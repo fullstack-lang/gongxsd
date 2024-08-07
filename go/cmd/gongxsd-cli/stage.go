@@ -34,13 +34,13 @@ func _(stage *models.StageStruct) {
 	__Element__000004_title := (&models.Element{Name: `title`}).Stage(stage)
 	__Element__000005_year := (&models.Element{Name: `year`}).Stage(stage)
 
-	__Enumeration__000000_ := (&models.Enumeration{Name: ``}).Stage(stage)
-	__Enumeration__000001_ := (&models.Enumeration{Name: ``}).Stage(stage)
+	__Enumeration__000000_within_within_bookFormatEnum := (&models.Enumeration{Name: `within within bookFormatEnum`}).Stage(stage)
+	__Enumeration__000001_within_within_bookFormatEnum := (&models.Enumeration{Name: `within within bookFormatEnum`}).Stage(stage)
 
-	__Restriction__000000_ := (&models.Restriction{Name: ``}).Stage(stage)
-	__Restriction__000001_ := (&models.Restriction{Name: ``}).Stage(stage)
+	__Restriction__000000_within_bookFormatEnum := (&models.Restriction{Name: `within bookFormatEnum`}).Stage(stage)
+	__Restriction__000001_within_yearType := (&models.Restriction{Name: `within yearType`}).Stage(stage)
 
-	__Schema__000000_ := (&models.Schema{Name: ``}).Stage(stage)
+	__Schema__000000_Schema := (&models.Schema{Name: `Schema`}).Stage(stage)
 
 	__Sequence__000000_within_bookType := (&models.Sequence{Name: `within bookType`}).Stage(stage)
 	__Sequence__000001_within_within_books := (&models.Sequence{Name: `within within books`}).Stage(stage)
@@ -80,19 +80,19 @@ func _(stage *models.StageStruct) {
 	__Element__000005_year.NameXSD = `year`
 	__Element__000005_year.Type = `yearType`
 
-	__Enumeration__000000_.Name = ``
-	__Enumeration__000000_.Value = `Paperback`
+	__Enumeration__000000_within_within_bookFormatEnum.Name = `within within bookFormatEnum`
+	__Enumeration__000000_within_within_bookFormatEnum.Value = `Paperback`
 
-	__Enumeration__000001_.Name = ``
-	__Enumeration__000001_.Value = `Hardcover`
+	__Enumeration__000001_within_within_bookFormatEnum.Name = `within within bookFormatEnum`
+	__Enumeration__000001_within_within_bookFormatEnum.Value = `Hardcover`
 
-	__Restriction__000000_.Name = ``
-	__Restriction__000000_.Base = `xs:string`
+	__Restriction__000000_within_bookFormatEnum.Name = `within bookFormatEnum`
+	__Restriction__000000_within_bookFormatEnum.Base = `xs:string`
 
-	__Restriction__000001_.Name = ``
-	__Restriction__000001_.Base = `xs:integer`
+	__Restriction__000001_within_yearType.Name = `within yearType`
+	__Restriction__000001_within_yearType.Base = `xs:integer`
 
-	__Schema__000000_.Name = ``
+	__Schema__000000_Schema.Name = `Schema`
 
 	__Sequence__000000_within_bookType.Name = `within bookType`
 
@@ -108,17 +108,17 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000000_bookType.Sequence = __Sequence__000000_within_bookType
 	__ComplexType__000001_within_books.Sequence = __Sequence__000001_within_within_books
 	__Element__000002_books.ComplexType = __ComplexType__000001_within_books
-	__Restriction__000000_.Enumerations = append(__Restriction__000000_.Enumerations, __Enumeration__000000_)
-	__Restriction__000000_.Enumerations = append(__Restriction__000000_.Enumerations, __Enumeration__000001_)
-	__Schema__000000_.Elements = append(__Schema__000000_.Elements, __Element__000002_books)
-	__Schema__000000_.SimpleTypes = append(__Schema__000000_.SimpleTypes, __SimpleType__000001_yearType)
-	__Schema__000000_.SimpleTypes = append(__Schema__000000_.SimpleTypes, __SimpleType__000000_bookFormatEnum)
-	__Schema__000000_.ComplexTypes = append(__Schema__000000_.ComplexTypes, __ComplexType__000000_bookType)
+	__Restriction__000000_within_bookFormatEnum.Enumerations = append(__Restriction__000000_within_bookFormatEnum.Enumerations, __Enumeration__000000_within_within_bookFormatEnum)
+	__Restriction__000000_within_bookFormatEnum.Enumerations = append(__Restriction__000000_within_bookFormatEnum.Enumerations, __Enumeration__000001_within_within_bookFormatEnum)
+	__Schema__000000_Schema.Elements = append(__Schema__000000_Schema.Elements, __Element__000002_books)
+	__Schema__000000_Schema.SimpleTypes = append(__Schema__000000_Schema.SimpleTypes, __SimpleType__000001_yearType)
+	__Schema__000000_Schema.SimpleTypes = append(__Schema__000000_Schema.SimpleTypes, __SimpleType__000000_bookFormatEnum)
+	__Schema__000000_Schema.ComplexTypes = append(__Schema__000000_Schema.ComplexTypes, __ComplexType__000000_bookType)
 	__Sequence__000000_within_bookType.Elements = append(__Sequence__000000_within_bookType.Elements, __Element__000004_title)
 	__Sequence__000000_within_bookType.Elements = append(__Sequence__000000_within_bookType.Elements, __Element__000000_author)
 	__Sequence__000000_within_bookType.Elements = append(__Sequence__000000_within_bookType.Elements, __Element__000005_year)
 	__Sequence__000000_within_bookType.Elements = append(__Sequence__000000_within_bookType.Elements, __Element__000003_format)
 	__Sequence__000001_within_within_books.Elements = append(__Sequence__000001_within_within_books.Elements, __Element__000001_book)
-	__SimpleType__000000_bookFormatEnum.Restriction = __Restriction__000000_
-	__SimpleType__000001_yearType.Restriction = __Restriction__000001_
+	__SimpleType__000000_bookFormatEnum.Restriction = __Restriction__000000_within_bookFormatEnum
+	__SimpleType__000001_yearType.Restriction = __Restriction__000001_within_yearType
 }

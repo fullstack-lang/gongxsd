@@ -25,5 +25,18 @@ func Process(stage *StageStruct) {
 	}
 	for x := range *GetGongstructInstancesSet[SimpleType](stage) {
 		x.Name = x.NameXSD
+
+		if x.Restriction != nil {
+			x.Restriction.Name = "within " + x.Name
+		}
 	}
+	for x := range *GetGongstructInstancesSet[Schema](stage) {
+		x.Name = "Schema"
+	}
+	for x := range *GetGongstructInstancesSet[Restriction](stage) {
+		for _, e := range x.Enumerations {
+			e.Name = "within " + x.Name
+		}
+	}
+
 }
