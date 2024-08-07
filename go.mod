@@ -3,7 +3,6 @@ module github.com/fullstack-lang/gongxsd
 go 1.22.1
 
 require (
-	aqwari.net/xml v0.0.0-20210331023308-d9421b293817
 	github.com/fullstack-lang/gong v0.0.0-20240807014648-db974ad1d256
 	github.com/fullstack-lang/gongdoc v0.0.0-20240807014721-860542868842
 	github.com/fullstack-lang/gongtable v0.0.0-20240807014722-c7bc4ee6cbec

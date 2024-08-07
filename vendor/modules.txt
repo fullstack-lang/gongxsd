@@ -1,8 +1,3 @@
-# aqwari.net/xml v0.0.0-20210331023308-d9421b293817
-## explicit; go 1.15
-aqwari.net/xml/internal/dependency
-aqwari.net/xml/xmltree
-aqwari.net/xml/xsd
 # github.com/bytedance/sonic v1.11.9
 ## explicit; go 1.16
 github.com/bytedance/sonic

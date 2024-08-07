@@ -66,8 +66,8 @@ type ComplexTypeDB struct {
 	// Declation for basic field complextypeDB.Name
 	Name_Data sql.NullString
 
-	// Declation for basic field complextypeDB.NameXML
-	NameXML_Data sql.NullString
+	// Declation for basic field complextypeDB.NameXSD
+	NameXSD_Data sql.NullString
 	
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
@@ -93,7 +93,7 @@ type ComplexTypeWOP struct {
 
 	Name string `xlsx:"1"`
 
-	NameXML string `xlsx:"2"`
+	NameXSD string `xlsx:"2"`
 	// insertion for WOP pointer fields
 }
 
@@ -101,7 +101,7 @@ var ComplexType_Fields = []string{
 	// insertion for WOP basic fields
 	"ID",
 	"Name",
-	"NameXML",
+	"NameXSD",
 }
 
 type BackRepoComplexTypeStruct struct {
@@ -388,8 +388,8 @@ func (complextypeDB *ComplexTypeDB) CopyBasicFieldsFromComplexType(complextype *
 	complextypeDB.Name_Data.String = complextype.Name
 	complextypeDB.Name_Data.Valid = true
 
-	complextypeDB.NameXML_Data.String = complextype.NameXML
-	complextypeDB.NameXML_Data.Valid = true
+	complextypeDB.NameXSD_Data.String = complextype.NameXSD
+	complextypeDB.NameXSD_Data.Valid = true
 }
 
 // CopyBasicFieldsFromComplexType_WOP
@@ -399,8 +399,8 @@ func (complextypeDB *ComplexTypeDB) CopyBasicFieldsFromComplexType_WOP(complexty
 	complextypeDB.Name_Data.String = complextype.Name
 	complextypeDB.Name_Data.Valid = true
 
-	complextypeDB.NameXML_Data.String = complextype.NameXML
-	complextypeDB.NameXML_Data.Valid = true
+	complextypeDB.NameXSD_Data.String = complextype.NameXSD
+	complextypeDB.NameXSD_Data.Valid = true
 }
 
 // CopyBasicFieldsFromComplexTypeWOP
@@ -410,22 +410,22 @@ func (complextypeDB *ComplexTypeDB) CopyBasicFieldsFromComplexTypeWOP(complextyp
 	complextypeDB.Name_Data.String = complextype.Name
 	complextypeDB.Name_Data.Valid = true
 
-	complextypeDB.NameXML_Data.String = complextype.NameXML
-	complextypeDB.NameXML_Data.Valid = true
+	complextypeDB.NameXSD_Data.String = complextype.NameXSD
+	complextypeDB.NameXSD_Data.Valid = true
 }
 
 // CopyBasicFieldsToComplexType
 func (complextypeDB *ComplexTypeDB) CopyBasicFieldsToComplexType(complextype *models.ComplexType) {
 	// insertion point for checkout of basic fields (back repo to stage)
 	complextype.Name = complextypeDB.Name_Data.String
-	complextype.NameXML = complextypeDB.NameXML_Data.String
+	complextype.NameXSD = complextypeDB.NameXSD_Data.String
 }
 
 // CopyBasicFieldsToComplexType_WOP
 func (complextypeDB *ComplexTypeDB) CopyBasicFieldsToComplexType_WOP(complextype *models.ComplexType_WOP) {
 	// insertion point for checkout of basic fields (back repo to stage)
 	complextype.Name = complextypeDB.Name_Data.String
-	complextype.NameXML = complextypeDB.NameXML_Data.String
+	complextype.NameXSD = complextypeDB.NameXSD_Data.String
 }
 
 // CopyBasicFieldsToComplexTypeWOP
@@ -433,7 +433,7 @@ func (complextypeDB *ComplexTypeDB) CopyBasicFieldsToComplexTypeWOP(complextype 
 	complextype.ID = int(complextypeDB.ID)
 	// insertion point for checkout of basic fields (back repo to stage)
 	complextype.Name = complextypeDB.Name_Data.String
-	complextype.NameXML = complextypeDB.NameXML_Data.String
+	complextype.NameXSD = complextypeDB.NameXSD_Data.String
 }
 
 // Backup generates a json file from a slice of all ComplexTypeDB instances in the backrepo

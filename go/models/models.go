@@ -34,7 +34,7 @@ type Enumeration struct {
 
 type ComplexType struct {
 	Name     string
-	NameXML  string    `xml:"name,attr"`
+	NameXSD  string    `xml:"name,attr"`
 	Sequence *Sequence `xml:"sequence"`
 }
 

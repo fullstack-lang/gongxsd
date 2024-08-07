@@ -1283,7 +1283,7 @@ func GetFields[Type Gongstruct]() (res []string) {
 	switch any(ret).(type) {
 	// insertion point for generic get gongstruct name
 	case ComplexType:
-		res = []string{"Name", "NameXML", "Sequence"}
+		res = []string{"Name", "NameXSD", "Sequence"}
 	case Element:
 		res = []string{"Name", "NameXSD", "Type", "SimpleType", "ComplexType"}
 	case Enumeration:
@@ -1362,7 +1362,7 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 	switch any(ret).(type) {
 	// insertion point for generic get gongstruct name
 	case *ComplexType:
-		res = []string{"Name", "NameXML", "Sequence"}
+		res = []string{"Name", "NameXSD", "Sequence"}
 	case *Element:
 		res = []string{"Name", "NameXSD", "Type", "SimpleType", "ComplexType"}
 	case *Enumeration:
@@ -1388,8 +1388,8 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		// string value of fields
 		case "Name":
 			res = inferedInstance.Name
-		case "NameXML":
-			res = inferedInstance.NameXML
+		case "NameXSD":
+			res = inferedInstance.NameXSD
 		case "Sequence":
 			if inferedInstance.Sequence != nil {
 				res = inferedInstance.Sequence.Name
@@ -1503,8 +1503,8 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		// string value of fields
 		case "Name":
 			res = inferedInstance.Name
-		case "NameXML":
-			res = inferedInstance.NameXML
+		case "NameXSD":
+			res = inferedInstance.NameXSD
 		case "Sequence":
 			if inferedInstance.Sequence != nil {
 				res = inferedInstance.Sequence.Name

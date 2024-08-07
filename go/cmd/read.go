@@ -12,7 +12,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	gongxsd_models "github.com/fullstack-lang/gongxsd/go/models"
+	"github.com/fullstack-lang/gongxsd/go/models"
 	gongxsd_stack "github.com/fullstack-lang/gongxsd/go/stack"
 	gongxsd_static "github.com/fullstack-lang/gongxsd/go/static"
 )
@@ -40,7 +40,7 @@ var readCmd = &cobra.Command{
 			os.Exit(1)
 		}
 
-		var schema gongxsd_models.Schema
+		var schema models.Schema
 		err = xml.Unmarshal(content, &schema)
 		if err != nil {
 			fmt.Printf("Error parsing XML: %v\n", err)
@@ -48,6 +48,10 @@ var readCmd = &cobra.Command{
 		}
 
 		stack.Stage.StageBranchSchema(&schema)
+
+		stack.Stage.ComputeReverseMaps()
+
+		models.Process(stack.Stage)
 
 		stack.Stage.Commit()
 		fmt.Println("XSD File Content:")

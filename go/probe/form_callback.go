@@ -63,8 +63,8 @@ func (complextypeFormCallback *ComplexTypeFormCallback) OnSave() {
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(complextype_.Name), formDiv)
-		case "NameXML":
-			FormDivBasicFieldToField(&(complextype_.NameXML), formDiv)
+		case "NameXSD":
+			FormDivBasicFieldToField(&(complextype_.NameXSD), formDiv)
 		case "Sequence":
 			FormDivSelectFieldToField(&(complextype_.Sequence), complextypeFormCallback.probe.stageOfInterest, formDiv)
 		case "Schema:ComplexTypes":

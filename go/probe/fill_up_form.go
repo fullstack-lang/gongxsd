@@ -22,7 +22,7 @@ func FillUpForm[T models.Gongstruct](
 		// insertion point
 		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
-		BasicFieldtoForm("NameXML", instanceWithInferedType.NameXML, instanceWithInferedType, probe.formStage, formGroup,
+		BasicFieldtoForm("NameXSD", instanceWithInferedType.NameXSD, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
 		AssociationFieldToForm("Sequence", instanceWithInferedType.Sequence, formGroup, probe)
 		{

@@ -10,13 +10,13 @@ var __GONG_time_The_fool_doth_think_he_is_wise__ = time.Hour
 type ComplexType_WOP struct {
 	// insertion point
 	Name string
-	NameXML string
+	NameXSD string
 }
 
 func (from *ComplexType) CopyBasicFields(to *ComplexType) {
 	// insertion point
 	to.Name = from.Name
-	to.NameXML = from.NameXML
+	to.NameXSD = from.NameXSD
 }
 
 type Element_WOP struct {
