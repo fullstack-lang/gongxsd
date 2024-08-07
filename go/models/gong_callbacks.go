@@ -26,13 +26,25 @@ func AfterCreateFromFront[Type Gongstruct](stage *StageStruct, instance *Type) {
 		if stage.OnAfterEnumerationCreateCallback != nil {
 			stage.OnAfterEnumerationCreateCallback.OnAfterCreate(stage, target)
 		}
+	case *Length:
+		if stage.OnAfterLengthCreateCallback != nil {
+			stage.OnAfterLengthCreateCallback.OnAfterCreate(stage, target)
+		}
 	case *MaxInclusive:
 		if stage.OnAfterMaxInclusiveCreateCallback != nil {
 			stage.OnAfterMaxInclusiveCreateCallback.OnAfterCreate(stage, target)
 		}
+	case *MaxLength:
+		if stage.OnAfterMaxLengthCreateCallback != nil {
+			stage.OnAfterMaxLengthCreateCallback.OnAfterCreate(stage, target)
+		}
 	case *MinInclusive:
 		if stage.OnAfterMinInclusiveCreateCallback != nil {
 			stage.OnAfterMinInclusiveCreateCallback.OnAfterCreate(stage, target)
+		}
+	case *MinLength:
+		if stage.OnAfterMinLengthCreateCallback != nil {
+			stage.OnAfterMinLengthCreateCallback.OnAfterCreate(stage, target)
 		}
 	case *Pattern:
 		if stage.OnAfterPatternCreateCallback != nil {
@@ -53,6 +65,10 @@ func AfterCreateFromFront[Type Gongstruct](stage *StageStruct, instance *Type) {
 	case *SimpleType:
 		if stage.OnAfterSimpleTypeCreateCallback != nil {
 			stage.OnAfterSimpleTypeCreateCallback.OnAfterCreate(stage, target)
+		}
+	case *WhiteSpace:
+		if stage.OnAfterWhiteSpaceCreateCallback != nil {
+			stage.OnAfterWhiteSpaceCreateCallback.OnAfterCreate(stage, target)
 		}
 	default:
 		_ = target
@@ -89,15 +105,30 @@ func AfterUpdateFromFront[Type Gongstruct](stage *StageStruct, old, new *Type) {
 		if stage.OnAfterEnumerationUpdateCallback != nil {
 			stage.OnAfterEnumerationUpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
 		}
+	case *Length:
+		newTarget := any(new).(*Length)
+		if stage.OnAfterLengthUpdateCallback != nil {
+			stage.OnAfterLengthUpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
+		}
 	case *MaxInclusive:
 		newTarget := any(new).(*MaxInclusive)
 		if stage.OnAfterMaxInclusiveUpdateCallback != nil {
 			stage.OnAfterMaxInclusiveUpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
 		}
+	case *MaxLength:
+		newTarget := any(new).(*MaxLength)
+		if stage.OnAfterMaxLengthUpdateCallback != nil {
+			stage.OnAfterMaxLengthUpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
+		}
 	case *MinInclusive:
 		newTarget := any(new).(*MinInclusive)
 		if stage.OnAfterMinInclusiveUpdateCallback != nil {
 			stage.OnAfterMinInclusiveUpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
+		}
+	case *MinLength:
+		newTarget := any(new).(*MinLength)
+		if stage.OnAfterMinLengthUpdateCallback != nil {
+			stage.OnAfterMinLengthUpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
 		}
 	case *Pattern:
 		newTarget := any(new).(*Pattern)
@@ -123,6 +154,11 @@ func AfterUpdateFromFront[Type Gongstruct](stage *StageStruct, old, new *Type) {
 		newTarget := any(new).(*SimpleType)
 		if stage.OnAfterSimpleTypeUpdateCallback != nil {
 			stage.OnAfterSimpleTypeUpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
+		}
+	case *WhiteSpace:
+		newTarget := any(new).(*WhiteSpace)
+		if stage.OnAfterWhiteSpaceUpdateCallback != nil {
+			stage.OnAfterWhiteSpaceUpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
 		}
 	default:
 		_ = oldTarget
@@ -159,15 +195,30 @@ func AfterDeleteFromFront[Type Gongstruct](stage *StageStruct, staged, front *Ty
 			staged := any(staged).(*Enumeration)
 			stage.OnAfterEnumerationDeleteCallback.OnAfterDelete(stage, staged, front)
 		}
+	case *Length:
+		if stage.OnAfterLengthDeleteCallback != nil {
+			staged := any(staged).(*Length)
+			stage.OnAfterLengthDeleteCallback.OnAfterDelete(stage, staged, front)
+		}
 	case *MaxInclusive:
 		if stage.OnAfterMaxInclusiveDeleteCallback != nil {
 			staged := any(staged).(*MaxInclusive)
 			stage.OnAfterMaxInclusiveDeleteCallback.OnAfterDelete(stage, staged, front)
 		}
+	case *MaxLength:
+		if stage.OnAfterMaxLengthDeleteCallback != nil {
+			staged := any(staged).(*MaxLength)
+			stage.OnAfterMaxLengthDeleteCallback.OnAfterDelete(stage, staged, front)
+		}
 	case *MinInclusive:
 		if stage.OnAfterMinInclusiveDeleteCallback != nil {
 			staged := any(staged).(*MinInclusive)
 			stage.OnAfterMinInclusiveDeleteCallback.OnAfterDelete(stage, staged, front)
+		}
+	case *MinLength:
+		if stage.OnAfterMinLengthDeleteCallback != nil {
+			staged := any(staged).(*MinLength)
+			stage.OnAfterMinLengthDeleteCallback.OnAfterDelete(stage, staged, front)
 		}
 	case *Pattern:
 		if stage.OnAfterPatternDeleteCallback != nil {
@@ -193,6 +244,11 @@ func AfterDeleteFromFront[Type Gongstruct](stage *StageStruct, staged, front *Ty
 		if stage.OnAfterSimpleTypeDeleteCallback != nil {
 			staged := any(staged).(*SimpleType)
 			stage.OnAfterSimpleTypeDeleteCallback.OnAfterDelete(stage, staged, front)
+		}
+	case *WhiteSpace:
+		if stage.OnAfterWhiteSpaceDeleteCallback != nil {
+			staged := any(staged).(*WhiteSpace)
+			stage.OnAfterWhiteSpaceDeleteCallback.OnAfterDelete(stage, staged, front)
 		}
 	default:
 		_ = front
@@ -224,13 +280,25 @@ func AfterReadFromFront[Type Gongstruct](stage *StageStruct, instance *Type) {
 		if stage.OnAfterEnumerationReadCallback != nil {
 			stage.OnAfterEnumerationReadCallback.OnAfterRead(stage, target)
 		}
+	case *Length:
+		if stage.OnAfterLengthReadCallback != nil {
+			stage.OnAfterLengthReadCallback.OnAfterRead(stage, target)
+		}
 	case *MaxInclusive:
 		if stage.OnAfterMaxInclusiveReadCallback != nil {
 			stage.OnAfterMaxInclusiveReadCallback.OnAfterRead(stage, target)
 		}
+	case *MaxLength:
+		if stage.OnAfterMaxLengthReadCallback != nil {
+			stage.OnAfterMaxLengthReadCallback.OnAfterRead(stage, target)
+		}
 	case *MinInclusive:
 		if stage.OnAfterMinInclusiveReadCallback != nil {
 			stage.OnAfterMinInclusiveReadCallback.OnAfterRead(stage, target)
+		}
+	case *MinLength:
+		if stage.OnAfterMinLengthReadCallback != nil {
+			stage.OnAfterMinLengthReadCallback.OnAfterRead(stage, target)
 		}
 	case *Pattern:
 		if stage.OnAfterPatternReadCallback != nil {
@@ -251,6 +319,10 @@ func AfterReadFromFront[Type Gongstruct](stage *StageStruct, instance *Type) {
 	case *SimpleType:
 		if stage.OnAfterSimpleTypeReadCallback != nil {
 			stage.OnAfterSimpleTypeReadCallback.OnAfterRead(stage, target)
+		}
+	case *WhiteSpace:
+		if stage.OnAfterWhiteSpaceReadCallback != nil {
+			stage.OnAfterWhiteSpaceReadCallback.OnAfterRead(stage, target)
 		}
 	default:
 		_ = target
@@ -278,11 +350,20 @@ func SetCallbackAfterUpdateFromFront[Type Gongstruct](stage *StageStruct, callba
 	case *Enumeration:
 		stage.OnAfterEnumerationUpdateCallback = any(callback).(OnAfterUpdateInterface[Enumeration])
 	
+	case *Length:
+		stage.OnAfterLengthUpdateCallback = any(callback).(OnAfterUpdateInterface[Length])
+	
 	case *MaxInclusive:
 		stage.OnAfterMaxInclusiveUpdateCallback = any(callback).(OnAfterUpdateInterface[MaxInclusive])
 	
+	case *MaxLength:
+		stage.OnAfterMaxLengthUpdateCallback = any(callback).(OnAfterUpdateInterface[MaxLength])
+	
 	case *MinInclusive:
 		stage.OnAfterMinInclusiveUpdateCallback = any(callback).(OnAfterUpdateInterface[MinInclusive])
+	
+	case *MinLength:
+		stage.OnAfterMinLengthUpdateCallback = any(callback).(OnAfterUpdateInterface[MinLength])
 	
 	case *Pattern:
 		stage.OnAfterPatternUpdateCallback = any(callback).(OnAfterUpdateInterface[Pattern])
@@ -298,6 +379,9 @@ func SetCallbackAfterUpdateFromFront[Type Gongstruct](stage *StageStruct, callba
 	
 	case *SimpleType:
 		stage.OnAfterSimpleTypeUpdateCallback = any(callback).(OnAfterUpdateInterface[SimpleType])
+	
+	case *WhiteSpace:
+		stage.OnAfterWhiteSpaceUpdateCallback = any(callback).(OnAfterUpdateInterface[WhiteSpace])
 	
 	}
 }
@@ -321,11 +405,20 @@ func SetCallbackAfterCreateFromFront[Type Gongstruct](stage *StageStruct, callba
 	case *Enumeration:
 		stage.OnAfterEnumerationCreateCallback = any(callback).(OnAfterCreateInterface[Enumeration])
 	
+	case *Length:
+		stage.OnAfterLengthCreateCallback = any(callback).(OnAfterCreateInterface[Length])
+	
 	case *MaxInclusive:
 		stage.OnAfterMaxInclusiveCreateCallback = any(callback).(OnAfterCreateInterface[MaxInclusive])
 	
+	case *MaxLength:
+		stage.OnAfterMaxLengthCreateCallback = any(callback).(OnAfterCreateInterface[MaxLength])
+	
 	case *MinInclusive:
 		stage.OnAfterMinInclusiveCreateCallback = any(callback).(OnAfterCreateInterface[MinInclusive])
+	
+	case *MinLength:
+		stage.OnAfterMinLengthCreateCallback = any(callback).(OnAfterCreateInterface[MinLength])
 	
 	case *Pattern:
 		stage.OnAfterPatternCreateCallback = any(callback).(OnAfterCreateInterface[Pattern])
@@ -341,6 +434,9 @@ func SetCallbackAfterCreateFromFront[Type Gongstruct](stage *StageStruct, callba
 	
 	case *SimpleType:
 		stage.OnAfterSimpleTypeCreateCallback = any(callback).(OnAfterCreateInterface[SimpleType])
+	
+	case *WhiteSpace:
+		stage.OnAfterWhiteSpaceCreateCallback = any(callback).(OnAfterCreateInterface[WhiteSpace])
 	
 	}
 }
@@ -364,11 +460,20 @@ func SetCallbackAfterDeleteFromFront[Type Gongstruct](stage *StageStruct, callba
 	case *Enumeration:
 		stage.OnAfterEnumerationDeleteCallback = any(callback).(OnAfterDeleteInterface[Enumeration])
 	
+	case *Length:
+		stage.OnAfterLengthDeleteCallback = any(callback).(OnAfterDeleteInterface[Length])
+	
 	case *MaxInclusive:
 		stage.OnAfterMaxInclusiveDeleteCallback = any(callback).(OnAfterDeleteInterface[MaxInclusive])
 	
+	case *MaxLength:
+		stage.OnAfterMaxLengthDeleteCallback = any(callback).(OnAfterDeleteInterface[MaxLength])
+	
 	case *MinInclusive:
 		stage.OnAfterMinInclusiveDeleteCallback = any(callback).(OnAfterDeleteInterface[MinInclusive])
+	
+	case *MinLength:
+		stage.OnAfterMinLengthDeleteCallback = any(callback).(OnAfterDeleteInterface[MinLength])
 	
 	case *Pattern:
 		stage.OnAfterPatternDeleteCallback = any(callback).(OnAfterDeleteInterface[Pattern])
@@ -384,6 +489,9 @@ func SetCallbackAfterDeleteFromFront[Type Gongstruct](stage *StageStruct, callba
 	
 	case *SimpleType:
 		stage.OnAfterSimpleTypeDeleteCallback = any(callback).(OnAfterDeleteInterface[SimpleType])
+	
+	case *WhiteSpace:
+		stage.OnAfterWhiteSpaceDeleteCallback = any(callback).(OnAfterDeleteInterface[WhiteSpace])
 	
 	}
 }
@@ -407,11 +515,20 @@ func SetCallbackAfterReadFromFront[Type Gongstruct](stage *StageStruct, callback
 	case *Enumeration:
 		stage.OnAfterEnumerationReadCallback = any(callback).(OnAfterReadInterface[Enumeration])
 	
+	case *Length:
+		stage.OnAfterLengthReadCallback = any(callback).(OnAfterReadInterface[Length])
+	
 	case *MaxInclusive:
 		stage.OnAfterMaxInclusiveReadCallback = any(callback).(OnAfterReadInterface[MaxInclusive])
 	
+	case *MaxLength:
+		stage.OnAfterMaxLengthReadCallback = any(callback).(OnAfterReadInterface[MaxLength])
+	
 	case *MinInclusive:
 		stage.OnAfterMinInclusiveReadCallback = any(callback).(OnAfterReadInterface[MinInclusive])
+	
+	case *MinLength:
+		stage.OnAfterMinLengthReadCallback = any(callback).(OnAfterReadInterface[MinLength])
 	
 	case *Pattern:
 		stage.OnAfterPatternReadCallback = any(callback).(OnAfterReadInterface[Pattern])
@@ -427,6 +544,9 @@ func SetCallbackAfterReadFromFront[Type Gongstruct](stage *StageStruct, callback
 	
 	case *SimpleType:
 		stage.OnAfterSimpleTypeReadCallback = any(callback).(OnAfterReadInterface[SimpleType])
+	
+	case *WhiteSpace:
+		stage.OnAfterWhiteSpaceReadCallback = any(callback).(OnAfterReadInterface[WhiteSpace])
 	
 	}
 }

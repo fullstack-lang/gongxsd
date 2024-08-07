@@ -74,12 +74,27 @@ func GetReverseFieldOwnerName[T models.Gongstruct](
 			}
 		}
 
+	case *models.Length:
+		switch reverseField.GongstructName {
+		// insertion point
+		}
+
 	case *models.MaxInclusive:
 		switch reverseField.GongstructName {
 		// insertion point
 		}
 
+	case *models.MaxLength:
+		switch reverseField.GongstructName {
+		// insertion point
+		}
+
 	case *models.MinInclusive:
+		switch reverseField.GongstructName {
+		// insertion point
+		}
+
+	case *models.MinLength:
 		switch reverseField.GongstructName {
 		// insertion point
 		}
@@ -114,6 +129,11 @@ func GetReverseFieldOwnerName[T models.Gongstruct](
 					res = _schema.Name
 				}
 			}
+		}
+
+	case *models.WhiteSpace:
+		switch reverseField.GongstructName {
+		// insertion point
 		}
 
 	default:
@@ -181,12 +201,27 @@ func GetReverseFieldOwner[T models.Gongstruct](
 			}
 		}
 
+	case *models.Length:
+		switch reverseField.GongstructName {
+		// insertion point
+		}
+
 	case *models.MaxInclusive:
 		switch reverseField.GongstructName {
 		// insertion point
 		}
 
+	case *models.MaxLength:
+		switch reverseField.GongstructName {
+		// insertion point
+		}
+
 	case *models.MinInclusive:
+		switch reverseField.GongstructName {
+		// insertion point
+		}
+
+	case *models.MinLength:
 		switch reverseField.GongstructName {
 		// insertion point
 		}
@@ -219,6 +254,11 @@ func GetReverseFieldOwner[T models.Gongstruct](
 			case "SimpleTypes":
 				res = stage.Schema_SimpleTypes_reverseMap[inst]
 			}
+		}
+
+	case *models.WhiteSpace:
+		switch reverseField.GongstructName {
+		// insertion point
 		}
 
 	default:

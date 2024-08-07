@@ -19,13 +19,17 @@ func SerializeStage(stage *StageStruct, filename string) {
 		SerializeExcelize[Documentation](stage, f)
 		SerializeExcelize[Element](stage, f)
 		SerializeExcelize[Enumeration](stage, f)
+		SerializeExcelize[Length](stage, f)
 		SerializeExcelize[MaxInclusive](stage, f)
+		SerializeExcelize[MaxLength](stage, f)
 		SerializeExcelize[MinInclusive](stage, f)
+		SerializeExcelize[MinLength](stage, f)
 		SerializeExcelize[Pattern](stage, f)
 		SerializeExcelize[Restriction](stage, f)
 		SerializeExcelize[Schema](stage, f)
 		SerializeExcelize[Sequence](stage, f)
 		SerializeExcelize[SimpleType](stage, f)
+		SerializeExcelize[WhiteSpace](stage, f)
 	}
 
 	var tab ExcelizeTabulator

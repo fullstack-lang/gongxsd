@@ -49,13 +49,17 @@ func NewStackInstance(
 	models.SetOrchestratorOnAfterUpdate[models.Documentation](stage)
 	models.SetOrchestratorOnAfterUpdate[models.Element](stage)
 	models.SetOrchestratorOnAfterUpdate[models.Enumeration](stage)
+	models.SetOrchestratorOnAfterUpdate[models.Length](stage)
 	models.SetOrchestratorOnAfterUpdate[models.MaxInclusive](stage)
+	models.SetOrchestratorOnAfterUpdate[models.MaxLength](stage)
 	models.SetOrchestratorOnAfterUpdate[models.MinInclusive](stage)
+	models.SetOrchestratorOnAfterUpdate[models.MinLength](stage)
 	models.SetOrchestratorOnAfterUpdate[models.Pattern](stage)
 	models.SetOrchestratorOnAfterUpdate[models.Restriction](stage)
 	models.SetOrchestratorOnAfterUpdate[models.Schema](stage)
 	models.SetOrchestratorOnAfterUpdate[models.Sequence](stage)
 	models.SetOrchestratorOnAfterUpdate[models.SimpleType](stage)
+	models.SetOrchestratorOnAfterUpdate[models.WhiteSpace](stage)
 
 	return
 }

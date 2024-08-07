@@ -67,11 +67,20 @@ func (nodeImplGongstruct *TreeNodeImplGongstruct) OnAfterUpdate(
 	if nodeImplGongstruct.gongStruct.GetName() == "Enumeration" {
 		fillUpTable[models.Enumeration](nodeImplGongstruct.probe)
 	}
+	if nodeImplGongstruct.gongStruct.GetName() == "Length" {
+		fillUpTable[models.Length](nodeImplGongstruct.probe)
+	}
 	if nodeImplGongstruct.gongStruct.GetName() == "MaxInclusive" {
 		fillUpTable[models.MaxInclusive](nodeImplGongstruct.probe)
 	}
+	if nodeImplGongstruct.gongStruct.GetName() == "MaxLength" {
+		fillUpTable[models.MaxLength](nodeImplGongstruct.probe)
+	}
 	if nodeImplGongstruct.gongStruct.GetName() == "MinInclusive" {
 		fillUpTable[models.MinInclusive](nodeImplGongstruct.probe)
+	}
+	if nodeImplGongstruct.gongStruct.GetName() == "MinLength" {
+		fillUpTable[models.MinLength](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Pattern" {
 		fillUpTable[models.Pattern](nodeImplGongstruct.probe)
@@ -87,6 +96,9 @@ func (nodeImplGongstruct *TreeNodeImplGongstruct) OnAfterUpdate(
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "SimpleType" {
 		fillUpTable[models.SimpleType](nodeImplGongstruct.probe)
+	}
+	if nodeImplGongstruct.gongStruct.GetName() == "WhiteSpace" {
+		fillUpTable[models.WhiteSpace](nodeImplGongstruct.probe)
 	}
 
 	// set color for node and reset all other nodes color

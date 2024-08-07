@@ -67,10 +67,19 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 	case *Enumeration:
 		// insertion point per field
 
+	case *Length:
+		// insertion point per field
+
 	case *MaxInclusive:
 		// insertion point per field
 
+	case *MaxLength:
+		// insertion point per field
+
 	case *MinInclusive:
+		// insertion point per field
+
+	case *MinLength:
 		// insertion point per field
 
 	case *Pattern:
@@ -183,6 +192,9 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 	case *SimpleType:
 		// insertion point per field
 
+	case *WhiteSpace:
+		// insertion point per field
+
 	default:
 		_ = owningInstanceInfered // to avoid "declared and not used" error if no named struct has slices
 	}
@@ -215,10 +227,19 @@ func (stage *StageStruct) ComputeReverseMaps() {
 	// Compute reverse map for named struct Enumeration
 	// insertion point per field
 
+	// Compute reverse map for named struct Length
+	// insertion point per field
+
 	// Compute reverse map for named struct MaxInclusive
 	// insertion point per field
 
+	// Compute reverse map for named struct MaxLength
+	// insertion point per field
+
 	// Compute reverse map for named struct MinInclusive
+	// insertion point per field
+
+	// Compute reverse map for named struct MinLength
 	// insertion point per field
 
 	// Compute reverse map for named struct Pattern
@@ -274,6 +295,9 @@ func (stage *StageStruct) ComputeReverseMaps() {
 	}
 
 	// Compute reverse map for named struct SimpleType
+	// insertion point per field
+
+	// Compute reverse map for named struct WhiteSpace
 	// insertion point per field
 
 }

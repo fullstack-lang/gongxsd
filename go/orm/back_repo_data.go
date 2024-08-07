@@ -14,9 +14,15 @@ type BackRepoData struct {
 
 	EnumerationAPIs []*EnumerationAPI
 
+	LengthAPIs []*LengthAPI
+
 	MaxInclusiveAPIs []*MaxInclusiveAPI
 
+	MaxLengthAPIs []*MaxLengthAPI
+
 	MinInclusiveAPIs []*MinInclusiveAPI
+
+	MinLengthAPIs []*MinLengthAPI
 
 	PatternAPIs []*PatternAPI
 
@@ -27,6 +33,8 @@ type BackRepoData struct {
 	SequenceAPIs []*SequenceAPI
 
 	SimpleTypeAPIs []*SimpleTypeAPI
+
+	WhiteSpaceAPIs []*WhiteSpaceAPI
 }
 
 func CopyBackRepoToBackRepoData(backRepo *BackRepoStruct, backRepoData *BackRepoData) {
@@ -81,6 +89,16 @@ func CopyBackRepoToBackRepoData(backRepo *BackRepoStruct, backRepoData *BackRepo
 		backRepoData.EnumerationAPIs = append(backRepoData.EnumerationAPIs, &enumerationAPI)
 	}
 
+	for _, lengthDB := range backRepo.BackRepoLength.Map_LengthDBID_LengthDB {
+
+		var lengthAPI LengthAPI
+		lengthAPI.ID = lengthDB.ID
+		lengthAPI.LengthPointersEncoding = lengthDB.LengthPointersEncoding
+		lengthDB.CopyBasicFieldsToLength_WOP(&lengthAPI.Length_WOP)
+
+		backRepoData.LengthAPIs = append(backRepoData.LengthAPIs, &lengthAPI)
+	}
+
 	for _, maxinclusiveDB := range backRepo.BackRepoMaxInclusive.Map_MaxInclusiveDBID_MaxInclusiveDB {
 
 		var maxinclusiveAPI MaxInclusiveAPI
@@ -91,6 +109,16 @@ func CopyBackRepoToBackRepoData(backRepo *BackRepoStruct, backRepoData *BackRepo
 		backRepoData.MaxInclusiveAPIs = append(backRepoData.MaxInclusiveAPIs, &maxinclusiveAPI)
 	}
 
+	for _, maxlengthDB := range backRepo.BackRepoMaxLength.Map_MaxLengthDBID_MaxLengthDB {
+
+		var maxlengthAPI MaxLengthAPI
+		maxlengthAPI.ID = maxlengthDB.ID
+		maxlengthAPI.MaxLengthPointersEncoding = maxlengthDB.MaxLengthPointersEncoding
+		maxlengthDB.CopyBasicFieldsToMaxLength_WOP(&maxlengthAPI.MaxLength_WOP)
+
+		backRepoData.MaxLengthAPIs = append(backRepoData.MaxLengthAPIs, &maxlengthAPI)
+	}
+
 	for _, mininclusiveDB := range backRepo.BackRepoMinInclusive.Map_MinInclusiveDBID_MinInclusiveDB {
 
 		var mininclusiveAPI MinInclusiveAPI
@@ -99,6 +127,16 @@ func CopyBackRepoToBackRepoData(backRepo *BackRepoStruct, backRepoData *BackRepo
 		mininclusiveDB.CopyBasicFieldsToMinInclusive_WOP(&mininclusiveAPI.MinInclusive_WOP)
 
 		backRepoData.MinInclusiveAPIs = append(backRepoData.MinInclusiveAPIs, &mininclusiveAPI)
+	}
+
+	for _, minlengthDB := range backRepo.BackRepoMinLength.Map_MinLengthDBID_MinLengthDB {
+
+		var minlengthAPI MinLengthAPI
+		minlengthAPI.ID = minlengthDB.ID
+		minlengthAPI.MinLengthPointersEncoding = minlengthDB.MinLengthPointersEncoding
+		minlengthDB.CopyBasicFieldsToMinLength_WOP(&minlengthAPI.MinLength_WOP)
+
+		backRepoData.MinLengthAPIs = append(backRepoData.MinLengthAPIs, &minlengthAPI)
 	}
 
 	for _, patternDB := range backRepo.BackRepoPattern.Map_PatternDBID_PatternDB {
@@ -149,6 +187,16 @@ func CopyBackRepoToBackRepoData(backRepo *BackRepoStruct, backRepoData *BackRepo
 		simpletypeDB.CopyBasicFieldsToSimpleType_WOP(&simpletypeAPI.SimpleType_WOP)
 
 		backRepoData.SimpleTypeAPIs = append(backRepoData.SimpleTypeAPIs, &simpletypeAPI)
+	}
+
+	for _, whitespaceDB := range backRepo.BackRepoWhiteSpace.Map_WhiteSpaceDBID_WhiteSpaceDB {
+
+		var whitespaceAPI WhiteSpaceAPI
+		whitespaceAPI.ID = whitespaceDB.ID
+		whitespaceAPI.WhiteSpacePointersEncoding = whitespaceDB.WhiteSpacePointersEncoding
+		whitespaceDB.CopyBasicFieldsToWhiteSpace_WOP(&whitespaceAPI.WhiteSpace_WOP)
+
+		backRepoData.WhiteSpaceAPIs = append(backRepoData.WhiteSpaceAPIs, &whitespaceAPI)
 	}
 
 }

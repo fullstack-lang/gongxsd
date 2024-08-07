@@ -637,6 +637,87 @@ func (enumerationFormCallback *EnumerationFormCallback) OnSave() {
 
 	fillUpTree(enumerationFormCallback.probe)
 }
+func __gong__New__LengthFormCallback(
+	length *models.Length,
+	probe *Probe,
+	formGroup *table.FormGroup,
+) (lengthFormCallback *LengthFormCallback) {
+	lengthFormCallback = new(LengthFormCallback)
+	lengthFormCallback.probe = probe
+	lengthFormCallback.length = length
+	lengthFormCallback.formGroup = formGroup
+
+	lengthFormCallback.CreationMode = (length == nil)
+
+	return
+}
+
+type LengthFormCallback struct {
+	length *models.Length
+
+	// If the form call is called on the creation of a new instnace
+	CreationMode bool
+
+	probe *Probe
+
+	formGroup *table.FormGroup
+}
+
+func (lengthFormCallback *LengthFormCallback) OnSave() {
+
+	log.Println("LengthFormCallback, OnSave")
+
+	// checkout formStage to have the form group on the stage synchronized with the
+	// back repo (and front repo)
+	lengthFormCallback.probe.formStage.Checkout()
+
+	if lengthFormCallback.length == nil {
+		lengthFormCallback.length = new(models.Length).Stage(lengthFormCallback.probe.stageOfInterest)
+	}
+	length_ := lengthFormCallback.length
+	_ = length_
+
+	for _, formDiv := range lengthFormCallback.formGroup.FormDivs {
+		switch formDiv.Name {
+		// insertion point per field
+		case "Name":
+			FormDivBasicFieldToField(&(length_.Name), formDiv)
+		case "Annotation":
+			FormDivSelectFieldToField(&(length_.Annotation), lengthFormCallback.probe.stageOfInterest, formDiv)
+		case "Value":
+			FormDivBasicFieldToField(&(length_.Value), formDiv)
+		}
+	}
+
+	// manage the suppress operation
+	if lengthFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		length_.Unstage(lengthFormCallback.probe.stageOfInterest)
+	}
+
+	lengthFormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.Length](
+		lengthFormCallback.probe,
+	)
+	lengthFormCallback.probe.tableStage.Commit()
+
+	// display a new form by reset the form stage
+	if lengthFormCallback.CreationMode || lengthFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		lengthFormCallback.probe.formStage.Reset()
+		newFormGroup := (&table.FormGroup{
+			Name: table.FormGroupDefaultName.ToString(),
+		}).Stage(lengthFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__LengthFormCallback(
+			nil,
+			lengthFormCallback.probe,
+			newFormGroup,
+		)
+		length := new(models.Length)
+		FillUpForm(length, newFormGroup, lengthFormCallback.probe)
+		lengthFormCallback.probe.formStage.Commit()
+	}
+
+	fillUpTree(lengthFormCallback.probe)
+}
 func __gong__New__MaxInclusiveFormCallback(
 	maxinclusive *models.MaxInclusive,
 	probe *Probe,
@@ -718,6 +799,87 @@ func (maxinclusiveFormCallback *MaxInclusiveFormCallback) OnSave() {
 
 	fillUpTree(maxinclusiveFormCallback.probe)
 }
+func __gong__New__MaxLengthFormCallback(
+	maxlength *models.MaxLength,
+	probe *Probe,
+	formGroup *table.FormGroup,
+) (maxlengthFormCallback *MaxLengthFormCallback) {
+	maxlengthFormCallback = new(MaxLengthFormCallback)
+	maxlengthFormCallback.probe = probe
+	maxlengthFormCallback.maxlength = maxlength
+	maxlengthFormCallback.formGroup = formGroup
+
+	maxlengthFormCallback.CreationMode = (maxlength == nil)
+
+	return
+}
+
+type MaxLengthFormCallback struct {
+	maxlength *models.MaxLength
+
+	// If the form call is called on the creation of a new instnace
+	CreationMode bool
+
+	probe *Probe
+
+	formGroup *table.FormGroup
+}
+
+func (maxlengthFormCallback *MaxLengthFormCallback) OnSave() {
+
+	log.Println("MaxLengthFormCallback, OnSave")
+
+	// checkout formStage to have the form group on the stage synchronized with the
+	// back repo (and front repo)
+	maxlengthFormCallback.probe.formStage.Checkout()
+
+	if maxlengthFormCallback.maxlength == nil {
+		maxlengthFormCallback.maxlength = new(models.MaxLength).Stage(maxlengthFormCallback.probe.stageOfInterest)
+	}
+	maxlength_ := maxlengthFormCallback.maxlength
+	_ = maxlength_
+
+	for _, formDiv := range maxlengthFormCallback.formGroup.FormDivs {
+		switch formDiv.Name {
+		// insertion point per field
+		case "Name":
+			FormDivBasicFieldToField(&(maxlength_.Name), formDiv)
+		case "Annotation":
+			FormDivSelectFieldToField(&(maxlength_.Annotation), maxlengthFormCallback.probe.stageOfInterest, formDiv)
+		case "Value":
+			FormDivBasicFieldToField(&(maxlength_.Value), formDiv)
+		}
+	}
+
+	// manage the suppress operation
+	if maxlengthFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		maxlength_.Unstage(maxlengthFormCallback.probe.stageOfInterest)
+	}
+
+	maxlengthFormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.MaxLength](
+		maxlengthFormCallback.probe,
+	)
+	maxlengthFormCallback.probe.tableStage.Commit()
+
+	// display a new form by reset the form stage
+	if maxlengthFormCallback.CreationMode || maxlengthFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		maxlengthFormCallback.probe.formStage.Reset()
+		newFormGroup := (&table.FormGroup{
+			Name: table.FormGroupDefaultName.ToString(),
+		}).Stage(maxlengthFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__MaxLengthFormCallback(
+			nil,
+			maxlengthFormCallback.probe,
+			newFormGroup,
+		)
+		maxlength := new(models.MaxLength)
+		FillUpForm(maxlength, newFormGroup, maxlengthFormCallback.probe)
+		maxlengthFormCallback.probe.formStage.Commit()
+	}
+
+	fillUpTree(maxlengthFormCallback.probe)
+}
 func __gong__New__MinInclusiveFormCallback(
 	mininclusive *models.MinInclusive,
 	probe *Probe,
@@ -798,6 +960,87 @@ func (mininclusiveFormCallback *MinInclusiveFormCallback) OnSave() {
 	}
 
 	fillUpTree(mininclusiveFormCallback.probe)
+}
+func __gong__New__MinLengthFormCallback(
+	minlength *models.MinLength,
+	probe *Probe,
+	formGroup *table.FormGroup,
+) (minlengthFormCallback *MinLengthFormCallback) {
+	minlengthFormCallback = new(MinLengthFormCallback)
+	minlengthFormCallback.probe = probe
+	minlengthFormCallback.minlength = minlength
+	minlengthFormCallback.formGroup = formGroup
+
+	minlengthFormCallback.CreationMode = (minlength == nil)
+
+	return
+}
+
+type MinLengthFormCallback struct {
+	minlength *models.MinLength
+
+	// If the form call is called on the creation of a new instnace
+	CreationMode bool
+
+	probe *Probe
+
+	formGroup *table.FormGroup
+}
+
+func (minlengthFormCallback *MinLengthFormCallback) OnSave() {
+
+	log.Println("MinLengthFormCallback, OnSave")
+
+	// checkout formStage to have the form group on the stage synchronized with the
+	// back repo (and front repo)
+	minlengthFormCallback.probe.formStage.Checkout()
+
+	if minlengthFormCallback.minlength == nil {
+		minlengthFormCallback.minlength = new(models.MinLength).Stage(minlengthFormCallback.probe.stageOfInterest)
+	}
+	minlength_ := minlengthFormCallback.minlength
+	_ = minlength_
+
+	for _, formDiv := range minlengthFormCallback.formGroup.FormDivs {
+		switch formDiv.Name {
+		// insertion point per field
+		case "Name":
+			FormDivBasicFieldToField(&(minlength_.Name), formDiv)
+		case "Annotation":
+			FormDivSelectFieldToField(&(minlength_.Annotation), minlengthFormCallback.probe.stageOfInterest, formDiv)
+		case "Value":
+			FormDivBasicFieldToField(&(minlength_.Value), formDiv)
+		}
+	}
+
+	// manage the suppress operation
+	if minlengthFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		minlength_.Unstage(minlengthFormCallback.probe.stageOfInterest)
+	}
+
+	minlengthFormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.MinLength](
+		minlengthFormCallback.probe,
+	)
+	minlengthFormCallback.probe.tableStage.Commit()
+
+	// display a new form by reset the form stage
+	if minlengthFormCallback.CreationMode || minlengthFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		minlengthFormCallback.probe.formStage.Reset()
+		newFormGroup := (&table.FormGroup{
+			Name: table.FormGroupDefaultName.ToString(),
+		}).Stage(minlengthFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__MinLengthFormCallback(
+			nil,
+			minlengthFormCallback.probe,
+			newFormGroup,
+		)
+		minlength := new(models.MinLength)
+		FillUpForm(minlength, newFormGroup, minlengthFormCallback.probe)
+		minlengthFormCallback.probe.formStage.Commit()
+	}
+
+	fillUpTree(minlengthFormCallback.probe)
 }
 func __gong__New__PatternFormCallback(
 	pattern *models.Pattern,
@@ -935,6 +1178,14 @@ func (restrictionFormCallback *RestrictionFormCallback) OnSave() {
 			FormDivSelectFieldToField(&(restriction_.MaxInclusive), restrictionFormCallback.probe.stageOfInterest, formDiv)
 		case "Pattern":
 			FormDivSelectFieldToField(&(restriction_.Pattern), restrictionFormCallback.probe.stageOfInterest, formDiv)
+		case "WhiteSpace":
+			FormDivSelectFieldToField(&(restriction_.WhiteSpace), restrictionFormCallback.probe.stageOfInterest, formDiv)
+		case "MinLength":
+			FormDivSelectFieldToField(&(restriction_.MinLength), restrictionFormCallback.probe.stageOfInterest, formDiv)
+		case "MaxLength":
+			FormDivSelectFieldToField(&(restriction_.MaxLength), restrictionFormCallback.probe.stageOfInterest, formDiv)
+		case "Length":
+			FormDivSelectFieldToField(&(restriction_.Length), restrictionFormCallback.probe.stageOfInterest, formDiv)
 		}
 	}
 
@@ -1249,4 +1500,85 @@ func (simpletypeFormCallback *SimpleTypeFormCallback) OnSave() {
 	}
 
 	fillUpTree(simpletypeFormCallback.probe)
+}
+func __gong__New__WhiteSpaceFormCallback(
+	whitespace *models.WhiteSpace,
+	probe *Probe,
+	formGroup *table.FormGroup,
+) (whitespaceFormCallback *WhiteSpaceFormCallback) {
+	whitespaceFormCallback = new(WhiteSpaceFormCallback)
+	whitespaceFormCallback.probe = probe
+	whitespaceFormCallback.whitespace = whitespace
+	whitespaceFormCallback.formGroup = formGroup
+
+	whitespaceFormCallback.CreationMode = (whitespace == nil)
+
+	return
+}
+
+type WhiteSpaceFormCallback struct {
+	whitespace *models.WhiteSpace
+
+	// If the form call is called on the creation of a new instnace
+	CreationMode bool
+
+	probe *Probe
+
+	formGroup *table.FormGroup
+}
+
+func (whitespaceFormCallback *WhiteSpaceFormCallback) OnSave() {
+
+	log.Println("WhiteSpaceFormCallback, OnSave")
+
+	// checkout formStage to have the form group on the stage synchronized with the
+	// back repo (and front repo)
+	whitespaceFormCallback.probe.formStage.Checkout()
+
+	if whitespaceFormCallback.whitespace == nil {
+		whitespaceFormCallback.whitespace = new(models.WhiteSpace).Stage(whitespaceFormCallback.probe.stageOfInterest)
+	}
+	whitespace_ := whitespaceFormCallback.whitespace
+	_ = whitespace_
+
+	for _, formDiv := range whitespaceFormCallback.formGroup.FormDivs {
+		switch formDiv.Name {
+		// insertion point per field
+		case "Name":
+			FormDivBasicFieldToField(&(whitespace_.Name), formDiv)
+		case "Annotation":
+			FormDivSelectFieldToField(&(whitespace_.Annotation), whitespaceFormCallback.probe.stageOfInterest, formDiv)
+		case "Value":
+			FormDivBasicFieldToField(&(whitespace_.Value), formDiv)
+		}
+	}
+
+	// manage the suppress operation
+	if whitespaceFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		whitespace_.Unstage(whitespaceFormCallback.probe.stageOfInterest)
+	}
+
+	whitespaceFormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.WhiteSpace](
+		whitespaceFormCallback.probe,
+	)
+	whitespaceFormCallback.probe.tableStage.Commit()
+
+	// display a new form by reset the form stage
+	if whitespaceFormCallback.CreationMode || whitespaceFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		whitespaceFormCallback.probe.formStage.Reset()
+		newFormGroup := (&table.FormGroup{
+			Name: table.FormGroupDefaultName.ToString(),
+		}).Stage(whitespaceFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__WhiteSpaceFormCallback(
+			nil,
+			whitespaceFormCallback.probe,
+			newFormGroup,
+		)
+		whitespace := new(models.WhiteSpace)
+		FillUpForm(whitespace, newFormGroup, whitespaceFormCallback.probe)
+		whitespaceFormCallback.probe.formStage.Commit()
+	}
+
+	fillUpTree(whitespaceFormCallback.probe)
 }

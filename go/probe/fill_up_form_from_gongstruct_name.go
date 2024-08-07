@@ -91,6 +91,19 @@ func FillUpFormFromGongstructName(
 		enumeration := new(models.Enumeration)
 		formGroup.HasSuppressButton = !isNewInstance
 		FillUpForm(enumeration, formGroup, probe)
+	case "Length":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "Length Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__LengthFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		length := new(models.Length)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(length, formGroup, probe)
 	case "MaxInclusive":
 		formGroup := (&form.FormGroup{
 			Name:  form.FormGroupDefaultName.ToString(),
@@ -104,6 +117,19 @@ func FillUpFormFromGongstructName(
 		maxinclusive := new(models.MaxInclusive)
 		formGroup.HasSuppressButton = !isNewInstance
 		FillUpForm(maxinclusive, formGroup, probe)
+	case "MaxLength":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "MaxLength Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__MaxLengthFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		maxlength := new(models.MaxLength)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(maxlength, formGroup, probe)
 	case "MinInclusive":
 		formGroup := (&form.FormGroup{
 			Name:  form.FormGroupDefaultName.ToString(),
@@ -117,6 +143,19 @@ func FillUpFormFromGongstructName(
 		mininclusive := new(models.MinInclusive)
 		formGroup.HasSuppressButton = !isNewInstance
 		FillUpForm(mininclusive, formGroup, probe)
+	case "MinLength":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "MinLength Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__MinLengthFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		minlength := new(models.MinLength)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(minlength, formGroup, probe)
 	case "Pattern":
 		formGroup := (&form.FormGroup{
 			Name:  form.FormGroupDefaultName.ToString(),
@@ -182,6 +221,19 @@ func FillUpFormFromGongstructName(
 		simpletype := new(models.SimpleType)
 		formGroup.HasSuppressButton = !isNewInstance
 		FillUpForm(simpletype, formGroup, probe)
+	case "WhiteSpace":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "WhiteSpace Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__WhiteSpaceFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		whitespace := new(models.WhiteSpace)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(whitespace, formGroup, probe)
 	}
 	formStage.Commit()
 }

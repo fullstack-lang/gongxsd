@@ -32,9 +32,15 @@ type BackRepoStruct struct {
 
 	BackRepoEnumeration BackRepoEnumerationStruct
 
+	BackRepoLength BackRepoLengthStruct
+
 	BackRepoMaxInclusive BackRepoMaxInclusiveStruct
 
+	BackRepoMaxLength BackRepoMaxLengthStruct
+
 	BackRepoMinInclusive BackRepoMinInclusiveStruct
+
+	BackRepoMinLength BackRepoMinLengthStruct
 
 	BackRepoPattern BackRepoPatternStruct
 
@@ -45,6 +51,8 @@ type BackRepoStruct struct {
 	BackRepoSequence BackRepoSequenceStruct
 
 	BackRepoSimpleType BackRepoSimpleTypeStruct
+
+	BackRepoWhiteSpace BackRepoWhiteSpaceStruct
 
 	CommitFromBackNb uint // records commit increments when performed by the back
 
@@ -91,13 +99,17 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 		&DocumentationDB{},
 		&ElementDB{},
 		&EnumerationDB{},
+		&LengthDB{},
 		&MaxInclusiveDB{},
+		&MaxLengthDB{},
 		&MinInclusiveDB{},
+		&MinLengthDB{},
 		&PatternDB{},
 		&RestrictionDB{},
 		&SchemaDB{},
 		&SequenceDB{},
 		&SimpleTypeDB{},
+		&WhiteSpaceDB{},
 	)
 
 	if err != nil {
@@ -148,6 +160,14 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 		db:    db,
 		stage: stage,
 	}
+	backRepo.BackRepoLength = BackRepoLengthStruct{
+		Map_LengthDBID_LengthPtr: make(map[uint]*models.Length, 0),
+		Map_LengthDBID_LengthDB:  make(map[uint]*LengthDB, 0),
+		Map_LengthPtr_LengthDBID: make(map[*models.Length]uint, 0),
+
+		db:    db,
+		stage: stage,
+	}
 	backRepo.BackRepoMaxInclusive = BackRepoMaxInclusiveStruct{
 		Map_MaxInclusiveDBID_MaxInclusivePtr: make(map[uint]*models.MaxInclusive, 0),
 		Map_MaxInclusiveDBID_MaxInclusiveDB:  make(map[uint]*MaxInclusiveDB, 0),
@@ -156,10 +176,26 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 		db:    db,
 		stage: stage,
 	}
+	backRepo.BackRepoMaxLength = BackRepoMaxLengthStruct{
+		Map_MaxLengthDBID_MaxLengthPtr: make(map[uint]*models.MaxLength, 0),
+		Map_MaxLengthDBID_MaxLengthDB:  make(map[uint]*MaxLengthDB, 0),
+		Map_MaxLengthPtr_MaxLengthDBID: make(map[*models.MaxLength]uint, 0),
+
+		db:    db,
+		stage: stage,
+	}
 	backRepo.BackRepoMinInclusive = BackRepoMinInclusiveStruct{
 		Map_MinInclusiveDBID_MinInclusivePtr: make(map[uint]*models.MinInclusive, 0),
 		Map_MinInclusiveDBID_MinInclusiveDB:  make(map[uint]*MinInclusiveDB, 0),
 		Map_MinInclusivePtr_MinInclusiveDBID: make(map[*models.MinInclusive]uint, 0),
+
+		db:    db,
+		stage: stage,
+	}
+	backRepo.BackRepoMinLength = BackRepoMinLengthStruct{
+		Map_MinLengthDBID_MinLengthPtr: make(map[uint]*models.MinLength, 0),
+		Map_MinLengthDBID_MinLengthDB:  make(map[uint]*MinLengthDB, 0),
+		Map_MinLengthPtr_MinLengthDBID: make(map[*models.MinLength]uint, 0),
 
 		db:    db,
 		stage: stage,
@@ -200,6 +236,14 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 		Map_SimpleTypeDBID_SimpleTypePtr: make(map[uint]*models.SimpleType, 0),
 		Map_SimpleTypeDBID_SimpleTypeDB:  make(map[uint]*SimpleTypeDB, 0),
 		Map_SimpleTypePtr_SimpleTypeDBID: make(map[*models.SimpleType]uint, 0),
+
+		db:    db,
+		stage: stage,
+	}
+	backRepo.BackRepoWhiteSpace = BackRepoWhiteSpaceStruct{
+		Map_WhiteSpaceDBID_WhiteSpacePtr: make(map[uint]*models.WhiteSpace, 0),
+		Map_WhiteSpaceDBID_WhiteSpaceDB:  make(map[uint]*WhiteSpaceDB, 0),
+		Map_WhiteSpacePtr_WhiteSpaceDBID: make(map[*models.WhiteSpace]uint, 0),
 
 		db:    db,
 		stage: stage,
@@ -257,13 +301,17 @@ func (backRepo *BackRepoStruct) Commit(stage *models.StageStruct) {
 	backRepo.BackRepoDocumentation.CommitPhaseOne(stage)
 	backRepo.BackRepoElement.CommitPhaseOne(stage)
 	backRepo.BackRepoEnumeration.CommitPhaseOne(stage)
+	backRepo.BackRepoLength.CommitPhaseOne(stage)
 	backRepo.BackRepoMaxInclusive.CommitPhaseOne(stage)
+	backRepo.BackRepoMaxLength.CommitPhaseOne(stage)
 	backRepo.BackRepoMinInclusive.CommitPhaseOne(stage)
+	backRepo.BackRepoMinLength.CommitPhaseOne(stage)
 	backRepo.BackRepoPattern.CommitPhaseOne(stage)
 	backRepo.BackRepoRestriction.CommitPhaseOne(stage)
 	backRepo.BackRepoSchema.CommitPhaseOne(stage)
 	backRepo.BackRepoSequence.CommitPhaseOne(stage)
 	backRepo.BackRepoSimpleType.CommitPhaseOne(stage)
+	backRepo.BackRepoWhiteSpace.CommitPhaseOne(stage)
 
 	// insertion point for per struct back repo phase two commit
 	backRepo.BackRepoAnnotation.CommitPhaseTwo(backRepo)
@@ -271,13 +319,17 @@ func (backRepo *BackRepoStruct) Commit(stage *models.StageStruct) {
 	backRepo.BackRepoDocumentation.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoElement.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoEnumeration.CommitPhaseTwo(backRepo)
+	backRepo.BackRepoLength.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoMaxInclusive.CommitPhaseTwo(backRepo)
+	backRepo.BackRepoMaxLength.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoMinInclusive.CommitPhaseTwo(backRepo)
+	backRepo.BackRepoMinLength.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoPattern.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoRestriction.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoSchema.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoSequence.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoSimpleType.CommitPhaseTwo(backRepo)
+	backRepo.BackRepoWhiteSpace.CommitPhaseTwo(backRepo)
 
 	backRepo.IncrementCommitFromBackNb()
 }
@@ -290,13 +342,17 @@ func (backRepo *BackRepoStruct) Checkout(stage *models.StageStruct) {
 	backRepo.BackRepoDocumentation.CheckoutPhaseOne()
 	backRepo.BackRepoElement.CheckoutPhaseOne()
 	backRepo.BackRepoEnumeration.CheckoutPhaseOne()
+	backRepo.BackRepoLength.CheckoutPhaseOne()
 	backRepo.BackRepoMaxInclusive.CheckoutPhaseOne()
+	backRepo.BackRepoMaxLength.CheckoutPhaseOne()
 	backRepo.BackRepoMinInclusive.CheckoutPhaseOne()
+	backRepo.BackRepoMinLength.CheckoutPhaseOne()
 	backRepo.BackRepoPattern.CheckoutPhaseOne()
 	backRepo.BackRepoRestriction.CheckoutPhaseOne()
 	backRepo.BackRepoSchema.CheckoutPhaseOne()
 	backRepo.BackRepoSequence.CheckoutPhaseOne()
 	backRepo.BackRepoSimpleType.CheckoutPhaseOne()
+	backRepo.BackRepoWhiteSpace.CheckoutPhaseOne()
 
 	// insertion point for per struct back repo phase two commit
 	backRepo.BackRepoAnnotation.CheckoutPhaseTwo(backRepo)
@@ -304,13 +360,17 @@ func (backRepo *BackRepoStruct) Checkout(stage *models.StageStruct) {
 	backRepo.BackRepoDocumentation.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoElement.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoEnumeration.CheckoutPhaseTwo(backRepo)
+	backRepo.BackRepoLength.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoMaxInclusive.CheckoutPhaseTwo(backRepo)
+	backRepo.BackRepoMaxLength.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoMinInclusive.CheckoutPhaseTwo(backRepo)
+	backRepo.BackRepoMinLength.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoPattern.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoRestriction.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoSchema.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoSequence.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoSimpleType.CheckoutPhaseTwo(backRepo)
+	backRepo.BackRepoWhiteSpace.CheckoutPhaseTwo(backRepo)
 }
 
 // Backup the BackRepoStruct
@@ -323,13 +383,17 @@ func (backRepo *BackRepoStruct) Backup(stage *models.StageStruct, dirPath string
 	backRepo.BackRepoDocumentation.Backup(dirPath)
 	backRepo.BackRepoElement.Backup(dirPath)
 	backRepo.BackRepoEnumeration.Backup(dirPath)
+	backRepo.BackRepoLength.Backup(dirPath)
 	backRepo.BackRepoMaxInclusive.Backup(dirPath)
+	backRepo.BackRepoMaxLength.Backup(dirPath)
 	backRepo.BackRepoMinInclusive.Backup(dirPath)
+	backRepo.BackRepoMinLength.Backup(dirPath)
 	backRepo.BackRepoPattern.Backup(dirPath)
 	backRepo.BackRepoRestriction.Backup(dirPath)
 	backRepo.BackRepoSchema.Backup(dirPath)
 	backRepo.BackRepoSequence.Backup(dirPath)
 	backRepo.BackRepoSimpleType.Backup(dirPath)
+	backRepo.BackRepoWhiteSpace.Backup(dirPath)
 }
 
 // Backup in XL the BackRepoStruct
@@ -345,13 +409,17 @@ func (backRepo *BackRepoStruct) BackupXL(stage *models.StageStruct, dirPath stri
 	backRepo.BackRepoDocumentation.BackupXL(file)
 	backRepo.BackRepoElement.BackupXL(file)
 	backRepo.BackRepoEnumeration.BackupXL(file)
+	backRepo.BackRepoLength.BackupXL(file)
 	backRepo.BackRepoMaxInclusive.BackupXL(file)
+	backRepo.BackRepoMaxLength.BackupXL(file)
 	backRepo.BackRepoMinInclusive.BackupXL(file)
+	backRepo.BackRepoMinLength.BackupXL(file)
 	backRepo.BackRepoPattern.BackupXL(file)
 	backRepo.BackRepoRestriction.BackupXL(file)
 	backRepo.BackRepoSchema.BackupXL(file)
 	backRepo.BackRepoSequence.BackupXL(file)
 	backRepo.BackRepoSimpleType.BackupXL(file)
+	backRepo.BackRepoWhiteSpace.BackupXL(file)
 
 	var b bytes.Buffer
 	writer := bufio.NewWriter(&b)
@@ -381,13 +449,17 @@ func (backRepo *BackRepoStruct) Restore(stage *models.StageStruct, dirPath strin
 	backRepo.BackRepoDocumentation.RestorePhaseOne(dirPath)
 	backRepo.BackRepoElement.RestorePhaseOne(dirPath)
 	backRepo.BackRepoEnumeration.RestorePhaseOne(dirPath)
+	backRepo.BackRepoLength.RestorePhaseOne(dirPath)
 	backRepo.BackRepoMaxInclusive.RestorePhaseOne(dirPath)
+	backRepo.BackRepoMaxLength.RestorePhaseOne(dirPath)
 	backRepo.BackRepoMinInclusive.RestorePhaseOne(dirPath)
+	backRepo.BackRepoMinLength.RestorePhaseOne(dirPath)
 	backRepo.BackRepoPattern.RestorePhaseOne(dirPath)
 	backRepo.BackRepoRestriction.RestorePhaseOne(dirPath)
 	backRepo.BackRepoSchema.RestorePhaseOne(dirPath)
 	backRepo.BackRepoSequence.RestorePhaseOne(dirPath)
 	backRepo.BackRepoSimpleType.RestorePhaseOne(dirPath)
+	backRepo.BackRepoWhiteSpace.RestorePhaseOne(dirPath)
 
 	//
 	// restauration second phase (reindex pointers with the new ID)
@@ -399,13 +471,17 @@ func (backRepo *BackRepoStruct) Restore(stage *models.StageStruct, dirPath strin
 	backRepo.BackRepoDocumentation.RestorePhaseTwo()
 	backRepo.BackRepoElement.RestorePhaseTwo()
 	backRepo.BackRepoEnumeration.RestorePhaseTwo()
+	backRepo.BackRepoLength.RestorePhaseTwo()
 	backRepo.BackRepoMaxInclusive.RestorePhaseTwo()
+	backRepo.BackRepoMaxLength.RestorePhaseTwo()
 	backRepo.BackRepoMinInclusive.RestorePhaseTwo()
+	backRepo.BackRepoMinLength.RestorePhaseTwo()
 	backRepo.BackRepoPattern.RestorePhaseTwo()
 	backRepo.BackRepoRestriction.RestorePhaseTwo()
 	backRepo.BackRepoSchema.RestorePhaseTwo()
 	backRepo.BackRepoSequence.RestorePhaseTwo()
 	backRepo.BackRepoSimpleType.RestorePhaseTwo()
+	backRepo.BackRepoWhiteSpace.RestorePhaseTwo()
 
 	backRepo.stage.Checkout()
 }
@@ -438,13 +514,17 @@ func (backRepo *BackRepoStruct) RestoreXL(stage *models.StageStruct, dirPath str
 	backRepo.BackRepoDocumentation.RestoreXLPhaseOne(file)
 	backRepo.BackRepoElement.RestoreXLPhaseOne(file)
 	backRepo.BackRepoEnumeration.RestoreXLPhaseOne(file)
+	backRepo.BackRepoLength.RestoreXLPhaseOne(file)
 	backRepo.BackRepoMaxInclusive.RestoreXLPhaseOne(file)
+	backRepo.BackRepoMaxLength.RestoreXLPhaseOne(file)
 	backRepo.BackRepoMinInclusive.RestoreXLPhaseOne(file)
+	backRepo.BackRepoMinLength.RestoreXLPhaseOne(file)
 	backRepo.BackRepoPattern.RestoreXLPhaseOne(file)
 	backRepo.BackRepoRestriction.RestoreXLPhaseOne(file)
 	backRepo.BackRepoSchema.RestoreXLPhaseOne(file)
 	backRepo.BackRepoSequence.RestoreXLPhaseOne(file)
 	backRepo.BackRepoSimpleType.RestoreXLPhaseOne(file)
+	backRepo.BackRepoWhiteSpace.RestoreXLPhaseOne(file)
 
 	// commit the restored stage
 	backRepo.stage.Commit()

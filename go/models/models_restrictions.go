@@ -23,3 +23,27 @@ type Pattern struct {
 	ElementWithAnnotation
 	ElementWithValueAttribute
 }
+
+type WhiteSpace struct {
+	Name string
+	ElementWithAnnotation
+	ElementWithValueAttribute
+}
+
+type MinLength struct {
+	Name string
+	ElementWithAnnotation
+	ElementWithValueAttribute
+}
+
+type MaxLength struct {
+	Name string
+	ElementWithAnnotation
+	ElementWithValueAttribute
+}
+
+type Length struct {
+	Name string
+	ElementWithAnnotation
+	ElementWithValueAttribute
+}

@@ -300,6 +300,46 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 
 	}
 
+	map_Length_Identifiers := make(map[*Length]string)
+	_ = map_Length_Identifiers
+
+	lengthOrdered := []*Length{}
+	for length := range stage.Lengths {
+		lengthOrdered = append(lengthOrdered, length)
+	}
+	sort.Slice(lengthOrdered[:], func(i, j int) bool {
+		return lengthOrdered[i].Name < lengthOrdered[j].Name
+	})
+	if len(lengthOrdered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, length := range lengthOrdered {
+
+		id = generatesIdentifier("Length", idx, length.Name)
+		map_Length_Identifiers[length] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "Length")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", length.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(length.Name))
+		initializerStatements += setValueField
+
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Value")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(length.Value))
+		initializerStatements += setValueField
+
+	}
+
 	map_MaxInclusive_Identifiers := make(map[*MaxInclusive]string)
 	_ = map_MaxInclusive_Identifiers
 
@@ -340,6 +380,46 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 
 	}
 
+	map_MaxLength_Identifiers := make(map[*MaxLength]string)
+	_ = map_MaxLength_Identifiers
+
+	maxlengthOrdered := []*MaxLength{}
+	for maxlength := range stage.MaxLengths {
+		maxlengthOrdered = append(maxlengthOrdered, maxlength)
+	}
+	sort.Slice(maxlengthOrdered[:], func(i, j int) bool {
+		return maxlengthOrdered[i].Name < maxlengthOrdered[j].Name
+	})
+	if len(maxlengthOrdered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, maxlength := range maxlengthOrdered {
+
+		id = generatesIdentifier("MaxLength", idx, maxlength.Name)
+		map_MaxLength_Identifiers[maxlength] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "MaxLength")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", maxlength.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(maxlength.Name))
+		initializerStatements += setValueField
+
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Value")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(maxlength.Value))
+		initializerStatements += setValueField
+
+	}
+
 	map_MinInclusive_Identifiers := make(map[*MinInclusive]string)
 	_ = map_MinInclusive_Identifiers
 
@@ -376,6 +456,46 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
 		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Value")
 		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(mininclusive.Value))
+		initializerStatements += setValueField
+
+	}
+
+	map_MinLength_Identifiers := make(map[*MinLength]string)
+	_ = map_MinLength_Identifiers
+
+	minlengthOrdered := []*MinLength{}
+	for minlength := range stage.MinLengths {
+		minlengthOrdered = append(minlengthOrdered, minlength)
+	}
+	sort.Slice(minlengthOrdered[:], func(i, j int) bool {
+		return minlengthOrdered[i].Name < minlengthOrdered[j].Name
+	})
+	if len(minlengthOrdered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, minlength := range minlengthOrdered {
+
+		id = generatesIdentifier("MinLength", idx, minlength.Name)
+		map_MinLength_Identifiers[minlength] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "MinLength")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", minlength.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(minlength.Name))
+		initializerStatements += setValueField
+
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Value")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(minlength.Value))
 		initializerStatements += setValueField
 
 	}
@@ -568,6 +688,46 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 
 	}
 
+	map_WhiteSpace_Identifiers := make(map[*WhiteSpace]string)
+	_ = map_WhiteSpace_Identifiers
+
+	whitespaceOrdered := []*WhiteSpace{}
+	for whitespace := range stage.WhiteSpaces {
+		whitespaceOrdered = append(whitespaceOrdered, whitespace)
+	}
+	sort.Slice(whitespaceOrdered[:], func(i, j int) bool {
+		return whitespaceOrdered[i].Name < whitespaceOrdered[j].Name
+	})
+	if len(whitespaceOrdered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, whitespace := range whitespaceOrdered {
+
+		id = generatesIdentifier("WhiteSpace", idx, whitespace.Name)
+		map_WhiteSpace_Identifiers[whitespace] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "WhiteSpace")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", whitespace.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(whitespace.Name))
+		initializerStatements += setValueField
+
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Value")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(whitespace.Value))
+		initializerStatements += setValueField
+
+	}
+
 	// insertion initialization of objects to stage
 	for idx, annotation := range annotationOrdered {
 		var setPointerField string
@@ -675,6 +835,24 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 
 	}
 
+	for idx, length := range lengthOrdered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("Length", idx, length.Name)
+		map_Length_Identifiers[length] = id
+
+		// Initialisation of values
+		if length.Annotation != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Annotation")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Annotation_Identifiers[length.Annotation])
+			pointersInitializesStatements += setPointerField
+		}
+
+	}
+
 	for idx, maxinclusive := range maxinclusiveOrdered {
 		var setPointerField string
 		_ = setPointerField
@@ -693,6 +871,24 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 
 	}
 
+	for idx, maxlength := range maxlengthOrdered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("MaxLength", idx, maxlength.Name)
+		map_MaxLength_Identifiers[maxlength] = id
+
+		// Initialisation of values
+		if maxlength.Annotation != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Annotation")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Annotation_Identifiers[maxlength.Annotation])
+			pointersInitializesStatements += setPointerField
+		}
+
+	}
+
 	for idx, mininclusive := range mininclusiveOrdered {
 		var setPointerField string
 		_ = setPointerField
@@ -706,6 +902,24 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Annotation")
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Annotation_Identifiers[mininclusive.Annotation])
+			pointersInitializesStatements += setPointerField
+		}
+
+	}
+
+	for idx, minlength := range minlengthOrdered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("MinLength", idx, minlength.Name)
+		map_MinLength_Identifiers[minlength] = id
+
+		// Initialisation of values
+		if minlength.Annotation != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Annotation")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Annotation_Identifiers[minlength.Annotation])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -774,6 +988,38 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Pattern")
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Pattern_Identifiers[restriction.Pattern])
+			pointersInitializesStatements += setPointerField
+		}
+
+		if restriction.WhiteSpace != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "WhiteSpace")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_WhiteSpace_Identifiers[restriction.WhiteSpace])
+			pointersInitializesStatements += setPointerField
+		}
+
+		if restriction.MinLength != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "MinLength")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_MinLength_Identifiers[restriction.MinLength])
+			pointersInitializesStatements += setPointerField
+		}
+
+		if restriction.MaxLength != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "MaxLength")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_MaxLength_Identifiers[restriction.MaxLength])
+			pointersInitializesStatements += setPointerField
+		}
+
+		if restriction.Length != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Length")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Length_Identifiers[restriction.Length])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -868,6 +1114,24 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Restriction")
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Restriction_Identifiers[simpletype.Restriction])
+			pointersInitializesStatements += setPointerField
+		}
+
+	}
+
+	for idx, whitespace := range whitespaceOrdered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("WhiteSpace", idx, whitespace.Name)
+		map_WhiteSpace_Identifiers[whitespace] = id
+
+		// Initialisation of values
+		if whitespace.Annotation != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Annotation")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Annotation_Identifiers[whitespace.Annotation])
 			pointersInitializesStatements += setPointerField
 		}
 

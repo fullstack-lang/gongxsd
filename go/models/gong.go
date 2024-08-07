@@ -96,6 +96,15 @@ type StageStruct struct {
 	OnAfterEnumerationDeleteCallback OnAfterDeleteInterface[Enumeration]
 	OnAfterEnumerationReadCallback   OnAfterReadInterface[Enumeration]
 
+	Lengths           map[*Length]any
+	Lengths_mapString map[string]*Length
+
+	// insertion point for slice of pointers maps
+	OnAfterLengthCreateCallback OnAfterCreateInterface[Length]
+	OnAfterLengthUpdateCallback OnAfterUpdateInterface[Length]
+	OnAfterLengthDeleteCallback OnAfterDeleteInterface[Length]
+	OnAfterLengthReadCallback   OnAfterReadInterface[Length]
+
 	MaxInclusives           map[*MaxInclusive]any
 	MaxInclusives_mapString map[string]*MaxInclusive
 
@@ -105,6 +114,15 @@ type StageStruct struct {
 	OnAfterMaxInclusiveDeleteCallback OnAfterDeleteInterface[MaxInclusive]
 	OnAfterMaxInclusiveReadCallback   OnAfterReadInterface[MaxInclusive]
 
+	MaxLengths           map[*MaxLength]any
+	MaxLengths_mapString map[string]*MaxLength
+
+	// insertion point for slice of pointers maps
+	OnAfterMaxLengthCreateCallback OnAfterCreateInterface[MaxLength]
+	OnAfterMaxLengthUpdateCallback OnAfterUpdateInterface[MaxLength]
+	OnAfterMaxLengthDeleteCallback OnAfterDeleteInterface[MaxLength]
+	OnAfterMaxLengthReadCallback   OnAfterReadInterface[MaxLength]
+
 	MinInclusives           map[*MinInclusive]any
 	MinInclusives_mapString map[string]*MinInclusive
 
@@ -113,6 +131,15 @@ type StageStruct struct {
 	OnAfterMinInclusiveUpdateCallback OnAfterUpdateInterface[MinInclusive]
 	OnAfterMinInclusiveDeleteCallback OnAfterDeleteInterface[MinInclusive]
 	OnAfterMinInclusiveReadCallback   OnAfterReadInterface[MinInclusive]
+
+	MinLengths           map[*MinLength]any
+	MinLengths_mapString map[string]*MinLength
+
+	// insertion point for slice of pointers maps
+	OnAfterMinLengthCreateCallback OnAfterCreateInterface[MinLength]
+	OnAfterMinLengthUpdateCallback OnAfterUpdateInterface[MinLength]
+	OnAfterMinLengthDeleteCallback OnAfterDeleteInterface[MinLength]
+	OnAfterMinLengthReadCallback   OnAfterReadInterface[MinLength]
 
 	Patterns           map[*Pattern]any
 	Patterns_mapString map[string]*Pattern
@@ -168,6 +195,15 @@ type StageStruct struct {
 	OnAfterSimpleTypeUpdateCallback OnAfterUpdateInterface[SimpleType]
 	OnAfterSimpleTypeDeleteCallback OnAfterDeleteInterface[SimpleType]
 	OnAfterSimpleTypeReadCallback   OnAfterReadInterface[SimpleType]
+
+	WhiteSpaces           map[*WhiteSpace]any
+	WhiteSpaces_mapString map[string]*WhiteSpace
+
+	// insertion point for slice of pointers maps
+	OnAfterWhiteSpaceCreateCallback OnAfterCreateInterface[WhiteSpace]
+	OnAfterWhiteSpaceUpdateCallback OnAfterUpdateInterface[WhiteSpace]
+	OnAfterWhiteSpaceDeleteCallback OnAfterDeleteInterface[WhiteSpace]
+	OnAfterWhiteSpaceReadCallback   OnAfterReadInterface[WhiteSpace]
 
 	AllModelsStructCreateCallback AllModelsStructCreateInterface
 
@@ -247,10 +283,16 @@ type BackRepoInterface interface {
 	CheckoutElement(element *Element)
 	CommitEnumeration(enumeration *Enumeration)
 	CheckoutEnumeration(enumeration *Enumeration)
+	CommitLength(length *Length)
+	CheckoutLength(length *Length)
 	CommitMaxInclusive(maxinclusive *MaxInclusive)
 	CheckoutMaxInclusive(maxinclusive *MaxInclusive)
+	CommitMaxLength(maxlength *MaxLength)
+	CheckoutMaxLength(maxlength *MaxLength)
 	CommitMinInclusive(mininclusive *MinInclusive)
 	CheckoutMinInclusive(mininclusive *MinInclusive)
+	CommitMinLength(minlength *MinLength)
+	CheckoutMinLength(minlength *MinLength)
 	CommitPattern(pattern *Pattern)
 	CheckoutPattern(pattern *Pattern)
 	CommitRestriction(restriction *Restriction)
@@ -261,6 +303,8 @@ type BackRepoInterface interface {
 	CheckoutSequence(sequence *Sequence)
 	CommitSimpleType(simpletype *SimpleType)
 	CheckoutSimpleType(simpletype *SimpleType)
+	CommitWhiteSpace(whitespace *WhiteSpace)
+	CheckoutWhiteSpace(whitespace *WhiteSpace)
 	GetLastCommitFromBackNb() uint
 	GetLastPushFromFrontNb() uint
 }
@@ -283,11 +327,20 @@ func NewStage(path string) (stage *StageStruct) {
 		Enumerations:           make(map[*Enumeration]any),
 		Enumerations_mapString: make(map[string]*Enumeration),
 
+		Lengths:           make(map[*Length]any),
+		Lengths_mapString: make(map[string]*Length),
+
 		MaxInclusives:           make(map[*MaxInclusive]any),
 		MaxInclusives_mapString: make(map[string]*MaxInclusive),
 
+		MaxLengths:           make(map[*MaxLength]any),
+		MaxLengths_mapString: make(map[string]*MaxLength),
+
 		MinInclusives:           make(map[*MinInclusive]any),
 		MinInclusives_mapString: make(map[string]*MinInclusive),
+
+		MinLengths:           make(map[*MinLength]any),
+		MinLengths_mapString: make(map[string]*MinLength),
 
 		Patterns:           make(map[*Pattern]any),
 		Patterns_mapString: make(map[string]*Pattern),
@@ -303,6 +356,9 @@ func NewStage(path string) (stage *StageStruct) {
 
 		SimpleTypes:           make(map[*SimpleType]any),
 		SimpleTypes_mapString: make(map[string]*SimpleType),
+
+		WhiteSpaces:           make(map[*WhiteSpace]any),
+		WhiteSpaces_mapString: make(map[string]*WhiteSpace),
 
 		// end of insertion point
 		Map_GongStructName_InstancesNb: make(map[string]int),
@@ -342,13 +398,17 @@ func (stage *StageStruct) Commit() {
 	stage.Map_GongStructName_InstancesNb["Documentation"] = len(stage.Documentations)
 	stage.Map_GongStructName_InstancesNb["Element"] = len(stage.Elements)
 	stage.Map_GongStructName_InstancesNb["Enumeration"] = len(stage.Enumerations)
+	stage.Map_GongStructName_InstancesNb["Length"] = len(stage.Lengths)
 	stage.Map_GongStructName_InstancesNb["MaxInclusive"] = len(stage.MaxInclusives)
+	stage.Map_GongStructName_InstancesNb["MaxLength"] = len(stage.MaxLengths)
 	stage.Map_GongStructName_InstancesNb["MinInclusive"] = len(stage.MinInclusives)
+	stage.Map_GongStructName_InstancesNb["MinLength"] = len(stage.MinLengths)
 	stage.Map_GongStructName_InstancesNb["Pattern"] = len(stage.Patterns)
 	stage.Map_GongStructName_InstancesNb["Restriction"] = len(stage.Restrictions)
 	stage.Map_GongStructName_InstancesNb["Schema"] = len(stage.Schemas)
 	stage.Map_GongStructName_InstancesNb["Sequence"] = len(stage.Sequences)
 	stage.Map_GongStructName_InstancesNb["SimpleType"] = len(stage.SimpleTypes)
+	stage.Map_GongStructName_InstancesNb["WhiteSpace"] = len(stage.WhiteSpaces)
 
 }
 
@@ -364,13 +424,17 @@ func (stage *StageStruct) Checkout() {
 	stage.Map_GongStructName_InstancesNb["Documentation"] = len(stage.Documentations)
 	stage.Map_GongStructName_InstancesNb["Element"] = len(stage.Elements)
 	stage.Map_GongStructName_InstancesNb["Enumeration"] = len(stage.Enumerations)
+	stage.Map_GongStructName_InstancesNb["Length"] = len(stage.Lengths)
 	stage.Map_GongStructName_InstancesNb["MaxInclusive"] = len(stage.MaxInclusives)
+	stage.Map_GongStructName_InstancesNb["MaxLength"] = len(stage.MaxLengths)
 	stage.Map_GongStructName_InstancesNb["MinInclusive"] = len(stage.MinInclusives)
+	stage.Map_GongStructName_InstancesNb["MinLength"] = len(stage.MinLengths)
 	stage.Map_GongStructName_InstancesNb["Pattern"] = len(stage.Patterns)
 	stage.Map_GongStructName_InstancesNb["Restriction"] = len(stage.Restrictions)
 	stage.Map_GongStructName_InstancesNb["Schema"] = len(stage.Schemas)
 	stage.Map_GongStructName_InstancesNb["Sequence"] = len(stage.Sequences)
 	stage.Map_GongStructName_InstancesNb["SimpleType"] = len(stage.SimpleTypes)
+	stage.Map_GongStructName_InstancesNb["WhiteSpace"] = len(stage.WhiteSpaces)
 
 }
 
@@ -653,6 +717,56 @@ func (enumeration *Enumeration) GetName() (res string) {
 	return enumeration.Name
 }
 
+// Stage puts length to the model stage
+func (length *Length) Stage(stage *StageStruct) *Length {
+	stage.Lengths[length] = __member
+	stage.Lengths_mapString[length.Name] = length
+
+	return length
+}
+
+// Unstage removes length off the model stage
+func (length *Length) Unstage(stage *StageStruct) *Length {
+	delete(stage.Lengths, length)
+	delete(stage.Lengths_mapString, length.Name)
+	return length
+}
+
+// UnstageVoid removes length off the model stage
+func (length *Length) UnstageVoid(stage *StageStruct) {
+	delete(stage.Lengths, length)
+	delete(stage.Lengths_mapString, length.Name)
+}
+
+// commit length to the back repo (if it is already staged)
+func (length *Length) Commit(stage *StageStruct) *Length {
+	if _, ok := stage.Lengths[length]; ok {
+		if stage.BackRepo != nil {
+			stage.BackRepo.CommitLength(length)
+		}
+	}
+	return length
+}
+
+func (length *Length) CommitVoid(stage *StageStruct) {
+	length.Commit(stage)
+}
+
+// Checkout length to the back repo (if it is already staged)
+func (length *Length) Checkout(stage *StageStruct) *Length {
+	if _, ok := stage.Lengths[length]; ok {
+		if stage.BackRepo != nil {
+			stage.BackRepo.CheckoutLength(length)
+		}
+	}
+	return length
+}
+
+// for satisfaction of GongStruct interface
+func (length *Length) GetName() (res string) {
+	return length.Name
+}
+
 // Stage puts maxinclusive to the model stage
 func (maxinclusive *MaxInclusive) Stage(stage *StageStruct) *MaxInclusive {
 	stage.MaxInclusives[maxinclusive] = __member
@@ -703,6 +817,56 @@ func (maxinclusive *MaxInclusive) GetName() (res string) {
 	return maxinclusive.Name
 }
 
+// Stage puts maxlength to the model stage
+func (maxlength *MaxLength) Stage(stage *StageStruct) *MaxLength {
+	stage.MaxLengths[maxlength] = __member
+	stage.MaxLengths_mapString[maxlength.Name] = maxlength
+
+	return maxlength
+}
+
+// Unstage removes maxlength off the model stage
+func (maxlength *MaxLength) Unstage(stage *StageStruct) *MaxLength {
+	delete(stage.MaxLengths, maxlength)
+	delete(stage.MaxLengths_mapString, maxlength.Name)
+	return maxlength
+}
+
+// UnstageVoid removes maxlength off the model stage
+func (maxlength *MaxLength) UnstageVoid(stage *StageStruct) {
+	delete(stage.MaxLengths, maxlength)
+	delete(stage.MaxLengths_mapString, maxlength.Name)
+}
+
+// commit maxlength to the back repo (if it is already staged)
+func (maxlength *MaxLength) Commit(stage *StageStruct) *MaxLength {
+	if _, ok := stage.MaxLengths[maxlength]; ok {
+		if stage.BackRepo != nil {
+			stage.BackRepo.CommitMaxLength(maxlength)
+		}
+	}
+	return maxlength
+}
+
+func (maxlength *MaxLength) CommitVoid(stage *StageStruct) {
+	maxlength.Commit(stage)
+}
+
+// Checkout maxlength to the back repo (if it is already staged)
+func (maxlength *MaxLength) Checkout(stage *StageStruct) *MaxLength {
+	if _, ok := stage.MaxLengths[maxlength]; ok {
+		if stage.BackRepo != nil {
+			stage.BackRepo.CheckoutMaxLength(maxlength)
+		}
+	}
+	return maxlength
+}
+
+// for satisfaction of GongStruct interface
+func (maxlength *MaxLength) GetName() (res string) {
+	return maxlength.Name
+}
+
 // Stage puts mininclusive to the model stage
 func (mininclusive *MinInclusive) Stage(stage *StageStruct) *MinInclusive {
 	stage.MinInclusives[mininclusive] = __member
@@ -751,6 +915,56 @@ func (mininclusive *MinInclusive) Checkout(stage *StageStruct) *MinInclusive {
 // for satisfaction of GongStruct interface
 func (mininclusive *MinInclusive) GetName() (res string) {
 	return mininclusive.Name
+}
+
+// Stage puts minlength to the model stage
+func (minlength *MinLength) Stage(stage *StageStruct) *MinLength {
+	stage.MinLengths[minlength] = __member
+	stage.MinLengths_mapString[minlength.Name] = minlength
+
+	return minlength
+}
+
+// Unstage removes minlength off the model stage
+func (minlength *MinLength) Unstage(stage *StageStruct) *MinLength {
+	delete(stage.MinLengths, minlength)
+	delete(stage.MinLengths_mapString, minlength.Name)
+	return minlength
+}
+
+// UnstageVoid removes minlength off the model stage
+func (minlength *MinLength) UnstageVoid(stage *StageStruct) {
+	delete(stage.MinLengths, minlength)
+	delete(stage.MinLengths_mapString, minlength.Name)
+}
+
+// commit minlength to the back repo (if it is already staged)
+func (minlength *MinLength) Commit(stage *StageStruct) *MinLength {
+	if _, ok := stage.MinLengths[minlength]; ok {
+		if stage.BackRepo != nil {
+			stage.BackRepo.CommitMinLength(minlength)
+		}
+	}
+	return minlength
+}
+
+func (minlength *MinLength) CommitVoid(stage *StageStruct) {
+	minlength.Commit(stage)
+}
+
+// Checkout minlength to the back repo (if it is already staged)
+func (minlength *MinLength) Checkout(stage *StageStruct) *MinLength {
+	if _, ok := stage.MinLengths[minlength]; ok {
+		if stage.BackRepo != nil {
+			stage.BackRepo.CheckoutMinLength(minlength)
+		}
+	}
+	return minlength
+}
+
+// for satisfaction of GongStruct interface
+func (minlength *MinLength) GetName() (res string) {
+	return minlength.Name
 }
 
 // Stage puts pattern to the model stage
@@ -1003,6 +1217,56 @@ func (simpletype *SimpleType) GetName() (res string) {
 	return simpletype.Name
 }
 
+// Stage puts whitespace to the model stage
+func (whitespace *WhiteSpace) Stage(stage *StageStruct) *WhiteSpace {
+	stage.WhiteSpaces[whitespace] = __member
+	stage.WhiteSpaces_mapString[whitespace.Name] = whitespace
+
+	return whitespace
+}
+
+// Unstage removes whitespace off the model stage
+func (whitespace *WhiteSpace) Unstage(stage *StageStruct) *WhiteSpace {
+	delete(stage.WhiteSpaces, whitespace)
+	delete(stage.WhiteSpaces_mapString, whitespace.Name)
+	return whitespace
+}
+
+// UnstageVoid removes whitespace off the model stage
+func (whitespace *WhiteSpace) UnstageVoid(stage *StageStruct) {
+	delete(stage.WhiteSpaces, whitespace)
+	delete(stage.WhiteSpaces_mapString, whitespace.Name)
+}
+
+// commit whitespace to the back repo (if it is already staged)
+func (whitespace *WhiteSpace) Commit(stage *StageStruct) *WhiteSpace {
+	if _, ok := stage.WhiteSpaces[whitespace]; ok {
+		if stage.BackRepo != nil {
+			stage.BackRepo.CommitWhiteSpace(whitespace)
+		}
+	}
+	return whitespace
+}
+
+func (whitespace *WhiteSpace) CommitVoid(stage *StageStruct) {
+	whitespace.Commit(stage)
+}
+
+// Checkout whitespace to the back repo (if it is already staged)
+func (whitespace *WhiteSpace) Checkout(stage *StageStruct) *WhiteSpace {
+	if _, ok := stage.WhiteSpaces[whitespace]; ok {
+		if stage.BackRepo != nil {
+			stage.BackRepo.CheckoutWhiteSpace(whitespace)
+		}
+	}
+	return whitespace
+}
+
+// for satisfaction of GongStruct interface
+func (whitespace *WhiteSpace) GetName() (res string) {
+	return whitespace.Name
+}
+
 // swagger:ignore
 type AllModelsStructCreateInterface interface { // insertion point for Callbacks on creation
 	CreateORMAnnotation(Annotation *Annotation)
@@ -1010,13 +1274,17 @@ type AllModelsStructCreateInterface interface { // insertion point for Callbacks
 	CreateORMDocumentation(Documentation *Documentation)
 	CreateORMElement(Element *Element)
 	CreateORMEnumeration(Enumeration *Enumeration)
+	CreateORMLength(Length *Length)
 	CreateORMMaxInclusive(MaxInclusive *MaxInclusive)
+	CreateORMMaxLength(MaxLength *MaxLength)
 	CreateORMMinInclusive(MinInclusive *MinInclusive)
+	CreateORMMinLength(MinLength *MinLength)
 	CreateORMPattern(Pattern *Pattern)
 	CreateORMRestriction(Restriction *Restriction)
 	CreateORMSchema(Schema *Schema)
 	CreateORMSequence(Sequence *Sequence)
 	CreateORMSimpleType(SimpleType *SimpleType)
+	CreateORMWhiteSpace(WhiteSpace *WhiteSpace)
 }
 
 type AllModelsStructDeleteInterface interface { // insertion point for Callbacks on deletion
@@ -1025,13 +1293,17 @@ type AllModelsStructDeleteInterface interface { // insertion point for Callbacks
 	DeleteORMDocumentation(Documentation *Documentation)
 	DeleteORMElement(Element *Element)
 	DeleteORMEnumeration(Enumeration *Enumeration)
+	DeleteORMLength(Length *Length)
 	DeleteORMMaxInclusive(MaxInclusive *MaxInclusive)
+	DeleteORMMaxLength(MaxLength *MaxLength)
 	DeleteORMMinInclusive(MinInclusive *MinInclusive)
+	DeleteORMMinLength(MinLength *MinLength)
 	DeleteORMPattern(Pattern *Pattern)
 	DeleteORMRestriction(Restriction *Restriction)
 	DeleteORMSchema(Schema *Schema)
 	DeleteORMSequence(Sequence *Sequence)
 	DeleteORMSimpleType(SimpleType *SimpleType)
+	DeleteORMWhiteSpace(WhiteSpace *WhiteSpace)
 }
 
 func (stage *StageStruct) Reset() { // insertion point for array reset
@@ -1050,11 +1322,20 @@ func (stage *StageStruct) Reset() { // insertion point for array reset
 	stage.Enumerations = make(map[*Enumeration]any)
 	stage.Enumerations_mapString = make(map[string]*Enumeration)
 
+	stage.Lengths = make(map[*Length]any)
+	stage.Lengths_mapString = make(map[string]*Length)
+
 	stage.MaxInclusives = make(map[*MaxInclusive]any)
 	stage.MaxInclusives_mapString = make(map[string]*MaxInclusive)
 
+	stage.MaxLengths = make(map[*MaxLength]any)
+	stage.MaxLengths_mapString = make(map[string]*MaxLength)
+
 	stage.MinInclusives = make(map[*MinInclusive]any)
 	stage.MinInclusives_mapString = make(map[string]*MinInclusive)
+
+	stage.MinLengths = make(map[*MinLength]any)
+	stage.MinLengths_mapString = make(map[string]*MinLength)
 
 	stage.Patterns = make(map[*Pattern]any)
 	stage.Patterns_mapString = make(map[string]*Pattern)
@@ -1070,6 +1351,9 @@ func (stage *StageStruct) Reset() { // insertion point for array reset
 
 	stage.SimpleTypes = make(map[*SimpleType]any)
 	stage.SimpleTypes_mapString = make(map[string]*SimpleType)
+
+	stage.WhiteSpaces = make(map[*WhiteSpace]any)
+	stage.WhiteSpaces_mapString = make(map[string]*WhiteSpace)
 
 }
 
@@ -1089,11 +1373,20 @@ func (stage *StageStruct) Nil() { // insertion point for array nil
 	stage.Enumerations = nil
 	stage.Enumerations_mapString = nil
 
+	stage.Lengths = nil
+	stage.Lengths_mapString = nil
+
 	stage.MaxInclusives = nil
 	stage.MaxInclusives_mapString = nil
 
+	stage.MaxLengths = nil
+	stage.MaxLengths_mapString = nil
+
 	stage.MinInclusives = nil
 	stage.MinInclusives_mapString = nil
+
+	stage.MinLengths = nil
+	stage.MinLengths_mapString = nil
 
 	stage.Patterns = nil
 	stage.Patterns_mapString = nil
@@ -1109,6 +1402,9 @@ func (stage *StageStruct) Nil() { // insertion point for array nil
 
 	stage.SimpleTypes = nil
 	stage.SimpleTypes_mapString = nil
+
+	stage.WhiteSpaces = nil
+	stage.WhiteSpaces_mapString = nil
 
 }
 
@@ -1133,12 +1429,24 @@ func (stage *StageStruct) Unstage() { // insertion point for array nil
 		enumeration.Unstage(stage)
 	}
 
+	for length := range stage.Lengths {
+		length.Unstage(stage)
+	}
+
 	for maxinclusive := range stage.MaxInclusives {
 		maxinclusive.Unstage(stage)
 	}
 
+	for maxlength := range stage.MaxLengths {
+		maxlength.Unstage(stage)
+	}
+
 	for mininclusive := range stage.MinInclusives {
 		mininclusive.Unstage(stage)
+	}
+
+	for minlength := range stage.MinLengths {
+		minlength.Unstage(stage)
 	}
 
 	for pattern := range stage.Patterns {
@@ -1159,6 +1467,10 @@ func (stage *StageStruct) Unstage() { // insertion point for array nil
 
 	for simpletype := range stage.SimpleTypes {
 		simpletype.Unstage(stage)
+	}
+
+	for whitespace := range stage.WhiteSpaces {
+		whitespace.Unstage(stage)
 	}
 
 }
@@ -1231,10 +1543,16 @@ func GongGetSet[Type GongstructSet](stage *StageStruct) *Type {
 		return any(&stage.Elements).(*Type)
 	case map[*Enumeration]any:
 		return any(&stage.Enumerations).(*Type)
+	case map[*Length]any:
+		return any(&stage.Lengths).(*Type)
 	case map[*MaxInclusive]any:
 		return any(&stage.MaxInclusives).(*Type)
+	case map[*MaxLength]any:
+		return any(&stage.MaxLengths).(*Type)
 	case map[*MinInclusive]any:
 		return any(&stage.MinInclusives).(*Type)
+	case map[*MinLength]any:
+		return any(&stage.MinLengths).(*Type)
 	case map[*Pattern]any:
 		return any(&stage.Patterns).(*Type)
 	case map[*Restriction]any:
@@ -1245,6 +1563,8 @@ func GongGetSet[Type GongstructSet](stage *StageStruct) *Type {
 		return any(&stage.Sequences).(*Type)
 	case map[*SimpleType]any:
 		return any(&stage.SimpleTypes).(*Type)
+	case map[*WhiteSpace]any:
+		return any(&stage.WhiteSpaces).(*Type)
 	default:
 		return nil
 	}
@@ -1267,10 +1587,16 @@ func GongGetMap[Type GongstructMapString](stage *StageStruct) *Type {
 		return any(&stage.Elements_mapString).(*Type)
 	case map[string]*Enumeration:
 		return any(&stage.Enumerations_mapString).(*Type)
+	case map[string]*Length:
+		return any(&stage.Lengths_mapString).(*Type)
 	case map[string]*MaxInclusive:
 		return any(&stage.MaxInclusives_mapString).(*Type)
+	case map[string]*MaxLength:
+		return any(&stage.MaxLengths_mapString).(*Type)
 	case map[string]*MinInclusive:
 		return any(&stage.MinInclusives_mapString).(*Type)
+	case map[string]*MinLength:
+		return any(&stage.MinLengths_mapString).(*Type)
 	case map[string]*Pattern:
 		return any(&stage.Patterns_mapString).(*Type)
 	case map[string]*Restriction:
@@ -1281,6 +1607,8 @@ func GongGetMap[Type GongstructMapString](stage *StageStruct) *Type {
 		return any(&stage.Sequences_mapString).(*Type)
 	case map[string]*SimpleType:
 		return any(&stage.SimpleTypes_mapString).(*Type)
+	case map[string]*WhiteSpace:
+		return any(&stage.WhiteSpaces_mapString).(*Type)
 	default:
 		return nil
 	}
@@ -1303,10 +1631,16 @@ func GetGongstructInstancesSet[Type Gongstruct](stage *StageStruct) *map[*Type]a
 		return any(&stage.Elements).(*map[*Type]any)
 	case Enumeration:
 		return any(&stage.Enumerations).(*map[*Type]any)
+	case Length:
+		return any(&stage.Lengths).(*map[*Type]any)
 	case MaxInclusive:
 		return any(&stage.MaxInclusives).(*map[*Type]any)
+	case MaxLength:
+		return any(&stage.MaxLengths).(*map[*Type]any)
 	case MinInclusive:
 		return any(&stage.MinInclusives).(*map[*Type]any)
+	case MinLength:
+		return any(&stage.MinLengths).(*map[*Type]any)
 	case Pattern:
 		return any(&stage.Patterns).(*map[*Type]any)
 	case Restriction:
@@ -1317,6 +1651,8 @@ func GetGongstructInstancesSet[Type Gongstruct](stage *StageStruct) *map[*Type]a
 		return any(&stage.Sequences).(*map[*Type]any)
 	case SimpleType:
 		return any(&stage.SimpleTypes).(*map[*Type]any)
+	case WhiteSpace:
+		return any(&stage.WhiteSpaces).(*map[*Type]any)
 	default:
 		return nil
 	}
@@ -1339,10 +1675,16 @@ func GetGongstructInstancesSetFromPointerType[Type PointerToGongstruct](stage *S
 		return any(&stage.Elements).(*map[Type]any)
 	case *Enumeration:
 		return any(&stage.Enumerations).(*map[Type]any)
+	case *Length:
+		return any(&stage.Lengths).(*map[Type]any)
 	case *MaxInclusive:
 		return any(&stage.MaxInclusives).(*map[Type]any)
+	case *MaxLength:
+		return any(&stage.MaxLengths).(*map[Type]any)
 	case *MinInclusive:
 		return any(&stage.MinInclusives).(*map[Type]any)
+	case *MinLength:
+		return any(&stage.MinLengths).(*map[Type]any)
 	case *Pattern:
 		return any(&stage.Patterns).(*map[Type]any)
 	case *Restriction:
@@ -1353,6 +1695,8 @@ func GetGongstructInstancesSetFromPointerType[Type PointerToGongstruct](stage *S
 		return any(&stage.Sequences).(*map[Type]any)
 	case *SimpleType:
 		return any(&stage.SimpleTypes).(*map[Type]any)
+	case *WhiteSpace:
+		return any(&stage.WhiteSpaces).(*map[Type]any)
 	default:
 		return nil
 	}
@@ -1375,10 +1719,16 @@ func GetGongstructInstancesMap[Type Gongstruct](stage *StageStruct) *map[string]
 		return any(&stage.Elements_mapString).(*map[string]*Type)
 	case Enumeration:
 		return any(&stage.Enumerations_mapString).(*map[string]*Type)
+	case Length:
+		return any(&stage.Lengths_mapString).(*map[string]*Type)
 	case MaxInclusive:
 		return any(&stage.MaxInclusives_mapString).(*map[string]*Type)
+	case MaxLength:
+		return any(&stage.MaxLengths_mapString).(*map[string]*Type)
 	case MinInclusive:
 		return any(&stage.MinInclusives_mapString).(*map[string]*Type)
+	case MinLength:
+		return any(&stage.MinLengths_mapString).(*map[string]*Type)
 	case Pattern:
 		return any(&stage.Patterns_mapString).(*map[string]*Type)
 	case Restriction:
@@ -1389,6 +1739,8 @@ func GetGongstructInstancesMap[Type Gongstruct](stage *StageStruct) *map[string]
 		return any(&stage.Sequences_mapString).(*map[string]*Type)
 	case SimpleType:
 		return any(&stage.SimpleTypes_mapString).(*map[string]*Type)
+	case WhiteSpace:
+		return any(&stage.WhiteSpaces_mapString).(*map[string]*Type)
 	default:
 		return nil
 	}
@@ -1449,6 +1801,16 @@ func GetAssociationName[Type Gongstruct]() *Type {
 				Annotation: &Annotation{Name: "Annotation"},
 			},
 		}).(*Type)
+	case Length:
+		return any(&Length{
+			// Initialisation of associations
+			// field is initialized with ElementWithAnnotation as it is a composite
+			ElementWithAnnotation: ElementWithAnnotation{
+				// per field init
+				//
+				Annotation: &Annotation{Name: "Annotation"},
+			},
+		}).(*Type)
 	case MaxInclusive:
 		return any(&MaxInclusive{
 			// Initialisation of associations
@@ -1459,8 +1821,28 @@ func GetAssociationName[Type Gongstruct]() *Type {
 				Annotation: &Annotation{Name: "Annotation"},
 			},
 		}).(*Type)
+	case MaxLength:
+		return any(&MaxLength{
+			// Initialisation of associations
+			// field is initialized with ElementWithAnnotation as it is a composite
+			ElementWithAnnotation: ElementWithAnnotation{
+				// per field init
+				//
+				Annotation: &Annotation{Name: "Annotation"},
+			},
+		}).(*Type)
 	case MinInclusive:
 		return any(&MinInclusive{
+			// Initialisation of associations
+			// field is initialized with ElementWithAnnotation as it is a composite
+			ElementWithAnnotation: ElementWithAnnotation{
+				// per field init
+				//
+				Annotation: &Annotation{Name: "Annotation"},
+			},
+		}).(*Type)
+	case MinLength:
+		return any(&MinLength{
 			// Initialisation of associations
 			// field is initialized with ElementWithAnnotation as it is a composite
 			ElementWithAnnotation: ElementWithAnnotation{
@@ -1490,6 +1872,14 @@ func GetAssociationName[Type Gongstruct]() *Type {
 			MaxInclusive: &MaxInclusive{Name: "MaxInclusive"},
 			// field is initialized with an instance of Pattern with the name of the field
 			Pattern: &Pattern{Name: "Pattern"},
+			// field is initialized with an instance of WhiteSpace with the name of the field
+			WhiteSpace: &WhiteSpace{Name: "WhiteSpace"},
+			// field is initialized with an instance of MinLength with the name of the field
+			MinLength: &MinLength{Name: "MinLength"},
+			// field is initialized with an instance of MaxLength with the name of the field
+			MaxLength: &MaxLength{Name: "MaxLength"},
+			// field is initialized with an instance of Length with the name of the field
+			Length: &Length{Name: "Length"},
 			// field is initialized with ElementWithAnnotation as it is a composite
 			ElementWithAnnotation: ElementWithAnnotation{
 				// per field init
@@ -1530,6 +1920,16 @@ func GetAssociationName[Type Gongstruct]() *Type {
 			// Initialisation of associations
 			// field is initialized with an instance of Restriction with the name of the field
 			Restriction: &Restriction{Name: "Restriction"},
+			// field is initialized with ElementWithAnnotation as it is a composite
+			ElementWithAnnotation: ElementWithAnnotation{
+				// per field init
+				//
+				Annotation: &Annotation{Name: "Annotation"},
+			},
+		}).(*Type)
+	case WhiteSpace:
+		return any(&WhiteSpace{
+			// Initialisation of associations
 			// field is initialized with ElementWithAnnotation as it is a composite
 			ElementWithAnnotation: ElementWithAnnotation{
 				// per field init
@@ -1682,6 +2082,28 @@ func GetPointerReverseMap[Start, End Gongstruct](fieldname string, stage *StageS
 			}
 			return any(res).(map[*End][]*Start)
 		}
+	// reverse maps of direct associations of Length
+	case Length:
+		switch fieldname {
+		// insertion point for per direct association field
+		case "Annotation":
+			res := make(map[*Annotation][]*Length)
+			for length := range stage.Lengths {
+				if length.Annotation != nil {
+					annotation_ := length.Annotation
+					var lengths []*Length
+					_, ok := res[annotation_]
+					if ok {
+						lengths = res[annotation_]
+					} else {
+						lengths = make([]*Length, 0)
+					}
+					lengths = append(lengths, length)
+					res[annotation_] = lengths
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		}
 	// reverse maps of direct associations of MaxInclusive
 	case MaxInclusive:
 		switch fieldname {
@@ -1704,6 +2126,28 @@ func GetPointerReverseMap[Start, End Gongstruct](fieldname string, stage *StageS
 			}
 			return any(res).(map[*End][]*Start)
 		}
+	// reverse maps of direct associations of MaxLength
+	case MaxLength:
+		switch fieldname {
+		// insertion point for per direct association field
+		case "Annotation":
+			res := make(map[*Annotation][]*MaxLength)
+			for maxlength := range stage.MaxLengths {
+				if maxlength.Annotation != nil {
+					annotation_ := maxlength.Annotation
+					var maxlengths []*MaxLength
+					_, ok := res[annotation_]
+					if ok {
+						maxlengths = res[annotation_]
+					} else {
+						maxlengths = make([]*MaxLength, 0)
+					}
+					maxlengths = append(maxlengths, maxlength)
+					res[annotation_] = maxlengths
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		}
 	// reverse maps of direct associations of MinInclusive
 	case MinInclusive:
 		switch fieldname {
@@ -1722,6 +2166,28 @@ func GetPointerReverseMap[Start, End Gongstruct](fieldname string, stage *StageS
 					}
 					mininclusives = append(mininclusives, mininclusive)
 					res[annotation_] = mininclusives
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		}
+	// reverse maps of direct associations of MinLength
+	case MinLength:
+		switch fieldname {
+		// insertion point for per direct association field
+		case "Annotation":
+			res := make(map[*Annotation][]*MinLength)
+			for minlength := range stage.MinLengths {
+				if minlength.Annotation != nil {
+					annotation_ := minlength.Annotation
+					var minlengths []*MinLength
+					_, ok := res[annotation_]
+					if ok {
+						minlengths = res[annotation_]
+					} else {
+						minlengths = make([]*MinLength, 0)
+					}
+					minlengths = append(minlengths, minlength)
+					res[annotation_] = minlengths
 				}
 			}
 			return any(res).(map[*End][]*Start)
@@ -1820,6 +2286,74 @@ func GetPointerReverseMap[Start, End Gongstruct](fieldname string, stage *StageS
 				}
 			}
 			return any(res).(map[*End][]*Start)
+		case "WhiteSpace":
+			res := make(map[*WhiteSpace][]*Restriction)
+			for restriction := range stage.Restrictions {
+				if restriction.WhiteSpace != nil {
+					whitespace_ := restriction.WhiteSpace
+					var restrictions []*Restriction
+					_, ok := res[whitespace_]
+					if ok {
+						restrictions = res[whitespace_]
+					} else {
+						restrictions = make([]*Restriction, 0)
+					}
+					restrictions = append(restrictions, restriction)
+					res[whitespace_] = restrictions
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "MinLength":
+			res := make(map[*MinLength][]*Restriction)
+			for restriction := range stage.Restrictions {
+				if restriction.MinLength != nil {
+					minlength_ := restriction.MinLength
+					var restrictions []*Restriction
+					_, ok := res[minlength_]
+					if ok {
+						restrictions = res[minlength_]
+					} else {
+						restrictions = make([]*Restriction, 0)
+					}
+					restrictions = append(restrictions, restriction)
+					res[minlength_] = restrictions
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "MaxLength":
+			res := make(map[*MaxLength][]*Restriction)
+			for restriction := range stage.Restrictions {
+				if restriction.MaxLength != nil {
+					maxlength_ := restriction.MaxLength
+					var restrictions []*Restriction
+					_, ok := res[maxlength_]
+					if ok {
+						restrictions = res[maxlength_]
+					} else {
+						restrictions = make([]*Restriction, 0)
+					}
+					restrictions = append(restrictions, restriction)
+					res[maxlength_] = restrictions
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "Length":
+			res := make(map[*Length][]*Restriction)
+			for restriction := range stage.Restrictions {
+				if restriction.Length != nil {
+					length_ := restriction.Length
+					var restrictions []*Restriction
+					_, ok := res[length_]
+					if ok {
+						restrictions = res[length_]
+					} else {
+						restrictions = make([]*Restriction, 0)
+					}
+					restrictions = append(restrictions, restriction)
+					res[length_] = restrictions
+				}
+			}
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of Schema
 	case Schema:
@@ -1904,6 +2438,28 @@ func GetPointerReverseMap[Start, End Gongstruct](fieldname string, stage *StageS
 			}
 			return any(res).(map[*End][]*Start)
 		}
+	// reverse maps of direct associations of WhiteSpace
+	case WhiteSpace:
+		switch fieldname {
+		// insertion point for per direct association field
+		case "Annotation":
+			res := make(map[*Annotation][]*WhiteSpace)
+			for whitespace := range stage.WhiteSpaces {
+				if whitespace.Annotation != nil {
+					annotation_ := whitespace.Annotation
+					var whitespaces []*WhiteSpace
+					_, ok := res[annotation_]
+					if ok {
+						whitespaces = res[annotation_]
+					} else {
+						whitespaces = make([]*WhiteSpace, 0)
+					}
+					whitespaces = append(whitespaces, whitespace)
+					res[annotation_] = whitespaces
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		}
 	}
 	return nil
 }
@@ -1953,13 +2509,28 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 		switch fieldname {
 		// insertion point for per direct association field
 		}
+	// reverse maps of direct associations of Length
+	case Length:
+		switch fieldname {
+		// insertion point for per direct association field
+		}
 	// reverse maps of direct associations of MaxInclusive
 	case MaxInclusive:
 		switch fieldname {
 		// insertion point for per direct association field
 		}
+	// reverse maps of direct associations of MaxLength
+	case MaxLength:
+		switch fieldname {
+		// insertion point for per direct association field
+		}
 	// reverse maps of direct associations of MinInclusive
 	case MinInclusive:
+		switch fieldname {
+		// insertion point for per direct association field
+		}
+	// reverse maps of direct associations of MinLength
+	case MinLength:
 		switch fieldname {
 		// insertion point for per direct association field
 		}
@@ -2028,6 +2599,11 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 		switch fieldname {
 		// insertion point for per direct association field
 		}
+	// reverse maps of direct associations of WhiteSpace
+	case WhiteSpace:
+		switch fieldname {
+		// insertion point for per direct association field
+		}
 	}
 	return nil
 }
@@ -2050,10 +2626,16 @@ func GetGongstructName[Type Gongstruct]() (res string) {
 		res = "Element"
 	case Enumeration:
 		res = "Enumeration"
+	case Length:
+		res = "Length"
 	case MaxInclusive:
 		res = "MaxInclusive"
+	case MaxLength:
+		res = "MaxLength"
 	case MinInclusive:
 		res = "MinInclusive"
+	case MinLength:
+		res = "MinLength"
 	case Pattern:
 		res = "Pattern"
 	case Restriction:
@@ -2064,6 +2646,8 @@ func GetGongstructName[Type Gongstruct]() (res string) {
 		res = "Sequence"
 	case SimpleType:
 		res = "SimpleType"
+	case WhiteSpace:
+		res = "WhiteSpace"
 	}
 	return res
 }
@@ -2086,10 +2670,16 @@ func GetPointerToGongstructName[Type PointerToGongstruct]() (res string) {
 		res = "Element"
 	case *Enumeration:
 		res = "Enumeration"
+	case *Length:
+		res = "Length"
 	case *MaxInclusive:
 		res = "MaxInclusive"
+	case *MaxLength:
+		res = "MaxLength"
 	case *MinInclusive:
 		res = "MinInclusive"
+	case *MinLength:
+		res = "MinLength"
 	case *Pattern:
 		res = "Pattern"
 	case *Restriction:
@@ -2100,6 +2690,8 @@ func GetPointerToGongstructName[Type PointerToGongstruct]() (res string) {
 		res = "Sequence"
 	case *SimpleType:
 		res = "SimpleType"
+	case *WhiteSpace:
+		res = "WhiteSpace"
 	}
 	return res
 }
@@ -2121,20 +2713,28 @@ func GetFields[Type Gongstruct]() (res []string) {
 		res = []string{"Name", "Annotation", "NameXSD", "Type", "SimpleType", "ComplexType"}
 	case Enumeration:
 		res = []string{"Name", "Annotation", "Value"}
+	case Length:
+		res = []string{"Name", "Annotation", "Value"}
 	case MaxInclusive:
 		res = []string{"Name", "Annotation", "Value"}
+	case MaxLength:
+		res = []string{"Name", "Annotation", "Value"}
 	case MinInclusive:
+		res = []string{"Name", "Annotation", "Value"}
+	case MinLength:
 		res = []string{"Name", "Annotation", "Value"}
 	case Pattern:
 		res = []string{"Name", "Annotation", "Value"}
 	case Restriction:
-		res = []string{"Name", "Annotation", "Base", "Enumerations", "MinInclusive", "MaxInclusive", "Pattern"}
+		res = []string{"Name", "Annotation", "Base", "Enumerations", "MinInclusive", "MaxInclusive", "Pattern", "WhiteSpace", "MinLength", "MaxLength", "Length"}
 	case Schema:
 		res = []string{"Name", "Annotation", "Elements", "SimpleTypes", "ComplexTypes"}
 	case Sequence:
 		res = []string{"Name", "Annotation", "Elements"}
 	case SimpleType:
 		res = []string{"Name", "Annotation", "NameXSD", "Restriction"}
+	case WhiteSpace:
+		res = []string{"Name", "Annotation", "Value"}
 	}
 	return
 }
@@ -2183,10 +2783,19 @@ func GetReverseFields[Type Gongstruct]() (res []ReverseField) {
 		rf.GongstructName = "Restriction"
 		rf.Fieldname = "Enumerations"
 		res = append(res, rf)
+	case Length:
+		var rf ReverseField
+		_ = rf
 	case MaxInclusive:
 		var rf ReverseField
 		_ = rf
+	case MaxLength:
+		var rf ReverseField
+		_ = rf
 	case MinInclusive:
+		var rf ReverseField
+		_ = rf
+	case MinLength:
 		var rf ReverseField
 		_ = rf
 	case Pattern:
@@ -2207,6 +2816,9 @@ func GetReverseFields[Type Gongstruct]() (res []ReverseField) {
 		rf.GongstructName = "Schema"
 		rf.Fieldname = "SimpleTypes"
 		res = append(res, rf)
+	case WhiteSpace:
+		var rf ReverseField
+		_ = rf
 	}
 	return
 }
@@ -2228,20 +2840,28 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 		res = []string{"Name", "Annotation", "NameXSD", "Type", "SimpleType", "ComplexType"}
 	case *Enumeration:
 		res = []string{"Name", "Annotation", "Value"}
+	case *Length:
+		res = []string{"Name", "Annotation", "Value"}
 	case *MaxInclusive:
 		res = []string{"Name", "Annotation", "Value"}
+	case *MaxLength:
+		res = []string{"Name", "Annotation", "Value"}
 	case *MinInclusive:
+		res = []string{"Name", "Annotation", "Value"}
+	case *MinLength:
 		res = []string{"Name", "Annotation", "Value"}
 	case *Pattern:
 		res = []string{"Name", "Annotation", "Value"}
 	case *Restriction:
-		res = []string{"Name", "Annotation", "Base", "Enumerations", "MinInclusive", "MaxInclusive", "Pattern"}
+		res = []string{"Name", "Annotation", "Base", "Enumerations", "MinInclusive", "MaxInclusive", "Pattern", "WhiteSpace", "MinLength", "MaxLength", "Length"}
 	case *Schema:
 		res = []string{"Name", "Annotation", "Elements", "SimpleTypes", "ComplexTypes"}
 	case *Sequence:
 		res = []string{"Name", "Annotation", "Elements"}
 	case *SimpleType:
 		res = []string{"Name", "Annotation", "NameXSD", "Restriction"}
+	case *WhiteSpace:
+		res = []string{"Name", "Annotation", "Value"}
 	}
 	return
 }
@@ -2323,6 +2943,18 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		case "Value":
 			res = inferedInstance.Value
 		}
+	case *Length:
+		switch fieldName {
+		// string value of fields
+		case "Name":
+			res = inferedInstance.Name
+		case "Annotation":
+			if inferedInstance.Annotation != nil {
+				res = inferedInstance.Annotation.Name
+			}
+		case "Value":
+			res = inferedInstance.Value
+		}
 	case *MaxInclusive:
 		switch fieldName {
 		// string value of fields
@@ -2335,7 +2967,31 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		case "Value":
 			res = inferedInstance.Value
 		}
+	case *MaxLength:
+		switch fieldName {
+		// string value of fields
+		case "Name":
+			res = inferedInstance.Name
+		case "Annotation":
+			if inferedInstance.Annotation != nil {
+				res = inferedInstance.Annotation.Name
+			}
+		case "Value":
+			res = inferedInstance.Value
+		}
 	case *MinInclusive:
+		switch fieldName {
+		// string value of fields
+		case "Name":
+			res = inferedInstance.Name
+		case "Annotation":
+			if inferedInstance.Annotation != nil {
+				res = inferedInstance.Annotation.Name
+			}
+		case "Value":
+			res = inferedInstance.Value
+		}
+	case *MinLength:
 		switch fieldName {
 		// string value of fields
 		case "Name":
@@ -2388,6 +3044,22 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		case "Pattern":
 			if inferedInstance.Pattern != nil {
 				res = inferedInstance.Pattern.Name
+			}
+		case "WhiteSpace":
+			if inferedInstance.WhiteSpace != nil {
+				res = inferedInstance.WhiteSpace.Name
+			}
+		case "MinLength":
+			if inferedInstance.MinLength != nil {
+				res = inferedInstance.MinLength.Name
+			}
+		case "MaxLength":
+			if inferedInstance.MaxLength != nil {
+				res = inferedInstance.MaxLength.Name
+			}
+		case "Length":
+			if inferedInstance.Length != nil {
+				res = inferedInstance.Length.Name
 			}
 		}
 	case *Schema:
@@ -2453,6 +3125,18 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 			if inferedInstance.Restriction != nil {
 				res = inferedInstance.Restriction.Name
 			}
+		}
+	case *WhiteSpace:
+		switch fieldName {
+		// string value of fields
+		case "Name":
+			res = inferedInstance.Name
+		case "Annotation":
+			if inferedInstance.Annotation != nil {
+				res = inferedInstance.Annotation.Name
+			}
+		case "Value":
+			res = inferedInstance.Value
 		}
 	default:
 		_ = inferedInstance
@@ -2537,6 +3221,18 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		case "Value":
 			res = inferedInstance.Value
 		}
+	case Length:
+		switch fieldName {
+		// string value of fields
+		case "Name":
+			res = inferedInstance.Name
+		case "Annotation":
+			if inferedInstance.Annotation != nil {
+				res = inferedInstance.Annotation.Name
+			}
+		case "Value":
+			res = inferedInstance.Value
+		}
 	case MaxInclusive:
 		switch fieldName {
 		// string value of fields
@@ -2549,7 +3245,31 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		case "Value":
 			res = inferedInstance.Value
 		}
+	case MaxLength:
+		switch fieldName {
+		// string value of fields
+		case "Name":
+			res = inferedInstance.Name
+		case "Annotation":
+			if inferedInstance.Annotation != nil {
+				res = inferedInstance.Annotation.Name
+			}
+		case "Value":
+			res = inferedInstance.Value
+		}
 	case MinInclusive:
+		switch fieldName {
+		// string value of fields
+		case "Name":
+			res = inferedInstance.Name
+		case "Annotation":
+			if inferedInstance.Annotation != nil {
+				res = inferedInstance.Annotation.Name
+			}
+		case "Value":
+			res = inferedInstance.Value
+		}
+	case MinLength:
 		switch fieldName {
 		// string value of fields
 		case "Name":
@@ -2602,6 +3322,22 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		case "Pattern":
 			if inferedInstance.Pattern != nil {
 				res = inferedInstance.Pattern.Name
+			}
+		case "WhiteSpace":
+			if inferedInstance.WhiteSpace != nil {
+				res = inferedInstance.WhiteSpace.Name
+			}
+		case "MinLength":
+			if inferedInstance.MinLength != nil {
+				res = inferedInstance.MinLength.Name
+			}
+		case "MaxLength":
+			if inferedInstance.MaxLength != nil {
+				res = inferedInstance.MaxLength.Name
+			}
+		case "Length":
+			if inferedInstance.Length != nil {
+				res = inferedInstance.Length.Name
 			}
 		}
 	case Schema:
@@ -2667,6 +3403,18 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 			if inferedInstance.Restriction != nil {
 				res = inferedInstance.Restriction.Name
 			}
+		}
+	case WhiteSpace:
+		switch fieldName {
+		// string value of fields
+		case "Name":
+			res = inferedInstance.Name
+		case "Annotation":
+			if inferedInstance.Annotation != nil {
+				res = inferedInstance.Annotation.Name
+			}
+		case "Value":
+			res = inferedInstance.Value
 		}
 	default:
 		_ = inferedInstance

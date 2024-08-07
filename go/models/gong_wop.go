@@ -69,6 +69,18 @@ func (from *Enumeration) CopyBasicFields(to *Enumeration) {
 	to.Value = from.Value
 }
 
+type Length_WOP struct {
+	// insertion point
+	Name string
+	Value string
+}
+
+func (from *Length) CopyBasicFields(to *Length) {
+	// insertion point
+	to.Name = from.Name
+	to.Value = from.Value
+}
+
 type MaxInclusive_WOP struct {
 	// insertion point
 	Name string
@@ -81,6 +93,18 @@ func (from *MaxInclusive) CopyBasicFields(to *MaxInclusive) {
 	to.Value = from.Value
 }
 
+type MaxLength_WOP struct {
+	// insertion point
+	Name string
+	Value string
+}
+
+func (from *MaxLength) CopyBasicFields(to *MaxLength) {
+	// insertion point
+	to.Name = from.Name
+	to.Value = from.Value
+}
+
 type MinInclusive_WOP struct {
 	// insertion point
 	Name string
@@ -88,6 +112,18 @@ type MinInclusive_WOP struct {
 }
 
 func (from *MinInclusive) CopyBasicFields(to *MinInclusive) {
+	// insertion point
+	to.Name = from.Name
+	to.Value = from.Value
+}
+
+type MinLength_WOP struct {
+	// insertion point
+	Name string
+	Value string
+}
+
+func (from *MinLength) CopyBasicFields(to *MinLength) {
 	// insertion point
 	to.Name = from.Name
 	to.Value = from.Value
@@ -147,5 +183,17 @@ func (from *SimpleType) CopyBasicFields(to *SimpleType) {
 	// insertion point
 	to.Name = from.Name
 	to.NameXSD = from.NameXSD
+}
+
+type WhiteSpace_WOP struct {
+	// insertion point
+	Name string
+	Value string
+}
+
+func (from *WhiteSpace) CopyBasicFields(to *WhiteSpace) {
+	// insertion point
+	to.Name = from.Name
+	to.Value = from.Value
 }
 

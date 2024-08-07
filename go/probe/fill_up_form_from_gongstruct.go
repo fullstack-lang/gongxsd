@@ -80,6 +80,18 @@ func FillUpNamedFormFromGongstruct[T models.Gongstruct](instance *T, probe *Prob
 		)
 		formGroup.HasSuppressButton = true
 		FillUpForm(instancesTyped, formGroup, probe)
+	case *models.Length:
+		formGroup := (&gongtable.FormGroup{
+			Name:  formName,
+			Label: "Length Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__LengthFormCallback(
+			instancesTyped,
+			probe,
+			formGroup,
+		)
+		formGroup.HasSuppressButton = true
+		FillUpForm(instancesTyped, formGroup, probe)
 	case *models.MaxInclusive:
 		formGroup := (&gongtable.FormGroup{
 			Name:  formName,
@@ -92,12 +104,36 @@ func FillUpNamedFormFromGongstruct[T models.Gongstruct](instance *T, probe *Prob
 		)
 		formGroup.HasSuppressButton = true
 		FillUpForm(instancesTyped, formGroup, probe)
+	case *models.MaxLength:
+		formGroup := (&gongtable.FormGroup{
+			Name:  formName,
+			Label: "MaxLength Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__MaxLengthFormCallback(
+			instancesTyped,
+			probe,
+			formGroup,
+		)
+		formGroup.HasSuppressButton = true
+		FillUpForm(instancesTyped, formGroup, probe)
 	case *models.MinInclusive:
 		formGroup := (&gongtable.FormGroup{
 			Name:  formName,
 			Label: "MinInclusive Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__MinInclusiveFormCallback(
+			instancesTyped,
+			probe,
+			formGroup,
+		)
+		formGroup.HasSuppressButton = true
+		FillUpForm(instancesTyped, formGroup, probe)
+	case *models.MinLength:
+		formGroup := (&gongtable.FormGroup{
+			Name:  formName,
+			Label: "MinLength Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__MinLengthFormCallback(
 			instancesTyped,
 			probe,
 			formGroup,
@@ -158,6 +194,18 @@ func FillUpNamedFormFromGongstruct[T models.Gongstruct](instance *T, probe *Prob
 			Label: "SimpleType Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__SimpleTypeFormCallback(
+			instancesTyped,
+			probe,
+			formGroup,
+		)
+		formGroup.HasSuppressButton = true
+		FillUpForm(instancesTyped, formGroup, probe)
+	case *models.WhiteSpace:
+		formGroup := (&gongtable.FormGroup{
+			Name:  formName,
+			Label: "WhiteSpace Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__WhiteSpaceFormCallback(
 			instancesTyped,
 			probe,
 			formGroup,

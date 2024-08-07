@@ -65,6 +65,22 @@ type RestrictionPointersEncoding struct {
 	// field Pattern is a pointer to another Struct (optional or 0..1)
 	// This field is generated into another field to enable AS ONE association
 	PatternID sql.NullInt64
+
+	// field WhiteSpace is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	WhiteSpaceID sql.NullInt64
+
+	// field MinLength is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	MinLengthID sql.NullInt64
+
+	// field MaxLength is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	MaxLengthID sql.NullInt64
+
+	// field Length is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	LengthID sql.NullInt64
 }
 
 // RestrictionDB describes a restriction in the database
@@ -302,6 +318,54 @@ func (backRepoRestriction *BackRepoRestrictionStruct) CommitPhaseTwoInstance(bac
 			restrictionDB.PatternID.Valid = true
 		}
 
+		// commit pointer value restriction.WhiteSpace translates to updating the restriction.WhiteSpaceID
+		restrictionDB.WhiteSpaceID.Valid = true // allow for a 0 value (nil association)
+		if restriction.WhiteSpace != nil {
+			if WhiteSpaceId, ok := backRepo.BackRepoWhiteSpace.Map_WhiteSpacePtr_WhiteSpaceDBID[restriction.WhiteSpace]; ok {
+				restrictionDB.WhiteSpaceID.Int64 = int64(WhiteSpaceId)
+				restrictionDB.WhiteSpaceID.Valid = true
+			}
+		} else {
+			restrictionDB.WhiteSpaceID.Int64 = 0
+			restrictionDB.WhiteSpaceID.Valid = true
+		}
+
+		// commit pointer value restriction.MinLength translates to updating the restriction.MinLengthID
+		restrictionDB.MinLengthID.Valid = true // allow for a 0 value (nil association)
+		if restriction.MinLength != nil {
+			if MinLengthId, ok := backRepo.BackRepoMinLength.Map_MinLengthPtr_MinLengthDBID[restriction.MinLength]; ok {
+				restrictionDB.MinLengthID.Int64 = int64(MinLengthId)
+				restrictionDB.MinLengthID.Valid = true
+			}
+		} else {
+			restrictionDB.MinLengthID.Int64 = 0
+			restrictionDB.MinLengthID.Valid = true
+		}
+
+		// commit pointer value restriction.MaxLength translates to updating the restriction.MaxLengthID
+		restrictionDB.MaxLengthID.Valid = true // allow for a 0 value (nil association)
+		if restriction.MaxLength != nil {
+			if MaxLengthId, ok := backRepo.BackRepoMaxLength.Map_MaxLengthPtr_MaxLengthDBID[restriction.MaxLength]; ok {
+				restrictionDB.MaxLengthID.Int64 = int64(MaxLengthId)
+				restrictionDB.MaxLengthID.Valid = true
+			}
+		} else {
+			restrictionDB.MaxLengthID.Int64 = 0
+			restrictionDB.MaxLengthID.Valid = true
+		}
+
+		// commit pointer value restriction.Length translates to updating the restriction.LengthID
+		restrictionDB.LengthID.Valid = true // allow for a 0 value (nil association)
+		if restriction.Length != nil {
+			if LengthId, ok := backRepo.BackRepoLength.Map_LengthPtr_LengthDBID[restriction.Length]; ok {
+				restrictionDB.LengthID.Int64 = int64(LengthId)
+				restrictionDB.LengthID.Valid = true
+			}
+		} else {
+			restrictionDB.LengthID.Int64 = 0
+			restrictionDB.LengthID.Valid = true
+		}
+
 		query := backRepoRestriction.db.Save(&restrictionDB)
 		if query.Error != nil {
 			log.Fatalln(query.Error)
@@ -443,6 +507,26 @@ func (restrictionDB *RestrictionDB) DecodePointers(backRepo *BackRepoStruct, res
 	restriction.Pattern = nil
 	if restrictionDB.PatternID.Int64 != 0 {
 		restriction.Pattern = backRepo.BackRepoPattern.Map_PatternDBID_PatternPtr[uint(restrictionDB.PatternID.Int64)]
+	}
+	// WhiteSpace field
+	restriction.WhiteSpace = nil
+	if restrictionDB.WhiteSpaceID.Int64 != 0 {
+		restriction.WhiteSpace = backRepo.BackRepoWhiteSpace.Map_WhiteSpaceDBID_WhiteSpacePtr[uint(restrictionDB.WhiteSpaceID.Int64)]
+	}
+	// MinLength field
+	restriction.MinLength = nil
+	if restrictionDB.MinLengthID.Int64 != 0 {
+		restriction.MinLength = backRepo.BackRepoMinLength.Map_MinLengthDBID_MinLengthPtr[uint(restrictionDB.MinLengthID.Int64)]
+	}
+	// MaxLength field
+	restriction.MaxLength = nil
+	if restrictionDB.MaxLengthID.Int64 != 0 {
+		restriction.MaxLength = backRepo.BackRepoMaxLength.Map_MaxLengthDBID_MaxLengthPtr[uint(restrictionDB.MaxLengthID.Int64)]
+	}
+	// Length field
+	restriction.Length = nil
+	if restrictionDB.LengthID.Int64 != 0 {
+		restriction.Length = backRepo.BackRepoLength.Map_LengthDBID_LengthPtr[uint(restrictionDB.LengthID.Int64)]
 	}
 	return
 }
@@ -706,6 +790,30 @@ func (backRepoRestriction *BackRepoRestrictionStruct) RestorePhaseTwo() {
 		if restrictionDB.PatternID.Int64 != 0 {
 			restrictionDB.PatternID.Int64 = int64(BackRepoPatternid_atBckpTime_newID[uint(restrictionDB.PatternID.Int64)])
 			restrictionDB.PatternID.Valid = true
+		}
+
+		// reindexing WhiteSpace field
+		if restrictionDB.WhiteSpaceID.Int64 != 0 {
+			restrictionDB.WhiteSpaceID.Int64 = int64(BackRepoWhiteSpaceid_atBckpTime_newID[uint(restrictionDB.WhiteSpaceID.Int64)])
+			restrictionDB.WhiteSpaceID.Valid = true
+		}
+
+		// reindexing MinLength field
+		if restrictionDB.MinLengthID.Int64 != 0 {
+			restrictionDB.MinLengthID.Int64 = int64(BackRepoMinLengthid_atBckpTime_newID[uint(restrictionDB.MinLengthID.Int64)])
+			restrictionDB.MinLengthID.Valid = true
+		}
+
+		// reindexing MaxLength field
+		if restrictionDB.MaxLengthID.Int64 != 0 {
+			restrictionDB.MaxLengthID.Int64 = int64(BackRepoMaxLengthid_atBckpTime_newID[uint(restrictionDB.MaxLengthID.Int64)])
+			restrictionDB.MaxLengthID.Valid = true
+		}
+
+		// reindexing Length field
+		if restrictionDB.LengthID.Int64 != 0 {
+			restrictionDB.LengthID.Int64 = int64(BackRepoLengthid_atBckpTime_newID[uint(restrictionDB.LengthID.Int64)])
+			restrictionDB.LengthID.Valid = true
 		}
 
 		// update databse with new index encoding

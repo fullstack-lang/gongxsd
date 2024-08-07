@@ -57,6 +57,7 @@
     <xs:simpleType name="titleType">
         <xs:restriction base="xs:string">
             <xs:pattern value="[A-Za-z ]+" />
+            <xs:whiteSpace value="collapse" />
         </xs:restriction>
     </xs:simpleType>
 

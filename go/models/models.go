@@ -59,6 +59,10 @@ type Restriction struct {
 	MinInclusive *MinInclusive  `xml:"minInclusive"`
 	MaxInclusive *MaxInclusive  `xml:"maxInclusive"`
 	Pattern      *Pattern       `xml:"pattern"`
+	WhiteSpace   *WhiteSpace    `xml:"whiteSpace"`
+	MinLength    *MinLength     `xml:"minLength"`
+	MaxLength    *MaxLength     `xml:"maxLength"`
+	Length       *Length        `xml:"length"`
 }
 
 type ComplexType struct {

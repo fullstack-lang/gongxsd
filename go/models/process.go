@@ -62,11 +62,26 @@ func Process(stage *StageStruct) {
 		if x.Pattern != nil {
 			x.Pattern.Name = prefix(x.Name)
 		}
+		if x.WhiteSpace != nil {
+			x.WhiteSpace.Name = prefix(x.Name)
+		}
+		if x.MinLength != nil {
+			x.MinLength.Name = prefix(x.Name)
+		}
+		if x.MaxLength != nil {
+			x.MaxLength.Name = prefix(x.Name)
+		}
+		if x.Length != nil {
+			x.Length.Name = prefix(x.Name)
+		}
 		if x.Annotation != nil {
 			x.Annotation.Name = prefix(x.Name)
 		}
 	}
 
+	//
+	// Restrictions
+	//
 	for x := range *GetGongstructInstancesSet[Enumeration](stage) {
 		if x.Annotation != nil {
 			x.Annotation.Name = prefix(x.Name)
@@ -92,6 +107,27 @@ func Process(stage *StageStruct) {
 			x.Annotation.Name = prefix(x.Name)
 		}
 	}
+	for x := range *GetGongstructInstancesSet[WhiteSpace](stage) {
+		if x.Annotation != nil {
+			x.Annotation.Name = prefix(x.Name)
+		}
+	}
+	for x := range *GetGongstructInstancesSet[MinLength](stage) {
+		if x.Annotation != nil {
+			x.Annotation.Name = prefix(x.Name)
+		}
+	}
+	for x := range *GetGongstructInstancesSet[MaxLength](stage) {
+		if x.Annotation != nil {
+			x.Annotation.Name = prefix(x.Name)
+		}
+	}
+	for x := range *GetGongstructInstancesSet[Length](stage) {
+		if x.Annotation != nil {
+			x.Annotation.Name = prefix(x.Name)
+		}
+	}
+
 	for x := range *GetGongstructInstancesSet[Annotation](stage) {
 		for _, d := range x.Documentations {
 			d.Name = prefix(x.Name)

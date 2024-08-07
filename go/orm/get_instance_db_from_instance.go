@@ -35,13 +35,25 @@ func GetInstanceDBFromInstance[T models.Gongstruct, T2 GongstructDB](
 		enumerationInstance := any(concreteInstance).(*models.Enumeration)
 		ret2 := backRepo.BackRepoEnumeration.GetEnumerationDBFromEnumerationPtr(enumerationInstance)
 		ret = any(ret2).(*T2)
+	case *models.Length:
+		lengthInstance := any(concreteInstance).(*models.Length)
+		ret2 := backRepo.BackRepoLength.GetLengthDBFromLengthPtr(lengthInstance)
+		ret = any(ret2).(*T2)
 	case *models.MaxInclusive:
 		maxinclusiveInstance := any(concreteInstance).(*models.MaxInclusive)
 		ret2 := backRepo.BackRepoMaxInclusive.GetMaxInclusiveDBFromMaxInclusivePtr(maxinclusiveInstance)
 		ret = any(ret2).(*T2)
+	case *models.MaxLength:
+		maxlengthInstance := any(concreteInstance).(*models.MaxLength)
+		ret2 := backRepo.BackRepoMaxLength.GetMaxLengthDBFromMaxLengthPtr(maxlengthInstance)
+		ret = any(ret2).(*T2)
 	case *models.MinInclusive:
 		mininclusiveInstance := any(concreteInstance).(*models.MinInclusive)
 		ret2 := backRepo.BackRepoMinInclusive.GetMinInclusiveDBFromMinInclusivePtr(mininclusiveInstance)
+		ret = any(ret2).(*T2)
+	case *models.MinLength:
+		minlengthInstance := any(concreteInstance).(*models.MinLength)
+		ret2 := backRepo.BackRepoMinLength.GetMinLengthDBFromMinLengthPtr(minlengthInstance)
 		ret = any(ret2).(*T2)
 	case *models.Pattern:
 		patternInstance := any(concreteInstance).(*models.Pattern)
@@ -62,6 +74,10 @@ func GetInstanceDBFromInstance[T models.Gongstruct, T2 GongstructDB](
 	case *models.SimpleType:
 		simpletypeInstance := any(concreteInstance).(*models.SimpleType)
 		ret2 := backRepo.BackRepoSimpleType.GetSimpleTypeDBFromSimpleTypePtr(simpletypeInstance)
+		ret = any(ret2).(*T2)
+	case *models.WhiteSpace:
+		whitespaceInstance := any(concreteInstance).(*models.WhiteSpace)
+		ret2 := backRepo.BackRepoWhiteSpace.GetWhiteSpaceDBFromWhiteSpacePtr(whitespaceInstance)
 		ret = any(ret2).(*T2)
 	default:
 		_ = concreteInstance
@@ -101,13 +117,28 @@ func GetID[T models.Gongstruct](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)
+	case *models.Length:
+		tmp := GetInstanceDBFromInstance[models.Length, LengthDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
 	case *models.MaxInclusive:
 		tmp := GetInstanceDBFromInstance[models.MaxInclusive, MaxInclusiveDB](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)
+	case *models.MaxLength:
+		tmp := GetInstanceDBFromInstance[models.MaxLength, MaxLengthDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
 	case *models.MinInclusive:
 		tmp := GetInstanceDBFromInstance[models.MinInclusive, MinInclusiveDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.MinLength:
+		tmp := GetInstanceDBFromInstance[models.MinLength, MinLengthDB](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)
@@ -133,6 +164,11 @@ func GetID[T models.Gongstruct](
 		id = int(tmp.ID)
 	case *models.SimpleType:
 		tmp := GetInstanceDBFromInstance[models.SimpleType, SimpleTypeDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.WhiteSpace:
+		tmp := GetInstanceDBFromInstance[models.WhiteSpace, WhiteSpaceDB](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)
@@ -174,13 +210,28 @@ func GetIDPointer[T models.PointerToGongstruct](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)
+	case *models.Length:
+		tmp := GetInstanceDBFromInstance[models.Length, LengthDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
 	case *models.MaxInclusive:
 		tmp := GetInstanceDBFromInstance[models.MaxInclusive, MaxInclusiveDB](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)
+	case *models.MaxLength:
+		tmp := GetInstanceDBFromInstance[models.MaxLength, MaxLengthDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
 	case *models.MinInclusive:
 		tmp := GetInstanceDBFromInstance[models.MinInclusive, MinInclusiveDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.MinLength:
+		tmp := GetInstanceDBFromInstance[models.MinLength, MinLengthDB](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)
@@ -206,6 +257,11 @@ func GetIDPointer[T models.PointerToGongstruct](
 		id = int(tmp.ID)
 	case *models.SimpleType:
 		tmp := GetInstanceDBFromInstance[models.SimpleType, SimpleTypeDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.WhiteSpace:
+		tmp := GetInstanceDBFromInstance[models.WhiteSpace, WhiteSpaceDB](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)

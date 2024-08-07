@@ -71,6 +71,8 @@ func _(stage *models.StageStruct) {
 	__SimpleType__000001_titleType := (&models.SimpleType{Name: `titleType`}).Stage(stage)
 	__SimpleType__000002_yearType := (&models.SimpleType{Name: `yearType`}).Stage(stage)
 
+	__WhiteSpace__000000_titleType_E_E := (&models.WhiteSpace{Name: `titleType_E_E`}).Stage(stage)
+
 	// Setup of values
 
 	__Annotation__000000_Schema_E.Name = `Schema_E`
@@ -182,6 +184,9 @@ func _(stage *models.StageStruct) {
 	__SimpleType__000002_yearType.Name = `yearType`
 	__SimpleType__000002_yearType.NameXSD = `yearType`
 
+	__WhiteSpace__000000_titleType_E_E.Name = `titleType_E_E`
+	__WhiteSpace__000000_titleType_E_E.Value = `collapse`
+
 	// Setup of pointers
 	__Annotation__000000_Schema_E.Documentations = append(__Annotation__000000_Schema_E.Documentations, __Documentation__000000_Schema_E_E)
 	__Annotation__000000_Schema_E.Documentations = append(__Annotation__000000_Schema_E.Documentations, __Documentation__000001_Schema_E_E)
@@ -200,6 +205,7 @@ func _(stage *models.StageStruct) {
 	__Restriction__000000_bookFormatEnum_E.Enumerations = append(__Restriction__000000_bookFormatEnum_E.Enumerations, __Enumeration__000000_bookFormatEnum_E_E)
 	__Restriction__000000_bookFormatEnum_E.Enumerations = append(__Restriction__000000_bookFormatEnum_E.Enumerations, __Enumeration__000001_bookFormatEnum_E_E)
 	__Restriction__000001_titleType_E.Pattern = __Pattern__000000_titleType_E_E
+	__Restriction__000001_titleType_E.WhiteSpace = __WhiteSpace__000000_titleType_E_E
 	__Restriction__000002_yearType_E.MinInclusive = __MinInclusive__000000_yearType_E_E
 	__Restriction__000002_yearType_E.MaxInclusive = __MaxInclusive__000000_yearType_E_E
 	__Schema__000000_Schema.Annotation = __Annotation__000000_Schema_E

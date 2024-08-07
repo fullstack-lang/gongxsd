@@ -30,10 +30,16 @@ func fillUpTablePointerToGongstruct[T models.PointerToGongstruct](
 		fillUpTable[models.Element](probe)
 	case *models.Enumeration:
 		fillUpTable[models.Enumeration](probe)
+	case *models.Length:
+		fillUpTable[models.Length](probe)
 	case *models.MaxInclusive:
 		fillUpTable[models.MaxInclusive](probe)
+	case *models.MaxLength:
+		fillUpTable[models.MaxLength](probe)
 	case *models.MinInclusive:
 		fillUpTable[models.MinInclusive](probe)
+	case *models.MinLength:
+		fillUpTable[models.MinLength](probe)
 	case *models.Pattern:
 		fillUpTable[models.Pattern](probe)
 	case *models.Restriction:
@@ -44,6 +50,8 @@ func fillUpTablePointerToGongstruct[T models.PointerToGongstruct](
 		fillUpTable[models.Sequence](probe)
 	case *models.SimpleType:
 		fillUpTable[models.SimpleType](probe)
+	case *models.WhiteSpace:
+		fillUpTable[models.WhiteSpace](probe)
 	default:
 		log.Println("unknow type")
 	}

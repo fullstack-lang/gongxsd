@@ -82,6 +82,13 @@ func registerControllers(r *gin.Engine) {
 		v1.PUT("/v1/enumerations/:id", GetController().UpdateEnumeration)
 		v1.DELETE("/v1/enumerations/:id", GetController().DeleteEnumeration)
 
+		v1.GET("/v1/lengths", GetController().GetLengths)
+		v1.GET("/v1/lengths/:id", GetController().GetLength)
+		v1.POST("/v1/lengths", GetController().PostLength)
+		v1.PATCH("/v1/lengths/:id", GetController().UpdateLength)
+		v1.PUT("/v1/lengths/:id", GetController().UpdateLength)
+		v1.DELETE("/v1/lengths/:id", GetController().DeleteLength)
+
 		v1.GET("/v1/maxinclusives", GetController().GetMaxInclusives)
 		v1.GET("/v1/maxinclusives/:id", GetController().GetMaxInclusive)
 		v1.POST("/v1/maxinclusives", GetController().PostMaxInclusive)
@@ -89,12 +96,26 @@ func registerControllers(r *gin.Engine) {
 		v1.PUT("/v1/maxinclusives/:id", GetController().UpdateMaxInclusive)
 		v1.DELETE("/v1/maxinclusives/:id", GetController().DeleteMaxInclusive)
 
+		v1.GET("/v1/maxlengths", GetController().GetMaxLengths)
+		v1.GET("/v1/maxlengths/:id", GetController().GetMaxLength)
+		v1.POST("/v1/maxlengths", GetController().PostMaxLength)
+		v1.PATCH("/v1/maxlengths/:id", GetController().UpdateMaxLength)
+		v1.PUT("/v1/maxlengths/:id", GetController().UpdateMaxLength)
+		v1.DELETE("/v1/maxlengths/:id", GetController().DeleteMaxLength)
+
 		v1.GET("/v1/mininclusives", GetController().GetMinInclusives)
 		v1.GET("/v1/mininclusives/:id", GetController().GetMinInclusive)
 		v1.POST("/v1/mininclusives", GetController().PostMinInclusive)
 		v1.PATCH("/v1/mininclusives/:id", GetController().UpdateMinInclusive)
 		v1.PUT("/v1/mininclusives/:id", GetController().UpdateMinInclusive)
 		v1.DELETE("/v1/mininclusives/:id", GetController().DeleteMinInclusive)
+
+		v1.GET("/v1/minlengths", GetController().GetMinLengths)
+		v1.GET("/v1/minlengths/:id", GetController().GetMinLength)
+		v1.POST("/v1/minlengths", GetController().PostMinLength)
+		v1.PATCH("/v1/minlengths/:id", GetController().UpdateMinLength)
+		v1.PUT("/v1/minlengths/:id", GetController().UpdateMinLength)
+		v1.DELETE("/v1/minlengths/:id", GetController().DeleteMinLength)
 
 		v1.GET("/v1/patterns", GetController().GetPatterns)
 		v1.GET("/v1/patterns/:id", GetController().GetPattern)
@@ -130,6 +151,13 @@ func registerControllers(r *gin.Engine) {
 		v1.PATCH("/v1/simpletypes/:id", GetController().UpdateSimpleType)
 		v1.PUT("/v1/simpletypes/:id", GetController().UpdateSimpleType)
 		v1.DELETE("/v1/simpletypes/:id", GetController().DeleteSimpleType)
+
+		v1.GET("/v1/whitespaces", GetController().GetWhiteSpaces)
+		v1.GET("/v1/whitespaces/:id", GetController().GetWhiteSpace)
+		v1.POST("/v1/whitespaces", GetController().PostWhiteSpace)
+		v1.PATCH("/v1/whitespaces/:id", GetController().UpdateWhiteSpace)
+		v1.PUT("/v1/whitespaces/:id", GetController().UpdateWhiteSpace)
+		v1.DELETE("/v1/whitespaces/:id", GetController().DeleteWhiteSpace)
 
 		v1.GET("/v1/commitfrombacknb", GetController().GetLastCommitFromBackNb)
 		v1.GET("/v1/pushfromfrontnb", GetController().GetLastPushFromFrontNb)
