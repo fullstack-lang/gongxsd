@@ -1,2 +1,3 @@
 node_modules
 go/cmd/gongxsd/gongxsd
+go/cmd/gongxsd-cli/__debug_bin*

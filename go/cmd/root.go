@@ -16,18 +16,27 @@ var rootCmd = &cobra.Command{
 	},
 }
 
+var Verbose bool
+var unmarshallFromCode *string
+var marshallOnCommit *string
+var port *int
+
 func init() {
 	rootCmd.AddCommand(readCmd)
 
-	// Here you will define your flags and configuration settings.
+	readCmd.Flags().StringP("output", "o", "", "Output file")
 
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// readCmd.PersistentFlags().String("foo", "", "A help for foo")
+	unmarshallFromCode = readCmd.Flags().StringP("unmarshallFromCode", "u", "stage.go", "unmarshall data from go file and '.go' (must be lowercased without spaces), If unmarshallFromCode arg is '', no unmarshalling")
+	marshallOnCommit = readCmd.Flags().StringP("marshallOnCommit", "m", "stage.go", "on all commits, marshall staged data to a go file with the marshall name and '.go' (must be lowercased without spaces). If marshall arg is '', no marshalling")
+	port = readCmd.Flags().IntP("port", "p", 8080, "port server")
 
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// readCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	rootCmd.PersistentFlags().BoolVarP(&Verbose, "verbose", "v", false, "verbose output")
+
+	rootCmd.PersistentPreRun = func(cmd *cobra.Command, args []string) {
+		if cmd.Flags().NFlag() == 0 && len(args) == 0 {
+			cmd.Help()
+		}
+	}
 }
 
 func Execute() {
