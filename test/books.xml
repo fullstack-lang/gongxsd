@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<books>
+    <book>
+        <title>Example Book Title</title>
+        <author>Author Name</author>
+        <year>2020</year>
+    </book>
+    <book>
+        <title>Another Book Title</title>
+        <author>Another Author</author>
+        <year>2018</year>
+    </book>
+</books>
