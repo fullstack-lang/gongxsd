@@ -44,6 +44,16 @@
                 </xs:annotation>
             </xs:element>
         </xs:sequence>
+        <xs:attribute name="isbn" type="xs:string" use="required">
+            <xs:annotation>
+                <xs:documentation>The ISBN number of the book.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="bestseller" type="xs:boolean" use="optional">
+            <xs:annotation>
+                <xs:documentation>Indicates if the book is a bestseller.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
     </xs:complexType>
 
     <xs:simpleType name="bookFormatEnum">

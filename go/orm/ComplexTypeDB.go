@@ -54,6 +54,9 @@ type ComplexTypePointersEncoding struct {
 	// field Sequence is a pointer to another Struct (optional or 0..1)
 	// This field is generated into another field to enable AS ONE association
 	SequenceID sql.NullInt64
+
+	// field Attributes is a slice of pointers to another Struct (optional or 0..1)
+	Attributes IntSlice `gorm:"type:TEXT"`
 }
 
 // ComplexTypeDB describes a complextype in the database
@@ -249,6 +252,24 @@ func (backRepoComplexType *BackRepoComplexTypeStruct) CommitPhaseTwoInstance(bac
 			complextypeDB.SequenceID.Valid = true
 		}
 
+		// 1. reset
+		complextypeDB.ComplexTypePointersEncoding.Attributes = make([]int, 0)
+		// 2. encode
+		for _, attributeAssocEnd := range complextype.Attributes {
+			attributeAssocEnd_DB :=
+				backRepo.BackRepoAttribute.GetAttributeDBFromAttributePtr(attributeAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the attributeAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if attributeAssocEnd_DB == nil {
+				continue
+			}
+			
+			complextypeDB.ComplexTypePointersEncoding.Attributes =
+				append(complextypeDB.ComplexTypePointersEncoding.Attributes, int(attributeAssocEnd_DB.ID))
+		}
+
 		query := backRepoComplexType.db.Save(&complextypeDB)
 		if query.Error != nil {
 			log.Fatalln(query.Error)
@@ -372,6 +393,15 @@ func (complextypeDB *ComplexTypeDB) DecodePointers(backRepo *BackRepoStruct, com
 	if complextypeDB.SequenceID.Int64 != 0 {
 		complextype.Sequence = backRepo.BackRepoSequence.Map_SequenceDBID_SequencePtr[uint(complextypeDB.SequenceID.Int64)]
 	}
+	// This loop redeem complextype.Attributes in the stage from the encode in the back repo
+	// It parses all AttributeDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	complextype.Attributes = complextype.Attributes[:0]
+	for _, _Attributeid := range complextypeDB.ComplexTypePointersEncoding.Attributes {
+		complextype.Attributes = append(complextype.Attributes, backRepo.BackRepoAttribute.Map_AttributeDBID_AttributePtr[uint(_Attributeid)])
+	}
+
 	return
 }
 

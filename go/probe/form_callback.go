@@ -95,6 +95,147 @@ func (annotationFormCallback *AnnotationFormCallback) OnSave() {
 
 	fillUpTree(annotationFormCallback.probe)
 }
+func __gong__New__AttributeFormCallback(
+	attribute *models.Attribute,
+	probe *Probe,
+	formGroup *table.FormGroup,
+) (attributeFormCallback *AttributeFormCallback) {
+	attributeFormCallback = new(AttributeFormCallback)
+	attributeFormCallback.probe = probe
+	attributeFormCallback.attribute = attribute
+	attributeFormCallback.formGroup = formGroup
+
+	attributeFormCallback.CreationMode = (attribute == nil)
+
+	return
+}
+
+type AttributeFormCallback struct {
+	attribute *models.Attribute
+
+	// If the form call is called on the creation of a new instnace
+	CreationMode bool
+
+	probe *Probe
+
+	formGroup *table.FormGroup
+}
+
+func (attributeFormCallback *AttributeFormCallback) OnSave() {
+
+	log.Println("AttributeFormCallback, OnSave")
+
+	// checkout formStage to have the form group on the stage synchronized with the
+	// back repo (and front repo)
+	attributeFormCallback.probe.formStage.Checkout()
+
+	if attributeFormCallback.attribute == nil {
+		attributeFormCallback.attribute = new(models.Attribute).Stage(attributeFormCallback.probe.stageOfInterest)
+	}
+	attribute_ := attributeFormCallback.attribute
+	_ = attribute_
+
+	for _, formDiv := range attributeFormCallback.formGroup.FormDivs {
+		switch formDiv.Name {
+		// insertion point per field
+		case "Name":
+			FormDivBasicFieldToField(&(attribute_.Name), formDiv)
+		case "NameXSD":
+			FormDivBasicFieldToField(&(attribute_.NameXSD), formDiv)
+		case "Type":
+			FormDivBasicFieldToField(&(attribute_.Type), formDiv)
+		case "Annotation":
+			FormDivSelectFieldToField(&(attribute_.Annotation), attributeFormCallback.probe.stageOfInterest, formDiv)
+		case "Default":
+			FormDivBasicFieldToField(&(attribute_.Default), formDiv)
+		case "Use":
+			FormDivBasicFieldToField(&(attribute_.Use), formDiv)
+		case "Form":
+			FormDivBasicFieldToField(&(attribute_.Form), formDiv)
+		case "Fixed":
+			FormDivBasicFieldToField(&(attribute_.Fixed), formDiv)
+		case "Ref":
+			FormDivBasicFieldToField(&(attribute_.Ref), formDiv)
+		case "TargetNamespace":
+			FormDivBasicFieldToField(&(attribute_.TargetNamespace), formDiv)
+		case "SimpleType":
+			FormDivBasicFieldToField(&(attribute_.SimpleType), formDiv)
+		case "IDXSD":
+			FormDivBasicFieldToField(&(attribute_.IDXSD), formDiv)
+		case "ComplexType:Attributes":
+			// we need to retrieve the field owner before the change
+			var pastComplexTypeOwner *models.ComplexType
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "ComplexType"
+			rf.Fieldname = "Attributes"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				attributeFormCallback.probe.stageOfInterest,
+				attributeFormCallback.probe.backRepoOfInterest,
+				attribute_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastComplexTypeOwner = reverseFieldOwner.(*models.ComplexType)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastComplexTypeOwner != nil {
+					idx := slices.Index(pastComplexTypeOwner.Attributes, attribute_)
+					pastComplexTypeOwner.Attributes = slices.Delete(pastComplexTypeOwner.Attributes, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _complextype := range *models.GetGongstructInstancesSet[models.ComplexType](attributeFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _complextype.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newComplexTypeOwner := _complextype // we have a match
+						if pastComplexTypeOwner != nil {
+							if newComplexTypeOwner != pastComplexTypeOwner {
+								idx := slices.Index(pastComplexTypeOwner.Attributes, attribute_)
+								pastComplexTypeOwner.Attributes = slices.Delete(pastComplexTypeOwner.Attributes, idx, idx+1)
+								newComplexTypeOwner.Attributes = append(newComplexTypeOwner.Attributes, attribute_)
+							}
+						} else {
+							newComplexTypeOwner.Attributes = append(newComplexTypeOwner.Attributes, attribute_)
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// manage the suppress operation
+	if attributeFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		attribute_.Unstage(attributeFormCallback.probe.stageOfInterest)
+	}
+
+	attributeFormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.Attribute](
+		attributeFormCallback.probe,
+	)
+	attributeFormCallback.probe.tableStage.Commit()
+
+	// display a new form by reset the form stage
+	if attributeFormCallback.CreationMode || attributeFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		attributeFormCallback.probe.formStage.Reset()
+		newFormGroup := (&table.FormGroup{
+			Name: table.FormGroupDefaultName.ToString(),
+		}).Stage(attributeFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__AttributeFormCallback(
+			nil,
+			attributeFormCallback.probe,
+			newFormGroup,
+		)
+		attribute := new(models.Attribute)
+		FillUpForm(attribute, newFormGroup, attributeFormCallback.probe)
+		attributeFormCallback.probe.formStage.Commit()
+	}
+
+	fillUpTree(attributeFormCallback.probe)
+}
 func __gong__New__ComplexTypeFormCallback(
 	complextype *models.ComplexType,
 	probe *Probe,

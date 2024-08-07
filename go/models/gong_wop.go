@@ -17,6 +17,36 @@ func (from *Annotation) CopyBasicFields(to *Annotation) {
 	to.Name = from.Name
 }
 
+type Attribute_WOP struct {
+	// insertion point
+	Name string
+	NameXSD string
+	Type string
+	Default string
+	Use string
+	Form string
+	Fixed string
+	Ref string
+	TargetNamespace string
+	SimpleType string
+	IDXSD string
+}
+
+func (from *Attribute) CopyBasicFields(to *Attribute) {
+	// insertion point
+	to.Name = from.Name
+	to.NameXSD = from.NameXSD
+	to.Type = from.Type
+	to.Default = from.Default
+	to.Use = from.Use
+	to.Form = from.Form
+	to.Fixed = from.Fixed
+	to.Ref = from.Ref
+	to.TargetNamespace = from.TargetNamespace
+	to.SimpleType = from.SimpleType
+	to.IDXSD = from.IDXSD
+}
+
 type ComplexType_WOP struct {
 	// insertion point
 	Name string

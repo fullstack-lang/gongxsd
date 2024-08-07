@@ -315,6 +315,7 @@ var __gong__map_Indentifiers_gongstructName = make(map[string]string)
 
 // insertion point for identifiers maps
 var __gong__map_Annotation = make(map[string]*Annotation)
+var __gong__map_Attribute = make(map[string]*Attribute)
 var __gong__map_ComplexType = make(map[string]*ComplexType)
 var __gong__map_Documentation = make(map[string]*Documentation)
 var __gong__map_Element = make(map[string]*Element)
@@ -507,6 +508,10 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 										instanceAnnotation := (&Annotation{Name: instanceName}).Stage(stage)
 										instance = any(instanceAnnotation)
 										__gong__map_Annotation[identifier] = instanceAnnotation
+									case "Attribute":
+										instanceAttribute := (&Attribute{Name: instanceName}).Stage(stage)
+										instance = any(instanceAttribute)
+										__gong__map_Attribute[identifier] = instanceAttribute
 									case "ComplexType":
 										instanceComplexType := (&ComplexType{Name: instanceName}).Stage(stage)
 										instance = any(instanceComplexType)
@@ -611,6 +616,10 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 							switch fieldName {
 							// insertion point for date assign code
 							}
+						case "Attribute":
+							switch fieldName {
+							// insertion point for date assign code
+							}
 						case "ComplexType":
 							switch fieldName {
 							// insertion point for date assign code
@@ -710,9 +719,19 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 							__gong__map_Annotation[identifier].Documentations =
 								append(__gong__map_Annotation[identifier].Documentations, target)
 						}
+					case "Attribute":
+						switch fieldName {
+						// insertion point for slice of pointers assign code
+						}
 					case "ComplexType":
 						switch fieldName {
 						// insertion point for slice of pointers assign code
+						case "Attributes":
+							// remove first and last char
+							targetIdentifier := ident.Name
+							target := __gong__map_Attribute[targetIdentifier]
+							__gong__map_ComplexType[identifier].Attributes =
+								append(__gong__map_ComplexType[identifier].Attributes, target)
 						}
 					case "Documentation":
 						switch fieldName {
@@ -860,6 +879,54 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					// remove first and last char
 					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
 					__gong__map_Annotation[identifier].Name = fielValue
+				}
+			case "Attribute":
+				switch fieldName {
+				// insertion point for field dependant code
+				case "Name":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_Attribute[identifier].Name = fielValue
+				case "NameXSD":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_Attribute[identifier].NameXSD = fielValue
+				case "Type":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_Attribute[identifier].Type = fielValue
+				case "Default":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_Attribute[identifier].Default = fielValue
+				case "Use":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_Attribute[identifier].Use = fielValue
+				case "Form":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_Attribute[identifier].Form = fielValue
+				case "Fixed":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_Attribute[identifier].Fixed = fielValue
+				case "Ref":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_Attribute[identifier].Ref = fielValue
+				case "TargetNamespace":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_Attribute[identifier].TargetNamespace = fielValue
+				case "SimpleType":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_Attribute[identifier].SimpleType = fielValue
+				case "IDXSD":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_Attribute[identifier].IDXSD = fielValue
 				}
 			case "ComplexType":
 				switch fieldName {
@@ -1079,6 +1146,13 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 				switch fieldName {
 				// insertion point for field dependant code
 				}
+			case "Attribute":
+				switch fieldName {
+				// insertion point for field dependant code
+				case "Annotation":
+					targetIdentifier := ident.Name
+					__gong__map_Attribute[identifier].Annotation = __gong__map_Annotation[targetIdentifier]
+				}
 			case "ComplexType":
 				switch fieldName {
 				// insertion point for field dependant code
@@ -1253,6 +1327,10 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 				switch gongstructName {
 				// insertion point for enums assignments
 				case "Annotation":
+					switch fieldName {
+					// insertion point for enum assign code
+					}
+				case "Attribute":
 					switch fieldName {
 					// insertion point for enum assign code
 					}

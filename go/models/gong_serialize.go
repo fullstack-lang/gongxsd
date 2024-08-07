@@ -15,6 +15,7 @@ func SerializeStage(stage *StageStruct, filename string) {
 	{
 		// insertion point
 		SerializeExcelize[Annotation](stage, f)
+		SerializeExcelize[Attribute](stage, f)
 		SerializeExcelize[ComplexType](stage, f)
 		SerializeExcelize[Documentation](stage, f)
 		SerializeExcelize[Element](stage, f)

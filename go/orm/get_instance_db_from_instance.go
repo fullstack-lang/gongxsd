@@ -19,6 +19,10 @@ func GetInstanceDBFromInstance[T models.Gongstruct, T2 GongstructDB](
 		annotationInstance := any(concreteInstance).(*models.Annotation)
 		ret2 := backRepo.BackRepoAnnotation.GetAnnotationDBFromAnnotationPtr(annotationInstance)
 		ret = any(ret2).(*T2)
+	case *models.Attribute:
+		attributeInstance := any(concreteInstance).(*models.Attribute)
+		ret2 := backRepo.BackRepoAttribute.GetAttributeDBFromAttributePtr(attributeInstance)
+		ret = any(ret2).(*T2)
 	case *models.ComplexType:
 		complextypeInstance := any(concreteInstance).(*models.ComplexType)
 		ret2 := backRepo.BackRepoComplexType.GetComplexTypeDBFromComplexTypePtr(complextypeInstance)
@@ -98,6 +102,11 @@ func GetID[T models.Gongstruct](
 	// insertion point for per struct backup
 	case *models.Annotation:
 		tmp := GetInstanceDBFromInstance[models.Annotation, AnnotationDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.Attribute:
+		tmp := GetInstanceDBFromInstance[models.Attribute, AttributeDB](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)
@@ -196,6 +205,11 @@ func GetIDPointer[T models.PointerToGongstruct](
 	// insertion point for per struct backup
 	case *models.Annotation:
 		tmp := GetInstanceDBFromInstance[models.Annotation, AnnotationDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.Attribute:
+		tmp := GetInstanceDBFromInstance[models.Attribute, AttributeDB](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)
