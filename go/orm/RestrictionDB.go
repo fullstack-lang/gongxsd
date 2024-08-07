@@ -57,6 +57,10 @@ type RestrictionPointersEncoding struct {
 	// field MaxInclusive is a pointer to another Struct (optional or 0..1)
 	// This field is generated into another field to enable AS ONE association
 	MaxInclusiveID sql.NullInt64
+
+	// field Pattern is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	PatternID sql.NullInt64
 }
 
 // RestrictionDB describes a restriction in the database
@@ -270,6 +274,18 @@ func (backRepoRestriction *BackRepoRestrictionStruct) CommitPhaseTwoInstance(bac
 			restrictionDB.MaxInclusiveID.Valid = true
 		}
 
+		// commit pointer value restriction.Pattern translates to updating the restriction.PatternID
+		restrictionDB.PatternID.Valid = true // allow for a 0 value (nil association)
+		if restriction.Pattern != nil {
+			if PatternId, ok := backRepo.BackRepoPattern.Map_PatternPtr_PatternDBID[restriction.Pattern]; ok {
+				restrictionDB.PatternID.Int64 = int64(PatternId)
+				restrictionDB.PatternID.Valid = true
+			}
+		} else {
+			restrictionDB.PatternID.Int64 = 0
+			restrictionDB.PatternID.Valid = true
+		}
+
 		query := backRepoRestriction.db.Save(&restrictionDB)
 		if query.Error != nil {
 			log.Fatalln(query.Error)
@@ -401,6 +417,11 @@ func (restrictionDB *RestrictionDB) DecodePointers(backRepo *BackRepoStruct, res
 	restriction.MaxInclusive = nil
 	if restrictionDB.MaxInclusiveID.Int64 != 0 {
 		restriction.MaxInclusive = backRepo.BackRepoMaxInclusive.Map_MaxInclusiveDBID_MaxInclusivePtr[uint(restrictionDB.MaxInclusiveID.Int64)]
+	}
+	// Pattern field
+	restriction.Pattern = nil
+	if restrictionDB.PatternID.Int64 != 0 {
+		restriction.Pattern = backRepo.BackRepoPattern.Map_PatternDBID_PatternPtr[uint(restrictionDB.PatternID.Int64)]
 	}
 	return
 }
@@ -652,6 +673,12 @@ func (backRepoRestriction *BackRepoRestrictionStruct) RestorePhaseTwo() {
 		if restrictionDB.MaxInclusiveID.Int64 != 0 {
 			restrictionDB.MaxInclusiveID.Int64 = int64(BackRepoMaxInclusiveid_atBckpTime_newID[uint(restrictionDB.MaxInclusiveID.Int64)])
 			restrictionDB.MaxInclusiveID.Valid = true
+		}
+
+		// reindexing Pattern field
+		if restrictionDB.PatternID.Int64 != 0 {
+			restrictionDB.PatternID.Int64 = int64(BackRepoPatternid_atBckpTime_newID[uint(restrictionDB.PatternID.Int64)])
+			restrictionDB.PatternID.Valid = true
 		}
 
 		// update databse with new index encoding

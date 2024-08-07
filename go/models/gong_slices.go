@@ -48,6 +48,9 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 	case *MinInclusive:
 		// insertion point per field
 
+	case *Pattern:
+		// insertion point per field
+
 	case *Restriction:
 		// insertion point per field
 		if fieldName == "Enumerations" {
@@ -177,6 +180,9 @@ func (stage *StageStruct) ComputeReverseMaps() {
 	// insertion point per field
 
 	// Compute reverse map for named struct MinInclusive
+	// insertion point per field
+
+	// Compute reverse map for named struct Pattern
 	// insertion point per field
 
 	// Compute reverse map for named struct Restriction

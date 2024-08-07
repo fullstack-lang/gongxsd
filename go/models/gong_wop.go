@@ -69,6 +69,18 @@ func (from *MinInclusive) CopyBasicFields(to *MinInclusive) {
 	to.Value = from.Value
 }
 
+type Pattern_WOP struct {
+	// insertion point
+	Name string
+	Value string
+}
+
+func (from *Pattern) CopyBasicFields(to *Pattern) {
+	// insertion point
+	to.Name = from.Name
+	to.Value = from.Value
+}
+
 type Restriction_WOP struct {
 	// insertion point
 	Name string

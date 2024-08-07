@@ -300,6 +300,46 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 
 	}
 
+	map_Pattern_Identifiers := make(map[*Pattern]string)
+	_ = map_Pattern_Identifiers
+
+	patternOrdered := []*Pattern{}
+	for pattern := range stage.Patterns {
+		patternOrdered = append(patternOrdered, pattern)
+	}
+	sort.Slice(patternOrdered[:], func(i, j int) bool {
+		return patternOrdered[i].Name < patternOrdered[j].Name
+	})
+	if len(patternOrdered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, pattern := range patternOrdered {
+
+		id = generatesIdentifier("Pattern", idx, pattern.Name)
+		map_Pattern_Identifiers[pattern] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "Pattern")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", pattern.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(pattern.Name))
+		initializerStatements += setValueField
+
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Value")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(pattern.Value))
+		initializerStatements += setValueField
+
+	}
+
 	map_Restriction_Identifiers := make(map[*Restriction]string)
 	_ = map_Restriction_Identifiers
 
@@ -523,6 +563,16 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		// Initialisation of values
 	}
 
+	for idx, pattern := range patternOrdered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("Pattern", idx, pattern.Name)
+		map_Pattern_Identifiers[pattern] = id
+
+		// Initialisation of values
+	}
+
 	for idx, restriction := range restrictionOrdered {
 		var setPointerField string
 		_ = setPointerField
@@ -552,6 +602,14 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "MaxInclusive")
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_MaxInclusive_Identifiers[restriction.MaxInclusive])
+			pointersInitializesStatements += setPointerField
+		}
+
+		if restriction.Pattern != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Pattern")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Pattern_Identifiers[restriction.Pattern])
 			pointersInitializesStatements += setPointerField
 		}
 

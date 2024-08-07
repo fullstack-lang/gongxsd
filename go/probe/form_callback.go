@@ -589,6 +589,85 @@ func (mininclusiveFormCallback *MinInclusiveFormCallback) OnSave() {
 
 	fillUpTree(mininclusiveFormCallback.probe)
 }
+func __gong__New__PatternFormCallback(
+	pattern *models.Pattern,
+	probe *Probe,
+	formGroup *table.FormGroup,
+) (patternFormCallback *PatternFormCallback) {
+	patternFormCallback = new(PatternFormCallback)
+	patternFormCallback.probe = probe
+	patternFormCallback.pattern = pattern
+	patternFormCallback.formGroup = formGroup
+
+	patternFormCallback.CreationMode = (pattern == nil)
+
+	return
+}
+
+type PatternFormCallback struct {
+	pattern *models.Pattern
+
+	// If the form call is called on the creation of a new instnace
+	CreationMode bool
+
+	probe *Probe
+
+	formGroup *table.FormGroup
+}
+
+func (patternFormCallback *PatternFormCallback) OnSave() {
+
+	log.Println("PatternFormCallback, OnSave")
+
+	// checkout formStage to have the form group on the stage synchronized with the
+	// back repo (and front repo)
+	patternFormCallback.probe.formStage.Checkout()
+
+	if patternFormCallback.pattern == nil {
+		patternFormCallback.pattern = new(models.Pattern).Stage(patternFormCallback.probe.stageOfInterest)
+	}
+	pattern_ := patternFormCallback.pattern
+	_ = pattern_
+
+	for _, formDiv := range patternFormCallback.formGroup.FormDivs {
+		switch formDiv.Name {
+		// insertion point per field
+		case "Name":
+			FormDivBasicFieldToField(&(pattern_.Name), formDiv)
+		case "Value":
+			FormDivBasicFieldToField(&(pattern_.Value), formDiv)
+		}
+	}
+
+	// manage the suppress operation
+	if patternFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		pattern_.Unstage(patternFormCallback.probe.stageOfInterest)
+	}
+
+	patternFormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.Pattern](
+		patternFormCallback.probe,
+	)
+	patternFormCallback.probe.tableStage.Commit()
+
+	// display a new form by reset the form stage
+	if patternFormCallback.CreationMode || patternFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		patternFormCallback.probe.formStage.Reset()
+		newFormGroup := (&table.FormGroup{
+			Name: table.FormGroupDefaultName.ToString(),
+		}).Stage(patternFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__PatternFormCallback(
+			nil,
+			patternFormCallback.probe,
+			newFormGroup,
+		)
+		pattern := new(models.Pattern)
+		FillUpForm(pattern, newFormGroup, patternFormCallback.probe)
+		patternFormCallback.probe.formStage.Commit()
+	}
+
+	fillUpTree(patternFormCallback.probe)
+}
 func __gong__New__RestrictionFormCallback(
 	restriction *models.Restriction,
 	probe *Probe,
@@ -640,6 +719,8 @@ func (restrictionFormCallback *RestrictionFormCallback) OnSave() {
 			FormDivSelectFieldToField(&(restriction_.MinInclusive), restrictionFormCallback.probe.stageOfInterest, formDiv)
 		case "MaxInclusive":
 			FormDivSelectFieldToField(&(restriction_.MaxInclusive), restrictionFormCallback.probe.stageOfInterest, formDiv)
+		case "Pattern":
+			FormDivSelectFieldToField(&(restriction_.Pattern), restrictionFormCallback.probe.stageOfInterest, formDiv)
 		}
 	}
 

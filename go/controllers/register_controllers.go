@@ -82,6 +82,13 @@ func registerControllers(r *gin.Engine) {
 		v1.PUT("/v1/mininclusives/:id", GetController().UpdateMinInclusive)
 		v1.DELETE("/v1/mininclusives/:id", GetController().DeleteMinInclusive)
 
+		v1.GET("/v1/patterns", GetController().GetPatterns)
+		v1.GET("/v1/patterns/:id", GetController().GetPattern)
+		v1.POST("/v1/patterns", GetController().PostPattern)
+		v1.PATCH("/v1/patterns/:id", GetController().UpdatePattern)
+		v1.PUT("/v1/patterns/:id", GetController().UpdatePattern)
+		v1.DELETE("/v1/patterns/:id", GetController().DeletePattern)
+
 		v1.GET("/v1/restrictions", GetController().GetRestrictions)
 		v1.GET("/v1/restrictions/:id", GetController().GetRestriction)
 		v1.POST("/v1/restrictions", GetController().PostRestriction)

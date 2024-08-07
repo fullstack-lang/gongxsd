@@ -67,6 +67,11 @@ func GetReverseFieldOwnerName[T models.Gongstruct](
 		// insertion point
 		}
 
+	case *models.Pattern:
+		switch reverseField.GongstructName {
+		// insertion point
+		}
+
 	case *models.Restriction:
 		switch reverseField.GongstructName {
 		// insertion point
@@ -150,6 +155,11 @@ func GetReverseFieldOwner[T models.Gongstruct](
 		}
 
 	case *models.MinInclusive:
+		switch reverseField.GongstructName {
+		// insertion point
+		}
+
+	case *models.Pattern:
 		switch reverseField.GongstructName {
 		// insertion point
 		}

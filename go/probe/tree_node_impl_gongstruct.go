@@ -67,6 +67,9 @@ func (nodeImplGongstruct *TreeNodeImplGongstruct) OnAfterUpdate(
 	if nodeImplGongstruct.gongStruct.GetName() == "MinInclusive" {
 		fillUpTable[models.MinInclusive](nodeImplGongstruct.probe)
 	}
+	if nodeImplGongstruct.gongStruct.GetName() == "Pattern" {
+		fillUpTable[models.Pattern](nodeImplGongstruct.probe)
+	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Restriction" {
 		fillUpTable[models.Restriction](nodeImplGongstruct.probe)
 	}

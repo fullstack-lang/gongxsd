@@ -41,8 +41,11 @@ func _(stage *models.StageStruct) {
 
 	__MinInclusive__000000_yearType_E_E := (&models.MinInclusive{Name: `yearType_E_E`}).Stage(stage)
 
+	__Pattern__000000_ := (&models.Pattern{Name: ``}).Stage(stage)
+
 	__Restriction__000000_bookFormatEnum_E := (&models.Restriction{Name: `bookFormatEnum_E`}).Stage(stage)
-	__Restriction__000001_yearType_E := (&models.Restriction{Name: `yearType_E`}).Stage(stage)
+	__Restriction__000001_titleType_E := (&models.Restriction{Name: `titleType_E`}).Stage(stage)
+	__Restriction__000002_yearType_E := (&models.Restriction{Name: `yearType_E`}).Stage(stage)
 
 	__Schema__000000_Schema := (&models.Schema{Name: `Schema`}).Stage(stage)
 
@@ -50,7 +53,8 @@ func _(stage *models.StageStruct) {
 	__Sequence__000001_books_E_E := (&models.Sequence{Name: `books_E_E`}).Stage(stage)
 
 	__SimpleType__000000_bookFormatEnum := (&models.SimpleType{Name: `bookFormatEnum`}).Stage(stage)
-	__SimpleType__000001_yearType := (&models.SimpleType{Name: `yearType`}).Stage(stage)
+	__SimpleType__000001_titleType := (&models.SimpleType{Name: `titleType`}).Stage(stage)
+	__SimpleType__000002_yearType := (&models.SimpleType{Name: `yearType`}).Stage(stage)
 
 	// Setup of values
 
@@ -78,7 +82,7 @@ func _(stage *models.StageStruct) {
 
 	__Element__000004_title.Name = `title`
 	__Element__000004_title.NameXSD = `title`
-	__Element__000004_title.Type = `xs:string`
+	__Element__000004_title.Type = `titleType`
 
 	__Element__000005_year.Name = `year`
 	__Element__000005_year.NameXSD = `year`
@@ -96,11 +100,17 @@ func _(stage *models.StageStruct) {
 	__MinInclusive__000000_yearType_E_E.Name = `yearType_E_E`
 	__MinInclusive__000000_yearType_E_E.Value = `1900`
 
+	__Pattern__000000_.Name = ``
+	__Pattern__000000_.Value = `[A-Za-z ]+`
+
 	__Restriction__000000_bookFormatEnum_E.Name = `bookFormatEnum_E`
 	__Restriction__000000_bookFormatEnum_E.Base = `xs:string`
 
-	__Restriction__000001_yearType_E.Name = `yearType_E`
-	__Restriction__000001_yearType_E.Base = `xs:integer`
+	__Restriction__000001_titleType_E.Name = `titleType_E`
+	__Restriction__000001_titleType_E.Base = `xs:string`
+
+	__Restriction__000002_yearType_E.Name = `yearType_E`
+	__Restriction__000002_yearType_E.Base = `xs:integer`
 
 	__Schema__000000_Schema.Name = `Schema`
 
@@ -111,8 +121,11 @@ func _(stage *models.StageStruct) {
 	__SimpleType__000000_bookFormatEnum.Name = `bookFormatEnum`
 	__SimpleType__000000_bookFormatEnum.NameXSD = `bookFormatEnum`
 
-	__SimpleType__000001_yearType.Name = `yearType`
-	__SimpleType__000001_yearType.NameXSD = `yearType`
+	__SimpleType__000001_titleType.Name = `titleType`
+	__SimpleType__000001_titleType.NameXSD = `titleType`
+
+	__SimpleType__000002_yearType.Name = `yearType`
+	__SimpleType__000002_yearType.NameXSD = `yearType`
 
 	// Setup of pointers
 	__ComplexType__000000_bookType.Sequence = __Sequence__000000_bookType_E
@@ -120,11 +133,13 @@ func _(stage *models.StageStruct) {
 	__Element__000002_books.ComplexType = __ComplexType__000001_books_E
 	__Restriction__000000_bookFormatEnum_E.Enumerations = append(__Restriction__000000_bookFormatEnum_E.Enumerations, __Enumeration__000000_bookFormatEnum_E_E)
 	__Restriction__000000_bookFormatEnum_E.Enumerations = append(__Restriction__000000_bookFormatEnum_E.Enumerations, __Enumeration__000001_bookFormatEnum_E_E)
-	__Restriction__000001_yearType_E.MinInclusive = __MinInclusive__000000_yearType_E_E
-	__Restriction__000001_yearType_E.MaxInclusive = __MaxInclusive__000000_yearType_E_E
+	__Restriction__000001_titleType_E.Pattern = __Pattern__000000_
+	__Restriction__000002_yearType_E.MinInclusive = __MinInclusive__000000_yearType_E_E
+	__Restriction__000002_yearType_E.MaxInclusive = __MaxInclusive__000000_yearType_E_E
 	__Schema__000000_Schema.Elements = append(__Schema__000000_Schema.Elements, __Element__000002_books)
-	__Schema__000000_Schema.SimpleTypes = append(__Schema__000000_Schema.SimpleTypes, __SimpleType__000001_yearType)
+	__Schema__000000_Schema.SimpleTypes = append(__Schema__000000_Schema.SimpleTypes, __SimpleType__000002_yearType)
 	__Schema__000000_Schema.SimpleTypes = append(__Schema__000000_Schema.SimpleTypes, __SimpleType__000000_bookFormatEnum)
+	__Schema__000000_Schema.SimpleTypes = append(__Schema__000000_Schema.SimpleTypes, __SimpleType__000001_titleType)
 	__Schema__000000_Schema.ComplexTypes = append(__Schema__000000_Schema.ComplexTypes, __ComplexType__000000_bookType)
 	__Sequence__000000_bookType_E.Elements = append(__Sequence__000000_bookType_E.Elements, __Element__000004_title)
 	__Sequence__000000_bookType_E.Elements = append(__Sequence__000000_bookType_E.Elements, __Element__000000_author)
@@ -132,5 +147,6 @@ func _(stage *models.StageStruct) {
 	__Sequence__000000_bookType_E.Elements = append(__Sequence__000000_bookType_E.Elements, __Element__000003_format)
 	__Sequence__000001_books_E_E.Elements = append(__Sequence__000001_books_E_E.Elements, __Element__000001_book)
 	__SimpleType__000000_bookFormatEnum.Restriction = __Restriction__000000_bookFormatEnum_E
-	__SimpleType__000001_yearType.Restriction = __Restriction__000001_yearType_E
+	__SimpleType__000001_titleType.Restriction = __Restriction__000001_titleType_E
+	__SimpleType__000002_yearType.Restriction = __Restriction__000002_yearType_E
 }

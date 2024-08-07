@@ -35,6 +35,10 @@ func GetInstanceDBFromInstance[T models.Gongstruct, T2 GongstructDB](
 		mininclusiveInstance := any(concreteInstance).(*models.MinInclusive)
 		ret2 := backRepo.BackRepoMinInclusive.GetMinInclusiveDBFromMinInclusivePtr(mininclusiveInstance)
 		ret = any(ret2).(*T2)
+	case *models.Pattern:
+		patternInstance := any(concreteInstance).(*models.Pattern)
+		ret2 := backRepo.BackRepoPattern.GetPatternDBFromPatternPtr(patternInstance)
+		ret = any(ret2).(*T2)
 	case *models.Restriction:
 		restrictionInstance := any(concreteInstance).(*models.Restriction)
 		ret2 := backRepo.BackRepoRestriction.GetRestrictionDBFromRestrictionPtr(restrictionInstance)
@@ -86,6 +90,11 @@ func GetID[T models.Gongstruct](
 		id = int(tmp.ID)
 	case *models.MinInclusive:
 		tmp := GetInstanceDBFromInstance[models.MinInclusive, MinInclusiveDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.Pattern:
+		tmp := GetInstanceDBFromInstance[models.Pattern, PatternDB](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)
@@ -144,6 +153,11 @@ func GetIDPointer[T models.PointerToGongstruct](
 		id = int(tmp.ID)
 	case *models.MinInclusive:
 		tmp := GetInstanceDBFromInstance[models.MinInclusive, MinInclusiveDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.Pattern:
+		tmp := GetInstanceDBFromInstance[models.Pattern, PatternDB](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)

@@ -13,7 +13,7 @@
     <!-- Definition of a complex type for a book -->
     <xs:complexType name="bookType">
         <xs:sequence>
-            <xs:element name="title" type="xs:string" />
+            <xs:element name="title" type="titleType" />
             <xs:element name="author" type="xs:string" />
             <xs:element name="year" type="yearType" />
             <xs:element name="format" type="bookFormatEnum" />
@@ -24,6 +24,13 @@
         <xs:restriction base="xs:string">
             <xs:enumeration value="Paperback" />
             <xs:enumeration value="Hardcover" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Definition of a simple type for the title with a pattern facet -->
+    <xs:simpleType name="titleType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Za-z ]+" />
         </xs:restriction>
     </xs:simpleType>
 

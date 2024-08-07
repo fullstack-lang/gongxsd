@@ -30,6 +30,8 @@ func fillUpTablePointerToGongstruct[T models.PointerToGongstruct](
 		fillUpTable[models.MaxInclusive](probe)
 	case *models.MinInclusive:
 		fillUpTable[models.MinInclusive](probe)
+	case *models.Pattern:
+		fillUpTable[models.Pattern](probe)
 	case *models.Restriction:
 		fillUpTable[models.Restriction](probe)
 	case *models.Schema:

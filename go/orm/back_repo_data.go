@@ -14,6 +14,8 @@ type BackRepoData struct {
 
 	MinInclusiveAPIs []*MinInclusiveAPI
 
+	PatternAPIs []*PatternAPI
+
 	RestrictionAPIs []*RestrictionAPI
 
 	SchemaAPIs []*SchemaAPI
@@ -73,6 +75,16 @@ func CopyBackRepoToBackRepoData(backRepo *BackRepoStruct, backRepoData *BackRepo
 		mininclusiveDB.CopyBasicFieldsToMinInclusive_WOP(&mininclusiveAPI.MinInclusive_WOP)
 
 		backRepoData.MinInclusiveAPIs = append(backRepoData.MinInclusiveAPIs, &mininclusiveAPI)
+	}
+
+	for _, patternDB := range backRepo.BackRepoPattern.Map_PatternDBID_PatternDB {
+
+		var patternAPI PatternAPI
+		patternAPI.ID = patternDB.ID
+		patternAPI.PatternPointersEncoding = patternDB.PatternPointersEncoding
+		patternDB.CopyBasicFieldsToPattern_WOP(&patternAPI.Pattern_WOP)
+
+		backRepoData.PatternAPIs = append(backRepoData.PatternAPIs, &patternAPI)
 	}
 
 	for _, restrictionDB := range backRepo.BackRepoRestriction.Map_RestrictionDBID_RestrictionDB {

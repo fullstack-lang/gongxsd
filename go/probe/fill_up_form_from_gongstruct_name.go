@@ -91,6 +91,19 @@ func FillUpFormFromGongstructName(
 		mininclusive := new(models.MinInclusive)
 		formGroup.HasSuppressButton = !isNewInstance
 		FillUpForm(mininclusive, formGroup, probe)
+	case "Pattern":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "Pattern Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__PatternFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		pattern := new(models.Pattern)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(pattern, formGroup, probe)
 	case "Restriction":
 		formGroup := (&form.FormGroup{
 			Name:  form.FormGroupDefaultName.ToString(),

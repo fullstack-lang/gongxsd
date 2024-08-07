@@ -19,6 +19,7 @@ func SerializeStage(stage *StageStruct, filename string) {
 		SerializeExcelize[Enumeration](stage, f)
 		SerializeExcelize[MaxInclusive](stage, f)
 		SerializeExcelize[MinInclusive](stage, f)
+		SerializeExcelize[Pattern](stage, f)
 		SerializeExcelize[Restriction](stage, f)
 		SerializeExcelize[Schema](stage, f)
 		SerializeExcelize[Sequence](stage, f)

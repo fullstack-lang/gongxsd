@@ -47,6 +47,9 @@ func Process(stage *StageStruct) {
 		if r.MaxInclusive != nil {
 			r.MaxInclusive.Name = prefix(r.Name)
 		}
+		if r.Pattern != nil {
+			r.Pattern.Name = prefix(r.Name)
+		}
 	}
 
 }

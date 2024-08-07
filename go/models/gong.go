@@ -94,6 +94,15 @@ type StageStruct struct {
 	OnAfterMinInclusiveDeleteCallback OnAfterDeleteInterface[MinInclusive]
 	OnAfterMinInclusiveReadCallback   OnAfterReadInterface[MinInclusive]
 
+	Patterns           map[*Pattern]any
+	Patterns_mapString map[string]*Pattern
+
+	// insertion point for slice of pointers maps
+	OnAfterPatternCreateCallback OnAfterCreateInterface[Pattern]
+	OnAfterPatternUpdateCallback OnAfterUpdateInterface[Pattern]
+	OnAfterPatternDeleteCallback OnAfterDeleteInterface[Pattern]
+	OnAfterPatternReadCallback   OnAfterReadInterface[Pattern]
+
 	Restrictions           map[*Restriction]any
 	Restrictions_mapString map[string]*Restriction
 
@@ -218,6 +227,8 @@ type BackRepoInterface interface {
 	CheckoutMaxInclusive(maxinclusive *MaxInclusive)
 	CommitMinInclusive(mininclusive *MinInclusive)
 	CheckoutMinInclusive(mininclusive *MinInclusive)
+	CommitPattern(pattern *Pattern)
+	CheckoutPattern(pattern *Pattern)
 	CommitRestriction(restriction *Restriction)
 	CheckoutRestriction(restriction *Restriction)
 	CommitSchema(schema *Schema)
@@ -247,6 +258,9 @@ func NewStage(path string) (stage *StageStruct) {
 
 		MinInclusives:           make(map[*MinInclusive]any),
 		MinInclusives_mapString: make(map[string]*MinInclusive),
+
+		Patterns:           make(map[*Pattern]any),
+		Patterns_mapString: make(map[string]*Pattern),
 
 		Restrictions:           make(map[*Restriction]any),
 		Restrictions_mapString: make(map[string]*Restriction),
@@ -298,6 +312,7 @@ func (stage *StageStruct) Commit() {
 	stage.Map_GongStructName_InstancesNb["Enumeration"] = len(stage.Enumerations)
 	stage.Map_GongStructName_InstancesNb["MaxInclusive"] = len(stage.MaxInclusives)
 	stage.Map_GongStructName_InstancesNb["MinInclusive"] = len(stage.MinInclusives)
+	stage.Map_GongStructName_InstancesNb["Pattern"] = len(stage.Patterns)
 	stage.Map_GongStructName_InstancesNb["Restriction"] = len(stage.Restrictions)
 	stage.Map_GongStructName_InstancesNb["Schema"] = len(stage.Schemas)
 	stage.Map_GongStructName_InstancesNb["Sequence"] = len(stage.Sequences)
@@ -317,6 +332,7 @@ func (stage *StageStruct) Checkout() {
 	stage.Map_GongStructName_InstancesNb["Enumeration"] = len(stage.Enumerations)
 	stage.Map_GongStructName_InstancesNb["MaxInclusive"] = len(stage.MaxInclusives)
 	stage.Map_GongStructName_InstancesNb["MinInclusive"] = len(stage.MinInclusives)
+	stage.Map_GongStructName_InstancesNb["Pattern"] = len(stage.Patterns)
 	stage.Map_GongStructName_InstancesNb["Restriction"] = len(stage.Restrictions)
 	stage.Map_GongStructName_InstancesNb["Schema"] = len(stage.Schemas)
 	stage.Map_GongStructName_InstancesNb["Sequence"] = len(stage.Sequences)
@@ -603,6 +619,56 @@ func (mininclusive *MinInclusive) GetName() (res string) {
 	return mininclusive.Name
 }
 
+// Stage puts pattern to the model stage
+func (pattern *Pattern) Stage(stage *StageStruct) *Pattern {
+	stage.Patterns[pattern] = __member
+	stage.Patterns_mapString[pattern.Name] = pattern
+
+	return pattern
+}
+
+// Unstage removes pattern off the model stage
+func (pattern *Pattern) Unstage(stage *StageStruct) *Pattern {
+	delete(stage.Patterns, pattern)
+	delete(stage.Patterns_mapString, pattern.Name)
+	return pattern
+}
+
+// UnstageVoid removes pattern off the model stage
+func (pattern *Pattern) UnstageVoid(stage *StageStruct) {
+	delete(stage.Patterns, pattern)
+	delete(stage.Patterns_mapString, pattern.Name)
+}
+
+// commit pattern to the back repo (if it is already staged)
+func (pattern *Pattern) Commit(stage *StageStruct) *Pattern {
+	if _, ok := stage.Patterns[pattern]; ok {
+		if stage.BackRepo != nil {
+			stage.BackRepo.CommitPattern(pattern)
+		}
+	}
+	return pattern
+}
+
+func (pattern *Pattern) CommitVoid(stage *StageStruct) {
+	pattern.Commit(stage)
+}
+
+// Checkout pattern to the back repo (if it is already staged)
+func (pattern *Pattern) Checkout(stage *StageStruct) *Pattern {
+	if _, ok := stage.Patterns[pattern]; ok {
+		if stage.BackRepo != nil {
+			stage.BackRepo.CheckoutPattern(pattern)
+		}
+	}
+	return pattern
+}
+
+// for satisfaction of GongStruct interface
+func (pattern *Pattern) GetName() (res string) {
+	return pattern.Name
+}
+
 // Stage puts restriction to the model stage
 func (restriction *Restriction) Stage(stage *StageStruct) *Restriction {
 	stage.Restrictions[restriction] = __member
@@ -810,6 +876,7 @@ type AllModelsStructCreateInterface interface { // insertion point for Callbacks
 	CreateORMEnumeration(Enumeration *Enumeration)
 	CreateORMMaxInclusive(MaxInclusive *MaxInclusive)
 	CreateORMMinInclusive(MinInclusive *MinInclusive)
+	CreateORMPattern(Pattern *Pattern)
 	CreateORMRestriction(Restriction *Restriction)
 	CreateORMSchema(Schema *Schema)
 	CreateORMSequence(Sequence *Sequence)
@@ -822,6 +889,7 @@ type AllModelsStructDeleteInterface interface { // insertion point for Callbacks
 	DeleteORMEnumeration(Enumeration *Enumeration)
 	DeleteORMMaxInclusive(MaxInclusive *MaxInclusive)
 	DeleteORMMinInclusive(MinInclusive *MinInclusive)
+	DeleteORMPattern(Pattern *Pattern)
 	DeleteORMRestriction(Restriction *Restriction)
 	DeleteORMSchema(Schema *Schema)
 	DeleteORMSequence(Sequence *Sequence)
@@ -843,6 +911,9 @@ func (stage *StageStruct) Reset() { // insertion point for array reset
 
 	stage.MinInclusives = make(map[*MinInclusive]any)
 	stage.MinInclusives_mapString = make(map[string]*MinInclusive)
+
+	stage.Patterns = make(map[*Pattern]any)
+	stage.Patterns_mapString = make(map[string]*Pattern)
 
 	stage.Restrictions = make(map[*Restriction]any)
 	stage.Restrictions_mapString = make(map[string]*Restriction)
@@ -873,6 +944,9 @@ func (stage *StageStruct) Nil() { // insertion point for array nil
 
 	stage.MinInclusives = nil
 	stage.MinInclusives_mapString = nil
+
+	stage.Patterns = nil
+	stage.Patterns_mapString = nil
 
 	stage.Restrictions = nil
 	stage.Restrictions_mapString = nil
@@ -907,6 +981,10 @@ func (stage *StageStruct) Unstage() { // insertion point for array nil
 
 	for mininclusive := range stage.MinInclusives {
 		mininclusive.Unstage(stage)
+	}
+
+	for pattern := range stage.Patterns {
+		pattern.Unstage(stage)
 	}
 
 	for restriction := range stage.Restrictions {
@@ -995,6 +1073,8 @@ func GongGetSet[Type GongstructSet](stage *StageStruct) *Type {
 		return any(&stage.MaxInclusives).(*Type)
 	case map[*MinInclusive]any:
 		return any(&stage.MinInclusives).(*Type)
+	case map[*Pattern]any:
+		return any(&stage.Patterns).(*Type)
 	case map[*Restriction]any:
 		return any(&stage.Restrictions).(*Type)
 	case map[*Schema]any:
@@ -1025,6 +1105,8 @@ func GongGetMap[Type GongstructMapString](stage *StageStruct) *Type {
 		return any(&stage.MaxInclusives_mapString).(*Type)
 	case map[string]*MinInclusive:
 		return any(&stage.MinInclusives_mapString).(*Type)
+	case map[string]*Pattern:
+		return any(&stage.Patterns_mapString).(*Type)
 	case map[string]*Restriction:
 		return any(&stage.Restrictions_mapString).(*Type)
 	case map[string]*Schema:
@@ -1055,6 +1137,8 @@ func GetGongstructInstancesSet[Type Gongstruct](stage *StageStruct) *map[*Type]a
 		return any(&stage.MaxInclusives).(*map[*Type]any)
 	case MinInclusive:
 		return any(&stage.MinInclusives).(*map[*Type]any)
+	case Pattern:
+		return any(&stage.Patterns).(*map[*Type]any)
 	case Restriction:
 		return any(&stage.Restrictions).(*map[*Type]any)
 	case Schema:
@@ -1085,6 +1169,8 @@ func GetGongstructInstancesSetFromPointerType[Type PointerToGongstruct](stage *S
 		return any(&stage.MaxInclusives).(*map[Type]any)
 	case *MinInclusive:
 		return any(&stage.MinInclusives).(*map[Type]any)
+	case *Pattern:
+		return any(&stage.Patterns).(*map[Type]any)
 	case *Restriction:
 		return any(&stage.Restrictions).(*map[Type]any)
 	case *Schema:
@@ -1115,6 +1201,8 @@ func GetGongstructInstancesMap[Type Gongstruct](stage *StageStruct) *map[string]
 		return any(&stage.MaxInclusives_mapString).(*map[string]*Type)
 	case MinInclusive:
 		return any(&stage.MinInclusives_mapString).(*map[string]*Type)
+	case Pattern:
+		return any(&stage.Patterns_mapString).(*map[string]*Type)
 	case Restriction:
 		return any(&stage.Restrictions_mapString).(*map[string]*Type)
 	case Schema:
@@ -1163,6 +1251,10 @@ func GetAssociationName[Type Gongstruct]() *Type {
 		return any(&MinInclusive{
 			// Initialisation of associations
 		}).(*Type)
+	case Pattern:
+		return any(&Pattern{
+			// Initialisation of associations
+		}).(*Type)
 	case Restriction:
 		return any(&Restriction{
 			// Initialisation of associations
@@ -1172,6 +1264,8 @@ func GetAssociationName[Type Gongstruct]() *Type {
 			MinInclusive: &MinInclusive{Name: "MinInclusive"},
 			// field is initialized with an instance of MaxInclusive with the name of the field
 			MaxInclusive: &MaxInclusive{Name: "MaxInclusive"},
+			// field is initialized with an instance of Pattern with the name of the field
+			Pattern: &Pattern{Name: "Pattern"},
 		}).(*Type)
 	case Schema:
 		return any(&Schema{
@@ -1289,6 +1383,11 @@ func GetPointerReverseMap[Start, End Gongstruct](fieldname string, stage *StageS
 		switch fieldname {
 		// insertion point for per direct association field
 		}
+	// reverse maps of direct associations of Pattern
+	case Pattern:
+		switch fieldname {
+		// insertion point for per direct association field
+		}
 	// reverse maps of direct associations of Restriction
 	case Restriction:
 		switch fieldname {
@@ -1324,6 +1423,23 @@ func GetPointerReverseMap[Start, End Gongstruct](fieldname string, stage *StageS
 					}
 					restrictions = append(restrictions, restriction)
 					res[maxinclusive_] = restrictions
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "Pattern":
+			res := make(map[*Pattern][]*Restriction)
+			for restriction := range stage.Restrictions {
+				if restriction.Pattern != nil {
+					pattern_ := restriction.Pattern
+					var restrictions []*Restriction
+					_, ok := res[pattern_]
+					if ok {
+						restrictions = res[pattern_]
+					} else {
+						restrictions = make([]*Restriction, 0)
+					}
+					restrictions = append(restrictions, restriction)
+					res[pattern_] = restrictions
 				}
 			}
 			return any(res).(map[*End][]*Start)
@@ -1398,6 +1514,11 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 		}
 	// reverse maps of direct associations of MinInclusive
 	case MinInclusive:
+		switch fieldname {
+		// insertion point for per direct association field
+		}
+	// reverse maps of direct associations of Pattern
+	case Pattern:
 		switch fieldname {
 		// insertion point for per direct association field
 		}
@@ -1483,6 +1604,8 @@ func GetGongstructName[Type Gongstruct]() (res string) {
 		res = "MaxInclusive"
 	case MinInclusive:
 		res = "MinInclusive"
+	case Pattern:
+		res = "Pattern"
 	case Restriction:
 		res = "Restriction"
 	case Schema:
@@ -1513,6 +1636,8 @@ func GetPointerToGongstructName[Type PointerToGongstruct]() (res string) {
 		res = "MaxInclusive"
 	case *MinInclusive:
 		res = "MinInclusive"
+	case *Pattern:
+		res = "Pattern"
 	case *Restriction:
 		res = "Restriction"
 	case *Schema:
@@ -1542,8 +1667,10 @@ func GetFields[Type Gongstruct]() (res []string) {
 		res = []string{"Name", "Value"}
 	case MinInclusive:
 		res = []string{"Name", "Value"}
+	case Pattern:
+		res = []string{"Name", "Value"}
 	case Restriction:
-		res = []string{"Name", "Base", "Enumerations", "MinInclusive", "MaxInclusive"}
+		res = []string{"Name", "Base", "Enumerations", "MinInclusive", "MaxInclusive", "Pattern"}
 	case Schema:
 		res = []string{"Name", "Elements", "SimpleTypes", "ComplexTypes"}
 	case Sequence:
@@ -1595,6 +1722,9 @@ func GetReverseFields[Type Gongstruct]() (res []ReverseField) {
 	case MinInclusive:
 		var rf ReverseField
 		_ = rf
+	case Pattern:
+		var rf ReverseField
+		_ = rf
 	case Restriction:
 		var rf ReverseField
 		_ = rf
@@ -1631,8 +1761,10 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 		res = []string{"Name", "Value"}
 	case *MinInclusive:
 		res = []string{"Name", "Value"}
+	case *Pattern:
+		res = []string{"Name", "Value"}
 	case *Restriction:
-		res = []string{"Name", "Base", "Enumerations", "MinInclusive", "MaxInclusive"}
+		res = []string{"Name", "Base", "Enumerations", "MinInclusive", "MaxInclusive", "Pattern"}
 	case *Schema:
 		res = []string{"Name", "Elements", "SimpleTypes", "ComplexTypes"}
 	case *Sequence:
@@ -1701,6 +1833,14 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		case "Value":
 			res = inferedInstance.Value
 		}
+	case *Pattern:
+		switch fieldName {
+		// string value of fields
+		case "Name":
+			res = inferedInstance.Name
+		case "Value":
+			res = inferedInstance.Value
+		}
 	case *Restriction:
 		switch fieldName {
 		// string value of fields
@@ -1722,6 +1862,10 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		case "MaxInclusive":
 			if inferedInstance.MaxInclusive != nil {
 				res = inferedInstance.MaxInclusive.Name
+			}
+		case "Pattern":
+			if inferedInstance.Pattern != nil {
+				res = inferedInstance.Pattern.Name
 			}
 		}
 	case *Schema:
@@ -1840,6 +1984,14 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		case "Value":
 			res = inferedInstance.Value
 		}
+	case Pattern:
+		switch fieldName {
+		// string value of fields
+		case "Name":
+			res = inferedInstance.Name
+		case "Value":
+			res = inferedInstance.Value
+		}
 	case Restriction:
 		switch fieldName {
 		// string value of fields
@@ -1861,6 +2013,10 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		case "MaxInclusive":
 			if inferedInstance.MaxInclusive != nil {
 				res = inferedInstance.MaxInclusive.Name
+			}
+		case "Pattern":
+			if inferedInstance.Pattern != nil {
+				res = inferedInstance.Pattern.Name
 			}
 		}
 	case Schema:

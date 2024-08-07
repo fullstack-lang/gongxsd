@@ -26,6 +26,10 @@ func AfterCreateFromFront[Type Gongstruct](stage *StageStruct, instance *Type) {
 		if stage.OnAfterMinInclusiveCreateCallback != nil {
 			stage.OnAfterMinInclusiveCreateCallback.OnAfterCreate(stage, target)
 		}
+	case *Pattern:
+		if stage.OnAfterPatternCreateCallback != nil {
+			stage.OnAfterPatternCreateCallback.OnAfterCreate(stage, target)
+		}
 	case *Restriction:
 		if stage.OnAfterRestrictionCreateCallback != nil {
 			stage.OnAfterRestrictionCreateCallback.OnAfterCreate(stage, target)
@@ -76,6 +80,11 @@ func AfterUpdateFromFront[Type Gongstruct](stage *StageStruct, old, new *Type) {
 		newTarget := any(new).(*MinInclusive)
 		if stage.OnAfterMinInclusiveUpdateCallback != nil {
 			stage.OnAfterMinInclusiveUpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
+		}
+	case *Pattern:
+		newTarget := any(new).(*Pattern)
+		if stage.OnAfterPatternUpdateCallback != nil {
+			stage.OnAfterPatternUpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
 		}
 	case *Restriction:
 		newTarget := any(new).(*Restriction)
@@ -132,6 +141,11 @@ func AfterDeleteFromFront[Type Gongstruct](stage *StageStruct, staged, front *Ty
 			staged := any(staged).(*MinInclusive)
 			stage.OnAfterMinInclusiveDeleteCallback.OnAfterDelete(stage, staged, front)
 		}
+	case *Pattern:
+		if stage.OnAfterPatternDeleteCallback != nil {
+			staged := any(staged).(*Pattern)
+			stage.OnAfterPatternDeleteCallback.OnAfterDelete(stage, staged, front)
+		}
 	case *Restriction:
 		if stage.OnAfterRestrictionDeleteCallback != nil {
 			staged := any(staged).(*Restriction)
@@ -182,6 +196,10 @@ func AfterReadFromFront[Type Gongstruct](stage *StageStruct, instance *Type) {
 		if stage.OnAfterMinInclusiveReadCallback != nil {
 			stage.OnAfterMinInclusiveReadCallback.OnAfterRead(stage, target)
 		}
+	case *Pattern:
+		if stage.OnAfterPatternReadCallback != nil {
+			stage.OnAfterPatternReadCallback.OnAfterRead(stage, target)
+		}
 	case *Restriction:
 		if stage.OnAfterRestrictionReadCallback != nil {
 			stage.OnAfterRestrictionReadCallback.OnAfterRead(stage, target)
@@ -224,6 +242,9 @@ func SetCallbackAfterUpdateFromFront[Type Gongstruct](stage *StageStruct, callba
 	case *MinInclusive:
 		stage.OnAfterMinInclusiveUpdateCallback = any(callback).(OnAfterUpdateInterface[MinInclusive])
 	
+	case *Pattern:
+		stage.OnAfterPatternUpdateCallback = any(callback).(OnAfterUpdateInterface[Pattern])
+	
 	case *Restriction:
 		stage.OnAfterRestrictionUpdateCallback = any(callback).(OnAfterUpdateInterface[Restriction])
 	
@@ -257,6 +278,9 @@ func SetCallbackAfterCreateFromFront[Type Gongstruct](stage *StageStruct, callba
 	
 	case *MinInclusive:
 		stage.OnAfterMinInclusiveCreateCallback = any(callback).(OnAfterCreateInterface[MinInclusive])
+	
+	case *Pattern:
+		stage.OnAfterPatternCreateCallback = any(callback).(OnAfterCreateInterface[Pattern])
 	
 	case *Restriction:
 		stage.OnAfterRestrictionCreateCallback = any(callback).(OnAfterCreateInterface[Restriction])
@@ -292,6 +316,9 @@ func SetCallbackAfterDeleteFromFront[Type Gongstruct](stage *StageStruct, callba
 	case *MinInclusive:
 		stage.OnAfterMinInclusiveDeleteCallback = any(callback).(OnAfterDeleteInterface[MinInclusive])
 	
+	case *Pattern:
+		stage.OnAfterPatternDeleteCallback = any(callback).(OnAfterDeleteInterface[Pattern])
+	
 	case *Restriction:
 		stage.OnAfterRestrictionDeleteCallback = any(callback).(OnAfterDeleteInterface[Restriction])
 	
@@ -325,6 +352,9 @@ func SetCallbackAfterReadFromFront[Type Gongstruct](stage *StageStruct, callback
 	
 	case *MinInclusive:
 		stage.OnAfterMinInclusiveReadCallback = any(callback).(OnAfterReadInterface[MinInclusive])
+	
+	case *Pattern:
+		stage.OnAfterPatternReadCallback = any(callback).(OnAfterReadInterface[Pattern])
 	
 	case *Restriction:
 		stage.OnAfterRestrictionReadCallback = any(callback).(OnAfterReadInterface[Restriction])
