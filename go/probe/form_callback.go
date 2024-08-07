@@ -18,23 +18,23 @@ var __dummmy__letters = slices.Delete([]string{"a"}, 0, 1)
 var __dummy_orm = orm.BackRepoStruct{}
 
 // insertion point
-func __gong__New__FooFormCallback(
-	foo *models.Foo,
+func __gong__New__SchemaFormCallback(
+	schema *models.Schema,
 	probe *Probe,
 	formGroup *table.FormGroup,
-) (fooFormCallback *FooFormCallback) {
-	fooFormCallback = new(FooFormCallback)
-	fooFormCallback.probe = probe
-	fooFormCallback.foo = foo
-	fooFormCallback.formGroup = formGroup
+) (schemaFormCallback *SchemaFormCallback) {
+	schemaFormCallback = new(SchemaFormCallback)
+	schemaFormCallback.probe = probe
+	schemaFormCallback.schema = schema
+	schemaFormCallback.formGroup = formGroup
 
-	fooFormCallback.CreationMode = (foo == nil)
+	schemaFormCallback.CreationMode = (schema == nil)
 
 	return
 }
 
-type FooFormCallback struct {
-	foo *models.Foo
+type SchemaFormCallback struct {
+	schema *models.Schema
 
 	// If the form call is called on the creation of a new instnace
 	CreationMode bool
@@ -44,54 +44,54 @@ type FooFormCallback struct {
 	formGroup *table.FormGroup
 }
 
-func (fooFormCallback *FooFormCallback) OnSave() {
+func (schemaFormCallback *SchemaFormCallback) OnSave() {
 
-	log.Println("FooFormCallback, OnSave")
+	log.Println("SchemaFormCallback, OnSave")
 
 	// checkout formStage to have the form group on the stage synchronized with the
 	// back repo (and front repo)
-	fooFormCallback.probe.formStage.Checkout()
+	schemaFormCallback.probe.formStage.Checkout()
 
-	if fooFormCallback.foo == nil {
-		fooFormCallback.foo = new(models.Foo).Stage(fooFormCallback.probe.stageOfInterest)
+	if schemaFormCallback.schema == nil {
+		schemaFormCallback.schema = new(models.Schema).Stage(schemaFormCallback.probe.stageOfInterest)
 	}
-	foo_ := fooFormCallback.foo
-	_ = foo_
+	schema_ := schemaFormCallback.schema
+	_ = schema_
 
-	for _, formDiv := range fooFormCallback.formGroup.FormDivs {
+	for _, formDiv := range schemaFormCallback.formGroup.FormDivs {
 		switch formDiv.Name {
 		// insertion point per field
 		case "Name":
-			FormDivBasicFieldToField(&(foo_.Name), formDiv)
+			FormDivBasicFieldToField(&(schema_.Name), formDiv)
 		}
 	}
 
 	// manage the suppress operation
-	if fooFormCallback.formGroup.HasSuppressButtonBeenPressed {
-		foo_.Unstage(fooFormCallback.probe.stageOfInterest)
+	if schemaFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		schema_.Unstage(schemaFormCallback.probe.stageOfInterest)
 	}
 
-	fooFormCallback.probe.stageOfInterest.Commit()
-	fillUpTable[models.Foo](
-		fooFormCallback.probe,
+	schemaFormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.Schema](
+		schemaFormCallback.probe,
 	)
-	fooFormCallback.probe.tableStage.Commit()
+	schemaFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
-	if fooFormCallback.CreationMode || fooFormCallback.formGroup.HasSuppressButtonBeenPressed {
-		fooFormCallback.probe.formStage.Reset()
+	if schemaFormCallback.CreationMode || schemaFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		schemaFormCallback.probe.formStage.Reset()
 		newFormGroup := (&table.FormGroup{
 			Name: table.FormGroupDefaultName.ToString(),
-		}).Stage(fooFormCallback.probe.formStage)
-		newFormGroup.OnSave = __gong__New__FooFormCallback(
+		}).Stage(schemaFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__SchemaFormCallback(
 			nil,
-			fooFormCallback.probe,
+			schemaFormCallback.probe,
 			newFormGroup,
 		)
-		foo := new(models.Foo)
-		FillUpForm(foo, newFormGroup, fooFormCallback.probe)
-		fooFormCallback.probe.formStage.Commit()
+		schema := new(models.Schema)
+		FillUpForm(schema, newFormGroup, schemaFormCallback.probe)
+		schemaFormCallback.probe.formStage.Commit()
 	}
 
-	fillUpTree(fooFormCallback.probe)
+	fillUpTree(schemaFormCallback.probe)
 }

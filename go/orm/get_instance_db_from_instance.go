@@ -15,9 +15,9 @@ func GetInstanceDBFromInstance[T models.Gongstruct, T2 GongstructDB](
 
 	switch concreteInstance := any(instance).(type) {
 	// insertion point for per struct backup
-	case *models.Foo:
-		fooInstance := any(concreteInstance).(*models.Foo)
-		ret2 := backRepo.BackRepoFoo.GetFooDBFromFooPtr(fooInstance)
+	case *models.Schema:
+		schemaInstance := any(concreteInstance).(*models.Schema)
+		ret2 := backRepo.BackRepoSchema.GetSchemaDBFromSchemaPtr(schemaInstance)
 		ret = any(ret2).(*T2)
 	default:
 		_ = concreteInstance
@@ -32,8 +32,8 @@ func GetID[T models.Gongstruct](
 
 	switch inst := any(instance).(type) {
 	// insertion point for per struct backup
-	case *models.Foo:
-		tmp := GetInstanceDBFromInstance[models.Foo, FooDB](
+	case *models.Schema:
+		tmp := GetInstanceDBFromInstance[models.Schema, SchemaDB](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)
@@ -50,8 +50,8 @@ func GetIDPointer[T models.PointerToGongstruct](
 
 	switch inst := any(instance).(type) {
 	// insertion point for per struct backup
-	case *models.Foo:
-		tmp := GetInstanceDBFromInstance[models.Foo, FooDB](
+	case *models.Schema:
+		tmp := GetInstanceDBFromInstance[models.Schema, SchemaDB](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)

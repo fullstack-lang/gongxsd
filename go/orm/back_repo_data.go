@@ -4,19 +4,19 @@ package orm
 type BackRepoData struct {
 	// insertion point for slices
 
-	FooAPIs []*FooAPI
+	SchemaAPIs []*SchemaAPI
 }
 
 func CopyBackRepoToBackRepoData(backRepo *BackRepoStruct, backRepoData *BackRepoData) {
 	// insertion point for slices copies
-	for _, fooDB := range backRepo.BackRepoFoo.Map_FooDBID_FooDB {
+	for _, schemaDB := range backRepo.BackRepoSchema.Map_SchemaDBID_SchemaDB {
 
-		var fooAPI FooAPI
-		fooAPI.ID = fooDB.ID
-		fooAPI.FooPointersEncoding = fooDB.FooPointersEncoding
-		fooDB.CopyBasicFieldsToFoo_WOP(&fooAPI.Foo_WOP)
+		var schemaAPI SchemaAPI
+		schemaAPI.ID = schemaDB.ID
+		schemaAPI.SchemaPointersEncoding = schemaDB.SchemaPointersEncoding
+		schemaDB.CopyBasicFieldsToSchema_WOP(&schemaAPI.Schema_WOP)
 
-		backRepoData.FooAPIs = append(backRepoData.FooAPIs, &fooAPI)
+		backRepoData.SchemaAPIs = append(backRepoData.SchemaAPIs, &schemaAPI)
 	}
 
 }

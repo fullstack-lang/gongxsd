@@ -49,14 +49,14 @@ type StageStruct struct {
 	path string
 
 	// insertion point for definition of arrays registering instances
-	Foos           map[*Foo]any
-	Foos_mapString map[string]*Foo
+	Schemas           map[*Schema]any
+	Schemas_mapString map[string]*Schema
 
 	// insertion point for slice of pointers maps
-	OnAfterFooCreateCallback OnAfterCreateInterface[Foo]
-	OnAfterFooUpdateCallback OnAfterUpdateInterface[Foo]
-	OnAfterFooDeleteCallback OnAfterDeleteInterface[Foo]
-	OnAfterFooReadCallback   OnAfterReadInterface[Foo]
+	OnAfterSchemaCreateCallback OnAfterCreateInterface[Schema]
+	OnAfterSchemaUpdateCallback OnAfterUpdateInterface[Schema]
+	OnAfterSchemaDeleteCallback OnAfterDeleteInterface[Schema]
+	OnAfterSchemaReadCallback   OnAfterReadInterface[Schema]
 
 	AllModelsStructCreateCallback AllModelsStructCreateInterface
 
@@ -126,8 +126,8 @@ type BackRepoInterface interface {
 	BackupXL(stage *StageStruct, dirPath string)
 	RestoreXL(stage *StageStruct, dirPath string)
 	// insertion point for Commit and Checkout signatures
-	CommitFoo(foo *Foo)
-	CheckoutFoo(foo *Foo)
+	CommitSchema(schema *Schema)
+	CheckoutSchema(schema *Schema)
 	GetLastCommitFromBackNb() uint
 	GetLastPushFromFrontNb() uint
 }
@@ -135,8 +135,8 @@ type BackRepoInterface interface {
 func NewStage(path string) (stage *StageStruct) {
 
 	stage = &StageStruct{ // insertion point for array initiatialisation
-		Foos:           make(map[*Foo]any),
-		Foos_mapString: make(map[string]*Foo),
+		Schemas:           make(map[*Schema]any),
+		Schemas_mapString: make(map[string]*Schema),
 
 		// end of insertion point
 		Map_GongStructName_InstancesNb: make(map[string]int),
@@ -171,7 +171,7 @@ func (stage *StageStruct) Commit() {
 	}
 
 	// insertion point for computing the map of number of instances per gongstruct
-	stage.Map_GongStructName_InstancesNb["Foo"] = len(stage.Foos)
+	stage.Map_GongStructName_InstancesNb["Schema"] = len(stage.Schemas)
 
 }
 
@@ -182,7 +182,7 @@ func (stage *StageStruct) Checkout() {
 
 	stage.ComputeReverseMaps()
 	// insertion point for computing the map of number of instances per gongstruct
-	stage.Map_GongStructName_InstancesNb["Foo"] = len(stage.Foos)
+	stage.Map_GongStructName_InstancesNb["Schema"] = len(stage.Schemas)
 
 }
 
@@ -215,80 +215,80 @@ func (stage *StageStruct) RestoreXL(dirPath string) {
 }
 
 // insertion point for cumulative sub template with model space calls
-// Stage puts foo to the model stage
-func (foo *Foo) Stage(stage *StageStruct) *Foo {
-	stage.Foos[foo] = __member
-	stage.Foos_mapString[foo.Name] = foo
+// Stage puts schema to the model stage
+func (schema *Schema) Stage(stage *StageStruct) *Schema {
+	stage.Schemas[schema] = __member
+	stage.Schemas_mapString[schema.Name] = schema
 
-	return foo
+	return schema
 }
 
-// Unstage removes foo off the model stage
-func (foo *Foo) Unstage(stage *StageStruct) *Foo {
-	delete(stage.Foos, foo)
-	delete(stage.Foos_mapString, foo.Name)
-	return foo
+// Unstage removes schema off the model stage
+func (schema *Schema) Unstage(stage *StageStruct) *Schema {
+	delete(stage.Schemas, schema)
+	delete(stage.Schemas_mapString, schema.Name)
+	return schema
 }
 
-// UnstageVoid removes foo off the model stage
-func (foo *Foo) UnstageVoid(stage *StageStruct) {
-	delete(stage.Foos, foo)
-	delete(stage.Foos_mapString, foo.Name)
+// UnstageVoid removes schema off the model stage
+func (schema *Schema) UnstageVoid(stage *StageStruct) {
+	delete(stage.Schemas, schema)
+	delete(stage.Schemas_mapString, schema.Name)
 }
 
-// commit foo to the back repo (if it is already staged)
-func (foo *Foo) Commit(stage *StageStruct) *Foo {
-	if _, ok := stage.Foos[foo]; ok {
+// commit schema to the back repo (if it is already staged)
+func (schema *Schema) Commit(stage *StageStruct) *Schema {
+	if _, ok := stage.Schemas[schema]; ok {
 		if stage.BackRepo != nil {
-			stage.BackRepo.CommitFoo(foo)
+			stage.BackRepo.CommitSchema(schema)
 		}
 	}
-	return foo
+	return schema
 }
 
-func (foo *Foo) CommitVoid(stage *StageStruct) {
-	foo.Commit(stage)
+func (schema *Schema) CommitVoid(stage *StageStruct) {
+	schema.Commit(stage)
 }
 
-// Checkout foo to the back repo (if it is already staged)
-func (foo *Foo) Checkout(stage *StageStruct) *Foo {
-	if _, ok := stage.Foos[foo]; ok {
+// Checkout schema to the back repo (if it is already staged)
+func (schema *Schema) Checkout(stage *StageStruct) *Schema {
+	if _, ok := stage.Schemas[schema]; ok {
 		if stage.BackRepo != nil {
-			stage.BackRepo.CheckoutFoo(foo)
+			stage.BackRepo.CheckoutSchema(schema)
 		}
 	}
-	return foo
+	return schema
 }
 
 // for satisfaction of GongStruct interface
-func (foo *Foo) GetName() (res string) {
-	return foo.Name
+func (schema *Schema) GetName() (res string) {
+	return schema.Name
 }
 
 // swagger:ignore
 type AllModelsStructCreateInterface interface { // insertion point for Callbacks on creation
-	CreateORMFoo(Foo *Foo)
+	CreateORMSchema(Schema *Schema)
 }
 
 type AllModelsStructDeleteInterface interface { // insertion point for Callbacks on deletion
-	DeleteORMFoo(Foo *Foo)
+	DeleteORMSchema(Schema *Schema)
 }
 
 func (stage *StageStruct) Reset() { // insertion point for array reset
-	stage.Foos = make(map[*Foo]any)
-	stage.Foos_mapString = make(map[string]*Foo)
+	stage.Schemas = make(map[*Schema]any)
+	stage.Schemas_mapString = make(map[string]*Schema)
 
 }
 
 func (stage *StageStruct) Nil() { // insertion point for array nil
-	stage.Foos = nil
-	stage.Foos_mapString = nil
+	stage.Schemas = nil
+	stage.Schemas_mapString = nil
 
 }
 
 func (stage *StageStruct) Unstage() { // insertion point for array nil
-	for foo := range stage.Foos {
-		foo.Unstage(stage)
+	for schema := range stage.Schemas {
+		schema.Unstage(stage)
 	}
 
 }
@@ -351,8 +351,8 @@ func GongGetSet[Type GongstructSet](stage *StageStruct) *Type {
 
 	switch any(ret).(type) {
 	// insertion point for generic get functions
-	case map[*Foo]any:
-		return any(&stage.Foos).(*Type)
+	case map[*Schema]any:
+		return any(&stage.Schemas).(*Type)
 	default:
 		return nil
 	}
@@ -365,8 +365,8 @@ func GongGetMap[Type GongstructMapString](stage *StageStruct) *Type {
 
 	switch any(ret).(type) {
 	// insertion point for generic get functions
-	case map[string]*Foo:
-		return any(&stage.Foos_mapString).(*Type)
+	case map[string]*Schema:
+		return any(&stage.Schemas_mapString).(*Type)
 	default:
 		return nil
 	}
@@ -379,8 +379,8 @@ func GetGongstructInstancesSet[Type Gongstruct](stage *StageStruct) *map[*Type]a
 
 	switch any(ret).(type) {
 	// insertion point for generic get functions
-	case Foo:
-		return any(&stage.Foos).(*map[*Type]any)
+	case Schema:
+		return any(&stage.Schemas).(*map[*Type]any)
 	default:
 		return nil
 	}
@@ -393,8 +393,8 @@ func GetGongstructInstancesSetFromPointerType[Type PointerToGongstruct](stage *S
 
 	switch any(ret).(type) {
 	// insertion point for generic get functions
-	case *Foo:
-		return any(&stage.Foos).(*map[Type]any)
+	case *Schema:
+		return any(&stage.Schemas).(*map[Type]any)
 	default:
 		return nil
 	}
@@ -407,8 +407,8 @@ func GetGongstructInstancesMap[Type Gongstruct](stage *StageStruct) *map[string]
 
 	switch any(ret).(type) {
 	// insertion point for generic get functions
-	case Foo:
-		return any(&stage.Foos_mapString).(*map[string]*Type)
+	case Schema:
+		return any(&stage.Schemas_mapString).(*map[string]*Type)
 	default:
 		return nil
 	}
@@ -423,8 +423,8 @@ func GetAssociationName[Type Gongstruct]() *Type {
 
 	switch any(ret).(type) {
 	// insertion point for instance with special fields
-	case Foo:
-		return any(&Foo{
+	case Schema:
+		return any(&Schema{
 			// Initialisation of associations
 		}).(*Type)
 	default:
@@ -445,8 +445,8 @@ func GetPointerReverseMap[Start, End Gongstruct](fieldname string, stage *StageS
 
 	switch any(ret).(type) {
 	// insertion point of functions that provide maps for reverse associations
-	// reverse maps of direct associations of Foo
-	case Foo:
+	// reverse maps of direct associations of Schema
+	case Schema:
 		switch fieldname {
 		// insertion point for per direct association field
 		}
@@ -466,8 +466,8 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 
 	switch any(ret).(type) {
 	// insertion point of functions that provide maps for reverse associations
-	// reverse maps of direct associations of Foo
-	case Foo:
+	// reverse maps of direct associations of Schema
+	case Schema:
 		switch fieldname {
 		// insertion point for per direct association field
 		}
@@ -483,8 +483,8 @@ func GetGongstructName[Type Gongstruct]() (res string) {
 
 	switch any(ret).(type) {
 	// insertion point for generic get gongstruct name
-	case Foo:
-		res = "Foo"
+	case Schema:
+		res = "Schema"
 	}
 	return res
 }
@@ -497,8 +497,8 @@ func GetPointerToGongstructName[Type PointerToGongstruct]() (res string) {
 
 	switch any(ret).(type) {
 	// insertion point for generic get gongstruct name
-	case *Foo:
-		res = "Foo"
+	case *Schema:
+		res = "Schema"
 	}
 	return res
 }
@@ -510,7 +510,7 @@ func GetFields[Type Gongstruct]() (res []string) {
 
 	switch any(ret).(type) {
 	// insertion point for generic get gongstruct name
-	case Foo:
+	case Schema:
 		res = []string{"Name"}
 	}
 	return
@@ -530,7 +530,7 @@ func GetReverseFields[Type Gongstruct]() (res []ReverseField) {
 	switch any(ret).(type) {
 
 	// insertion point for generic get gongstruct name
-	case Foo:
+	case Schema:
 		var rf ReverseField
 		_ = rf
 	}
@@ -544,7 +544,7 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 
 	switch any(ret).(type) {
 	// insertion point for generic get gongstruct name
-	case *Foo:
+	case *Schema:
 		res = []string{"Name"}
 	}
 	return
@@ -554,7 +554,7 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 
 	switch inferedInstance := any(instance).(type) {
 	// insertion point for generic get gongstruct field value
-	case *Foo:
+	case *Schema:
 		switch fieldName {
 		// string value of fields
 		case "Name":
@@ -570,7 +570,7 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 
 	switch inferedInstance := any(instance).(type) {
 	// insertion point for generic get gongstruct field value
-	case Foo:
+	case Schema:
 		switch fieldName {
 		// string value of fields
 		case "Name":

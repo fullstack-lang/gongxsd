@@ -1,5 +1,5 @@
 package models
 
-type Foo struct {
+type Schema struct {
 	Name string
 }

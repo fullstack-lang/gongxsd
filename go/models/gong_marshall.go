@@ -94,28 +94,28 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 	_ = setValueField
 
 	// insertion initialization of objects to stage
-	map_Foo_Identifiers := make(map[*Foo]string)
-	_ = map_Foo_Identifiers
+	map_Schema_Identifiers := make(map[*Schema]string)
+	_ = map_Schema_Identifiers
 
-	fooOrdered := []*Foo{}
-	for foo := range stage.Foos {
-		fooOrdered = append(fooOrdered, foo)
+	schemaOrdered := []*Schema{}
+	for schema := range stage.Schemas {
+		schemaOrdered = append(schemaOrdered, schema)
 	}
-	sort.Slice(fooOrdered[:], func(i, j int) bool {
-		return fooOrdered[i].Name < fooOrdered[j].Name
+	sort.Slice(schemaOrdered[:], func(i, j int) bool {
+		return schemaOrdered[i].Name < schemaOrdered[j].Name
 	})
-	if len(fooOrdered) > 0 {
+	if len(schemaOrdered) > 0 {
 		identifiersDecl += "\n"
 	}
-	for idx, foo := range fooOrdered {
+	for idx, schema := range schemaOrdered {
 
-		id = generatesIdentifier("Foo", idx, foo.Name)
-		map_Foo_Identifiers[foo] = id
+		id = generatesIdentifier("Schema", idx, schema.Name)
+		map_Schema_Identifiers[schema] = id
 
 		decl = IdentifiersDecls
 		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
-		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "Foo")
-		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", foo.Name)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "Schema")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", schema.Name)
 		identifiersDecl += decl
 
 		initializerStatements += "\n"
@@ -123,18 +123,18 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		setValueField = StringInitStatement
 		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
 		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(foo.Name))
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(schema.Name))
 		initializerStatements += setValueField
 
 	}
 
 	// insertion initialization of objects to stage
-	for idx, foo := range fooOrdered {
+	for idx, schema := range schemaOrdered {
 		var setPointerField string
 		_ = setPointerField
 
-		id = generatesIdentifier("Foo", idx, foo.Name)
-		map_Foo_Identifiers[foo] = id
+		id = generatesIdentifier("Schema", idx, schema.Name)
+		map_Schema_Identifiers[schema] = id
 
 		// Initialisation of values
 	}

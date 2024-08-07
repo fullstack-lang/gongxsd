@@ -4,6 +4,7 @@ Copyright © 2024 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
+	"encoding/xml"
 	"fmt"
 	"log"
 	"os"
@@ -34,7 +35,13 @@ var readCmd = &cobra.Command{
 			os.Exit(1)
 		}
 
-		_ = content
+		var xsd Schema
+		err = xml.Unmarshal(content, &xsd)
+		if err != nil {
+			fmt.Printf("Error parsing XML: %v\n", err)
+			os.Exit(1)
+		}
+
 		fmt.Println("XSD File Content:")
 		// fmt.Println(string(content))
 
@@ -48,4 +55,40 @@ var readCmd = &cobra.Command{
 			log.Fatalln(err.Error())
 		}
 	},
+}
+
+type Schema struct {
+	Elements     []*Element     `xml:"element"`
+	SimpleTypes  []*SimpleType  `xml:"simpleType"`
+	ComplexTypes []*ComplexType `xml:"complexType"`
+}
+
+type Element struct {
+	Name        string       `xml:"name,attr"`
+	Type        string       `xml:"type,attr"`
+	SimpleType  *SimpleType  `xml:"simpleType"`
+	ComplexType *ComplexType `xml:"complexType"`
+}
+
+type SimpleType struct {
+	Name        string       `xml:"name,attr"`
+	Restriction *Restriction `xml:"restriction"`
+}
+
+type Restriction struct {
+	Base         string         `xml:"base,attr"`
+	Enumerations []*Enumeration `xml:"enumeration"`
+}
+
+type Enumeration struct {
+	Value string `xml:"value,attr"`
+}
+
+type ComplexType struct {
+	Name     string    `xml:"name,attr"`
+	Sequence *Sequence `xml:"sequence"`
+}
+
+type Sequence struct {
+	Elements []*Element `xml:"element"`
 }

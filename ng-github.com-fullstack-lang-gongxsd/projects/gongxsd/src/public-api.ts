@@ -13,8 +13,4 @@ export * from './lib/back-repo-data'
 export * from './lib/web-socket-service'
 
 
-export * from './lib/foo-api'
-export * from './lib/foo'
-export * from './lib/foo.service'
-
 

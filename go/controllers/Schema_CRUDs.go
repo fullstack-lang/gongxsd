@@ -14,16 +14,16 @@ import (
 )
 
 // declaration in order to justify use of the models import
-var __Foo__dummysDeclaration__ models.Foo
-var __Foo_time__dummyDeclaration time.Duration
+var __Schema__dummysDeclaration__ models.Schema
+var __Schema_time__dummyDeclaration time.Duration
 
-var mutexFoo sync.Mutex
+var mutexSchema sync.Mutex
 
-// An FooID parameter model.
+// An SchemaID parameter model.
 //
 // This is used for operations that want the ID of an order in the path
-// swagger:parameters getFoo updateFoo deleteFoo
-type FooID struct {
+// swagger:parameters getSchema updateSchema deleteSchema
+type SchemaID struct {
 	// The ID of the order
 	//
 	// in: path
@@ -31,29 +31,29 @@ type FooID struct {
 	ID int64
 }
 
-// FooInput is a schema that can validate the user’s
+// SchemaInput is a schema that can validate the user’s
 // input to prevent us from getting invalid data
-// swagger:parameters postFoo updateFoo
-type FooInput struct {
-	// The Foo to submit or modify
+// swagger:parameters postSchema updateSchema
+type SchemaInput struct {
+	// The Schema to submit or modify
 	// in: body
-	Foo *orm.FooAPI
+	Schema *orm.SchemaAPI
 }
 
-// GetFoos
+// GetSchemas
 //
-// swagger:route GET /foos foos getFoos
+// swagger:route GET /schemas schemas getSchemas
 //
-// # Get all foos
+// # Get all schemas
 //
 // Responses:
 // default: genericError
 //
-//	200: fooDBResponse
-func (controller *Controller) GetFoos(c *gin.Context) {
+//	200: schemaDBResponse
+func (controller *Controller) GetSchemas(c *gin.Context) {
 
 	// source slice
-	var fooDBs []orm.FooDB
+	var schemaDBs []orm.SchemaDB
 
 	_values := c.Request.URL.Query()
 	stackPath := ""
@@ -61,16 +61,16 @@ func (controller *Controller) GetFoos(c *gin.Context) {
 		value := _values["GONG__StackPath"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("GetFoos", "GONG__StackPath", stackPath)
+			// log.Println("GetSchemas", "GONG__StackPath", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
 		log.Panic("Stack github.com/fullstack-lang/gongxsd/go/models, Unkown stack", stackPath)
 	}
-	db := backRepo.BackRepoFoo.GetDB()
+	db := backRepo.BackRepoSchema.GetDB()
 
-	query := db.Find(&fooDBs)
+	query := db.Find(&schemaDBs)
 	if query.Error != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
@@ -81,29 +81,29 @@ func (controller *Controller) GetFoos(c *gin.Context) {
 	}
 
 	// slice that will be transmitted to the front
-	fooAPIs := make([]orm.FooAPI, 0)
+	schemaAPIs := make([]orm.SchemaAPI, 0)
 
-	// for each foo, update fields from the database nullable fields
-	for idx := range fooDBs {
-		fooDB := &fooDBs[idx]
-		_ = fooDB
-		var fooAPI orm.FooAPI
+	// for each schema, update fields from the database nullable fields
+	for idx := range schemaDBs {
+		schemaDB := &schemaDBs[idx]
+		_ = schemaDB
+		var schemaAPI orm.SchemaAPI
 
 		// insertion point for updating fields
-		fooAPI.ID = fooDB.ID
-		fooDB.CopyBasicFieldsToFoo_WOP(&fooAPI.Foo_WOP)
-		fooAPI.FooPointersEncoding = fooDB.FooPointersEncoding
-		fooAPIs = append(fooAPIs, fooAPI)
+		schemaAPI.ID = schemaDB.ID
+		schemaDB.CopyBasicFieldsToSchema_WOP(&schemaAPI.Schema_WOP)
+		schemaAPI.SchemaPointersEncoding = schemaDB.SchemaPointersEncoding
+		schemaAPIs = append(schemaAPIs, schemaAPI)
 	}
 
-	c.JSON(http.StatusOK, fooAPIs)
+	c.JSON(http.StatusOK, schemaAPIs)
 }
 
-// PostFoo
+// PostSchema
 //
-// swagger:route POST /foos foos postFoo
+// swagger:route POST /schemas schemas postSchema
 //
-// Creates a foo
+// Creates a schema
 //
 //	Consumes:
 //	- application/json
@@ -113,10 +113,10 @@ func (controller *Controller) GetFoos(c *gin.Context) {
 //
 //	Responses:
 //	  200: nodeDBResponse
-func (controller *Controller) PostFoo(c *gin.Context) {
+func (controller *Controller) PostSchema(c *gin.Context) {
 
-	mutexFoo.Lock()
-	defer mutexFoo.Unlock()
+	mutexSchema.Lock()
+	defer mutexSchema.Unlock()
 
 	_values := c.Request.URL.Query()
 	stackPath := ""
@@ -124,17 +124,17 @@ func (controller *Controller) PostFoo(c *gin.Context) {
 		value := _values["GONG__StackPath"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("PostFoos", "GONG__StackPath", stackPath)
+			// log.Println("PostSchemas", "GONG__StackPath", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
 		log.Panic("Stack github.com/fullstack-lang/gongxsd/go/models, Unkown stack", stackPath)
 	}
-	db := backRepo.BackRepoFoo.GetDB()
+	db := backRepo.BackRepoSchema.GetDB()
 
 	// Validate input
-	var input orm.FooAPI
+	var input orm.SchemaAPI
 
 	err := c.ShouldBindJSON(&input)
 	if err != nil {
@@ -146,12 +146,12 @@ func (controller *Controller) PostFoo(c *gin.Context) {
 		return
 	}
 
-	// Create foo
-	fooDB := orm.FooDB{}
-	fooDB.FooPointersEncoding = input.FooPointersEncoding
-	fooDB.CopyBasicFieldsFromFoo_WOP(&input.Foo_WOP)
+	// Create schema
+	schemaDB := orm.SchemaDB{}
+	schemaDB.SchemaPointersEncoding = input.SchemaPointersEncoding
+	schemaDB.CopyBasicFieldsFromSchema_WOP(&input.Schema_WOP)
 
-	query := db.Create(&fooDB)
+	query := db.Create(&schemaDB)
 	if query.Error != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
@@ -162,31 +162,31 @@ func (controller *Controller) PostFoo(c *gin.Context) {
 	}
 
 	// get an instance (not staged) from DB instance, and call callback function
-	backRepo.BackRepoFoo.CheckoutPhaseOneInstance(&fooDB)
-	foo := backRepo.BackRepoFoo.Map_FooDBID_FooPtr[fooDB.ID]
+	backRepo.BackRepoSchema.CheckoutPhaseOneInstance(&schemaDB)
+	schema := backRepo.BackRepoSchema.Map_SchemaDBID_SchemaPtr[schemaDB.ID]
 
-	if foo != nil {
-		models.AfterCreateFromFront(backRepo.GetStage(), foo)
+	if schema != nil {
+		models.AfterCreateFromFront(backRepo.GetStage(), schema)
 	}
 
 	// a POST is equivalent to a back repo commit increase
 	// (this will be improved with implementation of unit of work design pattern)
 	backRepo.IncrementPushFromFrontNb()
 
-	c.JSON(http.StatusOK, fooDB)
+	c.JSON(http.StatusOK, schemaDB)
 }
 
-// GetFoo
+// GetSchema
 //
-// swagger:route GET /foos/{ID} foos getFoo
+// swagger:route GET /schemas/{ID} schemas getSchema
 //
-// Gets the details for a foo.
+// Gets the details for a schema.
 //
 // Responses:
 // default: genericError
 //
-//	200: fooDBResponse
-func (controller *Controller) GetFoo(c *gin.Context) {
+//	200: schemaDBResponse
+func (controller *Controller) GetSchema(c *gin.Context) {
 
 	_values := c.Request.URL.Query()
 	stackPath := ""
@@ -194,18 +194,18 @@ func (controller *Controller) GetFoo(c *gin.Context) {
 		value := _values["GONG__StackPath"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("GetFoo", "GONG__StackPath", stackPath)
+			// log.Println("GetSchema", "GONG__StackPath", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
 		log.Panic("Stack github.com/fullstack-lang/gongxsd/go/models, Unkown stack", stackPath)
 	}
-	db := backRepo.BackRepoFoo.GetDB()
+	db := backRepo.BackRepoSchema.GetDB()
 
-	// Get fooDB in DB
-	var fooDB orm.FooDB
-	if err := db.First(&fooDB, c.Param("id")).Error; err != nil {
+	// Get schemaDB in DB
+	var schemaDB orm.SchemaDB
+	if err := db.First(&schemaDB, c.Param("id")).Error; err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -214,28 +214,28 @@ func (controller *Controller) GetFoo(c *gin.Context) {
 		return
 	}
 
-	var fooAPI orm.FooAPI
-	fooAPI.ID = fooDB.ID
-	fooAPI.FooPointersEncoding = fooDB.FooPointersEncoding
-	fooDB.CopyBasicFieldsToFoo_WOP(&fooAPI.Foo_WOP)
+	var schemaAPI orm.SchemaAPI
+	schemaAPI.ID = schemaDB.ID
+	schemaAPI.SchemaPointersEncoding = schemaDB.SchemaPointersEncoding
+	schemaDB.CopyBasicFieldsToSchema_WOP(&schemaAPI.Schema_WOP)
 
-	c.JSON(http.StatusOK, fooAPI)
+	c.JSON(http.StatusOK, schemaAPI)
 }
 
-// UpdateFoo
+// UpdateSchema
 //
-// swagger:route PATCH /foos/{ID} foos updateFoo
+// swagger:route PATCH /schemas/{ID} schemas updateSchema
 //
-// # Update a foo
+// # Update a schema
 //
 // Responses:
 // default: genericError
 //
-//	200: fooDBResponse
-func (controller *Controller) UpdateFoo(c *gin.Context) {
+//	200: schemaDBResponse
+func (controller *Controller) UpdateSchema(c *gin.Context) {
 
-	mutexFoo.Lock()
-	defer mutexFoo.Unlock()
+	mutexSchema.Lock()
+	defer mutexSchema.Unlock()
 
 	_values := c.Request.URL.Query()
 	stackPath := ""
@@ -243,17 +243,17 @@ func (controller *Controller) UpdateFoo(c *gin.Context) {
 		value := _values["GONG__StackPath"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("UpdateFoo", "GONG__StackPath", stackPath)
+			// log.Println("UpdateSchema", "GONG__StackPath", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
 		log.Panic("Stack github.com/fullstack-lang/gongxsd/go/models, Unkown stack", stackPath)
 	}
-	db := backRepo.BackRepoFoo.GetDB()
+	db := backRepo.BackRepoSchema.GetDB()
 
 	// Validate input
-	var input orm.FooAPI
+	var input orm.SchemaAPI
 	if err := c.ShouldBindJSON(&input); err != nil {
 		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -261,10 +261,10 @@ func (controller *Controller) UpdateFoo(c *gin.Context) {
 	}
 
 	// Get model if exist
-	var fooDB orm.FooDB
+	var schemaDB orm.SchemaDB
 
-	// fetch the foo
-	query := db.First(&fooDB, c.Param("id"))
+	// fetch the schema
+	query := db.First(&schemaDB, c.Param("id"))
 
 	if query.Error != nil {
 		var returnError GenericError
@@ -276,10 +276,10 @@ func (controller *Controller) UpdateFoo(c *gin.Context) {
 	}
 
 	// update
-	fooDB.CopyBasicFieldsFromFoo_WOP(&input.Foo_WOP)
-	fooDB.FooPointersEncoding = input.FooPointersEncoding
+	schemaDB.CopyBasicFieldsFromSchema_WOP(&input.Schema_WOP)
+	schemaDB.SchemaPointersEncoding = input.SchemaPointersEncoding
 
-	query = db.Model(&fooDB).Updates(fooDB)
+	query = db.Model(&schemaDB).Updates(schemaDB)
 	if query.Error != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
@@ -290,16 +290,16 @@ func (controller *Controller) UpdateFoo(c *gin.Context) {
 	}
 
 	// get an instance (not staged) from DB instance, and call callback function
-	fooNew := new(models.Foo)
-	fooDB.CopyBasicFieldsToFoo(fooNew)
+	schemaNew := new(models.Schema)
+	schemaDB.CopyBasicFieldsToSchema(schemaNew)
 
 	// redeem pointers
-	fooDB.DecodePointers(backRepo, fooNew)
+	schemaDB.DecodePointers(backRepo, schemaNew)
 
 	// get stage instance from DB instance, and call callback function
-	fooOld := backRepo.BackRepoFoo.Map_FooDBID_FooPtr[fooDB.ID]
-	if fooOld != nil {
-		models.AfterUpdateFromFront(backRepo.GetStage(), fooOld, fooNew)
+	schemaOld := backRepo.BackRepoSchema.Map_SchemaDBID_SchemaPtr[schemaDB.ID]
+	if schemaOld != nil {
+		models.AfterUpdateFromFront(backRepo.GetStage(), schemaOld, schemaNew)
 	}
 
 	// an UPDATE generates a back repo commit increase
@@ -308,23 +308,23 @@ func (controller *Controller) UpdateFoo(c *gin.Context) {
 	// generates a checkout
 	backRepo.IncrementPushFromFrontNb()
 
-	// return status OK with the marshalling of the the fooDB
-	c.JSON(http.StatusOK, fooDB)
+	// return status OK with the marshalling of the the schemaDB
+	c.JSON(http.StatusOK, schemaDB)
 }
 
-// DeleteFoo
+// DeleteSchema
 //
-// swagger:route DELETE /foos/{ID} foos deleteFoo
+// swagger:route DELETE /schemas/{ID} schemas deleteSchema
 //
-// # Delete a foo
+// # Delete a schema
 //
 // default: genericError
 //
-//	200: fooDBResponse
-func (controller *Controller) DeleteFoo(c *gin.Context) {
+//	200: schemaDBResponse
+func (controller *Controller) DeleteSchema(c *gin.Context) {
 
-	mutexFoo.Lock()
-	defer mutexFoo.Unlock()
+	mutexSchema.Lock()
+	defer mutexSchema.Unlock()
 
 	_values := c.Request.URL.Query()
 	stackPath := ""
@@ -332,18 +332,18 @@ func (controller *Controller) DeleteFoo(c *gin.Context) {
 		value := _values["GONG__StackPath"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("DeleteFoo", "GONG__StackPath", stackPath)
+			// log.Println("DeleteSchema", "GONG__StackPath", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
 		log.Panic("Stack github.com/fullstack-lang/gongxsd/go/models, Unkown stack", stackPath)
 	}
-	db := backRepo.BackRepoFoo.GetDB()
+	db := backRepo.BackRepoSchema.GetDB()
 
 	// Get model if exist
-	var fooDB orm.FooDB
-	if err := db.First(&fooDB, c.Param("id")).Error; err != nil {
+	var schemaDB orm.SchemaDB
+	if err := db.First(&schemaDB, c.Param("id")).Error; err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -353,16 +353,16 @@ func (controller *Controller) DeleteFoo(c *gin.Context) {
 	}
 
 	// with gorm.Model field, default delete is a soft delete. Unscoped() force delete
-	db.Unscoped().Delete(&fooDB)
+	db.Unscoped().Delete(&schemaDB)
 
 	// get an instance (not staged) from DB instance, and call callback function
-	fooDeleted := new(models.Foo)
-	fooDB.CopyBasicFieldsToFoo(fooDeleted)
+	schemaDeleted := new(models.Schema)
+	schemaDB.CopyBasicFieldsToSchema(schemaDeleted)
 
 	// get stage instance from DB instance, and call callback function
-	fooStaged := backRepo.BackRepoFoo.Map_FooDBID_FooPtr[fooDB.ID]
-	if fooStaged != nil {
-		models.AfterDeleteFromFront(backRepo.GetStage(), fooStaged, fooDeleted)
+	schemaStaged := backRepo.BackRepoSchema.Map_SchemaDBID_SchemaPtr[schemaDB.ID]
+	if schemaStaged != nil {
+		models.AfterDeleteFromFront(backRepo.GetStage(), schemaStaged, schemaDeleted)
 	}
 
 	// a DELETE generates a back repo commit increase
