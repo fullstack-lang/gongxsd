@@ -1,5 +1,17 @@
 package models
 
+type ElementWithNameAttribute struct {
+	NameXSD string `xml:"name,attr"`
+}
+
+type ElementWithTypeAttribute struct {
+	Type string `xml:"type,attr"`
+}
+
+type ElementWithValueAttribute struct {
+	Value string `xml:"value,attr"`
+}
+
 type Schema struct {
 	Name         string
 	Elements     []*Element     `xml:"element"`
@@ -8,16 +20,16 @@ type Schema struct {
 }
 
 type Element struct {
-	Name        string
-	NameXSD     string       `xml:"name,attr"`
-	Type        string       `xml:"type,attr"`
+	Name string
+	ElementWithNameAttribute
+	ElementWithTypeAttribute
 	SimpleType  *SimpleType  `xml:"simpleType"`
 	ComplexType *ComplexType `xml:"complexType"`
 }
 
 type SimpleType struct {
-	Name        string
-	NameXSD     string       `xml:"name,attr"`
+	Name string
+	ElementWithNameAttribute
 	Restriction *Restriction `xml:"restriction"`
 }
 
@@ -30,29 +42,9 @@ type Restriction struct {
 	Pattern      *Pattern       `xml:"pattern"`
 }
 
-type Enumeration struct {
-	Name  string
-	Value string `xml:"value,attr"`
-}
-
-type MinInclusive struct {
-	Name  string
-	Value string `xml:"value,attr"`
-}
-
-type MaxInclusive struct {
-	Name  string
-	Value string `xml:"value,attr"`
-}
-
-type Pattern struct {
-	Name  string
-	Value string `xml:"value,attr"`
-}
-
 type ComplexType struct {
-	Name     string
-	NameXSD  string    `xml:"name,attr"`
+	Name string
+	ElementWithNameAttribute
 	Sequence *Sequence `xml:"sequence"`
 }
 

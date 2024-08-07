@@ -38,7 +38,12 @@
     <xs:element name="books">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="book" type="bookType" maxOccurs="unbounded" />
+                <xs:element name="book" type="bookType" maxOccurs="unbounded">
+                    <xs:annotation>
+                        <xs:documentation> A book element representing a single book in the
+                            collection. </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
