@@ -54,6 +54,25 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 				}
 			}
 		}
+		if fieldName == "Groups" {
+
+			// walk all instances of the owning type
+			for _instance := range *GetGongstructInstancesSetFromPointerType[OwningType](stage) {
+				if any(_instance).(*All) != owningInstanceInfered {
+					_inferedTypeInstance := any(_instance).(*All)
+					reference := make([]FieldType, 0)
+					targetFieldSlice := any(_inferedTypeInstance.Groups).([]FieldType)
+					copy(targetFieldSlice, reference)
+					_inferedTypeInstance.Groups = _inferedTypeInstance.Groups[0:]
+					for _, fieldInstance := range reference {
+						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
+							_inferedTypeInstance.Groups =
+								append(_inferedTypeInstance.Groups, any(fieldInstance).(*Group))
+						}
+					}
+				}
+			}
+		}
 
 	case *Annotation:
 		// insertion point per field
@@ -99,6 +118,25 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
 							_inferedTypeInstance.Elements =
 								append(_inferedTypeInstance.Elements, any(fieldInstance).(*Element))
+						}
+					}
+				}
+			}
+		}
+		if fieldName == "Groups" {
+
+			// walk all instances of the owning type
+			for _instance := range *GetGongstructInstancesSetFromPointerType[OwningType](stage) {
+				if any(_instance).(*Choice) != owningInstanceInfered {
+					_inferedTypeInstance := any(_instance).(*Choice)
+					reference := make([]FieldType, 0)
+					targetFieldSlice := any(_inferedTypeInstance.Groups).([]FieldType)
+					copy(targetFieldSlice, reference)
+					_inferedTypeInstance.Groups = _inferedTypeInstance.Groups[0:]
+					for _, fieldInstance := range reference {
+						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
+							_inferedTypeInstance.Groups =
+								append(_inferedTypeInstance.Groups, any(fieldInstance).(*Group))
 						}
 					}
 				}
@@ -153,6 +191,9 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 		// insertion point per field
 
 	case *Enumeration:
+		// insertion point per field
+
+	case *Group:
 		// insertion point per field
 
 	case *Length:
@@ -254,20 +295,39 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 				}
 			}
 		}
-		if fieldName == "AttributeGroup" {
+		if fieldName == "AttributeGroups" {
 
 			// walk all instances of the owning type
 			for _instance := range *GetGongstructInstancesSetFromPointerType[OwningType](stage) {
 				if any(_instance).(*Schema) != owningInstanceInfered {
 					_inferedTypeInstance := any(_instance).(*Schema)
 					reference := make([]FieldType, 0)
-					targetFieldSlice := any(_inferedTypeInstance.AttributeGroup).([]FieldType)
+					targetFieldSlice := any(_inferedTypeInstance.AttributeGroups).([]FieldType)
 					copy(targetFieldSlice, reference)
-					_inferedTypeInstance.AttributeGroup = _inferedTypeInstance.AttributeGroup[0:]
+					_inferedTypeInstance.AttributeGroups = _inferedTypeInstance.AttributeGroups[0:]
 					for _, fieldInstance := range reference {
 						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
-							_inferedTypeInstance.AttributeGroup =
-								append(_inferedTypeInstance.AttributeGroup, any(fieldInstance).(*AttributeGroup))
+							_inferedTypeInstance.AttributeGroups =
+								append(_inferedTypeInstance.AttributeGroups, any(fieldInstance).(*AttributeGroup))
+						}
+					}
+				}
+			}
+		}
+		if fieldName == "Groups" {
+
+			// walk all instances of the owning type
+			for _instance := range *GetGongstructInstancesSetFromPointerType[OwningType](stage) {
+				if any(_instance).(*Schema) != owningInstanceInfered {
+					_inferedTypeInstance := any(_instance).(*Schema)
+					reference := make([]FieldType, 0)
+					targetFieldSlice := any(_inferedTypeInstance.Groups).([]FieldType)
+					copy(targetFieldSlice, reference)
+					_inferedTypeInstance.Groups = _inferedTypeInstance.Groups[0:]
+					for _, fieldInstance := range reference {
+						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
+							_inferedTypeInstance.Groups =
+								append(_inferedTypeInstance.Groups, any(fieldInstance).(*Group))
 						}
 					}
 				}
@@ -290,6 +350,25 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
 							_inferedTypeInstance.Elements =
 								append(_inferedTypeInstance.Elements, any(fieldInstance).(*Element))
+						}
+					}
+				}
+			}
+		}
+		if fieldName == "Groups" {
+
+			// walk all instances of the owning type
+			for _instance := range *GetGongstructInstancesSetFromPointerType[OwningType](stage) {
+				if any(_instance).(*Sequence) != owningInstanceInfered {
+					_inferedTypeInstance := any(_instance).(*Sequence)
+					reference := make([]FieldType, 0)
+					targetFieldSlice := any(_inferedTypeInstance.Groups).([]FieldType)
+					copy(targetFieldSlice, reference)
+					_inferedTypeInstance.Groups = _inferedTypeInstance.Groups[0:]
+					for _, fieldInstance := range reference {
+						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
+							_inferedTypeInstance.Groups =
+								append(_inferedTypeInstance.Groups, any(fieldInstance).(*Group))
 						}
 					}
 				}
@@ -324,6 +403,14 @@ func (stage *StageStruct) ComputeReverseMaps() {
 			stage.All_Elements_reverseMap[_element] = all
 		}
 	}
+	clear(stage.All_Groups_reverseMap)
+	stage.All_Groups_reverseMap = make(map[*Group]*All)
+	for all := range stage.Alls {
+		_ = all
+		for _, _group := range all.Groups {
+			stage.All_Groups_reverseMap[_group] = all
+		}
+	}
 
 	// Compute reverse map for named struct Annotation
 	// insertion point per field
@@ -350,6 +437,14 @@ func (stage *StageStruct) ComputeReverseMaps() {
 		_ = choice
 		for _, _element := range choice.Elements {
 			stage.Choice_Elements_reverseMap[_element] = choice
+		}
+	}
+	clear(stage.Choice_Groups_reverseMap)
+	stage.Choice_Groups_reverseMap = make(map[*Group]*Choice)
+	for choice := range stage.Choices {
+		_ = choice
+		for _, _group := range choice.Groups {
+			stage.Choice_Groups_reverseMap[_group] = choice
 		}
 	}
 
@@ -379,6 +474,9 @@ func (stage *StageStruct) ComputeReverseMaps() {
 	// insertion point per field
 
 	// Compute reverse map for named struct Enumeration
+	// insertion point per field
+
+	// Compute reverse map for named struct Group
 	// insertion point per field
 
 	// Compute reverse map for named struct Length
@@ -436,12 +534,20 @@ func (stage *StageStruct) ComputeReverseMaps() {
 			stage.Schema_ComplexTypes_reverseMap[_complextype] = schema
 		}
 	}
-	clear(stage.Schema_AttributeGroup_reverseMap)
-	stage.Schema_AttributeGroup_reverseMap = make(map[*AttributeGroup]*Schema)
+	clear(stage.Schema_AttributeGroups_reverseMap)
+	stage.Schema_AttributeGroups_reverseMap = make(map[*AttributeGroup]*Schema)
 	for schema := range stage.Schemas {
 		_ = schema
-		for _, _attributegroup := range schema.AttributeGroup {
-			stage.Schema_AttributeGroup_reverseMap[_attributegroup] = schema
+		for _, _attributegroup := range schema.AttributeGroups {
+			stage.Schema_AttributeGroups_reverseMap[_attributegroup] = schema
+		}
+	}
+	clear(stage.Schema_Groups_reverseMap)
+	stage.Schema_Groups_reverseMap = make(map[*Group]*Schema)
+	for schema := range stage.Schemas {
+		_ = schema
+		for _, _group := range schema.Groups {
+			stage.Schema_Groups_reverseMap[_group] = schema
 		}
 	}
 
@@ -453,6 +559,14 @@ func (stage *StageStruct) ComputeReverseMaps() {
 		_ = sequence
 		for _, _element := range sequence.Elements {
 			stage.Sequence_Elements_reverseMap[_element] = sequence
+		}
+	}
+	clear(stage.Sequence_Groups_reverseMap)
+	stage.Sequence_Groups_reverseMap = make(map[*Group]*Sequence)
+	for sequence := range stage.Sequences {
+		_ = sequence
+		for _, _group := range sequence.Groups {
+			stage.Sequence_Groups_reverseMap[_group] = sequence
 		}
 	}
 

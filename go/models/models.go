@@ -32,10 +32,11 @@ type Schema struct {
 	Name string
 	Xs   string `xml:"xs,attr"`
 	ElementWithAnnotation
-	Elements       []*Element        `xml:"element"`
-	SimpleTypes    []*SimpleType     `xml:"simpleType"`
-	ComplexTypes   []*ComplexType    `xml:"complexType"`
-	AttributeGroup []*AttributeGroup `xml:"attributeGroup"`
+	Elements        []*Element        `xml:"element"`
+	SimpleTypes     []*SimpleType     `xml:"simpleType"`
+	ComplexTypes    []*ComplexType    `xml:"complexType"`
+	AttributeGroups []*AttributeGroup `xml:"attributeGroup"`
+	Groups          []*Group          `xml:"group"`
 }
 
 type Element struct {
@@ -57,6 +58,13 @@ type Element struct {
 
 	SimpleType  *SimpleType  `xml:"simpleType"`
 	ComplexType *ComplexType `xml:"complexType"`
+}
+
+type Group struct {
+	Name string
+	ElementWithAnnotation
+	ElementWithNameAttribute
+	Ref string `xml:"ref,attr"`
 }
 
 type SimpleType struct {
@@ -124,6 +132,7 @@ type Sequence struct {
 	MinOccurs string     `xml:"minOccurs,attr"`
 	MaxOccurs string     `xml:"maxOccurs,attr"`
 	Elements  []*Element `xml:"element"`
+	Groups    []*Group   `xml:"group"`
 }
 
 type All struct {
@@ -132,6 +141,7 @@ type All struct {
 	MinOccurs string     `xml:"minOccurs,attr"`
 	MaxOccurs string     `xml:"maxOccurs,attr"`
 	Elements  []*Element `xml:"element"`
+	Groups    []*Group   `xml:"group"`
 }
 
 type Choice struct {
@@ -140,4 +150,5 @@ type Choice struct {
 	MinOccurs string     `xml:"minOccurs,attr"`
 	MaxOccurs string     `xml:"maxOccurs,attr"`
 	Elements  []*Element `xml:"element"`
+	Groups    []*Group   `xml:"group"`
 }

@@ -40,6 +40,8 @@ type BackRepoStruct struct {
 
 	BackRepoEnumeration BackRepoEnumerationStruct
 
+	BackRepoGroup BackRepoGroupStruct
+
 	BackRepoLength BackRepoLengthStruct
 
 	BackRepoMaxInclusive BackRepoMaxInclusiveStruct
@@ -113,6 +115,7 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 		&DocumentationDB{},
 		&ElementDB{},
 		&EnumerationDB{},
+		&GroupDB{},
 		&LengthDB{},
 		&MaxInclusiveDB{},
 		&MaxLengthDB{},
@@ -203,6 +206,14 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 		Map_EnumerationDBID_EnumerationPtr: make(map[uint]*models.Enumeration, 0),
 		Map_EnumerationDBID_EnumerationDB:  make(map[uint]*EnumerationDB, 0),
 		Map_EnumerationPtr_EnumerationDBID: make(map[*models.Enumeration]uint, 0),
+
+		db:    db,
+		stage: stage,
+	}
+	backRepo.BackRepoGroup = BackRepoGroupStruct{
+		Map_GroupDBID_GroupPtr: make(map[uint]*models.Group, 0),
+		Map_GroupDBID_GroupDB:  make(map[uint]*GroupDB, 0),
+		Map_GroupPtr_GroupDBID: make(map[*models.Group]uint, 0),
 
 		db:    db,
 		stage: stage,
@@ -360,6 +371,7 @@ func (backRepo *BackRepoStruct) Commit(stage *models.StageStruct) {
 	backRepo.BackRepoDocumentation.CommitPhaseOne(stage)
 	backRepo.BackRepoElement.CommitPhaseOne(stage)
 	backRepo.BackRepoEnumeration.CommitPhaseOne(stage)
+	backRepo.BackRepoGroup.CommitPhaseOne(stage)
 	backRepo.BackRepoLength.CommitPhaseOne(stage)
 	backRepo.BackRepoMaxInclusive.CommitPhaseOne(stage)
 	backRepo.BackRepoMaxLength.CommitPhaseOne(stage)
@@ -383,6 +395,7 @@ func (backRepo *BackRepoStruct) Commit(stage *models.StageStruct) {
 	backRepo.BackRepoDocumentation.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoElement.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoEnumeration.CommitPhaseTwo(backRepo)
+	backRepo.BackRepoGroup.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoLength.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoMaxInclusive.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoMaxLength.CommitPhaseTwo(backRepo)
@@ -411,6 +424,7 @@ func (backRepo *BackRepoStruct) Checkout(stage *models.StageStruct) {
 	backRepo.BackRepoDocumentation.CheckoutPhaseOne()
 	backRepo.BackRepoElement.CheckoutPhaseOne()
 	backRepo.BackRepoEnumeration.CheckoutPhaseOne()
+	backRepo.BackRepoGroup.CheckoutPhaseOne()
 	backRepo.BackRepoLength.CheckoutPhaseOne()
 	backRepo.BackRepoMaxInclusive.CheckoutPhaseOne()
 	backRepo.BackRepoMaxLength.CheckoutPhaseOne()
@@ -434,6 +448,7 @@ func (backRepo *BackRepoStruct) Checkout(stage *models.StageStruct) {
 	backRepo.BackRepoDocumentation.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoElement.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoEnumeration.CheckoutPhaseTwo(backRepo)
+	backRepo.BackRepoGroup.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoLength.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoMaxInclusive.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoMaxLength.CheckoutPhaseTwo(backRepo)
@@ -462,6 +477,7 @@ func (backRepo *BackRepoStruct) Backup(stage *models.StageStruct, dirPath string
 	backRepo.BackRepoDocumentation.Backup(dirPath)
 	backRepo.BackRepoElement.Backup(dirPath)
 	backRepo.BackRepoEnumeration.Backup(dirPath)
+	backRepo.BackRepoGroup.Backup(dirPath)
 	backRepo.BackRepoLength.Backup(dirPath)
 	backRepo.BackRepoMaxInclusive.Backup(dirPath)
 	backRepo.BackRepoMaxLength.Backup(dirPath)
@@ -493,6 +509,7 @@ func (backRepo *BackRepoStruct) BackupXL(stage *models.StageStruct, dirPath stri
 	backRepo.BackRepoDocumentation.BackupXL(file)
 	backRepo.BackRepoElement.BackupXL(file)
 	backRepo.BackRepoEnumeration.BackupXL(file)
+	backRepo.BackRepoGroup.BackupXL(file)
 	backRepo.BackRepoLength.BackupXL(file)
 	backRepo.BackRepoMaxInclusive.BackupXL(file)
 	backRepo.BackRepoMaxLength.BackupXL(file)
@@ -538,6 +555,7 @@ func (backRepo *BackRepoStruct) Restore(stage *models.StageStruct, dirPath strin
 	backRepo.BackRepoDocumentation.RestorePhaseOne(dirPath)
 	backRepo.BackRepoElement.RestorePhaseOne(dirPath)
 	backRepo.BackRepoEnumeration.RestorePhaseOne(dirPath)
+	backRepo.BackRepoGroup.RestorePhaseOne(dirPath)
 	backRepo.BackRepoLength.RestorePhaseOne(dirPath)
 	backRepo.BackRepoMaxInclusive.RestorePhaseOne(dirPath)
 	backRepo.BackRepoMaxLength.RestorePhaseOne(dirPath)
@@ -565,6 +583,7 @@ func (backRepo *BackRepoStruct) Restore(stage *models.StageStruct, dirPath strin
 	backRepo.BackRepoDocumentation.RestorePhaseTwo()
 	backRepo.BackRepoElement.RestorePhaseTwo()
 	backRepo.BackRepoEnumeration.RestorePhaseTwo()
+	backRepo.BackRepoGroup.RestorePhaseTwo()
 	backRepo.BackRepoLength.RestorePhaseTwo()
 	backRepo.BackRepoMaxInclusive.RestorePhaseTwo()
 	backRepo.BackRepoMaxLength.RestorePhaseTwo()
@@ -613,6 +632,7 @@ func (backRepo *BackRepoStruct) RestoreXL(stage *models.StageStruct, dirPath str
 	backRepo.BackRepoDocumentation.RestoreXLPhaseOne(file)
 	backRepo.BackRepoElement.RestoreXLPhaseOne(file)
 	backRepo.BackRepoEnumeration.RestoreXLPhaseOne(file)
+	backRepo.BackRepoGroup.RestoreXLPhaseOne(file)
 	backRepo.BackRepoLength.RestoreXLPhaseOne(file)
 	backRepo.BackRepoMaxInclusive.RestoreXLPhaseOne(file)
 	backRepo.BackRepoMaxLength.RestoreXLPhaseOne(file)

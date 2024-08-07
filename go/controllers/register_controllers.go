@@ -110,6 +110,13 @@ func registerControllers(r *gin.Engine) {
 		v1.PUT("/v1/enumerations/:id", GetController().UpdateEnumeration)
 		v1.DELETE("/v1/enumerations/:id", GetController().DeleteEnumeration)
 
+		v1.GET("/v1/groups", GetController().GetGroups)
+		v1.GET("/v1/groups/:id", GetController().GetGroup)
+		v1.POST("/v1/groups", GetController().PostGroup)
+		v1.PATCH("/v1/groups/:id", GetController().UpdateGroup)
+		v1.PUT("/v1/groups/:id", GetController().UpdateGroup)
+		v1.DELETE("/v1/groups/:id", GetController().DeleteGroup)
+
 		v1.GET("/v1/lengths", GetController().GetLengths)
 		v1.GET("/v1/lengths/:id", GetController().GetLength)
 		v1.POST("/v1/lengths", GetController().PostLength)

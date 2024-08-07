@@ -53,6 +53,9 @@ type ChoicePointersEncoding struct {
 
 	// field Elements is a slice of pointers to another Struct (optional or 0..1)
 	Elements IntSlice `gorm:"type:TEXT"`
+
+	// field Groups is a slice of pointers to another Struct (optional or 0..1)
+	Groups IntSlice `gorm:"type:TEXT"`
 }
 
 // ChoiceDB describes a choice in the database
@@ -260,6 +263,24 @@ func (backRepoChoice *BackRepoChoiceStruct) CommitPhaseTwoInstance(backRepo *Bac
 				append(choiceDB.ChoicePointersEncoding.Elements, int(elementAssocEnd_DB.ID))
 		}
 
+		// 1. reset
+		choiceDB.ChoicePointersEncoding.Groups = make([]int, 0)
+		// 2. encode
+		for _, groupAssocEnd := range choice.Groups {
+			groupAssocEnd_DB :=
+				backRepo.BackRepoGroup.GetGroupDBFromGroupPtr(groupAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the groupAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if groupAssocEnd_DB == nil {
+				continue
+			}
+			
+			choiceDB.ChoicePointersEncoding.Groups =
+				append(choiceDB.ChoicePointersEncoding.Groups, int(groupAssocEnd_DB.ID))
+		}
+
 		query := backRepoChoice.db.Save(&choiceDB)
 		if query.Error != nil {
 			log.Fatalln(query.Error)
@@ -385,6 +406,15 @@ func (choiceDB *ChoiceDB) DecodePointers(backRepo *BackRepoStruct, choice *model
 	choice.Elements = choice.Elements[:0]
 	for _, _Elementid := range choiceDB.ChoicePointersEncoding.Elements {
 		choice.Elements = append(choice.Elements, backRepo.BackRepoElement.Map_ElementDBID_ElementPtr[uint(_Elementid)])
+	}
+
+	// This loop redeem choice.Groups in the stage from the encode in the back repo
+	// It parses all GroupDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	choice.Groups = choice.Groups[:0]
+	for _, _Groupid := range choiceDB.ChoicePointersEncoding.Groups {
+		choice.Groups = append(choice.Groups, backRepo.BackRepoGroup.Map_GroupDBID_GroupPtr[uint(_Groupid)])
 	}
 
 	return

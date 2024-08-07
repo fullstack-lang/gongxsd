@@ -598,6 +598,52 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 
 	}
 
+	map_Group_Identifiers := make(map[*Group]string)
+	_ = map_Group_Identifiers
+
+	groupOrdered := []*Group{}
+	for group := range stage.Groups {
+		groupOrdered = append(groupOrdered, group)
+	}
+	sort.Slice(groupOrdered[:], func(i, j int) bool {
+		return groupOrdered[i].Name < groupOrdered[j].Name
+	})
+	if len(groupOrdered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, group := range groupOrdered {
+
+		id = generatesIdentifier("Group", idx, group.Name)
+		map_Group_Identifiers[group] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "Group")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", group.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(group.Name))
+		initializerStatements += setValueField
+
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "NameXSD")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(group.NameXSD))
+		initializerStatements += setValueField
+
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Ref")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(group.Ref))
+		initializerStatements += setValueField
+
+	}
+
 	map_Length_Identifiers := make(map[*Length]string)
 	_ = map_Length_Identifiers
 
@@ -1109,6 +1155,14 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			pointersInitializesStatements += setPointerField
 		}
 
+		for _, _group := range all.Groups {
+			setPointerField = SliceOfPointersFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Groups")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Group_Identifiers[_group])
+			pointersInitializesStatements += setPointerField
+		}
+
 	}
 
 	for idx, annotation := range annotationOrdered {
@@ -1194,6 +1248,14 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Elements")
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Element_Identifiers[_element])
+			pointersInitializesStatements += setPointerField
+		}
+
+		for _, _group := range choice.Groups {
+			setPointerField = SliceOfPointersFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Groups")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Group_Identifiers[_group])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -1314,6 +1376,24 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Annotation")
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Annotation_Identifiers[enumeration.Annotation])
+			pointersInitializesStatements += setPointerField
+		}
+
+	}
+
+	for idx, group := range groupOrdered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("Group", idx, group.Name)
+		map_Group_Identifiers[group] = id
+
+		// Initialisation of values
+		if group.Annotation != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Annotation")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Annotation_Identifiers[group.Annotation])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -1557,11 +1637,19 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			pointersInitializesStatements += setPointerField
 		}
 
-		for _, _attributegroup := range schema.AttributeGroup {
+		for _, _attributegroup := range schema.AttributeGroups {
 			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "AttributeGroup")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "AttributeGroups")
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_AttributeGroup_Identifiers[_attributegroup])
+			pointersInitializesStatements += setPointerField
+		}
+
+		for _, _group := range schema.Groups {
+			setPointerField = SliceOfPointersFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Groups")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Group_Identifiers[_group])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -1588,6 +1676,14 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Elements")
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Element_Identifiers[_element])
+			pointersInitializesStatements += setPointerField
+		}
+
+		for _, _group := range sequence.Groups {
+			setPointerField = SliceOfPointersFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Groups")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Group_Identifiers[_group])
 			pointersInitializesStatements += setPointerField
 		}
 

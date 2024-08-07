@@ -48,8 +48,8 @@ func GetReverseFieldOwnerName[T models.Gongstruct](
 			}
 		case "Schema":
 			switch reverseField.Fieldname {
-			case "AttributeGroup":
-				if _schema, ok := stage.Schema_AttributeGroup_reverseMap[inst]; ok {
+			case "AttributeGroups":
+				if _schema, ok := stage.Schema_AttributeGroups_reverseMap[inst]; ok {
 					res = _schema.Name
 				}
 			}
@@ -125,6 +125,39 @@ func GetReverseFieldOwnerName[T models.Gongstruct](
 			case "Enumerations":
 				if _restriction, ok := stage.Restriction_Enumerations_reverseMap[inst]; ok {
 					res = _restriction.Name
+				}
+			}
+		}
+
+	case *models.Group:
+		switch reverseField.GongstructName {
+		// insertion point
+		case "All":
+			switch reverseField.Fieldname {
+			case "Groups":
+				if _all, ok := stage.All_Groups_reverseMap[inst]; ok {
+					res = _all.Name
+				}
+			}
+		case "Choice":
+			switch reverseField.Fieldname {
+			case "Groups":
+				if _choice, ok := stage.Choice_Groups_reverseMap[inst]; ok {
+					res = _choice.Name
+				}
+			}
+		case "Schema":
+			switch reverseField.Fieldname {
+			case "Groups":
+				if _schema, ok := stage.Schema_Groups_reverseMap[inst]; ok {
+					res = _schema.Name
+				}
+			}
+		case "Sequence":
+			switch reverseField.Fieldname {
+			case "Groups":
+				if _sequence, ok := stage.Sequence_Groups_reverseMap[inst]; ok {
+					res = _sequence.Name
 				}
 			}
 		}
@@ -241,8 +274,8 @@ func GetReverseFieldOwner[T models.Gongstruct](
 			}
 		case "Schema":
 			switch reverseField.Fieldname {
-			case "AttributeGroup":
-				res = stage.Schema_AttributeGroup_reverseMap[inst]
+			case "AttributeGroups":
+				res = stage.Schema_AttributeGroups_reverseMap[inst]
 			}
 		}
 
@@ -303,6 +336,31 @@ func GetReverseFieldOwner[T models.Gongstruct](
 			switch reverseField.Fieldname {
 			case "Enumerations":
 				res = stage.Restriction_Enumerations_reverseMap[inst]
+			}
+		}
+
+	case *models.Group:
+		switch reverseField.GongstructName {
+		// insertion point
+		case "All":
+			switch reverseField.Fieldname {
+			case "Groups":
+				res = stage.All_Groups_reverseMap[inst]
+			}
+		case "Choice":
+			switch reverseField.Fieldname {
+			case "Groups":
+				res = stage.Choice_Groups_reverseMap[inst]
+			}
+		case "Schema":
+			switch reverseField.Fieldname {
+			case "Groups":
+				res = stage.Schema_Groups_reverseMap[inst]
+			}
+		case "Sequence":
+			switch reverseField.Fieldname {
+			case "Groups":
+				res = stage.Sequence_Groups_reverseMap[inst]
 			}
 		}
 

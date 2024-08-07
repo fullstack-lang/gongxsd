@@ -414,13 +414,13 @@ func (attributegroupFormCallback *AttributeGroupFormCallback) OnSave() {
 					}
 				}
 			}
-		case "Schema:AttributeGroup":
+		case "Schema:AttributeGroups":
 			// we need to retrieve the field owner before the change
 			var pastSchemaOwner *models.Schema
 			var rf models.ReverseField
 			_ = rf
 			rf.GongstructName = "Schema"
-			rf.Fieldname = "AttributeGroup"
+			rf.Fieldname = "AttributeGroups"
 			reverseFieldOwner := orm.GetReverseFieldOwner(
 				attributegroupFormCallback.probe.stageOfInterest,
 				attributegroupFormCallback.probe.backRepoOfInterest,
@@ -432,8 +432,8 @@ func (attributegroupFormCallback *AttributeGroupFormCallback) OnSave() {
 			}
 			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
 				if pastSchemaOwner != nil {
-					idx := slices.Index(pastSchemaOwner.AttributeGroup, attributegroup_)
-					pastSchemaOwner.AttributeGroup = slices.Delete(pastSchemaOwner.AttributeGroup, idx, idx+1)
+					idx := slices.Index(pastSchemaOwner.AttributeGroups, attributegroup_)
+					pastSchemaOwner.AttributeGroups = slices.Delete(pastSchemaOwner.AttributeGroups, idx, idx+1)
 				}
 			} else {
 				// we need to retrieve the field owner after the change
@@ -446,12 +446,12 @@ func (attributegroupFormCallback *AttributeGroupFormCallback) OnSave() {
 						newSchemaOwner := _schema // we have a match
 						if pastSchemaOwner != nil {
 							if newSchemaOwner != pastSchemaOwner {
-								idx := slices.Index(pastSchemaOwner.AttributeGroup, attributegroup_)
-								pastSchemaOwner.AttributeGroup = slices.Delete(pastSchemaOwner.AttributeGroup, idx, idx+1)
-								newSchemaOwner.AttributeGroup = append(newSchemaOwner.AttributeGroup, attributegroup_)
+								idx := slices.Index(pastSchemaOwner.AttributeGroups, attributegroup_)
+								pastSchemaOwner.AttributeGroups = slices.Delete(pastSchemaOwner.AttributeGroups, idx, idx+1)
+								newSchemaOwner.AttributeGroups = append(newSchemaOwner.AttributeGroups, attributegroup_)
 							}
 						} else {
-							newSchemaOwner.AttributeGroup = append(newSchemaOwner.AttributeGroup, attributegroup_)
+							newSchemaOwner.AttributeGroups = append(newSchemaOwner.AttributeGroups, attributegroup_)
 						}
 					}
 				}
@@ -1222,6 +1222,257 @@ func (enumerationFormCallback *EnumerationFormCallback) OnSave() {
 	}
 
 	fillUpTree(enumerationFormCallback.probe)
+}
+func __gong__New__GroupFormCallback(
+	group *models.Group,
+	probe *Probe,
+	formGroup *table.FormGroup,
+) (groupFormCallback *GroupFormCallback) {
+	groupFormCallback = new(GroupFormCallback)
+	groupFormCallback.probe = probe
+	groupFormCallback.group = group
+	groupFormCallback.formGroup = formGroup
+
+	groupFormCallback.CreationMode = (group == nil)
+
+	return
+}
+
+type GroupFormCallback struct {
+	group *models.Group
+
+	// If the form call is called on the creation of a new instnace
+	CreationMode bool
+
+	probe *Probe
+
+	formGroup *table.FormGroup
+}
+
+func (groupFormCallback *GroupFormCallback) OnSave() {
+
+	log.Println("GroupFormCallback, OnSave")
+
+	// checkout formStage to have the form group on the stage synchronized with the
+	// back repo (and front repo)
+	groupFormCallback.probe.formStage.Checkout()
+
+	if groupFormCallback.group == nil {
+		groupFormCallback.group = new(models.Group).Stage(groupFormCallback.probe.stageOfInterest)
+	}
+	group_ := groupFormCallback.group
+	_ = group_
+
+	for _, formDiv := range groupFormCallback.formGroup.FormDivs {
+		switch formDiv.Name {
+		// insertion point per field
+		case "Name":
+			FormDivBasicFieldToField(&(group_.Name), formDiv)
+		case "Annotation":
+			FormDivSelectFieldToField(&(group_.Annotation), groupFormCallback.probe.stageOfInterest, formDiv)
+		case "NameXSD":
+			FormDivBasicFieldToField(&(group_.NameXSD), formDiv)
+		case "Ref":
+			FormDivBasicFieldToField(&(group_.Ref), formDiv)
+		case "All:Groups":
+			// we need to retrieve the field owner before the change
+			var pastAllOwner *models.All
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "All"
+			rf.Fieldname = "Groups"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				groupFormCallback.probe.stageOfInterest,
+				groupFormCallback.probe.backRepoOfInterest,
+				group_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastAllOwner = reverseFieldOwner.(*models.All)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastAllOwner != nil {
+					idx := slices.Index(pastAllOwner.Groups, group_)
+					pastAllOwner.Groups = slices.Delete(pastAllOwner.Groups, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _all := range *models.GetGongstructInstancesSet[models.All](groupFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _all.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newAllOwner := _all // we have a match
+						if pastAllOwner != nil {
+							if newAllOwner != pastAllOwner {
+								idx := slices.Index(pastAllOwner.Groups, group_)
+								pastAllOwner.Groups = slices.Delete(pastAllOwner.Groups, idx, idx+1)
+								newAllOwner.Groups = append(newAllOwner.Groups, group_)
+							}
+						} else {
+							newAllOwner.Groups = append(newAllOwner.Groups, group_)
+						}
+					}
+				}
+			}
+		case "Choice:Groups":
+			// we need to retrieve the field owner before the change
+			var pastChoiceOwner *models.Choice
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "Choice"
+			rf.Fieldname = "Groups"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				groupFormCallback.probe.stageOfInterest,
+				groupFormCallback.probe.backRepoOfInterest,
+				group_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastChoiceOwner = reverseFieldOwner.(*models.Choice)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastChoiceOwner != nil {
+					idx := slices.Index(pastChoiceOwner.Groups, group_)
+					pastChoiceOwner.Groups = slices.Delete(pastChoiceOwner.Groups, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _choice := range *models.GetGongstructInstancesSet[models.Choice](groupFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _choice.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newChoiceOwner := _choice // we have a match
+						if pastChoiceOwner != nil {
+							if newChoiceOwner != pastChoiceOwner {
+								idx := slices.Index(pastChoiceOwner.Groups, group_)
+								pastChoiceOwner.Groups = slices.Delete(pastChoiceOwner.Groups, idx, idx+1)
+								newChoiceOwner.Groups = append(newChoiceOwner.Groups, group_)
+							}
+						} else {
+							newChoiceOwner.Groups = append(newChoiceOwner.Groups, group_)
+						}
+					}
+				}
+			}
+		case "Schema:Groups":
+			// we need to retrieve the field owner before the change
+			var pastSchemaOwner *models.Schema
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "Schema"
+			rf.Fieldname = "Groups"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				groupFormCallback.probe.stageOfInterest,
+				groupFormCallback.probe.backRepoOfInterest,
+				group_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastSchemaOwner = reverseFieldOwner.(*models.Schema)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastSchemaOwner != nil {
+					idx := slices.Index(pastSchemaOwner.Groups, group_)
+					pastSchemaOwner.Groups = slices.Delete(pastSchemaOwner.Groups, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _schema := range *models.GetGongstructInstancesSet[models.Schema](groupFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _schema.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newSchemaOwner := _schema // we have a match
+						if pastSchemaOwner != nil {
+							if newSchemaOwner != pastSchemaOwner {
+								idx := slices.Index(pastSchemaOwner.Groups, group_)
+								pastSchemaOwner.Groups = slices.Delete(pastSchemaOwner.Groups, idx, idx+1)
+								newSchemaOwner.Groups = append(newSchemaOwner.Groups, group_)
+							}
+						} else {
+							newSchemaOwner.Groups = append(newSchemaOwner.Groups, group_)
+						}
+					}
+				}
+			}
+		case "Sequence:Groups":
+			// we need to retrieve the field owner before the change
+			var pastSequenceOwner *models.Sequence
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "Sequence"
+			rf.Fieldname = "Groups"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				groupFormCallback.probe.stageOfInterest,
+				groupFormCallback.probe.backRepoOfInterest,
+				group_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastSequenceOwner = reverseFieldOwner.(*models.Sequence)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastSequenceOwner != nil {
+					idx := slices.Index(pastSequenceOwner.Groups, group_)
+					pastSequenceOwner.Groups = slices.Delete(pastSequenceOwner.Groups, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _sequence := range *models.GetGongstructInstancesSet[models.Sequence](groupFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _sequence.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newSequenceOwner := _sequence // we have a match
+						if pastSequenceOwner != nil {
+							if newSequenceOwner != pastSequenceOwner {
+								idx := slices.Index(pastSequenceOwner.Groups, group_)
+								pastSequenceOwner.Groups = slices.Delete(pastSequenceOwner.Groups, idx, idx+1)
+								newSequenceOwner.Groups = append(newSequenceOwner.Groups, group_)
+							}
+						} else {
+							newSequenceOwner.Groups = append(newSequenceOwner.Groups, group_)
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// manage the suppress operation
+	if groupFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		group_.Unstage(groupFormCallback.probe.stageOfInterest)
+	}
+
+	groupFormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.Group](
+		groupFormCallback.probe,
+	)
+	groupFormCallback.probe.tableStage.Commit()
+
+	// display a new form by reset the form stage
+	if groupFormCallback.CreationMode || groupFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		groupFormCallback.probe.formStage.Reset()
+		newFormGroup := (&table.FormGroup{
+			Name: table.FormGroupDefaultName.ToString(),
+		}).Stage(groupFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__GroupFormCallback(
+			nil,
+			groupFormCallback.probe,
+			newFormGroup,
+		)
+		group := new(models.Group)
+		FillUpForm(group, newFormGroup, groupFormCallback.probe)
+		groupFormCallback.probe.formStage.Commit()
+	}
+
+	fillUpTree(groupFormCallback.probe)
 }
 func __gong__New__LengthFormCallback(
 	length *models.Length,

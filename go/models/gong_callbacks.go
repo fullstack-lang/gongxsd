@@ -42,6 +42,10 @@ func AfterCreateFromFront[Type Gongstruct](stage *StageStruct, instance *Type) {
 		if stage.OnAfterEnumerationCreateCallback != nil {
 			stage.OnAfterEnumerationCreateCallback.OnAfterCreate(stage, target)
 		}
+	case *Group:
+		if stage.OnAfterGroupCreateCallback != nil {
+			stage.OnAfterGroupCreateCallback.OnAfterCreate(stage, target)
+		}
 	case *Length:
 		if stage.OnAfterLengthCreateCallback != nil {
 			stage.OnAfterLengthCreateCallback.OnAfterCreate(stage, target)
@@ -144,6 +148,11 @@ func AfterUpdateFromFront[Type Gongstruct](stage *StageStruct, old, new *Type) {
 		newTarget := any(new).(*Enumeration)
 		if stage.OnAfterEnumerationUpdateCallback != nil {
 			stage.OnAfterEnumerationUpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
+		}
+	case *Group:
+		newTarget := any(new).(*Group)
+		if stage.OnAfterGroupUpdateCallback != nil {
+			stage.OnAfterGroupUpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
 		}
 	case *Length:
 		newTarget := any(new).(*Length)
@@ -260,6 +269,11 @@ func AfterDeleteFromFront[Type Gongstruct](stage *StageStruct, staged, front *Ty
 			staged := any(staged).(*Enumeration)
 			stage.OnAfterEnumerationDeleteCallback.OnAfterDelete(stage, staged, front)
 		}
+	case *Group:
+		if stage.OnAfterGroupDeleteCallback != nil {
+			staged := any(staged).(*Group)
+			stage.OnAfterGroupDeleteCallback.OnAfterDelete(stage, staged, front)
+		}
 	case *Length:
 		if stage.OnAfterLengthDeleteCallback != nil {
 			staged := any(staged).(*Length)
@@ -366,6 +380,10 @@ func AfterReadFromFront[Type Gongstruct](stage *StageStruct, instance *Type) {
 		if stage.OnAfterEnumerationReadCallback != nil {
 			stage.OnAfterEnumerationReadCallback.OnAfterRead(stage, target)
 		}
+	case *Group:
+		if stage.OnAfterGroupReadCallback != nil {
+			stage.OnAfterGroupReadCallback.OnAfterRead(stage, target)
+		}
 	case *Length:
 		if stage.OnAfterLengthReadCallback != nil {
 			stage.OnAfterLengthReadCallback.OnAfterRead(stage, target)
@@ -452,6 +470,9 @@ func SetCallbackAfterUpdateFromFront[Type Gongstruct](stage *StageStruct, callba
 	case *Enumeration:
 		stage.OnAfterEnumerationUpdateCallback = any(callback).(OnAfterUpdateInterface[Enumeration])
 	
+	case *Group:
+		stage.OnAfterGroupUpdateCallback = any(callback).(OnAfterUpdateInterface[Group])
+	
 	case *Length:
 		stage.OnAfterLengthUpdateCallback = any(callback).(OnAfterUpdateInterface[Length])
 	
@@ -521,6 +542,9 @@ func SetCallbackAfterCreateFromFront[Type Gongstruct](stage *StageStruct, callba
 	
 	case *Enumeration:
 		stage.OnAfterEnumerationCreateCallback = any(callback).(OnAfterCreateInterface[Enumeration])
+	
+	case *Group:
+		stage.OnAfterGroupCreateCallback = any(callback).(OnAfterCreateInterface[Group])
 	
 	case *Length:
 		stage.OnAfterLengthCreateCallback = any(callback).(OnAfterCreateInterface[Length])
@@ -592,6 +616,9 @@ func SetCallbackAfterDeleteFromFront[Type Gongstruct](stage *StageStruct, callba
 	case *Enumeration:
 		stage.OnAfterEnumerationDeleteCallback = any(callback).(OnAfterDeleteInterface[Enumeration])
 	
+	case *Group:
+		stage.OnAfterGroupDeleteCallback = any(callback).(OnAfterDeleteInterface[Group])
+	
 	case *Length:
 		stage.OnAfterLengthDeleteCallback = any(callback).(OnAfterDeleteInterface[Length])
 	
@@ -661,6 +688,9 @@ func SetCallbackAfterReadFromFront[Type Gongstruct](stage *StageStruct, callback
 	
 	case *Enumeration:
 		stage.OnAfterEnumerationReadCallback = any(callback).(OnAfterReadInterface[Enumeration])
+	
+	case *Group:
+		stage.OnAfterGroupReadCallback = any(callback).(OnAfterReadInterface[Group])
 	
 	case *Length:
 		stage.OnAfterLengthReadCallback = any(callback).(OnAfterReadInterface[Length])

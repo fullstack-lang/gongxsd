@@ -79,6 +79,9 @@ func (nodeImplGongstruct *TreeNodeImplGongstruct) OnAfterUpdate(
 	if nodeImplGongstruct.gongStruct.GetName() == "Enumeration" {
 		fillUpTable[models.Enumeration](nodeImplGongstruct.probe)
 	}
+	if nodeImplGongstruct.gongStruct.GetName() == "Group" {
+		fillUpTable[models.Group](nodeImplGongstruct.probe)
+	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Length" {
 		fillUpTable[models.Length](nodeImplGongstruct.probe)
 	}

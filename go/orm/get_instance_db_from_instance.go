@@ -51,6 +51,10 @@ func GetInstanceDBFromInstance[T models.Gongstruct, T2 GongstructDB](
 		enumerationInstance := any(concreteInstance).(*models.Enumeration)
 		ret2 := backRepo.BackRepoEnumeration.GetEnumerationDBFromEnumerationPtr(enumerationInstance)
 		ret = any(ret2).(*T2)
+	case *models.Group:
+		groupInstance := any(concreteInstance).(*models.Group)
+		ret2 := backRepo.BackRepoGroup.GetGroupDBFromGroupPtr(groupInstance)
+		ret = any(ret2).(*T2)
 	case *models.Length:
 		lengthInstance := any(concreteInstance).(*models.Length)
 		ret2 := backRepo.BackRepoLength.GetLengthDBFromLengthPtr(lengthInstance)
@@ -154,6 +158,11 @@ func GetID[T models.Gongstruct](
 		id = int(tmp.ID)
 	case *models.Enumeration:
 		tmp := GetInstanceDBFromInstance[models.Enumeration, EnumerationDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.Group:
+		tmp := GetInstanceDBFromInstance[models.Group, GroupDB](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)
@@ -272,6 +281,11 @@ func GetIDPointer[T models.PointerToGongstruct](
 		id = int(tmp.ID)
 	case *models.Enumeration:
 		tmp := GetInstanceDBFromInstance[models.Enumeration, EnumerationDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.Group:
+		tmp := GetInstanceDBFromInstance[models.Group, GroupDB](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)

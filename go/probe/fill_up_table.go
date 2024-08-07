@@ -38,6 +38,8 @@ func fillUpTablePointerToGongstruct[T models.PointerToGongstruct](
 		fillUpTable[models.Element](probe)
 	case *models.Enumeration:
 		fillUpTable[models.Enumeration](probe)
+	case *models.Group:
+		fillUpTable[models.Group](probe)
 	case *models.Length:
 		fillUpTable[models.Length](probe)
 	case *models.MaxInclusive:

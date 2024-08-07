@@ -32,6 +32,9 @@ func IsStaged[Type Gongstruct](stage *StageStruct, instance *Type) (ok bool) {
 	case *Enumeration:
 		ok = stage.IsStagedEnumeration(target)
 
+	case *Group:
+		ok = stage.IsStagedGroup(target)
+
 	case *Length:
 		ok = stage.IsStagedLength(target)
 
@@ -134,6 +137,13 @@ func (stage *StageStruct) IsStagedElement(element *Element) (ok bool) {
 func (stage *StageStruct) IsStagedEnumeration(enumeration *Enumeration) (ok bool) {
 
 	_, ok = stage.Enumerations[enumeration]
+
+	return
+}
+
+func (stage *StageStruct) IsStagedGroup(group *Group) (ok bool) {
+
+	_, ok = stage.Groups[group]
 
 	return
 }
@@ -257,6 +267,9 @@ func StageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 	case *Enumeration:
 		stage.StageBranchEnumeration(target)
 
+	case *Group:
+		stage.StageBranchGroup(target)
+
 	case *Length:
 		stage.StageBranchLength(target)
 
@@ -316,6 +329,9 @@ func (stage *StageStruct) StageBranchAll(all *All) {
 	//insertion point for the staging of instances referenced by slice of pointers
 	for _, _element := range all.Elements {
 		StageBranch(stage, _element)
+	}
+	for _, _group := range all.Groups {
+		StageBranch(stage, _group)
 	}
 
 }
@@ -394,6 +410,9 @@ func (stage *StageStruct) StageBranchChoice(choice *Choice) {
 	//insertion point for the staging of instances referenced by slice of pointers
 	for _, _element := range choice.Elements {
 		StageBranch(stage, _element)
+	}
+	for _, _group := range choice.Groups {
+		StageBranch(stage, _group)
 	}
 
 }
@@ -482,6 +501,24 @@ func (stage *StageStruct) StageBranchEnumeration(enumeration *Enumeration) {
 	//insertion point for the staging of instances referenced by pointers
 	if enumeration.Annotation != nil {
 		StageBranch(stage, enumeration.Annotation)
+	}
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) StageBranchGroup(group *Group) {
+
+	// check if instance is already staged
+	if IsStaged(stage, group) {
+		return
+	}
+
+	group.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+	if group.Annotation != nil {
+		StageBranch(stage, group.Annotation)
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
@@ -665,8 +702,11 @@ func (stage *StageStruct) StageBranchSchema(schema *Schema) {
 	for _, _complextype := range schema.ComplexTypes {
 		StageBranch(stage, _complextype)
 	}
-	for _, _attributegroup := range schema.AttributeGroup {
+	for _, _attributegroup := range schema.AttributeGroups {
 		StageBranch(stage, _attributegroup)
+	}
+	for _, _group := range schema.Groups {
+		StageBranch(stage, _group)
 	}
 
 }
@@ -688,6 +728,9 @@ func (stage *StageStruct) StageBranchSequence(sequence *Sequence) {
 	//insertion point for the staging of instances referenced by slice of pointers
 	for _, _element := range sequence.Elements {
 		StageBranch(stage, _element)
+	}
+	for _, _group := range sequence.Groups {
+		StageBranch(stage, _group)
 	}
 
 }
@@ -796,6 +839,10 @@ func CopyBranch[Type Gongstruct](from *Type) (to *Type) {
 		toT := CopyBranchEnumeration(mapOrigCopy, fromT)
 		return any(toT).(*Type)
 
+	case *Group:
+		toT := CopyBranchGroup(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
 	case *Length:
 		toT := CopyBranchLength(mapOrigCopy, fromT)
 		return any(toT).(*Type)
@@ -871,6 +918,9 @@ func CopyBranchAll(mapOrigCopy map[any]any, allFrom *All) (allTo *All) {
 	//insertion point for the staging of instances referenced by slice of pointers
 	for _, _element := range allFrom.Elements {
 		allTo.Elements = append(allTo.Elements, CopyBranchElement(mapOrigCopy, _element))
+	}
+	for _, _group := range allFrom.Groups {
+		allTo.Groups = append(allTo.Groups, CopyBranchGroup(mapOrigCopy, _group))
 	}
 
 	return
@@ -965,6 +1015,9 @@ func CopyBranchChoice(mapOrigCopy map[any]any, choiceFrom *Choice) (choiceTo *Ch
 	//insertion point for the staging of instances referenced by slice of pointers
 	for _, _element := range choiceFrom.Elements {
 		choiceTo.Elements = append(choiceTo.Elements, CopyBranchElement(mapOrigCopy, _element))
+	}
+	for _, _group := range choiceFrom.Groups {
+		choiceTo.Groups = append(choiceTo.Groups, CopyBranchGroup(mapOrigCopy, _group))
 	}
 
 	return
@@ -1069,6 +1122,28 @@ func CopyBranchEnumeration(mapOrigCopy map[any]any, enumerationFrom *Enumeration
 	//insertion point for the staging of instances referenced by pointers
 	if enumerationFrom.Annotation != nil {
 		enumerationTo.Annotation = CopyBranchAnnotation(mapOrigCopy, enumerationFrom.Annotation)
+	}
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+	return
+}
+
+func CopyBranchGroup(mapOrigCopy map[any]any, groupFrom *Group) (groupTo *Group) {
+
+	// groupFrom has already been copied
+	if _groupTo, ok := mapOrigCopy[groupFrom]; ok {
+		groupTo = _groupTo.(*Group)
+		return
+	}
+
+	groupTo = new(Group)
+	mapOrigCopy[groupFrom] = groupTo
+	groupFrom.CopyBasicFields(groupTo)
+
+	//insertion point for the staging of instances referenced by pointers
+	if groupFrom.Annotation != nil {
+		groupTo.Annotation = CopyBranchAnnotation(mapOrigCopy, groupFrom.Annotation)
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
@@ -1284,8 +1359,11 @@ func CopyBranchSchema(mapOrigCopy map[any]any, schemaFrom *Schema) (schemaTo *Sc
 	for _, _complextype := range schemaFrom.ComplexTypes {
 		schemaTo.ComplexTypes = append(schemaTo.ComplexTypes, CopyBranchComplexType(mapOrigCopy, _complextype))
 	}
-	for _, _attributegroup := range schemaFrom.AttributeGroup {
-		schemaTo.AttributeGroup = append(schemaTo.AttributeGroup, CopyBranchAttributeGroup(mapOrigCopy, _attributegroup))
+	for _, _attributegroup := range schemaFrom.AttributeGroups {
+		schemaTo.AttributeGroups = append(schemaTo.AttributeGroups, CopyBranchAttributeGroup(mapOrigCopy, _attributegroup))
+	}
+	for _, _group := range schemaFrom.Groups {
+		schemaTo.Groups = append(schemaTo.Groups, CopyBranchGroup(mapOrigCopy, _group))
 	}
 
 	return
@@ -1311,6 +1389,9 @@ func CopyBranchSequence(mapOrigCopy map[any]any, sequenceFrom *Sequence) (sequen
 	//insertion point for the staging of instances referenced by slice of pointers
 	for _, _element := range sequenceFrom.Elements {
 		sequenceTo.Elements = append(sequenceTo.Elements, CopyBranchElement(mapOrigCopy, _element))
+	}
+	for _, _group := range sequenceFrom.Groups {
+		sequenceTo.Groups = append(sequenceTo.Groups, CopyBranchGroup(mapOrigCopy, _group))
 	}
 
 	return
@@ -1420,6 +1501,9 @@ func UnstageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 	case *Enumeration:
 		stage.UnstageBranchEnumeration(target)
 
+	case *Group:
+		stage.UnstageBranchGroup(target)
+
 	case *Length:
 		stage.UnstageBranchLength(target)
 
@@ -1479,6 +1563,9 @@ func (stage *StageStruct) UnstageBranchAll(all *All) {
 	//insertion point for the staging of instances referenced by slice of pointers
 	for _, _element := range all.Elements {
 		UnstageBranch(stage, _element)
+	}
+	for _, _group := range all.Groups {
+		UnstageBranch(stage, _group)
 	}
 
 }
@@ -1557,6 +1644,9 @@ func (stage *StageStruct) UnstageBranchChoice(choice *Choice) {
 	//insertion point for the staging of instances referenced by slice of pointers
 	for _, _element := range choice.Elements {
 		UnstageBranch(stage, _element)
+	}
+	for _, _group := range choice.Groups {
+		UnstageBranch(stage, _group)
 	}
 
 }
@@ -1645,6 +1735,24 @@ func (stage *StageStruct) UnstageBranchEnumeration(enumeration *Enumeration) {
 	//insertion point for the staging of instances referenced by pointers
 	if enumeration.Annotation != nil {
 		UnstageBranch(stage, enumeration.Annotation)
+	}
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) UnstageBranchGroup(group *Group) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, group) {
+		return
+	}
+
+	group.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+	if group.Annotation != nil {
+		UnstageBranch(stage, group.Annotation)
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
@@ -1828,8 +1936,11 @@ func (stage *StageStruct) UnstageBranchSchema(schema *Schema) {
 	for _, _complextype := range schema.ComplexTypes {
 		UnstageBranch(stage, _complextype)
 	}
-	for _, _attributegroup := range schema.AttributeGroup {
+	for _, _attributegroup := range schema.AttributeGroups {
 		UnstageBranch(stage, _attributegroup)
+	}
+	for _, _group := range schema.Groups {
+		UnstageBranch(stage, _group)
 	}
 
 }
@@ -1851,6 +1962,9 @@ func (stage *StageStruct) UnstageBranchSequence(sequence *Sequence) {
 	//insertion point for the staging of instances referenced by slice of pointers
 	for _, _element := range sequence.Elements {
 		UnstageBranch(stage, _element)
+	}
+	for _, _group := range sequence.Groups {
+		UnstageBranch(stage, _group)
 	}
 
 }

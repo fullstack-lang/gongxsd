@@ -323,6 +323,7 @@ var __gong__map_ComplexType = make(map[string]*ComplexType)
 var __gong__map_Documentation = make(map[string]*Documentation)
 var __gong__map_Element = make(map[string]*Element)
 var __gong__map_Enumeration = make(map[string]*Enumeration)
+var __gong__map_Group = make(map[string]*Group)
 var __gong__map_Length = make(map[string]*Length)
 var __gong__map_MaxInclusive = make(map[string]*MaxInclusive)
 var __gong__map_MaxLength = make(map[string]*MaxLength)
@@ -543,6 +544,10 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 										instanceEnumeration := (&Enumeration{Name: instanceName}).Stage(stage)
 										instance = any(instanceEnumeration)
 										__gong__map_Enumeration[identifier] = instanceEnumeration
+									case "Group":
+										instanceGroup := (&Group{Name: instanceName}).Stage(stage)
+										instance = any(instanceGroup)
+										__gong__map_Group[identifier] = instanceGroup
 									case "Length":
 										instanceLength := (&Length{Name: instanceName}).Stage(stage)
 										instance = any(instanceLength)
@@ -663,6 +668,10 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 							switch fieldName {
 							// insertion point for date assign code
 							}
+						case "Group":
+							switch fieldName {
+							// insertion point for date assign code
+							}
 						case "Length":
 							switch fieldName {
 							// insertion point for date assign code
@@ -745,6 +754,12 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 							target := __gong__map_Element[targetIdentifier]
 							__gong__map_All[identifier].Elements =
 								append(__gong__map_All[identifier].Elements, target)
+						case "Groups":
+							// remove first and last char
+							targetIdentifier := ident.Name
+							target := __gong__map_Group[targetIdentifier]
+							__gong__map_All[identifier].Groups =
+								append(__gong__map_All[identifier].Groups, target)
 						}
 					case "Annotation":
 						switch fieldName {
@@ -773,6 +788,12 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 							target := __gong__map_Element[targetIdentifier]
 							__gong__map_Choice[identifier].Elements =
 								append(__gong__map_Choice[identifier].Elements, target)
+						case "Groups":
+							// remove first and last char
+							targetIdentifier := ident.Name
+							target := __gong__map_Group[targetIdentifier]
+							__gong__map_Choice[identifier].Groups =
+								append(__gong__map_Choice[identifier].Groups, target)
 						}
 					case "ComplexType":
 						switch fieldName {
@@ -799,6 +820,10 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 						// insertion point for slice of pointers assign code
 						}
 					case "Enumeration":
+						switch fieldName {
+						// insertion point for slice of pointers assign code
+						}
+					case "Group":
 						switch fieldName {
 						// insertion point for slice of pointers assign code
 						}
@@ -857,12 +882,18 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 							target := __gong__map_ComplexType[targetIdentifier]
 							__gong__map_Schema[identifier].ComplexTypes =
 								append(__gong__map_Schema[identifier].ComplexTypes, target)
-						case "AttributeGroup":
+						case "AttributeGroups":
 							// remove first and last char
 							targetIdentifier := ident.Name
 							target := __gong__map_AttributeGroup[targetIdentifier]
-							__gong__map_Schema[identifier].AttributeGroup =
-								append(__gong__map_Schema[identifier].AttributeGroup, target)
+							__gong__map_Schema[identifier].AttributeGroups =
+								append(__gong__map_Schema[identifier].AttributeGroups, target)
+						case "Groups":
+							// remove first and last char
+							targetIdentifier := ident.Name
+							target := __gong__map_Group[targetIdentifier]
+							__gong__map_Schema[identifier].Groups =
+								append(__gong__map_Schema[identifier].Groups, target)
 						}
 					case "Sequence":
 						switch fieldName {
@@ -873,6 +904,12 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 							target := __gong__map_Element[targetIdentifier]
 							__gong__map_Sequence[identifier].Elements =
 								append(__gong__map_Sequence[identifier].Elements, target)
+						case "Groups":
+							// remove first and last char
+							targetIdentifier := ident.Name
+							target := __gong__map_Group[targetIdentifier]
+							__gong__map_Sequence[identifier].Groups =
+								append(__gong__map_Sequence[identifier].Groups, target)
 						}
 					case "SimpleType":
 						switch fieldName {
@@ -1139,6 +1176,22 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
 					__gong__map_Enumeration[identifier].Value = fielValue
 				}
+			case "Group":
+				switch fieldName {
+				// insertion point for field dependant code
+				case "Name":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_Group[identifier].Name = fielValue
+				case "NameXSD":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_Group[identifier].NameXSD = fielValue
+				case "Ref":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_Group[identifier].Ref = fielValue
+				}
 			case "Length":
 				switch fieldName {
 				// insertion point for field dependant code
@@ -1376,6 +1429,13 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					targetIdentifier := ident.Name
 					__gong__map_Enumeration[identifier].Annotation = __gong__map_Annotation[targetIdentifier]
 				}
+			case "Group":
+				switch fieldName {
+				// insertion point for field dependant code
+				case "Annotation":
+					targetIdentifier := ident.Name
+					__gong__map_Group[identifier].Annotation = __gong__map_Annotation[targetIdentifier]
+				}
 			case "Length":
 				switch fieldName {
 				// insertion point for field dependant code
@@ -1548,6 +1608,10 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					// insertion point for enum assign code
 					}
 				case "Enumeration":
+					switch fieldName {
+					// insertion point for enum assign code
+					}
+				case "Group":
 					switch fieldName {
 					// insertion point for enum assign code
 					}

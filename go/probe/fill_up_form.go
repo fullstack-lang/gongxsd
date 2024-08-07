@@ -28,6 +28,7 @@ func FillUpForm[T models.Gongstruct](
 		BasicFieldtoForm("MaxOccurs", instanceWithInferedType.MaxOccurs, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
 		AssociationSliceToForm("Elements", instanceWithInferedType, &instanceWithInferedType.Elements, formGroup, probe)
+		AssociationSliceToForm("Groups", instanceWithInferedType, &instanceWithInferedType.Groups, formGroup, probe)
 
 	case *models.Annotation:
 		// insertion point
@@ -119,19 +120,19 @@ func FillUpForm[T models.Gongstruct](
 			var rf models.ReverseField
 			_ = rf
 			rf.GongstructName = "Schema"
-			rf.Fieldname = "AttributeGroup"
+			rf.Fieldname = "AttributeGroups"
 			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
 			if reverseFieldOwner != nil {
 				AssociationReverseFieldToForm(
 					reverseFieldOwner.(*models.Schema),
-					"AttributeGroup",
+					"AttributeGroups",
 					instanceWithInferedType,
 					formGroup,
 					probe)
 			} else {
 				AssociationReverseFieldToForm[*models.Schema, *models.AttributeGroup](
 					nil,
-					"AttributeGroup",
+					"AttributeGroups",
 					instanceWithInferedType,
 					formGroup,
 					probe)
@@ -148,6 +149,7 @@ func FillUpForm[T models.Gongstruct](
 		BasicFieldtoForm("MaxOccurs", instanceWithInferedType.MaxOccurs, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
 		AssociationSliceToForm("Elements", instanceWithInferedType, &instanceWithInferedType.Elements, formGroup, probe)
+		AssociationSliceToForm("Groups", instanceWithInferedType, &instanceWithInferedType.Groups, formGroup, probe)
 
 	case *models.ComplexType:
 		// insertion point
@@ -367,6 +369,104 @@ func FillUpForm[T models.Gongstruct](
 			}
 		}
 
+	case *models.Group:
+		// insertion point
+		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		AssociationFieldToForm("Annotation", instanceWithInferedType.Annotation, formGroup, probe)
+		BasicFieldtoForm("NameXSD", instanceWithInferedType.NameXSD, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		BasicFieldtoForm("Ref", instanceWithInferedType.Ref, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		{
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "All"
+			rf.Fieldname = "Groups"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.All),
+					"Groups",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.All, *models.Group](
+					nil,
+					"Groups",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
+		{
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "Choice"
+			rf.Fieldname = "Groups"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.Choice),
+					"Groups",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.Choice, *models.Group](
+					nil,
+					"Groups",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
+		{
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "Schema"
+			rf.Fieldname = "Groups"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.Schema),
+					"Groups",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.Schema, *models.Group](
+					nil,
+					"Groups",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
+		{
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "Sequence"
+			rf.Fieldname = "Groups"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.Sequence),
+					"Groups",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.Sequence, *models.Group](
+					nil,
+					"Groups",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
+
 	case *models.Length:
 		// insertion point
 		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
@@ -442,7 +542,8 @@ func FillUpForm[T models.Gongstruct](
 		AssociationSliceToForm("Elements", instanceWithInferedType, &instanceWithInferedType.Elements, formGroup, probe)
 		AssociationSliceToForm("SimpleTypes", instanceWithInferedType, &instanceWithInferedType.SimpleTypes, formGroup, probe)
 		AssociationSliceToForm("ComplexTypes", instanceWithInferedType, &instanceWithInferedType.ComplexTypes, formGroup, probe)
-		AssociationSliceToForm("AttributeGroup", instanceWithInferedType, &instanceWithInferedType.AttributeGroup, formGroup, probe)
+		AssociationSliceToForm("AttributeGroups", instanceWithInferedType, &instanceWithInferedType.AttributeGroups, formGroup, probe)
+		AssociationSliceToForm("Groups", instanceWithInferedType, &instanceWithInferedType.Groups, formGroup, probe)
 
 	case *models.Sequence:
 		// insertion point
@@ -454,6 +555,7 @@ func FillUpForm[T models.Gongstruct](
 		BasicFieldtoForm("MaxOccurs", instanceWithInferedType.MaxOccurs, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
 		AssociationSliceToForm("Elements", instanceWithInferedType, &instanceWithInferedType.Elements, formGroup, probe)
+		AssociationSliceToForm("Groups", instanceWithInferedType, &instanceWithInferedType.Groups, formGroup, probe)
 
 	case *models.SimpleType:
 		// insertion point

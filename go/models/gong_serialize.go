@@ -23,6 +23,7 @@ func SerializeStage(stage *StageStruct, filename string) {
 		SerializeExcelize[Documentation](stage, f)
 		SerializeExcelize[Element](stage, f)
 		SerializeExcelize[Enumeration](stage, f)
+		SerializeExcelize[Group](stage, f)
 		SerializeExcelize[Length](stage, f)
 		SerializeExcelize[MaxInclusive](stage, f)
 		SerializeExcelize[MaxLength](stage, f)

@@ -55,6 +55,8 @@ type StageStruct struct {
 	// insertion point for slice of pointers maps
 	All_Elements_reverseMap map[*Element]*All
 
+	All_Groups_reverseMap map[*Group]*All
+
 	OnAfterAllCreateCallback OnAfterCreateInterface[All]
 	OnAfterAllUpdateCallback OnAfterUpdateInterface[All]
 	OnAfterAllDeleteCallback OnAfterDeleteInterface[All]
@@ -94,6 +96,8 @@ type StageStruct struct {
 
 	// insertion point for slice of pointers maps
 	Choice_Elements_reverseMap map[*Element]*Choice
+
+	Choice_Groups_reverseMap map[*Group]*Choice
 
 	OnAfterChoiceCreateCallback OnAfterCreateInterface[Choice]
 	OnAfterChoiceUpdateCallback OnAfterUpdateInterface[Choice]
@@ -139,6 +143,15 @@ type StageStruct struct {
 	OnAfterEnumerationUpdateCallback OnAfterUpdateInterface[Enumeration]
 	OnAfterEnumerationDeleteCallback OnAfterDeleteInterface[Enumeration]
 	OnAfterEnumerationReadCallback   OnAfterReadInterface[Enumeration]
+
+	Groups           map[*Group]any
+	Groups_mapString map[string]*Group
+
+	// insertion point for slice of pointers maps
+	OnAfterGroupCreateCallback OnAfterCreateInterface[Group]
+	OnAfterGroupUpdateCallback OnAfterUpdateInterface[Group]
+	OnAfterGroupDeleteCallback OnAfterDeleteInterface[Group]
+	OnAfterGroupReadCallback   OnAfterReadInterface[Group]
 
 	Lengths           map[*Length]any
 	Lengths_mapString map[string]*Length
@@ -215,7 +228,9 @@ type StageStruct struct {
 
 	Schema_ComplexTypes_reverseMap map[*ComplexType]*Schema
 
-	Schema_AttributeGroup_reverseMap map[*AttributeGroup]*Schema
+	Schema_AttributeGroups_reverseMap map[*AttributeGroup]*Schema
+
+	Schema_Groups_reverseMap map[*Group]*Schema
 
 	OnAfterSchemaCreateCallback OnAfterCreateInterface[Schema]
 	OnAfterSchemaUpdateCallback OnAfterUpdateInterface[Schema]
@@ -227,6 +242,8 @@ type StageStruct struct {
 
 	// insertion point for slice of pointers maps
 	Sequence_Elements_reverseMap map[*Element]*Sequence
+
+	Sequence_Groups_reverseMap map[*Group]*Sequence
 
 	OnAfterSequenceCreateCallback OnAfterCreateInterface[Sequence]
 	OnAfterSequenceUpdateCallback OnAfterUpdateInterface[Sequence]
@@ -346,6 +363,8 @@ type BackRepoInterface interface {
 	CheckoutElement(element *Element)
 	CommitEnumeration(enumeration *Enumeration)
 	CheckoutEnumeration(enumeration *Enumeration)
+	CommitGroup(group *Group)
+	CheckoutGroup(group *Group)
 	CommitLength(length *Length)
 	CheckoutLength(length *Length)
 	CommitMaxInclusive(maxinclusive *MaxInclusive)
@@ -403,6 +422,9 @@ func NewStage(path string) (stage *StageStruct) {
 
 		Enumerations:           make(map[*Enumeration]any),
 		Enumerations_mapString: make(map[string]*Enumeration),
+
+		Groups:           make(map[*Group]any),
+		Groups_mapString: make(map[string]*Group),
 
 		Lengths:           make(map[*Length]any),
 		Lengths_mapString: make(map[string]*Length),
@@ -482,6 +504,7 @@ func (stage *StageStruct) Commit() {
 	stage.Map_GongStructName_InstancesNb["Documentation"] = len(stage.Documentations)
 	stage.Map_GongStructName_InstancesNb["Element"] = len(stage.Elements)
 	stage.Map_GongStructName_InstancesNb["Enumeration"] = len(stage.Enumerations)
+	stage.Map_GongStructName_InstancesNb["Group"] = len(stage.Groups)
 	stage.Map_GongStructName_InstancesNb["Length"] = len(stage.Lengths)
 	stage.Map_GongStructName_InstancesNb["MaxInclusive"] = len(stage.MaxInclusives)
 	stage.Map_GongStructName_InstancesNb["MaxLength"] = len(stage.MaxLengths)
@@ -513,6 +536,7 @@ func (stage *StageStruct) Checkout() {
 	stage.Map_GongStructName_InstancesNb["Documentation"] = len(stage.Documentations)
 	stage.Map_GongStructName_InstancesNb["Element"] = len(stage.Elements)
 	stage.Map_GongStructName_InstancesNb["Enumeration"] = len(stage.Enumerations)
+	stage.Map_GongStructName_InstancesNb["Group"] = len(stage.Groups)
 	stage.Map_GongStructName_InstancesNb["Length"] = len(stage.Lengths)
 	stage.Map_GongStructName_InstancesNb["MaxInclusive"] = len(stage.MaxInclusives)
 	stage.Map_GongStructName_InstancesNb["MaxLength"] = len(stage.MaxLengths)
@@ -1005,6 +1029,56 @@ func (enumeration *Enumeration) Checkout(stage *StageStruct) *Enumeration {
 // for satisfaction of GongStruct interface
 func (enumeration *Enumeration) GetName() (res string) {
 	return enumeration.Name
+}
+
+// Stage puts group to the model stage
+func (group *Group) Stage(stage *StageStruct) *Group {
+	stage.Groups[group] = __member
+	stage.Groups_mapString[group.Name] = group
+
+	return group
+}
+
+// Unstage removes group off the model stage
+func (group *Group) Unstage(stage *StageStruct) *Group {
+	delete(stage.Groups, group)
+	delete(stage.Groups_mapString, group.Name)
+	return group
+}
+
+// UnstageVoid removes group off the model stage
+func (group *Group) UnstageVoid(stage *StageStruct) {
+	delete(stage.Groups, group)
+	delete(stage.Groups_mapString, group.Name)
+}
+
+// commit group to the back repo (if it is already staged)
+func (group *Group) Commit(stage *StageStruct) *Group {
+	if _, ok := stage.Groups[group]; ok {
+		if stage.BackRepo != nil {
+			stage.BackRepo.CommitGroup(group)
+		}
+	}
+	return group
+}
+
+func (group *Group) CommitVoid(stage *StageStruct) {
+	group.Commit(stage)
+}
+
+// Checkout group to the back repo (if it is already staged)
+func (group *Group) Checkout(stage *StageStruct) *Group {
+	if _, ok := stage.Groups[group]; ok {
+		if stage.BackRepo != nil {
+			stage.BackRepo.CheckoutGroup(group)
+		}
+	}
+	return group
+}
+
+// for satisfaction of GongStruct interface
+func (group *Group) GetName() (res string) {
+	return group.Name
 }
 
 // Stage puts length to the model stage
@@ -1618,6 +1692,7 @@ type AllModelsStructCreateInterface interface { // insertion point for Callbacks
 	CreateORMDocumentation(Documentation *Documentation)
 	CreateORMElement(Element *Element)
 	CreateORMEnumeration(Enumeration *Enumeration)
+	CreateORMGroup(Group *Group)
 	CreateORMLength(Length *Length)
 	CreateORMMaxInclusive(MaxInclusive *MaxInclusive)
 	CreateORMMaxLength(MaxLength *MaxLength)
@@ -1642,6 +1717,7 @@ type AllModelsStructDeleteInterface interface { // insertion point for Callbacks
 	DeleteORMDocumentation(Documentation *Documentation)
 	DeleteORMElement(Element *Element)
 	DeleteORMEnumeration(Enumeration *Enumeration)
+	DeleteORMGroup(Group *Group)
 	DeleteORMLength(Length *Length)
 	DeleteORMMaxInclusive(MaxInclusive *MaxInclusive)
 	DeleteORMMaxLength(MaxLength *MaxLength)
@@ -1683,6 +1759,9 @@ func (stage *StageStruct) Reset() { // insertion point for array reset
 
 	stage.Enumerations = make(map[*Enumeration]any)
 	stage.Enumerations_mapString = make(map[string]*Enumeration)
+
+	stage.Groups = make(map[*Group]any)
+	stage.Groups_mapString = make(map[string]*Group)
 
 	stage.Lengths = make(map[*Length]any)
 	stage.Lengths_mapString = make(map[string]*Length)
@@ -1749,6 +1828,9 @@ func (stage *StageStruct) Nil() { // insertion point for array nil
 
 	stage.Enumerations = nil
 	stage.Enumerations_mapString = nil
+
+	stage.Groups = nil
+	stage.Groups_mapString = nil
 
 	stage.Lengths = nil
 	stage.Lengths_mapString = nil
@@ -1823,6 +1905,10 @@ func (stage *StageStruct) Unstage() { // insertion point for array nil
 
 	for enumeration := range stage.Enumerations {
 		enumeration.Unstage(stage)
+	}
+
+	for group := range stage.Groups {
+		group.Unstage(stage)
 	}
 
 	for length := range stage.Lengths {
@@ -1951,6 +2037,8 @@ func GongGetSet[Type GongstructSet](stage *StageStruct) *Type {
 		return any(&stage.Elements).(*Type)
 	case map[*Enumeration]any:
 		return any(&stage.Enumerations).(*Type)
+	case map[*Group]any:
+		return any(&stage.Groups).(*Type)
 	case map[*Length]any:
 		return any(&stage.Lengths).(*Type)
 	case map[*MaxInclusive]any:
@@ -2005,6 +2093,8 @@ func GongGetMap[Type GongstructMapString](stage *StageStruct) *Type {
 		return any(&stage.Elements_mapString).(*Type)
 	case map[string]*Enumeration:
 		return any(&stage.Enumerations_mapString).(*Type)
+	case map[string]*Group:
+		return any(&stage.Groups_mapString).(*Type)
 	case map[string]*Length:
 		return any(&stage.Lengths_mapString).(*Type)
 	case map[string]*MaxInclusive:
@@ -2059,6 +2149,8 @@ func GetGongstructInstancesSet[Type Gongstruct](stage *StageStruct) *map[*Type]a
 		return any(&stage.Elements).(*map[*Type]any)
 	case Enumeration:
 		return any(&stage.Enumerations).(*map[*Type]any)
+	case Group:
+		return any(&stage.Groups).(*map[*Type]any)
 	case Length:
 		return any(&stage.Lengths).(*map[*Type]any)
 	case MaxInclusive:
@@ -2113,6 +2205,8 @@ func GetGongstructInstancesSetFromPointerType[Type PointerToGongstruct](stage *S
 		return any(&stage.Elements).(*map[Type]any)
 	case *Enumeration:
 		return any(&stage.Enumerations).(*map[Type]any)
+	case *Group:
+		return any(&stage.Groups).(*map[Type]any)
 	case *Length:
 		return any(&stage.Lengths).(*map[Type]any)
 	case *MaxInclusive:
@@ -2167,6 +2261,8 @@ func GetGongstructInstancesMap[Type Gongstruct](stage *StageStruct) *map[string]
 		return any(&stage.Elements_mapString).(*map[string]*Type)
 	case Enumeration:
 		return any(&stage.Enumerations_mapString).(*map[string]*Type)
+	case Group:
+		return any(&stage.Groups_mapString).(*map[string]*Type)
 	case Length:
 		return any(&stage.Lengths_mapString).(*map[string]*Type)
 	case MaxInclusive:
@@ -2210,6 +2306,8 @@ func GetAssociationName[Type Gongstruct]() *Type {
 			// Initialisation of associations
 			// field is initialized with an instance of Element with the name of the field
 			Elements: []*Element{{Name: "Elements"}},
+			// field is initialized with an instance of Group with the name of the field
+			Groups: []*Group{{Name: "Groups"}},
 			// field is initialized with ElementWithAnnotation as it is a composite
 			ElementWithAnnotation: ElementWithAnnotation{
 				// per field init
@@ -2250,6 +2348,8 @@ func GetAssociationName[Type Gongstruct]() *Type {
 			// Initialisation of associations
 			// field is initialized with an instance of Element with the name of the field
 			Elements: []*Element{{Name: "Elements"}},
+			// field is initialized with an instance of Group with the name of the field
+			Groups: []*Group{{Name: "Groups"}},
 			// field is initialized with ElementWithAnnotation as it is a composite
 			ElementWithAnnotation: ElementWithAnnotation{
 				// per field init
@@ -2297,6 +2397,16 @@ func GetAssociationName[Type Gongstruct]() *Type {
 		}).(*Type)
 	case Enumeration:
 		return any(&Enumeration{
+			// Initialisation of associations
+			// field is initialized with ElementWithAnnotation as it is a composite
+			ElementWithAnnotation: ElementWithAnnotation{
+				// per field init
+				//
+				Annotation: &Annotation{Name: "Annotation"},
+			},
+		}).(*Type)
+	case Group:
+		return any(&Group{
 			// Initialisation of associations
 			// field is initialized with ElementWithAnnotation as it is a composite
 			ElementWithAnnotation: ElementWithAnnotation{
@@ -2403,7 +2513,9 @@ func GetAssociationName[Type Gongstruct]() *Type {
 			// field is initialized with an instance of ComplexType with the name of the field
 			ComplexTypes: []*ComplexType{{Name: "ComplexTypes"}},
 			// field is initialized with an instance of AttributeGroup with the name of the field
-			AttributeGroup: []*AttributeGroup{{Name: "AttributeGroup"}},
+			AttributeGroups: []*AttributeGroup{{Name: "AttributeGroups"}},
+			// field is initialized with an instance of Group with the name of the field
+			Groups: []*Group{{Name: "Groups"}},
 			// field is initialized with ElementWithAnnotation as it is a composite
 			ElementWithAnnotation: ElementWithAnnotation{
 				// per field init
@@ -2416,6 +2528,8 @@ func GetAssociationName[Type Gongstruct]() *Type {
 			// Initialisation of associations
 			// field is initialized with an instance of Element with the name of the field
 			Elements: []*Element{{Name: "Elements"}},
+			// field is initialized with an instance of Group with the name of the field
+			Groups: []*Group{{Name: "Groups"}},
 			// field is initialized with ElementWithAnnotation as it is a composite
 			ElementWithAnnotation: ElementWithAnnotation{
 				// per field init
@@ -2735,6 +2849,28 @@ func GetPointerReverseMap[Start, End Gongstruct](fieldname string, stage *StageS
 					}
 					enumerations = append(enumerations, enumeration)
 					res[annotation_] = enumerations
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		}
+	// reverse maps of direct associations of Group
+	case Group:
+		switch fieldname {
+		// insertion point for per direct association field
+		case "Annotation":
+			res := make(map[*Annotation][]*Group)
+			for group := range stage.Groups {
+				if group.Annotation != nil {
+					annotation_ := group.Annotation
+					var groups []*Group
+					_, ok := res[annotation_]
+					if ok {
+						groups = res[annotation_]
+					} else {
+						groups = make([]*Group, 0)
+					}
+					groups = append(groups, group)
+					res[annotation_] = groups
 				}
 			}
 			return any(res).(map[*End][]*Start)
@@ -3184,6 +3320,14 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 				}
 			}
 			return any(res).(map[*End]*Start)
+		case "Groups":
+			res := make(map[*Group]*All)
+			for all := range stage.Alls {
+				for _, group_ := range all.Groups {
+					res[group_] = all
+				}
+			}
+			return any(res).(map[*End]*Start)
 		}
 	// reverse maps of direct associations of Annotation
 	case Annotation:
@@ -3217,6 +3361,14 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 			for choice := range stage.Choices {
 				for _, element_ := range choice.Elements {
 					res[element_] = choice
+				}
+			}
+			return any(res).(map[*End]*Start)
+		case "Groups":
+			res := make(map[*Group]*Choice)
+			for choice := range stage.Choices {
+				for _, group_ := range choice.Groups {
+					res[group_] = choice
 				}
 			}
 			return any(res).(map[*End]*Start)
@@ -3254,6 +3406,11 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 		}
 	// reverse maps of direct associations of Enumeration
 	case Enumeration:
+		switch fieldname {
+		// insertion point for per direct association field
+		}
+	// reverse maps of direct associations of Group
+	case Group:
 		switch fieldname {
 		// insertion point for per direct association field
 		}
@@ -3328,11 +3485,19 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 				}
 			}
 			return any(res).(map[*End]*Start)
-		case "AttributeGroup":
+		case "AttributeGroups":
 			res := make(map[*AttributeGroup]*Schema)
 			for schema := range stage.Schemas {
-				for _, attributegroup_ := range schema.AttributeGroup {
+				for _, attributegroup_ := range schema.AttributeGroups {
 					res[attributegroup_] = schema
+				}
+			}
+			return any(res).(map[*End]*Start)
+		case "Groups":
+			res := make(map[*Group]*Schema)
+			for schema := range stage.Schemas {
+				for _, group_ := range schema.Groups {
+					res[group_] = schema
 				}
 			}
 			return any(res).(map[*End]*Start)
@@ -3346,6 +3511,14 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 			for sequence := range stage.Sequences {
 				for _, element_ := range sequence.Elements {
 					res[element_] = sequence
+				}
+			}
+			return any(res).(map[*End]*Start)
+		case "Groups":
+			res := make(map[*Group]*Sequence)
+			for sequence := range stage.Sequences {
+				for _, group_ := range sequence.Groups {
+					res[group_] = sequence
 				}
 			}
 			return any(res).(map[*End]*Start)
@@ -3395,6 +3568,8 @@ func GetGongstructName[Type Gongstruct]() (res string) {
 		res = "Element"
 	case Enumeration:
 		res = "Enumeration"
+	case Group:
+		res = "Group"
 	case Length:
 		res = "Length"
 	case MaxInclusive:
@@ -3449,6 +3624,8 @@ func GetPointerToGongstructName[Type PointerToGongstruct]() (res string) {
 		res = "Element"
 	case *Enumeration:
 		res = "Enumeration"
+	case *Group:
+		res = "Group"
 	case *Length:
 		res = "Length"
 	case *MaxInclusive:
@@ -3485,7 +3662,7 @@ func GetFields[Type Gongstruct]() (res []string) {
 	switch any(ret).(type) {
 	// insertion point for generic get gongstruct name
 	case All:
-		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "Elements"}
+		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "Elements", "Groups"}
 	case Annotation:
 		res = []string{"Name", "Documentations"}
 	case Attribute:
@@ -3493,7 +3670,7 @@ func GetFields[Type Gongstruct]() (res []string) {
 	case AttributeGroup:
 		res = []string{"Name", "NameXSD", "Annotation", "AttributeGroup", "Ref"}
 	case Choice:
-		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "Elements"}
+		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "Elements", "Groups"}
 	case ComplexType:
 		res = []string{"Name", "Annotation", "NameXSD", "Sequence", "All", "Choice", "Attributes", "AttributeGroups"}
 	case Documentation:
@@ -3502,6 +3679,8 @@ func GetFields[Type Gongstruct]() (res []string) {
 		res = []string{"Name", "Annotation", "NameXSD", "Type", "MinOccurs", "MaxOccurs", "Default", "Fixed", "Nillable", "Ref", "Abstract", "Form", "Block", "Final", "SimpleType", "ComplexType"}
 	case Enumeration:
 		res = []string{"Name", "Annotation", "Value"}
+	case Group:
+		res = []string{"Name", "Annotation", "NameXSD", "Ref"}
 	case Length:
 		res = []string{"Name", "Annotation", "Value"}
 	case MaxInclusive:
@@ -3517,9 +3696,9 @@ func GetFields[Type Gongstruct]() (res []string) {
 	case Restriction:
 		res = []string{"Name", "Annotation", "Base", "Enumerations", "MinInclusive", "MaxInclusive", "Pattern", "WhiteSpace", "MinLength", "MaxLength", "Length", "TotalDigit"}
 	case Schema:
-		res = []string{"Name", "Xs", "Annotation", "Elements", "SimpleTypes", "ComplexTypes", "AttributeGroup"}
+		res = []string{"Name", "Xs", "Annotation", "Elements", "SimpleTypes", "ComplexTypes", "AttributeGroups", "Groups"}
 	case Sequence:
-		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "Elements"}
+		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "Elements", "Groups"}
 	case SimpleType:
 		res = []string{"Name", "Annotation", "NameXSD", "Restriction"}
 	case TotalDigit:
@@ -3563,7 +3742,7 @@ func GetReverseFields[Type Gongstruct]() (res []ReverseField) {
 		rf.Fieldname = "AttributeGroups"
 		res = append(res, rf)
 		rf.GongstructName = "Schema"
-		rf.Fieldname = "AttributeGroup"
+		rf.Fieldname = "AttributeGroups"
 		res = append(res, rf)
 	case Choice:
 		var rf ReverseField
@@ -3600,6 +3779,21 @@ func GetReverseFields[Type Gongstruct]() (res []ReverseField) {
 		_ = rf
 		rf.GongstructName = "Restriction"
 		rf.Fieldname = "Enumerations"
+		res = append(res, rf)
+	case Group:
+		var rf ReverseField
+		_ = rf
+		rf.GongstructName = "All"
+		rf.Fieldname = "Groups"
+		res = append(res, rf)
+		rf.GongstructName = "Choice"
+		rf.Fieldname = "Groups"
+		res = append(res, rf)
+		rf.GongstructName = "Schema"
+		rf.Fieldname = "Groups"
+		res = append(res, rf)
+		rf.GongstructName = "Sequence"
+		rf.Fieldname = "Groups"
 		res = append(res, rf)
 	case Length:
 		var rf ReverseField
@@ -3652,7 +3846,7 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 	switch any(ret).(type) {
 	// insertion point for generic get gongstruct name
 	case *All:
-		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "Elements"}
+		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "Elements", "Groups"}
 	case *Annotation:
 		res = []string{"Name", "Documentations"}
 	case *Attribute:
@@ -3660,7 +3854,7 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 	case *AttributeGroup:
 		res = []string{"Name", "NameXSD", "Annotation", "AttributeGroup", "Ref"}
 	case *Choice:
-		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "Elements"}
+		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "Elements", "Groups"}
 	case *ComplexType:
 		res = []string{"Name", "Annotation", "NameXSD", "Sequence", "All", "Choice", "Attributes", "AttributeGroups"}
 	case *Documentation:
@@ -3669,6 +3863,8 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 		res = []string{"Name", "Annotation", "NameXSD", "Type", "MinOccurs", "MaxOccurs", "Default", "Fixed", "Nillable", "Ref", "Abstract", "Form", "Block", "Final", "SimpleType", "ComplexType"}
 	case *Enumeration:
 		res = []string{"Name", "Annotation", "Value"}
+	case *Group:
+		res = []string{"Name", "Annotation", "NameXSD", "Ref"}
 	case *Length:
 		res = []string{"Name", "Annotation", "Value"}
 	case *MaxInclusive:
@@ -3684,9 +3880,9 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 	case *Restriction:
 		res = []string{"Name", "Annotation", "Base", "Enumerations", "MinInclusive", "MaxInclusive", "Pattern", "WhiteSpace", "MinLength", "MaxLength", "Length", "TotalDigit"}
 	case *Schema:
-		res = []string{"Name", "Xs", "Annotation", "Elements", "SimpleTypes", "ComplexTypes", "AttributeGroup"}
+		res = []string{"Name", "Xs", "Annotation", "Elements", "SimpleTypes", "ComplexTypes", "AttributeGroups", "Groups"}
 	case *Sequence:
-		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "Elements"}
+		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "Elements", "Groups"}
 	case *SimpleType:
 		res = []string{"Name", "Annotation", "NameXSD", "Restriction"}
 	case *TotalDigit:
@@ -3716,6 +3912,13 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 			res = inferedInstance.MaxOccurs
 		case "Elements":
 			for idx, __instance__ := range inferedInstance.Elements {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
+		case "Groups":
+			for idx, __instance__ := range inferedInstance.Groups {
 				if idx > 0 {
 					res += "\n"
 				}
@@ -3798,6 +4001,13 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 			res = inferedInstance.MaxOccurs
 		case "Elements":
 			for idx, __instance__ := range inferedInstance.Elements {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
+		case "Groups":
+			for idx, __instance__ := range inferedInstance.Groups {
 				if idx > 0 {
 					res += "\n"
 				}
@@ -3907,6 +4117,20 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 			}
 		case "Value":
 			res = inferedInstance.Value
+		}
+	case *Group:
+		switch fieldName {
+		// string value of fields
+		case "Name":
+			res = inferedInstance.Name
+		case "Annotation":
+			if inferedInstance.Annotation != nil {
+				res = inferedInstance.Annotation.Name
+			}
+		case "NameXSD":
+			res = inferedInstance.NameXSD
+		case "Ref":
+			res = inferedInstance.Ref
 		}
 	case *Length:
 		switch fieldName {
@@ -4063,8 +4287,15 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 				}
 				res += __instance__.Name
 			}
-		case "AttributeGroup":
-			for idx, __instance__ := range inferedInstance.AttributeGroup {
+		case "AttributeGroups":
+			for idx, __instance__ := range inferedInstance.AttributeGroups {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
+		case "Groups":
+			for idx, __instance__ := range inferedInstance.Groups {
 				if idx > 0 {
 					res += "\n"
 				}
@@ -4086,6 +4317,13 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 			res = inferedInstance.MaxOccurs
 		case "Elements":
 			for idx, __instance__ := range inferedInstance.Elements {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
+		case "Groups":
+			for idx, __instance__ := range inferedInstance.Groups {
 				if idx > 0 {
 					res += "\n"
 				}
@@ -4162,6 +4400,13 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 				}
 				res += __instance__.Name
 			}
+		case "Groups":
+			for idx, __instance__ := range inferedInstance.Groups {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
 		}
 	case Annotation:
 		switch fieldName {
@@ -4239,6 +4484,13 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 			res = inferedInstance.MaxOccurs
 		case "Elements":
 			for idx, __instance__ := range inferedInstance.Elements {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
+		case "Groups":
+			for idx, __instance__ := range inferedInstance.Groups {
 				if idx > 0 {
 					res += "\n"
 				}
@@ -4348,6 +4600,20 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 			}
 		case "Value":
 			res = inferedInstance.Value
+		}
+	case Group:
+		switch fieldName {
+		// string value of fields
+		case "Name":
+			res = inferedInstance.Name
+		case "Annotation":
+			if inferedInstance.Annotation != nil {
+				res = inferedInstance.Annotation.Name
+			}
+		case "NameXSD":
+			res = inferedInstance.NameXSD
+		case "Ref":
+			res = inferedInstance.Ref
 		}
 	case Length:
 		switch fieldName {
@@ -4504,8 +4770,15 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 				}
 				res += __instance__.Name
 			}
-		case "AttributeGroup":
-			for idx, __instance__ := range inferedInstance.AttributeGroup {
+		case "AttributeGroups":
+			for idx, __instance__ := range inferedInstance.AttributeGroups {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
+		case "Groups":
+			for idx, __instance__ := range inferedInstance.Groups {
 				if idx > 0 {
 					res += "\n"
 				}
@@ -4527,6 +4800,13 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 			res = inferedInstance.MaxOccurs
 		case "Elements":
 			for idx, __instance__ := range inferedInstance.Elements {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
+		case "Groups":
+			for idx, __instance__ := range inferedInstance.Groups {
 				if idx > 0 {
 					res += "\n"
 				}

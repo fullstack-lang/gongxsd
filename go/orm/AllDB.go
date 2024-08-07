@@ -53,6 +53,9 @@ type AllPointersEncoding struct {
 
 	// field Elements is a slice of pointers to another Struct (optional or 0..1)
 	Elements IntSlice `gorm:"type:TEXT"`
+
+	// field Groups is a slice of pointers to another Struct (optional or 0..1)
+	Groups IntSlice `gorm:"type:TEXT"`
 }
 
 // AllDB describes a all in the database
@@ -260,6 +263,24 @@ func (backRepoAll *BackRepoAllStruct) CommitPhaseTwoInstance(backRepo *BackRepoS
 				append(allDB.AllPointersEncoding.Elements, int(elementAssocEnd_DB.ID))
 		}
 
+		// 1. reset
+		allDB.AllPointersEncoding.Groups = make([]int, 0)
+		// 2. encode
+		for _, groupAssocEnd := range all.Groups {
+			groupAssocEnd_DB :=
+				backRepo.BackRepoGroup.GetGroupDBFromGroupPtr(groupAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the groupAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if groupAssocEnd_DB == nil {
+				continue
+			}
+			
+			allDB.AllPointersEncoding.Groups =
+				append(allDB.AllPointersEncoding.Groups, int(groupAssocEnd_DB.ID))
+		}
+
 		query := backRepoAll.db.Save(&allDB)
 		if query.Error != nil {
 			log.Fatalln(query.Error)
@@ -385,6 +406,15 @@ func (allDB *AllDB) DecodePointers(backRepo *BackRepoStruct, all *models.All) {
 	all.Elements = all.Elements[:0]
 	for _, _Elementid := range allDB.AllPointersEncoding.Elements {
 		all.Elements = append(all.Elements, backRepo.BackRepoElement.Map_ElementDBID_ElementPtr[uint(_Elementid)])
+	}
+
+	// This loop redeem all.Groups in the stage from the encode in the back repo
+	// It parses all GroupDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	all.Groups = all.Groups[:0]
+	for _, _Groupid := range allDB.AllPointersEncoding.Groups {
+		all.Groups = append(all.Groups, backRepo.BackRepoGroup.Map_GroupDBID_GroupPtr[uint(_Groupid)])
 	}
 
 	return

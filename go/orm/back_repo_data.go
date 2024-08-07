@@ -22,6 +22,8 @@ type BackRepoData struct {
 
 	EnumerationAPIs []*EnumerationAPI
 
+	GroupAPIs []*GroupAPI
+
 	LengthAPIs []*LengthAPI
 
 	MaxInclusiveAPIs []*MaxInclusiveAPI
@@ -137,6 +139,16 @@ func CopyBackRepoToBackRepoData(backRepo *BackRepoStruct, backRepoData *BackRepo
 		enumerationDB.CopyBasicFieldsToEnumeration_WOP(&enumerationAPI.Enumeration_WOP)
 
 		backRepoData.EnumerationAPIs = append(backRepoData.EnumerationAPIs, &enumerationAPI)
+	}
+
+	for _, groupDB := range backRepo.BackRepoGroup.Map_GroupDBID_GroupDB {
+
+		var groupAPI GroupAPI
+		groupAPI.ID = groupDB.ID
+		groupAPI.GroupPointersEncoding = groupDB.GroupPointersEncoding
+		groupDB.CopyBasicFieldsToGroup_WOP(&groupAPI.Group_WOP)
+
+		backRepoData.GroupAPIs = append(backRepoData.GroupAPIs, &groupAPI)
 	}
 
 	for _, lengthDB := range backRepo.BackRepoLength.Map_LengthDBID_LengthDB {

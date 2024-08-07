@@ -163,6 +163,20 @@ func (from *Enumeration) CopyBasicFields(to *Enumeration) {
 	to.Value = from.Value
 }
 
+type Group_WOP struct {
+	// insertion point
+	Name string
+	NameXSD string
+	Ref string
+}
+
+func (from *Group) CopyBasicFields(to *Group) {
+	// insertion point
+	to.Name = from.Name
+	to.NameXSD = from.NameXSD
+	to.Ref = from.Ref
+}
+
 type Length_WOP struct {
 	// insertion point
 	Name string

@@ -53,6 +53,9 @@ type SequencePointersEncoding struct {
 
 	// field Elements is a slice of pointers to another Struct (optional or 0..1)
 	Elements IntSlice `gorm:"type:TEXT"`
+
+	// field Groups is a slice of pointers to another Struct (optional or 0..1)
+	Groups IntSlice `gorm:"type:TEXT"`
 }
 
 // SequenceDB describes a sequence in the database
@@ -260,6 +263,24 @@ func (backRepoSequence *BackRepoSequenceStruct) CommitPhaseTwoInstance(backRepo 
 				append(sequenceDB.SequencePointersEncoding.Elements, int(elementAssocEnd_DB.ID))
 		}
 
+		// 1. reset
+		sequenceDB.SequencePointersEncoding.Groups = make([]int, 0)
+		// 2. encode
+		for _, groupAssocEnd := range sequence.Groups {
+			groupAssocEnd_DB :=
+				backRepo.BackRepoGroup.GetGroupDBFromGroupPtr(groupAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the groupAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if groupAssocEnd_DB == nil {
+				continue
+			}
+			
+			sequenceDB.SequencePointersEncoding.Groups =
+				append(sequenceDB.SequencePointersEncoding.Groups, int(groupAssocEnd_DB.ID))
+		}
+
 		query := backRepoSequence.db.Save(&sequenceDB)
 		if query.Error != nil {
 			log.Fatalln(query.Error)
@@ -385,6 +406,15 @@ func (sequenceDB *SequenceDB) DecodePointers(backRepo *BackRepoStruct, sequence 
 	sequence.Elements = sequence.Elements[:0]
 	for _, _Elementid := range sequenceDB.SequencePointersEncoding.Elements {
 		sequence.Elements = append(sequence.Elements, backRepo.BackRepoElement.Map_ElementDBID_ElementPtr[uint(_Elementid)])
+	}
+
+	// This loop redeem sequence.Groups in the stage from the encode in the back repo
+	// It parses all GroupDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	sequence.Groups = sequence.Groups[:0]
+	for _, _Groupid := range sequenceDB.SequencePointersEncoding.Groups {
+		sequence.Groups = append(sequence.Groups, backRepo.BackRepoGroup.Map_GroupDBID_GroupPtr[uint(_Groupid)])
 	}
 
 	return
