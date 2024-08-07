@@ -2262,6 +2262,10 @@ func GetAssociationName[Type Gongstruct]() *Type {
 			// Initialisation of associations
 			// field is initialized with an instance of Sequence with the name of the field
 			Sequence: &Sequence{Name: "Sequence"},
+			// field is initialized with an instance of All with the name of the field
+			All: &All{Name: "All"},
+			// field is initialized with an instance of Choice with the name of the field
+			Choice: &Choice{Name: "Choice"},
 			// field is initialized with an instance of Attribute with the name of the field
 			Attributes: []*Attribute{{Name: "Attributes"}},
 			// field is initialized with an instance of AttributeGroup with the name of the field
@@ -2614,6 +2618,40 @@ func GetPointerReverseMap[Start, End Gongstruct](fieldname string, stage *StageS
 					}
 					complextypes = append(complextypes, complextype)
 					res[sequence_] = complextypes
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "All":
+			res := make(map[*All][]*ComplexType)
+			for complextype := range stage.ComplexTypes {
+				if complextype.All != nil {
+					all_ := complextype.All
+					var complextypes []*ComplexType
+					_, ok := res[all_]
+					if ok {
+						complextypes = res[all_]
+					} else {
+						complextypes = make([]*ComplexType, 0)
+					}
+					complextypes = append(complextypes, complextype)
+					res[all_] = complextypes
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "Choice":
+			res := make(map[*Choice][]*ComplexType)
+			for complextype := range stage.ComplexTypes {
+				if complextype.Choice != nil {
+					choice_ := complextype.Choice
+					var complextypes []*ComplexType
+					_, ok := res[choice_]
+					if ok {
+						complextypes = res[choice_]
+					} else {
+						complextypes = make([]*ComplexType, 0)
+					}
+					complextypes = append(complextypes, complextype)
+					res[choice_] = complextypes
 				}
 			}
 			return any(res).(map[*End][]*Start)
@@ -3457,7 +3495,7 @@ func GetFields[Type Gongstruct]() (res []string) {
 	case Choice:
 		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "Elements"}
 	case ComplexType:
-		res = []string{"Name", "Annotation", "NameXSD", "Sequence", "Attributes", "AttributeGroups"}
+		res = []string{"Name", "Annotation", "NameXSD", "Sequence", "All", "Choice", "Attributes", "AttributeGroups"}
 	case Documentation:
 		res = []string{"Name", "Text", "Source", "Lang"}
 	case Element:
@@ -3624,7 +3662,7 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 	case *Choice:
 		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "Elements"}
 	case *ComplexType:
-		res = []string{"Name", "Annotation", "NameXSD", "Sequence", "Attributes", "AttributeGroups"}
+		res = []string{"Name", "Annotation", "NameXSD", "Sequence", "All", "Choice", "Attributes", "AttributeGroups"}
 	case *Documentation:
 		res = []string{"Name", "Text", "Source", "Lang"}
 	case *Element:
@@ -3780,6 +3818,14 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		case "Sequence":
 			if inferedInstance.Sequence != nil {
 				res = inferedInstance.Sequence.Name
+			}
+		case "All":
+			if inferedInstance.All != nil {
+				res = inferedInstance.All.Name
+			}
+		case "Choice":
+			if inferedInstance.Choice != nil {
+				res = inferedInstance.Choice.Name
 			}
 		case "Attributes":
 			for idx, __instance__ := range inferedInstance.Attributes {
@@ -4213,6 +4259,14 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		case "Sequence":
 			if inferedInstance.Sequence != nil {
 				res = inferedInstance.Sequence.Name
+			}
+		case "All":
+			if inferedInstance.All != nil {
+				res = inferedInstance.All.Name
+			}
+		case "Choice":
+			if inferedInstance.Choice != nil {
+				res = inferedInstance.Choice.Name
 			}
 		case "Attributes":
 			for idx, __instance__ := range inferedInstance.Attributes {

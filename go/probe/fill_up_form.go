@@ -157,6 +157,8 @@ func FillUpForm[T models.Gongstruct](
 		BasicFieldtoForm("NameXSD", instanceWithInferedType.NameXSD, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
 		AssociationFieldToForm("Sequence", instanceWithInferedType.Sequence, formGroup, probe)
+		AssociationFieldToForm("All", instanceWithInferedType.All, formGroup, probe)
+		AssociationFieldToForm("Choice", instanceWithInferedType.Choice, formGroup, probe)
 		AssociationSliceToForm("Attributes", instanceWithInferedType, &instanceWithInferedType.Attributes, formGroup, probe)
 		AssociationSliceToForm("AttributeGroups", instanceWithInferedType, &instanceWithInferedType.AttributeGroups, formGroup, probe)
 		{

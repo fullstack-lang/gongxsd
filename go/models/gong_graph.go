@@ -414,6 +414,12 @@ func (stage *StageStruct) StageBranchComplexType(complextype *ComplexType) {
 	if complextype.Sequence != nil {
 		StageBranch(stage, complextype.Sequence)
 	}
+	if complextype.All != nil {
+		StageBranch(stage, complextype.All)
+	}
+	if complextype.Choice != nil {
+		StageBranch(stage, complextype.Choice)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 	for _, _attribute := range complextype.Attributes {
@@ -982,6 +988,12 @@ func CopyBranchComplexType(mapOrigCopy map[any]any, complextypeFrom *ComplexType
 	}
 	if complextypeFrom.Sequence != nil {
 		complextypeTo.Sequence = CopyBranchSequence(mapOrigCopy, complextypeFrom.Sequence)
+	}
+	if complextypeFrom.All != nil {
+		complextypeTo.All = CopyBranchAll(mapOrigCopy, complextypeFrom.All)
+	}
+	if complextypeFrom.Choice != nil {
+		complextypeTo.Choice = CopyBranchChoice(mapOrigCopy, complextypeFrom.Choice)
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
@@ -1564,6 +1576,12 @@ func (stage *StageStruct) UnstageBranchComplexType(complextype *ComplexType) {
 	}
 	if complextype.Sequence != nil {
 		UnstageBranch(stage, complextype.Sequence)
+	}
+	if complextype.All != nil {
+		UnstageBranch(stage, complextype.All)
+	}
+	if complextype.Choice != nil {
+		UnstageBranch(stage, complextype.Choice)
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers

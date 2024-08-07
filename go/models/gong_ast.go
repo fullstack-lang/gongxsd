@@ -1345,6 +1345,12 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 				case "Sequence":
 					targetIdentifier := ident.Name
 					__gong__map_ComplexType[identifier].Sequence = __gong__map_Sequence[targetIdentifier]
+				case "All":
+					targetIdentifier := ident.Name
+					__gong__map_ComplexType[identifier].All = __gong__map_All[targetIdentifier]
+				case "Choice":
+					targetIdentifier := ident.Name
+					__gong__map_ComplexType[identifier].Choice = __gong__map_Choice[targetIdentifier]
 				}
 			case "Documentation":
 				switch fieldName {

@@ -29,6 +29,12 @@ func Process(stage *StageStruct) {
 		if x.Sequence != nil {
 			x.Sequence.Name = prefix(x.Name)
 		}
+		if x.Choice != nil {
+			x.Choice.Name = prefix(x.Name)
+		}
+		if x.All != nil {
+			x.All.Name = prefix(x.Name)
+		}
 		if x.Annotation != nil {
 			x.Annotation.Name = prefix(x.Name)
 		}

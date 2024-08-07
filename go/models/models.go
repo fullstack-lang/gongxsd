@@ -86,6 +86,8 @@ type ComplexType struct {
 	ElementWithAnnotation
 	ElementWithNameAttribute
 	Sequence        *Sequence         `xml:"sequence"`
+	All             *All              `xml:"all"`
+	Choice          *Choice           `xml:"choice"`
 	Attributes      []*Attribute      `xml:"attribute"`
 	AttributeGroups []*AttributeGroup `xml:"attributeGroup"`
 }

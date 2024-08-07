@@ -622,6 +622,10 @@ func (complextypeFormCallback *ComplexTypeFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(complextype_.NameXSD), formDiv)
 		case "Sequence":
 			FormDivSelectFieldToField(&(complextype_.Sequence), complextypeFormCallback.probe.stageOfInterest, formDiv)
+		case "All":
+			FormDivSelectFieldToField(&(complextype_.All), complextypeFormCallback.probe.stageOfInterest, formDiv)
+		case "Choice":
+			FormDivSelectFieldToField(&(complextype_.Choice), complextypeFormCallback.probe.stageOfInterest, formDiv)
 		case "Schema:ComplexTypes":
 			// we need to retrieve the field owner before the change
 			var pastSchemaOwner *models.Schema

@@ -55,6 +55,14 @@ type ComplexTypePointersEncoding struct {
 	// This field is generated into another field to enable AS ONE association
 	SequenceID sql.NullInt64
 
+	// field All is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	AllID sql.NullInt64
+
+	// field Choice is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	ChoiceID sql.NullInt64
+
 	// field Attributes is a slice of pointers to another Struct (optional or 0..1)
 	Attributes IntSlice `gorm:"type:TEXT"`
 
@@ -255,6 +263,30 @@ func (backRepoComplexType *BackRepoComplexTypeStruct) CommitPhaseTwoInstance(bac
 			complextypeDB.SequenceID.Valid = true
 		}
 
+		// commit pointer value complextype.All translates to updating the complextype.AllID
+		complextypeDB.AllID.Valid = true // allow for a 0 value (nil association)
+		if complextype.All != nil {
+			if AllId, ok := backRepo.BackRepoAll.Map_AllPtr_AllDBID[complextype.All]; ok {
+				complextypeDB.AllID.Int64 = int64(AllId)
+				complextypeDB.AllID.Valid = true
+			}
+		} else {
+			complextypeDB.AllID.Int64 = 0
+			complextypeDB.AllID.Valid = true
+		}
+
+		// commit pointer value complextype.Choice translates to updating the complextype.ChoiceID
+		complextypeDB.ChoiceID.Valid = true // allow for a 0 value (nil association)
+		if complextype.Choice != nil {
+			if ChoiceId, ok := backRepo.BackRepoChoice.Map_ChoicePtr_ChoiceDBID[complextype.Choice]; ok {
+				complextypeDB.ChoiceID.Int64 = int64(ChoiceId)
+				complextypeDB.ChoiceID.Valid = true
+			}
+		} else {
+			complextypeDB.ChoiceID.Int64 = 0
+			complextypeDB.ChoiceID.Valid = true
+		}
+
 		// 1. reset
 		complextypeDB.ComplexTypePointersEncoding.Attributes = make([]int, 0)
 		// 2. encode
@@ -413,6 +445,16 @@ func (complextypeDB *ComplexTypeDB) DecodePointers(backRepo *BackRepoStruct, com
 	complextype.Sequence = nil
 	if complextypeDB.SequenceID.Int64 != 0 {
 		complextype.Sequence = backRepo.BackRepoSequence.Map_SequenceDBID_SequencePtr[uint(complextypeDB.SequenceID.Int64)]
+	}
+	// All field
+	complextype.All = nil
+	if complextypeDB.AllID.Int64 != 0 {
+		complextype.All = backRepo.BackRepoAll.Map_AllDBID_AllPtr[uint(complextypeDB.AllID.Int64)]
+	}
+	// Choice field
+	complextype.Choice = nil
+	if complextypeDB.ChoiceID.Int64 != 0 {
+		complextype.Choice = backRepo.BackRepoChoice.Map_ChoiceDBID_ChoicePtr[uint(complextypeDB.ChoiceID.Int64)]
 	}
 	// This loop redeem complextype.Attributes in the stage from the encode in the back repo
 	// It parses all AttributeDB in the back repo and if the reverse pointer encoding matches the back repo ID
@@ -682,6 +724,18 @@ func (backRepoComplexType *BackRepoComplexTypeStruct) RestorePhaseTwo() {
 		if complextypeDB.SequenceID.Int64 != 0 {
 			complextypeDB.SequenceID.Int64 = int64(BackRepoSequenceid_atBckpTime_newID[uint(complextypeDB.SequenceID.Int64)])
 			complextypeDB.SequenceID.Valid = true
+		}
+
+		// reindexing All field
+		if complextypeDB.AllID.Int64 != 0 {
+			complextypeDB.AllID.Int64 = int64(BackRepoAllid_atBckpTime_newID[uint(complextypeDB.AllID.Int64)])
+			complextypeDB.AllID.Valid = true
+		}
+
+		// reindexing Choice field
+		if complextypeDB.ChoiceID.Int64 != 0 {
+			complextypeDB.ChoiceID.Int64 = int64(BackRepoChoiceid_atBckpTime_newID[uint(complextypeDB.ChoiceID.Int64)])
+			complextypeDB.ChoiceID.Valid = true
 		}
 
 		// update databse with new index encoding
