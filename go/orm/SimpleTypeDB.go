@@ -47,6 +47,10 @@ type SimpleTypeAPI struct {
 type SimpleTypePointersEncoding struct {
 	// insertion for pointer fields encoding declaration
 
+	// field Annotation is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	AnnotationID sql.NullInt64
+
 	// field Restriction is a pointer to another Struct (optional or 0..1)
 	// This field is generated into another field to enable AS ONE association
 	RestrictionID sql.NullInt64
@@ -221,6 +225,18 @@ func (backRepoSimpleType *BackRepoSimpleTypeStruct) CommitPhaseTwoInstance(backR
 		simpletypeDB.CopyBasicFieldsFromSimpleType(simpletype)
 
 		// insertion point for translating pointers encodings into actual pointers
+		// commit pointer value simpletype.Annotation translates to updating the simpletype.AnnotationID
+		simpletypeDB.AnnotationID.Valid = true // allow for a 0 value (nil association)
+		if simpletype.Annotation != nil {
+			if AnnotationId, ok := backRepo.BackRepoAnnotation.Map_AnnotationPtr_AnnotationDBID[simpletype.Annotation]; ok {
+				simpletypeDB.AnnotationID.Int64 = int64(AnnotationId)
+				simpletypeDB.AnnotationID.Valid = true
+			}
+		} else {
+			simpletypeDB.AnnotationID.Int64 = 0
+			simpletypeDB.AnnotationID.Valid = true
+		}
+
 		// commit pointer value simpletype.Restriction translates to updating the simpletype.RestrictionID
 		simpletypeDB.RestrictionID.Valid = true // allow for a 0 value (nil association)
 		if simpletype.Restriction != nil {
@@ -346,6 +362,11 @@ func (backRepoSimpleType *BackRepoSimpleTypeStruct) CheckoutPhaseTwoInstance(bac
 func (simpletypeDB *SimpleTypeDB) DecodePointers(backRepo *BackRepoStruct, simpletype *models.SimpleType) {
 
 	// insertion point for checkout of pointer encoding
+	// Annotation field
+	simpletype.Annotation = nil
+	if simpletypeDB.AnnotationID.Int64 != 0 {
+		simpletype.Annotation = backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(simpletypeDB.AnnotationID.Int64)]
+	}
 	// Restriction field
 	simpletype.Restriction = nil
 	if simpletypeDB.RestrictionID.Int64 != 0 {
@@ -591,6 +612,12 @@ func (backRepoSimpleType *BackRepoSimpleTypeStruct) RestorePhaseTwo() {
 		_ = simpletypeDB
 
 		// insertion point for reindexing pointers encoding
+		// reindexing Annotation field
+		if simpletypeDB.AnnotationID.Int64 != 0 {
+			simpletypeDB.AnnotationID.Int64 = int64(BackRepoAnnotationid_atBckpTime_newID[uint(simpletypeDB.AnnotationID.Int64)])
+			simpletypeDB.AnnotationID.Valid = true
+		}
+
 		// reindexing Restriction field
 		if simpletypeDB.RestrictionID.Int64 != 0 {
 			simpletypeDB.RestrictionID.Int64 = int64(BackRepoRestrictionid_atBckpTime_newID[uint(simpletypeDB.RestrictionID.Int64)])

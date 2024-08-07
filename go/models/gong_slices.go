@@ -33,6 +33,9 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 
 	switch owningInstanceInfered := any(owningInstance).(type) {
 	// insertion point
+	case *Annotation:
+		// insertion point per field
+
 	case *ComplexType:
 		// insertion point per field
 
@@ -167,6 +170,9 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 // Its complexity is in O(n)O(p) where p is the number of pointers
 func (stage *StageStruct) ComputeReverseMaps() {
 	// insertion point per named struct
+	// Compute reverse map for named struct Annotation
+	// insertion point per field
+
 	// Compute reverse map for named struct ComplexType
 	// insertion point per field
 

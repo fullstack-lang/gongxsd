@@ -46,6 +46,10 @@ type MaxInclusiveAPI struct {
 // reverse pointers of slice of poitners to Struct
 type MaxInclusivePointersEncoding struct {
 	// insertion for pointer fields encoding declaration
+
+	// field Annotation is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	AnnotationID sql.NullInt64
 }
 
 // MaxInclusiveDB describes a maxinclusive in the database
@@ -217,6 +221,18 @@ func (backRepoMaxInclusive *BackRepoMaxInclusiveStruct) CommitPhaseTwoInstance(b
 		maxinclusiveDB.CopyBasicFieldsFromMaxInclusive(maxinclusive)
 
 		// insertion point for translating pointers encodings into actual pointers
+		// commit pointer value maxinclusive.Annotation translates to updating the maxinclusive.AnnotationID
+		maxinclusiveDB.AnnotationID.Valid = true // allow for a 0 value (nil association)
+		if maxinclusive.Annotation != nil {
+			if AnnotationId, ok := backRepo.BackRepoAnnotation.Map_AnnotationPtr_AnnotationDBID[maxinclusive.Annotation]; ok {
+				maxinclusiveDB.AnnotationID.Int64 = int64(AnnotationId)
+				maxinclusiveDB.AnnotationID.Valid = true
+			}
+		} else {
+			maxinclusiveDB.AnnotationID.Int64 = 0
+			maxinclusiveDB.AnnotationID.Valid = true
+		}
+
 		query := backRepoMaxInclusive.db.Save(&maxinclusiveDB)
 		if query.Error != nil {
 			log.Fatalln(query.Error)
@@ -330,6 +346,11 @@ func (backRepoMaxInclusive *BackRepoMaxInclusiveStruct) CheckoutPhaseTwoInstance
 func (maxinclusiveDB *MaxInclusiveDB) DecodePointers(backRepo *BackRepoStruct, maxinclusive *models.MaxInclusive) {
 
 	// insertion point for checkout of pointer encoding
+	// Annotation field
+	maxinclusive.Annotation = nil
+	if maxinclusiveDB.AnnotationID.Int64 != 0 {
+		maxinclusive.Annotation = backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(maxinclusiveDB.AnnotationID.Int64)]
+	}
 	return
 }
 
@@ -570,6 +591,12 @@ func (backRepoMaxInclusive *BackRepoMaxInclusiveStruct) RestorePhaseTwo() {
 		_ = maxinclusiveDB
 
 		// insertion point for reindexing pointers encoding
+		// reindexing Annotation field
+		if maxinclusiveDB.AnnotationID.Int64 != 0 {
+			maxinclusiveDB.AnnotationID.Int64 = int64(BackRepoAnnotationid_atBckpTime_newID[uint(maxinclusiveDB.AnnotationID.Int64)])
+			maxinclusiveDB.AnnotationID.Valid = true
+		}
+
 		// update databse with new index encoding
 		query := backRepoMaxInclusive.db.Model(maxinclusiveDB).Updates(*maxinclusiveDB)
 		if query.Error != nil {

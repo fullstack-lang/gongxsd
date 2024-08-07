@@ -5,6 +5,9 @@ func IsStaged[Type Gongstruct](stage *StageStruct, instance *Type) (ok bool) {
 
 	switch target := any(instance).(type) {
 	// insertion point for stage
+	case *Annotation:
+		ok = stage.IsStagedAnnotation(target)
+
 	case *ComplexType:
 		ok = stage.IsStagedComplexType(target)
 
@@ -42,6 +45,13 @@ func IsStaged[Type Gongstruct](stage *StageStruct, instance *Type) (ok bool) {
 }
 
 // insertion point for stage per struct
+func (stage *StageStruct) IsStagedAnnotation(annotation *Annotation) (ok bool) {
+
+	_, ok = stage.Annotations[annotation]
+
+	return
+}
+
 func (stage *StageStruct) IsStagedComplexType(complextype *ComplexType) (ok bool) {
 
 	_, ok = stage.ComplexTypes[complextype]
@@ -120,6 +130,9 @@ func StageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 
 	switch target := any(instance).(type) {
 	// insertion point for stage branch
+	case *Annotation:
+		stage.StageBranchAnnotation(target)
+
 	case *ComplexType:
 		stage.StageBranchComplexType(target)
 
@@ -156,6 +169,21 @@ func StageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 }
 
 // insertion point for stage branch per struct
+func (stage *StageStruct) StageBranchAnnotation(annotation *Annotation) {
+
+	// check if instance is already staged
+	if IsStaged(stage, annotation) {
+		return
+	}
+
+	annotation.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
 func (stage *StageStruct) StageBranchComplexType(complextype *ComplexType) {
 
 	// check if instance is already staged
@@ -166,6 +194,9 @@ func (stage *StageStruct) StageBranchComplexType(complextype *ComplexType) {
 	complextype.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if complextype.Annotation != nil {
+		StageBranch(stage, complextype.Annotation)
+	}
 	if complextype.Sequence != nil {
 		StageBranch(stage, complextype.Sequence)
 	}
@@ -184,6 +215,9 @@ func (stage *StageStruct) StageBranchElement(element *Element) {
 	element.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if element.Annotation != nil {
+		StageBranch(stage, element.Annotation)
+	}
 	if element.SimpleType != nil {
 		StageBranch(stage, element.SimpleType)
 	}
@@ -205,6 +239,9 @@ func (stage *StageStruct) StageBranchEnumeration(enumeration *Enumeration) {
 	enumeration.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if enumeration.Annotation != nil {
+		StageBranch(stage, enumeration.Annotation)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 
@@ -220,6 +257,9 @@ func (stage *StageStruct) StageBranchMaxInclusive(maxinclusive *MaxInclusive) {
 	maxinclusive.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if maxinclusive.Annotation != nil {
+		StageBranch(stage, maxinclusive.Annotation)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 
@@ -235,6 +275,9 @@ func (stage *StageStruct) StageBranchMinInclusive(mininclusive *MinInclusive) {
 	mininclusive.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if mininclusive.Annotation != nil {
+		StageBranch(stage, mininclusive.Annotation)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 
@@ -250,6 +293,9 @@ func (stage *StageStruct) StageBranchPattern(pattern *Pattern) {
 	pattern.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if pattern.Annotation != nil {
+		StageBranch(stage, pattern.Annotation)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 
@@ -265,6 +311,9 @@ func (stage *StageStruct) StageBranchRestriction(restriction *Restriction) {
 	restriction.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if restriction.Annotation != nil {
+		StageBranch(stage, restriction.Annotation)
+	}
 	if restriction.MinInclusive != nil {
 		StageBranch(stage, restriction.MinInclusive)
 	}
@@ -292,6 +341,9 @@ func (stage *StageStruct) StageBranchSchema(schema *Schema) {
 	schema.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if schema.Annotation != nil {
+		StageBranch(stage, schema.Annotation)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 	for _, _element := range schema.Elements {
@@ -316,6 +368,9 @@ func (stage *StageStruct) StageBranchSequence(sequence *Sequence) {
 	sequence.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if sequence.Annotation != nil {
+		StageBranch(stage, sequence.Annotation)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 	for _, _element := range sequence.Elements {
@@ -334,6 +389,9 @@ func (stage *StageStruct) StageBranchSimpleType(simpletype *SimpleType) {
 	simpletype.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if simpletype.Annotation != nil {
+		StageBranch(stage, simpletype.Annotation)
+	}
 	if simpletype.Restriction != nil {
 		StageBranch(stage, simpletype.Restriction)
 	}
@@ -353,6 +411,10 @@ func CopyBranch[Type Gongstruct](from *Type) (to *Type) {
 
 	switch fromT := any(from).(type) {
 	// insertion point for stage branch
+	case *Annotation:
+		toT := CopyBranchAnnotation(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
 	case *ComplexType:
 		toT := CopyBranchComplexType(mapOrigCopy, fromT)
 		return any(toT).(*Type)
@@ -400,6 +462,25 @@ func CopyBranch[Type Gongstruct](from *Type) (to *Type) {
 }
 
 // insertion point for stage branch per struct
+func CopyBranchAnnotation(mapOrigCopy map[any]any, annotationFrom *Annotation) (annotationTo *Annotation) {
+
+	// annotationFrom has already been copied
+	if _annotationTo, ok := mapOrigCopy[annotationFrom]; ok {
+		annotationTo = _annotationTo.(*Annotation)
+		return
+	}
+
+	annotationTo = new(Annotation)
+	mapOrigCopy[annotationFrom] = annotationTo
+	annotationFrom.CopyBasicFields(annotationTo)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+	return
+}
+
 func CopyBranchComplexType(mapOrigCopy map[any]any, complextypeFrom *ComplexType) (complextypeTo *ComplexType) {
 
 	// complextypeFrom has already been copied
@@ -413,6 +494,9 @@ func CopyBranchComplexType(mapOrigCopy map[any]any, complextypeFrom *ComplexType
 	complextypeFrom.CopyBasicFields(complextypeTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if complextypeFrom.Annotation != nil {
+		complextypeTo.Annotation = CopyBranchAnnotation(mapOrigCopy, complextypeFrom.Annotation)
+	}
 	if complextypeFrom.Sequence != nil {
 		complextypeTo.Sequence = CopyBranchSequence(mapOrigCopy, complextypeFrom.Sequence)
 	}
@@ -435,6 +519,9 @@ func CopyBranchElement(mapOrigCopy map[any]any, elementFrom *Element) (elementTo
 	elementFrom.CopyBasicFields(elementTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if elementFrom.Annotation != nil {
+		elementTo.Annotation = CopyBranchAnnotation(mapOrigCopy, elementFrom.Annotation)
+	}
 	if elementFrom.SimpleType != nil {
 		elementTo.SimpleType = CopyBranchSimpleType(mapOrigCopy, elementFrom.SimpleType)
 	}
@@ -460,6 +547,9 @@ func CopyBranchEnumeration(mapOrigCopy map[any]any, enumerationFrom *Enumeration
 	enumerationFrom.CopyBasicFields(enumerationTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if enumerationFrom.Annotation != nil {
+		enumerationTo.Annotation = CopyBranchAnnotation(mapOrigCopy, enumerationFrom.Annotation)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 
@@ -479,6 +569,9 @@ func CopyBranchMaxInclusive(mapOrigCopy map[any]any, maxinclusiveFrom *MaxInclus
 	maxinclusiveFrom.CopyBasicFields(maxinclusiveTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if maxinclusiveFrom.Annotation != nil {
+		maxinclusiveTo.Annotation = CopyBranchAnnotation(mapOrigCopy, maxinclusiveFrom.Annotation)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 
@@ -498,6 +591,9 @@ func CopyBranchMinInclusive(mapOrigCopy map[any]any, mininclusiveFrom *MinInclus
 	mininclusiveFrom.CopyBasicFields(mininclusiveTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if mininclusiveFrom.Annotation != nil {
+		mininclusiveTo.Annotation = CopyBranchAnnotation(mapOrigCopy, mininclusiveFrom.Annotation)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 
@@ -517,6 +613,9 @@ func CopyBranchPattern(mapOrigCopy map[any]any, patternFrom *Pattern) (patternTo
 	patternFrom.CopyBasicFields(patternTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if patternFrom.Annotation != nil {
+		patternTo.Annotation = CopyBranchAnnotation(mapOrigCopy, patternFrom.Annotation)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 
@@ -536,6 +635,9 @@ func CopyBranchRestriction(mapOrigCopy map[any]any, restrictionFrom *Restriction
 	restrictionFrom.CopyBasicFields(restrictionTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if restrictionFrom.Annotation != nil {
+		restrictionTo.Annotation = CopyBranchAnnotation(mapOrigCopy, restrictionFrom.Annotation)
+	}
 	if restrictionFrom.MinInclusive != nil {
 		restrictionTo.MinInclusive = CopyBranchMinInclusive(mapOrigCopy, restrictionFrom.MinInclusive)
 	}
@@ -567,6 +669,9 @@ func CopyBranchSchema(mapOrigCopy map[any]any, schemaFrom *Schema) (schemaTo *Sc
 	schemaFrom.CopyBasicFields(schemaTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if schemaFrom.Annotation != nil {
+		schemaTo.Annotation = CopyBranchAnnotation(mapOrigCopy, schemaFrom.Annotation)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 	for _, _element := range schemaFrom.Elements {
@@ -595,6 +700,9 @@ func CopyBranchSequence(mapOrigCopy map[any]any, sequenceFrom *Sequence) (sequen
 	sequenceFrom.CopyBasicFields(sequenceTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if sequenceFrom.Annotation != nil {
+		sequenceTo.Annotation = CopyBranchAnnotation(mapOrigCopy, sequenceFrom.Annotation)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 	for _, _element := range sequenceFrom.Elements {
@@ -617,6 +725,9 @@ func CopyBranchSimpleType(mapOrigCopy map[any]any, simpletypeFrom *SimpleType) (
 	simpletypeFrom.CopyBasicFields(simpletypeTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if simpletypeFrom.Annotation != nil {
+		simpletypeTo.Annotation = CopyBranchAnnotation(mapOrigCopy, simpletypeFrom.Annotation)
+	}
 	if simpletypeFrom.Restriction != nil {
 		simpletypeTo.Restriction = CopyBranchRestriction(mapOrigCopy, simpletypeFrom.Restriction)
 	}
@@ -634,6 +745,9 @@ func UnstageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 
 	switch target := any(instance).(type) {
 	// insertion point for unstage branch
+	case *Annotation:
+		stage.UnstageBranchAnnotation(target)
+
 	case *ComplexType:
 		stage.UnstageBranchComplexType(target)
 
@@ -670,6 +784,21 @@ func UnstageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 }
 
 // insertion point for unstage branch per struct
+func (stage *StageStruct) UnstageBranchAnnotation(annotation *Annotation) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, annotation) {
+		return
+	}
+
+	annotation.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
 func (stage *StageStruct) UnstageBranchComplexType(complextype *ComplexType) {
 
 	// check if instance is already staged
@@ -680,6 +809,9 @@ func (stage *StageStruct) UnstageBranchComplexType(complextype *ComplexType) {
 	complextype.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if complextype.Annotation != nil {
+		UnstageBranch(stage, complextype.Annotation)
+	}
 	if complextype.Sequence != nil {
 		UnstageBranch(stage, complextype.Sequence)
 	}
@@ -698,6 +830,9 @@ func (stage *StageStruct) UnstageBranchElement(element *Element) {
 	element.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if element.Annotation != nil {
+		UnstageBranch(stage, element.Annotation)
+	}
 	if element.SimpleType != nil {
 		UnstageBranch(stage, element.SimpleType)
 	}
@@ -719,6 +854,9 @@ func (stage *StageStruct) UnstageBranchEnumeration(enumeration *Enumeration) {
 	enumeration.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if enumeration.Annotation != nil {
+		UnstageBranch(stage, enumeration.Annotation)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 
@@ -734,6 +872,9 @@ func (stage *StageStruct) UnstageBranchMaxInclusive(maxinclusive *MaxInclusive) 
 	maxinclusive.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if maxinclusive.Annotation != nil {
+		UnstageBranch(stage, maxinclusive.Annotation)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 
@@ -749,6 +890,9 @@ func (stage *StageStruct) UnstageBranchMinInclusive(mininclusive *MinInclusive) 
 	mininclusive.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if mininclusive.Annotation != nil {
+		UnstageBranch(stage, mininclusive.Annotation)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 
@@ -764,6 +908,9 @@ func (stage *StageStruct) UnstageBranchPattern(pattern *Pattern) {
 	pattern.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if pattern.Annotation != nil {
+		UnstageBranch(stage, pattern.Annotation)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 
@@ -779,6 +926,9 @@ func (stage *StageStruct) UnstageBranchRestriction(restriction *Restriction) {
 	restriction.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if restriction.Annotation != nil {
+		UnstageBranch(stage, restriction.Annotation)
+	}
 	if restriction.MinInclusive != nil {
 		UnstageBranch(stage, restriction.MinInclusive)
 	}
@@ -806,6 +956,9 @@ func (stage *StageStruct) UnstageBranchSchema(schema *Schema) {
 	schema.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if schema.Annotation != nil {
+		UnstageBranch(stage, schema.Annotation)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 	for _, _element := range schema.Elements {
@@ -830,6 +983,9 @@ func (stage *StageStruct) UnstageBranchSequence(sequence *Sequence) {
 	sequence.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if sequence.Annotation != nil {
+		UnstageBranch(stage, sequence.Annotation)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 	for _, _element := range sequence.Elements {
@@ -848,6 +1004,9 @@ func (stage *StageStruct) UnstageBranchSimpleType(simpletype *SimpleType) {
 	simpletype.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if simpletype.Annotation != nil {
+		UnstageBranch(stage, simpletype.Annotation)
+	}
 	if simpletype.Restriction != nil {
 		UnstageBranch(stage, simpletype.Restriction)
 	}

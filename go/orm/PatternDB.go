@@ -46,6 +46,10 @@ type PatternAPI struct {
 // reverse pointers of slice of poitners to Struct
 type PatternPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
+
+	// field Annotation is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	AnnotationID sql.NullInt64
 }
 
 // PatternDB describes a pattern in the database
@@ -217,6 +221,18 @@ func (backRepoPattern *BackRepoPatternStruct) CommitPhaseTwoInstance(backRepo *B
 		patternDB.CopyBasicFieldsFromPattern(pattern)
 
 		// insertion point for translating pointers encodings into actual pointers
+		// commit pointer value pattern.Annotation translates to updating the pattern.AnnotationID
+		patternDB.AnnotationID.Valid = true // allow for a 0 value (nil association)
+		if pattern.Annotation != nil {
+			if AnnotationId, ok := backRepo.BackRepoAnnotation.Map_AnnotationPtr_AnnotationDBID[pattern.Annotation]; ok {
+				patternDB.AnnotationID.Int64 = int64(AnnotationId)
+				patternDB.AnnotationID.Valid = true
+			}
+		} else {
+			patternDB.AnnotationID.Int64 = 0
+			patternDB.AnnotationID.Valid = true
+		}
+
 		query := backRepoPattern.db.Save(&patternDB)
 		if query.Error != nil {
 			log.Fatalln(query.Error)
@@ -330,6 +346,11 @@ func (backRepoPattern *BackRepoPatternStruct) CheckoutPhaseTwoInstance(backRepo 
 func (patternDB *PatternDB) DecodePointers(backRepo *BackRepoStruct, pattern *models.Pattern) {
 
 	// insertion point for checkout of pointer encoding
+	// Annotation field
+	pattern.Annotation = nil
+	if patternDB.AnnotationID.Int64 != 0 {
+		pattern.Annotation = backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(patternDB.AnnotationID.Int64)]
+	}
 	return
 }
 
@@ -570,6 +591,12 @@ func (backRepoPattern *BackRepoPatternStruct) RestorePhaseTwo() {
 		_ = patternDB
 
 		// insertion point for reindexing pointers encoding
+		// reindexing Annotation field
+		if patternDB.AnnotationID.Int64 != 0 {
+			patternDB.AnnotationID.Int64 = int64(BackRepoAnnotationid_atBckpTime_newID[uint(patternDB.AnnotationID.Int64)])
+			patternDB.AnnotationID.Valid = true
+		}
+
 		// update databse with new index encoding
 		query := backRepoPattern.db.Model(patternDB).Updates(*patternDB)
 		if query.Error != nil {

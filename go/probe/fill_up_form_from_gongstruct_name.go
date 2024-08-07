@@ -26,6 +26,19 @@ func FillUpFormFromGongstructName(
 
 	switch gongstructName {
 	// insertion point
+	case "Annotation":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "Annotation Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__AnnotationFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		annotation := new(models.Annotation)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(annotation, formGroup, probe)
 	case "ComplexType":
 		formGroup := (&form.FormGroup{
 			Name:  form.FormGroupDefaultName.ToString(),

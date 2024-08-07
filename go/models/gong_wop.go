@@ -7,6 +7,16 @@ import "time"
 var __GONG_time_The_fool_doth_think_he_is_wise__ = time.Hour
 
 // insertion point
+type Annotation_WOP struct {
+	// insertion point
+	Name string
+}
+
+func (from *Annotation) CopyBasicFields(to *Annotation) {
+	// insertion point
+	to.Name = from.Name
+}
+
 type ComplexType_WOP struct {
 	// insertion point
 	Name string

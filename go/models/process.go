@@ -15,16 +15,22 @@ func Process(stage *StageStruct) {
 		if x.ComplexType != nil {
 			map_EmbeddedComplexStruct[x.ComplexType] = x
 		}
+		if x.Annotation != nil {
+			x.Annotation.Name = prefix(x.Name)
+		}
 	}
-	for complexType := range *GetGongstructInstancesSet[ComplexType](stage) {
-		complexType.Name = complexType.NameXSD
+	for x := range *GetGongstructInstancesSet[ComplexType](stage) {
+		x.Name = x.NameXSD
 
-		if x, ok := map_EmbeddedComplexStruct[complexType]; ok {
-			complexType.Name = prefix(x.Name)
+		if _x, ok := map_EmbeddedComplexStruct[x]; ok {
+			x.Name = prefix(_x.Name)
 		}
 
-		if complexType.Sequence != nil {
-			complexType.Sequence.Name = prefix(complexType.Name)
+		if x.Sequence != nil {
+			x.Sequence.Name = prefix(x.Name)
+		}
+		if x.Annotation != nil {
+			x.Annotation.Name = prefix(x.Name)
 		}
 	}
 	for x := range *GetGongstructInstancesSet[SimpleType](stage) {
@@ -33,23 +39,57 @@ func Process(stage *StageStruct) {
 		if x.Restriction != nil {
 			x.Restriction.Name = prefix(x.Name)
 		}
+		if x.Annotation != nil {
+			x.Annotation.Name = prefix(x.Name)
+		}
 	}
 	for x := range *GetGongstructInstancesSet[Schema](stage) {
 		x.Name = "Schema"
+		if x.Annotation != nil {
+			x.Annotation.Name = prefix(x.Name)
+		}
 	}
-	for r := range *GetGongstructInstancesSet[Restriction](stage) {
-		for _, e := range r.Enumerations {
-			e.Name = prefix(r.Name)
+	for x := range *GetGongstructInstancesSet[Restriction](stage) {
+		for _, e := range x.Enumerations {
+			e.Name = prefix(x.Name)
 		}
-		if r.MinInclusive != nil {
-			r.MinInclusive.Name = prefix(r.Name)
+		if x.MinInclusive != nil {
+			x.MinInclusive.Name = prefix(x.Name)
 		}
-		if r.MaxInclusive != nil {
-			r.MaxInclusive.Name = prefix(r.Name)
+		if x.MaxInclusive != nil {
+			x.MaxInclusive.Name = prefix(x.Name)
 		}
-		if r.Pattern != nil {
-			r.Pattern.Name = prefix(r.Name)
+		if x.Pattern != nil {
+			x.Pattern.Name = prefix(x.Name)
+		}
+		if x.Annotation != nil {
+			x.Annotation.Name = prefix(x.Name)
 		}
 	}
 
+	for x := range *GetGongstructInstancesSet[Enumeration](stage) {
+		if x.Annotation != nil {
+			x.Annotation.Name = prefix(x.Name)
+		}
+	}
+	for x := range *GetGongstructInstancesSet[Enumeration](stage) {
+		if x.Annotation != nil {
+			x.Annotation.Name = prefix(x.Name)
+		}
+	}
+	for x := range *GetGongstructInstancesSet[MinInclusive](stage) {
+		if x.Annotation != nil {
+			x.Annotation.Name = prefix(x.Name)
+		}
+	}
+	for x := range *GetGongstructInstancesSet[MaxInclusive](stage) {
+		if x.Annotation != nil {
+			x.Annotation.Name = prefix(x.Name)
+		}
+	}
+	for x := range *GetGongstructInstancesSet[Pattern](stage) {
+		if x.Annotation != nil {
+			x.Annotation.Name = prefix(x.Name)
+		}
+	}
 }

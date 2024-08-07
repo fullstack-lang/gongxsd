@@ -47,6 +47,10 @@ type RestrictionAPI struct {
 type RestrictionPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
 
+	// field Annotation is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	AnnotationID sql.NullInt64
+
 	// field Enumerations is a slice of pointers to another Struct (optional or 0..1)
 	Enumerations IntSlice `gorm:"type:TEXT"`
 
@@ -232,6 +236,18 @@ func (backRepoRestriction *BackRepoRestrictionStruct) CommitPhaseTwoInstance(bac
 		restrictionDB.CopyBasicFieldsFromRestriction(restriction)
 
 		// insertion point for translating pointers encodings into actual pointers
+		// commit pointer value restriction.Annotation translates to updating the restriction.AnnotationID
+		restrictionDB.AnnotationID.Valid = true // allow for a 0 value (nil association)
+		if restriction.Annotation != nil {
+			if AnnotationId, ok := backRepo.BackRepoAnnotation.Map_AnnotationPtr_AnnotationDBID[restriction.Annotation]; ok {
+				restrictionDB.AnnotationID.Int64 = int64(AnnotationId)
+				restrictionDB.AnnotationID.Valid = true
+			}
+		} else {
+			restrictionDB.AnnotationID.Int64 = 0
+			restrictionDB.AnnotationID.Valid = true
+		}
+
 		// 1. reset
 		restrictionDB.RestrictionPointersEncoding.Enumerations = make([]int, 0)
 		// 2. encode
@@ -399,6 +415,11 @@ func (backRepoRestriction *BackRepoRestrictionStruct) CheckoutPhaseTwoInstance(b
 func (restrictionDB *RestrictionDB) DecodePointers(backRepo *BackRepoStruct, restriction *models.Restriction) {
 
 	// insertion point for checkout of pointer encoding
+	// Annotation field
+	restriction.Annotation = nil
+	if restrictionDB.AnnotationID.Int64 != 0 {
+		restriction.Annotation = backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(restrictionDB.AnnotationID.Int64)]
+	}
 	// This loop redeem restriction.Enumerations in the stage from the encode in the back repo
 	// It parses all EnumerationDB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance
@@ -663,6 +684,12 @@ func (backRepoRestriction *BackRepoRestrictionStruct) RestorePhaseTwo() {
 		_ = restrictionDB
 
 		// insertion point for reindexing pointers encoding
+		// reindexing Annotation field
+		if restrictionDB.AnnotationID.Int64 != 0 {
+			restrictionDB.AnnotationID.Int64 = int64(BackRepoAnnotationid_atBckpTime_newID[uint(restrictionDB.AnnotationID.Int64)])
+			restrictionDB.AnnotationID.Valid = true
+		}
+
 		// reindexing MinInclusive field
 		if restrictionDB.MinInclusiveID.Int64 != 0 {
 			restrictionDB.MinInclusiveID.Int64 = int64(BackRepoMinInclusiveid_atBckpTime_newID[uint(restrictionDB.MinInclusiveID.Int64)])

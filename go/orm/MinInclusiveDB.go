@@ -46,6 +46,10 @@ type MinInclusiveAPI struct {
 // reverse pointers of slice of poitners to Struct
 type MinInclusivePointersEncoding struct {
 	// insertion for pointer fields encoding declaration
+
+	// field Annotation is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	AnnotationID sql.NullInt64
 }
 
 // MinInclusiveDB describes a mininclusive in the database
@@ -217,6 +221,18 @@ func (backRepoMinInclusive *BackRepoMinInclusiveStruct) CommitPhaseTwoInstance(b
 		mininclusiveDB.CopyBasicFieldsFromMinInclusive(mininclusive)
 
 		// insertion point for translating pointers encodings into actual pointers
+		// commit pointer value mininclusive.Annotation translates to updating the mininclusive.AnnotationID
+		mininclusiveDB.AnnotationID.Valid = true // allow for a 0 value (nil association)
+		if mininclusive.Annotation != nil {
+			if AnnotationId, ok := backRepo.BackRepoAnnotation.Map_AnnotationPtr_AnnotationDBID[mininclusive.Annotation]; ok {
+				mininclusiveDB.AnnotationID.Int64 = int64(AnnotationId)
+				mininclusiveDB.AnnotationID.Valid = true
+			}
+		} else {
+			mininclusiveDB.AnnotationID.Int64 = 0
+			mininclusiveDB.AnnotationID.Valid = true
+		}
+
 		query := backRepoMinInclusive.db.Save(&mininclusiveDB)
 		if query.Error != nil {
 			log.Fatalln(query.Error)
@@ -330,6 +346,11 @@ func (backRepoMinInclusive *BackRepoMinInclusiveStruct) CheckoutPhaseTwoInstance
 func (mininclusiveDB *MinInclusiveDB) DecodePointers(backRepo *BackRepoStruct, mininclusive *models.MinInclusive) {
 
 	// insertion point for checkout of pointer encoding
+	// Annotation field
+	mininclusive.Annotation = nil
+	if mininclusiveDB.AnnotationID.Int64 != 0 {
+		mininclusive.Annotation = backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(mininclusiveDB.AnnotationID.Int64)]
+	}
 	return
 }
 
@@ -570,6 +591,12 @@ func (backRepoMinInclusive *BackRepoMinInclusiveStruct) RestorePhaseTwo() {
 		_ = mininclusiveDB
 
 		// insertion point for reindexing pointers encoding
+		// reindexing Annotation field
+		if mininclusiveDB.AnnotationID.Int64 != 0 {
+			mininclusiveDB.AnnotationID.Int64 = int64(BackRepoAnnotationid_atBckpTime_newID[uint(mininclusiveDB.AnnotationID.Int64)])
+			mininclusiveDB.AnnotationID.Valid = true
+		}
+
 		// update databse with new index encoding
 		query := backRepoMinInclusive.db.Model(mininclusiveDB).Updates(*mininclusiveDB)
 		if query.Error != nil {

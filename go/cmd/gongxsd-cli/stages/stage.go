@@ -24,6 +24,12 @@ func _(stage *models.StageStruct) {
 
 	// Declaration of instances to stage
 
+	__Annotation__000000_bookType_E := (&models.Annotation{Name: `bookType_E`}).Stage(stage)
+	__Annotation__000001_book_E := (&models.Annotation{Name: `book_E`}).Stage(stage)
+	__Annotation__000002_format_E := (&models.Annotation{Name: `format_E`}).Stage(stage)
+	__Annotation__000003_title_E := (&models.Annotation{Name: `title_E`}).Stage(stage)
+	__Annotation__000004_yearType_E := (&models.Annotation{Name: `yearType_E`}).Stage(stage)
+
 	__ComplexType__000000_bookType := (&models.ComplexType{Name: `bookType`}).Stage(stage)
 	__ComplexType__000001_books_E := (&models.ComplexType{Name: `books_E`}).Stage(stage)
 
@@ -57,6 +63,16 @@ func _(stage *models.StageStruct) {
 	__SimpleType__000002_yearType := (&models.SimpleType{Name: `yearType`}).Stage(stage)
 
 	// Setup of values
+
+	__Annotation__000000_bookType_E.Name = `bookType_E`
+
+	__Annotation__000001_book_E.Name = `book_E`
+
+	__Annotation__000002_format_E.Name = `format_E`
+
+	__Annotation__000003_title_E.Name = `title_E`
+
+	__Annotation__000004_yearType_E.Name = `yearType_E`
 
 	__ComplexType__000000_bookType.Name = `bookType`
 	__ComplexType__000000_bookType.NameXSD = `bookType`
@@ -128,9 +144,13 @@ func _(stage *models.StageStruct) {
 	__SimpleType__000002_yearType.NameXSD = `yearType`
 
 	// Setup of pointers
+	__ComplexType__000000_bookType.Annotation = __Annotation__000000_bookType_E
 	__ComplexType__000000_bookType.Sequence = __Sequence__000000_bookType_E
 	__ComplexType__000001_books_E.Sequence = __Sequence__000001_books_E_E
+	__Element__000001_book.Annotation = __Annotation__000001_book_E
 	__Element__000002_books.ComplexType = __ComplexType__000001_books_E
+	__Element__000003_format.Annotation = __Annotation__000002_format_E
+	__Element__000004_title.Annotation = __Annotation__000003_title_E
 	__Restriction__000000_bookFormatEnum_E.Enumerations = append(__Restriction__000000_bookFormatEnum_E.Enumerations, __Enumeration__000000_bookFormatEnum_E_E)
 	__Restriction__000000_bookFormatEnum_E.Enumerations = append(__Restriction__000000_bookFormatEnum_E.Enumerations, __Enumeration__000001_bookFormatEnum_E_E)
 	__Restriction__000001_titleType_E.Pattern = __Pattern__000000_titleType_E_E
@@ -148,5 +168,6 @@ func _(stage *models.StageStruct) {
 	__Sequence__000001_books_E_E.Elements = append(__Sequence__000001_books_E_E.Elements, __Element__000001_book)
 	__SimpleType__000000_bookFormatEnum.Restriction = __Restriction__000000_bookFormatEnum_E
 	__SimpleType__000001_titleType.Restriction = __Restriction__000001_titleType_E
+	__SimpleType__000002_yearType.Annotation = __Annotation__000004_yearType_E
 	__SimpleType__000002_yearType.Restriction = __Restriction__000002_yearType_E
 }

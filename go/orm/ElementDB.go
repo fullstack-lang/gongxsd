@@ -47,6 +47,10 @@ type ElementAPI struct {
 type ElementPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
 
+	// field Annotation is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	AnnotationID sql.NullInt64
+
 	// field SimpleType is a pointer to another Struct (optional or 0..1)
 	// This field is generated into another field to enable AS ONE association
 	SimpleTypeID sql.NullInt64
@@ -231,6 +235,18 @@ func (backRepoElement *BackRepoElementStruct) CommitPhaseTwoInstance(backRepo *B
 		elementDB.CopyBasicFieldsFromElement(element)
 
 		// insertion point for translating pointers encodings into actual pointers
+		// commit pointer value element.Annotation translates to updating the element.AnnotationID
+		elementDB.AnnotationID.Valid = true // allow for a 0 value (nil association)
+		if element.Annotation != nil {
+			if AnnotationId, ok := backRepo.BackRepoAnnotation.Map_AnnotationPtr_AnnotationDBID[element.Annotation]; ok {
+				elementDB.AnnotationID.Int64 = int64(AnnotationId)
+				elementDB.AnnotationID.Valid = true
+			}
+		} else {
+			elementDB.AnnotationID.Int64 = 0
+			elementDB.AnnotationID.Valid = true
+		}
+
 		// commit pointer value element.SimpleType translates to updating the element.SimpleTypeID
 		elementDB.SimpleTypeID.Valid = true // allow for a 0 value (nil association)
 		if element.SimpleType != nil {
@@ -368,6 +384,11 @@ func (backRepoElement *BackRepoElementStruct) CheckoutPhaseTwoInstance(backRepo 
 func (elementDB *ElementDB) DecodePointers(backRepo *BackRepoStruct, element *models.Element) {
 
 	// insertion point for checkout of pointer encoding
+	// Annotation field
+	element.Annotation = nil
+	if elementDB.AnnotationID.Int64 != 0 {
+		element.Annotation = backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(elementDB.AnnotationID.Int64)]
+	}
 	// SimpleType field
 	element.SimpleType = nil
 	if elementDB.SimpleTypeID.Int64 != 0 {
@@ -630,6 +651,12 @@ func (backRepoElement *BackRepoElementStruct) RestorePhaseTwo() {
 		_ = elementDB
 
 		// insertion point for reindexing pointers encoding
+		// reindexing Annotation field
+		if elementDB.AnnotationID.Int64 != 0 {
+			elementDB.AnnotationID.Int64 = int64(BackRepoAnnotationid_atBckpTime_newID[uint(elementDB.AnnotationID.Int64)])
+			elementDB.AnnotationID.Valid = true
+		}
+
 		// reindexing SimpleType field
 		if elementDB.SimpleTypeID.Int64 != 0 {
 			elementDB.SimpleTypeID.Int64 = int64(BackRepoSimpleTypeid_atBckpTime_newID[uint(elementDB.SimpleTypeID.Int64)])

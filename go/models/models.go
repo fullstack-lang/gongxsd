@@ -12,8 +12,16 @@ type ElementWithValueAttribute struct {
 	Value string `xml:"value,attr"`
 }
 
+type ElementWithAnnotation struct {
+	Annotation *Annotation `xml:"annotation"`
+}
+
+type Annotation struct {
+	Name string
+}
 type Schema struct {
-	Name         string
+	Name string
+	ElementWithAnnotation
 	Elements     []*Element     `xml:"element"`
 	SimpleTypes  []*SimpleType  `xml:"simpleType"`
 	ComplexTypes []*ComplexType `xml:"complexType"`
@@ -21,6 +29,7 @@ type Schema struct {
 
 type Element struct {
 	Name string
+	ElementWithAnnotation
 	ElementWithNameAttribute
 	ElementWithTypeAttribute
 	SimpleType  *SimpleType  `xml:"simpleType"`
@@ -29,12 +38,14 @@ type Element struct {
 
 type SimpleType struct {
 	Name string
+	ElementWithAnnotation
 	ElementWithNameAttribute
 	Restriction *Restriction `xml:"restriction"`
 }
 
 type Restriction struct {
-	Name         string
+	Name string
+	ElementWithAnnotation
 	Base         string         `xml:"base,attr"`
 	Enumerations []*Enumeration `xml:"enumeration"`
 	MinInclusive *MinInclusive  `xml:"minInclusive"`
@@ -44,11 +55,13 @@ type Restriction struct {
 
 type ComplexType struct {
 	Name string
+	ElementWithAnnotation
 	ElementWithNameAttribute
 	Sequence *Sequence `xml:"sequence"`
 }
 
 type Sequence struct {
-	Name     string
+	Name string
+	ElementWithAnnotation
 	Elements []*Element `xml:"element"`
 }

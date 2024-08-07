@@ -94,6 +94,40 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 	_ = setValueField
 
 	// insertion initialization of objects to stage
+	map_Annotation_Identifiers := make(map[*Annotation]string)
+	_ = map_Annotation_Identifiers
+
+	annotationOrdered := []*Annotation{}
+	for annotation := range stage.Annotations {
+		annotationOrdered = append(annotationOrdered, annotation)
+	}
+	sort.Slice(annotationOrdered[:], func(i, j int) bool {
+		return annotationOrdered[i].Name < annotationOrdered[j].Name
+	})
+	if len(annotationOrdered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, annotation := range annotationOrdered {
+
+		id = generatesIdentifier("Annotation", idx, annotation.Name)
+		map_Annotation_Identifiers[annotation] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "Annotation")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", annotation.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(annotation.Name))
+		initializerStatements += setValueField
+
+	}
+
 	map_ComplexType_Identifiers := make(map[*ComplexType]string)
 	_ = map_ComplexType_Identifiers
 
@@ -489,6 +523,16 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 	}
 
 	// insertion initialization of objects to stage
+	for idx, annotation := range annotationOrdered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("Annotation", idx, annotation.Name)
+		map_Annotation_Identifiers[annotation] = id
+
+		// Initialisation of values
+	}
+
 	for idx, complextype := range complextypeOrdered {
 		var setPointerField string
 		_ = setPointerField
@@ -497,6 +541,14 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		map_ComplexType_Identifiers[complextype] = id
 
 		// Initialisation of values
+		if complextype.Annotation != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Annotation")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Annotation_Identifiers[complextype.Annotation])
+			pointersInitializesStatements += setPointerField
+		}
+
 		if complextype.Sequence != nil {
 			setPointerField = PointerFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
@@ -515,6 +567,14 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		map_Element_Identifiers[element] = id
 
 		// Initialisation of values
+		if element.Annotation != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Annotation")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Annotation_Identifiers[element.Annotation])
+			pointersInitializesStatements += setPointerField
+		}
+
 		if element.SimpleType != nil {
 			setPointerField = PointerFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
@@ -541,6 +601,14 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		map_Enumeration_Identifiers[enumeration] = id
 
 		// Initialisation of values
+		if enumeration.Annotation != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Annotation")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Annotation_Identifiers[enumeration.Annotation])
+			pointersInitializesStatements += setPointerField
+		}
+
 	}
 
 	for idx, maxinclusive := range maxinclusiveOrdered {
@@ -551,6 +619,14 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		map_MaxInclusive_Identifiers[maxinclusive] = id
 
 		// Initialisation of values
+		if maxinclusive.Annotation != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Annotation")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Annotation_Identifiers[maxinclusive.Annotation])
+			pointersInitializesStatements += setPointerField
+		}
+
 	}
 
 	for idx, mininclusive := range mininclusiveOrdered {
@@ -561,6 +637,14 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		map_MinInclusive_Identifiers[mininclusive] = id
 
 		// Initialisation of values
+		if mininclusive.Annotation != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Annotation")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Annotation_Identifiers[mininclusive.Annotation])
+			pointersInitializesStatements += setPointerField
+		}
+
 	}
 
 	for idx, pattern := range patternOrdered {
@@ -571,6 +655,14 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		map_Pattern_Identifiers[pattern] = id
 
 		// Initialisation of values
+		if pattern.Annotation != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Annotation")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Annotation_Identifiers[pattern.Annotation])
+			pointersInitializesStatements += setPointerField
+		}
+
 	}
 
 	for idx, restriction := range restrictionOrdered {
@@ -581,6 +673,14 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		map_Restriction_Identifiers[restriction] = id
 
 		// Initialisation of values
+		if restriction.Annotation != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Annotation")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Annotation_Identifiers[restriction.Annotation])
+			pointersInitializesStatements += setPointerField
+		}
+
 		for _, _enumeration := range restriction.Enumerations {
 			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
@@ -623,6 +723,14 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		map_Schema_Identifiers[schema] = id
 
 		// Initialisation of values
+		if schema.Annotation != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Annotation")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Annotation_Identifiers[schema.Annotation])
+			pointersInitializesStatements += setPointerField
+		}
+
 		for _, _element := range schema.Elements {
 			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
@@ -657,6 +765,14 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		map_Sequence_Identifiers[sequence] = id
 
 		// Initialisation of values
+		if sequence.Annotation != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Annotation")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Annotation_Identifiers[sequence.Annotation])
+			pointersInitializesStatements += setPointerField
+		}
+
 		for _, _element := range sequence.Elements {
 			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
@@ -675,6 +791,14 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		map_SimpleType_Identifiers[simpletype] = id
 
 		// Initialisation of values
+		if simpletype.Annotation != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Annotation")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Annotation_Identifiers[simpletype.Annotation])
+			pointersInitializesStatements += setPointerField
+		}
+
 		if simpletype.Restriction != nil {
 			setPointerField = PointerFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)

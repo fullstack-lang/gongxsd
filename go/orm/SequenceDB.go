@@ -47,6 +47,10 @@ type SequenceAPI struct {
 type SequencePointersEncoding struct {
 	// insertion for pointer fields encoding declaration
 
+	// field Annotation is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	AnnotationID sql.NullInt64
+
 	// field Elements is a slice of pointers to another Struct (optional or 0..1)
 	Elements IntSlice `gorm:"type:TEXT"`
 }
@@ -214,6 +218,18 @@ func (backRepoSequence *BackRepoSequenceStruct) CommitPhaseTwoInstance(backRepo 
 		sequenceDB.CopyBasicFieldsFromSequence(sequence)
 
 		// insertion point for translating pointers encodings into actual pointers
+		// commit pointer value sequence.Annotation translates to updating the sequence.AnnotationID
+		sequenceDB.AnnotationID.Valid = true // allow for a 0 value (nil association)
+		if sequence.Annotation != nil {
+			if AnnotationId, ok := backRepo.BackRepoAnnotation.Map_AnnotationPtr_AnnotationDBID[sequence.Annotation]; ok {
+				sequenceDB.AnnotationID.Int64 = int64(AnnotationId)
+				sequenceDB.AnnotationID.Valid = true
+			}
+		} else {
+			sequenceDB.AnnotationID.Int64 = 0
+			sequenceDB.AnnotationID.Valid = true
+		}
+
 		// 1. reset
 		sequenceDB.SequencePointersEncoding.Elements = make([]int, 0)
 		// 2. encode
@@ -345,6 +361,11 @@ func (backRepoSequence *BackRepoSequenceStruct) CheckoutPhaseTwoInstance(backRep
 func (sequenceDB *SequenceDB) DecodePointers(backRepo *BackRepoStruct, sequence *models.Sequence) {
 
 	// insertion point for checkout of pointer encoding
+	// Annotation field
+	sequence.Annotation = nil
+	if sequenceDB.AnnotationID.Int64 != 0 {
+		sequence.Annotation = backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(sequenceDB.AnnotationID.Int64)]
+	}
 	// This loop redeem sequence.Elements in the stage from the encode in the back repo
 	// It parses all ElementDB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance
@@ -582,6 +603,12 @@ func (backRepoSequence *BackRepoSequenceStruct) RestorePhaseTwo() {
 		_ = sequenceDB
 
 		// insertion point for reindexing pointers encoding
+		// reindexing Annotation field
+		if sequenceDB.AnnotationID.Int64 != 0 {
+			sequenceDB.AnnotationID.Int64 = int64(BackRepoAnnotationid_atBckpTime_newID[uint(sequenceDB.AnnotationID.Int64)])
+			sequenceDB.AnnotationID.Valid = true
+		}
+
 		// update databse with new index encoding
 		query := backRepoSequence.db.Model(sequenceDB).Updates(*sequenceDB)
 		if query.Error != nil {

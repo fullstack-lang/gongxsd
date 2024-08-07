@@ -4,6 +4,10 @@
 
     <!-- Definition of a simple type for the year -->
     <xs:simpleType name="yearType">
+        <xs:annotation>
+            <xs:documentation> This type represents a year. It restricts the value to an integer
+                between 1900 and 2100 inclusive. </xs:documentation>
+        </xs:annotation>
         <xs:restriction base="xs:integer">
             <xs:minInclusive value="1900" />
             <xs:maxInclusive value="2100" />
@@ -12,11 +16,24 @@
 
     <!-- Definition of a complex type for a book -->
     <xs:complexType name="bookType">
+        <xs:annotation>
+            <xs:documentation> This complex type defines the structure of a book, including title,
+                author, year, and format. </xs:documentation>
+        </xs:annotation>
         <xs:sequence>
-            <xs:element name="title" type="titleType" />
+            <xs:element name="title" type="titleType">
+                <xs:annotation>
+                    <xs:documentation>The title of the book, consisting of alphabetic characters and
+                        spaces only.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
             <xs:element name="author" type="xs:string" />
             <xs:element name="year" type="yearType" />
-            <xs:element name="format" type="bookFormatEnum" />
+            <xs:element name="format" type="bookFormatEnum">
+                <xs:annotation>
+                    <xs:documentation>The format of the book, either Paperback or Hardcover.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
         </xs:sequence>
     </xs:complexType>
 

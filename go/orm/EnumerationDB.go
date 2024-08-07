@@ -46,6 +46,10 @@ type EnumerationAPI struct {
 // reverse pointers of slice of poitners to Struct
 type EnumerationPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
+
+	// field Annotation is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	AnnotationID sql.NullInt64
 }
 
 // EnumerationDB describes a enumeration in the database
@@ -217,6 +221,18 @@ func (backRepoEnumeration *BackRepoEnumerationStruct) CommitPhaseTwoInstance(bac
 		enumerationDB.CopyBasicFieldsFromEnumeration(enumeration)
 
 		// insertion point for translating pointers encodings into actual pointers
+		// commit pointer value enumeration.Annotation translates to updating the enumeration.AnnotationID
+		enumerationDB.AnnotationID.Valid = true // allow for a 0 value (nil association)
+		if enumeration.Annotation != nil {
+			if AnnotationId, ok := backRepo.BackRepoAnnotation.Map_AnnotationPtr_AnnotationDBID[enumeration.Annotation]; ok {
+				enumerationDB.AnnotationID.Int64 = int64(AnnotationId)
+				enumerationDB.AnnotationID.Valid = true
+			}
+		} else {
+			enumerationDB.AnnotationID.Int64 = 0
+			enumerationDB.AnnotationID.Valid = true
+		}
+
 		query := backRepoEnumeration.db.Save(&enumerationDB)
 		if query.Error != nil {
 			log.Fatalln(query.Error)
@@ -330,6 +346,11 @@ func (backRepoEnumeration *BackRepoEnumerationStruct) CheckoutPhaseTwoInstance(b
 func (enumerationDB *EnumerationDB) DecodePointers(backRepo *BackRepoStruct, enumeration *models.Enumeration) {
 
 	// insertion point for checkout of pointer encoding
+	// Annotation field
+	enumeration.Annotation = nil
+	if enumerationDB.AnnotationID.Int64 != 0 {
+		enumeration.Annotation = backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(enumerationDB.AnnotationID.Int64)]
+	}
 	return
 }
 
@@ -570,6 +591,12 @@ func (backRepoEnumeration *BackRepoEnumerationStruct) RestorePhaseTwo() {
 		_ = enumerationDB
 
 		// insertion point for reindexing pointers encoding
+		// reindexing Annotation field
+		if enumerationDB.AnnotationID.Int64 != 0 {
+			enumerationDB.AnnotationID.Int64 = int64(BackRepoAnnotationid_atBckpTime_newID[uint(enumerationDB.AnnotationID.Int64)])
+			enumerationDB.AnnotationID.Valid = true
+		}
+
 		// update databse with new index encoding
 		query := backRepoEnumeration.db.Model(enumerationDB).Updates(*enumerationDB)
 		if query.Error != nil {

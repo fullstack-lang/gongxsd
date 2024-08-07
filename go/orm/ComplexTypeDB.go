@@ -47,6 +47,10 @@ type ComplexTypeAPI struct {
 type ComplexTypePointersEncoding struct {
 	// insertion for pointer fields encoding declaration
 
+	// field Annotation is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	AnnotationID sql.NullInt64
+
 	// field Sequence is a pointer to another Struct (optional or 0..1)
 	// This field is generated into another field to enable AS ONE association
 	SequenceID sql.NullInt64
@@ -221,6 +225,18 @@ func (backRepoComplexType *BackRepoComplexTypeStruct) CommitPhaseTwoInstance(bac
 		complextypeDB.CopyBasicFieldsFromComplexType(complextype)
 
 		// insertion point for translating pointers encodings into actual pointers
+		// commit pointer value complextype.Annotation translates to updating the complextype.AnnotationID
+		complextypeDB.AnnotationID.Valid = true // allow for a 0 value (nil association)
+		if complextype.Annotation != nil {
+			if AnnotationId, ok := backRepo.BackRepoAnnotation.Map_AnnotationPtr_AnnotationDBID[complextype.Annotation]; ok {
+				complextypeDB.AnnotationID.Int64 = int64(AnnotationId)
+				complextypeDB.AnnotationID.Valid = true
+			}
+		} else {
+			complextypeDB.AnnotationID.Int64 = 0
+			complextypeDB.AnnotationID.Valid = true
+		}
+
 		// commit pointer value complextype.Sequence translates to updating the complextype.SequenceID
 		complextypeDB.SequenceID.Valid = true // allow for a 0 value (nil association)
 		if complextype.Sequence != nil {
@@ -346,6 +362,11 @@ func (backRepoComplexType *BackRepoComplexTypeStruct) CheckoutPhaseTwoInstance(b
 func (complextypeDB *ComplexTypeDB) DecodePointers(backRepo *BackRepoStruct, complextype *models.ComplexType) {
 
 	// insertion point for checkout of pointer encoding
+	// Annotation field
+	complextype.Annotation = nil
+	if complextypeDB.AnnotationID.Int64 != 0 {
+		complextype.Annotation = backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(complextypeDB.AnnotationID.Int64)]
+	}
 	// Sequence field
 	complextype.Sequence = nil
 	if complextypeDB.SequenceID.Int64 != 0 {
@@ -591,6 +612,12 @@ func (backRepoComplexType *BackRepoComplexTypeStruct) RestorePhaseTwo() {
 		_ = complextypeDB
 
 		// insertion point for reindexing pointers encoding
+		// reindexing Annotation field
+		if complextypeDB.AnnotationID.Int64 != 0 {
+			complextypeDB.AnnotationID.Int64 = int64(BackRepoAnnotationid_atBckpTime_newID[uint(complextypeDB.AnnotationID.Int64)])
+			complextypeDB.AnnotationID.Valid = true
+		}
+
 		// reindexing Sequence field
 		if complextypeDB.SequenceID.Int64 != 0 {
 			complextypeDB.SequenceID.Int64 = int64(BackRepoSequenceid_atBckpTime_newID[uint(complextypeDB.SequenceID.Int64)])

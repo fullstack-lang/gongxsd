@@ -18,6 +18,83 @@ var __dummmy__letters = slices.Delete([]string{"a"}, 0, 1)
 var __dummy_orm = orm.BackRepoStruct{}
 
 // insertion point
+func __gong__New__AnnotationFormCallback(
+	annotation *models.Annotation,
+	probe *Probe,
+	formGroup *table.FormGroup,
+) (annotationFormCallback *AnnotationFormCallback) {
+	annotationFormCallback = new(AnnotationFormCallback)
+	annotationFormCallback.probe = probe
+	annotationFormCallback.annotation = annotation
+	annotationFormCallback.formGroup = formGroup
+
+	annotationFormCallback.CreationMode = (annotation == nil)
+
+	return
+}
+
+type AnnotationFormCallback struct {
+	annotation *models.Annotation
+
+	// If the form call is called on the creation of a new instnace
+	CreationMode bool
+
+	probe *Probe
+
+	formGroup *table.FormGroup
+}
+
+func (annotationFormCallback *AnnotationFormCallback) OnSave() {
+
+	log.Println("AnnotationFormCallback, OnSave")
+
+	// checkout formStage to have the form group on the stage synchronized with the
+	// back repo (and front repo)
+	annotationFormCallback.probe.formStage.Checkout()
+
+	if annotationFormCallback.annotation == nil {
+		annotationFormCallback.annotation = new(models.Annotation).Stage(annotationFormCallback.probe.stageOfInterest)
+	}
+	annotation_ := annotationFormCallback.annotation
+	_ = annotation_
+
+	for _, formDiv := range annotationFormCallback.formGroup.FormDivs {
+		switch formDiv.Name {
+		// insertion point per field
+		case "Name":
+			FormDivBasicFieldToField(&(annotation_.Name), formDiv)
+		}
+	}
+
+	// manage the suppress operation
+	if annotationFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		annotation_.Unstage(annotationFormCallback.probe.stageOfInterest)
+	}
+
+	annotationFormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.Annotation](
+		annotationFormCallback.probe,
+	)
+	annotationFormCallback.probe.tableStage.Commit()
+
+	// display a new form by reset the form stage
+	if annotationFormCallback.CreationMode || annotationFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		annotationFormCallback.probe.formStage.Reset()
+		newFormGroup := (&table.FormGroup{
+			Name: table.FormGroupDefaultName.ToString(),
+		}).Stage(annotationFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__AnnotationFormCallback(
+			nil,
+			annotationFormCallback.probe,
+			newFormGroup,
+		)
+		annotation := new(models.Annotation)
+		FillUpForm(annotation, newFormGroup, annotationFormCallback.probe)
+		annotationFormCallback.probe.formStage.Commit()
+	}
+
+	fillUpTree(annotationFormCallback.probe)
+}
 func __gong__New__ComplexTypeFormCallback(
 	complextype *models.ComplexType,
 	probe *Probe,
@@ -63,6 +140,8 @@ func (complextypeFormCallback *ComplexTypeFormCallback) OnSave() {
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(complextype_.Name), formDiv)
+		case "Annotation":
+			FormDivSelectFieldToField(&(complextype_.Annotation), complextypeFormCallback.probe.stageOfInterest, formDiv)
 		case "NameXSD":
 			FormDivBasicFieldToField(&(complextype_.NameXSD), formDiv)
 		case "Sequence":
@@ -186,6 +265,8 @@ func (elementFormCallback *ElementFormCallback) OnSave() {
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(element_.Name), formDiv)
+		case "Annotation":
+			FormDivSelectFieldToField(&(element_.Annotation), elementFormCallback.probe.stageOfInterest, formDiv)
 		case "NameXSD":
 			FormDivBasicFieldToField(&(element_.NameXSD), formDiv)
 		case "Type":
@@ -355,6 +436,8 @@ func (enumerationFormCallback *EnumerationFormCallback) OnSave() {
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(enumeration_.Name), formDiv)
+		case "Annotation":
+			FormDivSelectFieldToField(&(enumeration_.Annotation), enumerationFormCallback.probe.stageOfInterest, formDiv)
 		case "Value":
 			FormDivBasicFieldToField(&(enumeration_.Value), formDiv)
 		case "Restriction:Enumerations":
@@ -476,6 +559,8 @@ func (maxinclusiveFormCallback *MaxInclusiveFormCallback) OnSave() {
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(maxinclusive_.Name), formDiv)
+		case "Annotation":
+			FormDivSelectFieldToField(&(maxinclusive_.Annotation), maxinclusiveFormCallback.probe.stageOfInterest, formDiv)
 		case "Value":
 			FormDivBasicFieldToField(&(maxinclusive_.Value), formDiv)
 		}
@@ -555,6 +640,8 @@ func (mininclusiveFormCallback *MinInclusiveFormCallback) OnSave() {
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(mininclusive_.Name), formDiv)
+		case "Annotation":
+			FormDivSelectFieldToField(&(mininclusive_.Annotation), mininclusiveFormCallback.probe.stageOfInterest, formDiv)
 		case "Value":
 			FormDivBasicFieldToField(&(mininclusive_.Value), formDiv)
 		}
@@ -634,6 +721,8 @@ func (patternFormCallback *PatternFormCallback) OnSave() {
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(pattern_.Name), formDiv)
+		case "Annotation":
+			FormDivSelectFieldToField(&(pattern_.Annotation), patternFormCallback.probe.stageOfInterest, formDiv)
 		case "Value":
 			FormDivBasicFieldToField(&(pattern_.Value), formDiv)
 		}
@@ -713,6 +802,8 @@ func (restrictionFormCallback *RestrictionFormCallback) OnSave() {
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(restriction_.Name), formDiv)
+		case "Annotation":
+			FormDivSelectFieldToField(&(restriction_.Annotation), restrictionFormCallback.probe.stageOfInterest, formDiv)
 		case "Base":
 			FormDivBasicFieldToField(&(restriction_.Base), formDiv)
 		case "MinInclusive":
@@ -798,6 +889,8 @@ func (schemaFormCallback *SchemaFormCallback) OnSave() {
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(schema_.Name), formDiv)
+		case "Annotation":
+			FormDivSelectFieldToField(&(schema_.Annotation), schemaFormCallback.probe.stageOfInterest, formDiv)
 		}
 	}
 
@@ -875,6 +968,8 @@ func (sequenceFormCallback *SequenceFormCallback) OnSave() {
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(sequence_.Name), formDiv)
+		case "Annotation":
+			FormDivSelectFieldToField(&(sequence_.Annotation), sequenceFormCallback.probe.stageOfInterest, formDiv)
 		}
 	}
 
@@ -952,6 +1047,8 @@ func (simpletypeFormCallback *SimpleTypeFormCallback) OnSave() {
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(simpletype_.Name), formDiv)
+		case "Annotation":
+			FormDivSelectFieldToField(&(simpletype_.Annotation), simpletypeFormCallback.probe.stageOfInterest, formDiv)
 		case "NameXSD":
 			FormDivBasicFieldToField(&(simpletype_.NameXSD), formDiv)
 		case "Restriction":

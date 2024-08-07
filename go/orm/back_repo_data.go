@@ -4,6 +4,8 @@ package orm
 type BackRepoData struct {
 	// insertion point for slices
 
+	AnnotationAPIs []*AnnotationAPI
+
 	ComplexTypeAPIs []*ComplexTypeAPI
 
 	ElementAPIs []*ElementAPI
@@ -27,6 +29,16 @@ type BackRepoData struct {
 
 func CopyBackRepoToBackRepoData(backRepo *BackRepoStruct, backRepoData *BackRepoData) {
 	// insertion point for slices copies
+	for _, annotationDB := range backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationDB {
+
+		var annotationAPI AnnotationAPI
+		annotationAPI.ID = annotationDB.ID
+		annotationAPI.AnnotationPointersEncoding = annotationDB.AnnotationPointersEncoding
+		annotationDB.CopyBasicFieldsToAnnotation_WOP(&annotationAPI.Annotation_WOP)
+
+		backRepoData.AnnotationAPIs = append(backRepoData.AnnotationAPIs, &annotationAPI)
+	}
+
 	for _, complextypeDB := range backRepo.BackRepoComplexType.Map_ComplexTypeDBID_ComplexTypeDB {
 
 		var complextypeAPI ComplexTypeAPI

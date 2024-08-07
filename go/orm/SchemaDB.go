@@ -47,6 +47,10 @@ type SchemaAPI struct {
 type SchemaPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
 
+	// field Annotation is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	AnnotationID sql.NullInt64
+
 	// field Elements is a slice of pointers to another Struct (optional or 0..1)
 	Elements IntSlice `gorm:"type:TEXT"`
 
@@ -220,6 +224,18 @@ func (backRepoSchema *BackRepoSchemaStruct) CommitPhaseTwoInstance(backRepo *Bac
 		schemaDB.CopyBasicFieldsFromSchema(schema)
 
 		// insertion point for translating pointers encodings into actual pointers
+		// commit pointer value schema.Annotation translates to updating the schema.AnnotationID
+		schemaDB.AnnotationID.Valid = true // allow for a 0 value (nil association)
+		if schema.Annotation != nil {
+			if AnnotationId, ok := backRepo.BackRepoAnnotation.Map_AnnotationPtr_AnnotationDBID[schema.Annotation]; ok {
+				schemaDB.AnnotationID.Int64 = int64(AnnotationId)
+				schemaDB.AnnotationID.Valid = true
+			}
+		} else {
+			schemaDB.AnnotationID.Int64 = 0
+			schemaDB.AnnotationID.Valid = true
+		}
+
 		// 1. reset
 		schemaDB.SchemaPointersEncoding.Elements = make([]int, 0)
 		// 2. encode
@@ -387,6 +403,11 @@ func (backRepoSchema *BackRepoSchemaStruct) CheckoutPhaseTwoInstance(backRepo *B
 func (schemaDB *SchemaDB) DecodePointers(backRepo *BackRepoStruct, schema *models.Schema) {
 
 	// insertion point for checkout of pointer encoding
+	// Annotation field
+	schema.Annotation = nil
+	if schemaDB.AnnotationID.Int64 != 0 {
+		schema.Annotation = backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(schemaDB.AnnotationID.Int64)]
+	}
 	// This loop redeem schema.Elements in the stage from the encode in the back repo
 	// It parses all ElementDB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance
@@ -642,6 +663,12 @@ func (backRepoSchema *BackRepoSchemaStruct) RestorePhaseTwo() {
 		_ = schemaDB
 
 		// insertion point for reindexing pointers encoding
+		// reindexing Annotation field
+		if schemaDB.AnnotationID.Int64 != 0 {
+			schemaDB.AnnotationID.Int64 = int64(BackRepoAnnotationid_atBckpTime_newID[uint(schemaDB.AnnotationID.Int64)])
+			schemaDB.AnnotationID.Valid = true
+		}
+
 		// update databse with new index encoding
 		query := backRepoSchema.db.Model(schemaDB).Updates(*schemaDB)
 		if query.Error != nil {

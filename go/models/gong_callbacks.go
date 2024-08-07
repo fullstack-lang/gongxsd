@@ -6,6 +6,10 @@ func AfterCreateFromFront[Type Gongstruct](stage *StageStruct, instance *Type) {
 
 	switch target := any(instance).(type) {
 	// insertion point
+	case *Annotation:
+		if stage.OnAfterAnnotationCreateCallback != nil {
+			stage.OnAfterAnnotationCreateCallback.OnAfterCreate(stage, target)
+		}
 	case *ComplexType:
 		if stage.OnAfterComplexTypeCreateCallback != nil {
 			stage.OnAfterComplexTypeCreateCallback.OnAfterCreate(stage, target)
@@ -56,6 +60,11 @@ func AfterUpdateFromFront[Type Gongstruct](stage *StageStruct, old, new *Type) {
 
 	switch oldTarget := any(old).(type) {
 	// insertion point
+	case *Annotation:
+		newTarget := any(new).(*Annotation)
+		if stage.OnAfterAnnotationUpdateCallback != nil {
+			stage.OnAfterAnnotationUpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
+		}
 	case *ComplexType:
 		newTarget := any(new).(*ComplexType)
 		if stage.OnAfterComplexTypeUpdateCallback != nil {
@@ -116,6 +125,11 @@ func AfterDeleteFromFront[Type Gongstruct](stage *StageStruct, staged, front *Ty
 
 	switch front := any(front).(type) {
 	// insertion point
+	case *Annotation:
+		if stage.OnAfterAnnotationDeleteCallback != nil {
+			staged := any(staged).(*Annotation)
+			stage.OnAfterAnnotationDeleteCallback.OnAfterDelete(stage, staged, front)
+		}
 	case *ComplexType:
 		if stage.OnAfterComplexTypeDeleteCallback != nil {
 			staged := any(staged).(*ComplexType)
@@ -176,6 +190,10 @@ func AfterReadFromFront[Type Gongstruct](stage *StageStruct, instance *Type) {
 
 	switch target := any(instance).(type) {
 	// insertion point
+	case *Annotation:
+		if stage.OnAfterAnnotationReadCallback != nil {
+			stage.OnAfterAnnotationReadCallback.OnAfterRead(stage, target)
+		}
 	case *ComplexType:
 		if stage.OnAfterComplexTypeReadCallback != nil {
 			stage.OnAfterComplexTypeReadCallback.OnAfterRead(stage, target)
@@ -227,6 +245,9 @@ func SetCallbackAfterUpdateFromFront[Type Gongstruct](stage *StageStruct, callba
 	var instance Type
 	switch any(instance).(type) {
 		// insertion point
+	case *Annotation:
+		stage.OnAfterAnnotationUpdateCallback = any(callback).(OnAfterUpdateInterface[Annotation])
+	
 	case *ComplexType:
 		stage.OnAfterComplexTypeUpdateCallback = any(callback).(OnAfterUpdateInterface[ComplexType])
 	
@@ -264,6 +285,9 @@ func SetCallbackAfterCreateFromFront[Type Gongstruct](stage *StageStruct, callba
 	var instance Type
 	switch any(instance).(type) {
 		// insertion point
+	case *Annotation:
+		stage.OnAfterAnnotationCreateCallback = any(callback).(OnAfterCreateInterface[Annotation])
+	
 	case *ComplexType:
 		stage.OnAfterComplexTypeCreateCallback = any(callback).(OnAfterCreateInterface[ComplexType])
 	
@@ -301,6 +325,9 @@ func SetCallbackAfterDeleteFromFront[Type Gongstruct](stage *StageStruct, callba
 	var instance Type
 	switch any(instance).(type) {
 		// insertion point
+	case *Annotation:
+		stage.OnAfterAnnotationDeleteCallback = any(callback).(OnAfterDeleteInterface[Annotation])
+	
 	case *ComplexType:
 		stage.OnAfterComplexTypeDeleteCallback = any(callback).(OnAfterDeleteInterface[ComplexType])
 	
@@ -338,6 +365,9 @@ func SetCallbackAfterReadFromFront[Type Gongstruct](stage *StageStruct, callback
 	var instance Type
 	switch any(instance).(type) {
 		// insertion point
+	case *Annotation:
+		stage.OnAfterAnnotationReadCallback = any(callback).(OnAfterReadInterface[Annotation])
+	
 	case *ComplexType:
 		stage.OnAfterComplexTypeReadCallback = any(callback).(OnAfterReadInterface[ComplexType])
 	
