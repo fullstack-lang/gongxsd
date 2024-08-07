@@ -62,6 +62,46 @@ func fillUpTree(
 
 		switch gongStruct.Name {
 		// insertion point
+		case "ComplexType":
+			nodeGongstruct.Name = name
+			set := *models.GetGongstructInstancesSet[models.ComplexType](probe.stageOfInterest)
+			for _complextype := range set {
+				nodeInstance := (&tree.Node{Name: _complextype.GetName()}).Stage(probe.treeStage)
+				nodeInstance.IsNodeClickable = true
+				nodeInstance.Impl = NewInstanceNodeCallback(_complextype, "ComplexType", probe)
+
+				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
+			}
+		case "Element":
+			nodeGongstruct.Name = name
+			set := *models.GetGongstructInstancesSet[models.Element](probe.stageOfInterest)
+			for _element := range set {
+				nodeInstance := (&tree.Node{Name: _element.GetName()}).Stage(probe.treeStage)
+				nodeInstance.IsNodeClickable = true
+				nodeInstance.Impl = NewInstanceNodeCallback(_element, "Element", probe)
+
+				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
+			}
+		case "Enumeration":
+			nodeGongstruct.Name = name
+			set := *models.GetGongstructInstancesSet[models.Enumeration](probe.stageOfInterest)
+			for _enumeration := range set {
+				nodeInstance := (&tree.Node{Name: _enumeration.GetName()}).Stage(probe.treeStage)
+				nodeInstance.IsNodeClickable = true
+				nodeInstance.Impl = NewInstanceNodeCallback(_enumeration, "Enumeration", probe)
+
+				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
+			}
+		case "Restriction":
+			nodeGongstruct.Name = name
+			set := *models.GetGongstructInstancesSet[models.Restriction](probe.stageOfInterest)
+			for _restriction := range set {
+				nodeInstance := (&tree.Node{Name: _restriction.GetName()}).Stage(probe.treeStage)
+				nodeInstance.IsNodeClickable = true
+				nodeInstance.Impl = NewInstanceNodeCallback(_restriction, "Restriction", probe)
+
+				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
+			}
 		case "Schema":
 			nodeGongstruct.Name = name
 			set := *models.GetGongstructInstancesSet[models.Schema](probe.stageOfInterest)
@@ -69,6 +109,26 @@ func fillUpTree(
 				nodeInstance := (&tree.Node{Name: _schema.GetName()}).Stage(probe.treeStage)
 				nodeInstance.IsNodeClickable = true
 				nodeInstance.Impl = NewInstanceNodeCallback(_schema, "Schema", probe)
+
+				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
+			}
+		case "Sequence":
+			nodeGongstruct.Name = name
+			set := *models.GetGongstructInstancesSet[models.Sequence](probe.stageOfInterest)
+			for _sequence := range set {
+				nodeInstance := (&tree.Node{Name: _sequence.GetName()}).Stage(probe.treeStage)
+				nodeInstance.IsNodeClickable = true
+				nodeInstance.Impl = NewInstanceNodeCallback(_sequence, "Sequence", probe)
+
+				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
+			}
+		case "SimpleType":
+			nodeGongstruct.Name = name
+			set := *models.GetGongstructInstancesSet[models.SimpleType](probe.stageOfInterest)
+			for _simpletype := range set {
+				nodeInstance := (&tree.Node{Name: _simpletype.GetName()}).Stage(probe.treeStage)
+				nodeInstance.IsNodeClickable = true
+				nodeInstance.Impl = NewInstanceNodeCallback(_simpletype, "SimpleType", probe)
 
 				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
 			}

@@ -14,7 +14,13 @@ func SerializeStage(stage *StageStruct, filename string) {
 	f := excelize.NewFile()
 	{
 		// insertion point
+		SerializeExcelize[ComplexType](stage, f)
+		SerializeExcelize[Element](stage, f)
+		SerializeExcelize[Enumeration](stage, f)
+		SerializeExcelize[Restriction](stage, f)
 		SerializeExcelize[Schema](stage, f)
+		SerializeExcelize[Sequence](stage, f)
+		SerializeExcelize[SimpleType](stage, f)
 	}
 
 	var tab ExcelizeTabulator

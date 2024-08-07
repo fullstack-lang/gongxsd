@@ -46,6 +46,15 @@ type SchemaAPI struct {
 // reverse pointers of slice of poitners to Struct
 type SchemaPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
+
+	// field Elements is a slice of pointers to another Struct (optional or 0..1)
+	Elements IntSlice `gorm:"type:TEXT"`
+
+	// field SimpleTypes is a slice of pointers to another Struct (optional or 0..1)
+	SimpleTypes IntSlice `gorm:"type:TEXT"`
+
+	// field ComplexTypes is a slice of pointers to another Struct (optional or 0..1)
+	ComplexTypes IntSlice `gorm:"type:TEXT"`
 }
 
 // SchemaDB describes a schema in the database
@@ -211,6 +220,60 @@ func (backRepoSchema *BackRepoSchemaStruct) CommitPhaseTwoInstance(backRepo *Bac
 		schemaDB.CopyBasicFieldsFromSchema(schema)
 
 		// insertion point for translating pointers encodings into actual pointers
+		// 1. reset
+		schemaDB.SchemaPointersEncoding.Elements = make([]int, 0)
+		// 2. encode
+		for _, elementAssocEnd := range schema.Elements {
+			elementAssocEnd_DB :=
+				backRepo.BackRepoElement.GetElementDBFromElementPtr(elementAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the elementAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if elementAssocEnd_DB == nil {
+				continue
+			}
+			
+			schemaDB.SchemaPointersEncoding.Elements =
+				append(schemaDB.SchemaPointersEncoding.Elements, int(elementAssocEnd_DB.ID))
+		}
+
+		// 1. reset
+		schemaDB.SchemaPointersEncoding.SimpleTypes = make([]int, 0)
+		// 2. encode
+		for _, simpletypeAssocEnd := range schema.SimpleTypes {
+			simpletypeAssocEnd_DB :=
+				backRepo.BackRepoSimpleType.GetSimpleTypeDBFromSimpleTypePtr(simpletypeAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the simpletypeAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if simpletypeAssocEnd_DB == nil {
+				continue
+			}
+			
+			schemaDB.SchemaPointersEncoding.SimpleTypes =
+				append(schemaDB.SchemaPointersEncoding.SimpleTypes, int(simpletypeAssocEnd_DB.ID))
+		}
+
+		// 1. reset
+		schemaDB.SchemaPointersEncoding.ComplexTypes = make([]int, 0)
+		// 2. encode
+		for _, complextypeAssocEnd := range schema.ComplexTypes {
+			complextypeAssocEnd_DB :=
+				backRepo.BackRepoComplexType.GetComplexTypeDBFromComplexTypePtr(complextypeAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the complextypeAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if complextypeAssocEnd_DB == nil {
+				continue
+			}
+			
+			schemaDB.SchemaPointersEncoding.ComplexTypes =
+				append(schemaDB.SchemaPointersEncoding.ComplexTypes, int(complextypeAssocEnd_DB.ID))
+		}
+
 		query := backRepoSchema.db.Save(&schemaDB)
 		if query.Error != nil {
 			log.Fatalln(query.Error)
@@ -324,6 +387,33 @@ func (backRepoSchema *BackRepoSchemaStruct) CheckoutPhaseTwoInstance(backRepo *B
 func (schemaDB *SchemaDB) DecodePointers(backRepo *BackRepoStruct, schema *models.Schema) {
 
 	// insertion point for checkout of pointer encoding
+	// This loop redeem schema.Elements in the stage from the encode in the back repo
+	// It parses all ElementDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	schema.Elements = schema.Elements[:0]
+	for _, _Elementid := range schemaDB.SchemaPointersEncoding.Elements {
+		schema.Elements = append(schema.Elements, backRepo.BackRepoElement.Map_ElementDBID_ElementPtr[uint(_Elementid)])
+	}
+
+	// This loop redeem schema.SimpleTypes in the stage from the encode in the back repo
+	// It parses all SimpleTypeDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	schema.SimpleTypes = schema.SimpleTypes[:0]
+	for _, _SimpleTypeid := range schemaDB.SchemaPointersEncoding.SimpleTypes {
+		schema.SimpleTypes = append(schema.SimpleTypes, backRepo.BackRepoSimpleType.Map_SimpleTypeDBID_SimpleTypePtr[uint(_SimpleTypeid)])
+	}
+
+	// This loop redeem schema.ComplexTypes in the stage from the encode in the back repo
+	// It parses all ComplexTypeDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	schema.ComplexTypes = schema.ComplexTypes[:0]
+	for _, _ComplexTypeid := range schemaDB.SchemaPointersEncoding.ComplexTypes {
+		schema.ComplexTypes = append(schema.ComplexTypes, backRepo.BackRepoComplexType.Map_ComplexTypeDBID_ComplexTypePtr[uint(_ComplexTypeid)])
+	}
+
 	return
 }
 

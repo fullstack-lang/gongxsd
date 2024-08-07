@@ -27,7 +27,7 @@ func init() {
 	readCmd.Flags().StringP("output", "o", "", "Output file")
 
 	unmarshallFromCode = readCmd.Flags().StringP("unmarshallFromCode", "u", "stage.go", "unmarshall data from go file and '.go' (must be lowercased without spaces), If unmarshallFromCode arg is '', no unmarshalling")
-	marshallOnCommit = readCmd.Flags().StringP("marshallOnCommit", "m", "stage.go", "on all commits, marshall staged data to a go file with the marshall name and '.go' (must be lowercased without spaces). If marshall arg is '', no marshalling")
+	marshallOnCommit = readCmd.Flags().StringP("marshallOnCommit", "m", "stage", "on all commits, marshall staged data to a go file with the marshall name and '.go' (must be lowercased without spaces). If marshall arg is '', no marshalling")
 	port = readCmd.Flags().IntP("port", "p", 8080, "port server")
 
 	rootCmd.PersistentFlags().BoolVarP(&Verbose, "verbose", "v", false, "verbose output")

@@ -26,6 +26,58 @@ func FillUpFormFromGongstructName(
 
 	switch gongstructName {
 	// insertion point
+	case "ComplexType":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "ComplexType Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__ComplexTypeFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		complextype := new(models.ComplexType)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(complextype, formGroup, probe)
+	case "Element":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "Element Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__ElementFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		element := new(models.Element)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(element, formGroup, probe)
+	case "Enumeration":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "Enumeration Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__EnumerationFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		enumeration := new(models.Enumeration)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(enumeration, formGroup, probe)
+	case "Restriction":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "Restriction Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__RestrictionFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		restriction := new(models.Restriction)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(restriction, formGroup, probe)
 	case "Schema":
 		formGroup := (&form.FormGroup{
 			Name:  form.FormGroupDefaultName.ToString(),
@@ -39,6 +91,32 @@ func FillUpFormFromGongstructName(
 		schema := new(models.Schema)
 		formGroup.HasSuppressButton = !isNewInstance
 		FillUpForm(schema, formGroup, probe)
+	case "Sequence":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "Sequence Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__SequenceFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		sequence := new(models.Sequence)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(sequence, formGroup, probe)
+	case "SimpleType":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "SimpleType Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__SimpleTypeFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		simpletype := new(models.SimpleType)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(simpletype, formGroup, probe)
 	}
 	formStage.Commit()
 }

@@ -33,7 +33,120 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 
 	switch owningInstanceInfered := any(owningInstance).(type) {
 	// insertion point
+	case *ComplexType:
+		// insertion point per field
+
+	case *Element:
+		// insertion point per field
+
+	case *Enumeration:
+		// insertion point per field
+
+	case *Restriction:
+		// insertion point per field
+		if fieldName == "Enumerations" {
+
+			// walk all instances of the owning type
+			for _instance := range *GetGongstructInstancesSetFromPointerType[OwningType](stage) {
+				if any(_instance).(*Restriction) != owningInstanceInfered {
+					_inferedTypeInstance := any(_instance).(*Restriction)
+					reference := make([]FieldType, 0)
+					targetFieldSlice := any(_inferedTypeInstance.Enumerations).([]FieldType)
+					copy(targetFieldSlice, reference)
+					_inferedTypeInstance.Enumerations = _inferedTypeInstance.Enumerations[0:]
+					for _, fieldInstance := range reference {
+						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
+							_inferedTypeInstance.Enumerations =
+								append(_inferedTypeInstance.Enumerations, any(fieldInstance).(*Enumeration))
+						}
+					}
+				}
+			}
+		}
+
 	case *Schema:
+		// insertion point per field
+		if fieldName == "Elements" {
+
+			// walk all instances of the owning type
+			for _instance := range *GetGongstructInstancesSetFromPointerType[OwningType](stage) {
+				if any(_instance).(*Schema) != owningInstanceInfered {
+					_inferedTypeInstance := any(_instance).(*Schema)
+					reference := make([]FieldType, 0)
+					targetFieldSlice := any(_inferedTypeInstance.Elements).([]FieldType)
+					copy(targetFieldSlice, reference)
+					_inferedTypeInstance.Elements = _inferedTypeInstance.Elements[0:]
+					for _, fieldInstance := range reference {
+						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
+							_inferedTypeInstance.Elements =
+								append(_inferedTypeInstance.Elements, any(fieldInstance).(*Element))
+						}
+					}
+				}
+			}
+		}
+		if fieldName == "SimpleTypes" {
+
+			// walk all instances of the owning type
+			for _instance := range *GetGongstructInstancesSetFromPointerType[OwningType](stage) {
+				if any(_instance).(*Schema) != owningInstanceInfered {
+					_inferedTypeInstance := any(_instance).(*Schema)
+					reference := make([]FieldType, 0)
+					targetFieldSlice := any(_inferedTypeInstance.SimpleTypes).([]FieldType)
+					copy(targetFieldSlice, reference)
+					_inferedTypeInstance.SimpleTypes = _inferedTypeInstance.SimpleTypes[0:]
+					for _, fieldInstance := range reference {
+						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
+							_inferedTypeInstance.SimpleTypes =
+								append(_inferedTypeInstance.SimpleTypes, any(fieldInstance).(*SimpleType))
+						}
+					}
+				}
+			}
+		}
+		if fieldName == "ComplexTypes" {
+
+			// walk all instances of the owning type
+			for _instance := range *GetGongstructInstancesSetFromPointerType[OwningType](stage) {
+				if any(_instance).(*Schema) != owningInstanceInfered {
+					_inferedTypeInstance := any(_instance).(*Schema)
+					reference := make([]FieldType, 0)
+					targetFieldSlice := any(_inferedTypeInstance.ComplexTypes).([]FieldType)
+					copy(targetFieldSlice, reference)
+					_inferedTypeInstance.ComplexTypes = _inferedTypeInstance.ComplexTypes[0:]
+					for _, fieldInstance := range reference {
+						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
+							_inferedTypeInstance.ComplexTypes =
+								append(_inferedTypeInstance.ComplexTypes, any(fieldInstance).(*ComplexType))
+						}
+					}
+				}
+			}
+		}
+
+	case *Sequence:
+		// insertion point per field
+		if fieldName == "Elements" {
+
+			// walk all instances of the owning type
+			for _instance := range *GetGongstructInstancesSetFromPointerType[OwningType](stage) {
+				if any(_instance).(*Sequence) != owningInstanceInfered {
+					_inferedTypeInstance := any(_instance).(*Sequence)
+					reference := make([]FieldType, 0)
+					targetFieldSlice := any(_inferedTypeInstance.Elements).([]FieldType)
+					copy(targetFieldSlice, reference)
+					_inferedTypeInstance.Elements = _inferedTypeInstance.Elements[0:]
+					for _, fieldInstance := range reference {
+						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
+							_inferedTypeInstance.Elements =
+								append(_inferedTypeInstance.Elements, any(fieldInstance).(*Element))
+						}
+					}
+				}
+			}
+		}
+
+	case *SimpleType:
 		// insertion point per field
 
 	default:
@@ -45,7 +158,65 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 // Its complexity is in O(n)O(p) where p is the number of pointers
 func (stage *StageStruct) ComputeReverseMaps() {
 	// insertion point per named struct
+	// Compute reverse map for named struct ComplexType
+	// insertion point per field
+
+	// Compute reverse map for named struct Element
+	// insertion point per field
+
+	// Compute reverse map for named struct Enumeration
+	// insertion point per field
+
+	// Compute reverse map for named struct Restriction
+	// insertion point per field
+	clear(stage.Restriction_Enumerations_reverseMap)
+	stage.Restriction_Enumerations_reverseMap = make(map[*Enumeration]*Restriction)
+	for restriction := range stage.Restrictions {
+		_ = restriction
+		for _, _enumeration := range restriction.Enumerations {
+			stage.Restriction_Enumerations_reverseMap[_enumeration] = restriction
+		}
+	}
+
 	// Compute reverse map for named struct Schema
+	// insertion point per field
+	clear(stage.Schema_Elements_reverseMap)
+	stage.Schema_Elements_reverseMap = make(map[*Element]*Schema)
+	for schema := range stage.Schemas {
+		_ = schema
+		for _, _element := range schema.Elements {
+			stage.Schema_Elements_reverseMap[_element] = schema
+		}
+	}
+	clear(stage.Schema_SimpleTypes_reverseMap)
+	stage.Schema_SimpleTypes_reverseMap = make(map[*SimpleType]*Schema)
+	for schema := range stage.Schemas {
+		_ = schema
+		for _, _simpletype := range schema.SimpleTypes {
+			stage.Schema_SimpleTypes_reverseMap[_simpletype] = schema
+		}
+	}
+	clear(stage.Schema_ComplexTypes_reverseMap)
+	stage.Schema_ComplexTypes_reverseMap = make(map[*ComplexType]*Schema)
+	for schema := range stage.Schemas {
+		_ = schema
+		for _, _complextype := range schema.ComplexTypes {
+			stage.Schema_ComplexTypes_reverseMap[_complextype] = schema
+		}
+	}
+
+	// Compute reverse map for named struct Sequence
+	// insertion point per field
+	clear(stage.Sequence_Elements_reverseMap)
+	stage.Sequence_Elements_reverseMap = make(map[*Element]*Sequence)
+	for sequence := range stage.Sequences {
+		_ = sequence
+		for _, _element := range sequence.Elements {
+			stage.Sequence_Elements_reverseMap[_element] = sequence
+		}
+	}
+
+	// Compute reverse map for named struct SimpleType
 	// insertion point per field
 
 }

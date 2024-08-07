@@ -22,7 +22,19 @@ import (
 // BackRepoStruct supports callback functions
 type BackRepoStruct struct {
 	// insertion point for per struct back repo declarations
+	BackRepoComplexType BackRepoComplexTypeStruct
+
+	BackRepoElement BackRepoElementStruct
+
+	BackRepoEnumeration BackRepoEnumerationStruct
+
+	BackRepoRestriction BackRepoRestrictionStruct
+
 	BackRepoSchema BackRepoSchemaStruct
+
+	BackRepoSequence BackRepoSequenceStruct
+
+	BackRepoSimpleType BackRepoSimpleTypeStruct
 
 	CommitFromBackNb uint // records commit increments when performed by the back
 
@@ -64,7 +76,13 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 	}
 
 	err = db.AutoMigrate( // insertion point for reference to structs
+		&ComplexTypeDB{},
+		&ElementDB{},
+		&EnumerationDB{},
+		&RestrictionDB{},
 		&SchemaDB{},
+		&SequenceDB{},
+		&SimpleTypeDB{},
 	)
 
 	if err != nil {
@@ -75,10 +93,58 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 	backRepo = new(BackRepoStruct)
 
 	// insertion point for per struct back repo declarations
+	backRepo.BackRepoComplexType = BackRepoComplexTypeStruct{
+		Map_ComplexTypeDBID_ComplexTypePtr: make(map[uint]*models.ComplexType, 0),
+		Map_ComplexTypeDBID_ComplexTypeDB:  make(map[uint]*ComplexTypeDB, 0),
+		Map_ComplexTypePtr_ComplexTypeDBID: make(map[*models.ComplexType]uint, 0),
+
+		db:    db,
+		stage: stage,
+	}
+	backRepo.BackRepoElement = BackRepoElementStruct{
+		Map_ElementDBID_ElementPtr: make(map[uint]*models.Element, 0),
+		Map_ElementDBID_ElementDB:  make(map[uint]*ElementDB, 0),
+		Map_ElementPtr_ElementDBID: make(map[*models.Element]uint, 0),
+
+		db:    db,
+		stage: stage,
+	}
+	backRepo.BackRepoEnumeration = BackRepoEnumerationStruct{
+		Map_EnumerationDBID_EnumerationPtr: make(map[uint]*models.Enumeration, 0),
+		Map_EnumerationDBID_EnumerationDB:  make(map[uint]*EnumerationDB, 0),
+		Map_EnumerationPtr_EnumerationDBID: make(map[*models.Enumeration]uint, 0),
+
+		db:    db,
+		stage: stage,
+	}
+	backRepo.BackRepoRestriction = BackRepoRestrictionStruct{
+		Map_RestrictionDBID_RestrictionPtr: make(map[uint]*models.Restriction, 0),
+		Map_RestrictionDBID_RestrictionDB:  make(map[uint]*RestrictionDB, 0),
+		Map_RestrictionPtr_RestrictionDBID: make(map[*models.Restriction]uint, 0),
+
+		db:    db,
+		stage: stage,
+	}
 	backRepo.BackRepoSchema = BackRepoSchemaStruct{
 		Map_SchemaDBID_SchemaPtr: make(map[uint]*models.Schema, 0),
 		Map_SchemaDBID_SchemaDB:  make(map[uint]*SchemaDB, 0),
 		Map_SchemaPtr_SchemaDBID: make(map[*models.Schema]uint, 0),
+
+		db:    db,
+		stage: stage,
+	}
+	backRepo.BackRepoSequence = BackRepoSequenceStruct{
+		Map_SequenceDBID_SequencePtr: make(map[uint]*models.Sequence, 0),
+		Map_SequenceDBID_SequenceDB:  make(map[uint]*SequenceDB, 0),
+		Map_SequencePtr_SequenceDBID: make(map[*models.Sequence]uint, 0),
+
+		db:    db,
+		stage: stage,
+	}
+	backRepo.BackRepoSimpleType = BackRepoSimpleTypeStruct{
+		Map_SimpleTypeDBID_SimpleTypePtr: make(map[uint]*models.SimpleType, 0),
+		Map_SimpleTypeDBID_SimpleTypeDB:  make(map[uint]*SimpleTypeDB, 0),
+		Map_SimpleTypePtr_SimpleTypeDBID: make(map[*models.SimpleType]uint, 0),
 
 		db:    db,
 		stage: stage,
@@ -131,10 +197,22 @@ func (backRepo *BackRepoStruct) IncrementPushFromFrontNb() uint {
 // Commit the BackRepoStruct inner variables and link to the database
 func (backRepo *BackRepoStruct) Commit(stage *models.StageStruct) {
 	// insertion point for per struct back repo phase one commit
+	backRepo.BackRepoComplexType.CommitPhaseOne(stage)
+	backRepo.BackRepoElement.CommitPhaseOne(stage)
+	backRepo.BackRepoEnumeration.CommitPhaseOne(stage)
+	backRepo.BackRepoRestriction.CommitPhaseOne(stage)
 	backRepo.BackRepoSchema.CommitPhaseOne(stage)
+	backRepo.BackRepoSequence.CommitPhaseOne(stage)
+	backRepo.BackRepoSimpleType.CommitPhaseOne(stage)
 
 	// insertion point for per struct back repo phase two commit
+	backRepo.BackRepoComplexType.CommitPhaseTwo(backRepo)
+	backRepo.BackRepoElement.CommitPhaseTwo(backRepo)
+	backRepo.BackRepoEnumeration.CommitPhaseTwo(backRepo)
+	backRepo.BackRepoRestriction.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoSchema.CommitPhaseTwo(backRepo)
+	backRepo.BackRepoSequence.CommitPhaseTwo(backRepo)
+	backRepo.BackRepoSimpleType.CommitPhaseTwo(backRepo)
 
 	backRepo.IncrementCommitFromBackNb()
 }
@@ -142,10 +220,22 @@ func (backRepo *BackRepoStruct) Commit(stage *models.StageStruct) {
 // Checkout the database into the stage
 func (backRepo *BackRepoStruct) Checkout(stage *models.StageStruct) {
 	// insertion point for per struct back repo phase one commit
+	backRepo.BackRepoComplexType.CheckoutPhaseOne()
+	backRepo.BackRepoElement.CheckoutPhaseOne()
+	backRepo.BackRepoEnumeration.CheckoutPhaseOne()
+	backRepo.BackRepoRestriction.CheckoutPhaseOne()
 	backRepo.BackRepoSchema.CheckoutPhaseOne()
+	backRepo.BackRepoSequence.CheckoutPhaseOne()
+	backRepo.BackRepoSimpleType.CheckoutPhaseOne()
 
 	// insertion point for per struct back repo phase two commit
+	backRepo.BackRepoComplexType.CheckoutPhaseTwo(backRepo)
+	backRepo.BackRepoElement.CheckoutPhaseTwo(backRepo)
+	backRepo.BackRepoEnumeration.CheckoutPhaseTwo(backRepo)
+	backRepo.BackRepoRestriction.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoSchema.CheckoutPhaseTwo(backRepo)
+	backRepo.BackRepoSequence.CheckoutPhaseTwo(backRepo)
+	backRepo.BackRepoSimpleType.CheckoutPhaseTwo(backRepo)
 }
 
 // Backup the BackRepoStruct
@@ -153,7 +243,13 @@ func (backRepo *BackRepoStruct) Backup(stage *models.StageStruct, dirPath string
 	os.MkdirAll(dirPath, os.ModePerm)
 
 	// insertion point for per struct backup
+	backRepo.BackRepoComplexType.Backup(dirPath)
+	backRepo.BackRepoElement.Backup(dirPath)
+	backRepo.BackRepoEnumeration.Backup(dirPath)
+	backRepo.BackRepoRestriction.Backup(dirPath)
 	backRepo.BackRepoSchema.Backup(dirPath)
+	backRepo.BackRepoSequence.Backup(dirPath)
+	backRepo.BackRepoSimpleType.Backup(dirPath)
 }
 
 // Backup in XL the BackRepoStruct
@@ -164,7 +260,13 @@ func (backRepo *BackRepoStruct) BackupXL(stage *models.StageStruct, dirPath stri
 	file := xlsx.NewFile()
 
 	// insertion point for per struct backup
+	backRepo.BackRepoComplexType.BackupXL(file)
+	backRepo.BackRepoElement.BackupXL(file)
+	backRepo.BackRepoEnumeration.BackupXL(file)
+	backRepo.BackRepoRestriction.BackupXL(file)
 	backRepo.BackRepoSchema.BackupXL(file)
+	backRepo.BackRepoSequence.BackupXL(file)
+	backRepo.BackRepoSimpleType.BackupXL(file)
 
 	var b bytes.Buffer
 	writer := bufio.NewWriter(&b)
@@ -189,14 +291,26 @@ func (backRepo *BackRepoStruct) Restore(stage *models.StageStruct, dirPath strin
 	//
 
 	// insertion point for per struct backup
+	backRepo.BackRepoComplexType.RestorePhaseOne(dirPath)
+	backRepo.BackRepoElement.RestorePhaseOne(dirPath)
+	backRepo.BackRepoEnumeration.RestorePhaseOne(dirPath)
+	backRepo.BackRepoRestriction.RestorePhaseOne(dirPath)
 	backRepo.BackRepoSchema.RestorePhaseOne(dirPath)
+	backRepo.BackRepoSequence.RestorePhaseOne(dirPath)
+	backRepo.BackRepoSimpleType.RestorePhaseOne(dirPath)
 
 	//
 	// restauration second phase (reindex pointers with the new ID)
 	//
 
 	// insertion point for per struct backup
+	backRepo.BackRepoComplexType.RestorePhaseTwo()
+	backRepo.BackRepoElement.RestorePhaseTwo()
+	backRepo.BackRepoEnumeration.RestorePhaseTwo()
+	backRepo.BackRepoRestriction.RestorePhaseTwo()
 	backRepo.BackRepoSchema.RestorePhaseTwo()
+	backRepo.BackRepoSequence.RestorePhaseTwo()
+	backRepo.BackRepoSimpleType.RestorePhaseTwo()
 
 	backRepo.stage.Checkout()
 }
@@ -224,7 +338,13 @@ func (backRepo *BackRepoStruct) RestoreXL(stage *models.StageStruct, dirPath str
 	//
 
 	// insertion point for per struct backup
+	backRepo.BackRepoComplexType.RestoreXLPhaseOne(file)
+	backRepo.BackRepoElement.RestoreXLPhaseOne(file)
+	backRepo.BackRepoEnumeration.RestoreXLPhaseOne(file)
+	backRepo.BackRepoRestriction.RestoreXLPhaseOne(file)
 	backRepo.BackRepoSchema.RestoreXLPhaseOne(file)
+	backRepo.BackRepoSequence.RestoreXLPhaseOne(file)
+	backRepo.BackRepoSimpleType.RestoreXLPhaseOne(file)
 
 	// commit the restored stage
 	backRepo.stage.Commit()

@@ -52,8 +52,26 @@ func (nodeImplGongstruct *TreeNodeImplGongstruct) OnAfterUpdate(
 	log.Println("NodeImplGongstruct:OnAfterUpdate with: ", nodeImplGongstruct.gongStruct.GetName())
 
 	// insertion point
+	if nodeImplGongstruct.gongStruct.GetName() == "ComplexType" {
+		fillUpTable[models.ComplexType](nodeImplGongstruct.probe)
+	}
+	if nodeImplGongstruct.gongStruct.GetName() == "Element" {
+		fillUpTable[models.Element](nodeImplGongstruct.probe)
+	}
+	if nodeImplGongstruct.gongStruct.GetName() == "Enumeration" {
+		fillUpTable[models.Enumeration](nodeImplGongstruct.probe)
+	}
+	if nodeImplGongstruct.gongStruct.GetName() == "Restriction" {
+		fillUpTable[models.Restriction](nodeImplGongstruct.probe)
+	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Schema" {
 		fillUpTable[models.Schema](nodeImplGongstruct.probe)
+	}
+	if nodeImplGongstruct.gongStruct.GetName() == "Sequence" {
+		fillUpTable[models.Sequence](nodeImplGongstruct.probe)
+	}
+	if nodeImplGongstruct.gongStruct.GetName() == "SimpleType" {
+		fillUpTable[models.SimpleType](nodeImplGongstruct.probe)
 	}
 
 	// set color for node and reset all other nodes color

@@ -94,6 +94,172 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 	_ = setValueField
 
 	// insertion initialization of objects to stage
+	map_ComplexType_Identifiers := make(map[*ComplexType]string)
+	_ = map_ComplexType_Identifiers
+
+	complextypeOrdered := []*ComplexType{}
+	for complextype := range stage.ComplexTypes {
+		complextypeOrdered = append(complextypeOrdered, complextype)
+	}
+	sort.Slice(complextypeOrdered[:], func(i, j int) bool {
+		return complextypeOrdered[i].Name < complextypeOrdered[j].Name
+	})
+	if len(complextypeOrdered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, complextype := range complextypeOrdered {
+
+		id = generatesIdentifier("ComplexType", idx, complextype.Name)
+		map_ComplexType_Identifiers[complextype] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "ComplexType")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", complextype.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(complextype.Name))
+		initializerStatements += setValueField
+
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "NameXML")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(complextype.NameXML))
+		initializerStatements += setValueField
+
+	}
+
+	map_Element_Identifiers := make(map[*Element]string)
+	_ = map_Element_Identifiers
+
+	elementOrdered := []*Element{}
+	for element := range stage.Elements {
+		elementOrdered = append(elementOrdered, element)
+	}
+	sort.Slice(elementOrdered[:], func(i, j int) bool {
+		return elementOrdered[i].Name < elementOrdered[j].Name
+	})
+	if len(elementOrdered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, element := range elementOrdered {
+
+		id = generatesIdentifier("Element", idx, element.Name)
+		map_Element_Identifiers[element] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "Element")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", element.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(element.Name))
+		initializerStatements += setValueField
+
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "NameXSD")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(element.NameXSD))
+		initializerStatements += setValueField
+
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Type")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(element.Type))
+		initializerStatements += setValueField
+
+	}
+
+	map_Enumeration_Identifiers := make(map[*Enumeration]string)
+	_ = map_Enumeration_Identifiers
+
+	enumerationOrdered := []*Enumeration{}
+	for enumeration := range stage.Enumerations {
+		enumerationOrdered = append(enumerationOrdered, enumeration)
+	}
+	sort.Slice(enumerationOrdered[:], func(i, j int) bool {
+		return enumerationOrdered[i].Name < enumerationOrdered[j].Name
+	})
+	if len(enumerationOrdered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, enumeration := range enumerationOrdered {
+
+		id = generatesIdentifier("Enumeration", idx, enumeration.Name)
+		map_Enumeration_Identifiers[enumeration] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "Enumeration")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", enumeration.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(enumeration.Name))
+		initializerStatements += setValueField
+
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Value")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(enumeration.Value))
+		initializerStatements += setValueField
+
+	}
+
+	map_Restriction_Identifiers := make(map[*Restriction]string)
+	_ = map_Restriction_Identifiers
+
+	restrictionOrdered := []*Restriction{}
+	for restriction := range stage.Restrictions {
+		restrictionOrdered = append(restrictionOrdered, restriction)
+	}
+	sort.Slice(restrictionOrdered[:], func(i, j int) bool {
+		return restrictionOrdered[i].Name < restrictionOrdered[j].Name
+	})
+	if len(restrictionOrdered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, restriction := range restrictionOrdered {
+
+		id = generatesIdentifier("Restriction", idx, restriction.Name)
+		map_Restriction_Identifiers[restriction] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "Restriction")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", restriction.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(restriction.Name))
+		initializerStatements += setValueField
+
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Base")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(restriction.Base))
+		initializerStatements += setValueField
+
+	}
+
 	map_Schema_Identifiers := make(map[*Schema]string)
 	_ = map_Schema_Identifiers
 
@@ -128,7 +294,153 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 
 	}
 
+	map_Sequence_Identifiers := make(map[*Sequence]string)
+	_ = map_Sequence_Identifiers
+
+	sequenceOrdered := []*Sequence{}
+	for sequence := range stage.Sequences {
+		sequenceOrdered = append(sequenceOrdered, sequence)
+	}
+	sort.Slice(sequenceOrdered[:], func(i, j int) bool {
+		return sequenceOrdered[i].Name < sequenceOrdered[j].Name
+	})
+	if len(sequenceOrdered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, sequence := range sequenceOrdered {
+
+		id = generatesIdentifier("Sequence", idx, sequence.Name)
+		map_Sequence_Identifiers[sequence] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "Sequence")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", sequence.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(sequence.Name))
+		initializerStatements += setValueField
+
+	}
+
+	map_SimpleType_Identifiers := make(map[*SimpleType]string)
+	_ = map_SimpleType_Identifiers
+
+	simpletypeOrdered := []*SimpleType{}
+	for simpletype := range stage.SimpleTypes {
+		simpletypeOrdered = append(simpletypeOrdered, simpletype)
+	}
+	sort.Slice(simpletypeOrdered[:], func(i, j int) bool {
+		return simpletypeOrdered[i].Name < simpletypeOrdered[j].Name
+	})
+	if len(simpletypeOrdered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, simpletype := range simpletypeOrdered {
+
+		id = generatesIdentifier("SimpleType", idx, simpletype.Name)
+		map_SimpleType_Identifiers[simpletype] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "SimpleType")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", simpletype.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(simpletype.Name))
+		initializerStatements += setValueField
+
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "NameXSD")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(simpletype.NameXSD))
+		initializerStatements += setValueField
+
+	}
+
 	// insertion initialization of objects to stage
+	for idx, complextype := range complextypeOrdered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("ComplexType", idx, complextype.Name)
+		map_ComplexType_Identifiers[complextype] = id
+
+		// Initialisation of values
+		if complextype.Sequence != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Sequence")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Sequence_Identifiers[complextype.Sequence])
+			pointersInitializesStatements += setPointerField
+		}
+
+	}
+
+	for idx, element := range elementOrdered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("Element", idx, element.Name)
+		map_Element_Identifiers[element] = id
+
+		// Initialisation of values
+		if element.SimpleType != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "SimpleType")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_SimpleType_Identifiers[element.SimpleType])
+			pointersInitializesStatements += setPointerField
+		}
+
+		if element.ComplexType != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ComplexType")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ComplexType_Identifiers[element.ComplexType])
+			pointersInitializesStatements += setPointerField
+		}
+
+	}
+
+	for idx, enumeration := range enumerationOrdered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("Enumeration", idx, enumeration.Name)
+		map_Enumeration_Identifiers[enumeration] = id
+
+		// Initialisation of values
+	}
+
+	for idx, restriction := range restrictionOrdered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("Restriction", idx, restriction.Name)
+		map_Restriction_Identifiers[restriction] = id
+
+		// Initialisation of values
+		for _, _enumeration := range restriction.Enumerations {
+			setPointerField = SliceOfPointersFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Enumerations")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Enumeration_Identifiers[_enumeration])
+			pointersInitializesStatements += setPointerField
+		}
+
+	}
+
 	for idx, schema := range schemaOrdered {
 		var setPointerField string
 		_ = setPointerField
@@ -137,6 +449,66 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		map_Schema_Identifiers[schema] = id
 
 		// Initialisation of values
+		for _, _element := range schema.Elements {
+			setPointerField = SliceOfPointersFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Elements")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Element_Identifiers[_element])
+			pointersInitializesStatements += setPointerField
+		}
+
+		for _, _simpletype := range schema.SimpleTypes {
+			setPointerField = SliceOfPointersFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "SimpleTypes")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_SimpleType_Identifiers[_simpletype])
+			pointersInitializesStatements += setPointerField
+		}
+
+		for _, _complextype := range schema.ComplexTypes {
+			setPointerField = SliceOfPointersFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ComplexTypes")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ComplexType_Identifiers[_complextype])
+			pointersInitializesStatements += setPointerField
+		}
+
+	}
+
+	for idx, sequence := range sequenceOrdered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("Sequence", idx, sequence.Name)
+		map_Sequence_Identifiers[sequence] = id
+
+		// Initialisation of values
+		for _, _element := range sequence.Elements {
+			setPointerField = SliceOfPointersFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Elements")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Element_Identifiers[_element])
+			pointersInitializesStatements += setPointerField
+		}
+
+	}
+
+	for idx, simpletype := range simpletypeOrdered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("SimpleType", idx, simpletype.Name)
+		map_SimpleType_Identifiers[simpletype] = id
+
+		// Initialisation of values
+		if simpletype.Restriction != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Restriction")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Restriction_Identifiers[simpletype.Restriction])
+			pointersInitializesStatements += setPointerField
+		}
+
 	}
 
 	res = strings.ReplaceAll(res, "{{Identifiers}}", identifiersDecl)

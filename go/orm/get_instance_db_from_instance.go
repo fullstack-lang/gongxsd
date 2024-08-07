@@ -15,9 +15,33 @@ func GetInstanceDBFromInstance[T models.Gongstruct, T2 GongstructDB](
 
 	switch concreteInstance := any(instance).(type) {
 	// insertion point for per struct backup
+	case *models.ComplexType:
+		complextypeInstance := any(concreteInstance).(*models.ComplexType)
+		ret2 := backRepo.BackRepoComplexType.GetComplexTypeDBFromComplexTypePtr(complextypeInstance)
+		ret = any(ret2).(*T2)
+	case *models.Element:
+		elementInstance := any(concreteInstance).(*models.Element)
+		ret2 := backRepo.BackRepoElement.GetElementDBFromElementPtr(elementInstance)
+		ret = any(ret2).(*T2)
+	case *models.Enumeration:
+		enumerationInstance := any(concreteInstance).(*models.Enumeration)
+		ret2 := backRepo.BackRepoEnumeration.GetEnumerationDBFromEnumerationPtr(enumerationInstance)
+		ret = any(ret2).(*T2)
+	case *models.Restriction:
+		restrictionInstance := any(concreteInstance).(*models.Restriction)
+		ret2 := backRepo.BackRepoRestriction.GetRestrictionDBFromRestrictionPtr(restrictionInstance)
+		ret = any(ret2).(*T2)
 	case *models.Schema:
 		schemaInstance := any(concreteInstance).(*models.Schema)
 		ret2 := backRepo.BackRepoSchema.GetSchemaDBFromSchemaPtr(schemaInstance)
+		ret = any(ret2).(*T2)
+	case *models.Sequence:
+		sequenceInstance := any(concreteInstance).(*models.Sequence)
+		ret2 := backRepo.BackRepoSequence.GetSequenceDBFromSequencePtr(sequenceInstance)
+		ret = any(ret2).(*T2)
+	case *models.SimpleType:
+		simpletypeInstance := any(concreteInstance).(*models.SimpleType)
+		ret2 := backRepo.BackRepoSimpleType.GetSimpleTypeDBFromSimpleTypePtr(simpletypeInstance)
 		ret = any(ret2).(*T2)
 	default:
 		_ = concreteInstance
@@ -32,8 +56,38 @@ func GetID[T models.Gongstruct](
 
 	switch inst := any(instance).(type) {
 	// insertion point for per struct backup
+	case *models.ComplexType:
+		tmp := GetInstanceDBFromInstance[models.ComplexType, ComplexTypeDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.Element:
+		tmp := GetInstanceDBFromInstance[models.Element, ElementDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.Enumeration:
+		tmp := GetInstanceDBFromInstance[models.Enumeration, EnumerationDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.Restriction:
+		tmp := GetInstanceDBFromInstance[models.Restriction, RestrictionDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
 	case *models.Schema:
 		tmp := GetInstanceDBFromInstance[models.Schema, SchemaDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.Sequence:
+		tmp := GetInstanceDBFromInstance[models.Sequence, SequenceDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.SimpleType:
+		tmp := GetInstanceDBFromInstance[models.SimpleType, SimpleTypeDB](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)
@@ -50,8 +104,38 @@ func GetIDPointer[T models.PointerToGongstruct](
 
 	switch inst := any(instance).(type) {
 	// insertion point for per struct backup
+	case *models.ComplexType:
+		tmp := GetInstanceDBFromInstance[models.ComplexType, ComplexTypeDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.Element:
+		tmp := GetInstanceDBFromInstance[models.Element, ElementDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.Enumeration:
+		tmp := GetInstanceDBFromInstance[models.Enumeration, EnumerationDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.Restriction:
+		tmp := GetInstanceDBFromInstance[models.Restriction, RestrictionDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
 	case *models.Schema:
 		tmp := GetInstanceDBFromInstance[models.Schema, SchemaDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.Sequence:
+		tmp := GetInstanceDBFromInstance[models.Sequence, SequenceDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.SimpleType:
+		tmp := GetInstanceDBFromInstance[models.SimpleType, SimpleTypeDB](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)

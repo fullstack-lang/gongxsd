@@ -12,6 +12,7 @@ import (
 
 	"github.com/spf13/cobra"
 
+	gongxsd_models "github.com/fullstack-lang/gongxsd/go/models"
 	gongxsd_stack "github.com/fullstack-lang/gongxsd/go/stack"
 	gongxsd_static "github.com/fullstack-lang/gongxsd/go/static"
 )
@@ -29,24 +30,29 @@ var readCmd = &cobra.Command{
 			fmt.Printf("Reading file: %s\n", xsdFilePath)
 		}
 
+		r := gongxsd_static.ServeStaticFiles(false)
+		stack := gongxsd_stack.NewStack(r, "gongxsd", *unmarshallFromCode, *marshallOnCommit, "", false, true)
+		stack.Stage.Reset()
+
 		content, err := os.ReadFile(xsdFilePath)
 		if err != nil {
 			fmt.Printf("Error reading XSD file: %v\n", err)
 			os.Exit(1)
 		}
 
-		var xsd Schema
-		err = xml.Unmarshal(content, &xsd)
+		var schema gongxsd_models.Schema
+		err = xml.Unmarshal(content, &schema)
 		if err != nil {
 			fmt.Printf("Error parsing XML: %v\n", err)
 			os.Exit(1)
 		}
 
+		stack.Stage.StageBranchSchema(&schema)
+
+		stack.Stage.Commit()
 		fmt.Println("XSD File Content:")
 		// fmt.Println(string(content))
 
-		r := gongxsd_static.ServeStaticFiles(false)
-		stack := gongxsd_stack.NewStack(r, "gongxsd", *unmarshallFromCode, *marshallOnCommit, "", false, true)
 		stack.Probe.Refresh()
 
 		log.Printf("Server ready serve on localhost:" + strconv.Itoa(*port))
@@ -55,40 +61,4 @@ var readCmd = &cobra.Command{
 			log.Fatalln(err.Error())
 		}
 	},
-}
-
-type Schema struct {
-	Elements     []*Element     `xml:"element"`
-	SimpleTypes  []*SimpleType  `xml:"simpleType"`
-	ComplexTypes []*ComplexType `xml:"complexType"`
-}
-
-type Element struct {
-	Name        string       `xml:"name,attr"`
-	Type        string       `xml:"type,attr"`
-	SimpleType  *SimpleType  `xml:"simpleType"`
-	ComplexType *ComplexType `xml:"complexType"`
-}
-
-type SimpleType struct {
-	Name        string       `xml:"name,attr"`
-	Restriction *Restriction `xml:"restriction"`
-}
-
-type Restriction struct {
-	Base         string         `xml:"base,attr"`
-	Enumerations []*Enumeration `xml:"enumeration"`
-}
-
-type Enumeration struct {
-	Value string `xml:"value,attr"`
-}
-
-type ComplexType struct {
-	Name     string    `xml:"name,attr"`
-	Sequence *Sequence `xml:"sequence"`
-}
-
-type Sequence struct {
-	Elements []*Element `xml:"element"`
 }
