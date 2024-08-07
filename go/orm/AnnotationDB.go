@@ -46,6 +46,9 @@ type AnnotationAPI struct {
 // reverse pointers of slice of poitners to Struct
 type AnnotationPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
+
+	// field Documentations is a slice of pointers to another Struct (optional or 0..1)
+	Documentations IntSlice `gorm:"type:TEXT"`
 }
 
 // AnnotationDB describes a annotation in the database
@@ -211,6 +214,24 @@ func (backRepoAnnotation *BackRepoAnnotationStruct) CommitPhaseTwoInstance(backR
 		annotationDB.CopyBasicFieldsFromAnnotation(annotation)
 
 		// insertion point for translating pointers encodings into actual pointers
+		// 1. reset
+		annotationDB.AnnotationPointersEncoding.Documentations = make([]int, 0)
+		// 2. encode
+		for _, documentationAssocEnd := range annotation.Documentations {
+			documentationAssocEnd_DB :=
+				backRepo.BackRepoDocumentation.GetDocumentationDBFromDocumentationPtr(documentationAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the documentationAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if documentationAssocEnd_DB == nil {
+				continue
+			}
+			
+			annotationDB.AnnotationPointersEncoding.Documentations =
+				append(annotationDB.AnnotationPointersEncoding.Documentations, int(documentationAssocEnd_DB.ID))
+		}
+
 		query := backRepoAnnotation.db.Save(&annotationDB)
 		if query.Error != nil {
 			log.Fatalln(query.Error)
@@ -324,6 +345,15 @@ func (backRepoAnnotation *BackRepoAnnotationStruct) CheckoutPhaseTwoInstance(bac
 func (annotationDB *AnnotationDB) DecodePointers(backRepo *BackRepoStruct, annotation *models.Annotation) {
 
 	// insertion point for checkout of pointer encoding
+	// This loop redeem annotation.Documentations in the stage from the encode in the back repo
+	// It parses all DocumentationDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	annotation.Documentations = annotation.Documentations[:0]
+	for _, _Documentationid := range annotationDB.AnnotationPointersEncoding.Documentations {
+		annotation.Documentations = append(annotation.Documentations, backRepo.BackRepoDocumentation.Map_DocumentationDBID_DocumentationPtr[uint(_Documentationid)])
+	}
+
 	return
 }
 

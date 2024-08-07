@@ -61,6 +61,13 @@ func registerControllers(r *gin.Engine) {
 		v1.PUT("/v1/complextypes/:id", GetController().UpdateComplexType)
 		v1.DELETE("/v1/complextypes/:id", GetController().DeleteComplexType)
 
+		v1.GET("/v1/documentations", GetController().GetDocumentations)
+		v1.GET("/v1/documentations/:id", GetController().GetDocumentation)
+		v1.POST("/v1/documentations", GetController().PostDocumentation)
+		v1.PATCH("/v1/documentations/:id", GetController().UpdateDocumentation)
+		v1.PUT("/v1/documentations/:id", GetController().UpdateDocumentation)
+		v1.DELETE("/v1/documentations/:id", GetController().DeleteDocumentation)
+
 		v1.GET("/v1/elements", GetController().GetElements)
 		v1.GET("/v1/elements/:id", GetController().GetElement)
 		v1.POST("/v1/elements", GetController().PostElement)

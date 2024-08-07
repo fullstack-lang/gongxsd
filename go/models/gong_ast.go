@@ -316,6 +316,7 @@ var __gong__map_Indentifiers_gongstructName = make(map[string]string)
 // insertion point for identifiers maps
 var __gong__map_Annotation = make(map[string]*Annotation)
 var __gong__map_ComplexType = make(map[string]*ComplexType)
+var __gong__map_Documentation = make(map[string]*Documentation)
 var __gong__map_Element = make(map[string]*Element)
 var __gong__map_Enumeration = make(map[string]*Enumeration)
 var __gong__map_MaxInclusive = make(map[string]*MaxInclusive)
@@ -505,6 +506,10 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 										instanceComplexType := (&ComplexType{Name: instanceName}).Stage(stage)
 										instance = any(instanceComplexType)
 										__gong__map_ComplexType[identifier] = instanceComplexType
+									case "Documentation":
+										instanceDocumentation := (&Documentation{Name: instanceName}).Stage(stage)
+										instance = any(instanceDocumentation)
+										__gong__map_Documentation[identifier] = instanceDocumentation
 									case "Element":
 										instanceElement := (&Element{Name: instanceName}).Stage(stage)
 										instance = any(instanceElement)
@@ -585,6 +590,10 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 							switch fieldName {
 							// insertion point for date assign code
 							}
+						case "Documentation":
+							switch fieldName {
+							// insertion point for date assign code
+							}
 						case "Element":
 							switch fieldName {
 							// insertion point for date assign code
@@ -649,8 +658,18 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					case "Annotation":
 						switch fieldName {
 						// insertion point for slice of pointers assign code
+						case "Documentations":
+							// remove first and last char
+							targetIdentifier := ident.Name
+							target := __gong__map_Documentation[targetIdentifier]
+							__gong__map_Annotation[identifier].Documentations =
+								append(__gong__map_Annotation[identifier].Documentations, target)
 						}
 					case "ComplexType":
+						switch fieldName {
+						// insertion point for slice of pointers assign code
+						}
+					case "Documentation":
 						switch fieldName {
 						// insertion point for slice of pointers assign code
 						}
@@ -789,6 +808,22 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
 					__gong__map_ComplexType[identifier].NameXSD = fielValue
 				}
+			case "Documentation":
+				switch fieldName {
+				// insertion point for field dependant code
+				case "Name":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_Documentation[identifier].Name = fielValue
+				case "Source":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_Documentation[identifier].Source = fielValue
+				case "Lang":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_Documentation[identifier].Lang = fielValue
+				}
 			case "Element":
 				switch fieldName {
 				// insertion point for field dependant code
@@ -921,6 +956,10 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					targetIdentifier := ident.Name
 					__gong__map_ComplexType[identifier].Sequence = __gong__map_Sequence[targetIdentifier]
 				}
+			case "Documentation":
+				switch fieldName {
+				// insertion point for field dependant code
+				}
 			case "Element":
 				switch fieldName {
 				// insertion point for field dependant code
@@ -1035,6 +1074,10 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					// insertion point for enum assign code
 					}
 				case "ComplexType":
+					switch fieldName {
+					// insertion point for enum assign code
+					}
+				case "Documentation":
 					switch fieldName {
 					// insertion point for enum assign code
 					}

@@ -11,6 +11,9 @@ func IsStaged[Type Gongstruct](stage *StageStruct, instance *Type) (ok bool) {
 	case *ComplexType:
 		ok = stage.IsStagedComplexType(target)
 
+	case *Documentation:
+		ok = stage.IsStagedDocumentation(target)
+
 	case *Element:
 		ok = stage.IsStagedElement(target)
 
@@ -55,6 +58,13 @@ func (stage *StageStruct) IsStagedAnnotation(annotation *Annotation) (ok bool) {
 func (stage *StageStruct) IsStagedComplexType(complextype *ComplexType) (ok bool) {
 
 	_, ok = stage.ComplexTypes[complextype]
+
+	return
+}
+
+func (stage *StageStruct) IsStagedDocumentation(documentation *Documentation) (ok bool) {
+
+	_, ok = stage.Documentations[documentation]
 
 	return
 }
@@ -136,6 +146,9 @@ func StageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 	case *ComplexType:
 		stage.StageBranchComplexType(target)
 
+	case *Documentation:
+		stage.StageBranchDocumentation(target)
+
 	case *Element:
 		stage.StageBranchElement(target)
 
@@ -181,6 +194,9 @@ func (stage *StageStruct) StageBranchAnnotation(annotation *Annotation) {
 	//insertion point for the staging of instances referenced by pointers
 
 	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _documentation := range annotation.Documentations {
+		StageBranch(stage, _documentation)
+	}
 
 }
 
@@ -200,6 +216,21 @@ func (stage *StageStruct) StageBranchComplexType(complextype *ComplexType) {
 	if complextype.Sequence != nil {
 		StageBranch(stage, complextype.Sequence)
 	}
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) StageBranchDocumentation(documentation *Documentation) {
+
+	// check if instance is already staged
+	if IsStaged(stage, documentation) {
+		return
+	}
+
+	documentation.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
 
 	//insertion point for the staging of instances referenced by slice of pointers
 
@@ -419,6 +450,10 @@ func CopyBranch[Type Gongstruct](from *Type) (to *Type) {
 		toT := CopyBranchComplexType(mapOrigCopy, fromT)
 		return any(toT).(*Type)
 
+	case *Documentation:
+		toT := CopyBranchDocumentation(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
 	case *Element:
 		toT := CopyBranchElement(mapOrigCopy, fromT)
 		return any(toT).(*Type)
@@ -477,6 +512,9 @@ func CopyBranchAnnotation(mapOrigCopy map[any]any, annotationFrom *Annotation) (
 	//insertion point for the staging of instances referenced by pointers
 
 	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _documentation := range annotationFrom.Documentations {
+		annotationTo.Documentations = append(annotationTo.Documentations, CopyBranchDocumentation(mapOrigCopy, _documentation))
+	}
 
 	return
 }
@@ -500,6 +538,25 @@ func CopyBranchComplexType(mapOrigCopy map[any]any, complextypeFrom *ComplexType
 	if complextypeFrom.Sequence != nil {
 		complextypeTo.Sequence = CopyBranchSequence(mapOrigCopy, complextypeFrom.Sequence)
 	}
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+	return
+}
+
+func CopyBranchDocumentation(mapOrigCopy map[any]any, documentationFrom *Documentation) (documentationTo *Documentation) {
+
+	// documentationFrom has already been copied
+	if _documentationTo, ok := mapOrigCopy[documentationFrom]; ok {
+		documentationTo = _documentationTo.(*Documentation)
+		return
+	}
+
+	documentationTo = new(Documentation)
+	mapOrigCopy[documentationFrom] = documentationTo
+	documentationFrom.CopyBasicFields(documentationTo)
+
+	//insertion point for the staging of instances referenced by pointers
 
 	//insertion point for the staging of instances referenced by slice of pointers
 
@@ -751,6 +808,9 @@ func UnstageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 	case *ComplexType:
 		stage.UnstageBranchComplexType(target)
 
+	case *Documentation:
+		stage.UnstageBranchDocumentation(target)
+
 	case *Element:
 		stage.UnstageBranchElement(target)
 
@@ -796,6 +856,9 @@ func (stage *StageStruct) UnstageBranchAnnotation(annotation *Annotation) {
 	//insertion point for the staging of instances referenced by pointers
 
 	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _documentation := range annotation.Documentations {
+		UnstageBranch(stage, _documentation)
+	}
 
 }
 
@@ -815,6 +878,21 @@ func (stage *StageStruct) UnstageBranchComplexType(complextype *ComplexType) {
 	if complextype.Sequence != nil {
 		UnstageBranch(stage, complextype.Sequence)
 	}
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) UnstageBranchDocumentation(documentation *Documentation) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, documentation) {
+		return
+	}
+
+	documentation.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
 
 	//insertion point for the staging of instances referenced by slice of pointers
 

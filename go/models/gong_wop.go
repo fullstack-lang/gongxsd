@@ -29,6 +29,20 @@ func (from *ComplexType) CopyBasicFields(to *ComplexType) {
 	to.NameXSD = from.NameXSD
 }
 
+type Documentation_WOP struct {
+	// insertion point
+	Name string
+	Source string
+	Lang string
+}
+
+func (from *Documentation) CopyBasicFields(to *Documentation) {
+	// insertion point
+	to.Name = from.Name
+	to.Source = from.Source
+	to.Lang = from.Lang
+}
+
 type Element_WOP struct {
 	// insertion point
 	Name string

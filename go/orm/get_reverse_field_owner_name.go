@@ -31,6 +31,18 @@ func GetReverseFieldOwnerName[T models.Gongstruct](
 			}
 		}
 
+	case *models.Documentation:
+		switch reverseField.GongstructName {
+		// insertion point
+		case "Annotation":
+			switch reverseField.Fieldname {
+			case "Documentations":
+				if _annotation, ok := stage.Annotation_Documentations_reverseMap[inst]; ok {
+					res = _annotation.Name
+				}
+			}
+		}
+
 	case *models.Element:
 		switch reverseField.GongstructName {
 		// insertion point
@@ -131,6 +143,16 @@ func GetReverseFieldOwner[T models.Gongstruct](
 			switch reverseField.Fieldname {
 			case "ComplexTypes":
 				res = stage.Schema_ComplexTypes_reverseMap[inst]
+			}
+		}
+
+	case *models.Documentation:
+		switch reverseField.GongstructName {
+		// insertion point
+		case "Annotation":
+			switch reverseField.Fieldname {
+			case "Documentations":
+				res = stage.Annotation_Documentations_reverseMap[inst]
 			}
 		}
 

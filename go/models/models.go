@@ -17,8 +17,16 @@ type ElementWithAnnotation struct {
 }
 
 type Annotation struct {
-	Name string
+	Name           string
+	Documentations []*Documentation `xml:"documentation"`
 }
+
+type Documentation struct {
+	Name   string
+	Source string `xml:"source,attr"`
+	Lang   string `xml:"lang,attr"`
+}
+
 type Schema struct {
 	Name string
 	ElementWithAnnotation

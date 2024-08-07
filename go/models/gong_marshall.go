@@ -168,6 +168,52 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 
 	}
 
+	map_Documentation_Identifiers := make(map[*Documentation]string)
+	_ = map_Documentation_Identifiers
+
+	documentationOrdered := []*Documentation{}
+	for documentation := range stage.Documentations {
+		documentationOrdered = append(documentationOrdered, documentation)
+	}
+	sort.Slice(documentationOrdered[:], func(i, j int) bool {
+		return documentationOrdered[i].Name < documentationOrdered[j].Name
+	})
+	if len(documentationOrdered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, documentation := range documentationOrdered {
+
+		id = generatesIdentifier("Documentation", idx, documentation.Name)
+		map_Documentation_Identifiers[documentation] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "Documentation")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", documentation.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(documentation.Name))
+		initializerStatements += setValueField
+
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Source")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(documentation.Source))
+		initializerStatements += setValueField
+
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Lang")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(documentation.Lang))
+		initializerStatements += setValueField
+
+	}
+
 	map_Element_Identifiers := make(map[*Element]string)
 	_ = map_Element_Identifiers
 
@@ -531,6 +577,14 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		map_Annotation_Identifiers[annotation] = id
 
 		// Initialisation of values
+		for _, _documentation := range annotation.Documentations {
+			setPointerField = SliceOfPointersFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Documentations")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Documentation_Identifiers[_documentation])
+			pointersInitializesStatements += setPointerField
+		}
+
 	}
 
 	for idx, complextype := range complextypeOrdered {
@@ -557,6 +611,16 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			pointersInitializesStatements += setPointerField
 		}
 
+	}
+
+	for idx, documentation := range documentationOrdered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("Documentation", idx, documentation.Name)
+		map_Documentation_Identifiers[documentation] = id
+
+		// Initialisation of values
 	}
 
 	for idx, element := range elementOrdered {

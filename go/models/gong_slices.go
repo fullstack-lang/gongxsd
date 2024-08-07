@@ -35,8 +35,30 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 	// insertion point
 	case *Annotation:
 		// insertion point per field
+		if fieldName == "Documentations" {
+
+			// walk all instances of the owning type
+			for _instance := range *GetGongstructInstancesSetFromPointerType[OwningType](stage) {
+				if any(_instance).(*Annotation) != owningInstanceInfered {
+					_inferedTypeInstance := any(_instance).(*Annotation)
+					reference := make([]FieldType, 0)
+					targetFieldSlice := any(_inferedTypeInstance.Documentations).([]FieldType)
+					copy(targetFieldSlice, reference)
+					_inferedTypeInstance.Documentations = _inferedTypeInstance.Documentations[0:]
+					for _, fieldInstance := range reference {
+						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
+							_inferedTypeInstance.Documentations =
+								append(_inferedTypeInstance.Documentations, any(fieldInstance).(*Documentation))
+						}
+					}
+				}
+			}
+		}
 
 	case *ComplexType:
+		// insertion point per field
+
+	case *Documentation:
 		// insertion point per field
 
 	case *Element:
@@ -172,8 +194,19 @@ func (stage *StageStruct) ComputeReverseMaps() {
 	// insertion point per named struct
 	// Compute reverse map for named struct Annotation
 	// insertion point per field
+	clear(stage.Annotation_Documentations_reverseMap)
+	stage.Annotation_Documentations_reverseMap = make(map[*Documentation]*Annotation)
+	for annotation := range stage.Annotations {
+		_ = annotation
+		for _, _documentation := range annotation.Documentations {
+			stage.Annotation_Documentations_reverseMap[_documentation] = annotation
+		}
+	}
 
 	// Compute reverse map for named struct ComplexType
+	// insertion point per field
+
+	// Compute reverse map for named struct Documentation
 	// insertion point per field
 
 	// Compute reverse map for named struct Element

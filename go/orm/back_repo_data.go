@@ -8,6 +8,8 @@ type BackRepoData struct {
 
 	ComplexTypeAPIs []*ComplexTypeAPI
 
+	DocumentationAPIs []*DocumentationAPI
+
 	ElementAPIs []*ElementAPI
 
 	EnumerationAPIs []*EnumerationAPI
@@ -47,6 +49,16 @@ func CopyBackRepoToBackRepoData(backRepo *BackRepoStruct, backRepoData *BackRepo
 		complextypeDB.CopyBasicFieldsToComplexType_WOP(&complextypeAPI.ComplexType_WOP)
 
 		backRepoData.ComplexTypeAPIs = append(backRepoData.ComplexTypeAPIs, &complextypeAPI)
+	}
+
+	for _, documentationDB := range backRepo.BackRepoDocumentation.Map_DocumentationDBID_DocumentationDB {
+
+		var documentationAPI DocumentationAPI
+		documentationAPI.ID = documentationDB.ID
+		documentationAPI.DocumentationPointersEncoding = documentationDB.DocumentationPointersEncoding
+		documentationDB.CopyBasicFieldsToDocumentation_WOP(&documentationAPI.Documentation_WOP)
+
+		backRepoData.DocumentationAPIs = append(backRepoData.DocumentationAPIs, &documentationAPI)
 	}
 
 	for _, elementDB := range backRepo.BackRepoElement.Map_ElementDBID_ElementDB {

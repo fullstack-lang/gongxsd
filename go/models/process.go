@@ -92,4 +92,9 @@ func Process(stage *StageStruct) {
 			x.Annotation.Name = prefix(x.Name)
 		}
 	}
+	for x := range *GetGongstructInstancesSet[Annotation](stage) {
+		for _, d := range x.Documentations {
+			d.Name = prefix(x.Name)
+		}
+	}
 }

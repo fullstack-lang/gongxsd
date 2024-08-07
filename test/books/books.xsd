@@ -2,6 +2,15 @@
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
+    <xs:annotation>
+        <xs:documentation source="http://example.com/schema-docs" xml:lang="en"> This schema defines
+            the structure of a simple book collection. It includes types for book details, such as
+            title, author, year, and format. </xs:documentation>
+        <xs:documentation source="http://example.com/schema-docs" xml:lang="fr"> Ce schéma définit
+            la structure d'une collection de livres simple. Il inclut des types pour les détails du
+            livre, tels que le titre, l'auteur, l'année et le format. </xs:documentation>
+    </xs:annotation>
+
     <!-- Definition of a simple type for the year -->
     <xs:simpleType name="yearType">
         <xs:annotation>
