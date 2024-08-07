@@ -58,6 +58,9 @@ func (nodeImplGongstruct *TreeNodeImplGongstruct) OnAfterUpdate(
 	if nodeImplGongstruct.gongStruct.GetName() == "Attribute" {
 		fillUpTable[models.Attribute](nodeImplGongstruct.probe)
 	}
+	if nodeImplGongstruct.gongStruct.GetName() == "AttributeGroup" {
+		fillUpTable[models.AttributeGroup](nodeImplGongstruct.probe)
+	}
 	if nodeImplGongstruct.gongStruct.GetName() == "ComplexType" {
 		fillUpTable[models.ComplexType](nodeImplGongstruct.probe)
 	}

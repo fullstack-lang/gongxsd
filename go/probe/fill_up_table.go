@@ -24,6 +24,8 @@ func fillUpTablePointerToGongstruct[T models.PointerToGongstruct](
 		fillUpTable[models.Annotation](probe)
 	case *models.Attribute:
 		fillUpTable[models.Attribute](probe)
+	case *models.AttributeGroup:
+		fillUpTable[models.AttributeGroup](probe)
 	case *models.ComplexType:
 		fillUpTable[models.ComplexType](probe)
 	case *models.Documentation:

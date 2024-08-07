@@ -46,6 +46,7 @@ func NewStackInstance(
 	// insertion point
 	models.SetOrchestratorOnAfterUpdate[models.Annotation](stage)
 	models.SetOrchestratorOnAfterUpdate[models.Attribute](stage)
+	models.SetOrchestratorOnAfterUpdate[models.AttributeGroup](stage)
 	models.SetOrchestratorOnAfterUpdate[models.ComplexType](stage)
 	models.SetOrchestratorOnAfterUpdate[models.Documentation](stage)
 	models.SetOrchestratorOnAfterUpdate[models.Element](stage)

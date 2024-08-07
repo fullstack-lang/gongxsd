@@ -58,6 +58,9 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 	case *Attribute:
 		// insertion point per field
 
+	case *AttributeGroup:
+		// insertion point per field
+
 	case *ComplexType:
 		// insertion point per field
 		if fieldName == "Attributes" {
@@ -74,6 +77,25 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
 							_inferedTypeInstance.Attributes =
 								append(_inferedTypeInstance.Attributes, any(fieldInstance).(*Attribute))
+						}
+					}
+				}
+			}
+		}
+		if fieldName == "AttributeGroups" {
+
+			// walk all instances of the owning type
+			for _instance := range *GetGongstructInstancesSetFromPointerType[OwningType](stage) {
+				if any(_instance).(*ComplexType) != owningInstanceInfered {
+					_inferedTypeInstance := any(_instance).(*ComplexType)
+					reference := make([]FieldType, 0)
+					targetFieldSlice := any(_inferedTypeInstance.AttributeGroups).([]FieldType)
+					copy(targetFieldSlice, reference)
+					_inferedTypeInstance.AttributeGroups = _inferedTypeInstance.AttributeGroups[0:]
+					for _, fieldInstance := range reference {
+						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
+							_inferedTypeInstance.AttributeGroups =
+								append(_inferedTypeInstance.AttributeGroups, any(fieldInstance).(*AttributeGroup))
 						}
 					}
 				}
@@ -188,6 +210,25 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 				}
 			}
 		}
+		if fieldName == "AttributeGroup" {
+
+			// walk all instances of the owning type
+			for _instance := range *GetGongstructInstancesSetFromPointerType[OwningType](stage) {
+				if any(_instance).(*Schema) != owningInstanceInfered {
+					_inferedTypeInstance := any(_instance).(*Schema)
+					reference := make([]FieldType, 0)
+					targetFieldSlice := any(_inferedTypeInstance.AttributeGroup).([]FieldType)
+					copy(targetFieldSlice, reference)
+					_inferedTypeInstance.AttributeGroup = _inferedTypeInstance.AttributeGroup[0:]
+					for _, fieldInstance := range reference {
+						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
+							_inferedTypeInstance.AttributeGroup =
+								append(_inferedTypeInstance.AttributeGroup, any(fieldInstance).(*AttributeGroup))
+						}
+					}
+				}
+			}
+		}
 
 	case *Sequence:
 		// insertion point per field
@@ -243,6 +284,9 @@ func (stage *StageStruct) ComputeReverseMaps() {
 	// Compute reverse map for named struct Attribute
 	// insertion point per field
 
+	// Compute reverse map for named struct AttributeGroup
+	// insertion point per field
+
 	// Compute reverse map for named struct ComplexType
 	// insertion point per field
 	clear(stage.ComplexType_Attributes_reverseMap)
@@ -251,6 +295,14 @@ func (stage *StageStruct) ComputeReverseMaps() {
 		_ = complextype
 		for _, _attribute := range complextype.Attributes {
 			stage.ComplexType_Attributes_reverseMap[_attribute] = complextype
+		}
+	}
+	clear(stage.ComplexType_AttributeGroups_reverseMap)
+	stage.ComplexType_AttributeGroups_reverseMap = make(map[*AttributeGroup]*ComplexType)
+	for complextype := range stage.ComplexTypes {
+		_ = complextype
+		for _, _attributegroup := range complextype.AttributeGroups {
+			stage.ComplexType_AttributeGroups_reverseMap[_attributegroup] = complextype
 		}
 	}
 
@@ -316,6 +368,14 @@ func (stage *StageStruct) ComputeReverseMaps() {
 		_ = schema
 		for _, _complextype := range schema.ComplexTypes {
 			stage.Schema_ComplexTypes_reverseMap[_complextype] = schema
+		}
+	}
+	clear(stage.Schema_AttributeGroup_reverseMap)
+	stage.Schema_AttributeGroup_reverseMap = make(map[*AttributeGroup]*Schema)
+	for schema := range stage.Schemas {
+		_ = schema
+		for _, _attributegroup := range schema.AttributeGroup {
+			stage.Schema_AttributeGroup_reverseMap[_attributegroup] = schema
 		}
 	}
 

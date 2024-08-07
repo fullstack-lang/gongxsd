@@ -14,6 +14,10 @@ func AfterCreateFromFront[Type Gongstruct](stage *StageStruct, instance *Type) {
 		if stage.OnAfterAttributeCreateCallback != nil {
 			stage.OnAfterAttributeCreateCallback.OnAfterCreate(stage, target)
 		}
+	case *AttributeGroup:
+		if stage.OnAfterAttributeGroupCreateCallback != nil {
+			stage.OnAfterAttributeGroupCreateCallback.OnAfterCreate(stage, target)
+		}
 	case *ComplexType:
 		if stage.OnAfterComplexTypeCreateCallback != nil {
 			stage.OnAfterComplexTypeCreateCallback.OnAfterCreate(stage, target)
@@ -97,6 +101,11 @@ func AfterUpdateFromFront[Type Gongstruct](stage *StageStruct, old, new *Type) {
 		newTarget := any(new).(*Attribute)
 		if stage.OnAfterAttributeUpdateCallback != nil {
 			stage.OnAfterAttributeUpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
+		}
+	case *AttributeGroup:
+		newTarget := any(new).(*AttributeGroup)
+		if stage.OnAfterAttributeGroupUpdateCallback != nil {
+			stage.OnAfterAttributeGroupUpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
 		}
 	case *ComplexType:
 		newTarget := any(new).(*ComplexType)
@@ -198,6 +207,11 @@ func AfterDeleteFromFront[Type Gongstruct](stage *StageStruct, staged, front *Ty
 			staged := any(staged).(*Attribute)
 			stage.OnAfterAttributeDeleteCallback.OnAfterDelete(stage, staged, front)
 		}
+	case *AttributeGroup:
+		if stage.OnAfterAttributeGroupDeleteCallback != nil {
+			staged := any(staged).(*AttributeGroup)
+			stage.OnAfterAttributeGroupDeleteCallback.OnAfterDelete(stage, staged, front)
+		}
 	case *ComplexType:
 		if stage.OnAfterComplexTypeDeleteCallback != nil {
 			staged := any(staged).(*ComplexType)
@@ -296,6 +310,10 @@ func AfterReadFromFront[Type Gongstruct](stage *StageStruct, instance *Type) {
 		if stage.OnAfterAttributeReadCallback != nil {
 			stage.OnAfterAttributeReadCallback.OnAfterRead(stage, target)
 		}
+	case *AttributeGroup:
+		if stage.OnAfterAttributeGroupReadCallback != nil {
+			stage.OnAfterAttributeGroupReadCallback.OnAfterRead(stage, target)
+		}
 	case *ComplexType:
 		if stage.OnAfterComplexTypeReadCallback != nil {
 			stage.OnAfterComplexTypeReadCallback.OnAfterRead(stage, target)
@@ -377,6 +395,9 @@ func SetCallbackAfterUpdateFromFront[Type Gongstruct](stage *StageStruct, callba
 	case *Attribute:
 		stage.OnAfterAttributeUpdateCallback = any(callback).(OnAfterUpdateInterface[Attribute])
 	
+	case *AttributeGroup:
+		stage.OnAfterAttributeGroupUpdateCallback = any(callback).(OnAfterUpdateInterface[AttributeGroup])
+	
 	case *ComplexType:
 		stage.OnAfterComplexTypeUpdateCallback = any(callback).(OnAfterUpdateInterface[ComplexType])
 	
@@ -437,6 +458,9 @@ func SetCallbackAfterCreateFromFront[Type Gongstruct](stage *StageStruct, callba
 	
 	case *Attribute:
 		stage.OnAfterAttributeCreateCallback = any(callback).(OnAfterCreateInterface[Attribute])
+	
+	case *AttributeGroup:
+		stage.OnAfterAttributeGroupCreateCallback = any(callback).(OnAfterCreateInterface[AttributeGroup])
 	
 	case *ComplexType:
 		stage.OnAfterComplexTypeCreateCallback = any(callback).(OnAfterCreateInterface[ComplexType])
@@ -499,6 +523,9 @@ func SetCallbackAfterDeleteFromFront[Type Gongstruct](stage *StageStruct, callba
 	case *Attribute:
 		stage.OnAfterAttributeDeleteCallback = any(callback).(OnAfterDeleteInterface[Attribute])
 	
+	case *AttributeGroup:
+		stage.OnAfterAttributeGroupDeleteCallback = any(callback).(OnAfterDeleteInterface[AttributeGroup])
+	
 	case *ComplexType:
 		stage.OnAfterComplexTypeDeleteCallback = any(callback).(OnAfterDeleteInterface[ComplexType])
 	
@@ -559,6 +586,9 @@ func SetCallbackAfterReadFromFront[Type Gongstruct](stage *StageStruct, callback
 	
 	case *Attribute:
 		stage.OnAfterAttributeReadCallback = any(callback).(OnAfterReadInterface[Attribute])
+	
+	case *AttributeGroup:
+		stage.OnAfterAttributeGroupReadCallback = any(callback).(OnAfterReadInterface[AttributeGroup])
 	
 	case *ComplexType:
 		stage.OnAfterComplexTypeReadCallback = any(callback).(OnAfterReadInterface[ComplexType])

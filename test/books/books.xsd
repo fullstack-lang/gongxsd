@@ -44,16 +44,7 @@
                 </xs:annotation>
             </xs:element>
         </xs:sequence>
-        <xs:attribute name="isbn" type="xs:string" use="required">
-            <xs:annotation>
-                <xs:documentation>The ISBN number of the book.</xs:documentation>
-            </xs:annotation>
-        </xs:attribute>
-        <xs:attribute name="bestseller" type="xs:boolean" use="optional">
-            <xs:annotation>
-                <xs:documentation>Indicates if the book is a bestseller.</xs:documentation>
-            </xs:annotation>
-        </xs:attribute>
+        <xs:attributeGroup ref="extendedAttributes" />
     </xs:complexType>
 
     <xs:simpleType name="bookFormatEnum">
@@ -84,5 +75,33 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
+
+    <!-- Definition of a common attribute group -->
+    <xs:attributeGroup name="commonAttributes">
+        <xs:attribute name="isbn" type="xs:string" use="required">
+            <xs:annotation>
+                <xs:documentation>The ISBN number of the book.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="bestseller" type="xs:boolean" use="optional">
+            <xs:annotation>
+                <xs:documentation>Indicates if the book is a bestseller.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:attributeGroup>
+
+    <xs:attributeGroup name="extendedAttributes">
+        <xs:attributeGroup ref="commonAttributes" />
+        <xs:attribute name="edition" type="xs:string" use="optional">
+            <xs:annotation>
+                <xs:documentation>The edition of the book.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:anyAttribute namespace="##other" processContents="lax">
+            <xs:annotation>
+                <xs:documentation>Allows any other attribute from other namespaces.</xs:documentation>
+            </xs:annotation>
+        </xs:anyAttribute>
+    </xs:attributeGroup>
 
 </xs:schema>

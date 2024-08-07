@@ -32,6 +32,9 @@ func Process(stage *StageStruct) {
 		if x.Annotation != nil {
 			x.Annotation.Name = prefix(x.Name)
 		}
+		for _, ag := range x.AttributeGroups {
+			ag.Name = prefix(x.Name)
+		}
 	}
 	for x := range *GetGongstructInstancesSet[SimpleType](stage) {
 		x.Name = x.NameXSD
@@ -143,6 +146,12 @@ func Process(stage *StageStruct) {
 		}
 	}
 	for x := range *GetGongstructInstancesSet[Attribute](stage) {
+		x.Name = x.NameXSD
+		if x.Annotation != nil {
+			x.Annotation.Name = prefix(x.Name)
+		}
+	}
+	for x := range *GetGongstructInstancesSet[AttributeGroup](stage) {
 		x.Name = x.NameXSD
 		if x.Annotation != nil {
 			x.Annotation.Name = prefix(x.Name)

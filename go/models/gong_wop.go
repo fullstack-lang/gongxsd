@@ -47,6 +47,20 @@ func (from *Attribute) CopyBasicFields(to *Attribute) {
 	to.IDXSD = from.IDXSD
 }
 
+type AttributeGroup_WOP struct {
+	// insertion point
+	Name string
+	NameXSD string
+	Ref string
+}
+
+func (from *AttributeGroup) CopyBasicFields(to *AttributeGroup) {
+	// insertion point
+	to.Name = from.Name
+	to.NameXSD = from.NameXSD
+	to.Ref = from.Ref
+}
+
 type ComplexType_WOP struct {
 	// insertion point
 	Name string

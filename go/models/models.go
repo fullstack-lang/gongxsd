@@ -32,9 +32,10 @@ type Schema struct {
 	Name string
 	Xs   string `xml:"xs,attr"`
 	ElementWithAnnotation
-	Elements     []*Element     `xml:"element"`
-	SimpleTypes  []*SimpleType  `xml:"simpleType"`
-	ComplexTypes []*ComplexType `xml:"complexType"`
+	Elements       []*Element        `xml:"element"`
+	SimpleTypes    []*SimpleType     `xml:"simpleType"`
+	ComplexTypes   []*ComplexType    `xml:"complexType"`
+	AttributeGroup []*AttributeGroup `xml:"attributeGroup"`
 }
 
 type Element struct {
@@ -72,8 +73,9 @@ type ComplexType struct {
 	Name string
 	ElementWithAnnotation
 	ElementWithNameAttribute
-	Sequence   *Sequence    `xml:"sequence"`
-	Attributes []*Attribute `xml:"attribute"`
+	Sequence        *Sequence         `xml:"sequence"`
+	Attributes      []*Attribute      `xml:"attribute"`
+	AttributeGroups []*AttributeGroup `xml:"attributeGroup"`
 }
 
 type Attribute struct {
@@ -90,6 +92,16 @@ type Attribute struct {
 	TargetNamespace string `xml:"targetNamespace,attr"`
 	SimpleType      string `xml:"simpleType,attr"`
 	IDXSD           string `xml:"id,attr"`
+}
+
+type AttributeGroup struct {
+	Name string
+	ElementWithNameAttribute
+	ElementWithAnnotation
+
+	AttributeGroup *AttributeGroup `xml:"attributeGroup"`
+
+	Ref string `xml:"ref,attr"`
 }
 
 type Sequence struct {

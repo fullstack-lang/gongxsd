@@ -222,6 +222,52 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 
 	}
 
+	map_AttributeGroup_Identifiers := make(map[*AttributeGroup]string)
+	_ = map_AttributeGroup_Identifiers
+
+	attributegroupOrdered := []*AttributeGroup{}
+	for attributegroup := range stage.AttributeGroups {
+		attributegroupOrdered = append(attributegroupOrdered, attributegroup)
+	}
+	sort.Slice(attributegroupOrdered[:], func(i, j int) bool {
+		return attributegroupOrdered[i].Name < attributegroupOrdered[j].Name
+	})
+	if len(attributegroupOrdered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, attributegroup := range attributegroupOrdered {
+
+		id = generatesIdentifier("AttributeGroup", idx, attributegroup.Name)
+		map_AttributeGroup_Identifiers[attributegroup] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "AttributeGroup")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", attributegroup.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(attributegroup.Name))
+		initializerStatements += setValueField
+
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "NameXSD")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(attributegroup.NameXSD))
+		initializerStatements += setValueField
+
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Ref")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(attributegroup.Ref))
+		initializerStatements += setValueField
+
+	}
+
 	map_ComplexType_Identifiers := make(map[*ComplexType]string)
 	_ = map_ComplexType_Identifiers
 
@@ -911,6 +957,32 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 
 	}
 
+	for idx, attributegroup := range attributegroupOrdered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("AttributeGroup", idx, attributegroup.Name)
+		map_AttributeGroup_Identifiers[attributegroup] = id
+
+		// Initialisation of values
+		if attributegroup.Annotation != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Annotation")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Annotation_Identifiers[attributegroup.Annotation])
+			pointersInitializesStatements += setPointerField
+		}
+
+		if attributegroup.AttributeGroup != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "AttributeGroup")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_AttributeGroup_Identifiers[attributegroup.AttributeGroup])
+			pointersInitializesStatements += setPointerField
+		}
+
+	}
+
 	for idx, complextype := range complextypeOrdered {
 		var setPointerField string
 		_ = setPointerField
@@ -940,6 +1012,14 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Attributes")
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Attribute_Identifiers[_attribute])
+			pointersInitializesStatements += setPointerField
+		}
+
+		for _, _attributegroup := range complextype.AttributeGroups {
+			setPointerField = SliceOfPointersFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "AttributeGroups")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_AttributeGroup_Identifiers[_attributegroup])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -1242,6 +1322,14 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ComplexTypes")
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ComplexType_Identifiers[_complextype])
+			pointersInitializesStatements += setPointerField
+		}
+
+		for _, _attributegroup := range schema.AttributeGroup {
+			setPointerField = SliceOfPointersFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "AttributeGroup")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_AttributeGroup_Identifiers[_attributegroup])
 			pointersInitializesStatements += setPointerField
 		}
 

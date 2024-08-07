@@ -26,6 +26,8 @@ type BackRepoStruct struct {
 
 	BackRepoAttribute BackRepoAttributeStruct
 
+	BackRepoAttributeGroup BackRepoAttributeGroupStruct
+
 	BackRepoComplexType BackRepoComplexTypeStruct
 
 	BackRepoDocumentation BackRepoDocumentationStruct
@@ -100,6 +102,7 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 	err = db.AutoMigrate( // insertion point for reference to structs
 		&AnnotationDB{},
 		&AttributeDB{},
+		&AttributeGroupDB{},
 		&ComplexTypeDB{},
 		&DocumentationDB{},
 		&ElementDB{},
@@ -138,6 +141,14 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 		Map_AttributeDBID_AttributePtr: make(map[uint]*models.Attribute, 0),
 		Map_AttributeDBID_AttributeDB:  make(map[uint]*AttributeDB, 0),
 		Map_AttributePtr_AttributeDBID: make(map[*models.Attribute]uint, 0),
+
+		db:    db,
+		stage: stage,
+	}
+	backRepo.BackRepoAttributeGroup = BackRepoAttributeGroupStruct{
+		Map_AttributeGroupDBID_AttributeGroupPtr: make(map[uint]*models.AttributeGroup, 0),
+		Map_AttributeGroupDBID_AttributeGroupDB:  make(map[uint]*AttributeGroupDB, 0),
+		Map_AttributeGroupPtr_AttributeGroupDBID: make(map[*models.AttributeGroup]uint, 0),
 
 		db:    db,
 		stage: stage,
@@ -320,6 +331,7 @@ func (backRepo *BackRepoStruct) Commit(stage *models.StageStruct) {
 	// insertion point for per struct back repo phase one commit
 	backRepo.BackRepoAnnotation.CommitPhaseOne(stage)
 	backRepo.BackRepoAttribute.CommitPhaseOne(stage)
+	backRepo.BackRepoAttributeGroup.CommitPhaseOne(stage)
 	backRepo.BackRepoComplexType.CommitPhaseOne(stage)
 	backRepo.BackRepoDocumentation.CommitPhaseOne(stage)
 	backRepo.BackRepoElement.CommitPhaseOne(stage)
@@ -340,6 +352,7 @@ func (backRepo *BackRepoStruct) Commit(stage *models.StageStruct) {
 	// insertion point for per struct back repo phase two commit
 	backRepo.BackRepoAnnotation.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoAttribute.CommitPhaseTwo(backRepo)
+	backRepo.BackRepoAttributeGroup.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoComplexType.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoDocumentation.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoElement.CommitPhaseTwo(backRepo)
@@ -365,6 +378,7 @@ func (backRepo *BackRepoStruct) Checkout(stage *models.StageStruct) {
 	// insertion point for per struct back repo phase one commit
 	backRepo.BackRepoAnnotation.CheckoutPhaseOne()
 	backRepo.BackRepoAttribute.CheckoutPhaseOne()
+	backRepo.BackRepoAttributeGroup.CheckoutPhaseOne()
 	backRepo.BackRepoComplexType.CheckoutPhaseOne()
 	backRepo.BackRepoDocumentation.CheckoutPhaseOne()
 	backRepo.BackRepoElement.CheckoutPhaseOne()
@@ -385,6 +399,7 @@ func (backRepo *BackRepoStruct) Checkout(stage *models.StageStruct) {
 	// insertion point for per struct back repo phase two commit
 	backRepo.BackRepoAnnotation.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoAttribute.CheckoutPhaseTwo(backRepo)
+	backRepo.BackRepoAttributeGroup.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoComplexType.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoDocumentation.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoElement.CheckoutPhaseTwo(backRepo)
@@ -410,6 +425,7 @@ func (backRepo *BackRepoStruct) Backup(stage *models.StageStruct, dirPath string
 	// insertion point for per struct backup
 	backRepo.BackRepoAnnotation.Backup(dirPath)
 	backRepo.BackRepoAttribute.Backup(dirPath)
+	backRepo.BackRepoAttributeGroup.Backup(dirPath)
 	backRepo.BackRepoComplexType.Backup(dirPath)
 	backRepo.BackRepoDocumentation.Backup(dirPath)
 	backRepo.BackRepoElement.Backup(dirPath)
@@ -438,6 +454,7 @@ func (backRepo *BackRepoStruct) BackupXL(stage *models.StageStruct, dirPath stri
 	// insertion point for per struct backup
 	backRepo.BackRepoAnnotation.BackupXL(file)
 	backRepo.BackRepoAttribute.BackupXL(file)
+	backRepo.BackRepoAttributeGroup.BackupXL(file)
 	backRepo.BackRepoComplexType.BackupXL(file)
 	backRepo.BackRepoDocumentation.BackupXL(file)
 	backRepo.BackRepoElement.BackupXL(file)
@@ -480,6 +497,7 @@ func (backRepo *BackRepoStruct) Restore(stage *models.StageStruct, dirPath strin
 	// insertion point for per struct backup
 	backRepo.BackRepoAnnotation.RestorePhaseOne(dirPath)
 	backRepo.BackRepoAttribute.RestorePhaseOne(dirPath)
+	backRepo.BackRepoAttributeGroup.RestorePhaseOne(dirPath)
 	backRepo.BackRepoComplexType.RestorePhaseOne(dirPath)
 	backRepo.BackRepoDocumentation.RestorePhaseOne(dirPath)
 	backRepo.BackRepoElement.RestorePhaseOne(dirPath)
@@ -504,6 +522,7 @@ func (backRepo *BackRepoStruct) Restore(stage *models.StageStruct, dirPath strin
 	// insertion point for per struct backup
 	backRepo.BackRepoAnnotation.RestorePhaseTwo()
 	backRepo.BackRepoAttribute.RestorePhaseTwo()
+	backRepo.BackRepoAttributeGroup.RestorePhaseTwo()
 	backRepo.BackRepoComplexType.RestorePhaseTwo()
 	backRepo.BackRepoDocumentation.RestorePhaseTwo()
 	backRepo.BackRepoElement.RestorePhaseTwo()
@@ -549,6 +568,7 @@ func (backRepo *BackRepoStruct) RestoreXL(stage *models.StageStruct, dirPath str
 	// insertion point for per struct backup
 	backRepo.BackRepoAnnotation.RestoreXLPhaseOne(file)
 	backRepo.BackRepoAttribute.RestoreXLPhaseOne(file)
+	backRepo.BackRepoAttributeGroup.RestoreXLPhaseOne(file)
 	backRepo.BackRepoComplexType.RestoreXLPhaseOne(file)
 	backRepo.BackRepoDocumentation.RestoreXLPhaseOne(file)
 	backRepo.BackRepoElement.RestoreXLPhaseOne(file)

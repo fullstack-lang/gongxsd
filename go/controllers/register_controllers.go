@@ -61,6 +61,13 @@ func registerControllers(r *gin.Engine) {
 		v1.PUT("/v1/attributes/:id", GetController().UpdateAttribute)
 		v1.DELETE("/v1/attributes/:id", GetController().DeleteAttribute)
 
+		v1.GET("/v1/attributegroups", GetController().GetAttributeGroups)
+		v1.GET("/v1/attributegroups/:id", GetController().GetAttributeGroup)
+		v1.POST("/v1/attributegroups", GetController().PostAttributeGroup)
+		v1.PATCH("/v1/attributegroups/:id", GetController().UpdateAttributeGroup)
+		v1.PUT("/v1/attributegroups/:id", GetController().UpdateAttributeGroup)
+		v1.DELETE("/v1/attributegroups/:id", GetController().DeleteAttributeGroup)
+
 		v1.GET("/v1/complextypes", GetController().GetComplexTypes)
 		v1.GET("/v1/complextypes/:id", GetController().GetComplexType)
 		v1.POST("/v1/complextypes", GetController().PostComplexType)

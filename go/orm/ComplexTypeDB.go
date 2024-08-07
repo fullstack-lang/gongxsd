@@ -57,6 +57,9 @@ type ComplexTypePointersEncoding struct {
 
 	// field Attributes is a slice of pointers to another Struct (optional or 0..1)
 	Attributes IntSlice `gorm:"type:TEXT"`
+
+	// field AttributeGroups is a slice of pointers to another Struct (optional or 0..1)
+	AttributeGroups IntSlice `gorm:"type:TEXT"`
 }
 
 // ComplexTypeDB describes a complextype in the database
@@ -270,6 +273,24 @@ func (backRepoComplexType *BackRepoComplexTypeStruct) CommitPhaseTwoInstance(bac
 				append(complextypeDB.ComplexTypePointersEncoding.Attributes, int(attributeAssocEnd_DB.ID))
 		}
 
+		// 1. reset
+		complextypeDB.ComplexTypePointersEncoding.AttributeGroups = make([]int, 0)
+		// 2. encode
+		for _, attributegroupAssocEnd := range complextype.AttributeGroups {
+			attributegroupAssocEnd_DB :=
+				backRepo.BackRepoAttributeGroup.GetAttributeGroupDBFromAttributeGroupPtr(attributegroupAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the attributegroupAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if attributegroupAssocEnd_DB == nil {
+				continue
+			}
+			
+			complextypeDB.ComplexTypePointersEncoding.AttributeGroups =
+				append(complextypeDB.ComplexTypePointersEncoding.AttributeGroups, int(attributegroupAssocEnd_DB.ID))
+		}
+
 		query := backRepoComplexType.db.Save(&complextypeDB)
 		if query.Error != nil {
 			log.Fatalln(query.Error)
@@ -400,6 +421,15 @@ func (complextypeDB *ComplexTypeDB) DecodePointers(backRepo *BackRepoStruct, com
 	complextype.Attributes = complextype.Attributes[:0]
 	for _, _Attributeid := range complextypeDB.ComplexTypePointersEncoding.Attributes {
 		complextype.Attributes = append(complextype.Attributes, backRepo.BackRepoAttribute.Map_AttributeDBID_AttributePtr[uint(_Attributeid)])
+	}
+
+	// This loop redeem complextype.AttributeGroups in the stage from the encode in the back repo
+	// It parses all AttributeGroupDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	complextype.AttributeGroups = complextype.AttributeGroups[:0]
+	for _, _AttributeGroupid := range complextypeDB.ComplexTypePointersEncoding.AttributeGroups {
+		complextype.AttributeGroups = append(complextype.AttributeGroups, backRepo.BackRepoAttributeGroup.Map_AttributeGroupDBID_AttributeGroupPtr[uint(_AttributeGroupid)])
 	}
 
 	return

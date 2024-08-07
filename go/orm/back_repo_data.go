@@ -8,6 +8,8 @@ type BackRepoData struct {
 
 	AttributeAPIs []*AttributeAPI
 
+	AttributeGroupAPIs []*AttributeGroupAPI
+
 	ComplexTypeAPIs []*ComplexTypeAPI
 
 	DocumentationAPIs []*DocumentationAPI
@@ -61,6 +63,16 @@ func CopyBackRepoToBackRepoData(backRepo *BackRepoStruct, backRepoData *BackRepo
 		attributeDB.CopyBasicFieldsToAttribute_WOP(&attributeAPI.Attribute_WOP)
 
 		backRepoData.AttributeAPIs = append(backRepoData.AttributeAPIs, &attributeAPI)
+	}
+
+	for _, attributegroupDB := range backRepo.BackRepoAttributeGroup.Map_AttributeGroupDBID_AttributeGroupDB {
+
+		var attributegroupAPI AttributeGroupAPI
+		attributegroupAPI.ID = attributegroupDB.ID
+		attributegroupAPI.AttributeGroupPointersEncoding = attributegroupDB.AttributeGroupPointersEncoding
+		attributegroupDB.CopyBasicFieldsToAttributeGroup_WOP(&attributegroupAPI.AttributeGroup_WOP)
+
+		backRepoData.AttributeGroupAPIs = append(backRepoData.AttributeGroupAPIs, &attributegroupAPI)
 	}
 
 	for _, complextypeDB := range backRepo.BackRepoComplexType.Map_ComplexTypeDBID_ComplexTypeDB {

@@ -59,6 +59,9 @@ type SchemaPointersEncoding struct {
 
 	// field ComplexTypes is a slice of pointers to another Struct (optional or 0..1)
 	ComplexTypes IntSlice `gorm:"type:TEXT"`
+
+	// field AttributeGroup is a slice of pointers to another Struct (optional or 0..1)
+	AttributeGroup IntSlice `gorm:"type:TEXT"`
 }
 
 // SchemaDB describes a schema in the database
@@ -296,6 +299,24 @@ func (backRepoSchema *BackRepoSchemaStruct) CommitPhaseTwoInstance(backRepo *Bac
 				append(schemaDB.SchemaPointersEncoding.ComplexTypes, int(complextypeAssocEnd_DB.ID))
 		}
 
+		// 1. reset
+		schemaDB.SchemaPointersEncoding.AttributeGroup = make([]int, 0)
+		// 2. encode
+		for _, attributegroupAssocEnd := range schema.AttributeGroup {
+			attributegroupAssocEnd_DB :=
+				backRepo.BackRepoAttributeGroup.GetAttributeGroupDBFromAttributeGroupPtr(attributegroupAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the attributegroupAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if attributegroupAssocEnd_DB == nil {
+				continue
+			}
+			
+			schemaDB.SchemaPointersEncoding.AttributeGroup =
+				append(schemaDB.SchemaPointersEncoding.AttributeGroup, int(attributegroupAssocEnd_DB.ID))
+		}
+
 		query := backRepoSchema.db.Save(&schemaDB)
 		if query.Error != nil {
 			log.Fatalln(query.Error)
@@ -439,6 +460,15 @@ func (schemaDB *SchemaDB) DecodePointers(backRepo *BackRepoStruct, schema *model
 	schema.ComplexTypes = schema.ComplexTypes[:0]
 	for _, _ComplexTypeid := range schemaDB.SchemaPointersEncoding.ComplexTypes {
 		schema.ComplexTypes = append(schema.ComplexTypes, backRepo.BackRepoComplexType.Map_ComplexTypeDBID_ComplexTypePtr[uint(_ComplexTypeid)])
+	}
+
+	// This loop redeem schema.AttributeGroup in the stage from the encode in the back repo
+	// It parses all AttributeGroupDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	schema.AttributeGroup = schema.AttributeGroup[:0]
+	for _, _AttributeGroupid := range schemaDB.SchemaPointersEncoding.AttributeGroup {
+		schema.AttributeGroup = append(schema.AttributeGroup, backRepo.BackRepoAttributeGroup.Map_AttributeGroupDBID_AttributeGroupPtr[uint(_AttributeGroupid)])
 	}
 
 	return

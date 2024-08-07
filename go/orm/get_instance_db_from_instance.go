@@ -23,6 +23,10 @@ func GetInstanceDBFromInstance[T models.Gongstruct, T2 GongstructDB](
 		attributeInstance := any(concreteInstance).(*models.Attribute)
 		ret2 := backRepo.BackRepoAttribute.GetAttributeDBFromAttributePtr(attributeInstance)
 		ret = any(ret2).(*T2)
+	case *models.AttributeGroup:
+		attributegroupInstance := any(concreteInstance).(*models.AttributeGroup)
+		ret2 := backRepo.BackRepoAttributeGroup.GetAttributeGroupDBFromAttributeGroupPtr(attributegroupInstance)
+		ret = any(ret2).(*T2)
 	case *models.ComplexType:
 		complextypeInstance := any(concreteInstance).(*models.ComplexType)
 		ret2 := backRepo.BackRepoComplexType.GetComplexTypeDBFromComplexTypePtr(complextypeInstance)
@@ -107,6 +111,11 @@ func GetID[T models.Gongstruct](
 		id = int(tmp.ID)
 	case *models.Attribute:
 		tmp := GetInstanceDBFromInstance[models.Attribute, AttributeDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.AttributeGroup:
+		tmp := GetInstanceDBFromInstance[models.AttributeGroup, AttributeGroupDB](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)
@@ -210,6 +219,11 @@ func GetIDPointer[T models.PointerToGongstruct](
 		id = int(tmp.ID)
 	case *models.Attribute:
 		tmp := GetInstanceDBFromInstance[models.Attribute, AttributeDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.AttributeGroup:
+		tmp := GetInstanceDBFromInstance[models.AttributeGroup, AttributeGroupDB](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)
