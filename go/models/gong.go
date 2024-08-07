@@ -2708,7 +2708,7 @@ func GetFields[Type Gongstruct]() (res []string) {
 	case ComplexType:
 		res = []string{"Name", "Annotation", "NameXSD", "Sequence"}
 	case Documentation:
-		res = []string{"Name", "Source", "Lang"}
+		res = []string{"Name", "Text", "Source", "Lang"}
 	case Element:
 		res = []string{"Name", "Annotation", "NameXSD", "Type", "SimpleType", "ComplexType"}
 	case Enumeration:
@@ -2728,7 +2728,7 @@ func GetFields[Type Gongstruct]() (res []string) {
 	case Restriction:
 		res = []string{"Name", "Annotation", "Base", "Enumerations", "MinInclusive", "MaxInclusive", "Pattern", "WhiteSpace", "MinLength", "MaxLength", "Length"}
 	case Schema:
-		res = []string{"Name", "Annotation", "Elements", "SimpleTypes", "ComplexTypes"}
+		res = []string{"Name", "Xs", "Annotation", "Elements", "SimpleTypes", "ComplexTypes"}
 	case Sequence:
 		res = []string{"Name", "Annotation", "Elements"}
 	case SimpleType:
@@ -2835,7 +2835,7 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 	case *ComplexType:
 		res = []string{"Name", "Annotation", "NameXSD", "Sequence"}
 	case *Documentation:
-		res = []string{"Name", "Source", "Lang"}
+		res = []string{"Name", "Text", "Source", "Lang"}
 	case *Element:
 		res = []string{"Name", "Annotation", "NameXSD", "Type", "SimpleType", "ComplexType"}
 	case *Enumeration:
@@ -2855,7 +2855,7 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 	case *Restriction:
 		res = []string{"Name", "Annotation", "Base", "Enumerations", "MinInclusive", "MaxInclusive", "Pattern", "WhiteSpace", "MinLength", "MaxLength", "Length"}
 	case *Schema:
-		res = []string{"Name", "Annotation", "Elements", "SimpleTypes", "ComplexTypes"}
+		res = []string{"Name", "Xs", "Annotation", "Elements", "SimpleTypes", "ComplexTypes"}
 	case *Sequence:
 		res = []string{"Name", "Annotation", "Elements"}
 	case *SimpleType:
@@ -2904,6 +2904,8 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		// string value of fields
 		case "Name":
 			res = inferedInstance.Name
+		case "Text":
+			res = inferedInstance.Text
 		case "Source":
 			res = inferedInstance.Source
 		case "Lang":
@@ -3067,6 +3069,8 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		// string value of fields
 		case "Name":
 			res = inferedInstance.Name
+		case "Xs":
+			res = inferedInstance.Xs
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
 				res = inferedInstance.Annotation.Name
@@ -3182,6 +3186,8 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		// string value of fields
 		case "Name":
 			res = inferedInstance.Name
+		case "Text":
+			res = inferedInstance.Text
 		case "Source":
 			res = inferedInstance.Source
 		case "Lang":
@@ -3345,6 +3351,8 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		// string value of fields
 		case "Name":
 			res = inferedInstance.Name
+		case "Xs":
+			res = inferedInstance.Xs
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
 				res = inferedInstance.Annotation.Name

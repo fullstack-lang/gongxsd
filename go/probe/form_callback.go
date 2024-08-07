@@ -265,6 +265,8 @@ func (documentationFormCallback *DocumentationFormCallback) OnSave() {
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(documentation_.Name), formDiv)
+		case "Text":
+			FormDivBasicFieldToField(&(documentation_.Text), formDiv)
 		case "Source":
 			FormDivBasicFieldToField(&(documentation_.Source), formDiv)
 		case "Lang":
@@ -1263,6 +1265,8 @@ func (schemaFormCallback *SchemaFormCallback) OnSave() {
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(schema_.Name), formDiv)
+		case "Xs":
+			FormDivBasicFieldToField(&(schema_.Xs), formDiv)
 		case "Annotation":
 			FormDivSelectFieldToField(&(schema_.Annotation), schemaFormCallback.probe.stageOfInterest, formDiv)
 		}

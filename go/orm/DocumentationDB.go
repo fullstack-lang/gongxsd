@@ -62,6 +62,9 @@ type DocumentationDB struct {
 	// Declation for basic field documentationDB.Name
 	Name_Data sql.NullString
 
+	// Declation for basic field documentationDB.Text
+	Text_Data sql.NullString
+
 	// Declation for basic field documentationDB.Source
 	Source_Data sql.NullString
 
@@ -92,9 +95,11 @@ type DocumentationWOP struct {
 
 	Name string `xlsx:"1"`
 
-	Source string `xlsx:"2"`
+	Text string `xlsx:"2"`
 
-	Lang string `xlsx:"3"`
+	Source string `xlsx:"3"`
+
+	Lang string `xlsx:"4"`
 	// insertion for WOP pointer fields
 }
 
@@ -102,6 +107,7 @@ var Documentation_Fields = []string{
 	// insertion for WOP basic fields
 	"ID",
 	"Name",
+	"Text",
 	"Source",
 	"Lang",
 }
@@ -373,6 +379,9 @@ func (documentationDB *DocumentationDB) CopyBasicFieldsFromDocumentation(documen
 	documentationDB.Name_Data.String = documentation.Name
 	documentationDB.Name_Data.Valid = true
 
+	documentationDB.Text_Data.String = documentation.Text
+	documentationDB.Text_Data.Valid = true
+
 	documentationDB.Source_Data.String = documentation.Source
 	documentationDB.Source_Data.Valid = true
 
@@ -386,6 +395,9 @@ func (documentationDB *DocumentationDB) CopyBasicFieldsFromDocumentation_WOP(doc
 
 	documentationDB.Name_Data.String = documentation.Name
 	documentationDB.Name_Data.Valid = true
+
+	documentationDB.Text_Data.String = documentation.Text
+	documentationDB.Text_Data.Valid = true
 
 	documentationDB.Source_Data.String = documentation.Source
 	documentationDB.Source_Data.Valid = true
@@ -401,6 +413,9 @@ func (documentationDB *DocumentationDB) CopyBasicFieldsFromDocumentationWOP(docu
 	documentationDB.Name_Data.String = documentation.Name
 	documentationDB.Name_Data.Valid = true
 
+	documentationDB.Text_Data.String = documentation.Text
+	documentationDB.Text_Data.Valid = true
+
 	documentationDB.Source_Data.String = documentation.Source
 	documentationDB.Source_Data.Valid = true
 
@@ -412,6 +427,7 @@ func (documentationDB *DocumentationDB) CopyBasicFieldsFromDocumentationWOP(docu
 func (documentationDB *DocumentationDB) CopyBasicFieldsToDocumentation(documentation *models.Documentation) {
 	// insertion point for checkout of basic fields (back repo to stage)
 	documentation.Name = documentationDB.Name_Data.String
+	documentation.Text = documentationDB.Text_Data.String
 	documentation.Source = documentationDB.Source_Data.String
 	documentation.Lang = documentationDB.Lang_Data.String
 }
@@ -420,6 +436,7 @@ func (documentationDB *DocumentationDB) CopyBasicFieldsToDocumentation(documenta
 func (documentationDB *DocumentationDB) CopyBasicFieldsToDocumentation_WOP(documentation *models.Documentation_WOP) {
 	// insertion point for checkout of basic fields (back repo to stage)
 	documentation.Name = documentationDB.Name_Data.String
+	documentation.Text = documentationDB.Text_Data.String
 	documentation.Source = documentationDB.Source_Data.String
 	documentation.Lang = documentationDB.Lang_Data.String
 }
@@ -429,6 +446,7 @@ func (documentationDB *DocumentationDB) CopyBasicFieldsToDocumentationWOP(docume
 	documentation.ID = int(documentationDB.ID)
 	// insertion point for checkout of basic fields (back repo to stage)
 	documentation.Name = documentationDB.Name_Data.String
+	documentation.Text = documentationDB.Text_Data.String
 	documentation.Source = documentationDB.Source_Data.String
 	documentation.Lang = documentationDB.Lang_Data.String
 }

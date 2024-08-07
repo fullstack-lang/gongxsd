@@ -32,6 +32,7 @@ func (from *ComplexType) CopyBasicFields(to *ComplexType) {
 type Documentation_WOP struct {
 	// insertion point
 	Name string
+	Text string
 	Source string
 	Lang string
 }
@@ -39,6 +40,7 @@ type Documentation_WOP struct {
 func (from *Documentation) CopyBasicFields(to *Documentation) {
 	// insertion point
 	to.Name = from.Name
+	to.Text = from.Text
 	to.Source = from.Source
 	to.Lang = from.Lang
 }
@@ -156,11 +158,13 @@ func (from *Restriction) CopyBasicFields(to *Restriction) {
 type Schema_WOP struct {
 	// insertion point
 	Name string
+	Xs string
 }
 
 func (from *Schema) CopyBasicFields(to *Schema) {
 	// insertion point
 	to.Name = from.Name
+	to.Xs = from.Xs
 }
 
 type Sequence_WOP struct {
