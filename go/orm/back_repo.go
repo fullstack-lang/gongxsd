@@ -28,6 +28,10 @@ type BackRepoStruct struct {
 
 	BackRepoEnumeration BackRepoEnumerationStruct
 
+	BackRepoMaxInclusive BackRepoMaxInclusiveStruct
+
+	BackRepoMinInclusive BackRepoMinInclusiveStruct
+
 	BackRepoRestriction BackRepoRestrictionStruct
 
 	BackRepoSchema BackRepoSchemaStruct
@@ -79,6 +83,8 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 		&ComplexTypeDB{},
 		&ElementDB{},
 		&EnumerationDB{},
+		&MaxInclusiveDB{},
+		&MinInclusiveDB{},
 		&RestrictionDB{},
 		&SchemaDB{},
 		&SequenceDB{},
@@ -113,6 +119,22 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 		Map_EnumerationDBID_EnumerationPtr: make(map[uint]*models.Enumeration, 0),
 		Map_EnumerationDBID_EnumerationDB:  make(map[uint]*EnumerationDB, 0),
 		Map_EnumerationPtr_EnumerationDBID: make(map[*models.Enumeration]uint, 0),
+
+		db:    db,
+		stage: stage,
+	}
+	backRepo.BackRepoMaxInclusive = BackRepoMaxInclusiveStruct{
+		Map_MaxInclusiveDBID_MaxInclusivePtr: make(map[uint]*models.MaxInclusive, 0),
+		Map_MaxInclusiveDBID_MaxInclusiveDB:  make(map[uint]*MaxInclusiveDB, 0),
+		Map_MaxInclusivePtr_MaxInclusiveDBID: make(map[*models.MaxInclusive]uint, 0),
+
+		db:    db,
+		stage: stage,
+	}
+	backRepo.BackRepoMinInclusive = BackRepoMinInclusiveStruct{
+		Map_MinInclusiveDBID_MinInclusivePtr: make(map[uint]*models.MinInclusive, 0),
+		Map_MinInclusiveDBID_MinInclusiveDB:  make(map[uint]*MinInclusiveDB, 0),
+		Map_MinInclusivePtr_MinInclusiveDBID: make(map[*models.MinInclusive]uint, 0),
 
 		db:    db,
 		stage: stage,
@@ -200,6 +222,8 @@ func (backRepo *BackRepoStruct) Commit(stage *models.StageStruct) {
 	backRepo.BackRepoComplexType.CommitPhaseOne(stage)
 	backRepo.BackRepoElement.CommitPhaseOne(stage)
 	backRepo.BackRepoEnumeration.CommitPhaseOne(stage)
+	backRepo.BackRepoMaxInclusive.CommitPhaseOne(stage)
+	backRepo.BackRepoMinInclusive.CommitPhaseOne(stage)
 	backRepo.BackRepoRestriction.CommitPhaseOne(stage)
 	backRepo.BackRepoSchema.CommitPhaseOne(stage)
 	backRepo.BackRepoSequence.CommitPhaseOne(stage)
@@ -209,6 +233,8 @@ func (backRepo *BackRepoStruct) Commit(stage *models.StageStruct) {
 	backRepo.BackRepoComplexType.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoElement.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoEnumeration.CommitPhaseTwo(backRepo)
+	backRepo.BackRepoMaxInclusive.CommitPhaseTwo(backRepo)
+	backRepo.BackRepoMinInclusive.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoRestriction.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoSchema.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoSequence.CommitPhaseTwo(backRepo)
@@ -223,6 +249,8 @@ func (backRepo *BackRepoStruct) Checkout(stage *models.StageStruct) {
 	backRepo.BackRepoComplexType.CheckoutPhaseOne()
 	backRepo.BackRepoElement.CheckoutPhaseOne()
 	backRepo.BackRepoEnumeration.CheckoutPhaseOne()
+	backRepo.BackRepoMaxInclusive.CheckoutPhaseOne()
+	backRepo.BackRepoMinInclusive.CheckoutPhaseOne()
 	backRepo.BackRepoRestriction.CheckoutPhaseOne()
 	backRepo.BackRepoSchema.CheckoutPhaseOne()
 	backRepo.BackRepoSequence.CheckoutPhaseOne()
@@ -232,6 +260,8 @@ func (backRepo *BackRepoStruct) Checkout(stage *models.StageStruct) {
 	backRepo.BackRepoComplexType.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoElement.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoEnumeration.CheckoutPhaseTwo(backRepo)
+	backRepo.BackRepoMaxInclusive.CheckoutPhaseTwo(backRepo)
+	backRepo.BackRepoMinInclusive.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoRestriction.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoSchema.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoSequence.CheckoutPhaseTwo(backRepo)
@@ -246,6 +276,8 @@ func (backRepo *BackRepoStruct) Backup(stage *models.StageStruct, dirPath string
 	backRepo.BackRepoComplexType.Backup(dirPath)
 	backRepo.BackRepoElement.Backup(dirPath)
 	backRepo.BackRepoEnumeration.Backup(dirPath)
+	backRepo.BackRepoMaxInclusive.Backup(dirPath)
+	backRepo.BackRepoMinInclusive.Backup(dirPath)
 	backRepo.BackRepoRestriction.Backup(dirPath)
 	backRepo.BackRepoSchema.Backup(dirPath)
 	backRepo.BackRepoSequence.Backup(dirPath)
@@ -263,6 +295,8 @@ func (backRepo *BackRepoStruct) BackupXL(stage *models.StageStruct, dirPath stri
 	backRepo.BackRepoComplexType.BackupXL(file)
 	backRepo.BackRepoElement.BackupXL(file)
 	backRepo.BackRepoEnumeration.BackupXL(file)
+	backRepo.BackRepoMaxInclusive.BackupXL(file)
+	backRepo.BackRepoMinInclusive.BackupXL(file)
 	backRepo.BackRepoRestriction.BackupXL(file)
 	backRepo.BackRepoSchema.BackupXL(file)
 	backRepo.BackRepoSequence.BackupXL(file)
@@ -294,6 +328,8 @@ func (backRepo *BackRepoStruct) Restore(stage *models.StageStruct, dirPath strin
 	backRepo.BackRepoComplexType.RestorePhaseOne(dirPath)
 	backRepo.BackRepoElement.RestorePhaseOne(dirPath)
 	backRepo.BackRepoEnumeration.RestorePhaseOne(dirPath)
+	backRepo.BackRepoMaxInclusive.RestorePhaseOne(dirPath)
+	backRepo.BackRepoMinInclusive.RestorePhaseOne(dirPath)
 	backRepo.BackRepoRestriction.RestorePhaseOne(dirPath)
 	backRepo.BackRepoSchema.RestorePhaseOne(dirPath)
 	backRepo.BackRepoSequence.RestorePhaseOne(dirPath)
@@ -307,6 +343,8 @@ func (backRepo *BackRepoStruct) Restore(stage *models.StageStruct, dirPath strin
 	backRepo.BackRepoComplexType.RestorePhaseTwo()
 	backRepo.BackRepoElement.RestorePhaseTwo()
 	backRepo.BackRepoEnumeration.RestorePhaseTwo()
+	backRepo.BackRepoMaxInclusive.RestorePhaseTwo()
+	backRepo.BackRepoMinInclusive.RestorePhaseTwo()
 	backRepo.BackRepoRestriction.RestorePhaseTwo()
 	backRepo.BackRepoSchema.RestorePhaseTwo()
 	backRepo.BackRepoSequence.RestorePhaseTwo()
@@ -341,6 +379,8 @@ func (backRepo *BackRepoStruct) RestoreXL(stage *models.StageStruct, dirPath str
 	backRepo.BackRepoComplexType.RestoreXLPhaseOne(file)
 	backRepo.BackRepoElement.RestoreXLPhaseOne(file)
 	backRepo.BackRepoEnumeration.RestoreXLPhaseOne(file)
+	backRepo.BackRepoMaxInclusive.RestoreXLPhaseOne(file)
+	backRepo.BackRepoMinInclusive.RestoreXLPhaseOne(file)
 	backRepo.BackRepoRestriction.RestoreXLPhaseOne(file)
 	backRepo.BackRepoSchema.RestoreXLPhaseOne(file)
 	backRepo.BackRepoSequence.RestoreXLPhaseOne(file)

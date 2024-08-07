@@ -431,6 +431,164 @@ func (enumerationFormCallback *EnumerationFormCallback) OnSave() {
 
 	fillUpTree(enumerationFormCallback.probe)
 }
+func __gong__New__MaxInclusiveFormCallback(
+	maxinclusive *models.MaxInclusive,
+	probe *Probe,
+	formGroup *table.FormGroup,
+) (maxinclusiveFormCallback *MaxInclusiveFormCallback) {
+	maxinclusiveFormCallback = new(MaxInclusiveFormCallback)
+	maxinclusiveFormCallback.probe = probe
+	maxinclusiveFormCallback.maxinclusive = maxinclusive
+	maxinclusiveFormCallback.formGroup = formGroup
+
+	maxinclusiveFormCallback.CreationMode = (maxinclusive == nil)
+
+	return
+}
+
+type MaxInclusiveFormCallback struct {
+	maxinclusive *models.MaxInclusive
+
+	// If the form call is called on the creation of a new instnace
+	CreationMode bool
+
+	probe *Probe
+
+	formGroup *table.FormGroup
+}
+
+func (maxinclusiveFormCallback *MaxInclusiveFormCallback) OnSave() {
+
+	log.Println("MaxInclusiveFormCallback, OnSave")
+
+	// checkout formStage to have the form group on the stage synchronized with the
+	// back repo (and front repo)
+	maxinclusiveFormCallback.probe.formStage.Checkout()
+
+	if maxinclusiveFormCallback.maxinclusive == nil {
+		maxinclusiveFormCallback.maxinclusive = new(models.MaxInclusive).Stage(maxinclusiveFormCallback.probe.stageOfInterest)
+	}
+	maxinclusive_ := maxinclusiveFormCallback.maxinclusive
+	_ = maxinclusive_
+
+	for _, formDiv := range maxinclusiveFormCallback.formGroup.FormDivs {
+		switch formDiv.Name {
+		// insertion point per field
+		case "Name":
+			FormDivBasicFieldToField(&(maxinclusive_.Name), formDiv)
+		case "Value":
+			FormDivBasicFieldToField(&(maxinclusive_.Value), formDiv)
+		}
+	}
+
+	// manage the suppress operation
+	if maxinclusiveFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		maxinclusive_.Unstage(maxinclusiveFormCallback.probe.stageOfInterest)
+	}
+
+	maxinclusiveFormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.MaxInclusive](
+		maxinclusiveFormCallback.probe,
+	)
+	maxinclusiveFormCallback.probe.tableStage.Commit()
+
+	// display a new form by reset the form stage
+	if maxinclusiveFormCallback.CreationMode || maxinclusiveFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		maxinclusiveFormCallback.probe.formStage.Reset()
+		newFormGroup := (&table.FormGroup{
+			Name: table.FormGroupDefaultName.ToString(),
+		}).Stage(maxinclusiveFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__MaxInclusiveFormCallback(
+			nil,
+			maxinclusiveFormCallback.probe,
+			newFormGroup,
+		)
+		maxinclusive := new(models.MaxInclusive)
+		FillUpForm(maxinclusive, newFormGroup, maxinclusiveFormCallback.probe)
+		maxinclusiveFormCallback.probe.formStage.Commit()
+	}
+
+	fillUpTree(maxinclusiveFormCallback.probe)
+}
+func __gong__New__MinInclusiveFormCallback(
+	mininclusive *models.MinInclusive,
+	probe *Probe,
+	formGroup *table.FormGroup,
+) (mininclusiveFormCallback *MinInclusiveFormCallback) {
+	mininclusiveFormCallback = new(MinInclusiveFormCallback)
+	mininclusiveFormCallback.probe = probe
+	mininclusiveFormCallback.mininclusive = mininclusive
+	mininclusiveFormCallback.formGroup = formGroup
+
+	mininclusiveFormCallback.CreationMode = (mininclusive == nil)
+
+	return
+}
+
+type MinInclusiveFormCallback struct {
+	mininclusive *models.MinInclusive
+
+	// If the form call is called on the creation of a new instnace
+	CreationMode bool
+
+	probe *Probe
+
+	formGroup *table.FormGroup
+}
+
+func (mininclusiveFormCallback *MinInclusiveFormCallback) OnSave() {
+
+	log.Println("MinInclusiveFormCallback, OnSave")
+
+	// checkout formStage to have the form group on the stage synchronized with the
+	// back repo (and front repo)
+	mininclusiveFormCallback.probe.formStage.Checkout()
+
+	if mininclusiveFormCallback.mininclusive == nil {
+		mininclusiveFormCallback.mininclusive = new(models.MinInclusive).Stage(mininclusiveFormCallback.probe.stageOfInterest)
+	}
+	mininclusive_ := mininclusiveFormCallback.mininclusive
+	_ = mininclusive_
+
+	for _, formDiv := range mininclusiveFormCallback.formGroup.FormDivs {
+		switch formDiv.Name {
+		// insertion point per field
+		case "Name":
+			FormDivBasicFieldToField(&(mininclusive_.Name), formDiv)
+		case "Value":
+			FormDivBasicFieldToField(&(mininclusive_.Value), formDiv)
+		}
+	}
+
+	// manage the suppress operation
+	if mininclusiveFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		mininclusive_.Unstage(mininclusiveFormCallback.probe.stageOfInterest)
+	}
+
+	mininclusiveFormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.MinInclusive](
+		mininclusiveFormCallback.probe,
+	)
+	mininclusiveFormCallback.probe.tableStage.Commit()
+
+	// display a new form by reset the form stage
+	if mininclusiveFormCallback.CreationMode || mininclusiveFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		mininclusiveFormCallback.probe.formStage.Reset()
+		newFormGroup := (&table.FormGroup{
+			Name: table.FormGroupDefaultName.ToString(),
+		}).Stage(mininclusiveFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__MinInclusiveFormCallback(
+			nil,
+			mininclusiveFormCallback.probe,
+			newFormGroup,
+		)
+		mininclusive := new(models.MinInclusive)
+		FillUpForm(mininclusive, newFormGroup, mininclusiveFormCallback.probe)
+		mininclusiveFormCallback.probe.formStage.Commit()
+	}
+
+	fillUpTree(mininclusiveFormCallback.probe)
+}
 func __gong__New__RestrictionFormCallback(
 	restriction *models.Restriction,
 	probe *Probe,
@@ -478,6 +636,10 @@ func (restrictionFormCallback *RestrictionFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(restriction_.Name), formDiv)
 		case "Base":
 			FormDivBasicFieldToField(&(restriction_.Base), formDiv)
+		case "MinInclusive":
+			FormDivSelectFieldToField(&(restriction_.MinInclusive), restrictionFormCallback.probe.stageOfInterest, formDiv)
+		case "MaxInclusive":
+			FormDivSelectFieldToField(&(restriction_.MaxInclusive), restrictionFormCallback.probe.stageOfInterest, formDiv)
 		}
 	}
 

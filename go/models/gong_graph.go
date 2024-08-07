@@ -14,6 +14,12 @@ func IsStaged[Type Gongstruct](stage *StageStruct, instance *Type) (ok bool) {
 	case *Enumeration:
 		ok = stage.IsStagedEnumeration(target)
 
+	case *MaxInclusive:
+		ok = stage.IsStagedMaxInclusive(target)
+
+	case *MinInclusive:
+		ok = stage.IsStagedMinInclusive(target)
+
 	case *Restriction:
 		ok = stage.IsStagedRestriction(target)
 
@@ -50,6 +56,20 @@ func (stage *StageStruct) IsStagedElement(element *Element) (ok bool) {
 func (stage *StageStruct) IsStagedEnumeration(enumeration *Enumeration) (ok bool) {
 
 	_, ok = stage.Enumerations[enumeration]
+
+	return
+}
+
+func (stage *StageStruct) IsStagedMaxInclusive(maxinclusive *MaxInclusive) (ok bool) {
+
+	_, ok = stage.MaxInclusives[maxinclusive]
+
+	return
+}
+
+func (stage *StageStruct) IsStagedMinInclusive(mininclusive *MinInclusive) (ok bool) {
+
+	_, ok = stage.MinInclusives[mininclusive]
 
 	return
 }
@@ -98,6 +118,12 @@ func StageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 
 	case *Enumeration:
 		stage.StageBranchEnumeration(target)
+
+	case *MaxInclusive:
+		stage.StageBranchMaxInclusive(target)
+
+	case *MinInclusive:
+		stage.StageBranchMinInclusive(target)
 
 	case *Restriction:
 		stage.StageBranchRestriction(target)
@@ -171,6 +197,36 @@ func (stage *StageStruct) StageBranchEnumeration(enumeration *Enumeration) {
 
 }
 
+func (stage *StageStruct) StageBranchMaxInclusive(maxinclusive *MaxInclusive) {
+
+	// check if instance is already staged
+	if IsStaged(stage, maxinclusive) {
+		return
+	}
+
+	maxinclusive.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) StageBranchMinInclusive(mininclusive *MinInclusive) {
+
+	// check if instance is already staged
+	if IsStaged(stage, mininclusive) {
+		return
+	}
+
+	mininclusive.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
 func (stage *StageStruct) StageBranchRestriction(restriction *Restriction) {
 
 	// check if instance is already staged
@@ -181,6 +237,12 @@ func (stage *StageStruct) StageBranchRestriction(restriction *Restriction) {
 	restriction.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if restriction.MinInclusive != nil {
+		StageBranch(stage, restriction.MinInclusive)
+	}
+	if restriction.MaxInclusive != nil {
+		StageBranch(stage, restriction.MaxInclusive)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 	for _, _enumeration := range restriction.Enumerations {
@@ -272,6 +334,14 @@ func CopyBranch[Type Gongstruct](from *Type) (to *Type) {
 		toT := CopyBranchEnumeration(mapOrigCopy, fromT)
 		return any(toT).(*Type)
 
+	case *MaxInclusive:
+		toT := CopyBranchMaxInclusive(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
+	case *MinInclusive:
+		toT := CopyBranchMinInclusive(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
 	case *Restriction:
 		toT := CopyBranchRestriction(mapOrigCopy, fromT)
 		return any(toT).(*Type)
@@ -361,6 +431,44 @@ func CopyBranchEnumeration(mapOrigCopy map[any]any, enumerationFrom *Enumeration
 	return
 }
 
+func CopyBranchMaxInclusive(mapOrigCopy map[any]any, maxinclusiveFrom *MaxInclusive) (maxinclusiveTo *MaxInclusive) {
+
+	// maxinclusiveFrom has already been copied
+	if _maxinclusiveTo, ok := mapOrigCopy[maxinclusiveFrom]; ok {
+		maxinclusiveTo = _maxinclusiveTo.(*MaxInclusive)
+		return
+	}
+
+	maxinclusiveTo = new(MaxInclusive)
+	mapOrigCopy[maxinclusiveFrom] = maxinclusiveTo
+	maxinclusiveFrom.CopyBasicFields(maxinclusiveTo)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+	return
+}
+
+func CopyBranchMinInclusive(mapOrigCopy map[any]any, mininclusiveFrom *MinInclusive) (mininclusiveTo *MinInclusive) {
+
+	// mininclusiveFrom has already been copied
+	if _mininclusiveTo, ok := mapOrigCopy[mininclusiveFrom]; ok {
+		mininclusiveTo = _mininclusiveTo.(*MinInclusive)
+		return
+	}
+
+	mininclusiveTo = new(MinInclusive)
+	mapOrigCopy[mininclusiveFrom] = mininclusiveTo
+	mininclusiveFrom.CopyBasicFields(mininclusiveTo)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+	return
+}
+
 func CopyBranchRestriction(mapOrigCopy map[any]any, restrictionFrom *Restriction) (restrictionTo *Restriction) {
 
 	// restrictionFrom has already been copied
@@ -374,6 +482,12 @@ func CopyBranchRestriction(mapOrigCopy map[any]any, restrictionFrom *Restriction
 	restrictionFrom.CopyBasicFields(restrictionTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if restrictionFrom.MinInclusive != nil {
+		restrictionTo.MinInclusive = CopyBranchMinInclusive(mapOrigCopy, restrictionFrom.MinInclusive)
+	}
+	if restrictionFrom.MaxInclusive != nil {
+		restrictionTo.MaxInclusive = CopyBranchMaxInclusive(mapOrigCopy, restrictionFrom.MaxInclusive)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 	for _, _enumeration := range restrictionFrom.Enumerations {
@@ -472,6 +586,12 @@ func UnstageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 	case *Enumeration:
 		stage.UnstageBranchEnumeration(target)
 
+	case *MaxInclusive:
+		stage.UnstageBranchMaxInclusive(target)
+
+	case *MinInclusive:
+		stage.UnstageBranchMinInclusive(target)
+
 	case *Restriction:
 		stage.UnstageBranchRestriction(target)
 
@@ -544,6 +664,36 @@ func (stage *StageStruct) UnstageBranchEnumeration(enumeration *Enumeration) {
 
 }
 
+func (stage *StageStruct) UnstageBranchMaxInclusive(maxinclusive *MaxInclusive) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, maxinclusive) {
+		return
+	}
+
+	maxinclusive.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) UnstageBranchMinInclusive(mininclusive *MinInclusive) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, mininclusive) {
+		return
+	}
+
+	mininclusive.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
 func (stage *StageStruct) UnstageBranchRestriction(restriction *Restriction) {
 
 	// check if instance is already staged
@@ -554,6 +704,12 @@ func (stage *StageStruct) UnstageBranchRestriction(restriction *Restriction) {
 	restriction.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if restriction.MinInclusive != nil {
+		UnstageBranch(stage, restriction.MinInclusive)
+	}
+	if restriction.MaxInclusive != nil {
+		UnstageBranch(stage, restriction.MaxInclusive)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 	for _, _enumeration := range restriction.Enumerations {

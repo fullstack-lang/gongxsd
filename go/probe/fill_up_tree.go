@@ -92,6 +92,26 @@ func fillUpTree(
 
 				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
 			}
+		case "MaxInclusive":
+			nodeGongstruct.Name = name
+			set := *models.GetGongstructInstancesSet[models.MaxInclusive](probe.stageOfInterest)
+			for _maxinclusive := range set {
+				nodeInstance := (&tree.Node{Name: _maxinclusive.GetName()}).Stage(probe.treeStage)
+				nodeInstance.IsNodeClickable = true
+				nodeInstance.Impl = NewInstanceNodeCallback(_maxinclusive, "MaxInclusive", probe)
+
+				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
+			}
+		case "MinInclusive":
+			nodeGongstruct.Name = name
+			set := *models.GetGongstructInstancesSet[models.MinInclusive](probe.stageOfInterest)
+			for _mininclusive := range set {
+				nodeInstance := (&tree.Node{Name: _mininclusive.GetName()}).Stage(probe.treeStage)
+				nodeInstance.IsNodeClickable = true
+				nodeInstance.Impl = NewInstanceNodeCallback(_mininclusive, "MinInclusive", probe)
+
+				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
+			}
 		case "Restriction":
 			nodeGongstruct.Name = name
 			set := *models.GetGongstructInstancesSet[models.Restriction](probe.stageOfInterest)

@@ -25,9 +25,21 @@ type Restriction struct {
 	Name         string
 	Base         string         `xml:"base,attr"`
 	Enumerations []*Enumeration `xml:"enumeration"`
+	MinInclusive *MinInclusive  `xml:"minInclusive"`
+	MaxInclusive *MaxInclusive  `xml:"maxInclusive"`
 }
 
 type Enumeration struct {
+	Name  string
+	Value string `xml:"value,attr"`
+}
+
+type MinInclusive struct {
+	Name  string
+	Value string `xml:"value,attr"`
+}
+
+type MaxInclusive struct {
 	Name  string
 	Value string `xml:"value,attr"`
 }

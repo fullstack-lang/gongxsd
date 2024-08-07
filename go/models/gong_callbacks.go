@@ -18,6 +18,14 @@ func AfterCreateFromFront[Type Gongstruct](stage *StageStruct, instance *Type) {
 		if stage.OnAfterEnumerationCreateCallback != nil {
 			stage.OnAfterEnumerationCreateCallback.OnAfterCreate(stage, target)
 		}
+	case *MaxInclusive:
+		if stage.OnAfterMaxInclusiveCreateCallback != nil {
+			stage.OnAfterMaxInclusiveCreateCallback.OnAfterCreate(stage, target)
+		}
+	case *MinInclusive:
+		if stage.OnAfterMinInclusiveCreateCallback != nil {
+			stage.OnAfterMinInclusiveCreateCallback.OnAfterCreate(stage, target)
+		}
 	case *Restriction:
 		if stage.OnAfterRestrictionCreateCallback != nil {
 			stage.OnAfterRestrictionCreateCallback.OnAfterCreate(stage, target)
@@ -58,6 +66,16 @@ func AfterUpdateFromFront[Type Gongstruct](stage *StageStruct, old, new *Type) {
 		newTarget := any(new).(*Enumeration)
 		if stage.OnAfterEnumerationUpdateCallback != nil {
 			stage.OnAfterEnumerationUpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
+		}
+	case *MaxInclusive:
+		newTarget := any(new).(*MaxInclusive)
+		if stage.OnAfterMaxInclusiveUpdateCallback != nil {
+			stage.OnAfterMaxInclusiveUpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
+		}
+	case *MinInclusive:
+		newTarget := any(new).(*MinInclusive)
+		if stage.OnAfterMinInclusiveUpdateCallback != nil {
+			stage.OnAfterMinInclusiveUpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
 		}
 	case *Restriction:
 		newTarget := any(new).(*Restriction)
@@ -104,6 +122,16 @@ func AfterDeleteFromFront[Type Gongstruct](stage *StageStruct, staged, front *Ty
 			staged := any(staged).(*Enumeration)
 			stage.OnAfterEnumerationDeleteCallback.OnAfterDelete(stage, staged, front)
 		}
+	case *MaxInclusive:
+		if stage.OnAfterMaxInclusiveDeleteCallback != nil {
+			staged := any(staged).(*MaxInclusive)
+			stage.OnAfterMaxInclusiveDeleteCallback.OnAfterDelete(stage, staged, front)
+		}
+	case *MinInclusive:
+		if stage.OnAfterMinInclusiveDeleteCallback != nil {
+			staged := any(staged).(*MinInclusive)
+			stage.OnAfterMinInclusiveDeleteCallback.OnAfterDelete(stage, staged, front)
+		}
 	case *Restriction:
 		if stage.OnAfterRestrictionDeleteCallback != nil {
 			staged := any(staged).(*Restriction)
@@ -146,6 +174,14 @@ func AfterReadFromFront[Type Gongstruct](stage *StageStruct, instance *Type) {
 		if stage.OnAfterEnumerationReadCallback != nil {
 			stage.OnAfterEnumerationReadCallback.OnAfterRead(stage, target)
 		}
+	case *MaxInclusive:
+		if stage.OnAfterMaxInclusiveReadCallback != nil {
+			stage.OnAfterMaxInclusiveReadCallback.OnAfterRead(stage, target)
+		}
+	case *MinInclusive:
+		if stage.OnAfterMinInclusiveReadCallback != nil {
+			stage.OnAfterMinInclusiveReadCallback.OnAfterRead(stage, target)
+		}
 	case *Restriction:
 		if stage.OnAfterRestrictionReadCallback != nil {
 			stage.OnAfterRestrictionReadCallback.OnAfterRead(stage, target)
@@ -182,6 +218,12 @@ func SetCallbackAfterUpdateFromFront[Type Gongstruct](stage *StageStruct, callba
 	case *Enumeration:
 		stage.OnAfterEnumerationUpdateCallback = any(callback).(OnAfterUpdateInterface[Enumeration])
 	
+	case *MaxInclusive:
+		stage.OnAfterMaxInclusiveUpdateCallback = any(callback).(OnAfterUpdateInterface[MaxInclusive])
+	
+	case *MinInclusive:
+		stage.OnAfterMinInclusiveUpdateCallback = any(callback).(OnAfterUpdateInterface[MinInclusive])
+	
 	case *Restriction:
 		stage.OnAfterRestrictionUpdateCallback = any(callback).(OnAfterUpdateInterface[Restriction])
 	
@@ -209,6 +251,12 @@ func SetCallbackAfterCreateFromFront[Type Gongstruct](stage *StageStruct, callba
 	
 	case *Enumeration:
 		stage.OnAfterEnumerationCreateCallback = any(callback).(OnAfterCreateInterface[Enumeration])
+	
+	case *MaxInclusive:
+		stage.OnAfterMaxInclusiveCreateCallback = any(callback).(OnAfterCreateInterface[MaxInclusive])
+	
+	case *MinInclusive:
+		stage.OnAfterMinInclusiveCreateCallback = any(callback).(OnAfterCreateInterface[MinInclusive])
 	
 	case *Restriction:
 		stage.OnAfterRestrictionCreateCallback = any(callback).(OnAfterCreateInterface[Restriction])
@@ -238,6 +286,12 @@ func SetCallbackAfterDeleteFromFront[Type Gongstruct](stage *StageStruct, callba
 	case *Enumeration:
 		stage.OnAfterEnumerationDeleteCallback = any(callback).(OnAfterDeleteInterface[Enumeration])
 	
+	case *MaxInclusive:
+		stage.OnAfterMaxInclusiveDeleteCallback = any(callback).(OnAfterDeleteInterface[MaxInclusive])
+	
+	case *MinInclusive:
+		stage.OnAfterMinInclusiveDeleteCallback = any(callback).(OnAfterDeleteInterface[MinInclusive])
+	
 	case *Restriction:
 		stage.OnAfterRestrictionDeleteCallback = any(callback).(OnAfterDeleteInterface[Restriction])
 	
@@ -265,6 +319,12 @@ func SetCallbackAfterReadFromFront[Type Gongstruct](stage *StageStruct, callback
 	
 	case *Enumeration:
 		stage.OnAfterEnumerationReadCallback = any(callback).(OnAfterReadInterface[Enumeration])
+	
+	case *MaxInclusive:
+		stage.OnAfterMaxInclusiveReadCallback = any(callback).(OnAfterReadInterface[MaxInclusive])
+	
+	case *MinInclusive:
+		stage.OnAfterMinInclusiveReadCallback = any(callback).(OnAfterReadInterface[MinInclusive])
 	
 	case *Restriction:
 		stage.OnAfterRestrictionReadCallback = any(callback).(OnAfterReadInterface[Restriction])

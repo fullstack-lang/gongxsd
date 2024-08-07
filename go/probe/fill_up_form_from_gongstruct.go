@@ -56,6 +56,30 @@ func FillUpNamedFormFromGongstruct[T models.Gongstruct](instance *T, probe *Prob
 		)
 		formGroup.HasSuppressButton = true
 		FillUpForm(instancesTyped, formGroup, probe)
+	case *models.MaxInclusive:
+		formGroup := (&gongtable.FormGroup{
+			Name:  formName,
+			Label: "MaxInclusive Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__MaxInclusiveFormCallback(
+			instancesTyped,
+			probe,
+			formGroup,
+		)
+		formGroup.HasSuppressButton = true
+		FillUpForm(instancesTyped, formGroup, probe)
+	case *models.MinInclusive:
+		formGroup := (&gongtable.FormGroup{
+			Name:  formName,
+			Label: "MinInclusive Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__MinInclusiveFormCallback(
+			instancesTyped,
+			probe,
+			formGroup,
+		)
+		formGroup.HasSuppressButton = true
+		FillUpForm(instancesTyped, formGroup, probe)
 	case *models.Restriction:
 		formGroup := (&gongtable.FormGroup{
 			Name:  formName,

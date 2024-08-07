@@ -132,6 +132,20 @@ func FillUpForm[T models.Gongstruct](
 			}
 		}
 
+	case *models.MaxInclusive:
+		// insertion point
+		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		BasicFieldtoForm("Value", instanceWithInferedType.Value, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+
+	case *models.MinInclusive:
+		// insertion point
+		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		BasicFieldtoForm("Value", instanceWithInferedType.Value, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+
 	case *models.Restriction:
 		// insertion point
 		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
@@ -139,6 +153,8 @@ func FillUpForm[T models.Gongstruct](
 		BasicFieldtoForm("Base", instanceWithInferedType.Base, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
 		AssociationSliceToForm("Enumerations", instanceWithInferedType, &instanceWithInferedType.Enumerations, formGroup, probe)
+		AssociationFieldToForm("MinInclusive", instanceWithInferedType.MinInclusive, formGroup, probe)
+		AssociationFieldToForm("MaxInclusive", instanceWithInferedType.MaxInclusive, formGroup, probe)
 
 	case *models.Schema:
 		// insertion point

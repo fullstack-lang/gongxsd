@@ -27,6 +27,14 @@ func GetInstanceDBFromInstance[T models.Gongstruct, T2 GongstructDB](
 		enumerationInstance := any(concreteInstance).(*models.Enumeration)
 		ret2 := backRepo.BackRepoEnumeration.GetEnumerationDBFromEnumerationPtr(enumerationInstance)
 		ret = any(ret2).(*T2)
+	case *models.MaxInclusive:
+		maxinclusiveInstance := any(concreteInstance).(*models.MaxInclusive)
+		ret2 := backRepo.BackRepoMaxInclusive.GetMaxInclusiveDBFromMaxInclusivePtr(maxinclusiveInstance)
+		ret = any(ret2).(*T2)
+	case *models.MinInclusive:
+		mininclusiveInstance := any(concreteInstance).(*models.MinInclusive)
+		ret2 := backRepo.BackRepoMinInclusive.GetMinInclusiveDBFromMinInclusivePtr(mininclusiveInstance)
+		ret = any(ret2).(*T2)
 	case *models.Restriction:
 		restrictionInstance := any(concreteInstance).(*models.Restriction)
 		ret2 := backRepo.BackRepoRestriction.GetRestrictionDBFromRestrictionPtr(restrictionInstance)
@@ -68,6 +76,16 @@ func GetID[T models.Gongstruct](
 		id = int(tmp.ID)
 	case *models.Enumeration:
 		tmp := GetInstanceDBFromInstance[models.Enumeration, EnumerationDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.MaxInclusive:
+		tmp := GetInstanceDBFromInstance[models.MaxInclusive, MaxInclusiveDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.MinInclusive:
+		tmp := GetInstanceDBFromInstance[models.MinInclusive, MinInclusiveDB](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)
@@ -116,6 +134,16 @@ func GetIDPointer[T models.PointerToGongstruct](
 		id = int(tmp.ID)
 	case *models.Enumeration:
 		tmp := GetInstanceDBFromInstance[models.Enumeration, EnumerationDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.MaxInclusive:
+		tmp := GetInstanceDBFromInstance[models.MaxInclusive, MaxInclusiveDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.MinInclusive:
+		tmp := GetInstanceDBFromInstance[models.MinInclusive, MinInclusiveDB](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)

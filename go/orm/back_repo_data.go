@@ -10,6 +10,10 @@ type BackRepoData struct {
 
 	EnumerationAPIs []*EnumerationAPI
 
+	MaxInclusiveAPIs []*MaxInclusiveAPI
+
+	MinInclusiveAPIs []*MinInclusiveAPI
+
 	RestrictionAPIs []*RestrictionAPI
 
 	SchemaAPIs []*SchemaAPI
@@ -49,6 +53,26 @@ func CopyBackRepoToBackRepoData(backRepo *BackRepoStruct, backRepoData *BackRepo
 		enumerationDB.CopyBasicFieldsToEnumeration_WOP(&enumerationAPI.Enumeration_WOP)
 
 		backRepoData.EnumerationAPIs = append(backRepoData.EnumerationAPIs, &enumerationAPI)
+	}
+
+	for _, maxinclusiveDB := range backRepo.BackRepoMaxInclusive.Map_MaxInclusiveDBID_MaxInclusiveDB {
+
+		var maxinclusiveAPI MaxInclusiveAPI
+		maxinclusiveAPI.ID = maxinclusiveDB.ID
+		maxinclusiveAPI.MaxInclusivePointersEncoding = maxinclusiveDB.MaxInclusivePointersEncoding
+		maxinclusiveDB.CopyBasicFieldsToMaxInclusive_WOP(&maxinclusiveAPI.MaxInclusive_WOP)
+
+		backRepoData.MaxInclusiveAPIs = append(backRepoData.MaxInclusiveAPIs, &maxinclusiveAPI)
+	}
+
+	for _, mininclusiveDB := range backRepo.BackRepoMinInclusive.Map_MinInclusiveDBID_MinInclusiveDB {
+
+		var mininclusiveAPI MinInclusiveAPI
+		mininclusiveAPI.ID = mininclusiveDB.ID
+		mininclusiveAPI.MinInclusivePointersEncoding = mininclusiveDB.MinInclusivePointersEncoding
+		mininclusiveDB.CopyBasicFieldsToMinInclusive_WOP(&mininclusiveAPI.MinInclusive_WOP)
+
+		backRepoData.MinInclusiveAPIs = append(backRepoData.MinInclusiveAPIs, &mininclusiveAPI)
 	}
 
 	for _, restrictionDB := range backRepo.BackRepoRestriction.Map_RestrictionDBID_RestrictionDB {

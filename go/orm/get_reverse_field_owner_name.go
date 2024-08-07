@@ -57,6 +57,16 @@ func GetReverseFieldOwnerName[T models.Gongstruct](
 			}
 		}
 
+	case *models.MaxInclusive:
+		switch reverseField.GongstructName {
+		// insertion point
+		}
+
+	case *models.MinInclusive:
+		switch reverseField.GongstructName {
+		// insertion point
+		}
+
 	case *models.Restriction:
 		switch reverseField.GongstructName {
 		// insertion point
@@ -132,6 +142,16 @@ func GetReverseFieldOwner[T models.Gongstruct](
 			case "Enumerations":
 				res = stage.Restriction_Enumerations_reverseMap[inst]
 			}
+		}
+
+	case *models.MaxInclusive:
+		switch reverseField.GongstructName {
+		// insertion point
+		}
+
+	case *models.MinInclusive:
+		switch reverseField.GongstructName {
+		// insertion point
 		}
 
 	case *models.Restriction:

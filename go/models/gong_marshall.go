@@ -220,6 +220,86 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 
 	}
 
+	map_MaxInclusive_Identifiers := make(map[*MaxInclusive]string)
+	_ = map_MaxInclusive_Identifiers
+
+	maxinclusiveOrdered := []*MaxInclusive{}
+	for maxinclusive := range stage.MaxInclusives {
+		maxinclusiveOrdered = append(maxinclusiveOrdered, maxinclusive)
+	}
+	sort.Slice(maxinclusiveOrdered[:], func(i, j int) bool {
+		return maxinclusiveOrdered[i].Name < maxinclusiveOrdered[j].Name
+	})
+	if len(maxinclusiveOrdered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, maxinclusive := range maxinclusiveOrdered {
+
+		id = generatesIdentifier("MaxInclusive", idx, maxinclusive.Name)
+		map_MaxInclusive_Identifiers[maxinclusive] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "MaxInclusive")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", maxinclusive.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(maxinclusive.Name))
+		initializerStatements += setValueField
+
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Value")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(maxinclusive.Value))
+		initializerStatements += setValueField
+
+	}
+
+	map_MinInclusive_Identifiers := make(map[*MinInclusive]string)
+	_ = map_MinInclusive_Identifiers
+
+	mininclusiveOrdered := []*MinInclusive{}
+	for mininclusive := range stage.MinInclusives {
+		mininclusiveOrdered = append(mininclusiveOrdered, mininclusive)
+	}
+	sort.Slice(mininclusiveOrdered[:], func(i, j int) bool {
+		return mininclusiveOrdered[i].Name < mininclusiveOrdered[j].Name
+	})
+	if len(mininclusiveOrdered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, mininclusive := range mininclusiveOrdered {
+
+		id = generatesIdentifier("MinInclusive", idx, mininclusive.Name)
+		map_MinInclusive_Identifiers[mininclusive] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "MinInclusive")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", mininclusive.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(mininclusive.Name))
+		initializerStatements += setValueField
+
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Value")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(mininclusive.Value))
+		initializerStatements += setValueField
+
+	}
+
 	map_Restriction_Identifiers := make(map[*Restriction]string)
 	_ = map_Restriction_Identifiers
 
@@ -423,6 +503,26 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		// Initialisation of values
 	}
 
+	for idx, maxinclusive := range maxinclusiveOrdered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("MaxInclusive", idx, maxinclusive.Name)
+		map_MaxInclusive_Identifiers[maxinclusive] = id
+
+		// Initialisation of values
+	}
+
+	for idx, mininclusive := range mininclusiveOrdered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("MinInclusive", idx, mininclusive.Name)
+		map_MinInclusive_Identifiers[mininclusive] = id
+
+		// Initialisation of values
+	}
+
 	for idx, restriction := range restrictionOrdered {
 		var setPointerField string
 		_ = setPointerField
@@ -436,6 +536,22 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Enumerations")
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Enumeration_Identifiers[_enumeration])
+			pointersInitializesStatements += setPointerField
+		}
+
+		if restriction.MinInclusive != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "MinInclusive")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_MinInclusive_Identifiers[restriction.MinInclusive])
+			pointersInitializesStatements += setPointerField
+		}
+
+		if restriction.MaxInclusive != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "MaxInclusive")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_MaxInclusive_Identifiers[restriction.MaxInclusive])
 			pointersInitializesStatements += setPointerField
 		}
 

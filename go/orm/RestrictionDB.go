@@ -49,6 +49,14 @@ type RestrictionPointersEncoding struct {
 
 	// field Enumerations is a slice of pointers to another Struct (optional or 0..1)
 	Enumerations IntSlice `gorm:"type:TEXT"`
+
+	// field MinInclusive is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	MinInclusiveID sql.NullInt64
+
+	// field MaxInclusive is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	MaxInclusiveID sql.NullInt64
 }
 
 // RestrictionDB describes a restriction in the database
@@ -238,6 +246,30 @@ func (backRepoRestriction *BackRepoRestrictionStruct) CommitPhaseTwoInstance(bac
 				append(restrictionDB.RestrictionPointersEncoding.Enumerations, int(enumerationAssocEnd_DB.ID))
 		}
 
+		// commit pointer value restriction.MinInclusive translates to updating the restriction.MinInclusiveID
+		restrictionDB.MinInclusiveID.Valid = true // allow for a 0 value (nil association)
+		if restriction.MinInclusive != nil {
+			if MinInclusiveId, ok := backRepo.BackRepoMinInclusive.Map_MinInclusivePtr_MinInclusiveDBID[restriction.MinInclusive]; ok {
+				restrictionDB.MinInclusiveID.Int64 = int64(MinInclusiveId)
+				restrictionDB.MinInclusiveID.Valid = true
+			}
+		} else {
+			restrictionDB.MinInclusiveID.Int64 = 0
+			restrictionDB.MinInclusiveID.Valid = true
+		}
+
+		// commit pointer value restriction.MaxInclusive translates to updating the restriction.MaxInclusiveID
+		restrictionDB.MaxInclusiveID.Valid = true // allow for a 0 value (nil association)
+		if restriction.MaxInclusive != nil {
+			if MaxInclusiveId, ok := backRepo.BackRepoMaxInclusive.Map_MaxInclusivePtr_MaxInclusiveDBID[restriction.MaxInclusive]; ok {
+				restrictionDB.MaxInclusiveID.Int64 = int64(MaxInclusiveId)
+				restrictionDB.MaxInclusiveID.Valid = true
+			}
+		} else {
+			restrictionDB.MaxInclusiveID.Int64 = 0
+			restrictionDB.MaxInclusiveID.Valid = true
+		}
+
 		query := backRepoRestriction.db.Save(&restrictionDB)
 		if query.Error != nil {
 			log.Fatalln(query.Error)
@@ -360,6 +392,16 @@ func (restrictionDB *RestrictionDB) DecodePointers(backRepo *BackRepoStruct, res
 		restriction.Enumerations = append(restriction.Enumerations, backRepo.BackRepoEnumeration.Map_EnumerationDBID_EnumerationPtr[uint(_Enumerationid)])
 	}
 
+	// MinInclusive field
+	restriction.MinInclusive = nil
+	if restrictionDB.MinInclusiveID.Int64 != 0 {
+		restriction.MinInclusive = backRepo.BackRepoMinInclusive.Map_MinInclusiveDBID_MinInclusivePtr[uint(restrictionDB.MinInclusiveID.Int64)]
+	}
+	// MaxInclusive field
+	restriction.MaxInclusive = nil
+	if restrictionDB.MaxInclusiveID.Int64 != 0 {
+		restriction.MaxInclusive = backRepo.BackRepoMaxInclusive.Map_MaxInclusiveDBID_MaxInclusivePtr[uint(restrictionDB.MaxInclusiveID.Int64)]
+	}
 	return
 }
 
@@ -600,6 +642,18 @@ func (backRepoRestriction *BackRepoRestrictionStruct) RestorePhaseTwo() {
 		_ = restrictionDB
 
 		// insertion point for reindexing pointers encoding
+		// reindexing MinInclusive field
+		if restrictionDB.MinInclusiveID.Int64 != 0 {
+			restrictionDB.MinInclusiveID.Int64 = int64(BackRepoMinInclusiveid_atBckpTime_newID[uint(restrictionDB.MinInclusiveID.Int64)])
+			restrictionDB.MinInclusiveID.Valid = true
+		}
+
+		// reindexing MaxInclusive field
+		if restrictionDB.MaxInclusiveID.Int64 != 0 {
+			restrictionDB.MaxInclusiveID.Int64 = int64(BackRepoMaxInclusiveid_atBckpTime_newID[uint(restrictionDB.MaxInclusiveID.Int64)])
+			restrictionDB.MaxInclusiveID.Valid = true
+		}
+
 		// update databse with new index encoding
 		query := backRepoRestriction.db.Model(restrictionDB).Updates(*restrictionDB)
 		if query.Error != nil {

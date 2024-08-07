@@ -61,6 +61,12 @@ func (nodeImplGongstruct *TreeNodeImplGongstruct) OnAfterUpdate(
 	if nodeImplGongstruct.gongStruct.GetName() == "Enumeration" {
 		fillUpTable[models.Enumeration](nodeImplGongstruct.probe)
 	}
+	if nodeImplGongstruct.gongStruct.GetName() == "MaxInclusive" {
+		fillUpTable[models.MaxInclusive](nodeImplGongstruct.probe)
+	}
+	if nodeImplGongstruct.gongStruct.GetName() == "MinInclusive" {
+		fillUpTable[models.MinInclusive](nodeImplGongstruct.probe)
+	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Restriction" {
 		fillUpTable[models.Restriction](nodeImplGongstruct.probe)
 	}

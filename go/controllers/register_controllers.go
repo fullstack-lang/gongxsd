@@ -68,6 +68,20 @@ func registerControllers(r *gin.Engine) {
 		v1.PUT("/v1/enumerations/:id", GetController().UpdateEnumeration)
 		v1.DELETE("/v1/enumerations/:id", GetController().DeleteEnumeration)
 
+		v1.GET("/v1/maxinclusives", GetController().GetMaxInclusives)
+		v1.GET("/v1/maxinclusives/:id", GetController().GetMaxInclusive)
+		v1.POST("/v1/maxinclusives", GetController().PostMaxInclusive)
+		v1.PATCH("/v1/maxinclusives/:id", GetController().UpdateMaxInclusive)
+		v1.PUT("/v1/maxinclusives/:id", GetController().UpdateMaxInclusive)
+		v1.DELETE("/v1/maxinclusives/:id", GetController().DeleteMaxInclusive)
+
+		v1.GET("/v1/mininclusives", GetController().GetMinInclusives)
+		v1.GET("/v1/mininclusives/:id", GetController().GetMinInclusive)
+		v1.POST("/v1/mininclusives", GetController().PostMinInclusive)
+		v1.PATCH("/v1/mininclusives/:id", GetController().UpdateMinInclusive)
+		v1.PUT("/v1/mininclusives/:id", GetController().UpdateMinInclusive)
+		v1.DELETE("/v1/mininclusives/:id", GetController().DeleteMinInclusive)
+
 		v1.GET("/v1/restrictions", GetController().GetRestrictions)
 		v1.GET("/v1/restrictions/:id", GetController().GetRestriction)
 		v1.POST("/v1/restrictions", GetController().PostRestriction)

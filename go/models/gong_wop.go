@@ -45,6 +45,30 @@ func (from *Enumeration) CopyBasicFields(to *Enumeration) {
 	to.Value = from.Value
 }
 
+type MaxInclusive_WOP struct {
+	// insertion point
+	Name string
+	Value string
+}
+
+func (from *MaxInclusive) CopyBasicFields(to *MaxInclusive) {
+	// insertion point
+	to.Name = from.Name
+	to.Value = from.Value
+}
+
+type MinInclusive_WOP struct {
+	// insertion point
+	Name string
+	Value string
+}
+
+func (from *MinInclusive) CopyBasicFields(to *MinInclusive) {
+	// insertion point
+	to.Name = from.Name
+	to.Value = from.Value
+}
+
 type Restriction_WOP struct {
 	// insertion point
 	Name string

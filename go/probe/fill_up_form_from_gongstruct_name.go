@@ -65,6 +65,32 @@ func FillUpFormFromGongstructName(
 		enumeration := new(models.Enumeration)
 		formGroup.HasSuppressButton = !isNewInstance
 		FillUpForm(enumeration, formGroup, probe)
+	case "MaxInclusive":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "MaxInclusive Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__MaxInclusiveFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		maxinclusive := new(models.MaxInclusive)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(maxinclusive, formGroup, probe)
+	case "MinInclusive":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "MinInclusive Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__MinInclusiveFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		mininclusive := new(models.MinInclusive)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(mininclusive, formGroup, probe)
 	case "Restriction":
 		formGroup := (&form.FormGroup{
 			Name:  form.FormGroupDefaultName.ToString(),

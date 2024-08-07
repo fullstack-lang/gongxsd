@@ -47,6 +47,8 @@ func NewStackInstance(
 	models.SetOrchestratorOnAfterUpdate[models.ComplexType](stage)
 	models.SetOrchestratorOnAfterUpdate[models.Element](stage)
 	models.SetOrchestratorOnAfterUpdate[models.Enumeration](stage)
+	models.SetOrchestratorOnAfterUpdate[models.MaxInclusive](stage)
+	models.SetOrchestratorOnAfterUpdate[models.MinInclusive](stage)
 	models.SetOrchestratorOnAfterUpdate[models.Restriction](stage)
 	models.SetOrchestratorOnAfterUpdate[models.Schema](stage)
 	models.SetOrchestratorOnAfterUpdate[models.Sequence](stage)

@@ -317,6 +317,8 @@ var __gong__map_Indentifiers_gongstructName = make(map[string]string)
 var __gong__map_ComplexType = make(map[string]*ComplexType)
 var __gong__map_Element = make(map[string]*Element)
 var __gong__map_Enumeration = make(map[string]*Enumeration)
+var __gong__map_MaxInclusive = make(map[string]*MaxInclusive)
+var __gong__map_MinInclusive = make(map[string]*MinInclusive)
 var __gong__map_Restriction = make(map[string]*Restriction)
 var __gong__map_Schema = make(map[string]*Schema)
 var __gong__map_Sequence = make(map[string]*Sequence)
@@ -505,6 +507,14 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 										instanceEnumeration := (&Enumeration{Name: instanceName}).Stage(stage)
 										instance = any(instanceEnumeration)
 										__gong__map_Enumeration[identifier] = instanceEnumeration
+									case "MaxInclusive":
+										instanceMaxInclusive := (&MaxInclusive{Name: instanceName}).Stage(stage)
+										instance = any(instanceMaxInclusive)
+										__gong__map_MaxInclusive[identifier] = instanceMaxInclusive
+									case "MinInclusive":
+										instanceMinInclusive := (&MinInclusive{Name: instanceName}).Stage(stage)
+										instance = any(instanceMinInclusive)
+										__gong__map_MinInclusive[identifier] = instanceMinInclusive
 									case "Restriction":
 										instanceRestriction := (&Restriction{Name: instanceName}).Stage(stage)
 										instance = any(instanceRestriction)
@@ -569,6 +579,14 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 							switch fieldName {
 							// insertion point for date assign code
 							}
+						case "MaxInclusive":
+							switch fieldName {
+							// insertion point for date assign code
+							}
+						case "MinInclusive":
+							switch fieldName {
+							// insertion point for date assign code
+							}
 						case "Restriction":
 							switch fieldName {
 							// insertion point for date assign code
@@ -619,6 +637,14 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 						// insertion point for slice of pointers assign code
 						}
 					case "Enumeration":
+						switch fieldName {
+						// insertion point for slice of pointers assign code
+						}
+					case "MaxInclusive":
+						switch fieldName {
+						// insertion point for slice of pointers assign code
+						}
+					case "MinInclusive":
 						switch fieldName {
 						// insertion point for slice of pointers assign code
 						}
@@ -757,6 +783,30 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
 					__gong__map_Enumeration[identifier].Value = fielValue
 				}
+			case "MaxInclusive":
+				switch fieldName {
+				// insertion point for field dependant code
+				case "Name":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_MaxInclusive[identifier].Name = fielValue
+				case "Value":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_MaxInclusive[identifier].Value = fielValue
+				}
+			case "MinInclusive":
+				switch fieldName {
+				// insertion point for field dependant code
+				case "Name":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_MinInclusive[identifier].Name = fielValue
+				case "Value":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_MinInclusive[identifier].Value = fielValue
+				}
 			case "Restriction":
 				switch fieldName {
 				// insertion point for field dependant code
@@ -832,9 +882,23 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 				switch fieldName {
 				// insertion point for field dependant code
 				}
+			case "MaxInclusive":
+				switch fieldName {
+				// insertion point for field dependant code
+				}
+			case "MinInclusive":
+				switch fieldName {
+				// insertion point for field dependant code
+				}
 			case "Restriction":
 				switch fieldName {
 				// insertion point for field dependant code
+				case "MinInclusive":
+					targetIdentifier := ident.Name
+					__gong__map_Restriction[identifier].MinInclusive = __gong__map_MinInclusive[targetIdentifier]
+				case "MaxInclusive":
+					targetIdentifier := ident.Name
+					__gong__map_Restriction[identifier].MaxInclusive = __gong__map_MaxInclusive[targetIdentifier]
 				}
 			case "Schema":
 				switch fieldName {
@@ -888,6 +952,14 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					// insertion point for enum assign code
 					}
 				case "Enumeration":
+					switch fieldName {
+					// insertion point for enum assign code
+					}
+				case "MaxInclusive":
+					switch fieldName {
+					// insertion point for enum assign code
+					}
+				case "MinInclusive":
 					switch fieldName {
 					// insertion point for enum assign code
 					}
