@@ -4,11 +4,15 @@ package orm
 type BackRepoData struct {
 	// insertion point for slices
 
+	AllAPIs []*AllAPI
+
 	AnnotationAPIs []*AnnotationAPI
 
 	AttributeAPIs []*AttributeAPI
 
 	AttributeGroupAPIs []*AttributeGroupAPI
+
+	ChoiceAPIs []*ChoiceAPI
 
 	ComplexTypeAPIs []*ComplexTypeAPI
 
@@ -45,6 +49,16 @@ type BackRepoData struct {
 
 func CopyBackRepoToBackRepoData(backRepo *BackRepoStruct, backRepoData *BackRepoData) {
 	// insertion point for slices copies
+	for _, allDB := range backRepo.BackRepoAll.Map_AllDBID_AllDB {
+
+		var allAPI AllAPI
+		allAPI.ID = allDB.ID
+		allAPI.AllPointersEncoding = allDB.AllPointersEncoding
+		allDB.CopyBasicFieldsToAll_WOP(&allAPI.All_WOP)
+
+		backRepoData.AllAPIs = append(backRepoData.AllAPIs, &allAPI)
+	}
+
 	for _, annotationDB := range backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationDB {
 
 		var annotationAPI AnnotationAPI
@@ -73,6 +87,16 @@ func CopyBackRepoToBackRepoData(backRepo *BackRepoStruct, backRepoData *BackRepo
 		attributegroupDB.CopyBasicFieldsToAttributeGroup_WOP(&attributegroupAPI.AttributeGroup_WOP)
 
 		backRepoData.AttributeGroupAPIs = append(backRepoData.AttributeGroupAPIs, &attributegroupAPI)
+	}
+
+	for _, choiceDB := range backRepo.BackRepoChoice.Map_ChoiceDBID_ChoiceDB {
+
+		var choiceAPI ChoiceAPI
+		choiceAPI.ID = choiceDB.ID
+		choiceAPI.ChoicePointersEncoding = choiceDB.ChoicePointersEncoding
+		choiceDB.CopyBasicFieldsToChoice_WOP(&choiceAPI.Choice_WOP)
+
+		backRepoData.ChoiceAPIs = append(backRepoData.ChoiceAPIs, &choiceAPI)
 	}
 
 	for _, complextypeDB := range backRepo.BackRepoComplexType.Map_ComplexTypeDBID_ComplexTypeDB {

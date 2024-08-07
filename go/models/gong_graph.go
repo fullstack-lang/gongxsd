@@ -5,6 +5,9 @@ func IsStaged[Type Gongstruct](stage *StageStruct, instance *Type) (ok bool) {
 
 	switch target := any(instance).(type) {
 	// insertion point for stage
+	case *All:
+		ok = stage.IsStagedAll(target)
+
 	case *Annotation:
 		ok = stage.IsStagedAnnotation(target)
 
@@ -13,6 +16,9 @@ func IsStaged[Type Gongstruct](stage *StageStruct, instance *Type) (ok bool) {
 
 	case *AttributeGroup:
 		ok = stage.IsStagedAttributeGroup(target)
+
+	case *Choice:
+		ok = stage.IsStagedChoice(target)
 
 	case *ComplexType:
 		ok = stage.IsStagedComplexType(target)
@@ -69,6 +75,13 @@ func IsStaged[Type Gongstruct](stage *StageStruct, instance *Type) (ok bool) {
 }
 
 // insertion point for stage per struct
+func (stage *StageStruct) IsStagedAll(all *All) (ok bool) {
+
+	_, ok = stage.Alls[all]
+
+	return
+}
+
 func (stage *StageStruct) IsStagedAnnotation(annotation *Annotation) (ok bool) {
 
 	_, ok = stage.Annotations[annotation]
@@ -86,6 +99,13 @@ func (stage *StageStruct) IsStagedAttribute(attribute *Attribute) (ok bool) {
 func (stage *StageStruct) IsStagedAttributeGroup(attributegroup *AttributeGroup) (ok bool) {
 
 	_, ok = stage.AttributeGroups[attributegroup]
+
+	return
+}
+
+func (stage *StageStruct) IsStagedChoice(choice *Choice) (ok bool) {
+
+	_, ok = stage.Choices[choice]
 
 	return
 }
@@ -210,6 +230,9 @@ func StageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 
 	switch target := any(instance).(type) {
 	// insertion point for stage branch
+	case *All:
+		stage.StageBranchAll(target)
+
 	case *Annotation:
 		stage.StageBranchAnnotation(target)
 
@@ -218,6 +241,9 @@ func StageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 
 	case *AttributeGroup:
 		stage.StageBranchAttributeGroup(target)
+
+	case *Choice:
+		stage.StageBranchChoice(target)
 
 	case *ComplexType:
 		stage.StageBranchComplexType(target)
@@ -273,6 +299,27 @@ func StageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 }
 
 // insertion point for stage branch per struct
+func (stage *StageStruct) StageBranchAll(all *All) {
+
+	// check if instance is already staged
+	if IsStaged(stage, all) {
+		return
+	}
+
+	all.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+	if all.Annotation != nil {
+		StageBranch(stage, all.Annotation)
+	}
+
+	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _element := range all.Elements {
+		StageBranch(stage, _element)
+	}
+
+}
+
 func (stage *StageStruct) StageBranchAnnotation(annotation *Annotation) {
 
 	// check if instance is already staged
@@ -327,6 +374,27 @@ func (stage *StageStruct) StageBranchAttributeGroup(attributegroup *AttributeGro
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) StageBranchChoice(choice *Choice) {
+
+	// check if instance is already staged
+	if IsStaged(stage, choice) {
+		return
+	}
+
+	choice.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+	if choice.Annotation != nil {
+		StageBranch(stage, choice.Annotation)
+	}
+
+	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _element := range choice.Elements {
+		StageBranch(stage, _element)
+	}
 
 }
 
@@ -686,6 +754,10 @@ func CopyBranch[Type Gongstruct](from *Type) (to *Type) {
 
 	switch fromT := any(from).(type) {
 	// insertion point for stage branch
+	case *All:
+		toT := CopyBranchAll(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
 	case *Annotation:
 		toT := CopyBranchAnnotation(mapOrigCopy, fromT)
 		return any(toT).(*Type)
@@ -696,6 +768,10 @@ func CopyBranch[Type Gongstruct](from *Type) (to *Type) {
 
 	case *AttributeGroup:
 		toT := CopyBranchAttributeGroup(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
+	case *Choice:
+		toT := CopyBranchChoice(mapOrigCopy, fromT)
 		return any(toT).(*Type)
 
 	case *ComplexType:
@@ -769,6 +845,31 @@ func CopyBranch[Type Gongstruct](from *Type) (to *Type) {
 }
 
 // insertion point for stage branch per struct
+func CopyBranchAll(mapOrigCopy map[any]any, allFrom *All) (allTo *All) {
+
+	// allFrom has already been copied
+	if _allTo, ok := mapOrigCopy[allFrom]; ok {
+		allTo = _allTo.(*All)
+		return
+	}
+
+	allTo = new(All)
+	mapOrigCopy[allFrom] = allTo
+	allFrom.CopyBasicFields(allTo)
+
+	//insertion point for the staging of instances referenced by pointers
+	if allFrom.Annotation != nil {
+		allTo.Annotation = CopyBranchAnnotation(mapOrigCopy, allFrom.Annotation)
+	}
+
+	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _element := range allFrom.Elements {
+		allTo.Elements = append(allTo.Elements, CopyBranchElement(mapOrigCopy, _element))
+	}
+
+	return
+}
+
 func CopyBranchAnnotation(mapOrigCopy map[any]any, annotationFrom *Annotation) (annotationTo *Annotation) {
 
 	// annotationFrom has already been copied
@@ -834,6 +935,31 @@ func CopyBranchAttributeGroup(mapOrigCopy map[any]any, attributegroupFrom *Attri
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
+
+	return
+}
+
+func CopyBranchChoice(mapOrigCopy map[any]any, choiceFrom *Choice) (choiceTo *Choice) {
+
+	// choiceFrom has already been copied
+	if _choiceTo, ok := mapOrigCopy[choiceFrom]; ok {
+		choiceTo = _choiceTo.(*Choice)
+		return
+	}
+
+	choiceTo = new(Choice)
+	mapOrigCopy[choiceFrom] = choiceTo
+	choiceFrom.CopyBasicFields(choiceTo)
+
+	//insertion point for the staging of instances referenced by pointers
+	if choiceFrom.Annotation != nil {
+		choiceTo.Annotation = CopyBranchAnnotation(mapOrigCopy, choiceFrom.Annotation)
+	}
+
+	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _element := range choiceFrom.Elements {
+		choiceTo.Elements = append(choiceTo.Elements, CopyBranchElement(mapOrigCopy, _element))
+	}
 
 	return
 }
@@ -1255,6 +1381,9 @@ func UnstageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 
 	switch target := any(instance).(type) {
 	// insertion point for unstage branch
+	case *All:
+		stage.UnstageBranchAll(target)
+
 	case *Annotation:
 		stage.UnstageBranchAnnotation(target)
 
@@ -1263,6 +1392,9 @@ func UnstageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 
 	case *AttributeGroup:
 		stage.UnstageBranchAttributeGroup(target)
+
+	case *Choice:
+		stage.UnstageBranchChoice(target)
 
 	case *ComplexType:
 		stage.UnstageBranchComplexType(target)
@@ -1318,6 +1450,27 @@ func UnstageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 }
 
 // insertion point for unstage branch per struct
+func (stage *StageStruct) UnstageBranchAll(all *All) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, all) {
+		return
+	}
+
+	all.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+	if all.Annotation != nil {
+		UnstageBranch(stage, all.Annotation)
+	}
+
+	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _element := range all.Elements {
+		UnstageBranch(stage, _element)
+	}
+
+}
+
 func (stage *StageStruct) UnstageBranchAnnotation(annotation *Annotation) {
 
 	// check if instance is already staged
@@ -1372,6 +1525,27 @@ func (stage *StageStruct) UnstageBranchAttributeGroup(attributegroup *AttributeG
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) UnstageBranchChoice(choice *Choice) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, choice) {
+		return
+	}
+
+	choice.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+	if choice.Annotation != nil {
+		UnstageBranch(stage, choice.Annotation)
+	}
+
+	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _element := range choice.Elements {
+		UnstageBranch(stage, _element)
+	}
 
 }
 

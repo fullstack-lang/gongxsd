@@ -43,6 +43,18 @@ type Element struct {
 	ElementWithAnnotation
 	ElementWithNameAttribute
 	ElementWithTypeAttribute
+
+	MinOccurs string `xml:"minOccurs,attr"`
+	MaxOccurs string `xml:"maxOccurs,attr"`
+	Default   string `xml:"default,attr"`
+	Fixed     string `xml:"fixed,attr"`
+	Nillable  string `xml:"nillable,attr"`
+	Ref       string `xml:"ref,attr"`
+	Abstract  string `xml:"abstract,attr"`
+	Form      string `xml:"form,attr"`
+	Block     string `xml:"block,attr"`
+	Final     string `xml:"final,attr"`
+
 	SimpleType  *SimpleType  `xml:"simpleType"`
 	ComplexType *ComplexType `xml:"complexType"`
 }
@@ -107,5 +119,23 @@ type AttributeGroup struct {
 type Sequence struct {
 	Name string
 	ElementWithAnnotation
-	Elements []*Element `xml:"element"`
+	MinOccurs string     `xml:"minOccurs,attr"`
+	MaxOccurs string     `xml:"maxOccurs,attr"`
+	Elements  []*Element `xml:"element"`
+}
+
+type All struct {
+	Name string
+	ElementWithAnnotation
+	MinOccurs string     `xml:"minOccurs,attr"`
+	MaxOccurs string     `xml:"maxOccurs,attr"`
+	Elements  []*Element `xml:"element"`
+}
+
+type Choice struct {
+	Name string
+	ElementWithAnnotation
+	MinOccurs string     `xml:"minOccurs,attr"`
+	MaxOccurs string     `xml:"maxOccurs,attr"`
+	Elements  []*Element `xml:"element"`
 }

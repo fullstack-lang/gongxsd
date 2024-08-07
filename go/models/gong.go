@@ -49,6 +49,17 @@ type StageStruct struct {
 	path string
 
 	// insertion point for definition of arrays registering instances
+	Alls           map[*All]any
+	Alls_mapString map[string]*All
+
+	// insertion point for slice of pointers maps
+	All_Elements_reverseMap map[*Element]*All
+
+	OnAfterAllCreateCallback OnAfterCreateInterface[All]
+	OnAfterAllUpdateCallback OnAfterUpdateInterface[All]
+	OnAfterAllDeleteCallback OnAfterDeleteInterface[All]
+	OnAfterAllReadCallback   OnAfterReadInterface[All]
+
 	Annotations           map[*Annotation]any
 	Annotations_mapString map[string]*Annotation
 
@@ -77,6 +88,17 @@ type StageStruct struct {
 	OnAfterAttributeGroupUpdateCallback OnAfterUpdateInterface[AttributeGroup]
 	OnAfterAttributeGroupDeleteCallback OnAfterDeleteInterface[AttributeGroup]
 	OnAfterAttributeGroupReadCallback   OnAfterReadInterface[AttributeGroup]
+
+	Choices           map[*Choice]any
+	Choices_mapString map[string]*Choice
+
+	// insertion point for slice of pointers maps
+	Choice_Elements_reverseMap map[*Element]*Choice
+
+	OnAfterChoiceCreateCallback OnAfterCreateInterface[Choice]
+	OnAfterChoiceUpdateCallback OnAfterUpdateInterface[Choice]
+	OnAfterChoiceDeleteCallback OnAfterDeleteInterface[Choice]
+	OnAfterChoiceReadCallback   OnAfterReadInterface[Choice]
 
 	ComplexTypes           map[*ComplexType]any
 	ComplexTypes_mapString map[string]*ComplexType
@@ -306,12 +328,16 @@ type BackRepoInterface interface {
 	BackupXL(stage *StageStruct, dirPath string)
 	RestoreXL(stage *StageStruct, dirPath string)
 	// insertion point for Commit and Checkout signatures
+	CommitAll(all *All)
+	CheckoutAll(all *All)
 	CommitAnnotation(annotation *Annotation)
 	CheckoutAnnotation(annotation *Annotation)
 	CommitAttribute(attribute *Attribute)
 	CheckoutAttribute(attribute *Attribute)
 	CommitAttributeGroup(attributegroup *AttributeGroup)
 	CheckoutAttributeGroup(attributegroup *AttributeGroup)
+	CommitChoice(choice *Choice)
+	CheckoutChoice(choice *Choice)
 	CommitComplexType(complextype *ComplexType)
 	CheckoutComplexType(complextype *ComplexType)
 	CommitDocumentation(documentation *Documentation)
@@ -351,6 +377,9 @@ type BackRepoInterface interface {
 func NewStage(path string) (stage *StageStruct) {
 
 	stage = &StageStruct{ // insertion point for array initiatialisation
+		Alls:           make(map[*All]any),
+		Alls_mapString: make(map[string]*All),
+
 		Annotations:           make(map[*Annotation]any),
 		Annotations_mapString: make(map[string]*Annotation),
 
@@ -359,6 +388,9 @@ func NewStage(path string) (stage *StageStruct) {
 
 		AttributeGroups:           make(map[*AttributeGroup]any),
 		AttributeGroups_mapString: make(map[string]*AttributeGroup),
+
+		Choices:           make(map[*Choice]any),
+		Choices_mapString: make(map[string]*Choice),
 
 		ComplexTypes:           make(map[*ComplexType]any),
 		ComplexTypes_mapString: make(map[string]*ComplexType),
@@ -441,9 +473,11 @@ func (stage *StageStruct) Commit() {
 	}
 
 	// insertion point for computing the map of number of instances per gongstruct
+	stage.Map_GongStructName_InstancesNb["All"] = len(stage.Alls)
 	stage.Map_GongStructName_InstancesNb["Annotation"] = len(stage.Annotations)
 	stage.Map_GongStructName_InstancesNb["Attribute"] = len(stage.Attributes)
 	stage.Map_GongStructName_InstancesNb["AttributeGroup"] = len(stage.AttributeGroups)
+	stage.Map_GongStructName_InstancesNb["Choice"] = len(stage.Choices)
 	stage.Map_GongStructName_InstancesNb["ComplexType"] = len(stage.ComplexTypes)
 	stage.Map_GongStructName_InstancesNb["Documentation"] = len(stage.Documentations)
 	stage.Map_GongStructName_InstancesNb["Element"] = len(stage.Elements)
@@ -470,9 +504,11 @@ func (stage *StageStruct) Checkout() {
 
 	stage.ComputeReverseMaps()
 	// insertion point for computing the map of number of instances per gongstruct
+	stage.Map_GongStructName_InstancesNb["All"] = len(stage.Alls)
 	stage.Map_GongStructName_InstancesNb["Annotation"] = len(stage.Annotations)
 	stage.Map_GongStructName_InstancesNb["Attribute"] = len(stage.Attributes)
 	stage.Map_GongStructName_InstancesNb["AttributeGroup"] = len(stage.AttributeGroups)
+	stage.Map_GongStructName_InstancesNb["Choice"] = len(stage.Choices)
 	stage.Map_GongStructName_InstancesNb["ComplexType"] = len(stage.ComplexTypes)
 	stage.Map_GongStructName_InstancesNb["Documentation"] = len(stage.Documentations)
 	stage.Map_GongStructName_InstancesNb["Element"] = len(stage.Elements)
@@ -521,6 +557,56 @@ func (stage *StageStruct) RestoreXL(dirPath string) {
 }
 
 // insertion point for cumulative sub template with model space calls
+// Stage puts all to the model stage
+func (all *All) Stage(stage *StageStruct) *All {
+	stage.Alls[all] = __member
+	stage.Alls_mapString[all.Name] = all
+
+	return all
+}
+
+// Unstage removes all off the model stage
+func (all *All) Unstage(stage *StageStruct) *All {
+	delete(stage.Alls, all)
+	delete(stage.Alls_mapString, all.Name)
+	return all
+}
+
+// UnstageVoid removes all off the model stage
+func (all *All) UnstageVoid(stage *StageStruct) {
+	delete(stage.Alls, all)
+	delete(stage.Alls_mapString, all.Name)
+}
+
+// commit all to the back repo (if it is already staged)
+func (all *All) Commit(stage *StageStruct) *All {
+	if _, ok := stage.Alls[all]; ok {
+		if stage.BackRepo != nil {
+			stage.BackRepo.CommitAll(all)
+		}
+	}
+	return all
+}
+
+func (all *All) CommitVoid(stage *StageStruct) {
+	all.Commit(stage)
+}
+
+// Checkout all to the back repo (if it is already staged)
+func (all *All) Checkout(stage *StageStruct) *All {
+	if _, ok := stage.Alls[all]; ok {
+		if stage.BackRepo != nil {
+			stage.BackRepo.CheckoutAll(all)
+		}
+	}
+	return all
+}
+
+// for satisfaction of GongStruct interface
+func (all *All) GetName() (res string) {
+	return all.Name
+}
+
 // Stage puts annotation to the model stage
 func (annotation *Annotation) Stage(stage *StageStruct) *Annotation {
 	stage.Annotations[annotation] = __member
@@ -669,6 +755,56 @@ func (attributegroup *AttributeGroup) Checkout(stage *StageStruct) *AttributeGro
 // for satisfaction of GongStruct interface
 func (attributegroup *AttributeGroup) GetName() (res string) {
 	return attributegroup.Name
+}
+
+// Stage puts choice to the model stage
+func (choice *Choice) Stage(stage *StageStruct) *Choice {
+	stage.Choices[choice] = __member
+	stage.Choices_mapString[choice.Name] = choice
+
+	return choice
+}
+
+// Unstage removes choice off the model stage
+func (choice *Choice) Unstage(stage *StageStruct) *Choice {
+	delete(stage.Choices, choice)
+	delete(stage.Choices_mapString, choice.Name)
+	return choice
+}
+
+// UnstageVoid removes choice off the model stage
+func (choice *Choice) UnstageVoid(stage *StageStruct) {
+	delete(stage.Choices, choice)
+	delete(stage.Choices_mapString, choice.Name)
+}
+
+// commit choice to the back repo (if it is already staged)
+func (choice *Choice) Commit(stage *StageStruct) *Choice {
+	if _, ok := stage.Choices[choice]; ok {
+		if stage.BackRepo != nil {
+			stage.BackRepo.CommitChoice(choice)
+		}
+	}
+	return choice
+}
+
+func (choice *Choice) CommitVoid(stage *StageStruct) {
+	choice.Commit(stage)
+}
+
+// Checkout choice to the back repo (if it is already staged)
+func (choice *Choice) Checkout(stage *StageStruct) *Choice {
+	if _, ok := stage.Choices[choice]; ok {
+		if stage.BackRepo != nil {
+			stage.BackRepo.CheckoutChoice(choice)
+		}
+	}
+	return choice
+}
+
+// for satisfaction of GongStruct interface
+func (choice *Choice) GetName() (res string) {
+	return choice.Name
 }
 
 // Stage puts complextype to the model stage
@@ -1473,9 +1609,11 @@ func (whitespace *WhiteSpace) GetName() (res string) {
 
 // swagger:ignore
 type AllModelsStructCreateInterface interface { // insertion point for Callbacks on creation
+	CreateORMAll(All *All)
 	CreateORMAnnotation(Annotation *Annotation)
 	CreateORMAttribute(Attribute *Attribute)
 	CreateORMAttributeGroup(AttributeGroup *AttributeGroup)
+	CreateORMChoice(Choice *Choice)
 	CreateORMComplexType(ComplexType *ComplexType)
 	CreateORMDocumentation(Documentation *Documentation)
 	CreateORMElement(Element *Element)
@@ -1495,9 +1633,11 @@ type AllModelsStructCreateInterface interface { // insertion point for Callbacks
 }
 
 type AllModelsStructDeleteInterface interface { // insertion point for Callbacks on deletion
+	DeleteORMAll(All *All)
 	DeleteORMAnnotation(Annotation *Annotation)
 	DeleteORMAttribute(Attribute *Attribute)
 	DeleteORMAttributeGroup(AttributeGroup *AttributeGroup)
+	DeleteORMChoice(Choice *Choice)
 	DeleteORMComplexType(ComplexType *ComplexType)
 	DeleteORMDocumentation(Documentation *Documentation)
 	DeleteORMElement(Element *Element)
@@ -1517,6 +1657,9 @@ type AllModelsStructDeleteInterface interface { // insertion point for Callbacks
 }
 
 func (stage *StageStruct) Reset() { // insertion point for array reset
+	stage.Alls = make(map[*All]any)
+	stage.Alls_mapString = make(map[string]*All)
+
 	stage.Annotations = make(map[*Annotation]any)
 	stage.Annotations_mapString = make(map[string]*Annotation)
 
@@ -1525,6 +1668,9 @@ func (stage *StageStruct) Reset() { // insertion point for array reset
 
 	stage.AttributeGroups = make(map[*AttributeGroup]any)
 	stage.AttributeGroups_mapString = make(map[string]*AttributeGroup)
+
+	stage.Choices = make(map[*Choice]any)
+	stage.Choices_mapString = make(map[string]*Choice)
 
 	stage.ComplexTypes = make(map[*ComplexType]any)
 	stage.ComplexTypes_mapString = make(map[string]*ComplexType)
@@ -1577,6 +1723,9 @@ func (stage *StageStruct) Reset() { // insertion point for array reset
 }
 
 func (stage *StageStruct) Nil() { // insertion point for array nil
+	stage.Alls = nil
+	stage.Alls_mapString = nil
+
 	stage.Annotations = nil
 	stage.Annotations_mapString = nil
 
@@ -1585,6 +1734,9 @@ func (stage *StageStruct) Nil() { // insertion point for array nil
 
 	stage.AttributeGroups = nil
 	stage.AttributeGroups_mapString = nil
+
+	stage.Choices = nil
+	stage.Choices_mapString = nil
 
 	stage.ComplexTypes = nil
 	stage.ComplexTypes_mapString = nil
@@ -1637,6 +1789,10 @@ func (stage *StageStruct) Nil() { // insertion point for array nil
 }
 
 func (stage *StageStruct) Unstage() { // insertion point for array nil
+	for all := range stage.Alls {
+		all.Unstage(stage)
+	}
+
 	for annotation := range stage.Annotations {
 		annotation.Unstage(stage)
 	}
@@ -1647,6 +1803,10 @@ func (stage *StageStruct) Unstage() { // insertion point for array nil
 
 	for attributegroup := range stage.AttributeGroups {
 		attributegroup.Unstage(stage)
+	}
+
+	for choice := range stage.Choices {
+		choice.Unstage(stage)
 	}
 
 	for complextype := range stage.ComplexTypes {
@@ -1773,12 +1933,16 @@ func GongGetSet[Type GongstructSet](stage *StageStruct) *Type {
 
 	switch any(ret).(type) {
 	// insertion point for generic get functions
+	case map[*All]any:
+		return any(&stage.Alls).(*Type)
 	case map[*Annotation]any:
 		return any(&stage.Annotations).(*Type)
 	case map[*Attribute]any:
 		return any(&stage.Attributes).(*Type)
 	case map[*AttributeGroup]any:
 		return any(&stage.AttributeGroups).(*Type)
+	case map[*Choice]any:
+		return any(&stage.Choices).(*Type)
 	case map[*ComplexType]any:
 		return any(&stage.ComplexTypes).(*Type)
 	case map[*Documentation]any:
@@ -1823,12 +1987,16 @@ func GongGetMap[Type GongstructMapString](stage *StageStruct) *Type {
 
 	switch any(ret).(type) {
 	// insertion point for generic get functions
+	case map[string]*All:
+		return any(&stage.Alls_mapString).(*Type)
 	case map[string]*Annotation:
 		return any(&stage.Annotations_mapString).(*Type)
 	case map[string]*Attribute:
 		return any(&stage.Attributes_mapString).(*Type)
 	case map[string]*AttributeGroup:
 		return any(&stage.AttributeGroups_mapString).(*Type)
+	case map[string]*Choice:
+		return any(&stage.Choices_mapString).(*Type)
 	case map[string]*ComplexType:
 		return any(&stage.ComplexTypes_mapString).(*Type)
 	case map[string]*Documentation:
@@ -1873,12 +2041,16 @@ func GetGongstructInstancesSet[Type Gongstruct](stage *StageStruct) *map[*Type]a
 
 	switch any(ret).(type) {
 	// insertion point for generic get functions
+	case All:
+		return any(&stage.Alls).(*map[*Type]any)
 	case Annotation:
 		return any(&stage.Annotations).(*map[*Type]any)
 	case Attribute:
 		return any(&stage.Attributes).(*map[*Type]any)
 	case AttributeGroup:
 		return any(&stage.AttributeGroups).(*map[*Type]any)
+	case Choice:
+		return any(&stage.Choices).(*map[*Type]any)
 	case ComplexType:
 		return any(&stage.ComplexTypes).(*map[*Type]any)
 	case Documentation:
@@ -1923,12 +2095,16 @@ func GetGongstructInstancesSetFromPointerType[Type PointerToGongstruct](stage *S
 
 	switch any(ret).(type) {
 	// insertion point for generic get functions
+	case *All:
+		return any(&stage.Alls).(*map[Type]any)
 	case *Annotation:
 		return any(&stage.Annotations).(*map[Type]any)
 	case *Attribute:
 		return any(&stage.Attributes).(*map[Type]any)
 	case *AttributeGroup:
 		return any(&stage.AttributeGroups).(*map[Type]any)
+	case *Choice:
+		return any(&stage.Choices).(*map[Type]any)
 	case *ComplexType:
 		return any(&stage.ComplexTypes).(*map[Type]any)
 	case *Documentation:
@@ -1973,12 +2149,16 @@ func GetGongstructInstancesMap[Type Gongstruct](stage *StageStruct) *map[string]
 
 	switch any(ret).(type) {
 	// insertion point for generic get functions
+	case All:
+		return any(&stage.Alls_mapString).(*map[string]*Type)
 	case Annotation:
 		return any(&stage.Annotations_mapString).(*map[string]*Type)
 	case Attribute:
 		return any(&stage.Attributes_mapString).(*map[string]*Type)
 	case AttributeGroup:
 		return any(&stage.AttributeGroups_mapString).(*map[string]*Type)
+	case Choice:
+		return any(&stage.Choices_mapString).(*map[string]*Type)
 	case ComplexType:
 		return any(&stage.ComplexTypes_mapString).(*map[string]*Type)
 	case Documentation:
@@ -2025,6 +2205,18 @@ func GetAssociationName[Type Gongstruct]() *Type {
 
 	switch any(ret).(type) {
 	// insertion point for instance with special fields
+	case All:
+		return any(&All{
+			// Initialisation of associations
+			// field is initialized with an instance of Element with the name of the field
+			Elements: []*Element{{Name: "Elements"}},
+			// field is initialized with ElementWithAnnotation as it is a composite
+			ElementWithAnnotation: ElementWithAnnotation{
+				// per field init
+				//
+				Annotation: &Annotation{Name: "Annotation"},
+			},
+		}).(*Type)
 	case Annotation:
 		return any(&Annotation{
 			// Initialisation of associations
@@ -2046,6 +2238,18 @@ func GetAssociationName[Type Gongstruct]() *Type {
 			// Initialisation of associations
 			// field is initialized with an instance of AttributeGroup with the name of the field
 			AttributeGroup: &AttributeGroup{Name: "AttributeGroup"},
+			// field is initialized with ElementWithAnnotation as it is a composite
+			ElementWithAnnotation: ElementWithAnnotation{
+				// per field init
+				//
+				Annotation: &Annotation{Name: "Annotation"},
+			},
+		}).(*Type)
+	case Choice:
+		return any(&Choice{
+			// Initialisation of associations
+			// field is initialized with an instance of Element with the name of the field
+			Elements: []*Element{{Name: "Elements"}},
 			// field is initialized with ElementWithAnnotation as it is a composite
 			ElementWithAnnotation: ElementWithAnnotation{
 				// per field init
@@ -2265,6 +2469,28 @@ func GetPointerReverseMap[Start, End Gongstruct](fieldname string, stage *StageS
 
 	switch any(ret).(type) {
 	// insertion point of functions that provide maps for reverse associations
+	// reverse maps of direct associations of All
+	case All:
+		switch fieldname {
+		// insertion point for per direct association field
+		case "Annotation":
+			res := make(map[*Annotation][]*All)
+			for all := range stage.Alls {
+				if all.Annotation != nil {
+					annotation_ := all.Annotation
+					var alls []*All
+					_, ok := res[annotation_]
+					if ok {
+						alls = res[annotation_]
+					} else {
+						alls = make([]*All, 0)
+					}
+					alls = append(alls, all)
+					res[annotation_] = alls
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		}
 	// reverse maps of direct associations of Annotation
 	case Annotation:
 		switch fieldname {
@@ -2327,6 +2553,28 @@ func GetPointerReverseMap[Start, End Gongstruct](fieldname string, stage *StageS
 					}
 					attributegroups = append(attributegroups, attributegroup)
 					res[attributegroup_] = attributegroups
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		}
+	// reverse maps of direct associations of Choice
+	case Choice:
+		switch fieldname {
+		// insertion point for per direct association field
+		case "Annotation":
+			res := make(map[*Annotation][]*Choice)
+			for choice := range stage.Choices {
+				if choice.Annotation != nil {
+					annotation_ := choice.Annotation
+					var choices []*Choice
+					_, ok := res[annotation_]
+					if ok {
+						choices = res[annotation_]
+					} else {
+						choices = make([]*Choice, 0)
+					}
+					choices = append(choices, choice)
+					res[annotation_] = choices
 				}
 			}
 			return any(res).(map[*End][]*Start)
@@ -2886,6 +3134,19 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 
 	switch any(ret).(type) {
 	// insertion point of functions that provide maps for reverse associations
+	// reverse maps of direct associations of All
+	case All:
+		switch fieldname {
+		// insertion point for per direct association field
+		case "Elements":
+			res := make(map[*Element]*All)
+			for all := range stage.Alls {
+				for _, element_ := range all.Elements {
+					res[element_] = all
+				}
+			}
+			return any(res).(map[*End]*Start)
+		}
 	// reverse maps of direct associations of Annotation
 	case Annotation:
 		switch fieldname {
@@ -2908,6 +3169,19 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 	case AttributeGroup:
 		switch fieldname {
 		// insertion point for per direct association field
+		}
+	// reverse maps of direct associations of Choice
+	case Choice:
+		switch fieldname {
+		// insertion point for per direct association field
+		case "Elements":
+			res := make(map[*Element]*Choice)
+			for choice := range stage.Choices {
+				for _, element_ := range choice.Elements {
+					res[element_] = choice
+				}
+			}
+			return any(res).(map[*End]*Start)
 		}
 	// reverse maps of direct associations of ComplexType
 	case ComplexType:
@@ -3065,12 +3339,16 @@ func GetGongstructName[Type Gongstruct]() (res string) {
 
 	switch any(ret).(type) {
 	// insertion point for generic get gongstruct name
+	case All:
+		res = "All"
 	case Annotation:
 		res = "Annotation"
 	case Attribute:
 		res = "Attribute"
 	case AttributeGroup:
 		res = "AttributeGroup"
+	case Choice:
+		res = "Choice"
 	case ComplexType:
 		res = "ComplexType"
 	case Documentation:
@@ -3115,12 +3393,16 @@ func GetPointerToGongstructName[Type PointerToGongstruct]() (res string) {
 
 	switch any(ret).(type) {
 	// insertion point for generic get gongstruct name
+	case *All:
+		res = "All"
 	case *Annotation:
 		res = "Annotation"
 	case *Attribute:
 		res = "Attribute"
 	case *AttributeGroup:
 		res = "AttributeGroup"
+	case *Choice:
+		res = "Choice"
 	case *ComplexType:
 		res = "ComplexType"
 	case *Documentation:
@@ -3164,18 +3446,22 @@ func GetFields[Type Gongstruct]() (res []string) {
 
 	switch any(ret).(type) {
 	// insertion point for generic get gongstruct name
+	case All:
+		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "Elements"}
 	case Annotation:
 		res = []string{"Name", "Documentations"}
 	case Attribute:
 		res = []string{"Name", "NameXSD", "Type", "Annotation", "Default", "Use", "Form", "Fixed", "Ref", "TargetNamespace", "SimpleType", "IDXSD"}
 	case AttributeGroup:
 		res = []string{"Name", "NameXSD", "Annotation", "AttributeGroup", "Ref"}
+	case Choice:
+		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "Elements"}
 	case ComplexType:
 		res = []string{"Name", "Annotation", "NameXSD", "Sequence", "Attributes", "AttributeGroups"}
 	case Documentation:
 		res = []string{"Name", "Text", "Source", "Lang"}
 	case Element:
-		res = []string{"Name", "Annotation", "NameXSD", "Type", "SimpleType", "ComplexType"}
+		res = []string{"Name", "Annotation", "NameXSD", "Type", "MinOccurs", "MaxOccurs", "Default", "Fixed", "Nillable", "Ref", "Abstract", "Form", "Block", "Final", "SimpleType", "ComplexType"}
 	case Enumeration:
 		res = []string{"Name", "Annotation", "Value"}
 	case Length:
@@ -3195,7 +3481,7 @@ func GetFields[Type Gongstruct]() (res []string) {
 	case Schema:
 		res = []string{"Name", "Xs", "Annotation", "Elements", "SimpleTypes", "ComplexTypes", "AttributeGroup"}
 	case Sequence:
-		res = []string{"Name", "Annotation", "Elements"}
+		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "Elements"}
 	case SimpleType:
 		res = []string{"Name", "Annotation", "NameXSD", "Restriction"}
 	case TotalDigit:
@@ -3220,6 +3506,9 @@ func GetReverseFields[Type Gongstruct]() (res []ReverseField) {
 	switch any(ret).(type) {
 
 	// insertion point for generic get gongstruct name
+	case All:
+		var rf ReverseField
+		_ = rf
 	case Annotation:
 		var rf ReverseField
 		_ = rf
@@ -3238,6 +3527,9 @@ func GetReverseFields[Type Gongstruct]() (res []ReverseField) {
 		rf.GongstructName = "Schema"
 		rf.Fieldname = "AttributeGroup"
 		res = append(res, rf)
+	case Choice:
+		var rf ReverseField
+		_ = rf
 	case ComplexType:
 		var rf ReverseField
 		_ = rf
@@ -3253,6 +3545,12 @@ func GetReverseFields[Type Gongstruct]() (res []ReverseField) {
 	case Element:
 		var rf ReverseField
 		_ = rf
+		rf.GongstructName = "All"
+		rf.Fieldname = "Elements"
+		res = append(res, rf)
+		rf.GongstructName = "Choice"
+		rf.Fieldname = "Elements"
+		res = append(res, rf)
 		rf.GongstructName = "Schema"
 		rf.Fieldname = "Elements"
 		res = append(res, rf)
@@ -3315,18 +3613,22 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 
 	switch any(ret).(type) {
 	// insertion point for generic get gongstruct name
+	case *All:
+		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "Elements"}
 	case *Annotation:
 		res = []string{"Name", "Documentations"}
 	case *Attribute:
 		res = []string{"Name", "NameXSD", "Type", "Annotation", "Default", "Use", "Form", "Fixed", "Ref", "TargetNamespace", "SimpleType", "IDXSD"}
 	case *AttributeGroup:
 		res = []string{"Name", "NameXSD", "Annotation", "AttributeGroup", "Ref"}
+	case *Choice:
+		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "Elements"}
 	case *ComplexType:
 		res = []string{"Name", "Annotation", "NameXSD", "Sequence", "Attributes", "AttributeGroups"}
 	case *Documentation:
 		res = []string{"Name", "Text", "Source", "Lang"}
 	case *Element:
-		res = []string{"Name", "Annotation", "NameXSD", "Type", "SimpleType", "ComplexType"}
+		res = []string{"Name", "Annotation", "NameXSD", "Type", "MinOccurs", "MaxOccurs", "Default", "Fixed", "Nillable", "Ref", "Abstract", "Form", "Block", "Final", "SimpleType", "ComplexType"}
 	case *Enumeration:
 		res = []string{"Name", "Annotation", "Value"}
 	case *Length:
@@ -3346,7 +3648,7 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 	case *Schema:
 		res = []string{"Name", "Xs", "Annotation", "Elements", "SimpleTypes", "ComplexTypes", "AttributeGroup"}
 	case *Sequence:
-		res = []string{"Name", "Annotation", "Elements"}
+		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "Elements"}
 	case *SimpleType:
 		res = []string{"Name", "Annotation", "NameXSD", "Restriction"}
 	case *TotalDigit:
@@ -3361,6 +3663,27 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 
 	switch inferedInstance := any(instance).(type) {
 	// insertion point for generic get gongstruct field value
+	case *All:
+		switch fieldName {
+		// string value of fields
+		case "Name":
+			res = inferedInstance.Name
+		case "Annotation":
+			if inferedInstance.Annotation != nil {
+				res = inferedInstance.Annotation.Name
+			}
+		case "MinOccurs":
+			res = inferedInstance.MinOccurs
+		case "MaxOccurs":
+			res = inferedInstance.MaxOccurs
+		case "Elements":
+			for idx, __instance__ := range inferedInstance.Elements {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
+		}
 	case *Annotation:
 		switch fieldName {
 		// string value of fields
@@ -3422,6 +3745,27 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		case "Ref":
 			res = inferedInstance.Ref
 		}
+	case *Choice:
+		switch fieldName {
+		// string value of fields
+		case "Name":
+			res = inferedInstance.Name
+		case "Annotation":
+			if inferedInstance.Annotation != nil {
+				res = inferedInstance.Annotation.Name
+			}
+		case "MinOccurs":
+			res = inferedInstance.MinOccurs
+		case "MaxOccurs":
+			res = inferedInstance.MaxOccurs
+		case "Elements":
+			for idx, __instance__ := range inferedInstance.Elements {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
+		}
 	case *ComplexType:
 		switch fieldName {
 		// string value of fields
@@ -3477,6 +3821,26 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 			res = inferedInstance.NameXSD
 		case "Type":
 			res = inferedInstance.Type
+		case "MinOccurs":
+			res = inferedInstance.MinOccurs
+		case "MaxOccurs":
+			res = inferedInstance.MaxOccurs
+		case "Default":
+			res = inferedInstance.Default
+		case "Fixed":
+			res = inferedInstance.Fixed
+		case "Nillable":
+			res = inferedInstance.Nillable
+		case "Ref":
+			res = inferedInstance.Ref
+		case "Abstract":
+			res = inferedInstance.Abstract
+		case "Form":
+			res = inferedInstance.Form
+		case "Block":
+			res = inferedInstance.Block
+		case "Final":
+			res = inferedInstance.Final
 		case "SimpleType":
 			if inferedInstance.SimpleType != nil {
 				res = inferedInstance.SimpleType.Name
@@ -3670,6 +4034,10 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 			if inferedInstance.Annotation != nil {
 				res = inferedInstance.Annotation.Name
 			}
+		case "MinOccurs":
+			res = inferedInstance.MinOccurs
+		case "MaxOccurs":
+			res = inferedInstance.MaxOccurs
 		case "Elements":
 			for idx, __instance__ := range inferedInstance.Elements {
 				if idx > 0 {
@@ -3728,6 +4096,27 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 
 	switch inferedInstance := any(instance).(type) {
 	// insertion point for generic get gongstruct field value
+	case All:
+		switch fieldName {
+		// string value of fields
+		case "Name":
+			res = inferedInstance.Name
+		case "Annotation":
+			if inferedInstance.Annotation != nil {
+				res = inferedInstance.Annotation.Name
+			}
+		case "MinOccurs":
+			res = inferedInstance.MinOccurs
+		case "MaxOccurs":
+			res = inferedInstance.MaxOccurs
+		case "Elements":
+			for idx, __instance__ := range inferedInstance.Elements {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
+		}
 	case Annotation:
 		switch fieldName {
 		// string value of fields
@@ -3789,6 +4178,27 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		case "Ref":
 			res = inferedInstance.Ref
 		}
+	case Choice:
+		switch fieldName {
+		// string value of fields
+		case "Name":
+			res = inferedInstance.Name
+		case "Annotation":
+			if inferedInstance.Annotation != nil {
+				res = inferedInstance.Annotation.Name
+			}
+		case "MinOccurs":
+			res = inferedInstance.MinOccurs
+		case "MaxOccurs":
+			res = inferedInstance.MaxOccurs
+		case "Elements":
+			for idx, __instance__ := range inferedInstance.Elements {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
+		}
 	case ComplexType:
 		switch fieldName {
 		// string value of fields
@@ -3844,6 +4254,26 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 			res = inferedInstance.NameXSD
 		case "Type":
 			res = inferedInstance.Type
+		case "MinOccurs":
+			res = inferedInstance.MinOccurs
+		case "MaxOccurs":
+			res = inferedInstance.MaxOccurs
+		case "Default":
+			res = inferedInstance.Default
+		case "Fixed":
+			res = inferedInstance.Fixed
+		case "Nillable":
+			res = inferedInstance.Nillable
+		case "Ref":
+			res = inferedInstance.Ref
+		case "Abstract":
+			res = inferedInstance.Abstract
+		case "Form":
+			res = inferedInstance.Form
+		case "Block":
+			res = inferedInstance.Block
+		case "Final":
+			res = inferedInstance.Final
 		case "SimpleType":
 			if inferedInstance.SimpleType != nil {
 				res = inferedInstance.SimpleType.Name
@@ -4037,6 +4467,10 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 			if inferedInstance.Annotation != nil {
 				res = inferedInstance.Annotation.Name
 			}
+		case "MinOccurs":
+			res = inferedInstance.MinOccurs
+		case "MaxOccurs":
+			res = inferedInstance.MaxOccurs
 		case "Elements":
 			for idx, __instance__ := range inferedInstance.Elements {
 				if idx > 0 {

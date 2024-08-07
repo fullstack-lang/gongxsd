@@ -52,6 +52,9 @@ func (nodeImplGongstruct *TreeNodeImplGongstruct) OnAfterUpdate(
 	log.Println("NodeImplGongstruct:OnAfterUpdate with: ", nodeImplGongstruct.gongStruct.GetName())
 
 	// insertion point
+	if nodeImplGongstruct.gongStruct.GetName() == "All" {
+		fillUpTable[models.All](nodeImplGongstruct.probe)
+	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Annotation" {
 		fillUpTable[models.Annotation](nodeImplGongstruct.probe)
 	}
@@ -60,6 +63,9 @@ func (nodeImplGongstruct *TreeNodeImplGongstruct) OnAfterUpdate(
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "AttributeGroup" {
 		fillUpTable[models.AttributeGroup](nodeImplGongstruct.probe)
+	}
+	if nodeImplGongstruct.gongStruct.GetName() == "Choice" {
+		fillUpTable[models.Choice](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "ComplexType" {
 		fillUpTable[models.ComplexType](nodeImplGongstruct.probe)

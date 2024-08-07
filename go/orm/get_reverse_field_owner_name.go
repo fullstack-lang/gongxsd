@@ -14,6 +14,11 @@ func GetReverseFieldOwnerName[T models.Gongstruct](
 	res = ""
 	switch inst := any(instance).(type) {
 	// insertion point
+	case *models.All:
+		switch reverseField.GongstructName {
+		// insertion point
+		}
+
 	case *models.Annotation:
 		switch reverseField.GongstructName {
 		// insertion point
@@ -50,6 +55,11 @@ func GetReverseFieldOwnerName[T models.Gongstruct](
 			}
 		}
 
+	case *models.Choice:
+		switch reverseField.GongstructName {
+		// insertion point
+		}
+
 	case *models.ComplexType:
 		switch reverseField.GongstructName {
 		// insertion point
@@ -77,6 +87,20 @@ func GetReverseFieldOwnerName[T models.Gongstruct](
 	case *models.Element:
 		switch reverseField.GongstructName {
 		// insertion point
+		case "All":
+			switch reverseField.Fieldname {
+			case "Elements":
+				if _all, ok := stage.All_Elements_reverseMap[inst]; ok {
+					res = _all.Name
+				}
+			}
+		case "Choice":
+			switch reverseField.Fieldname {
+			case "Elements":
+				if _choice, ok := stage.Choice_Elements_reverseMap[inst]; ok {
+					res = _choice.Name
+				}
+			}
 		case "Schema":
 			switch reverseField.Fieldname {
 			case "Elements":
@@ -187,6 +211,11 @@ func GetReverseFieldOwner[T models.Gongstruct](
 	res = nil
 	switch inst := any(instance).(type) {
 	// insertion point
+	case *models.All:
+		switch reverseField.GongstructName {
+		// insertion point
+		}
+
 	case *models.Annotation:
 		switch reverseField.GongstructName {
 		// insertion point
@@ -217,6 +246,11 @@ func GetReverseFieldOwner[T models.Gongstruct](
 			}
 		}
 
+	case *models.Choice:
+		switch reverseField.GongstructName {
+		// insertion point
+		}
+
 	case *models.ComplexType:
 		switch reverseField.GongstructName {
 		// insertion point
@@ -240,6 +274,16 @@ func GetReverseFieldOwner[T models.Gongstruct](
 	case *models.Element:
 		switch reverseField.GongstructName {
 		// insertion point
+		case "All":
+			switch reverseField.Fieldname {
+			case "Elements":
+				res = stage.All_Elements_reverseMap[inst]
+			}
+		case "Choice":
+			switch reverseField.Fieldname {
+			case "Elements":
+				res = stage.Choice_Elements_reverseMap[inst]
+			}
 		case "Schema":
 			switch reverseField.Fieldname {
 			case "Elements":

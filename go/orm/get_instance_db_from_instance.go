@@ -15,6 +15,10 @@ func GetInstanceDBFromInstance[T models.Gongstruct, T2 GongstructDB](
 
 	switch concreteInstance := any(instance).(type) {
 	// insertion point for per struct backup
+	case *models.All:
+		allInstance := any(concreteInstance).(*models.All)
+		ret2 := backRepo.BackRepoAll.GetAllDBFromAllPtr(allInstance)
+		ret = any(ret2).(*T2)
 	case *models.Annotation:
 		annotationInstance := any(concreteInstance).(*models.Annotation)
 		ret2 := backRepo.BackRepoAnnotation.GetAnnotationDBFromAnnotationPtr(annotationInstance)
@@ -26,6 +30,10 @@ func GetInstanceDBFromInstance[T models.Gongstruct, T2 GongstructDB](
 	case *models.AttributeGroup:
 		attributegroupInstance := any(concreteInstance).(*models.AttributeGroup)
 		ret2 := backRepo.BackRepoAttributeGroup.GetAttributeGroupDBFromAttributeGroupPtr(attributegroupInstance)
+		ret = any(ret2).(*T2)
+	case *models.Choice:
+		choiceInstance := any(concreteInstance).(*models.Choice)
+		ret2 := backRepo.BackRepoChoice.GetChoiceDBFromChoicePtr(choiceInstance)
 		ret = any(ret2).(*T2)
 	case *models.ComplexType:
 		complextypeInstance := any(concreteInstance).(*models.ComplexType)
@@ -104,6 +112,11 @@ func GetID[T models.Gongstruct](
 
 	switch inst := any(instance).(type) {
 	// insertion point for per struct backup
+	case *models.All:
+		tmp := GetInstanceDBFromInstance[models.All, AllDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
 	case *models.Annotation:
 		tmp := GetInstanceDBFromInstance[models.Annotation, AnnotationDB](
 			stage, backRepo, inst,
@@ -116,6 +129,11 @@ func GetID[T models.Gongstruct](
 		id = int(tmp.ID)
 	case *models.AttributeGroup:
 		tmp := GetInstanceDBFromInstance[models.AttributeGroup, AttributeGroupDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.Choice:
+		tmp := GetInstanceDBFromInstance[models.Choice, ChoiceDB](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)
@@ -212,6 +230,11 @@ func GetIDPointer[T models.PointerToGongstruct](
 
 	switch inst := any(instance).(type) {
 	// insertion point for per struct backup
+	case *models.All:
+		tmp := GetInstanceDBFromInstance[models.All, AllDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
 	case *models.Annotation:
 		tmp := GetInstanceDBFromInstance[models.Annotation, AnnotationDB](
 			stage, backRepo, inst,
@@ -224,6 +247,11 @@ func GetIDPointer[T models.PointerToGongstruct](
 		id = int(tmp.ID)
 	case *models.AttributeGroup:
 		tmp := GetInstanceDBFromInstance[models.AttributeGroup, AttributeGroupDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.Choice:
+		tmp := GetInstanceDBFromInstance[models.Choice, ChoiceDB](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)

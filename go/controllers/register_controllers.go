@@ -47,6 +47,13 @@ type ValidationError struct {
 func registerControllers(r *gin.Engine) {
 	v1 := r.Group("/api/github.com/fullstack-lang/gongxsd/go")
 	{ // insertion point for registrations
+		v1.GET("/v1/alls", GetController().GetAlls)
+		v1.GET("/v1/alls/:id", GetController().GetAll)
+		v1.POST("/v1/alls", GetController().PostAll)
+		v1.PATCH("/v1/alls/:id", GetController().UpdateAll)
+		v1.PUT("/v1/alls/:id", GetController().UpdateAll)
+		v1.DELETE("/v1/alls/:id", GetController().DeleteAll)
+
 		v1.GET("/v1/annotations", GetController().GetAnnotations)
 		v1.GET("/v1/annotations/:id", GetController().GetAnnotation)
 		v1.POST("/v1/annotations", GetController().PostAnnotation)
@@ -67,6 +74,13 @@ func registerControllers(r *gin.Engine) {
 		v1.PATCH("/v1/attributegroups/:id", GetController().UpdateAttributeGroup)
 		v1.PUT("/v1/attributegroups/:id", GetController().UpdateAttributeGroup)
 		v1.DELETE("/v1/attributegroups/:id", GetController().DeleteAttributeGroup)
+
+		v1.GET("/v1/choices", GetController().GetChoices)
+		v1.GET("/v1/choices/:id", GetController().GetChoice)
+		v1.POST("/v1/choices", GetController().PostChoice)
+		v1.PATCH("/v1/choices/:id", GetController().UpdateChoice)
+		v1.PUT("/v1/choices/:id", GetController().UpdateChoice)
+		v1.DELETE("/v1/choices/:id", GetController().DeleteChoice)
 
 		v1.GET("/v1/complextypes", GetController().GetComplexTypes)
 		v1.GET("/v1/complextypes/:id", GetController().GetComplexType)

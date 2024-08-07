@@ -62,6 +62,16 @@ func fillUpTree(
 
 		switch gongStruct.Name {
 		// insertion point
+		case "All":
+			nodeGongstruct.Name = name
+			set := *models.GetGongstructInstancesSet[models.All](probe.stageOfInterest)
+			for _all := range set {
+				nodeInstance := (&tree.Node{Name: _all.GetName()}).Stage(probe.treeStage)
+				nodeInstance.IsNodeClickable = true
+				nodeInstance.Impl = NewInstanceNodeCallback(_all, "All", probe)
+
+				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
+			}
 		case "Annotation":
 			nodeGongstruct.Name = name
 			set := *models.GetGongstructInstancesSet[models.Annotation](probe.stageOfInterest)
@@ -89,6 +99,16 @@ func fillUpTree(
 				nodeInstance := (&tree.Node{Name: _attributegroup.GetName()}).Stage(probe.treeStage)
 				nodeInstance.IsNodeClickable = true
 				nodeInstance.Impl = NewInstanceNodeCallback(_attributegroup, "AttributeGroup", probe)
+
+				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
+			}
+		case "Choice":
+			nodeGongstruct.Name = name
+			set := *models.GetGongstructInstancesSet[models.Choice](probe.stageOfInterest)
+			for _choice := range set {
+				nodeInstance := (&tree.Node{Name: _choice.GetName()}).Stage(probe.treeStage)
+				nodeInstance.IsNodeClickable = true
+				nodeInstance.Impl = NewInstanceNodeCallback(_choice, "Choice", probe)
 
 				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
 			}

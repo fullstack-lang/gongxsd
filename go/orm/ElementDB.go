@@ -79,6 +79,36 @@ type ElementDB struct {
 
 	// Declation for basic field elementDB.Type
 	Type_Data sql.NullString
+
+	// Declation for basic field elementDB.MinOccurs
+	MinOccurs_Data sql.NullString
+
+	// Declation for basic field elementDB.MaxOccurs
+	MaxOccurs_Data sql.NullString
+
+	// Declation for basic field elementDB.Default
+	Default_Data sql.NullString
+
+	// Declation for basic field elementDB.Fixed
+	Fixed_Data sql.NullString
+
+	// Declation for basic field elementDB.Nillable
+	Nillable_Data sql.NullString
+
+	// Declation for basic field elementDB.Ref
+	Ref_Data sql.NullString
+
+	// Declation for basic field elementDB.Abstract
+	Abstract_Data sql.NullString
+
+	// Declation for basic field elementDB.Form
+	Form_Data sql.NullString
+
+	// Declation for basic field elementDB.Block
+	Block_Data sql.NullString
+
+	// Declation for basic field elementDB.Final
+	Final_Data sql.NullString
 	
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
@@ -107,6 +137,26 @@ type ElementWOP struct {
 	NameXSD string `xlsx:"2"`
 
 	Type string `xlsx:"3"`
+
+	MinOccurs string `xlsx:"4"`
+
+	MaxOccurs string `xlsx:"5"`
+
+	Default string `xlsx:"6"`
+
+	Fixed string `xlsx:"7"`
+
+	Nillable string `xlsx:"8"`
+
+	Ref string `xlsx:"9"`
+
+	Abstract string `xlsx:"10"`
+
+	Form string `xlsx:"11"`
+
+	Block string `xlsx:"12"`
+
+	Final string `xlsx:"13"`
 	// insertion for WOP pointer fields
 }
 
@@ -116,6 +166,16 @@ var Element_Fields = []string{
 	"Name",
 	"NameXSD",
 	"Type",
+	"MinOccurs",
+	"MaxOccurs",
+	"Default",
+	"Fixed",
+	"Nillable",
+	"Ref",
+	"Abstract",
+	"Form",
+	"Block",
+	"Final",
 }
 
 type BackRepoElementStruct struct {
@@ -441,6 +501,36 @@ func (elementDB *ElementDB) CopyBasicFieldsFromElement(element *models.Element) 
 
 	elementDB.Type_Data.String = element.Type
 	elementDB.Type_Data.Valid = true
+
+	elementDB.MinOccurs_Data.String = element.MinOccurs
+	elementDB.MinOccurs_Data.Valid = true
+
+	elementDB.MaxOccurs_Data.String = element.MaxOccurs
+	elementDB.MaxOccurs_Data.Valid = true
+
+	elementDB.Default_Data.String = element.Default
+	elementDB.Default_Data.Valid = true
+
+	elementDB.Fixed_Data.String = element.Fixed
+	elementDB.Fixed_Data.Valid = true
+
+	elementDB.Nillable_Data.String = element.Nillable
+	elementDB.Nillable_Data.Valid = true
+
+	elementDB.Ref_Data.String = element.Ref
+	elementDB.Ref_Data.Valid = true
+
+	elementDB.Abstract_Data.String = element.Abstract
+	elementDB.Abstract_Data.Valid = true
+
+	elementDB.Form_Data.String = element.Form
+	elementDB.Form_Data.Valid = true
+
+	elementDB.Block_Data.String = element.Block
+	elementDB.Block_Data.Valid = true
+
+	elementDB.Final_Data.String = element.Final
+	elementDB.Final_Data.Valid = true
 }
 
 // CopyBasicFieldsFromElement_WOP
@@ -455,6 +545,36 @@ func (elementDB *ElementDB) CopyBasicFieldsFromElement_WOP(element *models.Eleme
 
 	elementDB.Type_Data.String = element.Type
 	elementDB.Type_Data.Valid = true
+
+	elementDB.MinOccurs_Data.String = element.MinOccurs
+	elementDB.MinOccurs_Data.Valid = true
+
+	elementDB.MaxOccurs_Data.String = element.MaxOccurs
+	elementDB.MaxOccurs_Data.Valid = true
+
+	elementDB.Default_Data.String = element.Default
+	elementDB.Default_Data.Valid = true
+
+	elementDB.Fixed_Data.String = element.Fixed
+	elementDB.Fixed_Data.Valid = true
+
+	elementDB.Nillable_Data.String = element.Nillable
+	elementDB.Nillable_Data.Valid = true
+
+	elementDB.Ref_Data.String = element.Ref
+	elementDB.Ref_Data.Valid = true
+
+	elementDB.Abstract_Data.String = element.Abstract
+	elementDB.Abstract_Data.Valid = true
+
+	elementDB.Form_Data.String = element.Form
+	elementDB.Form_Data.Valid = true
+
+	elementDB.Block_Data.String = element.Block
+	elementDB.Block_Data.Valid = true
+
+	elementDB.Final_Data.String = element.Final
+	elementDB.Final_Data.Valid = true
 }
 
 // CopyBasicFieldsFromElementWOP
@@ -469,6 +589,36 @@ func (elementDB *ElementDB) CopyBasicFieldsFromElementWOP(element *ElementWOP) {
 
 	elementDB.Type_Data.String = element.Type
 	elementDB.Type_Data.Valid = true
+
+	elementDB.MinOccurs_Data.String = element.MinOccurs
+	elementDB.MinOccurs_Data.Valid = true
+
+	elementDB.MaxOccurs_Data.String = element.MaxOccurs
+	elementDB.MaxOccurs_Data.Valid = true
+
+	elementDB.Default_Data.String = element.Default
+	elementDB.Default_Data.Valid = true
+
+	elementDB.Fixed_Data.String = element.Fixed
+	elementDB.Fixed_Data.Valid = true
+
+	elementDB.Nillable_Data.String = element.Nillable
+	elementDB.Nillable_Data.Valid = true
+
+	elementDB.Ref_Data.String = element.Ref
+	elementDB.Ref_Data.Valid = true
+
+	elementDB.Abstract_Data.String = element.Abstract
+	elementDB.Abstract_Data.Valid = true
+
+	elementDB.Form_Data.String = element.Form
+	elementDB.Form_Data.Valid = true
+
+	elementDB.Block_Data.String = element.Block
+	elementDB.Block_Data.Valid = true
+
+	elementDB.Final_Data.String = element.Final
+	elementDB.Final_Data.Valid = true
 }
 
 // CopyBasicFieldsToElement
@@ -477,6 +627,16 @@ func (elementDB *ElementDB) CopyBasicFieldsToElement(element *models.Element) {
 	element.Name = elementDB.Name_Data.String
 	element.NameXSD = elementDB.NameXSD_Data.String
 	element.Type = elementDB.Type_Data.String
+	element.MinOccurs = elementDB.MinOccurs_Data.String
+	element.MaxOccurs = elementDB.MaxOccurs_Data.String
+	element.Default = elementDB.Default_Data.String
+	element.Fixed = elementDB.Fixed_Data.String
+	element.Nillable = elementDB.Nillable_Data.String
+	element.Ref = elementDB.Ref_Data.String
+	element.Abstract = elementDB.Abstract_Data.String
+	element.Form = elementDB.Form_Data.String
+	element.Block = elementDB.Block_Data.String
+	element.Final = elementDB.Final_Data.String
 }
 
 // CopyBasicFieldsToElement_WOP
@@ -485,6 +645,16 @@ func (elementDB *ElementDB) CopyBasicFieldsToElement_WOP(element *models.Element
 	element.Name = elementDB.Name_Data.String
 	element.NameXSD = elementDB.NameXSD_Data.String
 	element.Type = elementDB.Type_Data.String
+	element.MinOccurs = elementDB.MinOccurs_Data.String
+	element.MaxOccurs = elementDB.MaxOccurs_Data.String
+	element.Default = elementDB.Default_Data.String
+	element.Fixed = elementDB.Fixed_Data.String
+	element.Nillable = elementDB.Nillable_Data.String
+	element.Ref = elementDB.Ref_Data.String
+	element.Abstract = elementDB.Abstract_Data.String
+	element.Form = elementDB.Form_Data.String
+	element.Block = elementDB.Block_Data.String
+	element.Final = elementDB.Final_Data.String
 }
 
 // CopyBasicFieldsToElementWOP
@@ -494,6 +664,16 @@ func (elementDB *ElementDB) CopyBasicFieldsToElementWOP(element *ElementWOP) {
 	element.Name = elementDB.Name_Data.String
 	element.NameXSD = elementDB.NameXSD_Data.String
 	element.Type = elementDB.Type_Data.String
+	element.MinOccurs = elementDB.MinOccurs_Data.String
+	element.MaxOccurs = elementDB.MaxOccurs_Data.String
+	element.Default = elementDB.Default_Data.String
+	element.Fixed = elementDB.Fixed_Data.String
+	element.Nillable = elementDB.Nillable_Data.String
+	element.Ref = elementDB.Ref_Data.String
+	element.Abstract = elementDB.Abstract_Data.String
+	element.Form = elementDB.Form_Data.String
+	element.Block = elementDB.Block_Data.String
+	element.Final = elementDB.Final_Data.String
 }
 
 // Backup generates a json file from a slice of all ElementDB instances in the backrepo

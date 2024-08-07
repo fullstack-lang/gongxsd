@@ -14,9 +14,11 @@ func SerializeStage(stage *StageStruct, filename string) {
 	f := excelize.NewFile()
 	{
 		// insertion point
+		SerializeExcelize[All](stage, f)
 		SerializeExcelize[Annotation](stage, f)
 		SerializeExcelize[Attribute](stage, f)
 		SerializeExcelize[AttributeGroup](stage, f)
+		SerializeExcelize[Choice](stage, f)
 		SerializeExcelize[ComplexType](stage, f)
 		SerializeExcelize[Documentation](stage, f)
 		SerializeExcelize[Element](stage, f)

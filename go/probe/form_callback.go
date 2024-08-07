@@ -18,6 +18,89 @@ var __dummmy__letters = slices.Delete([]string{"a"}, 0, 1)
 var __dummy_orm = orm.BackRepoStruct{}
 
 // insertion point
+func __gong__New__AllFormCallback(
+	all *models.All,
+	probe *Probe,
+	formGroup *table.FormGroup,
+) (allFormCallback *AllFormCallback) {
+	allFormCallback = new(AllFormCallback)
+	allFormCallback.probe = probe
+	allFormCallback.all = all
+	allFormCallback.formGroup = formGroup
+
+	allFormCallback.CreationMode = (all == nil)
+
+	return
+}
+
+type AllFormCallback struct {
+	all *models.All
+
+	// If the form call is called on the creation of a new instnace
+	CreationMode bool
+
+	probe *Probe
+
+	formGroup *table.FormGroup
+}
+
+func (allFormCallback *AllFormCallback) OnSave() {
+
+	log.Println("AllFormCallback, OnSave")
+
+	// checkout formStage to have the form group on the stage synchronized with the
+	// back repo (and front repo)
+	allFormCallback.probe.formStage.Checkout()
+
+	if allFormCallback.all == nil {
+		allFormCallback.all = new(models.All).Stage(allFormCallback.probe.stageOfInterest)
+	}
+	all_ := allFormCallback.all
+	_ = all_
+
+	for _, formDiv := range allFormCallback.formGroup.FormDivs {
+		switch formDiv.Name {
+		// insertion point per field
+		case "Name":
+			FormDivBasicFieldToField(&(all_.Name), formDiv)
+		case "Annotation":
+			FormDivSelectFieldToField(&(all_.Annotation), allFormCallback.probe.stageOfInterest, formDiv)
+		case "MinOccurs":
+			FormDivBasicFieldToField(&(all_.MinOccurs), formDiv)
+		case "MaxOccurs":
+			FormDivBasicFieldToField(&(all_.MaxOccurs), formDiv)
+		}
+	}
+
+	// manage the suppress operation
+	if allFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		all_.Unstage(allFormCallback.probe.stageOfInterest)
+	}
+
+	allFormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.All](
+		allFormCallback.probe,
+	)
+	allFormCallback.probe.tableStage.Commit()
+
+	// display a new form by reset the form stage
+	if allFormCallback.CreationMode || allFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		allFormCallback.probe.formStage.Reset()
+		newFormGroup := (&table.FormGroup{
+			Name: table.FormGroupDefaultName.ToString(),
+		}).Stage(allFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__AllFormCallback(
+			nil,
+			allFormCallback.probe,
+			newFormGroup,
+		)
+		all := new(models.All)
+		FillUpForm(all, newFormGroup, allFormCallback.probe)
+		allFormCallback.probe.formStage.Commit()
+	}
+
+	fillUpTree(allFormCallback.probe)
+}
 func __gong__New__AnnotationFormCallback(
 	annotation *models.Annotation,
 	probe *Probe,
@@ -405,6 +488,89 @@ func (attributegroupFormCallback *AttributeGroupFormCallback) OnSave() {
 
 	fillUpTree(attributegroupFormCallback.probe)
 }
+func __gong__New__ChoiceFormCallback(
+	choice *models.Choice,
+	probe *Probe,
+	formGroup *table.FormGroup,
+) (choiceFormCallback *ChoiceFormCallback) {
+	choiceFormCallback = new(ChoiceFormCallback)
+	choiceFormCallback.probe = probe
+	choiceFormCallback.choice = choice
+	choiceFormCallback.formGroup = formGroup
+
+	choiceFormCallback.CreationMode = (choice == nil)
+
+	return
+}
+
+type ChoiceFormCallback struct {
+	choice *models.Choice
+
+	// If the form call is called on the creation of a new instnace
+	CreationMode bool
+
+	probe *Probe
+
+	formGroup *table.FormGroup
+}
+
+func (choiceFormCallback *ChoiceFormCallback) OnSave() {
+
+	log.Println("ChoiceFormCallback, OnSave")
+
+	// checkout formStage to have the form group on the stage synchronized with the
+	// back repo (and front repo)
+	choiceFormCallback.probe.formStage.Checkout()
+
+	if choiceFormCallback.choice == nil {
+		choiceFormCallback.choice = new(models.Choice).Stage(choiceFormCallback.probe.stageOfInterest)
+	}
+	choice_ := choiceFormCallback.choice
+	_ = choice_
+
+	for _, formDiv := range choiceFormCallback.formGroup.FormDivs {
+		switch formDiv.Name {
+		// insertion point per field
+		case "Name":
+			FormDivBasicFieldToField(&(choice_.Name), formDiv)
+		case "Annotation":
+			FormDivSelectFieldToField(&(choice_.Annotation), choiceFormCallback.probe.stageOfInterest, formDiv)
+		case "MinOccurs":
+			FormDivBasicFieldToField(&(choice_.MinOccurs), formDiv)
+		case "MaxOccurs":
+			FormDivBasicFieldToField(&(choice_.MaxOccurs), formDiv)
+		}
+	}
+
+	// manage the suppress operation
+	if choiceFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		choice_.Unstage(choiceFormCallback.probe.stageOfInterest)
+	}
+
+	choiceFormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.Choice](
+		choiceFormCallback.probe,
+	)
+	choiceFormCallback.probe.tableStage.Commit()
+
+	// display a new form by reset the form stage
+	if choiceFormCallback.CreationMode || choiceFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		choiceFormCallback.probe.formStage.Reset()
+		newFormGroup := (&table.FormGroup{
+			Name: table.FormGroupDefaultName.ToString(),
+		}).Stage(choiceFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__ChoiceFormCallback(
+			nil,
+			choiceFormCallback.probe,
+			newFormGroup,
+		)
+		choice := new(models.Choice)
+		FillUpForm(choice, newFormGroup, choiceFormCallback.probe)
+		choiceFormCallback.probe.formStage.Commit()
+	}
+
+	fillUpTree(choiceFormCallback.probe)
+}
 func __gong__New__ComplexTypeFormCallback(
 	complextype *models.ComplexType,
 	probe *Probe,
@@ -706,10 +872,114 @@ func (elementFormCallback *ElementFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(element_.NameXSD), formDiv)
 		case "Type":
 			FormDivBasicFieldToField(&(element_.Type), formDiv)
+		case "MinOccurs":
+			FormDivBasicFieldToField(&(element_.MinOccurs), formDiv)
+		case "MaxOccurs":
+			FormDivBasicFieldToField(&(element_.MaxOccurs), formDiv)
+		case "Default":
+			FormDivBasicFieldToField(&(element_.Default), formDiv)
+		case "Fixed":
+			FormDivBasicFieldToField(&(element_.Fixed), formDiv)
+		case "Nillable":
+			FormDivBasicFieldToField(&(element_.Nillable), formDiv)
+		case "Ref":
+			FormDivBasicFieldToField(&(element_.Ref), formDiv)
+		case "Abstract":
+			FormDivBasicFieldToField(&(element_.Abstract), formDiv)
+		case "Form":
+			FormDivBasicFieldToField(&(element_.Form), formDiv)
+		case "Block":
+			FormDivBasicFieldToField(&(element_.Block), formDiv)
+		case "Final":
+			FormDivBasicFieldToField(&(element_.Final), formDiv)
 		case "SimpleType":
 			FormDivSelectFieldToField(&(element_.SimpleType), elementFormCallback.probe.stageOfInterest, formDiv)
 		case "ComplexType":
 			FormDivSelectFieldToField(&(element_.ComplexType), elementFormCallback.probe.stageOfInterest, formDiv)
+		case "All:Elements":
+			// we need to retrieve the field owner before the change
+			var pastAllOwner *models.All
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "All"
+			rf.Fieldname = "Elements"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				elementFormCallback.probe.stageOfInterest,
+				elementFormCallback.probe.backRepoOfInterest,
+				element_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastAllOwner = reverseFieldOwner.(*models.All)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastAllOwner != nil {
+					idx := slices.Index(pastAllOwner.Elements, element_)
+					pastAllOwner.Elements = slices.Delete(pastAllOwner.Elements, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _all := range *models.GetGongstructInstancesSet[models.All](elementFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _all.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newAllOwner := _all // we have a match
+						if pastAllOwner != nil {
+							if newAllOwner != pastAllOwner {
+								idx := slices.Index(pastAllOwner.Elements, element_)
+								pastAllOwner.Elements = slices.Delete(pastAllOwner.Elements, idx, idx+1)
+								newAllOwner.Elements = append(newAllOwner.Elements, element_)
+							}
+						} else {
+							newAllOwner.Elements = append(newAllOwner.Elements, element_)
+						}
+					}
+				}
+			}
+		case "Choice:Elements":
+			// we need to retrieve the field owner before the change
+			var pastChoiceOwner *models.Choice
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "Choice"
+			rf.Fieldname = "Elements"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				elementFormCallback.probe.stageOfInterest,
+				elementFormCallback.probe.backRepoOfInterest,
+				element_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastChoiceOwner = reverseFieldOwner.(*models.Choice)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastChoiceOwner != nil {
+					idx := slices.Index(pastChoiceOwner.Elements, element_)
+					pastChoiceOwner.Elements = slices.Delete(pastChoiceOwner.Elements, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _choice := range *models.GetGongstructInstancesSet[models.Choice](elementFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _choice.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newChoiceOwner := _choice // we have a match
+						if pastChoiceOwner != nil {
+							if newChoiceOwner != pastChoiceOwner {
+								idx := slices.Index(pastChoiceOwner.Elements, element_)
+								pastChoiceOwner.Elements = slices.Delete(pastChoiceOwner.Elements, idx, idx+1)
+								newChoiceOwner.Elements = append(newChoiceOwner.Elements, element_)
+							}
+						} else {
+							newChoiceOwner.Elements = append(newChoiceOwner.Elements, element_)
+						}
+					}
+				}
+			}
 		case "Schema:Elements":
 			// we need to retrieve the field owner before the change
 			var pastSchemaOwner *models.Schema
@@ -1660,6 +1930,10 @@ func (sequenceFormCallback *SequenceFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(sequence_.Name), formDiv)
 		case "Annotation":
 			FormDivSelectFieldToField(&(sequence_.Annotation), sequenceFormCallback.probe.stageOfInterest, formDiv)
+		case "MinOccurs":
+			FormDivBasicFieldToField(&(sequence_.MinOccurs), formDiv)
+		case "MaxOccurs":
+			FormDivBasicFieldToField(&(sequence_.MaxOccurs), formDiv)
 		}
 	}
 

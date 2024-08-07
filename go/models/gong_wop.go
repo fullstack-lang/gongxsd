@@ -7,6 +7,20 @@ import "time"
 var __GONG_time_The_fool_doth_think_he_is_wise__ = time.Hour
 
 // insertion point
+type All_WOP struct {
+	// insertion point
+	Name string
+	MinOccurs string
+	MaxOccurs string
+}
+
+func (from *All) CopyBasicFields(to *All) {
+	// insertion point
+	to.Name = from.Name
+	to.MinOccurs = from.MinOccurs
+	to.MaxOccurs = from.MaxOccurs
+}
+
 type Annotation_WOP struct {
 	// insertion point
 	Name string
@@ -61,6 +75,20 @@ func (from *AttributeGroup) CopyBasicFields(to *AttributeGroup) {
 	to.Ref = from.Ref
 }
 
+type Choice_WOP struct {
+	// insertion point
+	Name string
+	MinOccurs string
+	MaxOccurs string
+}
+
+func (from *Choice) CopyBasicFields(to *Choice) {
+	// insertion point
+	to.Name = from.Name
+	to.MinOccurs = from.MinOccurs
+	to.MaxOccurs = from.MaxOccurs
+}
+
 type ComplexType_WOP struct {
 	// insertion point
 	Name string
@@ -94,6 +122,16 @@ type Element_WOP struct {
 	Name string
 	NameXSD string
 	Type string
+	MinOccurs string
+	MaxOccurs string
+	Default string
+	Fixed string
+	Nillable string
+	Ref string
+	Abstract string
+	Form string
+	Block string
+	Final string
 }
 
 func (from *Element) CopyBasicFields(to *Element) {
@@ -101,6 +139,16 @@ func (from *Element) CopyBasicFields(to *Element) {
 	to.Name = from.Name
 	to.NameXSD = from.NameXSD
 	to.Type = from.Type
+	to.MinOccurs = from.MinOccurs
+	to.MaxOccurs = from.MaxOccurs
+	to.Default = from.Default
+	to.Fixed = from.Fixed
+	to.Nillable = from.Nillable
+	to.Ref = from.Ref
+	to.Abstract = from.Abstract
+	to.Form = from.Form
+	to.Block = from.Block
+	to.Final = from.Final
 }
 
 type Enumeration_WOP struct {
@@ -214,11 +262,15 @@ func (from *Schema) CopyBasicFields(to *Schema) {
 type Sequence_WOP struct {
 	// insertion point
 	Name string
+	MinOccurs string
+	MaxOccurs string
 }
 
 func (from *Sequence) CopyBasicFields(to *Sequence) {
 	// insertion point
 	to.Name = from.Name
+	to.MinOccurs = from.MinOccurs
+	to.MaxOccurs = from.MaxOccurs
 }
 
 type SimpleType_WOP struct {
