@@ -237,6 +237,7 @@ func FillUpForm[T models.Gongstruct](
 		AssociationFieldToForm("MinLength", instanceWithInferedType.MinLength, formGroup, probe)
 		AssociationFieldToForm("MaxLength", instanceWithInferedType.MaxLength, formGroup, probe)
 		AssociationFieldToForm("Length", instanceWithInferedType.Length, formGroup, probe)
+		AssociationFieldToForm("TotalDigit", instanceWithInferedType.TotalDigit, formGroup, probe)
 
 	case *models.Schema:
 		// insertion point
@@ -286,6 +287,14 @@ func FillUpForm[T models.Gongstruct](
 					probe)
 			}
 		}
+
+	case *models.TotalDigit:
+		// insertion point
+		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		AssociationFieldToForm("Annotation", instanceWithInferedType.Annotation, formGroup, probe)
+		BasicFieldtoForm("Value", instanceWithInferedType.Value, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
 
 	case *models.WhiteSpace:
 		// insertion point

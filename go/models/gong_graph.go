@@ -50,6 +50,9 @@ func IsStaged[Type Gongstruct](stage *StageStruct, instance *Type) (ok bool) {
 	case *SimpleType:
 		ok = stage.IsStagedSimpleType(target)
 
+	case *TotalDigit:
+		ok = stage.IsStagedTotalDigit(target)
+
 	case *WhiteSpace:
 		ok = stage.IsStagedWhiteSpace(target)
 
@@ -165,6 +168,13 @@ func (stage *StageStruct) IsStagedSimpleType(simpletype *SimpleType) (ok bool) {
 	return
 }
 
+func (stage *StageStruct) IsStagedTotalDigit(totaldigit *TotalDigit) (ok bool) {
+
+	_, ok = stage.TotalDigits[totaldigit]
+
+	return
+}
+
 func (stage *StageStruct) IsStagedWhiteSpace(whitespace *WhiteSpace) (ok bool) {
 
 	_, ok = stage.WhiteSpaces[whitespace]
@@ -224,6 +234,9 @@ func StageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 
 	case *SimpleType:
 		stage.StageBranchSimpleType(target)
+
+	case *TotalDigit:
+		stage.StageBranchTotalDigit(target)
 
 	case *WhiteSpace:
 		stage.StageBranchWhiteSpace(target)
@@ -472,6 +485,9 @@ func (stage *StageStruct) StageBranchRestriction(restriction *Restriction) {
 	if restriction.Length != nil {
 		StageBranch(stage, restriction.Length)
 	}
+	if restriction.TotalDigit != nil {
+		StageBranch(stage, restriction.TotalDigit)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 	for _, _enumeration := range restriction.Enumerations {
@@ -543,6 +559,24 @@ func (stage *StageStruct) StageBranchSimpleType(simpletype *SimpleType) {
 	}
 	if simpletype.Restriction != nil {
 		StageBranch(stage, simpletype.Restriction)
+	}
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) StageBranchTotalDigit(totaldigit *TotalDigit) {
+
+	// check if instance is already staged
+	if IsStaged(stage, totaldigit) {
+		return
+	}
+
+	totaldigit.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+	if totaldigit.Annotation != nil {
+		StageBranch(stage, totaldigit.Annotation)
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
@@ -636,6 +670,10 @@ func CopyBranch[Type Gongstruct](from *Type) (to *Type) {
 
 	case *SimpleType:
 		toT := CopyBranchSimpleType(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
+	case *TotalDigit:
+		toT := CopyBranchTotalDigit(mapOrigCopy, fromT)
 		return any(toT).(*Type)
 
 	case *WhiteSpace:
@@ -934,6 +972,9 @@ func CopyBranchRestriction(mapOrigCopy map[any]any, restrictionFrom *Restriction
 	if restrictionFrom.Length != nil {
 		restrictionTo.Length = CopyBranchLength(mapOrigCopy, restrictionFrom.Length)
 	}
+	if restrictionFrom.TotalDigit != nil {
+		restrictionTo.TotalDigit = CopyBranchTotalDigit(mapOrigCopy, restrictionFrom.TotalDigit)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 	for _, _enumeration := range restrictionFrom.Enumerations {
@@ -1024,6 +1065,28 @@ func CopyBranchSimpleType(mapOrigCopy map[any]any, simpletypeFrom *SimpleType) (
 	return
 }
 
+func CopyBranchTotalDigit(mapOrigCopy map[any]any, totaldigitFrom *TotalDigit) (totaldigitTo *TotalDigit) {
+
+	// totaldigitFrom has already been copied
+	if _totaldigitTo, ok := mapOrigCopy[totaldigitFrom]; ok {
+		totaldigitTo = _totaldigitTo.(*TotalDigit)
+		return
+	}
+
+	totaldigitTo = new(TotalDigit)
+	mapOrigCopy[totaldigitFrom] = totaldigitTo
+	totaldigitFrom.CopyBasicFields(totaldigitTo)
+
+	//insertion point for the staging of instances referenced by pointers
+	if totaldigitFrom.Annotation != nil {
+		totaldigitTo.Annotation = CopyBranchAnnotation(mapOrigCopy, totaldigitFrom.Annotation)
+	}
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+	return
+}
+
 func CopyBranchWhiteSpace(mapOrigCopy map[any]any, whitespaceFrom *WhiteSpace) (whitespaceTo *WhiteSpace) {
 
 	// whitespaceFrom has already been copied
@@ -1098,6 +1161,9 @@ func UnstageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 
 	case *SimpleType:
 		stage.UnstageBranchSimpleType(target)
+
+	case *TotalDigit:
+		stage.UnstageBranchTotalDigit(target)
 
 	case *WhiteSpace:
 		stage.UnstageBranchWhiteSpace(target)
@@ -1346,6 +1412,9 @@ func (stage *StageStruct) UnstageBranchRestriction(restriction *Restriction) {
 	if restriction.Length != nil {
 		UnstageBranch(stage, restriction.Length)
 	}
+	if restriction.TotalDigit != nil {
+		UnstageBranch(stage, restriction.TotalDigit)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 	for _, _enumeration := range restriction.Enumerations {
@@ -1417,6 +1486,24 @@ func (stage *StageStruct) UnstageBranchSimpleType(simpletype *SimpleType) {
 	}
 	if simpletype.Restriction != nil {
 		UnstageBranch(stage, simpletype.Restriction)
+	}
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) UnstageBranchTotalDigit(totaldigit *TotalDigit) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, totaldigit) {
+		return
+	}
+
+	totaldigit.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+	if totaldigit.Annotation != nil {
+		UnstageBranch(stage, totaldigit.Annotation)
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers

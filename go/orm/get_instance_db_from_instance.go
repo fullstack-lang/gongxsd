@@ -75,6 +75,10 @@ func GetInstanceDBFromInstance[T models.Gongstruct, T2 GongstructDB](
 		simpletypeInstance := any(concreteInstance).(*models.SimpleType)
 		ret2 := backRepo.BackRepoSimpleType.GetSimpleTypeDBFromSimpleTypePtr(simpletypeInstance)
 		ret = any(ret2).(*T2)
+	case *models.TotalDigit:
+		totaldigitInstance := any(concreteInstance).(*models.TotalDigit)
+		ret2 := backRepo.BackRepoTotalDigit.GetTotalDigitDBFromTotalDigitPtr(totaldigitInstance)
+		ret = any(ret2).(*T2)
 	case *models.WhiteSpace:
 		whitespaceInstance := any(concreteInstance).(*models.WhiteSpace)
 		ret2 := backRepo.BackRepoWhiteSpace.GetWhiteSpaceDBFromWhiteSpacePtr(whitespaceInstance)
@@ -164,6 +168,11 @@ func GetID[T models.Gongstruct](
 		id = int(tmp.ID)
 	case *models.SimpleType:
 		tmp := GetInstanceDBFromInstance[models.SimpleType, SimpleTypeDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.TotalDigit:
+		tmp := GetInstanceDBFromInstance[models.TotalDigit, TotalDigitDB](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)
@@ -257,6 +266,11 @@ func GetIDPointer[T models.PointerToGongstruct](
 		id = int(tmp.ID)
 	case *models.SimpleType:
 		tmp := GetInstanceDBFromInstance[models.SimpleType, SimpleTypeDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.TotalDigit:
+		tmp := GetInstanceDBFromInstance[models.TotalDigit, TotalDigitDB](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)

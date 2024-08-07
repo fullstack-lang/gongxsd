@@ -74,6 +74,10 @@ func Process(stage *StageStruct) {
 		if x.Length != nil {
 			x.Length.Name = prefix(x.Name)
 		}
+		if x.TotalDigit != nil {
+			x.TotalDigit.Name = prefix(x.Name)
+		}
+
 		if x.Annotation != nil {
 			x.Annotation.Name = prefix(x.Name)
 		}
@@ -123,6 +127,11 @@ func Process(stage *StageStruct) {
 		}
 	}
 	for x := range *GetGongstructInstancesSet[Length](stage) {
+		if x.Annotation != nil {
+			x.Annotation.Name = prefix(x.Name)
+		}
+	}
+	for x := range *GetGongstructInstancesSet[TotalDigit](stage) {
 		if x.Annotation != nil {
 			x.Annotation.Name = prefix(x.Name)
 		}

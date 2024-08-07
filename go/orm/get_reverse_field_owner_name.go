@@ -131,6 +131,11 @@ func GetReverseFieldOwnerName[T models.Gongstruct](
 			}
 		}
 
+	case *models.TotalDigit:
+		switch reverseField.GongstructName {
+		// insertion point
+		}
+
 	case *models.WhiteSpace:
 		switch reverseField.GongstructName {
 		// insertion point
@@ -254,6 +259,11 @@ func GetReverseFieldOwner[T models.Gongstruct](
 			case "SimpleTypes":
 				res = stage.Schema_SimpleTypes_reverseMap[inst]
 			}
+		}
+
+	case *models.TotalDigit:
+		switch reverseField.GongstructName {
+		// insertion point
 		}
 
 	case *models.WhiteSpace:

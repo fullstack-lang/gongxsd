@@ -1188,6 +1188,8 @@ func (restrictionFormCallback *RestrictionFormCallback) OnSave() {
 			FormDivSelectFieldToField(&(restriction_.MaxLength), restrictionFormCallback.probe.stageOfInterest, formDiv)
 		case "Length":
 			FormDivSelectFieldToField(&(restriction_.Length), restrictionFormCallback.probe.stageOfInterest, formDiv)
+		case "TotalDigit":
+			FormDivSelectFieldToField(&(restriction_.TotalDigit), restrictionFormCallback.probe.stageOfInterest, formDiv)
 		}
 	}
 
@@ -1504,6 +1506,87 @@ func (simpletypeFormCallback *SimpleTypeFormCallback) OnSave() {
 	}
 
 	fillUpTree(simpletypeFormCallback.probe)
+}
+func __gong__New__TotalDigitFormCallback(
+	totaldigit *models.TotalDigit,
+	probe *Probe,
+	formGroup *table.FormGroup,
+) (totaldigitFormCallback *TotalDigitFormCallback) {
+	totaldigitFormCallback = new(TotalDigitFormCallback)
+	totaldigitFormCallback.probe = probe
+	totaldigitFormCallback.totaldigit = totaldigit
+	totaldigitFormCallback.formGroup = formGroup
+
+	totaldigitFormCallback.CreationMode = (totaldigit == nil)
+
+	return
+}
+
+type TotalDigitFormCallback struct {
+	totaldigit *models.TotalDigit
+
+	// If the form call is called on the creation of a new instnace
+	CreationMode bool
+
+	probe *Probe
+
+	formGroup *table.FormGroup
+}
+
+func (totaldigitFormCallback *TotalDigitFormCallback) OnSave() {
+
+	log.Println("TotalDigitFormCallback, OnSave")
+
+	// checkout formStage to have the form group on the stage synchronized with the
+	// back repo (and front repo)
+	totaldigitFormCallback.probe.formStage.Checkout()
+
+	if totaldigitFormCallback.totaldigit == nil {
+		totaldigitFormCallback.totaldigit = new(models.TotalDigit).Stage(totaldigitFormCallback.probe.stageOfInterest)
+	}
+	totaldigit_ := totaldigitFormCallback.totaldigit
+	_ = totaldigit_
+
+	for _, formDiv := range totaldigitFormCallback.formGroup.FormDivs {
+		switch formDiv.Name {
+		// insertion point per field
+		case "Name":
+			FormDivBasicFieldToField(&(totaldigit_.Name), formDiv)
+		case "Annotation":
+			FormDivSelectFieldToField(&(totaldigit_.Annotation), totaldigitFormCallback.probe.stageOfInterest, formDiv)
+		case "Value":
+			FormDivBasicFieldToField(&(totaldigit_.Value), formDiv)
+		}
+	}
+
+	// manage the suppress operation
+	if totaldigitFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		totaldigit_.Unstage(totaldigitFormCallback.probe.stageOfInterest)
+	}
+
+	totaldigitFormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.TotalDigit](
+		totaldigitFormCallback.probe,
+	)
+	totaldigitFormCallback.probe.tableStage.Commit()
+
+	// display a new form by reset the form stage
+	if totaldigitFormCallback.CreationMode || totaldigitFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		totaldigitFormCallback.probe.formStage.Reset()
+		newFormGroup := (&table.FormGroup{
+			Name: table.FormGroupDefaultName.ToString(),
+		}).Stage(totaldigitFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__TotalDigitFormCallback(
+			nil,
+			totaldigitFormCallback.probe,
+			newFormGroup,
+		)
+		totaldigit := new(models.TotalDigit)
+		FillUpForm(totaldigit, newFormGroup, totaldigitFormCallback.probe)
+		totaldigitFormCallback.probe.formStage.Commit()
+	}
+
+	fillUpTree(totaldigitFormCallback.probe)
 }
 func __gong__New__WhiteSpaceFormCallback(
 	whitespace *models.WhiteSpace,

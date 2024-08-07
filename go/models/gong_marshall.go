@@ -700,6 +700,46 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 
 	}
 
+	map_TotalDigit_Identifiers := make(map[*TotalDigit]string)
+	_ = map_TotalDigit_Identifiers
+
+	totaldigitOrdered := []*TotalDigit{}
+	for totaldigit := range stage.TotalDigits {
+		totaldigitOrdered = append(totaldigitOrdered, totaldigit)
+	}
+	sort.Slice(totaldigitOrdered[:], func(i, j int) bool {
+		return totaldigitOrdered[i].Name < totaldigitOrdered[j].Name
+	})
+	if len(totaldigitOrdered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, totaldigit := range totaldigitOrdered {
+
+		id = generatesIdentifier("TotalDigit", idx, totaldigit.Name)
+		map_TotalDigit_Identifiers[totaldigit] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "TotalDigit")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", totaldigit.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(totaldigit.Name))
+		initializerStatements += setValueField
+
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Value")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(totaldigit.Value))
+		initializerStatements += setValueField
+
+	}
+
 	map_WhiteSpace_Identifiers := make(map[*WhiteSpace]string)
 	_ = map_WhiteSpace_Identifiers
 
@@ -1035,6 +1075,14 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			pointersInitializesStatements += setPointerField
 		}
 
+		if restriction.TotalDigit != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "TotalDigit")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_TotalDigit_Identifiers[restriction.TotalDigit])
+			pointersInitializesStatements += setPointerField
+		}
+
 	}
 
 	for idx, schema := range schemaOrdered {
@@ -1126,6 +1174,24 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Restriction")
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Restriction_Identifiers[simpletype.Restriction])
+			pointersInitializesStatements += setPointerField
+		}
+
+	}
+
+	for idx, totaldigit := range totaldigitOrdered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("TotalDigit", idx, totaldigit.Name)
+		map_TotalDigit_Identifiers[totaldigit] = id
+
+		// Initialisation of values
+		if totaldigit.Annotation != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Annotation")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Annotation_Identifiers[totaldigit.Annotation])
 			pointersInitializesStatements += setPointerField
 		}
 

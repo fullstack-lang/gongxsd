@@ -47,3 +47,9 @@ type Length struct {
 	ElementWithAnnotation
 	ElementWithValueAttribute
 }
+
+type TotalDigit struct {
+	Name string
+	ElementWithAnnotation
+	ElementWithValueAttribute
+}

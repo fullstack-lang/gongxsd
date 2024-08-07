@@ -221,6 +221,19 @@ func FillUpFormFromGongstructName(
 		simpletype := new(models.SimpleType)
 		formGroup.HasSuppressButton = !isNewInstance
 		FillUpForm(simpletype, formGroup, probe)
+	case "TotalDigit":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "TotalDigit Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__TotalDigitFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		totaldigit := new(models.TotalDigit)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(totaldigit, formGroup, probe)
 	case "WhiteSpace":
 		formGroup := (&form.FormGroup{
 			Name:  form.FormGroupDefaultName.ToString(),

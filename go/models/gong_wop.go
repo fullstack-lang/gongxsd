@@ -189,6 +189,18 @@ func (from *SimpleType) CopyBasicFields(to *SimpleType) {
 	to.NameXSD = from.NameXSD
 }
 
+type TotalDigit_WOP struct {
+	// insertion point
+	Name string
+	Value string
+}
+
+func (from *TotalDigit) CopyBasicFields(to *TotalDigit) {
+	// insertion point
+	to.Name = from.Name
+	to.Value = from.Value
+}
+
 type WhiteSpace_WOP struct {
 	// insertion point
 	Name string

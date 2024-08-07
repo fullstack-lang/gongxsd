@@ -65,6 +65,7 @@ type Restriction struct {
 	MinLength    *MinLength     `xml:"minLength"`
 	MaxLength    *MaxLength     `xml:"maxLength"`
 	Length       *Length        `xml:"length"`
+	TotalDigit   *TotalDigit    `xml:"totalDigits"`
 }
 
 type ComplexType struct {

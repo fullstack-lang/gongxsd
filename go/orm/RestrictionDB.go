@@ -81,6 +81,10 @@ type RestrictionPointersEncoding struct {
 	// field Length is a pointer to another Struct (optional or 0..1)
 	// This field is generated into another field to enable AS ONE association
 	LengthID sql.NullInt64
+
+	// field TotalDigit is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	TotalDigitID sql.NullInt64
 }
 
 // RestrictionDB describes a restriction in the database
@@ -366,6 +370,18 @@ func (backRepoRestriction *BackRepoRestrictionStruct) CommitPhaseTwoInstance(bac
 			restrictionDB.LengthID.Valid = true
 		}
 
+		// commit pointer value restriction.TotalDigit translates to updating the restriction.TotalDigitID
+		restrictionDB.TotalDigitID.Valid = true // allow for a 0 value (nil association)
+		if restriction.TotalDigit != nil {
+			if TotalDigitId, ok := backRepo.BackRepoTotalDigit.Map_TotalDigitPtr_TotalDigitDBID[restriction.TotalDigit]; ok {
+				restrictionDB.TotalDigitID.Int64 = int64(TotalDigitId)
+				restrictionDB.TotalDigitID.Valid = true
+			}
+		} else {
+			restrictionDB.TotalDigitID.Int64 = 0
+			restrictionDB.TotalDigitID.Valid = true
+		}
+
 		query := backRepoRestriction.db.Save(&restrictionDB)
 		if query.Error != nil {
 			log.Fatalln(query.Error)
@@ -527,6 +543,11 @@ func (restrictionDB *RestrictionDB) DecodePointers(backRepo *BackRepoStruct, res
 	restriction.Length = nil
 	if restrictionDB.LengthID.Int64 != 0 {
 		restriction.Length = backRepo.BackRepoLength.Map_LengthDBID_LengthPtr[uint(restrictionDB.LengthID.Int64)]
+	}
+	// TotalDigit field
+	restriction.TotalDigit = nil
+	if restrictionDB.TotalDigitID.Int64 != 0 {
+		restriction.TotalDigit = backRepo.BackRepoTotalDigit.Map_TotalDigitDBID_TotalDigitPtr[uint(restrictionDB.TotalDigitID.Int64)]
 	}
 	return
 }
@@ -814,6 +835,12 @@ func (backRepoRestriction *BackRepoRestrictionStruct) RestorePhaseTwo() {
 		if restrictionDB.LengthID.Int64 != 0 {
 			restrictionDB.LengthID.Int64 = int64(BackRepoLengthid_atBckpTime_newID[uint(restrictionDB.LengthID.Int64)])
 			restrictionDB.LengthID.Valid = true
+		}
+
+		// reindexing TotalDigit field
+		if restrictionDB.TotalDigitID.Int64 != 0 {
+			restrictionDB.TotalDigitID.Int64 = int64(BackRepoTotalDigitid_atBckpTime_newID[uint(restrictionDB.TotalDigitID.Int64)])
+			restrictionDB.TotalDigitID.Valid = true
 		}
 
 		// update databse with new index encoding

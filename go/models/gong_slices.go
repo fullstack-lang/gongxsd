@@ -192,6 +192,9 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 	case *SimpleType:
 		// insertion point per field
 
+	case *TotalDigit:
+		// insertion point per field
+
 	case *WhiteSpace:
 		// insertion point per field
 
@@ -295,6 +298,9 @@ func (stage *StageStruct) ComputeReverseMaps() {
 	}
 
 	// Compute reverse map for named struct SimpleType
+	// insertion point per field
+
+	// Compute reverse map for named struct TotalDigit
 	// insertion point per field
 
 	// Compute reverse map for named struct WhiteSpace

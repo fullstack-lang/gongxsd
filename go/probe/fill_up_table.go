@@ -50,6 +50,8 @@ func fillUpTablePointerToGongstruct[T models.PointerToGongstruct](
 		fillUpTable[models.Sequence](probe)
 	case *models.SimpleType:
 		fillUpTable[models.SimpleType](probe)
+	case *models.TotalDigit:
+		fillUpTable[models.TotalDigit](probe)
 	case *models.WhiteSpace:
 		fillUpTable[models.WhiteSpace](probe)
 	default:

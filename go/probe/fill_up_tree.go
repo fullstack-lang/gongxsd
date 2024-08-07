@@ -212,6 +212,16 @@ func fillUpTree(
 
 				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
 			}
+		case "TotalDigit":
+			nodeGongstruct.Name = name
+			set := *models.GetGongstructInstancesSet[models.TotalDigit](probe.stageOfInterest)
+			for _totaldigit := range set {
+				nodeInstance := (&tree.Node{Name: _totaldigit.GetName()}).Stage(probe.treeStage)
+				nodeInstance.IsNodeClickable = true
+				nodeInstance.Impl = NewInstanceNodeCallback(_totaldigit, "TotalDigit", probe)
+
+				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
+			}
 		case "WhiteSpace":
 			nodeGongstruct.Name = name
 			set := *models.GetGongstructInstancesSet[models.WhiteSpace](probe.stageOfInterest)

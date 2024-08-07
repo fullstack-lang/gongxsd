@@ -152,6 +152,13 @@ func registerControllers(r *gin.Engine) {
 		v1.PUT("/v1/simpletypes/:id", GetController().UpdateSimpleType)
 		v1.DELETE("/v1/simpletypes/:id", GetController().DeleteSimpleType)
 
+		v1.GET("/v1/totaldigits", GetController().GetTotalDigits)
+		v1.GET("/v1/totaldigits/:id", GetController().GetTotalDigit)
+		v1.POST("/v1/totaldigits", GetController().PostTotalDigit)
+		v1.PATCH("/v1/totaldigits/:id", GetController().UpdateTotalDigit)
+		v1.PUT("/v1/totaldigits/:id", GetController().UpdateTotalDigit)
+		v1.DELETE("/v1/totaldigits/:id", GetController().DeleteTotalDigit)
+
 		v1.GET("/v1/whitespaces", GetController().GetWhiteSpaces)
 		v1.GET("/v1/whitespaces/:id", GetController().GetWhiteSpace)
 		v1.POST("/v1/whitespaces", GetController().PostWhiteSpace)

@@ -34,6 +34,8 @@ type BackRepoData struct {
 
 	SimpleTypeAPIs []*SimpleTypeAPI
 
+	TotalDigitAPIs []*TotalDigitAPI
+
 	WhiteSpaceAPIs []*WhiteSpaceAPI
 }
 
@@ -187,6 +189,16 @@ func CopyBackRepoToBackRepoData(backRepo *BackRepoStruct, backRepoData *BackRepo
 		simpletypeDB.CopyBasicFieldsToSimpleType_WOP(&simpletypeAPI.SimpleType_WOP)
 
 		backRepoData.SimpleTypeAPIs = append(backRepoData.SimpleTypeAPIs, &simpletypeAPI)
+	}
+
+	for _, totaldigitDB := range backRepo.BackRepoTotalDigit.Map_TotalDigitDBID_TotalDigitDB {
+
+		var totaldigitAPI TotalDigitAPI
+		totaldigitAPI.ID = totaldigitDB.ID
+		totaldigitAPI.TotalDigitPointersEncoding = totaldigitDB.TotalDigitPointersEncoding
+		totaldigitDB.CopyBasicFieldsToTotalDigit_WOP(&totaldigitAPI.TotalDigit_WOP)
+
+		backRepoData.TotalDigitAPIs = append(backRepoData.TotalDigitAPIs, &totaldigitAPI)
 	}
 
 	for _, whitespaceDB := range backRepo.BackRepoWhiteSpace.Map_WhiteSpaceDBID_WhiteSpaceDB {

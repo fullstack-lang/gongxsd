@@ -196,6 +196,15 @@ type StageStruct struct {
 	OnAfterSimpleTypeDeleteCallback OnAfterDeleteInterface[SimpleType]
 	OnAfterSimpleTypeReadCallback   OnAfterReadInterface[SimpleType]
 
+	TotalDigits           map[*TotalDigit]any
+	TotalDigits_mapString map[string]*TotalDigit
+
+	// insertion point for slice of pointers maps
+	OnAfterTotalDigitCreateCallback OnAfterCreateInterface[TotalDigit]
+	OnAfterTotalDigitUpdateCallback OnAfterUpdateInterface[TotalDigit]
+	OnAfterTotalDigitDeleteCallback OnAfterDeleteInterface[TotalDigit]
+	OnAfterTotalDigitReadCallback   OnAfterReadInterface[TotalDigit]
+
 	WhiteSpaces           map[*WhiteSpace]any
 	WhiteSpaces_mapString map[string]*WhiteSpace
 
@@ -303,6 +312,8 @@ type BackRepoInterface interface {
 	CheckoutSequence(sequence *Sequence)
 	CommitSimpleType(simpletype *SimpleType)
 	CheckoutSimpleType(simpletype *SimpleType)
+	CommitTotalDigit(totaldigit *TotalDigit)
+	CheckoutTotalDigit(totaldigit *TotalDigit)
 	CommitWhiteSpace(whitespace *WhiteSpace)
 	CheckoutWhiteSpace(whitespace *WhiteSpace)
 	GetLastCommitFromBackNb() uint
@@ -357,6 +368,9 @@ func NewStage(path string) (stage *StageStruct) {
 		SimpleTypes:           make(map[*SimpleType]any),
 		SimpleTypes_mapString: make(map[string]*SimpleType),
 
+		TotalDigits:           make(map[*TotalDigit]any),
+		TotalDigits_mapString: make(map[string]*TotalDigit),
+
 		WhiteSpaces:           make(map[*WhiteSpace]any),
 		WhiteSpaces_mapString: make(map[string]*WhiteSpace),
 
@@ -408,6 +422,7 @@ func (stage *StageStruct) Commit() {
 	stage.Map_GongStructName_InstancesNb["Schema"] = len(stage.Schemas)
 	stage.Map_GongStructName_InstancesNb["Sequence"] = len(stage.Sequences)
 	stage.Map_GongStructName_InstancesNb["SimpleType"] = len(stage.SimpleTypes)
+	stage.Map_GongStructName_InstancesNb["TotalDigit"] = len(stage.TotalDigits)
 	stage.Map_GongStructName_InstancesNb["WhiteSpace"] = len(stage.WhiteSpaces)
 
 }
@@ -434,6 +449,7 @@ func (stage *StageStruct) Checkout() {
 	stage.Map_GongStructName_InstancesNb["Schema"] = len(stage.Schemas)
 	stage.Map_GongStructName_InstancesNb["Sequence"] = len(stage.Sequences)
 	stage.Map_GongStructName_InstancesNb["SimpleType"] = len(stage.SimpleTypes)
+	stage.Map_GongStructName_InstancesNb["TotalDigit"] = len(stage.TotalDigits)
 	stage.Map_GongStructName_InstancesNb["WhiteSpace"] = len(stage.WhiteSpaces)
 
 }
@@ -1217,6 +1233,56 @@ func (simpletype *SimpleType) GetName() (res string) {
 	return simpletype.Name
 }
 
+// Stage puts totaldigit to the model stage
+func (totaldigit *TotalDigit) Stage(stage *StageStruct) *TotalDigit {
+	stage.TotalDigits[totaldigit] = __member
+	stage.TotalDigits_mapString[totaldigit.Name] = totaldigit
+
+	return totaldigit
+}
+
+// Unstage removes totaldigit off the model stage
+func (totaldigit *TotalDigit) Unstage(stage *StageStruct) *TotalDigit {
+	delete(stage.TotalDigits, totaldigit)
+	delete(stage.TotalDigits_mapString, totaldigit.Name)
+	return totaldigit
+}
+
+// UnstageVoid removes totaldigit off the model stage
+func (totaldigit *TotalDigit) UnstageVoid(stage *StageStruct) {
+	delete(stage.TotalDigits, totaldigit)
+	delete(stage.TotalDigits_mapString, totaldigit.Name)
+}
+
+// commit totaldigit to the back repo (if it is already staged)
+func (totaldigit *TotalDigit) Commit(stage *StageStruct) *TotalDigit {
+	if _, ok := stage.TotalDigits[totaldigit]; ok {
+		if stage.BackRepo != nil {
+			stage.BackRepo.CommitTotalDigit(totaldigit)
+		}
+	}
+	return totaldigit
+}
+
+func (totaldigit *TotalDigit) CommitVoid(stage *StageStruct) {
+	totaldigit.Commit(stage)
+}
+
+// Checkout totaldigit to the back repo (if it is already staged)
+func (totaldigit *TotalDigit) Checkout(stage *StageStruct) *TotalDigit {
+	if _, ok := stage.TotalDigits[totaldigit]; ok {
+		if stage.BackRepo != nil {
+			stage.BackRepo.CheckoutTotalDigit(totaldigit)
+		}
+	}
+	return totaldigit
+}
+
+// for satisfaction of GongStruct interface
+func (totaldigit *TotalDigit) GetName() (res string) {
+	return totaldigit.Name
+}
+
 // Stage puts whitespace to the model stage
 func (whitespace *WhiteSpace) Stage(stage *StageStruct) *WhiteSpace {
 	stage.WhiteSpaces[whitespace] = __member
@@ -1284,6 +1350,7 @@ type AllModelsStructCreateInterface interface { // insertion point for Callbacks
 	CreateORMSchema(Schema *Schema)
 	CreateORMSequence(Sequence *Sequence)
 	CreateORMSimpleType(SimpleType *SimpleType)
+	CreateORMTotalDigit(TotalDigit *TotalDigit)
 	CreateORMWhiteSpace(WhiteSpace *WhiteSpace)
 }
 
@@ -1303,6 +1370,7 @@ type AllModelsStructDeleteInterface interface { // insertion point for Callbacks
 	DeleteORMSchema(Schema *Schema)
 	DeleteORMSequence(Sequence *Sequence)
 	DeleteORMSimpleType(SimpleType *SimpleType)
+	DeleteORMTotalDigit(TotalDigit *TotalDigit)
 	DeleteORMWhiteSpace(WhiteSpace *WhiteSpace)
 }
 
@@ -1351,6 +1419,9 @@ func (stage *StageStruct) Reset() { // insertion point for array reset
 
 	stage.SimpleTypes = make(map[*SimpleType]any)
 	stage.SimpleTypes_mapString = make(map[string]*SimpleType)
+
+	stage.TotalDigits = make(map[*TotalDigit]any)
+	stage.TotalDigits_mapString = make(map[string]*TotalDigit)
 
 	stage.WhiteSpaces = make(map[*WhiteSpace]any)
 	stage.WhiteSpaces_mapString = make(map[string]*WhiteSpace)
@@ -1402,6 +1473,9 @@ func (stage *StageStruct) Nil() { // insertion point for array nil
 
 	stage.SimpleTypes = nil
 	stage.SimpleTypes_mapString = nil
+
+	stage.TotalDigits = nil
+	stage.TotalDigits_mapString = nil
 
 	stage.WhiteSpaces = nil
 	stage.WhiteSpaces_mapString = nil
@@ -1467,6 +1541,10 @@ func (stage *StageStruct) Unstage() { // insertion point for array nil
 
 	for simpletype := range stage.SimpleTypes {
 		simpletype.Unstage(stage)
+	}
+
+	for totaldigit := range stage.TotalDigits {
+		totaldigit.Unstage(stage)
 	}
 
 	for whitespace := range stage.WhiteSpaces {
@@ -1563,6 +1641,8 @@ func GongGetSet[Type GongstructSet](stage *StageStruct) *Type {
 		return any(&stage.Sequences).(*Type)
 	case map[*SimpleType]any:
 		return any(&stage.SimpleTypes).(*Type)
+	case map[*TotalDigit]any:
+		return any(&stage.TotalDigits).(*Type)
 	case map[*WhiteSpace]any:
 		return any(&stage.WhiteSpaces).(*Type)
 	default:
@@ -1607,6 +1687,8 @@ func GongGetMap[Type GongstructMapString](stage *StageStruct) *Type {
 		return any(&stage.Sequences_mapString).(*Type)
 	case map[string]*SimpleType:
 		return any(&stage.SimpleTypes_mapString).(*Type)
+	case map[string]*TotalDigit:
+		return any(&stage.TotalDigits_mapString).(*Type)
 	case map[string]*WhiteSpace:
 		return any(&stage.WhiteSpaces_mapString).(*Type)
 	default:
@@ -1651,6 +1733,8 @@ func GetGongstructInstancesSet[Type Gongstruct](stage *StageStruct) *map[*Type]a
 		return any(&stage.Sequences).(*map[*Type]any)
 	case SimpleType:
 		return any(&stage.SimpleTypes).(*map[*Type]any)
+	case TotalDigit:
+		return any(&stage.TotalDigits).(*map[*Type]any)
 	case WhiteSpace:
 		return any(&stage.WhiteSpaces).(*map[*Type]any)
 	default:
@@ -1695,6 +1779,8 @@ func GetGongstructInstancesSetFromPointerType[Type PointerToGongstruct](stage *S
 		return any(&stage.Sequences).(*map[Type]any)
 	case *SimpleType:
 		return any(&stage.SimpleTypes).(*map[Type]any)
+	case *TotalDigit:
+		return any(&stage.TotalDigits).(*map[Type]any)
 	case *WhiteSpace:
 		return any(&stage.WhiteSpaces).(*map[Type]any)
 	default:
@@ -1739,6 +1825,8 @@ func GetGongstructInstancesMap[Type Gongstruct](stage *StageStruct) *map[string]
 		return any(&stage.Sequences_mapString).(*map[string]*Type)
 	case SimpleType:
 		return any(&stage.SimpleTypes_mapString).(*map[string]*Type)
+	case TotalDigit:
+		return any(&stage.TotalDigits_mapString).(*map[string]*Type)
 	case WhiteSpace:
 		return any(&stage.WhiteSpaces_mapString).(*map[string]*Type)
 	default:
@@ -1880,6 +1968,8 @@ func GetAssociationName[Type Gongstruct]() *Type {
 			MaxLength: &MaxLength{Name: "MaxLength"},
 			// field is initialized with an instance of Length with the name of the field
 			Length: &Length{Name: "Length"},
+			// field is initialized with an instance of TotalDigit with the name of the field
+			TotalDigit: &TotalDigit{Name: "TotalDigit"},
 			// field is initialized with ElementWithAnnotation as it is a composite
 			ElementWithAnnotation: ElementWithAnnotation{
 				// per field init
@@ -1920,6 +2010,16 @@ func GetAssociationName[Type Gongstruct]() *Type {
 			// Initialisation of associations
 			// field is initialized with an instance of Restriction with the name of the field
 			Restriction: &Restriction{Name: "Restriction"},
+			// field is initialized with ElementWithAnnotation as it is a composite
+			ElementWithAnnotation: ElementWithAnnotation{
+				// per field init
+				//
+				Annotation: &Annotation{Name: "Annotation"},
+			},
+		}).(*Type)
+	case TotalDigit:
+		return any(&TotalDigit{
+			// Initialisation of associations
 			// field is initialized with ElementWithAnnotation as it is a composite
 			ElementWithAnnotation: ElementWithAnnotation{
 				// per field init
@@ -2354,6 +2454,23 @@ func GetPointerReverseMap[Start, End Gongstruct](fieldname string, stage *StageS
 				}
 			}
 			return any(res).(map[*End][]*Start)
+		case "TotalDigit":
+			res := make(map[*TotalDigit][]*Restriction)
+			for restriction := range stage.Restrictions {
+				if restriction.TotalDigit != nil {
+					totaldigit_ := restriction.TotalDigit
+					var restrictions []*Restriction
+					_, ok := res[totaldigit_]
+					if ok {
+						restrictions = res[totaldigit_]
+					} else {
+						restrictions = make([]*Restriction, 0)
+					}
+					restrictions = append(restrictions, restriction)
+					res[totaldigit_] = restrictions
+				}
+			}
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of Schema
 	case Schema:
@@ -2434,6 +2551,28 @@ func GetPointerReverseMap[Start, End Gongstruct](fieldname string, stage *StageS
 					}
 					simpletypes = append(simpletypes, simpletype)
 					res[restriction_] = simpletypes
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		}
+	// reverse maps of direct associations of TotalDigit
+	case TotalDigit:
+		switch fieldname {
+		// insertion point for per direct association field
+		case "Annotation":
+			res := make(map[*Annotation][]*TotalDigit)
+			for totaldigit := range stage.TotalDigits {
+				if totaldigit.Annotation != nil {
+					annotation_ := totaldigit.Annotation
+					var totaldigits []*TotalDigit
+					_, ok := res[annotation_]
+					if ok {
+						totaldigits = res[annotation_]
+					} else {
+						totaldigits = make([]*TotalDigit, 0)
+					}
+					totaldigits = append(totaldigits, totaldigit)
+					res[annotation_] = totaldigits
 				}
 			}
 			return any(res).(map[*End][]*Start)
@@ -2599,6 +2738,11 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 		switch fieldname {
 		// insertion point for per direct association field
 		}
+	// reverse maps of direct associations of TotalDigit
+	case TotalDigit:
+		switch fieldname {
+		// insertion point for per direct association field
+		}
 	// reverse maps of direct associations of WhiteSpace
 	case WhiteSpace:
 		switch fieldname {
@@ -2646,6 +2790,8 @@ func GetGongstructName[Type Gongstruct]() (res string) {
 		res = "Sequence"
 	case SimpleType:
 		res = "SimpleType"
+	case TotalDigit:
+		res = "TotalDigit"
 	case WhiteSpace:
 		res = "WhiteSpace"
 	}
@@ -2690,6 +2836,8 @@ func GetPointerToGongstructName[Type PointerToGongstruct]() (res string) {
 		res = "Sequence"
 	case *SimpleType:
 		res = "SimpleType"
+	case *TotalDigit:
+		res = "TotalDigit"
 	case *WhiteSpace:
 		res = "WhiteSpace"
 	}
@@ -2726,13 +2874,15 @@ func GetFields[Type Gongstruct]() (res []string) {
 	case Pattern:
 		res = []string{"Name", "Annotation", "Value"}
 	case Restriction:
-		res = []string{"Name", "Annotation", "Base", "Enumerations", "MinInclusive", "MaxInclusive", "Pattern", "WhiteSpace", "MinLength", "MaxLength", "Length"}
+		res = []string{"Name", "Annotation", "Base", "Enumerations", "MinInclusive", "MaxInclusive", "Pattern", "WhiteSpace", "MinLength", "MaxLength", "Length", "TotalDigit"}
 	case Schema:
 		res = []string{"Name", "Xs", "Annotation", "Elements", "SimpleTypes", "ComplexTypes"}
 	case Sequence:
 		res = []string{"Name", "Annotation", "Elements"}
 	case SimpleType:
 		res = []string{"Name", "Annotation", "NameXSD", "Restriction"}
+	case TotalDigit:
+		res = []string{"Name", "Annotation", "Value"}
 	case WhiteSpace:
 		res = []string{"Name", "Annotation", "Value"}
 	}
@@ -2816,6 +2966,9 @@ func GetReverseFields[Type Gongstruct]() (res []ReverseField) {
 		rf.GongstructName = "Schema"
 		rf.Fieldname = "SimpleTypes"
 		res = append(res, rf)
+	case TotalDigit:
+		var rf ReverseField
+		_ = rf
 	case WhiteSpace:
 		var rf ReverseField
 		_ = rf
@@ -2853,13 +3006,15 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 	case *Pattern:
 		res = []string{"Name", "Annotation", "Value"}
 	case *Restriction:
-		res = []string{"Name", "Annotation", "Base", "Enumerations", "MinInclusive", "MaxInclusive", "Pattern", "WhiteSpace", "MinLength", "MaxLength", "Length"}
+		res = []string{"Name", "Annotation", "Base", "Enumerations", "MinInclusive", "MaxInclusive", "Pattern", "WhiteSpace", "MinLength", "MaxLength", "Length", "TotalDigit"}
 	case *Schema:
 		res = []string{"Name", "Xs", "Annotation", "Elements", "SimpleTypes", "ComplexTypes"}
 	case *Sequence:
 		res = []string{"Name", "Annotation", "Elements"}
 	case *SimpleType:
 		res = []string{"Name", "Annotation", "NameXSD", "Restriction"}
+	case *TotalDigit:
+		res = []string{"Name", "Annotation", "Value"}
 	case *WhiteSpace:
 		res = []string{"Name", "Annotation", "Value"}
 	}
@@ -3063,6 +3218,10 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 			if inferedInstance.Length != nil {
 				res = inferedInstance.Length.Name
 			}
+		case "TotalDigit":
+			if inferedInstance.TotalDigit != nil {
+				res = inferedInstance.TotalDigit.Name
+			}
 		}
 	case *Schema:
 		switch fieldName {
@@ -3129,6 +3288,18 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 			if inferedInstance.Restriction != nil {
 				res = inferedInstance.Restriction.Name
 			}
+		}
+	case *TotalDigit:
+		switch fieldName {
+		// string value of fields
+		case "Name":
+			res = inferedInstance.Name
+		case "Annotation":
+			if inferedInstance.Annotation != nil {
+				res = inferedInstance.Annotation.Name
+			}
+		case "Value":
+			res = inferedInstance.Value
 		}
 	case *WhiteSpace:
 		switch fieldName {
@@ -3345,6 +3516,10 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 			if inferedInstance.Length != nil {
 				res = inferedInstance.Length.Name
 			}
+		case "TotalDigit":
+			if inferedInstance.TotalDigit != nil {
+				res = inferedInstance.TotalDigit.Name
+			}
 		}
 	case Schema:
 		switch fieldName {
@@ -3411,6 +3586,18 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 			if inferedInstance.Restriction != nil {
 				res = inferedInstance.Restriction.Name
 			}
+		}
+	case TotalDigit:
+		switch fieldName {
+		// string value of fields
+		case "Name":
+			res = inferedInstance.Name
+		case "Annotation":
+			if inferedInstance.Annotation != nil {
+				res = inferedInstance.Annotation.Name
+			}
+		case "Value":
+			res = inferedInstance.Value
 		}
 	case WhiteSpace:
 		switch fieldName {

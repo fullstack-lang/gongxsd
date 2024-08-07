@@ -200,6 +200,18 @@ func FillUpNamedFormFromGongstruct[T models.Gongstruct](instance *T, probe *Prob
 		)
 		formGroup.HasSuppressButton = true
 		FillUpForm(instancesTyped, formGroup, probe)
+	case *models.TotalDigit:
+		formGroup := (&gongtable.FormGroup{
+			Name:  formName,
+			Label: "TotalDigit Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__TotalDigitFormCallback(
+			instancesTyped,
+			probe,
+			formGroup,
+		)
+		formGroup.HasSuppressButton = true
+		FillUpForm(instancesTyped, formGroup, probe)
 	case *models.WhiteSpace:
 		formGroup := (&gongtable.FormGroup{
 			Name:  formName,
