@@ -24,6 +24,8 @@
             "args": [
                 "read",
                 "../../../test/books/books.xsd",
+                "-m",
+                "stages/stage"
             ]
         },
         {
