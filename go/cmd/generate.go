@@ -6,9 +6,8 @@ package cmd
 import (
 	"encoding/xml"
 	"fmt"
-	"log"
 	"os"
-	"strconv"
+	"time"
 
 	"github.com/spf13/cobra"
 
@@ -17,13 +16,18 @@ import (
 	gongxsd_static "github.com/fullstack-lang/gongxsd/go/static"
 )
 
-// readCmd represents the read command
-var readCmd = &cobra.Command{
-	Use:   "read",
-	Short: "read an xsd file",
+// generateCmd represents the read command
+var generateCmd = &cobra.Command{
+	Use:   "generate",
+	Short: "read an xsd file and generate the gong models",
 	Args:  cobra.ExactArgs(1),
-	Long:  `...`,
+	Long:  `read an xsd file and generate the gong models`,
 	Run: func(cmd *cobra.Command, args []string) {
+
+		start := time.Now()
+		if Verbose {
+			fmt.Printf("generate start\n")
+		}
 
 		xsdFilePath := args[0]
 		if Verbose {
@@ -53,16 +57,15 @@ var readCmd = &cobra.Command{
 
 		models.PostProcessingUpdateNames(stack.Stage)
 
-		stack.Stage.Commit()
-		fmt.Println("XSD File Content:")
-		// fmt.Println(string(content))
-
-		stack.Probe.Refresh()
-
-		log.Printf("Server ready serve on localhost:" + strconv.Itoa(*port))
-		err = r.Run(":" + strconv.Itoa(*port))
-		if err != nil {
-			log.Fatalln(err.Error())
+		if Verbose {
+			fmt.Printf("generating file %s\n", *outputModelFilePath)
 		}
+
+		models.Generate(stack.Stage, *outputModelFilePath)
+
+		if Verbose {
+			fmt.Printf("generate took %s\n", time.Since(start))
+		}
+
 	},
 }

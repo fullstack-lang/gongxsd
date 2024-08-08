@@ -4,7 +4,7 @@ func prefix(s string) string {
 	return s + "_E"
 }
 
-func Process(stage *StageStruct) {
+func PostProcessingUpdateNames(stage *StageStruct) {
 
 	// map of embedded complex struct within elements
 	map_EmbeddedComplexStruct := make(map[*ComplexType]*Element)
