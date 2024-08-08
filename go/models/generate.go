@@ -7,6 +7,10 @@ import (
 	"strings"
 )
 
+// Generate process the xsd
+//
+// - all Named Complex Type => Gongstruct
+// - all Elements with inlined ComplexType => Gongstruct
 func Generate(stage *StageStruct, outputFilePath string) {
 
 	// generate the typescript file
@@ -19,10 +23,12 @@ func Generate(stage *StageStruct, outputFilePath string) {
 
 	for ct := range *GetGongstructInstancesSet[ComplexType](stage) {
 
-		templInsertionLevel0[ModelsFileTmplLevel0AllGongstructsCode] += Replace1(
-			ModelsFileTmplLevel1Code[ModelsFileTmplLevel1OneGongstructCode],
-			"{{"+string(rune(ModelsFileTmplLevel2Structname))+"}}", ct.Name,
-		)
+		if !ct.IsInlined {
+			templInsertionLevel0[ModelsFileTmplLevel0AllGongstructsCode] += Replace1(
+				ModelsFileTmplLevel1Code[ModelsFileTmplLevel1OneGongstructCode],
+				"{{"+string(rune(ModelsFileTmplLevel2Structname))+"}}", capitalizeFirstLetter(ct.Name),
+			)
+		}
 	}
 
 	for insertionPerStructId := ModelsFileTmplLevel0(0); insertionPerStructId < ModelsFileTmplLevel0Nb; insertionPerStructId++ {

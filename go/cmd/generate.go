@@ -55,7 +55,7 @@ var generateCmd = &cobra.Command{
 
 		stack.Stage.ComputeReverseMaps()
 
-		models.PostProcessingUpdateNames(stack.Stage)
+		models.PostProcessing(stack.Stage)
 
 		if Verbose {
 			fmt.Printf("generating file %s\n", *outputModelFilePath)

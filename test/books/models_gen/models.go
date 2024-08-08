@@ -6,11 +6,7 @@ import "encoding/xml"
 // to avoid compilation error if no xml element is generated
 var _ xml.Attr
 
-type books_E struct {
-	Name string
-}
-
-type bookType struct {
+type BookType struct {
 	Name string
 }
 

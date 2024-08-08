@@ -4,7 +4,6 @@ import (
 	"time"
 
 	"github.com/fullstack-lang/gongxsd/go/models"
-
 	// injection point for ident package import declaration{{ImportPackageDeclaration}}
 )
 
@@ -94,11 +93,11 @@ func _(stage *models.StageStruct) {
 
 	__AttributeGroup__000000_.Name = ``
 	__AttributeGroup__000000_.NameXSD = ``
-	__AttributeGroup__000000_.Ref = `commonAttributes`
+	__AttributeGroup__000000_.Ref = `extendedAttributes`
 
 	__AttributeGroup__000001_.Name = ``
 	__AttributeGroup__000001_.NameXSD = ``
-	__AttributeGroup__000001_.Ref = `extendedAttributes`
+	__AttributeGroup__000001_.Ref = `commonAttributes`
 
 	__AttributeGroup__000002_commonAttributes.Name = `commonAttributes`
 	__AttributeGroup__000002_commonAttributes.NameXSD = `commonAttributes`
@@ -109,9 +108,11 @@ func _(stage *models.StageStruct) {
 	__AttributeGroup__000003_extendedAttributes.Ref = ``
 
 	__ComplexType__000000_bookType.Name = `bookType`
+	__ComplexType__000000_bookType.IsInlined = false
 	__ComplexType__000000_bookType.NameXSD = `bookType`
 
 	__ComplexType__000001_books_E.Name = `books_E`
+	__ComplexType__000001_books_E.IsInlined = true
 	__ComplexType__000001_books_E.NameXSD = ``
 
 	__Documentation__000000_Schema_E_E.Name = `Schema_E_E`
@@ -242,10 +243,10 @@ func _(stage *models.StageStruct) {
 	__Element__000005_year.Final = ``
 
 	__Enumeration__000000_bookFormatEnum_E_E.Name = `bookFormatEnum_E_E`
-	__Enumeration__000000_bookFormatEnum_E_E.Value = `Paperback`
+	__Enumeration__000000_bookFormatEnum_E_E.Value = `Hardcover`
 
 	__Enumeration__000001_bookFormatEnum_E_E.Name = `bookFormatEnum_E_E`
-	__Enumeration__000001_bookFormatEnum_E_E.Value = `Hardcover`
+	__Enumeration__000001_bookFormatEnum_E_E.Value = `Paperback`
 
 	__MaxInclusive__000000_yearType_E_E.Name = `yearType_E_E`
 	__MaxInclusive__000000_yearType_E_E.Value = `2100`
@@ -296,17 +297,18 @@ func _(stage *models.StageStruct) {
 	__Annotation__000003_format_E.Documentations = append(__Annotation__000003_format_E.Documentations, __Documentation__000004_format_E_E)
 	__Annotation__000004_title_E.Documentations = append(__Annotation__000004_title_E.Documentations, __Documentation__000005_title_E_E)
 	__Annotation__000005_yearType_E.Documentations = append(__Annotation__000005_yearType_E.Documentations, __Documentation__000006_yearType_E_E)
-	__AttributeGroup__000003_extendedAttributes.AttributeGroup = __AttributeGroup__000000_
+	__AttributeGroup__000003_extendedAttributes.AttributeGroup = __AttributeGroup__000001_
 	__ComplexType__000000_bookType.Annotation = __Annotation__000001_bookType_E
 	__ComplexType__000000_bookType.Sequence = __Sequence__000000_bookType_E
-	__ComplexType__000000_bookType.AttributeGroups = append(__ComplexType__000000_bookType.AttributeGroups, __AttributeGroup__000001_)
+	__ComplexType__000000_bookType.AttributeGroups = append(__ComplexType__000000_bookType.AttributeGroups, __AttributeGroup__000000_)
+	__ComplexType__000001_books_E.EnclosingElement = __Element__000002_books
 	__ComplexType__000001_books_E.Sequence = __Sequence__000001_books_E_E
 	__Element__000001_book.Annotation = __Annotation__000002_book_E
 	__Element__000002_books.ComplexType = __ComplexType__000001_books_E
 	__Element__000003_format.Annotation = __Annotation__000003_format_E
 	__Element__000004_title.Annotation = __Annotation__000004_title_E
-	__Restriction__000000_bookFormatEnum_E.Enumerations = append(__Restriction__000000_bookFormatEnum_E.Enumerations, __Enumeration__000000_bookFormatEnum_E_E)
 	__Restriction__000000_bookFormatEnum_E.Enumerations = append(__Restriction__000000_bookFormatEnum_E.Enumerations, __Enumeration__000001_bookFormatEnum_E_E)
+	__Restriction__000000_bookFormatEnum_E.Enumerations = append(__Restriction__000000_bookFormatEnum_E.Enumerations, __Enumeration__000000_bookFormatEnum_E_E)
 	__Restriction__000001_titleType_E.Pattern = __Pattern__000000_titleType_E_E
 	__Restriction__000001_titleType_E.WhiteSpace = __WhiteSpace__000000_titleType_E_E
 	__Restriction__000002_yearType_E.MinInclusive = __MinInclusive__000000_yearType_E_E

@@ -51,7 +51,7 @@ var readCmd = &cobra.Command{
 
 		stack.Stage.ComputeReverseMaps()
 
-		models.PostProcessingUpdateNames(stack.Stage)
+		models.PostProcessing(stack.Stage)
 
 		stack.Stage.Commit()
 		fmt.Println("XSD File Content:")

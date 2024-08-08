@@ -91,6 +91,11 @@ type Restriction struct {
 
 type ComplexType struct {
 	Name string
+
+	// analysis
+	IsInlined        bool // it has been defined by the enclosing element
+	EnclosingElement *Element
+
 	ElementWithAnnotation
 	ElementWithNameAttribute
 	Sequence        *Sequence         `xml:"sequence"`

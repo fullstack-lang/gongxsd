@@ -2360,6 +2360,8 @@ func GetAssociationName[Type Gongstruct]() *Type {
 	case ComplexType:
 		return any(&ComplexType{
 			// Initialisation of associations
+			// field is initialized with an instance of Element with the name of the field
+			EnclosingElement: &Element{Name: "EnclosingElement"},
 			// field is initialized with an instance of Sequence with the name of the field
 			Sequence: &Sequence{Name: "Sequence"},
 			// field is initialized with an instance of All with the name of the field
@@ -2701,6 +2703,23 @@ func GetPointerReverseMap[Start, End Gongstruct](fieldname string, stage *StageS
 	case ComplexType:
 		switch fieldname {
 		// insertion point for per direct association field
+		case "EnclosingElement":
+			res := make(map[*Element][]*ComplexType)
+			for complextype := range stage.ComplexTypes {
+				if complextype.EnclosingElement != nil {
+					element_ := complextype.EnclosingElement
+					var complextypes []*ComplexType
+					_, ok := res[element_]
+					if ok {
+						complextypes = res[element_]
+					} else {
+						complextypes = make([]*ComplexType, 0)
+					}
+					complextypes = append(complextypes, complextype)
+					res[element_] = complextypes
+				}
+			}
+			return any(res).(map[*End][]*Start)
 		case "Annotation":
 			res := make(map[*Annotation][]*ComplexType)
 			for complextype := range stage.ComplexTypes {
@@ -3672,7 +3691,7 @@ func GetFields[Type Gongstruct]() (res []string) {
 	case Choice:
 		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "Elements", "Groups"}
 	case ComplexType:
-		res = []string{"Name", "Annotation", "NameXSD", "Sequence", "All", "Choice", "Attributes", "AttributeGroups"}
+		res = []string{"Name", "IsInlined", "EnclosingElement", "Annotation", "NameXSD", "Sequence", "All", "Choice", "Attributes", "AttributeGroups"}
 	case Documentation:
 		res = []string{"Name", "Text", "Source", "Lang"}
 	case Element:
@@ -3856,7 +3875,7 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 	case *Choice:
 		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "Elements", "Groups"}
 	case *ComplexType:
-		res = []string{"Name", "Annotation", "NameXSD", "Sequence", "All", "Choice", "Attributes", "AttributeGroups"}
+		res = []string{"Name", "IsInlined", "EnclosingElement", "Annotation", "NameXSD", "Sequence", "All", "Choice", "Attributes", "AttributeGroups"}
 	case *Documentation:
 		res = []string{"Name", "Text", "Source", "Lang"}
 	case *Element:
@@ -4019,6 +4038,12 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		// string value of fields
 		case "Name":
 			res = inferedInstance.Name
+		case "IsInlined":
+			res = fmt.Sprintf("%t", inferedInstance.IsInlined)
+		case "EnclosingElement":
+			if inferedInstance.EnclosingElement != nil {
+				res = inferedInstance.EnclosingElement.Name
+			}
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
 				res = inferedInstance.Annotation.Name
@@ -4502,6 +4527,12 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		// string value of fields
 		case "Name":
 			res = inferedInstance.Name
+		case "IsInlined":
+			res = fmt.Sprintf("%t", inferedInstance.IsInlined)
+		case "EnclosingElement":
+			if inferedInstance.EnclosingElement != nil {
+				res = inferedInstance.EnclosingElement.Name
+			}
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
 				res = inferedInstance.Annotation.Name

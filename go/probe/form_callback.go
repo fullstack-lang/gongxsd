@@ -616,6 +616,10 @@ func (complextypeFormCallback *ComplexTypeFormCallback) OnSave() {
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(complextype_.Name), formDiv)
+		case "IsInlined":
+			FormDivBasicFieldToField(&(complextype_.IsInlined), formDiv)
+		case "EnclosingElement":
+			FormDivSelectFieldToField(&(complextype_.EnclosingElement), complextypeFormCallback.probe.stageOfInterest, formDiv)
 		case "Annotation":
 			FormDivSelectFieldToField(&(complextype_.Annotation), complextypeFormCallback.probe.stageOfInterest, formDiv)
 		case "NameXSD":
