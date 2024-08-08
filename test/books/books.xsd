@@ -18,7 +18,7 @@
                 between 1900 and 2100 inclusive. </xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:integer">
-            <xs:minInclusive value="1900" />
+            <xs:minInclusive value="1000" />
             <xs:maxInclusive value="2100" />
         </xs:restriction>
     </xs:simpleType>
@@ -57,7 +57,7 @@
     <!-- Definition of a simple type for the title with a pattern facet -->
     <xs:simpleType name="titleType">
         <xs:restriction base="xs:string">
-            <xs:pattern value="[A-Za-z ]+" />
+            <xs:pattern value="[0-9A-Za-z ]+" />
             <xs:whiteSpace value="collapse" />
         </xs:restriction>
     </xs:simpleType>
