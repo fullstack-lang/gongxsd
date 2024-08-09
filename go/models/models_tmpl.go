@@ -37,6 +37,7 @@ map[ModelsFileTmplLevel1]string{
 		`}}
 type {{` + string(rune(ModelsFileTmplLevel2Structname)) + `}} struct {
 	Name string
+	
 	// insertion point for fields{{` + string(rune(ModelsFileTmplLevel2Fields)) + `}}
 }
 
