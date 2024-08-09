@@ -29,6 +29,9 @@ func FillUpForm[T models.Gongstruct](
 			false, false, 0, false, 0)
 		AssociationSliceToForm("Elements", instanceWithInferedType, &instanceWithInferedType.Elements, formGroup, probe)
 		AssociationSliceToForm("Groups", instanceWithInferedType, &instanceWithInferedType.Groups, formGroup, probe)
+		AssociationFieldToForm("Sequence", instanceWithInferedType.Sequence, formGroup, probe)
+		AssociationFieldToForm("All", instanceWithInferedType.All, formGroup, probe)
+		AssociationFieldToForm("Choice", instanceWithInferedType.Choice, formGroup, probe)
 
 	case *models.Annotation:
 		// insertion point
@@ -150,6 +153,9 @@ func FillUpForm[T models.Gongstruct](
 			false, false, 0, false, 0)
 		AssociationSliceToForm("Elements", instanceWithInferedType, &instanceWithInferedType.Elements, formGroup, probe)
 		AssociationSliceToForm("Groups", instanceWithInferedType, &instanceWithInferedType.Groups, formGroup, probe)
+		AssociationFieldToForm("Sequence", instanceWithInferedType.Sequence, formGroup, probe)
+		AssociationFieldToForm("All", instanceWithInferedType.All, formGroup, probe)
+		AssociationFieldToForm("Choice", instanceWithInferedType.Choice, formGroup, probe)
 
 	case *models.ComplexType:
 		// insertion point
@@ -563,6 +569,9 @@ func FillUpForm[T models.Gongstruct](
 			false, false, 0, false, 0)
 		AssociationSliceToForm("Elements", instanceWithInferedType, &instanceWithInferedType.Elements, formGroup, probe)
 		AssociationSliceToForm("Groups", instanceWithInferedType, &instanceWithInferedType.Groups, formGroup, probe)
+		AssociationFieldToForm("Sequence", instanceWithInferedType.Sequence, formGroup, probe)
+		AssociationFieldToForm("All", instanceWithInferedType.All, formGroup, probe)
+		AssociationFieldToForm("Choice", instanceWithInferedType.Choice, formGroup, probe)
 
 	case *models.SimpleType:
 		// insertion point

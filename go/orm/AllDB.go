@@ -56,6 +56,18 @@ type AllPointersEncoding struct {
 
 	// field Groups is a slice of pointers to another Struct (optional or 0..1)
 	Groups IntSlice `gorm:"type:TEXT"`
+
+	// field Sequence is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	SequenceID sql.NullInt64
+
+	// field All is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	AllID sql.NullInt64
+
+	// field Choice is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	ChoiceID sql.NullInt64
 }
 
 // AllDB describes a all in the database
@@ -281,6 +293,42 @@ func (backRepoAll *BackRepoAllStruct) CommitPhaseTwoInstance(backRepo *BackRepoS
 				append(allDB.AllPointersEncoding.Groups, int(groupAssocEnd_DB.ID))
 		}
 
+		// commit pointer value all.Sequence translates to updating the all.SequenceID
+		allDB.SequenceID.Valid = true // allow for a 0 value (nil association)
+		if all.Sequence != nil {
+			if SequenceId, ok := backRepo.BackRepoSequence.Map_SequencePtr_SequenceDBID[all.Sequence]; ok {
+				allDB.SequenceID.Int64 = int64(SequenceId)
+				allDB.SequenceID.Valid = true
+			}
+		} else {
+			allDB.SequenceID.Int64 = 0
+			allDB.SequenceID.Valid = true
+		}
+
+		// commit pointer value all.All translates to updating the all.AllID
+		allDB.AllID.Valid = true // allow for a 0 value (nil association)
+		if all.All != nil {
+			if AllId, ok := backRepo.BackRepoAll.Map_AllPtr_AllDBID[all.All]; ok {
+				allDB.AllID.Int64 = int64(AllId)
+				allDB.AllID.Valid = true
+			}
+		} else {
+			allDB.AllID.Int64 = 0
+			allDB.AllID.Valid = true
+		}
+
+		// commit pointer value all.Choice translates to updating the all.ChoiceID
+		allDB.ChoiceID.Valid = true // allow for a 0 value (nil association)
+		if all.Choice != nil {
+			if ChoiceId, ok := backRepo.BackRepoChoice.Map_ChoicePtr_ChoiceDBID[all.Choice]; ok {
+				allDB.ChoiceID.Int64 = int64(ChoiceId)
+				allDB.ChoiceID.Valid = true
+			}
+		} else {
+			allDB.ChoiceID.Int64 = 0
+			allDB.ChoiceID.Valid = true
+		}
+
 		query := backRepoAll.db.Save(&allDB)
 		if query.Error != nil {
 			log.Fatalln(query.Error)
@@ -417,6 +465,21 @@ func (allDB *AllDB) DecodePointers(backRepo *BackRepoStruct, all *models.All) {
 		all.Groups = append(all.Groups, backRepo.BackRepoGroup.Map_GroupDBID_GroupPtr[uint(_Groupid)])
 	}
 
+	// Sequence field
+	all.Sequence = nil
+	if allDB.SequenceID.Int64 != 0 {
+		all.Sequence = backRepo.BackRepoSequence.Map_SequenceDBID_SequencePtr[uint(allDB.SequenceID.Int64)]
+	}
+	// All field
+	all.All = nil
+	if allDB.AllID.Int64 != 0 {
+		all.All = backRepo.BackRepoAll.Map_AllDBID_AllPtr[uint(allDB.AllID.Int64)]
+	}
+	// Choice field
+	all.Choice = nil
+	if allDB.ChoiceID.Int64 != 0 {
+		all.Choice = backRepo.BackRepoChoice.Map_ChoiceDBID_ChoicePtr[uint(allDB.ChoiceID.Int64)]
+	}
 	return
 }
 
@@ -673,6 +736,24 @@ func (backRepoAll *BackRepoAllStruct) RestorePhaseTwo() {
 		if allDB.AnnotationID.Int64 != 0 {
 			allDB.AnnotationID.Int64 = int64(BackRepoAnnotationid_atBckpTime_newID[uint(allDB.AnnotationID.Int64)])
 			allDB.AnnotationID.Valid = true
+		}
+
+		// reindexing Sequence field
+		if allDB.SequenceID.Int64 != 0 {
+			allDB.SequenceID.Int64 = int64(BackRepoSequenceid_atBckpTime_newID[uint(allDB.SequenceID.Int64)])
+			allDB.SequenceID.Valid = true
+		}
+
+		// reindexing All field
+		if allDB.AllID.Int64 != 0 {
+			allDB.AllID.Int64 = int64(BackRepoAllid_atBckpTime_newID[uint(allDB.AllID.Int64)])
+			allDB.AllID.Valid = true
+		}
+
+		// reindexing Choice field
+		if allDB.ChoiceID.Int64 != 0 {
+			allDB.ChoiceID.Int64 = int64(BackRepoChoiceid_atBckpTime_newID[uint(allDB.ChoiceID.Int64)])
+			allDB.ChoiceID.Valid = true
 		}
 
 		// update databse with new index encoding

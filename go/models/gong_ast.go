@@ -1364,6 +1364,15 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 				case "Annotation":
 					targetIdentifier := ident.Name
 					__gong__map_All[identifier].Annotation = __gong__map_Annotation[targetIdentifier]
+				case "Sequence":
+					targetIdentifier := ident.Name
+					__gong__map_All[identifier].Sequence = __gong__map_Sequence[targetIdentifier]
+				case "All":
+					targetIdentifier := ident.Name
+					__gong__map_All[identifier].All = __gong__map_All[targetIdentifier]
+				case "Choice":
+					targetIdentifier := ident.Name
+					__gong__map_All[identifier].Choice = __gong__map_Choice[targetIdentifier]
 				}
 			case "Annotation":
 				switch fieldName {
@@ -1392,6 +1401,15 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 				case "Annotation":
 					targetIdentifier := ident.Name
 					__gong__map_Choice[identifier].Annotation = __gong__map_Annotation[targetIdentifier]
+				case "Sequence":
+					targetIdentifier := ident.Name
+					__gong__map_Choice[identifier].Sequence = __gong__map_Sequence[targetIdentifier]
+				case "All":
+					targetIdentifier := ident.Name
+					__gong__map_Choice[identifier].All = __gong__map_All[targetIdentifier]
+				case "Choice":
+					targetIdentifier := ident.Name
+					__gong__map_Choice[identifier].Choice = __gong__map_Choice[targetIdentifier]
 				}
 			case "ComplexType":
 				switch fieldName {
@@ -1543,6 +1561,15 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 				case "Annotation":
 					targetIdentifier := ident.Name
 					__gong__map_Sequence[identifier].Annotation = __gong__map_Annotation[targetIdentifier]
+				case "Sequence":
+					targetIdentifier := ident.Name
+					__gong__map_Sequence[identifier].Sequence = __gong__map_Sequence[targetIdentifier]
+				case "All":
+					targetIdentifier := ident.Name
+					__gong__map_Sequence[identifier].All = __gong__map_All[targetIdentifier]
+				case "Choice":
+					targetIdentifier := ident.Name
+					__gong__map_Sequence[identifier].Choice = __gong__map_Choice[targetIdentifier]
 				}
 			case "SimpleType":
 				switch fieldName {

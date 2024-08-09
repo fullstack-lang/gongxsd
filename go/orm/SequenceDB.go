@@ -56,6 +56,18 @@ type SequencePointersEncoding struct {
 
 	// field Groups is a slice of pointers to another Struct (optional or 0..1)
 	Groups IntSlice `gorm:"type:TEXT"`
+
+	// field Sequence is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	SequenceID sql.NullInt64
+
+	// field All is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	AllID sql.NullInt64
+
+	// field Choice is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	ChoiceID sql.NullInt64
 }
 
 // SequenceDB describes a sequence in the database
@@ -281,6 +293,42 @@ func (backRepoSequence *BackRepoSequenceStruct) CommitPhaseTwoInstance(backRepo 
 				append(sequenceDB.SequencePointersEncoding.Groups, int(groupAssocEnd_DB.ID))
 		}
 
+		// commit pointer value sequence.Sequence translates to updating the sequence.SequenceID
+		sequenceDB.SequenceID.Valid = true // allow for a 0 value (nil association)
+		if sequence.Sequence != nil {
+			if SequenceId, ok := backRepo.BackRepoSequence.Map_SequencePtr_SequenceDBID[sequence.Sequence]; ok {
+				sequenceDB.SequenceID.Int64 = int64(SequenceId)
+				sequenceDB.SequenceID.Valid = true
+			}
+		} else {
+			sequenceDB.SequenceID.Int64 = 0
+			sequenceDB.SequenceID.Valid = true
+		}
+
+		// commit pointer value sequence.All translates to updating the sequence.AllID
+		sequenceDB.AllID.Valid = true // allow for a 0 value (nil association)
+		if sequence.All != nil {
+			if AllId, ok := backRepo.BackRepoAll.Map_AllPtr_AllDBID[sequence.All]; ok {
+				sequenceDB.AllID.Int64 = int64(AllId)
+				sequenceDB.AllID.Valid = true
+			}
+		} else {
+			sequenceDB.AllID.Int64 = 0
+			sequenceDB.AllID.Valid = true
+		}
+
+		// commit pointer value sequence.Choice translates to updating the sequence.ChoiceID
+		sequenceDB.ChoiceID.Valid = true // allow for a 0 value (nil association)
+		if sequence.Choice != nil {
+			if ChoiceId, ok := backRepo.BackRepoChoice.Map_ChoicePtr_ChoiceDBID[sequence.Choice]; ok {
+				sequenceDB.ChoiceID.Int64 = int64(ChoiceId)
+				sequenceDB.ChoiceID.Valid = true
+			}
+		} else {
+			sequenceDB.ChoiceID.Int64 = 0
+			sequenceDB.ChoiceID.Valid = true
+		}
+
 		query := backRepoSequence.db.Save(&sequenceDB)
 		if query.Error != nil {
 			log.Fatalln(query.Error)
@@ -417,6 +465,21 @@ func (sequenceDB *SequenceDB) DecodePointers(backRepo *BackRepoStruct, sequence 
 		sequence.Groups = append(sequence.Groups, backRepo.BackRepoGroup.Map_GroupDBID_GroupPtr[uint(_Groupid)])
 	}
 
+	// Sequence field
+	sequence.Sequence = nil
+	if sequenceDB.SequenceID.Int64 != 0 {
+		sequence.Sequence = backRepo.BackRepoSequence.Map_SequenceDBID_SequencePtr[uint(sequenceDB.SequenceID.Int64)]
+	}
+	// All field
+	sequence.All = nil
+	if sequenceDB.AllID.Int64 != 0 {
+		sequence.All = backRepo.BackRepoAll.Map_AllDBID_AllPtr[uint(sequenceDB.AllID.Int64)]
+	}
+	// Choice field
+	sequence.Choice = nil
+	if sequenceDB.ChoiceID.Int64 != 0 {
+		sequence.Choice = backRepo.BackRepoChoice.Map_ChoiceDBID_ChoicePtr[uint(sequenceDB.ChoiceID.Int64)]
+	}
 	return
 }
 
@@ -673,6 +736,24 @@ func (backRepoSequence *BackRepoSequenceStruct) RestorePhaseTwo() {
 		if sequenceDB.AnnotationID.Int64 != 0 {
 			sequenceDB.AnnotationID.Int64 = int64(BackRepoAnnotationid_atBckpTime_newID[uint(sequenceDB.AnnotationID.Int64)])
 			sequenceDB.AnnotationID.Valid = true
+		}
+
+		// reindexing Sequence field
+		if sequenceDB.SequenceID.Int64 != 0 {
+			sequenceDB.SequenceID.Int64 = int64(BackRepoSequenceid_atBckpTime_newID[uint(sequenceDB.SequenceID.Int64)])
+			sequenceDB.SequenceID.Valid = true
+		}
+
+		// reindexing All field
+		if sequenceDB.AllID.Int64 != 0 {
+			sequenceDB.AllID.Int64 = int64(BackRepoAllid_atBckpTime_newID[uint(sequenceDB.AllID.Int64)])
+			sequenceDB.AllID.Valid = true
+		}
+
+		// reindexing Choice field
+		if sequenceDB.ChoiceID.Int64 != 0 {
+			sequenceDB.ChoiceID.Int64 = int64(BackRepoChoiceid_atBckpTime_newID[uint(sequenceDB.ChoiceID.Int64)])
+			sequenceDB.ChoiceID.Valid = true
 		}
 
 		// update databse with new index encoding

@@ -21,7 +21,7 @@ func Generate(stage *StageStruct, outputFilePath string) {
 		templInsertionLevel0[subStructTemplate] = ""
 	}
 
-	for ct := range *GetGongstructInstancesSet[ComplexType](stage) {
+	for _, ct := range GetGongstrucsSorted[*ComplexType](stage) {
 
 		// not the inline complex type
 		if ct.IsInlined {
@@ -44,7 +44,7 @@ func Generate(stage *StageStruct, outputFilePath string) {
 	}
 
 	// elements with inline complex type
-	for element := range *GetGongstructInstancesSet[Element](stage) {
+	for _, element := range GetGongstrucsSorted[*Element](stage) {
 
 		if element.ComplexType == nil {
 			continue

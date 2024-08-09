@@ -93,30 +93,3 @@ type AttributeGroup struct {
 
 	Ref string `xml:"ref,attr"`
 }
-
-type Sequence struct {
-	Name string
-	ElementWithAnnotation
-	MinOccurs string     `xml:"minOccurs,attr"`
-	MaxOccurs string     `xml:"maxOccurs,attr"`
-	Elements  []*Element `xml:"element"`
-	Groups    []*Group   `xml:"group"`
-}
-
-type All struct {
-	Name string
-	ElementWithAnnotation
-	MinOccurs string     `xml:"minOccurs,attr"`
-	MaxOccurs string     `xml:"maxOccurs,attr"`
-	Elements  []*Element `xml:"element"`
-	Groups    []*Group   `xml:"group"`
-}
-
-type Choice struct {
-	Name string
-	ElementWithAnnotation
-	MinOccurs string     `xml:"minOccurs,attr"`
-	MaxOccurs string     `xml:"maxOccurs,attr"`
-	Elements  []*Element `xml:"element"`
-	Groups    []*Group   `xml:"group"`
-}

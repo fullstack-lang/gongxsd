@@ -325,6 +325,15 @@ func (stage *StageStruct) StageBranchAll(all *All) {
 	if all.Annotation != nil {
 		StageBranch(stage, all.Annotation)
 	}
+	if all.Sequence != nil {
+		StageBranch(stage, all.Sequence)
+	}
+	if all.All != nil {
+		StageBranch(stage, all.All)
+	}
+	if all.Choice != nil {
+		StageBranch(stage, all.Choice)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 	for _, _element := range all.Elements {
@@ -405,6 +414,15 @@ func (stage *StageStruct) StageBranchChoice(choice *Choice) {
 	//insertion point for the staging of instances referenced by pointers
 	if choice.Annotation != nil {
 		StageBranch(stage, choice.Annotation)
+	}
+	if choice.Sequence != nil {
+		StageBranch(stage, choice.Sequence)
+	}
+	if choice.All != nil {
+		StageBranch(stage, choice.All)
+	}
+	if choice.Choice != nil {
+		StageBranch(stage, choice.Choice)
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
@@ -727,6 +745,15 @@ func (stage *StageStruct) StageBranchSequence(sequence *Sequence) {
 	if sequence.Annotation != nil {
 		StageBranch(stage, sequence.Annotation)
 	}
+	if sequence.Sequence != nil {
+		StageBranch(stage, sequence.Sequence)
+	}
+	if sequence.All != nil {
+		StageBranch(stage, sequence.All)
+	}
+	if sequence.Choice != nil {
+		StageBranch(stage, sequence.Choice)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 	for _, _element := range sequence.Elements {
@@ -917,6 +944,15 @@ func CopyBranchAll(mapOrigCopy map[any]any, allFrom *All) (allTo *All) {
 	if allFrom.Annotation != nil {
 		allTo.Annotation = CopyBranchAnnotation(mapOrigCopy, allFrom.Annotation)
 	}
+	if allFrom.Sequence != nil {
+		allTo.Sequence = CopyBranchSequence(mapOrigCopy, allFrom.Sequence)
+	}
+	if allFrom.All != nil {
+		allTo.All = CopyBranchAll(mapOrigCopy, allFrom.All)
+	}
+	if allFrom.Choice != nil {
+		allTo.Choice = CopyBranchChoice(mapOrigCopy, allFrom.Choice)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 	for _, _element := range allFrom.Elements {
@@ -1013,6 +1049,15 @@ func CopyBranchChoice(mapOrigCopy map[any]any, choiceFrom *Choice) (choiceTo *Ch
 	//insertion point for the staging of instances referenced by pointers
 	if choiceFrom.Annotation != nil {
 		choiceTo.Annotation = CopyBranchAnnotation(mapOrigCopy, choiceFrom.Annotation)
+	}
+	if choiceFrom.Sequence != nil {
+		choiceTo.Sequence = CopyBranchSequence(mapOrigCopy, choiceFrom.Sequence)
+	}
+	if choiceFrom.All != nil {
+		choiceTo.All = CopyBranchAll(mapOrigCopy, choiceFrom.All)
+	}
+	if choiceFrom.Choice != nil {
+		choiceTo.Choice = CopyBranchChoice(mapOrigCopy, choiceFrom.Choice)
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
@@ -1391,6 +1436,15 @@ func CopyBranchSequence(mapOrigCopy map[any]any, sequenceFrom *Sequence) (sequen
 	if sequenceFrom.Annotation != nil {
 		sequenceTo.Annotation = CopyBranchAnnotation(mapOrigCopy, sequenceFrom.Annotation)
 	}
+	if sequenceFrom.Sequence != nil {
+		sequenceTo.Sequence = CopyBranchSequence(mapOrigCopy, sequenceFrom.Sequence)
+	}
+	if sequenceFrom.All != nil {
+		sequenceTo.All = CopyBranchAll(mapOrigCopy, sequenceFrom.All)
+	}
+	if sequenceFrom.Choice != nil {
+		sequenceTo.Choice = CopyBranchChoice(mapOrigCopy, sequenceFrom.Choice)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 	for _, _element := range sequenceFrom.Elements {
@@ -1565,6 +1619,15 @@ func (stage *StageStruct) UnstageBranchAll(all *All) {
 	if all.Annotation != nil {
 		UnstageBranch(stage, all.Annotation)
 	}
+	if all.Sequence != nil {
+		UnstageBranch(stage, all.Sequence)
+	}
+	if all.All != nil {
+		UnstageBranch(stage, all.All)
+	}
+	if all.Choice != nil {
+		UnstageBranch(stage, all.Choice)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 	for _, _element := range all.Elements {
@@ -1645,6 +1708,15 @@ func (stage *StageStruct) UnstageBranchChoice(choice *Choice) {
 	//insertion point for the staging of instances referenced by pointers
 	if choice.Annotation != nil {
 		UnstageBranch(stage, choice.Annotation)
+	}
+	if choice.Sequence != nil {
+		UnstageBranch(stage, choice.Sequence)
+	}
+	if choice.All != nil {
+		UnstageBranch(stage, choice.All)
+	}
+	if choice.Choice != nil {
+		UnstageBranch(stage, choice.Choice)
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
@@ -1966,6 +2038,15 @@ func (stage *StageStruct) UnstageBranchSequence(sequence *Sequence) {
 	//insertion point for the staging of instances referenced by pointers
 	if sequence.Annotation != nil {
 		UnstageBranch(stage, sequence.Annotation)
+	}
+	if sequence.Sequence != nil {
+		UnstageBranch(stage, sequence.Sequence)
+	}
+	if sequence.All != nil {
+		UnstageBranch(stage, sequence.All)
+	}
+	if sequence.Choice != nil {
+		UnstageBranch(stage, sequence.Choice)
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers

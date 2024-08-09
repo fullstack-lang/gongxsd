@@ -69,6 +69,12 @@ func (allFormCallback *AllFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(all_.MinOccurs), formDiv)
 		case "MaxOccurs":
 			FormDivBasicFieldToField(&(all_.MaxOccurs), formDiv)
+		case "Sequence":
+			FormDivSelectFieldToField(&(all_.Sequence), allFormCallback.probe.stageOfInterest, formDiv)
+		case "All":
+			FormDivSelectFieldToField(&(all_.All), allFormCallback.probe.stageOfInterest, formDiv)
+		case "Choice":
+			FormDivSelectFieldToField(&(all_.Choice), allFormCallback.probe.stageOfInterest, formDiv)
 		}
 	}
 
@@ -539,6 +545,12 @@ func (choiceFormCallback *ChoiceFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(choice_.MinOccurs), formDiv)
 		case "MaxOccurs":
 			FormDivBasicFieldToField(&(choice_.MaxOccurs), formDiv)
+		case "Sequence":
+			FormDivSelectFieldToField(&(choice_.Sequence), choiceFormCallback.probe.stageOfInterest, formDiv)
+		case "All":
+			FormDivSelectFieldToField(&(choice_.All), choiceFormCallback.probe.stageOfInterest, formDiv)
+		case "Choice":
+			FormDivSelectFieldToField(&(choice_.Choice), choiceFormCallback.probe.stageOfInterest, formDiv)
 		}
 	}
 
@@ -2197,6 +2209,12 @@ func (sequenceFormCallback *SequenceFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(sequence_.MinOccurs), formDiv)
 		case "MaxOccurs":
 			FormDivBasicFieldToField(&(sequence_.MaxOccurs), formDiv)
+		case "Sequence":
+			FormDivSelectFieldToField(&(sequence_.Sequence), sequenceFormCallback.probe.stageOfInterest, formDiv)
+		case "All":
+			FormDivSelectFieldToField(&(sequence_.All), sequenceFormCallback.probe.stageOfInterest, formDiv)
+		case "Choice":
+			FormDivSelectFieldToField(&(sequence_.Choice), sequenceFormCallback.probe.stageOfInterest, formDiv)
 		}
 	}
 
