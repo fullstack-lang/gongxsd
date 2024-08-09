@@ -21,22 +21,7 @@ func PostProcessingNames(stage *StageStruct) {
 
 			// loop until the name of the element is not in collision with an existing
 			// diagram name
-			var hasNameCollision bool
-			initialGoIdentifier := xsdNameToGoIdentifier(x.Name)
-
-			goIdentifier := initialGoIdentifier
-			index := 0
-			for index == 0 || hasNameCollision {
-				index++
-				_, hasNameCollision = setOfGoIdentifiers[goIdentifier]
-
-				if hasNameCollision {
-					goIdentifier = initialGoIdentifier + fmt.Sprintf("_%d", index)
-					x.HasNameConflict = true
-				}
-			}
-			setOfGoIdentifiers[goIdentifier] = nil
-			x.GoIdentifier = goIdentifier
+			computeGoIdentifier(x.Name, &x.WithGoIdentifier, setOfGoIdentifiers)
 		}
 		if x.Annotation != nil {
 			x.Annotation.Name = prefix(x.Name)
@@ -45,6 +30,8 @@ func PostProcessingNames(stage *StageStruct) {
 	}
 	for x := range *GetGongstructInstancesSet[ComplexType](stage) {
 		x.Name = x.NameXSD
+
+		computeGoIdentifier(x.Name, &x.WithGoIdentifier, setOfGoIdentifiers)
 
 		if _x, ok := map_EmbeddedComplexStruct[x]; ok {
 			x.Name = prefix(_x.Name)
@@ -187,4 +174,23 @@ func PostProcessingNames(stage *StageStruct) {
 			x.Annotation.Name = prefix(x.Name)
 		}
 	}
+}
+
+func computeGoIdentifier(name string, x *WithGoIdentifier, setOfGoIdentifiers map[string]any) {
+	var hasNameCollision bool
+	initialGoIdentifier := xsdNameToGoIdentifier(name)
+
+	goIdentifier := initialGoIdentifier
+	index := 0
+	for index == 0 || hasNameCollision {
+		index++
+		_, hasNameCollision = setOfGoIdentifiers[goIdentifier]
+
+		if hasNameCollision {
+			goIdentifier = initialGoIdentifier + fmt.Sprintf("_%d", index)
+			x.HasNameConflict = true
+		}
+	}
+	setOfGoIdentifiers[goIdentifier] = nil
+	x.GoIdentifier = goIdentifier
 }

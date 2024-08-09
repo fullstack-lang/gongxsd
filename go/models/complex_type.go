@@ -3,6 +3,8 @@ package models
 type ComplexType struct {
 	Name string
 
+	WithGoIdentifier
+
 	// analysis
 	IsInlined        bool // it has been defined by the enclosing element
 	EnclosingElement *Element
@@ -43,7 +45,7 @@ func (ct *ComplexType) Fields(stage *StageStruct) (fields string) {
 		} else {
 			if ct, ok := ctMap[elem.Type]; ok {
 				fields += "\n\n\t// generated from element \"" + elem.NameXSD + "\" of type " + ct.Name +
-					"\n\t" + elem.GoIdentifier + " []*" + xsdNameToGoIdentifier(ct.Name) + " " + "`" + `xml:"` + elem.NameXSD + `"` + "`"
+					"\n\t" + elem.GoIdentifier + " []*" + ct.GoIdentifier + " " + "`" + `xml:"` + elem.NameXSD + `"` + "`"
 			}
 		}
 	}

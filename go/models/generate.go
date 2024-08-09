@@ -32,7 +32,7 @@ func Generate(stage *StageStruct, outputFilePath string) {
 		templInsertionLevel0[ModelsFileTmplLevel0AllGongstructsCode] += Replace3(
 			ModelsFileTmplLevel1Code[ModelsFileTmplLevel1OneGongstructCode],
 
-			"{{"+string(rune(ModelsFileTmplLevel2Structname))+"}}", xsdNameToGoIdentifier(ct.Name),
+			"{{"+string(rune(ModelsFileTmplLevel2Structname))+"}}", ct.GoIdentifier,
 
 			"{{"+string(rune(ModelsFileTmplLevel2Source))+"}}",
 			`named complex type "`+ct.Name+`"`,
