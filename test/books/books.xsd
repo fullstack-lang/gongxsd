@@ -43,6 +43,7 @@
                     <xs:documentation>The format of the book, either Paperback or Hardcover.</xs:documentation>
                 </xs:annotation>
             </xs:element>
+            <xs:element name="credit" type="credit" minOccurs="0" maxOccurs="unbounded" />
         </xs:sequence>
         <xs:attributeGroup ref="extendedAttributes" />
     </xs:complexType>
@@ -104,4 +105,38 @@
         </xs:anyAttribute>
     </xs:attributeGroup>
 
+    <xs:complexType name="credit">
+        <xs:annotation>
+            <xs:documentation>The credit type .. </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="credit-type" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="link" type="link" minOccurs="0" maxOccurs="unbounded" />
+            <xs:choice>
+                <xs:sequence>
+                    <xs:choice>
+                        <xs:element name="credit-words" type="xs:string" />
+                        <xs:element name="credit-symbol" type="xs:string" />
+                    </xs:choice>
+                    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                        <xs:element name="link" type="link" minOccurs="0" maxOccurs="unbounded" />
+                        <xs:choice>
+                            <xs:element name="credit-words" type="xs:string" />
+                            <xs:element name="credit-symbol" type="xs:string" />
+                        </xs:choice>
+                    </xs:sequence>
+                </xs:sequence>
+            </xs:choice>
+        </xs:sequence>
+        <xs:attribute name="page" type="xs:positiveInteger" />
+    </xs:complexType>
+
+    <xs:complexType name="link">
+        <xs:annotation>
+            <xs:documentation>The link type serves as an outgoing simple XLink. If a relative link
+                is used within a document that is part of a compressed MusicXML file, the link is
+                relative to the root folder of the zip file.</xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="name" type="xs:token" />
+    </xs:complexType>
 </xs:schema>

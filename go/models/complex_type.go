@@ -31,7 +31,8 @@ func (ct *ComplexType) Fields(stage *StageStruct) (fields string) {
 		return
 	}
 
-	elems := ct.Composer.getElements()
+	map_Name_Elems := make(map[string]*Element)
+	elems := ct.Composer.getElements(map_Name_Elems)
 	// for _, e := range elems {
 	// 	fields += "\n\t// elem " + e.GoIdentifier
 	// }

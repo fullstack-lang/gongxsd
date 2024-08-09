@@ -23,6 +23,35 @@ type BookType struct {
 
 	// generated from element "format" of type bookFormatEnum
 	Format string `xml:"format"`
+
+	// generated from element "credit" of type credit
+	Credit []*Credit `xml:"credit"`
+}
+
+// Credit is generated from named complex type "credit"
+type Credit struct {
+	Name string `xml:"-"`
+	
+	// insertion point for fields
+
+	// generated from element "credit-type" of type xs:string
+	Credit_type string `xml:"credit-type"`
+
+	// generated from element "link" of type link
+	Link []*Link `xml:"link"`
+
+	// generated from element "credit-words" of type xs:string
+	Credit_words string `xml:"credit-words"`
+
+	// generated from element "credit-symbol" of type xs:string
+	Credit_symbol string `xml:"credit-symbol"`
+}
+
+// Link is generated from named complex type "link"
+type Link struct {
+	Name string `xml:"-"`
+	
+	// insertion point for fields
 }
 
 // Books is generated from inlined complex type within element "books"

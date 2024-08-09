@@ -6,25 +6,37 @@ type Composer struct {
 	Choice   *Choice   `xml:"choice"`
 }
 
-func (composer *Composer) getElements() (elems []*Element) {
+func (composer *Composer) getElements(map_Name_Elems map[string]*Element) (elems []*Element) {
 
 	if composer.Sequence != nil {
 		for _, e := range composer.Sequence.Elements {
+			if _, ok := map_Name_Elems[e.Name]; ok {
+				continue
+			}
+			map_Name_Elems[e.Name] = e
 			elems = append(elems, e)
 		}
-		elems = append(elems, composer.Sequence.Composer.getElements()...)
+		elems = append(elems, composer.Sequence.Composer.getElements(map_Name_Elems)...)
 	}
 	if composer.Choice != nil {
 		for _, e := range composer.Choice.Elements {
+			if _, ok := map_Name_Elems[e.Name]; ok {
+				continue
+			}
+			map_Name_Elems[e.Name] = e
 			elems = append(elems, e)
 		}
-		elems = append(elems, composer.Choice.Composer.getElements()...)
+		elems = append(elems, composer.Choice.Composer.getElements(map_Name_Elems)...)
 	}
 	if composer.All != nil {
 		for _, e := range composer.All.Elements {
+			if _, ok := map_Name_Elems[e.Name]; ok {
+				continue
+			}
+			map_Name_Elems[e.Name] = e
 			elems = append(elems, e)
 		}
-		elems = append(elems, composer.All.Composer.getElements()...)
+		elems = append(elems, composer.All.Composer.getElements(map_Name_Elems)...)
 	}
 
 	return

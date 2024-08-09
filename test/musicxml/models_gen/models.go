@@ -326,18 +326,6 @@ type Credit struct {
 	// generated from element "credit-image" of type image
 	Credit_image []*Image `xml:"credit-image"`
 
-	// generated from element "link" of type link
-	Link []*Link `xml:"link"`
-
-	// generated from element "bookmark" of type bookmark
-	Bookmark []*Bookmark `xml:"bookmark"`
-
-	// generated from element "credit-words" of type formatted-text-id
-	Credit_words []*Formatted_text_id `xml:"credit-words"`
-
-	// generated from element "credit-symbol" of type formatted-symbol-id
-	Credit_symbol []*Formatted_symbol_id `xml:"credit-symbol"`
-
 	// generated from element "credit-words" of type formatted-text-id
 	Credit_words []*Formatted_text_id `xml:"credit-words"`
 
@@ -1077,17 +1065,8 @@ type Lyric struct {
 	// generated from element "text" of type text-element-data
 	Text []*Text_element_data `xml:"text"`
 
-	// generated from element "extend" of type extend
-	Extend []*Extend `xml:"extend"`
-
-	// generated from element "text" of type text-element-data
-	Text []*Text_element_data `xml:"text"`
-
 	// generated from element "elision" of type elision
 	Elision []*Elision `xml:"elision"`
-
-	// generated from element "syllabic" of type syllabic
-	Syllabic string `xml:"syllabic"`
 }
 
 // Lyric_font is generated from named complex type "lyric-font"
@@ -1390,12 +1369,6 @@ type Note struct {
 
 	// generated from element "tie" of type tie
 	Tie []*Tie `xml:"tie"`
-
-	// generated from element "tie" of type tie
-	Tie []*Tie `xml:"tie"`
-
-	// generated from element "cue" of type empty
-	Cue []*Empty `xml:"cue"`
 }
 
 // Note_size is generated from named complex type "note-size"
