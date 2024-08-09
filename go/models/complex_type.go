@@ -1,7 +1,5 @@
 package models
 
-import "log"
-
 type ComplexType struct {
 	Name string
 
@@ -19,44 +17,41 @@ type ComplexType struct {
 func (ct *ComplexType) Fields(stage *StageStruct) (fields string) {
 
 	stMap := make(map[string]*SimpleType)
-
 	for st := range *GetGongstructInstancesSet[SimpleType](stage) {
 		stMap[st.Name] = st
+	}
+	ctMap := make(map[string]*ComplexType)
+	for st := range *GetGongstructInstancesSet[ComplexType](stage) {
+		ctMap[st.Name] = st
 	}
 
 	if ct.Sequence == nil {
 		return
 	}
 
-	seq := ct.Sequence
+	elems := ct.Composer.getElements()
+	// for _, e := range elems {
+	// 	fields += "\n\t// elem " + e.GoIdentifier
+	// }
 
-	for _, elem := range seq.Elements {
-		switch elem.Type {
-		case "xs:string":
-			fields += "\n\n\t// generated from element " + elem.NameXSD + " with type xs:string" +
-				"\n\t" + elem.GoIdentifier + " string " + "`" + `xml:"` + elem.NameXSD + `"` + "`"
-		case "xs:integer":
-			fields += "\n\n\t// generated from element " + elem.NameXSD + " with type xs:integer" +
-				"\n\t" + elem.GoIdentifier + " int " + "`" + `xml:"` + elem.NameXSD + `"` + "`"
-		}
+	for _, elem := range elems {
 
-		// element type is a simple type
-		if st, ok := stMap[elem.Type]; ok {
-			if st.Restriction == nil {
-				log.Fatalln("simple type without restriction", st.NameXSD)
-			}
-
-			goType := generateGoType(st.Restriction.Base, stMap)
-
-			fields += "\n\n\t// generated from element \"" + elem.NameXSD + "\" with type simple type " + st.NameXSD +
+		goType := generateGoTypeFromSimpleType(elem.Type, stMap)
+		if goType != "" {
+			fields += "\n\n\t// generated from element \"" + elem.NameXSD + "\" of type " + elem.Type +
 				"\n\t" + elem.GoIdentifier + " " + goType + " " + "`" + `xml:"` + elem.NameXSD + `"` + "`"
+		} else {
+			if ct, ok := ctMap[elem.Type]; ok {
+				fields += "\n\n\t// generated from element \"" + elem.NameXSD + "\" of type " + ct.Name +
+					"\n\t" + elem.GoIdentifier + " []*" + xsdNameToGoIdentifier(ct.Name) + " " + "`" + `xml:"` + elem.NameXSD + `"` + "`"
+			}
 		}
 	}
 
 	return
 }
 
-func generateGoType(base string, stMap map[string]*SimpleType) (goType string) {
+func generateGoTypeFromSimpleType(base string, stMap map[string]*SimpleType) (goType string) {
 
 	switch base {
 	// String types
@@ -84,9 +79,7 @@ func generateGoType(base string, stMap map[string]*SimpleType) (goType string) {
 	// a base can refer a simple type
 	if goType == "" {
 		if st, ok := stMap[base]; ok {
-			return generateGoType(st.Restriction.Base, stMap)
-		} else {
-			log.Fatalln("unknown restriction base", base)
+			return generateGoTypeFromSimpleType(st.Restriction.Base, stMap)
 		}
 	}
 	return

@@ -36,7 +36,7 @@ map[ModelsFileTmplLevel1]string{
 		`}} is generated from {{` + string(rune(ModelsFileTmplLevel2Source)) +
 		`}}
 type {{` + string(rune(ModelsFileTmplLevel2Structname)) + `}} struct {
-	Name string
+	Name string ` + "`" + "xml:\"-\"" + "`" + `
 	
 	// insertion point for fields{{` + string(rune(ModelsFileTmplLevel2Fields)) + `}}
 }
