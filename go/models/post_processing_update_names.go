@@ -1,5 +1,7 @@
 package models
 
+import "fmt"
+
 func prefix(s string) string {
 	return s + "_E"
 }
@@ -8,16 +10,37 @@ func PostProcessingUpdateNames(stage *StageStruct) {
 
 	// map of embedded complex struct within elements
 	map_EmbeddedComplexStruct := make(map[*ComplexType]*Element)
+	setOfGoIdentifiers := make(map[string]any)
 
 	for x := range *GetGongstructInstancesSet[Element](stage) {
 		x.Name = x.NameXSD
 
 		if x.ComplexType != nil {
 			map_EmbeddedComplexStruct[x.ComplexType] = x
+
+			// loop until the name of the element is not in collision with an existing
+			// diagram name
+			var hasNameCollision bool
+			initialGoIdentifier := xsdNameToGoIdentifier(x.Name)
+
+			goIdentifier := initialGoIdentifier
+			index := 0
+			for index == 0 || hasNameCollision {
+				index++
+				_, hasNameCollision = setOfGoIdentifiers[goIdentifier]
+
+				if hasNameCollision {
+					goIdentifier = initialGoIdentifier + fmt.Sprintf("_%d", index)
+					x.HasNameConflict = true
+				}
+			}
+			setOfGoIdentifiers[goIdentifier] = nil
+			x.GoIdentifier = goIdentifier
 		}
 		if x.Annotation != nil {
 			x.Annotation.Name = prefix(x.Name)
 		}
+
 	}
 	for x := range *GetGongstructInstancesSet[ComplexType](stage) {
 		x.Name = x.NameXSD

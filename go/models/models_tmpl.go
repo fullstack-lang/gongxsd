@@ -32,7 +32,10 @@ const (
 
 var ModelsFileTmplLevel1Code map[ModelsFileTmplLevel1]string = // new line
 map[ModelsFileTmplLevel1]string{
-	ModelsFileTmplLevel1OneGongstructCode: `type {{` + string(rune(ModelsFileTmplLevel2Structname)) + `}} struct {
+	ModelsFileTmplLevel1OneGongstructCode: `// {{` + string(rune(ModelsFileTmplLevel2Structname)) +
+		`}} is generated from {{` + string(rune(ModelsFileTmplLevel2Source)) +
+		`}}
+type {{` + string(rune(ModelsFileTmplLevel2Structname)) + `}} struct {
 	Name string
 }
 
@@ -43,10 +46,12 @@ type ModelsFileTmplLevel2 int
 
 const (
 	ModelsFileTmplLevel2Structname ModelsFileTmplLevel2 = iota
+	ModelsFileTmplLevel2Source
 	ModelsFileTmplLevel2Nb
 )
 
 var ModelsFileTmplLevel2Code map[ModelsFileTmplLevel2]string = // new line
 map[ModelsFileTmplLevel2]string{
 	ModelsFileTmplLevel2Structname: ``,
+	ModelsFileTmplLevel2Source:     ``,
 }

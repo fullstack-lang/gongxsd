@@ -874,6 +874,8 @@ func (elementFormCallback *ElementFormCallback) OnSave() {
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(element_.Name), formDiv)
+		case "HasNameInConflictWithAComplexTypeOrElement":
+			FormDivBasicFieldToField(&(element_.HasNameConflict), formDiv)
 		case "Annotation":
 			FormDivSelectFieldToField(&(element_.Annotation), elementFormCallback.probe.stageOfInterest, formDiv)
 		case "NameXSD":

@@ -1422,6 +1422,13 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 			case "Element":
 				switch fieldName {
 				// insertion point for field dependant code
+				case "HasNameInConflictWithAComplexTypeOrElement":
+					// convert string to boolean
+					fielValue, err := strconv.ParseBool(ident.Name)
+					if err != nil {
+						log.Fatalln(err)
+					}
+					__gong__map_Element[identifier].HasNameConflict = fielValue
 				case "Annotation":
 					targetIdentifier := ident.Name
 					__gong__map_Element[identifier].Annotation = __gong__map_Annotation[targetIdentifier]

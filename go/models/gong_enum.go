@@ -170,8 +170,10 @@ func (modelsfiletmpllevel2 ModelsFileTmplLevel2) ToInt() (res int) {
 	// insertion code per enum code
 	case ModelsFileTmplLevel2Structname:
 		res = 0
-	case ModelsFileTmplLevel2Nb:
+	case ModelsFileTmplLevel2Source:
 		res = 1
+	case ModelsFileTmplLevel2Nb:
+		res = 2
 	}
 	return
 }
@@ -184,6 +186,9 @@ func (modelsfiletmpllevel2 *ModelsFileTmplLevel2) FromInt(input int) (err error)
 		*modelsfiletmpllevel2 = ModelsFileTmplLevel2Structname
 		return
 	case 1:
+		*modelsfiletmpllevel2 = ModelsFileTmplLevel2Source
+		return
+	case 2:
 		*modelsfiletmpllevel2 = ModelsFileTmplLevel2Nb
 		return
 	default:
@@ -197,6 +202,8 @@ func (modelsfiletmpllevel2 *ModelsFileTmplLevel2) FromCodeString(input string) (
 	// insertion code per enum code
 	case "ModelsFileTmplLevel2Structname":
 		*modelsfiletmpllevel2 = ModelsFileTmplLevel2Structname
+	case "ModelsFileTmplLevel2Source":
+		*modelsfiletmpllevel2 = ModelsFileTmplLevel2Source
 	case "ModelsFileTmplLevel2Nb":
 		*modelsfiletmpllevel2 = ModelsFileTmplLevel2Nb
 	default:
@@ -211,6 +218,8 @@ func (modelsfiletmpllevel2 *ModelsFileTmplLevel2) ToCodeString() (res string) {
 	// insertion code per enum code
 	case ModelsFileTmplLevel2Structname:
 		res = "ModelsFileTmplLevel2Structname"
+	case ModelsFileTmplLevel2Source:
+		res = "ModelsFileTmplLevel2Source"
 	case ModelsFileTmplLevel2Nb:
 		res = "ModelsFileTmplLevel2Nb"
 	}
@@ -223,6 +232,7 @@ func (modelsfiletmpllevel2 ModelsFileTmplLevel2) Codes() (res []string) {
 
 	// insertion code per enum code
 	res = append(res, "ModelsFileTmplLevel2Structname")
+	res = append(res, "ModelsFileTmplLevel2Source")
 	res = append(res, "ModelsFileTmplLevel2Nb")
 
 	return
@@ -235,6 +245,7 @@ func (modelsfiletmpllevel2 ModelsFileTmplLevel2) CodeValues() (res []int) {
 	// insertion code per enum code
 	res = append(res, 0)
 	res = append(res, 1)
+	res = append(res, 2)
 
 	return
 }

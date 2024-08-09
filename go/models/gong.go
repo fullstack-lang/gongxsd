@@ -1966,7 +1966,6 @@ func (stage *StageStruct) Unstage() { // insertion point for array nil
 // - navigation between staged instances by going backward association links between gongstruct
 // - full refactoring of Gongstruct identifiers / fields
 type Gongstruct interface {
-
 }
 
 type GongtructBasicField interface {
@@ -3695,7 +3694,7 @@ func GetFields[Type Gongstruct]() (res []string) {
 	case Documentation:
 		res = []string{"Name", "Text", "Source", "Lang"}
 	case Element:
-		res = []string{"Name", "Annotation", "NameXSD", "Type", "MinOccurs", "MaxOccurs", "Default", "Fixed", "Nillable", "Ref", "Abstract", "Form", "Block", "Final", "SimpleType", "ComplexType"}
+		res = []string{"Name", "HasNameInConflictWithAComplexTypeOrElement", "Annotation", "NameXSD", "Type", "MinOccurs", "MaxOccurs", "Default", "Fixed", "Nillable", "Ref", "Abstract", "Form", "Block", "Final", "SimpleType", "ComplexType"}
 	case Enumeration:
 		res = []string{"Name", "Annotation", "Value"}
 	case Group:
@@ -3879,7 +3878,7 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 	case *Documentation:
 		res = []string{"Name", "Text", "Source", "Lang"}
 	case *Element:
-		res = []string{"Name", "Annotation", "NameXSD", "Type", "MinOccurs", "MaxOccurs", "Default", "Fixed", "Nillable", "Ref", "Abstract", "Form", "Block", "Final", "SimpleType", "ComplexType"}
+		res = []string{"Name", "HasNameInConflictWithAComplexTypeOrElement", "Annotation", "NameXSD", "Type", "MinOccurs", "MaxOccurs", "Default", "Fixed", "Nillable", "Ref", "Abstract", "Form", "Block", "Final", "SimpleType", "ComplexType"}
 	case *Enumeration:
 		res = []string{"Name", "Annotation", "Value"}
 	case *Group:
@@ -4094,6 +4093,8 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		// string value of fields
 		case "Name":
 			res = inferedInstance.Name
+		case "HasNameInConflictWithAComplexTypeOrElement":
+			res = fmt.Sprintf("%t", inferedInstance.HasNameConflict)
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
 				res = inferedInstance.Annotation.Name
@@ -4583,6 +4584,8 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		// string value of fields
 		case "Name":
 			res = inferedInstance.Name
+		case "HasNameInConflictWithAComplexTypeOrElement":
+			res = fmt.Sprintf("%t", inferedInstance.HasNameConflict)
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
 				res = inferedInstance.Annotation.Name

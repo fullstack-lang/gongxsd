@@ -54,6 +54,20 @@
             ]
         },
         {
+            "name": "gongxsd-cli generate musicxml",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceFolder}/go/cmd/gongxsd-cli",
+            "args": [
+                "generate",
+                "../../../test/musicxml/musicxml.xsd",
+                "-v",
+                "-o",
+                "../../../test/musicxml/models_gen/models.go"
+            ]
+        },
+        {
             "name": "go read musicxml",
             "type": "go",
             "request": "launch",

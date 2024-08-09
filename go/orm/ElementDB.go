@@ -74,6 +74,10 @@ type ElementDB struct {
 	// Declation for basic field elementDB.Name
 	Name_Data sql.NullString
 
+	// Declation for basic field elementDB.HasNameInConflictWithAComplexTypeOrElement
+	// provide the sql storage for the boolan
+	HasNameInConflictWithAComplexTypeOrElement_Data sql.NullBool
+
 	// Declation for basic field elementDB.NameXSD
 	NameXSD_Data sql.NullString
 
@@ -109,7 +113,7 @@ type ElementDB struct {
 
 	// Declation for basic field elementDB.Final
 	Final_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	ElementPointersEncoding
@@ -134,29 +138,31 @@ type ElementWOP struct {
 
 	Name string `xlsx:"1"`
 
-	NameXSD string `xlsx:"2"`
+	HasNameInConflictWithAComplexTypeOrElement bool `xlsx:"2"`
 
-	Type string `xlsx:"3"`
+	NameXSD string `xlsx:"3"`
 
-	MinOccurs string `xlsx:"4"`
+	Type string `xlsx:"4"`
 
-	MaxOccurs string `xlsx:"5"`
+	MinOccurs string `xlsx:"5"`
 
-	Default string `xlsx:"6"`
+	MaxOccurs string `xlsx:"6"`
 
-	Fixed string `xlsx:"7"`
+	Default string `xlsx:"7"`
 
-	Nillable string `xlsx:"8"`
+	Fixed string `xlsx:"8"`
 
-	Ref string `xlsx:"9"`
+	Nillable string `xlsx:"9"`
 
-	Abstract string `xlsx:"10"`
+	Ref string `xlsx:"10"`
 
-	Form string `xlsx:"11"`
+	Abstract string `xlsx:"11"`
 
-	Block string `xlsx:"12"`
+	Form string `xlsx:"12"`
 
-	Final string `xlsx:"13"`
+	Block string `xlsx:"13"`
+
+	Final string `xlsx:"14"`
 	// insertion for WOP pointer fields
 }
 
@@ -164,6 +170,7 @@ var Element_Fields = []string{
 	// insertion for WOP basic fields
 	"ID",
 	"Name",
+	"HasNameInConflictWithAComplexTypeOrElement",
 	"NameXSD",
 	"Type",
 	"MinOccurs",
@@ -496,6 +503,9 @@ func (elementDB *ElementDB) CopyBasicFieldsFromElement(element *models.Element) 
 	elementDB.Name_Data.String = element.Name
 	elementDB.Name_Data.Valid = true
 
+	elementDB.HasNameInConflictWithAComplexTypeOrElement_Data.Bool = element.HasNameConflict
+	elementDB.HasNameInConflictWithAComplexTypeOrElement_Data.Valid = true
+
 	elementDB.NameXSD_Data.String = element.NameXSD
 	elementDB.NameXSD_Data.Valid = true
 
@@ -539,6 +549,9 @@ func (elementDB *ElementDB) CopyBasicFieldsFromElement_WOP(element *models.Eleme
 
 	elementDB.Name_Data.String = element.Name
 	elementDB.Name_Data.Valid = true
+
+	elementDB.HasNameInConflictWithAComplexTypeOrElement_Data.Bool = element.HasNameInConflictWithAComplexTypeOrElement
+	elementDB.HasNameInConflictWithAComplexTypeOrElement_Data.Valid = true
 
 	elementDB.NameXSD_Data.String = element.NameXSD
 	elementDB.NameXSD_Data.Valid = true
@@ -584,6 +597,9 @@ func (elementDB *ElementDB) CopyBasicFieldsFromElementWOP(element *ElementWOP) {
 	elementDB.Name_Data.String = element.Name
 	elementDB.Name_Data.Valid = true
 
+	elementDB.HasNameInConflictWithAComplexTypeOrElement_Data.Bool = element.HasNameInConflictWithAComplexTypeOrElement
+	elementDB.HasNameInConflictWithAComplexTypeOrElement_Data.Valid = true
+
 	elementDB.NameXSD_Data.String = element.NameXSD
 	elementDB.NameXSD_Data.Valid = true
 
@@ -625,6 +641,7 @@ func (elementDB *ElementDB) CopyBasicFieldsFromElementWOP(element *ElementWOP) {
 func (elementDB *ElementDB) CopyBasicFieldsToElement(element *models.Element) {
 	// insertion point for checkout of basic fields (back repo to stage)
 	element.Name = elementDB.Name_Data.String
+	element.HasNameConflict = elementDB.HasNameInConflictWithAComplexTypeOrElement_Data.Bool
 	element.NameXSD = elementDB.NameXSD_Data.String
 	element.Type = elementDB.Type_Data.String
 	element.MinOccurs = elementDB.MinOccurs_Data.String
@@ -643,6 +660,7 @@ func (elementDB *ElementDB) CopyBasicFieldsToElement(element *models.Element) {
 func (elementDB *ElementDB) CopyBasicFieldsToElement_WOP(element *models.Element_WOP) {
 	// insertion point for checkout of basic fields (back repo to stage)
 	element.Name = elementDB.Name_Data.String
+	element.HasNameInConflictWithAComplexTypeOrElement = elementDB.HasNameInConflictWithAComplexTypeOrElement_Data.Bool
 	element.NameXSD = elementDB.NameXSD_Data.String
 	element.Type = elementDB.Type_Data.String
 	element.MinOccurs = elementDB.MinOccurs_Data.String
@@ -662,6 +680,7 @@ func (elementDB *ElementDB) CopyBasicFieldsToElementWOP(element *ElementWOP) {
 	element.ID = int(elementDB.ID)
 	// insertion point for checkout of basic fields (back repo to stage)
 	element.Name = elementDB.Name_Data.String
+	element.HasNameInConflictWithAComplexTypeOrElement = elementDB.HasNameInConflictWithAComplexTypeOrElement_Data.Bool
 	element.NameXSD = elementDB.NameXSD_Data.String
 	element.Type = elementDB.Type_Data.String
 	element.MinOccurs = elementDB.MinOccurs_Data.String

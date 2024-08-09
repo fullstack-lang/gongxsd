@@ -23,12 +23,50 @@ func Generate(stage *StageStruct, outputFilePath string) {
 
 	for ct := range *GetGongstructInstancesSet[ComplexType](stage) {
 
-		if !ct.IsInlined {
-			templInsertionLevel0[ModelsFileTmplLevel0AllGongstructsCode] += Replace1(
-				ModelsFileTmplLevel1Code[ModelsFileTmplLevel1OneGongstructCode],
-				"{{"+string(rune(ModelsFileTmplLevel2Structname))+"}}", capitalizeFirstLetter(ct.Name),
-			)
+		// not the inline complex type
+		if ct.IsInlined {
+			continue
 		}
+		templInsertionLevel0[ModelsFileTmplLevel0AllGongstructsCode] += Replace2(
+			ModelsFileTmplLevel1Code[ModelsFileTmplLevel1OneGongstructCode],
+
+			"{{"+string(rune(ModelsFileTmplLevel2Structname))+"}}", xsdNameToGoIdentifier(ct.Name),
+
+			"{{"+string(rune(ModelsFileTmplLevel2Source))+"}}",
+			`named complex type "`+ct.Name+`"`,
+		)
+
+	}
+
+	// elements with inline complex type
+	for element := range *GetGongstructInstancesSet[Element](stage) {
+
+		if element.ComplexType == nil {
+			continue
+		}
+
+		// fail loud and fast
+		if !element.ComplexType.IsInlined {
+			log.Fatal("element", element.Name, "has inlined complex type")
+		}
+
+		source := `inlined complex type within element "` + element.Name + `"`
+
+		if element.HasNameConflict {
+			source += `
+// Identifier is post fixed because more than one xsd element has the name "` + element.Name + `"`
+		}
+
+		templInsertionLevel0[ModelsFileTmplLevel0AllGongstructsCode] += Replace2(
+			ModelsFileTmplLevel1Code[ModelsFileTmplLevel1OneGongstructCode],
+
+			"{{"+string(rune(ModelsFileTmplLevel2Structname))+"}}",
+			element.GoIdentifier,
+
+			"{{"+string(rune(ModelsFileTmplLevel2Source))+"}}",
+			source,
+		)
+
 	}
 
 	for insertionPerStructId := ModelsFileTmplLevel0(0); insertionPerStructId < ModelsFileTmplLevel0Nb; insertionPerStructId++ {

@@ -39,27 +39,6 @@ type Schema struct {
 	Groups          []*Group          `xml:"group"`
 }
 
-type Element struct {
-	Name string
-	ElementWithAnnotation
-	ElementWithNameAttribute
-	ElementWithTypeAttribute
-
-	MinOccurs string `xml:"minOccurs,attr"`
-	MaxOccurs string `xml:"maxOccurs,attr"`
-	Default   string `xml:"default,attr"`
-	Fixed     string `xml:"fixed,attr"`
-	Nillable  string `xml:"nillable,attr"`
-	Ref       string `xml:"ref,attr"`
-	Abstract  string `xml:"abstract,attr"`
-	Form      string `xml:"form,attr"`
-	Block     string `xml:"block,attr"`
-	Final     string `xml:"final,attr"`
-
-	SimpleType  *SimpleType  `xml:"simpleType"`
-	ComplexType *ComplexType `xml:"complexType"`
-}
-
 type Group struct {
 	Name string
 	ElementWithAnnotation
