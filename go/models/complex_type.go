@@ -27,11 +27,22 @@ func (ct *ComplexType) Fields(stage *StageStruct) (fields string) {
 		ctMap[st.Name] = st
 	}
 
+	for _, attr := range ct.Attributes {
+		goType := generateGoTypeFromSimpleType(attr.Type, stMap)
+
+		name := xsdNameToGoIdentifier(attr.Name)
+
+		switch name {
+		case "Name":
+			name = "NameXSD"
+		}
+
+		fields += "\n\n\t// generated from attribute \"" + attr.NameXSD + "\" of type " + attr.Type +
+			"\n\t" + name + " " + goType + " " + "`" + `xml:"` + attr.NameXSD + `,attr"` + "`"
+	}
+
 	map_Name_Elems := make(map[string]*Element)
 	elems := ct.Composer.getElements(map_Name_Elems)
-	// for _, e := range elems {
-	// 	fields += "\n\t// elem " + e.GoIdentifier
-	// }
 
 	for _, elem := range elems {
 

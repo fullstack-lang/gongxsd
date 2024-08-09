@@ -34,6 +34,9 @@ type Credit struct {
 	
 	// insertion point for fields
 
+	// generated from attribute "page" of type xs:positiveInteger
+	Page int `xml:"page,attr"`
+
 	// generated from element "credit-type" of type xs:string
 	Credit_type string `xml:"credit-type"`
 
@@ -52,6 +55,9 @@ type Link struct {
 	Name string `xml:"-"`
 	
 	// insertion point for fields
+
+	// generated from attribute "name" of type xs:token
+	NameXSD string `xml:"name,attr"`
 }
 
 // Books is generated from inlined complex type within element "books"
