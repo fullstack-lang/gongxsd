@@ -2,6 +2,7 @@ package models
 
 import "encoding/xml"
 
+// Book is generated from named complex type "bookType"
 type Book struct {
 	ISBN       string `xml:"isbn,attr"`
 	Bestseller bool   `xml:"bestseller,attr"`
@@ -13,6 +14,7 @@ type Book struct {
 }
 
 // Books represents the root element containing multiple books
+// Books is generated from inlined complex type within element "books"
 type Books struct {
 	XMLNSXSI       string `xml:"xmlns:xsi,attr"`
 	SchemaLocation string `xml:"xsi:noNamespaceSchemaLocation,attr"`

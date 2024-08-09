@@ -1115,6 +1115,10 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					// remove first and last char
 					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
 					__gong__map_Element[identifier].Name = fielValue
+				case "GoIdentifier":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_Element[identifier].GoIdentifier = fielValue
 				case "NameXSD":
 					// remove first and last char
 					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
@@ -1422,7 +1426,7 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 			case "Element":
 				switch fieldName {
 				// insertion point for field dependant code
-				case "HasNameInConflictWithAComplexTypeOrElement":
+				case "HasNameConflict":
 					// convert string to boolean
 					fielValue, err := strconv.ParseBool(ident.Name)
 					if err != nil {

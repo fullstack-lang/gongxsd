@@ -27,13 +27,18 @@ func Generate(stage *StageStruct, outputFilePath string) {
 		if ct.IsInlined {
 			continue
 		}
-		templInsertionLevel0[ModelsFileTmplLevel0AllGongstructsCode] += Replace2(
+
+		fields := ct.Fields(stage)
+		templInsertionLevel0[ModelsFileTmplLevel0AllGongstructsCode] += Replace3(
 			ModelsFileTmplLevel1Code[ModelsFileTmplLevel1OneGongstructCode],
 
 			"{{"+string(rune(ModelsFileTmplLevel2Structname))+"}}", xsdNameToGoIdentifier(ct.Name),
 
 			"{{"+string(rune(ModelsFileTmplLevel2Source))+"}}",
 			`named complex type "`+ct.Name+`"`,
+
+			"{{"+string(rune(ModelsFileTmplLevel2Fields))+"}}",
+			fields,
 		)
 
 	}
@@ -57,7 +62,9 @@ func Generate(stage *StageStruct, outputFilePath string) {
 // Identifier is post fixed because more than one xsd element has the name "` + element.Name + `"`
 		}
 
-		templInsertionLevel0[ModelsFileTmplLevel0AllGongstructsCode] += Replace2(
+		fields := element.ComplexType.Fields(stage)
+
+		templInsertionLevel0[ModelsFileTmplLevel0AllGongstructsCode] += Replace3(
 			ModelsFileTmplLevel1Code[ModelsFileTmplLevel1OneGongstructCode],
 
 			"{{"+string(rune(ModelsFileTmplLevel2Structname))+"}}",
@@ -65,6 +72,9 @@ func Generate(stage *StageStruct, outputFilePath string) {
 
 			"{{"+string(rune(ModelsFileTmplLevel2Source))+"}}",
 			source,
+
+			"{{"+string(rune(ModelsFileTmplLevel2Fields))+"}}",
+			fields,
 		)
 
 	}

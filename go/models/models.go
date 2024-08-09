@@ -68,22 +68,6 @@ type Restriction struct {
 	TotalDigit   *TotalDigit    `xml:"totalDigits"`
 }
 
-type ComplexType struct {
-	Name string
-
-	// analysis
-	IsInlined        bool // it has been defined by the enclosing element
-	EnclosingElement *Element
-
-	ElementWithAnnotation
-	ElementWithNameAttribute
-	Sequence        *Sequence         `xml:"sequence"`
-	All             *All              `xml:"all"`
-	Choice          *Choice           `xml:"choice"`
-	Attributes      []*Attribute      `xml:"attribute"`
-	AttributeGroups []*AttributeGroup `xml:"attributeGroup"`
-}
-
 type Attribute struct {
 	Name string
 	ElementWithNameAttribute

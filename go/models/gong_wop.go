@@ -9,7 +9,7 @@ var __GONG_time_The_fool_doth_think_he_is_wise__ = time.Hour
 // insertion point
 type All_WOP struct {
 	// insertion point
-	Name      string
+	Name string
 	MinOccurs string
 	MaxOccurs string
 }
@@ -33,17 +33,17 @@ func (from *Annotation) CopyBasicFields(to *Annotation) {
 
 type Attribute_WOP struct {
 	// insertion point
-	Name            string
-	NameXSD         string
-	Type            string
-	Default         string
-	Use             string
-	Form            string
-	Fixed           string
-	Ref             string
+	Name string
+	NameXSD string
+	Type string
+	Default string
+	Use string
+	Form string
+	Fixed string
+	Ref string
 	TargetNamespace string
-	SimpleType      string
-	IDXSD           string
+	SimpleType string
+	IDXSD string
 }
 
 func (from *Attribute) CopyBasicFields(to *Attribute) {
@@ -63,9 +63,9 @@ func (from *Attribute) CopyBasicFields(to *Attribute) {
 
 type AttributeGroup_WOP struct {
 	// insertion point
-	Name    string
+	Name string
 	NameXSD string
-	Ref     string
+	Ref string
 }
 
 func (from *AttributeGroup) CopyBasicFields(to *AttributeGroup) {
@@ -77,7 +77,7 @@ func (from *AttributeGroup) CopyBasicFields(to *AttributeGroup) {
 
 type Choice_WOP struct {
 	// insertion point
-	Name      string
+	Name string
 	MinOccurs string
 	MaxOccurs string
 }
@@ -91,9 +91,9 @@ func (from *Choice) CopyBasicFields(to *Choice) {
 
 type ComplexType_WOP struct {
 	// insertion point
-	Name      string
+	Name string
 	IsInlined bool
-	NameXSD   string
+	NameXSD string
 }
 
 func (from *ComplexType) CopyBasicFields(to *ComplexType) {
@@ -105,10 +105,10 @@ func (from *ComplexType) CopyBasicFields(to *ComplexType) {
 
 type Documentation_WOP struct {
 	// insertion point
-	Name   string
-	Text   string
+	Name string
+	Text string
 	Source string
-	Lang   string
+	Lang string
 }
 
 func (from *Documentation) CopyBasicFields(to *Documentation) {
@@ -121,26 +121,28 @@ func (from *Documentation) CopyBasicFields(to *Documentation) {
 
 type Element_WOP struct {
 	// insertion point
-	Name                                       string
-	HasNameInConflictWithAComplexTypeOrElement bool
-	NameXSD                                    string
-	Type                                       string
-	MinOccurs                                  string
-	MaxOccurs                                  string
-	Default                                    string
-	Fixed                                      string
-	Nillable                                   string
-	Ref                                        string
-	Abstract                                   string
-	Form                                       string
-	Block                                      string
-	Final                                      string
+	Name string
+	HasNameConflict bool
+	GoIdentifier string
+	NameXSD string
+	Type string
+	MinOccurs string
+	MaxOccurs string
+	Default string
+	Fixed string
+	Nillable string
+	Ref string
+	Abstract string
+	Form string
+	Block string
+	Final string
 }
 
 func (from *Element) CopyBasicFields(to *Element) {
 	// insertion point
 	to.Name = from.Name
 	to.HasNameConflict = from.HasNameConflict
+	to.GoIdentifier = from.GoIdentifier
 	to.NameXSD = from.NameXSD
 	to.Type = from.Type
 	to.MinOccurs = from.MinOccurs
@@ -157,7 +159,7 @@ func (from *Element) CopyBasicFields(to *Element) {
 
 type Enumeration_WOP struct {
 	// insertion point
-	Name  string
+	Name string
 	Value string
 }
 
@@ -169,9 +171,9 @@ func (from *Enumeration) CopyBasicFields(to *Enumeration) {
 
 type Group_WOP struct {
 	// insertion point
-	Name    string
+	Name string
 	NameXSD string
-	Ref     string
+	Ref string
 }
 
 func (from *Group) CopyBasicFields(to *Group) {
@@ -183,7 +185,7 @@ func (from *Group) CopyBasicFields(to *Group) {
 
 type Length_WOP struct {
 	// insertion point
-	Name  string
+	Name string
 	Value string
 }
 
@@ -195,7 +197,7 @@ func (from *Length) CopyBasicFields(to *Length) {
 
 type MaxInclusive_WOP struct {
 	// insertion point
-	Name  string
+	Name string
 	Value string
 }
 
@@ -207,7 +209,7 @@ func (from *MaxInclusive) CopyBasicFields(to *MaxInclusive) {
 
 type MaxLength_WOP struct {
 	// insertion point
-	Name  string
+	Name string
 	Value string
 }
 
@@ -219,7 +221,7 @@ func (from *MaxLength) CopyBasicFields(to *MaxLength) {
 
 type MinInclusive_WOP struct {
 	// insertion point
-	Name  string
+	Name string
 	Value string
 }
 
@@ -231,7 +233,7 @@ func (from *MinInclusive) CopyBasicFields(to *MinInclusive) {
 
 type MinLength_WOP struct {
 	// insertion point
-	Name  string
+	Name string
 	Value string
 }
 
@@ -243,7 +245,7 @@ func (from *MinLength) CopyBasicFields(to *MinLength) {
 
 type Pattern_WOP struct {
 	// insertion point
-	Name  string
+	Name string
 	Value string
 }
 
@@ -268,7 +270,7 @@ func (from *Restriction) CopyBasicFields(to *Restriction) {
 type Schema_WOP struct {
 	// insertion point
 	Name string
-	Xs   string
+	Xs string
 }
 
 func (from *Schema) CopyBasicFields(to *Schema) {
@@ -279,7 +281,7 @@ func (from *Schema) CopyBasicFields(to *Schema) {
 
 type Sequence_WOP struct {
 	// insertion point
-	Name      string
+	Name string
 	MinOccurs string
 	MaxOccurs string
 }
@@ -293,7 +295,7 @@ func (from *Sequence) CopyBasicFields(to *Sequence) {
 
 type SimpleType_WOP struct {
 	// insertion point
-	Name    string
+	Name string
 	NameXSD string
 }
 
@@ -305,7 +307,7 @@ func (from *SimpleType) CopyBasicFields(to *SimpleType) {
 
 type TotalDigit_WOP struct {
 	// insertion point
-	Name  string
+	Name string
 	Value string
 }
 
@@ -317,7 +319,7 @@ func (from *TotalDigit) CopyBasicFields(to *TotalDigit) {
 
 type WhiteSpace_WOP struct {
 	// insertion point
-	Name  string
+	Name string
 	Value string
 }
 
@@ -326,3 +328,4 @@ func (from *WhiteSpace) CopyBasicFields(to *WhiteSpace) {
 	to.Name = from.Name
 	to.Value = from.Value
 }
+

@@ -37,6 +37,7 @@ map[ModelsFileTmplLevel1]string{
 		`}}
 type {{` + string(rune(ModelsFileTmplLevel2Structname)) + `}} struct {
 	Name string
+	// insertion point for fields{{` + string(rune(ModelsFileTmplLevel2Fields)) + `}}
 }
 
 `,
@@ -47,6 +48,7 @@ type ModelsFileTmplLevel2 int
 const (
 	ModelsFileTmplLevel2Structname ModelsFileTmplLevel2 = iota
 	ModelsFileTmplLevel2Source
+	ModelsFileTmplLevel2Fields
 	ModelsFileTmplLevel2Nb
 )
 
@@ -54,4 +56,5 @@ var ModelsFileTmplLevel2Code map[ModelsFileTmplLevel2]string = // new line
 map[ModelsFileTmplLevel2]string{
 	ModelsFileTmplLevel2Structname: ``,
 	ModelsFileTmplLevel2Source:     ``,
+	ModelsFileTmplLevel2Fields:     ``,
 }

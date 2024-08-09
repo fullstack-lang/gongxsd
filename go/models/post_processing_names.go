@@ -6,7 +6,7 @@ func prefix(s string) string {
 	return s + "_E"
 }
 
-func PostProcessingUpdateNames(stage *StageStruct) {
+func PostProcessingNames(stage *StageStruct) {
 
 	// map of embedded complex struct within elements
 	map_EmbeddedComplexStruct := make(map[*ComplexType]*Element)
@@ -14,6 +14,7 @@ func PostProcessingUpdateNames(stage *StageStruct) {
 
 	for x := range *GetGongstructInstancesSet[Element](stage) {
 		x.Name = x.NameXSD
+		x.GoIdentifier = xsdNameToGoIdentifier(x.Name)
 
 		if x.ComplexType != nil {
 			map_EmbeddedComplexStruct[x.ComplexType] = x

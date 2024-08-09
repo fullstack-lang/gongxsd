@@ -1,6 +1,6 @@
 package models
 
 func PostProcessing(stage *StageStruct) {
-	PostProcessingUpdateNames(stage)
+	PostProcessingNames(stage)
 	PostProcessingAnalyzeXSDStructure(stage)
 }
