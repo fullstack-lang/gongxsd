@@ -280,168 +280,8 @@ type ALTERNATIVE_ID_21 struct {
 	// insertion point for fields
 }
 
-// ALTERNATIVE_ID_13 is generated from inlined complex type within element "ALTERNATIVE-ID"
-// Identifier is post fixed because more than one xsd element has the name "ALTERNATIVE-ID"
-type ALTERNATIVE_ID_13 struct {
-	Name string `xml:"-"`
-	
-	// insertion point for fields
-}
-
-// ALTERNATIVE_ID_20 is generated from inlined complex type within element "ALTERNATIVE-ID"
-// Identifier is post fixed because more than one xsd element has the name "ALTERNATIVE-ID"
-type ALTERNATIVE_ID_20 struct {
-	Name string `xml:"-"`
-	
-	// insertion point for fields
-}
-
-// ALTERNATIVE_ID_19 is generated from inlined complex type within element "ALTERNATIVE-ID"
-// Identifier is post fixed because more than one xsd element has the name "ALTERNATIVE-ID"
-type ALTERNATIVE_ID_19 struct {
-	Name string `xml:"-"`
-	
-	// insertion point for fields
-}
-
-// ALTERNATIVE_ID_8 is generated from inlined complex type within element "ALTERNATIVE-ID"
-// Identifier is post fixed because more than one xsd element has the name "ALTERNATIVE-ID"
-type ALTERNATIVE_ID_8 struct {
-	Name string `xml:"-"`
-	
-	// insertion point for fields
-}
-
-// ALTERNATIVE_ID_7 is generated from inlined complex type within element "ALTERNATIVE-ID"
-// Identifier is post fixed because more than one xsd element has the name "ALTERNATIVE-ID"
-type ALTERNATIVE_ID_7 struct {
-	Name string `xml:"-"`
-	
-	// insertion point for fields
-}
-
-// ALTERNATIVE_ID_6 is generated from inlined complex type within element "ALTERNATIVE-ID"
-// Identifier is post fixed because more than one xsd element has the name "ALTERNATIVE-ID"
-type ALTERNATIVE_ID_6 struct {
-	Name string `xml:"-"`
-	
-	// insertion point for fields
-}
-
-// ALTERNATIVE_ID_5 is generated from inlined complex type within element "ALTERNATIVE-ID"
-// Identifier is post fixed because more than one xsd element has the name "ALTERNATIVE-ID"
-type ALTERNATIVE_ID_5 struct {
-	Name string `xml:"-"`
-	
-	// insertion point for fields
-}
-
-// ALTERNATIVE_ID_10 is generated from inlined complex type within element "ALTERNATIVE-ID"
-// Identifier is post fixed because more than one xsd element has the name "ALTERNATIVE-ID"
-type ALTERNATIVE_ID_10 struct {
-	Name string `xml:"-"`
-	
-	// insertion point for fields
-}
-
-// ALTERNATIVE_ID_18 is generated from inlined complex type within element "ALTERNATIVE-ID"
-// Identifier is post fixed because more than one xsd element has the name "ALTERNATIVE-ID"
-type ALTERNATIVE_ID_18 struct {
-	Name string `xml:"-"`
-	
-	// insertion point for fields
-}
-
-// ALTERNATIVE_ID_14 is generated from inlined complex type within element "ALTERNATIVE-ID"
-// Identifier is post fixed because more than one xsd element has the name "ALTERNATIVE-ID"
-type ALTERNATIVE_ID_14 struct {
-	Name string `xml:"-"`
-	
-	// insertion point for fields
-}
-
-// ALTERNATIVE_ID_4 is generated from inlined complex type within element "ALTERNATIVE-ID"
-// Identifier is post fixed because more than one xsd element has the name "ALTERNATIVE-ID"
-type ALTERNATIVE_ID_4 struct {
-	Name string `xml:"-"`
-	
-	// insertion point for fields
-}
-
-// ALTERNATIVE_ID_9 is generated from inlined complex type within element "ALTERNATIVE-ID"
-// Identifier is post fixed because more than one xsd element has the name "ALTERNATIVE-ID"
-type ALTERNATIVE_ID_9 struct {
-	Name string `xml:"-"`
-	
-	// insertion point for fields
-}
-
-// ALTERNATIVE_ID_3 is generated from inlined complex type within element "ALTERNATIVE-ID"
-// Identifier is post fixed because more than one xsd element has the name "ALTERNATIVE-ID"
-type ALTERNATIVE_ID_3 struct {
-	Name string `xml:"-"`
-	
-	// insertion point for fields
-}
-
-// ALTERNATIVE_ID_22 is generated from inlined complex type within element "ALTERNATIVE-ID"
-// Identifier is post fixed because more than one xsd element has the name "ALTERNATIVE-ID"
-type ALTERNATIVE_ID_22 struct {
-	Name string `xml:"-"`
-	
-	// insertion point for fields
-}
-
-// ALTERNATIVE_ID_15 is generated from inlined complex type within element "ALTERNATIVE-ID"
-// Identifier is post fixed because more than one xsd element has the name "ALTERNATIVE-ID"
-type ALTERNATIVE_ID_15 struct {
-	Name string `xml:"-"`
-	
-	// insertion point for fields
-}
-
-// ALTERNATIVE_ID_1 is generated from inlined complex type within element "ALTERNATIVE-ID"
-// Identifier is post fixed because more than one xsd element has the name "ALTERNATIVE-ID"
-type ALTERNATIVE_ID_1 struct {
-	Name string `xml:"-"`
-	
-	// insertion point for fields
-}
-
-// ALTERNATIVE_ID_12 is generated from inlined complex type within element "ALTERNATIVE-ID"
-// Identifier is post fixed because more than one xsd element has the name "ALTERNATIVE-ID"
-type ALTERNATIVE_ID_12 struct {
-	Name string `xml:"-"`
-	
-	// insertion point for fields
-}
-
-// ALTERNATIVE_ID_17 is generated from inlined complex type within element "ALTERNATIVE-ID"
-// Identifier is post fixed because more than one xsd element has the name "ALTERNATIVE-ID"
-type ALTERNATIVE_ID_17 struct {
-	Name string `xml:"-"`
-	
-	// insertion point for fields
-}
-
 // ALTERNATIVE_ID is generated from inlined complex type within element "ALTERNATIVE-ID"
 type ALTERNATIVE_ID struct {
-	Name string `xml:"-"`
-	
-	// insertion point for fields
-}
-
-// ALTERNATIVE_ID_11 is generated from inlined complex type within element "ALTERNATIVE-ID"
-// Identifier is post fixed because more than one xsd element has the name "ALTERNATIVE-ID"
-type ALTERNATIVE_ID_11 struct {
-	Name string `xml:"-"`
-	
-	// insertion point for fields
-}
-
-// ALTERNATIVE_ID_23 is generated from inlined complex type within element "ALTERNATIVE-ID"
-// Identifier is post fixed because more than one xsd element has the name "ALTERNATIVE-ID"
-type ALTERNATIVE_ID_23 struct {
 	Name string `xml:"-"`
 	
 	// insertion point for fields
@@ -455,9 +295,169 @@ type ALTERNATIVE_ID_2 struct {
 	// insertion point for fields
 }
 
+// ALTERNATIVE_ID_7 is generated from inlined complex type within element "ALTERNATIVE-ID"
+// Identifier is post fixed because more than one xsd element has the name "ALTERNATIVE-ID"
+type ALTERNATIVE_ID_7 struct {
+	Name string `xml:"-"`
+	
+	// insertion point for fields
+}
+
+// ALTERNATIVE_ID_13 is generated from inlined complex type within element "ALTERNATIVE-ID"
+// Identifier is post fixed because more than one xsd element has the name "ALTERNATIVE-ID"
+type ALTERNATIVE_ID_13 struct {
+	Name string `xml:"-"`
+	
+	// insertion point for fields
+}
+
+// ALTERNATIVE_ID_10 is generated from inlined complex type within element "ALTERNATIVE-ID"
+// Identifier is post fixed because more than one xsd element has the name "ALTERNATIVE-ID"
+type ALTERNATIVE_ID_10 struct {
+	Name string `xml:"-"`
+	
+	// insertion point for fields
+}
+
+// ALTERNATIVE_ID_9 is generated from inlined complex type within element "ALTERNATIVE-ID"
+// Identifier is post fixed because more than one xsd element has the name "ALTERNATIVE-ID"
+type ALTERNATIVE_ID_9 struct {
+	Name string `xml:"-"`
+	
+	// insertion point for fields
+}
+
+// ALTERNATIVE_ID_1 is generated from inlined complex type within element "ALTERNATIVE-ID"
+// Identifier is post fixed because more than one xsd element has the name "ALTERNATIVE-ID"
+type ALTERNATIVE_ID_1 struct {
+	Name string `xml:"-"`
+	
+	// insertion point for fields
+}
+
+// ALTERNATIVE_ID_3 is generated from inlined complex type within element "ALTERNATIVE-ID"
+// Identifier is post fixed because more than one xsd element has the name "ALTERNATIVE-ID"
+type ALTERNATIVE_ID_3 struct {
+	Name string `xml:"-"`
+	
+	// insertion point for fields
+}
+
+// ALTERNATIVE_ID_14 is generated from inlined complex type within element "ALTERNATIVE-ID"
+// Identifier is post fixed because more than one xsd element has the name "ALTERNATIVE-ID"
+type ALTERNATIVE_ID_14 struct {
+	Name string `xml:"-"`
+	
+	// insertion point for fields
+}
+
+// ALTERNATIVE_ID_6 is generated from inlined complex type within element "ALTERNATIVE-ID"
+// Identifier is post fixed because more than one xsd element has the name "ALTERNATIVE-ID"
+type ALTERNATIVE_ID_6 struct {
+	Name string `xml:"-"`
+	
+	// insertion point for fields
+}
+
 // ALTERNATIVE_ID_16 is generated from inlined complex type within element "ALTERNATIVE-ID"
 // Identifier is post fixed because more than one xsd element has the name "ALTERNATIVE-ID"
 type ALTERNATIVE_ID_16 struct {
+	Name string `xml:"-"`
+	
+	// insertion point for fields
+}
+
+// ALTERNATIVE_ID_17 is generated from inlined complex type within element "ALTERNATIVE-ID"
+// Identifier is post fixed because more than one xsd element has the name "ALTERNATIVE-ID"
+type ALTERNATIVE_ID_17 struct {
+	Name string `xml:"-"`
+	
+	// insertion point for fields
+}
+
+// ALTERNATIVE_ID_15 is generated from inlined complex type within element "ALTERNATIVE-ID"
+// Identifier is post fixed because more than one xsd element has the name "ALTERNATIVE-ID"
+type ALTERNATIVE_ID_15 struct {
+	Name string `xml:"-"`
+	
+	// insertion point for fields
+}
+
+// ALTERNATIVE_ID_23 is generated from inlined complex type within element "ALTERNATIVE-ID"
+// Identifier is post fixed because more than one xsd element has the name "ALTERNATIVE-ID"
+type ALTERNATIVE_ID_23 struct {
+	Name string `xml:"-"`
+	
+	// insertion point for fields
+}
+
+// ALTERNATIVE_ID_4 is generated from inlined complex type within element "ALTERNATIVE-ID"
+// Identifier is post fixed because more than one xsd element has the name "ALTERNATIVE-ID"
+type ALTERNATIVE_ID_4 struct {
+	Name string `xml:"-"`
+	
+	// insertion point for fields
+}
+
+// ALTERNATIVE_ID_22 is generated from inlined complex type within element "ALTERNATIVE-ID"
+// Identifier is post fixed because more than one xsd element has the name "ALTERNATIVE-ID"
+type ALTERNATIVE_ID_22 struct {
+	Name string `xml:"-"`
+	
+	// insertion point for fields
+}
+
+// ALTERNATIVE_ID_20 is generated from inlined complex type within element "ALTERNATIVE-ID"
+// Identifier is post fixed because more than one xsd element has the name "ALTERNATIVE-ID"
+type ALTERNATIVE_ID_20 struct {
+	Name string `xml:"-"`
+	
+	// insertion point for fields
+}
+
+// ALTERNATIVE_ID_11 is generated from inlined complex type within element "ALTERNATIVE-ID"
+// Identifier is post fixed because more than one xsd element has the name "ALTERNATIVE-ID"
+type ALTERNATIVE_ID_11 struct {
+	Name string `xml:"-"`
+	
+	// insertion point for fields
+}
+
+// ALTERNATIVE_ID_8 is generated from inlined complex type within element "ALTERNATIVE-ID"
+// Identifier is post fixed because more than one xsd element has the name "ALTERNATIVE-ID"
+type ALTERNATIVE_ID_8 struct {
+	Name string `xml:"-"`
+	
+	// insertion point for fields
+}
+
+// ALTERNATIVE_ID_19 is generated from inlined complex type within element "ALTERNATIVE-ID"
+// Identifier is post fixed because more than one xsd element has the name "ALTERNATIVE-ID"
+type ALTERNATIVE_ID_19 struct {
+	Name string `xml:"-"`
+	
+	// insertion point for fields
+}
+
+// ALTERNATIVE_ID_5 is generated from inlined complex type within element "ALTERNATIVE-ID"
+// Identifier is post fixed because more than one xsd element has the name "ALTERNATIVE-ID"
+type ALTERNATIVE_ID_5 struct {
+	Name string `xml:"-"`
+	
+	// insertion point for fields
+}
+
+// ALTERNATIVE_ID_18 is generated from inlined complex type within element "ALTERNATIVE-ID"
+// Identifier is post fixed because more than one xsd element has the name "ALTERNATIVE-ID"
+type ALTERNATIVE_ID_18 struct {
+	Name string `xml:"-"`
+	
+	// insertion point for fields
+}
+
+// ALTERNATIVE_ID_12 is generated from inlined complex type within element "ALTERNATIVE-ID"
+// Identifier is post fixed because more than one xsd element has the name "ALTERNATIVE-ID"
+type ALTERNATIVE_ID_12 struct {
 	Name string `xml:"-"`
 	
 	// insertion point for fields
@@ -492,6 +492,22 @@ type DATATYPES struct {
 	// insertion point for fields
 }
 
+// DEFAULT_VALUE_2 is generated from inlined complex type within element "DEFAULT-VALUE"
+// Identifier is post fixed because more than one xsd element has the name "DEFAULT-VALUE"
+type DEFAULT_VALUE_2 struct {
+	Name string `xml:"-"`
+	
+	// insertion point for fields
+}
+
+// DEFAULT_VALUE_1 is generated from inlined complex type within element "DEFAULT-VALUE"
+// Identifier is post fixed because more than one xsd element has the name "DEFAULT-VALUE"
+type DEFAULT_VALUE_1 struct {
+	Name string `xml:"-"`
+	
+	// insertion point for fields
+}
+
 // DEFAULT_VALUE is generated from inlined complex type within element "DEFAULT-VALUE"
 type DEFAULT_VALUE struct {
 	Name string `xml:"-"`
@@ -507,9 +523,17 @@ type DEFAULT_VALUE_5 struct {
 	// insertion point for fields
 }
 
-// DEFAULT_VALUE_1 is generated from inlined complex type within element "DEFAULT-VALUE"
+// DEFAULT_VALUE_4 is generated from inlined complex type within element "DEFAULT-VALUE"
 // Identifier is post fixed because more than one xsd element has the name "DEFAULT-VALUE"
-type DEFAULT_VALUE_1 struct {
+type DEFAULT_VALUE_4 struct {
+	Name string `xml:"-"`
+	
+	// insertion point for fields
+}
+
+// DEFAULT_VALUE_3 is generated from inlined complex type within element "DEFAULT-VALUE"
+// Identifier is post fixed because more than one xsd element has the name "DEFAULT-VALUE"
+type DEFAULT_VALUE_3 struct {
 	Name string `xml:"-"`
 	
 	// insertion point for fields
@@ -523,25 +547,25 @@ type DEFAULT_VALUE_6 struct {
 	// insertion point for fields
 }
 
-// DEFAULT_VALUE_4 is generated from inlined complex type within element "DEFAULT-VALUE"
-// Identifier is post fixed because more than one xsd element has the name "DEFAULT-VALUE"
-type DEFAULT_VALUE_4 struct {
+// DEFINITION_3 is generated from inlined complex type within element "DEFINITION"
+// Identifier is post fixed because more than one xsd element has the name "DEFINITION"
+type DEFINITION_3 struct {
 	Name string `xml:"-"`
 	
 	// insertion point for fields
 }
 
-// DEFAULT_VALUE_2 is generated from inlined complex type within element "DEFAULT-VALUE"
-// Identifier is post fixed because more than one xsd element has the name "DEFAULT-VALUE"
-type DEFAULT_VALUE_2 struct {
+// DEFINITION_5 is generated from inlined complex type within element "DEFINITION"
+// Identifier is post fixed because more than one xsd element has the name "DEFINITION"
+type DEFINITION_5 struct {
 	Name string `xml:"-"`
 	
 	// insertion point for fields
 }
 
-// DEFAULT_VALUE_3 is generated from inlined complex type within element "DEFAULT-VALUE"
-// Identifier is post fixed because more than one xsd element has the name "DEFAULT-VALUE"
-type DEFAULT_VALUE_3 struct {
+// DEFINITION_1 is generated from inlined complex type within element "DEFINITION"
+// Identifier is post fixed because more than one xsd element has the name "DEFINITION"
+type DEFINITION_1 struct {
 	Name string `xml:"-"`
 	
 	// insertion point for fields
@@ -573,30 +597,6 @@ type DEFINITION_4 struct {
 // DEFINITION_6 is generated from inlined complex type within element "DEFINITION"
 // Identifier is post fixed because more than one xsd element has the name "DEFINITION"
 type DEFINITION_6 struct {
-	Name string `xml:"-"`
-	
-	// insertion point for fields
-}
-
-// DEFINITION_1 is generated from inlined complex type within element "DEFINITION"
-// Identifier is post fixed because more than one xsd element has the name "DEFINITION"
-type DEFINITION_1 struct {
-	Name string `xml:"-"`
-	
-	// insertion point for fields
-}
-
-// DEFINITION_3 is generated from inlined complex type within element "DEFINITION"
-// Identifier is post fixed because more than one xsd element has the name "DEFINITION"
-type DEFINITION_3 struct {
-	Name string `xml:"-"`
-	
-	// insertion point for fields
-}
-
-// DEFINITION_5 is generated from inlined complex type within element "DEFINITION"
-// Identifier is post fixed because more than one xsd element has the name "DEFINITION"
-type DEFINITION_5 struct {
 	Name string `xml:"-"`
 	
 	// insertion point for fields
@@ -637,24 +637,8 @@ type SOURCE_SPECIFICATION struct {
 	// insertion point for fields
 }
 
-// SPEC_ATTRIBUTES_2 is generated from inlined complex type within element "SPEC-ATTRIBUTES"
-// Identifier is post fixed because more than one xsd element has the name "SPEC-ATTRIBUTES"
-type SPEC_ATTRIBUTES_2 struct {
-	Name string `xml:"-"`
-	
-	// insertion point for fields
-}
-
 // SPEC_ATTRIBUTES is generated from inlined complex type within element "SPEC-ATTRIBUTES"
 type SPEC_ATTRIBUTES struct {
-	Name string `xml:"-"`
-	
-	// insertion point for fields
-}
-
-// SPEC_ATTRIBUTES_1 is generated from inlined complex type within element "SPEC-ATTRIBUTES"
-// Identifier is post fixed because more than one xsd element has the name "SPEC-ATTRIBUTES"
-type SPEC_ATTRIBUTES_1 struct {
 	Name string `xml:"-"`
 	
 	// insertion point for fields
@@ -663,6 +647,22 @@ type SPEC_ATTRIBUTES_1 struct {
 // SPEC_ATTRIBUTES_3 is generated from inlined complex type within element "SPEC-ATTRIBUTES"
 // Identifier is post fixed because more than one xsd element has the name "SPEC-ATTRIBUTES"
 type SPEC_ATTRIBUTES_3 struct {
+	Name string `xml:"-"`
+	
+	// insertion point for fields
+}
+
+// SPEC_ATTRIBUTES_2 is generated from inlined complex type within element "SPEC-ATTRIBUTES"
+// Identifier is post fixed because more than one xsd element has the name "SPEC-ATTRIBUTES"
+type SPEC_ATTRIBUTES_2 struct {
+	Name string `xml:"-"`
+	
+	// insertion point for fields
+}
+
+// SPEC_ATTRIBUTES_1 is generated from inlined complex type within element "SPEC-ATTRIBUTES"
+// Identifier is post fixed because more than one xsd element has the name "SPEC-ATTRIBUTES"
+type SPEC_ATTRIBUTES_1 struct {
 	Name string `xml:"-"`
 	
 	// insertion point for fields
@@ -746,25 +746,25 @@ type TOOL_EXTENSIONS struct {
 	// insertion point for fields
 }
 
-// TYPE_9 is generated from inlined complex type within element "TYPE"
-// Identifier is post fixed because more than one xsd element has the name "TYPE"
-type TYPE_9 struct {
-	Name string `xml:"-"`
-	
-	// insertion point for fields
-}
-
-// TYPE_7 is generated from inlined complex type within element "TYPE"
-// Identifier is post fixed because more than one xsd element has the name "TYPE"
-type TYPE_7 struct {
-	Name string `xml:"-"`
-	
-	// insertion point for fields
-}
-
 // TYPE_4 is generated from inlined complex type within element "TYPE"
 // Identifier is post fixed because more than one xsd element has the name "TYPE"
 type TYPE_4 struct {
+	Name string `xml:"-"`
+	
+	// insertion point for fields
+}
+
+// TYPE_2 is generated from inlined complex type within element "TYPE"
+// Identifier is post fixed because more than one xsd element has the name "TYPE"
+type TYPE_2 struct {
+	Name string `xml:"-"`
+	
+	// insertion point for fields
+}
+
+// TYPE_1 is generated from inlined complex type within element "TYPE"
+// Identifier is post fixed because more than one xsd element has the name "TYPE"
+type TYPE_1 struct {
 	Name string `xml:"-"`
 	
 	// insertion point for fields
@@ -785,9 +785,17 @@ type TYPE_3 struct {
 	// insertion point for fields
 }
 
-// TYPE_2 is generated from inlined complex type within element "TYPE"
+// TYPE_5 is generated from inlined complex type within element "TYPE"
 // Identifier is post fixed because more than one xsd element has the name "TYPE"
-type TYPE_2 struct {
+type TYPE_5 struct {
+	Name string `xml:"-"`
+	
+	// insertion point for fields
+}
+
+// TYPE_7 is generated from inlined complex type within element "TYPE"
+// Identifier is post fixed because more than one xsd element has the name "TYPE"
+type TYPE_7 struct {
 	Name string `xml:"-"`
 	
 	// insertion point for fields
@@ -801,17 +809,9 @@ type TYPE_8 struct {
 	// insertion point for fields
 }
 
-// TYPE_1 is generated from inlined complex type within element "TYPE"
+// TYPE_10 is generated from inlined complex type within element "TYPE"
 // Identifier is post fixed because more than one xsd element has the name "TYPE"
-type TYPE_1 struct {
-	Name string `xml:"-"`
-	
-	// insertion point for fields
-}
-
-// TYPE_5 is generated from inlined complex type within element "TYPE"
-// Identifier is post fixed because more than one xsd element has the name "TYPE"
-type TYPE_5 struct {
+type TYPE_10 struct {
 	Name string `xml:"-"`
 	
 	// insertion point for fields
@@ -825,17 +825,17 @@ type TYPE_6 struct {
 	// insertion point for fields
 }
 
-// TYPE_10 is generated from inlined complex type within element "TYPE"
+// TYPE_9 is generated from inlined complex type within element "TYPE"
 // Identifier is post fixed because more than one xsd element has the name "TYPE"
-type TYPE_10 struct {
+type TYPE_9 struct {
 	Name string `xml:"-"`
 	
 	// insertion point for fields
 }
 
-// VALUES_2 is generated from inlined complex type within element "VALUES"
+// VALUES_3 is generated from inlined complex type within element "VALUES"
 // Identifier is post fixed because more than one xsd element has the name "VALUES"
-type VALUES_2 struct {
+type VALUES_3 struct {
 	Name string `xml:"-"`
 	
 	// insertion point for fields
@@ -856,9 +856,9 @@ type VALUES struct {
 	// insertion point for fields
 }
 
-// VALUES_3 is generated from inlined complex type within element "VALUES"
+// VALUES_2 is generated from inlined complex type within element "VALUES"
 // Identifier is post fixed because more than one xsd element has the name "VALUES"
-type VALUES_3 struct {
+type VALUES_2 struct {
 	Name string `xml:"-"`
 	
 	// insertion point for fields

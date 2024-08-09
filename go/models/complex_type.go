@@ -27,10 +27,6 @@ func (ct *ComplexType) Fields(stage *StageStruct) (fields string) {
 		ctMap[st.Name] = st
 	}
 
-	if ct.Sequence == nil {
-		return
-	}
-
 	map_Name_Elems := make(map[string]*Element)
 	elems := ct.Composer.getElements(map_Name_Elems)
 	// for _, e := range elems {

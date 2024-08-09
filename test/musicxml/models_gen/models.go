@@ -84,6 +84,18 @@ type Arrow struct {
 	Name string `xml:"-"`
 	
 	// insertion point for fields
+
+	// generated from element "circular-arrow" of type circular-arrow
+	Circular_arrow string `xml:"circular-arrow"`
+
+	// generated from element "arrow-direction" of type arrow-direction
+	Arrow_direction string `xml:"arrow-direction"`
+
+	// generated from element "arrow-style" of type arrow-style
+	Arrow_style string `xml:"arrow-style"`
+
+	// generated from element "arrowhead" of type empty
+	Arrowhead []*Empty `xml:"arrowhead"`
 }
 
 // Articulations is generated from named complex type "articulations"
@@ -91,6 +103,57 @@ type Articulations struct {
 	Name string `xml:"-"`
 	
 	// insertion point for fields
+
+	// generated from element "accent" of type empty-placement
+	Accent []*Empty_placement `xml:"accent"`
+
+	// generated from element "strong-accent" of type strong-accent
+	Strong_accent []*Strong_accent `xml:"strong-accent"`
+
+	// generated from element "staccato" of type empty-placement
+	Staccato []*Empty_placement `xml:"staccato"`
+
+	// generated from element "tenuto" of type empty-placement
+	Tenuto []*Empty_placement `xml:"tenuto"`
+
+	// generated from element "detached-legato" of type empty-placement
+	Detached_legato []*Empty_placement `xml:"detached-legato"`
+
+	// generated from element "staccatissimo" of type empty-placement
+	Staccatissimo []*Empty_placement `xml:"staccatissimo"`
+
+	// generated from element "spiccato" of type empty-placement
+	Spiccato []*Empty_placement `xml:"spiccato"`
+
+	// generated from element "scoop" of type empty-line
+	Scoop []*Empty_line `xml:"scoop"`
+
+	// generated from element "plop" of type empty-line
+	Plop []*Empty_line `xml:"plop"`
+
+	// generated from element "doit" of type empty-line
+	Doit []*Empty_line `xml:"doit"`
+
+	// generated from element "falloff" of type empty-line
+	Falloff []*Empty_line `xml:"falloff"`
+
+	// generated from element "breath-mark" of type breath-mark
+	Breath_mark []*Breath_mark `xml:"breath-mark"`
+
+	// generated from element "caesura" of type caesura
+	Caesura []*Caesura `xml:"caesura"`
+
+	// generated from element "stress" of type empty-placement
+	Stress []*Empty_placement `xml:"stress"`
+
+	// generated from element "unstress" of type empty-placement
+	Unstress []*Empty_placement `xml:"unstress"`
+
+	// generated from element "soft-accent" of type empty-placement
+	Soft_accent []*Empty_placement `xml:"soft-accent"`
+
+	// generated from element "other-articulation" of type other-placement-text
+	Other_articulation []*Other_placement_text `xml:"other-articulation"`
 }
 
 // Assess is generated from named complex type "assess"
@@ -429,6 +492,78 @@ type Direction_type struct {
 	Name string `xml:"-"`
 	
 	// insertion point for fields
+
+	// generated from element "rehearsal" of type formatted-text-id
+	Rehearsal []*Formatted_text_id `xml:"rehearsal"`
+
+	// generated from element "segno" of type segno
+	Segno []*Segno `xml:"segno"`
+
+	// generated from element "coda" of type coda
+	Coda []*Coda `xml:"coda"`
+
+	// generated from element "wedge" of type wedge
+	Wedge []*Wedge `xml:"wedge"`
+
+	// generated from element "dynamics" of type dynamics
+	Dynamics []*Dynamics `xml:"dynamics"`
+
+	// generated from element "dashes" of type dashes
+	Dashes []*Dashes `xml:"dashes"`
+
+	// generated from element "bracket" of type bracket
+	Bracket []*Bracket `xml:"bracket"`
+
+	// generated from element "pedal" of type pedal
+	Pedal []*Pedal `xml:"pedal"`
+
+	// generated from element "metronome" of type metronome
+	Metronome []*Metronome `xml:"metronome"`
+
+	// generated from element "octave-shift" of type octave-shift
+	Octave_shift []*Octave_shift `xml:"octave-shift"`
+
+	// generated from element "harp-pedals" of type harp-pedals
+	Harp_pedals []*Harp_pedals `xml:"harp-pedals"`
+
+	// generated from element "damp" of type empty-print-style-align-id
+	Damp []*Empty_print_style_align_id `xml:"damp"`
+
+	// generated from element "damp-all" of type empty-print-style-align-id
+	Damp_all []*Empty_print_style_align_id `xml:"damp-all"`
+
+	// generated from element "eyeglasses" of type empty-print-style-align-id
+	Eyeglasses []*Empty_print_style_align_id `xml:"eyeglasses"`
+
+	// generated from element "string-mute" of type string-mute
+	String_mute []*String_mute `xml:"string-mute"`
+
+	// generated from element "scordatura" of type scordatura
+	Scordatura []*Scordatura `xml:"scordatura"`
+
+	// generated from element "image" of type image
+	Image []*Image `xml:"image"`
+
+	// generated from element "principal-voice" of type principal-voice
+	Principal_voice []*Principal_voice `xml:"principal-voice"`
+
+	// generated from element "percussion" of type percussion
+	Percussion []*Percussion `xml:"percussion"`
+
+	// generated from element "accordion-registration" of type accordion-registration
+	Accordion_registration []*Accordion_registration `xml:"accordion-registration"`
+
+	// generated from element "staff-divide" of type staff-divide
+	Staff_divide []*Staff_divide `xml:"staff-divide"`
+
+	// generated from element "other-direction" of type other-direction
+	Other_direction []*Other_direction `xml:"other-direction"`
+
+	// generated from element "words" of type formatted-text-id
+	Words []*Formatted_text_id `xml:"words"`
+
+	// generated from element "symbol" of type formatted-symbol-id
+	Symbol []*Formatted_symbol_id `xml:"symbol"`
 }
 
 // Distance is generated from named complex type "distance"
@@ -450,6 +585,87 @@ type Dynamics struct {
 	Name string `xml:"-"`
 	
 	// insertion point for fields
+
+	// generated from element "p" of type empty
+	P []*Empty `xml:"p"`
+
+	// generated from element "pp" of type empty
+	Pp []*Empty `xml:"pp"`
+
+	// generated from element "ppp" of type empty
+	Ppp []*Empty `xml:"ppp"`
+
+	// generated from element "pppp" of type empty
+	Pppp []*Empty `xml:"pppp"`
+
+	// generated from element "ppppp" of type empty
+	Ppppp []*Empty `xml:"ppppp"`
+
+	// generated from element "pppppp" of type empty
+	Pppppp []*Empty `xml:"pppppp"`
+
+	// generated from element "f" of type empty
+	F []*Empty `xml:"f"`
+
+	// generated from element "ff" of type empty
+	Ff []*Empty `xml:"ff"`
+
+	// generated from element "fff" of type empty
+	Fff []*Empty `xml:"fff"`
+
+	// generated from element "ffff" of type empty
+	Ffff []*Empty `xml:"ffff"`
+
+	// generated from element "fffff" of type empty
+	Fffff []*Empty `xml:"fffff"`
+
+	// generated from element "ffffff" of type empty
+	Ffffff []*Empty `xml:"ffffff"`
+
+	// generated from element "mp" of type empty
+	Mp []*Empty `xml:"mp"`
+
+	// generated from element "mf" of type empty
+	Mf []*Empty `xml:"mf"`
+
+	// generated from element "sf" of type empty
+	Sf []*Empty `xml:"sf"`
+
+	// generated from element "sfp" of type empty
+	Sfp []*Empty `xml:"sfp"`
+
+	// generated from element "sfpp" of type empty
+	Sfpp []*Empty `xml:"sfpp"`
+
+	// generated from element "fp" of type empty
+	Fp []*Empty `xml:"fp"`
+
+	// generated from element "rf" of type empty
+	Rf []*Empty `xml:"rf"`
+
+	// generated from element "rfz" of type empty
+	Rfz []*Empty `xml:"rfz"`
+
+	// generated from element "sfz" of type empty
+	Sfz []*Empty `xml:"sfz"`
+
+	// generated from element "sffz" of type empty
+	Sffz []*Empty `xml:"sffz"`
+
+	// generated from element "fz" of type empty
+	Fz []*Empty `xml:"fz"`
+
+	// generated from element "n" of type empty
+	N []*Empty `xml:"n"`
+
+	// generated from element "pf" of type empty
+	Pf []*Empty `xml:"pf"`
+
+	// generated from element "sfzp" of type empty
+	Sfzp []*Empty `xml:"sfzp"`
+
+	// generated from element "other-dynamics" of type other-text
+	Other_dynamics []*Other_text `xml:"other-dynamics"`
 }
 
 // Effect is generated from named complex type "effect"
@@ -541,6 +757,18 @@ type Encoding struct {
 	Name string `xml:"-"`
 	
 	// insertion point for fields
+
+	// generated from element "encoder" of type typed-text
+	Encoder []*Typed_text `xml:"encoder"`
+
+	// generated from element "software" of type xs:string
+	Software string `xml:"software"`
+
+	// generated from element "encoding-description" of type xs:string
+	Encoding_description string `xml:"encoding-description"`
+
+	// generated from element "supports" of type supports
+	Supports []*Supports `xml:"supports"`
 }
 
 // Ending is generated from named complex type "ending"
@@ -1020,6 +1248,15 @@ type Listen struct {
 	Name string `xml:"-"`
 	
 	// insertion point for fields
+
+	// generated from element "assess" of type assess
+	Assess []*Assess `xml:"assess"`
+
+	// generated from element "wait" of type wait
+	Wait []*Wait `xml:"wait"`
+
+	// generated from element "other-listen" of type other-listening
+	Other_listen []*Other_listening `xml:"other-listen"`
 }
 
 // Listening is generated from named complex type "listening"
@@ -1112,6 +1349,18 @@ type Measure_style struct {
 	Name string `xml:"-"`
 	
 	// insertion point for fields
+
+	// generated from element "multiple-rest" of type multiple-rest
+	Multiple_rest []*Multiple_rest `xml:"multiple-rest"`
+
+	// generated from element "measure-repeat" of type measure-repeat
+	Measure_repeat []*Measure_repeat `xml:"measure-repeat"`
+
+	// generated from element "beat-repeat" of type beat-repeat
+	Beat_repeat []*Beat_repeat `xml:"beat-repeat"`
+
+	// generated from element "slash" of type slash
+	Slash []*Slash `xml:"slash"`
 }
 
 // Membrane is generated from named complex type "membrane"
@@ -1133,6 +1382,21 @@ type Metronome struct {
 	Name string `xml:"-"`
 	
 	// insertion point for fields
+
+	// generated from element "beat-unit-tied" of type beat-unit-tied
+	Beat_unit_tied []*Beat_unit_tied `xml:"beat-unit-tied"`
+
+	// generated from element "metronome-arrows" of type empty
+	Metronome_arrows []*Empty `xml:"metronome-arrows"`
+
+	// generated from element "metronome-note" of type metronome-note
+	Metronome_note []*Metronome_note `xml:"metronome-note"`
+
+	// generated from element "metronome-relation" of type xs:string
+	Metronome_relation string `xml:"metronome-relation"`
+
+	// generated from element "per-minute" of type per-minute
+	Per_minute []*Per_minute `xml:"per-minute"`
 }
 
 // Metronome_beam is generated from named complex type "metronome-beam"
@@ -1697,6 +1961,39 @@ type Percussion struct {
 	Name string `xml:"-"`
 	
 	// insertion point for fields
+
+	// generated from element "glass" of type glass
+	Glass []*Glass `xml:"glass"`
+
+	// generated from element "metal" of type metal
+	Metal []*Metal `xml:"metal"`
+
+	// generated from element "wood" of type wood
+	Wood []*Wood `xml:"wood"`
+
+	// generated from element "pitched" of type pitched
+	Pitched []*Pitched `xml:"pitched"`
+
+	// generated from element "membrane" of type membrane
+	Membrane []*Membrane `xml:"membrane"`
+
+	// generated from element "effect" of type effect
+	Effect []*Effect `xml:"effect"`
+
+	// generated from element "timpani" of type timpani
+	Timpani []*Timpani `xml:"timpani"`
+
+	// generated from element "beater" of type beater
+	Beater []*Beater `xml:"beater"`
+
+	// generated from element "stick" of type stick
+	Stick []*Stick `xml:"stick"`
+
+	// generated from element "stick-location" of type stick-location
+	Stick_location string `xml:"stick-location"`
+
+	// generated from element "other-percussion" of type other-text
+	Other_percussion []*Other_text `xml:"other-percussion"`
 }
 
 // Pitch is generated from named complex type "pitch"
@@ -2145,6 +2442,99 @@ type Technical struct {
 	Name string `xml:"-"`
 	
 	// insertion point for fields
+
+	// generated from element "up-bow" of type empty-placement
+	Up_bow []*Empty_placement `xml:"up-bow"`
+
+	// generated from element "down-bow" of type empty-placement
+	Down_bow []*Empty_placement `xml:"down-bow"`
+
+	// generated from element "harmonic" of type harmonic
+	Harmonic []*Harmonic `xml:"harmonic"`
+
+	// generated from element "open-string" of type empty-placement
+	Open_string []*Empty_placement `xml:"open-string"`
+
+	// generated from element "thumb-position" of type empty-placement
+	Thumb_position []*Empty_placement `xml:"thumb-position"`
+
+	// generated from element "fingering" of type fingering
+	Fingering []*Fingering `xml:"fingering"`
+
+	// generated from element "pluck" of type placement-text
+	Pluck []*Placement_text `xml:"pluck"`
+
+	// generated from element "double-tongue" of type empty-placement
+	Double_tongue []*Empty_placement `xml:"double-tongue"`
+
+	// generated from element "triple-tongue" of type empty-placement
+	Triple_tongue []*Empty_placement `xml:"triple-tongue"`
+
+	// generated from element "stopped" of type empty-placement-smufl
+	Stopped []*Empty_placement_smufl `xml:"stopped"`
+
+	// generated from element "snap-pizzicato" of type empty-placement
+	Snap_pizzicato []*Empty_placement `xml:"snap-pizzicato"`
+
+	// generated from element "fret" of type fret
+	Fret []*Fret `xml:"fret"`
+
+	// generated from element "string" of type string
+	String []*String `xml:"string"`
+
+	// generated from element "hammer-on" of type hammer-on-pull-off
+	Hammer_on []*Hammer_on_pull_off `xml:"hammer-on"`
+
+	// generated from element "pull-off" of type hammer-on-pull-off
+	Pull_off []*Hammer_on_pull_off `xml:"pull-off"`
+
+	// generated from element "bend" of type bend
+	Bend []*Bend `xml:"bend"`
+
+	// generated from element "tap" of type tap
+	Tap []*Tap `xml:"tap"`
+
+	// generated from element "heel" of type heel-toe
+	Heel []*Heel_toe `xml:"heel"`
+
+	// generated from element "toe" of type heel-toe
+	Toe []*Heel_toe `xml:"toe"`
+
+	// generated from element "fingernails" of type empty-placement
+	Fingernails []*Empty_placement `xml:"fingernails"`
+
+	// generated from element "hole" of type hole
+	Hole []*Hole `xml:"hole"`
+
+	// generated from element "arrow" of type arrow
+	Arrow []*Arrow `xml:"arrow"`
+
+	// generated from element "handbell" of type handbell
+	Handbell []*Handbell `xml:"handbell"`
+
+	// generated from element "brass-bend" of type empty-placement
+	Brass_bend []*Empty_placement `xml:"brass-bend"`
+
+	// generated from element "flip" of type empty-placement
+	Flip []*Empty_placement `xml:"flip"`
+
+	// generated from element "smear" of type empty-placement
+	Smear []*Empty_placement `xml:"smear"`
+
+	// generated from element "open" of type empty-placement-smufl
+	Open []*Empty_placement_smufl `xml:"open"`
+
+	// generated from element "half-muted" of type empty-placement-smufl
+	Half_muted []*Empty_placement_smufl `xml:"half-muted"`
+
+	// generated from element "harmon-mute" of type harmon-mute
+	Harmon_mute []*Harmon_mute `xml:"harmon-mute"`
+
+	// generated from element "golpe" of type empty-placement
+	Golpe []*Empty_placement `xml:"golpe"`
+
+	// generated from element "other-technical" of type other-placement-text
+	Other_technical []*Other_placement_text `xml:"other-technical"`
 }
 
 // Text_element_data is generated from named complex type "text-element-data"
@@ -2173,6 +2563,12 @@ type Time struct {
 	Name string `xml:"-"`
 	
 	// insertion point for fields
+
+	// generated from element "senza-misura" of type xs:string
+	Senza_misura string `xml:"senza-misura"`
+
+	// generated from element "interchangeable" of type interchangeable
+	Interchangeable []*Interchangeable `xml:"interchangeable"`
 }
 
 // Time_modification is generated from named complex type "time-modification"
@@ -2343,6 +2739,13 @@ type Directive struct {
 	// insertion point for fields
 }
 
+// Measure is generated from inlined complex type within element "measure"
+type Measure struct {
+	Name string `xml:"-"`
+	
+	// insertion point for fields
+}
+
 // Measure_1 is generated from inlined complex type within element "measure"
 // Identifier is post fixed because more than one xsd element has the name "measure"
 type Measure_1 struct {
@@ -2351,8 +2754,8 @@ type Measure_1 struct {
 	// insertion point for fields
 }
 
-// Measure is generated from inlined complex type within element "measure"
-type Measure struct {
+// Part is generated from inlined complex type within element "part"
+type Part struct {
 	Name string `xml:"-"`
 	
 	// insertion point for fields
@@ -2361,13 +2764,6 @@ type Measure struct {
 // Part_1 is generated from inlined complex type within element "part"
 // Identifier is post fixed because more than one xsd element has the name "part"
 type Part_1 struct {
-	Name string `xml:"-"`
-	
-	// insertion point for fields
-}
-
-// Part is generated from inlined complex type within element "part"
-type Part struct {
 	Name string `xml:"-"`
 	
 	// insertion point for fields
