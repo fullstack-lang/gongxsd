@@ -335,6 +335,7 @@ var __gong__map_Schema = make(map[string]*Schema)
 var __gong__map_Sequence = make(map[string]*Sequence)
 var __gong__map_SimpleType = make(map[string]*SimpleType)
 var __gong__map_TotalDigit = make(map[string]*TotalDigit)
+var __gong__map_Union = make(map[string]*Union)
 var __gong__map_WhiteSpace = make(map[string]*WhiteSpace)
 
 // Parser needs to be configured for having the [Name1.Name2] or [pkg.Name1] ...
@@ -592,6 +593,10 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 										instanceTotalDigit := (&TotalDigit{Name: instanceName}).Stage(stage)
 										instance = any(instanceTotalDigit)
 										__gong__map_TotalDigit[identifier] = instanceTotalDigit
+									case "Union":
+										instanceUnion := (&Union{Name: instanceName}).Stage(stage)
+										instance = any(instanceUnion)
+										__gong__map_Union[identifier] = instanceUnion
 									case "WhiteSpace":
 										instanceWhiteSpace := (&WhiteSpace{Name: instanceName}).Stage(stage)
 										instance = any(instanceWhiteSpace)
@@ -713,6 +718,10 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 							// insertion point for date assign code
 							}
 						case "TotalDigit":
+							switch fieldName {
+							// insertion point for date assign code
+							}
+						case "Union":
 							switch fieldName {
 							// insertion point for date assign code
 							}
@@ -928,6 +937,10 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 						// insertion point for slice of pointers assign code
 						}
 					case "TotalDigit":
+						switch fieldName {
+						// insertion point for slice of pointers assign code
+						}
+					case "Union":
 						switch fieldName {
 						// insertion point for slice of pointers assign code
 						}
@@ -1348,6 +1361,18 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
 					__gong__map_TotalDigit[identifier].Value = fielValue
 				}
+			case "Union":
+				switch fieldName {
+				// insertion point for field dependant code
+				case "Name":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_Union[identifier].Name = fielValue
+				case "MemberTypes":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_Union[identifier].MemberTypes = fielValue
+				}
 			case "WhiteSpace":
 				switch fieldName {
 				// insertion point for field dependant code
@@ -1600,6 +1625,9 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 				case "Restriction":
 					targetIdentifier := ident.Name
 					__gong__map_SimpleType[identifier].Restriction = __gong__map_Restriction[targetIdentifier]
+				case "Union":
+					targetIdentifier := ident.Name
+					__gong__map_SimpleType[identifier].Union = __gong__map_Union[targetIdentifier]
 				}
 			case "TotalDigit":
 				switch fieldName {
@@ -1607,6 +1635,13 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 				case "Annotation":
 					targetIdentifier := ident.Name
 					__gong__map_TotalDigit[identifier].Annotation = __gong__map_Annotation[targetIdentifier]
+				}
+			case "Union":
+				switch fieldName {
+				// insertion point for field dependant code
+				case "Annotation":
+					targetIdentifier := ident.Name
+					__gong__map_Union[identifier].Annotation = __gong__map_Annotation[targetIdentifier]
 				}
 			case "WhiteSpace":
 				switch fieldName {
@@ -1724,6 +1759,10 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					// insertion point for enum assign code
 					}
 				case "TotalDigit":
+					switch fieldName {
+					// insertion point for enum assign code
+					}
+				case "Union":
 					switch fieldName {
 					// insertion point for enum assign code
 					}

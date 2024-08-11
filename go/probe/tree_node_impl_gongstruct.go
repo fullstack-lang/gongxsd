@@ -115,6 +115,9 @@ func (nodeImplGongstruct *TreeNodeImplGongstruct) OnAfterUpdate(
 	if nodeImplGongstruct.gongStruct.GetName() == "TotalDigit" {
 		fillUpTable[models.TotalDigit](nodeImplGongstruct.probe)
 	}
+	if nodeImplGongstruct.gongStruct.GetName() == "Union" {
+		fillUpTable[models.Union](nodeImplGongstruct.probe)
+	}
 	if nodeImplGongstruct.gongStruct.GetName() == "WhiteSpace" {
 		fillUpTable[models.WhiteSpace](nodeImplGongstruct.probe)
 	}

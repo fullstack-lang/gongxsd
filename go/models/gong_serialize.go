@@ -35,6 +35,7 @@ func SerializeStage(stage *StageStruct, filename string) {
 		SerializeExcelize[Sequence](stage, f)
 		SerializeExcelize[SimpleType](stage, f)
 		SerializeExcelize[TotalDigit](stage, f)
+		SerializeExcelize[Union](stage, f)
 		SerializeExcelize[WhiteSpace](stage, f)
 	}
 

@@ -65,6 +65,7 @@ func NewStackInstance(
 	models.SetOrchestratorOnAfterUpdate[models.Sequence](stage)
 	models.SetOrchestratorOnAfterUpdate[models.SimpleType](stage)
 	models.SetOrchestratorOnAfterUpdate[models.TotalDigit](stage)
+	models.SetOrchestratorOnAfterUpdate[models.Union](stage)
 	models.SetOrchestratorOnAfterUpdate[models.WhiteSpace](stage)
 
 	return

@@ -90,6 +90,10 @@ func AfterCreateFromFront[Type Gongstruct](stage *StageStruct, instance *Type) {
 		if stage.OnAfterTotalDigitCreateCallback != nil {
 			stage.OnAfterTotalDigitCreateCallback.OnAfterCreate(stage, target)
 		}
+	case *Union:
+		if stage.OnAfterUnionCreateCallback != nil {
+			stage.OnAfterUnionCreateCallback.OnAfterCreate(stage, target)
+		}
 	case *WhiteSpace:
 		if stage.OnAfterWhiteSpaceCreateCallback != nil {
 			stage.OnAfterWhiteSpaceCreateCallback.OnAfterCreate(stage, target)
@@ -208,6 +212,11 @@ func AfterUpdateFromFront[Type Gongstruct](stage *StageStruct, old, new *Type) {
 		newTarget := any(new).(*TotalDigit)
 		if stage.OnAfterTotalDigitUpdateCallback != nil {
 			stage.OnAfterTotalDigitUpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
+		}
+	case *Union:
+		newTarget := any(new).(*Union)
+		if stage.OnAfterUnionUpdateCallback != nil {
+			stage.OnAfterUnionUpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
 		}
 	case *WhiteSpace:
 		newTarget := any(new).(*WhiteSpace)
@@ -329,6 +338,11 @@ func AfterDeleteFromFront[Type Gongstruct](stage *StageStruct, staged, front *Ty
 			staged := any(staged).(*TotalDigit)
 			stage.OnAfterTotalDigitDeleteCallback.OnAfterDelete(stage, staged, front)
 		}
+	case *Union:
+		if stage.OnAfterUnionDeleteCallback != nil {
+			staged := any(staged).(*Union)
+			stage.OnAfterUnionDeleteCallback.OnAfterDelete(stage, staged, front)
+		}
 	case *WhiteSpace:
 		if stage.OnAfterWhiteSpaceDeleteCallback != nil {
 			staged := any(staged).(*WhiteSpace)
@@ -428,6 +442,10 @@ func AfterReadFromFront[Type Gongstruct](stage *StageStruct, instance *Type) {
 		if stage.OnAfterTotalDigitReadCallback != nil {
 			stage.OnAfterTotalDigitReadCallback.OnAfterRead(stage, target)
 		}
+	case *Union:
+		if stage.OnAfterUnionReadCallback != nil {
+			stage.OnAfterUnionReadCallback.OnAfterRead(stage, target)
+		}
 	case *WhiteSpace:
 		if stage.OnAfterWhiteSpaceReadCallback != nil {
 			stage.OnAfterWhiteSpaceReadCallback.OnAfterRead(stage, target)
@@ -506,6 +524,9 @@ func SetCallbackAfterUpdateFromFront[Type Gongstruct](stage *StageStruct, callba
 	case *TotalDigit:
 		stage.OnAfterTotalDigitUpdateCallback = any(callback).(OnAfterUpdateInterface[TotalDigit])
 	
+	case *Union:
+		stage.OnAfterUnionUpdateCallback = any(callback).(OnAfterUpdateInterface[Union])
+	
 	case *WhiteSpace:
 		stage.OnAfterWhiteSpaceUpdateCallback = any(callback).(OnAfterUpdateInterface[WhiteSpace])
 	
@@ -578,6 +599,9 @@ func SetCallbackAfterCreateFromFront[Type Gongstruct](stage *StageStruct, callba
 	
 	case *TotalDigit:
 		stage.OnAfterTotalDigitCreateCallback = any(callback).(OnAfterCreateInterface[TotalDigit])
+	
+	case *Union:
+		stage.OnAfterUnionCreateCallback = any(callback).(OnAfterCreateInterface[Union])
 	
 	case *WhiteSpace:
 		stage.OnAfterWhiteSpaceCreateCallback = any(callback).(OnAfterCreateInterface[WhiteSpace])
@@ -652,6 +676,9 @@ func SetCallbackAfterDeleteFromFront[Type Gongstruct](stage *StageStruct, callba
 	case *TotalDigit:
 		stage.OnAfterTotalDigitDeleteCallback = any(callback).(OnAfterDeleteInterface[TotalDigit])
 	
+	case *Union:
+		stage.OnAfterUnionDeleteCallback = any(callback).(OnAfterDeleteInterface[Union])
+	
 	case *WhiteSpace:
 		stage.OnAfterWhiteSpaceDeleteCallback = any(callback).(OnAfterDeleteInterface[WhiteSpace])
 	
@@ -724,6 +751,9 @@ func SetCallbackAfterReadFromFront[Type Gongstruct](stage *StageStruct, callback
 	
 	case *TotalDigit:
 		stage.OnAfterTotalDigitReadCallback = any(callback).(OnAfterReadInterface[TotalDigit])
+	
+	case *Union:
+		stage.OnAfterUnionReadCallback = any(callback).(OnAfterReadInterface[Union])
 	
 	case *WhiteSpace:
 		stage.OnAfterWhiteSpaceReadCallback = any(callback).(OnAfterReadInterface[WhiteSpace])

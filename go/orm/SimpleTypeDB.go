@@ -54,6 +54,10 @@ type SimpleTypePointersEncoding struct {
 	// field Restriction is a pointer to another Struct (optional or 0..1)
 	// This field is generated into another field to enable AS ONE association
 	RestrictionID sql.NullInt64
+
+	// field Union is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	UnionID sql.NullInt64
 }
 
 // SimpleTypeDB describes a simpletype in the database
@@ -249,6 +253,18 @@ func (backRepoSimpleType *BackRepoSimpleTypeStruct) CommitPhaseTwoInstance(backR
 			simpletypeDB.RestrictionID.Valid = true
 		}
 
+		// commit pointer value simpletype.Union translates to updating the simpletype.UnionID
+		simpletypeDB.UnionID.Valid = true // allow for a 0 value (nil association)
+		if simpletype.Union != nil {
+			if UnionId, ok := backRepo.BackRepoUnion.Map_UnionPtr_UnionDBID[simpletype.Union]; ok {
+				simpletypeDB.UnionID.Int64 = int64(UnionId)
+				simpletypeDB.UnionID.Valid = true
+			}
+		} else {
+			simpletypeDB.UnionID.Int64 = 0
+			simpletypeDB.UnionID.Valid = true
+		}
+
 		query := backRepoSimpleType.db.Save(&simpletypeDB)
 		if query.Error != nil {
 			log.Fatalln(query.Error)
@@ -371,6 +387,11 @@ func (simpletypeDB *SimpleTypeDB) DecodePointers(backRepo *BackRepoStruct, simpl
 	simpletype.Restriction = nil
 	if simpletypeDB.RestrictionID.Int64 != 0 {
 		simpletype.Restriction = backRepo.BackRepoRestriction.Map_RestrictionDBID_RestrictionPtr[uint(simpletypeDB.RestrictionID.Int64)]
+	}
+	// Union field
+	simpletype.Union = nil
+	if simpletypeDB.UnionID.Int64 != 0 {
+		simpletype.Union = backRepo.BackRepoUnion.Map_UnionDBID_UnionPtr[uint(simpletypeDB.UnionID.Int64)]
 	}
 	return
 }
@@ -622,6 +643,12 @@ func (backRepoSimpleType *BackRepoSimpleTypeStruct) RestorePhaseTwo() {
 		if simpletypeDB.RestrictionID.Int64 != 0 {
 			simpletypeDB.RestrictionID.Int64 = int64(BackRepoRestrictionid_atBckpTime_newID[uint(simpletypeDB.RestrictionID.Int64)])
 			simpletypeDB.RestrictionID.Valid = true
+		}
+
+		// reindexing Union field
+		if simpletypeDB.UnionID.Int64 != 0 {
+			simpletypeDB.UnionID.Int64 = int64(BackRepoUnionid_atBckpTime_newID[uint(simpletypeDB.UnionID.Int64)])
+			simpletypeDB.UnionID.Valid = true
 		}
 
 		// update databse with new index encoding

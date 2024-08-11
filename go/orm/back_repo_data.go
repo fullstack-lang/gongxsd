@@ -46,6 +46,8 @@ type BackRepoData struct {
 
 	TotalDigitAPIs []*TotalDigitAPI
 
+	UnionAPIs []*UnionAPI
+
 	WhiteSpaceAPIs []*WhiteSpaceAPI
 }
 
@@ -259,6 +261,16 @@ func CopyBackRepoToBackRepoData(backRepo *BackRepoStruct, backRepoData *BackRepo
 		totaldigitDB.CopyBasicFieldsToTotalDigit_WOP(&totaldigitAPI.TotalDigit_WOP)
 
 		backRepoData.TotalDigitAPIs = append(backRepoData.TotalDigitAPIs, &totaldigitAPI)
+	}
+
+	for _, unionDB := range backRepo.BackRepoUnion.Map_UnionDBID_UnionDB {
+
+		var unionAPI UnionAPI
+		unionAPI.ID = unionDB.ID
+		unionAPI.UnionPointersEncoding = unionDB.UnionPointersEncoding
+		unionDB.CopyBasicFieldsToUnion_WOP(&unionAPI.Union_WOP)
+
+		backRepoData.UnionAPIs = append(backRepoData.UnionAPIs, &unionAPI)
 	}
 
 	for _, whitespaceDB := range backRepo.BackRepoWhiteSpace.Map_WhiteSpaceDBID_WhiteSpaceDB {

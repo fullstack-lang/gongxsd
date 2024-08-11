@@ -272,6 +272,16 @@ func fillUpTree(
 
 				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
 			}
+		case "Union":
+			nodeGongstruct.Name = name
+			set := *models.GetGongstructInstancesSet[models.Union](probe.stageOfInterest)
+			for _union := range set {
+				nodeInstance := (&tree.Node{Name: _union.GetName()}).Stage(probe.treeStage)
+				nodeInstance.IsNodeClickable = true
+				nodeInstance.Impl = NewInstanceNodeCallback(_union, "Union", probe)
+
+				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
+			}
 		case "WhiteSpace":
 			nodeGongstruct.Name = name
 			set := *models.GetGongstructInstancesSet[models.WhiteSpace](probe.stageOfInterest)

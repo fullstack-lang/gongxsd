@@ -12,13 +12,17 @@ type AttributeGroup struct {
 	Attributes []*Attribute `xml:"attribute"`
 }
 
-func (ag *AttributeGroup) generateAttributes(agMap map[string]*AttributeGroup, stMap map[string]*SimpleType, fields *string) {
+func (ag *AttributeGroup) generateAttributes(
+	agMap map[string]*AttributeGroup,
+	stMap map[string]*SimpleType,
+	setOfGoIdentifiers map[string]any,
+	fields *string) {
 
 	for _, referencedAg := range ag.AttributeGroups {
 
 		if namedAg, ok := agMap[referencedAg.Ref]; ok {
-			generateAttributes(namedAg.Attributes, stMap, fields)
-			namedAg.generateAttributes(agMap, stMap, fields)
+			generateAttributes(namedAg.Attributes, stMap, setOfGoIdentifiers, fields)
+			namedAg.generateAttributes(agMap, stMap, setOfGoIdentifiers, fields)
 		}
 	}
 

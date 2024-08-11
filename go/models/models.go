@@ -51,6 +51,7 @@ type SimpleType struct {
 	ElementWithAnnotation
 	ElementWithNameAttribute
 	Restriction *Restriction `xml:"restriction"`
+	Union       *Union       `xml:"union"`
 }
 
 type Restriction struct {
@@ -68,11 +69,19 @@ type Restriction struct {
 	TotalDigit   *TotalDigit    `xml:"totalDigits"`
 }
 
+type Union struct {
+	Name string
+	ElementWithAnnotation
+	MemberTypes string `xml:"memberTypes,attr"`
+}
+
 type Attribute struct {
 	Name string
 	ElementWithNameAttribute
 	ElementWithTypeAttribute
 	ElementWithAnnotation
+
+	WithGoIdentifier
 
 	Default         string `xml:"default,attr"`
 	Use             string `xml:"use,attr"`

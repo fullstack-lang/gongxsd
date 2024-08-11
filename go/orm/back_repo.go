@@ -64,6 +64,8 @@ type BackRepoStruct struct {
 
 	BackRepoTotalDigit BackRepoTotalDigitStruct
 
+	BackRepoUnion BackRepoUnionStruct
+
 	BackRepoWhiteSpace BackRepoWhiteSpaceStruct
 
 	CommitFromBackNb uint // records commit increments when performed by the back
@@ -127,6 +129,7 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 		&SequenceDB{},
 		&SimpleTypeDB{},
 		&TotalDigitDB{},
+		&UnionDB{},
 		&WhiteSpaceDB{},
 	)
 
@@ -306,6 +309,14 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 		db:    db,
 		stage: stage,
 	}
+	backRepo.BackRepoUnion = BackRepoUnionStruct{
+		Map_UnionDBID_UnionPtr: make(map[uint]*models.Union, 0),
+		Map_UnionDBID_UnionDB:  make(map[uint]*UnionDB, 0),
+		Map_UnionPtr_UnionDBID: make(map[*models.Union]uint, 0),
+
+		db:    db,
+		stage: stage,
+	}
 	backRepo.BackRepoWhiteSpace = BackRepoWhiteSpaceStruct{
 		Map_WhiteSpaceDBID_WhiteSpacePtr: make(map[uint]*models.WhiteSpace, 0),
 		Map_WhiteSpaceDBID_WhiteSpaceDB:  make(map[uint]*WhiteSpaceDB, 0),
@@ -383,6 +394,7 @@ func (backRepo *BackRepoStruct) Commit(stage *models.StageStruct) {
 	backRepo.BackRepoSequence.CommitPhaseOne(stage)
 	backRepo.BackRepoSimpleType.CommitPhaseOne(stage)
 	backRepo.BackRepoTotalDigit.CommitPhaseOne(stage)
+	backRepo.BackRepoUnion.CommitPhaseOne(stage)
 	backRepo.BackRepoWhiteSpace.CommitPhaseOne(stage)
 
 	// insertion point for per struct back repo phase two commit
@@ -407,6 +419,7 @@ func (backRepo *BackRepoStruct) Commit(stage *models.StageStruct) {
 	backRepo.BackRepoSequence.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoSimpleType.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoTotalDigit.CommitPhaseTwo(backRepo)
+	backRepo.BackRepoUnion.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoWhiteSpace.CommitPhaseTwo(backRepo)
 
 	backRepo.IncrementCommitFromBackNb()
@@ -436,6 +449,7 @@ func (backRepo *BackRepoStruct) Checkout(stage *models.StageStruct) {
 	backRepo.BackRepoSequence.CheckoutPhaseOne()
 	backRepo.BackRepoSimpleType.CheckoutPhaseOne()
 	backRepo.BackRepoTotalDigit.CheckoutPhaseOne()
+	backRepo.BackRepoUnion.CheckoutPhaseOne()
 	backRepo.BackRepoWhiteSpace.CheckoutPhaseOne()
 
 	// insertion point for per struct back repo phase two commit
@@ -460,6 +474,7 @@ func (backRepo *BackRepoStruct) Checkout(stage *models.StageStruct) {
 	backRepo.BackRepoSequence.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoSimpleType.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoTotalDigit.CheckoutPhaseTwo(backRepo)
+	backRepo.BackRepoUnion.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoWhiteSpace.CheckoutPhaseTwo(backRepo)
 }
 
@@ -489,6 +504,7 @@ func (backRepo *BackRepoStruct) Backup(stage *models.StageStruct, dirPath string
 	backRepo.BackRepoSequence.Backup(dirPath)
 	backRepo.BackRepoSimpleType.Backup(dirPath)
 	backRepo.BackRepoTotalDigit.Backup(dirPath)
+	backRepo.BackRepoUnion.Backup(dirPath)
 	backRepo.BackRepoWhiteSpace.Backup(dirPath)
 }
 
@@ -521,6 +537,7 @@ func (backRepo *BackRepoStruct) BackupXL(stage *models.StageStruct, dirPath stri
 	backRepo.BackRepoSequence.BackupXL(file)
 	backRepo.BackRepoSimpleType.BackupXL(file)
 	backRepo.BackRepoTotalDigit.BackupXL(file)
+	backRepo.BackRepoUnion.BackupXL(file)
 	backRepo.BackRepoWhiteSpace.BackupXL(file)
 
 	var b bytes.Buffer
@@ -567,6 +584,7 @@ func (backRepo *BackRepoStruct) Restore(stage *models.StageStruct, dirPath strin
 	backRepo.BackRepoSequence.RestorePhaseOne(dirPath)
 	backRepo.BackRepoSimpleType.RestorePhaseOne(dirPath)
 	backRepo.BackRepoTotalDigit.RestorePhaseOne(dirPath)
+	backRepo.BackRepoUnion.RestorePhaseOne(dirPath)
 	backRepo.BackRepoWhiteSpace.RestorePhaseOne(dirPath)
 
 	//
@@ -595,6 +613,7 @@ func (backRepo *BackRepoStruct) Restore(stage *models.StageStruct, dirPath strin
 	backRepo.BackRepoSequence.RestorePhaseTwo()
 	backRepo.BackRepoSimpleType.RestorePhaseTwo()
 	backRepo.BackRepoTotalDigit.RestorePhaseTwo()
+	backRepo.BackRepoUnion.RestorePhaseTwo()
 	backRepo.BackRepoWhiteSpace.RestorePhaseTwo()
 
 	backRepo.stage.Checkout()
@@ -644,6 +663,7 @@ func (backRepo *BackRepoStruct) RestoreXL(stage *models.StageStruct, dirPath str
 	backRepo.BackRepoSequence.RestoreXLPhaseOne(file)
 	backRepo.BackRepoSimpleType.RestoreXLPhaseOne(file)
 	backRepo.BackRepoTotalDigit.RestoreXLPhaseOne(file)
+	backRepo.BackRepoUnion.RestoreXLPhaseOne(file)
 	backRepo.BackRepoWhiteSpace.RestoreXLPhaseOne(file)
 
 	// commit the restored stage

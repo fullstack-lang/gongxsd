@@ -194,6 +194,13 @@ func registerControllers(r *gin.Engine) {
 		v1.PUT("/v1/totaldigits/:id", GetController().UpdateTotalDigit)
 		v1.DELETE("/v1/totaldigits/:id", GetController().DeleteTotalDigit)
 
+		v1.GET("/v1/unions", GetController().GetUnions)
+		v1.GET("/v1/unions/:id", GetController().GetUnion)
+		v1.POST("/v1/unions", GetController().PostUnion)
+		v1.PATCH("/v1/unions/:id", GetController().UpdateUnion)
+		v1.PUT("/v1/unions/:id", GetController().UpdateUnion)
+		v1.DELETE("/v1/unions/:id", GetController().DeleteUnion)
+
 		v1.GET("/v1/whitespaces", GetController().GetWhiteSpaces)
 		v1.GET("/v1/whitespaces/:id", GetController().GetWhiteSpace)
 		v1.POST("/v1/whitespaces", GetController().PostWhiteSpace)

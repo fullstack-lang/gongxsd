@@ -68,6 +68,9 @@ func IsStaged[Type Gongstruct](stage *StageStruct, instance *Type) (ok bool) {
 	case *TotalDigit:
 		ok = stage.IsStagedTotalDigit(target)
 
+	case *Union:
+		ok = stage.IsStagedUnion(target)
+
 	case *WhiteSpace:
 		ok = stage.IsStagedWhiteSpace(target)
 
@@ -225,6 +228,13 @@ func (stage *StageStruct) IsStagedTotalDigit(totaldigit *TotalDigit) (ok bool) {
 	return
 }
 
+func (stage *StageStruct) IsStagedUnion(union *Union) (ok bool) {
+
+	_, ok = stage.Unions[union]
+
+	return
+}
+
 func (stage *StageStruct) IsStagedWhiteSpace(whitespace *WhiteSpace) (ok bool) {
 
 	_, ok = stage.WhiteSpaces[whitespace]
@@ -302,6 +312,9 @@ func StageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 
 	case *TotalDigit:
 		stage.StageBranchTotalDigit(target)
+
+	case *Union:
+		stage.StageBranchUnion(target)
 
 	case *WhiteSpace:
 		stage.StageBranchWhiteSpace(target)
@@ -784,6 +797,9 @@ func (stage *StageStruct) StageBranchSimpleType(simpletype *SimpleType) {
 	if simpletype.Restriction != nil {
 		StageBranch(stage, simpletype.Restriction)
 	}
+	if simpletype.Union != nil {
+		StageBranch(stage, simpletype.Union)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 
@@ -801,6 +817,24 @@ func (stage *StageStruct) StageBranchTotalDigit(totaldigit *TotalDigit) {
 	//insertion point for the staging of instances referenced by pointers
 	if totaldigit.Annotation != nil {
 		StageBranch(stage, totaldigit.Annotation)
+	}
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) StageBranchUnion(union *Union) {
+
+	// check if instance is already staged
+	if IsStaged(stage, union) {
+		return
+	}
+
+	union.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+	if union.Annotation != nil {
+		StageBranch(stage, union.Annotation)
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
@@ -918,6 +952,10 @@ func CopyBranch[Type Gongstruct](from *Type) (to *Type) {
 
 	case *TotalDigit:
 		toT := CopyBranchTotalDigit(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
+	case *Union:
+		toT := CopyBranchUnion(mapOrigCopy, fromT)
 		return any(toT).(*Type)
 
 	case *WhiteSpace:
@@ -1482,6 +1520,9 @@ func CopyBranchSimpleType(mapOrigCopy map[any]any, simpletypeFrom *SimpleType) (
 	if simpletypeFrom.Restriction != nil {
 		simpletypeTo.Restriction = CopyBranchRestriction(mapOrigCopy, simpletypeFrom.Restriction)
 	}
+	if simpletypeFrom.Union != nil {
+		simpletypeTo.Union = CopyBranchUnion(mapOrigCopy, simpletypeFrom.Union)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 
@@ -1503,6 +1544,28 @@ func CopyBranchTotalDigit(mapOrigCopy map[any]any, totaldigitFrom *TotalDigit) (
 	//insertion point for the staging of instances referenced by pointers
 	if totaldigitFrom.Annotation != nil {
 		totaldigitTo.Annotation = CopyBranchAnnotation(mapOrigCopy, totaldigitFrom.Annotation)
+	}
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+	return
+}
+
+func CopyBranchUnion(mapOrigCopy map[any]any, unionFrom *Union) (unionTo *Union) {
+
+	// unionFrom has already been copied
+	if _unionTo, ok := mapOrigCopy[unionFrom]; ok {
+		unionTo = _unionTo.(*Union)
+		return
+	}
+
+	unionTo = new(Union)
+	mapOrigCopy[unionFrom] = unionTo
+	unionFrom.CopyBasicFields(unionTo)
+
+	//insertion point for the staging of instances referenced by pointers
+	if unionFrom.Annotation != nil {
+		unionTo.Annotation = CopyBranchAnnotation(mapOrigCopy, unionFrom.Annotation)
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
@@ -1602,6 +1665,9 @@ func UnstageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 
 	case *TotalDigit:
 		stage.UnstageBranchTotalDigit(target)
+
+	case *Union:
+		stage.UnstageBranchUnion(target)
 
 	case *WhiteSpace:
 		stage.UnstageBranchWhiteSpace(target)
@@ -2084,6 +2150,9 @@ func (stage *StageStruct) UnstageBranchSimpleType(simpletype *SimpleType) {
 	if simpletype.Restriction != nil {
 		UnstageBranch(stage, simpletype.Restriction)
 	}
+	if simpletype.Union != nil {
+		UnstageBranch(stage, simpletype.Union)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 
@@ -2101,6 +2170,24 @@ func (stage *StageStruct) UnstageBranchTotalDigit(totaldigit *TotalDigit) {
 	//insertion point for the staging of instances referenced by pointers
 	if totaldigit.Annotation != nil {
 		UnstageBranch(stage, totaldigit.Annotation)
+	}
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) UnstageBranchUnion(union *Union) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, union) {
+		return
+	}
+
+	union.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+	if union.Annotation != nil {
+		UnstageBranch(stage, union.Annotation)
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers

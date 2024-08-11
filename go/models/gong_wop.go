@@ -321,6 +321,18 @@ func (from *TotalDigit) CopyBasicFields(to *TotalDigit) {
 	to.Value = from.Value
 }
 
+type Union_WOP struct {
+	// insertion point
+	Name string
+	MemberTypes string
+}
+
+func (from *Union) CopyBasicFields(to *Union) {
+	// insertion point
+	to.Name = from.Name
+	to.MemberTypes = from.MemberTypes
+}
+
 type WhiteSpace_WOP struct {
 	// insertion point
 	Name string

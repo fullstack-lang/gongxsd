@@ -1120,6 +1120,46 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 
 	}
 
+	map_Union_Identifiers := make(map[*Union]string)
+	_ = map_Union_Identifiers
+
+	unionOrdered := []*Union{}
+	for union := range stage.Unions {
+		unionOrdered = append(unionOrdered, union)
+	}
+	sort.Slice(unionOrdered[:], func(i, j int) bool {
+		return unionOrdered[i].Name < unionOrdered[j].Name
+	})
+	if len(unionOrdered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, union := range unionOrdered {
+
+		id = generatesIdentifier("Union", idx, union.Name)
+		map_Union_Identifiers[union] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "Union")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", union.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(union.Name))
+		initializerStatements += setValueField
+
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "MemberTypes")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(union.MemberTypes))
+		initializerStatements += setValueField
+
+	}
+
 	map_WhiteSpace_Identifiers := make(map[*WhiteSpace]string)
 	_ = map_WhiteSpace_Identifiers
 
@@ -1831,6 +1871,14 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			pointersInitializesStatements += setPointerField
 		}
 
+		if simpletype.Union != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Union")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Union_Identifiers[simpletype.Union])
+			pointersInitializesStatements += setPointerField
+		}
+
 	}
 
 	for idx, totaldigit := range totaldigitOrdered {
@@ -1846,6 +1894,24 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Annotation")
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Annotation_Identifiers[totaldigit.Annotation])
+			pointersInitializesStatements += setPointerField
+		}
+
+	}
+
+	for idx, union := range unionOrdered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("Union", idx, union.Name)
+		map_Union_Identifiers[union] = id
+
+		// Initialisation of values
+		if union.Annotation != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Annotation")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Annotation_Identifiers[union.Annotation])
 			pointersInitializesStatements += setPointerField
 		}
 

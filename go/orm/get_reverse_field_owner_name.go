@@ -238,6 +238,11 @@ func GetReverseFieldOwnerName[T models.Gongstruct](
 		// insertion point
 		}
 
+	case *models.Union:
+		switch reverseField.GongstructName {
+		// insertion point
+		}
+
 	case *models.WhiteSpace:
 		switch reverseField.GongstructName {
 		// insertion point
@@ -444,6 +449,11 @@ func GetReverseFieldOwner[T models.Gongstruct](
 		}
 
 	case *models.TotalDigit:
+		switch reverseField.GongstructName {
+		// insertion point
+		}
+
+	case *models.Union:
 		switch reverseField.GongstructName {
 		// insertion point
 		}

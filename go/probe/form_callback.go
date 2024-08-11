@@ -2384,6 +2384,8 @@ func (simpletypeFormCallback *SimpleTypeFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(simpletype_.NameXSD), formDiv)
 		case "Restriction":
 			FormDivSelectFieldToField(&(simpletype_.Restriction), simpletypeFormCallback.probe.stageOfInterest, formDiv)
+		case "Union":
+			FormDivSelectFieldToField(&(simpletype_.Union), simpletypeFormCallback.probe.stageOfInterest, formDiv)
 		case "Schema:SimpleTypes":
 			// we need to retrieve the field owner before the change
 			var pastSchemaOwner *models.Schema
@@ -2538,6 +2540,87 @@ func (totaldigitFormCallback *TotalDigitFormCallback) OnSave() {
 	}
 
 	fillUpTree(totaldigitFormCallback.probe)
+}
+func __gong__New__UnionFormCallback(
+	union *models.Union,
+	probe *Probe,
+	formGroup *table.FormGroup,
+) (unionFormCallback *UnionFormCallback) {
+	unionFormCallback = new(UnionFormCallback)
+	unionFormCallback.probe = probe
+	unionFormCallback.union = union
+	unionFormCallback.formGroup = formGroup
+
+	unionFormCallback.CreationMode = (union == nil)
+
+	return
+}
+
+type UnionFormCallback struct {
+	union *models.Union
+
+	// If the form call is called on the creation of a new instnace
+	CreationMode bool
+
+	probe *Probe
+
+	formGroup *table.FormGroup
+}
+
+func (unionFormCallback *UnionFormCallback) OnSave() {
+
+	log.Println("UnionFormCallback, OnSave")
+
+	// checkout formStage to have the form group on the stage synchronized with the
+	// back repo (and front repo)
+	unionFormCallback.probe.formStage.Checkout()
+
+	if unionFormCallback.union == nil {
+		unionFormCallback.union = new(models.Union).Stage(unionFormCallback.probe.stageOfInterest)
+	}
+	union_ := unionFormCallback.union
+	_ = union_
+
+	for _, formDiv := range unionFormCallback.formGroup.FormDivs {
+		switch formDiv.Name {
+		// insertion point per field
+		case "Name":
+			FormDivBasicFieldToField(&(union_.Name), formDiv)
+		case "Annotation":
+			FormDivSelectFieldToField(&(union_.Annotation), unionFormCallback.probe.stageOfInterest, formDiv)
+		case "MemberTypes":
+			FormDivBasicFieldToField(&(union_.MemberTypes), formDiv)
+		}
+	}
+
+	// manage the suppress operation
+	if unionFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		union_.Unstage(unionFormCallback.probe.stageOfInterest)
+	}
+
+	unionFormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.Union](
+		unionFormCallback.probe,
+	)
+	unionFormCallback.probe.tableStage.Commit()
+
+	// display a new form by reset the form stage
+	if unionFormCallback.CreationMode || unionFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		unionFormCallback.probe.formStage.Reset()
+		newFormGroup := (&table.FormGroup{
+			Name: table.FormGroupDefaultName.ToString(),
+		}).Stage(unionFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__UnionFormCallback(
+			nil,
+			unionFormCallback.probe,
+			newFormGroup,
+		)
+		union := new(models.Union)
+		FillUpForm(union, newFormGroup, unionFormCallback.probe)
+		unionFormCallback.probe.formStage.Commit()
+	}
+
+	fillUpTree(unionFormCallback.probe)
 }
 func __gong__New__WhiteSpaceFormCallback(
 	whitespace *models.WhiteSpace,

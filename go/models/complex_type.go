@@ -1,5 +1,10 @@
 package models
 
+import (
+	"log"
+	"strings"
+)
+
 type ComplexType struct {
 	Name string
 
@@ -18,6 +23,7 @@ type ComplexType struct {
 }
 
 func (ct *ComplexType) Fields(stage *StageStruct) (fields string) {
+	setOfGoIdentifiers := make(map[string]any)
 
 	stMap := make(map[string]*SimpleType)
 	for st := range *GetGongstructInstancesSet[SimpleType](stage) {
@@ -32,12 +38,12 @@ func (ct *ComplexType) Fields(stage *StageStruct) (fields string) {
 		agMap[ag.Name] = ag
 	}
 
-	generateAttributes(ct.Attributes, stMap, &fields)
+	generateAttributes(ct.Attributes, stMap, setOfGoIdentifiers, &fields)
 	for _, referencedAg := range ct.AttributeGroups {
 
 		if namedAg, ok := agMap[referencedAg.Ref]; ok {
-			generateAttributes(namedAg.Attributes, stMap, &fields)
-			namedAg.generateAttributes(agMap, stMap, &fields)
+			generateAttributes(namedAg.Attributes, stMap, setOfGoIdentifiers, &fields)
+			namedAg.generateAttributes(agMap, stMap, setOfGoIdentifiers, &fields)
 		}
 	}
 
@@ -45,6 +51,8 @@ func (ct *ComplexType) Fields(stage *StageStruct) (fields string) {
 	elems := ct.Composer.getElements(map_Name_Elems)
 
 	for _, elem := range elems {
+
+		computeGoIdentifier(elem.GoIdentifier, &elem.WithGoIdentifier, setOfGoIdentifiers)
 
 		goType := generateGoTypeFromSimpleType(elem.Type, stMap)
 		if goType != "" {
@@ -58,22 +66,53 @@ func (ct *ComplexType) Fields(stage *StageStruct) (fields string) {
 		}
 	}
 
+	// parse all fields and post fix if necessary to avoid name conflicts
+
 	return
 }
 
-func generateAttributes(attrs []*Attribute, stMap map[string]*SimpleType, fields *string) {
+func generateAttributes(
+	attrs []*Attribute,
+	stMap map[string]*SimpleType,
+	setOfGoIdentifiers map[string]any,
+	fields *string) {
 	for _, attr := range attrs {
 		goType := generateGoTypeFromSimpleType(attr.Type, stMap)
 
-		name := xsdNameToGoIdentifier(attr.Name)
+		var name string
+
+		if goType == "" {
+
+			prefix := "xlink:"
+			if strings.HasPrefix(attr.Ref, prefix) {
+				goType = "string"
+				nameDec := strings.TrimPrefix(attr.Ref, prefix)
+				name = xsdNameToGoIdentifier(nameDec)
+			}
+
+			prefix = "xml:"
+			if strings.HasPrefix(attr.Ref, prefix) {
+				goType = "string"
+				nameDec := strings.TrimPrefix(attr.Ref, prefix)
+				name = xsdNameToGoIdentifier(nameDec)
+			}
+		} else {
+			name = xsdNameToGoIdentifier(attr.Name)
+		}
+
+		if goType == "" {
+			log.Fatalln("No resolution of attribute type", attr.Type)
+		}
 
 		switch name {
 		case "Name":
 			name = "NameXSD"
 		}
 
+		computeGoIdentifier(name, &attr.WithGoIdentifier, setOfGoIdentifiers)
+
 		*fields += "\n\n\t// generated from attribute \"" + attr.NameXSD + "\" of type " + attr.Type +
-			"\n\t" + name + " " + goType + " " + "`" + `xml:"` + attr.NameXSD + `,attr"` + "`"
+			"\n\t" + attr.GoIdentifier + " " + goType + " " + "`" + `xml:"` + attr.NameXSD + `,attr"` + "`"
 	}
 }
 
@@ -104,8 +143,24 @@ func generateGoTypeFromSimpleType(base string, stMap map[string]*SimpleType) (go
 
 	// a base can refer a simple type
 	if goType == "" {
+
 		if st, ok := stMap[base]; ok {
-			return generateGoTypeFromSimpleType(st.Restriction.Base, stMap)
+			if st.Restriction != nil {
+				return generateGoTypeFromSimpleType(st.Restriction.Base, stMap)
+			} else {
+				//
+				// the union of type can be a go type int, float64, string or boolean
+				// on simplify to string
+				return "string"
+				// types := strings.Split(st.Union.MemberTypes, " ")
+				// return generateGoTypeFromSimpleType(types[0], stMap)
+			}
+		}
+		//
+		// type="empty": This indicates that the element is expected to be empty
+		// (i.e., it does not have any child elements or text content).
+		if base == "empty" {
+			return "string"
 		}
 	}
 	return
