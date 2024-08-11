@@ -1,42 +1,43 @@
 package models
 
 type Composer struct {
-	Sequence *Sequence `xml:"sequence"`
-	All      *All      `xml:"all"`
-	Choice   *Choice   `xml:"choice"`
+	Sequences []*Sequence `xml:"sequence"`
+	Alls      []*All      `xml:"all"`
+	Choices   []*Choice   `xml:"choice"`
+	Groups    []*Group    `xml:"group"`
 }
 
 func (composer *Composer) getElements(map_Name_Elems map[string]*Element) (elems []*Element) {
 
-	if composer.Sequence != nil {
-		for _, e := range composer.Sequence.Elements {
+	for _, s := range composer.Sequences {
+		for _, e := range s.Elements {
 			if _, ok := map_Name_Elems[e.Name]; ok {
 				continue
 			}
 			map_Name_Elems[e.Name] = e
 			elems = append(elems, e)
 		}
-		elems = append(elems, composer.Sequence.Composer.getElements(map_Name_Elems)...)
+		elems = append(elems, s.getElements(map_Name_Elems)...)
 	}
-	if composer.Choice != nil {
-		for _, e := range composer.Choice.Elements {
+	for _, c := range composer.Choices {
+		for _, e := range c.Elements {
 			if _, ok := map_Name_Elems[e.Name]; ok {
 				continue
 			}
 			map_Name_Elems[e.Name] = e
 			elems = append(elems, e)
 		}
-		elems = append(elems, composer.Choice.Composer.getElements(map_Name_Elems)...)
+		elems = append(elems, c.getElements(map_Name_Elems)...)
 	}
-	if composer.All != nil {
-		for _, e := range composer.All.Elements {
+	for _, a := range composer.Alls {
+		for _, e := range a.Elements {
 			if _, ok := map_Name_Elems[e.Name]; ok {
 				continue
 			}
 			map_Name_Elems[e.Name] = e
 			elems = append(elems, e)
 		}
-		elems = append(elems, composer.All.Composer.getElements(map_Name_Elems)...)
+		elems = append(elems, a.Composer.getElements(map_Name_Elems)...)
 	}
 
 	return
@@ -48,7 +49,6 @@ type Sequence struct {
 	MinOccurs string     `xml:"minOccurs,attr"`
 	MaxOccurs string     `xml:"maxOccurs,attr"`
 	Elements  []*Element `xml:"element"`
-	Groups    []*Group   `xml:"group"`
 	Composer
 }
 
@@ -58,7 +58,6 @@ type All struct {
 	MinOccurs string     `xml:"minOccurs,attr"`
 	MaxOccurs string     `xml:"maxOccurs,attr"`
 	Elements  []*Element `xml:"element"`
-	Groups    []*Group   `xml:"group"`
 	Composer
 }
 
@@ -68,6 +67,5 @@ type Choice struct {
 	MinOccurs string     `xml:"minOccurs,attr"`
 	MaxOccurs string     `xml:"maxOccurs,attr"`
 	Elements  []*Element `xml:"element"`
-	Groups    []*Group   `xml:"group"`
 	Composer
 }

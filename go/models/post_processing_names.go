@@ -37,14 +37,14 @@ func PostProcessingNames(stage *StageStruct) {
 			x.Name = prefix(_x.Name)
 		}
 
-		if x.Sequence != nil {
-			x.Sequence.Name = prefix(x.Name)
+		for _, s := range x.Sequences {
+			s.Name = prefix(x.Name)
 		}
-		if x.Choice != nil {
-			x.Choice.Name = prefix(x.Name)
+		for _, c := range x.Choices {
+			c.Name = prefix(x.Name)
 		}
-		if x.All != nil {
-			x.All.Name = prefix(x.Name)
+		for _, a := range x.Alls {
+			a.Name = prefix(x.Name)
 		}
 		if x.Annotation != nil {
 			x.Annotation.Name = prefix(x.Name)

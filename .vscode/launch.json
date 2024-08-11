@@ -111,5 +111,13 @@
             "program": "${workspaceFolder}/test/books",
             "args": []
         },
+        {
+            "name": "test xml roundtrip musicxml",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceFolder}/test/musicxml",
+            "args": []
+        },
     ]
 }

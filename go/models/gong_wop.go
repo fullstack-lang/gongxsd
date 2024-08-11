@@ -36,6 +36,8 @@ type Attribute_WOP struct {
 	Name string
 	NameXSD string
 	Type string
+	HasNameConflict bool
+	GoIdentifier string
 	Default string
 	Use string
 	Form string
@@ -51,6 +53,8 @@ func (from *Attribute) CopyBasicFields(to *Attribute) {
 	to.Name = from.Name
 	to.NameXSD = from.NameXSD
 	to.Type = from.Type
+	to.HasNameConflict = from.HasNameConflict
+	to.GoIdentifier = from.GoIdentifier
 	to.Default = from.Default
 	to.Use = from.Use
 	to.Form = from.Form

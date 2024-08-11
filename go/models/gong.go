@@ -55,6 +55,12 @@ type StageStruct struct {
 	// insertion point for slice of pointers maps
 	All_Elements_reverseMap map[*Element]*All
 
+	All_Sequences_reverseMap map[*Sequence]*All
+
+	All_Alls_reverseMap map[*All]*All
+
+	All_Choices_reverseMap map[*Choice]*All
+
 	All_Groups_reverseMap map[*Group]*All
 
 	OnAfterAllCreateCallback OnAfterCreateInterface[All]
@@ -101,6 +107,12 @@ type StageStruct struct {
 	// insertion point for slice of pointers maps
 	Choice_Elements_reverseMap map[*Element]*Choice
 
+	Choice_Sequences_reverseMap map[*Sequence]*Choice
+
+	Choice_Alls_reverseMap map[*All]*Choice
+
+	Choice_Choices_reverseMap map[*Choice]*Choice
+
 	Choice_Groups_reverseMap map[*Group]*Choice
 
 	OnAfterChoiceCreateCallback OnAfterCreateInterface[Choice]
@@ -112,6 +124,14 @@ type StageStruct struct {
 	ComplexTypes_mapString map[string]*ComplexType
 
 	// insertion point for slice of pointers maps
+	ComplexType_Sequences_reverseMap map[*Sequence]*ComplexType
+
+	ComplexType_Alls_reverseMap map[*All]*ComplexType
+
+	ComplexType_Choices_reverseMap map[*Choice]*ComplexType
+
+	ComplexType_Groups_reverseMap map[*Group]*ComplexType
+
 	ComplexType_Attributes_reverseMap map[*Attribute]*ComplexType
 
 	ComplexType_AttributeGroups_reverseMap map[*AttributeGroup]*ComplexType
@@ -152,6 +172,14 @@ type StageStruct struct {
 	Groups_mapString map[string]*Group
 
 	// insertion point for slice of pointers maps
+	Group_Sequences_reverseMap map[*Sequence]*Group
+
+	Group_Alls_reverseMap map[*All]*Group
+
+	Group_Choices_reverseMap map[*Choice]*Group
+
+	Group_Groups_reverseMap map[*Group]*Group
+
 	OnAfterGroupCreateCallback OnAfterCreateInterface[Group]
 	OnAfterGroupUpdateCallback OnAfterUpdateInterface[Group]
 	OnAfterGroupDeleteCallback OnAfterDeleteInterface[Group]
@@ -246,6 +274,12 @@ type StageStruct struct {
 
 	// insertion point for slice of pointers maps
 	Sequence_Elements_reverseMap map[*Element]*Sequence
+
+	Sequence_Sequences_reverseMap map[*Sequence]*Sequence
+
+	Sequence_Alls_reverseMap map[*All]*Sequence
+
+	Sequence_Choices_reverseMap map[*Choice]*Sequence
 
 	Sequence_Groups_reverseMap map[*Group]*Sequence
 
@@ -2398,18 +2432,6 @@ func GetAssociationName[Type Gongstruct]() *Type {
 			// Initialisation of associations
 			// field is initialized with an instance of Element with the name of the field
 			Elements: []*Element{{Name: "Elements"}},
-			// field is initialized with an instance of Group with the name of the field
-			Groups: []*Group{{Name: "Groups"}},
-			// field is initialized with Composer as it is a composite
-			Composer: Composer{
-				// per field init
-				//
-				Sequence: &Sequence{Name: "Sequence"},
-				//
-				All: &All{Name: "All"},
-				//
-				Choice: &Choice{Name: "Choice"},
-			},
 			// field is initialized with ElementWithAnnotation as it is a composite
 			ElementWithAnnotation: ElementWithAnnotation{
 				// per field init
@@ -2452,18 +2474,6 @@ func GetAssociationName[Type Gongstruct]() *Type {
 			// Initialisation of associations
 			// field is initialized with an instance of Element with the name of the field
 			Elements: []*Element{{Name: "Elements"}},
-			// field is initialized with an instance of Group with the name of the field
-			Groups: []*Group{{Name: "Groups"}},
-			// field is initialized with Composer as it is a composite
-			Composer: Composer{
-				// per field init
-				//
-				Sequence: &Sequence{Name: "Sequence"},
-				//
-				All: &All{Name: "All"},
-				//
-				Choice: &Choice{Name: "Choice"},
-			},
 			// field is initialized with ElementWithAnnotation as it is a composite
 			ElementWithAnnotation: ElementWithAnnotation{
 				// per field init
@@ -2480,16 +2490,6 @@ func GetAssociationName[Type Gongstruct]() *Type {
 			Attributes: []*Attribute{{Name: "Attributes"}},
 			// field is initialized with an instance of AttributeGroup with the name of the field
 			AttributeGroups: []*AttributeGroup{{Name: "AttributeGroups"}},
-			// field is initialized with Composer as it is a composite
-			Composer: Composer{
-				// per field init
-				//
-				Sequence: &Sequence{Name: "Sequence"},
-				//
-				All: &All{Name: "All"},
-				//
-				Choice: &Choice{Name: "Choice"},
-			},
 			// field is initialized with ElementWithAnnotation as it is a composite
 			ElementWithAnnotation: ElementWithAnnotation{
 				// per field init
@@ -2648,18 +2648,6 @@ func GetAssociationName[Type Gongstruct]() *Type {
 			// Initialisation of associations
 			// field is initialized with an instance of Element with the name of the field
 			Elements: []*Element{{Name: "Elements"}},
-			// field is initialized with an instance of Group with the name of the field
-			Groups: []*Group{{Name: "Groups"}},
-			// field is initialized with Composer as it is a composite
-			Composer: Composer{
-				// per field init
-				//
-				Sequence: &Sequence{Name: "Sequence"},
-				//
-				All: &All{Name: "All"},
-				//
-				Choice: &Choice{Name: "Choice"},
-			},
 			// field is initialized with ElementWithAnnotation as it is a composite
 			ElementWithAnnotation: ElementWithAnnotation{
 				// per field init
@@ -2750,57 +2738,6 @@ func GetPointerReverseMap[Start, End Gongstruct](fieldname string, stage *StageS
 				}
 			}
 			return any(res).(map[*End][]*Start)
-		case "Sequence":
-			res := make(map[*Sequence][]*All)
-			for all := range stage.Alls {
-				if all.Sequence != nil {
-					sequence_ := all.Sequence
-					var alls []*All
-					_, ok := res[sequence_]
-					if ok {
-						alls = res[sequence_]
-					} else {
-						alls = make([]*All, 0)
-					}
-					alls = append(alls, all)
-					res[sequence_] = alls
-				}
-			}
-			return any(res).(map[*End][]*Start)
-		case "All":
-			res := make(map[*All][]*All)
-			for all := range stage.Alls {
-				if all.All != nil {
-					all_ := all.All
-					var alls []*All
-					_, ok := res[all_]
-					if ok {
-						alls = res[all_]
-					} else {
-						alls = make([]*All, 0)
-					}
-					alls = append(alls, all)
-					res[all_] = alls
-				}
-			}
-			return any(res).(map[*End][]*Start)
-		case "Choice":
-			res := make(map[*Choice][]*All)
-			for all := range stage.Alls {
-				if all.Choice != nil {
-					choice_ := all.Choice
-					var alls []*All
-					_, ok := res[choice_]
-					if ok {
-						alls = res[choice_]
-					} else {
-						alls = make([]*All, 0)
-					}
-					alls = append(alls, all)
-					res[choice_] = alls
-				}
-			}
-			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of Annotation
 	case Annotation:
@@ -2872,57 +2809,6 @@ func GetPointerReverseMap[Start, End Gongstruct](fieldname string, stage *StageS
 				}
 			}
 			return any(res).(map[*End][]*Start)
-		case "Sequence":
-			res := make(map[*Sequence][]*Choice)
-			for choice := range stage.Choices {
-				if choice.Sequence != nil {
-					sequence_ := choice.Sequence
-					var choices []*Choice
-					_, ok := res[sequence_]
-					if ok {
-						choices = res[sequence_]
-					} else {
-						choices = make([]*Choice, 0)
-					}
-					choices = append(choices, choice)
-					res[sequence_] = choices
-				}
-			}
-			return any(res).(map[*End][]*Start)
-		case "All":
-			res := make(map[*All][]*Choice)
-			for choice := range stage.Choices {
-				if choice.All != nil {
-					all_ := choice.All
-					var choices []*Choice
-					_, ok := res[all_]
-					if ok {
-						choices = res[all_]
-					} else {
-						choices = make([]*Choice, 0)
-					}
-					choices = append(choices, choice)
-					res[all_] = choices
-				}
-			}
-			return any(res).(map[*End][]*Start)
-		case "Choice":
-			res := make(map[*Choice][]*Choice)
-			for choice := range stage.Choices {
-				if choice.Choice != nil {
-					choice_ := choice.Choice
-					var choices []*Choice
-					_, ok := res[choice_]
-					if ok {
-						choices = res[choice_]
-					} else {
-						choices = make([]*Choice, 0)
-					}
-					choices = append(choices, choice)
-					res[choice_] = choices
-				}
-			}
-			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of ComplexType
 	case ComplexType:
@@ -2959,57 +2845,6 @@ func GetPointerReverseMap[Start, End Gongstruct](fieldname string, stage *StageS
 					}
 					complextypes = append(complextypes, complextype)
 					res[annotation_] = complextypes
-				}
-			}
-			return any(res).(map[*End][]*Start)
-		case "Sequence":
-			res := make(map[*Sequence][]*ComplexType)
-			for complextype := range stage.ComplexTypes {
-				if complextype.Sequence != nil {
-					sequence_ := complextype.Sequence
-					var complextypes []*ComplexType
-					_, ok := res[sequence_]
-					if ok {
-						complextypes = res[sequence_]
-					} else {
-						complextypes = make([]*ComplexType, 0)
-					}
-					complextypes = append(complextypes, complextype)
-					res[sequence_] = complextypes
-				}
-			}
-			return any(res).(map[*End][]*Start)
-		case "All":
-			res := make(map[*All][]*ComplexType)
-			for complextype := range stage.ComplexTypes {
-				if complextype.All != nil {
-					all_ := complextype.All
-					var complextypes []*ComplexType
-					_, ok := res[all_]
-					if ok {
-						complextypes = res[all_]
-					} else {
-						complextypes = make([]*ComplexType, 0)
-					}
-					complextypes = append(complextypes, complextype)
-					res[all_] = complextypes
-				}
-			}
-			return any(res).(map[*End][]*Start)
-		case "Choice":
-			res := make(map[*Choice][]*ComplexType)
-			for complextype := range stage.ComplexTypes {
-				if complextype.Choice != nil {
-					choice_ := complextype.Choice
-					var complextypes []*ComplexType
-					_, ok := res[choice_]
-					if ok {
-						complextypes = res[choice_]
-					} else {
-						complextypes = make([]*ComplexType, 0)
-					}
-					complextypes = append(complextypes, complextype)
-					res[choice_] = complextypes
 				}
 			}
 			return any(res).(map[*End][]*Start)
@@ -3452,57 +3287,6 @@ func GetPointerReverseMap[Start, End Gongstruct](fieldname string, stage *StageS
 				}
 			}
 			return any(res).(map[*End][]*Start)
-		case "Sequence":
-			res := make(map[*Sequence][]*Sequence)
-			for sequence := range stage.Sequences {
-				if sequence.Sequence != nil {
-					sequence_ := sequence.Sequence
-					var sequences []*Sequence
-					_, ok := res[sequence_]
-					if ok {
-						sequences = res[sequence_]
-					} else {
-						sequences = make([]*Sequence, 0)
-					}
-					sequences = append(sequences, sequence)
-					res[sequence_] = sequences
-				}
-			}
-			return any(res).(map[*End][]*Start)
-		case "All":
-			res := make(map[*All][]*Sequence)
-			for sequence := range stage.Sequences {
-				if sequence.All != nil {
-					all_ := sequence.All
-					var sequences []*Sequence
-					_, ok := res[all_]
-					if ok {
-						sequences = res[all_]
-					} else {
-						sequences = make([]*Sequence, 0)
-					}
-					sequences = append(sequences, sequence)
-					res[all_] = sequences
-				}
-			}
-			return any(res).(map[*End][]*Start)
-		case "Choice":
-			res := make(map[*Choice][]*Sequence)
-			for sequence := range stage.Sequences {
-				if sequence.Choice != nil {
-					choice_ := sequence.Choice
-					var sequences []*Sequence
-					_, ok := res[choice_]
-					if ok {
-						sequences = res[choice_]
-					} else {
-						sequences = make([]*Sequence, 0)
-					}
-					sequences = append(sequences, sequence)
-					res[choice_] = sequences
-				}
-			}
-			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of SimpleType
 	case SimpleType:
@@ -3654,6 +3438,30 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 				}
 			}
 			return any(res).(map[*End]*Start)
+		case "Sequences":
+			res := make(map[*Sequence]*All)
+			for all := range stage.Alls {
+				for _, sequence_ := range all.Sequences {
+					res[sequence_] = all
+				}
+			}
+			return any(res).(map[*End]*Start)
+		case "Alls":
+			res := make(map[*All]*All)
+			for all := range stage.Alls {
+				for _, all_ := range all.Alls {
+					res[all_] = all
+				}
+			}
+			return any(res).(map[*End]*Start)
+		case "Choices":
+			res := make(map[*Choice]*All)
+			for all := range stage.Alls {
+				for _, choice_ := range all.Choices {
+					res[choice_] = all
+				}
+			}
+			return any(res).(map[*End]*Start)
 		case "Groups":
 			res := make(map[*Group]*All)
 			for all := range stage.Alls {
@@ -3714,6 +3522,30 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 				}
 			}
 			return any(res).(map[*End]*Start)
+		case "Sequences":
+			res := make(map[*Sequence]*Choice)
+			for choice := range stage.Choices {
+				for _, sequence_ := range choice.Sequences {
+					res[sequence_] = choice
+				}
+			}
+			return any(res).(map[*End]*Start)
+		case "Alls":
+			res := make(map[*All]*Choice)
+			for choice := range stage.Choices {
+				for _, all_ := range choice.Alls {
+					res[all_] = choice
+				}
+			}
+			return any(res).(map[*End]*Start)
+		case "Choices":
+			res := make(map[*Choice]*Choice)
+			for choice := range stage.Choices {
+				for _, choice_ := range choice.Choices {
+					res[choice_] = choice
+				}
+			}
+			return any(res).(map[*End]*Start)
 		case "Groups":
 			res := make(map[*Group]*Choice)
 			for choice := range stage.Choices {
@@ -3727,6 +3559,38 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 	case ComplexType:
 		switch fieldname {
 		// insertion point for per direct association field
+		case "Sequences":
+			res := make(map[*Sequence]*ComplexType)
+			for complextype := range stage.ComplexTypes {
+				for _, sequence_ := range complextype.Sequences {
+					res[sequence_] = complextype
+				}
+			}
+			return any(res).(map[*End]*Start)
+		case "Alls":
+			res := make(map[*All]*ComplexType)
+			for complextype := range stage.ComplexTypes {
+				for _, all_ := range complextype.Alls {
+					res[all_] = complextype
+				}
+			}
+			return any(res).(map[*End]*Start)
+		case "Choices":
+			res := make(map[*Choice]*ComplexType)
+			for complextype := range stage.ComplexTypes {
+				for _, choice_ := range complextype.Choices {
+					res[choice_] = complextype
+				}
+			}
+			return any(res).(map[*End]*Start)
+		case "Groups":
+			res := make(map[*Group]*ComplexType)
+			for complextype := range stage.ComplexTypes {
+				for _, group_ := range complextype.Groups {
+					res[group_] = complextype
+				}
+			}
+			return any(res).(map[*End]*Start)
 		case "Attributes":
 			res := make(map[*Attribute]*ComplexType)
 			for complextype := range stage.ComplexTypes {
@@ -3763,6 +3627,38 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 	case Group:
 		switch fieldname {
 		// insertion point for per direct association field
+		case "Sequences":
+			res := make(map[*Sequence]*Group)
+			for group := range stage.Groups {
+				for _, sequence_ := range group.Sequences {
+					res[sequence_] = group
+				}
+			}
+			return any(res).(map[*End]*Start)
+		case "Alls":
+			res := make(map[*All]*Group)
+			for group := range stage.Groups {
+				for _, all_ := range group.Alls {
+					res[all_] = group
+				}
+			}
+			return any(res).(map[*End]*Start)
+		case "Choices":
+			res := make(map[*Choice]*Group)
+			for group := range stage.Groups {
+				for _, choice_ := range group.Choices {
+					res[choice_] = group
+				}
+			}
+			return any(res).(map[*End]*Start)
+		case "Groups":
+			res := make(map[*Group]*Group)
+			for group := range stage.Groups {
+				for _, group_ := range group.Groups {
+					res[group_] = group
+				}
+			}
+			return any(res).(map[*End]*Start)
 		}
 	// reverse maps of direct associations of Length
 	case Length:
@@ -3861,6 +3757,30 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 			for sequence := range stage.Sequences {
 				for _, element_ := range sequence.Elements {
 					res[element_] = sequence
+				}
+			}
+			return any(res).(map[*End]*Start)
+		case "Sequences":
+			res := make(map[*Sequence]*Sequence)
+			for sequence := range stage.Sequences {
+				for _, sequence_ := range sequence.Sequences {
+					res[sequence_] = sequence
+				}
+			}
+			return any(res).(map[*End]*Start)
+		case "Alls":
+			res := make(map[*All]*Sequence)
+			for sequence := range stage.Sequences {
+				for _, all_ := range sequence.Alls {
+					res[all_] = sequence
+				}
+			}
+			return any(res).(map[*End]*Start)
+		case "Choices":
+			res := make(map[*Choice]*Sequence)
+			for sequence := range stage.Sequences {
+				for _, choice_ := range sequence.Choices {
+					res[choice_] = sequence
 				}
 			}
 			return any(res).(map[*End]*Start)
@@ -4021,17 +3941,17 @@ func GetFields[Type Gongstruct]() (res []string) {
 	switch any(ret).(type) {
 	// insertion point for generic get gongstruct name
 	case All:
-		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "Elements", "Groups", "Sequence", "All", "Choice"}
+		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "Elements", "Sequences", "Alls", "Choices", "Groups"}
 	case Annotation:
 		res = []string{"Name", "Documentations"}
 	case Attribute:
-		res = []string{"Name", "NameXSD", "Type", "Annotation", "Default", "Use", "Form", "Fixed", "Ref", "TargetNamespace", "SimpleType", "IDXSD"}
+		res = []string{"Name", "NameXSD", "Type", "Annotation", "HasNameConflict", "GoIdentifier", "Default", "Use", "Form", "Fixed", "Ref", "TargetNamespace", "SimpleType", "IDXSD"}
 	case AttributeGroup:
 		res = []string{"Name", "NameXSD", "Annotation", "AttributeGroups", "Ref", "Attributes"}
 	case Choice:
-		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "Elements", "Groups", "Sequence", "All", "Choice"}
+		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "Elements", "Sequences", "Alls", "Choices", "Groups"}
 	case ComplexType:
-		res = []string{"Name", "HasNameConflict", "GoIdentifier", "IsInlined", "EnclosingElement", "Annotation", "NameXSD", "Sequence", "All", "Choice", "Attributes", "AttributeGroups"}
+		res = []string{"Name", "HasNameConflict", "GoIdentifier", "IsInlined", "EnclosingElement", "Annotation", "NameXSD", "Sequences", "Alls", "Choices", "Groups", "Attributes", "AttributeGroups"}
 	case Documentation:
 		res = []string{"Name", "Text", "Source", "Lang"}
 	case Element:
@@ -4039,7 +3959,7 @@ func GetFields[Type Gongstruct]() (res []string) {
 	case Enumeration:
 		res = []string{"Name", "Annotation", "Value"}
 	case Group:
-		res = []string{"Name", "Annotation", "NameXSD", "Ref"}
+		res = []string{"Name", "Annotation", "NameXSD", "Ref", "Sequences", "Alls", "Choices", "Groups"}
 	case Length:
 		res = []string{"Name", "Annotation", "Value"}
 	case MaxInclusive:
@@ -4057,7 +3977,7 @@ func GetFields[Type Gongstruct]() (res []string) {
 	case Schema:
 		res = []string{"Name", "Xs", "Annotation", "Elements", "SimpleTypes", "ComplexTypes", "AttributeGroups", "Groups"}
 	case Sequence:
-		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "Elements", "Groups", "Sequence", "All", "Choice"}
+		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "Elements", "Sequences", "Alls", "Choices", "Groups"}
 	case SimpleType:
 		res = []string{"Name", "Annotation", "NameXSD", "Restriction", "Union"}
 	case TotalDigit:
@@ -4087,6 +4007,21 @@ func GetReverseFields[Type Gongstruct]() (res []ReverseField) {
 	case All:
 		var rf ReverseField
 		_ = rf
+		rf.GongstructName = "All"
+		rf.Fieldname = "Alls"
+		res = append(res, rf)
+		rf.GongstructName = "Choice"
+		rf.Fieldname = "Alls"
+		res = append(res, rf)
+		rf.GongstructName = "ComplexType"
+		rf.Fieldname = "Alls"
+		res = append(res, rf)
+		rf.GongstructName = "Group"
+		rf.Fieldname = "Alls"
+		res = append(res, rf)
+		rf.GongstructName = "Sequence"
+		rf.Fieldname = "Alls"
+		res = append(res, rf)
 	case Annotation:
 		var rf ReverseField
 		_ = rf
@@ -4114,6 +4049,21 @@ func GetReverseFields[Type Gongstruct]() (res []ReverseField) {
 	case Choice:
 		var rf ReverseField
 		_ = rf
+		rf.GongstructName = "All"
+		rf.Fieldname = "Choices"
+		res = append(res, rf)
+		rf.GongstructName = "Choice"
+		rf.Fieldname = "Choices"
+		res = append(res, rf)
+		rf.GongstructName = "ComplexType"
+		rf.Fieldname = "Choices"
+		res = append(res, rf)
+		rf.GongstructName = "Group"
+		rf.Fieldname = "Choices"
+		res = append(res, rf)
+		rf.GongstructName = "Sequence"
+		rf.Fieldname = "Choices"
+		res = append(res, rf)
 	case ComplexType:
 		var rf ReverseField
 		_ = rf
@@ -4156,6 +4106,12 @@ func GetReverseFields[Type Gongstruct]() (res []ReverseField) {
 		rf.GongstructName = "Choice"
 		rf.Fieldname = "Groups"
 		res = append(res, rf)
+		rf.GongstructName = "ComplexType"
+		rf.Fieldname = "Groups"
+		res = append(res, rf)
+		rf.GongstructName = "Group"
+		rf.Fieldname = "Groups"
+		res = append(res, rf)
 		rf.GongstructName = "Schema"
 		rf.Fieldname = "Groups"
 		res = append(res, rf)
@@ -4189,6 +4145,21 @@ func GetReverseFields[Type Gongstruct]() (res []ReverseField) {
 	case Sequence:
 		var rf ReverseField
 		_ = rf
+		rf.GongstructName = "All"
+		rf.Fieldname = "Sequences"
+		res = append(res, rf)
+		rf.GongstructName = "Choice"
+		rf.Fieldname = "Sequences"
+		res = append(res, rf)
+		rf.GongstructName = "ComplexType"
+		rf.Fieldname = "Sequences"
+		res = append(res, rf)
+		rf.GongstructName = "Group"
+		rf.Fieldname = "Sequences"
+		res = append(res, rf)
+		rf.GongstructName = "Sequence"
+		rf.Fieldname = "Sequences"
+		res = append(res, rf)
 	case SimpleType:
 		var rf ReverseField
 		_ = rf
@@ -4216,17 +4187,17 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 	switch any(ret).(type) {
 	// insertion point for generic get gongstruct name
 	case *All:
-		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "Elements", "Groups", "Sequence", "All", "Choice"}
+		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "Elements", "Sequences", "Alls", "Choices", "Groups"}
 	case *Annotation:
 		res = []string{"Name", "Documentations"}
 	case *Attribute:
-		res = []string{"Name", "NameXSD", "Type", "Annotation", "Default", "Use", "Form", "Fixed", "Ref", "TargetNamespace", "SimpleType", "IDXSD"}
+		res = []string{"Name", "NameXSD", "Type", "Annotation", "HasNameConflict", "GoIdentifier", "Default", "Use", "Form", "Fixed", "Ref", "TargetNamespace", "SimpleType", "IDXSD"}
 	case *AttributeGroup:
 		res = []string{"Name", "NameXSD", "Annotation", "AttributeGroups", "Ref", "Attributes"}
 	case *Choice:
-		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "Elements", "Groups", "Sequence", "All", "Choice"}
+		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "Elements", "Sequences", "Alls", "Choices", "Groups"}
 	case *ComplexType:
-		res = []string{"Name", "HasNameConflict", "GoIdentifier", "IsInlined", "EnclosingElement", "Annotation", "NameXSD", "Sequence", "All", "Choice", "Attributes", "AttributeGroups"}
+		res = []string{"Name", "HasNameConflict", "GoIdentifier", "IsInlined", "EnclosingElement", "Annotation", "NameXSD", "Sequences", "Alls", "Choices", "Groups", "Attributes", "AttributeGroups"}
 	case *Documentation:
 		res = []string{"Name", "Text", "Source", "Lang"}
 	case *Element:
@@ -4234,7 +4205,7 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 	case *Enumeration:
 		res = []string{"Name", "Annotation", "Value"}
 	case *Group:
-		res = []string{"Name", "Annotation", "NameXSD", "Ref"}
+		res = []string{"Name", "Annotation", "NameXSD", "Ref", "Sequences", "Alls", "Choices", "Groups"}
 	case *Length:
 		res = []string{"Name", "Annotation", "Value"}
 	case *MaxInclusive:
@@ -4252,7 +4223,7 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 	case *Schema:
 		res = []string{"Name", "Xs", "Annotation", "Elements", "SimpleTypes", "ComplexTypes", "AttributeGroups", "Groups"}
 	case *Sequence:
-		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "Elements", "Groups", "Sequence", "All", "Choice"}
+		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "Elements", "Sequences", "Alls", "Choices", "Groups"}
 	case *SimpleType:
 		res = []string{"Name", "Annotation", "NameXSD", "Restriction", "Union"}
 	case *TotalDigit:
@@ -4289,24 +4260,33 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 				}
 				res += __instance__.Name
 			}
+		case "Sequences":
+			for idx, __instance__ := range inferedInstance.Sequences {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
+		case "Alls":
+			for idx, __instance__ := range inferedInstance.Alls {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
+		case "Choices":
+			for idx, __instance__ := range inferedInstance.Choices {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
 		case "Groups":
 			for idx, __instance__ := range inferedInstance.Groups {
 				if idx > 0 {
 					res += "\n"
 				}
 				res += __instance__.Name
-			}
-		case "Sequence":
-			if inferedInstance.Sequence != nil {
-				res = inferedInstance.Sequence.Name
-			}
-		case "All":
-			if inferedInstance.All != nil {
-				res = inferedInstance.All.Name
-			}
-		case "Choice":
-			if inferedInstance.Choice != nil {
-				res = inferedInstance.Choice.Name
 			}
 		}
 	case *Annotation:
@@ -4335,6 +4315,10 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 			if inferedInstance.Annotation != nil {
 				res = inferedInstance.Annotation.Name
 			}
+		case "HasNameConflict":
+			res = fmt.Sprintf("%t", inferedInstance.HasNameConflict)
+		case "GoIdentifier":
+			res = inferedInstance.GoIdentifier
 		case "Default":
 			res = inferedInstance.Default
 		case "Use":
@@ -4400,24 +4384,33 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 				}
 				res += __instance__.Name
 			}
+		case "Sequences":
+			for idx, __instance__ := range inferedInstance.Sequences {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
+		case "Alls":
+			for idx, __instance__ := range inferedInstance.Alls {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
+		case "Choices":
+			for idx, __instance__ := range inferedInstance.Choices {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
 		case "Groups":
 			for idx, __instance__ := range inferedInstance.Groups {
 				if idx > 0 {
 					res += "\n"
 				}
 				res += __instance__.Name
-			}
-		case "Sequence":
-			if inferedInstance.Sequence != nil {
-				res = inferedInstance.Sequence.Name
-			}
-		case "All":
-			if inferedInstance.All != nil {
-				res = inferedInstance.All.Name
-			}
-		case "Choice":
-			if inferedInstance.Choice != nil {
-				res = inferedInstance.Choice.Name
 			}
 		}
 	case *ComplexType:
@@ -4441,17 +4434,33 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 			}
 		case "NameXSD":
 			res = inferedInstance.NameXSD
-		case "Sequence":
-			if inferedInstance.Sequence != nil {
-				res = inferedInstance.Sequence.Name
+		case "Sequences":
+			for idx, __instance__ := range inferedInstance.Sequences {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
 			}
-		case "All":
-			if inferedInstance.All != nil {
-				res = inferedInstance.All.Name
+		case "Alls":
+			for idx, __instance__ := range inferedInstance.Alls {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
 			}
-		case "Choice":
-			if inferedInstance.Choice != nil {
-				res = inferedInstance.Choice.Name
+		case "Choices":
+			for idx, __instance__ := range inferedInstance.Choices {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
+		case "Groups":
+			for idx, __instance__ := range inferedInstance.Groups {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
 			}
 		case "Attributes":
 			for idx, __instance__ := range inferedInstance.Attributes {
@@ -4551,6 +4560,34 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 			res = inferedInstance.NameXSD
 		case "Ref":
 			res = inferedInstance.Ref
+		case "Sequences":
+			for idx, __instance__ := range inferedInstance.Sequences {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
+		case "Alls":
+			for idx, __instance__ := range inferedInstance.Alls {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
+		case "Choices":
+			for idx, __instance__ := range inferedInstance.Choices {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
+		case "Groups":
+			for idx, __instance__ := range inferedInstance.Groups {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
 		}
 	case *Length:
 		switch fieldName {
@@ -4742,24 +4779,33 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 				}
 				res += __instance__.Name
 			}
+		case "Sequences":
+			for idx, __instance__ := range inferedInstance.Sequences {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
+		case "Alls":
+			for idx, __instance__ := range inferedInstance.Alls {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
+		case "Choices":
+			for idx, __instance__ := range inferedInstance.Choices {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
 		case "Groups":
 			for idx, __instance__ := range inferedInstance.Groups {
 				if idx > 0 {
 					res += "\n"
 				}
 				res += __instance__.Name
-			}
-		case "Sequence":
-			if inferedInstance.Sequence != nil {
-				res = inferedInstance.Sequence.Name
-			}
-		case "All":
-			if inferedInstance.All != nil {
-				res = inferedInstance.All.Name
-			}
-		case "Choice":
-			if inferedInstance.Choice != nil {
-				res = inferedInstance.Choice.Name
 			}
 		}
 	case *SimpleType:
@@ -4848,24 +4894,33 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 				}
 				res += __instance__.Name
 			}
+		case "Sequences":
+			for idx, __instance__ := range inferedInstance.Sequences {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
+		case "Alls":
+			for idx, __instance__ := range inferedInstance.Alls {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
+		case "Choices":
+			for idx, __instance__ := range inferedInstance.Choices {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
 		case "Groups":
 			for idx, __instance__ := range inferedInstance.Groups {
 				if idx > 0 {
 					res += "\n"
 				}
 				res += __instance__.Name
-			}
-		case "Sequence":
-			if inferedInstance.Sequence != nil {
-				res = inferedInstance.Sequence.Name
-			}
-		case "All":
-			if inferedInstance.All != nil {
-				res = inferedInstance.All.Name
-			}
-		case "Choice":
-			if inferedInstance.Choice != nil {
-				res = inferedInstance.Choice.Name
 			}
 		}
 	case Annotation:
@@ -4894,6 +4949,10 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 			if inferedInstance.Annotation != nil {
 				res = inferedInstance.Annotation.Name
 			}
+		case "HasNameConflict":
+			res = fmt.Sprintf("%t", inferedInstance.HasNameConflict)
+		case "GoIdentifier":
+			res = inferedInstance.GoIdentifier
 		case "Default":
 			res = inferedInstance.Default
 		case "Use":
@@ -4959,24 +5018,33 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 				}
 				res += __instance__.Name
 			}
+		case "Sequences":
+			for idx, __instance__ := range inferedInstance.Sequences {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
+		case "Alls":
+			for idx, __instance__ := range inferedInstance.Alls {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
+		case "Choices":
+			for idx, __instance__ := range inferedInstance.Choices {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
 		case "Groups":
 			for idx, __instance__ := range inferedInstance.Groups {
 				if idx > 0 {
 					res += "\n"
 				}
 				res += __instance__.Name
-			}
-		case "Sequence":
-			if inferedInstance.Sequence != nil {
-				res = inferedInstance.Sequence.Name
-			}
-		case "All":
-			if inferedInstance.All != nil {
-				res = inferedInstance.All.Name
-			}
-		case "Choice":
-			if inferedInstance.Choice != nil {
-				res = inferedInstance.Choice.Name
 			}
 		}
 	case ComplexType:
@@ -5000,17 +5068,33 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 			}
 		case "NameXSD":
 			res = inferedInstance.NameXSD
-		case "Sequence":
-			if inferedInstance.Sequence != nil {
-				res = inferedInstance.Sequence.Name
+		case "Sequences":
+			for idx, __instance__ := range inferedInstance.Sequences {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
 			}
-		case "All":
-			if inferedInstance.All != nil {
-				res = inferedInstance.All.Name
+		case "Alls":
+			for idx, __instance__ := range inferedInstance.Alls {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
 			}
-		case "Choice":
-			if inferedInstance.Choice != nil {
-				res = inferedInstance.Choice.Name
+		case "Choices":
+			for idx, __instance__ := range inferedInstance.Choices {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
+		case "Groups":
+			for idx, __instance__ := range inferedInstance.Groups {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
 			}
 		case "Attributes":
 			for idx, __instance__ := range inferedInstance.Attributes {
@@ -5110,6 +5194,34 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 			res = inferedInstance.NameXSD
 		case "Ref":
 			res = inferedInstance.Ref
+		case "Sequences":
+			for idx, __instance__ := range inferedInstance.Sequences {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
+		case "Alls":
+			for idx, __instance__ := range inferedInstance.Alls {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
+		case "Choices":
+			for idx, __instance__ := range inferedInstance.Choices {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
+		case "Groups":
+			for idx, __instance__ := range inferedInstance.Groups {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
 		}
 	case Length:
 		switch fieldName {
@@ -5301,24 +5413,33 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 				}
 				res += __instance__.Name
 			}
+		case "Sequences":
+			for idx, __instance__ := range inferedInstance.Sequences {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
+		case "Alls":
+			for idx, __instance__ := range inferedInstance.Alls {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
+		case "Choices":
+			for idx, __instance__ := range inferedInstance.Choices {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
 		case "Groups":
 			for idx, __instance__ := range inferedInstance.Groups {
 				if idx > 0 {
 					res += "\n"
 				}
 				res += __instance__.Name
-			}
-		case "Sequence":
-			if inferedInstance.Sequence != nil {
-				res = inferedInstance.Sequence.Name
-			}
-		case "All":
-			if inferedInstance.All != nil {
-				res = inferedInstance.All.Name
-			}
-		case "Choice":
-			if inferedInstance.Choice != nil {
-				res = inferedInstance.Choice.Name
 			}
 		}
 	case SimpleType:

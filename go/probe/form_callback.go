@@ -69,12 +69,216 @@ func (allFormCallback *AllFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(all_.MinOccurs), formDiv)
 		case "MaxOccurs":
 			FormDivBasicFieldToField(&(all_.MaxOccurs), formDiv)
-		case "Sequence":
-			FormDivSelectFieldToField(&(all_.Sequence), allFormCallback.probe.stageOfInterest, formDiv)
-		case "All":
-			FormDivSelectFieldToField(&(all_.All), allFormCallback.probe.stageOfInterest, formDiv)
-		case "Choice":
-			FormDivSelectFieldToField(&(all_.Choice), allFormCallback.probe.stageOfInterest, formDiv)
+		case "All:Alls":
+			// we need to retrieve the field owner before the change
+			var pastAllOwner *models.All
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "All"
+			rf.Fieldname = "Alls"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				allFormCallback.probe.stageOfInterest,
+				allFormCallback.probe.backRepoOfInterest,
+				all_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastAllOwner = reverseFieldOwner.(*models.All)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastAllOwner != nil {
+					idx := slices.Index(pastAllOwner.Alls, all_)
+					pastAllOwner.Alls = slices.Delete(pastAllOwner.Alls, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _all := range *models.GetGongstructInstancesSet[models.All](allFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _all.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newAllOwner := _all // we have a match
+						if pastAllOwner != nil {
+							if newAllOwner != pastAllOwner {
+								idx := slices.Index(pastAllOwner.Alls, all_)
+								pastAllOwner.Alls = slices.Delete(pastAllOwner.Alls, idx, idx+1)
+								newAllOwner.Alls = append(newAllOwner.Alls, all_)
+							}
+						} else {
+							newAllOwner.Alls = append(newAllOwner.Alls, all_)
+						}
+					}
+				}
+			}
+		case "Choice:Alls":
+			// we need to retrieve the field owner before the change
+			var pastChoiceOwner *models.Choice
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "Choice"
+			rf.Fieldname = "Alls"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				allFormCallback.probe.stageOfInterest,
+				allFormCallback.probe.backRepoOfInterest,
+				all_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastChoiceOwner = reverseFieldOwner.(*models.Choice)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastChoiceOwner != nil {
+					idx := slices.Index(pastChoiceOwner.Alls, all_)
+					pastChoiceOwner.Alls = slices.Delete(pastChoiceOwner.Alls, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _choice := range *models.GetGongstructInstancesSet[models.Choice](allFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _choice.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newChoiceOwner := _choice // we have a match
+						if pastChoiceOwner != nil {
+							if newChoiceOwner != pastChoiceOwner {
+								idx := slices.Index(pastChoiceOwner.Alls, all_)
+								pastChoiceOwner.Alls = slices.Delete(pastChoiceOwner.Alls, idx, idx+1)
+								newChoiceOwner.Alls = append(newChoiceOwner.Alls, all_)
+							}
+						} else {
+							newChoiceOwner.Alls = append(newChoiceOwner.Alls, all_)
+						}
+					}
+				}
+			}
+		case "ComplexType:Alls":
+			// we need to retrieve the field owner before the change
+			var pastComplexTypeOwner *models.ComplexType
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "ComplexType"
+			rf.Fieldname = "Alls"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				allFormCallback.probe.stageOfInterest,
+				allFormCallback.probe.backRepoOfInterest,
+				all_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastComplexTypeOwner = reverseFieldOwner.(*models.ComplexType)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastComplexTypeOwner != nil {
+					idx := slices.Index(pastComplexTypeOwner.Alls, all_)
+					pastComplexTypeOwner.Alls = slices.Delete(pastComplexTypeOwner.Alls, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _complextype := range *models.GetGongstructInstancesSet[models.ComplexType](allFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _complextype.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newComplexTypeOwner := _complextype // we have a match
+						if pastComplexTypeOwner != nil {
+							if newComplexTypeOwner != pastComplexTypeOwner {
+								idx := slices.Index(pastComplexTypeOwner.Alls, all_)
+								pastComplexTypeOwner.Alls = slices.Delete(pastComplexTypeOwner.Alls, idx, idx+1)
+								newComplexTypeOwner.Alls = append(newComplexTypeOwner.Alls, all_)
+							}
+						} else {
+							newComplexTypeOwner.Alls = append(newComplexTypeOwner.Alls, all_)
+						}
+					}
+				}
+			}
+		case "Group:Alls":
+			// we need to retrieve the field owner before the change
+			var pastGroupOwner *models.Group
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "Group"
+			rf.Fieldname = "Alls"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				allFormCallback.probe.stageOfInterest,
+				allFormCallback.probe.backRepoOfInterest,
+				all_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastGroupOwner = reverseFieldOwner.(*models.Group)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastGroupOwner != nil {
+					idx := slices.Index(pastGroupOwner.Alls, all_)
+					pastGroupOwner.Alls = slices.Delete(pastGroupOwner.Alls, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _group := range *models.GetGongstructInstancesSet[models.Group](allFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _group.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newGroupOwner := _group // we have a match
+						if pastGroupOwner != nil {
+							if newGroupOwner != pastGroupOwner {
+								idx := slices.Index(pastGroupOwner.Alls, all_)
+								pastGroupOwner.Alls = slices.Delete(pastGroupOwner.Alls, idx, idx+1)
+								newGroupOwner.Alls = append(newGroupOwner.Alls, all_)
+							}
+						} else {
+							newGroupOwner.Alls = append(newGroupOwner.Alls, all_)
+						}
+					}
+				}
+			}
+		case "Sequence:Alls":
+			// we need to retrieve the field owner before the change
+			var pastSequenceOwner *models.Sequence
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "Sequence"
+			rf.Fieldname = "Alls"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				allFormCallback.probe.stageOfInterest,
+				allFormCallback.probe.backRepoOfInterest,
+				all_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastSequenceOwner = reverseFieldOwner.(*models.Sequence)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastSequenceOwner != nil {
+					idx := slices.Index(pastSequenceOwner.Alls, all_)
+					pastSequenceOwner.Alls = slices.Delete(pastSequenceOwner.Alls, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _sequence := range *models.GetGongstructInstancesSet[models.Sequence](allFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _sequence.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newSequenceOwner := _sequence // we have a match
+						if pastSequenceOwner != nil {
+							if newSequenceOwner != pastSequenceOwner {
+								idx := slices.Index(pastSequenceOwner.Alls, all_)
+								pastSequenceOwner.Alls = slices.Delete(pastSequenceOwner.Alls, idx, idx+1)
+								newSequenceOwner.Alls = append(newSequenceOwner.Alls, all_)
+							}
+						} else {
+							newSequenceOwner.Alls = append(newSequenceOwner.Alls, all_)
+						}
+					}
+				}
+			}
 		}
 	}
 
@@ -235,6 +439,10 @@ func (attributeFormCallback *AttributeFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(attribute_.Type), formDiv)
 		case "Annotation":
 			FormDivSelectFieldToField(&(attribute_.Annotation), attributeFormCallback.probe.stageOfInterest, formDiv)
+		case "HasNameConflict":
+			FormDivBasicFieldToField(&(attribute_.HasNameConflict), formDiv)
+		case "GoIdentifier":
+			FormDivBasicFieldToField(&(attribute_.GoIdentifier), formDiv)
 		case "Default":
 			FormDivBasicFieldToField(&(attribute_.Default), formDiv)
 		case "Use":
@@ -627,12 +835,216 @@ func (choiceFormCallback *ChoiceFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(choice_.MinOccurs), formDiv)
 		case "MaxOccurs":
 			FormDivBasicFieldToField(&(choice_.MaxOccurs), formDiv)
-		case "Sequence":
-			FormDivSelectFieldToField(&(choice_.Sequence), choiceFormCallback.probe.stageOfInterest, formDiv)
-		case "All":
-			FormDivSelectFieldToField(&(choice_.All), choiceFormCallback.probe.stageOfInterest, formDiv)
-		case "Choice":
-			FormDivSelectFieldToField(&(choice_.Choice), choiceFormCallback.probe.stageOfInterest, formDiv)
+		case "All:Choices":
+			// we need to retrieve the field owner before the change
+			var pastAllOwner *models.All
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "All"
+			rf.Fieldname = "Choices"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				choiceFormCallback.probe.stageOfInterest,
+				choiceFormCallback.probe.backRepoOfInterest,
+				choice_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastAllOwner = reverseFieldOwner.(*models.All)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastAllOwner != nil {
+					idx := slices.Index(pastAllOwner.Choices, choice_)
+					pastAllOwner.Choices = slices.Delete(pastAllOwner.Choices, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _all := range *models.GetGongstructInstancesSet[models.All](choiceFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _all.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newAllOwner := _all // we have a match
+						if pastAllOwner != nil {
+							if newAllOwner != pastAllOwner {
+								idx := slices.Index(pastAllOwner.Choices, choice_)
+								pastAllOwner.Choices = slices.Delete(pastAllOwner.Choices, idx, idx+1)
+								newAllOwner.Choices = append(newAllOwner.Choices, choice_)
+							}
+						} else {
+							newAllOwner.Choices = append(newAllOwner.Choices, choice_)
+						}
+					}
+				}
+			}
+		case "Choice:Choices":
+			// we need to retrieve the field owner before the change
+			var pastChoiceOwner *models.Choice
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "Choice"
+			rf.Fieldname = "Choices"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				choiceFormCallback.probe.stageOfInterest,
+				choiceFormCallback.probe.backRepoOfInterest,
+				choice_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastChoiceOwner = reverseFieldOwner.(*models.Choice)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastChoiceOwner != nil {
+					idx := slices.Index(pastChoiceOwner.Choices, choice_)
+					pastChoiceOwner.Choices = slices.Delete(pastChoiceOwner.Choices, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _choice := range *models.GetGongstructInstancesSet[models.Choice](choiceFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _choice.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newChoiceOwner := _choice // we have a match
+						if pastChoiceOwner != nil {
+							if newChoiceOwner != pastChoiceOwner {
+								idx := slices.Index(pastChoiceOwner.Choices, choice_)
+								pastChoiceOwner.Choices = slices.Delete(pastChoiceOwner.Choices, idx, idx+1)
+								newChoiceOwner.Choices = append(newChoiceOwner.Choices, choice_)
+							}
+						} else {
+							newChoiceOwner.Choices = append(newChoiceOwner.Choices, choice_)
+						}
+					}
+				}
+			}
+		case "ComplexType:Choices":
+			// we need to retrieve the field owner before the change
+			var pastComplexTypeOwner *models.ComplexType
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "ComplexType"
+			rf.Fieldname = "Choices"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				choiceFormCallback.probe.stageOfInterest,
+				choiceFormCallback.probe.backRepoOfInterest,
+				choice_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastComplexTypeOwner = reverseFieldOwner.(*models.ComplexType)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastComplexTypeOwner != nil {
+					idx := slices.Index(pastComplexTypeOwner.Choices, choice_)
+					pastComplexTypeOwner.Choices = slices.Delete(pastComplexTypeOwner.Choices, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _complextype := range *models.GetGongstructInstancesSet[models.ComplexType](choiceFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _complextype.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newComplexTypeOwner := _complextype // we have a match
+						if pastComplexTypeOwner != nil {
+							if newComplexTypeOwner != pastComplexTypeOwner {
+								idx := slices.Index(pastComplexTypeOwner.Choices, choice_)
+								pastComplexTypeOwner.Choices = slices.Delete(pastComplexTypeOwner.Choices, idx, idx+1)
+								newComplexTypeOwner.Choices = append(newComplexTypeOwner.Choices, choice_)
+							}
+						} else {
+							newComplexTypeOwner.Choices = append(newComplexTypeOwner.Choices, choice_)
+						}
+					}
+				}
+			}
+		case "Group:Choices":
+			// we need to retrieve the field owner before the change
+			var pastGroupOwner *models.Group
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "Group"
+			rf.Fieldname = "Choices"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				choiceFormCallback.probe.stageOfInterest,
+				choiceFormCallback.probe.backRepoOfInterest,
+				choice_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastGroupOwner = reverseFieldOwner.(*models.Group)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastGroupOwner != nil {
+					idx := slices.Index(pastGroupOwner.Choices, choice_)
+					pastGroupOwner.Choices = slices.Delete(pastGroupOwner.Choices, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _group := range *models.GetGongstructInstancesSet[models.Group](choiceFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _group.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newGroupOwner := _group // we have a match
+						if pastGroupOwner != nil {
+							if newGroupOwner != pastGroupOwner {
+								idx := slices.Index(pastGroupOwner.Choices, choice_)
+								pastGroupOwner.Choices = slices.Delete(pastGroupOwner.Choices, idx, idx+1)
+								newGroupOwner.Choices = append(newGroupOwner.Choices, choice_)
+							}
+						} else {
+							newGroupOwner.Choices = append(newGroupOwner.Choices, choice_)
+						}
+					}
+				}
+			}
+		case "Sequence:Choices":
+			// we need to retrieve the field owner before the change
+			var pastSequenceOwner *models.Sequence
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "Sequence"
+			rf.Fieldname = "Choices"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				choiceFormCallback.probe.stageOfInterest,
+				choiceFormCallback.probe.backRepoOfInterest,
+				choice_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastSequenceOwner = reverseFieldOwner.(*models.Sequence)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastSequenceOwner != nil {
+					idx := slices.Index(pastSequenceOwner.Choices, choice_)
+					pastSequenceOwner.Choices = slices.Delete(pastSequenceOwner.Choices, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _sequence := range *models.GetGongstructInstancesSet[models.Sequence](choiceFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _sequence.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newSequenceOwner := _sequence // we have a match
+						if pastSequenceOwner != nil {
+							if newSequenceOwner != pastSequenceOwner {
+								idx := slices.Index(pastSequenceOwner.Choices, choice_)
+								pastSequenceOwner.Choices = slices.Delete(pastSequenceOwner.Choices, idx, idx+1)
+								newSequenceOwner.Choices = append(newSequenceOwner.Choices, choice_)
+							}
+						} else {
+							newSequenceOwner.Choices = append(newSequenceOwner.Choices, choice_)
+						}
+					}
+				}
+			}
 		}
 	}
 
@@ -722,12 +1134,6 @@ func (complextypeFormCallback *ComplexTypeFormCallback) OnSave() {
 			FormDivSelectFieldToField(&(complextype_.Annotation), complextypeFormCallback.probe.stageOfInterest, formDiv)
 		case "NameXSD":
 			FormDivBasicFieldToField(&(complextype_.NameXSD), formDiv)
-		case "Sequence":
-			FormDivSelectFieldToField(&(complextype_.Sequence), complextypeFormCallback.probe.stageOfInterest, formDiv)
-		case "All":
-			FormDivSelectFieldToField(&(complextype_.All), complextypeFormCallback.probe.stageOfInterest, formDiv)
-		case "Choice":
-			FormDivSelectFieldToField(&(complextype_.Choice), complextypeFormCallback.probe.stageOfInterest, formDiv)
 		case "Schema:ComplexTypes":
 			// we need to retrieve the field owner before the change
 			var pastSchemaOwner *models.Schema
@@ -1460,6 +1866,90 @@ func (groupFormCallback *GroupFormCallback) OnSave() {
 							}
 						} else {
 							newChoiceOwner.Groups = append(newChoiceOwner.Groups, group_)
+						}
+					}
+				}
+			}
+		case "ComplexType:Groups":
+			// we need to retrieve the field owner before the change
+			var pastComplexTypeOwner *models.ComplexType
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "ComplexType"
+			rf.Fieldname = "Groups"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				groupFormCallback.probe.stageOfInterest,
+				groupFormCallback.probe.backRepoOfInterest,
+				group_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastComplexTypeOwner = reverseFieldOwner.(*models.ComplexType)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastComplexTypeOwner != nil {
+					idx := slices.Index(pastComplexTypeOwner.Groups, group_)
+					pastComplexTypeOwner.Groups = slices.Delete(pastComplexTypeOwner.Groups, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _complextype := range *models.GetGongstructInstancesSet[models.ComplexType](groupFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _complextype.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newComplexTypeOwner := _complextype // we have a match
+						if pastComplexTypeOwner != nil {
+							if newComplexTypeOwner != pastComplexTypeOwner {
+								idx := slices.Index(pastComplexTypeOwner.Groups, group_)
+								pastComplexTypeOwner.Groups = slices.Delete(pastComplexTypeOwner.Groups, idx, idx+1)
+								newComplexTypeOwner.Groups = append(newComplexTypeOwner.Groups, group_)
+							}
+						} else {
+							newComplexTypeOwner.Groups = append(newComplexTypeOwner.Groups, group_)
+						}
+					}
+				}
+			}
+		case "Group:Groups":
+			// we need to retrieve the field owner before the change
+			var pastGroupOwner *models.Group
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "Group"
+			rf.Fieldname = "Groups"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				groupFormCallback.probe.stageOfInterest,
+				groupFormCallback.probe.backRepoOfInterest,
+				group_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastGroupOwner = reverseFieldOwner.(*models.Group)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastGroupOwner != nil {
+					idx := slices.Index(pastGroupOwner.Groups, group_)
+					pastGroupOwner.Groups = slices.Delete(pastGroupOwner.Groups, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _group := range *models.GetGongstructInstancesSet[models.Group](groupFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _group.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newGroupOwner := _group // we have a match
+						if pastGroupOwner != nil {
+							if newGroupOwner != pastGroupOwner {
+								idx := slices.Index(pastGroupOwner.Groups, group_)
+								pastGroupOwner.Groups = slices.Delete(pastGroupOwner.Groups, idx, idx+1)
+								newGroupOwner.Groups = append(newGroupOwner.Groups, group_)
+							}
+						} else {
+							newGroupOwner.Groups = append(newGroupOwner.Groups, group_)
 						}
 					}
 				}
@@ -2295,12 +2785,216 @@ func (sequenceFormCallback *SequenceFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(sequence_.MinOccurs), formDiv)
 		case "MaxOccurs":
 			FormDivBasicFieldToField(&(sequence_.MaxOccurs), formDiv)
-		case "Sequence":
-			FormDivSelectFieldToField(&(sequence_.Sequence), sequenceFormCallback.probe.stageOfInterest, formDiv)
-		case "All":
-			FormDivSelectFieldToField(&(sequence_.All), sequenceFormCallback.probe.stageOfInterest, formDiv)
-		case "Choice":
-			FormDivSelectFieldToField(&(sequence_.Choice), sequenceFormCallback.probe.stageOfInterest, formDiv)
+		case "All:Sequences":
+			// we need to retrieve the field owner before the change
+			var pastAllOwner *models.All
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "All"
+			rf.Fieldname = "Sequences"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				sequenceFormCallback.probe.stageOfInterest,
+				sequenceFormCallback.probe.backRepoOfInterest,
+				sequence_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastAllOwner = reverseFieldOwner.(*models.All)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastAllOwner != nil {
+					idx := slices.Index(pastAllOwner.Sequences, sequence_)
+					pastAllOwner.Sequences = slices.Delete(pastAllOwner.Sequences, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _all := range *models.GetGongstructInstancesSet[models.All](sequenceFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _all.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newAllOwner := _all // we have a match
+						if pastAllOwner != nil {
+							if newAllOwner != pastAllOwner {
+								idx := slices.Index(pastAllOwner.Sequences, sequence_)
+								pastAllOwner.Sequences = slices.Delete(pastAllOwner.Sequences, idx, idx+1)
+								newAllOwner.Sequences = append(newAllOwner.Sequences, sequence_)
+							}
+						} else {
+							newAllOwner.Sequences = append(newAllOwner.Sequences, sequence_)
+						}
+					}
+				}
+			}
+		case "Choice:Sequences":
+			// we need to retrieve the field owner before the change
+			var pastChoiceOwner *models.Choice
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "Choice"
+			rf.Fieldname = "Sequences"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				sequenceFormCallback.probe.stageOfInterest,
+				sequenceFormCallback.probe.backRepoOfInterest,
+				sequence_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastChoiceOwner = reverseFieldOwner.(*models.Choice)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastChoiceOwner != nil {
+					idx := slices.Index(pastChoiceOwner.Sequences, sequence_)
+					pastChoiceOwner.Sequences = slices.Delete(pastChoiceOwner.Sequences, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _choice := range *models.GetGongstructInstancesSet[models.Choice](sequenceFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _choice.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newChoiceOwner := _choice // we have a match
+						if pastChoiceOwner != nil {
+							if newChoiceOwner != pastChoiceOwner {
+								idx := slices.Index(pastChoiceOwner.Sequences, sequence_)
+								pastChoiceOwner.Sequences = slices.Delete(pastChoiceOwner.Sequences, idx, idx+1)
+								newChoiceOwner.Sequences = append(newChoiceOwner.Sequences, sequence_)
+							}
+						} else {
+							newChoiceOwner.Sequences = append(newChoiceOwner.Sequences, sequence_)
+						}
+					}
+				}
+			}
+		case "ComplexType:Sequences":
+			// we need to retrieve the field owner before the change
+			var pastComplexTypeOwner *models.ComplexType
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "ComplexType"
+			rf.Fieldname = "Sequences"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				sequenceFormCallback.probe.stageOfInterest,
+				sequenceFormCallback.probe.backRepoOfInterest,
+				sequence_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastComplexTypeOwner = reverseFieldOwner.(*models.ComplexType)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastComplexTypeOwner != nil {
+					idx := slices.Index(pastComplexTypeOwner.Sequences, sequence_)
+					pastComplexTypeOwner.Sequences = slices.Delete(pastComplexTypeOwner.Sequences, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _complextype := range *models.GetGongstructInstancesSet[models.ComplexType](sequenceFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _complextype.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newComplexTypeOwner := _complextype // we have a match
+						if pastComplexTypeOwner != nil {
+							if newComplexTypeOwner != pastComplexTypeOwner {
+								idx := slices.Index(pastComplexTypeOwner.Sequences, sequence_)
+								pastComplexTypeOwner.Sequences = slices.Delete(pastComplexTypeOwner.Sequences, idx, idx+1)
+								newComplexTypeOwner.Sequences = append(newComplexTypeOwner.Sequences, sequence_)
+							}
+						} else {
+							newComplexTypeOwner.Sequences = append(newComplexTypeOwner.Sequences, sequence_)
+						}
+					}
+				}
+			}
+		case "Group:Sequences":
+			// we need to retrieve the field owner before the change
+			var pastGroupOwner *models.Group
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "Group"
+			rf.Fieldname = "Sequences"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				sequenceFormCallback.probe.stageOfInterest,
+				sequenceFormCallback.probe.backRepoOfInterest,
+				sequence_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastGroupOwner = reverseFieldOwner.(*models.Group)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastGroupOwner != nil {
+					idx := slices.Index(pastGroupOwner.Sequences, sequence_)
+					pastGroupOwner.Sequences = slices.Delete(pastGroupOwner.Sequences, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _group := range *models.GetGongstructInstancesSet[models.Group](sequenceFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _group.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newGroupOwner := _group // we have a match
+						if pastGroupOwner != nil {
+							if newGroupOwner != pastGroupOwner {
+								idx := slices.Index(pastGroupOwner.Sequences, sequence_)
+								pastGroupOwner.Sequences = slices.Delete(pastGroupOwner.Sequences, idx, idx+1)
+								newGroupOwner.Sequences = append(newGroupOwner.Sequences, sequence_)
+							}
+						} else {
+							newGroupOwner.Sequences = append(newGroupOwner.Sequences, sequence_)
+						}
+					}
+				}
+			}
+		case "Sequence:Sequences":
+			// we need to retrieve the field owner before the change
+			var pastSequenceOwner *models.Sequence
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "Sequence"
+			rf.Fieldname = "Sequences"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				sequenceFormCallback.probe.stageOfInterest,
+				sequenceFormCallback.probe.backRepoOfInterest,
+				sequence_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastSequenceOwner = reverseFieldOwner.(*models.Sequence)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastSequenceOwner != nil {
+					idx := slices.Index(pastSequenceOwner.Sequences, sequence_)
+					pastSequenceOwner.Sequences = slices.Delete(pastSequenceOwner.Sequences, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _sequence := range *models.GetGongstructInstancesSet[models.Sequence](sequenceFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _sequence.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newSequenceOwner := _sequence // we have a match
+						if pastSequenceOwner != nil {
+							if newSequenceOwner != pastSequenceOwner {
+								idx := slices.Index(pastSequenceOwner.Sequences, sequence_)
+								pastSequenceOwner.Sequences = slices.Delete(pastSequenceOwner.Sequences, idx, idx+1)
+								newSequenceOwner.Sequences = append(newSequenceOwner.Sequences, sequence_)
+							}
+						} else {
+							newSequenceOwner.Sequences = append(newSequenceOwner.Sequences, sequence_)
+						}
+					}
+				}
+			}
 		}
 	}
 

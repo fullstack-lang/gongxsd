@@ -54,20 +54,17 @@ type ChoicePointersEncoding struct {
 	// field Elements is a slice of pointers to another Struct (optional or 0..1)
 	Elements IntSlice `gorm:"type:TEXT"`
 
+	// field Sequences is a slice of pointers to another Struct (optional or 0..1)
+	Sequences IntSlice `gorm:"type:TEXT"`
+
+	// field Alls is a slice of pointers to another Struct (optional or 0..1)
+	Alls IntSlice `gorm:"type:TEXT"`
+
+	// field Choices is a slice of pointers to another Struct (optional or 0..1)
+	Choices IntSlice `gorm:"type:TEXT"`
+
 	// field Groups is a slice of pointers to another Struct (optional or 0..1)
 	Groups IntSlice `gorm:"type:TEXT"`
-
-	// field Sequence is a pointer to another Struct (optional or 0..1)
-	// This field is generated into another field to enable AS ONE association
-	SequenceID sql.NullInt64
-
-	// field All is a pointer to another Struct (optional or 0..1)
-	// This field is generated into another field to enable AS ONE association
-	AllID sql.NullInt64
-
-	// field Choice is a pointer to another Struct (optional or 0..1)
-	// This field is generated into another field to enable AS ONE association
-	ChoiceID sql.NullInt64
 }
 
 // ChoiceDB describes a choice in the database
@@ -276,6 +273,60 @@ func (backRepoChoice *BackRepoChoiceStruct) CommitPhaseTwoInstance(backRepo *Bac
 		}
 
 		// 1. reset
+		choiceDB.ChoicePointersEncoding.Sequences = make([]int, 0)
+		// 2. encode
+		for _, sequenceAssocEnd := range choice.Sequences {
+			sequenceAssocEnd_DB :=
+				backRepo.BackRepoSequence.GetSequenceDBFromSequencePtr(sequenceAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the sequenceAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if sequenceAssocEnd_DB == nil {
+				continue
+			}
+			
+			choiceDB.ChoicePointersEncoding.Sequences =
+				append(choiceDB.ChoicePointersEncoding.Sequences, int(sequenceAssocEnd_DB.ID))
+		}
+
+		// 1. reset
+		choiceDB.ChoicePointersEncoding.Alls = make([]int, 0)
+		// 2. encode
+		for _, allAssocEnd := range choice.Alls {
+			allAssocEnd_DB :=
+				backRepo.BackRepoAll.GetAllDBFromAllPtr(allAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the allAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if allAssocEnd_DB == nil {
+				continue
+			}
+			
+			choiceDB.ChoicePointersEncoding.Alls =
+				append(choiceDB.ChoicePointersEncoding.Alls, int(allAssocEnd_DB.ID))
+		}
+
+		// 1. reset
+		choiceDB.ChoicePointersEncoding.Choices = make([]int, 0)
+		// 2. encode
+		for _, choiceAssocEnd := range choice.Choices {
+			choiceAssocEnd_DB :=
+				backRepo.BackRepoChoice.GetChoiceDBFromChoicePtr(choiceAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the choiceAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if choiceAssocEnd_DB == nil {
+				continue
+			}
+			
+			choiceDB.ChoicePointersEncoding.Choices =
+				append(choiceDB.ChoicePointersEncoding.Choices, int(choiceAssocEnd_DB.ID))
+		}
+
+		// 1. reset
 		choiceDB.ChoicePointersEncoding.Groups = make([]int, 0)
 		// 2. encode
 		for _, groupAssocEnd := range choice.Groups {
@@ -291,42 +342,6 @@ func (backRepoChoice *BackRepoChoiceStruct) CommitPhaseTwoInstance(backRepo *Bac
 			
 			choiceDB.ChoicePointersEncoding.Groups =
 				append(choiceDB.ChoicePointersEncoding.Groups, int(groupAssocEnd_DB.ID))
-		}
-
-		// commit pointer value choice.Sequence translates to updating the choice.SequenceID
-		choiceDB.SequenceID.Valid = true // allow for a 0 value (nil association)
-		if choice.Sequence != nil {
-			if SequenceId, ok := backRepo.BackRepoSequence.Map_SequencePtr_SequenceDBID[choice.Sequence]; ok {
-				choiceDB.SequenceID.Int64 = int64(SequenceId)
-				choiceDB.SequenceID.Valid = true
-			}
-		} else {
-			choiceDB.SequenceID.Int64 = 0
-			choiceDB.SequenceID.Valid = true
-		}
-
-		// commit pointer value choice.All translates to updating the choice.AllID
-		choiceDB.AllID.Valid = true // allow for a 0 value (nil association)
-		if choice.All != nil {
-			if AllId, ok := backRepo.BackRepoAll.Map_AllPtr_AllDBID[choice.All]; ok {
-				choiceDB.AllID.Int64 = int64(AllId)
-				choiceDB.AllID.Valid = true
-			}
-		} else {
-			choiceDB.AllID.Int64 = 0
-			choiceDB.AllID.Valid = true
-		}
-
-		// commit pointer value choice.Choice translates to updating the choice.ChoiceID
-		choiceDB.ChoiceID.Valid = true // allow for a 0 value (nil association)
-		if choice.Choice != nil {
-			if ChoiceId, ok := backRepo.BackRepoChoice.Map_ChoicePtr_ChoiceDBID[choice.Choice]; ok {
-				choiceDB.ChoiceID.Int64 = int64(ChoiceId)
-				choiceDB.ChoiceID.Valid = true
-			}
-		} else {
-			choiceDB.ChoiceID.Int64 = 0
-			choiceDB.ChoiceID.Valid = true
 		}
 
 		query := backRepoChoice.db.Save(&choiceDB)
@@ -456,6 +471,33 @@ func (choiceDB *ChoiceDB) DecodePointers(backRepo *BackRepoStruct, choice *model
 		choice.Elements = append(choice.Elements, backRepo.BackRepoElement.Map_ElementDBID_ElementPtr[uint(_Elementid)])
 	}
 
+	// This loop redeem choice.Sequences in the stage from the encode in the back repo
+	// It parses all SequenceDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	choice.Sequences = choice.Sequences[:0]
+	for _, _Sequenceid := range choiceDB.ChoicePointersEncoding.Sequences {
+		choice.Sequences = append(choice.Sequences, backRepo.BackRepoSequence.Map_SequenceDBID_SequencePtr[uint(_Sequenceid)])
+	}
+
+	// This loop redeem choice.Alls in the stage from the encode in the back repo
+	// It parses all AllDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	choice.Alls = choice.Alls[:0]
+	for _, _Allid := range choiceDB.ChoicePointersEncoding.Alls {
+		choice.Alls = append(choice.Alls, backRepo.BackRepoAll.Map_AllDBID_AllPtr[uint(_Allid)])
+	}
+
+	// This loop redeem choice.Choices in the stage from the encode in the back repo
+	// It parses all ChoiceDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	choice.Choices = choice.Choices[:0]
+	for _, _Choiceid := range choiceDB.ChoicePointersEncoding.Choices {
+		choice.Choices = append(choice.Choices, backRepo.BackRepoChoice.Map_ChoiceDBID_ChoicePtr[uint(_Choiceid)])
+	}
+
 	// This loop redeem choice.Groups in the stage from the encode in the back repo
 	// It parses all GroupDB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance
@@ -465,21 +507,6 @@ func (choiceDB *ChoiceDB) DecodePointers(backRepo *BackRepoStruct, choice *model
 		choice.Groups = append(choice.Groups, backRepo.BackRepoGroup.Map_GroupDBID_GroupPtr[uint(_Groupid)])
 	}
 
-	// Sequence field
-	choice.Sequence = nil
-	if choiceDB.SequenceID.Int64 != 0 {
-		choice.Sequence = backRepo.BackRepoSequence.Map_SequenceDBID_SequencePtr[uint(choiceDB.SequenceID.Int64)]
-	}
-	// All field
-	choice.All = nil
-	if choiceDB.AllID.Int64 != 0 {
-		choice.All = backRepo.BackRepoAll.Map_AllDBID_AllPtr[uint(choiceDB.AllID.Int64)]
-	}
-	// Choice field
-	choice.Choice = nil
-	if choiceDB.ChoiceID.Int64 != 0 {
-		choice.Choice = backRepo.BackRepoChoice.Map_ChoiceDBID_ChoicePtr[uint(choiceDB.ChoiceID.Int64)]
-	}
 	return
 }
 
@@ -736,24 +763,6 @@ func (backRepoChoice *BackRepoChoiceStruct) RestorePhaseTwo() {
 		if choiceDB.AnnotationID.Int64 != 0 {
 			choiceDB.AnnotationID.Int64 = int64(BackRepoAnnotationid_atBckpTime_newID[uint(choiceDB.AnnotationID.Int64)])
 			choiceDB.AnnotationID.Valid = true
-		}
-
-		// reindexing Sequence field
-		if choiceDB.SequenceID.Int64 != 0 {
-			choiceDB.SequenceID.Int64 = int64(BackRepoSequenceid_atBckpTime_newID[uint(choiceDB.SequenceID.Int64)])
-			choiceDB.SequenceID.Valid = true
-		}
-
-		// reindexing All field
-		if choiceDB.AllID.Int64 != 0 {
-			choiceDB.AllID.Int64 = int64(BackRepoAllid_atBckpTime_newID[uint(choiceDB.AllID.Int64)])
-			choiceDB.AllID.Valid = true
-		}
-
-		// reindexing Choice field
-		if choiceDB.ChoiceID.Int64 != 0 {
-			choiceDB.ChoiceID.Int64 = int64(BackRepoChoiceid_atBckpTime_newID[uint(choiceDB.ChoiceID.Int64)])
-			choiceDB.ChoiceID.Valid = true
 		}
 
 		// update databse with new index encoding

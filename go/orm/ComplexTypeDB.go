@@ -55,17 +55,17 @@ type ComplexTypePointersEncoding struct {
 	// This field is generated into another field to enable AS ONE association
 	AnnotationID sql.NullInt64
 
-	// field Sequence is a pointer to another Struct (optional or 0..1)
-	// This field is generated into another field to enable AS ONE association
-	SequenceID sql.NullInt64
+	// field Sequences is a slice of pointers to another Struct (optional or 0..1)
+	Sequences IntSlice `gorm:"type:TEXT"`
 
-	// field All is a pointer to another Struct (optional or 0..1)
-	// This field is generated into another field to enable AS ONE association
-	AllID sql.NullInt64
+	// field Alls is a slice of pointers to another Struct (optional or 0..1)
+	Alls IntSlice `gorm:"type:TEXT"`
 
-	// field Choice is a pointer to another Struct (optional or 0..1)
-	// This field is generated into another field to enable AS ONE association
-	ChoiceID sql.NullInt64
+	// field Choices is a slice of pointers to another Struct (optional or 0..1)
+	Choices IntSlice `gorm:"type:TEXT"`
+
+	// field Groups is a slice of pointers to another Struct (optional or 0..1)
+	Groups IntSlice `gorm:"type:TEXT"`
 
 	// field Attributes is a slice of pointers to another Struct (optional or 0..1)
 	Attributes IntSlice `gorm:"type:TEXT"`
@@ -287,40 +287,76 @@ func (backRepoComplexType *BackRepoComplexTypeStruct) CommitPhaseTwoInstance(bac
 			complextypeDB.AnnotationID.Valid = true
 		}
 
-		// commit pointer value complextype.Sequence translates to updating the complextype.SequenceID
-		complextypeDB.SequenceID.Valid = true // allow for a 0 value (nil association)
-		if complextype.Sequence != nil {
-			if SequenceId, ok := backRepo.BackRepoSequence.Map_SequencePtr_SequenceDBID[complextype.Sequence]; ok {
-				complextypeDB.SequenceID.Int64 = int64(SequenceId)
-				complextypeDB.SequenceID.Valid = true
+		// 1. reset
+		complextypeDB.ComplexTypePointersEncoding.Sequences = make([]int, 0)
+		// 2. encode
+		for _, sequenceAssocEnd := range complextype.Sequences {
+			sequenceAssocEnd_DB :=
+				backRepo.BackRepoSequence.GetSequenceDBFromSequencePtr(sequenceAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the sequenceAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if sequenceAssocEnd_DB == nil {
+				continue
 			}
-		} else {
-			complextypeDB.SequenceID.Int64 = 0
-			complextypeDB.SequenceID.Valid = true
+			
+			complextypeDB.ComplexTypePointersEncoding.Sequences =
+				append(complextypeDB.ComplexTypePointersEncoding.Sequences, int(sequenceAssocEnd_DB.ID))
 		}
 
-		// commit pointer value complextype.All translates to updating the complextype.AllID
-		complextypeDB.AllID.Valid = true // allow for a 0 value (nil association)
-		if complextype.All != nil {
-			if AllId, ok := backRepo.BackRepoAll.Map_AllPtr_AllDBID[complextype.All]; ok {
-				complextypeDB.AllID.Int64 = int64(AllId)
-				complextypeDB.AllID.Valid = true
+		// 1. reset
+		complextypeDB.ComplexTypePointersEncoding.Alls = make([]int, 0)
+		// 2. encode
+		for _, allAssocEnd := range complextype.Alls {
+			allAssocEnd_DB :=
+				backRepo.BackRepoAll.GetAllDBFromAllPtr(allAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the allAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if allAssocEnd_DB == nil {
+				continue
 			}
-		} else {
-			complextypeDB.AllID.Int64 = 0
-			complextypeDB.AllID.Valid = true
+			
+			complextypeDB.ComplexTypePointersEncoding.Alls =
+				append(complextypeDB.ComplexTypePointersEncoding.Alls, int(allAssocEnd_DB.ID))
 		}
 
-		// commit pointer value complextype.Choice translates to updating the complextype.ChoiceID
-		complextypeDB.ChoiceID.Valid = true // allow for a 0 value (nil association)
-		if complextype.Choice != nil {
-			if ChoiceId, ok := backRepo.BackRepoChoice.Map_ChoicePtr_ChoiceDBID[complextype.Choice]; ok {
-				complextypeDB.ChoiceID.Int64 = int64(ChoiceId)
-				complextypeDB.ChoiceID.Valid = true
+		// 1. reset
+		complextypeDB.ComplexTypePointersEncoding.Choices = make([]int, 0)
+		// 2. encode
+		for _, choiceAssocEnd := range complextype.Choices {
+			choiceAssocEnd_DB :=
+				backRepo.BackRepoChoice.GetChoiceDBFromChoicePtr(choiceAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the choiceAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if choiceAssocEnd_DB == nil {
+				continue
 			}
-		} else {
-			complextypeDB.ChoiceID.Int64 = 0
-			complextypeDB.ChoiceID.Valid = true
+			
+			complextypeDB.ComplexTypePointersEncoding.Choices =
+				append(complextypeDB.ComplexTypePointersEncoding.Choices, int(choiceAssocEnd_DB.ID))
+		}
+
+		// 1. reset
+		complextypeDB.ComplexTypePointersEncoding.Groups = make([]int, 0)
+		// 2. encode
+		for _, groupAssocEnd := range complextype.Groups {
+			groupAssocEnd_DB :=
+				backRepo.BackRepoGroup.GetGroupDBFromGroupPtr(groupAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the groupAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if groupAssocEnd_DB == nil {
+				continue
+			}
+			
+			complextypeDB.ComplexTypePointersEncoding.Groups =
+				append(complextypeDB.ComplexTypePointersEncoding.Groups, int(groupAssocEnd_DB.ID))
 		}
 
 		// 1. reset
@@ -482,21 +518,42 @@ func (complextypeDB *ComplexTypeDB) DecodePointers(backRepo *BackRepoStruct, com
 	if complextypeDB.AnnotationID.Int64 != 0 {
 		complextype.Annotation = backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(complextypeDB.AnnotationID.Int64)]
 	}
-	// Sequence field
-	complextype.Sequence = nil
-	if complextypeDB.SequenceID.Int64 != 0 {
-		complextype.Sequence = backRepo.BackRepoSequence.Map_SequenceDBID_SequencePtr[uint(complextypeDB.SequenceID.Int64)]
+	// This loop redeem complextype.Sequences in the stage from the encode in the back repo
+	// It parses all SequenceDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	complextype.Sequences = complextype.Sequences[:0]
+	for _, _Sequenceid := range complextypeDB.ComplexTypePointersEncoding.Sequences {
+		complextype.Sequences = append(complextype.Sequences, backRepo.BackRepoSequence.Map_SequenceDBID_SequencePtr[uint(_Sequenceid)])
 	}
-	// All field
-	complextype.All = nil
-	if complextypeDB.AllID.Int64 != 0 {
-		complextype.All = backRepo.BackRepoAll.Map_AllDBID_AllPtr[uint(complextypeDB.AllID.Int64)]
+
+	// This loop redeem complextype.Alls in the stage from the encode in the back repo
+	// It parses all AllDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	complextype.Alls = complextype.Alls[:0]
+	for _, _Allid := range complextypeDB.ComplexTypePointersEncoding.Alls {
+		complextype.Alls = append(complextype.Alls, backRepo.BackRepoAll.Map_AllDBID_AllPtr[uint(_Allid)])
 	}
-	// Choice field
-	complextype.Choice = nil
-	if complextypeDB.ChoiceID.Int64 != 0 {
-		complextype.Choice = backRepo.BackRepoChoice.Map_ChoiceDBID_ChoicePtr[uint(complextypeDB.ChoiceID.Int64)]
+
+	// This loop redeem complextype.Choices in the stage from the encode in the back repo
+	// It parses all ChoiceDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	complextype.Choices = complextype.Choices[:0]
+	for _, _Choiceid := range complextypeDB.ComplexTypePointersEncoding.Choices {
+		complextype.Choices = append(complextype.Choices, backRepo.BackRepoChoice.Map_ChoiceDBID_ChoicePtr[uint(_Choiceid)])
 	}
+
+	// This loop redeem complextype.Groups in the stage from the encode in the back repo
+	// It parses all GroupDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	complextype.Groups = complextype.Groups[:0]
+	for _, _Groupid := range complextypeDB.ComplexTypePointersEncoding.Groups {
+		complextype.Groups = append(complextype.Groups, backRepo.BackRepoGroup.Map_GroupDBID_GroupPtr[uint(_Groupid)])
+	}
+
 	// This loop redeem complextype.Attributes in the stage from the encode in the back repo
 	// It parses all AttributeDB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance
@@ -801,24 +858,6 @@ func (backRepoComplexType *BackRepoComplexTypeStruct) RestorePhaseTwo() {
 		if complextypeDB.AnnotationID.Int64 != 0 {
 			complextypeDB.AnnotationID.Int64 = int64(BackRepoAnnotationid_atBckpTime_newID[uint(complextypeDB.AnnotationID.Int64)])
 			complextypeDB.AnnotationID.Valid = true
-		}
-
-		// reindexing Sequence field
-		if complextypeDB.SequenceID.Int64 != 0 {
-			complextypeDB.SequenceID.Int64 = int64(BackRepoSequenceid_atBckpTime_newID[uint(complextypeDB.SequenceID.Int64)])
-			complextypeDB.SequenceID.Valid = true
-		}
-
-		// reindexing All field
-		if complextypeDB.AllID.Int64 != 0 {
-			complextypeDB.AllID.Int64 = int64(BackRepoAllid_atBckpTime_newID[uint(complextypeDB.AllID.Int64)])
-			complextypeDB.AllID.Valid = true
-		}
-
-		// reindexing Choice field
-		if complextypeDB.ChoiceID.Int64 != 0 {
-			complextypeDB.ChoiceID.Int64 = int64(BackRepoChoiceid_atBckpTime_newID[uint(complextypeDB.ChoiceID.Int64)])
-			complextypeDB.ChoiceID.Valid = true
 		}
 
 		// update databse with new index encoding

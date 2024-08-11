@@ -72,6 +72,13 @@ type AttributeDB struct {
 	// Declation for basic field attributeDB.Type
 	Type_Data sql.NullString
 
+	// Declation for basic field attributeDB.HasNameConflict
+	// provide the sql storage for the boolan
+	HasNameConflict_Data sql.NullBool
+
+	// Declation for basic field attributeDB.GoIdentifier
+	GoIdentifier_Data sql.NullString
+
 	// Declation for basic field attributeDB.Default
 	Default_Data sql.NullString
 
@@ -124,21 +131,25 @@ type AttributeWOP struct {
 
 	Type string `xlsx:"3"`
 
-	Default string `xlsx:"4"`
+	HasNameConflict bool `xlsx:"4"`
 
-	Use string `xlsx:"5"`
+	GoIdentifier string `xlsx:"5"`
 
-	Form string `xlsx:"6"`
+	Default string `xlsx:"6"`
 
-	Fixed string `xlsx:"7"`
+	Use string `xlsx:"7"`
 
-	Ref string `xlsx:"8"`
+	Form string `xlsx:"8"`
 
-	TargetNamespace string `xlsx:"9"`
+	Fixed string `xlsx:"9"`
 
-	SimpleType string `xlsx:"10"`
+	Ref string `xlsx:"10"`
 
-	IDXSD string `xlsx:"11"`
+	TargetNamespace string `xlsx:"11"`
+
+	SimpleType string `xlsx:"12"`
+
+	IDXSD string `xlsx:"13"`
 	// insertion for WOP pointer fields
 }
 
@@ -148,6 +159,8 @@ var Attribute_Fields = []string{
 	"Name",
 	"NameXSD",
 	"Type",
+	"HasNameConflict",
+	"GoIdentifier",
 	"Default",
 	"Use",
 	"Form",
@@ -448,6 +461,12 @@ func (attributeDB *AttributeDB) CopyBasicFieldsFromAttribute(attribute *models.A
 	attributeDB.Type_Data.String = attribute.Type
 	attributeDB.Type_Data.Valid = true
 
+	attributeDB.HasNameConflict_Data.Bool = attribute.HasNameConflict
+	attributeDB.HasNameConflict_Data.Valid = true
+
+	attributeDB.GoIdentifier_Data.String = attribute.GoIdentifier
+	attributeDB.GoIdentifier_Data.Valid = true
+
 	attributeDB.Default_Data.String = attribute.Default
 	attributeDB.Default_Data.Valid = true
 
@@ -485,6 +504,12 @@ func (attributeDB *AttributeDB) CopyBasicFieldsFromAttribute_WOP(attribute *mode
 
 	attributeDB.Type_Data.String = attribute.Type
 	attributeDB.Type_Data.Valid = true
+
+	attributeDB.HasNameConflict_Data.Bool = attribute.HasNameConflict
+	attributeDB.HasNameConflict_Data.Valid = true
+
+	attributeDB.GoIdentifier_Data.String = attribute.GoIdentifier
+	attributeDB.GoIdentifier_Data.Valid = true
 
 	attributeDB.Default_Data.String = attribute.Default
 	attributeDB.Default_Data.Valid = true
@@ -524,6 +549,12 @@ func (attributeDB *AttributeDB) CopyBasicFieldsFromAttributeWOP(attribute *Attri
 	attributeDB.Type_Data.String = attribute.Type
 	attributeDB.Type_Data.Valid = true
 
+	attributeDB.HasNameConflict_Data.Bool = attribute.HasNameConflict
+	attributeDB.HasNameConflict_Data.Valid = true
+
+	attributeDB.GoIdentifier_Data.String = attribute.GoIdentifier
+	attributeDB.GoIdentifier_Data.Valid = true
+
 	attributeDB.Default_Data.String = attribute.Default
 	attributeDB.Default_Data.Valid = true
 
@@ -555,6 +586,8 @@ func (attributeDB *AttributeDB) CopyBasicFieldsToAttribute(attribute *models.Att
 	attribute.Name = attributeDB.Name_Data.String
 	attribute.NameXSD = attributeDB.NameXSD_Data.String
 	attribute.Type = attributeDB.Type_Data.String
+	attribute.HasNameConflict = attributeDB.HasNameConflict_Data.Bool
+	attribute.GoIdentifier = attributeDB.GoIdentifier_Data.String
 	attribute.Default = attributeDB.Default_Data.String
 	attribute.Use = attributeDB.Use_Data.String
 	attribute.Form = attributeDB.Form_Data.String
@@ -571,6 +604,8 @@ func (attributeDB *AttributeDB) CopyBasicFieldsToAttribute_WOP(attribute *models
 	attribute.Name = attributeDB.Name_Data.String
 	attribute.NameXSD = attributeDB.NameXSD_Data.String
 	attribute.Type = attributeDB.Type_Data.String
+	attribute.HasNameConflict = attributeDB.HasNameConflict_Data.Bool
+	attribute.GoIdentifier = attributeDB.GoIdentifier_Data.String
 	attribute.Default = attributeDB.Default_Data.String
 	attribute.Use = attributeDB.Use_Data.String
 	attribute.Form = attributeDB.Form_Data.String
@@ -588,6 +623,8 @@ func (attributeDB *AttributeDB) CopyBasicFieldsToAttributeWOP(attribute *Attribu
 	attribute.Name = attributeDB.Name_Data.String
 	attribute.NameXSD = attributeDB.NameXSD_Data.String
 	attribute.Type = attributeDB.Type_Data.String
+	attribute.HasNameConflict = attributeDB.HasNameConflict_Data.Bool
+	attribute.GoIdentifier = attributeDB.GoIdentifier_Data.String
 	attribute.Default = attributeDB.Default_Data.String
 	attribute.Use = attributeDB.Use_Data.String
 	attribute.Form = attributeDB.Form_Data.String

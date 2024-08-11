@@ -17,8 +17,8 @@ type ComplexType struct {
 	ElementWithAnnotation
 	ElementWithNameAttribute
 	Composer
-	Attributes []*Attribute `xml:"attribute"`
 
+	Attributes      []*Attribute      `xml:"attribute"`
 	AttributeGroups []*AttributeGroup `xml:"attributeGroup"`
 }
 

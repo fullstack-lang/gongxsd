@@ -39,13 +39,6 @@ type Schema struct {
 	Groups          []*Group          `xml:"group"`
 }
 
-type Group struct {
-	Name string
-	ElementWithAnnotation
-	ElementWithNameAttribute
-	Ref string `xml:"ref,attr"`
-}
-
 type SimpleType struct {
 	Name string
 	ElementWithAnnotation

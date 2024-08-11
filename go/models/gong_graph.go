@@ -338,19 +338,19 @@ func (stage *StageStruct) StageBranchAll(all *All) {
 	if all.Annotation != nil {
 		StageBranch(stage, all.Annotation)
 	}
-	if all.Sequence != nil {
-		StageBranch(stage, all.Sequence)
-	}
-	if all.All != nil {
-		StageBranch(stage, all.All)
-	}
-	if all.Choice != nil {
-		StageBranch(stage, all.Choice)
-	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 	for _, _element := range all.Elements {
 		StageBranch(stage, _element)
+	}
+	for _, _sequence := range all.Sequences {
+		StageBranch(stage, _sequence)
+	}
+	for _, _all := range all.Alls {
+		StageBranch(stage, _all)
+	}
+	for _, _choice := range all.Choices {
+		StageBranch(stage, _choice)
 	}
 	for _, _group := range all.Groups {
 		StageBranch(stage, _group)
@@ -431,19 +431,19 @@ func (stage *StageStruct) StageBranchChoice(choice *Choice) {
 	if choice.Annotation != nil {
 		StageBranch(stage, choice.Annotation)
 	}
-	if choice.Sequence != nil {
-		StageBranch(stage, choice.Sequence)
-	}
-	if choice.All != nil {
-		StageBranch(stage, choice.All)
-	}
-	if choice.Choice != nil {
-		StageBranch(stage, choice.Choice)
-	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 	for _, _element := range choice.Elements {
 		StageBranch(stage, _element)
+	}
+	for _, _sequence := range choice.Sequences {
+		StageBranch(stage, _sequence)
+	}
+	for _, _all := range choice.Alls {
+		StageBranch(stage, _all)
+	}
+	for _, _choice := range choice.Choices {
+		StageBranch(stage, _choice)
 	}
 	for _, _group := range choice.Groups {
 		StageBranch(stage, _group)
@@ -467,17 +467,20 @@ func (stage *StageStruct) StageBranchComplexType(complextype *ComplexType) {
 	if complextype.Annotation != nil {
 		StageBranch(stage, complextype.Annotation)
 	}
-	if complextype.Sequence != nil {
-		StageBranch(stage, complextype.Sequence)
-	}
-	if complextype.All != nil {
-		StageBranch(stage, complextype.All)
-	}
-	if complextype.Choice != nil {
-		StageBranch(stage, complextype.Choice)
-	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _sequence := range complextype.Sequences {
+		StageBranch(stage, _sequence)
+	}
+	for _, _all := range complextype.Alls {
+		StageBranch(stage, _all)
+	}
+	for _, _choice := range complextype.Choices {
+		StageBranch(stage, _choice)
+	}
+	for _, _group := range complextype.Groups {
+		StageBranch(stage, _group)
+	}
 	for _, _attribute := range complextype.Attributes {
 		StageBranch(stage, _attribute)
 	}
@@ -559,6 +562,18 @@ func (stage *StageStruct) StageBranchGroup(group *Group) {
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _sequence := range group.Sequences {
+		StageBranch(stage, _sequence)
+	}
+	for _, _all := range group.Alls {
+		StageBranch(stage, _all)
+	}
+	for _, _choice := range group.Choices {
+		StageBranch(stage, _choice)
+	}
+	for _, _group := range group.Groups {
+		StageBranch(stage, _group)
+	}
 
 }
 
@@ -761,19 +776,19 @@ func (stage *StageStruct) StageBranchSequence(sequence *Sequence) {
 	if sequence.Annotation != nil {
 		StageBranch(stage, sequence.Annotation)
 	}
-	if sequence.Sequence != nil {
-		StageBranch(stage, sequence.Sequence)
-	}
-	if sequence.All != nil {
-		StageBranch(stage, sequence.All)
-	}
-	if sequence.Choice != nil {
-		StageBranch(stage, sequence.Choice)
-	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 	for _, _element := range sequence.Elements {
 		StageBranch(stage, _element)
+	}
+	for _, _sequence := range sequence.Sequences {
+		StageBranch(stage, _sequence)
+	}
+	for _, _all := range sequence.Alls {
+		StageBranch(stage, _all)
+	}
+	for _, _choice := range sequence.Choices {
+		StageBranch(stage, _choice)
 	}
 	for _, _group := range sequence.Groups {
 		StageBranch(stage, _group)
@@ -985,19 +1000,19 @@ func CopyBranchAll(mapOrigCopy map[any]any, allFrom *All) (allTo *All) {
 	if allFrom.Annotation != nil {
 		allTo.Annotation = CopyBranchAnnotation(mapOrigCopy, allFrom.Annotation)
 	}
-	if allFrom.Sequence != nil {
-		allTo.Sequence = CopyBranchSequence(mapOrigCopy, allFrom.Sequence)
-	}
-	if allFrom.All != nil {
-		allTo.All = CopyBranchAll(mapOrigCopy, allFrom.All)
-	}
-	if allFrom.Choice != nil {
-		allTo.Choice = CopyBranchChoice(mapOrigCopy, allFrom.Choice)
-	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 	for _, _element := range allFrom.Elements {
 		allTo.Elements = append(allTo.Elements, CopyBranchElement(mapOrigCopy, _element))
+	}
+	for _, _sequence := range allFrom.Sequences {
+		allTo.Sequences = append(allTo.Sequences, CopyBranchSequence(mapOrigCopy, _sequence))
+	}
+	for _, _all := range allFrom.Alls {
+		allTo.Alls = append(allTo.Alls, CopyBranchAll(mapOrigCopy, _all))
+	}
+	for _, _choice := range allFrom.Choices {
+		allTo.Choices = append(allTo.Choices, CopyBranchChoice(mapOrigCopy, _choice))
 	}
 	for _, _group := range allFrom.Groups {
 		allTo.Groups = append(allTo.Groups, CopyBranchGroup(mapOrigCopy, _group))
@@ -1094,19 +1109,19 @@ func CopyBranchChoice(mapOrigCopy map[any]any, choiceFrom *Choice) (choiceTo *Ch
 	if choiceFrom.Annotation != nil {
 		choiceTo.Annotation = CopyBranchAnnotation(mapOrigCopy, choiceFrom.Annotation)
 	}
-	if choiceFrom.Sequence != nil {
-		choiceTo.Sequence = CopyBranchSequence(mapOrigCopy, choiceFrom.Sequence)
-	}
-	if choiceFrom.All != nil {
-		choiceTo.All = CopyBranchAll(mapOrigCopy, choiceFrom.All)
-	}
-	if choiceFrom.Choice != nil {
-		choiceTo.Choice = CopyBranchChoice(mapOrigCopy, choiceFrom.Choice)
-	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 	for _, _element := range choiceFrom.Elements {
 		choiceTo.Elements = append(choiceTo.Elements, CopyBranchElement(mapOrigCopy, _element))
+	}
+	for _, _sequence := range choiceFrom.Sequences {
+		choiceTo.Sequences = append(choiceTo.Sequences, CopyBranchSequence(mapOrigCopy, _sequence))
+	}
+	for _, _all := range choiceFrom.Alls {
+		choiceTo.Alls = append(choiceTo.Alls, CopyBranchAll(mapOrigCopy, _all))
+	}
+	for _, _choice := range choiceFrom.Choices {
+		choiceTo.Choices = append(choiceTo.Choices, CopyBranchChoice(mapOrigCopy, _choice))
 	}
 	for _, _group := range choiceFrom.Groups {
 		choiceTo.Groups = append(choiceTo.Groups, CopyBranchGroup(mapOrigCopy, _group))
@@ -1134,17 +1149,20 @@ func CopyBranchComplexType(mapOrigCopy map[any]any, complextypeFrom *ComplexType
 	if complextypeFrom.Annotation != nil {
 		complextypeTo.Annotation = CopyBranchAnnotation(mapOrigCopy, complextypeFrom.Annotation)
 	}
-	if complextypeFrom.Sequence != nil {
-		complextypeTo.Sequence = CopyBranchSequence(mapOrigCopy, complextypeFrom.Sequence)
-	}
-	if complextypeFrom.All != nil {
-		complextypeTo.All = CopyBranchAll(mapOrigCopy, complextypeFrom.All)
-	}
-	if complextypeFrom.Choice != nil {
-		complextypeTo.Choice = CopyBranchChoice(mapOrigCopy, complextypeFrom.Choice)
-	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _sequence := range complextypeFrom.Sequences {
+		complextypeTo.Sequences = append(complextypeTo.Sequences, CopyBranchSequence(mapOrigCopy, _sequence))
+	}
+	for _, _all := range complextypeFrom.Alls {
+		complextypeTo.Alls = append(complextypeTo.Alls, CopyBranchAll(mapOrigCopy, _all))
+	}
+	for _, _choice := range complextypeFrom.Choices {
+		complextypeTo.Choices = append(complextypeTo.Choices, CopyBranchChoice(mapOrigCopy, _choice))
+	}
+	for _, _group := range complextypeFrom.Groups {
+		complextypeTo.Groups = append(complextypeTo.Groups, CopyBranchGroup(mapOrigCopy, _group))
+	}
 	for _, _attribute := range complextypeFrom.Attributes {
 		complextypeTo.Attributes = append(complextypeTo.Attributes, CopyBranchAttribute(mapOrigCopy, _attribute))
 	}
@@ -1242,6 +1260,18 @@ func CopyBranchGroup(mapOrigCopy map[any]any, groupFrom *Group) (groupTo *Group)
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _sequence := range groupFrom.Sequences {
+		groupTo.Sequences = append(groupTo.Sequences, CopyBranchSequence(mapOrigCopy, _sequence))
+	}
+	for _, _all := range groupFrom.Alls {
+		groupTo.Alls = append(groupTo.Alls, CopyBranchAll(mapOrigCopy, _all))
+	}
+	for _, _choice := range groupFrom.Choices {
+		groupTo.Choices = append(groupTo.Choices, CopyBranchChoice(mapOrigCopy, _choice))
+	}
+	for _, _group := range groupFrom.Groups {
+		groupTo.Groups = append(groupTo.Groups, CopyBranchGroup(mapOrigCopy, _group))
+	}
 
 	return
 }
@@ -1480,19 +1510,19 @@ func CopyBranchSequence(mapOrigCopy map[any]any, sequenceFrom *Sequence) (sequen
 	if sequenceFrom.Annotation != nil {
 		sequenceTo.Annotation = CopyBranchAnnotation(mapOrigCopy, sequenceFrom.Annotation)
 	}
-	if sequenceFrom.Sequence != nil {
-		sequenceTo.Sequence = CopyBranchSequence(mapOrigCopy, sequenceFrom.Sequence)
-	}
-	if sequenceFrom.All != nil {
-		sequenceTo.All = CopyBranchAll(mapOrigCopy, sequenceFrom.All)
-	}
-	if sequenceFrom.Choice != nil {
-		sequenceTo.Choice = CopyBranchChoice(mapOrigCopy, sequenceFrom.Choice)
-	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 	for _, _element := range sequenceFrom.Elements {
 		sequenceTo.Elements = append(sequenceTo.Elements, CopyBranchElement(mapOrigCopy, _element))
+	}
+	for _, _sequence := range sequenceFrom.Sequences {
+		sequenceTo.Sequences = append(sequenceTo.Sequences, CopyBranchSequence(mapOrigCopy, _sequence))
+	}
+	for _, _all := range sequenceFrom.Alls {
+		sequenceTo.Alls = append(sequenceTo.Alls, CopyBranchAll(mapOrigCopy, _all))
+	}
+	for _, _choice := range sequenceFrom.Choices {
+		sequenceTo.Choices = append(sequenceTo.Choices, CopyBranchChoice(mapOrigCopy, _choice))
 	}
 	for _, _group := range sequenceFrom.Groups {
 		sequenceTo.Groups = append(sequenceTo.Groups, CopyBranchGroup(mapOrigCopy, _group))
@@ -1691,19 +1721,19 @@ func (stage *StageStruct) UnstageBranchAll(all *All) {
 	if all.Annotation != nil {
 		UnstageBranch(stage, all.Annotation)
 	}
-	if all.Sequence != nil {
-		UnstageBranch(stage, all.Sequence)
-	}
-	if all.All != nil {
-		UnstageBranch(stage, all.All)
-	}
-	if all.Choice != nil {
-		UnstageBranch(stage, all.Choice)
-	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 	for _, _element := range all.Elements {
 		UnstageBranch(stage, _element)
+	}
+	for _, _sequence := range all.Sequences {
+		UnstageBranch(stage, _sequence)
+	}
+	for _, _all := range all.Alls {
+		UnstageBranch(stage, _all)
+	}
+	for _, _choice := range all.Choices {
+		UnstageBranch(stage, _choice)
 	}
 	for _, _group := range all.Groups {
 		UnstageBranch(stage, _group)
@@ -1784,19 +1814,19 @@ func (stage *StageStruct) UnstageBranchChoice(choice *Choice) {
 	if choice.Annotation != nil {
 		UnstageBranch(stage, choice.Annotation)
 	}
-	if choice.Sequence != nil {
-		UnstageBranch(stage, choice.Sequence)
-	}
-	if choice.All != nil {
-		UnstageBranch(stage, choice.All)
-	}
-	if choice.Choice != nil {
-		UnstageBranch(stage, choice.Choice)
-	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 	for _, _element := range choice.Elements {
 		UnstageBranch(stage, _element)
+	}
+	for _, _sequence := range choice.Sequences {
+		UnstageBranch(stage, _sequence)
+	}
+	for _, _all := range choice.Alls {
+		UnstageBranch(stage, _all)
+	}
+	for _, _choice := range choice.Choices {
+		UnstageBranch(stage, _choice)
 	}
 	for _, _group := range choice.Groups {
 		UnstageBranch(stage, _group)
@@ -1820,17 +1850,20 @@ func (stage *StageStruct) UnstageBranchComplexType(complextype *ComplexType) {
 	if complextype.Annotation != nil {
 		UnstageBranch(stage, complextype.Annotation)
 	}
-	if complextype.Sequence != nil {
-		UnstageBranch(stage, complextype.Sequence)
-	}
-	if complextype.All != nil {
-		UnstageBranch(stage, complextype.All)
-	}
-	if complextype.Choice != nil {
-		UnstageBranch(stage, complextype.Choice)
-	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _sequence := range complextype.Sequences {
+		UnstageBranch(stage, _sequence)
+	}
+	for _, _all := range complextype.Alls {
+		UnstageBranch(stage, _all)
+	}
+	for _, _choice := range complextype.Choices {
+		UnstageBranch(stage, _choice)
+	}
+	for _, _group := range complextype.Groups {
+		UnstageBranch(stage, _group)
+	}
 	for _, _attribute := range complextype.Attributes {
 		UnstageBranch(stage, _attribute)
 	}
@@ -1912,6 +1945,18 @@ func (stage *StageStruct) UnstageBranchGroup(group *Group) {
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _sequence := range group.Sequences {
+		UnstageBranch(stage, _sequence)
+	}
+	for _, _all := range group.Alls {
+		UnstageBranch(stage, _all)
+	}
+	for _, _choice := range group.Choices {
+		UnstageBranch(stage, _choice)
+	}
+	for _, _group := range group.Groups {
+		UnstageBranch(stage, _group)
+	}
 
 }
 
@@ -2114,19 +2159,19 @@ func (stage *StageStruct) UnstageBranchSequence(sequence *Sequence) {
 	if sequence.Annotation != nil {
 		UnstageBranch(stage, sequence.Annotation)
 	}
-	if sequence.Sequence != nil {
-		UnstageBranch(stage, sequence.Sequence)
-	}
-	if sequence.All != nil {
-		UnstageBranch(stage, sequence.All)
-	}
-	if sequence.Choice != nil {
-		UnstageBranch(stage, sequence.Choice)
-	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 	for _, _element := range sequence.Elements {
 		UnstageBranch(stage, _element)
+	}
+	for _, _sequence := range sequence.Sequences {
+		UnstageBranch(stage, _sequence)
+	}
+	for _, _all := range sequence.Alls {
+		UnstageBranch(stage, _all)
+	}
+	for _, _choice := range sequence.Choices {
+		UnstageBranch(stage, _choice)
 	}
 	for _, _group := range sequence.Groups {
 		UnstageBranch(stage, _group)
