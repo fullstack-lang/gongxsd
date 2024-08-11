@@ -778,6 +778,18 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					case "AttributeGroup":
 						switch fieldName {
 						// insertion point for slice of pointers assign code
+						case "AttributeGroups":
+							// remove first and last char
+							targetIdentifier := ident.Name
+							target := __gong__map_AttributeGroup[targetIdentifier]
+							__gong__map_AttributeGroup[identifier].AttributeGroups =
+								append(__gong__map_AttributeGroup[identifier].AttributeGroups, target)
+						case "Attributes":
+							// remove first and last char
+							targetIdentifier := ident.Name
+							target := __gong__map_Attribute[targetIdentifier]
+							__gong__map_AttributeGroup[identifier].Attributes =
+								append(__gong__map_AttributeGroup[identifier].Attributes, target)
 						}
 					case "Choice":
 						switch fieldName {
@@ -1083,6 +1095,10 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					// remove first and last char
 					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
 					__gong__map_ComplexType[identifier].Name = fielValue
+				case "GoIdentifier":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_ComplexType[identifier].GoIdentifier = fielValue
 				case "NameXSD":
 					// remove first and last char
 					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
@@ -1391,9 +1407,6 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 				case "Annotation":
 					targetIdentifier := ident.Name
 					__gong__map_AttributeGroup[identifier].Annotation = __gong__map_Annotation[targetIdentifier]
-				case "AttributeGroup":
-					targetIdentifier := ident.Name
-					__gong__map_AttributeGroup[identifier].AttributeGroup = __gong__map_AttributeGroup[targetIdentifier]
 				}
 			case "Choice":
 				switch fieldName {
@@ -1414,6 +1427,13 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 			case "ComplexType":
 				switch fieldName {
 				// insertion point for field dependant code
+				case "HasNameConflict":
+					// convert string to boolean
+					fielValue, err := strconv.ParseBool(ident.Name)
+					if err != nil {
+						log.Fatalln(err)
+					}
+					__gong__map_ComplexType[identifier].HasNameConflict = fielValue
 				case "IsInlined":
 					// convert string to boolean
 					fielValue, err := strconv.ParseBool(ident.Name)

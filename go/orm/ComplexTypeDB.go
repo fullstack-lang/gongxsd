@@ -88,6 +88,13 @@ type ComplexTypeDB struct {
 	// Declation for basic field complextypeDB.Name
 	Name_Data sql.NullString
 
+	// Declation for basic field complextypeDB.HasNameConflict
+	// provide the sql storage for the boolan
+	HasNameConflict_Data sql.NullBool
+
+	// Declation for basic field complextypeDB.GoIdentifier
+	GoIdentifier_Data sql.NullString
+
 	// Declation for basic field complextypeDB.IsInlined
 	// provide the sql storage for the boolan
 	IsInlined_Data sql.NullBool
@@ -119,9 +126,13 @@ type ComplexTypeWOP struct {
 
 	Name string `xlsx:"1"`
 
-	IsInlined bool `xlsx:"2"`
+	HasNameConflict bool `xlsx:"2"`
 
-	NameXSD string `xlsx:"3"`
+	GoIdentifier string `xlsx:"3"`
+
+	IsInlined bool `xlsx:"4"`
+
+	NameXSD string `xlsx:"5"`
 	// insertion for WOP pointer fields
 }
 
@@ -129,6 +140,8 @@ var ComplexType_Fields = []string{
 	// insertion for WOP basic fields
 	"ID",
 	"Name",
+	"HasNameConflict",
+	"GoIdentifier",
 	"IsInlined",
 	"NameXSD",
 }
@@ -539,6 +552,12 @@ func (complextypeDB *ComplexTypeDB) CopyBasicFieldsFromComplexType(complextype *
 	complextypeDB.Name_Data.String = complextype.Name
 	complextypeDB.Name_Data.Valid = true
 
+	complextypeDB.HasNameConflict_Data.Bool = complextype.HasNameConflict
+	complextypeDB.HasNameConflict_Data.Valid = true
+
+	complextypeDB.GoIdentifier_Data.String = complextype.GoIdentifier
+	complextypeDB.GoIdentifier_Data.Valid = true
+
 	complextypeDB.IsInlined_Data.Bool = complextype.IsInlined
 	complextypeDB.IsInlined_Data.Valid = true
 
@@ -552,6 +571,12 @@ func (complextypeDB *ComplexTypeDB) CopyBasicFieldsFromComplexType_WOP(complexty
 
 	complextypeDB.Name_Data.String = complextype.Name
 	complextypeDB.Name_Data.Valid = true
+
+	complextypeDB.HasNameConflict_Data.Bool = complextype.HasNameConflict
+	complextypeDB.HasNameConflict_Data.Valid = true
+
+	complextypeDB.GoIdentifier_Data.String = complextype.GoIdentifier
+	complextypeDB.GoIdentifier_Data.Valid = true
 
 	complextypeDB.IsInlined_Data.Bool = complextype.IsInlined
 	complextypeDB.IsInlined_Data.Valid = true
@@ -567,6 +592,12 @@ func (complextypeDB *ComplexTypeDB) CopyBasicFieldsFromComplexTypeWOP(complextyp
 	complextypeDB.Name_Data.String = complextype.Name
 	complextypeDB.Name_Data.Valid = true
 
+	complextypeDB.HasNameConflict_Data.Bool = complextype.HasNameConflict
+	complextypeDB.HasNameConflict_Data.Valid = true
+
+	complextypeDB.GoIdentifier_Data.String = complextype.GoIdentifier
+	complextypeDB.GoIdentifier_Data.Valid = true
+
 	complextypeDB.IsInlined_Data.Bool = complextype.IsInlined
 	complextypeDB.IsInlined_Data.Valid = true
 
@@ -578,6 +609,8 @@ func (complextypeDB *ComplexTypeDB) CopyBasicFieldsFromComplexTypeWOP(complextyp
 func (complextypeDB *ComplexTypeDB) CopyBasicFieldsToComplexType(complextype *models.ComplexType) {
 	// insertion point for checkout of basic fields (back repo to stage)
 	complextype.Name = complextypeDB.Name_Data.String
+	complextype.HasNameConflict = complextypeDB.HasNameConflict_Data.Bool
+	complextype.GoIdentifier = complextypeDB.GoIdentifier_Data.String
 	complextype.IsInlined = complextypeDB.IsInlined_Data.Bool
 	complextype.NameXSD = complextypeDB.NameXSD_Data.String
 }
@@ -586,6 +619,8 @@ func (complextypeDB *ComplexTypeDB) CopyBasicFieldsToComplexType(complextype *mo
 func (complextypeDB *ComplexTypeDB) CopyBasicFieldsToComplexType_WOP(complextype *models.ComplexType_WOP) {
 	// insertion point for checkout of basic fields (back repo to stage)
 	complextype.Name = complextypeDB.Name_Data.String
+	complextype.HasNameConflict = complextypeDB.HasNameConflict_Data.Bool
+	complextype.GoIdentifier = complextypeDB.GoIdentifier_Data.String
 	complextype.IsInlined = complextypeDB.IsInlined_Data.Bool
 	complextype.NameXSD = complextypeDB.NameXSD_Data.String
 }
@@ -595,6 +630,8 @@ func (complextypeDB *ComplexTypeDB) CopyBasicFieldsToComplexTypeWOP(complextype 
 	complextype.ID = int(complextypeDB.ID)
 	// insertion point for checkout of basic fields (back repo to stage)
 	complextype.Name = complextypeDB.Name_Data.String
+	complextype.HasNameConflict = complextypeDB.HasNameConflict_Data.Bool
+	complextype.GoIdentifier = complextypeDB.GoIdentifier_Data.String
 	complextype.IsInlined = complextypeDB.IsInlined_Data.Bool
 	complextype.NameXSD = complextypeDB.NameXSD_Data.String
 }

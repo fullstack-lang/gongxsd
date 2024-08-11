@@ -394,11 +394,14 @@ func (stage *StageStruct) StageBranchAttributeGroup(attributegroup *AttributeGro
 	if attributegroup.Annotation != nil {
 		StageBranch(stage, attributegroup.Annotation)
 	}
-	if attributegroup.AttributeGroup != nil {
-		StageBranch(stage, attributegroup.AttributeGroup)
-	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _attributegroup := range attributegroup.AttributeGroups {
+		StageBranch(stage, _attributegroup)
+	}
+	for _, _attribute := range attributegroup.Attributes {
+		StageBranch(stage, _attribute)
+	}
 
 }
 
@@ -1025,11 +1028,14 @@ func CopyBranchAttributeGroup(mapOrigCopy map[any]any, attributegroupFrom *Attri
 	if attributegroupFrom.Annotation != nil {
 		attributegroupTo.Annotation = CopyBranchAnnotation(mapOrigCopy, attributegroupFrom.Annotation)
 	}
-	if attributegroupFrom.AttributeGroup != nil {
-		attributegroupTo.AttributeGroup = CopyBranchAttributeGroup(mapOrigCopy, attributegroupFrom.AttributeGroup)
-	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _attributegroup := range attributegroupFrom.AttributeGroups {
+		attributegroupTo.AttributeGroups = append(attributegroupTo.AttributeGroups, CopyBranchAttributeGroup(mapOrigCopy, _attributegroup))
+	}
+	for _, _attribute := range attributegroupFrom.Attributes {
+		attributegroupTo.Attributes = append(attributegroupTo.Attributes, CopyBranchAttribute(mapOrigCopy, _attribute))
+	}
 
 	return
 }
@@ -1688,11 +1694,14 @@ func (stage *StageStruct) UnstageBranchAttributeGroup(attributegroup *AttributeG
 	if attributegroup.Annotation != nil {
 		UnstageBranch(stage, attributegroup.Annotation)
 	}
-	if attributegroup.AttributeGroup != nil {
-		UnstageBranch(stage, attributegroup.AttributeGroup)
-	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _attributegroup := range attributegroup.AttributeGroups {
+		UnstageBranch(stage, _attributegroup)
+	}
+	for _, _attribute := range attributegroup.Attributes {
+		UnstageBranch(stage, _attribute)
+	}
 
 }
 

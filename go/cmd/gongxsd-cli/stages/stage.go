@@ -4,7 +4,6 @@ import (
 	"time"
 
 	"github.com/fullstack-lang/gongxsd/go/models"
-
 	// injection point for ident package import declaration{{ImportPackageDeclaration}}
 )
 
@@ -310,7 +309,6 @@ func _(stage *models.StageStruct) {
 	__Annotation__000003_format_E.Documentations = append(__Annotation__000003_format_E.Documentations, __Documentation__000004_format_E_E)
 	__Annotation__000004_title_E.Documentations = append(__Annotation__000004_title_E.Documentations, __Documentation__000005_title_E_E)
 	__Annotation__000005_yearType_E.Documentations = append(__Annotation__000005_yearType_E.Documentations, __Documentation__000006_yearType_E_E)
-	__AttributeGroup__000003_extendedAttributes.AttributeGroup = __AttributeGroup__000001_
 	__ComplexType__000000_bookType.Annotation = __Annotation__000001_bookType_E
 	__ComplexType__000000_bookType.Sequence = __Sequence__000000_bookType_E
 	__ComplexType__000000_bookType.AttributeGroups = append(__ComplexType__000000_bookType.AttributeGroups, __AttributeGroup__000000_)

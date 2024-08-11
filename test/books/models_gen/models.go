@@ -12,6 +12,15 @@ type BookType struct {
 	
 	// insertion point for fields
 
+	// generated from attribute "edition" of type xs:string
+	Edition string `xml:"edition,attr"`
+
+	// generated from attribute "isbn" of type xs:string
+	Isbn string `xml:"isbn,attr"`
+
+	// generated from attribute "bestseller" of type xs:boolean
+	Bestseller bool `xml:"bestseller,attr"`
+
 	// generated from element "title" of type titleType
 	Title string `xml:"title"`
 

@@ -251,6 +251,48 @@ func (attributeFormCallback *AttributeFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(attribute_.SimpleType), formDiv)
 		case "IDXSD":
 			FormDivBasicFieldToField(&(attribute_.IDXSD), formDiv)
+		case "AttributeGroup:Attributes":
+			// we need to retrieve the field owner before the change
+			var pastAttributeGroupOwner *models.AttributeGroup
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "AttributeGroup"
+			rf.Fieldname = "Attributes"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				attributeFormCallback.probe.stageOfInterest,
+				attributeFormCallback.probe.backRepoOfInterest,
+				attribute_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastAttributeGroupOwner = reverseFieldOwner.(*models.AttributeGroup)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastAttributeGroupOwner != nil {
+					idx := slices.Index(pastAttributeGroupOwner.Attributes, attribute_)
+					pastAttributeGroupOwner.Attributes = slices.Delete(pastAttributeGroupOwner.Attributes, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _attributegroup := range *models.GetGongstructInstancesSet[models.AttributeGroup](attributeFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _attributegroup.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newAttributeGroupOwner := _attributegroup // we have a match
+						if pastAttributeGroupOwner != nil {
+							if newAttributeGroupOwner != pastAttributeGroupOwner {
+								idx := slices.Index(pastAttributeGroupOwner.Attributes, attribute_)
+								pastAttributeGroupOwner.Attributes = slices.Delete(pastAttributeGroupOwner.Attributes, idx, idx+1)
+								newAttributeGroupOwner.Attributes = append(newAttributeGroupOwner.Attributes, attribute_)
+							}
+						} else {
+							newAttributeGroupOwner.Attributes = append(newAttributeGroupOwner.Attributes, attribute_)
+						}
+					}
+				}
+			}
 		case "ComplexType:Attributes":
 			// we need to retrieve the field owner before the change
 			var pastComplexTypeOwner *models.ComplexType
@@ -374,10 +416,50 @@ func (attributegroupFormCallback *AttributeGroupFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(attributegroup_.NameXSD), formDiv)
 		case "Annotation":
 			FormDivSelectFieldToField(&(attributegroup_.Annotation), attributegroupFormCallback.probe.stageOfInterest, formDiv)
-		case "AttributeGroup":
-			FormDivSelectFieldToField(&(attributegroup_.AttributeGroup), attributegroupFormCallback.probe.stageOfInterest, formDiv)
 		case "Ref":
 			FormDivBasicFieldToField(&(attributegroup_.Ref), formDiv)
+		case "AttributeGroup:AttributeGroups":
+			// we need to retrieve the field owner before the change
+			var pastAttributeGroupOwner *models.AttributeGroup
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "AttributeGroup"
+			rf.Fieldname = "AttributeGroups"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				attributegroupFormCallback.probe.stageOfInterest,
+				attributegroupFormCallback.probe.backRepoOfInterest,
+				attributegroup_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastAttributeGroupOwner = reverseFieldOwner.(*models.AttributeGroup)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastAttributeGroupOwner != nil {
+					idx := slices.Index(pastAttributeGroupOwner.AttributeGroups, attributegroup_)
+					pastAttributeGroupOwner.AttributeGroups = slices.Delete(pastAttributeGroupOwner.AttributeGroups, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _attributegroup := range *models.GetGongstructInstancesSet[models.AttributeGroup](attributegroupFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _attributegroup.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newAttributeGroupOwner := _attributegroup // we have a match
+						if pastAttributeGroupOwner != nil {
+							if newAttributeGroupOwner != pastAttributeGroupOwner {
+								idx := slices.Index(pastAttributeGroupOwner.AttributeGroups, attributegroup_)
+								pastAttributeGroupOwner.AttributeGroups = slices.Delete(pastAttributeGroupOwner.AttributeGroups, idx, idx+1)
+								newAttributeGroupOwner.AttributeGroups = append(newAttributeGroupOwner.AttributeGroups, attributegroup_)
+							}
+						} else {
+							newAttributeGroupOwner.AttributeGroups = append(newAttributeGroupOwner.AttributeGroups, attributegroup_)
+						}
+					}
+				}
+			}
 		case "ComplexType:AttributeGroups":
 			// we need to retrieve the field owner before the change
 			var pastComplexTypeOwner *models.ComplexType
@@ -628,6 +710,10 @@ func (complextypeFormCallback *ComplexTypeFormCallback) OnSave() {
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(complextype_.Name), formDiv)
+		case "HasNameConflict":
+			FormDivBasicFieldToField(&(complextype_.HasNameConflict), formDiv)
+		case "GoIdentifier":
+			FormDivBasicFieldToField(&(complextype_.GoIdentifier), formDiv)
 		case "IsInlined":
 			FormDivBasicFieldToField(&(complextype_.IsInlined), formDiv)
 		case "EnclosingElement":

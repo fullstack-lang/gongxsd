@@ -51,9 +51,11 @@ type AttributeGroupPointersEncoding struct {
 	// This field is generated into another field to enable AS ONE association
 	AnnotationID sql.NullInt64
 
-	// field AttributeGroup is a pointer to another Struct (optional or 0..1)
-	// This field is generated into another field to enable AS ONE association
-	AttributeGroupID sql.NullInt64
+	// field AttributeGroups is a slice of pointers to another Struct (optional or 0..1)
+	AttributeGroups IntSlice `gorm:"type:TEXT"`
+
+	// field Attributes is a slice of pointers to another Struct (optional or 0..1)
+	Attributes IntSlice `gorm:"type:TEXT"`
 }
 
 // AttributeGroupDB describes a attributegroup in the database
@@ -243,16 +245,40 @@ func (backRepoAttributeGroup *BackRepoAttributeGroupStruct) CommitPhaseTwoInstan
 			attributegroupDB.AnnotationID.Valid = true
 		}
 
-		// commit pointer value attributegroup.AttributeGroup translates to updating the attributegroup.AttributeGroupID
-		attributegroupDB.AttributeGroupID.Valid = true // allow for a 0 value (nil association)
-		if attributegroup.AttributeGroup != nil {
-			if AttributeGroupId, ok := backRepo.BackRepoAttributeGroup.Map_AttributeGroupPtr_AttributeGroupDBID[attributegroup.AttributeGroup]; ok {
-				attributegroupDB.AttributeGroupID.Int64 = int64(AttributeGroupId)
-				attributegroupDB.AttributeGroupID.Valid = true
+		// 1. reset
+		attributegroupDB.AttributeGroupPointersEncoding.AttributeGroups = make([]int, 0)
+		// 2. encode
+		for _, attributegroupAssocEnd := range attributegroup.AttributeGroups {
+			attributegroupAssocEnd_DB :=
+				backRepo.BackRepoAttributeGroup.GetAttributeGroupDBFromAttributeGroupPtr(attributegroupAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the attributegroupAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if attributegroupAssocEnd_DB == nil {
+				continue
 			}
-		} else {
-			attributegroupDB.AttributeGroupID.Int64 = 0
-			attributegroupDB.AttributeGroupID.Valid = true
+			
+			attributegroupDB.AttributeGroupPointersEncoding.AttributeGroups =
+				append(attributegroupDB.AttributeGroupPointersEncoding.AttributeGroups, int(attributegroupAssocEnd_DB.ID))
+		}
+
+		// 1. reset
+		attributegroupDB.AttributeGroupPointersEncoding.Attributes = make([]int, 0)
+		// 2. encode
+		for _, attributeAssocEnd := range attributegroup.Attributes {
+			attributeAssocEnd_DB :=
+				backRepo.BackRepoAttribute.GetAttributeDBFromAttributePtr(attributeAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the attributeAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if attributeAssocEnd_DB == nil {
+				continue
+			}
+			
+			attributegroupDB.AttributeGroupPointersEncoding.Attributes =
+				append(attributegroupDB.AttributeGroupPointersEncoding.Attributes, int(attributeAssocEnd_DB.ID))
 		}
 
 		query := backRepoAttributeGroup.db.Save(&attributegroupDB)
@@ -373,11 +399,24 @@ func (attributegroupDB *AttributeGroupDB) DecodePointers(backRepo *BackRepoStruc
 	if attributegroupDB.AnnotationID.Int64 != 0 {
 		attributegroup.Annotation = backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(attributegroupDB.AnnotationID.Int64)]
 	}
-	// AttributeGroup field
-	attributegroup.AttributeGroup = nil
-	if attributegroupDB.AttributeGroupID.Int64 != 0 {
-		attributegroup.AttributeGroup = backRepo.BackRepoAttributeGroup.Map_AttributeGroupDBID_AttributeGroupPtr[uint(attributegroupDB.AttributeGroupID.Int64)]
+	// This loop redeem attributegroup.AttributeGroups in the stage from the encode in the back repo
+	// It parses all AttributeGroupDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	attributegroup.AttributeGroups = attributegroup.AttributeGroups[:0]
+	for _, _AttributeGroupid := range attributegroupDB.AttributeGroupPointersEncoding.AttributeGroups {
+		attributegroup.AttributeGroups = append(attributegroup.AttributeGroups, backRepo.BackRepoAttributeGroup.Map_AttributeGroupDBID_AttributeGroupPtr[uint(_AttributeGroupid)])
 	}
+
+	// This loop redeem attributegroup.Attributes in the stage from the encode in the back repo
+	// It parses all AttributeDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	attributegroup.Attributes = attributegroup.Attributes[:0]
+	for _, _Attributeid := range attributegroupDB.AttributeGroupPointersEncoding.Attributes {
+		attributegroup.Attributes = append(attributegroup.Attributes, backRepo.BackRepoAttribute.Map_AttributeDBID_AttributePtr[uint(_Attributeid)])
+	}
+
 	return
 }
 
@@ -634,12 +673,6 @@ func (backRepoAttributeGroup *BackRepoAttributeGroupStruct) RestorePhaseTwo() {
 		if attributegroupDB.AnnotationID.Int64 != 0 {
 			attributegroupDB.AnnotationID.Int64 = int64(BackRepoAnnotationid_atBckpTime_newID[uint(attributegroupDB.AnnotationID.Int64)])
 			attributegroupDB.AnnotationID.Valid = true
-		}
-
-		// reindexing AttributeGroup field
-		if attributegroupDB.AttributeGroupID.Int64 != 0 {
-			attributegroupDB.AttributeGroupID.Int64 = int64(BackRepoAttributeGroupid_atBckpTime_newID[uint(attributegroupDB.AttributeGroupID.Int64)])
-			attributegroupDB.AttributeGroupID.Valid = true
 		}
 
 		// update databse with new index encoding

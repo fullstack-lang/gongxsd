@@ -101,6 +101,44 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 
 	case *AttributeGroup:
 		// insertion point per field
+		if fieldName == "AttributeGroups" {
+
+			// walk all instances of the owning type
+			for _instance := range *GetGongstructInstancesSetFromPointerType[OwningType](stage) {
+				if any(_instance).(*AttributeGroup) != owningInstanceInfered {
+					_inferedTypeInstance := any(_instance).(*AttributeGroup)
+					reference := make([]FieldType, 0)
+					targetFieldSlice := any(_inferedTypeInstance.AttributeGroups).([]FieldType)
+					copy(targetFieldSlice, reference)
+					_inferedTypeInstance.AttributeGroups = _inferedTypeInstance.AttributeGroups[0:]
+					for _, fieldInstance := range reference {
+						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
+							_inferedTypeInstance.AttributeGroups =
+								append(_inferedTypeInstance.AttributeGroups, any(fieldInstance).(*AttributeGroup))
+						}
+					}
+				}
+			}
+		}
+		if fieldName == "Attributes" {
+
+			// walk all instances of the owning type
+			for _instance := range *GetGongstructInstancesSetFromPointerType[OwningType](stage) {
+				if any(_instance).(*AttributeGroup) != owningInstanceInfered {
+					_inferedTypeInstance := any(_instance).(*AttributeGroup)
+					reference := make([]FieldType, 0)
+					targetFieldSlice := any(_inferedTypeInstance.Attributes).([]FieldType)
+					copy(targetFieldSlice, reference)
+					_inferedTypeInstance.Attributes = _inferedTypeInstance.Attributes[0:]
+					for _, fieldInstance := range reference {
+						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
+							_inferedTypeInstance.Attributes =
+								append(_inferedTypeInstance.Attributes, any(fieldInstance).(*Attribute))
+						}
+					}
+				}
+			}
+		}
 
 	case *Choice:
 		// insertion point per field
@@ -428,6 +466,22 @@ func (stage *StageStruct) ComputeReverseMaps() {
 
 	// Compute reverse map for named struct AttributeGroup
 	// insertion point per field
+	clear(stage.AttributeGroup_AttributeGroups_reverseMap)
+	stage.AttributeGroup_AttributeGroups_reverseMap = make(map[*AttributeGroup]*AttributeGroup)
+	for attributegroup := range stage.AttributeGroups {
+		_ = attributegroup
+		for _, _attributegroup := range attributegroup.AttributeGroups {
+			stage.AttributeGroup_AttributeGroups_reverseMap[_attributegroup] = attributegroup
+		}
+	}
+	clear(stage.AttributeGroup_Attributes_reverseMap)
+	stage.AttributeGroup_Attributes_reverseMap = make(map[*Attribute]*AttributeGroup)
+	for attributegroup := range stage.AttributeGroups {
+		_ = attributegroup
+		for _, _attribute := range attributegroup.Attributes {
+			stage.AttributeGroup_Attributes_reverseMap[_attribute] = attributegroup
+		}
+	}
 
 	// Compute reverse map for named struct Choice
 	// insertion point per field

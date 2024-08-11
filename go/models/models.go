@@ -83,13 +83,3 @@ type Attribute struct {
 	SimpleType      string `xml:"simpleType,attr"`
 	IDXSD           string `xml:"id,attr"`
 }
-
-type AttributeGroup struct {
-	Name string
-	ElementWithNameAttribute
-	ElementWithAnnotation
-
-	AttributeGroup *AttributeGroup `xml:"attributeGroup"`
-
-	Ref string `xml:"ref,attr"`
-}

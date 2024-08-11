@@ -92,6 +92,8 @@ func (from *Choice) CopyBasicFields(to *Choice) {
 type ComplexType_WOP struct {
 	// insertion point
 	Name string
+	HasNameConflict bool
+	GoIdentifier string
 	IsInlined bool
 	NameXSD string
 }
@@ -99,6 +101,8 @@ type ComplexType_WOP struct {
 func (from *ComplexType) CopyBasicFields(to *ComplexType) {
 	// insertion point
 	to.Name = from.Name
+	to.HasNameConflict = from.HasNameConflict
+	to.GoIdentifier = from.GoIdentifier
 	to.IsInlined = from.IsInlined
 	to.NameXSD = from.NameXSD
 }

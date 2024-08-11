@@ -12,7 +12,8 @@ type ComplexType struct {
 	ElementWithAnnotation
 	ElementWithNameAttribute
 	Composer
-	Attributes      []*Attribute      `xml:"attribute"`
+	Attributes []*Attribute `xml:"attribute"`
+
 	AttributeGroups []*AttributeGroup `xml:"attributeGroup"`
 }
 
@@ -26,19 +27,18 @@ func (ct *ComplexType) Fields(stage *StageStruct) (fields string) {
 	for st := range *GetGongstructInstancesSet[ComplexType](stage) {
 		ctMap[st.Name] = st
 	}
+	agMap := make(map[string]*AttributeGroup)
+	for ag := range *GetGongstructInstancesSet[AttributeGroup](stage) {
+		agMap[ag.Name] = ag
+	}
 
-	for _, attr := range ct.Attributes {
-		goType := generateGoTypeFromSimpleType(attr.Type, stMap)
+	generateAttributes(ct.Attributes, stMap, &fields)
+	for _, referencedAg := range ct.AttributeGroups {
 
-		name := xsdNameToGoIdentifier(attr.Name)
-
-		switch name {
-		case "Name":
-			name = "NameXSD"
+		if namedAg, ok := agMap[referencedAg.Ref]; ok {
+			generateAttributes(namedAg.Attributes, stMap, &fields)
+			namedAg.generateAttributes(agMap, stMap, &fields)
 		}
-
-		fields += "\n\n\t// generated from attribute \"" + attr.NameXSD + "\" of type " + attr.Type +
-			"\n\t" + name + " " + goType + " " + "`" + `xml:"` + attr.NameXSD + `,attr"` + "`"
 	}
 
 	map_Name_Elems := make(map[string]*Element)
@@ -59,6 +59,22 @@ func (ct *ComplexType) Fields(stage *StageStruct) (fields string) {
 	}
 
 	return
+}
+
+func generateAttributes(attrs []*Attribute, stMap map[string]*SimpleType, fields *string) {
+	for _, attr := range attrs {
+		goType := generateGoTypeFromSimpleType(attr.Type, stMap)
+
+		name := xsdNameToGoIdentifier(attr.Name)
+
+		switch name {
+		case "Name":
+			name = "NameXSD"
+		}
+
+		*fields += "\n\n\t// generated from attribute \"" + attr.NameXSD + "\" of type " + attr.Type +
+			"\n\t" + name + " " + goType + " " + "`" + `xml:"` + attr.NameXSD + `,attr"` + "`"
+	}
 }
 
 func generateGoTypeFromSimpleType(base string, stMap map[string]*SimpleType) (goType string) {
