@@ -1,33 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Books>
-    <book>
-        <title>The Great Gatsby</title>
-        <author>F. Scott Fitzgerald</author>
-        <year>1925</year>
+    <book edition="First" isbn="978-3-16-148410-0" bestseller="true">
+        <title>The Great Adventure</title>
+        <author>John Doe</author>
+        <year>2020</year>
+        <format>Hardcover</format>
+        <credit page="45">
+            <credit-type>Author</credit-type>
+            <link name="https://example.com/author-profile"></link>
+            <credit-words>Special thanks to the Java community</credit-words>
+            <credit-symbol></credit-symbol>
+        </credit>
+        <credit page="46">
+            <credit-type>Editor</credit-type>
+            <credit-words></credit-words>
+            <credit-symbol>*</credit-symbol>
+        </credit>
+    </book>
+    <book edition="" isbn="978-1-234-56789-0" bestseller="false">
+        <title>Learning XML</title>
+        <author>Jane Smith</author>
+        <year>2018</year>
+        <format>Paperback</format>
+        <credit page="45">
+            <credit-type>Author</credit-type>
+            <link name="https://example.com/author-profile"></link>
+            <link name="https://example.com/community"></link>
+            <credit-words>Special thanks to the Java community</credit-words>
+            <credit-symbol>*</credit-symbol>
+        </credit>
+    </book>
+    <book edition="" isbn="978-0-12-345678-9" bestseller="false">
+        <title>Advanced XML Techniques</title>
+        <author>Alice Johnson</author>
+        <year>2021</year>
         <format>Hardcover</format>
     </book>
-    <book>
-        <title>To Kill a Mockingbird</title>
-        <author>Harper Lee</author>
-        <year>1960</year>
+    <book edition="Second" isbn="978-0-543-210987-6" bestseller="false">
+        <title>XML for Dummies</title>
+        <author>Bob Brown</author>
+        <year>2019</year>
         <format>Paperback</format>
     </book>
-    <book>
-        <title>1984</title>
-        <author>George Orwell</author>
-        <year>1949</year>
-        <format>Paperback</format>
-    </book>
-    <book>
-        <title>Pride and Prejudice</title>
-        <author>Jane Austen</author>
-        <year>1813</year>
+    <book edition="" isbn="978-1-111-11111-1" bestseller="true">
+        <title>Mastering XML</title>
+        <author>Charlie Davis</author>
+        <year>2022</year>
         <format>Hardcover</format>
-    </book>
-    <book>
-        <title>Brave New World</title>
-        <author>Aldous Huxley</author>
-        <year>1932</year>
-        <format>Paperback</format>
     </book>
 </Books>
