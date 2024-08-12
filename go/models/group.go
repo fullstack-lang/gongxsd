@@ -36,7 +36,7 @@ func (group *Group) GetFields(stage *StageStruct) (fields string) {
 
 	map_Name_Elems := make(map[string]*Element)
 
-	group.Composer.generateElements(map_Name_Elems, stMap, ctMap, setOfGoIdentifiers, &fields)
+	group.Composer.generateElements(map_Name_Elems, stMap, ctMap, groupMap, setOfGoIdentifiers, &fields)
 
 	return
 }

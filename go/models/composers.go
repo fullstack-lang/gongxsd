@@ -5,9 +5,11 @@ type Composer struct {
 	Alls      []*All      `xml:"all"`
 	Choices   []*Choice   `xml:"choice"`
 	Groups    []*Group    `xml:"group"`
+
+	Elements []*Element `xml:"element"`
 }
 
-func (composer *Composer) getElements(map_Name_Elems map[string]*Element) (elems []*Element) {
+func (composer *Composer) getElements(groupMap map[string]*Group, map_Name_Elems map[string]*Element) (elems []*Element) {
 
 	for _, s := range composer.Sequences {
 		for _, e := range s.Elements {
@@ -17,7 +19,7 @@ func (composer *Composer) getElements(map_Name_Elems map[string]*Element) (elems
 			map_Name_Elems[e.Name] = e
 			elems = append(elems, e)
 		}
-		elems = append(elems, s.getElements(map_Name_Elems)...)
+		elems = append(elems, s.getElements(groupMap, map_Name_Elems)...)
 	}
 	for _, c := range composer.Choices {
 		for _, e := range c.Elements {
@@ -27,7 +29,7 @@ func (composer *Composer) getElements(map_Name_Elems map[string]*Element) (elems
 			map_Name_Elems[e.Name] = e
 			elems = append(elems, e)
 		}
-		elems = append(elems, c.getElements(map_Name_Elems)...)
+		elems = append(elems, c.getElements(groupMap, map_Name_Elems)...)
 	}
 	for _, a := range composer.Alls {
 		for _, e := range a.Elements {
@@ -37,7 +39,26 @@ func (composer *Composer) getElements(map_Name_Elems map[string]*Element) (elems
 			map_Name_Elems[e.Name] = e
 			elems = append(elems, e)
 		}
-		elems = append(elems, a.Composer.getElements(map_Name_Elems)...)
+		elems = append(elems, a.Composer.getElements(groupMap, map_Name_Elems)...)
+	}
+	for _, gRef := range composer.Groups {
+
+		if gRef.Ref != "" {
+			// log.Println("Processing group", gRef.Name, gRef.Ref)
+			if namedGroup, ok := groupMap[gRef.Ref]; ok {
+				elems = append(elems, namedGroup.getElements(
+					groupMap, map_Name_Elems)...)
+			}
+		} else {
+			for _, e := range gRef.Elements {
+				if _, ok := map_Name_Elems[e.Name]; ok {
+					continue
+				}
+				map_Name_Elems[e.Name] = e
+				elems = append(elems, e)
+			}
+			elems = append(elems, gRef.Composer.getElements(groupMap, map_Name_Elems)...)
+		}
 	}
 
 	return
@@ -46,27 +67,27 @@ func (composer *Composer) getElements(map_Name_Elems map[string]*Element) (elems
 type Sequence struct {
 	Name string
 	ElementWithAnnotation
-	MinOccurs string     `xml:"minOccurs,attr"`
-	MaxOccurs string     `xml:"maxOccurs,attr"`
-	Elements  []*Element `xml:"element"`
+	MinOccurs string `xml:"minOccurs,attr"`
+	MaxOccurs string `xml:"maxOccurs,attr"`
+
 	Composer
 }
 
 type All struct {
 	Name string
 	ElementWithAnnotation
-	MinOccurs string     `xml:"minOccurs,attr"`
-	MaxOccurs string     `xml:"maxOccurs,attr"`
-	Elements  []*Element `xml:"element"`
+	MinOccurs string `xml:"minOccurs,attr"`
+	MaxOccurs string `xml:"maxOccurs,attr"`
+
 	Composer
 }
 
 type Choice struct {
 	Name string
 	ElementWithAnnotation
-	MinOccurs string     `xml:"minOccurs,attr"`
-	MaxOccurs string     `xml:"maxOccurs,attr"`
-	Elements  []*Element `xml:"element"`
+	MinOccurs string `xml:"minOccurs,attr"`
+	MaxOccurs string `xml:"maxOccurs,attr"`
+
 	Composer
 }
 
@@ -74,10 +95,11 @@ func (composer *Composer) generateElements(
 	map_Name_Elems map[string]*Element,
 	stMap map[string]*SimpleType,
 	ctMap map[string]*ComplexType,
+	groupMap map[string]*Group,
 	setOfGoIdentifiers map[string]any,
 	fields *string,
 ) {
-	elems := composer.getElements(map_Name_Elems)
+	elems := composer.getElements(groupMap, map_Name_Elems)
 
 	for _, elem := range elems {
 

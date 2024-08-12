@@ -1496,6 +1496,90 @@ func (elementFormCallback *ElementFormCallback) OnSave() {
 					}
 				}
 			}
+		case "ComplexType:Elements":
+			// we need to retrieve the field owner before the change
+			var pastComplexTypeOwner *models.ComplexType
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "ComplexType"
+			rf.Fieldname = "Elements"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				elementFormCallback.probe.stageOfInterest,
+				elementFormCallback.probe.backRepoOfInterest,
+				element_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastComplexTypeOwner = reverseFieldOwner.(*models.ComplexType)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastComplexTypeOwner != nil {
+					idx := slices.Index(pastComplexTypeOwner.Elements, element_)
+					pastComplexTypeOwner.Elements = slices.Delete(pastComplexTypeOwner.Elements, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _complextype := range *models.GetGongstructInstancesSet[models.ComplexType](elementFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _complextype.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newComplexTypeOwner := _complextype // we have a match
+						if pastComplexTypeOwner != nil {
+							if newComplexTypeOwner != pastComplexTypeOwner {
+								idx := slices.Index(pastComplexTypeOwner.Elements, element_)
+								pastComplexTypeOwner.Elements = slices.Delete(pastComplexTypeOwner.Elements, idx, idx+1)
+								newComplexTypeOwner.Elements = append(newComplexTypeOwner.Elements, element_)
+							}
+						} else {
+							newComplexTypeOwner.Elements = append(newComplexTypeOwner.Elements, element_)
+						}
+					}
+				}
+			}
+		case "Group:Elements":
+			// we need to retrieve the field owner before the change
+			var pastGroupOwner *models.Group
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "Group"
+			rf.Fieldname = "Elements"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				elementFormCallback.probe.stageOfInterest,
+				elementFormCallback.probe.backRepoOfInterest,
+				element_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastGroupOwner = reverseFieldOwner.(*models.Group)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastGroupOwner != nil {
+					idx := slices.Index(pastGroupOwner.Elements, element_)
+					pastGroupOwner.Elements = slices.Delete(pastGroupOwner.Elements, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _group := range *models.GetGongstructInstancesSet[models.Group](elementFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _group.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newGroupOwner := _group // we have a match
+						if pastGroupOwner != nil {
+							if newGroupOwner != pastGroupOwner {
+								idx := slices.Index(pastGroupOwner.Elements, element_)
+								pastGroupOwner.Elements = slices.Delete(pastGroupOwner.Elements, idx, idx+1)
+								newGroupOwner.Elements = append(newGroupOwner.Elements, element_)
+							}
+						} else {
+							newGroupOwner.Elements = append(newGroupOwner.Elements, element_)
+						}
+					}
+				}
+			}
 		case "Schema:Elements":
 			// we need to retrieve the field owner before the change
 			var pastSchemaOwner *models.Schema

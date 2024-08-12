@@ -87,6 +87,9 @@ func _(stage *models.StageStruct) {
 	__Enumeration__000000_bookFormatEnum_E_E := (&models.Enumeration{Name: `bookFormatEnum_E_E`}).Stage(stage)
 	__Enumeration__000001_bookFormatEnum_E_E := (&models.Enumeration{Name: `bookFormatEnum_E_E`}).Stage(stage)
 
+	__Group__000000_ := (&models.Group{Name: ``}).Stage(stage)
+	__Group__000001_bookDetailsGroup := (&models.Group{Name: `bookDetailsGroup`}).Stage(stage)
+
 	__MaxInclusive__000000_yearType_E_E := (&models.MaxInclusive{Name: `yearType_E_E`}).Stage(stage)
 
 	__MinInclusive__000000_yearType_E_E := (&models.MinInclusive{Name: `yearType_E_E`}).Stage(stage)
@@ -101,9 +104,10 @@ func _(stage *models.StageStruct) {
 
 	__Sequence__000000_ := (&models.Sequence{Name: ``}).Stage(stage)
 	__Sequence__000001_ := (&models.Sequence{Name: ``}).Stage(stage)
-	__Sequence__000002_bookType_E := (&models.Sequence{Name: `bookType_E`}).Stage(stage)
-	__Sequence__000003_books_E_E := (&models.Sequence{Name: `books_E_E`}).Stage(stage)
-	__Sequence__000004_credit_E := (&models.Sequence{Name: `credit_E`}).Stage(stage)
+	__Sequence__000002_bookDetailsGroup_E := (&models.Sequence{Name: `bookDetailsGroup_E`}).Stage(stage)
+	__Sequence__000003_bookType_E := (&models.Sequence{Name: `bookType_E`}).Stage(stage)
+	__Sequence__000004_books_E_E := (&models.Sequence{Name: `books_E_E`}).Stage(stage)
+	__Sequence__000005_credit_E := (&models.Sequence{Name: `credit_E`}).Stage(stage)
 
 	__SimpleType__000000_bookFormatEnum := (&models.SimpleType{Name: `bookFormatEnum`}).Stage(stage)
 	__SimpleType__000001_titleType := (&models.SimpleType{Name: `titleType`}).Stage(stage)
@@ -207,11 +211,11 @@ func _(stage *models.StageStruct) {
 
 	__AttributeGroup__000000_.Name = ``
 	__AttributeGroup__000000_.NameXSD = ``
-	__AttributeGroup__000000_.Ref = `extendedAttributes`
+	__AttributeGroup__000000_.Ref = `commonAttributes`
 
 	__AttributeGroup__000001_.Name = ``
 	__AttributeGroup__000001_.NameXSD = ``
-	__AttributeGroup__000001_.Ref = `commonAttributes`
+	__AttributeGroup__000001_.Ref = `extendedAttributes`
 
 	__AttributeGroup__000002_commonAttributes.Name = `commonAttributes`
 	__AttributeGroup__000002_commonAttributes.NameXSD = `commonAttributes`
@@ -258,18 +262,18 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000003_link.NameXSD = `link`
 
 	__Documentation__000000_Schema_E_E.Name = `Schema_E_E`
-	__Documentation__000000_Schema_E_E.Text = ` This schema defines
-            the structure of a simple book collection. It includes types for book details, such as
-            title, author, year, and format. `
-	__Documentation__000000_Schema_E_E.Source = `http://example.com/schema-docs`
-	__Documentation__000000_Schema_E_E.Lang = `en`
-
-	__Documentation__000001_Schema_E_E.Name = `Schema_E_E`
-	__Documentation__000001_Schema_E_E.Text = ` Ce schéma définit
+	__Documentation__000000_Schema_E_E.Text = ` Ce schéma définit
             la structure d'une collection de livres simple. Il inclut des types pour les détails du
             livre, tels que le titre, l'auteur, l'année et le format. `
+	__Documentation__000000_Schema_E_E.Source = `http://example.com/schema-docs`
+	__Documentation__000000_Schema_E_E.Lang = `fr`
+
+	__Documentation__000001_Schema_E_E.Name = `Schema_E_E`
+	__Documentation__000001_Schema_E_E.Text = ` This schema defines
+            the structure of a simple book collection. It includes types for book details, such as
+            title, author, year, and format. `
 	__Documentation__000001_Schema_E_E.Source = `http://example.com/schema-docs`
-	__Documentation__000001_Schema_E_E.Lang = `fr`
+	__Documentation__000001_Schema_E_E.Lang = `en`
 
 	__Documentation__000002__E.Name = `_E`
 	__Documentation__000002__E.Text = `The ISBN number of the book.`
@@ -557,6 +561,20 @@ func _(stage *models.StageStruct) {
 	__Enumeration__000001_bookFormatEnum_E_E.Name = `bookFormatEnum_E_E`
 	__Enumeration__000001_bookFormatEnum_E_E.Value = `Hardcover`
 
+	__Group__000000_.Name = ``
+	__Group__000000_.NameXSD = ``
+	__Group__000000_.Ref = `bookDetailsGroup`
+	__Group__000000_.IsInlined = false
+	__Group__000000_.HasNameConflict = true
+	__Group__000000_.GoIdentifier = `_1`
+
+	__Group__000001_bookDetailsGroup.Name = `bookDetailsGroup`
+	__Group__000001_bookDetailsGroup.NameXSD = `bookDetailsGroup`
+	__Group__000001_bookDetailsGroup.Ref = ``
+	__Group__000001_bookDetailsGroup.IsInlined = false
+	__Group__000001_bookDetailsGroup.HasNameConflict = false
+	__Group__000001_bookDetailsGroup.GoIdentifier = `BookDetailsGroup`
+
 	__MaxInclusive__000000_yearType_E_E.Name = `yearType_E_E`
 	__MaxInclusive__000000_yearType_E_E.Value = `2100`
 
@@ -586,17 +604,21 @@ func _(stage *models.StageStruct) {
 	__Sequence__000001_.MinOccurs = `0`
 	__Sequence__000001_.MaxOccurs = `unbounded`
 
-	__Sequence__000002_bookType_E.Name = `bookType_E`
-	__Sequence__000002_bookType_E.MinOccurs = ``
-	__Sequence__000002_bookType_E.MaxOccurs = ``
+	__Sequence__000002_bookDetailsGroup_E.Name = `bookDetailsGroup_E`
+	__Sequence__000002_bookDetailsGroup_E.MinOccurs = ``
+	__Sequence__000002_bookDetailsGroup_E.MaxOccurs = ``
 
-	__Sequence__000003_books_E_E.Name = `books_E_E`
-	__Sequence__000003_books_E_E.MinOccurs = ``
-	__Sequence__000003_books_E_E.MaxOccurs = ``
+	__Sequence__000003_bookType_E.Name = `bookType_E`
+	__Sequence__000003_bookType_E.MinOccurs = ``
+	__Sequence__000003_bookType_E.MaxOccurs = ``
 
-	__Sequence__000004_credit_E.Name = `credit_E`
-	__Sequence__000004_credit_E.MinOccurs = ``
-	__Sequence__000004_credit_E.MaxOccurs = ``
+	__Sequence__000004_books_E_E.Name = `books_E_E`
+	__Sequence__000004_books_E_E.MinOccurs = ``
+	__Sequence__000004_books_E_E.MaxOccurs = ``
+
+	__Sequence__000005_credit_E.Name = `credit_E`
+	__Sequence__000005_credit_E.MinOccurs = ``
+	__Sequence__000005_credit_E.MaxOccurs = ``
 
 	__SimpleType__000000_bookFormatEnum.Name = `bookFormatEnum`
 	__SimpleType__000000_bookFormatEnum.NameXSD = `bookFormatEnum`
@@ -611,8 +633,8 @@ func _(stage *models.StageStruct) {
 	__WhiteSpace__000000_titleType_E_E.Value = `collapse`
 
 	// Setup of pointers
-	__Annotation__000000_Schema_E.Documentations = append(__Annotation__000000_Schema_E.Documentations, __Documentation__000000_Schema_E_E)
 	__Annotation__000000_Schema_E.Documentations = append(__Annotation__000000_Schema_E.Documentations, __Documentation__000001_Schema_E_E)
+	__Annotation__000000_Schema_E.Documentations = append(__Annotation__000000_Schema_E.Documentations, __Documentation__000000_Schema_E_E)
 	__Annotation__000001_bestseller_E.Documentations = append(__Annotation__000001_bestseller_E.Documentations, __Documentation__000003__E)
 	__Annotation__000002_bookType_E.Documentations = append(__Annotation__000002_bookType_E.Documentations, __Documentation__000005_bookType_E_E)
 	__Annotation__000003_book_E.Documentations = append(__Annotation__000003_book_E.Documentations, __Documentation__000006_book_E_E)
@@ -628,20 +650,20 @@ func _(stage *models.StageStruct) {
 	__Attribute__000002_isbn.Annotation = __Annotation__000007_isbn_E
 	__AttributeGroup__000002_commonAttributes.Attributes = append(__AttributeGroup__000002_commonAttributes.Attributes, __Attribute__000002_isbn)
 	__AttributeGroup__000002_commonAttributes.Attributes = append(__AttributeGroup__000002_commonAttributes.Attributes, __Attribute__000000_bestseller)
-	__AttributeGroup__000003_extendedAttributes.AttributeGroups = append(__AttributeGroup__000003_extendedAttributes.AttributeGroups, __AttributeGroup__000001_)
+	__AttributeGroup__000003_extendedAttributes.AttributeGroups = append(__AttributeGroup__000003_extendedAttributes.AttributeGroups, __AttributeGroup__000000_)
 	__AttributeGroup__000003_extendedAttributes.Attributes = append(__AttributeGroup__000003_extendedAttributes.Attributes, __Attribute__000001_edition)
 	__Choice__000000_.Sequences = append(__Choice__000000_.Sequences, __Sequence__000000_)
-	__Choice__000001_.Elements = append(__Choice__000001_.Elements, __Element__000008_credit_words)
+	__Choice__000001_.Elements = append(__Choice__000001_.Elements, __Element__000007_credit_words)
 	__Choice__000001_.Elements = append(__Choice__000001_.Elements, __Element__000005_credit_symbol)
-	__Choice__000002_.Elements = append(__Choice__000002_.Elements, __Element__000007_credit_words)
+	__Choice__000002_.Elements = append(__Choice__000002_.Elements, __Element__000008_credit_words)
 	__Choice__000002_.Elements = append(__Choice__000002_.Elements, __Element__000004_credit_symbol)
 	__ComplexType__000000_bookType.Annotation = __Annotation__000002_bookType_E
-	__ComplexType__000000_bookType.Sequences = append(__ComplexType__000000_bookType.Sequences, __Sequence__000002_bookType_E)
-	__ComplexType__000000_bookType.AttributeGroups = append(__ComplexType__000000_bookType.AttributeGroups, __AttributeGroup__000000_)
+	__ComplexType__000000_bookType.Sequences = append(__ComplexType__000000_bookType.Sequences, __Sequence__000003_bookType_E)
+	__ComplexType__000000_bookType.AttributeGroups = append(__ComplexType__000000_bookType.AttributeGroups, __AttributeGroup__000001_)
 	__ComplexType__000001_books_E.EnclosingElement = __Element__000002_books
-	__ComplexType__000001_books_E.Sequences = append(__ComplexType__000001_books_E.Sequences, __Sequence__000003_books_E_E)
+	__ComplexType__000001_books_E.Sequences = append(__ComplexType__000001_books_E.Sequences, __Sequence__000004_books_E_E)
 	__ComplexType__000002_credit.Annotation = __Annotation__000004_credit_E
-	__ComplexType__000002_credit.Sequences = append(__ComplexType__000002_credit.Sequences, __Sequence__000004_credit_E)
+	__ComplexType__000002_credit.Sequences = append(__ComplexType__000002_credit.Sequences, __Sequence__000005_credit_E)
 	__ComplexType__000002_credit.Attributes = append(__ComplexType__000002_credit.Attributes, __Attribute__000004_page)
 	__ComplexType__000003_link.Annotation = __Annotation__000008_link_E
 	__ComplexType__000003_link.Attributes = append(__ComplexType__000003_link.Attributes, __Attribute__000003_name)
@@ -649,6 +671,7 @@ func _(stage *models.StageStruct) {
 	__Element__000002_books.ComplexType = __ComplexType__000001_books_E
 	__Element__000009_format.Annotation = __Annotation__000006_format_E
 	__Element__000012_title.Annotation = __Annotation__000009_title_E
+	__Group__000001_bookDetailsGroup.Sequences = append(__Group__000001_bookDetailsGroup.Sequences, __Sequence__000002_bookDetailsGroup_E)
 	__Restriction__000000_bookFormatEnum_E.Enumerations = append(__Restriction__000000_bookFormatEnum_E.Enumerations, __Enumeration__000000_bookFormatEnum_E_E)
 	__Restriction__000000_bookFormatEnum_E.Enumerations = append(__Restriction__000000_bookFormatEnum_E.Enumerations, __Enumeration__000001_bookFormatEnum_E_E)
 	__Restriction__000001_titleType_E.Pattern = __Pattern__000000_titleType_E_E
@@ -665,19 +688,21 @@ func _(stage *models.StageStruct) {
 	__Schema__000000_Schema.ComplexTypes = append(__Schema__000000_Schema.ComplexTypes, __ComplexType__000003_link)
 	__Schema__000000_Schema.AttributeGroups = append(__Schema__000000_Schema.AttributeGroups, __AttributeGroup__000002_commonAttributes)
 	__Schema__000000_Schema.AttributeGroups = append(__Schema__000000_Schema.AttributeGroups, __AttributeGroup__000003_extendedAttributes)
+	__Schema__000000_Schema.Groups = append(__Schema__000000_Schema.Groups, __Group__000001_bookDetailsGroup)
 	__Sequence__000000_.Sequences = append(__Sequence__000000_.Sequences, __Sequence__000001_)
 	__Sequence__000000_.Choices = append(__Sequence__000000_.Choices, __Choice__000002_)
-	__Sequence__000001_.Elements = append(__Sequence__000001_.Elements, __Element__000010_link)
 	__Sequence__000001_.Choices = append(__Sequence__000001_.Choices, __Choice__000001_)
-	__Sequence__000002_bookType_E.Elements = append(__Sequence__000002_bookType_E.Elements, __Element__000012_title)
-	__Sequence__000002_bookType_E.Elements = append(__Sequence__000002_bookType_E.Elements, __Element__000000_author)
-	__Sequence__000002_bookType_E.Elements = append(__Sequence__000002_bookType_E.Elements, __Element__000013_year)
-	__Sequence__000002_bookType_E.Elements = append(__Sequence__000002_bookType_E.Elements, __Element__000009_format)
-	__Sequence__000002_bookType_E.Elements = append(__Sequence__000002_bookType_E.Elements, __Element__000003_credit)
-	__Sequence__000003_books_E_E.Elements = append(__Sequence__000003_books_E_E.Elements, __Element__000001_book)
-	__Sequence__000004_credit_E.Elements = append(__Sequence__000004_credit_E.Elements, __Element__000006_credit_type)
-	__Sequence__000004_credit_E.Elements = append(__Sequence__000004_credit_E.Elements, __Element__000011_link)
-	__Sequence__000004_credit_E.Choices = append(__Sequence__000004_credit_E.Choices, __Choice__000000_)
+	__Sequence__000001_.Elements = append(__Sequence__000001_.Elements, __Element__000011_link)
+	__Sequence__000002_bookDetailsGroup_E.Elements = append(__Sequence__000002_bookDetailsGroup_E.Elements, __Element__000012_title)
+	__Sequence__000002_bookDetailsGroup_E.Elements = append(__Sequence__000002_bookDetailsGroup_E.Elements, __Element__000000_author)
+	__Sequence__000002_bookDetailsGroup_E.Elements = append(__Sequence__000002_bookDetailsGroup_E.Elements, __Element__000013_year)
+	__Sequence__000002_bookDetailsGroup_E.Elements = append(__Sequence__000002_bookDetailsGroup_E.Elements, __Element__000009_format)
+	__Sequence__000003_bookType_E.Groups = append(__Sequence__000003_bookType_E.Groups, __Group__000000_)
+	__Sequence__000003_bookType_E.Elements = append(__Sequence__000003_bookType_E.Elements, __Element__000003_credit)
+	__Sequence__000004_books_E_E.Elements = append(__Sequence__000004_books_E_E.Elements, __Element__000001_book)
+	__Sequence__000005_credit_E.Choices = append(__Sequence__000005_credit_E.Choices, __Choice__000000_)
+	__Sequence__000005_credit_E.Elements = append(__Sequence__000005_credit_E.Elements, __Element__000006_credit_type)
+	__Sequence__000005_credit_E.Elements = append(__Sequence__000005_credit_E.Elements, __Element__000010_link)
 	__SimpleType__000000_bookFormatEnum.Restriction = __Restriction__000000_bookFormatEnum_E
 	__SimpleType__000001_titleType.Restriction = __Restriction__000001_titleType_E
 	__SimpleType__000002_yearType.Annotation = __Annotation__000010_yearType_E

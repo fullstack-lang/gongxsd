@@ -9,7 +9,11 @@ func PostProcessingAnalyzeXSDStructure(stage *StageStruct) {
 			element.ComplexType.IsInlined = true
 			element.ComplexType.EnclosingElement = element
 		}
-	}
 
+		for _, group := range element.Groups {
+			group.IsInlined = true
+			group.EnclosingElement = element
+		}
+	}
 
 }

@@ -67,6 +67,9 @@ type ComplexTypePointersEncoding struct {
 	// field Groups is a slice of pointers to another Struct (optional or 0..1)
 	Groups IntSlice `gorm:"type:TEXT"`
 
+	// field Elements is a slice of pointers to another Struct (optional or 0..1)
+	Elements IntSlice `gorm:"type:TEXT"`
+
 	// field Attributes is a slice of pointers to another Struct (optional or 0..1)
 	Attributes IntSlice `gorm:"type:TEXT"`
 
@@ -360,6 +363,24 @@ func (backRepoComplexType *BackRepoComplexTypeStruct) CommitPhaseTwoInstance(bac
 		}
 
 		// 1. reset
+		complextypeDB.ComplexTypePointersEncoding.Elements = make([]int, 0)
+		// 2. encode
+		for _, elementAssocEnd := range complextype.Elements {
+			elementAssocEnd_DB :=
+				backRepo.BackRepoElement.GetElementDBFromElementPtr(elementAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the elementAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if elementAssocEnd_DB == nil {
+				continue
+			}
+			
+			complextypeDB.ComplexTypePointersEncoding.Elements =
+				append(complextypeDB.ComplexTypePointersEncoding.Elements, int(elementAssocEnd_DB.ID))
+		}
+
+		// 1. reset
 		complextypeDB.ComplexTypePointersEncoding.Attributes = make([]int, 0)
 		// 2. encode
 		for _, attributeAssocEnd := range complextype.Attributes {
@@ -552,6 +573,15 @@ func (complextypeDB *ComplexTypeDB) DecodePointers(backRepo *BackRepoStruct, com
 	complextype.Groups = complextype.Groups[:0]
 	for _, _Groupid := range complextypeDB.ComplexTypePointersEncoding.Groups {
 		complextype.Groups = append(complextype.Groups, backRepo.BackRepoGroup.Map_GroupDBID_GroupPtr[uint(_Groupid)])
+	}
+
+	// This loop redeem complextype.Elements in the stage from the encode in the back repo
+	// It parses all ElementDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	complextype.Elements = complextype.Elements[:0]
+	for _, _Elementid := range complextypeDB.ComplexTypePointersEncoding.Elements {
+		complextype.Elements = append(complextype.Elements, backRepo.BackRepoElement.Map_ElementDBID_ElementPtr[uint(_Elementid)])
 	}
 
 	// This loop redeem complextype.Attributes in the stage from the encode in the back repo

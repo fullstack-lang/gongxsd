@@ -185,6 +185,20 @@ func GetReverseFieldOwnerName[T models.Gongstruct](
 					res = _choice.Name
 				}
 			}
+		case "ComplexType":
+			switch reverseField.Fieldname {
+			case "Elements":
+				if _complextype, ok := stage.ComplexType_Elements_reverseMap[inst]; ok {
+					res = _complextype.Name
+				}
+			}
+		case "Group":
+			switch reverseField.Fieldname {
+			case "Elements":
+				if _group, ok := stage.Group_Elements_reverseMap[inst]; ok {
+					res = _group.Name
+				}
+			}
 		case "Schema":
 			switch reverseField.Fieldname {
 			case "Elements":
@@ -521,6 +535,16 @@ func GetReverseFieldOwner[T models.Gongstruct](
 			switch reverseField.Fieldname {
 			case "Elements":
 				res = stage.Choice_Elements_reverseMap[inst]
+			}
+		case "ComplexType":
+			switch reverseField.Fieldname {
+			case "Elements":
+				res = stage.ComplexType_Elements_reverseMap[inst]
+			}
+		case "Group":
+			switch reverseField.Fieldname {
+			case "Elements":
+				res = stage.Group_Elements_reverseMap[inst]
 			}
 		case "Schema":
 			switch reverseField.Fieldname {

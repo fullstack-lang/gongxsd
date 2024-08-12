@@ -35,25 +35,6 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 	// insertion point
 	case *All:
 		// insertion point per field
-		if fieldName == "Elements" {
-
-			// walk all instances of the owning type
-			for _instance := range *GetGongstructInstancesSetFromPointerType[OwningType](stage) {
-				if any(_instance).(*All) != owningInstanceInfered {
-					_inferedTypeInstance := any(_instance).(*All)
-					reference := make([]FieldType, 0)
-					targetFieldSlice := any(_inferedTypeInstance.Elements).([]FieldType)
-					copy(targetFieldSlice, reference)
-					_inferedTypeInstance.Elements = _inferedTypeInstance.Elements[0:]
-					for _, fieldInstance := range reference {
-						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
-							_inferedTypeInstance.Elements =
-								append(_inferedTypeInstance.Elements, any(fieldInstance).(*Element))
-						}
-					}
-				}
-			}
-		}
 		if fieldName == "Sequences" {
 
 			// walk all instances of the owning type
@@ -125,6 +106,25 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
 							_inferedTypeInstance.Groups =
 								append(_inferedTypeInstance.Groups, any(fieldInstance).(*Group))
+						}
+					}
+				}
+			}
+		}
+		if fieldName == "Elements" {
+
+			// walk all instances of the owning type
+			for _instance := range *GetGongstructInstancesSetFromPointerType[OwningType](stage) {
+				if any(_instance).(*All) != owningInstanceInfered {
+					_inferedTypeInstance := any(_instance).(*All)
+					reference := make([]FieldType, 0)
+					targetFieldSlice := any(_inferedTypeInstance.Elements).([]FieldType)
+					copy(targetFieldSlice, reference)
+					_inferedTypeInstance.Elements = _inferedTypeInstance.Elements[0:]
+					for _, fieldInstance := range reference {
+						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
+							_inferedTypeInstance.Elements =
+								append(_inferedTypeInstance.Elements, any(fieldInstance).(*Element))
 						}
 					}
 				}
@@ -199,25 +199,6 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 
 	case *Choice:
 		// insertion point per field
-		if fieldName == "Elements" {
-
-			// walk all instances of the owning type
-			for _instance := range *GetGongstructInstancesSetFromPointerType[OwningType](stage) {
-				if any(_instance).(*Choice) != owningInstanceInfered {
-					_inferedTypeInstance := any(_instance).(*Choice)
-					reference := make([]FieldType, 0)
-					targetFieldSlice := any(_inferedTypeInstance.Elements).([]FieldType)
-					copy(targetFieldSlice, reference)
-					_inferedTypeInstance.Elements = _inferedTypeInstance.Elements[0:]
-					for _, fieldInstance := range reference {
-						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
-							_inferedTypeInstance.Elements =
-								append(_inferedTypeInstance.Elements, any(fieldInstance).(*Element))
-						}
-					}
-				}
-			}
-		}
 		if fieldName == "Sequences" {
 
 			// walk all instances of the owning type
@@ -289,6 +270,25 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
 							_inferedTypeInstance.Groups =
 								append(_inferedTypeInstance.Groups, any(fieldInstance).(*Group))
+						}
+					}
+				}
+			}
+		}
+		if fieldName == "Elements" {
+
+			// walk all instances of the owning type
+			for _instance := range *GetGongstructInstancesSetFromPointerType[OwningType](stage) {
+				if any(_instance).(*Choice) != owningInstanceInfered {
+					_inferedTypeInstance := any(_instance).(*Choice)
+					reference := make([]FieldType, 0)
+					targetFieldSlice := any(_inferedTypeInstance.Elements).([]FieldType)
+					copy(targetFieldSlice, reference)
+					_inferedTypeInstance.Elements = _inferedTypeInstance.Elements[0:]
+					for _, fieldInstance := range reference {
+						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
+							_inferedTypeInstance.Elements =
+								append(_inferedTypeInstance.Elements, any(fieldInstance).(*Element))
 						}
 					}
 				}
@@ -368,6 +368,25 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
 							_inferedTypeInstance.Groups =
 								append(_inferedTypeInstance.Groups, any(fieldInstance).(*Group))
+						}
+					}
+				}
+			}
+		}
+		if fieldName == "Elements" {
+
+			// walk all instances of the owning type
+			for _instance := range *GetGongstructInstancesSetFromPointerType[OwningType](stage) {
+				if any(_instance).(*ComplexType) != owningInstanceInfered {
+					_inferedTypeInstance := any(_instance).(*ComplexType)
+					reference := make([]FieldType, 0)
+					targetFieldSlice := any(_inferedTypeInstance.Elements).([]FieldType)
+					copy(targetFieldSlice, reference)
+					_inferedTypeInstance.Elements = _inferedTypeInstance.Elements[0:]
+					for _, fieldInstance := range reference {
+						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
+							_inferedTypeInstance.Elements =
+								append(_inferedTypeInstance.Elements, any(fieldInstance).(*Element))
 						}
 					}
 				}
@@ -518,6 +537,25 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 				}
 			}
 		}
+		if fieldName == "Elements" {
+
+			// walk all instances of the owning type
+			for _instance := range *GetGongstructInstancesSetFromPointerType[OwningType](stage) {
+				if any(_instance).(*Group) != owningInstanceInfered {
+					_inferedTypeInstance := any(_instance).(*Group)
+					reference := make([]FieldType, 0)
+					targetFieldSlice := any(_inferedTypeInstance.Elements).([]FieldType)
+					copy(targetFieldSlice, reference)
+					_inferedTypeInstance.Elements = _inferedTypeInstance.Elements[0:]
+					for _, fieldInstance := range reference {
+						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
+							_inferedTypeInstance.Elements =
+								append(_inferedTypeInstance.Elements, any(fieldInstance).(*Element))
+						}
+					}
+				}
+			}
+		}
 
 	case *Length:
 		// insertion point per field
@@ -659,25 +697,6 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 
 	case *Sequence:
 		// insertion point per field
-		if fieldName == "Elements" {
-
-			// walk all instances of the owning type
-			for _instance := range *GetGongstructInstancesSetFromPointerType[OwningType](stage) {
-				if any(_instance).(*Sequence) != owningInstanceInfered {
-					_inferedTypeInstance := any(_instance).(*Sequence)
-					reference := make([]FieldType, 0)
-					targetFieldSlice := any(_inferedTypeInstance.Elements).([]FieldType)
-					copy(targetFieldSlice, reference)
-					_inferedTypeInstance.Elements = _inferedTypeInstance.Elements[0:]
-					for _, fieldInstance := range reference {
-						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
-							_inferedTypeInstance.Elements =
-								append(_inferedTypeInstance.Elements, any(fieldInstance).(*Element))
-						}
-					}
-				}
-			}
-		}
 		if fieldName == "Sequences" {
 
 			// walk all instances of the owning type
@@ -754,6 +773,25 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 				}
 			}
 		}
+		if fieldName == "Elements" {
+
+			// walk all instances of the owning type
+			for _instance := range *GetGongstructInstancesSetFromPointerType[OwningType](stage) {
+				if any(_instance).(*Sequence) != owningInstanceInfered {
+					_inferedTypeInstance := any(_instance).(*Sequence)
+					reference := make([]FieldType, 0)
+					targetFieldSlice := any(_inferedTypeInstance.Elements).([]FieldType)
+					copy(targetFieldSlice, reference)
+					_inferedTypeInstance.Elements = _inferedTypeInstance.Elements[0:]
+					for _, fieldInstance := range reference {
+						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
+							_inferedTypeInstance.Elements =
+								append(_inferedTypeInstance.Elements, any(fieldInstance).(*Element))
+						}
+					}
+				}
+			}
+		}
 
 	case *SimpleType:
 		// insertion point per field
@@ -778,14 +816,6 @@ func (stage *StageStruct) ComputeReverseMaps() {
 	// insertion point per named struct
 	// Compute reverse map for named struct All
 	// insertion point per field
-	clear(stage.All_Elements_reverseMap)
-	stage.All_Elements_reverseMap = make(map[*Element]*All)
-	for all := range stage.Alls {
-		_ = all
-		for _, _element := range all.Elements {
-			stage.All_Elements_reverseMap[_element] = all
-		}
-	}
 	clear(stage.All_Sequences_reverseMap)
 	stage.All_Sequences_reverseMap = make(map[*Sequence]*All)
 	for all := range stage.Alls {
@@ -816,6 +846,14 @@ func (stage *StageStruct) ComputeReverseMaps() {
 		_ = all
 		for _, _group := range all.Groups {
 			stage.All_Groups_reverseMap[_group] = all
+		}
+	}
+	clear(stage.All_Elements_reverseMap)
+	stage.All_Elements_reverseMap = make(map[*Element]*All)
+	for all := range stage.Alls {
+		_ = all
+		for _, _element := range all.Elements {
+			stage.All_Elements_reverseMap[_element] = all
 		}
 	}
 
@@ -854,14 +892,6 @@ func (stage *StageStruct) ComputeReverseMaps() {
 
 	// Compute reverse map for named struct Choice
 	// insertion point per field
-	clear(stage.Choice_Elements_reverseMap)
-	stage.Choice_Elements_reverseMap = make(map[*Element]*Choice)
-	for choice := range stage.Choices {
-		_ = choice
-		for _, _element := range choice.Elements {
-			stage.Choice_Elements_reverseMap[_element] = choice
-		}
-	}
 	clear(stage.Choice_Sequences_reverseMap)
 	stage.Choice_Sequences_reverseMap = make(map[*Sequence]*Choice)
 	for choice := range stage.Choices {
@@ -892,6 +922,14 @@ func (stage *StageStruct) ComputeReverseMaps() {
 		_ = choice
 		for _, _group := range choice.Groups {
 			stage.Choice_Groups_reverseMap[_group] = choice
+		}
+	}
+	clear(stage.Choice_Elements_reverseMap)
+	stage.Choice_Elements_reverseMap = make(map[*Element]*Choice)
+	for choice := range stage.Choices {
+		_ = choice
+		for _, _element := range choice.Elements {
+			stage.Choice_Elements_reverseMap[_element] = choice
 		}
 	}
 
@@ -927,6 +965,14 @@ func (stage *StageStruct) ComputeReverseMaps() {
 		_ = complextype
 		for _, _group := range complextype.Groups {
 			stage.ComplexType_Groups_reverseMap[_group] = complextype
+		}
+	}
+	clear(stage.ComplexType_Elements_reverseMap)
+	stage.ComplexType_Elements_reverseMap = make(map[*Element]*ComplexType)
+	for complextype := range stage.ComplexTypes {
+		_ = complextype
+		for _, _element := range complextype.Elements {
+			stage.ComplexType_Elements_reverseMap[_element] = complextype
 		}
 	}
 	clear(stage.ComplexType_Attributes_reverseMap)
@@ -995,6 +1041,14 @@ func (stage *StageStruct) ComputeReverseMaps() {
 		_ = group
 		for _, _group := range group.Groups {
 			stage.Group_Groups_reverseMap[_group] = group
+		}
+	}
+	clear(stage.Group_Elements_reverseMap)
+	stage.Group_Elements_reverseMap = make(map[*Element]*Group)
+	for group := range stage.Groups {
+		_ = group
+		for _, _element := range group.Elements {
+			stage.Group_Elements_reverseMap[_element] = group
 		}
 	}
 
@@ -1072,14 +1126,6 @@ func (stage *StageStruct) ComputeReverseMaps() {
 
 	// Compute reverse map for named struct Sequence
 	// insertion point per field
-	clear(stage.Sequence_Elements_reverseMap)
-	stage.Sequence_Elements_reverseMap = make(map[*Element]*Sequence)
-	for sequence := range stage.Sequences {
-		_ = sequence
-		for _, _element := range sequence.Elements {
-			stage.Sequence_Elements_reverseMap[_element] = sequence
-		}
-	}
 	clear(stage.Sequence_Sequences_reverseMap)
 	stage.Sequence_Sequences_reverseMap = make(map[*Sequence]*Sequence)
 	for sequence := range stage.Sequences {
@@ -1110,6 +1156,14 @@ func (stage *StageStruct) ComputeReverseMaps() {
 		_ = sequence
 		for _, _group := range sequence.Groups {
 			stage.Sequence_Groups_reverseMap[_group] = sequence
+		}
+	}
+	clear(stage.Sequence_Elements_reverseMap)
+	stage.Sequence_Elements_reverseMap = make(map[*Element]*Sequence)
+	for sequence := range stage.Sequences {
+		_ = sequence
+		for _, _element := range sequence.Elements {
+			stage.Sequence_Elements_reverseMap[_element] = sequence
 		}
 	}
 

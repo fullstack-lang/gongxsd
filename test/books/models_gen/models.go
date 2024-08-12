@@ -21,6 +21,9 @@ type BookType struct {
 	// generated from attribute "bestseller" of type xs:boolean
 	Bestseller bool `xml:"bestseller,attr"`
 
+	// generated from element "credit" of type credit
+	Credit []*Credit `xml:"credit"`
+
 	// generated from element "title" of type titleType
 	Title string `xml:"title"`
 
@@ -32,9 +35,6 @@ type BookType struct {
 
 	// generated from element "format" of type bookFormatEnum
 	Format string `xml:"format"`
-
-	// generated from element "credit" of type credit
-	Credit []*Credit `xml:"credit"`
 }
 
 // Credit is generated from named complex type "credit"
@@ -67,6 +67,25 @@ type Link struct {
 
 	// generated from attribute "name" of type xs:token
 	NameXSD string `xml:"name,attr"`
+}
+
+// BookDetailsGroup is generated from named group "bookDetailsGroup"
+type BookDetailsGroup struct {
+	Name string `xml:"-"`
+	
+	// insertion point for fields
+
+	// generated from element "title" of type titleType
+	Title string `xml:"title"`
+
+	// generated from element "author" of type xs:string
+	Author string `xml:"author"`
+
+	// generated from element "year" of type yearType
+	Year int `xml:"year"`
+
+	// generated from element "format" of type bookFormatEnum
+	Format string `xml:"format"`
 }
 
 // Books is generated from inlined complex type within element "books"

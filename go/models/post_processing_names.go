@@ -58,13 +58,16 @@ func PostProcessingNames(stage *StageStruct) {
 		for _, ag := range x.AttributeGroups {
 			ag.Name = prefix(x.Name)
 		}
+		for _, g := range x.Groups {
+			g.Name = prefix(x.Name)
+		}
 	}
 	for x := range *GetGongstructInstancesSet[Group](stage) {
 		x.Name = x.NameXSD
 
 		computeGoIdentifier(x.Name, &x.WithGoIdentifier, setOfGoIdentifiers)
 
-		if _x, ok := map_EmbeddedComplexType[x]; ok {
+		if _x, ok := map_EmbeddedGroup[x]; ok {
 			x.Name = prefix(_x.Name)
 		}
 
@@ -79,9 +82,6 @@ func PostProcessingNames(stage *StageStruct) {
 		}
 		if x.Annotation != nil {
 			x.Annotation.Name = prefix(x.Name)
-		}
-		for _, ag := range x.AttributeGroups {
-			ag.Name = prefix(x.Name)
 		}
 	}
 	for x := range *GetGongstructInstancesSet[SimpleType](stage) {

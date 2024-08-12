@@ -27,11 +27,11 @@ func FillUpForm[T models.Gongstruct](
 			false, false, 0, false, 0)
 		BasicFieldtoForm("MaxOccurs", instanceWithInferedType.MaxOccurs, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
-		AssociationSliceToForm("Elements", instanceWithInferedType, &instanceWithInferedType.Elements, formGroup, probe)
 		AssociationSliceToForm("Sequences", instanceWithInferedType, &instanceWithInferedType.Sequences, formGroup, probe)
 		AssociationSliceToForm("Alls", instanceWithInferedType, &instanceWithInferedType.Alls, formGroup, probe)
 		AssociationSliceToForm("Choices", instanceWithInferedType, &instanceWithInferedType.Choices, formGroup, probe)
 		AssociationSliceToForm("Groups", instanceWithInferedType, &instanceWithInferedType.Groups, formGroup, probe)
+		AssociationSliceToForm("Elements", instanceWithInferedType, &instanceWithInferedType.Elements, formGroup, probe)
 		{
 			var rf models.ReverseField
 			_ = rf
@@ -310,11 +310,11 @@ func FillUpForm[T models.Gongstruct](
 			false, false, 0, false, 0)
 		BasicFieldtoForm("MaxOccurs", instanceWithInferedType.MaxOccurs, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
-		AssociationSliceToForm("Elements", instanceWithInferedType, &instanceWithInferedType.Elements, formGroup, probe)
 		AssociationSliceToForm("Sequences", instanceWithInferedType, &instanceWithInferedType.Sequences, formGroup, probe)
 		AssociationSliceToForm("Alls", instanceWithInferedType, &instanceWithInferedType.Alls, formGroup, probe)
 		AssociationSliceToForm("Choices", instanceWithInferedType, &instanceWithInferedType.Choices, formGroup, probe)
 		AssociationSliceToForm("Groups", instanceWithInferedType, &instanceWithInferedType.Groups, formGroup, probe)
+		AssociationSliceToForm("Elements", instanceWithInferedType, &instanceWithInferedType.Elements, formGroup, probe)
 		{
 			var rf models.ReverseField
 			_ = rf
@@ -444,6 +444,7 @@ func FillUpForm[T models.Gongstruct](
 		AssociationSliceToForm("Alls", instanceWithInferedType, &instanceWithInferedType.Alls, formGroup, probe)
 		AssociationSliceToForm("Choices", instanceWithInferedType, &instanceWithInferedType.Choices, formGroup, probe)
 		AssociationSliceToForm("Groups", instanceWithInferedType, &instanceWithInferedType.Groups, formGroup, probe)
+		AssociationSliceToForm("Elements", instanceWithInferedType, &instanceWithInferedType.Elements, formGroup, probe)
 		AssociationSliceToForm("Attributes", instanceWithInferedType, &instanceWithInferedType.Attributes, formGroup, probe)
 		AssociationSliceToForm("AttributeGroups", instanceWithInferedType, &instanceWithInferedType.AttributeGroups, formGroup, probe)
 		{
@@ -585,6 +586,50 @@ func FillUpForm[T models.Gongstruct](
 		{
 			var rf models.ReverseField
 			_ = rf
+			rf.GongstructName = "ComplexType"
+			rf.Fieldname = "Elements"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.ComplexType),
+					"Elements",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.ComplexType, *models.Element](
+					nil,
+					"Elements",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
+		{
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "Group"
+			rf.Fieldname = "Elements"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.Group),
+					"Elements",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.Group, *models.Element](
+					nil,
+					"Elements",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
+		{
+			var rf models.ReverseField
+			_ = rf
 			rf.GongstructName = "Schema"
 			rf.Fieldname = "Elements"
 			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
@@ -677,6 +722,7 @@ func FillUpForm[T models.Gongstruct](
 		AssociationSliceToForm("Alls", instanceWithInferedType, &instanceWithInferedType.Alls, formGroup, probe)
 		AssociationSliceToForm("Choices", instanceWithInferedType, &instanceWithInferedType.Choices, formGroup, probe)
 		AssociationSliceToForm("Groups", instanceWithInferedType, &instanceWithInferedType.Groups, formGroup, probe)
+		AssociationSliceToForm("Elements", instanceWithInferedType, &instanceWithInferedType.Elements, formGroup, probe)
 		{
 			var rf models.ReverseField
 			_ = rf
@@ -919,11 +965,11 @@ func FillUpForm[T models.Gongstruct](
 			false, false, 0, false, 0)
 		BasicFieldtoForm("MaxOccurs", instanceWithInferedType.MaxOccurs, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
-		AssociationSliceToForm("Elements", instanceWithInferedType, &instanceWithInferedType.Elements, formGroup, probe)
 		AssociationSliceToForm("Sequences", instanceWithInferedType, &instanceWithInferedType.Sequences, formGroup, probe)
 		AssociationSliceToForm("Alls", instanceWithInferedType, &instanceWithInferedType.Alls, formGroup, probe)
 		AssociationSliceToForm("Choices", instanceWithInferedType, &instanceWithInferedType.Choices, formGroup, probe)
 		AssociationSliceToForm("Groups", instanceWithInferedType, &instanceWithInferedType.Groups, formGroup, probe)
+		AssociationSliceToForm("Elements", instanceWithInferedType, &instanceWithInferedType.Elements, formGroup, probe)
 		{
 			var rf models.ReverseField
 			_ = rf

@@ -66,6 +66,9 @@ type GroupPointersEncoding struct {
 
 	// field Groups is a slice of pointers to another Struct (optional or 0..1)
 	Groups IntSlice `gorm:"type:TEXT"`
+
+	// field Elements is a slice of pointers to another Struct (optional or 0..1)
+	Elements IntSlice `gorm:"type:TEXT"`
 }
 
 // GroupDB describes a group in the database
@@ -359,6 +362,24 @@ func (backRepoGroup *BackRepoGroupStruct) CommitPhaseTwoInstance(backRepo *BackR
 				append(groupDB.GroupPointersEncoding.Groups, int(groupAssocEnd_DB.ID))
 		}
 
+		// 1. reset
+		groupDB.GroupPointersEncoding.Elements = make([]int, 0)
+		// 2. encode
+		for _, elementAssocEnd := range group.Elements {
+			elementAssocEnd_DB :=
+				backRepo.BackRepoElement.GetElementDBFromElementPtr(elementAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the elementAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if elementAssocEnd_DB == nil {
+				continue
+			}
+			
+			groupDB.GroupPointersEncoding.Elements =
+				append(groupDB.GroupPointersEncoding.Elements, int(elementAssocEnd_DB.ID))
+		}
+
 		query := backRepoGroup.db.Save(&groupDB)
 		if query.Error != nil {
 			log.Fatalln(query.Error)
@@ -516,6 +537,15 @@ func (groupDB *GroupDB) DecodePointers(backRepo *BackRepoStruct, group *models.G
 	group.Groups = group.Groups[:0]
 	for _, _Groupid := range groupDB.GroupPointersEncoding.Groups {
 		group.Groups = append(group.Groups, backRepo.BackRepoGroup.Map_GroupDBID_GroupPtr[uint(_Groupid)])
+	}
+
+	// This loop redeem group.Elements in the stage from the encode in the back repo
+	// It parses all ElementDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	group.Elements = group.Elements[:0]
+	for _, _Elementid := range groupDB.GroupPointersEncoding.Elements {
+		group.Elements = append(group.Elements, backRepo.BackRepoElement.Map_ElementDBID_ElementPtr[uint(_Elementid)])
 	}
 
 	return

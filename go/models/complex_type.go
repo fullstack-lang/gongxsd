@@ -48,7 +48,7 @@ func (ct *ComplexType) GetFields(stage *StageStruct) (fields string) {
 
 	map_Name_Elems := make(map[string]*Element)
 
-	ct.Composer.generateElements(map_Name_Elems, stMap, ctMap, setOfGoIdentifiers, &fields)
+	ct.Composer.generateElements(map_Name_Elems, stMap, ctMap, groupMap, setOfGoIdentifiers, &fields)
 
 	return
 }
