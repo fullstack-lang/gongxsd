@@ -23,4 +23,5 @@ type Element struct {
 
 	SimpleType  *SimpleType  `xml:"simpleType"`
 	ComplexType *ComplexType `xml:"complexType"`
+	Groups      []*Group     `xml:"group"`
 }

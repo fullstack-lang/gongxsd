@@ -182,6 +182,9 @@ type Group_WOP struct {
 	Name string
 	NameXSD string
 	Ref string
+	IsInlined bool
+	HasNameConflict bool
+	GoIdentifier string
 }
 
 func (from *Group) CopyBasicFields(to *Group) {
@@ -189,6 +192,9 @@ func (from *Group) CopyBasicFields(to *Group) {
 	to.Name = from.Name
 	to.NameXSD = from.NameXSD
 	to.Ref = from.Ref
+	to.IsInlined = from.IsInlined
+	to.HasNameConflict = from.HasNameConflict
+	to.GoIdentifier = from.GoIdentifier
 }
 
 type Length_WOP struct {

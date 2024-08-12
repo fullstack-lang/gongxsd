@@ -58,6 +58,9 @@ type ElementPointersEncoding struct {
 	// field ComplexType is a pointer to another Struct (optional or 0..1)
 	// This field is generated into another field to enable AS ONE association
 	ComplexTypeID sql.NullInt64
+
+	// field Groups is a slice of pointers to another Struct (optional or 0..1)
+	Groups IntSlice `gorm:"type:TEXT"`
 }
 
 // ElementDB describes a element in the database
@@ -344,6 +347,24 @@ func (backRepoElement *BackRepoElementStruct) CommitPhaseTwoInstance(backRepo *B
 			elementDB.ComplexTypeID.Valid = true
 		}
 
+		// 1. reset
+		elementDB.ElementPointersEncoding.Groups = make([]int, 0)
+		// 2. encode
+		for _, groupAssocEnd := range element.Groups {
+			groupAssocEnd_DB :=
+				backRepo.BackRepoGroup.GetGroupDBFromGroupPtr(groupAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the groupAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if groupAssocEnd_DB == nil {
+				continue
+			}
+			
+			elementDB.ElementPointersEncoding.Groups =
+				append(elementDB.ElementPointersEncoding.Groups, int(groupAssocEnd_DB.ID))
+		}
+
 		query := backRepoElement.db.Save(&elementDB)
 		if query.Error != nil {
 			log.Fatalln(query.Error)
@@ -472,6 +493,15 @@ func (elementDB *ElementDB) DecodePointers(backRepo *BackRepoStruct, element *mo
 	if elementDB.ComplexTypeID.Int64 != 0 {
 		element.ComplexType = backRepo.BackRepoComplexType.Map_ComplexTypeDBID_ComplexTypePtr[uint(elementDB.ComplexTypeID.Int64)]
 	}
+	// This loop redeem element.Groups in the stage from the encode in the back repo
+	// It parses all GroupDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	element.Groups = element.Groups[:0]
+	for _, _Groupid := range elementDB.ElementPointersEncoding.Groups {
+		element.Groups = append(element.Groups, backRepo.BackRepoGroup.Map_GroupDBID_GroupPtr[uint(_Groupid)])
+	}
+
 	return
 }
 

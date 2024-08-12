@@ -526,6 +526,9 @@ func (stage *StageStruct) StageBranchElement(element *Element) {
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _group := range element.Groups {
+		StageBranch(stage, _group)
+	}
 
 }
 
@@ -559,6 +562,9 @@ func (stage *StageStruct) StageBranchGroup(group *Group) {
 	//insertion point for the staging of instances referenced by pointers
 	if group.Annotation != nil {
 		StageBranch(stage, group.Annotation)
+	}
+	if group.EnclosingElement != nil {
+		StageBranch(stage, group.EnclosingElement)
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
@@ -1216,6 +1222,9 @@ func CopyBranchElement(mapOrigCopy map[any]any, elementFrom *Element) (elementTo
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _group := range elementFrom.Groups {
+		elementTo.Groups = append(elementTo.Groups, CopyBranchGroup(mapOrigCopy, _group))
+	}
 
 	return
 }
@@ -1257,6 +1266,9 @@ func CopyBranchGroup(mapOrigCopy map[any]any, groupFrom *Group) (groupTo *Group)
 	//insertion point for the staging of instances referenced by pointers
 	if groupFrom.Annotation != nil {
 		groupTo.Annotation = CopyBranchAnnotation(mapOrigCopy, groupFrom.Annotation)
+	}
+	if groupFrom.EnclosingElement != nil {
+		groupTo.EnclosingElement = CopyBranchElement(mapOrigCopy, groupFrom.EnclosingElement)
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
@@ -1909,6 +1921,9 @@ func (stage *StageStruct) UnstageBranchElement(element *Element) {
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _group := range element.Groups {
+		UnstageBranch(stage, _group)
+	}
 
 }
 
@@ -1942,6 +1957,9 @@ func (stage *StageStruct) UnstageBranchGroup(group *Group) {
 	//insertion point for the staging of instances referenced by pointers
 	if group.Annotation != nil {
 		UnstageBranch(stage, group.Annotation)
+	}
+	if group.EnclosingElement != nil {
+		UnstageBranch(stage, group.EnclosingElement)
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers

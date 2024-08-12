@@ -417,6 +417,25 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 
 	case *Element:
 		// insertion point per field
+		if fieldName == "Groups" {
+
+			// walk all instances of the owning type
+			for _instance := range *GetGongstructInstancesSetFromPointerType[OwningType](stage) {
+				if any(_instance).(*Element) != owningInstanceInfered {
+					_inferedTypeInstance := any(_instance).(*Element)
+					reference := make([]FieldType, 0)
+					targetFieldSlice := any(_inferedTypeInstance.Groups).([]FieldType)
+					copy(targetFieldSlice, reference)
+					_inferedTypeInstance.Groups = _inferedTypeInstance.Groups[0:]
+					for _, fieldInstance := range reference {
+						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
+							_inferedTypeInstance.Groups =
+								append(_inferedTypeInstance.Groups, any(fieldInstance).(*Group))
+						}
+					}
+				}
+			}
+		}
 
 	case *Enumeration:
 		// insertion point per field
@@ -932,6 +951,14 @@ func (stage *StageStruct) ComputeReverseMaps() {
 
 	// Compute reverse map for named struct Element
 	// insertion point per field
+	clear(stage.Element_Groups_reverseMap)
+	stage.Element_Groups_reverseMap = make(map[*Group]*Element)
+	for element := range stage.Elements {
+		_ = element
+		for _, _group := range element.Groups {
+			stage.Element_Groups_reverseMap[_group] = element
+		}
+	}
 
 	// Compute reverse map for named struct Enumeration
 	// insertion point per field

@@ -154,6 +154,8 @@ type StageStruct struct {
 	Elements_mapString map[string]*Element
 
 	// insertion point for slice of pointers maps
+	Element_Groups_reverseMap map[*Group]*Element
+
 	OnAfterElementCreateCallback OnAfterCreateInterface[Element]
 	OnAfterElementUpdateCallback OnAfterUpdateInterface[Element]
 	OnAfterElementDeleteCallback OnAfterDeleteInterface[Element]
@@ -2508,6 +2510,8 @@ func GetAssociationName[Type Gongstruct]() *Type {
 			SimpleType: &SimpleType{Name: "SimpleType"},
 			// field is initialized with an instance of ComplexType with the name of the field
 			ComplexType: &ComplexType{Name: "ComplexType"},
+			// field is initialized with an instance of Group with the name of the field
+			Groups: []*Group{{Name: "Groups"}},
 			// field is initialized with ElementWithAnnotation as it is a composite
 			ElementWithAnnotation: ElementWithAnnotation{
 				// per field init
@@ -2528,6 +2532,8 @@ func GetAssociationName[Type Gongstruct]() *Type {
 	case Group:
 		return any(&Group{
 			// Initialisation of associations
+			// field is initialized with an instance of Element with the name of the field
+			EnclosingElement: &Element{Name: "EnclosingElement"},
 			// field is initialized with ElementWithAnnotation as it is a composite
 			ElementWithAnnotation: ElementWithAnnotation{
 				// per field init
@@ -2950,6 +2956,23 @@ func GetPointerReverseMap[Start, End Gongstruct](fieldname string, stage *StageS
 					}
 					groups = append(groups, group)
 					res[annotation_] = groups
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "EnclosingElement":
+			res := make(map[*Element][]*Group)
+			for group := range stage.Groups {
+				if group.EnclosingElement != nil {
+					element_ := group.EnclosingElement
+					var groups []*Group
+					_, ok := res[element_]
+					if ok {
+						groups = res[element_]
+					} else {
+						groups = make([]*Group, 0)
+					}
+					groups = append(groups, group)
+					res[element_] = groups
 				}
 			}
 			return any(res).(map[*End][]*Start)
@@ -3617,6 +3640,14 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 	case Element:
 		switch fieldname {
 		// insertion point for per direct association field
+		case "Groups":
+			res := make(map[*Group]*Element)
+			for element := range stage.Elements {
+				for _, group_ := range element.Groups {
+					res[group_] = element
+				}
+			}
+			return any(res).(map[*End]*Start)
 		}
 	// reverse maps of direct associations of Enumeration
 	case Enumeration:
@@ -3955,11 +3986,11 @@ func GetFields[Type Gongstruct]() (res []string) {
 	case Documentation:
 		res = []string{"Name", "Text", "Source", "Lang"}
 	case Element:
-		res = []string{"Name", "HasNameConflict", "GoIdentifier", "Annotation", "NameXSD", "Type", "MinOccurs", "MaxOccurs", "Default", "Fixed", "Nillable", "Ref", "Abstract", "Form", "Block", "Final", "SimpleType", "ComplexType"}
+		res = []string{"Name", "HasNameConflict", "GoIdentifier", "Annotation", "NameXSD", "Type", "MinOccurs", "MaxOccurs", "Default", "Fixed", "Nillable", "Ref", "Abstract", "Form", "Block", "Final", "SimpleType", "ComplexType", "Groups"}
 	case Enumeration:
 		res = []string{"Name", "Annotation", "Value"}
 	case Group:
-		res = []string{"Name", "Annotation", "NameXSD", "Ref", "Sequences", "Alls", "Choices", "Groups"}
+		res = []string{"Name", "Annotation", "NameXSD", "Ref", "IsInlined", "EnclosingElement", "HasNameConflict", "GoIdentifier", "Sequences", "Alls", "Choices", "Groups"}
 	case Length:
 		res = []string{"Name", "Annotation", "Value"}
 	case MaxInclusive:
@@ -4109,6 +4140,9 @@ func GetReverseFields[Type Gongstruct]() (res []ReverseField) {
 		rf.GongstructName = "ComplexType"
 		rf.Fieldname = "Groups"
 		res = append(res, rf)
+		rf.GongstructName = "Element"
+		rf.Fieldname = "Groups"
+		res = append(res, rf)
 		rf.GongstructName = "Group"
 		rf.Fieldname = "Groups"
 		res = append(res, rf)
@@ -4201,11 +4235,11 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 	case *Documentation:
 		res = []string{"Name", "Text", "Source", "Lang"}
 	case *Element:
-		res = []string{"Name", "HasNameConflict", "GoIdentifier", "Annotation", "NameXSD", "Type", "MinOccurs", "MaxOccurs", "Default", "Fixed", "Nillable", "Ref", "Abstract", "Form", "Block", "Final", "SimpleType", "ComplexType"}
+		res = []string{"Name", "HasNameConflict", "GoIdentifier", "Annotation", "NameXSD", "Type", "MinOccurs", "MaxOccurs", "Default", "Fixed", "Nillable", "Ref", "Abstract", "Form", "Block", "Final", "SimpleType", "ComplexType", "Groups"}
 	case *Enumeration:
 		res = []string{"Name", "Annotation", "Value"}
 	case *Group:
-		res = []string{"Name", "Annotation", "NameXSD", "Ref", "Sequences", "Alls", "Choices", "Groups"}
+		res = []string{"Name", "Annotation", "NameXSD", "Ref", "IsInlined", "EnclosingElement", "HasNameConflict", "GoIdentifier", "Sequences", "Alls", "Choices", "Groups"}
 	case *Length:
 		res = []string{"Name", "Annotation", "Value"}
 	case *MaxInclusive:
@@ -4534,6 +4568,13 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 			if inferedInstance.ComplexType != nil {
 				res = inferedInstance.ComplexType.Name
 			}
+		case "Groups":
+			for idx, __instance__ := range inferedInstance.Groups {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
 		}
 	case *Enumeration:
 		switch fieldName {
@@ -4560,6 +4601,16 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 			res = inferedInstance.NameXSD
 		case "Ref":
 			res = inferedInstance.Ref
+		case "IsInlined":
+			res = fmt.Sprintf("%t", inferedInstance.IsInlined)
+		case "EnclosingElement":
+			if inferedInstance.EnclosingElement != nil {
+				res = inferedInstance.EnclosingElement.Name
+			}
+		case "HasNameConflict":
+			res = fmt.Sprintf("%t", inferedInstance.HasNameConflict)
+		case "GoIdentifier":
+			res = inferedInstance.GoIdentifier
 		case "Sequences":
 			for idx, __instance__ := range inferedInstance.Sequences {
 				if idx > 0 {
@@ -5168,6 +5219,13 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 			if inferedInstance.ComplexType != nil {
 				res = inferedInstance.ComplexType.Name
 			}
+		case "Groups":
+			for idx, __instance__ := range inferedInstance.Groups {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
 		}
 	case Enumeration:
 		switch fieldName {
@@ -5194,6 +5252,16 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 			res = inferedInstance.NameXSD
 		case "Ref":
 			res = inferedInstance.Ref
+		case "IsInlined":
+			res = fmt.Sprintf("%t", inferedInstance.IsInlined)
+		case "EnclosingElement":
+			if inferedInstance.EnclosingElement != nil {
+				res = inferedInstance.EnclosingElement.Name
+			}
+		case "HasNameConflict":
+			res = fmt.Sprintf("%t", inferedInstance.HasNameConflict)
+		case "GoIdentifier":
+			res = inferedInstance.GoIdentifier
 		case "Sequences":
 			for idx, __instance__ := range inferedInstance.Sequences {
 				if idx > 0 {

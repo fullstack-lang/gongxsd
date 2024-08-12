@@ -51,6 +51,10 @@ type GroupPointersEncoding struct {
 	// This field is generated into another field to enable AS ONE association
 	AnnotationID sql.NullInt64
 
+	// field EnclosingElement is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	EnclosingElementID sql.NullInt64
+
 	// field Sequences is a slice of pointers to another Struct (optional or 0..1)
 	Sequences IntSlice `gorm:"type:TEXT"`
 
@@ -83,6 +87,17 @@ type GroupDB struct {
 
 	// Declation for basic field groupDB.Ref
 	Ref_Data sql.NullString
+
+	// Declation for basic field groupDB.IsInlined
+	// provide the sql storage for the boolan
+	IsInlined_Data sql.NullBool
+
+	// Declation for basic field groupDB.HasNameConflict
+	// provide the sql storage for the boolan
+	HasNameConflict_Data sql.NullBool
+
+	// Declation for basic field groupDB.GoIdentifier
+	GoIdentifier_Data sql.NullString
 	
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
@@ -111,6 +126,12 @@ type GroupWOP struct {
 	NameXSD string `xlsx:"2"`
 
 	Ref string `xlsx:"3"`
+
+	IsInlined bool `xlsx:"4"`
+
+	HasNameConflict bool `xlsx:"5"`
+
+	GoIdentifier string `xlsx:"6"`
 	// insertion for WOP pointer fields
 }
 
@@ -120,6 +141,9 @@ var Group_Fields = []string{
 	"Name",
 	"NameXSD",
 	"Ref",
+	"IsInlined",
+	"HasNameConflict",
+	"GoIdentifier",
 }
 
 type BackRepoGroupStruct struct {
@@ -249,6 +273,18 @@ func (backRepoGroup *BackRepoGroupStruct) CommitPhaseTwoInstance(backRepo *BackR
 		} else {
 			groupDB.AnnotationID.Int64 = 0
 			groupDB.AnnotationID.Valid = true
+		}
+
+		// commit pointer value group.EnclosingElement translates to updating the group.EnclosingElementID
+		groupDB.EnclosingElementID.Valid = true // allow for a 0 value (nil association)
+		if group.EnclosingElement != nil {
+			if EnclosingElementId, ok := backRepo.BackRepoElement.Map_ElementPtr_ElementDBID[group.EnclosingElement]; ok {
+				groupDB.EnclosingElementID.Int64 = int64(EnclosingElementId)
+				groupDB.EnclosingElementID.Valid = true
+			}
+		} else {
+			groupDB.EnclosingElementID.Int64 = 0
+			groupDB.EnclosingElementID.Valid = true
 		}
 
 		// 1. reset
@@ -441,6 +477,11 @@ func (groupDB *GroupDB) DecodePointers(backRepo *BackRepoStruct, group *models.G
 	if groupDB.AnnotationID.Int64 != 0 {
 		group.Annotation = backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(groupDB.AnnotationID.Int64)]
 	}
+	// EnclosingElement field
+	group.EnclosingElement = nil
+	if groupDB.EnclosingElementID.Int64 != 0 {
+		group.EnclosingElement = backRepo.BackRepoElement.Map_ElementDBID_ElementPtr[uint(groupDB.EnclosingElementID.Int64)]
+	}
 	// This loop redeem group.Sequences in the stage from the encode in the back repo
 	// It parses all SequenceDB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance
@@ -519,6 +560,15 @@ func (groupDB *GroupDB) CopyBasicFieldsFromGroup(group *models.Group) {
 
 	groupDB.Ref_Data.String = group.Ref
 	groupDB.Ref_Data.Valid = true
+
+	groupDB.IsInlined_Data.Bool = group.IsInlined
+	groupDB.IsInlined_Data.Valid = true
+
+	groupDB.HasNameConflict_Data.Bool = group.HasNameConflict
+	groupDB.HasNameConflict_Data.Valid = true
+
+	groupDB.GoIdentifier_Data.String = group.GoIdentifier
+	groupDB.GoIdentifier_Data.Valid = true
 }
 
 // CopyBasicFieldsFromGroup_WOP
@@ -533,6 +583,15 @@ func (groupDB *GroupDB) CopyBasicFieldsFromGroup_WOP(group *models.Group_WOP) {
 
 	groupDB.Ref_Data.String = group.Ref
 	groupDB.Ref_Data.Valid = true
+
+	groupDB.IsInlined_Data.Bool = group.IsInlined
+	groupDB.IsInlined_Data.Valid = true
+
+	groupDB.HasNameConflict_Data.Bool = group.HasNameConflict
+	groupDB.HasNameConflict_Data.Valid = true
+
+	groupDB.GoIdentifier_Data.String = group.GoIdentifier
+	groupDB.GoIdentifier_Data.Valid = true
 }
 
 // CopyBasicFieldsFromGroupWOP
@@ -547,6 +606,15 @@ func (groupDB *GroupDB) CopyBasicFieldsFromGroupWOP(group *GroupWOP) {
 
 	groupDB.Ref_Data.String = group.Ref
 	groupDB.Ref_Data.Valid = true
+
+	groupDB.IsInlined_Data.Bool = group.IsInlined
+	groupDB.IsInlined_Data.Valid = true
+
+	groupDB.HasNameConflict_Data.Bool = group.HasNameConflict
+	groupDB.HasNameConflict_Data.Valid = true
+
+	groupDB.GoIdentifier_Data.String = group.GoIdentifier
+	groupDB.GoIdentifier_Data.Valid = true
 }
 
 // CopyBasicFieldsToGroup
@@ -555,6 +623,9 @@ func (groupDB *GroupDB) CopyBasicFieldsToGroup(group *models.Group) {
 	group.Name = groupDB.Name_Data.String
 	group.NameXSD = groupDB.NameXSD_Data.String
 	group.Ref = groupDB.Ref_Data.String
+	group.IsInlined = groupDB.IsInlined_Data.Bool
+	group.HasNameConflict = groupDB.HasNameConflict_Data.Bool
+	group.GoIdentifier = groupDB.GoIdentifier_Data.String
 }
 
 // CopyBasicFieldsToGroup_WOP
@@ -563,6 +634,9 @@ func (groupDB *GroupDB) CopyBasicFieldsToGroup_WOP(group *models.Group_WOP) {
 	group.Name = groupDB.Name_Data.String
 	group.NameXSD = groupDB.NameXSD_Data.String
 	group.Ref = groupDB.Ref_Data.String
+	group.IsInlined = groupDB.IsInlined_Data.Bool
+	group.HasNameConflict = groupDB.HasNameConflict_Data.Bool
+	group.GoIdentifier = groupDB.GoIdentifier_Data.String
 }
 
 // CopyBasicFieldsToGroupWOP
@@ -572,6 +646,9 @@ func (groupDB *GroupDB) CopyBasicFieldsToGroupWOP(group *GroupWOP) {
 	group.Name = groupDB.Name_Data.String
 	group.NameXSD = groupDB.NameXSD_Data.String
 	group.Ref = groupDB.Ref_Data.String
+	group.IsInlined = groupDB.IsInlined_Data.Bool
+	group.HasNameConflict = groupDB.HasNameConflict_Data.Bool
+	group.GoIdentifier = groupDB.GoIdentifier_Data.String
 }
 
 // Backup generates a json file from a slice of all GroupDB instances in the backrepo
@@ -733,6 +810,12 @@ func (backRepoGroup *BackRepoGroupStruct) RestorePhaseTwo() {
 		if groupDB.AnnotationID.Int64 != 0 {
 			groupDB.AnnotationID.Int64 = int64(BackRepoAnnotationid_atBckpTime_newID[uint(groupDB.AnnotationID.Int64)])
 			groupDB.AnnotationID.Valid = true
+		}
+
+		// reindexing EnclosingElement field
+		if groupDB.EnclosingElementID.Int64 != 0 {
+			groupDB.EnclosingElementID.Int64 = int64(BackRepoElementid_atBckpTime_newID[uint(groupDB.EnclosingElementID.Int64)])
+			groupDB.EnclosingElementID.Valid = true
 		}
 
 		// update databse with new index encoding

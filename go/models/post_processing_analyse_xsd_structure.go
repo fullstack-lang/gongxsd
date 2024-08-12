@@ -10,4 +10,6 @@ func PostProcessingAnalyzeXSDStructure(stage *StageStruct) {
 			element.ComplexType.EnclosingElement = element
 		}
 	}
+
+
 }

@@ -899,6 +899,12 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					case "Element":
 						switch fieldName {
 						// insertion point for slice of pointers assign code
+						case "Groups":
+							// remove first and last char
+							targetIdentifier := ident.Name
+							target := __gong__map_Group[targetIdentifier]
+							__gong__map_Element[identifier].Groups =
+								append(__gong__map_Element[identifier].Groups, target)
 						}
 					case "Enumeration":
 						switch fieldName {
@@ -1330,6 +1336,10 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					// remove first and last char
 					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
 					__gong__map_Group[identifier].Ref = fielValue
+				case "GoIdentifier":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_Group[identifier].GoIdentifier = fielValue
 				}
 			case "Length":
 				switch fieldName {
@@ -1605,6 +1615,23 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 				case "Annotation":
 					targetIdentifier := ident.Name
 					__gong__map_Group[identifier].Annotation = __gong__map_Annotation[targetIdentifier]
+				case "IsInlined":
+					// convert string to boolean
+					fielValue, err := strconv.ParseBool(ident.Name)
+					if err != nil {
+						log.Fatalln(err)
+					}
+					__gong__map_Group[identifier].IsInlined = fielValue
+				case "EnclosingElement":
+					targetIdentifier := ident.Name
+					__gong__map_Group[identifier].EnclosingElement = __gong__map_Element[targetIdentifier]
+				case "HasNameConflict":
+					// convert string to boolean
+					fielValue, err := strconv.ParseBool(ident.Name)
+					if err != nil {
+						log.Fatalln(err)
+					}
+					__gong__map_Group[identifier].HasNameConflict = fielValue
 				}
 			case "Length":
 				switch fieldName {

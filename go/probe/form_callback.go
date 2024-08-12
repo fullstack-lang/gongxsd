@@ -1786,6 +1786,14 @@ func (groupFormCallback *GroupFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(group_.NameXSD), formDiv)
 		case "Ref":
 			FormDivBasicFieldToField(&(group_.Ref), formDiv)
+		case "IsInlined":
+			FormDivBasicFieldToField(&(group_.IsInlined), formDiv)
+		case "EnclosingElement":
+			FormDivSelectFieldToField(&(group_.EnclosingElement), groupFormCallback.probe.stageOfInterest, formDiv)
+		case "HasNameConflict":
+			FormDivBasicFieldToField(&(group_.HasNameConflict), formDiv)
+		case "GoIdentifier":
+			FormDivBasicFieldToField(&(group_.GoIdentifier), formDiv)
 		case "All:Groups":
 			// we need to retrieve the field owner before the change
 			var pastAllOwner *models.All
@@ -1908,6 +1916,48 @@ func (groupFormCallback *GroupFormCallback) OnSave() {
 							}
 						} else {
 							newComplexTypeOwner.Groups = append(newComplexTypeOwner.Groups, group_)
+						}
+					}
+				}
+			}
+		case "Element:Groups":
+			// we need to retrieve the field owner before the change
+			var pastElementOwner *models.Element
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "Element"
+			rf.Fieldname = "Groups"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				groupFormCallback.probe.stageOfInterest,
+				groupFormCallback.probe.backRepoOfInterest,
+				group_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastElementOwner = reverseFieldOwner.(*models.Element)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastElementOwner != nil {
+					idx := slices.Index(pastElementOwner.Groups, group_)
+					pastElementOwner.Groups = slices.Delete(pastElementOwner.Groups, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _element := range *models.GetGongstructInstancesSet[models.Element](groupFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _element.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newElementOwner := _element // we have a match
+						if pastElementOwner != nil {
+							if newElementOwner != pastElementOwner {
+								idx := slices.Index(pastElementOwner.Groups, group_)
+								pastElementOwner.Groups = slices.Delete(pastElementOwner.Groups, idx, idx+1)
+								newElementOwner.Groups = append(newElementOwner.Groups, group_)
+							}
+						} else {
+							newElementOwner.Groups = append(newElementOwner.Groups, group_)
 						}
 					}
 				}

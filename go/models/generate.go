@@ -28,7 +28,7 @@ func Generate(stage *StageStruct, outputFilePath string) {
 			continue
 		}
 
-		fields := ct.Fields(stage)
+		fields := ct.GetFields(stage)
 		templInsertionLevel0[ModelsFileTmplLevel0AllGongstructsCode] += Replace3(
 			ModelsFileTmplLevel1Code[ModelsFileTmplLevel1OneGongstructCode],
 
@@ -40,7 +40,27 @@ func Generate(stage *StageStruct, outputFilePath string) {
 			"{{"+string(rune(ModelsFileTmplLevel2Fields))+"}}",
 			fields,
 		)
+	}
 
+	for _, group := range GetGongstrucsSorted[*Group](stage) {
+
+		// not the inline complex type
+		if group.Ref != "" {
+			continue
+		}
+
+		fields := group.GetFields(stage)
+		templInsertionLevel0[ModelsFileTmplLevel0AllGongstructsCode] += Replace3(
+			ModelsFileTmplLevel1Code[ModelsFileTmplLevel1OneGongstructCode],
+
+			"{{"+string(rune(ModelsFileTmplLevel2Structname))+"}}", group.GoIdentifier,
+
+			"{{"+string(rune(ModelsFileTmplLevel2Source))+"}}",
+			`named group "`+group.Name+`"`,
+
+			"{{"+string(rune(ModelsFileTmplLevel2Fields))+"}}",
+			fields,
+		)
 	}
 
 	// elements with inline complex type
@@ -62,7 +82,7 @@ func Generate(stage *StageStruct, outputFilePath string) {
 // Identifier is post fixed because more than one xsd element has the name "` + element.Name + `"`
 		}
 
-		fields := element.ComplexType.Fields(stage)
+		fields := element.ComplexType.GetFields(stage)
 
 		templInsertionLevel0[ModelsFileTmplLevel0AllGongstructsCode] += Replace3(
 			ModelsFileTmplLevel1Code[ModelsFileTmplLevel1OneGongstructCode],

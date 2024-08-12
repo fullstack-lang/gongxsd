@@ -9,7 +9,8 @@ func prefix(s string) string {
 func PostProcessingNames(stage *StageStruct) {
 
 	// map of embedded complex struct within elements
-	map_EmbeddedComplexStruct := make(map[*ComplexType]*Element)
+	map_EmbeddedComplexType := make(map[*ComplexType]*Element)
+	map_EmbeddedGroup := make(map[*Group]*Element)
 	setOfGoIdentifiers := make(map[string]any)
 
 	for x := range *GetGongstructInstancesSet[Element](stage) {
@@ -17,12 +18,17 @@ func PostProcessingNames(stage *StageStruct) {
 		x.GoIdentifier = xsdNameToGoIdentifier(x.Name)
 
 		if x.ComplexType != nil {
-			map_EmbeddedComplexStruct[x.ComplexType] = x
+			map_EmbeddedComplexType[x.ComplexType] = x
 
 			// loop until the name of the element is not in collision with an existing
 			// diagram name
 			computeGoIdentifier(x.Name, &x.WithGoIdentifier, setOfGoIdentifiers)
 		}
+		for _, group := range x.Groups {
+			map_EmbeddedGroup[group] = x
+			computeGoIdentifier(x.Name, &x.WithGoIdentifier, setOfGoIdentifiers)
+		}
+
 		if x.Annotation != nil {
 			x.Annotation.Name = prefix(x.Name)
 		}
@@ -33,7 +39,32 @@ func PostProcessingNames(stage *StageStruct) {
 
 		computeGoIdentifier(x.Name, &x.WithGoIdentifier, setOfGoIdentifiers)
 
-		if _x, ok := map_EmbeddedComplexStruct[x]; ok {
+		if _x, ok := map_EmbeddedComplexType[x]; ok {
+			x.Name = prefix(_x.Name)
+		}
+
+		for _, s := range x.Sequences {
+			s.Name = prefix(x.Name)
+		}
+		for _, c := range x.Choices {
+			c.Name = prefix(x.Name)
+		}
+		for _, a := range x.Alls {
+			a.Name = prefix(x.Name)
+		}
+		if x.Annotation != nil {
+			x.Annotation.Name = prefix(x.Name)
+		}
+		for _, ag := range x.AttributeGroups {
+			ag.Name = prefix(x.Name)
+		}
+	}
+	for x := range *GetGongstructInstancesSet[Group](stage) {
+		x.Name = x.NameXSD
+
+		computeGoIdentifier(x.Name, &x.WithGoIdentifier, setOfGoIdentifiers)
+
+		if _x, ok := map_EmbeddedComplexType[x]; ok {
 			x.Name = prefix(_x.Name)
 		}
 

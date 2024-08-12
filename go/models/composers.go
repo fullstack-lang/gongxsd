@@ -69,3 +69,29 @@ type Choice struct {
 	Elements  []*Element `xml:"element"`
 	Composer
 }
+
+func (composer *Composer) generateElements(
+	map_Name_Elems map[string]*Element,
+	stMap map[string]*SimpleType,
+	ctMap map[string]*ComplexType,
+	setOfGoIdentifiers map[string]any,
+	fields *string,
+) {
+	elems := composer.getElements(map_Name_Elems)
+
+	for _, elem := range elems {
+
+		computeGoIdentifier(elem.GoIdentifier, &elem.WithGoIdentifier, setOfGoIdentifiers)
+
+		goType := generateGoTypeFromSimpleType(elem.Type, stMap)
+		if goType != "" {
+			*fields += "\n\n\t// generated from element \"" + elem.NameXSD + "\" of type " + elem.Type +
+				"\n\t" + elem.GoIdentifier + " " + goType + " " + "`" + `xml:"` + elem.NameXSD + `"` + "`"
+		} else {
+			if ct, ok := ctMap[elem.Type]; ok {
+				*fields += "\n\n\t// generated from element \"" + elem.NameXSD + "\" of type " + ct.Name +
+					"\n\t" + elem.GoIdentifier + " []*" + ct.GoIdentifier + " " + "`" + `xml:"` + elem.NameXSD + `"` + "`"
+			}
+		}
+	}
+}
