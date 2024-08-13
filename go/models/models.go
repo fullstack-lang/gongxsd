@@ -12,7 +12,7 @@ type ElementWithValueAttribute struct {
 	Value string `xml:"value,attr"`
 }
 
-type ElementWithAnnotation struct {
+type Annotated struct {
 	Annotation *Annotation `xml:"annotation"`
 }
 
@@ -31,7 +31,7 @@ type Documentation struct {
 type Schema struct {
 	Name string
 	Xs   string `xml:"xs,attr"`
-	ElementWithAnnotation
+	Annotated
 	Elements        []*Element        `xml:"element"`
 	SimpleTypes     []*SimpleType     `xml:"simpleType"`
 	ComplexTypes    []*ComplexType    `xml:"complexType"`
@@ -39,32 +39,9 @@ type Schema struct {
 	Groups          []*Group          `xml:"group"`
 }
 
-type SimpleType struct {
-	Name string
-	ElementWithAnnotation
-	ElementWithNameAttribute
-	Restriction *Restriction `xml:"restriction"`
-	Union       *Union       `xml:"union"`
-}
-
-type Restriction struct {
-	Name string
-	ElementWithAnnotation
-	Base         string         `xml:"base,attr"`
-	Enumerations []*Enumeration `xml:"enumeration"`
-	MinInclusive *MinInclusive  `xml:"minInclusive"`
-	MaxInclusive *MaxInclusive  `xml:"maxInclusive"`
-	Pattern      *Pattern       `xml:"pattern"`
-	WhiteSpace   *WhiteSpace    `xml:"whiteSpace"`
-	MinLength    *MinLength     `xml:"minLength"`
-	MaxLength    *MaxLength     `xml:"maxLength"`
-	Length       *Length        `xml:"length"`
-	TotalDigit   *TotalDigit    `xml:"totalDigits"`
-}
-
 type Union struct {
 	Name string
-	ElementWithAnnotation
+	Annotated
 	MemberTypes string `xml:"memberTypes,attr"`
 }
 
@@ -72,7 +49,7 @@ type Attribute struct {
 	Name string
 	ElementWithNameAttribute
 	ElementWithTypeAttribute
-	ElementWithAnnotation
+	Annotated
 
 	WithGoIdentifier
 

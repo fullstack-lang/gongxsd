@@ -3,7 +3,7 @@ package models
 type AttributeGroup struct {
 	Name string
 	ElementWithNameAttribute
-	ElementWithAnnotation
+	Annotated
 
 	AttributeGroups []*AttributeGroup `xml:"attributeGroup"`
 

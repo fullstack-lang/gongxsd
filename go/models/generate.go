@@ -24,7 +24,7 @@ func Generate(stage *StageStruct, outputFilePath string) {
 	for _, ct := range GetGongstrucsSorted[*ComplexType](stage) {
 
 		// not the inline complex type
-		if ct.IsInlined {
+		if ct.IsAnonymous {
 			continue
 		}
 
@@ -71,7 +71,7 @@ func Generate(stage *StageStruct, outputFilePath string) {
 		}
 
 		// fail loud and fast
-		if !element.ComplexType.IsInlined {
+		if !element.ComplexType.IsAnonymous {
 			log.Fatal("element", element.Name, "has inlined complex type")
 		}
 

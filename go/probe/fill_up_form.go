@@ -101,6 +101,28 @@ func FillUpForm[T models.Gongstruct](
 		{
 			var rf models.ReverseField
 			_ = rf
+			rf.GongstructName = "Extension"
+			rf.Fieldname = "Alls"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.Extension),
+					"Alls",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.Extension, *models.All](
+					nil,
+					"Alls",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
+		{
+			var rf models.ReverseField
+			_ = rf
 			rf.GongstructName = "Group"
 			rf.Fieldname = "Alls"
 			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
@@ -384,6 +406,28 @@ func FillUpForm[T models.Gongstruct](
 		{
 			var rf models.ReverseField
 			_ = rf
+			rf.GongstructName = "Extension"
+			rf.Fieldname = "Choices"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.Extension),
+					"Choices",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.Extension, *models.Choice](
+					nil,
+					"Choices",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
+		{
+			var rf models.ReverseField
+			_ = rf
 			rf.GongstructName = "Group"
 			rf.Fieldname = "Choices"
 			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
@@ -426,6 +470,11 @@ func FillUpForm[T models.Gongstruct](
 			}
 		}
 
+	case *models.ComplexContent:
+		// insertion point
+		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+
 	case *models.ComplexType:
 		// insertion point
 		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
@@ -434,9 +483,9 @@ func FillUpForm[T models.Gongstruct](
 			false, false, 0, false, 0)
 		BasicFieldtoForm("GoIdentifier", instanceWithInferedType.GoIdentifier, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
-		BasicFieldtoForm("IsInlined", instanceWithInferedType.IsInlined, instanceWithInferedType, probe.formStage, formGroup,
+		BasicFieldtoForm("IsAnonymous", instanceWithInferedType.IsAnonymous, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
-		AssociationFieldToForm("EnclosingElement", instanceWithInferedType.EnclosingElement, formGroup, probe)
+		AssociationFieldToForm("DerivedFrom", instanceWithInferedType.DerivedFrom, formGroup, probe)
 		AssociationFieldToForm("Annotation", instanceWithInferedType.Annotation, formGroup, probe)
 		BasicFieldtoForm("NameXSD", instanceWithInferedType.NameXSD, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
@@ -445,6 +494,9 @@ func FillUpForm[T models.Gongstruct](
 		AssociationSliceToForm("Choices", instanceWithInferedType, &instanceWithInferedType.Choices, formGroup, probe)
 		AssociationSliceToForm("Groups", instanceWithInferedType, &instanceWithInferedType.Groups, formGroup, probe)
 		AssociationSliceToForm("Elements", instanceWithInferedType, &instanceWithInferedType.Elements, formGroup, probe)
+		AssociationFieldToForm("Extension", instanceWithInferedType.Extension, formGroup, probe)
+		AssociationFieldToForm("SimpleContent", instanceWithInferedType.SimpleContent, formGroup, probe)
+		AssociationFieldToForm("ComplexContent", instanceWithInferedType.ComplexContent, formGroup, probe)
 		AssociationSliceToForm("Attributes", instanceWithInferedType, &instanceWithInferedType.Attributes, formGroup, probe)
 		AssociationSliceToForm("AttributeGroups", instanceWithInferedType, &instanceWithInferedType.AttributeGroups, formGroup, probe)
 		{
@@ -608,6 +660,28 @@ func FillUpForm[T models.Gongstruct](
 		{
 			var rf models.ReverseField
 			_ = rf
+			rf.GongstructName = "Extension"
+			rf.Fieldname = "Elements"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.Extension),
+					"Elements",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.Extension, *models.Element](
+					nil,
+					"Elements",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
+		{
+			var rf models.ReverseField
+			_ = rf
 			rf.GongstructName = "Group"
 			rf.Fieldname = "Elements"
 			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
@@ -701,6 +775,16 @@ func FillUpForm[T models.Gongstruct](
 					probe)
 			}
 		}
+
+	case *models.Extension:
+		// insertion point
+		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		AssociationSliceToForm("Sequences", instanceWithInferedType, &instanceWithInferedType.Sequences, formGroup, probe)
+		AssociationSliceToForm("Alls", instanceWithInferedType, &instanceWithInferedType.Alls, formGroup, probe)
+		AssociationSliceToForm("Choices", instanceWithInferedType, &instanceWithInferedType.Choices, formGroup, probe)
+		AssociationSliceToForm("Groups", instanceWithInferedType, &instanceWithInferedType.Groups, formGroup, probe)
+		AssociationSliceToForm("Elements", instanceWithInferedType, &instanceWithInferedType.Elements, formGroup, probe)
 
 	case *models.Group:
 		// insertion point
@@ -804,6 +888,28 @@ func FillUpForm[T models.Gongstruct](
 					probe)
 			} else {
 				AssociationReverseFieldToForm[*models.Element, *models.Group](
+					nil,
+					"Groups",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
+		{
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "Extension"
+			rf.Fieldname = "Groups"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.Extension),
+					"Groups",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.Extension, *models.Group](
 					nil,
 					"Groups",
 					instanceWithInferedType,
@@ -1039,6 +1145,28 @@ func FillUpForm[T models.Gongstruct](
 		{
 			var rf models.ReverseField
 			_ = rf
+			rf.GongstructName = "Extension"
+			rf.Fieldname = "Sequences"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.Extension),
+					"Sequences",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.Extension, *models.Sequence](
+					nil,
+					"Sequences",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
+		{
+			var rf models.ReverseField
+			_ = rf
 			rf.GongstructName = "Group"
 			rf.Fieldname = "Sequences"
 			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
@@ -1080,6 +1208,11 @@ func FillUpForm[T models.Gongstruct](
 					probe)
 			}
 		}
+
+	case *models.SimpleContent:
+		// insertion point
+		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
 
 	case *models.SimpleType:
 		// insertion point

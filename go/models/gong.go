@@ -120,6 +120,15 @@ type StageStruct struct {
 	OnAfterChoiceDeleteCallback OnAfterDeleteInterface[Choice]
 	OnAfterChoiceReadCallback   OnAfterReadInterface[Choice]
 
+	ComplexContents           map[*ComplexContent]any
+	ComplexContents_mapString map[string]*ComplexContent
+
+	// insertion point for slice of pointers maps
+	OnAfterComplexContentCreateCallback OnAfterCreateInterface[ComplexContent]
+	OnAfterComplexContentUpdateCallback OnAfterUpdateInterface[ComplexContent]
+	OnAfterComplexContentDeleteCallback OnAfterDeleteInterface[ComplexContent]
+	OnAfterComplexContentReadCallback   OnAfterReadInterface[ComplexContent]
+
 	ComplexTypes           map[*ComplexType]any
 	ComplexTypes_mapString map[string]*ComplexType
 
@@ -171,6 +180,25 @@ type StageStruct struct {
 	OnAfterEnumerationUpdateCallback OnAfterUpdateInterface[Enumeration]
 	OnAfterEnumerationDeleteCallback OnAfterDeleteInterface[Enumeration]
 	OnAfterEnumerationReadCallback   OnAfterReadInterface[Enumeration]
+
+	Extensions           map[*Extension]any
+	Extensions_mapString map[string]*Extension
+
+	// insertion point for slice of pointers maps
+	Extension_Sequences_reverseMap map[*Sequence]*Extension
+
+	Extension_Alls_reverseMap map[*All]*Extension
+
+	Extension_Choices_reverseMap map[*Choice]*Extension
+
+	Extension_Groups_reverseMap map[*Group]*Extension
+
+	Extension_Elements_reverseMap map[*Element]*Extension
+
+	OnAfterExtensionCreateCallback OnAfterCreateInterface[Extension]
+	OnAfterExtensionUpdateCallback OnAfterUpdateInterface[Extension]
+	OnAfterExtensionDeleteCallback OnAfterDeleteInterface[Extension]
+	OnAfterExtensionReadCallback   OnAfterReadInterface[Extension]
 
 	Groups           map[*Group]any
 	Groups_mapString map[string]*Group
@@ -294,6 +322,15 @@ type StageStruct struct {
 	OnAfterSequenceDeleteCallback OnAfterDeleteInterface[Sequence]
 	OnAfterSequenceReadCallback   OnAfterReadInterface[Sequence]
 
+	SimpleContents           map[*SimpleContent]any
+	SimpleContents_mapString map[string]*SimpleContent
+
+	// insertion point for slice of pointers maps
+	OnAfterSimpleContentCreateCallback OnAfterCreateInterface[SimpleContent]
+	OnAfterSimpleContentUpdateCallback OnAfterUpdateInterface[SimpleContent]
+	OnAfterSimpleContentDeleteCallback OnAfterDeleteInterface[SimpleContent]
+	OnAfterSimpleContentReadCallback   OnAfterReadInterface[SimpleContent]
+
 	SimpleTypes           map[*SimpleType]any
 	SimpleTypes_mapString map[string]*SimpleType
 
@@ -408,6 +445,8 @@ type BackRepoInterface interface {
 	CheckoutAttributeGroup(attributegroup *AttributeGroup)
 	CommitChoice(choice *Choice)
 	CheckoutChoice(choice *Choice)
+	CommitComplexContent(complexcontent *ComplexContent)
+	CheckoutComplexContent(complexcontent *ComplexContent)
 	CommitComplexType(complextype *ComplexType)
 	CheckoutComplexType(complextype *ComplexType)
 	CommitDocumentation(documentation *Documentation)
@@ -416,6 +455,8 @@ type BackRepoInterface interface {
 	CheckoutElement(element *Element)
 	CommitEnumeration(enumeration *Enumeration)
 	CheckoutEnumeration(enumeration *Enumeration)
+	CommitExtension(extension *Extension)
+	CheckoutExtension(extension *Extension)
 	CommitGroup(group *Group)
 	CheckoutGroup(group *Group)
 	CommitLength(length *Length)
@@ -436,6 +477,8 @@ type BackRepoInterface interface {
 	CheckoutSchema(schema *Schema)
 	CommitSequence(sequence *Sequence)
 	CheckoutSequence(sequence *Sequence)
+	CommitSimpleContent(simplecontent *SimpleContent)
+	CheckoutSimpleContent(simplecontent *SimpleContent)
 	CommitSimpleType(simpletype *SimpleType)
 	CheckoutSimpleType(simpletype *SimpleType)
 	CommitTotalDigit(totaldigit *TotalDigit)
@@ -466,6 +509,9 @@ func NewStage(path string) (stage *StageStruct) {
 		Choices:           make(map[*Choice]any),
 		Choices_mapString: make(map[string]*Choice),
 
+		ComplexContents:           make(map[*ComplexContent]any),
+		ComplexContents_mapString: make(map[string]*ComplexContent),
+
 		ComplexTypes:           make(map[*ComplexType]any),
 		ComplexTypes_mapString: make(map[string]*ComplexType),
 
@@ -477,6 +523,9 @@ func NewStage(path string) (stage *StageStruct) {
 
 		Enumerations:           make(map[*Enumeration]any),
 		Enumerations_mapString: make(map[string]*Enumeration),
+
+		Extensions:           make(map[*Extension]any),
+		Extensions_mapString: make(map[string]*Extension),
 
 		Groups:           make(map[*Group]any),
 		Groups_mapString: make(map[string]*Group),
@@ -507,6 +556,9 @@ func NewStage(path string) (stage *StageStruct) {
 
 		Sequences:           make(map[*Sequence]any),
 		Sequences_mapString: make(map[string]*Sequence),
+
+		SimpleContents:           make(map[*SimpleContent]any),
+		SimpleContents_mapString: make(map[string]*SimpleContent),
 
 		SimpleTypes:           make(map[*SimpleType]any),
 		SimpleTypes_mapString: make(map[string]*SimpleType),
@@ -558,10 +610,12 @@ func (stage *StageStruct) Commit() {
 	stage.Map_GongStructName_InstancesNb["Attribute"] = len(stage.Attributes)
 	stage.Map_GongStructName_InstancesNb["AttributeGroup"] = len(stage.AttributeGroups)
 	stage.Map_GongStructName_InstancesNb["Choice"] = len(stage.Choices)
+	stage.Map_GongStructName_InstancesNb["ComplexContent"] = len(stage.ComplexContents)
 	stage.Map_GongStructName_InstancesNb["ComplexType"] = len(stage.ComplexTypes)
 	stage.Map_GongStructName_InstancesNb["Documentation"] = len(stage.Documentations)
 	stage.Map_GongStructName_InstancesNb["Element"] = len(stage.Elements)
 	stage.Map_GongStructName_InstancesNb["Enumeration"] = len(stage.Enumerations)
+	stage.Map_GongStructName_InstancesNb["Extension"] = len(stage.Extensions)
 	stage.Map_GongStructName_InstancesNb["Group"] = len(stage.Groups)
 	stage.Map_GongStructName_InstancesNb["Length"] = len(stage.Lengths)
 	stage.Map_GongStructName_InstancesNb["MaxInclusive"] = len(stage.MaxInclusives)
@@ -572,6 +626,7 @@ func (stage *StageStruct) Commit() {
 	stage.Map_GongStructName_InstancesNb["Restriction"] = len(stage.Restrictions)
 	stage.Map_GongStructName_InstancesNb["Schema"] = len(stage.Schemas)
 	stage.Map_GongStructName_InstancesNb["Sequence"] = len(stage.Sequences)
+	stage.Map_GongStructName_InstancesNb["SimpleContent"] = len(stage.SimpleContents)
 	stage.Map_GongStructName_InstancesNb["SimpleType"] = len(stage.SimpleTypes)
 	stage.Map_GongStructName_InstancesNb["TotalDigit"] = len(stage.TotalDigits)
 	stage.Map_GongStructName_InstancesNb["Union"] = len(stage.Unions)
@@ -591,10 +646,12 @@ func (stage *StageStruct) Checkout() {
 	stage.Map_GongStructName_InstancesNb["Attribute"] = len(stage.Attributes)
 	stage.Map_GongStructName_InstancesNb["AttributeGroup"] = len(stage.AttributeGroups)
 	stage.Map_GongStructName_InstancesNb["Choice"] = len(stage.Choices)
+	stage.Map_GongStructName_InstancesNb["ComplexContent"] = len(stage.ComplexContents)
 	stage.Map_GongStructName_InstancesNb["ComplexType"] = len(stage.ComplexTypes)
 	stage.Map_GongStructName_InstancesNb["Documentation"] = len(stage.Documentations)
 	stage.Map_GongStructName_InstancesNb["Element"] = len(stage.Elements)
 	stage.Map_GongStructName_InstancesNb["Enumeration"] = len(stage.Enumerations)
+	stage.Map_GongStructName_InstancesNb["Extension"] = len(stage.Extensions)
 	stage.Map_GongStructName_InstancesNb["Group"] = len(stage.Groups)
 	stage.Map_GongStructName_InstancesNb["Length"] = len(stage.Lengths)
 	stage.Map_GongStructName_InstancesNb["MaxInclusive"] = len(stage.MaxInclusives)
@@ -605,6 +662,7 @@ func (stage *StageStruct) Checkout() {
 	stage.Map_GongStructName_InstancesNb["Restriction"] = len(stage.Restrictions)
 	stage.Map_GongStructName_InstancesNb["Schema"] = len(stage.Schemas)
 	stage.Map_GongStructName_InstancesNb["Sequence"] = len(stage.Sequences)
+	stage.Map_GongStructName_InstancesNb["SimpleContent"] = len(stage.SimpleContents)
 	stage.Map_GongStructName_InstancesNb["SimpleType"] = len(stage.SimpleTypes)
 	stage.Map_GongStructName_InstancesNb["TotalDigit"] = len(stage.TotalDigits)
 	stage.Map_GongStructName_InstancesNb["Union"] = len(stage.Unions)
@@ -891,6 +949,56 @@ func (choice *Choice) GetName() (res string) {
 	return choice.Name
 }
 
+// Stage puts complexcontent to the model stage
+func (complexcontent *ComplexContent) Stage(stage *StageStruct) *ComplexContent {
+	stage.ComplexContents[complexcontent] = __member
+	stage.ComplexContents_mapString[complexcontent.Name] = complexcontent
+
+	return complexcontent
+}
+
+// Unstage removes complexcontent off the model stage
+func (complexcontent *ComplexContent) Unstage(stage *StageStruct) *ComplexContent {
+	delete(stage.ComplexContents, complexcontent)
+	delete(stage.ComplexContents_mapString, complexcontent.Name)
+	return complexcontent
+}
+
+// UnstageVoid removes complexcontent off the model stage
+func (complexcontent *ComplexContent) UnstageVoid(stage *StageStruct) {
+	delete(stage.ComplexContents, complexcontent)
+	delete(stage.ComplexContents_mapString, complexcontent.Name)
+}
+
+// commit complexcontent to the back repo (if it is already staged)
+func (complexcontent *ComplexContent) Commit(stage *StageStruct) *ComplexContent {
+	if _, ok := stage.ComplexContents[complexcontent]; ok {
+		if stage.BackRepo != nil {
+			stage.BackRepo.CommitComplexContent(complexcontent)
+		}
+	}
+	return complexcontent
+}
+
+func (complexcontent *ComplexContent) CommitVoid(stage *StageStruct) {
+	complexcontent.Commit(stage)
+}
+
+// Checkout complexcontent to the back repo (if it is already staged)
+func (complexcontent *ComplexContent) Checkout(stage *StageStruct) *ComplexContent {
+	if _, ok := stage.ComplexContents[complexcontent]; ok {
+		if stage.BackRepo != nil {
+			stage.BackRepo.CheckoutComplexContent(complexcontent)
+		}
+	}
+	return complexcontent
+}
+
+// for satisfaction of GongStruct interface
+func (complexcontent *ComplexContent) GetName() (res string) {
+	return complexcontent.Name
+}
+
 // Stage puts complextype to the model stage
 func (complextype *ComplexType) Stage(stage *StageStruct) *ComplexType {
 	stage.ComplexTypes[complextype] = __member
@@ -1089,6 +1197,56 @@ func (enumeration *Enumeration) Checkout(stage *StageStruct) *Enumeration {
 // for satisfaction of GongStruct interface
 func (enumeration *Enumeration) GetName() (res string) {
 	return enumeration.Name
+}
+
+// Stage puts extension to the model stage
+func (extension *Extension) Stage(stage *StageStruct) *Extension {
+	stage.Extensions[extension] = __member
+	stage.Extensions_mapString[extension.Name] = extension
+
+	return extension
+}
+
+// Unstage removes extension off the model stage
+func (extension *Extension) Unstage(stage *StageStruct) *Extension {
+	delete(stage.Extensions, extension)
+	delete(stage.Extensions_mapString, extension.Name)
+	return extension
+}
+
+// UnstageVoid removes extension off the model stage
+func (extension *Extension) UnstageVoid(stage *StageStruct) {
+	delete(stage.Extensions, extension)
+	delete(stage.Extensions_mapString, extension.Name)
+}
+
+// commit extension to the back repo (if it is already staged)
+func (extension *Extension) Commit(stage *StageStruct) *Extension {
+	if _, ok := stage.Extensions[extension]; ok {
+		if stage.BackRepo != nil {
+			stage.BackRepo.CommitExtension(extension)
+		}
+	}
+	return extension
+}
+
+func (extension *Extension) CommitVoid(stage *StageStruct) {
+	extension.Commit(stage)
+}
+
+// Checkout extension to the back repo (if it is already staged)
+func (extension *Extension) Checkout(stage *StageStruct) *Extension {
+	if _, ok := stage.Extensions[extension]; ok {
+		if stage.BackRepo != nil {
+			stage.BackRepo.CheckoutExtension(extension)
+		}
+	}
+	return extension
+}
+
+// for satisfaction of GongStruct interface
+func (extension *Extension) GetName() (res string) {
+	return extension.Name
 }
 
 // Stage puts group to the model stage
@@ -1591,6 +1749,56 @@ func (sequence *Sequence) GetName() (res string) {
 	return sequence.Name
 }
 
+// Stage puts simplecontent to the model stage
+func (simplecontent *SimpleContent) Stage(stage *StageStruct) *SimpleContent {
+	stage.SimpleContents[simplecontent] = __member
+	stage.SimpleContents_mapString[simplecontent.Name] = simplecontent
+
+	return simplecontent
+}
+
+// Unstage removes simplecontent off the model stage
+func (simplecontent *SimpleContent) Unstage(stage *StageStruct) *SimpleContent {
+	delete(stage.SimpleContents, simplecontent)
+	delete(stage.SimpleContents_mapString, simplecontent.Name)
+	return simplecontent
+}
+
+// UnstageVoid removes simplecontent off the model stage
+func (simplecontent *SimpleContent) UnstageVoid(stage *StageStruct) {
+	delete(stage.SimpleContents, simplecontent)
+	delete(stage.SimpleContents_mapString, simplecontent.Name)
+}
+
+// commit simplecontent to the back repo (if it is already staged)
+func (simplecontent *SimpleContent) Commit(stage *StageStruct) *SimpleContent {
+	if _, ok := stage.SimpleContents[simplecontent]; ok {
+		if stage.BackRepo != nil {
+			stage.BackRepo.CommitSimpleContent(simplecontent)
+		}
+	}
+	return simplecontent
+}
+
+func (simplecontent *SimpleContent) CommitVoid(stage *StageStruct) {
+	simplecontent.Commit(stage)
+}
+
+// Checkout simplecontent to the back repo (if it is already staged)
+func (simplecontent *SimpleContent) Checkout(stage *StageStruct) *SimpleContent {
+	if _, ok := stage.SimpleContents[simplecontent]; ok {
+		if stage.BackRepo != nil {
+			stage.BackRepo.CheckoutSimpleContent(simplecontent)
+		}
+	}
+	return simplecontent
+}
+
+// for satisfaction of GongStruct interface
+func (simplecontent *SimpleContent) GetName() (res string) {
+	return simplecontent.Name
+}
+
 // Stage puts simpletype to the model stage
 func (simpletype *SimpleType) Stage(stage *StageStruct) *SimpleType {
 	stage.SimpleTypes[simpletype] = __member
@@ -1798,10 +2006,12 @@ type AllModelsStructCreateInterface interface { // insertion point for Callbacks
 	CreateORMAttribute(Attribute *Attribute)
 	CreateORMAttributeGroup(AttributeGroup *AttributeGroup)
 	CreateORMChoice(Choice *Choice)
+	CreateORMComplexContent(ComplexContent *ComplexContent)
 	CreateORMComplexType(ComplexType *ComplexType)
 	CreateORMDocumentation(Documentation *Documentation)
 	CreateORMElement(Element *Element)
 	CreateORMEnumeration(Enumeration *Enumeration)
+	CreateORMExtension(Extension *Extension)
 	CreateORMGroup(Group *Group)
 	CreateORMLength(Length *Length)
 	CreateORMMaxInclusive(MaxInclusive *MaxInclusive)
@@ -1812,6 +2022,7 @@ type AllModelsStructCreateInterface interface { // insertion point for Callbacks
 	CreateORMRestriction(Restriction *Restriction)
 	CreateORMSchema(Schema *Schema)
 	CreateORMSequence(Sequence *Sequence)
+	CreateORMSimpleContent(SimpleContent *SimpleContent)
 	CreateORMSimpleType(SimpleType *SimpleType)
 	CreateORMTotalDigit(TotalDigit *TotalDigit)
 	CreateORMUnion(Union *Union)
@@ -1824,10 +2035,12 @@ type AllModelsStructDeleteInterface interface { // insertion point for Callbacks
 	DeleteORMAttribute(Attribute *Attribute)
 	DeleteORMAttributeGroup(AttributeGroup *AttributeGroup)
 	DeleteORMChoice(Choice *Choice)
+	DeleteORMComplexContent(ComplexContent *ComplexContent)
 	DeleteORMComplexType(ComplexType *ComplexType)
 	DeleteORMDocumentation(Documentation *Documentation)
 	DeleteORMElement(Element *Element)
 	DeleteORMEnumeration(Enumeration *Enumeration)
+	DeleteORMExtension(Extension *Extension)
 	DeleteORMGroup(Group *Group)
 	DeleteORMLength(Length *Length)
 	DeleteORMMaxInclusive(MaxInclusive *MaxInclusive)
@@ -1838,6 +2051,7 @@ type AllModelsStructDeleteInterface interface { // insertion point for Callbacks
 	DeleteORMRestriction(Restriction *Restriction)
 	DeleteORMSchema(Schema *Schema)
 	DeleteORMSequence(Sequence *Sequence)
+	DeleteORMSimpleContent(SimpleContent *SimpleContent)
 	DeleteORMSimpleType(SimpleType *SimpleType)
 	DeleteORMTotalDigit(TotalDigit *TotalDigit)
 	DeleteORMUnion(Union *Union)
@@ -1860,6 +2074,9 @@ func (stage *StageStruct) Reset() { // insertion point for array reset
 	stage.Choices = make(map[*Choice]any)
 	stage.Choices_mapString = make(map[string]*Choice)
 
+	stage.ComplexContents = make(map[*ComplexContent]any)
+	stage.ComplexContents_mapString = make(map[string]*ComplexContent)
+
 	stage.ComplexTypes = make(map[*ComplexType]any)
 	stage.ComplexTypes_mapString = make(map[string]*ComplexType)
 
@@ -1871,6 +2088,9 @@ func (stage *StageStruct) Reset() { // insertion point for array reset
 
 	stage.Enumerations = make(map[*Enumeration]any)
 	stage.Enumerations_mapString = make(map[string]*Enumeration)
+
+	stage.Extensions = make(map[*Extension]any)
+	stage.Extensions_mapString = make(map[string]*Extension)
 
 	stage.Groups = make(map[*Group]any)
 	stage.Groups_mapString = make(map[string]*Group)
@@ -1902,6 +2122,9 @@ func (stage *StageStruct) Reset() { // insertion point for array reset
 	stage.Sequences = make(map[*Sequence]any)
 	stage.Sequences_mapString = make(map[string]*Sequence)
 
+	stage.SimpleContents = make(map[*SimpleContent]any)
+	stage.SimpleContents_mapString = make(map[string]*SimpleContent)
+
 	stage.SimpleTypes = make(map[*SimpleType]any)
 	stage.SimpleTypes_mapString = make(map[string]*SimpleType)
 
@@ -1932,6 +2155,9 @@ func (stage *StageStruct) Nil() { // insertion point for array nil
 	stage.Choices = nil
 	stage.Choices_mapString = nil
 
+	stage.ComplexContents = nil
+	stage.ComplexContents_mapString = nil
+
 	stage.ComplexTypes = nil
 	stage.ComplexTypes_mapString = nil
 
@@ -1943,6 +2169,9 @@ func (stage *StageStruct) Nil() { // insertion point for array nil
 
 	stage.Enumerations = nil
 	stage.Enumerations_mapString = nil
+
+	stage.Extensions = nil
+	stage.Extensions_mapString = nil
 
 	stage.Groups = nil
 	stage.Groups_mapString = nil
@@ -1973,6 +2202,9 @@ func (stage *StageStruct) Nil() { // insertion point for array nil
 
 	stage.Sequences = nil
 	stage.Sequences_mapString = nil
+
+	stage.SimpleContents = nil
+	stage.SimpleContents_mapString = nil
 
 	stage.SimpleTypes = nil
 	stage.SimpleTypes_mapString = nil
@@ -2009,6 +2241,10 @@ func (stage *StageStruct) Unstage() { // insertion point for array nil
 		choice.Unstage(stage)
 	}
 
+	for complexcontent := range stage.ComplexContents {
+		complexcontent.Unstage(stage)
+	}
+
 	for complextype := range stage.ComplexTypes {
 		complextype.Unstage(stage)
 	}
@@ -2023,6 +2259,10 @@ func (stage *StageStruct) Unstage() { // insertion point for array nil
 
 	for enumeration := range stage.Enumerations {
 		enumeration.Unstage(stage)
+	}
+
+	for extension := range stage.Extensions {
+		extension.Unstage(stage)
 	}
 
 	for group := range stage.Groups {
@@ -2063,6 +2303,10 @@ func (stage *StageStruct) Unstage() { // insertion point for array nil
 
 	for sequence := range stage.Sequences {
 		sequence.Unstage(stage)
+	}
+
+	for simplecontent := range stage.SimpleContents {
+		simplecontent.Unstage(stage)
 	}
 
 	for simpletype := range stage.SimpleTypes {
@@ -2151,6 +2395,8 @@ func GongGetSet[Type GongstructSet](stage *StageStruct) *Type {
 		return any(&stage.AttributeGroups).(*Type)
 	case map[*Choice]any:
 		return any(&stage.Choices).(*Type)
+	case map[*ComplexContent]any:
+		return any(&stage.ComplexContents).(*Type)
 	case map[*ComplexType]any:
 		return any(&stage.ComplexTypes).(*Type)
 	case map[*Documentation]any:
@@ -2159,6 +2405,8 @@ func GongGetSet[Type GongstructSet](stage *StageStruct) *Type {
 		return any(&stage.Elements).(*Type)
 	case map[*Enumeration]any:
 		return any(&stage.Enumerations).(*Type)
+	case map[*Extension]any:
+		return any(&stage.Extensions).(*Type)
 	case map[*Group]any:
 		return any(&stage.Groups).(*Type)
 	case map[*Length]any:
@@ -2179,6 +2427,8 @@ func GongGetSet[Type GongstructSet](stage *StageStruct) *Type {
 		return any(&stage.Schemas).(*Type)
 	case map[*Sequence]any:
 		return any(&stage.Sequences).(*Type)
+	case map[*SimpleContent]any:
+		return any(&stage.SimpleContents).(*Type)
 	case map[*SimpleType]any:
 		return any(&stage.SimpleTypes).(*Type)
 	case map[*TotalDigit]any:
@@ -2209,6 +2459,8 @@ func GongGetMap[Type GongstructMapString](stage *StageStruct) *Type {
 		return any(&stage.AttributeGroups_mapString).(*Type)
 	case map[string]*Choice:
 		return any(&stage.Choices_mapString).(*Type)
+	case map[string]*ComplexContent:
+		return any(&stage.ComplexContents_mapString).(*Type)
 	case map[string]*ComplexType:
 		return any(&stage.ComplexTypes_mapString).(*Type)
 	case map[string]*Documentation:
@@ -2217,6 +2469,8 @@ func GongGetMap[Type GongstructMapString](stage *StageStruct) *Type {
 		return any(&stage.Elements_mapString).(*Type)
 	case map[string]*Enumeration:
 		return any(&stage.Enumerations_mapString).(*Type)
+	case map[string]*Extension:
+		return any(&stage.Extensions_mapString).(*Type)
 	case map[string]*Group:
 		return any(&stage.Groups_mapString).(*Type)
 	case map[string]*Length:
@@ -2237,6 +2491,8 @@ func GongGetMap[Type GongstructMapString](stage *StageStruct) *Type {
 		return any(&stage.Schemas_mapString).(*Type)
 	case map[string]*Sequence:
 		return any(&stage.Sequences_mapString).(*Type)
+	case map[string]*SimpleContent:
+		return any(&stage.SimpleContents_mapString).(*Type)
 	case map[string]*SimpleType:
 		return any(&stage.SimpleTypes_mapString).(*Type)
 	case map[string]*TotalDigit:
@@ -2267,6 +2523,8 @@ func GetGongstructInstancesSet[Type Gongstruct](stage *StageStruct) *map[*Type]a
 		return any(&stage.AttributeGroups).(*map[*Type]any)
 	case Choice:
 		return any(&stage.Choices).(*map[*Type]any)
+	case ComplexContent:
+		return any(&stage.ComplexContents).(*map[*Type]any)
 	case ComplexType:
 		return any(&stage.ComplexTypes).(*map[*Type]any)
 	case Documentation:
@@ -2275,6 +2533,8 @@ func GetGongstructInstancesSet[Type Gongstruct](stage *StageStruct) *map[*Type]a
 		return any(&stage.Elements).(*map[*Type]any)
 	case Enumeration:
 		return any(&stage.Enumerations).(*map[*Type]any)
+	case Extension:
+		return any(&stage.Extensions).(*map[*Type]any)
 	case Group:
 		return any(&stage.Groups).(*map[*Type]any)
 	case Length:
@@ -2295,6 +2555,8 @@ func GetGongstructInstancesSet[Type Gongstruct](stage *StageStruct) *map[*Type]a
 		return any(&stage.Schemas).(*map[*Type]any)
 	case Sequence:
 		return any(&stage.Sequences).(*map[*Type]any)
+	case SimpleContent:
+		return any(&stage.SimpleContents).(*map[*Type]any)
 	case SimpleType:
 		return any(&stage.SimpleTypes).(*map[*Type]any)
 	case TotalDigit:
@@ -2325,6 +2587,8 @@ func GetGongstructInstancesSetFromPointerType[Type PointerToGongstruct](stage *S
 		return any(&stage.AttributeGroups).(*map[Type]any)
 	case *Choice:
 		return any(&stage.Choices).(*map[Type]any)
+	case *ComplexContent:
+		return any(&stage.ComplexContents).(*map[Type]any)
 	case *ComplexType:
 		return any(&stage.ComplexTypes).(*map[Type]any)
 	case *Documentation:
@@ -2333,6 +2597,8 @@ func GetGongstructInstancesSetFromPointerType[Type PointerToGongstruct](stage *S
 		return any(&stage.Elements).(*map[Type]any)
 	case *Enumeration:
 		return any(&stage.Enumerations).(*map[Type]any)
+	case *Extension:
+		return any(&stage.Extensions).(*map[Type]any)
 	case *Group:
 		return any(&stage.Groups).(*map[Type]any)
 	case *Length:
@@ -2353,6 +2619,8 @@ func GetGongstructInstancesSetFromPointerType[Type PointerToGongstruct](stage *S
 		return any(&stage.Schemas).(*map[Type]any)
 	case *Sequence:
 		return any(&stage.Sequences).(*map[Type]any)
+	case *SimpleContent:
+		return any(&stage.SimpleContents).(*map[Type]any)
 	case *SimpleType:
 		return any(&stage.SimpleTypes).(*map[Type]any)
 	case *TotalDigit:
@@ -2383,6 +2651,8 @@ func GetGongstructInstancesMap[Type Gongstruct](stage *StageStruct) *map[string]
 		return any(&stage.AttributeGroups_mapString).(*map[string]*Type)
 	case Choice:
 		return any(&stage.Choices_mapString).(*map[string]*Type)
+	case ComplexContent:
+		return any(&stage.ComplexContents_mapString).(*map[string]*Type)
 	case ComplexType:
 		return any(&stage.ComplexTypes_mapString).(*map[string]*Type)
 	case Documentation:
@@ -2391,6 +2661,8 @@ func GetGongstructInstancesMap[Type Gongstruct](stage *StageStruct) *map[string]
 		return any(&stage.Elements_mapString).(*map[string]*Type)
 	case Enumeration:
 		return any(&stage.Enumerations_mapString).(*map[string]*Type)
+	case Extension:
+		return any(&stage.Extensions_mapString).(*map[string]*Type)
 	case Group:
 		return any(&stage.Groups_mapString).(*map[string]*Type)
 	case Length:
@@ -2411,6 +2683,8 @@ func GetGongstructInstancesMap[Type Gongstruct](stage *StageStruct) *map[string]
 		return any(&stage.Schemas_mapString).(*map[string]*Type)
 	case Sequence:
 		return any(&stage.Sequences_mapString).(*map[string]*Type)
+	case SimpleContent:
+		return any(&stage.SimpleContents_mapString).(*map[string]*Type)
 	case SimpleType:
 		return any(&stage.SimpleTypes_mapString).(*map[string]*Type)
 	case TotalDigit:
@@ -2436,8 +2710,8 @@ func GetAssociationName[Type Gongstruct]() *Type {
 	case All:
 		return any(&All{
 			// Initialisation of associations
-			// field is initialized with ElementWithAnnotation as it is a composite
-			ElementWithAnnotation: ElementWithAnnotation{
+			// field is initialized with Annotated as it is a composite
+			Annotated: Annotated{
 				// per field init
 				//
 				Annotation: &Annotation{Name: "Annotation"},
@@ -2452,8 +2726,8 @@ func GetAssociationName[Type Gongstruct]() *Type {
 	case Attribute:
 		return any(&Attribute{
 			// Initialisation of associations
-			// field is initialized with ElementWithAnnotation as it is a composite
-			ElementWithAnnotation: ElementWithAnnotation{
+			// field is initialized with Annotated as it is a composite
+			Annotated: Annotated{
 				// per field init
 				//
 				Annotation: &Annotation{Name: "Annotation"},
@@ -2466,8 +2740,8 @@ func GetAssociationName[Type Gongstruct]() *Type {
 			AttributeGroups: []*AttributeGroup{{Name: "AttributeGroups"}},
 			// field is initialized with an instance of Attribute with the name of the field
 			Attributes: []*Attribute{{Name: "Attributes"}},
-			// field is initialized with ElementWithAnnotation as it is a composite
-			ElementWithAnnotation: ElementWithAnnotation{
+			// field is initialized with Annotated as it is a composite
+			Annotated: Annotated{
 				// per field init
 				//
 				Annotation: &Annotation{Name: "Annotation"},
@@ -2476,24 +2750,34 @@ func GetAssociationName[Type Gongstruct]() *Type {
 	case Choice:
 		return any(&Choice{
 			// Initialisation of associations
-			// field is initialized with ElementWithAnnotation as it is a composite
-			ElementWithAnnotation: ElementWithAnnotation{
+			// field is initialized with Annotated as it is a composite
+			Annotated: Annotated{
 				// per field init
 				//
 				Annotation: &Annotation{Name: "Annotation"},
 			},
 		}).(*Type)
+	case ComplexContent:
+		return any(&ComplexContent{
+			// Initialisation of associations
+		}).(*Type)
 	case ComplexType:
 		return any(&ComplexType{
 			// Initialisation of associations
 			// field is initialized with an instance of Element with the name of the field
-			EnclosingElement: &Element{Name: "EnclosingElement"},
+			DerivedFrom: &Element{Name: "DerivedFrom"},
+			// field is initialized with an instance of Extension with the name of the field
+			Extension: &Extension{Name: "Extension"},
+			// field is initialized with an instance of SimpleContent with the name of the field
+			SimpleContent: &SimpleContent{Name: "SimpleContent"},
+			// field is initialized with an instance of ComplexContent with the name of the field
+			ComplexContent: &ComplexContent{Name: "ComplexContent"},
 			// field is initialized with an instance of Attribute with the name of the field
 			Attributes: []*Attribute{{Name: "Attributes"}},
 			// field is initialized with an instance of AttributeGroup with the name of the field
 			AttributeGroups: []*AttributeGroup{{Name: "AttributeGroups"}},
-			// field is initialized with ElementWithAnnotation as it is a composite
-			ElementWithAnnotation: ElementWithAnnotation{
+			// field is initialized with Annotated as it is a composite
+			Annotated: Annotated{
 				// per field init
 				//
 				Annotation: &Annotation{Name: "Annotation"},
@@ -2512,8 +2796,8 @@ func GetAssociationName[Type Gongstruct]() *Type {
 			ComplexType: &ComplexType{Name: "ComplexType"},
 			// field is initialized with an instance of Group with the name of the field
 			Groups: []*Group{{Name: "Groups"}},
-			// field is initialized with ElementWithAnnotation as it is a composite
-			ElementWithAnnotation: ElementWithAnnotation{
+			// field is initialized with Annotated as it is a composite
+			Annotated: Annotated{
 				// per field init
 				//
 				Annotation: &Annotation{Name: "Annotation"},
@@ -2522,20 +2806,24 @@ func GetAssociationName[Type Gongstruct]() *Type {
 	case Enumeration:
 		return any(&Enumeration{
 			// Initialisation of associations
-			// field is initialized with ElementWithAnnotation as it is a composite
-			ElementWithAnnotation: ElementWithAnnotation{
+			// field is initialized with Annotated as it is a composite
+			Annotated: Annotated{
 				// per field init
 				//
 				Annotation: &Annotation{Name: "Annotation"},
 			},
+		}).(*Type)
+	case Extension:
+		return any(&Extension{
+			// Initialisation of associations
 		}).(*Type)
 	case Group:
 		return any(&Group{
 			// Initialisation of associations
 			// field is initialized with an instance of Element with the name of the field
 			EnclosingElement: &Element{Name: "EnclosingElement"},
-			// field is initialized with ElementWithAnnotation as it is a composite
-			ElementWithAnnotation: ElementWithAnnotation{
+			// field is initialized with Annotated as it is a composite
+			Annotated: Annotated{
 				// per field init
 				//
 				Annotation: &Annotation{Name: "Annotation"},
@@ -2544,8 +2832,8 @@ func GetAssociationName[Type Gongstruct]() *Type {
 	case Length:
 		return any(&Length{
 			// Initialisation of associations
-			// field is initialized with ElementWithAnnotation as it is a composite
-			ElementWithAnnotation: ElementWithAnnotation{
+			// field is initialized with Annotated as it is a composite
+			Annotated: Annotated{
 				// per field init
 				//
 				Annotation: &Annotation{Name: "Annotation"},
@@ -2554,8 +2842,8 @@ func GetAssociationName[Type Gongstruct]() *Type {
 	case MaxInclusive:
 		return any(&MaxInclusive{
 			// Initialisation of associations
-			// field is initialized with ElementWithAnnotation as it is a composite
-			ElementWithAnnotation: ElementWithAnnotation{
+			// field is initialized with Annotated as it is a composite
+			Annotated: Annotated{
 				// per field init
 				//
 				Annotation: &Annotation{Name: "Annotation"},
@@ -2564,8 +2852,8 @@ func GetAssociationName[Type Gongstruct]() *Type {
 	case MaxLength:
 		return any(&MaxLength{
 			// Initialisation of associations
-			// field is initialized with ElementWithAnnotation as it is a composite
-			ElementWithAnnotation: ElementWithAnnotation{
+			// field is initialized with Annotated as it is a composite
+			Annotated: Annotated{
 				// per field init
 				//
 				Annotation: &Annotation{Name: "Annotation"},
@@ -2574,8 +2862,8 @@ func GetAssociationName[Type Gongstruct]() *Type {
 	case MinInclusive:
 		return any(&MinInclusive{
 			// Initialisation of associations
-			// field is initialized with ElementWithAnnotation as it is a composite
-			ElementWithAnnotation: ElementWithAnnotation{
+			// field is initialized with Annotated as it is a composite
+			Annotated: Annotated{
 				// per field init
 				//
 				Annotation: &Annotation{Name: "Annotation"},
@@ -2584,8 +2872,8 @@ func GetAssociationName[Type Gongstruct]() *Type {
 	case MinLength:
 		return any(&MinLength{
 			// Initialisation of associations
-			// field is initialized with ElementWithAnnotation as it is a composite
-			ElementWithAnnotation: ElementWithAnnotation{
+			// field is initialized with Annotated as it is a composite
+			Annotated: Annotated{
 				// per field init
 				//
 				Annotation: &Annotation{Name: "Annotation"},
@@ -2594,8 +2882,8 @@ func GetAssociationName[Type Gongstruct]() *Type {
 	case Pattern:
 		return any(&Pattern{
 			// Initialisation of associations
-			// field is initialized with ElementWithAnnotation as it is a composite
-			ElementWithAnnotation: ElementWithAnnotation{
+			// field is initialized with Annotated as it is a composite
+			Annotated: Annotated{
 				// per field init
 				//
 				Annotation: &Annotation{Name: "Annotation"},
@@ -2622,8 +2910,8 @@ func GetAssociationName[Type Gongstruct]() *Type {
 			Length: &Length{Name: "Length"},
 			// field is initialized with an instance of TotalDigit with the name of the field
 			TotalDigit: &TotalDigit{Name: "TotalDigit"},
-			// field is initialized with ElementWithAnnotation as it is a composite
-			ElementWithAnnotation: ElementWithAnnotation{
+			// field is initialized with Annotated as it is a composite
+			Annotated: Annotated{
 				// per field init
 				//
 				Annotation: &Annotation{Name: "Annotation"},
@@ -2642,8 +2930,8 @@ func GetAssociationName[Type Gongstruct]() *Type {
 			AttributeGroups: []*AttributeGroup{{Name: "AttributeGroups"}},
 			// field is initialized with an instance of Group with the name of the field
 			Groups: []*Group{{Name: "Groups"}},
-			// field is initialized with ElementWithAnnotation as it is a composite
-			ElementWithAnnotation: ElementWithAnnotation{
+			// field is initialized with Annotated as it is a composite
+			Annotated: Annotated{
 				// per field init
 				//
 				Annotation: &Annotation{Name: "Annotation"},
@@ -2652,12 +2940,16 @@ func GetAssociationName[Type Gongstruct]() *Type {
 	case Sequence:
 		return any(&Sequence{
 			// Initialisation of associations
-			// field is initialized with ElementWithAnnotation as it is a composite
-			ElementWithAnnotation: ElementWithAnnotation{
+			// field is initialized with Annotated as it is a composite
+			Annotated: Annotated{
 				// per field init
 				//
 				Annotation: &Annotation{Name: "Annotation"},
 			},
+		}).(*Type)
+	case SimpleContent:
+		return any(&SimpleContent{
+			// Initialisation of associations
 		}).(*Type)
 	case SimpleType:
 		return any(&SimpleType{
@@ -2666,8 +2958,8 @@ func GetAssociationName[Type Gongstruct]() *Type {
 			Restriction: &Restriction{Name: "Restriction"},
 			// field is initialized with an instance of Union with the name of the field
 			Union: &Union{Name: "Union"},
-			// field is initialized with ElementWithAnnotation as it is a composite
-			ElementWithAnnotation: ElementWithAnnotation{
+			// field is initialized with Annotated as it is a composite
+			Annotated: Annotated{
 				// per field init
 				//
 				Annotation: &Annotation{Name: "Annotation"},
@@ -2676,8 +2968,8 @@ func GetAssociationName[Type Gongstruct]() *Type {
 	case TotalDigit:
 		return any(&TotalDigit{
 			// Initialisation of associations
-			// field is initialized with ElementWithAnnotation as it is a composite
-			ElementWithAnnotation: ElementWithAnnotation{
+			// field is initialized with Annotated as it is a composite
+			Annotated: Annotated{
 				// per field init
 				//
 				Annotation: &Annotation{Name: "Annotation"},
@@ -2686,8 +2978,8 @@ func GetAssociationName[Type Gongstruct]() *Type {
 	case Union:
 		return any(&Union{
 			// Initialisation of associations
-			// field is initialized with ElementWithAnnotation as it is a composite
-			ElementWithAnnotation: ElementWithAnnotation{
+			// field is initialized with Annotated as it is a composite
+			Annotated: Annotated{
 				// per field init
 				//
 				Annotation: &Annotation{Name: "Annotation"},
@@ -2696,8 +2988,8 @@ func GetAssociationName[Type Gongstruct]() *Type {
 	case WhiteSpace:
 		return any(&WhiteSpace{
 			// Initialisation of associations
-			// field is initialized with ElementWithAnnotation as it is a composite
-			ElementWithAnnotation: ElementWithAnnotation{
+			// field is initialized with Annotated as it is a composite
+			Annotated: Annotated{
 				// per field init
 				//
 				Annotation: &Annotation{Name: "Annotation"},
@@ -2814,15 +3106,20 @@ func GetPointerReverseMap[Start, End Gongstruct](fieldname string, stage *StageS
 			}
 			return any(res).(map[*End][]*Start)
 		}
+	// reverse maps of direct associations of ComplexContent
+	case ComplexContent:
+		switch fieldname {
+		// insertion point for per direct association field
+		}
 	// reverse maps of direct associations of ComplexType
 	case ComplexType:
 		switch fieldname {
 		// insertion point for per direct association field
-		case "EnclosingElement":
+		case "DerivedFrom":
 			res := make(map[*Element][]*ComplexType)
 			for complextype := range stage.ComplexTypes {
-				if complextype.EnclosingElement != nil {
-					element_ := complextype.EnclosingElement
+				if complextype.DerivedFrom != nil {
+					element_ := complextype.DerivedFrom
 					var complextypes []*ComplexType
 					_, ok := res[element_]
 					if ok {
@@ -2849,6 +3146,57 @@ func GetPointerReverseMap[Start, End Gongstruct](fieldname string, stage *StageS
 					}
 					complextypes = append(complextypes, complextype)
 					res[annotation_] = complextypes
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "Extension":
+			res := make(map[*Extension][]*ComplexType)
+			for complextype := range stage.ComplexTypes {
+				if complextype.Extension != nil {
+					extension_ := complextype.Extension
+					var complextypes []*ComplexType
+					_, ok := res[extension_]
+					if ok {
+						complextypes = res[extension_]
+					} else {
+						complextypes = make([]*ComplexType, 0)
+					}
+					complextypes = append(complextypes, complextype)
+					res[extension_] = complextypes
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "SimpleContent":
+			res := make(map[*SimpleContent][]*ComplexType)
+			for complextype := range stage.ComplexTypes {
+				if complextype.SimpleContent != nil {
+					simplecontent_ := complextype.SimpleContent
+					var complextypes []*ComplexType
+					_, ok := res[simplecontent_]
+					if ok {
+						complextypes = res[simplecontent_]
+					} else {
+						complextypes = make([]*ComplexType, 0)
+					}
+					complextypes = append(complextypes, complextype)
+					res[simplecontent_] = complextypes
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "ComplexContent":
+			res := make(map[*ComplexContent][]*ComplexType)
+			for complextype := range stage.ComplexTypes {
+				if complextype.ComplexContent != nil {
+					complexcontent_ := complextype.ComplexContent
+					var complextypes []*ComplexType
+					_, ok := res[complexcontent_]
+					if ok {
+						complextypes = res[complexcontent_]
+					} else {
+						complextypes = make([]*ComplexType, 0)
+					}
+					complextypes = append(complextypes, complextype)
+					res[complexcontent_] = complextypes
 				}
 			}
 			return any(res).(map[*End][]*Start)
@@ -2935,6 +3283,11 @@ func GetPointerReverseMap[Start, End Gongstruct](fieldname string, stage *StageS
 				}
 			}
 			return any(res).(map[*End][]*Start)
+		}
+	// reverse maps of direct associations of Extension
+	case Extension:
+		switch fieldname {
+		// insertion point for per direct association field
 		}
 	// reverse maps of direct associations of Group
 	case Group:
@@ -3309,6 +3662,11 @@ func GetPointerReverseMap[Start, End Gongstruct](fieldname string, stage *StageS
 			}
 			return any(res).(map[*End][]*Start)
 		}
+	// reverse maps of direct associations of SimpleContent
+	case SimpleContent:
+		switch fieldname {
+		// insertion point for per direct association field
+		}
 	// reverse maps of direct associations of SimpleType
 	case SimpleType:
 		switch fieldname {
@@ -3576,6 +3934,11 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 			}
 			return any(res).(map[*End]*Start)
 		}
+	// reverse maps of direct associations of ComplexContent
+	case ComplexContent:
+		switch fieldname {
+		// insertion point for per direct association field
+		}
 	// reverse maps of direct associations of ComplexType
 	case ComplexType:
 		switch fieldname {
@@ -3659,6 +4022,51 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 	case Enumeration:
 		switch fieldname {
 		// insertion point for per direct association field
+		}
+	// reverse maps of direct associations of Extension
+	case Extension:
+		switch fieldname {
+		// insertion point for per direct association field
+		case "Sequences":
+			res := make(map[*Sequence]*Extension)
+			for extension := range stage.Extensions {
+				for _, sequence_ := range extension.Sequences {
+					res[sequence_] = extension
+				}
+			}
+			return any(res).(map[*End]*Start)
+		case "Alls":
+			res := make(map[*All]*Extension)
+			for extension := range stage.Extensions {
+				for _, all_ := range extension.Alls {
+					res[all_] = extension
+				}
+			}
+			return any(res).(map[*End]*Start)
+		case "Choices":
+			res := make(map[*Choice]*Extension)
+			for extension := range stage.Extensions {
+				for _, choice_ := range extension.Choices {
+					res[choice_] = extension
+				}
+			}
+			return any(res).(map[*End]*Start)
+		case "Groups":
+			res := make(map[*Group]*Extension)
+			for extension := range stage.Extensions {
+				for _, group_ := range extension.Groups {
+					res[group_] = extension
+				}
+			}
+			return any(res).(map[*End]*Start)
+		case "Elements":
+			res := make(map[*Element]*Extension)
+			for extension := range stage.Extensions {
+				for _, element_ := range extension.Elements {
+					res[element_] = extension
+				}
+			}
+			return any(res).(map[*End]*Start)
 		}
 	// reverse maps of direct associations of Group
 	case Group:
@@ -3838,6 +4246,11 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 			}
 			return any(res).(map[*End]*Start)
 		}
+	// reverse maps of direct associations of SimpleContent
+	case SimpleContent:
+		switch fieldname {
+		// insertion point for per direct association field
+		}
 	// reverse maps of direct associations of SimpleType
 	case SimpleType:
 		switch fieldname {
@@ -3880,6 +4293,8 @@ func GetGongstructName[Type Gongstruct]() (res string) {
 		res = "AttributeGroup"
 	case Choice:
 		res = "Choice"
+	case ComplexContent:
+		res = "ComplexContent"
 	case ComplexType:
 		res = "ComplexType"
 	case Documentation:
@@ -3888,6 +4303,8 @@ func GetGongstructName[Type Gongstruct]() (res string) {
 		res = "Element"
 	case Enumeration:
 		res = "Enumeration"
+	case Extension:
+		res = "Extension"
 	case Group:
 		res = "Group"
 	case Length:
@@ -3908,6 +4325,8 @@ func GetGongstructName[Type Gongstruct]() (res string) {
 		res = "Schema"
 	case Sequence:
 		res = "Sequence"
+	case SimpleContent:
+		res = "SimpleContent"
 	case SimpleType:
 		res = "SimpleType"
 	case TotalDigit:
@@ -3938,6 +4357,8 @@ func GetPointerToGongstructName[Type PointerToGongstruct]() (res string) {
 		res = "AttributeGroup"
 	case *Choice:
 		res = "Choice"
+	case *ComplexContent:
+		res = "ComplexContent"
 	case *ComplexType:
 		res = "ComplexType"
 	case *Documentation:
@@ -3946,6 +4367,8 @@ func GetPointerToGongstructName[Type PointerToGongstruct]() (res string) {
 		res = "Element"
 	case *Enumeration:
 		res = "Enumeration"
+	case *Extension:
+		res = "Extension"
 	case *Group:
 		res = "Group"
 	case *Length:
@@ -3966,6 +4389,8 @@ func GetPointerToGongstructName[Type PointerToGongstruct]() (res string) {
 		res = "Schema"
 	case *Sequence:
 		res = "Sequence"
+	case *SimpleContent:
+		res = "SimpleContent"
 	case *SimpleType:
 		res = "SimpleType"
 	case *TotalDigit:
@@ -3995,14 +4420,18 @@ func GetFields[Type Gongstruct]() (res []string) {
 		res = []string{"Name", "NameXSD", "Annotation", "AttributeGroups", "Ref", "Attributes"}
 	case Choice:
 		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "Sequences", "Alls", "Choices", "Groups", "Elements"}
+	case ComplexContent:
+		res = []string{"Name"}
 	case ComplexType:
-		res = []string{"Name", "HasNameConflict", "GoIdentifier", "IsInlined", "EnclosingElement", "Annotation", "NameXSD", "Sequences", "Alls", "Choices", "Groups", "Elements", "Attributes", "AttributeGroups"}
+		res = []string{"Name", "HasNameConflict", "GoIdentifier", "IsAnonymous", "DerivedFrom", "Annotation", "NameXSD", "Sequences", "Alls", "Choices", "Groups", "Elements", "Extension", "SimpleContent", "ComplexContent", "Attributes", "AttributeGroups"}
 	case Documentation:
 		res = []string{"Name", "Text", "Source", "Lang"}
 	case Element:
 		res = []string{"Name", "HasNameConflict", "GoIdentifier", "Annotation", "NameXSD", "Type", "MinOccurs", "MaxOccurs", "Default", "Fixed", "Nillable", "Ref", "Abstract", "Form", "Block", "Final", "SimpleType", "ComplexType", "Groups"}
 	case Enumeration:
 		res = []string{"Name", "Annotation", "Value"}
+	case Extension:
+		res = []string{"Name", "Sequences", "Alls", "Choices", "Groups", "Elements"}
 	case Group:
 		res = []string{"Name", "Annotation", "NameXSD", "Ref", "IsInlined", "EnclosingElement", "HasNameConflict", "GoIdentifier", "Sequences", "Alls", "Choices", "Groups", "Elements"}
 	case Length:
@@ -4023,6 +4452,8 @@ func GetFields[Type Gongstruct]() (res []string) {
 		res = []string{"Name", "Xs", "Annotation", "Elements", "SimpleTypes", "ComplexTypes", "AttributeGroups", "Groups"}
 	case Sequence:
 		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "Sequences", "Alls", "Choices", "Groups", "Elements"}
+	case SimpleContent:
+		res = []string{"Name"}
 	case SimpleType:
 		res = []string{"Name", "Annotation", "NameXSD", "Restriction", "Union"}
 	case TotalDigit:
@@ -4061,6 +4492,9 @@ func GetReverseFields[Type Gongstruct]() (res []ReverseField) {
 		rf.GongstructName = "ComplexType"
 		rf.Fieldname = "Alls"
 		res = append(res, rf)
+		rf.GongstructName = "Extension"
+		rf.Fieldname = "Alls"
+		res = append(res, rf)
 		rf.GongstructName = "Group"
 		rf.Fieldname = "Alls"
 		res = append(res, rf)
@@ -4103,12 +4537,18 @@ func GetReverseFields[Type Gongstruct]() (res []ReverseField) {
 		rf.GongstructName = "ComplexType"
 		rf.Fieldname = "Choices"
 		res = append(res, rf)
+		rf.GongstructName = "Extension"
+		rf.Fieldname = "Choices"
+		res = append(res, rf)
 		rf.GongstructName = "Group"
 		rf.Fieldname = "Choices"
 		res = append(res, rf)
 		rf.GongstructName = "Sequence"
 		rf.Fieldname = "Choices"
 		res = append(res, rf)
+	case ComplexContent:
+		var rf ReverseField
+		_ = rf
 	case ComplexType:
 		var rf ReverseField
 		_ = rf
@@ -4133,6 +4573,9 @@ func GetReverseFields[Type Gongstruct]() (res []ReverseField) {
 		rf.GongstructName = "ComplexType"
 		rf.Fieldname = "Elements"
 		res = append(res, rf)
+		rf.GongstructName = "Extension"
+		rf.Fieldname = "Elements"
+		res = append(res, rf)
 		rf.GongstructName = "Group"
 		rf.Fieldname = "Elements"
 		res = append(res, rf)
@@ -4148,6 +4591,9 @@ func GetReverseFields[Type Gongstruct]() (res []ReverseField) {
 		rf.GongstructName = "Restriction"
 		rf.Fieldname = "Enumerations"
 		res = append(res, rf)
+	case Extension:
+		var rf ReverseField
+		_ = rf
 	case Group:
 		var rf ReverseField
 		_ = rf
@@ -4161,6 +4607,9 @@ func GetReverseFields[Type Gongstruct]() (res []ReverseField) {
 		rf.Fieldname = "Groups"
 		res = append(res, rf)
 		rf.GongstructName = "Element"
+		rf.Fieldname = "Groups"
+		res = append(res, rf)
+		rf.GongstructName = "Extension"
 		rf.Fieldname = "Groups"
 		res = append(res, rf)
 		rf.GongstructName = "Group"
@@ -4208,12 +4657,18 @@ func GetReverseFields[Type Gongstruct]() (res []ReverseField) {
 		rf.GongstructName = "ComplexType"
 		rf.Fieldname = "Sequences"
 		res = append(res, rf)
+		rf.GongstructName = "Extension"
+		rf.Fieldname = "Sequences"
+		res = append(res, rf)
 		rf.GongstructName = "Group"
 		rf.Fieldname = "Sequences"
 		res = append(res, rf)
 		rf.GongstructName = "Sequence"
 		rf.Fieldname = "Sequences"
 		res = append(res, rf)
+	case SimpleContent:
+		var rf ReverseField
+		_ = rf
 	case SimpleType:
 		var rf ReverseField
 		_ = rf
@@ -4250,14 +4705,18 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 		res = []string{"Name", "NameXSD", "Annotation", "AttributeGroups", "Ref", "Attributes"}
 	case *Choice:
 		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "Sequences", "Alls", "Choices", "Groups", "Elements"}
+	case *ComplexContent:
+		res = []string{"Name"}
 	case *ComplexType:
-		res = []string{"Name", "HasNameConflict", "GoIdentifier", "IsInlined", "EnclosingElement", "Annotation", "NameXSD", "Sequences", "Alls", "Choices", "Groups", "Elements", "Attributes", "AttributeGroups"}
+		res = []string{"Name", "HasNameConflict", "GoIdentifier", "IsAnonymous", "DerivedFrom", "Annotation", "NameXSD", "Sequences", "Alls", "Choices", "Groups", "Elements", "Extension", "SimpleContent", "ComplexContent", "Attributes", "AttributeGroups"}
 	case *Documentation:
 		res = []string{"Name", "Text", "Source", "Lang"}
 	case *Element:
 		res = []string{"Name", "HasNameConflict", "GoIdentifier", "Annotation", "NameXSD", "Type", "MinOccurs", "MaxOccurs", "Default", "Fixed", "Nillable", "Ref", "Abstract", "Form", "Block", "Final", "SimpleType", "ComplexType", "Groups"}
 	case *Enumeration:
 		res = []string{"Name", "Annotation", "Value"}
+	case *Extension:
+		res = []string{"Name", "Sequences", "Alls", "Choices", "Groups", "Elements"}
 	case *Group:
 		res = []string{"Name", "Annotation", "NameXSD", "Ref", "IsInlined", "EnclosingElement", "HasNameConflict", "GoIdentifier", "Sequences", "Alls", "Choices", "Groups", "Elements"}
 	case *Length:
@@ -4278,6 +4737,8 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 		res = []string{"Name", "Xs", "Annotation", "Elements", "SimpleTypes", "ComplexTypes", "AttributeGroups", "Groups"}
 	case *Sequence:
 		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "Sequences", "Alls", "Choices", "Groups", "Elements"}
+	case *SimpleContent:
+		res = []string{"Name"}
 	case *SimpleType:
 		res = []string{"Name", "Annotation", "NameXSD", "Restriction", "Union"}
 	case *TotalDigit:
@@ -4467,6 +4928,12 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 				res += __instance__.Name
 			}
 		}
+	case *ComplexContent:
+		switch fieldName {
+		// string value of fields
+		case "Name":
+			res = inferedInstance.Name
+		}
 	case *ComplexType:
 		switch fieldName {
 		// string value of fields
@@ -4476,11 +4943,11 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 			res = fmt.Sprintf("%t", inferedInstance.HasNameConflict)
 		case "GoIdentifier":
 			res = inferedInstance.GoIdentifier
-		case "IsInlined":
-			res = fmt.Sprintf("%t", inferedInstance.IsInlined)
-		case "EnclosingElement":
-			if inferedInstance.EnclosingElement != nil {
-				res = inferedInstance.EnclosingElement.Name
+		case "IsAnonymous":
+			res = fmt.Sprintf("%t", inferedInstance.IsAnonymous)
+		case "DerivedFrom":
+			if inferedInstance.DerivedFrom != nil {
+				res = inferedInstance.DerivedFrom.Name
 			}
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
@@ -4522,6 +4989,18 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 					res += "\n"
 				}
 				res += __instance__.Name
+			}
+		case "Extension":
+			if inferedInstance.Extension != nil {
+				res = inferedInstance.Extension.Name
+			}
+		case "SimpleContent":
+			if inferedInstance.SimpleContent != nil {
+				res = inferedInstance.SimpleContent.Name
+			}
+		case "ComplexContent":
+			if inferedInstance.ComplexContent != nil {
+				res = inferedInstance.ComplexContent.Name
 			}
 		case "Attributes":
 			for idx, __instance__ := range inferedInstance.Attributes {
@@ -4614,6 +5093,47 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 			}
 		case "Value":
 			res = inferedInstance.Value
+		}
+	case *Extension:
+		switch fieldName {
+		// string value of fields
+		case "Name":
+			res = inferedInstance.Name
+		case "Sequences":
+			for idx, __instance__ := range inferedInstance.Sequences {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
+		case "Alls":
+			for idx, __instance__ := range inferedInstance.Alls {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
+		case "Choices":
+			for idx, __instance__ := range inferedInstance.Choices {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
+		case "Groups":
+			for idx, __instance__ := range inferedInstance.Groups {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
+		case "Elements":
+			for idx, __instance__ := range inferedInstance.Elements {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
 		}
 	case *Group:
 		switch fieldName {
@@ -4892,6 +5412,12 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 				}
 				res += __instance__.Name
 			}
+		}
+	case *SimpleContent:
+		switch fieldName {
+		// string value of fields
+		case "Name":
+			res = inferedInstance.Name
 		}
 	case *SimpleType:
 		switch fieldName {
@@ -5132,6 +5658,12 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 				res += __instance__.Name
 			}
 		}
+	case ComplexContent:
+		switch fieldName {
+		// string value of fields
+		case "Name":
+			res = inferedInstance.Name
+		}
 	case ComplexType:
 		switch fieldName {
 		// string value of fields
@@ -5141,11 +5673,11 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 			res = fmt.Sprintf("%t", inferedInstance.HasNameConflict)
 		case "GoIdentifier":
 			res = inferedInstance.GoIdentifier
-		case "IsInlined":
-			res = fmt.Sprintf("%t", inferedInstance.IsInlined)
-		case "EnclosingElement":
-			if inferedInstance.EnclosingElement != nil {
-				res = inferedInstance.EnclosingElement.Name
+		case "IsAnonymous":
+			res = fmt.Sprintf("%t", inferedInstance.IsAnonymous)
+		case "DerivedFrom":
+			if inferedInstance.DerivedFrom != nil {
+				res = inferedInstance.DerivedFrom.Name
 			}
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
@@ -5187,6 +5719,18 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 					res += "\n"
 				}
 				res += __instance__.Name
+			}
+		case "Extension":
+			if inferedInstance.Extension != nil {
+				res = inferedInstance.Extension.Name
+			}
+		case "SimpleContent":
+			if inferedInstance.SimpleContent != nil {
+				res = inferedInstance.SimpleContent.Name
+			}
+		case "ComplexContent":
+			if inferedInstance.ComplexContent != nil {
+				res = inferedInstance.ComplexContent.Name
 			}
 		case "Attributes":
 			for idx, __instance__ := range inferedInstance.Attributes {
@@ -5279,6 +5823,47 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 			}
 		case "Value":
 			res = inferedInstance.Value
+		}
+	case Extension:
+		switch fieldName {
+		// string value of fields
+		case "Name":
+			res = inferedInstance.Name
+		case "Sequences":
+			for idx, __instance__ := range inferedInstance.Sequences {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
+		case "Alls":
+			for idx, __instance__ := range inferedInstance.Alls {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
+		case "Choices":
+			for idx, __instance__ := range inferedInstance.Choices {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
+		case "Groups":
+			for idx, __instance__ := range inferedInstance.Groups {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
+		case "Elements":
+			for idx, __instance__ := range inferedInstance.Elements {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
 		}
 	case Group:
 		switch fieldName {
@@ -5557,6 +6142,12 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 				}
 				res += __instance__.Name
 			}
+		}
+	case SimpleContent:
+		switch fieldName {
+		// string value of fields
+		case "Name":
+			res = inferedInstance.Name
 		}
 	case SimpleType:
 		switch fieldName {

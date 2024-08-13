@@ -38,6 +38,13 @@ func GetReverseFieldOwnerName[T models.Gongstruct](
 					res = _complextype.Name
 				}
 			}
+		case "Extension":
+			switch reverseField.Fieldname {
+			case "Alls":
+				if _extension, ok := stage.Extension_Alls_reverseMap[inst]; ok {
+					res = _extension.Name
+				}
+			}
 		case "Group":
 			switch reverseField.Fieldname {
 			case "Alls":
@@ -128,6 +135,13 @@ func GetReverseFieldOwnerName[T models.Gongstruct](
 					res = _complextype.Name
 				}
 			}
+		case "Extension":
+			switch reverseField.Fieldname {
+			case "Choices":
+				if _extension, ok := stage.Extension_Choices_reverseMap[inst]; ok {
+					res = _extension.Name
+				}
+			}
 		case "Group":
 			switch reverseField.Fieldname {
 			case "Choices":
@@ -142,6 +156,11 @@ func GetReverseFieldOwnerName[T models.Gongstruct](
 					res = _sequence.Name
 				}
 			}
+		}
+
+	case *models.ComplexContent:
+		switch reverseField.GongstructName {
+		// insertion point
 		}
 
 	case *models.ComplexType:
@@ -192,6 +211,13 @@ func GetReverseFieldOwnerName[T models.Gongstruct](
 					res = _complextype.Name
 				}
 			}
+		case "Extension":
+			switch reverseField.Fieldname {
+			case "Elements":
+				if _extension, ok := stage.Extension_Elements_reverseMap[inst]; ok {
+					res = _extension.Name
+				}
+			}
 		case "Group":
 			switch reverseField.Fieldname {
 			case "Elements":
@@ -227,6 +253,11 @@ func GetReverseFieldOwnerName[T models.Gongstruct](
 			}
 		}
 
+	case *models.Extension:
+		switch reverseField.GongstructName {
+		// insertion point
+		}
+
 	case *models.Group:
 		switch reverseField.GongstructName {
 		// insertion point
@@ -256,6 +287,13 @@ func GetReverseFieldOwnerName[T models.Gongstruct](
 			case "Groups":
 				if _element, ok := stage.Element_Groups_reverseMap[inst]; ok {
 					res = _element.Name
+				}
+			}
+		case "Extension":
+			switch reverseField.Fieldname {
+			case "Groups":
+				if _extension, ok := stage.Extension_Groups_reverseMap[inst]; ok {
+					res = _extension.Name
 				}
 			}
 		case "Group":
@@ -345,6 +383,13 @@ func GetReverseFieldOwnerName[T models.Gongstruct](
 					res = _complextype.Name
 				}
 			}
+		case "Extension":
+			switch reverseField.Fieldname {
+			case "Sequences":
+				if _extension, ok := stage.Extension_Sequences_reverseMap[inst]; ok {
+					res = _extension.Name
+				}
+			}
 		case "Group":
 			switch reverseField.Fieldname {
 			case "Sequences":
@@ -359,6 +404,11 @@ func GetReverseFieldOwnerName[T models.Gongstruct](
 					res = _sequence.Name
 				}
 			}
+		}
+
+	case *models.SimpleContent:
+		switch reverseField.GongstructName {
+		// insertion point
 		}
 
 	case *models.SimpleType:
@@ -420,6 +470,11 @@ func GetReverseFieldOwner[T models.Gongstruct](
 			switch reverseField.Fieldname {
 			case "Alls":
 				res = stage.ComplexType_Alls_reverseMap[inst]
+			}
+		case "Extension":
+			switch reverseField.Fieldname {
+			case "Alls":
+				res = stage.Extension_Alls_reverseMap[inst]
 			}
 		case "Group":
 			switch reverseField.Fieldname {
@@ -491,6 +546,11 @@ func GetReverseFieldOwner[T models.Gongstruct](
 			case "Choices":
 				res = stage.ComplexType_Choices_reverseMap[inst]
 			}
+		case "Extension":
+			switch reverseField.Fieldname {
+			case "Choices":
+				res = stage.Extension_Choices_reverseMap[inst]
+			}
 		case "Group":
 			switch reverseField.Fieldname {
 			case "Choices":
@@ -501,6 +561,11 @@ func GetReverseFieldOwner[T models.Gongstruct](
 			case "Choices":
 				res = stage.Sequence_Choices_reverseMap[inst]
 			}
+		}
+
+	case *models.ComplexContent:
+		switch reverseField.GongstructName {
+		// insertion point
 		}
 
 	case *models.ComplexType:
@@ -541,6 +606,11 @@ func GetReverseFieldOwner[T models.Gongstruct](
 			case "Elements":
 				res = stage.ComplexType_Elements_reverseMap[inst]
 			}
+		case "Extension":
+			switch reverseField.Fieldname {
+			case "Elements":
+				res = stage.Extension_Elements_reverseMap[inst]
+			}
 		case "Group":
 			switch reverseField.Fieldname {
 			case "Elements":
@@ -568,6 +638,11 @@ func GetReverseFieldOwner[T models.Gongstruct](
 			}
 		}
 
+	case *models.Extension:
+		switch reverseField.GongstructName {
+		// insertion point
+		}
+
 	case *models.Group:
 		switch reverseField.GongstructName {
 		// insertion point
@@ -590,6 +665,11 @@ func GetReverseFieldOwner[T models.Gongstruct](
 			switch reverseField.Fieldname {
 			case "Groups":
 				res = stage.Element_Groups_reverseMap[inst]
+			}
+		case "Extension":
+			switch reverseField.Fieldname {
+			case "Groups":
+				res = stage.Extension_Groups_reverseMap[inst]
 			}
 		case "Group":
 			switch reverseField.Fieldname {
@@ -666,6 +746,11 @@ func GetReverseFieldOwner[T models.Gongstruct](
 			case "Sequences":
 				res = stage.ComplexType_Sequences_reverseMap[inst]
 			}
+		case "Extension":
+			switch reverseField.Fieldname {
+			case "Sequences":
+				res = stage.Extension_Sequences_reverseMap[inst]
+			}
 		case "Group":
 			switch reverseField.Fieldname {
 			case "Sequences":
@@ -676,6 +761,11 @@ func GetReverseFieldOwner[T models.Gongstruct](
 			case "Sequences":
 				res = stage.Sequence_Sequences_reverseMap[inst]
 			}
+		}
+
+	case *models.SimpleContent:
+		switch reverseField.GongstructName {
+		// insertion point
 		}
 
 	case *models.SimpleType:

@@ -2,7 +2,7 @@ package models
 
 type Group struct {
 	Name string
-	ElementWithAnnotation
+	Annotated
 	ElementWithNameAttribute
 	Ref string `xml:"ref,attr"`
 
@@ -11,7 +11,7 @@ type Group struct {
 	EnclosingElement *Element
 	WithGoIdentifier
 
-	Composer
+	ModelGroup
 }
 
 func (group *Group) GetFields(stage *StageStruct) (fields string) {
@@ -36,7 +36,7 @@ func (group *Group) GetFields(stage *StageStruct) (fields string) {
 
 	map_Name_Elems := make(map[string]*Element)
 
-	group.Composer.generateElements(map_Name_Elems, stMap, ctMap, groupMap, setOfGoIdentifiers, &fields)
+	group.ModelGroup.generateElements(map_Name_Elems, stMap, ctMap, groupMap, setOfGoIdentifiers, &fields)
 
 	return
 }

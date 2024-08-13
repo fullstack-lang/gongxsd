@@ -6,12 +6,22 @@ type ComplexType struct {
 	WithGoIdentifier
 
 	// analysis
-	IsInlined        bool // it has been defined by the enclosing element
-	EnclosingElement *Element
+	IsAnonymous bool // it has been defined inline by the enclosing element
+	DerivedFrom *Element
 
-	ElementWithAnnotation
+	Annotated
 	ElementWithNameAttribute
-	Composer
+
+	ModelGroup
+
+	Extension *Extension `xml:"extension"`
+
+	// xs:simpleContent element is used exclusively within an xs:complexType element
+	// to define complex types that contain simple content along with
+	// attributes or restrictions.
+	SimpleContent *SimpleContent `xml:"simpleContent"`
+
+	ComplexContent *ComplexContent `xml:"complexContent"`
 
 	Attributes      []*Attribute      `xml:"attribute"`
 	AttributeGroups []*AttributeGroup `xml:"attributeGroup"`
@@ -48,7 +58,7 @@ func (ct *ComplexType) GetFields(stage *StageStruct) (fields string) {
 
 	map_Name_Elems := make(map[string]*Element)
 
-	ct.Composer.generateElements(map_Name_Elems, stMap, ctMap, groupMap, setOfGoIdentifiers, &fields)
+	ct.ModelGroup.generateElements(map_Name_Elems, stMap, ctMap, groupMap, setOfGoIdentifiers, &fields)
 
 	return
 }

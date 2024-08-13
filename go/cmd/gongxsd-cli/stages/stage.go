@@ -4,7 +4,6 @@ import (
 	"time"
 
 	"github.com/fullstack-lang/gongxsd/go/models"
-
 	// injection point for ident package import declaration{{ImportPackageDeclaration}}
 )
 
@@ -240,25 +239,25 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000000_bookType.Name = `bookType`
 	__ComplexType__000000_bookType.HasNameConflict = false
 	__ComplexType__000000_bookType.GoIdentifier = `BookType`
-	__ComplexType__000000_bookType.IsInlined = false
+	__ComplexType__000000_bookType.IsAnonymous = false
 	__ComplexType__000000_bookType.NameXSD = `bookType`
 
 	__ComplexType__000001_books_E.Name = `books_E`
 	__ComplexType__000001_books_E.HasNameConflict = false
 	__ComplexType__000001_books_E.GoIdentifier = ``
-	__ComplexType__000001_books_E.IsInlined = true
+	__ComplexType__000001_books_E.IsAnonymous = true
 	__ComplexType__000001_books_E.NameXSD = ``
 
 	__ComplexType__000002_credit.Name = `credit`
 	__ComplexType__000002_credit.HasNameConflict = false
 	__ComplexType__000002_credit.GoIdentifier = `Credit`
-	__ComplexType__000002_credit.IsInlined = false
+	__ComplexType__000002_credit.IsAnonymous = false
 	__ComplexType__000002_credit.NameXSD = `credit`
 
 	__ComplexType__000003_link.Name = `link`
 	__ComplexType__000003_link.HasNameConflict = false
 	__ComplexType__000003_link.GoIdentifier = `Link`
-	__ComplexType__000003_link.IsInlined = false
+	__ComplexType__000003_link.IsAnonymous = false
 	__ComplexType__000003_link.NameXSD = `link`
 
 	__Documentation__000000_Schema_E_E.Name = `Schema_E_E`
@@ -660,7 +659,7 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000000_bookType.Annotation = __Annotation__000002_bookType_E
 	__ComplexType__000000_bookType.Sequences = append(__ComplexType__000000_bookType.Sequences, __Sequence__000003_bookType_E)
 	__ComplexType__000000_bookType.AttributeGroups = append(__ComplexType__000000_bookType.AttributeGroups, __AttributeGroup__000001_)
-	__ComplexType__000001_books_E.EnclosingElement = __Element__000002_books
+	__ComplexType__000001_books_E.DerivedFrom = __Element__000002_books
 	__ComplexType__000001_books_E.Sequences = append(__ComplexType__000001_books_E.Sequences, __Sequence__000004_books_E_E)
 	__ComplexType__000002_credit.Annotation = __Annotation__000004_credit_E
 	__ComplexType__000002_credit.Sequences = append(__ComplexType__000002_credit.Sequences, __Sequence__000005_credit_E)

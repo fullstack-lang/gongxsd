@@ -91,6 +91,19 @@ func FillUpFormFromGongstructName(
 		choice := new(models.Choice)
 		formGroup.HasSuppressButton = !isNewInstance
 		FillUpForm(choice, formGroup, probe)
+	case "ComplexContent":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "ComplexContent Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__ComplexContentFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		complexcontent := new(models.ComplexContent)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(complexcontent, formGroup, probe)
 	case "ComplexType":
 		formGroup := (&form.FormGroup{
 			Name:  form.FormGroupDefaultName.ToString(),
@@ -143,6 +156,19 @@ func FillUpFormFromGongstructName(
 		enumeration := new(models.Enumeration)
 		formGroup.HasSuppressButton = !isNewInstance
 		FillUpForm(enumeration, formGroup, probe)
+	case "Extension":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "Extension Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__ExtensionFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		extension := new(models.Extension)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(extension, formGroup, probe)
 	case "Group":
 		formGroup := (&form.FormGroup{
 			Name:  form.FormGroupDefaultName.ToString(),
@@ -273,6 +299,19 @@ func FillUpFormFromGongstructName(
 		sequence := new(models.Sequence)
 		formGroup.HasSuppressButton = !isNewInstance
 		FillUpForm(sequence, formGroup, probe)
+	case "SimpleContent":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "SimpleContent Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__SimpleContentFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		simplecontent := new(models.SimpleContent)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(simplecontent, formGroup, probe)
 	case "SimpleType":
 		formGroup := (&form.FormGroup{
 			Name:  form.FormGroupDefaultName.ToString(),

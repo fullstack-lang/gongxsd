@@ -40,6 +40,8 @@ func (cellDeleteIconImpl *CellDeleteIconImpl[T]) CellIconUpdated(stage *gongtabl
 		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
 	case *models.Choice:
 		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
+	case *models.ComplexContent:
+		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
 	case *models.ComplexType:
 		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
 	case *models.Documentation:
@@ -47,6 +49,8 @@ func (cellDeleteIconImpl *CellDeleteIconImpl[T]) CellIconUpdated(stage *gongtabl
 	case *models.Element:
 		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
 	case *models.Enumeration:
+		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
+	case *models.Extension:
 		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
 	case *models.Group:
 		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
@@ -67,6 +71,8 @@ func (cellDeleteIconImpl *CellDeleteIconImpl[T]) CellIconUpdated(stage *gongtabl
 	case *models.Schema:
 		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
 	case *models.Sequence:
+		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
+	case *models.SimpleContent:
 		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
 	case *models.SimpleType:
 		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)

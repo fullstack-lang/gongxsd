@@ -30,6 +30,8 @@ func fillUpTablePointerToGongstruct[T models.PointerToGongstruct](
 		fillUpTable[models.AttributeGroup](probe)
 	case *models.Choice:
 		fillUpTable[models.Choice](probe)
+	case *models.ComplexContent:
+		fillUpTable[models.ComplexContent](probe)
 	case *models.ComplexType:
 		fillUpTable[models.ComplexType](probe)
 	case *models.Documentation:
@@ -38,6 +40,8 @@ func fillUpTablePointerToGongstruct[T models.PointerToGongstruct](
 		fillUpTable[models.Element](probe)
 	case *models.Enumeration:
 		fillUpTable[models.Enumeration](probe)
+	case *models.Extension:
+		fillUpTable[models.Extension](probe)
 	case *models.Group:
 		fillUpTable[models.Group](probe)
 	case *models.Length:
@@ -58,6 +62,8 @@ func fillUpTablePointerToGongstruct[T models.PointerToGongstruct](
 		fillUpTable[models.Schema](probe)
 	case *models.Sequence:
 		fillUpTable[models.Sequence](probe)
+	case *models.SimpleContent:
+		fillUpTable[models.SimpleContent](probe)
 	case *models.SimpleType:
 		fillUpTable[models.SimpleType](probe)
 	case *models.TotalDigit:

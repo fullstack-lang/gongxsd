@@ -82,6 +82,13 @@ func registerControllers(r *gin.Engine) {
 		v1.PUT("/v1/choices/:id", GetController().UpdateChoice)
 		v1.DELETE("/v1/choices/:id", GetController().DeleteChoice)
 
+		v1.GET("/v1/complexcontents", GetController().GetComplexContents)
+		v1.GET("/v1/complexcontents/:id", GetController().GetComplexContent)
+		v1.POST("/v1/complexcontents", GetController().PostComplexContent)
+		v1.PATCH("/v1/complexcontents/:id", GetController().UpdateComplexContent)
+		v1.PUT("/v1/complexcontents/:id", GetController().UpdateComplexContent)
+		v1.DELETE("/v1/complexcontents/:id", GetController().DeleteComplexContent)
+
 		v1.GET("/v1/complextypes", GetController().GetComplexTypes)
 		v1.GET("/v1/complextypes/:id", GetController().GetComplexType)
 		v1.POST("/v1/complextypes", GetController().PostComplexType)
@@ -109,6 +116,13 @@ func registerControllers(r *gin.Engine) {
 		v1.PATCH("/v1/enumerations/:id", GetController().UpdateEnumeration)
 		v1.PUT("/v1/enumerations/:id", GetController().UpdateEnumeration)
 		v1.DELETE("/v1/enumerations/:id", GetController().DeleteEnumeration)
+
+		v1.GET("/v1/extensions", GetController().GetExtensions)
+		v1.GET("/v1/extensions/:id", GetController().GetExtension)
+		v1.POST("/v1/extensions", GetController().PostExtension)
+		v1.PATCH("/v1/extensions/:id", GetController().UpdateExtension)
+		v1.PUT("/v1/extensions/:id", GetController().UpdateExtension)
+		v1.DELETE("/v1/extensions/:id", GetController().DeleteExtension)
 
 		v1.GET("/v1/groups", GetController().GetGroups)
 		v1.GET("/v1/groups/:id", GetController().GetGroup)
@@ -179,6 +193,13 @@ func registerControllers(r *gin.Engine) {
 		v1.PATCH("/v1/sequences/:id", GetController().UpdateSequence)
 		v1.PUT("/v1/sequences/:id", GetController().UpdateSequence)
 		v1.DELETE("/v1/sequences/:id", GetController().DeleteSequence)
+
+		v1.GET("/v1/simplecontents", GetController().GetSimpleContents)
+		v1.GET("/v1/simplecontents/:id", GetController().GetSimpleContent)
+		v1.POST("/v1/simplecontents", GetController().PostSimpleContent)
+		v1.PATCH("/v1/simplecontents/:id", GetController().UpdateSimpleContent)
+		v1.PUT("/v1/simplecontents/:id", GetController().UpdateSimpleContent)
+		v1.DELETE("/v1/simplecontents/:id", GetController().DeleteSimpleContent)
 
 		v1.GET("/v1/simpletypes", GetController().GetSimpleTypes)
 		v1.GET("/v1/simpletypes/:id", GetController().GetSimpleType)

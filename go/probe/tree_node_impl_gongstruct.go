@@ -67,6 +67,9 @@ func (nodeImplGongstruct *TreeNodeImplGongstruct) OnAfterUpdate(
 	if nodeImplGongstruct.gongStruct.GetName() == "Choice" {
 		fillUpTable[models.Choice](nodeImplGongstruct.probe)
 	}
+	if nodeImplGongstruct.gongStruct.GetName() == "ComplexContent" {
+		fillUpTable[models.ComplexContent](nodeImplGongstruct.probe)
+	}
 	if nodeImplGongstruct.gongStruct.GetName() == "ComplexType" {
 		fillUpTable[models.ComplexType](nodeImplGongstruct.probe)
 	}
@@ -78,6 +81,9 @@ func (nodeImplGongstruct *TreeNodeImplGongstruct) OnAfterUpdate(
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Enumeration" {
 		fillUpTable[models.Enumeration](nodeImplGongstruct.probe)
+	}
+	if nodeImplGongstruct.gongStruct.GetName() == "Extension" {
+		fillUpTable[models.Extension](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Group" {
 		fillUpTable[models.Group](nodeImplGongstruct.probe)
@@ -108,6 +114,9 @@ func (nodeImplGongstruct *TreeNodeImplGongstruct) OnAfterUpdate(
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Sequence" {
 		fillUpTable[models.Sequence](nodeImplGongstruct.probe)
+	}
+	if nodeImplGongstruct.gongStruct.GetName() == "SimpleContent" {
+		fillUpTable[models.SimpleContent](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "SimpleType" {
 		fillUpTable[models.SimpleType](nodeImplGongstruct.probe)

@@ -93,12 +93,22 @@ func (from *Choice) CopyBasicFields(to *Choice) {
 	to.MaxOccurs = from.MaxOccurs
 }
 
+type ComplexContent_WOP struct {
+	// insertion point
+	Name string
+}
+
+func (from *ComplexContent) CopyBasicFields(to *ComplexContent) {
+	// insertion point
+	to.Name = from.Name
+}
+
 type ComplexType_WOP struct {
 	// insertion point
 	Name string
 	HasNameConflict bool
 	GoIdentifier string
-	IsInlined bool
+	IsAnonymous bool
 	NameXSD string
 }
 
@@ -107,7 +117,7 @@ func (from *ComplexType) CopyBasicFields(to *ComplexType) {
 	to.Name = from.Name
 	to.HasNameConflict = from.HasNameConflict
 	to.GoIdentifier = from.GoIdentifier
-	to.IsInlined = from.IsInlined
+	to.IsAnonymous = from.IsAnonymous
 	to.NameXSD = from.NameXSD
 }
 
@@ -175,6 +185,16 @@ func (from *Enumeration) CopyBasicFields(to *Enumeration) {
 	// insertion point
 	to.Name = from.Name
 	to.Value = from.Value
+}
+
+type Extension_WOP struct {
+	// insertion point
+	Name string
+}
+
+func (from *Extension) CopyBasicFields(to *Extension) {
+	// insertion point
+	to.Name = from.Name
 }
 
 type Group_WOP struct {
@@ -305,6 +325,16 @@ func (from *Sequence) CopyBasicFields(to *Sequence) {
 	to.Name = from.Name
 	to.MinOccurs = from.MinOccurs
 	to.MaxOccurs = from.MaxOccurs
+}
+
+type SimpleContent_WOP struct {
+	// insertion point
+	Name string
+}
+
+func (from *SimpleContent) CopyBasicFields(to *SimpleContent) {
+	// insertion point
+	to.Name = from.Name
 }
 
 type SimpleType_WOP struct {

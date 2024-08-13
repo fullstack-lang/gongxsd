@@ -20,6 +20,9 @@ func IsStaged[Type Gongstruct](stage *StageStruct, instance *Type) (ok bool) {
 	case *Choice:
 		ok = stage.IsStagedChoice(target)
 
+	case *ComplexContent:
+		ok = stage.IsStagedComplexContent(target)
+
 	case *ComplexType:
 		ok = stage.IsStagedComplexType(target)
 
@@ -31,6 +34,9 @@ func IsStaged[Type Gongstruct](stage *StageStruct, instance *Type) (ok bool) {
 
 	case *Enumeration:
 		ok = stage.IsStagedEnumeration(target)
+
+	case *Extension:
+		ok = stage.IsStagedExtension(target)
 
 	case *Group:
 		ok = stage.IsStagedGroup(target)
@@ -61,6 +67,9 @@ func IsStaged[Type Gongstruct](stage *StageStruct, instance *Type) (ok bool) {
 
 	case *Sequence:
 		ok = stage.IsStagedSequence(target)
+
+	case *SimpleContent:
+		ok = stage.IsStagedSimpleContent(target)
 
 	case *SimpleType:
 		ok = stage.IsStagedSimpleType(target)
@@ -116,6 +125,13 @@ func (stage *StageStruct) IsStagedChoice(choice *Choice) (ok bool) {
 	return
 }
 
+func (stage *StageStruct) IsStagedComplexContent(complexcontent *ComplexContent) (ok bool) {
+
+	_, ok = stage.ComplexContents[complexcontent]
+
+	return
+}
+
 func (stage *StageStruct) IsStagedComplexType(complextype *ComplexType) (ok bool) {
 
 	_, ok = stage.ComplexTypes[complextype]
@@ -140,6 +156,13 @@ func (stage *StageStruct) IsStagedElement(element *Element) (ok bool) {
 func (stage *StageStruct) IsStagedEnumeration(enumeration *Enumeration) (ok bool) {
 
 	_, ok = stage.Enumerations[enumeration]
+
+	return
+}
+
+func (stage *StageStruct) IsStagedExtension(extension *Extension) (ok bool) {
+
+	_, ok = stage.Extensions[extension]
 
 	return
 }
@@ -214,6 +237,13 @@ func (stage *StageStruct) IsStagedSequence(sequence *Sequence) (ok bool) {
 	return
 }
 
+func (stage *StageStruct) IsStagedSimpleContent(simplecontent *SimpleContent) (ok bool) {
+
+	_, ok = stage.SimpleContents[simplecontent]
+
+	return
+}
+
 func (stage *StageStruct) IsStagedSimpleType(simpletype *SimpleType) (ok bool) {
 
 	_, ok = stage.SimpleTypes[simpletype]
@@ -265,6 +295,9 @@ func StageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 	case *Choice:
 		stage.StageBranchChoice(target)
 
+	case *ComplexContent:
+		stage.StageBranchComplexContent(target)
+
 	case *ComplexType:
 		stage.StageBranchComplexType(target)
 
@@ -276,6 +309,9 @@ func StageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 
 	case *Enumeration:
 		stage.StageBranchEnumeration(target)
+
+	case *Extension:
+		stage.StageBranchExtension(target)
 
 	case *Group:
 		stage.StageBranchGroup(target)
@@ -306,6 +342,9 @@ func StageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 
 	case *Sequence:
 		stage.StageBranchSequence(target)
+
+	case *SimpleContent:
+		stage.StageBranchSimpleContent(target)
 
 	case *SimpleType:
 		stage.StageBranchSimpleType(target)
@@ -451,6 +490,21 @@ func (stage *StageStruct) StageBranchChoice(choice *Choice) {
 
 }
 
+func (stage *StageStruct) StageBranchComplexContent(complexcontent *ComplexContent) {
+
+	// check if instance is already staged
+	if IsStaged(stage, complexcontent) {
+		return
+	}
+
+	complexcontent.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
 func (stage *StageStruct) StageBranchComplexType(complextype *ComplexType) {
 
 	// check if instance is already staged
@@ -461,11 +515,20 @@ func (stage *StageStruct) StageBranchComplexType(complextype *ComplexType) {
 	complextype.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
-	if complextype.EnclosingElement != nil {
-		StageBranch(stage, complextype.EnclosingElement)
+	if complextype.DerivedFrom != nil {
+		StageBranch(stage, complextype.DerivedFrom)
 	}
 	if complextype.Annotation != nil {
 		StageBranch(stage, complextype.Annotation)
+	}
+	if complextype.Extension != nil {
+		StageBranch(stage, complextype.Extension)
+	}
+	if complextype.SimpleContent != nil {
+		StageBranch(stage, complextype.SimpleContent)
+	}
+	if complextype.ComplexContent != nil {
+		StageBranch(stage, complextype.ComplexContent)
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
@@ -550,6 +613,36 @@ func (stage *StageStruct) StageBranchEnumeration(enumeration *Enumeration) {
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) StageBranchExtension(extension *Extension) {
+
+	// check if instance is already staged
+	if IsStaged(stage, extension) {
+		return
+	}
+
+	extension.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _sequence := range extension.Sequences {
+		StageBranch(stage, _sequence)
+	}
+	for _, _all := range extension.Alls {
+		StageBranch(stage, _all)
+	}
+	for _, _choice := range extension.Choices {
+		StageBranch(stage, _choice)
+	}
+	for _, _group := range extension.Groups {
+		StageBranch(stage, _group)
+	}
+	for _, _element := range extension.Elements {
+		StageBranch(stage, _element)
+	}
 
 }
 
@@ -808,6 +901,21 @@ func (stage *StageStruct) StageBranchSequence(sequence *Sequence) {
 
 }
 
+func (stage *StageStruct) StageBranchSimpleContent(simplecontent *SimpleContent) {
+
+	// check if instance is already staged
+	if IsStaged(stage, simplecontent) {
+		return
+	}
+
+	simplecontent.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
 func (stage *StageStruct) StageBranchSimpleType(simpletype *SimpleType) {
 
 	// check if instance is already staged
@@ -917,6 +1025,10 @@ func CopyBranch[Type Gongstruct](from *Type) (to *Type) {
 		toT := CopyBranchChoice(mapOrigCopy, fromT)
 		return any(toT).(*Type)
 
+	case *ComplexContent:
+		toT := CopyBranchComplexContent(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
 	case *ComplexType:
 		toT := CopyBranchComplexType(mapOrigCopy, fromT)
 		return any(toT).(*Type)
@@ -931,6 +1043,10 @@ func CopyBranch[Type Gongstruct](from *Type) (to *Type) {
 
 	case *Enumeration:
 		toT := CopyBranchEnumeration(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
+	case *Extension:
+		toT := CopyBranchExtension(mapOrigCopy, fromT)
 		return any(toT).(*Type)
 
 	case *Group:
@@ -971,6 +1087,10 @@ func CopyBranch[Type Gongstruct](from *Type) (to *Type) {
 
 	case *Sequence:
 		toT := CopyBranchSequence(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
+	case *SimpleContent:
+		toT := CopyBranchSimpleContent(mapOrigCopy, fromT)
 		return any(toT).(*Type)
 
 	case *SimpleType:
@@ -1142,6 +1262,25 @@ func CopyBranchChoice(mapOrigCopy map[any]any, choiceFrom *Choice) (choiceTo *Ch
 	return
 }
 
+func CopyBranchComplexContent(mapOrigCopy map[any]any, complexcontentFrom *ComplexContent) (complexcontentTo *ComplexContent) {
+
+	// complexcontentFrom has already been copied
+	if _complexcontentTo, ok := mapOrigCopy[complexcontentFrom]; ok {
+		complexcontentTo = _complexcontentTo.(*ComplexContent)
+		return
+	}
+
+	complexcontentTo = new(ComplexContent)
+	mapOrigCopy[complexcontentFrom] = complexcontentTo
+	complexcontentFrom.CopyBasicFields(complexcontentTo)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+	return
+}
+
 func CopyBranchComplexType(mapOrigCopy map[any]any, complextypeFrom *ComplexType) (complextypeTo *ComplexType) {
 
 	// complextypeFrom has already been copied
@@ -1155,11 +1294,20 @@ func CopyBranchComplexType(mapOrigCopy map[any]any, complextypeFrom *ComplexType
 	complextypeFrom.CopyBasicFields(complextypeTo)
 
 	//insertion point for the staging of instances referenced by pointers
-	if complextypeFrom.EnclosingElement != nil {
-		complextypeTo.EnclosingElement = CopyBranchElement(mapOrigCopy, complextypeFrom.EnclosingElement)
+	if complextypeFrom.DerivedFrom != nil {
+		complextypeTo.DerivedFrom = CopyBranchElement(mapOrigCopy, complextypeFrom.DerivedFrom)
 	}
 	if complextypeFrom.Annotation != nil {
 		complextypeTo.Annotation = CopyBranchAnnotation(mapOrigCopy, complextypeFrom.Annotation)
+	}
+	if complextypeFrom.Extension != nil {
+		complextypeTo.Extension = CopyBranchExtension(mapOrigCopy, complextypeFrom.Extension)
+	}
+	if complextypeFrom.SimpleContent != nil {
+		complextypeTo.SimpleContent = CopyBranchSimpleContent(mapOrigCopy, complextypeFrom.SimpleContent)
+	}
+	if complextypeFrom.ComplexContent != nil {
+		complextypeTo.ComplexContent = CopyBranchComplexContent(mapOrigCopy, complextypeFrom.ComplexContent)
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
@@ -1256,6 +1404,40 @@ func CopyBranchEnumeration(mapOrigCopy map[any]any, enumerationFrom *Enumeration
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
+
+	return
+}
+
+func CopyBranchExtension(mapOrigCopy map[any]any, extensionFrom *Extension) (extensionTo *Extension) {
+
+	// extensionFrom has already been copied
+	if _extensionTo, ok := mapOrigCopy[extensionFrom]; ok {
+		extensionTo = _extensionTo.(*Extension)
+		return
+	}
+
+	extensionTo = new(Extension)
+	mapOrigCopy[extensionFrom] = extensionTo
+	extensionFrom.CopyBasicFields(extensionTo)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _sequence := range extensionFrom.Sequences {
+		extensionTo.Sequences = append(extensionTo.Sequences, CopyBranchSequence(mapOrigCopy, _sequence))
+	}
+	for _, _all := range extensionFrom.Alls {
+		extensionTo.Alls = append(extensionTo.Alls, CopyBranchAll(mapOrigCopy, _all))
+	}
+	for _, _choice := range extensionFrom.Choices {
+		extensionTo.Choices = append(extensionTo.Choices, CopyBranchChoice(mapOrigCopy, _choice))
+	}
+	for _, _group := range extensionFrom.Groups {
+		extensionTo.Groups = append(extensionTo.Groups, CopyBranchGroup(mapOrigCopy, _group))
+	}
+	for _, _element := range extensionFrom.Elements {
+		extensionTo.Elements = append(extensionTo.Elements, CopyBranchElement(mapOrigCopy, _element))
+	}
 
 	return
 }
@@ -1555,6 +1737,25 @@ func CopyBranchSequence(mapOrigCopy map[any]any, sequenceFrom *Sequence) (sequen
 	return
 }
 
+func CopyBranchSimpleContent(mapOrigCopy map[any]any, simplecontentFrom *SimpleContent) (simplecontentTo *SimpleContent) {
+
+	// simplecontentFrom has already been copied
+	if _simplecontentTo, ok := mapOrigCopy[simplecontentFrom]; ok {
+		simplecontentTo = _simplecontentTo.(*SimpleContent)
+		return
+	}
+
+	simplecontentTo = new(SimpleContent)
+	mapOrigCopy[simplecontentFrom] = simplecontentTo
+	simplecontentFrom.CopyBasicFields(simplecontentTo)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+	return
+}
+
 func CopyBranchSimpleType(mapOrigCopy map[any]any, simpletypeFrom *SimpleType) (simpletypeTo *SimpleType) {
 
 	// simpletypeFrom has already been copied
@@ -1672,6 +1873,9 @@ func UnstageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 	case *Choice:
 		stage.UnstageBranchChoice(target)
 
+	case *ComplexContent:
+		stage.UnstageBranchComplexContent(target)
+
 	case *ComplexType:
 		stage.UnstageBranchComplexType(target)
 
@@ -1683,6 +1887,9 @@ func UnstageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 
 	case *Enumeration:
 		stage.UnstageBranchEnumeration(target)
+
+	case *Extension:
+		stage.UnstageBranchExtension(target)
 
 	case *Group:
 		stage.UnstageBranchGroup(target)
@@ -1713,6 +1920,9 @@ func UnstageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 
 	case *Sequence:
 		stage.UnstageBranchSequence(target)
+
+	case *SimpleContent:
+		stage.UnstageBranchSimpleContent(target)
 
 	case *SimpleType:
 		stage.UnstageBranchSimpleType(target)
@@ -1858,6 +2068,21 @@ func (stage *StageStruct) UnstageBranchChoice(choice *Choice) {
 
 }
 
+func (stage *StageStruct) UnstageBranchComplexContent(complexcontent *ComplexContent) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, complexcontent) {
+		return
+	}
+
+	complexcontent.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
 func (stage *StageStruct) UnstageBranchComplexType(complextype *ComplexType) {
 
 	// check if instance is already staged
@@ -1868,11 +2093,20 @@ func (stage *StageStruct) UnstageBranchComplexType(complextype *ComplexType) {
 	complextype.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
-	if complextype.EnclosingElement != nil {
-		UnstageBranch(stage, complextype.EnclosingElement)
+	if complextype.DerivedFrom != nil {
+		UnstageBranch(stage, complextype.DerivedFrom)
 	}
 	if complextype.Annotation != nil {
 		UnstageBranch(stage, complextype.Annotation)
+	}
+	if complextype.Extension != nil {
+		UnstageBranch(stage, complextype.Extension)
+	}
+	if complextype.SimpleContent != nil {
+		UnstageBranch(stage, complextype.SimpleContent)
+	}
+	if complextype.ComplexContent != nil {
+		UnstageBranch(stage, complextype.ComplexContent)
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
@@ -1957,6 +2191,36 @@ func (stage *StageStruct) UnstageBranchEnumeration(enumeration *Enumeration) {
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) UnstageBranchExtension(extension *Extension) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, extension) {
+		return
+	}
+
+	extension.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _sequence := range extension.Sequences {
+		UnstageBranch(stage, _sequence)
+	}
+	for _, _all := range extension.Alls {
+		UnstageBranch(stage, _all)
+	}
+	for _, _choice := range extension.Choices {
+		UnstageBranch(stage, _choice)
+	}
+	for _, _group := range extension.Groups {
+		UnstageBranch(stage, _group)
+	}
+	for _, _element := range extension.Elements {
+		UnstageBranch(stage, _element)
+	}
 
 }
 
@@ -2212,6 +2476,21 @@ func (stage *StageStruct) UnstageBranchSequence(sequence *Sequence) {
 	for _, _element := range sequence.Elements {
 		UnstageBranch(stage, _element)
 	}
+
+}
+
+func (stage *StageStruct) UnstageBranchSimpleContent(simplecontent *SimpleContent) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, simplecontent) {
+		return
+	}
+
+	simplecontent.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
 
 }
 

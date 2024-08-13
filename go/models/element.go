@@ -6,7 +6,7 @@ type Element struct {
 	// analysis
 	WithGoIdentifier
 
-	ElementWithAnnotation
+	Annotated
 	ElementWithNameAttribute
 	ElementWithTypeAttribute
 

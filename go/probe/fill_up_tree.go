@@ -112,6 +112,16 @@ func fillUpTree(
 
 				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
 			}
+		case "ComplexContent":
+			nodeGongstruct.Name = name
+			set := *models.GetGongstructInstancesSet[models.ComplexContent](probe.stageOfInterest)
+			for _complexcontent := range set {
+				nodeInstance := (&tree.Node{Name: _complexcontent.GetName()}).Stage(probe.treeStage)
+				nodeInstance.IsNodeClickable = true
+				nodeInstance.Impl = NewInstanceNodeCallback(_complexcontent, "ComplexContent", probe)
+
+				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
+			}
 		case "ComplexType":
 			nodeGongstruct.Name = name
 			set := *models.GetGongstructInstancesSet[models.ComplexType](probe.stageOfInterest)
@@ -149,6 +159,16 @@ func fillUpTree(
 				nodeInstance := (&tree.Node{Name: _enumeration.GetName()}).Stage(probe.treeStage)
 				nodeInstance.IsNodeClickable = true
 				nodeInstance.Impl = NewInstanceNodeCallback(_enumeration, "Enumeration", probe)
+
+				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
+			}
+		case "Extension":
+			nodeGongstruct.Name = name
+			set := *models.GetGongstructInstancesSet[models.Extension](probe.stageOfInterest)
+			for _extension := range set {
+				nodeInstance := (&tree.Node{Name: _extension.GetName()}).Stage(probe.treeStage)
+				nodeInstance.IsNodeClickable = true
+				nodeInstance.Impl = NewInstanceNodeCallback(_extension, "Extension", probe)
 
 				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
 			}
@@ -249,6 +269,16 @@ func fillUpTree(
 				nodeInstance := (&tree.Node{Name: _sequence.GetName()}).Stage(probe.treeStage)
 				nodeInstance.IsNodeClickable = true
 				nodeInstance.Impl = NewInstanceNodeCallback(_sequence, "Sequence", probe)
+
+				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
+			}
+		case "SimpleContent":
+			nodeGongstruct.Name = name
+			set := *models.GetGongstructInstancesSet[models.SimpleContent](probe.stageOfInterest)
+			for _simplecontent := range set {
+				nodeInstance := (&tree.Node{Name: _simplecontent.GetName()}).Stage(probe.treeStage)
+				nodeInstance.IsNodeClickable = true
+				nodeInstance.Impl = NewInstanceNodeCallback(_simplecontent, "SimpleContent", probe)
 
 				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
 			}

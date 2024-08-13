@@ -47,9 +47,9 @@ type ComplexTypeAPI struct {
 type ComplexTypePointersEncoding struct {
 	// insertion for pointer fields encoding declaration
 
-	// field EnclosingElement is a pointer to another Struct (optional or 0..1)
+	// field DerivedFrom is a pointer to another Struct (optional or 0..1)
 	// This field is generated into another field to enable AS ONE association
-	EnclosingElementID sql.NullInt64
+	DerivedFromID sql.NullInt64
 
 	// field Annotation is a pointer to another Struct (optional or 0..1)
 	// This field is generated into another field to enable AS ONE association
@@ -69,6 +69,18 @@ type ComplexTypePointersEncoding struct {
 
 	// field Elements is a slice of pointers to another Struct (optional or 0..1)
 	Elements IntSlice `gorm:"type:TEXT"`
+
+	// field Extension is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	ExtensionID sql.NullInt64
+
+	// field SimpleContent is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	SimpleContentID sql.NullInt64
+
+	// field ComplexContent is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	ComplexContentID sql.NullInt64
 
 	// field Attributes is a slice of pointers to another Struct (optional or 0..1)
 	Attributes IntSlice `gorm:"type:TEXT"`
@@ -98,9 +110,9 @@ type ComplexTypeDB struct {
 	// Declation for basic field complextypeDB.GoIdentifier
 	GoIdentifier_Data sql.NullString
 
-	// Declation for basic field complextypeDB.IsInlined
+	// Declation for basic field complextypeDB.IsAnonymous
 	// provide the sql storage for the boolan
-	IsInlined_Data sql.NullBool
+	IsAnonymous_Data sql.NullBool
 
 	// Declation for basic field complextypeDB.NameXSD
 	NameXSD_Data sql.NullString
@@ -133,7 +145,7 @@ type ComplexTypeWOP struct {
 
 	GoIdentifier string `xlsx:"3"`
 
-	IsInlined bool `xlsx:"4"`
+	IsAnonymous bool `xlsx:"4"`
 
 	NameXSD string `xlsx:"5"`
 	// insertion for WOP pointer fields
@@ -145,7 +157,7 @@ var ComplexType_Fields = []string{
 	"Name",
 	"HasNameConflict",
 	"GoIdentifier",
-	"IsInlined",
+	"IsAnonymous",
 	"NameXSD",
 }
 
@@ -266,16 +278,16 @@ func (backRepoComplexType *BackRepoComplexTypeStruct) CommitPhaseTwoInstance(bac
 		complextypeDB.CopyBasicFieldsFromComplexType(complextype)
 
 		// insertion point for translating pointers encodings into actual pointers
-		// commit pointer value complextype.EnclosingElement translates to updating the complextype.EnclosingElementID
-		complextypeDB.EnclosingElementID.Valid = true // allow for a 0 value (nil association)
-		if complextype.EnclosingElement != nil {
-			if EnclosingElementId, ok := backRepo.BackRepoElement.Map_ElementPtr_ElementDBID[complextype.EnclosingElement]; ok {
-				complextypeDB.EnclosingElementID.Int64 = int64(EnclosingElementId)
-				complextypeDB.EnclosingElementID.Valid = true
+		// commit pointer value complextype.DerivedFrom translates to updating the complextype.DerivedFromID
+		complextypeDB.DerivedFromID.Valid = true // allow for a 0 value (nil association)
+		if complextype.DerivedFrom != nil {
+			if DerivedFromId, ok := backRepo.BackRepoElement.Map_ElementPtr_ElementDBID[complextype.DerivedFrom]; ok {
+				complextypeDB.DerivedFromID.Int64 = int64(DerivedFromId)
+				complextypeDB.DerivedFromID.Valid = true
 			}
 		} else {
-			complextypeDB.EnclosingElementID.Int64 = 0
-			complextypeDB.EnclosingElementID.Valid = true
+			complextypeDB.DerivedFromID.Int64 = 0
+			complextypeDB.DerivedFromID.Valid = true
 		}
 
 		// commit pointer value complextype.Annotation translates to updating the complextype.AnnotationID
@@ -378,6 +390,42 @@ func (backRepoComplexType *BackRepoComplexTypeStruct) CommitPhaseTwoInstance(bac
 			
 			complextypeDB.ComplexTypePointersEncoding.Elements =
 				append(complextypeDB.ComplexTypePointersEncoding.Elements, int(elementAssocEnd_DB.ID))
+		}
+
+		// commit pointer value complextype.Extension translates to updating the complextype.ExtensionID
+		complextypeDB.ExtensionID.Valid = true // allow for a 0 value (nil association)
+		if complextype.Extension != nil {
+			if ExtensionId, ok := backRepo.BackRepoExtension.Map_ExtensionPtr_ExtensionDBID[complextype.Extension]; ok {
+				complextypeDB.ExtensionID.Int64 = int64(ExtensionId)
+				complextypeDB.ExtensionID.Valid = true
+			}
+		} else {
+			complextypeDB.ExtensionID.Int64 = 0
+			complextypeDB.ExtensionID.Valid = true
+		}
+
+		// commit pointer value complextype.SimpleContent translates to updating the complextype.SimpleContentID
+		complextypeDB.SimpleContentID.Valid = true // allow for a 0 value (nil association)
+		if complextype.SimpleContent != nil {
+			if SimpleContentId, ok := backRepo.BackRepoSimpleContent.Map_SimpleContentPtr_SimpleContentDBID[complextype.SimpleContent]; ok {
+				complextypeDB.SimpleContentID.Int64 = int64(SimpleContentId)
+				complextypeDB.SimpleContentID.Valid = true
+			}
+		} else {
+			complextypeDB.SimpleContentID.Int64 = 0
+			complextypeDB.SimpleContentID.Valid = true
+		}
+
+		// commit pointer value complextype.ComplexContent translates to updating the complextype.ComplexContentID
+		complextypeDB.ComplexContentID.Valid = true // allow for a 0 value (nil association)
+		if complextype.ComplexContent != nil {
+			if ComplexContentId, ok := backRepo.BackRepoComplexContent.Map_ComplexContentPtr_ComplexContentDBID[complextype.ComplexContent]; ok {
+				complextypeDB.ComplexContentID.Int64 = int64(ComplexContentId)
+				complextypeDB.ComplexContentID.Valid = true
+			}
+		} else {
+			complextypeDB.ComplexContentID.Int64 = 0
+			complextypeDB.ComplexContentID.Valid = true
 		}
 
 		// 1. reset
@@ -529,10 +577,10 @@ func (backRepoComplexType *BackRepoComplexTypeStruct) CheckoutPhaseTwoInstance(b
 func (complextypeDB *ComplexTypeDB) DecodePointers(backRepo *BackRepoStruct, complextype *models.ComplexType) {
 
 	// insertion point for checkout of pointer encoding
-	// EnclosingElement field
-	complextype.EnclosingElement = nil
-	if complextypeDB.EnclosingElementID.Int64 != 0 {
-		complextype.EnclosingElement = backRepo.BackRepoElement.Map_ElementDBID_ElementPtr[uint(complextypeDB.EnclosingElementID.Int64)]
+	// DerivedFrom field
+	complextype.DerivedFrom = nil
+	if complextypeDB.DerivedFromID.Int64 != 0 {
+		complextype.DerivedFrom = backRepo.BackRepoElement.Map_ElementDBID_ElementPtr[uint(complextypeDB.DerivedFromID.Int64)]
 	}
 	// Annotation field
 	complextype.Annotation = nil
@@ -584,6 +632,21 @@ func (complextypeDB *ComplexTypeDB) DecodePointers(backRepo *BackRepoStruct, com
 		complextype.Elements = append(complextype.Elements, backRepo.BackRepoElement.Map_ElementDBID_ElementPtr[uint(_Elementid)])
 	}
 
+	// Extension field
+	complextype.Extension = nil
+	if complextypeDB.ExtensionID.Int64 != 0 {
+		complextype.Extension = backRepo.BackRepoExtension.Map_ExtensionDBID_ExtensionPtr[uint(complextypeDB.ExtensionID.Int64)]
+	}
+	// SimpleContent field
+	complextype.SimpleContent = nil
+	if complextypeDB.SimpleContentID.Int64 != 0 {
+		complextype.SimpleContent = backRepo.BackRepoSimpleContent.Map_SimpleContentDBID_SimpleContentPtr[uint(complextypeDB.SimpleContentID.Int64)]
+	}
+	// ComplexContent field
+	complextype.ComplexContent = nil
+	if complextypeDB.ComplexContentID.Int64 != 0 {
+		complextype.ComplexContent = backRepo.BackRepoComplexContent.Map_ComplexContentDBID_ComplexContentPtr[uint(complextypeDB.ComplexContentID.Int64)]
+	}
 	// This loop redeem complextype.Attributes in the stage from the encode in the back repo
 	// It parses all AttributeDB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance
@@ -645,8 +708,8 @@ func (complextypeDB *ComplexTypeDB) CopyBasicFieldsFromComplexType(complextype *
 	complextypeDB.GoIdentifier_Data.String = complextype.GoIdentifier
 	complextypeDB.GoIdentifier_Data.Valid = true
 
-	complextypeDB.IsInlined_Data.Bool = complextype.IsInlined
-	complextypeDB.IsInlined_Data.Valid = true
+	complextypeDB.IsAnonymous_Data.Bool = complextype.IsAnonymous
+	complextypeDB.IsAnonymous_Data.Valid = true
 
 	complextypeDB.NameXSD_Data.String = complextype.NameXSD
 	complextypeDB.NameXSD_Data.Valid = true
@@ -665,8 +728,8 @@ func (complextypeDB *ComplexTypeDB) CopyBasicFieldsFromComplexType_WOP(complexty
 	complextypeDB.GoIdentifier_Data.String = complextype.GoIdentifier
 	complextypeDB.GoIdentifier_Data.Valid = true
 
-	complextypeDB.IsInlined_Data.Bool = complextype.IsInlined
-	complextypeDB.IsInlined_Data.Valid = true
+	complextypeDB.IsAnonymous_Data.Bool = complextype.IsAnonymous
+	complextypeDB.IsAnonymous_Data.Valid = true
 
 	complextypeDB.NameXSD_Data.String = complextype.NameXSD
 	complextypeDB.NameXSD_Data.Valid = true
@@ -685,8 +748,8 @@ func (complextypeDB *ComplexTypeDB) CopyBasicFieldsFromComplexTypeWOP(complextyp
 	complextypeDB.GoIdentifier_Data.String = complextype.GoIdentifier
 	complextypeDB.GoIdentifier_Data.Valid = true
 
-	complextypeDB.IsInlined_Data.Bool = complextype.IsInlined
-	complextypeDB.IsInlined_Data.Valid = true
+	complextypeDB.IsAnonymous_Data.Bool = complextype.IsAnonymous
+	complextypeDB.IsAnonymous_Data.Valid = true
 
 	complextypeDB.NameXSD_Data.String = complextype.NameXSD
 	complextypeDB.NameXSD_Data.Valid = true
@@ -698,7 +761,7 @@ func (complextypeDB *ComplexTypeDB) CopyBasicFieldsToComplexType(complextype *mo
 	complextype.Name = complextypeDB.Name_Data.String
 	complextype.HasNameConflict = complextypeDB.HasNameConflict_Data.Bool
 	complextype.GoIdentifier = complextypeDB.GoIdentifier_Data.String
-	complextype.IsInlined = complextypeDB.IsInlined_Data.Bool
+	complextype.IsAnonymous = complextypeDB.IsAnonymous_Data.Bool
 	complextype.NameXSD = complextypeDB.NameXSD_Data.String
 }
 
@@ -708,7 +771,7 @@ func (complextypeDB *ComplexTypeDB) CopyBasicFieldsToComplexType_WOP(complextype
 	complextype.Name = complextypeDB.Name_Data.String
 	complextype.HasNameConflict = complextypeDB.HasNameConflict_Data.Bool
 	complextype.GoIdentifier = complextypeDB.GoIdentifier_Data.String
-	complextype.IsInlined = complextypeDB.IsInlined_Data.Bool
+	complextype.IsAnonymous = complextypeDB.IsAnonymous_Data.Bool
 	complextype.NameXSD = complextypeDB.NameXSD_Data.String
 }
 
@@ -719,7 +782,7 @@ func (complextypeDB *ComplexTypeDB) CopyBasicFieldsToComplexTypeWOP(complextype 
 	complextype.Name = complextypeDB.Name_Data.String
 	complextype.HasNameConflict = complextypeDB.HasNameConflict_Data.Bool
 	complextype.GoIdentifier = complextypeDB.GoIdentifier_Data.String
-	complextype.IsInlined = complextypeDB.IsInlined_Data.Bool
+	complextype.IsAnonymous = complextypeDB.IsAnonymous_Data.Bool
 	complextype.NameXSD = complextypeDB.NameXSD_Data.String
 }
 
@@ -878,16 +941,34 @@ func (backRepoComplexType *BackRepoComplexTypeStruct) RestorePhaseTwo() {
 		_ = complextypeDB
 
 		// insertion point for reindexing pointers encoding
-		// reindexing EnclosingElement field
-		if complextypeDB.EnclosingElementID.Int64 != 0 {
-			complextypeDB.EnclosingElementID.Int64 = int64(BackRepoElementid_atBckpTime_newID[uint(complextypeDB.EnclosingElementID.Int64)])
-			complextypeDB.EnclosingElementID.Valid = true
+		// reindexing DerivedFrom field
+		if complextypeDB.DerivedFromID.Int64 != 0 {
+			complextypeDB.DerivedFromID.Int64 = int64(BackRepoElementid_atBckpTime_newID[uint(complextypeDB.DerivedFromID.Int64)])
+			complextypeDB.DerivedFromID.Valid = true
 		}
 
 		// reindexing Annotation field
 		if complextypeDB.AnnotationID.Int64 != 0 {
 			complextypeDB.AnnotationID.Int64 = int64(BackRepoAnnotationid_atBckpTime_newID[uint(complextypeDB.AnnotationID.Int64)])
 			complextypeDB.AnnotationID.Valid = true
+		}
+
+		// reindexing Extension field
+		if complextypeDB.ExtensionID.Int64 != 0 {
+			complextypeDB.ExtensionID.Int64 = int64(BackRepoExtensionid_atBckpTime_newID[uint(complextypeDB.ExtensionID.Int64)])
+			complextypeDB.ExtensionID.Valid = true
+		}
+
+		// reindexing SimpleContent field
+		if complextypeDB.SimpleContentID.Int64 != 0 {
+			complextypeDB.SimpleContentID.Int64 = int64(BackRepoSimpleContentid_atBckpTime_newID[uint(complextypeDB.SimpleContentID.Int64)])
+			complextypeDB.SimpleContentID.Valid = true
+		}
+
+		// reindexing ComplexContent field
+		if complextypeDB.ComplexContentID.Int64 != 0 {
+			complextypeDB.ComplexContentID.Int64 = int64(BackRepoComplexContentid_atBckpTime_newID[uint(complextypeDB.ComplexContentID.Int64)])
+			complextypeDB.ComplexContentID.Valid = true
 		}
 
 		// update databse with new index encoding

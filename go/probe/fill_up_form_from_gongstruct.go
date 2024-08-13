@@ -80,6 +80,18 @@ func FillUpNamedFormFromGongstruct[T models.Gongstruct](instance *T, probe *Prob
 		)
 		formGroup.HasSuppressButton = true
 		FillUpForm(instancesTyped, formGroup, probe)
+	case *models.ComplexContent:
+		formGroup := (&gongtable.FormGroup{
+			Name:  formName,
+			Label: "ComplexContent Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__ComplexContentFormCallback(
+			instancesTyped,
+			probe,
+			formGroup,
+		)
+		formGroup.HasSuppressButton = true
+		FillUpForm(instancesTyped, formGroup, probe)
 	case *models.ComplexType:
 		formGroup := (&gongtable.FormGroup{
 			Name:  formName,
@@ -122,6 +134,18 @@ func FillUpNamedFormFromGongstruct[T models.Gongstruct](instance *T, probe *Prob
 			Label: "Enumeration Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__EnumerationFormCallback(
+			instancesTyped,
+			probe,
+			formGroup,
+		)
+		formGroup.HasSuppressButton = true
+		FillUpForm(instancesTyped, formGroup, probe)
+	case *models.Extension:
+		formGroup := (&gongtable.FormGroup{
+			Name:  formName,
+			Label: "Extension Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__ExtensionFormCallback(
 			instancesTyped,
 			probe,
 			formGroup,
@@ -242,6 +266,18 @@ func FillUpNamedFormFromGongstruct[T models.Gongstruct](instance *T, probe *Prob
 			Label: "Sequence Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__SequenceFormCallback(
+			instancesTyped,
+			probe,
+			formGroup,
+		)
+		formGroup.HasSuppressButton = true
+		FillUpForm(instancesTyped, formGroup, probe)
+	case *models.SimpleContent:
+		formGroup := (&gongtable.FormGroup{
+			Name:  formName,
+			Label: "SimpleContent Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__SimpleContentFormCallback(
 			instancesTyped,
 			probe,
 			formGroup,

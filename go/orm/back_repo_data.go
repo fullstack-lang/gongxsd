@@ -14,6 +14,8 @@ type BackRepoData struct {
 
 	ChoiceAPIs []*ChoiceAPI
 
+	ComplexContentAPIs []*ComplexContentAPI
+
 	ComplexTypeAPIs []*ComplexTypeAPI
 
 	DocumentationAPIs []*DocumentationAPI
@@ -21,6 +23,8 @@ type BackRepoData struct {
 	ElementAPIs []*ElementAPI
 
 	EnumerationAPIs []*EnumerationAPI
+
+	ExtensionAPIs []*ExtensionAPI
 
 	GroupAPIs []*GroupAPI
 
@@ -41,6 +45,8 @@ type BackRepoData struct {
 	SchemaAPIs []*SchemaAPI
 
 	SequenceAPIs []*SequenceAPI
+
+	SimpleContentAPIs []*SimpleContentAPI
 
 	SimpleTypeAPIs []*SimpleTypeAPI
 
@@ -103,6 +109,16 @@ func CopyBackRepoToBackRepoData(backRepo *BackRepoStruct, backRepoData *BackRepo
 		backRepoData.ChoiceAPIs = append(backRepoData.ChoiceAPIs, &choiceAPI)
 	}
 
+	for _, complexcontentDB := range backRepo.BackRepoComplexContent.Map_ComplexContentDBID_ComplexContentDB {
+
+		var complexcontentAPI ComplexContentAPI
+		complexcontentAPI.ID = complexcontentDB.ID
+		complexcontentAPI.ComplexContentPointersEncoding = complexcontentDB.ComplexContentPointersEncoding
+		complexcontentDB.CopyBasicFieldsToComplexContent_WOP(&complexcontentAPI.ComplexContent_WOP)
+
+		backRepoData.ComplexContentAPIs = append(backRepoData.ComplexContentAPIs, &complexcontentAPI)
+	}
+
 	for _, complextypeDB := range backRepo.BackRepoComplexType.Map_ComplexTypeDBID_ComplexTypeDB {
 
 		var complextypeAPI ComplexTypeAPI
@@ -141,6 +157,16 @@ func CopyBackRepoToBackRepoData(backRepo *BackRepoStruct, backRepoData *BackRepo
 		enumerationDB.CopyBasicFieldsToEnumeration_WOP(&enumerationAPI.Enumeration_WOP)
 
 		backRepoData.EnumerationAPIs = append(backRepoData.EnumerationAPIs, &enumerationAPI)
+	}
+
+	for _, extensionDB := range backRepo.BackRepoExtension.Map_ExtensionDBID_ExtensionDB {
+
+		var extensionAPI ExtensionAPI
+		extensionAPI.ID = extensionDB.ID
+		extensionAPI.ExtensionPointersEncoding = extensionDB.ExtensionPointersEncoding
+		extensionDB.CopyBasicFieldsToExtension_WOP(&extensionAPI.Extension_WOP)
+
+		backRepoData.ExtensionAPIs = append(backRepoData.ExtensionAPIs, &extensionAPI)
 	}
 
 	for _, groupDB := range backRepo.BackRepoGroup.Map_GroupDBID_GroupDB {
@@ -241,6 +267,16 @@ func CopyBackRepoToBackRepoData(backRepo *BackRepoStruct, backRepoData *BackRepo
 		sequenceDB.CopyBasicFieldsToSequence_WOP(&sequenceAPI.Sequence_WOP)
 
 		backRepoData.SequenceAPIs = append(backRepoData.SequenceAPIs, &sequenceAPI)
+	}
+
+	for _, simplecontentDB := range backRepo.BackRepoSimpleContent.Map_SimpleContentDBID_SimpleContentDB {
+
+		var simplecontentAPI SimpleContentAPI
+		simplecontentAPI.ID = simplecontentDB.ID
+		simplecontentAPI.SimpleContentPointersEncoding = simplecontentDB.SimpleContentPointersEncoding
+		simplecontentDB.CopyBasicFieldsToSimpleContent_WOP(&simplecontentAPI.SimpleContent_WOP)
+
+		backRepoData.SimpleContentAPIs = append(backRepoData.SimpleContentAPIs, &simplecontentAPI)
 	}
 
 	for _, simpletypeDB := range backRepo.BackRepoSimpleType.Map_SimpleTypeDBID_SimpleTypeDB {

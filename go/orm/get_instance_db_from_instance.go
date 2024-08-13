@@ -35,6 +35,10 @@ func GetInstanceDBFromInstance[T models.Gongstruct, T2 GongstructDB](
 		choiceInstance := any(concreteInstance).(*models.Choice)
 		ret2 := backRepo.BackRepoChoice.GetChoiceDBFromChoicePtr(choiceInstance)
 		ret = any(ret2).(*T2)
+	case *models.ComplexContent:
+		complexcontentInstance := any(concreteInstance).(*models.ComplexContent)
+		ret2 := backRepo.BackRepoComplexContent.GetComplexContentDBFromComplexContentPtr(complexcontentInstance)
+		ret = any(ret2).(*T2)
 	case *models.ComplexType:
 		complextypeInstance := any(concreteInstance).(*models.ComplexType)
 		ret2 := backRepo.BackRepoComplexType.GetComplexTypeDBFromComplexTypePtr(complextypeInstance)
@@ -50,6 +54,10 @@ func GetInstanceDBFromInstance[T models.Gongstruct, T2 GongstructDB](
 	case *models.Enumeration:
 		enumerationInstance := any(concreteInstance).(*models.Enumeration)
 		ret2 := backRepo.BackRepoEnumeration.GetEnumerationDBFromEnumerationPtr(enumerationInstance)
+		ret = any(ret2).(*T2)
+	case *models.Extension:
+		extensionInstance := any(concreteInstance).(*models.Extension)
+		ret2 := backRepo.BackRepoExtension.GetExtensionDBFromExtensionPtr(extensionInstance)
 		ret = any(ret2).(*T2)
 	case *models.Group:
 		groupInstance := any(concreteInstance).(*models.Group)
@@ -90,6 +98,10 @@ func GetInstanceDBFromInstance[T models.Gongstruct, T2 GongstructDB](
 	case *models.Sequence:
 		sequenceInstance := any(concreteInstance).(*models.Sequence)
 		ret2 := backRepo.BackRepoSequence.GetSequenceDBFromSequencePtr(sequenceInstance)
+		ret = any(ret2).(*T2)
+	case *models.SimpleContent:
+		simplecontentInstance := any(concreteInstance).(*models.SimpleContent)
+		ret2 := backRepo.BackRepoSimpleContent.GetSimpleContentDBFromSimpleContentPtr(simplecontentInstance)
 		ret = any(ret2).(*T2)
 	case *models.SimpleType:
 		simpletypeInstance := any(concreteInstance).(*models.SimpleType)
@@ -145,6 +157,11 @@ func GetID[T models.Gongstruct](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)
+	case *models.ComplexContent:
+		tmp := GetInstanceDBFromInstance[models.ComplexContent, ComplexContentDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
 	case *models.ComplexType:
 		tmp := GetInstanceDBFromInstance[models.ComplexType, ComplexTypeDB](
 			stage, backRepo, inst,
@@ -162,6 +179,11 @@ func GetID[T models.Gongstruct](
 		id = int(tmp.ID)
 	case *models.Enumeration:
 		tmp := GetInstanceDBFromInstance[models.Enumeration, EnumerationDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.Extension:
+		tmp := GetInstanceDBFromInstance[models.Extension, ExtensionDB](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)
@@ -212,6 +234,11 @@ func GetID[T models.Gongstruct](
 		id = int(tmp.ID)
 	case *models.Sequence:
 		tmp := GetInstanceDBFromInstance[models.Sequence, SequenceDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.SimpleContent:
+		tmp := GetInstanceDBFromInstance[models.SimpleContent, SimpleContentDB](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)
@@ -273,6 +300,11 @@ func GetIDPointer[T models.PointerToGongstruct](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)
+	case *models.ComplexContent:
+		tmp := GetInstanceDBFromInstance[models.ComplexContent, ComplexContentDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
 	case *models.ComplexType:
 		tmp := GetInstanceDBFromInstance[models.ComplexType, ComplexTypeDB](
 			stage, backRepo, inst,
@@ -290,6 +322,11 @@ func GetIDPointer[T models.PointerToGongstruct](
 		id = int(tmp.ID)
 	case *models.Enumeration:
 		tmp := GetInstanceDBFromInstance[models.Enumeration, EnumerationDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.Extension:
+		tmp := GetInstanceDBFromInstance[models.Extension, ExtensionDB](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)
@@ -340,6 +377,11 @@ func GetIDPointer[T models.PointerToGongstruct](
 		id = int(tmp.ID)
 	case *models.Sequence:
 		tmp := GetInstanceDBFromInstance[models.Sequence, SequenceDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.SimpleContent:
+		tmp := GetInstanceDBFromInstance[models.SimpleContent, SimpleContentDB](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)

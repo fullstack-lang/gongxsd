@@ -2,54 +2,54 @@ package models
 
 type Enumeration struct {
 	Name string
-	ElementWithAnnotation
+	Annotated
 	ElementWithValueAttribute
 }
 
 type MinInclusive struct {
 	Name string
-	ElementWithAnnotation
+	Annotated
 	ElementWithValueAttribute
 }
 
 type MaxInclusive struct {
 	Name string
-	ElementWithAnnotation
+	Annotated
 	ElementWithValueAttribute
 }
 
 type Pattern struct {
 	Name string
-	ElementWithAnnotation
+	Annotated
 	ElementWithValueAttribute
 }
 
 type WhiteSpace struct {
 	Name string
-	ElementWithAnnotation
+	Annotated
 	ElementWithValueAttribute
 }
 
 type MinLength struct {
 	Name string
-	ElementWithAnnotation
+	Annotated
 	ElementWithValueAttribute
 }
 
 type MaxLength struct {
 	Name string
-	ElementWithAnnotation
+	Annotated
 	ElementWithValueAttribute
 }
 
 type Length struct {
 	Name string
-	ElementWithAnnotation
+	Annotated
 	ElementWithValueAttribute
 }
 
 type TotalDigit struct {
 	Name string
-	ElementWithAnnotation
+	Annotated
 	ElementWithValueAttribute
 }

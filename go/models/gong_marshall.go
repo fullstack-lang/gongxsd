@@ -372,6 +372,40 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 
 	}
 
+	map_ComplexContent_Identifiers := make(map[*ComplexContent]string)
+	_ = map_ComplexContent_Identifiers
+
+	complexcontentOrdered := []*ComplexContent{}
+	for complexcontent := range stage.ComplexContents {
+		complexcontentOrdered = append(complexcontentOrdered, complexcontent)
+	}
+	sort.Slice(complexcontentOrdered[:], func(i, j int) bool {
+		return complexcontentOrdered[i].Name < complexcontentOrdered[j].Name
+	})
+	if len(complexcontentOrdered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, complexcontent := range complexcontentOrdered {
+
+		id = generatesIdentifier("ComplexContent", idx, complexcontent.Name)
+		map_ComplexContent_Identifiers[complexcontent] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "ComplexContent")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", complexcontent.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(complexcontent.Name))
+		initializerStatements += setValueField
+
+	}
+
 	map_ComplexType_Identifiers := make(map[*ComplexType]string)
 	_ = map_ComplexType_Identifiers
 
@@ -418,8 +452,8 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 
 		setValueField = NumberInitStatement
 		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "IsInlined")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", fmt.Sprintf("%t", complextype.IsInlined))
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "IsAnonymous")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", fmt.Sprintf("%t", complextype.IsAnonymous))
 		initializerStatements += setValueField
 
 		setValueField = StringInitStatement
@@ -636,6 +670,40 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
 		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Value")
 		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(enumeration.Value))
+		initializerStatements += setValueField
+
+	}
+
+	map_Extension_Identifiers := make(map[*Extension]string)
+	_ = map_Extension_Identifiers
+
+	extensionOrdered := []*Extension{}
+	for extension := range stage.Extensions {
+		extensionOrdered = append(extensionOrdered, extension)
+	}
+	sort.Slice(extensionOrdered[:], func(i, j int) bool {
+		return extensionOrdered[i].Name < extensionOrdered[j].Name
+	})
+	if len(extensionOrdered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, extension := range extensionOrdered {
+
+		id = generatesIdentifier("Extension", idx, extension.Name)
+		map_Extension_Identifiers[extension] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "Extension")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", extension.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(extension.Name))
 		initializerStatements += setValueField
 
 	}
@@ -1070,6 +1138,40 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 
 	}
 
+	map_SimpleContent_Identifiers := make(map[*SimpleContent]string)
+	_ = map_SimpleContent_Identifiers
+
+	simplecontentOrdered := []*SimpleContent{}
+	for simplecontent := range stage.SimpleContents {
+		simplecontentOrdered = append(simplecontentOrdered, simplecontent)
+	}
+	sort.Slice(simplecontentOrdered[:], func(i, j int) bool {
+		return simplecontentOrdered[i].Name < simplecontentOrdered[j].Name
+	})
+	if len(simplecontentOrdered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, simplecontent := range simplecontentOrdered {
+
+		id = generatesIdentifier("SimpleContent", idx, simplecontent.Name)
+		map_SimpleContent_Identifiers[simplecontent] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "SimpleContent")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", simplecontent.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(simplecontent.Name))
+		initializerStatements += setValueField
+
+	}
+
 	map_SimpleType_Identifiers := make(map[*SimpleType]string)
 	_ = map_SimpleType_Identifiers
 
@@ -1417,6 +1519,16 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 
 	}
 
+	for idx, complexcontent := range complexcontentOrdered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("ComplexContent", idx, complexcontent.Name)
+		map_ComplexContent_Identifiers[complexcontent] = id
+
+		// Initialisation of values
+	}
+
 	for idx, complextype := range complextypeOrdered {
 		var setPointerField string
 		_ = setPointerField
@@ -1425,11 +1537,11 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		map_ComplexType_Identifiers[complextype] = id
 
 		// Initialisation of values
-		if complextype.EnclosingElement != nil {
+		if complextype.DerivedFrom != nil {
 			setPointerField = PointerFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "EnclosingElement")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Element_Identifiers[complextype.EnclosingElement])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "DerivedFrom")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Element_Identifiers[complextype.DerivedFrom])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -1478,6 +1590,30 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Elements")
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Element_Identifiers[_element])
+			pointersInitializesStatements += setPointerField
+		}
+
+		if complextype.Extension != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Extension")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Extension_Identifiers[complextype.Extension])
+			pointersInitializesStatements += setPointerField
+		}
+
+		if complextype.SimpleContent != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "SimpleContent")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_SimpleContent_Identifiers[complextype.SimpleContent])
+			pointersInitializesStatements += setPointerField
+		}
+
+		if complextype.ComplexContent != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ComplexContent")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ComplexContent_Identifiers[complextype.ComplexContent])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -1564,6 +1700,56 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Annotation")
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Annotation_Identifiers[enumeration.Annotation])
+			pointersInitializesStatements += setPointerField
+		}
+
+	}
+
+	for idx, extension := range extensionOrdered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("Extension", idx, extension.Name)
+		map_Extension_Identifiers[extension] = id
+
+		// Initialisation of values
+		for _, _sequence := range extension.Sequences {
+			setPointerField = SliceOfPointersFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Sequences")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Sequence_Identifiers[_sequence])
+			pointersInitializesStatements += setPointerField
+		}
+
+		for _, _all := range extension.Alls {
+			setPointerField = SliceOfPointersFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Alls")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_All_Identifiers[_all])
+			pointersInitializesStatements += setPointerField
+		}
+
+		for _, _choice := range extension.Choices {
+			setPointerField = SliceOfPointersFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Choices")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Choice_Identifiers[_choice])
+			pointersInitializesStatements += setPointerField
+		}
+
+		for _, _group := range extension.Groups {
+			setPointerField = SliceOfPointersFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Groups")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Group_Identifiers[_group])
+			pointersInitializesStatements += setPointerField
+		}
+
+		for _, _element := range extension.Elements {
+			setPointerField = SliceOfPointersFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Elements")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Element_Identifiers[_element])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -1947,6 +2133,16 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			pointersInitializesStatements += setPointerField
 		}
 
+	}
+
+	for idx, simplecontent := range simplecontentOrdered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("SimpleContent", idx, simplecontent.Name)
+		map_SimpleContent_Identifiers[simplecontent] = id
+
+		// Initialisation of values
 	}
 
 	for idx, simpletype := range simpletypeOrdered {

@@ -6,8 +6,8 @@ func PostProcessingAnalyzeXSDStructure(stage *StageStruct) {
 	for element := range *GetGongstructInstancesSet[Element](stage) {
 
 		if element.ComplexType != nil {
-			element.ComplexType.IsInlined = true
-			element.ComplexType.EnclosingElement = element
+			element.ComplexType.IsAnonymous = true
+			element.ComplexType.DerivedFrom = element
 		}
 
 		for _, group := range element.Groups {
