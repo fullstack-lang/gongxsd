@@ -21,13 +21,6 @@ type Annotation struct {
 	Documentations []*Documentation `xml:"documentation"`
 }
 
-type Documentation struct {
-	Name   string
-	Text   string `xml:",chardata"`
-	Source string `xml:"source,attr"`
-	Lang   string `xml:"lang,attr"`
-}
-
 type Schema struct {
 	Name string
 	Xs   string `xml:"xs,attr"`

@@ -7,9 +7,9 @@
     <movement-number></movement-number>
     <movement-title></movement-title>
     <identification>
-        <creator></creator>
-        <creator></creator>
-        <rights></rights>
+        <creator type="composer">Wolfgang Amadeus Mozart</creator>
+        <creator type="lyricist">Johann Georg Jacobi</creator>
+        <rights type="">Copyright © 2002 MakeMusic, Inc.</rights>
         <encoding>
             <software>Finale v27.0 for Mac</software>
             <encoding-description></encoding-description>
@@ -28,20 +28,20 @@
         </scaling>
         <concert-score></concert-score>
         <appearance>
-            <line-width></line-width>
-            <line-width></line-width>
-            <line-width></line-width>
-            <line-width></line-width>
-            <line-width></line-width>
-            <line-width></line-width>
-            <line-width></line-width>
-            <line-width></line-width>
-            <line-width></line-width>
-            <line-width></line-width>
-            <note-size></note-size>
-            <note-size></note-size>
-            <distance></distance>
-            <distance></distance>
+            <line-width type="stem"></line-width>
+            <line-width type="beam"></line-width>
+            <line-width type="staff"></line-width>
+            <line-width type="light barline"></line-width>
+            <line-width type="heavy barline"></line-width>
+            <line-width type="leger"></line-width>
+            <line-width type="ending"></line-width>
+            <line-width type="wedge"></line-width>
+            <line-width type="enclosure"></line-width>
+            <line-width type="tuplet bracket"></line-width>
+            <note-size type="grace"></note-size>
+            <note-size type="cue"></note-size>
+            <distance type="hyphen"></distance>
+            <distance type="beam"></distance>
         </appearance>
         <music-font font-family="Maestro,engraved" font-style="" font-size="18" font-weight=""></music-font>
         <word-font font-family="Times New Roman" font-style="" font-size="9" font-weight=""></word-font>
