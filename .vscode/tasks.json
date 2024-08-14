@@ -167,5 +167,34 @@
 			],
 			"group": "build"
 		},
+		{
+			"label": "01 - gongc gongbooks -skipNpmWorkspaces",
+			"type": "shell",
+			"options": {
+				"cwd": "${workspaceFolder}/test/books"
+			},
+			"command": "gongc",
+			"group": "build",
+			"args": [
+				"go/models",
+				"-skipNpmWorkspaces"
+			]
+		},
+		{
+			"label": "02 - run books -unmarshallFromCode=stage.go -marshallOnCommit=stage",
+			"type": "shell",
+			"options": {
+				"cwd": "${workspaceFolder}/test/books/go/cmd/books"
+			},
+			"command": "go",
+			"args": [
+				"run",
+				"main.go",
+				"-diagrams",
+				"-unmarshallFromCode=stage.go",
+				"-marshallOnCommit=stage"
+			],
+			"group": "build"
+		},
 	]
 }

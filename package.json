@@ -6,6 +6,7 @@
         "vendor/github.com/fullstack-lang/gongsvg/ng-github.com-fullstack-lang-gongsvg",
         "vendor/github.com/fullstack-lang/gongtable/ng-github.com-fullstack-lang-gongtable",
         "vendor/github.com/fullstack-lang/gongdoc/ng-github.com-fullstack-lang-gongdoc",
+        "test/books/ng-github.com-fullstack-lang-gongxsd-test-books",
         ""
     ]
 }

@@ -6,7 +6,7 @@ import (
 	"io"
 	"os"
 
-	models "github.com/fullstack-lang/gongxsd/test/books/models_gen"
+	models "github.com/fullstack-lang/gongxsd/test/books/go/models"
 )
 
 func main() {
