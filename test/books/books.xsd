@@ -15,7 +15,7 @@
     <xs:simpleType name="yearType">
         <xs:annotation>
             <xs:documentation> This type represents a year. It restricts the value to an integer
-                between 1900 and 2100 inclusive. </xs:documentation>
+                between 1000 and 2100 inclusive. </xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:integer">
             <xs:minInclusive value="1000" />
@@ -143,6 +143,11 @@
                 is used within a document that is part of a compressed MusicXML file, the link is
                 relative to the root folder of the zip file.</xs:documentation>
         </xs:annotation>
-        <xs:attribute name="name" type="xs:token" />
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="name" type="xs:token" />
+            </xs:extension>
+        </xs:simpleContent>
     </xs:complexType>
+
 </xs:schema>

@@ -64,9 +64,6 @@ type Link struct {
 	Name string `xml:"-"`
 	
 	// insertion point for fields
-
-	// generated from attribute "name" of type xs:token
-	NameXSD string `xml:"name,attr"`
 }
 
 // BookDetailsGroup is generated from named group "bookDetailsGroup"

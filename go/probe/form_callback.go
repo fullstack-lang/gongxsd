@@ -585,6 +585,48 @@ func (attributeFormCallback *AttributeFormCallback) OnSave() {
 					}
 				}
 			}
+		case "Extension:Attributes":
+			// we need to retrieve the field owner before the change
+			var pastExtensionOwner *models.Extension
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "Extension"
+			rf.Fieldname = "Attributes"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				attributeFormCallback.probe.stageOfInterest,
+				attributeFormCallback.probe.backRepoOfInterest,
+				attribute_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastExtensionOwner = reverseFieldOwner.(*models.Extension)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastExtensionOwner != nil {
+					idx := slices.Index(pastExtensionOwner.Attributes, attribute_)
+					pastExtensionOwner.Attributes = slices.Delete(pastExtensionOwner.Attributes, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _extension := range *models.GetGongstructInstancesSet[models.Extension](attributeFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _extension.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newExtensionOwner := _extension // we have a match
+						if pastExtensionOwner != nil {
+							if newExtensionOwner != pastExtensionOwner {
+								idx := slices.Index(pastExtensionOwner.Attributes, attribute_)
+								pastExtensionOwner.Attributes = slices.Delete(pastExtensionOwner.Attributes, idx, idx+1)
+								newExtensionOwner.Attributes = append(newExtensionOwner.Attributes, attribute_)
+							}
+						} else {
+							newExtensionOwner.Attributes = append(newExtensionOwner.Attributes, attribute_)
+						}
+					}
+				}
+			}
 		}
 	}
 
@@ -3576,6 +3618,10 @@ func (simplecontentFormCallback *SimpleContentFormCallback) OnSave() {
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(simplecontent_.Name), formDiv)
+		case "Extension":
+			FormDivSelectFieldToField(&(simplecontent_.Extension), simplecontentFormCallback.probe.stageOfInterest, formDiv)
+		case "Restriction":
+			FormDivSelectFieldToField(&(simplecontent_.Restriction), simplecontentFormCallback.probe.stageOfInterest, formDiv)
 		}
 	}
 

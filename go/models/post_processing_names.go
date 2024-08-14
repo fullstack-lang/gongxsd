@@ -3,7 +3,7 @@ package models
 import "fmt"
 
 func prefix(s string) string {
-	return s + "_E"
+	return s + "_Inlined"
 }
 
 func PostProcessingNames(stage *StageStruct) {
@@ -60,6 +60,9 @@ func PostProcessingNames(stage *StageStruct) {
 		}
 		for _, g := range x.Groups {
 			g.Name = prefix(x.Name)
+		}
+		if x.SimpleContent != nil {
+			x.SimpleContent.Name = prefix(x.Name)
 		}
 	}
 	for x := range *GetGongstructInstancesSet[Group](stage) {
@@ -205,6 +208,17 @@ func PostProcessingNames(stage *StageStruct) {
 			x.Annotation.Name = prefix(x.Name)
 		}
 	}
+
+	for x := range *GetGongstructInstancesSet[SimpleContent](stage) {
+
+		if x.Extension != nil {
+			x.Extension.Name = prefix(x.Name)
+		}
+		if x.Restriction != nil {
+			x.Restriction.Name = prefix(x.Name)
+		}
+	}
+
 }
 
 func computeGoIdentifier(name string, x *WithGoIdentifier, setOfGoIdentifiers map[string]any) {

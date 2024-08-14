@@ -643,6 +643,9 @@ func (stage *StageStruct) StageBranchExtension(extension *Extension) {
 	for _, _element := range extension.Elements {
 		StageBranch(stage, _element)
 	}
+	for _, _attribute := range extension.Attributes {
+		StageBranch(stage, _attribute)
+	}
 
 }
 
@@ -911,6 +914,12 @@ func (stage *StageStruct) StageBranchSimpleContent(simplecontent *SimpleContent)
 	simplecontent.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if simplecontent.Extension != nil {
+		StageBranch(stage, simplecontent.Extension)
+	}
+	if simplecontent.Restriction != nil {
+		StageBranch(stage, simplecontent.Restriction)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 
@@ -1438,6 +1447,9 @@ func CopyBranchExtension(mapOrigCopy map[any]any, extensionFrom *Extension) (ext
 	for _, _element := range extensionFrom.Elements {
 		extensionTo.Elements = append(extensionTo.Elements, CopyBranchElement(mapOrigCopy, _element))
 	}
+	for _, _attribute := range extensionFrom.Attributes {
+		extensionTo.Attributes = append(extensionTo.Attributes, CopyBranchAttribute(mapOrigCopy, _attribute))
+	}
 
 	return
 }
@@ -1750,6 +1762,12 @@ func CopyBranchSimpleContent(mapOrigCopy map[any]any, simplecontentFrom *SimpleC
 	simplecontentFrom.CopyBasicFields(simplecontentTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if simplecontentFrom.Extension != nil {
+		simplecontentTo.Extension = CopyBranchExtension(mapOrigCopy, simplecontentFrom.Extension)
+	}
+	if simplecontentFrom.Restriction != nil {
+		simplecontentTo.Restriction = CopyBranchRestriction(mapOrigCopy, simplecontentFrom.Restriction)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 
@@ -2221,6 +2239,9 @@ func (stage *StageStruct) UnstageBranchExtension(extension *Extension) {
 	for _, _element := range extension.Elements {
 		UnstageBranch(stage, _element)
 	}
+	for _, _attribute := range extension.Attributes {
+		UnstageBranch(stage, _attribute)
+	}
 
 }
 
@@ -2489,6 +2510,12 @@ func (stage *StageStruct) UnstageBranchSimpleContent(simplecontent *SimpleConten
 	simplecontent.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if simplecontent.Extension != nil {
+		UnstageBranch(stage, simplecontent.Extension)
+	}
+	if simplecontent.Restriction != nil {
+		UnstageBranch(stage, simplecontent.Restriction)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 

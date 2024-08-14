@@ -56,6 +56,12 @@ func (ct *ComplexType) GetFields(stage *StageStruct) (fields string) {
 		}
 	}
 
+	if ct.SimpleContent != nil {
+		if ct.SimpleContent.Extension != nil {
+			generateAttributes(ct.SimpleContent.Extension.Attributes, stMap, setOfGoIdentifiers, &fields)
+		}
+	}
+
 	map_Name_Elems := make(map[string]*Element)
 
 	ct.ModelGroup.generateElements(map_Name_Elems, stMap, ctMap, groupMap, setOfGoIdentifiers, &fields)

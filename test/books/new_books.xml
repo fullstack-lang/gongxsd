@@ -3,13 +3,13 @@
     <book edition="First Edition" isbn="978-3-16-148410-0" bestseller="true">
         <credit page="1">
             <credit-type>Editor</credit-type>
-            <link name="http://example.com/editor-link"></link>
+            <link></link>
             <credit-words>Edited by John Doe</credit-words>
             <credit-symbol></credit-symbol>
         </credit>
         <credit page="2">
             <credit-type>Illustrator</credit-type>
-            <link name="http://example.com/illustrator-link"></link>
+            <link></link>
             <credit-words></credit-words>
             <credit-symbol>Illustration Symbol</credit-symbol>
         </credit>
@@ -21,7 +21,7 @@
     <book edition="Second Edition" isbn="978-1-4028-9462-6" bestseller="false">
         <credit page="10">
             <credit-type>Foreword</credit-type>
-            <link name="http://example.com/foreword-link"></link>
+            <link></link>
             <credit-words>Foreword by Jane Smith</credit-words>
             <credit-symbol></credit-symbol>
         </credit>

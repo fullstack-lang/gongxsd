@@ -1753,6 +1753,14 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			pointersInitializesStatements += setPointerField
 		}
 
+		for _, _attribute := range extension.Attributes {
+			setPointerField = SliceOfPointersFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Attributes")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Attribute_Identifiers[_attribute])
+			pointersInitializesStatements += setPointerField
+		}
+
 	}
 
 	for idx, group := range groupOrdered {
@@ -2143,6 +2151,22 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		map_SimpleContent_Identifiers[simplecontent] = id
 
 		// Initialisation of values
+		if simplecontent.Extension != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Extension")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Extension_Identifiers[simplecontent.Extension])
+			pointersInitializesStatements += setPointerField
+		}
+
+		if simplecontent.Restriction != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Restriction")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Restriction_Identifiers[simplecontent.Restriction])
+			pointersInitializesStatements += setPointerField
+		}
+
 	}
 
 	for idx, simpletype := range simpletypeOrdered {

@@ -980,6 +980,12 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 							target := __gong__map_Element[targetIdentifier]
 							__gong__map_Extension[identifier].Elements =
 								append(__gong__map_Extension[identifier].Elements, target)
+						case "Attributes":
+							// remove first and last char
+							targetIdentifier := ident.Name
+							target := __gong__map_Attribute[targetIdentifier]
+							__gong__map_Extension[identifier].Attributes =
+								append(__gong__map_Extension[identifier].Attributes, target)
 						}
 					case "Group":
 						switch fieldName {
@@ -1845,6 +1851,12 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 			case "SimpleContent":
 				switch fieldName {
 				// insertion point for field dependant code
+				case "Extension":
+					targetIdentifier := ident.Name
+					__gong__map_SimpleContent[identifier].Extension = __gong__map_Extension[targetIdentifier]
+				case "Restriction":
+					targetIdentifier := ident.Name
+					__gong__map_SimpleContent[identifier].Restriction = __gong__map_Restriction[targetIdentifier]
 				}
 			case "SimpleType":
 				switch fieldName {

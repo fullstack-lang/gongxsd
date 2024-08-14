@@ -61,6 +61,9 @@ type ExtensionPointersEncoding struct {
 
 	// field Elements is a slice of pointers to another Struct (optional or 0..1)
 	Elements IntSlice `gorm:"type:TEXT"`
+
+	// field Attributes is a slice of pointers to another Struct (optional or 0..1)
+	Attributes IntSlice `gorm:"type:TEXT"`
 }
 
 // ExtensionDB describes a extension in the database
@@ -316,6 +319,24 @@ func (backRepoExtension *BackRepoExtensionStruct) CommitPhaseTwoInstance(backRep
 				append(extensionDB.ExtensionPointersEncoding.Elements, int(elementAssocEnd_DB.ID))
 		}
 
+		// 1. reset
+		extensionDB.ExtensionPointersEncoding.Attributes = make([]int, 0)
+		// 2. encode
+		for _, attributeAssocEnd := range extension.Attributes {
+			attributeAssocEnd_DB :=
+				backRepo.BackRepoAttribute.GetAttributeDBFromAttributePtr(attributeAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the attributeAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if attributeAssocEnd_DB == nil {
+				continue
+			}
+			
+			extensionDB.ExtensionPointersEncoding.Attributes =
+				append(extensionDB.ExtensionPointersEncoding.Attributes, int(attributeAssocEnd_DB.ID))
+		}
+
 		query := backRepoExtension.db.Save(&extensionDB)
 		if query.Error != nil {
 			log.Fatalln(query.Error)
@@ -472,6 +493,15 @@ func (extensionDB *ExtensionDB) DecodePointers(backRepo *BackRepoStruct, extensi
 	extension.Elements = extension.Elements[:0]
 	for _, _Elementid := range extensionDB.ExtensionPointersEncoding.Elements {
 		extension.Elements = append(extension.Elements, backRepo.BackRepoElement.Map_ElementDBID_ElementPtr[uint(_Elementid)])
+	}
+
+	// This loop redeem extension.Attributes in the stage from the encode in the back repo
+	// It parses all AttributeDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	extension.Attributes = extension.Attributes[:0]
+	for _, _Attributeid := range extensionDB.ExtensionPointersEncoding.Attributes {
+		extension.Attributes = append(extension.Attributes, backRepo.BackRepoAttribute.Map_AttributeDBID_AttributePtr[uint(_Attributeid)])
 	}
 
 	return

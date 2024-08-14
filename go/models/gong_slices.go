@@ -559,6 +559,25 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 				}
 			}
 		}
+		if fieldName == "Attributes" {
+
+			// walk all instances of the owning type
+			for _instance := range *GetGongstructInstancesSetFromPointerType[OwningType](stage) {
+				if any(_instance).(*Extension) != owningInstanceInfered {
+					_inferedTypeInstance := any(_instance).(*Extension)
+					reference := make([]FieldType, 0)
+					targetFieldSlice := any(_inferedTypeInstance.Attributes).([]FieldType)
+					copy(targetFieldSlice, reference)
+					_inferedTypeInstance.Attributes = _inferedTypeInstance.Attributes[0:]
+					for _, fieldInstance := range reference {
+						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
+							_inferedTypeInstance.Attributes =
+								append(_inferedTypeInstance.Attributes, any(fieldInstance).(*Attribute))
+						}
+					}
+				}
+			}
+		}
 
 	case *Group:
 		// insertion point per field
@@ -1156,6 +1175,14 @@ func (stage *StageStruct) ComputeReverseMaps() {
 		_ = extension
 		for _, _element := range extension.Elements {
 			stage.Extension_Elements_reverseMap[_element] = extension
+		}
+	}
+	clear(stage.Extension_Attributes_reverseMap)
+	stage.Extension_Attributes_reverseMap = make(map[*Attribute]*Extension)
+	for extension := range stage.Extensions {
+		_ = extension
+		for _, _attribute := range extension.Attributes {
+			stage.Extension_Attributes_reverseMap[_attribute] = extension
 		}
 	}
 

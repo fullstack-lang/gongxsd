@@ -46,6 +46,14 @@ type SimpleContentAPI struct {
 // reverse pointers of slice of poitners to Struct
 type SimpleContentPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
+
+	// field Extension is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	ExtensionID sql.NullInt64
+
+	// field Restriction is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	RestrictionID sql.NullInt64
 }
 
 // SimpleContentDB describes a simplecontent in the database
@@ -211,6 +219,30 @@ func (backRepoSimpleContent *BackRepoSimpleContentStruct) CommitPhaseTwoInstance
 		simplecontentDB.CopyBasicFieldsFromSimpleContent(simplecontent)
 
 		// insertion point for translating pointers encodings into actual pointers
+		// commit pointer value simplecontent.Extension translates to updating the simplecontent.ExtensionID
+		simplecontentDB.ExtensionID.Valid = true // allow for a 0 value (nil association)
+		if simplecontent.Extension != nil {
+			if ExtensionId, ok := backRepo.BackRepoExtension.Map_ExtensionPtr_ExtensionDBID[simplecontent.Extension]; ok {
+				simplecontentDB.ExtensionID.Int64 = int64(ExtensionId)
+				simplecontentDB.ExtensionID.Valid = true
+			}
+		} else {
+			simplecontentDB.ExtensionID.Int64 = 0
+			simplecontentDB.ExtensionID.Valid = true
+		}
+
+		// commit pointer value simplecontent.Restriction translates to updating the simplecontent.RestrictionID
+		simplecontentDB.RestrictionID.Valid = true // allow for a 0 value (nil association)
+		if simplecontent.Restriction != nil {
+			if RestrictionId, ok := backRepo.BackRepoRestriction.Map_RestrictionPtr_RestrictionDBID[simplecontent.Restriction]; ok {
+				simplecontentDB.RestrictionID.Int64 = int64(RestrictionId)
+				simplecontentDB.RestrictionID.Valid = true
+			}
+		} else {
+			simplecontentDB.RestrictionID.Int64 = 0
+			simplecontentDB.RestrictionID.Valid = true
+		}
+
 		query := backRepoSimpleContent.db.Save(&simplecontentDB)
 		if query.Error != nil {
 			log.Fatalln(query.Error)
@@ -324,6 +356,16 @@ func (backRepoSimpleContent *BackRepoSimpleContentStruct) CheckoutPhaseTwoInstan
 func (simplecontentDB *SimpleContentDB) DecodePointers(backRepo *BackRepoStruct, simplecontent *models.SimpleContent) {
 
 	// insertion point for checkout of pointer encoding
+	// Extension field
+	simplecontent.Extension = nil
+	if simplecontentDB.ExtensionID.Int64 != 0 {
+		simplecontent.Extension = backRepo.BackRepoExtension.Map_ExtensionDBID_ExtensionPtr[uint(simplecontentDB.ExtensionID.Int64)]
+	}
+	// Restriction field
+	simplecontent.Restriction = nil
+	if simplecontentDB.RestrictionID.Int64 != 0 {
+		simplecontent.Restriction = backRepo.BackRepoRestriction.Map_RestrictionDBID_RestrictionPtr[uint(simplecontentDB.RestrictionID.Int64)]
+	}
 	return
 }
 
@@ -552,6 +594,18 @@ func (backRepoSimpleContent *BackRepoSimpleContentStruct) RestorePhaseTwo() {
 		_ = simplecontentDB
 
 		// insertion point for reindexing pointers encoding
+		// reindexing Extension field
+		if simplecontentDB.ExtensionID.Int64 != 0 {
+			simplecontentDB.ExtensionID.Int64 = int64(BackRepoExtensionid_atBckpTime_newID[uint(simplecontentDB.ExtensionID.Int64)])
+			simplecontentDB.ExtensionID.Valid = true
+		}
+
+		// reindexing Restriction field
+		if simplecontentDB.RestrictionID.Int64 != 0 {
+			simplecontentDB.RestrictionID.Int64 = int64(BackRepoRestrictionid_atBckpTime_newID[uint(simplecontentDB.RestrictionID.Int64)])
+			simplecontentDB.RestrictionID.Valid = true
+		}
+
 		// update databse with new index encoding
 		query := backRepoSimpleContent.db.Model(simplecontentDB).Updates(*simplecontentDB)
 		if query.Error != nil {
