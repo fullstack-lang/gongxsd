@@ -1,3 +1,4 @@
 node_modules
 go/cmd/gongxsd/gongxsd
 go/cmd/gongxsd-cli/__debug_bin*
+test/musicxml/go/roundtrip/__debug_bin*

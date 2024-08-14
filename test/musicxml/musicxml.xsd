@@ -3305,7 +3305,7 @@
         <xs:attribute name="smufl" type="smufl-segno-glyph-name" />
     </xs:complexType>
 
-    <xs:complexType name="string">
+    <xs:complexType name="string-type">
         <xs:annotation>
             <xs:documentation>The string type is used with tablature notation, regular notation
                 (where it is often circled), and chord diagrams. String numbers start with 1 for the
@@ -4427,7 +4427,7 @@
                 with a frame-note element.</xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element name="string" type="string" />
+            <xs:element name="string" type="string-type" />
             <xs:element name="fret" type="fret" />
             <xs:element name="fingering" type="fingering" minOccurs="0" />
             <xs:element name="barre" type="barre" minOccurs="0" />
@@ -6971,7 +6971,7 @@
                 </xs:annotation>
             </xs:element>
             <xs:element name="fret" type="fret" />
-            <xs:element name="string" type="string" />
+            <xs:element name="string" type="string-type" />
             <xs:element name="hammer-on" type="hammer-on-pull-off" />
             <xs:element name="pull-off" type="hammer-on-pull-off" />
             <xs:element name="bend" type="bend" />

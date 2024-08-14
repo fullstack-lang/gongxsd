@@ -2028,8 +2028,8 @@ type Frame_note struct {
 	
 	// insertion point for fields
 
-	// generated from element "string" of type string
-	String []*String `xml:"string"`
+	// generated from element "string" of type string-type
+	String []*String_type `xml:"string"`
 
 	// generated from element "fret" of type fret
 	Fret []*Fret `xml:"fret"`
@@ -5039,16 +5039,6 @@ type Stick struct {
 	Stick_material string `xml:"stick-material"`
 }
 
-// String is generated from named complex type "string"
-type String struct {
-	Name string `xml:"-"`
-	
-	// insertion point for fields
-
-	// in case the extension has base type xs:string, one has to had the chardata stuff
-	EnclosedText int `xml:",chardata"`
-}
-
 // String_mute is generated from named complex type "string-mute"
 type String_mute struct {
 	Name string `xml:"-"`
@@ -5093,6 +5083,16 @@ type String_mute struct {
 
 	// generated from attribute "id" of type xs:ID
 	Id string `xml:"id,attr"`
+}
+
+// String_type is generated from named complex type "string-type"
+type String_type struct {
+	Name string `xml:"-"`
+	
+	// insertion point for fields
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText int `xml:",chardata"`
 }
 
 // Strong_accent is generated from named complex type "strong-accent"
@@ -5275,8 +5275,8 @@ type Technical struct {
 	// generated from element "fret" of type fret
 	Fret []*Fret `xml:"fret"`
 
-	// generated from element "string" of type string
-	String []*String `xml:"string"`
+	// generated from element "string" of type string-type
+	String []*String_type `xml:"string"`
 
 	// generated from element "hammer-on" of type hammer-on-pull-off
 	Hammer_on []*Hammer_on_pull_off `xml:"hammer-on"`
@@ -6327,31 +6327,6 @@ type Measure_1 struct {
 
 	// generated from attribute "id" of type xs:ID
 	Id string `xml:"id,attr"`
-}
-
-// Measure is generated from inlined complex type within element "measure"
-type Measure struct {
-	Name string `xml:"-"`
-	
-	// insertion point for fields
-
-	// generated from attribute "number" of type xs:token
-	Number string `xml:"number,attr"`
-
-	// generated from attribute "text" of type measure-text
-	Text string `xml:"text,attr"`
-
-	// generated from attribute "implicit" of type yes-no
-	Implicit string `xml:"implicit,attr"`
-
-	// generated from attribute "non-controlling" of type yes-no
-	Non_controlling string `xml:"non-controlling,attr"`
-
-	// generated from attribute "width" of type tenths
-	Width string `xml:"width,attr"`
-
-	// generated from attribute "id" of type xs:ID
-	Id string `xml:"id,attr"`
 
 	// generated from element "note" of type note
 	Note []*Note `xml:"note"`
@@ -6396,8 +6371,34 @@ type Measure struct {
 	Bookmark []*Bookmark `xml:"bookmark"`
 }
 
-// Part is generated from inlined complex type within element "part"
-type Part struct {
+// Measure is generated from inlined complex type within element "measure"
+type Measure struct {
+	Name string `xml:"-"`
+	
+	// insertion point for fields
+
+	// generated from attribute "number" of type xs:token
+	Number string `xml:"number,attr"`
+
+	// generated from attribute "text" of type measure-text
+	Text string `xml:"text,attr"`
+
+	// generated from attribute "implicit" of type yes-no
+	Implicit string `xml:"implicit,attr"`
+
+	// generated from attribute "non-controlling" of type yes-no
+	Non_controlling string `xml:"non-controlling,attr"`
+
+	// generated from attribute "width" of type tenths
+	Width string `xml:"width,attr"`
+
+	// generated from attribute "id" of type xs:ID
+	Id string `xml:"id,attr"`
+}
+
+// Part_1 is generated from inlined complex type within element "part"
+// Identifier is post fixed because more than one xsd element has the name "part"
+type Part_1 struct {
 	Name string `xml:"-"`
 	
 	// insertion point for fields
@@ -6448,9 +6449,8 @@ type Part struct {
 	Bookmark []*Bookmark `xml:"bookmark"`
 }
 
-// Part_1 is generated from inlined complex type within element "part"
-// Identifier is post fixed because more than one xsd element has the name "part"
-type Part_1 struct {
+// Part is generated from inlined complex type within element "part"
+type Part struct {
 	Name string `xml:"-"`
 	
 	// insertion point for fields

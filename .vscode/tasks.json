@@ -168,7 +168,7 @@
 			"group": "build"
 		},
 		{
-			"label": "01 - gongc gongbooks -skipNpmWorkspaces",
+			"label": "01 - gongc books -skipNpmWorkspaces",
 			"type": "shell",
 			"options": {
 				"cwd": "${workspaceFolder}/test/books"
@@ -185,6 +185,50 @@
 			"type": "shell",
 			"options": {
 				"cwd": "${workspaceFolder}/test/books/go/cmd/books"
+			},
+			"command": "go",
+			"args": [
+				"run",
+				"main.go",
+				"-diagrams",
+				"-unmarshallFromCode=stage.go",
+				"-marshallOnCommit=stage"
+			],
+			"group": "build"
+		},
+		{
+			"label": "01 - gongc musicxml -skipNpmWorkspaces",
+			"type": "shell",
+			"options": {
+				"cwd": "${workspaceFolder}/test/musicxml"
+			},
+			"command": "gongc",
+			"group": "build",
+			"args": [
+				"-skipNpmWorkspaces",
+				"go/models",
+			]
+		},
+		{
+			"label": "01 - gongc musicxml -skipNpmWorkspaces -skipNg -skipGoModCommands",
+			"type": "shell",
+			"options": {
+				"cwd": "${workspaceFolder}/test/musicxml"
+			},
+			"command": "gongc",
+			"group": "build",
+			"args": [
+				"-skipNpmWorkspaces",
+				"-skipNg",
+				"-skipGoModCommands",
+				"go/models",
+			]
+		},
+		{
+			"label": "02 - run musicxml -unmarshallFromCode=stage.go -marshallOnCommit=stage",
+			"type": "shell",
+			"options": {
+				"cwd": "${workspaceFolder}/test/musicxml/go/cmd/musicxml"
 			},
 			"command": "go",
 			"args": [
