@@ -176,8 +176,8 @@
 			"command": "gongc",
 			"group": "build",
 			"args": [
+				"-skipNpmWorkspaces",
 				"go/models",
-				"-skipNpmWorkspaces"
 			]
 		},
 		{

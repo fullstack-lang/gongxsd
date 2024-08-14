@@ -64,7 +64,7 @@
                 "../../../test/musicxml/musicxml.xsd",
                 "-v",
                 "-o",
-                "../../../test/musicxml/models_gen/models.go"
+                "../../../test/musicxml/go/models/models.go"
             ]
         },
         {
@@ -116,7 +116,7 @@
             "type": "go",
             "request": "launch",
             "mode": "debug",
-            "program": "${workspaceFolder}/test/musicxml",
+            "program": "${workspaceFolder}/test/musicxml/go/roundtrip",
             "args": []
         },
     ]

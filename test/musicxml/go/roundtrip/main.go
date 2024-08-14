@@ -6,7 +6,7 @@ import (
 	"io"
 	"os"
 
-	models "github.com/fullstack-lang/gongxsd/test/musicxml/models_gen"
+	models "github.com/fullstack-lang/gongxsd/test/musicxml/go/models"
 
 	"golang.org/x/text/encoding/unicode"
 	"golang.org/x/text/transform"
@@ -14,7 +14,7 @@ import (
 
 func main() {
 	// Open the XML file
-	xmlFile, err := os.Open("MozaChloSample.musicxml")
+	xmlFile, err := os.Open("../../MozaChloSample.musicxml")
 	if err != nil {
 		fmt.Println("Error opening file:", err)
 		return
@@ -66,7 +66,7 @@ func main() {
 	}
 
 	// Write the XML to a new file
-	err = os.WriteFile("new_score.xml", []byte(xml.Header+string(output)), 0644)
+	err = os.WriteFile("../../new_score.xml", []byte(xml.Header+string(output)), 0644)
 	if err != nil {
 		fmt.Println("Error writing to file:", err)
 		return
