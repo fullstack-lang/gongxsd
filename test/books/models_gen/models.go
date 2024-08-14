@@ -9,7 +9,7 @@ var _ xml.Attr
 // BookType is generated from named complex type "bookType"
 type BookType struct {
 	Name string `xml:"-"`
-	
+
 	// insertion point for fields
 
 	// generated from attribute "edition" of type xs:string
@@ -40,7 +40,7 @@ type BookType struct {
 // Credit is generated from named complex type "credit"
 type Credit struct {
 	Name string `xml:"-"`
-	
+
 	// insertion point for fields
 
 	// generated from attribute "page" of type xs:positiveInteger
@@ -62,8 +62,10 @@ type Credit struct {
 // Link is generated from named complex type "link"
 type Link struct {
 	Name string `xml:"-"`
-	
+
 	// insertion point for fields
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 
 	// generated from attribute "name" of type xs:token
 	NameXSD string `xml:"name,attr"`
@@ -72,7 +74,7 @@ type Link struct {
 // BookDetailsGroup is generated from named group "bookDetailsGroup"
 type BookDetailsGroup struct {
 	Name string `xml:"-"`
-	
+
 	// insertion point for fields
 
 	// generated from element "title" of type titleType
@@ -91,11 +93,9 @@ type BookDetailsGroup struct {
 // Books is generated from inlined complex type within element "books"
 type Books struct {
 	Name string `xml:"-"`
-	
+
 	// insertion point for fields
 
 	// generated from element "book" of type bookType
 	Book []*BookType `xml:"book"`
 }
-
-

@@ -8,7 +8,7 @@
         <format>Hardcover</format>
         <credit page="1">
             <credit-type>Editor</credit-type>
-            <link name="http://example.com/editor-link" />
+            <link name="http://example.com/editor-link">Some info in the link</link>
             <credit-words>Edited by John Doe</credit-words>
         </credit>
         <credit page="2">

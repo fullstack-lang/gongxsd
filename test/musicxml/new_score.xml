@@ -28,20 +28,20 @@
         </scaling>
         <concert-score></concert-score>
         <appearance>
-            <line-width type="stem"></line-width>
-            <line-width type="beam"></line-width>
-            <line-width type="staff"></line-width>
-            <line-width type="light barline"></line-width>
-            <line-width type="heavy barline"></line-width>
-            <line-width type="leger"></line-width>
-            <line-width type="ending"></line-width>
-            <line-width type="wedge"></line-width>
-            <line-width type="enclosure"></line-width>
-            <line-width type="tuplet bracket"></line-width>
-            <note-size type="grace"></note-size>
-            <note-size type="cue"></note-size>
-            <distance type="hyphen"></distance>
-            <distance type="beam"></distance>
+            <line-width type="stem">0.8333</line-width>
+            <line-width type="beam">5</line-width>
+            <line-width type="staff">1.25</line-width>
+            <line-width type="light barline">1.875</line-width>
+            <line-width type="heavy barline">5</line-width>
+            <line-width type="leger">1.875</line-width>
+            <line-width type="ending">0.8333</line-width>
+            <line-width type="wedge">0.8333</line-width>
+            <line-width type="enclosure">1.25</line-width>
+            <line-width type="tuplet bracket">0.8333</line-width>
+            <note-size type="grace">60</note-size>
+            <note-size type="cue">60</note-size>
+            <distance type="hyphen">60</distance>
+            <distance type="beam">7.5</distance>
         </appearance>
         <music-font font-family="Maestro,engraved" font-style="" font-size="18" font-weight=""></music-font>
         <word-font font-family="Times New Roman" font-style="" font-size="9" font-weight=""></word-font>
@@ -71,31 +71,31 @@
     </defaults>
     <credit page="1" id="">
         <credit-type>page number</credit-type>
-        <credit-words></credit-words>
+        <credit-words>2</credit-words>
     </credit>
     <credit page="1" id="">
         <credit-type>rights</credit-type>
-        <credit-words></credit-words>
+        <credit-words>Copyright&#xA;      © 2002 MakeMusic, Inc.</credit-words>
     </credit>
     <credit page="1" id="">
         <credit-type>title</credit-type>
-        <credit-words></credit-words>
+        <credit-words>An&#xA;      Chloe</credit-words>
     </credit>
     <credit page="1" id="">
         <credit-type></credit-type>
-        <credit-words></credit-words>
+        <credit-words>K.&#xA;      524</credit-words>
     </credit>
     <credit page="1" id="">
         <credit-type>lyricist</credit-type>
-        <credit-words></credit-words>
+        <credit-words>Johann Georg Jacobi</credit-words>
     </credit>
     <credit page="1" id="">
         <credit-type>composer</credit-type>
-        <credit-words></credit-words>
+        <credit-words>Wolfgang&#xA;      Amadeus Mozart</credit-words>
     </credit>
     <part-list>
         <score-part id="P1">
-            <part-name></part-name>
+            <part-name>Voice</part-name>
             <group></group>
             <score-instrument id="P1-I1">
                 <instrument-name>Voice</instrument-name>
@@ -112,11 +112,11 @@
                 <midi-unpitched>0</midi-unpitched>
                 <volume>80</volume>
                 <pan>0</pan>
-                <elevation>0</elevation>
+                <elevation></elevation>
             </midi-instrument>
         </score-part>
         <score-part id="P2">
-            <part-name></part-name>
+            <part-name>Piano</part-name>
             <group></group>
             <score-instrument id="P2-I2">
                 <instrument-name>Acoustic Grand Piano</instrument-name>
@@ -133,7 +133,7 @@
                 <midi-unpitched>0</midi-unpitched>
                 <volume>80</volume>
                 <pan>0</pan>
-                <elevation>0</elevation>
+                <elevation></elevation>
             </midi-instrument>
         </score-part>
     </part-list>

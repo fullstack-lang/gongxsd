@@ -1423,6 +1423,10 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					// remove first and last char
 					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
 					__gong__map_Extension[identifier].Name = fielValue
+				case "Base":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_Extension[identifier].Base = fielValue
 				}
 			case "Group":
 				switch fieldName {

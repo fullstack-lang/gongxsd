@@ -59,6 +59,11 @@ func (ct *ComplexType) GetFields(stage *StageStruct) (fields string) {
 	if ct.SimpleContent != nil {
 		if ct.SimpleContent.Extension != nil {
 			generateAttributes(ct.SimpleContent.Extension.Attributes, stMap, setOfGoIdentifiers, &fields)
+
+			// in case the extension has base type "xs:string", one has to had the chardata stuff
+			goType := generateGoTypeFromSimpleType(ct.SimpleContent.Extension.Base, stMap)
+			fields += "\n\n\t// in case the extension has base type xs:string, one has to had the chardata stuff" +
+				"\n\t" + "EnclosedText" + " " + goType + " " + "`" + `xml:",chardata"` + "`"
 		}
 	}
 

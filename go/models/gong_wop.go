@@ -190,11 +190,13 @@ func (from *Enumeration) CopyBasicFields(to *Enumeration) {
 type Extension_WOP struct {
 	// insertion point
 	Name string
+	Base string
 }
 
 func (from *Extension) CopyBasicFields(to *Extension) {
 	// insertion point
 	to.Name = from.Name
+	to.Base = from.Base
 }
 
 type Group_WOP struct {

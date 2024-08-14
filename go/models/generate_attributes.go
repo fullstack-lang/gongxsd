@@ -56,7 +56,7 @@ func generateGoTypeFromSimpleType(base string, stMap map[string]*SimpleType) (go
 	// String types
 	case "xs:string", "xs:normalizedString", "xs:token", "xs:language", "xs:Name", "xs:NCName",
 		"xs:NMTOKEN", "xs:NMTOKENS", "xs:ID", "xs:IDREF", "xs:IDREFS", "xs:ENTITY", "xs:ENTITIES",
-		"xs:QName", "xs:anyURI", "xs:NOTATION":
+		"xs:QName", "xs:anyURI", "xs:NOTATION", "xs:decimal":
 		goType = "string"
 
 	// Numeric types
@@ -66,7 +66,7 @@ func generateGoTypeFromSimpleType(base string, stMap map[string]*SimpleType) (go
 		goType = "int"
 
 		// Numeric types
-	case "xs:decimal", "xs:double", "xs:float":
+	case "xs:double", "xs:float":
 		goType = "float64"
 
 	// Boolean type

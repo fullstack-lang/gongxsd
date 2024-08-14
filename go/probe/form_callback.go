@@ -2115,6 +2115,8 @@ func (extensionFormCallback *ExtensionFormCallback) OnSave() {
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(extension_.Name), formDiv)
+		case "Base":
+			FormDivBasicFieldToField(&(extension_.Base), formDiv)
 		}
 	}
 

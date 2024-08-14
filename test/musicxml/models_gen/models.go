@@ -9,7 +9,7 @@ var _ xml.Attr
 // Accidental is generated from named complex type "accidental"
 type Accidental struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "cautionary" of type yes-no
@@ -20,32 +20,41 @@ type Accidental struct {
 
 	// generated from attribute "smufl" of type smufl-accidental-glyph-name
 	Smufl string `xml:"smufl,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Accidental_mark is generated from named complex type "accidental-mark"
 type Accidental_mark struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "smufl" of type smufl-accidental-glyph-name
 	Smufl string `xml:"smufl,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Accidental_text is generated from named complex type "accidental-text"
 type Accidental_text struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "smufl" of type smufl-accidental-glyph-name
 	Smufl string `xml:"smufl,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Accord is generated from named complex type "accord"
 type Accord struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "string" of type string-number
@@ -55,7 +64,7 @@ type Accord struct {
 	Tuning_step string `xml:"tuning-step"`
 
 	// generated from element "tuning-alter" of type semitones
-	Tuning_alter float64 `xml:"tuning-alter"`
+	Tuning_alter string `xml:"tuning-alter"`
 
 	// generated from element "tuning-octave" of type octave
 	Tuning_octave int `xml:"tuning-octave"`
@@ -64,20 +73,20 @@ type Accord struct {
 // Accordion_registration is generated from named complex type "accordion-registration"
 type Accordion_registration struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "default-x" of type tenths
-	Default_x float64 `xml:"default-x,attr"`
+	Default_x string `xml:"default-x,attr"`
 
 	// generated from attribute "default-y" of type tenths
-	Default_y float64 `xml:"default-y,attr"`
+	Default_y string `xml:"default-y,attr"`
 
 	// generated from attribute "relative-x" of type tenths
-	Relative_x float64 `xml:"relative-x,attr"`
+	Relative_x string `xml:"relative-x,attr"`
 
 	// generated from attribute "relative-y" of type tenths
-	Relative_y float64 `xml:"relative-y,attr"`
+	Relative_y string `xml:"relative-y,attr"`
 
 	// generated from attribute "font-family" of type font-family
 	Font_family string `xml:"font-family,attr"`
@@ -116,7 +125,7 @@ type Accordion_registration struct {
 // Appearance is generated from named complex type "appearance"
 type Appearance struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "line-width" of type line-width
@@ -138,7 +147,7 @@ type Appearance struct {
 // Arpeggiate is generated from named complex type "arpeggiate"
 type Arpeggiate struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "number" of type number-level
@@ -151,16 +160,16 @@ type Arpeggiate struct {
 	Unbroken string `xml:"unbroken,attr"`
 
 	// generated from attribute "default-x" of type tenths
-	Default_x float64 `xml:"default-x,attr"`
+	Default_x string `xml:"default-x,attr"`
 
 	// generated from attribute "default-y" of type tenths
-	Default_y float64 `xml:"default-y,attr"`
+	Default_y string `xml:"default-y,attr"`
 
 	// generated from attribute "relative-x" of type tenths
-	Relative_x float64 `xml:"relative-x,attr"`
+	Relative_x string `xml:"relative-x,attr"`
 
 	// generated from attribute "relative-y" of type tenths
-	Relative_y float64 `xml:"relative-y,attr"`
+	Relative_y string `xml:"relative-y,attr"`
 
 	// generated from attribute "placement" of type above-below
 	Placement string `xml:"placement,attr"`
@@ -175,20 +184,20 @@ type Arpeggiate struct {
 // Arrow is generated from named complex type "arrow"
 type Arrow struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "default-x" of type tenths
-	Default_x float64 `xml:"default-x,attr"`
+	Default_x string `xml:"default-x,attr"`
 
 	// generated from attribute "default-y" of type tenths
-	Default_y float64 `xml:"default-y,attr"`
+	Default_y string `xml:"default-y,attr"`
 
 	// generated from attribute "relative-x" of type tenths
-	Relative_x float64 `xml:"relative-x,attr"`
+	Relative_x string `xml:"relative-x,attr"`
 
 	// generated from attribute "relative-y" of type tenths
-	Relative_y float64 `xml:"relative-y,attr"`
+	Relative_y string `xml:"relative-y,attr"`
 
 	// generated from attribute "font-family" of type font-family
 	Font_family string `xml:"font-family,attr"`
@@ -227,7 +236,7 @@ type Arrow struct {
 // Articulations is generated from named complex type "articulations"
 type Articulations struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "id" of type xs:ID
@@ -288,7 +297,7 @@ type Articulations struct {
 // Assess is generated from named complex type "assess"
 type Assess struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "type" of type yes-no
@@ -304,11 +313,11 @@ type Assess struct {
 // Attributes is generated from named complex type "attributes"
 type Attributes struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "divisions" of type positive-divisions
-	Divisions float64 `xml:"divisions"`
+	Divisions string `xml:"divisions"`
 
 	// generated from element "key" of type key
 	Key []*Key `xml:"key"`
@@ -350,11 +359,11 @@ type Attributes struct {
 // Backup is generated from named complex type "backup"
 type Backup struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "duration" of type positive-divisions
-	Duration float64 `xml:"duration"`
+	Duration string `xml:"duration"`
 
 	// generated from element "footnote" of type formatted-text
 	Footnote []*Formatted_text `xml:"footnote"`
@@ -366,14 +375,17 @@ type Backup struct {
 // Bar_style_color is generated from named complex type "bar-style-color"
 type Bar_style_color struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Barline is generated from named complex type "barline"
 type Barline struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "location" of type right-left-middle
@@ -386,7 +398,7 @@ type Barline struct {
 	Coda string `xml:"coda,attr"`
 
 	// generated from attribute "divisions" of type divisions
-	Divisions float64 `xml:"divisions,attr"`
+	Divisions string `xml:"divisions,attr"`
 
 	// generated from attribute "id" of type xs:ID
 	Id string `xml:"id,attr"`
@@ -422,7 +434,7 @@ type Barline struct {
 // Barre is generated from named complex type "barre"
 type Barre struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "type" of type start-stop
@@ -435,7 +447,7 @@ type Barre struct {
 // Bass is generated from named complex type "bass"
 type Bass struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "arrangement" of type harmony-arrangement
@@ -454,17 +466,20 @@ type Bass struct {
 // Bass_step is generated from named complex type "bass-step"
 type Bass_step struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "text" of type xs:token
 	Text string `xml:"text,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Beam is generated from named complex type "beam"
 type Beam struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "number" of type beam-level
@@ -475,12 +490,15 @@ type Beam struct {
 
 	// generated from attribute "fan" of type fan
 	Fan string `xml:"fan,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Beat_repeat is generated from named complex type "beat-repeat"
 type Beat_repeat struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "type" of type start-stop
@@ -505,7 +523,7 @@ type Beat_repeat struct {
 // Beat_unit_tied is generated from named complex type "beat-unit-tied"
 type Beat_unit_tied struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "beat-unit" of type note-type-value
@@ -518,33 +536,36 @@ type Beat_unit_tied struct {
 // Beater is generated from named complex type "beater"
 type Beater struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "tip" of type tip-direction
 	Tip string `xml:"tip,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Bend is generated from named complex type "bend"
 type Bend struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "shape" of type bend-shape
 	Shape string `xml:"shape,attr"`
 
 	// generated from attribute "default-x" of type tenths
-	Default_x float64 `xml:"default-x,attr"`
+	Default_x string `xml:"default-x,attr"`
 
 	// generated from attribute "default-y" of type tenths
-	Default_y float64 `xml:"default-y,attr"`
+	Default_y string `xml:"default-y,attr"`
 
 	// generated from attribute "relative-x" of type tenths
-	Relative_x float64 `xml:"relative-x,attr"`
+	Relative_x string `xml:"relative-x,attr"`
 
 	// generated from attribute "relative-y" of type tenths
-	Relative_y float64 `xml:"relative-y,attr"`
+	Relative_y string `xml:"relative-y,attr"`
 
 	// generated from attribute "font-family" of type font-family
 	Font_family string `xml:"font-family,attr"`
@@ -565,16 +586,16 @@ type Bend struct {
 	Accelerate string `xml:"accelerate,attr"`
 
 	// generated from attribute "beats" of type trill-beats
-	Beats float64 `xml:"beats,attr"`
+	Beats string `xml:"beats,attr"`
 
 	// generated from attribute "first-beat" of type percent
-	First_beat float64 `xml:"first-beat,attr"`
+	First_beat string `xml:"first-beat,attr"`
 
 	// generated from attribute "last-beat" of type percent
-	Last_beat float64 `xml:"last-beat,attr"`
+	Last_beat string `xml:"last-beat,attr"`
 
 	// generated from element "bend-alter" of type semitones
-	Bend_alter float64 `xml:"bend-alter"`
+	Bend_alter string `xml:"bend-alter"`
 
 	// generated from element "with-bar" of type placement-text
 	With_bar []*Placement_text `xml:"with-bar"`
@@ -589,7 +610,7 @@ type Bend struct {
 // Bookmark is generated from named complex type "bookmark"
 type Bookmark struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "id" of type xs:ID
@@ -608,7 +629,7 @@ type Bookmark struct {
 // Bracket is generated from named complex type "bracket"
 type Bracket struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "type" of type start-stop-continue
@@ -621,28 +642,28 @@ type Bracket struct {
 	Line_end string `xml:"line-end,attr"`
 
 	// generated from attribute "end-length" of type tenths
-	End_length float64 `xml:"end-length,attr"`
+	End_length string `xml:"end-length,attr"`
 
 	// generated from attribute "line-type" of type line-type
 	Line_type string `xml:"line-type,attr"`
 
 	// generated from attribute "dash-length" of type tenths
-	Dash_length float64 `xml:"dash-length,attr"`
+	Dash_length string `xml:"dash-length,attr"`
 
 	// generated from attribute "space-length" of type tenths
-	Space_length float64 `xml:"space-length,attr"`
+	Space_length string `xml:"space-length,attr"`
 
 	// generated from attribute "default-x" of type tenths
-	Default_x float64 `xml:"default-x,attr"`
+	Default_x string `xml:"default-x,attr"`
 
 	// generated from attribute "default-y" of type tenths
-	Default_y float64 `xml:"default-y,attr"`
+	Default_y string `xml:"default-y,attr"`
 
 	// generated from attribute "relative-x" of type tenths
-	Relative_x float64 `xml:"relative-x,attr"`
+	Relative_x string `xml:"relative-x,attr"`
 
 	// generated from attribute "relative-y" of type tenths
-	Relative_y float64 `xml:"relative-y,attr"`
+	Relative_y string `xml:"relative-y,attr"`
 
 	// generated from attribute "color" of type color
 	Color string `xml:"color,attr"`
@@ -654,31 +675,40 @@ type Bracket struct {
 // Breath_mark is generated from named complex type "breath-mark"
 type Breath_mark struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Caesura is generated from named complex type "caesura"
 type Caesura struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Cancel is generated from named complex type "cancel"
 type Cancel struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "location" of type cancel-location
 	Location string `xml:"location,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText int `xml:",chardata"`
 }
 
 // Clef is generated from named complex type "clef"
 type Clef struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "number" of type staff-number
@@ -694,16 +724,16 @@ type Clef struct {
 	After_barline string `xml:"after-barline,attr"`
 
 	// generated from attribute "default-x" of type tenths
-	Default_x float64 `xml:"default-x,attr"`
+	Default_x string `xml:"default-x,attr"`
 
 	// generated from attribute "default-y" of type tenths
-	Default_y float64 `xml:"default-y,attr"`
+	Default_y string `xml:"default-y,attr"`
 
 	// generated from attribute "relative-x" of type tenths
-	Relative_x float64 `xml:"relative-x,attr"`
+	Relative_x string `xml:"relative-x,attr"`
 
 	// generated from attribute "relative-y" of type tenths
-	Relative_y float64 `xml:"relative-y,attr"`
+	Relative_y string `xml:"relative-y,attr"`
 
 	// generated from attribute "font-family" of type font-family
 	Font_family string `xml:"font-family,attr"`
@@ -739,23 +769,23 @@ type Clef struct {
 // Coda is generated from named complex type "coda"
 type Coda struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "smufl" of type smufl-coda-glyph-name
 	Smufl string `xml:"smufl,attr"`
 
 	// generated from attribute "default-x" of type tenths
-	Default_x float64 `xml:"default-x,attr"`
+	Default_x string `xml:"default-x,attr"`
 
 	// generated from attribute "default-y" of type tenths
-	Default_y float64 `xml:"default-y,attr"`
+	Default_y string `xml:"default-y,attr"`
 
 	// generated from attribute "relative-x" of type tenths
-	Relative_x float64 `xml:"relative-x,attr"`
+	Relative_x string `xml:"relative-x,attr"`
 
 	// generated from attribute "relative-y" of type tenths
-	Relative_y float64 `xml:"relative-y,attr"`
+	Relative_y string `xml:"relative-y,attr"`
 
 	// generated from attribute "font-family" of type font-family
 	Font_family string `xml:"font-family,attr"`
@@ -785,7 +815,7 @@ type Coda struct {
 // Credit is generated from named complex type "credit"
 type Credit struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "page" of type xs:positiveInteger
@@ -816,7 +846,7 @@ type Credit struct {
 // Dashes is generated from named complex type "dashes"
 type Dashes struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "type" of type start-stop-continue
@@ -826,22 +856,22 @@ type Dashes struct {
 	Number int `xml:"number,attr"`
 
 	// generated from attribute "dash-length" of type tenths
-	Dash_length float64 `xml:"dash-length,attr"`
+	Dash_length string `xml:"dash-length,attr"`
 
 	// generated from attribute "space-length" of type tenths
-	Space_length float64 `xml:"space-length,attr"`
+	Space_length string `xml:"space-length,attr"`
 
 	// generated from attribute "default-x" of type tenths
-	Default_x float64 `xml:"default-x,attr"`
+	Default_x string `xml:"default-x,attr"`
 
 	// generated from attribute "default-y" of type tenths
-	Default_y float64 `xml:"default-y,attr"`
+	Default_y string `xml:"default-y,attr"`
 
 	// generated from attribute "relative-x" of type tenths
-	Relative_x float64 `xml:"relative-x,attr"`
+	Relative_x string `xml:"relative-x,attr"`
 
 	// generated from attribute "relative-y" of type tenths
-	Relative_y float64 `xml:"relative-y,attr"`
+	Relative_y string `xml:"relative-y,attr"`
 
 	// generated from attribute "color" of type color
 	Color string `xml:"color,attr"`
@@ -853,7 +883,7 @@ type Dashes struct {
 // Defaults is generated from named complex type "defaults"
 type Defaults struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "scaling" of type scaling
@@ -890,7 +920,7 @@ type Defaults struct {
 // Degree is generated from named complex type "degree"
 type Degree struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "print-object" of type yes-no
@@ -909,27 +939,33 @@ type Degree struct {
 // Degree_alter is generated from named complex type "degree-alter"
 type Degree_alter struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "plus-minus" of type yes-no
 	Plus_minus string `xml:"plus-minus,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Degree_type is generated from named complex type "degree-type"
 type Degree_type struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "text" of type xs:token
 	Text string `xml:"text,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Degree_value is generated from named complex type "degree-value"
 type Degree_value struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "symbol" of type degree-symbol-value
@@ -937,12 +973,15 @@ type Degree_value struct {
 
 	// generated from attribute "text" of type xs:token
 	Text string `xml:"text,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText int `xml:",chardata"`
 }
 
 // Direction is generated from named complex type "direction"
 type Direction struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "placement" of type above-below
@@ -985,7 +1024,7 @@ type Direction struct {
 // Direction_type is generated from named complex type "direction-type"
 type Direction_type struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "id" of type xs:ID
@@ -1067,17 +1106,20 @@ type Direction_type struct {
 // Distance is generated from named complex type "distance"
 type Distance struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "type" of type distance-type
 	Type string `xml:"type,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Double is generated from named complex type "double"
 type Double struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "above" of type yes-no
@@ -1087,20 +1129,20 @@ type Double struct {
 // Dynamics is generated from named complex type "dynamics"
 type Dynamics struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "default-x" of type tenths
-	Default_x float64 `xml:"default-x,attr"`
+	Default_x string `xml:"default-x,attr"`
 
 	// generated from attribute "default-y" of type tenths
-	Default_y float64 `xml:"default-y,attr"`
+	Default_y string `xml:"default-y,attr"`
 
 	// generated from attribute "relative-x" of type tenths
-	Relative_x float64 `xml:"relative-x,attr"`
+	Relative_x string `xml:"relative-x,attr"`
 
 	// generated from attribute "relative-y" of type tenths
-	Relative_y float64 `xml:"relative-y,attr"`
+	Relative_y string `xml:"relative-y,attr"`
 
 	// generated from attribute "font-family" of type font-family
 	Font_family string `xml:"font-family,attr"`
@@ -1226,34 +1268,40 @@ type Dynamics struct {
 // Effect is generated from named complex type "effect"
 type Effect struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "smufl" of type smufl-pictogram-glyph-name
 	Smufl string `xml:"smufl,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Elision is generated from named complex type "elision"
 type Elision struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "smufl" of type smufl-lyrics-glyph-name
 	Smufl string `xml:"smufl,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Empty is generated from named complex type "empty"
 type Empty struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 }
 
 // Empty_font is generated from named complex type "empty-font"
 type Empty_font struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "font-family" of type font-family
@@ -1272,7 +1320,7 @@ type Empty_font struct {
 // Empty_line is generated from named complex type "empty-line"
 type Empty_line struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "line-shape" of type line-shape
@@ -1285,22 +1333,22 @@ type Empty_line struct {
 	Line_length string `xml:"line-length,attr"`
 
 	// generated from attribute "dash-length" of type tenths
-	Dash_length float64 `xml:"dash-length,attr"`
+	Dash_length string `xml:"dash-length,attr"`
 
 	// generated from attribute "space-length" of type tenths
-	Space_length float64 `xml:"space-length,attr"`
+	Space_length string `xml:"space-length,attr"`
 
 	// generated from attribute "default-x" of type tenths
-	Default_x float64 `xml:"default-x,attr"`
+	Default_x string `xml:"default-x,attr"`
 
 	// generated from attribute "default-y" of type tenths
-	Default_y float64 `xml:"default-y,attr"`
+	Default_y string `xml:"default-y,attr"`
 
 	// generated from attribute "relative-x" of type tenths
-	Relative_x float64 `xml:"relative-x,attr"`
+	Relative_x string `xml:"relative-x,attr"`
 
 	// generated from attribute "relative-y" of type tenths
-	Relative_y float64 `xml:"relative-y,attr"`
+	Relative_y string `xml:"relative-y,attr"`
 
 	// generated from attribute "font-family" of type font-family
 	Font_family string `xml:"font-family,attr"`
@@ -1324,20 +1372,20 @@ type Empty_line struct {
 // Empty_placement is generated from named complex type "empty-placement"
 type Empty_placement struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "default-x" of type tenths
-	Default_x float64 `xml:"default-x,attr"`
+	Default_x string `xml:"default-x,attr"`
 
 	// generated from attribute "default-y" of type tenths
-	Default_y float64 `xml:"default-y,attr"`
+	Default_y string `xml:"default-y,attr"`
 
 	// generated from attribute "relative-x" of type tenths
-	Relative_x float64 `xml:"relative-x,attr"`
+	Relative_x string `xml:"relative-x,attr"`
 
 	// generated from attribute "relative-y" of type tenths
-	Relative_y float64 `xml:"relative-y,attr"`
+	Relative_y string `xml:"relative-y,attr"`
 
 	// generated from attribute "font-family" of type font-family
 	Font_family string `xml:"font-family,attr"`
@@ -1361,20 +1409,20 @@ type Empty_placement struct {
 // Empty_placement_smufl is generated from named complex type "empty-placement-smufl"
 type Empty_placement_smufl struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "default-x" of type tenths
-	Default_x float64 `xml:"default-x,attr"`
+	Default_x string `xml:"default-x,attr"`
 
 	// generated from attribute "default-y" of type tenths
-	Default_y float64 `xml:"default-y,attr"`
+	Default_y string `xml:"default-y,attr"`
 
 	// generated from attribute "relative-x" of type tenths
-	Relative_x float64 `xml:"relative-x,attr"`
+	Relative_x string `xml:"relative-x,attr"`
 
 	// generated from attribute "relative-y" of type tenths
-	Relative_y float64 `xml:"relative-y,attr"`
+	Relative_y string `xml:"relative-y,attr"`
 
 	// generated from attribute "font-family" of type font-family
 	Font_family string `xml:"font-family,attr"`
@@ -1401,23 +1449,23 @@ type Empty_placement_smufl struct {
 // Empty_print_object_style_align is generated from named complex type "empty-print-object-style-align"
 type Empty_print_object_style_align struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "print-object" of type yes-no
 	Print_object string `xml:"print-object,attr"`
 
 	// generated from attribute "default-x" of type tenths
-	Default_x float64 `xml:"default-x,attr"`
+	Default_x string `xml:"default-x,attr"`
 
 	// generated from attribute "default-y" of type tenths
-	Default_y float64 `xml:"default-y,attr"`
+	Default_y string `xml:"default-y,attr"`
 
 	// generated from attribute "relative-x" of type tenths
-	Relative_x float64 `xml:"relative-x,attr"`
+	Relative_x string `xml:"relative-x,attr"`
 
 	// generated from attribute "relative-y" of type tenths
-	Relative_y float64 `xml:"relative-y,attr"`
+	Relative_y string `xml:"relative-y,attr"`
 
 	// generated from attribute "font-family" of type font-family
 	Font_family string `xml:"font-family,attr"`
@@ -1444,20 +1492,20 @@ type Empty_print_object_style_align struct {
 // Empty_print_style is generated from named complex type "empty-print-style"
 type Empty_print_style struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "default-x" of type tenths
-	Default_x float64 `xml:"default-x,attr"`
+	Default_x string `xml:"default-x,attr"`
 
 	// generated from attribute "default-y" of type tenths
-	Default_y float64 `xml:"default-y,attr"`
+	Default_y string `xml:"default-y,attr"`
 
 	// generated from attribute "relative-x" of type tenths
-	Relative_x float64 `xml:"relative-x,attr"`
+	Relative_x string `xml:"relative-x,attr"`
 
 	// generated from attribute "relative-y" of type tenths
-	Relative_y float64 `xml:"relative-y,attr"`
+	Relative_y string `xml:"relative-y,attr"`
 
 	// generated from attribute "font-family" of type font-family
 	Font_family string `xml:"font-family,attr"`
@@ -1478,20 +1526,20 @@ type Empty_print_style struct {
 // Empty_print_style_align is generated from named complex type "empty-print-style-align"
 type Empty_print_style_align struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "default-x" of type tenths
-	Default_x float64 `xml:"default-x,attr"`
+	Default_x string `xml:"default-x,attr"`
 
 	// generated from attribute "default-y" of type tenths
-	Default_y float64 `xml:"default-y,attr"`
+	Default_y string `xml:"default-y,attr"`
 
 	// generated from attribute "relative-x" of type tenths
-	Relative_x float64 `xml:"relative-x,attr"`
+	Relative_x string `xml:"relative-x,attr"`
 
 	// generated from attribute "relative-y" of type tenths
-	Relative_y float64 `xml:"relative-y,attr"`
+	Relative_y string `xml:"relative-y,attr"`
 
 	// generated from attribute "font-family" of type font-family
 	Font_family string `xml:"font-family,attr"`
@@ -1518,20 +1566,20 @@ type Empty_print_style_align struct {
 // Empty_print_style_align_id is generated from named complex type "empty-print-style-align-id"
 type Empty_print_style_align_id struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "default-x" of type tenths
-	Default_x float64 `xml:"default-x,attr"`
+	Default_x string `xml:"default-x,attr"`
 
 	// generated from attribute "default-y" of type tenths
-	Default_y float64 `xml:"default-y,attr"`
+	Default_y string `xml:"default-y,attr"`
 
 	// generated from attribute "relative-x" of type tenths
-	Relative_x float64 `xml:"relative-x,attr"`
+	Relative_x string `xml:"relative-x,attr"`
 
 	// generated from attribute "relative-y" of type tenths
-	Relative_y float64 `xml:"relative-y,attr"`
+	Relative_y string `xml:"relative-y,attr"`
 
 	// generated from attribute "font-family" of type font-family
 	Font_family string `xml:"font-family,attr"`
@@ -1561,20 +1609,20 @@ type Empty_print_style_align_id struct {
 // Empty_trill_sound is generated from named complex type "empty-trill-sound"
 type Empty_trill_sound struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "default-x" of type tenths
-	Default_x float64 `xml:"default-x,attr"`
+	Default_x string `xml:"default-x,attr"`
 
 	// generated from attribute "default-y" of type tenths
-	Default_y float64 `xml:"default-y,attr"`
+	Default_y string `xml:"default-y,attr"`
 
 	// generated from attribute "relative-x" of type tenths
-	Relative_x float64 `xml:"relative-x,attr"`
+	Relative_x string `xml:"relative-x,attr"`
 
 	// generated from attribute "relative-y" of type tenths
-	Relative_y float64 `xml:"relative-y,attr"`
+	Relative_y string `xml:"relative-y,attr"`
 
 	// generated from attribute "font-family" of type font-family
 	Font_family string `xml:"font-family,attr"`
@@ -1607,19 +1655,19 @@ type Empty_trill_sound struct {
 	Accelerate string `xml:"accelerate,attr"`
 
 	// generated from attribute "beats" of type trill-beats
-	Beats float64 `xml:"beats,attr"`
+	Beats string `xml:"beats,attr"`
 
 	// generated from attribute "second-beat" of type percent
-	Second_beat float64 `xml:"second-beat,attr"`
+	Second_beat string `xml:"second-beat,attr"`
 
 	// generated from attribute "last-beat" of type percent
-	Last_beat float64 `xml:"last-beat,attr"`
+	Last_beat string `xml:"last-beat,attr"`
 }
 
 // Encoding is generated from named complex type "encoding"
 type Encoding struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "encoder" of type typed-text
@@ -1638,7 +1686,7 @@ type Encoding struct {
 // Ending is generated from named complex type "ending"
 type Ending struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "number" of type ending-number
@@ -1648,35 +1696,38 @@ type Ending struct {
 	Type string `xml:"type,attr"`
 
 	// generated from attribute "end-length" of type tenths
-	End_length float64 `xml:"end-length,attr"`
+	End_length string `xml:"end-length,attr"`
 
 	// generated from attribute "text-x" of type tenths
-	Text_x float64 `xml:"text-x,attr"`
+	Text_x string `xml:"text-x,attr"`
 
 	// generated from attribute "text-y" of type tenths
-	Text_y float64 `xml:"text-y,attr"`
+	Text_y string `xml:"text-y,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Extend is generated from named complex type "extend"
 type Extend struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "type" of type start-stop-continue
 	Type string `xml:"type,attr"`
 
 	// generated from attribute "default-x" of type tenths
-	Default_x float64 `xml:"default-x,attr"`
+	Default_x string `xml:"default-x,attr"`
 
 	// generated from attribute "default-y" of type tenths
-	Default_y float64 `xml:"default-y,attr"`
+	Default_y string `xml:"default-y,attr"`
 
 	// generated from attribute "relative-x" of type tenths
-	Relative_x float64 `xml:"relative-x,attr"`
+	Relative_x string `xml:"relative-x,attr"`
 
 	// generated from attribute "relative-y" of type tenths
-	Relative_y float64 `xml:"relative-y,attr"`
+	Relative_y string `xml:"relative-y,attr"`
 
 	// generated from attribute "color" of type color
 	Color string `xml:"color,attr"`
@@ -1685,27 +1736,33 @@ type Extend struct {
 // Feature is generated from named complex type "feature"
 type Feature struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "type" of type xs:token
 	Type string `xml:"type,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Fermata is generated from named complex type "fermata"
 type Fermata struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "type" of type upright-inverted
 	Type string `xml:"type,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Figure is generated from named complex type "figure"
 type Figure struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "prefix" of type style-text
@@ -1730,23 +1787,23 @@ type Figure struct {
 // Figured_bass is generated from named complex type "figured-bass"
 type Figured_bass struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "parentheses" of type yes-no
 	Parentheses string `xml:"parentheses,attr"`
 
 	// generated from attribute "default-x" of type tenths
-	Default_x float64 `xml:"default-x,attr"`
+	Default_x string `xml:"default-x,attr"`
 
 	// generated from attribute "default-y" of type tenths
-	Default_y float64 `xml:"default-y,attr"`
+	Default_y string `xml:"default-y,attr"`
 
 	// generated from attribute "relative-x" of type tenths
-	Relative_x float64 `xml:"relative-x,attr"`
+	Relative_x string `xml:"relative-x,attr"`
 
 	// generated from attribute "relative-y" of type tenths
-	Relative_y float64 `xml:"relative-y,attr"`
+	Relative_y string `xml:"relative-y,attr"`
 
 	// generated from attribute "font-family" of type font-family
 	Font_family string `xml:"font-family,attr"`
@@ -1791,7 +1848,7 @@ type Figured_bass struct {
 	Figure []*Figure `xml:"figure"`
 
 	// generated from element "duration" of type positive-divisions
-	Duration float64 `xml:"duration"`
+	Duration string `xml:"duration"`
 
 	// generated from element "footnote" of type formatted-text
 	Footnote []*Formatted_text `xml:"footnote"`
@@ -1803,7 +1860,7 @@ type Figured_bass struct {
 // Fingering is generated from named complex type "fingering"
 type Fingering struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "substitution" of type yes-no
@@ -1811,12 +1868,15 @@ type Fingering struct {
 
 	// generated from attribute "alternate" of type yes-no
 	Alternate string `xml:"alternate,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // First_fret is generated from named complex type "first-fret"
 type First_fret struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "text" of type xs:token
@@ -1824,12 +1884,15 @@ type First_fret struct {
 
 	// generated from attribute "location" of type left-right
 	Location string `xml:"location,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText int `xml:",chardata"`
 }
 
 // For_part is generated from named complex type "for-part"
 type For_part struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "number" of type staff-number
@@ -1848,39 +1911,51 @@ type For_part struct {
 // Formatted_symbol is generated from named complex type "formatted-symbol"
 type Formatted_symbol struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Formatted_symbol_id is generated from named complex type "formatted-symbol-id"
 type Formatted_symbol_id struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Formatted_text is generated from named complex type "formatted-text"
 type Formatted_text struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Formatted_text_id is generated from named complex type "formatted-text-id"
 type Formatted_text_id struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Forward is generated from named complex type "forward"
 type Forward struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "duration" of type positive-divisions
-	Duration float64 `xml:"duration"`
+	Duration string `xml:"duration"`
 
 	// generated from element "footnote" of type formatted-text
 	Footnote []*Formatted_text `xml:"footnote"`
@@ -1898,29 +1973,29 @@ type Forward struct {
 // Frame is generated from named complex type "frame"
 type Frame struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "height" of type tenths
-	Height float64 `xml:"height,attr"`
+	Height string `xml:"height,attr"`
 
 	// generated from attribute "width" of type tenths
-	Width float64 `xml:"width,attr"`
+	Width string `xml:"width,attr"`
 
 	// generated from attribute "unplayed" of type xs:token
 	Unplayed string `xml:"unplayed,attr"`
 
 	// generated from attribute "default-x" of type tenths
-	Default_x float64 `xml:"default-x,attr"`
+	Default_x string `xml:"default-x,attr"`
 
 	// generated from attribute "default-y" of type tenths
-	Default_y float64 `xml:"default-y,attr"`
+	Default_y string `xml:"default-y,attr"`
 
 	// generated from attribute "relative-x" of type tenths
-	Relative_x float64 `xml:"relative-x,attr"`
+	Relative_x string `xml:"relative-x,attr"`
 
 	// generated from attribute "relative-y" of type tenths
-	Relative_y float64 `xml:"relative-y,attr"`
+	Relative_y string `xml:"relative-y,attr"`
 
 	// generated from attribute "color" of type color
 	Color string `xml:"color,attr"`
@@ -1950,7 +2025,7 @@ type Frame struct {
 // Frame_note is generated from named complex type "frame-note"
 type Frame_note struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "string" of type string
@@ -1969,24 +2044,30 @@ type Frame_note struct {
 // Fret is generated from named complex type "fret"
 type Fret struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText int `xml:",chardata"`
 }
 
 // Glass is generated from named complex type "glass"
 type Glass struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "smufl" of type smufl-pictogram-glyph-name
 	Smufl string `xml:"smufl,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Glissando is generated from named complex type "glissando"
 type Glissando struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "type" of type start-stop
@@ -1994,32 +2075,38 @@ type Glissando struct {
 
 	// generated from attribute "number" of type number-level
 	Number int `xml:"number,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Glyph is generated from named complex type "glyph"
 type Glyph struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "type" of type glyph-type
 	Type string `xml:"type,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Grace is generated from named complex type "grace"
 type Grace struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "steal-time-previous" of type percent
-	Steal_time_previous float64 `xml:"steal-time-previous,attr"`
+	Steal_time_previous string `xml:"steal-time-previous,attr"`
 
 	// generated from attribute "steal-time-following" of type percent
-	Steal_time_following float64 `xml:"steal-time-following,attr"`
+	Steal_time_following string `xml:"steal-time-following,attr"`
 
 	// generated from attribute "make-time" of type divisions
-	Make_time float64 `xml:"make-time,attr"`
+	Make_time string `xml:"make-time,attr"`
 
 	// generated from attribute "slash" of type yes-no
 	Slash string `xml:"slash,attr"`
@@ -2028,28 +2115,37 @@ type Grace struct {
 // Group_barline is generated from named complex type "group-barline"
 type Group_barline struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Group_name is generated from named complex type "group-name"
 type Group_name struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Group_symbol is generated from named complex type "group-symbol"
 type Group_symbol struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Grouping is generated from named complex type "grouping"
 type Grouping struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "type" of type start-stop-single
@@ -2071,7 +2167,7 @@ type Grouping struct {
 // Hammer_on_pull_off is generated from named complex type "hammer-on-pull-off"
 type Hammer_on_pull_off struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "type" of type start-stop
@@ -2079,42 +2175,51 @@ type Hammer_on_pull_off struct {
 
 	// generated from attribute "number" of type number-level
 	Number int `xml:"number,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Handbell is generated from named complex type "handbell"
 type Handbell struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Harmon_closed is generated from named complex type "harmon-closed"
 type Harmon_closed struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "location" of type harmon-closed-location
 	Location string `xml:"location,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Harmon_mute is generated from named complex type "harmon-mute"
 type Harmon_mute struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "default-x" of type tenths
-	Default_x float64 `xml:"default-x,attr"`
+	Default_x string `xml:"default-x,attr"`
 
 	// generated from attribute "default-y" of type tenths
-	Default_y float64 `xml:"default-y,attr"`
+	Default_y string `xml:"default-y,attr"`
 
 	// generated from attribute "relative-x" of type tenths
-	Relative_x float64 `xml:"relative-x,attr"`
+	Relative_x string `xml:"relative-x,attr"`
 
 	// generated from attribute "relative-y" of type tenths
-	Relative_y float64 `xml:"relative-y,attr"`
+	Relative_y string `xml:"relative-y,attr"`
 
 	// generated from attribute "font-family" of type font-family
 	Font_family string `xml:"font-family,attr"`
@@ -2141,23 +2246,23 @@ type Harmon_mute struct {
 // Harmonic is generated from named complex type "harmonic"
 type Harmonic struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "print-object" of type yes-no
 	Print_object string `xml:"print-object,attr"`
 
 	// generated from attribute "default-x" of type tenths
-	Default_x float64 `xml:"default-x,attr"`
+	Default_x string `xml:"default-x,attr"`
 
 	// generated from attribute "default-y" of type tenths
-	Default_y float64 `xml:"default-y,attr"`
+	Default_y string `xml:"default-y,attr"`
 
 	// generated from attribute "relative-x" of type tenths
-	Relative_x float64 `xml:"relative-x,attr"`
+	Relative_x string `xml:"relative-x,attr"`
 
 	// generated from attribute "relative-y" of type tenths
-	Relative_y float64 `xml:"relative-y,attr"`
+	Relative_y string `xml:"relative-y,attr"`
 
 	// generated from attribute "font-family" of type font-family
 	Font_family string `xml:"font-family,attr"`
@@ -2196,7 +2301,7 @@ type Harmonic struct {
 // Harmony is generated from named complex type "harmony"
 type Harmony struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "type" of type harmony-type
@@ -2212,16 +2317,16 @@ type Harmony struct {
 	Print_object string `xml:"print-object,attr"`
 
 	// generated from attribute "default-x" of type tenths
-	Default_x float64 `xml:"default-x,attr"`
+	Default_x string `xml:"default-x,attr"`
 
 	// generated from attribute "default-y" of type tenths
-	Default_y float64 `xml:"default-y,attr"`
+	Default_y string `xml:"default-y,attr"`
 
 	// generated from attribute "relative-x" of type tenths
-	Relative_x float64 `xml:"relative-x,attr"`
+	Relative_x string `xml:"relative-x,attr"`
 
 	// generated from attribute "relative-y" of type tenths
-	Relative_y float64 `xml:"relative-y,attr"`
+	Relative_y string `xml:"relative-y,attr"`
 
 	// generated from attribute "font-family" of type font-family
 	Font_family string `xml:"font-family,attr"`
@@ -2287,30 +2392,33 @@ type Harmony struct {
 // Harmony_alter is generated from named complex type "harmony-alter"
 type Harmony_alter struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "location" of type left-right
 	Location string `xml:"location,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Harp_pedals is generated from named complex type "harp-pedals"
 type Harp_pedals struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "default-x" of type tenths
-	Default_x float64 `xml:"default-x,attr"`
+	Default_x string `xml:"default-x,attr"`
 
 	// generated from attribute "default-y" of type tenths
-	Default_y float64 `xml:"default-y,attr"`
+	Default_y string `xml:"default-y,attr"`
 
 	// generated from attribute "relative-x" of type tenths
-	Relative_x float64 `xml:"relative-x,attr"`
+	Relative_x string `xml:"relative-x,attr"`
 
 	// generated from attribute "relative-y" of type tenths
-	Relative_y float64 `xml:"relative-y,attr"`
+	Relative_y string `xml:"relative-y,attr"`
 
 	// generated from attribute "font-family" of type font-family
 	Font_family string `xml:"font-family,attr"`
@@ -2343,27 +2451,27 @@ type Harp_pedals struct {
 // Heel_toe is generated from named complex type "heel-toe"
 type Heel_toe struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 }
 
 // Hole is generated from named complex type "hole"
 type Hole struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "default-x" of type tenths
-	Default_x float64 `xml:"default-x,attr"`
+	Default_x string `xml:"default-x,attr"`
 
 	// generated from attribute "default-y" of type tenths
-	Default_y float64 `xml:"default-y,attr"`
+	Default_y string `xml:"default-y,attr"`
 
 	// generated from attribute "relative-x" of type tenths
-	Relative_x float64 `xml:"relative-x,attr"`
+	Relative_x string `xml:"relative-x,attr"`
 
 	// generated from attribute "relative-y" of type tenths
-	Relative_y float64 `xml:"relative-y,attr"`
+	Relative_y string `xml:"relative-y,attr"`
 
 	// generated from attribute "font-family" of type font-family
 	Font_family string `xml:"font-family,attr"`
@@ -2396,33 +2504,36 @@ type Hole struct {
 // Hole_closed is generated from named complex type "hole-closed"
 type Hole_closed struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "location" of type hole-closed-location
 	Location string `xml:"location,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Horizontal_turn is generated from named complex type "horizontal-turn"
 type Horizontal_turn struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "slash" of type yes-no
 	Slash string `xml:"slash,attr"`
 
 	// generated from attribute "default-x" of type tenths
-	Default_x float64 `xml:"default-x,attr"`
+	Default_x string `xml:"default-x,attr"`
 
 	// generated from attribute "default-y" of type tenths
-	Default_y float64 `xml:"default-y,attr"`
+	Default_y string `xml:"default-y,attr"`
 
 	// generated from attribute "relative-x" of type tenths
-	Relative_x float64 `xml:"relative-x,attr"`
+	Relative_x string `xml:"relative-x,attr"`
 
 	// generated from attribute "relative-y" of type tenths
-	Relative_y float64 `xml:"relative-y,attr"`
+	Relative_y string `xml:"relative-y,attr"`
 
 	// generated from attribute "font-family" of type font-family
 	Font_family string `xml:"font-family,attr"`
@@ -2455,19 +2566,19 @@ type Horizontal_turn struct {
 	Accelerate string `xml:"accelerate,attr"`
 
 	// generated from attribute "beats" of type trill-beats
-	Beats float64 `xml:"beats,attr"`
+	Beats string `xml:"beats,attr"`
 
 	// generated from attribute "second-beat" of type percent
-	Second_beat float64 `xml:"second-beat,attr"`
+	Second_beat string `xml:"second-beat,attr"`
 
 	// generated from attribute "last-beat" of type percent
-	Last_beat float64 `xml:"last-beat,attr"`
+	Last_beat string `xml:"last-beat,attr"`
 }
 
 // Identification is generated from named complex type "identification"
 type Identification struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "creator" of type typed-text
@@ -2492,7 +2603,7 @@ type Identification struct {
 // Image is generated from named complex type "image"
 type Image struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "source" of type xs:anyURI
@@ -2502,22 +2613,22 @@ type Image struct {
 	Type string `xml:"type,attr"`
 
 	// generated from attribute "height" of type tenths
-	Height float64 `xml:"height,attr"`
+	Height string `xml:"height,attr"`
 
 	// generated from attribute "width" of type tenths
-	Width float64 `xml:"width,attr"`
+	Width string `xml:"width,attr"`
 
 	// generated from attribute "default-x" of type tenths
-	Default_x float64 `xml:"default-x,attr"`
+	Default_x string `xml:"default-x,attr"`
 
 	// generated from attribute "default-y" of type tenths
-	Default_y float64 `xml:"default-y,attr"`
+	Default_y string `xml:"default-y,attr"`
 
 	// generated from attribute "relative-x" of type tenths
-	Relative_x float64 `xml:"relative-x,attr"`
+	Relative_x string `xml:"relative-x,attr"`
 
 	// generated from attribute "relative-y" of type tenths
-	Relative_y float64 `xml:"relative-y,attr"`
+	Relative_y string `xml:"relative-y,attr"`
 
 	// generated from attribute "halign" of type left-center-right
 	Halign string `xml:"halign,attr"`
@@ -2532,7 +2643,7 @@ type Image struct {
 // Instrument is generated from named complex type "instrument"
 type Instrument struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "id" of type xs:IDREF
@@ -2542,7 +2653,7 @@ type Instrument struct {
 // Instrument_change is generated from named complex type "instrument-change"
 type Instrument_change struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "id" of type xs:IDREF
@@ -2564,7 +2675,7 @@ type Instrument_change struct {
 // Instrument_link is generated from named complex type "instrument-link"
 type Instrument_link struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "id" of type xs:IDREF
@@ -2574,7 +2685,7 @@ type Instrument_link struct {
 // Interchangeable is generated from named complex type "interchangeable"
 type Interchangeable struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "symbol" of type time-symbol
@@ -2596,33 +2707,36 @@ type Interchangeable struct {
 // Inversion is generated from named complex type "inversion"
 type Inversion struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "text" of type xs:token
 	Text string `xml:"text,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText int `xml:",chardata"`
 }
 
 // Key is generated from named complex type "key"
 type Key struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "number" of type staff-number
 	Number int `xml:"number,attr"`
 
 	// generated from attribute "default-x" of type tenths
-	Default_x float64 `xml:"default-x,attr"`
+	Default_x string `xml:"default-x,attr"`
 
 	// generated from attribute "default-y" of type tenths
-	Default_y float64 `xml:"default-y,attr"`
+	Default_y string `xml:"default-y,attr"`
 
 	// generated from attribute "relative-x" of type tenths
-	Relative_x float64 `xml:"relative-x,attr"`
+	Relative_x string `xml:"relative-x,attr"`
 
 	// generated from attribute "relative-y" of type tenths
-	Relative_y float64 `xml:"relative-y,attr"`
+	Relative_y string `xml:"relative-y,attr"`
 
 	// generated from attribute "font-family" of type font-family
 	Font_family string `xml:"font-family,attr"`
@@ -2661,7 +2775,7 @@ type Key struct {
 	Key_step string `xml:"key-step"`
 
 	// generated from element "key-alter" of type semitones
-	Key_alter float64 `xml:"key-alter"`
+	Key_alter string `xml:"key-alter"`
 
 	// generated from element "key-accidental" of type key-accidental
 	Key_accidental []*Key_accidental `xml:"key-accidental"`
@@ -2670,17 +2784,20 @@ type Key struct {
 // Key_accidental is generated from named complex type "key-accidental"
 type Key_accidental struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "smufl" of type smufl-accidental-glyph-name
 	Smufl string `xml:"smufl,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Key_octave is generated from named complex type "key-octave"
 type Key_octave struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "number" of type xs:positiveInteger
@@ -2688,12 +2805,15 @@ type Key_octave struct {
 
 	// generated from attribute "cancel" of type yes-no
 	Cancel string `xml:"cancel,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText int `xml:",chardata"`
 }
 
 // Kind is generated from named complex type "kind"
 type Kind struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "use-symbols" of type yes-no
@@ -2710,12 +2830,15 @@ type Kind struct {
 
 	// generated from attribute "bracket-degrees" of type yes-no
 	Bracket_degrees string `xml:"bracket-degrees,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Level is generated from named complex type "level"
 type Level struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "reference" of type yes-no
@@ -2723,19 +2846,22 @@ type Level struct {
 
 	// generated from attribute "type" of type start-stop-single
 	Type string `xml:"type,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Line_detail is generated from named complex type "line-detail"
 type Line_detail struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "line" of type staff-line
 	Line int `xml:"line,attr"`
 
 	// generated from attribute "width" of type tenths
-	Width float64 `xml:"width,attr"`
+	Width string `xml:"width,attr"`
 
 	// generated from attribute "color" of type color
 	Color string `xml:"color,attr"`
@@ -2750,38 +2876,41 @@ type Line_detail struct {
 // Line_width is generated from named complex type "line-width"
 type Line_width struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "type" of type line-width-type
 	Type string `xml:"type,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Link is generated from named complex type "link"
 type Link struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "name" of type xs:token
 	NameXSD string `xml:"name,attr"`
 
-	// generated from attribute "" of type
+	// generated from attribute "" of type 
 	Href string `xml:",attr"`
 
-	// generated from attribute "" of type
+	// generated from attribute "" of type 
 	Type string `xml:",attr"`
 
-	// generated from attribute "" of type
+	// generated from attribute "" of type 
 	Role string `xml:",attr"`
 
-	// generated from attribute "" of type
+	// generated from attribute "" of type 
 	Title string `xml:",attr"`
 
-	// generated from attribute "" of type
+	// generated from attribute "" of type 
 	Show string `xml:",attr"`
 
-	// generated from attribute "" of type
+	// generated from attribute "" of type 
 	Actuate string `xml:",attr"`
 
 	// generated from attribute "element" of type xs:NMTOKEN
@@ -2791,22 +2920,22 @@ type Link struct {
 	Position int `xml:"position,attr"`
 
 	// generated from attribute "default-x" of type tenths
-	Default_x float64 `xml:"default-x,attr"`
+	Default_x string `xml:"default-x,attr"`
 
 	// generated from attribute "default-y" of type tenths
-	Default_y float64 `xml:"default-y,attr"`
+	Default_y string `xml:"default-y,attr"`
 
 	// generated from attribute "relative-x" of type tenths
-	Relative_x float64 `xml:"relative-x,attr"`
+	Relative_x string `xml:"relative-x,attr"`
 
 	// generated from attribute "relative-y" of type tenths
-	Relative_y float64 `xml:"relative-y,attr"`
+	Relative_y string `xml:"relative-y,attr"`
 }
 
 // Listen is generated from named complex type "listen"
 type Listen struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "assess" of type assess
@@ -2822,7 +2951,7 @@ type Listen struct {
 // Listening is generated from named complex type "listening"
 type Listening struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "offset" of type offset
@@ -2838,7 +2967,7 @@ type Listening struct {
 // Lyric is generated from named complex type "lyric"
 type Lyric struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "number" of type xs:NMTOKEN
@@ -2854,16 +2983,16 @@ type Lyric struct {
 	Justify string `xml:"justify,attr"`
 
 	// generated from attribute "default-x" of type tenths
-	Default_x float64 `xml:"default-x,attr"`
+	Default_x string `xml:"default-x,attr"`
 
 	// generated from attribute "default-y" of type tenths
-	Default_y float64 `xml:"default-y,attr"`
+	Default_y string `xml:"default-y,attr"`
 
 	// generated from attribute "relative-x" of type tenths
-	Relative_x float64 `xml:"relative-x,attr"`
+	Relative_x string `xml:"relative-x,attr"`
 
 	// generated from attribute "relative-y" of type tenths
-	Relative_y float64 `xml:"relative-y,attr"`
+	Relative_y string `xml:"relative-y,attr"`
 
 	// generated from attribute "placement" of type above-below
 	Placement string `xml:"placement,attr"`
@@ -2911,7 +3040,7 @@ type Lyric struct {
 // Lyric_font is generated from named complex type "lyric-font"
 type Lyric_font struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "number" of type xs:NMTOKEN
@@ -2936,7 +3065,7 @@ type Lyric_font struct {
 // Lyric_language is generated from named complex type "lyric-language"
 type Lyric_language struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "number" of type xs:NMTOKEN
@@ -2945,24 +3074,24 @@ type Lyric_language struct {
 	// generated from attribute "name" of type xs:token
 	NameXSD string `xml:"name,attr"`
 
-	// generated from attribute "" of type
+	// generated from attribute "" of type 
 	Lang string `xml:",attr"`
 }
 
 // Measure_layout is generated from named complex type "measure-layout"
 type Measure_layout struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "measure-distance" of type tenths
-	Measure_distance float64 `xml:"measure-distance"`
+	Measure_distance string `xml:"measure-distance"`
 }
 
 // Measure_numbering is generated from named complex type "measure-numbering"
 type Measure_numbering struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "system" of type system-relation-number
@@ -2976,12 +3105,15 @@ type Measure_numbering struct {
 
 	// generated from attribute "multiple-rest-range" of type yes-no
 	Multiple_rest_range string `xml:"multiple-rest-range,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Measure_repeat is generated from named complex type "measure-repeat"
 type Measure_repeat struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "type" of type start-stop
@@ -2989,12 +3121,15 @@ type Measure_repeat struct {
 
 	// generated from attribute "slashes" of type xs:positiveInteger
 	Slashes int `xml:"slashes,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Measure_style is generated from named complex type "measure-style"
 type Measure_style struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "number" of type staff-number
@@ -3034,43 +3169,49 @@ type Measure_style struct {
 // Membrane is generated from named complex type "membrane"
 type Membrane struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "smufl" of type smufl-pictogram-glyph-name
 	Smufl string `xml:"smufl,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Metal is generated from named complex type "metal"
 type Metal struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "smufl" of type smufl-pictogram-glyph-name
 	Smufl string `xml:"smufl,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Metronome is generated from named complex type "metronome"
 type Metronome struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "parentheses" of type yes-no
 	Parentheses string `xml:"parentheses,attr"`
 
 	// generated from attribute "default-x" of type tenths
-	Default_x float64 `xml:"default-x,attr"`
+	Default_x string `xml:"default-x,attr"`
 
 	// generated from attribute "default-y" of type tenths
-	Default_y float64 `xml:"default-y,attr"`
+	Default_y string `xml:"default-y,attr"`
 
 	// generated from attribute "relative-x" of type tenths
-	Relative_x float64 `xml:"relative-x,attr"`
+	Relative_x string `xml:"relative-x,attr"`
 
 	// generated from attribute "relative-y" of type tenths
-	Relative_y float64 `xml:"relative-y,attr"`
+	Relative_y string `xml:"relative-y,attr"`
 
 	// generated from attribute "font-family" of type font-family
 	Font_family string `xml:"font-family,attr"`
@@ -3127,17 +3268,20 @@ type Metronome struct {
 // Metronome_beam is generated from named complex type "metronome-beam"
 type Metronome_beam struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "number" of type beam-level
 	Number int `xml:"number,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Metronome_note is generated from named complex type "metronome-note"
 type Metronome_note struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "metronome-type" of type note-type-value
@@ -3159,7 +3303,7 @@ type Metronome_note struct {
 // Metronome_tied is generated from named complex type "metronome-tied"
 type Metronome_tied struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "type" of type start-stop
@@ -3169,14 +3313,14 @@ type Metronome_tied struct {
 // Metronome_tuplet is generated from named complex type "metronome-tuplet"
 type Metronome_tuplet struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 }
 
 // Midi_device is generated from named complex type "midi-device"
 type Midi_device struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "port" of type midi-16
@@ -3184,12 +3328,15 @@ type Midi_device struct {
 
 	// generated from attribute "id" of type xs:IDREF
 	Id string `xml:"id,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Midi_instrument is generated from named complex type "midi-instrument"
 type Midi_instrument struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "id" of type xs:IDREF
@@ -3211,19 +3358,19 @@ type Midi_instrument struct {
 	Midi_unpitched int `xml:"midi-unpitched"`
 
 	// generated from element "volume" of type percent
-	Volume float64 `xml:"volume"`
+	Volume string `xml:"volume"`
 
 	// generated from element "pan" of type rotation-degrees
-	Pan float64 `xml:"pan"`
+	Pan string `xml:"pan"`
 
 	// generated from element "elevation" of type rotation-degrees
-	Elevation float64 `xml:"elevation"`
+	Elevation string `xml:"elevation"`
 }
 
 // Miscellaneous is generated from named complex type "miscellaneous"
 type Miscellaneous struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "miscellaneous-field" of type miscellaneous-field
@@ -3233,34 +3380,40 @@ type Miscellaneous struct {
 // Miscellaneous_field is generated from named complex type "miscellaneous-field"
 type Miscellaneous_field struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "name" of type xs:token
 	NameXSD string `xml:"name,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Mordent is generated from named complex type "mordent"
 type Mordent struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 }
 
 // Multiple_rest is generated from named complex type "multiple-rest"
 type Multiple_rest struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "use-symbols" of type yes-no
 	Use_symbols string `xml:"use-symbols,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText int `xml:",chardata"`
 }
 
 // Name_display is generated from named complex type "name-display"
 type Name_display struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "print-object" of type yes-no
@@ -3276,7 +3429,7 @@ type Name_display struct {
 // Non_arpeggiate is generated from named complex type "non-arpeggiate"
 type Non_arpeggiate struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "type" of type top-bottom
@@ -3286,16 +3439,16 @@ type Non_arpeggiate struct {
 	Number int `xml:"number,attr"`
 
 	// generated from attribute "default-x" of type tenths
-	Default_x float64 `xml:"default-x,attr"`
+	Default_x string `xml:"default-x,attr"`
 
 	// generated from attribute "default-y" of type tenths
-	Default_y float64 `xml:"default-y,attr"`
+	Default_y string `xml:"default-y,attr"`
 
 	// generated from attribute "relative-x" of type tenths
-	Relative_x float64 `xml:"relative-x,attr"`
+	Relative_x string `xml:"relative-x,attr"`
 
 	// generated from attribute "relative-y" of type tenths
-	Relative_y float64 `xml:"relative-y,attr"`
+	Relative_y string `xml:"relative-y,attr"`
 
 	// generated from attribute "placement" of type above-below
 	Placement string `xml:"placement,attr"`
@@ -3310,7 +3463,7 @@ type Non_arpeggiate struct {
 // Notations is generated from named complex type "notations"
 type Notations struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "print-object" of type yes-no
@@ -3371,23 +3524,23 @@ type Notations struct {
 // Note is generated from named complex type "note"
 type Note struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "print-leger" of type yes-no
 	Print_leger string `xml:"print-leger,attr"`
 
 	// generated from attribute "dynamics" of type non-negative-decimal
-	Dynamics float64 `xml:"dynamics,attr"`
+	Dynamics string `xml:"dynamics,attr"`
 
 	// generated from attribute "end-dynamics" of type non-negative-decimal
-	End_dynamics float64 `xml:"end-dynamics,attr"`
+	End_dynamics string `xml:"end-dynamics,attr"`
 
 	// generated from attribute "attack" of type divisions
-	Attack float64 `xml:"attack,attr"`
+	Attack string `xml:"attack,attr"`
 
 	// generated from attribute "release" of type divisions
-	Release float64 `xml:"release,attr"`
+	Release string `xml:"release,attr"`
 
 	// generated from attribute "time-only" of type time-only
 	Time_only string `xml:"time-only,attr"`
@@ -3396,16 +3549,16 @@ type Note struct {
 	Pizzicato string `xml:"pizzicato,attr"`
 
 	// generated from attribute "default-x" of type tenths
-	Default_x float64 `xml:"default-x,attr"`
+	Default_x string `xml:"default-x,attr"`
 
 	// generated from attribute "default-y" of type tenths
-	Default_y float64 `xml:"default-y,attr"`
+	Default_y string `xml:"default-y,attr"`
 
 	// generated from attribute "relative-x" of type tenths
-	Relative_x float64 `xml:"relative-x,attr"`
+	Relative_x string `xml:"relative-x,attr"`
 
 	// generated from attribute "relative-y" of type tenths
-	Relative_y float64 `xml:"relative-y,attr"`
+	Relative_y string `xml:"relative-y,attr"`
 
 	// generated from attribute "font-family" of type font-family
 	Font_family string `xml:"font-family,attr"`
@@ -3498,7 +3651,7 @@ type Note struct {
 	Cue string `xml:"cue"`
 
 	// generated from element "duration" of type positive-divisions
-	Duration float64 `xml:"duration"`
+	Duration string `xml:"duration"`
 
 	// generated from element "footnote" of type formatted-text
 	Footnote []*Formatted_text `xml:"footnote"`
@@ -3516,27 +3669,33 @@ type Note struct {
 // Note_size is generated from named complex type "note-size"
 type Note_size struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "type" of type note-size-type
 	Type string `xml:"type,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Note_type is generated from named complex type "note-type"
 type Note_type struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "size" of type symbol-size
 	Size string `xml:"size,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Notehead is generated from named complex type "notehead"
 type Notehead struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "filled" of type yes-no
@@ -3544,12 +3703,15 @@ type Notehead struct {
 
 	// generated from attribute "parentheses" of type yes-no
 	Parentheses string `xml:"parentheses,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Notehead_text is generated from named complex type "notehead-text"
 type Notehead_text struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "display-text" of type formatted-text
@@ -3562,7 +3724,7 @@ type Notehead_text struct {
 // Numeral is generated from named complex type "numeral"
 type Numeral struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "numeral-root" of type numeral-root
@@ -3578,7 +3740,7 @@ type Numeral struct {
 // Numeral_key is generated from named complex type "numeral-key"
 type Numeral_key struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "print-object" of type yes-no
@@ -3594,17 +3756,20 @@ type Numeral_key struct {
 // Numeral_root is generated from named complex type "numeral-root"
 type Numeral_root struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "text" of type xs:token
 	Text string `xml:"text,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText int `xml:",chardata"`
 }
 
 // Octave_shift is generated from named complex type "octave-shift"
 type Octave_shift struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "type" of type up-down-stop-continue
@@ -3617,22 +3782,22 @@ type Octave_shift struct {
 	Size int `xml:"size,attr"`
 
 	// generated from attribute "dash-length" of type tenths
-	Dash_length float64 `xml:"dash-length,attr"`
+	Dash_length string `xml:"dash-length,attr"`
 
 	// generated from attribute "space-length" of type tenths
-	Space_length float64 `xml:"space-length,attr"`
+	Space_length string `xml:"space-length,attr"`
 
 	// generated from attribute "default-x" of type tenths
-	Default_x float64 `xml:"default-x,attr"`
+	Default_x string `xml:"default-x,attr"`
 
 	// generated from attribute "default-y" of type tenths
-	Default_y float64 `xml:"default-y,attr"`
+	Default_y string `xml:"default-y,attr"`
 
 	// generated from attribute "relative-x" of type tenths
-	Relative_x float64 `xml:"relative-x,attr"`
+	Relative_x string `xml:"relative-x,attr"`
 
 	// generated from attribute "relative-y" of type tenths
-	Relative_y float64 `xml:"relative-y,attr"`
+	Relative_y string `xml:"relative-y,attr"`
 
 	// generated from attribute "font-family" of type font-family
 	Font_family string `xml:"font-family,attr"`
@@ -3656,42 +3821,45 @@ type Octave_shift struct {
 // Offset is generated from named complex type "offset"
 type Offset struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "sound" of type yes-no
 	Sound string `xml:"sound,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Opus is generated from named complex type "opus"
 type Opus struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
-	// generated from attribute "" of type
+	// generated from attribute "" of type 
 	Href string `xml:",attr"`
 
-	// generated from attribute "" of type
+	// generated from attribute "" of type 
 	Type string `xml:",attr"`
 
-	// generated from attribute "" of type
+	// generated from attribute "" of type 
 	Role string `xml:",attr"`
 
-	// generated from attribute "" of type
+	// generated from attribute "" of type 
 	Title string `xml:",attr"`
 
-	// generated from attribute "" of type
+	// generated from attribute "" of type 
 	Show string `xml:",attr"`
 
-	// generated from attribute "" of type
+	// generated from attribute "" of type 
 	Actuate string `xml:",attr"`
 }
 
 // Ornaments is generated from named complex type "ornaments"
 type Ornaments struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "id" of type xs:ID
@@ -3749,24 +3917,30 @@ type Ornaments struct {
 // Other_appearance is generated from named complex type "other-appearance"
 type Other_appearance struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "type" of type xs:token
 	Type string `xml:"type,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Other_direction is generated from named complex type "other-direction"
 type Other_direction struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Other_listening is generated from named complex type "other-listening"
 type Other_listening struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "type" of type xs:token
@@ -3777,12 +3951,15 @@ type Other_listening struct {
 
 	// generated from attribute "time-only" of type time-only
 	Time_only string `xml:"time-only,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Other_notation is generated from named complex type "other-notation"
 type Other_notation struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "type" of type start-stop-single
@@ -3790,74 +3967,86 @@ type Other_notation struct {
 
 	// generated from attribute "number" of type number-level
 	Number int `xml:"number,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Other_placement_text is generated from named complex type "other-placement-text"
 type Other_placement_text struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Other_play is generated from named complex type "other-play"
 type Other_play struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "type" of type xs:token
 	Type string `xml:"type,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Other_text is generated from named complex type "other-text"
 type Other_text struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Page_layout is generated from named complex type "page-layout"
 type Page_layout struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "page-margins" of type page-margins
 	Page_margins []*Page_margins `xml:"page-margins"`
 
 	// generated from element "page-height" of type tenths
-	Page_height float64 `xml:"page-height"`
+	Page_height string `xml:"page-height"`
 
 	// generated from element "page-width" of type tenths
-	Page_width float64 `xml:"page-width"`
+	Page_width string `xml:"page-width"`
 }
 
 // Page_margins is generated from named complex type "page-margins"
 type Page_margins struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "type" of type margin-type
 	Type string `xml:"type,attr"`
 
 	// generated from element "top-margin" of type tenths
-	Top_margin float64 `xml:"top-margin"`
+	Top_margin string `xml:"top-margin"`
 
 	// generated from element "bottom-margin" of type tenths
-	Bottom_margin float64 `xml:"bottom-margin"`
+	Bottom_margin string `xml:"bottom-margin"`
 
 	// generated from element "left-margin" of type tenths
-	Left_margin float64 `xml:"left-margin"`
+	Left_margin string `xml:"left-margin"`
 
 	// generated from element "right-margin" of type tenths
-	Right_margin float64 `xml:"right-margin"`
+	Right_margin string `xml:"right-margin"`
 }
 
 // Part_clef is generated from named complex type "part-clef"
 type Part_clef struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "sign" of type clef-sign
@@ -3873,7 +4062,7 @@ type Part_clef struct {
 // Part_group is generated from named complex type "part-group"
 type Part_group struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "type" of type start-stop
@@ -3913,25 +4102,25 @@ type Part_group struct {
 // Part_link is generated from named complex type "part-link"
 type Part_link struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
-	// generated from attribute "" of type
+	// generated from attribute "" of type 
 	Href string `xml:",attr"`
 
-	// generated from attribute "" of type
+	// generated from attribute "" of type 
 	Type string `xml:",attr"`
 
-	// generated from attribute "" of type
+	// generated from attribute "" of type 
 	Role string `xml:",attr"`
 
-	// generated from attribute "" of type
+	// generated from attribute "" of type 
 	Title string `xml:",attr"`
 
-	// generated from attribute "" of type
+	// generated from attribute "" of type 
 	Show string `xml:",attr"`
 
-	// generated from attribute "" of type
+	// generated from attribute "" of type 
 	Actuate string `xml:",attr"`
 
 	// generated from element "instrument-link" of type instrument-link
@@ -3944,7 +4133,7 @@ type Part_link struct {
 // Part_list is generated from named complex type "part-list"
 type Part_list struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "part-group" of type part-group
@@ -3957,14 +4146,17 @@ type Part_list struct {
 // Part_name is generated from named complex type "part-name"
 type Part_name struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Part_symbol is generated from named complex type "part-symbol"
 type Part_symbol struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "top-staff" of type staff-number
@@ -3972,19 +4164,22 @@ type Part_symbol struct {
 
 	// generated from attribute "bottom-staff" of type staff-number
 	Bottom_staff int `xml:"bottom-staff,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Part_transpose is generated from named complex type "part-transpose"
 type Part_transpose struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "diatonic" of type xs:integer
 	Diatonic int `xml:"diatonic"`
 
 	// generated from element "chromatic" of type semitones
-	Chromatic float64 `xml:"chromatic"`
+	Chromatic string `xml:"chromatic"`
 
 	// generated from element "octave-change" of type xs:integer
 	Octave_change int `xml:"octave-change"`
@@ -3996,7 +4191,7 @@ type Part_transpose struct {
 // Pedal is generated from named complex type "pedal"
 type Pedal struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "type" of type pedal-type
@@ -4015,16 +4210,16 @@ type Pedal struct {
 	Abbreviated string `xml:"abbreviated,attr"`
 
 	// generated from attribute "default-x" of type tenths
-	Default_x float64 `xml:"default-x,attr"`
+	Default_x string `xml:"default-x,attr"`
 
 	// generated from attribute "default-y" of type tenths
-	Default_y float64 `xml:"default-y,attr"`
+	Default_y string `xml:"default-y,attr"`
 
 	// generated from attribute "relative-x" of type tenths
-	Relative_x float64 `xml:"relative-x,attr"`
+	Relative_x string `xml:"relative-x,attr"`
 
 	// generated from attribute "relative-y" of type tenths
-	Relative_y float64 `xml:"relative-y,attr"`
+	Relative_y string `xml:"relative-y,attr"`
 
 	// generated from attribute "font-family" of type font-family
 	Font_family string `xml:"font-family,attr"`
@@ -4054,40 +4249,43 @@ type Pedal struct {
 // Pedal_tuning is generated from named complex type "pedal-tuning"
 type Pedal_tuning struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "pedal-step" of type step
 	Pedal_step string `xml:"pedal-step"`
 
 	// generated from element "pedal-alter" of type semitones
-	Pedal_alter float64 `xml:"pedal-alter"`
+	Pedal_alter string `xml:"pedal-alter"`
 }
 
 // Per_minute is generated from named complex type "per-minute"
 type Per_minute struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Percussion is generated from named complex type "percussion"
 type Percussion struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "default-x" of type tenths
-	Default_x float64 `xml:"default-x,attr"`
+	Default_x string `xml:"default-x,attr"`
 
 	// generated from attribute "default-y" of type tenths
-	Default_y float64 `xml:"default-y,attr"`
+	Default_y string `xml:"default-y,attr"`
 
 	// generated from attribute "relative-x" of type tenths
-	Relative_x float64 `xml:"relative-x,attr"`
+	Relative_x string `xml:"relative-x,attr"`
 
 	// generated from attribute "relative-y" of type tenths
-	Relative_y float64 `xml:"relative-y,attr"`
+	Relative_y string `xml:"relative-y,attr"`
 
 	// generated from attribute "font-family" of type font-family
 	Font_family string `xml:"font-family,attr"`
@@ -4153,14 +4351,14 @@ type Percussion struct {
 // Pitch is generated from named complex type "pitch"
 type Pitch struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "step" of type step
 	Step string `xml:"step"`
 
 	// generated from element "alter" of type semitones
-	Alter float64 `xml:"alter"`
+	Alter string `xml:"alter"`
 
 	// generated from element "octave" of type octave
 	Octave int `xml:"octave"`
@@ -4169,24 +4367,30 @@ type Pitch struct {
 // Pitched is generated from named complex type "pitched"
 type Pitched struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "smufl" of type smufl-pictogram-glyph-name
 	Smufl string `xml:"smufl,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Placement_text is generated from named complex type "placement-text"
 type Placement_text struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Play is generated from named complex type "play"
 type Play struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "id" of type xs:IDREF
@@ -4208,7 +4412,7 @@ type Play struct {
 // Player is generated from named complex type "player"
 type Player struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "id" of type xs:ID
@@ -4221,7 +4425,7 @@ type Player struct {
 // Principal_voice is generated from named complex type "principal-voice"
 type Principal_voice struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "type" of type start-stop
@@ -4229,16 +4433,19 @@ type Principal_voice struct {
 
 	// generated from attribute "symbol" of type principal-voice-symbol
 	Symbol string `xml:"symbol,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Print is generated from named complex type "print"
 type Print struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "staff-spacing" of type tenths
-	Staff_spacing float64 `xml:"staff-spacing,attr"`
+	Staff_spacing string `xml:"staff-spacing,attr"`
 
 	// generated from attribute "new-system" of type yes-no
 	New_system string `xml:"new-system,attr"`
@@ -4280,14 +4487,14 @@ type Print struct {
 // Release is generated from named complex type "release"
 type Release struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 }
 
 // Repeat is generated from named complex type "repeat"
 type Repeat struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "direction" of type backward-forward
@@ -4306,7 +4513,7 @@ type Repeat struct {
 // Rest is generated from named complex type "rest"
 type Rest struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "measure" of type yes-no
@@ -4322,7 +4529,7 @@ type Rest struct {
 // Root is generated from named complex type "root"
 type Root struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "root-step" of type root-step
@@ -4335,30 +4542,33 @@ type Root struct {
 // Root_step is generated from named complex type "root-step"
 type Root_step struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "text" of type xs:token
 	Text string `xml:"text,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Scaling is generated from named complex type "scaling"
 type Scaling struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "millimeters" of type millimeters
-	Millimeters float64 `xml:"millimeters"`
+	Millimeters string `xml:"millimeters"`
 
 	// generated from element "tenths" of type tenths
-	Tenths float64 `xml:"tenths"`
+	Tenths string `xml:"tenths"`
 }
 
 // Scordatura is generated from named complex type "scordatura"
 type Scordatura struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "id" of type xs:ID
@@ -4371,7 +4581,7 @@ type Scordatura struct {
 // Score_instrument is generated from named complex type "score-instrument"
 type Score_instrument struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "id" of type xs:ID
@@ -4399,7 +4609,7 @@ type Score_instrument struct {
 // Score_part is generated from named complex type "score-part"
 type Score_part struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "id" of type xs:ID
@@ -4442,23 +4652,23 @@ type Score_part struct {
 // Segno is generated from named complex type "segno"
 type Segno struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "smufl" of type smufl-segno-glyph-name
 	Smufl string `xml:"smufl,attr"`
 
 	// generated from attribute "default-x" of type tenths
-	Default_x float64 `xml:"default-x,attr"`
+	Default_x string `xml:"default-x,attr"`
 
 	// generated from attribute "default-y" of type tenths
-	Default_y float64 `xml:"default-y,attr"`
+	Default_y string `xml:"default-y,attr"`
 
 	// generated from attribute "relative-x" of type tenths
-	Relative_x float64 `xml:"relative-x,attr"`
+	Relative_x string `xml:"relative-x,attr"`
 
 	// generated from attribute "relative-y" of type tenths
-	Relative_y float64 `xml:"relative-y,attr"`
+	Relative_y string `xml:"relative-y,attr"`
 
 	// generated from attribute "font-family" of type font-family
 	Font_family string `xml:"font-family,attr"`
@@ -4488,7 +4698,7 @@ type Segno struct {
 // Slash is generated from named complex type "slash"
 type Slash struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "type" of type start-stop
@@ -4513,7 +4723,7 @@ type Slash struct {
 // Slide is generated from named complex type "slide"
 type Slide struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "type" of type start-stop
@@ -4521,12 +4731,15 @@ type Slide struct {
 
 	// generated from attribute "number" of type number-level
 	Number int `xml:"number,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Slur is generated from named complex type "slur"
 type Slur struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "type" of type start-stop-continue
@@ -4539,22 +4752,22 @@ type Slur struct {
 	Line_type string `xml:"line-type,attr"`
 
 	// generated from attribute "dash-length" of type tenths
-	Dash_length float64 `xml:"dash-length,attr"`
+	Dash_length string `xml:"dash-length,attr"`
 
 	// generated from attribute "space-length" of type tenths
-	Space_length float64 `xml:"space-length,attr"`
+	Space_length string `xml:"space-length,attr"`
 
 	// generated from attribute "default-x" of type tenths
-	Default_x float64 `xml:"default-x,attr"`
+	Default_x string `xml:"default-x,attr"`
 
 	// generated from attribute "default-y" of type tenths
-	Default_y float64 `xml:"default-y,attr"`
+	Default_y string `xml:"default-y,attr"`
 
 	// generated from attribute "relative-x" of type tenths
-	Relative_x float64 `xml:"relative-x,attr"`
+	Relative_x string `xml:"relative-x,attr"`
 
 	// generated from attribute "relative-y" of type tenths
-	Relative_y float64 `xml:"relative-y,attr"`
+	Relative_y string `xml:"relative-y,attr"`
 
 	// generated from attribute "placement" of type above-below
 	Placement string `xml:"placement,attr"`
@@ -4563,22 +4776,22 @@ type Slur struct {
 	Orientation string `xml:"orientation,attr"`
 
 	// generated from attribute "bezier-x" of type tenths
-	Bezier_x float64 `xml:"bezier-x,attr"`
+	Bezier_x string `xml:"bezier-x,attr"`
 
 	// generated from attribute "bezier-y" of type tenths
-	Bezier_y float64 `xml:"bezier-y,attr"`
+	Bezier_y string `xml:"bezier-y,attr"`
 
 	// generated from attribute "bezier-x2" of type tenths
-	Bezier_x2 float64 `xml:"bezier-x2,attr"`
+	Bezier_x2 string `xml:"bezier-x2,attr"`
 
 	// generated from attribute "bezier-y2" of type tenths
-	Bezier_y2 float64 `xml:"bezier-y2,attr"`
+	Bezier_y2 string `xml:"bezier-y2,attr"`
 
 	// generated from attribute "bezier-offset" of type divisions
-	Bezier_offset float64 `xml:"bezier-offset,attr"`
+	Bezier_offset string `xml:"bezier-offset,attr"`
 
 	// generated from attribute "bezier-offset2" of type divisions
-	Bezier_offset2 float64 `xml:"bezier-offset2,attr"`
+	Bezier_offset2 string `xml:"bezier-offset2,attr"`
 
 	// generated from attribute "color" of type color
 	Color string `xml:"color,attr"`
@@ -4590,14 +4803,14 @@ type Slur struct {
 // Sound is generated from named complex type "sound"
 type Sound struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "tempo" of type non-negative-decimal
-	Tempo float64 `xml:"tempo,attr"`
+	Tempo string `xml:"tempo,attr"`
 
 	// generated from attribute "dynamics" of type non-negative-decimal
-	Dynamics float64 `xml:"dynamics,attr"`
+	Dynamics string `xml:"dynamics,attr"`
 
 	// generated from attribute "dacapo" of type yes-no
 	Dacapo string `xml:"dacapo,attr"`
@@ -4615,7 +4828,7 @@ type Sound struct {
 	Tocoda string `xml:"tocoda,attr"`
 
 	// generated from attribute "divisions" of type divisions
-	Divisions float64 `xml:"divisions,attr"`
+	Divisions string `xml:"divisions,attr"`
 
 	// generated from attribute "forward-repeat" of type yes-no
 	Forward_repeat string `xml:"forward-repeat,attr"`
@@ -4630,10 +4843,10 @@ type Sound struct {
 	Pizzicato string `xml:"pizzicato,attr"`
 
 	// generated from attribute "pan" of type rotation-degrees
-	Pan float64 `xml:"pan,attr"`
+	Pan string `xml:"pan,attr"`
 
 	// generated from attribute "elevation" of type rotation-degrees
-	Elevation float64 `xml:"elevation,attr"`
+	Elevation string `xml:"elevation,attr"`
 
 	// generated from attribute "damper-pedal" of type yes-no-number
 	Damper_pedal string `xml:"damper-pedal,attr"`
@@ -4669,7 +4882,7 @@ type Sound struct {
 // Staff_details is generated from named complex type "staff-details"
 type Staff_details struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "number" of type staff-number
@@ -4706,23 +4919,23 @@ type Staff_details struct {
 // Staff_divide is generated from named complex type "staff-divide"
 type Staff_divide struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "type" of type staff-divide-symbol
 	Type string `xml:"type,attr"`
 
 	// generated from attribute "default-x" of type tenths
-	Default_x float64 `xml:"default-x,attr"`
+	Default_x string `xml:"default-x,attr"`
 
 	// generated from attribute "default-y" of type tenths
-	Default_y float64 `xml:"default-y,attr"`
+	Default_y string `xml:"default-y,attr"`
 
 	// generated from attribute "relative-x" of type tenths
-	Relative_x float64 `xml:"relative-x,attr"`
+	Relative_x string `xml:"relative-x,attr"`
 
 	// generated from attribute "relative-y" of type tenths
-	Relative_y float64 `xml:"relative-y,attr"`
+	Relative_y string `xml:"relative-y,attr"`
 
 	// generated from attribute "font-family" of type font-family
 	Font_family string `xml:"font-family,attr"`
@@ -4752,30 +4965,33 @@ type Staff_divide struct {
 // Staff_layout is generated from named complex type "staff-layout"
 type Staff_layout struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "number" of type staff-number
 	Number int `xml:"number,attr"`
 
 	// generated from element "staff-distance" of type tenths
-	Staff_distance float64 `xml:"staff-distance"`
+	Staff_distance string `xml:"staff-distance"`
 }
 
 // Staff_size is generated from named complex type "staff-size"
 type Staff_size struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "scaling" of type non-negative-decimal
-	Scaling float64 `xml:"scaling,attr"`
+	Scaling string `xml:"scaling,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Staff_tuning is generated from named complex type "staff-tuning"
 type Staff_tuning struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "line" of type staff-line
@@ -4785,7 +5001,7 @@ type Staff_tuning struct {
 	Tuning_step string `xml:"tuning-step"`
 
 	// generated from element "tuning-alter" of type semitones
-	Tuning_alter float64 `xml:"tuning-alter"`
+	Tuning_alter string `xml:"tuning-alter"`
 
 	// generated from element "tuning-octave" of type octave
 	Tuning_octave int `xml:"tuning-octave"`
@@ -4794,14 +5010,17 @@ type Staff_tuning struct {
 // Stem is generated from named complex type "stem"
 type Stem struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Stick is generated from named complex type "stick"
 type Stick struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "tip" of type tip-direction
@@ -4823,30 +5042,33 @@ type Stick struct {
 // String is generated from named complex type "string"
 type String struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText int `xml:",chardata"`
 }
 
 // String_mute is generated from named complex type "string-mute"
 type String_mute struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "type" of type on-off
 	Type string `xml:"type,attr"`
 
 	// generated from attribute "default-x" of type tenths
-	Default_x float64 `xml:"default-x,attr"`
+	Default_x string `xml:"default-x,attr"`
 
 	// generated from attribute "default-y" of type tenths
-	Default_y float64 `xml:"default-y,attr"`
+	Default_y string `xml:"default-y,attr"`
 
 	// generated from attribute "relative-x" of type tenths
-	Relative_x float64 `xml:"relative-x,attr"`
+	Relative_x string `xml:"relative-x,attr"`
 
 	// generated from attribute "relative-y" of type tenths
-	Relative_y float64 `xml:"relative-y,attr"`
+	Relative_y string `xml:"relative-y,attr"`
 
 	// generated from attribute "font-family" of type font-family
 	Font_family string `xml:"font-family,attr"`
@@ -4876,21 +5098,24 @@ type String_mute struct {
 // Strong_accent is generated from named complex type "strong-accent"
 type Strong_accent struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 }
 
 // Style_text is generated from named complex type "style-text"
 type Style_text struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Supports is generated from named complex type "supports"
 type Supports struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "type" of type yes-no
@@ -4909,7 +5134,7 @@ type Supports struct {
 // Swing is generated from named complex type "swing"
 type Swing struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "swing-style" of type xs:string
@@ -4931,7 +5156,7 @@ type Swing struct {
 // Sync is generated from named complex type "sync"
 type Sync struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "type" of type sync-type
@@ -4950,7 +5175,7 @@ type Sync struct {
 // System_dividers is generated from named complex type "system-dividers"
 type System_dividers struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "left-divider" of type empty-print-object-style-align
@@ -4963,17 +5188,17 @@ type System_dividers struct {
 // System_layout is generated from named complex type "system-layout"
 type System_layout struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "system-margins" of type system-margins
 	System_margins []*System_margins `xml:"system-margins"`
 
 	// generated from element "system-distance" of type tenths
-	System_distance float64 `xml:"system-distance"`
+	System_distance string `xml:"system-distance"`
 
 	// generated from element "top-system-distance" of type tenths
-	Top_system_distance float64 `xml:"top-system-distance"`
+	Top_system_distance string `xml:"top-system-distance"`
 
 	// generated from element "system-dividers" of type system-dividers
 	System_dividers []*System_dividers `xml:"system-dividers"`
@@ -4982,30 +5207,33 @@ type System_layout struct {
 // System_margins is generated from named complex type "system-margins"
 type System_margins struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "left-margin" of type tenths
-	Left_margin float64 `xml:"left-margin"`
+	Left_margin string `xml:"left-margin"`
 
 	// generated from element "right-margin" of type tenths
-	Right_margin float64 `xml:"right-margin"`
+	Right_margin string `xml:"right-margin"`
 }
 
 // Tap is generated from named complex type "tap"
 type Tap struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "hand" of type tap-hand
 	Hand string `xml:"hand,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Technical is generated from named complex type "technical"
 type Technical struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "id" of type xs:ID
@@ -5108,17 +5336,20 @@ type Technical struct {
 // Text_element_data is generated from named complex type "text-element-data"
 type Text_element_data struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
-	// generated from attribute "" of type
+	// generated from attribute "" of type 
 	Lang string `xml:",attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Tie is generated from named complex type "tie"
 type Tie struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "type" of type start-stop
@@ -5131,7 +5362,7 @@ type Tie struct {
 // Tied is generated from named complex type "tied"
 type Tied struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "type" of type tied-type
@@ -5144,22 +5375,22 @@ type Tied struct {
 	Line_type string `xml:"line-type,attr"`
 
 	// generated from attribute "dash-length" of type tenths
-	Dash_length float64 `xml:"dash-length,attr"`
+	Dash_length string `xml:"dash-length,attr"`
 
 	// generated from attribute "space-length" of type tenths
-	Space_length float64 `xml:"space-length,attr"`
+	Space_length string `xml:"space-length,attr"`
 
 	// generated from attribute "default-x" of type tenths
-	Default_x float64 `xml:"default-x,attr"`
+	Default_x string `xml:"default-x,attr"`
 
 	// generated from attribute "default-y" of type tenths
-	Default_y float64 `xml:"default-y,attr"`
+	Default_y string `xml:"default-y,attr"`
 
 	// generated from attribute "relative-x" of type tenths
-	Relative_x float64 `xml:"relative-x,attr"`
+	Relative_x string `xml:"relative-x,attr"`
 
 	// generated from attribute "relative-y" of type tenths
-	Relative_y float64 `xml:"relative-y,attr"`
+	Relative_y string `xml:"relative-y,attr"`
 
 	// generated from attribute "placement" of type above-below
 	Placement string `xml:"placement,attr"`
@@ -5168,22 +5399,22 @@ type Tied struct {
 	Orientation string `xml:"orientation,attr"`
 
 	// generated from attribute "bezier-x" of type tenths
-	Bezier_x float64 `xml:"bezier-x,attr"`
+	Bezier_x string `xml:"bezier-x,attr"`
 
 	// generated from attribute "bezier-y" of type tenths
-	Bezier_y float64 `xml:"bezier-y,attr"`
+	Bezier_y string `xml:"bezier-y,attr"`
 
 	// generated from attribute "bezier-x2" of type tenths
-	Bezier_x2 float64 `xml:"bezier-x2,attr"`
+	Bezier_x2 string `xml:"bezier-x2,attr"`
 
 	// generated from attribute "bezier-y2" of type tenths
-	Bezier_y2 float64 `xml:"bezier-y2,attr"`
+	Bezier_y2 string `xml:"bezier-y2,attr"`
 
 	// generated from attribute "bezier-offset" of type divisions
-	Bezier_offset float64 `xml:"bezier-offset,attr"`
+	Bezier_offset string `xml:"bezier-offset,attr"`
 
 	// generated from attribute "bezier-offset2" of type divisions
-	Bezier_offset2 float64 `xml:"bezier-offset2,attr"`
+	Bezier_offset2 string `xml:"bezier-offset2,attr"`
 
 	// generated from attribute "color" of type color
 	Color string `xml:"color,attr"`
@@ -5195,7 +5426,7 @@ type Tied struct {
 // Time is generated from named complex type "time"
 type Time struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "number" of type staff-number
@@ -5208,16 +5439,16 @@ type Time struct {
 	Separator string `xml:"separator,attr"`
 
 	// generated from attribute "default-x" of type tenths
-	Default_x float64 `xml:"default-x,attr"`
+	Default_x string `xml:"default-x,attr"`
 
 	// generated from attribute "default-y" of type tenths
-	Default_y float64 `xml:"default-y,attr"`
+	Default_y string `xml:"default-y,attr"`
 
 	// generated from attribute "relative-x" of type tenths
-	Relative_x float64 `xml:"relative-x,attr"`
+	Relative_x string `xml:"relative-x,attr"`
 
 	// generated from attribute "relative-y" of type tenths
-	Relative_y float64 `xml:"relative-y,attr"`
+	Relative_y string `xml:"relative-y,attr"`
 
 	// generated from attribute "font-family" of type font-family
 	Font_family string `xml:"font-family,attr"`
@@ -5262,7 +5493,7 @@ type Time struct {
 // Time_modification is generated from named complex type "time-modification"
 type Time_modification struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "actual-notes" of type xs:nonNegativeInteger
@@ -5281,7 +5512,7 @@ type Time_modification struct {
 // Timpani is generated from named complex type "timpani"
 type Timpani struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "smufl" of type smufl-pictogram-glyph-name
@@ -5291,7 +5522,7 @@ type Timpani struct {
 // Transpose is generated from named complex type "transpose"
 type Transpose struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "number" of type staff-number
@@ -5304,7 +5535,7 @@ type Transpose struct {
 	Diatonic int `xml:"diatonic"`
 
 	// generated from element "chromatic" of type semitones
-	Chromatic float64 `xml:"chromatic"`
+	Chromatic string `xml:"chromatic"`
 
 	// generated from element "octave-change" of type xs:integer
 	Octave_change int `xml:"octave-change"`
@@ -5316,17 +5547,20 @@ type Transpose struct {
 // Tremolo is generated from named complex type "tremolo"
 type Tremolo struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "type" of type tremolo-type
 	Type string `xml:"type,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText int `xml:",chardata"`
 }
 
 // Tuplet is generated from named complex type "tuplet"
 type Tuplet struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "type" of type start-stop
@@ -5348,16 +5582,16 @@ type Tuplet struct {
 	Line_shape string `xml:"line-shape,attr"`
 
 	// generated from attribute "default-x" of type tenths
-	Default_x float64 `xml:"default-x,attr"`
+	Default_x string `xml:"default-x,attr"`
 
 	// generated from attribute "default-y" of type tenths
-	Default_y float64 `xml:"default-y,attr"`
+	Default_y string `xml:"default-y,attr"`
 
 	// generated from attribute "relative-x" of type tenths
-	Relative_x float64 `xml:"relative-x,attr"`
+	Relative_x string `xml:"relative-x,attr"`
 
 	// generated from attribute "relative-y" of type tenths
-	Relative_y float64 `xml:"relative-y,attr"`
+	Relative_y string `xml:"relative-y,attr"`
 
 	// generated from attribute "placement" of type above-below
 	Placement string `xml:"placement,attr"`
@@ -5375,7 +5609,7 @@ type Tuplet struct {
 // Tuplet_dot is generated from named complex type "tuplet-dot"
 type Tuplet_dot struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "font-family" of type font-family
@@ -5397,14 +5631,17 @@ type Tuplet_dot struct {
 // Tuplet_number is generated from named complex type "tuplet-number"
 type Tuplet_number struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText int `xml:",chardata"`
 }
 
 // Tuplet_portion is generated from named complex type "tuplet-portion"
 type Tuplet_portion struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "tuplet-number" of type tuplet-number
@@ -5420,26 +5657,30 @@ type Tuplet_portion struct {
 // Tuplet_type is generated from named complex type "tuplet-type"
 type Tuplet_type struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Typed_text is generated from named complex type "typed-text"
 type Typed_text struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "type" of type xs:token
 	Type string `xml:"type,attr"`
 
-	Text string `xml:",chardata"`
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Unpitched is generated from named complex type "unpitched"
 type Unpitched struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "display-step" of type step
@@ -5452,7 +5693,7 @@ type Unpitched struct {
 // Virtual_instrument is generated from named complex type "virtual-instrument"
 type Virtual_instrument struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "virtual-library" of type xs:string
@@ -5465,7 +5706,7 @@ type Virtual_instrument struct {
 // Wait is generated from named complex type "wait"
 type Wait struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "player" of type xs:IDREF
@@ -5478,7 +5719,7 @@ type Wait struct {
 // Wavy_line is generated from named complex type "wavy-line"
 type Wavy_line struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "type" of type start-stop-continue
@@ -5491,16 +5732,16 @@ type Wavy_line struct {
 	Smufl string `xml:"smufl,attr"`
 
 	// generated from attribute "default-x" of type tenths
-	Default_x float64 `xml:"default-x,attr"`
+	Default_x string `xml:"default-x,attr"`
 
 	// generated from attribute "default-y" of type tenths
-	Default_y float64 `xml:"default-y,attr"`
+	Default_y string `xml:"default-y,attr"`
 
 	// generated from attribute "relative-x" of type tenths
-	Relative_x float64 `xml:"relative-x,attr"`
+	Relative_x string `xml:"relative-x,attr"`
 
 	// generated from attribute "relative-y" of type tenths
-	Relative_y float64 `xml:"relative-y,attr"`
+	Relative_y string `xml:"relative-y,attr"`
 
 	// generated from attribute "placement" of type above-below
 	Placement string `xml:"placement,attr"`
@@ -5521,19 +5762,19 @@ type Wavy_line struct {
 	Accelerate string `xml:"accelerate,attr"`
 
 	// generated from attribute "beats" of type trill-beats
-	Beats float64 `xml:"beats,attr"`
+	Beats string `xml:"beats,attr"`
 
 	// generated from attribute "second-beat" of type percent
-	Second_beat float64 `xml:"second-beat,attr"`
+	Second_beat string `xml:"second-beat,attr"`
 
 	// generated from attribute "last-beat" of type percent
-	Last_beat float64 `xml:"last-beat,attr"`
+	Last_beat string `xml:"last-beat,attr"`
 }
 
 // Wedge is generated from named complex type "wedge"
 type Wedge struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "type" of type wedge-type
@@ -5543,7 +5784,7 @@ type Wedge struct {
 	Number int `xml:"number,attr"`
 
 	// generated from attribute "spread" of type tenths
-	Spread float64 `xml:"spread,attr"`
+	Spread string `xml:"spread,attr"`
 
 	// generated from attribute "niente" of type yes-no
 	Niente string `xml:"niente,attr"`
@@ -5552,22 +5793,22 @@ type Wedge struct {
 	Line_type string `xml:"line-type,attr"`
 
 	// generated from attribute "dash-length" of type tenths
-	Dash_length float64 `xml:"dash-length,attr"`
+	Dash_length string `xml:"dash-length,attr"`
 
 	// generated from attribute "space-length" of type tenths
-	Space_length float64 `xml:"space-length,attr"`
+	Space_length string `xml:"space-length,attr"`
 
 	// generated from attribute "default-x" of type tenths
-	Default_x float64 `xml:"default-x,attr"`
+	Default_x string `xml:"default-x,attr"`
 
 	// generated from attribute "default-y" of type tenths
-	Default_y float64 `xml:"default-y,attr"`
+	Default_y string `xml:"default-y,attr"`
 
 	// generated from attribute "relative-x" of type tenths
-	Relative_x float64 `xml:"relative-x,attr"`
+	Relative_x string `xml:"relative-x,attr"`
 
 	// generated from attribute "relative-y" of type tenths
-	Relative_y float64 `xml:"relative-y,attr"`
+	Relative_y string `xml:"relative-y,attr"`
 
 	// generated from attribute "color" of type color
 	Color string `xml:"color,attr"`
@@ -5579,17 +5820,20 @@ type Wedge struct {
 // Wood is generated from named complex type "wood"
 type Wood struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "smufl" of type smufl-pictogram-glyph-name
 	Smufl string `xml:"smufl,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Work is generated from named complex type "work"
 type Work struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "work-number" of type xs:string
@@ -5605,26 +5849,26 @@ type Work struct {
 // All_margins is generated from named group "all-margins"
 type All_margins struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "top-margin" of type tenths
-	Top_margin float64 `xml:"top-margin"`
+	Top_margin string `xml:"top-margin"`
 
 	// generated from element "bottom-margin" of type tenths
-	Bottom_margin float64 `xml:"bottom-margin"`
+	Bottom_margin string `xml:"bottom-margin"`
 
 	// generated from element "left-margin" of type tenths
-	Left_margin float64 `xml:"left-margin"`
+	Left_margin string `xml:"left-margin"`
 
 	// generated from element "right-margin" of type tenths
-	Right_margin float64 `xml:"right-margin"`
+	Right_margin string `xml:"right-margin"`
 }
 
 // Beat_unit is generated from named group "beat-unit"
 type Beat_unit struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "beat-unit" of type note-type-value
@@ -5637,7 +5881,7 @@ type Beat_unit struct {
 // Clef_1 is generated from named group "clef"
 type Clef_1 struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "sign" of type clef-sign
@@ -5653,7 +5897,7 @@ type Clef_1 struct {
 // Display_step_octave is generated from named group "display-step-octave"
 type Display_step_octave struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "display-step" of type step
@@ -5666,17 +5910,17 @@ type Display_step_octave struct {
 // Duration is generated from named group "duration"
 type Duration struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "duration" of type positive-divisions
-	Duration float64 `xml:"duration"`
+	Duration string `xml:"duration"`
 }
 
 // Editorial is generated from named group "editorial"
 type Editorial struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "footnote" of type formatted-text
@@ -5689,7 +5933,7 @@ type Editorial struct {
 // Editorial_voice is generated from named group "editorial-voice"
 type Editorial_voice struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "footnote" of type formatted-text
@@ -5705,7 +5949,7 @@ type Editorial_voice struct {
 // Editorial_voice_direction is generated from named group "editorial-voice-direction"
 type Editorial_voice_direction struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "footnote" of type formatted-text
@@ -5721,7 +5965,7 @@ type Editorial_voice_direction struct {
 // Footnote is generated from named group "footnote"
 type Footnote struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "footnote" of type formatted-text
@@ -5731,7 +5975,7 @@ type Footnote struct {
 // Full_note is generated from named group "full-note"
 type Full_note struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "chord" of type empty
@@ -5750,7 +5994,7 @@ type Full_note struct {
 // Harmony_chord is generated from named group "harmony-chord"
 type Harmony_chord struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "kind" of type kind
@@ -5778,7 +6022,7 @@ type Harmony_chord struct {
 // Layout is generated from named group "layout"
 type Layout struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "page-layout" of type page-layout
@@ -5794,20 +6038,20 @@ type Layout struct {
 // Left_right_margins is generated from named group "left-right-margins"
 type Left_right_margins struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "left-margin" of type tenths
-	Left_margin float64 `xml:"left-margin"`
+	Left_margin string `xml:"left-margin"`
 
 	// generated from element "right-margin" of type tenths
-	Right_margin float64 `xml:"right-margin"`
+	Right_margin string `xml:"right-margin"`
 }
 
 // Level_1 is generated from named group "level"
 type Level_1 struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "level" of type level
@@ -5817,7 +6061,7 @@ type Level_1 struct {
 // Music_data is generated from named group "music-data"
 type Music_data struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "note" of type note
@@ -5866,14 +6110,14 @@ type Music_data struct {
 // Non_traditional_key is generated from named group "non-traditional-key"
 type Non_traditional_key struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "key-step" of type step
 	Key_step string `xml:"key-step"`
 
 	// generated from element "key-alter" of type semitones
-	Key_alter float64 `xml:"key-alter"`
+	Key_alter string `xml:"key-alter"`
 
 	// generated from element "key-accidental" of type key-accidental
 	Key_accidental []*Key_accidental `xml:"key-accidental"`
@@ -5882,7 +6126,7 @@ type Non_traditional_key struct {
 // Part_group_1 is generated from named group "part-group"
 type Part_group_1 struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "part-group" of type part-group
@@ -5892,7 +6136,7 @@ type Part_group_1 struct {
 // Score_header is generated from named group "score-header"
 type Score_header struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "work" of type work
@@ -5920,7 +6164,7 @@ type Score_header struct {
 // Score_part_1 is generated from named group "score-part"
 type Score_part_1 struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "score-part" of type score-part
@@ -5930,7 +6174,7 @@ type Score_part_1 struct {
 // Slash_1 is generated from named group "slash"
 type Slash_1 struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "except-voice" of type xs:string
@@ -5946,7 +6190,7 @@ type Slash_1 struct {
 // Staff is generated from named group "staff"
 type Staff struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "staff" of type xs:positiveInteger
@@ -5956,7 +6200,7 @@ type Staff struct {
 // Time_signature is generated from named group "time-signature"
 type Time_signature struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "beats" of type xs:string
@@ -5969,7 +6213,7 @@ type Time_signature struct {
 // Traditional_key is generated from named group "traditional-key"
 type Traditional_key struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "cancel" of type cancel
@@ -5985,14 +6229,14 @@ type Traditional_key struct {
 // Transpose_1 is generated from named group "transpose"
 type Transpose_1 struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "diatonic" of type xs:integer
 	Diatonic int `xml:"diatonic"`
 
 	// generated from element "chromatic" of type semitones
-	Chromatic float64 `xml:"chromatic"`
+	Chromatic string `xml:"chromatic"`
 
 	// generated from element "octave-change" of type xs:integer
 	Octave_change int `xml:"octave-change"`
@@ -6004,14 +6248,14 @@ type Transpose_1 struct {
 // Tuning is generated from named group "tuning"
 type Tuning struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "tuning-step" of type step
 	Tuning_step string `xml:"tuning-step"`
 
 	// generated from element "tuning-alter" of type semitones
-	Tuning_alter float64 `xml:"tuning-alter"`
+	Tuning_alter string `xml:"tuning-alter"`
 
 	// generated from element "tuning-octave" of type octave
 	Tuning_octave int `xml:"tuning-octave"`
@@ -6020,7 +6264,7 @@ type Tuning struct {
 // Virtual_instrument_data is generated from named group "virtual-instrument-data"
 type Virtual_instrument_data struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "instrument-sound" of type xs:string
@@ -6039,7 +6283,7 @@ type Virtual_instrument_data struct {
 // Voice is generated from named group "voice"
 type Voice struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from element "voice" of type xs:string
@@ -6049,43 +6293,21 @@ type Voice struct {
 // Directive is generated from inlined complex type within element "directive"
 type Directive struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
-	// generated from attribute "" of type
+	// generated from attribute "" of type 
 	Lang string `xml:",attr"`
-}
 
-// Measure is generated from inlined complex type within element "measure"
-type Measure struct {
-	Name string `xml:"-"`
-
-	// insertion point for fields
-
-	// generated from attribute "number" of type xs:token
-	Number string `xml:"number,attr"`
-
-	// generated from attribute "text" of type measure-text
-	Text string `xml:"text,attr"`
-
-	// generated from attribute "implicit" of type yes-no
-	Implicit string `xml:"implicit,attr"`
-
-	// generated from attribute "non-controlling" of type yes-no
-	Non_controlling string `xml:"non-controlling,attr"`
-
-	// generated from attribute "width" of type tenths
-	Width float64 `xml:"width,attr"`
-
-	// generated from attribute "id" of type xs:ID
-	Id string `xml:"id,attr"`
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // Measure_1 is generated from inlined complex type within element "measure"
 // Identifier is post fixed because more than one xsd element has the name "measure"
 type Measure_1 struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "number" of type xs:token
@@ -6101,9 +6323,86 @@ type Measure_1 struct {
 	Non_controlling string `xml:"non-controlling,attr"`
 
 	// generated from attribute "width" of type tenths
-	Width float64 `xml:"width,attr"`
+	Width string `xml:"width,attr"`
 
 	// generated from attribute "id" of type xs:ID
+	Id string `xml:"id,attr"`
+}
+
+// Measure is generated from inlined complex type within element "measure"
+type Measure struct {
+	Name string `xml:"-"`
+	
+	// insertion point for fields
+
+	// generated from attribute "number" of type xs:token
+	Number string `xml:"number,attr"`
+
+	// generated from attribute "text" of type measure-text
+	Text string `xml:"text,attr"`
+
+	// generated from attribute "implicit" of type yes-no
+	Implicit string `xml:"implicit,attr"`
+
+	// generated from attribute "non-controlling" of type yes-no
+	Non_controlling string `xml:"non-controlling,attr"`
+
+	// generated from attribute "width" of type tenths
+	Width string `xml:"width,attr"`
+
+	// generated from attribute "id" of type xs:ID
+	Id string `xml:"id,attr"`
+
+	// generated from element "note" of type note
+	Note []*Note `xml:"note"`
+
+	// generated from element "backup" of type backup
+	Backup []*Backup `xml:"backup"`
+
+	// generated from element "forward" of type forward
+	Forward []*Forward `xml:"forward"`
+
+	// generated from element "direction" of type direction
+	Direction []*Direction `xml:"direction"`
+
+	// generated from element "attributes" of type attributes
+	Attributes []*Attributes `xml:"attributes"`
+
+	// generated from element "harmony" of type harmony
+	Harmony []*Harmony `xml:"harmony"`
+
+	// generated from element "figured-bass" of type figured-bass
+	Figured_bass []*Figured_bass `xml:"figured-bass"`
+
+	// generated from element "print" of type print
+	Print []*Print `xml:"print"`
+
+	// generated from element "sound" of type sound
+	Sound []*Sound `xml:"sound"`
+
+	// generated from element "listening" of type listening
+	Listening []*Listening `xml:"listening"`
+
+	// generated from element "barline" of type barline
+	Barline []*Barline `xml:"barline"`
+
+	// generated from element "grouping" of type grouping
+	Grouping []*Grouping `xml:"grouping"`
+
+	// generated from element "link" of type link
+	Link []*Link `xml:"link"`
+
+	// generated from element "bookmark" of type bookmark
+	Bookmark []*Bookmark `xml:"bookmark"`
+}
+
+// Part is generated from inlined complex type within element "part"
+type Part struct {
+	Name string `xml:"-"`
+	
+	// insertion point for fields
+
+	// generated from attribute "id" of type xs:IDREF
 	Id string `xml:"id,attr"`
 
 	// generated from element "note" of type note
@@ -6153,69 +6452,17 @@ type Measure_1 struct {
 // Identifier is post fixed because more than one xsd element has the name "part"
 type Part_1 struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "id" of type xs:IDREF
 	Id string `xml:"id,attr"`
-}
-
-// Part is generated from inlined complex type within element "part"
-type Part struct {
-	Name string `xml:"-"`
-
-	// insertion point for fields
-
-	// generated from attribute "id" of type xs:IDREF
-	Id string `xml:"id,attr"`
-
-	// generated from element "note" of type note
-	Note []*Note `xml:"note"`
-
-	// generated from element "backup" of type backup
-	Backup []*Backup `xml:"backup"`
-
-	// generated from element "forward" of type forward
-	Forward []*Forward `xml:"forward"`
-
-	// generated from element "direction" of type direction
-	Direction []*Direction `xml:"direction"`
-
-	// generated from element "attributes" of type attributes
-	Attributes []*Attributes `xml:"attributes"`
-
-	// generated from element "harmony" of type harmony
-	Harmony []*Harmony `xml:"harmony"`
-
-	// generated from element "figured-bass" of type figured-bass
-	Figured_bass []*Figured_bass `xml:"figured-bass"`
-
-	// generated from element "print" of type print
-	Print []*Print `xml:"print"`
-
-	// generated from element "sound" of type sound
-	Sound []*Sound `xml:"sound"`
-
-	// generated from element "listening" of type listening
-	Listening []*Listening `xml:"listening"`
-
-	// generated from element "barline" of type barline
-	Barline []*Barline `xml:"barline"`
-
-	// generated from element "grouping" of type grouping
-	Grouping []*Grouping `xml:"grouping"`
-
-	// generated from element "link" of type link
-	Link []*Link `xml:"link"`
-
-	// generated from element "bookmark" of type bookmark
-	Bookmark []*Bookmark `xml:"bookmark"`
 }
 
 // Score_partwise is generated from inlined complex type within element "score-partwise"
 type Score_partwise struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "version" of type xs:token
@@ -6246,7 +6493,7 @@ type Score_partwise struct {
 // Score_timewise is generated from inlined complex type within element "score-timewise"
 type Score_timewise struct {
 	Name string `xml:"-"`
-
+	
 	// insertion point for fields
 
 	// generated from attribute "version" of type xs:token
@@ -6273,3 +6520,5 @@ type Score_timewise struct {
 	// generated from element "part-list" of type part-list
 	Part_list []*Part_list `xml:"part-list"`
 }
+
+
