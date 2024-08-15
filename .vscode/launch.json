@@ -39,7 +39,7 @@
                 "../../../test/books/books.xsd",
                 "-v",
                 "-o",
-                "../../../test/books/models_gen/models.go"
+                "../../../test/books/go/models/models.go"
             ]
         },
         {

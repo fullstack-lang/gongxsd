@@ -7,9 +7,7 @@ import "encoding/xml"
 
 // to avoid compilation error if no xml element is generated
 var _ xml.Attr
-
-{{` + string(rune(ModelsFileTmplLevel0AllGongstructsCode)) + `}}
-`
+{{` + string(rune(ModelsFileTmplLevel0AllGongstructsCode)) + `}}`
 
 type ModelsFileTmplLevel0 int
 
@@ -32,15 +30,15 @@ const (
 
 var ModelsFileTmplLevel1Code map[ModelsFileTmplLevel1]string = // new line
 map[ModelsFileTmplLevel1]string{
-	ModelsFileTmplLevel1OneGongstructCode: `// {{` + string(rune(ModelsFileTmplLevel2Structname)) +
+	ModelsFileTmplLevel1OneGongstructCode: `
+// {{` + string(rune(ModelsFileTmplLevel2Structname)) +
 		`}} is generated from {{` + string(rune(ModelsFileTmplLevel2Source)) +
 		`}}
 type {{` + string(rune(ModelsFileTmplLevel2Structname)) + `}} struct {
 	Name string ` + "`" + "xml:\"-\"" + "`" + `
-	
+
 	// insertion point for fields{{` + string(rune(ModelsFileTmplLevel2Fields)) + `}}
 }
-
 `,
 }
 

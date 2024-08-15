@@ -64,11 +64,12 @@ type Link struct {
 	Name string `xml:"-"`
 
 	// insertion point for fields
-	// in case the extension has base type xs:string, one has to had the chardata stuff
-	EnclosedText string `xml:",chardata"`
 
 	// generated from attribute "name" of type xs:token
 	NameXSD string `xml:"name,attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
 
 // BookDetailsGroup is generated from named group "bookDetailsGroup"
