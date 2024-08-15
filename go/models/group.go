@@ -7,8 +7,8 @@ type Group struct {
 	Ref string `xml:"ref,attr"`
 
 	// analysis
-	IsInlined        bool // it has been defined by the enclosing element
-	EnclosingElement *Element
+	IsAnonymous  bool // it has been defined by the enclosing element
+	OuterElement *Element
 	WithGoIdentifier
 
 	ModelGroup

@@ -1331,8 +1331,8 @@ func (complextypeFormCallback *ComplexTypeFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(complextype_.GoIdentifier), formDiv)
 		case "IsAnonymous":
 			FormDivBasicFieldToField(&(complextype_.IsAnonymous), formDiv)
-		case "DerivedFrom":
-			FormDivSelectFieldToField(&(complextype_.DerivedFrom), complextypeFormCallback.probe.stageOfInterest, formDiv)
+		case "OuterElement":
+			FormDivSelectFieldToField(&(complextype_.OuterElement), complextypeFormCallback.probe.stageOfInterest, formDiv)
 		case "Annotation":
 			FormDivSelectFieldToField(&(complextype_.Annotation), complextypeFormCallback.probe.stageOfInterest, formDiv)
 		case "NameXSD":
@@ -2200,10 +2200,10 @@ func (groupFormCallback *GroupFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(group_.NameXSD), formDiv)
 		case "Ref":
 			FormDivBasicFieldToField(&(group_.Ref), formDiv)
-		case "IsInlined":
-			FormDivBasicFieldToField(&(group_.IsInlined), formDiv)
-		case "EnclosingElement":
-			FormDivSelectFieldToField(&(group_.EnclosingElement), groupFormCallback.probe.stageOfInterest, formDiv)
+		case "IsAnonymous":
+			FormDivBasicFieldToField(&(group_.IsAnonymous), formDiv)
+		case "OuterElement":
+			FormDivSelectFieldToField(&(group_.OuterElement), groupFormCallback.probe.stageOfInterest, formDiv)
 		case "HasNameConflict":
 			FormDivBasicFieldToField(&(group_.HasNameConflict), formDiv)
 		case "GoIdentifier":

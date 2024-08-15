@@ -566,18 +566,19 @@ func _(stage *models.StageStruct) {
 	__Enumeration__000001_bookFormatEnum_Inlined_Inlined.Value = `Hardcover`
 
 	__Extension__000000_link_Inlined_Inlined.Name = `link_Inlined_Inlined`
+	__Extension__000000_link_Inlined_Inlined.Base = `xs:string`
 
 	__Group__000000_.Name = ``
 	__Group__000000_.NameXSD = ``
 	__Group__000000_.Ref = `bookDetailsGroup`
-	__Group__000000_.IsInlined = false
+	__Group__000000_.IsAnonymous = false
 	__Group__000000_.HasNameConflict = true
 	__Group__000000_.GoIdentifier = `_1`
 
 	__Group__000001_bookDetailsGroup.Name = `bookDetailsGroup`
 	__Group__000001_bookDetailsGroup.NameXSD = `bookDetailsGroup`
 	__Group__000001_bookDetailsGroup.Ref = ``
-	__Group__000001_bookDetailsGroup.IsInlined = false
+	__Group__000001_bookDetailsGroup.IsAnonymous = false
 	__Group__000001_bookDetailsGroup.HasNameConflict = false
 	__Group__000001_bookDetailsGroup.GoIdentifier = `BookDetailsGroup`
 
@@ -662,13 +663,13 @@ func _(stage *models.StageStruct) {
 	__AttributeGroup__000003_extendedAttributes.Attributes = append(__AttributeGroup__000003_extendedAttributes.Attributes, __Attribute__000001_edition)
 	__Choice__000000_.Sequences = append(__Choice__000000_.Sequences, __Sequence__000000_)
 	__Choice__000001_.Elements = append(__Choice__000001_.Elements, __Element__000008_credit_words)
-	__Choice__000001_.Elements = append(__Choice__000001_.Elements, __Element__000005_credit_symbol)
+	__Choice__000001_.Elements = append(__Choice__000001_.Elements, __Element__000004_credit_symbol)
 	__Choice__000002_.Elements = append(__Choice__000002_.Elements, __Element__000007_credit_words)
-	__Choice__000002_.Elements = append(__Choice__000002_.Elements, __Element__000004_credit_symbol)
+	__Choice__000002_.Elements = append(__Choice__000002_.Elements, __Element__000005_credit_symbol)
 	__ComplexType__000000_bookType.Annotation = __Annotation__000002_bookType_Inlined
 	__ComplexType__000000_bookType.Sequences = append(__ComplexType__000000_bookType.Sequences, __Sequence__000003_bookType_Inlined)
 	__ComplexType__000000_bookType.AttributeGroups = append(__ComplexType__000000_bookType.AttributeGroups, __AttributeGroup__000000_)
-	__ComplexType__000001_books_Inlined.DerivedFrom = __Element__000002_books
+	__ComplexType__000001_books_Inlined.OuterElement = __Element__000002_books
 	__ComplexType__000001_books_Inlined.Sequences = append(__ComplexType__000001_books_Inlined.Sequences, __Sequence__000004_books_Inlined_Inlined)
 	__ComplexType__000002_credit.Annotation = __Annotation__000004_credit_Inlined
 	__ComplexType__000002_credit.Sequences = append(__ComplexType__000002_credit.Sequences, __Sequence__000005_credit_Inlined)
@@ -701,7 +702,7 @@ func _(stage *models.StageStruct) {
 	__Sequence__000000_.Sequences = append(__Sequence__000000_.Sequences, __Sequence__000001_)
 	__Sequence__000000_.Choices = append(__Sequence__000000_.Choices, __Choice__000002_)
 	__Sequence__000001_.Choices = append(__Sequence__000001_.Choices, __Choice__000001_)
-	__Sequence__000001_.Elements = append(__Sequence__000001_.Elements, __Element__000010_link)
+	__Sequence__000001_.Elements = append(__Sequence__000001_.Elements, __Element__000011_link)
 	__Sequence__000002_bookDetailsGroup_Inlined.Elements = append(__Sequence__000002_bookDetailsGroup_Inlined.Elements, __Element__000012_title)
 	__Sequence__000002_bookDetailsGroup_Inlined.Elements = append(__Sequence__000002_bookDetailsGroup_Inlined.Elements, __Element__000000_author)
 	__Sequence__000002_bookDetailsGroup_Inlined.Elements = append(__Sequence__000002_bookDetailsGroup_Inlined.Elements, __Element__000013_year)
@@ -711,7 +712,7 @@ func _(stage *models.StageStruct) {
 	__Sequence__000004_books_Inlined_Inlined.Elements = append(__Sequence__000004_books_Inlined_Inlined.Elements, __Element__000001_book)
 	__Sequence__000005_credit_Inlined.Choices = append(__Sequence__000005_credit_Inlined.Choices, __Choice__000000_)
 	__Sequence__000005_credit_Inlined.Elements = append(__Sequence__000005_credit_Inlined.Elements, __Element__000006_credit_type)
-	__Sequence__000005_credit_Inlined.Elements = append(__Sequence__000005_credit_Inlined.Elements, __Element__000011_link)
+	__Sequence__000005_credit_Inlined.Elements = append(__Sequence__000005_credit_Inlined.Elements, __Element__000010_link)
 	__SimpleContent__000000_link_Inlined.Extension = __Extension__000000_link_Inlined_Inlined
 	__SimpleType__000000_bookFormatEnum.Restriction = __Restriction__000000_bookFormatEnum_Inlined
 	__SimpleType__000001_titleType.Restriction = __Restriction__000001_titleType_Inlined

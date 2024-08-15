@@ -7,12 +7,12 @@ func PostProcessingAnalyzeXSDStructure(stage *StageStruct) {
 
 		if element.ComplexType != nil {
 			element.ComplexType.IsAnonymous = true
-			element.ComplexType.DerivedFrom = element
+			element.ComplexType.OuterElement = element
 		}
 
 		for _, group := range element.Groups {
-			group.IsInlined = true
-			group.EnclosingElement = element
+			group.IsAnonymous = true
+			group.OuterElement = element
 		}
 	}
 

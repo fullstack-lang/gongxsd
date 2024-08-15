@@ -47,9 +47,9 @@ type ComplexTypeAPI struct {
 type ComplexTypePointersEncoding struct {
 	// insertion for pointer fields encoding declaration
 
-	// field DerivedFrom is a pointer to another Struct (optional or 0..1)
+	// field OuterElement is a pointer to another Struct (optional or 0..1)
 	// This field is generated into another field to enable AS ONE association
-	DerivedFromID sql.NullInt64
+	OuterElementID sql.NullInt64
 
 	// field Annotation is a pointer to another Struct (optional or 0..1)
 	// This field is generated into another field to enable AS ONE association
@@ -278,16 +278,16 @@ func (backRepoComplexType *BackRepoComplexTypeStruct) CommitPhaseTwoInstance(bac
 		complextypeDB.CopyBasicFieldsFromComplexType(complextype)
 
 		// insertion point for translating pointers encodings into actual pointers
-		// commit pointer value complextype.DerivedFrom translates to updating the complextype.DerivedFromID
-		complextypeDB.DerivedFromID.Valid = true // allow for a 0 value (nil association)
-		if complextype.DerivedFrom != nil {
-			if DerivedFromId, ok := backRepo.BackRepoElement.Map_ElementPtr_ElementDBID[complextype.DerivedFrom]; ok {
-				complextypeDB.DerivedFromID.Int64 = int64(DerivedFromId)
-				complextypeDB.DerivedFromID.Valid = true
+		// commit pointer value complextype.OuterElement translates to updating the complextype.OuterElementID
+		complextypeDB.OuterElementID.Valid = true // allow for a 0 value (nil association)
+		if complextype.OuterElement != nil {
+			if OuterElementId, ok := backRepo.BackRepoElement.Map_ElementPtr_ElementDBID[complextype.OuterElement]; ok {
+				complextypeDB.OuterElementID.Int64 = int64(OuterElementId)
+				complextypeDB.OuterElementID.Valid = true
 			}
 		} else {
-			complextypeDB.DerivedFromID.Int64 = 0
-			complextypeDB.DerivedFromID.Valid = true
+			complextypeDB.OuterElementID.Int64 = 0
+			complextypeDB.OuterElementID.Valid = true
 		}
 
 		// commit pointer value complextype.Annotation translates to updating the complextype.AnnotationID
@@ -577,10 +577,10 @@ func (backRepoComplexType *BackRepoComplexTypeStruct) CheckoutPhaseTwoInstance(b
 func (complextypeDB *ComplexTypeDB) DecodePointers(backRepo *BackRepoStruct, complextype *models.ComplexType) {
 
 	// insertion point for checkout of pointer encoding
-	// DerivedFrom field
-	complextype.DerivedFrom = nil
-	if complextypeDB.DerivedFromID.Int64 != 0 {
-		complextype.DerivedFrom = backRepo.BackRepoElement.Map_ElementDBID_ElementPtr[uint(complextypeDB.DerivedFromID.Int64)]
+	// OuterElement field
+	complextype.OuterElement = nil
+	if complextypeDB.OuterElementID.Int64 != 0 {
+		complextype.OuterElement = backRepo.BackRepoElement.Map_ElementDBID_ElementPtr[uint(complextypeDB.OuterElementID.Int64)]
 	}
 	// Annotation field
 	complextype.Annotation = nil
@@ -941,10 +941,10 @@ func (backRepoComplexType *BackRepoComplexTypeStruct) RestorePhaseTwo() {
 		_ = complextypeDB
 
 		// insertion point for reindexing pointers encoding
-		// reindexing DerivedFrom field
-		if complextypeDB.DerivedFromID.Int64 != 0 {
-			complextypeDB.DerivedFromID.Int64 = int64(BackRepoElementid_atBckpTime_newID[uint(complextypeDB.DerivedFromID.Int64)])
-			complextypeDB.DerivedFromID.Valid = true
+		// reindexing OuterElement field
+		if complextypeDB.OuterElementID.Int64 != 0 {
+			complextypeDB.OuterElementID.Int64 = int64(BackRepoElementid_atBckpTime_newID[uint(complextypeDB.OuterElementID.Int64)])
+			complextypeDB.OuterElementID.Valid = true
 		}
 
 		// reindexing Annotation field

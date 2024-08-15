@@ -760,8 +760,8 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 
 		setValueField = NumberInitStatement
 		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "IsInlined")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", fmt.Sprintf("%t", group.IsInlined))
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "IsAnonymous")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", fmt.Sprintf("%t", group.IsAnonymous))
 		initializerStatements += setValueField
 
 		setValueField = NumberInitStatement
@@ -1543,11 +1543,11 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		map_ComplexType_Identifiers[complextype] = id
 
 		// Initialisation of values
-		if complextype.DerivedFrom != nil {
+		if complextype.OuterElement != nil {
 			setPointerField = PointerFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "DerivedFrom")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Element_Identifiers[complextype.DerivedFrom])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "OuterElement")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Element_Identifiers[complextype.OuterElement])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -1785,11 +1785,11 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			pointersInitializesStatements += setPointerField
 		}
 
-		if group.EnclosingElement != nil {
+		if group.OuterElement != nil {
 			setPointerField = PointerFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "EnclosingElement")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Element_Identifiers[group.EnclosingElement])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "OuterElement")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Element_Identifiers[group.OuterElement])
 			pointersInitializesStatements += setPointerField
 		}
 

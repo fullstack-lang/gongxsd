@@ -204,7 +204,7 @@ type Group_WOP struct {
 	Name string
 	NameXSD string
 	Ref string
-	IsInlined bool
+	IsAnonymous bool
 	HasNameConflict bool
 	GoIdentifier string
 }
@@ -214,7 +214,7 @@ func (from *Group) CopyBasicFields(to *Group) {
 	to.Name = from.Name
 	to.NameXSD = from.NameXSD
 	to.Ref = from.Ref
-	to.IsInlined = from.IsInlined
+	to.IsAnonymous = from.IsAnonymous
 	to.HasNameConflict = from.HasNameConflict
 	to.GoIdentifier = from.GoIdentifier
 }

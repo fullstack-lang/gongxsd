@@ -6,8 +6,8 @@ type ComplexType struct {
 	WithGoIdentifier
 
 	// analysis
-	IsAnonymous bool // it has been defined inline by the enclosing element
-	DerivedFrom *Element
+	IsAnonymous  bool // it has been defined inline by the enclosing element
+	OuterElement *Element
 
 	Annotated
 	ElementWithNameAttribute

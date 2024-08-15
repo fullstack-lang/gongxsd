@@ -507,7 +507,7 @@ func FillUpForm[T models.Gongstruct](
 			false, false, 0, false, 0)
 		BasicFieldtoForm("IsAnonymous", instanceWithInferedType.IsAnonymous, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
-		AssociationFieldToForm("DerivedFrom", instanceWithInferedType.DerivedFrom, formGroup, probe)
+		AssociationFieldToForm("OuterElement", instanceWithInferedType.OuterElement, formGroup, probe)
 		AssociationFieldToForm("Annotation", instanceWithInferedType.Annotation, formGroup, probe)
 		BasicFieldtoForm("NameXSD", instanceWithInferedType.NameXSD, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
@@ -820,9 +820,9 @@ func FillUpForm[T models.Gongstruct](
 			false, false, 0, false, 0)
 		BasicFieldtoForm("Ref", instanceWithInferedType.Ref, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
-		BasicFieldtoForm("IsInlined", instanceWithInferedType.IsInlined, instanceWithInferedType, probe.formStage, formGroup,
+		BasicFieldtoForm("IsAnonymous", instanceWithInferedType.IsAnonymous, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
-		AssociationFieldToForm("EnclosingElement", instanceWithInferedType.EnclosingElement, formGroup, probe)
+		AssociationFieldToForm("OuterElement", instanceWithInferedType.OuterElement, formGroup, probe)
 		BasicFieldtoForm("HasNameConflict", instanceWithInferedType.HasNameConflict, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
 		BasicFieldtoForm("GoIdentifier", instanceWithInferedType.GoIdentifier, instanceWithInferedType, probe.formStage, formGroup,

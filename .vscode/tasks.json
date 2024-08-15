@@ -101,6 +101,18 @@
 			]
 		},
 		{
+			"label": "01 - gongc gongxsd -clean",
+			"type": "shell",
+			"options": {
+				"cwd": "${workspaceFolder}/go/models"
+			},
+			"command": "gongc",
+			"group": "build",
+			"args": [
+				"-clean"
+			]
+		},
+		{
 			"label": "00 - go mod vendor",
 			"type": "shell",
 			"group": "build",

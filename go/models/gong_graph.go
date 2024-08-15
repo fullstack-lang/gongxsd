@@ -515,8 +515,8 @@ func (stage *StageStruct) StageBranchComplexType(complextype *ComplexType) {
 	complextype.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
-	if complextype.DerivedFrom != nil {
-		StageBranch(stage, complextype.DerivedFrom)
+	if complextype.OuterElement != nil {
+		StageBranch(stage, complextype.OuterElement)
 	}
 	if complextype.Annotation != nil {
 		StageBranch(stage, complextype.Annotation)
@@ -662,8 +662,8 @@ func (stage *StageStruct) StageBranchGroup(group *Group) {
 	if group.Annotation != nil {
 		StageBranch(stage, group.Annotation)
 	}
-	if group.EnclosingElement != nil {
-		StageBranch(stage, group.EnclosingElement)
+	if group.OuterElement != nil {
+		StageBranch(stage, group.OuterElement)
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
@@ -1303,8 +1303,8 @@ func CopyBranchComplexType(mapOrigCopy map[any]any, complextypeFrom *ComplexType
 	complextypeFrom.CopyBasicFields(complextypeTo)
 
 	//insertion point for the staging of instances referenced by pointers
-	if complextypeFrom.DerivedFrom != nil {
-		complextypeTo.DerivedFrom = CopyBranchElement(mapOrigCopy, complextypeFrom.DerivedFrom)
+	if complextypeFrom.OuterElement != nil {
+		complextypeTo.OuterElement = CopyBranchElement(mapOrigCopy, complextypeFrom.OuterElement)
 	}
 	if complextypeFrom.Annotation != nil {
 		complextypeTo.Annotation = CopyBranchAnnotation(mapOrigCopy, complextypeFrom.Annotation)
@@ -1470,8 +1470,8 @@ func CopyBranchGroup(mapOrigCopy map[any]any, groupFrom *Group) (groupTo *Group)
 	if groupFrom.Annotation != nil {
 		groupTo.Annotation = CopyBranchAnnotation(mapOrigCopy, groupFrom.Annotation)
 	}
-	if groupFrom.EnclosingElement != nil {
-		groupTo.EnclosingElement = CopyBranchElement(mapOrigCopy, groupFrom.EnclosingElement)
+	if groupFrom.OuterElement != nil {
+		groupTo.OuterElement = CopyBranchElement(mapOrigCopy, groupFrom.OuterElement)
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
@@ -2111,8 +2111,8 @@ func (stage *StageStruct) UnstageBranchComplexType(complextype *ComplexType) {
 	complextype.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
-	if complextype.DerivedFrom != nil {
-		UnstageBranch(stage, complextype.DerivedFrom)
+	if complextype.OuterElement != nil {
+		UnstageBranch(stage, complextype.OuterElement)
 	}
 	if complextype.Annotation != nil {
 		UnstageBranch(stage, complextype.Annotation)
@@ -2258,8 +2258,8 @@ func (stage *StageStruct) UnstageBranchGroup(group *Group) {
 	if group.Annotation != nil {
 		UnstageBranch(stage, group.Annotation)
 	}
-	if group.EnclosingElement != nil {
-		UnstageBranch(stage, group.EnclosingElement)
+	if group.OuterElement != nil {
+		UnstageBranch(stage, group.OuterElement)
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
