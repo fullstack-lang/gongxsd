@@ -26,18 +26,6 @@ type AnonymousComplexTypeInline_measure struct {
 	// generated from attribute group "measure-attributes
 	AttributeGroup_measure_attributes
 
-	// generated from anonymous type within outer element "part" of type AnonymousComplexTypeInline_part
-	Part []*AnonymousComplexTypeInline_part_1 `xml:"part"`
-}
-
-// AnonymousComplexTypeInline_measure_1 is generated from outer element "measure"
-type AnonymousComplexTypeInline_measure_1 struct {
-
-	// insertion point for fields
-
-	// generated from attribute group "measure-attributes
-	AttributeGroup_measure_attributes
-
 	// generated from element "note" of type note
 	Note []*Note `xml:"note"`
 
@@ -81,8 +69,20 @@ type AnonymousComplexTypeInline_measure_1 struct {
 	Bookmark []*Bookmark `xml:"bookmark"`
 }
 
-// AnonymousComplexTypeInline_part is generated from outer element "part"
-type AnonymousComplexTypeInline_part struct {
+// AnonymousComplexTypeInline_measure_1 is generated from outer element "measure"
+type AnonymousComplexTypeInline_measure_1 struct {
+
+	// insertion point for fields
+
+	// generated from attribute group "measure-attributes
+	AttributeGroup_measure_attributes
+
+	// generated from anonymous type within outer element "part" of type AnonymousComplexTypeInline_part
+	Part []*AnonymousComplexTypeInline_part `xml:"part"`
+}
+
+// AnonymousComplexTypeInline_part_1 is generated from outer element "part"
+type AnonymousComplexTypeInline_part_1 struct {
 
 	// insertion point for fields
 
@@ -90,11 +90,11 @@ type AnonymousComplexTypeInline_part struct {
 	AttributeGroup_part_attributes
 
 	// generated from anonymous type within outer element "measure" of type AnonymousComplexTypeInline_measure
-	Measure []*AnonymousComplexTypeInline_measure_1 `xml:"measure"`
+	Measure []*AnonymousComplexTypeInline_measure `xml:"measure"`
 }
 
-// AnonymousComplexTypeInline_part_1 is generated from outer element "part"
-type AnonymousComplexTypeInline_part_1 struct {
+// AnonymousComplexTypeInline_part is generated from outer element "part"
+type AnonymousComplexTypeInline_part struct {
 
 	// insertion point for fields
 
@@ -153,7 +153,7 @@ type AnonymousComplexTypeInline_score_partwise struct {
 	AttributeGroup_document_attributes
 
 	// generated from anonymous type within outer element "part" of type AnonymousComplexTypeInline_part
-	Part []*AnonymousComplexTypeInline_part `xml:"part"`
+	Part []*AnonymousComplexTypeInline_part_1 `xml:"part"`
 
 	// generated from element "work" of type work
 	Work []*Work `xml:"work"`
@@ -186,7 +186,7 @@ type AnonymousComplexTypeInline_score_timewise struct {
 	AttributeGroup_document_attributes
 
 	// generated from anonymous type within outer element "measure" of type AnonymousComplexTypeInline_measure
-	Measure []*AnonymousComplexTypeInline_measure `xml:"measure"`
+	Measure []*AnonymousComplexTypeInline_measure_1 `xml:"measure"`
 
 	// generated from element "work" of type work
 	Work []*Work `xml:"work"`
@@ -5906,6 +5906,9 @@ type Score_partwise struct {
 
 	// insertion point for fields
 
+	// necessary since it is a root element
+	XMLName xml.Name `xml:"score-partwise"`
+
 	// generated from inline complex type
 	AnonymousComplexTypeInline_score_partwise
 }
@@ -5915,6 +5918,9 @@ type Score_timewise struct {
 	Name string `xml:"-"`
 
 	// insertion point for fields
+
+	// necessary since it is a root element
+	XMLName xml.Name `xml:"score-timewise"`
 
 	// generated from inline complex type
 	AnonymousComplexTypeInline_score_timewise

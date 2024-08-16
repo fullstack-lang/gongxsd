@@ -135,7 +135,11 @@ func Generate(stage *StageStruct, outputFilePath string) {
 
 	schema := GetGongstrucsSorted[*Schema](stage)[0]
 	for _, element := range schema.Elements {
-		fields := "\n\n\t// generated from inline complex type" +
+		// add the XMLName because it is a root element
+		fields := "\n\n\t// necessary since it is a root element" +
+			"\n\tXMLName xml.Name `xml:\"" + element.NameXSD + "\"`"
+
+		fields += "\n\n\t// generated from inline complex type" +
 			"\n\t" + element.ComplexType.GoIdentifier
 
 		templInsertionLevel0[ModelsFileTmplLevel0AllGongstructsCode] += Replace3(
