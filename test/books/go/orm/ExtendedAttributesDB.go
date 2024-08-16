@@ -65,9 +65,6 @@ type ExtendedAttributesDB struct {
 
 	// Declation for basic field extendedattributesDB.Name
 	Name_Data sql.NullString
-
-	// Declation for basic field extendedattributesDB.Edition
-	Edition_Data sql.NullString
 	
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
@@ -92,8 +89,6 @@ type ExtendedAttributesWOP struct {
 	// insertion for WOP basic fields
 
 	Name string `xlsx:"1"`
-
-	Edition string `xlsx:"2"`
 	// insertion for WOP pointer fields
 }
 
@@ -101,7 +96,6 @@ var ExtendedAttributes_Fields = []string{
 	// insertion for WOP basic fields
 	"ID",
 	"Name",
-	"Edition",
 }
 
 type BackRepoExtendedAttributesStruct struct {
@@ -387,9 +381,6 @@ func (extendedattributesDB *ExtendedAttributesDB) CopyBasicFieldsFromExtendedAtt
 
 	extendedattributesDB.Name_Data.String = extendedattributes.Name
 	extendedattributesDB.Name_Data.Valid = true
-
-	extendedattributesDB.Edition_Data.String = extendedattributes.Edition
-	extendedattributesDB.Edition_Data.Valid = true
 }
 
 // CopyBasicFieldsFromExtendedAttributes_WOP
@@ -398,9 +389,6 @@ func (extendedattributesDB *ExtendedAttributesDB) CopyBasicFieldsFromExtendedAtt
 
 	extendedattributesDB.Name_Data.String = extendedattributes.Name
 	extendedattributesDB.Name_Data.Valid = true
-
-	extendedattributesDB.Edition_Data.String = extendedattributes.Edition
-	extendedattributesDB.Edition_Data.Valid = true
 }
 
 // CopyBasicFieldsFromExtendedAttributesWOP
@@ -409,23 +397,18 @@ func (extendedattributesDB *ExtendedAttributesDB) CopyBasicFieldsFromExtendedAtt
 
 	extendedattributesDB.Name_Data.String = extendedattributes.Name
 	extendedattributesDB.Name_Data.Valid = true
-
-	extendedattributesDB.Edition_Data.String = extendedattributes.Edition
-	extendedattributesDB.Edition_Data.Valid = true
 }
 
 // CopyBasicFieldsToExtendedAttributes
 func (extendedattributesDB *ExtendedAttributesDB) CopyBasicFieldsToExtendedAttributes(extendedattributes *models.ExtendedAttributes) {
 	// insertion point for checkout of basic fields (back repo to stage)
 	extendedattributes.Name = extendedattributesDB.Name_Data.String
-	extendedattributes.Edition = extendedattributesDB.Edition_Data.String
 }
 
 // CopyBasicFieldsToExtendedAttributes_WOP
 func (extendedattributesDB *ExtendedAttributesDB) CopyBasicFieldsToExtendedAttributes_WOP(extendedattributes *models.ExtendedAttributes_WOP) {
 	// insertion point for checkout of basic fields (back repo to stage)
 	extendedattributes.Name = extendedattributesDB.Name_Data.String
-	extendedattributes.Edition = extendedattributesDB.Edition_Data.String
 }
 
 // CopyBasicFieldsToExtendedAttributesWOP
@@ -433,7 +416,6 @@ func (extendedattributesDB *ExtendedAttributesDB) CopyBasicFieldsToExtendedAttri
 	extendedattributes.ID = int(extendedattributesDB.ID)
 	// insertion point for checkout of basic fields (back repo to stage)
 	extendedattributes.Name = extendedattributesDB.Name_Data.String
-	extendedattributes.Edition = extendedattributesDB.Edition_Data.String
 }
 
 // Backup generates a json file from a slice of all ExtendedAttributesDB instances in the backrepo

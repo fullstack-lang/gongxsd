@@ -205,6 +205,20 @@
 			]
 		},
 		{
+			"label": "01 - gongc books -skipNg -skipNpmWorkspaces",
+			"type": "shell",
+			"options": {
+				"cwd": "${workspaceFolder}/test/books"
+			},
+			"command": "gongc",
+			"group": "build",
+			"args": [
+				"-skipNpmWorkspaces",
+				"-skipNg",
+				"go/models",
+			]
+		},
+		{
 			"label": "02 - run books -unmarshallFromCode=stage.go -marshallOnCommit=stage",
 			"type": "shell",
 			"options": {

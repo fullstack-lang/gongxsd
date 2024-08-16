@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Books>
-    <book>
+    <book edition="First Edition" isbn="978-3-16-148410-0" bestseller="true">
         <credit page="1">
             <credit-type>Editor</credit-type>
             <link name="http://example.com/editor-link">Some info in the link</link>
@@ -18,7 +18,7 @@
         <year>1925</year>
         <format>Hardcover</format>
     </book>
-    <book>
+    <book edition="Second Edition" isbn="978-1-4028-9462-6" bestseller="false">
         <credit page="10">
             <credit-type>Foreword</credit-type>
             <link name="http://example.com/foreword-link"></link>

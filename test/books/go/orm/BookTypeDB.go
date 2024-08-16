@@ -69,6 +69,16 @@ type BookTypeDB struct {
 	// Declation for basic field booktypeDB.Name
 	Name_Data sql.NullString
 
+	// Declation for basic field booktypeDB.Edition
+	Edition_Data sql.NullString
+
+	// Declation for basic field booktypeDB.Isbn
+	Isbn_Data sql.NullString
+
+	// Declation for basic field booktypeDB.Bestseller
+	// provide the sql storage for the boolan
+	Bestseller_Data sql.NullBool
+
 	// Declation for basic field booktypeDB.Title
 	Title_Data sql.NullString
 
@@ -105,13 +115,19 @@ type BookTypeWOP struct {
 
 	Name string `xlsx:"1"`
 
-	Title string `xlsx:"2"`
+	Edition string `xlsx:"2"`
 
-	Author string `xlsx:"3"`
+	Isbn string `xlsx:"3"`
 
-	Year int `xlsx:"4"`
+	Bestseller bool `xlsx:"4"`
 
-	Format string `xlsx:"5"`
+	Title string `xlsx:"5"`
+
+	Author string `xlsx:"6"`
+
+	Year int `xlsx:"7"`
+
+	Format string `xlsx:"8"`
 	// insertion for WOP pointer fields
 }
 
@@ -119,6 +135,9 @@ var BookType_Fields = []string{
 	// insertion for WOP basic fields
 	"ID",
 	"Name",
+	"Edition",
+	"Isbn",
+	"Bestseller",
 	"Title",
 	"Author",
 	"Year",
@@ -436,6 +455,15 @@ func (booktypeDB *BookTypeDB) CopyBasicFieldsFromBookType(booktype *models.BookT
 	booktypeDB.Name_Data.String = booktype.Name
 	booktypeDB.Name_Data.Valid = true
 
+	booktypeDB.Edition_Data.String = booktype.Edition
+	booktypeDB.Edition_Data.Valid = true
+
+	booktypeDB.Isbn_Data.String = booktype.Isbn
+	booktypeDB.Isbn_Data.Valid = true
+
+	booktypeDB.Bestseller_Data.Bool = booktype.Bestseller
+	booktypeDB.Bestseller_Data.Valid = true
+
 	booktypeDB.Title_Data.String = booktype.Title
 	booktypeDB.Title_Data.Valid = true
 
@@ -455,6 +483,15 @@ func (booktypeDB *BookTypeDB) CopyBasicFieldsFromBookType_WOP(booktype *models.B
 
 	booktypeDB.Name_Data.String = booktype.Name
 	booktypeDB.Name_Data.Valid = true
+
+	booktypeDB.Edition_Data.String = booktype.Edition
+	booktypeDB.Edition_Data.Valid = true
+
+	booktypeDB.Isbn_Data.String = booktype.Isbn
+	booktypeDB.Isbn_Data.Valid = true
+
+	booktypeDB.Bestseller_Data.Bool = booktype.Bestseller
+	booktypeDB.Bestseller_Data.Valid = true
 
 	booktypeDB.Title_Data.String = booktype.Title
 	booktypeDB.Title_Data.Valid = true
@@ -476,6 +513,15 @@ func (booktypeDB *BookTypeDB) CopyBasicFieldsFromBookTypeWOP(booktype *BookTypeW
 	booktypeDB.Name_Data.String = booktype.Name
 	booktypeDB.Name_Data.Valid = true
 
+	booktypeDB.Edition_Data.String = booktype.Edition
+	booktypeDB.Edition_Data.Valid = true
+
+	booktypeDB.Isbn_Data.String = booktype.Isbn
+	booktypeDB.Isbn_Data.Valid = true
+
+	booktypeDB.Bestseller_Data.Bool = booktype.Bestseller
+	booktypeDB.Bestseller_Data.Valid = true
+
 	booktypeDB.Title_Data.String = booktype.Title
 	booktypeDB.Title_Data.Valid = true
 
@@ -493,6 +539,9 @@ func (booktypeDB *BookTypeDB) CopyBasicFieldsFromBookTypeWOP(booktype *BookTypeW
 func (booktypeDB *BookTypeDB) CopyBasicFieldsToBookType(booktype *models.BookType) {
 	// insertion point for checkout of basic fields (back repo to stage)
 	booktype.Name = booktypeDB.Name_Data.String
+	booktype.Edition = booktypeDB.Edition_Data.String
+	booktype.Isbn = booktypeDB.Isbn_Data.String
+	booktype.Bestseller = booktypeDB.Bestseller_Data.Bool
 	booktype.Title = booktypeDB.Title_Data.String
 	booktype.Author = booktypeDB.Author_Data.String
 	booktype.Year = int(booktypeDB.Year_Data.Int64)
@@ -503,6 +552,9 @@ func (booktypeDB *BookTypeDB) CopyBasicFieldsToBookType(booktype *models.BookTyp
 func (booktypeDB *BookTypeDB) CopyBasicFieldsToBookType_WOP(booktype *models.BookType_WOP) {
 	// insertion point for checkout of basic fields (back repo to stage)
 	booktype.Name = booktypeDB.Name_Data.String
+	booktype.Edition = booktypeDB.Edition_Data.String
+	booktype.Isbn = booktypeDB.Isbn_Data.String
+	booktype.Bestseller = booktypeDB.Bestseller_Data.Bool
 	booktype.Title = booktypeDB.Title_Data.String
 	booktype.Author = booktypeDB.Author_Data.String
 	booktype.Year = int(booktypeDB.Year_Data.Int64)
@@ -514,6 +566,9 @@ func (booktypeDB *BookTypeDB) CopyBasicFieldsToBookTypeWOP(booktype *BookTypeWOP
 	booktype.ID = int(booktypeDB.ID)
 	// insertion point for checkout of basic fields (back repo to stage)
 	booktype.Name = booktypeDB.Name_Data.String
+	booktype.Edition = booktypeDB.Edition_Data.String
+	booktype.Isbn = booktypeDB.Isbn_Data.String
+	booktype.Bestseller = booktypeDB.Bestseller_Data.Bool
 	booktype.Title = booktypeDB.Title_Data.String
 	booktype.Author = booktypeDB.Author_Data.String
 	booktype.Year = int(booktypeDB.Year_Data.Int64)

@@ -87,7 +87,7 @@ func Generate(stage *StageStruct, outputFilePath string) {
 			if referencedAg.Ref != "" {
 				if namedAg, ok := agMap[referencedAg.Ref]; ok {
 					fields += "\n\n\t// generated from attribute group \"" + referencedAg.Ref +
-						"\n\t" + namedAg.GoIdentifier + " *" + namedAg.GoIdentifier + " " + "`" + `xml:"` + referencedAg.Ref + `"` + "`"
+						"\n\t" + namedAg.GoIdentifier
 				} else {
 					log.Fatalln("Unkown attribute group", referencedAg.Ref)
 				}

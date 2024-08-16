@@ -61,13 +61,6 @@ type CommonAttributesDB struct {
 
 	// Declation for basic field commonattributesDB.Name
 	Name_Data sql.NullString
-
-	// Declation for basic field commonattributesDB.Isbn
-	Isbn_Data sql.NullString
-
-	// Declation for basic field commonattributesDB.Bestseller
-	// provide the sql storage for the boolan
-	Bestseller_Data sql.NullBool
 	
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
@@ -92,10 +85,6 @@ type CommonAttributesWOP struct {
 	// insertion for WOP basic fields
 
 	Name string `xlsx:"1"`
-
-	Isbn string `xlsx:"2"`
-
-	Bestseller bool `xlsx:"3"`
 	// insertion for WOP pointer fields
 }
 
@@ -103,8 +92,6 @@ var CommonAttributes_Fields = []string{
 	// insertion for WOP basic fields
 	"ID",
 	"Name",
-	"Isbn",
-	"Bestseller",
 }
 
 type BackRepoCommonAttributesStruct struct {
@@ -373,12 +360,6 @@ func (commonattributesDB *CommonAttributesDB) CopyBasicFieldsFromCommonAttribute
 
 	commonattributesDB.Name_Data.String = commonattributes.Name
 	commonattributesDB.Name_Data.Valid = true
-
-	commonattributesDB.Isbn_Data.String = commonattributes.Isbn
-	commonattributesDB.Isbn_Data.Valid = true
-
-	commonattributesDB.Bestseller_Data.Bool = commonattributes.Bestseller
-	commonattributesDB.Bestseller_Data.Valid = true
 }
 
 // CopyBasicFieldsFromCommonAttributes_WOP
@@ -387,12 +368,6 @@ func (commonattributesDB *CommonAttributesDB) CopyBasicFieldsFromCommonAttribute
 
 	commonattributesDB.Name_Data.String = commonattributes.Name
 	commonattributesDB.Name_Data.Valid = true
-
-	commonattributesDB.Isbn_Data.String = commonattributes.Isbn
-	commonattributesDB.Isbn_Data.Valid = true
-
-	commonattributesDB.Bestseller_Data.Bool = commonattributes.Bestseller
-	commonattributesDB.Bestseller_Data.Valid = true
 }
 
 // CopyBasicFieldsFromCommonAttributesWOP
@@ -401,28 +376,18 @@ func (commonattributesDB *CommonAttributesDB) CopyBasicFieldsFromCommonAttribute
 
 	commonattributesDB.Name_Data.String = commonattributes.Name
 	commonattributesDB.Name_Data.Valid = true
-
-	commonattributesDB.Isbn_Data.String = commonattributes.Isbn
-	commonattributesDB.Isbn_Data.Valid = true
-
-	commonattributesDB.Bestseller_Data.Bool = commonattributes.Bestseller
-	commonattributesDB.Bestseller_Data.Valid = true
 }
 
 // CopyBasicFieldsToCommonAttributes
 func (commonattributesDB *CommonAttributesDB) CopyBasicFieldsToCommonAttributes(commonattributes *models.CommonAttributes) {
 	// insertion point for checkout of basic fields (back repo to stage)
 	commonattributes.Name = commonattributesDB.Name_Data.String
-	commonattributes.Isbn = commonattributesDB.Isbn_Data.String
-	commonattributes.Bestseller = commonattributesDB.Bestseller_Data.Bool
 }
 
 // CopyBasicFieldsToCommonAttributes_WOP
 func (commonattributesDB *CommonAttributesDB) CopyBasicFieldsToCommonAttributes_WOP(commonattributes *models.CommonAttributes_WOP) {
 	// insertion point for checkout of basic fields (back repo to stage)
 	commonattributes.Name = commonattributesDB.Name_Data.String
-	commonattributes.Isbn = commonattributesDB.Isbn_Data.String
-	commonattributes.Bestseller = commonattributesDB.Bestseller_Data.Bool
 }
 
 // CopyBasicFieldsToCommonAttributesWOP
@@ -430,8 +395,6 @@ func (commonattributesDB *CommonAttributesDB) CopyBasicFieldsToCommonAttributesW
 	commonattributes.ID = int(commonattributesDB.ID)
 	// insertion point for checkout of basic fields (back repo to stage)
 	commonattributes.Name = commonattributesDB.Name_Data.String
-	commonattributes.Isbn = commonattributesDB.Isbn_Data.String
-	commonattributes.Bestseller = commonattributesDB.Bestseller_Data.Bool
 }
 
 // Backup generates a json file from a slice of all CommonAttributesDB instances in the backrepo

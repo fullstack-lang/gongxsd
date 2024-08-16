@@ -148,6 +148,12 @@ func (booktypeFormCallback *BookTypeFormCallback) OnSave() {
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(booktype_.Name), formDiv)
+		case "Edition":
+			FormDivBasicFieldToField(&(booktype_.Edition), formDiv)
+		case "Isbn":
+			FormDivBasicFieldToField(&(booktype_.Isbn), formDiv)
+		case "Bestseller":
+			FormDivBasicFieldToField(&(booktype_.Bestseller), formDiv)
 		case "ExtendedAttributes":
 			FormDivSelectFieldToField(&(booktype_.ExtendedAttributes), booktypeFormCallback.probe.stageOfInterest, formDiv)
 		case "Title":
@@ -354,10 +360,6 @@ func (commonattributesFormCallback *CommonAttributesFormCallback) OnSave() {
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(commonattributes_.Name), formDiv)
-		case "Isbn":
-			FormDivBasicFieldToField(&(commonattributes_.Isbn), formDiv)
-		case "Bestseller":
-			FormDivBasicFieldToField(&(commonattributes_.Bestseller), formDiv)
 		}
 	}
 
@@ -562,8 +564,6 @@ func (extendedattributesFormCallback *ExtendedAttributesFormCallback) OnSave() {
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(extendedattributes_.Name), formDiv)
-		case "Edition":
-			FormDivBasicFieldToField(&(extendedattributes_.Edition), formDiv)
 		case "CommonAttributes":
 			FormDivSelectFieldToField(&(extendedattributes_.CommonAttributes), extendedattributesFormCallback.probe.stageOfInterest, formDiv)
 		}

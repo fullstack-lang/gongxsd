@@ -35,6 +35,12 @@ func FillUpForm[T models.Gongstruct](
 		// insertion point
 		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
+		BasicFieldtoForm("Edition", instanceWithInferedType.Edition, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		BasicFieldtoForm("Isbn", instanceWithInferedType.Isbn, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		BasicFieldtoForm("Bestseller", instanceWithInferedType.Bestseller, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
 		AssociationFieldToForm("ExtendedAttributes", instanceWithInferedType.ExtendedAttributes, formGroup, probe)
 		AssociationSliceToForm("Credit", instanceWithInferedType, &instanceWithInferedType.Credit, formGroup, probe)
 		BasicFieldtoForm("Title", instanceWithInferedType.Title, instanceWithInferedType, probe.formStage, formGroup,
@@ -78,10 +84,6 @@ func FillUpForm[T models.Gongstruct](
 		// insertion point
 		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
-		BasicFieldtoForm("Isbn", instanceWithInferedType.Isbn, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		BasicFieldtoForm("Bestseller", instanceWithInferedType.Bestseller, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
 
 	case *models.Credit:
 		// insertion point
@@ -122,8 +124,6 @@ func FillUpForm[T models.Gongstruct](
 	case *models.ExtendedAttributes:
 		// insertion point
 		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		BasicFieldtoForm("Edition", instanceWithInferedType.Edition, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
 		AssociationFieldToForm("CommonAttributes", instanceWithInferedType.CommonAttributes, formGroup, probe)
 

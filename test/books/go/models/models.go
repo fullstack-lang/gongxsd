@@ -13,7 +13,7 @@ type BookType struct {
 	// insertion point for fields
 
 	// generated from attribute group "extendedAttributes
-	ExtendedAttributes *ExtendedAttributes `xml:"extendedAttributes"`
+	ExtendedAttributes
 
 	// generated from element "credit" of type credit
 	Credit []*Credit `xml:"credit"`
@@ -108,7 +108,7 @@ type ExtendedAttributes struct {
 	Edition string `xml:"edition,attr"`
 
 	// generated from attribute group "commonAttributes
-	CommonAttributes *CommonAttributes `xml:"commonAttributes"`
+	CommonAttributes
 }
 
 // Books is generated from inlined complex type within element "books"
