@@ -89,10 +89,12 @@ func (modelsfiletmpllevel1 ModelsFileTmplLevel1) ToInt() (res int) {
 	// migration of former implementation of enum
 	switch modelsfiletmpllevel1 {
 	// insertion code per enum code
-	case ModelsFileTmplLevel1OneGongstructCode:
+	case ModelsFileTmplLevel1NamedStructCode:
 		res = 0
-	case ModelsFileTmplLevel1Nb:
+	case ModelsFileTmplLevel1UnNamedStructCode:
 		res = 1
+	case ModelsFileTmplLevel1Nb:
+		res = 2
 	}
 	return
 }
@@ -102,9 +104,12 @@ func (modelsfiletmpllevel1 *ModelsFileTmplLevel1) FromInt(input int) (err error)
 	switch input {
 	// insertion code per enum code
 	case 0:
-		*modelsfiletmpllevel1 = ModelsFileTmplLevel1OneGongstructCode
+		*modelsfiletmpllevel1 = ModelsFileTmplLevel1NamedStructCode
 		return
 	case 1:
+		*modelsfiletmpllevel1 = ModelsFileTmplLevel1UnNamedStructCode
+		return
+	case 2:
 		*modelsfiletmpllevel1 = ModelsFileTmplLevel1Nb
 		return
 	default:
@@ -116,8 +121,10 @@ func (modelsfiletmpllevel1 *ModelsFileTmplLevel1) FromCodeString(input string) (
 
 	switch input {
 	// insertion code per enum code
-	case "ModelsFileTmplLevel1OneGongstructCode":
-		*modelsfiletmpllevel1 = ModelsFileTmplLevel1OneGongstructCode
+	case "ModelsFileTmplLevel1NamedStructCode":
+		*modelsfiletmpllevel1 = ModelsFileTmplLevel1NamedStructCode
+	case "ModelsFileTmplLevel1UnNamedStructCode":
+		*modelsfiletmpllevel1 = ModelsFileTmplLevel1UnNamedStructCode
 	case "ModelsFileTmplLevel1Nb":
 		*modelsfiletmpllevel1 = ModelsFileTmplLevel1Nb
 	default:
@@ -130,8 +137,10 @@ func (modelsfiletmpllevel1 *ModelsFileTmplLevel1) ToCodeString() (res string) {
 
 	switch *modelsfiletmpllevel1 {
 	// insertion code per enum code
-	case ModelsFileTmplLevel1OneGongstructCode:
-		res = "ModelsFileTmplLevel1OneGongstructCode"
+	case ModelsFileTmplLevel1NamedStructCode:
+		res = "ModelsFileTmplLevel1NamedStructCode"
+	case ModelsFileTmplLevel1UnNamedStructCode:
+		res = "ModelsFileTmplLevel1UnNamedStructCode"
 	case ModelsFileTmplLevel1Nb:
 		res = "ModelsFileTmplLevel1Nb"
 	}
@@ -143,7 +152,8 @@ func (modelsfiletmpllevel1 ModelsFileTmplLevel1) Codes() (res []string) {
 	res = make([]string, 0)
 
 	// insertion code per enum code
-	res = append(res, "ModelsFileTmplLevel1OneGongstructCode")
+	res = append(res, "ModelsFileTmplLevel1NamedStructCode")
+	res = append(res, "ModelsFileTmplLevel1UnNamedStructCode")
 	res = append(res, "ModelsFileTmplLevel1Nb")
 
 	return
@@ -156,6 +166,7 @@ func (modelsfiletmpllevel1 ModelsFileTmplLevel1) CodeValues() (res []int) {
 	// insertion code per enum code
 	res = append(res, 0)
 	res = append(res, 1)
+	res = append(res, 2)
 
 	return
 }

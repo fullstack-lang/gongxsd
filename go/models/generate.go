@@ -30,7 +30,7 @@ func Generate(stage *StageStruct, outputFilePath string) {
 
 		fields := ct.GetFields(stage)
 		templInsertionLevel0[ModelsFileTmplLevel0AllGongstructsCode] += Replace3(
-			ModelsFileTmplLevel1Code[ModelsFileTmplLevel1OneGongstructCode],
+			ModelsFileTmplLevel1Code[ModelsFileTmplLevel1NamedStructCode],
 
 			"{{"+string(rune(ModelsFileTmplLevel2Structname))+"}}", ct.GoIdentifier,
 
@@ -51,7 +51,7 @@ func Generate(stage *StageStruct, outputFilePath string) {
 
 		fields := group.GetFields(stage)
 		templInsertionLevel0[ModelsFileTmplLevel0AllGongstructsCode] += Replace3(
-			ModelsFileTmplLevel1Code[ModelsFileTmplLevel1OneGongstructCode],
+			ModelsFileTmplLevel1Code[ModelsFileTmplLevel1UnNamedStructCode],
 
 			"{{"+string(rune(ModelsFileTmplLevel2Structname))+"}}", group.GoIdentifier,
 
@@ -95,12 +95,12 @@ func Generate(stage *StageStruct, outputFilePath string) {
 		}
 
 		templInsertionLevel0[ModelsFileTmplLevel0AllGongstructsCode] += Replace3(
-			ModelsFileTmplLevel1Code[ModelsFileTmplLevel1OneGongstructCode],
+			ModelsFileTmplLevel1Code[ModelsFileTmplLevel1UnNamedStructCode],
 
 			"{{"+string(rune(ModelsFileTmplLevel2Structname))+"}}", ag.GoIdentifier,
 
 			"{{"+string(rune(ModelsFileTmplLevel2Source))+"}}",
-			`named group "`+ag.Name+`"`,
+			`named attribute group "`+ag.Name+`"`,
 
 			"{{"+string(rune(ModelsFileTmplLevel2Fields))+"}}",
 			fields,
@@ -129,7 +129,7 @@ func Generate(stage *StageStruct, outputFilePath string) {
 		fields := element.ComplexType.GetFields(stage)
 
 		templInsertionLevel0[ModelsFileTmplLevel0AllGongstructsCode] += Replace3(
-			ModelsFileTmplLevel1Code[ModelsFileTmplLevel1OneGongstructCode],
+			ModelsFileTmplLevel1Code[ModelsFileTmplLevel1NamedStructCode],
 
 			"{{"+string(rune(ModelsFileTmplLevel2Structname))+"}}",
 			element.GoIdentifier,

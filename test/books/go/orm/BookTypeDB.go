@@ -47,10 +47,6 @@ type BookTypeAPI struct {
 type BookTypePointersEncoding struct {
 	// insertion for pointer fields encoding declaration
 
-	// field ExtendedAttributes is a pointer to another Struct (optional or 0..1)
-	// This field is generated into another field to enable AS ONE association
-	ExtendedAttributesID sql.NullInt64
-
 	// field Credit is a slice of pointers to another Struct (optional or 0..1)
 	Credit IntSlice `gorm:"type:TEXT"`
 }
@@ -261,18 +257,6 @@ func (backRepoBookType *BackRepoBookTypeStruct) CommitPhaseTwoInstance(backRepo 
 		booktypeDB.CopyBasicFieldsFromBookType(booktype)
 
 		// insertion point for translating pointers encodings into actual pointers
-		// commit pointer value booktype.ExtendedAttributes translates to updating the booktype.ExtendedAttributesID
-		booktypeDB.ExtendedAttributesID.Valid = true // allow for a 0 value (nil association)
-		if booktype.ExtendedAttributes != nil {
-			if ExtendedAttributesId, ok := backRepo.BackRepoExtendedAttributes.Map_ExtendedAttributesPtr_ExtendedAttributesDBID[booktype.ExtendedAttributes]; ok {
-				booktypeDB.ExtendedAttributesID.Int64 = int64(ExtendedAttributesId)
-				booktypeDB.ExtendedAttributesID.Valid = true
-			}
-		} else {
-			booktypeDB.ExtendedAttributesID.Int64 = 0
-			booktypeDB.ExtendedAttributesID.Valid = true
-		}
-
 		// 1. reset
 		booktypeDB.BookTypePointersEncoding.Credit = make([]int, 0)
 		// 2. encode
@@ -404,11 +388,6 @@ func (backRepoBookType *BackRepoBookTypeStruct) CheckoutPhaseTwoInstance(backRep
 func (booktypeDB *BookTypeDB) DecodePointers(backRepo *BackRepoStruct, booktype *models.BookType) {
 
 	// insertion point for checkout of pointer encoding
-	// ExtendedAttributes field
-	booktype.ExtendedAttributes = nil
-	if booktypeDB.ExtendedAttributesID.Int64 != 0 {
-		booktype.ExtendedAttributes = backRepo.BackRepoExtendedAttributes.Map_ExtendedAttributesDBID_ExtendedAttributesPtr[uint(booktypeDB.ExtendedAttributesID.Int64)]
-	}
 	// This loop redeem booktype.Credit in the stage from the encode in the back repo
 	// It parses all CreditDB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance
@@ -730,12 +709,6 @@ func (backRepoBookType *BackRepoBookTypeStruct) RestorePhaseTwo() {
 		_ = booktypeDB
 
 		// insertion point for reindexing pointers encoding
-		// reindexing ExtendedAttributes field
-		if booktypeDB.ExtendedAttributesID.Int64 != 0 {
-			booktypeDB.ExtendedAttributesID.Int64 = int64(BackRepoExtendedAttributesid_atBckpTime_newID[uint(booktypeDB.ExtendedAttributesID.Int64)])
-			booktypeDB.ExtendedAttributesID.Valid = true
-		}
-
 		// update databse with new index encoding
 		query := backRepoBookType.db.Model(booktypeDB).Updates(*booktypeDB)
 		if query.Error != nil {

@@ -14,11 +14,6 @@ func GetReverseFieldOwnerName[T models.Gongstruct](
 	res = ""
 	switch inst := any(instance).(type) {
 	// insertion point
-	case *models.BookDetailsGroup:
-		switch reverseField.GongstructName {
-		// insertion point
-		}
-
 	case *models.BookType:
 		switch reverseField.GongstructName {
 		// insertion point
@@ -36,11 +31,6 @@ func GetReverseFieldOwnerName[T models.Gongstruct](
 		// insertion point
 		}
 
-	case *models.CommonAttributes:
-		switch reverseField.GongstructName {
-		// insertion point
-		}
-
 	case *models.Credit:
 		switch reverseField.GongstructName {
 		// insertion point
@@ -51,11 +41,6 @@ func GetReverseFieldOwnerName[T models.Gongstruct](
 					res = _booktype.Name
 				}
 			}
-		}
-
-	case *models.ExtendedAttributes:
-		switch reverseField.GongstructName {
-		// insertion point
 		}
 
 	case *models.Link:
@@ -85,11 +70,6 @@ func GetReverseFieldOwner[T models.Gongstruct](
 	res = nil
 	switch inst := any(instance).(type) {
 	// insertion point
-	case *models.BookDetailsGroup:
-		switch reverseField.GongstructName {
-		// insertion point
-		}
-
 	case *models.BookType:
 		switch reverseField.GongstructName {
 		// insertion point
@@ -105,11 +85,6 @@ func GetReverseFieldOwner[T models.Gongstruct](
 		// insertion point
 		}
 
-	case *models.CommonAttributes:
-		switch reverseField.GongstructName {
-		// insertion point
-		}
-
 	case *models.Credit:
 		switch reverseField.GongstructName {
 		// insertion point
@@ -118,11 +93,6 @@ func GetReverseFieldOwner[T models.Gongstruct](
 			case "Credit":
 				res = stage.BookType_Credit_reverseMap[inst]
 			}
-		}
-
-	case *models.ExtendedAttributes:
-		switch reverseField.GongstructName {
-		// insertion point
 		}
 
 	case *models.Link:

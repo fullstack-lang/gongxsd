@@ -68,7 +68,6 @@ type Link struct {
 
 // BookDetailsGroup is generated from named group "bookDetailsGroup"
 type BookDetailsGroup struct {
-	Name string `xml:"-"`
 
 	// insertion point for fields
 
@@ -85,9 +84,8 @@ type BookDetailsGroup struct {
 	Format string `xml:"format"`
 }
 
-// CommonAttributes is generated from named group "commonAttributes"
+// CommonAttributes is generated from named attribute group "commonAttributes"
 type CommonAttributes struct {
-	Name string `xml:"-"`
 
 	// insertion point for fields
 
@@ -98,9 +96,8 @@ type CommonAttributes struct {
 	Bestseller bool `xml:"bestseller,attr"`
 }
 
-// ExtendedAttributes is generated from named group "extendedAttributes"
+// ExtendedAttributes is generated from named attribute group "extendedAttributes"
 type ExtendedAttributes struct {
-	Name string `xml:"-"`
 
 	// insertion point for fields
 

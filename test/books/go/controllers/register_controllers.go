@@ -47,13 +47,6 @@ type ValidationError struct {
 func registerControllers(r *gin.Engine) {
 	v1 := r.Group("/api/github.com/fullstack-lang/gongxsd/test/books/go")
 	{ // insertion point for registrations
-		v1.GET("/v1/bookdetailsgroups", GetController().GetBookDetailsGroups)
-		v1.GET("/v1/bookdetailsgroups/:id", GetController().GetBookDetailsGroup)
-		v1.POST("/v1/bookdetailsgroups", GetController().PostBookDetailsGroup)
-		v1.PATCH("/v1/bookdetailsgroups/:id", GetController().UpdateBookDetailsGroup)
-		v1.PUT("/v1/bookdetailsgroups/:id", GetController().UpdateBookDetailsGroup)
-		v1.DELETE("/v1/bookdetailsgroups/:id", GetController().DeleteBookDetailsGroup)
-
 		v1.GET("/v1/booktypes", GetController().GetBookTypes)
 		v1.GET("/v1/booktypes/:id", GetController().GetBookType)
 		v1.POST("/v1/booktypes", GetController().PostBookType)
@@ -68,26 +61,12 @@ func registerControllers(r *gin.Engine) {
 		v1.PUT("/v1/bookss/:id", GetController().UpdateBooks)
 		v1.DELETE("/v1/bookss/:id", GetController().DeleteBooks)
 
-		v1.GET("/v1/commonattributess", GetController().GetCommonAttributess)
-		v1.GET("/v1/commonattributess/:id", GetController().GetCommonAttributes)
-		v1.POST("/v1/commonattributess", GetController().PostCommonAttributes)
-		v1.PATCH("/v1/commonattributess/:id", GetController().UpdateCommonAttributes)
-		v1.PUT("/v1/commonattributess/:id", GetController().UpdateCommonAttributes)
-		v1.DELETE("/v1/commonattributess/:id", GetController().DeleteCommonAttributes)
-
 		v1.GET("/v1/credits", GetController().GetCredits)
 		v1.GET("/v1/credits/:id", GetController().GetCredit)
 		v1.POST("/v1/credits", GetController().PostCredit)
 		v1.PATCH("/v1/credits/:id", GetController().UpdateCredit)
 		v1.PUT("/v1/credits/:id", GetController().UpdateCredit)
 		v1.DELETE("/v1/credits/:id", GetController().DeleteCredit)
-
-		v1.GET("/v1/extendedattributess", GetController().GetExtendedAttributess)
-		v1.GET("/v1/extendedattributess/:id", GetController().GetExtendedAttributes)
-		v1.POST("/v1/extendedattributess", GetController().PostExtendedAttributes)
-		v1.PATCH("/v1/extendedattributess/:id", GetController().UpdateExtendedAttributes)
-		v1.PUT("/v1/extendedattributess/:id", GetController().UpdateExtendedAttributes)
-		v1.DELETE("/v1/extendedattributess/:id", GetController().DeleteExtendedAttributes)
 
 		v1.GET("/v1/links", GetController().GetLinks)
 		v1.GET("/v1/links/:id", GetController().GetLink)

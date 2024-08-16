@@ -52,23 +52,14 @@ func (nodeImplGongstruct *TreeNodeImplGongstruct) OnAfterUpdate(
 	log.Println("NodeImplGongstruct:OnAfterUpdate with: ", nodeImplGongstruct.gongStruct.GetName())
 
 	// insertion point
-	if nodeImplGongstruct.gongStruct.GetName() == "BookDetailsGroup" {
-		fillUpTable[models.BookDetailsGroup](nodeImplGongstruct.probe)
-	}
 	if nodeImplGongstruct.gongStruct.GetName() == "BookType" {
 		fillUpTable[models.BookType](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Books" {
 		fillUpTable[models.Books](nodeImplGongstruct.probe)
 	}
-	if nodeImplGongstruct.gongStruct.GetName() == "CommonAttributes" {
-		fillUpTable[models.CommonAttributes](nodeImplGongstruct.probe)
-	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Credit" {
 		fillUpTable[models.Credit](nodeImplGongstruct.probe)
-	}
-	if nodeImplGongstruct.gongStruct.GetName() == "ExtendedAttributes" {
-		fillUpTable[models.ExtendedAttributes](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Link" {
 		fillUpTable[models.Link](nodeImplGongstruct.probe)

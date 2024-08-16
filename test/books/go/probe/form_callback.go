@@ -18,91 +18,6 @@ var __dummmy__letters = slices.Delete([]string{"a"}, 0, 1)
 var __dummy_orm = orm.BackRepoStruct{}
 
 // insertion point
-func __gong__New__BookDetailsGroupFormCallback(
-	bookdetailsgroup *models.BookDetailsGroup,
-	probe *Probe,
-	formGroup *table.FormGroup,
-) (bookdetailsgroupFormCallback *BookDetailsGroupFormCallback) {
-	bookdetailsgroupFormCallback = new(BookDetailsGroupFormCallback)
-	bookdetailsgroupFormCallback.probe = probe
-	bookdetailsgroupFormCallback.bookdetailsgroup = bookdetailsgroup
-	bookdetailsgroupFormCallback.formGroup = formGroup
-
-	bookdetailsgroupFormCallback.CreationMode = (bookdetailsgroup == nil)
-
-	return
-}
-
-type BookDetailsGroupFormCallback struct {
-	bookdetailsgroup *models.BookDetailsGroup
-
-	// If the form call is called on the creation of a new instnace
-	CreationMode bool
-
-	probe *Probe
-
-	formGroup *table.FormGroup
-}
-
-func (bookdetailsgroupFormCallback *BookDetailsGroupFormCallback) OnSave() {
-
-	log.Println("BookDetailsGroupFormCallback, OnSave")
-
-	// checkout formStage to have the form group on the stage synchronized with the
-	// back repo (and front repo)
-	bookdetailsgroupFormCallback.probe.formStage.Checkout()
-
-	if bookdetailsgroupFormCallback.bookdetailsgroup == nil {
-		bookdetailsgroupFormCallback.bookdetailsgroup = new(models.BookDetailsGroup).Stage(bookdetailsgroupFormCallback.probe.stageOfInterest)
-	}
-	bookdetailsgroup_ := bookdetailsgroupFormCallback.bookdetailsgroup
-	_ = bookdetailsgroup_
-
-	for _, formDiv := range bookdetailsgroupFormCallback.formGroup.FormDivs {
-		switch formDiv.Name {
-		// insertion point per field
-		case "Name":
-			FormDivBasicFieldToField(&(bookdetailsgroup_.Name), formDiv)
-		case "Title":
-			FormDivBasicFieldToField(&(bookdetailsgroup_.Title), formDiv)
-		case "Author":
-			FormDivBasicFieldToField(&(bookdetailsgroup_.Author), formDiv)
-		case "Year":
-			FormDivBasicFieldToField(&(bookdetailsgroup_.Year), formDiv)
-		case "Format":
-			FormDivBasicFieldToField(&(bookdetailsgroup_.Format), formDiv)
-		}
-	}
-
-	// manage the suppress operation
-	if bookdetailsgroupFormCallback.formGroup.HasSuppressButtonBeenPressed {
-		bookdetailsgroup_.Unstage(bookdetailsgroupFormCallback.probe.stageOfInterest)
-	}
-
-	bookdetailsgroupFormCallback.probe.stageOfInterest.Commit()
-	fillUpTable[models.BookDetailsGroup](
-		bookdetailsgroupFormCallback.probe,
-	)
-	bookdetailsgroupFormCallback.probe.tableStage.Commit()
-
-	// display a new form by reset the form stage
-	if bookdetailsgroupFormCallback.CreationMode || bookdetailsgroupFormCallback.formGroup.HasSuppressButtonBeenPressed {
-		bookdetailsgroupFormCallback.probe.formStage.Reset()
-		newFormGroup := (&table.FormGroup{
-			Name: table.FormGroupDefaultName.ToString(),
-		}).Stage(bookdetailsgroupFormCallback.probe.formStage)
-		newFormGroup.OnSave = __gong__New__BookDetailsGroupFormCallback(
-			nil,
-			bookdetailsgroupFormCallback.probe,
-			newFormGroup,
-		)
-		bookdetailsgroup := new(models.BookDetailsGroup)
-		FillUpForm(bookdetailsgroup, newFormGroup, bookdetailsgroupFormCallback.probe)
-		bookdetailsgroupFormCallback.probe.formStage.Commit()
-	}
-
-	fillUpTree(bookdetailsgroupFormCallback.probe)
-}
 func __gong__New__BookTypeFormCallback(
 	booktype *models.BookType,
 	probe *Probe,
@@ -154,8 +69,6 @@ func (booktypeFormCallback *BookTypeFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(booktype_.Isbn), formDiv)
 		case "Bestseller":
 			FormDivBasicFieldToField(&(booktype_.Bestseller), formDiv)
-		case "ExtendedAttributes":
-			FormDivSelectFieldToField(&(booktype_.ExtendedAttributes), booktypeFormCallback.probe.stageOfInterest, formDiv)
 		case "Title":
 			FormDivBasicFieldToField(&(booktype_.Title), formDiv)
 		case "Author":
@@ -315,83 +228,6 @@ func (booksFormCallback *BooksFormCallback) OnSave() {
 
 	fillUpTree(booksFormCallback.probe)
 }
-func __gong__New__CommonAttributesFormCallback(
-	commonattributes *models.CommonAttributes,
-	probe *Probe,
-	formGroup *table.FormGroup,
-) (commonattributesFormCallback *CommonAttributesFormCallback) {
-	commonattributesFormCallback = new(CommonAttributesFormCallback)
-	commonattributesFormCallback.probe = probe
-	commonattributesFormCallback.commonattributes = commonattributes
-	commonattributesFormCallback.formGroup = formGroup
-
-	commonattributesFormCallback.CreationMode = (commonattributes == nil)
-
-	return
-}
-
-type CommonAttributesFormCallback struct {
-	commonattributes *models.CommonAttributes
-
-	// If the form call is called on the creation of a new instnace
-	CreationMode bool
-
-	probe *Probe
-
-	formGroup *table.FormGroup
-}
-
-func (commonattributesFormCallback *CommonAttributesFormCallback) OnSave() {
-
-	log.Println("CommonAttributesFormCallback, OnSave")
-
-	// checkout formStage to have the form group on the stage synchronized with the
-	// back repo (and front repo)
-	commonattributesFormCallback.probe.formStage.Checkout()
-
-	if commonattributesFormCallback.commonattributes == nil {
-		commonattributesFormCallback.commonattributes = new(models.CommonAttributes).Stage(commonattributesFormCallback.probe.stageOfInterest)
-	}
-	commonattributes_ := commonattributesFormCallback.commonattributes
-	_ = commonattributes_
-
-	for _, formDiv := range commonattributesFormCallback.formGroup.FormDivs {
-		switch formDiv.Name {
-		// insertion point per field
-		case "Name":
-			FormDivBasicFieldToField(&(commonattributes_.Name), formDiv)
-		}
-	}
-
-	// manage the suppress operation
-	if commonattributesFormCallback.formGroup.HasSuppressButtonBeenPressed {
-		commonattributes_.Unstage(commonattributesFormCallback.probe.stageOfInterest)
-	}
-
-	commonattributesFormCallback.probe.stageOfInterest.Commit()
-	fillUpTable[models.CommonAttributes](
-		commonattributesFormCallback.probe,
-	)
-	commonattributesFormCallback.probe.tableStage.Commit()
-
-	// display a new form by reset the form stage
-	if commonattributesFormCallback.CreationMode || commonattributesFormCallback.formGroup.HasSuppressButtonBeenPressed {
-		commonattributesFormCallback.probe.formStage.Reset()
-		newFormGroup := (&table.FormGroup{
-			Name: table.FormGroupDefaultName.ToString(),
-		}).Stage(commonattributesFormCallback.probe.formStage)
-		newFormGroup.OnSave = __gong__New__CommonAttributesFormCallback(
-			nil,
-			commonattributesFormCallback.probe,
-			newFormGroup,
-		)
-		commonattributes := new(models.CommonAttributes)
-		FillUpForm(commonattributes, newFormGroup, commonattributesFormCallback.probe)
-		commonattributesFormCallback.probe.formStage.Commit()
-	}
-
-	fillUpTree(commonattributesFormCallback.probe)
-}
 func __gong__New__CreditFormCallback(
 	credit *models.Credit,
 	probe *Probe,
@@ -518,85 +354,6 @@ func (creditFormCallback *CreditFormCallback) OnSave() {
 	}
 
 	fillUpTree(creditFormCallback.probe)
-}
-func __gong__New__ExtendedAttributesFormCallback(
-	extendedattributes *models.ExtendedAttributes,
-	probe *Probe,
-	formGroup *table.FormGroup,
-) (extendedattributesFormCallback *ExtendedAttributesFormCallback) {
-	extendedattributesFormCallback = new(ExtendedAttributesFormCallback)
-	extendedattributesFormCallback.probe = probe
-	extendedattributesFormCallback.extendedattributes = extendedattributes
-	extendedattributesFormCallback.formGroup = formGroup
-
-	extendedattributesFormCallback.CreationMode = (extendedattributes == nil)
-
-	return
-}
-
-type ExtendedAttributesFormCallback struct {
-	extendedattributes *models.ExtendedAttributes
-
-	// If the form call is called on the creation of a new instnace
-	CreationMode bool
-
-	probe *Probe
-
-	formGroup *table.FormGroup
-}
-
-func (extendedattributesFormCallback *ExtendedAttributesFormCallback) OnSave() {
-
-	log.Println("ExtendedAttributesFormCallback, OnSave")
-
-	// checkout formStage to have the form group on the stage synchronized with the
-	// back repo (and front repo)
-	extendedattributesFormCallback.probe.formStage.Checkout()
-
-	if extendedattributesFormCallback.extendedattributes == nil {
-		extendedattributesFormCallback.extendedattributes = new(models.ExtendedAttributes).Stage(extendedattributesFormCallback.probe.stageOfInterest)
-	}
-	extendedattributes_ := extendedattributesFormCallback.extendedattributes
-	_ = extendedattributes_
-
-	for _, formDiv := range extendedattributesFormCallback.formGroup.FormDivs {
-		switch formDiv.Name {
-		// insertion point per field
-		case "Name":
-			FormDivBasicFieldToField(&(extendedattributes_.Name), formDiv)
-		case "CommonAttributes":
-			FormDivSelectFieldToField(&(extendedattributes_.CommonAttributes), extendedattributesFormCallback.probe.stageOfInterest, formDiv)
-		}
-	}
-
-	// manage the suppress operation
-	if extendedattributesFormCallback.formGroup.HasSuppressButtonBeenPressed {
-		extendedattributes_.Unstage(extendedattributesFormCallback.probe.stageOfInterest)
-	}
-
-	extendedattributesFormCallback.probe.stageOfInterest.Commit()
-	fillUpTable[models.ExtendedAttributes](
-		extendedattributesFormCallback.probe,
-	)
-	extendedattributesFormCallback.probe.tableStage.Commit()
-
-	// display a new form by reset the form stage
-	if extendedattributesFormCallback.CreationMode || extendedattributesFormCallback.formGroup.HasSuppressButtonBeenPressed {
-		extendedattributesFormCallback.probe.formStage.Reset()
-		newFormGroup := (&table.FormGroup{
-			Name: table.FormGroupDefaultName.ToString(),
-		}).Stage(extendedattributesFormCallback.probe.formStage)
-		newFormGroup.OnSave = __gong__New__ExtendedAttributesFormCallback(
-			nil,
-			extendedattributesFormCallback.probe,
-			newFormGroup,
-		)
-		extendedattributes := new(models.ExtendedAttributes)
-		FillUpForm(extendedattributes, newFormGroup, extendedattributesFormCallback.probe)
-		extendedattributesFormCallback.probe.formStage.Commit()
-	}
-
-	fillUpTree(extendedattributesFormCallback.probe)
 }
 func __gong__New__LinkFormCallback(
 	link *models.Link,

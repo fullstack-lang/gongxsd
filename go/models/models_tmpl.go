@@ -24,18 +24,28 @@ map[ModelsFileTmplLevel0]string{
 type ModelsFileTmplLevel1 int
 
 const (
-	ModelsFileTmplLevel1OneGongstructCode ModelsFileTmplLevel1 = iota
+	ModelsFileTmplLevel1NamedStructCode ModelsFileTmplLevel1 = iota
+	ModelsFileTmplLevel1UnNamedStructCode
 	ModelsFileTmplLevel1Nb
 )
 
 var ModelsFileTmplLevel1Code map[ModelsFileTmplLevel1]string = // new line
 map[ModelsFileTmplLevel1]string{
-	ModelsFileTmplLevel1OneGongstructCode: `
+	ModelsFileTmplLevel1NamedStructCode: `
 // {{` + string(rune(ModelsFileTmplLevel2Structname)) +
 		`}} is generated from {{` + string(rune(ModelsFileTmplLevel2Source)) +
 		`}}
 type {{` + string(rune(ModelsFileTmplLevel2Structname)) + `}} struct {
 	Name string ` + "`" + "xml:\"-\"" + "`" + `
+
+	// insertion point for fields{{` + string(rune(ModelsFileTmplLevel2Fields)) + `}}
+}
+`,
+	ModelsFileTmplLevel1UnNamedStructCode: `
+// {{` + string(rune(ModelsFileTmplLevel2Structname)) +
+		`}} is generated from {{` + string(rune(ModelsFileTmplLevel2Source)) +
+		`}}
+type {{` + string(rune(ModelsFileTmplLevel2Structname)) + `}} struct {
 
 	// insertion point for fields{{` + string(rune(ModelsFileTmplLevel2Fields)) + `}}
 }
