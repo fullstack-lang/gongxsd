@@ -123,6 +123,9 @@ type Books struct {
 
 	// insertion point for fields
 
+	// necessary since it is a root element
+	XMLName xml.Name `xml:"books"`
+
 	// generated from inline complex type
 	AnonymousComplexTypeInline_books
 }
