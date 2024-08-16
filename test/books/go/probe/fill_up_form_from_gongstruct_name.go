@@ -39,19 +39,6 @@ func FillUpFormFromGongstructName(
 		booktype := new(models.BookType)
 		formGroup.HasSuppressButton = !isNewInstance
 		FillUpForm(booktype, formGroup, probe)
-	case "Books":
-		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
-			Label: prefix + "Books Form",
-		}).Stage(formStage)
-		formGroup.OnSave = __gong__New__BooksFormCallback(
-			nil,
-			probe,
-			formGroup,
-		)
-		books := new(models.Books)
-		formGroup.HasSuppressButton = !isNewInstance
-		FillUpForm(books, formGroup, probe)
 	case "Credit":
 		formGroup := (&form.FormGroup{
 			Name:  form.FormGroupDefaultName.ToString(),

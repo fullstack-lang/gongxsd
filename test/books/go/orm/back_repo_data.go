@@ -6,8 +6,6 @@ type BackRepoData struct {
 
 	BookTypeAPIs []*BookTypeAPI
 
-	BooksAPIs []*BooksAPI
-
 	CreditAPIs []*CreditAPI
 
 	LinkAPIs []*LinkAPI
@@ -23,16 +21,6 @@ func CopyBackRepoToBackRepoData(backRepo *BackRepoStruct, backRepoData *BackRepo
 		booktypeDB.CopyBasicFieldsToBookType_WOP(&booktypeAPI.BookType_WOP)
 
 		backRepoData.BookTypeAPIs = append(backRepoData.BookTypeAPIs, &booktypeAPI)
-	}
-
-	for _, booksDB := range backRepo.BackRepoBooks.Map_BooksDBID_BooksDB {
-
-		var booksAPI BooksAPI
-		booksAPI.ID = booksDB.ID
-		booksAPI.BooksPointersEncoding = booksDB.BooksPointersEncoding
-		booksDB.CopyBasicFieldsToBooks_WOP(&booksAPI.Books_WOP)
-
-		backRepoData.BooksAPIs = append(backRepoData.BooksAPIs, &booksAPI)
 	}
 
 	for _, creditDB := range backRepo.BackRepoCredit.Map_CreditDBID_CreditDB {

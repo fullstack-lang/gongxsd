@@ -15,7 +15,6 @@ func SerializeStage(stage *StageStruct, filename string) {
 	{
 		// insertion point
 		SerializeExcelize[BookType](stage, f)
-		SerializeExcelize[Books](stage, f)
 		SerializeExcelize[Credit](stage, f)
 		SerializeExcelize[Link](stage, f)
 	}

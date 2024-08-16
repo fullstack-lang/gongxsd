@@ -108,7 +108,7 @@ type ExtendedAttributes struct {
 	CommonAttributes
 }
 
-// Books is generated from inlined complex type within element "books"
+// Books is generated from element books within root schema
 type Books struct {
 	Name string `xml:"-"`
 

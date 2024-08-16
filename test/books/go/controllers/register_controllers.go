@@ -54,13 +54,6 @@ func registerControllers(r *gin.Engine) {
 		v1.PUT("/v1/booktypes/:id", GetController().UpdateBookType)
 		v1.DELETE("/v1/booktypes/:id", GetController().DeleteBookType)
 
-		v1.GET("/v1/bookss", GetController().GetBookss)
-		v1.GET("/v1/bookss/:id", GetController().GetBooks)
-		v1.POST("/v1/bookss", GetController().PostBooks)
-		v1.PATCH("/v1/bookss/:id", GetController().UpdateBooks)
-		v1.PUT("/v1/bookss/:id", GetController().UpdateBooks)
-		v1.DELETE("/v1/bookss/:id", GetController().DeleteBooks)
-
 		v1.GET("/v1/credits", GetController().GetCredits)
 		v1.GET("/v1/credits/:id", GetController().GetCredit)
 		v1.POST("/v1/credits", GetController().PostCredit)

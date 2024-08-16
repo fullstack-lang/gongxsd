@@ -24,8 +24,6 @@ type BackRepoStruct struct {
 	// insertion point for per struct back repo declarations
 	BackRepoBookType BackRepoBookTypeStruct
 
-	BackRepoBooks BackRepoBooksStruct
-
 	BackRepoCredit BackRepoCreditStruct
 
 	BackRepoLink BackRepoLinkStruct
@@ -71,7 +69,6 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 
 	err = db.AutoMigrate( // insertion point for reference to structs
 		&BookTypeDB{},
-		&BooksDB{},
 		&CreditDB{},
 		&LinkDB{},
 	)
@@ -88,14 +85,6 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 		Map_BookTypeDBID_BookTypePtr: make(map[uint]*models.BookType, 0),
 		Map_BookTypeDBID_BookTypeDB:  make(map[uint]*BookTypeDB, 0),
 		Map_BookTypePtr_BookTypeDBID: make(map[*models.BookType]uint, 0),
-
-		db:    db,
-		stage: stage,
-	}
-	backRepo.BackRepoBooks = BackRepoBooksStruct{
-		Map_BooksDBID_BooksPtr: make(map[uint]*models.Books, 0),
-		Map_BooksDBID_BooksDB:  make(map[uint]*BooksDB, 0),
-		Map_BooksPtr_BooksDBID: make(map[*models.Books]uint, 0),
 
 		db:    db,
 		stage: stage,
@@ -165,13 +154,11 @@ func (backRepo *BackRepoStruct) IncrementPushFromFrontNb() uint {
 func (backRepo *BackRepoStruct) Commit(stage *models.StageStruct) {
 	// insertion point for per struct back repo phase one commit
 	backRepo.BackRepoBookType.CommitPhaseOne(stage)
-	backRepo.BackRepoBooks.CommitPhaseOne(stage)
 	backRepo.BackRepoCredit.CommitPhaseOne(stage)
 	backRepo.BackRepoLink.CommitPhaseOne(stage)
 
 	// insertion point for per struct back repo phase two commit
 	backRepo.BackRepoBookType.CommitPhaseTwo(backRepo)
-	backRepo.BackRepoBooks.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoCredit.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoLink.CommitPhaseTwo(backRepo)
 
@@ -182,13 +169,11 @@ func (backRepo *BackRepoStruct) Commit(stage *models.StageStruct) {
 func (backRepo *BackRepoStruct) Checkout(stage *models.StageStruct) {
 	// insertion point for per struct back repo phase one commit
 	backRepo.BackRepoBookType.CheckoutPhaseOne()
-	backRepo.BackRepoBooks.CheckoutPhaseOne()
 	backRepo.BackRepoCredit.CheckoutPhaseOne()
 	backRepo.BackRepoLink.CheckoutPhaseOne()
 
 	// insertion point for per struct back repo phase two commit
 	backRepo.BackRepoBookType.CheckoutPhaseTwo(backRepo)
-	backRepo.BackRepoBooks.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoCredit.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoLink.CheckoutPhaseTwo(backRepo)
 }
@@ -199,7 +184,6 @@ func (backRepo *BackRepoStruct) Backup(stage *models.StageStruct, dirPath string
 
 	// insertion point for per struct backup
 	backRepo.BackRepoBookType.Backup(dirPath)
-	backRepo.BackRepoBooks.Backup(dirPath)
 	backRepo.BackRepoCredit.Backup(dirPath)
 	backRepo.BackRepoLink.Backup(dirPath)
 }
@@ -213,7 +197,6 @@ func (backRepo *BackRepoStruct) BackupXL(stage *models.StageStruct, dirPath stri
 
 	// insertion point for per struct backup
 	backRepo.BackRepoBookType.BackupXL(file)
-	backRepo.BackRepoBooks.BackupXL(file)
 	backRepo.BackRepoCredit.BackupXL(file)
 	backRepo.BackRepoLink.BackupXL(file)
 
@@ -241,7 +224,6 @@ func (backRepo *BackRepoStruct) Restore(stage *models.StageStruct, dirPath strin
 
 	// insertion point for per struct backup
 	backRepo.BackRepoBookType.RestorePhaseOne(dirPath)
-	backRepo.BackRepoBooks.RestorePhaseOne(dirPath)
 	backRepo.BackRepoCredit.RestorePhaseOne(dirPath)
 	backRepo.BackRepoLink.RestorePhaseOne(dirPath)
 
@@ -251,7 +233,6 @@ func (backRepo *BackRepoStruct) Restore(stage *models.StageStruct, dirPath strin
 
 	// insertion point for per struct backup
 	backRepo.BackRepoBookType.RestorePhaseTwo()
-	backRepo.BackRepoBooks.RestorePhaseTwo()
 	backRepo.BackRepoCredit.RestorePhaseTwo()
 	backRepo.BackRepoLink.RestorePhaseTwo()
 
@@ -282,7 +263,6 @@ func (backRepo *BackRepoStruct) RestoreXL(stage *models.StageStruct, dirPath str
 
 	// insertion point for per struct backup
 	backRepo.BackRepoBookType.RestoreXLPhaseOne(file)
-	backRepo.BackRepoBooks.RestoreXLPhaseOne(file)
 	backRepo.BackRepoCredit.RestoreXLPhaseOne(file)
 	backRepo.BackRepoLink.RestoreXLPhaseOne(file)
 

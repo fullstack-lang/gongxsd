@@ -1,5 +1,7 @@
 package models
 
+import "log"
+
 // ModelGroup is a construct that allows for
 // the specification of complex structures within an XML document.
 // Model groups define how elements within an XML schema are composed and ordered.
@@ -109,15 +111,31 @@ func (composer *ModelGroup) generateElements(
 
 		computeGoIdentifier(elem.GoIdentifier, &elem.WithGoIdentifier, setOfGoIdentifiers)
 
+		// an element can be of 3 types:
+		// 1. a simple type
+		// 2. a named complex type
+		// 3. an anonmous complex type
 		goType := generateGoTypeFromSimpleType(elem.Type, stMap)
 		if goType != "" {
+			// 1. a simple type
 			*fields += "\n\n\t// generated from element \"" + elem.NameXSD + "\" of type " + elem.Type +
 				"\n\t" + elem.GoIdentifier + " " + goType + " " + "`" + `xml:"` + elem.NameXSD + `"` + "`"
 		} else {
-			if ct, ok := ctMap[elem.Type]; ok {
-				*fields += "\n\n\t// generated from element \"" + elem.NameXSD + "\" of type " + ct.Name +
-					"\n\t" + elem.GoIdentifier + " []*" + ct.GoIdentifier + " " + "`" + `xml:"` + elem.NameXSD + `"` + "`"
+			if elem.Type != "" {
+				if ct, ok := ctMap[elem.Type]; ok {
+					*fields += "\n\n\t// generated from element \"" + elem.NameXSD + "\" of type " + ct.Name +
+						"\n\t" + elem.GoIdentifier + " []*" + ct.GoIdentifier + " " + "`" + `xml:"` + elem.NameXSD + `"` + "`"
+				} else {
+					log.Println("element", elem.NameXSD, "unkown type", elem.Type)
+				}
+			} else {
+				if elem.ComplexType == nil {
+					log.Println("element", elem.NameXSD, "should have an anonymous complex type", elem.Type)
+				} else {
+					elem.ComplexType.generateElements(map_Name_Elems, stMap, ctMap, groupMap, setOfGoIdentifiers, fields)
+				}
 			}
+
 		}
 	}
 }

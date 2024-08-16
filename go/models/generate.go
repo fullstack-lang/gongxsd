@@ -42,6 +42,8 @@ func Generate(stage *StageStruct, outputFilePath string) {
 		)
 	}
 
+	// groups are generated into unamed struct that can be composed
+	// into named struct
 	for _, group := range GetGongstrucsSorted[*Group](stage) {
 
 		// not the inline complex type
@@ -107,25 +109,21 @@ func Generate(stage *StageStruct, outputFilePath string) {
 		)
 	}
 
-	// elements with inline complex type
+	// elements do not need to be translated into gong struct
 	for _, element := range GetGongstrucsSorted[*Element](stage) {
 
-		if element.ComplexType == nil {
-			continue
-		}
+		_ = element
+	}
 
-		// fail loud and fast
-		if !element.ComplexType.IsAnonymous {
-			log.Fatal("element", element.Name, "has inlined complex type")
-		}
+	// parse THE schema
+	if len(GetGongstrucsSorted[*Schema](stage)) != 1 {
+		log.Fatalln("an XSD (XML Schema Definition) cannot contain more than one " +
+			"<xs:schema> element directly within a single XSD file. The <xs:schema> element " +
+			"is the root element of the schema, and there can only be one root element in an XML document.")
+	}
 
-		source := `inlined complex type within element "` + element.Name + `"`
-
-		if element.HasNameConflict {
-			source += `
-// Identifier is post fixed because more than one xsd element has the name "` + element.Name + `"`
-		}
-
+	schema := GetGongstrucsSorted[*Schema](stage)[0]
+	for _, element := range schema.Elements {
 		fields := element.ComplexType.GetFields(stage)
 
 		templInsertionLevel0[ModelsFileTmplLevel0AllGongstructsCode] += Replace3(
@@ -135,12 +133,11 @@ func Generate(stage *StageStruct, outputFilePath string) {
 			element.GoIdentifier,
 
 			"{{"+string(rune(ModelsFileTmplLevel2Source))+"}}",
-			source,
+			"element "+element.NameXSD+" within root schema",
 
 			"{{"+string(rune(ModelsFileTmplLevel2Fields))+"}}",
 			fields,
 		)
-
 	}
 
 	for insertionPerStructId := ModelsFileTmplLevel0(0); insertionPerStructId < ModelsFileTmplLevel0Nb; insertionPerStructId++ {

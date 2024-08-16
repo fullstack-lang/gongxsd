@@ -208,8 +208,7 @@ func PostProcessingNames(stage *StageStruct) {
 		if x.ComplexType != nil {
 			map_EmbeddedComplexType[x.ComplexType] = x
 
-			// loop until the name of the element is not in collision with an existing
-			// diagram name
+			setOfGoIdentifiers := make(map[string]any)
 			computeGoIdentifier(x.Name, &x.WithGoIdentifier, setOfGoIdentifiers)
 		}
 		for _, group := range x.Groups {

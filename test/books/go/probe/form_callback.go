@@ -77,48 +77,6 @@ func (booktypeFormCallback *BookTypeFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(booktype_.Year), formDiv)
 		case "Format":
 			FormDivBasicFieldToField(&(booktype_.Format), formDiv)
-		case "Books:Book":
-			// we need to retrieve the field owner before the change
-			var pastBooksOwner *models.Books
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "Books"
-			rf.Fieldname = "Book"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				booktypeFormCallback.probe.stageOfInterest,
-				booktypeFormCallback.probe.backRepoOfInterest,
-				booktype_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastBooksOwner = reverseFieldOwner.(*models.Books)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastBooksOwner != nil {
-					idx := slices.Index(pastBooksOwner.Book, booktype_)
-					pastBooksOwner.Book = slices.Delete(pastBooksOwner.Book, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _books := range *models.GetGongstructInstancesSet[models.Books](booktypeFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _books.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newBooksOwner := _books // we have a match
-						if pastBooksOwner != nil {
-							if newBooksOwner != pastBooksOwner {
-								idx := slices.Index(pastBooksOwner.Book, booktype_)
-								pastBooksOwner.Book = slices.Delete(pastBooksOwner.Book, idx, idx+1)
-								newBooksOwner.Book = append(newBooksOwner.Book, booktype_)
-							}
-						} else {
-							newBooksOwner.Book = append(newBooksOwner.Book, booktype_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -150,83 +108,6 @@ func (booktypeFormCallback *BookTypeFormCallback) OnSave() {
 	}
 
 	fillUpTree(booktypeFormCallback.probe)
-}
-func __gong__New__BooksFormCallback(
-	books *models.Books,
-	probe *Probe,
-	formGroup *table.FormGroup,
-) (booksFormCallback *BooksFormCallback) {
-	booksFormCallback = new(BooksFormCallback)
-	booksFormCallback.probe = probe
-	booksFormCallback.books = books
-	booksFormCallback.formGroup = formGroup
-
-	booksFormCallback.CreationMode = (books == nil)
-
-	return
-}
-
-type BooksFormCallback struct {
-	books *models.Books
-
-	// If the form call is called on the creation of a new instnace
-	CreationMode bool
-
-	probe *Probe
-
-	formGroup *table.FormGroup
-}
-
-func (booksFormCallback *BooksFormCallback) OnSave() {
-
-	log.Println("BooksFormCallback, OnSave")
-
-	// checkout formStage to have the form group on the stage synchronized with the
-	// back repo (and front repo)
-	booksFormCallback.probe.formStage.Checkout()
-
-	if booksFormCallback.books == nil {
-		booksFormCallback.books = new(models.Books).Stage(booksFormCallback.probe.stageOfInterest)
-	}
-	books_ := booksFormCallback.books
-	_ = books_
-
-	for _, formDiv := range booksFormCallback.formGroup.FormDivs {
-		switch formDiv.Name {
-		// insertion point per field
-		case "Name":
-			FormDivBasicFieldToField(&(books_.Name), formDiv)
-		}
-	}
-
-	// manage the suppress operation
-	if booksFormCallback.formGroup.HasSuppressButtonBeenPressed {
-		books_.Unstage(booksFormCallback.probe.stageOfInterest)
-	}
-
-	booksFormCallback.probe.stageOfInterest.Commit()
-	fillUpTable[models.Books](
-		booksFormCallback.probe,
-	)
-	booksFormCallback.probe.tableStage.Commit()
-
-	// display a new form by reset the form stage
-	if booksFormCallback.CreationMode || booksFormCallback.formGroup.HasSuppressButtonBeenPressed {
-		booksFormCallback.probe.formStage.Reset()
-		newFormGroup := (&table.FormGroup{
-			Name: table.FormGroupDefaultName.ToString(),
-		}).Stage(booksFormCallback.probe.formStage)
-		newFormGroup.OnSave = __gong__New__BooksFormCallback(
-			nil,
-			booksFormCallback.probe,
-			newFormGroup,
-		)
-		books := new(models.Books)
-		FillUpForm(books, newFormGroup, booksFormCallback.probe)
-		booksFormCallback.probe.formStage.Commit()
-	}
-
-	fillUpTree(booksFormCallback.probe)
 }
 func __gong__New__CreditFormCallback(
 	credit *models.Credit,

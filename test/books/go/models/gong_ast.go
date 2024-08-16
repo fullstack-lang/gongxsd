@@ -315,7 +315,6 @@ var __gong__map_Indentifiers_gongstructName = make(map[string]string)
 
 // insertion point for identifiers maps
 var __gong__map_BookType = make(map[string]*BookType)
-var __gong__map_Books = make(map[string]*Books)
 var __gong__map_Credit = make(map[string]*Credit)
 var __gong__map_Link = make(map[string]*Link)
 
@@ -494,10 +493,6 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 										instanceBookType := (&BookType{Name: instanceName}).Stage(stage)
 										instance = any(instanceBookType)
 										__gong__map_BookType[identifier] = instanceBookType
-									case "Books":
-										instanceBooks := (&Books{Name: instanceName}).Stage(stage)
-										instance = any(instanceBooks)
-										__gong__map_Books[identifier] = instanceBooks
 									case "Credit":
 										instanceCredit := (&Credit{Name: instanceName}).Stage(stage)
 										instance = any(instanceCredit)
@@ -546,10 +541,6 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 							switch fieldName {
 							// insertion point for date assign code
 							}
-						case "Books":
-							switch fieldName {
-							// insertion point for date assign code
-							}
 						case "Credit":
 							switch fieldName {
 							// insertion point for date assign code
@@ -592,16 +583,6 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 							target := __gong__map_Credit[targetIdentifier]
 							__gong__map_BookType[identifier].Credit =
 								append(__gong__map_BookType[identifier].Credit, target)
-						}
-					case "Books":
-						switch fieldName {
-						// insertion point for slice of pointers assign code
-						case "Book":
-							// remove first and last char
-							targetIdentifier := ident.Name
-							target := __gong__map_BookType[targetIdentifier]
-							__gong__map_Books[identifier].Book =
-								append(__gong__map_Books[identifier].Book, target)
 						}
 					case "Credit":
 						switch fieldName {
@@ -701,14 +682,6 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
 					__gong__map_BookType[identifier].Format = fielValue
 				}
-			case "Books":
-				switch fieldName {
-				// insertion point for field dependant code
-				case "Name":
-					// remove first and last char
-					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
-					__gong__map_Books[identifier].Name = fielValue
-				}
 			case "Credit":
 				switch fieldName {
 				// insertion point for field dependant code
@@ -777,10 +750,6 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					}
 					__gong__map_BookType[identifier].Bestseller = fielValue
 				}
-			case "Books":
-				switch fieldName {
-				// insertion point for field dependant code
-				}
 			case "Credit":
 				switch fieldName {
 				// insertion point for field dependant code
@@ -818,10 +787,6 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 				switch gongstructName {
 				// insertion point for enums assignments
 				case "BookType":
-					switch fieldName {
-					// insertion point for enum assign code
-					}
-				case "Books":
 					switch fieldName {
 					// insertion point for enum assign code
 					}
