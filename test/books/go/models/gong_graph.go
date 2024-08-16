@@ -14,8 +14,14 @@ func IsStaged[Type Gongstruct](stage *StageStruct, instance *Type) (ok bool) {
 	case *Books:
 		ok = stage.IsStagedBooks(target)
 
+	case *CommonAttributes:
+		ok = stage.IsStagedCommonAttributes(target)
+
 	case *Credit:
 		ok = stage.IsStagedCredit(target)
+
+	case *ExtendedAttributes:
+		ok = stage.IsStagedExtendedAttributes(target)
 
 	case *Link:
 		ok = stage.IsStagedLink(target)
@@ -48,9 +54,23 @@ func (stage *StageStruct) IsStagedBooks(books *Books) (ok bool) {
 	return
 }
 
+func (stage *StageStruct) IsStagedCommonAttributes(commonattributes *CommonAttributes) (ok bool) {
+
+	_, ok = stage.CommonAttributess[commonattributes]
+
+	return
+}
+
 func (stage *StageStruct) IsStagedCredit(credit *Credit) (ok bool) {
 
 	_, ok = stage.Credits[credit]
+
+	return
+}
+
+func (stage *StageStruct) IsStagedExtendedAttributes(extendedattributes *ExtendedAttributes) (ok bool) {
+
+	_, ok = stage.ExtendedAttributess[extendedattributes]
 
 	return
 }
@@ -79,8 +99,14 @@ func StageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 	case *Books:
 		stage.StageBranchBooks(target)
 
+	case *CommonAttributes:
+		stage.StageBranchCommonAttributes(target)
+
 	case *Credit:
 		stage.StageBranchCredit(target)
+
+	case *ExtendedAttributes:
+		stage.StageBranchExtendedAttributes(target)
 
 	case *Link:
 		stage.StageBranchLink(target)
@@ -116,6 +142,9 @@ func (stage *StageStruct) StageBranchBookType(booktype *BookType) {
 	booktype.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if booktype.ExtendedAttributes != nil {
+		StageBranch(stage, booktype.ExtendedAttributes)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 	for _, _credit := range booktype.Credit {
@@ -142,6 +171,21 @@ func (stage *StageStruct) StageBranchBooks(books *Books) {
 
 }
 
+func (stage *StageStruct) StageBranchCommonAttributes(commonattributes *CommonAttributes) {
+
+	// check if instance is already staged
+	if IsStaged(stage, commonattributes) {
+		return
+	}
+
+	commonattributes.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
 func (stage *StageStruct) StageBranchCredit(credit *Credit) {
 
 	// check if instance is already staged
@@ -157,6 +201,24 @@ func (stage *StageStruct) StageBranchCredit(credit *Credit) {
 	for _, _link := range credit.Link {
 		StageBranch(stage, _link)
 	}
+
+}
+
+func (stage *StageStruct) StageBranchExtendedAttributes(extendedattributes *ExtendedAttributes) {
+
+	// check if instance is already staged
+	if IsStaged(stage, extendedattributes) {
+		return
+	}
+
+	extendedattributes.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+	if extendedattributes.CommonAttributes != nil {
+		StageBranch(stage, extendedattributes.CommonAttributes)
+	}
+
+	//insertion point for the staging of instances referenced by slice of pointers
 
 }
 
@@ -198,8 +260,16 @@ func CopyBranch[Type Gongstruct](from *Type) (to *Type) {
 		toT := CopyBranchBooks(mapOrigCopy, fromT)
 		return any(toT).(*Type)
 
+	case *CommonAttributes:
+		toT := CopyBranchCommonAttributes(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
 	case *Credit:
 		toT := CopyBranchCredit(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
+	case *ExtendedAttributes:
+		toT := CopyBranchExtendedAttributes(mapOrigCopy, fromT)
 		return any(toT).(*Type)
 
 	case *Link:
@@ -245,6 +315,9 @@ func CopyBranchBookType(mapOrigCopy map[any]any, booktypeFrom *BookType) (bookty
 	booktypeFrom.CopyBasicFields(booktypeTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if booktypeFrom.ExtendedAttributes != nil {
+		booktypeTo.ExtendedAttributes = CopyBranchExtendedAttributes(mapOrigCopy, booktypeFrom.ExtendedAttributes)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 	for _, _credit := range booktypeFrom.Credit {
@@ -276,6 +349,25 @@ func CopyBranchBooks(mapOrigCopy map[any]any, booksFrom *Books) (booksTo *Books)
 	return
 }
 
+func CopyBranchCommonAttributes(mapOrigCopy map[any]any, commonattributesFrom *CommonAttributes) (commonattributesTo *CommonAttributes) {
+
+	// commonattributesFrom has already been copied
+	if _commonattributesTo, ok := mapOrigCopy[commonattributesFrom]; ok {
+		commonattributesTo = _commonattributesTo.(*CommonAttributes)
+		return
+	}
+
+	commonattributesTo = new(CommonAttributes)
+	mapOrigCopy[commonattributesFrom] = commonattributesTo
+	commonattributesFrom.CopyBasicFields(commonattributesTo)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+	return
+}
+
 func CopyBranchCredit(mapOrigCopy map[any]any, creditFrom *Credit) (creditTo *Credit) {
 
 	// creditFrom has already been copied
@@ -294,6 +386,28 @@ func CopyBranchCredit(mapOrigCopy map[any]any, creditFrom *Credit) (creditTo *Cr
 	for _, _link := range creditFrom.Link {
 		creditTo.Link = append(creditTo.Link, CopyBranchLink(mapOrigCopy, _link))
 	}
+
+	return
+}
+
+func CopyBranchExtendedAttributes(mapOrigCopy map[any]any, extendedattributesFrom *ExtendedAttributes) (extendedattributesTo *ExtendedAttributes) {
+
+	// extendedattributesFrom has already been copied
+	if _extendedattributesTo, ok := mapOrigCopy[extendedattributesFrom]; ok {
+		extendedattributesTo = _extendedattributesTo.(*ExtendedAttributes)
+		return
+	}
+
+	extendedattributesTo = new(ExtendedAttributes)
+	mapOrigCopy[extendedattributesFrom] = extendedattributesTo
+	extendedattributesFrom.CopyBasicFields(extendedattributesTo)
+
+	//insertion point for the staging of instances referenced by pointers
+	if extendedattributesFrom.CommonAttributes != nil {
+		extendedattributesTo.CommonAttributes = CopyBranchCommonAttributes(mapOrigCopy, extendedattributesFrom.CommonAttributes)
+	}
+
+	//insertion point for the staging of instances referenced by slice of pointers
 
 	return
 }
@@ -334,8 +448,14 @@ func UnstageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 	case *Books:
 		stage.UnstageBranchBooks(target)
 
+	case *CommonAttributes:
+		stage.UnstageBranchCommonAttributes(target)
+
 	case *Credit:
 		stage.UnstageBranchCredit(target)
+
+	case *ExtendedAttributes:
+		stage.UnstageBranchExtendedAttributes(target)
 
 	case *Link:
 		stage.UnstageBranchLink(target)
@@ -371,6 +491,9 @@ func (stage *StageStruct) UnstageBranchBookType(booktype *BookType) {
 	booktype.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if booktype.ExtendedAttributes != nil {
+		UnstageBranch(stage, booktype.ExtendedAttributes)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 	for _, _credit := range booktype.Credit {
@@ -397,6 +520,21 @@ func (stage *StageStruct) UnstageBranchBooks(books *Books) {
 
 }
 
+func (stage *StageStruct) UnstageBranchCommonAttributes(commonattributes *CommonAttributes) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, commonattributes) {
+		return
+	}
+
+	commonattributes.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
 func (stage *StageStruct) UnstageBranchCredit(credit *Credit) {
 
 	// check if instance is already staged
@@ -412,6 +550,24 @@ func (stage *StageStruct) UnstageBranchCredit(credit *Credit) {
 	for _, _link := range credit.Link {
 		UnstageBranch(stage, _link)
 	}
+
+}
+
+func (stage *StageStruct) UnstageBranchExtendedAttributes(extendedattributes *ExtendedAttributes) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, extendedattributes) {
+		return
+	}
+
+	extendedattributes.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+	if extendedattributes.CommonAttributes != nil {
+		UnstageBranch(stage, extendedattributes.CommonAttributes)
+	}
+
+	//insertion point for the staging of instances referenced by slice of pointers
 
 }
 

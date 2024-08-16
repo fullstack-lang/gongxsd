@@ -113,6 +113,18 @@
 			]
 		},
 		{
+			"label": "01 - gongc books -clean",
+			"type": "shell",
+			"options": {
+				"cwd": "${workspaceFolder}/test/books/go/models"
+			},
+			"command": "gongc",
+			"group": "build",
+			"args": [
+				"-clean"
+			]
+		},
+		{
 			"label": "00 - go mod vendor",
 			"type": "shell",
 			"group": "build",

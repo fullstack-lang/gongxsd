@@ -47,7 +47,9 @@ func NewStackInstance(
 	models.SetOrchestratorOnAfterUpdate[models.BookDetailsGroup](stage)
 	models.SetOrchestratorOnAfterUpdate[models.BookType](stage)
 	models.SetOrchestratorOnAfterUpdate[models.Books](stage)
+	models.SetOrchestratorOnAfterUpdate[models.CommonAttributes](stage)
 	models.SetOrchestratorOnAfterUpdate[models.Credit](stage)
+	models.SetOrchestratorOnAfterUpdate[models.ExtendedAttributes](stage)
 	models.SetOrchestratorOnAfterUpdate[models.Link](stage)
 
 	return

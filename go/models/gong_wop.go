@@ -69,6 +69,8 @@ type AttributeGroup_WOP struct {
 	// insertion point
 	Name string
 	NameXSD string
+	HasNameConflict bool
+	GoIdentifier string
 	Ref string
 }
 
@@ -76,6 +78,8 @@ func (from *AttributeGroup) CopyBasicFields(to *AttributeGroup) {
 	// insertion point
 	to.Name = from.Name
 	to.NameXSD = from.NameXSD
+	to.HasNameConflict = from.HasNameConflict
+	to.GoIdentifier = from.GoIdentifier
 	to.Ref = from.Ref
 }
 

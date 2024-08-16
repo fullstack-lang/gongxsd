@@ -27,9 +27,17 @@ func GetInstanceDBFromInstance[T models.Gongstruct, T2 GongstructDB](
 		booksInstance := any(concreteInstance).(*models.Books)
 		ret2 := backRepo.BackRepoBooks.GetBooksDBFromBooksPtr(booksInstance)
 		ret = any(ret2).(*T2)
+	case *models.CommonAttributes:
+		commonattributesInstance := any(concreteInstance).(*models.CommonAttributes)
+		ret2 := backRepo.BackRepoCommonAttributes.GetCommonAttributesDBFromCommonAttributesPtr(commonattributesInstance)
+		ret = any(ret2).(*T2)
 	case *models.Credit:
 		creditInstance := any(concreteInstance).(*models.Credit)
 		ret2 := backRepo.BackRepoCredit.GetCreditDBFromCreditPtr(creditInstance)
+		ret = any(ret2).(*T2)
+	case *models.ExtendedAttributes:
+		extendedattributesInstance := any(concreteInstance).(*models.ExtendedAttributes)
+		ret2 := backRepo.BackRepoExtendedAttributes.GetExtendedAttributesDBFromExtendedAttributesPtr(extendedattributesInstance)
 		ret = any(ret2).(*T2)
 	case *models.Link:
 		linkInstance := any(concreteInstance).(*models.Link)
@@ -63,8 +71,18 @@ func GetID[T models.Gongstruct](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)
+	case *models.CommonAttributes:
+		tmp := GetInstanceDBFromInstance[models.CommonAttributes, CommonAttributesDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
 	case *models.Credit:
 		tmp := GetInstanceDBFromInstance[models.Credit, CreditDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.ExtendedAttributes:
+		tmp := GetInstanceDBFromInstance[models.ExtendedAttributes, ExtendedAttributesDB](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)
@@ -101,8 +119,18 @@ func GetIDPointer[T models.PointerToGongstruct](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)
+	case *models.CommonAttributes:
+		tmp := GetInstanceDBFromInstance[models.CommonAttributes, CommonAttributesDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
 	case *models.Credit:
 		tmp := GetInstanceDBFromInstance[models.Credit, CreditDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.ExtendedAttributes:
+		tmp := GetInstanceDBFromInstance[models.ExtendedAttributes, ExtendedAttributesDB](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)

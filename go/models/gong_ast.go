@@ -1279,6 +1279,10 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					// remove first and last char
 					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
 					__gong__map_AttributeGroup[identifier].NameXSD = fielValue
+				case "GoIdentifier":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_AttributeGroup[identifier].GoIdentifier = fielValue
 				case "Ref":
 					// remove first and last char
 					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
@@ -1661,6 +1665,13 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 				case "Annotation":
 					targetIdentifier := ident.Name
 					__gong__map_AttributeGroup[identifier].Annotation = __gong__map_Annotation[targetIdentifier]
+				case "HasNameConflict":
+					// convert string to boolean
+					fielValue, err := strconv.ParseBool(ident.Name)
+					if err != nil {
+						log.Fatalln(err)
+					}
+					__gong__map_AttributeGroup[identifier].HasNameConflict = fielValue
 				}
 			case "Choice":
 				switch fieldName {

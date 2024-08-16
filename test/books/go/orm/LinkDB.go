@@ -62,11 +62,11 @@ type LinkDB struct {
 	// Declation for basic field linkDB.Name
 	Name_Data sql.NullString
 
-	// Declation for basic field linkDB.EnclosedText
-	EnclosedText_Data sql.NullString
-
 	// Declation for basic field linkDB.NameXSD
 	NameXSD_Data sql.NullString
+
+	// Declation for basic field linkDB.EnclosedText
+	EnclosedText_Data sql.NullString
 	
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
@@ -92,9 +92,9 @@ type LinkWOP struct {
 
 	Name string `xlsx:"1"`
 
-	EnclosedText string `xlsx:"2"`
+	NameXSD string `xlsx:"2"`
 
-	NameXSD string `xlsx:"3"`
+	EnclosedText string `xlsx:"3"`
 	// insertion for WOP pointer fields
 }
 
@@ -102,8 +102,8 @@ var Link_Fields = []string{
 	// insertion for WOP basic fields
 	"ID",
 	"Name",
-	"EnclosedText",
 	"NameXSD",
+	"EnclosedText",
 }
 
 type BackRepoLinkStruct struct {
@@ -373,11 +373,11 @@ func (linkDB *LinkDB) CopyBasicFieldsFromLink(link *models.Link) {
 	linkDB.Name_Data.String = link.Name
 	linkDB.Name_Data.Valid = true
 
-	linkDB.EnclosedText_Data.String = link.EnclosedText
-	linkDB.EnclosedText_Data.Valid = true
-
 	linkDB.NameXSD_Data.String = link.NameXSD
 	linkDB.NameXSD_Data.Valid = true
+
+	linkDB.EnclosedText_Data.String = link.EnclosedText
+	linkDB.EnclosedText_Data.Valid = true
 }
 
 // CopyBasicFieldsFromLink_WOP
@@ -387,11 +387,11 @@ func (linkDB *LinkDB) CopyBasicFieldsFromLink_WOP(link *models.Link_WOP) {
 	linkDB.Name_Data.String = link.Name
 	linkDB.Name_Data.Valid = true
 
-	linkDB.EnclosedText_Data.String = link.EnclosedText
-	linkDB.EnclosedText_Data.Valid = true
-
 	linkDB.NameXSD_Data.String = link.NameXSD
 	linkDB.NameXSD_Data.Valid = true
+
+	linkDB.EnclosedText_Data.String = link.EnclosedText
+	linkDB.EnclosedText_Data.Valid = true
 }
 
 // CopyBasicFieldsFromLinkWOP
@@ -401,27 +401,27 @@ func (linkDB *LinkDB) CopyBasicFieldsFromLinkWOP(link *LinkWOP) {
 	linkDB.Name_Data.String = link.Name
 	linkDB.Name_Data.Valid = true
 
-	linkDB.EnclosedText_Data.String = link.EnclosedText
-	linkDB.EnclosedText_Data.Valid = true
-
 	linkDB.NameXSD_Data.String = link.NameXSD
 	linkDB.NameXSD_Data.Valid = true
+
+	linkDB.EnclosedText_Data.String = link.EnclosedText
+	linkDB.EnclosedText_Data.Valid = true
 }
 
 // CopyBasicFieldsToLink
 func (linkDB *LinkDB) CopyBasicFieldsToLink(link *models.Link) {
 	// insertion point for checkout of basic fields (back repo to stage)
 	link.Name = linkDB.Name_Data.String
-	link.EnclosedText = linkDB.EnclosedText_Data.String
 	link.NameXSD = linkDB.NameXSD_Data.String
+	link.EnclosedText = linkDB.EnclosedText_Data.String
 }
 
 // CopyBasicFieldsToLink_WOP
 func (linkDB *LinkDB) CopyBasicFieldsToLink_WOP(link *models.Link_WOP) {
 	// insertion point for checkout of basic fields (back repo to stage)
 	link.Name = linkDB.Name_Data.String
-	link.EnclosedText = linkDB.EnclosedText_Data.String
 	link.NameXSD = linkDB.NameXSD_Data.String
+	link.EnclosedText = linkDB.EnclosedText_Data.String
 }
 
 // CopyBasicFieldsToLinkWOP
@@ -429,8 +429,8 @@ func (linkDB *LinkDB) CopyBasicFieldsToLinkWOP(link *LinkWOP) {
 	link.ID = int(linkDB.ID)
 	// insertion point for checkout of basic fields (back repo to stage)
 	link.Name = linkDB.Name_Data.String
-	link.EnclosedText = linkDB.EnclosedText_Data.String
 	link.NameXSD = linkDB.NameXSD_Data.String
+	link.EnclosedText = linkDB.EnclosedText_Data.String
 }
 
 // Backup generates a json file from a slice of all LinkDB instances in the backrepo

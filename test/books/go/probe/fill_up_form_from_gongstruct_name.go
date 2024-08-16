@@ -65,6 +65,19 @@ func FillUpFormFromGongstructName(
 		books := new(models.Books)
 		formGroup.HasSuppressButton = !isNewInstance
 		FillUpForm(books, formGroup, probe)
+	case "CommonAttributes":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "CommonAttributes Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__CommonAttributesFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		commonattributes := new(models.CommonAttributes)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(commonattributes, formGroup, probe)
 	case "Credit":
 		formGroup := (&form.FormGroup{
 			Name:  form.FormGroupDefaultName.ToString(),
@@ -78,6 +91,19 @@ func FillUpFormFromGongstructName(
 		credit := new(models.Credit)
 		formGroup.HasSuppressButton = !isNewInstance
 		FillUpForm(credit, formGroup, probe)
+	case "ExtendedAttributes":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "ExtendedAttributes Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__ExtendedAttributesFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		extendedattributes := new(models.ExtendedAttributes)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(extendedattributes, formGroup, probe)
 	case "Link":
 		formGroup := (&form.FormGroup{
 			Name:  form.FormGroupDefaultName.ToString(),

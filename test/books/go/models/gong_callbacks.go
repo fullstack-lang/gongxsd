@@ -18,9 +18,17 @@ func AfterCreateFromFront[Type Gongstruct](stage *StageStruct, instance *Type) {
 		if stage.OnAfterBooksCreateCallback != nil {
 			stage.OnAfterBooksCreateCallback.OnAfterCreate(stage, target)
 		}
+	case *CommonAttributes:
+		if stage.OnAfterCommonAttributesCreateCallback != nil {
+			stage.OnAfterCommonAttributesCreateCallback.OnAfterCreate(stage, target)
+		}
 	case *Credit:
 		if stage.OnAfterCreditCreateCallback != nil {
 			stage.OnAfterCreditCreateCallback.OnAfterCreate(stage, target)
+		}
+	case *ExtendedAttributes:
+		if stage.OnAfterExtendedAttributesCreateCallback != nil {
+			stage.OnAfterExtendedAttributesCreateCallback.OnAfterCreate(stage, target)
 		}
 	case *Link:
 		if stage.OnAfterLinkCreateCallback != nil {
@@ -51,10 +59,20 @@ func AfterUpdateFromFront[Type Gongstruct](stage *StageStruct, old, new *Type) {
 		if stage.OnAfterBooksUpdateCallback != nil {
 			stage.OnAfterBooksUpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
 		}
+	case *CommonAttributes:
+		newTarget := any(new).(*CommonAttributes)
+		if stage.OnAfterCommonAttributesUpdateCallback != nil {
+			stage.OnAfterCommonAttributesUpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
+		}
 	case *Credit:
 		newTarget := any(new).(*Credit)
 		if stage.OnAfterCreditUpdateCallback != nil {
 			stage.OnAfterCreditUpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
+		}
+	case *ExtendedAttributes:
+		newTarget := any(new).(*ExtendedAttributes)
+		if stage.OnAfterExtendedAttributesUpdateCallback != nil {
+			stage.OnAfterExtendedAttributesUpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
 		}
 	case *Link:
 		newTarget := any(new).(*Link)
@@ -86,10 +104,20 @@ func AfterDeleteFromFront[Type Gongstruct](stage *StageStruct, staged, front *Ty
 			staged := any(staged).(*Books)
 			stage.OnAfterBooksDeleteCallback.OnAfterDelete(stage, staged, front)
 		}
+	case *CommonAttributes:
+		if stage.OnAfterCommonAttributesDeleteCallback != nil {
+			staged := any(staged).(*CommonAttributes)
+			stage.OnAfterCommonAttributesDeleteCallback.OnAfterDelete(stage, staged, front)
+		}
 	case *Credit:
 		if stage.OnAfterCreditDeleteCallback != nil {
 			staged := any(staged).(*Credit)
 			stage.OnAfterCreditDeleteCallback.OnAfterDelete(stage, staged, front)
+		}
+	case *ExtendedAttributes:
+		if stage.OnAfterExtendedAttributesDeleteCallback != nil {
+			staged := any(staged).(*ExtendedAttributes)
+			stage.OnAfterExtendedAttributesDeleteCallback.OnAfterDelete(stage, staged, front)
 		}
 	case *Link:
 		if stage.OnAfterLinkDeleteCallback != nil {
@@ -118,9 +146,17 @@ func AfterReadFromFront[Type Gongstruct](stage *StageStruct, instance *Type) {
 		if stage.OnAfterBooksReadCallback != nil {
 			stage.OnAfterBooksReadCallback.OnAfterRead(stage, target)
 		}
+	case *CommonAttributes:
+		if stage.OnAfterCommonAttributesReadCallback != nil {
+			stage.OnAfterCommonAttributesReadCallback.OnAfterRead(stage, target)
+		}
 	case *Credit:
 		if stage.OnAfterCreditReadCallback != nil {
 			stage.OnAfterCreditReadCallback.OnAfterRead(stage, target)
+		}
+	case *ExtendedAttributes:
+		if stage.OnAfterExtendedAttributesReadCallback != nil {
+			stage.OnAfterExtendedAttributesReadCallback.OnAfterRead(stage, target)
 		}
 	case *Link:
 		if stage.OnAfterLinkReadCallback != nil {
@@ -146,8 +182,14 @@ func SetCallbackAfterUpdateFromFront[Type Gongstruct](stage *StageStruct, callba
 	case *Books:
 		stage.OnAfterBooksUpdateCallback = any(callback).(OnAfterUpdateInterface[Books])
 	
+	case *CommonAttributes:
+		stage.OnAfterCommonAttributesUpdateCallback = any(callback).(OnAfterUpdateInterface[CommonAttributes])
+	
 	case *Credit:
 		stage.OnAfterCreditUpdateCallback = any(callback).(OnAfterUpdateInterface[Credit])
+	
+	case *ExtendedAttributes:
+		stage.OnAfterExtendedAttributesUpdateCallback = any(callback).(OnAfterUpdateInterface[ExtendedAttributes])
 	
 	case *Link:
 		stage.OnAfterLinkUpdateCallback = any(callback).(OnAfterUpdateInterface[Link])
@@ -168,8 +210,14 @@ func SetCallbackAfterCreateFromFront[Type Gongstruct](stage *StageStruct, callba
 	case *Books:
 		stage.OnAfterBooksCreateCallback = any(callback).(OnAfterCreateInterface[Books])
 	
+	case *CommonAttributes:
+		stage.OnAfterCommonAttributesCreateCallback = any(callback).(OnAfterCreateInterface[CommonAttributes])
+	
 	case *Credit:
 		stage.OnAfterCreditCreateCallback = any(callback).(OnAfterCreateInterface[Credit])
+	
+	case *ExtendedAttributes:
+		stage.OnAfterExtendedAttributesCreateCallback = any(callback).(OnAfterCreateInterface[ExtendedAttributes])
 	
 	case *Link:
 		stage.OnAfterLinkCreateCallback = any(callback).(OnAfterCreateInterface[Link])
@@ -190,8 +238,14 @@ func SetCallbackAfterDeleteFromFront[Type Gongstruct](stage *StageStruct, callba
 	case *Books:
 		stage.OnAfterBooksDeleteCallback = any(callback).(OnAfterDeleteInterface[Books])
 	
+	case *CommonAttributes:
+		stage.OnAfterCommonAttributesDeleteCallback = any(callback).(OnAfterDeleteInterface[CommonAttributes])
+	
 	case *Credit:
 		stage.OnAfterCreditDeleteCallback = any(callback).(OnAfterDeleteInterface[Credit])
+	
+	case *ExtendedAttributes:
+		stage.OnAfterExtendedAttributesDeleteCallback = any(callback).(OnAfterDeleteInterface[ExtendedAttributes])
 	
 	case *Link:
 		stage.OnAfterLinkDeleteCallback = any(callback).(OnAfterDeleteInterface[Link])
@@ -212,8 +266,14 @@ func SetCallbackAfterReadFromFront[Type Gongstruct](stage *StageStruct, callback
 	case *Books:
 		stage.OnAfterBooksReadCallback = any(callback).(OnAfterReadInterface[Books])
 	
+	case *CommonAttributes:
+		stage.OnAfterCommonAttributesReadCallback = any(callback).(OnAfterReadInterface[CommonAttributes])
+	
 	case *Credit:
 		stage.OnAfterCreditReadCallback = any(callback).(OnAfterReadInterface[Credit])
+	
+	case *ExtendedAttributes:
+		stage.OnAfterExtendedAttributesReadCallback = any(callback).(OnAfterReadInterface[ExtendedAttributes])
 	
 	case *Link:
 		stage.OnAfterLinkReadCallback = any(callback).(OnAfterReadInterface[Link])

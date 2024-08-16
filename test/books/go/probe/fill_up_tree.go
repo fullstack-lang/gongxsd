@@ -92,6 +92,16 @@ func fillUpTree(
 
 				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
 			}
+		case "CommonAttributes":
+			nodeGongstruct.Name = name
+			set := *models.GetGongstructInstancesSet[models.CommonAttributes](probe.stageOfInterest)
+			for _commonattributes := range set {
+				nodeInstance := (&tree.Node{Name: _commonattributes.GetName()}).Stage(probe.treeStage)
+				nodeInstance.IsNodeClickable = true
+				nodeInstance.Impl = NewInstanceNodeCallback(_commonattributes, "CommonAttributes", probe)
+
+				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
+			}
 		case "Credit":
 			nodeGongstruct.Name = name
 			set := *models.GetGongstructInstancesSet[models.Credit](probe.stageOfInterest)
@@ -99,6 +109,16 @@ func fillUpTree(
 				nodeInstance := (&tree.Node{Name: _credit.GetName()}).Stage(probe.treeStage)
 				nodeInstance.IsNodeClickable = true
 				nodeInstance.Impl = NewInstanceNodeCallback(_credit, "Credit", probe)
+
+				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
+			}
+		case "ExtendedAttributes":
+			nodeGongstruct.Name = name
+			set := *models.GetGongstructInstancesSet[models.ExtendedAttributes](probe.stageOfInterest)
+			for _extendedattributes := range set {
+				nodeInstance := (&tree.Node{Name: _extendedattributes.GetName()}).Stage(probe.treeStage)
+				nodeInstance.IsNodeClickable = true
+				nodeInstance.Impl = NewInstanceNodeCallback(_extendedattributes, "ExtendedAttributes", probe)
 
 				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
 			}

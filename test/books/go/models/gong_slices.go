@@ -80,6 +80,9 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 			}
 		}
 
+	case *CommonAttributes:
+		// insertion point per field
+
 	case *Credit:
 		// insertion point per field
 		if fieldName == "Link" {
@@ -101,6 +104,9 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 				}
 			}
 		}
+
+	case *ExtendedAttributes:
+		// insertion point per field
 
 	case *Link:
 		// insertion point per field
@@ -139,6 +145,9 @@ func (stage *StageStruct) ComputeReverseMaps() {
 		}
 	}
 
+	// Compute reverse map for named struct CommonAttributes
+	// insertion point per field
+
 	// Compute reverse map for named struct Credit
 	// insertion point per field
 	clear(stage.Credit_Link_reverseMap)
@@ -149,6 +158,9 @@ func (stage *StageStruct) ComputeReverseMaps() {
 			stage.Credit_Link_reverseMap[_link] = credit
 		}
 	}
+
+	// Compute reverse map for named struct ExtendedAttributes
+	// insertion point per field
 
 	// Compute reverse map for named struct Link
 	// insertion point per field

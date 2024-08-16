@@ -11,7 +11,7 @@ import (
 
 func main() {
 	// Open the XML file
-	xmlFile, err := os.Open("books.xml")
+	xmlFile, err := os.Open("../../books.xml")
 	if err != nil {
 		fmt.Println("Error opening file:", err)
 		return
@@ -55,7 +55,7 @@ func main() {
 	}
 
 	// Write the XML to a new file
-	err = os.WriteFile("new_books.xml", []byte(xml.Header+string(output)), 0644)
+	err = os.WriteFile("../../new_books.xml", []byte(xml.Header+string(output)), 0644)
 	if err != nil {
 		fmt.Println("Error writing to file:", err)
 		return

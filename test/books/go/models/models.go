@@ -12,14 +12,8 @@ type BookType struct {
 
 	// insertion point for fields
 
-	// generated from attribute "edition" of type xs:string
-	Edition string `xml:"edition,attr"`
-
-	// generated from attribute "isbn" of type xs:string
-	Isbn string `xml:"isbn,attr"`
-
-	// generated from attribute "bestseller" of type xs:boolean
-	Bestseller bool `xml:"bestseller,attr"`
+	// generated from attribute group "extendedAttributes
+	ExtendedAttributes *ExtendedAttributes `xml:"extendedAttributes"`
 
 	// generated from element "credit" of type credit
 	Credit []*Credit `xml:"credit"`
@@ -89,6 +83,32 @@ type BookDetailsGroup struct {
 
 	// generated from element "format" of type bookFormatEnum
 	Format string `xml:"format"`
+}
+
+// CommonAttributes is generated from named group "commonAttributes"
+type CommonAttributes struct {
+	Name string `xml:"-"`
+
+	// insertion point for fields
+
+	// generated from attribute "isbn" of type xs:string
+	Isbn string `xml:"isbn,attr"`
+
+	// generated from attribute "bestseller" of type xs:boolean
+	Bestseller bool `xml:"bestseller,attr"`
+}
+
+// ExtendedAttributes is generated from named group "extendedAttributes"
+type ExtendedAttributes struct {
+	Name string `xml:"-"`
+
+	// insertion point for fields
+
+	// generated from attribute "edition" of type xs:string
+	Edition string `xml:"edition,attr"`
+
+	// generated from attribute group "commonAttributes
+	CommonAttributes *CommonAttributes `xml:"commonAttributes"`
 }
 
 // Books is generated from inlined complex type within element "books"

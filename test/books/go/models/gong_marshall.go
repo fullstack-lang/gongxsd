@@ -186,24 +186,6 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 
 		setValueField = StringInitStatement
 		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Edition")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(booktype.Edition))
-		initializerStatements += setValueField
-
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Isbn")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(booktype.Isbn))
-		initializerStatements += setValueField
-
-		setValueField = NumberInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Bestseller")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", fmt.Sprintf("%t", booktype.Bestseller))
-		initializerStatements += setValueField
-
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
 		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Title")
 		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(booktype.Title))
 		initializerStatements += setValueField
@@ -258,6 +240,52 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
 		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
 		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(books.Name))
+		initializerStatements += setValueField
+
+	}
+
+	map_CommonAttributes_Identifiers := make(map[*CommonAttributes]string)
+	_ = map_CommonAttributes_Identifiers
+
+	commonattributesOrdered := []*CommonAttributes{}
+	for commonattributes := range stage.CommonAttributess {
+		commonattributesOrdered = append(commonattributesOrdered, commonattributes)
+	}
+	sort.Slice(commonattributesOrdered[:], func(i, j int) bool {
+		return commonattributesOrdered[i].Name < commonattributesOrdered[j].Name
+	})
+	if len(commonattributesOrdered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, commonattributes := range commonattributesOrdered {
+
+		id = generatesIdentifier("CommonAttributes", idx, commonattributes.Name)
+		map_CommonAttributes_Identifiers[commonattributes] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "CommonAttributes")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", commonattributes.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(commonattributes.Name))
+		initializerStatements += setValueField
+
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Isbn")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(commonattributes.Isbn))
+		initializerStatements += setValueField
+
+		setValueField = NumberInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Bestseller")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", fmt.Sprintf("%t", commonattributes.Bestseller))
 		initializerStatements += setValueField
 
 	}
@@ -320,6 +348,46 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 
 	}
 
+	map_ExtendedAttributes_Identifiers := make(map[*ExtendedAttributes]string)
+	_ = map_ExtendedAttributes_Identifiers
+
+	extendedattributesOrdered := []*ExtendedAttributes{}
+	for extendedattributes := range stage.ExtendedAttributess {
+		extendedattributesOrdered = append(extendedattributesOrdered, extendedattributes)
+	}
+	sort.Slice(extendedattributesOrdered[:], func(i, j int) bool {
+		return extendedattributesOrdered[i].Name < extendedattributesOrdered[j].Name
+	})
+	if len(extendedattributesOrdered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, extendedattributes := range extendedattributesOrdered {
+
+		id = generatesIdentifier("ExtendedAttributes", idx, extendedattributes.Name)
+		map_ExtendedAttributes_Identifiers[extendedattributes] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "ExtendedAttributes")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", extendedattributes.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(extendedattributes.Name))
+		initializerStatements += setValueField
+
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Edition")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(extendedattributes.Edition))
+		initializerStatements += setValueField
+
+	}
+
 	map_Link_Identifiers := make(map[*Link]string)
 	_ = map_Link_Identifiers
 
@@ -354,14 +422,14 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 
 		setValueField = StringInitStatement
 		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "EnclosedText")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(link.EnclosedText))
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "NameXSD")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(link.NameXSD))
 		initializerStatements += setValueField
 
 		setValueField = StringInitStatement
 		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "NameXSD")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(link.NameXSD))
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "EnclosedText")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(link.EnclosedText))
 		initializerStatements += setValueField
 
 	}
@@ -385,6 +453,14 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		map_BookType_Identifiers[booktype] = id
 
 		// Initialisation of values
+		if booktype.ExtendedAttributes != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ExtendedAttributes")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ExtendedAttributes_Identifiers[booktype.ExtendedAttributes])
+			pointersInitializesStatements += setPointerField
+		}
+
 		for _, _credit := range booktype.Credit {
 			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
@@ -413,6 +489,16 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 
 	}
 
+	for idx, commonattributes := range commonattributesOrdered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("CommonAttributes", idx, commonattributes.Name)
+		map_CommonAttributes_Identifiers[commonattributes] = id
+
+		// Initialisation of values
+	}
+
 	for idx, credit := range creditOrdered {
 		var setPointerField string
 		_ = setPointerField
@@ -426,6 +512,24 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Link")
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Link_Identifiers[_link])
+			pointersInitializesStatements += setPointerField
+		}
+
+	}
+
+	for idx, extendedattributes := range extendedattributesOrdered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("ExtendedAttributes", idx, extendedattributes.Name)
+		map_ExtendedAttributes_Identifiers[extendedattributes] = id
+
+		// Initialisation of values
+		if extendedattributes.CommonAttributes != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "CommonAttributes")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_CommonAttributes_Identifiers[extendedattributes.CommonAttributes])
 			pointersInitializesStatements += setPointerField
 		}
 

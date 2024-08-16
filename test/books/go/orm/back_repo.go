@@ -28,7 +28,11 @@ type BackRepoStruct struct {
 
 	BackRepoBooks BackRepoBooksStruct
 
+	BackRepoCommonAttributes BackRepoCommonAttributesStruct
+
 	BackRepoCredit BackRepoCreditStruct
+
+	BackRepoExtendedAttributes BackRepoExtendedAttributesStruct
 
 	BackRepoLink BackRepoLinkStruct
 
@@ -75,7 +79,9 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 		&BookDetailsGroupDB{},
 		&BookTypeDB{},
 		&BooksDB{},
+		&CommonAttributesDB{},
 		&CreditDB{},
+		&ExtendedAttributesDB{},
 		&LinkDB{},
 	)
 
@@ -111,10 +117,26 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 		db:    db,
 		stage: stage,
 	}
+	backRepo.BackRepoCommonAttributes = BackRepoCommonAttributesStruct{
+		Map_CommonAttributesDBID_CommonAttributesPtr: make(map[uint]*models.CommonAttributes, 0),
+		Map_CommonAttributesDBID_CommonAttributesDB:  make(map[uint]*CommonAttributesDB, 0),
+		Map_CommonAttributesPtr_CommonAttributesDBID: make(map[*models.CommonAttributes]uint, 0),
+
+		db:    db,
+		stage: stage,
+	}
 	backRepo.BackRepoCredit = BackRepoCreditStruct{
 		Map_CreditDBID_CreditPtr: make(map[uint]*models.Credit, 0),
 		Map_CreditDBID_CreditDB:  make(map[uint]*CreditDB, 0),
 		Map_CreditPtr_CreditDBID: make(map[*models.Credit]uint, 0),
+
+		db:    db,
+		stage: stage,
+	}
+	backRepo.BackRepoExtendedAttributes = BackRepoExtendedAttributesStruct{
+		Map_ExtendedAttributesDBID_ExtendedAttributesPtr: make(map[uint]*models.ExtendedAttributes, 0),
+		Map_ExtendedAttributesDBID_ExtendedAttributesDB:  make(map[uint]*ExtendedAttributesDB, 0),
+		Map_ExtendedAttributesPtr_ExtendedAttributesDBID: make(map[*models.ExtendedAttributes]uint, 0),
 
 		db:    db,
 		stage: stage,
@@ -178,14 +200,18 @@ func (backRepo *BackRepoStruct) Commit(stage *models.StageStruct) {
 	backRepo.BackRepoBookDetailsGroup.CommitPhaseOne(stage)
 	backRepo.BackRepoBookType.CommitPhaseOne(stage)
 	backRepo.BackRepoBooks.CommitPhaseOne(stage)
+	backRepo.BackRepoCommonAttributes.CommitPhaseOne(stage)
 	backRepo.BackRepoCredit.CommitPhaseOne(stage)
+	backRepo.BackRepoExtendedAttributes.CommitPhaseOne(stage)
 	backRepo.BackRepoLink.CommitPhaseOne(stage)
 
 	// insertion point for per struct back repo phase two commit
 	backRepo.BackRepoBookDetailsGroup.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoBookType.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoBooks.CommitPhaseTwo(backRepo)
+	backRepo.BackRepoCommonAttributes.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoCredit.CommitPhaseTwo(backRepo)
+	backRepo.BackRepoExtendedAttributes.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoLink.CommitPhaseTwo(backRepo)
 
 	backRepo.IncrementCommitFromBackNb()
@@ -197,14 +223,18 @@ func (backRepo *BackRepoStruct) Checkout(stage *models.StageStruct) {
 	backRepo.BackRepoBookDetailsGroup.CheckoutPhaseOne()
 	backRepo.BackRepoBookType.CheckoutPhaseOne()
 	backRepo.BackRepoBooks.CheckoutPhaseOne()
+	backRepo.BackRepoCommonAttributes.CheckoutPhaseOne()
 	backRepo.BackRepoCredit.CheckoutPhaseOne()
+	backRepo.BackRepoExtendedAttributes.CheckoutPhaseOne()
 	backRepo.BackRepoLink.CheckoutPhaseOne()
 
 	// insertion point for per struct back repo phase two commit
 	backRepo.BackRepoBookDetailsGroup.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoBookType.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoBooks.CheckoutPhaseTwo(backRepo)
+	backRepo.BackRepoCommonAttributes.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoCredit.CheckoutPhaseTwo(backRepo)
+	backRepo.BackRepoExtendedAttributes.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoLink.CheckoutPhaseTwo(backRepo)
 }
 
@@ -216,7 +246,9 @@ func (backRepo *BackRepoStruct) Backup(stage *models.StageStruct, dirPath string
 	backRepo.BackRepoBookDetailsGroup.Backup(dirPath)
 	backRepo.BackRepoBookType.Backup(dirPath)
 	backRepo.BackRepoBooks.Backup(dirPath)
+	backRepo.BackRepoCommonAttributes.Backup(dirPath)
 	backRepo.BackRepoCredit.Backup(dirPath)
+	backRepo.BackRepoExtendedAttributes.Backup(dirPath)
 	backRepo.BackRepoLink.Backup(dirPath)
 }
 
@@ -231,7 +263,9 @@ func (backRepo *BackRepoStruct) BackupXL(stage *models.StageStruct, dirPath stri
 	backRepo.BackRepoBookDetailsGroup.BackupXL(file)
 	backRepo.BackRepoBookType.BackupXL(file)
 	backRepo.BackRepoBooks.BackupXL(file)
+	backRepo.BackRepoCommonAttributes.BackupXL(file)
 	backRepo.BackRepoCredit.BackupXL(file)
+	backRepo.BackRepoExtendedAttributes.BackupXL(file)
 	backRepo.BackRepoLink.BackupXL(file)
 
 	var b bytes.Buffer
@@ -260,7 +294,9 @@ func (backRepo *BackRepoStruct) Restore(stage *models.StageStruct, dirPath strin
 	backRepo.BackRepoBookDetailsGroup.RestorePhaseOne(dirPath)
 	backRepo.BackRepoBookType.RestorePhaseOne(dirPath)
 	backRepo.BackRepoBooks.RestorePhaseOne(dirPath)
+	backRepo.BackRepoCommonAttributes.RestorePhaseOne(dirPath)
 	backRepo.BackRepoCredit.RestorePhaseOne(dirPath)
+	backRepo.BackRepoExtendedAttributes.RestorePhaseOne(dirPath)
 	backRepo.BackRepoLink.RestorePhaseOne(dirPath)
 
 	//
@@ -271,7 +307,9 @@ func (backRepo *BackRepoStruct) Restore(stage *models.StageStruct, dirPath strin
 	backRepo.BackRepoBookDetailsGroup.RestorePhaseTwo()
 	backRepo.BackRepoBookType.RestorePhaseTwo()
 	backRepo.BackRepoBooks.RestorePhaseTwo()
+	backRepo.BackRepoCommonAttributes.RestorePhaseTwo()
 	backRepo.BackRepoCredit.RestorePhaseTwo()
+	backRepo.BackRepoExtendedAttributes.RestorePhaseTwo()
 	backRepo.BackRepoLink.RestorePhaseTwo()
 
 	backRepo.stage.Checkout()
@@ -303,7 +341,9 @@ func (backRepo *BackRepoStruct) RestoreXL(stage *models.StageStruct, dirPath str
 	backRepo.BackRepoBookDetailsGroup.RestoreXLPhaseOne(file)
 	backRepo.BackRepoBookType.RestoreXLPhaseOne(file)
 	backRepo.BackRepoBooks.RestoreXLPhaseOne(file)
+	backRepo.BackRepoCommonAttributes.RestoreXLPhaseOne(file)
 	backRepo.BackRepoCredit.RestoreXLPhaseOne(file)
+	backRepo.BackRepoExtendedAttributes.RestoreXLPhaseOne(file)
 	backRepo.BackRepoLink.RestoreXLPhaseOne(file)
 
 	// commit the restored stage

@@ -63,6 +63,50 @@ func Generate(stage *StageStruct, outputFilePath string) {
 		)
 	}
 
+	for _, ag := range GetGongstrucsSorted[*AttributeGroup](stage) {
+
+		// not the inline complex type
+		if ag.Ref != "" {
+			continue
+		}
+
+		stMap := make(map[string]*SimpleType)
+		for st := range *GetGongstructInstancesSet[SimpleType](stage) {
+			stMap[st.Name] = st
+		}
+		agMap := make(map[string]*AttributeGroup)
+		for ag := range *GetGongstructInstancesSet[AttributeGroup](stage) {
+			agMap[ag.Name] = ag
+		}
+
+		var fields string
+		setOfGoIdentifiers := make(map[string]any)
+		generateAttributes(ag.Attributes, stMap, setOfGoIdentifiers, &fields)
+
+		for _, referencedAg := range ag.AttributeGroups {
+			if referencedAg.Ref != "" {
+				if namedAg, ok := agMap[referencedAg.Ref]; ok {
+					fields += "\n\n\t// generated from attribute group \"" + referencedAg.Ref +
+						"\n\t" + namedAg.GoIdentifier + " *" + namedAg.GoIdentifier + " " + "`" + `xml:"` + referencedAg.Ref + `"` + "`"
+				} else {
+					log.Fatalln("Unkown attribute group", referencedAg.Ref)
+				}
+			}
+		}
+
+		templInsertionLevel0[ModelsFileTmplLevel0AllGongstructsCode] += Replace3(
+			ModelsFileTmplLevel1Code[ModelsFileTmplLevel1OneGongstructCode],
+
+			"{{"+string(rune(ModelsFileTmplLevel2Structname))+"}}", ag.GoIdentifier,
+
+			"{{"+string(rune(ModelsFileTmplLevel2Source))+"}}",
+			`named group "`+ag.Name+`"`,
+
+			"{{"+string(rune(ModelsFileTmplLevel2Fields))+"}}",
+			fields,
+		)
+	}
+
 	// elements with inline complex type
 	for _, element := range GetGongstrucsSorted[*Element](stage) {
 

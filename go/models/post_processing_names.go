@@ -13,27 +13,6 @@ func PostProcessingNames(stage *StageStruct) {
 	map_EmbeddedGroup := make(map[*Group]*Element)
 	setOfGoIdentifiers := make(map[string]any)
 
-	for x := range *GetGongstructInstancesSet[Element](stage) {
-		x.Name = x.NameXSD
-		x.GoIdentifier = xsdNameToGoIdentifier(x.Name)
-
-		if x.ComplexType != nil {
-			map_EmbeddedComplexType[x.ComplexType] = x
-
-			// loop until the name of the element is not in collision with an existing
-			// diagram name
-			computeGoIdentifier(x.Name, &x.WithGoIdentifier, setOfGoIdentifiers)
-		}
-		for _, group := range x.Groups {
-			map_EmbeddedGroup[group] = x
-			computeGoIdentifier(x.Name, &x.WithGoIdentifier, setOfGoIdentifiers)
-		}
-
-		if x.Annotation != nil {
-			x.Annotation.Name = prefix(x.Name)
-		}
-
-	}
 	for x := range *GetGongstructInstancesSet[ComplexType](stage) {
 		x.Name = x.NameXSD
 
@@ -204,6 +183,9 @@ func PostProcessingNames(stage *StageStruct) {
 	}
 	for x := range *GetGongstructInstancesSet[AttributeGroup](stage) {
 		x.Name = x.NameXSD
+
+		computeGoIdentifier(x.Name, &x.WithGoIdentifier, setOfGoIdentifiers)
+
 		if x.Annotation != nil {
 			x.Annotation.Name = prefix(x.Name)
 		}
@@ -216,6 +198,27 @@ func PostProcessingNames(stage *StageStruct) {
 		}
 		if x.Restriction != nil {
 			x.Restriction.Name = prefix(x.Name)
+		}
+	}
+
+	for x := range *GetGongstructInstancesSet[Element](stage) {
+		x.Name = x.NameXSD
+		x.GoIdentifier = xsdNameToGoIdentifier(x.Name)
+
+		if x.ComplexType != nil {
+			map_EmbeddedComplexType[x.ComplexType] = x
+
+			// loop until the name of the element is not in collision with an existing
+			// diagram name
+			computeGoIdentifier(x.Name, &x.WithGoIdentifier, setOfGoIdentifiers)
+		}
+		for _, group := range x.Groups {
+			map_EmbeddedGroup[group] = x
+			computeGoIdentifier(x.Name, &x.WithGoIdentifier, setOfGoIdentifiers)
+		}
+
+		if x.Annotation != nil {
+			x.Annotation.Name = prefix(x.Name)
 		}
 	}
 

@@ -56,12 +56,36 @@ func FillUpNamedFormFromGongstruct[T models.Gongstruct](instance *T, probe *Prob
 		)
 		formGroup.HasSuppressButton = true
 		FillUpForm(instancesTyped, formGroup, probe)
+	case *models.CommonAttributes:
+		formGroup := (&gongtable.FormGroup{
+			Name:  formName,
+			Label: "CommonAttributes Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__CommonAttributesFormCallback(
+			instancesTyped,
+			probe,
+			formGroup,
+		)
+		formGroup.HasSuppressButton = true
+		FillUpForm(instancesTyped, formGroup, probe)
 	case *models.Credit:
 		formGroup := (&gongtable.FormGroup{
 			Name:  formName,
 			Label: "Credit Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__CreditFormCallback(
+			instancesTyped,
+			probe,
+			formGroup,
+		)
+		formGroup.HasSuppressButton = true
+		FillUpForm(instancesTyped, formGroup, probe)
+	case *models.ExtendedAttributes:
+		formGroup := (&gongtable.FormGroup{
+			Name:  formName,
+			Label: "ExtendedAttributes Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__ExtendedAttributesFormCallback(
 			instancesTyped,
 			probe,
 			formGroup,

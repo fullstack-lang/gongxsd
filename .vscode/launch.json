@@ -108,7 +108,7 @@
             "type": "go",
             "request": "launch",
             "mode": "debug",
-            "program": "${workspaceFolder}/test/books",
+            "program": "${workspaceFolder}/test/books/go/roundtrip",
             "args": []
         },
         {

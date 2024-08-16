@@ -17,7 +17,9 @@ func SerializeStage(stage *StageStruct, filename string) {
 		SerializeExcelize[BookDetailsGroup](stage, f)
 		SerializeExcelize[BookType](stage, f)
 		SerializeExcelize[Books](stage, f)
+		SerializeExcelize[CommonAttributes](stage, f)
 		SerializeExcelize[Credit](stage, f)
+		SerializeExcelize[ExtendedAttributes](stage, f)
 		SerializeExcelize[Link](stage, f)
 	}
 

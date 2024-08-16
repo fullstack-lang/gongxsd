@@ -4467,7 +4467,7 @@ func GetFields[Type Gongstruct]() (res []string) {
 	case Attribute:
 		res = []string{"Name", "NameXSD", "Type", "Annotation", "HasNameConflict", "GoIdentifier", "Default", "Use", "Form", "Fixed", "Ref", "TargetNamespace", "SimpleType", "IDXSD"}
 	case AttributeGroup:
-		res = []string{"Name", "NameXSD", "Annotation", "AttributeGroups", "Ref", "Attributes"}
+		res = []string{"Name", "NameXSD", "Annotation", "HasNameConflict", "GoIdentifier", "AttributeGroups", "Ref", "Attributes"}
 	case Choice:
 		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "Sequences", "Alls", "Choices", "Groups", "Elements"}
 	case ComplexContent:
@@ -4755,7 +4755,7 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 	case *Attribute:
 		res = []string{"Name", "NameXSD", "Type", "Annotation", "HasNameConflict", "GoIdentifier", "Default", "Use", "Form", "Fixed", "Ref", "TargetNamespace", "SimpleType", "IDXSD"}
 	case *AttributeGroup:
-		res = []string{"Name", "NameXSD", "Annotation", "AttributeGroups", "Ref", "Attributes"}
+		res = []string{"Name", "NameXSD", "Annotation", "HasNameConflict", "GoIdentifier", "AttributeGroups", "Ref", "Attributes"}
 	case *Choice:
 		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "Sequences", "Alls", "Choices", "Groups", "Elements"}
 	case *ComplexContent:
@@ -4915,6 +4915,10 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 			if inferedInstance.Annotation != nil {
 				res = inferedInstance.Annotation.Name
 			}
+		case "HasNameConflict":
+			res = fmt.Sprintf("%t", inferedInstance.HasNameConflict)
+		case "GoIdentifier":
+			res = inferedInstance.GoIdentifier
 		case "AttributeGroups":
 			for idx, __instance__ := range inferedInstance.AttributeGroups {
 				if idx > 0 {
@@ -5662,6 +5666,10 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 			if inferedInstance.Annotation != nil {
 				res = inferedInstance.Annotation.Name
 			}
+		case "HasNameConflict":
+			res = fmt.Sprintf("%t", inferedInstance.HasNameConflict)
+		case "GoIdentifier":
+			res = inferedInstance.GoIdentifier
 		case "AttributeGroups":
 			for idx, __instance__ := range inferedInstance.AttributeGroups {
 				if idx > 0 {

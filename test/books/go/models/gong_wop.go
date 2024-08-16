@@ -28,9 +28,6 @@ func (from *BookDetailsGroup) CopyBasicFields(to *BookDetailsGroup) {
 type BookType_WOP struct {
 	// insertion point
 	Name string
-	Edition string
-	Isbn string
-	Bestseller bool
 	Title string
 	Author string
 	Year int
@@ -40,9 +37,6 @@ type BookType_WOP struct {
 func (from *BookType) CopyBasicFields(to *BookType) {
 	// insertion point
 	to.Name = from.Name
-	to.Edition = from.Edition
-	to.Isbn = from.Isbn
-	to.Bestseller = from.Bestseller
 	to.Title = from.Title
 	to.Author = from.Author
 	to.Year = from.Year
@@ -57,6 +51,20 @@ type Books_WOP struct {
 func (from *Books) CopyBasicFields(to *Books) {
 	// insertion point
 	to.Name = from.Name
+}
+
+type CommonAttributes_WOP struct {
+	// insertion point
+	Name string
+	Isbn string
+	Bestseller bool
+}
+
+func (from *CommonAttributes) CopyBasicFields(to *CommonAttributes) {
+	// insertion point
+	to.Name = from.Name
+	to.Isbn = from.Isbn
+	to.Bestseller = from.Bestseller
 }
 
 type Credit_WOP struct {
@@ -77,17 +85,29 @@ func (from *Credit) CopyBasicFields(to *Credit) {
 	to.Credit_symbol = from.Credit_symbol
 }
 
+type ExtendedAttributes_WOP struct {
+	// insertion point
+	Name string
+	Edition string
+}
+
+func (from *ExtendedAttributes) CopyBasicFields(to *ExtendedAttributes) {
+	// insertion point
+	to.Name = from.Name
+	to.Edition = from.Edition
+}
+
 type Link_WOP struct {
 	// insertion point
 	Name string
-	EnclosedText string
 	NameXSD string
+	EnclosedText string
 }
 
 func (from *Link) CopyBasicFields(to *Link) {
 	// insertion point
 	to.Name = from.Name
-	to.EnclosedText = from.EnclosedText
 	to.NameXSD = from.NameXSD
+	to.EnclosedText = from.EnclosedText
 }
 

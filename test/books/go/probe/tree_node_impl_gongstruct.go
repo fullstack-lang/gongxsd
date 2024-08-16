@@ -61,8 +61,14 @@ func (nodeImplGongstruct *TreeNodeImplGongstruct) OnAfterUpdate(
 	if nodeImplGongstruct.gongStruct.GetName() == "Books" {
 		fillUpTable[models.Books](nodeImplGongstruct.probe)
 	}
+	if nodeImplGongstruct.gongStruct.GetName() == "CommonAttributes" {
+		fillUpTable[models.CommonAttributes](nodeImplGongstruct.probe)
+	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Credit" {
 		fillUpTable[models.Credit](nodeImplGongstruct.probe)
+	}
+	if nodeImplGongstruct.gongStruct.GetName() == "ExtendedAttributes" {
+		fillUpTable[models.ExtendedAttributes](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Link" {
 		fillUpTable[models.Link](nodeImplGongstruct.probe)

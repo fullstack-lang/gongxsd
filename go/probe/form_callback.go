@@ -708,6 +708,10 @@ func (attributegroupFormCallback *AttributeGroupFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(attributegroup_.NameXSD), formDiv)
 		case "Annotation":
 			FormDivSelectFieldToField(&(attributegroup_.Annotation), attributegroupFormCallback.probe.stageOfInterest, formDiv)
+		case "HasNameConflict":
+			FormDivBasicFieldToField(&(attributegroup_.HasNameConflict), formDiv)
+		case "GoIdentifier":
+			FormDivBasicFieldToField(&(attributegroup_.GoIdentifier), formDiv)
 		case "Ref":
 			FormDivBasicFieldToField(&(attributegroup_.Ref), formDiv)
 		case "AttributeGroup:AttributeGroups":

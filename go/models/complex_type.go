@@ -1,13 +1,15 @@
 package models
 
+import "log"
+
 type ComplexType struct {
 	Name string
 
 	WithGoIdentifier
 
 	// analysis
-	IsAnonymous  bool // it has been defined inline by the enclosing element
-	OuterElement *Element
+	IsAnonymous  bool
+	OuterElement *Element // if anonymous
 
 	Annotated
 	ElementWithNameAttribute
@@ -51,9 +53,12 @@ func (ct *ComplexType) GetFields(stage *StageStruct) (fields string) {
 	for _, referencedAg := range ct.AttributeGroups {
 
 		if namedAg, ok := agMap[referencedAg.Ref]; ok {
-			generateAttributes(namedAg.Attributes, stMap, setOfGoIdentifiers, &fields)
-			namedAg.generateAttributes(agMap, stMap, setOfGoIdentifiers, &fields)
+			fields += "\n\n\t// generated from attribute group \"" + referencedAg.Ref +
+				"\n\t" + namedAg.GoIdentifier + " *" + namedAg.GoIdentifier + " " + "`" + `xml:"` + referencedAg.Ref + `"` + "`"
+		} else {
+			log.Fatalln("Unkown attribute group", referencedAg.Ref)
 		}
+
 	}
 
 	if ct.SimpleContent != nil {

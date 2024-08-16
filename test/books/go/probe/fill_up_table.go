@@ -26,8 +26,12 @@ func fillUpTablePointerToGongstruct[T models.PointerToGongstruct](
 		fillUpTable[models.BookType](probe)
 	case *models.Books:
 		fillUpTable[models.Books](probe)
+	case *models.CommonAttributes:
+		fillUpTable[models.CommonAttributes](probe)
 	case *models.Credit:
 		fillUpTable[models.Credit](probe)
+	case *models.ExtendedAttributes:
+		fillUpTable[models.ExtendedAttributes](probe)
 	case *models.Link:
 		fillUpTable[models.Link](probe)
 	default:

@@ -4,6 +4,7 @@ type AttributeGroup struct {
 	Name string
 	ElementWithNameAttribute
 	Annotated
+	WithGoIdentifier
 
 	AttributeGroups []*AttributeGroup `xml:"attributeGroup"`
 

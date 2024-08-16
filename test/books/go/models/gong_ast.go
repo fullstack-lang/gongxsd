@@ -317,7 +317,9 @@ var __gong__map_Indentifiers_gongstructName = make(map[string]string)
 var __gong__map_BookDetailsGroup = make(map[string]*BookDetailsGroup)
 var __gong__map_BookType = make(map[string]*BookType)
 var __gong__map_Books = make(map[string]*Books)
+var __gong__map_CommonAttributes = make(map[string]*CommonAttributes)
 var __gong__map_Credit = make(map[string]*Credit)
+var __gong__map_ExtendedAttributes = make(map[string]*ExtendedAttributes)
 var __gong__map_Link = make(map[string]*Link)
 
 // Parser needs to be configured for having the [Name1.Name2] or [pkg.Name1] ...
@@ -503,10 +505,18 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 										instanceBooks := (&Books{Name: instanceName}).Stage(stage)
 										instance = any(instanceBooks)
 										__gong__map_Books[identifier] = instanceBooks
+									case "CommonAttributes":
+										instanceCommonAttributes := (&CommonAttributes{Name: instanceName}).Stage(stage)
+										instance = any(instanceCommonAttributes)
+										__gong__map_CommonAttributes[identifier] = instanceCommonAttributes
 									case "Credit":
 										instanceCredit := (&Credit{Name: instanceName}).Stage(stage)
 										instance = any(instanceCredit)
 										__gong__map_Credit[identifier] = instanceCredit
+									case "ExtendedAttributes":
+										instanceExtendedAttributes := (&ExtendedAttributes{Name: instanceName}).Stage(stage)
+										instance = any(instanceExtendedAttributes)
+										__gong__map_ExtendedAttributes[identifier] = instanceExtendedAttributes
 									case "Link":
 										instanceLink := (&Link{Name: instanceName}).Stage(stage)
 										instance = any(instanceLink)
@@ -559,7 +569,15 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 							switch fieldName {
 							// insertion point for date assign code
 							}
+						case "CommonAttributes":
+							switch fieldName {
+							// insertion point for date assign code
+							}
 						case "Credit":
+							switch fieldName {
+							// insertion point for date assign code
+							}
+						case "ExtendedAttributes":
 							switch fieldName {
 							// insertion point for date assign code
 							}
@@ -616,6 +634,10 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 							__gong__map_Books[identifier].Book =
 								append(__gong__map_Books[identifier].Book, target)
 						}
+					case "CommonAttributes":
+						switch fieldName {
+						// insertion point for slice of pointers assign code
+						}
 					case "Credit":
 						switch fieldName {
 						// insertion point for slice of pointers assign code
@@ -625,6 +647,10 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 							target := __gong__map_Link[targetIdentifier]
 							__gong__map_Credit[identifier].Link =
 								append(__gong__map_Credit[identifier].Link, target)
+						}
+					case "ExtendedAttributes":
+						switch fieldName {
+						// insertion point for slice of pointers assign code
 						}
 					case "Link":
 						switch fieldName {
@@ -713,14 +739,6 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					// remove first and last char
 					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
 					__gong__map_BookType[identifier].Name = fielValue
-				case "Edition":
-					// remove first and last char
-					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
-					__gong__map_BookType[identifier].Edition = fielValue
-				case "Isbn":
-					// remove first and last char
-					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
-					__gong__map_BookType[identifier].Isbn = fielValue
 				case "Title":
 					// remove first and last char
 					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
@@ -749,6 +767,18 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
 					__gong__map_Books[identifier].Name = fielValue
 				}
+			case "CommonAttributes":
+				switch fieldName {
+				// insertion point for field dependant code
+				case "Name":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_CommonAttributes[identifier].Name = fielValue
+				case "Isbn":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_CommonAttributes[identifier].Isbn = fielValue
+				}
 			case "Credit":
 				switch fieldName {
 				// insertion point for field dependant code
@@ -776,6 +806,18 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
 					__gong__map_Credit[identifier].Credit_symbol = fielValue
 				}
+			case "ExtendedAttributes":
+				switch fieldName {
+				// insertion point for field dependant code
+				case "Name":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_ExtendedAttributes[identifier].Name = fielValue
+				case "Edition":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_ExtendedAttributes[identifier].Edition = fielValue
+				}
 			case "Link":
 				switch fieldName {
 				// insertion point for field dependant code
@@ -783,14 +825,14 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					// remove first and last char
 					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
 					__gong__map_Link[identifier].Name = fielValue
-				case "EnclosedText":
-					// remove first and last char
-					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
-					__gong__map_Link[identifier].EnclosedText = fielValue
 				case "NameXSD":
 					// remove first and last char
 					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
 					__gong__map_Link[identifier].NameXSD = fielValue
+				case "EnclosedText":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_Link[identifier].EnclosedText = fielValue
 				}
 			}
 		case *ast.Ident:
@@ -813,21 +855,35 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 			case "BookType":
 				switch fieldName {
 				// insertion point for field dependant code
+				case "ExtendedAttributes":
+					targetIdentifier := ident.Name
+					__gong__map_BookType[identifier].ExtendedAttributes = __gong__map_ExtendedAttributes[targetIdentifier]
+				}
+			case "Books":
+				switch fieldName {
+				// insertion point for field dependant code
+				}
+			case "CommonAttributes":
+				switch fieldName {
+				// insertion point for field dependant code
 				case "Bestseller":
 					// convert string to boolean
 					fielValue, err := strconv.ParseBool(ident.Name)
 					if err != nil {
 						log.Fatalln(err)
 					}
-					__gong__map_BookType[identifier].Bestseller = fielValue
-				}
-			case "Books":
-				switch fieldName {
-				// insertion point for field dependant code
+					__gong__map_CommonAttributes[identifier].Bestseller = fielValue
 				}
 			case "Credit":
 				switch fieldName {
 				// insertion point for field dependant code
+				}
+			case "ExtendedAttributes":
+				switch fieldName {
+				// insertion point for field dependant code
+				case "CommonAttributes":
+					targetIdentifier := ident.Name
+					__gong__map_ExtendedAttributes[identifier].CommonAttributes = __gong__map_CommonAttributes[targetIdentifier]
 				}
 			case "Link":
 				switch fieldName {
@@ -873,7 +929,15 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					switch fieldName {
 					// insertion point for enum assign code
 					}
+				case "CommonAttributes":
+					switch fieldName {
+					// insertion point for enum assign code
+					}
 				case "Credit":
+					switch fieldName {
+					// insertion point for enum assign code
+					}
+				case "ExtendedAttributes":
 					switch fieldName {
 					// insertion point for enum assign code
 					}

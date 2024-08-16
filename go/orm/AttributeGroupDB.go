@@ -75,6 +75,13 @@ type AttributeGroupDB struct {
 	// Declation for basic field attributegroupDB.NameXSD
 	NameXSD_Data sql.NullString
 
+	// Declation for basic field attributegroupDB.HasNameConflict
+	// provide the sql storage for the boolan
+	HasNameConflict_Data sql.NullBool
+
+	// Declation for basic field attributegroupDB.GoIdentifier
+	GoIdentifier_Data sql.NullString
+
 	// Declation for basic field attributegroupDB.Ref
 	Ref_Data sql.NullString
 	
@@ -104,7 +111,11 @@ type AttributeGroupWOP struct {
 
 	NameXSD string `xlsx:"2"`
 
-	Ref string `xlsx:"3"`
+	HasNameConflict bool `xlsx:"3"`
+
+	GoIdentifier string `xlsx:"4"`
+
+	Ref string `xlsx:"5"`
 	// insertion for WOP pointer fields
 }
 
@@ -113,6 +124,8 @@ var AttributeGroup_Fields = []string{
 	"ID",
 	"Name",
 	"NameXSD",
+	"HasNameConflict",
+	"GoIdentifier",
 	"Ref",
 }
 
@@ -457,6 +470,12 @@ func (attributegroupDB *AttributeGroupDB) CopyBasicFieldsFromAttributeGroup(attr
 	attributegroupDB.NameXSD_Data.String = attributegroup.NameXSD
 	attributegroupDB.NameXSD_Data.Valid = true
 
+	attributegroupDB.HasNameConflict_Data.Bool = attributegroup.HasNameConflict
+	attributegroupDB.HasNameConflict_Data.Valid = true
+
+	attributegroupDB.GoIdentifier_Data.String = attributegroup.GoIdentifier
+	attributegroupDB.GoIdentifier_Data.Valid = true
+
 	attributegroupDB.Ref_Data.String = attributegroup.Ref
 	attributegroupDB.Ref_Data.Valid = true
 }
@@ -470,6 +489,12 @@ func (attributegroupDB *AttributeGroupDB) CopyBasicFieldsFromAttributeGroup_WOP(
 
 	attributegroupDB.NameXSD_Data.String = attributegroup.NameXSD
 	attributegroupDB.NameXSD_Data.Valid = true
+
+	attributegroupDB.HasNameConflict_Data.Bool = attributegroup.HasNameConflict
+	attributegroupDB.HasNameConflict_Data.Valid = true
+
+	attributegroupDB.GoIdentifier_Data.String = attributegroup.GoIdentifier
+	attributegroupDB.GoIdentifier_Data.Valid = true
 
 	attributegroupDB.Ref_Data.String = attributegroup.Ref
 	attributegroupDB.Ref_Data.Valid = true
@@ -485,6 +510,12 @@ func (attributegroupDB *AttributeGroupDB) CopyBasicFieldsFromAttributeGroupWOP(a
 	attributegroupDB.NameXSD_Data.String = attributegroup.NameXSD
 	attributegroupDB.NameXSD_Data.Valid = true
 
+	attributegroupDB.HasNameConflict_Data.Bool = attributegroup.HasNameConflict
+	attributegroupDB.HasNameConflict_Data.Valid = true
+
+	attributegroupDB.GoIdentifier_Data.String = attributegroup.GoIdentifier
+	attributegroupDB.GoIdentifier_Data.Valid = true
+
 	attributegroupDB.Ref_Data.String = attributegroup.Ref
 	attributegroupDB.Ref_Data.Valid = true
 }
@@ -494,6 +525,8 @@ func (attributegroupDB *AttributeGroupDB) CopyBasicFieldsToAttributeGroup(attrib
 	// insertion point for checkout of basic fields (back repo to stage)
 	attributegroup.Name = attributegroupDB.Name_Data.String
 	attributegroup.NameXSD = attributegroupDB.NameXSD_Data.String
+	attributegroup.HasNameConflict = attributegroupDB.HasNameConflict_Data.Bool
+	attributegroup.GoIdentifier = attributegroupDB.GoIdentifier_Data.String
 	attributegroup.Ref = attributegroupDB.Ref_Data.String
 }
 
@@ -502,6 +535,8 @@ func (attributegroupDB *AttributeGroupDB) CopyBasicFieldsToAttributeGroup_WOP(at
 	// insertion point for checkout of basic fields (back repo to stage)
 	attributegroup.Name = attributegroupDB.Name_Data.String
 	attributegroup.NameXSD = attributegroupDB.NameXSD_Data.String
+	attributegroup.HasNameConflict = attributegroupDB.HasNameConflict_Data.Bool
+	attributegroup.GoIdentifier = attributegroupDB.GoIdentifier_Data.String
 	attributegroup.Ref = attributegroupDB.Ref_Data.String
 }
 
@@ -511,6 +546,8 @@ func (attributegroupDB *AttributeGroupDB) CopyBasicFieldsToAttributeGroupWOP(att
 	// insertion point for checkout of basic fields (back repo to stage)
 	attributegroup.Name = attributegroupDB.Name_Data.String
 	attributegroup.NameXSD = attributegroupDB.NameXSD_Data.String
+	attributegroup.HasNameConflict = attributegroupDB.HasNameConflict_Data.Bool
+	attributegroup.GoIdentifier = attributegroupDB.GoIdentifier_Data.String
 	attributegroup.Ref = attributegroupDB.Ref_Data.String
 }
 

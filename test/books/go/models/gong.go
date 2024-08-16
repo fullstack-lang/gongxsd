@@ -80,6 +80,15 @@ type StageStruct struct {
 	OnAfterBooksDeleteCallback OnAfterDeleteInterface[Books]
 	OnAfterBooksReadCallback   OnAfterReadInterface[Books]
 
+	CommonAttributess           map[*CommonAttributes]any
+	CommonAttributess_mapString map[string]*CommonAttributes
+
+	// insertion point for slice of pointers maps
+	OnAfterCommonAttributesCreateCallback OnAfterCreateInterface[CommonAttributes]
+	OnAfterCommonAttributesUpdateCallback OnAfterUpdateInterface[CommonAttributes]
+	OnAfterCommonAttributesDeleteCallback OnAfterDeleteInterface[CommonAttributes]
+	OnAfterCommonAttributesReadCallback   OnAfterReadInterface[CommonAttributes]
+
 	Credits           map[*Credit]any
 	Credits_mapString map[string]*Credit
 
@@ -90,6 +99,15 @@ type StageStruct struct {
 	OnAfterCreditUpdateCallback OnAfterUpdateInterface[Credit]
 	OnAfterCreditDeleteCallback OnAfterDeleteInterface[Credit]
 	OnAfterCreditReadCallback   OnAfterReadInterface[Credit]
+
+	ExtendedAttributess           map[*ExtendedAttributes]any
+	ExtendedAttributess_mapString map[string]*ExtendedAttributes
+
+	// insertion point for slice of pointers maps
+	OnAfterExtendedAttributesCreateCallback OnAfterCreateInterface[ExtendedAttributes]
+	OnAfterExtendedAttributesUpdateCallback OnAfterUpdateInterface[ExtendedAttributes]
+	OnAfterExtendedAttributesDeleteCallback OnAfterDeleteInterface[ExtendedAttributes]
+	OnAfterExtendedAttributesReadCallback   OnAfterReadInterface[ExtendedAttributes]
 
 	Links           map[*Link]any
 	Links_mapString map[string]*Link
@@ -174,8 +192,12 @@ type BackRepoInterface interface {
 	CheckoutBookType(booktype *BookType)
 	CommitBooks(books *Books)
 	CheckoutBooks(books *Books)
+	CommitCommonAttributes(commonattributes *CommonAttributes)
+	CheckoutCommonAttributes(commonattributes *CommonAttributes)
 	CommitCredit(credit *Credit)
 	CheckoutCredit(credit *Credit)
+	CommitExtendedAttributes(extendedattributes *ExtendedAttributes)
+	CheckoutExtendedAttributes(extendedattributes *ExtendedAttributes)
 	CommitLink(link *Link)
 	CheckoutLink(link *Link)
 	GetLastCommitFromBackNb() uint
@@ -194,8 +216,14 @@ func NewStage(path string) (stage *StageStruct) {
 		Bookss:           make(map[*Books]any),
 		Bookss_mapString: make(map[string]*Books),
 
+		CommonAttributess:           make(map[*CommonAttributes]any),
+		CommonAttributess_mapString: make(map[string]*CommonAttributes),
+
 		Credits:           make(map[*Credit]any),
 		Credits_mapString: make(map[string]*Credit),
+
+		ExtendedAttributess:           make(map[*ExtendedAttributes]any),
+		ExtendedAttributess_mapString: make(map[string]*ExtendedAttributes),
 
 		Links:           make(map[*Link]any),
 		Links_mapString: make(map[string]*Link),
@@ -236,7 +264,9 @@ func (stage *StageStruct) Commit() {
 	stage.Map_GongStructName_InstancesNb["BookDetailsGroup"] = len(stage.BookDetailsGroups)
 	stage.Map_GongStructName_InstancesNb["BookType"] = len(stage.BookTypes)
 	stage.Map_GongStructName_InstancesNb["Books"] = len(stage.Bookss)
+	stage.Map_GongStructName_InstancesNb["CommonAttributes"] = len(stage.CommonAttributess)
 	stage.Map_GongStructName_InstancesNb["Credit"] = len(stage.Credits)
+	stage.Map_GongStructName_InstancesNb["ExtendedAttributes"] = len(stage.ExtendedAttributess)
 	stage.Map_GongStructName_InstancesNb["Link"] = len(stage.Links)
 
 }
@@ -251,7 +281,9 @@ func (stage *StageStruct) Checkout() {
 	stage.Map_GongStructName_InstancesNb["BookDetailsGroup"] = len(stage.BookDetailsGroups)
 	stage.Map_GongStructName_InstancesNb["BookType"] = len(stage.BookTypes)
 	stage.Map_GongStructName_InstancesNb["Books"] = len(stage.Bookss)
+	stage.Map_GongStructName_InstancesNb["CommonAttributes"] = len(stage.CommonAttributess)
 	stage.Map_GongStructName_InstancesNb["Credit"] = len(stage.Credits)
+	stage.Map_GongStructName_InstancesNb["ExtendedAttributes"] = len(stage.ExtendedAttributess)
 	stage.Map_GongStructName_InstancesNb["Link"] = len(stage.Links)
 
 }
@@ -435,6 +467,56 @@ func (books *Books) GetName() (res string) {
 	return books.Name
 }
 
+// Stage puts commonattributes to the model stage
+func (commonattributes *CommonAttributes) Stage(stage *StageStruct) *CommonAttributes {
+	stage.CommonAttributess[commonattributes] = __member
+	stage.CommonAttributess_mapString[commonattributes.Name] = commonattributes
+
+	return commonattributes
+}
+
+// Unstage removes commonattributes off the model stage
+func (commonattributes *CommonAttributes) Unstage(stage *StageStruct) *CommonAttributes {
+	delete(stage.CommonAttributess, commonattributes)
+	delete(stage.CommonAttributess_mapString, commonattributes.Name)
+	return commonattributes
+}
+
+// UnstageVoid removes commonattributes off the model stage
+func (commonattributes *CommonAttributes) UnstageVoid(stage *StageStruct) {
+	delete(stage.CommonAttributess, commonattributes)
+	delete(stage.CommonAttributess_mapString, commonattributes.Name)
+}
+
+// commit commonattributes to the back repo (if it is already staged)
+func (commonattributes *CommonAttributes) Commit(stage *StageStruct) *CommonAttributes {
+	if _, ok := stage.CommonAttributess[commonattributes]; ok {
+		if stage.BackRepo != nil {
+			stage.BackRepo.CommitCommonAttributes(commonattributes)
+		}
+	}
+	return commonattributes
+}
+
+func (commonattributes *CommonAttributes) CommitVoid(stage *StageStruct) {
+	commonattributes.Commit(stage)
+}
+
+// Checkout commonattributes to the back repo (if it is already staged)
+func (commonattributes *CommonAttributes) Checkout(stage *StageStruct) *CommonAttributes {
+	if _, ok := stage.CommonAttributess[commonattributes]; ok {
+		if stage.BackRepo != nil {
+			stage.BackRepo.CheckoutCommonAttributes(commonattributes)
+		}
+	}
+	return commonattributes
+}
+
+// for satisfaction of GongStruct interface
+func (commonattributes *CommonAttributes) GetName() (res string) {
+	return commonattributes.Name
+}
+
 // Stage puts credit to the model stage
 func (credit *Credit) Stage(stage *StageStruct) *Credit {
 	stage.Credits[credit] = __member
@@ -483,6 +565,56 @@ func (credit *Credit) Checkout(stage *StageStruct) *Credit {
 // for satisfaction of GongStruct interface
 func (credit *Credit) GetName() (res string) {
 	return credit.Name
+}
+
+// Stage puts extendedattributes to the model stage
+func (extendedattributes *ExtendedAttributes) Stage(stage *StageStruct) *ExtendedAttributes {
+	stage.ExtendedAttributess[extendedattributes] = __member
+	stage.ExtendedAttributess_mapString[extendedattributes.Name] = extendedattributes
+
+	return extendedattributes
+}
+
+// Unstage removes extendedattributes off the model stage
+func (extendedattributes *ExtendedAttributes) Unstage(stage *StageStruct) *ExtendedAttributes {
+	delete(stage.ExtendedAttributess, extendedattributes)
+	delete(stage.ExtendedAttributess_mapString, extendedattributes.Name)
+	return extendedattributes
+}
+
+// UnstageVoid removes extendedattributes off the model stage
+func (extendedattributes *ExtendedAttributes) UnstageVoid(stage *StageStruct) {
+	delete(stage.ExtendedAttributess, extendedattributes)
+	delete(stage.ExtendedAttributess_mapString, extendedattributes.Name)
+}
+
+// commit extendedattributes to the back repo (if it is already staged)
+func (extendedattributes *ExtendedAttributes) Commit(stage *StageStruct) *ExtendedAttributes {
+	if _, ok := stage.ExtendedAttributess[extendedattributes]; ok {
+		if stage.BackRepo != nil {
+			stage.BackRepo.CommitExtendedAttributes(extendedattributes)
+		}
+	}
+	return extendedattributes
+}
+
+func (extendedattributes *ExtendedAttributes) CommitVoid(stage *StageStruct) {
+	extendedattributes.Commit(stage)
+}
+
+// Checkout extendedattributes to the back repo (if it is already staged)
+func (extendedattributes *ExtendedAttributes) Checkout(stage *StageStruct) *ExtendedAttributes {
+	if _, ok := stage.ExtendedAttributess[extendedattributes]; ok {
+		if stage.BackRepo != nil {
+			stage.BackRepo.CheckoutExtendedAttributes(extendedattributes)
+		}
+	}
+	return extendedattributes
+}
+
+// for satisfaction of GongStruct interface
+func (extendedattributes *ExtendedAttributes) GetName() (res string) {
+	return extendedattributes.Name
 }
 
 // Stage puts link to the model stage
@@ -540,7 +672,9 @@ type AllModelsStructCreateInterface interface { // insertion point for Callbacks
 	CreateORMBookDetailsGroup(BookDetailsGroup *BookDetailsGroup)
 	CreateORMBookType(BookType *BookType)
 	CreateORMBooks(Books *Books)
+	CreateORMCommonAttributes(CommonAttributes *CommonAttributes)
 	CreateORMCredit(Credit *Credit)
+	CreateORMExtendedAttributes(ExtendedAttributes *ExtendedAttributes)
 	CreateORMLink(Link *Link)
 }
 
@@ -548,7 +682,9 @@ type AllModelsStructDeleteInterface interface { // insertion point for Callbacks
 	DeleteORMBookDetailsGroup(BookDetailsGroup *BookDetailsGroup)
 	DeleteORMBookType(BookType *BookType)
 	DeleteORMBooks(Books *Books)
+	DeleteORMCommonAttributes(CommonAttributes *CommonAttributes)
 	DeleteORMCredit(Credit *Credit)
+	DeleteORMExtendedAttributes(ExtendedAttributes *ExtendedAttributes)
 	DeleteORMLink(Link *Link)
 }
 
@@ -562,8 +698,14 @@ func (stage *StageStruct) Reset() { // insertion point for array reset
 	stage.Bookss = make(map[*Books]any)
 	stage.Bookss_mapString = make(map[string]*Books)
 
+	stage.CommonAttributess = make(map[*CommonAttributes]any)
+	stage.CommonAttributess_mapString = make(map[string]*CommonAttributes)
+
 	stage.Credits = make(map[*Credit]any)
 	stage.Credits_mapString = make(map[string]*Credit)
+
+	stage.ExtendedAttributess = make(map[*ExtendedAttributes]any)
+	stage.ExtendedAttributess_mapString = make(map[string]*ExtendedAttributes)
 
 	stage.Links = make(map[*Link]any)
 	stage.Links_mapString = make(map[string]*Link)
@@ -580,8 +722,14 @@ func (stage *StageStruct) Nil() { // insertion point for array nil
 	stage.Bookss = nil
 	stage.Bookss_mapString = nil
 
+	stage.CommonAttributess = nil
+	stage.CommonAttributess_mapString = nil
+
 	stage.Credits = nil
 	stage.Credits_mapString = nil
+
+	stage.ExtendedAttributess = nil
+	stage.ExtendedAttributess_mapString = nil
 
 	stage.Links = nil
 	stage.Links_mapString = nil
@@ -601,8 +749,16 @@ func (stage *StageStruct) Unstage() { // insertion point for array nil
 		books.Unstage(stage)
 	}
 
+	for commonattributes := range stage.CommonAttributess {
+		commonattributes.Unstage(stage)
+	}
+
 	for credit := range stage.Credits {
 		credit.Unstage(stage)
+	}
+
+	for extendedattributes := range stage.ExtendedAttributess {
+		extendedattributes.Unstage(stage)
 	}
 
 	for link := range stage.Links {
@@ -675,8 +831,12 @@ func GongGetSet[Type GongstructSet](stage *StageStruct) *Type {
 		return any(&stage.BookTypes).(*Type)
 	case map[*Books]any:
 		return any(&stage.Bookss).(*Type)
+	case map[*CommonAttributes]any:
+		return any(&stage.CommonAttributess).(*Type)
 	case map[*Credit]any:
 		return any(&stage.Credits).(*Type)
+	case map[*ExtendedAttributes]any:
+		return any(&stage.ExtendedAttributess).(*Type)
 	case map[*Link]any:
 		return any(&stage.Links).(*Type)
 	default:
@@ -697,8 +857,12 @@ func GongGetMap[Type GongstructMapString](stage *StageStruct) *Type {
 		return any(&stage.BookTypes_mapString).(*Type)
 	case map[string]*Books:
 		return any(&stage.Bookss_mapString).(*Type)
+	case map[string]*CommonAttributes:
+		return any(&stage.CommonAttributess_mapString).(*Type)
 	case map[string]*Credit:
 		return any(&stage.Credits_mapString).(*Type)
+	case map[string]*ExtendedAttributes:
+		return any(&stage.ExtendedAttributess_mapString).(*Type)
 	case map[string]*Link:
 		return any(&stage.Links_mapString).(*Type)
 	default:
@@ -719,8 +883,12 @@ func GetGongstructInstancesSet[Type Gongstruct](stage *StageStruct) *map[*Type]a
 		return any(&stage.BookTypes).(*map[*Type]any)
 	case Books:
 		return any(&stage.Bookss).(*map[*Type]any)
+	case CommonAttributes:
+		return any(&stage.CommonAttributess).(*map[*Type]any)
 	case Credit:
 		return any(&stage.Credits).(*map[*Type]any)
+	case ExtendedAttributes:
+		return any(&stage.ExtendedAttributess).(*map[*Type]any)
 	case Link:
 		return any(&stage.Links).(*map[*Type]any)
 	default:
@@ -741,8 +909,12 @@ func GetGongstructInstancesSetFromPointerType[Type PointerToGongstruct](stage *S
 		return any(&stage.BookTypes).(*map[Type]any)
 	case *Books:
 		return any(&stage.Bookss).(*map[Type]any)
+	case *CommonAttributes:
+		return any(&stage.CommonAttributess).(*map[Type]any)
 	case *Credit:
 		return any(&stage.Credits).(*map[Type]any)
+	case *ExtendedAttributes:
+		return any(&stage.ExtendedAttributess).(*map[Type]any)
 	case *Link:
 		return any(&stage.Links).(*map[Type]any)
 	default:
@@ -763,8 +935,12 @@ func GetGongstructInstancesMap[Type Gongstruct](stage *StageStruct) *map[string]
 		return any(&stage.BookTypes_mapString).(*map[string]*Type)
 	case Books:
 		return any(&stage.Bookss_mapString).(*map[string]*Type)
+	case CommonAttributes:
+		return any(&stage.CommonAttributess_mapString).(*map[string]*Type)
 	case Credit:
 		return any(&stage.Credits_mapString).(*map[string]*Type)
+	case ExtendedAttributes:
+		return any(&stage.ExtendedAttributess_mapString).(*map[string]*Type)
 	case Link:
 		return any(&stage.Links_mapString).(*map[string]*Type)
 	default:
@@ -788,6 +964,8 @@ func GetAssociationName[Type Gongstruct]() *Type {
 	case BookType:
 		return any(&BookType{
 			// Initialisation of associations
+			// field is initialized with an instance of ExtendedAttributes with the name of the field
+			ExtendedAttributes: &ExtendedAttributes{Name: "ExtendedAttributes"},
 			// field is initialized with an instance of Credit with the name of the field
 			Credit: []*Credit{{Name: "Credit"}},
 		}).(*Type)
@@ -797,11 +975,21 @@ func GetAssociationName[Type Gongstruct]() *Type {
 			// field is initialized with an instance of BookType with the name of the field
 			Book: []*BookType{{Name: "Book"}},
 		}).(*Type)
+	case CommonAttributes:
+		return any(&CommonAttributes{
+			// Initialisation of associations
+		}).(*Type)
 	case Credit:
 		return any(&Credit{
 			// Initialisation of associations
 			// field is initialized with an instance of Link with the name of the field
 			Link: []*Link{{Name: "Link"}},
+		}).(*Type)
+	case ExtendedAttributes:
+		return any(&ExtendedAttributes{
+			// Initialisation of associations
+			// field is initialized with an instance of CommonAttributes with the name of the field
+			CommonAttributes: &CommonAttributes{Name: "CommonAttributes"},
 		}).(*Type)
 	case Link:
 		return any(&Link{
@@ -834,9 +1022,31 @@ func GetPointerReverseMap[Start, End Gongstruct](fieldname string, stage *StageS
 	case BookType:
 		switch fieldname {
 		// insertion point for per direct association field
+		case "ExtendedAttributes":
+			res := make(map[*ExtendedAttributes][]*BookType)
+			for booktype := range stage.BookTypes {
+				if booktype.ExtendedAttributes != nil {
+					extendedattributes_ := booktype.ExtendedAttributes
+					var booktypes []*BookType
+					_, ok := res[extendedattributes_]
+					if ok {
+						booktypes = res[extendedattributes_]
+					} else {
+						booktypes = make([]*BookType, 0)
+					}
+					booktypes = append(booktypes, booktype)
+					res[extendedattributes_] = booktypes
+				}
+			}
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of Books
 	case Books:
+		switch fieldname {
+		// insertion point for per direct association field
+		}
+	// reverse maps of direct associations of CommonAttributes
+	case CommonAttributes:
 		switch fieldname {
 		// insertion point for per direct association field
 		}
@@ -844,6 +1054,28 @@ func GetPointerReverseMap[Start, End Gongstruct](fieldname string, stage *StageS
 	case Credit:
 		switch fieldname {
 		// insertion point for per direct association field
+		}
+	// reverse maps of direct associations of ExtendedAttributes
+	case ExtendedAttributes:
+		switch fieldname {
+		// insertion point for per direct association field
+		case "CommonAttributes":
+			res := make(map[*CommonAttributes][]*ExtendedAttributes)
+			for extendedattributes := range stage.ExtendedAttributess {
+				if extendedattributes.CommonAttributes != nil {
+					commonattributes_ := extendedattributes.CommonAttributes
+					var extendedattributess []*ExtendedAttributes
+					_, ok := res[commonattributes_]
+					if ok {
+						extendedattributess = res[commonattributes_]
+					} else {
+						extendedattributess = make([]*ExtendedAttributes, 0)
+					}
+					extendedattributess = append(extendedattributess, extendedattributes)
+					res[commonattributes_] = extendedattributess
+				}
+			}
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of Link
 	case Link:
@@ -897,6 +1129,11 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 			}
 			return any(res).(map[*End]*Start)
 		}
+	// reverse maps of direct associations of CommonAttributes
+	case CommonAttributes:
+		switch fieldname {
+		// insertion point for per direct association field
+		}
 	// reverse maps of direct associations of Credit
 	case Credit:
 		switch fieldname {
@@ -909,6 +1146,11 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 				}
 			}
 			return any(res).(map[*End]*Start)
+		}
+	// reverse maps of direct associations of ExtendedAttributes
+	case ExtendedAttributes:
+		switch fieldname {
+		// insertion point for per direct association field
 		}
 	// reverse maps of direct associations of Link
 	case Link:
@@ -933,8 +1175,12 @@ func GetGongstructName[Type Gongstruct]() (res string) {
 		res = "BookType"
 	case Books:
 		res = "Books"
+	case CommonAttributes:
+		res = "CommonAttributes"
 	case Credit:
 		res = "Credit"
+	case ExtendedAttributes:
+		res = "ExtendedAttributes"
 	case Link:
 		res = "Link"
 	}
@@ -955,8 +1201,12 @@ func GetPointerToGongstructName[Type PointerToGongstruct]() (res string) {
 		res = "BookType"
 	case *Books:
 		res = "Books"
+	case *CommonAttributes:
+		res = "CommonAttributes"
 	case *Credit:
 		res = "Credit"
+	case *ExtendedAttributes:
+		res = "ExtendedAttributes"
 	case *Link:
 		res = "Link"
 	}
@@ -973,13 +1223,17 @@ func GetFields[Type Gongstruct]() (res []string) {
 	case BookDetailsGroup:
 		res = []string{"Name", "Title", "Author", "Year", "Format"}
 	case BookType:
-		res = []string{"Name", "Edition", "Isbn", "Bestseller", "Credit", "Title", "Author", "Year", "Format"}
+		res = []string{"Name", "ExtendedAttributes", "Credit", "Title", "Author", "Year", "Format"}
 	case Books:
 		res = []string{"Name", "Book"}
+	case CommonAttributes:
+		res = []string{"Name", "Isbn", "Bestseller"}
 	case Credit:
 		res = []string{"Name", "Page", "Credit_type", "Link", "Credit_words", "Credit_symbol"}
+	case ExtendedAttributes:
+		res = []string{"Name", "Edition", "CommonAttributes"}
 	case Link:
-		res = []string{"Name", "EnclosedText", "NameXSD"}
+		res = []string{"Name", "NameXSD", "EnclosedText"}
 	}
 	return
 }
@@ -1010,12 +1264,18 @@ func GetReverseFields[Type Gongstruct]() (res []ReverseField) {
 	case Books:
 		var rf ReverseField
 		_ = rf
+	case CommonAttributes:
+		var rf ReverseField
+		_ = rf
 	case Credit:
 		var rf ReverseField
 		_ = rf
 		rf.GongstructName = "BookType"
 		rf.Fieldname = "Credit"
 		res = append(res, rf)
+	case ExtendedAttributes:
+		var rf ReverseField
+		_ = rf
 	case Link:
 		var rf ReverseField
 		_ = rf
@@ -1036,13 +1296,17 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 	case *BookDetailsGroup:
 		res = []string{"Name", "Title", "Author", "Year", "Format"}
 	case *BookType:
-		res = []string{"Name", "Edition", "Isbn", "Bestseller", "Credit", "Title", "Author", "Year", "Format"}
+		res = []string{"Name", "ExtendedAttributes", "Credit", "Title", "Author", "Year", "Format"}
 	case *Books:
 		res = []string{"Name", "Book"}
+	case *CommonAttributes:
+		res = []string{"Name", "Isbn", "Bestseller"}
 	case *Credit:
 		res = []string{"Name", "Page", "Credit_type", "Link", "Credit_words", "Credit_symbol"}
+	case *ExtendedAttributes:
+		res = []string{"Name", "Edition", "CommonAttributes"}
 	case *Link:
-		res = []string{"Name", "EnclosedText", "NameXSD"}
+		res = []string{"Name", "NameXSD", "EnclosedText"}
 	}
 	return
 }
@@ -1070,12 +1334,10 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		// string value of fields
 		case "Name":
 			res = inferedInstance.Name
-		case "Edition":
-			res = inferedInstance.Edition
-		case "Isbn":
-			res = inferedInstance.Isbn
-		case "Bestseller":
-			res = fmt.Sprintf("%t", inferedInstance.Bestseller)
+		case "ExtendedAttributes":
+			if inferedInstance.ExtendedAttributes != nil {
+				res = inferedInstance.ExtendedAttributes.Name
+			}
 		case "Credit":
 			for idx, __instance__ := range inferedInstance.Credit {
 				if idx > 0 {
@@ -1105,6 +1367,16 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 				res += __instance__.Name
 			}
 		}
+	case *CommonAttributes:
+		switch fieldName {
+		// string value of fields
+		case "Name":
+			res = inferedInstance.Name
+		case "Isbn":
+			res = inferedInstance.Isbn
+		case "Bestseller":
+			res = fmt.Sprintf("%t", inferedInstance.Bestseller)
+		}
 	case *Credit:
 		switch fieldName {
 		// string value of fields
@@ -1126,15 +1398,27 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		case "Credit_symbol":
 			res = inferedInstance.Credit_symbol
 		}
+	case *ExtendedAttributes:
+		switch fieldName {
+		// string value of fields
+		case "Name":
+			res = inferedInstance.Name
+		case "Edition":
+			res = inferedInstance.Edition
+		case "CommonAttributes":
+			if inferedInstance.CommonAttributes != nil {
+				res = inferedInstance.CommonAttributes.Name
+			}
+		}
 	case *Link:
 		switch fieldName {
 		// string value of fields
 		case "Name":
 			res = inferedInstance.Name
-		case "EnclosedText":
-			res = inferedInstance.EnclosedText
 		case "NameXSD":
 			res = inferedInstance.NameXSD
+		case "EnclosedText":
+			res = inferedInstance.EnclosedText
 		}
 	default:
 		_ = inferedInstance
@@ -1165,12 +1449,10 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		// string value of fields
 		case "Name":
 			res = inferedInstance.Name
-		case "Edition":
-			res = inferedInstance.Edition
-		case "Isbn":
-			res = inferedInstance.Isbn
-		case "Bestseller":
-			res = fmt.Sprintf("%t", inferedInstance.Bestseller)
+		case "ExtendedAttributes":
+			if inferedInstance.ExtendedAttributes != nil {
+				res = inferedInstance.ExtendedAttributes.Name
+			}
 		case "Credit":
 			for idx, __instance__ := range inferedInstance.Credit {
 				if idx > 0 {
@@ -1200,6 +1482,16 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 				res += __instance__.Name
 			}
 		}
+	case CommonAttributes:
+		switch fieldName {
+		// string value of fields
+		case "Name":
+			res = inferedInstance.Name
+		case "Isbn":
+			res = inferedInstance.Isbn
+		case "Bestseller":
+			res = fmt.Sprintf("%t", inferedInstance.Bestseller)
+		}
 	case Credit:
 		switch fieldName {
 		// string value of fields
@@ -1221,15 +1513,27 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		case "Credit_symbol":
 			res = inferedInstance.Credit_symbol
 		}
+	case ExtendedAttributes:
+		switch fieldName {
+		// string value of fields
+		case "Name":
+			res = inferedInstance.Name
+		case "Edition":
+			res = inferedInstance.Edition
+		case "CommonAttributes":
+			if inferedInstance.CommonAttributes != nil {
+				res = inferedInstance.CommonAttributes.Name
+			}
+		}
 	case Link:
 		switch fieldName {
 		// string value of fields
 		case "Name":
 			res = inferedInstance.Name
-		case "EnclosedText":
-			res = inferedInstance.EnclosedText
 		case "NameXSD":
 			res = inferedInstance.NameXSD
+		case "EnclosedText":
+			res = inferedInstance.EnclosedText
 		}
 	default:
 		_ = inferedInstance
