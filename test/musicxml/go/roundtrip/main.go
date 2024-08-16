@@ -66,7 +66,7 @@ func main() {
 	}
 
 	// Write the XML to a new file
-	err = os.WriteFile("../../new_score.xml", []byte(xml.Header+string(output)), 0644)
+	err = os.WriteFile("../../new_MozaChloSample.musicxml", []byte(xml.Header+string(output)), 0644)
 	if err != nil {
 		fmt.Println("Error writing to file:", err)
 		return

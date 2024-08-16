@@ -60,6 +60,17 @@ type StageStruct struct {
 	OnAfterBookTypeDeleteCallback OnAfterDeleteInterface[BookType]
 	OnAfterBookTypeReadCallback   OnAfterReadInterface[BookType]
 
+	Bookss           map[*Books]any
+	Bookss_mapString map[string]*Books
+
+	// insertion point for slice of pointers maps
+	Books_Book_reverseMap map[*BookType]*Books
+
+	OnAfterBooksCreateCallback OnAfterCreateInterface[Books]
+	OnAfterBooksUpdateCallback OnAfterUpdateInterface[Books]
+	OnAfterBooksDeleteCallback OnAfterDeleteInterface[Books]
+	OnAfterBooksReadCallback   OnAfterReadInterface[Books]
+
 	Credits           map[*Credit]any
 	Credits_mapString map[string]*Credit
 
@@ -150,6 +161,8 @@ type BackRepoInterface interface {
 	// insertion point for Commit and Checkout signatures
 	CommitBookType(booktype *BookType)
 	CheckoutBookType(booktype *BookType)
+	CommitBooks(books *Books)
+	CheckoutBooks(books *Books)
 	CommitCredit(credit *Credit)
 	CheckoutCredit(credit *Credit)
 	CommitLink(link *Link)
@@ -163,6 +176,9 @@ func NewStage(path string) (stage *StageStruct) {
 	stage = &StageStruct{ // insertion point for array initiatialisation
 		BookTypes:           make(map[*BookType]any),
 		BookTypes_mapString: make(map[string]*BookType),
+
+		Bookss:           make(map[*Books]any),
+		Bookss_mapString: make(map[string]*Books),
 
 		Credits:           make(map[*Credit]any),
 		Credits_mapString: make(map[string]*Credit),
@@ -204,6 +220,7 @@ func (stage *StageStruct) Commit() {
 
 	// insertion point for computing the map of number of instances per gongstruct
 	stage.Map_GongStructName_InstancesNb["BookType"] = len(stage.BookTypes)
+	stage.Map_GongStructName_InstancesNb["Books"] = len(stage.Bookss)
 	stage.Map_GongStructName_InstancesNb["Credit"] = len(stage.Credits)
 	stage.Map_GongStructName_InstancesNb["Link"] = len(stage.Links)
 
@@ -217,6 +234,7 @@ func (stage *StageStruct) Checkout() {
 	stage.ComputeReverseMaps()
 	// insertion point for computing the map of number of instances per gongstruct
 	stage.Map_GongStructName_InstancesNb["BookType"] = len(stage.BookTypes)
+	stage.Map_GongStructName_InstancesNb["Books"] = len(stage.Bookss)
 	stage.Map_GongStructName_InstancesNb["Credit"] = len(stage.Credits)
 	stage.Map_GongStructName_InstancesNb["Link"] = len(stage.Links)
 
@@ -299,6 +317,56 @@ func (booktype *BookType) Checkout(stage *StageStruct) *BookType {
 // for satisfaction of GongStruct interface
 func (booktype *BookType) GetName() (res string) {
 	return booktype.Name
+}
+
+// Stage puts books to the model stage
+func (books *Books) Stage(stage *StageStruct) *Books {
+	stage.Bookss[books] = __member
+	stage.Bookss_mapString[books.Name] = books
+
+	return books
+}
+
+// Unstage removes books off the model stage
+func (books *Books) Unstage(stage *StageStruct) *Books {
+	delete(stage.Bookss, books)
+	delete(stage.Bookss_mapString, books.Name)
+	return books
+}
+
+// UnstageVoid removes books off the model stage
+func (books *Books) UnstageVoid(stage *StageStruct) {
+	delete(stage.Bookss, books)
+	delete(stage.Bookss_mapString, books.Name)
+}
+
+// commit books to the back repo (if it is already staged)
+func (books *Books) Commit(stage *StageStruct) *Books {
+	if _, ok := stage.Bookss[books]; ok {
+		if stage.BackRepo != nil {
+			stage.BackRepo.CommitBooks(books)
+		}
+	}
+	return books
+}
+
+func (books *Books) CommitVoid(stage *StageStruct) {
+	books.Commit(stage)
+}
+
+// Checkout books to the back repo (if it is already staged)
+func (books *Books) Checkout(stage *StageStruct) *Books {
+	if _, ok := stage.Bookss[books]; ok {
+		if stage.BackRepo != nil {
+			stage.BackRepo.CheckoutBooks(books)
+		}
+	}
+	return books
+}
+
+// for satisfaction of GongStruct interface
+func (books *Books) GetName() (res string) {
+	return books.Name
 }
 
 // Stage puts credit to the model stage
@@ -404,12 +472,14 @@ func (link *Link) GetName() (res string) {
 // swagger:ignore
 type AllModelsStructCreateInterface interface { // insertion point for Callbacks on creation
 	CreateORMBookType(BookType *BookType)
+	CreateORMBooks(Books *Books)
 	CreateORMCredit(Credit *Credit)
 	CreateORMLink(Link *Link)
 }
 
 type AllModelsStructDeleteInterface interface { // insertion point for Callbacks on deletion
 	DeleteORMBookType(BookType *BookType)
+	DeleteORMBooks(Books *Books)
 	DeleteORMCredit(Credit *Credit)
 	DeleteORMLink(Link *Link)
 }
@@ -417,6 +487,9 @@ type AllModelsStructDeleteInterface interface { // insertion point for Callbacks
 func (stage *StageStruct) Reset() { // insertion point for array reset
 	stage.BookTypes = make(map[*BookType]any)
 	stage.BookTypes_mapString = make(map[string]*BookType)
+
+	stage.Bookss = make(map[*Books]any)
+	stage.Bookss_mapString = make(map[string]*Books)
 
 	stage.Credits = make(map[*Credit]any)
 	stage.Credits_mapString = make(map[string]*Credit)
@@ -430,6 +503,9 @@ func (stage *StageStruct) Nil() { // insertion point for array nil
 	stage.BookTypes = nil
 	stage.BookTypes_mapString = nil
 
+	stage.Bookss = nil
+	stage.Bookss_mapString = nil
+
 	stage.Credits = nil
 	stage.Credits_mapString = nil
 
@@ -441,6 +517,10 @@ func (stage *StageStruct) Nil() { // insertion point for array nil
 func (stage *StageStruct) Unstage() { // insertion point for array nil
 	for booktype := range stage.BookTypes {
 		booktype.Unstage(stage)
+	}
+
+	for books := range stage.Bookss {
+		books.Unstage(stage)
 	}
 
 	for credit := range stage.Credits {
@@ -513,6 +593,8 @@ func GongGetSet[Type GongstructSet](stage *StageStruct) *Type {
 	// insertion point for generic get functions
 	case map[*BookType]any:
 		return any(&stage.BookTypes).(*Type)
+	case map[*Books]any:
+		return any(&stage.Bookss).(*Type)
 	case map[*Credit]any:
 		return any(&stage.Credits).(*Type)
 	case map[*Link]any:
@@ -531,6 +613,8 @@ func GongGetMap[Type GongstructMapString](stage *StageStruct) *Type {
 	// insertion point for generic get functions
 	case map[string]*BookType:
 		return any(&stage.BookTypes_mapString).(*Type)
+	case map[string]*Books:
+		return any(&stage.Bookss_mapString).(*Type)
 	case map[string]*Credit:
 		return any(&stage.Credits_mapString).(*Type)
 	case map[string]*Link:
@@ -549,6 +633,8 @@ func GetGongstructInstancesSet[Type Gongstruct](stage *StageStruct) *map[*Type]a
 	// insertion point for generic get functions
 	case BookType:
 		return any(&stage.BookTypes).(*map[*Type]any)
+	case Books:
+		return any(&stage.Bookss).(*map[*Type]any)
 	case Credit:
 		return any(&stage.Credits).(*map[*Type]any)
 	case Link:
@@ -567,6 +653,8 @@ func GetGongstructInstancesSetFromPointerType[Type PointerToGongstruct](stage *S
 	// insertion point for generic get functions
 	case *BookType:
 		return any(&stage.BookTypes).(*map[Type]any)
+	case *Books:
+		return any(&stage.Bookss).(*map[Type]any)
 	case *Credit:
 		return any(&stage.Credits).(*map[Type]any)
 	case *Link:
@@ -585,6 +673,8 @@ func GetGongstructInstancesMap[Type Gongstruct](stage *StageStruct) *map[string]
 	// insertion point for generic get functions
 	case BookType:
 		return any(&stage.BookTypes_mapString).(*map[string]*Type)
+	case Books:
+		return any(&stage.Bookss_mapString).(*map[string]*Type)
 	case Credit:
 		return any(&stage.Credits_mapString).(*map[string]*Type)
 	case Link:
@@ -608,6 +698,10 @@ func GetAssociationName[Type Gongstruct]() *Type {
 			// Initialisation of associations
 			// field is initialized with an instance of Credit with the name of the field
 			Credit: []*Credit{{Name: "Credit"}},
+		}).(*Type)
+	case Books:
+		return any(&Books{
+			// Initialisation of associations
 		}).(*Type)
 	case Credit:
 		return any(&Credit{
@@ -639,6 +733,11 @@ func GetPointerReverseMap[Start, End Gongstruct](fieldname string, stage *StageS
 	// insertion point of functions that provide maps for reverse associations
 	// reverse maps of direct associations of BookType
 	case BookType:
+		switch fieldname {
+		// insertion point for per direct association field
+		}
+	// reverse maps of direct associations of Books
+	case Books:
 		switch fieldname {
 		// insertion point for per direct association field
 		}
@@ -681,6 +780,19 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 			}
 			return any(res).(map[*End]*Start)
 		}
+	// reverse maps of direct associations of Books
+	case Books:
+		switch fieldname {
+		// insertion point for per direct association field
+		case "Book":
+			res := make(map[*BookType]*Books)
+			for books := range stage.Bookss {
+				for _, booktype_ := range books.Book {
+					res[booktype_] = books
+				}
+			}
+			return any(res).(map[*End]*Start)
+		}
 	// reverse maps of direct associations of Credit
 	case Credit:
 		switch fieldname {
@@ -713,6 +825,8 @@ func GetGongstructName[Type Gongstruct]() (res string) {
 	// insertion point for generic get gongstruct name
 	case BookType:
 		res = "BookType"
+	case Books:
+		res = "Books"
 	case Credit:
 		res = "Credit"
 	case Link:
@@ -731,6 +845,8 @@ func GetPointerToGongstructName[Type PointerToGongstruct]() (res string) {
 	// insertion point for generic get gongstruct name
 	case *BookType:
 		res = "BookType"
+	case *Books:
+		res = "Books"
 	case *Credit:
 		res = "Credit"
 	case *Link:
@@ -748,6 +864,8 @@ func GetFields[Type Gongstruct]() (res []string) {
 	// insertion point for generic get gongstruct name
 	case BookType:
 		res = []string{"Name", "Edition", "Isbn", "Bestseller", "Credit", "Title", "Author", "Year", "Format"}
+	case Books:
+		res = []string{"Name", "Book"}
 	case Credit:
 		res = []string{"Name", "Page", "Credit_type", "Link", "Credit_words", "Credit_symbol"}
 	case Link:
@@ -771,6 +889,12 @@ func GetReverseFields[Type Gongstruct]() (res []ReverseField) {
 
 	// insertion point for generic get gongstruct name
 	case BookType:
+		var rf ReverseField
+		_ = rf
+		rf.GongstructName = "Books"
+		rf.Fieldname = "Book"
+		res = append(res, rf)
+	case Books:
 		var rf ReverseField
 		_ = rf
 	case Credit:
@@ -798,6 +922,8 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 	// insertion point for generic get gongstruct name
 	case *BookType:
 		res = []string{"Name", "Edition", "Isbn", "Bestseller", "Credit", "Title", "Author", "Year", "Format"}
+	case *Books:
+		res = []string{"Name", "Book"}
 	case *Credit:
 		res = []string{"Name", "Page", "Credit_type", "Link", "Credit_words", "Credit_symbol"}
 	case *Link:
@@ -836,6 +962,19 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 			res = fmt.Sprintf("%d", inferedInstance.Year)
 		case "Format":
 			res = inferedInstance.Format
+		}
+	case *Books:
+		switch fieldName {
+		// string value of fields
+		case "Name":
+			res = inferedInstance.Name
+		case "Book":
+			for idx, __instance__ := range inferedInstance.Book {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
 		}
 	case *Credit:
 		switch fieldName {
@@ -904,6 +1043,19 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 			res = fmt.Sprintf("%d", inferedInstance.Year)
 		case "Format":
 			res = inferedInstance.Format
+		}
+	case Books:
+		switch fieldName {
+		// string value of fields
+		case "Name":
+			res = inferedInstance.Name
+		case "Book":
+			for idx, __instance__ := range inferedInstance.Book {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
 		}
 	case Credit:
 		switch fieldName {

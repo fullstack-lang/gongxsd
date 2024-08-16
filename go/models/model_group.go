@@ -132,7 +132,9 @@ func (composer *ModelGroup) generateElements(
 				if elem.ComplexType == nil {
 					log.Println("element", elem.NameXSD, "should have an anonymous complex type", elem.Type)
 				} else {
-					elem.ComplexType.generateElements(map_Name_Elems, stMap, ctMap, groupMap, setOfGoIdentifiers, fields)
+					ct := elem.ComplexType
+					*fields += "\n\n\t// generated from anonymous type within outer element \"" + elem.NameXSD + "\" of type " + ct.Name +
+						"\n\t" + elem.GoIdentifier + " []*" + ct.GoIdentifier + " " + "`" + `xml:"` + elem.NameXSD + `"` + "`"
 				}
 			}
 

@@ -6,6 +6,210 @@ import "encoding/xml"
 // to avoid compilation error if no xml element is generated
 var _ xml.Attr
 
+// AnonymousComplexTypeInline_directive is generated from outer element "directive"
+type AnonymousComplexTypeInline_directive struct {
+
+	// insertion point for fields
+
+	// generated from attribute "" of type 
+	Lang string `xml:",attr"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
+}
+
+// AnonymousComplexTypeInline_measure is generated from outer element "measure"
+type AnonymousComplexTypeInline_measure struct {
+
+	// insertion point for fields
+
+	// generated from attribute group "measure-attributes
+	AttributeGroup_measure_attributes
+
+	// generated from anonymous type within outer element "part" of type AnonymousComplexTypeInline_part
+	Part []*AnonymousComplexTypeInline_part_1 `xml:"part"`
+}
+
+// AnonymousComplexTypeInline_measure_1 is generated from outer element "measure"
+type AnonymousComplexTypeInline_measure_1 struct {
+
+	// insertion point for fields
+
+	// generated from attribute group "measure-attributes
+	AttributeGroup_measure_attributes
+
+	// generated from element "note" of type note
+	Note []*Note `xml:"note"`
+
+	// generated from element "backup" of type backup
+	Backup []*Backup `xml:"backup"`
+
+	// generated from element "forward" of type forward
+	Forward []*Forward `xml:"forward"`
+
+	// generated from element "direction" of type direction
+	Direction []*Direction `xml:"direction"`
+
+	// generated from element "attributes" of type attributes
+	Attributes []*Attributes `xml:"attributes"`
+
+	// generated from element "harmony" of type harmony
+	Harmony []*Harmony `xml:"harmony"`
+
+	// generated from element "figured-bass" of type figured-bass
+	Figured_bass []*Figured_bass `xml:"figured-bass"`
+
+	// generated from element "print" of type print
+	Print []*Print `xml:"print"`
+
+	// generated from element "sound" of type sound
+	Sound []*Sound `xml:"sound"`
+
+	// generated from element "listening" of type listening
+	Listening []*Listening `xml:"listening"`
+
+	// generated from element "barline" of type barline
+	Barline []*Barline `xml:"barline"`
+
+	// generated from element "grouping" of type grouping
+	Grouping []*Grouping `xml:"grouping"`
+
+	// generated from element "link" of type link
+	Link []*Link `xml:"link"`
+
+	// generated from element "bookmark" of type bookmark
+	Bookmark []*Bookmark `xml:"bookmark"`
+}
+
+// AnonymousComplexTypeInline_part is generated from outer element "part"
+type AnonymousComplexTypeInline_part struct {
+
+	// insertion point for fields
+
+	// generated from attribute group "part-attributes
+	AttributeGroup_part_attributes
+
+	// generated from anonymous type within outer element "measure" of type AnonymousComplexTypeInline_measure
+	Measure []*AnonymousComplexTypeInline_measure_1 `xml:"measure"`
+}
+
+// AnonymousComplexTypeInline_part_1 is generated from outer element "part"
+type AnonymousComplexTypeInline_part_1 struct {
+
+	// insertion point for fields
+
+	// generated from attribute group "part-attributes
+	AttributeGroup_part_attributes
+
+	// generated from element "note" of type note
+	Note []*Note `xml:"note"`
+
+	// generated from element "backup" of type backup
+	Backup []*Backup `xml:"backup"`
+
+	// generated from element "forward" of type forward
+	Forward []*Forward `xml:"forward"`
+
+	// generated from element "direction" of type direction
+	Direction []*Direction `xml:"direction"`
+
+	// generated from element "attributes" of type attributes
+	Attributes []*Attributes `xml:"attributes"`
+
+	// generated from element "harmony" of type harmony
+	Harmony []*Harmony `xml:"harmony"`
+
+	// generated from element "figured-bass" of type figured-bass
+	Figured_bass []*Figured_bass `xml:"figured-bass"`
+
+	// generated from element "print" of type print
+	Print []*Print `xml:"print"`
+
+	// generated from element "sound" of type sound
+	Sound []*Sound `xml:"sound"`
+
+	// generated from element "listening" of type listening
+	Listening []*Listening `xml:"listening"`
+
+	// generated from element "barline" of type barline
+	Barline []*Barline `xml:"barline"`
+
+	// generated from element "grouping" of type grouping
+	Grouping []*Grouping `xml:"grouping"`
+
+	// generated from element "link" of type link
+	Link []*Link `xml:"link"`
+
+	// generated from element "bookmark" of type bookmark
+	Bookmark []*Bookmark `xml:"bookmark"`
+}
+
+// AnonymousComplexTypeInline_score_partwise is generated from outer element "score-partwise"
+type AnonymousComplexTypeInline_score_partwise struct {
+
+	// insertion point for fields
+
+	// generated from attribute group "document-attributes
+	AttributeGroup_document_attributes
+
+	// generated from anonymous type within outer element "part" of type AnonymousComplexTypeInline_part
+	Part []*AnonymousComplexTypeInline_part `xml:"part"`
+
+	// generated from element "work" of type work
+	Work []*Work `xml:"work"`
+
+	// generated from element "movement-number" of type xs:string
+	Movement_number string `xml:"movement-number"`
+
+	// generated from element "movement-title" of type xs:string
+	Movement_title string `xml:"movement-title"`
+
+	// generated from element "identification" of type identification
+	Identification []*Identification `xml:"identification"`
+
+	// generated from element "defaults" of type defaults
+	Defaults []*Defaults `xml:"defaults"`
+
+	// generated from element "credit" of type credit
+	Credit []*Credit `xml:"credit"`
+
+	// generated from element "part-list" of type part-list
+	Part_list []*Part_list `xml:"part-list"`
+}
+
+// AnonymousComplexTypeInline_score_timewise is generated from outer element "score-timewise"
+type AnonymousComplexTypeInline_score_timewise struct {
+
+	// insertion point for fields
+
+	// generated from attribute group "document-attributes
+	AttributeGroup_document_attributes
+
+	// generated from anonymous type within outer element "measure" of type AnonymousComplexTypeInline_measure
+	Measure []*AnonymousComplexTypeInline_measure `xml:"measure"`
+
+	// generated from element "work" of type work
+	Work []*Work `xml:"work"`
+
+	// generated from element "movement-number" of type xs:string
+	Movement_number string `xml:"movement-number"`
+
+	// generated from element "movement-title" of type xs:string
+	Movement_title string `xml:"movement-title"`
+
+	// generated from element "identification" of type identification
+	Identification []*Identification `xml:"identification"`
+
+	// generated from element "defaults" of type defaults
+	Defaults []*Defaults `xml:"defaults"`
+
+	// generated from element "credit" of type credit
+	Credit []*Credit `xml:"credit"`
+
+	// generated from element "part-list" of type part-list
+	Part_list []*Part_list `xml:"part-list"`
+}
+
 // Accidental is generated from named complex type "accidental"
 type Accidental struct {
 	Name string `xml:"-"`
@@ -77,10 +281,10 @@ type Accordion_registration struct {
 	// insertion point for fields
 
 	// generated from attribute group "print-style-align
-	Print_style_align
+	AttributeGroup_print_style_align
 
 	// generated from attribute group "optional-unique-id
-	Optional_unique_id
+	AttributeGroup_optional_unique_id
 
 	// generated from element "accordion-high" of type empty
 	Accordion_high string `xml:"accordion-high"`
@@ -130,16 +334,16 @@ type Arpeggiate struct {
 	Unbroken string `xml:"unbroken,attr"`
 
 	// generated from attribute group "position
-	Position
+	AttributeGroup_position
 
 	// generated from attribute group "placement
-	Placement
+	AttributeGroup_placement
 
 	// generated from attribute group "color
-	Color
+	AttributeGroup_color
 
 	// generated from attribute group "optional-unique-id
-	Optional_unique_id
+	AttributeGroup_optional_unique_id
 }
 
 // Arrow is generated from named complex type "arrow"
@@ -149,13 +353,13 @@ type Arrow struct {
 	// insertion point for fields
 
 	// generated from attribute group "print-style
-	Print_style
+	AttributeGroup_print_style
 
 	// generated from attribute group "placement
-	Placement
+	AttributeGroup_placement
 
 	// generated from attribute group "smufl
-	Smufl
+	AttributeGroup_smufl
 
 	// generated from element "circular-arrow" of type circular-arrow
 	Circular_arrow string `xml:"circular-arrow"`
@@ -177,7 +381,7 @@ type Articulations struct {
 	// insertion point for fields
 
 	// generated from attribute group "optional-unique-id
-	Optional_unique_id
+	AttributeGroup_optional_unique_id
 
 	// generated from element "accent" of type empty-placement
 	Accent []*Empty_placement `xml:"accent"`
@@ -277,6 +481,9 @@ type Attributes struct {
 	// generated from element "staff-details" of type staff-details
 	Staff_details []*Staff_details `xml:"staff-details"`
 
+	// generated from anonymous type within outer element "directive" of type AnonymousComplexTypeInline_directive
+	Directive []*AnonymousComplexTypeInline_directive `xml:"directive"`
+
 	// generated from element "measure-style" of type measure-style
 	Measure_style []*Measure_style `xml:"measure-style"`
 
@@ -338,7 +545,7 @@ type Barline struct {
 	Divisions string `xml:"divisions,attr"`
 
 	// generated from attribute group "optional-unique-id
-	Optional_unique_id
+	AttributeGroup_optional_unique_id
 
 	// generated from element "bar-style" of type bar-style-color
 	Bar_style []*Bar_style_color `xml:"bar-style"`
@@ -378,7 +585,7 @@ type Barre struct {
 	Type string `xml:"type,attr"`
 
 	// generated from attribute group "color
-	Color
+	AttributeGroup_color
 }
 
 // Bass is generated from named complex type "bass"
@@ -493,10 +700,10 @@ type Bend struct {
 	Shape string `xml:"shape,attr"`
 
 	// generated from attribute group "print-style
-	Print_style
+	AttributeGroup_print_style
 
 	// generated from attribute group "bend-sound
-	Bend_sound
+	AttributeGroup_bend_sound
 
 	// generated from element "bend-alter" of type semitones
 	Bend_alter string `xml:"bend-alter"`
@@ -524,7 +731,7 @@ type Bookmark struct {
 	NameXSD string `xml:"name,attr"`
 
 	// generated from attribute group "element-position
-	Element_position
+	AttributeGroup_element_position
 }
 
 // Bracket is generated from named complex type "bracket"
@@ -546,19 +753,19 @@ type Bracket struct {
 	End_length string `xml:"end-length,attr"`
 
 	// generated from attribute group "line-type
-	Line_type
+	AttributeGroup_line_type
 
 	// generated from attribute group "dashed-formatting
-	Dashed_formatting
+	AttributeGroup_dashed_formatting
 
 	// generated from attribute group "position
-	Position
+	AttributeGroup_position
 
 	// generated from attribute group "color
-	Color
+	AttributeGroup_color
 
 	// generated from attribute group "optional-unique-id
-	Optional_unique_id
+	AttributeGroup_optional_unique_id
 }
 
 // Breath_mark is generated from named complex type "breath-mark"
@@ -613,13 +820,13 @@ type Clef struct {
 	After_barline string `xml:"after-barline,attr"`
 
 	// generated from attribute group "print-style
-	Print_style
+	AttributeGroup_print_style
 
 	// generated from attribute group "print-object
-	Print_object
+	AttributeGroup_print_object
 
 	// generated from attribute group "optional-unique-id
-	Optional_unique_id
+	AttributeGroup_optional_unique_id
 
 	// generated from element "sign" of type clef-sign
 	Sign string `xml:"sign"`
@@ -641,10 +848,10 @@ type Coda struct {
 	Smufl string `xml:"smufl,attr"`
 
 	// generated from attribute group "print-style-align
-	Print_style_align
+	AttributeGroup_print_style_align
 
 	// generated from attribute group "optional-unique-id
-	Optional_unique_id
+	AttributeGroup_optional_unique_id
 }
 
 // Credit is generated from named complex type "credit"
@@ -657,7 +864,7 @@ type Credit struct {
 	Page int `xml:"page,attr"`
 
 	// generated from attribute group "optional-unique-id
-	Optional_unique_id
+	AttributeGroup_optional_unique_id
 
 	// generated from element "credit-type" of type xs:string
 	Credit_type string `xml:"credit-type"`
@@ -691,16 +898,16 @@ type Dashes struct {
 	Number int `xml:"number,attr"`
 
 	// generated from attribute group "dashed-formatting
-	Dashed_formatting
+	AttributeGroup_dashed_formatting
 
 	// generated from attribute group "position
-	Position
+	AttributeGroup_position
 
 	// generated from attribute group "color
-	Color
+	AttributeGroup_color
 
 	// generated from attribute group "optional-unique-id
-	Optional_unique_id
+	AttributeGroup_optional_unique_id
 }
 
 // Defaults is generated from named complex type "defaults"
@@ -747,7 +954,7 @@ type Degree struct {
 	// insertion point for fields
 
 	// generated from attribute group "print-object
-	Print_object
+	AttributeGroup_print_object
 
 	// generated from element "degree-value" of type degree-value
 	Degree_value []*Degree_value `xml:"degree-value"`
@@ -808,16 +1015,16 @@ type Direction struct {
 	// insertion point for fields
 
 	// generated from attribute group "placement
-	Placement
+	AttributeGroup_placement
 
 	// generated from attribute group "directive
-	Directive
+	AttributeGroup_directive
 
 	// generated from attribute group "system-relation
-	System_relation
+	AttributeGroup_system_relation
 
 	// generated from attribute group "optional-unique-id
-	Optional_unique_id
+	AttributeGroup_optional_unique_id
 
 	// generated from element "direction-type" of type direction-type
 	Direction_type []*Direction_type `xml:"direction-type"`
@@ -851,7 +1058,7 @@ type Direction_type struct {
 	// insertion point for fields
 
 	// generated from attribute group "optional-unique-id
-	Optional_unique_id
+	AttributeGroup_optional_unique_id
 
 	// generated from element "rehearsal" of type formatted-text-id
 	Rehearsal []*Formatted_text_id `xml:"rehearsal"`
@@ -956,19 +1163,19 @@ type Dynamics struct {
 	// insertion point for fields
 
 	// generated from attribute group "print-style-align
-	Print_style_align
+	AttributeGroup_print_style_align
 
 	// generated from attribute group "placement
-	Placement
+	AttributeGroup_placement
 
 	// generated from attribute group "text-decoration
-	Text_decoration
+	AttributeGroup_text_decoration
 
 	// generated from attribute group "enclosure
-	Enclosure
+	AttributeGroup_enclosure
 
 	// generated from attribute group "optional-unique-id
-	Optional_unique_id
+	AttributeGroup_optional_unique_id
 
 	// generated from element "p" of type empty
 	P string `xml:"p"`
@@ -1092,7 +1299,7 @@ type Empty_font struct {
 	// insertion point for fields
 
 	// generated from attribute group "font
-	Font
+	AttributeGroup_font
 }
 
 // Empty_line is generated from named complex type "empty-line"
@@ -1102,22 +1309,22 @@ type Empty_line struct {
 	// insertion point for fields
 
 	// generated from attribute group "line-shape
-	Line_shape
+	AttributeGroup_line_shape
 
 	// generated from attribute group "line-type
-	Line_type
+	AttributeGroup_line_type
 
 	// generated from attribute group "line-length
-	Line_length
+	AttributeGroup_line_length
 
 	// generated from attribute group "dashed-formatting
-	Dashed_formatting
+	AttributeGroup_dashed_formatting
 
 	// generated from attribute group "print-style
-	Print_style
+	AttributeGroup_print_style
 
 	// generated from attribute group "placement
-	Placement
+	AttributeGroup_placement
 }
 
 // Empty_placement is generated from named complex type "empty-placement"
@@ -1127,10 +1334,10 @@ type Empty_placement struct {
 	// insertion point for fields
 
 	// generated from attribute group "print-style
-	Print_style
+	AttributeGroup_print_style
 
 	// generated from attribute group "placement
-	Placement
+	AttributeGroup_placement
 }
 
 // Empty_placement_smufl is generated from named complex type "empty-placement-smufl"
@@ -1140,13 +1347,13 @@ type Empty_placement_smufl struct {
 	// insertion point for fields
 
 	// generated from attribute group "print-style
-	Print_style
+	AttributeGroup_print_style
 
 	// generated from attribute group "placement
-	Placement
+	AttributeGroup_placement
 
 	// generated from attribute group "smufl
-	Smufl
+	AttributeGroup_smufl
 }
 
 // Empty_print_object_style_align is generated from named complex type "empty-print-object-style-align"
@@ -1156,10 +1363,10 @@ type Empty_print_object_style_align struct {
 	// insertion point for fields
 
 	// generated from attribute group "print-object
-	Print_object
+	AttributeGroup_print_object
 
 	// generated from attribute group "print-style-align
-	Print_style_align
+	AttributeGroup_print_style_align
 }
 
 // Empty_print_style is generated from named complex type "empty-print-style"
@@ -1169,7 +1376,7 @@ type Empty_print_style struct {
 	// insertion point for fields
 
 	// generated from attribute group "print-style
-	Print_style
+	AttributeGroup_print_style
 }
 
 // Empty_print_style_align is generated from named complex type "empty-print-style-align"
@@ -1179,7 +1386,7 @@ type Empty_print_style_align struct {
 	// insertion point for fields
 
 	// generated from attribute group "print-style-align
-	Print_style_align
+	AttributeGroup_print_style_align
 }
 
 // Empty_print_style_align_id is generated from named complex type "empty-print-style-align-id"
@@ -1189,10 +1396,10 @@ type Empty_print_style_align_id struct {
 	// insertion point for fields
 
 	// generated from attribute group "print-style-align
-	Print_style_align
+	AttributeGroup_print_style_align
 
 	// generated from attribute group "optional-unique-id
-	Optional_unique_id
+	AttributeGroup_optional_unique_id
 }
 
 // Empty_trill_sound is generated from named complex type "empty-trill-sound"
@@ -1202,13 +1409,13 @@ type Empty_trill_sound struct {
 	// insertion point for fields
 
 	// generated from attribute group "print-style
-	Print_style
+	AttributeGroup_print_style
 
 	// generated from attribute group "placement
-	Placement
+	AttributeGroup_placement
 
 	// generated from attribute group "trill-sound
-	Trill_sound
+	AttributeGroup_trill_sound
 }
 
 // Encoding is generated from named complex type "encoding"
@@ -1265,10 +1472,10 @@ type Extend struct {
 	Type string `xml:"type,attr"`
 
 	// generated from attribute group "position
-	Position
+	AttributeGroup_position
 
 	// generated from attribute group "color
-	Color
+	AttributeGroup_color
 }
 
 // Feature is generated from named complex type "feature"
@@ -1332,16 +1539,16 @@ type Figured_bass struct {
 	Parentheses string `xml:"parentheses,attr"`
 
 	// generated from attribute group "print-style-align
-	Print_style_align
+	AttributeGroup_print_style_align
 
 	// generated from attribute group "placement
-	Placement
+	AttributeGroup_placement
 
 	// generated from attribute group "printout
-	Printout
+	AttributeGroup_printout
 
 	// generated from attribute group "optional-unique-id
-	Optional_unique_id
+	AttributeGroup_optional_unique_id
 
 	// generated from element "figure" of type figure
 	Figure []*Figure `xml:"figure"`
@@ -1398,7 +1605,7 @@ type For_part struct {
 	Number int `xml:"number,attr"`
 
 	// generated from attribute group "optional-unique-id
-	Optional_unique_id
+	AttributeGroup_optional_unique_id
 
 	// generated from element "part-clef" of type part-clef
 	Part_clef []*Part_clef `xml:"part-clef"`
@@ -1485,19 +1692,19 @@ type Frame struct {
 	Unplayed string `xml:"unplayed,attr"`
 
 	// generated from attribute group "position
-	Position
+	AttributeGroup_position
 
 	// generated from attribute group "color
-	Color
+	AttributeGroup_color
 
 	// generated from attribute group "halign
-	Halign
+	AttributeGroup_halign
 
 	// generated from attribute group "valign-image
-	Valign_image
+	AttributeGroup_valign_image
 
 	// generated from attribute group "optional-unique-id
-	Optional_unique_id
+	AttributeGroup_optional_unique_id
 
 	// generated from element "frame-strings" of type xs:positiveInteger
 	Frame_strings int `xml:"frame-strings"`
@@ -1648,7 +1855,7 @@ type Grouping struct {
 	Member_of string `xml:"member-of,attr"`
 
 	// generated from attribute group "optional-unique-id
-	Optional_unique_id
+	AttributeGroup_optional_unique_id
 
 	// generated from element "feature" of type feature
 	Feature []*Feature `xml:"feature"`
@@ -1700,10 +1907,10 @@ type Harmon_mute struct {
 	// insertion point for fields
 
 	// generated from attribute group "print-style
-	Print_style
+	AttributeGroup_print_style
 
 	// generated from attribute group "placement
-	Placement
+	AttributeGroup_placement
 
 	// generated from element "harmon-closed" of type harmon-closed
 	Harmon_closed []*Harmon_closed `xml:"harmon-closed"`
@@ -1716,13 +1923,13 @@ type Harmonic struct {
 	// insertion point for fields
 
 	// generated from attribute group "print-object
-	Print_object
+	AttributeGroup_print_object
 
 	// generated from attribute group "print-style
-	Print_style
+	AttributeGroup_print_style
 
 	// generated from attribute group "placement
-	Placement
+	AttributeGroup_placement
 
 	// generated from element "natural" of type empty
 	Natural string `xml:"natural"`
@@ -1756,19 +1963,19 @@ type Harmony struct {
 	Arrangement string `xml:"arrangement,attr"`
 
 	// generated from attribute group "print-object
-	Print_object
+	AttributeGroup_print_object
 
 	// generated from attribute group "print-style
-	Print_style
+	AttributeGroup_print_style
 
 	// generated from attribute group "placement
-	Placement
+	AttributeGroup_placement
 
 	// generated from attribute group "system-relation
-	System_relation
+	AttributeGroup_system_relation
 
 	// generated from attribute group "optional-unique-id
-	Optional_unique_id
+	AttributeGroup_optional_unique_id
 
 	// generated from element "frame" of type frame
 	Frame []*Frame `xml:"frame"`
@@ -1827,10 +2034,10 @@ type Harp_pedals struct {
 	// insertion point for fields
 
 	// generated from attribute group "print-style-align
-	Print_style_align
+	AttributeGroup_print_style_align
 
 	// generated from attribute group "optional-unique-id
-	Optional_unique_id
+	AttributeGroup_optional_unique_id
 
 	// generated from element "pedal-tuning" of type pedal-tuning
 	Pedal_tuning []*Pedal_tuning `xml:"pedal-tuning"`
@@ -1850,10 +2057,10 @@ type Hole struct {
 	// insertion point for fields
 
 	// generated from attribute group "print-style
-	Print_style
+	AttributeGroup_print_style
 
 	// generated from attribute group "placement
-	Placement
+	AttributeGroup_placement
 
 	// generated from element "hole-type" of type xs:string
 	Hole_type string `xml:"hole-type"`
@@ -1888,13 +2095,13 @@ type Horizontal_turn struct {
 	Slash string `xml:"slash,attr"`
 
 	// generated from attribute group "print-style
-	Print_style
+	AttributeGroup_print_style
 
 	// generated from attribute group "placement
-	Placement
+	AttributeGroup_placement
 
 	// generated from attribute group "trill-sound
-	Trill_sound
+	AttributeGroup_trill_sound
 }
 
 // Identification is generated from named complex type "identification"
@@ -1929,10 +2136,10 @@ type Image struct {
 	// insertion point for fields
 
 	// generated from attribute group "image-attributes
-	Image_attributes
+	AttributeGroup_image_attributes
 
 	// generated from attribute group "optional-unique-id
-	Optional_unique_id
+	AttributeGroup_optional_unique_id
 }
 
 // Instrument is generated from named complex type "instrument"
@@ -2022,13 +2229,13 @@ type Key struct {
 	Number int `xml:"number,attr"`
 
 	// generated from attribute group "print-style
-	Print_style
+	AttributeGroup_print_style
 
 	// generated from attribute group "print-object
-	Print_object
+	AttributeGroup_print_object
 
 	// generated from attribute group "optional-unique-id
-	Optional_unique_id
+	AttributeGroup_optional_unique_id
 
 	// generated from element "key-octave" of type key-octave
 	Key_octave []*Key_octave `xml:"key-octave"`
@@ -2135,13 +2342,13 @@ type Line_detail struct {
 	Width string `xml:"width,attr"`
 
 	// generated from attribute group "color
-	Color
+	AttributeGroup_color
 
 	// generated from attribute group "line-type
-	Line_type
+	AttributeGroup_line_type
 
 	// generated from attribute group "print-object
-	Print_object
+	AttributeGroup_print_object
 }
 
 // Line_width is generated from named complex type "line-width"
@@ -2167,13 +2374,13 @@ type Link struct {
 	NameXSD string `xml:"name,attr"`
 
 	// generated from attribute group "link-attributes
-	Link_attributes
+	AttributeGroup_link_attributes
 
 	// generated from attribute group "element-position
-	Element_position
+	AttributeGroup_element_position
 
 	// generated from attribute group "position
-	Position
+	AttributeGroup_position
 }
 
 // Listen is generated from named complex type "listen"
@@ -2224,22 +2431,22 @@ type Lyric struct {
 	Time_only string `xml:"time-only,attr"`
 
 	// generated from attribute group "justify
-	Justify
+	AttributeGroup_justify
 
 	// generated from attribute group "position
-	Position
+	AttributeGroup_position
 
 	// generated from attribute group "placement
-	Placement
+	AttributeGroup_placement
 
 	// generated from attribute group "color
-	Color
+	AttributeGroup_color
 
 	// generated from attribute group "print-object
-	Print_object
+	AttributeGroup_print_object
 
 	// generated from attribute group "optional-unique-id
-	Optional_unique_id
+	AttributeGroup_optional_unique_id
 
 	// generated from element "end-line" of type empty
 	End_line string `xml:"end-line"`
@@ -2285,7 +2492,7 @@ type Lyric_font struct {
 	NameXSD string `xml:"name,attr"`
 
 	// generated from attribute group "font
-	Font
+	AttributeGroup_font
 }
 
 // Lyric_language is generated from named complex type "lyric-language"
@@ -2362,13 +2569,13 @@ type Measure_style struct {
 	Number int `xml:"number,attr"`
 
 	// generated from attribute group "font
-	Font
+	AttributeGroup_font
 
 	// generated from attribute group "color
-	Color
+	AttributeGroup_color
 
 	// generated from attribute group "optional-unique-id
-	Optional_unique_id
+	AttributeGroup_optional_unique_id
 
 	// generated from element "multiple-rest" of type multiple-rest
 	Multiple_rest []*Multiple_rest `xml:"multiple-rest"`
@@ -2419,16 +2626,16 @@ type Metronome struct {
 	Parentheses string `xml:"parentheses,attr"`
 
 	// generated from attribute group "print-style-align
-	Print_style_align
+	AttributeGroup_print_style_align
 
 	// generated from attribute group "print-object
-	Print_object
+	AttributeGroup_print_object
 
 	// generated from attribute group "justify
-	Justify
+	AttributeGroup_justify
 
 	// generated from attribute group "optional-unique-id
-	Optional_unique_id
+	AttributeGroup_optional_unique_id
 
 	// generated from element "beat-unit-tied" of type beat-unit-tied
 	Beat_unit_tied []*Beat_unit_tied `xml:"beat-unit-tied"`
@@ -2604,7 +2811,7 @@ type Name_display struct {
 	// insertion point for fields
 
 	// generated from attribute group "print-object
-	Print_object
+	AttributeGroup_print_object
 
 	// generated from element "display-text" of type formatted-text
 	Display_text []*Formatted_text `xml:"display-text"`
@@ -2626,16 +2833,16 @@ type Non_arpeggiate struct {
 	Number int `xml:"number,attr"`
 
 	// generated from attribute group "position
-	Position
+	AttributeGroup_position
 
 	// generated from attribute group "placement
-	Placement
+	AttributeGroup_placement
 
 	// generated from attribute group "color
-	Color
+	AttributeGroup_color
 
 	// generated from attribute group "optional-unique-id
-	Optional_unique_id
+	AttributeGroup_optional_unique_id
 }
 
 // Notations is generated from named complex type "notations"
@@ -2645,10 +2852,10 @@ type Notations struct {
 	// insertion point for fields
 
 	// generated from attribute group "print-object
-	Print_object
+	AttributeGroup_print_object
 
 	// generated from attribute group "optional-unique-id
-	Optional_unique_id
+	AttributeGroup_optional_unique_id
 
 	// generated from element "tied" of type tied
 	Tied []*Tied `xml:"tied"`
@@ -2727,19 +2934,19 @@ type Note struct {
 	Pizzicato string `xml:"pizzicato,attr"`
 
 	// generated from attribute group "x-position
-	X_position
+	AttributeGroup_x_position
 
 	// generated from attribute group "font
-	Font
+	AttributeGroup_font
 
 	// generated from attribute group "color
-	Color
+	AttributeGroup_color
 
 	// generated from attribute group "printout
-	Printout
+	AttributeGroup_printout
 
 	// generated from attribute group "optional-unique-id
-	Optional_unique_id
+	AttributeGroup_optional_unique_id
 
 	// generated from element "instrument" of type instrument
 	Instrument []*Instrument `xml:"instrument"`
@@ -2895,7 +3102,7 @@ type Numeral_key struct {
 	// insertion point for fields
 
 	// generated from attribute group "print-object
-	Print_object
+	AttributeGroup_print_object
 
 	// generated from element "numeral-fifths" of type fifths
 	Numeral_fifths int `xml:"numeral-fifths"`
@@ -2933,13 +3140,13 @@ type Octave_shift struct {
 	Size int `xml:"size,attr"`
 
 	// generated from attribute group "dashed-formatting
-	Dashed_formatting
+	AttributeGroup_dashed_formatting
 
 	// generated from attribute group "print-style
-	Print_style
+	AttributeGroup_print_style
 
 	// generated from attribute group "optional-unique-id
-	Optional_unique_id
+	AttributeGroup_optional_unique_id
 }
 
 // Offset is generated from named complex type "offset"
@@ -2962,7 +3169,7 @@ type Opus struct {
 	// insertion point for fields
 
 	// generated from attribute group "link-attributes
-	Link_attributes
+	AttributeGroup_link_attributes
 }
 
 // Ornaments is generated from named complex type "ornaments"
@@ -2972,7 +3179,7 @@ type Ornaments struct {
 	// insertion point for fields
 
 	// generated from attribute group "optional-unique-id
-	Optional_unique_id
+	AttributeGroup_optional_unique_id
 
 	// generated from element "accidental-mark" of type accidental-mark
 	Accidental_mark []*Accidental_mark `xml:"accidental-mark"`
@@ -3215,7 +3422,7 @@ type Part_link struct {
 	// insertion point for fields
 
 	// generated from attribute group "link-attributes
-	Link_attributes
+	AttributeGroup_link_attributes
 
 	// generated from element "instrument-link" of type instrument-link
 	Instrument_link []*Instrument_link `xml:"instrument-link"`
@@ -3304,10 +3511,10 @@ type Pedal struct {
 	Abbreviated string `xml:"abbreviated,attr"`
 
 	// generated from attribute group "print-style-align
-	Print_style_align
+	AttributeGroup_print_style_align
 
 	// generated from attribute group "optional-unique-id
-	Optional_unique_id
+	AttributeGroup_optional_unique_id
 }
 
 // Pedal_tuning is generated from named complex type "pedal-tuning"
@@ -3340,13 +3547,13 @@ type Percussion struct {
 	// insertion point for fields
 
 	// generated from attribute group "print-style-align
-	Print_style_align
+	AttributeGroup_print_style_align
 
 	// generated from attribute group "enclosure
-	Enclosure
+	AttributeGroup_enclosure
 
 	// generated from attribute group "optional-unique-id
-	Optional_unique_id
+	AttributeGroup_optional_unique_id
 
 	// generated from element "glass" of type glass
 	Glass []*Glass `xml:"glass"`
@@ -3479,10 +3686,10 @@ type Print struct {
 	// insertion point for fields
 
 	// generated from attribute group "print-attributes
-	Print_attributes
+	AttributeGroup_print_attributes
 
 	// generated from attribute group "optional-unique-id
-	Optional_unique_id
+	AttributeGroup_optional_unique_id
 
 	// generated from element "measure-layout" of type measure-layout
 	Measure_layout []*Measure_layout `xml:"measure-layout"`
@@ -3594,7 +3801,7 @@ type Scordatura struct {
 	// insertion point for fields
 
 	// generated from attribute group "optional-unique-id
-	Optional_unique_id
+	AttributeGroup_optional_unique_id
 
 	// generated from element "accord" of type accord
 	Accord []*Accord `xml:"accord"`
@@ -3681,10 +3888,10 @@ type Segno struct {
 	Smufl string `xml:"smufl,attr"`
 
 	// generated from attribute group "print-style-align
-	Print_style_align
+	AttributeGroup_print_style_align
 
 	// generated from attribute group "optional-unique-id
-	Optional_unique_id
+	AttributeGroup_optional_unique_id
 }
 
 // Slash is generated from named complex type "slash"
@@ -3741,28 +3948,28 @@ type Slur struct {
 	Number int `xml:"number,attr"`
 
 	// generated from attribute group "line-type
-	Line_type
+	AttributeGroup_line_type
 
 	// generated from attribute group "dashed-formatting
-	Dashed_formatting
+	AttributeGroup_dashed_formatting
 
 	// generated from attribute group "position
-	Position
+	AttributeGroup_position
 
 	// generated from attribute group "placement
-	Placement
+	AttributeGroup_placement
 
 	// generated from attribute group "orientation
-	Orientation
+	AttributeGroup_orientation
 
 	// generated from attribute group "bezier
-	Bezier
+	AttributeGroup_bezier
 
 	// generated from attribute group "color
-	Color
+	AttributeGroup_color
 
 	// generated from attribute group "optional-unique-id
-	Optional_unique_id
+	AttributeGroup_optional_unique_id
 }
 
 // Sound is generated from named complex type "sound"
@@ -3823,7 +4030,7 @@ type Sound struct {
 	Sostenuto_pedal string `xml:"sostenuto-pedal,attr"`
 
 	// generated from attribute group "optional-unique-id
-	Optional_unique_id
+	AttributeGroup_optional_unique_id
 
 	// generated from element "swing" of type swing
 	Swing []*Swing `xml:"swing"`
@@ -3857,10 +4064,10 @@ type Staff_details struct {
 	Show_frets string `xml:"show-frets,attr"`
 
 	// generated from attribute group "print-object
-	Print_object
+	AttributeGroup_print_object
 
 	// generated from attribute group "print-spacing
-	Print_spacing
+	AttributeGroup_print_spacing
 
 	// generated from element "staff-type" of type staff-type
 	Staff_type string `xml:"staff-type"`
@@ -3891,10 +4098,10 @@ type Staff_divide struct {
 	Type string `xml:"type,attr"`
 
 	// generated from attribute group "print-style-align
-	Print_style_align
+	AttributeGroup_print_style_align
 
 	// generated from attribute group "optional-unique-id
-	Optional_unique_id
+	AttributeGroup_optional_unique_id
 }
 
 // Staff_layout is generated from named complex type "staff-layout"
@@ -3984,10 +4191,10 @@ type String_mute struct {
 	Type string `xml:"type,attr"`
 
 	// generated from attribute group "print-style-align
-	Print_style_align
+	AttributeGroup_print_style_align
 
 	// generated from attribute group "optional-unique-id
-	Optional_unique_id
+	AttributeGroup_optional_unique_id
 }
 
 // String_type is generated from named complex type "string-type"
@@ -4142,7 +4349,7 @@ type Technical struct {
 	// insertion point for fields
 
 	// generated from attribute group "optional-unique-id
-	Optional_unique_id
+	AttributeGroup_optional_unique_id
 
 	// generated from element "up-bow" of type empty-placement
 	Up_bow []*Empty_placement `xml:"up-bow"`
@@ -4277,28 +4484,28 @@ type Tied struct {
 	Number int `xml:"number,attr"`
 
 	// generated from attribute group "line-type
-	Line_type
+	AttributeGroup_line_type
 
 	// generated from attribute group "dashed-formatting
-	Dashed_formatting
+	AttributeGroup_dashed_formatting
 
 	// generated from attribute group "position
-	Position
+	AttributeGroup_position
 
 	// generated from attribute group "placement
-	Placement
+	AttributeGroup_placement
 
 	// generated from attribute group "orientation
-	Orientation
+	AttributeGroup_orientation
 
 	// generated from attribute group "bezier
-	Bezier
+	AttributeGroup_bezier
 
 	// generated from attribute group "color
-	Color
+	AttributeGroup_color
 
 	// generated from attribute group "optional-unique-id
-	Optional_unique_id
+	AttributeGroup_optional_unique_id
 }
 
 // Time is generated from named complex type "time"
@@ -4317,13 +4524,13 @@ type Time struct {
 	Separator string `xml:"separator,attr"`
 
 	// generated from attribute group "print-style-align
-	Print_style_align
+	AttributeGroup_print_style_align
 
 	// generated from attribute group "print-object
-	Print_object
+	AttributeGroup_print_object
 
 	// generated from attribute group "optional-unique-id
-	Optional_unique_id
+	AttributeGroup_optional_unique_id
 
 	// generated from element "senza-misura" of type xs:string
 	Senza_misura string `xml:"senza-misura"`
@@ -4377,7 +4584,7 @@ type Transpose struct {
 	Number int `xml:"number,attr"`
 
 	// generated from attribute group "optional-unique-id
-	Optional_unique_id
+	AttributeGroup_optional_unique_id
 
 	// generated from element "diatonic" of type xs:integer
 	Diatonic int `xml:"diatonic"`
@@ -4427,16 +4634,16 @@ type Tuplet struct {
 	Show_type string `xml:"show-type,attr"`
 
 	// generated from attribute group "line-shape
-	Line_shape
+	AttributeGroup_line_shape
 
 	// generated from attribute group "position
-	Position
+	AttributeGroup_position
 
 	// generated from attribute group "placement
-	Placement
+	AttributeGroup_placement
 
 	// generated from attribute group "optional-unique-id
-	Optional_unique_id
+	AttributeGroup_optional_unique_id
 
 	// generated from element "tuplet-actual" of type tuplet-portion
 	Tuplet_actual []*Tuplet_portion `xml:"tuplet-actual"`
@@ -4452,10 +4659,10 @@ type Tuplet_dot struct {
 	// insertion point for fields
 
 	// generated from attribute group "font
-	Font
+	AttributeGroup_font
 
 	// generated from attribute group "color
-	Color
+	AttributeGroup_color
 }
 
 // Tuplet_number is generated from named complex type "tuplet-number"
@@ -4562,16 +4769,16 @@ type Wavy_line struct {
 	Smufl string `xml:"smufl,attr"`
 
 	// generated from attribute group "position
-	Position
+	AttributeGroup_position
 
 	// generated from attribute group "placement
-	Placement
+	AttributeGroup_placement
 
 	// generated from attribute group "color
-	Color
+	AttributeGroup_color
 
 	// generated from attribute group "trill-sound
-	Trill_sound
+	AttributeGroup_trill_sound
 }
 
 // Wedge is generated from named complex type "wedge"
@@ -4593,19 +4800,19 @@ type Wedge struct {
 	Niente string `xml:"niente,attr"`
 
 	// generated from attribute group "line-type
-	Line_type
+	AttributeGroup_line_type
 
 	// generated from attribute group "dashed-formatting
-	Dashed_formatting
+	AttributeGroup_dashed_formatting
 
 	// generated from attribute group "position
-	Position
+	AttributeGroup_position
 
 	// generated from attribute group "color
-	Color
+	AttributeGroup_color
 
 	// generated from attribute group "optional-unique-id
-	Optional_unique_id
+	AttributeGroup_optional_unique_id
 }
 
 // Wood is generated from named complex type "wood"
@@ -4637,8 +4844,8 @@ type Work struct {
 	Opus []*Opus `xml:"opus"`
 }
 
-// All_margins is generated from named group "all-margins"
-type All_margins struct {
+// Group_all_margins is generated from named group "all-margins"
+type Group_all_margins struct {
 
 	// insertion point for fields
 
@@ -4655,8 +4862,8 @@ type All_margins struct {
 	Right_margin string `xml:"right-margin"`
 }
 
-// Beat_unit is generated from named group "beat-unit"
-type Beat_unit struct {
+// Group_beat_unit is generated from named group "beat-unit"
+type Group_beat_unit struct {
 
 	// insertion point for fields
 
@@ -4667,8 +4874,8 @@ type Beat_unit struct {
 	Beat_unit_dot string `xml:"beat-unit-dot"`
 }
 
-// Clef_1 is generated from named group "clef"
-type Clef_1 struct {
+// Group_clef is generated from named group "clef"
+type Group_clef struct {
 
 	// insertion point for fields
 
@@ -4682,8 +4889,8 @@ type Clef_1 struct {
 	Clef_octave_change int `xml:"clef-octave-change"`
 }
 
-// Display_step_octave is generated from named group "display-step-octave"
-type Display_step_octave struct {
+// Group_display_step_octave is generated from named group "display-step-octave"
+type Group_display_step_octave struct {
 
 	// insertion point for fields
 
@@ -4694,8 +4901,8 @@ type Display_step_octave struct {
 	Display_octave int `xml:"display-octave"`
 }
 
-// Duration is generated from named group "duration"
-type Duration struct {
+// Group_duration is generated from named group "duration"
+type Group_duration struct {
 
 	// insertion point for fields
 
@@ -4703,8 +4910,8 @@ type Duration struct {
 	Duration string `xml:"duration"`
 }
 
-// Editorial is generated from named group "editorial"
-type Editorial struct {
+// Group_editorial is generated from named group "editorial"
+type Group_editorial struct {
 
 	// insertion point for fields
 
@@ -4715,23 +4922,8 @@ type Editorial struct {
 	Level []*Level `xml:"level"`
 }
 
-// Editorial_voice is generated from named group "editorial-voice"
-type Editorial_voice struct {
-
-	// insertion point for fields
-
-	// generated from element "footnote" of type formatted-text
-	Footnote []*Formatted_text `xml:"footnote"`
-
-	// generated from element "level" of type level
-	Level []*Level `xml:"level"`
-
-	// generated from element "voice" of type xs:string
-	Voice string `xml:"voice"`
-}
-
-// Editorial_voice_direction is generated from named group "editorial-voice-direction"
-type Editorial_voice_direction struct {
+// Group_editorial_voice is generated from named group "editorial-voice"
+type Group_editorial_voice struct {
 
 	// insertion point for fields
 
@@ -4745,8 +4937,23 @@ type Editorial_voice_direction struct {
 	Voice string `xml:"voice"`
 }
 
-// Footnote is generated from named group "footnote"
-type Footnote struct {
+// Group_editorial_voice_direction is generated from named group "editorial-voice-direction"
+type Group_editorial_voice_direction struct {
+
+	// insertion point for fields
+
+	// generated from element "footnote" of type formatted-text
+	Footnote []*Formatted_text `xml:"footnote"`
+
+	// generated from element "level" of type level
+	Level []*Level `xml:"level"`
+
+	// generated from element "voice" of type xs:string
+	Voice string `xml:"voice"`
+}
+
+// Group_footnote is generated from named group "footnote"
+type Group_footnote struct {
 
 	// insertion point for fields
 
@@ -4754,8 +4961,8 @@ type Footnote struct {
 	Footnote []*Formatted_text `xml:"footnote"`
 }
 
-// Full_note is generated from named group "full-note"
-type Full_note struct {
+// Group_full_note is generated from named group "full-note"
+type Group_full_note struct {
 
 	// insertion point for fields
 
@@ -4772,8 +4979,8 @@ type Full_note struct {
 	Rest []*Rest `xml:"rest"`
 }
 
-// Harmony_chord is generated from named group "harmony-chord"
-type Harmony_chord struct {
+// Group_harmony_chord is generated from named group "harmony-chord"
+type Group_harmony_chord struct {
 
 	// insertion point for fields
 
@@ -4799,8 +5006,8 @@ type Harmony_chord struct {
 	Function []*Style_text `xml:"function"`
 }
 
-// Layout is generated from named group "layout"
-type Layout struct {
+// Group_layout is generated from named group "layout"
+type Group_layout struct {
 
 	// insertion point for fields
 
@@ -4814,8 +5021,8 @@ type Layout struct {
 	Staff_layout []*Staff_layout `xml:"staff-layout"`
 }
 
-// Left_right_margins is generated from named group "left-right-margins"
-type Left_right_margins struct {
+// Group_left_right_margins is generated from named group "left-right-margins"
+type Group_left_right_margins struct {
 
 	// insertion point for fields
 
@@ -4826,8 +5033,8 @@ type Left_right_margins struct {
 	Right_margin string `xml:"right-margin"`
 }
 
-// Level_1 is generated from named group "level"
-type Level_1 struct {
+// Group_level is generated from named group "level"
+type Group_level struct {
 
 	// insertion point for fields
 
@@ -4835,8 +5042,8 @@ type Level_1 struct {
 	Level []*Level `xml:"level"`
 }
 
-// Music_data is generated from named group "music-data"
-type Music_data struct {
+// Group_music_data is generated from named group "music-data"
+type Group_music_data struct {
 
 	// insertion point for fields
 
@@ -4883,8 +5090,8 @@ type Music_data struct {
 	Bookmark []*Bookmark `xml:"bookmark"`
 }
 
-// Non_traditional_key is generated from named group "non-traditional-key"
-type Non_traditional_key struct {
+// Group_non_traditional_key is generated from named group "non-traditional-key"
+type Group_non_traditional_key struct {
 
 	// insertion point for fields
 
@@ -4898,8 +5105,8 @@ type Non_traditional_key struct {
 	Key_accidental []*Key_accidental `xml:"key-accidental"`
 }
 
-// Part_group_1 is generated from named group "part-group"
-type Part_group_1 struct {
+// Group_part_group is generated from named group "part-group"
+type Group_part_group struct {
 
 	// insertion point for fields
 
@@ -4907,8 +5114,8 @@ type Part_group_1 struct {
 	Part_group []*Part_group `xml:"part-group"`
 }
 
-// Score_header is generated from named group "score-header"
-type Score_header struct {
+// Group_score_header is generated from named group "score-header"
+type Group_score_header struct {
 
 	// insertion point for fields
 
@@ -4934,8 +5141,8 @@ type Score_header struct {
 	Part_list []*Part_list `xml:"part-list"`
 }
 
-// Score_part_1 is generated from named group "score-part"
-type Score_part_1 struct {
+// Group_score_part is generated from named group "score-part"
+type Group_score_part struct {
 
 	// insertion point for fields
 
@@ -4943,8 +5150,8 @@ type Score_part_1 struct {
 	Score_part []*Score_part `xml:"score-part"`
 }
 
-// Slash_1 is generated from named group "slash"
-type Slash_1 struct {
+// Group_slash is generated from named group "slash"
+type Group_slash struct {
 
 	// insertion point for fields
 
@@ -4958,8 +5165,8 @@ type Slash_1 struct {
 	Slash_dot string `xml:"slash-dot"`
 }
 
-// Staff is generated from named group "staff"
-type Staff struct {
+// Group_staff is generated from named group "staff"
+type Group_staff struct {
 
 	// insertion point for fields
 
@@ -4967,8 +5174,8 @@ type Staff struct {
 	Staff int `xml:"staff"`
 }
 
-// Time_signature is generated from named group "time-signature"
-type Time_signature struct {
+// Group_time_signature is generated from named group "time-signature"
+type Group_time_signature struct {
 
 	// insertion point for fields
 
@@ -4979,8 +5186,8 @@ type Time_signature struct {
 	Beat_type string `xml:"beat-type"`
 }
 
-// Traditional_key is generated from named group "traditional-key"
-type Traditional_key struct {
+// Group_traditional_key is generated from named group "traditional-key"
+type Group_traditional_key struct {
 
 	// insertion point for fields
 
@@ -4994,8 +5201,8 @@ type Traditional_key struct {
 	Mode string `xml:"mode"`
 }
 
-// Transpose_1 is generated from named group "transpose"
-type Transpose_1 struct {
+// Group_transpose is generated from named group "transpose"
+type Group_transpose struct {
 
 	// insertion point for fields
 
@@ -5012,8 +5219,8 @@ type Transpose_1 struct {
 	Double []*Double `xml:"double"`
 }
 
-// Tuning is generated from named group "tuning"
-type Tuning struct {
+// Group_tuning is generated from named group "tuning"
+type Group_tuning struct {
 
 	// insertion point for fields
 
@@ -5027,8 +5234,8 @@ type Tuning struct {
 	Tuning_octave int `xml:"tuning-octave"`
 }
 
-// Virtual_instrument_data is generated from named group "virtual-instrument-data"
-type Virtual_instrument_data struct {
+// Group_virtual_instrument_data is generated from named group "virtual-instrument-data"
+type Group_virtual_instrument_data struct {
 
 	// insertion point for fields
 
@@ -5045,8 +5252,8 @@ type Virtual_instrument_data struct {
 	Ensemble string `xml:"ensemble"`
 }
 
-// Voice is generated from named group "voice"
-type Voice struct {
+// Group_voice is generated from named group "voice"
+type Group_voice struct {
 
 	// insertion point for fields
 
@@ -5054,8 +5261,8 @@ type Voice struct {
 	Voice string `xml:"voice"`
 }
 
-// Bend_sound is generated from named attribute group "bend-sound"
-type Bend_sound struct {
+// AttributeGroup_bend_sound is generated from named attribute group "bend-sound"
+type AttributeGroup_bend_sound struct {
 
 	// insertion point for fields
 
@@ -5072,8 +5279,8 @@ type Bend_sound struct {
 	Last_beat string `xml:"last-beat,attr"`
 }
 
-// Bezier is generated from named attribute group "bezier"
-type Bezier struct {
+// AttributeGroup_bezier is generated from named attribute group "bezier"
+type AttributeGroup_bezier struct {
 
 	// insertion point for fields
 
@@ -5096,8 +5303,8 @@ type Bezier struct {
 	Bezier_offset2 string `xml:"bezier-offset2,attr"`
 }
 
-// Color is generated from named attribute group "color"
-type Color struct {
+// AttributeGroup_color is generated from named attribute group "color"
+type AttributeGroup_color struct {
 
 	// insertion point for fields
 
@@ -5105,8 +5312,8 @@ type Color struct {
 	Color string `xml:"color,attr"`
 }
 
-// Dashed_formatting is generated from named attribute group "dashed-formatting"
-type Dashed_formatting struct {
+// AttributeGroup_dashed_formatting is generated from named attribute group "dashed-formatting"
+type AttributeGroup_dashed_formatting struct {
 
 	// insertion point for fields
 
@@ -5117,8 +5324,8 @@ type Dashed_formatting struct {
 	Space_length string `xml:"space-length,attr"`
 }
 
-// Directive is generated from named attribute group "directive"
-type Directive struct {
+// AttributeGroup_directive is generated from named attribute group "directive"
+type AttributeGroup_directive struct {
 
 	// insertion point for fields
 
@@ -5126,8 +5333,8 @@ type Directive struct {
 	Directive string `xml:"directive,attr"`
 }
 
-// Document_attributes is generated from named attribute group "document-attributes"
-type Document_attributes struct {
+// AttributeGroup_document_attributes is generated from named attribute group "document-attributes"
+type AttributeGroup_document_attributes struct {
 
 	// insertion point for fields
 
@@ -5135,8 +5342,8 @@ type Document_attributes struct {
 	Version string `xml:"version,attr"`
 }
 
-// Element_position is generated from named attribute group "element-position"
-type Element_position struct {
+// AttributeGroup_element_position is generated from named attribute group "element-position"
+type AttributeGroup_element_position struct {
 
 	// insertion point for fields
 
@@ -5147,8 +5354,8 @@ type Element_position struct {
 	Position int `xml:"position,attr"`
 }
 
-// Enclosure is generated from named attribute group "enclosure"
-type Enclosure struct {
+// AttributeGroup_enclosure is generated from named attribute group "enclosure"
+type AttributeGroup_enclosure struct {
 
 	// insertion point for fields
 
@@ -5156,8 +5363,8 @@ type Enclosure struct {
 	Enclosure string `xml:"enclosure,attr"`
 }
 
-// Font is generated from named attribute group "font"
-type Font struct {
+// AttributeGroup_font is generated from named attribute group "font"
+type AttributeGroup_font struct {
 
 	// insertion point for fields
 
@@ -5174,20 +5381,20 @@ type Font struct {
 	Font_weight string `xml:"font-weight,attr"`
 }
 
-// Group_name_text is generated from named attribute group "group-name-text"
-type Group_name_text struct {
+// AttributeGroup_group_name_text is generated from named attribute group "group-name-text"
+type AttributeGroup_group_name_text struct {
 
 	// insertion point for fields
 
 	// generated from attribute group "print-style
-	Print_style
+	AttributeGroup_print_style
 
 	// generated from attribute group "justify
-	Justify
+	AttributeGroup_justify
 }
 
-// Halign is generated from named attribute group "halign"
-type Halign struct {
+// AttributeGroup_halign is generated from named attribute group "halign"
+type AttributeGroup_halign struct {
 
 	// insertion point for fields
 
@@ -5195,8 +5402,8 @@ type Halign struct {
 	Halign string `xml:"halign,attr"`
 }
 
-// Image_attributes is generated from named attribute group "image-attributes"
-type Image_attributes struct {
+// AttributeGroup_image_attributes is generated from named attribute group "image-attributes"
+type AttributeGroup_image_attributes struct {
 
 	// insertion point for fields
 
@@ -5213,17 +5420,17 @@ type Image_attributes struct {
 	Width string `xml:"width,attr"`
 
 	// generated from attribute group "position
-	Position
+	AttributeGroup_position
 
 	// generated from attribute group "halign
-	Halign
+	AttributeGroup_halign
 
 	// generated from attribute group "valign-image
-	Valign_image
+	AttributeGroup_valign_image
 }
 
-// Justify is generated from named attribute group "justify"
-type Justify struct {
+// AttributeGroup_justify is generated from named attribute group "justify"
+type AttributeGroup_justify struct {
 
 	// insertion point for fields
 
@@ -5231,8 +5438,8 @@ type Justify struct {
 	Justify string `xml:"justify,attr"`
 }
 
-// Letter_spacing is generated from named attribute group "letter-spacing"
-type Letter_spacing struct {
+// AttributeGroup_letter_spacing is generated from named attribute group "letter-spacing"
+type AttributeGroup_letter_spacing struct {
 
 	// insertion point for fields
 
@@ -5240,8 +5447,8 @@ type Letter_spacing struct {
 	Letter_spacing string `xml:"letter-spacing,attr"`
 }
 
-// Level_display is generated from named attribute group "level-display"
-type Level_display struct {
+// AttributeGroup_level_display is generated from named attribute group "level-display"
+type AttributeGroup_level_display struct {
 
 	// insertion point for fields
 
@@ -5255,8 +5462,8 @@ type Level_display struct {
 	Size string `xml:"size,attr"`
 }
 
-// Line_height is generated from named attribute group "line-height"
-type Line_height struct {
+// AttributeGroup_line_height is generated from named attribute group "line-height"
+type AttributeGroup_line_height struct {
 
 	// insertion point for fields
 
@@ -5264,8 +5471,8 @@ type Line_height struct {
 	Line_height string `xml:"line-height,attr"`
 }
 
-// Line_length is generated from named attribute group "line-length"
-type Line_length struct {
+// AttributeGroup_line_length is generated from named attribute group "line-length"
+type AttributeGroup_line_length struct {
 
 	// insertion point for fields
 
@@ -5273,8 +5480,8 @@ type Line_length struct {
 	Line_length string `xml:"line-length,attr"`
 }
 
-// Line_shape is generated from named attribute group "line-shape"
-type Line_shape struct {
+// AttributeGroup_line_shape is generated from named attribute group "line-shape"
+type AttributeGroup_line_shape struct {
 
 	// insertion point for fields
 
@@ -5282,8 +5489,8 @@ type Line_shape struct {
 	Line_shape string `xml:"line-shape,attr"`
 }
 
-// Line_type is generated from named attribute group "line-type"
-type Line_type struct {
+// AttributeGroup_line_type is generated from named attribute group "line-type"
+type AttributeGroup_line_type struct {
 
 	// insertion point for fields
 
@@ -5291,8 +5498,8 @@ type Line_type struct {
 	Line_type string `xml:"line-type,attr"`
 }
 
-// Link_attributes is generated from named attribute group "link-attributes"
-type Link_attributes struct {
+// AttributeGroup_link_attributes is generated from named attribute group "link-attributes"
+type AttributeGroup_link_attributes struct {
 
 	// insertion point for fields
 
@@ -5315,8 +5522,8 @@ type Link_attributes struct {
 	Actuate string `xml:",attr"`
 }
 
-// Measure_attributes is generated from named attribute group "measure-attributes"
-type Measure_attributes struct {
+// AttributeGroup_measure_attributes is generated from named attribute group "measure-attributes"
+type AttributeGroup_measure_attributes struct {
 
 	// insertion point for fields
 
@@ -5336,11 +5543,11 @@ type Measure_attributes struct {
 	Width string `xml:"width,attr"`
 
 	// generated from attribute group "optional-unique-id
-	Optional_unique_id
+	AttributeGroup_optional_unique_id
 }
 
-// Optional_unique_id is generated from named attribute group "optional-unique-id"
-type Optional_unique_id struct {
+// AttributeGroup_optional_unique_id is generated from named attribute group "optional-unique-id"
+type AttributeGroup_optional_unique_id struct {
 
 	// insertion point for fields
 
@@ -5348,8 +5555,8 @@ type Optional_unique_id struct {
 	Id string `xml:"id,attr"`
 }
 
-// Orientation is generated from named attribute group "orientation"
-type Orientation struct {
+// AttributeGroup_orientation is generated from named attribute group "orientation"
+type AttributeGroup_orientation struct {
 
 	// insertion point for fields
 
@@ -5357,8 +5564,8 @@ type Orientation struct {
 	Orientation string `xml:"orientation,attr"`
 }
 
-// Part_attributes is generated from named attribute group "part-attributes"
-type Part_attributes struct {
+// AttributeGroup_part_attributes is generated from named attribute group "part-attributes"
+type AttributeGroup_part_attributes struct {
 
 	// insertion point for fields
 
@@ -5366,23 +5573,23 @@ type Part_attributes struct {
 	Id string `xml:"id,attr"`
 }
 
-// Part_name_text is generated from named attribute group "part-name-text"
-type Part_name_text struct {
+// AttributeGroup_part_name_text is generated from named attribute group "part-name-text"
+type AttributeGroup_part_name_text struct {
 
 	// insertion point for fields
 
 	// generated from attribute group "print-style
-	Print_style
+	AttributeGroup_print_style
 
 	// generated from attribute group "print-object
-	Print_object
+	AttributeGroup_print_object
 
 	// generated from attribute group "justify
-	Justify
+	AttributeGroup_justify
 }
 
-// Placement is generated from named attribute group "placement"
-type Placement struct {
+// AttributeGroup_placement is generated from named attribute group "placement"
+type AttributeGroup_placement struct {
 
 	// insertion point for fields
 
@@ -5390,8 +5597,8 @@ type Placement struct {
 	Placement string `xml:"placement,attr"`
 }
 
-// Position is generated from named attribute group "position"
-type Position struct {
+// AttributeGroup_position is generated from named attribute group "position"
+type AttributeGroup_position struct {
 
 	// insertion point for fields
 
@@ -5408,8 +5615,8 @@ type Position struct {
 	Relative_y string `xml:"relative-y,attr"`
 }
 
-// Print_attributes is generated from named attribute group "print-attributes"
-type Print_attributes struct {
+// AttributeGroup_print_attributes is generated from named attribute group "print-attributes"
+type AttributeGroup_print_attributes struct {
 
 	// insertion point for fields
 
@@ -5429,8 +5636,8 @@ type Print_attributes struct {
 	Page_number string `xml:"page-number,attr"`
 }
 
-// Print_object is generated from named attribute group "print-object"
-type Print_object struct {
+// AttributeGroup_print_object is generated from named attribute group "print-object"
+type AttributeGroup_print_object struct {
 
 	// insertion point for fields
 
@@ -5438,8 +5645,8 @@ type Print_object struct {
 	Print_object string `xml:"print-object,attr"`
 }
 
-// Print_spacing is generated from named attribute group "print-spacing"
-type Print_spacing struct {
+// AttributeGroup_print_spacing is generated from named attribute group "print-spacing"
+type AttributeGroup_print_spacing struct {
 
 	// insertion point for fields
 
@@ -5447,38 +5654,38 @@ type Print_spacing struct {
 	Print_spacing string `xml:"print-spacing,attr"`
 }
 
-// Print_style is generated from named attribute group "print-style"
-type Print_style struct {
+// AttributeGroup_print_style is generated from named attribute group "print-style"
+type AttributeGroup_print_style struct {
 
 	// insertion point for fields
 
 	// generated from attribute group "position
-	Position
+	AttributeGroup_position
 
 	// generated from attribute group "font
-	Font
+	AttributeGroup_font
 
 	// generated from attribute group "color
-	Color
+	AttributeGroup_color
 }
 
-// Print_style_align is generated from named attribute group "print-style-align"
-type Print_style_align struct {
+// AttributeGroup_print_style_align is generated from named attribute group "print-style-align"
+type AttributeGroup_print_style_align struct {
 
 	// insertion point for fields
 
 	// generated from attribute group "print-style
-	Print_style
+	AttributeGroup_print_style
 
 	// generated from attribute group "halign
-	Halign
+	AttributeGroup_halign
 
 	// generated from attribute group "valign
-	Valign
+	AttributeGroup_valign
 }
 
-// Printout is generated from named attribute group "printout"
-type Printout struct {
+// AttributeGroup_printout is generated from named attribute group "printout"
+type AttributeGroup_printout struct {
 
 	// insertion point for fields
 
@@ -5489,14 +5696,14 @@ type Printout struct {
 	Print_lyric string `xml:"print-lyric,attr"`
 
 	// generated from attribute group "print-object
-	Print_object
+	AttributeGroup_print_object
 
 	// generated from attribute group "print-spacing
-	Print_spacing
+	AttributeGroup_print_spacing
 }
 
-// Smufl is generated from named attribute group "smufl"
-type Smufl struct {
+// AttributeGroup_smufl is generated from named attribute group "smufl"
+type AttributeGroup_smufl struct {
 
 	// insertion point for fields
 
@@ -5504,38 +5711,38 @@ type Smufl struct {
 	Smufl string `xml:"smufl,attr"`
 }
 
-// Symbol_formatting is generated from named attribute group "symbol-formatting"
-type Symbol_formatting struct {
+// AttributeGroup_symbol_formatting is generated from named attribute group "symbol-formatting"
+type AttributeGroup_symbol_formatting struct {
 
 	// insertion point for fields
 
 	// generated from attribute group "justify
-	Justify
+	AttributeGroup_justify
 
 	// generated from attribute group "print-style-align
-	Print_style_align
+	AttributeGroup_print_style_align
 
 	// generated from attribute group "text-decoration
-	Text_decoration
+	AttributeGroup_text_decoration
 
 	// generated from attribute group "text-rotation
-	Text_rotation
+	AttributeGroup_text_rotation
 
 	// generated from attribute group "letter-spacing
-	Letter_spacing
+	AttributeGroup_letter_spacing
 
 	// generated from attribute group "line-height
-	Line_height
+	AttributeGroup_line_height
 
 	// generated from attribute group "text-direction
-	Text_direction
+	AttributeGroup_text_direction
 
 	// generated from attribute group "enclosure
-	Enclosure
+	AttributeGroup_enclosure
 }
 
-// System_relation is generated from named attribute group "system-relation"
-type System_relation struct {
+// AttributeGroup_system_relation is generated from named attribute group "system-relation"
+type AttributeGroup_system_relation struct {
 
 	// insertion point for fields
 
@@ -5543,8 +5750,8 @@ type System_relation struct {
 	System string `xml:"system,attr"`
 }
 
-// Text_decoration is generated from named attribute group "text-decoration"
-type Text_decoration struct {
+// AttributeGroup_text_decoration is generated from named attribute group "text-decoration"
+type AttributeGroup_text_decoration struct {
 
 	// insertion point for fields
 
@@ -5558,8 +5765,8 @@ type Text_decoration struct {
 	Line_through int `xml:"line-through,attr"`
 }
 
-// Text_direction is generated from named attribute group "text-direction"
-type Text_direction struct {
+// AttributeGroup_text_direction is generated from named attribute group "text-direction"
+type AttributeGroup_text_direction struct {
 
 	// insertion point for fields
 
@@ -5567,8 +5774,8 @@ type Text_direction struct {
 	Dir string `xml:"dir,attr"`
 }
 
-// Text_formatting is generated from named attribute group "text-formatting"
-type Text_formatting struct {
+// AttributeGroup_text_formatting is generated from named attribute group "text-formatting"
+type AttributeGroup_text_formatting struct {
 
 	// insertion point for fields
 
@@ -5579,32 +5786,32 @@ type Text_formatting struct {
 	Space string `xml:",attr"`
 
 	// generated from attribute group "justify
-	Justify
+	AttributeGroup_justify
 
 	// generated from attribute group "print-style-align
-	Print_style_align
+	AttributeGroup_print_style_align
 
 	// generated from attribute group "text-decoration
-	Text_decoration
+	AttributeGroup_text_decoration
 
 	// generated from attribute group "text-rotation
-	Text_rotation
+	AttributeGroup_text_rotation
 
 	// generated from attribute group "letter-spacing
-	Letter_spacing
+	AttributeGroup_letter_spacing
 
 	// generated from attribute group "line-height
-	Line_height
+	AttributeGroup_line_height
 
 	// generated from attribute group "text-direction
-	Text_direction
+	AttributeGroup_text_direction
 
 	// generated from attribute group "enclosure
-	Enclosure
+	AttributeGroup_enclosure
 }
 
-// Text_rotation is generated from named attribute group "text-rotation"
-type Text_rotation struct {
+// AttributeGroup_text_rotation is generated from named attribute group "text-rotation"
+type AttributeGroup_text_rotation struct {
 
 	// insertion point for fields
 
@@ -5612,8 +5819,8 @@ type Text_rotation struct {
 	Rotation string `xml:"rotation,attr"`
 }
 
-// Trill_sound is generated from named attribute group "trill-sound"
-type Trill_sound struct {
+// AttributeGroup_trill_sound is generated from named attribute group "trill-sound"
+type AttributeGroup_trill_sound struct {
 
 	// insertion point for fields
 
@@ -5639,8 +5846,8 @@ type Trill_sound struct {
 	Last_beat string `xml:"last-beat,attr"`
 }
 
-// Valign is generated from named attribute group "valign"
-type Valign struct {
+// AttributeGroup_valign is generated from named attribute group "valign"
+type AttributeGroup_valign struct {
 
 	// insertion point for fields
 
@@ -5648,8 +5855,8 @@ type Valign struct {
 	Valign string `xml:"valign,attr"`
 }
 
-// Valign_image is generated from named attribute group "valign-image"
-type Valign_image struct {
+// AttributeGroup_valign_image is generated from named attribute group "valign-image"
+type AttributeGroup_valign_image struct {
 
 	// insertion point for fields
 
@@ -5657,8 +5864,8 @@ type Valign_image struct {
 	Valign string `xml:"valign,attr"`
 }
 
-// X_position is generated from named attribute group "x-position"
-type X_position struct {
+// AttributeGroup_x_position is generated from named attribute group "x-position"
+type AttributeGroup_x_position struct {
 
 	// insertion point for fields
 
@@ -5675,8 +5882,8 @@ type X_position struct {
 	Relative_y string `xml:"relative-y,attr"`
 }
 
-// Y_position is generated from named attribute group "y-position"
-type Y_position struct {
+// AttributeGroup_y_position is generated from named attribute group "y-position"
+type AttributeGroup_y_position struct {
 
 	// insertion point for fields
 
@@ -5699,71 +5906,8 @@ type Score_partwise struct {
 
 	// insertion point for fields
 
-	// generated from attribute group "document-attributes
-	Document_attributes
-
-	// generated from element "note" of type note
-	Note []*Note `xml:"note"`
-
-	// generated from element "backup" of type backup
-	Backup []*Backup `xml:"backup"`
-
-	// generated from element "forward" of type forward
-	Forward []*Forward `xml:"forward"`
-
-	// generated from element "direction" of type direction
-	Direction []*Direction `xml:"direction"`
-
-	// generated from element "attributes" of type attributes
-	Attributes []*Attributes `xml:"attributes"`
-
-	// generated from element "harmony" of type harmony
-	Harmony []*Harmony `xml:"harmony"`
-
-	// generated from element "figured-bass" of type figured-bass
-	Figured_bass []*Figured_bass `xml:"figured-bass"`
-
-	// generated from element "print" of type print
-	Print []*Print `xml:"print"`
-
-	// generated from element "sound" of type sound
-	Sound []*Sound `xml:"sound"`
-
-	// generated from element "listening" of type listening
-	Listening []*Listening `xml:"listening"`
-
-	// generated from element "barline" of type barline
-	Barline []*Barline `xml:"barline"`
-
-	// generated from element "grouping" of type grouping
-	Grouping []*Grouping `xml:"grouping"`
-
-	// generated from element "link" of type link
-	Link []*Link `xml:"link"`
-
-	// generated from element "bookmark" of type bookmark
-	Bookmark []*Bookmark `xml:"bookmark"`
-
-	// generated from element "work" of type work
-	Work []*Work `xml:"work"`
-
-	// generated from element "movement-number" of type xs:string
-	Movement_number string `xml:"movement-number"`
-
-	// generated from element "movement-title" of type xs:string
-	Movement_title string `xml:"movement-title"`
-
-	// generated from element "identification" of type identification
-	Identification []*Identification `xml:"identification"`
-
-	// generated from element "defaults" of type defaults
-	Defaults []*Defaults `xml:"defaults"`
-
-	// generated from element "credit" of type credit
-	Credit []*Credit `xml:"credit"`
-
-	// generated from element "part-list" of type part-list
-	Part_list []*Part_list `xml:"part-list"`
+	// generated from inline complex type
+	AnonymousComplexTypeInline_score_partwise
 }
 
 // Score_timewise is generated from element score-timewise within root schema
@@ -5772,69 +5916,6 @@ type Score_timewise struct {
 
 	// insertion point for fields
 
-	// generated from attribute group "document-attributes
-	Document_attributes
-
-	// generated from element "note" of type note
-	Note []*Note `xml:"note"`
-
-	// generated from element "backup" of type backup
-	Backup []*Backup `xml:"backup"`
-
-	// generated from element "forward" of type forward
-	Forward []*Forward `xml:"forward"`
-
-	// generated from element "direction" of type direction
-	Direction []*Direction `xml:"direction"`
-
-	// generated from element "attributes" of type attributes
-	Attributes []*Attributes `xml:"attributes"`
-
-	// generated from element "harmony" of type harmony
-	Harmony []*Harmony `xml:"harmony"`
-
-	// generated from element "figured-bass" of type figured-bass
-	Figured_bass []*Figured_bass `xml:"figured-bass"`
-
-	// generated from element "print" of type print
-	Print []*Print `xml:"print"`
-
-	// generated from element "sound" of type sound
-	Sound []*Sound `xml:"sound"`
-
-	// generated from element "listening" of type listening
-	Listening []*Listening `xml:"listening"`
-
-	// generated from element "barline" of type barline
-	Barline []*Barline `xml:"barline"`
-
-	// generated from element "grouping" of type grouping
-	Grouping []*Grouping `xml:"grouping"`
-
-	// generated from element "link" of type link
-	Link []*Link `xml:"link"`
-
-	// generated from element "bookmark" of type bookmark
-	Bookmark []*Bookmark `xml:"bookmark"`
-
-	// generated from element "work" of type work
-	Work []*Work `xml:"work"`
-
-	// generated from element "movement-number" of type xs:string
-	Movement_number string `xml:"movement-number"`
-
-	// generated from element "movement-title" of type xs:string
-	Movement_title string `xml:"movement-title"`
-
-	// generated from element "identification" of type identification
-	Identification []*Identification `xml:"identification"`
-
-	// generated from element "defaults" of type defaults
-	Defaults []*Defaults `xml:"defaults"`
-
-	// generated from element "credit" of type credit
-	Credit []*Credit `xml:"credit"`
-
-	// generated from element "part-list" of type part-list
-	Part_list []*Part_list `xml:"part-list"`
+	// generated from inline complex type
+	AnonymousComplexTypeInline_score_timewise
 }

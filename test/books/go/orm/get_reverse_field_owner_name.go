@@ -17,6 +17,18 @@ func GetReverseFieldOwnerName[T models.Gongstruct](
 	case *models.BookType:
 		switch reverseField.GongstructName {
 		// insertion point
+		case "Books":
+			switch reverseField.Fieldname {
+			case "Book":
+				if _books, ok := stage.Books_Book_reverseMap[inst]; ok {
+					res = _books.Name
+				}
+			}
+		}
+
+	case *models.Books:
+		switch reverseField.GongstructName {
+		// insertion point
 		}
 
 	case *models.Credit:
@@ -59,6 +71,16 @@ func GetReverseFieldOwner[T models.Gongstruct](
 	switch inst := any(instance).(type) {
 	// insertion point
 	case *models.BookType:
+		switch reverseField.GongstructName {
+		// insertion point
+		case "Books":
+			switch reverseField.Fieldname {
+			case "Book":
+				res = stage.Books_Book_reverseMap[inst]
+			}
+		}
+
+	case *models.Books:
 		switch reverseField.GongstructName {
 		// insertion point
 		}

@@ -55,6 +55,28 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 			}
 		}
 
+	case *Books:
+		// insertion point per field
+		if fieldName == "Book" {
+
+			// walk all instances of the owning type
+			for _instance := range *GetGongstructInstancesSetFromPointerType[OwningType](stage) {
+				if any(_instance).(*Books) != owningInstanceInfered {
+					_inferedTypeInstance := any(_instance).(*Books)
+					reference := make([]FieldType, 0)
+					targetFieldSlice := any(_inferedTypeInstance.Book).([]FieldType)
+					copy(targetFieldSlice, reference)
+					_inferedTypeInstance.Book = _inferedTypeInstance.Book[0:]
+					for _, fieldInstance := range reference {
+						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
+							_inferedTypeInstance.Book =
+								append(_inferedTypeInstance.Book, any(fieldInstance).(*BookType))
+						}
+					}
+				}
+			}
+		}
+
 	case *Credit:
 		// insertion point per field
 		if fieldName == "Link" {
@@ -97,6 +119,17 @@ func (stage *StageStruct) ComputeReverseMaps() {
 		_ = booktype
 		for _, _credit := range booktype.Credit {
 			stage.BookType_Credit_reverseMap[_credit] = booktype
+		}
+	}
+
+	// Compute reverse map for named struct Books
+	// insertion point per field
+	clear(stage.Books_Book_reverseMap)
+	stage.Books_Book_reverseMap = make(map[*BookType]*Books)
+	for books := range stage.Bookss {
+		_ = books
+		for _, _booktype := range books.Book {
+			stage.Books_Book_reverseMap[_booktype] = books
 		}
 	}
 

@@ -6,6 +6,15 @@ import "encoding/xml"
 // to avoid compilation error if no xml element is generated
 var _ xml.Attr
 
+// AnonymousComplexTypeInline_books is generated from outer element "books"
+type AnonymousComplexTypeInline_books struct {
+
+	// insertion point for fields
+
+	// generated from element "book" of type bookType
+	Book []*BookType `xml:"book"`
+}
+
 // BookType is generated from named complex type "bookType"
 type BookType struct {
 	Name string `xml:"-"`
@@ -13,7 +22,7 @@ type BookType struct {
 	// insertion point for fields
 
 	// generated from attribute group "extendedAttributes
-	ExtendedAttributes
+	AttributeGroup_extendedAttributes
 
 	// generated from element "credit" of type credit
 	Credit []*Credit `xml:"credit"`
@@ -66,8 +75,8 @@ type Link struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// BookDetailsGroup is generated from named group "bookDetailsGroup"
-type BookDetailsGroup struct {
+// Group_bookDetailsGroup is generated from named group "bookDetailsGroup"
+type Group_bookDetailsGroup struct {
 
 	// insertion point for fields
 
@@ -84,8 +93,8 @@ type BookDetailsGroup struct {
 	Format string `xml:"format"`
 }
 
-// CommonAttributes is generated from named attribute group "commonAttributes"
-type CommonAttributes struct {
+// AttributeGroup_commonAttributes is generated from named attribute group "commonAttributes"
+type AttributeGroup_commonAttributes struct {
 
 	// insertion point for fields
 
@@ -96,8 +105,8 @@ type CommonAttributes struct {
 	Bestseller bool `xml:"bestseller,attr"`
 }
 
-// ExtendedAttributes is generated from named attribute group "extendedAttributes"
-type ExtendedAttributes struct {
+// AttributeGroup_extendedAttributes is generated from named attribute group "extendedAttributes"
+type AttributeGroup_extendedAttributes struct {
 
 	// insertion point for fields
 
@@ -105,7 +114,7 @@ type ExtendedAttributes struct {
 	Edition string `xml:"edition,attr"`
 
 	// generated from attribute group "commonAttributes
-	CommonAttributes
+	AttributeGroup_commonAttributes
 }
 
 // Books is generated from element books within root schema
@@ -114,6 +123,6 @@ type Books struct {
 
 	// insertion point for fields
 
-	// generated from element "book" of type bookType
-	Book []*BookType `xml:"book"`
+	// generated from inline complex type
+	AnonymousComplexTypeInline_books
 }

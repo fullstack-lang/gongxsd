@@ -31,6 +31,16 @@ func (from *BookType) CopyBasicFields(to *BookType) {
 	to.Format = from.Format
 }
 
+type Books_WOP struct {
+	// insertion point
+	Name string
+}
+
+func (from *Books) CopyBasicFields(to *Books) {
+	// insertion point
+	to.Name = from.Name
+}
+
 type Credit_WOP struct {
 	// insertion point
 	Name string

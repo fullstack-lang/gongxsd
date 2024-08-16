@@ -22,6 +22,8 @@ func fillUpTablePointerToGongstruct[T models.PointerToGongstruct](
 	// insertion point
 	case *models.BookType:
 		fillUpTable[models.BookType](probe)
+	case *models.Books:
+		fillUpTable[models.Books](probe)
 	case *models.Credit:
 		fillUpTable[models.Credit](probe)
 	case *models.Link:

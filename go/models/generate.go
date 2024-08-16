@@ -23,23 +23,34 @@ func Generate(stage *StageStruct, outputFilePath string) {
 
 	for _, ct := range GetGongstrucsSorted[*ComplexType](stage) {
 
-		// not the inline complex type
-		if ct.IsAnonymous {
-			continue
+		fields := ct.GetFields(stage)
+
+		if !ct.IsAnonymous {
+			templInsertionLevel0[ModelsFileTmplLevel0AllGongstructsCode] += Replace3(
+				ModelsFileTmplLevel1Code[ModelsFileTmplLevel1NamedStructCode],
+
+				"{{"+string(rune(ModelsFileTmplLevel2Structname))+"}}", ct.GoIdentifier,
+
+				"{{"+string(rune(ModelsFileTmplLevel2Source))+"}}",
+				`named complex type "`+ct.Name+`"`,
+
+				"{{"+string(rune(ModelsFileTmplLevel2Fields))+"}}",
+				fields,
+			)
+		} else {
+			templInsertionLevel0[ModelsFileTmplLevel0AllGongstructsCode] += Replace3(
+				ModelsFileTmplLevel1Code[ModelsFileTmplLevel1UnNamedStructCode],
+
+				"{{"+string(rune(ModelsFileTmplLevel2Structname))+"}}", ct.GoIdentifier,
+
+				"{{"+string(rune(ModelsFileTmplLevel2Source))+"}}",
+				`outer element "`+ct.OuterElement.Name+`"`,
+
+				"{{"+string(rune(ModelsFileTmplLevel2Fields))+"}}",
+				fields,
+			)
 		}
 
-		fields := ct.GetFields(stage)
-		templInsertionLevel0[ModelsFileTmplLevel0AllGongstructsCode] += Replace3(
-			ModelsFileTmplLevel1Code[ModelsFileTmplLevel1NamedStructCode],
-
-			"{{"+string(rune(ModelsFileTmplLevel2Structname))+"}}", ct.GoIdentifier,
-
-			"{{"+string(rune(ModelsFileTmplLevel2Source))+"}}",
-			`named complex type "`+ct.Name+`"`,
-
-			"{{"+string(rune(ModelsFileTmplLevel2Fields))+"}}",
-			fields,
-		)
 	}
 
 	// groups are generated into unamed struct that can be composed
@@ -124,7 +135,8 @@ func Generate(stage *StageStruct, outputFilePath string) {
 
 	schema := GetGongstrucsSorted[*Schema](stage)[0]
 	for _, element := range schema.Elements {
-		fields := element.ComplexType.GetFields(stage)
+		fields := "\n\n\t// generated from inline complex type" +
+			"\n\t" + element.ComplexType.GoIdentifier
 
 		templInsertionLevel0[ModelsFileTmplLevel0AllGongstructsCode] += Replace3(
 			ModelsFileTmplLevel1Code[ModelsFileTmplLevel1NamedStructCode],

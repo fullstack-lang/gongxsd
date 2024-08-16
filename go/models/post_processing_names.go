@@ -47,7 +47,7 @@ func PostProcessingNames(stage *StageStruct) {
 	for x := range *GetGongstructInstancesSet[Group](stage) {
 		x.Name = x.NameXSD
 
-		computeGoIdentifier(x.Name, &x.WithGoIdentifier, setOfGoIdentifiers)
+		computeGoIdentifier("Group_"+x.Name, &x.WithGoIdentifier, setOfGoIdentifiers)
 
 		if _x, ok := map_EmbeddedGroup[x]; ok {
 			x.Name = prefix(_x.Name)
@@ -184,7 +184,7 @@ func PostProcessingNames(stage *StageStruct) {
 	for x := range *GetGongstructInstancesSet[AttributeGroup](stage) {
 		x.Name = x.NameXSD
 
-		computeGoIdentifier(x.Name, &x.WithGoIdentifier, setOfGoIdentifiers)
+		computeGoIdentifier("AttributeGroup_"+x.Name, &x.WithGoIdentifier, setOfGoIdentifiers)
 
 		if x.Annotation != nil {
 			x.Annotation.Name = prefix(x.Name)
@@ -207,6 +207,9 @@ func PostProcessingNames(stage *StageStruct) {
 
 		if x.ComplexType != nil {
 			map_EmbeddedComplexType[x.ComplexType] = x
+
+			x.ComplexType.Name = "AnonymousComplexTypeInline_" + x.Name
+			computeGoIdentifier(x.ComplexType.Name, &x.ComplexType.WithGoIdentifier, setOfGoIdentifiers)
 
 			setOfGoIdentifiers := make(map[string]any)
 			computeGoIdentifier(x.Name, &x.WithGoIdentifier, setOfGoIdentifiers)

@@ -170,6 +170,40 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 
 	}
 
+	map_Books_Identifiers := make(map[*Books]string)
+	_ = map_Books_Identifiers
+
+	booksOrdered := []*Books{}
+	for books := range stage.Bookss {
+		booksOrdered = append(booksOrdered, books)
+	}
+	sort.Slice(booksOrdered[:], func(i, j int) bool {
+		return booksOrdered[i].Name < booksOrdered[j].Name
+	})
+	if len(booksOrdered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, books := range booksOrdered {
+
+		id = generatesIdentifier("Books", idx, books.Name)
+		map_Books_Identifiers[books] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "Books")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", books.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(books.Name))
+		initializerStatements += setValueField
+
+	}
+
 	map_Credit_Identifiers := make(map[*Credit]string)
 	_ = map_Credit_Identifiers
 
@@ -288,6 +322,24 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Credit")
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Credit_Identifiers[_credit])
+			pointersInitializesStatements += setPointerField
+		}
+
+	}
+
+	for idx, books := range booksOrdered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("Books", idx, books.Name)
+		map_Books_Identifiers[books] = id
+
+		// Initialisation of values
+		for _, _booktype := range books.Book {
+			setPointerField = SliceOfPointersFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Book")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_BookType_Identifiers[_booktype])
 			pointersInitializesStatements += setPointerField
 		}
 

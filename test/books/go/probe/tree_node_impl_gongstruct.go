@@ -55,6 +55,9 @@ func (nodeImplGongstruct *TreeNodeImplGongstruct) OnAfterUpdate(
 	if nodeImplGongstruct.gongStruct.GetName() == "BookType" {
 		fillUpTable[models.BookType](nodeImplGongstruct.probe)
 	}
+	if nodeImplGongstruct.gongStruct.GetName() == "Books" {
+		fillUpTable[models.Books](nodeImplGongstruct.probe)
+	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Credit" {
 		fillUpTable[models.Credit](nodeImplGongstruct.probe)
 	}
