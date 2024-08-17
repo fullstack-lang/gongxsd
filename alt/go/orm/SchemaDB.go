@@ -50,6 +50,14 @@ type SchemaPointersEncoding struct {
 	// field Annotation is a pointer to another Struct (optional or 0..1)
 	// This field is generated into another field to enable AS ONE association
 	AnnotationID sql.NullInt64
+
+	Sequence2 struct {
+
+		// field ComplexType is a pointer to another Struct (optional or 0..1)
+		// This field is generated into another field to enable AS ONE association
+		ComplexTypeID sql.NullInt64
+
+	} `gorm:"embedded"`
 }
 
 // SchemaDB describes a schema in the database
@@ -251,6 +259,18 @@ func (backRepoSchema *BackRepoSchemaStruct) CommitPhaseTwoInstance(backRepo *Bac
 			schemaDB.AnnotationID.Valid = true
 		}
 
+		// commit pointer value schema.Sequence2.ComplexType translates to updating the schema.Sequence2.ComplexTypeID
+		schemaDB.SchemaPointersEncoding.Sequence2.ComplexTypeID.Valid = true // allow for a 0 value (nil association)
+		if schema.Sequence2.ComplexType != nil {
+			if ComplexTypeId, ok := backRepo.BackRepoComplexType.Map_ComplexTypePtr_ComplexTypeDBID[schema.Sequence2.ComplexType]; ok {
+				schemaDB.SchemaPointersEncoding.Sequence2.ComplexTypeID.Int64 = int64(ComplexTypeId)
+				schemaDB.SchemaPointersEncoding.Sequence2.ComplexTypeID.Valid = true
+			}
+		} else {
+			schemaDB.SchemaPointersEncoding.Sequence2.ComplexTypeID.Int64 = 0
+			schemaDB.SchemaPointersEncoding.Sequence2.ComplexTypeID.Valid = true
+		}
+
 		query := backRepoSchema.db.Save(&schemaDB)
 		if query.Error != nil {
 			log.Fatalln(query.Error)
@@ -368,6 +388,11 @@ func (schemaDB *SchemaDB) DecodePointers(backRepo *BackRepoStruct, schema *model
 	schema.Annotation = nil
 	if schemaDB.AnnotationID.Int64 != 0 {
 		schema.Annotation = backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(schemaDB.AnnotationID.Int64)]
+	}
+	// Sequence2.ComplexType field
+	schema.Sequence2.ComplexType = nil
+	if schemaDB.SchemaPointersEncoding.Sequence2.ComplexTypeID.Int64 != 0 {
+		schema.Sequence2.ComplexType = backRepo.BackRepoComplexType.Map_ComplexTypeDBID_ComplexTypePtr[uint(schemaDB.SchemaPointersEncoding.Sequence2.ComplexTypeID.Int64)]
 	}
 	return
 }
@@ -649,6 +674,12 @@ func (backRepoSchema *BackRepoSchemaStruct) RestorePhaseTwo() {
 		if schemaDB.AnnotationID.Int64 != 0 {
 			schemaDB.AnnotationID.Int64 = int64(BackRepoAnnotationid_atBckpTime_newID[uint(schemaDB.AnnotationID.Int64)])
 			schemaDB.AnnotationID.Valid = true
+		}
+
+		// reindexing Sequence2.ComplexType field
+		if schemaDB.SchemaPointersEncoding.Sequence2.ComplexTypeID.Int64 != 0 {
+			schemaDB.SchemaPointersEncoding.Sequence2.ComplexTypeID.Int64 = int64(BackRepoComplexTypeid_atBckpTime_newID[uint(schemaDB.SchemaPointersEncoding.Sequence2.ComplexTypeID.Int64)])
+			schemaDB.SchemaPointersEncoding.Sequence2.ComplexTypeID.Valid = true
 		}
 
 		// update databse with new index encoding

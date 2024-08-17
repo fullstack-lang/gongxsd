@@ -17,5 +17,5 @@ package models
 </xs:group>
 */
 type Redefinable struct {
-	ComplexType *ComplexType `xml:"xs:complexType"`
+	ComplexType *ComplexType `xml:"complexType"`
 }

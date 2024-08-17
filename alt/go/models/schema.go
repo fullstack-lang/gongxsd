@@ -68,9 +68,14 @@ type Schema_A_ComplexType_A_ComplexContent_A_Extension_Sequence struct {
 	Schema_A_ComplexType_A_ComplexContent_A_Extension_Sequence_Sequence1
 
 	// this line below can read the complex type
-	// ComplexType []*ComplexType `xml:"complexType"`
+	// Redefinables []*ComplexType `xml:"complexType"`
 
-	Sequence2 []*Schema_A_ComplexType_A_ComplexContent_A_Extension_Sequence_Sequence2 `xml:",inline"`
+	Sequence2 struct {
+		ComplexType *ComplexType `xml:"complexType"`
+	} `xml:",inline"`
+}
+
+type Foo struct {
 }
 
 /*

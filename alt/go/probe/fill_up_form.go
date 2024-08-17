@@ -80,6 +80,7 @@ func FillUpForm[T models.Gongstruct](
 			false, false, 0, false, 0)
 		BasicFieldtoForm("Schema_A_ComplexType_A_ComplexContent_A_Extension_Sequence_Sequence1Dummy", instanceWithInferedType.Schema_A_ComplexType_A_ComplexContent_A_Extension_Sequence_Sequence1Dummy, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
+		AssociationFieldToForm("Sequence2.ComplexType", instanceWithInferedType.Sequence2.ComplexType, formGroup, probe)
 
 	default:
 		_ = instanceWithInferedType

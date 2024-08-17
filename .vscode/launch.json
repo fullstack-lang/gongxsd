@@ -145,5 +145,12 @@
                 "stages/books_xml"
             ]
         },
+        {
+            "name": "test inline",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceFolder}/test/xsd/inline"
+        },
     ]
 }

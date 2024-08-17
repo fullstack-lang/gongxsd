@@ -780,6 +780,9 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 				case "Annotation":
 					targetIdentifier := ident.Name
 					__gong__map_Schema[identifier].Annotation = __gong__map_Annotation[targetIdentifier]
+				case "Sequence2.ComplexType":
+					targetIdentifier := ident.Name
+					__gong__map_Schema[identifier].Sequence2.ComplexType = __gong__map_ComplexType[targetIdentifier]
 				}
 			}
 		case *ast.SelectorExpr:

@@ -429,6 +429,8 @@ func (schemaFormCallback *SchemaFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(schema_.Schema_A_ComplexType_A_ComplexContent_A_Extension_SequenceDummy), formDiv)
 		case "Schema_A_ComplexType_A_ComplexContent_A_Extension_Sequence_Sequence1Dummy":
 			FormDivBasicFieldToField(&(schema_.Schema_A_ComplexType_A_ComplexContent_A_Extension_Sequence_Sequence1Dummy), formDiv)
+		case "Sequence2.ComplexType":
+			FormDivSelectFieldToField(&(schema_.Sequence2.ComplexType), schemaFormCallback.probe.stageOfInterest, formDiv)
 		}
 	}
 

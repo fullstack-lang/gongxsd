@@ -167,6 +167,9 @@ func (stage *StageStruct) StageBranchSchema(schema *Schema) {
 	if schema.Annotation != nil {
 		StageBranch(stage, schema.Annotation)
 	}
+	if schema.Sequence2.ComplexType != nil {
+		StageBranch(stage, schema.Sequence2.ComplexType)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 
@@ -305,6 +308,9 @@ func CopyBranchSchema(mapOrigCopy map[any]any, schemaFrom *Schema) (schemaTo *Sc
 	if schemaFrom.Annotation != nil {
 		schemaTo.Annotation = CopyBranchAnnotation(mapOrigCopy, schemaFrom.Annotation)
 	}
+	if schemaFrom.Sequence2.ComplexType != nil {
+		schemaTo.Sequence2.ComplexType = CopyBranchComplexType(mapOrigCopy, schemaFrom.Sequence2.ComplexType)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 
@@ -415,6 +421,9 @@ func (stage *StageStruct) UnstageBranchSchema(schema *Schema) {
 	//insertion point for the staging of instances referenced by pointers
 	if schema.Annotation != nil {
 		UnstageBranch(stage, schema.Annotation)
+	}
+	if schema.Sequence2.ComplexType != nil {
+		UnstageBranch(stage, schema.Sequence2.ComplexType)
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers

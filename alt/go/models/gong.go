@@ -860,6 +860,23 @@ func GetPointerReverseMap[Start, End Gongstruct](fieldname string, stage *StageS
 				}
 			}
 			return any(res).(map[*End][]*Start)
+		case "Sequence2.ComplexType":
+			res := make(map[*ComplexType][]*Schema)
+			for schema := range stage.Schemas {
+				if schema.Sequence2.ComplexType != nil {
+					complextype_ := schema.Sequence2.ComplexType
+					var schemas []*Schema
+					_, ok := res[complextype_]
+					if ok {
+						schemas = res[complextype_]
+					} else {
+						schemas = make([]*Schema, 0)
+					}
+					schemas = append(schemas, schema)
+					res[complextype_] = schemas
+				}
+			}
+			return any(res).(map[*End][]*Start)
 		}
 	}
 	return nil
@@ -974,7 +991,7 @@ func GetFields[Type Gongstruct]() (res []string) {
 	case Documentation:
 		res = []string{"Name", "Text", "Source", "Lang"}
 	case Schema:
-		res = []string{"Name", "Xs", "Annotation", "Schema_A_ComplexType_A_ComplexContentDummy", "Schema_A_ComplexType_A_ComplexContent_A_Extension_SequenceDummy", "Schema_A_ComplexType_A_ComplexContent_A_Extension_Sequence_Sequence1Dummy"}
+		res = []string{"Name", "Xs", "Annotation", "Schema_A_ComplexType_A_ComplexContentDummy", "Schema_A_ComplexType_A_ComplexContent_A_Extension_SequenceDummy", "Schema_A_ComplexType_A_ComplexContent_A_Extension_Sequence_Sequence1Dummy", "Sequence2.ComplexType"}
 	}
 	return
 }
@@ -1031,7 +1048,7 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 	case *Documentation:
 		res = []string{"Name", "Text", "Source", "Lang"}
 	case *Schema:
-		res = []string{"Name", "Xs", "Annotation", "Schema_A_ComplexType_A_ComplexContentDummy", "Schema_A_ComplexType_A_ComplexContent_A_Extension_SequenceDummy", "Schema_A_ComplexType_A_ComplexContent_A_Extension_Sequence_Sequence1Dummy"}
+		res = []string{"Name", "Xs", "Annotation", "Schema_A_ComplexType_A_ComplexContentDummy", "Schema_A_ComplexType_A_ComplexContent_A_Extension_SequenceDummy", "Schema_A_ComplexType_A_ComplexContent_A_Extension_Sequence_Sequence1Dummy", "Sequence2.ComplexType"}
 	}
 	return
 }
@@ -1094,6 +1111,10 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 			res = fmt.Sprintf("%d", inferedInstance.Schema_A_ComplexType_A_ComplexContent_A_Extension_SequenceDummy)
 		case "Schema_A_ComplexType_A_ComplexContent_A_Extension_Sequence_Sequence1Dummy":
 			res = fmt.Sprintf("%d", inferedInstance.Schema_A_ComplexType_A_ComplexContent_A_Extension_Sequence_Sequence1Dummy)
+		case "Sequence2.ComplexType":
+			if inferedInstance.Sequence2.ComplexType != nil {
+				res = inferedInstance.Sequence2.ComplexType.Name
+			}
 		}
 	default:
 		_ = inferedInstance
@@ -1159,6 +1180,10 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 			res = fmt.Sprintf("%d", inferedInstance.Schema_A_ComplexType_A_ComplexContent_A_Extension_SequenceDummy)
 		case "Schema_A_ComplexType_A_ComplexContent_A_Extension_Sequence_Sequence1Dummy":
 			res = fmt.Sprintf("%d", inferedInstance.Schema_A_ComplexType_A_ComplexContent_A_Extension_Sequence_Sequence1Dummy)
+		case "Sequence2.ComplexType":
+			if inferedInstance.Sequence2.ComplexType != nil {
+				res = inferedInstance.Sequence2.ComplexType.Name
+			}
 		}
 	default:
 		_ = inferedInstance
