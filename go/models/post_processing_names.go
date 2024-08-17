@@ -208,7 +208,7 @@ func PostProcessingNames(stage *StageStruct) {
 		if x.ComplexType != nil {
 			map_EmbeddedComplexType[x.ComplexType] = x
 
-			x.ComplexType.Name = "AnonymousComplexTypeInline_" + x.Name
+			x.ComplexType.Name = "A_" + x.Name
 			computeGoIdentifier(x.ComplexType.Name, &x.ComplexType.WithGoIdentifier, setOfGoIdentifiers)
 
 			setOfGoIdentifiers := make(map[string]any)

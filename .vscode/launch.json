@@ -104,6 +104,19 @@
             ]
         },
         {
+            "name": "gongxsd-cli read xsd",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceFolder}/go/cmd/gongxsd-cli",
+            "args": [
+                "read",
+                "../../../test/xsd/schema.xsd",
+                "-m",
+                "stages/stage"
+            ]
+        },
+        {
             "name": "test xml roundtrip books",
             "type": "go",
             "request": "launch",
@@ -118,6 +131,17 @@
             "mode": "debug",
             "program": "${workspaceFolder}/test/musicxml/go/roundtrip",
             "args": []
+        },
+        {
+            "name": "gongxsd-cli alt read books",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceFolder}/alt/go/cmd/gongxsd-cli",
+            "args": [
+                "read",
+                "../../../../test/books/books.xsd",
+            ]
         },
     ]
 }

@@ -278,5 +278,30 @@
 			],
 			"group": "build"
 		},
+		{
+			"label": "01 - gongc alt -clean",
+			"type": "shell",
+			"options": {
+				"cwd": "${workspaceFolder}/test/go/models"
+			},
+			"command": "gongc",
+			"group": "build",
+			"args": [
+				"-clean"
+			]
+		},
+		{
+			"label": "01 - gongc alt -skipNpmWorkspaces",
+			"type": "shell",
+			"options": {
+				"cwd": "${workspaceFolder}/alt"
+			},
+			"command": "gongc",
+			"group": "build",
+			"args": [
+				"-skipNpmWorkspaces",
+				"go/models",
+			]
+		},
 	]
 }
