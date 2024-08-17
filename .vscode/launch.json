@@ -141,6 +141,8 @@
             "args": [
                 "read",
                 "../../../../test/books/books.xsd",
+                "-m",
+                "stages/books_xml"
             ]
         },
     ]

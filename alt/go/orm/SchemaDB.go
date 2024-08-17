@@ -50,10 +50,6 @@ type SchemaPointersEncoding struct {
 	// field Annotation is a pointer to another Struct (optional or 0..1)
 	// This field is generated into another field to enable AS ONE association
 	AnnotationID sql.NullInt64
-
-	// field ComplexType is a pointer to another Struct (optional or 0..1)
-	// This field is generated into another field to enable AS ONE association
-	ComplexTypeID sql.NullInt64
 }
 
 // SchemaDB describes a schema in the database
@@ -72,6 +68,15 @@ type SchemaDB struct {
 
 	// Declation for basic field schemaDB.Xs
 	Xs_Data sql.NullString
+
+	// Declation for basic field schemaDB.Schema_A_ComplexType_A_ComplexContentDummy
+	Schema_A_ComplexType_A_ComplexContentDummy_Data sql.NullInt64
+
+	// Declation for basic field schemaDB.Schema_A_ComplexType_A_ComplexContent_A_Extension_SequenceDummy
+	Schema_A_ComplexType_A_ComplexContent_A_Extension_SequenceDummy_Data sql.NullInt64
+
+	// Declation for basic field schemaDB.Schema_A_ComplexType_A_ComplexContent_A_Extension_Sequence_Sequence1Dummy
+	Schema_A_ComplexType_A_ComplexContent_A_Extension_Sequence_Sequence1Dummy_Data sql.NullInt64
 	
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
@@ -98,6 +103,12 @@ type SchemaWOP struct {
 	Name string `xlsx:"1"`
 
 	Xs string `xlsx:"2"`
+
+	Schema_A_ComplexType_A_ComplexContentDummy int `xlsx:"3"`
+
+	Schema_A_ComplexType_A_ComplexContent_A_Extension_SequenceDummy int `xlsx:"4"`
+
+	Schema_A_ComplexType_A_ComplexContent_A_Extension_Sequence_Sequence1Dummy int `xlsx:"5"`
 	// insertion for WOP pointer fields
 }
 
@@ -106,6 +117,9 @@ var Schema_Fields = []string{
 	"ID",
 	"Name",
 	"Xs",
+	"Schema_A_ComplexType_A_ComplexContentDummy",
+	"Schema_A_ComplexType_A_ComplexContent_A_Extension_SequenceDummy",
+	"Schema_A_ComplexType_A_ComplexContent_A_Extension_Sequence_Sequence1Dummy",
 }
 
 type BackRepoSchemaStruct struct {
@@ -237,18 +251,6 @@ func (backRepoSchema *BackRepoSchemaStruct) CommitPhaseTwoInstance(backRepo *Bac
 			schemaDB.AnnotationID.Valid = true
 		}
 
-		// commit pointer value schema.ComplexType translates to updating the schema.ComplexTypeID
-		schemaDB.ComplexTypeID.Valid = true // allow for a 0 value (nil association)
-		if schema.ComplexType != nil {
-			if ComplexTypeId, ok := backRepo.BackRepoComplexType.Map_ComplexTypePtr_ComplexTypeDBID[schema.ComplexType]; ok {
-				schemaDB.ComplexTypeID.Int64 = int64(ComplexTypeId)
-				schemaDB.ComplexTypeID.Valid = true
-			}
-		} else {
-			schemaDB.ComplexTypeID.Int64 = 0
-			schemaDB.ComplexTypeID.Valid = true
-		}
-
 		query := backRepoSchema.db.Save(&schemaDB)
 		if query.Error != nil {
 			log.Fatalln(query.Error)
@@ -367,11 +369,6 @@ func (schemaDB *SchemaDB) DecodePointers(backRepo *BackRepoStruct, schema *model
 	if schemaDB.AnnotationID.Int64 != 0 {
 		schema.Annotation = backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(schemaDB.AnnotationID.Int64)]
 	}
-	// ComplexType field
-	schema.ComplexType = nil
-	if schemaDB.ComplexTypeID.Int64 != 0 {
-		schema.ComplexType = backRepo.BackRepoComplexType.Map_ComplexTypeDBID_ComplexTypePtr[uint(schemaDB.ComplexTypeID.Int64)]
-	}
 	return
 }
 
@@ -411,6 +408,15 @@ func (schemaDB *SchemaDB) CopyBasicFieldsFromSchema(schema *models.Schema) {
 
 	schemaDB.Xs_Data.String = schema.Xs
 	schemaDB.Xs_Data.Valid = true
+
+	schemaDB.Schema_A_ComplexType_A_ComplexContentDummy_Data.Int64 = int64(schema.Schema_A_ComplexType_A_ComplexContentDummy)
+	schemaDB.Schema_A_ComplexType_A_ComplexContentDummy_Data.Valid = true
+
+	schemaDB.Schema_A_ComplexType_A_ComplexContent_A_Extension_SequenceDummy_Data.Int64 = int64(schema.Schema_A_ComplexType_A_ComplexContent_A_Extension_SequenceDummy)
+	schemaDB.Schema_A_ComplexType_A_ComplexContent_A_Extension_SequenceDummy_Data.Valid = true
+
+	schemaDB.Schema_A_ComplexType_A_ComplexContent_A_Extension_Sequence_Sequence1Dummy_Data.Int64 = int64(schema.Schema_A_ComplexType_A_ComplexContent_A_Extension_Sequence_Sequence1Dummy)
+	schemaDB.Schema_A_ComplexType_A_ComplexContent_A_Extension_Sequence_Sequence1Dummy_Data.Valid = true
 }
 
 // CopyBasicFieldsFromSchema_WOP
@@ -422,6 +428,15 @@ func (schemaDB *SchemaDB) CopyBasicFieldsFromSchema_WOP(schema *models.Schema_WO
 
 	schemaDB.Xs_Data.String = schema.Xs
 	schemaDB.Xs_Data.Valid = true
+
+	schemaDB.Schema_A_ComplexType_A_ComplexContentDummy_Data.Int64 = int64(schema.Schema_A_ComplexType_A_ComplexContentDummy)
+	schemaDB.Schema_A_ComplexType_A_ComplexContentDummy_Data.Valid = true
+
+	schemaDB.Schema_A_ComplexType_A_ComplexContent_A_Extension_SequenceDummy_Data.Int64 = int64(schema.Schema_A_ComplexType_A_ComplexContent_A_Extension_SequenceDummy)
+	schemaDB.Schema_A_ComplexType_A_ComplexContent_A_Extension_SequenceDummy_Data.Valid = true
+
+	schemaDB.Schema_A_ComplexType_A_ComplexContent_A_Extension_Sequence_Sequence1Dummy_Data.Int64 = int64(schema.Schema_A_ComplexType_A_ComplexContent_A_Extension_Sequence_Sequence1Dummy)
+	schemaDB.Schema_A_ComplexType_A_ComplexContent_A_Extension_Sequence_Sequence1Dummy_Data.Valid = true
 }
 
 // CopyBasicFieldsFromSchemaWOP
@@ -433,6 +448,15 @@ func (schemaDB *SchemaDB) CopyBasicFieldsFromSchemaWOP(schema *SchemaWOP) {
 
 	schemaDB.Xs_Data.String = schema.Xs
 	schemaDB.Xs_Data.Valid = true
+
+	schemaDB.Schema_A_ComplexType_A_ComplexContentDummy_Data.Int64 = int64(schema.Schema_A_ComplexType_A_ComplexContentDummy)
+	schemaDB.Schema_A_ComplexType_A_ComplexContentDummy_Data.Valid = true
+
+	schemaDB.Schema_A_ComplexType_A_ComplexContent_A_Extension_SequenceDummy_Data.Int64 = int64(schema.Schema_A_ComplexType_A_ComplexContent_A_Extension_SequenceDummy)
+	schemaDB.Schema_A_ComplexType_A_ComplexContent_A_Extension_SequenceDummy_Data.Valid = true
+
+	schemaDB.Schema_A_ComplexType_A_ComplexContent_A_Extension_Sequence_Sequence1Dummy_Data.Int64 = int64(schema.Schema_A_ComplexType_A_ComplexContent_A_Extension_Sequence_Sequence1Dummy)
+	schemaDB.Schema_A_ComplexType_A_ComplexContent_A_Extension_Sequence_Sequence1Dummy_Data.Valid = true
 }
 
 // CopyBasicFieldsToSchema
@@ -440,6 +464,9 @@ func (schemaDB *SchemaDB) CopyBasicFieldsToSchema(schema *models.Schema) {
 	// insertion point for checkout of basic fields (back repo to stage)
 	schema.Name = schemaDB.Name_Data.String
 	schema.Xs = schemaDB.Xs_Data.String
+	schema.Schema_A_ComplexType_A_ComplexContentDummy = int(schemaDB.Schema_A_ComplexType_A_ComplexContentDummy_Data.Int64)
+	schema.Schema_A_ComplexType_A_ComplexContent_A_Extension_SequenceDummy = int(schemaDB.Schema_A_ComplexType_A_ComplexContent_A_Extension_SequenceDummy_Data.Int64)
+	schema.Schema_A_ComplexType_A_ComplexContent_A_Extension_Sequence_Sequence1Dummy = int(schemaDB.Schema_A_ComplexType_A_ComplexContent_A_Extension_Sequence_Sequence1Dummy_Data.Int64)
 }
 
 // CopyBasicFieldsToSchema_WOP
@@ -447,6 +474,9 @@ func (schemaDB *SchemaDB) CopyBasicFieldsToSchema_WOP(schema *models.Schema_WOP)
 	// insertion point for checkout of basic fields (back repo to stage)
 	schema.Name = schemaDB.Name_Data.String
 	schema.Xs = schemaDB.Xs_Data.String
+	schema.Schema_A_ComplexType_A_ComplexContentDummy = int(schemaDB.Schema_A_ComplexType_A_ComplexContentDummy_Data.Int64)
+	schema.Schema_A_ComplexType_A_ComplexContent_A_Extension_SequenceDummy = int(schemaDB.Schema_A_ComplexType_A_ComplexContent_A_Extension_SequenceDummy_Data.Int64)
+	schema.Schema_A_ComplexType_A_ComplexContent_A_Extension_Sequence_Sequence1Dummy = int(schemaDB.Schema_A_ComplexType_A_ComplexContent_A_Extension_Sequence_Sequence1Dummy_Data.Int64)
 }
 
 // CopyBasicFieldsToSchemaWOP
@@ -455,6 +485,9 @@ func (schemaDB *SchemaDB) CopyBasicFieldsToSchemaWOP(schema *SchemaWOP) {
 	// insertion point for checkout of basic fields (back repo to stage)
 	schema.Name = schemaDB.Name_Data.String
 	schema.Xs = schemaDB.Xs_Data.String
+	schema.Schema_A_ComplexType_A_ComplexContentDummy = int(schemaDB.Schema_A_ComplexType_A_ComplexContentDummy_Data.Int64)
+	schema.Schema_A_ComplexType_A_ComplexContent_A_Extension_SequenceDummy = int(schemaDB.Schema_A_ComplexType_A_ComplexContent_A_Extension_SequenceDummy_Data.Int64)
+	schema.Schema_A_ComplexType_A_ComplexContent_A_Extension_Sequence_Sequence1Dummy = int(schemaDB.Schema_A_ComplexType_A_ComplexContent_A_Extension_Sequence_Sequence1Dummy_Data.Int64)
 }
 
 // Backup generates a json file from a slice of all SchemaDB instances in the backrepo
@@ -616,12 +649,6 @@ func (backRepoSchema *BackRepoSchemaStruct) RestorePhaseTwo() {
 		if schemaDB.AnnotationID.Int64 != 0 {
 			schemaDB.AnnotationID.Int64 = int64(BackRepoAnnotationid_atBckpTime_newID[uint(schemaDB.AnnotationID.Int64)])
 			schemaDB.AnnotationID.Valid = true
-		}
-
-		// reindexing ComplexType field
-		if schemaDB.ComplexTypeID.Int64 != 0 {
-			schemaDB.ComplexTypeID.Int64 = int64(BackRepoComplexTypeid_atBckpTime_newID[uint(schemaDB.ComplexTypeID.Int64)])
-			schemaDB.ComplexTypeID.Valid = true
 		}
 
 		// update databse with new index encoding

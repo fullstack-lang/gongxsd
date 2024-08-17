@@ -17,6 +17,16 @@ func (from *Annotation) CopyBasicFields(to *Annotation) {
 	to.Name = from.Name
 }
 
+type ComplexContent_WOP struct {
+	// insertion point
+	Name string
+}
+
+func (from *ComplexContent) CopyBasicFields(to *ComplexContent) {
+	// insertion point
+	to.Name = from.Name
+}
+
 type ComplexType_WOP struct {
 	// insertion point
 	Name string
@@ -47,11 +57,17 @@ type Schema_WOP struct {
 	// insertion point
 	Name string
 	Xs string
+	Schema_A_ComplexType_A_ComplexContentDummy int
+	Schema_A_ComplexType_A_ComplexContent_A_Extension_SequenceDummy int
+	Schema_A_ComplexType_A_ComplexContent_A_Extension_Sequence_Sequence1Dummy int
 }
 
 func (from *Schema) CopyBasicFields(to *Schema) {
 	// insertion point
 	to.Name = from.Name
 	to.Xs = from.Xs
+	to.Schema_A_ComplexType_A_ComplexContentDummy = from.Schema_A_ComplexType_A_ComplexContentDummy
+	to.Schema_A_ComplexType_A_ComplexContent_A_Extension_SequenceDummy = from.Schema_A_ComplexType_A_ComplexContent_A_Extension_SequenceDummy
+	to.Schema_A_ComplexType_A_ComplexContent_A_Extension_Sequence_Sequence1Dummy = from.Schema_A_ComplexType_A_ComplexContent_A_Extension_Sequence_Sequence1Dummy
 }
 

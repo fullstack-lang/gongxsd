@@ -46,14 +46,6 @@ type ComplexTypeAPI struct {
 // reverse pointers of slice of poitners to Struct
 type ComplexTypePointersEncoding struct {
 	// insertion for pointer fields encoding declaration
-
-	// field Annotation is a pointer to another Struct (optional or 0..1)
-	// This field is generated into another field to enable AS ONE association
-	AnnotationID sql.NullInt64
-
-	// field OuterSchema is a pointer to another Struct (optional or 0..1)
-	// This field is generated into another field to enable AS ONE association
-	OuterSchemaID sql.NullInt64
 }
 
 // ComplexTypeDB describes a complextype in the database
@@ -219,30 +211,6 @@ func (backRepoComplexType *BackRepoComplexTypeStruct) CommitPhaseTwoInstance(bac
 		complextypeDB.CopyBasicFieldsFromComplexType(complextype)
 
 		// insertion point for translating pointers encodings into actual pointers
-		// commit pointer value complextype.Annotation translates to updating the complextype.AnnotationID
-		complextypeDB.AnnotationID.Valid = true // allow for a 0 value (nil association)
-		if complextype.Annotation != nil {
-			if AnnotationId, ok := backRepo.BackRepoAnnotation.Map_AnnotationPtr_AnnotationDBID[complextype.Annotation]; ok {
-				complextypeDB.AnnotationID.Int64 = int64(AnnotationId)
-				complextypeDB.AnnotationID.Valid = true
-			}
-		} else {
-			complextypeDB.AnnotationID.Int64 = 0
-			complextypeDB.AnnotationID.Valid = true
-		}
-
-		// commit pointer value complextype.OuterSchema translates to updating the complextype.OuterSchemaID
-		complextypeDB.OuterSchemaID.Valid = true // allow for a 0 value (nil association)
-		if complextype.OuterSchema != nil {
-			if OuterSchemaId, ok := backRepo.BackRepoSchema.Map_SchemaPtr_SchemaDBID[complextype.OuterSchema]; ok {
-				complextypeDB.OuterSchemaID.Int64 = int64(OuterSchemaId)
-				complextypeDB.OuterSchemaID.Valid = true
-			}
-		} else {
-			complextypeDB.OuterSchemaID.Int64 = 0
-			complextypeDB.OuterSchemaID.Valid = true
-		}
-
 		query := backRepoComplexType.db.Save(&complextypeDB)
 		if query.Error != nil {
 			log.Fatalln(query.Error)
@@ -356,16 +324,6 @@ func (backRepoComplexType *BackRepoComplexTypeStruct) CheckoutPhaseTwoInstance(b
 func (complextypeDB *ComplexTypeDB) DecodePointers(backRepo *BackRepoStruct, complextype *models.ComplexType) {
 
 	// insertion point for checkout of pointer encoding
-	// Annotation field
-	complextype.Annotation = nil
-	if complextypeDB.AnnotationID.Int64 != 0 {
-		complextype.Annotation = backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(complextypeDB.AnnotationID.Int64)]
-	}
-	// OuterSchema field
-	complextype.OuterSchema = nil
-	if complextypeDB.OuterSchemaID.Int64 != 0 {
-		complextype.OuterSchema = backRepo.BackRepoSchema.Map_SchemaDBID_SchemaPtr[uint(complextypeDB.OuterSchemaID.Int64)]
-	}
 	return
 }
 
@@ -594,18 +552,6 @@ func (backRepoComplexType *BackRepoComplexTypeStruct) RestorePhaseTwo() {
 		_ = complextypeDB
 
 		// insertion point for reindexing pointers encoding
-		// reindexing Annotation field
-		if complextypeDB.AnnotationID.Int64 != 0 {
-			complextypeDB.AnnotationID.Int64 = int64(BackRepoAnnotationid_atBckpTime_newID[uint(complextypeDB.AnnotationID.Int64)])
-			complextypeDB.AnnotationID.Valid = true
-		}
-
-		// reindexing OuterSchema field
-		if complextypeDB.OuterSchemaID.Int64 != 0 {
-			complextypeDB.OuterSchemaID.Int64 = int64(BackRepoSchemaid_atBckpTime_newID[uint(complextypeDB.OuterSchemaID.Int64)])
-			complextypeDB.OuterSchemaID.Valid = true
-		}
-
 		// update databse with new index encoding
 		query := backRepoComplexType.db.Model(complextypeDB).Updates(*complextypeDB)
 		if query.Error != nil {

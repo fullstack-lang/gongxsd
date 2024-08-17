@@ -54,6 +54,13 @@ func registerControllers(r *gin.Engine) {
 		v1.PUT("/v1/annotations/:id", GetController().UpdateAnnotation)
 		v1.DELETE("/v1/annotations/:id", GetController().DeleteAnnotation)
 
+		v1.GET("/v1/complexcontents", GetController().GetComplexContents)
+		v1.GET("/v1/complexcontents/:id", GetController().GetComplexContent)
+		v1.POST("/v1/complexcontents", GetController().PostComplexContent)
+		v1.PATCH("/v1/complexcontents/:id", GetController().UpdateComplexContent)
+		v1.PUT("/v1/complexcontents/:id", GetController().UpdateComplexContent)
+		v1.DELETE("/v1/complexcontents/:id", GetController().DeleteComplexContent)
+
 		v1.GET("/v1/complextypes", GetController().GetComplexTypes)
 		v1.GET("/v1/complextypes/:id", GetController().GetComplexType)
 		v1.POST("/v1/complextypes", GetController().PostComplexType)

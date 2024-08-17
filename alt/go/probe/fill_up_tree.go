@@ -72,6 +72,16 @@ func fillUpTree(
 
 				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
 			}
+		case "ComplexContent":
+			nodeGongstruct.Name = name
+			set := *models.GetGongstructInstancesSet[models.ComplexContent](probe.stageOfInterest)
+			for _complexcontent := range set {
+				nodeInstance := (&tree.Node{Name: _complexcontent.GetName()}).Stage(probe.treeStage)
+				nodeInstance.IsNodeClickable = true
+				nodeInstance.Impl = NewInstanceNodeCallback(_complexcontent, "ComplexContent", probe)
+
+				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
+			}
 		case "ComplexType":
 			nodeGongstruct.Name = name
 			set := *models.GetGongstructInstancesSet[models.ComplexType](probe.stageOfInterest)

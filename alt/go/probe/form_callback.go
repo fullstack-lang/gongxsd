@@ -95,6 +95,83 @@ func (annotationFormCallback *AnnotationFormCallback) OnSave() {
 
 	fillUpTree(annotationFormCallback.probe)
 }
+func __gong__New__ComplexContentFormCallback(
+	complexcontent *models.ComplexContent,
+	probe *Probe,
+	formGroup *table.FormGroup,
+) (complexcontentFormCallback *ComplexContentFormCallback) {
+	complexcontentFormCallback = new(ComplexContentFormCallback)
+	complexcontentFormCallback.probe = probe
+	complexcontentFormCallback.complexcontent = complexcontent
+	complexcontentFormCallback.formGroup = formGroup
+
+	complexcontentFormCallback.CreationMode = (complexcontent == nil)
+
+	return
+}
+
+type ComplexContentFormCallback struct {
+	complexcontent *models.ComplexContent
+
+	// If the form call is called on the creation of a new instnace
+	CreationMode bool
+
+	probe *Probe
+
+	formGroup *table.FormGroup
+}
+
+func (complexcontentFormCallback *ComplexContentFormCallback) OnSave() {
+
+	log.Println("ComplexContentFormCallback, OnSave")
+
+	// checkout formStage to have the form group on the stage synchronized with the
+	// back repo (and front repo)
+	complexcontentFormCallback.probe.formStage.Checkout()
+
+	if complexcontentFormCallback.complexcontent == nil {
+		complexcontentFormCallback.complexcontent = new(models.ComplexContent).Stage(complexcontentFormCallback.probe.stageOfInterest)
+	}
+	complexcontent_ := complexcontentFormCallback.complexcontent
+	_ = complexcontent_
+
+	for _, formDiv := range complexcontentFormCallback.formGroup.FormDivs {
+		switch formDiv.Name {
+		// insertion point per field
+		case "Name":
+			FormDivBasicFieldToField(&(complexcontent_.Name), formDiv)
+		}
+	}
+
+	// manage the suppress operation
+	if complexcontentFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		complexcontent_.Unstage(complexcontentFormCallback.probe.stageOfInterest)
+	}
+
+	complexcontentFormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.ComplexContent](
+		complexcontentFormCallback.probe,
+	)
+	complexcontentFormCallback.probe.tableStage.Commit()
+
+	// display a new form by reset the form stage
+	if complexcontentFormCallback.CreationMode || complexcontentFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		complexcontentFormCallback.probe.formStage.Reset()
+		newFormGroup := (&table.FormGroup{
+			Name: table.FormGroupDefaultName.ToString(),
+		}).Stage(complexcontentFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__ComplexContentFormCallback(
+			nil,
+			complexcontentFormCallback.probe,
+			newFormGroup,
+		)
+		complexcontent := new(models.ComplexContent)
+		FillUpForm(complexcontent, newFormGroup, complexcontentFormCallback.probe)
+		complexcontentFormCallback.probe.formStage.Commit()
+	}
+
+	fillUpTree(complexcontentFormCallback.probe)
+}
 func __gong__New__ComplexTypeFormCallback(
 	complextype *models.ComplexType,
 	probe *Probe,
@@ -140,10 +217,6 @@ func (complextypeFormCallback *ComplexTypeFormCallback) OnSave() {
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(complextype_.Name), formDiv)
-		case "Annotation":
-			FormDivSelectFieldToField(&(complextype_.Annotation), complextypeFormCallback.probe.stageOfInterest, formDiv)
-		case "OuterSchema":
-			FormDivSelectFieldToField(&(complextype_.OuterSchema), complextypeFormCallback.probe.stageOfInterest, formDiv)
 		}
 	}
 
@@ -350,8 +423,12 @@ func (schemaFormCallback *SchemaFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(schema_.Xs), formDiv)
 		case "Annotation":
 			FormDivSelectFieldToField(&(schema_.Annotation), schemaFormCallback.probe.stageOfInterest, formDiv)
-		case "ComplexType":
-			FormDivSelectFieldToField(&(schema_.ComplexType), schemaFormCallback.probe.stageOfInterest, formDiv)
+		case "Schema_A_ComplexType_A_ComplexContentDummy":
+			FormDivBasicFieldToField(&(schema_.Schema_A_ComplexType_A_ComplexContentDummy), formDiv)
+		case "Schema_A_ComplexType_A_ComplexContent_A_Extension_SequenceDummy":
+			FormDivBasicFieldToField(&(schema_.Schema_A_ComplexType_A_ComplexContent_A_Extension_SequenceDummy), formDiv)
+		case "Schema_A_ComplexType_A_ComplexContent_A_Extension_Sequence_Sequence1Dummy":
+			FormDivBasicFieldToField(&(schema_.Schema_A_ComplexType_A_ComplexContent_A_Extension_Sequence_Sequence1Dummy), formDiv)
 		}
 	}
 
