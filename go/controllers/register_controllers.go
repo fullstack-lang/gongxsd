@@ -166,6 +166,13 @@ func registerControllers(r *gin.Engine) {
 		v1.PUT("/v1/minlengths/:id", GetController().UpdateMinLength)
 		v1.DELETE("/v1/minlengths/:id", GetController().DeleteMinLength)
 
+		v1.GET("/v1/modelgroupelements", GetController().GetModelGroupElements)
+		v1.GET("/v1/modelgroupelements/:id", GetController().GetModelGroupElement)
+		v1.POST("/v1/modelgroupelements", GetController().PostModelGroupElement)
+		v1.PATCH("/v1/modelgroupelements/:id", GetController().UpdateModelGroupElement)
+		v1.PUT("/v1/modelgroupelements/:id", GetController().UpdateModelGroupElement)
+		v1.DELETE("/v1/modelgroupelements/:id", GetController().DeleteModelGroupElement)
+
 		v1.GET("/v1/patterns", GetController().GetPatterns)
 		v1.GET("/v1/patterns/:id", GetController().GetPattern)
 		v1.POST("/v1/patterns", GetController().PostPattern)

@@ -51,20 +51,8 @@ type SequencePointersEncoding struct {
 	// This field is generated into another field to enable AS ONE association
 	AnnotationID sql.NullInt64
 
-	// field Sequences is a slice of pointers to another Struct (optional or 0..1)
-	Sequences IntSlice `gorm:"type:TEXT"`
-
-	// field Alls is a slice of pointers to another Struct (optional or 0..1)
-	Alls IntSlice `gorm:"type:TEXT"`
-
-	// field Choices is a slice of pointers to another Struct (optional or 0..1)
-	Choices IntSlice `gorm:"type:TEXT"`
-
-	// field Groups is a slice of pointers to another Struct (optional or 0..1)
-	Groups IntSlice `gorm:"type:TEXT"`
-
-	// field Elements is a slice of pointers to another Struct (optional or 0..1)
-	Elements IntSlice `gorm:"type:TEXT"`
+	// field ModelGroupElements is a slice of pointers to another Struct (optional or 0..1)
+	ModelGroupElements IntSlice `gorm:"type:TEXT"`
 }
 
 // SequenceDB describes a sequence in the database
@@ -255,93 +243,21 @@ func (backRepoSequence *BackRepoSequenceStruct) CommitPhaseTwoInstance(backRepo 
 		}
 
 		// 1. reset
-		sequenceDB.SequencePointersEncoding.Sequences = make([]int, 0)
+		sequenceDB.SequencePointersEncoding.ModelGroupElements = make([]int, 0)
 		// 2. encode
-		for _, sequenceAssocEnd := range sequence.Sequences {
-			sequenceAssocEnd_DB :=
-				backRepo.BackRepoSequence.GetSequenceDBFromSequencePtr(sequenceAssocEnd)
+		for _, modelgroupelementAssocEnd := range sequence.ModelGroupElements {
+			modelgroupelementAssocEnd_DB :=
+				backRepo.BackRepoModelGroupElement.GetModelGroupElementDBFromModelGroupElementPtr(modelgroupelementAssocEnd)
 			
-			// the stage might be inconsistant, meaning that the sequenceAssocEnd_DB might
+			// the stage might be inconsistant, meaning that the modelgroupelementAssocEnd_DB might
 			// be missing from the stage. In this case, the commit operation is robust
 			// An alternative would be to crash here to reveal the missing element.
-			if sequenceAssocEnd_DB == nil {
+			if modelgroupelementAssocEnd_DB == nil {
 				continue
 			}
 			
-			sequenceDB.SequencePointersEncoding.Sequences =
-				append(sequenceDB.SequencePointersEncoding.Sequences, int(sequenceAssocEnd_DB.ID))
-		}
-
-		// 1. reset
-		sequenceDB.SequencePointersEncoding.Alls = make([]int, 0)
-		// 2. encode
-		for _, allAssocEnd := range sequence.Alls {
-			allAssocEnd_DB :=
-				backRepo.BackRepoAll.GetAllDBFromAllPtr(allAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the allAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if allAssocEnd_DB == nil {
-				continue
-			}
-			
-			sequenceDB.SequencePointersEncoding.Alls =
-				append(sequenceDB.SequencePointersEncoding.Alls, int(allAssocEnd_DB.ID))
-		}
-
-		// 1. reset
-		sequenceDB.SequencePointersEncoding.Choices = make([]int, 0)
-		// 2. encode
-		for _, choiceAssocEnd := range sequence.Choices {
-			choiceAssocEnd_DB :=
-				backRepo.BackRepoChoice.GetChoiceDBFromChoicePtr(choiceAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the choiceAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if choiceAssocEnd_DB == nil {
-				continue
-			}
-			
-			sequenceDB.SequencePointersEncoding.Choices =
-				append(sequenceDB.SequencePointersEncoding.Choices, int(choiceAssocEnd_DB.ID))
-		}
-
-		// 1. reset
-		sequenceDB.SequencePointersEncoding.Groups = make([]int, 0)
-		// 2. encode
-		for _, groupAssocEnd := range sequence.Groups {
-			groupAssocEnd_DB :=
-				backRepo.BackRepoGroup.GetGroupDBFromGroupPtr(groupAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the groupAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if groupAssocEnd_DB == nil {
-				continue
-			}
-			
-			sequenceDB.SequencePointersEncoding.Groups =
-				append(sequenceDB.SequencePointersEncoding.Groups, int(groupAssocEnd_DB.ID))
-		}
-
-		// 1. reset
-		sequenceDB.SequencePointersEncoding.Elements = make([]int, 0)
-		// 2. encode
-		for _, elementAssocEnd := range sequence.Elements {
-			elementAssocEnd_DB :=
-				backRepo.BackRepoElement.GetElementDBFromElementPtr(elementAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the elementAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if elementAssocEnd_DB == nil {
-				continue
-			}
-			
-			sequenceDB.SequencePointersEncoding.Elements =
-				append(sequenceDB.SequencePointersEncoding.Elements, int(elementAssocEnd_DB.ID))
+			sequenceDB.SequencePointersEncoding.ModelGroupElements =
+				append(sequenceDB.SequencePointersEncoding.ModelGroupElements, int(modelgroupelementAssocEnd_DB.ID))
 		}
 
 		query := backRepoSequence.db.Save(&sequenceDB)
@@ -462,49 +378,13 @@ func (sequenceDB *SequenceDB) DecodePointers(backRepo *BackRepoStruct, sequence 
 	if sequenceDB.AnnotationID.Int64 != 0 {
 		sequence.Annotation = backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(sequenceDB.AnnotationID.Int64)]
 	}
-	// This loop redeem sequence.Sequences in the stage from the encode in the back repo
-	// It parses all SequenceDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// This loop redeem sequence.ModelGroupElements in the stage from the encode in the back repo
+	// It parses all ModelGroupElementDB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance
 	// 1. reset the slice
-	sequence.Sequences = sequence.Sequences[:0]
-	for _, _Sequenceid := range sequenceDB.SequencePointersEncoding.Sequences {
-		sequence.Sequences = append(sequence.Sequences, backRepo.BackRepoSequence.Map_SequenceDBID_SequencePtr[uint(_Sequenceid)])
-	}
-
-	// This loop redeem sequence.Alls in the stage from the encode in the back repo
-	// It parses all AllDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	sequence.Alls = sequence.Alls[:0]
-	for _, _Allid := range sequenceDB.SequencePointersEncoding.Alls {
-		sequence.Alls = append(sequence.Alls, backRepo.BackRepoAll.Map_AllDBID_AllPtr[uint(_Allid)])
-	}
-
-	// This loop redeem sequence.Choices in the stage from the encode in the back repo
-	// It parses all ChoiceDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	sequence.Choices = sequence.Choices[:0]
-	for _, _Choiceid := range sequenceDB.SequencePointersEncoding.Choices {
-		sequence.Choices = append(sequence.Choices, backRepo.BackRepoChoice.Map_ChoiceDBID_ChoicePtr[uint(_Choiceid)])
-	}
-
-	// This loop redeem sequence.Groups in the stage from the encode in the back repo
-	// It parses all GroupDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	sequence.Groups = sequence.Groups[:0]
-	for _, _Groupid := range sequenceDB.SequencePointersEncoding.Groups {
-		sequence.Groups = append(sequence.Groups, backRepo.BackRepoGroup.Map_GroupDBID_GroupPtr[uint(_Groupid)])
-	}
-
-	// This loop redeem sequence.Elements in the stage from the encode in the back repo
-	// It parses all ElementDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	sequence.Elements = sequence.Elements[:0]
-	for _, _Elementid := range sequenceDB.SequencePointersEncoding.Elements {
-		sequence.Elements = append(sequence.Elements, backRepo.BackRepoElement.Map_ElementDBID_ElementPtr[uint(_Elementid)])
+	sequence.ModelGroupElements = sequence.ModelGroupElements[:0]
+	for _, _ModelGroupElementid := range sequenceDB.SequencePointersEncoding.ModelGroupElements {
+		sequence.ModelGroupElements = append(sequence.ModelGroupElements, backRepo.BackRepoModelGroupElement.Map_ModelGroupElementDBID_ModelGroupElementPtr[uint(_ModelGroupElementid)])
 	}
 
 	return

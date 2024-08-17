@@ -83,6 +83,10 @@ func GetInstanceDBFromInstance[T models.Gongstruct, T2 GongstructDB](
 		minlengthInstance := any(concreteInstance).(*models.MinLength)
 		ret2 := backRepo.BackRepoMinLength.GetMinLengthDBFromMinLengthPtr(minlengthInstance)
 		ret = any(ret2).(*T2)
+	case *models.ModelGroupElement:
+		modelgroupelementInstance := any(concreteInstance).(*models.ModelGroupElement)
+		ret2 := backRepo.BackRepoModelGroupElement.GetModelGroupElementDBFromModelGroupElementPtr(modelgroupelementInstance)
+		ret = any(ret2).(*T2)
 	case *models.Pattern:
 		patternInstance := any(concreteInstance).(*models.Pattern)
 		ret2 := backRepo.BackRepoPattern.GetPatternDBFromPatternPtr(patternInstance)
@@ -214,6 +218,11 @@ func GetID[T models.Gongstruct](
 		id = int(tmp.ID)
 	case *models.MinLength:
 		tmp := GetInstanceDBFromInstance[models.MinLength, MinLengthDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.ModelGroupElement:
+		tmp := GetInstanceDBFromInstance[models.ModelGroupElement, ModelGroupElementDB](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)
@@ -357,6 +366,11 @@ func GetIDPointer[T models.PointerToGongstruct](
 		id = int(tmp.ID)
 	case *models.MinLength:
 		tmp := GetInstanceDBFromInstance[models.MinLength, MinLengthDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.ModelGroupElement:
+		tmp := GetInstanceDBFromInstance[models.ModelGroupElement, ModelGroupElementDB](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)

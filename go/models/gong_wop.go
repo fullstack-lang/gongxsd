@@ -283,6 +283,16 @@ func (from *MinLength) CopyBasicFields(to *MinLength) {
 	to.Value = from.Value
 }
 
+type ModelGroupElement_WOP struct {
+	// insertion point
+	Name string
+}
+
+func (from *ModelGroupElement) CopyBasicFields(to *ModelGroupElement) {
+	// insertion point
+	to.Name = from.Name
+}
+
 type Pattern_WOP struct {
 	// insertion point
 	Name string

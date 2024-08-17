@@ -27,14 +27,11 @@ func _(stage *models.StageStruct) {
 	__Annotation__000000_Schema_Inlined := (&models.Annotation{Name: `Schema_Inlined`}).Stage(stage)
 	__Annotation__000001_bestseller_Inlined := (&models.Annotation{Name: `bestseller_Inlined`}).Stage(stage)
 	__Annotation__000002_bookType_Inlined := (&models.Annotation{Name: `bookType_Inlined`}).Stage(stage)
-	__Annotation__000003_book_Inlined := (&models.Annotation{Name: `book_Inlined`}).Stage(stage)
-	__Annotation__000004_credit_Inlined := (&models.Annotation{Name: `credit_Inlined`}).Stage(stage)
-	__Annotation__000005_edition_Inlined := (&models.Annotation{Name: `edition_Inlined`}).Stage(stage)
-	__Annotation__000006_format_Inlined := (&models.Annotation{Name: `format_Inlined`}).Stage(stage)
-	__Annotation__000007_isbn_Inlined := (&models.Annotation{Name: `isbn_Inlined`}).Stage(stage)
-	__Annotation__000008_link_Inlined := (&models.Annotation{Name: `link_Inlined`}).Stage(stage)
-	__Annotation__000009_title_Inlined := (&models.Annotation{Name: `title_Inlined`}).Stage(stage)
-	__Annotation__000010_yearType_Inlined := (&models.Annotation{Name: `yearType_Inlined`}).Stage(stage)
+	__Annotation__000003_credit_Inlined := (&models.Annotation{Name: `credit_Inlined`}).Stage(stage)
+	__Annotation__000004_edition_Inlined := (&models.Annotation{Name: `edition_Inlined`}).Stage(stage)
+	__Annotation__000005_isbn_Inlined := (&models.Annotation{Name: `isbn_Inlined`}).Stage(stage)
+	__Annotation__000006_link_Inlined := (&models.Annotation{Name: `link_Inlined`}).Stage(stage)
+	__Annotation__000007_yearType_Inlined := (&models.Annotation{Name: `yearType_Inlined`}).Stage(stage)
 
 	__Attribute__000000_bestseller := (&models.Attribute{Name: `bestseller`}).Stage(stage)
 	__Attribute__000001_edition := (&models.Attribute{Name: `edition`}).Stage(stage)
@@ -47,11 +44,7 @@ func _(stage *models.StageStruct) {
 	__AttributeGroup__000002_commonAttributes := (&models.AttributeGroup{Name: `commonAttributes`}).Stage(stage)
 	__AttributeGroup__000003_extendedAttributes := (&models.AttributeGroup{Name: `extendedAttributes`}).Stage(stage)
 
-	__Choice__000000_ := (&models.Choice{Name: ``}).Stage(stage)
-	__Choice__000001_ := (&models.Choice{Name: ``}).Stage(stage)
-	__Choice__000002_ := (&models.Choice{Name: ``}).Stage(stage)
-
-	__ComplexType__000000_AnonymousWithin_books := (&models.ComplexType{Name: `AnonymousWithin_books`}).Stage(stage)
+	__ComplexType__000000_AnonymousComplexTypeInline_books := (&models.ComplexType{Name: `AnonymousComplexTypeInline_books`}).Stage(stage)
 	__ComplexType__000001_bookType := (&models.ComplexType{Name: `bookType`}).Stage(stage)
 	__ComplexType__000002_credit := (&models.ComplexType{Name: `credit`}).Stage(stage)
 	__ComplexType__000003_link := (&models.ComplexType{Name: `link`}).Stage(stage)
@@ -61,36 +54,19 @@ func _(stage *models.StageStruct) {
 	__Documentation__000002__Inlined := (&models.Documentation{Name: `_Inlined`}).Stage(stage)
 	__Documentation__000003__Inlined := (&models.Documentation{Name: `_Inlined`}).Stage(stage)
 	__Documentation__000004__Inlined := (&models.Documentation{Name: `_Inlined`}).Stage(stage)
-	__Documentation__000005__Inlined := (&models.Documentation{Name: `_Inlined`}).Stage(stage)
-	__Documentation__000006__Inlined := (&models.Documentation{Name: `_Inlined`}).Stage(stage)
-	__Documentation__000007__Inlined := (&models.Documentation{Name: `_Inlined`}).Stage(stage)
-	__Documentation__000008_bookType_Inlined_Inlined := (&models.Documentation{Name: `bookType_Inlined_Inlined`}).Stage(stage)
-	__Documentation__000009_credit_Inlined_Inlined := (&models.Documentation{Name: `credit_Inlined_Inlined`}).Stage(stage)
-	__Documentation__000010_link_Inlined_Inlined := (&models.Documentation{Name: `link_Inlined_Inlined`}).Stage(stage)
-	__Documentation__000011_yearType_Inlined_Inlined := (&models.Documentation{Name: `yearType_Inlined_Inlined`}).Stage(stage)
+	__Documentation__000005_bookType_Inlined_Inlined := (&models.Documentation{Name: `bookType_Inlined_Inlined`}).Stage(stage)
+	__Documentation__000006_credit_Inlined_Inlined := (&models.Documentation{Name: `credit_Inlined_Inlined`}).Stage(stage)
+	__Documentation__000007_link_Inlined_Inlined := (&models.Documentation{Name: `link_Inlined_Inlined`}).Stage(stage)
+	__Documentation__000008_yearType_Inlined_Inlined := (&models.Documentation{Name: `yearType_Inlined_Inlined`}).Stage(stage)
 
-	__Element__000000_author := (&models.Element{Name: `author`}).Stage(stage)
-	__Element__000001_book := (&models.Element{Name: `book`}).Stage(stage)
-	__Element__000002_books := (&models.Element{Name: `books`}).Stage(stage)
-	__Element__000003_credit := (&models.Element{Name: `credit`}).Stage(stage)
-	__Element__000004_credit_symbol := (&models.Element{Name: `credit-symbol`}).Stage(stage)
-	__Element__000005_credit_symbol := (&models.Element{Name: `credit-symbol`}).Stage(stage)
-	__Element__000006_credit_type := (&models.Element{Name: `credit-type`}).Stage(stage)
-	__Element__000007_credit_words := (&models.Element{Name: `credit-words`}).Stage(stage)
-	__Element__000008_credit_words := (&models.Element{Name: `credit-words`}).Stage(stage)
-	__Element__000009_format := (&models.Element{Name: `format`}).Stage(stage)
-	__Element__000010_link := (&models.Element{Name: `link`}).Stage(stage)
-	__Element__000011_link := (&models.Element{Name: `link`}).Stage(stage)
-	__Element__000012_title := (&models.Element{Name: `title`}).Stage(stage)
-	__Element__000013_year := (&models.Element{Name: `year`}).Stage(stage)
+	__Element__000000_books := (&models.Element{Name: `books`}).Stage(stage)
 
 	__Enumeration__000000_bookFormatEnum_Inlined_Inlined := (&models.Enumeration{Name: `bookFormatEnum_Inlined_Inlined`}).Stage(stage)
 	__Enumeration__000001_bookFormatEnum_Inlined_Inlined := (&models.Enumeration{Name: `bookFormatEnum_Inlined_Inlined`}).Stage(stage)
 
 	__Extension__000000_link_Inlined_Inlined := (&models.Extension{Name: `link_Inlined_Inlined`}).Stage(stage)
 
-	__Group__000000_ := (&models.Group{Name: ``}).Stage(stage)
-	__Group__000001_bookDetailsGroup := (&models.Group{Name: `bookDetailsGroup`}).Stage(stage)
+	__Group__000000_bookDetailsGroup := (&models.Group{Name: `bookDetailsGroup`}).Stage(stage)
 
 	__MaxInclusive__000000_yearType_Inlined_Inlined := (&models.MaxInclusive{Name: `yearType_Inlined_Inlined`}).Stage(stage)
 
@@ -103,13 +79,6 @@ func _(stage *models.StageStruct) {
 	__Restriction__000002_yearType_Inlined := (&models.Restriction{Name: `yearType_Inlined`}).Stage(stage)
 
 	__Schema__000000_Schema := (&models.Schema{Name: `Schema`}).Stage(stage)
-
-	__Sequence__000000_ := (&models.Sequence{Name: ``}).Stage(stage)
-	__Sequence__000001_ := (&models.Sequence{Name: ``}).Stage(stage)
-	__Sequence__000002__Inlined := (&models.Sequence{Name: `_Inlined`}).Stage(stage)
-	__Sequence__000003_bookDetailsGroup_Inlined := (&models.Sequence{Name: `bookDetailsGroup_Inlined`}).Stage(stage)
-	__Sequence__000004_bookType_Inlined := (&models.Sequence{Name: `bookType_Inlined`}).Stage(stage)
-	__Sequence__000005_credit_Inlined := (&models.Sequence{Name: `credit_Inlined`}).Stage(stage)
 
 	__SimpleContent__000000_link_Inlined := (&models.SimpleContent{Name: `link_Inlined`}).Stage(stage)
 
@@ -127,21 +96,15 @@ func _(stage *models.StageStruct) {
 
 	__Annotation__000002_bookType_Inlined.Name = `bookType_Inlined`
 
-	__Annotation__000003_book_Inlined.Name = `book_Inlined`
+	__Annotation__000003_credit_Inlined.Name = `credit_Inlined`
 
-	__Annotation__000004_credit_Inlined.Name = `credit_Inlined`
+	__Annotation__000004_edition_Inlined.Name = `edition_Inlined`
 
-	__Annotation__000005_edition_Inlined.Name = `edition_Inlined`
+	__Annotation__000005_isbn_Inlined.Name = `isbn_Inlined`
 
-	__Annotation__000006_format_Inlined.Name = `format_Inlined`
+	__Annotation__000006_link_Inlined.Name = `link_Inlined`
 
-	__Annotation__000007_isbn_Inlined.Name = `isbn_Inlined`
-
-	__Annotation__000008_link_Inlined.Name = `link_Inlined`
-
-	__Annotation__000009_title_Inlined.Name = `title_Inlined`
-
-	__Annotation__000010_yearType_Inlined.Name = `yearType_Inlined`
+	__Annotation__000007_yearType_Inlined.Name = `yearType_Inlined`
 
 	__Attribute__000000_bestseller.Name = `bestseller`
 	__Attribute__000000_bestseller.NameXSD = `bestseller`
@@ -237,23 +200,11 @@ func _(stage *models.StageStruct) {
 	__AttributeGroup__000003_extendedAttributes.GoIdentifier = `AttributeGroup_extendedAttributes`
 	__AttributeGroup__000003_extendedAttributes.Ref = ``
 
-	__Choice__000000_.Name = ``
-	__Choice__000000_.MinOccurs = ``
-	__Choice__000000_.MaxOccurs = ``
-
-	__Choice__000001_.Name = ``
-	__Choice__000001_.MinOccurs = ``
-	__Choice__000001_.MaxOccurs = ``
-
-	__Choice__000002_.Name = ``
-	__Choice__000002_.MinOccurs = ``
-	__Choice__000002_.MaxOccurs = ``
-
-	__ComplexType__000000_AnonymousWithin_books.Name = `AnonymousWithin_books`
-	__ComplexType__000000_AnonymousWithin_books.HasNameConflict = false
-	__ComplexType__000000_AnonymousWithin_books.GoIdentifier = `AnonymousWithin_books`
-	__ComplexType__000000_AnonymousWithin_books.IsAnonymous = true
-	__ComplexType__000000_AnonymousWithin_books.NameXSD = ``
+	__ComplexType__000000_AnonymousComplexTypeInline_books.Name = `AnonymousComplexTypeInline_books`
+	__ComplexType__000000_AnonymousComplexTypeInline_books.HasNameConflict = false
+	__ComplexType__000000_AnonymousComplexTypeInline_books.GoIdentifier = `AnonymousComplexTypeInline_books`
+	__ComplexType__000000_AnonymousComplexTypeInline_books.IsAnonymous = true
+	__ComplexType__000000_AnonymousComplexTypeInline_books.NameXSD = ``
 
 	__ComplexType__000001_bookType.Name = `bookType`
 	__ComplexType__000001_bookType.HasNameConflict = false
@@ -288,7 +239,7 @@ func _(stage *models.StageStruct) {
 	__Documentation__000001_Schema_Inlined_Inlined.Lang = `fr`
 
 	__Documentation__000002__Inlined.Name = `_Inlined`
-	__Documentation__000002__Inlined.Text = `Indicates if the book is a bestseller.`
+	__Documentation__000002__Inlined.Text = `The ISBN number of the book.`
 	__Documentation__000002__Inlined.Source = ``
 	__Documentation__000002__Inlined.Lang = ``
 
@@ -298,274 +249,49 @@ func _(stage *models.StageStruct) {
 	__Documentation__000003__Inlined.Lang = ``
 
 	__Documentation__000004__Inlined.Name = `_Inlined`
-	__Documentation__000004__Inlined.Text = `The title of the book, consisting of alphabetic characters and
-                        spaces only.`
+	__Documentation__000004__Inlined.Text = `Indicates if the book is a bestseller.`
 	__Documentation__000004__Inlined.Source = ``
 	__Documentation__000004__Inlined.Lang = ``
 
-	__Documentation__000005__Inlined.Name = `_Inlined`
-	__Documentation__000005__Inlined.Text = `The ISBN number of the book.`
-	__Documentation__000005__Inlined.Source = ``
-	__Documentation__000005__Inlined.Lang = ``
-
-	__Documentation__000006__Inlined.Name = `_Inlined`
-	__Documentation__000006__Inlined.Text = ` A book element representing a single book in the
-                            collection. `
-	__Documentation__000006__Inlined.Source = ``
-	__Documentation__000006__Inlined.Lang = ``
-
-	__Documentation__000007__Inlined.Name = `_Inlined`
-	__Documentation__000007__Inlined.Text = `The format of the book, either Paperback or Hardcover.`
-	__Documentation__000007__Inlined.Source = ``
-	__Documentation__000007__Inlined.Lang = ``
-
-	__Documentation__000008_bookType_Inlined_Inlined.Name = `bookType_Inlined_Inlined`
-	__Documentation__000008_bookType_Inlined_Inlined.Text = ` This complex type defines the structure of a book, including title,
+	__Documentation__000005_bookType_Inlined_Inlined.Name = `bookType_Inlined_Inlined`
+	__Documentation__000005_bookType_Inlined_Inlined.Text = ` This complex type defines the structure of a book, including title,
                 author, year, and format. `
-	__Documentation__000008_bookType_Inlined_Inlined.Source = ``
-	__Documentation__000008_bookType_Inlined_Inlined.Lang = ``
+	__Documentation__000005_bookType_Inlined_Inlined.Source = ``
+	__Documentation__000005_bookType_Inlined_Inlined.Lang = ``
 
-	__Documentation__000009_credit_Inlined_Inlined.Name = `credit_Inlined_Inlined`
-	__Documentation__000009_credit_Inlined_Inlined.Text = `The credit type .. `
-	__Documentation__000009_credit_Inlined_Inlined.Source = ``
-	__Documentation__000009_credit_Inlined_Inlined.Lang = ``
+	__Documentation__000006_credit_Inlined_Inlined.Name = `credit_Inlined_Inlined`
+	__Documentation__000006_credit_Inlined_Inlined.Text = `The credit type .. `
+	__Documentation__000006_credit_Inlined_Inlined.Source = ``
+	__Documentation__000006_credit_Inlined_Inlined.Lang = ``
 
-	__Documentation__000010_link_Inlined_Inlined.Name = `link_Inlined_Inlined`
-	__Documentation__000010_link_Inlined_Inlined.Text = `The link type serves as an outgoing simple XLink. If a relative link
+	__Documentation__000007_link_Inlined_Inlined.Name = `link_Inlined_Inlined`
+	__Documentation__000007_link_Inlined_Inlined.Text = `The link type serves as an outgoing simple XLink. If a relative link
                 is used within a document that is part of a compressed MusicXML file, the link is
                 relative to the root folder of the zip file.`
-	__Documentation__000010_link_Inlined_Inlined.Source = ``
-	__Documentation__000010_link_Inlined_Inlined.Lang = ``
+	__Documentation__000007_link_Inlined_Inlined.Source = ``
+	__Documentation__000007_link_Inlined_Inlined.Lang = ``
 
-	__Documentation__000011_yearType_Inlined_Inlined.Name = `yearType_Inlined_Inlined`
-	__Documentation__000011_yearType_Inlined_Inlined.Text = ` This type represents a year. It restricts the value to an integer
+	__Documentation__000008_yearType_Inlined_Inlined.Name = `yearType_Inlined_Inlined`
+	__Documentation__000008_yearType_Inlined_Inlined.Text = ` This type represents a year. It restricts the value to an integer
                 between 1000 and 2100 inclusive. `
-	__Documentation__000011_yearType_Inlined_Inlined.Source = ``
-	__Documentation__000011_yearType_Inlined_Inlined.Lang = ``
+	__Documentation__000008_yearType_Inlined_Inlined.Source = ``
+	__Documentation__000008_yearType_Inlined_Inlined.Lang = ``
 
-	__Element__000000_author.Name = `author`
-	__Element__000000_author.HasNameConflict = false
-	__Element__000000_author.GoIdentifier = `Author`
-	__Element__000000_author.NameXSD = `author`
-	__Element__000000_author.Type = `xs:string`
-	__Element__000000_author.MinOccurs = ``
-	__Element__000000_author.MaxOccurs = ``
-	__Element__000000_author.Default = ``
-	__Element__000000_author.Fixed = ``
-	__Element__000000_author.Nillable = ``
-	__Element__000000_author.Ref = ``
-	__Element__000000_author.Abstract = ``
-	__Element__000000_author.Form = ``
-	__Element__000000_author.Block = ``
-	__Element__000000_author.Final = ``
-
-	__Element__000001_book.Name = `book`
-	__Element__000001_book.HasNameConflict = false
-	__Element__000001_book.GoIdentifier = `Book`
-	__Element__000001_book.NameXSD = `book`
-	__Element__000001_book.Type = `bookType`
-	__Element__000001_book.MinOccurs = ``
-	__Element__000001_book.MaxOccurs = `unbounded`
-	__Element__000001_book.Default = ``
-	__Element__000001_book.Fixed = ``
-	__Element__000001_book.Nillable = ``
-	__Element__000001_book.Ref = ``
-	__Element__000001_book.Abstract = ``
-	__Element__000001_book.Form = ``
-	__Element__000001_book.Block = ``
-	__Element__000001_book.Final = ``
-
-	__Element__000002_books.Name = `books`
-	__Element__000002_books.HasNameConflict = false
-	__Element__000002_books.GoIdentifier = `Books`
-	__Element__000002_books.NameXSD = `books`
-	__Element__000002_books.Type = ``
-	__Element__000002_books.MinOccurs = ``
-	__Element__000002_books.MaxOccurs = ``
-	__Element__000002_books.Default = ``
-	__Element__000002_books.Fixed = ``
-	__Element__000002_books.Nillable = ``
-	__Element__000002_books.Ref = ``
-	__Element__000002_books.Abstract = ``
-	__Element__000002_books.Form = ``
-	__Element__000002_books.Block = ``
-	__Element__000002_books.Final = ``
-
-	__Element__000003_credit.Name = `credit`
-	__Element__000003_credit.HasNameConflict = false
-	__Element__000003_credit.GoIdentifier = `Credit`
-	__Element__000003_credit.NameXSD = `credit`
-	__Element__000003_credit.Type = `credit`
-	__Element__000003_credit.MinOccurs = `0`
-	__Element__000003_credit.MaxOccurs = `unbounded`
-	__Element__000003_credit.Default = ``
-	__Element__000003_credit.Fixed = ``
-	__Element__000003_credit.Nillable = ``
-	__Element__000003_credit.Ref = ``
-	__Element__000003_credit.Abstract = ``
-	__Element__000003_credit.Form = ``
-	__Element__000003_credit.Block = ``
-	__Element__000003_credit.Final = ``
-
-	__Element__000004_credit_symbol.Name = `credit-symbol`
-	__Element__000004_credit_symbol.HasNameConflict = false
-	__Element__000004_credit_symbol.GoIdentifier = `Credit_symbol`
-	__Element__000004_credit_symbol.NameXSD = `credit-symbol`
-	__Element__000004_credit_symbol.Type = `xs:string`
-	__Element__000004_credit_symbol.MinOccurs = ``
-	__Element__000004_credit_symbol.MaxOccurs = ``
-	__Element__000004_credit_symbol.Default = ``
-	__Element__000004_credit_symbol.Fixed = ``
-	__Element__000004_credit_symbol.Nillable = ``
-	__Element__000004_credit_symbol.Ref = ``
-	__Element__000004_credit_symbol.Abstract = ``
-	__Element__000004_credit_symbol.Form = ``
-	__Element__000004_credit_symbol.Block = ``
-	__Element__000004_credit_symbol.Final = ``
-
-	__Element__000005_credit_symbol.Name = `credit-symbol`
-	__Element__000005_credit_symbol.HasNameConflict = false
-	__Element__000005_credit_symbol.GoIdentifier = `Credit_symbol`
-	__Element__000005_credit_symbol.NameXSD = `credit-symbol`
-	__Element__000005_credit_symbol.Type = `xs:string`
-	__Element__000005_credit_symbol.MinOccurs = ``
-	__Element__000005_credit_symbol.MaxOccurs = ``
-	__Element__000005_credit_symbol.Default = ``
-	__Element__000005_credit_symbol.Fixed = ``
-	__Element__000005_credit_symbol.Nillable = ``
-	__Element__000005_credit_symbol.Ref = ``
-	__Element__000005_credit_symbol.Abstract = ``
-	__Element__000005_credit_symbol.Form = ``
-	__Element__000005_credit_symbol.Block = ``
-	__Element__000005_credit_symbol.Final = ``
-
-	__Element__000006_credit_type.Name = `credit-type`
-	__Element__000006_credit_type.HasNameConflict = false
-	__Element__000006_credit_type.GoIdentifier = `Credit_type`
-	__Element__000006_credit_type.NameXSD = `credit-type`
-	__Element__000006_credit_type.Type = `xs:string`
-	__Element__000006_credit_type.MinOccurs = `0`
-	__Element__000006_credit_type.MaxOccurs = `unbounded`
-	__Element__000006_credit_type.Default = ``
-	__Element__000006_credit_type.Fixed = ``
-	__Element__000006_credit_type.Nillable = ``
-	__Element__000006_credit_type.Ref = ``
-	__Element__000006_credit_type.Abstract = ``
-	__Element__000006_credit_type.Form = ``
-	__Element__000006_credit_type.Block = ``
-	__Element__000006_credit_type.Final = ``
-
-	__Element__000007_credit_words.Name = `credit-words`
-	__Element__000007_credit_words.HasNameConflict = false
-	__Element__000007_credit_words.GoIdentifier = `Credit_words`
-	__Element__000007_credit_words.NameXSD = `credit-words`
-	__Element__000007_credit_words.Type = `xs:string`
-	__Element__000007_credit_words.MinOccurs = ``
-	__Element__000007_credit_words.MaxOccurs = ``
-	__Element__000007_credit_words.Default = ``
-	__Element__000007_credit_words.Fixed = ``
-	__Element__000007_credit_words.Nillable = ``
-	__Element__000007_credit_words.Ref = ``
-	__Element__000007_credit_words.Abstract = ``
-	__Element__000007_credit_words.Form = ``
-	__Element__000007_credit_words.Block = ``
-	__Element__000007_credit_words.Final = ``
-
-	__Element__000008_credit_words.Name = `credit-words`
-	__Element__000008_credit_words.HasNameConflict = false
-	__Element__000008_credit_words.GoIdentifier = `Credit_words`
-	__Element__000008_credit_words.NameXSD = `credit-words`
-	__Element__000008_credit_words.Type = `xs:string`
-	__Element__000008_credit_words.MinOccurs = ``
-	__Element__000008_credit_words.MaxOccurs = ``
-	__Element__000008_credit_words.Default = ``
-	__Element__000008_credit_words.Fixed = ``
-	__Element__000008_credit_words.Nillable = ``
-	__Element__000008_credit_words.Ref = ``
-	__Element__000008_credit_words.Abstract = ``
-	__Element__000008_credit_words.Form = ``
-	__Element__000008_credit_words.Block = ``
-	__Element__000008_credit_words.Final = ``
-
-	__Element__000009_format.Name = `format`
-	__Element__000009_format.HasNameConflict = false
-	__Element__000009_format.GoIdentifier = `Format`
-	__Element__000009_format.NameXSD = `format`
-	__Element__000009_format.Type = `bookFormatEnum`
-	__Element__000009_format.MinOccurs = ``
-	__Element__000009_format.MaxOccurs = ``
-	__Element__000009_format.Default = ``
-	__Element__000009_format.Fixed = ``
-	__Element__000009_format.Nillable = ``
-	__Element__000009_format.Ref = ``
-	__Element__000009_format.Abstract = ``
-	__Element__000009_format.Form = ``
-	__Element__000009_format.Block = ``
-	__Element__000009_format.Final = ``
-
-	__Element__000010_link.Name = `link`
-	__Element__000010_link.HasNameConflict = false
-	__Element__000010_link.GoIdentifier = `Link`
-	__Element__000010_link.NameXSD = `link`
-	__Element__000010_link.Type = `link`
-	__Element__000010_link.MinOccurs = `0`
-	__Element__000010_link.MaxOccurs = `unbounded`
-	__Element__000010_link.Default = ``
-	__Element__000010_link.Fixed = ``
-	__Element__000010_link.Nillable = ``
-	__Element__000010_link.Ref = ``
-	__Element__000010_link.Abstract = ``
-	__Element__000010_link.Form = ``
-	__Element__000010_link.Block = ``
-	__Element__000010_link.Final = ``
-
-	__Element__000011_link.Name = `link`
-	__Element__000011_link.HasNameConflict = false
-	__Element__000011_link.GoIdentifier = `Link`
-	__Element__000011_link.NameXSD = `link`
-	__Element__000011_link.Type = `link`
-	__Element__000011_link.MinOccurs = `0`
-	__Element__000011_link.MaxOccurs = `unbounded`
-	__Element__000011_link.Default = ``
-	__Element__000011_link.Fixed = ``
-	__Element__000011_link.Nillable = ``
-	__Element__000011_link.Ref = ``
-	__Element__000011_link.Abstract = ``
-	__Element__000011_link.Form = ``
-	__Element__000011_link.Block = ``
-	__Element__000011_link.Final = ``
-
-	__Element__000012_title.Name = `title`
-	__Element__000012_title.HasNameConflict = false
-	__Element__000012_title.GoIdentifier = `Title`
-	__Element__000012_title.NameXSD = `title`
-	__Element__000012_title.Type = `titleType`
-	__Element__000012_title.MinOccurs = ``
-	__Element__000012_title.MaxOccurs = ``
-	__Element__000012_title.Default = ``
-	__Element__000012_title.Fixed = ``
-	__Element__000012_title.Nillable = ``
-	__Element__000012_title.Ref = ``
-	__Element__000012_title.Abstract = ``
-	__Element__000012_title.Form = ``
-	__Element__000012_title.Block = ``
-	__Element__000012_title.Final = ``
-
-	__Element__000013_year.Name = `year`
-	__Element__000013_year.HasNameConflict = false
-	__Element__000013_year.GoIdentifier = `Year`
-	__Element__000013_year.NameXSD = `year`
-	__Element__000013_year.Type = `yearType`
-	__Element__000013_year.MinOccurs = ``
-	__Element__000013_year.MaxOccurs = ``
-	__Element__000013_year.Default = ``
-	__Element__000013_year.Fixed = ``
-	__Element__000013_year.Nillable = ``
-	__Element__000013_year.Ref = ``
-	__Element__000013_year.Abstract = ``
-	__Element__000013_year.Form = ``
-	__Element__000013_year.Block = ``
-	__Element__000013_year.Final = ``
+	__Element__000000_books.Name = `books`
+	__Element__000000_books.HasNameConflict = false
+	__Element__000000_books.GoIdentifier = `Books`
+	__Element__000000_books.NameXSD = `books`
+	__Element__000000_books.Type = ``
+	__Element__000000_books.MinOccurs = ``
+	__Element__000000_books.MaxOccurs = ``
+	__Element__000000_books.Default = ``
+	__Element__000000_books.Fixed = ``
+	__Element__000000_books.Nillable = ``
+	__Element__000000_books.Ref = ``
+	__Element__000000_books.Abstract = ``
+	__Element__000000_books.Form = ``
+	__Element__000000_books.Block = ``
+	__Element__000000_books.Final = ``
 
 	__Enumeration__000000_bookFormatEnum_Inlined_Inlined.Name = `bookFormatEnum_Inlined_Inlined`
 	__Enumeration__000000_bookFormatEnum_Inlined_Inlined.Value = `Paperback`
@@ -576,19 +302,12 @@ func _(stage *models.StageStruct) {
 	__Extension__000000_link_Inlined_Inlined.Name = `link_Inlined_Inlined`
 	__Extension__000000_link_Inlined_Inlined.Base = `xs:string`
 
-	__Group__000000_.Name = ``
-	__Group__000000_.NameXSD = ``
-	__Group__000000_.Ref = `bookDetailsGroup`
-	__Group__000000_.IsAnonymous = false
-	__Group__000000_.HasNameConflict = false
-	__Group__000000_.GoIdentifier = `Group_`
-
-	__Group__000001_bookDetailsGroup.Name = `bookDetailsGroup`
-	__Group__000001_bookDetailsGroup.NameXSD = `bookDetailsGroup`
-	__Group__000001_bookDetailsGroup.Ref = ``
-	__Group__000001_bookDetailsGroup.IsAnonymous = false
-	__Group__000001_bookDetailsGroup.HasNameConflict = false
-	__Group__000001_bookDetailsGroup.GoIdentifier = `Group_bookDetailsGroup`
+	__Group__000000_bookDetailsGroup.Name = `bookDetailsGroup`
+	__Group__000000_bookDetailsGroup.NameXSD = `bookDetailsGroup`
+	__Group__000000_bookDetailsGroup.Ref = ``
+	__Group__000000_bookDetailsGroup.IsAnonymous = false
+	__Group__000000_bookDetailsGroup.HasNameConflict = false
+	__Group__000000_bookDetailsGroup.GoIdentifier = `Group_bookDetailsGroup`
 
 	__MaxInclusive__000000_yearType_Inlined_Inlined.Name = `yearType_Inlined_Inlined`
 	__MaxInclusive__000000_yearType_Inlined_Inlined.Value = `2100`
@@ -611,30 +330,6 @@ func _(stage *models.StageStruct) {
 	__Schema__000000_Schema.Name = `Schema`
 	__Schema__000000_Schema.Xs = `http://www.w3.org/2001/XMLSchema`
 
-	__Sequence__000000_.Name = ``
-	__Sequence__000000_.MinOccurs = ``
-	__Sequence__000000_.MaxOccurs = ``
-
-	__Sequence__000001_.Name = ``
-	__Sequence__000001_.MinOccurs = `0`
-	__Sequence__000001_.MaxOccurs = `unbounded`
-
-	__Sequence__000002__Inlined.Name = `_Inlined`
-	__Sequence__000002__Inlined.MinOccurs = ``
-	__Sequence__000002__Inlined.MaxOccurs = ``
-
-	__Sequence__000003_bookDetailsGroup_Inlined.Name = `bookDetailsGroup_Inlined`
-	__Sequence__000003_bookDetailsGroup_Inlined.MinOccurs = ``
-	__Sequence__000003_bookDetailsGroup_Inlined.MaxOccurs = ``
-
-	__Sequence__000004_bookType_Inlined.Name = `bookType_Inlined`
-	__Sequence__000004_bookType_Inlined.MinOccurs = ``
-	__Sequence__000004_bookType_Inlined.MaxOccurs = ``
-
-	__Sequence__000005_credit_Inlined.Name = `credit_Inlined`
-	__Sequence__000005_credit_Inlined.MinOccurs = ``
-	__Sequence__000005_credit_Inlined.MaxOccurs = ``
-
 	__SimpleContent__000000_link_Inlined.Name = `link_Inlined`
 
 	__SimpleType__000000_bookFormatEnum.Name = `bookFormatEnum`
@@ -652,44 +347,29 @@ func _(stage *models.StageStruct) {
 	// Setup of pointers
 	__Annotation__000000_Schema_Inlined.Documentations = append(__Annotation__000000_Schema_Inlined.Documentations, __Documentation__000000_Schema_Inlined_Inlined)
 	__Annotation__000000_Schema_Inlined.Documentations = append(__Annotation__000000_Schema_Inlined.Documentations, __Documentation__000001_Schema_Inlined_Inlined)
-	__Annotation__000001_bestseller_Inlined.Documentations = append(__Annotation__000001_bestseller_Inlined.Documentations, __Documentation__000002__Inlined)
-	__Annotation__000002_bookType_Inlined.Documentations = append(__Annotation__000002_bookType_Inlined.Documentations, __Documentation__000008_bookType_Inlined_Inlined)
-	__Annotation__000003_book_Inlined.Documentations = append(__Annotation__000003_book_Inlined.Documentations, __Documentation__000006__Inlined)
-	__Annotation__000004_credit_Inlined.Documentations = append(__Annotation__000004_credit_Inlined.Documentations, __Documentation__000009_credit_Inlined_Inlined)
-	__Annotation__000005_edition_Inlined.Documentations = append(__Annotation__000005_edition_Inlined.Documentations, __Documentation__000003__Inlined)
-	__Annotation__000006_format_Inlined.Documentations = append(__Annotation__000006_format_Inlined.Documentations, __Documentation__000007__Inlined)
-	__Annotation__000007_isbn_Inlined.Documentations = append(__Annotation__000007_isbn_Inlined.Documentations, __Documentation__000005__Inlined)
-	__Annotation__000008_link_Inlined.Documentations = append(__Annotation__000008_link_Inlined.Documentations, __Documentation__000010_link_Inlined_Inlined)
-	__Annotation__000009_title_Inlined.Documentations = append(__Annotation__000009_title_Inlined.Documentations, __Documentation__000004__Inlined)
-	__Annotation__000010_yearType_Inlined.Documentations = append(__Annotation__000010_yearType_Inlined.Documentations, __Documentation__000011_yearType_Inlined_Inlined)
+	__Annotation__000001_bestseller_Inlined.Documentations = append(__Annotation__000001_bestseller_Inlined.Documentations, __Documentation__000004__Inlined)
+	__Annotation__000002_bookType_Inlined.Documentations = append(__Annotation__000002_bookType_Inlined.Documentations, __Documentation__000005_bookType_Inlined_Inlined)
+	__Annotation__000003_credit_Inlined.Documentations = append(__Annotation__000003_credit_Inlined.Documentations, __Documentation__000006_credit_Inlined_Inlined)
+	__Annotation__000004_edition_Inlined.Documentations = append(__Annotation__000004_edition_Inlined.Documentations, __Documentation__000003__Inlined)
+	__Annotation__000005_isbn_Inlined.Documentations = append(__Annotation__000005_isbn_Inlined.Documentations, __Documentation__000002__Inlined)
+	__Annotation__000006_link_Inlined.Documentations = append(__Annotation__000006_link_Inlined.Documentations, __Documentation__000007_link_Inlined_Inlined)
+	__Annotation__000007_yearType_Inlined.Documentations = append(__Annotation__000007_yearType_Inlined.Documentations, __Documentation__000008_yearType_Inlined_Inlined)
 	__Attribute__000000_bestseller.Annotation = __Annotation__000001_bestseller_Inlined
-	__Attribute__000001_edition.Annotation = __Annotation__000005_edition_Inlined
-	__Attribute__000002_isbn.Annotation = __Annotation__000007_isbn_Inlined
+	__Attribute__000001_edition.Annotation = __Annotation__000004_edition_Inlined
+	__Attribute__000002_isbn.Annotation = __Annotation__000005_isbn_Inlined
 	__AttributeGroup__000002_commonAttributes.Attributes = append(__AttributeGroup__000002_commonAttributes.Attributes, __Attribute__000002_isbn)
 	__AttributeGroup__000002_commonAttributes.Attributes = append(__AttributeGroup__000002_commonAttributes.Attributes, __Attribute__000000_bestseller)
 	__AttributeGroup__000003_extendedAttributes.AttributeGroups = append(__AttributeGroup__000003_extendedAttributes.AttributeGroups, __AttributeGroup__000001_)
 	__AttributeGroup__000003_extendedAttributes.Attributes = append(__AttributeGroup__000003_extendedAttributes.Attributes, __Attribute__000001_edition)
-	__Choice__000000_.Elements = append(__Choice__000000_.Elements, __Element__000007_credit_words)
-	__Choice__000000_.Elements = append(__Choice__000000_.Elements, __Element__000004_credit_symbol)
-	__Choice__000001_.Elements = append(__Choice__000001_.Elements, __Element__000008_credit_words)
-	__Choice__000001_.Elements = append(__Choice__000001_.Elements, __Element__000005_credit_symbol)
-	__Choice__000002_.Sequences = append(__Choice__000002_.Sequences, __Sequence__000000_)
-	__ComplexType__000000_AnonymousWithin_books.OuterElement = __Element__000002_books
-	__ComplexType__000000_AnonymousWithin_books.Sequences = append(__ComplexType__000000_AnonymousWithin_books.Sequences, __Sequence__000002__Inlined)
+	__ComplexType__000000_AnonymousComplexTypeInline_books.OuterElement = __Element__000000_books
 	__ComplexType__000001_bookType.Annotation = __Annotation__000002_bookType_Inlined
-	__ComplexType__000001_bookType.Sequences = append(__ComplexType__000001_bookType.Sequences, __Sequence__000004_bookType_Inlined)
 	__ComplexType__000001_bookType.AttributeGroups = append(__ComplexType__000001_bookType.AttributeGroups, __AttributeGroup__000000_)
-	__ComplexType__000002_credit.Annotation = __Annotation__000004_credit_Inlined
-	__ComplexType__000002_credit.Sequences = append(__ComplexType__000002_credit.Sequences, __Sequence__000005_credit_Inlined)
+	__ComplexType__000002_credit.Annotation = __Annotation__000003_credit_Inlined
 	__ComplexType__000002_credit.Attributes = append(__ComplexType__000002_credit.Attributes, __Attribute__000004_page)
-	__ComplexType__000003_link.Annotation = __Annotation__000008_link_Inlined
+	__ComplexType__000003_link.Annotation = __Annotation__000006_link_Inlined
 	__ComplexType__000003_link.SimpleContent = __SimpleContent__000000_link_Inlined
-	__Element__000001_book.Annotation = __Annotation__000003_book_Inlined
-	__Element__000002_books.ComplexType = __ComplexType__000000_AnonymousWithin_books
-	__Element__000009_format.Annotation = __Annotation__000006_format_Inlined
-	__Element__000012_title.Annotation = __Annotation__000009_title_Inlined
+	__Element__000000_books.ComplexType = __ComplexType__000000_AnonymousComplexTypeInline_books
 	__Extension__000000_link_Inlined_Inlined.Attributes = append(__Extension__000000_link_Inlined_Inlined.Attributes, __Attribute__000003_name)
-	__Group__000001_bookDetailsGroup.Sequences = append(__Group__000001_bookDetailsGroup.Sequences, __Sequence__000003_bookDetailsGroup_Inlined)
 	__Restriction__000000_bookFormatEnum_Inlined.Enumerations = append(__Restriction__000000_bookFormatEnum_Inlined.Enumerations, __Enumeration__000000_bookFormatEnum_Inlined_Inlined)
 	__Restriction__000000_bookFormatEnum_Inlined.Enumerations = append(__Restriction__000000_bookFormatEnum_Inlined.Enumerations, __Enumeration__000001_bookFormatEnum_Inlined_Inlined)
 	__Restriction__000001_titleType_Inlined.Pattern = __Pattern__000000_titleType_Inlined_Inlined
@@ -697,7 +377,7 @@ func _(stage *models.StageStruct) {
 	__Restriction__000002_yearType_Inlined.MinInclusive = __MinInclusive__000000_yearType_Inlined_Inlined
 	__Restriction__000002_yearType_Inlined.MaxInclusive = __MaxInclusive__000000_yearType_Inlined_Inlined
 	__Schema__000000_Schema.Annotation = __Annotation__000000_Schema_Inlined
-	__Schema__000000_Schema.Elements = append(__Schema__000000_Schema.Elements, __Element__000002_books)
+	__Schema__000000_Schema.Elements = append(__Schema__000000_Schema.Elements, __Element__000000_books)
 	__Schema__000000_Schema.SimpleTypes = append(__Schema__000000_Schema.SimpleTypes, __SimpleType__000002_yearType)
 	__Schema__000000_Schema.SimpleTypes = append(__Schema__000000_Schema.SimpleTypes, __SimpleType__000000_bookFormatEnum)
 	__Schema__000000_Schema.SimpleTypes = append(__Schema__000000_Schema.SimpleTypes, __SimpleType__000001_titleType)
@@ -706,24 +386,10 @@ func _(stage *models.StageStruct) {
 	__Schema__000000_Schema.ComplexTypes = append(__Schema__000000_Schema.ComplexTypes, __ComplexType__000003_link)
 	__Schema__000000_Schema.AttributeGroups = append(__Schema__000000_Schema.AttributeGroups, __AttributeGroup__000002_commonAttributes)
 	__Schema__000000_Schema.AttributeGroups = append(__Schema__000000_Schema.AttributeGroups, __AttributeGroup__000003_extendedAttributes)
-	__Schema__000000_Schema.Groups = append(__Schema__000000_Schema.Groups, __Group__000001_bookDetailsGroup)
-	__Sequence__000000_.Sequences = append(__Sequence__000000_.Sequences, __Sequence__000001_)
-	__Sequence__000000_.Choices = append(__Sequence__000000_.Choices, __Choice__000001_)
-	__Sequence__000001_.Choices = append(__Sequence__000001_.Choices, __Choice__000000_)
-	__Sequence__000001_.Elements = append(__Sequence__000001_.Elements, __Element__000011_link)
-	__Sequence__000002__Inlined.Elements = append(__Sequence__000002__Inlined.Elements, __Element__000001_book)
-	__Sequence__000003_bookDetailsGroup_Inlined.Elements = append(__Sequence__000003_bookDetailsGroup_Inlined.Elements, __Element__000012_title)
-	__Sequence__000003_bookDetailsGroup_Inlined.Elements = append(__Sequence__000003_bookDetailsGroup_Inlined.Elements, __Element__000000_author)
-	__Sequence__000003_bookDetailsGroup_Inlined.Elements = append(__Sequence__000003_bookDetailsGroup_Inlined.Elements, __Element__000013_year)
-	__Sequence__000003_bookDetailsGroup_Inlined.Elements = append(__Sequence__000003_bookDetailsGroup_Inlined.Elements, __Element__000009_format)
-	__Sequence__000004_bookType_Inlined.Groups = append(__Sequence__000004_bookType_Inlined.Groups, __Group__000000_)
-	__Sequence__000004_bookType_Inlined.Elements = append(__Sequence__000004_bookType_Inlined.Elements, __Element__000003_credit)
-	__Sequence__000005_credit_Inlined.Choices = append(__Sequence__000005_credit_Inlined.Choices, __Choice__000002_)
-	__Sequence__000005_credit_Inlined.Elements = append(__Sequence__000005_credit_Inlined.Elements, __Element__000006_credit_type)
-	__Sequence__000005_credit_Inlined.Elements = append(__Sequence__000005_credit_Inlined.Elements, __Element__000010_link)
+	__Schema__000000_Schema.Groups = append(__Schema__000000_Schema.Groups, __Group__000000_bookDetailsGroup)
 	__SimpleContent__000000_link_Inlined.Extension = __Extension__000000_link_Inlined_Inlined
 	__SimpleType__000000_bookFormatEnum.Restriction = __Restriction__000000_bookFormatEnum_Inlined
 	__SimpleType__000001_titleType.Restriction = __Restriction__000001_titleType_Inlined
-	__SimpleType__000002_yearType.Annotation = __Annotation__000010_yearType_Inlined
+	__SimpleType__000002_yearType.Annotation = __Annotation__000007_yearType_Inlined
 	__SimpleType__000002_yearType.Restriction = __Restriction__000002_yearType_Inlined
 }

@@ -56,6 +56,9 @@ func IsStaged[Type Gongstruct](stage *StageStruct, instance *Type) (ok bool) {
 	case *MinLength:
 		ok = stage.IsStagedMinLength(target)
 
+	case *ModelGroupElement:
+		ok = stage.IsStagedModelGroupElement(target)
+
 	case *Pattern:
 		ok = stage.IsStagedPattern(target)
 
@@ -209,6 +212,13 @@ func (stage *StageStruct) IsStagedMinLength(minlength *MinLength) (ok bool) {
 	return
 }
 
+func (stage *StageStruct) IsStagedModelGroupElement(modelgroupelement *ModelGroupElement) (ok bool) {
+
+	_, ok = stage.ModelGroupElements[modelgroupelement]
+
+	return
+}
+
 func (stage *StageStruct) IsStagedPattern(pattern *Pattern) (ok bool) {
 
 	_, ok = stage.Patterns[pattern]
@@ -331,6 +341,9 @@ func StageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 	case *MinLength:
 		stage.StageBranchMinLength(target)
 
+	case *ModelGroupElement:
+		stage.StageBranchModelGroupElement(target)
+
 	case *Pattern:
 		stage.StageBranchPattern(target)
 
@@ -379,20 +392,8 @@ func (stage *StageStruct) StageBranchAll(all *All) {
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _sequence := range all.Sequences {
-		StageBranch(stage, _sequence)
-	}
-	for _, _all := range all.Alls {
-		StageBranch(stage, _all)
-	}
-	for _, _choice := range all.Choices {
-		StageBranch(stage, _choice)
-	}
-	for _, _group := range all.Groups {
-		StageBranch(stage, _group)
-	}
-	for _, _element := range all.Elements {
-		StageBranch(stage, _element)
+	for _, _modelgroupelement := range all.ModelGroupElements {
+		StageBranch(stage, _modelgroupelement)
 	}
 
 }
@@ -472,20 +473,8 @@ func (stage *StageStruct) StageBranchChoice(choice *Choice) {
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _sequence := range choice.Sequences {
-		StageBranch(stage, _sequence)
-	}
-	for _, _all := range choice.Alls {
-		StageBranch(stage, _all)
-	}
-	for _, _choice := range choice.Choices {
-		StageBranch(stage, _choice)
-	}
-	for _, _group := range choice.Groups {
-		StageBranch(stage, _group)
-	}
-	for _, _element := range choice.Elements {
-		StageBranch(stage, _element)
+	for _, _modelgroupelement := range choice.ModelGroupElements {
+		StageBranch(stage, _modelgroupelement)
 	}
 
 }
@@ -532,20 +521,8 @@ func (stage *StageStruct) StageBranchComplexType(complextype *ComplexType) {
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _sequence := range complextype.Sequences {
-		StageBranch(stage, _sequence)
-	}
-	for _, _all := range complextype.Alls {
-		StageBranch(stage, _all)
-	}
-	for _, _choice := range complextype.Choices {
-		StageBranch(stage, _choice)
-	}
-	for _, _group := range complextype.Groups {
-		StageBranch(stage, _group)
-	}
-	for _, _element := range complextype.Elements {
-		StageBranch(stage, _element)
+	for _, _modelgroupelement := range complextype.ModelGroupElements {
+		StageBranch(stage, _modelgroupelement)
 	}
 	for _, _attribute := range complextype.Attributes {
 		StageBranch(stage, _attribute)
@@ -628,20 +605,8 @@ func (stage *StageStruct) StageBranchExtension(extension *Extension) {
 	//insertion point for the staging of instances referenced by pointers
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _sequence := range extension.Sequences {
-		StageBranch(stage, _sequence)
-	}
-	for _, _all := range extension.Alls {
-		StageBranch(stage, _all)
-	}
-	for _, _choice := range extension.Choices {
-		StageBranch(stage, _choice)
-	}
-	for _, _group := range extension.Groups {
-		StageBranch(stage, _group)
-	}
-	for _, _element := range extension.Elements {
-		StageBranch(stage, _element)
+	for _, _modelgroupelement := range extension.ModelGroupElements {
+		StageBranch(stage, _modelgroupelement)
 	}
 	for _, _attribute := range extension.Attributes {
 		StageBranch(stage, _attribute)
@@ -667,20 +632,8 @@ func (stage *StageStruct) StageBranchGroup(group *Group) {
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _sequence := range group.Sequences {
-		StageBranch(stage, _sequence)
-	}
-	for _, _all := range group.Alls {
-		StageBranch(stage, _all)
-	}
-	for _, _choice := range group.Choices {
-		StageBranch(stage, _choice)
-	}
-	for _, _group := range group.Groups {
-		StageBranch(stage, _group)
-	}
-	for _, _element := range group.Elements {
-		StageBranch(stage, _element)
+	for _, _modelgroupelement := range group.ModelGroupElements {
+		StageBranch(stage, _modelgroupelement)
 	}
 
 }
@@ -769,6 +722,36 @@ func (stage *StageStruct) StageBranchMinLength(minlength *MinLength) {
 	//insertion point for the staging of instances referenced by pointers
 	if minlength.Annotation != nil {
 		StageBranch(stage, minlength.Annotation)
+	}
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) StageBranchModelGroupElement(modelgroupelement *ModelGroupElement) {
+
+	// check if instance is already staged
+	if IsStaged(stage, modelgroupelement) {
+		return
+	}
+
+	modelgroupelement.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+	if modelgroupelement.Sequences != nil {
+		StageBranch(stage, modelgroupelement.Sequences)
+	}
+	if modelgroupelement.Alls != nil {
+		StageBranch(stage, modelgroupelement.Alls)
+	}
+	if modelgroupelement.Choices != nil {
+		StageBranch(stage, modelgroupelement.Choices)
+	}
+	if modelgroupelement.Groups != nil {
+		StageBranch(stage, modelgroupelement.Groups)
+	}
+	if modelgroupelement.Elements != nil {
+		StageBranch(stage, modelgroupelement.Elements)
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
@@ -886,20 +869,8 @@ func (stage *StageStruct) StageBranchSequence(sequence *Sequence) {
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _sequence := range sequence.Sequences {
-		StageBranch(stage, _sequence)
-	}
-	for _, _all := range sequence.Alls {
-		StageBranch(stage, _all)
-	}
-	for _, _choice := range sequence.Choices {
-		StageBranch(stage, _choice)
-	}
-	for _, _group := range sequence.Groups {
-		StageBranch(stage, _group)
-	}
-	for _, _element := range sequence.Elements {
-		StageBranch(stage, _element)
+	for _, _modelgroupelement := range sequence.ModelGroupElements {
+		StageBranch(stage, _modelgroupelement)
 	}
 
 }
@@ -1082,6 +1053,10 @@ func CopyBranch[Type Gongstruct](from *Type) (to *Type) {
 		toT := CopyBranchMinLength(mapOrigCopy, fromT)
 		return any(toT).(*Type)
 
+	case *ModelGroupElement:
+		toT := CopyBranchModelGroupElement(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
 	case *Pattern:
 		toT := CopyBranchPattern(mapOrigCopy, fromT)
 		return any(toT).(*Type)
@@ -1143,20 +1118,8 @@ func CopyBranchAll(mapOrigCopy map[any]any, allFrom *All) (allTo *All) {
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _sequence := range allFrom.Sequences {
-		allTo.Sequences = append(allTo.Sequences, CopyBranchSequence(mapOrigCopy, _sequence))
-	}
-	for _, _all := range allFrom.Alls {
-		allTo.Alls = append(allTo.Alls, CopyBranchAll(mapOrigCopy, _all))
-	}
-	for _, _choice := range allFrom.Choices {
-		allTo.Choices = append(allTo.Choices, CopyBranchChoice(mapOrigCopy, _choice))
-	}
-	for _, _group := range allFrom.Groups {
-		allTo.Groups = append(allTo.Groups, CopyBranchGroup(mapOrigCopy, _group))
-	}
-	for _, _element := range allFrom.Elements {
-		allTo.Elements = append(allTo.Elements, CopyBranchElement(mapOrigCopy, _element))
+	for _, _modelgroupelement := range allFrom.ModelGroupElements {
+		allTo.ModelGroupElements = append(allTo.ModelGroupElements, CopyBranchModelGroupElement(mapOrigCopy, _modelgroupelement))
 	}
 
 	return
@@ -1252,20 +1215,8 @@ func CopyBranchChoice(mapOrigCopy map[any]any, choiceFrom *Choice) (choiceTo *Ch
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _sequence := range choiceFrom.Sequences {
-		choiceTo.Sequences = append(choiceTo.Sequences, CopyBranchSequence(mapOrigCopy, _sequence))
-	}
-	for _, _all := range choiceFrom.Alls {
-		choiceTo.Alls = append(choiceTo.Alls, CopyBranchAll(mapOrigCopy, _all))
-	}
-	for _, _choice := range choiceFrom.Choices {
-		choiceTo.Choices = append(choiceTo.Choices, CopyBranchChoice(mapOrigCopy, _choice))
-	}
-	for _, _group := range choiceFrom.Groups {
-		choiceTo.Groups = append(choiceTo.Groups, CopyBranchGroup(mapOrigCopy, _group))
-	}
-	for _, _element := range choiceFrom.Elements {
-		choiceTo.Elements = append(choiceTo.Elements, CopyBranchElement(mapOrigCopy, _element))
+	for _, _modelgroupelement := range choiceFrom.ModelGroupElements {
+		choiceTo.ModelGroupElements = append(choiceTo.ModelGroupElements, CopyBranchModelGroupElement(mapOrigCopy, _modelgroupelement))
 	}
 
 	return
@@ -1320,20 +1271,8 @@ func CopyBranchComplexType(mapOrigCopy map[any]any, complextypeFrom *ComplexType
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _sequence := range complextypeFrom.Sequences {
-		complextypeTo.Sequences = append(complextypeTo.Sequences, CopyBranchSequence(mapOrigCopy, _sequence))
-	}
-	for _, _all := range complextypeFrom.Alls {
-		complextypeTo.Alls = append(complextypeTo.Alls, CopyBranchAll(mapOrigCopy, _all))
-	}
-	for _, _choice := range complextypeFrom.Choices {
-		complextypeTo.Choices = append(complextypeTo.Choices, CopyBranchChoice(mapOrigCopy, _choice))
-	}
-	for _, _group := range complextypeFrom.Groups {
-		complextypeTo.Groups = append(complextypeTo.Groups, CopyBranchGroup(mapOrigCopy, _group))
-	}
-	for _, _element := range complextypeFrom.Elements {
-		complextypeTo.Elements = append(complextypeTo.Elements, CopyBranchElement(mapOrigCopy, _element))
+	for _, _modelgroupelement := range complextypeFrom.ModelGroupElements {
+		complextypeTo.ModelGroupElements = append(complextypeTo.ModelGroupElements, CopyBranchModelGroupElement(mapOrigCopy, _modelgroupelement))
 	}
 	for _, _attribute := range complextypeFrom.Attributes {
 		complextypeTo.Attributes = append(complextypeTo.Attributes, CopyBranchAttribute(mapOrigCopy, _attribute))
@@ -1432,20 +1371,8 @@ func CopyBranchExtension(mapOrigCopy map[any]any, extensionFrom *Extension) (ext
 	//insertion point for the staging of instances referenced by pointers
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _sequence := range extensionFrom.Sequences {
-		extensionTo.Sequences = append(extensionTo.Sequences, CopyBranchSequence(mapOrigCopy, _sequence))
-	}
-	for _, _all := range extensionFrom.Alls {
-		extensionTo.Alls = append(extensionTo.Alls, CopyBranchAll(mapOrigCopy, _all))
-	}
-	for _, _choice := range extensionFrom.Choices {
-		extensionTo.Choices = append(extensionTo.Choices, CopyBranchChoice(mapOrigCopy, _choice))
-	}
-	for _, _group := range extensionFrom.Groups {
-		extensionTo.Groups = append(extensionTo.Groups, CopyBranchGroup(mapOrigCopy, _group))
-	}
-	for _, _element := range extensionFrom.Elements {
-		extensionTo.Elements = append(extensionTo.Elements, CopyBranchElement(mapOrigCopy, _element))
+	for _, _modelgroupelement := range extensionFrom.ModelGroupElements {
+		extensionTo.ModelGroupElements = append(extensionTo.ModelGroupElements, CopyBranchModelGroupElement(mapOrigCopy, _modelgroupelement))
 	}
 	for _, _attribute := range extensionFrom.Attributes {
 		extensionTo.Attributes = append(extensionTo.Attributes, CopyBranchAttribute(mapOrigCopy, _attribute))
@@ -1475,20 +1402,8 @@ func CopyBranchGroup(mapOrigCopy map[any]any, groupFrom *Group) (groupTo *Group)
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _sequence := range groupFrom.Sequences {
-		groupTo.Sequences = append(groupTo.Sequences, CopyBranchSequence(mapOrigCopy, _sequence))
-	}
-	for _, _all := range groupFrom.Alls {
-		groupTo.Alls = append(groupTo.Alls, CopyBranchAll(mapOrigCopy, _all))
-	}
-	for _, _choice := range groupFrom.Choices {
-		groupTo.Choices = append(groupTo.Choices, CopyBranchChoice(mapOrigCopy, _choice))
-	}
-	for _, _group := range groupFrom.Groups {
-		groupTo.Groups = append(groupTo.Groups, CopyBranchGroup(mapOrigCopy, _group))
-	}
-	for _, _element := range groupFrom.Elements {
-		groupTo.Elements = append(groupTo.Elements, CopyBranchElement(mapOrigCopy, _element))
+	for _, _modelgroupelement := range groupFrom.ModelGroupElements {
+		groupTo.ModelGroupElements = append(groupTo.ModelGroupElements, CopyBranchModelGroupElement(mapOrigCopy, _modelgroupelement))
 	}
 
 	return
@@ -1597,6 +1512,40 @@ func CopyBranchMinLength(mapOrigCopy map[any]any, minlengthFrom *MinLength) (min
 	//insertion point for the staging of instances referenced by pointers
 	if minlengthFrom.Annotation != nil {
 		minlengthTo.Annotation = CopyBranchAnnotation(mapOrigCopy, minlengthFrom.Annotation)
+	}
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+	return
+}
+
+func CopyBranchModelGroupElement(mapOrigCopy map[any]any, modelgroupelementFrom *ModelGroupElement) (modelgroupelementTo *ModelGroupElement) {
+
+	// modelgroupelementFrom has already been copied
+	if _modelgroupelementTo, ok := mapOrigCopy[modelgroupelementFrom]; ok {
+		modelgroupelementTo = _modelgroupelementTo.(*ModelGroupElement)
+		return
+	}
+
+	modelgroupelementTo = new(ModelGroupElement)
+	mapOrigCopy[modelgroupelementFrom] = modelgroupelementTo
+	modelgroupelementFrom.CopyBasicFields(modelgroupelementTo)
+
+	//insertion point for the staging of instances referenced by pointers
+	if modelgroupelementFrom.Sequences != nil {
+		modelgroupelementTo.Sequences = CopyBranchSequence(mapOrigCopy, modelgroupelementFrom.Sequences)
+	}
+	if modelgroupelementFrom.Alls != nil {
+		modelgroupelementTo.Alls = CopyBranchAll(mapOrigCopy, modelgroupelementFrom.Alls)
+	}
+	if modelgroupelementFrom.Choices != nil {
+		modelgroupelementTo.Choices = CopyBranchChoice(mapOrigCopy, modelgroupelementFrom.Choices)
+	}
+	if modelgroupelementFrom.Groups != nil {
+		modelgroupelementTo.Groups = CopyBranchGroup(mapOrigCopy, modelgroupelementFrom.Groups)
+	}
+	if modelgroupelementFrom.Elements != nil {
+		modelgroupelementTo.Elements = CopyBranchElement(mapOrigCopy, modelgroupelementFrom.Elements)
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
@@ -1730,20 +1679,8 @@ func CopyBranchSequence(mapOrigCopy map[any]any, sequenceFrom *Sequence) (sequen
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _sequence := range sequenceFrom.Sequences {
-		sequenceTo.Sequences = append(sequenceTo.Sequences, CopyBranchSequence(mapOrigCopy, _sequence))
-	}
-	for _, _all := range sequenceFrom.Alls {
-		sequenceTo.Alls = append(sequenceTo.Alls, CopyBranchAll(mapOrigCopy, _all))
-	}
-	for _, _choice := range sequenceFrom.Choices {
-		sequenceTo.Choices = append(sequenceTo.Choices, CopyBranchChoice(mapOrigCopy, _choice))
-	}
-	for _, _group := range sequenceFrom.Groups {
-		sequenceTo.Groups = append(sequenceTo.Groups, CopyBranchGroup(mapOrigCopy, _group))
-	}
-	for _, _element := range sequenceFrom.Elements {
-		sequenceTo.Elements = append(sequenceTo.Elements, CopyBranchElement(mapOrigCopy, _element))
+	for _, _modelgroupelement := range sequenceFrom.ModelGroupElements {
+		sequenceTo.ModelGroupElements = append(sequenceTo.ModelGroupElements, CopyBranchModelGroupElement(mapOrigCopy, _modelgroupelement))
 	}
 
 	return
@@ -1927,6 +1864,9 @@ func UnstageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 	case *MinLength:
 		stage.UnstageBranchMinLength(target)
 
+	case *ModelGroupElement:
+		stage.UnstageBranchModelGroupElement(target)
+
 	case *Pattern:
 		stage.UnstageBranchPattern(target)
 
@@ -1975,20 +1915,8 @@ func (stage *StageStruct) UnstageBranchAll(all *All) {
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _sequence := range all.Sequences {
-		UnstageBranch(stage, _sequence)
-	}
-	for _, _all := range all.Alls {
-		UnstageBranch(stage, _all)
-	}
-	for _, _choice := range all.Choices {
-		UnstageBranch(stage, _choice)
-	}
-	for _, _group := range all.Groups {
-		UnstageBranch(stage, _group)
-	}
-	for _, _element := range all.Elements {
-		UnstageBranch(stage, _element)
+	for _, _modelgroupelement := range all.ModelGroupElements {
+		UnstageBranch(stage, _modelgroupelement)
 	}
 
 }
@@ -2068,20 +1996,8 @@ func (stage *StageStruct) UnstageBranchChoice(choice *Choice) {
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _sequence := range choice.Sequences {
-		UnstageBranch(stage, _sequence)
-	}
-	for _, _all := range choice.Alls {
-		UnstageBranch(stage, _all)
-	}
-	for _, _choice := range choice.Choices {
-		UnstageBranch(stage, _choice)
-	}
-	for _, _group := range choice.Groups {
-		UnstageBranch(stage, _group)
-	}
-	for _, _element := range choice.Elements {
-		UnstageBranch(stage, _element)
+	for _, _modelgroupelement := range choice.ModelGroupElements {
+		UnstageBranch(stage, _modelgroupelement)
 	}
 
 }
@@ -2128,20 +2044,8 @@ func (stage *StageStruct) UnstageBranchComplexType(complextype *ComplexType) {
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _sequence := range complextype.Sequences {
-		UnstageBranch(stage, _sequence)
-	}
-	for _, _all := range complextype.Alls {
-		UnstageBranch(stage, _all)
-	}
-	for _, _choice := range complextype.Choices {
-		UnstageBranch(stage, _choice)
-	}
-	for _, _group := range complextype.Groups {
-		UnstageBranch(stage, _group)
-	}
-	for _, _element := range complextype.Elements {
-		UnstageBranch(stage, _element)
+	for _, _modelgroupelement := range complextype.ModelGroupElements {
+		UnstageBranch(stage, _modelgroupelement)
 	}
 	for _, _attribute := range complextype.Attributes {
 		UnstageBranch(stage, _attribute)
@@ -2224,20 +2128,8 @@ func (stage *StageStruct) UnstageBranchExtension(extension *Extension) {
 	//insertion point for the staging of instances referenced by pointers
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _sequence := range extension.Sequences {
-		UnstageBranch(stage, _sequence)
-	}
-	for _, _all := range extension.Alls {
-		UnstageBranch(stage, _all)
-	}
-	for _, _choice := range extension.Choices {
-		UnstageBranch(stage, _choice)
-	}
-	for _, _group := range extension.Groups {
-		UnstageBranch(stage, _group)
-	}
-	for _, _element := range extension.Elements {
-		UnstageBranch(stage, _element)
+	for _, _modelgroupelement := range extension.ModelGroupElements {
+		UnstageBranch(stage, _modelgroupelement)
 	}
 	for _, _attribute := range extension.Attributes {
 		UnstageBranch(stage, _attribute)
@@ -2263,20 +2155,8 @@ func (stage *StageStruct) UnstageBranchGroup(group *Group) {
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _sequence := range group.Sequences {
-		UnstageBranch(stage, _sequence)
-	}
-	for _, _all := range group.Alls {
-		UnstageBranch(stage, _all)
-	}
-	for _, _choice := range group.Choices {
-		UnstageBranch(stage, _choice)
-	}
-	for _, _group := range group.Groups {
-		UnstageBranch(stage, _group)
-	}
-	for _, _element := range group.Elements {
-		UnstageBranch(stage, _element)
+	for _, _modelgroupelement := range group.ModelGroupElements {
+		UnstageBranch(stage, _modelgroupelement)
 	}
 
 }
@@ -2365,6 +2245,36 @@ func (stage *StageStruct) UnstageBranchMinLength(minlength *MinLength) {
 	//insertion point for the staging of instances referenced by pointers
 	if minlength.Annotation != nil {
 		UnstageBranch(stage, minlength.Annotation)
+	}
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) UnstageBranchModelGroupElement(modelgroupelement *ModelGroupElement) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, modelgroupelement) {
+		return
+	}
+
+	modelgroupelement.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+	if modelgroupelement.Sequences != nil {
+		UnstageBranch(stage, modelgroupelement.Sequences)
+	}
+	if modelgroupelement.Alls != nil {
+		UnstageBranch(stage, modelgroupelement.Alls)
+	}
+	if modelgroupelement.Choices != nil {
+		UnstageBranch(stage, modelgroupelement.Choices)
+	}
+	if modelgroupelement.Groups != nil {
+		UnstageBranch(stage, modelgroupelement.Groups)
+	}
+	if modelgroupelement.Elements != nil {
+		UnstageBranch(stage, modelgroupelement.Elements)
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
@@ -2482,20 +2392,8 @@ func (stage *StageStruct) UnstageBranchSequence(sequence *Sequence) {
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _sequence := range sequence.Sequences {
-		UnstageBranch(stage, _sequence)
-	}
-	for _, _all := range sequence.Alls {
-		UnstageBranch(stage, _all)
-	}
-	for _, _choice := range sequence.Choices {
-		UnstageBranch(stage, _choice)
-	}
-	for _, _group := range sequence.Groups {
-		UnstageBranch(stage, _group)
-	}
-	for _, _element := range sequence.Elements {
-		UnstageBranch(stage, _element)
+	for _, _modelgroupelement := range sequence.ModelGroupElements {
+		UnstageBranch(stage, _modelgroupelement)
 	}
 
 }

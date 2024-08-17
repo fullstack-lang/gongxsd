@@ -31,6 +31,7 @@ func SerializeStage(stage *StageStruct, filename string) {
 		SerializeExcelize[MaxLength](stage, f)
 		SerializeExcelize[MinInclusive](stage, f)
 		SerializeExcelize[MinLength](stage, f)
+		SerializeExcelize[ModelGroupElement](stage, f)
 		SerializeExcelize[Pattern](stage, f)
 		SerializeExcelize[Restriction](stage, f)
 		SerializeExcelize[Schema](stage, f)

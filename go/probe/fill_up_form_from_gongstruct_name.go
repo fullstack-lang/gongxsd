@@ -247,6 +247,19 @@ func FillUpFormFromGongstructName(
 		minlength := new(models.MinLength)
 		formGroup.HasSuppressButton = !isNewInstance
 		FillUpForm(minlength, formGroup, probe)
+	case "ModelGroupElement":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "ModelGroupElement Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__ModelGroupElementFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		modelgroupelement := new(models.ModelGroupElement)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(modelgroupelement, formGroup, probe)
 	case "Pattern":
 		formGroup := (&form.FormGroup{
 			Name:  form.FormGroupDefaultName.ToString(),

@@ -103,6 +103,9 @@ func (nodeImplGongstruct *TreeNodeImplGongstruct) OnAfterUpdate(
 	if nodeImplGongstruct.gongStruct.GetName() == "MinLength" {
 		fillUpTable[models.MinLength](nodeImplGongstruct.probe)
 	}
+	if nodeImplGongstruct.gongStruct.GetName() == "ModelGroupElement" {
+		fillUpTable[models.ModelGroupElement](nodeImplGongstruct.probe)
+	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Pattern" {
 		fillUpTable[models.Pattern](nodeImplGongstruct.probe)
 	}

@@ -990,6 +990,40 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 
 	}
 
+	map_ModelGroupElement_Identifiers := make(map[*ModelGroupElement]string)
+	_ = map_ModelGroupElement_Identifiers
+
+	modelgroupelementOrdered := []*ModelGroupElement{}
+	for modelgroupelement := range stage.ModelGroupElements {
+		modelgroupelementOrdered = append(modelgroupelementOrdered, modelgroupelement)
+	}
+	sort.Slice(modelgroupelementOrdered[:], func(i, j int) bool {
+		return modelgroupelementOrdered[i].Name < modelgroupelementOrdered[j].Name
+	})
+	if len(modelgroupelementOrdered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, modelgroupelement := range modelgroupelementOrdered {
+
+		id = generatesIdentifier("ModelGroupElement", idx, modelgroupelement.Name)
+		map_ModelGroupElement_Identifiers[modelgroupelement] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "ModelGroupElement")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", modelgroupelement.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(modelgroupelement.Name))
+		initializerStatements += setValueField
+
+	}
+
 	map_Pattern_Identifiers := make(map[*Pattern]string)
 	_ = map_Pattern_Identifiers
 
@@ -1367,43 +1401,11 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			pointersInitializesStatements += setPointerField
 		}
 
-		for _, _sequence := range all.Sequences {
+		for _, _modelgroupelement := range all.ModelGroupElements {
 			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Sequences")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Sequence_Identifiers[_sequence])
-			pointersInitializesStatements += setPointerField
-		}
-
-		for _, _all := range all.Alls {
-			setPointerField = SliceOfPointersFieldInitStatement
-			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Alls")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_All_Identifiers[_all])
-			pointersInitializesStatements += setPointerField
-		}
-
-		for _, _choice := range all.Choices {
-			setPointerField = SliceOfPointersFieldInitStatement
-			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Choices")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Choice_Identifiers[_choice])
-			pointersInitializesStatements += setPointerField
-		}
-
-		for _, _group := range all.Groups {
-			setPointerField = SliceOfPointersFieldInitStatement
-			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Groups")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Group_Identifiers[_group])
-			pointersInitializesStatements += setPointerField
-		}
-
-		for _, _element := range all.Elements {
-			setPointerField = SliceOfPointersFieldInitStatement
-			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Elements")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Element_Identifiers[_element])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ModelGroupElements")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ModelGroupElement_Identifiers[_modelgroupelement])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -1495,43 +1497,11 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			pointersInitializesStatements += setPointerField
 		}
 
-		for _, _sequence := range choice.Sequences {
+		for _, _modelgroupelement := range choice.ModelGroupElements {
 			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Sequences")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Sequence_Identifiers[_sequence])
-			pointersInitializesStatements += setPointerField
-		}
-
-		for _, _all := range choice.Alls {
-			setPointerField = SliceOfPointersFieldInitStatement
-			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Alls")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_All_Identifiers[_all])
-			pointersInitializesStatements += setPointerField
-		}
-
-		for _, _choice := range choice.Choices {
-			setPointerField = SliceOfPointersFieldInitStatement
-			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Choices")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Choice_Identifiers[_choice])
-			pointersInitializesStatements += setPointerField
-		}
-
-		for _, _group := range choice.Groups {
-			setPointerField = SliceOfPointersFieldInitStatement
-			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Groups")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Group_Identifiers[_group])
-			pointersInitializesStatements += setPointerField
-		}
-
-		for _, _element := range choice.Elements {
-			setPointerField = SliceOfPointersFieldInitStatement
-			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Elements")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Element_Identifiers[_element])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ModelGroupElements")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ModelGroupElement_Identifiers[_modelgroupelement])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -1571,43 +1541,11 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			pointersInitializesStatements += setPointerField
 		}
 
-		for _, _sequence := range complextype.Sequences {
+		for _, _modelgroupelement := range complextype.ModelGroupElements {
 			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Sequences")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Sequence_Identifiers[_sequence])
-			pointersInitializesStatements += setPointerField
-		}
-
-		for _, _all := range complextype.Alls {
-			setPointerField = SliceOfPointersFieldInitStatement
-			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Alls")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_All_Identifiers[_all])
-			pointersInitializesStatements += setPointerField
-		}
-
-		for _, _choice := range complextype.Choices {
-			setPointerField = SliceOfPointersFieldInitStatement
-			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Choices")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Choice_Identifiers[_choice])
-			pointersInitializesStatements += setPointerField
-		}
-
-		for _, _group := range complextype.Groups {
-			setPointerField = SliceOfPointersFieldInitStatement
-			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Groups")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Group_Identifiers[_group])
-			pointersInitializesStatements += setPointerField
-		}
-
-		for _, _element := range complextype.Elements {
-			setPointerField = SliceOfPointersFieldInitStatement
-			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Elements")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Element_Identifiers[_element])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ModelGroupElements")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ModelGroupElement_Identifiers[_modelgroupelement])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -1731,43 +1669,11 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		map_Extension_Identifiers[extension] = id
 
 		// Initialisation of values
-		for _, _sequence := range extension.Sequences {
+		for _, _modelgroupelement := range extension.ModelGroupElements {
 			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Sequences")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Sequence_Identifiers[_sequence])
-			pointersInitializesStatements += setPointerField
-		}
-
-		for _, _all := range extension.Alls {
-			setPointerField = SliceOfPointersFieldInitStatement
-			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Alls")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_All_Identifiers[_all])
-			pointersInitializesStatements += setPointerField
-		}
-
-		for _, _choice := range extension.Choices {
-			setPointerField = SliceOfPointersFieldInitStatement
-			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Choices")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Choice_Identifiers[_choice])
-			pointersInitializesStatements += setPointerField
-		}
-
-		for _, _group := range extension.Groups {
-			setPointerField = SliceOfPointersFieldInitStatement
-			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Groups")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Group_Identifiers[_group])
-			pointersInitializesStatements += setPointerField
-		}
-
-		for _, _element := range extension.Elements {
-			setPointerField = SliceOfPointersFieldInitStatement
-			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Elements")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Element_Identifiers[_element])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ModelGroupElements")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ModelGroupElement_Identifiers[_modelgroupelement])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -1805,43 +1711,11 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			pointersInitializesStatements += setPointerField
 		}
 
-		for _, _sequence := range group.Sequences {
+		for _, _modelgroupelement := range group.ModelGroupElements {
 			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Sequences")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Sequence_Identifiers[_sequence])
-			pointersInitializesStatements += setPointerField
-		}
-
-		for _, _all := range group.Alls {
-			setPointerField = SliceOfPointersFieldInitStatement
-			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Alls")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_All_Identifiers[_all])
-			pointersInitializesStatements += setPointerField
-		}
-
-		for _, _choice := range group.Choices {
-			setPointerField = SliceOfPointersFieldInitStatement
-			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Choices")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Choice_Identifiers[_choice])
-			pointersInitializesStatements += setPointerField
-		}
-
-		for _, _group := range group.Groups {
-			setPointerField = SliceOfPointersFieldInitStatement
-			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Groups")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Group_Identifiers[_group])
-			pointersInitializesStatements += setPointerField
-		}
-
-		for _, _element := range group.Elements {
-			setPointerField = SliceOfPointersFieldInitStatement
-			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Elements")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Element_Identifiers[_element])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ModelGroupElements")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ModelGroupElement_Identifiers[_modelgroupelement])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -1932,6 +1806,56 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Annotation")
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Annotation_Identifiers[minlength.Annotation])
+			pointersInitializesStatements += setPointerField
+		}
+
+	}
+
+	for idx, modelgroupelement := range modelgroupelementOrdered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("ModelGroupElement", idx, modelgroupelement.Name)
+		map_ModelGroupElement_Identifiers[modelgroupelement] = id
+
+		// Initialisation of values
+		if modelgroupelement.Sequences != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Sequences")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Sequence_Identifiers[modelgroupelement.Sequences])
+			pointersInitializesStatements += setPointerField
+		}
+
+		if modelgroupelement.Alls != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Alls")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_All_Identifiers[modelgroupelement.Alls])
+			pointersInitializesStatements += setPointerField
+		}
+
+		if modelgroupelement.Choices != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Choices")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Choice_Identifiers[modelgroupelement.Choices])
+			pointersInitializesStatements += setPointerField
+		}
+
+		if modelgroupelement.Groups != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Groups")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Group_Identifiers[modelgroupelement.Groups])
+			pointersInitializesStatements += setPointerField
+		}
+
+		if modelgroupelement.Elements != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Elements")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Element_Identifiers[modelgroupelement.Elements])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -2119,43 +2043,11 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			pointersInitializesStatements += setPointerField
 		}
 
-		for _, _sequence := range sequence.Sequences {
+		for _, _modelgroupelement := range sequence.ModelGroupElements {
 			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Sequences")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Sequence_Identifiers[_sequence])
-			pointersInitializesStatements += setPointerField
-		}
-
-		for _, _all := range sequence.Alls {
-			setPointerField = SliceOfPointersFieldInitStatement
-			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Alls")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_All_Identifiers[_all])
-			pointersInitializesStatements += setPointerField
-		}
-
-		for _, _choice := range sequence.Choices {
-			setPointerField = SliceOfPointersFieldInitStatement
-			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Choices")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Choice_Identifiers[_choice])
-			pointersInitializesStatements += setPointerField
-		}
-
-		for _, _group := range sequence.Groups {
-			setPointerField = SliceOfPointersFieldInitStatement
-			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Groups")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Group_Identifiers[_group])
-			pointersInitializesStatements += setPointerField
-		}
-
-		for _, _element := range sequence.Elements {
-			setPointerField = SliceOfPointersFieldInitStatement
-			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Elements")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Element_Identifiers[_element])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ModelGroupElements")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ModelGroupElement_Identifiers[_modelgroupelement])
 			pointersInitializesStatements += setPointerField
 		}
 

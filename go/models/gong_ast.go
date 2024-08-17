@@ -331,6 +331,7 @@ var __gong__map_MaxInclusive = make(map[string]*MaxInclusive)
 var __gong__map_MaxLength = make(map[string]*MaxLength)
 var __gong__map_MinInclusive = make(map[string]*MinInclusive)
 var __gong__map_MinLength = make(map[string]*MinLength)
+var __gong__map_ModelGroupElement = make(map[string]*ModelGroupElement)
 var __gong__map_Pattern = make(map[string]*Pattern)
 var __gong__map_Restriction = make(map[string]*Restriction)
 var __gong__map_Schema = make(map[string]*Schema)
@@ -580,6 +581,10 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 										instanceMinLength := (&MinLength{Name: instanceName}).Stage(stage)
 										instance = any(instanceMinLength)
 										__gong__map_MinLength[identifier] = instanceMinLength
+									case "ModelGroupElement":
+										instanceModelGroupElement := (&ModelGroupElement{Name: instanceName}).Stage(stage)
+										instance = any(instanceModelGroupElement)
+										__gong__map_ModelGroupElement[identifier] = instanceModelGroupElement
 									case "Pattern":
 										instancePattern := (&Pattern{Name: instanceName}).Stage(stage)
 										instance = any(instancePattern)
@@ -720,6 +725,10 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 							switch fieldName {
 							// insertion point for date assign code
 							}
+						case "ModelGroupElement":
+							switch fieldName {
+							// insertion point for date assign code
+							}
 						case "Pattern":
 							switch fieldName {
 							// insertion point for date assign code
@@ -784,36 +793,12 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					case "All":
 						switch fieldName {
 						// insertion point for slice of pointers assign code
-						case "Sequences":
+						case "ModelGroupElements":
 							// remove first and last char
 							targetIdentifier := ident.Name
-							target := __gong__map_Sequence[targetIdentifier]
-							__gong__map_All[identifier].Sequences =
-								append(__gong__map_All[identifier].Sequences, target)
-						case "Alls":
-							// remove first and last char
-							targetIdentifier := ident.Name
-							target := __gong__map_All[targetIdentifier]
-							__gong__map_All[identifier].Alls =
-								append(__gong__map_All[identifier].Alls, target)
-						case "Choices":
-							// remove first and last char
-							targetIdentifier := ident.Name
-							target := __gong__map_Choice[targetIdentifier]
-							__gong__map_All[identifier].Choices =
-								append(__gong__map_All[identifier].Choices, target)
-						case "Groups":
-							// remove first and last char
-							targetIdentifier := ident.Name
-							target := __gong__map_Group[targetIdentifier]
-							__gong__map_All[identifier].Groups =
-								append(__gong__map_All[identifier].Groups, target)
-						case "Elements":
-							// remove first and last char
-							targetIdentifier := ident.Name
-							target := __gong__map_Element[targetIdentifier]
-							__gong__map_All[identifier].Elements =
-								append(__gong__map_All[identifier].Elements, target)
+							target := __gong__map_ModelGroupElement[targetIdentifier]
+							__gong__map_All[identifier].ModelGroupElements =
+								append(__gong__map_All[identifier].ModelGroupElements, target)
 						}
 					case "Annotation":
 						switch fieldName {
@@ -848,36 +833,12 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					case "Choice":
 						switch fieldName {
 						// insertion point for slice of pointers assign code
-						case "Sequences":
+						case "ModelGroupElements":
 							// remove first and last char
 							targetIdentifier := ident.Name
-							target := __gong__map_Sequence[targetIdentifier]
-							__gong__map_Choice[identifier].Sequences =
-								append(__gong__map_Choice[identifier].Sequences, target)
-						case "Alls":
-							// remove first and last char
-							targetIdentifier := ident.Name
-							target := __gong__map_All[targetIdentifier]
-							__gong__map_Choice[identifier].Alls =
-								append(__gong__map_Choice[identifier].Alls, target)
-						case "Choices":
-							// remove first and last char
-							targetIdentifier := ident.Name
-							target := __gong__map_Choice[targetIdentifier]
-							__gong__map_Choice[identifier].Choices =
-								append(__gong__map_Choice[identifier].Choices, target)
-						case "Groups":
-							// remove first and last char
-							targetIdentifier := ident.Name
-							target := __gong__map_Group[targetIdentifier]
-							__gong__map_Choice[identifier].Groups =
-								append(__gong__map_Choice[identifier].Groups, target)
-						case "Elements":
-							// remove first and last char
-							targetIdentifier := ident.Name
-							target := __gong__map_Element[targetIdentifier]
-							__gong__map_Choice[identifier].Elements =
-								append(__gong__map_Choice[identifier].Elements, target)
+							target := __gong__map_ModelGroupElement[targetIdentifier]
+							__gong__map_Choice[identifier].ModelGroupElements =
+								append(__gong__map_Choice[identifier].ModelGroupElements, target)
 						}
 					case "ComplexContent":
 						switch fieldName {
@@ -886,36 +847,12 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					case "ComplexType":
 						switch fieldName {
 						// insertion point for slice of pointers assign code
-						case "Sequences":
+						case "ModelGroupElements":
 							// remove first and last char
 							targetIdentifier := ident.Name
-							target := __gong__map_Sequence[targetIdentifier]
-							__gong__map_ComplexType[identifier].Sequences =
-								append(__gong__map_ComplexType[identifier].Sequences, target)
-						case "Alls":
-							// remove first and last char
-							targetIdentifier := ident.Name
-							target := __gong__map_All[targetIdentifier]
-							__gong__map_ComplexType[identifier].Alls =
-								append(__gong__map_ComplexType[identifier].Alls, target)
-						case "Choices":
-							// remove first and last char
-							targetIdentifier := ident.Name
-							target := __gong__map_Choice[targetIdentifier]
-							__gong__map_ComplexType[identifier].Choices =
-								append(__gong__map_ComplexType[identifier].Choices, target)
-						case "Groups":
-							// remove first and last char
-							targetIdentifier := ident.Name
-							target := __gong__map_Group[targetIdentifier]
-							__gong__map_ComplexType[identifier].Groups =
-								append(__gong__map_ComplexType[identifier].Groups, target)
-						case "Elements":
-							// remove first and last char
-							targetIdentifier := ident.Name
-							target := __gong__map_Element[targetIdentifier]
-							__gong__map_ComplexType[identifier].Elements =
-								append(__gong__map_ComplexType[identifier].Elements, target)
+							target := __gong__map_ModelGroupElement[targetIdentifier]
+							__gong__map_ComplexType[identifier].ModelGroupElements =
+								append(__gong__map_ComplexType[identifier].ModelGroupElements, target)
 						case "Attributes":
 							// remove first and last char
 							targetIdentifier := ident.Name
@@ -950,36 +887,12 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					case "Extension":
 						switch fieldName {
 						// insertion point for slice of pointers assign code
-						case "Sequences":
+						case "ModelGroupElements":
 							// remove first and last char
 							targetIdentifier := ident.Name
-							target := __gong__map_Sequence[targetIdentifier]
-							__gong__map_Extension[identifier].Sequences =
-								append(__gong__map_Extension[identifier].Sequences, target)
-						case "Alls":
-							// remove first and last char
-							targetIdentifier := ident.Name
-							target := __gong__map_All[targetIdentifier]
-							__gong__map_Extension[identifier].Alls =
-								append(__gong__map_Extension[identifier].Alls, target)
-						case "Choices":
-							// remove first and last char
-							targetIdentifier := ident.Name
-							target := __gong__map_Choice[targetIdentifier]
-							__gong__map_Extension[identifier].Choices =
-								append(__gong__map_Extension[identifier].Choices, target)
-						case "Groups":
-							// remove first and last char
-							targetIdentifier := ident.Name
-							target := __gong__map_Group[targetIdentifier]
-							__gong__map_Extension[identifier].Groups =
-								append(__gong__map_Extension[identifier].Groups, target)
-						case "Elements":
-							// remove first and last char
-							targetIdentifier := ident.Name
-							target := __gong__map_Element[targetIdentifier]
-							__gong__map_Extension[identifier].Elements =
-								append(__gong__map_Extension[identifier].Elements, target)
+							target := __gong__map_ModelGroupElement[targetIdentifier]
+							__gong__map_Extension[identifier].ModelGroupElements =
+								append(__gong__map_Extension[identifier].ModelGroupElements, target)
 						case "Attributes":
 							// remove first and last char
 							targetIdentifier := ident.Name
@@ -990,36 +903,12 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					case "Group":
 						switch fieldName {
 						// insertion point for slice of pointers assign code
-						case "Sequences":
+						case "ModelGroupElements":
 							// remove first and last char
 							targetIdentifier := ident.Name
-							target := __gong__map_Sequence[targetIdentifier]
-							__gong__map_Group[identifier].Sequences =
-								append(__gong__map_Group[identifier].Sequences, target)
-						case "Alls":
-							// remove first and last char
-							targetIdentifier := ident.Name
-							target := __gong__map_All[targetIdentifier]
-							__gong__map_Group[identifier].Alls =
-								append(__gong__map_Group[identifier].Alls, target)
-						case "Choices":
-							// remove first and last char
-							targetIdentifier := ident.Name
-							target := __gong__map_Choice[targetIdentifier]
-							__gong__map_Group[identifier].Choices =
-								append(__gong__map_Group[identifier].Choices, target)
-						case "Groups":
-							// remove first and last char
-							targetIdentifier := ident.Name
-							target := __gong__map_Group[targetIdentifier]
-							__gong__map_Group[identifier].Groups =
-								append(__gong__map_Group[identifier].Groups, target)
-						case "Elements":
-							// remove first and last char
-							targetIdentifier := ident.Name
-							target := __gong__map_Element[targetIdentifier]
-							__gong__map_Group[identifier].Elements =
-								append(__gong__map_Group[identifier].Elements, target)
+							target := __gong__map_ModelGroupElement[targetIdentifier]
+							__gong__map_Group[identifier].ModelGroupElements =
+								append(__gong__map_Group[identifier].ModelGroupElements, target)
 						}
 					case "Length":
 						switch fieldName {
@@ -1038,6 +927,10 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 						// insertion point for slice of pointers assign code
 						}
 					case "MinLength":
+						switch fieldName {
+						// insertion point for slice of pointers assign code
+						}
+					case "ModelGroupElement":
 						switch fieldName {
 						// insertion point for slice of pointers assign code
 						}
@@ -1092,36 +985,12 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					case "Sequence":
 						switch fieldName {
 						// insertion point for slice of pointers assign code
-						case "Sequences":
+						case "ModelGroupElements":
 							// remove first and last char
 							targetIdentifier := ident.Name
-							target := __gong__map_Sequence[targetIdentifier]
-							__gong__map_Sequence[identifier].Sequences =
-								append(__gong__map_Sequence[identifier].Sequences, target)
-						case "Alls":
-							// remove first and last char
-							targetIdentifier := ident.Name
-							target := __gong__map_All[targetIdentifier]
-							__gong__map_Sequence[identifier].Alls =
-								append(__gong__map_Sequence[identifier].Alls, target)
-						case "Choices":
-							// remove first and last char
-							targetIdentifier := ident.Name
-							target := __gong__map_Choice[targetIdentifier]
-							__gong__map_Sequence[identifier].Choices =
-								append(__gong__map_Sequence[identifier].Choices, target)
-						case "Groups":
-							// remove first and last char
-							targetIdentifier := ident.Name
-							target := __gong__map_Group[targetIdentifier]
-							__gong__map_Sequence[identifier].Groups =
-								append(__gong__map_Sequence[identifier].Groups, target)
-						case "Elements":
-							// remove first and last char
-							targetIdentifier := ident.Name
-							target := __gong__map_Element[targetIdentifier]
-							__gong__map_Sequence[identifier].Elements =
-								append(__gong__map_Sequence[identifier].Elements, target)
+							target := __gong__map_ModelGroupElement[targetIdentifier]
+							__gong__map_Sequence[identifier].ModelGroupElements =
+								append(__gong__map_Sequence[identifier].ModelGroupElements, target)
 						}
 					case "SimpleContent":
 						switch fieldName {
@@ -1512,6 +1381,14 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
 					__gong__map_MinLength[identifier].Value = fielValue
 				}
+			case "ModelGroupElement":
+				switch fieldName {
+				// insertion point for field dependant code
+				case "Name":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_ModelGroupElement[identifier].Name = fielValue
+				}
 			case "Pattern":
 				switch fieldName {
 				// insertion point for field dependant code
@@ -1811,6 +1688,25 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					targetIdentifier := ident.Name
 					__gong__map_MinLength[identifier].Annotation = __gong__map_Annotation[targetIdentifier]
 				}
+			case "ModelGroupElement":
+				switch fieldName {
+				// insertion point for field dependant code
+				case "Sequences":
+					targetIdentifier := ident.Name
+					__gong__map_ModelGroupElement[identifier].Sequences = __gong__map_Sequence[targetIdentifier]
+				case "Alls":
+					targetIdentifier := ident.Name
+					__gong__map_ModelGroupElement[identifier].Alls = __gong__map_All[targetIdentifier]
+				case "Choices":
+					targetIdentifier := ident.Name
+					__gong__map_ModelGroupElement[identifier].Choices = __gong__map_Choice[targetIdentifier]
+				case "Groups":
+					targetIdentifier := ident.Name
+					__gong__map_ModelGroupElement[identifier].Groups = __gong__map_Group[targetIdentifier]
+				case "Elements":
+					targetIdentifier := ident.Name
+					__gong__map_ModelGroupElement[identifier].Elements = __gong__map_Element[targetIdentifier]
+				}
 			case "Pattern":
 				switch fieldName {
 				// insertion point for field dependant code
@@ -2000,6 +1896,10 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					// insertion point for enum assign code
 					}
 				case "MinLength":
+					switch fieldName {
+					// insertion point for enum assign code
+					}
+				case "ModelGroupElement":
 					switch fieldName {
 					// insertion point for enum assign code
 					}

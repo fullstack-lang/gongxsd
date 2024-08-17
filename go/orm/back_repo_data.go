@@ -38,6 +38,8 @@ type BackRepoData struct {
 
 	MinLengthAPIs []*MinLengthAPI
 
+	ModelGroupElementAPIs []*ModelGroupElementAPI
+
 	PatternAPIs []*PatternAPI
 
 	RestrictionAPIs []*RestrictionAPI
@@ -227,6 +229,16 @@ func CopyBackRepoToBackRepoData(backRepo *BackRepoStruct, backRepoData *BackRepo
 		minlengthDB.CopyBasicFieldsToMinLength_WOP(&minlengthAPI.MinLength_WOP)
 
 		backRepoData.MinLengthAPIs = append(backRepoData.MinLengthAPIs, &minlengthAPI)
+	}
+
+	for _, modelgroupelementDB := range backRepo.BackRepoModelGroupElement.Map_ModelGroupElementDBID_ModelGroupElementDB {
+
+		var modelgroupelementAPI ModelGroupElementAPI
+		modelgroupelementAPI.ID = modelgroupelementDB.ID
+		modelgroupelementAPI.ModelGroupElementPointersEncoding = modelgroupelementDB.ModelGroupElementPointersEncoding
+		modelgroupelementDB.CopyBasicFieldsToModelGroupElement_WOP(&modelgroupelementAPI.ModelGroupElement_WOP)
+
+		backRepoData.ModelGroupElementAPIs = append(backRepoData.ModelGroupElementAPIs, &modelgroupelementAPI)
 	}
 
 	for _, patternDB := range backRepo.BackRepoPattern.Map_PatternDBID_PatternDB {

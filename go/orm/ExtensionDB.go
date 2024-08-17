@@ -47,20 +47,8 @@ type ExtensionAPI struct {
 type ExtensionPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
 
-	// field Sequences is a slice of pointers to another Struct (optional or 0..1)
-	Sequences IntSlice `gorm:"type:TEXT"`
-
-	// field Alls is a slice of pointers to another Struct (optional or 0..1)
-	Alls IntSlice `gorm:"type:TEXT"`
-
-	// field Choices is a slice of pointers to another Struct (optional or 0..1)
-	Choices IntSlice `gorm:"type:TEXT"`
-
-	// field Groups is a slice of pointers to another Struct (optional or 0..1)
-	Groups IntSlice `gorm:"type:TEXT"`
-
-	// field Elements is a slice of pointers to another Struct (optional or 0..1)
-	Elements IntSlice `gorm:"type:TEXT"`
+	// field ModelGroupElements is a slice of pointers to another Struct (optional or 0..1)
+	ModelGroupElements IntSlice `gorm:"type:TEXT"`
 
 	// field Attributes is a slice of pointers to another Struct (optional or 0..1)
 	Attributes IntSlice `gorm:"type:TEXT"`
@@ -236,93 +224,21 @@ func (backRepoExtension *BackRepoExtensionStruct) CommitPhaseTwoInstance(backRep
 
 		// insertion point for translating pointers encodings into actual pointers
 		// 1. reset
-		extensionDB.ExtensionPointersEncoding.Sequences = make([]int, 0)
+		extensionDB.ExtensionPointersEncoding.ModelGroupElements = make([]int, 0)
 		// 2. encode
-		for _, sequenceAssocEnd := range extension.Sequences {
-			sequenceAssocEnd_DB :=
-				backRepo.BackRepoSequence.GetSequenceDBFromSequencePtr(sequenceAssocEnd)
+		for _, modelgroupelementAssocEnd := range extension.ModelGroupElements {
+			modelgroupelementAssocEnd_DB :=
+				backRepo.BackRepoModelGroupElement.GetModelGroupElementDBFromModelGroupElementPtr(modelgroupelementAssocEnd)
 			
-			// the stage might be inconsistant, meaning that the sequenceAssocEnd_DB might
+			// the stage might be inconsistant, meaning that the modelgroupelementAssocEnd_DB might
 			// be missing from the stage. In this case, the commit operation is robust
 			// An alternative would be to crash here to reveal the missing element.
-			if sequenceAssocEnd_DB == nil {
+			if modelgroupelementAssocEnd_DB == nil {
 				continue
 			}
 			
-			extensionDB.ExtensionPointersEncoding.Sequences =
-				append(extensionDB.ExtensionPointersEncoding.Sequences, int(sequenceAssocEnd_DB.ID))
-		}
-
-		// 1. reset
-		extensionDB.ExtensionPointersEncoding.Alls = make([]int, 0)
-		// 2. encode
-		for _, allAssocEnd := range extension.Alls {
-			allAssocEnd_DB :=
-				backRepo.BackRepoAll.GetAllDBFromAllPtr(allAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the allAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if allAssocEnd_DB == nil {
-				continue
-			}
-			
-			extensionDB.ExtensionPointersEncoding.Alls =
-				append(extensionDB.ExtensionPointersEncoding.Alls, int(allAssocEnd_DB.ID))
-		}
-
-		// 1. reset
-		extensionDB.ExtensionPointersEncoding.Choices = make([]int, 0)
-		// 2. encode
-		for _, choiceAssocEnd := range extension.Choices {
-			choiceAssocEnd_DB :=
-				backRepo.BackRepoChoice.GetChoiceDBFromChoicePtr(choiceAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the choiceAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if choiceAssocEnd_DB == nil {
-				continue
-			}
-			
-			extensionDB.ExtensionPointersEncoding.Choices =
-				append(extensionDB.ExtensionPointersEncoding.Choices, int(choiceAssocEnd_DB.ID))
-		}
-
-		// 1. reset
-		extensionDB.ExtensionPointersEncoding.Groups = make([]int, 0)
-		// 2. encode
-		for _, groupAssocEnd := range extension.Groups {
-			groupAssocEnd_DB :=
-				backRepo.BackRepoGroup.GetGroupDBFromGroupPtr(groupAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the groupAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if groupAssocEnd_DB == nil {
-				continue
-			}
-			
-			extensionDB.ExtensionPointersEncoding.Groups =
-				append(extensionDB.ExtensionPointersEncoding.Groups, int(groupAssocEnd_DB.ID))
-		}
-
-		// 1. reset
-		extensionDB.ExtensionPointersEncoding.Elements = make([]int, 0)
-		// 2. encode
-		for _, elementAssocEnd := range extension.Elements {
-			elementAssocEnd_DB :=
-				backRepo.BackRepoElement.GetElementDBFromElementPtr(elementAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the elementAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if elementAssocEnd_DB == nil {
-				continue
-			}
-			
-			extensionDB.ExtensionPointersEncoding.Elements =
-				append(extensionDB.ExtensionPointersEncoding.Elements, int(elementAssocEnd_DB.ID))
+			extensionDB.ExtensionPointersEncoding.ModelGroupElements =
+				append(extensionDB.ExtensionPointersEncoding.ModelGroupElements, int(modelgroupelementAssocEnd_DB.ID))
 		}
 
 		// 1. reset
@@ -456,49 +372,13 @@ func (backRepoExtension *BackRepoExtensionStruct) CheckoutPhaseTwoInstance(backR
 func (extensionDB *ExtensionDB) DecodePointers(backRepo *BackRepoStruct, extension *models.Extension) {
 
 	// insertion point for checkout of pointer encoding
-	// This loop redeem extension.Sequences in the stage from the encode in the back repo
-	// It parses all SequenceDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// This loop redeem extension.ModelGroupElements in the stage from the encode in the back repo
+	// It parses all ModelGroupElementDB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance
 	// 1. reset the slice
-	extension.Sequences = extension.Sequences[:0]
-	for _, _Sequenceid := range extensionDB.ExtensionPointersEncoding.Sequences {
-		extension.Sequences = append(extension.Sequences, backRepo.BackRepoSequence.Map_SequenceDBID_SequencePtr[uint(_Sequenceid)])
-	}
-
-	// This loop redeem extension.Alls in the stage from the encode in the back repo
-	// It parses all AllDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	extension.Alls = extension.Alls[:0]
-	for _, _Allid := range extensionDB.ExtensionPointersEncoding.Alls {
-		extension.Alls = append(extension.Alls, backRepo.BackRepoAll.Map_AllDBID_AllPtr[uint(_Allid)])
-	}
-
-	// This loop redeem extension.Choices in the stage from the encode in the back repo
-	// It parses all ChoiceDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	extension.Choices = extension.Choices[:0]
-	for _, _Choiceid := range extensionDB.ExtensionPointersEncoding.Choices {
-		extension.Choices = append(extension.Choices, backRepo.BackRepoChoice.Map_ChoiceDBID_ChoicePtr[uint(_Choiceid)])
-	}
-
-	// This loop redeem extension.Groups in the stage from the encode in the back repo
-	// It parses all GroupDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	extension.Groups = extension.Groups[:0]
-	for _, _Groupid := range extensionDB.ExtensionPointersEncoding.Groups {
-		extension.Groups = append(extension.Groups, backRepo.BackRepoGroup.Map_GroupDBID_GroupPtr[uint(_Groupid)])
-	}
-
-	// This loop redeem extension.Elements in the stage from the encode in the back repo
-	// It parses all ElementDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	extension.Elements = extension.Elements[:0]
-	for _, _Elementid := range extensionDB.ExtensionPointersEncoding.Elements {
-		extension.Elements = append(extension.Elements, backRepo.BackRepoElement.Map_ElementDBID_ElementPtr[uint(_Elementid)])
+	extension.ModelGroupElements = extension.ModelGroupElements[:0]
+	for _, _ModelGroupElementid := range extensionDB.ExtensionPointersEncoding.ModelGroupElements {
+		extension.ModelGroupElements = append(extension.ModelGroupElements, backRepo.BackRepoModelGroupElement.Map_ModelGroupElementDBID_ModelGroupElementPtr[uint(_ModelGroupElementid)])
 	}
 
 	// This loop redeem extension.Attributes in the stage from the encode in the back repo

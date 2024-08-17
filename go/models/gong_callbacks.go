@@ -74,6 +74,10 @@ func AfterCreateFromFront[Type Gongstruct](stage *StageStruct, instance *Type) {
 		if stage.OnAfterMinLengthCreateCallback != nil {
 			stage.OnAfterMinLengthCreateCallback.OnAfterCreate(stage, target)
 		}
+	case *ModelGroupElement:
+		if stage.OnAfterModelGroupElementCreateCallback != nil {
+			stage.OnAfterModelGroupElementCreateCallback.OnAfterCreate(stage, target)
+		}
 	case *Pattern:
 		if stage.OnAfterPatternCreateCallback != nil {
 			stage.OnAfterPatternCreateCallback.OnAfterCreate(stage, target)
@@ -204,6 +208,11 @@ func AfterUpdateFromFront[Type Gongstruct](stage *StageStruct, old, new *Type) {
 		newTarget := any(new).(*MinLength)
 		if stage.OnAfterMinLengthUpdateCallback != nil {
 			stage.OnAfterMinLengthUpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
+		}
+	case *ModelGroupElement:
+		newTarget := any(new).(*ModelGroupElement)
+		if stage.OnAfterModelGroupElementUpdateCallback != nil {
+			stage.OnAfterModelGroupElementUpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
 		}
 	case *Pattern:
 		newTarget := any(new).(*Pattern)
@@ -345,6 +354,11 @@ func AfterDeleteFromFront[Type Gongstruct](stage *StageStruct, staged, front *Ty
 			staged := any(staged).(*MinLength)
 			stage.OnAfterMinLengthDeleteCallback.OnAfterDelete(stage, staged, front)
 		}
+	case *ModelGroupElement:
+		if stage.OnAfterModelGroupElementDeleteCallback != nil {
+			staged := any(staged).(*ModelGroupElement)
+			stage.OnAfterModelGroupElementDeleteCallback.OnAfterDelete(stage, staged, front)
+		}
 	case *Pattern:
 		if stage.OnAfterPatternDeleteCallback != nil {
 			staged := any(staged).(*Pattern)
@@ -468,6 +482,10 @@ func AfterReadFromFront[Type Gongstruct](stage *StageStruct, instance *Type) {
 		if stage.OnAfterMinLengthReadCallback != nil {
 			stage.OnAfterMinLengthReadCallback.OnAfterRead(stage, target)
 		}
+	case *ModelGroupElement:
+		if stage.OnAfterModelGroupElementReadCallback != nil {
+			stage.OnAfterModelGroupElementReadCallback.OnAfterRead(stage, target)
+		}
 	case *Pattern:
 		if stage.OnAfterPatternReadCallback != nil {
 			stage.OnAfterPatternReadCallback.OnAfterRead(stage, target)
@@ -566,6 +584,9 @@ func SetCallbackAfterUpdateFromFront[Type Gongstruct](stage *StageStruct, callba
 	case *MinLength:
 		stage.OnAfterMinLengthUpdateCallback = any(callback).(OnAfterUpdateInterface[MinLength])
 	
+	case *ModelGroupElement:
+		stage.OnAfterModelGroupElementUpdateCallback = any(callback).(OnAfterUpdateInterface[ModelGroupElement])
+	
 	case *Pattern:
 		stage.OnAfterPatternUpdateCallback = any(callback).(OnAfterUpdateInterface[Pattern])
 	
@@ -650,6 +671,9 @@ func SetCallbackAfterCreateFromFront[Type Gongstruct](stage *StageStruct, callba
 	
 	case *MinLength:
 		stage.OnAfterMinLengthCreateCallback = any(callback).(OnAfterCreateInterface[MinLength])
+	
+	case *ModelGroupElement:
+		stage.OnAfterModelGroupElementCreateCallback = any(callback).(OnAfterCreateInterface[ModelGroupElement])
 	
 	case *Pattern:
 		stage.OnAfterPatternCreateCallback = any(callback).(OnAfterCreateInterface[Pattern])
@@ -736,6 +760,9 @@ func SetCallbackAfterDeleteFromFront[Type Gongstruct](stage *StageStruct, callba
 	case *MinLength:
 		stage.OnAfterMinLengthDeleteCallback = any(callback).(OnAfterDeleteInterface[MinLength])
 	
+	case *ModelGroupElement:
+		stage.OnAfterModelGroupElementDeleteCallback = any(callback).(OnAfterDeleteInterface[ModelGroupElement])
+	
 	case *Pattern:
 		stage.OnAfterPatternDeleteCallback = any(callback).(OnAfterDeleteInterface[Pattern])
 	
@@ -820,6 +847,9 @@ func SetCallbackAfterReadFromFront[Type Gongstruct](stage *StageStruct, callback
 	
 	case *MinLength:
 		stage.OnAfterMinLengthReadCallback = any(callback).(OnAfterReadInterface[MinLength])
+	
+	case *ModelGroupElement:
+		stage.OnAfterModelGroupElementReadCallback = any(callback).(OnAfterReadInterface[ModelGroupElement])
 	
 	case *Pattern:
 		stage.OnAfterPatternReadCallback = any(callback).(OnAfterReadInterface[Pattern])

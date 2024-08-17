@@ -22,24 +22,13 @@ func PostProcessingNames(stage *StageStruct) {
 			x.Name = prefix(_x.Name)
 		}
 
-		for _, s := range x.Sequences {
-			s.Name = prefix(x.Name)
-		}
-		for _, c := range x.Choices {
-			c.Name = prefix(x.Name)
-		}
-		for _, a := range x.Alls {
-			a.Name = prefix(x.Name)
-		}
 		if x.Annotation != nil {
 			x.Annotation.Name = prefix(x.Name)
 		}
 		for _, ag := range x.AttributeGroups {
 			ag.Name = prefix(x.Name)
 		}
-		for _, g := range x.Groups {
-			g.Name = prefix(x.Name)
-		}
+
 		if x.SimpleContent != nil {
 			x.SimpleContent.Name = prefix(x.Name)
 		}
@@ -53,15 +42,6 @@ func PostProcessingNames(stage *StageStruct) {
 			x.Name = prefix(_x.Name)
 		}
 
-		for _, s := range x.Sequences {
-			s.Name = prefix(x.Name)
-		}
-		for _, c := range x.Choices {
-			c.Name = prefix(x.Name)
-		}
-		for _, a := range x.Alls {
-			a.Name = prefix(x.Name)
-		}
 		if x.Annotation != nil {
 			x.Annotation.Name = prefix(x.Name)
 		}

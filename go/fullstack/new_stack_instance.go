@@ -61,6 +61,7 @@ func NewStackInstance(
 	models.SetOrchestratorOnAfterUpdate[models.MaxLength](stage)
 	models.SetOrchestratorOnAfterUpdate[models.MinInclusive](stage)
 	models.SetOrchestratorOnAfterUpdate[models.MinLength](stage)
+	models.SetOrchestratorOnAfterUpdate[models.ModelGroupElement](stage)
 	models.SetOrchestratorOnAfterUpdate[models.Pattern](stage)
 	models.SetOrchestratorOnAfterUpdate[models.Restriction](stage)
 	models.SetOrchestratorOnAfterUpdate[models.Schema](stage)
