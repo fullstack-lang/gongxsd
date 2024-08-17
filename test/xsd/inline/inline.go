@@ -12,14 +12,22 @@ type InlineStruct struct {
 }
 
 type Root struct {
-	InlineStruct `xml:",inline"`
+	Inlines []*InlineStruct `xml:",inline"`
 }
 
 func main() {
 	// Create an instance of Root with some data
 	root := new(Root)
-	root.FieldA = "A"
-	root.FieldB = "B"
+
+	inline1 := new(InlineStruct)
+	inline1.FieldA = "A1"
+	inline1.FieldB = "B1"
+
+	inline2 := new(InlineStruct)
+	inline2.FieldA = "A2"
+	inline2.FieldB = "B2"
+
+	root.Inlines = append(root.Inlines, inline1, inline2)
 
 	// Marshal the Root struct to XML
 	output, err := xml.MarshalIndent(root, "", "  ")
