@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/xml"
 	"fmt"
-	"os"
 )
 
 type InlineStruct struct {
@@ -12,7 +11,63 @@ type InlineStruct struct {
 }
 
 type Root struct {
-	Inlines []*InlineStruct `xml:",inline"`
+	Inlines []*InlineStruct
+}
+
+// Custom MarshalXML implementation for Root
+func (r *Root) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
+	start.Name.Local = "Root"
+	if err := e.EncodeToken(start); err != nil {
+		return err
+	}
+
+	for _, inline := range r.Inlines {
+		if err := e.EncodeElement(inline.FieldA, xml.StartElement{Name: xml.Name{Local: "FieldA"}}); err != nil {
+			return err
+		}
+		if err := e.EncodeElement(inline.FieldB, xml.StartElement{Name: xml.Name{Local: "FieldB"}}); err != nil {
+			return err
+		}
+	}
+
+	return e.EncodeToken(start.End())
+}
+
+// Custom UnmarshalXML implementation for Root
+func (r *Root) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
+	var inline *InlineStruct
+
+	for {
+		t, err := d.Token()
+		if err != nil {
+			return err
+		}
+
+		switch se := t.(type) {
+		case xml.StartElement:
+			switch se.Name.Local {
+			case "FieldA":
+				if inline == nil {
+					inline = new(InlineStruct)
+				}
+				if err := d.DecodeElement(&inline.FieldA, &se); err != nil {
+					return err
+				}
+			case "FieldB":
+				if inline != nil {
+					if err := d.DecodeElement(&inline.FieldB, &se); err != nil {
+						return err
+					}
+					r.Inlines = append(r.Inlines, inline)
+					inline = nil
+				}
+			}
+		case xml.EndElement:
+			if se.Name.Local == start.Name.Local {
+				return nil
+			}
+		}
+	}
 }
 
 func main() {
@@ -37,16 +92,20 @@ func main() {
 	}
 
 	// Print the XML output
+	fmt.Println("Marshalled XML:")
 	fmt.Println(string(output))
 
-	// Optionally, save the XML to a file
-	file, err := os.Create("output.xml")
+	// Simulate unmarshaling from the marshalled XML
+	var unmarshalledRoot Root
+	err = xml.Unmarshal(output, &unmarshalledRoot)
 	if err != nil {
-		fmt.Printf("error: %v\n", err)
+		fmt.Printf("error unmarshalling: %v\n", err)
 		return
 	}
-	defer file.Close()
 
-	file.WriteString(xml.Header)
-	file.Write(output)
+	// Print the unmarshalled data
+	fmt.Println("\nUnmarshalled Data:")
+	for _, inline := range unmarshalledRoot.Inlines {
+		fmt.Printf("FieldA: %s, FieldB: %s\n", inline.FieldA, inline.FieldB)
+	}
 }
