@@ -12,6 +12,7 @@ type All_WOP struct {
 	Name string
 	MinOccurs string
 	MaxOccurs string
+	OuterElementName string
 }
 
 func (from *All) CopyBasicFields(to *All) {
@@ -19,6 +20,7 @@ func (from *All) CopyBasicFields(to *All) {
 	to.Name = from.Name
 	to.MinOccurs = from.MinOccurs
 	to.MaxOccurs = from.MaxOccurs
+	to.OuterElementName = from.OuterElementName
 }
 
 type Annotation_WOP struct {
@@ -88,6 +90,7 @@ type Choice_WOP struct {
 	Name string
 	MinOccurs string
 	MaxOccurs string
+	OuterElementName string
 }
 
 func (from *Choice) CopyBasicFields(to *Choice) {
@@ -95,6 +98,7 @@ func (from *Choice) CopyBasicFields(to *Choice) {
 	to.Name = from.Name
 	to.MinOccurs = from.MinOccurs
 	to.MaxOccurs = from.MaxOccurs
+	to.OuterElementName = from.OuterElementName
 }
 
 type ComplexContent_WOP struct {
@@ -114,6 +118,7 @@ type ComplexType_WOP struct {
 	GoIdentifier string
 	IsAnonymous bool
 	NameXSD string
+	OuterElementName string
 }
 
 func (from *ComplexType) CopyBasicFields(to *ComplexType) {
@@ -123,6 +128,7 @@ func (from *ComplexType) CopyBasicFields(to *ComplexType) {
 	to.GoIdentifier = from.GoIdentifier
 	to.IsAnonymous = from.IsAnonymous
 	to.NameXSD = from.NameXSD
+	to.OuterElementName = from.OuterElementName
 }
 
 type Documentation_WOP struct {
@@ -194,12 +200,14 @@ func (from *Enumeration) CopyBasicFields(to *Enumeration) {
 type Extension_WOP struct {
 	// insertion point
 	Name string
+	OuterElementName string
 	Base string
 }
 
 func (from *Extension) CopyBasicFields(to *Extension) {
 	// insertion point
 	to.Name = from.Name
+	to.OuterElementName = from.OuterElementName
 	to.Base = from.Base
 }
 
@@ -211,6 +219,7 @@ type Group_WOP struct {
 	IsAnonymous bool
 	HasNameConflict bool
 	GoIdentifier string
+	OuterElementName string
 }
 
 func (from *Group) CopyBasicFields(to *Group) {
@@ -221,6 +230,7 @@ func (from *Group) CopyBasicFields(to *Group) {
 	to.IsAnonymous = from.IsAnonymous
 	to.HasNameConflict = from.HasNameConflict
 	to.GoIdentifier = from.GoIdentifier
+	to.OuterElementName = from.OuterElementName
 }
 
 type Length_WOP struct {
@@ -324,6 +334,7 @@ type Sequence_WOP struct {
 	Name string
 	MinOccurs string
 	MaxOccurs string
+	OuterElementName string
 }
 
 func (from *Sequence) CopyBasicFields(to *Sequence) {
@@ -331,6 +342,7 @@ func (from *Sequence) CopyBasicFields(to *Sequence) {
 	to.Name = from.Name
 	to.MinOccurs = from.MinOccurs
 	to.MaxOccurs = from.MaxOccurs
+	to.OuterElementName = from.OuterElementName
 }
 
 type SimpleContent_WOP struct {

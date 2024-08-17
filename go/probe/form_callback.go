@@ -69,6 +69,8 @@ func (allFormCallback *AllFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(all_.MinOccurs), formDiv)
 		case "MaxOccurs":
 			FormDivBasicFieldToField(&(all_.MaxOccurs), formDiv)
+		case "OuterElementName":
+			FormDivBasicFieldToField(&(all_.OuterElementName), formDiv)
 		case "All:Alls":
 			// we need to retrieve the field owner before the change
 			var pastAllOwner *models.All
@@ -923,6 +925,8 @@ func (choiceFormCallback *ChoiceFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(choice_.MinOccurs), formDiv)
 		case "MaxOccurs":
 			FormDivBasicFieldToField(&(choice_.MaxOccurs), formDiv)
+		case "OuterElementName":
+			FormDivBasicFieldToField(&(choice_.OuterElementName), formDiv)
 		case "All:Choices":
 			// we need to retrieve the field owner before the change
 			var pastAllOwner *models.All
@@ -1341,6 +1345,8 @@ func (complextypeFormCallback *ComplexTypeFormCallback) OnSave() {
 			FormDivSelectFieldToField(&(complextype_.Annotation), complextypeFormCallback.probe.stageOfInterest, formDiv)
 		case "NameXSD":
 			FormDivBasicFieldToField(&(complextype_.NameXSD), formDiv)
+		case "OuterElementName":
+			FormDivBasicFieldToField(&(complextype_.OuterElementName), formDiv)
 		case "Extension":
 			FormDivSelectFieldToField(&(complextype_.Extension), complextypeFormCallback.probe.stageOfInterest, formDiv)
 		case "SimpleContent":
@@ -2119,6 +2125,8 @@ func (extensionFormCallback *ExtensionFormCallback) OnSave() {
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(extension_.Name), formDiv)
+		case "OuterElementName":
+			FormDivBasicFieldToField(&(extension_.OuterElementName), formDiv)
 		case "Base":
 			FormDivBasicFieldToField(&(extension_.Base), formDiv)
 		}
@@ -2212,6 +2220,8 @@ func (groupFormCallback *GroupFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(group_.HasNameConflict), formDiv)
 		case "GoIdentifier":
 			FormDivBasicFieldToField(&(group_.GoIdentifier), formDiv)
+		case "OuterElementName":
+			FormDivBasicFieldToField(&(group_.OuterElementName), formDiv)
 		case "All:Groups":
 			// we need to retrieve the field owner before the change
 			var pastAllOwner *models.All
@@ -3295,6 +3305,8 @@ func (sequenceFormCallback *SequenceFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(sequence_.MinOccurs), formDiv)
 		case "MaxOccurs":
 			FormDivBasicFieldToField(&(sequence_.MaxOccurs), formDiv)
+		case "OuterElementName":
+			FormDivBasicFieldToField(&(sequence_.OuterElementName), formDiv)
 		case "All:Sequences":
 			// we need to retrieve the field owner before the change
 			var pastAllOwner *models.All

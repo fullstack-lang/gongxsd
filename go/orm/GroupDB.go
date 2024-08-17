@@ -101,6 +101,9 @@ type GroupDB struct {
 
 	// Declation for basic field groupDB.GoIdentifier
 	GoIdentifier_Data sql.NullString
+
+	// Declation for basic field groupDB.OuterElementName
+	OuterElementName_Data sql.NullString
 	
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
@@ -135,6 +138,8 @@ type GroupWOP struct {
 	HasNameConflict bool `xlsx:"5"`
 
 	GoIdentifier string `xlsx:"6"`
+
+	OuterElementName string `xlsx:"7"`
 	// insertion for WOP pointer fields
 }
 
@@ -147,6 +152,7 @@ var Group_Fields = []string{
 	"IsAnonymous",
 	"HasNameConflict",
 	"GoIdentifier",
+	"OuterElementName",
 }
 
 type BackRepoGroupStruct struct {
@@ -599,6 +605,9 @@ func (groupDB *GroupDB) CopyBasicFieldsFromGroup(group *models.Group) {
 
 	groupDB.GoIdentifier_Data.String = group.GoIdentifier
 	groupDB.GoIdentifier_Data.Valid = true
+
+	groupDB.OuterElementName_Data.String = group.OuterElementName
+	groupDB.OuterElementName_Data.Valid = true
 }
 
 // CopyBasicFieldsFromGroup_WOP
@@ -622,6 +631,9 @@ func (groupDB *GroupDB) CopyBasicFieldsFromGroup_WOP(group *models.Group_WOP) {
 
 	groupDB.GoIdentifier_Data.String = group.GoIdentifier
 	groupDB.GoIdentifier_Data.Valid = true
+
+	groupDB.OuterElementName_Data.String = group.OuterElementName
+	groupDB.OuterElementName_Data.Valid = true
 }
 
 // CopyBasicFieldsFromGroupWOP
@@ -645,6 +657,9 @@ func (groupDB *GroupDB) CopyBasicFieldsFromGroupWOP(group *GroupWOP) {
 
 	groupDB.GoIdentifier_Data.String = group.GoIdentifier
 	groupDB.GoIdentifier_Data.Valid = true
+
+	groupDB.OuterElementName_Data.String = group.OuterElementName
+	groupDB.OuterElementName_Data.Valid = true
 }
 
 // CopyBasicFieldsToGroup
@@ -656,6 +671,7 @@ func (groupDB *GroupDB) CopyBasicFieldsToGroup(group *models.Group) {
 	group.IsAnonymous = groupDB.IsAnonymous_Data.Bool
 	group.HasNameConflict = groupDB.HasNameConflict_Data.Bool
 	group.GoIdentifier = groupDB.GoIdentifier_Data.String
+	group.OuterElementName = groupDB.OuterElementName_Data.String
 }
 
 // CopyBasicFieldsToGroup_WOP
@@ -667,6 +683,7 @@ func (groupDB *GroupDB) CopyBasicFieldsToGroup_WOP(group *models.Group_WOP) {
 	group.IsAnonymous = groupDB.IsAnonymous_Data.Bool
 	group.HasNameConflict = groupDB.HasNameConflict_Data.Bool
 	group.GoIdentifier = groupDB.GoIdentifier_Data.String
+	group.OuterElementName = groupDB.OuterElementName_Data.String
 }
 
 // CopyBasicFieldsToGroupWOP
@@ -679,6 +696,7 @@ func (groupDB *GroupDB) CopyBasicFieldsToGroupWOP(group *GroupWOP) {
 	group.IsAnonymous = groupDB.IsAnonymous_Data.Bool
 	group.HasNameConflict = groupDB.HasNameConflict_Data.Bool
 	group.GoIdentifier = groupDB.GoIdentifier_Data.String
+	group.OuterElementName = groupDB.OuterElementName_Data.String
 }
 
 // Backup generates a json file from a slice of all GroupDB instances in the backrepo

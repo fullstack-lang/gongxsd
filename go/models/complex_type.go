@@ -74,6 +74,7 @@ func (ct *ComplexType) GetFields(stage *StageStruct) (fields string) {
 
 	map_Name_Elems := make(map[string]*Element)
 
+	ct.ModelGroup.OuterElementName = ct.Name
 	ct.ModelGroup.generateElements(map_Name_Elems, stMap, ctMap, groupMap, setOfGoIdentifiers, &fields)
 
 	return

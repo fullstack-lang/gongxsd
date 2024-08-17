@@ -80,6 +80,9 @@ type ExtensionDB struct {
 	// Declation for basic field extensionDB.Name
 	Name_Data sql.NullString
 
+	// Declation for basic field extensionDB.OuterElementName
+	OuterElementName_Data sql.NullString
+
 	// Declation for basic field extensionDB.Base
 	Base_Data sql.NullString
 	
@@ -107,7 +110,9 @@ type ExtensionWOP struct {
 
 	Name string `xlsx:"1"`
 
-	Base string `xlsx:"2"`
+	OuterElementName string `xlsx:"2"`
+
+	Base string `xlsx:"3"`
 	// insertion for WOP pointer fields
 }
 
@@ -115,6 +120,7 @@ var Extension_Fields = []string{
 	// insertion for WOP basic fields
 	"ID",
 	"Name",
+	"OuterElementName",
 	"Base",
 }
 
@@ -547,6 +553,9 @@ func (extensionDB *ExtensionDB) CopyBasicFieldsFromExtension(extension *models.E
 	extensionDB.Name_Data.String = extension.Name
 	extensionDB.Name_Data.Valid = true
 
+	extensionDB.OuterElementName_Data.String = extension.OuterElementName
+	extensionDB.OuterElementName_Data.Valid = true
+
 	extensionDB.Base_Data.String = extension.Base
 	extensionDB.Base_Data.Valid = true
 }
@@ -557,6 +566,9 @@ func (extensionDB *ExtensionDB) CopyBasicFieldsFromExtension_WOP(extension *mode
 
 	extensionDB.Name_Data.String = extension.Name
 	extensionDB.Name_Data.Valid = true
+
+	extensionDB.OuterElementName_Data.String = extension.OuterElementName
+	extensionDB.OuterElementName_Data.Valid = true
 
 	extensionDB.Base_Data.String = extension.Base
 	extensionDB.Base_Data.Valid = true
@@ -569,6 +581,9 @@ func (extensionDB *ExtensionDB) CopyBasicFieldsFromExtensionWOP(extension *Exten
 	extensionDB.Name_Data.String = extension.Name
 	extensionDB.Name_Data.Valid = true
 
+	extensionDB.OuterElementName_Data.String = extension.OuterElementName
+	extensionDB.OuterElementName_Data.Valid = true
+
 	extensionDB.Base_Data.String = extension.Base
 	extensionDB.Base_Data.Valid = true
 }
@@ -577,6 +592,7 @@ func (extensionDB *ExtensionDB) CopyBasicFieldsFromExtensionWOP(extension *Exten
 func (extensionDB *ExtensionDB) CopyBasicFieldsToExtension(extension *models.Extension) {
 	// insertion point for checkout of basic fields (back repo to stage)
 	extension.Name = extensionDB.Name_Data.String
+	extension.OuterElementName = extensionDB.OuterElementName_Data.String
 	extension.Base = extensionDB.Base_Data.String
 }
 
@@ -584,6 +600,7 @@ func (extensionDB *ExtensionDB) CopyBasicFieldsToExtension(extension *models.Ext
 func (extensionDB *ExtensionDB) CopyBasicFieldsToExtension_WOP(extension *models.Extension_WOP) {
 	// insertion point for checkout of basic fields (back repo to stage)
 	extension.Name = extensionDB.Name_Data.String
+	extension.OuterElementName = extensionDB.OuterElementName_Data.String
 	extension.Base = extensionDB.Base_Data.String
 }
 
@@ -592,6 +609,7 @@ func (extensionDB *ExtensionDB) CopyBasicFieldsToExtensionWOP(extension *Extensi
 	extension.ID = int(extensionDB.ID)
 	// insertion point for checkout of basic fields (back repo to stage)
 	extension.Name = extensionDB.Name_Data.String
+	extension.OuterElementName = extensionDB.OuterElementName_Data.String
 	extension.Base = extensionDB.Base_Data.String
 }
 

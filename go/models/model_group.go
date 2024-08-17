@@ -7,6 +7,8 @@ import "log"
 // Model groups define how elements within an XML schema are composed and ordered.
 // There are three main types of model groups in XSD
 type ModelGroup struct {
+	OuterElementName string
+
 	Sequences []*Sequence `xml:"sequence"`
 	Alls      []*All      `xml:"all"`
 	Choices   []*Choice   `xml:"choice"`
@@ -17,36 +19,6 @@ type ModelGroup struct {
 
 func (modelGroup *ModelGroup) getElements(groupMap map[string]*Group, map_Name_Elems map[string]*Element) (elems []*Element) {
 
-	for _, s := range modelGroup.Sequences {
-		for _, e := range s.Elements {
-			if _, ok := map_Name_Elems[e.Name]; ok {
-				continue
-			}
-			map_Name_Elems[e.Name] = e
-			elems = append(elems, e)
-		}
-		elems = append(elems, s.getElements(groupMap, map_Name_Elems)...)
-	}
-	for _, c := range modelGroup.Choices {
-		for _, e := range c.Elements {
-			if _, ok := map_Name_Elems[e.Name]; ok {
-				continue
-			}
-			map_Name_Elems[e.Name] = e
-			elems = append(elems, e)
-		}
-		elems = append(elems, c.getElements(groupMap, map_Name_Elems)...)
-	}
-	for _, a := range modelGroup.Alls {
-		for _, e := range a.Elements {
-			if _, ok := map_Name_Elems[e.Name]; ok {
-				continue
-			}
-			map_Name_Elems[e.Name] = e
-			elems = append(elems, e)
-		}
-		elems = append(elems, a.ModelGroup.getElements(groupMap, map_Name_Elems)...)
-	}
 	for _, gRef := range modelGroup.Groups {
 
 		if gRef.Ref != "" {
@@ -57,13 +29,43 @@ func (modelGroup *ModelGroup) getElements(groupMap map[string]*Group, map_Name_E
 			}
 		} else {
 			for _, e := range gRef.Elements {
+				elems = append(elems, gRef.ModelGroup.getElements(groupMap, map_Name_Elems)...)
 				if _, ok := map_Name_Elems[e.Name]; ok {
 					continue
 				}
 				map_Name_Elems[e.Name] = e
 				elems = append(elems, e)
 			}
-			elems = append(elems, gRef.ModelGroup.getElements(groupMap, map_Name_Elems)...)
+		}
+	}
+	for _, s := range modelGroup.Sequences {
+		elems = append(elems, s.getElements(groupMap, map_Name_Elems)...)
+		for _, e := range s.Elements {
+			if _, ok := map_Name_Elems[e.Name]; ok {
+				continue
+			}
+			map_Name_Elems[e.Name] = e
+			elems = append(elems, e)
+		}
+	}
+	for _, c := range modelGroup.Choices {
+		elems = append(elems, c.getElements(groupMap, map_Name_Elems)...)
+		for _, e := range c.Elements {
+			if _, ok := map_Name_Elems[e.Name]; ok {
+				continue
+			}
+			map_Name_Elems[e.Name] = e
+			elems = append(elems, e)
+		}
+	}
+	for _, a := range modelGroup.Alls {
+		elems = append(elems, a.ModelGroup.getElements(groupMap, map_Name_Elems)...)
+		for _, e := range a.Elements {
+			if _, ok := map_Name_Elems[e.Name]; ok {
+				continue
+			}
+			map_Name_Elems[e.Name] = e
+			elems = append(elems, e)
 		}
 	}
 

@@ -86,6 +86,9 @@ type ChoiceDB struct {
 
 	// Declation for basic field choiceDB.MaxOccurs
 	MaxOccurs_Data sql.NullString
+
+	// Declation for basic field choiceDB.OuterElementName
+	OuterElementName_Data sql.NullString
 	
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
@@ -114,6 +117,8 @@ type ChoiceWOP struct {
 	MinOccurs string `xlsx:"2"`
 
 	MaxOccurs string `xlsx:"3"`
+
+	OuterElementName string `xlsx:"4"`
 	// insertion for WOP pointer fields
 }
 
@@ -123,6 +128,7 @@ var Choice_Fields = []string{
 	"Name",
 	"MinOccurs",
 	"MaxOccurs",
+	"OuterElementName",
 }
 
 type BackRepoChoiceStruct struct {
@@ -549,6 +555,9 @@ func (choiceDB *ChoiceDB) CopyBasicFieldsFromChoice(choice *models.Choice) {
 
 	choiceDB.MaxOccurs_Data.String = choice.MaxOccurs
 	choiceDB.MaxOccurs_Data.Valid = true
+
+	choiceDB.OuterElementName_Data.String = choice.OuterElementName
+	choiceDB.OuterElementName_Data.Valid = true
 }
 
 // CopyBasicFieldsFromChoice_WOP
@@ -563,6 +572,9 @@ func (choiceDB *ChoiceDB) CopyBasicFieldsFromChoice_WOP(choice *models.Choice_WO
 
 	choiceDB.MaxOccurs_Data.String = choice.MaxOccurs
 	choiceDB.MaxOccurs_Data.Valid = true
+
+	choiceDB.OuterElementName_Data.String = choice.OuterElementName
+	choiceDB.OuterElementName_Data.Valid = true
 }
 
 // CopyBasicFieldsFromChoiceWOP
@@ -577,6 +589,9 @@ func (choiceDB *ChoiceDB) CopyBasicFieldsFromChoiceWOP(choice *ChoiceWOP) {
 
 	choiceDB.MaxOccurs_Data.String = choice.MaxOccurs
 	choiceDB.MaxOccurs_Data.Valid = true
+
+	choiceDB.OuterElementName_Data.String = choice.OuterElementName
+	choiceDB.OuterElementName_Data.Valid = true
 }
 
 // CopyBasicFieldsToChoice
@@ -585,6 +600,7 @@ func (choiceDB *ChoiceDB) CopyBasicFieldsToChoice(choice *models.Choice) {
 	choice.Name = choiceDB.Name_Data.String
 	choice.MinOccurs = choiceDB.MinOccurs_Data.String
 	choice.MaxOccurs = choiceDB.MaxOccurs_Data.String
+	choice.OuterElementName = choiceDB.OuterElementName_Data.String
 }
 
 // CopyBasicFieldsToChoice_WOP
@@ -593,6 +609,7 @@ func (choiceDB *ChoiceDB) CopyBasicFieldsToChoice_WOP(choice *models.Choice_WOP)
 	choice.Name = choiceDB.Name_Data.String
 	choice.MinOccurs = choiceDB.MinOccurs_Data.String
 	choice.MaxOccurs = choiceDB.MaxOccurs_Data.String
+	choice.OuterElementName = choiceDB.OuterElementName_Data.String
 }
 
 // CopyBasicFieldsToChoiceWOP
@@ -602,6 +619,7 @@ func (choiceDB *ChoiceDB) CopyBasicFieldsToChoiceWOP(choice *ChoiceWOP) {
 	choice.Name = choiceDB.Name_Data.String
 	choice.MinOccurs = choiceDB.MinOccurs_Data.String
 	choice.MaxOccurs = choiceDB.MaxOccurs_Data.String
+	choice.OuterElementName = choiceDB.OuterElementName_Data.String
 }
 
 // Backup generates a json file from a slice of all ChoiceDB instances in the backrepo

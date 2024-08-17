@@ -1207,6 +1207,10 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					// remove first and last char
 					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
 					__gong__map_All[identifier].MaxOccurs = fielValue
+				case "OuterElementName":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_All[identifier].OuterElementName = fielValue
 				}
 			case "Annotation":
 				switch fieldName {
@@ -1303,6 +1307,10 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					// remove first and last char
 					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
 					__gong__map_Choice[identifier].MaxOccurs = fielValue
+				case "OuterElementName":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_Choice[identifier].OuterElementName = fielValue
 				}
 			case "ComplexContent":
 				switch fieldName {
@@ -1327,6 +1335,10 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					// remove first and last char
 					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
 					__gong__map_ComplexType[identifier].NameXSD = fielValue
+				case "OuterElementName":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_ComplexType[identifier].OuterElementName = fielValue
 				}
 			case "Documentation":
 				switch fieldName {
@@ -1427,6 +1439,10 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					// remove first and last char
 					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
 					__gong__map_Extension[identifier].Name = fielValue
+				case "OuterElementName":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_Extension[identifier].OuterElementName = fielValue
 				case "Base":
 					// remove first and last char
 					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
@@ -1451,6 +1467,10 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					// remove first and last char
 					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
 					__gong__map_Group[identifier].GoIdentifier = fielValue
+				case "OuterElementName":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_Group[identifier].OuterElementName = fielValue
 				}
 			case "Length":
 				switch fieldName {
@@ -1563,6 +1583,10 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					// remove first and last char
 					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
 					__gong__map_Sequence[identifier].MaxOccurs = fielValue
+				case "OuterElementName":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_Sequence[identifier].OuterElementName = fielValue
 				}
 			case "SimpleContent":
 				switch fieldName {

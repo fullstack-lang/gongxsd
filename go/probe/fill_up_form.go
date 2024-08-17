@@ -27,6 +27,8 @@ func FillUpForm[T models.Gongstruct](
 			false, false, 0, false, 0)
 		BasicFieldtoForm("MaxOccurs", instanceWithInferedType.MaxOccurs, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
+		BasicFieldtoForm("OuterElementName", instanceWithInferedType.OuterElementName, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
 		AssociationSliceToForm("Sequences", instanceWithInferedType, &instanceWithInferedType.Sequences, formGroup, probe)
 		AssociationSliceToForm("Alls", instanceWithInferedType, &instanceWithInferedType.Alls, formGroup, probe)
 		AssociationSliceToForm("Choices", instanceWithInferedType, &instanceWithInferedType.Choices, formGroup, probe)
@@ -358,6 +360,8 @@ func FillUpForm[T models.Gongstruct](
 			false, false, 0, false, 0)
 		BasicFieldtoForm("MaxOccurs", instanceWithInferedType.MaxOccurs, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
+		BasicFieldtoForm("OuterElementName", instanceWithInferedType.OuterElementName, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
 		AssociationSliceToForm("Sequences", instanceWithInferedType, &instanceWithInferedType.Sequences, formGroup, probe)
 		AssociationSliceToForm("Alls", instanceWithInferedType, &instanceWithInferedType.Alls, formGroup, probe)
 		AssociationSliceToForm("Choices", instanceWithInferedType, &instanceWithInferedType.Choices, formGroup, probe)
@@ -514,6 +518,8 @@ func FillUpForm[T models.Gongstruct](
 		AssociationFieldToForm("OuterElement", instanceWithInferedType.OuterElement, formGroup, probe)
 		AssociationFieldToForm("Annotation", instanceWithInferedType.Annotation, formGroup, probe)
 		BasicFieldtoForm("NameXSD", instanceWithInferedType.NameXSD, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		BasicFieldtoForm("OuterElementName", instanceWithInferedType.OuterElementName, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
 		AssociationSliceToForm("Sequences", instanceWithInferedType, &instanceWithInferedType.Sequences, formGroup, probe)
 		AssociationSliceToForm("Alls", instanceWithInferedType, &instanceWithInferedType.Alls, formGroup, probe)
@@ -806,6 +812,8 @@ func FillUpForm[T models.Gongstruct](
 		// insertion point
 		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
+		BasicFieldtoForm("OuterElementName", instanceWithInferedType.OuterElementName, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
 		AssociationSliceToForm("Sequences", instanceWithInferedType, &instanceWithInferedType.Sequences, formGroup, probe)
 		AssociationSliceToForm("Alls", instanceWithInferedType, &instanceWithInferedType.Alls, formGroup, probe)
 		AssociationSliceToForm("Choices", instanceWithInferedType, &instanceWithInferedType.Choices, formGroup, probe)
@@ -830,6 +838,8 @@ func FillUpForm[T models.Gongstruct](
 		BasicFieldtoForm("HasNameConflict", instanceWithInferedType.HasNameConflict, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
 		BasicFieldtoForm("GoIdentifier", instanceWithInferedType.GoIdentifier, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		BasicFieldtoForm("OuterElementName", instanceWithInferedType.OuterElementName, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
 		AssociationSliceToForm("Sequences", instanceWithInferedType, &instanceWithInferedType.Sequences, formGroup, probe)
 		AssociationSliceToForm("Alls", instanceWithInferedType, &instanceWithInferedType.Alls, formGroup, probe)
@@ -1099,6 +1109,8 @@ func FillUpForm[T models.Gongstruct](
 		BasicFieldtoForm("MinOccurs", instanceWithInferedType.MinOccurs, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
 		BasicFieldtoForm("MaxOccurs", instanceWithInferedType.MaxOccurs, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		BasicFieldtoForm("OuterElementName", instanceWithInferedType.OuterElementName, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
 		AssociationSliceToForm("Sequences", instanceWithInferedType, &instanceWithInferedType.Sequences, formGroup, probe)
 		AssociationSliceToForm("Alls", instanceWithInferedType, &instanceWithInferedType.Alls, formGroup, probe)

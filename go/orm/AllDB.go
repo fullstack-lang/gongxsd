@@ -86,6 +86,9 @@ type AllDB struct {
 
 	// Declation for basic field allDB.MaxOccurs
 	MaxOccurs_Data sql.NullString
+
+	// Declation for basic field allDB.OuterElementName
+	OuterElementName_Data sql.NullString
 	
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
@@ -114,6 +117,8 @@ type AllWOP struct {
 	MinOccurs string `xlsx:"2"`
 
 	MaxOccurs string `xlsx:"3"`
+
+	OuterElementName string `xlsx:"4"`
 	// insertion for WOP pointer fields
 }
 
@@ -123,6 +128,7 @@ var All_Fields = []string{
 	"Name",
 	"MinOccurs",
 	"MaxOccurs",
+	"OuterElementName",
 }
 
 type BackRepoAllStruct struct {
@@ -549,6 +555,9 @@ func (allDB *AllDB) CopyBasicFieldsFromAll(all *models.All) {
 
 	allDB.MaxOccurs_Data.String = all.MaxOccurs
 	allDB.MaxOccurs_Data.Valid = true
+
+	allDB.OuterElementName_Data.String = all.OuterElementName
+	allDB.OuterElementName_Data.Valid = true
 }
 
 // CopyBasicFieldsFromAll_WOP
@@ -563,6 +572,9 @@ func (allDB *AllDB) CopyBasicFieldsFromAll_WOP(all *models.All_WOP) {
 
 	allDB.MaxOccurs_Data.String = all.MaxOccurs
 	allDB.MaxOccurs_Data.Valid = true
+
+	allDB.OuterElementName_Data.String = all.OuterElementName
+	allDB.OuterElementName_Data.Valid = true
 }
 
 // CopyBasicFieldsFromAllWOP
@@ -577,6 +589,9 @@ func (allDB *AllDB) CopyBasicFieldsFromAllWOP(all *AllWOP) {
 
 	allDB.MaxOccurs_Data.String = all.MaxOccurs
 	allDB.MaxOccurs_Data.Valid = true
+
+	allDB.OuterElementName_Data.String = all.OuterElementName
+	allDB.OuterElementName_Data.Valid = true
 }
 
 // CopyBasicFieldsToAll
@@ -585,6 +600,7 @@ func (allDB *AllDB) CopyBasicFieldsToAll(all *models.All) {
 	all.Name = allDB.Name_Data.String
 	all.MinOccurs = allDB.MinOccurs_Data.String
 	all.MaxOccurs = allDB.MaxOccurs_Data.String
+	all.OuterElementName = allDB.OuterElementName_Data.String
 }
 
 // CopyBasicFieldsToAll_WOP
@@ -593,6 +609,7 @@ func (allDB *AllDB) CopyBasicFieldsToAll_WOP(all *models.All_WOP) {
 	all.Name = allDB.Name_Data.String
 	all.MinOccurs = allDB.MinOccurs_Data.String
 	all.MaxOccurs = allDB.MaxOccurs_Data.String
+	all.OuterElementName = allDB.OuterElementName_Data.String
 }
 
 // CopyBasicFieldsToAllWOP
@@ -602,6 +619,7 @@ func (allDB *AllDB) CopyBasicFieldsToAllWOP(all *AllWOP) {
 	all.Name = allDB.Name_Data.String
 	all.MinOccurs = allDB.MinOccurs_Data.String
 	all.MaxOccurs = allDB.MaxOccurs_Data.String
+	all.OuterElementName = allDB.OuterElementName_Data.String
 }
 
 // Backup generates a json file from a slice of all AllDB instances in the backrepo

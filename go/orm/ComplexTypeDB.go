@@ -116,6 +116,9 @@ type ComplexTypeDB struct {
 
 	// Declation for basic field complextypeDB.NameXSD
 	NameXSD_Data sql.NullString
+
+	// Declation for basic field complextypeDB.OuterElementName
+	OuterElementName_Data sql.NullString
 	
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
@@ -148,6 +151,8 @@ type ComplexTypeWOP struct {
 	IsAnonymous bool `xlsx:"4"`
 
 	NameXSD string `xlsx:"5"`
+
+	OuterElementName string `xlsx:"6"`
 	// insertion for WOP pointer fields
 }
 
@@ -159,6 +164,7 @@ var ComplexType_Fields = []string{
 	"GoIdentifier",
 	"IsAnonymous",
 	"NameXSD",
+	"OuterElementName",
 }
 
 type BackRepoComplexTypeStruct struct {
@@ -713,6 +719,9 @@ func (complextypeDB *ComplexTypeDB) CopyBasicFieldsFromComplexType(complextype *
 
 	complextypeDB.NameXSD_Data.String = complextype.NameXSD
 	complextypeDB.NameXSD_Data.Valid = true
+
+	complextypeDB.OuterElementName_Data.String = complextype.OuterElementName
+	complextypeDB.OuterElementName_Data.Valid = true
 }
 
 // CopyBasicFieldsFromComplexType_WOP
@@ -733,6 +742,9 @@ func (complextypeDB *ComplexTypeDB) CopyBasicFieldsFromComplexType_WOP(complexty
 
 	complextypeDB.NameXSD_Data.String = complextype.NameXSD
 	complextypeDB.NameXSD_Data.Valid = true
+
+	complextypeDB.OuterElementName_Data.String = complextype.OuterElementName
+	complextypeDB.OuterElementName_Data.Valid = true
 }
 
 // CopyBasicFieldsFromComplexTypeWOP
@@ -753,6 +765,9 @@ func (complextypeDB *ComplexTypeDB) CopyBasicFieldsFromComplexTypeWOP(complextyp
 
 	complextypeDB.NameXSD_Data.String = complextype.NameXSD
 	complextypeDB.NameXSD_Data.Valid = true
+
+	complextypeDB.OuterElementName_Data.String = complextype.OuterElementName
+	complextypeDB.OuterElementName_Data.Valid = true
 }
 
 // CopyBasicFieldsToComplexType
@@ -763,6 +778,7 @@ func (complextypeDB *ComplexTypeDB) CopyBasicFieldsToComplexType(complextype *mo
 	complextype.GoIdentifier = complextypeDB.GoIdentifier_Data.String
 	complextype.IsAnonymous = complextypeDB.IsAnonymous_Data.Bool
 	complextype.NameXSD = complextypeDB.NameXSD_Data.String
+	complextype.OuterElementName = complextypeDB.OuterElementName_Data.String
 }
 
 // CopyBasicFieldsToComplexType_WOP
@@ -773,6 +789,7 @@ func (complextypeDB *ComplexTypeDB) CopyBasicFieldsToComplexType_WOP(complextype
 	complextype.GoIdentifier = complextypeDB.GoIdentifier_Data.String
 	complextype.IsAnonymous = complextypeDB.IsAnonymous_Data.Bool
 	complextype.NameXSD = complextypeDB.NameXSD_Data.String
+	complextype.OuterElementName = complextypeDB.OuterElementName_Data.String
 }
 
 // CopyBasicFieldsToComplexTypeWOP
@@ -784,6 +801,7 @@ func (complextypeDB *ComplexTypeDB) CopyBasicFieldsToComplexTypeWOP(complextype 
 	complextype.GoIdentifier = complextypeDB.GoIdentifier_Data.String
 	complextype.IsAnonymous = complextypeDB.IsAnonymous_Data.Bool
 	complextype.NameXSD = complextypeDB.NameXSD_Data.String
+	complextype.OuterElementName = complextypeDB.OuterElementName_Data.String
 }
 
 // Backup generates a json file from a slice of all ComplexTypeDB instances in the backrepo
