@@ -8,6 +8,9 @@ func IsStaged[Type Gongstruct](stage *StageStruct, instance *Type) (ok bool) {
 	case *Annotation:
 		ok = stage.IsStagedAnnotation(target)
 
+	case *ComplexType:
+		ok = stage.IsStagedComplexType(target)
+
 	case *Documentation:
 		ok = stage.IsStagedDocumentation(target)
 
@@ -24,6 +27,13 @@ func IsStaged[Type Gongstruct](stage *StageStruct, instance *Type) (ok bool) {
 func (stage *StageStruct) IsStagedAnnotation(annotation *Annotation) (ok bool) {
 
 	_, ok = stage.Annotations[annotation]
+
+	return
+}
+
+func (stage *StageStruct) IsStagedComplexType(complextype *ComplexType) (ok bool) {
+
+	_, ok = stage.ComplexTypes[complextype]
 
 	return
 }
@@ -52,6 +62,9 @@ func StageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 	// insertion point for stage branch
 	case *Annotation:
 		stage.StageBranchAnnotation(target)
+
+	case *ComplexType:
+		stage.StageBranchComplexType(target)
 
 	case *Documentation:
 		stage.StageBranchDocumentation(target)
@@ -83,6 +96,27 @@ func (stage *StageStruct) StageBranchAnnotation(annotation *Annotation) {
 
 }
 
+func (stage *StageStruct) StageBranchComplexType(complextype *ComplexType) {
+
+	// check if instance is already staged
+	if IsStaged(stage, complextype) {
+		return
+	}
+
+	complextype.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+	if complextype.Annotation != nil {
+		StageBranch(stage, complextype.Annotation)
+	}
+	if complextype.OuterSchema != nil {
+		StageBranch(stage, complextype.OuterSchema)
+	}
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
 func (stage *StageStruct) StageBranchDocumentation(documentation *Documentation) {
 
 	// check if instance is already staged
@@ -111,6 +145,9 @@ func (stage *StageStruct) StageBranchSchema(schema *Schema) {
 	if schema.Annotation != nil {
 		StageBranch(stage, schema.Annotation)
 	}
+	if schema.ComplexType != nil {
+		StageBranch(stage, schema.ComplexType)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 
@@ -129,6 +166,10 @@ func CopyBranch[Type Gongstruct](from *Type) (to *Type) {
 	// insertion point for stage branch
 	case *Annotation:
 		toT := CopyBranchAnnotation(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
+	case *ComplexType:
+		toT := CopyBranchComplexType(mapOrigCopy, fromT)
 		return any(toT).(*Type)
 
 	case *Documentation:
@@ -168,6 +209,31 @@ func CopyBranchAnnotation(mapOrigCopy map[any]any, annotationFrom *Annotation) (
 	return
 }
 
+func CopyBranchComplexType(mapOrigCopy map[any]any, complextypeFrom *ComplexType) (complextypeTo *ComplexType) {
+
+	// complextypeFrom has already been copied
+	if _complextypeTo, ok := mapOrigCopy[complextypeFrom]; ok {
+		complextypeTo = _complextypeTo.(*ComplexType)
+		return
+	}
+
+	complextypeTo = new(ComplexType)
+	mapOrigCopy[complextypeFrom] = complextypeTo
+	complextypeFrom.CopyBasicFields(complextypeTo)
+
+	//insertion point for the staging of instances referenced by pointers
+	if complextypeFrom.Annotation != nil {
+		complextypeTo.Annotation = CopyBranchAnnotation(mapOrigCopy, complextypeFrom.Annotation)
+	}
+	if complextypeFrom.OuterSchema != nil {
+		complextypeTo.OuterSchema = CopyBranchSchema(mapOrigCopy, complextypeFrom.OuterSchema)
+	}
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+	return
+}
+
 func CopyBranchDocumentation(mapOrigCopy map[any]any, documentationFrom *Documentation) (documentationTo *Documentation) {
 
 	// documentationFrom has already been copied
@@ -203,6 +269,9 @@ func CopyBranchSchema(mapOrigCopy map[any]any, schemaFrom *Schema) (schemaTo *Sc
 	if schemaFrom.Annotation != nil {
 		schemaTo.Annotation = CopyBranchAnnotation(mapOrigCopy, schemaFrom.Annotation)
 	}
+	if schemaFrom.ComplexType != nil {
+		schemaTo.ComplexType = CopyBranchComplexType(mapOrigCopy, schemaFrom.ComplexType)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
 
@@ -219,6 +288,9 @@ func UnstageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 	// insertion point for unstage branch
 	case *Annotation:
 		stage.UnstageBranchAnnotation(target)
+
+	case *ComplexType:
+		stage.UnstageBranchComplexType(target)
 
 	case *Documentation:
 		stage.UnstageBranchDocumentation(target)
@@ -250,6 +322,27 @@ func (stage *StageStruct) UnstageBranchAnnotation(annotation *Annotation) {
 
 }
 
+func (stage *StageStruct) UnstageBranchComplexType(complextype *ComplexType) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, complextype) {
+		return
+	}
+
+	complextype.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+	if complextype.Annotation != nil {
+		UnstageBranch(stage, complextype.Annotation)
+	}
+	if complextype.OuterSchema != nil {
+		UnstageBranch(stage, complextype.OuterSchema)
+	}
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
 func (stage *StageStruct) UnstageBranchDocumentation(documentation *Documentation) {
 
 	// check if instance is already staged
@@ -277,6 +370,9 @@ func (stage *StageStruct) UnstageBranchSchema(schema *Schema) {
 	//insertion point for the staging of instances referenced by pointers
 	if schema.Annotation != nil {
 		UnstageBranch(stage, schema.Annotation)
+	}
+	if schema.ComplexType != nil {
+		UnstageBranch(stage, schema.ComplexType)
 	}
 
 	//insertion point for the staging of instances referenced by slice of pointers

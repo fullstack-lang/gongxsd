@@ -128,6 +128,40 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 
 	}
 
+	map_ComplexType_Identifiers := make(map[*ComplexType]string)
+	_ = map_ComplexType_Identifiers
+
+	complextypeOrdered := []*ComplexType{}
+	for complextype := range stage.ComplexTypes {
+		complextypeOrdered = append(complextypeOrdered, complextype)
+	}
+	sort.Slice(complextypeOrdered[:], func(i, j int) bool {
+		return complextypeOrdered[i].Name < complextypeOrdered[j].Name
+	})
+	if len(complextypeOrdered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, complextype := range complextypeOrdered {
+
+		id = generatesIdentifier("ComplexType", idx, complextype.Name)
+		map_ComplexType_Identifiers[complextype] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "ComplexType")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", complextype.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(complextype.Name))
+		initializerStatements += setValueField
+
+	}
+
 	map_Documentation_Identifiers := make(map[*Documentation]string)
 	_ = map_Documentation_Identifiers
 
@@ -239,6 +273,32 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 
 	}
 
+	for idx, complextype := range complextypeOrdered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("ComplexType", idx, complextype.Name)
+		map_ComplexType_Identifiers[complextype] = id
+
+		// Initialisation of values
+		if complextype.Annotation != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Annotation")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Annotation_Identifiers[complextype.Annotation])
+			pointersInitializesStatements += setPointerField
+		}
+
+		if complextype.OuterSchema != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "OuterSchema")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Schema_Identifiers[complextype.OuterSchema])
+			pointersInitializesStatements += setPointerField
+		}
+
+	}
+
 	for idx, documentation := range documentationOrdered {
 		var setPointerField string
 		_ = setPointerField
@@ -262,6 +322,14 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Annotation")
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Annotation_Identifiers[schema.Annotation])
+			pointersInitializesStatements += setPointerField
+		}
+
+		if schema.ComplexType != nil {
+			setPointerField = PointerFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ComplexType")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ComplexType_Identifiers[schema.ComplexType])
 			pointersInitializesStatements += setPointerField
 		}
 

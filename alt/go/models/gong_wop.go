@@ -17,6 +17,16 @@ func (from *Annotation) CopyBasicFields(to *Annotation) {
 	to.Name = from.Name
 }
 
+type ComplexType_WOP struct {
+	// insertion point
+	Name string
+}
+
+func (from *ComplexType) CopyBasicFields(to *ComplexType) {
+	// insertion point
+	to.Name = from.Name
+}
+
 type Documentation_WOP struct {
 	// insertion point
 	Name string

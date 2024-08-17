@@ -95,6 +95,87 @@ func (annotationFormCallback *AnnotationFormCallback) OnSave() {
 
 	fillUpTree(annotationFormCallback.probe)
 }
+func __gong__New__ComplexTypeFormCallback(
+	complextype *models.ComplexType,
+	probe *Probe,
+	formGroup *table.FormGroup,
+) (complextypeFormCallback *ComplexTypeFormCallback) {
+	complextypeFormCallback = new(ComplexTypeFormCallback)
+	complextypeFormCallback.probe = probe
+	complextypeFormCallback.complextype = complextype
+	complextypeFormCallback.formGroup = formGroup
+
+	complextypeFormCallback.CreationMode = (complextype == nil)
+
+	return
+}
+
+type ComplexTypeFormCallback struct {
+	complextype *models.ComplexType
+
+	// If the form call is called on the creation of a new instnace
+	CreationMode bool
+
+	probe *Probe
+
+	formGroup *table.FormGroup
+}
+
+func (complextypeFormCallback *ComplexTypeFormCallback) OnSave() {
+
+	log.Println("ComplexTypeFormCallback, OnSave")
+
+	// checkout formStage to have the form group on the stage synchronized with the
+	// back repo (and front repo)
+	complextypeFormCallback.probe.formStage.Checkout()
+
+	if complextypeFormCallback.complextype == nil {
+		complextypeFormCallback.complextype = new(models.ComplexType).Stage(complextypeFormCallback.probe.stageOfInterest)
+	}
+	complextype_ := complextypeFormCallback.complextype
+	_ = complextype_
+
+	for _, formDiv := range complextypeFormCallback.formGroup.FormDivs {
+		switch formDiv.Name {
+		// insertion point per field
+		case "Name":
+			FormDivBasicFieldToField(&(complextype_.Name), formDiv)
+		case "Annotation":
+			FormDivSelectFieldToField(&(complextype_.Annotation), complextypeFormCallback.probe.stageOfInterest, formDiv)
+		case "OuterSchema":
+			FormDivSelectFieldToField(&(complextype_.OuterSchema), complextypeFormCallback.probe.stageOfInterest, formDiv)
+		}
+	}
+
+	// manage the suppress operation
+	if complextypeFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		complextype_.Unstage(complextypeFormCallback.probe.stageOfInterest)
+	}
+
+	complextypeFormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.ComplexType](
+		complextypeFormCallback.probe,
+	)
+	complextypeFormCallback.probe.tableStage.Commit()
+
+	// display a new form by reset the form stage
+	if complextypeFormCallback.CreationMode || complextypeFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		complextypeFormCallback.probe.formStage.Reset()
+		newFormGroup := (&table.FormGroup{
+			Name: table.FormGroupDefaultName.ToString(),
+		}).Stage(complextypeFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__ComplexTypeFormCallback(
+			nil,
+			complextypeFormCallback.probe,
+			newFormGroup,
+		)
+		complextype := new(models.ComplexType)
+		FillUpForm(complextype, newFormGroup, complextypeFormCallback.probe)
+		complextypeFormCallback.probe.formStage.Commit()
+	}
+
+	fillUpTree(complextypeFormCallback.probe)
+}
 func __gong__New__DocumentationFormCallback(
 	documentation *models.Documentation,
 	probe *Probe,
@@ -269,6 +350,8 @@ func (schemaFormCallback *SchemaFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(schema_.Xs), formDiv)
 		case "Annotation":
 			FormDivSelectFieldToField(&(schema_.Annotation), schemaFormCallback.probe.stageOfInterest, formDiv)
+		case "ComplexType":
+			FormDivSelectFieldToField(&(schema_.ComplexType), schemaFormCallback.probe.stageOfInterest, formDiv)
 		}
 	}
 

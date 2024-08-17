@@ -6,6 +6,8 @@ type BackRepoData struct {
 
 	AnnotationAPIs []*AnnotationAPI
 
+	ComplexTypeAPIs []*ComplexTypeAPI
+
 	DocumentationAPIs []*DocumentationAPI
 
 	SchemaAPIs []*SchemaAPI
@@ -21,6 +23,16 @@ func CopyBackRepoToBackRepoData(backRepo *BackRepoStruct, backRepoData *BackRepo
 		annotationDB.CopyBasicFieldsToAnnotation_WOP(&annotationAPI.Annotation_WOP)
 
 		backRepoData.AnnotationAPIs = append(backRepoData.AnnotationAPIs, &annotationAPI)
+	}
+
+	for _, complextypeDB := range backRepo.BackRepoComplexType.Map_ComplexTypeDBID_ComplexTypeDB {
+
+		var complextypeAPI ComplexTypeAPI
+		complextypeAPI.ID = complextypeDB.ID
+		complextypeAPI.ComplexTypePointersEncoding = complextypeDB.ComplexTypePointersEncoding
+		complextypeDB.CopyBasicFieldsToComplexType_WOP(&complextypeAPI.ComplexType_WOP)
+
+		backRepoData.ComplexTypeAPIs = append(backRepoData.ComplexTypeAPIs, &complextypeAPI)
 	}
 
 	for _, documentationDB := range backRepo.BackRepoDocumentation.Map_DocumentationDBID_DocumentationDB {

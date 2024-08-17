@@ -55,6 +55,9 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 			}
 		}
 
+	case *ComplexType:
+		// insertion point per field
+
 	case *Documentation:
 		// insertion point per field
 
@@ -80,6 +83,9 @@ func (stage *StageStruct) ComputeReverseMaps() {
 			stage.Annotation_Documentations_reverseMap[_documentation] = annotation
 		}
 	}
+
+	// Compute reverse map for named struct ComplexType
+	// insertion point per field
 
 	// Compute reverse map for named struct Documentation
 	// insertion point per field

@@ -47,6 +47,8 @@ var readCmd = &cobra.Command{
 			os.Exit(1)
 		}
 
+		schema.Setup()
+
 		stack.Stage.StageBranchSchema(&schema)
 
 		stack.Stage.ComputeReverseMaps()

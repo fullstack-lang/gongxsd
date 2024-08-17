@@ -55,6 +55,9 @@ func (nodeImplGongstruct *TreeNodeImplGongstruct) OnAfterUpdate(
 	if nodeImplGongstruct.gongStruct.GetName() == "Annotation" {
 		fillUpTable[models.Annotation](nodeImplGongstruct.probe)
 	}
+	if nodeImplGongstruct.gongStruct.GetName() == "ComplexType" {
+		fillUpTable[models.ComplexType](nodeImplGongstruct.probe)
+	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Documentation" {
 		fillUpTable[models.Documentation](nodeImplGongstruct.probe)
 	}

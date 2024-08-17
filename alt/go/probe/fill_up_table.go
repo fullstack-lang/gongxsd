@@ -22,6 +22,8 @@ func fillUpTablePointerToGongstruct[T models.PointerToGongstruct](
 	// insertion point
 	case *models.Annotation:
 		fillUpTable[models.Annotation](probe)
+	case *models.ComplexType:
+		fillUpTable[models.ComplexType](probe)
 	case *models.Documentation:
 		fillUpTable[models.Documentation](probe)
 	case *models.Schema:

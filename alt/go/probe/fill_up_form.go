@@ -24,6 +24,13 @@ func FillUpForm[T models.Gongstruct](
 			false, false, 0, false, 0)
 		AssociationSliceToForm("Documentations", instanceWithInferedType, &instanceWithInferedType.Documentations, formGroup, probe)
 
+	case *models.ComplexType:
+		// insertion point
+		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		AssociationFieldToForm("Annotation", instanceWithInferedType.Annotation, formGroup, probe)
+		AssociationFieldToForm("OuterSchema", instanceWithInferedType.OuterSchema, formGroup, probe)
+
 	case *models.Documentation:
 		// insertion point
 		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
@@ -64,6 +71,7 @@ func FillUpForm[T models.Gongstruct](
 		BasicFieldtoForm("Xs", instanceWithInferedType.Xs, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
 		AssociationFieldToForm("Annotation", instanceWithInferedType.Annotation, formGroup, probe)
+		AssociationFieldToForm("ComplexType", instanceWithInferedType.ComplexType, formGroup, probe)
 
 	default:
 		_ = instanceWithInferedType

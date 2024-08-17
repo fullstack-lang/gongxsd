@@ -303,5 +303,19 @@
 				"go/models",
 			]
 		},
+		{
+			"label": "01 - gongc alt -skipNg -skipNpmWorkspaces",
+			"type": "shell",
+			"options": {
+				"cwd": "${workspaceFolder}/alt"
+			},
+			"command": "gongc",
+			"group": "build",
+			"args": [
+				"-skipNpmWorkspaces",
+				"-skipNg",
+				"go/models",
+			]
+		},
 	]
 }
