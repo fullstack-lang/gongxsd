@@ -22,6 +22,9 @@ func generateAttributes(
 				goType = "string"
 				nameDec := strings.TrimPrefix(attr.Ref, prefix)
 				name = xsdNameToGoIdentifier(nameDec)
+
+				// overide the name of the attr
+				attr.NameXSD = attr.Ref
 			}
 
 			prefix = "xml:"
@@ -29,6 +32,9 @@ func generateAttributes(
 				goType = "string"
 				nameDec := strings.TrimPrefix(attr.Ref, prefix)
 				name = xsdNameToGoIdentifier(nameDec)
+
+				// overide the name of the attr
+				attr.NameXSD = attr.Ref
 			}
 		} else {
 			name = xsdNameToGoIdentifier(attr.Name)

@@ -27,11 +27,12 @@ func init() {
 	port = readCmd.Flags().IntP("port", "p", 8080, "port server")
 
 	rootCmd.AddCommand(generateCmd)
-	outputModelFilePath = generateCmd.Flags().StringP("output", "o", "", "output file")
 
 	rootCmd.PersistentFlags().BoolVarP(&Verbose, "verbose", "v", false, "verbose output")
+
 	unmarshallFromCode = rootCmd.PersistentFlags().StringP("unmarshallFromCode", "u", "", "unmarshall data from go file and '.go' (must be lowercased without spaces), If unmarshallFromCode arg is '', no unmarshalling")
 	marshallOnCommit = rootCmd.PersistentFlags().StringP("marshallOnCommit", "m", "", "on all commits, marshall staged data to a go file with the marshall name and '.go' (must be lowercased without spaces). If marshall arg is '', no marshalling")
+	outputModelFilePath = rootCmd.PersistentFlags().StringP("output", "o", "", "output file")
 
 	rootCmd.PersistentPreRun = func(cmd *cobra.Command, args []string) {
 		if cmd.Flags().NFlag() == 0 && len(args) == 0 {

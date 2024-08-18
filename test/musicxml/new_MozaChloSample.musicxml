@@ -46,7 +46,7 @@
         <music-font font-family="Maestro,engraved" font-size="18"></music-font>
         <word-font font-family="Times New Roman" font-size="9"></word-font>
         <lyric-font font-family="Times New Roman" font-size="10"></lyric-font>
-        <lyric-language></lyric-language>
+        <lyric-language xml:lang="de"></lyric-language>
         <page-layout>
             <page-height>1760</page-height>
             <page-width>1360</page-width>

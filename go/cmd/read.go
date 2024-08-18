@@ -9,6 +9,7 @@ import (
 	"log"
 	"os"
 	"strconv"
+	"time"
 
 	"github.com/spf13/cobra"
 
@@ -52,6 +53,17 @@ var readCmd = &cobra.Command{
 		stack.Stage.ComputeReverseMaps()
 
 		models.PostProcessing(stack.Stage)
+
+		if Verbose {
+			fmt.Printf("generating file %s\n", *outputModelFilePath)
+		}
+
+		start := time.Now()
+		models.Generate(stack.Stage, *outputModelFilePath)
+
+		if Verbose {
+			fmt.Printf("generate took %s\n", time.Since(start))
+		}
 
 		stack.Stage.Commit()
 		fmt.Println("XSD File Content:")
