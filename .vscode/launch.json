@@ -50,7 +50,9 @@
             "program": "${workspaceFolder}/go/cmd/gongxsd-cli",
             "args": [
                 "read",
-                "../../../test/musicxml/musicxml.xsd"
+                "../../../test/musicxml/musicxml.xsd",
+                "-m",
+                "stages/musicxml"
             ]
         },
         {

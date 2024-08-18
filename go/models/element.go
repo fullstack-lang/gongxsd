@@ -3,6 +3,9 @@ package models
 type Element struct {
 	Name string
 
+	Line   int `xml:"-"`
+	Column int `xml:"-"`
+
 	// analysis
 	WithGoIdentifier
 
@@ -25,3 +28,9 @@ type Element struct {
 	ComplexType *ComplexType `xml:"complexType"`
 	Groups      []*Group     `xml:"group"`
 }
+
+// func (e *Element) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
+// 	type Alias Element
+// 	aux := (*Alias)(e)
+// 	return d.DecodeElement(aux, &start)
+// }

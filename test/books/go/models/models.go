@@ -6,8 +6,8 @@ import "encoding/xml"
 // to avoid compilation error if no xml element is generated
 var _ xml.Attr
 
-// AnonymousComplexTypeInline_books is generated from outer element "books"
-type AnonymousComplexTypeInline_books struct {
+// A_books is generated from outer element "books"
+type A_books struct {
 
 	// insertion point for fields
 
@@ -24,9 +24,6 @@ type BookType struct {
 	// generated from attribute group "extendedAttributes
 	AttributeGroup_extendedAttributes
 
-	// generated from element "credit" of type credit
-	Credit []*Credit `xml:"credit"`
-
 	// generated from element "title" of type titleType
 	Title string `xml:"title"`
 
@@ -38,6 +35,9 @@ type BookType struct {
 
 	// generated from element "format" of type bookFormatEnum
 	Format string `xml:"format"`
+
+	// generated from element "credit" of type credit
+	Credit []*Credit `xml:"credit"`
 }
 
 // Credit is generated from named complex type "credit"
@@ -47,19 +47,19 @@ type Credit struct {
 	// insertion point for fields
 
 	// generated from attribute "page" of type xs:positiveInteger
-	Page int `xml:"page,attr"`
-
-	// generated from element "credit-type" of type xs:string
-	Credit_type string `xml:"credit-type"`
-
-	// generated from element "link" of type link
-	Link []*Link `xml:"link"`
+	Page int `xml:"page,attr,omitempty"`
 
 	// generated from element "credit-words" of type xs:string
 	Credit_words string `xml:"credit-words"`
 
 	// generated from element "credit-symbol" of type xs:string
 	Credit_symbol string `xml:"credit-symbol"`
+
+	// generated from element "link" of type link
+	Link []*Link `xml:"link"`
+
+	// generated from element "credit-type" of type xs:string
+	Credit_type string `xml:"credit-type"`
 }
 
 // Link is generated from named complex type "link"
@@ -69,7 +69,7 @@ type Link struct {
 	// insertion point for fields
 
 	// generated from attribute "name" of type xs:token
-	NameXSD string `xml:"name,attr"`
+	NameXSD string `xml:"name,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
 	EnclosedText string `xml:",chardata"`
@@ -99,10 +99,10 @@ type AttributeGroup_commonAttributes struct {
 	// insertion point for fields
 
 	// generated from attribute "isbn" of type xs:string
-	Isbn string `xml:"isbn,attr"`
+	Isbn string `xml:"isbn,attr,omitempty"`
 
 	// generated from attribute "bestseller" of type xs:boolean
-	Bestseller bool `xml:"bestseller,attr"`
+	Bestseller bool `xml:"bestseller,attr,omitempty"`
 }
 
 // AttributeGroup_extendedAttributes is generated from named attribute group "extendedAttributes"
@@ -111,7 +111,7 @@ type AttributeGroup_extendedAttributes struct {
 	// insertion point for fields
 
 	// generated from attribute "edition" of type xs:string
-	Edition string `xml:"edition,attr"`
+	Edition string `xml:"edition,attr,omitempty"`
 
 	// generated from attribute group "commonAttributes
 	AttributeGroup_commonAttributes
@@ -127,5 +127,5 @@ type Books struct {
 	XMLName xml.Name `xml:"books"`
 
 	// generated from inline complex type
-	AnonymousComplexTypeInline_books
+	A_books
 }

@@ -1597,6 +1597,10 @@ func (elementFormCallback *ElementFormCallback) OnSave() {
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(element_.Name), formDiv)
+		case "Line":
+			FormDivBasicFieldToField(&(element_.Line), formDiv)
+		case "Column":
+			FormDivBasicFieldToField(&(element_.Column), formDiv)
 		case "HasNameConflict":
 			FormDivBasicFieldToField(&(element_.HasNameConflict), formDiv)
 		case "GoIdentifier":

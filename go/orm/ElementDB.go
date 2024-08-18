@@ -77,6 +77,12 @@ type ElementDB struct {
 	// Declation for basic field elementDB.Name
 	Name_Data sql.NullString
 
+	// Declation for basic field elementDB.Line
+	Line_Data sql.NullInt64
+
+	// Declation for basic field elementDB.Column
+	Column_Data sql.NullInt64
+
 	// Declation for basic field elementDB.HasNameConflict
 	// provide the sql storage for the boolan
 	HasNameConflict_Data sql.NullBool
@@ -144,33 +150,37 @@ type ElementWOP struct {
 
 	Name string `xlsx:"1"`
 
-	HasNameConflict bool `xlsx:"2"`
+	Line int `xlsx:"2"`
 
-	GoIdentifier string `xlsx:"3"`
+	Column int `xlsx:"3"`
 
-	NameXSD string `xlsx:"4"`
+	HasNameConflict bool `xlsx:"4"`
 
-	Type string `xlsx:"5"`
+	GoIdentifier string `xlsx:"5"`
 
-	MinOccurs string `xlsx:"6"`
+	NameXSD string `xlsx:"6"`
 
-	MaxOccurs string `xlsx:"7"`
+	Type string `xlsx:"7"`
 
-	Default string `xlsx:"8"`
+	MinOccurs string `xlsx:"8"`
 
-	Fixed string `xlsx:"9"`
+	MaxOccurs string `xlsx:"9"`
 
-	Nillable string `xlsx:"10"`
+	Default string `xlsx:"10"`
 
-	Ref string `xlsx:"11"`
+	Fixed string `xlsx:"11"`
 
-	Abstract string `xlsx:"12"`
+	Nillable string `xlsx:"12"`
 
-	Form string `xlsx:"13"`
+	Ref string `xlsx:"13"`
 
-	Block string `xlsx:"14"`
+	Abstract string `xlsx:"14"`
 
-	Final string `xlsx:"15"`
+	Form string `xlsx:"15"`
+
+	Block string `xlsx:"16"`
+
+	Final string `xlsx:"17"`
 	// insertion for WOP pointer fields
 }
 
@@ -178,6 +188,8 @@ var Element_Fields = []string{
 	// insertion for WOP basic fields
 	"ID",
 	"Name",
+	"Line",
+	"Column",
 	"HasNameConflict",
 	"GoIdentifier",
 	"NameXSD",
@@ -539,6 +551,12 @@ func (elementDB *ElementDB) CopyBasicFieldsFromElement(element *models.Element) 
 	elementDB.Name_Data.String = element.Name
 	elementDB.Name_Data.Valid = true
 
+	elementDB.Line_Data.Int64 = int64(element.Line)
+	elementDB.Line_Data.Valid = true
+
+	elementDB.Column_Data.Int64 = int64(element.Column)
+	elementDB.Column_Data.Valid = true
+
 	elementDB.HasNameConflict_Data.Bool = element.HasNameConflict
 	elementDB.HasNameConflict_Data.Valid = true
 
@@ -588,6 +606,12 @@ func (elementDB *ElementDB) CopyBasicFieldsFromElement_WOP(element *models.Eleme
 
 	elementDB.Name_Data.String = element.Name
 	elementDB.Name_Data.Valid = true
+
+	elementDB.Line_Data.Int64 = int64(element.Line)
+	elementDB.Line_Data.Valid = true
+
+	elementDB.Column_Data.Int64 = int64(element.Column)
+	elementDB.Column_Data.Valid = true
 
 	elementDB.HasNameConflict_Data.Bool = element.HasNameConflict
 	elementDB.HasNameConflict_Data.Valid = true
@@ -639,6 +663,12 @@ func (elementDB *ElementDB) CopyBasicFieldsFromElementWOP(element *ElementWOP) {
 	elementDB.Name_Data.String = element.Name
 	elementDB.Name_Data.Valid = true
 
+	elementDB.Line_Data.Int64 = int64(element.Line)
+	elementDB.Line_Data.Valid = true
+
+	elementDB.Column_Data.Int64 = int64(element.Column)
+	elementDB.Column_Data.Valid = true
+
 	elementDB.HasNameConflict_Data.Bool = element.HasNameConflict
 	elementDB.HasNameConflict_Data.Valid = true
 
@@ -686,6 +716,8 @@ func (elementDB *ElementDB) CopyBasicFieldsFromElementWOP(element *ElementWOP) {
 func (elementDB *ElementDB) CopyBasicFieldsToElement(element *models.Element) {
 	// insertion point for checkout of basic fields (back repo to stage)
 	element.Name = elementDB.Name_Data.String
+	element.Line = int(elementDB.Line_Data.Int64)
+	element.Column = int(elementDB.Column_Data.Int64)
 	element.HasNameConflict = elementDB.HasNameConflict_Data.Bool
 	element.GoIdentifier = elementDB.GoIdentifier_Data.String
 	element.NameXSD = elementDB.NameXSD_Data.String
@@ -706,6 +738,8 @@ func (elementDB *ElementDB) CopyBasicFieldsToElement(element *models.Element) {
 func (elementDB *ElementDB) CopyBasicFieldsToElement_WOP(element *models.Element_WOP) {
 	// insertion point for checkout of basic fields (back repo to stage)
 	element.Name = elementDB.Name_Data.String
+	element.Line = int(elementDB.Line_Data.Int64)
+	element.Column = int(elementDB.Column_Data.Int64)
 	element.HasNameConflict = elementDB.HasNameConflict_Data.Bool
 	element.GoIdentifier = elementDB.GoIdentifier_Data.String
 	element.NameXSD = elementDB.NameXSD_Data.String
@@ -727,6 +761,8 @@ func (elementDB *ElementDB) CopyBasicFieldsToElementWOP(element *ElementWOP) {
 	element.ID = int(elementDB.ID)
 	// insertion point for checkout of basic fields (back repo to stage)
 	element.Name = elementDB.Name_Data.String
+	element.Line = int(elementDB.Line_Data.Int64)
+	element.Column = int(elementDB.Column_Data.Int64)
 	element.HasNameConflict = elementDB.HasNameConflict_Data.Bool
 	element.GoIdentifier = elementDB.GoIdentifier_Data.String
 	element.NameXSD = elementDB.NameXSD_Data.String

@@ -46,7 +46,7 @@ func generateAttributes(
 		computeGoIdentifier(name, &attr.WithGoIdentifier, setOfGoIdentifiers)
 
 		*fields += "\n\n\t// generated from attribute \"" + attr.NameXSD + "\" of type " + attr.Type +
-			"\n\t" + attr.GoIdentifier + " " + goType + " " + "`" + `xml:"` + attr.NameXSD + `,attr"` + "`"
+			"\n\t" + attr.GoIdentifier + " " + goType + " " + "`" + `xml:"` + attr.NameXSD + `,attr,omitempty"` + "`"
 	}
 }
 
