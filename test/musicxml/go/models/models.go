@@ -11,8 +11,8 @@ type A_directive struct {
 
 	// insertion point for fields
 
-	// generated from attribute "xml:lang" of type
-	Lang string `xml:"xml:lang,attr,omitempty"`
+	// generated from attribute "http://www.w3.org/XML/1998/namespace lang" of type 
+	Lang string `xml:"http://www.w3.org/XML/1998/namespace lang,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
 	EnclosedText string `xml:",chardata"`
@@ -20,6 +20,18 @@ type A_directive struct {
 
 // A_measure_1 is generated from outer element "measure"
 type A_measure_1 struct {
+
+	// insertion point for fields
+
+	// generated from attribute group "measure-attributes
+	AttributeGroup_measure_attributes
+
+	// generated from anonymous type within outer element "part" of type A_part
+	Part []*A_part `xml:"part"`
+}
+
+// A_measure is generated from outer element "measure"
+type A_measure struct {
 
 	// insertion point for fields
 
@@ -67,30 +79,6 @@ type A_measure_1 struct {
 
 	// generated from element "bookmark" of type bookmark
 	Bookmark []*Bookmark `xml:"bookmark"`
-}
-
-// A_measure is generated from outer element "measure"
-type A_measure struct {
-
-	// insertion point for fields
-
-	// generated from attribute group "measure-attributes
-	AttributeGroup_measure_attributes
-
-	// generated from anonymous type within outer element "part" of type A_part
-	Part []*A_part `xml:"part"`
-}
-
-// A_part_1 is generated from outer element "part"
-type A_part_1 struct {
-
-	// insertion point for fields
-
-	// generated from attribute group "part-attributes
-	AttributeGroup_part_attributes
-
-	// generated from anonymous type within outer element "measure" of type A_measure
-	Measure []*A_measure_1 `xml:"measure"`
 }
 
 // A_part is generated from outer element "part"
@@ -142,6 +130,18 @@ type A_part struct {
 
 	// generated from element "bookmark" of type bookmark
 	Bookmark []*Bookmark `xml:"bookmark"`
+}
+
+// A_part_1 is generated from outer element "part"
+type A_part_1 struct {
+
+	// insertion point for fields
+
+	// generated from attribute group "part-attributes
+	AttributeGroup_part_attributes
+
+	// generated from anonymous type within outer element "measure" of type A_measure
+	Measure []*A_measure `xml:"measure"`
 }
 
 // A_score_partwise is generated from outer element "score-partwise"
@@ -207,7 +207,7 @@ type A_score_timewise struct {
 	Part_list []*Part_list `xml:"part-list"`
 
 	// generated from anonymous type within outer element "measure" of type A_measure
-	Measure []*A_measure `xml:"measure"`
+	Measure []*A_measure_1 `xml:"measure"`
 }
 
 // Accidental is generated from named complex type "accidental"
@@ -2507,8 +2507,8 @@ type Lyric_language struct {
 	// generated from attribute "name" of type xs:token
 	NameXSD string `xml:"name,attr,omitempty"`
 
-	// generated from attribute "xml:lang" of type
-	Lang string `xml:"http://www.w3.org/XML/1998/namespace lang,attr"`
+	// generated from attribute "http://www.w3.org/XML/1998/namespace lang" of type 
+	Lang string `xml:"http://www.w3.org/XML/1998/namespace lang,attr,omitempty"`
 }
 
 // Measure_layout is generated from named complex type "measure-layout"
@@ -4451,8 +4451,8 @@ type Text_element_data struct {
 
 	// insertion point for fields
 
-	// generated from attribute "xml:lang" of type
-	Lang string `xml:"xml:lang,attr,omitempty"`
+	// generated from attribute "http://www.w3.org/XML/1998/namespace lang" of type 
+	Lang string `xml:"http://www.w3.org/XML/1998/namespace lang,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
 	EnclosedText string `xml:",chardata"`
@@ -5503,23 +5503,23 @@ type AttributeGroup_link_attributes struct {
 
 	// insertion point for fields
 
-	// generated from attribute "xlink:href" of type
-	Href string `xml:"xlink:href,attr,omitempty"`
+	// generated from attribute "http://www.w3.org/1999/xlink href" of type 
+	Href string `xml:"http://www.w3.org/1999/xlink href,attr,omitempty"`
 
-	// generated from attribute "xlink:type" of type
-	Type string `xml:"xlink:type,attr,omitempty"`
+	// generated from attribute "http://www.w3.org/1999/xlink type" of type 
+	Type string `xml:"http://www.w3.org/1999/xlink type,attr,omitempty"`
 
-	// generated from attribute "xlink:role" of type
-	Role string `xml:"xlink:role,attr,omitempty"`
+	// generated from attribute "http://www.w3.org/1999/xlink role" of type 
+	Role string `xml:"http://www.w3.org/1999/xlink role,attr,omitempty"`
 
-	// generated from attribute "xlink:title" of type
-	Title string `xml:"xlink:title,attr,omitempty"`
+	// generated from attribute "http://www.w3.org/1999/xlink title" of type 
+	Title string `xml:"http://www.w3.org/1999/xlink title,attr,omitempty"`
 
-	// generated from attribute "xlink:show" of type
-	Show string `xml:"xlink:show,attr,omitempty"`
+	// generated from attribute "http://www.w3.org/1999/xlink show" of type 
+	Show string `xml:"http://www.w3.org/1999/xlink show,attr,omitempty"`
 
-	// generated from attribute "xlink:actuate" of type
-	Actuate string `xml:"xlink:actuate,attr,omitempty"`
+	// generated from attribute "http://www.w3.org/1999/xlink actuate" of type 
+	Actuate string `xml:"http://www.w3.org/1999/xlink actuate,attr,omitempty"`
 }
 
 // AttributeGroup_measure_attributes is generated from named attribute group "measure-attributes"
@@ -5779,11 +5779,11 @@ type AttributeGroup_text_formatting struct {
 
 	// insertion point for fields
 
-	// generated from attribute "xml:lang" of type
-	Lang string `xml:"xml:lang,attr,omitempty"`
+	// generated from attribute "http://www.w3.org/XML/1998/namespace lang" of type 
+	Lang string `xml:"http://www.w3.org/XML/1998/namespace lang,attr,omitempty"`
 
-	// generated from attribute "xml:space" of type
-	Space string `xml:"xml:space,attr,omitempty"`
+	// generated from attribute "http://www.w3.org/XML/1998/namespace space" of type 
+	Space string `xml:"http://www.w3.org/XML/1998/namespace space,attr,omitempty"`
 
 	// generated from attribute group "justify
 	AttributeGroup_justify

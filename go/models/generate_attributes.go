@@ -24,7 +24,7 @@ func generateAttributes(
 				name = xsdNameToGoIdentifier(nameDec)
 
 				// overide the name of the attr
-				attr.NameXSD = attr.Ref
+				attr.NameXSD = "http://www.w3.org/1999/xlink " + nameDec
 			}
 
 			prefix = "xml:"
@@ -34,7 +34,7 @@ func generateAttributes(
 				name = xsdNameToGoIdentifier(nameDec)
 
 				// overide the name of the attr
-				attr.NameXSD = attr.Ref
+				attr.NameXSD = "http://www.w3.org/XML/1998/namespace " + nameDec
 			}
 		} else {
 			name = xsdNameToGoIdentifier(attr.Name)
