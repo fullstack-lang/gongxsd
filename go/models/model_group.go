@@ -43,94 +43,59 @@ func (modelGroup *ModelGroup) nameRecursively(name string) {
 
 }
 
-func (modelGroup *ModelGroup) getElements(groupMap map[string]*Group, map_Name_Elems map[string]*Element) (elems []*Element) {
+func (modelGroup *ModelGroup) getParticles(
+	groupMap map[string]*Group,
+	map_Name_Elems map[string]*Element) (particles []Particle) {
 
 	log.Println("modelGroup.getElements", modelGroup.OuterElementName)
-	for _, gRef := range modelGroup.Groups {
+	for _, referenceGroup := range modelGroup.Groups {
 
-		if gRef.Ref != "" {
+		if referenceGroup.Ref != "" {
 			// log.Println("Processing group", gRef.Name, gRef.Ref)
-			if namedGroup, ok := groupMap[gRef.Ref]; ok {
-				elems = append(elems, namedGroup.getElements(
-					groupMap, map_Name_Elems)...)
-			}
-		} else {
-			for _, e := range gRef.Elements {
-				elems = append(elems, gRef.ModelGroup.getElements(groupMap, map_Name_Elems)...)
-				if _, ok := map_Name_Elems[e.Name]; ok {
-					continue
-				}
-				map_Name_Elems[e.Name] = e
-				elems = append(elems, e)
+			if _, ok := groupMap[referenceGroup.Ref]; ok {
+				particles = append(particles, referenceGroup)
 			}
 		}
 	}
 	for _, s := range modelGroup.Sequences {
-		elems = append(elems, s.getElements(groupMap, map_Name_Elems)...)
+		particles = append(particles, s.getParticles(groupMap, map_Name_Elems)...)
 		for _, e := range s.Elements {
 			if _, ok := map_Name_Elems[e.Name]; ok {
 				continue
 			}
 			map_Name_Elems[e.Name] = e
-			elems = append(elems, e)
+			particles = append(particles, e)
 		}
 	}
 	for _, c := range modelGroup.Choices {
-		elems = append(elems, c.getElements(groupMap, map_Name_Elems)...)
+		particles = append(particles, c.getParticles(groupMap, map_Name_Elems)...)
 		for _, e := range c.Elements {
 			if _, ok := map_Name_Elems[e.Name]; ok {
 				continue
 			}
 			map_Name_Elems[e.Name] = e
-			elems = append(elems, e)
+			particles = append(particles, e)
 		}
 	}
 	for _, a := range modelGroup.Alls {
-		elems = append(elems, a.ModelGroup.getElements(groupMap, map_Name_Elems)...)
+		particles = append(particles, a.ModelGroup.getParticles(groupMap, map_Name_Elems)...)
 		for _, e := range a.Elements {
 			if _, ok := map_Name_Elems[e.Name]; ok {
 				continue
 			}
 			map_Name_Elems[e.Name] = e
-			elems = append(elems, e)
+			particles = append(particles, e)
 		}
 	}
 
 	// append the model group elements
 
 	// reoder elements according to their rank
-	slices.SortFunc(elems, func(a, b *Element) int {
-		return cmp.Compare(a.Order, b.Order)
+	slices.SortFunc(particles, func(a, b Particle) int {
+		return cmp.Compare(a.GetOrder(), b.GetOrder())
 	})
 
 	return
-}
-
-type Sequence struct {
-	Name string
-	Annotated
-	MinOccurs string `xml:"minOccurs,attr"`
-	MaxOccurs string `xml:"maxOccurs,attr"`
-
-	ModelGroup
-}
-
-type All struct {
-	Name string
-	Annotated
-	MinOccurs string `xml:"minOccurs,attr"`
-	MaxOccurs string `xml:"maxOccurs,attr"`
-
-	ModelGroup
-}
-
-type Choice struct {
-	Name string
-	Annotated
-	MinOccurs string `xml:"minOccurs,attr"`
-	MaxOccurs string `xml:"maxOccurs,attr"`
-
-	ModelGroup
 }
 
 func (modelGroup *ModelGroup) generateElements(
@@ -141,39 +106,58 @@ func (modelGroup *ModelGroup) generateElements(
 	setOfGoIdentifiers map[string]any,
 	fields *string,
 ) {
-	elems := modelGroup.getElements(groupMap, map_Name_Elems)
+	particles := modelGroup.getParticles(groupMap, map_Name_Elems)
 
-	for _, elem := range elems {
+	for _, particle := range particles {
 
-		computeGoIdentifier(elem.GoIdentifier, &elem.WithGoIdentifier, setOfGoIdentifiers)
+		if elem, ok := particle.(*Element); ok {
 
-		// an element can be of 3 types:
-		// 1. a simple type
-		// 2. a named complex type
-		// 3. an anonmous complex type
-		goType := generateGoTypeFromSimpleType(elem.Type, stMap)
-		if goType != "" {
+			computeGoIdentifier(elem.GoIdentifier, &elem.WithGoIdentifier, setOfGoIdentifiers)
+
+			// an element can be of 3 types:
 			// 1. a simple type
-			*fields += "\n\n\t// generated from element \"" + elem.NameXSD + "\" of type " + elem.Type + " order " + fmt.Sprintf("%d", elem.Order) + " depth " + fmt.Sprintf("%d", elem.Depth) +
-				"\n\t" + elem.GoIdentifier + " " + goType + " " + "`" + `xml:"` + elem.NameXSD + `"` + "`"
-		} else {
-			if elem.Type != "" {
-				if ct, ok := ctMap[elem.Type]; ok {
-					*fields += "\n\n\t// generated from element \"" + elem.NameXSD + "\" of type " + ct.Name + " order " + fmt.Sprintf("%d", elem.Order) + " depth " + fmt.Sprintf("%d", elem.Depth) +
-						"\n\t" + elem.GoIdentifier + " []*" + ct.GoIdentifier + " " + "`" + `xml:"` + elem.NameXSD + `"` + "`"
-				} else {
-					log.Println("element", elem.NameXSD, "unkown type", elem.Type)
-				}
+			// 2. a named complex type
+			// 3. an anonmous complex type
+			goType := generateGoTypeFromSimpleType(elem.Type, stMap)
+			if goType != "" {
+				// 1. a simple type
+				*fields += "\n\n\t// generated from element \"" + elem.NameXSD + "\" of type " + elem.Type + " order " + fmt.Sprintf("%d", elem.Order) + " depth " + fmt.Sprintf("%d", elem.Depth) +
+					"\n\t" + elem.GoIdentifier + " " + goType + " " + "`" + `xml:"` + elem.NameXSD + `"` + "`"
 			} else {
-				if elem.ComplexType == nil {
-					log.Println("element", elem.NameXSD, "should have an anonymous complex type", elem.Type)
+				if elem.Type != "" {
+					if ct, ok := ctMap[elem.Type]; ok {
+						*fields += "\n\n\t// generated from element \"" + elem.NameXSD + "\" of type " + ct.Name + " order " + fmt.Sprintf("%d", elem.Order) + " depth " + fmt.Sprintf("%d", elem.Depth) +
+							"\n\t" + elem.GoIdentifier + " []*" + ct.GoIdentifier + " " + "`" + `xml:"` + elem.NameXSD + `"` + "`"
+					} else {
+						log.Println("element", elem.NameXSD, "unkown type", elem.Type)
+					}
 				} else {
-					ct := elem.ComplexType
-					*fields += "\n\n\t// generated from anonymous type within outer element \"" + elem.NameXSD + "\" of type " + ct.Name + "." +
-						"\n\t" + elem.GoIdentifier + " []*" + ct.GoIdentifier + " " + "`" + `xml:"` + elem.NameXSD + `"` + "`"
+					if elem.ComplexType == nil {
+						log.Println("element", elem.NameXSD, "should have an anonymous complex type", elem.Type)
+					} else {
+						ct := elem.ComplexType
+						*fields += "\n\n\t// generated from anonymous type within outer element \"" + elem.NameXSD + "\" of type " + ct.Name + "." +
+							"\n\t" + elem.GoIdentifier + " []*" + ct.GoIdentifier + " " + "`" + `xml:"` + elem.NameXSD + `"` + "`"
+					}
 				}
+
+			}
+		}
+
+		if referenceGroup, ok := particle.(*Group); ok {
+
+			computeGoIdentifier(referenceGroup.Ref, &referenceGroup.WithGoIdentifier, setOfGoIdentifiers)
+
+			if namedGroup, ok := groupMap[referenceGroup.Ref]; ok {
+
+				// *fields += "\n\n\t// generated from group " +
+				// 	"\n\t" + referenceGroup.GoIdentifier + " " + namedGroup.GoIdentifier // + " `xml:\",inline\"`"
+
+				*fields += "\n\n\t// generated from group " +
+					"\n\t" + namedGroup.GoIdentifier // + " `xml:\",inline\"`"
 			}
 
 		}
+
 	}
 }

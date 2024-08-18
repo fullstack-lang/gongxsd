@@ -8,10 +8,7 @@ var Depth int
 type Element struct {
 	Name string
 
-	// Order is the order at wich the element was unmarshalled in the xsd
-	// It is important to preserve the order output that is defined in the xsd
-	Order int `xml:"-"`
-	Depth int `xml:"-"`
+	ParticleAbstract
 
 	// analysis
 	WithGoIdentifier

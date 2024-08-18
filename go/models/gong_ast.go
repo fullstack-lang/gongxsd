@@ -1485,6 +1485,20 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					// remove first and last char
 					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
 					__gong__map_Group[identifier].OuterElementName = fielValue
+				case "Order":
+					// convert string to int
+					fielValue, err := strconv.ParseInt(basicLit.Value, 10, 64)
+					if err != nil {
+						log.Fatalln(err)
+					}
+					__gong__map_Group[identifier].Order = int(exprSign) * int(fielValue)
+				case "Depth":
+					// convert string to int
+					fielValue, err := strconv.ParseInt(basicLit.Value, 10, 64)
+					if err != nil {
+						log.Fatalln(err)
+					}
+					__gong__map_Group[identifier].Depth = int(exprSign) * int(fielValue)
 				}
 			case "Length":
 				switch fieldName {

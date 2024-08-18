@@ -2226,6 +2226,10 @@ func (groupFormCallback *GroupFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(group_.GoIdentifier), formDiv)
 		case "OuterElementName":
 			FormDivBasicFieldToField(&(group_.OuterElementName), formDiv)
+		case "Order":
+			FormDivBasicFieldToField(&(group_.Order), formDiv)
+		case "Depth":
+			FormDivBasicFieldToField(&(group_.Depth), formDiv)
 		case "All:Groups":
 			// we need to retrieve the field owner before the change
 			var pastAllOwner *models.All

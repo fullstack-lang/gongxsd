@@ -863,7 +863,7 @@ func GetFields[Type Gongstruct]() (res []string) {
 	switch any(ret).(type) {
 	// insertion point for generic get gongstruct name
 	case BookType:
-		res = []string{"Name", "Edition", "Isbn", "Bestseller", "Credit", "Title", "Author", "Year", "Format"}
+		res = []string{"Name", "Edition", "Isbn", "Bestseller", "Title", "Author", "Year", "Format", "Credit"}
 	case Books:
 		res = []string{"Name", "Book"}
 	case Credit:
@@ -921,7 +921,7 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 	switch any(ret).(type) {
 	// insertion point for generic get gongstruct name
 	case *BookType:
-		res = []string{"Name", "Edition", "Isbn", "Bestseller", "Credit", "Title", "Author", "Year", "Format"}
+		res = []string{"Name", "Edition", "Isbn", "Bestseller", "Title", "Author", "Year", "Format", "Credit"}
 	case *Books:
 		res = []string{"Name", "Book"}
 	case *Credit:
@@ -947,13 +947,6 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 			res = inferedInstance.Isbn
 		case "Bestseller":
 			res = fmt.Sprintf("%t", inferedInstance.Bestseller)
-		case "Credit":
-			for idx, __instance__ := range inferedInstance.Credit {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
-			}
 		case "Title":
 			res = inferedInstance.Title
 		case "Author":
@@ -962,6 +955,13 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 			res = fmt.Sprintf("%d", inferedInstance.Year)
 		case "Format":
 			res = inferedInstance.Format
+		case "Credit":
+			for idx, __instance__ := range inferedInstance.Credit {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
 		}
 	case *Books:
 		switch fieldName {
@@ -1028,13 +1028,6 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 			res = inferedInstance.Isbn
 		case "Bestseller":
 			res = fmt.Sprintf("%t", inferedInstance.Bestseller)
-		case "Credit":
-			for idx, __instance__ := range inferedInstance.Credit {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
-			}
 		case "Title":
 			res = inferedInstance.Title
 		case "Author":
@@ -1043,6 +1036,13 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 			res = fmt.Sprintf("%d", inferedInstance.Year)
 		case "Format":
 			res = inferedInstance.Format
+		case "Credit":
+			for idx, __instance__ := range inferedInstance.Credit {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
 		}
 	case Books:
 		switch fieldName {

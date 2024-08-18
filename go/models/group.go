@@ -14,6 +14,8 @@ type Group struct {
 	WithGoIdentifier
 
 	ModelGroup
+
+	ParticleAbstract
 }
 
 func (group *Group) GetFields(stage *StageStruct) (fields string) {

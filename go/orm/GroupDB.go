@@ -104,6 +104,12 @@ type GroupDB struct {
 
 	// Declation for basic field groupDB.OuterElementName
 	OuterElementName_Data sql.NullString
+
+	// Declation for basic field groupDB.Order
+	Order_Data sql.NullInt64
+
+	// Declation for basic field groupDB.Depth
+	Depth_Data sql.NullInt64
 	
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
@@ -140,6 +146,10 @@ type GroupWOP struct {
 	GoIdentifier string `xlsx:"6"`
 
 	OuterElementName string `xlsx:"7"`
+
+	Order int `xlsx:"8"`
+
+	Depth int `xlsx:"9"`
 	// insertion for WOP pointer fields
 }
 
@@ -153,6 +163,8 @@ var Group_Fields = []string{
 	"HasNameConflict",
 	"GoIdentifier",
 	"OuterElementName",
+	"Order",
+	"Depth",
 }
 
 type BackRepoGroupStruct struct {
@@ -608,6 +620,12 @@ func (groupDB *GroupDB) CopyBasicFieldsFromGroup(group *models.Group) {
 
 	groupDB.OuterElementName_Data.String = group.OuterElementName
 	groupDB.OuterElementName_Data.Valid = true
+
+	groupDB.Order_Data.Int64 = int64(group.Order)
+	groupDB.Order_Data.Valid = true
+
+	groupDB.Depth_Data.Int64 = int64(group.Depth)
+	groupDB.Depth_Data.Valid = true
 }
 
 // CopyBasicFieldsFromGroup_WOP
@@ -634,6 +652,12 @@ func (groupDB *GroupDB) CopyBasicFieldsFromGroup_WOP(group *models.Group_WOP) {
 
 	groupDB.OuterElementName_Data.String = group.OuterElementName
 	groupDB.OuterElementName_Data.Valid = true
+
+	groupDB.Order_Data.Int64 = int64(group.Order)
+	groupDB.Order_Data.Valid = true
+
+	groupDB.Depth_Data.Int64 = int64(group.Depth)
+	groupDB.Depth_Data.Valid = true
 }
 
 // CopyBasicFieldsFromGroupWOP
@@ -660,6 +684,12 @@ func (groupDB *GroupDB) CopyBasicFieldsFromGroupWOP(group *GroupWOP) {
 
 	groupDB.OuterElementName_Data.String = group.OuterElementName
 	groupDB.OuterElementName_Data.Valid = true
+
+	groupDB.Order_Data.Int64 = int64(group.Order)
+	groupDB.Order_Data.Valid = true
+
+	groupDB.Depth_Data.Int64 = int64(group.Depth)
+	groupDB.Depth_Data.Valid = true
 }
 
 // CopyBasicFieldsToGroup
@@ -672,6 +702,8 @@ func (groupDB *GroupDB) CopyBasicFieldsToGroup(group *models.Group) {
 	group.HasNameConflict = groupDB.HasNameConflict_Data.Bool
 	group.GoIdentifier = groupDB.GoIdentifier_Data.String
 	group.OuterElementName = groupDB.OuterElementName_Data.String
+	group.Order = int(groupDB.Order_Data.Int64)
+	group.Depth = int(groupDB.Depth_Data.Int64)
 }
 
 // CopyBasicFieldsToGroup_WOP
@@ -684,6 +716,8 @@ func (groupDB *GroupDB) CopyBasicFieldsToGroup_WOP(group *models.Group_WOP) {
 	group.HasNameConflict = groupDB.HasNameConflict_Data.Bool
 	group.GoIdentifier = groupDB.GoIdentifier_Data.String
 	group.OuterElementName = groupDB.OuterElementName_Data.String
+	group.Order = int(groupDB.Order_Data.Int64)
+	group.Depth = int(groupDB.Depth_Data.Int64)
 }
 
 // CopyBasicFieldsToGroupWOP
@@ -697,6 +731,8 @@ func (groupDB *GroupDB) CopyBasicFieldsToGroupWOP(group *GroupWOP) {
 	group.HasNameConflict = groupDB.HasNameConflict_Data.Bool
 	group.GoIdentifier = groupDB.GoIdentifier_Data.String
 	group.OuterElementName = groupDB.OuterElementName_Data.String
+	group.Order = int(groupDB.Order_Data.Int64)
+	group.Depth = int(groupDB.Depth_Data.Int64)
 }
 
 // Backup generates a json file from a slice of all GroupDB instances in the backrepo

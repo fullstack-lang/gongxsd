@@ -29,7 +29,7 @@
             ]
         },
         {
-            "name": "gongxsd-cli generate books",
+            "name": "gen books models.go",
             "type": "go",
             "request": "launch",
             "mode": "debug",
@@ -58,7 +58,7 @@
             ]
         },
         {
-            "name": "gongxsd-cli generate musicxml",
+            "name": "gen musicxml models.go",
             "type": "go",
             "request": "launch",
             "mode": "debug",
@@ -96,7 +96,7 @@
             ]
         },
         {
-            "name": "gongxsd-cli generate reqif",
+            "name": "gen reqif",
             "type": "go",
             "request": "launch",
             "mode": "debug",

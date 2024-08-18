@@ -224,6 +224,8 @@ type Group_WOP struct {
 	HasNameConflict bool
 	GoIdentifier string
 	OuterElementName string
+	Order int
+	Depth int
 }
 
 func (from *Group) CopyBasicFields(to *Group) {
@@ -235,6 +237,8 @@ func (from *Group) CopyBasicFields(to *Group) {
 	to.HasNameConflict = from.HasNameConflict
 	to.GoIdentifier = from.GoIdentifier
 	to.OuterElementName = from.OuterElementName
+	to.Order = from.Order
+	to.Depth = from.Depth
 }
 
 type Length_WOP struct {
