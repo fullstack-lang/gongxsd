@@ -1,5 +1,7 @@
 package models
 
+import "encoding/xml"
+
 type Group struct {
 	Name string
 	Annotated
@@ -39,4 +41,18 @@ func (group *Group) GetFields(stage *StageStruct) (fields string) {
 	group.ModelGroup.generateElements(map_Name_Elems, stMap, ctMap, groupMap, setOfGoIdentifiers, &fields)
 
 	return
+}
+
+func (e *Group) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
+
+	Order = Order + 1
+
+	type Alias Group
+	aux := (*Alias)(e)
+
+	Depth = Depth + 1
+	err := d.DecodeElement(aux, &start)
+	Depth = Depth - 1
+
+	return err
 }

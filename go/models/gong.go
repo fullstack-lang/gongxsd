@@ -4393,7 +4393,7 @@ func GetFields[Type Gongstruct]() (res []string) {
 	case Documentation:
 		res = []string{"Name", "Text", "Source", "Lang"}
 	case Element:
-		res = []string{"Name", "Order", "HasNameConflict", "GoIdentifier", "Annotation", "NameXSD", "Type", "MinOccurs", "MaxOccurs", "Default", "Fixed", "Nillable", "Ref", "Abstract", "Form", "Block", "Final", "SimpleType", "ComplexType", "Groups"}
+		res = []string{"Name", "Order", "Depth", "HasNameConflict", "GoIdentifier", "Annotation", "NameXSD", "Type", "MinOccurs", "MaxOccurs", "Default", "Fixed", "Nillable", "Ref", "Abstract", "Form", "Block", "Final", "SimpleType", "ComplexType", "Groups"}
 	case Enumeration:
 		res = []string{"Name", "Annotation", "Value"}
 	case Extension:
@@ -4681,7 +4681,7 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 	case *Documentation:
 		res = []string{"Name", "Text", "Source", "Lang"}
 	case *Element:
-		res = []string{"Name", "Order", "HasNameConflict", "GoIdentifier", "Annotation", "NameXSD", "Type", "MinOccurs", "MaxOccurs", "Default", "Fixed", "Nillable", "Ref", "Abstract", "Form", "Block", "Final", "SimpleType", "ComplexType", "Groups"}
+		res = []string{"Name", "Order", "Depth", "HasNameConflict", "GoIdentifier", "Annotation", "NameXSD", "Type", "MinOccurs", "MaxOccurs", "Default", "Fixed", "Nillable", "Ref", "Abstract", "Form", "Block", "Final", "SimpleType", "ComplexType", "Groups"}
 	case *Enumeration:
 		res = []string{"Name", "Annotation", "Value"}
 	case *Extension:
@@ -5015,6 +5015,8 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 			res = inferedInstance.Name
 		case "Order":
 			res = fmt.Sprintf("%d", inferedInstance.Order)
+		case "Depth":
+			res = fmt.Sprintf("%d", inferedInstance.Depth)
 		case "HasNameConflict":
 			res = fmt.Sprintf("%t", inferedInstance.HasNameConflict)
 		case "GoIdentifier":
@@ -5780,6 +5782,8 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 			res = inferedInstance.Name
 		case "Order":
 			res = fmt.Sprintf("%d", inferedInstance.Order)
+		case "Depth":
+			res = fmt.Sprintf("%d", inferedInstance.Depth)
 		case "HasNameConflict":
 			res = fmt.Sprintf("%t", inferedInstance.HasNameConflict)
 		case "GoIdentifier":

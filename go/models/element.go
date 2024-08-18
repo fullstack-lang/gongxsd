@@ -3,6 +3,7 @@ package models
 import "encoding/xml"
 
 var Order int
+var Depth int
 
 type Element struct {
 	Name string
@@ -10,6 +11,7 @@ type Element struct {
 	// Order is the order at wich the element was unmarshalled in the xsd
 	// It is important to preserve the order output that is defined in the xsd
 	Order int `xml:"-"`
+	Depth int `xml:"-"`
 
 	// analysis
 	WithGoIdentifier
@@ -37,11 +39,15 @@ type Element struct {
 func (e *Element) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
 
 	e.Order = Order
-	Order += 1
+	e.Depth = Depth
+	Order = Order + 1
 
 	type Alias Element
 	aux := (*Alias)(e)
+
+	Depth = Depth + 1
 	err := d.DecodeElement(aux, &start)
+	Depth = Depth - 1
 
 	return err
 }

@@ -151,6 +151,7 @@ type Element_WOP struct {
 	// insertion point
 	Name string
 	Order int
+	Depth int
 	HasNameConflict bool
 	GoIdentifier string
 	NameXSD string
@@ -171,6 +172,7 @@ func (from *Element) CopyBasicFields(to *Element) {
 	// insertion point
 	to.Name = from.Name
 	to.Order = from.Order
+	to.Depth = from.Depth
 	to.HasNameConflict = from.HasNameConflict
 	to.GoIdentifier = from.GoIdentifier
 	to.NameXSD = from.NameXSD

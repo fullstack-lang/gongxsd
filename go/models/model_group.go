@@ -154,12 +154,12 @@ func (modelGroup *ModelGroup) generateElements(
 		goType := generateGoTypeFromSimpleType(elem.Type, stMap)
 		if goType != "" {
 			// 1. a simple type
-			*fields += "\n\n\t// generated from element \"" + elem.NameXSD + "\" of type " + elem.Type + " order " + fmt.Sprintf("%d", elem.Order) +
+			*fields += "\n\n\t// generated from element \"" + elem.NameXSD + "\" of type " + elem.Type + " order " + fmt.Sprintf("%d", elem.Order) + " depth " + fmt.Sprintf("%d", elem.Depth) +
 				"\n\t" + elem.GoIdentifier + " " + goType + " " + "`" + `xml:"` + elem.NameXSD + `"` + "`"
 		} else {
 			if elem.Type != "" {
 				if ct, ok := ctMap[elem.Type]; ok {
-					*fields += "\n\n\t// generated from element \"" + elem.NameXSD + "\" of type " + ct.Name + " order " + fmt.Sprintf("%d", elem.Order) +
+					*fields += "\n\n\t// generated from element \"" + elem.NameXSD + "\" of type " + ct.Name + " order " + fmt.Sprintf("%d", elem.Order) + " depth " + fmt.Sprintf("%d", elem.Depth) +
 						"\n\t" + elem.GoIdentifier + " []*" + ct.GoIdentifier + " " + "`" + `xml:"` + elem.NameXSD + `"` + "`"
 				} else {
 					log.Println("element", elem.NameXSD, "unkown type", elem.Type)

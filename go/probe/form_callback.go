@@ -1599,6 +1599,8 @@ func (elementFormCallback *ElementFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(element_.Name), formDiv)
 		case "Order":
 			FormDivBasicFieldToField(&(element_.Order), formDiv)
+		case "Depth":
+			FormDivBasicFieldToField(&(element_.Depth), formDiv)
 		case "HasNameConflict":
 			FormDivBasicFieldToField(&(element_.HasNameConflict), formDiv)
 		case "GoIdentifier":

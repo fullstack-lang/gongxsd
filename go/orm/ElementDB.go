@@ -80,6 +80,9 @@ type ElementDB struct {
 	// Declation for basic field elementDB.Order
 	Order_Data sql.NullInt64
 
+	// Declation for basic field elementDB.Depth
+	Depth_Data sql.NullInt64
+
 	// Declation for basic field elementDB.HasNameConflict
 	// provide the sql storage for the boolan
 	HasNameConflict_Data sql.NullBool
@@ -149,33 +152,35 @@ type ElementWOP struct {
 
 	Order int `xlsx:"2"`
 
-	HasNameConflict bool `xlsx:"3"`
+	Depth int `xlsx:"3"`
 
-	GoIdentifier string `xlsx:"4"`
+	HasNameConflict bool `xlsx:"4"`
 
-	NameXSD string `xlsx:"5"`
+	GoIdentifier string `xlsx:"5"`
 
-	Type string `xlsx:"6"`
+	NameXSD string `xlsx:"6"`
 
-	MinOccurs string `xlsx:"7"`
+	Type string `xlsx:"7"`
 
-	MaxOccurs string `xlsx:"8"`
+	MinOccurs string `xlsx:"8"`
 
-	Default string `xlsx:"9"`
+	MaxOccurs string `xlsx:"9"`
 
-	Fixed string `xlsx:"10"`
+	Default string `xlsx:"10"`
 
-	Nillable string `xlsx:"11"`
+	Fixed string `xlsx:"11"`
 
-	Ref string `xlsx:"12"`
+	Nillable string `xlsx:"12"`
 
-	Abstract string `xlsx:"13"`
+	Ref string `xlsx:"13"`
 
-	Form string `xlsx:"14"`
+	Abstract string `xlsx:"14"`
 
-	Block string `xlsx:"15"`
+	Form string `xlsx:"15"`
 
-	Final string `xlsx:"16"`
+	Block string `xlsx:"16"`
+
+	Final string `xlsx:"17"`
 	// insertion for WOP pointer fields
 }
 
@@ -184,6 +189,7 @@ var Element_Fields = []string{
 	"ID",
 	"Name",
 	"Order",
+	"Depth",
 	"HasNameConflict",
 	"GoIdentifier",
 	"NameXSD",
@@ -548,6 +554,9 @@ func (elementDB *ElementDB) CopyBasicFieldsFromElement(element *models.Element) 
 	elementDB.Order_Data.Int64 = int64(element.Order)
 	elementDB.Order_Data.Valid = true
 
+	elementDB.Depth_Data.Int64 = int64(element.Depth)
+	elementDB.Depth_Data.Valid = true
+
 	elementDB.HasNameConflict_Data.Bool = element.HasNameConflict
 	elementDB.HasNameConflict_Data.Valid = true
 
@@ -600,6 +609,9 @@ func (elementDB *ElementDB) CopyBasicFieldsFromElement_WOP(element *models.Eleme
 
 	elementDB.Order_Data.Int64 = int64(element.Order)
 	elementDB.Order_Data.Valid = true
+
+	elementDB.Depth_Data.Int64 = int64(element.Depth)
+	elementDB.Depth_Data.Valid = true
 
 	elementDB.HasNameConflict_Data.Bool = element.HasNameConflict
 	elementDB.HasNameConflict_Data.Valid = true
@@ -654,6 +666,9 @@ func (elementDB *ElementDB) CopyBasicFieldsFromElementWOP(element *ElementWOP) {
 	elementDB.Order_Data.Int64 = int64(element.Order)
 	elementDB.Order_Data.Valid = true
 
+	elementDB.Depth_Data.Int64 = int64(element.Depth)
+	elementDB.Depth_Data.Valid = true
+
 	elementDB.HasNameConflict_Data.Bool = element.HasNameConflict
 	elementDB.HasNameConflict_Data.Valid = true
 
@@ -702,6 +717,7 @@ func (elementDB *ElementDB) CopyBasicFieldsToElement(element *models.Element) {
 	// insertion point for checkout of basic fields (back repo to stage)
 	element.Name = elementDB.Name_Data.String
 	element.Order = int(elementDB.Order_Data.Int64)
+	element.Depth = int(elementDB.Depth_Data.Int64)
 	element.HasNameConflict = elementDB.HasNameConflict_Data.Bool
 	element.GoIdentifier = elementDB.GoIdentifier_Data.String
 	element.NameXSD = elementDB.NameXSD_Data.String
@@ -723,6 +739,7 @@ func (elementDB *ElementDB) CopyBasicFieldsToElement_WOP(element *models.Element
 	// insertion point for checkout of basic fields (back repo to stage)
 	element.Name = elementDB.Name_Data.String
 	element.Order = int(elementDB.Order_Data.Int64)
+	element.Depth = int(elementDB.Depth_Data.Int64)
 	element.HasNameConflict = elementDB.HasNameConflict_Data.Bool
 	element.GoIdentifier = elementDB.GoIdentifier_Data.String
 	element.NameXSD = elementDB.NameXSD_Data.String
@@ -745,6 +762,7 @@ func (elementDB *ElementDB) CopyBasicFieldsToElementWOP(element *ElementWOP) {
 	// insertion point for checkout of basic fields (back repo to stage)
 	element.Name = elementDB.Name_Data.String
 	element.Order = int(elementDB.Order_Data.Int64)
+	element.Depth = int(elementDB.Depth_Data.Int64)
 	element.HasNameConflict = elementDB.HasNameConflict_Data.Bool
 	element.GoIdentifier = elementDB.GoIdentifier_Data.String
 	element.NameXSD = elementDB.NameXSD_Data.String
