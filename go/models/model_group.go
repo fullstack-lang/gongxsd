@@ -2,6 +2,7 @@ package models
 
 import (
 	"cmp"
+	"fmt"
 	"log"
 	"slices"
 )
@@ -21,8 +22,30 @@ type ModelGroup struct {
 	Elements []*Element `xml:"element"`
 }
 
+func (modelGroup *ModelGroup) nameRecursively(name string) {
+	modelGroup.OuterElementName = name
+	for _, redefinable := range modelGroup.Groups {
+		redefinable.Name = name + "_G_"
+		redefinable.ModelGroup.nameRecursively(name + "_G_")
+	}
+	for _, redefinable := range modelGroup.Alls {
+		redefinable.Name = name + "_A_"
+		redefinable.ModelGroup.nameRecursively(name + "_A_")
+	}
+	for _, redefinable := range modelGroup.Sequences {
+		redefinable.Name = name + "_S_"
+		redefinable.ModelGroup.nameRecursively(name + "_S_")
+	}
+	for _, redefinable := range modelGroup.Choices {
+		redefinable.Name = name + "_C_"
+		redefinable.ModelGroup.nameRecursively(name + "_C_")
+	}
+
+}
+
 func (modelGroup *ModelGroup) getElements(groupMap map[string]*Group, map_Name_Elems map[string]*Element) (elems []*Element) {
 
+	log.Println("modelGroup.getElements", modelGroup.OuterElementName)
 	for _, gRef := range modelGroup.Groups {
 
 		if gRef.Ref != "" {
@@ -73,6 +96,8 @@ func (modelGroup *ModelGroup) getElements(groupMap map[string]*Group, map_Name_E
 		}
 	}
 
+	// append the model group elements
+
 	// reoder elements according to their rank
 	slices.SortFunc(elems, func(a, b *Element) int {
 		return cmp.Compare(a.Order, b.Order)
@@ -108,7 +133,7 @@ type Choice struct {
 	ModelGroup
 }
 
-func (composer *ModelGroup) generateElements(
+func (modelGroup *ModelGroup) generateElements(
 	map_Name_Elems map[string]*Element,
 	stMap map[string]*SimpleType,
 	ctMap map[string]*ComplexType,
@@ -116,7 +141,7 @@ func (composer *ModelGroup) generateElements(
 	setOfGoIdentifiers map[string]any,
 	fields *string,
 ) {
-	elems := composer.getElements(groupMap, map_Name_Elems)
+	elems := modelGroup.getElements(groupMap, map_Name_Elems)
 
 	for _, elem := range elems {
 
@@ -129,12 +154,12 @@ func (composer *ModelGroup) generateElements(
 		goType := generateGoTypeFromSimpleType(elem.Type, stMap)
 		if goType != "" {
 			// 1. a simple type
-			*fields += "\n\n\t// generated from element \"" + elem.NameXSD + "\" of type " + elem.Type +
+			*fields += "\n\n\t// generated from element \"" + elem.NameXSD + "\" of type " + elem.Type + " order " + fmt.Sprintf("%d", elem.Order) +
 				"\n\t" + elem.GoIdentifier + " " + goType + " " + "`" + `xml:"` + elem.NameXSD + `"` + "`"
 		} else {
 			if elem.Type != "" {
 				if ct, ok := ctMap[elem.Type]; ok {
-					*fields += "\n\n\t// generated from element \"" + elem.NameXSD + "\" of type " + ct.Name +
+					*fields += "\n\n\t// generated from element \"" + elem.NameXSD + "\" of type " + ct.Name + " order " + fmt.Sprintf("%d", elem.Order) +
 						"\n\t" + elem.GoIdentifier + " []*" + ct.GoIdentifier + " " + "`" + `xml:"` + elem.NameXSD + `"` + "`"
 				} else {
 					log.Println("element", elem.NameXSD, "unkown type", elem.Type)

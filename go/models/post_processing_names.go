@@ -16,35 +16,33 @@ func PostProcessingNames(stage *StageStruct) {
 	for x := range *GetGongstructInstancesSet[ComplexType](stage) {
 		x.Name = x.NameXSD
 
+		if x.NameXSD == "" {
+			continue
+		}
+
 		computeGoIdentifier(x.Name, &x.WithGoIdentifier, setOfGoIdentifiers)
 
 		if _x, ok := map_EmbeddedComplexType[x]; ok {
 			x.Name = prefix(_x.Name)
 		}
 
-		for _, s := range x.Sequences {
-			s.Name = prefix(x.Name)
-		}
-		for _, c := range x.Choices {
-			c.Name = prefix(x.Name)
-		}
-		for _, a := range x.Alls {
-			a.Name = prefix(x.Name)
-		}
+		x.ModelGroup.nameRecursively(x.Name)
+
 		if x.Annotation != nil {
 			x.Annotation.Name = prefix(x.Name)
 		}
 		for _, ag := range x.AttributeGroups {
 			ag.Name = prefix(x.Name)
 		}
-		for _, g := range x.Groups {
-			g.Name = prefix(x.Name)
-		}
 		if x.SimpleContent != nil {
 			x.SimpleContent.Name = prefix(x.Name)
 		}
 	}
 	for x := range *GetGongstructInstancesSet[Group](stage) {
+
+		if x.Ref != "" {
+			continue
+		}
 		x.Name = x.NameXSD
 
 		computeGoIdentifier("Group_"+x.Name, &x.WithGoIdentifier, setOfGoIdentifiers)
@@ -53,15 +51,8 @@ func PostProcessingNames(stage *StageStruct) {
 			x.Name = prefix(_x.Name)
 		}
 
-		for _, s := range x.Sequences {
-			s.Name = prefix(x.Name)
-		}
-		for _, c := range x.Choices {
-			c.Name = prefix(x.Name)
-		}
-		for _, a := range x.Alls {
-			a.Name = prefix(x.Name)
-		}
+		x.ModelGroup.nameRecursively(x.Name)
+
 		if x.Annotation != nil {
 			x.Annotation.Name = prefix(x.Name)
 		}

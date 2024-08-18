@@ -52,7 +52,9 @@
                 "read",
                 "../../../test/musicxml/musicxml.xsd",
                 "-m",
-                "stages/musicxml"
+                "stages/musicxml",
+                "-o",
+                "../../../test/books/go/models/models.go"
             ]
         },
         {

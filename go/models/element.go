@@ -41,5 +41,7 @@ func (e *Element) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
 
 	type Alias Element
 	aux := (*Alias)(e)
-	return d.DecodeElement(aux, &start)
+	err := d.DecodeElement(aux, &start)
+
+	return err
 }

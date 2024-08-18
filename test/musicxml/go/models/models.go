@@ -26,8 +26,47 @@ type A_measure_1 struct {
 	// generated from attribute group "measure-attributes
 	AttributeGroup_measure_attributes
 
-	// generated from anonymous type within outer element "part" of type A_part
-	Part []*A_part `xml:"part"`
+	// generated from element "note" of type note order 451
+	Note []*Note `xml:"note"`
+
+	// generated from element "backup" of type backup order 452
+	Backup []*Backup `xml:"backup"`
+
+	// generated from element "forward" of type forward order 453
+	Forward []*Forward `xml:"forward"`
+
+	// generated from element "direction" of type direction order 454
+	Direction []*Direction `xml:"direction"`
+
+	// generated from element "attributes" of type attributes order 455
+	Attributes []*Attributes `xml:"attributes"`
+
+	// generated from element "harmony" of type harmony order 456
+	Harmony []*Harmony `xml:"harmony"`
+
+	// generated from element "figured-bass" of type figured-bass order 457
+	Figured_bass []*Figured_bass `xml:"figured-bass"`
+
+	// generated from element "print" of type print order 458
+	Print []*Print `xml:"print"`
+
+	// generated from element "sound" of type sound order 459
+	Sound []*Sound `xml:"sound"`
+
+	// generated from element "listening" of type listening order 460
+	Listening []*Listening `xml:"listening"`
+
+	// generated from element "barline" of type barline order 461
+	Barline []*Barline `xml:"barline"`
+
+	// generated from element "grouping" of type grouping order 462
+	Grouping []*Grouping `xml:"grouping"`
+
+	// generated from element "link" of type link order 463
+	Link []*Link `xml:"link"`
+
+	// generated from element "bookmark" of type bookmark order 464
+	Bookmark []*Bookmark `xml:"bookmark"`
 }
 
 // A_measure is generated from outer element "measure"
@@ -38,47 +77,8 @@ type A_measure struct {
 	// generated from attribute group "measure-attributes
 	AttributeGroup_measure_attributes
 
-	// generated from element "note" of type note
-	Note []*Note `xml:"note"`
-
-	// generated from element "backup" of type backup
-	Backup []*Backup `xml:"backup"`
-
-	// generated from element "forward" of type forward
-	Forward []*Forward `xml:"forward"`
-
-	// generated from element "direction" of type direction
-	Direction []*Direction `xml:"direction"`
-
-	// generated from element "attributes" of type attributes
-	Attributes []*Attributes `xml:"attributes"`
-
-	// generated from element "harmony" of type harmony
-	Harmony []*Harmony `xml:"harmony"`
-
-	// generated from element "figured-bass" of type figured-bass
-	Figured_bass []*Figured_bass `xml:"figured-bass"`
-
-	// generated from element "print" of type print
-	Print []*Print `xml:"print"`
-
-	// generated from element "sound" of type sound
-	Sound []*Sound `xml:"sound"`
-
-	// generated from element "listening" of type listening
-	Listening []*Listening `xml:"listening"`
-
-	// generated from element "barline" of type barline
-	Barline []*Barline `xml:"barline"`
-
-	// generated from element "grouping" of type grouping
-	Grouping []*Grouping `xml:"grouping"`
-
-	// generated from element "link" of type link
-	Link []*Link `xml:"link"`
-
-	// generated from element "bookmark" of type bookmark
-	Bookmark []*Bookmark `xml:"bookmark"`
+	// generated from anonymous type within outer element "part" of type A_part
+	Part []*A_part_1 `xml:"part"`
 }
 
 // A_part is generated from outer element "part"
@@ -89,47 +89,8 @@ type A_part struct {
 	// generated from attribute group "part-attributes
 	AttributeGroup_part_attributes
 
-	// generated from element "note" of type note
-	Note []*Note `xml:"note"`
-
-	// generated from element "backup" of type backup
-	Backup []*Backup `xml:"backup"`
-
-	// generated from element "forward" of type forward
-	Forward []*Forward `xml:"forward"`
-
-	// generated from element "direction" of type direction
-	Direction []*Direction `xml:"direction"`
-
-	// generated from element "attributes" of type attributes
-	Attributes []*Attributes `xml:"attributes"`
-
-	// generated from element "harmony" of type harmony
-	Harmony []*Harmony `xml:"harmony"`
-
-	// generated from element "figured-bass" of type figured-bass
-	Figured_bass []*Figured_bass `xml:"figured-bass"`
-
-	// generated from element "print" of type print
-	Print []*Print `xml:"print"`
-
-	// generated from element "sound" of type sound
-	Sound []*Sound `xml:"sound"`
-
-	// generated from element "listening" of type listening
-	Listening []*Listening `xml:"listening"`
-
-	// generated from element "barline" of type barline
-	Barline []*Barline `xml:"barline"`
-
-	// generated from element "grouping" of type grouping
-	Grouping []*Grouping `xml:"grouping"`
-
-	// generated from element "link" of type link
-	Link []*Link `xml:"link"`
-
-	// generated from element "bookmark" of type bookmark
-	Bookmark []*Bookmark `xml:"bookmark"`
+	// generated from anonymous type within outer element "measure" of type A_measure
+	Measure []*A_measure_1 `xml:"measure"`
 }
 
 // A_part_1 is generated from outer element "part"
@@ -140,8 +101,47 @@ type A_part_1 struct {
 	// generated from attribute group "part-attributes
 	AttributeGroup_part_attributes
 
-	// generated from anonymous type within outer element "measure" of type A_measure
-	Measure []*A_measure `xml:"measure"`
+	// generated from element "note" of type note order 451
+	Note []*Note `xml:"note"`
+
+	// generated from element "backup" of type backup order 452
+	Backup []*Backup `xml:"backup"`
+
+	// generated from element "forward" of type forward order 453
+	Forward []*Forward `xml:"forward"`
+
+	// generated from element "direction" of type direction order 454
+	Direction []*Direction `xml:"direction"`
+
+	// generated from element "attributes" of type attributes order 455
+	Attributes []*Attributes `xml:"attributes"`
+
+	// generated from element "harmony" of type harmony order 456
+	Harmony []*Harmony `xml:"harmony"`
+
+	// generated from element "figured-bass" of type figured-bass order 457
+	Figured_bass []*Figured_bass `xml:"figured-bass"`
+
+	// generated from element "print" of type print order 458
+	Print []*Print `xml:"print"`
+
+	// generated from element "sound" of type sound order 459
+	Sound []*Sound `xml:"sound"`
+
+	// generated from element "listening" of type listening order 460
+	Listening []*Listening `xml:"listening"`
+
+	// generated from element "barline" of type barline order 461
+	Barline []*Barline `xml:"barline"`
+
+	// generated from element "grouping" of type grouping order 462
+	Grouping []*Grouping `xml:"grouping"`
+
+	// generated from element "link" of type link order 463
+	Link []*Link `xml:"link"`
+
+	// generated from element "bookmark" of type bookmark order 464
+	Bookmark []*Bookmark `xml:"bookmark"`
 }
 
 // A_score_partwise is generated from outer element "score-partwise"
@@ -152,29 +152,29 @@ type A_score_partwise struct {
 	// generated from attribute group "document-attributes
 	AttributeGroup_document_attributes
 
-	// generated from element "work" of type work
+	// generated from element "work" of type work order 466
 	Work []*Work `xml:"work"`
 
-	// generated from element "movement-number" of type xs:string
+	// generated from element "movement-number" of type xs:string order 467
 	Movement_number string `xml:"movement-number"`
 
-	// generated from element "movement-title" of type xs:string
+	// generated from element "movement-title" of type xs:string order 468
 	Movement_title string `xml:"movement-title"`
 
-	// generated from element "identification" of type identification
+	// generated from element "identification" of type identification order 469
 	Identification []*Identification `xml:"identification"`
 
-	// generated from element "defaults" of type defaults
+	// generated from element "defaults" of type defaults order 470
 	Defaults []*Defaults `xml:"defaults"`
 
-	// generated from element "credit" of type credit
+	// generated from element "credit" of type credit order 471
 	Credit []*Credit `xml:"credit"`
 
-	// generated from element "part-list" of type part-list
+	// generated from element "part-list" of type part-list order 472
 	Part_list []*Part_list `xml:"part-list"`
 
 	// generated from anonymous type within outer element "part" of type A_part
-	Part []*A_part_1 `xml:"part"`
+	Part []*A_part `xml:"part"`
 }
 
 // A_score_timewise is generated from outer element "score-timewise"
@@ -185,29 +185,29 @@ type A_score_timewise struct {
 	// generated from attribute group "document-attributes
 	AttributeGroup_document_attributes
 
-	// generated from element "work" of type work
+	// generated from element "work" of type work order 466
 	Work []*Work `xml:"work"`
 
-	// generated from element "movement-number" of type xs:string
+	// generated from element "movement-number" of type xs:string order 467
 	Movement_number string `xml:"movement-number"`
 
-	// generated from element "movement-title" of type xs:string
+	// generated from element "movement-title" of type xs:string order 468
 	Movement_title string `xml:"movement-title"`
 
-	// generated from element "identification" of type identification
+	// generated from element "identification" of type identification order 469
 	Identification []*Identification `xml:"identification"`
 
-	// generated from element "defaults" of type defaults
+	// generated from element "defaults" of type defaults order 470
 	Defaults []*Defaults `xml:"defaults"`
 
-	// generated from element "credit" of type credit
+	// generated from element "credit" of type credit order 471
 	Credit []*Credit `xml:"credit"`
 
-	// generated from element "part-list" of type part-list
+	// generated from element "part-list" of type part-list order 472
 	Part_list []*Part_list `xml:"part-list"`
 
 	// generated from anonymous type within outer element "measure" of type A_measure
-	Measure []*A_measure_1 `xml:"measure"`
+	Measure []*A_measure `xml:"measure"`
 }
 
 // Accidental is generated from named complex type "accidental"
@@ -264,13 +264,13 @@ type Accord struct {
 	// generated from attribute "string" of type string-number
 	String int `xml:"string,attr,omitempty"`
 
-	// generated from element "tuning-step" of type step
+	// generated from element "tuning-step" of type step order 402
 	Tuning_step string `xml:"tuning-step"`
 
-	// generated from element "tuning-alter" of type semitones
+	// generated from element "tuning-alter" of type semitones order 403
 	Tuning_alter string `xml:"tuning-alter"`
 
-	// generated from element "tuning-octave" of type octave
+	// generated from element "tuning-octave" of type octave order 404
 	Tuning_octave int `xml:"tuning-octave"`
 }
 
@@ -286,13 +286,13 @@ type Accordion_registration struct {
 	// generated from attribute group "optional-unique-id
 	AttributeGroup_optional_unique_id
 
-	// generated from element "accordion-high" of type empty
+	// generated from element "accordion-high" of type empty order 76
 	Accordion_high string `xml:"accordion-high"`
 
-	// generated from element "accordion-middle" of type accordion-middle
+	// generated from element "accordion-middle" of type accordion-middle order 77
 	Accordion_middle int `xml:"accordion-middle"`
 
-	// generated from element "accordion-low" of type empty
+	// generated from element "accordion-low" of type empty order 78
 	Accordion_low string `xml:"accordion-low"`
 }
 
@@ -302,19 +302,19 @@ type Appearance struct {
 
 	// insertion point for fields
 
-	// generated from element "line-width" of type line-width
+	// generated from element "line-width" of type line-width order 190
 	Line_width []*Line_width `xml:"line-width"`
 
-	// generated from element "note-size" of type note-size
+	// generated from element "note-size" of type note-size order 191
 	Note_size []*Note_size `xml:"note-size"`
 
-	// generated from element "distance" of type distance
+	// generated from element "distance" of type distance order 192
 	Distance []*Distance `xml:"distance"`
 
-	// generated from element "glyph" of type glyph
+	// generated from element "glyph" of type glyph order 193
 	Glyph []*Glyph `xml:"glyph"`
 
-	// generated from element "other-appearance" of type other-appearance
+	// generated from element "other-appearance" of type other-appearance order 194
 	Other_appearance []*Other_appearance `xml:"other-appearance"`
 }
 
@@ -361,16 +361,16 @@ type Arrow struct {
 	// generated from attribute group "smufl
 	AttributeGroup_smufl
 
-	// generated from element "arrow-direction" of type arrow-direction
+	// generated from element "arrow-direction" of type arrow-direction order 225
 	Arrow_direction string `xml:"arrow-direction"`
 
-	// generated from element "arrow-style" of type arrow-style
+	// generated from element "arrow-style" of type arrow-style order 226
 	Arrow_style string `xml:"arrow-style"`
 
-	// generated from element "arrowhead" of type empty
+	// generated from element "arrowhead" of type empty order 227
 	Arrowhead string `xml:"arrowhead"`
 
-	// generated from element "circular-arrow" of type circular-arrow
+	// generated from element "circular-arrow" of type circular-arrow order 228
 	Circular_arrow string `xml:"circular-arrow"`
 }
 
@@ -383,55 +383,55 @@ type Articulations struct {
 	// generated from attribute group "optional-unique-id
 	AttributeGroup_optional_unique_id
 
-	// generated from element "accent" of type empty-placement
+	// generated from element "accent" of type empty-placement order 208
 	Accent []*Empty_placement `xml:"accent"`
 
-	// generated from element "strong-accent" of type strong-accent
+	// generated from element "strong-accent" of type strong-accent order 209
 	Strong_accent []*Strong_accent `xml:"strong-accent"`
 
-	// generated from element "staccato" of type empty-placement
+	// generated from element "staccato" of type empty-placement order 210
 	Staccato []*Empty_placement `xml:"staccato"`
 
-	// generated from element "tenuto" of type empty-placement
+	// generated from element "tenuto" of type empty-placement order 211
 	Tenuto []*Empty_placement `xml:"tenuto"`
 
-	// generated from element "detached-legato" of type empty-placement
+	// generated from element "detached-legato" of type empty-placement order 212
 	Detached_legato []*Empty_placement `xml:"detached-legato"`
 
-	// generated from element "staccatissimo" of type empty-placement
+	// generated from element "staccatissimo" of type empty-placement order 213
 	Staccatissimo []*Empty_placement `xml:"staccatissimo"`
 
-	// generated from element "spiccato" of type empty-placement
+	// generated from element "spiccato" of type empty-placement order 214
 	Spiccato []*Empty_placement `xml:"spiccato"`
 
-	// generated from element "scoop" of type empty-line
+	// generated from element "scoop" of type empty-line order 215
 	Scoop []*Empty_line `xml:"scoop"`
 
-	// generated from element "plop" of type empty-line
+	// generated from element "plop" of type empty-line order 216
 	Plop []*Empty_line `xml:"plop"`
 
-	// generated from element "doit" of type empty-line
+	// generated from element "doit" of type empty-line order 217
 	Doit []*Empty_line `xml:"doit"`
 
-	// generated from element "falloff" of type empty-line
+	// generated from element "falloff" of type empty-line order 218
 	Falloff []*Empty_line `xml:"falloff"`
 
-	// generated from element "breath-mark" of type breath-mark
+	// generated from element "breath-mark" of type breath-mark order 219
 	Breath_mark []*Breath_mark `xml:"breath-mark"`
 
-	// generated from element "caesura" of type caesura
+	// generated from element "caesura" of type caesura order 220
 	Caesura []*Caesura `xml:"caesura"`
 
-	// generated from element "stress" of type empty-placement
+	// generated from element "stress" of type empty-placement order 221
 	Stress []*Empty_placement `xml:"stress"`
 
-	// generated from element "unstress" of type empty-placement
+	// generated from element "unstress" of type empty-placement order 222
 	Unstress []*Empty_placement `xml:"unstress"`
 
-	// generated from element "soft-accent" of type empty-placement
+	// generated from element "soft-accent" of type empty-placement order 223
 	Soft_accent []*Empty_placement `xml:"soft-accent"`
 
-	// generated from element "other-articulation" of type other-placement-text
+	// generated from element "other-articulation" of type other-placement-text order 224
 	Other_articulation []*Other_placement_text `xml:"other-articulation"`
 }
 
@@ -457,46 +457,46 @@ type Attributes struct {
 
 	// insertion point for fields
 
-	// generated from element "divisions" of type positive-divisions
+	// generated from element "divisions" of type positive-divisions order 41
 	Divisions string `xml:"divisions"`
 
-	// generated from element "key" of type key
+	// generated from element "key" of type key order 42
 	Key []*Key `xml:"key"`
 
-	// generated from element "time" of type time
+	// generated from element "time" of type time order 43
 	Time []*Time `xml:"time"`
 
-	// generated from element "staves" of type xs:nonNegativeInteger
+	// generated from element "staves" of type xs:nonNegativeInteger order 44
 	Staves int `xml:"staves"`
 
-	// generated from element "part-symbol" of type part-symbol
+	// generated from element "part-symbol" of type part-symbol order 45
 	Part_symbol []*Part_symbol `xml:"part-symbol"`
 
-	// generated from element "instruments" of type xs:nonNegativeInteger
+	// generated from element "instruments" of type xs:nonNegativeInteger order 46
 	Instruments int `xml:"instruments"`
 
-	// generated from element "clef" of type clef
+	// generated from element "clef" of type clef order 47
 	Clef []*Clef `xml:"clef"`
 
-	// generated from element "staff-details" of type staff-details
+	// generated from element "staff-details" of type staff-details order 48
 	Staff_details []*Staff_details `xml:"staff-details"`
 
-	// generated from element "transpose" of type transpose
+	// generated from element "transpose" of type transpose order 49
 	Transpose []*Transpose `xml:"transpose"`
 
-	// generated from element "for-part" of type for-part
+	// generated from element "for-part" of type for-part order 50
 	For_part []*For_part `xml:"for-part"`
 
 	// generated from anonymous type within outer element "directive" of type A_directive
 	Directive []*A_directive `xml:"directive"`
 
-	// generated from element "measure-style" of type measure-style
+	// generated from element "measure-style" of type measure-style order 52
 	Measure_style []*Measure_style `xml:"measure-style"`
 
-	// generated from element "footnote" of type formatted-text
+	// generated from element "footnote" of type formatted-text order 399
 	Footnote []*Formatted_text `xml:"footnote"`
 
-	// generated from element "level" of type level
+	// generated from element "level" of type level order 400
 	Level []*Level `xml:"level"`
 }
 
@@ -506,13 +506,13 @@ type Backup struct {
 
 	// insertion point for fields
 
-	// generated from element "footnote" of type formatted-text
+	// generated from element "footnote" of type formatted-text order 399
 	Footnote []*Formatted_text `xml:"footnote"`
 
-	// generated from element "level" of type level
+	// generated from element "level" of type level order 400
 	Level []*Level `xml:"level"`
 
-	// generated from element "duration" of type positive-divisions
+	// generated from element "duration" of type positive-divisions order 444
 	Duration string `xml:"duration"`
 }
 
@@ -547,31 +547,31 @@ type Barline struct {
 	// generated from attribute group "optional-unique-id
 	AttributeGroup_optional_unique_id
 
-	// generated from element "bar-style" of type bar-style-color
+	// generated from element "bar-style" of type bar-style-color order 69
 	Bar_style []*Bar_style_color `xml:"bar-style"`
 
-	// generated from element "wavy-line" of type wavy-line
+	// generated from element "wavy-line" of type wavy-line order 70
 	Wavy_line []*Wavy_line `xml:"wavy-line"`
 
-	// generated from element "segno" of type segno
+	// generated from element "segno" of type segno order 71
 	Segno_1 []*Segno `xml:"segno"`
 
-	// generated from element "coda" of type coda
+	// generated from element "coda" of type coda order 72
 	Coda_1 []*Coda `xml:"coda"`
 
-	// generated from element "fermata" of type fermata
+	// generated from element "fermata" of type fermata order 73
 	Fermata []*Fermata `xml:"fermata"`
 
-	// generated from element "ending" of type ending
+	// generated from element "ending" of type ending order 74
 	Ending []*Ending `xml:"ending"`
 
-	// generated from element "repeat" of type repeat
+	// generated from element "repeat" of type repeat order 75
 	Repeat []*Repeat `xml:"repeat"`
 
-	// generated from element "footnote" of type formatted-text
+	// generated from element "footnote" of type formatted-text order 399
 	Footnote []*Formatted_text `xml:"footnote"`
 
-	// generated from element "level" of type level
+	// generated from element "level" of type level order 400
 	Level []*Level `xml:"level"`
 }
 
@@ -597,13 +597,13 @@ type Bass struct {
 	// generated from attribute "arrangement" of type harmony-arrangement
 	Arrangement string `xml:"arrangement,attr,omitempty"`
 
-	// generated from element "bass-separator" of type style-text
+	// generated from element "bass-separator" of type style-text order 79
 	Bass_separator []*Style_text `xml:"bass-separator"`
 
-	// generated from element "bass-step" of type bass-step
+	// generated from element "bass-step" of type bass-step order 80
 	Bass_step []*Bass_step `xml:"bass-step"`
 
-	// generated from element "bass-alter" of type harmony-alter
+	// generated from element "bass-alter" of type harmony-alter order 81
 	Bass_alter []*Harmony_alter `xml:"bass-alter"`
 }
 
@@ -654,13 +654,13 @@ type Beat_repeat struct {
 	// generated from attribute "use-dots" of type yes-no
 	Use_dots string `xml:"use-dots,attr,omitempty"`
 
-	// generated from element "slash-type" of type note-type-value
+	// generated from element "slash-type" of type note-type-value order 416
 	Slash_type string `xml:"slash-type"`
 
-	// generated from element "slash-dot" of type empty
+	// generated from element "slash-dot" of type empty order 417
 	Slash_dot string `xml:"slash-dot"`
 
-	// generated from element "except-voice" of type xs:string
+	// generated from element "except-voice" of type xs:string order 418
 	Except_voice string `xml:"except-voice"`
 }
 
@@ -670,10 +670,10 @@ type Beat_unit_tied struct {
 
 	// insertion point for fields
 
-	// generated from element "beat-unit" of type note-type-value
+	// generated from element "beat-unit" of type note-type-value order 428
 	Beat_unit string `xml:"beat-unit"`
 
-	// generated from element "beat-unit-dot" of type empty
+	// generated from element "beat-unit-dot" of type empty order 429
 	Beat_unit_dot string `xml:"beat-unit-dot"`
 }
 
@@ -705,16 +705,16 @@ type Bend struct {
 	// generated from attribute group "bend-sound
 	AttributeGroup_bend_sound
 
-	// generated from element "bend-alter" of type semitones
+	// generated from element "bend-alter" of type semitones order 229
 	Bend_alter string `xml:"bend-alter"`
 
-	// generated from element "pre-bend" of type empty
+	// generated from element "pre-bend" of type empty order 230
 	Pre_bend string `xml:"pre-bend"`
 
-	// generated from element "release" of type release
+	// generated from element "release" of type release order 231
 	Release []*Release `xml:"release"`
 
-	// generated from element "with-bar" of type placement-text
+	// generated from element "with-bar" of type placement-text order 232
 	With_bar []*Placement_text `xml:"with-bar"`
 }
 
@@ -828,13 +828,13 @@ type Clef struct {
 	// generated from attribute group "optional-unique-id
 	AttributeGroup_optional_unique_id
 
-	// generated from element "sign" of type clef-sign
+	// generated from element "sign" of type clef-sign order 410
 	Sign string `xml:"sign"`
 
-	// generated from element "line" of type staff-line-position
+	// generated from element "line" of type staff-line-position order 411
 	Line int `xml:"line"`
 
-	// generated from element "clef-octave-change" of type xs:integer
+	// generated from element "clef-octave-change" of type xs:integer order 412
 	Clef_octave_change int `xml:"clef-octave-change"`
 }
 
@@ -866,22 +866,22 @@ type Credit struct {
 	// generated from attribute group "optional-unique-id
 	AttributeGroup_optional_unique_id
 
-	// generated from element "credit-type" of type xs:string
+	// generated from element "credit-type" of type xs:string order 354
 	Credit_type string `xml:"credit-type"`
 
-	// generated from element "credit-image" of type image
+	// generated from element "credit-image" of type image order 357
 	Credit_image []*Image `xml:"credit-image"`
 
-	// generated from element "link" of type link
+	// generated from element "link" of type link order 360
 	Link []*Link `xml:"link"`
 
-	// generated from element "bookmark" of type bookmark
+	// generated from element "bookmark" of type bookmark order 361
 	Bookmark []*Bookmark `xml:"bookmark"`
 
-	// generated from element "credit-words" of type formatted-text-id
+	// generated from element "credit-words" of type formatted-text-id order 362
 	Credit_words []*Formatted_text_id `xml:"credit-words"`
 
-	// generated from element "credit-symbol" of type formatted-symbol-id
+	// generated from element "credit-symbol" of type formatted-symbol-id order 363
 	Credit_symbol []*Formatted_symbol_id `xml:"credit-symbol"`
 }
 
@@ -916,34 +916,34 @@ type Defaults struct {
 
 	// insertion point for fields
 
-	// generated from element "scaling" of type scaling
+	// generated from element "scaling" of type scaling order 364
 	Scaling []*Scaling `xml:"scaling"`
 
-	// generated from element "concert-score" of type empty
+	// generated from element "concert-score" of type empty order 365
 	Concert_score string `xml:"concert-score"`
 
-	// generated from element "appearance" of type appearance
+	// generated from element "appearance" of type appearance order 366
 	Appearance []*Appearance `xml:"appearance"`
 
-	// generated from element "music-font" of type empty-font
+	// generated from element "music-font" of type empty-font order 367
 	Music_font []*Empty_font `xml:"music-font"`
 
-	// generated from element "word-font" of type empty-font
+	// generated from element "word-font" of type empty-font order 368
 	Word_font []*Empty_font `xml:"word-font"`
 
-	// generated from element "lyric-font" of type lyric-font
+	// generated from element "lyric-font" of type lyric-font order 369
 	Lyric_font []*Lyric_font `xml:"lyric-font"`
 
-	// generated from element "lyric-language" of type lyric-language
+	// generated from element "lyric-language" of type lyric-language order 370
 	Lyric_language []*Lyric_language `xml:"lyric-language"`
 
-	// generated from element "page-layout" of type page-layout
+	// generated from element "page-layout" of type page-layout order 439
 	Page_layout []*Page_layout `xml:"page-layout"`
 
-	// generated from element "system-layout" of type system-layout
+	// generated from element "system-layout" of type system-layout order 440
 	System_layout []*System_layout `xml:"system-layout"`
 
-	// generated from element "staff-layout" of type staff-layout
+	// generated from element "staff-layout" of type staff-layout order 441
 	Staff_layout []*Staff_layout `xml:"staff-layout"`
 }
 
@@ -956,13 +956,13 @@ type Degree struct {
 	// generated from attribute group "print-object
 	AttributeGroup_print_object
 
-	// generated from element "degree-value" of type degree-value
+	// generated from element "degree-value" of type degree-value order 82
 	Degree_value []*Degree_value `xml:"degree-value"`
 
-	// generated from element "degree-alter" of type degree-alter
+	// generated from element "degree-alter" of type degree-alter order 83
 	Degree_alter []*Degree_alter `xml:"degree-alter"`
 
-	// generated from element "degree-type" of type degree-type
+	// generated from element "degree-type" of type degree-type order 84
 	Degree_type []*Degree_type `xml:"degree-type"`
 }
 
@@ -1026,28 +1026,28 @@ type Direction struct {
 	// generated from attribute group "optional-unique-id
 	AttributeGroup_optional_unique_id
 
-	// generated from element "direction-type" of type direction-type
+	// generated from element "direction-type" of type direction-type order 85
 	Direction_type []*Direction_type `xml:"direction-type"`
 
-	// generated from element "offset" of type offset
+	// generated from element "offset" of type offset order 86
 	Offset []*Offset `xml:"offset"`
 
-	// generated from element "sound" of type sound
+	// generated from element "sound" of type sound order 87
 	Sound []*Sound `xml:"sound"`
 
-	// generated from element "listening" of type listening
+	// generated from element "listening" of type listening order 88
 	Listening []*Listening `xml:"listening"`
 
-	// generated from element "footnote" of type formatted-text
+	// generated from element "footnote" of type formatted-text order 399
 	Footnote []*Formatted_text `xml:"footnote"`
 
-	// generated from element "level" of type level
+	// generated from element "level" of type level order 400
 	Level []*Level `xml:"level"`
 
-	// generated from element "staff" of type xs:positiveInteger
+	// generated from element "staff" of type xs:positiveInteger order 401
 	Staff int `xml:"staff"`
 
-	// generated from element "voice" of type xs:string
+	// generated from element "voice" of type xs:string order 409
 	Voice string `xml:"voice"`
 }
 
@@ -1060,76 +1060,76 @@ type Direction_type struct {
 	// generated from attribute group "optional-unique-id
 	AttributeGroup_optional_unique_id
 
-	// generated from element "rehearsal" of type formatted-text-id
+	// generated from element "rehearsal" of type formatted-text-id order 89
 	Rehearsal []*Formatted_text_id `xml:"rehearsal"`
 
-	// generated from element "segno" of type segno
+	// generated from element "segno" of type segno order 90
 	Segno []*Segno `xml:"segno"`
 
-	// generated from element "coda" of type coda
+	// generated from element "coda" of type coda order 91
 	Coda []*Coda `xml:"coda"`
 
-	// generated from element "words" of type formatted-text-id
+	// generated from element "words" of type formatted-text-id order 92
 	Words []*Formatted_text_id `xml:"words"`
 
-	// generated from element "symbol" of type formatted-symbol-id
+	// generated from element "symbol" of type formatted-symbol-id order 93
 	Symbol []*Formatted_symbol_id `xml:"symbol"`
 
-	// generated from element "wedge" of type wedge
+	// generated from element "wedge" of type wedge order 94
 	Wedge []*Wedge `xml:"wedge"`
 
-	// generated from element "dynamics" of type dynamics
+	// generated from element "dynamics" of type dynamics order 95
 	Dynamics []*Dynamics `xml:"dynamics"`
 
-	// generated from element "dashes" of type dashes
+	// generated from element "dashes" of type dashes order 96
 	Dashes []*Dashes `xml:"dashes"`
 
-	// generated from element "bracket" of type bracket
+	// generated from element "bracket" of type bracket order 97
 	Bracket []*Bracket `xml:"bracket"`
 
-	// generated from element "pedal" of type pedal
+	// generated from element "pedal" of type pedal order 98
 	Pedal []*Pedal `xml:"pedal"`
 
-	// generated from element "metronome" of type metronome
+	// generated from element "metronome" of type metronome order 99
 	Metronome []*Metronome `xml:"metronome"`
 
-	// generated from element "octave-shift" of type octave-shift
+	// generated from element "octave-shift" of type octave-shift order 100
 	Octave_shift []*Octave_shift `xml:"octave-shift"`
 
-	// generated from element "harp-pedals" of type harp-pedals
+	// generated from element "harp-pedals" of type harp-pedals order 101
 	Harp_pedals []*Harp_pedals `xml:"harp-pedals"`
 
-	// generated from element "damp" of type empty-print-style-align-id
+	// generated from element "damp" of type empty-print-style-align-id order 102
 	Damp []*Empty_print_style_align_id `xml:"damp"`
 
-	// generated from element "damp-all" of type empty-print-style-align-id
+	// generated from element "damp-all" of type empty-print-style-align-id order 103
 	Damp_all []*Empty_print_style_align_id `xml:"damp-all"`
 
-	// generated from element "eyeglasses" of type empty-print-style-align-id
+	// generated from element "eyeglasses" of type empty-print-style-align-id order 104
 	Eyeglasses []*Empty_print_style_align_id `xml:"eyeglasses"`
 
-	// generated from element "string-mute" of type string-mute
+	// generated from element "string-mute" of type string-mute order 105
 	String_mute []*String_mute `xml:"string-mute"`
 
-	// generated from element "scordatura" of type scordatura
+	// generated from element "scordatura" of type scordatura order 106
 	Scordatura []*Scordatura `xml:"scordatura"`
 
-	// generated from element "image" of type image
+	// generated from element "image" of type image order 107
 	Image []*Image `xml:"image"`
 
-	// generated from element "principal-voice" of type principal-voice
+	// generated from element "principal-voice" of type principal-voice order 108
 	Principal_voice []*Principal_voice `xml:"principal-voice"`
 
-	// generated from element "percussion" of type percussion
+	// generated from element "percussion" of type percussion order 109
 	Percussion []*Percussion `xml:"percussion"`
 
-	// generated from element "accordion-registration" of type accordion-registration
+	// generated from element "accordion-registration" of type accordion-registration order 110
 	Accordion_registration []*Accordion_registration `xml:"accordion-registration"`
 
-	// generated from element "staff-divide" of type staff-divide
+	// generated from element "staff-divide" of type staff-divide order 111
 	Staff_divide []*Staff_divide `xml:"staff-divide"`
 
-	// generated from element "other-direction" of type other-direction
+	// generated from element "other-direction" of type other-direction order 112
 	Other_direction []*Other_direction `xml:"other-direction"`
 }
 
@@ -1177,85 +1177,85 @@ type Dynamics struct {
 	// generated from attribute group "optional-unique-id
 	AttributeGroup_optional_unique_id
 
-	// generated from element "p" of type empty
+	// generated from element "p" of type empty order 0
 	P string `xml:"p"`
 
-	// generated from element "pp" of type empty
+	// generated from element "pp" of type empty order 1
 	Pp string `xml:"pp"`
 
-	// generated from element "ppp" of type empty
+	// generated from element "ppp" of type empty order 2
 	Ppp string `xml:"ppp"`
 
-	// generated from element "pppp" of type empty
+	// generated from element "pppp" of type empty order 3
 	Pppp string `xml:"pppp"`
 
-	// generated from element "ppppp" of type empty
+	// generated from element "ppppp" of type empty order 4
 	Ppppp string `xml:"ppppp"`
 
-	// generated from element "pppppp" of type empty
+	// generated from element "pppppp" of type empty order 5
 	Pppppp string `xml:"pppppp"`
 
-	// generated from element "f" of type empty
+	// generated from element "f" of type empty order 6
 	F string `xml:"f"`
 
-	// generated from element "ff" of type empty
+	// generated from element "ff" of type empty order 7
 	Ff string `xml:"ff"`
 
-	// generated from element "fff" of type empty
+	// generated from element "fff" of type empty order 8
 	Fff string `xml:"fff"`
 
-	// generated from element "ffff" of type empty
+	// generated from element "ffff" of type empty order 9
 	Ffff string `xml:"ffff"`
 
-	// generated from element "fffff" of type empty
+	// generated from element "fffff" of type empty order 10
 	Fffff string `xml:"fffff"`
 
-	// generated from element "ffffff" of type empty
+	// generated from element "ffffff" of type empty order 11
 	Ffffff string `xml:"ffffff"`
 
-	// generated from element "mp" of type empty
+	// generated from element "mp" of type empty order 12
 	Mp string `xml:"mp"`
 
-	// generated from element "mf" of type empty
+	// generated from element "mf" of type empty order 13
 	Mf string `xml:"mf"`
 
-	// generated from element "sf" of type empty
+	// generated from element "sf" of type empty order 14
 	Sf string `xml:"sf"`
 
-	// generated from element "sfp" of type empty
+	// generated from element "sfp" of type empty order 15
 	Sfp string `xml:"sfp"`
 
-	// generated from element "sfpp" of type empty
+	// generated from element "sfpp" of type empty order 16
 	Sfpp string `xml:"sfpp"`
 
-	// generated from element "fp" of type empty
+	// generated from element "fp" of type empty order 17
 	Fp string `xml:"fp"`
 
-	// generated from element "rf" of type empty
+	// generated from element "rf" of type empty order 18
 	Rf string `xml:"rf"`
 
-	// generated from element "rfz" of type empty
+	// generated from element "rfz" of type empty order 19
 	Rfz string `xml:"rfz"`
 
-	// generated from element "sfz" of type empty
+	// generated from element "sfz" of type empty order 20
 	Sfz string `xml:"sfz"`
 
-	// generated from element "sffz" of type empty
+	// generated from element "sffz" of type empty order 21
 	Sffz string `xml:"sffz"`
 
-	// generated from element "fz" of type empty
+	// generated from element "fz" of type empty order 22
 	Fz string `xml:"fz"`
 
-	// generated from element "n" of type empty
+	// generated from element "n" of type empty order 23
 	N string `xml:"n"`
 
-	// generated from element "pf" of type empty
+	// generated from element "pf" of type empty order 24
 	Pf string `xml:"pf"`
 
-	// generated from element "sfzp" of type empty
+	// generated from element "sfzp" of type empty order 25
 	Sfzp string `xml:"sfzp"`
 
-	// generated from element "other-dynamics" of type other-text
+	// generated from element "other-dynamics" of type other-text order 26
 	Other_dynamics []*Other_text `xml:"other-dynamics"`
 }
 
@@ -1424,16 +1424,16 @@ type Encoding struct {
 
 	// insertion point for fields
 
-	// generated from element "encoder" of type typed-text
+	// generated from element "encoder" of type typed-text order 179
 	Encoder []*Typed_text `xml:"encoder"`
 
-	// generated from element "software" of type xs:string
+	// generated from element "software" of type xs:string order 180
 	Software string `xml:"software"`
 
-	// generated from element "encoding-description" of type xs:string
+	// generated from element "encoding-description" of type xs:string order 181
 	Encoding_description string `xml:"encoding-description"`
 
-	// generated from element "supports" of type supports
+	// generated from element "supports" of type supports order 182
 	Supports []*Supports `xml:"supports"`
 }
 
@@ -1510,22 +1510,22 @@ type Figure struct {
 
 	// insertion point for fields
 
-	// generated from element "prefix" of type style-text
+	// generated from element "prefix" of type style-text order 233
 	Prefix []*Style_text `xml:"prefix"`
 
-	// generated from element "figure-number" of type style-text
+	// generated from element "figure-number" of type style-text order 234
 	Figure_number []*Style_text `xml:"figure-number"`
 
-	// generated from element "suffix" of type style-text
+	// generated from element "suffix" of type style-text order 235
 	Suffix []*Style_text `xml:"suffix"`
 
-	// generated from element "extend" of type extend
+	// generated from element "extend" of type extend order 236
 	Extend []*Extend `xml:"extend"`
 
-	// generated from element "footnote" of type formatted-text
+	// generated from element "footnote" of type formatted-text order 399
 	Footnote []*Formatted_text `xml:"footnote"`
 
-	// generated from element "level" of type level
+	// generated from element "level" of type level order 400
 	Level []*Level `xml:"level"`
 }
 
@@ -1550,16 +1550,16 @@ type Figured_bass struct {
 	// generated from attribute group "optional-unique-id
 	AttributeGroup_optional_unique_id
 
-	// generated from element "figure" of type figure
+	// generated from element "figure" of type figure order 237
 	Figure []*Figure `xml:"figure"`
 
-	// generated from element "footnote" of type formatted-text
+	// generated from element "footnote" of type formatted-text order 399
 	Footnote []*Formatted_text `xml:"footnote"`
 
-	// generated from element "level" of type level
+	// generated from element "level" of type level order 400
 	Level []*Level `xml:"level"`
 
-	// generated from element "duration" of type positive-divisions
+	// generated from element "duration" of type positive-divisions order 444
 	Duration string `xml:"duration"`
 }
 
@@ -1607,10 +1607,10 @@ type For_part struct {
 	// generated from attribute group "optional-unique-id
 	AttributeGroup_optional_unique_id
 
-	// generated from element "part-clef" of type part-clef
+	// generated from element "part-clef" of type part-clef order 53
 	Part_clef []*Part_clef `xml:"part-clef"`
 
-	// generated from element "part-transpose" of type part-transpose
+	// generated from element "part-transpose" of type part-transpose order 54
 	Part_transpose []*Part_transpose `xml:"part-transpose"`
 }
 
@@ -1660,19 +1660,19 @@ type Forward struct {
 
 	// insertion point for fields
 
-	// generated from element "footnote" of type formatted-text
+	// generated from element "footnote" of type formatted-text order 399
 	Footnote []*Formatted_text `xml:"footnote"`
 
-	// generated from element "level" of type level
+	// generated from element "level" of type level order 400
 	Level []*Level `xml:"level"`
 
-	// generated from element "staff" of type xs:positiveInteger
+	// generated from element "staff" of type xs:positiveInteger order 401
 	Staff int `xml:"staff"`
 
-	// generated from element "voice" of type xs:string
+	// generated from element "voice" of type xs:string order 409
 	Voice string `xml:"voice"`
 
-	// generated from element "duration" of type positive-divisions
+	// generated from element "duration" of type positive-divisions order 444
 	Duration string `xml:"duration"`
 }
 
@@ -1706,16 +1706,16 @@ type Frame struct {
 	// generated from attribute group "optional-unique-id
 	AttributeGroup_optional_unique_id
 
-	// generated from element "frame-strings" of type xs:positiveInteger
+	// generated from element "frame-strings" of type xs:positiveInteger order 113
 	Frame_strings int `xml:"frame-strings"`
 
-	// generated from element "frame-frets" of type xs:positiveInteger
+	// generated from element "frame-frets" of type xs:positiveInteger order 114
 	Frame_frets int `xml:"frame-frets"`
 
-	// generated from element "first-fret" of type first-fret
+	// generated from element "first-fret" of type first-fret order 115
 	First_fret []*First_fret `xml:"first-fret"`
 
-	// generated from element "frame-note" of type frame-note
+	// generated from element "frame-note" of type frame-note order 116
 	Frame_note []*Frame_note `xml:"frame-note"`
 }
 
@@ -1725,16 +1725,16 @@ type Frame_note struct {
 
 	// insertion point for fields
 
-	// generated from element "string" of type string-type
+	// generated from element "string" of type string-type order 117
 	String []*String_type `xml:"string"`
 
-	// generated from element "fret" of type fret
+	// generated from element "fret" of type fret order 118
 	Fret []*Fret `xml:"fret"`
 
-	// generated from element "fingering" of type fingering
+	// generated from element "fingering" of type fingering order 119
 	Fingering []*Fingering `xml:"fingering"`
 
-	// generated from element "barre" of type barre
+	// generated from element "barre" of type barre order 120
 	Barre []*Barre `xml:"barre"`
 }
 
@@ -1857,7 +1857,7 @@ type Grouping struct {
 	// generated from attribute group "optional-unique-id
 	AttributeGroup_optional_unique_id
 
-	// generated from element "feature" of type feature
+	// generated from element "feature" of type feature order 121
 	Feature []*Feature `xml:"feature"`
 }
 
@@ -1912,7 +1912,7 @@ type Harmon_mute struct {
 	// generated from attribute group "placement
 	AttributeGroup_placement
 
-	// generated from element "harmon-closed" of type harmon-closed
+	// generated from element "harmon-closed" of type harmon-closed order 238
 	Harmon_closed []*Harmon_closed `xml:"harmon-closed"`
 }
 
@@ -1931,19 +1931,19 @@ type Harmonic struct {
 	// generated from attribute group "placement
 	AttributeGroup_placement
 
-	// generated from element "natural" of type empty
+	// generated from element "natural" of type empty order 239
 	Natural string `xml:"natural"`
 
-	// generated from element "artificial" of type empty
+	// generated from element "artificial" of type empty order 240
 	Artificial string `xml:"artificial"`
 
-	// generated from element "base-pitch" of type empty
+	// generated from element "base-pitch" of type empty order 241
 	Base_pitch string `xml:"base-pitch"`
 
-	// generated from element "touching-pitch" of type empty
+	// generated from element "touching-pitch" of type empty order 242
 	Touching_pitch string `xml:"touching-pitch"`
 
-	// generated from element "sounding-pitch" of type empty
+	// generated from element "sounding-pitch" of type empty order 243
 	Sounding_pitch string `xml:"sounding-pitch"`
 }
 
@@ -1977,40 +1977,40 @@ type Harmony struct {
 	// generated from attribute group "optional-unique-id
 	AttributeGroup_optional_unique_id
 
-	// generated from element "frame" of type frame
+	// generated from element "frame" of type frame order 122
 	Frame []*Frame `xml:"frame"`
 
-	// generated from element "offset" of type offset
+	// generated from element "offset" of type offset order 123
 	Offset []*Offset `xml:"offset"`
 
-	// generated from element "footnote" of type formatted-text
+	// generated from element "footnote" of type formatted-text order 399
 	Footnote []*Formatted_text `xml:"footnote"`
 
-	// generated from element "level" of type level
+	// generated from element "level" of type level order 400
 	Level []*Level `xml:"level"`
 
-	// generated from element "staff" of type xs:positiveInteger
+	// generated from element "staff" of type xs:positiveInteger order 401
 	Staff int `xml:"staff"`
 
-	// generated from element "root" of type root
+	// generated from element "root" of type root order 430
 	Root []*Root `xml:"root"`
 
-	// generated from element "numeral" of type numeral
+	// generated from element "numeral" of type numeral order 431
 	Numeral []*Numeral `xml:"numeral"`
 
-	// generated from element "function" of type style-text
+	// generated from element "function" of type style-text order 432
 	Function []*Style_text `xml:"function"`
 
-	// generated from element "kind" of type kind
+	// generated from element "kind" of type kind order 433
 	Kind []*Kind `xml:"kind"`
 
-	// generated from element "inversion" of type inversion
+	// generated from element "inversion" of type inversion order 434
 	Inversion []*Inversion `xml:"inversion"`
 
-	// generated from element "bass" of type bass
+	// generated from element "bass" of type bass order 435
 	Bass []*Bass `xml:"bass"`
 
-	// generated from element "degree" of type degree
+	// generated from element "degree" of type degree order 436
 	Degree []*Degree `xml:"degree"`
 }
 
@@ -2039,7 +2039,7 @@ type Harp_pedals struct {
 	// generated from attribute group "optional-unique-id
 	AttributeGroup_optional_unique_id
 
-	// generated from element "pedal-tuning" of type pedal-tuning
+	// generated from element "pedal-tuning" of type pedal-tuning order 124
 	Pedal_tuning []*Pedal_tuning `xml:"pedal-tuning"`
 }
 
@@ -2062,13 +2062,13 @@ type Hole struct {
 	// generated from attribute group "placement
 	AttributeGroup_placement
 
-	// generated from element "hole-type" of type xs:string
+	// generated from element "hole-type" of type xs:string order 244
 	Hole_type string `xml:"hole-type"`
 
-	// generated from element "hole-closed" of type hole-closed
+	// generated from element "hole-closed" of type hole-closed order 245
 	Hole_closed []*Hole_closed `xml:"hole-closed"`
 
-	// generated from element "hole-shape" of type xs:string
+	// generated from element "hole-shape" of type xs:string order 246
 	Hole_shape string `xml:"hole-shape"`
 }
 
@@ -2110,22 +2110,22 @@ type Identification struct {
 
 	// insertion point for fields
 
-	// generated from element "creator" of type typed-text
+	// generated from element "creator" of type typed-text order 183
 	Creator []*Typed_text `xml:"creator"`
 
-	// generated from element "rights" of type typed-text
+	// generated from element "rights" of type typed-text order 184
 	Rights []*Typed_text `xml:"rights"`
 
-	// generated from element "encoding" of type encoding
+	// generated from element "encoding" of type encoding order 185
 	Encoding []*Encoding `xml:"encoding"`
 
-	// generated from element "source" of type xs:string
+	// generated from element "source" of type xs:string order 186
 	Source string `xml:"source"`
 
-	// generated from element "relation" of type typed-text
+	// generated from element "relation" of type typed-text order 187
 	Relation []*Typed_text `xml:"relation"`
 
-	// generated from element "miscellaneous" of type miscellaneous
+	// generated from element "miscellaneous" of type miscellaneous order 188
 	Miscellaneous []*Miscellaneous `xml:"miscellaneous"`
 }
 
@@ -2161,16 +2161,16 @@ type Instrument_change struct {
 	// generated from attribute "id" of type xs:IDREF
 	Id string `xml:"id,attr,omitempty"`
 
-	// generated from element "instrument-sound" of type xs:string
+	// generated from element "instrument-sound" of type xs:string order 405
 	Instrument_sound string `xml:"instrument-sound"`
 
-	// generated from element "solo" of type empty
+	// generated from element "solo" of type empty order 406
 	Solo string `xml:"solo"`
 
-	// generated from element "ensemble" of type positive-integer-or-empty
+	// generated from element "ensemble" of type positive-integer-or-empty order 407
 	Ensemble string `xml:"ensemble"`
 
-	// generated from element "virtual-instrument" of type virtual-instrument
+	// generated from element "virtual-instrument" of type virtual-instrument order 408
 	Virtual_instrument []*Virtual_instrument `xml:"virtual-instrument"`
 }
 
@@ -2196,13 +2196,13 @@ type Interchangeable struct {
 	// generated from attribute "separator" of type time-separator
 	Separator string `xml:"separator,attr,omitempty"`
 
-	// generated from element "time-relation" of type time-relation
+	// generated from element "time-relation" of type time-relation order 55
 	Time_relation string `xml:"time-relation"`
 
-	// generated from element "beats" of type xs:string
+	// generated from element "beats" of type xs:string order 419
 	Beats string `xml:"beats"`
 
-	// generated from element "beat-type" of type xs:string
+	// generated from element "beat-type" of type xs:string order 420
 	Beat_type string `xml:"beat-type"`
 }
 
@@ -2237,25 +2237,25 @@ type Key struct {
 	// generated from attribute group "optional-unique-id
 	AttributeGroup_optional_unique_id
 
-	// generated from element "key-octave" of type key-octave
+	// generated from element "key-octave" of type key-octave order 56
 	Key_octave []*Key_octave `xml:"key-octave"`
 
-	// generated from element "key-step" of type step
+	// generated from element "key-step" of type step order 413
 	Key_step string `xml:"key-step"`
 
-	// generated from element "key-alter" of type semitones
+	// generated from element "key-alter" of type semitones order 414
 	Key_alter string `xml:"key-alter"`
 
-	// generated from element "key-accidental" of type key-accidental
+	// generated from element "key-accidental" of type key-accidental order 415
 	Key_accidental []*Key_accidental `xml:"key-accidental"`
 
-	// generated from element "cancel" of type cancel
+	// generated from element "cancel" of type cancel order 421
 	Cancel []*Cancel `xml:"cancel"`
 
-	// generated from element "fifths" of type fifths
+	// generated from element "fifths" of type fifths order 422
 	Fifths int `xml:"fifths"`
 
-	// generated from element "mode" of type mode
+	// generated from element "mode" of type mode order 423
 	Mode string `xml:"mode"`
 }
 
@@ -2389,13 +2389,13 @@ type Listen struct {
 
 	// insertion point for fields
 
-	// generated from element "assess" of type assess
+	// generated from element "assess" of type assess order 247
 	Assess []*Assess `xml:"assess"`
 
-	// generated from element "wait" of type wait
+	// generated from element "wait" of type wait order 248
 	Wait []*Wait `xml:"wait"`
 
-	// generated from element "other-listen" of type other-listening
+	// generated from element "other-listen" of type other-listening order 249
 	Other_listen []*Other_listening `xml:"other-listen"`
 }
 
@@ -2405,13 +2405,13 @@ type Listening struct {
 
 	// insertion point for fields
 
-	// generated from element "sync" of type sync
+	// generated from element "sync" of type sync order 125
 	Sync []*Sync `xml:"sync"`
 
-	// generated from element "other-listening" of type other-listening
+	// generated from element "other-listening" of type other-listening order 126
 	Other_listening []*Other_listening `xml:"other-listening"`
 
-	// generated from element "offset" of type offset
+	// generated from element "offset" of type offset order 127
 	Offset []*Offset `xml:"offset"`
 }
 
@@ -2448,34 +2448,34 @@ type Lyric struct {
 	// generated from attribute group "optional-unique-id
 	AttributeGroup_optional_unique_id
 
-	// generated from element "elision" of type elision
+	// generated from element "elision" of type elision order 252
 	Elision []*Elision `xml:"elision"`
 
-	// generated from element "syllabic" of type syllabic
+	// generated from element "syllabic" of type syllabic order 253
 	Syllabic string `xml:"syllabic"`
 
-	// generated from element "text" of type text-element-data
+	// generated from element "text" of type text-element-data order 254
 	Text []*Text_element_data `xml:"text"`
 
-	// generated from element "extend" of type extend
+	// generated from element "extend" of type extend order 255
 	Extend []*Extend `xml:"extend"`
 
-	// generated from element "laughing" of type empty
+	// generated from element "laughing" of type empty order 257
 	Laughing string `xml:"laughing"`
 
-	// generated from element "humming" of type empty
+	// generated from element "humming" of type empty order 258
 	Humming string `xml:"humming"`
 
-	// generated from element "end-line" of type empty
+	// generated from element "end-line" of type empty order 259
 	End_line string `xml:"end-line"`
 
-	// generated from element "end-paragraph" of type empty
+	// generated from element "end-paragraph" of type empty order 260
 	End_paragraph string `xml:"end-paragraph"`
 
-	// generated from element "footnote" of type formatted-text
+	// generated from element "footnote" of type formatted-text order 399
 	Footnote []*Formatted_text `xml:"footnote"`
 
-	// generated from element "level" of type level
+	// generated from element "level" of type level order 400
 	Level []*Level `xml:"level"`
 }
 
@@ -2517,7 +2517,7 @@ type Measure_layout struct {
 
 	// insertion point for fields
 
-	// generated from element "measure-distance" of type tenths
+	// generated from element "measure-distance" of type tenths order 195
 	Measure_distance string `xml:"measure-distance"`
 }
 
@@ -2577,16 +2577,16 @@ type Measure_style struct {
 	// generated from attribute group "optional-unique-id
 	AttributeGroup_optional_unique_id
 
-	// generated from element "multiple-rest" of type multiple-rest
+	// generated from element "multiple-rest" of type multiple-rest order 57
 	Multiple_rest []*Multiple_rest `xml:"multiple-rest"`
 
-	// generated from element "measure-repeat" of type measure-repeat
+	// generated from element "measure-repeat" of type measure-repeat order 58
 	Measure_repeat []*Measure_repeat `xml:"measure-repeat"`
 
-	// generated from element "beat-repeat" of type beat-repeat
+	// generated from element "beat-repeat" of type beat-repeat order 59
 	Beat_repeat []*Beat_repeat `xml:"beat-repeat"`
 
-	// generated from element "slash" of type slash
+	// generated from element "slash" of type slash order 60
 	Slash []*Slash `xml:"slash"`
 }
 
@@ -2637,25 +2637,25 @@ type Metronome struct {
 	// generated from attribute group "optional-unique-id
 	AttributeGroup_optional_unique_id
 
-	// generated from element "per-minute" of type per-minute
+	// generated from element "per-minute" of type per-minute order 129
 	Per_minute []*Per_minute `xml:"per-minute"`
 
-	// generated from element "beat-unit-tied" of type beat-unit-tied
+	// generated from element "beat-unit-tied" of type beat-unit-tied order 130
 	Beat_unit_tied []*Beat_unit_tied `xml:"beat-unit-tied"`
 
-	// generated from element "metronome-arrows" of type empty
+	// generated from element "metronome-arrows" of type empty order 131
 	Metronome_arrows string `xml:"metronome-arrows"`
 
-	// generated from element "metronome-relation" of type xs:string
+	// generated from element "metronome-relation" of type xs:string order 133
 	Metronome_relation string `xml:"metronome-relation"`
 
-	// generated from element "metronome-note" of type metronome-note
+	// generated from element "metronome-note" of type metronome-note order 134
 	Metronome_note []*Metronome_note `xml:"metronome-note"`
 
-	// generated from element "beat-unit" of type note-type-value
+	// generated from element "beat-unit" of type note-type-value order 428
 	Beat_unit string `xml:"beat-unit"`
 
-	// generated from element "beat-unit-dot" of type empty
+	// generated from element "beat-unit-dot" of type empty order 429
 	Beat_unit_dot string `xml:"beat-unit-dot"`
 }
 
@@ -2678,19 +2678,19 @@ type Metronome_note struct {
 
 	// insertion point for fields
 
-	// generated from element "metronome-type" of type note-type-value
+	// generated from element "metronome-type" of type note-type-value order 135
 	Metronome_type string `xml:"metronome-type"`
 
-	// generated from element "metronome-dot" of type empty
+	// generated from element "metronome-dot" of type empty order 136
 	Metronome_dot string `xml:"metronome-dot"`
 
-	// generated from element "metronome-beam" of type metronome-beam
+	// generated from element "metronome-beam" of type metronome-beam order 137
 	Metronome_beam []*Metronome_beam `xml:"metronome-beam"`
 
-	// generated from element "metronome-tied" of type metronome-tied
+	// generated from element "metronome-tied" of type metronome-tied order 138
 	Metronome_tied []*Metronome_tied `xml:"metronome-tied"`
 
-	// generated from element "metronome-tuplet" of type metronome-tuplet
+	// generated from element "metronome-tuplet" of type metronome-tuplet order 139
 	Metronome_tuplet []*Metronome_tuplet `xml:"metronome-tuplet"`
 }
 
@@ -2736,28 +2736,28 @@ type Midi_instrument struct {
 	// generated from attribute "id" of type xs:IDREF
 	Id string `xml:"id,attr,omitempty"`
 
-	// generated from element "midi-channel" of type midi-16
+	// generated from element "midi-channel" of type midi-16 order 27
 	Midi_channel int `xml:"midi-channel"`
 
-	// generated from element "midi-name" of type xs:string
+	// generated from element "midi-name" of type xs:string order 28
 	Midi_name string `xml:"midi-name"`
 
-	// generated from element "midi-bank" of type midi-16384
+	// generated from element "midi-bank" of type midi-16384 order 29
 	Midi_bank int `xml:"midi-bank"`
 
-	// generated from element "midi-program" of type midi-128
+	// generated from element "midi-program" of type midi-128 order 30
 	Midi_program int `xml:"midi-program"`
 
-	// generated from element "midi-unpitched" of type midi-128
+	// generated from element "midi-unpitched" of type midi-128 order 31
 	Midi_unpitched int `xml:"midi-unpitched"`
 
-	// generated from element "volume" of type percent
+	// generated from element "volume" of type percent order 32
 	Volume string `xml:"volume"`
 
-	// generated from element "pan" of type rotation-degrees
+	// generated from element "pan" of type rotation-degrees order 33
 	Pan string `xml:"pan"`
 
-	// generated from element "elevation" of type rotation-degrees
+	// generated from element "elevation" of type rotation-degrees order 34
 	Elevation string `xml:"elevation"`
 }
 
@@ -2767,7 +2767,7 @@ type Miscellaneous struct {
 
 	// insertion point for fields
 
-	// generated from element "miscellaneous-field" of type miscellaneous-field
+	// generated from element "miscellaneous-field" of type miscellaneous-field order 189
 	Miscellaneous_field []*Miscellaneous_field `xml:"miscellaneous-field"`
 }
 
@@ -2813,10 +2813,10 @@ type Name_display struct {
 	// generated from attribute group "print-object
 	AttributeGroup_print_object
 
-	// generated from element "display-text" of type formatted-text
+	// generated from element "display-text" of type formatted-text order 35
 	Display_text []*Formatted_text `xml:"display-text"`
 
-	// generated from element "accidental-text" of type accidental-text
+	// generated from element "accidental-text" of type accidental-text order 36
 	Accidental_text []*Accidental_text `xml:"accidental-text"`
 }
 
@@ -2857,52 +2857,52 @@ type Notations struct {
 	// generated from attribute group "optional-unique-id
 	AttributeGroup_optional_unique_id
 
-	// generated from element "tied" of type tied
+	// generated from element "tied" of type tied order 261
 	Tied []*Tied `xml:"tied"`
 
-	// generated from element "slur" of type slur
+	// generated from element "slur" of type slur order 262
 	Slur []*Slur `xml:"slur"`
 
-	// generated from element "tuplet" of type tuplet
+	// generated from element "tuplet" of type tuplet order 263
 	Tuplet []*Tuplet `xml:"tuplet"`
 
-	// generated from element "glissando" of type glissando
+	// generated from element "glissando" of type glissando order 264
 	Glissando []*Glissando `xml:"glissando"`
 
-	// generated from element "slide" of type slide
+	// generated from element "slide" of type slide order 265
 	Slide []*Slide `xml:"slide"`
 
-	// generated from element "ornaments" of type ornaments
+	// generated from element "ornaments" of type ornaments order 266
 	Ornaments []*Ornaments `xml:"ornaments"`
 
-	// generated from element "technical" of type technical
+	// generated from element "technical" of type technical order 267
 	Technical []*Technical `xml:"technical"`
 
-	// generated from element "articulations" of type articulations
+	// generated from element "articulations" of type articulations order 268
 	Articulations []*Articulations `xml:"articulations"`
 
-	// generated from element "dynamics" of type dynamics
+	// generated from element "dynamics" of type dynamics order 269
 	Dynamics []*Dynamics `xml:"dynamics"`
 
-	// generated from element "fermata" of type fermata
+	// generated from element "fermata" of type fermata order 270
 	Fermata []*Fermata `xml:"fermata"`
 
-	// generated from element "arpeggiate" of type arpeggiate
+	// generated from element "arpeggiate" of type arpeggiate order 271
 	Arpeggiate []*Arpeggiate `xml:"arpeggiate"`
 
-	// generated from element "non-arpeggiate" of type non-arpeggiate
+	// generated from element "non-arpeggiate" of type non-arpeggiate order 272
 	Non_arpeggiate []*Non_arpeggiate `xml:"non-arpeggiate"`
 
-	// generated from element "accidental-mark" of type accidental-mark
+	// generated from element "accidental-mark" of type accidental-mark order 273
 	Accidental_mark []*Accidental_mark `xml:"accidental-mark"`
 
-	// generated from element "other-notation" of type other-notation
+	// generated from element "other-notation" of type other-notation order 274
 	Other_notation []*Other_notation `xml:"other-notation"`
 
-	// generated from element "footnote" of type formatted-text
+	// generated from element "footnote" of type formatted-text order 399
 	Footnote []*Formatted_text `xml:"footnote"`
 
-	// generated from element "level" of type level
+	// generated from element "level" of type level order 400
 	Level []*Level `xml:"level"`
 }
 
@@ -2948,79 +2948,79 @@ type Note struct {
 	// generated from attribute group "optional-unique-id
 	AttributeGroup_optional_unique_id
 
-	// generated from element "grace" of type grace
+	// generated from element "grace" of type grace order 275
 	Grace []*Grace `xml:"grace"`
 
-	// generated from element "tie" of type tie
+	// generated from element "tie" of type tie order 276
 	Tie []*Tie `xml:"tie"`
 
-	// generated from element "cue" of type empty
+	// generated from element "cue" of type empty order 277
 	Cue string `xml:"cue"`
 
-	// generated from element "instrument" of type instrument
+	// generated from element "instrument" of type instrument order 280
 	Instrument []*Instrument `xml:"instrument"`
 
-	// generated from element "type" of type note-type
+	// generated from element "type" of type note-type order 281
 	Type []*Note_type `xml:"type"`
 
-	// generated from element "dot" of type empty-placement
+	// generated from element "dot" of type empty-placement order 282
 	Dot []*Empty_placement `xml:"dot"`
 
-	// generated from element "accidental" of type accidental
+	// generated from element "accidental" of type accidental order 283
 	Accidental []*Accidental `xml:"accidental"`
 
-	// generated from element "time-modification" of type time-modification
+	// generated from element "time-modification" of type time-modification order 284
 	Time_modification []*Time_modification `xml:"time-modification"`
 
-	// generated from element "stem" of type stem
+	// generated from element "stem" of type stem order 285
 	Stem []*Stem `xml:"stem"`
 
-	// generated from element "notehead" of type notehead
+	// generated from element "notehead" of type notehead order 286
 	Notehead []*Notehead `xml:"notehead"`
 
-	// generated from element "notehead-text" of type notehead-text
+	// generated from element "notehead-text" of type notehead-text order 287
 	Notehead_text []*Notehead_text `xml:"notehead-text"`
 
-	// generated from element "beam" of type beam
+	// generated from element "beam" of type beam order 288
 	Beam []*Beam `xml:"beam"`
 
-	// generated from element "notations" of type notations
+	// generated from element "notations" of type notations order 289
 	Notations []*Notations `xml:"notations"`
 
-	// generated from element "lyric" of type lyric
+	// generated from element "lyric" of type lyric order 290
 	Lyric []*Lyric `xml:"lyric"`
 
-	// generated from element "play" of type play
+	// generated from element "play" of type play order 291
 	Play []*Play `xml:"play"`
 
-	// generated from element "listen" of type listen
+	// generated from element "listen" of type listen order 292
 	Listen []*Listen `xml:"listen"`
 
-	// generated from element "footnote" of type formatted-text
+	// generated from element "footnote" of type formatted-text order 399
 	Footnote []*Formatted_text `xml:"footnote"`
 
-	// generated from element "level" of type level
+	// generated from element "level" of type level order 400
 	Level []*Level `xml:"level"`
 
-	// generated from element "staff" of type xs:positiveInteger
+	// generated from element "staff" of type xs:positiveInteger order 401
 	Staff int `xml:"staff"`
 
-	// generated from element "voice" of type xs:string
+	// generated from element "voice" of type xs:string order 409
 	Voice string `xml:"voice"`
 
-	// generated from element "duration" of type positive-divisions
+	// generated from element "duration" of type positive-divisions order 444
 	Duration string `xml:"duration"`
 
-	// generated from element "chord" of type empty
+	// generated from element "chord" of type empty order 447
 	Chord string `xml:"chord"`
 
-	// generated from element "pitch" of type pitch
+	// generated from element "pitch" of type pitch order 448
 	Pitch []*Pitch `xml:"pitch"`
 
-	// generated from element "unpitched" of type unpitched
+	// generated from element "unpitched" of type unpitched order 449
 	Unpitched []*Unpitched `xml:"unpitched"`
 
-	// generated from element "rest" of type rest
+	// generated from element "rest" of type rest order 450
 	Rest []*Rest `xml:"rest"`
 }
 
@@ -3072,10 +3072,10 @@ type Notehead_text struct {
 
 	// insertion point for fields
 
-	// generated from element "display-text" of type formatted-text
+	// generated from element "display-text" of type formatted-text order 293
 	Display_text []*Formatted_text `xml:"display-text"`
 
-	// generated from element "accidental-text" of type accidental-text
+	// generated from element "accidental-text" of type accidental-text order 294
 	Accidental_text []*Accidental_text `xml:"accidental-text"`
 }
 
@@ -3085,13 +3085,13 @@ type Numeral struct {
 
 	// insertion point for fields
 
-	// generated from element "numeral-root" of type numeral-root
+	// generated from element "numeral-root" of type numeral-root order 140
 	Numeral_root []*Numeral_root `xml:"numeral-root"`
 
-	// generated from element "numeral-alter" of type harmony-alter
+	// generated from element "numeral-alter" of type harmony-alter order 141
 	Numeral_alter []*Harmony_alter `xml:"numeral-alter"`
 
-	// generated from element "numeral-key" of type numeral-key
+	// generated from element "numeral-key" of type numeral-key order 142
 	Numeral_key []*Numeral_key `xml:"numeral-key"`
 }
 
@@ -3104,10 +3104,10 @@ type Numeral_key struct {
 	// generated from attribute group "print-object
 	AttributeGroup_print_object
 
-	// generated from element "numeral-fifths" of type fifths
+	// generated from element "numeral-fifths" of type fifths order 143
 	Numeral_fifths int `xml:"numeral-fifths"`
 
-	// generated from element "numeral-mode" of type numeral-mode
+	// generated from element "numeral-mode" of type numeral-mode order 144
 	Numeral_mode string `xml:"numeral-mode"`
 }
 
@@ -3181,52 +3181,52 @@ type Ornaments struct {
 	// generated from attribute group "optional-unique-id
 	AttributeGroup_optional_unique_id
 
-	// generated from element "trill-mark" of type empty-trill-sound
+	// generated from element "trill-mark" of type empty-trill-sound order 295
 	Trill_mark []*Empty_trill_sound `xml:"trill-mark"`
 
-	// generated from element "turn" of type horizontal-turn
+	// generated from element "turn" of type horizontal-turn order 296
 	Turn []*Horizontal_turn `xml:"turn"`
 
-	// generated from element "delayed-turn" of type horizontal-turn
+	// generated from element "delayed-turn" of type horizontal-turn order 297
 	Delayed_turn []*Horizontal_turn `xml:"delayed-turn"`
 
-	// generated from element "inverted-turn" of type horizontal-turn
+	// generated from element "inverted-turn" of type horizontal-turn order 298
 	Inverted_turn []*Horizontal_turn `xml:"inverted-turn"`
 
-	// generated from element "delayed-inverted-turn" of type horizontal-turn
+	// generated from element "delayed-inverted-turn" of type horizontal-turn order 299
 	Delayed_inverted_turn []*Horizontal_turn `xml:"delayed-inverted-turn"`
 
-	// generated from element "vertical-turn" of type empty-trill-sound
+	// generated from element "vertical-turn" of type empty-trill-sound order 300
 	Vertical_turn []*Empty_trill_sound `xml:"vertical-turn"`
 
-	// generated from element "inverted-vertical-turn" of type empty-trill-sound
+	// generated from element "inverted-vertical-turn" of type empty-trill-sound order 301
 	Inverted_vertical_turn []*Empty_trill_sound `xml:"inverted-vertical-turn"`
 
-	// generated from element "shake" of type empty-trill-sound
+	// generated from element "shake" of type empty-trill-sound order 302
 	Shake []*Empty_trill_sound `xml:"shake"`
 
-	// generated from element "wavy-line" of type wavy-line
+	// generated from element "wavy-line" of type wavy-line order 303
 	Wavy_line []*Wavy_line `xml:"wavy-line"`
 
-	// generated from element "mordent" of type mordent
+	// generated from element "mordent" of type mordent order 304
 	Mordent []*Mordent `xml:"mordent"`
 
-	// generated from element "inverted-mordent" of type mordent
+	// generated from element "inverted-mordent" of type mordent order 305
 	Inverted_mordent []*Mordent `xml:"inverted-mordent"`
 
-	// generated from element "schleifer" of type empty-placement
+	// generated from element "schleifer" of type empty-placement order 306
 	Schleifer []*Empty_placement `xml:"schleifer"`
 
-	// generated from element "tremolo" of type tremolo
+	// generated from element "tremolo" of type tremolo order 307
 	Tremolo []*Tremolo `xml:"tremolo"`
 
-	// generated from element "haydn" of type empty-trill-sound
+	// generated from element "haydn" of type empty-trill-sound order 308
 	Haydn []*Empty_trill_sound `xml:"haydn"`
 
-	// generated from element "other-ornament" of type other-placement-text
+	// generated from element "other-ornament" of type other-placement-text order 309
 	Other_ornament []*Other_placement_text `xml:"other-ornament"`
 
-	// generated from element "accidental-mark" of type accidental-mark
+	// generated from element "accidental-mark" of type accidental-mark order 310
 	Accidental_mark []*Accidental_mark `xml:"accidental-mark"`
 }
 
@@ -3327,13 +3327,13 @@ type Page_layout struct {
 
 	// insertion point for fields
 
-	// generated from element "page-height" of type tenths
+	// generated from element "page-height" of type tenths order 196
 	Page_height string `xml:"page-height"`
 
-	// generated from element "page-width" of type tenths
+	// generated from element "page-width" of type tenths order 197
 	Page_width string `xml:"page-width"`
 
-	// generated from element "page-margins" of type page-margins
+	// generated from element "page-margins" of type page-margins order 198
 	Page_margins []*Page_margins `xml:"page-margins"`
 }
 
@@ -3346,16 +3346,16 @@ type Page_margins struct {
 	// generated from attribute "type" of type margin-type
 	Type string `xml:"type,attr,omitempty"`
 
-	// generated from element "top-margin" of type tenths
+	// generated from element "top-margin" of type tenths order 437
 	Top_margin string `xml:"top-margin"`
 
-	// generated from element "bottom-margin" of type tenths
+	// generated from element "bottom-margin" of type tenths order 438
 	Bottom_margin string `xml:"bottom-margin"`
 
-	// generated from element "left-margin" of type tenths
+	// generated from element "left-margin" of type tenths order 442
 	Left_margin string `xml:"left-margin"`
 
-	// generated from element "right-margin" of type tenths
+	// generated from element "right-margin" of type tenths order 443
 	Right_margin string `xml:"right-margin"`
 }
 
@@ -3365,13 +3365,13 @@ type Part_clef struct {
 
 	// insertion point for fields
 
-	// generated from element "sign" of type clef-sign
+	// generated from element "sign" of type clef-sign order 410
 	Sign string `xml:"sign"`
 
-	// generated from element "line" of type staff-line-position
+	// generated from element "line" of type staff-line-position order 411
 	Line int `xml:"line"`
 
-	// generated from element "clef-octave-change" of type xs:integer
+	// generated from element "clef-octave-change" of type xs:integer order 412
 	Clef_octave_change int `xml:"clef-octave-change"`
 }
 
@@ -3387,31 +3387,31 @@ type Part_group struct {
 	// generated from attribute "number" of type xs:token
 	Number string `xml:"number,attr,omitempty"`
 
-	// generated from element "group-name" of type group-name
+	// generated from element "group-name" of type group-name order 371
 	Group_name []*Group_name `xml:"group-name"`
 
-	// generated from element "group-name-display" of type name-display
+	// generated from element "group-name-display" of type name-display order 372
 	Group_name_display []*Name_display `xml:"group-name-display"`
 
-	// generated from element "group-abbreviation" of type group-name
+	// generated from element "group-abbreviation" of type group-name order 373
 	Group_abbreviation []*Group_name `xml:"group-abbreviation"`
 
-	// generated from element "group-abbreviation-display" of type name-display
+	// generated from element "group-abbreviation-display" of type name-display order 374
 	Group_abbreviation_display []*Name_display `xml:"group-abbreviation-display"`
 
-	// generated from element "group-symbol" of type group-symbol
+	// generated from element "group-symbol" of type group-symbol order 375
 	Group_symbol []*Group_symbol `xml:"group-symbol"`
 
-	// generated from element "group-barline" of type group-barline
+	// generated from element "group-barline" of type group-barline order 376
 	Group_barline []*Group_barline `xml:"group-barline"`
 
-	// generated from element "group-time" of type empty
+	// generated from element "group-time" of type empty order 377
 	Group_time string `xml:"group-time"`
 
-	// generated from element "footnote" of type formatted-text
+	// generated from element "footnote" of type formatted-text order 399
 	Footnote []*Formatted_text `xml:"footnote"`
 
-	// generated from element "level" of type level
+	// generated from element "level" of type level order 400
 	Level []*Level `xml:"level"`
 }
 
@@ -3424,10 +3424,10 @@ type Part_link struct {
 	// generated from attribute group "link-attributes
 	AttributeGroup_link_attributes
 
-	// generated from element "instrument-link" of type instrument-link
+	// generated from element "instrument-link" of type instrument-link order 378
 	Instrument_link []*Instrument_link `xml:"instrument-link"`
 
-	// generated from element "group-link" of type xs:string
+	// generated from element "group-link" of type xs:string order 379
 	Group_link string `xml:"group-link"`
 }
 
@@ -3437,10 +3437,10 @@ type Part_list struct {
 
 	// insertion point for fields
 
-	// generated from element "part-group" of type part-group
+	// generated from element "part-group" of type part-group order 465
 	Part_group []*Part_group `xml:"part-group"`
 
-	// generated from element "score-part" of type score-part
+	// generated from element "score-part" of type score-part order 473
 	Score_part []*Score_part `xml:"score-part"`
 }
 
@@ -3476,16 +3476,16 @@ type Part_transpose struct {
 
 	// insertion point for fields
 
-	// generated from element "diatonic" of type xs:integer
+	// generated from element "diatonic" of type xs:integer order 424
 	Diatonic int `xml:"diatonic"`
 
-	// generated from element "chromatic" of type semitones
+	// generated from element "chromatic" of type semitones order 425
 	Chromatic string `xml:"chromatic"`
 
-	// generated from element "octave-change" of type xs:integer
+	// generated from element "octave-change" of type xs:integer order 426
 	Octave_change int `xml:"octave-change"`
 
-	// generated from element "double" of type double
+	// generated from element "double" of type double order 427
 	Double []*Double `xml:"double"`
 }
 
@@ -3523,10 +3523,10 @@ type Pedal_tuning struct {
 
 	// insertion point for fields
 
-	// generated from element "pedal-step" of type step
+	// generated from element "pedal-step" of type step order 145
 	Pedal_step string `xml:"pedal-step"`
 
-	// generated from element "pedal-alter" of type semitones
+	// generated from element "pedal-alter" of type semitones order 146
 	Pedal_alter string `xml:"pedal-alter"`
 }
 
@@ -3555,37 +3555,37 @@ type Percussion struct {
 	// generated from attribute group "optional-unique-id
 	AttributeGroup_optional_unique_id
 
-	// generated from element "glass" of type glass
+	// generated from element "glass" of type glass order 147
 	Glass []*Glass `xml:"glass"`
 
-	// generated from element "metal" of type metal
+	// generated from element "metal" of type metal order 148
 	Metal []*Metal `xml:"metal"`
 
-	// generated from element "wood" of type wood
+	// generated from element "wood" of type wood order 149
 	Wood []*Wood `xml:"wood"`
 
-	// generated from element "pitched" of type pitched
+	// generated from element "pitched" of type pitched order 150
 	Pitched []*Pitched `xml:"pitched"`
 
-	// generated from element "membrane" of type membrane
+	// generated from element "membrane" of type membrane order 151
 	Membrane []*Membrane `xml:"membrane"`
 
-	// generated from element "effect" of type effect
+	// generated from element "effect" of type effect order 152
 	Effect []*Effect `xml:"effect"`
 
-	// generated from element "timpani" of type timpani
+	// generated from element "timpani" of type timpani order 153
 	Timpani []*Timpani `xml:"timpani"`
 
-	// generated from element "beater" of type beater
+	// generated from element "beater" of type beater order 154
 	Beater []*Beater `xml:"beater"`
 
-	// generated from element "stick" of type stick
+	// generated from element "stick" of type stick order 155
 	Stick []*Stick `xml:"stick"`
 
-	// generated from element "stick-location" of type stick-location
+	// generated from element "stick-location" of type stick-location order 156
 	Stick_location string `xml:"stick-location"`
 
-	// generated from element "other-percussion" of type other-text
+	// generated from element "other-percussion" of type other-text order 157
 	Other_percussion []*Other_text `xml:"other-percussion"`
 }
 
@@ -3595,13 +3595,13 @@ type Pitch struct {
 
 	// insertion point for fields
 
-	// generated from element "step" of type step
+	// generated from element "step" of type step order 311
 	Step string `xml:"step"`
 
-	// generated from element "alter" of type semitones
+	// generated from element "alter" of type semitones order 312
 	Alter string `xml:"alter"`
 
-	// generated from element "octave" of type octave
+	// generated from element "octave" of type octave order 313
 	Octave int `xml:"octave"`
 }
 
@@ -3637,16 +3637,16 @@ type Play struct {
 	// generated from attribute "id" of type xs:IDREF
 	Id string `xml:"id,attr,omitempty"`
 
-	// generated from element "ipa" of type xs:string
+	// generated from element "ipa" of type xs:string order 37
 	Ipa string `xml:"ipa"`
 
-	// generated from element "mute" of type mute
+	// generated from element "mute" of type mute order 38
 	Mute string `xml:"mute"`
 
-	// generated from element "semi-pitched" of type semi-pitched
+	// generated from element "semi-pitched" of type semi-pitched order 39
 	Semi_pitched string `xml:"semi-pitched"`
 
-	// generated from element "other-play" of type other-play
+	// generated from element "other-play" of type other-play order 40
 	Other_play []*Other_play `xml:"other-play"`
 }
 
@@ -3659,7 +3659,7 @@ type Player struct {
 	// generated from attribute "id" of type xs:ID
 	Id string `xml:"id,attr,omitempty"`
 
-	// generated from element "player-name" of type xs:string
+	// generated from element "player-name" of type xs:string order 380
 	Player_name string `xml:"player-name"`
 }
 
@@ -3691,25 +3691,25 @@ type Print struct {
 	// generated from attribute group "optional-unique-id
 	AttributeGroup_optional_unique_id
 
-	// generated from element "measure-layout" of type measure-layout
+	// generated from element "measure-layout" of type measure-layout order 158
 	Measure_layout []*Measure_layout `xml:"measure-layout"`
 
-	// generated from element "measure-numbering" of type measure-numbering
+	// generated from element "measure-numbering" of type measure-numbering order 159
 	Measure_numbering []*Measure_numbering `xml:"measure-numbering"`
 
-	// generated from element "part-name-display" of type name-display
+	// generated from element "part-name-display" of type name-display order 160
 	Part_name_display []*Name_display `xml:"part-name-display"`
 
-	// generated from element "part-abbreviation-display" of type name-display
+	// generated from element "part-abbreviation-display" of type name-display order 161
 	Part_abbreviation_display []*Name_display `xml:"part-abbreviation-display"`
 
-	// generated from element "page-layout" of type page-layout
+	// generated from element "page-layout" of type page-layout order 439
 	Page_layout []*Page_layout `xml:"page-layout"`
 
-	// generated from element "system-layout" of type system-layout
+	// generated from element "system-layout" of type system-layout order 440
 	System_layout []*System_layout `xml:"system-layout"`
 
-	// generated from element "staff-layout" of type staff-layout
+	// generated from element "staff-layout" of type staff-layout order 441
 	Staff_layout []*Staff_layout `xml:"staff-layout"`
 }
 
@@ -3748,10 +3748,10 @@ type Rest struct {
 	// generated from attribute "measure" of type yes-no
 	Measure string `xml:"measure,attr,omitempty"`
 
-	// generated from element "display-step" of type step
+	// generated from element "display-step" of type step order 445
 	Display_step string `xml:"display-step"`
 
-	// generated from element "display-octave" of type octave
+	// generated from element "display-octave" of type octave order 446
 	Display_octave int `xml:"display-octave"`
 }
 
@@ -3761,10 +3761,10 @@ type Root struct {
 
 	// insertion point for fields
 
-	// generated from element "root-step" of type root-step
+	// generated from element "root-step" of type root-step order 162
 	Root_step []*Root_step `xml:"root-step"`
 
-	// generated from element "root-alter" of type harmony-alter
+	// generated from element "root-alter" of type harmony-alter order 163
 	Root_alter []*Harmony_alter `xml:"root-alter"`
 }
 
@@ -3787,10 +3787,10 @@ type Scaling struct {
 
 	// insertion point for fields
 
-	// generated from element "millimeters" of type millimeters
+	// generated from element "millimeters" of type millimeters order 199
 	Millimeters string `xml:"millimeters"`
 
-	// generated from element "tenths" of type tenths
+	// generated from element "tenths" of type tenths order 200
 	Tenths string `xml:"tenths"`
 }
 
@@ -3803,7 +3803,7 @@ type Scordatura struct {
 	// generated from attribute group "optional-unique-id
 	AttributeGroup_optional_unique_id
 
-	// generated from element "accord" of type accord
+	// generated from element "accord" of type accord order 164
 	Accord []*Accord `xml:"accord"`
 }
 
@@ -3816,22 +3816,22 @@ type Score_instrument struct {
 	// generated from attribute "id" of type xs:ID
 	Id string `xml:"id,attr,omitempty"`
 
-	// generated from element "instrument-name" of type xs:string
+	// generated from element "instrument-name" of type xs:string order 381
 	Instrument_name string `xml:"instrument-name"`
 
-	// generated from element "instrument-abbreviation" of type xs:string
+	// generated from element "instrument-abbreviation" of type xs:string order 382
 	Instrument_abbreviation string `xml:"instrument-abbreviation"`
 
-	// generated from element "instrument-sound" of type xs:string
+	// generated from element "instrument-sound" of type xs:string order 405
 	Instrument_sound string `xml:"instrument-sound"`
 
-	// generated from element "solo" of type empty
+	// generated from element "solo" of type empty order 406
 	Solo string `xml:"solo"`
 
-	// generated from element "ensemble" of type positive-integer-or-empty
+	// generated from element "ensemble" of type positive-integer-or-empty order 407
 	Ensemble string `xml:"ensemble"`
 
-	// generated from element "virtual-instrument" of type virtual-instrument
+	// generated from element "virtual-instrument" of type virtual-instrument order 408
 	Virtual_instrument []*Virtual_instrument `xml:"virtual-instrument"`
 }
 
@@ -3844,37 +3844,37 @@ type Score_part struct {
 	// generated from attribute "id" of type xs:ID
 	Id string `xml:"id,attr,omitempty"`
 
-	// generated from element "identification" of type identification
+	// generated from element "identification" of type identification order 383
 	Identification []*Identification `xml:"identification"`
 
-	// generated from element "part-link" of type part-link
+	// generated from element "part-link" of type part-link order 384
 	Part_link []*Part_link `xml:"part-link"`
 
-	// generated from element "part-name" of type part-name
+	// generated from element "part-name" of type part-name order 385
 	Part_name []*Part_name `xml:"part-name"`
 
-	// generated from element "part-name-display" of type name-display
+	// generated from element "part-name-display" of type name-display order 386
 	Part_name_display []*Name_display `xml:"part-name-display"`
 
-	// generated from element "part-abbreviation" of type part-name
+	// generated from element "part-abbreviation" of type part-name order 387
 	Part_abbreviation []*Part_name `xml:"part-abbreviation"`
 
-	// generated from element "part-abbreviation-display" of type name-display
+	// generated from element "part-abbreviation-display" of type name-display order 388
 	Part_abbreviation_display []*Name_display `xml:"part-abbreviation-display"`
 
-	// generated from element "group" of type xs:string
+	// generated from element "group" of type xs:string order 389
 	Group string `xml:"group"`
 
-	// generated from element "score-instrument" of type score-instrument
+	// generated from element "score-instrument" of type score-instrument order 390
 	Score_instrument []*Score_instrument `xml:"score-instrument"`
 
-	// generated from element "player" of type player
+	// generated from element "player" of type player order 391
 	Player []*Player `xml:"player"`
 
-	// generated from element "midi-device" of type midi-device
+	// generated from element "midi-device" of type midi-device order 392
 	Midi_device []*Midi_device `xml:"midi-device"`
 
-	// generated from element "midi-instrument" of type midi-instrument
+	// generated from element "midi-instrument" of type midi-instrument order 393
 	Midi_instrument []*Midi_instrument `xml:"midi-instrument"`
 }
 
@@ -3909,13 +3909,13 @@ type Slash struct {
 	// generated from attribute "use-stems" of type yes-no
 	Use_stems string `xml:"use-stems,attr,omitempty"`
 
-	// generated from element "slash-type" of type note-type-value
+	// generated from element "slash-type" of type note-type-value order 416
 	Slash_type string `xml:"slash-type"`
 
-	// generated from element "slash-dot" of type empty
+	// generated from element "slash-dot" of type empty order 417
 	Slash_dot string `xml:"slash-dot"`
 
-	// generated from element "except-voice" of type xs:string
+	// generated from element "except-voice" of type xs:string order 418
 	Except_voice string `xml:"except-voice"`
 }
 
@@ -4032,22 +4032,22 @@ type Sound struct {
 	// generated from attribute group "optional-unique-id
 	AttributeGroup_optional_unique_id
 
-	// generated from element "instrument-change" of type instrument-change
+	// generated from element "instrument-change" of type instrument-change order 165
 	Instrument_change []*Instrument_change `xml:"instrument-change"`
 
-	// generated from element "midi-device" of type midi-device
+	// generated from element "midi-device" of type midi-device order 166
 	Midi_device []*Midi_device `xml:"midi-device"`
 
-	// generated from element "midi-instrument" of type midi-instrument
+	// generated from element "midi-instrument" of type midi-instrument order 167
 	Midi_instrument []*Midi_instrument `xml:"midi-instrument"`
 
-	// generated from element "play" of type play
+	// generated from element "play" of type play order 168
 	Play []*Play `xml:"play"`
 
-	// generated from element "swing" of type swing
+	// generated from element "swing" of type swing order 169
 	Swing []*Swing `xml:"swing"`
 
-	// generated from element "offset" of type offset
+	// generated from element "offset" of type offset order 170
 	Offset []*Offset `xml:"offset"`
 }
 
@@ -4069,22 +4069,22 @@ type Staff_details struct {
 	// generated from attribute group "print-spacing
 	AttributeGroup_print_spacing
 
-	// generated from element "staff-type" of type staff-type
+	// generated from element "staff-type" of type staff-type order 61
 	Staff_type string `xml:"staff-type"`
 
-	// generated from element "staff-lines" of type xs:nonNegativeInteger
+	// generated from element "staff-lines" of type xs:nonNegativeInteger order 62
 	Staff_lines int `xml:"staff-lines"`
 
-	// generated from element "line-detail" of type line-detail
+	// generated from element "line-detail" of type line-detail order 63
 	Line_detail []*Line_detail `xml:"line-detail"`
 
-	// generated from element "staff-tuning" of type staff-tuning
+	// generated from element "staff-tuning" of type staff-tuning order 64
 	Staff_tuning []*Staff_tuning `xml:"staff-tuning"`
 
-	// generated from element "capo" of type xs:nonNegativeInteger
+	// generated from element "capo" of type xs:nonNegativeInteger order 65
 	Capo int `xml:"capo"`
 
-	// generated from element "staff-size" of type staff-size
+	// generated from element "staff-size" of type staff-size order 66
 	Staff_size []*Staff_size `xml:"staff-size"`
 }
 
@@ -4113,7 +4113,7 @@ type Staff_layout struct {
 	// generated from attribute "number" of type staff-number
 	Number int `xml:"number,attr,omitempty"`
 
-	// generated from element "staff-distance" of type tenths
+	// generated from element "staff-distance" of type tenths order 201
 	Staff_distance string `xml:"staff-distance"`
 }
 
@@ -4139,13 +4139,13 @@ type Staff_tuning struct {
 	// generated from attribute "line" of type staff-line
 	Line int `xml:"line,attr,omitempty"`
 
-	// generated from element "tuning-step" of type step
+	// generated from element "tuning-step" of type step order 402
 	Tuning_step string `xml:"tuning-step"`
 
-	// generated from element "tuning-alter" of type semitones
+	// generated from element "tuning-alter" of type semitones order 403
 	Tuning_alter string `xml:"tuning-alter"`
 
-	// generated from element "tuning-octave" of type octave
+	// generated from element "tuning-octave" of type octave order 404
 	Tuning_octave int `xml:"tuning-octave"`
 }
 
@@ -4174,10 +4174,10 @@ type Stick struct {
 	// generated from attribute "dashed-circle" of type yes-no
 	Dashed_circle string `xml:"dashed-circle,attr,omitempty"`
 
-	// generated from element "stick-type" of type stick-type
+	// generated from element "stick-type" of type stick-type order 171
 	Stick_type string `xml:"stick-type"`
 
-	// generated from element "stick-material" of type stick-material
+	// generated from element "stick-material" of type stick-material order 172
 	Stick_material string `xml:"stick-material"`
 }
 
@@ -4249,19 +4249,19 @@ type Swing struct {
 
 	// insertion point for fields
 
-	// generated from element "straight" of type empty
+	// generated from element "straight" of type empty order 173
 	Straight string `xml:"straight"`
 
-	// generated from element "first" of type xs:positiveInteger
+	// generated from element "first" of type xs:positiveInteger order 174
 	First int `xml:"first"`
 
-	// generated from element "second" of type xs:positiveInteger
+	// generated from element "second" of type xs:positiveInteger order 175
 	Second int `xml:"second"`
 
-	// generated from element "swing-type" of type swing-type-value
+	// generated from element "swing-type" of type swing-type-value order 176
 	Swing_type string `xml:"swing-type"`
 
-	// generated from element "swing-style" of type xs:string
+	// generated from element "swing-style" of type xs:string order 177
 	Swing_style string `xml:"swing-style"`
 }
 
@@ -4290,10 +4290,10 @@ type System_dividers struct {
 
 	// insertion point for fields
 
-	// generated from element "left-divider" of type empty-print-object-style-align
+	// generated from element "left-divider" of type empty-print-object-style-align order 202
 	Left_divider []*Empty_print_object_style_align `xml:"left-divider"`
 
-	// generated from element "right-divider" of type empty-print-object-style-align
+	// generated from element "right-divider" of type empty-print-object-style-align order 203
 	Right_divider []*Empty_print_object_style_align `xml:"right-divider"`
 }
 
@@ -4303,16 +4303,16 @@ type System_layout struct {
 
 	// insertion point for fields
 
-	// generated from element "system-margins" of type system-margins
+	// generated from element "system-margins" of type system-margins order 204
 	System_margins []*System_margins `xml:"system-margins"`
 
-	// generated from element "system-distance" of type tenths
+	// generated from element "system-distance" of type tenths order 205
 	System_distance string `xml:"system-distance"`
 
-	// generated from element "top-system-distance" of type tenths
+	// generated from element "top-system-distance" of type tenths order 206
 	Top_system_distance string `xml:"top-system-distance"`
 
-	// generated from element "system-dividers" of type system-dividers
+	// generated from element "system-dividers" of type system-dividers order 207
 	System_dividers []*System_dividers `xml:"system-dividers"`
 }
 
@@ -4322,10 +4322,10 @@ type System_margins struct {
 
 	// insertion point for fields
 
-	// generated from element "left-margin" of type tenths
+	// generated from element "left-margin" of type tenths order 442
 	Left_margin string `xml:"left-margin"`
 
-	// generated from element "right-margin" of type tenths
+	// generated from element "right-margin" of type tenths order 443
 	Right_margin string `xml:"right-margin"`
 }
 
@@ -4351,97 +4351,97 @@ type Technical struct {
 	// generated from attribute group "optional-unique-id
 	AttributeGroup_optional_unique_id
 
-	// generated from element "up-bow" of type empty-placement
+	// generated from element "up-bow" of type empty-placement order 314
 	Up_bow []*Empty_placement `xml:"up-bow"`
 
-	// generated from element "down-bow" of type empty-placement
+	// generated from element "down-bow" of type empty-placement order 315
 	Down_bow []*Empty_placement `xml:"down-bow"`
 
-	// generated from element "harmonic" of type harmonic
+	// generated from element "harmonic" of type harmonic order 316
 	Harmonic []*Harmonic `xml:"harmonic"`
 
-	// generated from element "open-string" of type empty-placement
+	// generated from element "open-string" of type empty-placement order 317
 	Open_string []*Empty_placement `xml:"open-string"`
 
-	// generated from element "thumb-position" of type empty-placement
+	// generated from element "thumb-position" of type empty-placement order 318
 	Thumb_position []*Empty_placement `xml:"thumb-position"`
 
-	// generated from element "fingering" of type fingering
+	// generated from element "fingering" of type fingering order 319
 	Fingering []*Fingering `xml:"fingering"`
 
-	// generated from element "pluck" of type placement-text
+	// generated from element "pluck" of type placement-text order 320
 	Pluck []*Placement_text `xml:"pluck"`
 
-	// generated from element "double-tongue" of type empty-placement
+	// generated from element "double-tongue" of type empty-placement order 321
 	Double_tongue []*Empty_placement `xml:"double-tongue"`
 
-	// generated from element "triple-tongue" of type empty-placement
+	// generated from element "triple-tongue" of type empty-placement order 322
 	Triple_tongue []*Empty_placement `xml:"triple-tongue"`
 
-	// generated from element "stopped" of type empty-placement-smufl
+	// generated from element "stopped" of type empty-placement-smufl order 323
 	Stopped []*Empty_placement_smufl `xml:"stopped"`
 
-	// generated from element "snap-pizzicato" of type empty-placement
+	// generated from element "snap-pizzicato" of type empty-placement order 324
 	Snap_pizzicato []*Empty_placement `xml:"snap-pizzicato"`
 
-	// generated from element "fret" of type fret
+	// generated from element "fret" of type fret order 325
 	Fret []*Fret `xml:"fret"`
 
-	// generated from element "string" of type string-type
+	// generated from element "string" of type string-type order 326
 	String []*String_type `xml:"string"`
 
-	// generated from element "hammer-on" of type hammer-on-pull-off
+	// generated from element "hammer-on" of type hammer-on-pull-off order 327
 	Hammer_on []*Hammer_on_pull_off `xml:"hammer-on"`
 
-	// generated from element "pull-off" of type hammer-on-pull-off
+	// generated from element "pull-off" of type hammer-on-pull-off order 328
 	Pull_off []*Hammer_on_pull_off `xml:"pull-off"`
 
-	// generated from element "bend" of type bend
+	// generated from element "bend" of type bend order 329
 	Bend []*Bend `xml:"bend"`
 
-	// generated from element "tap" of type tap
+	// generated from element "tap" of type tap order 330
 	Tap []*Tap `xml:"tap"`
 
-	// generated from element "heel" of type heel-toe
+	// generated from element "heel" of type heel-toe order 331
 	Heel []*Heel_toe `xml:"heel"`
 
-	// generated from element "toe" of type heel-toe
+	// generated from element "toe" of type heel-toe order 332
 	Toe []*Heel_toe `xml:"toe"`
 
-	// generated from element "fingernails" of type empty-placement
+	// generated from element "fingernails" of type empty-placement order 333
 	Fingernails []*Empty_placement `xml:"fingernails"`
 
-	// generated from element "hole" of type hole
+	// generated from element "hole" of type hole order 334
 	Hole []*Hole `xml:"hole"`
 
-	// generated from element "arrow" of type arrow
+	// generated from element "arrow" of type arrow order 335
 	Arrow []*Arrow `xml:"arrow"`
 
-	// generated from element "handbell" of type handbell
+	// generated from element "handbell" of type handbell order 336
 	Handbell []*Handbell `xml:"handbell"`
 
-	// generated from element "brass-bend" of type empty-placement
+	// generated from element "brass-bend" of type empty-placement order 337
 	Brass_bend []*Empty_placement `xml:"brass-bend"`
 
-	// generated from element "flip" of type empty-placement
+	// generated from element "flip" of type empty-placement order 338
 	Flip []*Empty_placement `xml:"flip"`
 
-	// generated from element "smear" of type empty-placement
+	// generated from element "smear" of type empty-placement order 339
 	Smear []*Empty_placement `xml:"smear"`
 
-	// generated from element "open" of type empty-placement-smufl
+	// generated from element "open" of type empty-placement-smufl order 340
 	Open []*Empty_placement_smufl `xml:"open"`
 
-	// generated from element "half-muted" of type empty-placement-smufl
+	// generated from element "half-muted" of type empty-placement-smufl order 341
 	Half_muted []*Empty_placement_smufl `xml:"half-muted"`
 
-	// generated from element "harmon-mute" of type harmon-mute
+	// generated from element "harmon-mute" of type harmon-mute order 342
 	Harmon_mute []*Harmon_mute `xml:"harmon-mute"`
 
-	// generated from element "golpe" of type empty-placement
+	// generated from element "golpe" of type empty-placement order 343
 	Golpe []*Empty_placement `xml:"golpe"`
 
-	// generated from element "other-technical" of type other-placement-text
+	// generated from element "other-technical" of type other-placement-text order 344
 	Other_technical []*Other_placement_text `xml:"other-technical"`
 }
 
@@ -4532,16 +4532,16 @@ type Time struct {
 	// generated from attribute group "optional-unique-id
 	AttributeGroup_optional_unique_id
 
-	// generated from element "interchangeable" of type interchangeable
+	// generated from element "interchangeable" of type interchangeable order 67
 	Interchangeable []*Interchangeable `xml:"interchangeable"`
 
-	// generated from element "senza-misura" of type xs:string
+	// generated from element "senza-misura" of type xs:string order 68
 	Senza_misura string `xml:"senza-misura"`
 
-	// generated from element "beats" of type xs:string
+	// generated from element "beats" of type xs:string order 419
 	Beats string `xml:"beats"`
 
-	// generated from element "beat-type" of type xs:string
+	// generated from element "beat-type" of type xs:string order 420
 	Beat_type string `xml:"beat-type"`
 }
 
@@ -4551,16 +4551,16 @@ type Time_modification struct {
 
 	// insertion point for fields
 
-	// generated from element "actual-notes" of type xs:nonNegativeInteger
+	// generated from element "actual-notes" of type xs:nonNegativeInteger order 345
 	Actual_notes int `xml:"actual-notes"`
 
-	// generated from element "normal-notes" of type xs:nonNegativeInteger
+	// generated from element "normal-notes" of type xs:nonNegativeInteger order 346
 	Normal_notes int `xml:"normal-notes"`
 
-	// generated from element "normal-type" of type note-type-value
+	// generated from element "normal-type" of type note-type-value order 347
 	Normal_type string `xml:"normal-type"`
 
-	// generated from element "normal-dot" of type empty
+	// generated from element "normal-dot" of type empty order 348
 	Normal_dot string `xml:"normal-dot"`
 }
 
@@ -4586,16 +4586,16 @@ type Transpose struct {
 	// generated from attribute group "optional-unique-id
 	AttributeGroup_optional_unique_id
 
-	// generated from element "diatonic" of type xs:integer
+	// generated from element "diatonic" of type xs:integer order 424
 	Diatonic int `xml:"diatonic"`
 
-	// generated from element "chromatic" of type semitones
+	// generated from element "chromatic" of type semitones order 425
 	Chromatic string `xml:"chromatic"`
 
-	// generated from element "octave-change" of type xs:integer
+	// generated from element "octave-change" of type xs:integer order 426
 	Octave_change int `xml:"octave-change"`
 
-	// generated from element "double" of type double
+	// generated from element "double" of type double order 427
 	Double []*Double `xml:"double"`
 }
 
@@ -4645,10 +4645,10 @@ type Tuplet struct {
 	// generated from attribute group "optional-unique-id
 	AttributeGroup_optional_unique_id
 
-	// generated from element "tuplet-actual" of type tuplet-portion
+	// generated from element "tuplet-actual" of type tuplet-portion order 349
 	Tuplet_actual []*Tuplet_portion `xml:"tuplet-actual"`
 
-	// generated from element "tuplet-normal" of type tuplet-portion
+	// generated from element "tuplet-normal" of type tuplet-portion order 350
 	Tuplet_normal []*Tuplet_portion `xml:"tuplet-normal"`
 }
 
@@ -4681,13 +4681,13 @@ type Tuplet_portion struct {
 
 	// insertion point for fields
 
-	// generated from element "tuplet-number" of type tuplet-number
+	// generated from element "tuplet-number" of type tuplet-number order 351
 	Tuplet_number []*Tuplet_number `xml:"tuplet-number"`
 
-	// generated from element "tuplet-type" of type tuplet-type
+	// generated from element "tuplet-type" of type tuplet-type order 352
 	Tuplet_type []*Tuplet_type `xml:"tuplet-type"`
 
-	// generated from element "tuplet-dot" of type tuplet-dot
+	// generated from element "tuplet-dot" of type tuplet-dot order 353
 	Tuplet_dot []*Tuplet_dot `xml:"tuplet-dot"`
 }
 
@@ -4720,10 +4720,10 @@ type Unpitched struct {
 
 	// insertion point for fields
 
-	// generated from element "display-step" of type step
+	// generated from element "display-step" of type step order 445
 	Display_step string `xml:"display-step"`
 
-	// generated from element "display-octave" of type octave
+	// generated from element "display-octave" of type octave order 446
 	Display_octave int `xml:"display-octave"`
 }
 
@@ -4733,10 +4733,10 @@ type Virtual_instrument struct {
 
 	// insertion point for fields
 
-	// generated from element "virtual-library" of type xs:string
+	// generated from element "virtual-library" of type xs:string order 394
 	Virtual_library string `xml:"virtual-library"`
 
-	// generated from element "virtual-name" of type xs:string
+	// generated from element "virtual-name" of type xs:string order 395
 	Virtual_name string `xml:"virtual-name"`
 }
 
@@ -4834,13 +4834,13 @@ type Work struct {
 
 	// insertion point for fields
 
-	// generated from element "work-number" of type xs:string
+	// generated from element "work-number" of type xs:string order 396
 	Work_number string `xml:"work-number"`
 
-	// generated from element "work-title" of type xs:string
+	// generated from element "work-title" of type xs:string order 397
 	Work_title string `xml:"work-title"`
 
-	// generated from element "opus" of type opus
+	// generated from element "opus" of type opus order 398
 	Opus []*Opus `xml:"opus"`
 }
 
@@ -4849,16 +4849,16 @@ type Group_all_margins struct {
 
 	// insertion point for fields
 
-	// generated from element "top-margin" of type tenths
+	// generated from element "top-margin" of type tenths order 437
 	Top_margin string `xml:"top-margin"`
 
-	// generated from element "bottom-margin" of type tenths
+	// generated from element "bottom-margin" of type tenths order 438
 	Bottom_margin string `xml:"bottom-margin"`
 
-	// generated from element "left-margin" of type tenths
+	// generated from element "left-margin" of type tenths order 442
 	Left_margin string `xml:"left-margin"`
 
-	// generated from element "right-margin" of type tenths
+	// generated from element "right-margin" of type tenths order 443
 	Right_margin string `xml:"right-margin"`
 }
 
@@ -4867,10 +4867,10 @@ type Group_beat_unit struct {
 
 	// insertion point for fields
 
-	// generated from element "beat-unit" of type note-type-value
+	// generated from element "beat-unit" of type note-type-value order 428
 	Beat_unit string `xml:"beat-unit"`
 
-	// generated from element "beat-unit-dot" of type empty
+	// generated from element "beat-unit-dot" of type empty order 429
 	Beat_unit_dot string `xml:"beat-unit-dot"`
 }
 
@@ -4879,13 +4879,13 @@ type Group_clef struct {
 
 	// insertion point for fields
 
-	// generated from element "sign" of type clef-sign
+	// generated from element "sign" of type clef-sign order 410
 	Sign string `xml:"sign"`
 
-	// generated from element "line" of type staff-line-position
+	// generated from element "line" of type staff-line-position order 411
 	Line int `xml:"line"`
 
-	// generated from element "clef-octave-change" of type xs:integer
+	// generated from element "clef-octave-change" of type xs:integer order 412
 	Clef_octave_change int `xml:"clef-octave-change"`
 }
 
@@ -4894,10 +4894,10 @@ type Group_display_step_octave struct {
 
 	// insertion point for fields
 
-	// generated from element "display-step" of type step
+	// generated from element "display-step" of type step order 445
 	Display_step string `xml:"display-step"`
 
-	// generated from element "display-octave" of type octave
+	// generated from element "display-octave" of type octave order 446
 	Display_octave int `xml:"display-octave"`
 }
 
@@ -4906,7 +4906,7 @@ type Group_duration struct {
 
 	// insertion point for fields
 
-	// generated from element "duration" of type positive-divisions
+	// generated from element "duration" of type positive-divisions order 444
 	Duration string `xml:"duration"`
 }
 
@@ -4915,10 +4915,10 @@ type Group_editorial struct {
 
 	// insertion point for fields
 
-	// generated from element "footnote" of type formatted-text
+	// generated from element "footnote" of type formatted-text order 399
 	Footnote []*Formatted_text `xml:"footnote"`
 
-	// generated from element "level" of type level
+	// generated from element "level" of type level order 400
 	Level []*Level `xml:"level"`
 }
 
@@ -4927,13 +4927,13 @@ type Group_editorial_voice struct {
 
 	// insertion point for fields
 
-	// generated from element "footnote" of type formatted-text
+	// generated from element "footnote" of type formatted-text order 399
 	Footnote []*Formatted_text `xml:"footnote"`
 
-	// generated from element "level" of type level
+	// generated from element "level" of type level order 400
 	Level []*Level `xml:"level"`
 
-	// generated from element "voice" of type xs:string
+	// generated from element "voice" of type xs:string order 409
 	Voice string `xml:"voice"`
 }
 
@@ -4942,13 +4942,13 @@ type Group_editorial_voice_direction struct {
 
 	// insertion point for fields
 
-	// generated from element "footnote" of type formatted-text
+	// generated from element "footnote" of type formatted-text order 399
 	Footnote []*Formatted_text `xml:"footnote"`
 
-	// generated from element "level" of type level
+	// generated from element "level" of type level order 400
 	Level []*Level `xml:"level"`
 
-	// generated from element "voice" of type xs:string
+	// generated from element "voice" of type xs:string order 409
 	Voice string `xml:"voice"`
 }
 
@@ -4957,7 +4957,7 @@ type Group_footnote struct {
 
 	// insertion point for fields
 
-	// generated from element "footnote" of type formatted-text
+	// generated from element "footnote" of type formatted-text order 399
 	Footnote []*Formatted_text `xml:"footnote"`
 }
 
@@ -4966,16 +4966,16 @@ type Group_full_note struct {
 
 	// insertion point for fields
 
-	// generated from element "chord" of type empty
+	// generated from element "chord" of type empty order 447
 	Chord string `xml:"chord"`
 
-	// generated from element "pitch" of type pitch
+	// generated from element "pitch" of type pitch order 448
 	Pitch []*Pitch `xml:"pitch"`
 
-	// generated from element "unpitched" of type unpitched
+	// generated from element "unpitched" of type unpitched order 449
 	Unpitched []*Unpitched `xml:"unpitched"`
 
-	// generated from element "rest" of type rest
+	// generated from element "rest" of type rest order 450
 	Rest []*Rest `xml:"rest"`
 }
 
@@ -4984,25 +4984,25 @@ type Group_harmony_chord struct {
 
 	// insertion point for fields
 
-	// generated from element "root" of type root
+	// generated from element "root" of type root order 430
 	Root []*Root `xml:"root"`
 
-	// generated from element "numeral" of type numeral
+	// generated from element "numeral" of type numeral order 431
 	Numeral []*Numeral `xml:"numeral"`
 
-	// generated from element "function" of type style-text
+	// generated from element "function" of type style-text order 432
 	Function []*Style_text `xml:"function"`
 
-	// generated from element "kind" of type kind
+	// generated from element "kind" of type kind order 433
 	Kind []*Kind `xml:"kind"`
 
-	// generated from element "inversion" of type inversion
+	// generated from element "inversion" of type inversion order 434
 	Inversion []*Inversion `xml:"inversion"`
 
-	// generated from element "bass" of type bass
+	// generated from element "bass" of type bass order 435
 	Bass []*Bass `xml:"bass"`
 
-	// generated from element "degree" of type degree
+	// generated from element "degree" of type degree order 436
 	Degree []*Degree `xml:"degree"`
 }
 
@@ -5011,13 +5011,13 @@ type Group_layout struct {
 
 	// insertion point for fields
 
-	// generated from element "page-layout" of type page-layout
+	// generated from element "page-layout" of type page-layout order 439
 	Page_layout []*Page_layout `xml:"page-layout"`
 
-	// generated from element "system-layout" of type system-layout
+	// generated from element "system-layout" of type system-layout order 440
 	System_layout []*System_layout `xml:"system-layout"`
 
-	// generated from element "staff-layout" of type staff-layout
+	// generated from element "staff-layout" of type staff-layout order 441
 	Staff_layout []*Staff_layout `xml:"staff-layout"`
 }
 
@@ -5026,10 +5026,10 @@ type Group_left_right_margins struct {
 
 	// insertion point for fields
 
-	// generated from element "left-margin" of type tenths
+	// generated from element "left-margin" of type tenths order 442
 	Left_margin string `xml:"left-margin"`
 
-	// generated from element "right-margin" of type tenths
+	// generated from element "right-margin" of type tenths order 443
 	Right_margin string `xml:"right-margin"`
 }
 
@@ -5038,7 +5038,7 @@ type Group_level struct {
 
 	// insertion point for fields
 
-	// generated from element "level" of type level
+	// generated from element "level" of type level order 400
 	Level []*Level `xml:"level"`
 }
 
@@ -5047,46 +5047,46 @@ type Group_music_data struct {
 
 	// insertion point for fields
 
-	// generated from element "note" of type note
+	// generated from element "note" of type note order 451
 	Note []*Note `xml:"note"`
 
-	// generated from element "backup" of type backup
+	// generated from element "backup" of type backup order 452
 	Backup []*Backup `xml:"backup"`
 
-	// generated from element "forward" of type forward
+	// generated from element "forward" of type forward order 453
 	Forward []*Forward `xml:"forward"`
 
-	// generated from element "direction" of type direction
+	// generated from element "direction" of type direction order 454
 	Direction []*Direction `xml:"direction"`
 
-	// generated from element "attributes" of type attributes
+	// generated from element "attributes" of type attributes order 455
 	Attributes []*Attributes `xml:"attributes"`
 
-	// generated from element "harmony" of type harmony
+	// generated from element "harmony" of type harmony order 456
 	Harmony []*Harmony `xml:"harmony"`
 
-	// generated from element "figured-bass" of type figured-bass
+	// generated from element "figured-bass" of type figured-bass order 457
 	Figured_bass []*Figured_bass `xml:"figured-bass"`
 
-	// generated from element "print" of type print
+	// generated from element "print" of type print order 458
 	Print []*Print `xml:"print"`
 
-	// generated from element "sound" of type sound
+	// generated from element "sound" of type sound order 459
 	Sound []*Sound `xml:"sound"`
 
-	// generated from element "listening" of type listening
+	// generated from element "listening" of type listening order 460
 	Listening []*Listening `xml:"listening"`
 
-	// generated from element "barline" of type barline
+	// generated from element "barline" of type barline order 461
 	Barline []*Barline `xml:"barline"`
 
-	// generated from element "grouping" of type grouping
+	// generated from element "grouping" of type grouping order 462
 	Grouping []*Grouping `xml:"grouping"`
 
-	// generated from element "link" of type link
+	// generated from element "link" of type link order 463
 	Link []*Link `xml:"link"`
 
-	// generated from element "bookmark" of type bookmark
+	// generated from element "bookmark" of type bookmark order 464
 	Bookmark []*Bookmark `xml:"bookmark"`
 }
 
@@ -5095,13 +5095,13 @@ type Group_non_traditional_key struct {
 
 	// insertion point for fields
 
-	// generated from element "key-step" of type step
+	// generated from element "key-step" of type step order 413
 	Key_step string `xml:"key-step"`
 
-	// generated from element "key-alter" of type semitones
+	// generated from element "key-alter" of type semitones order 414
 	Key_alter string `xml:"key-alter"`
 
-	// generated from element "key-accidental" of type key-accidental
+	// generated from element "key-accidental" of type key-accidental order 415
 	Key_accidental []*Key_accidental `xml:"key-accidental"`
 }
 
@@ -5110,7 +5110,7 @@ type Group_part_group struct {
 
 	// insertion point for fields
 
-	// generated from element "part-group" of type part-group
+	// generated from element "part-group" of type part-group order 465
 	Part_group []*Part_group `xml:"part-group"`
 }
 
@@ -5119,25 +5119,25 @@ type Group_score_header struct {
 
 	// insertion point for fields
 
-	// generated from element "work" of type work
+	// generated from element "work" of type work order 466
 	Work []*Work `xml:"work"`
 
-	// generated from element "movement-number" of type xs:string
+	// generated from element "movement-number" of type xs:string order 467
 	Movement_number string `xml:"movement-number"`
 
-	// generated from element "movement-title" of type xs:string
+	// generated from element "movement-title" of type xs:string order 468
 	Movement_title string `xml:"movement-title"`
 
-	// generated from element "identification" of type identification
+	// generated from element "identification" of type identification order 469
 	Identification []*Identification `xml:"identification"`
 
-	// generated from element "defaults" of type defaults
+	// generated from element "defaults" of type defaults order 470
 	Defaults []*Defaults `xml:"defaults"`
 
-	// generated from element "credit" of type credit
+	// generated from element "credit" of type credit order 471
 	Credit []*Credit `xml:"credit"`
 
-	// generated from element "part-list" of type part-list
+	// generated from element "part-list" of type part-list order 472
 	Part_list []*Part_list `xml:"part-list"`
 }
 
@@ -5146,7 +5146,7 @@ type Group_score_part struct {
 
 	// insertion point for fields
 
-	// generated from element "score-part" of type score-part
+	// generated from element "score-part" of type score-part order 473
 	Score_part []*Score_part `xml:"score-part"`
 }
 
@@ -5155,13 +5155,13 @@ type Group_slash struct {
 
 	// insertion point for fields
 
-	// generated from element "slash-type" of type note-type-value
+	// generated from element "slash-type" of type note-type-value order 416
 	Slash_type string `xml:"slash-type"`
 
-	// generated from element "slash-dot" of type empty
+	// generated from element "slash-dot" of type empty order 417
 	Slash_dot string `xml:"slash-dot"`
 
-	// generated from element "except-voice" of type xs:string
+	// generated from element "except-voice" of type xs:string order 418
 	Except_voice string `xml:"except-voice"`
 }
 
@@ -5170,7 +5170,7 @@ type Group_staff struct {
 
 	// insertion point for fields
 
-	// generated from element "staff" of type xs:positiveInteger
+	// generated from element "staff" of type xs:positiveInteger order 401
 	Staff int `xml:"staff"`
 }
 
@@ -5179,10 +5179,10 @@ type Group_time_signature struct {
 
 	// insertion point for fields
 
-	// generated from element "beats" of type xs:string
+	// generated from element "beats" of type xs:string order 419
 	Beats string `xml:"beats"`
 
-	// generated from element "beat-type" of type xs:string
+	// generated from element "beat-type" of type xs:string order 420
 	Beat_type string `xml:"beat-type"`
 }
 
@@ -5191,13 +5191,13 @@ type Group_traditional_key struct {
 
 	// insertion point for fields
 
-	// generated from element "cancel" of type cancel
+	// generated from element "cancel" of type cancel order 421
 	Cancel []*Cancel `xml:"cancel"`
 
-	// generated from element "fifths" of type fifths
+	// generated from element "fifths" of type fifths order 422
 	Fifths int `xml:"fifths"`
 
-	// generated from element "mode" of type mode
+	// generated from element "mode" of type mode order 423
 	Mode string `xml:"mode"`
 }
 
@@ -5206,16 +5206,16 @@ type Group_transpose struct {
 
 	// insertion point for fields
 
-	// generated from element "diatonic" of type xs:integer
+	// generated from element "diatonic" of type xs:integer order 424
 	Diatonic int `xml:"diatonic"`
 
-	// generated from element "chromatic" of type semitones
+	// generated from element "chromatic" of type semitones order 425
 	Chromatic string `xml:"chromatic"`
 
-	// generated from element "octave-change" of type xs:integer
+	// generated from element "octave-change" of type xs:integer order 426
 	Octave_change int `xml:"octave-change"`
 
-	// generated from element "double" of type double
+	// generated from element "double" of type double order 427
 	Double []*Double `xml:"double"`
 }
 
@@ -5224,13 +5224,13 @@ type Group_tuning struct {
 
 	// insertion point for fields
 
-	// generated from element "tuning-step" of type step
+	// generated from element "tuning-step" of type step order 402
 	Tuning_step string `xml:"tuning-step"`
 
-	// generated from element "tuning-alter" of type semitones
+	// generated from element "tuning-alter" of type semitones order 403
 	Tuning_alter string `xml:"tuning-alter"`
 
-	// generated from element "tuning-octave" of type octave
+	// generated from element "tuning-octave" of type octave order 404
 	Tuning_octave int `xml:"tuning-octave"`
 }
 
@@ -5239,16 +5239,16 @@ type Group_virtual_instrument_data struct {
 
 	// insertion point for fields
 
-	// generated from element "instrument-sound" of type xs:string
+	// generated from element "instrument-sound" of type xs:string order 405
 	Instrument_sound string `xml:"instrument-sound"`
 
-	// generated from element "solo" of type empty
+	// generated from element "solo" of type empty order 406
 	Solo string `xml:"solo"`
 
-	// generated from element "ensemble" of type positive-integer-or-empty
+	// generated from element "ensemble" of type positive-integer-or-empty order 407
 	Ensemble string `xml:"ensemble"`
 
-	// generated from element "virtual-instrument" of type virtual-instrument
+	// generated from element "virtual-instrument" of type virtual-instrument order 408
 	Virtual_instrument []*Virtual_instrument `xml:"virtual-instrument"`
 }
 
@@ -5257,7 +5257,7 @@ type Group_voice struct {
 
 	// insertion point for fields
 
-	// generated from element "voice" of type xs:string
+	// generated from element "voice" of type xs:string order 409
 	Voice string `xml:"voice"`
 }
 
