@@ -169,7 +169,7 @@ func (modelGroup *ModelGroup) generateElements(
 					log.Println("element", elem.NameXSD, "should have an anonymous complex type", elem.Type)
 				} else {
 					ct := elem.ComplexType
-					*fields += "\n\n\t// generated from anonymous type within outer element \"" + elem.NameXSD + "\" of type " + ct.Name +
+					*fields += "\n\n\t// generated from anonymous type within outer element \"" + elem.NameXSD + "\" of type " + ct.Name + "." +
 						"\n\t" + elem.GoIdentifier + " []*" + ct.GoIdentifier + " " + "`" + `xml:"` + elem.NameXSD + `"` + "`"
 				}
 			}

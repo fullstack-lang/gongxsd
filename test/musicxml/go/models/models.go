@@ -11,7 +11,7 @@ type A_directive struct {
 
 	// insertion point for fields
 
-	// generated from attribute "http://www.w3.org/XML/1998/namespace lang" of type 
+	// generated from attribute "http://www.w3.org/XML/1998/namespace lang
 	Lang string `xml:"http://www.w3.org/XML/1998/namespace lang,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -20,18 +20,6 @@ type A_directive struct {
 
 // A_measure is generated from outer element "measure"
 type A_measure struct {
-
-	// insertion point for fields
-
-	// generated from attribute group "measure-attributes
-	AttributeGroup_measure_attributes
-
-	// generated from anonymous type within outer element "part" of type A_part
-	Part []*A_part `xml:"part"`
-}
-
-// A_measure_1 is generated from outer element "measure"
-type A_measure_1 struct {
 
 	// insertion point for fields
 
@@ -81,16 +69,16 @@ type A_measure_1 struct {
 	Bookmark []*Bookmark `xml:"bookmark"`
 }
 
-// A_part_1 is generated from outer element "part"
-type A_part_1 struct {
+// A_measure_1 is generated from outer element "measure"
+type A_measure_1 struct {
 
 	// insertion point for fields
 
-	// generated from attribute group "part-attributes
-	AttributeGroup_part_attributes
+	// generated from attribute group "measure-attributes
+	AttributeGroup_measure_attributes
 
-	// generated from anonymous type within outer element "measure" of type A_measure
-	Measure []*A_measure_1 `xml:"measure"`
+	// generated from anonymous type within outer element "part" of type A_part.
+	Part []*A_part `xml:"part"`
 }
 
 // A_part is generated from outer element "part"
@@ -144,6 +132,18 @@ type A_part struct {
 	Bookmark []*Bookmark `xml:"bookmark"`
 }
 
+// A_part_1 is generated from outer element "part"
+type A_part_1 struct {
+
+	// insertion point for fields
+
+	// generated from attribute group "part-attributes
+	AttributeGroup_part_attributes
+
+	// generated from anonymous type within outer element "measure" of type A_measure.
+	Measure []*A_measure `xml:"measure"`
+}
+
 // A_score_partwise is generated from outer element "score-partwise"
 type A_score_partwise struct {
 
@@ -173,7 +173,7 @@ type A_score_partwise struct {
 	// generated from element "part-list" of type part-list order 560 depth 1
 	Part_list []*Part_list `xml:"part-list"`
 
-	// generated from anonymous type within outer element "part" of type A_part
+	// generated from anonymous type within outer element "part" of type A_part.
 	Part []*A_part_1 `xml:"part"`
 }
 
@@ -206,8 +206,8 @@ type A_score_timewise struct {
 	// generated from element "part-list" of type part-list order 560 depth 1
 	Part_list []*Part_list `xml:"part-list"`
 
-	// generated from anonymous type within outer element "measure" of type A_measure
-	Measure []*A_measure `xml:"measure"`
+	// generated from anonymous type within outer element "measure" of type A_measure.
+	Measure []*A_measure_1 `xml:"measure"`
 }
 
 // Accidental is generated from named complex type "accidental"
@@ -216,13 +216,13 @@ type Accidental struct {
 
 	// insertion point for fields
 
-	// generated from attribute "cautionary" of type yes-no
+	// generated from attribute "cautionary
 	Cautionary string `xml:"cautionary,attr,omitempty"`
 
-	// generated from attribute "editorial" of type yes-no
+	// generated from attribute "editorial
 	Editorial string `xml:"editorial,attr,omitempty"`
 
-	// generated from attribute "smufl" of type smufl-accidental-glyph-name
+	// generated from attribute "smufl
 	Smufl string `xml:"smufl,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -235,7 +235,7 @@ type Accidental_mark struct {
 
 	// insertion point for fields
 
-	// generated from attribute "smufl" of type smufl-accidental-glyph-name
+	// generated from attribute "smufl
 	Smufl string `xml:"smufl,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -248,7 +248,7 @@ type Accidental_text struct {
 
 	// insertion point for fields
 
-	// generated from attribute "smufl" of type smufl-accidental-glyph-name
+	// generated from attribute "smufl
 	Smufl string `xml:"smufl,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -261,7 +261,7 @@ type Accord struct {
 
 	// insertion point for fields
 
-	// generated from attribute "string" of type string-number
+	// generated from attribute "string
 	String int `xml:"string,attr,omitempty"`
 
 	// generated from element "tuning-step" of type step order 470 depth 1
@@ -324,13 +324,13 @@ type Arpeggiate struct {
 
 	// insertion point for fields
 
-	// generated from attribute "number" of type number-level
+	// generated from attribute "number
 	Number int `xml:"number,attr,omitempty"`
 
-	// generated from attribute "direction" of type up-down
+	// generated from attribute "direction
 	Direction string `xml:"direction,attr,omitempty"`
 
-	// generated from attribute "unbroken" of type yes-no
+	// generated from attribute "unbroken
 	Unbroken string `xml:"unbroken,attr,omitempty"`
 
 	// generated from attribute group "position
@@ -441,13 +441,13 @@ type Assess struct {
 
 	// insertion point for fields
 
-	// generated from attribute "type" of type yes-no
+	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 
-	// generated from attribute "player" of type xs:IDREF
+	// generated from attribute "player
 	Player string `xml:"player,attr,omitempty"`
 
-	// generated from attribute "time-only" of type time-only
+	// generated from attribute "time-only
 	Time_only string `xml:"time-only,attr,omitempty"`
 }
 
@@ -487,7 +487,7 @@ type Attributes struct {
 	// generated from element "for-part" of type for-part order 51 depth 0
 	For_part []*For_part `xml:"for-part"`
 
-	// generated from anonymous type within outer element "directive" of type A_directive
+	// generated from anonymous type within outer element "directive" of type A_directive.
 	Directive []*A_directive `xml:"directive"`
 
 	// generated from element "measure-style" of type measure-style order 53 depth 0
@@ -532,16 +532,16 @@ type Barline struct {
 
 	// insertion point for fields
 
-	// generated from attribute "location" of type right-left-middle
+	// generated from attribute "location
 	Location string `xml:"location,attr,omitempty"`
 
-	// generated from attribute "segno" of type xs:token
+	// generated from attribute "segno
 	Segno string `xml:"segno,attr,omitempty"`
 
-	// generated from attribute "coda" of type xs:token
+	// generated from attribute "coda
 	Coda string `xml:"coda,attr,omitempty"`
 
-	// generated from attribute "divisions" of type divisions
+	// generated from attribute "divisions
 	Divisions string `xml:"divisions,attr,omitempty"`
 
 	// generated from attribute group "optional-unique-id
@@ -581,7 +581,7 @@ type Barre struct {
 
 	// insertion point for fields
 
-	// generated from attribute "type" of type start-stop
+	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 
 	// generated from attribute group "color
@@ -594,7 +594,7 @@ type Bass struct {
 
 	// insertion point for fields
 
-	// generated from attribute "arrangement" of type harmony-arrangement
+	// generated from attribute "arrangement
 	Arrangement string `xml:"arrangement,attr,omitempty"`
 
 	// generated from element "bass-separator" of type style-text order 93 depth 0
@@ -613,7 +613,7 @@ type Bass_step struct {
 
 	// insertion point for fields
 
-	// generated from attribute "text" of type xs:token
+	// generated from attribute "text
 	Text string `xml:"text,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -626,13 +626,13 @@ type Beam struct {
 
 	// insertion point for fields
 
-	// generated from attribute "number" of type beam-level
+	// generated from attribute "number
 	Number int `xml:"number,attr,omitempty"`
 
-	// generated from attribute "repeater" of type yes-no
+	// generated from attribute "repeater
 	Repeater string `xml:"repeater,attr,omitempty"`
 
-	// generated from attribute "fan" of type fan
+	// generated from attribute "fan
 	Fan string `xml:"fan,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -645,13 +645,13 @@ type Beat_repeat struct {
 
 	// insertion point for fields
 
-	// generated from attribute "type" of type start-stop
+	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 
-	// generated from attribute "slashes" of type xs:positiveInteger
+	// generated from attribute "slashes
 	Slashes int `xml:"slashes,attr,omitempty"`
 
-	// generated from attribute "use-dots" of type yes-no
+	// generated from attribute "use-dots
 	Use_dots string `xml:"use-dots,attr,omitempty"`
 
 	// generated from element "slash-type" of type note-type-value order 489 depth 1
@@ -683,7 +683,7 @@ type Beater struct {
 
 	// insertion point for fields
 
-	// generated from attribute "tip" of type tip-direction
+	// generated from attribute "tip
 	Tip string `xml:"tip,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -696,7 +696,7 @@ type Bend struct {
 
 	// insertion point for fields
 
-	// generated from attribute "shape" of type bend-shape
+	// generated from attribute "shape
 	Shape string `xml:"shape,attr,omitempty"`
 
 	// generated from attribute group "print-style
@@ -724,10 +724,10 @@ type Bookmark struct {
 
 	// insertion point for fields
 
-	// generated from attribute "id" of type xs:ID
+	// generated from attribute "id
 	Id string `xml:"id,attr,omitempty"`
 
-	// generated from attribute "name" of type xs:token
+	// generated from attribute "name
 	NameXSD string `xml:"name,attr,omitempty"`
 
 	// generated from attribute group "element-position
@@ -740,16 +740,16 @@ type Bracket struct {
 
 	// insertion point for fields
 
-	// generated from attribute "type" of type start-stop-continue
+	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 
-	// generated from attribute "number" of type number-level
+	// generated from attribute "number
 	Number int `xml:"number,attr,omitempty"`
 
-	// generated from attribute "line-end" of type line-end
+	// generated from attribute "line-end
 	Line_end string `xml:"line-end,attr,omitempty"`
 
-	// generated from attribute "end-length" of type tenths
+	// generated from attribute "end-length
 	End_length string `xml:"end-length,attr,omitempty"`
 
 	// generated from attribute group "line-type
@@ -794,7 +794,7 @@ type Cancel struct {
 
 	// insertion point for fields
 
-	// generated from attribute "location" of type cancel-location
+	// generated from attribute "location
 	Location string `xml:"location,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -807,16 +807,16 @@ type Clef struct {
 
 	// insertion point for fields
 
-	// generated from attribute "number" of type staff-number
+	// generated from attribute "number
 	Number int `xml:"number,attr,omitempty"`
 
-	// generated from attribute "additional" of type yes-no
+	// generated from attribute "additional
 	Additional string `xml:"additional,attr,omitempty"`
 
-	// generated from attribute "size" of type symbol-size
+	// generated from attribute "size
 	Size string `xml:"size,attr,omitempty"`
 
-	// generated from attribute "after-barline" of type yes-no
+	// generated from attribute "after-barline
 	After_barline string `xml:"after-barline,attr,omitempty"`
 
 	// generated from attribute group "print-style
@@ -844,7 +844,7 @@ type Coda struct {
 
 	// insertion point for fields
 
-	// generated from attribute "smufl" of type smufl-coda-glyph-name
+	// generated from attribute "smufl
 	Smufl string `xml:"smufl,attr,omitempty"`
 
 	// generated from attribute group "print-style-align
@@ -860,7 +860,7 @@ type Credit struct {
 
 	// insertion point for fields
 
-	// generated from attribute "page" of type xs:positiveInteger
+	// generated from attribute "page
 	Page int `xml:"page,attr,omitempty"`
 
 	// generated from attribute group "optional-unique-id
@@ -891,10 +891,10 @@ type Dashes struct {
 
 	// insertion point for fields
 
-	// generated from attribute "type" of type start-stop-continue
+	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 
-	// generated from attribute "number" of type number-level
+	// generated from attribute "number
 	Number int `xml:"number,attr,omitempty"`
 
 	// generated from attribute group "dashed-formatting
@@ -972,7 +972,7 @@ type Degree_alter struct {
 
 	// insertion point for fields
 
-	// generated from attribute "plus-minus" of type yes-no
+	// generated from attribute "plus-minus
 	Plus_minus string `xml:"plus-minus,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -985,7 +985,7 @@ type Degree_type struct {
 
 	// insertion point for fields
 
-	// generated from attribute "text" of type xs:token
+	// generated from attribute "text
 	Text string `xml:"text,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -998,10 +998,10 @@ type Degree_value struct {
 
 	// insertion point for fields
 
-	// generated from attribute "symbol" of type degree-symbol-value
+	// generated from attribute "symbol
 	Symbol string `xml:"symbol,attr,omitempty"`
 
-	// generated from attribute "text" of type xs:token
+	// generated from attribute "text
 	Text string `xml:"text,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -1139,7 +1139,7 @@ type Distance struct {
 
 	// insertion point for fields
 
-	// generated from attribute "type" of type distance-type
+	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -1152,7 +1152,7 @@ type Double struct {
 
 	// insertion point for fields
 
-	// generated from attribute "above" of type yes-no
+	// generated from attribute "above
 	Above string `xml:"above,attr,omitempty"`
 }
 
@@ -1265,7 +1265,7 @@ type Effect struct {
 
 	// insertion point for fields
 
-	// generated from attribute "smufl" of type smufl-pictogram-glyph-name
+	// generated from attribute "smufl
 	Smufl string `xml:"smufl,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -1278,7 +1278,7 @@ type Elision struct {
 
 	// insertion point for fields
 
-	// generated from attribute "smufl" of type smufl-lyrics-glyph-name
+	// generated from attribute "smufl
 	Smufl string `xml:"smufl,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -1443,19 +1443,19 @@ type Ending struct {
 
 	// insertion point for fields
 
-	// generated from attribute "number" of type ending-number
+	// generated from attribute "number
 	Number string `xml:"number,attr,omitempty"`
 
-	// generated from attribute "type" of type start-stop-discontinue
+	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 
-	// generated from attribute "end-length" of type tenths
+	// generated from attribute "end-length
 	End_length string `xml:"end-length,attr,omitempty"`
 
-	// generated from attribute "text-x" of type tenths
+	// generated from attribute "text-x
 	Text_x string `xml:"text-x,attr,omitempty"`
 
-	// generated from attribute "text-y" of type tenths
+	// generated from attribute "text-y
 	Text_y string `xml:"text-y,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -1468,7 +1468,7 @@ type Extend struct {
 
 	// insertion point for fields
 
-	// generated from attribute "type" of type start-stop-continue
+	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 
 	// generated from attribute group "position
@@ -1484,7 +1484,7 @@ type Feature struct {
 
 	// insertion point for fields
 
-	// generated from attribute "type" of type xs:token
+	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -1497,7 +1497,7 @@ type Fermata struct {
 
 	// insertion point for fields
 
-	// generated from attribute "type" of type upright-inverted
+	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -1535,7 +1535,7 @@ type Figured_bass struct {
 
 	// insertion point for fields
 
-	// generated from attribute "parentheses" of type yes-no
+	// generated from attribute "parentheses
 	Parentheses string `xml:"parentheses,attr,omitempty"`
 
 	// generated from attribute group "print-style-align
@@ -1569,10 +1569,10 @@ type Fingering struct {
 
 	// insertion point for fields
 
-	// generated from attribute "substitution" of type yes-no
+	// generated from attribute "substitution
 	Substitution string `xml:"substitution,attr,omitempty"`
 
-	// generated from attribute "alternate" of type yes-no
+	// generated from attribute "alternate
 	Alternate string `xml:"alternate,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -1585,10 +1585,10 @@ type First_fret struct {
 
 	// insertion point for fields
 
-	// generated from attribute "text" of type xs:token
+	// generated from attribute "text
 	Text string `xml:"text,attr,omitempty"`
 
-	// generated from attribute "location" of type left-right
+	// generated from attribute "location
 	Location string `xml:"location,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -1601,7 +1601,7 @@ type For_part struct {
 
 	// insertion point for fields
 
-	// generated from attribute "number" of type staff-number
+	// generated from attribute "number
 	Number int `xml:"number,attr,omitempty"`
 
 	// generated from attribute group "optional-unique-id
@@ -1682,13 +1682,13 @@ type Frame struct {
 
 	// insertion point for fields
 
-	// generated from attribute "height" of type tenths
+	// generated from attribute "height
 	Height string `xml:"height,attr,omitempty"`
 
-	// generated from attribute "width" of type tenths
+	// generated from attribute "width
 	Width string `xml:"width,attr,omitempty"`
 
-	// generated from attribute "unplayed" of type xs:token
+	// generated from attribute "unplayed
 	Unplayed string `xml:"unplayed,attr,omitempty"`
 
 	// generated from attribute group "position
@@ -1754,7 +1754,7 @@ type Glass struct {
 
 	// insertion point for fields
 
-	// generated from attribute "smufl" of type smufl-pictogram-glyph-name
+	// generated from attribute "smufl
 	Smufl string `xml:"smufl,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -1767,10 +1767,10 @@ type Glissando struct {
 
 	// insertion point for fields
 
-	// generated from attribute "type" of type start-stop
+	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 
-	// generated from attribute "number" of type number-level
+	// generated from attribute "number
 	Number int `xml:"number,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -1783,7 +1783,7 @@ type Glyph struct {
 
 	// insertion point for fields
 
-	// generated from attribute "type" of type glyph-type
+	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -1796,16 +1796,16 @@ type Grace struct {
 
 	// insertion point for fields
 
-	// generated from attribute "steal-time-previous" of type percent
+	// generated from attribute "steal-time-previous
 	Steal_time_previous string `xml:"steal-time-previous,attr,omitempty"`
 
-	// generated from attribute "steal-time-following" of type percent
+	// generated from attribute "steal-time-following
 	Steal_time_following string `xml:"steal-time-following,attr,omitempty"`
 
-	// generated from attribute "make-time" of type divisions
+	// generated from attribute "make-time
 	Make_time string `xml:"make-time,attr,omitempty"`
 
-	// generated from attribute "slash" of type yes-no
+	// generated from attribute "slash
 	Slash string `xml:"slash,attr,omitempty"`
 }
 
@@ -1845,13 +1845,13 @@ type Grouping struct {
 
 	// insertion point for fields
 
-	// generated from attribute "type" of type start-stop-single
+	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 
-	// generated from attribute "number" of type xs:token
+	// generated from attribute "number
 	Number string `xml:"number,attr,omitempty"`
 
-	// generated from attribute "member-of" of type xs:token
+	// generated from attribute "member-of
 	Member_of string `xml:"member-of,attr,omitempty"`
 
 	// generated from attribute group "optional-unique-id
@@ -1867,10 +1867,10 @@ type Hammer_on_pull_off struct {
 
 	// insertion point for fields
 
-	// generated from attribute "type" of type start-stop
+	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 
-	// generated from attribute "number" of type number-level
+	// generated from attribute "number
 	Number int `xml:"number,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -1893,7 +1893,7 @@ type Harmon_closed struct {
 
 	// insertion point for fields
 
-	// generated from attribute "location" of type harmon-closed-location
+	// generated from attribute "location
 	Location string `xml:"location,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -1953,13 +1953,13 @@ type Harmony struct {
 
 	// insertion point for fields
 
-	// generated from attribute "type" of type harmony-type
+	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 
-	// generated from attribute "print-frame" of type yes-no
+	// generated from attribute "print-frame
 	Print_frame string `xml:"print-frame,attr,omitempty"`
 
-	// generated from attribute "arrangement" of type harmony-arrangement
+	// generated from attribute "arrangement
 	Arrangement string `xml:"arrangement,attr,omitempty"`
 
 	// generated from attribute group "print-object
@@ -2020,7 +2020,7 @@ type Harmony_alter struct {
 
 	// insertion point for fields
 
-	// generated from attribute "location" of type left-right
+	// generated from attribute "location
 	Location string `xml:"location,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -2078,7 +2078,7 @@ type Hole_closed struct {
 
 	// insertion point for fields
 
-	// generated from attribute "location" of type hole-closed-location
+	// generated from attribute "location
 	Location string `xml:"location,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -2091,7 +2091,7 @@ type Horizontal_turn struct {
 
 	// insertion point for fields
 
-	// generated from attribute "slash" of type yes-no
+	// generated from attribute "slash
 	Slash string `xml:"slash,attr,omitempty"`
 
 	// generated from attribute group "print-style
@@ -2148,7 +2148,7 @@ type Instrument struct {
 
 	// insertion point for fields
 
-	// generated from attribute "id" of type xs:IDREF
+	// generated from attribute "id
 	Id string `xml:"id,attr,omitempty"`
 }
 
@@ -2158,7 +2158,7 @@ type Instrument_change struct {
 
 	// insertion point for fields
 
-	// generated from attribute "id" of type xs:IDREF
+	// generated from attribute "id
 	Id string `xml:"id,attr,omitempty"`
 
 	// generated from element "instrument-sound" of type xs:string order 474 depth 1
@@ -2180,7 +2180,7 @@ type Instrument_link struct {
 
 	// insertion point for fields
 
-	// generated from attribute "id" of type xs:IDREF
+	// generated from attribute "id
 	Id string `xml:"id,attr,omitempty"`
 }
 
@@ -2190,10 +2190,10 @@ type Interchangeable struct {
 
 	// insertion point for fields
 
-	// generated from attribute "symbol" of type time-symbol
+	// generated from attribute "symbol
 	Symbol string `xml:"symbol,attr,omitempty"`
 
-	// generated from attribute "separator" of type time-separator
+	// generated from attribute "separator
 	Separator string `xml:"separator,attr,omitempty"`
 
 	// generated from element "time-relation" of type time-relation order 58 depth 0
@@ -2212,7 +2212,7 @@ type Inversion struct {
 
 	// insertion point for fields
 
-	// generated from attribute "text" of type xs:token
+	// generated from attribute "text
 	Text string `xml:"text,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -2225,7 +2225,7 @@ type Key struct {
 
 	// insertion point for fields
 
-	// generated from attribute "number" of type staff-number
+	// generated from attribute "number
 	Number int `xml:"number,attr,omitempty"`
 
 	// generated from attribute group "print-style
@@ -2265,7 +2265,7 @@ type Key_accidental struct {
 
 	// insertion point for fields
 
-	// generated from attribute "smufl" of type smufl-accidental-glyph-name
+	// generated from attribute "smufl
 	Smufl string `xml:"smufl,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -2278,10 +2278,10 @@ type Key_octave struct {
 
 	// insertion point for fields
 
-	// generated from attribute "number" of type xs:positiveInteger
+	// generated from attribute "number
 	Number int `xml:"number,attr,omitempty"`
 
-	// generated from attribute "cancel" of type yes-no
+	// generated from attribute "cancel
 	Cancel string `xml:"cancel,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -2294,19 +2294,19 @@ type Kind struct {
 
 	// insertion point for fields
 
-	// generated from attribute "use-symbols" of type yes-no
+	// generated from attribute "use-symbols
 	Use_symbols string `xml:"use-symbols,attr,omitempty"`
 
-	// generated from attribute "text" of type xs:token
+	// generated from attribute "text
 	Text string `xml:"text,attr,omitempty"`
 
-	// generated from attribute "stack-degrees" of type yes-no
+	// generated from attribute "stack-degrees
 	Stack_degrees string `xml:"stack-degrees,attr,omitempty"`
 
-	// generated from attribute "parentheses-degrees" of type yes-no
+	// generated from attribute "parentheses-degrees
 	Parentheses_degrees string `xml:"parentheses-degrees,attr,omitempty"`
 
-	// generated from attribute "bracket-degrees" of type yes-no
+	// generated from attribute "bracket-degrees
 	Bracket_degrees string `xml:"bracket-degrees,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -2319,10 +2319,10 @@ type Level struct {
 
 	// insertion point for fields
 
-	// generated from attribute "reference" of type yes-no
+	// generated from attribute "reference
 	Reference string `xml:"reference,attr,omitempty"`
 
-	// generated from attribute "type" of type start-stop-single
+	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -2335,10 +2335,10 @@ type Line_detail struct {
 
 	// insertion point for fields
 
-	// generated from attribute "line" of type staff-line
+	// generated from attribute "line
 	Line int `xml:"line,attr,omitempty"`
 
-	// generated from attribute "width" of type tenths
+	// generated from attribute "width
 	Width string `xml:"width,attr,omitempty"`
 
 	// generated from attribute group "color
@@ -2357,7 +2357,7 @@ type Line_width struct {
 
 	// insertion point for fields
 
-	// generated from attribute "type" of type line-width-type
+	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -2370,7 +2370,7 @@ type Link struct {
 
 	// insertion point for fields
 
-	// generated from attribute "name" of type xs:token
+	// generated from attribute "name
 	NameXSD string `xml:"name,attr,omitempty"`
 
 	// generated from attribute group "link-attributes
@@ -2421,13 +2421,13 @@ type Lyric struct {
 
 	// insertion point for fields
 
-	// generated from attribute "number" of type xs:NMTOKEN
+	// generated from attribute "number
 	Number string `xml:"number,attr,omitempty"`
 
-	// generated from attribute "name" of type xs:token
+	// generated from attribute "name
 	NameXSD string `xml:"name,attr,omitempty"`
 
-	// generated from attribute "time-only" of type time-only
+	// generated from attribute "time-only
 	Time_only string `xml:"time-only,attr,omitempty"`
 
 	// generated from attribute group "justify
@@ -2485,10 +2485,10 @@ type Lyric_font struct {
 
 	// insertion point for fields
 
-	// generated from attribute "number" of type xs:NMTOKEN
+	// generated from attribute "number
 	Number string `xml:"number,attr,omitempty"`
 
-	// generated from attribute "name" of type xs:token
+	// generated from attribute "name
 	NameXSD string `xml:"name,attr,omitempty"`
 
 	// generated from attribute group "font
@@ -2501,13 +2501,13 @@ type Lyric_language struct {
 
 	// insertion point for fields
 
-	// generated from attribute "number" of type xs:NMTOKEN
+	// generated from attribute "number
 	Number string `xml:"number,attr,omitempty"`
 
-	// generated from attribute "name" of type xs:token
+	// generated from attribute "name
 	NameXSD string `xml:"name,attr,omitempty"`
 
-	// generated from attribute "http://www.w3.org/XML/1998/namespace lang" of type 
+	// generated from attribute "http://www.w3.org/XML/1998/namespace lang
 	Lang string `xml:"http://www.w3.org/XML/1998/namespace lang,attr,omitempty"`
 }
 
@@ -2527,16 +2527,16 @@ type Measure_numbering struct {
 
 	// insertion point for fields
 
-	// generated from attribute "system" of type system-relation-number
+	// generated from attribute "system
 	System string `xml:"system,attr,omitempty"`
 
-	// generated from attribute "staff" of type staff-number
+	// generated from attribute "staff
 	Staff int `xml:"staff,attr,omitempty"`
 
-	// generated from attribute "multiple-rest-always" of type yes-no
+	// generated from attribute "multiple-rest-always
 	Multiple_rest_always string `xml:"multiple-rest-always,attr,omitempty"`
 
-	// generated from attribute "multiple-rest-range" of type yes-no
+	// generated from attribute "multiple-rest-range
 	Multiple_rest_range string `xml:"multiple-rest-range,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -2549,10 +2549,10 @@ type Measure_repeat struct {
 
 	// insertion point for fields
 
-	// generated from attribute "type" of type start-stop
+	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 
-	// generated from attribute "slashes" of type xs:positiveInteger
+	// generated from attribute "slashes
 	Slashes int `xml:"slashes,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -2565,7 +2565,7 @@ type Measure_style struct {
 
 	// insertion point for fields
 
-	// generated from attribute "number" of type staff-number
+	// generated from attribute "number
 	Number int `xml:"number,attr,omitempty"`
 
 	// generated from attribute group "font
@@ -2596,7 +2596,7 @@ type Membrane struct {
 
 	// insertion point for fields
 
-	// generated from attribute "smufl" of type smufl-pictogram-glyph-name
+	// generated from attribute "smufl
 	Smufl string `xml:"smufl,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -2609,7 +2609,7 @@ type Metal struct {
 
 	// insertion point for fields
 
-	// generated from attribute "smufl" of type smufl-pictogram-glyph-name
+	// generated from attribute "smufl
 	Smufl string `xml:"smufl,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -2622,7 +2622,7 @@ type Metronome struct {
 
 	// insertion point for fields
 
-	// generated from attribute "parentheses" of type yes-no
+	// generated from attribute "parentheses
 	Parentheses string `xml:"parentheses,attr,omitempty"`
 
 	// generated from attribute group "print-style-align
@@ -2665,7 +2665,7 @@ type Metronome_beam struct {
 
 	// insertion point for fields
 
-	// generated from attribute "number" of type beam-level
+	// generated from attribute "number
 	Number int `xml:"number,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -2700,7 +2700,7 @@ type Metronome_tied struct {
 
 	// insertion point for fields
 
-	// generated from attribute "type" of type start-stop
+	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 }
 
@@ -2717,10 +2717,10 @@ type Midi_device struct {
 
 	// insertion point for fields
 
-	// generated from attribute "port" of type midi-16
+	// generated from attribute "port
 	Port int `xml:"port,attr,omitempty"`
 
-	// generated from attribute "id" of type xs:IDREF
+	// generated from attribute "id
 	Id string `xml:"id,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -2733,7 +2733,7 @@ type Midi_instrument struct {
 
 	// insertion point for fields
 
-	// generated from attribute "id" of type xs:IDREF
+	// generated from attribute "id
 	Id string `xml:"id,attr,omitempty"`
 
 	// generated from element "midi-channel" of type midi-16 order 27 depth 0
@@ -2777,7 +2777,7 @@ type Miscellaneous_field struct {
 
 	// insertion point for fields
 
-	// generated from attribute "name" of type xs:token
+	// generated from attribute "name
 	NameXSD string `xml:"name,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -2797,7 +2797,7 @@ type Multiple_rest struct {
 
 	// insertion point for fields
 
-	// generated from attribute "use-symbols" of type yes-no
+	// generated from attribute "use-symbols
 	Use_symbols string `xml:"use-symbols,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -2826,10 +2826,10 @@ type Non_arpeggiate struct {
 
 	// insertion point for fields
 
-	// generated from attribute "type" of type top-bottom
+	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 
-	// generated from attribute "number" of type number-level
+	// generated from attribute "number
 	Number int `xml:"number,attr,omitempty"`
 
 	// generated from attribute group "position
@@ -2912,25 +2912,25 @@ type Note struct {
 
 	// insertion point for fields
 
-	// generated from attribute "print-leger" of type yes-no
+	// generated from attribute "print-leger
 	Print_leger string `xml:"print-leger,attr,omitempty"`
 
-	// generated from attribute "dynamics" of type non-negative-decimal
+	// generated from attribute "dynamics
 	Dynamics string `xml:"dynamics,attr,omitempty"`
 
-	// generated from attribute "end-dynamics" of type non-negative-decimal
+	// generated from attribute "end-dynamics
 	End_dynamics string `xml:"end-dynamics,attr,omitempty"`
 
-	// generated from attribute "attack" of type divisions
+	// generated from attribute "attack
 	Attack string `xml:"attack,attr,omitempty"`
 
-	// generated from attribute "release" of type divisions
+	// generated from attribute "release
 	Release string `xml:"release,attr,omitempty"`
 
-	// generated from attribute "time-only" of type time-only
+	// generated from attribute "time-only
 	Time_only string `xml:"time-only,attr,omitempty"`
 
-	// generated from attribute "pizzicato" of type yes-no
+	// generated from attribute "pizzicato
 	Pizzicato string `xml:"pizzicato,attr,omitempty"`
 
 	// generated from attribute group "x-position
@@ -3030,7 +3030,7 @@ type Note_size struct {
 
 	// insertion point for fields
 
-	// generated from attribute "type" of type note-size-type
+	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -3043,7 +3043,7 @@ type Note_type struct {
 
 	// insertion point for fields
 
-	// generated from attribute "size" of type symbol-size
+	// generated from attribute "size
 	Size string `xml:"size,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -3056,10 +3056,10 @@ type Notehead struct {
 
 	// insertion point for fields
 
-	// generated from attribute "filled" of type yes-no
+	// generated from attribute "filled
 	Filled string `xml:"filled,attr,omitempty"`
 
-	// generated from attribute "parentheses" of type yes-no
+	// generated from attribute "parentheses
 	Parentheses string `xml:"parentheses,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -3117,7 +3117,7 @@ type Numeral_root struct {
 
 	// insertion point for fields
 
-	// generated from attribute "text" of type xs:token
+	// generated from attribute "text
 	Text string `xml:"text,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -3130,13 +3130,13 @@ type Octave_shift struct {
 
 	// insertion point for fields
 
-	// generated from attribute "type" of type up-down-stop-continue
+	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 
-	// generated from attribute "number" of type number-level
+	// generated from attribute "number
 	Number int `xml:"number,attr,omitempty"`
 
-	// generated from attribute "size" of type xs:positiveInteger
+	// generated from attribute "size
 	Size int `xml:"size,attr,omitempty"`
 
 	// generated from attribute group "dashed-formatting
@@ -3155,7 +3155,7 @@ type Offset struct {
 
 	// insertion point for fields
 
-	// generated from attribute "sound" of type yes-no
+	// generated from attribute "sound
 	Sound string `xml:"sound,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -3236,7 +3236,7 @@ type Other_appearance struct {
 
 	// insertion point for fields
 
-	// generated from attribute "type" of type xs:token
+	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -3259,13 +3259,13 @@ type Other_listening struct {
 
 	// insertion point for fields
 
-	// generated from attribute "type" of type xs:token
+	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 
-	// generated from attribute "player" of type xs:IDREF
+	// generated from attribute "player
 	Player string `xml:"player,attr,omitempty"`
 
-	// generated from attribute "time-only" of type time-only
+	// generated from attribute "time-only
 	Time_only string `xml:"time-only,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -3278,10 +3278,10 @@ type Other_notation struct {
 
 	// insertion point for fields
 
-	// generated from attribute "type" of type start-stop-single
+	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 
-	// generated from attribute "number" of type number-level
+	// generated from attribute "number
 	Number int `xml:"number,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -3304,7 +3304,7 @@ type Other_play struct {
 
 	// insertion point for fields
 
-	// generated from attribute "type" of type xs:token
+	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -3343,7 +3343,7 @@ type Page_margins struct {
 
 	// insertion point for fields
 
-	// generated from attribute "type" of type margin-type
+	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 
 	// generated from element "top-margin" of type tenths order 517 depth 1
@@ -3381,10 +3381,10 @@ type Part_group struct {
 
 	// insertion point for fields
 
-	// generated from attribute "type" of type start-stop
+	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 
-	// generated from attribute "number" of type xs:token
+	// generated from attribute "number
 	Number string `xml:"number,attr,omitempty"`
 
 	// generated from element "group-name" of type group-name order 418 depth 0
@@ -3460,10 +3460,10 @@ type Part_symbol struct {
 
 	// insertion point for fields
 
-	// generated from attribute "top-staff" of type staff-number
+	// generated from attribute "top-staff
 	Top_staff int `xml:"top-staff,attr,omitempty"`
 
-	// generated from attribute "bottom-staff" of type staff-number
+	// generated from attribute "bottom-staff
 	Bottom_staff int `xml:"bottom-staff,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -3495,19 +3495,19 @@ type Pedal struct {
 
 	// insertion point for fields
 
-	// generated from attribute "type" of type pedal-type
+	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 
-	// generated from attribute "number" of type number-level
+	// generated from attribute "number
 	Number int `xml:"number,attr,omitempty"`
 
-	// generated from attribute "line" of type yes-no
+	// generated from attribute "line
 	Line string `xml:"line,attr,omitempty"`
 
-	// generated from attribute "sign" of type yes-no
+	// generated from attribute "sign
 	Sign string `xml:"sign,attr,omitempty"`
 
-	// generated from attribute "abbreviated" of type yes-no
+	// generated from attribute "abbreviated
 	Abbreviated string `xml:"abbreviated,attr,omitempty"`
 
 	// generated from attribute group "print-style-align
@@ -3611,7 +3611,7 @@ type Pitched struct {
 
 	// insertion point for fields
 
-	// generated from attribute "smufl" of type smufl-pictogram-glyph-name
+	// generated from attribute "smufl
 	Smufl string `xml:"smufl,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -3634,7 +3634,7 @@ type Play struct {
 
 	// insertion point for fields
 
-	// generated from attribute "id" of type xs:IDREF
+	// generated from attribute "id
 	Id string `xml:"id,attr,omitempty"`
 
 	// generated from element "ipa" of type xs:string order 37 depth 0
@@ -3656,7 +3656,7 @@ type Player struct {
 
 	// insertion point for fields
 
-	// generated from attribute "id" of type xs:ID
+	// generated from attribute "id
 	Id string `xml:"id,attr,omitempty"`
 
 	// generated from element "player-name" of type xs:string order 432 depth 0
@@ -3669,10 +3669,10 @@ type Principal_voice struct {
 
 	// insertion point for fields
 
-	// generated from attribute "type" of type start-stop
+	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 
-	// generated from attribute "symbol" of type principal-voice-symbol
+	// generated from attribute "symbol
 	Symbol string `xml:"symbol,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -3726,16 +3726,16 @@ type Repeat struct {
 
 	// insertion point for fields
 
-	// generated from attribute "direction" of type backward-forward
+	// generated from attribute "direction
 	Direction string `xml:"direction,attr,omitempty"`
 
-	// generated from attribute "times" of type xs:nonNegativeInteger
+	// generated from attribute "times
 	Times int `xml:"times,attr,omitempty"`
 
-	// generated from attribute "after-jump" of type yes-no
+	// generated from attribute "after-jump
 	After_jump string `xml:"after-jump,attr,omitempty"`
 
-	// generated from attribute "winged" of type winged
+	// generated from attribute "winged
 	Winged string `xml:"winged,attr,omitempty"`
 }
 
@@ -3745,7 +3745,7 @@ type Rest struct {
 
 	// insertion point for fields
 
-	// generated from attribute "measure" of type yes-no
+	// generated from attribute "measure
 	Measure string `xml:"measure,attr,omitempty"`
 
 	// generated from element "display-step" of type step order 529 depth 1
@@ -3774,7 +3774,7 @@ type Root_step struct {
 
 	// insertion point for fields
 
-	// generated from attribute "text" of type xs:token
+	// generated from attribute "text
 	Text string `xml:"text,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -3813,7 +3813,7 @@ type Score_instrument struct {
 
 	// insertion point for fields
 
-	// generated from attribute "id" of type xs:ID
+	// generated from attribute "id
 	Id string `xml:"id,attr,omitempty"`
 
 	// generated from element "instrument-name" of type xs:string order 433 depth 0
@@ -3841,7 +3841,7 @@ type Score_part struct {
 
 	// insertion point for fields
 
-	// generated from attribute "id" of type xs:ID
+	// generated from attribute "id
 	Id string `xml:"id,attr,omitempty"`
 
 	// generated from element "identification" of type identification order 436 depth 0
@@ -3884,7 +3884,7 @@ type Segno struct {
 
 	// insertion point for fields
 
-	// generated from attribute "smufl" of type smufl-segno-glyph-name
+	// generated from attribute "smufl
 	Smufl string `xml:"smufl,attr,omitempty"`
 
 	// generated from attribute group "print-style-align
@@ -3900,13 +3900,13 @@ type Slash struct {
 
 	// insertion point for fields
 
-	// generated from attribute "type" of type start-stop
+	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 
-	// generated from attribute "use-dots" of type yes-no
+	// generated from attribute "use-dots
 	Use_dots string `xml:"use-dots,attr,omitempty"`
 
-	// generated from attribute "use-stems" of type yes-no
+	// generated from attribute "use-stems
 	Use_stems string `xml:"use-stems,attr,omitempty"`
 
 	// generated from element "slash-type" of type note-type-value order 489 depth 1
@@ -3925,10 +3925,10 @@ type Slide struct {
 
 	// insertion point for fields
 
-	// generated from attribute "type" of type start-stop
+	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 
-	// generated from attribute "number" of type number-level
+	// generated from attribute "number
 	Number int `xml:"number,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -3941,10 +3941,10 @@ type Slur struct {
 
 	// insertion point for fields
 
-	// generated from attribute "type" of type start-stop-continue
+	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 
-	// generated from attribute "number" of type number-level
+	// generated from attribute "number
 	Number int `xml:"number,attr,omitempty"`
 
 	// generated from attribute group "line-type
@@ -3978,55 +3978,55 @@ type Sound struct {
 
 	// insertion point for fields
 
-	// generated from attribute "tempo" of type non-negative-decimal
+	// generated from attribute "tempo
 	Tempo string `xml:"tempo,attr,omitempty"`
 
-	// generated from attribute "dynamics" of type non-negative-decimal
+	// generated from attribute "dynamics
 	Dynamics string `xml:"dynamics,attr,omitempty"`
 
-	// generated from attribute "dacapo" of type yes-no
+	// generated from attribute "dacapo
 	Dacapo string `xml:"dacapo,attr,omitempty"`
 
-	// generated from attribute "segno" of type xs:token
+	// generated from attribute "segno
 	Segno string `xml:"segno,attr,omitempty"`
 
-	// generated from attribute "dalsegno" of type xs:token
+	// generated from attribute "dalsegno
 	Dalsegno string `xml:"dalsegno,attr,omitempty"`
 
-	// generated from attribute "coda" of type xs:token
+	// generated from attribute "coda
 	Coda string `xml:"coda,attr,omitempty"`
 
-	// generated from attribute "tocoda" of type xs:token
+	// generated from attribute "tocoda
 	Tocoda string `xml:"tocoda,attr,omitempty"`
 
-	// generated from attribute "divisions" of type divisions
+	// generated from attribute "divisions
 	Divisions string `xml:"divisions,attr,omitempty"`
 
-	// generated from attribute "forward-repeat" of type yes-no
+	// generated from attribute "forward-repeat
 	Forward_repeat string `xml:"forward-repeat,attr,omitempty"`
 
-	// generated from attribute "fine" of type xs:token
+	// generated from attribute "fine
 	Fine string `xml:"fine,attr,omitempty"`
 
-	// generated from attribute "time-only" of type time-only
+	// generated from attribute "time-only
 	Time_only string `xml:"time-only,attr,omitempty"`
 
-	// generated from attribute "pizzicato" of type yes-no
+	// generated from attribute "pizzicato
 	Pizzicato string `xml:"pizzicato,attr,omitempty"`
 
-	// generated from attribute "pan" of type rotation-degrees
+	// generated from attribute "pan
 	Pan string `xml:"pan,attr,omitempty"`
 
-	// generated from attribute "elevation" of type rotation-degrees
+	// generated from attribute "elevation
 	Elevation string `xml:"elevation,attr,omitempty"`
 
-	// generated from attribute "damper-pedal" of type yes-no-number
+	// generated from attribute "damper-pedal
 	Damper_pedal string `xml:"damper-pedal,attr,omitempty"`
 
-	// generated from attribute "soft-pedal" of type yes-no-number
+	// generated from attribute "soft-pedal
 	Soft_pedal string `xml:"soft-pedal,attr,omitempty"`
 
-	// generated from attribute "sostenuto-pedal" of type yes-no-number
+	// generated from attribute "sostenuto-pedal
 	Sostenuto_pedal string `xml:"sostenuto-pedal,attr,omitempty"`
 
 	// generated from attribute group "optional-unique-id
@@ -4057,10 +4057,10 @@ type Staff_details struct {
 
 	// insertion point for fields
 
-	// generated from attribute "number" of type staff-number
+	// generated from attribute "number
 	Number int `xml:"number,attr,omitempty"`
 
-	// generated from attribute "show-frets" of type show-frets
+	// generated from attribute "show-frets
 	Show_frets string `xml:"show-frets,attr,omitempty"`
 
 	// generated from attribute group "print-object
@@ -4094,7 +4094,7 @@ type Staff_divide struct {
 
 	// insertion point for fields
 
-	// generated from attribute "type" of type staff-divide-symbol
+	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 
 	// generated from attribute group "print-style-align
@@ -4110,7 +4110,7 @@ type Staff_layout struct {
 
 	// insertion point for fields
 
-	// generated from attribute "number" of type staff-number
+	// generated from attribute "number
 	Number int `xml:"number,attr,omitempty"`
 
 	// generated from element "staff-distance" of type tenths order 226 depth 0
@@ -4123,7 +4123,7 @@ type Staff_size struct {
 
 	// insertion point for fields
 
-	// generated from attribute "scaling" of type non-negative-decimal
+	// generated from attribute "scaling
 	Scaling string `xml:"scaling,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -4136,7 +4136,7 @@ type Staff_tuning struct {
 
 	// insertion point for fields
 
-	// generated from attribute "line" of type staff-line
+	// generated from attribute "line
 	Line int `xml:"line,attr,omitempty"`
 
 	// generated from element "tuning-step" of type step order 470 depth 1
@@ -4165,13 +4165,13 @@ type Stick struct {
 
 	// insertion point for fields
 
-	// generated from attribute "tip" of type tip-direction
+	// generated from attribute "tip
 	Tip string `xml:"tip,attr,omitempty"`
 
-	// generated from attribute "parentheses" of type yes-no
+	// generated from attribute "parentheses
 	Parentheses string `xml:"parentheses,attr,omitempty"`
 
-	// generated from attribute "dashed-circle" of type yes-no
+	// generated from attribute "dashed-circle
 	Dashed_circle string `xml:"dashed-circle,attr,omitempty"`
 
 	// generated from element "stick-type" of type stick-type order 195 depth 0
@@ -4187,7 +4187,7 @@ type String_mute struct {
 
 	// insertion point for fields
 
-	// generated from attribute "type" of type on-off
+	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 
 	// generated from attribute group "print-style-align
@@ -4230,16 +4230,16 @@ type Supports struct {
 
 	// insertion point for fields
 
-	// generated from attribute "type" of type yes-no
+	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 
-	// generated from attribute "element" of type xs:NMTOKEN
+	// generated from attribute "element
 	Element string `xml:"element,attr,omitempty"`
 
-	// generated from attribute "attribute" of type xs:NMTOKEN
+	// generated from attribute "attribute
 	Attribute string `xml:"attribute,attr,omitempty"`
 
-	// generated from attribute "value" of type xs:token
+	// generated from attribute "value
 	Value string `xml:"value,attr,omitempty"`
 }
 
@@ -4271,16 +4271,16 @@ type Sync struct {
 
 	// insertion point for fields
 
-	// generated from attribute "type" of type sync-type
+	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 
-	// generated from attribute "latency" of type milliseconds
+	// generated from attribute "latency
 	Latency int `xml:"latency,attr,omitempty"`
 
-	// generated from attribute "player" of type xs:IDREF
+	// generated from attribute "player
 	Player string `xml:"player,attr,omitempty"`
 
-	// generated from attribute "time-only" of type time-only
+	// generated from attribute "time-only
 	Time_only string `xml:"time-only,attr,omitempty"`
 }
 
@@ -4335,7 +4335,7 @@ type Tap struct {
 
 	// insertion point for fields
 
-	// generated from attribute "hand" of type tap-hand
+	// generated from attribute "hand
 	Hand string `xml:"hand,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -4451,7 +4451,7 @@ type Text_element_data struct {
 
 	// insertion point for fields
 
-	// generated from attribute "http://www.w3.org/XML/1998/namespace lang" of type 
+	// generated from attribute "http://www.w3.org/XML/1998/namespace lang
 	Lang string `xml:"http://www.w3.org/XML/1998/namespace lang,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -4464,10 +4464,10 @@ type Tie struct {
 
 	// insertion point for fields
 
-	// generated from attribute "type" of type start-stop
+	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 
-	// generated from attribute "time-only" of type time-only
+	// generated from attribute "time-only
 	Time_only string `xml:"time-only,attr,omitempty"`
 }
 
@@ -4477,10 +4477,10 @@ type Tied struct {
 
 	// insertion point for fields
 
-	// generated from attribute "type" of type tied-type
+	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 
-	// generated from attribute "number" of type number-level
+	// generated from attribute "number
 	Number int `xml:"number,attr,omitempty"`
 
 	// generated from attribute group "line-type
@@ -4514,13 +4514,13 @@ type Time struct {
 
 	// insertion point for fields
 
-	// generated from attribute "number" of type staff-number
+	// generated from attribute "number
 	Number int `xml:"number,attr,omitempty"`
 
-	// generated from attribute "symbol" of type time-symbol
+	// generated from attribute "symbol
 	Symbol string `xml:"symbol,attr,omitempty"`
 
-	// generated from attribute "separator" of type time-separator
+	// generated from attribute "separator
 	Separator string `xml:"separator,attr,omitempty"`
 
 	// generated from attribute group "print-style-align
@@ -4570,7 +4570,7 @@ type Timpani struct {
 
 	// insertion point for fields
 
-	// generated from attribute "smufl" of type smufl-pictogram-glyph-name
+	// generated from attribute "smufl
 	Smufl string `xml:"smufl,attr,omitempty"`
 }
 
@@ -4580,7 +4580,7 @@ type Transpose struct {
 
 	// insertion point for fields
 
-	// generated from attribute "number" of type staff-number
+	// generated from attribute "number
 	Number int `xml:"number,attr,omitempty"`
 
 	// generated from attribute group "optional-unique-id
@@ -4605,7 +4605,7 @@ type Tremolo struct {
 
 	// insertion point for fields
 
-	// generated from attribute "type" of type tremolo-type
+	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -4618,19 +4618,19 @@ type Tuplet struct {
 
 	// insertion point for fields
 
-	// generated from attribute "type" of type start-stop
+	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 
-	// generated from attribute "number" of type number-level
+	// generated from attribute "number
 	Number int `xml:"number,attr,omitempty"`
 
-	// generated from attribute "bracket" of type yes-no
+	// generated from attribute "bracket
 	Bracket string `xml:"bracket,attr,omitempty"`
 
-	// generated from attribute "show-number" of type show-tuplet
+	// generated from attribute "show-number
 	Show_number string `xml:"show-number,attr,omitempty"`
 
-	// generated from attribute "show-type" of type show-tuplet
+	// generated from attribute "show-type
 	Show_type string `xml:"show-type,attr,omitempty"`
 
 	// generated from attribute group "line-shape
@@ -4707,7 +4707,7 @@ type Typed_text struct {
 
 	// insertion point for fields
 
-	// generated from attribute "type" of type xs:token
+	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -4746,10 +4746,10 @@ type Wait struct {
 
 	// insertion point for fields
 
-	// generated from attribute "player" of type xs:IDREF
+	// generated from attribute "player
 	Player string `xml:"player,attr,omitempty"`
 
-	// generated from attribute "time-only" of type time-only
+	// generated from attribute "time-only
 	Time_only string `xml:"time-only,attr,omitempty"`
 }
 
@@ -4759,13 +4759,13 @@ type Wavy_line struct {
 
 	// insertion point for fields
 
-	// generated from attribute "type" of type start-stop-continue
+	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 
-	// generated from attribute "number" of type number-level
+	// generated from attribute "number
 	Number int `xml:"number,attr,omitempty"`
 
-	// generated from attribute "smufl" of type smufl-wavy-line-glyph-name
+	// generated from attribute "smufl
 	Smufl string `xml:"smufl,attr,omitempty"`
 
 	// generated from attribute group "position
@@ -4787,16 +4787,16 @@ type Wedge struct {
 
 	// insertion point for fields
 
-	// generated from attribute "type" of type wedge-type
+	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 
-	// generated from attribute "number" of type number-level
+	// generated from attribute "number
 	Number int `xml:"number,attr,omitempty"`
 
-	// generated from attribute "spread" of type tenths
+	// generated from attribute "spread
 	Spread string `xml:"spread,attr,omitempty"`
 
-	// generated from attribute "niente" of type yes-no
+	// generated from attribute "niente
 	Niente string `xml:"niente,attr,omitempty"`
 
 	// generated from attribute group "line-type
@@ -4821,7 +4821,7 @@ type Wood struct {
 
 	// insertion point for fields
 
-	// generated from attribute "smufl" of type smufl-pictogram-glyph-name
+	// generated from attribute "smufl
 	Smufl string `xml:"smufl,attr,omitempty"`
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
@@ -5266,16 +5266,16 @@ type AttributeGroup_bend_sound struct {
 
 	// insertion point for fields
 
-	// generated from attribute "accelerate" of type yes-no
+	// generated from attribute "accelerate
 	Accelerate string `xml:"accelerate,attr,omitempty"`
 
-	// generated from attribute "beats" of type trill-beats
+	// generated from attribute "beats
 	Beats string `xml:"beats,attr,omitempty"`
 
-	// generated from attribute "first-beat" of type percent
+	// generated from attribute "first-beat
 	First_beat string `xml:"first-beat,attr,omitempty"`
 
-	// generated from attribute "last-beat" of type percent
+	// generated from attribute "last-beat
 	Last_beat string `xml:"last-beat,attr,omitempty"`
 }
 
@@ -5284,22 +5284,22 @@ type AttributeGroup_bezier struct {
 
 	// insertion point for fields
 
-	// generated from attribute "bezier-x" of type tenths
+	// generated from attribute "bezier-x
 	Bezier_x string `xml:"bezier-x,attr,omitempty"`
 
-	// generated from attribute "bezier-y" of type tenths
+	// generated from attribute "bezier-y
 	Bezier_y string `xml:"bezier-y,attr,omitempty"`
 
-	// generated from attribute "bezier-x2" of type tenths
+	// generated from attribute "bezier-x2
 	Bezier_x2 string `xml:"bezier-x2,attr,omitempty"`
 
-	// generated from attribute "bezier-y2" of type tenths
+	// generated from attribute "bezier-y2
 	Bezier_y2 string `xml:"bezier-y2,attr,omitempty"`
 
-	// generated from attribute "bezier-offset" of type divisions
+	// generated from attribute "bezier-offset
 	Bezier_offset string `xml:"bezier-offset,attr,omitempty"`
 
-	// generated from attribute "bezier-offset2" of type divisions
+	// generated from attribute "bezier-offset2
 	Bezier_offset2 string `xml:"bezier-offset2,attr,omitempty"`
 }
 
@@ -5308,7 +5308,7 @@ type AttributeGroup_color struct {
 
 	// insertion point for fields
 
-	// generated from attribute "color" of type color
+	// generated from attribute "color
 	Color string `xml:"color,attr,omitempty"`
 }
 
@@ -5317,10 +5317,10 @@ type AttributeGroup_dashed_formatting struct {
 
 	// insertion point for fields
 
-	// generated from attribute "dash-length" of type tenths
+	// generated from attribute "dash-length
 	Dash_length string `xml:"dash-length,attr,omitempty"`
 
-	// generated from attribute "space-length" of type tenths
+	// generated from attribute "space-length
 	Space_length string `xml:"space-length,attr,omitempty"`
 }
 
@@ -5329,7 +5329,7 @@ type AttributeGroup_directive struct {
 
 	// insertion point for fields
 
-	// generated from attribute "directive" of type yes-no
+	// generated from attribute "directive
 	Directive string `xml:"directive,attr,omitempty"`
 }
 
@@ -5338,7 +5338,7 @@ type AttributeGroup_document_attributes struct {
 
 	// insertion point for fields
 
-	// generated from attribute "version" of type xs:token
+	// generated from attribute "version
 	Version string `xml:"version,attr,omitempty"`
 }
 
@@ -5347,10 +5347,10 @@ type AttributeGroup_element_position struct {
 
 	// insertion point for fields
 
-	// generated from attribute "element" of type xs:NMTOKEN
+	// generated from attribute "element
 	Element string `xml:"element,attr,omitempty"`
 
-	// generated from attribute "position" of type xs:positiveInteger
+	// generated from attribute "position
 	Position int `xml:"position,attr,omitempty"`
 }
 
@@ -5359,7 +5359,7 @@ type AttributeGroup_enclosure struct {
 
 	// insertion point for fields
 
-	// generated from attribute "enclosure" of type enclosure-shape
+	// generated from attribute "enclosure
 	Enclosure string `xml:"enclosure,attr,omitempty"`
 }
 
@@ -5368,16 +5368,16 @@ type AttributeGroup_font struct {
 
 	// insertion point for fields
 
-	// generated from attribute "font-family" of type font-family
+	// generated from attribute "font-family
 	Font_family string `xml:"font-family,attr,omitempty"`
 
-	// generated from attribute "font-style" of type font-style
+	// generated from attribute "font-style
 	Font_style string `xml:"font-style,attr,omitempty"`
 
-	// generated from attribute "font-size" of type font-size
+	// generated from attribute "font-size
 	Font_size string `xml:"font-size,attr,omitempty"`
 
-	// generated from attribute "font-weight" of type font-weight
+	// generated from attribute "font-weight
 	Font_weight string `xml:"font-weight,attr,omitempty"`
 }
 
@@ -5398,7 +5398,7 @@ type AttributeGroup_halign struct {
 
 	// insertion point for fields
 
-	// generated from attribute "halign" of type left-center-right
+	// generated from attribute "halign
 	Halign string `xml:"halign,attr,omitempty"`
 }
 
@@ -5407,16 +5407,16 @@ type AttributeGroup_image_attributes struct {
 
 	// insertion point for fields
 
-	// generated from attribute "source" of type xs:anyURI
+	// generated from attribute "source
 	Source string `xml:"source,attr,omitempty"`
 
-	// generated from attribute "type" of type xs:token
+	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 
-	// generated from attribute "height" of type tenths
+	// generated from attribute "height
 	Height string `xml:"height,attr,omitempty"`
 
-	// generated from attribute "width" of type tenths
+	// generated from attribute "width
 	Width string `xml:"width,attr,omitempty"`
 
 	// generated from attribute group "position
@@ -5434,7 +5434,7 @@ type AttributeGroup_justify struct {
 
 	// insertion point for fields
 
-	// generated from attribute "justify" of type left-center-right
+	// generated from attribute "justify
 	Justify string `xml:"justify,attr,omitempty"`
 }
 
@@ -5443,7 +5443,7 @@ type AttributeGroup_letter_spacing struct {
 
 	// insertion point for fields
 
-	// generated from attribute "letter-spacing" of type number-or-normal
+	// generated from attribute "letter-spacing
 	Letter_spacing string `xml:"letter-spacing,attr,omitempty"`
 }
 
@@ -5452,13 +5452,13 @@ type AttributeGroup_level_display struct {
 
 	// insertion point for fields
 
-	// generated from attribute "parentheses" of type yes-no
+	// generated from attribute "parentheses
 	Parentheses string `xml:"parentheses,attr,omitempty"`
 
-	// generated from attribute "bracket" of type yes-no
+	// generated from attribute "bracket
 	Bracket string `xml:"bracket,attr,omitempty"`
 
-	// generated from attribute "size" of type symbol-size
+	// generated from attribute "size
 	Size string `xml:"size,attr,omitempty"`
 }
 
@@ -5467,7 +5467,7 @@ type AttributeGroup_line_height struct {
 
 	// insertion point for fields
 
-	// generated from attribute "line-height" of type number-or-normal
+	// generated from attribute "line-height
 	Line_height string `xml:"line-height,attr,omitempty"`
 }
 
@@ -5476,7 +5476,7 @@ type AttributeGroup_line_length struct {
 
 	// insertion point for fields
 
-	// generated from attribute "line-length" of type line-length
+	// generated from attribute "line-length
 	Line_length string `xml:"line-length,attr,omitempty"`
 }
 
@@ -5485,7 +5485,7 @@ type AttributeGroup_line_shape struct {
 
 	// insertion point for fields
 
-	// generated from attribute "line-shape" of type line-shape
+	// generated from attribute "line-shape
 	Line_shape string `xml:"line-shape,attr,omitempty"`
 }
 
@@ -5494,7 +5494,7 @@ type AttributeGroup_line_type struct {
 
 	// insertion point for fields
 
-	// generated from attribute "line-type" of type line-type
+	// generated from attribute "line-type
 	Line_type string `xml:"line-type,attr,omitempty"`
 }
 
@@ -5503,22 +5503,22 @@ type AttributeGroup_link_attributes struct {
 
 	// insertion point for fields
 
-	// generated from attribute "http://www.w3.org/1999/xlink href" of type 
+	// generated from attribute "http://www.w3.org/1999/xlink href
 	Href string `xml:"http://www.w3.org/1999/xlink href,attr,omitempty"`
 
-	// generated from attribute "http://www.w3.org/1999/xlink type" of type 
+	// generated from attribute "http://www.w3.org/1999/xlink type
 	Type string `xml:"http://www.w3.org/1999/xlink type,attr,omitempty"`
 
-	// generated from attribute "http://www.w3.org/1999/xlink role" of type 
+	// generated from attribute "http://www.w3.org/1999/xlink role
 	Role string `xml:"http://www.w3.org/1999/xlink role,attr,omitempty"`
 
-	// generated from attribute "http://www.w3.org/1999/xlink title" of type 
+	// generated from attribute "http://www.w3.org/1999/xlink title
 	Title string `xml:"http://www.w3.org/1999/xlink title,attr,omitempty"`
 
-	// generated from attribute "http://www.w3.org/1999/xlink show" of type 
+	// generated from attribute "http://www.w3.org/1999/xlink show
 	Show string `xml:"http://www.w3.org/1999/xlink show,attr,omitempty"`
 
-	// generated from attribute "http://www.w3.org/1999/xlink actuate" of type 
+	// generated from attribute "http://www.w3.org/1999/xlink actuate
 	Actuate string `xml:"http://www.w3.org/1999/xlink actuate,attr,omitempty"`
 }
 
@@ -5527,19 +5527,19 @@ type AttributeGroup_measure_attributes struct {
 
 	// insertion point for fields
 
-	// generated from attribute "number" of type xs:token
+	// generated from attribute "number
 	Number string `xml:"number,attr,omitempty"`
 
-	// generated from attribute "text" of type measure-text
+	// generated from attribute "text
 	Text string `xml:"text,attr,omitempty"`
 
-	// generated from attribute "implicit" of type yes-no
+	// generated from attribute "implicit
 	Implicit string `xml:"implicit,attr,omitempty"`
 
-	// generated from attribute "non-controlling" of type yes-no
+	// generated from attribute "non-controlling
 	Non_controlling string `xml:"non-controlling,attr,omitempty"`
 
-	// generated from attribute "width" of type tenths
+	// generated from attribute "width
 	Width string `xml:"width,attr,omitempty"`
 
 	// generated from attribute group "optional-unique-id
@@ -5551,7 +5551,7 @@ type AttributeGroup_optional_unique_id struct {
 
 	// insertion point for fields
 
-	// generated from attribute "id" of type xs:ID
+	// generated from attribute "id
 	Id string `xml:"id,attr,omitempty"`
 }
 
@@ -5560,7 +5560,7 @@ type AttributeGroup_orientation struct {
 
 	// insertion point for fields
 
-	// generated from attribute "orientation" of type over-under
+	// generated from attribute "orientation
 	Orientation string `xml:"orientation,attr,omitempty"`
 }
 
@@ -5569,7 +5569,7 @@ type AttributeGroup_part_attributes struct {
 
 	// insertion point for fields
 
-	// generated from attribute "id" of type xs:IDREF
+	// generated from attribute "id
 	Id string `xml:"id,attr,omitempty"`
 }
 
@@ -5593,7 +5593,7 @@ type AttributeGroup_placement struct {
 
 	// insertion point for fields
 
-	// generated from attribute "placement" of type above-below
+	// generated from attribute "placement
 	Placement string `xml:"placement,attr,omitempty"`
 }
 
@@ -5602,16 +5602,16 @@ type AttributeGroup_position struct {
 
 	// insertion point for fields
 
-	// generated from attribute "default-x" of type tenths
+	// generated from attribute "default-x
 	Default_x string `xml:"default-x,attr,omitempty"`
 
-	// generated from attribute "default-y" of type tenths
+	// generated from attribute "default-y
 	Default_y string `xml:"default-y,attr,omitempty"`
 
-	// generated from attribute "relative-x" of type tenths
+	// generated from attribute "relative-x
 	Relative_x string `xml:"relative-x,attr,omitempty"`
 
-	// generated from attribute "relative-y" of type tenths
+	// generated from attribute "relative-y
 	Relative_y string `xml:"relative-y,attr,omitempty"`
 }
 
@@ -5620,19 +5620,19 @@ type AttributeGroup_print_attributes struct {
 
 	// insertion point for fields
 
-	// generated from attribute "staff-spacing" of type tenths
+	// generated from attribute "staff-spacing
 	Staff_spacing string `xml:"staff-spacing,attr,omitempty"`
 
-	// generated from attribute "new-system" of type yes-no
+	// generated from attribute "new-system
 	New_system string `xml:"new-system,attr,omitempty"`
 
-	// generated from attribute "new-page" of type yes-no
+	// generated from attribute "new-page
 	New_page string `xml:"new-page,attr,omitempty"`
 
-	// generated from attribute "blank-page" of type xs:positiveInteger
+	// generated from attribute "blank-page
 	Blank_page int `xml:"blank-page,attr,omitempty"`
 
-	// generated from attribute "page-number" of type xs:token
+	// generated from attribute "page-number
 	Page_number string `xml:"page-number,attr,omitempty"`
 }
 
@@ -5641,7 +5641,7 @@ type AttributeGroup_print_object struct {
 
 	// insertion point for fields
 
-	// generated from attribute "print-object" of type yes-no
+	// generated from attribute "print-object
 	Print_object string `xml:"print-object,attr,omitempty"`
 }
 
@@ -5650,7 +5650,7 @@ type AttributeGroup_print_spacing struct {
 
 	// insertion point for fields
 
-	// generated from attribute "print-spacing" of type yes-no
+	// generated from attribute "print-spacing
 	Print_spacing string `xml:"print-spacing,attr,omitempty"`
 }
 
@@ -5689,10 +5689,10 @@ type AttributeGroup_printout struct {
 
 	// insertion point for fields
 
-	// generated from attribute "print-dot" of type yes-no
+	// generated from attribute "print-dot
 	Print_dot string `xml:"print-dot,attr,omitempty"`
 
-	// generated from attribute "print-lyric" of type yes-no
+	// generated from attribute "print-lyric
 	Print_lyric string `xml:"print-lyric,attr,omitempty"`
 
 	// generated from attribute group "print-object
@@ -5707,7 +5707,7 @@ type AttributeGroup_smufl struct {
 
 	// insertion point for fields
 
-	// generated from attribute "smufl" of type smufl-glyph-name
+	// generated from attribute "smufl
 	Smufl string `xml:"smufl,attr,omitempty"`
 }
 
@@ -5746,7 +5746,7 @@ type AttributeGroup_system_relation struct {
 
 	// insertion point for fields
 
-	// generated from attribute "system" of type system-relation
+	// generated from attribute "system
 	System string `xml:"system,attr,omitempty"`
 }
 
@@ -5755,13 +5755,13 @@ type AttributeGroup_text_decoration struct {
 
 	// insertion point for fields
 
-	// generated from attribute "underline" of type number-of-lines
+	// generated from attribute "underline
 	Underline int `xml:"underline,attr,omitempty"`
 
-	// generated from attribute "overline" of type number-of-lines
+	// generated from attribute "overline
 	Overline int `xml:"overline,attr,omitempty"`
 
-	// generated from attribute "line-through" of type number-of-lines
+	// generated from attribute "line-through
 	Line_through int `xml:"line-through,attr,omitempty"`
 }
 
@@ -5770,7 +5770,7 @@ type AttributeGroup_text_direction struct {
 
 	// insertion point for fields
 
-	// generated from attribute "dir" of type text-direction
+	// generated from attribute "dir
 	Dir string `xml:"dir,attr,omitempty"`
 }
 
@@ -5779,10 +5779,10 @@ type AttributeGroup_text_formatting struct {
 
 	// insertion point for fields
 
-	// generated from attribute "http://www.w3.org/XML/1998/namespace lang" of type 
+	// generated from attribute "http://www.w3.org/XML/1998/namespace lang
 	Lang string `xml:"http://www.w3.org/XML/1998/namespace lang,attr,omitempty"`
 
-	// generated from attribute "http://www.w3.org/XML/1998/namespace space" of type 
+	// generated from attribute "http://www.w3.org/XML/1998/namespace space
 	Space string `xml:"http://www.w3.org/XML/1998/namespace space,attr,omitempty"`
 
 	// generated from attribute group "justify
@@ -5815,7 +5815,7 @@ type AttributeGroup_text_rotation struct {
 
 	// insertion point for fields
 
-	// generated from attribute "rotation" of type rotation-degrees
+	// generated from attribute "rotation
 	Rotation string `xml:"rotation,attr,omitempty"`
 }
 
@@ -5824,25 +5824,25 @@ type AttributeGroup_trill_sound struct {
 
 	// insertion point for fields
 
-	// generated from attribute "start-note" of type start-note
+	// generated from attribute "start-note
 	Start_note string `xml:"start-note,attr,omitempty"`
 
-	// generated from attribute "trill-step" of type trill-step
+	// generated from attribute "trill-step
 	Trill_step string `xml:"trill-step,attr,omitempty"`
 
-	// generated from attribute "two-note-turn" of type two-note-turn
+	// generated from attribute "two-note-turn
 	Two_note_turn string `xml:"two-note-turn,attr,omitempty"`
 
-	// generated from attribute "accelerate" of type yes-no
+	// generated from attribute "accelerate
 	Accelerate string `xml:"accelerate,attr,omitempty"`
 
-	// generated from attribute "beats" of type trill-beats
+	// generated from attribute "beats
 	Beats string `xml:"beats,attr,omitempty"`
 
-	// generated from attribute "second-beat" of type percent
+	// generated from attribute "second-beat
 	Second_beat string `xml:"second-beat,attr,omitempty"`
 
-	// generated from attribute "last-beat" of type percent
+	// generated from attribute "last-beat
 	Last_beat string `xml:"last-beat,attr,omitempty"`
 }
 
@@ -5851,7 +5851,7 @@ type AttributeGroup_valign struct {
 
 	// insertion point for fields
 
-	// generated from attribute "valign" of type valign
+	// generated from attribute "valign
 	Valign string `xml:"valign,attr,omitempty"`
 }
 
@@ -5860,7 +5860,7 @@ type AttributeGroup_valign_image struct {
 
 	// insertion point for fields
 
-	// generated from attribute "valign" of type valign-image
+	// generated from attribute "valign
 	Valign string `xml:"valign,attr,omitempty"`
 }
 
@@ -5869,16 +5869,16 @@ type AttributeGroup_x_position struct {
 
 	// insertion point for fields
 
-	// generated from attribute "default-x" of type tenths
+	// generated from attribute "default-x
 	Default_x string `xml:"default-x,attr,omitempty"`
 
-	// generated from attribute "default-y" of type tenths
+	// generated from attribute "default-y
 	Default_y string `xml:"default-y,attr,omitempty"`
 
-	// generated from attribute "relative-x" of type tenths
+	// generated from attribute "relative-x
 	Relative_x string `xml:"relative-x,attr,omitempty"`
 
-	// generated from attribute "relative-y" of type tenths
+	// generated from attribute "relative-y
 	Relative_y string `xml:"relative-y,attr,omitempty"`
 }
 
@@ -5887,16 +5887,16 @@ type AttributeGroup_y_position struct {
 
 	// insertion point for fields
 
-	// generated from attribute "default-x" of type tenths
+	// generated from attribute "default-x
 	Default_x string `xml:"default-x,attr,omitempty"`
 
-	// generated from attribute "default-y" of type tenths
+	// generated from attribute "default-y
 	Default_y string `xml:"default-y,attr,omitempty"`
 
-	// generated from attribute "relative-x" of type tenths
+	// generated from attribute "relative-x
 	Relative_x string `xml:"relative-x,attr,omitempty"`
 
-	// generated from attribute "relative-y" of type tenths
+	// generated from attribute "relative-y
 	Relative_y string `xml:"relative-y,attr,omitempty"`
 }
 
