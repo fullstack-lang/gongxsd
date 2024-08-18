@@ -1,6 +1,10 @@
 package models
 
-import "log"
+import (
+	"cmp"
+	"log"
+	"slices"
+)
 
 // ModelGroup is a construct that allows for
 // the specification of complex structures within an XML document.
@@ -68,6 +72,11 @@ func (modelGroup *ModelGroup) getElements(groupMap map[string]*Group, map_Name_E
 			elems = append(elems, e)
 		}
 	}
+
+	// reoder elements according to their rank
+	slices.SortFunc(elems, func(a, b *Element) int {
+		return cmp.Compare(a.Order, b.Order)
+	})
 
 	return
 }

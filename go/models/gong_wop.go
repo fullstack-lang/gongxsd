@@ -150,8 +150,7 @@ func (from *Documentation) CopyBasicFields(to *Documentation) {
 type Element_WOP struct {
 	// insertion point
 	Name string
-	Line int
-	Column int
+	Order int
 	HasNameConflict bool
 	GoIdentifier string
 	NameXSD string
@@ -171,8 +170,7 @@ type Element_WOP struct {
 func (from *Element) CopyBasicFields(to *Element) {
 	// insertion point
 	to.Name = from.Name
-	to.Line = from.Line
-	to.Column = from.Column
+	to.Order = from.Order
 	to.HasNameConflict = from.HasNameConflict
 	to.GoIdentifier = from.GoIdentifier
 	to.NameXSD = from.NameXSD

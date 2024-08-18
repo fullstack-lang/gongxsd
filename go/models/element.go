@@ -1,10 +1,15 @@
 package models
 
+import "encoding/xml"
+
+var Order int
+
 type Element struct {
 	Name string
 
-	Line   int `xml:"-"`
-	Column int `xml:"-"`
+	// Order is the order at wich the element was unmarshalled in the xsd
+	// It is important to preserve the order output that is defined in the xsd
+	Order int `xml:"-"`
 
 	// analysis
 	WithGoIdentifier
@@ -29,8 +34,12 @@ type Element struct {
 	Groups      []*Group     `xml:"group"`
 }
 
-// func (e *Element) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
-// 	type Alias Element
-// 	aux := (*Alias)(e)
-// 	return d.DecodeElement(aux, &start)
-// }
+func (e *Element) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
+
+	e.Order = Order
+	Order += 1
+
+	type Alias Element
+	aux := (*Alias)(e)
+	return d.DecodeElement(aux, &start)
+}
