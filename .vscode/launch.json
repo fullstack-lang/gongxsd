@@ -25,7 +25,9 @@
                 "read",
                 "../../../test/books/books.xsd",
                 "-m",
-                "stages/stage"
+                "stages/stage",
+                "-o",
+                "../../../test/books/go/models/models.go"
             ]
         },
         {
