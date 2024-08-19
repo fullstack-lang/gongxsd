@@ -5,3 +5,4 @@ test/musicxml/go/roundtrip/__debug_bin*
 test/books/go/cmd/books/books
 alt/go/cmd/alt/alt
 alt/go/cmd/gongxsd-cli/__debug_bin*
+go/cmd/gongxsd/gongxsd.exe

@@ -1,8 +1,9 @@
 // generated from ng_file_enum.ts.go
 export enum ModelsFileTmplLevel1 {
 	// insertion point	
-	ModelsFileTmplLevel1OneGongstructCode = 0,
-	ModelsFileTmplLevel1Nb = 1,
+	ModelsFileTmplLevel1NamedStructCode = 0,
+	ModelsFileTmplLevel1UnNamedStructCode = 1,
+	ModelsFileTmplLevel1Nb = 2,
 }
 
 export interface ModelsFileTmplLevel1Select {
@@ -11,6 +12,7 @@ export interface ModelsFileTmplLevel1Select {
 }
 
 export const ModelsFileTmplLevel1List: ModelsFileTmplLevel1Select[] = [ // insertion point	
-	{ value: ModelsFileTmplLevel1.ModelsFileTmplLevel1OneGongstructCode, viewValue: "ModelsFileTmplLevel1OneGongstructCode" },
+	{ value: ModelsFileTmplLevel1.ModelsFileTmplLevel1NamedStructCode, viewValue: "ModelsFileTmplLevel1NamedStructCode" },
+	{ value: ModelsFileTmplLevel1.ModelsFileTmplLevel1UnNamedStructCode, viewValue: "ModelsFileTmplLevel1UnNamedStructCode" },
 	{ value: ModelsFileTmplLevel1.ModelsFileTmplLevel1Nb, viewValue: "ModelsFileTmplLevel1Nb" },
 ];
