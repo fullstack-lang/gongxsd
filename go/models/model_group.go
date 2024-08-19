@@ -121,12 +121,14 @@ func (modelGroup *ModelGroup) generateElements(
 			goType := generateGoTypeFromSimpleType(elem.Type, stMap)
 			if goType != "" {
 				// 1. a simple type
-				*fields += "\n\n\t// generated from element \"" + elem.NameXSD + "\" of type " + elem.Type + " order " + fmt.Sprintf("%d", elem.Order) + " depth " + fmt.Sprintf("%d", elem.Depth) +
+				*fields += "\n\n\t// generated from element \"" + elem.NameXSD + "\" of type " + elem.Type +
+					" order " + fmt.Sprintf("%d", elem.Order) + " depth " + fmt.Sprintf("%d", elem.Depth) +
 					"\n\t" + elem.GoIdentifier + " " + goType + " " + "`" + `xml:"` + elem.NameXSD + `"` + "`"
 			} else {
 				if elem.Type != "" {
 					if ct, ok := ctMap[elem.Type]; ok {
-						*fields += "\n\n\t// generated from element \"" + elem.NameXSD + "\" of type " + ct.Name + " order " + fmt.Sprintf("%d", elem.Order) + " depth " + fmt.Sprintf("%d", elem.Depth) +
+						*fields += "\n\n\t// generated from element \"" + elem.NameXSD + "\" of type " + ct.Name +
+							" order " + fmt.Sprintf("%d", elem.Order) + " depth " + fmt.Sprintf("%d", elem.Depth) +
 							"\n\t" + elem.GoIdentifier + " []*" + ct.GoIdentifier + " " + "`" + `xml:"` + elem.NameXSD + `"` + "`"
 					} else {
 						log.Println("element", elem.NameXSD, "unkown type", elem.Type)
@@ -136,7 +138,8 @@ func (modelGroup *ModelGroup) generateElements(
 						log.Println("element", elem.NameXSD, "should have an anonymous complex type", elem.Type)
 					} else {
 						ct := elem.ComplexType
-						*fields += "\n\n\t// generated from anonymous type within outer element \"" + elem.NameXSD + "\" of type " + ct.Name + "." +
+						*fields += "\n\n\t// generated from anonymous type within outer element \"" + elem.NameXSD +
+							"\" of type " + ct.Name + "." +
 							"\n\t" + elem.GoIdentifier + " []*" + ct.GoIdentifier + " " + "`" + `xml:"` + elem.NameXSD + `"` + "`"
 					}
 				}
@@ -153,7 +156,8 @@ func (modelGroup *ModelGroup) generateElements(
 				// *fields += "\n\n\t// generated from group " +
 				// 	"\n\t" + referenceGroup.GoIdentifier + " " + namedGroup.GoIdentifier // + " `xml:\",inline\"`"
 
-				*fields += "\n\n\t// generated from group " +
+				*fields += "\n\n\t// generated from group with order " + fmt.Sprintf("%d", referenceGroup.Order) +
+					" depth " + fmt.Sprintf("%d", referenceGroup.Depth) +
 					"\n\t" + namedGroup.GoIdentifier // + " `xml:\",inline\"`"
 			}
 

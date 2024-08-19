@@ -45,14 +45,16 @@ func (group *Group) GetFields(stage *StageStruct) (fields string) {
 	return
 }
 
-func (e *Group) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
+func (group *Group) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
 
+	group.Order = Order
+	group.Depth = Depth
 	Order = Order + 1
+	Depth = Depth + 1
 
 	type Alias Group
-	aux := (*Alias)(e)
+	aux := (*Alias)(group)
 
-	Depth = Depth + 1
 	err := d.DecodeElement(aux, &start)
 	Depth = Depth - 1
 

@@ -26,7 +26,7 @@ type A_measure struct {
 	// generated from attribute group "measure-attributes
 	AttributeGroup_measure_attributes
 
-	// generated from group
+	// generated from group with order 567 depth 3
 	Group_music_data
 }
 
@@ -50,7 +50,7 @@ type A_part struct {
 	// generated from attribute group "part-attributes
 	AttributeGroup_part_attributes
 
-	// generated from group
+	// generated from group with order 572 depth 3
 	Group_music_data
 }
 
@@ -74,7 +74,7 @@ type A_score_partwise struct {
 	// generated from attribute group "document-attributes
 	AttributeGroup_document_attributes
 
-	// generated from group
+	// generated from group with order 564 depth 1
 	Group_score_header
 
 	// generated from anonymous type within outer element "part" of type A_part.
@@ -89,7 +89,7 @@ type A_score_timewise struct {
 	// generated from attribute group "document-attributes
 	AttributeGroup_document_attributes
 
-	// generated from group
+	// generated from group with order 569 depth 1
 	Group_score_header
 
 	// generated from anonymous type within outer element "measure" of type A_measure.
@@ -150,7 +150,7 @@ type Accord struct {
 	// generated from attribute "string
 	String int `xml:"string,attr,omitempty"`
 
-	// generated from group
+	// generated from group with order 89 depth 0
 	Group_tuning
 }
 
@@ -337,7 +337,7 @@ type Attributes struct {
 
 	// insertion point for fields
 
-	// generated from group
+	// generated from group with order 41 depth 0
 	Group_editorial
 
 	// generated from element "divisions" of type positive-divisions order 42 depth 0
@@ -383,10 +383,10 @@ type Backup struct {
 
 	// insertion point for fields
 
-	// generated from group
+	// generated from group with order 255 depth 0
 	Group_duration
 
-	// generated from group
+	// generated from group with order 256 depth 0
 	Group_editorial
 }
 
@@ -421,11 +421,11 @@ type Barline struct {
 	// generated from attribute group "optional-unique-id
 	AttributeGroup_optional_unique_id
 
-	// generated from group
-	Group_editorial
-
 	// generated from element "bar-style" of type bar-style-color order 81 depth 0
 	Bar_style []*Bar_style_color `xml:"bar-style"`
+
+	// generated from group with order 82 depth 0
+	Group_editorial
 
 	// generated from element "wavy-line" of type wavy-line order 83 depth 0
 	Wavy_line []*Wavy_line `xml:"wavy-line"`
@@ -525,7 +525,7 @@ type Beat_repeat struct {
 	// generated from attribute "use-dots
 	Use_dots string `xml:"use-dots,attr,omitempty"`
 
-	// generated from group
+	// generated from group with order 54 depth 0
 	Group_slash
 }
 
@@ -535,7 +535,7 @@ type Beat_unit_tied struct {
 
 	// insertion point for fields
 
-	// generated from group
+	// generated from group with order 96 depth 0
 	Group_beat_unit
 }
 
@@ -690,7 +690,7 @@ type Clef struct {
 	// generated from attribute group "optional-unique-id
 	AttributeGroup_optional_unique_id
 
-	// generated from group
+	// generated from group with order 55 depth 0
 	Group_clef
 }
 
@@ -772,14 +772,14 @@ type Defaults struct {
 
 	// insertion point for fields
 
-	// generated from group
-	Group_layout
-
 	// generated from element "scaling" of type scaling order 410 depth 0
 	Scaling []*Scaling `xml:"scaling"`
 
 	// generated from element "concert-score" of type empty order 411 depth 0
 	Concert_score string `xml:"concert-score"`
+
+	// generated from group with order 412 depth 0
+	Group_layout
 
 	// generated from element "appearance" of type appearance order 413 depth 0
 	Appearance []*Appearance `xml:"appearance"`
@@ -876,17 +876,17 @@ type Direction struct {
 	// generated from attribute group "optional-unique-id
 	AttributeGroup_optional_unique_id
 
-	// generated from group
-	Group_editorial_voice_direction
-
-	// generated from group
-	Group_staff
-
 	// generated from element "direction-type" of type direction-type order 100 depth 0
 	Direction_type []*Direction_type `xml:"direction-type"`
 
 	// generated from element "offset" of type offset order 101 depth 0
 	Offset []*Offset `xml:"offset"`
+
+	// generated from group with order 102 depth 0
+	Group_editorial_voice_direction
+
+	// generated from group with order 103 depth 0
+	Group_staff
 
 	// generated from element "sound" of type sound order 104 depth 0
 	Sound []*Sound `xml:"sound"`
@@ -1354,9 +1354,6 @@ type Figure struct {
 
 	// insertion point for fields
 
-	// generated from group
-	Group_editorial
-
 	// generated from element "prefix" of type style-text order 261 depth 0
 	Prefix []*Style_text `xml:"prefix"`
 
@@ -1368,6 +1365,9 @@ type Figure struct {
 
 	// generated from element "extend" of type extend order 264 depth 0
 	Extend []*Extend `xml:"extend"`
+
+	// generated from group with order 265 depth 0
+	Group_editorial
 }
 
 // Figured_bass is generated from named complex type "figured-bass"
@@ -1391,14 +1391,14 @@ type Figured_bass struct {
 	// generated from attribute group "optional-unique-id
 	AttributeGroup_optional_unique_id
 
-	// generated from group
-	Group_duration
-
-	// generated from group
-	Group_editorial
-
 	// generated from element "figure" of type figure order 266 depth 0
 	Figure []*Figure `xml:"figure"`
+
+	// generated from group with order 267 depth 0
+	Group_duration
+
+	// generated from group with order 268 depth 0
+	Group_editorial
 }
 
 // Fingering is generated from named complex type "fingering"
@@ -1498,13 +1498,13 @@ type Forward struct {
 
 	// insertion point for fields
 
-	// generated from group
+	// generated from group with order 269 depth 0
 	Group_duration
 
-	// generated from group
+	// generated from group with order 270 depth 0
 	Group_editorial_voice
 
-	// generated from group
+	// generated from group with order 271 depth 0
 	Group_staff
 }
 
@@ -1809,20 +1809,20 @@ type Harmony struct {
 	// generated from attribute group "optional-unique-id
 	AttributeGroup_optional_unique_id
 
-	// generated from group
+	// generated from group with order 139 depth 0
 	Group_harmony_chord
-
-	// generated from group
-	Group_editorial
-
-	// generated from group
-	Group_staff
 
 	// generated from element "frame" of type frame order 140 depth 0
 	Frame []*Frame `xml:"frame"`
 
 	// generated from element "offset" of type offset order 141 depth 0
 	Offset []*Offset `xml:"offset"`
+
+	// generated from group with order 142 depth 0
+	Group_editorial
+
+	// generated from group with order 143 depth 0
+	Group_staff
 }
 
 // Harmony_alter is generated from named complex type "harmony-alter"
@@ -1972,7 +1972,7 @@ type Instrument_change struct {
 	// generated from attribute "id
 	Id string `xml:"id,attr,omitempty"`
 
-	// generated from group
+	// generated from group with order 145 depth 0
 	Group_virtual_instrument_data
 }
 
@@ -1998,11 +1998,11 @@ type Interchangeable struct {
 	// generated from attribute "separator
 	Separator string `xml:"separator,attr,omitempty"`
 
-	// generated from group
-	Group_time_signature
-
 	// generated from element "time-relation" of type time-relation order 58 depth 0
 	Time_relation string `xml:"time-relation"`
+
+	// generated from group with order 59 depth 0
+	Group_time_signature
 }
 
 // Inversion is generated from named complex type "inversion"
@@ -2036,10 +2036,10 @@ type Key struct {
 	// generated from attribute group "optional-unique-id
 	AttributeGroup_optional_unique_id
 
-	// generated from group
+	// generated from group with order 60 depth 0
 	Group_traditional_key
 
-	// generated from group
+	// generated from group with order 61 depth 0
 	Group_non_traditional_key
 
 	// generated from element "key-octave" of type key-octave order 62 depth 0
@@ -2235,9 +2235,6 @@ type Lyric struct {
 	// generated from attribute group "optional-unique-id
 	AttributeGroup_optional_unique_id
 
-	// generated from group
-	Group_editorial
-
 	// generated from element "elision" of type elision order 286 depth 0
 	Elision []*Elision `xml:"elision"`
 
@@ -2261,6 +2258,9 @@ type Lyric struct {
 
 	// generated from element "end-paragraph" of type empty order 294 depth 0
 	End_paragraph string `xml:"end-paragraph"`
+
+	// generated from group with order 295 depth 0
+	Group_editorial
 }
 
 // Lyric_font is generated from named complex type "lyric-font"
@@ -2421,8 +2421,14 @@ type Metronome struct {
 	// generated from attribute group "optional-unique-id
 	AttributeGroup_optional_unique_id
 
+	// generated from group with order 149 depth 0
+	Group_beat_unit
+
 	// generated from element "per-minute" of type per-minute order 151 depth 0
 	Per_minute []*Per_minute `xml:"per-minute"`
+
+	// generated from group with order 152 depth 0
+	// Group_beat_unit
 
 	// generated from element "beat-unit-tied" of type beat-unit-tied order 153 depth 0
 	Beat_unit_tied []*Beat_unit_tied `xml:"beat-unit-tied"`
@@ -2635,7 +2641,7 @@ type Notations struct {
 	// generated from attribute group "optional-unique-id
 	AttributeGroup_optional_unique_id
 
-	// generated from group
+	// generated from group with order 296 depth 0
 	Group_editorial
 
 	// generated from element "tied" of type tied order 297 depth 0
@@ -2723,20 +2729,11 @@ type Note struct {
 	// generated from attribute group "optional-unique-id
 	AttributeGroup_optional_unique_id
 
-	// generated from group
-	Group_editorial_voice
-
-	// generated from group
-	Group_staff
-
-	// generated from group
-	Group_full_note
-
-	// generated from group
-	Group_duration
-
 	// generated from element "grace" of type grace order 311 depth 0
 	Grace []*Grace `xml:"grace"`
+
+	// generated from group with order 312 depth 0
+	Group_full_note
 
 	// generated from element "tie" of type tie order 313 depth 0
 	Tie []*Tie `xml:"tie"`
@@ -2744,8 +2741,26 @@ type Note struct {
 	// generated from element "cue" of type empty order 314 depth 0
 	Cue string `xml:"cue"`
 
+	// generated from group with order 315 depth 0
+	// Group_full_note
+
+	// generated from group with order 317 depth 0
+	// Group_full_note
+
+	// generated from group with order 318 depth 0
+	// Group_duration
+
+	// generated from group with order 319 depth 0
+	// Group_full_note
+
+	// generated from group with order 320 depth 0
+	Group_duration
+
 	// generated from element "instrument" of type instrument order 322 depth 0
 	Instrument []*Instrument `xml:"instrument"`
+
+	// generated from group with order 323 depth 0
+	Group_editorial_voice
 
 	// generated from element "type" of type note-type order 324 depth 0
 	Type []*Note_type `xml:"type"`
@@ -2767,6 +2782,9 @@ type Note struct {
 
 	// generated from element "notehead-text" of type notehead-text order 330 depth 0
 	Notehead_text []*Notehead_text `xml:"notehead-text"`
+
+	// generated from group with order 331 depth 0
+	Group_staff
 
 	// generated from element "beam" of type beam order 332 depth 0
 	Beam []*Beam `xml:"beam"`
@@ -3106,7 +3124,7 @@ type Page_margins struct {
 	// generated from attribute "type
 	Type string `xml:"type,attr,omitempty"`
 
-	// generated from group
+	// generated from group with order 223 depth 0
 	Group_all_margins
 }
 
@@ -3116,7 +3134,7 @@ type Part_clef struct {
 
 	// insertion point for fields
 
-	// generated from group
+	// generated from group with order 67 depth 0
 	Group_clef
 }
 
@@ -3131,9 +3149,6 @@ type Part_group struct {
 
 	// generated from attribute "number
 	Number string `xml:"number,attr,omitempty"`
-
-	// generated from group
-	Group_editorial
 
 	// generated from element "group-name" of type group-name order 418 depth 0
 	Group_name []*Group_name `xml:"group-name"`
@@ -3155,6 +3170,9 @@ type Part_group struct {
 
 	// generated from element "group-time" of type empty order 424 depth 0
 	Group_time string `xml:"group-time"`
+
+	// generated from group with order 425 depth 0
+	Group_editorial
 }
 
 // Part_link is generated from named complex type "part-link"
@@ -3179,11 +3197,17 @@ type Part_list struct {
 
 	// insertion point for fields
 
-	// generated from group
+	// generated from group with order 428 depth 0
 	Group_part_group
 
-	// generated from group
+	// generated from group with order 429 depth 0
 	Group_score_part
+
+	// generated from group with order 430 depth 0
+	// Group_part_group
+
+	// generated from group with order 431 depth 0
+	// Group_score_part
 }
 
 // Part_name is generated from named complex type "part-name"
@@ -3218,7 +3242,7 @@ type Part_transpose struct {
 
 	// insertion point for fields
 
-	// generated from group
+	// generated from group with order 68 depth 0
 	Group_transpose
 }
 
@@ -3424,7 +3448,7 @@ type Print struct {
 	// generated from attribute group "optional-unique-id
 	AttributeGroup_optional_unique_id
 
-	// generated from group
+	// generated from group with order 181 depth 0
 	Group_layout
 
 	// generated from element "measure-layout" of type measure-layout order 182 depth 0
@@ -3475,7 +3499,7 @@ type Rest struct {
 	// generated from attribute "measure
 	Measure string `xml:"measure,attr,omitempty"`
 
-	// generated from group
+	// generated from group with order 358 depth 0
 	Group_display_step_octave
 }
 
@@ -3540,14 +3564,14 @@ type Score_instrument struct {
 	// generated from attribute "id
 	Id string `xml:"id,attr,omitempty"`
 
-	// generated from group
-	Group_virtual_instrument_data
-
 	// generated from element "instrument-name" of type xs:string order 433 depth 0
 	Instrument_name string `xml:"instrument-name"`
 
 	// generated from element "instrument-abbreviation" of type xs:string order 434 depth 0
 	Instrument_abbreviation string `xml:"instrument-abbreviation"`
+
+	// generated from group with order 435 depth 0
+	Group_virtual_instrument_data
 }
 
 // Score_part is generated from named complex type "score-part"
@@ -3624,7 +3648,7 @@ type Slash struct {
 	// generated from attribute "use-stems
 	Use_stems string `xml:"use-stems,attr,omitempty"`
 
-	// generated from group
+	// generated from group with order 69 depth 0
 	Group_slash
 }
 
@@ -3848,7 +3872,7 @@ type Staff_tuning struct {
 	// generated from attribute "line
 	Line int `xml:"line,attr,omitempty"`
 
-	// generated from group
+	// generated from group with order 76 depth 0
 	Group_tuning
 }
 
@@ -4025,7 +4049,7 @@ type System_margins struct {
 
 	// insertion point for fields
 
-	// generated from group
+	// generated from group with order 233 depth 0
 	Group_left_right_margins
 }
 
@@ -4232,7 +4256,7 @@ type Time struct {
 	// generated from attribute group "optional-unique-id
 	AttributeGroup_optional_unique_id
 
-	// generated from group
+	// generated from group with order 77 depth 0
 	Group_time_signature
 
 	// generated from element "interchangeable" of type interchangeable order 78 depth 0
@@ -4283,7 +4307,7 @@ type Transpose struct {
 	// generated from attribute group "optional-unique-id
 	AttributeGroup_optional_unique_id
 
-	// generated from group
+	// generated from group with order 80 depth 0
 	Group_transpose
 }
 
@@ -4408,7 +4432,7 @@ type Unpitched struct {
 
 	// insertion point for fields
 
-	// generated from group
+	// generated from group with order 399 depth 0
 	Group_display_step_octave
 }
 
@@ -4534,7 +4558,7 @@ type Group_all_margins struct {
 
 	// insertion point for fields
 
-	// generated from group
+	// generated from group with order 516 depth 1
 	Group_left_right_margins
 
 	// generated from element "top-margin" of type tenths order 517 depth 1
@@ -4597,10 +4621,10 @@ type Group_editorial struct {
 
 	// insertion point for fields
 
-	// generated from group
+	// generated from group with order 453 depth 1
 	Group_footnote
 
-	// generated from group
+	// generated from group with order 454 depth 1
 	Group_level
 }
 
@@ -4609,13 +4633,13 @@ type Group_editorial_voice struct {
 
 	// insertion point for fields
 
-	// generated from group
+	// generated from group with order 456 depth 1
 	Group_footnote
 
-	// generated from group
+	// generated from group with order 457 depth 1
 	Group_level
 
-	// generated from group
+	// generated from group with order 458 depth 1
 	Group_voice
 }
 
@@ -4624,13 +4648,13 @@ type Group_editorial_voice_direction struct {
 
 	// insertion point for fields
 
-	// generated from group
+	// generated from group with order 460 depth 1
 	Group_footnote
 
-	// generated from group
+	// generated from group with order 461 depth 1
 	Group_level
 
-	// generated from group
+	// generated from group with order 462 depth 1
 	Group_voice
 }
 
