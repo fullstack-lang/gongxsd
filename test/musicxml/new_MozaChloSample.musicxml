@@ -4,29 +4,24 @@
         <work-number>K. 524</work-number>
         <work-title>An Chloe (Page 1)</work-title>
     </work>
-    <movement-number></movement-number>
-    <movement-title></movement-title>
     <identification>
         <creator type="composer">Wolfgang Amadeus Mozart</creator>
         <creator type="lyricist">Johann Georg Jacobi</creator>
         <rights>Copyright © 2002 MakeMusic, Inc.</rights>
         <encoding>
             <software>Finale v27.0 for Mac</software>
-            <encoding-description></encoding-description>
             <supports type="yes" element="print" attribute="new-system" value="yes"></supports>
             <supports type="yes" element="print" attribute="new-page" value="yes"></supports>
             <supports type="yes" element="accidental"></supports>
             <supports type="yes" element="beam"></supports>
             <supports type="yes" element="stem"></supports>
         </encoding>
-        <source></source>
     </identification>
     <defaults>
         <scaling>
             <millimeters>6.35</millimeters>
             <tenths>40</tenths>
         </scaling>
-        <concert-score></concert-score>
         <page-layout>
             <page-height>1760</page-height>
             <page-width>1360</page-width>
@@ -82,7 +77,6 @@
         <credit-words>An&#xA;      Chloe</credit-words>
     </credit>
     <credit page="1">
-        <credit-type></credit-type>
         <credit-words>K.&#xA;      524</credit-words>
     </credit>
     <credit page="1">
@@ -96,85 +90,53 @@
     <part-list>
         <score-part id="P1">
             <part-name>Voice</part-name>
-            <group></group>
             <score-instrument id="P1-I1">
                 <instrument-name>Voice</instrument-name>
-                <instrument-abbreviation></instrument-abbreviation>
                 <instrument-sound>voice.vocals</instrument-sound>
-                <solo></solo>
-                <ensemble></ensemble>
             </score-instrument>
             <midi-instrument id="P1-I1">
                 <midi-channel>1</midi-channel>
-                <midi-name></midi-name>
-                <midi-bank>0</midi-bank>
                 <midi-program>53</midi-program>
-                <midi-unpitched>0</midi-unpitched>
                 <volume>80</volume>
                 <pan>0</pan>
-                <elevation></elevation>
             </midi-instrument>
         </score-part>
         <score-part id="P2">
             <part-name>Piano</part-name>
-            <group></group>
             <score-instrument id="P2-I2">
                 <instrument-name>Acoustic Grand Piano</instrument-name>
-                <instrument-abbreviation></instrument-abbreviation>
                 <instrument-sound>keyboard.piano</instrument-sound>
-                <solo></solo>
-                <ensemble></ensemble>
             </score-instrument>
             <midi-instrument id="P2-I2">
                 <midi-channel>2</midi-channel>
-                <midi-name></midi-name>
-                <midi-bank>0</midi-bank>
                 <midi-program>1</midi-program>
-                <midi-unpitched>0</midi-unpitched>
                 <volume>80</volume>
                 <pan>0</pan>
-                <elevation></elevation>
             </midi-instrument>
         </score-part>
     </part-list>
     <part id="P1">
         <measure number="0" implicit="yes">
             <note>
-                <chord></chord>
-                <rest measure="yes">
-                    <display-step></display-step>
-                    <display-octave>0</display-octave>
-                </rest>
-                <cue></cue>
+                <rest measure="yes"></rest>
                 <duration>4</duration>
                 <voice>1</voice>
-                <staff>0</staff>
             </note>
             <attributes>
                 <divisions>4</divisions>
                 <key>
                     <fifths>-3</fifths>
                     <mode>major</mode>
-                    <key-step></key-step>
-                    <key-alter></key-alter>
                 </key>
                 <time symbol="cut">
                     <beats>2</beats>
                     <beat-type>2</beat-type>
-                    <senza-misura></senza-misura>
                 </time>
-                <staves>0</staves>
-                <instruments>0</instruments>
                 <clef>
                     <sign>G</sign>
                     <line>2</line>
-                    <clef-octave-change>0</clef-octave-change>
                 </clef>
-                <staff-details print-object="no">
-                    <staff-type></staff-type>
-                    <staff-lines>0</staff-lines>
-                    <capo>0</capo>
-                </staff-details>
+                <staff-details print-object="no"></staff-details>
             </attributes>
             <print>
                 <measure-numbering system="only-top">system</measure-numbering>
@@ -182,541 +144,363 @@
         </measure>
         <measure number="1">
             <note>
-                <chord></chord>
-                <rest measure="yes">
-                    <display-step></display-step>
-                    <display-octave>0</display-octave>
-                </rest>
-                <cue></cue>
+                <rest measure="yes"></rest>
                 <duration>16</duration>
                 <voice>1</voice>
-                <staff>0</staff>
             </note>
         </measure>
         <measure number="2">
             <note>
-                <chord></chord>
-                <rest measure="yes">
-                    <display-step></display-step>
-                    <display-octave>0</display-octave>
-                </rest>
-                <cue></cue>
+                <rest measure="yes"></rest>
                 <duration>16</duration>
                 <voice>1</voice>
-                <staff>0</staff>
             </note>
         </measure>
         <measure number="3">
             <note>
-                <chord></chord>
-                <rest measure="yes">
-                    <display-step></display-step>
-                    <display-octave>0</display-octave>
-                </rest>
-                <cue></cue>
+                <rest measure="yes"></rest>
                 <duration>16</duration>
                 <voice>1</voice>
-                <staff>0</staff>
             </note>
         </measure>
         <measure number="4">
             <note>
-                <chord></chord>
-                <rest measure="yes">
-                    <display-step></display-step>
-                    <display-octave>0</display-octave>
-                </rest>
-                <cue></cue>
+                <rest measure="yes"></rest>
                 <duration>16</duration>
                 <voice>1</voice>
-                <staff>0</staff>
             </note>
         </measure>
         <measure number="5" width="341">
             <note>
-                <chord></chord>
-                <rest measure="yes">
-                    <display-step></display-step>
-                    <display-octave>0</display-octave>
-                </rest>
-                <cue></cue>
+                <rest measure="yes"></rest>
                 <duration>16</duration>
                 <voice>1</voice>
-                <staff>0</staff>
             </note>
             <attributes>
-                <divisions></divisions>
-                <staves>0</staves>
-                <instruments>0</instruments>
-                <staff-details print-object="yes">
-                    <staff-type></staff-type>
-                    <staff-lines>0</staff-lines>
-                    <capo>0</capo>
-                </staff-details>
+                <staff-details print-object="yes"></staff-details>
             </attributes>
             <print new-system="yes">
                 <system-layout>
                     <system-distance>110</system-distance>
-                    <top-system-distance></top-system-distance>
                 </system-layout>
             </print>
         </measure>
         <measure number="6" width="194">
             <note default-x="12">
-                <chord></chord>
-                <rest>
-                    <display-step></display-step>
-                    <display-octave>0</display-octave>
-                </rest>
-                <cue></cue>
+                <rest></rest>
                 <duration>8</duration>
                 <voice>1</voice>
                 <type>half</type>
-                <staff>0</staff>
             </note>
             <note default-x="81">
-                <chord></chord>
-                <rest>
-                    <display-step></display-step>
-                    <display-octave>0</display-octave>
-                </rest>
-                <cue></cue>
+                <rest></rest>
                 <duration>4</duration>
                 <voice>1</voice>
                 <type>quarter</type>
-                <staff>0</staff>
             </note>
             <note default-x="122">
-                <chord></chord>
                 <pitch>
                     <step>G</step>
-                    <alter></alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>2</duration>
                 <voice>1</voice>
                 <type>eighth</type>
                 <stem>up</stem>
-                <staff>0</staff>
                 <beam number="1">begin</beam>
                 <lyric number="1" default-y="-80" relative-x="-2">
                     <syllabic>single</syllabic>
                     <text>Wenn</text>
-                    <laughing></laughing>
-                    <humming></humming>
-                    <end-line></end-line>
-                    <end-paragraph></end-paragraph>
                 </lyric>
             </note>
             <note default-x="163">
-                <chord></chord>
                 <pitch>
                     <step>A</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>2</duration>
                 <voice>1</voice>
                 <type>eighth</type>
                 <stem>up</stem>
-                <staff>0</staff>
                 <beam number="1">end</beam>
                 <lyric number="1" default-y="-80">
                     <syllabic>single</syllabic>
                     <text>die</text>
-                    <laughing></laughing>
-                    <humming></humming>
-                    <end-line></end-line>
-                    <end-paragraph></end-paragraph>
                 </lyric>
             </note>
         </measure>
         <measure number="7" width="225">
             <note default-x="22">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>4</duration>
                 <voice>1</voice>
                 <type>quarter</type>
                 <stem>down</stem>
-                <staff>0</staff>
                 <lyric number="1" default-y="-80" relative-x="3">
                     <syllabic>single</syllabic>
                     <text>Lieb’</text>
-                    <laughing></laughing>
-                    <humming></humming>
-                    <end-line></end-line>
-                    <end-paragraph></end-paragraph>
                 </lyric>
             </note>
             <note default-x="73">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>4</duration>
                 <voice>1</voice>
                 <type>quarter</type>
                 <stem>down</stem>
-                <staff>0</staff>
                 <lyric number="1" default-y="-80">
                     <syllabic>single</syllabic>
                     <text>aus</text>
-                    <laughing></laughing>
-                    <humming></humming>
-                    <end-line></end-line>
-                    <end-paragraph></end-paragraph>
                 </lyric>
             </note>
             <note default-x="123">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>4</duration>
                 <voice>1</voice>
                 <type>quarter</type>
                 <stem>down</stem>
-                <staff>0</staff>
                 <lyric number="1" default-y="-80">
                     <syllabic>begin</syllabic>
                     <text>dei</text>
-                    <laughing></laughing>
-                    <humming></humming>
-                    <end-line></end-line>
-                    <end-paragraph></end-paragraph>
                 </lyric>
             </note>
             <note default-x="173">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>4</duration>
                 <voice>1</voice>
                 <type>quarter</type>
                 <stem>down</stem>
-                <staff>0</staff>
                 <lyric number="1" default-y="-80">
                     <syllabic>end</syllabic>
                     <text>nen</text>
-                    <laughing></laughing>
-                    <humming></humming>
-                    <end-line></end-line>
-                    <end-paragraph></end-paragraph>
                 </lyric>
             </note>
         </measure>
         <measure number="8" width="221">
             <note default-x="18">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>6</duration>
                 <voice>1</voice>
                 <type>quarter</type>
                 <dot></dot>
                 <stem>down</stem>
-                <staff>0</staff>
                 <notations>
                     <slur type="start" number="1" default-x="6" default-y="-7" placement="above" bezier-x="18" bezier-y="20"></slur>
                 </notations>
                 <lyric number="1" default-y="-80">
                     <syllabic>begin</syllabic>
                     <text>blau</text>
-                    <laughing></laughing>
-                    <humming></humming>
-                    <end-line></end-line>
-                    <end-paragraph></end-paragraph>
                 </lyric>
             </note>
             <note default-x="94">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>5</octave>
                 </pitch>
-                <cue></cue>
                 <duration>2</duration>
                 <voice>1</voice>
                 <type>eighth</type>
                 <stem>down</stem>
-                <staff>0</staff>
                 <notations>
                     <slur type="stop" number="1" default-x="6" default-y="5" bezier-x="-23" bezier-y="14"></slur>
                 </notations>
             </note>
             <note default-x="119">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>5</octave>
                 </pitch>
-                <cue></cue>
                 <duration>4</duration>
                 <voice>1</voice>
                 <type>quarter</type>
                 <stem>down</stem>
-                <staff>0</staff>
                 <lyric number="1" default-y="-80" relative-x="3">
                     <syllabic>end</syllabic>
                     <text>en,</text>
-                    <laughing></laughing>
-                    <humming></humming>
-                    <end-line></end-line>
-                    <end-paragraph></end-paragraph>
                 </lyric>
             </note>
             <note default-x="169">
-                <chord></chord>
-                <rest>
-                    <display-step></display-step>
-                    <display-octave>0</display-octave>
-                </rest>
-                <cue></cue>
+                <rest></rest>
                 <duration>4</duration>
                 <voice>1</voice>
                 <type>quarter</type>
-                <staff>0</staff>
             </note>
         </measure>
         <measure number="9" width="218">
             <note default-x="14">
-                <chord></chord>
                 <pitch>
                     <step>G</step>
-                    <alter></alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>6</duration>
                 <voice>1</voice>
                 <type>quarter</type>
                 <dot></dot>
                 <stem>up</stem>
-                <staff>0</staff>
                 <notations>
                     <slur type="start" number="1" default-x="17" default-y="-5" orientation="over" bezier-x="18" bezier-y="15"></slur>
                 </notations>
                 <lyric number="1" default-y="-80">
                     <syllabic>begin</syllabic>
                     <text>hel</text>
-                    <laughing></laughing>
-                    <humming></humming>
-                    <end-line></end-line>
-                    <end-paragraph></end-paragraph>
                 </lyric>
             </note>
             <note default-x="90">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>2</duration>
                 <voice>1</voice>
                 <type>eighth</type>
                 <stem>down</stem>
-                <staff>0</staff>
                 <notations>
                     <slur type="stop" number="1" default-x="7" default-y="-7" bezier-x="-17" bezier-y="16"></slur>
                 </notations>
             </note>
             <note default-x="115">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>4</duration>
                 <voice>1</voice>
                 <type>quarter</type>
                 <stem>down</stem>
-                <staff>0</staff>
                 <lyric number="1" default-y="-80" relative-x="3">
                     <syllabic>end</syllabic>
                     <text>len,</text>
-                    <laughing></laughing>
-                    <humming></humming>
-                    <end-line></end-line>
-                    <end-paragraph></end-paragraph>
                 </lyric>
             </note>
             <note default-x="166">
-                <chord></chord>
-                <rest>
-                    <display-step></display-step>
-                    <display-octave>0</display-octave>
-                </rest>
-                <cue></cue>
+                <rest></rest>
                 <duration>4</duration>
                 <voice>1</voice>
                 <type>quarter</type>
-                <staff>0</staff>
             </note>
         </measure>
         <measure number="10" width="389">
             <note default-x="99">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
                 <tie type="start"></tie>
-                <cue></cue>
                 <duration>8</duration>
                 <voice>1</voice>
                 <type>half</type>
                 <stem>up</stem>
-                <staff>0</staff>
                 <notations>
                     <tied type="start"></tied>
                 </notations>
                 <lyric number="1" default-y="-80">
                     <syllabic>begin</syllabic>
                     <text>off</text>
-                    <laughing></laughing>
-                    <humming></humming>
-                    <end-line></end-line>
-                    <end-paragraph></end-paragraph>
                 </lyric>
             </note>
             <note default-x="243">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
                 <tie type="stop"></tie>
-                <cue></cue>
                 <duration>2</duration>
                 <voice>1</voice>
                 <type>eighth</type>
                 <stem>up</stem>
-                <staff>0</staff>
                 <beam number="1">begin</beam>
                 <notations>
                     <tied type="stop"></tied>
                 </notations>
             </note>
             <note default-x="279">
-                <chord></chord>
                 <pitch>
                     <step>F</step>
-                    <alter></alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>2</duration>
                 <voice>1</voice>
                 <type>eighth</type>
                 <stem>up</stem>
-                <staff>0</staff>
                 <beam number="1">continue</beam>
                 <lyric number="1" default-y="-80">
                     <syllabic>end</syllabic>
                     <text>nen</text>
-                    <laughing></laughing>
-                    <humming></humming>
-                    <end-line></end-line>
-                    <end-paragraph></end-paragraph>
                 </lyric>
             </note>
             <note default-x="315">
-                <chord></chord>
                 <pitch>
                     <step>G</step>
-                    <alter></alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>2</duration>
                 <voice>1</voice>
                 <type>eighth</type>
                 <stem>up</stem>
-                <staff>0</staff>
                 <beam number="1">continue</beam>
                 <lyric number="1" default-y="-80">
                     <syllabic>begin</syllabic>
                     <text>Au</text>
-                    <laughing></laughing>
-                    <humming></humming>
-                    <end-line></end-line>
-                    <end-paragraph></end-paragraph>
                 </lyric>
             </note>
             <note default-x="351">
-                <chord></chord>
                 <pitch>
                     <step>A</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>2</duration>
                 <voice>1</voice>
                 <type>eighth</type>
                 <stem>up</stem>
-                <staff>0</staff>
                 <beam number="1">end</beam>
                 <lyric number="1" default-y="-80">
                     <syllabic>end</syllabic>
                     <text>gen</text>
-                    <laughing></laughing>
-                    <humming></humming>
-                    <end-line></end-line>
-                    <end-paragraph></end-paragraph>
                 </lyric>
             </note>
             <print new-system="yes">
                 <system-layout>
                     <system-distance>110</system-distance>
-                    <top-system-distance></top-system-distance>
                 </system-layout>
             </print>
         </measure>
         <measure number="11" width="260">
             <note default-x="22">
-                <chord></chord>
                 <pitch>
                     <step>G</step>
-                    <alter></alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>4</duration>
                 <voice>1</voice>
                 <type>quarter</type>
                 <stem>up</stem>
-                <staff>0</staff>
                 <notations>
                     <slur type="start" number="1" default-x="6" default-y="-43" placement="below" bezier-x="15" bezier-y="-14"></slur>
                 </notations>
@@ -724,272 +508,188 @@
                     <syllabic>single</syllabic>
                     <text>sieht,</text>
                     <extend></extend>
-                    <laughing></laughing>
-                    <humming></humming>
-                    <end-line></end-line>
-                    <end-paragraph></end-paragraph>
                 </lyric>
             </note>
             <note default-x="78">
-                <chord></chord>
                 <pitch>
                     <step>F</step>
-                    <alter></alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>4</duration>
                 <voice>1</voice>
                 <type>quarter</type>
                 <stem>up</stem>
-                <staff>0</staff>
                 <notations>
                     <slur type="stop" number="1" default-x="7" default-y="-45" bezier-x="-16" bezier-y="-13"></slur>
                 </notations>
             </note>
             <note default-x="134">
-                <chord></chord>
-                <rest>
-                    <display-step></display-step>
-                    <display-octave>0</display-octave>
-                </rest>
-                <cue></cue>
+                <rest></rest>
                 <duration>4</duration>
                 <voice>1</voice>
                 <type>quarter</type>
-                <staff>0</staff>
             </note>
             <note default-x="189">
-                <chord></chord>
                 <pitch>
                     <step>G</step>
-                    <alter></alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>2</duration>
                 <voice>1</voice>
                 <type>eighth</type>
                 <stem>up</stem>
-                <staff>0</staff>
                 <beam number="1">begin</beam>
                 <lyric number="1" default-y="-80">
                     <syllabic>single</syllabic>
                     <text>und</text>
-                    <laughing></laughing>
-                    <humming></humming>
-                    <end-line></end-line>
-                    <end-paragraph></end-paragraph>
                 </lyric>
             </note>
             <note default-x="223">
-                <chord></chord>
                 <pitch>
                     <step>A</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>2</duration>
                 <voice>1</voice>
                 <type>eighth</type>
                 <stem>up</stem>
-                <staff>0</staff>
                 <beam number="1">end</beam>
                 <lyric number="1" default-y="-80" relative-x="3">
                     <syllabic>single</syllabic>
                     <text>vor</text>
-                    <laughing></laughing>
-                    <humming></humming>
-                    <end-line></end-line>
-                    <end-paragraph></end-paragraph>
                 </lyric>
             </note>
         </measure>
         <measure number="12" width="273">
             <note default-x="19">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>4</duration>
                 <voice>1</voice>
                 <type>quarter</type>
                 <stem>down</stem>
-                <staff>0</staff>
                 <lyric number="1" default-y="-80">
                     <syllabic>single</syllabic>
                     <text>Lust</text>
-                    <laughing></laughing>
-                    <humming></humming>
-                    <end-line></end-line>
-                    <end-paragraph></end-paragraph>
                 </lyric>
             </note>
             <note default-x="82">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>4</duration>
                 <voice>1</voice>
                 <type>quarter</type>
                 <stem>down</stem>
-                <staff>0</staff>
                 <lyric number="1" default-y="-80">
                     <syllabic>begin</syllabic>
                     <text>hin</text>
-                    <laughing></laughing>
-                    <humming></humming>
-                    <end-line></end-line>
-                    <end-paragraph></end-paragraph>
                 </lyric>
             </note>
             <note default-x="145">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>4</duration>
                 <voice>1</voice>
                 <type>quarter</type>
                 <stem>down</stem>
-                <staff>0</staff>
                 <lyric number="1" default-y="-80">
                     <syllabic>end</syllabic>
                     <text>ein</text>
-                    <laughing></laughing>
-                    <humming></humming>
-                    <end-line></end-line>
-                    <end-paragraph></end-paragraph>
                 </lyric>
             </note>
             <note default-x="208">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>4</duration>
                 <voice>1</voice>
                 <type>quarter</type>
                 <stem>down</stem>
-                <staff>0</staff>
                 <lyric number="1" default-y="-80">
                     <syllabic>single</syllabic>
                     <text>zu</text>
-                    <laughing></laughing>
-                    <humming></humming>
-                    <end-line></end-line>
-                    <end-paragraph></end-paragraph>
                 </lyric>
             </note>
         </measure>
         <measure number="13" width="279">
             <note default-x="23">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>6</duration>
                 <voice>1</voice>
                 <type>quarter</type>
                 <dot></dot>
                 <stem>down</stem>
-                <staff>0</staff>
                 <notations>
                     <slur type="start" number="1" default-x="6" default-y="-7" placement="above" bezier-x="22" bezier-y="24"></slur>
                 </notations>
                 <lyric number="1" default-y="-80">
                     <syllabic>begin</syllabic>
                     <text>schau</text>
-                    <laughing></laughing>
-                    <humming></humming>
-                    <end-line></end-line>
-                    <end-paragraph></end-paragraph>
                 </lyric>
             </note>
             <note default-x="118">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>5</octave>
                 </pitch>
-                <cue></cue>
                 <duration>2</duration>
                 <voice>1</voice>
                 <type>eighth</type>
                 <stem>down</stem>
-                <staff>0</staff>
                 <notations>
                     <slur type="stop" number="1" default-x="6" default-y="5" bezier-x="-27" bezier-y="18"></slur>
                 </notations>
             </note>
             <note default-x="150">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>5</octave>
                 </pitch>
-                <cue></cue>
                 <duration>4</duration>
                 <voice>1</voice>
                 <type>quarter</type>
                 <stem>down</stem>
-                <staff>0</staff>
                 <lyric number="1" default-y="-80">
                     <syllabic>end</syllabic>
                     <text>en</text>
-                    <laughing></laughing>
-                    <humming></humming>
-                    <end-line></end-line>
-                    <end-paragraph></end-paragraph>
                 </lyric>
             </note>
             <note default-x="213">
-                <chord></chord>
-                <rest>
-                    <display-step></display-step>
-                    <display-octave>0</display-octave>
-                </rest>
-                <cue></cue>
+                <rest></rest>
                 <duration>4</duration>
                 <voice>1</voice>
                 <type>quarter</type>
-                <staff>0</staff>
             </note>
         </measure>
         <measure number="14" width="368">
             <note default-x="107">
-                <chord></chord>
                 <pitch>
                     <step>G</step>
-                    <alter></alter>
                     <octave>4</octave>
                 </pitch>
                 <tie type="start"></tie>
-                <cue></cue>
                 <duration>8</duration>
                 <voice>1</voice>
                 <type>half</type>
                 <stem>up</stem>
-                <staff>0</staff>
                 <notations>
                     <tied type="start"></tied>
                 </notations>
@@ -997,26 +697,18 @@
                     <syllabic>single</syllabic>
                     <text>mir’s</text>
                     <extend></extend>
-                    <laughing></laughing>
-                    <humming></humming>
-                    <end-line></end-line>
-                    <end-paragraph></end-paragraph>
                 </lyric>
             </note>
             <note default-x="237">
-                <chord></chord>
                 <pitch>
                     <step>G</step>
-                    <alter></alter>
                     <octave>4</octave>
                 </pitch>
                 <tie type="stop"></tie>
-                <cue></cue>
                 <duration>2</duration>
                 <voice>1</voice>
                 <type>eighth</type>
                 <stem>up</stem>
-                <staff>0</staff>
                 <beam number="1">begin</beam>
                 <notations>
                     <tied type="stop"></tied>
@@ -1024,37 +716,30 @@
                 </notations>
             </note>
             <note default-x="269">
-                <chord></chord>
                 <pitch>
                     <step>A</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>2</duration>
                 <voice>1</voice>
                 <type>eighth</type>
                 <stem>up</stem>
-                <staff>0</staff>
                 <beam number="1">continue</beam>
                 <notations>
                     <slur type="stop" number="1" default-x="6" default-y="-35" bezier-x="-7" bezier-y="-12"></slur>
                 </notations>
             </note>
             <note default-x="302">
-                <chord></chord>
                 <pitch>
                     <step>A</step>
-                    <alter></alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>2</duration>
                 <voice>1</voice>
                 <type>eighth</type>
                 <accidental>natural</accidental>
                 <stem>up</stem>
-                <staff>0</staff>
                 <beam number="1">continue</beam>
                 <notations>
                     <slur type="start" number="1" default-x="7" default-y="-35" placement="below" bezier-x="10" bezier-y="-9"></slur>
@@ -1063,25 +748,18 @@
                     <syllabic>single</syllabic>
                     <text>im</text>
                     <extend></extend>
-                    <laughing></laughing>
-                    <humming></humming>
-                    <end-line></end-line>
-                    <end-paragraph></end-paragraph>
                 </lyric>
             </note>
             <note default-x="334">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>2</duration>
                 <voice>1</voice>
                 <type>eighth</type>
                 <stem>up</stem>
-                <staff>0</staff>
                 <beam number="1">end</beam>
                 <notations>
                     <slur type="stop" number="1" default-x="6" default-y="-33" bezier-x="-9" bezier-y="-10"></slur>
@@ -1090,69 +768,50 @@
             <print new-system="yes">
                 <system-layout>
                     <system-distance>110</system-distance>
-                    <top-system-distance></top-system-distance>
                 </system-layout>
             </print>
         </measure>
         <measure number="15" width="316">
             <note default-x="16">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>4</duration>
                 <voice>1</voice>
                 <type>quarter</type>
                 <stem>up</stem>
-                <staff>0</staff>
                 <lyric number="1" default-y="-80">
                     <syllabic>begin</syllabic>
                     <text>Her</text>
-                    <laughing></laughing>
-                    <humming></humming>
-                    <end-line></end-line>
-                    <end-paragraph></end-paragraph>
                 </lyric>
             </note>
             <note default-x="89">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>4</duration>
                 <voice>1</voice>
                 <type>quarter</type>
                 <stem>up</stem>
-                <staff>0</staff>
                 <lyric number="1" default-y="-80">
                     <syllabic>end</syllabic>
                     <text>zen</text>
-                    <laughing></laughing>
-                    <humming></humming>
-                    <end-line></end-line>
-                    <end-paragraph></end-paragraph>
                 </lyric>
             </note>
             <note default-x="161">
-                <chord></chord>
                 <pitch>
                     <step>G</step>
-                    <alter></alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>3</duration>
                 <voice>1</voice>
                 <type>eighth</type>
                 <dot></dot>
                 <stem>up</stem>
-                <staff>0</staff>
                 <beam number="1">begin</beam>
                 <notations>
                     <slur type="start" number="1" default-x="6" default-y="-43" placement="below" bezier-x="18" bezier-y="-11"></slur>
@@ -1161,26 +820,19 @@
                     <syllabic>single</syllabic>
                     <text>klopft</text>
                     <extend></extend>
-                    <laughing></laughing>
-                    <humming></humming>
-                    <end-line></end-line>
-                    <end-paragraph></end-paragraph>
                 </lyric>
             </note>
             <note default-x="215">
-                <chord></chord>
                 <pitch>
                     <step>A</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>1</duration>
                 <voice>1</voice>
                 <type>16th</type>
                 <accidental>flat</accidental>
                 <stem>up</stem>
-                <staff>0</staff>
                 <beam number="1">continue</beam>
                 <beam number="2">backward hook</beam>
                 <notations>
@@ -1188,19 +840,15 @@
                 </notations>
             </note>
             <note default-x="237">
-                <chord></chord>
                 <pitch>
                     <step>F</step>
-                    <alter></alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>3</duration>
                 <voice>1</voice>
                 <type>eighth</type>
                 <dot></dot>
                 <stem>up</stem>
-                <staff>0</staff>
                 <beam number="1">continue</beam>
                 <notations>
                     <slur type="start" number="1" default-x="6" default-y="-45" placement="below" bezier-x="16" bezier-y="-13"></slur>
@@ -1209,25 +857,17 @@
                     <syllabic>single</syllabic>
                     <text>und</text>
                     <extend></extend>
-                    <laughing></laughing>
-                    <humming></humming>
-                    <end-line></end-line>
-                    <end-paragraph></end-paragraph>
                 </lyric>
             </note>
             <note default-x="292">
-                <chord></chord>
                 <pitch>
                     <step>G</step>
-                    <alter></alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>1</duration>
                 <voice>1</voice>
                 <type>16th</type>
                 <stem>up</stem>
-                <staff>0</staff>
                 <beam number="1">end</beam>
                 <beam number="2">backward hook</beam>
                 <notations>
@@ -1237,186 +877,120 @@
         </measure>
         <measure number="16" width="262">
             <note default-x="23">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>4</duration>
                 <voice>1</voice>
                 <type>quarter</type>
                 <stem>up</stem>
-                <staff>0</staff>
                 <lyric number="1" default-y="-80" relative-x="3">
                     <syllabic>single</syllabic>
                     <text>glüht;</text>
-                    <laughing></laughing>
-                    <humming></humming>
-                    <end-line></end-line>
-                    <end-paragraph></end-paragraph>
                 </lyric>
             </note>
             <note default-x="78">
-                <chord></chord>
-                <rest>
-                    <display-step></display-step>
-                    <display-octave>0</display-octave>
-                </rest>
-                <cue></cue>
+                <rest></rest>
                 <duration>4</duration>
                 <voice>1</voice>
                 <type>quarter</type>
-                <staff>0</staff>
             </note>
             <note default-x="132">
-                <chord></chord>
-                <rest>
-                    <display-step></display-step>
-                    <display-octave>0</display-octave>
-                </rest>
-                <cue></cue>
+                <rest></rest>
                 <duration>4</duration>
                 <voice>1</voice>
                 <type>quarter</type>
-                <staff>0</staff>
             </note>
             <note default-x="186">
-                <chord></chord>
                 <pitch>
                     <step>G</step>
-                    <alter></alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>2</duration>
                 <voice>1</voice>
                 <type>eighth</type>
                 <stem>up</stem>
-                <staff>0</staff>
                 <beam number="1">begin</beam>
                 <lyric number="1" default-y="-80">
                     <syllabic>single</syllabic>
                     <text>und</text>
-                    <laughing></laughing>
-                    <humming></humming>
-                    <end-line></end-line>
-                    <end-paragraph></end-paragraph>
                 </lyric>
             </note>
             <note default-x="225">
-                <chord></chord>
                 <pitch>
                     <step>A</step>
-                    <alter></alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>2</duration>
                 <voice>1</voice>
                 <type>eighth</type>
                 <accidental>natural</accidental>
                 <stem>up</stem>
-                <staff>0</staff>
                 <beam number="1">end</beam>
                 <lyric number="1" default-y="-80" relative-x="3">
                     <syllabic>single</syllabic>
                     <text>ich</text>
-                    <laughing></laughing>
-                    <humming></humming>
-                    <end-line></end-line>
-                    <end-paragraph></end-paragraph>
                 </lyric>
             </note>
         </measure>
         <measure number="17" width="254">
             <note default-x="14">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>4</duration>
                 <voice>1</voice>
                 <type>quarter</type>
                 <stem>down</stem>
-                <staff>0</staff>
                 <lyric number="1" default-y="-80">
                     <syllabic>begin</syllabic>
                     <text>hal</text>
-                    <laughing></laughing>
-                    <humming></humming>
-                    <end-line></end-line>
-                    <end-paragraph></end-paragraph>
                 </lyric>
             </note>
             <note default-x="74">
-                <chord></chord>
                 <pitch>
                     <step>F</step>
-                    <alter></alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>4</duration>
                 <voice>1</voice>
                 <type>quarter</type>
                 <stem>up</stem>
-                <staff>0</staff>
                 <lyric number="1" default-y="-80">
                     <syllabic>end</syllabic>
                     <text>te</text>
-                    <laughing></laughing>
-                    <humming></humming>
-                    <end-line></end-line>
-                    <end-paragraph></end-paragraph>
                 </lyric>
             </note>
             <note default-x="133">
-                <chord></chord>
                 <pitch>
                     <step>C</step>
-                    <alter></alter>
                     <octave>5</octave>
                 </pitch>
-                <cue></cue>
                 <duration>4</duration>
                 <voice>1</voice>
                 <type>quarter</type>
                 <stem>down</stem>
-                <staff>0</staff>
                 <lyric number="1" default-y="-80">
                     <syllabic>single</syllabic>
                     <text>dich</text>
-                    <laughing></laughing>
-                    <humming></humming>
-                    <end-line></end-line>
-                    <end-paragraph></end-paragraph>
                 </lyric>
             </note>
             <note default-x="193">
-                <chord></chord>
                 <pitch>
                     <step>F</step>
-                    <alter></alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>4</duration>
                 <voice>1</voice>
                 <type>quarter</type>
                 <stem>up</stem>
-                <staff>0</staff>
                 <lyric number="1" default-y="-80">
                     <syllabic>single</syllabic>
                     <text>und</text>
-                    <laughing></laughing>
-                    <humming></humming>
-                    <end-line></end-line>
-                    <end-paragraph></end-paragraph>
                 </lyric>
             </note>
         </measure>
@@ -1424,13 +998,10 @@
     <part id="P2">
         <measure number="0" implicit="yes" width="179">
             <note default-x="128">
-                <chord></chord>
                 <pitch>
                     <step>G</step>
-                    <alter></alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -1442,13 +1013,11 @@
                 </notations>
             </note>
             <note default-x="153">
-                <chord></chord>
                 <pitch>
                     <step>A</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -1460,12 +1029,7 @@
                 </notations>
             </note>
             <note default-x="128">
-                <chord></chord>
-                <rest>
-                    <display-step></display-step>
-                    <display-octave>0</display-octave>
-                </rest>
-                <cue></cue>
+                <rest></rest>
                 <duration>24</duration>
                 <voice>3</voice>
                 <type>quarter</type>
@@ -1478,49 +1042,17 @@
                 <direction-type>
                     <words>Allegretto</words>
                 </direction-type>
-                <voice></voice>
                 <staff>1</staff>
                 <sound tempo="126"></sound>
             </direction>
             <direction placement="below">
                 <direction-type>
-                    <dynamics default-y="-61" relative-x="-13" halign="left">
-                        <p></p>
-                        <pp></pp>
-                        <ppp></ppp>
-                        <pppp></pppp>
-                        <ppppp></ppppp>
-                        <pppppp></pppppp>
-                        <f></f>
-                        <ff></ff>
-                        <fff></fff>
-                        <ffff></ffff>
-                        <fffff></fffff>
-                        <ffffff></ffffff>
-                        <mp></mp>
-                        <mf></mf>
-                        <sf></sf>
-                        <sfp></sfp>
-                        <sfpp></sfpp>
-                        <fp></fp>
-                        <rf></rf>
-                        <rfz></rfz>
-                        <sfz></sfz>
-                        <sffz></sffz>
-                        <fz></fz>
-                        <n></n>
-                        <pf></pf>
-                        <sfzp></sfzp>
-                    </dynamics>
+                    <dynamics default-y="-61" relative-x="-13" halign="left"></dynamics>
                 </direction-type>
-                <voice></voice>
                 <staff>1</staff>
                 <sound dynamics="54"></sound>
             </direction>
             <attributes>
-                <divisions></divisions>
-                <staves>0</staves>
-                <instruments>0</instruments>
                 <directive>Play with expression</directive>
             </attributes>
             <attributes>
@@ -1528,25 +1060,19 @@
                 <key>
                     <fifths>-3</fifths>
                     <mode>major</mode>
-                    <key-step></key-step>
-                    <key-alter></key-alter>
                 </key>
                 <time symbol="cut">
                     <beats>2</beats>
                     <beat-type>2</beat-type>
-                    <senza-misura></senza-misura>
                 </time>
                 <staves>2</staves>
-                <instruments>0</instruments>
                 <clef number="1">
                     <sign>G</sign>
                     <line>2</line>
-                    <clef-octave-change>0</clef-octave-change>
                 </clef>
                 <clef number="2">
                     <sign>F</sign>
                     <line>4</line>
-                    <clef-octave-change>0</clef-octave-change>
                 </clef>
             </attributes>
             <print page-number="2">
@@ -1555,7 +1081,6 @@
                         <left-margin>120</left-margin>
                         <right-margin>0</right-margin>
                     </system-margins>
-                    <system-distance></system-distance>
                     <top-system-distance>230</top-system-distance>
                 </system-layout>
                 <staff-layout number="2">
@@ -1566,13 +1091,11 @@
         </measure>
         <measure number="1" width="204">
             <note default-x="10">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>24</duration>
                 <voice>1</voice>
                 <type>quarter</type>
@@ -1580,13 +1103,11 @@
                 <staff>1</staff>
             </note>
             <note default-x="58">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>24</duration>
                 <voice>1</voice>
                 <type>quarter</type>
@@ -1594,13 +1115,11 @@
                 <staff>1</staff>
             </note>
             <note default-x="106">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>24</duration>
                 <voice>1</voice>
                 <type>quarter</type>
@@ -1608,13 +1127,11 @@
                 <staff>1</staff>
             </note>
             <note default-x="154">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>24</duration>
                 <voice>1</voice>
                 <type>quarter</type>
@@ -1622,13 +1139,11 @@
                 <staff>1</staff>
             </note>
             <note default-x="10">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>3</voice>
                 <type>eighth</type>
@@ -1640,13 +1155,11 @@
                 </notations>
             </note>
             <note default-x="34">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>3</voice>
                 <type>eighth</type>
@@ -1655,13 +1168,10 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="58">
-                <chord></chord>
                 <pitch>
                     <step>G</step>
-                    <alter></alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>3</voice>
                 <type>eighth</type>
@@ -1670,13 +1180,11 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="83">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>3</voice>
                 <type>eighth</type>
@@ -1685,13 +1193,10 @@
                 <beam number="1">end</beam>
             </note>
             <note default-x="106">
-                <chord></chord>
                 <pitch>
                     <step>D</step>
-                    <alter></alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>3</voice>
                 <type>eighth</type>
@@ -1700,13 +1205,11 @@
                 <beam number="1">begin</beam>
             </note>
             <note default-x="130">
-                <chord></chord>
                 <pitch>
                     <step>A</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>3</voice>
                 <type>eighth</type>
@@ -1715,13 +1218,10 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="154">
-                <chord></chord>
                 <pitch>
                     <step>F</step>
-                    <alter></alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>3</voice>
                 <type>eighth</type>
@@ -1730,13 +1230,11 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="178">
-                <chord></chord>
                 <pitch>
                     <step>A</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>3</voice>
                 <type>eighth</type>
@@ -1752,49 +1250,19 @@
             </backup>
             <direction placement="below">
                 <direction-type>
-                    <dynamics default-y="-65" relative-x="-8" halign="left">
-                        <p></p>
-                        <pp></pp>
-                        <ppp></ppp>
-                        <pppp></pppp>
-                        <ppppp></ppppp>
-                        <pppppp></pppppp>
-                        <f></f>
-                        <ff></ff>
-                        <fff></fff>
-                        <ffff></ffff>
-                        <fffff></fffff>
-                        <ffffff></ffffff>
-                        <mp></mp>
-                        <mf></mf>
-                        <sf></sf>
-                        <sfp></sfp>
-                        <sfpp></sfpp>
-                        <fp></fp>
-                        <rf></rf>
-                        <rfz></rfz>
-                        <sfz></sfz>
-                        <sffz></sffz>
-                        <fz></fz>
-                        <n></n>
-                        <pf></pf>
-                        <sfzp></sfzp>
-                    </dynamics>
+                    <dynamics default-y="-65" relative-x="-8" halign="left"></dynamics>
                 </direction-type>
-                <voice></voice>
                 <staff>2</staff>
                 <sound dynamics="54"></sound>
             </direction>
         </measure>
         <measure number="2" width="204">
             <note default-x="10">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>24</duration>
                 <voice>1</voice>
                 <type>quarter</type>
@@ -1809,13 +1277,11 @@
                 </notations>
             </note>
             <note default-x="58">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>5</octave>
                 </pitch>
-                <cue></cue>
                 <duration>24</duration>
                 <voice>1</voice>
                 <type>quarter</type>
@@ -1826,25 +1292,18 @@
                 </notations>
             </note>
             <note default-x="105">
-                <chord></chord>
-                <rest>
-                    <display-step></display-step>
-                    <display-octave>0</display-octave>
-                </rest>
-                <cue></cue>
+                <rest></rest>
                 <duration>48</duration>
                 <voice>1</voice>
                 <type>half</type>
                 <staff>1</staff>
             </note>
             <note default-x="10">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>3</voice>
                 <type>eighth</type>
@@ -1856,13 +1315,11 @@
                 </notations>
             </note>
             <note default-x="35">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>3</voice>
                 <type>eighth</type>
@@ -1871,13 +1328,10 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="58">
-                <chord></chord>
                 <pitch>
                     <step>G</step>
-                    <alter></alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>3</voice>
                 <type>eighth</type>
@@ -1886,13 +1340,11 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="82">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>3</voice>
                 <type>eighth</type>
@@ -1901,13 +1353,11 @@
                 <beam number="1">end</beam>
             </note>
             <note default-x="107">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>3</voice>
                 <type>eighth</type>
@@ -1916,13 +1366,11 @@
                 <beam number="1">begin</beam>
             </note>
             <note default-x="130">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>3</voice>
                 <type>eighth</type>
@@ -1931,13 +1379,10 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="155">
-                <chord></chord>
                 <pitch>
                     <step>G</step>
-                    <alter></alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>3</voice>
                 <type>eighth</type>
@@ -1946,13 +1391,11 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="178">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>3</voice>
                 <type>eighth</type>
@@ -1969,13 +1412,10 @@
         </measure>
         <measure number="3" width="204">
             <note default-x="10">
-                <chord></chord>
                 <pitch>
                     <step>G</step>
-                    <alter></alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>24</duration>
                 <voice>1</voice>
                 <type>quarter</type>
@@ -1990,13 +1430,11 @@
                 </notations>
             </note>
             <note default-x="58">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>24</duration>
                 <voice>1</voice>
                 <type>quarter</type>
@@ -2007,25 +1445,18 @@
                 </notations>
             </note>
             <note default-x="105">
-                <chord></chord>
-                <rest>
-                    <display-step></display-step>
-                    <display-octave>0</display-octave>
-                </rest>
-                <cue></cue>
+                <rest></rest>
                 <duration>48</duration>
                 <voice>1</voice>
                 <type>half</type>
                 <staff>1</staff>
             </note>
             <note default-x="10">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>3</voice>
                 <type>eighth</type>
@@ -2037,13 +1468,11 @@
                 </notations>
             </note>
             <note default-x="34">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>3</voice>
                 <type>eighth</type>
@@ -2052,13 +1481,10 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="58">
-                <chord></chord>
                 <pitch>
                     <step>G</step>
-                    <alter></alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>3</voice>
                 <type>eighth</type>
@@ -2067,13 +1493,11 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="83">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>3</voice>
                 <type>eighth</type>
@@ -2082,13 +1506,11 @@
                 <beam number="1">end</beam>
             </note>
             <note default-x="106">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>3</voice>
                 <type>eighth</type>
@@ -2097,13 +1519,11 @@
                 <beam number="1">begin</beam>
             </note>
             <note default-x="130">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>3</voice>
                 <type>eighth</type>
@@ -2112,13 +1532,10 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="154">
-                <chord></chord>
                 <pitch>
                     <step>G</step>
-                    <alter></alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>3</voice>
                 <type>eighth</type>
@@ -2127,13 +1544,11 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="178">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>3</voice>
                 <type>eighth</type>
@@ -2150,13 +1565,11 @@
         </measure>
         <measure number="4" width="289">
             <note default-x="10">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>36</duration>
                 <voice>1</voice>
                 <type>quarter</type>
@@ -2170,13 +1583,10 @@
                 </notations>
             </note>
             <note default-x="93">
-                <chord></chord>
                 <pitch>
                     <step>F</step>
-                    <alter></alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>6</duration>
                 <voice>1</voice>
                 <type>16th</type>
@@ -2186,13 +1596,10 @@
                 <beam number="2">begin</beam>
             </note>
             <note default-x="112">
-                <chord></chord>
                 <pitch>
                     <step>G</step>
-                    <alter></alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>6</duration>
                 <voice>1</voice>
                 <type>16th</type>
@@ -2202,13 +1609,11 @@
                 <beam number="2">end</beam>
             </note>
             <note default-x="131">
-                <chord></chord>
                 <pitch>
                     <step>A</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>6</duration>
                 <voice>1</voice>
                 <type>16th</type>
@@ -2218,13 +1623,11 @@
                 <beam number="2">begin</beam>
             </note>
             <note default-x="150">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>6</duration>
                 <voice>1</voice>
                 <type>16th</type>
@@ -2234,13 +1637,10 @@
                 <beam number="2">continue</beam>
             </note>
             <note default-x="170">
-                <chord></chord>
                 <pitch>
                     <step>C</step>
-                    <alter></alter>
                     <octave>5</octave>
                 </pitch>
-                <cue></cue>
                 <duration>6</duration>
                 <voice>1</voice>
                 <type>16th</type>
@@ -2250,13 +1650,10 @@
                 <beam number="2">continue</beam>
             </note>
             <note default-x="188">
-                <chord></chord>
                 <pitch>
                     <step>D</step>
-                    <alter></alter>
                     <octave>5</octave>
                 </pitch>
-                <cue></cue>
                 <duration>6</duration>
                 <voice>1</voice>
                 <type>16th</type>
@@ -2266,13 +1663,11 @@
                 <beam number="2">end</beam>
             </note>
             <note default-x="208">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>5</octave>
                 </pitch>
-                <cue></cue>
                 <duration>6</duration>
                 <voice>1</voice>
                 <type>16th</type>
@@ -2282,13 +1677,10 @@
                 <beam number="2">begin</beam>
             </note>
             <note default-x="227">
-                <chord></chord>
                 <pitch>
                     <step>F</step>
-                    <alter></alter>
                     <octave>5</octave>
                 </pitch>
-                <cue></cue>
                 <duration>6</duration>
                 <voice>1</voice>
                 <type>16th</type>
@@ -2298,13 +1690,10 @@
                 <beam number="2">continue</beam>
             </note>
             <note default-x="246">
-                <chord></chord>
                 <pitch>
                     <step>G</step>
-                    <alter></alter>
                     <octave>5</octave>
                 </pitch>
-                <cue></cue>
                 <duration>6</duration>
                 <voice>1</voice>
                 <type>16th</type>
@@ -2314,13 +1703,11 @@
                 <beam number="2">continue</beam>
             </note>
             <note default-x="267">
-                <chord></chord>
                 <pitch>
                     <step>A</step>
                     <alter>-1</alter>
                     <octave>5</octave>
                 </pitch>
-                <cue></cue>
                 <duration>6</duration>
                 <voice>1</voice>
                 <type>16th</type>
@@ -2330,13 +1717,11 @@
                 <beam number="2">end</beam>
             </note>
             <note default-x="10">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>2</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>3</voice>
                 <type>eighth</type>
@@ -2348,13 +1733,10 @@
                 </notations>
             </note>
             <note default-x="38">
-                <chord></chord>
                 <pitch>
                     <step>G</step>
-                    <alter></alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>3</voice>
                 <type>eighth</type>
@@ -2363,13 +1745,11 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="65">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>3</voice>
                 <type>eighth</type>
@@ -2378,13 +1758,10 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="93">
-                <chord></chord>
                 <pitch>
                     <step>G</step>
-                    <alter></alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>3</voice>
                 <type>eighth</type>
@@ -2393,13 +1770,11 @@
                 <beam number="1">end</beam>
             </note>
             <note default-x="131">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>2</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>3</voice>
                 <type>eighth</type>
@@ -2408,13 +1783,10 @@
                 <beam number="1">begin</beam>
             </note>
             <note default-x="170">
-                <chord></chord>
                 <pitch>
                     <step>G</step>
-                    <alter></alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>3</voice>
                 <type>eighth</type>
@@ -2423,13 +1795,11 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="208">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>3</voice>
                 <type>eighth</type>
@@ -2438,13 +1808,10 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="246">
-                <chord></chord>
                 <pitch>
                     <step>G</step>
-                    <alter></alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>3</voice>
                 <type>eighth</type>
@@ -2460,57 +1827,25 @@
             </backup>
             <direction placement="below">
                 <direction-type>
-                    <dynamics default-y="-79" halign="left">
-                        <p></p>
-                        <pp></pp>
-                        <ppp></ppp>
-                        <pppp></pppp>
-                        <ppppp></ppppp>
-                        <pppppp></pppppp>
-                        <f></f>
-                        <ff></ff>
-                        <fff></fff>
-                        <ffff></ffff>
-                        <fffff></fffff>
-                        <ffffff></ffffff>
-                        <mp></mp>
-                        <mf></mf>
-                        <sf></sf>
-                        <sfp></sfp>
-                        <sfpp></sfpp>
-                        <fp></fp>
-                        <rf></rf>
-                        <rfz></rfz>
-                        <sfz></sfz>
-                        <sffz></sffz>
-                        <fz></fz>
-                        <n></n>
-                        <pf></pf>
-                        <sfzp></sfzp>
-                    </dynamics>
+                    <dynamics default-y="-79" halign="left"></dynamics>
                 </direction-type>
-                <voice></voice>
                 <staff>1</staff>
                 <sound dynamics="98"></sound>
             </direction>
         </measure>
         <measure number="5" width="341">
             <note default-x="98">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>5</octave>
                 </pitch>
-                <cue></cue>
                 <duration>8</duration>
                 <voice>1</voice>
                 <type>eighth</type>
                 <time-modification>
                     <actual-notes>3</actual-notes>
                     <normal-notes>2</normal-notes>
-                    <normal-type></normal-type>
-                    <normal-dot></normal-dot>
                 </time-modification>
                 <stem>down</stem>
                 <staff>1</staff>
@@ -2521,42 +1856,33 @@
                 </notations>
             </note>
             <note default-x="121">
-                <chord></chord>
                 <pitch>
                     <step>G</step>
-                    <alter></alter>
                     <octave>5</octave>
                 </pitch>
-                <cue></cue>
                 <duration>8</duration>
                 <voice>1</voice>
                 <type>eighth</type>
                 <time-modification>
                     <actual-notes>3</actual-notes>
                     <normal-notes>2</normal-notes>
-                    <normal-type></normal-type>
-                    <normal-dot></normal-dot>
                 </time-modification>
                 <stem>down</stem>
                 <staff>1</staff>
                 <beam number="1">continue</beam>
             </note>
             <note default-x="141">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>5</octave>
                 </pitch>
-                <cue></cue>
                 <duration>8</duration>
                 <voice>1</voice>
                 <type>eighth</type>
                 <time-modification>
                     <actual-notes>3</actual-notes>
                     <normal-notes>2</normal-notes>
-                    <normal-type></normal-type>
-                    <normal-dot></normal-dot>
                 </time-modification>
                 <stem>down</stem>
                 <staff>1</staff>
@@ -2567,21 +1893,17 @@
                 </notations>
             </note>
             <note default-x="162">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>8</duration>
                 <voice>1</voice>
                 <type>eighth</type>
                 <time-modification>
                     <actual-notes>3</actual-notes>
                     <normal-notes>2</normal-notes>
-                    <normal-type></normal-type>
-                    <normal-dot></normal-dot>
                 </time-modification>
                 <stem>up</stem>
                 <staff>1</staff>
@@ -2592,42 +1914,33 @@
                 </notations>
             </note>
             <note default-x="183">
-                <chord></chord>
                 <pitch>
                     <step>G</step>
-                    <alter></alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>8</duration>
                 <voice>1</voice>
                 <type>eighth</type>
                 <time-modification>
                     <actual-notes>3</actual-notes>
                     <normal-notes>2</normal-notes>
-                    <normal-type></normal-type>
-                    <normal-dot></normal-dot>
                 </time-modification>
                 <stem>up</stem>
                 <staff>1</staff>
                 <beam number="1">continue</beam>
             </note>
             <note default-x="204">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>8</duration>
                 <voice>1</voice>
                 <type>eighth</type>
                 <time-modification>
                     <actual-notes>3</actual-notes>
                     <normal-notes>2</normal-notes>
-                    <normal-type></normal-type>
-                    <normal-dot></normal-dot>
                 </time-modification>
                 <stem>up</stem>
                 <staff>1</staff>
@@ -2638,13 +1951,10 @@
                 </notations>
             </note>
             <note default-x="224">
-                <chord></chord>
                 <pitch>
                     <step>G</step>
-                    <alter></alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -2652,25 +1962,18 @@
                 <staff>1</staff>
             </note>
             <note default-x="254">
-                <chord></chord>
-                <rest>
-                    <display-step></display-step>
-                    <display-octave>0</display-octave>
-                </rest>
-                <cue></cue>
+                <rest></rest>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
                 <staff>1</staff>
             </note>
             <note default-x="281">
-                <chord></chord>
                 <pitch>
                     <step>A</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -2678,13 +1981,11 @@
                 <staff>1</staff>
             </note>
             <note default-x="293">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -2692,13 +1993,10 @@
                 <staff>1</staff>
             </note>
             <note default-x="281">
-                <chord></chord>
                 <pitch>
                     <step>D</step>
-                    <alter></alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -2706,13 +2004,10 @@
                 <staff>1</staff>
             </note>
             <note default-x="281">
-                <chord></chord>
                 <pitch>
                     <step>F</step>
-                    <alter></alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -2720,25 +2015,18 @@
                 <staff>1</staff>
             </note>
             <note default-x="313">
-                <chord></chord>
-                <rest>
-                    <display-step></display-step>
-                    <display-octave>0</display-octave>
-                </rest>
-                <cue></cue>
+                <rest></rest>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
                 <staff>1</staff>
             </note>
             <note default-x="98">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>2</octave>
                 </pitch>
-                <cue></cue>
                 <duration>24</duration>
                 <voice>3</voice>
                 <type>quarter</type>
@@ -2746,37 +2034,25 @@
                 <staff>2</staff>
             </note>
             <note default-x="162">
-                <chord></chord>
-                <rest>
-                    <display-step></display-step>
-                    <display-octave>0</display-octave>
-                </rest>
-                <cue></cue>
+                <rest></rest>
                 <duration>24</duration>
                 <voice>3</voice>
                 <type>quarter</type>
                 <staff>2</staff>
             </note>
             <note default-x="225">
-                <chord></chord>
-                <rest>
-                    <display-step></display-step>
-                    <display-octave>0</display-octave>
-                </rest>
-                <cue></cue>
+                <rest></rest>
                 <duration>24</duration>
                 <voice>3</voice>
                 <type>quarter</type>
                 <staff>2</staff>
             </note>
             <note default-x="281">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>2</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>3</voice>
                 <type>eighth</type>
@@ -2784,12 +2060,7 @@
                 <staff>2</staff>
             </note>
             <note default-x="313">
-                <chord></chord>
-                <rest>
-                    <display-step></display-step>
-                    <display-octave>0</display-octave>
-                </rest>
-                <cue></cue>
+                <rest></rest>
                 <duration>12</duration>
                 <voice>3</voice>
                 <type>eighth</type>
@@ -2800,37 +2071,9 @@
             </backup>
             <direction placement="below">
                 <direction-type>
-                    <dynamics default-y="-85" halign="left">
-                        <p></p>
-                        <pp></pp>
-                        <ppp></ppp>
-                        <pppp></pppp>
-                        <ppppp></ppppp>
-                        <pppppp></pppppp>
-                        <f></f>
-                        <ff></ff>
-                        <fff></fff>
-                        <ffff></ffff>
-                        <fffff></fffff>
-                        <ffffff></ffffff>
-                        <mp></mp>
-                        <mf></mf>
-                        <sf></sf>
-                        <sfp></sfp>
-                        <sfpp></sfpp>
-                        <fp></fp>
-                        <rf></rf>
-                        <rfz></rfz>
-                        <sfz></sfz>
-                        <sffz></sffz>
-                        <fz></fz>
-                        <n></n>
-                        <pf></pf>
-                        <sfzp></sfzp>
-                    </dynamics>
+                    <dynamics default-y="-85" halign="left"></dynamics>
                 </direction-type>
                 <offset sound="yes">-2</offset>
-                <voice></voice>
                 <staff>1</staff>
                 <sound dynamics="54"></sound>
             </direction>
@@ -2842,13 +2085,11 @@
         </measure>
         <measure number="6" width="194">
             <note default-x="13">
-                <chord></chord>
                 <pitch>
                     <step>A</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>48</duration>
                 <voice>1</voice>
                 <type>half</type>
@@ -2859,14 +2100,12 @@
                 </notations>
             </note>
             <note default-x="25">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
                 <tie type="start"></tie>
-                <cue></cue>
                 <duration>48</duration>
                 <voice>1</voice>
                 <type>half</type>
@@ -2877,13 +2116,10 @@
                 </notations>
             </note>
             <note default-x="13">
-                <chord></chord>
                 <pitch>
                     <step>D</step>
-                    <alter></alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>48</duration>
                 <voice>1</voice>
                 <type>half</type>
@@ -2891,13 +2127,10 @@
                 <staff>1</staff>
             </note>
             <note default-x="13">
-                <chord></chord>
                 <pitch>
                     <step>F</step>
-                    <alter></alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>48</duration>
                 <voice>1</voice>
                 <type>half</type>
@@ -2905,13 +2138,10 @@
                 <staff>1</staff>
             </note>
             <note default-x="80">
-                <chord></chord>
                 <pitch>
                     <step>G</step>
-                    <alter></alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>24</duration>
                 <voice>1</voice>
                 <type>quarter</type>
@@ -2922,14 +2152,12 @@
                 </notations>
             </note>
             <note default-x="80">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
                 <tie type="stop"></tie>
-                <cue></cue>
                 <duration>24</duration>
                 <voice>1</voice>
                 <type>quarter</type>
@@ -2940,13 +2168,11 @@
                 </notations>
             </note>
             <note default-x="80">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>24</duration>
                 <voice>1</voice>
                 <type>quarter</type>
@@ -2954,26 +2180,19 @@
                 <staff>1</staff>
             </note>
             <note default-x="123">
-                <chord></chord>
-                <rest>
-                    <display-step></display-step>
-                    <display-octave>0</display-octave>
-                </rest>
-                <cue></cue>
+                <rest></rest>
                 <duration>24</duration>
                 <voice>1</voice>
                 <type>quarter</type>
                 <staff>1</staff>
             </note>
             <note default-x="13">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>2</octave>
                 </pitch>
                 <tie type="start"></tie>
-                <cue></cue>
                 <duration>48</duration>
                 <voice>3</voice>
                 <type>half</type>
@@ -2984,14 +2203,12 @@
                 </notations>
             </note>
             <note default-x="13">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
                 <tie type="start"></tie>
-                <cue></cue>
                 <duration>48</duration>
                 <voice>3</voice>
                 <type>half</type>
@@ -3002,14 +2219,12 @@
                 </notations>
             </note>
             <note default-x="80">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>2</octave>
                 </pitch>
                 <tie type="stop"></tie>
-                <cue></cue>
                 <duration>24</duration>
                 <voice>3</voice>
                 <type>quarter</type>
@@ -3020,14 +2235,12 @@
                 </notations>
             </note>
             <note default-x="80">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
                 <tie type="stop"></tie>
-                <cue></cue>
                 <duration>24</duration>
                 <voice>3</voice>
                 <type>quarter</type>
@@ -3038,12 +2251,7 @@
                 </notations>
             </note>
             <note default-x="123">
-                <chord></chord>
-                <rest>
-                    <display-step></display-step>
-                    <display-octave>0</display-octave>
-                </rest>
-                <cue></cue>
+                <rest></rest>
                 <duration>24</duration>
                 <voice>3</voice>
                 <type>quarter</type>
@@ -3055,13 +2263,10 @@
         </measure>
         <measure number="7" width="225">
             <note default-x="22">
-                <chord></chord>
                 <pitch>
                     <step>G</step>
-                    <alter></alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -3073,13 +2278,11 @@
                 </notations>
             </note>
             <note default-x="48">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -3088,13 +2291,11 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="73">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -3103,13 +2304,11 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="98">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -3118,13 +2317,11 @@
                 <beam number="1">end</beam>
             </note>
             <note default-x="123">
-                <chord></chord>
                 <pitch>
                     <step>A</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -3133,13 +2330,11 @@
                 <beam number="1">begin</beam>
             </note>
             <note default-x="148">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -3148,13 +2343,10 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="173">
-                <chord></chord>
                 <pitch>
                     <step>F</step>
-                    <alter></alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -3163,13 +2355,11 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="199">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -3181,13 +2371,11 @@
                 </notations>
             </note>
             <note default-x="22">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>2</octave>
                 </pitch>
-                <cue></cue>
                 <duration>48</duration>
                 <voice>3</voice>
                 <type>half</type>
@@ -3195,13 +2383,11 @@
                 <staff>2</staff>
             </note>
             <note default-x="22">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>48</duration>
                 <voice>3</voice>
                 <type>half</type>
@@ -3209,13 +2395,10 @@
                 <staff>2</staff>
             </note>
             <note default-x="123">
-                <chord></chord>
                 <pitch>
                     <step>D</step>
-                    <alter></alter>
                     <octave>2</octave>
                 </pitch>
-                <cue></cue>
                 <duration>48</duration>
                 <voice>3</voice>
                 <type>half</type>
@@ -3223,13 +2406,10 @@
                 <staff>2</staff>
             </note>
             <note default-x="123">
-                <chord></chord>
                 <pitch>
                     <step>D</step>
-                    <alter></alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>48</duration>
                 <voice>3</voice>
                 <type>half</type>
@@ -3242,13 +2422,10 @@
         </measure>
         <measure number="8" width="221">
             <note default-x="18">
-                <chord></chord>
                 <pitch>
                     <step>G</step>
-                    <alter></alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -3260,13 +2437,11 @@
                 </notations>
             </note>
             <note default-x="43">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -3275,13 +2450,11 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="69">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -3290,13 +2463,11 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="94">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -3305,13 +2476,10 @@
                 <beam number="1">end</beam>
             </note>
             <note default-x="119">
-                <chord></chord>
                 <pitch>
                     <step>G</step>
-                    <alter></alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -3320,13 +2488,11 @@
                 <beam number="1">begin</beam>
             </note>
             <note default-x="144">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -3335,13 +2501,11 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="169">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -3350,13 +2514,11 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="194">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -3368,13 +2530,11 @@
                 </notations>
             </note>
             <note default-x="18">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>2</octave>
                 </pitch>
-                <cue></cue>
                 <duration>24</duration>
                 <voice>3</voice>
                 <type>quarter</type>
@@ -3382,13 +2542,11 @@
                 <staff>2</staff>
             </note>
             <note default-x="18">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>24</duration>
                 <voice>3</voice>
                 <type>quarter</type>
@@ -3396,24 +2554,14 @@
                 <staff>2</staff>
             </note>
             <note default-x="69">
-                <chord></chord>
-                <rest>
-                    <display-step></display-step>
-                    <display-octave>0</display-octave>
-                </rest>
-                <cue></cue>
+                <rest></rest>
                 <duration>24</duration>
                 <voice>3</voice>
                 <type>quarter</type>
                 <staff>2</staff>
             </note>
             <note default-x="118">
-                <chord></chord>
-                <rest>
-                    <display-step></display-step>
-                    <display-octave>0</display-octave>
-                </rest>
-                <cue></cue>
+                <rest></rest>
                 <duration>48</duration>
                 <voice>3</voice>
                 <type>half</type>
@@ -3425,13 +2573,10 @@
         </measure>
         <measure number="9" width="218">
             <note default-x="14">
-                <chord></chord>
                 <pitch>
                     <step>G</step>
-                    <alter></alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -3443,13 +2588,11 @@
                 </notations>
             </note>
             <note default-x="39">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -3458,13 +2601,11 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="64">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -3473,13 +2614,11 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="90">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -3488,13 +2627,10 @@
                 <beam number="1">end</beam>
             </note>
             <note default-x="115">
-                <chord></chord>
                 <pitch>
                     <step>G</step>
-                    <alter></alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -3503,13 +2639,11 @@
                 <beam number="1">begin</beam>
             </note>
             <note default-x="140">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -3518,13 +2652,11 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="166">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -3533,13 +2665,11 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="191">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -3551,13 +2681,11 @@
                 </notations>
             </note>
             <note default-x="14">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>2</octave>
                 </pitch>
-                <cue></cue>
                 <duration>24</duration>
                 <voice>3</voice>
                 <type>quarter</type>
@@ -3565,13 +2693,11 @@
                 <staff>2</staff>
             </note>
             <note default-x="14">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>24</duration>
                 <voice>3</voice>
                 <type>quarter</type>
@@ -3579,24 +2705,14 @@
                 <staff>2</staff>
             </note>
             <note default-x="65">
-                <chord></chord>
-                <rest>
-                    <display-step></display-step>
-                    <display-octave>0</display-octave>
-                </rest>
-                <cue></cue>
+                <rest></rest>
                 <duration>24</duration>
                 <voice>3</voice>
                 <type>quarter</type>
                 <staff>2</staff>
             </note>
             <note default-x="114">
-                <chord></chord>
-                <rest>
-                    <display-step></display-step>
-                    <display-octave>0</display-octave>
-                </rest>
-                <cue></cue>
+                <rest></rest>
                 <duration>48</duration>
                 <voice>3</voice>
                 <type>half</type>
@@ -3608,13 +2724,11 @@
         </measure>
         <measure number="10" width="389">
             <note default-x="99">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -3626,13 +2740,11 @@
                 </notations>
             </note>
             <note default-x="135">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -3641,13 +2753,10 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="171">
-                <chord></chord>
                 <pitch>
                     <step>G</step>
-                    <alter></alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -3656,13 +2765,11 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="207">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -3671,13 +2778,11 @@
                 <beam number="1">end</beam>
             </note>
             <note default-x="243">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -3686,13 +2791,10 @@
                 <beam number="1">begin</beam>
             </note>
             <note default-x="279">
-                <chord></chord>
                 <pitch>
                     <step>D</step>
-                    <alter></alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -3701,13 +2803,10 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="279">
-                <chord></chord>
                 <pitch>
                     <step>F</step>
-                    <alter></alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -3715,13 +2814,11 @@
                 <staff>1</staff>
             </note>
             <note default-x="315">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -3730,13 +2827,10 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="315">
-                <chord></chord>
                 <pitch>
                     <step>G</step>
-                    <alter></alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -3744,13 +2838,10 @@
                 <staff>1</staff>
             </note>
             <note default-x="351">
-                <chord></chord>
                 <pitch>
                     <step>F</step>
-                    <alter></alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -3762,13 +2853,11 @@
                 </notations>
             </note>
             <note default-x="351">
-                <chord></chord>
                 <pitch>
                     <step>A</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -3776,13 +2865,10 @@
                 <staff>1</staff>
             </note>
             <note default-x="99">
-                <chord></chord>
                 <pitch>
                     <step>G</step>
-                    <alter></alter>
                     <octave>2</octave>
                 </pitch>
-                <cue></cue>
                 <duration>48</duration>
                 <voice>3</voice>
                 <type>half</type>
@@ -3793,13 +2879,11 @@
                 </notations>
             </note>
             <note default-x="243">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>2</octave>
                 </pitch>
-                <cue></cue>
                 <duration>48</duration>
                 <voice>3</voice>
                 <type>half</type>
@@ -3820,13 +2904,11 @@
         </measure>
         <measure number="11" width="260">
             <note default-x="22">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>24</duration>
                 <voice>1</voice>
                 <type>quarter</type>
@@ -3837,13 +2919,10 @@
                 </notations>
             </note>
             <note default-x="22">
-                <chord></chord>
                 <pitch>
                     <step>G</step>
-                    <alter></alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>24</duration>
                 <voice>1</voice>
                 <type>quarter</type>
@@ -3851,13 +2930,10 @@
                 <staff>1</staff>
             </note>
             <note default-x="78">
-                <chord></chord>
                 <pitch>
                     <step>D</step>
-                    <alter></alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>24</duration>
                 <voice>1</voice>
                 <type>quarter</type>
@@ -3868,13 +2944,10 @@
                 </notations>
             </note>
             <note default-x="78">
-                <chord></chord>
                 <pitch>
                     <step>F</step>
-                    <alter></alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>24</duration>
                 <voice>1</voice>
                 <type>quarter</type>
@@ -3882,25 +2955,18 @@
                 <staff>1</staff>
             </note>
             <note default-x="132">
-                <chord></chord>
-                <rest>
-                    <display-step></display-step>
-                    <display-octave>0</display-octave>
-                </rest>
-                <cue></cue>
+                <rest></rest>
                 <duration>48</duration>
                 <voice>1</voice>
                 <type>half</type>
                 <staff>1</staff>
             </note>
             <note default-x="22">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>2</octave>
                 </pitch>
-                <cue></cue>
                 <duration>24</duration>
                 <voice>3</voice>
                 <type>quarter</type>
@@ -3908,13 +2974,11 @@
                 <staff>2</staff>
             </note>
             <note default-x="78">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>24</duration>
                 <voice>3</voice>
                 <type>quarter</type>
@@ -3922,13 +2986,11 @@
                 <staff>2</staff>
             </note>
             <note default-x="133">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>2</octave>
                 </pitch>
-                <cue></cue>
                 <duration>24</duration>
                 <voice>3</voice>
                 <type>quarter</type>
@@ -3936,12 +2998,7 @@
                 <staff>2</staff>
             </note>
             <note default-x="189">
-                <chord></chord>
-                <rest>
-                    <display-step></display-step>
-                    <display-octave>0</display-octave>
-                </rest>
-                <cue></cue>
+                <rest></rest>
                 <duration>24</duration>
                 <voice>3</voice>
                 <type>quarter</type>
@@ -3953,13 +3010,10 @@
         </measure>
         <measure number="12" width="273">
             <note default-x="19">
-                <chord></chord>
                 <pitch>
                     <step>G</step>
-                    <alter></alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -3971,13 +3025,11 @@
                 </notations>
             </note>
             <note default-x="50">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -3986,13 +3038,11 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="82">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -4001,13 +3051,11 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="113">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -4016,13 +3064,11 @@
                 <beam number="1">end</beam>
             </note>
             <note default-x="145">
-                <chord></chord>
                 <pitch>
                     <step>A</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -4031,13 +3077,11 @@
                 <beam number="1">begin</beam>
             </note>
             <note default-x="176">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -4046,13 +3090,10 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="208">
-                <chord></chord>
                 <pitch>
                     <step>F</step>
-                    <alter></alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -4061,13 +3102,11 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="240">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -4079,13 +3118,11 @@
                 </notations>
             </note>
             <note default-x="19">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>2</octave>
                 </pitch>
-                <cue></cue>
                 <duration>48</duration>
                 <voice>3</voice>
                 <type>half</type>
@@ -4093,13 +3130,11 @@
                 <staff>2</staff>
             </note>
             <note default-x="19">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>48</duration>
                 <voice>3</voice>
                 <type>half</type>
@@ -4107,13 +3142,10 @@
                 <staff>2</staff>
             </note>
             <note default-x="145">
-                <chord></chord>
                 <pitch>
                     <step>D</step>
-                    <alter></alter>
                     <octave>2</octave>
                 </pitch>
-                <cue></cue>
                 <duration>48</duration>
                 <voice>3</voice>
                 <type>half</type>
@@ -4121,13 +3153,10 @@
                 <staff>2</staff>
             </note>
             <note default-x="145">
-                <chord></chord>
                 <pitch>
                     <step>D</step>
-                    <alter></alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>48</duration>
                 <voice>3</voice>
                 <type>half</type>
@@ -4140,13 +3169,10 @@
         </measure>
         <measure number="13" width="279">
             <note default-x="23">
-                <chord></chord>
                 <pitch>
                     <step>G</step>
-                    <alter></alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -4158,13 +3184,11 @@
                 </notations>
             </note>
             <note default-x="55">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -4173,13 +3197,11 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="87">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -4188,13 +3210,11 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="118">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -4203,13 +3223,10 @@
                 <beam number="1">end</beam>
             </note>
             <note default-x="150">
-                <chord></chord>
                 <pitch>
                     <step>G</step>
-                    <alter></alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -4218,13 +3235,11 @@
                 <beam number="1">begin</beam>
             </note>
             <note default-x="182">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -4233,13 +3248,11 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="213">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -4248,13 +3261,11 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="245">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -4266,13 +3277,11 @@
                 </notations>
             </note>
             <note default-x="23">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>2</octave>
                 </pitch>
-                <cue></cue>
                 <duration>24</duration>
                 <voice>3</voice>
                 <type>quarter</type>
@@ -4280,13 +3289,11 @@
                 <staff>2</staff>
             </note>
             <note default-x="23">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>24</duration>
                 <voice>3</voice>
                 <type>quarter</type>
@@ -4294,24 +3301,14 @@
                 <staff>2</staff>
             </note>
             <note default-x="87">
-                <chord></chord>
-                <rest>
-                    <display-step></display-step>
-                    <display-octave>0</display-octave>
-                </rest>
-                <cue></cue>
+                <rest></rest>
                 <duration>24</duration>
                 <voice>3</voice>
                 <type>quarter</type>
                 <staff>2</staff>
             </note>
             <note default-x="148">
-                <chord></chord>
-                <rest>
-                    <display-step></display-step>
-                    <display-octave>0</display-octave>
-                </rest>
-                <cue></cue>
+                <rest></rest>
                 <duration>48</duration>
                 <voice>3</voice>
                 <type>half</type>
@@ -4323,13 +3320,10 @@
         </measure>
         <measure number="14" width="368">
             <note default-x="107">
-                <chord></chord>
                 <pitch>
                     <step>G</step>
-                    <alter></alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -4341,13 +3335,11 @@
                 </notations>
             </note>
             <note default-x="139">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -4356,13 +3348,11 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="172">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -4371,13 +3361,11 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="204">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -4386,13 +3374,10 @@
                 <beam number="1">end</beam>
             </note>
             <note default-x="237">
-                <chord></chord>
                 <pitch>
                     <step>G</step>
-                    <alter></alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -4401,13 +3386,11 @@
                 <beam number="1">begin</beam>
             </note>
             <note default-x="269">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -4416,13 +3399,11 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="302">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -4431,13 +3412,11 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="334">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -4449,13 +3428,11 @@
                 </notations>
             </note>
             <note default-x="107">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>2</octave>
                 </pitch>
-                <cue></cue>
                 <duration>24</duration>
                 <voice>3</voice>
                 <type>quarter</type>
@@ -4463,13 +3440,11 @@
                 <staff>2</staff>
             </note>
             <note default-x="107">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>24</duration>
                 <voice>3</voice>
                 <type>quarter</type>
@@ -4477,24 +3452,14 @@
                 <staff>2</staff>
             </note>
             <note default-x="172">
-                <chord></chord>
-                <rest>
-                    <display-step></display-step>
-                    <display-octave>0</display-octave>
-                </rest>
-                <cue></cue>
+                <rest></rest>
                 <duration>24</duration>
                 <voice>3</voice>
                 <type>quarter</type>
                 <staff>2</staff>
             </note>
             <note default-x="236">
-                <chord></chord>
-                <rest>
-                    <display-step></display-step>
-                    <display-octave>0</display-octave>
-                </rest>
-                <cue></cue>
+                <rest></rest>
                 <duration>48</duration>
                 <voice>3</voice>
                 <type>half</type>
@@ -4511,13 +3476,10 @@
         </measure>
         <measure number="15" width="316">
             <note default-x="16">
-                <chord></chord>
                 <pitch>
                     <step>G</step>
-                    <alter></alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -4529,13 +3491,11 @@
                 </notations>
             </note>
             <note default-x="53">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -4544,13 +3504,11 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="89">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -4559,13 +3517,11 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="125">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -4577,13 +3533,11 @@
                 </notations>
             </note>
             <note default-x="161">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -4591,13 +3545,11 @@
                 <staff>1</staff>
             </note>
             <note default-x="161">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -4605,25 +3557,18 @@
                 <staff>1</staff>
             </note>
             <note default-x="197">
-                <chord></chord>
-                <rest>
-                    <display-step></display-step>
-                    <display-octave>0</display-octave>
-                </rest>
-                <cue></cue>
+                <rest></rest>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
                 <staff>1</staff>
             </note>
             <note default-x="237">
-                <chord></chord>
                 <pitch>
                     <step>A</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -4631,13 +3576,10 @@
                 <staff>1</staff>
             </note>
             <note default-x="237">
-                <chord></chord>
                 <pitch>
                     <step>D</step>
-                    <alter></alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -4645,25 +3587,18 @@
                 <staff>1</staff>
             </note>
             <note default-x="274">
-                <chord></chord>
-                <rest>
-                    <display-step></display-step>
-                    <display-octave>0</display-octave>
-                </rest>
-                <cue></cue>
+                <rest></rest>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
                 <staff>1</staff>
             </note>
             <note default-x="16">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>1</octave>
                 </pitch>
-                <cue></cue>
                 <duration>48</duration>
                 <voice>3</voice>
                 <type>half</type>
@@ -4671,13 +3606,11 @@
                 <staff>2</staff>
             </note>
             <note default-x="16">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>2</octave>
                 </pitch>
-                <cue></cue>
                 <duration>48</duration>
                 <voice>3</voice>
                 <type>half</type>
@@ -4685,25 +3618,18 @@
                 <staff>2</staff>
             </note>
             <note default-x="161">
-                <chord></chord>
-                <rest>
-                    <display-step></display-step>
-                    <display-octave>0</display-octave>
-                </rest>
-                <cue></cue>
+                <rest></rest>
                 <duration>24</duration>
                 <voice>3</voice>
                 <type>quarter</type>
                 <staff>2</staff>
             </note>
             <note default-x="237">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>2</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>3</voice>
                 <type>eighth</type>
@@ -4711,12 +3637,7 @@
                 <staff>2</staff>
             </note>
             <note default-x="274">
-                <chord></chord>
-                <rest>
-                    <display-step></display-step>
-                    <display-octave>0</display-octave>
-                </rest>
-                <cue></cue>
+                <rest></rest>
                 <duration>12</duration>
                 <voice>3</voice>
                 <type>eighth</type>
@@ -4728,13 +3649,10 @@
         </measure>
         <measure number="16" width="262">
             <note default-x="23">
-                <chord></chord>
                 <pitch>
                     <step>G</step>
-                    <alter></alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>24</duration>
                 <voice>1</voice>
                 <type>quarter</type>
@@ -4742,13 +3660,11 @@
                 <staff>1</staff>
             </note>
             <note default-x="23">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>24</duration>
                 <voice>1</voice>
                 <type>quarter</type>
@@ -4756,37 +3672,25 @@
                 <staff>1</staff>
             </note>
             <note default-x="78">
-                <chord></chord>
-                <rest>
-                    <display-step></display-step>
-                    <display-octave>0</display-octave>
-                </rest>
-                <cue></cue>
+                <rest></rest>
                 <duration>24</duration>
                 <voice>1</voice>
                 <type>quarter</type>
                 <staff>1</staff>
             </note>
             <note default-x="130">
-                <chord></chord>
-                <rest>
-                    <display-step></display-step>
-                    <display-octave>0</display-octave>
-                </rest>
-                <cue></cue>
+                <rest></rest>
                 <duration>48</duration>
                 <voice>1</voice>
                 <type>half</type>
                 <staff>1</staff>
             </note>
             <note default-x="23">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>24</duration>
                 <voice>3</voice>
                 <type>quarter</type>
@@ -4794,13 +3698,11 @@
                 <staff>2</staff>
             </note>
             <note default-x="77">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>2</octave>
                 </pitch>
-                <cue></cue>
                 <duration>24</duration>
                 <voice>3</voice>
                 <type>quarter</type>
@@ -4808,13 +3710,11 @@
                 <staff>2</staff>
             </note>
             <note default-x="132">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>2</octave>
                 </pitch>
-                <cue></cue>
                 <duration>24</duration>
                 <voice>3</voice>
                 <type>quarter</type>
@@ -4822,12 +3722,7 @@
                 <staff>2</staff>
             </note>
             <note default-x="187">
-                <chord></chord>
-                <rest>
-                    <display-step></display-step>
-                    <display-octave>0</display-octave>
-                </rest>
-                <cue></cue>
+                <rest></rest>
                 <duration>24</duration>
                 <voice>3</voice>
                 <type>quarter</type>
@@ -4839,13 +3734,11 @@
         </measure>
         <measure number="17" width="254">
             <note default-x="14">
-                <chord></chord>
                 <pitch>
                     <step>B</step>
                     <alter>-1</alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -4857,13 +3750,10 @@
                 </notations>
             </note>
             <note default-x="44">
-                <chord></chord>
                 <pitch>
                     <step>D</step>
-                    <alter></alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -4872,13 +3762,10 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="74">
-                <chord></chord>
                 <pitch>
                     <step>F</step>
-                    <alter></alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -4887,13 +3774,10 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="104">
-                <chord></chord>
                 <pitch>
                     <step>D</step>
-                    <alter></alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -4905,13 +3789,10 @@
                 </notations>
             </note>
             <note default-x="133">
-                <chord></chord>
                 <pitch>
                     <step>C</step>
-                    <alter></alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -4923,13 +3804,11 @@
                 </notations>
             </note>
             <note default-x="163">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -4938,13 +3817,10 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="193">
-                <chord></chord>
                 <pitch>
                     <step>F</step>
-                    <alter></alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -4953,13 +3829,11 @@
                 <beam number="1">continue</beam>
             </note>
             <note default-x="223">
-                <chord></chord>
                 <pitch>
                     <step>E</step>
                     <alter>-1</alter>
                     <octave>4</octave>
                 </pitch>
-                <cue></cue>
                 <duration>12</duration>
                 <voice>1</voice>
                 <type>eighth</type>
@@ -4971,13 +3845,10 @@
                 </notations>
             </note>
             <note default-x="14">
-                <chord></chord>
                 <pitch>
                     <step>D</step>
-                    <alter></alter>
                     <octave>2</octave>
                 </pitch>
-                <cue></cue>
                 <duration>48</duration>
                 <voice>3</voice>
                 <type>half</type>
@@ -4985,13 +3856,10 @@
                 <staff>2</staff>
             </note>
             <note default-x="14">
-                <chord></chord>
                 <pitch>
                     <step>D</step>
-                    <alter></alter>
                     <octave>3</octave>
                 </pitch>
-                <cue></cue>
                 <duration>48</duration>
                 <voice>3</voice>
                 <type>half</type>
@@ -4999,13 +3867,10 @@
                 <staff>2</staff>
             </note>
             <note default-x="133">
-                <chord></chord>
                 <pitch>
                     <step>A</step>
-                    <alter></alter>
                     <octave>1</octave>
                 </pitch>
-                <cue></cue>
                 <duration>48</duration>
                 <voice>3</voice>
                 <type>half</type>
@@ -5014,13 +3879,10 @@
                 <staff>2</staff>
             </note>
             <note default-x="133">
-                <chord></chord>
                 <pitch>
                     <step>A</step>
-                    <alter></alter>
                     <octave>2</octave>
                 </pitch>
-                <cue></cue>
                 <duration>48</duration>
                 <voice>3</voice>
                 <type>half</type>

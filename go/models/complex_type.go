@@ -30,7 +30,7 @@ type ComplexType struct {
 }
 
 func (ct *ComplexType) GetFields(stage *StageStruct) (fields string) {
-	setOfGoIdentifiers := make(map[string]any)
+	setOfFieldsGoIdentifiers := make(map[string]any)
 
 	stMap := make(map[string]*SimpleType)
 	for st := range *GetGongstructInstancesSet[SimpleType](stage) {
@@ -49,7 +49,7 @@ func (ct *ComplexType) GetFields(stage *StageStruct) (fields string) {
 		groupMap[group.Name] = group
 	}
 
-	generateAttributes(ct.Attributes, stMap, setOfGoIdentifiers, &fields)
+	generateAttributes(ct.Attributes, stMap, setOfFieldsGoIdentifiers, &fields)
 	for _, referencedAg := range ct.AttributeGroups {
 
 		if namedAg, ok := agMap[referencedAg.Ref]; ok {
@@ -63,7 +63,7 @@ func (ct *ComplexType) GetFields(stage *StageStruct) (fields string) {
 
 	if ct.SimpleContent != nil {
 		if ct.SimpleContent.Extension != nil {
-			generateAttributes(ct.SimpleContent.Extension.Attributes, stMap, setOfGoIdentifiers, &fields)
+			generateAttributes(ct.SimpleContent.Extension.Attributes, stMap, setOfFieldsGoIdentifiers, &fields)
 
 			// in case the extension has base type "xs:string", one has to had the chardata stuff
 			goType := generateGoTypeFromSimpleType(ct.SimpleContent.Extension.Base, stMap)
@@ -75,7 +75,7 @@ func (ct *ComplexType) GetFields(stage *StageStruct) (fields string) {
 	map_Name_Elems := make(map[string]*Element)
 
 	ct.ModelGroup.OuterElementName = ct.Name
-	ct.ModelGroup.generateElements(map_Name_Elems, stMap, ctMap, groupMap, setOfGoIdentifiers, &fields)
+	ct.ModelGroup.generateElements(map_Name_Elems, stMap, ctMap, groupMap, setOfFieldsGoIdentifiers, &fields)
 
 	return
 }

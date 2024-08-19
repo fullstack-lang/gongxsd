@@ -47,7 +47,7 @@ func (modelGroup *ModelGroup) getParticles(
 	groupMap map[string]*Group,
 	map_Name_Elems map[string]*Element) (particles []Particle) {
 
-	log.Println("modelGroup.getElements", modelGroup.OuterElementName)
+	// log.Println("modelGroup.getElements", modelGroup.OuterElementName)
 	for _, referenceGroup := range modelGroup.Groups {
 
 		if referenceGroup.Ref != "" {
@@ -103,7 +103,7 @@ func (modelGroup *ModelGroup) generateElements(
 	stMap map[string]*SimpleType,
 	ctMap map[string]*ComplexType,
 	groupMap map[string]*Group,
-	setOfGoIdentifiers map[string]any,
+	setOfFieldGoIdentifiers map[string]any,
 	fields *string,
 ) {
 	particles := modelGroup.getParticles(groupMap, map_Name_Elems)
@@ -112,7 +112,7 @@ func (modelGroup *ModelGroup) generateElements(
 
 		if elem, ok := particle.(*Element); ok {
 
-			computeGoIdentifier(elem.GoIdentifier, &elem.WithGoIdentifier, setOfGoIdentifiers)
+			computeGoIdentifier(elem.GoIdentifier, &elem.WithGoIdentifier, setOfFieldGoIdentifiers)
 
 			// an element can be of 3 types:
 			// 1. a simple type
@@ -123,13 +123,13 @@ func (modelGroup *ModelGroup) generateElements(
 				// 1. a simple type
 				*fields += "\n\n\t// generated from element \"" + elem.NameXSD + "\" of type " + elem.Type +
 					" order " + fmt.Sprintf("%d", elem.Order) + " depth " + fmt.Sprintf("%d", elem.Depth) +
-					"\n\t" + elem.GoIdentifier + " " + goType + " " + "`" + `xml:"` + elem.NameXSD + `"` + "`"
+					"\n\t" + elem.GoIdentifier + " " + goType + " " + "`" + `xml:"` + elem.NameXSD + `,omitempty"` + "`"
 			} else {
 				if elem.Type != "" {
 					if ct, ok := ctMap[elem.Type]; ok {
 						*fields += "\n\n\t// generated from element \"" + elem.NameXSD + "\" of type " + ct.Name +
 							" order " + fmt.Sprintf("%d", elem.Order) + " depth " + fmt.Sprintf("%d", elem.Depth) +
-							"\n\t" + elem.GoIdentifier + " []*" + ct.GoIdentifier + " " + "`" + `xml:"` + elem.NameXSD + `"` + "`"
+							"\n\t" + elem.GoIdentifier + " []*" + ct.GoIdentifier + " " + "`" + `xml:"` + elem.NameXSD + `,omitempty"` + "`"
 					} else {
 						log.Println("element", elem.NameXSD, "unkown type", elem.Type)
 					}
@@ -140,7 +140,7 @@ func (modelGroup *ModelGroup) generateElements(
 						ct := elem.ComplexType
 						*fields += "\n\n\t// generated from anonymous type within outer element \"" + elem.NameXSD +
 							"\" of type " + ct.Name + "." +
-							"\n\t" + elem.GoIdentifier + " []*" + ct.GoIdentifier + " " + "`" + `xml:"` + elem.NameXSD + `"` + "`"
+							"\n\t" + elem.GoIdentifier + " []*" + ct.GoIdentifier + " " + "`" + `xml:"` + elem.NameXSD + `,omitempty"` + "`"
 					}
 				}
 
@@ -149,16 +149,20 @@ func (modelGroup *ModelGroup) generateElements(
 
 		if referenceGroup, ok := particle.(*Group); ok {
 
-			computeGoIdentifier(referenceGroup.Ref, &referenceGroup.WithGoIdentifier, setOfGoIdentifiers)
+			computeGoIdentifier(referenceGroup.Ref, &referenceGroup.WithGoIdentifier, setOfFieldGoIdentifiers)
 
 			if namedGroup, ok := groupMap[referenceGroup.Ref]; ok {
 
 				// *fields += "\n\n\t// generated from group " +
 				// 	"\n\t" + referenceGroup.GoIdentifier + " " + namedGroup.GoIdentifier // + " `xml:\",inline\"`"
 
-				*fields += "\n\n\t// generated from group with order " + fmt.Sprintf("%d", referenceGroup.Order) +
-					" depth " + fmt.Sprintf("%d", referenceGroup.Depth) +
-					"\n\t" + namedGroup.GoIdentifier // + " `xml:\",inline\"`"
+				if !referenceGroup.HasNameConflict {
+					*fields += "\n\n\t// generated from group with order " + fmt.Sprintf("%d", referenceGroup.Order) +
+						" depth " + fmt.Sprintf("%d", referenceGroup.Depth) +
+						"\n\t" + namedGroup.GoIdentifier // + " `xml:\",inline\"`"
+				} else {
+					log.Println("name conflict, ref", referenceGroup.GoIdentifier, " ", namedGroup.GoIdentifier)
+				}
 			}
 
 		}

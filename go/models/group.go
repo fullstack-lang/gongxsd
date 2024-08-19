@@ -19,7 +19,7 @@ type Group struct {
 }
 
 func (group *Group) GetFields(stage *StageStruct) (fields string) {
-	setOfGoIdentifiers := make(map[string]any)
+	setOfFieldGoIdentifiers := make(map[string]any)
 
 	stMap := make(map[string]*SimpleType)
 	for st := range *GetGongstructInstancesSet[SimpleType](stage) {
@@ -40,7 +40,7 @@ func (group *Group) GetFields(stage *StageStruct) (fields string) {
 
 	map_Name_Elems := make(map[string]*Element)
 
-	group.ModelGroup.generateElements(map_Name_Elems, stMap, ctMap, groupMap, setOfGoIdentifiers, &fields)
+	group.ModelGroup.generateElements(map_Name_Elems, stMap, ctMap, groupMap, setOfFieldGoIdentifiers, &fields)
 
 	return
 }
