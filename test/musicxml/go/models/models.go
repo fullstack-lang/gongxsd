@@ -18,18 +18,6 @@ type A_directive struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// A_measure_1 is generated from outer element "measure"
-type A_measure_1 struct {
-
-	// insertion point for fields
-
-	// generated from attribute group "measure-attributes
-	AttributeGroup_measure_attributes
-
-	// generated from anonymous type within outer element "part" of type A_part.
-	Part []*A_part `xml:"part,omitempty"`
-}
-
 // A_measure is generated from outer element "measure"
 type A_measure struct {
 
@@ -42,6 +30,18 @@ type A_measure struct {
 	Group_music_data
 }
 
+// A_measure_1 is generated from outer element "measure"
+type A_measure_1 struct {
+
+	// insertion point for fields
+
+	// generated from attribute group "measure-attributes
+	AttributeGroup_measure_attributes
+
+	// generated from anonymous type within outer element "part" of type A_part.
+	Part []*A_part_1 `xml:"part,omitempty"`
+}
+
 // A_part_1 is generated from outer element "part"
 type A_part_1 struct {
 
@@ -50,8 +50,8 @@ type A_part_1 struct {
 	// generated from attribute group "part-attributes
 	AttributeGroup_part_attributes
 
-	// generated from anonymous type within outer element "measure" of type A_measure.
-	Measure []*A_measure `xml:"measure,omitempty"`
+	// generated from group with order 572 depth 3
+	Group_music_data
 }
 
 // A_part is generated from outer element "part"
@@ -62,8 +62,8 @@ type A_part struct {
 	// generated from attribute group "part-attributes
 	AttributeGroup_part_attributes
 
-	// generated from group with order 572 depth 3
-	Group_music_data
+	// generated from anonymous type within outer element "measure" of type A_measure.
+	Measure []*A_measure `xml:"measure,omitempty"`
 }
 
 // A_score_partwise is generated from outer element "score-partwise"
@@ -78,7 +78,7 @@ type A_score_partwise struct {
 	Group_score_header
 
 	// generated from anonymous type within outer element "part" of type A_part.
-	Part []*A_part_1 `xml:"part,omitempty"`
+	Part []*A_part `xml:"part,omitempty"`
 }
 
 // A_score_timewise is generated from outer element "score-timewise"

@@ -118,7 +118,7 @@ func (modelGroup *ModelGroup) generateElements(
 			// 1. a simple type
 			// 2. a named complex type
 			// 3. an anonmous complex type
-			goType := generateGoTypeFromSimpleType(elem.Type, stMap)
+			goType := generateGoTypeFromBase(elem.Type, stMap)
 			if goType != "" {
 				// 1. a simple type
 				*fields += "\n\n\t// generated from element \"" + elem.NameXSD + "\" of type " + elem.Type +
