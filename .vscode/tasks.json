@@ -317,5 +317,60 @@
 				"go/models",
 			]
 		},
+		{
+			"label": "01 - gongc reqif -skipNpmWorkspaces",
+			"type": "shell",
+			"options": {
+				"cwd": "${workspaceFolder}/test/reqif"
+			},
+			"command": "gongc",
+			"group": "build",
+			"args": [
+				"-skipNpmWorkspaces",
+				"go/models",
+			]
+		},
+		{
+			"label": "01 - gongc reqif -skipNg -skipNpmWorkspaces",
+			"type": "shell",
+			"options": {
+				"cwd": "${workspaceFolder}/test/reqif"
+			},
+			"command": "gongc",
+			"group": "build",
+			"args": [
+				"-skipNpmWorkspaces",
+				"-skipNg",
+				"go/models",
+			]
+		},
+		{
+			"label": "01 - gongc reqif -clean",
+			"type": "shell",
+			"options": {
+				"cwd": "${workspaceFolder}/test/reqif/go/models"
+			},
+			"command": "gongc",
+			"group": "build",
+			"args": [
+				"-clean"
+			]
+		},
+		{
+			"label": "02 - run reqif -unmarshallFromCode=stage.go -marshallOnCommit=stage",
+			"type": "shell",
+			"options": {
+				"cwd": "${workspaceFolder}/test/reqif/go/cmd/reqif"
+			},
+			"command": "go",
+			"args": [
+				"run",
+				"main.go",
+				"-diagrams",
+				"-unmarshallFromCode=stage.go",
+				"-marshallOnCommit=stage"
+			],
+			"group": "build"
+		},
 	]
 }

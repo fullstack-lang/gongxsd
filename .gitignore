@@ -8,3 +8,4 @@ alt/go/cmd/gongxsd-cli/__debug_bin*
 go/cmd/gongxsd/gongxsd.exe
 alt/go/cmd/alt/alt.exe
 test/books/go/cmd/books/books.exe
+test/reqif/go/cmd/reqif/reqif.exe
