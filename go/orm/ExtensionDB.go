@@ -85,6 +85,9 @@ type ExtensionDB struct {
 
 	// Declation for basic field extensionDB.Base
 	Base_Data sql.NullString
+
+	// Declation for basic field extensionDB.Ref
+	Ref_Data sql.NullString
 	
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
@@ -113,6 +116,8 @@ type ExtensionWOP struct {
 	OuterElementName string `xlsx:"2"`
 
 	Base string `xlsx:"3"`
+
+	Ref string `xlsx:"4"`
 	// insertion for WOP pointer fields
 }
 
@@ -122,6 +127,7 @@ var Extension_Fields = []string{
 	"Name",
 	"OuterElementName",
 	"Base",
+	"Ref",
 }
 
 type BackRepoExtensionStruct struct {
@@ -558,6 +564,9 @@ func (extensionDB *ExtensionDB) CopyBasicFieldsFromExtension(extension *models.E
 
 	extensionDB.Base_Data.String = extension.Base
 	extensionDB.Base_Data.Valid = true
+
+	extensionDB.Ref_Data.String = extension.Ref
+	extensionDB.Ref_Data.Valid = true
 }
 
 // CopyBasicFieldsFromExtension_WOP
@@ -572,6 +581,9 @@ func (extensionDB *ExtensionDB) CopyBasicFieldsFromExtension_WOP(extension *mode
 
 	extensionDB.Base_Data.String = extension.Base
 	extensionDB.Base_Data.Valid = true
+
+	extensionDB.Ref_Data.String = extension.Ref
+	extensionDB.Ref_Data.Valid = true
 }
 
 // CopyBasicFieldsFromExtensionWOP
@@ -586,6 +598,9 @@ func (extensionDB *ExtensionDB) CopyBasicFieldsFromExtensionWOP(extension *Exten
 
 	extensionDB.Base_Data.String = extension.Base
 	extensionDB.Base_Data.Valid = true
+
+	extensionDB.Ref_Data.String = extension.Ref
+	extensionDB.Ref_Data.Valid = true
 }
 
 // CopyBasicFieldsToExtension
@@ -594,6 +609,7 @@ func (extensionDB *ExtensionDB) CopyBasicFieldsToExtension(extension *models.Ext
 	extension.Name = extensionDB.Name_Data.String
 	extension.OuterElementName = extensionDB.OuterElementName_Data.String
 	extension.Base = extensionDB.Base_Data.String
+	extension.Ref = extensionDB.Ref_Data.String
 }
 
 // CopyBasicFieldsToExtension_WOP
@@ -602,6 +618,7 @@ func (extensionDB *ExtensionDB) CopyBasicFieldsToExtension_WOP(extension *models
 	extension.Name = extensionDB.Name_Data.String
 	extension.OuterElementName = extensionDB.OuterElementName_Data.String
 	extension.Base = extensionDB.Base_Data.String
+	extension.Ref = extensionDB.Ref_Data.String
 }
 
 // CopyBasicFieldsToExtensionWOP
@@ -611,6 +628,7 @@ func (extensionDB *ExtensionDB) CopyBasicFieldsToExtensionWOP(extension *Extensi
 	extension.Name = extensionDB.Name_Data.String
 	extension.OuterElementName = extensionDB.OuterElementName_Data.String
 	extension.Base = extensionDB.Base_Data.String
+	extension.Ref = extensionDB.Ref_Data.String
 }
 
 // Backup generates a json file from a slice of all ExtensionDB instances in the backrepo

@@ -44,14 +44,13 @@ var generateCmd = &cobra.Command{
 			os.Exit(1)
 		}
 
-		var schema models.Schema
-		err = xml.Unmarshal(content, &schema)
+		err = xml.Unmarshal(content, &models.SchemaSingloton)
 		if err != nil {
 			fmt.Printf("Error parsing XML: %v\n", err)
 			os.Exit(1)
 		}
 
-		stack.Stage.StageBranchSchema(&schema)
+		stack.Stage.StageBranchSchema(&models.SchemaSingloton)
 
 		stack.Stage.ComputeReverseMaps()
 

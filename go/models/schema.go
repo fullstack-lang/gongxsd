@@ -4,12 +4,15 @@ import (
 	"encoding/xml"
 )
 
+var SchemaSingloton Schema
+
 type Schema struct {
 	Name string
 	Xs   string `xml:"xs,attr"`
 
-	Xmlns           Xmlns              `xml:"-"`
-	importedModules map[string]*Schema `xml:"-"`
+	// Xmlns represents namespaces like xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	// they are unmarshall via a custom unmarshaller
+	Xmlns Xmlns `xml:"-"`
 
 	Annotated
 	Elements        []*Element        `xml:"element"`

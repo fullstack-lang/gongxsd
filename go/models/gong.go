@@ -4481,7 +4481,7 @@ func GetFields[Type Gongstruct]() (res []string) {
 	case Enumeration:
 		res = []string{"Name", "Annotation", "Value"}
 	case Extension:
-		res = []string{"Name", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Base", "Attributes"}
+		res = []string{"Name", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Base", "Ref", "Attributes"}
 	case Group:
 		res = []string{"Name", "Annotation", "NameXSD", "Ref", "IsAnonymous", "OuterElement", "HasNameConflict", "GoIdentifier", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth"}
 	case Length:
@@ -4769,7 +4769,7 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 	case *Enumeration:
 		res = []string{"Name", "Annotation", "Value"}
 	case *Extension:
-		res = []string{"Name", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Base", "Attributes"}
+		res = []string{"Name", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Base", "Ref", "Attributes"}
 	case *Group:
 		res = []string{"Name", "Annotation", "NameXSD", "Ref", "IsAnonymous", "OuterElement", "HasNameConflict", "GoIdentifier", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth"}
 	case *Length:
@@ -5205,6 +5205,8 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 			}
 		case "Base":
 			res = inferedInstance.Base
+		case "Ref":
+			res = inferedInstance.Ref
 		case "Attributes":
 			for idx, __instance__ := range inferedInstance.Attributes {
 				if idx > 0 {
@@ -5976,6 +5978,8 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 			}
 		case "Base":
 			res = inferedInstance.Base
+		case "Ref":
+			res = inferedInstance.Ref
 		case "Attributes":
 			for idx, __instance__ := range inferedInstance.Attributes {
 				if idx > 0 {

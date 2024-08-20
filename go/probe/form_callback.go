@@ -2133,6 +2133,8 @@ func (extensionFormCallback *ExtensionFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(extension_.OuterElementName), formDiv)
 		case "Base":
 			FormDivBasicFieldToField(&(extension_.Base), formDiv)
+		case "Ref":
+			FormDivBasicFieldToField(&(extension_.Ref), formDiv)
 		}
 	}
 

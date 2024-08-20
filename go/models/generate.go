@@ -139,21 +139,24 @@ func Generate(stage *StageStruct, outputFilePath string) {
 		fields := "\n\n\t// necessary since it is a root element" +
 			"\n\tXMLName xml.Name `xml:\"" + element.NameXSD + "\"`"
 
-		fields += "\n\n\t// generated from inline complex type" +
-			"\n\t" + element.ComplexType.GoIdentifier
+		if element.ComplexType != nil {
+			fields += "\n\n\t// generated from inline complex type" +
+				"\n\t" + element.ComplexType.GoIdentifier
 
-		templInsertionLevel0[ModelsFileTmplLevel0AllGongstructsCode] += Replace3(
-			ModelsFileTmplLevel1Code[ModelsFileTmplLevel1NamedStructCode],
+			templInsertionLevel0[ModelsFileTmplLevel0AllGongstructsCode] += Replace3(
+				ModelsFileTmplLevel1Code[ModelsFileTmplLevel1NamedStructCode],
 
-			"{{"+string(rune(ModelsFileTmplLevel2Structname))+"}}",
-			element.GoIdentifier,
+				"{{"+string(rune(ModelsFileTmplLevel2Structname))+"}}",
+				element.GoIdentifier,
 
-			"{{"+string(rune(ModelsFileTmplLevel2Source))+"}}",
-			"element "+element.NameXSD+" within root schema",
+				"{{"+string(rune(ModelsFileTmplLevel2Source))+"}}",
+				"element "+element.NameXSD+" within root schema",
 
-			"{{"+string(rune(ModelsFileTmplLevel2Fields))+"}}",
-			fields,
-		)
+				"{{"+string(rune(ModelsFileTmplLevel2Fields))+"}}",
+				fields,
+			)
+		}
+
 	}
 
 	for insertionPerStructId := ModelsFileTmplLevel0(0); insertionPerStructId < ModelsFileTmplLevel0Nb; insertionPerStructId++ {

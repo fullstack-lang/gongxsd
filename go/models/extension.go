@@ -5,6 +5,7 @@ type Extension struct {
 	ModelGroup
 
 	Base string `xml:"base,attr"`
+	Ref  string `xml:"ref,attr"`
 
 	Attributes []*Attribute `xml:"attribute"`
 }

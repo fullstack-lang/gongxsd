@@ -206,6 +206,7 @@ type Extension_WOP struct {
 	Name string
 	OuterElementName string
 	Base string
+	Ref string
 }
 
 func (from *Extension) CopyBasicFields(to *Extension) {
@@ -213,6 +214,7 @@ func (from *Extension) CopyBasicFields(to *Extension) {
 	to.Name = from.Name
 	to.OuterElementName = from.OuterElementName
 	to.Base = from.Base
+	to.Ref = from.Ref
 }
 
 type Group_WOP struct {

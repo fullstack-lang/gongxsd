@@ -13,6 +13,7 @@ require (
 	github.com/gin-gonic/gin v1.10.0
 	github.com/glebarez/sqlite v1.11.0
 	github.com/gorilla/websocket v1.5.3
+	github.com/iancoleman/strcase v0.3.0
 	github.com/spf13/cobra v1.8.1
 	github.com/tealeg/xlsx/v3 v3.3.7
 	github.com/xuri/excelize/v2 v2.8.1
