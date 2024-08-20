@@ -17,7 +17,20 @@ func (ref reference) NsPrefix() string {
 	return string(ref)[0:colonPos]
 }
 
+func NsPrefix(ref string) string {
+	colonPos := strings.Index(string(ref), ":")
+	if colonPos == -1 {
+		return ""
+	}
+	return string(ref)[0:colonPos]
+}
+
 func (ref reference) Name() string {
+	colonPos := strings.Index(string(ref), ":")
+	return string(ref)[colonPos+1:]
+}
+
+func Name(ref string) string {
 	colonPos := strings.Index(string(ref), ":")
 	return string(ref)[colonPos+1:]
 }

@@ -11,7 +11,13 @@ func generateAttributes(
 	setOfGoIdentifiers map[string]any,
 	fields *string) {
 	for _, attr := range attrs {
-		goType := generateGoTypeFromBase(attr.Type, stMap)
+
+		// remove namespace from type
+		if NsPrefix(attr.Type) != "" {
+			attr.Type = Name(attr.Type)
+		}
+
+		goType := generateGoTypeFromType(attr.Type, stMap)
 
 		var name string
 

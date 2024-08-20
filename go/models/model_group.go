@@ -114,11 +114,16 @@ func (modelGroup *ModelGroup) generateElements(
 
 			computeGoIdentifier(elem.GoIdentifier, &elem.WithGoIdentifier, setOfFieldGoIdentifiers)
 
+			// remove namespace from type
+			if NsPrefix(elem.Type) != "" {
+				elem.Type = Name(elem.Type)
+			}
+
 			// an element can be of 3 types:
 			// 1. a simple type
 			// 2. a named complex type
 			// 3. an anonmous complex type
-			goType := generateGoTypeFromBase(elem.Type, stMap)
+			goType := generateGoTypeFromType(elem.Type, stMap)
 			if goType != "" {
 				// 1. a simple type
 				*fields += "\n\n\t// generated from element \"" + elem.NameXSD + "\" of type " + elem.Type +
@@ -131,7 +136,7 @@ func (modelGroup *ModelGroup) generateElements(
 							" order " + fmt.Sprintf("%d", elem.Order) + " depth " + fmt.Sprintf("%d", elem.Depth) +
 							"\n\t" + elem.GoIdentifier + " []*" + ct.GoIdentifier + " " + "`" + `xml:"` + elem.NameXSD + `,omitempty"` + "`"
 					} else {
-						log.Println("element", elem.NameXSD, "unkown type", elem.Type)
+						log.Println("element", elem.NameXSD, "unknown type", elem.Type)
 					}
 				} else {
 					if elem.ComplexType == nil {

@@ -1,43 +1,28 @@
 package models
 
-func generateGoTypeFromBase(base string, stMap map[string]*SimpleType) (goType string) {
+func generateGoTypeFromType(type_ string, stMap map[string]*SimpleType) (goType string) {
 
-	switch base {
+	switch type_ {
 	// String types
 	case
-		"xs:dateTime",
-		"xs:string", "xs:normalizedString", "xs:token", "xs:language", "xs:Name", "xs:NCName",
-		"xs:NMTOKEN", "xs:NMTOKENS", "xs:ID", "xs:IDREF", "xs:IDREFS", "xs:ENTITY", "xs:ENTITIES",
-		"xs:QName", "xs:anyURI", "xs:NOTATION", "xs:decimal",
-
-		// ugly hack
-
-		"xsd:dateTime",
-		"xsd:string", "xsd:normalizedString", "xsd:token", "xsd:language", "xsd:Name", "xsd:NCName",
-		"xsd:NMTOKEN", "xsd:NMTOKENS", "xsd:ID", "xsd:IDREF", "xsd:IDREFS", "xsd:ENTITY", "xsd:ENTITIES",
-		"xsd:QName", "xsd:anyURI", "xsd:NOTATION", "xsd:decimal":
+		"dateTime",
+		"string", "normalizedString", "token", "language", "Name", "NCName",
+		"NMTOKEN", "NMTOKENS", "ID", "IDREF", "IDREFS", "ENTITY", "ENTITIES",
+		"QName", "anyURI", "NOTATION", "decimal":
 		goType = "string"
 
 	// Numeric types
-	case "xs:integer", "xs:nonPositiveInteger", "xs:negativeInteger", "xs:long",
-		"xs:int", "xs:short", "xs:byte", "xs:nonNegativeInteger", "xs:unsignedLong", "xs:unsignedInt",
-		"xs:unsignedShort", "xs:unsignedByte", "xs:positiveInteger",
-
-		"xsd:integer", "xsd:nonPositiveInteger", "xsd:negativeInteger", "xsd:long",
-		"xsd:int", "xsd:short", "xsd:byte", "xsd:nonNegativeInteger", "xsd:unsignedLong", "xsd:unsignedInt",
-		"xsd:unsignedShort", "xsd:unsignedByte", "xsd:positiveInteger":
+	case "integer", "nonPositiveInteger", "negativeInteger", "long",
+		"int", "short", "byte", "nonNegativeInteger", "unsignedLong", "unsignedInt",
+		"unsignedShort", "unsignedByte", "positiveInteger":
 		goType = "int"
 
 		// Numeric types
-	case "xs:double", "xs:float",
-
-		"xsd:double", "xsd:float":
+	case "double", "float":
 		goType = "float64"
 
 	// Boolean type
-	case "xs:boolean",
-
-		"xsd:boolean":
+	case "boolean":
 		goType = "bool"
 
 	}
@@ -45,9 +30,15 @@ func generateGoTypeFromBase(base string, stMap map[string]*SimpleType) (goType s
 	// a base can refer a simple type
 	if goType == "" {
 
-		if st, ok := stMap[base]; ok {
+		if st, ok := stMap[type_]; ok {
 			if st.Restriction != nil {
-				return generateGoTypeFromBase(st.Restriction.Base, stMap)
+
+				// remove namespace from type
+				if NsPrefix(st.Restriction.Base) != "" {
+					st.Restriction.Base = Name(st.Restriction.Base)
+				}
+
+				return generateGoTypeFromType(st.Restriction.Base, stMap)
 			} else {
 				//
 				// the union of type can be a go type int, float64, string or boolean
@@ -60,7 +51,7 @@ func generateGoTypeFromBase(base string, stMap map[string]*SimpleType) (goType s
 		//
 		// type="empty": This indicates that the element is expected to be empty
 		// (i.e., it does not have any child elements or text content).
-		if base == "empty" {
+		if type_ == "empty" {
 			return "string"
 		}
 	}

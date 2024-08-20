@@ -40,16 +40,16 @@ type Credit struct {
 	// generated from attribute "page
 	Page int `xml:"page,attr,omitempty"`
 
-	// generated from element "credit-type" of type xs:string order 9 depth 0
+	// generated from element "credit-type" of type string order 9 depth 0
 	Credit_type string `xml:"credit-type,omitempty"`
 
 	// generated from element "link" of type link order 13 depth 0
 	Link []*Link `xml:"link,omitempty"`
 
-	// generated from element "credit-words" of type xs:string order 14 depth 0
+	// generated from element "credit-words" of type string order 14 depth 0
 	Credit_words string `xml:"credit-words,omitempty"`
 
-	// generated from element "credit-symbol" of type xs:string order 15 depth 0
+	// generated from element "credit-symbol" of type string order 15 depth 0
 	Credit_symbol string `xml:"credit-symbol,omitempty"`
 }
 
@@ -74,7 +74,7 @@ type Group_bookDetailsGroup struct {
 	// generated from element "title" of type titleType order 3 depth 1
 	Title string `xml:"title,omitempty"`
 
-	// generated from element "author" of type xs:string order 4 depth 1
+	// generated from element "author" of type string order 4 depth 1
 	Author string `xml:"author,omitempty"`
 
 	// generated from element "year" of type yearType order 5 depth 1
