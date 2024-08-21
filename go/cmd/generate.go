@@ -50,6 +50,9 @@ var generateCmd = &cobra.Command{
 			os.Exit(1)
 		}
 
+		// suppress duplicates
+		models.SchemaSingloton.FactorDuplicates()
+
 		stack.Stage.StageBranchSchema(&models.SchemaSingloton)
 
 		stack.Stage.ComputeReverseMaps()

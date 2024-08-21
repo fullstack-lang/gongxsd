@@ -31,6 +31,11 @@ type Element struct {
 	SimpleType  *SimpleType  `xml:"simpleType"`
 	ComplexType *ComplexType `xml:"complexType"`
 	Groups      []*Group     `xml:"group"`
+
+	// OuterParticle is the particle that reference the element
+	// this is used in the factoring process of non normalized xsd
+	OuterParticle     Particle `xml:"-"`
+	IsDuplicatedInXSD bool
 }
 
 func (e *Element) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {

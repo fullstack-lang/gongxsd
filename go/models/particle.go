@@ -13,6 +13,9 @@ type Particle interface {
 
 var _ Particle = (*Element)(nil)
 var _ Particle = (*Group)(nil)
+var _ Particle = (*All)(nil)
+var _ Particle = (*Sequence)(nil)
+var _ Particle = (*Choice)(nil)
 
 type ParticleAbstract struct {
 	// Order is the order at wich the particle was unmarshalled in the xsd

@@ -125,6 +125,10 @@ type ElementDB struct {
 
 	// Declation for basic field elementDB.Final
 	Final_Data sql.NullString
+
+	// Declation for basic field elementDB.IsDuplicatedInXSD
+	// provide the sql storage for the boolan
+	IsDuplicatedInXSD_Data sql.NullBool
 	
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
@@ -181,6 +185,8 @@ type ElementWOP struct {
 	Block string `xlsx:"16"`
 
 	Final string `xlsx:"17"`
+
+	IsDuplicatedInXSD bool `xlsx:"18"`
 	// insertion for WOP pointer fields
 }
 
@@ -204,6 +210,7 @@ var Element_Fields = []string{
 	"Form",
 	"Block",
 	"Final",
+	"IsDuplicatedInXSD",
 }
 
 type BackRepoElementStruct struct {
@@ -598,6 +605,9 @@ func (elementDB *ElementDB) CopyBasicFieldsFromElement(element *models.Element) 
 
 	elementDB.Final_Data.String = element.Final
 	elementDB.Final_Data.Valid = true
+
+	elementDB.IsDuplicatedInXSD_Data.Bool = element.IsDuplicatedInXSD
+	elementDB.IsDuplicatedInXSD_Data.Valid = true
 }
 
 // CopyBasicFieldsFromElement_WOP
@@ -654,6 +664,9 @@ func (elementDB *ElementDB) CopyBasicFieldsFromElement_WOP(element *models.Eleme
 
 	elementDB.Final_Data.String = element.Final
 	elementDB.Final_Data.Valid = true
+
+	elementDB.IsDuplicatedInXSD_Data.Bool = element.IsDuplicatedInXSD
+	elementDB.IsDuplicatedInXSD_Data.Valid = true
 }
 
 // CopyBasicFieldsFromElementWOP
@@ -710,6 +723,9 @@ func (elementDB *ElementDB) CopyBasicFieldsFromElementWOP(element *ElementWOP) {
 
 	elementDB.Final_Data.String = element.Final
 	elementDB.Final_Data.Valid = true
+
+	elementDB.IsDuplicatedInXSD_Data.Bool = element.IsDuplicatedInXSD
+	elementDB.IsDuplicatedInXSD_Data.Valid = true
 }
 
 // CopyBasicFieldsToElement
@@ -732,6 +748,7 @@ func (elementDB *ElementDB) CopyBasicFieldsToElement(element *models.Element) {
 	element.Form = elementDB.Form_Data.String
 	element.Block = elementDB.Block_Data.String
 	element.Final = elementDB.Final_Data.String
+	element.IsDuplicatedInXSD = elementDB.IsDuplicatedInXSD_Data.Bool
 }
 
 // CopyBasicFieldsToElement_WOP
@@ -754,6 +771,7 @@ func (elementDB *ElementDB) CopyBasicFieldsToElement_WOP(element *models.Element
 	element.Form = elementDB.Form_Data.String
 	element.Block = elementDB.Block_Data.String
 	element.Final = elementDB.Final_Data.String
+	element.IsDuplicatedInXSD = elementDB.IsDuplicatedInXSD_Data.Bool
 }
 
 // CopyBasicFieldsToElementWOP
@@ -777,6 +795,7 @@ func (elementDB *ElementDB) CopyBasicFieldsToElementWOP(element *ElementWOP) {
 	element.Form = elementDB.Form_Data.String
 	element.Block = elementDB.Block_Data.String
 	element.Final = elementDB.Final_Data.String
+	element.IsDuplicatedInXSD = elementDB.IsDuplicatedInXSD_Data.Bool
 }
 
 // Backup generates a json file from a slice of all ElementDB instances in the backrepo
