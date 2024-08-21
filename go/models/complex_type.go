@@ -29,6 +29,9 @@ type ComplexType struct {
 	AttributeGroups []*AttributeGroup `xml:"attributeGroup"`
 
 	ParticleAbstract
+
+	IsDuplicatedInXSD bool
+	OuterParticle     Particle
 }
 
 func (ct *ComplexType) GetFields(stage *StageStruct) (fields string) {

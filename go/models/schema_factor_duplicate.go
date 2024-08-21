@@ -32,8 +32,112 @@ func (schema *Schema) FactorDuplicates() {
 	schema.analyseMapOfChoices(map_Choices)
 	schema.factorChoicesWithinComplexType(map_Choices)
 
+	// Step 3 complex types within elements
+	map_ComplexTypes := make(map[complexTypeId][]*ComplexType)
+	schema.extractMapOfComplexTypesWithinElements(map_ComplexTypes)
+	schema.analyseMapOfComplexTypes(map_ComplexTypes)
+	schema.factorComplexTypesWithinElements(map_ComplexTypes)
+
+	log.Println("")
+
+	map_ComplexTypes = make(map[complexTypeId][]*ComplexType)
+	schema.extractMapOfComplexTypesWithinElements(map_ComplexTypes)
+	schema.analyseMapOfComplexTypes(map_ComplexTypes)
+
 	log.Println("")
 }
+
+//
+// complex type within element
+//
+
+type complexTypeId struct {
+	minOccurs   int
+	maxOccurs   int
+	elementName string
+	elementType string
+}
+
+func genComplexTypeId(complexType *ComplexType) (res complexTypeId) {
+
+	choice := complexType.Choices[0]
+
+	minOccurs, _ := strconv.Atoi(choice.MinOccurs)
+	maxOccurs, _ := strconv.Atoi(choice.MaxOccurs)
+	res = complexTypeId{
+		minOccurs:   minOccurs,
+		maxOccurs:   maxOccurs,
+		elementName: choice.Elements[0].NameXSD,
+		elementType: choice.Elements[0].Type,
+	}
+	return
+}
+func (schema *Schema) extractMapOfComplexTypesWithinElements(map_ComplexTypes map[complexTypeId][]*ComplexType) {
+	for _, complexType := range schema.ComplexTypes {
+		for _, alls := range complexType.Alls {
+			for _, element := range alls.Elements {
+				if _complexType := element.ComplexType; _complexType != nil {
+					// get rid of choices that are not with one element only
+					if len(_complexType.Elements) > 0 ||
+						len(_complexType.Sequences) > 0 ||
+						len(_complexType.Alls) > 0 ||
+						len(_complexType.Choices) != 1 {
+						continue
+					}
+					complexTypeId := genComplexTypeId(_complexType)
+					if _, ok := map_ComplexTypes[complexTypeId]; ok {
+						if !slices.Contains(map_ComplexTypes[complexTypeId], _complexType) {
+							map_ComplexTypes[complexTypeId] = append(map_ComplexTypes[complexTypeId], _complexType)
+						}
+					} else {
+						map_ComplexTypes[complexTypeId] = []*ComplexType{_complexType}
+					}
+				}
+			}
+		}
+	}
+}
+
+func (*Schema) analyseMapOfComplexTypes(map_ComplexTypes map[complexTypeId][]*ComplexType) {
+	complextypes := maps.Keys(map_ComplexTypes)
+	slices.SortFunc(complextypes, func(a, b complexTypeId) int {
+		return cmp.Compare(a.elementName, b.elementName)
+	})
+
+	for _, complextypeId := range complextypes {
+		log.Println("complex type", complextypeId.elementName, complextypeId.elementType, len(map_ComplexTypes[complextypeId]))
+	}
+}
+
+func (*Schema) factorComplexTypesWithinElements(map_ComplexTypes map[complexTypeId][]*ComplexType) {
+
+	complextypes := maps.Keys(map_ComplexTypes)
+	slices.SortFunc(complextypes, func(a, b complexTypeId) int {
+		return cmp.Compare(a.elementName, b.elementName)
+	})
+
+	for _, complextypeId := range complextypes {
+
+		sliceElements := map_ComplexTypes[complextypeId]
+		complexTypeToKeep := sliceElements[0]
+
+		// log.Println(len(sliceElements), "elements for element name", elementType, "type", elementType)
+		for _, complexTypeToRemoveFromElement := range sliceElements[1:] {
+			complexTypeToRemoveFromElement.IsDuplicatedInXSD = true
+			if outerElement, ok := complexTypeToRemoveFromElement.OuterParticle.(*Element); ok {
+				if _complexType := outerElement.ComplexType; _complexType != nil {
+					if _complexType == complexTypeToRemoveFromElement {
+						outerElement.ComplexType = complexTypeToKeep
+					}
+				}
+			}
+		}
+	}
+}
+
+//
+// choice within complex type
+//
 
 // if choice is with only those elements, one can factor them
 type choiceId struct {
@@ -126,6 +230,7 @@ func (schema *Schema) extractMapOfElementsWithinChoice(map_Elements map[string]m
 		for _, alls := range complexType.Alls {
 			for _, element := range alls.Elements {
 				if _complexType := element.ComplexType; _complexType != nil {
+					complexType.OuterParticle = element
 					for _, choice := range _complexType.Choices {
 						choice.OuterParticle = complexType
 						for _, _e := range choice.Elements {
