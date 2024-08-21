@@ -97,6 +97,7 @@ type Choice_WOP struct {
 	OuterElementName string
 	Order int
 	Depth int
+	IsDuplicatedInXSD bool
 }
 
 func (from *Choice) CopyBasicFields(to *Choice) {
@@ -107,6 +108,7 @@ func (from *Choice) CopyBasicFields(to *Choice) {
 	to.OuterElementName = from.OuterElementName
 	to.Order = from.Order
 	to.Depth = from.Depth
+	to.IsDuplicatedInXSD = from.IsDuplicatedInXSD
 }
 
 type ComplexContent_WOP struct {

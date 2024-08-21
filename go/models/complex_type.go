@@ -27,6 +27,8 @@ type ComplexType struct {
 
 	Attributes      []*Attribute      `xml:"attribute"`
 	AttributeGroups []*AttributeGroup `xml:"attributeGroup"`
+
+	ParticleAbstract
 }
 
 func (ct *ComplexType) GetFields(stage *StageStruct) (fields string) {

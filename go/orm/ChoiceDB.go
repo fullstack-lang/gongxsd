@@ -95,6 +95,10 @@ type ChoiceDB struct {
 
 	// Declation for basic field choiceDB.Depth
 	Depth_Data sql.NullInt64
+
+	// Declation for basic field choiceDB.IsDuplicatedInXSD
+	// provide the sql storage for the boolan
+	IsDuplicatedInXSD_Data sql.NullBool
 	
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
@@ -129,6 +133,8 @@ type ChoiceWOP struct {
 	Order int `xlsx:"5"`
 
 	Depth int `xlsx:"6"`
+
+	IsDuplicatedInXSD bool `xlsx:"7"`
 	// insertion for WOP pointer fields
 }
 
@@ -141,6 +147,7 @@ var Choice_Fields = []string{
 	"OuterElementName",
 	"Order",
 	"Depth",
+	"IsDuplicatedInXSD",
 }
 
 type BackRepoChoiceStruct struct {
@@ -576,6 +583,9 @@ func (choiceDB *ChoiceDB) CopyBasicFieldsFromChoice(choice *models.Choice) {
 
 	choiceDB.Depth_Data.Int64 = int64(choice.Depth)
 	choiceDB.Depth_Data.Valid = true
+
+	choiceDB.IsDuplicatedInXSD_Data.Bool = choice.IsDuplicatedInXSD
+	choiceDB.IsDuplicatedInXSD_Data.Valid = true
 }
 
 // CopyBasicFieldsFromChoice_WOP
@@ -599,6 +609,9 @@ func (choiceDB *ChoiceDB) CopyBasicFieldsFromChoice_WOP(choice *models.Choice_WO
 
 	choiceDB.Depth_Data.Int64 = int64(choice.Depth)
 	choiceDB.Depth_Data.Valid = true
+
+	choiceDB.IsDuplicatedInXSD_Data.Bool = choice.IsDuplicatedInXSD
+	choiceDB.IsDuplicatedInXSD_Data.Valid = true
 }
 
 // CopyBasicFieldsFromChoiceWOP
@@ -622,6 +635,9 @@ func (choiceDB *ChoiceDB) CopyBasicFieldsFromChoiceWOP(choice *ChoiceWOP) {
 
 	choiceDB.Depth_Data.Int64 = int64(choice.Depth)
 	choiceDB.Depth_Data.Valid = true
+
+	choiceDB.IsDuplicatedInXSD_Data.Bool = choice.IsDuplicatedInXSD
+	choiceDB.IsDuplicatedInXSD_Data.Valid = true
 }
 
 // CopyBasicFieldsToChoice
@@ -633,6 +649,7 @@ func (choiceDB *ChoiceDB) CopyBasicFieldsToChoice(choice *models.Choice) {
 	choice.OuterElementName = choiceDB.OuterElementName_Data.String
 	choice.Order = int(choiceDB.Order_Data.Int64)
 	choice.Depth = int(choiceDB.Depth_Data.Int64)
+	choice.IsDuplicatedInXSD = choiceDB.IsDuplicatedInXSD_Data.Bool
 }
 
 // CopyBasicFieldsToChoice_WOP
@@ -644,6 +661,7 @@ func (choiceDB *ChoiceDB) CopyBasicFieldsToChoice_WOP(choice *models.Choice_WOP)
 	choice.OuterElementName = choiceDB.OuterElementName_Data.String
 	choice.Order = int(choiceDB.Order_Data.Int64)
 	choice.Depth = int(choiceDB.Depth_Data.Int64)
+	choice.IsDuplicatedInXSD = choiceDB.IsDuplicatedInXSD_Data.Bool
 }
 
 // CopyBasicFieldsToChoiceWOP
@@ -656,6 +674,7 @@ func (choiceDB *ChoiceDB) CopyBasicFieldsToChoiceWOP(choice *ChoiceWOP) {
 	choice.OuterElementName = choiceDB.OuterElementName_Data.String
 	choice.Order = int(choiceDB.Order_Data.Int64)
 	choice.Depth = int(choiceDB.Depth_Data.Int64)
+	choice.IsDuplicatedInXSD = choiceDB.IsDuplicatedInXSD_Data.Bool
 }
 
 // Backup generates a json file from a slice of all ChoiceDB instances in the backrepo

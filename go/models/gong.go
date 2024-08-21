@@ -4469,7 +4469,7 @@ func GetFields[Type Gongstruct]() (res []string) {
 	case AttributeGroup:
 		res = []string{"Name", "NameXSD", "Annotation", "HasNameConflict", "GoIdentifier", "AttributeGroups", "Ref", "Attributes"}
 	case Choice:
-		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth"}
+		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth", "IsDuplicatedInXSD"}
 	case ComplexContent:
 		res = []string{"Name"}
 	case ComplexType:
@@ -4757,7 +4757,7 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 	case *AttributeGroup:
 		res = []string{"Name", "NameXSD", "Annotation", "HasNameConflict", "GoIdentifier", "AttributeGroups", "Ref", "Attributes"}
 	case *Choice:
-		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth"}
+		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth", "IsDuplicatedInXSD"}
 	case *ComplexContent:
 		res = []string{"Name"}
 	case *ComplexType:
@@ -4996,6 +4996,8 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 			res = fmt.Sprintf("%d", inferedInstance.Order)
 		case "Depth":
 			res = fmt.Sprintf("%d", inferedInstance.Depth)
+		case "IsDuplicatedInXSD":
+			res = fmt.Sprintf("%t", inferedInstance.IsDuplicatedInXSD)
 		}
 	case *ComplexContent:
 		switch fieldName {
@@ -5783,6 +5785,8 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 			res = fmt.Sprintf("%d", inferedInstance.Order)
 		case "Depth":
 			res = fmt.Sprintf("%d", inferedInstance.Depth)
+		case "IsDuplicatedInXSD":
+			res = fmt.Sprintf("%t", inferedInstance.IsDuplicatedInXSD)
 		}
 	case ComplexContent:
 		switch fieldName {

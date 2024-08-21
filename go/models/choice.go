@@ -9,4 +9,8 @@ type Choice struct {
 	ModelGroup
 
 	ParticleAbstract
+
+	IsDuplicatedInXSD bool
+
+	OuterParticle Particle
 }

@@ -38,13 +38,13 @@ type ATTRIBUTE_DEFINITION_BOOLEAN struct {
 	LONG_NAME string `xml:"LONG-NAME,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID []*A_ALTERNATIVE_ID_9 `xml:"ALTERNATIVE-ID,omitempty"`
 
 	// generated from anonymous type within outer element "DEFAULT-VALUE" of type A_DEFAULT-VALUE.
-	DEFAULT_VALUE []*A_DEFAULT_VALUE_1 `xml:"DEFAULT-VALUE,omitempty"`
+	DEFAULT_VALUE []*A_DEFAULT_VALUE_5 `xml:"DEFAULT-VALUE,omitempty"`
 
 	// generated from anonymous type within outer element "TYPE" of type A_TYPE.
-	TYPE []*A_TYPE_2 `xml:"TYPE,omitempty"`
+	TYPE []*A_TYPE_1 `xml:"TYPE,omitempty"`
 }
 
 // ATTRIBUTE_DEFINITION_DATE is generated from named complex type "ATTRIBUTE-DEFINITION-DATE"
@@ -69,13 +69,13 @@ type ATTRIBUTE_DEFINITION_DATE struct {
 	LONG_NAME string `xml:"LONG-NAME,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID_3 `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID []*A_ALTERNATIVE_ID_19 `xml:"ALTERNATIVE-ID,omitempty"`
 
 	// generated from anonymous type within outer element "DEFAULT-VALUE" of type A_DEFAULT-VALUE.
-	DEFAULT_VALUE []*A_DEFAULT_VALUE_4 `xml:"DEFAULT-VALUE,omitempty"`
+	DEFAULT_VALUE []*A_DEFAULT_VALUE_3 `xml:"DEFAULT-VALUE,omitempty"`
 
 	// generated from anonymous type within outer element "TYPE" of type A_TYPE.
-	TYPE []*A_TYPE_5 `xml:"TYPE,omitempty"`
+	TYPE []*A_TYPE_7 `xml:"TYPE,omitempty"`
 }
 
 // ATTRIBUTE_DEFINITION_ENUMERATION is generated from named complex type "ATTRIBUTE-DEFINITION-ENUMERATION"
@@ -103,13 +103,13 @@ type ATTRIBUTE_DEFINITION_ENUMERATION struct {
 	MULTI_VALUED bool `xml:"MULTI-VALUED,attr,omitempty"`
 
 	// generated from anonymous type within outer element "DEFAULT-VALUE" of type A_DEFAULT-VALUE.
-	DEFAULT_VALUE []*A_DEFAULT_VALUE_5 `xml:"DEFAULT-VALUE,omitempty"`
+	DEFAULT_VALUE []*A_DEFAULT_VALUE_4 `xml:"DEFAULT-VALUE,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID_19 `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID []*A_ALTERNATIVE_ID_10 `xml:"ALTERNATIVE-ID,omitempty"`
 
 	// generated from anonymous type within outer element "TYPE" of type A_TYPE.
-	TYPE []*A_TYPE_4 `xml:"TYPE,omitempty"`
+	TYPE []*A_TYPE_2 `xml:"TYPE,omitempty"`
 }
 
 // ATTRIBUTE_DEFINITION_INTEGER is generated from named complex type "ATTRIBUTE-DEFINITION-INTEGER"
@@ -134,13 +134,13 @@ type ATTRIBUTE_DEFINITION_INTEGER struct {
 	LONG_NAME string `xml:"LONG-NAME,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID_7 `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID []*A_ALTERNATIVE_ID_20 `xml:"ALTERNATIVE-ID,omitempty"`
 
 	// generated from anonymous type within outer element "DEFAULT-VALUE" of type A_DEFAULT-VALUE.
-	DEFAULT_VALUE []*A_DEFAULT_VALUE_6 `xml:"DEFAULT-VALUE,omitempty"`
+	DEFAULT_VALUE []*A_DEFAULT_VALUE `xml:"DEFAULT-VALUE,omitempty"`
 
 	// generated from anonymous type within outer element "TYPE" of type A_TYPE.
-	TYPE []*A_TYPE_9 `xml:"TYPE,omitempty"`
+	TYPE []*A_TYPE_3 `xml:"TYPE,omitempty"`
 }
 
 // ATTRIBUTE_DEFINITION_REAL is generated from named complex type "ATTRIBUTE-DEFINITION-REAL"
@@ -165,13 +165,13 @@ type ATTRIBUTE_DEFINITION_REAL struct {
 	LONG_NAME string `xml:"LONG-NAME,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID_4 `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID []*A_ALTERNATIVE_ID_21 `xml:"ALTERNATIVE-ID,omitempty"`
 
 	// generated from anonymous type within outer element "DEFAULT-VALUE" of type A_DEFAULT-VALUE.
-	DEFAULT_VALUE []*A_DEFAULT_VALUE `xml:"DEFAULT-VALUE,omitempty"`
+	DEFAULT_VALUE []*A_DEFAULT_VALUE_2 `xml:"DEFAULT-VALUE,omitempty"`
 
 	// generated from anonymous type within outer element "TYPE" of type A_TYPE.
-	TYPE []*A_TYPE `xml:"TYPE,omitempty"`
+	TYPE []*A_TYPE_9 `xml:"TYPE,omitempty"`
 }
 
 // ATTRIBUTE_DEFINITION_STRING is generated from named complex type "ATTRIBUTE-DEFINITION-STRING"
@@ -196,13 +196,13 @@ type ATTRIBUTE_DEFINITION_STRING struct {
 	LONG_NAME string `xml:"LONG-NAME,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID_5 `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID []*A_ALTERNATIVE_ID_11 `xml:"ALTERNATIVE-ID,omitempty"`
 
 	// generated from anonymous type within outer element "DEFAULT-VALUE" of type A_DEFAULT-VALUE.
-	DEFAULT_VALUE []*A_DEFAULT_VALUE_3 `xml:"DEFAULT-VALUE,omitempty"`
+	DEFAULT_VALUE []*A_DEFAULT_VALUE_1 `xml:"DEFAULT-VALUE,omitempty"`
 
 	// generated from anonymous type within outer element "TYPE" of type A_TYPE.
-	TYPE []*A_TYPE_6 `xml:"TYPE,omitempty"`
+	TYPE []*A_TYPE_8 `xml:"TYPE,omitempty"`
 }
 
 // ATTRIBUTE_DEFINITION_XHTML is generated from named complex type "ATTRIBUTE-DEFINITION-XHTML"
@@ -227,13 +227,13 @@ type ATTRIBUTE_DEFINITION_XHTML struct {
 	LONG_NAME string `xml:"LONG-NAME,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID_14 `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID []*A_ALTERNATIVE_ID_12 `xml:"ALTERNATIVE-ID,omitempty"`
 
 	// generated from anonymous type within outer element "DEFAULT-VALUE" of type A_DEFAULT-VALUE.
-	DEFAULT_VALUE []*A_DEFAULT_VALUE_2 `xml:"DEFAULT-VALUE,omitempty"`
+	DEFAULT_VALUE []*A_DEFAULT_VALUE_6 `xml:"DEFAULT-VALUE,omitempty"`
 
 	// generated from anonymous type within outer element "TYPE" of type A_TYPE.
-	TYPE []*A_TYPE_1 `xml:"TYPE,omitempty"`
+	TYPE []*A_TYPE_10 `xml:"TYPE,omitempty"`
 }
 
 // ATTRIBUTE_VALUE_BOOLEAN is generated from named complex type "ATTRIBUTE-VALUE-BOOLEAN"
@@ -246,7 +246,7 @@ type ATTRIBUTE_VALUE_BOOLEAN struct {
 	THE_VALUE bool `xml:"THE-VALUE,attr,omitempty"`
 
 	// generated from anonymous type within outer element "DEFINITION" of type A_DEFINITION.
-	DEFINITION []*A_DEFINITION_6 `xml:"DEFINITION,omitempty"`
+	DEFINITION []*A_DEFINITION `xml:"DEFINITION,omitempty"`
 }
 
 // ATTRIBUTE_VALUE_DATE is generated from named complex type "ATTRIBUTE-VALUE-DATE"
@@ -269,10 +269,10 @@ type ATTRIBUTE_VALUE_ENUMERATION struct {
 	// insertion point for fields
 
 	// generated from anonymous type within outer element "DEFINITION" of type A_DEFINITION.
-	DEFINITION []*A_DEFINITION `xml:"DEFINITION,omitempty"`
+	DEFINITION []*A_DEFINITION_6 `xml:"DEFINITION,omitempty"`
 
 	// generated from anonymous type within outer element "VALUES" of type A_VALUES.
-	VALUES []*A_VALUES_3 `xml:"VALUES,omitempty"`
+	VALUES []*A_VALUES_1 `xml:"VALUES,omitempty"`
 }
 
 // ATTRIBUTE_VALUE_INTEGER is generated from named complex type "ATTRIBUTE-VALUE-INTEGER"
@@ -285,7 +285,7 @@ type ATTRIBUTE_VALUE_INTEGER struct {
 	THE_VALUE int `xml:"THE-VALUE,attr,omitempty"`
 
 	// generated from anonymous type within outer element "DEFINITION" of type A_DEFINITION.
-	DEFINITION []*A_DEFINITION_4 `xml:"DEFINITION,omitempty"`
+	DEFINITION []*A_DEFINITION_5 `xml:"DEFINITION,omitempty"`
 }
 
 // ATTRIBUTE_VALUE_REAL is generated from named complex type "ATTRIBUTE-VALUE-REAL"
@@ -298,7 +298,7 @@ type ATTRIBUTE_VALUE_REAL struct {
 	THE_VALUE float64 `xml:"THE-VALUE,attr,omitempty"`
 
 	// generated from anonymous type within outer element "DEFINITION" of type A_DEFINITION.
-	DEFINITION []*A_DEFINITION_1 `xml:"DEFINITION,omitempty"`
+	DEFINITION []*A_DEFINITION_4 `xml:"DEFINITION,omitempty"`
 }
 
 // ATTRIBUTE_VALUE_STRING is generated from named complex type "ATTRIBUTE-VALUE-STRING"
@@ -311,7 +311,7 @@ type ATTRIBUTE_VALUE_STRING struct {
 	THE_VALUE string `xml:"THE-VALUE,attr,omitempty"`
 
 	// generated from anonymous type within outer element "DEFINITION" of type A_DEFINITION.
-	DEFINITION []*A_DEFINITION_5 `xml:"DEFINITION,omitempty"`
+	DEFINITION []*A_DEFINITION_3 `xml:"DEFINITION,omitempty"`
 }
 
 // ATTRIBUTE_VALUE_XHTML is generated from named complex type "ATTRIBUTE-VALUE-XHTML"
@@ -330,155 +330,11 @@ type ATTRIBUTE_VALUE_XHTML struct {
 	THE_ORIGINAL_VALUE []*XHTML_CONTENT `xml:"THE-ORIGINAL-VALUE,omitempty"`
 
 	// generated from anonymous type within outer element "DEFINITION" of type A_DEFINITION.
-	DEFINITION []*A_DEFINITION_3 `xml:"DEFINITION,omitempty"`
-}
-
-// A_ALTERNATIVE_ID_3 is generated from outer element "ALTERNATIVE-ID"
-type A_ALTERNATIVE_ID_3 struct {
-
-	// insertion point for fields
-
-	// generated from element "ALTERNATIVE-ID" of type ALTERNATIVE-ID order 2 depth 1
-	ALTERNATIVE_ID []*ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
-}
-
-// A_ALTERNATIVE_ID_10 is generated from outer element "ALTERNATIVE-ID"
-type A_ALTERNATIVE_ID_10 struct {
-
-	// insertion point for fields
-
-	// generated from element "ALTERNATIVE-ID" of type ALTERNATIVE-ID order 2 depth 1
-	ALTERNATIVE_ID []*ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
-}
-
-// A_ALTERNATIVE_ID_22 is generated from outer element "ALTERNATIVE-ID"
-type A_ALTERNATIVE_ID_22 struct {
-
-	// insertion point for fields
-
-	// generated from element "ALTERNATIVE-ID" of type ALTERNATIVE-ID order 2 depth 1
-	ALTERNATIVE_ID []*ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
-}
-
-// A_ALTERNATIVE_ID_11 is generated from outer element "ALTERNATIVE-ID"
-type A_ALTERNATIVE_ID_11 struct {
-
-	// insertion point for fields
-
-	// generated from element "ALTERNATIVE-ID" of type ALTERNATIVE-ID order 2 depth 1
-	ALTERNATIVE_ID []*ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
-}
-
-// A_ALTERNATIVE_ID_6 is generated from outer element "ALTERNATIVE-ID"
-type A_ALTERNATIVE_ID_6 struct {
-
-	// insertion point for fields
-
-	// generated from element "ALTERNATIVE-ID" of type ALTERNATIVE-ID order 2 depth 1
-	ALTERNATIVE_ID []*ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
-}
-
-// A_ALTERNATIVE_ID_1 is generated from outer element "ALTERNATIVE-ID"
-type A_ALTERNATIVE_ID_1 struct {
-
-	// insertion point for fields
-
-	// generated from element "ALTERNATIVE-ID" of type ALTERNATIVE-ID order 2 depth 1
-	ALTERNATIVE_ID []*ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
-}
-
-// A_ALTERNATIVE_ID_17 is generated from outer element "ALTERNATIVE-ID"
-type A_ALTERNATIVE_ID_17 struct {
-
-	// insertion point for fields
-
-	// generated from element "ALTERNATIVE-ID" of type ALTERNATIVE-ID order 2 depth 1
-	ALTERNATIVE_ID []*ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
-}
-
-// A_ALTERNATIVE_ID_20 is generated from outer element "ALTERNATIVE-ID"
-type A_ALTERNATIVE_ID_20 struct {
-
-	// insertion point for fields
-
-	// generated from element "ALTERNATIVE-ID" of type ALTERNATIVE-ID order 2 depth 1
-	ALTERNATIVE_ID []*ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
+	DEFINITION []*A_DEFINITION_1 `xml:"DEFINITION,omitempty"`
 }
 
 // A_ALTERNATIVE_ID_18 is generated from outer element "ALTERNATIVE-ID"
 type A_ALTERNATIVE_ID_18 struct {
-
-	// insertion point for fields
-
-	// generated from element "ALTERNATIVE-ID" of type ALTERNATIVE-ID order 2 depth 1
-	ALTERNATIVE_ID []*ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
-}
-
-// A_ALTERNATIVE_ID is generated from outer element "ALTERNATIVE-ID"
-type A_ALTERNATIVE_ID struct {
-
-	// insertion point for fields
-
-	// generated from element "ALTERNATIVE-ID" of type ALTERNATIVE-ID order 2 depth 1
-	ALTERNATIVE_ID []*ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
-}
-
-// A_ALTERNATIVE_ID_23 is generated from outer element "ALTERNATIVE-ID"
-type A_ALTERNATIVE_ID_23 struct {
-
-	// insertion point for fields
-
-	// generated from element "ALTERNATIVE-ID" of type ALTERNATIVE-ID order 2 depth 1
-	ALTERNATIVE_ID []*ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
-}
-
-// A_ALTERNATIVE_ID_15 is generated from outer element "ALTERNATIVE-ID"
-type A_ALTERNATIVE_ID_15 struct {
-
-	// insertion point for fields
-
-	// generated from element "ALTERNATIVE-ID" of type ALTERNATIVE-ID order 2 depth 1
-	ALTERNATIVE_ID []*ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
-}
-
-// A_ALTERNATIVE_ID_21 is generated from outer element "ALTERNATIVE-ID"
-type A_ALTERNATIVE_ID_21 struct {
-
-	// insertion point for fields
-
-	// generated from element "ALTERNATIVE-ID" of type ALTERNATIVE-ID order 2 depth 1
-	ALTERNATIVE_ID []*ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
-}
-
-// A_ALTERNATIVE_ID_13 is generated from outer element "ALTERNATIVE-ID"
-type A_ALTERNATIVE_ID_13 struct {
-
-	// insertion point for fields
-
-	// generated from element "ALTERNATIVE-ID" of type ALTERNATIVE-ID order 2 depth 1
-	ALTERNATIVE_ID []*ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
-}
-
-// A_ALTERNATIVE_ID_2 is generated from outer element "ALTERNATIVE-ID"
-type A_ALTERNATIVE_ID_2 struct {
-
-	// insertion point for fields
-
-	// generated from element "ALTERNATIVE-ID" of type ALTERNATIVE-ID order 2 depth 1
-	ALTERNATIVE_ID []*ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
-}
-
-// A_ALTERNATIVE_ID_14 is generated from outer element "ALTERNATIVE-ID"
-type A_ALTERNATIVE_ID_14 struct {
-
-	// insertion point for fields
-
-	// generated from element "ALTERNATIVE-ID" of type ALTERNATIVE-ID order 2 depth 1
-	ALTERNATIVE_ID []*ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
-}
-
-// A_ALTERNATIVE_ID_4 is generated from outer element "ALTERNATIVE-ID"
-type A_ALTERNATIVE_ID_4 struct {
 
 	// insertion point for fields
 
@@ -495,8 +351,8 @@ type A_ALTERNATIVE_ID_8 struct {
 	ALTERNATIVE_ID []*ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
 }
 
-// A_ALTERNATIVE_ID_12 is generated from outer element "ALTERNATIVE-ID"
-type A_ALTERNATIVE_ID_12 struct {
+// A_ALTERNATIVE_ID_2 is generated from outer element "ALTERNATIVE-ID"
+type A_ALTERNATIVE_ID_2 struct {
 
 	// insertion point for fields
 
@@ -504,8 +360,8 @@ type A_ALTERNATIVE_ID_12 struct {
 	ALTERNATIVE_ID []*ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
 }
 
-// A_ALTERNATIVE_ID_7 is generated from outer element "ALTERNATIVE-ID"
-type A_ALTERNATIVE_ID_7 struct {
+// A_ALTERNATIVE_ID_15 is generated from outer element "ALTERNATIVE-ID"
+type A_ALTERNATIVE_ID_15 struct {
 
 	// insertion point for fields
 
@@ -513,8 +369,8 @@ type A_ALTERNATIVE_ID_7 struct {
 	ALTERNATIVE_ID []*ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
 }
 
-// A_ALTERNATIVE_ID_9 is generated from outer element "ALTERNATIVE-ID"
-type A_ALTERNATIVE_ID_9 struct {
+// A_ALTERNATIVE_ID_20 is generated from outer element "ALTERNATIVE-ID"
+type A_ALTERNATIVE_ID_20 struct {
 
 	// insertion point for fields
 
@@ -522,8 +378,35 @@ type A_ALTERNATIVE_ID_9 struct {
 	ALTERNATIVE_ID []*ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
 }
 
-// A_ALTERNATIVE_ID_19 is generated from outer element "ALTERNATIVE-ID"
-type A_ALTERNATIVE_ID_19 struct {
+// A_ALTERNATIVE_ID_22 is generated from outer element "ALTERNATIVE-ID"
+type A_ALTERNATIVE_ID_22 struct {
+
+	// insertion point for fields
+
+	// generated from element "ALTERNATIVE-ID" of type ALTERNATIVE-ID order 2 depth 1
+	ALTERNATIVE_ID []*ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
+}
+
+// A_ALTERNATIVE_ID_16 is generated from outer element "ALTERNATIVE-ID"
+type A_ALTERNATIVE_ID_16 struct {
+
+	// insertion point for fields
+
+	// generated from element "ALTERNATIVE-ID" of type ALTERNATIVE-ID order 2 depth 1
+	ALTERNATIVE_ID []*ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
+}
+
+// A_ALTERNATIVE_ID_11 is generated from outer element "ALTERNATIVE-ID"
+type A_ALTERNATIVE_ID_11 struct {
+
+	// insertion point for fields
+
+	// generated from element "ALTERNATIVE-ID" of type ALTERNATIVE-ID order 2 depth 1
+	ALTERNATIVE_ID []*ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
+}
+
+// A_ALTERNATIVE_ID_21 is generated from outer element "ALTERNATIVE-ID"
+type A_ALTERNATIVE_ID_21 struct {
 
 	// insertion point for fields
 
@@ -540,8 +423,125 @@ type A_ALTERNATIVE_ID_5 struct {
 	ALTERNATIVE_ID []*ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
 }
 
-// A_ALTERNATIVE_ID_16 is generated from outer element "ALTERNATIVE-ID"
-type A_ALTERNATIVE_ID_16 struct {
+// A_ALTERNATIVE_ID_9 is generated from outer element "ALTERNATIVE-ID"
+type A_ALTERNATIVE_ID_9 struct {
+
+	// insertion point for fields
+
+	// generated from element "ALTERNATIVE-ID" of type ALTERNATIVE-ID order 2 depth 1
+	ALTERNATIVE_ID []*ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
+}
+
+// A_ALTERNATIVE_ID_17 is generated from outer element "ALTERNATIVE-ID"
+type A_ALTERNATIVE_ID_17 struct {
+
+	// insertion point for fields
+
+	// generated from element "ALTERNATIVE-ID" of type ALTERNATIVE-ID order 2 depth 1
+	ALTERNATIVE_ID []*ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
+}
+
+// A_ALTERNATIVE_ID_6 is generated from outer element "ALTERNATIVE-ID"
+type A_ALTERNATIVE_ID_6 struct {
+
+	// insertion point for fields
+
+	// generated from element "ALTERNATIVE-ID" of type ALTERNATIVE-ID order 2 depth 1
+	ALTERNATIVE_ID []*ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
+}
+
+// A_ALTERNATIVE_ID is generated from outer element "ALTERNATIVE-ID"
+type A_ALTERNATIVE_ID struct {
+
+	// insertion point for fields
+
+	// generated from element "ALTERNATIVE-ID" of type ALTERNATIVE-ID order 2 depth 1
+	ALTERNATIVE_ID []*ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
+}
+
+// A_ALTERNATIVE_ID_4 is generated from outer element "ALTERNATIVE-ID"
+type A_ALTERNATIVE_ID_4 struct {
+
+	// insertion point for fields
+
+	// generated from element "ALTERNATIVE-ID" of type ALTERNATIVE-ID order 2 depth 1
+	ALTERNATIVE_ID []*ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
+}
+
+// A_ALTERNATIVE_ID_13 is generated from outer element "ALTERNATIVE-ID"
+type A_ALTERNATIVE_ID_13 struct {
+
+	// insertion point for fields
+
+	// generated from element "ALTERNATIVE-ID" of type ALTERNATIVE-ID order 2 depth 1
+	ALTERNATIVE_ID []*ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
+}
+
+// A_ALTERNATIVE_ID_3 is generated from outer element "ALTERNATIVE-ID"
+type A_ALTERNATIVE_ID_3 struct {
+
+	// insertion point for fields
+
+	// generated from element "ALTERNATIVE-ID" of type ALTERNATIVE-ID order 2 depth 1
+	ALTERNATIVE_ID []*ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
+}
+
+// A_ALTERNATIVE_ID_19 is generated from outer element "ALTERNATIVE-ID"
+type A_ALTERNATIVE_ID_19 struct {
+
+	// insertion point for fields
+
+	// generated from element "ALTERNATIVE-ID" of type ALTERNATIVE-ID order 2 depth 1
+	ALTERNATIVE_ID []*ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
+}
+
+// A_ALTERNATIVE_ID_23 is generated from outer element "ALTERNATIVE-ID"
+type A_ALTERNATIVE_ID_23 struct {
+
+	// insertion point for fields
+
+	// generated from element "ALTERNATIVE-ID" of type ALTERNATIVE-ID order 2 depth 1
+	ALTERNATIVE_ID []*ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
+}
+
+// A_ALTERNATIVE_ID_7 is generated from outer element "ALTERNATIVE-ID"
+type A_ALTERNATIVE_ID_7 struct {
+
+	// insertion point for fields
+
+	// generated from element "ALTERNATIVE-ID" of type ALTERNATIVE-ID order 2 depth 1
+	ALTERNATIVE_ID []*ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
+}
+
+// A_ALTERNATIVE_ID_10 is generated from outer element "ALTERNATIVE-ID"
+type A_ALTERNATIVE_ID_10 struct {
+
+	// insertion point for fields
+
+	// generated from element "ALTERNATIVE-ID" of type ALTERNATIVE-ID order 2 depth 1
+	ALTERNATIVE_ID []*ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
+}
+
+// A_ALTERNATIVE_ID_12 is generated from outer element "ALTERNATIVE-ID"
+type A_ALTERNATIVE_ID_12 struct {
+
+	// insertion point for fields
+
+	// generated from element "ALTERNATIVE-ID" of type ALTERNATIVE-ID order 2 depth 1
+	ALTERNATIVE_ID []*ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
+}
+
+// A_ALTERNATIVE_ID_14 is generated from outer element "ALTERNATIVE-ID"
+type A_ALTERNATIVE_ID_14 struct {
+
+	// insertion point for fields
+
+	// generated from element "ALTERNATIVE-ID" of type ALTERNATIVE-ID order 2 depth 1
+	ALTERNATIVE_ID []*ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
+}
+
+// A_ALTERNATIVE_ID_1 is generated from outer element "ALTERNATIVE-ID"
+type A_ALTERNATIVE_ID_1 struct {
 
 	// insertion point for fields
 
@@ -603,26 +603,8 @@ type A_DATATYPES struct {
 	DATATYPE_DEFINITION_XHTML []*DATATYPE_DEFINITION_XHTML `xml:"DATATYPE-DEFINITION-XHTML,omitempty"`
 }
 
-// A_DEFAULT_VALUE_1 is generated from outer element "DEFAULT-VALUE"
-type A_DEFAULT_VALUE_1 struct {
-
-	// insertion point for fields
-
-	// generated from element "ATTRIBUTE-VALUE-BOOLEAN" of type ATTRIBUTE-VALUE-BOOLEAN order 4 depth 1
-	ATTRIBUTE_VALUE_BOOLEAN []*ATTRIBUTE_VALUE_BOOLEAN `xml:"ATTRIBUTE-VALUE-BOOLEAN,omitempty"`
-}
-
-// A_DEFAULT_VALUE_6 is generated from outer element "DEFAULT-VALUE"
-type A_DEFAULT_VALUE_6 struct {
-
-	// insertion point for fields
-
-	// generated from element "ATTRIBUTE-VALUE-INTEGER" of type ATTRIBUTE-VALUE-INTEGER order 22 depth 1
-	ATTRIBUTE_VALUE_INTEGER []*ATTRIBUTE_VALUE_INTEGER `xml:"ATTRIBUTE-VALUE-INTEGER,omitempty"`
-}
-
-// A_DEFAULT_VALUE_4 is generated from outer element "DEFAULT-VALUE"
-type A_DEFAULT_VALUE_4 struct {
+// A_DEFAULT_VALUE_3 is generated from outer element "DEFAULT-VALUE"
+type A_DEFAULT_VALUE_3 struct {
 
 	// insertion point for fields
 
@@ -630,17 +612,35 @@ type A_DEFAULT_VALUE_4 struct {
 	ATTRIBUTE_VALUE_DATE []*ATTRIBUTE_VALUE_DATE `xml:"ATTRIBUTE-VALUE-DATE,omitempty"`
 }
 
+// A_DEFAULT_VALUE_6 is generated from outer element "DEFAULT-VALUE"
+type A_DEFAULT_VALUE_6 struct {
+
+	// insertion point for fields
+
+	// generated from element "ATTRIBUTE-VALUE-XHTML" of type ATTRIBUTE-VALUE-XHTML order 40 depth 1
+	ATTRIBUTE_VALUE_XHTML []*ATTRIBUTE_VALUE_XHTML `xml:"ATTRIBUTE-VALUE-XHTML,omitempty"`
+}
+
+// A_DEFAULT_VALUE_2 is generated from outer element "DEFAULT-VALUE"
+type A_DEFAULT_VALUE_2 struct {
+
+	// insertion point for fields
+
+	// generated from element "ATTRIBUTE-VALUE-REAL" of type ATTRIBUTE-VALUE-REAL order 28 depth 1
+	ATTRIBUTE_VALUE_REAL []*ATTRIBUTE_VALUE_REAL `xml:"ATTRIBUTE-VALUE-REAL,omitempty"`
+}
+
 // A_DEFAULT_VALUE_5 is generated from outer element "DEFAULT-VALUE"
 type A_DEFAULT_VALUE_5 struct {
 
 	// insertion point for fields
 
-	// generated from element "ATTRIBUTE-VALUE-ENUMERATION" of type ATTRIBUTE-VALUE-ENUMERATION order 14 depth 1
-	ATTRIBUTE_VALUE_ENUMERATION []*ATTRIBUTE_VALUE_ENUMERATION `xml:"ATTRIBUTE-VALUE-ENUMERATION,omitempty"`
+	// generated from element "ATTRIBUTE-VALUE-BOOLEAN" of type ATTRIBUTE-VALUE-BOOLEAN order 4 depth 1
+	ATTRIBUTE_VALUE_BOOLEAN []*ATTRIBUTE_VALUE_BOOLEAN `xml:"ATTRIBUTE-VALUE-BOOLEAN,omitempty"`
 }
 
-// A_DEFAULT_VALUE_3 is generated from outer element "DEFAULT-VALUE"
-type A_DEFAULT_VALUE_3 struct {
+// A_DEFAULT_VALUE_1 is generated from outer element "DEFAULT-VALUE"
+type A_DEFAULT_VALUE_1 struct {
 
 	// insertion point for fields
 
@@ -653,48 +653,21 @@ type A_DEFAULT_VALUE struct {
 
 	// insertion point for fields
 
-	// generated from element "ATTRIBUTE-VALUE-REAL" of type ATTRIBUTE-VALUE-REAL order 28 depth 1
-	ATTRIBUTE_VALUE_REAL []*ATTRIBUTE_VALUE_REAL `xml:"ATTRIBUTE-VALUE-REAL,omitempty"`
+	// generated from element "ATTRIBUTE-VALUE-INTEGER" of type ATTRIBUTE-VALUE-INTEGER order 22 depth 1
+	ATTRIBUTE_VALUE_INTEGER []*ATTRIBUTE_VALUE_INTEGER `xml:"ATTRIBUTE-VALUE-INTEGER,omitempty"`
 }
 
-// A_DEFAULT_VALUE_2 is generated from outer element "DEFAULT-VALUE"
-type A_DEFAULT_VALUE_2 struct {
+// A_DEFAULT_VALUE_4 is generated from outer element "DEFAULT-VALUE"
+type A_DEFAULT_VALUE_4 struct {
 
 	// insertion point for fields
 
-	// generated from element "ATTRIBUTE-VALUE-XHTML" of type ATTRIBUTE-VALUE-XHTML order 40 depth 1
-	ATTRIBUTE_VALUE_XHTML []*ATTRIBUTE_VALUE_XHTML `xml:"ATTRIBUTE-VALUE-XHTML,omitempty"`
-}
-
-// A_DEFINITION is generated from outer element "DEFINITION"
-type A_DEFINITION struct {
-
-	// insertion point for fields
-
-	// generated from element "ATTRIBUTE-DEFINITION-ENUMERATION-REF" of type LOCAL-REF order 48 depth 1
-	ATTRIBUTE_DEFINITION_ENUMERATION_REF string `xml:"ATTRIBUTE-DEFINITION-ENUMERATION-REF,omitempty"`
-}
-
-// A_DEFINITION_2 is generated from outer element "DEFINITION"
-type A_DEFINITION_2 struct {
-
-	// insertion point for fields
-
-	// generated from element "ATTRIBUTE-DEFINITION-DATE-REF" of type LOCAL-REF order 46 depth 1
-	ATTRIBUTE_DEFINITION_DATE_REF string `xml:"ATTRIBUTE-DEFINITION-DATE-REF,omitempty"`
+	// generated from element "ATTRIBUTE-VALUE-ENUMERATION" of type ATTRIBUTE-VALUE-ENUMERATION order 14 depth 1
+	ATTRIBUTE_VALUE_ENUMERATION []*ATTRIBUTE_VALUE_ENUMERATION `xml:"ATTRIBUTE-VALUE-ENUMERATION,omitempty"`
 }
 
 // A_DEFINITION_4 is generated from outer element "DEFINITION"
 type A_DEFINITION_4 struct {
-
-	// insertion point for fields
-
-	// generated from element "ATTRIBUTE-DEFINITION-INTEGER-REF" of type LOCAL-REF order 52 depth 1
-	ATTRIBUTE_DEFINITION_INTEGER_REF string `xml:"ATTRIBUTE-DEFINITION-INTEGER-REF,omitempty"`
-}
-
-// A_DEFINITION_1 is generated from outer element "DEFINITION"
-type A_DEFINITION_1 struct {
 
 	// insertion point for fields
 
@@ -707,8 +680,35 @@ type A_DEFINITION_3 struct {
 
 	// insertion point for fields
 
+	// generated from element "ATTRIBUTE-DEFINITION-STRING-REF" of type LOCAL-REF order 56 depth 1
+	ATTRIBUTE_DEFINITION_STRING_REF string `xml:"ATTRIBUTE-DEFINITION-STRING-REF,omitempty"`
+}
+
+// A_DEFINITION_6 is generated from outer element "DEFINITION"
+type A_DEFINITION_6 struct {
+
+	// insertion point for fields
+
+	// generated from element "ATTRIBUTE-DEFINITION-ENUMERATION-REF" of type LOCAL-REF order 48 depth 1
+	ATTRIBUTE_DEFINITION_ENUMERATION_REF string `xml:"ATTRIBUTE-DEFINITION-ENUMERATION-REF,omitempty"`
+}
+
+// A_DEFINITION_1 is generated from outer element "DEFINITION"
+type A_DEFINITION_1 struct {
+
+	// insertion point for fields
+
 	// generated from element "ATTRIBUTE-DEFINITION-XHTML-REF" of type LOCAL-REF order 60 depth 1
 	ATTRIBUTE_DEFINITION_XHTML_REF string `xml:"ATTRIBUTE-DEFINITION-XHTML-REF,omitempty"`
+}
+
+// A_DEFINITION_2 is generated from outer element "DEFINITION"
+type A_DEFINITION_2 struct {
+
+	// insertion point for fields
+
+	// generated from element "ATTRIBUTE-DEFINITION-DATE-REF" of type LOCAL-REF order 46 depth 1
+	ATTRIBUTE_DEFINITION_DATE_REF string `xml:"ATTRIBUTE-DEFINITION-DATE-REF,omitempty"`
 }
 
 // A_DEFINITION_5 is generated from outer element "DEFINITION"
@@ -716,12 +716,12 @@ type A_DEFINITION_5 struct {
 
 	// insertion point for fields
 
-	// generated from element "ATTRIBUTE-DEFINITION-STRING-REF" of type LOCAL-REF order 56 depth 1
-	ATTRIBUTE_DEFINITION_STRING_REF string `xml:"ATTRIBUTE-DEFINITION-STRING-REF,omitempty"`
+	// generated from element "ATTRIBUTE-DEFINITION-INTEGER-REF" of type LOCAL-REF order 52 depth 1
+	ATTRIBUTE_DEFINITION_INTEGER_REF string `xml:"ATTRIBUTE-DEFINITION-INTEGER-REF,omitempty"`
 }
 
-// A_DEFINITION_6 is generated from outer element "DEFINITION"
-type A_DEFINITION_6 struct {
+// A_DEFINITION is generated from outer element "DEFINITION"
+type A_DEFINITION struct {
 
 	// insertion point for fields
 
@@ -792,6 +792,33 @@ type A_SOURCE_SPECIFICATION struct {
 	SPECIFICATION_REF string `xml:"SPECIFICATION-REF,omitempty"`
 }
 
+// A_SPEC_ATTRIBUTES_3 is generated from outer element "SPEC-ATTRIBUTES"
+type A_SPEC_ATTRIBUTES_3 struct {
+
+	// insertion point for fields
+
+	// generated from element "ATTRIBUTE-DEFINITION-BOOLEAN" of type ATTRIBUTE-DEFINITION-BOOLEAN order 94 depth 1
+	ATTRIBUTE_DEFINITION_BOOLEAN []*ATTRIBUTE_DEFINITION_BOOLEAN `xml:"ATTRIBUTE-DEFINITION-BOOLEAN,omitempty"`
+
+	// generated from element "ATTRIBUTE-DEFINITION-DATE" of type ATTRIBUTE-DEFINITION-DATE order 95 depth 1
+	ATTRIBUTE_DEFINITION_DATE []*ATTRIBUTE_DEFINITION_DATE `xml:"ATTRIBUTE-DEFINITION-DATE,omitempty"`
+
+	// generated from element "ATTRIBUTE-DEFINITION-ENUMERATION" of type ATTRIBUTE-DEFINITION-ENUMERATION order 96 depth 1
+	ATTRIBUTE_DEFINITION_ENUMERATION []*ATTRIBUTE_DEFINITION_ENUMERATION `xml:"ATTRIBUTE-DEFINITION-ENUMERATION,omitempty"`
+
+	// generated from element "ATTRIBUTE-DEFINITION-INTEGER" of type ATTRIBUTE-DEFINITION-INTEGER order 97 depth 1
+	ATTRIBUTE_DEFINITION_INTEGER []*ATTRIBUTE_DEFINITION_INTEGER `xml:"ATTRIBUTE-DEFINITION-INTEGER,omitempty"`
+
+	// generated from element "ATTRIBUTE-DEFINITION-REAL" of type ATTRIBUTE-DEFINITION-REAL order 98 depth 1
+	ATTRIBUTE_DEFINITION_REAL []*ATTRIBUTE_DEFINITION_REAL `xml:"ATTRIBUTE-DEFINITION-REAL,omitempty"`
+
+	// generated from element "ATTRIBUTE-DEFINITION-STRING" of type ATTRIBUTE-DEFINITION-STRING order 99 depth 1
+	ATTRIBUTE_DEFINITION_STRING []*ATTRIBUTE_DEFINITION_STRING `xml:"ATTRIBUTE-DEFINITION-STRING,omitempty"`
+
+	// generated from element "ATTRIBUTE-DEFINITION-XHTML" of type ATTRIBUTE-DEFINITION-XHTML order 100 depth 1
+	ATTRIBUTE_DEFINITION_XHTML []*ATTRIBUTE_DEFINITION_XHTML `xml:"ATTRIBUTE-DEFINITION-XHTML,omitempty"`
+}
+
 // A_SPEC_ATTRIBUTES_1 is generated from outer element "SPEC-ATTRIBUTES"
 type A_SPEC_ATTRIBUTES_1 struct {
 
@@ -821,33 +848,6 @@ type A_SPEC_ATTRIBUTES_1 struct {
 
 // A_SPEC_ATTRIBUTES_2 is generated from outer element "SPEC-ATTRIBUTES"
 type A_SPEC_ATTRIBUTES_2 struct {
-
-	// insertion point for fields
-
-	// generated from element "ATTRIBUTE-DEFINITION-BOOLEAN" of type ATTRIBUTE-DEFINITION-BOOLEAN order 94 depth 1
-	ATTRIBUTE_DEFINITION_BOOLEAN []*ATTRIBUTE_DEFINITION_BOOLEAN `xml:"ATTRIBUTE-DEFINITION-BOOLEAN,omitempty"`
-
-	// generated from element "ATTRIBUTE-DEFINITION-DATE" of type ATTRIBUTE-DEFINITION-DATE order 95 depth 1
-	ATTRIBUTE_DEFINITION_DATE []*ATTRIBUTE_DEFINITION_DATE `xml:"ATTRIBUTE-DEFINITION-DATE,omitempty"`
-
-	// generated from element "ATTRIBUTE-DEFINITION-ENUMERATION" of type ATTRIBUTE-DEFINITION-ENUMERATION order 96 depth 1
-	ATTRIBUTE_DEFINITION_ENUMERATION []*ATTRIBUTE_DEFINITION_ENUMERATION `xml:"ATTRIBUTE-DEFINITION-ENUMERATION,omitempty"`
-
-	// generated from element "ATTRIBUTE-DEFINITION-INTEGER" of type ATTRIBUTE-DEFINITION-INTEGER order 97 depth 1
-	ATTRIBUTE_DEFINITION_INTEGER []*ATTRIBUTE_DEFINITION_INTEGER `xml:"ATTRIBUTE-DEFINITION-INTEGER,omitempty"`
-
-	// generated from element "ATTRIBUTE-DEFINITION-REAL" of type ATTRIBUTE-DEFINITION-REAL order 98 depth 1
-	ATTRIBUTE_DEFINITION_REAL []*ATTRIBUTE_DEFINITION_REAL `xml:"ATTRIBUTE-DEFINITION-REAL,omitempty"`
-
-	// generated from element "ATTRIBUTE-DEFINITION-STRING" of type ATTRIBUTE-DEFINITION-STRING order 99 depth 1
-	ATTRIBUTE_DEFINITION_STRING []*ATTRIBUTE_DEFINITION_STRING `xml:"ATTRIBUTE-DEFINITION-STRING,omitempty"`
-
-	// generated from element "ATTRIBUTE-DEFINITION-XHTML" of type ATTRIBUTE-DEFINITION-XHTML order 100 depth 1
-	ATTRIBUTE_DEFINITION_XHTML []*ATTRIBUTE_DEFINITION_XHTML `xml:"ATTRIBUTE-DEFINITION-XHTML,omitempty"`
-}
-
-// A_SPEC_ATTRIBUTES_3 is generated from outer element "SPEC-ATTRIBUTES"
-type A_SPEC_ATTRIBUTES_3 struct {
 
 	// insertion point for fields
 
@@ -918,15 +918,6 @@ type A_SPEC_RELATION_GROUPS struct {
 	RELATION_GROUP []*RELATION_GROUP `xml:"RELATION-GROUP,omitempty"`
 }
 
-// A_SPEC_RELATIONS is generated from outer element "SPEC-RELATIONS"
-type A_SPEC_RELATIONS struct {
-
-	// insertion point for fields
-
-	// generated from element "SPEC-RELATION" of type SPEC-RELATION order 123 depth 1
-	SPEC_RELATION []*SPEC_RELATION `xml:"SPEC-RELATION,omitempty"`
-}
-
 // A_SPEC_RELATIONS_1 is generated from outer element "SPEC-RELATIONS"
 type A_SPEC_RELATIONS_1 struct {
 
@@ -934,6 +925,15 @@ type A_SPEC_RELATIONS_1 struct {
 
 	// generated from element "SPEC-RELATION-REF" of type LOCAL-REF order 86 depth 1
 	SPEC_RELATION_REF string `xml:"SPEC-RELATION-REF,omitempty"`
+}
+
+// A_SPEC_RELATIONS is generated from outer element "SPEC-RELATIONS"
+type A_SPEC_RELATIONS struct {
+
+	// insertion point for fields
+
+	// generated from element "SPEC-RELATION" of type SPEC-RELATION order 123 depth 1
+	SPEC_RELATION []*SPEC_RELATION `xml:"SPEC-RELATION,omitempty"`
 }
 
 // A_SPEC_TYPES is generated from outer element "SPEC-TYPES"
@@ -1008,17 +1008,8 @@ type A_TOOL_EXTENSIONS struct {
 	REQ_IF_TOOL_EXTENSION []*REQ_IF_TOOL_EXTENSION `xml:"REQ-IF-TOOL-EXTENSION,omitempty"`
 }
 
-// A_TYPE_9 is generated from outer element "TYPE"
-type A_TYPE_9 struct {
-
-	// insertion point for fields
-
-	// generated from element "DATATYPE-DEFINITION-INTEGER-REF" of type LOCAL-REF order 24 depth 1
-	DATATYPE_DEFINITION_INTEGER_REF string `xml:"DATATYPE-DEFINITION-INTEGER-REF,omitempty"`
-}
-
-// A_TYPE_7 is generated from outer element "TYPE"
-type A_TYPE_7 struct {
+// A_TYPE_6 is generated from outer element "TYPE"
+type A_TYPE_6 struct {
 
 	// insertion point for fields
 
@@ -1026,44 +1017,8 @@ type A_TYPE_7 struct {
 	SPECIFICATION_TYPE_REF string `xml:"SPECIFICATION-TYPE-REF,omitempty"`
 }
 
-// A_TYPE_2 is generated from outer element "TYPE"
-type A_TYPE_2 struct {
-
-	// insertion point for fields
-
-	// generated from element "DATATYPE-DEFINITION-BOOLEAN-REF" of type LOCAL-REF order 6 depth 1
-	DATATYPE_DEFINITION_BOOLEAN_REF string `xml:"DATATYPE-DEFINITION-BOOLEAN-REF,omitempty"`
-}
-
-// A_TYPE_3 is generated from outer element "TYPE"
-type A_TYPE_3 struct {
-
-	// insertion point for fields
-
-	// generated from element "SPEC-RELATION-TYPE-REF" of type LOCAL-REF order 186 depth 1
-	SPEC_RELATION_TYPE_REF string `xml:"SPEC-RELATION-TYPE-REF,omitempty"`
-}
-
-// A_TYPE_6 is generated from outer element "TYPE"
-type A_TYPE_6 struct {
-
-	// insertion point for fields
-
-	// generated from element "DATATYPE-DEFINITION-STRING-REF" of type LOCAL-REF order 36 depth 1
-	DATATYPE_DEFINITION_STRING_REF string `xml:"DATATYPE-DEFINITION-STRING-REF,omitempty"`
-}
-
-// A_TYPE_4 is generated from outer element "TYPE"
-type A_TYPE_4 struct {
-
-	// insertion point for fields
-
-	// generated from element "DATATYPE-DEFINITION-ENUMERATION-REF" of type LOCAL-REF order 18 depth 1
-	DATATYPE_DEFINITION_ENUMERATION_REF string `xml:"DATATYPE-DEFINITION-ENUMERATION-REF,omitempty"`
-}
-
-// A_TYPE_1 is generated from outer element "TYPE"
-type A_TYPE_1 struct {
+// A_TYPE_10 is generated from outer element "TYPE"
+type A_TYPE_10 struct {
 
 	// insertion point for fields
 
@@ -1076,15 +1031,6 @@ type A_TYPE struct {
 
 	// insertion point for fields
 
-	// generated from element "DATATYPE-DEFINITION-REAL-REF" of type LOCAL-REF order 30 depth 1
-	DATATYPE_DEFINITION_REAL_REF string `xml:"DATATYPE-DEFINITION-REAL-REF,omitempty"`
-}
-
-// A_TYPE_10 is generated from outer element "TYPE"
-type A_TYPE_10 struct {
-
-	// insertion point for fields
-
 	// generated from element "RELATION-GROUP-TYPE-REF" of type LOCAL-REF order 90 depth 1
 	RELATION_GROUP_TYPE_REF string `xml:"RELATION-GROUP-TYPE-REF,omitempty"`
 }
@@ -1094,12 +1040,30 @@ type A_TYPE_8 struct {
 
 	// insertion point for fields
 
-	// generated from element "SPEC-OBJECT-TYPE-REF" of type LOCAL-REF order 160 depth 1
-	SPEC_OBJECT_TYPE_REF string `xml:"SPEC-OBJECT-TYPE-REF,omitempty"`
+	// generated from element "DATATYPE-DEFINITION-STRING-REF" of type LOCAL-REF order 36 depth 1
+	DATATYPE_DEFINITION_STRING_REF string `xml:"DATATYPE-DEFINITION-STRING-REF,omitempty"`
 }
 
-// A_TYPE_5 is generated from outer element "TYPE"
-type A_TYPE_5 struct {
+// A_TYPE_1 is generated from outer element "TYPE"
+type A_TYPE_1 struct {
+
+	// insertion point for fields
+
+	// generated from element "DATATYPE-DEFINITION-BOOLEAN-REF" of type LOCAL-REF order 6 depth 1
+	DATATYPE_DEFINITION_BOOLEAN_REF string `xml:"DATATYPE-DEFINITION-BOOLEAN-REF,omitempty"`
+}
+
+// A_TYPE_9 is generated from outer element "TYPE"
+type A_TYPE_9 struct {
+
+	// insertion point for fields
+
+	// generated from element "DATATYPE-DEFINITION-REAL-REF" of type LOCAL-REF order 30 depth 1
+	DATATYPE_DEFINITION_REAL_REF string `xml:"DATATYPE-DEFINITION-REAL-REF,omitempty"`
+}
+
+// A_TYPE_7 is generated from outer element "TYPE"
+type A_TYPE_7 struct {
 
 	// insertion point for fields
 
@@ -1107,8 +1071,44 @@ type A_TYPE_5 struct {
 	DATATYPE_DEFINITION_DATE_REF string `xml:"DATATYPE-DEFINITION-DATE-REF,omitempty"`
 }
 
-// A_VALUES_3 is generated from outer element "VALUES"
-type A_VALUES_3 struct {
+// A_TYPE_5 is generated from outer element "TYPE"
+type A_TYPE_5 struct {
+
+	// insertion point for fields
+
+	// generated from element "SPEC-OBJECT-TYPE-REF" of type LOCAL-REF order 160 depth 1
+	SPEC_OBJECT_TYPE_REF string `xml:"SPEC-OBJECT-TYPE-REF,omitempty"`
+}
+
+// A_TYPE_3 is generated from outer element "TYPE"
+type A_TYPE_3 struct {
+
+	// insertion point for fields
+
+	// generated from element "DATATYPE-DEFINITION-INTEGER-REF" of type LOCAL-REF order 24 depth 1
+	DATATYPE_DEFINITION_INTEGER_REF string `xml:"DATATYPE-DEFINITION-INTEGER-REF,omitempty"`
+}
+
+// A_TYPE_2 is generated from outer element "TYPE"
+type A_TYPE_2 struct {
+
+	// insertion point for fields
+
+	// generated from element "DATATYPE-DEFINITION-ENUMERATION-REF" of type LOCAL-REF order 18 depth 1
+	DATATYPE_DEFINITION_ENUMERATION_REF string `xml:"DATATYPE-DEFINITION-ENUMERATION-REF,omitempty"`
+}
+
+// A_TYPE_4 is generated from outer element "TYPE"
+type A_TYPE_4 struct {
+
+	// insertion point for fields
+
+	// generated from element "SPEC-RELATION-TYPE-REF" of type LOCAL-REF order 186 depth 1
+	SPEC_RELATION_TYPE_REF string `xml:"SPEC-RELATION-TYPE-REF,omitempty"`
+}
+
+// A_VALUES_1 is generated from outer element "VALUES"
+type A_VALUES_1 struct {
 
 	// insertion point for fields
 
@@ -1143,8 +1143,8 @@ type A_VALUES struct {
 	ATTRIBUTE_VALUE_XHTML []*ATTRIBUTE_VALUE_XHTML `xml:"ATTRIBUTE-VALUE-XHTML,omitempty"`
 }
 
-// A_VALUES_1 is generated from outer element "VALUES"
-type A_VALUES_1 struct {
+// A_VALUES_2 is generated from outer element "VALUES"
+type A_VALUES_2 struct {
 
 	// insertion point for fields
 
@@ -1170,8 +1170,8 @@ type A_VALUES_1 struct {
 	ATTRIBUTE_VALUE_XHTML []*ATTRIBUTE_VALUE_XHTML `xml:"ATTRIBUTE-VALUE-XHTML,omitempty"`
 }
 
-// A_VALUES_2 is generated from outer element "VALUES"
-type A_VALUES_2 struct {
+// A_VALUES_3 is generated from outer element "VALUES"
+type A_VALUES_3 struct {
 
 	// insertion point for fields
 
@@ -1238,7 +1238,7 @@ type DATATYPE_DEFINITION_DATE struct {
 	LONG_NAME string `xml:"LONG-NAME,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID_11 `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID []*A_ALTERNATIVE_ID_2 `xml:"ALTERNATIVE-ID,omitempty"`
 }
 
 // DATATYPE_DEFINITION_ENUMERATION is generated from named complex type "DATATYPE-DEFINITION-ENUMERATION"
@@ -1260,7 +1260,7 @@ type DATATYPE_DEFINITION_ENUMERATION struct {
 	LONG_NAME string `xml:"LONG-NAME,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID_21 `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID []*A_ALTERNATIVE_ID_17 `xml:"ALTERNATIVE-ID,omitempty"`
 
 	// generated from anonymous type within outer element "SPECIFIED-VALUES" of type A_SPECIFIED-VALUES.
 	SPECIFIED_VALUES []*A_SPECIFIED_VALUES `xml:"SPECIFIED-VALUES,omitempty"`
@@ -1291,7 +1291,7 @@ type DATATYPE_DEFINITION_INTEGER struct {
 	MIN int `xml:"MIN,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID_15 `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID []*A_ALTERNATIVE_ID_6 `xml:"ALTERNATIVE-ID,omitempty"`
 }
 
 // DATATYPE_DEFINITION_REAL is generated from named complex type "DATATYPE-DEFINITION-REAL"
@@ -1322,7 +1322,7 @@ type DATATYPE_DEFINITION_REAL struct {
 	MIN float64 `xml:"MIN,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID_1 `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID []*A_ALTERNATIVE_ID_13 `xml:"ALTERNATIVE-ID,omitempty"`
 }
 
 // DATATYPE_DEFINITION_STRING is generated from named complex type "DATATYPE-DEFINITION-STRING"
@@ -1347,7 +1347,7 @@ type DATATYPE_DEFINITION_STRING struct {
 	MAX_LENGTH int `xml:"MAX-LENGTH,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID_2 `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID []*A_ALTERNATIVE_ID_7 `xml:"ALTERNATIVE-ID,omitempty"`
 }
 
 // DATATYPE_DEFINITION_XHTML is generated from named complex type "DATATYPE-DEFINITION-XHTML"
@@ -1369,7 +1369,7 @@ type DATATYPE_DEFINITION_XHTML struct {
 	LONG_NAME string `xml:"LONG-NAME,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID_20 `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID []*A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
 }
 
 // EMBEDDED_VALUE is generated from named complex type "EMBEDDED-VALUE"
@@ -1404,7 +1404,7 @@ type ENUM_VALUE struct {
 	LONG_NAME string `xml:"LONG-NAME,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID_10 `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID []*A_ALTERNATIVE_ID_18 `xml:"ALTERNATIVE-ID,omitempty"`
 
 	// generated from anonymous type within outer element "PROPERTIES" of type A_PROPERTIES.
 	PROPERTIES []*A_PROPERTIES `xml:"PROPERTIES,omitempty"`
@@ -1429,7 +1429,7 @@ type RELATION_GROUP struct {
 	LONG_NAME string `xml:"LONG-NAME,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID_6 `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID []*A_ALTERNATIVE_ID_4 `xml:"ALTERNATIVE-ID,omitempty"`
 
 	// generated from anonymous type within outer element "SOURCE-SPECIFICATION" of type A_SOURCE-SPECIFICATION.
 	SOURCE_SPECIFICATION []*A_SOURCE_SPECIFICATION `xml:"SOURCE-SPECIFICATION,omitempty"`
@@ -1441,7 +1441,7 @@ type RELATION_GROUP struct {
 	TARGET_SPECIFICATION []*A_TARGET_SPECIFICATION `xml:"TARGET-SPECIFICATION,omitempty"`
 
 	// generated from anonymous type within outer element "TYPE" of type A_TYPE.
-	TYPE []*A_TYPE_10 `xml:"TYPE,omitempty"`
+	TYPE []*A_TYPE `xml:"TYPE,omitempty"`
 }
 
 // RELATION_GROUP_TYPE is generated from named complex type "RELATION-GROUP-TYPE"
@@ -1463,10 +1463,10 @@ type RELATION_GROUP_TYPE struct {
 	LONG_NAME string `xml:"LONG-NAME,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID_9 `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID []*A_ALTERNATIVE_ID_3 `xml:"ALTERNATIVE-ID,omitempty"`
 
 	// generated from anonymous type within outer element "SPEC-ATTRIBUTES" of type A_SPEC-ATTRIBUTES.
-	SPEC_ATTRIBUTES []*A_SPEC_ATTRIBUTES_3 `xml:"SPEC-ATTRIBUTES,omitempty"`
+	SPEC_ATTRIBUTES []*A_SPEC_ATTRIBUTES_1 `xml:"SPEC-ATTRIBUTES,omitempty"`
 }
 
 // REQ_IF is generated from named complex type "REQ-IF"
@@ -1576,10 +1576,10 @@ type SPEC_HIERARCHY struct {
 	LONG_NAME string `xml:"LONG-NAME,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID_13 `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID []*A_ALTERNATIVE_ID_15 `xml:"ALTERNATIVE-ID,omitempty"`
 
 	// generated from anonymous type within outer element "CHILDREN" of type A_CHILDREN.
-	CHILDREN []*A_CHILDREN `xml:"CHILDREN,omitempty"`
+	CHILDREN []*A_CHILDREN_1 `xml:"CHILDREN,omitempty"`
 
 	// generated from anonymous type within outer element "EDITABLE-ATTS" of type A_EDITABLE-ATTS.
 	EDITABLE_ATTS []*A_EDITABLE_ATTS `xml:"EDITABLE-ATTS,omitempty"`
@@ -1607,13 +1607,13 @@ type SPEC_OBJECT struct {
 	LONG_NAME string `xml:"LONG-NAME,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID_17 `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID []*A_ALTERNATIVE_ID_14 `xml:"ALTERNATIVE-ID,omitempty"`
 
 	// generated from anonymous type within outer element "VALUES" of type A_VALUES.
-	VALUES []*A_VALUES_2 `xml:"VALUES,omitempty"`
+	VALUES []*A_VALUES_3 `xml:"VALUES,omitempty"`
 
 	// generated from anonymous type within outer element "TYPE" of type A_TYPE.
-	TYPE []*A_TYPE_8 `xml:"TYPE,omitempty"`
+	TYPE []*A_TYPE_5 `xml:"TYPE,omitempty"`
 }
 
 // SPEC_OBJECT_TYPE is generated from named complex type "SPEC-OBJECT-TYPE"
@@ -1635,7 +1635,7 @@ type SPEC_OBJECT_TYPE struct {
 	LONG_NAME string `xml:"LONG-NAME,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID_22 `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID []*A_ALTERNATIVE_ID_5 `xml:"ALTERNATIVE-ID,omitempty"`
 
 	// generated from anonymous type within outer element "SPEC-ATTRIBUTES" of type A_SPEC-ATTRIBUTES.
 	SPEC_ATTRIBUTES []*A_SPEC_ATTRIBUTES_2 `xml:"SPEC-ATTRIBUTES,omitempty"`
@@ -1660,10 +1660,10 @@ type SPEC_RELATION struct {
 	LONG_NAME string `xml:"LONG-NAME,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID_12 `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID []*A_ALTERNATIVE_ID_1 `xml:"ALTERNATIVE-ID,omitempty"`
 
 	// generated from anonymous type within outer element "VALUES" of type A_VALUES.
-	VALUES []*A_VALUES `xml:"VALUES,omitempty"`
+	VALUES []*A_VALUES_2 `xml:"VALUES,omitempty"`
 
 	// generated from anonymous type within outer element "SOURCE" of type A_SOURCE.
 	SOURCE []*A_SOURCE `xml:"SOURCE,omitempty"`
@@ -1672,7 +1672,7 @@ type SPEC_RELATION struct {
 	TARGET []*A_TARGET `xml:"TARGET,omitempty"`
 
 	// generated from anonymous type within outer element "TYPE" of type A_TYPE.
-	TYPE []*A_TYPE_3 `xml:"TYPE,omitempty"`
+	TYPE []*A_TYPE_4 `xml:"TYPE,omitempty"`
 }
 
 // SPEC_RELATION_TYPE is generated from named complex type "SPEC-RELATION-TYPE"
@@ -1694,7 +1694,7 @@ type SPEC_RELATION_TYPE struct {
 	LONG_NAME string `xml:"LONG-NAME,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID_16 `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID []*A_ALTERNATIVE_ID_22 `xml:"ALTERNATIVE-ID,omitempty"`
 
 	// generated from anonymous type within outer element "SPEC-ATTRIBUTES" of type A_SPEC-ATTRIBUTES.
 	SPEC_ATTRIBUTES []*A_SPEC_ATTRIBUTES `xml:"SPEC-ATTRIBUTES,omitempty"`
@@ -1719,16 +1719,16 @@ type SPECIFICATION struct {
 	LONG_NAME string `xml:"LONG-NAME,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID_18 `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID []*A_ALTERNATIVE_ID_23 `xml:"ALTERNATIVE-ID,omitempty"`
 
 	// generated from anonymous type within outer element "VALUES" of type A_VALUES.
-	VALUES []*A_VALUES_1 `xml:"VALUES,omitempty"`
+	VALUES []*A_VALUES `xml:"VALUES,omitempty"`
 
 	// generated from anonymous type within outer element "CHILDREN" of type A_CHILDREN.
-	CHILDREN []*A_CHILDREN_1 `xml:"CHILDREN,omitempty"`
+	CHILDREN []*A_CHILDREN `xml:"CHILDREN,omitempty"`
 
 	// generated from anonymous type within outer element "TYPE" of type A_TYPE.
-	TYPE []*A_TYPE_7 `xml:"TYPE,omitempty"`
+	TYPE []*A_TYPE_6 `xml:"TYPE,omitempty"`
 }
 
 // SPECIFICATION_TYPE is generated from named complex type "SPECIFICATION-TYPE"
@@ -1750,10 +1750,10 @@ type SPECIFICATION_TYPE struct {
 	LONG_NAME string `xml:"LONG-NAME,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID_23 `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID []*A_ALTERNATIVE_ID_16 `xml:"ALTERNATIVE-ID,omitempty"`
 
 	// generated from anonymous type within outer element "SPEC-ATTRIBUTES" of type A_SPEC-ATTRIBUTES.
-	SPEC_ATTRIBUTES []*A_SPEC_ATTRIBUTES_1 `xml:"SPEC-ATTRIBUTES,omitempty"`
+	SPEC_ATTRIBUTES []*A_SPEC_ATTRIBUTES_3 `xml:"SPEC-ATTRIBUTES,omitempty"`
 }
 
 // XHTML_CONTENT is generated from named complex type "XHTML-CONTENT"

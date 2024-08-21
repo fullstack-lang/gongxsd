@@ -935,6 +935,8 @@ func (choiceFormCallback *ChoiceFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(choice_.Order), formDiv)
 		case "Depth":
 			FormDivBasicFieldToField(&(choice_.Depth), formDiv)
+		case "IsDuplicatedInXSD":
+			FormDivBasicFieldToField(&(choice_.IsDuplicatedInXSD), formDiv)
 		case "All:Choices":
 			// we need to retrieve the field owner before the change
 			var pastAllOwner *models.All
