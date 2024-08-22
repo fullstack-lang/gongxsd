@@ -1,12 +1,18 @@
 package main
 
 import (
+	"encoding/xml"
 	"flag"
+	"fmt"
+	"io"
 	"log"
+	"os"
 	"strconv"
 
 	reqif_stack "github.com/fullstack-lang/gongxsd/test/reqif/go/stack"
 	reqif_static "github.com/fullstack-lang/gongxsd/test/reqif/go/static"
+
+	models "github.com/fullstack-lang/gongxsd/test/reqif/go/models"
 )
 
 var (
@@ -36,8 +42,35 @@ func main() {
 	stack := reqif_stack.NewStack(r, "reqif", *unmarshallFromCode, *marshallOnCommit, "", *embeddedDiagrams, true)
 	stack.Probe.Refresh()
 
+	// Open the XML file
+	xmlFile, err := os.Open("../../../samples/Sample.reqif")
+	if err != nil {
+		fmt.Println("Error opening file:", err)
+		return
+	}
+	defer xmlFile.Close()
+
+	// Read the XML file
+	byteValue, err := io.ReadAll(xmlFile)
+	if err != nil {
+		fmt.Println("Error reading file:", err)
+		return
+	}
+
+	// Unmarshal the XML into the Reqif struct
+	var req_if models.REQ_IF
+	err = xml.Unmarshal(byteValue, &req_if)
+	if err != nil {
+		fmt.Println("Error unmarshalling XML:", err)
+		return
+	}
+
+	stack.Stage.StageBranchREQ_IF(&req_if)
+
+	stack.Stage.Commit()
+
 	log.Printf("Server ready serve on localhost:" + strconv.Itoa(*port))
-	err := r.Run(":" + strconv.Itoa(*port))
+	err = r.Run(":" + strconv.Itoa(*port))
 	if err != nil {
 		log.Fatalln(err.Error())
 	}
