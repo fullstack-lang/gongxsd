@@ -7,4 +7,10 @@ type Choice struct {
 	MaxOccurs string `xml:"maxOccurs,attr"`
 
 	ModelGroup
+
+	ParticleAbstract
+
+	IsDuplicatedInXSD bool
+
+	OuterParticle Particle
 }

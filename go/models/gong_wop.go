@@ -13,6 +13,8 @@ type All_WOP struct {
 	MinOccurs string
 	MaxOccurs string
 	OuterElementName string
+	Order int
+	Depth int
 }
 
 func (from *All) CopyBasicFields(to *All) {
@@ -21,6 +23,8 @@ func (from *All) CopyBasicFields(to *All) {
 	to.MinOccurs = from.MinOccurs
 	to.MaxOccurs = from.MaxOccurs
 	to.OuterElementName = from.OuterElementName
+	to.Order = from.Order
+	to.Depth = from.Depth
 }
 
 type Annotation_WOP struct {
@@ -91,6 +95,9 @@ type Choice_WOP struct {
 	MinOccurs string
 	MaxOccurs string
 	OuterElementName string
+	Order int
+	Depth int
+	IsDuplicatedInXSD bool
 }
 
 func (from *Choice) CopyBasicFields(to *Choice) {
@@ -99,6 +106,9 @@ func (from *Choice) CopyBasicFields(to *Choice) {
 	to.MinOccurs = from.MinOccurs
 	to.MaxOccurs = from.MaxOccurs
 	to.OuterElementName = from.OuterElementName
+	to.Order = from.Order
+	to.Depth = from.Depth
+	to.IsDuplicatedInXSD = from.IsDuplicatedInXSD
 }
 
 type ComplexContent_WOP struct {
@@ -166,6 +176,7 @@ type Element_WOP struct {
 	Form string
 	Block string
 	Final string
+	IsDuplicatedInXSD bool
 }
 
 func (from *Element) CopyBasicFields(to *Element) {
@@ -187,6 +198,7 @@ func (from *Element) CopyBasicFields(to *Element) {
 	to.Form = from.Form
 	to.Block = from.Block
 	to.Final = from.Final
+	to.IsDuplicatedInXSD = from.IsDuplicatedInXSD
 }
 
 type Enumeration_WOP struct {
@@ -345,6 +357,8 @@ type Sequence_WOP struct {
 	MinOccurs string
 	MaxOccurs string
 	OuterElementName string
+	Order int
+	Depth int
 }
 
 func (from *Sequence) CopyBasicFields(to *Sequence) {
@@ -353,6 +367,8 @@ func (from *Sequence) CopyBasicFields(to *Sequence) {
 	to.MinOccurs = from.MinOccurs
 	to.MaxOccurs = from.MaxOccurs
 	to.OuterElementName = from.OuterElementName
+	to.Order = from.Order
+	to.Depth = from.Depth
 }
 
 type SimpleContent_WOP struct {

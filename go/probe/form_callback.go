@@ -71,6 +71,10 @@ func (allFormCallback *AllFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(all_.MaxOccurs), formDiv)
 		case "OuterElementName":
 			FormDivBasicFieldToField(&(all_.OuterElementName), formDiv)
+		case "Order":
+			FormDivBasicFieldToField(&(all_.Order), formDiv)
+		case "Depth":
+			FormDivBasicFieldToField(&(all_.Depth), formDiv)
 		case "All:Alls":
 			// we need to retrieve the field owner before the change
 			var pastAllOwner *models.All
@@ -927,6 +931,12 @@ func (choiceFormCallback *ChoiceFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(choice_.MaxOccurs), formDiv)
 		case "OuterElementName":
 			FormDivBasicFieldToField(&(choice_.OuterElementName), formDiv)
+		case "Order":
+			FormDivBasicFieldToField(&(choice_.Order), formDiv)
+		case "Depth":
+			FormDivBasicFieldToField(&(choice_.Depth), formDiv)
+		case "IsDuplicatedInXSD":
+			FormDivBasicFieldToField(&(choice_.IsDuplicatedInXSD), formDiv)
 		case "All:Choices":
 			// we need to retrieve the field owner before the change
 			var pastAllOwner *models.All
@@ -1635,6 +1645,8 @@ func (elementFormCallback *ElementFormCallback) OnSave() {
 			FormDivSelectFieldToField(&(element_.SimpleType), elementFormCallback.probe.stageOfInterest, formDiv)
 		case "ComplexType":
 			FormDivSelectFieldToField(&(element_.ComplexType), elementFormCallback.probe.stageOfInterest, formDiv)
+		case "IsDuplicatedInXSD":
+			FormDivBasicFieldToField(&(element_.IsDuplicatedInXSD), formDiv)
 		case "All:Elements":
 			// we need to retrieve the field owner before the change
 			var pastAllOwner *models.All
@@ -3317,6 +3329,10 @@ func (sequenceFormCallback *SequenceFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(sequence_.MaxOccurs), formDiv)
 		case "OuterElementName":
 			FormDivBasicFieldToField(&(sequence_.OuterElementName), formDiv)
+		case "Order":
+			FormDivBasicFieldToField(&(sequence_.Order), formDiv)
+		case "Depth":
+			FormDivBasicFieldToField(&(sequence_.Depth), formDiv)
 		case "All:Sequences":
 			// we need to retrieve the field owner before the change
 			var pastAllOwner *models.All

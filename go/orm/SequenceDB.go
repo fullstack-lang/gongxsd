@@ -89,6 +89,12 @@ type SequenceDB struct {
 
 	// Declation for basic field sequenceDB.OuterElementName
 	OuterElementName_Data sql.NullString
+
+	// Declation for basic field sequenceDB.Order
+	Order_Data sql.NullInt64
+
+	// Declation for basic field sequenceDB.Depth
+	Depth_Data sql.NullInt64
 	
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
@@ -119,6 +125,10 @@ type SequenceWOP struct {
 	MaxOccurs string `xlsx:"3"`
 
 	OuterElementName string `xlsx:"4"`
+
+	Order int `xlsx:"5"`
+
+	Depth int `xlsx:"6"`
 	// insertion for WOP pointer fields
 }
 
@@ -129,6 +139,8 @@ var Sequence_Fields = []string{
 	"MinOccurs",
 	"MaxOccurs",
 	"OuterElementName",
+	"Order",
+	"Depth",
 }
 
 type BackRepoSequenceStruct struct {
@@ -558,6 +570,12 @@ func (sequenceDB *SequenceDB) CopyBasicFieldsFromSequence(sequence *models.Seque
 
 	sequenceDB.OuterElementName_Data.String = sequence.OuterElementName
 	sequenceDB.OuterElementName_Data.Valid = true
+
+	sequenceDB.Order_Data.Int64 = int64(sequence.Order)
+	sequenceDB.Order_Data.Valid = true
+
+	sequenceDB.Depth_Data.Int64 = int64(sequence.Depth)
+	sequenceDB.Depth_Data.Valid = true
 }
 
 // CopyBasicFieldsFromSequence_WOP
@@ -575,6 +593,12 @@ func (sequenceDB *SequenceDB) CopyBasicFieldsFromSequence_WOP(sequence *models.S
 
 	sequenceDB.OuterElementName_Data.String = sequence.OuterElementName
 	sequenceDB.OuterElementName_Data.Valid = true
+
+	sequenceDB.Order_Data.Int64 = int64(sequence.Order)
+	sequenceDB.Order_Data.Valid = true
+
+	sequenceDB.Depth_Data.Int64 = int64(sequence.Depth)
+	sequenceDB.Depth_Data.Valid = true
 }
 
 // CopyBasicFieldsFromSequenceWOP
@@ -592,6 +616,12 @@ func (sequenceDB *SequenceDB) CopyBasicFieldsFromSequenceWOP(sequence *SequenceW
 
 	sequenceDB.OuterElementName_Data.String = sequence.OuterElementName
 	sequenceDB.OuterElementName_Data.Valid = true
+
+	sequenceDB.Order_Data.Int64 = int64(sequence.Order)
+	sequenceDB.Order_Data.Valid = true
+
+	sequenceDB.Depth_Data.Int64 = int64(sequence.Depth)
+	sequenceDB.Depth_Data.Valid = true
 }
 
 // CopyBasicFieldsToSequence
@@ -601,6 +631,8 @@ func (sequenceDB *SequenceDB) CopyBasicFieldsToSequence(sequence *models.Sequenc
 	sequence.MinOccurs = sequenceDB.MinOccurs_Data.String
 	sequence.MaxOccurs = sequenceDB.MaxOccurs_Data.String
 	sequence.OuterElementName = sequenceDB.OuterElementName_Data.String
+	sequence.Order = int(sequenceDB.Order_Data.Int64)
+	sequence.Depth = int(sequenceDB.Depth_Data.Int64)
 }
 
 // CopyBasicFieldsToSequence_WOP
@@ -610,6 +642,8 @@ func (sequenceDB *SequenceDB) CopyBasicFieldsToSequence_WOP(sequence *models.Seq
 	sequence.MinOccurs = sequenceDB.MinOccurs_Data.String
 	sequence.MaxOccurs = sequenceDB.MaxOccurs_Data.String
 	sequence.OuterElementName = sequenceDB.OuterElementName_Data.String
+	sequence.Order = int(sequenceDB.Order_Data.Int64)
+	sequence.Depth = int(sequenceDB.Depth_Data.Int64)
 }
 
 // CopyBasicFieldsToSequenceWOP
@@ -620,6 +654,8 @@ func (sequenceDB *SequenceDB) CopyBasicFieldsToSequenceWOP(sequence *SequenceWOP
 	sequence.MinOccurs = sequenceDB.MinOccurs_Data.String
 	sequence.MaxOccurs = sequenceDB.MaxOccurs_Data.String
 	sequence.OuterElementName = sequenceDB.OuterElementName_Data.String
+	sequence.Order = int(sequenceDB.Order_Data.Int64)
+	sequence.Depth = int(sequenceDB.Depth_Data.Int64)
 }
 
 // Backup generates a json file from a slice of all SequenceDB instances in the backrepo
