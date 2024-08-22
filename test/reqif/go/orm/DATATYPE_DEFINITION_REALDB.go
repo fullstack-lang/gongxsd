@@ -46,6 +46,9 @@ type DATATYPE_DEFINITION_REALAPI struct {
 // reverse pointers of slice of poitners to Struct
 type DATATYPE_DEFINITION_REALPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
+
+	// field ALTERNATIVE_ID is a slice of pointers to another Struct (optional or 0..1)
+	ALTERNATIVE_ID IntSlice `gorm:"type:TEXT"`
 }
 
 // DATATYPE_DEFINITION_REALDB describes a datatype_definition_real in the database
@@ -253,6 +256,24 @@ func (backRepoDATATYPE_DEFINITION_REAL *BackRepoDATATYPE_DEFINITION_REALStruct) 
 		datatype_definition_realDB.CopyBasicFieldsFromDATATYPE_DEFINITION_REAL(datatype_definition_real)
 
 		// insertion point for translating pointers encodings into actual pointers
+		// 1. reset
+		datatype_definition_realDB.DATATYPE_DEFINITION_REALPointersEncoding.ALTERNATIVE_ID = make([]int, 0)
+		// 2. encode
+		for _, a_alternative_idAssocEnd := range datatype_definition_real.ALTERNATIVE_ID {
+			a_alternative_idAssocEnd_DB :=
+				backRepo.BackRepoA_ALTERNATIVE_ID.GetA_ALTERNATIVE_IDDBFromA_ALTERNATIVE_IDPtr(a_alternative_idAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the a_alternative_idAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if a_alternative_idAssocEnd_DB == nil {
+				continue
+			}
+			
+			datatype_definition_realDB.DATATYPE_DEFINITION_REALPointersEncoding.ALTERNATIVE_ID =
+				append(datatype_definition_realDB.DATATYPE_DEFINITION_REALPointersEncoding.ALTERNATIVE_ID, int(a_alternative_idAssocEnd_DB.ID))
+		}
+
 		query := backRepoDATATYPE_DEFINITION_REAL.db.Save(&datatype_definition_realDB)
 		if query.Error != nil {
 			log.Fatalln(query.Error)
@@ -366,6 +387,15 @@ func (backRepoDATATYPE_DEFINITION_REAL *BackRepoDATATYPE_DEFINITION_REALStruct) 
 func (datatype_definition_realDB *DATATYPE_DEFINITION_REALDB) DecodePointers(backRepo *BackRepoStruct, datatype_definition_real *models.DATATYPE_DEFINITION_REAL) {
 
 	// insertion point for checkout of pointer encoding
+	// This loop redeem datatype_definition_real.ALTERNATIVE_ID in the stage from the encode in the back repo
+	// It parses all A_ALTERNATIVE_IDDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	datatype_definition_real.ALTERNATIVE_ID = datatype_definition_real.ALTERNATIVE_ID[:0]
+	for _, _A_ALTERNATIVE_IDid := range datatype_definition_realDB.DATATYPE_DEFINITION_REALPointersEncoding.ALTERNATIVE_ID {
+		datatype_definition_real.ALTERNATIVE_ID = append(datatype_definition_real.ALTERNATIVE_ID, backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(_A_ALTERNATIVE_IDid)])
+	}
+
 	return
 }
 

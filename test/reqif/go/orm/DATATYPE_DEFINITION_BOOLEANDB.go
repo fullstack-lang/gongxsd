@@ -46,6 +46,9 @@ type DATATYPE_DEFINITION_BOOLEANAPI struct {
 // reverse pointers of slice of poitners to Struct
 type DATATYPE_DEFINITION_BOOLEANPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
+
+	// field ALTERNATIVE_ID is a slice of pointers to another Struct (optional or 0..1)
+	ALTERNATIVE_ID IntSlice `gorm:"type:TEXT"`
 }
 
 // DATATYPE_DEFINITION_BOOLEANDB describes a datatype_definition_boolean in the database
@@ -235,6 +238,24 @@ func (backRepoDATATYPE_DEFINITION_BOOLEAN *BackRepoDATATYPE_DEFINITION_BOOLEANSt
 		datatype_definition_booleanDB.CopyBasicFieldsFromDATATYPE_DEFINITION_BOOLEAN(datatype_definition_boolean)
 
 		// insertion point for translating pointers encodings into actual pointers
+		// 1. reset
+		datatype_definition_booleanDB.DATATYPE_DEFINITION_BOOLEANPointersEncoding.ALTERNATIVE_ID = make([]int, 0)
+		// 2. encode
+		for _, a_alternative_idAssocEnd := range datatype_definition_boolean.ALTERNATIVE_ID {
+			a_alternative_idAssocEnd_DB :=
+				backRepo.BackRepoA_ALTERNATIVE_ID.GetA_ALTERNATIVE_IDDBFromA_ALTERNATIVE_IDPtr(a_alternative_idAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the a_alternative_idAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if a_alternative_idAssocEnd_DB == nil {
+				continue
+			}
+			
+			datatype_definition_booleanDB.DATATYPE_DEFINITION_BOOLEANPointersEncoding.ALTERNATIVE_ID =
+				append(datatype_definition_booleanDB.DATATYPE_DEFINITION_BOOLEANPointersEncoding.ALTERNATIVE_ID, int(a_alternative_idAssocEnd_DB.ID))
+		}
+
 		query := backRepoDATATYPE_DEFINITION_BOOLEAN.db.Save(&datatype_definition_booleanDB)
 		if query.Error != nil {
 			log.Fatalln(query.Error)
@@ -348,6 +369,15 @@ func (backRepoDATATYPE_DEFINITION_BOOLEAN *BackRepoDATATYPE_DEFINITION_BOOLEANSt
 func (datatype_definition_booleanDB *DATATYPE_DEFINITION_BOOLEANDB) DecodePointers(backRepo *BackRepoStruct, datatype_definition_boolean *models.DATATYPE_DEFINITION_BOOLEAN) {
 
 	// insertion point for checkout of pointer encoding
+	// This loop redeem datatype_definition_boolean.ALTERNATIVE_ID in the stage from the encode in the back repo
+	// It parses all A_ALTERNATIVE_IDDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	datatype_definition_boolean.ALTERNATIVE_ID = datatype_definition_boolean.ALTERNATIVE_ID[:0]
+	for _, _A_ALTERNATIVE_IDid := range datatype_definition_booleanDB.DATATYPE_DEFINITION_BOOLEANPointersEncoding.ALTERNATIVE_ID {
+		datatype_definition_boolean.ALTERNATIVE_ID = append(datatype_definition_boolean.ALTERNATIVE_ID, backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(_A_ALTERNATIVE_IDid)])
+	}
+
 	return
 }
 

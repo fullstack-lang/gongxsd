@@ -46,6 +46,15 @@ type ATTRIBUTE_DEFINITION_DATEAPI struct {
 // reverse pointers of slice of poitners to Struct
 type ATTRIBUTE_DEFINITION_DATEPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
+
+	// field ALTERNATIVE_ID is a slice of pointers to another Struct (optional or 0..1)
+	ALTERNATIVE_ID IntSlice `gorm:"type:TEXT"`
+
+	// field DEFAULT_VALUE is a slice of pointers to another Struct (optional or 0..1)
+	DEFAULT_VALUE IntSlice `gorm:"type:TEXT"`
+
+	// field TYPE is a slice of pointers to another Struct (optional or 0..1)
+	TYPE IntSlice `gorm:"type:TEXT"`
 }
 
 // ATTRIBUTE_DEFINITION_DATEDB describes a attribute_definition_date in the database
@@ -242,6 +251,60 @@ func (backRepoATTRIBUTE_DEFINITION_DATE *BackRepoATTRIBUTE_DEFINITION_DATEStruct
 		attribute_definition_dateDB.CopyBasicFieldsFromATTRIBUTE_DEFINITION_DATE(attribute_definition_date)
 
 		// insertion point for translating pointers encodings into actual pointers
+		// 1. reset
+		attribute_definition_dateDB.ATTRIBUTE_DEFINITION_DATEPointersEncoding.ALTERNATIVE_ID = make([]int, 0)
+		// 2. encode
+		for _, a_alternative_idAssocEnd := range attribute_definition_date.ALTERNATIVE_ID {
+			a_alternative_idAssocEnd_DB :=
+				backRepo.BackRepoA_ALTERNATIVE_ID.GetA_ALTERNATIVE_IDDBFromA_ALTERNATIVE_IDPtr(a_alternative_idAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the a_alternative_idAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if a_alternative_idAssocEnd_DB == nil {
+				continue
+			}
+			
+			attribute_definition_dateDB.ATTRIBUTE_DEFINITION_DATEPointersEncoding.ALTERNATIVE_ID =
+				append(attribute_definition_dateDB.ATTRIBUTE_DEFINITION_DATEPointersEncoding.ALTERNATIVE_ID, int(a_alternative_idAssocEnd_DB.ID))
+		}
+
+		// 1. reset
+		attribute_definition_dateDB.ATTRIBUTE_DEFINITION_DATEPointersEncoding.DEFAULT_VALUE = make([]int, 0)
+		// 2. encode
+		for _, a_default_value_3AssocEnd := range attribute_definition_date.DEFAULT_VALUE {
+			a_default_value_3AssocEnd_DB :=
+				backRepo.BackRepoA_DEFAULT_VALUE_3.GetA_DEFAULT_VALUE_3DBFromA_DEFAULT_VALUE_3Ptr(a_default_value_3AssocEnd)
+			
+			// the stage might be inconsistant, meaning that the a_default_value_3AssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if a_default_value_3AssocEnd_DB == nil {
+				continue
+			}
+			
+			attribute_definition_dateDB.ATTRIBUTE_DEFINITION_DATEPointersEncoding.DEFAULT_VALUE =
+				append(attribute_definition_dateDB.ATTRIBUTE_DEFINITION_DATEPointersEncoding.DEFAULT_VALUE, int(a_default_value_3AssocEnd_DB.ID))
+		}
+
+		// 1. reset
+		attribute_definition_dateDB.ATTRIBUTE_DEFINITION_DATEPointersEncoding.TYPE = make([]int, 0)
+		// 2. encode
+		for _, a_typeAssocEnd := range attribute_definition_date.TYPE {
+			a_typeAssocEnd_DB :=
+				backRepo.BackRepoA_TYPE.GetA_TYPEDBFromA_TYPEPtr(a_typeAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the a_typeAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if a_typeAssocEnd_DB == nil {
+				continue
+			}
+			
+			attribute_definition_dateDB.ATTRIBUTE_DEFINITION_DATEPointersEncoding.TYPE =
+				append(attribute_definition_dateDB.ATTRIBUTE_DEFINITION_DATEPointersEncoding.TYPE, int(a_typeAssocEnd_DB.ID))
+		}
+
 		query := backRepoATTRIBUTE_DEFINITION_DATE.db.Save(&attribute_definition_dateDB)
 		if query.Error != nil {
 			log.Fatalln(query.Error)
@@ -355,6 +418,33 @@ func (backRepoATTRIBUTE_DEFINITION_DATE *BackRepoATTRIBUTE_DEFINITION_DATEStruct
 func (attribute_definition_dateDB *ATTRIBUTE_DEFINITION_DATEDB) DecodePointers(backRepo *BackRepoStruct, attribute_definition_date *models.ATTRIBUTE_DEFINITION_DATE) {
 
 	// insertion point for checkout of pointer encoding
+	// This loop redeem attribute_definition_date.ALTERNATIVE_ID in the stage from the encode in the back repo
+	// It parses all A_ALTERNATIVE_IDDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	attribute_definition_date.ALTERNATIVE_ID = attribute_definition_date.ALTERNATIVE_ID[:0]
+	for _, _A_ALTERNATIVE_IDid := range attribute_definition_dateDB.ATTRIBUTE_DEFINITION_DATEPointersEncoding.ALTERNATIVE_ID {
+		attribute_definition_date.ALTERNATIVE_ID = append(attribute_definition_date.ALTERNATIVE_ID, backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(_A_ALTERNATIVE_IDid)])
+	}
+
+	// This loop redeem attribute_definition_date.DEFAULT_VALUE in the stage from the encode in the back repo
+	// It parses all A_DEFAULT_VALUE_3DB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	attribute_definition_date.DEFAULT_VALUE = attribute_definition_date.DEFAULT_VALUE[:0]
+	for _, _A_DEFAULT_VALUE_3id := range attribute_definition_dateDB.ATTRIBUTE_DEFINITION_DATEPointersEncoding.DEFAULT_VALUE {
+		attribute_definition_date.DEFAULT_VALUE = append(attribute_definition_date.DEFAULT_VALUE, backRepo.BackRepoA_DEFAULT_VALUE_3.Map_A_DEFAULT_VALUE_3DBID_A_DEFAULT_VALUE_3Ptr[uint(_A_DEFAULT_VALUE_3id)])
+	}
+
+	// This loop redeem attribute_definition_date.TYPE in the stage from the encode in the back repo
+	// It parses all A_TYPEDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	attribute_definition_date.TYPE = attribute_definition_date.TYPE[:0]
+	for _, _A_TYPEid := range attribute_definition_dateDB.ATTRIBUTE_DEFINITION_DATEPointersEncoding.TYPE {
+		attribute_definition_date.TYPE = append(attribute_definition_date.TYPE, backRepo.BackRepoA_TYPE.Map_A_TYPEDBID_A_TYPEPtr[uint(_A_TYPEid)])
+	}
+
 	return
 }
 

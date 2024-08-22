@@ -46,6 +46,9 @@ type ATTRIBUTE_VALUE_BOOLEANAPI struct {
 // reverse pointers of slice of poitners to Struct
 type ATTRIBUTE_VALUE_BOOLEANPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
+
+	// field DEFINITION is a slice of pointers to another Struct (optional or 0..1)
+	DEFINITION IntSlice `gorm:"type:TEXT"`
 }
 
 // ATTRIBUTE_VALUE_BOOLEANDB describes a attribute_value_boolean in the database
@@ -218,6 +221,24 @@ func (backRepoATTRIBUTE_VALUE_BOOLEAN *BackRepoATTRIBUTE_VALUE_BOOLEANStruct) Co
 		attribute_value_booleanDB.CopyBasicFieldsFromATTRIBUTE_VALUE_BOOLEAN(attribute_value_boolean)
 
 		// insertion point for translating pointers encodings into actual pointers
+		// 1. reset
+		attribute_value_booleanDB.ATTRIBUTE_VALUE_BOOLEANPointersEncoding.DEFINITION = make([]int, 0)
+		// 2. encode
+		for _, a_definition_4AssocEnd := range attribute_value_boolean.DEFINITION {
+			a_definition_4AssocEnd_DB :=
+				backRepo.BackRepoA_DEFINITION_4.GetA_DEFINITION_4DBFromA_DEFINITION_4Ptr(a_definition_4AssocEnd)
+			
+			// the stage might be inconsistant, meaning that the a_definition_4AssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if a_definition_4AssocEnd_DB == nil {
+				continue
+			}
+			
+			attribute_value_booleanDB.ATTRIBUTE_VALUE_BOOLEANPointersEncoding.DEFINITION =
+				append(attribute_value_booleanDB.ATTRIBUTE_VALUE_BOOLEANPointersEncoding.DEFINITION, int(a_definition_4AssocEnd_DB.ID))
+		}
+
 		query := backRepoATTRIBUTE_VALUE_BOOLEAN.db.Save(&attribute_value_booleanDB)
 		if query.Error != nil {
 			log.Fatalln(query.Error)
@@ -331,6 +352,15 @@ func (backRepoATTRIBUTE_VALUE_BOOLEAN *BackRepoATTRIBUTE_VALUE_BOOLEANStruct) Ch
 func (attribute_value_booleanDB *ATTRIBUTE_VALUE_BOOLEANDB) DecodePointers(backRepo *BackRepoStruct, attribute_value_boolean *models.ATTRIBUTE_VALUE_BOOLEAN) {
 
 	// insertion point for checkout of pointer encoding
+	// This loop redeem attribute_value_boolean.DEFINITION in the stage from the encode in the back repo
+	// It parses all A_DEFINITION_4DB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	attribute_value_boolean.DEFINITION = attribute_value_boolean.DEFINITION[:0]
+	for _, _A_DEFINITION_4id := range attribute_value_booleanDB.ATTRIBUTE_VALUE_BOOLEANPointersEncoding.DEFINITION {
+		attribute_value_boolean.DEFINITION = append(attribute_value_boolean.DEFINITION, backRepo.BackRepoA_DEFINITION_4.Map_A_DEFINITION_4DBID_A_DEFINITION_4Ptr[uint(_A_DEFINITION_4id)])
+	}
+
 	return
 }
 

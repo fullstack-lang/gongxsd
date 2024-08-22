@@ -46,6 +46,12 @@ type RELATION_GROUP_TYPEAPI struct {
 // reverse pointers of slice of poitners to Struct
 type RELATION_GROUP_TYPEPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
+
+	// field ALTERNATIVE_ID is a slice of pointers to another Struct (optional or 0..1)
+	ALTERNATIVE_ID IntSlice `gorm:"type:TEXT"`
+
+	// field SPEC_ATTRIBUTES is a slice of pointers to another Struct (optional or 0..1)
+	SPEC_ATTRIBUTES IntSlice `gorm:"type:TEXT"`
 }
 
 // RELATION_GROUP_TYPEDB describes a relation_group_type in the database
@@ -235,6 +241,42 @@ func (backRepoRELATION_GROUP_TYPE *BackRepoRELATION_GROUP_TYPEStruct) CommitPhas
 		relation_group_typeDB.CopyBasicFieldsFromRELATION_GROUP_TYPE(relation_group_type)
 
 		// insertion point for translating pointers encodings into actual pointers
+		// 1. reset
+		relation_group_typeDB.RELATION_GROUP_TYPEPointersEncoding.ALTERNATIVE_ID = make([]int, 0)
+		// 2. encode
+		for _, a_alternative_idAssocEnd := range relation_group_type.ALTERNATIVE_ID {
+			a_alternative_idAssocEnd_DB :=
+				backRepo.BackRepoA_ALTERNATIVE_ID.GetA_ALTERNATIVE_IDDBFromA_ALTERNATIVE_IDPtr(a_alternative_idAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the a_alternative_idAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if a_alternative_idAssocEnd_DB == nil {
+				continue
+			}
+			
+			relation_group_typeDB.RELATION_GROUP_TYPEPointersEncoding.ALTERNATIVE_ID =
+				append(relation_group_typeDB.RELATION_GROUP_TYPEPointersEncoding.ALTERNATIVE_ID, int(a_alternative_idAssocEnd_DB.ID))
+		}
+
+		// 1. reset
+		relation_group_typeDB.RELATION_GROUP_TYPEPointersEncoding.SPEC_ATTRIBUTES = make([]int, 0)
+		// 2. encode
+		for _, a_spec_attributesAssocEnd := range relation_group_type.SPEC_ATTRIBUTES {
+			a_spec_attributesAssocEnd_DB :=
+				backRepo.BackRepoA_SPEC_ATTRIBUTES.GetA_SPEC_ATTRIBUTESDBFromA_SPEC_ATTRIBUTESPtr(a_spec_attributesAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the a_spec_attributesAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if a_spec_attributesAssocEnd_DB == nil {
+				continue
+			}
+			
+			relation_group_typeDB.RELATION_GROUP_TYPEPointersEncoding.SPEC_ATTRIBUTES =
+				append(relation_group_typeDB.RELATION_GROUP_TYPEPointersEncoding.SPEC_ATTRIBUTES, int(a_spec_attributesAssocEnd_DB.ID))
+		}
+
 		query := backRepoRELATION_GROUP_TYPE.db.Save(&relation_group_typeDB)
 		if query.Error != nil {
 			log.Fatalln(query.Error)
@@ -348,6 +390,24 @@ func (backRepoRELATION_GROUP_TYPE *BackRepoRELATION_GROUP_TYPEStruct) CheckoutPh
 func (relation_group_typeDB *RELATION_GROUP_TYPEDB) DecodePointers(backRepo *BackRepoStruct, relation_group_type *models.RELATION_GROUP_TYPE) {
 
 	// insertion point for checkout of pointer encoding
+	// This loop redeem relation_group_type.ALTERNATIVE_ID in the stage from the encode in the back repo
+	// It parses all A_ALTERNATIVE_IDDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	relation_group_type.ALTERNATIVE_ID = relation_group_type.ALTERNATIVE_ID[:0]
+	for _, _A_ALTERNATIVE_IDid := range relation_group_typeDB.RELATION_GROUP_TYPEPointersEncoding.ALTERNATIVE_ID {
+		relation_group_type.ALTERNATIVE_ID = append(relation_group_type.ALTERNATIVE_ID, backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(_A_ALTERNATIVE_IDid)])
+	}
+
+	// This loop redeem relation_group_type.SPEC_ATTRIBUTES in the stage from the encode in the back repo
+	// It parses all A_SPEC_ATTRIBUTESDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	relation_group_type.SPEC_ATTRIBUTES = relation_group_type.SPEC_ATTRIBUTES[:0]
+	for _, _A_SPEC_ATTRIBUTESid := range relation_group_typeDB.RELATION_GROUP_TYPEPointersEncoding.SPEC_ATTRIBUTES {
+		relation_group_type.SPEC_ATTRIBUTES = append(relation_group_type.SPEC_ATTRIBUTES, backRepo.BackRepoA_SPEC_ATTRIBUTES.Map_A_SPEC_ATTRIBUTESDBID_A_SPEC_ATTRIBUTESPtr[uint(_A_SPEC_ATTRIBUTESid)])
+	}
+
 	return
 }
 

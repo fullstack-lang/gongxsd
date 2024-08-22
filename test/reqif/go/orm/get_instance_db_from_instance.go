@@ -75,6 +75,190 @@ func GetInstanceDBFromInstance[T models.Gongstruct, T2 GongstructDB](
 		attribute_value_xhtmlInstance := any(concreteInstance).(*models.ATTRIBUTE_VALUE_XHTML)
 		ret2 := backRepo.BackRepoATTRIBUTE_VALUE_XHTML.GetATTRIBUTE_VALUE_XHTMLDBFromATTRIBUTE_VALUE_XHTMLPtr(attribute_value_xhtmlInstance)
 		ret = any(ret2).(*T2)
+	case *models.A_ALTERNATIVE_ID:
+		a_alternative_idInstance := any(concreteInstance).(*models.A_ALTERNATIVE_ID)
+		ret2 := backRepo.BackRepoA_ALTERNATIVE_ID.GetA_ALTERNATIVE_IDDBFromA_ALTERNATIVE_IDPtr(a_alternative_idInstance)
+		ret = any(ret2).(*T2)
+	case *models.A_CHILDREN:
+		a_childrenInstance := any(concreteInstance).(*models.A_CHILDREN)
+		ret2 := backRepo.BackRepoA_CHILDREN.GetA_CHILDRENDBFromA_CHILDRENPtr(a_childrenInstance)
+		ret = any(ret2).(*T2)
+	case *models.A_CORE_CONTENT:
+		a_core_contentInstance := any(concreteInstance).(*models.A_CORE_CONTENT)
+		ret2 := backRepo.BackRepoA_CORE_CONTENT.GetA_CORE_CONTENTDBFromA_CORE_CONTENTPtr(a_core_contentInstance)
+		ret = any(ret2).(*T2)
+	case *models.A_DATATYPES:
+		a_datatypesInstance := any(concreteInstance).(*models.A_DATATYPES)
+		ret2 := backRepo.BackRepoA_DATATYPES.GetA_DATATYPESDBFromA_DATATYPESPtr(a_datatypesInstance)
+		ret = any(ret2).(*T2)
+	case *models.A_DEFAULT_VALUE:
+		a_default_valueInstance := any(concreteInstance).(*models.A_DEFAULT_VALUE)
+		ret2 := backRepo.BackRepoA_DEFAULT_VALUE.GetA_DEFAULT_VALUEDBFromA_DEFAULT_VALUEPtr(a_default_valueInstance)
+		ret = any(ret2).(*T2)
+	case *models.A_DEFAULT_VALUE_1:
+		a_default_value_1Instance := any(concreteInstance).(*models.A_DEFAULT_VALUE_1)
+		ret2 := backRepo.BackRepoA_DEFAULT_VALUE_1.GetA_DEFAULT_VALUE_1DBFromA_DEFAULT_VALUE_1Ptr(a_default_value_1Instance)
+		ret = any(ret2).(*T2)
+	case *models.A_DEFAULT_VALUE_2:
+		a_default_value_2Instance := any(concreteInstance).(*models.A_DEFAULT_VALUE_2)
+		ret2 := backRepo.BackRepoA_DEFAULT_VALUE_2.GetA_DEFAULT_VALUE_2DBFromA_DEFAULT_VALUE_2Ptr(a_default_value_2Instance)
+		ret = any(ret2).(*T2)
+	case *models.A_DEFAULT_VALUE_3:
+		a_default_value_3Instance := any(concreteInstance).(*models.A_DEFAULT_VALUE_3)
+		ret2 := backRepo.BackRepoA_DEFAULT_VALUE_3.GetA_DEFAULT_VALUE_3DBFromA_DEFAULT_VALUE_3Ptr(a_default_value_3Instance)
+		ret = any(ret2).(*T2)
+	case *models.A_DEFAULT_VALUE_4:
+		a_default_value_4Instance := any(concreteInstance).(*models.A_DEFAULT_VALUE_4)
+		ret2 := backRepo.BackRepoA_DEFAULT_VALUE_4.GetA_DEFAULT_VALUE_4DBFromA_DEFAULT_VALUE_4Ptr(a_default_value_4Instance)
+		ret = any(ret2).(*T2)
+	case *models.A_DEFAULT_VALUE_5:
+		a_default_value_5Instance := any(concreteInstance).(*models.A_DEFAULT_VALUE_5)
+		ret2 := backRepo.BackRepoA_DEFAULT_VALUE_5.GetA_DEFAULT_VALUE_5DBFromA_DEFAULT_VALUE_5Ptr(a_default_value_5Instance)
+		ret = any(ret2).(*T2)
+	case *models.A_DEFAULT_VALUE_6:
+		a_default_value_6Instance := any(concreteInstance).(*models.A_DEFAULT_VALUE_6)
+		ret2 := backRepo.BackRepoA_DEFAULT_VALUE_6.GetA_DEFAULT_VALUE_6DBFromA_DEFAULT_VALUE_6Ptr(a_default_value_6Instance)
+		ret = any(ret2).(*T2)
+	case *models.A_DEFINITION:
+		a_definitionInstance := any(concreteInstance).(*models.A_DEFINITION)
+		ret2 := backRepo.BackRepoA_DEFINITION.GetA_DEFINITIONDBFromA_DEFINITIONPtr(a_definitionInstance)
+		ret = any(ret2).(*T2)
+	case *models.A_DEFINITION_1:
+		a_definition_1Instance := any(concreteInstance).(*models.A_DEFINITION_1)
+		ret2 := backRepo.BackRepoA_DEFINITION_1.GetA_DEFINITION_1DBFromA_DEFINITION_1Ptr(a_definition_1Instance)
+		ret = any(ret2).(*T2)
+	case *models.A_DEFINITION_2:
+		a_definition_2Instance := any(concreteInstance).(*models.A_DEFINITION_2)
+		ret2 := backRepo.BackRepoA_DEFINITION_2.GetA_DEFINITION_2DBFromA_DEFINITION_2Ptr(a_definition_2Instance)
+		ret = any(ret2).(*T2)
+	case *models.A_DEFINITION_3:
+		a_definition_3Instance := any(concreteInstance).(*models.A_DEFINITION_3)
+		ret2 := backRepo.BackRepoA_DEFINITION_3.GetA_DEFINITION_3DBFromA_DEFINITION_3Ptr(a_definition_3Instance)
+		ret = any(ret2).(*T2)
+	case *models.A_DEFINITION_4:
+		a_definition_4Instance := any(concreteInstance).(*models.A_DEFINITION_4)
+		ret2 := backRepo.BackRepoA_DEFINITION_4.GetA_DEFINITION_4DBFromA_DEFINITION_4Ptr(a_definition_4Instance)
+		ret = any(ret2).(*T2)
+	case *models.A_DEFINITION_5:
+		a_definition_5Instance := any(concreteInstance).(*models.A_DEFINITION_5)
+		ret2 := backRepo.BackRepoA_DEFINITION_5.GetA_DEFINITION_5DBFromA_DEFINITION_5Ptr(a_definition_5Instance)
+		ret = any(ret2).(*T2)
+	case *models.A_DEFINITION_6:
+		a_definition_6Instance := any(concreteInstance).(*models.A_DEFINITION_6)
+		ret2 := backRepo.BackRepoA_DEFINITION_6.GetA_DEFINITION_6DBFromA_DEFINITION_6Ptr(a_definition_6Instance)
+		ret = any(ret2).(*T2)
+	case *models.A_EDITABLE_ATTS:
+		a_editable_attsInstance := any(concreteInstance).(*models.A_EDITABLE_ATTS)
+		ret2 := backRepo.BackRepoA_EDITABLE_ATTS.GetA_EDITABLE_ATTSDBFromA_EDITABLE_ATTSPtr(a_editable_attsInstance)
+		ret = any(ret2).(*T2)
+	case *models.A_OBJECT:
+		a_objectInstance := any(concreteInstance).(*models.A_OBJECT)
+		ret2 := backRepo.BackRepoA_OBJECT.GetA_OBJECTDBFromA_OBJECTPtr(a_objectInstance)
+		ret = any(ret2).(*T2)
+	case *models.A_PROPERTIES:
+		a_propertiesInstance := any(concreteInstance).(*models.A_PROPERTIES)
+		ret2 := backRepo.BackRepoA_PROPERTIES.GetA_PROPERTIESDBFromA_PROPERTIESPtr(a_propertiesInstance)
+		ret = any(ret2).(*T2)
+	case *models.A_SOURCE:
+		a_sourceInstance := any(concreteInstance).(*models.A_SOURCE)
+		ret2 := backRepo.BackRepoA_SOURCE.GetA_SOURCEDBFromA_SOURCEPtr(a_sourceInstance)
+		ret = any(ret2).(*T2)
+	case *models.A_SOURCE_SPECIFICATION:
+		a_source_specificationInstance := any(concreteInstance).(*models.A_SOURCE_SPECIFICATION)
+		ret2 := backRepo.BackRepoA_SOURCE_SPECIFICATION.GetA_SOURCE_SPECIFICATIONDBFromA_SOURCE_SPECIFICATIONPtr(a_source_specificationInstance)
+		ret = any(ret2).(*T2)
+	case *models.A_SPECIFICATIONS:
+		a_specificationsInstance := any(concreteInstance).(*models.A_SPECIFICATIONS)
+		ret2 := backRepo.BackRepoA_SPECIFICATIONS.GetA_SPECIFICATIONSDBFromA_SPECIFICATIONSPtr(a_specificationsInstance)
+		ret = any(ret2).(*T2)
+	case *models.A_SPECIFIED_VALUES:
+		a_specified_valuesInstance := any(concreteInstance).(*models.A_SPECIFIED_VALUES)
+		ret2 := backRepo.BackRepoA_SPECIFIED_VALUES.GetA_SPECIFIED_VALUESDBFromA_SPECIFIED_VALUESPtr(a_specified_valuesInstance)
+		ret = any(ret2).(*T2)
+	case *models.A_SPEC_ATTRIBUTES:
+		a_spec_attributesInstance := any(concreteInstance).(*models.A_SPEC_ATTRIBUTES)
+		ret2 := backRepo.BackRepoA_SPEC_ATTRIBUTES.GetA_SPEC_ATTRIBUTESDBFromA_SPEC_ATTRIBUTESPtr(a_spec_attributesInstance)
+		ret = any(ret2).(*T2)
+	case *models.A_SPEC_OBJECTS:
+		a_spec_objectsInstance := any(concreteInstance).(*models.A_SPEC_OBJECTS)
+		ret2 := backRepo.BackRepoA_SPEC_OBJECTS.GetA_SPEC_OBJECTSDBFromA_SPEC_OBJECTSPtr(a_spec_objectsInstance)
+		ret = any(ret2).(*T2)
+	case *models.A_SPEC_RELATIONS:
+		a_spec_relationsInstance := any(concreteInstance).(*models.A_SPEC_RELATIONS)
+		ret2 := backRepo.BackRepoA_SPEC_RELATIONS.GetA_SPEC_RELATIONSDBFromA_SPEC_RELATIONSPtr(a_spec_relationsInstance)
+		ret = any(ret2).(*T2)
+	case *models.A_SPEC_RELATIONS_1:
+		a_spec_relations_1Instance := any(concreteInstance).(*models.A_SPEC_RELATIONS_1)
+		ret2 := backRepo.BackRepoA_SPEC_RELATIONS_1.GetA_SPEC_RELATIONS_1DBFromA_SPEC_RELATIONS_1Ptr(a_spec_relations_1Instance)
+		ret = any(ret2).(*T2)
+	case *models.A_SPEC_RELATION_GROUPS:
+		a_spec_relation_groupsInstance := any(concreteInstance).(*models.A_SPEC_RELATION_GROUPS)
+		ret2 := backRepo.BackRepoA_SPEC_RELATION_GROUPS.GetA_SPEC_RELATION_GROUPSDBFromA_SPEC_RELATION_GROUPSPtr(a_spec_relation_groupsInstance)
+		ret = any(ret2).(*T2)
+	case *models.A_SPEC_TYPES:
+		a_spec_typesInstance := any(concreteInstance).(*models.A_SPEC_TYPES)
+		ret2 := backRepo.BackRepoA_SPEC_TYPES.GetA_SPEC_TYPESDBFromA_SPEC_TYPESPtr(a_spec_typesInstance)
+		ret = any(ret2).(*T2)
+	case *models.A_THE_HEADER:
+		a_the_headerInstance := any(concreteInstance).(*models.A_THE_HEADER)
+		ret2 := backRepo.BackRepoA_THE_HEADER.GetA_THE_HEADERDBFromA_THE_HEADERPtr(a_the_headerInstance)
+		ret = any(ret2).(*T2)
+	case *models.A_TOOL_EXTENSIONS:
+		a_tool_extensionsInstance := any(concreteInstance).(*models.A_TOOL_EXTENSIONS)
+		ret2 := backRepo.BackRepoA_TOOL_EXTENSIONS.GetA_TOOL_EXTENSIONSDBFromA_TOOL_EXTENSIONSPtr(a_tool_extensionsInstance)
+		ret = any(ret2).(*T2)
+	case *models.A_TYPE:
+		a_typeInstance := any(concreteInstance).(*models.A_TYPE)
+		ret2 := backRepo.BackRepoA_TYPE.GetA_TYPEDBFromA_TYPEPtr(a_typeInstance)
+		ret = any(ret2).(*T2)
+	case *models.A_TYPE_1:
+		a_type_1Instance := any(concreteInstance).(*models.A_TYPE_1)
+		ret2 := backRepo.BackRepoA_TYPE_1.GetA_TYPE_1DBFromA_TYPE_1Ptr(a_type_1Instance)
+		ret = any(ret2).(*T2)
+	case *models.A_TYPE_10:
+		a_type_10Instance := any(concreteInstance).(*models.A_TYPE_10)
+		ret2 := backRepo.BackRepoA_TYPE_10.GetA_TYPE_10DBFromA_TYPE_10Ptr(a_type_10Instance)
+		ret = any(ret2).(*T2)
+	case *models.A_TYPE_2:
+		a_type_2Instance := any(concreteInstance).(*models.A_TYPE_2)
+		ret2 := backRepo.BackRepoA_TYPE_2.GetA_TYPE_2DBFromA_TYPE_2Ptr(a_type_2Instance)
+		ret = any(ret2).(*T2)
+	case *models.A_TYPE_3:
+		a_type_3Instance := any(concreteInstance).(*models.A_TYPE_3)
+		ret2 := backRepo.BackRepoA_TYPE_3.GetA_TYPE_3DBFromA_TYPE_3Ptr(a_type_3Instance)
+		ret = any(ret2).(*T2)
+	case *models.A_TYPE_4:
+		a_type_4Instance := any(concreteInstance).(*models.A_TYPE_4)
+		ret2 := backRepo.BackRepoA_TYPE_4.GetA_TYPE_4DBFromA_TYPE_4Ptr(a_type_4Instance)
+		ret = any(ret2).(*T2)
+	case *models.A_TYPE_5:
+		a_type_5Instance := any(concreteInstance).(*models.A_TYPE_5)
+		ret2 := backRepo.BackRepoA_TYPE_5.GetA_TYPE_5DBFromA_TYPE_5Ptr(a_type_5Instance)
+		ret = any(ret2).(*T2)
+	case *models.A_TYPE_6:
+		a_type_6Instance := any(concreteInstance).(*models.A_TYPE_6)
+		ret2 := backRepo.BackRepoA_TYPE_6.GetA_TYPE_6DBFromA_TYPE_6Ptr(a_type_6Instance)
+		ret = any(ret2).(*T2)
+	case *models.A_TYPE_7:
+		a_type_7Instance := any(concreteInstance).(*models.A_TYPE_7)
+		ret2 := backRepo.BackRepoA_TYPE_7.GetA_TYPE_7DBFromA_TYPE_7Ptr(a_type_7Instance)
+		ret = any(ret2).(*T2)
+	case *models.A_TYPE_8:
+		a_type_8Instance := any(concreteInstance).(*models.A_TYPE_8)
+		ret2 := backRepo.BackRepoA_TYPE_8.GetA_TYPE_8DBFromA_TYPE_8Ptr(a_type_8Instance)
+		ret = any(ret2).(*T2)
+	case *models.A_TYPE_9:
+		a_type_9Instance := any(concreteInstance).(*models.A_TYPE_9)
+		ret2 := backRepo.BackRepoA_TYPE_9.GetA_TYPE_9DBFromA_TYPE_9Ptr(a_type_9Instance)
+		ret = any(ret2).(*T2)
+	case *models.A_VALUES:
+		a_valuesInstance := any(concreteInstance).(*models.A_VALUES)
+		ret2 := backRepo.BackRepoA_VALUES.GetA_VALUESDBFromA_VALUESPtr(a_valuesInstance)
+		ret = any(ret2).(*T2)
+	case *models.A_VALUES_1:
+		a_values_1Instance := any(concreteInstance).(*models.A_VALUES_1)
+		ret2 := backRepo.BackRepoA_VALUES_1.GetA_VALUES_1DBFromA_VALUES_1Ptr(a_values_1Instance)
+		ret = any(ret2).(*T2)
 	case *models.DATATYPE_DEFINITION_BOOLEAN:
 		datatype_definition_booleanInstance := any(concreteInstance).(*models.DATATYPE_DEFINITION_BOOLEAN)
 		ret2 := backRepo.BackRepoDATATYPE_DEFINITION_BOOLEAN.GetDATATYPE_DEFINITION_BOOLEANDBFromDATATYPE_DEFINITION_BOOLEANPtr(datatype_definition_booleanInstance)
@@ -252,6 +436,236 @@ func GetID[T models.Gongstruct](
 		id = int(tmp.ID)
 	case *models.ATTRIBUTE_VALUE_XHTML:
 		tmp := GetInstanceDBFromInstance[models.ATTRIBUTE_VALUE_XHTML, ATTRIBUTE_VALUE_XHTMLDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_ALTERNATIVE_ID:
+		tmp := GetInstanceDBFromInstance[models.A_ALTERNATIVE_ID, A_ALTERNATIVE_IDDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_CHILDREN:
+		tmp := GetInstanceDBFromInstance[models.A_CHILDREN, A_CHILDRENDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_CORE_CONTENT:
+		tmp := GetInstanceDBFromInstance[models.A_CORE_CONTENT, A_CORE_CONTENTDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_DATATYPES:
+		tmp := GetInstanceDBFromInstance[models.A_DATATYPES, A_DATATYPESDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_DEFAULT_VALUE:
+		tmp := GetInstanceDBFromInstance[models.A_DEFAULT_VALUE, A_DEFAULT_VALUEDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_DEFAULT_VALUE_1:
+		tmp := GetInstanceDBFromInstance[models.A_DEFAULT_VALUE_1, A_DEFAULT_VALUE_1DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_DEFAULT_VALUE_2:
+		tmp := GetInstanceDBFromInstance[models.A_DEFAULT_VALUE_2, A_DEFAULT_VALUE_2DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_DEFAULT_VALUE_3:
+		tmp := GetInstanceDBFromInstance[models.A_DEFAULT_VALUE_3, A_DEFAULT_VALUE_3DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_DEFAULT_VALUE_4:
+		tmp := GetInstanceDBFromInstance[models.A_DEFAULT_VALUE_4, A_DEFAULT_VALUE_4DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_DEFAULT_VALUE_5:
+		tmp := GetInstanceDBFromInstance[models.A_DEFAULT_VALUE_5, A_DEFAULT_VALUE_5DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_DEFAULT_VALUE_6:
+		tmp := GetInstanceDBFromInstance[models.A_DEFAULT_VALUE_6, A_DEFAULT_VALUE_6DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_DEFINITION:
+		tmp := GetInstanceDBFromInstance[models.A_DEFINITION, A_DEFINITIONDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_DEFINITION_1:
+		tmp := GetInstanceDBFromInstance[models.A_DEFINITION_1, A_DEFINITION_1DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_DEFINITION_2:
+		tmp := GetInstanceDBFromInstance[models.A_DEFINITION_2, A_DEFINITION_2DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_DEFINITION_3:
+		tmp := GetInstanceDBFromInstance[models.A_DEFINITION_3, A_DEFINITION_3DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_DEFINITION_4:
+		tmp := GetInstanceDBFromInstance[models.A_DEFINITION_4, A_DEFINITION_4DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_DEFINITION_5:
+		tmp := GetInstanceDBFromInstance[models.A_DEFINITION_5, A_DEFINITION_5DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_DEFINITION_6:
+		tmp := GetInstanceDBFromInstance[models.A_DEFINITION_6, A_DEFINITION_6DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_EDITABLE_ATTS:
+		tmp := GetInstanceDBFromInstance[models.A_EDITABLE_ATTS, A_EDITABLE_ATTSDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_OBJECT:
+		tmp := GetInstanceDBFromInstance[models.A_OBJECT, A_OBJECTDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_PROPERTIES:
+		tmp := GetInstanceDBFromInstance[models.A_PROPERTIES, A_PROPERTIESDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_SOURCE:
+		tmp := GetInstanceDBFromInstance[models.A_SOURCE, A_SOURCEDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_SOURCE_SPECIFICATION:
+		tmp := GetInstanceDBFromInstance[models.A_SOURCE_SPECIFICATION, A_SOURCE_SPECIFICATIONDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_SPECIFICATIONS:
+		tmp := GetInstanceDBFromInstance[models.A_SPECIFICATIONS, A_SPECIFICATIONSDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_SPECIFIED_VALUES:
+		tmp := GetInstanceDBFromInstance[models.A_SPECIFIED_VALUES, A_SPECIFIED_VALUESDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_SPEC_ATTRIBUTES:
+		tmp := GetInstanceDBFromInstance[models.A_SPEC_ATTRIBUTES, A_SPEC_ATTRIBUTESDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_SPEC_OBJECTS:
+		tmp := GetInstanceDBFromInstance[models.A_SPEC_OBJECTS, A_SPEC_OBJECTSDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_SPEC_RELATIONS:
+		tmp := GetInstanceDBFromInstance[models.A_SPEC_RELATIONS, A_SPEC_RELATIONSDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_SPEC_RELATIONS_1:
+		tmp := GetInstanceDBFromInstance[models.A_SPEC_RELATIONS_1, A_SPEC_RELATIONS_1DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_SPEC_RELATION_GROUPS:
+		tmp := GetInstanceDBFromInstance[models.A_SPEC_RELATION_GROUPS, A_SPEC_RELATION_GROUPSDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_SPEC_TYPES:
+		tmp := GetInstanceDBFromInstance[models.A_SPEC_TYPES, A_SPEC_TYPESDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_THE_HEADER:
+		tmp := GetInstanceDBFromInstance[models.A_THE_HEADER, A_THE_HEADERDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_TOOL_EXTENSIONS:
+		tmp := GetInstanceDBFromInstance[models.A_TOOL_EXTENSIONS, A_TOOL_EXTENSIONSDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_TYPE:
+		tmp := GetInstanceDBFromInstance[models.A_TYPE, A_TYPEDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_TYPE_1:
+		tmp := GetInstanceDBFromInstance[models.A_TYPE_1, A_TYPE_1DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_TYPE_10:
+		tmp := GetInstanceDBFromInstance[models.A_TYPE_10, A_TYPE_10DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_TYPE_2:
+		tmp := GetInstanceDBFromInstance[models.A_TYPE_2, A_TYPE_2DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_TYPE_3:
+		tmp := GetInstanceDBFromInstance[models.A_TYPE_3, A_TYPE_3DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_TYPE_4:
+		tmp := GetInstanceDBFromInstance[models.A_TYPE_4, A_TYPE_4DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_TYPE_5:
+		tmp := GetInstanceDBFromInstance[models.A_TYPE_5, A_TYPE_5DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_TYPE_6:
+		tmp := GetInstanceDBFromInstance[models.A_TYPE_6, A_TYPE_6DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_TYPE_7:
+		tmp := GetInstanceDBFromInstance[models.A_TYPE_7, A_TYPE_7DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_TYPE_8:
+		tmp := GetInstanceDBFromInstance[models.A_TYPE_8, A_TYPE_8DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_TYPE_9:
+		tmp := GetInstanceDBFromInstance[models.A_TYPE_9, A_TYPE_9DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_VALUES:
+		tmp := GetInstanceDBFromInstance[models.A_VALUES, A_VALUESDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_VALUES_1:
+		tmp := GetInstanceDBFromInstance[models.A_VALUES_1, A_VALUES_1DB](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)
@@ -455,6 +869,236 @@ func GetIDPointer[T models.PointerToGongstruct](
 		id = int(tmp.ID)
 	case *models.ATTRIBUTE_VALUE_XHTML:
 		tmp := GetInstanceDBFromInstance[models.ATTRIBUTE_VALUE_XHTML, ATTRIBUTE_VALUE_XHTMLDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_ALTERNATIVE_ID:
+		tmp := GetInstanceDBFromInstance[models.A_ALTERNATIVE_ID, A_ALTERNATIVE_IDDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_CHILDREN:
+		tmp := GetInstanceDBFromInstance[models.A_CHILDREN, A_CHILDRENDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_CORE_CONTENT:
+		tmp := GetInstanceDBFromInstance[models.A_CORE_CONTENT, A_CORE_CONTENTDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_DATATYPES:
+		tmp := GetInstanceDBFromInstance[models.A_DATATYPES, A_DATATYPESDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_DEFAULT_VALUE:
+		tmp := GetInstanceDBFromInstance[models.A_DEFAULT_VALUE, A_DEFAULT_VALUEDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_DEFAULT_VALUE_1:
+		tmp := GetInstanceDBFromInstance[models.A_DEFAULT_VALUE_1, A_DEFAULT_VALUE_1DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_DEFAULT_VALUE_2:
+		tmp := GetInstanceDBFromInstance[models.A_DEFAULT_VALUE_2, A_DEFAULT_VALUE_2DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_DEFAULT_VALUE_3:
+		tmp := GetInstanceDBFromInstance[models.A_DEFAULT_VALUE_3, A_DEFAULT_VALUE_3DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_DEFAULT_VALUE_4:
+		tmp := GetInstanceDBFromInstance[models.A_DEFAULT_VALUE_4, A_DEFAULT_VALUE_4DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_DEFAULT_VALUE_5:
+		tmp := GetInstanceDBFromInstance[models.A_DEFAULT_VALUE_5, A_DEFAULT_VALUE_5DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_DEFAULT_VALUE_6:
+		tmp := GetInstanceDBFromInstance[models.A_DEFAULT_VALUE_6, A_DEFAULT_VALUE_6DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_DEFINITION:
+		tmp := GetInstanceDBFromInstance[models.A_DEFINITION, A_DEFINITIONDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_DEFINITION_1:
+		tmp := GetInstanceDBFromInstance[models.A_DEFINITION_1, A_DEFINITION_1DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_DEFINITION_2:
+		tmp := GetInstanceDBFromInstance[models.A_DEFINITION_2, A_DEFINITION_2DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_DEFINITION_3:
+		tmp := GetInstanceDBFromInstance[models.A_DEFINITION_3, A_DEFINITION_3DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_DEFINITION_4:
+		tmp := GetInstanceDBFromInstance[models.A_DEFINITION_4, A_DEFINITION_4DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_DEFINITION_5:
+		tmp := GetInstanceDBFromInstance[models.A_DEFINITION_5, A_DEFINITION_5DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_DEFINITION_6:
+		tmp := GetInstanceDBFromInstance[models.A_DEFINITION_6, A_DEFINITION_6DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_EDITABLE_ATTS:
+		tmp := GetInstanceDBFromInstance[models.A_EDITABLE_ATTS, A_EDITABLE_ATTSDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_OBJECT:
+		tmp := GetInstanceDBFromInstance[models.A_OBJECT, A_OBJECTDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_PROPERTIES:
+		tmp := GetInstanceDBFromInstance[models.A_PROPERTIES, A_PROPERTIESDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_SOURCE:
+		tmp := GetInstanceDBFromInstance[models.A_SOURCE, A_SOURCEDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_SOURCE_SPECIFICATION:
+		tmp := GetInstanceDBFromInstance[models.A_SOURCE_SPECIFICATION, A_SOURCE_SPECIFICATIONDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_SPECIFICATIONS:
+		tmp := GetInstanceDBFromInstance[models.A_SPECIFICATIONS, A_SPECIFICATIONSDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_SPECIFIED_VALUES:
+		tmp := GetInstanceDBFromInstance[models.A_SPECIFIED_VALUES, A_SPECIFIED_VALUESDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_SPEC_ATTRIBUTES:
+		tmp := GetInstanceDBFromInstance[models.A_SPEC_ATTRIBUTES, A_SPEC_ATTRIBUTESDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_SPEC_OBJECTS:
+		tmp := GetInstanceDBFromInstance[models.A_SPEC_OBJECTS, A_SPEC_OBJECTSDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_SPEC_RELATIONS:
+		tmp := GetInstanceDBFromInstance[models.A_SPEC_RELATIONS, A_SPEC_RELATIONSDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_SPEC_RELATIONS_1:
+		tmp := GetInstanceDBFromInstance[models.A_SPEC_RELATIONS_1, A_SPEC_RELATIONS_1DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_SPEC_RELATION_GROUPS:
+		tmp := GetInstanceDBFromInstance[models.A_SPEC_RELATION_GROUPS, A_SPEC_RELATION_GROUPSDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_SPEC_TYPES:
+		tmp := GetInstanceDBFromInstance[models.A_SPEC_TYPES, A_SPEC_TYPESDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_THE_HEADER:
+		tmp := GetInstanceDBFromInstance[models.A_THE_HEADER, A_THE_HEADERDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_TOOL_EXTENSIONS:
+		tmp := GetInstanceDBFromInstance[models.A_TOOL_EXTENSIONS, A_TOOL_EXTENSIONSDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_TYPE:
+		tmp := GetInstanceDBFromInstance[models.A_TYPE, A_TYPEDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_TYPE_1:
+		tmp := GetInstanceDBFromInstance[models.A_TYPE_1, A_TYPE_1DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_TYPE_10:
+		tmp := GetInstanceDBFromInstance[models.A_TYPE_10, A_TYPE_10DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_TYPE_2:
+		tmp := GetInstanceDBFromInstance[models.A_TYPE_2, A_TYPE_2DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_TYPE_3:
+		tmp := GetInstanceDBFromInstance[models.A_TYPE_3, A_TYPE_3DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_TYPE_4:
+		tmp := GetInstanceDBFromInstance[models.A_TYPE_4, A_TYPE_4DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_TYPE_5:
+		tmp := GetInstanceDBFromInstance[models.A_TYPE_5, A_TYPE_5DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_TYPE_6:
+		tmp := GetInstanceDBFromInstance[models.A_TYPE_6, A_TYPE_6DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_TYPE_7:
+		tmp := GetInstanceDBFromInstance[models.A_TYPE_7, A_TYPE_7DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_TYPE_8:
+		tmp := GetInstanceDBFromInstance[models.A_TYPE_8, A_TYPE_8DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_TYPE_9:
+		tmp := GetInstanceDBFromInstance[models.A_TYPE_9, A_TYPE_9DB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_VALUES:
+		tmp := GetInstanceDBFromInstance[models.A_VALUES, A_VALUESDB](
+			stage, backRepo, inst,
+		)
+		id = int(tmp.ID)
+	case *models.A_VALUES_1:
+		tmp := GetInstanceDBFromInstance[models.A_VALUES_1, A_VALUES_1DB](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)

@@ -46,6 +46,15 @@ type ATTRIBUTE_DEFINITION_XHTMLAPI struct {
 // reverse pointers of slice of poitners to Struct
 type ATTRIBUTE_DEFINITION_XHTMLPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
+
+	// field ALTERNATIVE_ID is a slice of pointers to another Struct (optional or 0..1)
+	ALTERNATIVE_ID IntSlice `gorm:"type:TEXT"`
+
+	// field DEFAULT_VALUE is a slice of pointers to another Struct (optional or 0..1)
+	DEFAULT_VALUE IntSlice `gorm:"type:TEXT"`
+
+	// field TYPE is a slice of pointers to another Struct (optional or 0..1)
+	TYPE IntSlice `gorm:"type:TEXT"`
 }
 
 // ATTRIBUTE_DEFINITION_XHTMLDB describes a attribute_definition_xhtml in the database
@@ -242,6 +251,60 @@ func (backRepoATTRIBUTE_DEFINITION_XHTML *BackRepoATTRIBUTE_DEFINITION_XHTMLStru
 		attribute_definition_xhtmlDB.CopyBasicFieldsFromATTRIBUTE_DEFINITION_XHTML(attribute_definition_xhtml)
 
 		// insertion point for translating pointers encodings into actual pointers
+		// 1. reset
+		attribute_definition_xhtmlDB.ATTRIBUTE_DEFINITION_XHTMLPointersEncoding.ALTERNATIVE_ID = make([]int, 0)
+		// 2. encode
+		for _, a_alternative_idAssocEnd := range attribute_definition_xhtml.ALTERNATIVE_ID {
+			a_alternative_idAssocEnd_DB :=
+				backRepo.BackRepoA_ALTERNATIVE_ID.GetA_ALTERNATIVE_IDDBFromA_ALTERNATIVE_IDPtr(a_alternative_idAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the a_alternative_idAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if a_alternative_idAssocEnd_DB == nil {
+				continue
+			}
+			
+			attribute_definition_xhtmlDB.ATTRIBUTE_DEFINITION_XHTMLPointersEncoding.ALTERNATIVE_ID =
+				append(attribute_definition_xhtmlDB.ATTRIBUTE_DEFINITION_XHTMLPointersEncoding.ALTERNATIVE_ID, int(a_alternative_idAssocEnd_DB.ID))
+		}
+
+		// 1. reset
+		attribute_definition_xhtmlDB.ATTRIBUTE_DEFINITION_XHTMLPointersEncoding.DEFAULT_VALUE = make([]int, 0)
+		// 2. encode
+		for _, a_default_value_2AssocEnd := range attribute_definition_xhtml.DEFAULT_VALUE {
+			a_default_value_2AssocEnd_DB :=
+				backRepo.BackRepoA_DEFAULT_VALUE_2.GetA_DEFAULT_VALUE_2DBFromA_DEFAULT_VALUE_2Ptr(a_default_value_2AssocEnd)
+			
+			// the stage might be inconsistant, meaning that the a_default_value_2AssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if a_default_value_2AssocEnd_DB == nil {
+				continue
+			}
+			
+			attribute_definition_xhtmlDB.ATTRIBUTE_DEFINITION_XHTMLPointersEncoding.DEFAULT_VALUE =
+				append(attribute_definition_xhtmlDB.ATTRIBUTE_DEFINITION_XHTMLPointersEncoding.DEFAULT_VALUE, int(a_default_value_2AssocEnd_DB.ID))
+		}
+
+		// 1. reset
+		attribute_definition_xhtmlDB.ATTRIBUTE_DEFINITION_XHTMLPointersEncoding.TYPE = make([]int, 0)
+		// 2. encode
+		for _, a_type_6AssocEnd := range attribute_definition_xhtml.TYPE {
+			a_type_6AssocEnd_DB :=
+				backRepo.BackRepoA_TYPE_6.GetA_TYPE_6DBFromA_TYPE_6Ptr(a_type_6AssocEnd)
+			
+			// the stage might be inconsistant, meaning that the a_type_6AssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if a_type_6AssocEnd_DB == nil {
+				continue
+			}
+			
+			attribute_definition_xhtmlDB.ATTRIBUTE_DEFINITION_XHTMLPointersEncoding.TYPE =
+				append(attribute_definition_xhtmlDB.ATTRIBUTE_DEFINITION_XHTMLPointersEncoding.TYPE, int(a_type_6AssocEnd_DB.ID))
+		}
+
 		query := backRepoATTRIBUTE_DEFINITION_XHTML.db.Save(&attribute_definition_xhtmlDB)
 		if query.Error != nil {
 			log.Fatalln(query.Error)
@@ -355,6 +418,33 @@ func (backRepoATTRIBUTE_DEFINITION_XHTML *BackRepoATTRIBUTE_DEFINITION_XHTMLStru
 func (attribute_definition_xhtmlDB *ATTRIBUTE_DEFINITION_XHTMLDB) DecodePointers(backRepo *BackRepoStruct, attribute_definition_xhtml *models.ATTRIBUTE_DEFINITION_XHTML) {
 
 	// insertion point for checkout of pointer encoding
+	// This loop redeem attribute_definition_xhtml.ALTERNATIVE_ID in the stage from the encode in the back repo
+	// It parses all A_ALTERNATIVE_IDDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	attribute_definition_xhtml.ALTERNATIVE_ID = attribute_definition_xhtml.ALTERNATIVE_ID[:0]
+	for _, _A_ALTERNATIVE_IDid := range attribute_definition_xhtmlDB.ATTRIBUTE_DEFINITION_XHTMLPointersEncoding.ALTERNATIVE_ID {
+		attribute_definition_xhtml.ALTERNATIVE_ID = append(attribute_definition_xhtml.ALTERNATIVE_ID, backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(_A_ALTERNATIVE_IDid)])
+	}
+
+	// This loop redeem attribute_definition_xhtml.DEFAULT_VALUE in the stage from the encode in the back repo
+	// It parses all A_DEFAULT_VALUE_2DB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	attribute_definition_xhtml.DEFAULT_VALUE = attribute_definition_xhtml.DEFAULT_VALUE[:0]
+	for _, _A_DEFAULT_VALUE_2id := range attribute_definition_xhtmlDB.ATTRIBUTE_DEFINITION_XHTMLPointersEncoding.DEFAULT_VALUE {
+		attribute_definition_xhtml.DEFAULT_VALUE = append(attribute_definition_xhtml.DEFAULT_VALUE, backRepo.BackRepoA_DEFAULT_VALUE_2.Map_A_DEFAULT_VALUE_2DBID_A_DEFAULT_VALUE_2Ptr[uint(_A_DEFAULT_VALUE_2id)])
+	}
+
+	// This loop redeem attribute_definition_xhtml.TYPE in the stage from the encode in the back repo
+	// It parses all A_TYPE_6DB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	attribute_definition_xhtml.TYPE = attribute_definition_xhtml.TYPE[:0]
+	for _, _A_TYPE_6id := range attribute_definition_xhtmlDB.ATTRIBUTE_DEFINITION_XHTMLPointersEncoding.TYPE {
+		attribute_definition_xhtml.TYPE = append(attribute_definition_xhtml.TYPE, backRepo.BackRepoA_TYPE_6.Map_A_TYPE_6DBID_A_TYPE_6Ptr[uint(_A_TYPE_6id)])
+	}
+
 	return
 }
 

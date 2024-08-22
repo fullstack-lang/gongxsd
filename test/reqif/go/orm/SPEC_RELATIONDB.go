@@ -46,6 +46,18 @@ type SPEC_RELATIONAPI struct {
 // reverse pointers of slice of poitners to Struct
 type SPEC_RELATIONPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
+
+	// field ALTERNATIVE_ID is a slice of pointers to another Struct (optional or 0..1)
+	ALTERNATIVE_ID IntSlice `gorm:"type:TEXT"`
+
+	// field VALUES is a slice of pointers to another Struct (optional or 0..1)
+	VALUES IntSlice `gorm:"type:TEXT"`
+
+	// field SOURCE is a slice of pointers to another Struct (optional or 0..1)
+	SOURCE IntSlice `gorm:"type:TEXT"`
+
+	// field TYPE is a slice of pointers to another Struct (optional or 0..1)
+	TYPE IntSlice `gorm:"type:TEXT"`
 }
 
 // SPEC_RELATIONDB describes a spec_relation in the database
@@ -235,6 +247,78 @@ func (backRepoSPEC_RELATION *BackRepoSPEC_RELATIONStruct) CommitPhaseTwoInstance
 		spec_relationDB.CopyBasicFieldsFromSPEC_RELATION(spec_relation)
 
 		// insertion point for translating pointers encodings into actual pointers
+		// 1. reset
+		spec_relationDB.SPEC_RELATIONPointersEncoding.ALTERNATIVE_ID = make([]int, 0)
+		// 2. encode
+		for _, a_alternative_idAssocEnd := range spec_relation.ALTERNATIVE_ID {
+			a_alternative_idAssocEnd_DB :=
+				backRepo.BackRepoA_ALTERNATIVE_ID.GetA_ALTERNATIVE_IDDBFromA_ALTERNATIVE_IDPtr(a_alternative_idAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the a_alternative_idAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if a_alternative_idAssocEnd_DB == nil {
+				continue
+			}
+			
+			spec_relationDB.SPEC_RELATIONPointersEncoding.ALTERNATIVE_ID =
+				append(spec_relationDB.SPEC_RELATIONPointersEncoding.ALTERNATIVE_ID, int(a_alternative_idAssocEnd_DB.ID))
+		}
+
+		// 1. reset
+		spec_relationDB.SPEC_RELATIONPointersEncoding.VALUES = make([]int, 0)
+		// 2. encode
+		for _, a_values_1AssocEnd := range spec_relation.VALUES {
+			a_values_1AssocEnd_DB :=
+				backRepo.BackRepoA_VALUES_1.GetA_VALUES_1DBFromA_VALUES_1Ptr(a_values_1AssocEnd)
+			
+			// the stage might be inconsistant, meaning that the a_values_1AssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if a_values_1AssocEnd_DB == nil {
+				continue
+			}
+			
+			spec_relationDB.SPEC_RELATIONPointersEncoding.VALUES =
+				append(spec_relationDB.SPEC_RELATIONPointersEncoding.VALUES, int(a_values_1AssocEnd_DB.ID))
+		}
+
+		// 1. reset
+		spec_relationDB.SPEC_RELATIONPointersEncoding.SOURCE = make([]int, 0)
+		// 2. encode
+		for _, a_sourceAssocEnd := range spec_relation.SOURCE {
+			a_sourceAssocEnd_DB :=
+				backRepo.BackRepoA_SOURCE.GetA_SOURCEDBFromA_SOURCEPtr(a_sourceAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the a_sourceAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if a_sourceAssocEnd_DB == nil {
+				continue
+			}
+			
+			spec_relationDB.SPEC_RELATIONPointersEncoding.SOURCE =
+				append(spec_relationDB.SPEC_RELATIONPointersEncoding.SOURCE, int(a_sourceAssocEnd_DB.ID))
+		}
+
+		// 1. reset
+		spec_relationDB.SPEC_RELATIONPointersEncoding.TYPE = make([]int, 0)
+		// 2. encode
+		for _, a_type_4AssocEnd := range spec_relation.TYPE {
+			a_type_4AssocEnd_DB :=
+				backRepo.BackRepoA_TYPE_4.GetA_TYPE_4DBFromA_TYPE_4Ptr(a_type_4AssocEnd)
+			
+			// the stage might be inconsistant, meaning that the a_type_4AssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if a_type_4AssocEnd_DB == nil {
+				continue
+			}
+			
+			spec_relationDB.SPEC_RELATIONPointersEncoding.TYPE =
+				append(spec_relationDB.SPEC_RELATIONPointersEncoding.TYPE, int(a_type_4AssocEnd_DB.ID))
+		}
+
 		query := backRepoSPEC_RELATION.db.Save(&spec_relationDB)
 		if query.Error != nil {
 			log.Fatalln(query.Error)
@@ -348,6 +432,42 @@ func (backRepoSPEC_RELATION *BackRepoSPEC_RELATIONStruct) CheckoutPhaseTwoInstan
 func (spec_relationDB *SPEC_RELATIONDB) DecodePointers(backRepo *BackRepoStruct, spec_relation *models.SPEC_RELATION) {
 
 	// insertion point for checkout of pointer encoding
+	// This loop redeem spec_relation.ALTERNATIVE_ID in the stage from the encode in the back repo
+	// It parses all A_ALTERNATIVE_IDDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	spec_relation.ALTERNATIVE_ID = spec_relation.ALTERNATIVE_ID[:0]
+	for _, _A_ALTERNATIVE_IDid := range spec_relationDB.SPEC_RELATIONPointersEncoding.ALTERNATIVE_ID {
+		spec_relation.ALTERNATIVE_ID = append(spec_relation.ALTERNATIVE_ID, backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(_A_ALTERNATIVE_IDid)])
+	}
+
+	// This loop redeem spec_relation.VALUES in the stage from the encode in the back repo
+	// It parses all A_VALUES_1DB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	spec_relation.VALUES = spec_relation.VALUES[:0]
+	for _, _A_VALUES_1id := range spec_relationDB.SPEC_RELATIONPointersEncoding.VALUES {
+		spec_relation.VALUES = append(spec_relation.VALUES, backRepo.BackRepoA_VALUES_1.Map_A_VALUES_1DBID_A_VALUES_1Ptr[uint(_A_VALUES_1id)])
+	}
+
+	// This loop redeem spec_relation.SOURCE in the stage from the encode in the back repo
+	// It parses all A_SOURCEDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	spec_relation.SOURCE = spec_relation.SOURCE[:0]
+	for _, _A_SOURCEid := range spec_relationDB.SPEC_RELATIONPointersEncoding.SOURCE {
+		spec_relation.SOURCE = append(spec_relation.SOURCE, backRepo.BackRepoA_SOURCE.Map_A_SOURCEDBID_A_SOURCEPtr[uint(_A_SOURCEid)])
+	}
+
+	// This loop redeem spec_relation.TYPE in the stage from the encode in the back repo
+	// It parses all A_TYPE_4DB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	spec_relation.TYPE = spec_relation.TYPE[:0]
+	for _, _A_TYPE_4id := range spec_relationDB.SPEC_RELATIONPointersEncoding.TYPE {
+		spec_relation.TYPE = append(spec_relation.TYPE, backRepo.BackRepoA_TYPE_4.Map_A_TYPE_4DBID_A_TYPE_4Ptr[uint(_A_TYPE_4id)])
+	}
+
 	return
 }
 

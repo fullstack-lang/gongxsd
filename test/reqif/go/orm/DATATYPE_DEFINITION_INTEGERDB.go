@@ -46,6 +46,9 @@ type DATATYPE_DEFINITION_INTEGERAPI struct {
 // reverse pointers of slice of poitners to Struct
 type DATATYPE_DEFINITION_INTEGERPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
+
+	// field ALTERNATIVE_ID is a slice of pointers to another Struct (optional or 0..1)
+	ALTERNATIVE_ID IntSlice `gorm:"type:TEXT"`
 }
 
 // DATATYPE_DEFINITION_INTEGERDB describes a datatype_definition_integer in the database
@@ -247,6 +250,24 @@ func (backRepoDATATYPE_DEFINITION_INTEGER *BackRepoDATATYPE_DEFINITION_INTEGERSt
 		datatype_definition_integerDB.CopyBasicFieldsFromDATATYPE_DEFINITION_INTEGER(datatype_definition_integer)
 
 		// insertion point for translating pointers encodings into actual pointers
+		// 1. reset
+		datatype_definition_integerDB.DATATYPE_DEFINITION_INTEGERPointersEncoding.ALTERNATIVE_ID = make([]int, 0)
+		// 2. encode
+		for _, a_alternative_idAssocEnd := range datatype_definition_integer.ALTERNATIVE_ID {
+			a_alternative_idAssocEnd_DB :=
+				backRepo.BackRepoA_ALTERNATIVE_ID.GetA_ALTERNATIVE_IDDBFromA_ALTERNATIVE_IDPtr(a_alternative_idAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the a_alternative_idAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if a_alternative_idAssocEnd_DB == nil {
+				continue
+			}
+			
+			datatype_definition_integerDB.DATATYPE_DEFINITION_INTEGERPointersEncoding.ALTERNATIVE_ID =
+				append(datatype_definition_integerDB.DATATYPE_DEFINITION_INTEGERPointersEncoding.ALTERNATIVE_ID, int(a_alternative_idAssocEnd_DB.ID))
+		}
+
 		query := backRepoDATATYPE_DEFINITION_INTEGER.db.Save(&datatype_definition_integerDB)
 		if query.Error != nil {
 			log.Fatalln(query.Error)
@@ -360,6 +381,15 @@ func (backRepoDATATYPE_DEFINITION_INTEGER *BackRepoDATATYPE_DEFINITION_INTEGERSt
 func (datatype_definition_integerDB *DATATYPE_DEFINITION_INTEGERDB) DecodePointers(backRepo *BackRepoStruct, datatype_definition_integer *models.DATATYPE_DEFINITION_INTEGER) {
 
 	// insertion point for checkout of pointer encoding
+	// This loop redeem datatype_definition_integer.ALTERNATIVE_ID in the stage from the encode in the back repo
+	// It parses all A_ALTERNATIVE_IDDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	datatype_definition_integer.ALTERNATIVE_ID = datatype_definition_integer.ALTERNATIVE_ID[:0]
+	for _, _A_ALTERNATIVE_IDid := range datatype_definition_integerDB.DATATYPE_DEFINITION_INTEGERPointersEncoding.ALTERNATIVE_ID {
+		datatype_definition_integer.ALTERNATIVE_ID = append(datatype_definition_integer.ALTERNATIVE_ID, backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(_A_ALTERNATIVE_IDid)])
+	}
+
 	return
 }
 

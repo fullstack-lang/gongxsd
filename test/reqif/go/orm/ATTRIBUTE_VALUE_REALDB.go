@@ -46,6 +46,9 @@ type ATTRIBUTE_VALUE_REALAPI struct {
 // reverse pointers of slice of poitners to Struct
 type ATTRIBUTE_VALUE_REALPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
+
+	// field DEFINITION is a slice of pointers to another Struct (optional or 0..1)
+	DEFINITION IntSlice `gorm:"type:TEXT"`
 }
 
 // ATTRIBUTE_VALUE_REALDB describes a attribute_value_real in the database
@@ -217,6 +220,24 @@ func (backRepoATTRIBUTE_VALUE_REAL *BackRepoATTRIBUTE_VALUE_REALStruct) CommitPh
 		attribute_value_realDB.CopyBasicFieldsFromATTRIBUTE_VALUE_REAL(attribute_value_real)
 
 		// insertion point for translating pointers encodings into actual pointers
+		// 1. reset
+		attribute_value_realDB.ATTRIBUTE_VALUE_REALPointersEncoding.DEFINITION = make([]int, 0)
+		// 2. encode
+		for _, a_definition_6AssocEnd := range attribute_value_real.DEFINITION {
+			a_definition_6AssocEnd_DB :=
+				backRepo.BackRepoA_DEFINITION_6.GetA_DEFINITION_6DBFromA_DEFINITION_6Ptr(a_definition_6AssocEnd)
+			
+			// the stage might be inconsistant, meaning that the a_definition_6AssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if a_definition_6AssocEnd_DB == nil {
+				continue
+			}
+			
+			attribute_value_realDB.ATTRIBUTE_VALUE_REALPointersEncoding.DEFINITION =
+				append(attribute_value_realDB.ATTRIBUTE_VALUE_REALPointersEncoding.DEFINITION, int(a_definition_6AssocEnd_DB.ID))
+		}
+
 		query := backRepoATTRIBUTE_VALUE_REAL.db.Save(&attribute_value_realDB)
 		if query.Error != nil {
 			log.Fatalln(query.Error)
@@ -330,6 +351,15 @@ func (backRepoATTRIBUTE_VALUE_REAL *BackRepoATTRIBUTE_VALUE_REALStruct) Checkout
 func (attribute_value_realDB *ATTRIBUTE_VALUE_REALDB) DecodePointers(backRepo *BackRepoStruct, attribute_value_real *models.ATTRIBUTE_VALUE_REAL) {
 
 	// insertion point for checkout of pointer encoding
+	// This loop redeem attribute_value_real.DEFINITION in the stage from the encode in the back repo
+	// It parses all A_DEFINITION_6DB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	attribute_value_real.DEFINITION = attribute_value_real.DEFINITION[:0]
+	for _, _A_DEFINITION_6id := range attribute_value_realDB.ATTRIBUTE_VALUE_REALPointersEncoding.DEFINITION {
+		attribute_value_real.DEFINITION = append(attribute_value_real.DEFINITION, backRepo.BackRepoA_DEFINITION_6.Map_A_DEFINITION_6DBID_A_DEFINITION_6Ptr[uint(_A_DEFINITION_6id)])
+	}
+
 	return
 }
 

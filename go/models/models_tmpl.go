@@ -33,7 +33,7 @@ var ModelsFileTmplLevel1Code map[ModelsFileTmplLevel1]string = // new line
 map[ModelsFileTmplLevel1]string{
 	ModelsFileTmplLevel1NamedStructCode: `
 // {{` + string(rune(ModelsFileTmplLevel2Structname)) +
-		`}} is generated from {{` + string(rune(ModelsFileTmplLevel2Source)) +
+		`}} Named source {{` + string(rune(ModelsFileTmplLevel2Source)) +
 		`}}
 type {{` + string(rune(ModelsFileTmplLevel2Structname)) + `}} struct {
 	Name string ` + "`" + "xml:\"-\"" + "`" + `
@@ -43,7 +43,7 @@ type {{` + string(rune(ModelsFileTmplLevel2Structname)) + `}} struct {
 `,
 	ModelsFileTmplLevel1UnNamedStructCode: `
 // {{` + string(rune(ModelsFileTmplLevel2Structname)) +
-		`}} is generated from {{` + string(rune(ModelsFileTmplLevel2Source)) +
+		`}} UnNamed source {{` + string(rune(ModelsFileTmplLevel2Source)) +
 		`}}
 type {{` + string(rune(ModelsFileTmplLevel2Structname)) + `}} struct {
 

@@ -46,6 +46,15 @@ type REQ_IFAPI struct {
 // reverse pointers of slice of poitners to Struct
 type REQ_IFPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
+
+	// field THE_HEADER is a slice of pointers to another Struct (optional or 0..1)
+	THE_HEADER IntSlice `gorm:"type:TEXT"`
+
+	// field CORE_CONTENT is a slice of pointers to another Struct (optional or 0..1)
+	CORE_CONTENT IntSlice `gorm:"type:TEXT"`
+
+	// field TOOL_EXTENSIONS is a slice of pointers to another Struct (optional or 0..1)
+	TOOL_EXTENSIONS IntSlice `gorm:"type:TEXT"`
 }
 
 // REQ_IFDB describes a req_if in the database
@@ -217,6 +226,60 @@ func (backRepoREQ_IF *BackRepoREQ_IFStruct) CommitPhaseTwoInstance(backRepo *Bac
 		req_ifDB.CopyBasicFieldsFromREQ_IF(req_if)
 
 		// insertion point for translating pointers encodings into actual pointers
+		// 1. reset
+		req_ifDB.REQ_IFPointersEncoding.THE_HEADER = make([]int, 0)
+		// 2. encode
+		for _, a_the_headerAssocEnd := range req_if.THE_HEADER {
+			a_the_headerAssocEnd_DB :=
+				backRepo.BackRepoA_THE_HEADER.GetA_THE_HEADERDBFromA_THE_HEADERPtr(a_the_headerAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the a_the_headerAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if a_the_headerAssocEnd_DB == nil {
+				continue
+			}
+			
+			req_ifDB.REQ_IFPointersEncoding.THE_HEADER =
+				append(req_ifDB.REQ_IFPointersEncoding.THE_HEADER, int(a_the_headerAssocEnd_DB.ID))
+		}
+
+		// 1. reset
+		req_ifDB.REQ_IFPointersEncoding.CORE_CONTENT = make([]int, 0)
+		// 2. encode
+		for _, a_core_contentAssocEnd := range req_if.CORE_CONTENT {
+			a_core_contentAssocEnd_DB :=
+				backRepo.BackRepoA_CORE_CONTENT.GetA_CORE_CONTENTDBFromA_CORE_CONTENTPtr(a_core_contentAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the a_core_contentAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if a_core_contentAssocEnd_DB == nil {
+				continue
+			}
+			
+			req_ifDB.REQ_IFPointersEncoding.CORE_CONTENT =
+				append(req_ifDB.REQ_IFPointersEncoding.CORE_CONTENT, int(a_core_contentAssocEnd_DB.ID))
+		}
+
+		// 1. reset
+		req_ifDB.REQ_IFPointersEncoding.TOOL_EXTENSIONS = make([]int, 0)
+		// 2. encode
+		for _, a_tool_extensionsAssocEnd := range req_if.TOOL_EXTENSIONS {
+			a_tool_extensionsAssocEnd_DB :=
+				backRepo.BackRepoA_TOOL_EXTENSIONS.GetA_TOOL_EXTENSIONSDBFromA_TOOL_EXTENSIONSPtr(a_tool_extensionsAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the a_tool_extensionsAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if a_tool_extensionsAssocEnd_DB == nil {
+				continue
+			}
+			
+			req_ifDB.REQ_IFPointersEncoding.TOOL_EXTENSIONS =
+				append(req_ifDB.REQ_IFPointersEncoding.TOOL_EXTENSIONS, int(a_tool_extensionsAssocEnd_DB.ID))
+		}
+
 		query := backRepoREQ_IF.db.Save(&req_ifDB)
 		if query.Error != nil {
 			log.Fatalln(query.Error)
@@ -330,6 +393,33 @@ func (backRepoREQ_IF *BackRepoREQ_IFStruct) CheckoutPhaseTwoInstance(backRepo *B
 func (req_ifDB *REQ_IFDB) DecodePointers(backRepo *BackRepoStruct, req_if *models.REQ_IF) {
 
 	// insertion point for checkout of pointer encoding
+	// This loop redeem req_if.THE_HEADER in the stage from the encode in the back repo
+	// It parses all A_THE_HEADERDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	req_if.THE_HEADER = req_if.THE_HEADER[:0]
+	for _, _A_THE_HEADERid := range req_ifDB.REQ_IFPointersEncoding.THE_HEADER {
+		req_if.THE_HEADER = append(req_if.THE_HEADER, backRepo.BackRepoA_THE_HEADER.Map_A_THE_HEADERDBID_A_THE_HEADERPtr[uint(_A_THE_HEADERid)])
+	}
+
+	// This loop redeem req_if.CORE_CONTENT in the stage from the encode in the back repo
+	// It parses all A_CORE_CONTENTDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	req_if.CORE_CONTENT = req_if.CORE_CONTENT[:0]
+	for _, _A_CORE_CONTENTid := range req_ifDB.REQ_IFPointersEncoding.CORE_CONTENT {
+		req_if.CORE_CONTENT = append(req_if.CORE_CONTENT, backRepo.BackRepoA_CORE_CONTENT.Map_A_CORE_CONTENTDBID_A_CORE_CONTENTPtr[uint(_A_CORE_CONTENTid)])
+	}
+
+	// This loop redeem req_if.TOOL_EXTENSIONS in the stage from the encode in the back repo
+	// It parses all A_TOOL_EXTENSIONSDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	req_if.TOOL_EXTENSIONS = req_if.TOOL_EXTENSIONS[:0]
+	for _, _A_TOOL_EXTENSIONSid := range req_ifDB.REQ_IFPointersEncoding.TOOL_EXTENSIONS {
+		req_if.TOOL_EXTENSIONS = append(req_if.TOOL_EXTENSIONS, backRepo.BackRepoA_TOOL_EXTENSIONS.Map_A_TOOL_EXTENSIONSDBID_A_TOOL_EXTENSIONSPtr[uint(_A_TOOL_EXTENSIONSid)])
+	}
+
 	return
 }
 

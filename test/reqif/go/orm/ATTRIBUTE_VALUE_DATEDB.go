@@ -46,6 +46,9 @@ type ATTRIBUTE_VALUE_DATEAPI struct {
 // reverse pointers of slice of poitners to Struct
 type ATTRIBUTE_VALUE_DATEPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
+
+	// field DEFINITION is a slice of pointers to another Struct (optional or 0..1)
+	DEFINITION IntSlice `gorm:"type:TEXT"`
 }
 
 // ATTRIBUTE_VALUE_DATEDB describes a attribute_value_date in the database
@@ -217,6 +220,24 @@ func (backRepoATTRIBUTE_VALUE_DATE *BackRepoATTRIBUTE_VALUE_DATEStruct) CommitPh
 		attribute_value_dateDB.CopyBasicFieldsFromATTRIBUTE_VALUE_DATE(attribute_value_date)
 
 		// insertion point for translating pointers encodings into actual pointers
+		// 1. reset
+		attribute_value_dateDB.ATTRIBUTE_VALUE_DATEPointersEncoding.DEFINITION = make([]int, 0)
+		// 2. encode
+		for _, a_definition_2AssocEnd := range attribute_value_date.DEFINITION {
+			a_definition_2AssocEnd_DB :=
+				backRepo.BackRepoA_DEFINITION_2.GetA_DEFINITION_2DBFromA_DEFINITION_2Ptr(a_definition_2AssocEnd)
+			
+			// the stage might be inconsistant, meaning that the a_definition_2AssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if a_definition_2AssocEnd_DB == nil {
+				continue
+			}
+			
+			attribute_value_dateDB.ATTRIBUTE_VALUE_DATEPointersEncoding.DEFINITION =
+				append(attribute_value_dateDB.ATTRIBUTE_VALUE_DATEPointersEncoding.DEFINITION, int(a_definition_2AssocEnd_DB.ID))
+		}
+
 		query := backRepoATTRIBUTE_VALUE_DATE.db.Save(&attribute_value_dateDB)
 		if query.Error != nil {
 			log.Fatalln(query.Error)
@@ -330,6 +351,15 @@ func (backRepoATTRIBUTE_VALUE_DATE *BackRepoATTRIBUTE_VALUE_DATEStruct) Checkout
 func (attribute_value_dateDB *ATTRIBUTE_VALUE_DATEDB) DecodePointers(backRepo *BackRepoStruct, attribute_value_date *models.ATTRIBUTE_VALUE_DATE) {
 
 	// insertion point for checkout of pointer encoding
+	// This loop redeem attribute_value_date.DEFINITION in the stage from the encode in the back repo
+	// It parses all A_DEFINITION_2DB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	attribute_value_date.DEFINITION = attribute_value_date.DEFINITION[:0]
+	for _, _A_DEFINITION_2id := range attribute_value_dateDB.ATTRIBUTE_VALUE_DATEPointersEncoding.DEFINITION {
+		attribute_value_date.DEFINITION = append(attribute_value_date.DEFINITION, backRepo.BackRepoA_DEFINITION_2.Map_A_DEFINITION_2DBID_A_DEFINITION_2Ptr[uint(_A_DEFINITION_2id)])
+	}
+
 	return
 }
 

@@ -46,6 +46,15 @@ type SPEC_OBJECTAPI struct {
 // reverse pointers of slice of poitners to Struct
 type SPEC_OBJECTPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
+
+	// field ALTERNATIVE_ID is a slice of pointers to another Struct (optional or 0..1)
+	ALTERNATIVE_ID IntSlice `gorm:"type:TEXT"`
+
+	// field VALUES is a slice of pointers to another Struct (optional or 0..1)
+	VALUES IntSlice `gorm:"type:TEXT"`
+
+	// field TYPE is a slice of pointers to another Struct (optional or 0..1)
+	TYPE IntSlice `gorm:"type:TEXT"`
 }
 
 // SPEC_OBJECTDB describes a spec_object in the database
@@ -235,6 +244,60 @@ func (backRepoSPEC_OBJECT *BackRepoSPEC_OBJECTStruct) CommitPhaseTwoInstance(bac
 		spec_objectDB.CopyBasicFieldsFromSPEC_OBJECT(spec_object)
 
 		// insertion point for translating pointers encodings into actual pointers
+		// 1. reset
+		spec_objectDB.SPEC_OBJECTPointersEncoding.ALTERNATIVE_ID = make([]int, 0)
+		// 2. encode
+		for _, a_alternative_idAssocEnd := range spec_object.ALTERNATIVE_ID {
+			a_alternative_idAssocEnd_DB :=
+				backRepo.BackRepoA_ALTERNATIVE_ID.GetA_ALTERNATIVE_IDDBFromA_ALTERNATIVE_IDPtr(a_alternative_idAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the a_alternative_idAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if a_alternative_idAssocEnd_DB == nil {
+				continue
+			}
+			
+			spec_objectDB.SPEC_OBJECTPointersEncoding.ALTERNATIVE_ID =
+				append(spec_objectDB.SPEC_OBJECTPointersEncoding.ALTERNATIVE_ID, int(a_alternative_idAssocEnd_DB.ID))
+		}
+
+		// 1. reset
+		spec_objectDB.SPEC_OBJECTPointersEncoding.VALUES = make([]int, 0)
+		// 2. encode
+		for _, a_values_1AssocEnd := range spec_object.VALUES {
+			a_values_1AssocEnd_DB :=
+				backRepo.BackRepoA_VALUES_1.GetA_VALUES_1DBFromA_VALUES_1Ptr(a_values_1AssocEnd)
+			
+			// the stage might be inconsistant, meaning that the a_values_1AssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if a_values_1AssocEnd_DB == nil {
+				continue
+			}
+			
+			spec_objectDB.SPEC_OBJECTPointersEncoding.VALUES =
+				append(spec_objectDB.SPEC_OBJECTPointersEncoding.VALUES, int(a_values_1AssocEnd_DB.ID))
+		}
+
+		// 1. reset
+		spec_objectDB.SPEC_OBJECTPointersEncoding.TYPE = make([]int, 0)
+		// 2. encode
+		for _, a_type_2AssocEnd := range spec_object.TYPE {
+			a_type_2AssocEnd_DB :=
+				backRepo.BackRepoA_TYPE_2.GetA_TYPE_2DBFromA_TYPE_2Ptr(a_type_2AssocEnd)
+			
+			// the stage might be inconsistant, meaning that the a_type_2AssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if a_type_2AssocEnd_DB == nil {
+				continue
+			}
+			
+			spec_objectDB.SPEC_OBJECTPointersEncoding.TYPE =
+				append(spec_objectDB.SPEC_OBJECTPointersEncoding.TYPE, int(a_type_2AssocEnd_DB.ID))
+		}
+
 		query := backRepoSPEC_OBJECT.db.Save(&spec_objectDB)
 		if query.Error != nil {
 			log.Fatalln(query.Error)
@@ -348,6 +411,33 @@ func (backRepoSPEC_OBJECT *BackRepoSPEC_OBJECTStruct) CheckoutPhaseTwoInstance(b
 func (spec_objectDB *SPEC_OBJECTDB) DecodePointers(backRepo *BackRepoStruct, spec_object *models.SPEC_OBJECT) {
 
 	// insertion point for checkout of pointer encoding
+	// This loop redeem spec_object.ALTERNATIVE_ID in the stage from the encode in the back repo
+	// It parses all A_ALTERNATIVE_IDDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	spec_object.ALTERNATIVE_ID = spec_object.ALTERNATIVE_ID[:0]
+	for _, _A_ALTERNATIVE_IDid := range spec_objectDB.SPEC_OBJECTPointersEncoding.ALTERNATIVE_ID {
+		spec_object.ALTERNATIVE_ID = append(spec_object.ALTERNATIVE_ID, backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(_A_ALTERNATIVE_IDid)])
+	}
+
+	// This loop redeem spec_object.VALUES in the stage from the encode in the back repo
+	// It parses all A_VALUES_1DB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	spec_object.VALUES = spec_object.VALUES[:0]
+	for _, _A_VALUES_1id := range spec_objectDB.SPEC_OBJECTPointersEncoding.VALUES {
+		spec_object.VALUES = append(spec_object.VALUES, backRepo.BackRepoA_VALUES_1.Map_A_VALUES_1DBID_A_VALUES_1Ptr[uint(_A_VALUES_1id)])
+	}
+
+	// This loop redeem spec_object.TYPE in the stage from the encode in the back repo
+	// It parses all A_TYPE_2DB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	spec_object.TYPE = spec_object.TYPE[:0]
+	for _, _A_TYPE_2id := range spec_objectDB.SPEC_OBJECTPointersEncoding.TYPE {
+		spec_object.TYPE = append(spec_object.TYPE, backRepo.BackRepoA_TYPE_2.Map_A_TYPE_2DBID_A_TYPE_2Ptr[uint(_A_TYPE_2id)])
+	}
+
 	return
 }
 

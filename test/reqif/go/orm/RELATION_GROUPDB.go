@@ -46,6 +46,18 @@ type RELATION_GROUPAPI struct {
 // reverse pointers of slice of poitners to Struct
 type RELATION_GROUPPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
+
+	// field ALTERNATIVE_ID is a slice of pointers to another Struct (optional or 0..1)
+	ALTERNATIVE_ID IntSlice `gorm:"type:TEXT"`
+
+	// field SOURCE_SPECIFICATION is a slice of pointers to another Struct (optional or 0..1)
+	SOURCE_SPECIFICATION IntSlice `gorm:"type:TEXT"`
+
+	// field SPEC_RELATIONS is a slice of pointers to another Struct (optional or 0..1)
+	SPEC_RELATIONS IntSlice `gorm:"type:TEXT"`
+
+	// field TYPE is a slice of pointers to another Struct (optional or 0..1)
+	TYPE IntSlice `gorm:"type:TEXT"`
 }
 
 // RELATION_GROUPDB describes a relation_group in the database
@@ -235,6 +247,78 @@ func (backRepoRELATION_GROUP *BackRepoRELATION_GROUPStruct) CommitPhaseTwoInstan
 		relation_groupDB.CopyBasicFieldsFromRELATION_GROUP(relation_group)
 
 		// insertion point for translating pointers encodings into actual pointers
+		// 1. reset
+		relation_groupDB.RELATION_GROUPPointersEncoding.ALTERNATIVE_ID = make([]int, 0)
+		// 2. encode
+		for _, a_alternative_idAssocEnd := range relation_group.ALTERNATIVE_ID {
+			a_alternative_idAssocEnd_DB :=
+				backRepo.BackRepoA_ALTERNATIVE_ID.GetA_ALTERNATIVE_IDDBFromA_ALTERNATIVE_IDPtr(a_alternative_idAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the a_alternative_idAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if a_alternative_idAssocEnd_DB == nil {
+				continue
+			}
+			
+			relation_groupDB.RELATION_GROUPPointersEncoding.ALTERNATIVE_ID =
+				append(relation_groupDB.RELATION_GROUPPointersEncoding.ALTERNATIVE_ID, int(a_alternative_idAssocEnd_DB.ID))
+		}
+
+		// 1. reset
+		relation_groupDB.RELATION_GROUPPointersEncoding.SOURCE_SPECIFICATION = make([]int, 0)
+		// 2. encode
+		for _, a_source_specificationAssocEnd := range relation_group.SOURCE_SPECIFICATION {
+			a_source_specificationAssocEnd_DB :=
+				backRepo.BackRepoA_SOURCE_SPECIFICATION.GetA_SOURCE_SPECIFICATIONDBFromA_SOURCE_SPECIFICATIONPtr(a_source_specificationAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the a_source_specificationAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if a_source_specificationAssocEnd_DB == nil {
+				continue
+			}
+			
+			relation_groupDB.RELATION_GROUPPointersEncoding.SOURCE_SPECIFICATION =
+				append(relation_groupDB.RELATION_GROUPPointersEncoding.SOURCE_SPECIFICATION, int(a_source_specificationAssocEnd_DB.ID))
+		}
+
+		// 1. reset
+		relation_groupDB.RELATION_GROUPPointersEncoding.SPEC_RELATIONS = make([]int, 0)
+		// 2. encode
+		for _, a_spec_relationsAssocEnd := range relation_group.SPEC_RELATIONS {
+			a_spec_relationsAssocEnd_DB :=
+				backRepo.BackRepoA_SPEC_RELATIONS.GetA_SPEC_RELATIONSDBFromA_SPEC_RELATIONSPtr(a_spec_relationsAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the a_spec_relationsAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if a_spec_relationsAssocEnd_DB == nil {
+				continue
+			}
+			
+			relation_groupDB.RELATION_GROUPPointersEncoding.SPEC_RELATIONS =
+				append(relation_groupDB.RELATION_GROUPPointersEncoding.SPEC_RELATIONS, int(a_spec_relationsAssocEnd_DB.ID))
+		}
+
+		// 1. reset
+		relation_groupDB.RELATION_GROUPPointersEncoding.TYPE = make([]int, 0)
+		// 2. encode
+		for _, a_type_1AssocEnd := range relation_group.TYPE {
+			a_type_1AssocEnd_DB :=
+				backRepo.BackRepoA_TYPE_1.GetA_TYPE_1DBFromA_TYPE_1Ptr(a_type_1AssocEnd)
+			
+			// the stage might be inconsistant, meaning that the a_type_1AssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if a_type_1AssocEnd_DB == nil {
+				continue
+			}
+			
+			relation_groupDB.RELATION_GROUPPointersEncoding.TYPE =
+				append(relation_groupDB.RELATION_GROUPPointersEncoding.TYPE, int(a_type_1AssocEnd_DB.ID))
+		}
+
 		query := backRepoRELATION_GROUP.db.Save(&relation_groupDB)
 		if query.Error != nil {
 			log.Fatalln(query.Error)
@@ -348,6 +432,42 @@ func (backRepoRELATION_GROUP *BackRepoRELATION_GROUPStruct) CheckoutPhaseTwoInst
 func (relation_groupDB *RELATION_GROUPDB) DecodePointers(backRepo *BackRepoStruct, relation_group *models.RELATION_GROUP) {
 
 	// insertion point for checkout of pointer encoding
+	// This loop redeem relation_group.ALTERNATIVE_ID in the stage from the encode in the back repo
+	// It parses all A_ALTERNATIVE_IDDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	relation_group.ALTERNATIVE_ID = relation_group.ALTERNATIVE_ID[:0]
+	for _, _A_ALTERNATIVE_IDid := range relation_groupDB.RELATION_GROUPPointersEncoding.ALTERNATIVE_ID {
+		relation_group.ALTERNATIVE_ID = append(relation_group.ALTERNATIVE_ID, backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(_A_ALTERNATIVE_IDid)])
+	}
+
+	// This loop redeem relation_group.SOURCE_SPECIFICATION in the stage from the encode in the back repo
+	// It parses all A_SOURCE_SPECIFICATIONDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	relation_group.SOURCE_SPECIFICATION = relation_group.SOURCE_SPECIFICATION[:0]
+	for _, _A_SOURCE_SPECIFICATIONid := range relation_groupDB.RELATION_GROUPPointersEncoding.SOURCE_SPECIFICATION {
+		relation_group.SOURCE_SPECIFICATION = append(relation_group.SOURCE_SPECIFICATION, backRepo.BackRepoA_SOURCE_SPECIFICATION.Map_A_SOURCE_SPECIFICATIONDBID_A_SOURCE_SPECIFICATIONPtr[uint(_A_SOURCE_SPECIFICATIONid)])
+	}
+
+	// This loop redeem relation_group.SPEC_RELATIONS in the stage from the encode in the back repo
+	// It parses all A_SPEC_RELATIONSDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	relation_group.SPEC_RELATIONS = relation_group.SPEC_RELATIONS[:0]
+	for _, _A_SPEC_RELATIONSid := range relation_groupDB.RELATION_GROUPPointersEncoding.SPEC_RELATIONS {
+		relation_group.SPEC_RELATIONS = append(relation_group.SPEC_RELATIONS, backRepo.BackRepoA_SPEC_RELATIONS.Map_A_SPEC_RELATIONSDBID_A_SPEC_RELATIONSPtr[uint(_A_SPEC_RELATIONSid)])
+	}
+
+	// This loop redeem relation_group.TYPE in the stage from the encode in the back repo
+	// It parses all A_TYPE_1DB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	relation_group.TYPE = relation_group.TYPE[:0]
+	for _, _A_TYPE_1id := range relation_groupDB.RELATION_GROUPPointersEncoding.TYPE {
+		relation_group.TYPE = append(relation_group.TYPE, backRepo.BackRepoA_TYPE_1.Map_A_TYPE_1DBID_A_TYPE_1Ptr[uint(_A_TYPE_1id)])
+	}
+
 	return
 }
 

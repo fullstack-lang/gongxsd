@@ -46,6 +46,12 @@ type SPECIFICATION_TYPEAPI struct {
 // reverse pointers of slice of poitners to Struct
 type SPECIFICATION_TYPEPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
+
+	// field ALTERNATIVE_ID is a slice of pointers to another Struct (optional or 0..1)
+	ALTERNATIVE_ID IntSlice `gorm:"type:TEXT"`
+
+	// field SPEC_ATTRIBUTES is a slice of pointers to another Struct (optional or 0..1)
+	SPEC_ATTRIBUTES IntSlice `gorm:"type:TEXT"`
 }
 
 // SPECIFICATION_TYPEDB describes a specification_type in the database
@@ -235,6 +241,42 @@ func (backRepoSPECIFICATION_TYPE *BackRepoSPECIFICATION_TYPEStruct) CommitPhaseT
 		specification_typeDB.CopyBasicFieldsFromSPECIFICATION_TYPE(specification_type)
 
 		// insertion point for translating pointers encodings into actual pointers
+		// 1. reset
+		specification_typeDB.SPECIFICATION_TYPEPointersEncoding.ALTERNATIVE_ID = make([]int, 0)
+		// 2. encode
+		for _, a_alternative_idAssocEnd := range specification_type.ALTERNATIVE_ID {
+			a_alternative_idAssocEnd_DB :=
+				backRepo.BackRepoA_ALTERNATIVE_ID.GetA_ALTERNATIVE_IDDBFromA_ALTERNATIVE_IDPtr(a_alternative_idAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the a_alternative_idAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if a_alternative_idAssocEnd_DB == nil {
+				continue
+			}
+			
+			specification_typeDB.SPECIFICATION_TYPEPointersEncoding.ALTERNATIVE_ID =
+				append(specification_typeDB.SPECIFICATION_TYPEPointersEncoding.ALTERNATIVE_ID, int(a_alternative_idAssocEnd_DB.ID))
+		}
+
+		// 1. reset
+		specification_typeDB.SPECIFICATION_TYPEPointersEncoding.SPEC_ATTRIBUTES = make([]int, 0)
+		// 2. encode
+		for _, a_spec_attributesAssocEnd := range specification_type.SPEC_ATTRIBUTES {
+			a_spec_attributesAssocEnd_DB :=
+				backRepo.BackRepoA_SPEC_ATTRIBUTES.GetA_SPEC_ATTRIBUTESDBFromA_SPEC_ATTRIBUTESPtr(a_spec_attributesAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the a_spec_attributesAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if a_spec_attributesAssocEnd_DB == nil {
+				continue
+			}
+			
+			specification_typeDB.SPECIFICATION_TYPEPointersEncoding.SPEC_ATTRIBUTES =
+				append(specification_typeDB.SPECIFICATION_TYPEPointersEncoding.SPEC_ATTRIBUTES, int(a_spec_attributesAssocEnd_DB.ID))
+		}
+
 		query := backRepoSPECIFICATION_TYPE.db.Save(&specification_typeDB)
 		if query.Error != nil {
 			log.Fatalln(query.Error)
@@ -348,6 +390,24 @@ func (backRepoSPECIFICATION_TYPE *BackRepoSPECIFICATION_TYPEStruct) CheckoutPhas
 func (specification_typeDB *SPECIFICATION_TYPEDB) DecodePointers(backRepo *BackRepoStruct, specification_type *models.SPECIFICATION_TYPE) {
 
 	// insertion point for checkout of pointer encoding
+	// This loop redeem specification_type.ALTERNATIVE_ID in the stage from the encode in the back repo
+	// It parses all A_ALTERNATIVE_IDDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	specification_type.ALTERNATIVE_ID = specification_type.ALTERNATIVE_ID[:0]
+	for _, _A_ALTERNATIVE_IDid := range specification_typeDB.SPECIFICATION_TYPEPointersEncoding.ALTERNATIVE_ID {
+		specification_type.ALTERNATIVE_ID = append(specification_type.ALTERNATIVE_ID, backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(_A_ALTERNATIVE_IDid)])
+	}
+
+	// This loop redeem specification_type.SPEC_ATTRIBUTES in the stage from the encode in the back repo
+	// It parses all A_SPEC_ATTRIBUTESDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	specification_type.SPEC_ATTRIBUTES = specification_type.SPEC_ATTRIBUTES[:0]
+	for _, _A_SPEC_ATTRIBUTESid := range specification_typeDB.SPECIFICATION_TYPEPointersEncoding.SPEC_ATTRIBUTES {
+		specification_type.SPEC_ATTRIBUTES = append(specification_type.SPEC_ATTRIBUTES, backRepo.BackRepoA_SPEC_ATTRIBUTES.Map_A_SPEC_ATTRIBUTESDBID_A_SPEC_ATTRIBUTESPtr[uint(_A_SPEC_ATTRIBUTESid)])
+	}
+
 	return
 }
 

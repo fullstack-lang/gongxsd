@@ -46,6 +46,12 @@ type ENUM_VALUEAPI struct {
 // reverse pointers of slice of poitners to Struct
 type ENUM_VALUEPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
+
+	// field ALTERNATIVE_ID is a slice of pointers to another Struct (optional or 0..1)
+	ALTERNATIVE_ID IntSlice `gorm:"type:TEXT"`
+
+	// field PROPERTIES is a slice of pointers to another Struct (optional or 0..1)
+	PROPERTIES IntSlice `gorm:"type:TEXT"`
 }
 
 // ENUM_VALUEDB describes a enum_value in the database
@@ -235,6 +241,42 @@ func (backRepoENUM_VALUE *BackRepoENUM_VALUEStruct) CommitPhaseTwoInstance(backR
 		enum_valueDB.CopyBasicFieldsFromENUM_VALUE(enum_value)
 
 		// insertion point for translating pointers encodings into actual pointers
+		// 1. reset
+		enum_valueDB.ENUM_VALUEPointersEncoding.ALTERNATIVE_ID = make([]int, 0)
+		// 2. encode
+		for _, a_alternative_idAssocEnd := range enum_value.ALTERNATIVE_ID {
+			a_alternative_idAssocEnd_DB :=
+				backRepo.BackRepoA_ALTERNATIVE_ID.GetA_ALTERNATIVE_IDDBFromA_ALTERNATIVE_IDPtr(a_alternative_idAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the a_alternative_idAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if a_alternative_idAssocEnd_DB == nil {
+				continue
+			}
+			
+			enum_valueDB.ENUM_VALUEPointersEncoding.ALTERNATIVE_ID =
+				append(enum_valueDB.ENUM_VALUEPointersEncoding.ALTERNATIVE_ID, int(a_alternative_idAssocEnd_DB.ID))
+		}
+
+		// 1. reset
+		enum_valueDB.ENUM_VALUEPointersEncoding.PROPERTIES = make([]int, 0)
+		// 2. encode
+		for _, a_propertiesAssocEnd := range enum_value.PROPERTIES {
+			a_propertiesAssocEnd_DB :=
+				backRepo.BackRepoA_PROPERTIES.GetA_PROPERTIESDBFromA_PROPERTIESPtr(a_propertiesAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the a_propertiesAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if a_propertiesAssocEnd_DB == nil {
+				continue
+			}
+			
+			enum_valueDB.ENUM_VALUEPointersEncoding.PROPERTIES =
+				append(enum_valueDB.ENUM_VALUEPointersEncoding.PROPERTIES, int(a_propertiesAssocEnd_DB.ID))
+		}
+
 		query := backRepoENUM_VALUE.db.Save(&enum_valueDB)
 		if query.Error != nil {
 			log.Fatalln(query.Error)
@@ -348,6 +390,24 @@ func (backRepoENUM_VALUE *BackRepoENUM_VALUEStruct) CheckoutPhaseTwoInstance(bac
 func (enum_valueDB *ENUM_VALUEDB) DecodePointers(backRepo *BackRepoStruct, enum_value *models.ENUM_VALUE) {
 
 	// insertion point for checkout of pointer encoding
+	// This loop redeem enum_value.ALTERNATIVE_ID in the stage from the encode in the back repo
+	// It parses all A_ALTERNATIVE_IDDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	enum_value.ALTERNATIVE_ID = enum_value.ALTERNATIVE_ID[:0]
+	for _, _A_ALTERNATIVE_IDid := range enum_valueDB.ENUM_VALUEPointersEncoding.ALTERNATIVE_ID {
+		enum_value.ALTERNATIVE_ID = append(enum_value.ALTERNATIVE_ID, backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(_A_ALTERNATIVE_IDid)])
+	}
+
+	// This loop redeem enum_value.PROPERTIES in the stage from the encode in the back repo
+	// It parses all A_PROPERTIESDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	enum_value.PROPERTIES = enum_value.PROPERTIES[:0]
+	for _, _A_PROPERTIESid := range enum_valueDB.ENUM_VALUEPointersEncoding.PROPERTIES {
+		enum_value.PROPERTIES = append(enum_value.PROPERTIES, backRepo.BackRepoA_PROPERTIES.Map_A_PROPERTIESDBID_A_PROPERTIESPtr[uint(_A_PROPERTIESid)])
+	}
+
 	return
 }
 

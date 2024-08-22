@@ -46,6 +46,12 @@ type ATTRIBUTE_VALUE_ENUMERATIONAPI struct {
 // reverse pointers of slice of poitners to Struct
 type ATTRIBUTE_VALUE_ENUMERATIONPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
+
+	// field DEFINITION is a slice of pointers to another Struct (optional or 0..1)
+	DEFINITION IntSlice `gorm:"type:TEXT"`
+
+	// field VALUES is a slice of pointers to another Struct (optional or 0..1)
+	VALUES IntSlice `gorm:"type:TEXT"`
 }
 
 // ATTRIBUTE_VALUE_ENUMERATIONDB describes a attribute_value_enumeration in the database
@@ -211,6 +217,42 @@ func (backRepoATTRIBUTE_VALUE_ENUMERATION *BackRepoATTRIBUTE_VALUE_ENUMERATIONSt
 		attribute_value_enumerationDB.CopyBasicFieldsFromATTRIBUTE_VALUE_ENUMERATION(attribute_value_enumeration)
 
 		// insertion point for translating pointers encodings into actual pointers
+		// 1. reset
+		attribute_value_enumerationDB.ATTRIBUTE_VALUE_ENUMERATIONPointersEncoding.DEFINITION = make([]int, 0)
+		// 2. encode
+		for _, a_definition_5AssocEnd := range attribute_value_enumeration.DEFINITION {
+			a_definition_5AssocEnd_DB :=
+				backRepo.BackRepoA_DEFINITION_5.GetA_DEFINITION_5DBFromA_DEFINITION_5Ptr(a_definition_5AssocEnd)
+			
+			// the stage might be inconsistant, meaning that the a_definition_5AssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if a_definition_5AssocEnd_DB == nil {
+				continue
+			}
+			
+			attribute_value_enumerationDB.ATTRIBUTE_VALUE_ENUMERATIONPointersEncoding.DEFINITION =
+				append(attribute_value_enumerationDB.ATTRIBUTE_VALUE_ENUMERATIONPointersEncoding.DEFINITION, int(a_definition_5AssocEnd_DB.ID))
+		}
+
+		// 1. reset
+		attribute_value_enumerationDB.ATTRIBUTE_VALUE_ENUMERATIONPointersEncoding.VALUES = make([]int, 0)
+		// 2. encode
+		for _, a_valuesAssocEnd := range attribute_value_enumeration.VALUES {
+			a_valuesAssocEnd_DB :=
+				backRepo.BackRepoA_VALUES.GetA_VALUESDBFromA_VALUESPtr(a_valuesAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the a_valuesAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if a_valuesAssocEnd_DB == nil {
+				continue
+			}
+			
+			attribute_value_enumerationDB.ATTRIBUTE_VALUE_ENUMERATIONPointersEncoding.VALUES =
+				append(attribute_value_enumerationDB.ATTRIBUTE_VALUE_ENUMERATIONPointersEncoding.VALUES, int(a_valuesAssocEnd_DB.ID))
+		}
+
 		query := backRepoATTRIBUTE_VALUE_ENUMERATION.db.Save(&attribute_value_enumerationDB)
 		if query.Error != nil {
 			log.Fatalln(query.Error)
@@ -324,6 +366,24 @@ func (backRepoATTRIBUTE_VALUE_ENUMERATION *BackRepoATTRIBUTE_VALUE_ENUMERATIONSt
 func (attribute_value_enumerationDB *ATTRIBUTE_VALUE_ENUMERATIONDB) DecodePointers(backRepo *BackRepoStruct, attribute_value_enumeration *models.ATTRIBUTE_VALUE_ENUMERATION) {
 
 	// insertion point for checkout of pointer encoding
+	// This loop redeem attribute_value_enumeration.DEFINITION in the stage from the encode in the back repo
+	// It parses all A_DEFINITION_5DB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	attribute_value_enumeration.DEFINITION = attribute_value_enumeration.DEFINITION[:0]
+	for _, _A_DEFINITION_5id := range attribute_value_enumerationDB.ATTRIBUTE_VALUE_ENUMERATIONPointersEncoding.DEFINITION {
+		attribute_value_enumeration.DEFINITION = append(attribute_value_enumeration.DEFINITION, backRepo.BackRepoA_DEFINITION_5.Map_A_DEFINITION_5DBID_A_DEFINITION_5Ptr[uint(_A_DEFINITION_5id)])
+	}
+
+	// This loop redeem attribute_value_enumeration.VALUES in the stage from the encode in the back repo
+	// It parses all A_VALUESDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	attribute_value_enumeration.VALUES = attribute_value_enumeration.VALUES[:0]
+	for _, _A_VALUESid := range attribute_value_enumerationDB.ATTRIBUTE_VALUE_ENUMERATIONPointersEncoding.VALUES {
+		attribute_value_enumeration.VALUES = append(attribute_value_enumeration.VALUES, backRepo.BackRepoA_VALUES.Map_A_VALUESDBID_A_VALUESPtr[uint(_A_VALUESid)])
+	}
+
 	return
 }
 

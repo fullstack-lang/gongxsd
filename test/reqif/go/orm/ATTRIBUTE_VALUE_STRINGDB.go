@@ -46,6 +46,9 @@ type ATTRIBUTE_VALUE_STRINGAPI struct {
 // reverse pointers of slice of poitners to Struct
 type ATTRIBUTE_VALUE_STRINGPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
+
+	// field DEFINITION is a slice of pointers to another Struct (optional or 0..1)
+	DEFINITION IntSlice `gorm:"type:TEXT"`
 }
 
 // ATTRIBUTE_VALUE_STRINGDB describes a attribute_value_string in the database
@@ -217,6 +220,24 @@ func (backRepoATTRIBUTE_VALUE_STRING *BackRepoATTRIBUTE_VALUE_STRINGStruct) Comm
 		attribute_value_stringDB.CopyBasicFieldsFromATTRIBUTE_VALUE_STRING(attribute_value_string)
 
 		// insertion point for translating pointers encodings into actual pointers
+		// 1. reset
+		attribute_value_stringDB.ATTRIBUTE_VALUE_STRINGPointersEncoding.DEFINITION = make([]int, 0)
+		// 2. encode
+		for _, a_definition_3AssocEnd := range attribute_value_string.DEFINITION {
+			a_definition_3AssocEnd_DB :=
+				backRepo.BackRepoA_DEFINITION_3.GetA_DEFINITION_3DBFromA_DEFINITION_3Ptr(a_definition_3AssocEnd)
+			
+			// the stage might be inconsistant, meaning that the a_definition_3AssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if a_definition_3AssocEnd_DB == nil {
+				continue
+			}
+			
+			attribute_value_stringDB.ATTRIBUTE_VALUE_STRINGPointersEncoding.DEFINITION =
+				append(attribute_value_stringDB.ATTRIBUTE_VALUE_STRINGPointersEncoding.DEFINITION, int(a_definition_3AssocEnd_DB.ID))
+		}
+
 		query := backRepoATTRIBUTE_VALUE_STRING.db.Save(&attribute_value_stringDB)
 		if query.Error != nil {
 			log.Fatalln(query.Error)
@@ -330,6 +351,15 @@ func (backRepoATTRIBUTE_VALUE_STRING *BackRepoATTRIBUTE_VALUE_STRINGStruct) Chec
 func (attribute_value_stringDB *ATTRIBUTE_VALUE_STRINGDB) DecodePointers(backRepo *BackRepoStruct, attribute_value_string *models.ATTRIBUTE_VALUE_STRING) {
 
 	// insertion point for checkout of pointer encoding
+	// This loop redeem attribute_value_string.DEFINITION in the stage from the encode in the back repo
+	// It parses all A_DEFINITION_3DB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	attribute_value_string.DEFINITION = attribute_value_string.DEFINITION[:0]
+	for _, _A_DEFINITION_3id := range attribute_value_stringDB.ATTRIBUTE_VALUE_STRINGPointersEncoding.DEFINITION {
+		attribute_value_string.DEFINITION = append(attribute_value_string.DEFINITION, backRepo.BackRepoA_DEFINITION_3.Map_A_DEFINITION_3DBID_A_DEFINITION_3Ptr[uint(_A_DEFINITION_3id)])
+	}
+
 	return
 }
 

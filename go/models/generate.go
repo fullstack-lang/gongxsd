@@ -39,12 +39,12 @@ func Generate(stage *StageStruct, outputFilePath string) {
 			)
 		} else {
 			templInsertionLevel0[ModelsFileTmplLevel0AllGongstructsCode] += Replace3(
-				ModelsFileTmplLevel1Code[ModelsFileTmplLevel1UnNamedStructCode],
+				ModelsFileTmplLevel1Code[ModelsFileTmplLevel1NamedStructCode],
 
 				"{{"+string(rune(ModelsFileTmplLevel2Structname))+"}}", ct.GoIdentifier,
 
 				"{{"+string(rune(ModelsFileTmplLevel2Source))+"}}",
-				`outer element "`+ct.OuterElement.Name+`"`,
+				`within outer element "`+ct.OuterElement.Name+`"`,
 
 				"{{"+string(rune(ModelsFileTmplLevel2Fields))+"}}",
 				fields,

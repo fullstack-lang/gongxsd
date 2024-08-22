@@ -46,6 +46,15 @@ type ATTRIBUTE_DEFINITION_STRINGAPI struct {
 // reverse pointers of slice of poitners to Struct
 type ATTRIBUTE_DEFINITION_STRINGPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
+
+	// field ALTERNATIVE_ID is a slice of pointers to another Struct (optional or 0..1)
+	ALTERNATIVE_ID IntSlice `gorm:"type:TEXT"`
+
+	// field DEFAULT_VALUE is a slice of pointers to another Struct (optional or 0..1)
+	DEFAULT_VALUE IntSlice `gorm:"type:TEXT"`
+
+	// field TYPE is a slice of pointers to another Struct (optional or 0..1)
+	TYPE IntSlice `gorm:"type:TEXT"`
 }
 
 // ATTRIBUTE_DEFINITION_STRINGDB describes a attribute_definition_string in the database
@@ -242,6 +251,60 @@ func (backRepoATTRIBUTE_DEFINITION_STRING *BackRepoATTRIBUTE_DEFINITION_STRINGSt
 		attribute_definition_stringDB.CopyBasicFieldsFromATTRIBUTE_DEFINITION_STRING(attribute_definition_string)
 
 		// insertion point for translating pointers encodings into actual pointers
+		// 1. reset
+		attribute_definition_stringDB.ATTRIBUTE_DEFINITION_STRINGPointersEncoding.ALTERNATIVE_ID = make([]int, 0)
+		// 2. encode
+		for _, a_alternative_idAssocEnd := range attribute_definition_string.ALTERNATIVE_ID {
+			a_alternative_idAssocEnd_DB :=
+				backRepo.BackRepoA_ALTERNATIVE_ID.GetA_ALTERNATIVE_IDDBFromA_ALTERNATIVE_IDPtr(a_alternative_idAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the a_alternative_idAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if a_alternative_idAssocEnd_DB == nil {
+				continue
+			}
+			
+			attribute_definition_stringDB.ATTRIBUTE_DEFINITION_STRINGPointersEncoding.ALTERNATIVE_ID =
+				append(attribute_definition_stringDB.ATTRIBUTE_DEFINITION_STRINGPointersEncoding.ALTERNATIVE_ID, int(a_alternative_idAssocEnd_DB.ID))
+		}
+
+		// 1. reset
+		attribute_definition_stringDB.ATTRIBUTE_DEFINITION_STRINGPointersEncoding.DEFAULT_VALUE = make([]int, 0)
+		// 2. encode
+		for _, a_default_valueAssocEnd := range attribute_definition_string.DEFAULT_VALUE {
+			a_default_valueAssocEnd_DB :=
+				backRepo.BackRepoA_DEFAULT_VALUE.GetA_DEFAULT_VALUEDBFromA_DEFAULT_VALUEPtr(a_default_valueAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the a_default_valueAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if a_default_valueAssocEnd_DB == nil {
+				continue
+			}
+			
+			attribute_definition_stringDB.ATTRIBUTE_DEFINITION_STRINGPointersEncoding.DEFAULT_VALUE =
+				append(attribute_definition_stringDB.ATTRIBUTE_DEFINITION_STRINGPointersEncoding.DEFAULT_VALUE, int(a_default_valueAssocEnd_DB.ID))
+		}
+
+		// 1. reset
+		attribute_definition_stringDB.ATTRIBUTE_DEFINITION_STRINGPointersEncoding.TYPE = make([]int, 0)
+		// 2. encode
+		for _, a_type_8AssocEnd := range attribute_definition_string.TYPE {
+			a_type_8AssocEnd_DB :=
+				backRepo.BackRepoA_TYPE_8.GetA_TYPE_8DBFromA_TYPE_8Ptr(a_type_8AssocEnd)
+			
+			// the stage might be inconsistant, meaning that the a_type_8AssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if a_type_8AssocEnd_DB == nil {
+				continue
+			}
+			
+			attribute_definition_stringDB.ATTRIBUTE_DEFINITION_STRINGPointersEncoding.TYPE =
+				append(attribute_definition_stringDB.ATTRIBUTE_DEFINITION_STRINGPointersEncoding.TYPE, int(a_type_8AssocEnd_DB.ID))
+		}
+
 		query := backRepoATTRIBUTE_DEFINITION_STRING.db.Save(&attribute_definition_stringDB)
 		if query.Error != nil {
 			log.Fatalln(query.Error)
@@ -355,6 +418,33 @@ func (backRepoATTRIBUTE_DEFINITION_STRING *BackRepoATTRIBUTE_DEFINITION_STRINGSt
 func (attribute_definition_stringDB *ATTRIBUTE_DEFINITION_STRINGDB) DecodePointers(backRepo *BackRepoStruct, attribute_definition_string *models.ATTRIBUTE_DEFINITION_STRING) {
 
 	// insertion point for checkout of pointer encoding
+	// This loop redeem attribute_definition_string.ALTERNATIVE_ID in the stage from the encode in the back repo
+	// It parses all A_ALTERNATIVE_IDDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	attribute_definition_string.ALTERNATIVE_ID = attribute_definition_string.ALTERNATIVE_ID[:0]
+	for _, _A_ALTERNATIVE_IDid := range attribute_definition_stringDB.ATTRIBUTE_DEFINITION_STRINGPointersEncoding.ALTERNATIVE_ID {
+		attribute_definition_string.ALTERNATIVE_ID = append(attribute_definition_string.ALTERNATIVE_ID, backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(_A_ALTERNATIVE_IDid)])
+	}
+
+	// This loop redeem attribute_definition_string.DEFAULT_VALUE in the stage from the encode in the back repo
+	// It parses all A_DEFAULT_VALUEDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	attribute_definition_string.DEFAULT_VALUE = attribute_definition_string.DEFAULT_VALUE[:0]
+	for _, _A_DEFAULT_VALUEid := range attribute_definition_stringDB.ATTRIBUTE_DEFINITION_STRINGPointersEncoding.DEFAULT_VALUE {
+		attribute_definition_string.DEFAULT_VALUE = append(attribute_definition_string.DEFAULT_VALUE, backRepo.BackRepoA_DEFAULT_VALUE.Map_A_DEFAULT_VALUEDBID_A_DEFAULT_VALUEPtr[uint(_A_DEFAULT_VALUEid)])
+	}
+
+	// This loop redeem attribute_definition_string.TYPE in the stage from the encode in the back repo
+	// It parses all A_TYPE_8DB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	attribute_definition_string.TYPE = attribute_definition_string.TYPE[:0]
+	for _, _A_TYPE_8id := range attribute_definition_stringDB.ATTRIBUTE_DEFINITION_STRINGPointersEncoding.TYPE {
+		attribute_definition_string.TYPE = append(attribute_definition_string.TYPE, backRepo.BackRepoA_TYPE_8.Map_A_TYPE_8DBID_A_TYPE_8Ptr[uint(_A_TYPE_8id)])
+	}
+
 	return
 }
 

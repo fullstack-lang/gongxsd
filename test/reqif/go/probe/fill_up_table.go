@@ -50,6 +50,98 @@ func fillUpTablePointerToGongstruct[T models.PointerToGongstruct](
 		fillUpTable[models.ATTRIBUTE_VALUE_STRING](probe)
 	case *models.ATTRIBUTE_VALUE_XHTML:
 		fillUpTable[models.ATTRIBUTE_VALUE_XHTML](probe)
+	case *models.A_ALTERNATIVE_ID:
+		fillUpTable[models.A_ALTERNATIVE_ID](probe)
+	case *models.A_CHILDREN:
+		fillUpTable[models.A_CHILDREN](probe)
+	case *models.A_CORE_CONTENT:
+		fillUpTable[models.A_CORE_CONTENT](probe)
+	case *models.A_DATATYPES:
+		fillUpTable[models.A_DATATYPES](probe)
+	case *models.A_DEFAULT_VALUE:
+		fillUpTable[models.A_DEFAULT_VALUE](probe)
+	case *models.A_DEFAULT_VALUE_1:
+		fillUpTable[models.A_DEFAULT_VALUE_1](probe)
+	case *models.A_DEFAULT_VALUE_2:
+		fillUpTable[models.A_DEFAULT_VALUE_2](probe)
+	case *models.A_DEFAULT_VALUE_3:
+		fillUpTable[models.A_DEFAULT_VALUE_3](probe)
+	case *models.A_DEFAULT_VALUE_4:
+		fillUpTable[models.A_DEFAULT_VALUE_4](probe)
+	case *models.A_DEFAULT_VALUE_5:
+		fillUpTable[models.A_DEFAULT_VALUE_5](probe)
+	case *models.A_DEFAULT_VALUE_6:
+		fillUpTable[models.A_DEFAULT_VALUE_6](probe)
+	case *models.A_DEFINITION:
+		fillUpTable[models.A_DEFINITION](probe)
+	case *models.A_DEFINITION_1:
+		fillUpTable[models.A_DEFINITION_1](probe)
+	case *models.A_DEFINITION_2:
+		fillUpTable[models.A_DEFINITION_2](probe)
+	case *models.A_DEFINITION_3:
+		fillUpTable[models.A_DEFINITION_3](probe)
+	case *models.A_DEFINITION_4:
+		fillUpTable[models.A_DEFINITION_4](probe)
+	case *models.A_DEFINITION_5:
+		fillUpTable[models.A_DEFINITION_5](probe)
+	case *models.A_DEFINITION_6:
+		fillUpTable[models.A_DEFINITION_6](probe)
+	case *models.A_EDITABLE_ATTS:
+		fillUpTable[models.A_EDITABLE_ATTS](probe)
+	case *models.A_OBJECT:
+		fillUpTable[models.A_OBJECT](probe)
+	case *models.A_PROPERTIES:
+		fillUpTable[models.A_PROPERTIES](probe)
+	case *models.A_SOURCE:
+		fillUpTable[models.A_SOURCE](probe)
+	case *models.A_SOURCE_SPECIFICATION:
+		fillUpTable[models.A_SOURCE_SPECIFICATION](probe)
+	case *models.A_SPECIFICATIONS:
+		fillUpTable[models.A_SPECIFICATIONS](probe)
+	case *models.A_SPECIFIED_VALUES:
+		fillUpTable[models.A_SPECIFIED_VALUES](probe)
+	case *models.A_SPEC_ATTRIBUTES:
+		fillUpTable[models.A_SPEC_ATTRIBUTES](probe)
+	case *models.A_SPEC_OBJECTS:
+		fillUpTable[models.A_SPEC_OBJECTS](probe)
+	case *models.A_SPEC_RELATIONS:
+		fillUpTable[models.A_SPEC_RELATIONS](probe)
+	case *models.A_SPEC_RELATIONS_1:
+		fillUpTable[models.A_SPEC_RELATIONS_1](probe)
+	case *models.A_SPEC_RELATION_GROUPS:
+		fillUpTable[models.A_SPEC_RELATION_GROUPS](probe)
+	case *models.A_SPEC_TYPES:
+		fillUpTable[models.A_SPEC_TYPES](probe)
+	case *models.A_THE_HEADER:
+		fillUpTable[models.A_THE_HEADER](probe)
+	case *models.A_TOOL_EXTENSIONS:
+		fillUpTable[models.A_TOOL_EXTENSIONS](probe)
+	case *models.A_TYPE:
+		fillUpTable[models.A_TYPE](probe)
+	case *models.A_TYPE_1:
+		fillUpTable[models.A_TYPE_1](probe)
+	case *models.A_TYPE_10:
+		fillUpTable[models.A_TYPE_10](probe)
+	case *models.A_TYPE_2:
+		fillUpTable[models.A_TYPE_2](probe)
+	case *models.A_TYPE_3:
+		fillUpTable[models.A_TYPE_3](probe)
+	case *models.A_TYPE_4:
+		fillUpTable[models.A_TYPE_4](probe)
+	case *models.A_TYPE_5:
+		fillUpTable[models.A_TYPE_5](probe)
+	case *models.A_TYPE_6:
+		fillUpTable[models.A_TYPE_6](probe)
+	case *models.A_TYPE_7:
+		fillUpTable[models.A_TYPE_7](probe)
+	case *models.A_TYPE_8:
+		fillUpTable[models.A_TYPE_8](probe)
+	case *models.A_TYPE_9:
+		fillUpTable[models.A_TYPE_9](probe)
+	case *models.A_VALUES:
+		fillUpTable[models.A_VALUES](probe)
+	case *models.A_VALUES_1:
+		fillUpTable[models.A_VALUES_1](probe)
 	case *models.DATATYPE_DEFINITION_BOOLEAN:
 		fillUpTable[models.DATATYPE_DEFINITION_BOOLEAN](probe)
 	case *models.DATATYPE_DEFINITION_DATE:
