@@ -19,18 +19,21 @@ import (
 // This function is currently suited for REQIF schema and could be generalized later
 func (schema *Schema) FactorDuplicates() {
 
-	map_NameXSD_Type_Element := make(map[string]map[string][]*Element)
-
 	// Step 1. elements within choices
+	map_NameXSD_Type_Element := make(map[string]map[string][]*Element)
 	schema.extractMapOfElementsWithinChoice(map_NameXSD_Type_Element)
 	schema.analyseMapOfElements(map_NameXSD_Type_Element)
 	schema.factorElementsWithinChoices(map_NameXSD_Type_Element)
+
+	log.Println("")
 
 	// Step 2 choices within complex types
 	map_Choices := make(map[choiceId][]*Choice)
 	schema.extractMapOfChoicesWithinComplexTypes(map_Choices)
 	schema.analyseMapOfChoices(map_Choices)
 	schema.factorChoicesWithinComplexType(map_Choices)
+
+	log.Println("")
 
 	// Step 3 complex types within elements
 	map_ComplexTypes := make(map[complexTypeId][]*ComplexType)
@@ -40,11 +43,112 @@ func (schema *Schema) FactorDuplicates() {
 
 	log.Println("")
 
-	map_ComplexTypes = make(map[complexTypeId][]*ComplexType)
-	schema.extractMapOfComplexTypesWithinElements(map_ComplexTypes)
-	schema.analyseMapOfComplexTypes(map_ComplexTypes)
+	// Step 4
+	map_ElementsWithinAlls := make(map[elementId][]*Element)
+	schema.extractMapOfElementsWithinAll(map_ElementsWithinAlls)
+	schema.analyseMapOfElementWithinAlls(map_ElementsWithinAlls)
+	schema.factorElementsWithinAlls(map_ElementsWithinAlls)
 
 	log.Println("")
+
+	map_ElementsWithinAlls = make(map[elementId][]*Element)
+	schema.extractMapOfElementsWithinAll(map_ElementsWithinAlls)
+	schema.analyseMapOfElementWithinAlls(map_ElementsWithinAlls)
+
+	log.Println("")
+}
+
+//
+// element within all
+//
+
+type elementId struct {
+	minOccurs   int
+	maxOccurs   int
+	elementName string
+	elementType string
+}
+
+func genElementId(element *Element) (res elementId) {
+
+	choice := element.ComplexType.Choices[0]
+
+	minOccurs, _ := strconv.Atoi(choice.MinOccurs)
+	maxOccurs, _ := strconv.Atoi(choice.MaxOccurs)
+	res = elementId{
+		minOccurs:   minOccurs,
+		maxOccurs:   maxOccurs,
+		elementName: choice.Elements[0].NameXSD,
+		elementType: choice.Elements[0].Type,
+	}
+	return
+}
+
+func (schema *Schema) extractMapOfElementsWithinAll(map_Elements map[elementId][]*Element) {
+	for _, complexType := range schema.ComplexTypes {
+		for _, alls := range complexType.Alls {
+			for _, element := range alls.Elements {
+				if _complexType := element.ComplexType; _complexType != nil {
+					// get rid of choices that are not with one element only
+					if len(_complexType.Elements) > 0 ||
+						len(_complexType.Sequences) > 0 ||
+						len(_complexType.Alls) > 0 ||
+						len(_complexType.Choices) != 1 {
+						continue
+					}
+					elementId := genElementId(element)
+					if _, ok := map_Elements[elementId]; ok {
+						if !slices.Contains(map_Elements[elementId], element) {
+							map_Elements[elementId] = append(map_Elements[elementId], element)
+						}
+					} else {
+						map_Elements[elementId] = []*Element{element}
+					}
+				}
+			}
+		}
+	}
+}
+
+func (*Schema) analyseMapOfElementWithinAlls(map_Elements map[elementId][]*Element) {
+	elements := maps.Keys(map_Elements)
+	slices.SortFunc(elements, func(a, b elementId) int {
+		return cmp.Compare(a.elementName, b.elementName)
+	})
+
+	for _, elementId := range elements {
+		log.Println("element", elementId.elementName, elementId.elementType, len(map_Elements[elementId]))
+	}
+}
+
+func (*Schema) factorElementsWithinAlls(map_ElementsWithinAlls map[elementId][]*Element) {
+
+	elements := maps.Keys(map_ElementsWithinAlls)
+	slices.SortFunc(elements, func(a, b elementId) int {
+		return cmp.Compare(a.elementName, b.elementName)
+	})
+
+	for _, elementId := range elements {
+
+		sliceElements := map_ElementsWithinAlls[elementId]
+		elementToKeep := sliceElements[0]
+
+		// log.Println(len(sliceElements), "elements for element name", elementType, "type", elementType)
+		for _, elementToRemoveFromAll := range sliceElements[1:] {
+			elementToRemoveFromAll.IsDuplicatedInXSD = true
+			if outerAll, ok := elementToRemoveFromAll.OuterParticle.(*All); ok {
+				var newElemWithinAll []*Element
+				for _, _element := range outerAll.Elements {
+					if _element == elementToRemoveFromAll {
+						newElemWithinAll = append(newElemWithinAll, elementToKeep)
+					} else {
+						newElemWithinAll = append(newElemWithinAll, _element)
+					}
+				}
+				outerAll.Elements = newElemWithinAll
+			}
+		}
+	}
 }
 
 //
@@ -72,6 +176,7 @@ func genComplexTypeId(complexType *ComplexType) (res complexTypeId) {
 	}
 	return
 }
+
 func (schema *Schema) extractMapOfComplexTypesWithinElements(map_ComplexTypes map[complexTypeId][]*ComplexType) {
 	for _, complexType := range schema.ComplexTypes {
 		for _, alls := range complexType.Alls {
@@ -227,8 +332,9 @@ func (*Schema) factorChoicesWithinComplexType(map_Choices map[choiceId][]*Choice
 
 func (schema *Schema) extractMapOfElementsWithinChoice(map_Elements map[string]map[string][]*Element) {
 	for _, namedComplexType := range schema.ComplexTypes {
-		for _, alls := range namedComplexType.Alls {
-			for _, element := range alls.Elements {
+		for _, all := range namedComplexType.Alls {
+			for _, element := range all.Elements {
+				element.OuterParticle = all
 				if anonymousComplexType := element.ComplexType; anonymousComplexType != nil {
 					anonymousComplexType.OuterParticle = element
 					for _, choice := range anonymousComplexType.Choices {
