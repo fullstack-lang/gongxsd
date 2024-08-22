@@ -226,13 +226,13 @@ func (*Schema) factorChoicesWithinComplexType(map_Choices map[choiceId][]*Choice
 // elements within choices
 
 func (schema *Schema) extractMapOfElementsWithinChoice(map_Elements map[string]map[string][]*Element) {
-	for _, complexType := range schema.ComplexTypes {
-		for _, alls := range complexType.Alls {
+	for _, namedComplexType := range schema.ComplexTypes {
+		for _, alls := range namedComplexType.Alls {
 			for _, element := range alls.Elements {
-				if _complexType := element.ComplexType; _complexType != nil {
-					complexType.OuterParticle = element
-					for _, choice := range _complexType.Choices {
-						choice.OuterParticle = complexType
+				if anonymousComplexType := element.ComplexType; anonymousComplexType != nil {
+					anonymousComplexType.OuterParticle = element
+					for _, choice := range anonymousComplexType.Choices {
+						choice.OuterParticle = namedComplexType
 						for _, _e := range choice.Elements {
 							_e.OuterParticle = choice
 							if _, ok := map_Elements[_e.NameXSD]; !ok {
