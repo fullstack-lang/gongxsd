@@ -109,48 +109,6 @@ func (nodeImplGongstruct *TreeNodeImplGongstruct) OnAfterUpdate(
 	if nodeImplGongstruct.gongStruct.GetName() == "A_DATATYPES" {
 		fillUpTable[models.A_DATATYPES](nodeImplGongstruct.probe)
 	}
-	if nodeImplGongstruct.gongStruct.GetName() == "A_DEFAULT_VALUE" {
-		fillUpTable[models.A_DEFAULT_VALUE](nodeImplGongstruct.probe)
-	}
-	if nodeImplGongstruct.gongStruct.GetName() == "A_DEFAULT_VALUE_1" {
-		fillUpTable[models.A_DEFAULT_VALUE_1](nodeImplGongstruct.probe)
-	}
-	if nodeImplGongstruct.gongStruct.GetName() == "A_DEFAULT_VALUE_2" {
-		fillUpTable[models.A_DEFAULT_VALUE_2](nodeImplGongstruct.probe)
-	}
-	if nodeImplGongstruct.gongStruct.GetName() == "A_DEFAULT_VALUE_3" {
-		fillUpTable[models.A_DEFAULT_VALUE_3](nodeImplGongstruct.probe)
-	}
-	if nodeImplGongstruct.gongStruct.GetName() == "A_DEFAULT_VALUE_4" {
-		fillUpTable[models.A_DEFAULT_VALUE_4](nodeImplGongstruct.probe)
-	}
-	if nodeImplGongstruct.gongStruct.GetName() == "A_DEFAULT_VALUE_5" {
-		fillUpTable[models.A_DEFAULT_VALUE_5](nodeImplGongstruct.probe)
-	}
-	if nodeImplGongstruct.gongStruct.GetName() == "A_DEFAULT_VALUE_6" {
-		fillUpTable[models.A_DEFAULT_VALUE_6](nodeImplGongstruct.probe)
-	}
-	if nodeImplGongstruct.gongStruct.GetName() == "A_DEFINITION" {
-		fillUpTable[models.A_DEFINITION](nodeImplGongstruct.probe)
-	}
-	if nodeImplGongstruct.gongStruct.GetName() == "A_DEFINITION_1" {
-		fillUpTable[models.A_DEFINITION_1](nodeImplGongstruct.probe)
-	}
-	if nodeImplGongstruct.gongStruct.GetName() == "A_DEFINITION_2" {
-		fillUpTable[models.A_DEFINITION_2](nodeImplGongstruct.probe)
-	}
-	if nodeImplGongstruct.gongStruct.GetName() == "A_DEFINITION_3" {
-		fillUpTable[models.A_DEFINITION_3](nodeImplGongstruct.probe)
-	}
-	if nodeImplGongstruct.gongStruct.GetName() == "A_DEFINITION_4" {
-		fillUpTable[models.A_DEFINITION_4](nodeImplGongstruct.probe)
-	}
-	if nodeImplGongstruct.gongStruct.GetName() == "A_DEFINITION_5" {
-		fillUpTable[models.A_DEFINITION_5](nodeImplGongstruct.probe)
-	}
-	if nodeImplGongstruct.gongStruct.GetName() == "A_DEFINITION_6" {
-		fillUpTable[models.A_DEFINITION_6](nodeImplGongstruct.probe)
-	}
 	if nodeImplGongstruct.gongStruct.GetName() == "A_EDITABLE_ATTS" {
 		fillUpTable[models.A_EDITABLE_ATTS](nodeImplGongstruct.probe)
 	}
@@ -195,39 +153,6 @@ func (nodeImplGongstruct *TreeNodeImplGongstruct) OnAfterUpdate(
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "A_TOOL_EXTENSIONS" {
 		fillUpTable[models.A_TOOL_EXTENSIONS](nodeImplGongstruct.probe)
-	}
-	if nodeImplGongstruct.gongStruct.GetName() == "A_TYPE" {
-		fillUpTable[models.A_TYPE](nodeImplGongstruct.probe)
-	}
-	if nodeImplGongstruct.gongStruct.GetName() == "A_TYPE_1" {
-		fillUpTable[models.A_TYPE_1](nodeImplGongstruct.probe)
-	}
-	if nodeImplGongstruct.gongStruct.GetName() == "A_TYPE_10" {
-		fillUpTable[models.A_TYPE_10](nodeImplGongstruct.probe)
-	}
-	if nodeImplGongstruct.gongStruct.GetName() == "A_TYPE_2" {
-		fillUpTable[models.A_TYPE_2](nodeImplGongstruct.probe)
-	}
-	if nodeImplGongstruct.gongStruct.GetName() == "A_TYPE_3" {
-		fillUpTable[models.A_TYPE_3](nodeImplGongstruct.probe)
-	}
-	if nodeImplGongstruct.gongStruct.GetName() == "A_TYPE_4" {
-		fillUpTable[models.A_TYPE_4](nodeImplGongstruct.probe)
-	}
-	if nodeImplGongstruct.gongStruct.GetName() == "A_TYPE_5" {
-		fillUpTable[models.A_TYPE_5](nodeImplGongstruct.probe)
-	}
-	if nodeImplGongstruct.gongStruct.GetName() == "A_TYPE_6" {
-		fillUpTable[models.A_TYPE_6](nodeImplGongstruct.probe)
-	}
-	if nodeImplGongstruct.gongStruct.GetName() == "A_TYPE_7" {
-		fillUpTable[models.A_TYPE_7](nodeImplGongstruct.probe)
-	}
-	if nodeImplGongstruct.gongStruct.GetName() == "A_TYPE_8" {
-		fillUpTable[models.A_TYPE_8](nodeImplGongstruct.probe)
-	}
-	if nodeImplGongstruct.gongStruct.GetName() == "A_TYPE_9" {
-		fillUpTable[models.A_TYPE_9](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "A_VALUES" {
 		fillUpTable[models.A_VALUES](nodeImplGongstruct.probe)
@@ -279,6 +204,81 @@ func (nodeImplGongstruct *TreeNodeImplGongstruct) OnAfterUpdate(
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "REQ_IF_TOOL_EXTENSION" {
 		fillUpTable[models.REQ_IF_TOOL_EXTENSION](nodeImplGongstruct.probe)
+	}
+	if nodeImplGongstruct.gongStruct.GetName() == "Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1" {
+		fillUpTable[models.Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1](nodeImplGongstruct.probe)
+	}
+	if nodeImplGongstruct.gongStruct.GetName() == "Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1" {
+		fillUpTable[models.Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1](nodeImplGongstruct.probe)
+	}
+	if nodeImplGongstruct.gongStruct.GetName() == "Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1" {
+		fillUpTable[models.Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1](nodeImplGongstruct.probe)
+	}
+	if nodeImplGongstruct.gongStruct.GetName() == "Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1" {
+		fillUpTable[models.Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1](nodeImplGongstruct.probe)
+	}
+	if nodeImplGongstruct.gongStruct.GetName() == "Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1" {
+		fillUpTable[models.Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1](nodeImplGongstruct.probe)
+	}
+	if nodeImplGongstruct.gongStruct.GetName() == "Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1" {
+		fillUpTable[models.Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1](nodeImplGongstruct.probe)
+	}
+	if nodeImplGongstruct.gongStruct.GetName() == "Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1" {
+		fillUpTable[models.Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1](nodeImplGongstruct.probe)
+	}
+	if nodeImplGongstruct.gongStruct.GetName() == "Renamed_ATTRIBUTE_VALUE_BOOLEAN_1" {
+		fillUpTable[models.Renamed_ATTRIBUTE_VALUE_BOOLEAN_1](nodeImplGongstruct.probe)
+	}
+	if nodeImplGongstruct.gongStruct.GetName() == "Renamed_ATTRIBUTE_VALUE_DATE_1" {
+		fillUpTable[models.Renamed_ATTRIBUTE_VALUE_DATE_1](nodeImplGongstruct.probe)
+	}
+	if nodeImplGongstruct.gongStruct.GetName() == "Renamed_ATTRIBUTE_VALUE_ENUMERATION_1" {
+		fillUpTable[models.Renamed_ATTRIBUTE_VALUE_ENUMERATION_1](nodeImplGongstruct.probe)
+	}
+	if nodeImplGongstruct.gongStruct.GetName() == "Renamed_ATTRIBUTE_VALUE_INTEGER_1" {
+		fillUpTable[models.Renamed_ATTRIBUTE_VALUE_INTEGER_1](nodeImplGongstruct.probe)
+	}
+	if nodeImplGongstruct.gongStruct.GetName() == "Renamed_ATTRIBUTE_VALUE_REAL_1" {
+		fillUpTable[models.Renamed_ATTRIBUTE_VALUE_REAL_1](nodeImplGongstruct.probe)
+	}
+	if nodeImplGongstruct.gongStruct.GetName() == "Renamed_ATTRIBUTE_VALUE_STRING_1" {
+		fillUpTable[models.Renamed_ATTRIBUTE_VALUE_STRING_1](nodeImplGongstruct.probe)
+	}
+	if nodeImplGongstruct.gongStruct.GetName() == "Renamed_ATTRIBUTE_VALUE_XHTML_1" {
+		fillUpTable[models.Renamed_ATTRIBUTE_VALUE_XHTML_1](nodeImplGongstruct.probe)
+	}
+	if nodeImplGongstruct.gongStruct.GetName() == "Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1" {
+		fillUpTable[models.Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1](nodeImplGongstruct.probe)
+	}
+	if nodeImplGongstruct.gongStruct.GetName() == "Renamed_DATATYPE_DEFINITION_DATE_REF_1" {
+		fillUpTable[models.Renamed_DATATYPE_DEFINITION_DATE_REF_1](nodeImplGongstruct.probe)
+	}
+	if nodeImplGongstruct.gongStruct.GetName() == "Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1" {
+		fillUpTable[models.Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1](nodeImplGongstruct.probe)
+	}
+	if nodeImplGongstruct.gongStruct.GetName() == "Renamed_DATATYPE_DEFINITION_INTEGER_REF_1" {
+		fillUpTable[models.Renamed_DATATYPE_DEFINITION_INTEGER_REF_1](nodeImplGongstruct.probe)
+	}
+	if nodeImplGongstruct.gongStruct.GetName() == "Renamed_DATATYPE_DEFINITION_REAL_REF_1" {
+		fillUpTable[models.Renamed_DATATYPE_DEFINITION_REAL_REF_1](nodeImplGongstruct.probe)
+	}
+	if nodeImplGongstruct.gongStruct.GetName() == "Renamed_DATATYPE_DEFINITION_STRING_REF_1" {
+		fillUpTable[models.Renamed_DATATYPE_DEFINITION_STRING_REF_1](nodeImplGongstruct.probe)
+	}
+	if nodeImplGongstruct.gongStruct.GetName() == "Renamed_DATATYPE_DEFINITION_XHTML_REF_1" {
+		fillUpTable[models.Renamed_DATATYPE_DEFINITION_XHTML_REF_1](nodeImplGongstruct.probe)
+	}
+	if nodeImplGongstruct.gongStruct.GetName() == "Renamed_RELATION_GROUP_TYPE_REF_1" {
+		fillUpTable[models.Renamed_RELATION_GROUP_TYPE_REF_1](nodeImplGongstruct.probe)
+	}
+	if nodeImplGongstruct.gongStruct.GetName() == "Renamed_SPECIFICATION_TYPE_REF_1" {
+		fillUpTable[models.Renamed_SPECIFICATION_TYPE_REF_1](nodeImplGongstruct.probe)
+	}
+	if nodeImplGongstruct.gongStruct.GetName() == "Renamed_SPEC_OBJECT_TYPE_REF_1" {
+		fillUpTable[models.Renamed_SPEC_OBJECT_TYPE_REF_1](nodeImplGongstruct.probe)
+	}
+	if nodeImplGongstruct.gongStruct.GetName() == "Renamed_SPEC_RELATION_TYPE_REF_1" {
+		fillUpTable[models.Renamed_SPEC_RELATION_TYPE_REF_1](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "SPECIFICATION" {
 		fillUpTable[models.SPECIFICATION](nodeImplGongstruct.probe)

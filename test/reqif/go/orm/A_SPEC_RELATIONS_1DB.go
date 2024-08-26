@@ -46,9 +46,6 @@ type A_SPEC_RELATIONS_1API struct {
 // reverse pointers of slice of poitners to Struct
 type A_SPEC_RELATIONS_1PointersEncoding struct {
 	// insertion for pointer fields encoding declaration
-
-	// field SPEC_RELATION is a slice of pointers to another Struct (optional or 0..1)
-	SPEC_RELATION IntSlice `gorm:"type:TEXT"`
 }
 
 // A_SPEC_RELATIONS_1DB describes a a_spec_relations_1 in the database
@@ -64,6 +61,9 @@ type A_SPEC_RELATIONS_1DB struct {
 
 	// Declation for basic field a_spec_relations_1DB.Name
 	Name_Data sql.NullString
+
+	// Declation for basic field a_spec_relations_1DB.SPEC_RELATION_REF
+	SPEC_RELATION_REF_Data sql.NullString
 	
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
@@ -88,6 +88,8 @@ type A_SPEC_RELATIONS_1WOP struct {
 	// insertion for WOP basic fields
 
 	Name string `xlsx:"1"`
+
+	SPEC_RELATION_REF string `xlsx:"2"`
 	// insertion for WOP pointer fields
 }
 
@@ -95,6 +97,7 @@ var A_SPEC_RELATIONS_1_Fields = []string{
 	// insertion for WOP basic fields
 	"ID",
 	"Name",
+	"SPEC_RELATION_REF",
 }
 
 type BackRepoA_SPEC_RELATIONS_1Struct struct {
@@ -214,24 +217,6 @@ func (backRepoA_SPEC_RELATIONS_1 *BackRepoA_SPEC_RELATIONS_1Struct) CommitPhaseT
 		a_spec_relations_1DB.CopyBasicFieldsFromA_SPEC_RELATIONS_1(a_spec_relations_1)
 
 		// insertion point for translating pointers encodings into actual pointers
-		// 1. reset
-		a_spec_relations_1DB.A_SPEC_RELATIONS_1PointersEncoding.SPEC_RELATION = make([]int, 0)
-		// 2. encode
-		for _, spec_relationAssocEnd := range a_spec_relations_1.SPEC_RELATION {
-			spec_relationAssocEnd_DB :=
-				backRepo.BackRepoSPEC_RELATION.GetSPEC_RELATIONDBFromSPEC_RELATIONPtr(spec_relationAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the spec_relationAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if spec_relationAssocEnd_DB == nil {
-				continue
-			}
-			
-			a_spec_relations_1DB.A_SPEC_RELATIONS_1PointersEncoding.SPEC_RELATION =
-				append(a_spec_relations_1DB.A_SPEC_RELATIONS_1PointersEncoding.SPEC_RELATION, int(spec_relationAssocEnd_DB.ID))
-		}
-
 		query := backRepoA_SPEC_RELATIONS_1.db.Save(&a_spec_relations_1DB)
 		if query.Error != nil {
 			log.Fatalln(query.Error)
@@ -345,15 +330,6 @@ func (backRepoA_SPEC_RELATIONS_1 *BackRepoA_SPEC_RELATIONS_1Struct) CheckoutPhas
 func (a_spec_relations_1DB *A_SPEC_RELATIONS_1DB) DecodePointers(backRepo *BackRepoStruct, a_spec_relations_1 *models.A_SPEC_RELATIONS_1) {
 
 	// insertion point for checkout of pointer encoding
-	// This loop redeem a_spec_relations_1.SPEC_RELATION in the stage from the encode in the back repo
-	// It parses all SPEC_RELATIONDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	a_spec_relations_1.SPEC_RELATION = a_spec_relations_1.SPEC_RELATION[:0]
-	for _, _SPEC_RELATIONid := range a_spec_relations_1DB.A_SPEC_RELATIONS_1PointersEncoding.SPEC_RELATION {
-		a_spec_relations_1.SPEC_RELATION = append(a_spec_relations_1.SPEC_RELATION, backRepo.BackRepoSPEC_RELATION.Map_SPEC_RELATIONDBID_SPEC_RELATIONPtr[uint(_SPEC_RELATIONid)])
-	}
-
 	return
 }
 
@@ -390,6 +366,9 @@ func (a_spec_relations_1DB *A_SPEC_RELATIONS_1DB) CopyBasicFieldsFromA_SPEC_RELA
 
 	a_spec_relations_1DB.Name_Data.String = a_spec_relations_1.Name
 	a_spec_relations_1DB.Name_Data.Valid = true
+
+	a_spec_relations_1DB.SPEC_RELATION_REF_Data.String = a_spec_relations_1.SPEC_RELATION_REF
+	a_spec_relations_1DB.SPEC_RELATION_REF_Data.Valid = true
 }
 
 // CopyBasicFieldsFromA_SPEC_RELATIONS_1_WOP
@@ -398,6 +377,9 @@ func (a_spec_relations_1DB *A_SPEC_RELATIONS_1DB) CopyBasicFieldsFromA_SPEC_RELA
 
 	a_spec_relations_1DB.Name_Data.String = a_spec_relations_1.Name
 	a_spec_relations_1DB.Name_Data.Valid = true
+
+	a_spec_relations_1DB.SPEC_RELATION_REF_Data.String = a_spec_relations_1.SPEC_RELATION_REF
+	a_spec_relations_1DB.SPEC_RELATION_REF_Data.Valid = true
 }
 
 // CopyBasicFieldsFromA_SPEC_RELATIONS_1WOP
@@ -406,18 +388,23 @@ func (a_spec_relations_1DB *A_SPEC_RELATIONS_1DB) CopyBasicFieldsFromA_SPEC_RELA
 
 	a_spec_relations_1DB.Name_Data.String = a_spec_relations_1.Name
 	a_spec_relations_1DB.Name_Data.Valid = true
+
+	a_spec_relations_1DB.SPEC_RELATION_REF_Data.String = a_spec_relations_1.SPEC_RELATION_REF
+	a_spec_relations_1DB.SPEC_RELATION_REF_Data.Valid = true
 }
 
 // CopyBasicFieldsToA_SPEC_RELATIONS_1
 func (a_spec_relations_1DB *A_SPEC_RELATIONS_1DB) CopyBasicFieldsToA_SPEC_RELATIONS_1(a_spec_relations_1 *models.A_SPEC_RELATIONS_1) {
 	// insertion point for checkout of basic fields (back repo to stage)
 	a_spec_relations_1.Name = a_spec_relations_1DB.Name_Data.String
+	a_spec_relations_1.SPEC_RELATION_REF = a_spec_relations_1DB.SPEC_RELATION_REF_Data.String
 }
 
 // CopyBasicFieldsToA_SPEC_RELATIONS_1_WOP
 func (a_spec_relations_1DB *A_SPEC_RELATIONS_1DB) CopyBasicFieldsToA_SPEC_RELATIONS_1_WOP(a_spec_relations_1 *models.A_SPEC_RELATIONS_1_WOP) {
 	// insertion point for checkout of basic fields (back repo to stage)
 	a_spec_relations_1.Name = a_spec_relations_1DB.Name_Data.String
+	a_spec_relations_1.SPEC_RELATION_REF = a_spec_relations_1DB.SPEC_RELATION_REF_Data.String
 }
 
 // CopyBasicFieldsToA_SPEC_RELATIONS_1WOP
@@ -425,6 +412,7 @@ func (a_spec_relations_1DB *A_SPEC_RELATIONS_1DB) CopyBasicFieldsToA_SPEC_RELATI
 	a_spec_relations_1.ID = int(a_spec_relations_1DB.ID)
 	// insertion point for checkout of basic fields (back repo to stage)
 	a_spec_relations_1.Name = a_spec_relations_1DB.Name_Data.String
+	a_spec_relations_1.SPEC_RELATION_REF = a_spec_relations_1DB.SPEC_RELATION_REF_Data.String
 }
 
 // Backup generates a json file from a slice of all A_SPEC_RELATIONS_1DB instances in the backrepo

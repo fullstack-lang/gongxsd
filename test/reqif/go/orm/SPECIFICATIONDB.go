@@ -304,19 +304,19 @@ func (backRepoSPECIFICATION *BackRepoSPECIFICATIONStruct) CommitPhaseTwoInstance
 		// 1. reset
 		specificationDB.SPECIFICATIONPointersEncoding.TYPE = make([]int, 0)
 		// 2. encode
-		for _, a_type_10AssocEnd := range specification.TYPE {
-			a_type_10AssocEnd_DB :=
-				backRepo.BackRepoA_TYPE_10.GetA_TYPE_10DBFromA_TYPE_10Ptr(a_type_10AssocEnd)
+		for _, renamed_specification_type_ref_1AssocEnd := range specification.TYPE {
+			renamed_specification_type_ref_1AssocEnd_DB :=
+				backRepo.BackRepoRenamed_SPECIFICATION_TYPE_REF_1.GetRenamed_SPECIFICATION_TYPE_REF_1DBFromRenamed_SPECIFICATION_TYPE_REF_1Ptr(renamed_specification_type_ref_1AssocEnd)
 			
-			// the stage might be inconsistant, meaning that the a_type_10AssocEnd_DB might
+			// the stage might be inconsistant, meaning that the renamed_specification_type_ref_1AssocEnd_DB might
 			// be missing from the stage. In this case, the commit operation is robust
 			// An alternative would be to crash here to reveal the missing element.
-			if a_type_10AssocEnd_DB == nil {
+			if renamed_specification_type_ref_1AssocEnd_DB == nil {
 				continue
 			}
 			
 			specificationDB.SPECIFICATIONPointersEncoding.TYPE =
-				append(specificationDB.SPECIFICATIONPointersEncoding.TYPE, int(a_type_10AssocEnd_DB.ID))
+				append(specificationDB.SPECIFICATIONPointersEncoding.TYPE, int(renamed_specification_type_ref_1AssocEnd_DB.ID))
 		}
 
 		query := backRepoSPECIFICATION.db.Save(&specificationDB)
@@ -460,12 +460,12 @@ func (specificationDB *SPECIFICATIONDB) DecodePointers(backRepo *BackRepoStruct,
 	}
 
 	// This loop redeem specification.TYPE in the stage from the encode in the back repo
-	// It parses all A_TYPE_10DB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// It parses all Renamed_SPECIFICATION_TYPE_REF_1DB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance
 	// 1. reset the slice
 	specification.TYPE = specification.TYPE[:0]
-	for _, _A_TYPE_10id := range specificationDB.SPECIFICATIONPointersEncoding.TYPE {
-		specification.TYPE = append(specification.TYPE, backRepo.BackRepoA_TYPE_10.Map_A_TYPE_10DBID_A_TYPE_10Ptr[uint(_A_TYPE_10id)])
+	for _, _Renamed_SPECIFICATION_TYPE_REF_1id := range specificationDB.SPECIFICATIONPointersEncoding.TYPE {
+		specification.TYPE = append(specification.TYPE, backRepo.BackRepoRenamed_SPECIFICATION_TYPE_REF_1.Map_Renamed_SPECIFICATION_TYPE_REF_1DBID_Renamed_SPECIFICATION_TYPE_REF_1Ptr[uint(_Renamed_SPECIFICATION_TYPE_REF_1id)])
 	}
 
 	return

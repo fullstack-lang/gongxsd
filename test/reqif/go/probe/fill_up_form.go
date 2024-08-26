@@ -339,28 +339,6 @@ func FillUpForm[T models.Gongstruct](
 		{
 			var rf models.ReverseField
 			_ = rf
-			rf.GongstructName = "A_DEFAULT_VALUE_1"
-			rf.Fieldname = "ATTRIBUTE_VALUE_BOOLEAN"
-			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
-			if reverseFieldOwner != nil {
-				AssociationReverseFieldToForm(
-					reverseFieldOwner.(*models.A_DEFAULT_VALUE_1),
-					"ATTRIBUTE_VALUE_BOOLEAN",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			} else {
-				AssociationReverseFieldToForm[*models.A_DEFAULT_VALUE_1, *models.ATTRIBUTE_VALUE_BOOLEAN](
-					nil,
-					"ATTRIBUTE_VALUE_BOOLEAN",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			}
-		}
-		{
-			var rf models.ReverseField
-			_ = rf
 			rf.GongstructName = "A_VALUES_1"
 			rf.Fieldname = "ATTRIBUTE_VALUE_BOOLEAN"
 			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
@@ -380,6 +358,28 @@ func FillUpForm[T models.Gongstruct](
 					probe)
 			}
 		}
+		{
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "Renamed_ATTRIBUTE_VALUE_BOOLEAN_1"
+			rf.Fieldname = "ATTRIBUTE_VALUE_BOOLEAN"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.Renamed_ATTRIBUTE_VALUE_BOOLEAN_1),
+					"ATTRIBUTE_VALUE_BOOLEAN",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.Renamed_ATTRIBUTE_VALUE_BOOLEAN_1, *models.ATTRIBUTE_VALUE_BOOLEAN](
+					nil,
+					"ATTRIBUTE_VALUE_BOOLEAN",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
 
 	case *models.ATTRIBUTE_VALUE_DATE:
 		// insertion point
@@ -388,28 +388,6 @@ func FillUpForm[T models.Gongstruct](
 		BasicFieldtoForm("THE_VALUE", instanceWithInferedType.THE_VALUE, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
 		AssociationSliceToForm("DEFINITION", instanceWithInferedType, &instanceWithInferedType.DEFINITION, formGroup, probe)
-		{
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "A_DEFAULT_VALUE_3"
-			rf.Fieldname = "ATTRIBUTE_VALUE_DATE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
-			if reverseFieldOwner != nil {
-				AssociationReverseFieldToForm(
-					reverseFieldOwner.(*models.A_DEFAULT_VALUE_3),
-					"ATTRIBUTE_VALUE_DATE",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			} else {
-				AssociationReverseFieldToForm[*models.A_DEFAULT_VALUE_3, *models.ATTRIBUTE_VALUE_DATE](
-					nil,
-					"ATTRIBUTE_VALUE_DATE",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			}
-		}
 		{
 			var rf models.ReverseField
 			_ = rf
@@ -432,6 +410,28 @@ func FillUpForm[T models.Gongstruct](
 					probe)
 			}
 		}
+		{
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "Renamed_ATTRIBUTE_VALUE_DATE_1"
+			rf.Fieldname = "ATTRIBUTE_VALUE_DATE"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.Renamed_ATTRIBUTE_VALUE_DATE_1),
+					"ATTRIBUTE_VALUE_DATE",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.Renamed_ATTRIBUTE_VALUE_DATE_1, *models.ATTRIBUTE_VALUE_DATE](
+					nil,
+					"ATTRIBUTE_VALUE_DATE",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
 
 	case *models.ATTRIBUTE_VALUE_ENUMERATION:
 		// insertion point
@@ -439,28 +439,6 @@ func FillUpForm[T models.Gongstruct](
 			false, false, 0, false, 0)
 		AssociationSliceToForm("DEFINITION", instanceWithInferedType, &instanceWithInferedType.DEFINITION, formGroup, probe)
 		AssociationSliceToForm("VALUES", instanceWithInferedType, &instanceWithInferedType.VALUES, formGroup, probe)
-		{
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "A_DEFAULT_VALUE_5"
-			rf.Fieldname = "ATTRIBUTE_VALUE_ENUMERATION"
-			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
-			if reverseFieldOwner != nil {
-				AssociationReverseFieldToForm(
-					reverseFieldOwner.(*models.A_DEFAULT_VALUE_5),
-					"ATTRIBUTE_VALUE_ENUMERATION",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			} else {
-				AssociationReverseFieldToForm[*models.A_DEFAULT_VALUE_5, *models.ATTRIBUTE_VALUE_ENUMERATION](
-					nil,
-					"ATTRIBUTE_VALUE_ENUMERATION",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			}
-		}
 		{
 			var rf models.ReverseField
 			_ = rf
@@ -483,6 +461,28 @@ func FillUpForm[T models.Gongstruct](
 					probe)
 			}
 		}
+		{
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "Renamed_ATTRIBUTE_VALUE_ENUMERATION_1"
+			rf.Fieldname = "ATTRIBUTE_VALUE_ENUMERATION"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.Renamed_ATTRIBUTE_VALUE_ENUMERATION_1),
+					"ATTRIBUTE_VALUE_ENUMERATION",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.Renamed_ATTRIBUTE_VALUE_ENUMERATION_1, *models.ATTRIBUTE_VALUE_ENUMERATION](
+					nil,
+					"ATTRIBUTE_VALUE_ENUMERATION",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
 
 	case *models.ATTRIBUTE_VALUE_INTEGER:
 		// insertion point
@@ -491,28 +491,6 @@ func FillUpForm[T models.Gongstruct](
 		BasicFieldtoForm("THE_VALUE", instanceWithInferedType.THE_VALUE, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
 		AssociationSliceToForm("DEFINITION", instanceWithInferedType, &instanceWithInferedType.DEFINITION, formGroup, probe)
-		{
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "A_DEFAULT_VALUE_6"
-			rf.Fieldname = "ATTRIBUTE_VALUE_INTEGER"
-			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
-			if reverseFieldOwner != nil {
-				AssociationReverseFieldToForm(
-					reverseFieldOwner.(*models.A_DEFAULT_VALUE_6),
-					"ATTRIBUTE_VALUE_INTEGER",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			} else {
-				AssociationReverseFieldToForm[*models.A_DEFAULT_VALUE_6, *models.ATTRIBUTE_VALUE_INTEGER](
-					nil,
-					"ATTRIBUTE_VALUE_INTEGER",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			}
-		}
 		{
 			var rf models.ReverseField
 			_ = rf
@@ -535,6 +513,28 @@ func FillUpForm[T models.Gongstruct](
 					probe)
 			}
 		}
+		{
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "Renamed_ATTRIBUTE_VALUE_INTEGER_1"
+			rf.Fieldname = "ATTRIBUTE_VALUE_INTEGER"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.Renamed_ATTRIBUTE_VALUE_INTEGER_1),
+					"ATTRIBUTE_VALUE_INTEGER",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.Renamed_ATTRIBUTE_VALUE_INTEGER_1, *models.ATTRIBUTE_VALUE_INTEGER](
+					nil,
+					"ATTRIBUTE_VALUE_INTEGER",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
 
 	case *models.ATTRIBUTE_VALUE_REAL:
 		// insertion point
@@ -543,28 +543,6 @@ func FillUpForm[T models.Gongstruct](
 		BasicFieldtoForm("THE_VALUE", instanceWithInferedType.THE_VALUE, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
 		AssociationSliceToForm("DEFINITION", instanceWithInferedType, &instanceWithInferedType.DEFINITION, formGroup, probe)
-		{
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "A_DEFAULT_VALUE_4"
-			rf.Fieldname = "ATTRIBUTE_VALUE_REAL"
-			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
-			if reverseFieldOwner != nil {
-				AssociationReverseFieldToForm(
-					reverseFieldOwner.(*models.A_DEFAULT_VALUE_4),
-					"ATTRIBUTE_VALUE_REAL",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			} else {
-				AssociationReverseFieldToForm[*models.A_DEFAULT_VALUE_4, *models.ATTRIBUTE_VALUE_REAL](
-					nil,
-					"ATTRIBUTE_VALUE_REAL",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			}
-		}
 		{
 			var rf models.ReverseField
 			_ = rf
@@ -587,6 +565,28 @@ func FillUpForm[T models.Gongstruct](
 					probe)
 			}
 		}
+		{
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "Renamed_ATTRIBUTE_VALUE_REAL_1"
+			rf.Fieldname = "ATTRIBUTE_VALUE_REAL"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.Renamed_ATTRIBUTE_VALUE_REAL_1),
+					"ATTRIBUTE_VALUE_REAL",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.Renamed_ATTRIBUTE_VALUE_REAL_1, *models.ATTRIBUTE_VALUE_REAL](
+					nil,
+					"ATTRIBUTE_VALUE_REAL",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
 
 	case *models.ATTRIBUTE_VALUE_STRING:
 		// insertion point
@@ -595,28 +595,6 @@ func FillUpForm[T models.Gongstruct](
 		BasicFieldtoForm("THE_VALUE", instanceWithInferedType.THE_VALUE, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
 		AssociationSliceToForm("DEFINITION", instanceWithInferedType, &instanceWithInferedType.DEFINITION, formGroup, probe)
-		{
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "A_DEFAULT_VALUE"
-			rf.Fieldname = "ATTRIBUTE_VALUE_STRING"
-			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
-			if reverseFieldOwner != nil {
-				AssociationReverseFieldToForm(
-					reverseFieldOwner.(*models.A_DEFAULT_VALUE),
-					"ATTRIBUTE_VALUE_STRING",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			} else {
-				AssociationReverseFieldToForm[*models.A_DEFAULT_VALUE, *models.ATTRIBUTE_VALUE_STRING](
-					nil,
-					"ATTRIBUTE_VALUE_STRING",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			}
-		}
 		{
 			var rf models.ReverseField
 			_ = rf
@@ -639,6 +617,28 @@ func FillUpForm[T models.Gongstruct](
 					probe)
 			}
 		}
+		{
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "Renamed_ATTRIBUTE_VALUE_STRING_1"
+			rf.Fieldname = "ATTRIBUTE_VALUE_STRING"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.Renamed_ATTRIBUTE_VALUE_STRING_1),
+					"ATTRIBUTE_VALUE_STRING",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.Renamed_ATTRIBUTE_VALUE_STRING_1, *models.ATTRIBUTE_VALUE_STRING](
+					nil,
+					"ATTRIBUTE_VALUE_STRING",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
 
 	case *models.ATTRIBUTE_VALUE_XHTML:
 		// insertion point
@@ -649,28 +649,6 @@ func FillUpForm[T models.Gongstruct](
 		AssociationSliceToForm("THE_VALUE", instanceWithInferedType, &instanceWithInferedType.THE_VALUE, formGroup, probe)
 		AssociationSliceToForm("THE_ORIGINAL_VALUE", instanceWithInferedType, &instanceWithInferedType.THE_ORIGINAL_VALUE, formGroup, probe)
 		AssociationSliceToForm("DEFINITION", instanceWithInferedType, &instanceWithInferedType.DEFINITION, formGroup, probe)
-		{
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "A_DEFAULT_VALUE_2"
-			rf.Fieldname = "ATTRIBUTE_VALUE_XHTML"
-			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
-			if reverseFieldOwner != nil {
-				AssociationReverseFieldToForm(
-					reverseFieldOwner.(*models.A_DEFAULT_VALUE_2),
-					"ATTRIBUTE_VALUE_XHTML",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			} else {
-				AssociationReverseFieldToForm[*models.A_DEFAULT_VALUE_2, *models.ATTRIBUTE_VALUE_XHTML](
-					nil,
-					"ATTRIBUTE_VALUE_XHTML",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			}
-		}
 		{
 			var rf models.ReverseField
 			_ = rf
@@ -686,6 +664,28 @@ func FillUpForm[T models.Gongstruct](
 					probe)
 			} else {
 				AssociationReverseFieldToForm[*models.A_VALUES_1, *models.ATTRIBUTE_VALUE_XHTML](
+					nil,
+					"ATTRIBUTE_VALUE_XHTML",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
+		{
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "Renamed_ATTRIBUTE_VALUE_XHTML_1"
+			rf.Fieldname = "ATTRIBUTE_VALUE_XHTML"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.Renamed_ATTRIBUTE_VALUE_XHTML_1),
+					"ATTRIBUTE_VALUE_XHTML",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.Renamed_ATTRIBUTE_VALUE_XHTML_1, *models.ATTRIBUTE_VALUE_XHTML](
 					nil,
 					"ATTRIBUTE_VALUE_XHTML",
 					instanceWithInferedType,
@@ -1340,405 +1340,6 @@ func FillUpForm[T models.Gongstruct](
 			}
 		}
 
-	case *models.A_DEFAULT_VALUE:
-		// insertion point
-		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		AssociationSliceToForm("ATTRIBUTE_VALUE_STRING", instanceWithInferedType, &instanceWithInferedType.ATTRIBUTE_VALUE_STRING, formGroup, probe)
-		{
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_DEFINITION_STRING"
-			rf.Fieldname = "DEFAULT_VALUE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
-			if reverseFieldOwner != nil {
-				AssociationReverseFieldToForm(
-					reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_STRING),
-					"DEFAULT_VALUE",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			} else {
-				AssociationReverseFieldToForm[*models.ATTRIBUTE_DEFINITION_STRING, *models.A_DEFAULT_VALUE](
-					nil,
-					"DEFAULT_VALUE",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			}
-		}
-
-	case *models.A_DEFAULT_VALUE_1:
-		// insertion point
-		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		AssociationSliceToForm("ATTRIBUTE_VALUE_BOOLEAN", instanceWithInferedType, &instanceWithInferedType.ATTRIBUTE_VALUE_BOOLEAN, formGroup, probe)
-		{
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_DEFINITION_BOOLEAN"
-			rf.Fieldname = "DEFAULT_VALUE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
-			if reverseFieldOwner != nil {
-				AssociationReverseFieldToForm(
-					reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_BOOLEAN),
-					"DEFAULT_VALUE",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			} else {
-				AssociationReverseFieldToForm[*models.ATTRIBUTE_DEFINITION_BOOLEAN, *models.A_DEFAULT_VALUE_1](
-					nil,
-					"DEFAULT_VALUE",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			}
-		}
-
-	case *models.A_DEFAULT_VALUE_2:
-		// insertion point
-		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		AssociationSliceToForm("ATTRIBUTE_VALUE_XHTML", instanceWithInferedType, &instanceWithInferedType.ATTRIBUTE_VALUE_XHTML, formGroup, probe)
-		{
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_DEFINITION_XHTML"
-			rf.Fieldname = "DEFAULT_VALUE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
-			if reverseFieldOwner != nil {
-				AssociationReverseFieldToForm(
-					reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_XHTML),
-					"DEFAULT_VALUE",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			} else {
-				AssociationReverseFieldToForm[*models.ATTRIBUTE_DEFINITION_XHTML, *models.A_DEFAULT_VALUE_2](
-					nil,
-					"DEFAULT_VALUE",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			}
-		}
-
-	case *models.A_DEFAULT_VALUE_3:
-		// insertion point
-		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		AssociationSliceToForm("ATTRIBUTE_VALUE_DATE", instanceWithInferedType, &instanceWithInferedType.ATTRIBUTE_VALUE_DATE, formGroup, probe)
-		{
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_DEFINITION_DATE"
-			rf.Fieldname = "DEFAULT_VALUE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
-			if reverseFieldOwner != nil {
-				AssociationReverseFieldToForm(
-					reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_DATE),
-					"DEFAULT_VALUE",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			} else {
-				AssociationReverseFieldToForm[*models.ATTRIBUTE_DEFINITION_DATE, *models.A_DEFAULT_VALUE_3](
-					nil,
-					"DEFAULT_VALUE",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			}
-		}
-
-	case *models.A_DEFAULT_VALUE_4:
-		// insertion point
-		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		AssociationSliceToForm("ATTRIBUTE_VALUE_REAL", instanceWithInferedType, &instanceWithInferedType.ATTRIBUTE_VALUE_REAL, formGroup, probe)
-		{
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_DEFINITION_REAL"
-			rf.Fieldname = "DEFAULT_VALUE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
-			if reverseFieldOwner != nil {
-				AssociationReverseFieldToForm(
-					reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_REAL),
-					"DEFAULT_VALUE",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			} else {
-				AssociationReverseFieldToForm[*models.ATTRIBUTE_DEFINITION_REAL, *models.A_DEFAULT_VALUE_4](
-					nil,
-					"DEFAULT_VALUE",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			}
-		}
-
-	case *models.A_DEFAULT_VALUE_5:
-		// insertion point
-		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		AssociationSliceToForm("ATTRIBUTE_VALUE_ENUMERATION", instanceWithInferedType, &instanceWithInferedType.ATTRIBUTE_VALUE_ENUMERATION, formGroup, probe)
-		{
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_DEFINITION_ENUMERATION"
-			rf.Fieldname = "DEFAULT_VALUE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
-			if reverseFieldOwner != nil {
-				AssociationReverseFieldToForm(
-					reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_ENUMERATION),
-					"DEFAULT_VALUE",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			} else {
-				AssociationReverseFieldToForm[*models.ATTRIBUTE_DEFINITION_ENUMERATION, *models.A_DEFAULT_VALUE_5](
-					nil,
-					"DEFAULT_VALUE",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			}
-		}
-
-	case *models.A_DEFAULT_VALUE_6:
-		// insertion point
-		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		AssociationSliceToForm("ATTRIBUTE_VALUE_INTEGER", instanceWithInferedType, &instanceWithInferedType.ATTRIBUTE_VALUE_INTEGER, formGroup, probe)
-		{
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_DEFINITION_INTEGER"
-			rf.Fieldname = "DEFAULT_VALUE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
-			if reverseFieldOwner != nil {
-				AssociationReverseFieldToForm(
-					reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_INTEGER),
-					"DEFAULT_VALUE",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			} else {
-				AssociationReverseFieldToForm[*models.ATTRIBUTE_DEFINITION_INTEGER, *models.A_DEFAULT_VALUE_6](
-					nil,
-					"DEFAULT_VALUE",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			}
-		}
-
-	case *models.A_DEFINITION:
-		// insertion point
-		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		BasicFieldtoForm("ATTRIBUTE_DEFINITION_INTEGER_REF", instanceWithInferedType.ATTRIBUTE_DEFINITION_INTEGER_REF, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		{
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_VALUE_INTEGER"
-			rf.Fieldname = "DEFINITION"
-			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
-			if reverseFieldOwner != nil {
-				AssociationReverseFieldToForm(
-					reverseFieldOwner.(*models.ATTRIBUTE_VALUE_INTEGER),
-					"DEFINITION",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			} else {
-				AssociationReverseFieldToForm[*models.ATTRIBUTE_VALUE_INTEGER, *models.A_DEFINITION](
-					nil,
-					"DEFINITION",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			}
-		}
-
-	case *models.A_DEFINITION_1:
-		// insertion point
-		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		BasicFieldtoForm("ATTRIBUTE_DEFINITION_XHTML_REF", instanceWithInferedType.ATTRIBUTE_DEFINITION_XHTML_REF, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		{
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_VALUE_XHTML"
-			rf.Fieldname = "DEFINITION"
-			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
-			if reverseFieldOwner != nil {
-				AssociationReverseFieldToForm(
-					reverseFieldOwner.(*models.ATTRIBUTE_VALUE_XHTML),
-					"DEFINITION",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			} else {
-				AssociationReverseFieldToForm[*models.ATTRIBUTE_VALUE_XHTML, *models.A_DEFINITION_1](
-					nil,
-					"DEFINITION",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			}
-		}
-
-	case *models.A_DEFINITION_2:
-		// insertion point
-		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		BasicFieldtoForm("ATTRIBUTE_DEFINITION_DATE_REF", instanceWithInferedType.ATTRIBUTE_DEFINITION_DATE_REF, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		{
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_VALUE_DATE"
-			rf.Fieldname = "DEFINITION"
-			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
-			if reverseFieldOwner != nil {
-				AssociationReverseFieldToForm(
-					reverseFieldOwner.(*models.ATTRIBUTE_VALUE_DATE),
-					"DEFINITION",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			} else {
-				AssociationReverseFieldToForm[*models.ATTRIBUTE_VALUE_DATE, *models.A_DEFINITION_2](
-					nil,
-					"DEFINITION",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			}
-		}
-
-	case *models.A_DEFINITION_3:
-		// insertion point
-		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		BasicFieldtoForm("ATTRIBUTE_DEFINITION_STRING_REF", instanceWithInferedType.ATTRIBUTE_DEFINITION_STRING_REF, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		{
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_VALUE_STRING"
-			rf.Fieldname = "DEFINITION"
-			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
-			if reverseFieldOwner != nil {
-				AssociationReverseFieldToForm(
-					reverseFieldOwner.(*models.ATTRIBUTE_VALUE_STRING),
-					"DEFINITION",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			} else {
-				AssociationReverseFieldToForm[*models.ATTRIBUTE_VALUE_STRING, *models.A_DEFINITION_3](
-					nil,
-					"DEFINITION",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			}
-		}
-
-	case *models.A_DEFINITION_4:
-		// insertion point
-		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		BasicFieldtoForm("ATTRIBUTE_DEFINITION_BOOLEAN_REF", instanceWithInferedType.ATTRIBUTE_DEFINITION_BOOLEAN_REF, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		{
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_VALUE_BOOLEAN"
-			rf.Fieldname = "DEFINITION"
-			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
-			if reverseFieldOwner != nil {
-				AssociationReverseFieldToForm(
-					reverseFieldOwner.(*models.ATTRIBUTE_VALUE_BOOLEAN),
-					"DEFINITION",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			} else {
-				AssociationReverseFieldToForm[*models.ATTRIBUTE_VALUE_BOOLEAN, *models.A_DEFINITION_4](
-					nil,
-					"DEFINITION",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			}
-		}
-
-	case *models.A_DEFINITION_5:
-		// insertion point
-		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		BasicFieldtoForm("ATTRIBUTE_DEFINITION_ENUMERATION_REF", instanceWithInferedType.ATTRIBUTE_DEFINITION_ENUMERATION_REF, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		{
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_VALUE_ENUMERATION"
-			rf.Fieldname = "DEFINITION"
-			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
-			if reverseFieldOwner != nil {
-				AssociationReverseFieldToForm(
-					reverseFieldOwner.(*models.ATTRIBUTE_VALUE_ENUMERATION),
-					"DEFINITION",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			} else {
-				AssociationReverseFieldToForm[*models.ATTRIBUTE_VALUE_ENUMERATION, *models.A_DEFINITION_5](
-					nil,
-					"DEFINITION",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			}
-		}
-
-	case *models.A_DEFINITION_6:
-		// insertion point
-		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		BasicFieldtoForm("ATTRIBUTE_DEFINITION_REAL_REF", instanceWithInferedType.ATTRIBUTE_DEFINITION_REAL_REF, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		{
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_VALUE_REAL"
-			rf.Fieldname = "DEFINITION"
-			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
-			if reverseFieldOwner != nil {
-				AssociationReverseFieldToForm(
-					reverseFieldOwner.(*models.ATTRIBUTE_VALUE_REAL),
-					"DEFINITION",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			} else {
-				AssociationReverseFieldToForm[*models.ATTRIBUTE_VALUE_REAL, *models.A_DEFINITION_6](
-					nil,
-					"DEFINITION",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			}
-		}
-
 	case *models.A_EDITABLE_ATTS:
 		// insertion point
 		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
@@ -2083,6 +1684,34 @@ func FillUpForm[T models.Gongstruct](
 		// insertion point
 		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
+		AssociationSliceToForm("SPEC_RELATION", instanceWithInferedType, &instanceWithInferedType.SPEC_RELATION, formGroup, probe)
+		{
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "REQ_IF_CONTENT"
+			rf.Fieldname = "SPEC_RELATIONS"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.REQ_IF_CONTENT),
+					"SPEC_RELATIONS",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.REQ_IF_CONTENT, *models.A_SPEC_RELATIONS](
+					nil,
+					"SPEC_RELATIONS",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
+
+	case *models.A_SPEC_RELATIONS_1:
+		// insertion point
+		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
 		BasicFieldtoForm("SPEC_RELATION_REF", instanceWithInferedType.SPEC_RELATION_REF, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
 		{
@@ -2099,35 +1728,7 @@ func FillUpForm[T models.Gongstruct](
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.RELATION_GROUP, *models.A_SPEC_RELATIONS](
-					nil,
-					"SPEC_RELATIONS",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			}
-		}
-
-	case *models.A_SPEC_RELATIONS_1:
-		// insertion point
-		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		AssociationSliceToForm("SPEC_RELATION", instanceWithInferedType, &instanceWithInferedType.SPEC_RELATION, formGroup, probe)
-		{
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "REQ_IF_CONTENT"
-			rf.Fieldname = "SPEC_RELATIONS"
-			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
-			if reverseFieldOwner != nil {
-				AssociationReverseFieldToForm(
-					reverseFieldOwner.(*models.REQ_IF_CONTENT),
-					"SPEC_RELATIONS",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			} else {
-				AssociationReverseFieldToForm[*models.REQ_IF_CONTENT, *models.A_SPEC_RELATIONS_1](
+				AssociationReverseFieldToForm[*models.RELATION_GROUP, *models.A_SPEC_RELATIONS_1](
 					nil,
 					"SPEC_RELATIONS",
 					instanceWithInferedType,
@@ -2245,325 +1846,6 @@ func FillUpForm[T models.Gongstruct](
 				AssociationReverseFieldToForm[*models.REQ_IF, *models.A_TOOL_EXTENSIONS](
 					nil,
 					"TOOL_EXTENSIONS",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			}
-		}
-
-	case *models.A_TYPE:
-		// insertion point
-		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		BasicFieldtoForm("DATATYPE_DEFINITION_DATE_REF", instanceWithInferedType.DATATYPE_DEFINITION_DATE_REF, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		{
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_DEFINITION_DATE"
-			rf.Fieldname = "TYPE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
-			if reverseFieldOwner != nil {
-				AssociationReverseFieldToForm(
-					reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_DATE),
-					"TYPE",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			} else {
-				AssociationReverseFieldToForm[*models.ATTRIBUTE_DEFINITION_DATE, *models.A_TYPE](
-					nil,
-					"TYPE",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			}
-		}
-
-	case *models.A_TYPE_1:
-		// insertion point
-		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		BasicFieldtoForm("RELATION_GROUP_TYPE_REF", instanceWithInferedType.RELATION_GROUP_TYPE_REF, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		{
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "RELATION_GROUP"
-			rf.Fieldname = "TYPE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
-			if reverseFieldOwner != nil {
-				AssociationReverseFieldToForm(
-					reverseFieldOwner.(*models.RELATION_GROUP),
-					"TYPE",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			} else {
-				AssociationReverseFieldToForm[*models.RELATION_GROUP, *models.A_TYPE_1](
-					nil,
-					"TYPE",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			}
-		}
-
-	case *models.A_TYPE_10:
-		// insertion point
-		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		BasicFieldtoForm("SPECIFICATION_TYPE_REF", instanceWithInferedType.SPECIFICATION_TYPE_REF, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		{
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "SPECIFICATION"
-			rf.Fieldname = "TYPE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
-			if reverseFieldOwner != nil {
-				AssociationReverseFieldToForm(
-					reverseFieldOwner.(*models.SPECIFICATION),
-					"TYPE",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			} else {
-				AssociationReverseFieldToForm[*models.SPECIFICATION, *models.A_TYPE_10](
-					nil,
-					"TYPE",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			}
-		}
-
-	case *models.A_TYPE_2:
-		// insertion point
-		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		BasicFieldtoForm("SPEC_OBJECT_TYPE_REF", instanceWithInferedType.SPEC_OBJECT_TYPE_REF, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		{
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "SPEC_OBJECT"
-			rf.Fieldname = "TYPE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
-			if reverseFieldOwner != nil {
-				AssociationReverseFieldToForm(
-					reverseFieldOwner.(*models.SPEC_OBJECT),
-					"TYPE",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			} else {
-				AssociationReverseFieldToForm[*models.SPEC_OBJECT, *models.A_TYPE_2](
-					nil,
-					"TYPE",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			}
-		}
-
-	case *models.A_TYPE_3:
-		// insertion point
-		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		BasicFieldtoForm("DATATYPE_DEFINITION_REAL_REF", instanceWithInferedType.DATATYPE_DEFINITION_REAL_REF, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		{
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_DEFINITION_REAL"
-			rf.Fieldname = "TYPE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
-			if reverseFieldOwner != nil {
-				AssociationReverseFieldToForm(
-					reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_REAL),
-					"TYPE",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			} else {
-				AssociationReverseFieldToForm[*models.ATTRIBUTE_DEFINITION_REAL, *models.A_TYPE_3](
-					nil,
-					"TYPE",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			}
-		}
-
-	case *models.A_TYPE_4:
-		// insertion point
-		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		BasicFieldtoForm("SPEC_RELATION_TYPE_REF", instanceWithInferedType.SPEC_RELATION_TYPE_REF, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		{
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "SPEC_RELATION"
-			rf.Fieldname = "TYPE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
-			if reverseFieldOwner != nil {
-				AssociationReverseFieldToForm(
-					reverseFieldOwner.(*models.SPEC_RELATION),
-					"TYPE",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			} else {
-				AssociationReverseFieldToForm[*models.SPEC_RELATION, *models.A_TYPE_4](
-					nil,
-					"TYPE",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			}
-		}
-
-	case *models.A_TYPE_5:
-		// insertion point
-		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		BasicFieldtoForm("DATATYPE_DEFINITION_INTEGER_REF", instanceWithInferedType.DATATYPE_DEFINITION_INTEGER_REF, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		{
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_DEFINITION_INTEGER"
-			rf.Fieldname = "TYPE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
-			if reverseFieldOwner != nil {
-				AssociationReverseFieldToForm(
-					reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_INTEGER),
-					"TYPE",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			} else {
-				AssociationReverseFieldToForm[*models.ATTRIBUTE_DEFINITION_INTEGER, *models.A_TYPE_5](
-					nil,
-					"TYPE",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			}
-		}
-
-	case *models.A_TYPE_6:
-		// insertion point
-		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		BasicFieldtoForm("DATATYPE_DEFINITION_XHTML_REF", instanceWithInferedType.DATATYPE_DEFINITION_XHTML_REF, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		{
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_DEFINITION_XHTML"
-			rf.Fieldname = "TYPE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
-			if reverseFieldOwner != nil {
-				AssociationReverseFieldToForm(
-					reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_XHTML),
-					"TYPE",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			} else {
-				AssociationReverseFieldToForm[*models.ATTRIBUTE_DEFINITION_XHTML, *models.A_TYPE_6](
-					nil,
-					"TYPE",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			}
-		}
-
-	case *models.A_TYPE_7:
-		// insertion point
-		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		BasicFieldtoForm("DATATYPE_DEFINITION_BOOLEAN_REF", instanceWithInferedType.DATATYPE_DEFINITION_BOOLEAN_REF, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		{
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_DEFINITION_BOOLEAN"
-			rf.Fieldname = "TYPE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
-			if reverseFieldOwner != nil {
-				AssociationReverseFieldToForm(
-					reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_BOOLEAN),
-					"TYPE",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			} else {
-				AssociationReverseFieldToForm[*models.ATTRIBUTE_DEFINITION_BOOLEAN, *models.A_TYPE_7](
-					nil,
-					"TYPE",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			}
-		}
-
-	case *models.A_TYPE_8:
-		// insertion point
-		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		BasicFieldtoForm("DATATYPE_DEFINITION_STRING_REF", instanceWithInferedType.DATATYPE_DEFINITION_STRING_REF, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		{
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_DEFINITION_STRING"
-			rf.Fieldname = "TYPE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
-			if reverseFieldOwner != nil {
-				AssociationReverseFieldToForm(
-					reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_STRING),
-					"TYPE",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			} else {
-				AssociationReverseFieldToForm[*models.ATTRIBUTE_DEFINITION_STRING, *models.A_TYPE_8](
-					nil,
-					"TYPE",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			}
-		}
-
-	case *models.A_TYPE_9:
-		// insertion point
-		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		BasicFieldtoForm("DATATYPE_DEFINITION_ENUMERATION_REF", instanceWithInferedType.DATATYPE_DEFINITION_ENUMERATION_REF, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		{
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_DEFINITION_ENUMERATION"
-			rf.Fieldname = "TYPE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
-			if reverseFieldOwner != nil {
-				AssociationReverseFieldToForm(
-					reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_ENUMERATION),
-					"TYPE",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			} else {
-				AssociationReverseFieldToForm[*models.ATTRIBUTE_DEFINITION_ENUMERATION, *models.A_TYPE_9](
-					nil,
-					"TYPE",
 					instanceWithInferedType,
 					formGroup,
 					probe)
@@ -3199,6 +2481,724 @@ func FillUpForm[T models.Gongstruct](
 			}
 		}
 
+	case *models.Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1:
+		// insertion point
+		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		BasicFieldtoForm("ATTRIBUTE_DEFINITION_BOOLEAN_REF", instanceWithInferedType.ATTRIBUTE_DEFINITION_BOOLEAN_REF, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		{
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "ATTRIBUTE_VALUE_BOOLEAN"
+			rf.Fieldname = "DEFINITION"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.ATTRIBUTE_VALUE_BOOLEAN),
+					"DEFINITION",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.ATTRIBUTE_VALUE_BOOLEAN, *models.Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1](
+					nil,
+					"DEFINITION",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
+
+	case *models.Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1:
+		// insertion point
+		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		BasicFieldtoForm("ATTRIBUTE_DEFINITION_DATE_REF", instanceWithInferedType.ATTRIBUTE_DEFINITION_DATE_REF, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		{
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "ATTRIBUTE_VALUE_DATE"
+			rf.Fieldname = "DEFINITION"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.ATTRIBUTE_VALUE_DATE),
+					"DEFINITION",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.ATTRIBUTE_VALUE_DATE, *models.Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1](
+					nil,
+					"DEFINITION",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
+
+	case *models.Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1:
+		// insertion point
+		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		BasicFieldtoForm("ATTRIBUTE_DEFINITION_ENUMERATION_REF", instanceWithInferedType.ATTRIBUTE_DEFINITION_ENUMERATION_REF, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		{
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "ATTRIBUTE_VALUE_ENUMERATION"
+			rf.Fieldname = "DEFINITION"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.ATTRIBUTE_VALUE_ENUMERATION),
+					"DEFINITION",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.ATTRIBUTE_VALUE_ENUMERATION, *models.Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1](
+					nil,
+					"DEFINITION",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
+
+	case *models.Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1:
+		// insertion point
+		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		BasicFieldtoForm("ATTRIBUTE_DEFINITION_INTEGER_REF", instanceWithInferedType.ATTRIBUTE_DEFINITION_INTEGER_REF, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		{
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "ATTRIBUTE_VALUE_INTEGER"
+			rf.Fieldname = "DEFINITION"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.ATTRIBUTE_VALUE_INTEGER),
+					"DEFINITION",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.ATTRIBUTE_VALUE_INTEGER, *models.Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1](
+					nil,
+					"DEFINITION",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
+
+	case *models.Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1:
+		// insertion point
+		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		BasicFieldtoForm("ATTRIBUTE_DEFINITION_REAL_REF", instanceWithInferedType.ATTRIBUTE_DEFINITION_REAL_REF, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		{
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "ATTRIBUTE_VALUE_REAL"
+			rf.Fieldname = "DEFINITION"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.ATTRIBUTE_VALUE_REAL),
+					"DEFINITION",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.ATTRIBUTE_VALUE_REAL, *models.Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1](
+					nil,
+					"DEFINITION",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
+
+	case *models.Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1:
+		// insertion point
+		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		BasicFieldtoForm("ATTRIBUTE_DEFINITION_STRING_REF", instanceWithInferedType.ATTRIBUTE_DEFINITION_STRING_REF, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		{
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "ATTRIBUTE_VALUE_STRING"
+			rf.Fieldname = "DEFINITION"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.ATTRIBUTE_VALUE_STRING),
+					"DEFINITION",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.ATTRIBUTE_VALUE_STRING, *models.Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1](
+					nil,
+					"DEFINITION",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
+
+	case *models.Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1:
+		// insertion point
+		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		BasicFieldtoForm("ATTRIBUTE_DEFINITION_XHTML_REF", instanceWithInferedType.ATTRIBUTE_DEFINITION_XHTML_REF, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		{
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "ATTRIBUTE_VALUE_XHTML"
+			rf.Fieldname = "DEFINITION"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.ATTRIBUTE_VALUE_XHTML),
+					"DEFINITION",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.ATTRIBUTE_VALUE_XHTML, *models.Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1](
+					nil,
+					"DEFINITION",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
+
+	case *models.Renamed_ATTRIBUTE_VALUE_BOOLEAN_1:
+		// insertion point
+		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		AssociationSliceToForm("ATTRIBUTE_VALUE_BOOLEAN", instanceWithInferedType, &instanceWithInferedType.ATTRIBUTE_VALUE_BOOLEAN, formGroup, probe)
+		{
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "ATTRIBUTE_DEFINITION_BOOLEAN"
+			rf.Fieldname = "DEFAULT_VALUE"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_BOOLEAN),
+					"DEFAULT_VALUE",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.ATTRIBUTE_DEFINITION_BOOLEAN, *models.Renamed_ATTRIBUTE_VALUE_BOOLEAN_1](
+					nil,
+					"DEFAULT_VALUE",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
+
+	case *models.Renamed_ATTRIBUTE_VALUE_DATE_1:
+		// insertion point
+		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		AssociationSliceToForm("ATTRIBUTE_VALUE_DATE", instanceWithInferedType, &instanceWithInferedType.ATTRIBUTE_VALUE_DATE, formGroup, probe)
+		{
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "ATTRIBUTE_DEFINITION_DATE"
+			rf.Fieldname = "DEFAULT_VALUE"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_DATE),
+					"DEFAULT_VALUE",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.ATTRIBUTE_DEFINITION_DATE, *models.Renamed_ATTRIBUTE_VALUE_DATE_1](
+					nil,
+					"DEFAULT_VALUE",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
+
+	case *models.Renamed_ATTRIBUTE_VALUE_ENUMERATION_1:
+		// insertion point
+		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		AssociationSliceToForm("ATTRIBUTE_VALUE_ENUMERATION", instanceWithInferedType, &instanceWithInferedType.ATTRIBUTE_VALUE_ENUMERATION, formGroup, probe)
+		{
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "ATTRIBUTE_DEFINITION_ENUMERATION"
+			rf.Fieldname = "DEFAULT_VALUE"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_ENUMERATION),
+					"DEFAULT_VALUE",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.ATTRIBUTE_DEFINITION_ENUMERATION, *models.Renamed_ATTRIBUTE_VALUE_ENUMERATION_1](
+					nil,
+					"DEFAULT_VALUE",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
+
+	case *models.Renamed_ATTRIBUTE_VALUE_INTEGER_1:
+		// insertion point
+		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		AssociationSliceToForm("ATTRIBUTE_VALUE_INTEGER", instanceWithInferedType, &instanceWithInferedType.ATTRIBUTE_VALUE_INTEGER, formGroup, probe)
+		{
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "ATTRIBUTE_DEFINITION_INTEGER"
+			rf.Fieldname = "DEFAULT_VALUE"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_INTEGER),
+					"DEFAULT_VALUE",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.ATTRIBUTE_DEFINITION_INTEGER, *models.Renamed_ATTRIBUTE_VALUE_INTEGER_1](
+					nil,
+					"DEFAULT_VALUE",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
+
+	case *models.Renamed_ATTRIBUTE_VALUE_REAL_1:
+		// insertion point
+		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		AssociationSliceToForm("ATTRIBUTE_VALUE_REAL", instanceWithInferedType, &instanceWithInferedType.ATTRIBUTE_VALUE_REAL, formGroup, probe)
+		{
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "ATTRIBUTE_DEFINITION_REAL"
+			rf.Fieldname = "DEFAULT_VALUE"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_REAL),
+					"DEFAULT_VALUE",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.ATTRIBUTE_DEFINITION_REAL, *models.Renamed_ATTRIBUTE_VALUE_REAL_1](
+					nil,
+					"DEFAULT_VALUE",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
+
+	case *models.Renamed_ATTRIBUTE_VALUE_STRING_1:
+		// insertion point
+		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		AssociationSliceToForm("ATTRIBUTE_VALUE_STRING", instanceWithInferedType, &instanceWithInferedType.ATTRIBUTE_VALUE_STRING, formGroup, probe)
+		{
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "ATTRIBUTE_DEFINITION_STRING"
+			rf.Fieldname = "DEFAULT_VALUE"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_STRING),
+					"DEFAULT_VALUE",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.ATTRIBUTE_DEFINITION_STRING, *models.Renamed_ATTRIBUTE_VALUE_STRING_1](
+					nil,
+					"DEFAULT_VALUE",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
+
+	case *models.Renamed_ATTRIBUTE_VALUE_XHTML_1:
+		// insertion point
+		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		AssociationSliceToForm("ATTRIBUTE_VALUE_XHTML", instanceWithInferedType, &instanceWithInferedType.ATTRIBUTE_VALUE_XHTML, formGroup, probe)
+		{
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "ATTRIBUTE_DEFINITION_XHTML"
+			rf.Fieldname = "DEFAULT_VALUE"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_XHTML),
+					"DEFAULT_VALUE",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.ATTRIBUTE_DEFINITION_XHTML, *models.Renamed_ATTRIBUTE_VALUE_XHTML_1](
+					nil,
+					"DEFAULT_VALUE",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
+
+	case *models.Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1:
+		// insertion point
+		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		BasicFieldtoForm("DATATYPE_DEFINITION_BOOLEAN_REF", instanceWithInferedType.DATATYPE_DEFINITION_BOOLEAN_REF, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		{
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "ATTRIBUTE_DEFINITION_BOOLEAN"
+			rf.Fieldname = "TYPE"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_BOOLEAN),
+					"TYPE",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.ATTRIBUTE_DEFINITION_BOOLEAN, *models.Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1](
+					nil,
+					"TYPE",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
+
+	case *models.Renamed_DATATYPE_DEFINITION_DATE_REF_1:
+		// insertion point
+		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		BasicFieldtoForm("DATATYPE_DEFINITION_DATE_REF", instanceWithInferedType.DATATYPE_DEFINITION_DATE_REF, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		{
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "ATTRIBUTE_DEFINITION_DATE"
+			rf.Fieldname = "TYPE"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_DATE),
+					"TYPE",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.ATTRIBUTE_DEFINITION_DATE, *models.Renamed_DATATYPE_DEFINITION_DATE_REF_1](
+					nil,
+					"TYPE",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
+
+	case *models.Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1:
+		// insertion point
+		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		BasicFieldtoForm("DATATYPE_DEFINITION_ENUMERATION_REF", instanceWithInferedType.DATATYPE_DEFINITION_ENUMERATION_REF, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		{
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "ATTRIBUTE_DEFINITION_ENUMERATION"
+			rf.Fieldname = "TYPE"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_ENUMERATION),
+					"TYPE",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.ATTRIBUTE_DEFINITION_ENUMERATION, *models.Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1](
+					nil,
+					"TYPE",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
+
+	case *models.Renamed_DATATYPE_DEFINITION_INTEGER_REF_1:
+		// insertion point
+		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		BasicFieldtoForm("DATATYPE_DEFINITION_INTEGER_REF", instanceWithInferedType.DATATYPE_DEFINITION_INTEGER_REF, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		{
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "ATTRIBUTE_DEFINITION_INTEGER"
+			rf.Fieldname = "TYPE"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_INTEGER),
+					"TYPE",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.ATTRIBUTE_DEFINITION_INTEGER, *models.Renamed_DATATYPE_DEFINITION_INTEGER_REF_1](
+					nil,
+					"TYPE",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
+
+	case *models.Renamed_DATATYPE_DEFINITION_REAL_REF_1:
+		// insertion point
+		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		BasicFieldtoForm("DATATYPE_DEFINITION_REAL_REF", instanceWithInferedType.DATATYPE_DEFINITION_REAL_REF, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		{
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "ATTRIBUTE_DEFINITION_REAL"
+			rf.Fieldname = "TYPE"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_REAL),
+					"TYPE",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.ATTRIBUTE_DEFINITION_REAL, *models.Renamed_DATATYPE_DEFINITION_REAL_REF_1](
+					nil,
+					"TYPE",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
+
+	case *models.Renamed_DATATYPE_DEFINITION_STRING_REF_1:
+		// insertion point
+		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		BasicFieldtoForm("DATATYPE_DEFINITION_STRING_REF", instanceWithInferedType.DATATYPE_DEFINITION_STRING_REF, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		{
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "ATTRIBUTE_DEFINITION_STRING"
+			rf.Fieldname = "TYPE"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_STRING),
+					"TYPE",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.ATTRIBUTE_DEFINITION_STRING, *models.Renamed_DATATYPE_DEFINITION_STRING_REF_1](
+					nil,
+					"TYPE",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
+
+	case *models.Renamed_DATATYPE_DEFINITION_XHTML_REF_1:
+		// insertion point
+		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		BasicFieldtoForm("DATATYPE_DEFINITION_XHTML_REF", instanceWithInferedType.DATATYPE_DEFINITION_XHTML_REF, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		{
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "ATTRIBUTE_DEFINITION_XHTML"
+			rf.Fieldname = "TYPE"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_XHTML),
+					"TYPE",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.ATTRIBUTE_DEFINITION_XHTML, *models.Renamed_DATATYPE_DEFINITION_XHTML_REF_1](
+					nil,
+					"TYPE",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
+
+	case *models.Renamed_RELATION_GROUP_TYPE_REF_1:
+		// insertion point
+		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		BasicFieldtoForm("RELATION_GROUP_TYPE_REF", instanceWithInferedType.RELATION_GROUP_TYPE_REF, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		{
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "RELATION_GROUP"
+			rf.Fieldname = "TYPE"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.RELATION_GROUP),
+					"TYPE",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.RELATION_GROUP, *models.Renamed_RELATION_GROUP_TYPE_REF_1](
+					nil,
+					"TYPE",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
+
+	case *models.Renamed_SPECIFICATION_TYPE_REF_1:
+		// insertion point
+		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		BasicFieldtoForm("SPECIFICATION_TYPE_REF", instanceWithInferedType.SPECIFICATION_TYPE_REF, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		{
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "SPECIFICATION"
+			rf.Fieldname = "TYPE"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.SPECIFICATION),
+					"TYPE",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.SPECIFICATION, *models.Renamed_SPECIFICATION_TYPE_REF_1](
+					nil,
+					"TYPE",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
+
+	case *models.Renamed_SPEC_OBJECT_TYPE_REF_1:
+		// insertion point
+		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		BasicFieldtoForm("SPEC_OBJECT_TYPE_REF", instanceWithInferedType.SPEC_OBJECT_TYPE_REF, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		{
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "SPEC_OBJECT"
+			rf.Fieldname = "TYPE"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.SPEC_OBJECT),
+					"TYPE",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.SPEC_OBJECT, *models.Renamed_SPEC_OBJECT_TYPE_REF_1](
+					nil,
+					"TYPE",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
+
+	case *models.Renamed_SPEC_RELATION_TYPE_REF_1:
+		// insertion point
+		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		BasicFieldtoForm("SPEC_RELATION_TYPE_REF", instanceWithInferedType.SPEC_RELATION_TYPE_REF, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		{
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "SPEC_RELATION"
+			rf.Fieldname = "TYPE"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.SPEC_RELATION),
+					"TYPE",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.SPEC_RELATION, *models.Renamed_SPEC_RELATION_TYPE_REF_1](
+					nil,
+					"TYPE",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
+
 	case *models.SPECIFICATION:
 		// insertion point
 		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
@@ -3412,18 +3412,18 @@ func FillUpForm[T models.Gongstruct](
 		{
 			var rf models.ReverseField
 			_ = rf
-			rf.GongstructName = "A_SPEC_RELATIONS_1"
+			rf.GongstructName = "A_SPEC_RELATIONS"
 			rf.Fieldname = "SPEC_RELATION"
 			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
 			if reverseFieldOwner != nil {
 				AssociationReverseFieldToForm(
-					reverseFieldOwner.(*models.A_SPEC_RELATIONS_1),
+					reverseFieldOwner.(*models.A_SPEC_RELATIONS),
 					"SPEC_RELATION",
 					instanceWithInferedType,
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.A_SPEC_RELATIONS_1, *models.SPEC_RELATION](
+				AssociationReverseFieldToForm[*models.A_SPEC_RELATIONS, *models.SPEC_RELATION](
 					nil,
 					"SPEC_RELATION",
 					instanceWithInferedType,

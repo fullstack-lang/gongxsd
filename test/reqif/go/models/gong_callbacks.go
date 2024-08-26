@@ -82,62 +82,6 @@ func AfterCreateFromFront[Type Gongstruct](stage *StageStruct, instance *Type) {
 		if stage.OnAfterA_DATATYPESCreateCallback != nil {
 			stage.OnAfterA_DATATYPESCreateCallback.OnAfterCreate(stage, target)
 		}
-	case *A_DEFAULT_VALUE:
-		if stage.OnAfterA_DEFAULT_VALUECreateCallback != nil {
-			stage.OnAfterA_DEFAULT_VALUECreateCallback.OnAfterCreate(stage, target)
-		}
-	case *A_DEFAULT_VALUE_1:
-		if stage.OnAfterA_DEFAULT_VALUE_1CreateCallback != nil {
-			stage.OnAfterA_DEFAULT_VALUE_1CreateCallback.OnAfterCreate(stage, target)
-		}
-	case *A_DEFAULT_VALUE_2:
-		if stage.OnAfterA_DEFAULT_VALUE_2CreateCallback != nil {
-			stage.OnAfterA_DEFAULT_VALUE_2CreateCallback.OnAfterCreate(stage, target)
-		}
-	case *A_DEFAULT_VALUE_3:
-		if stage.OnAfterA_DEFAULT_VALUE_3CreateCallback != nil {
-			stage.OnAfterA_DEFAULT_VALUE_3CreateCallback.OnAfterCreate(stage, target)
-		}
-	case *A_DEFAULT_VALUE_4:
-		if stage.OnAfterA_DEFAULT_VALUE_4CreateCallback != nil {
-			stage.OnAfterA_DEFAULT_VALUE_4CreateCallback.OnAfterCreate(stage, target)
-		}
-	case *A_DEFAULT_VALUE_5:
-		if stage.OnAfterA_DEFAULT_VALUE_5CreateCallback != nil {
-			stage.OnAfterA_DEFAULT_VALUE_5CreateCallback.OnAfterCreate(stage, target)
-		}
-	case *A_DEFAULT_VALUE_6:
-		if stage.OnAfterA_DEFAULT_VALUE_6CreateCallback != nil {
-			stage.OnAfterA_DEFAULT_VALUE_6CreateCallback.OnAfterCreate(stage, target)
-		}
-	case *A_DEFINITION:
-		if stage.OnAfterA_DEFINITIONCreateCallback != nil {
-			stage.OnAfterA_DEFINITIONCreateCallback.OnAfterCreate(stage, target)
-		}
-	case *A_DEFINITION_1:
-		if stage.OnAfterA_DEFINITION_1CreateCallback != nil {
-			stage.OnAfterA_DEFINITION_1CreateCallback.OnAfterCreate(stage, target)
-		}
-	case *A_DEFINITION_2:
-		if stage.OnAfterA_DEFINITION_2CreateCallback != nil {
-			stage.OnAfterA_DEFINITION_2CreateCallback.OnAfterCreate(stage, target)
-		}
-	case *A_DEFINITION_3:
-		if stage.OnAfterA_DEFINITION_3CreateCallback != nil {
-			stage.OnAfterA_DEFINITION_3CreateCallback.OnAfterCreate(stage, target)
-		}
-	case *A_DEFINITION_4:
-		if stage.OnAfterA_DEFINITION_4CreateCallback != nil {
-			stage.OnAfterA_DEFINITION_4CreateCallback.OnAfterCreate(stage, target)
-		}
-	case *A_DEFINITION_5:
-		if stage.OnAfterA_DEFINITION_5CreateCallback != nil {
-			stage.OnAfterA_DEFINITION_5CreateCallback.OnAfterCreate(stage, target)
-		}
-	case *A_DEFINITION_6:
-		if stage.OnAfterA_DEFINITION_6CreateCallback != nil {
-			stage.OnAfterA_DEFINITION_6CreateCallback.OnAfterCreate(stage, target)
-		}
 	case *A_EDITABLE_ATTS:
 		if stage.OnAfterA_EDITABLE_ATTSCreateCallback != nil {
 			stage.OnAfterA_EDITABLE_ATTSCreateCallback.OnAfterCreate(stage, target)
@@ -197,50 +141,6 @@ func AfterCreateFromFront[Type Gongstruct](stage *StageStruct, instance *Type) {
 	case *A_TOOL_EXTENSIONS:
 		if stage.OnAfterA_TOOL_EXTENSIONSCreateCallback != nil {
 			stage.OnAfterA_TOOL_EXTENSIONSCreateCallback.OnAfterCreate(stage, target)
-		}
-	case *A_TYPE:
-		if stage.OnAfterA_TYPECreateCallback != nil {
-			stage.OnAfterA_TYPECreateCallback.OnAfterCreate(stage, target)
-		}
-	case *A_TYPE_1:
-		if stage.OnAfterA_TYPE_1CreateCallback != nil {
-			stage.OnAfterA_TYPE_1CreateCallback.OnAfterCreate(stage, target)
-		}
-	case *A_TYPE_10:
-		if stage.OnAfterA_TYPE_10CreateCallback != nil {
-			stage.OnAfterA_TYPE_10CreateCallback.OnAfterCreate(stage, target)
-		}
-	case *A_TYPE_2:
-		if stage.OnAfterA_TYPE_2CreateCallback != nil {
-			stage.OnAfterA_TYPE_2CreateCallback.OnAfterCreate(stage, target)
-		}
-	case *A_TYPE_3:
-		if stage.OnAfterA_TYPE_3CreateCallback != nil {
-			stage.OnAfterA_TYPE_3CreateCallback.OnAfterCreate(stage, target)
-		}
-	case *A_TYPE_4:
-		if stage.OnAfterA_TYPE_4CreateCallback != nil {
-			stage.OnAfterA_TYPE_4CreateCallback.OnAfterCreate(stage, target)
-		}
-	case *A_TYPE_5:
-		if stage.OnAfterA_TYPE_5CreateCallback != nil {
-			stage.OnAfterA_TYPE_5CreateCallback.OnAfterCreate(stage, target)
-		}
-	case *A_TYPE_6:
-		if stage.OnAfterA_TYPE_6CreateCallback != nil {
-			stage.OnAfterA_TYPE_6CreateCallback.OnAfterCreate(stage, target)
-		}
-	case *A_TYPE_7:
-		if stage.OnAfterA_TYPE_7CreateCallback != nil {
-			stage.OnAfterA_TYPE_7CreateCallback.OnAfterCreate(stage, target)
-		}
-	case *A_TYPE_8:
-		if stage.OnAfterA_TYPE_8CreateCallback != nil {
-			stage.OnAfterA_TYPE_8CreateCallback.OnAfterCreate(stage, target)
-		}
-	case *A_TYPE_9:
-		if stage.OnAfterA_TYPE_9CreateCallback != nil {
-			stage.OnAfterA_TYPE_9CreateCallback.OnAfterCreate(stage, target)
 		}
 	case *A_VALUES:
 		if stage.OnAfterA_VALUESCreateCallback != nil {
@@ -309,6 +209,106 @@ func AfterCreateFromFront[Type Gongstruct](stage *StageStruct, instance *Type) {
 	case *REQ_IF_TOOL_EXTENSION:
 		if stage.OnAfterREQ_IF_TOOL_EXTENSIONCreateCallback != nil {
 			stage.OnAfterREQ_IF_TOOL_EXTENSIONCreateCallback.OnAfterCreate(stage, target)
+		}
+	case *Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1:
+		if stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1CreateCallback != nil {
+			stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1CreateCallback.OnAfterCreate(stage, target)
+		}
+	case *Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1:
+		if stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_DATE_REF_1CreateCallback != nil {
+			stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_DATE_REF_1CreateCallback.OnAfterCreate(stage, target)
+		}
+	case *Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1:
+		if stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1CreateCallback != nil {
+			stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1CreateCallback.OnAfterCreate(stage, target)
+		}
+	case *Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1:
+		if stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1CreateCallback != nil {
+			stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1CreateCallback.OnAfterCreate(stage, target)
+		}
+	case *Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1:
+		if stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_REAL_REF_1CreateCallback != nil {
+			stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_REAL_REF_1CreateCallback.OnAfterCreate(stage, target)
+		}
+	case *Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1:
+		if stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_STRING_REF_1CreateCallback != nil {
+			stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_STRING_REF_1CreateCallback.OnAfterCreate(stage, target)
+		}
+	case *Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1:
+		if stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_XHTML_REF_1CreateCallback != nil {
+			stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_XHTML_REF_1CreateCallback.OnAfterCreate(stage, target)
+		}
+	case *Renamed_ATTRIBUTE_VALUE_BOOLEAN_1:
+		if stage.OnAfterRenamed_ATTRIBUTE_VALUE_BOOLEAN_1CreateCallback != nil {
+			stage.OnAfterRenamed_ATTRIBUTE_VALUE_BOOLEAN_1CreateCallback.OnAfterCreate(stage, target)
+		}
+	case *Renamed_ATTRIBUTE_VALUE_DATE_1:
+		if stage.OnAfterRenamed_ATTRIBUTE_VALUE_DATE_1CreateCallback != nil {
+			stage.OnAfterRenamed_ATTRIBUTE_VALUE_DATE_1CreateCallback.OnAfterCreate(stage, target)
+		}
+	case *Renamed_ATTRIBUTE_VALUE_ENUMERATION_1:
+		if stage.OnAfterRenamed_ATTRIBUTE_VALUE_ENUMERATION_1CreateCallback != nil {
+			stage.OnAfterRenamed_ATTRIBUTE_VALUE_ENUMERATION_1CreateCallback.OnAfterCreate(stage, target)
+		}
+	case *Renamed_ATTRIBUTE_VALUE_INTEGER_1:
+		if stage.OnAfterRenamed_ATTRIBUTE_VALUE_INTEGER_1CreateCallback != nil {
+			stage.OnAfterRenamed_ATTRIBUTE_VALUE_INTEGER_1CreateCallback.OnAfterCreate(stage, target)
+		}
+	case *Renamed_ATTRIBUTE_VALUE_REAL_1:
+		if stage.OnAfterRenamed_ATTRIBUTE_VALUE_REAL_1CreateCallback != nil {
+			stage.OnAfterRenamed_ATTRIBUTE_VALUE_REAL_1CreateCallback.OnAfterCreate(stage, target)
+		}
+	case *Renamed_ATTRIBUTE_VALUE_STRING_1:
+		if stage.OnAfterRenamed_ATTRIBUTE_VALUE_STRING_1CreateCallback != nil {
+			stage.OnAfterRenamed_ATTRIBUTE_VALUE_STRING_1CreateCallback.OnAfterCreate(stage, target)
+		}
+	case *Renamed_ATTRIBUTE_VALUE_XHTML_1:
+		if stage.OnAfterRenamed_ATTRIBUTE_VALUE_XHTML_1CreateCallback != nil {
+			stage.OnAfterRenamed_ATTRIBUTE_VALUE_XHTML_1CreateCallback.OnAfterCreate(stage, target)
+		}
+	case *Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1:
+		if stage.OnAfterRenamed_DATATYPE_DEFINITION_BOOLEAN_REF_1CreateCallback != nil {
+			stage.OnAfterRenamed_DATATYPE_DEFINITION_BOOLEAN_REF_1CreateCallback.OnAfterCreate(stage, target)
+		}
+	case *Renamed_DATATYPE_DEFINITION_DATE_REF_1:
+		if stage.OnAfterRenamed_DATATYPE_DEFINITION_DATE_REF_1CreateCallback != nil {
+			stage.OnAfterRenamed_DATATYPE_DEFINITION_DATE_REF_1CreateCallback.OnAfterCreate(stage, target)
+		}
+	case *Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1:
+		if stage.OnAfterRenamed_DATATYPE_DEFINITION_ENUMERATION_REF_1CreateCallback != nil {
+			stage.OnAfterRenamed_DATATYPE_DEFINITION_ENUMERATION_REF_1CreateCallback.OnAfterCreate(stage, target)
+		}
+	case *Renamed_DATATYPE_DEFINITION_INTEGER_REF_1:
+		if stage.OnAfterRenamed_DATATYPE_DEFINITION_INTEGER_REF_1CreateCallback != nil {
+			stage.OnAfterRenamed_DATATYPE_DEFINITION_INTEGER_REF_1CreateCallback.OnAfterCreate(stage, target)
+		}
+	case *Renamed_DATATYPE_DEFINITION_REAL_REF_1:
+		if stage.OnAfterRenamed_DATATYPE_DEFINITION_REAL_REF_1CreateCallback != nil {
+			stage.OnAfterRenamed_DATATYPE_DEFINITION_REAL_REF_1CreateCallback.OnAfterCreate(stage, target)
+		}
+	case *Renamed_DATATYPE_DEFINITION_STRING_REF_1:
+		if stage.OnAfterRenamed_DATATYPE_DEFINITION_STRING_REF_1CreateCallback != nil {
+			stage.OnAfterRenamed_DATATYPE_DEFINITION_STRING_REF_1CreateCallback.OnAfterCreate(stage, target)
+		}
+	case *Renamed_DATATYPE_DEFINITION_XHTML_REF_1:
+		if stage.OnAfterRenamed_DATATYPE_DEFINITION_XHTML_REF_1CreateCallback != nil {
+			stage.OnAfterRenamed_DATATYPE_DEFINITION_XHTML_REF_1CreateCallback.OnAfterCreate(stage, target)
+		}
+	case *Renamed_RELATION_GROUP_TYPE_REF_1:
+		if stage.OnAfterRenamed_RELATION_GROUP_TYPE_REF_1CreateCallback != nil {
+			stage.OnAfterRenamed_RELATION_GROUP_TYPE_REF_1CreateCallback.OnAfterCreate(stage, target)
+		}
+	case *Renamed_SPECIFICATION_TYPE_REF_1:
+		if stage.OnAfterRenamed_SPECIFICATION_TYPE_REF_1CreateCallback != nil {
+			stage.OnAfterRenamed_SPECIFICATION_TYPE_REF_1CreateCallback.OnAfterCreate(stage, target)
+		}
+	case *Renamed_SPEC_OBJECT_TYPE_REF_1:
+		if stage.OnAfterRenamed_SPEC_OBJECT_TYPE_REF_1CreateCallback != nil {
+			stage.OnAfterRenamed_SPEC_OBJECT_TYPE_REF_1CreateCallback.OnAfterCreate(stage, target)
+		}
+	case *Renamed_SPEC_RELATION_TYPE_REF_1:
+		if stage.OnAfterRenamed_SPEC_RELATION_TYPE_REF_1CreateCallback != nil {
+			stage.OnAfterRenamed_SPEC_RELATION_TYPE_REF_1CreateCallback.OnAfterCreate(stage, target)
 		}
 	case *SPECIFICATION:
 		if stage.OnAfterSPECIFICATIONCreateCallback != nil {
@@ -447,76 +447,6 @@ func AfterUpdateFromFront[Type Gongstruct](stage *StageStruct, old, new *Type) {
 		if stage.OnAfterA_DATATYPESUpdateCallback != nil {
 			stage.OnAfterA_DATATYPESUpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
 		}
-	case *A_DEFAULT_VALUE:
-		newTarget := any(new).(*A_DEFAULT_VALUE)
-		if stage.OnAfterA_DEFAULT_VALUEUpdateCallback != nil {
-			stage.OnAfterA_DEFAULT_VALUEUpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
-		}
-	case *A_DEFAULT_VALUE_1:
-		newTarget := any(new).(*A_DEFAULT_VALUE_1)
-		if stage.OnAfterA_DEFAULT_VALUE_1UpdateCallback != nil {
-			stage.OnAfterA_DEFAULT_VALUE_1UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
-		}
-	case *A_DEFAULT_VALUE_2:
-		newTarget := any(new).(*A_DEFAULT_VALUE_2)
-		if stage.OnAfterA_DEFAULT_VALUE_2UpdateCallback != nil {
-			stage.OnAfterA_DEFAULT_VALUE_2UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
-		}
-	case *A_DEFAULT_VALUE_3:
-		newTarget := any(new).(*A_DEFAULT_VALUE_3)
-		if stage.OnAfterA_DEFAULT_VALUE_3UpdateCallback != nil {
-			stage.OnAfterA_DEFAULT_VALUE_3UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
-		}
-	case *A_DEFAULT_VALUE_4:
-		newTarget := any(new).(*A_DEFAULT_VALUE_4)
-		if stage.OnAfterA_DEFAULT_VALUE_4UpdateCallback != nil {
-			stage.OnAfterA_DEFAULT_VALUE_4UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
-		}
-	case *A_DEFAULT_VALUE_5:
-		newTarget := any(new).(*A_DEFAULT_VALUE_5)
-		if stage.OnAfterA_DEFAULT_VALUE_5UpdateCallback != nil {
-			stage.OnAfterA_DEFAULT_VALUE_5UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
-		}
-	case *A_DEFAULT_VALUE_6:
-		newTarget := any(new).(*A_DEFAULT_VALUE_6)
-		if stage.OnAfterA_DEFAULT_VALUE_6UpdateCallback != nil {
-			stage.OnAfterA_DEFAULT_VALUE_6UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
-		}
-	case *A_DEFINITION:
-		newTarget := any(new).(*A_DEFINITION)
-		if stage.OnAfterA_DEFINITIONUpdateCallback != nil {
-			stage.OnAfterA_DEFINITIONUpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
-		}
-	case *A_DEFINITION_1:
-		newTarget := any(new).(*A_DEFINITION_1)
-		if stage.OnAfterA_DEFINITION_1UpdateCallback != nil {
-			stage.OnAfterA_DEFINITION_1UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
-		}
-	case *A_DEFINITION_2:
-		newTarget := any(new).(*A_DEFINITION_2)
-		if stage.OnAfterA_DEFINITION_2UpdateCallback != nil {
-			stage.OnAfterA_DEFINITION_2UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
-		}
-	case *A_DEFINITION_3:
-		newTarget := any(new).(*A_DEFINITION_3)
-		if stage.OnAfterA_DEFINITION_3UpdateCallback != nil {
-			stage.OnAfterA_DEFINITION_3UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
-		}
-	case *A_DEFINITION_4:
-		newTarget := any(new).(*A_DEFINITION_4)
-		if stage.OnAfterA_DEFINITION_4UpdateCallback != nil {
-			stage.OnAfterA_DEFINITION_4UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
-		}
-	case *A_DEFINITION_5:
-		newTarget := any(new).(*A_DEFINITION_5)
-		if stage.OnAfterA_DEFINITION_5UpdateCallback != nil {
-			stage.OnAfterA_DEFINITION_5UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
-		}
-	case *A_DEFINITION_6:
-		newTarget := any(new).(*A_DEFINITION_6)
-		if stage.OnAfterA_DEFINITION_6UpdateCallback != nil {
-			stage.OnAfterA_DEFINITION_6UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
-		}
 	case *A_EDITABLE_ATTS:
 		newTarget := any(new).(*A_EDITABLE_ATTS)
 		if stage.OnAfterA_EDITABLE_ATTSUpdateCallback != nil {
@@ -591,61 +521,6 @@ func AfterUpdateFromFront[Type Gongstruct](stage *StageStruct, old, new *Type) {
 		newTarget := any(new).(*A_TOOL_EXTENSIONS)
 		if stage.OnAfterA_TOOL_EXTENSIONSUpdateCallback != nil {
 			stage.OnAfterA_TOOL_EXTENSIONSUpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
-		}
-	case *A_TYPE:
-		newTarget := any(new).(*A_TYPE)
-		if stage.OnAfterA_TYPEUpdateCallback != nil {
-			stage.OnAfterA_TYPEUpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
-		}
-	case *A_TYPE_1:
-		newTarget := any(new).(*A_TYPE_1)
-		if stage.OnAfterA_TYPE_1UpdateCallback != nil {
-			stage.OnAfterA_TYPE_1UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
-		}
-	case *A_TYPE_10:
-		newTarget := any(new).(*A_TYPE_10)
-		if stage.OnAfterA_TYPE_10UpdateCallback != nil {
-			stage.OnAfterA_TYPE_10UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
-		}
-	case *A_TYPE_2:
-		newTarget := any(new).(*A_TYPE_2)
-		if stage.OnAfterA_TYPE_2UpdateCallback != nil {
-			stage.OnAfterA_TYPE_2UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
-		}
-	case *A_TYPE_3:
-		newTarget := any(new).(*A_TYPE_3)
-		if stage.OnAfterA_TYPE_3UpdateCallback != nil {
-			stage.OnAfterA_TYPE_3UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
-		}
-	case *A_TYPE_4:
-		newTarget := any(new).(*A_TYPE_4)
-		if stage.OnAfterA_TYPE_4UpdateCallback != nil {
-			stage.OnAfterA_TYPE_4UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
-		}
-	case *A_TYPE_5:
-		newTarget := any(new).(*A_TYPE_5)
-		if stage.OnAfterA_TYPE_5UpdateCallback != nil {
-			stage.OnAfterA_TYPE_5UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
-		}
-	case *A_TYPE_6:
-		newTarget := any(new).(*A_TYPE_6)
-		if stage.OnAfterA_TYPE_6UpdateCallback != nil {
-			stage.OnAfterA_TYPE_6UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
-		}
-	case *A_TYPE_7:
-		newTarget := any(new).(*A_TYPE_7)
-		if stage.OnAfterA_TYPE_7UpdateCallback != nil {
-			stage.OnAfterA_TYPE_7UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
-		}
-	case *A_TYPE_8:
-		newTarget := any(new).(*A_TYPE_8)
-		if stage.OnAfterA_TYPE_8UpdateCallback != nil {
-			stage.OnAfterA_TYPE_8UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
-		}
-	case *A_TYPE_9:
-		newTarget := any(new).(*A_TYPE_9)
-		if stage.OnAfterA_TYPE_9UpdateCallback != nil {
-			stage.OnAfterA_TYPE_9UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
 		}
 	case *A_VALUES:
 		newTarget := any(new).(*A_VALUES)
@@ -731,6 +606,131 @@ func AfterUpdateFromFront[Type Gongstruct](stage *StageStruct, old, new *Type) {
 		newTarget := any(new).(*REQ_IF_TOOL_EXTENSION)
 		if stage.OnAfterREQ_IF_TOOL_EXTENSIONUpdateCallback != nil {
 			stage.OnAfterREQ_IF_TOOL_EXTENSIONUpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
+		}
+	case *Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1:
+		newTarget := any(new).(*Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1)
+		if stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1UpdateCallback != nil {
+			stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
+		}
+	case *Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1:
+		newTarget := any(new).(*Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1)
+		if stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_DATE_REF_1UpdateCallback != nil {
+			stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_DATE_REF_1UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
+		}
+	case *Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1:
+		newTarget := any(new).(*Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1)
+		if stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1UpdateCallback != nil {
+			stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
+		}
+	case *Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1:
+		newTarget := any(new).(*Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1)
+		if stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1UpdateCallback != nil {
+			stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
+		}
+	case *Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1:
+		newTarget := any(new).(*Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1)
+		if stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_REAL_REF_1UpdateCallback != nil {
+			stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_REAL_REF_1UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
+		}
+	case *Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1:
+		newTarget := any(new).(*Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1)
+		if stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_STRING_REF_1UpdateCallback != nil {
+			stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_STRING_REF_1UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
+		}
+	case *Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1:
+		newTarget := any(new).(*Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1)
+		if stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_XHTML_REF_1UpdateCallback != nil {
+			stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_XHTML_REF_1UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
+		}
+	case *Renamed_ATTRIBUTE_VALUE_BOOLEAN_1:
+		newTarget := any(new).(*Renamed_ATTRIBUTE_VALUE_BOOLEAN_1)
+		if stage.OnAfterRenamed_ATTRIBUTE_VALUE_BOOLEAN_1UpdateCallback != nil {
+			stage.OnAfterRenamed_ATTRIBUTE_VALUE_BOOLEAN_1UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
+		}
+	case *Renamed_ATTRIBUTE_VALUE_DATE_1:
+		newTarget := any(new).(*Renamed_ATTRIBUTE_VALUE_DATE_1)
+		if stage.OnAfterRenamed_ATTRIBUTE_VALUE_DATE_1UpdateCallback != nil {
+			stage.OnAfterRenamed_ATTRIBUTE_VALUE_DATE_1UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
+		}
+	case *Renamed_ATTRIBUTE_VALUE_ENUMERATION_1:
+		newTarget := any(new).(*Renamed_ATTRIBUTE_VALUE_ENUMERATION_1)
+		if stage.OnAfterRenamed_ATTRIBUTE_VALUE_ENUMERATION_1UpdateCallback != nil {
+			stage.OnAfterRenamed_ATTRIBUTE_VALUE_ENUMERATION_1UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
+		}
+	case *Renamed_ATTRIBUTE_VALUE_INTEGER_1:
+		newTarget := any(new).(*Renamed_ATTRIBUTE_VALUE_INTEGER_1)
+		if stage.OnAfterRenamed_ATTRIBUTE_VALUE_INTEGER_1UpdateCallback != nil {
+			stage.OnAfterRenamed_ATTRIBUTE_VALUE_INTEGER_1UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
+		}
+	case *Renamed_ATTRIBUTE_VALUE_REAL_1:
+		newTarget := any(new).(*Renamed_ATTRIBUTE_VALUE_REAL_1)
+		if stage.OnAfterRenamed_ATTRIBUTE_VALUE_REAL_1UpdateCallback != nil {
+			stage.OnAfterRenamed_ATTRIBUTE_VALUE_REAL_1UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
+		}
+	case *Renamed_ATTRIBUTE_VALUE_STRING_1:
+		newTarget := any(new).(*Renamed_ATTRIBUTE_VALUE_STRING_1)
+		if stage.OnAfterRenamed_ATTRIBUTE_VALUE_STRING_1UpdateCallback != nil {
+			stage.OnAfterRenamed_ATTRIBUTE_VALUE_STRING_1UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
+		}
+	case *Renamed_ATTRIBUTE_VALUE_XHTML_1:
+		newTarget := any(new).(*Renamed_ATTRIBUTE_VALUE_XHTML_1)
+		if stage.OnAfterRenamed_ATTRIBUTE_VALUE_XHTML_1UpdateCallback != nil {
+			stage.OnAfterRenamed_ATTRIBUTE_VALUE_XHTML_1UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
+		}
+	case *Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1:
+		newTarget := any(new).(*Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1)
+		if stage.OnAfterRenamed_DATATYPE_DEFINITION_BOOLEAN_REF_1UpdateCallback != nil {
+			stage.OnAfterRenamed_DATATYPE_DEFINITION_BOOLEAN_REF_1UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
+		}
+	case *Renamed_DATATYPE_DEFINITION_DATE_REF_1:
+		newTarget := any(new).(*Renamed_DATATYPE_DEFINITION_DATE_REF_1)
+		if stage.OnAfterRenamed_DATATYPE_DEFINITION_DATE_REF_1UpdateCallback != nil {
+			stage.OnAfterRenamed_DATATYPE_DEFINITION_DATE_REF_1UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
+		}
+	case *Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1:
+		newTarget := any(new).(*Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1)
+		if stage.OnAfterRenamed_DATATYPE_DEFINITION_ENUMERATION_REF_1UpdateCallback != nil {
+			stage.OnAfterRenamed_DATATYPE_DEFINITION_ENUMERATION_REF_1UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
+		}
+	case *Renamed_DATATYPE_DEFINITION_INTEGER_REF_1:
+		newTarget := any(new).(*Renamed_DATATYPE_DEFINITION_INTEGER_REF_1)
+		if stage.OnAfterRenamed_DATATYPE_DEFINITION_INTEGER_REF_1UpdateCallback != nil {
+			stage.OnAfterRenamed_DATATYPE_DEFINITION_INTEGER_REF_1UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
+		}
+	case *Renamed_DATATYPE_DEFINITION_REAL_REF_1:
+		newTarget := any(new).(*Renamed_DATATYPE_DEFINITION_REAL_REF_1)
+		if stage.OnAfterRenamed_DATATYPE_DEFINITION_REAL_REF_1UpdateCallback != nil {
+			stage.OnAfterRenamed_DATATYPE_DEFINITION_REAL_REF_1UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
+		}
+	case *Renamed_DATATYPE_DEFINITION_STRING_REF_1:
+		newTarget := any(new).(*Renamed_DATATYPE_DEFINITION_STRING_REF_1)
+		if stage.OnAfterRenamed_DATATYPE_DEFINITION_STRING_REF_1UpdateCallback != nil {
+			stage.OnAfterRenamed_DATATYPE_DEFINITION_STRING_REF_1UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
+		}
+	case *Renamed_DATATYPE_DEFINITION_XHTML_REF_1:
+		newTarget := any(new).(*Renamed_DATATYPE_DEFINITION_XHTML_REF_1)
+		if stage.OnAfterRenamed_DATATYPE_DEFINITION_XHTML_REF_1UpdateCallback != nil {
+			stage.OnAfterRenamed_DATATYPE_DEFINITION_XHTML_REF_1UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
+		}
+	case *Renamed_RELATION_GROUP_TYPE_REF_1:
+		newTarget := any(new).(*Renamed_RELATION_GROUP_TYPE_REF_1)
+		if stage.OnAfterRenamed_RELATION_GROUP_TYPE_REF_1UpdateCallback != nil {
+			stage.OnAfterRenamed_RELATION_GROUP_TYPE_REF_1UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
+		}
+	case *Renamed_SPECIFICATION_TYPE_REF_1:
+		newTarget := any(new).(*Renamed_SPECIFICATION_TYPE_REF_1)
+		if stage.OnAfterRenamed_SPECIFICATION_TYPE_REF_1UpdateCallback != nil {
+			stage.OnAfterRenamed_SPECIFICATION_TYPE_REF_1UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
+		}
+	case *Renamed_SPEC_OBJECT_TYPE_REF_1:
+		newTarget := any(new).(*Renamed_SPEC_OBJECT_TYPE_REF_1)
+		if stage.OnAfterRenamed_SPEC_OBJECT_TYPE_REF_1UpdateCallback != nil {
+			stage.OnAfterRenamed_SPEC_OBJECT_TYPE_REF_1UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
+		}
+	case *Renamed_SPEC_RELATION_TYPE_REF_1:
+		newTarget := any(new).(*Renamed_SPEC_RELATION_TYPE_REF_1)
+		if stage.OnAfterRenamed_SPEC_RELATION_TYPE_REF_1UpdateCallback != nil {
+			stage.OnAfterRenamed_SPEC_RELATION_TYPE_REF_1UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
 		}
 	case *SPECIFICATION:
 		newTarget := any(new).(*SPECIFICATION)
@@ -877,76 +877,6 @@ func AfterDeleteFromFront[Type Gongstruct](stage *StageStruct, staged, front *Ty
 			staged := any(staged).(*A_DATATYPES)
 			stage.OnAfterA_DATATYPESDeleteCallback.OnAfterDelete(stage, staged, front)
 		}
-	case *A_DEFAULT_VALUE:
-		if stage.OnAfterA_DEFAULT_VALUEDeleteCallback != nil {
-			staged := any(staged).(*A_DEFAULT_VALUE)
-			stage.OnAfterA_DEFAULT_VALUEDeleteCallback.OnAfterDelete(stage, staged, front)
-		}
-	case *A_DEFAULT_VALUE_1:
-		if stage.OnAfterA_DEFAULT_VALUE_1DeleteCallback != nil {
-			staged := any(staged).(*A_DEFAULT_VALUE_1)
-			stage.OnAfterA_DEFAULT_VALUE_1DeleteCallback.OnAfterDelete(stage, staged, front)
-		}
-	case *A_DEFAULT_VALUE_2:
-		if stage.OnAfterA_DEFAULT_VALUE_2DeleteCallback != nil {
-			staged := any(staged).(*A_DEFAULT_VALUE_2)
-			stage.OnAfterA_DEFAULT_VALUE_2DeleteCallback.OnAfterDelete(stage, staged, front)
-		}
-	case *A_DEFAULT_VALUE_3:
-		if stage.OnAfterA_DEFAULT_VALUE_3DeleteCallback != nil {
-			staged := any(staged).(*A_DEFAULT_VALUE_3)
-			stage.OnAfterA_DEFAULT_VALUE_3DeleteCallback.OnAfterDelete(stage, staged, front)
-		}
-	case *A_DEFAULT_VALUE_4:
-		if stage.OnAfterA_DEFAULT_VALUE_4DeleteCallback != nil {
-			staged := any(staged).(*A_DEFAULT_VALUE_4)
-			stage.OnAfterA_DEFAULT_VALUE_4DeleteCallback.OnAfterDelete(stage, staged, front)
-		}
-	case *A_DEFAULT_VALUE_5:
-		if stage.OnAfterA_DEFAULT_VALUE_5DeleteCallback != nil {
-			staged := any(staged).(*A_DEFAULT_VALUE_5)
-			stage.OnAfterA_DEFAULT_VALUE_5DeleteCallback.OnAfterDelete(stage, staged, front)
-		}
-	case *A_DEFAULT_VALUE_6:
-		if stage.OnAfterA_DEFAULT_VALUE_6DeleteCallback != nil {
-			staged := any(staged).(*A_DEFAULT_VALUE_6)
-			stage.OnAfterA_DEFAULT_VALUE_6DeleteCallback.OnAfterDelete(stage, staged, front)
-		}
-	case *A_DEFINITION:
-		if stage.OnAfterA_DEFINITIONDeleteCallback != nil {
-			staged := any(staged).(*A_DEFINITION)
-			stage.OnAfterA_DEFINITIONDeleteCallback.OnAfterDelete(stage, staged, front)
-		}
-	case *A_DEFINITION_1:
-		if stage.OnAfterA_DEFINITION_1DeleteCallback != nil {
-			staged := any(staged).(*A_DEFINITION_1)
-			stage.OnAfterA_DEFINITION_1DeleteCallback.OnAfterDelete(stage, staged, front)
-		}
-	case *A_DEFINITION_2:
-		if stage.OnAfterA_DEFINITION_2DeleteCallback != nil {
-			staged := any(staged).(*A_DEFINITION_2)
-			stage.OnAfterA_DEFINITION_2DeleteCallback.OnAfterDelete(stage, staged, front)
-		}
-	case *A_DEFINITION_3:
-		if stage.OnAfterA_DEFINITION_3DeleteCallback != nil {
-			staged := any(staged).(*A_DEFINITION_3)
-			stage.OnAfterA_DEFINITION_3DeleteCallback.OnAfterDelete(stage, staged, front)
-		}
-	case *A_DEFINITION_4:
-		if stage.OnAfterA_DEFINITION_4DeleteCallback != nil {
-			staged := any(staged).(*A_DEFINITION_4)
-			stage.OnAfterA_DEFINITION_4DeleteCallback.OnAfterDelete(stage, staged, front)
-		}
-	case *A_DEFINITION_5:
-		if stage.OnAfterA_DEFINITION_5DeleteCallback != nil {
-			staged := any(staged).(*A_DEFINITION_5)
-			stage.OnAfterA_DEFINITION_5DeleteCallback.OnAfterDelete(stage, staged, front)
-		}
-	case *A_DEFINITION_6:
-		if stage.OnAfterA_DEFINITION_6DeleteCallback != nil {
-			staged := any(staged).(*A_DEFINITION_6)
-			stage.OnAfterA_DEFINITION_6DeleteCallback.OnAfterDelete(stage, staged, front)
-		}
 	case *A_EDITABLE_ATTS:
 		if stage.OnAfterA_EDITABLE_ATTSDeleteCallback != nil {
 			staged := any(staged).(*A_EDITABLE_ATTS)
@@ -1021,61 +951,6 @@ func AfterDeleteFromFront[Type Gongstruct](stage *StageStruct, staged, front *Ty
 		if stage.OnAfterA_TOOL_EXTENSIONSDeleteCallback != nil {
 			staged := any(staged).(*A_TOOL_EXTENSIONS)
 			stage.OnAfterA_TOOL_EXTENSIONSDeleteCallback.OnAfterDelete(stage, staged, front)
-		}
-	case *A_TYPE:
-		if stage.OnAfterA_TYPEDeleteCallback != nil {
-			staged := any(staged).(*A_TYPE)
-			stage.OnAfterA_TYPEDeleteCallback.OnAfterDelete(stage, staged, front)
-		}
-	case *A_TYPE_1:
-		if stage.OnAfterA_TYPE_1DeleteCallback != nil {
-			staged := any(staged).(*A_TYPE_1)
-			stage.OnAfterA_TYPE_1DeleteCallback.OnAfterDelete(stage, staged, front)
-		}
-	case *A_TYPE_10:
-		if stage.OnAfterA_TYPE_10DeleteCallback != nil {
-			staged := any(staged).(*A_TYPE_10)
-			stage.OnAfterA_TYPE_10DeleteCallback.OnAfterDelete(stage, staged, front)
-		}
-	case *A_TYPE_2:
-		if stage.OnAfterA_TYPE_2DeleteCallback != nil {
-			staged := any(staged).(*A_TYPE_2)
-			stage.OnAfterA_TYPE_2DeleteCallback.OnAfterDelete(stage, staged, front)
-		}
-	case *A_TYPE_3:
-		if stage.OnAfterA_TYPE_3DeleteCallback != nil {
-			staged := any(staged).(*A_TYPE_3)
-			stage.OnAfterA_TYPE_3DeleteCallback.OnAfterDelete(stage, staged, front)
-		}
-	case *A_TYPE_4:
-		if stage.OnAfterA_TYPE_4DeleteCallback != nil {
-			staged := any(staged).(*A_TYPE_4)
-			stage.OnAfterA_TYPE_4DeleteCallback.OnAfterDelete(stage, staged, front)
-		}
-	case *A_TYPE_5:
-		if stage.OnAfterA_TYPE_5DeleteCallback != nil {
-			staged := any(staged).(*A_TYPE_5)
-			stage.OnAfterA_TYPE_5DeleteCallback.OnAfterDelete(stage, staged, front)
-		}
-	case *A_TYPE_6:
-		if stage.OnAfterA_TYPE_6DeleteCallback != nil {
-			staged := any(staged).(*A_TYPE_6)
-			stage.OnAfterA_TYPE_6DeleteCallback.OnAfterDelete(stage, staged, front)
-		}
-	case *A_TYPE_7:
-		if stage.OnAfterA_TYPE_7DeleteCallback != nil {
-			staged := any(staged).(*A_TYPE_7)
-			stage.OnAfterA_TYPE_7DeleteCallback.OnAfterDelete(stage, staged, front)
-		}
-	case *A_TYPE_8:
-		if stage.OnAfterA_TYPE_8DeleteCallback != nil {
-			staged := any(staged).(*A_TYPE_8)
-			stage.OnAfterA_TYPE_8DeleteCallback.OnAfterDelete(stage, staged, front)
-		}
-	case *A_TYPE_9:
-		if stage.OnAfterA_TYPE_9DeleteCallback != nil {
-			staged := any(staged).(*A_TYPE_9)
-			stage.OnAfterA_TYPE_9DeleteCallback.OnAfterDelete(stage, staged, front)
 		}
 	case *A_VALUES:
 		if stage.OnAfterA_VALUESDeleteCallback != nil {
@@ -1161,6 +1036,131 @@ func AfterDeleteFromFront[Type Gongstruct](stage *StageStruct, staged, front *Ty
 		if stage.OnAfterREQ_IF_TOOL_EXTENSIONDeleteCallback != nil {
 			staged := any(staged).(*REQ_IF_TOOL_EXTENSION)
 			stage.OnAfterREQ_IF_TOOL_EXTENSIONDeleteCallback.OnAfterDelete(stage, staged, front)
+		}
+	case *Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1:
+		if stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1DeleteCallback != nil {
+			staged := any(staged).(*Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1)
+			stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1DeleteCallback.OnAfterDelete(stage, staged, front)
+		}
+	case *Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1:
+		if stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_DATE_REF_1DeleteCallback != nil {
+			staged := any(staged).(*Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1)
+			stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_DATE_REF_1DeleteCallback.OnAfterDelete(stage, staged, front)
+		}
+	case *Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1:
+		if stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1DeleteCallback != nil {
+			staged := any(staged).(*Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1)
+			stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1DeleteCallback.OnAfterDelete(stage, staged, front)
+		}
+	case *Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1:
+		if stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1DeleteCallback != nil {
+			staged := any(staged).(*Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1)
+			stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1DeleteCallback.OnAfterDelete(stage, staged, front)
+		}
+	case *Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1:
+		if stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_REAL_REF_1DeleteCallback != nil {
+			staged := any(staged).(*Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1)
+			stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_REAL_REF_1DeleteCallback.OnAfterDelete(stage, staged, front)
+		}
+	case *Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1:
+		if stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_STRING_REF_1DeleteCallback != nil {
+			staged := any(staged).(*Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1)
+			stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_STRING_REF_1DeleteCallback.OnAfterDelete(stage, staged, front)
+		}
+	case *Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1:
+		if stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_XHTML_REF_1DeleteCallback != nil {
+			staged := any(staged).(*Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1)
+			stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_XHTML_REF_1DeleteCallback.OnAfterDelete(stage, staged, front)
+		}
+	case *Renamed_ATTRIBUTE_VALUE_BOOLEAN_1:
+		if stage.OnAfterRenamed_ATTRIBUTE_VALUE_BOOLEAN_1DeleteCallback != nil {
+			staged := any(staged).(*Renamed_ATTRIBUTE_VALUE_BOOLEAN_1)
+			stage.OnAfterRenamed_ATTRIBUTE_VALUE_BOOLEAN_1DeleteCallback.OnAfterDelete(stage, staged, front)
+		}
+	case *Renamed_ATTRIBUTE_VALUE_DATE_1:
+		if stage.OnAfterRenamed_ATTRIBUTE_VALUE_DATE_1DeleteCallback != nil {
+			staged := any(staged).(*Renamed_ATTRIBUTE_VALUE_DATE_1)
+			stage.OnAfterRenamed_ATTRIBUTE_VALUE_DATE_1DeleteCallback.OnAfterDelete(stage, staged, front)
+		}
+	case *Renamed_ATTRIBUTE_VALUE_ENUMERATION_1:
+		if stage.OnAfterRenamed_ATTRIBUTE_VALUE_ENUMERATION_1DeleteCallback != nil {
+			staged := any(staged).(*Renamed_ATTRIBUTE_VALUE_ENUMERATION_1)
+			stage.OnAfterRenamed_ATTRIBUTE_VALUE_ENUMERATION_1DeleteCallback.OnAfterDelete(stage, staged, front)
+		}
+	case *Renamed_ATTRIBUTE_VALUE_INTEGER_1:
+		if stage.OnAfterRenamed_ATTRIBUTE_VALUE_INTEGER_1DeleteCallback != nil {
+			staged := any(staged).(*Renamed_ATTRIBUTE_VALUE_INTEGER_1)
+			stage.OnAfterRenamed_ATTRIBUTE_VALUE_INTEGER_1DeleteCallback.OnAfterDelete(stage, staged, front)
+		}
+	case *Renamed_ATTRIBUTE_VALUE_REAL_1:
+		if stage.OnAfterRenamed_ATTRIBUTE_VALUE_REAL_1DeleteCallback != nil {
+			staged := any(staged).(*Renamed_ATTRIBUTE_VALUE_REAL_1)
+			stage.OnAfterRenamed_ATTRIBUTE_VALUE_REAL_1DeleteCallback.OnAfterDelete(stage, staged, front)
+		}
+	case *Renamed_ATTRIBUTE_VALUE_STRING_1:
+		if stage.OnAfterRenamed_ATTRIBUTE_VALUE_STRING_1DeleteCallback != nil {
+			staged := any(staged).(*Renamed_ATTRIBUTE_VALUE_STRING_1)
+			stage.OnAfterRenamed_ATTRIBUTE_VALUE_STRING_1DeleteCallback.OnAfterDelete(stage, staged, front)
+		}
+	case *Renamed_ATTRIBUTE_VALUE_XHTML_1:
+		if stage.OnAfterRenamed_ATTRIBUTE_VALUE_XHTML_1DeleteCallback != nil {
+			staged := any(staged).(*Renamed_ATTRIBUTE_VALUE_XHTML_1)
+			stage.OnAfterRenamed_ATTRIBUTE_VALUE_XHTML_1DeleteCallback.OnAfterDelete(stage, staged, front)
+		}
+	case *Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1:
+		if stage.OnAfterRenamed_DATATYPE_DEFINITION_BOOLEAN_REF_1DeleteCallback != nil {
+			staged := any(staged).(*Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1)
+			stage.OnAfterRenamed_DATATYPE_DEFINITION_BOOLEAN_REF_1DeleteCallback.OnAfterDelete(stage, staged, front)
+		}
+	case *Renamed_DATATYPE_DEFINITION_DATE_REF_1:
+		if stage.OnAfterRenamed_DATATYPE_DEFINITION_DATE_REF_1DeleteCallback != nil {
+			staged := any(staged).(*Renamed_DATATYPE_DEFINITION_DATE_REF_1)
+			stage.OnAfterRenamed_DATATYPE_DEFINITION_DATE_REF_1DeleteCallback.OnAfterDelete(stage, staged, front)
+		}
+	case *Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1:
+		if stage.OnAfterRenamed_DATATYPE_DEFINITION_ENUMERATION_REF_1DeleteCallback != nil {
+			staged := any(staged).(*Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1)
+			stage.OnAfterRenamed_DATATYPE_DEFINITION_ENUMERATION_REF_1DeleteCallback.OnAfterDelete(stage, staged, front)
+		}
+	case *Renamed_DATATYPE_DEFINITION_INTEGER_REF_1:
+		if stage.OnAfterRenamed_DATATYPE_DEFINITION_INTEGER_REF_1DeleteCallback != nil {
+			staged := any(staged).(*Renamed_DATATYPE_DEFINITION_INTEGER_REF_1)
+			stage.OnAfterRenamed_DATATYPE_DEFINITION_INTEGER_REF_1DeleteCallback.OnAfterDelete(stage, staged, front)
+		}
+	case *Renamed_DATATYPE_DEFINITION_REAL_REF_1:
+		if stage.OnAfterRenamed_DATATYPE_DEFINITION_REAL_REF_1DeleteCallback != nil {
+			staged := any(staged).(*Renamed_DATATYPE_DEFINITION_REAL_REF_1)
+			stage.OnAfterRenamed_DATATYPE_DEFINITION_REAL_REF_1DeleteCallback.OnAfterDelete(stage, staged, front)
+		}
+	case *Renamed_DATATYPE_DEFINITION_STRING_REF_1:
+		if stage.OnAfterRenamed_DATATYPE_DEFINITION_STRING_REF_1DeleteCallback != nil {
+			staged := any(staged).(*Renamed_DATATYPE_DEFINITION_STRING_REF_1)
+			stage.OnAfterRenamed_DATATYPE_DEFINITION_STRING_REF_1DeleteCallback.OnAfterDelete(stage, staged, front)
+		}
+	case *Renamed_DATATYPE_DEFINITION_XHTML_REF_1:
+		if stage.OnAfterRenamed_DATATYPE_DEFINITION_XHTML_REF_1DeleteCallback != nil {
+			staged := any(staged).(*Renamed_DATATYPE_DEFINITION_XHTML_REF_1)
+			stage.OnAfterRenamed_DATATYPE_DEFINITION_XHTML_REF_1DeleteCallback.OnAfterDelete(stage, staged, front)
+		}
+	case *Renamed_RELATION_GROUP_TYPE_REF_1:
+		if stage.OnAfterRenamed_RELATION_GROUP_TYPE_REF_1DeleteCallback != nil {
+			staged := any(staged).(*Renamed_RELATION_GROUP_TYPE_REF_1)
+			stage.OnAfterRenamed_RELATION_GROUP_TYPE_REF_1DeleteCallback.OnAfterDelete(stage, staged, front)
+		}
+	case *Renamed_SPECIFICATION_TYPE_REF_1:
+		if stage.OnAfterRenamed_SPECIFICATION_TYPE_REF_1DeleteCallback != nil {
+			staged := any(staged).(*Renamed_SPECIFICATION_TYPE_REF_1)
+			stage.OnAfterRenamed_SPECIFICATION_TYPE_REF_1DeleteCallback.OnAfterDelete(stage, staged, front)
+		}
+	case *Renamed_SPEC_OBJECT_TYPE_REF_1:
+		if stage.OnAfterRenamed_SPEC_OBJECT_TYPE_REF_1DeleteCallback != nil {
+			staged := any(staged).(*Renamed_SPEC_OBJECT_TYPE_REF_1)
+			stage.OnAfterRenamed_SPEC_OBJECT_TYPE_REF_1DeleteCallback.OnAfterDelete(stage, staged, front)
+		}
+	case *Renamed_SPEC_RELATION_TYPE_REF_1:
+		if stage.OnAfterRenamed_SPEC_RELATION_TYPE_REF_1DeleteCallback != nil {
+			staged := any(staged).(*Renamed_SPEC_RELATION_TYPE_REF_1)
+			stage.OnAfterRenamed_SPEC_RELATION_TYPE_REF_1DeleteCallback.OnAfterDelete(stage, staged, front)
 		}
 	case *SPECIFICATION:
 		if stage.OnAfterSPECIFICATIONDeleteCallback != nil {
@@ -1288,62 +1288,6 @@ func AfterReadFromFront[Type Gongstruct](stage *StageStruct, instance *Type) {
 		if stage.OnAfterA_DATATYPESReadCallback != nil {
 			stage.OnAfterA_DATATYPESReadCallback.OnAfterRead(stage, target)
 		}
-	case *A_DEFAULT_VALUE:
-		if stage.OnAfterA_DEFAULT_VALUEReadCallback != nil {
-			stage.OnAfterA_DEFAULT_VALUEReadCallback.OnAfterRead(stage, target)
-		}
-	case *A_DEFAULT_VALUE_1:
-		if stage.OnAfterA_DEFAULT_VALUE_1ReadCallback != nil {
-			stage.OnAfterA_DEFAULT_VALUE_1ReadCallback.OnAfterRead(stage, target)
-		}
-	case *A_DEFAULT_VALUE_2:
-		if stage.OnAfterA_DEFAULT_VALUE_2ReadCallback != nil {
-			stage.OnAfterA_DEFAULT_VALUE_2ReadCallback.OnAfterRead(stage, target)
-		}
-	case *A_DEFAULT_VALUE_3:
-		if stage.OnAfterA_DEFAULT_VALUE_3ReadCallback != nil {
-			stage.OnAfterA_DEFAULT_VALUE_3ReadCallback.OnAfterRead(stage, target)
-		}
-	case *A_DEFAULT_VALUE_4:
-		if stage.OnAfterA_DEFAULT_VALUE_4ReadCallback != nil {
-			stage.OnAfterA_DEFAULT_VALUE_4ReadCallback.OnAfterRead(stage, target)
-		}
-	case *A_DEFAULT_VALUE_5:
-		if stage.OnAfterA_DEFAULT_VALUE_5ReadCallback != nil {
-			stage.OnAfterA_DEFAULT_VALUE_5ReadCallback.OnAfterRead(stage, target)
-		}
-	case *A_DEFAULT_VALUE_6:
-		if stage.OnAfterA_DEFAULT_VALUE_6ReadCallback != nil {
-			stage.OnAfterA_DEFAULT_VALUE_6ReadCallback.OnAfterRead(stage, target)
-		}
-	case *A_DEFINITION:
-		if stage.OnAfterA_DEFINITIONReadCallback != nil {
-			stage.OnAfterA_DEFINITIONReadCallback.OnAfterRead(stage, target)
-		}
-	case *A_DEFINITION_1:
-		if stage.OnAfterA_DEFINITION_1ReadCallback != nil {
-			stage.OnAfterA_DEFINITION_1ReadCallback.OnAfterRead(stage, target)
-		}
-	case *A_DEFINITION_2:
-		if stage.OnAfterA_DEFINITION_2ReadCallback != nil {
-			stage.OnAfterA_DEFINITION_2ReadCallback.OnAfterRead(stage, target)
-		}
-	case *A_DEFINITION_3:
-		if stage.OnAfterA_DEFINITION_3ReadCallback != nil {
-			stage.OnAfterA_DEFINITION_3ReadCallback.OnAfterRead(stage, target)
-		}
-	case *A_DEFINITION_4:
-		if stage.OnAfterA_DEFINITION_4ReadCallback != nil {
-			stage.OnAfterA_DEFINITION_4ReadCallback.OnAfterRead(stage, target)
-		}
-	case *A_DEFINITION_5:
-		if stage.OnAfterA_DEFINITION_5ReadCallback != nil {
-			stage.OnAfterA_DEFINITION_5ReadCallback.OnAfterRead(stage, target)
-		}
-	case *A_DEFINITION_6:
-		if stage.OnAfterA_DEFINITION_6ReadCallback != nil {
-			stage.OnAfterA_DEFINITION_6ReadCallback.OnAfterRead(stage, target)
-		}
 	case *A_EDITABLE_ATTS:
 		if stage.OnAfterA_EDITABLE_ATTSReadCallback != nil {
 			stage.OnAfterA_EDITABLE_ATTSReadCallback.OnAfterRead(stage, target)
@@ -1403,50 +1347,6 @@ func AfterReadFromFront[Type Gongstruct](stage *StageStruct, instance *Type) {
 	case *A_TOOL_EXTENSIONS:
 		if stage.OnAfterA_TOOL_EXTENSIONSReadCallback != nil {
 			stage.OnAfterA_TOOL_EXTENSIONSReadCallback.OnAfterRead(stage, target)
-		}
-	case *A_TYPE:
-		if stage.OnAfterA_TYPEReadCallback != nil {
-			stage.OnAfterA_TYPEReadCallback.OnAfterRead(stage, target)
-		}
-	case *A_TYPE_1:
-		if stage.OnAfterA_TYPE_1ReadCallback != nil {
-			stage.OnAfterA_TYPE_1ReadCallback.OnAfterRead(stage, target)
-		}
-	case *A_TYPE_10:
-		if stage.OnAfterA_TYPE_10ReadCallback != nil {
-			stage.OnAfterA_TYPE_10ReadCallback.OnAfterRead(stage, target)
-		}
-	case *A_TYPE_2:
-		if stage.OnAfterA_TYPE_2ReadCallback != nil {
-			stage.OnAfterA_TYPE_2ReadCallback.OnAfterRead(stage, target)
-		}
-	case *A_TYPE_3:
-		if stage.OnAfterA_TYPE_3ReadCallback != nil {
-			stage.OnAfterA_TYPE_3ReadCallback.OnAfterRead(stage, target)
-		}
-	case *A_TYPE_4:
-		if stage.OnAfterA_TYPE_4ReadCallback != nil {
-			stage.OnAfterA_TYPE_4ReadCallback.OnAfterRead(stage, target)
-		}
-	case *A_TYPE_5:
-		if stage.OnAfterA_TYPE_5ReadCallback != nil {
-			stage.OnAfterA_TYPE_5ReadCallback.OnAfterRead(stage, target)
-		}
-	case *A_TYPE_6:
-		if stage.OnAfterA_TYPE_6ReadCallback != nil {
-			stage.OnAfterA_TYPE_6ReadCallback.OnAfterRead(stage, target)
-		}
-	case *A_TYPE_7:
-		if stage.OnAfterA_TYPE_7ReadCallback != nil {
-			stage.OnAfterA_TYPE_7ReadCallback.OnAfterRead(stage, target)
-		}
-	case *A_TYPE_8:
-		if stage.OnAfterA_TYPE_8ReadCallback != nil {
-			stage.OnAfterA_TYPE_8ReadCallback.OnAfterRead(stage, target)
-		}
-	case *A_TYPE_9:
-		if stage.OnAfterA_TYPE_9ReadCallback != nil {
-			stage.OnAfterA_TYPE_9ReadCallback.OnAfterRead(stage, target)
 		}
 	case *A_VALUES:
 		if stage.OnAfterA_VALUESReadCallback != nil {
@@ -1515,6 +1415,106 @@ func AfterReadFromFront[Type Gongstruct](stage *StageStruct, instance *Type) {
 	case *REQ_IF_TOOL_EXTENSION:
 		if stage.OnAfterREQ_IF_TOOL_EXTENSIONReadCallback != nil {
 			stage.OnAfterREQ_IF_TOOL_EXTENSIONReadCallback.OnAfterRead(stage, target)
+		}
+	case *Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1:
+		if stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1ReadCallback != nil {
+			stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1ReadCallback.OnAfterRead(stage, target)
+		}
+	case *Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1:
+		if stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_DATE_REF_1ReadCallback != nil {
+			stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_DATE_REF_1ReadCallback.OnAfterRead(stage, target)
+		}
+	case *Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1:
+		if stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1ReadCallback != nil {
+			stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1ReadCallback.OnAfterRead(stage, target)
+		}
+	case *Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1:
+		if stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1ReadCallback != nil {
+			stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1ReadCallback.OnAfterRead(stage, target)
+		}
+	case *Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1:
+		if stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_REAL_REF_1ReadCallback != nil {
+			stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_REAL_REF_1ReadCallback.OnAfterRead(stage, target)
+		}
+	case *Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1:
+		if stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_STRING_REF_1ReadCallback != nil {
+			stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_STRING_REF_1ReadCallback.OnAfterRead(stage, target)
+		}
+	case *Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1:
+		if stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_XHTML_REF_1ReadCallback != nil {
+			stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_XHTML_REF_1ReadCallback.OnAfterRead(stage, target)
+		}
+	case *Renamed_ATTRIBUTE_VALUE_BOOLEAN_1:
+		if stage.OnAfterRenamed_ATTRIBUTE_VALUE_BOOLEAN_1ReadCallback != nil {
+			stage.OnAfterRenamed_ATTRIBUTE_VALUE_BOOLEAN_1ReadCallback.OnAfterRead(stage, target)
+		}
+	case *Renamed_ATTRIBUTE_VALUE_DATE_1:
+		if stage.OnAfterRenamed_ATTRIBUTE_VALUE_DATE_1ReadCallback != nil {
+			stage.OnAfterRenamed_ATTRIBUTE_VALUE_DATE_1ReadCallback.OnAfterRead(stage, target)
+		}
+	case *Renamed_ATTRIBUTE_VALUE_ENUMERATION_1:
+		if stage.OnAfterRenamed_ATTRIBUTE_VALUE_ENUMERATION_1ReadCallback != nil {
+			stage.OnAfterRenamed_ATTRIBUTE_VALUE_ENUMERATION_1ReadCallback.OnAfterRead(stage, target)
+		}
+	case *Renamed_ATTRIBUTE_VALUE_INTEGER_1:
+		if stage.OnAfterRenamed_ATTRIBUTE_VALUE_INTEGER_1ReadCallback != nil {
+			stage.OnAfterRenamed_ATTRIBUTE_VALUE_INTEGER_1ReadCallback.OnAfterRead(stage, target)
+		}
+	case *Renamed_ATTRIBUTE_VALUE_REAL_1:
+		if stage.OnAfterRenamed_ATTRIBUTE_VALUE_REAL_1ReadCallback != nil {
+			stage.OnAfterRenamed_ATTRIBUTE_VALUE_REAL_1ReadCallback.OnAfterRead(stage, target)
+		}
+	case *Renamed_ATTRIBUTE_VALUE_STRING_1:
+		if stage.OnAfterRenamed_ATTRIBUTE_VALUE_STRING_1ReadCallback != nil {
+			stage.OnAfterRenamed_ATTRIBUTE_VALUE_STRING_1ReadCallback.OnAfterRead(stage, target)
+		}
+	case *Renamed_ATTRIBUTE_VALUE_XHTML_1:
+		if stage.OnAfterRenamed_ATTRIBUTE_VALUE_XHTML_1ReadCallback != nil {
+			stage.OnAfterRenamed_ATTRIBUTE_VALUE_XHTML_1ReadCallback.OnAfterRead(stage, target)
+		}
+	case *Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1:
+		if stage.OnAfterRenamed_DATATYPE_DEFINITION_BOOLEAN_REF_1ReadCallback != nil {
+			stage.OnAfterRenamed_DATATYPE_DEFINITION_BOOLEAN_REF_1ReadCallback.OnAfterRead(stage, target)
+		}
+	case *Renamed_DATATYPE_DEFINITION_DATE_REF_1:
+		if stage.OnAfterRenamed_DATATYPE_DEFINITION_DATE_REF_1ReadCallback != nil {
+			stage.OnAfterRenamed_DATATYPE_DEFINITION_DATE_REF_1ReadCallback.OnAfterRead(stage, target)
+		}
+	case *Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1:
+		if stage.OnAfterRenamed_DATATYPE_DEFINITION_ENUMERATION_REF_1ReadCallback != nil {
+			stage.OnAfterRenamed_DATATYPE_DEFINITION_ENUMERATION_REF_1ReadCallback.OnAfterRead(stage, target)
+		}
+	case *Renamed_DATATYPE_DEFINITION_INTEGER_REF_1:
+		if stage.OnAfterRenamed_DATATYPE_DEFINITION_INTEGER_REF_1ReadCallback != nil {
+			stage.OnAfterRenamed_DATATYPE_DEFINITION_INTEGER_REF_1ReadCallback.OnAfterRead(stage, target)
+		}
+	case *Renamed_DATATYPE_DEFINITION_REAL_REF_1:
+		if stage.OnAfterRenamed_DATATYPE_DEFINITION_REAL_REF_1ReadCallback != nil {
+			stage.OnAfterRenamed_DATATYPE_DEFINITION_REAL_REF_1ReadCallback.OnAfterRead(stage, target)
+		}
+	case *Renamed_DATATYPE_DEFINITION_STRING_REF_1:
+		if stage.OnAfterRenamed_DATATYPE_DEFINITION_STRING_REF_1ReadCallback != nil {
+			stage.OnAfterRenamed_DATATYPE_DEFINITION_STRING_REF_1ReadCallback.OnAfterRead(stage, target)
+		}
+	case *Renamed_DATATYPE_DEFINITION_XHTML_REF_1:
+		if stage.OnAfterRenamed_DATATYPE_DEFINITION_XHTML_REF_1ReadCallback != nil {
+			stage.OnAfterRenamed_DATATYPE_DEFINITION_XHTML_REF_1ReadCallback.OnAfterRead(stage, target)
+		}
+	case *Renamed_RELATION_GROUP_TYPE_REF_1:
+		if stage.OnAfterRenamed_RELATION_GROUP_TYPE_REF_1ReadCallback != nil {
+			stage.OnAfterRenamed_RELATION_GROUP_TYPE_REF_1ReadCallback.OnAfterRead(stage, target)
+		}
+	case *Renamed_SPECIFICATION_TYPE_REF_1:
+		if stage.OnAfterRenamed_SPECIFICATION_TYPE_REF_1ReadCallback != nil {
+			stage.OnAfterRenamed_SPECIFICATION_TYPE_REF_1ReadCallback.OnAfterRead(stage, target)
+		}
+	case *Renamed_SPEC_OBJECT_TYPE_REF_1:
+		if stage.OnAfterRenamed_SPEC_OBJECT_TYPE_REF_1ReadCallback != nil {
+			stage.OnAfterRenamed_SPEC_OBJECT_TYPE_REF_1ReadCallback.OnAfterRead(stage, target)
+		}
+	case *Renamed_SPEC_RELATION_TYPE_REF_1:
+		if stage.OnAfterRenamed_SPEC_RELATION_TYPE_REF_1ReadCallback != nil {
+			stage.OnAfterRenamed_SPEC_RELATION_TYPE_REF_1ReadCallback.OnAfterRead(stage, target)
 		}
 	case *SPECIFICATION:
 		if stage.OnAfterSPECIFICATIONReadCallback != nil {
@@ -1616,48 +1616,6 @@ func SetCallbackAfterUpdateFromFront[Type Gongstruct](stage *StageStruct, callba
 	case *A_DATATYPES:
 		stage.OnAfterA_DATATYPESUpdateCallback = any(callback).(OnAfterUpdateInterface[A_DATATYPES])
 	
-	case *A_DEFAULT_VALUE:
-		stage.OnAfterA_DEFAULT_VALUEUpdateCallback = any(callback).(OnAfterUpdateInterface[A_DEFAULT_VALUE])
-	
-	case *A_DEFAULT_VALUE_1:
-		stage.OnAfterA_DEFAULT_VALUE_1UpdateCallback = any(callback).(OnAfterUpdateInterface[A_DEFAULT_VALUE_1])
-	
-	case *A_DEFAULT_VALUE_2:
-		stage.OnAfterA_DEFAULT_VALUE_2UpdateCallback = any(callback).(OnAfterUpdateInterface[A_DEFAULT_VALUE_2])
-	
-	case *A_DEFAULT_VALUE_3:
-		stage.OnAfterA_DEFAULT_VALUE_3UpdateCallback = any(callback).(OnAfterUpdateInterface[A_DEFAULT_VALUE_3])
-	
-	case *A_DEFAULT_VALUE_4:
-		stage.OnAfterA_DEFAULT_VALUE_4UpdateCallback = any(callback).(OnAfterUpdateInterface[A_DEFAULT_VALUE_4])
-	
-	case *A_DEFAULT_VALUE_5:
-		stage.OnAfterA_DEFAULT_VALUE_5UpdateCallback = any(callback).(OnAfterUpdateInterface[A_DEFAULT_VALUE_5])
-	
-	case *A_DEFAULT_VALUE_6:
-		stage.OnAfterA_DEFAULT_VALUE_6UpdateCallback = any(callback).(OnAfterUpdateInterface[A_DEFAULT_VALUE_6])
-	
-	case *A_DEFINITION:
-		stage.OnAfterA_DEFINITIONUpdateCallback = any(callback).(OnAfterUpdateInterface[A_DEFINITION])
-	
-	case *A_DEFINITION_1:
-		stage.OnAfterA_DEFINITION_1UpdateCallback = any(callback).(OnAfterUpdateInterface[A_DEFINITION_1])
-	
-	case *A_DEFINITION_2:
-		stage.OnAfterA_DEFINITION_2UpdateCallback = any(callback).(OnAfterUpdateInterface[A_DEFINITION_2])
-	
-	case *A_DEFINITION_3:
-		stage.OnAfterA_DEFINITION_3UpdateCallback = any(callback).(OnAfterUpdateInterface[A_DEFINITION_3])
-	
-	case *A_DEFINITION_4:
-		stage.OnAfterA_DEFINITION_4UpdateCallback = any(callback).(OnAfterUpdateInterface[A_DEFINITION_4])
-	
-	case *A_DEFINITION_5:
-		stage.OnAfterA_DEFINITION_5UpdateCallback = any(callback).(OnAfterUpdateInterface[A_DEFINITION_5])
-	
-	case *A_DEFINITION_6:
-		stage.OnAfterA_DEFINITION_6UpdateCallback = any(callback).(OnAfterUpdateInterface[A_DEFINITION_6])
-	
 	case *A_EDITABLE_ATTS:
 		stage.OnAfterA_EDITABLE_ATTSUpdateCallback = any(callback).(OnAfterUpdateInterface[A_EDITABLE_ATTS])
 	
@@ -1702,39 +1660,6 @@ func SetCallbackAfterUpdateFromFront[Type Gongstruct](stage *StageStruct, callba
 	
 	case *A_TOOL_EXTENSIONS:
 		stage.OnAfterA_TOOL_EXTENSIONSUpdateCallback = any(callback).(OnAfterUpdateInterface[A_TOOL_EXTENSIONS])
-	
-	case *A_TYPE:
-		stage.OnAfterA_TYPEUpdateCallback = any(callback).(OnAfterUpdateInterface[A_TYPE])
-	
-	case *A_TYPE_1:
-		stage.OnAfterA_TYPE_1UpdateCallback = any(callback).(OnAfterUpdateInterface[A_TYPE_1])
-	
-	case *A_TYPE_10:
-		stage.OnAfterA_TYPE_10UpdateCallback = any(callback).(OnAfterUpdateInterface[A_TYPE_10])
-	
-	case *A_TYPE_2:
-		stage.OnAfterA_TYPE_2UpdateCallback = any(callback).(OnAfterUpdateInterface[A_TYPE_2])
-	
-	case *A_TYPE_3:
-		stage.OnAfterA_TYPE_3UpdateCallback = any(callback).(OnAfterUpdateInterface[A_TYPE_3])
-	
-	case *A_TYPE_4:
-		stage.OnAfterA_TYPE_4UpdateCallback = any(callback).(OnAfterUpdateInterface[A_TYPE_4])
-	
-	case *A_TYPE_5:
-		stage.OnAfterA_TYPE_5UpdateCallback = any(callback).(OnAfterUpdateInterface[A_TYPE_5])
-	
-	case *A_TYPE_6:
-		stage.OnAfterA_TYPE_6UpdateCallback = any(callback).(OnAfterUpdateInterface[A_TYPE_6])
-	
-	case *A_TYPE_7:
-		stage.OnAfterA_TYPE_7UpdateCallback = any(callback).(OnAfterUpdateInterface[A_TYPE_7])
-	
-	case *A_TYPE_8:
-		stage.OnAfterA_TYPE_8UpdateCallback = any(callback).(OnAfterUpdateInterface[A_TYPE_8])
-	
-	case *A_TYPE_9:
-		stage.OnAfterA_TYPE_9UpdateCallback = any(callback).(OnAfterUpdateInterface[A_TYPE_9])
 	
 	case *A_VALUES:
 		stage.OnAfterA_VALUESUpdateCallback = any(callback).(OnAfterUpdateInterface[A_VALUES])
@@ -1786,6 +1711,81 @@ func SetCallbackAfterUpdateFromFront[Type Gongstruct](stage *StageStruct, callba
 	
 	case *REQ_IF_TOOL_EXTENSION:
 		stage.OnAfterREQ_IF_TOOL_EXTENSIONUpdateCallback = any(callback).(OnAfterUpdateInterface[REQ_IF_TOOL_EXTENSION])
+	
+	case *Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1:
+		stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1UpdateCallback = any(callback).(OnAfterUpdateInterface[Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1])
+	
+	case *Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1:
+		stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_DATE_REF_1UpdateCallback = any(callback).(OnAfterUpdateInterface[Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1])
+	
+	case *Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1:
+		stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1UpdateCallback = any(callback).(OnAfterUpdateInterface[Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1])
+	
+	case *Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1:
+		stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1UpdateCallback = any(callback).(OnAfterUpdateInterface[Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1])
+	
+	case *Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1:
+		stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_REAL_REF_1UpdateCallback = any(callback).(OnAfterUpdateInterface[Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1])
+	
+	case *Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1:
+		stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_STRING_REF_1UpdateCallback = any(callback).(OnAfterUpdateInterface[Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1])
+	
+	case *Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1:
+		stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_XHTML_REF_1UpdateCallback = any(callback).(OnAfterUpdateInterface[Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1])
+	
+	case *Renamed_ATTRIBUTE_VALUE_BOOLEAN_1:
+		stage.OnAfterRenamed_ATTRIBUTE_VALUE_BOOLEAN_1UpdateCallback = any(callback).(OnAfterUpdateInterface[Renamed_ATTRIBUTE_VALUE_BOOLEAN_1])
+	
+	case *Renamed_ATTRIBUTE_VALUE_DATE_1:
+		stage.OnAfterRenamed_ATTRIBUTE_VALUE_DATE_1UpdateCallback = any(callback).(OnAfterUpdateInterface[Renamed_ATTRIBUTE_VALUE_DATE_1])
+	
+	case *Renamed_ATTRIBUTE_VALUE_ENUMERATION_1:
+		stage.OnAfterRenamed_ATTRIBUTE_VALUE_ENUMERATION_1UpdateCallback = any(callback).(OnAfterUpdateInterface[Renamed_ATTRIBUTE_VALUE_ENUMERATION_1])
+	
+	case *Renamed_ATTRIBUTE_VALUE_INTEGER_1:
+		stage.OnAfterRenamed_ATTRIBUTE_VALUE_INTEGER_1UpdateCallback = any(callback).(OnAfterUpdateInterface[Renamed_ATTRIBUTE_VALUE_INTEGER_1])
+	
+	case *Renamed_ATTRIBUTE_VALUE_REAL_1:
+		stage.OnAfterRenamed_ATTRIBUTE_VALUE_REAL_1UpdateCallback = any(callback).(OnAfterUpdateInterface[Renamed_ATTRIBUTE_VALUE_REAL_1])
+	
+	case *Renamed_ATTRIBUTE_VALUE_STRING_1:
+		stage.OnAfterRenamed_ATTRIBUTE_VALUE_STRING_1UpdateCallback = any(callback).(OnAfterUpdateInterface[Renamed_ATTRIBUTE_VALUE_STRING_1])
+	
+	case *Renamed_ATTRIBUTE_VALUE_XHTML_1:
+		stage.OnAfterRenamed_ATTRIBUTE_VALUE_XHTML_1UpdateCallback = any(callback).(OnAfterUpdateInterface[Renamed_ATTRIBUTE_VALUE_XHTML_1])
+	
+	case *Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1:
+		stage.OnAfterRenamed_DATATYPE_DEFINITION_BOOLEAN_REF_1UpdateCallback = any(callback).(OnAfterUpdateInterface[Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1])
+	
+	case *Renamed_DATATYPE_DEFINITION_DATE_REF_1:
+		stage.OnAfterRenamed_DATATYPE_DEFINITION_DATE_REF_1UpdateCallback = any(callback).(OnAfterUpdateInterface[Renamed_DATATYPE_DEFINITION_DATE_REF_1])
+	
+	case *Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1:
+		stage.OnAfterRenamed_DATATYPE_DEFINITION_ENUMERATION_REF_1UpdateCallback = any(callback).(OnAfterUpdateInterface[Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1])
+	
+	case *Renamed_DATATYPE_DEFINITION_INTEGER_REF_1:
+		stage.OnAfterRenamed_DATATYPE_DEFINITION_INTEGER_REF_1UpdateCallback = any(callback).(OnAfterUpdateInterface[Renamed_DATATYPE_DEFINITION_INTEGER_REF_1])
+	
+	case *Renamed_DATATYPE_DEFINITION_REAL_REF_1:
+		stage.OnAfterRenamed_DATATYPE_DEFINITION_REAL_REF_1UpdateCallback = any(callback).(OnAfterUpdateInterface[Renamed_DATATYPE_DEFINITION_REAL_REF_1])
+	
+	case *Renamed_DATATYPE_DEFINITION_STRING_REF_1:
+		stage.OnAfterRenamed_DATATYPE_DEFINITION_STRING_REF_1UpdateCallback = any(callback).(OnAfterUpdateInterface[Renamed_DATATYPE_DEFINITION_STRING_REF_1])
+	
+	case *Renamed_DATATYPE_DEFINITION_XHTML_REF_1:
+		stage.OnAfterRenamed_DATATYPE_DEFINITION_XHTML_REF_1UpdateCallback = any(callback).(OnAfterUpdateInterface[Renamed_DATATYPE_DEFINITION_XHTML_REF_1])
+	
+	case *Renamed_RELATION_GROUP_TYPE_REF_1:
+		stage.OnAfterRenamed_RELATION_GROUP_TYPE_REF_1UpdateCallback = any(callback).(OnAfterUpdateInterface[Renamed_RELATION_GROUP_TYPE_REF_1])
+	
+	case *Renamed_SPECIFICATION_TYPE_REF_1:
+		stage.OnAfterRenamed_SPECIFICATION_TYPE_REF_1UpdateCallback = any(callback).(OnAfterUpdateInterface[Renamed_SPECIFICATION_TYPE_REF_1])
+	
+	case *Renamed_SPEC_OBJECT_TYPE_REF_1:
+		stage.OnAfterRenamed_SPEC_OBJECT_TYPE_REF_1UpdateCallback = any(callback).(OnAfterUpdateInterface[Renamed_SPEC_OBJECT_TYPE_REF_1])
+	
+	case *Renamed_SPEC_RELATION_TYPE_REF_1:
+		stage.OnAfterRenamed_SPEC_RELATION_TYPE_REF_1UpdateCallback = any(callback).(OnAfterUpdateInterface[Renamed_SPEC_RELATION_TYPE_REF_1])
 	
 	case *SPECIFICATION:
 		stage.OnAfterSPECIFICATIONUpdateCallback = any(callback).(OnAfterUpdateInterface[SPECIFICATION])
@@ -1875,48 +1875,6 @@ func SetCallbackAfterCreateFromFront[Type Gongstruct](stage *StageStruct, callba
 	case *A_DATATYPES:
 		stage.OnAfterA_DATATYPESCreateCallback = any(callback).(OnAfterCreateInterface[A_DATATYPES])
 	
-	case *A_DEFAULT_VALUE:
-		stage.OnAfterA_DEFAULT_VALUECreateCallback = any(callback).(OnAfterCreateInterface[A_DEFAULT_VALUE])
-	
-	case *A_DEFAULT_VALUE_1:
-		stage.OnAfterA_DEFAULT_VALUE_1CreateCallback = any(callback).(OnAfterCreateInterface[A_DEFAULT_VALUE_1])
-	
-	case *A_DEFAULT_VALUE_2:
-		stage.OnAfterA_DEFAULT_VALUE_2CreateCallback = any(callback).(OnAfterCreateInterface[A_DEFAULT_VALUE_2])
-	
-	case *A_DEFAULT_VALUE_3:
-		stage.OnAfterA_DEFAULT_VALUE_3CreateCallback = any(callback).(OnAfterCreateInterface[A_DEFAULT_VALUE_3])
-	
-	case *A_DEFAULT_VALUE_4:
-		stage.OnAfterA_DEFAULT_VALUE_4CreateCallback = any(callback).(OnAfterCreateInterface[A_DEFAULT_VALUE_4])
-	
-	case *A_DEFAULT_VALUE_5:
-		stage.OnAfterA_DEFAULT_VALUE_5CreateCallback = any(callback).(OnAfterCreateInterface[A_DEFAULT_VALUE_5])
-	
-	case *A_DEFAULT_VALUE_6:
-		stage.OnAfterA_DEFAULT_VALUE_6CreateCallback = any(callback).(OnAfterCreateInterface[A_DEFAULT_VALUE_6])
-	
-	case *A_DEFINITION:
-		stage.OnAfterA_DEFINITIONCreateCallback = any(callback).(OnAfterCreateInterface[A_DEFINITION])
-	
-	case *A_DEFINITION_1:
-		stage.OnAfterA_DEFINITION_1CreateCallback = any(callback).(OnAfterCreateInterface[A_DEFINITION_1])
-	
-	case *A_DEFINITION_2:
-		stage.OnAfterA_DEFINITION_2CreateCallback = any(callback).(OnAfterCreateInterface[A_DEFINITION_2])
-	
-	case *A_DEFINITION_3:
-		stage.OnAfterA_DEFINITION_3CreateCallback = any(callback).(OnAfterCreateInterface[A_DEFINITION_3])
-	
-	case *A_DEFINITION_4:
-		stage.OnAfterA_DEFINITION_4CreateCallback = any(callback).(OnAfterCreateInterface[A_DEFINITION_4])
-	
-	case *A_DEFINITION_5:
-		stage.OnAfterA_DEFINITION_5CreateCallback = any(callback).(OnAfterCreateInterface[A_DEFINITION_5])
-	
-	case *A_DEFINITION_6:
-		stage.OnAfterA_DEFINITION_6CreateCallback = any(callback).(OnAfterCreateInterface[A_DEFINITION_6])
-	
 	case *A_EDITABLE_ATTS:
 		stage.OnAfterA_EDITABLE_ATTSCreateCallback = any(callback).(OnAfterCreateInterface[A_EDITABLE_ATTS])
 	
@@ -1961,39 +1919,6 @@ func SetCallbackAfterCreateFromFront[Type Gongstruct](stage *StageStruct, callba
 	
 	case *A_TOOL_EXTENSIONS:
 		stage.OnAfterA_TOOL_EXTENSIONSCreateCallback = any(callback).(OnAfterCreateInterface[A_TOOL_EXTENSIONS])
-	
-	case *A_TYPE:
-		stage.OnAfterA_TYPECreateCallback = any(callback).(OnAfterCreateInterface[A_TYPE])
-	
-	case *A_TYPE_1:
-		stage.OnAfterA_TYPE_1CreateCallback = any(callback).(OnAfterCreateInterface[A_TYPE_1])
-	
-	case *A_TYPE_10:
-		stage.OnAfterA_TYPE_10CreateCallback = any(callback).(OnAfterCreateInterface[A_TYPE_10])
-	
-	case *A_TYPE_2:
-		stage.OnAfterA_TYPE_2CreateCallback = any(callback).(OnAfterCreateInterface[A_TYPE_2])
-	
-	case *A_TYPE_3:
-		stage.OnAfterA_TYPE_3CreateCallback = any(callback).(OnAfterCreateInterface[A_TYPE_3])
-	
-	case *A_TYPE_4:
-		stage.OnAfterA_TYPE_4CreateCallback = any(callback).(OnAfterCreateInterface[A_TYPE_4])
-	
-	case *A_TYPE_5:
-		stage.OnAfterA_TYPE_5CreateCallback = any(callback).(OnAfterCreateInterface[A_TYPE_5])
-	
-	case *A_TYPE_6:
-		stage.OnAfterA_TYPE_6CreateCallback = any(callback).(OnAfterCreateInterface[A_TYPE_6])
-	
-	case *A_TYPE_7:
-		stage.OnAfterA_TYPE_7CreateCallback = any(callback).(OnAfterCreateInterface[A_TYPE_7])
-	
-	case *A_TYPE_8:
-		stage.OnAfterA_TYPE_8CreateCallback = any(callback).(OnAfterCreateInterface[A_TYPE_8])
-	
-	case *A_TYPE_9:
-		stage.OnAfterA_TYPE_9CreateCallback = any(callback).(OnAfterCreateInterface[A_TYPE_9])
 	
 	case *A_VALUES:
 		stage.OnAfterA_VALUESCreateCallback = any(callback).(OnAfterCreateInterface[A_VALUES])
@@ -2045,6 +1970,81 @@ func SetCallbackAfterCreateFromFront[Type Gongstruct](stage *StageStruct, callba
 	
 	case *REQ_IF_TOOL_EXTENSION:
 		stage.OnAfterREQ_IF_TOOL_EXTENSIONCreateCallback = any(callback).(OnAfterCreateInterface[REQ_IF_TOOL_EXTENSION])
+	
+	case *Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1:
+		stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1CreateCallback = any(callback).(OnAfterCreateInterface[Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1])
+	
+	case *Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1:
+		stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_DATE_REF_1CreateCallback = any(callback).(OnAfterCreateInterface[Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1])
+	
+	case *Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1:
+		stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1CreateCallback = any(callback).(OnAfterCreateInterface[Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1])
+	
+	case *Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1:
+		stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1CreateCallback = any(callback).(OnAfterCreateInterface[Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1])
+	
+	case *Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1:
+		stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_REAL_REF_1CreateCallback = any(callback).(OnAfterCreateInterface[Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1])
+	
+	case *Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1:
+		stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_STRING_REF_1CreateCallback = any(callback).(OnAfterCreateInterface[Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1])
+	
+	case *Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1:
+		stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_XHTML_REF_1CreateCallback = any(callback).(OnAfterCreateInterface[Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1])
+	
+	case *Renamed_ATTRIBUTE_VALUE_BOOLEAN_1:
+		stage.OnAfterRenamed_ATTRIBUTE_VALUE_BOOLEAN_1CreateCallback = any(callback).(OnAfterCreateInterface[Renamed_ATTRIBUTE_VALUE_BOOLEAN_1])
+	
+	case *Renamed_ATTRIBUTE_VALUE_DATE_1:
+		stage.OnAfterRenamed_ATTRIBUTE_VALUE_DATE_1CreateCallback = any(callback).(OnAfterCreateInterface[Renamed_ATTRIBUTE_VALUE_DATE_1])
+	
+	case *Renamed_ATTRIBUTE_VALUE_ENUMERATION_1:
+		stage.OnAfterRenamed_ATTRIBUTE_VALUE_ENUMERATION_1CreateCallback = any(callback).(OnAfterCreateInterface[Renamed_ATTRIBUTE_VALUE_ENUMERATION_1])
+	
+	case *Renamed_ATTRIBUTE_VALUE_INTEGER_1:
+		stage.OnAfterRenamed_ATTRIBUTE_VALUE_INTEGER_1CreateCallback = any(callback).(OnAfterCreateInterface[Renamed_ATTRIBUTE_VALUE_INTEGER_1])
+	
+	case *Renamed_ATTRIBUTE_VALUE_REAL_1:
+		stage.OnAfterRenamed_ATTRIBUTE_VALUE_REAL_1CreateCallback = any(callback).(OnAfterCreateInterface[Renamed_ATTRIBUTE_VALUE_REAL_1])
+	
+	case *Renamed_ATTRIBUTE_VALUE_STRING_1:
+		stage.OnAfterRenamed_ATTRIBUTE_VALUE_STRING_1CreateCallback = any(callback).(OnAfterCreateInterface[Renamed_ATTRIBUTE_VALUE_STRING_1])
+	
+	case *Renamed_ATTRIBUTE_VALUE_XHTML_1:
+		stage.OnAfterRenamed_ATTRIBUTE_VALUE_XHTML_1CreateCallback = any(callback).(OnAfterCreateInterface[Renamed_ATTRIBUTE_VALUE_XHTML_1])
+	
+	case *Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1:
+		stage.OnAfterRenamed_DATATYPE_DEFINITION_BOOLEAN_REF_1CreateCallback = any(callback).(OnAfterCreateInterface[Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1])
+	
+	case *Renamed_DATATYPE_DEFINITION_DATE_REF_1:
+		stage.OnAfterRenamed_DATATYPE_DEFINITION_DATE_REF_1CreateCallback = any(callback).(OnAfterCreateInterface[Renamed_DATATYPE_DEFINITION_DATE_REF_1])
+	
+	case *Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1:
+		stage.OnAfterRenamed_DATATYPE_DEFINITION_ENUMERATION_REF_1CreateCallback = any(callback).(OnAfterCreateInterface[Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1])
+	
+	case *Renamed_DATATYPE_DEFINITION_INTEGER_REF_1:
+		stage.OnAfterRenamed_DATATYPE_DEFINITION_INTEGER_REF_1CreateCallback = any(callback).(OnAfterCreateInterface[Renamed_DATATYPE_DEFINITION_INTEGER_REF_1])
+	
+	case *Renamed_DATATYPE_DEFINITION_REAL_REF_1:
+		stage.OnAfterRenamed_DATATYPE_DEFINITION_REAL_REF_1CreateCallback = any(callback).(OnAfterCreateInterface[Renamed_DATATYPE_DEFINITION_REAL_REF_1])
+	
+	case *Renamed_DATATYPE_DEFINITION_STRING_REF_1:
+		stage.OnAfterRenamed_DATATYPE_DEFINITION_STRING_REF_1CreateCallback = any(callback).(OnAfterCreateInterface[Renamed_DATATYPE_DEFINITION_STRING_REF_1])
+	
+	case *Renamed_DATATYPE_DEFINITION_XHTML_REF_1:
+		stage.OnAfterRenamed_DATATYPE_DEFINITION_XHTML_REF_1CreateCallback = any(callback).(OnAfterCreateInterface[Renamed_DATATYPE_DEFINITION_XHTML_REF_1])
+	
+	case *Renamed_RELATION_GROUP_TYPE_REF_1:
+		stage.OnAfterRenamed_RELATION_GROUP_TYPE_REF_1CreateCallback = any(callback).(OnAfterCreateInterface[Renamed_RELATION_GROUP_TYPE_REF_1])
+	
+	case *Renamed_SPECIFICATION_TYPE_REF_1:
+		stage.OnAfterRenamed_SPECIFICATION_TYPE_REF_1CreateCallback = any(callback).(OnAfterCreateInterface[Renamed_SPECIFICATION_TYPE_REF_1])
+	
+	case *Renamed_SPEC_OBJECT_TYPE_REF_1:
+		stage.OnAfterRenamed_SPEC_OBJECT_TYPE_REF_1CreateCallback = any(callback).(OnAfterCreateInterface[Renamed_SPEC_OBJECT_TYPE_REF_1])
+	
+	case *Renamed_SPEC_RELATION_TYPE_REF_1:
+		stage.OnAfterRenamed_SPEC_RELATION_TYPE_REF_1CreateCallback = any(callback).(OnAfterCreateInterface[Renamed_SPEC_RELATION_TYPE_REF_1])
 	
 	case *SPECIFICATION:
 		stage.OnAfterSPECIFICATIONCreateCallback = any(callback).(OnAfterCreateInterface[SPECIFICATION])
@@ -2134,48 +2134,6 @@ func SetCallbackAfterDeleteFromFront[Type Gongstruct](stage *StageStruct, callba
 	case *A_DATATYPES:
 		stage.OnAfterA_DATATYPESDeleteCallback = any(callback).(OnAfterDeleteInterface[A_DATATYPES])
 	
-	case *A_DEFAULT_VALUE:
-		stage.OnAfterA_DEFAULT_VALUEDeleteCallback = any(callback).(OnAfterDeleteInterface[A_DEFAULT_VALUE])
-	
-	case *A_DEFAULT_VALUE_1:
-		stage.OnAfterA_DEFAULT_VALUE_1DeleteCallback = any(callback).(OnAfterDeleteInterface[A_DEFAULT_VALUE_1])
-	
-	case *A_DEFAULT_VALUE_2:
-		stage.OnAfterA_DEFAULT_VALUE_2DeleteCallback = any(callback).(OnAfterDeleteInterface[A_DEFAULT_VALUE_2])
-	
-	case *A_DEFAULT_VALUE_3:
-		stage.OnAfterA_DEFAULT_VALUE_3DeleteCallback = any(callback).(OnAfterDeleteInterface[A_DEFAULT_VALUE_3])
-	
-	case *A_DEFAULT_VALUE_4:
-		stage.OnAfterA_DEFAULT_VALUE_4DeleteCallback = any(callback).(OnAfterDeleteInterface[A_DEFAULT_VALUE_4])
-	
-	case *A_DEFAULT_VALUE_5:
-		stage.OnAfterA_DEFAULT_VALUE_5DeleteCallback = any(callback).(OnAfterDeleteInterface[A_DEFAULT_VALUE_5])
-	
-	case *A_DEFAULT_VALUE_6:
-		stage.OnAfterA_DEFAULT_VALUE_6DeleteCallback = any(callback).(OnAfterDeleteInterface[A_DEFAULT_VALUE_6])
-	
-	case *A_DEFINITION:
-		stage.OnAfterA_DEFINITIONDeleteCallback = any(callback).(OnAfterDeleteInterface[A_DEFINITION])
-	
-	case *A_DEFINITION_1:
-		stage.OnAfterA_DEFINITION_1DeleteCallback = any(callback).(OnAfterDeleteInterface[A_DEFINITION_1])
-	
-	case *A_DEFINITION_2:
-		stage.OnAfterA_DEFINITION_2DeleteCallback = any(callback).(OnAfterDeleteInterface[A_DEFINITION_2])
-	
-	case *A_DEFINITION_3:
-		stage.OnAfterA_DEFINITION_3DeleteCallback = any(callback).(OnAfterDeleteInterface[A_DEFINITION_3])
-	
-	case *A_DEFINITION_4:
-		stage.OnAfterA_DEFINITION_4DeleteCallback = any(callback).(OnAfterDeleteInterface[A_DEFINITION_4])
-	
-	case *A_DEFINITION_5:
-		stage.OnAfterA_DEFINITION_5DeleteCallback = any(callback).(OnAfterDeleteInterface[A_DEFINITION_5])
-	
-	case *A_DEFINITION_6:
-		stage.OnAfterA_DEFINITION_6DeleteCallback = any(callback).(OnAfterDeleteInterface[A_DEFINITION_6])
-	
 	case *A_EDITABLE_ATTS:
 		stage.OnAfterA_EDITABLE_ATTSDeleteCallback = any(callback).(OnAfterDeleteInterface[A_EDITABLE_ATTS])
 	
@@ -2220,39 +2178,6 @@ func SetCallbackAfterDeleteFromFront[Type Gongstruct](stage *StageStruct, callba
 	
 	case *A_TOOL_EXTENSIONS:
 		stage.OnAfterA_TOOL_EXTENSIONSDeleteCallback = any(callback).(OnAfterDeleteInterface[A_TOOL_EXTENSIONS])
-	
-	case *A_TYPE:
-		stage.OnAfterA_TYPEDeleteCallback = any(callback).(OnAfterDeleteInterface[A_TYPE])
-	
-	case *A_TYPE_1:
-		stage.OnAfterA_TYPE_1DeleteCallback = any(callback).(OnAfterDeleteInterface[A_TYPE_1])
-	
-	case *A_TYPE_10:
-		stage.OnAfterA_TYPE_10DeleteCallback = any(callback).(OnAfterDeleteInterface[A_TYPE_10])
-	
-	case *A_TYPE_2:
-		stage.OnAfterA_TYPE_2DeleteCallback = any(callback).(OnAfterDeleteInterface[A_TYPE_2])
-	
-	case *A_TYPE_3:
-		stage.OnAfterA_TYPE_3DeleteCallback = any(callback).(OnAfterDeleteInterface[A_TYPE_3])
-	
-	case *A_TYPE_4:
-		stage.OnAfterA_TYPE_4DeleteCallback = any(callback).(OnAfterDeleteInterface[A_TYPE_4])
-	
-	case *A_TYPE_5:
-		stage.OnAfterA_TYPE_5DeleteCallback = any(callback).(OnAfterDeleteInterface[A_TYPE_5])
-	
-	case *A_TYPE_6:
-		stage.OnAfterA_TYPE_6DeleteCallback = any(callback).(OnAfterDeleteInterface[A_TYPE_6])
-	
-	case *A_TYPE_7:
-		stage.OnAfterA_TYPE_7DeleteCallback = any(callback).(OnAfterDeleteInterface[A_TYPE_7])
-	
-	case *A_TYPE_8:
-		stage.OnAfterA_TYPE_8DeleteCallback = any(callback).(OnAfterDeleteInterface[A_TYPE_8])
-	
-	case *A_TYPE_9:
-		stage.OnAfterA_TYPE_9DeleteCallback = any(callback).(OnAfterDeleteInterface[A_TYPE_9])
 	
 	case *A_VALUES:
 		stage.OnAfterA_VALUESDeleteCallback = any(callback).(OnAfterDeleteInterface[A_VALUES])
@@ -2304,6 +2229,81 @@ func SetCallbackAfterDeleteFromFront[Type Gongstruct](stage *StageStruct, callba
 	
 	case *REQ_IF_TOOL_EXTENSION:
 		stage.OnAfterREQ_IF_TOOL_EXTENSIONDeleteCallback = any(callback).(OnAfterDeleteInterface[REQ_IF_TOOL_EXTENSION])
+	
+	case *Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1:
+		stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1DeleteCallback = any(callback).(OnAfterDeleteInterface[Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1])
+	
+	case *Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1:
+		stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_DATE_REF_1DeleteCallback = any(callback).(OnAfterDeleteInterface[Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1])
+	
+	case *Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1:
+		stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1DeleteCallback = any(callback).(OnAfterDeleteInterface[Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1])
+	
+	case *Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1:
+		stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1DeleteCallback = any(callback).(OnAfterDeleteInterface[Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1])
+	
+	case *Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1:
+		stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_REAL_REF_1DeleteCallback = any(callback).(OnAfterDeleteInterface[Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1])
+	
+	case *Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1:
+		stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_STRING_REF_1DeleteCallback = any(callback).(OnAfterDeleteInterface[Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1])
+	
+	case *Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1:
+		stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_XHTML_REF_1DeleteCallback = any(callback).(OnAfterDeleteInterface[Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1])
+	
+	case *Renamed_ATTRIBUTE_VALUE_BOOLEAN_1:
+		stage.OnAfterRenamed_ATTRIBUTE_VALUE_BOOLEAN_1DeleteCallback = any(callback).(OnAfterDeleteInterface[Renamed_ATTRIBUTE_VALUE_BOOLEAN_1])
+	
+	case *Renamed_ATTRIBUTE_VALUE_DATE_1:
+		stage.OnAfterRenamed_ATTRIBUTE_VALUE_DATE_1DeleteCallback = any(callback).(OnAfterDeleteInterface[Renamed_ATTRIBUTE_VALUE_DATE_1])
+	
+	case *Renamed_ATTRIBUTE_VALUE_ENUMERATION_1:
+		stage.OnAfterRenamed_ATTRIBUTE_VALUE_ENUMERATION_1DeleteCallback = any(callback).(OnAfterDeleteInterface[Renamed_ATTRIBUTE_VALUE_ENUMERATION_1])
+	
+	case *Renamed_ATTRIBUTE_VALUE_INTEGER_1:
+		stage.OnAfterRenamed_ATTRIBUTE_VALUE_INTEGER_1DeleteCallback = any(callback).(OnAfterDeleteInterface[Renamed_ATTRIBUTE_VALUE_INTEGER_1])
+	
+	case *Renamed_ATTRIBUTE_VALUE_REAL_1:
+		stage.OnAfterRenamed_ATTRIBUTE_VALUE_REAL_1DeleteCallback = any(callback).(OnAfterDeleteInterface[Renamed_ATTRIBUTE_VALUE_REAL_1])
+	
+	case *Renamed_ATTRIBUTE_VALUE_STRING_1:
+		stage.OnAfterRenamed_ATTRIBUTE_VALUE_STRING_1DeleteCallback = any(callback).(OnAfterDeleteInterface[Renamed_ATTRIBUTE_VALUE_STRING_1])
+	
+	case *Renamed_ATTRIBUTE_VALUE_XHTML_1:
+		stage.OnAfterRenamed_ATTRIBUTE_VALUE_XHTML_1DeleteCallback = any(callback).(OnAfterDeleteInterface[Renamed_ATTRIBUTE_VALUE_XHTML_1])
+	
+	case *Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1:
+		stage.OnAfterRenamed_DATATYPE_DEFINITION_BOOLEAN_REF_1DeleteCallback = any(callback).(OnAfterDeleteInterface[Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1])
+	
+	case *Renamed_DATATYPE_DEFINITION_DATE_REF_1:
+		stage.OnAfterRenamed_DATATYPE_DEFINITION_DATE_REF_1DeleteCallback = any(callback).(OnAfterDeleteInterface[Renamed_DATATYPE_DEFINITION_DATE_REF_1])
+	
+	case *Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1:
+		stage.OnAfterRenamed_DATATYPE_DEFINITION_ENUMERATION_REF_1DeleteCallback = any(callback).(OnAfterDeleteInterface[Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1])
+	
+	case *Renamed_DATATYPE_DEFINITION_INTEGER_REF_1:
+		stage.OnAfterRenamed_DATATYPE_DEFINITION_INTEGER_REF_1DeleteCallback = any(callback).(OnAfterDeleteInterface[Renamed_DATATYPE_DEFINITION_INTEGER_REF_1])
+	
+	case *Renamed_DATATYPE_DEFINITION_REAL_REF_1:
+		stage.OnAfterRenamed_DATATYPE_DEFINITION_REAL_REF_1DeleteCallback = any(callback).(OnAfterDeleteInterface[Renamed_DATATYPE_DEFINITION_REAL_REF_1])
+	
+	case *Renamed_DATATYPE_DEFINITION_STRING_REF_1:
+		stage.OnAfterRenamed_DATATYPE_DEFINITION_STRING_REF_1DeleteCallback = any(callback).(OnAfterDeleteInterface[Renamed_DATATYPE_DEFINITION_STRING_REF_1])
+	
+	case *Renamed_DATATYPE_DEFINITION_XHTML_REF_1:
+		stage.OnAfterRenamed_DATATYPE_DEFINITION_XHTML_REF_1DeleteCallback = any(callback).(OnAfterDeleteInterface[Renamed_DATATYPE_DEFINITION_XHTML_REF_1])
+	
+	case *Renamed_RELATION_GROUP_TYPE_REF_1:
+		stage.OnAfterRenamed_RELATION_GROUP_TYPE_REF_1DeleteCallback = any(callback).(OnAfterDeleteInterface[Renamed_RELATION_GROUP_TYPE_REF_1])
+	
+	case *Renamed_SPECIFICATION_TYPE_REF_1:
+		stage.OnAfterRenamed_SPECIFICATION_TYPE_REF_1DeleteCallback = any(callback).(OnAfterDeleteInterface[Renamed_SPECIFICATION_TYPE_REF_1])
+	
+	case *Renamed_SPEC_OBJECT_TYPE_REF_1:
+		stage.OnAfterRenamed_SPEC_OBJECT_TYPE_REF_1DeleteCallback = any(callback).(OnAfterDeleteInterface[Renamed_SPEC_OBJECT_TYPE_REF_1])
+	
+	case *Renamed_SPEC_RELATION_TYPE_REF_1:
+		stage.OnAfterRenamed_SPEC_RELATION_TYPE_REF_1DeleteCallback = any(callback).(OnAfterDeleteInterface[Renamed_SPEC_RELATION_TYPE_REF_1])
 	
 	case *SPECIFICATION:
 		stage.OnAfterSPECIFICATIONDeleteCallback = any(callback).(OnAfterDeleteInterface[SPECIFICATION])
@@ -2393,48 +2393,6 @@ func SetCallbackAfterReadFromFront[Type Gongstruct](stage *StageStruct, callback
 	case *A_DATATYPES:
 		stage.OnAfterA_DATATYPESReadCallback = any(callback).(OnAfterReadInterface[A_DATATYPES])
 	
-	case *A_DEFAULT_VALUE:
-		stage.OnAfterA_DEFAULT_VALUEReadCallback = any(callback).(OnAfterReadInterface[A_DEFAULT_VALUE])
-	
-	case *A_DEFAULT_VALUE_1:
-		stage.OnAfterA_DEFAULT_VALUE_1ReadCallback = any(callback).(OnAfterReadInterface[A_DEFAULT_VALUE_1])
-	
-	case *A_DEFAULT_VALUE_2:
-		stage.OnAfterA_DEFAULT_VALUE_2ReadCallback = any(callback).(OnAfterReadInterface[A_DEFAULT_VALUE_2])
-	
-	case *A_DEFAULT_VALUE_3:
-		stage.OnAfterA_DEFAULT_VALUE_3ReadCallback = any(callback).(OnAfterReadInterface[A_DEFAULT_VALUE_3])
-	
-	case *A_DEFAULT_VALUE_4:
-		stage.OnAfterA_DEFAULT_VALUE_4ReadCallback = any(callback).(OnAfterReadInterface[A_DEFAULT_VALUE_4])
-	
-	case *A_DEFAULT_VALUE_5:
-		stage.OnAfterA_DEFAULT_VALUE_5ReadCallback = any(callback).(OnAfterReadInterface[A_DEFAULT_VALUE_5])
-	
-	case *A_DEFAULT_VALUE_6:
-		stage.OnAfterA_DEFAULT_VALUE_6ReadCallback = any(callback).(OnAfterReadInterface[A_DEFAULT_VALUE_6])
-	
-	case *A_DEFINITION:
-		stage.OnAfterA_DEFINITIONReadCallback = any(callback).(OnAfterReadInterface[A_DEFINITION])
-	
-	case *A_DEFINITION_1:
-		stage.OnAfterA_DEFINITION_1ReadCallback = any(callback).(OnAfterReadInterface[A_DEFINITION_1])
-	
-	case *A_DEFINITION_2:
-		stage.OnAfterA_DEFINITION_2ReadCallback = any(callback).(OnAfterReadInterface[A_DEFINITION_2])
-	
-	case *A_DEFINITION_3:
-		stage.OnAfterA_DEFINITION_3ReadCallback = any(callback).(OnAfterReadInterface[A_DEFINITION_3])
-	
-	case *A_DEFINITION_4:
-		stage.OnAfterA_DEFINITION_4ReadCallback = any(callback).(OnAfterReadInterface[A_DEFINITION_4])
-	
-	case *A_DEFINITION_5:
-		stage.OnAfterA_DEFINITION_5ReadCallback = any(callback).(OnAfterReadInterface[A_DEFINITION_5])
-	
-	case *A_DEFINITION_6:
-		stage.OnAfterA_DEFINITION_6ReadCallback = any(callback).(OnAfterReadInterface[A_DEFINITION_6])
-	
 	case *A_EDITABLE_ATTS:
 		stage.OnAfterA_EDITABLE_ATTSReadCallback = any(callback).(OnAfterReadInterface[A_EDITABLE_ATTS])
 	
@@ -2479,39 +2437,6 @@ func SetCallbackAfterReadFromFront[Type Gongstruct](stage *StageStruct, callback
 	
 	case *A_TOOL_EXTENSIONS:
 		stage.OnAfterA_TOOL_EXTENSIONSReadCallback = any(callback).(OnAfterReadInterface[A_TOOL_EXTENSIONS])
-	
-	case *A_TYPE:
-		stage.OnAfterA_TYPEReadCallback = any(callback).(OnAfterReadInterface[A_TYPE])
-	
-	case *A_TYPE_1:
-		stage.OnAfterA_TYPE_1ReadCallback = any(callback).(OnAfterReadInterface[A_TYPE_1])
-	
-	case *A_TYPE_10:
-		stage.OnAfterA_TYPE_10ReadCallback = any(callback).(OnAfterReadInterface[A_TYPE_10])
-	
-	case *A_TYPE_2:
-		stage.OnAfterA_TYPE_2ReadCallback = any(callback).(OnAfterReadInterface[A_TYPE_2])
-	
-	case *A_TYPE_3:
-		stage.OnAfterA_TYPE_3ReadCallback = any(callback).(OnAfterReadInterface[A_TYPE_3])
-	
-	case *A_TYPE_4:
-		stage.OnAfterA_TYPE_4ReadCallback = any(callback).(OnAfterReadInterface[A_TYPE_4])
-	
-	case *A_TYPE_5:
-		stage.OnAfterA_TYPE_5ReadCallback = any(callback).(OnAfterReadInterface[A_TYPE_5])
-	
-	case *A_TYPE_6:
-		stage.OnAfterA_TYPE_6ReadCallback = any(callback).(OnAfterReadInterface[A_TYPE_6])
-	
-	case *A_TYPE_7:
-		stage.OnAfterA_TYPE_7ReadCallback = any(callback).(OnAfterReadInterface[A_TYPE_7])
-	
-	case *A_TYPE_8:
-		stage.OnAfterA_TYPE_8ReadCallback = any(callback).(OnAfterReadInterface[A_TYPE_8])
-	
-	case *A_TYPE_9:
-		stage.OnAfterA_TYPE_9ReadCallback = any(callback).(OnAfterReadInterface[A_TYPE_9])
 	
 	case *A_VALUES:
 		stage.OnAfterA_VALUESReadCallback = any(callback).(OnAfterReadInterface[A_VALUES])
@@ -2563,6 +2488,81 @@ func SetCallbackAfterReadFromFront[Type Gongstruct](stage *StageStruct, callback
 	
 	case *REQ_IF_TOOL_EXTENSION:
 		stage.OnAfterREQ_IF_TOOL_EXTENSIONReadCallback = any(callback).(OnAfterReadInterface[REQ_IF_TOOL_EXTENSION])
+	
+	case *Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1:
+		stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1ReadCallback = any(callback).(OnAfterReadInterface[Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1])
+	
+	case *Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1:
+		stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_DATE_REF_1ReadCallback = any(callback).(OnAfterReadInterface[Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1])
+	
+	case *Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1:
+		stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1ReadCallback = any(callback).(OnAfterReadInterface[Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1])
+	
+	case *Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1:
+		stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1ReadCallback = any(callback).(OnAfterReadInterface[Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1])
+	
+	case *Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1:
+		stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_REAL_REF_1ReadCallback = any(callback).(OnAfterReadInterface[Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1])
+	
+	case *Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1:
+		stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_STRING_REF_1ReadCallback = any(callback).(OnAfterReadInterface[Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1])
+	
+	case *Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1:
+		stage.OnAfterRenamed_ATTRIBUTE_DEFINITION_XHTML_REF_1ReadCallback = any(callback).(OnAfterReadInterface[Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1])
+	
+	case *Renamed_ATTRIBUTE_VALUE_BOOLEAN_1:
+		stage.OnAfterRenamed_ATTRIBUTE_VALUE_BOOLEAN_1ReadCallback = any(callback).(OnAfterReadInterface[Renamed_ATTRIBUTE_VALUE_BOOLEAN_1])
+	
+	case *Renamed_ATTRIBUTE_VALUE_DATE_1:
+		stage.OnAfterRenamed_ATTRIBUTE_VALUE_DATE_1ReadCallback = any(callback).(OnAfterReadInterface[Renamed_ATTRIBUTE_VALUE_DATE_1])
+	
+	case *Renamed_ATTRIBUTE_VALUE_ENUMERATION_1:
+		stage.OnAfterRenamed_ATTRIBUTE_VALUE_ENUMERATION_1ReadCallback = any(callback).(OnAfterReadInterface[Renamed_ATTRIBUTE_VALUE_ENUMERATION_1])
+	
+	case *Renamed_ATTRIBUTE_VALUE_INTEGER_1:
+		stage.OnAfterRenamed_ATTRIBUTE_VALUE_INTEGER_1ReadCallback = any(callback).(OnAfterReadInterface[Renamed_ATTRIBUTE_VALUE_INTEGER_1])
+	
+	case *Renamed_ATTRIBUTE_VALUE_REAL_1:
+		stage.OnAfterRenamed_ATTRIBUTE_VALUE_REAL_1ReadCallback = any(callback).(OnAfterReadInterface[Renamed_ATTRIBUTE_VALUE_REAL_1])
+	
+	case *Renamed_ATTRIBUTE_VALUE_STRING_1:
+		stage.OnAfterRenamed_ATTRIBUTE_VALUE_STRING_1ReadCallback = any(callback).(OnAfterReadInterface[Renamed_ATTRIBUTE_VALUE_STRING_1])
+	
+	case *Renamed_ATTRIBUTE_VALUE_XHTML_1:
+		stage.OnAfterRenamed_ATTRIBUTE_VALUE_XHTML_1ReadCallback = any(callback).(OnAfterReadInterface[Renamed_ATTRIBUTE_VALUE_XHTML_1])
+	
+	case *Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1:
+		stage.OnAfterRenamed_DATATYPE_DEFINITION_BOOLEAN_REF_1ReadCallback = any(callback).(OnAfterReadInterface[Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1])
+	
+	case *Renamed_DATATYPE_DEFINITION_DATE_REF_1:
+		stage.OnAfterRenamed_DATATYPE_DEFINITION_DATE_REF_1ReadCallback = any(callback).(OnAfterReadInterface[Renamed_DATATYPE_DEFINITION_DATE_REF_1])
+	
+	case *Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1:
+		stage.OnAfterRenamed_DATATYPE_DEFINITION_ENUMERATION_REF_1ReadCallback = any(callback).(OnAfterReadInterface[Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1])
+	
+	case *Renamed_DATATYPE_DEFINITION_INTEGER_REF_1:
+		stage.OnAfterRenamed_DATATYPE_DEFINITION_INTEGER_REF_1ReadCallback = any(callback).(OnAfterReadInterface[Renamed_DATATYPE_DEFINITION_INTEGER_REF_1])
+	
+	case *Renamed_DATATYPE_DEFINITION_REAL_REF_1:
+		stage.OnAfterRenamed_DATATYPE_DEFINITION_REAL_REF_1ReadCallback = any(callback).(OnAfterReadInterface[Renamed_DATATYPE_DEFINITION_REAL_REF_1])
+	
+	case *Renamed_DATATYPE_DEFINITION_STRING_REF_1:
+		stage.OnAfterRenamed_DATATYPE_DEFINITION_STRING_REF_1ReadCallback = any(callback).(OnAfterReadInterface[Renamed_DATATYPE_DEFINITION_STRING_REF_1])
+	
+	case *Renamed_DATATYPE_DEFINITION_XHTML_REF_1:
+		stage.OnAfterRenamed_DATATYPE_DEFINITION_XHTML_REF_1ReadCallback = any(callback).(OnAfterReadInterface[Renamed_DATATYPE_DEFINITION_XHTML_REF_1])
+	
+	case *Renamed_RELATION_GROUP_TYPE_REF_1:
+		stage.OnAfterRenamed_RELATION_GROUP_TYPE_REF_1ReadCallback = any(callback).(OnAfterReadInterface[Renamed_RELATION_GROUP_TYPE_REF_1])
+	
+	case *Renamed_SPECIFICATION_TYPE_REF_1:
+		stage.OnAfterRenamed_SPECIFICATION_TYPE_REF_1ReadCallback = any(callback).(OnAfterReadInterface[Renamed_SPECIFICATION_TYPE_REF_1])
+	
+	case *Renamed_SPEC_OBJECT_TYPE_REF_1:
+		stage.OnAfterRenamed_SPEC_OBJECT_TYPE_REF_1ReadCallback = any(callback).(OnAfterReadInterface[Renamed_SPEC_OBJECT_TYPE_REF_1])
+	
+	case *Renamed_SPEC_RELATION_TYPE_REF_1:
+		stage.OnAfterRenamed_SPEC_RELATION_TYPE_REF_1ReadCallback = any(callback).(OnAfterReadInterface[Renamed_SPEC_RELATION_TYPE_REF_1])
 	
 	case *SPECIFICATION:
 		stage.OnAfterSPECIFICATIONReadCallback = any(callback).(OnAfterReadInterface[SPECIFICATION])

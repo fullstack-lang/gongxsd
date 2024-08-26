@@ -70,7 +70,7 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 					for _, fieldInstance := range reference {
 						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
 							_inferedTypeInstance.DEFAULT_VALUE =
-								append(_inferedTypeInstance.DEFAULT_VALUE, any(fieldInstance).(*A_DEFAULT_VALUE_1))
+								append(_inferedTypeInstance.DEFAULT_VALUE, any(fieldInstance).(*Renamed_ATTRIBUTE_VALUE_BOOLEAN_1))
 						}
 					}
 				}
@@ -89,7 +89,7 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 					for _, fieldInstance := range reference {
 						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
 							_inferedTypeInstance.TYPE =
-								append(_inferedTypeInstance.TYPE, any(fieldInstance).(*A_TYPE_7))
+								append(_inferedTypeInstance.TYPE, any(fieldInstance).(*Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1))
 						}
 					}
 				}
@@ -130,7 +130,7 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 					for _, fieldInstance := range reference {
 						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
 							_inferedTypeInstance.DEFAULT_VALUE =
-								append(_inferedTypeInstance.DEFAULT_VALUE, any(fieldInstance).(*A_DEFAULT_VALUE_3))
+								append(_inferedTypeInstance.DEFAULT_VALUE, any(fieldInstance).(*Renamed_ATTRIBUTE_VALUE_DATE_1))
 						}
 					}
 				}
@@ -149,7 +149,7 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 					for _, fieldInstance := range reference {
 						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
 							_inferedTypeInstance.TYPE =
-								append(_inferedTypeInstance.TYPE, any(fieldInstance).(*A_TYPE))
+								append(_inferedTypeInstance.TYPE, any(fieldInstance).(*Renamed_DATATYPE_DEFINITION_DATE_REF_1))
 						}
 					}
 				}
@@ -190,7 +190,7 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 					for _, fieldInstance := range reference {
 						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
 							_inferedTypeInstance.DEFAULT_VALUE =
-								append(_inferedTypeInstance.DEFAULT_VALUE, any(fieldInstance).(*A_DEFAULT_VALUE_5))
+								append(_inferedTypeInstance.DEFAULT_VALUE, any(fieldInstance).(*Renamed_ATTRIBUTE_VALUE_ENUMERATION_1))
 						}
 					}
 				}
@@ -209,7 +209,7 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 					for _, fieldInstance := range reference {
 						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
 							_inferedTypeInstance.TYPE =
-								append(_inferedTypeInstance.TYPE, any(fieldInstance).(*A_TYPE_9))
+								append(_inferedTypeInstance.TYPE, any(fieldInstance).(*Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1))
 						}
 					}
 				}
@@ -250,7 +250,7 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 					for _, fieldInstance := range reference {
 						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
 							_inferedTypeInstance.DEFAULT_VALUE =
-								append(_inferedTypeInstance.DEFAULT_VALUE, any(fieldInstance).(*A_DEFAULT_VALUE_6))
+								append(_inferedTypeInstance.DEFAULT_VALUE, any(fieldInstance).(*Renamed_ATTRIBUTE_VALUE_INTEGER_1))
 						}
 					}
 				}
@@ -269,7 +269,7 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 					for _, fieldInstance := range reference {
 						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
 							_inferedTypeInstance.TYPE =
-								append(_inferedTypeInstance.TYPE, any(fieldInstance).(*A_TYPE_5))
+								append(_inferedTypeInstance.TYPE, any(fieldInstance).(*Renamed_DATATYPE_DEFINITION_INTEGER_REF_1))
 						}
 					}
 				}
@@ -310,7 +310,7 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 					for _, fieldInstance := range reference {
 						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
 							_inferedTypeInstance.DEFAULT_VALUE =
-								append(_inferedTypeInstance.DEFAULT_VALUE, any(fieldInstance).(*A_DEFAULT_VALUE_4))
+								append(_inferedTypeInstance.DEFAULT_VALUE, any(fieldInstance).(*Renamed_ATTRIBUTE_VALUE_REAL_1))
 						}
 					}
 				}
@@ -329,7 +329,7 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 					for _, fieldInstance := range reference {
 						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
 							_inferedTypeInstance.TYPE =
-								append(_inferedTypeInstance.TYPE, any(fieldInstance).(*A_TYPE_3))
+								append(_inferedTypeInstance.TYPE, any(fieldInstance).(*Renamed_DATATYPE_DEFINITION_REAL_REF_1))
 						}
 					}
 				}
@@ -370,7 +370,7 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 					for _, fieldInstance := range reference {
 						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
 							_inferedTypeInstance.DEFAULT_VALUE =
-								append(_inferedTypeInstance.DEFAULT_VALUE, any(fieldInstance).(*A_DEFAULT_VALUE))
+								append(_inferedTypeInstance.DEFAULT_VALUE, any(fieldInstance).(*Renamed_ATTRIBUTE_VALUE_STRING_1))
 						}
 					}
 				}
@@ -389,7 +389,7 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 					for _, fieldInstance := range reference {
 						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
 							_inferedTypeInstance.TYPE =
-								append(_inferedTypeInstance.TYPE, any(fieldInstance).(*A_TYPE_8))
+								append(_inferedTypeInstance.TYPE, any(fieldInstance).(*Renamed_DATATYPE_DEFINITION_STRING_REF_1))
 						}
 					}
 				}
@@ -430,7 +430,7 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 					for _, fieldInstance := range reference {
 						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
 							_inferedTypeInstance.DEFAULT_VALUE =
-								append(_inferedTypeInstance.DEFAULT_VALUE, any(fieldInstance).(*A_DEFAULT_VALUE_2))
+								append(_inferedTypeInstance.DEFAULT_VALUE, any(fieldInstance).(*Renamed_ATTRIBUTE_VALUE_XHTML_1))
 						}
 					}
 				}
@@ -449,7 +449,7 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 					for _, fieldInstance := range reference {
 						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
 							_inferedTypeInstance.TYPE =
-								append(_inferedTypeInstance.TYPE, any(fieldInstance).(*A_TYPE_6))
+								append(_inferedTypeInstance.TYPE, any(fieldInstance).(*Renamed_DATATYPE_DEFINITION_XHTML_REF_1))
 						}
 					}
 				}
@@ -471,7 +471,7 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 					for _, fieldInstance := range reference {
 						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
 							_inferedTypeInstance.DEFINITION =
-								append(_inferedTypeInstance.DEFINITION, any(fieldInstance).(*A_DEFINITION_4))
+								append(_inferedTypeInstance.DEFINITION, any(fieldInstance).(*Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1))
 						}
 					}
 				}
@@ -493,7 +493,7 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 					for _, fieldInstance := range reference {
 						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
 							_inferedTypeInstance.DEFINITION =
-								append(_inferedTypeInstance.DEFINITION, any(fieldInstance).(*A_DEFINITION_2))
+								append(_inferedTypeInstance.DEFINITION, any(fieldInstance).(*Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1))
 						}
 					}
 				}
@@ -515,7 +515,7 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 					for _, fieldInstance := range reference {
 						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
 							_inferedTypeInstance.DEFINITION =
-								append(_inferedTypeInstance.DEFINITION, any(fieldInstance).(*A_DEFINITION_5))
+								append(_inferedTypeInstance.DEFINITION, any(fieldInstance).(*Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1))
 						}
 					}
 				}
@@ -556,7 +556,7 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 					for _, fieldInstance := range reference {
 						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
 							_inferedTypeInstance.DEFINITION =
-								append(_inferedTypeInstance.DEFINITION, any(fieldInstance).(*A_DEFINITION))
+								append(_inferedTypeInstance.DEFINITION, any(fieldInstance).(*Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1))
 						}
 					}
 				}
@@ -578,7 +578,7 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 					for _, fieldInstance := range reference {
 						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
 							_inferedTypeInstance.DEFINITION =
-								append(_inferedTypeInstance.DEFINITION, any(fieldInstance).(*A_DEFINITION_6))
+								append(_inferedTypeInstance.DEFINITION, any(fieldInstance).(*Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1))
 						}
 					}
 				}
@@ -600,7 +600,7 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 					for _, fieldInstance := range reference {
 						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
 							_inferedTypeInstance.DEFINITION =
-								append(_inferedTypeInstance.DEFINITION, any(fieldInstance).(*A_DEFINITION_3))
+								append(_inferedTypeInstance.DEFINITION, any(fieldInstance).(*Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1))
 						}
 					}
 				}
@@ -660,7 +660,7 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 					for _, fieldInstance := range reference {
 						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
 							_inferedTypeInstance.DEFINITION =
-								append(_inferedTypeInstance.DEFINITION, any(fieldInstance).(*A_DEFINITION_1))
+								append(_inferedTypeInstance.DEFINITION, any(fieldInstance).(*Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1))
 						}
 					}
 				}
@@ -868,181 +868,6 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 				}
 			}
 		}
-
-	case *A_DEFAULT_VALUE:
-		// insertion point per field
-		if fieldName == "ATTRIBUTE_VALUE_STRING" {
-
-			// walk all instances of the owning type
-			for _instance := range *GetGongstructInstancesSetFromPointerType[OwningType](stage) {
-				if any(_instance).(*A_DEFAULT_VALUE) != owningInstanceInfered {
-					_inferedTypeInstance := any(_instance).(*A_DEFAULT_VALUE)
-					reference := make([]FieldType, 0)
-					targetFieldSlice := any(_inferedTypeInstance.ATTRIBUTE_VALUE_STRING).([]FieldType)
-					copy(targetFieldSlice, reference)
-					_inferedTypeInstance.ATTRIBUTE_VALUE_STRING = _inferedTypeInstance.ATTRIBUTE_VALUE_STRING[0:]
-					for _, fieldInstance := range reference {
-						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
-							_inferedTypeInstance.ATTRIBUTE_VALUE_STRING =
-								append(_inferedTypeInstance.ATTRIBUTE_VALUE_STRING, any(fieldInstance).(*ATTRIBUTE_VALUE_STRING))
-						}
-					}
-				}
-			}
-		}
-
-	case *A_DEFAULT_VALUE_1:
-		// insertion point per field
-		if fieldName == "ATTRIBUTE_VALUE_BOOLEAN" {
-
-			// walk all instances of the owning type
-			for _instance := range *GetGongstructInstancesSetFromPointerType[OwningType](stage) {
-				if any(_instance).(*A_DEFAULT_VALUE_1) != owningInstanceInfered {
-					_inferedTypeInstance := any(_instance).(*A_DEFAULT_VALUE_1)
-					reference := make([]FieldType, 0)
-					targetFieldSlice := any(_inferedTypeInstance.ATTRIBUTE_VALUE_BOOLEAN).([]FieldType)
-					copy(targetFieldSlice, reference)
-					_inferedTypeInstance.ATTRIBUTE_VALUE_BOOLEAN = _inferedTypeInstance.ATTRIBUTE_VALUE_BOOLEAN[0:]
-					for _, fieldInstance := range reference {
-						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
-							_inferedTypeInstance.ATTRIBUTE_VALUE_BOOLEAN =
-								append(_inferedTypeInstance.ATTRIBUTE_VALUE_BOOLEAN, any(fieldInstance).(*ATTRIBUTE_VALUE_BOOLEAN))
-						}
-					}
-				}
-			}
-		}
-
-	case *A_DEFAULT_VALUE_2:
-		// insertion point per field
-		if fieldName == "ATTRIBUTE_VALUE_XHTML" {
-
-			// walk all instances of the owning type
-			for _instance := range *GetGongstructInstancesSetFromPointerType[OwningType](stage) {
-				if any(_instance).(*A_DEFAULT_VALUE_2) != owningInstanceInfered {
-					_inferedTypeInstance := any(_instance).(*A_DEFAULT_VALUE_2)
-					reference := make([]FieldType, 0)
-					targetFieldSlice := any(_inferedTypeInstance.ATTRIBUTE_VALUE_XHTML).([]FieldType)
-					copy(targetFieldSlice, reference)
-					_inferedTypeInstance.ATTRIBUTE_VALUE_XHTML = _inferedTypeInstance.ATTRIBUTE_VALUE_XHTML[0:]
-					for _, fieldInstance := range reference {
-						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
-							_inferedTypeInstance.ATTRIBUTE_VALUE_XHTML =
-								append(_inferedTypeInstance.ATTRIBUTE_VALUE_XHTML, any(fieldInstance).(*ATTRIBUTE_VALUE_XHTML))
-						}
-					}
-				}
-			}
-		}
-
-	case *A_DEFAULT_VALUE_3:
-		// insertion point per field
-		if fieldName == "ATTRIBUTE_VALUE_DATE" {
-
-			// walk all instances of the owning type
-			for _instance := range *GetGongstructInstancesSetFromPointerType[OwningType](stage) {
-				if any(_instance).(*A_DEFAULT_VALUE_3) != owningInstanceInfered {
-					_inferedTypeInstance := any(_instance).(*A_DEFAULT_VALUE_3)
-					reference := make([]FieldType, 0)
-					targetFieldSlice := any(_inferedTypeInstance.ATTRIBUTE_VALUE_DATE).([]FieldType)
-					copy(targetFieldSlice, reference)
-					_inferedTypeInstance.ATTRIBUTE_VALUE_DATE = _inferedTypeInstance.ATTRIBUTE_VALUE_DATE[0:]
-					for _, fieldInstance := range reference {
-						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
-							_inferedTypeInstance.ATTRIBUTE_VALUE_DATE =
-								append(_inferedTypeInstance.ATTRIBUTE_VALUE_DATE, any(fieldInstance).(*ATTRIBUTE_VALUE_DATE))
-						}
-					}
-				}
-			}
-		}
-
-	case *A_DEFAULT_VALUE_4:
-		// insertion point per field
-		if fieldName == "ATTRIBUTE_VALUE_REAL" {
-
-			// walk all instances of the owning type
-			for _instance := range *GetGongstructInstancesSetFromPointerType[OwningType](stage) {
-				if any(_instance).(*A_DEFAULT_VALUE_4) != owningInstanceInfered {
-					_inferedTypeInstance := any(_instance).(*A_DEFAULT_VALUE_4)
-					reference := make([]FieldType, 0)
-					targetFieldSlice := any(_inferedTypeInstance.ATTRIBUTE_VALUE_REAL).([]FieldType)
-					copy(targetFieldSlice, reference)
-					_inferedTypeInstance.ATTRIBUTE_VALUE_REAL = _inferedTypeInstance.ATTRIBUTE_VALUE_REAL[0:]
-					for _, fieldInstance := range reference {
-						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
-							_inferedTypeInstance.ATTRIBUTE_VALUE_REAL =
-								append(_inferedTypeInstance.ATTRIBUTE_VALUE_REAL, any(fieldInstance).(*ATTRIBUTE_VALUE_REAL))
-						}
-					}
-				}
-			}
-		}
-
-	case *A_DEFAULT_VALUE_5:
-		// insertion point per field
-		if fieldName == "ATTRIBUTE_VALUE_ENUMERATION" {
-
-			// walk all instances of the owning type
-			for _instance := range *GetGongstructInstancesSetFromPointerType[OwningType](stage) {
-				if any(_instance).(*A_DEFAULT_VALUE_5) != owningInstanceInfered {
-					_inferedTypeInstance := any(_instance).(*A_DEFAULT_VALUE_5)
-					reference := make([]FieldType, 0)
-					targetFieldSlice := any(_inferedTypeInstance.ATTRIBUTE_VALUE_ENUMERATION).([]FieldType)
-					copy(targetFieldSlice, reference)
-					_inferedTypeInstance.ATTRIBUTE_VALUE_ENUMERATION = _inferedTypeInstance.ATTRIBUTE_VALUE_ENUMERATION[0:]
-					for _, fieldInstance := range reference {
-						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
-							_inferedTypeInstance.ATTRIBUTE_VALUE_ENUMERATION =
-								append(_inferedTypeInstance.ATTRIBUTE_VALUE_ENUMERATION, any(fieldInstance).(*ATTRIBUTE_VALUE_ENUMERATION))
-						}
-					}
-				}
-			}
-		}
-
-	case *A_DEFAULT_VALUE_6:
-		// insertion point per field
-		if fieldName == "ATTRIBUTE_VALUE_INTEGER" {
-
-			// walk all instances of the owning type
-			for _instance := range *GetGongstructInstancesSetFromPointerType[OwningType](stage) {
-				if any(_instance).(*A_DEFAULT_VALUE_6) != owningInstanceInfered {
-					_inferedTypeInstance := any(_instance).(*A_DEFAULT_VALUE_6)
-					reference := make([]FieldType, 0)
-					targetFieldSlice := any(_inferedTypeInstance.ATTRIBUTE_VALUE_INTEGER).([]FieldType)
-					copy(targetFieldSlice, reference)
-					_inferedTypeInstance.ATTRIBUTE_VALUE_INTEGER = _inferedTypeInstance.ATTRIBUTE_VALUE_INTEGER[0:]
-					for _, fieldInstance := range reference {
-						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
-							_inferedTypeInstance.ATTRIBUTE_VALUE_INTEGER =
-								append(_inferedTypeInstance.ATTRIBUTE_VALUE_INTEGER, any(fieldInstance).(*ATTRIBUTE_VALUE_INTEGER))
-						}
-					}
-				}
-			}
-		}
-
-	case *A_DEFINITION:
-		// insertion point per field
-
-	case *A_DEFINITION_1:
-		// insertion point per field
-
-	case *A_DEFINITION_2:
-		// insertion point per field
-
-	case *A_DEFINITION_3:
-		// insertion point per field
-
-	case *A_DEFINITION_4:
-		// insertion point per field
-
-	case *A_DEFINITION_5:
-		// insertion point per field
-
-	case *A_DEFINITION_6:
-		// insertion point per field
 
 	case *A_EDITABLE_ATTS:
 		// insertion point per field
@@ -1282,15 +1107,12 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 
 	case *A_SPEC_RELATIONS:
 		// insertion point per field
-
-	case *A_SPEC_RELATIONS_1:
-		// insertion point per field
 		if fieldName == "SPEC_RELATION" {
 
 			// walk all instances of the owning type
 			for _instance := range *GetGongstructInstancesSetFromPointerType[OwningType](stage) {
-				if any(_instance).(*A_SPEC_RELATIONS_1) != owningInstanceInfered {
-					_inferedTypeInstance := any(_instance).(*A_SPEC_RELATIONS_1)
+				if any(_instance).(*A_SPEC_RELATIONS) != owningInstanceInfered {
+					_inferedTypeInstance := any(_instance).(*A_SPEC_RELATIONS)
 					reference := make([]FieldType, 0)
 					targetFieldSlice := any(_inferedTypeInstance.SPEC_RELATION).([]FieldType)
 					copy(targetFieldSlice, reference)
@@ -1304,6 +1126,9 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 				}
 			}
 		}
+
+	case *A_SPEC_RELATIONS_1:
+		// insertion point per field
 
 	case *A_SPEC_RELATION_GROUPS:
 		// insertion point per field
@@ -1449,39 +1274,6 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 				}
 			}
 		}
-
-	case *A_TYPE:
-		// insertion point per field
-
-	case *A_TYPE_1:
-		// insertion point per field
-
-	case *A_TYPE_10:
-		// insertion point per field
-
-	case *A_TYPE_2:
-		// insertion point per field
-
-	case *A_TYPE_3:
-		// insertion point per field
-
-	case *A_TYPE_4:
-		// insertion point per field
-
-	case *A_TYPE_5:
-		// insertion point per field
-
-	case *A_TYPE_6:
-		// insertion point per field
-
-	case *A_TYPE_7:
-		// insertion point per field
-
-	case *A_TYPE_8:
-		// insertion point per field
-
-	case *A_TYPE_9:
-		// insertion point per field
 
 	case *A_VALUES:
 		// insertion point per field
@@ -1892,7 +1684,7 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 					for _, fieldInstance := range reference {
 						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
 							_inferedTypeInstance.SPEC_RELATIONS =
-								append(_inferedTypeInstance.SPEC_RELATIONS, any(fieldInstance).(*A_SPEC_RELATIONS))
+								append(_inferedTypeInstance.SPEC_RELATIONS, any(fieldInstance).(*A_SPEC_RELATIONS_1))
 						}
 					}
 				}
@@ -1911,7 +1703,7 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 					for _, fieldInstance := range reference {
 						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
 							_inferedTypeInstance.TYPE =
-								append(_inferedTypeInstance.TYPE, any(fieldInstance).(*A_TYPE_1))
+								append(_inferedTypeInstance.TYPE, any(fieldInstance).(*Renamed_RELATION_GROUP_TYPE_REF_1))
 						}
 					}
 				}
@@ -2091,7 +1883,7 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 					for _, fieldInstance := range reference {
 						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
 							_inferedTypeInstance.SPEC_RELATIONS =
-								append(_inferedTypeInstance.SPEC_RELATIONS, any(fieldInstance).(*A_SPEC_RELATIONS_1))
+								append(_inferedTypeInstance.SPEC_RELATIONS, any(fieldInstance).(*A_SPEC_RELATIONS))
 						}
 					}
 				}
@@ -2140,6 +1932,214 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 		// insertion point per field
 
 	case *REQ_IF_TOOL_EXTENSION:
+		// insertion point per field
+
+	case *Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1:
+		// insertion point per field
+
+	case *Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1:
+		// insertion point per field
+
+	case *Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1:
+		// insertion point per field
+
+	case *Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1:
+		// insertion point per field
+
+	case *Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1:
+		// insertion point per field
+
+	case *Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1:
+		// insertion point per field
+
+	case *Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1:
+		// insertion point per field
+
+	case *Renamed_ATTRIBUTE_VALUE_BOOLEAN_1:
+		// insertion point per field
+		if fieldName == "ATTRIBUTE_VALUE_BOOLEAN" {
+
+			// walk all instances of the owning type
+			for _instance := range *GetGongstructInstancesSetFromPointerType[OwningType](stage) {
+				if any(_instance).(*Renamed_ATTRIBUTE_VALUE_BOOLEAN_1) != owningInstanceInfered {
+					_inferedTypeInstance := any(_instance).(*Renamed_ATTRIBUTE_VALUE_BOOLEAN_1)
+					reference := make([]FieldType, 0)
+					targetFieldSlice := any(_inferedTypeInstance.ATTRIBUTE_VALUE_BOOLEAN).([]FieldType)
+					copy(targetFieldSlice, reference)
+					_inferedTypeInstance.ATTRIBUTE_VALUE_BOOLEAN = _inferedTypeInstance.ATTRIBUTE_VALUE_BOOLEAN[0:]
+					for _, fieldInstance := range reference {
+						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
+							_inferedTypeInstance.ATTRIBUTE_VALUE_BOOLEAN =
+								append(_inferedTypeInstance.ATTRIBUTE_VALUE_BOOLEAN, any(fieldInstance).(*ATTRIBUTE_VALUE_BOOLEAN))
+						}
+					}
+				}
+			}
+		}
+
+	case *Renamed_ATTRIBUTE_VALUE_DATE_1:
+		// insertion point per field
+		if fieldName == "ATTRIBUTE_VALUE_DATE" {
+
+			// walk all instances of the owning type
+			for _instance := range *GetGongstructInstancesSetFromPointerType[OwningType](stage) {
+				if any(_instance).(*Renamed_ATTRIBUTE_VALUE_DATE_1) != owningInstanceInfered {
+					_inferedTypeInstance := any(_instance).(*Renamed_ATTRIBUTE_VALUE_DATE_1)
+					reference := make([]FieldType, 0)
+					targetFieldSlice := any(_inferedTypeInstance.ATTRIBUTE_VALUE_DATE).([]FieldType)
+					copy(targetFieldSlice, reference)
+					_inferedTypeInstance.ATTRIBUTE_VALUE_DATE = _inferedTypeInstance.ATTRIBUTE_VALUE_DATE[0:]
+					for _, fieldInstance := range reference {
+						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
+							_inferedTypeInstance.ATTRIBUTE_VALUE_DATE =
+								append(_inferedTypeInstance.ATTRIBUTE_VALUE_DATE, any(fieldInstance).(*ATTRIBUTE_VALUE_DATE))
+						}
+					}
+				}
+			}
+		}
+
+	case *Renamed_ATTRIBUTE_VALUE_ENUMERATION_1:
+		// insertion point per field
+		if fieldName == "ATTRIBUTE_VALUE_ENUMERATION" {
+
+			// walk all instances of the owning type
+			for _instance := range *GetGongstructInstancesSetFromPointerType[OwningType](stage) {
+				if any(_instance).(*Renamed_ATTRIBUTE_VALUE_ENUMERATION_1) != owningInstanceInfered {
+					_inferedTypeInstance := any(_instance).(*Renamed_ATTRIBUTE_VALUE_ENUMERATION_1)
+					reference := make([]FieldType, 0)
+					targetFieldSlice := any(_inferedTypeInstance.ATTRIBUTE_VALUE_ENUMERATION).([]FieldType)
+					copy(targetFieldSlice, reference)
+					_inferedTypeInstance.ATTRIBUTE_VALUE_ENUMERATION = _inferedTypeInstance.ATTRIBUTE_VALUE_ENUMERATION[0:]
+					for _, fieldInstance := range reference {
+						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
+							_inferedTypeInstance.ATTRIBUTE_VALUE_ENUMERATION =
+								append(_inferedTypeInstance.ATTRIBUTE_VALUE_ENUMERATION, any(fieldInstance).(*ATTRIBUTE_VALUE_ENUMERATION))
+						}
+					}
+				}
+			}
+		}
+
+	case *Renamed_ATTRIBUTE_VALUE_INTEGER_1:
+		// insertion point per field
+		if fieldName == "ATTRIBUTE_VALUE_INTEGER" {
+
+			// walk all instances of the owning type
+			for _instance := range *GetGongstructInstancesSetFromPointerType[OwningType](stage) {
+				if any(_instance).(*Renamed_ATTRIBUTE_VALUE_INTEGER_1) != owningInstanceInfered {
+					_inferedTypeInstance := any(_instance).(*Renamed_ATTRIBUTE_VALUE_INTEGER_1)
+					reference := make([]FieldType, 0)
+					targetFieldSlice := any(_inferedTypeInstance.ATTRIBUTE_VALUE_INTEGER).([]FieldType)
+					copy(targetFieldSlice, reference)
+					_inferedTypeInstance.ATTRIBUTE_VALUE_INTEGER = _inferedTypeInstance.ATTRIBUTE_VALUE_INTEGER[0:]
+					for _, fieldInstance := range reference {
+						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
+							_inferedTypeInstance.ATTRIBUTE_VALUE_INTEGER =
+								append(_inferedTypeInstance.ATTRIBUTE_VALUE_INTEGER, any(fieldInstance).(*ATTRIBUTE_VALUE_INTEGER))
+						}
+					}
+				}
+			}
+		}
+
+	case *Renamed_ATTRIBUTE_VALUE_REAL_1:
+		// insertion point per field
+		if fieldName == "ATTRIBUTE_VALUE_REAL" {
+
+			// walk all instances of the owning type
+			for _instance := range *GetGongstructInstancesSetFromPointerType[OwningType](stage) {
+				if any(_instance).(*Renamed_ATTRIBUTE_VALUE_REAL_1) != owningInstanceInfered {
+					_inferedTypeInstance := any(_instance).(*Renamed_ATTRIBUTE_VALUE_REAL_1)
+					reference := make([]FieldType, 0)
+					targetFieldSlice := any(_inferedTypeInstance.ATTRIBUTE_VALUE_REAL).([]FieldType)
+					copy(targetFieldSlice, reference)
+					_inferedTypeInstance.ATTRIBUTE_VALUE_REAL = _inferedTypeInstance.ATTRIBUTE_VALUE_REAL[0:]
+					for _, fieldInstance := range reference {
+						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
+							_inferedTypeInstance.ATTRIBUTE_VALUE_REAL =
+								append(_inferedTypeInstance.ATTRIBUTE_VALUE_REAL, any(fieldInstance).(*ATTRIBUTE_VALUE_REAL))
+						}
+					}
+				}
+			}
+		}
+
+	case *Renamed_ATTRIBUTE_VALUE_STRING_1:
+		// insertion point per field
+		if fieldName == "ATTRIBUTE_VALUE_STRING" {
+
+			// walk all instances of the owning type
+			for _instance := range *GetGongstructInstancesSetFromPointerType[OwningType](stage) {
+				if any(_instance).(*Renamed_ATTRIBUTE_VALUE_STRING_1) != owningInstanceInfered {
+					_inferedTypeInstance := any(_instance).(*Renamed_ATTRIBUTE_VALUE_STRING_1)
+					reference := make([]FieldType, 0)
+					targetFieldSlice := any(_inferedTypeInstance.ATTRIBUTE_VALUE_STRING).([]FieldType)
+					copy(targetFieldSlice, reference)
+					_inferedTypeInstance.ATTRIBUTE_VALUE_STRING = _inferedTypeInstance.ATTRIBUTE_VALUE_STRING[0:]
+					for _, fieldInstance := range reference {
+						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
+							_inferedTypeInstance.ATTRIBUTE_VALUE_STRING =
+								append(_inferedTypeInstance.ATTRIBUTE_VALUE_STRING, any(fieldInstance).(*ATTRIBUTE_VALUE_STRING))
+						}
+					}
+				}
+			}
+		}
+
+	case *Renamed_ATTRIBUTE_VALUE_XHTML_1:
+		// insertion point per field
+		if fieldName == "ATTRIBUTE_VALUE_XHTML" {
+
+			// walk all instances of the owning type
+			for _instance := range *GetGongstructInstancesSetFromPointerType[OwningType](stage) {
+				if any(_instance).(*Renamed_ATTRIBUTE_VALUE_XHTML_1) != owningInstanceInfered {
+					_inferedTypeInstance := any(_instance).(*Renamed_ATTRIBUTE_VALUE_XHTML_1)
+					reference := make([]FieldType, 0)
+					targetFieldSlice := any(_inferedTypeInstance.ATTRIBUTE_VALUE_XHTML).([]FieldType)
+					copy(targetFieldSlice, reference)
+					_inferedTypeInstance.ATTRIBUTE_VALUE_XHTML = _inferedTypeInstance.ATTRIBUTE_VALUE_XHTML[0:]
+					for _, fieldInstance := range reference {
+						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
+							_inferedTypeInstance.ATTRIBUTE_VALUE_XHTML =
+								append(_inferedTypeInstance.ATTRIBUTE_VALUE_XHTML, any(fieldInstance).(*ATTRIBUTE_VALUE_XHTML))
+						}
+					}
+				}
+			}
+		}
+
+	case *Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1:
+		// insertion point per field
+
+	case *Renamed_DATATYPE_DEFINITION_DATE_REF_1:
+		// insertion point per field
+
+	case *Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1:
+		// insertion point per field
+
+	case *Renamed_DATATYPE_DEFINITION_INTEGER_REF_1:
+		// insertion point per field
+
+	case *Renamed_DATATYPE_DEFINITION_REAL_REF_1:
+		// insertion point per field
+
+	case *Renamed_DATATYPE_DEFINITION_STRING_REF_1:
+		// insertion point per field
+
+	case *Renamed_DATATYPE_DEFINITION_XHTML_REF_1:
+		// insertion point per field
+
+	case *Renamed_RELATION_GROUP_TYPE_REF_1:
+		// insertion point per field
+
+	case *Renamed_SPECIFICATION_TYPE_REF_1:
+		// insertion point per field
+
+	case *Renamed_SPEC_OBJECT_TYPE_REF_1:
+		// insertion point per field
+
+	case *Renamed_SPEC_RELATION_TYPE_REF_1:
 		// insertion point per field
 
 	case *SPECIFICATION:
@@ -2214,7 +2214,7 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 					for _, fieldInstance := range reference {
 						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
 							_inferedTypeInstance.TYPE =
-								append(_inferedTypeInstance.TYPE, any(fieldInstance).(*A_TYPE_10))
+								append(_inferedTypeInstance.TYPE, any(fieldInstance).(*Renamed_SPECIFICATION_TYPE_REF_1))
 						}
 					}
 				}
@@ -2394,7 +2394,7 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 					for _, fieldInstance := range reference {
 						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
 							_inferedTypeInstance.TYPE =
-								append(_inferedTypeInstance.TYPE, any(fieldInstance).(*A_TYPE_2))
+								append(_inferedTypeInstance.TYPE, any(fieldInstance).(*Renamed_SPEC_OBJECT_TYPE_REF_1))
 						}
 					}
 				}
@@ -2514,7 +2514,7 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 					for _, fieldInstance := range reference {
 						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
 							_inferedTypeInstance.TYPE =
-								append(_inferedTypeInstance.TYPE, any(fieldInstance).(*A_TYPE_4))
+								append(_inferedTypeInstance.TYPE, any(fieldInstance).(*Renamed_SPEC_RELATION_TYPE_REF_1))
 						}
 					}
 				}
@@ -2588,19 +2588,19 @@ func (stage *StageStruct) ComputeReverseMaps() {
 		}
 	}
 	clear(stage.ATTRIBUTE_DEFINITION_BOOLEAN_DEFAULT_VALUE_reverseMap)
-	stage.ATTRIBUTE_DEFINITION_BOOLEAN_DEFAULT_VALUE_reverseMap = make(map[*A_DEFAULT_VALUE_1]*ATTRIBUTE_DEFINITION_BOOLEAN)
+	stage.ATTRIBUTE_DEFINITION_BOOLEAN_DEFAULT_VALUE_reverseMap = make(map[*Renamed_ATTRIBUTE_VALUE_BOOLEAN_1]*ATTRIBUTE_DEFINITION_BOOLEAN)
 	for attribute_definition_boolean := range stage.ATTRIBUTE_DEFINITION_BOOLEANs {
 		_ = attribute_definition_boolean
-		for _, _a_default_value_1 := range attribute_definition_boolean.DEFAULT_VALUE {
-			stage.ATTRIBUTE_DEFINITION_BOOLEAN_DEFAULT_VALUE_reverseMap[_a_default_value_1] = attribute_definition_boolean
+		for _, _renamed_attribute_value_boolean_1 := range attribute_definition_boolean.DEFAULT_VALUE {
+			stage.ATTRIBUTE_DEFINITION_BOOLEAN_DEFAULT_VALUE_reverseMap[_renamed_attribute_value_boolean_1] = attribute_definition_boolean
 		}
 	}
 	clear(stage.ATTRIBUTE_DEFINITION_BOOLEAN_TYPE_reverseMap)
-	stage.ATTRIBUTE_DEFINITION_BOOLEAN_TYPE_reverseMap = make(map[*A_TYPE_7]*ATTRIBUTE_DEFINITION_BOOLEAN)
+	stage.ATTRIBUTE_DEFINITION_BOOLEAN_TYPE_reverseMap = make(map[*Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1]*ATTRIBUTE_DEFINITION_BOOLEAN)
 	for attribute_definition_boolean := range stage.ATTRIBUTE_DEFINITION_BOOLEANs {
 		_ = attribute_definition_boolean
-		for _, _a_type_7 := range attribute_definition_boolean.TYPE {
-			stage.ATTRIBUTE_DEFINITION_BOOLEAN_TYPE_reverseMap[_a_type_7] = attribute_definition_boolean
+		for _, _renamed_datatype_definition_boolean_ref_1 := range attribute_definition_boolean.TYPE {
+			stage.ATTRIBUTE_DEFINITION_BOOLEAN_TYPE_reverseMap[_renamed_datatype_definition_boolean_ref_1] = attribute_definition_boolean
 		}
 	}
 
@@ -2615,19 +2615,19 @@ func (stage *StageStruct) ComputeReverseMaps() {
 		}
 	}
 	clear(stage.ATTRIBUTE_DEFINITION_DATE_DEFAULT_VALUE_reverseMap)
-	stage.ATTRIBUTE_DEFINITION_DATE_DEFAULT_VALUE_reverseMap = make(map[*A_DEFAULT_VALUE_3]*ATTRIBUTE_DEFINITION_DATE)
+	stage.ATTRIBUTE_DEFINITION_DATE_DEFAULT_VALUE_reverseMap = make(map[*Renamed_ATTRIBUTE_VALUE_DATE_1]*ATTRIBUTE_DEFINITION_DATE)
 	for attribute_definition_date := range stage.ATTRIBUTE_DEFINITION_DATEs {
 		_ = attribute_definition_date
-		for _, _a_default_value_3 := range attribute_definition_date.DEFAULT_VALUE {
-			stage.ATTRIBUTE_DEFINITION_DATE_DEFAULT_VALUE_reverseMap[_a_default_value_3] = attribute_definition_date
+		for _, _renamed_attribute_value_date_1 := range attribute_definition_date.DEFAULT_VALUE {
+			stage.ATTRIBUTE_DEFINITION_DATE_DEFAULT_VALUE_reverseMap[_renamed_attribute_value_date_1] = attribute_definition_date
 		}
 	}
 	clear(stage.ATTRIBUTE_DEFINITION_DATE_TYPE_reverseMap)
-	stage.ATTRIBUTE_DEFINITION_DATE_TYPE_reverseMap = make(map[*A_TYPE]*ATTRIBUTE_DEFINITION_DATE)
+	stage.ATTRIBUTE_DEFINITION_DATE_TYPE_reverseMap = make(map[*Renamed_DATATYPE_DEFINITION_DATE_REF_1]*ATTRIBUTE_DEFINITION_DATE)
 	for attribute_definition_date := range stage.ATTRIBUTE_DEFINITION_DATEs {
 		_ = attribute_definition_date
-		for _, _a_type := range attribute_definition_date.TYPE {
-			stage.ATTRIBUTE_DEFINITION_DATE_TYPE_reverseMap[_a_type] = attribute_definition_date
+		for _, _renamed_datatype_definition_date_ref_1 := range attribute_definition_date.TYPE {
+			stage.ATTRIBUTE_DEFINITION_DATE_TYPE_reverseMap[_renamed_datatype_definition_date_ref_1] = attribute_definition_date
 		}
 	}
 
@@ -2642,19 +2642,19 @@ func (stage *StageStruct) ComputeReverseMaps() {
 		}
 	}
 	clear(stage.ATTRIBUTE_DEFINITION_ENUMERATION_DEFAULT_VALUE_reverseMap)
-	stage.ATTRIBUTE_DEFINITION_ENUMERATION_DEFAULT_VALUE_reverseMap = make(map[*A_DEFAULT_VALUE_5]*ATTRIBUTE_DEFINITION_ENUMERATION)
+	stage.ATTRIBUTE_DEFINITION_ENUMERATION_DEFAULT_VALUE_reverseMap = make(map[*Renamed_ATTRIBUTE_VALUE_ENUMERATION_1]*ATTRIBUTE_DEFINITION_ENUMERATION)
 	for attribute_definition_enumeration := range stage.ATTRIBUTE_DEFINITION_ENUMERATIONs {
 		_ = attribute_definition_enumeration
-		for _, _a_default_value_5 := range attribute_definition_enumeration.DEFAULT_VALUE {
-			stage.ATTRIBUTE_DEFINITION_ENUMERATION_DEFAULT_VALUE_reverseMap[_a_default_value_5] = attribute_definition_enumeration
+		for _, _renamed_attribute_value_enumeration_1 := range attribute_definition_enumeration.DEFAULT_VALUE {
+			stage.ATTRIBUTE_DEFINITION_ENUMERATION_DEFAULT_VALUE_reverseMap[_renamed_attribute_value_enumeration_1] = attribute_definition_enumeration
 		}
 	}
 	clear(stage.ATTRIBUTE_DEFINITION_ENUMERATION_TYPE_reverseMap)
-	stage.ATTRIBUTE_DEFINITION_ENUMERATION_TYPE_reverseMap = make(map[*A_TYPE_9]*ATTRIBUTE_DEFINITION_ENUMERATION)
+	stage.ATTRIBUTE_DEFINITION_ENUMERATION_TYPE_reverseMap = make(map[*Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1]*ATTRIBUTE_DEFINITION_ENUMERATION)
 	for attribute_definition_enumeration := range stage.ATTRIBUTE_DEFINITION_ENUMERATIONs {
 		_ = attribute_definition_enumeration
-		for _, _a_type_9 := range attribute_definition_enumeration.TYPE {
-			stage.ATTRIBUTE_DEFINITION_ENUMERATION_TYPE_reverseMap[_a_type_9] = attribute_definition_enumeration
+		for _, _renamed_datatype_definition_enumeration_ref_1 := range attribute_definition_enumeration.TYPE {
+			stage.ATTRIBUTE_DEFINITION_ENUMERATION_TYPE_reverseMap[_renamed_datatype_definition_enumeration_ref_1] = attribute_definition_enumeration
 		}
 	}
 
@@ -2669,19 +2669,19 @@ func (stage *StageStruct) ComputeReverseMaps() {
 		}
 	}
 	clear(stage.ATTRIBUTE_DEFINITION_INTEGER_DEFAULT_VALUE_reverseMap)
-	stage.ATTRIBUTE_DEFINITION_INTEGER_DEFAULT_VALUE_reverseMap = make(map[*A_DEFAULT_VALUE_6]*ATTRIBUTE_DEFINITION_INTEGER)
+	stage.ATTRIBUTE_DEFINITION_INTEGER_DEFAULT_VALUE_reverseMap = make(map[*Renamed_ATTRIBUTE_VALUE_INTEGER_1]*ATTRIBUTE_DEFINITION_INTEGER)
 	for attribute_definition_integer := range stage.ATTRIBUTE_DEFINITION_INTEGERs {
 		_ = attribute_definition_integer
-		for _, _a_default_value_6 := range attribute_definition_integer.DEFAULT_VALUE {
-			stage.ATTRIBUTE_DEFINITION_INTEGER_DEFAULT_VALUE_reverseMap[_a_default_value_6] = attribute_definition_integer
+		for _, _renamed_attribute_value_integer_1 := range attribute_definition_integer.DEFAULT_VALUE {
+			stage.ATTRIBUTE_DEFINITION_INTEGER_DEFAULT_VALUE_reverseMap[_renamed_attribute_value_integer_1] = attribute_definition_integer
 		}
 	}
 	clear(stage.ATTRIBUTE_DEFINITION_INTEGER_TYPE_reverseMap)
-	stage.ATTRIBUTE_DEFINITION_INTEGER_TYPE_reverseMap = make(map[*A_TYPE_5]*ATTRIBUTE_DEFINITION_INTEGER)
+	stage.ATTRIBUTE_DEFINITION_INTEGER_TYPE_reverseMap = make(map[*Renamed_DATATYPE_DEFINITION_INTEGER_REF_1]*ATTRIBUTE_DEFINITION_INTEGER)
 	for attribute_definition_integer := range stage.ATTRIBUTE_DEFINITION_INTEGERs {
 		_ = attribute_definition_integer
-		for _, _a_type_5 := range attribute_definition_integer.TYPE {
-			stage.ATTRIBUTE_DEFINITION_INTEGER_TYPE_reverseMap[_a_type_5] = attribute_definition_integer
+		for _, _renamed_datatype_definition_integer_ref_1 := range attribute_definition_integer.TYPE {
+			stage.ATTRIBUTE_DEFINITION_INTEGER_TYPE_reverseMap[_renamed_datatype_definition_integer_ref_1] = attribute_definition_integer
 		}
 	}
 
@@ -2696,19 +2696,19 @@ func (stage *StageStruct) ComputeReverseMaps() {
 		}
 	}
 	clear(stage.ATTRIBUTE_DEFINITION_REAL_DEFAULT_VALUE_reverseMap)
-	stage.ATTRIBUTE_DEFINITION_REAL_DEFAULT_VALUE_reverseMap = make(map[*A_DEFAULT_VALUE_4]*ATTRIBUTE_DEFINITION_REAL)
+	stage.ATTRIBUTE_DEFINITION_REAL_DEFAULT_VALUE_reverseMap = make(map[*Renamed_ATTRIBUTE_VALUE_REAL_1]*ATTRIBUTE_DEFINITION_REAL)
 	for attribute_definition_real := range stage.ATTRIBUTE_DEFINITION_REALs {
 		_ = attribute_definition_real
-		for _, _a_default_value_4 := range attribute_definition_real.DEFAULT_VALUE {
-			stage.ATTRIBUTE_DEFINITION_REAL_DEFAULT_VALUE_reverseMap[_a_default_value_4] = attribute_definition_real
+		for _, _renamed_attribute_value_real_1 := range attribute_definition_real.DEFAULT_VALUE {
+			stage.ATTRIBUTE_DEFINITION_REAL_DEFAULT_VALUE_reverseMap[_renamed_attribute_value_real_1] = attribute_definition_real
 		}
 	}
 	clear(stage.ATTRIBUTE_DEFINITION_REAL_TYPE_reverseMap)
-	stage.ATTRIBUTE_DEFINITION_REAL_TYPE_reverseMap = make(map[*A_TYPE_3]*ATTRIBUTE_DEFINITION_REAL)
+	stage.ATTRIBUTE_DEFINITION_REAL_TYPE_reverseMap = make(map[*Renamed_DATATYPE_DEFINITION_REAL_REF_1]*ATTRIBUTE_DEFINITION_REAL)
 	for attribute_definition_real := range stage.ATTRIBUTE_DEFINITION_REALs {
 		_ = attribute_definition_real
-		for _, _a_type_3 := range attribute_definition_real.TYPE {
-			stage.ATTRIBUTE_DEFINITION_REAL_TYPE_reverseMap[_a_type_3] = attribute_definition_real
+		for _, _renamed_datatype_definition_real_ref_1 := range attribute_definition_real.TYPE {
+			stage.ATTRIBUTE_DEFINITION_REAL_TYPE_reverseMap[_renamed_datatype_definition_real_ref_1] = attribute_definition_real
 		}
 	}
 
@@ -2723,19 +2723,19 @@ func (stage *StageStruct) ComputeReverseMaps() {
 		}
 	}
 	clear(stage.ATTRIBUTE_DEFINITION_STRING_DEFAULT_VALUE_reverseMap)
-	stage.ATTRIBUTE_DEFINITION_STRING_DEFAULT_VALUE_reverseMap = make(map[*A_DEFAULT_VALUE]*ATTRIBUTE_DEFINITION_STRING)
+	stage.ATTRIBUTE_DEFINITION_STRING_DEFAULT_VALUE_reverseMap = make(map[*Renamed_ATTRIBUTE_VALUE_STRING_1]*ATTRIBUTE_DEFINITION_STRING)
 	for attribute_definition_string := range stage.ATTRIBUTE_DEFINITION_STRINGs {
 		_ = attribute_definition_string
-		for _, _a_default_value := range attribute_definition_string.DEFAULT_VALUE {
-			stage.ATTRIBUTE_DEFINITION_STRING_DEFAULT_VALUE_reverseMap[_a_default_value] = attribute_definition_string
+		for _, _renamed_attribute_value_string_1 := range attribute_definition_string.DEFAULT_VALUE {
+			stage.ATTRIBUTE_DEFINITION_STRING_DEFAULT_VALUE_reverseMap[_renamed_attribute_value_string_1] = attribute_definition_string
 		}
 	}
 	clear(stage.ATTRIBUTE_DEFINITION_STRING_TYPE_reverseMap)
-	stage.ATTRIBUTE_DEFINITION_STRING_TYPE_reverseMap = make(map[*A_TYPE_8]*ATTRIBUTE_DEFINITION_STRING)
+	stage.ATTRIBUTE_DEFINITION_STRING_TYPE_reverseMap = make(map[*Renamed_DATATYPE_DEFINITION_STRING_REF_1]*ATTRIBUTE_DEFINITION_STRING)
 	for attribute_definition_string := range stage.ATTRIBUTE_DEFINITION_STRINGs {
 		_ = attribute_definition_string
-		for _, _a_type_8 := range attribute_definition_string.TYPE {
-			stage.ATTRIBUTE_DEFINITION_STRING_TYPE_reverseMap[_a_type_8] = attribute_definition_string
+		for _, _renamed_datatype_definition_string_ref_1 := range attribute_definition_string.TYPE {
+			stage.ATTRIBUTE_DEFINITION_STRING_TYPE_reverseMap[_renamed_datatype_definition_string_ref_1] = attribute_definition_string
 		}
 	}
 
@@ -2750,52 +2750,52 @@ func (stage *StageStruct) ComputeReverseMaps() {
 		}
 	}
 	clear(stage.ATTRIBUTE_DEFINITION_XHTML_DEFAULT_VALUE_reverseMap)
-	stage.ATTRIBUTE_DEFINITION_XHTML_DEFAULT_VALUE_reverseMap = make(map[*A_DEFAULT_VALUE_2]*ATTRIBUTE_DEFINITION_XHTML)
+	stage.ATTRIBUTE_DEFINITION_XHTML_DEFAULT_VALUE_reverseMap = make(map[*Renamed_ATTRIBUTE_VALUE_XHTML_1]*ATTRIBUTE_DEFINITION_XHTML)
 	for attribute_definition_xhtml := range stage.ATTRIBUTE_DEFINITION_XHTMLs {
 		_ = attribute_definition_xhtml
-		for _, _a_default_value_2 := range attribute_definition_xhtml.DEFAULT_VALUE {
-			stage.ATTRIBUTE_DEFINITION_XHTML_DEFAULT_VALUE_reverseMap[_a_default_value_2] = attribute_definition_xhtml
+		for _, _renamed_attribute_value_xhtml_1 := range attribute_definition_xhtml.DEFAULT_VALUE {
+			stage.ATTRIBUTE_DEFINITION_XHTML_DEFAULT_VALUE_reverseMap[_renamed_attribute_value_xhtml_1] = attribute_definition_xhtml
 		}
 	}
 	clear(stage.ATTRIBUTE_DEFINITION_XHTML_TYPE_reverseMap)
-	stage.ATTRIBUTE_DEFINITION_XHTML_TYPE_reverseMap = make(map[*A_TYPE_6]*ATTRIBUTE_DEFINITION_XHTML)
+	stage.ATTRIBUTE_DEFINITION_XHTML_TYPE_reverseMap = make(map[*Renamed_DATATYPE_DEFINITION_XHTML_REF_1]*ATTRIBUTE_DEFINITION_XHTML)
 	for attribute_definition_xhtml := range stage.ATTRIBUTE_DEFINITION_XHTMLs {
 		_ = attribute_definition_xhtml
-		for _, _a_type_6 := range attribute_definition_xhtml.TYPE {
-			stage.ATTRIBUTE_DEFINITION_XHTML_TYPE_reverseMap[_a_type_6] = attribute_definition_xhtml
+		for _, _renamed_datatype_definition_xhtml_ref_1 := range attribute_definition_xhtml.TYPE {
+			stage.ATTRIBUTE_DEFINITION_XHTML_TYPE_reverseMap[_renamed_datatype_definition_xhtml_ref_1] = attribute_definition_xhtml
 		}
 	}
 
 	// Compute reverse map for named struct ATTRIBUTE_VALUE_BOOLEAN
 	// insertion point per field
 	clear(stage.ATTRIBUTE_VALUE_BOOLEAN_DEFINITION_reverseMap)
-	stage.ATTRIBUTE_VALUE_BOOLEAN_DEFINITION_reverseMap = make(map[*A_DEFINITION_4]*ATTRIBUTE_VALUE_BOOLEAN)
+	stage.ATTRIBUTE_VALUE_BOOLEAN_DEFINITION_reverseMap = make(map[*Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1]*ATTRIBUTE_VALUE_BOOLEAN)
 	for attribute_value_boolean := range stage.ATTRIBUTE_VALUE_BOOLEANs {
 		_ = attribute_value_boolean
-		for _, _a_definition_4 := range attribute_value_boolean.DEFINITION {
-			stage.ATTRIBUTE_VALUE_BOOLEAN_DEFINITION_reverseMap[_a_definition_4] = attribute_value_boolean
+		for _, _renamed_attribute_definition_boolean_ref_1 := range attribute_value_boolean.DEFINITION {
+			stage.ATTRIBUTE_VALUE_BOOLEAN_DEFINITION_reverseMap[_renamed_attribute_definition_boolean_ref_1] = attribute_value_boolean
 		}
 	}
 
 	// Compute reverse map for named struct ATTRIBUTE_VALUE_DATE
 	// insertion point per field
 	clear(stage.ATTRIBUTE_VALUE_DATE_DEFINITION_reverseMap)
-	stage.ATTRIBUTE_VALUE_DATE_DEFINITION_reverseMap = make(map[*A_DEFINITION_2]*ATTRIBUTE_VALUE_DATE)
+	stage.ATTRIBUTE_VALUE_DATE_DEFINITION_reverseMap = make(map[*Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1]*ATTRIBUTE_VALUE_DATE)
 	for attribute_value_date := range stage.ATTRIBUTE_VALUE_DATEs {
 		_ = attribute_value_date
-		for _, _a_definition_2 := range attribute_value_date.DEFINITION {
-			stage.ATTRIBUTE_VALUE_DATE_DEFINITION_reverseMap[_a_definition_2] = attribute_value_date
+		for _, _renamed_attribute_definition_date_ref_1 := range attribute_value_date.DEFINITION {
+			stage.ATTRIBUTE_VALUE_DATE_DEFINITION_reverseMap[_renamed_attribute_definition_date_ref_1] = attribute_value_date
 		}
 	}
 
 	// Compute reverse map for named struct ATTRIBUTE_VALUE_ENUMERATION
 	// insertion point per field
 	clear(stage.ATTRIBUTE_VALUE_ENUMERATION_DEFINITION_reverseMap)
-	stage.ATTRIBUTE_VALUE_ENUMERATION_DEFINITION_reverseMap = make(map[*A_DEFINITION_5]*ATTRIBUTE_VALUE_ENUMERATION)
+	stage.ATTRIBUTE_VALUE_ENUMERATION_DEFINITION_reverseMap = make(map[*Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1]*ATTRIBUTE_VALUE_ENUMERATION)
 	for attribute_value_enumeration := range stage.ATTRIBUTE_VALUE_ENUMERATIONs {
 		_ = attribute_value_enumeration
-		for _, _a_definition_5 := range attribute_value_enumeration.DEFINITION {
-			stage.ATTRIBUTE_VALUE_ENUMERATION_DEFINITION_reverseMap[_a_definition_5] = attribute_value_enumeration
+		for _, _renamed_attribute_definition_enumeration_ref_1 := range attribute_value_enumeration.DEFINITION {
+			stage.ATTRIBUTE_VALUE_ENUMERATION_DEFINITION_reverseMap[_renamed_attribute_definition_enumeration_ref_1] = attribute_value_enumeration
 		}
 	}
 	clear(stage.ATTRIBUTE_VALUE_ENUMERATION_VALUES_reverseMap)
@@ -2810,33 +2810,33 @@ func (stage *StageStruct) ComputeReverseMaps() {
 	// Compute reverse map for named struct ATTRIBUTE_VALUE_INTEGER
 	// insertion point per field
 	clear(stage.ATTRIBUTE_VALUE_INTEGER_DEFINITION_reverseMap)
-	stage.ATTRIBUTE_VALUE_INTEGER_DEFINITION_reverseMap = make(map[*A_DEFINITION]*ATTRIBUTE_VALUE_INTEGER)
+	stage.ATTRIBUTE_VALUE_INTEGER_DEFINITION_reverseMap = make(map[*Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1]*ATTRIBUTE_VALUE_INTEGER)
 	for attribute_value_integer := range stage.ATTRIBUTE_VALUE_INTEGERs {
 		_ = attribute_value_integer
-		for _, _a_definition := range attribute_value_integer.DEFINITION {
-			stage.ATTRIBUTE_VALUE_INTEGER_DEFINITION_reverseMap[_a_definition] = attribute_value_integer
+		for _, _renamed_attribute_definition_integer_ref_1 := range attribute_value_integer.DEFINITION {
+			stage.ATTRIBUTE_VALUE_INTEGER_DEFINITION_reverseMap[_renamed_attribute_definition_integer_ref_1] = attribute_value_integer
 		}
 	}
 
 	// Compute reverse map for named struct ATTRIBUTE_VALUE_REAL
 	// insertion point per field
 	clear(stage.ATTRIBUTE_VALUE_REAL_DEFINITION_reverseMap)
-	stage.ATTRIBUTE_VALUE_REAL_DEFINITION_reverseMap = make(map[*A_DEFINITION_6]*ATTRIBUTE_VALUE_REAL)
+	stage.ATTRIBUTE_VALUE_REAL_DEFINITION_reverseMap = make(map[*Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1]*ATTRIBUTE_VALUE_REAL)
 	for attribute_value_real := range stage.ATTRIBUTE_VALUE_REALs {
 		_ = attribute_value_real
-		for _, _a_definition_6 := range attribute_value_real.DEFINITION {
-			stage.ATTRIBUTE_VALUE_REAL_DEFINITION_reverseMap[_a_definition_6] = attribute_value_real
+		for _, _renamed_attribute_definition_real_ref_1 := range attribute_value_real.DEFINITION {
+			stage.ATTRIBUTE_VALUE_REAL_DEFINITION_reverseMap[_renamed_attribute_definition_real_ref_1] = attribute_value_real
 		}
 	}
 
 	// Compute reverse map for named struct ATTRIBUTE_VALUE_STRING
 	// insertion point per field
 	clear(stage.ATTRIBUTE_VALUE_STRING_DEFINITION_reverseMap)
-	stage.ATTRIBUTE_VALUE_STRING_DEFINITION_reverseMap = make(map[*A_DEFINITION_3]*ATTRIBUTE_VALUE_STRING)
+	stage.ATTRIBUTE_VALUE_STRING_DEFINITION_reverseMap = make(map[*Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1]*ATTRIBUTE_VALUE_STRING)
 	for attribute_value_string := range stage.ATTRIBUTE_VALUE_STRINGs {
 		_ = attribute_value_string
-		for _, _a_definition_3 := range attribute_value_string.DEFINITION {
-			stage.ATTRIBUTE_VALUE_STRING_DEFINITION_reverseMap[_a_definition_3] = attribute_value_string
+		for _, _renamed_attribute_definition_string_ref_1 := range attribute_value_string.DEFINITION {
+			stage.ATTRIBUTE_VALUE_STRING_DEFINITION_reverseMap[_renamed_attribute_definition_string_ref_1] = attribute_value_string
 		}
 	}
 
@@ -2859,11 +2859,11 @@ func (stage *StageStruct) ComputeReverseMaps() {
 		}
 	}
 	clear(stage.ATTRIBUTE_VALUE_XHTML_DEFINITION_reverseMap)
-	stage.ATTRIBUTE_VALUE_XHTML_DEFINITION_reverseMap = make(map[*A_DEFINITION_1]*ATTRIBUTE_VALUE_XHTML)
+	stage.ATTRIBUTE_VALUE_XHTML_DEFINITION_reverseMap = make(map[*Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1]*ATTRIBUTE_VALUE_XHTML)
 	for attribute_value_xhtml := range stage.ATTRIBUTE_VALUE_XHTMLs {
 		_ = attribute_value_xhtml
-		for _, _a_definition_1 := range attribute_value_xhtml.DEFINITION {
-			stage.ATTRIBUTE_VALUE_XHTML_DEFINITION_reverseMap[_a_definition_1] = attribute_value_xhtml
+		for _, _renamed_attribute_definition_xhtml_ref_1 := range attribute_value_xhtml.DEFINITION {
+			stage.ATTRIBUTE_VALUE_XHTML_DEFINITION_reverseMap[_renamed_attribute_definition_xhtml_ref_1] = attribute_value_xhtml
 		}
 	}
 
@@ -2958,104 +2958,6 @@ func (stage *StageStruct) ComputeReverseMaps() {
 			stage.A_DATATYPES_DATATYPE_DEFINITION_XHTML_reverseMap[_datatype_definition_xhtml] = a_datatypes
 		}
 	}
-
-	// Compute reverse map for named struct A_DEFAULT_VALUE
-	// insertion point per field
-	clear(stage.A_DEFAULT_VALUE_ATTRIBUTE_VALUE_STRING_reverseMap)
-	stage.A_DEFAULT_VALUE_ATTRIBUTE_VALUE_STRING_reverseMap = make(map[*ATTRIBUTE_VALUE_STRING]*A_DEFAULT_VALUE)
-	for a_default_value := range stage.A_DEFAULT_VALUEs {
-		_ = a_default_value
-		for _, _attribute_value_string := range a_default_value.ATTRIBUTE_VALUE_STRING {
-			stage.A_DEFAULT_VALUE_ATTRIBUTE_VALUE_STRING_reverseMap[_attribute_value_string] = a_default_value
-		}
-	}
-
-	// Compute reverse map for named struct A_DEFAULT_VALUE_1
-	// insertion point per field
-	clear(stage.A_DEFAULT_VALUE_1_ATTRIBUTE_VALUE_BOOLEAN_reverseMap)
-	stage.A_DEFAULT_VALUE_1_ATTRIBUTE_VALUE_BOOLEAN_reverseMap = make(map[*ATTRIBUTE_VALUE_BOOLEAN]*A_DEFAULT_VALUE_1)
-	for a_default_value_1 := range stage.A_DEFAULT_VALUE_1s {
-		_ = a_default_value_1
-		for _, _attribute_value_boolean := range a_default_value_1.ATTRIBUTE_VALUE_BOOLEAN {
-			stage.A_DEFAULT_VALUE_1_ATTRIBUTE_VALUE_BOOLEAN_reverseMap[_attribute_value_boolean] = a_default_value_1
-		}
-	}
-
-	// Compute reverse map for named struct A_DEFAULT_VALUE_2
-	// insertion point per field
-	clear(stage.A_DEFAULT_VALUE_2_ATTRIBUTE_VALUE_XHTML_reverseMap)
-	stage.A_DEFAULT_VALUE_2_ATTRIBUTE_VALUE_XHTML_reverseMap = make(map[*ATTRIBUTE_VALUE_XHTML]*A_DEFAULT_VALUE_2)
-	for a_default_value_2 := range stage.A_DEFAULT_VALUE_2s {
-		_ = a_default_value_2
-		for _, _attribute_value_xhtml := range a_default_value_2.ATTRIBUTE_VALUE_XHTML {
-			stage.A_DEFAULT_VALUE_2_ATTRIBUTE_VALUE_XHTML_reverseMap[_attribute_value_xhtml] = a_default_value_2
-		}
-	}
-
-	// Compute reverse map for named struct A_DEFAULT_VALUE_3
-	// insertion point per field
-	clear(stage.A_DEFAULT_VALUE_3_ATTRIBUTE_VALUE_DATE_reverseMap)
-	stage.A_DEFAULT_VALUE_3_ATTRIBUTE_VALUE_DATE_reverseMap = make(map[*ATTRIBUTE_VALUE_DATE]*A_DEFAULT_VALUE_3)
-	for a_default_value_3 := range stage.A_DEFAULT_VALUE_3s {
-		_ = a_default_value_3
-		for _, _attribute_value_date := range a_default_value_3.ATTRIBUTE_VALUE_DATE {
-			stage.A_DEFAULT_VALUE_3_ATTRIBUTE_VALUE_DATE_reverseMap[_attribute_value_date] = a_default_value_3
-		}
-	}
-
-	// Compute reverse map for named struct A_DEFAULT_VALUE_4
-	// insertion point per field
-	clear(stage.A_DEFAULT_VALUE_4_ATTRIBUTE_VALUE_REAL_reverseMap)
-	stage.A_DEFAULT_VALUE_4_ATTRIBUTE_VALUE_REAL_reverseMap = make(map[*ATTRIBUTE_VALUE_REAL]*A_DEFAULT_VALUE_4)
-	for a_default_value_4 := range stage.A_DEFAULT_VALUE_4s {
-		_ = a_default_value_4
-		for _, _attribute_value_real := range a_default_value_4.ATTRIBUTE_VALUE_REAL {
-			stage.A_DEFAULT_VALUE_4_ATTRIBUTE_VALUE_REAL_reverseMap[_attribute_value_real] = a_default_value_4
-		}
-	}
-
-	// Compute reverse map for named struct A_DEFAULT_VALUE_5
-	// insertion point per field
-	clear(stage.A_DEFAULT_VALUE_5_ATTRIBUTE_VALUE_ENUMERATION_reverseMap)
-	stage.A_DEFAULT_VALUE_5_ATTRIBUTE_VALUE_ENUMERATION_reverseMap = make(map[*ATTRIBUTE_VALUE_ENUMERATION]*A_DEFAULT_VALUE_5)
-	for a_default_value_5 := range stage.A_DEFAULT_VALUE_5s {
-		_ = a_default_value_5
-		for _, _attribute_value_enumeration := range a_default_value_5.ATTRIBUTE_VALUE_ENUMERATION {
-			stage.A_DEFAULT_VALUE_5_ATTRIBUTE_VALUE_ENUMERATION_reverseMap[_attribute_value_enumeration] = a_default_value_5
-		}
-	}
-
-	// Compute reverse map for named struct A_DEFAULT_VALUE_6
-	// insertion point per field
-	clear(stage.A_DEFAULT_VALUE_6_ATTRIBUTE_VALUE_INTEGER_reverseMap)
-	stage.A_DEFAULT_VALUE_6_ATTRIBUTE_VALUE_INTEGER_reverseMap = make(map[*ATTRIBUTE_VALUE_INTEGER]*A_DEFAULT_VALUE_6)
-	for a_default_value_6 := range stage.A_DEFAULT_VALUE_6s {
-		_ = a_default_value_6
-		for _, _attribute_value_integer := range a_default_value_6.ATTRIBUTE_VALUE_INTEGER {
-			stage.A_DEFAULT_VALUE_6_ATTRIBUTE_VALUE_INTEGER_reverseMap[_attribute_value_integer] = a_default_value_6
-		}
-	}
-
-	// Compute reverse map for named struct A_DEFINITION
-	// insertion point per field
-
-	// Compute reverse map for named struct A_DEFINITION_1
-	// insertion point per field
-
-	// Compute reverse map for named struct A_DEFINITION_2
-	// insertion point per field
-
-	// Compute reverse map for named struct A_DEFINITION_3
-	// insertion point per field
-
-	// Compute reverse map for named struct A_DEFINITION_4
-	// insertion point per field
-
-	// Compute reverse map for named struct A_DEFINITION_5
-	// insertion point per field
-
-	// Compute reverse map for named struct A_DEFINITION_6
-	// insertion point per field
 
 	// Compute reverse map for named struct A_EDITABLE_ATTS
 	// insertion point per field
@@ -3174,17 +3076,17 @@ func (stage *StageStruct) ComputeReverseMaps() {
 
 	// Compute reverse map for named struct A_SPEC_RELATIONS
 	// insertion point per field
+	clear(stage.A_SPEC_RELATIONS_SPEC_RELATION_reverseMap)
+	stage.A_SPEC_RELATIONS_SPEC_RELATION_reverseMap = make(map[*SPEC_RELATION]*A_SPEC_RELATIONS)
+	for a_spec_relations := range stage.A_SPEC_RELATIONSs {
+		_ = a_spec_relations
+		for _, _spec_relation := range a_spec_relations.SPEC_RELATION {
+			stage.A_SPEC_RELATIONS_SPEC_RELATION_reverseMap[_spec_relation] = a_spec_relations
+		}
+	}
 
 	// Compute reverse map for named struct A_SPEC_RELATIONS_1
 	// insertion point per field
-	clear(stage.A_SPEC_RELATIONS_1_SPEC_RELATION_reverseMap)
-	stage.A_SPEC_RELATIONS_1_SPEC_RELATION_reverseMap = make(map[*SPEC_RELATION]*A_SPEC_RELATIONS_1)
-	for a_spec_relations_1 := range stage.A_SPEC_RELATIONS_1s {
-		_ = a_spec_relations_1
-		for _, _spec_relation := range a_spec_relations_1.SPEC_RELATION {
-			stage.A_SPEC_RELATIONS_1_SPEC_RELATION_reverseMap[_spec_relation] = a_spec_relations_1
-		}
-	}
 
 	// Compute reverse map for named struct A_SPEC_RELATION_GROUPS
 	// insertion point per field
@@ -3253,39 +3155,6 @@ func (stage *StageStruct) ComputeReverseMaps() {
 			stage.A_TOOL_EXTENSIONS_REQ_IF_TOOL_EXTENSION_reverseMap[_req_if_tool_extension] = a_tool_extensions
 		}
 	}
-
-	// Compute reverse map for named struct A_TYPE
-	// insertion point per field
-
-	// Compute reverse map for named struct A_TYPE_1
-	// insertion point per field
-
-	// Compute reverse map for named struct A_TYPE_10
-	// insertion point per field
-
-	// Compute reverse map for named struct A_TYPE_2
-	// insertion point per field
-
-	// Compute reverse map for named struct A_TYPE_3
-	// insertion point per field
-
-	// Compute reverse map for named struct A_TYPE_4
-	// insertion point per field
-
-	// Compute reverse map for named struct A_TYPE_5
-	// insertion point per field
-
-	// Compute reverse map for named struct A_TYPE_6
-	// insertion point per field
-
-	// Compute reverse map for named struct A_TYPE_7
-	// insertion point per field
-
-	// Compute reverse map for named struct A_TYPE_8
-	// insertion point per field
-
-	// Compute reverse map for named struct A_TYPE_9
-	// insertion point per field
 
 	// Compute reverse map for named struct A_VALUES
 	// insertion point per field
@@ -3475,19 +3344,19 @@ func (stage *StageStruct) ComputeReverseMaps() {
 		}
 	}
 	clear(stage.RELATION_GROUP_SPEC_RELATIONS_reverseMap)
-	stage.RELATION_GROUP_SPEC_RELATIONS_reverseMap = make(map[*A_SPEC_RELATIONS]*RELATION_GROUP)
+	stage.RELATION_GROUP_SPEC_RELATIONS_reverseMap = make(map[*A_SPEC_RELATIONS_1]*RELATION_GROUP)
 	for relation_group := range stage.RELATION_GROUPs {
 		_ = relation_group
-		for _, _a_spec_relations := range relation_group.SPEC_RELATIONS {
-			stage.RELATION_GROUP_SPEC_RELATIONS_reverseMap[_a_spec_relations] = relation_group
+		for _, _a_spec_relations_1 := range relation_group.SPEC_RELATIONS {
+			stage.RELATION_GROUP_SPEC_RELATIONS_reverseMap[_a_spec_relations_1] = relation_group
 		}
 	}
 	clear(stage.RELATION_GROUP_TYPE_reverseMap)
-	stage.RELATION_GROUP_TYPE_reverseMap = make(map[*A_TYPE_1]*RELATION_GROUP)
+	stage.RELATION_GROUP_TYPE_reverseMap = make(map[*Renamed_RELATION_GROUP_TYPE_REF_1]*RELATION_GROUP)
 	for relation_group := range stage.RELATION_GROUPs {
 		_ = relation_group
-		for _, _a_type_1 := range relation_group.TYPE {
-			stage.RELATION_GROUP_TYPE_reverseMap[_a_type_1] = relation_group
+		for _, _renamed_relation_group_type_ref_1 := range relation_group.TYPE {
+			stage.RELATION_GROUP_TYPE_reverseMap[_renamed_relation_group_type_ref_1] = relation_group
 		}
 	}
 
@@ -3564,11 +3433,11 @@ func (stage *StageStruct) ComputeReverseMaps() {
 		}
 	}
 	clear(stage.REQ_IF_CONTENT_SPEC_RELATIONS_reverseMap)
-	stage.REQ_IF_CONTENT_SPEC_RELATIONS_reverseMap = make(map[*A_SPEC_RELATIONS_1]*REQ_IF_CONTENT)
+	stage.REQ_IF_CONTENT_SPEC_RELATIONS_reverseMap = make(map[*A_SPEC_RELATIONS]*REQ_IF_CONTENT)
 	for req_if_content := range stage.REQ_IF_CONTENTs {
 		_ = req_if_content
-		for _, _a_spec_relations_1 := range req_if_content.SPEC_RELATIONS {
-			stage.REQ_IF_CONTENT_SPEC_RELATIONS_reverseMap[_a_spec_relations_1] = req_if_content
+		for _, _a_spec_relations := range req_if_content.SPEC_RELATIONS {
+			stage.REQ_IF_CONTENT_SPEC_RELATIONS_reverseMap[_a_spec_relations] = req_if_content
 		}
 	}
 	clear(stage.REQ_IF_CONTENT_SPECIFICATIONS_reverseMap)
@@ -3592,6 +3461,137 @@ func (stage *StageStruct) ComputeReverseMaps() {
 	// insertion point per field
 
 	// Compute reverse map for named struct REQ_IF_TOOL_EXTENSION
+	// insertion point per field
+
+	// Compute reverse map for named struct Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1
+	// insertion point per field
+
+	// Compute reverse map for named struct Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1
+	// insertion point per field
+
+	// Compute reverse map for named struct Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1
+	// insertion point per field
+
+	// Compute reverse map for named struct Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1
+	// insertion point per field
+
+	// Compute reverse map for named struct Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1
+	// insertion point per field
+
+	// Compute reverse map for named struct Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1
+	// insertion point per field
+
+	// Compute reverse map for named struct Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1
+	// insertion point per field
+
+	// Compute reverse map for named struct Renamed_ATTRIBUTE_VALUE_BOOLEAN_1
+	// insertion point per field
+	clear(stage.Renamed_ATTRIBUTE_VALUE_BOOLEAN_1_ATTRIBUTE_VALUE_BOOLEAN_reverseMap)
+	stage.Renamed_ATTRIBUTE_VALUE_BOOLEAN_1_ATTRIBUTE_VALUE_BOOLEAN_reverseMap = make(map[*ATTRIBUTE_VALUE_BOOLEAN]*Renamed_ATTRIBUTE_VALUE_BOOLEAN_1)
+	for renamed_attribute_value_boolean_1 := range stage.Renamed_ATTRIBUTE_VALUE_BOOLEAN_1s {
+		_ = renamed_attribute_value_boolean_1
+		for _, _attribute_value_boolean := range renamed_attribute_value_boolean_1.ATTRIBUTE_VALUE_BOOLEAN {
+			stage.Renamed_ATTRIBUTE_VALUE_BOOLEAN_1_ATTRIBUTE_VALUE_BOOLEAN_reverseMap[_attribute_value_boolean] = renamed_attribute_value_boolean_1
+		}
+	}
+
+	// Compute reverse map for named struct Renamed_ATTRIBUTE_VALUE_DATE_1
+	// insertion point per field
+	clear(stage.Renamed_ATTRIBUTE_VALUE_DATE_1_ATTRIBUTE_VALUE_DATE_reverseMap)
+	stage.Renamed_ATTRIBUTE_VALUE_DATE_1_ATTRIBUTE_VALUE_DATE_reverseMap = make(map[*ATTRIBUTE_VALUE_DATE]*Renamed_ATTRIBUTE_VALUE_DATE_1)
+	for renamed_attribute_value_date_1 := range stage.Renamed_ATTRIBUTE_VALUE_DATE_1s {
+		_ = renamed_attribute_value_date_1
+		for _, _attribute_value_date := range renamed_attribute_value_date_1.ATTRIBUTE_VALUE_DATE {
+			stage.Renamed_ATTRIBUTE_VALUE_DATE_1_ATTRIBUTE_VALUE_DATE_reverseMap[_attribute_value_date] = renamed_attribute_value_date_1
+		}
+	}
+
+	// Compute reverse map for named struct Renamed_ATTRIBUTE_VALUE_ENUMERATION_1
+	// insertion point per field
+	clear(stage.Renamed_ATTRIBUTE_VALUE_ENUMERATION_1_ATTRIBUTE_VALUE_ENUMERATION_reverseMap)
+	stage.Renamed_ATTRIBUTE_VALUE_ENUMERATION_1_ATTRIBUTE_VALUE_ENUMERATION_reverseMap = make(map[*ATTRIBUTE_VALUE_ENUMERATION]*Renamed_ATTRIBUTE_VALUE_ENUMERATION_1)
+	for renamed_attribute_value_enumeration_1 := range stage.Renamed_ATTRIBUTE_VALUE_ENUMERATION_1s {
+		_ = renamed_attribute_value_enumeration_1
+		for _, _attribute_value_enumeration := range renamed_attribute_value_enumeration_1.ATTRIBUTE_VALUE_ENUMERATION {
+			stage.Renamed_ATTRIBUTE_VALUE_ENUMERATION_1_ATTRIBUTE_VALUE_ENUMERATION_reverseMap[_attribute_value_enumeration] = renamed_attribute_value_enumeration_1
+		}
+	}
+
+	// Compute reverse map for named struct Renamed_ATTRIBUTE_VALUE_INTEGER_1
+	// insertion point per field
+	clear(stage.Renamed_ATTRIBUTE_VALUE_INTEGER_1_ATTRIBUTE_VALUE_INTEGER_reverseMap)
+	stage.Renamed_ATTRIBUTE_VALUE_INTEGER_1_ATTRIBUTE_VALUE_INTEGER_reverseMap = make(map[*ATTRIBUTE_VALUE_INTEGER]*Renamed_ATTRIBUTE_VALUE_INTEGER_1)
+	for renamed_attribute_value_integer_1 := range stage.Renamed_ATTRIBUTE_VALUE_INTEGER_1s {
+		_ = renamed_attribute_value_integer_1
+		for _, _attribute_value_integer := range renamed_attribute_value_integer_1.ATTRIBUTE_VALUE_INTEGER {
+			stage.Renamed_ATTRIBUTE_VALUE_INTEGER_1_ATTRIBUTE_VALUE_INTEGER_reverseMap[_attribute_value_integer] = renamed_attribute_value_integer_1
+		}
+	}
+
+	// Compute reverse map for named struct Renamed_ATTRIBUTE_VALUE_REAL_1
+	// insertion point per field
+	clear(stage.Renamed_ATTRIBUTE_VALUE_REAL_1_ATTRIBUTE_VALUE_REAL_reverseMap)
+	stage.Renamed_ATTRIBUTE_VALUE_REAL_1_ATTRIBUTE_VALUE_REAL_reverseMap = make(map[*ATTRIBUTE_VALUE_REAL]*Renamed_ATTRIBUTE_VALUE_REAL_1)
+	for renamed_attribute_value_real_1 := range stage.Renamed_ATTRIBUTE_VALUE_REAL_1s {
+		_ = renamed_attribute_value_real_1
+		for _, _attribute_value_real := range renamed_attribute_value_real_1.ATTRIBUTE_VALUE_REAL {
+			stage.Renamed_ATTRIBUTE_VALUE_REAL_1_ATTRIBUTE_VALUE_REAL_reverseMap[_attribute_value_real] = renamed_attribute_value_real_1
+		}
+	}
+
+	// Compute reverse map for named struct Renamed_ATTRIBUTE_VALUE_STRING_1
+	// insertion point per field
+	clear(stage.Renamed_ATTRIBUTE_VALUE_STRING_1_ATTRIBUTE_VALUE_STRING_reverseMap)
+	stage.Renamed_ATTRIBUTE_VALUE_STRING_1_ATTRIBUTE_VALUE_STRING_reverseMap = make(map[*ATTRIBUTE_VALUE_STRING]*Renamed_ATTRIBUTE_VALUE_STRING_1)
+	for renamed_attribute_value_string_1 := range stage.Renamed_ATTRIBUTE_VALUE_STRING_1s {
+		_ = renamed_attribute_value_string_1
+		for _, _attribute_value_string := range renamed_attribute_value_string_1.ATTRIBUTE_VALUE_STRING {
+			stage.Renamed_ATTRIBUTE_VALUE_STRING_1_ATTRIBUTE_VALUE_STRING_reverseMap[_attribute_value_string] = renamed_attribute_value_string_1
+		}
+	}
+
+	// Compute reverse map for named struct Renamed_ATTRIBUTE_VALUE_XHTML_1
+	// insertion point per field
+	clear(stage.Renamed_ATTRIBUTE_VALUE_XHTML_1_ATTRIBUTE_VALUE_XHTML_reverseMap)
+	stage.Renamed_ATTRIBUTE_VALUE_XHTML_1_ATTRIBUTE_VALUE_XHTML_reverseMap = make(map[*ATTRIBUTE_VALUE_XHTML]*Renamed_ATTRIBUTE_VALUE_XHTML_1)
+	for renamed_attribute_value_xhtml_1 := range stage.Renamed_ATTRIBUTE_VALUE_XHTML_1s {
+		_ = renamed_attribute_value_xhtml_1
+		for _, _attribute_value_xhtml := range renamed_attribute_value_xhtml_1.ATTRIBUTE_VALUE_XHTML {
+			stage.Renamed_ATTRIBUTE_VALUE_XHTML_1_ATTRIBUTE_VALUE_XHTML_reverseMap[_attribute_value_xhtml] = renamed_attribute_value_xhtml_1
+		}
+	}
+
+	// Compute reverse map for named struct Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1
+	// insertion point per field
+
+	// Compute reverse map for named struct Renamed_DATATYPE_DEFINITION_DATE_REF_1
+	// insertion point per field
+
+	// Compute reverse map for named struct Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1
+	// insertion point per field
+
+	// Compute reverse map for named struct Renamed_DATATYPE_DEFINITION_INTEGER_REF_1
+	// insertion point per field
+
+	// Compute reverse map for named struct Renamed_DATATYPE_DEFINITION_REAL_REF_1
+	// insertion point per field
+
+	// Compute reverse map for named struct Renamed_DATATYPE_DEFINITION_STRING_REF_1
+	// insertion point per field
+
+	// Compute reverse map for named struct Renamed_DATATYPE_DEFINITION_XHTML_REF_1
+	// insertion point per field
+
+	// Compute reverse map for named struct Renamed_RELATION_GROUP_TYPE_REF_1
+	// insertion point per field
+
+	// Compute reverse map for named struct Renamed_SPECIFICATION_TYPE_REF_1
+	// insertion point per field
+
+	// Compute reverse map for named struct Renamed_SPEC_OBJECT_TYPE_REF_1
+	// insertion point per field
+
+	// Compute reverse map for named struct Renamed_SPEC_RELATION_TYPE_REF_1
 	// insertion point per field
 
 	// Compute reverse map for named struct SPECIFICATION
@@ -3621,11 +3621,11 @@ func (stage *StageStruct) ComputeReverseMaps() {
 		}
 	}
 	clear(stage.SPECIFICATION_TYPE_reverseMap)
-	stage.SPECIFICATION_TYPE_reverseMap = make(map[*A_TYPE_10]*SPECIFICATION)
+	stage.SPECIFICATION_TYPE_reverseMap = make(map[*Renamed_SPECIFICATION_TYPE_REF_1]*SPECIFICATION)
 	for specification := range stage.SPECIFICATIONs {
 		_ = specification
-		for _, _a_type_10 := range specification.TYPE {
-			stage.SPECIFICATION_TYPE_reverseMap[_a_type_10] = specification
+		for _, _renamed_specification_type_ref_1 := range specification.TYPE {
+			stage.SPECIFICATION_TYPE_reverseMap[_renamed_specification_type_ref_1] = specification
 		}
 	}
 
@@ -3702,11 +3702,11 @@ func (stage *StageStruct) ComputeReverseMaps() {
 		}
 	}
 	clear(stage.SPEC_OBJECT_TYPE_reverseMap)
-	stage.SPEC_OBJECT_TYPE_reverseMap = make(map[*A_TYPE_2]*SPEC_OBJECT)
+	stage.SPEC_OBJECT_TYPE_reverseMap = make(map[*Renamed_SPEC_OBJECT_TYPE_REF_1]*SPEC_OBJECT)
 	for spec_object := range stage.SPEC_OBJECTs {
 		_ = spec_object
-		for _, _a_type_2 := range spec_object.TYPE {
-			stage.SPEC_OBJECT_TYPE_reverseMap[_a_type_2] = spec_object
+		for _, _renamed_spec_object_type_ref_1 := range spec_object.TYPE {
+			stage.SPEC_OBJECT_TYPE_reverseMap[_renamed_spec_object_type_ref_1] = spec_object
 		}
 	}
 
@@ -3756,11 +3756,11 @@ func (stage *StageStruct) ComputeReverseMaps() {
 		}
 	}
 	clear(stage.SPEC_RELATION_TYPE_reverseMap)
-	stage.SPEC_RELATION_TYPE_reverseMap = make(map[*A_TYPE_4]*SPEC_RELATION)
+	stage.SPEC_RELATION_TYPE_reverseMap = make(map[*Renamed_SPEC_RELATION_TYPE_REF_1]*SPEC_RELATION)
 	for spec_relation := range stage.SPEC_RELATIONs {
 		_ = spec_relation
-		for _, _a_type_4 := range spec_relation.TYPE {
-			stage.SPEC_RELATION_TYPE_reverseMap[_a_type_4] = spec_relation
+		for _, _renamed_spec_relation_type_ref_1 := range spec_relation.TYPE {
+			stage.SPEC_RELATION_TYPE_reverseMap[_renamed_spec_relation_type_ref_1] = spec_relation
 		}
 	}
 

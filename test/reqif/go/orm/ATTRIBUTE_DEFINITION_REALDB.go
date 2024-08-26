@@ -272,37 +272,37 @@ func (backRepoATTRIBUTE_DEFINITION_REAL *BackRepoATTRIBUTE_DEFINITION_REALStruct
 		// 1. reset
 		attribute_definition_realDB.ATTRIBUTE_DEFINITION_REALPointersEncoding.DEFAULT_VALUE = make([]int, 0)
 		// 2. encode
-		for _, a_default_value_4AssocEnd := range attribute_definition_real.DEFAULT_VALUE {
-			a_default_value_4AssocEnd_DB :=
-				backRepo.BackRepoA_DEFAULT_VALUE_4.GetA_DEFAULT_VALUE_4DBFromA_DEFAULT_VALUE_4Ptr(a_default_value_4AssocEnd)
+		for _, renamed_attribute_value_real_1AssocEnd := range attribute_definition_real.DEFAULT_VALUE {
+			renamed_attribute_value_real_1AssocEnd_DB :=
+				backRepo.BackRepoRenamed_ATTRIBUTE_VALUE_REAL_1.GetRenamed_ATTRIBUTE_VALUE_REAL_1DBFromRenamed_ATTRIBUTE_VALUE_REAL_1Ptr(renamed_attribute_value_real_1AssocEnd)
 			
-			// the stage might be inconsistant, meaning that the a_default_value_4AssocEnd_DB might
+			// the stage might be inconsistant, meaning that the renamed_attribute_value_real_1AssocEnd_DB might
 			// be missing from the stage. In this case, the commit operation is robust
 			// An alternative would be to crash here to reveal the missing element.
-			if a_default_value_4AssocEnd_DB == nil {
+			if renamed_attribute_value_real_1AssocEnd_DB == nil {
 				continue
 			}
 			
 			attribute_definition_realDB.ATTRIBUTE_DEFINITION_REALPointersEncoding.DEFAULT_VALUE =
-				append(attribute_definition_realDB.ATTRIBUTE_DEFINITION_REALPointersEncoding.DEFAULT_VALUE, int(a_default_value_4AssocEnd_DB.ID))
+				append(attribute_definition_realDB.ATTRIBUTE_DEFINITION_REALPointersEncoding.DEFAULT_VALUE, int(renamed_attribute_value_real_1AssocEnd_DB.ID))
 		}
 
 		// 1. reset
 		attribute_definition_realDB.ATTRIBUTE_DEFINITION_REALPointersEncoding.TYPE = make([]int, 0)
 		// 2. encode
-		for _, a_type_3AssocEnd := range attribute_definition_real.TYPE {
-			a_type_3AssocEnd_DB :=
-				backRepo.BackRepoA_TYPE_3.GetA_TYPE_3DBFromA_TYPE_3Ptr(a_type_3AssocEnd)
+		for _, renamed_datatype_definition_real_ref_1AssocEnd := range attribute_definition_real.TYPE {
+			renamed_datatype_definition_real_ref_1AssocEnd_DB :=
+				backRepo.BackRepoRenamed_DATATYPE_DEFINITION_REAL_REF_1.GetRenamed_DATATYPE_DEFINITION_REAL_REF_1DBFromRenamed_DATATYPE_DEFINITION_REAL_REF_1Ptr(renamed_datatype_definition_real_ref_1AssocEnd)
 			
-			// the stage might be inconsistant, meaning that the a_type_3AssocEnd_DB might
+			// the stage might be inconsistant, meaning that the renamed_datatype_definition_real_ref_1AssocEnd_DB might
 			// be missing from the stage. In this case, the commit operation is robust
 			// An alternative would be to crash here to reveal the missing element.
-			if a_type_3AssocEnd_DB == nil {
+			if renamed_datatype_definition_real_ref_1AssocEnd_DB == nil {
 				continue
 			}
 			
 			attribute_definition_realDB.ATTRIBUTE_DEFINITION_REALPointersEncoding.TYPE =
-				append(attribute_definition_realDB.ATTRIBUTE_DEFINITION_REALPointersEncoding.TYPE, int(a_type_3AssocEnd_DB.ID))
+				append(attribute_definition_realDB.ATTRIBUTE_DEFINITION_REALPointersEncoding.TYPE, int(renamed_datatype_definition_real_ref_1AssocEnd_DB.ID))
 		}
 
 		query := backRepoATTRIBUTE_DEFINITION_REAL.db.Save(&attribute_definition_realDB)
@@ -428,21 +428,21 @@ func (attribute_definition_realDB *ATTRIBUTE_DEFINITION_REALDB) DecodePointers(b
 	}
 
 	// This loop redeem attribute_definition_real.DEFAULT_VALUE in the stage from the encode in the back repo
-	// It parses all A_DEFAULT_VALUE_4DB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// It parses all Renamed_ATTRIBUTE_VALUE_REAL_1DB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance
 	// 1. reset the slice
 	attribute_definition_real.DEFAULT_VALUE = attribute_definition_real.DEFAULT_VALUE[:0]
-	for _, _A_DEFAULT_VALUE_4id := range attribute_definition_realDB.ATTRIBUTE_DEFINITION_REALPointersEncoding.DEFAULT_VALUE {
-		attribute_definition_real.DEFAULT_VALUE = append(attribute_definition_real.DEFAULT_VALUE, backRepo.BackRepoA_DEFAULT_VALUE_4.Map_A_DEFAULT_VALUE_4DBID_A_DEFAULT_VALUE_4Ptr[uint(_A_DEFAULT_VALUE_4id)])
+	for _, _Renamed_ATTRIBUTE_VALUE_REAL_1id := range attribute_definition_realDB.ATTRIBUTE_DEFINITION_REALPointersEncoding.DEFAULT_VALUE {
+		attribute_definition_real.DEFAULT_VALUE = append(attribute_definition_real.DEFAULT_VALUE, backRepo.BackRepoRenamed_ATTRIBUTE_VALUE_REAL_1.Map_Renamed_ATTRIBUTE_VALUE_REAL_1DBID_Renamed_ATTRIBUTE_VALUE_REAL_1Ptr[uint(_Renamed_ATTRIBUTE_VALUE_REAL_1id)])
 	}
 
 	// This loop redeem attribute_definition_real.TYPE in the stage from the encode in the back repo
-	// It parses all A_TYPE_3DB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// It parses all Renamed_DATATYPE_DEFINITION_REAL_REF_1DB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance
 	// 1. reset the slice
 	attribute_definition_real.TYPE = attribute_definition_real.TYPE[:0]
-	for _, _A_TYPE_3id := range attribute_definition_realDB.ATTRIBUTE_DEFINITION_REALPointersEncoding.TYPE {
-		attribute_definition_real.TYPE = append(attribute_definition_real.TYPE, backRepo.BackRepoA_TYPE_3.Map_A_TYPE_3DBID_A_TYPE_3Ptr[uint(_A_TYPE_3id)])
+	for _, _Renamed_DATATYPE_DEFINITION_REAL_REF_1id := range attribute_definition_realDB.ATTRIBUTE_DEFINITION_REALPointersEncoding.TYPE {
+		attribute_definition_real.TYPE = append(attribute_definition_real.TYPE, backRepo.BackRepoRenamed_DATATYPE_DEFINITION_REAL_REF_1.Map_Renamed_DATATYPE_DEFINITION_REAL_REF_1DBID_Renamed_DATATYPE_DEFINITION_REAL_REF_1Ptr[uint(_Renamed_DATATYPE_DEFINITION_REAL_REF_1id)])
 	}
 
 	return

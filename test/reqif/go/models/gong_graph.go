@@ -62,48 +62,6 @@ func IsStaged[Type Gongstruct](stage *StageStruct, instance *Type) (ok bool) {
 	case *A_DATATYPES:
 		ok = stage.IsStagedA_DATATYPES(target)
 
-	case *A_DEFAULT_VALUE:
-		ok = stage.IsStagedA_DEFAULT_VALUE(target)
-
-	case *A_DEFAULT_VALUE_1:
-		ok = stage.IsStagedA_DEFAULT_VALUE_1(target)
-
-	case *A_DEFAULT_VALUE_2:
-		ok = stage.IsStagedA_DEFAULT_VALUE_2(target)
-
-	case *A_DEFAULT_VALUE_3:
-		ok = stage.IsStagedA_DEFAULT_VALUE_3(target)
-
-	case *A_DEFAULT_VALUE_4:
-		ok = stage.IsStagedA_DEFAULT_VALUE_4(target)
-
-	case *A_DEFAULT_VALUE_5:
-		ok = stage.IsStagedA_DEFAULT_VALUE_5(target)
-
-	case *A_DEFAULT_VALUE_6:
-		ok = stage.IsStagedA_DEFAULT_VALUE_6(target)
-
-	case *A_DEFINITION:
-		ok = stage.IsStagedA_DEFINITION(target)
-
-	case *A_DEFINITION_1:
-		ok = stage.IsStagedA_DEFINITION_1(target)
-
-	case *A_DEFINITION_2:
-		ok = stage.IsStagedA_DEFINITION_2(target)
-
-	case *A_DEFINITION_3:
-		ok = stage.IsStagedA_DEFINITION_3(target)
-
-	case *A_DEFINITION_4:
-		ok = stage.IsStagedA_DEFINITION_4(target)
-
-	case *A_DEFINITION_5:
-		ok = stage.IsStagedA_DEFINITION_5(target)
-
-	case *A_DEFINITION_6:
-		ok = stage.IsStagedA_DEFINITION_6(target)
-
 	case *A_EDITABLE_ATTS:
 		ok = stage.IsStagedA_EDITABLE_ATTS(target)
 
@@ -148,39 +106,6 @@ func IsStaged[Type Gongstruct](stage *StageStruct, instance *Type) (ok bool) {
 
 	case *A_TOOL_EXTENSIONS:
 		ok = stage.IsStagedA_TOOL_EXTENSIONS(target)
-
-	case *A_TYPE:
-		ok = stage.IsStagedA_TYPE(target)
-
-	case *A_TYPE_1:
-		ok = stage.IsStagedA_TYPE_1(target)
-
-	case *A_TYPE_10:
-		ok = stage.IsStagedA_TYPE_10(target)
-
-	case *A_TYPE_2:
-		ok = stage.IsStagedA_TYPE_2(target)
-
-	case *A_TYPE_3:
-		ok = stage.IsStagedA_TYPE_3(target)
-
-	case *A_TYPE_4:
-		ok = stage.IsStagedA_TYPE_4(target)
-
-	case *A_TYPE_5:
-		ok = stage.IsStagedA_TYPE_5(target)
-
-	case *A_TYPE_6:
-		ok = stage.IsStagedA_TYPE_6(target)
-
-	case *A_TYPE_7:
-		ok = stage.IsStagedA_TYPE_7(target)
-
-	case *A_TYPE_8:
-		ok = stage.IsStagedA_TYPE_8(target)
-
-	case *A_TYPE_9:
-		ok = stage.IsStagedA_TYPE_9(target)
 
 	case *A_VALUES:
 		ok = stage.IsStagedA_VALUES(target)
@@ -232,6 +157,81 @@ func IsStaged[Type Gongstruct](stage *StageStruct, instance *Type) (ok bool) {
 
 	case *REQ_IF_TOOL_EXTENSION:
 		ok = stage.IsStagedREQ_IF_TOOL_EXTENSION(target)
+
+	case *Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1:
+		ok = stage.IsStagedRenamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1(target)
+
+	case *Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1:
+		ok = stage.IsStagedRenamed_ATTRIBUTE_DEFINITION_DATE_REF_1(target)
+
+	case *Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1:
+		ok = stage.IsStagedRenamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1(target)
+
+	case *Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1:
+		ok = stage.IsStagedRenamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1(target)
+
+	case *Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1:
+		ok = stage.IsStagedRenamed_ATTRIBUTE_DEFINITION_REAL_REF_1(target)
+
+	case *Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1:
+		ok = stage.IsStagedRenamed_ATTRIBUTE_DEFINITION_STRING_REF_1(target)
+
+	case *Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1:
+		ok = stage.IsStagedRenamed_ATTRIBUTE_DEFINITION_XHTML_REF_1(target)
+
+	case *Renamed_ATTRIBUTE_VALUE_BOOLEAN_1:
+		ok = stage.IsStagedRenamed_ATTRIBUTE_VALUE_BOOLEAN_1(target)
+
+	case *Renamed_ATTRIBUTE_VALUE_DATE_1:
+		ok = stage.IsStagedRenamed_ATTRIBUTE_VALUE_DATE_1(target)
+
+	case *Renamed_ATTRIBUTE_VALUE_ENUMERATION_1:
+		ok = stage.IsStagedRenamed_ATTRIBUTE_VALUE_ENUMERATION_1(target)
+
+	case *Renamed_ATTRIBUTE_VALUE_INTEGER_1:
+		ok = stage.IsStagedRenamed_ATTRIBUTE_VALUE_INTEGER_1(target)
+
+	case *Renamed_ATTRIBUTE_VALUE_REAL_1:
+		ok = stage.IsStagedRenamed_ATTRIBUTE_VALUE_REAL_1(target)
+
+	case *Renamed_ATTRIBUTE_VALUE_STRING_1:
+		ok = stage.IsStagedRenamed_ATTRIBUTE_VALUE_STRING_1(target)
+
+	case *Renamed_ATTRIBUTE_VALUE_XHTML_1:
+		ok = stage.IsStagedRenamed_ATTRIBUTE_VALUE_XHTML_1(target)
+
+	case *Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1:
+		ok = stage.IsStagedRenamed_DATATYPE_DEFINITION_BOOLEAN_REF_1(target)
+
+	case *Renamed_DATATYPE_DEFINITION_DATE_REF_1:
+		ok = stage.IsStagedRenamed_DATATYPE_DEFINITION_DATE_REF_1(target)
+
+	case *Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1:
+		ok = stage.IsStagedRenamed_DATATYPE_DEFINITION_ENUMERATION_REF_1(target)
+
+	case *Renamed_DATATYPE_DEFINITION_INTEGER_REF_1:
+		ok = stage.IsStagedRenamed_DATATYPE_DEFINITION_INTEGER_REF_1(target)
+
+	case *Renamed_DATATYPE_DEFINITION_REAL_REF_1:
+		ok = stage.IsStagedRenamed_DATATYPE_DEFINITION_REAL_REF_1(target)
+
+	case *Renamed_DATATYPE_DEFINITION_STRING_REF_1:
+		ok = stage.IsStagedRenamed_DATATYPE_DEFINITION_STRING_REF_1(target)
+
+	case *Renamed_DATATYPE_DEFINITION_XHTML_REF_1:
+		ok = stage.IsStagedRenamed_DATATYPE_DEFINITION_XHTML_REF_1(target)
+
+	case *Renamed_RELATION_GROUP_TYPE_REF_1:
+		ok = stage.IsStagedRenamed_RELATION_GROUP_TYPE_REF_1(target)
+
+	case *Renamed_SPECIFICATION_TYPE_REF_1:
+		ok = stage.IsStagedRenamed_SPECIFICATION_TYPE_REF_1(target)
+
+	case *Renamed_SPEC_OBJECT_TYPE_REF_1:
+		ok = stage.IsStagedRenamed_SPEC_OBJECT_TYPE_REF_1(target)
+
+	case *Renamed_SPEC_RELATION_TYPE_REF_1:
+		ok = stage.IsStagedRenamed_SPEC_RELATION_TYPE_REF_1(target)
 
 	case *SPECIFICATION:
 		ok = stage.IsStagedSPECIFICATION(target)
@@ -397,104 +397,6 @@ func (stage *StageStruct) IsStagedA_DATATYPES(a_datatypes *A_DATATYPES) (ok bool
 	return
 }
 
-func (stage *StageStruct) IsStagedA_DEFAULT_VALUE(a_default_value *A_DEFAULT_VALUE) (ok bool) {
-
-	_, ok = stage.A_DEFAULT_VALUEs[a_default_value]
-
-	return
-}
-
-func (stage *StageStruct) IsStagedA_DEFAULT_VALUE_1(a_default_value_1 *A_DEFAULT_VALUE_1) (ok bool) {
-
-	_, ok = stage.A_DEFAULT_VALUE_1s[a_default_value_1]
-
-	return
-}
-
-func (stage *StageStruct) IsStagedA_DEFAULT_VALUE_2(a_default_value_2 *A_DEFAULT_VALUE_2) (ok bool) {
-
-	_, ok = stage.A_DEFAULT_VALUE_2s[a_default_value_2]
-
-	return
-}
-
-func (stage *StageStruct) IsStagedA_DEFAULT_VALUE_3(a_default_value_3 *A_DEFAULT_VALUE_3) (ok bool) {
-
-	_, ok = stage.A_DEFAULT_VALUE_3s[a_default_value_3]
-
-	return
-}
-
-func (stage *StageStruct) IsStagedA_DEFAULT_VALUE_4(a_default_value_4 *A_DEFAULT_VALUE_4) (ok bool) {
-
-	_, ok = stage.A_DEFAULT_VALUE_4s[a_default_value_4]
-
-	return
-}
-
-func (stage *StageStruct) IsStagedA_DEFAULT_VALUE_5(a_default_value_5 *A_DEFAULT_VALUE_5) (ok bool) {
-
-	_, ok = stage.A_DEFAULT_VALUE_5s[a_default_value_5]
-
-	return
-}
-
-func (stage *StageStruct) IsStagedA_DEFAULT_VALUE_6(a_default_value_6 *A_DEFAULT_VALUE_6) (ok bool) {
-
-	_, ok = stage.A_DEFAULT_VALUE_6s[a_default_value_6]
-
-	return
-}
-
-func (stage *StageStruct) IsStagedA_DEFINITION(a_definition *A_DEFINITION) (ok bool) {
-
-	_, ok = stage.A_DEFINITIONs[a_definition]
-
-	return
-}
-
-func (stage *StageStruct) IsStagedA_DEFINITION_1(a_definition_1 *A_DEFINITION_1) (ok bool) {
-
-	_, ok = stage.A_DEFINITION_1s[a_definition_1]
-
-	return
-}
-
-func (stage *StageStruct) IsStagedA_DEFINITION_2(a_definition_2 *A_DEFINITION_2) (ok bool) {
-
-	_, ok = stage.A_DEFINITION_2s[a_definition_2]
-
-	return
-}
-
-func (stage *StageStruct) IsStagedA_DEFINITION_3(a_definition_3 *A_DEFINITION_3) (ok bool) {
-
-	_, ok = stage.A_DEFINITION_3s[a_definition_3]
-
-	return
-}
-
-func (stage *StageStruct) IsStagedA_DEFINITION_4(a_definition_4 *A_DEFINITION_4) (ok bool) {
-
-	_, ok = stage.A_DEFINITION_4s[a_definition_4]
-
-	return
-}
-
-func (stage *StageStruct) IsStagedA_DEFINITION_5(a_definition_5 *A_DEFINITION_5) (ok bool) {
-
-	_, ok = stage.A_DEFINITION_5s[a_definition_5]
-
-	return
-}
-
-func (stage *StageStruct) IsStagedA_DEFINITION_6(a_definition_6 *A_DEFINITION_6) (ok bool) {
-
-	_, ok = stage.A_DEFINITION_6s[a_definition_6]
-
-	return
-}
-
 func (stage *StageStruct) IsStagedA_EDITABLE_ATTS(a_editable_atts *A_EDITABLE_ATTS) (ok bool) {
 
 	_, ok = stage.A_EDITABLE_ATTSs[a_editable_atts]
@@ -596,83 +498,6 @@ func (stage *StageStruct) IsStagedA_THE_HEADER(a_the_header *A_THE_HEADER) (ok b
 func (stage *StageStruct) IsStagedA_TOOL_EXTENSIONS(a_tool_extensions *A_TOOL_EXTENSIONS) (ok bool) {
 
 	_, ok = stage.A_TOOL_EXTENSIONSs[a_tool_extensions]
-
-	return
-}
-
-func (stage *StageStruct) IsStagedA_TYPE(a_type *A_TYPE) (ok bool) {
-
-	_, ok = stage.A_TYPEs[a_type]
-
-	return
-}
-
-func (stage *StageStruct) IsStagedA_TYPE_1(a_type_1 *A_TYPE_1) (ok bool) {
-
-	_, ok = stage.A_TYPE_1s[a_type_1]
-
-	return
-}
-
-func (stage *StageStruct) IsStagedA_TYPE_10(a_type_10 *A_TYPE_10) (ok bool) {
-
-	_, ok = stage.A_TYPE_10s[a_type_10]
-
-	return
-}
-
-func (stage *StageStruct) IsStagedA_TYPE_2(a_type_2 *A_TYPE_2) (ok bool) {
-
-	_, ok = stage.A_TYPE_2s[a_type_2]
-
-	return
-}
-
-func (stage *StageStruct) IsStagedA_TYPE_3(a_type_3 *A_TYPE_3) (ok bool) {
-
-	_, ok = stage.A_TYPE_3s[a_type_3]
-
-	return
-}
-
-func (stage *StageStruct) IsStagedA_TYPE_4(a_type_4 *A_TYPE_4) (ok bool) {
-
-	_, ok = stage.A_TYPE_4s[a_type_4]
-
-	return
-}
-
-func (stage *StageStruct) IsStagedA_TYPE_5(a_type_5 *A_TYPE_5) (ok bool) {
-
-	_, ok = stage.A_TYPE_5s[a_type_5]
-
-	return
-}
-
-func (stage *StageStruct) IsStagedA_TYPE_6(a_type_6 *A_TYPE_6) (ok bool) {
-
-	_, ok = stage.A_TYPE_6s[a_type_6]
-
-	return
-}
-
-func (stage *StageStruct) IsStagedA_TYPE_7(a_type_7 *A_TYPE_7) (ok bool) {
-
-	_, ok = stage.A_TYPE_7s[a_type_7]
-
-	return
-}
-
-func (stage *StageStruct) IsStagedA_TYPE_8(a_type_8 *A_TYPE_8) (ok bool) {
-
-	_, ok = stage.A_TYPE_8s[a_type_8]
-
-	return
-}
-
-func (stage *StageStruct) IsStagedA_TYPE_9(a_type_9 *A_TYPE_9) (ok bool) {
-
-	_, ok = stage.A_TYPE_9s[a_type_9]
 
 	return
 }
@@ -792,6 +617,181 @@ func (stage *StageStruct) IsStagedREQ_IF_HEADER(req_if_header *REQ_IF_HEADER) (o
 func (stage *StageStruct) IsStagedREQ_IF_TOOL_EXTENSION(req_if_tool_extension *REQ_IF_TOOL_EXTENSION) (ok bool) {
 
 	_, ok = stage.REQ_IF_TOOL_EXTENSIONs[req_if_tool_extension]
+
+	return
+}
+
+func (stage *StageStruct) IsStagedRenamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1(renamed_attribute_definition_boolean_ref_1 *Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1) (ok bool) {
+
+	_, ok = stage.Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1s[renamed_attribute_definition_boolean_ref_1]
+
+	return
+}
+
+func (stage *StageStruct) IsStagedRenamed_ATTRIBUTE_DEFINITION_DATE_REF_1(renamed_attribute_definition_date_ref_1 *Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1) (ok bool) {
+
+	_, ok = stage.Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1s[renamed_attribute_definition_date_ref_1]
+
+	return
+}
+
+func (stage *StageStruct) IsStagedRenamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1(renamed_attribute_definition_enumeration_ref_1 *Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1) (ok bool) {
+
+	_, ok = stage.Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1s[renamed_attribute_definition_enumeration_ref_1]
+
+	return
+}
+
+func (stage *StageStruct) IsStagedRenamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1(renamed_attribute_definition_integer_ref_1 *Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1) (ok bool) {
+
+	_, ok = stage.Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1s[renamed_attribute_definition_integer_ref_1]
+
+	return
+}
+
+func (stage *StageStruct) IsStagedRenamed_ATTRIBUTE_DEFINITION_REAL_REF_1(renamed_attribute_definition_real_ref_1 *Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1) (ok bool) {
+
+	_, ok = stage.Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1s[renamed_attribute_definition_real_ref_1]
+
+	return
+}
+
+func (stage *StageStruct) IsStagedRenamed_ATTRIBUTE_DEFINITION_STRING_REF_1(renamed_attribute_definition_string_ref_1 *Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1) (ok bool) {
+
+	_, ok = stage.Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1s[renamed_attribute_definition_string_ref_1]
+
+	return
+}
+
+func (stage *StageStruct) IsStagedRenamed_ATTRIBUTE_DEFINITION_XHTML_REF_1(renamed_attribute_definition_xhtml_ref_1 *Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1) (ok bool) {
+
+	_, ok = stage.Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1s[renamed_attribute_definition_xhtml_ref_1]
+
+	return
+}
+
+func (stage *StageStruct) IsStagedRenamed_ATTRIBUTE_VALUE_BOOLEAN_1(renamed_attribute_value_boolean_1 *Renamed_ATTRIBUTE_VALUE_BOOLEAN_1) (ok bool) {
+
+	_, ok = stage.Renamed_ATTRIBUTE_VALUE_BOOLEAN_1s[renamed_attribute_value_boolean_1]
+
+	return
+}
+
+func (stage *StageStruct) IsStagedRenamed_ATTRIBUTE_VALUE_DATE_1(renamed_attribute_value_date_1 *Renamed_ATTRIBUTE_VALUE_DATE_1) (ok bool) {
+
+	_, ok = stage.Renamed_ATTRIBUTE_VALUE_DATE_1s[renamed_attribute_value_date_1]
+
+	return
+}
+
+func (stage *StageStruct) IsStagedRenamed_ATTRIBUTE_VALUE_ENUMERATION_1(renamed_attribute_value_enumeration_1 *Renamed_ATTRIBUTE_VALUE_ENUMERATION_1) (ok bool) {
+
+	_, ok = stage.Renamed_ATTRIBUTE_VALUE_ENUMERATION_1s[renamed_attribute_value_enumeration_1]
+
+	return
+}
+
+func (stage *StageStruct) IsStagedRenamed_ATTRIBUTE_VALUE_INTEGER_1(renamed_attribute_value_integer_1 *Renamed_ATTRIBUTE_VALUE_INTEGER_1) (ok bool) {
+
+	_, ok = stage.Renamed_ATTRIBUTE_VALUE_INTEGER_1s[renamed_attribute_value_integer_1]
+
+	return
+}
+
+func (stage *StageStruct) IsStagedRenamed_ATTRIBUTE_VALUE_REAL_1(renamed_attribute_value_real_1 *Renamed_ATTRIBUTE_VALUE_REAL_1) (ok bool) {
+
+	_, ok = stage.Renamed_ATTRIBUTE_VALUE_REAL_1s[renamed_attribute_value_real_1]
+
+	return
+}
+
+func (stage *StageStruct) IsStagedRenamed_ATTRIBUTE_VALUE_STRING_1(renamed_attribute_value_string_1 *Renamed_ATTRIBUTE_VALUE_STRING_1) (ok bool) {
+
+	_, ok = stage.Renamed_ATTRIBUTE_VALUE_STRING_1s[renamed_attribute_value_string_1]
+
+	return
+}
+
+func (stage *StageStruct) IsStagedRenamed_ATTRIBUTE_VALUE_XHTML_1(renamed_attribute_value_xhtml_1 *Renamed_ATTRIBUTE_VALUE_XHTML_1) (ok bool) {
+
+	_, ok = stage.Renamed_ATTRIBUTE_VALUE_XHTML_1s[renamed_attribute_value_xhtml_1]
+
+	return
+}
+
+func (stage *StageStruct) IsStagedRenamed_DATATYPE_DEFINITION_BOOLEAN_REF_1(renamed_datatype_definition_boolean_ref_1 *Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1) (ok bool) {
+
+	_, ok = stage.Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1s[renamed_datatype_definition_boolean_ref_1]
+
+	return
+}
+
+func (stage *StageStruct) IsStagedRenamed_DATATYPE_DEFINITION_DATE_REF_1(renamed_datatype_definition_date_ref_1 *Renamed_DATATYPE_DEFINITION_DATE_REF_1) (ok bool) {
+
+	_, ok = stage.Renamed_DATATYPE_DEFINITION_DATE_REF_1s[renamed_datatype_definition_date_ref_1]
+
+	return
+}
+
+func (stage *StageStruct) IsStagedRenamed_DATATYPE_DEFINITION_ENUMERATION_REF_1(renamed_datatype_definition_enumeration_ref_1 *Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1) (ok bool) {
+
+	_, ok = stage.Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1s[renamed_datatype_definition_enumeration_ref_1]
+
+	return
+}
+
+func (stage *StageStruct) IsStagedRenamed_DATATYPE_DEFINITION_INTEGER_REF_1(renamed_datatype_definition_integer_ref_1 *Renamed_DATATYPE_DEFINITION_INTEGER_REF_1) (ok bool) {
+
+	_, ok = stage.Renamed_DATATYPE_DEFINITION_INTEGER_REF_1s[renamed_datatype_definition_integer_ref_1]
+
+	return
+}
+
+func (stage *StageStruct) IsStagedRenamed_DATATYPE_DEFINITION_REAL_REF_1(renamed_datatype_definition_real_ref_1 *Renamed_DATATYPE_DEFINITION_REAL_REF_1) (ok bool) {
+
+	_, ok = stage.Renamed_DATATYPE_DEFINITION_REAL_REF_1s[renamed_datatype_definition_real_ref_1]
+
+	return
+}
+
+func (stage *StageStruct) IsStagedRenamed_DATATYPE_DEFINITION_STRING_REF_1(renamed_datatype_definition_string_ref_1 *Renamed_DATATYPE_DEFINITION_STRING_REF_1) (ok bool) {
+
+	_, ok = stage.Renamed_DATATYPE_DEFINITION_STRING_REF_1s[renamed_datatype_definition_string_ref_1]
+
+	return
+}
+
+func (stage *StageStruct) IsStagedRenamed_DATATYPE_DEFINITION_XHTML_REF_1(renamed_datatype_definition_xhtml_ref_1 *Renamed_DATATYPE_DEFINITION_XHTML_REF_1) (ok bool) {
+
+	_, ok = stage.Renamed_DATATYPE_DEFINITION_XHTML_REF_1s[renamed_datatype_definition_xhtml_ref_1]
+
+	return
+}
+
+func (stage *StageStruct) IsStagedRenamed_RELATION_GROUP_TYPE_REF_1(renamed_relation_group_type_ref_1 *Renamed_RELATION_GROUP_TYPE_REF_1) (ok bool) {
+
+	_, ok = stage.Renamed_RELATION_GROUP_TYPE_REF_1s[renamed_relation_group_type_ref_1]
+
+	return
+}
+
+func (stage *StageStruct) IsStagedRenamed_SPECIFICATION_TYPE_REF_1(renamed_specification_type_ref_1 *Renamed_SPECIFICATION_TYPE_REF_1) (ok bool) {
+
+	_, ok = stage.Renamed_SPECIFICATION_TYPE_REF_1s[renamed_specification_type_ref_1]
+
+	return
+}
+
+func (stage *StageStruct) IsStagedRenamed_SPEC_OBJECT_TYPE_REF_1(renamed_spec_object_type_ref_1 *Renamed_SPEC_OBJECT_TYPE_REF_1) (ok bool) {
+
+	_, ok = stage.Renamed_SPEC_OBJECT_TYPE_REF_1s[renamed_spec_object_type_ref_1]
+
+	return
+}
+
+func (stage *StageStruct) IsStagedRenamed_SPEC_RELATION_TYPE_REF_1(renamed_spec_relation_type_ref_1 *Renamed_SPEC_RELATION_TYPE_REF_1) (ok bool) {
+
+	_, ok = stage.Renamed_SPEC_RELATION_TYPE_REF_1s[renamed_spec_relation_type_ref_1]
 
 	return
 }
@@ -917,48 +917,6 @@ func StageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 	case *A_DATATYPES:
 		stage.StageBranchA_DATATYPES(target)
 
-	case *A_DEFAULT_VALUE:
-		stage.StageBranchA_DEFAULT_VALUE(target)
-
-	case *A_DEFAULT_VALUE_1:
-		stage.StageBranchA_DEFAULT_VALUE_1(target)
-
-	case *A_DEFAULT_VALUE_2:
-		stage.StageBranchA_DEFAULT_VALUE_2(target)
-
-	case *A_DEFAULT_VALUE_3:
-		stage.StageBranchA_DEFAULT_VALUE_3(target)
-
-	case *A_DEFAULT_VALUE_4:
-		stage.StageBranchA_DEFAULT_VALUE_4(target)
-
-	case *A_DEFAULT_VALUE_5:
-		stage.StageBranchA_DEFAULT_VALUE_5(target)
-
-	case *A_DEFAULT_VALUE_6:
-		stage.StageBranchA_DEFAULT_VALUE_6(target)
-
-	case *A_DEFINITION:
-		stage.StageBranchA_DEFINITION(target)
-
-	case *A_DEFINITION_1:
-		stage.StageBranchA_DEFINITION_1(target)
-
-	case *A_DEFINITION_2:
-		stage.StageBranchA_DEFINITION_2(target)
-
-	case *A_DEFINITION_3:
-		stage.StageBranchA_DEFINITION_3(target)
-
-	case *A_DEFINITION_4:
-		stage.StageBranchA_DEFINITION_4(target)
-
-	case *A_DEFINITION_5:
-		stage.StageBranchA_DEFINITION_5(target)
-
-	case *A_DEFINITION_6:
-		stage.StageBranchA_DEFINITION_6(target)
-
 	case *A_EDITABLE_ATTS:
 		stage.StageBranchA_EDITABLE_ATTS(target)
 
@@ -1003,39 +961,6 @@ func StageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 
 	case *A_TOOL_EXTENSIONS:
 		stage.StageBranchA_TOOL_EXTENSIONS(target)
-
-	case *A_TYPE:
-		stage.StageBranchA_TYPE(target)
-
-	case *A_TYPE_1:
-		stage.StageBranchA_TYPE_1(target)
-
-	case *A_TYPE_10:
-		stage.StageBranchA_TYPE_10(target)
-
-	case *A_TYPE_2:
-		stage.StageBranchA_TYPE_2(target)
-
-	case *A_TYPE_3:
-		stage.StageBranchA_TYPE_3(target)
-
-	case *A_TYPE_4:
-		stage.StageBranchA_TYPE_4(target)
-
-	case *A_TYPE_5:
-		stage.StageBranchA_TYPE_5(target)
-
-	case *A_TYPE_6:
-		stage.StageBranchA_TYPE_6(target)
-
-	case *A_TYPE_7:
-		stage.StageBranchA_TYPE_7(target)
-
-	case *A_TYPE_8:
-		stage.StageBranchA_TYPE_8(target)
-
-	case *A_TYPE_9:
-		stage.StageBranchA_TYPE_9(target)
 
 	case *A_VALUES:
 		stage.StageBranchA_VALUES(target)
@@ -1087,6 +1012,81 @@ func StageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 
 	case *REQ_IF_TOOL_EXTENSION:
 		stage.StageBranchREQ_IF_TOOL_EXTENSION(target)
+
+	case *Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1:
+		stage.StageBranchRenamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1(target)
+
+	case *Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1:
+		stage.StageBranchRenamed_ATTRIBUTE_DEFINITION_DATE_REF_1(target)
+
+	case *Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1:
+		stage.StageBranchRenamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1(target)
+
+	case *Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1:
+		stage.StageBranchRenamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1(target)
+
+	case *Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1:
+		stage.StageBranchRenamed_ATTRIBUTE_DEFINITION_REAL_REF_1(target)
+
+	case *Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1:
+		stage.StageBranchRenamed_ATTRIBUTE_DEFINITION_STRING_REF_1(target)
+
+	case *Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1:
+		stage.StageBranchRenamed_ATTRIBUTE_DEFINITION_XHTML_REF_1(target)
+
+	case *Renamed_ATTRIBUTE_VALUE_BOOLEAN_1:
+		stage.StageBranchRenamed_ATTRIBUTE_VALUE_BOOLEAN_1(target)
+
+	case *Renamed_ATTRIBUTE_VALUE_DATE_1:
+		stage.StageBranchRenamed_ATTRIBUTE_VALUE_DATE_1(target)
+
+	case *Renamed_ATTRIBUTE_VALUE_ENUMERATION_1:
+		stage.StageBranchRenamed_ATTRIBUTE_VALUE_ENUMERATION_1(target)
+
+	case *Renamed_ATTRIBUTE_VALUE_INTEGER_1:
+		stage.StageBranchRenamed_ATTRIBUTE_VALUE_INTEGER_1(target)
+
+	case *Renamed_ATTRIBUTE_VALUE_REAL_1:
+		stage.StageBranchRenamed_ATTRIBUTE_VALUE_REAL_1(target)
+
+	case *Renamed_ATTRIBUTE_VALUE_STRING_1:
+		stage.StageBranchRenamed_ATTRIBUTE_VALUE_STRING_1(target)
+
+	case *Renamed_ATTRIBUTE_VALUE_XHTML_1:
+		stage.StageBranchRenamed_ATTRIBUTE_VALUE_XHTML_1(target)
+
+	case *Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1:
+		stage.StageBranchRenamed_DATATYPE_DEFINITION_BOOLEAN_REF_1(target)
+
+	case *Renamed_DATATYPE_DEFINITION_DATE_REF_1:
+		stage.StageBranchRenamed_DATATYPE_DEFINITION_DATE_REF_1(target)
+
+	case *Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1:
+		stage.StageBranchRenamed_DATATYPE_DEFINITION_ENUMERATION_REF_1(target)
+
+	case *Renamed_DATATYPE_DEFINITION_INTEGER_REF_1:
+		stage.StageBranchRenamed_DATATYPE_DEFINITION_INTEGER_REF_1(target)
+
+	case *Renamed_DATATYPE_DEFINITION_REAL_REF_1:
+		stage.StageBranchRenamed_DATATYPE_DEFINITION_REAL_REF_1(target)
+
+	case *Renamed_DATATYPE_DEFINITION_STRING_REF_1:
+		stage.StageBranchRenamed_DATATYPE_DEFINITION_STRING_REF_1(target)
+
+	case *Renamed_DATATYPE_DEFINITION_XHTML_REF_1:
+		stage.StageBranchRenamed_DATATYPE_DEFINITION_XHTML_REF_1(target)
+
+	case *Renamed_RELATION_GROUP_TYPE_REF_1:
+		stage.StageBranchRenamed_RELATION_GROUP_TYPE_REF_1(target)
+
+	case *Renamed_SPECIFICATION_TYPE_REF_1:
+		stage.StageBranchRenamed_SPECIFICATION_TYPE_REF_1(target)
+
+	case *Renamed_SPEC_OBJECT_TYPE_REF_1:
+		stage.StageBranchRenamed_SPEC_OBJECT_TYPE_REF_1(target)
+
+	case *Renamed_SPEC_RELATION_TYPE_REF_1:
+		stage.StageBranchRenamed_SPEC_RELATION_TYPE_REF_1(target)
 
 	case *SPECIFICATION:
 		stage.StageBranchSPECIFICATION(target)
@@ -1148,11 +1148,11 @@ func (stage *StageStruct) StageBranchATTRIBUTE_DEFINITION_BOOLEAN(attribute_defi
 	for _, _a_alternative_id := range attribute_definition_boolean.ALTERNATIVE_ID {
 		StageBranch(stage, _a_alternative_id)
 	}
-	for _, _a_default_value_1 := range attribute_definition_boolean.DEFAULT_VALUE {
-		StageBranch(stage, _a_default_value_1)
+	for _, _renamed_attribute_value_boolean_1 := range attribute_definition_boolean.DEFAULT_VALUE {
+		StageBranch(stage, _renamed_attribute_value_boolean_1)
 	}
-	for _, _a_type_7 := range attribute_definition_boolean.TYPE {
-		StageBranch(stage, _a_type_7)
+	for _, _renamed_datatype_definition_boolean_ref_1 := range attribute_definition_boolean.TYPE {
+		StageBranch(stage, _renamed_datatype_definition_boolean_ref_1)
 	}
 
 }
@@ -1172,11 +1172,11 @@ func (stage *StageStruct) StageBranchATTRIBUTE_DEFINITION_DATE(attribute_definit
 	for _, _a_alternative_id := range attribute_definition_date.ALTERNATIVE_ID {
 		StageBranch(stage, _a_alternative_id)
 	}
-	for _, _a_default_value_3 := range attribute_definition_date.DEFAULT_VALUE {
-		StageBranch(stage, _a_default_value_3)
+	for _, _renamed_attribute_value_date_1 := range attribute_definition_date.DEFAULT_VALUE {
+		StageBranch(stage, _renamed_attribute_value_date_1)
 	}
-	for _, _a_type := range attribute_definition_date.TYPE {
-		StageBranch(stage, _a_type)
+	for _, _renamed_datatype_definition_date_ref_1 := range attribute_definition_date.TYPE {
+		StageBranch(stage, _renamed_datatype_definition_date_ref_1)
 	}
 
 }
@@ -1196,11 +1196,11 @@ func (stage *StageStruct) StageBranchATTRIBUTE_DEFINITION_ENUMERATION(attribute_
 	for _, _a_alternative_id := range attribute_definition_enumeration.ALTERNATIVE_ID {
 		StageBranch(stage, _a_alternative_id)
 	}
-	for _, _a_default_value_5 := range attribute_definition_enumeration.DEFAULT_VALUE {
-		StageBranch(stage, _a_default_value_5)
+	for _, _renamed_attribute_value_enumeration_1 := range attribute_definition_enumeration.DEFAULT_VALUE {
+		StageBranch(stage, _renamed_attribute_value_enumeration_1)
 	}
-	for _, _a_type_9 := range attribute_definition_enumeration.TYPE {
-		StageBranch(stage, _a_type_9)
+	for _, _renamed_datatype_definition_enumeration_ref_1 := range attribute_definition_enumeration.TYPE {
+		StageBranch(stage, _renamed_datatype_definition_enumeration_ref_1)
 	}
 
 }
@@ -1220,11 +1220,11 @@ func (stage *StageStruct) StageBranchATTRIBUTE_DEFINITION_INTEGER(attribute_defi
 	for _, _a_alternative_id := range attribute_definition_integer.ALTERNATIVE_ID {
 		StageBranch(stage, _a_alternative_id)
 	}
-	for _, _a_default_value_6 := range attribute_definition_integer.DEFAULT_VALUE {
-		StageBranch(stage, _a_default_value_6)
+	for _, _renamed_attribute_value_integer_1 := range attribute_definition_integer.DEFAULT_VALUE {
+		StageBranch(stage, _renamed_attribute_value_integer_1)
 	}
-	for _, _a_type_5 := range attribute_definition_integer.TYPE {
-		StageBranch(stage, _a_type_5)
+	for _, _renamed_datatype_definition_integer_ref_1 := range attribute_definition_integer.TYPE {
+		StageBranch(stage, _renamed_datatype_definition_integer_ref_1)
 	}
 
 }
@@ -1244,11 +1244,11 @@ func (stage *StageStruct) StageBranchATTRIBUTE_DEFINITION_REAL(attribute_definit
 	for _, _a_alternative_id := range attribute_definition_real.ALTERNATIVE_ID {
 		StageBranch(stage, _a_alternative_id)
 	}
-	for _, _a_default_value_4 := range attribute_definition_real.DEFAULT_VALUE {
-		StageBranch(stage, _a_default_value_4)
+	for _, _renamed_attribute_value_real_1 := range attribute_definition_real.DEFAULT_VALUE {
+		StageBranch(stage, _renamed_attribute_value_real_1)
 	}
-	for _, _a_type_3 := range attribute_definition_real.TYPE {
-		StageBranch(stage, _a_type_3)
+	for _, _renamed_datatype_definition_real_ref_1 := range attribute_definition_real.TYPE {
+		StageBranch(stage, _renamed_datatype_definition_real_ref_1)
 	}
 
 }
@@ -1268,11 +1268,11 @@ func (stage *StageStruct) StageBranchATTRIBUTE_DEFINITION_STRING(attribute_defin
 	for _, _a_alternative_id := range attribute_definition_string.ALTERNATIVE_ID {
 		StageBranch(stage, _a_alternative_id)
 	}
-	for _, _a_default_value := range attribute_definition_string.DEFAULT_VALUE {
-		StageBranch(stage, _a_default_value)
+	for _, _renamed_attribute_value_string_1 := range attribute_definition_string.DEFAULT_VALUE {
+		StageBranch(stage, _renamed_attribute_value_string_1)
 	}
-	for _, _a_type_8 := range attribute_definition_string.TYPE {
-		StageBranch(stage, _a_type_8)
+	for _, _renamed_datatype_definition_string_ref_1 := range attribute_definition_string.TYPE {
+		StageBranch(stage, _renamed_datatype_definition_string_ref_1)
 	}
 
 }
@@ -1292,11 +1292,11 @@ func (stage *StageStruct) StageBranchATTRIBUTE_DEFINITION_XHTML(attribute_defini
 	for _, _a_alternative_id := range attribute_definition_xhtml.ALTERNATIVE_ID {
 		StageBranch(stage, _a_alternative_id)
 	}
-	for _, _a_default_value_2 := range attribute_definition_xhtml.DEFAULT_VALUE {
-		StageBranch(stage, _a_default_value_2)
+	for _, _renamed_attribute_value_xhtml_1 := range attribute_definition_xhtml.DEFAULT_VALUE {
+		StageBranch(stage, _renamed_attribute_value_xhtml_1)
 	}
-	for _, _a_type_6 := range attribute_definition_xhtml.TYPE {
-		StageBranch(stage, _a_type_6)
+	for _, _renamed_datatype_definition_xhtml_ref_1 := range attribute_definition_xhtml.TYPE {
+		StageBranch(stage, _renamed_datatype_definition_xhtml_ref_1)
 	}
 
 }
@@ -1313,8 +1313,8 @@ func (stage *StageStruct) StageBranchATTRIBUTE_VALUE_BOOLEAN(attribute_value_boo
 	//insertion point for the staging of instances referenced by pointers
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_definition_4 := range attribute_value_boolean.DEFINITION {
-		StageBranch(stage, _a_definition_4)
+	for _, _renamed_attribute_definition_boolean_ref_1 := range attribute_value_boolean.DEFINITION {
+		StageBranch(stage, _renamed_attribute_definition_boolean_ref_1)
 	}
 
 }
@@ -1331,8 +1331,8 @@ func (stage *StageStruct) StageBranchATTRIBUTE_VALUE_DATE(attribute_value_date *
 	//insertion point for the staging of instances referenced by pointers
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_definition_2 := range attribute_value_date.DEFINITION {
-		StageBranch(stage, _a_definition_2)
+	for _, _renamed_attribute_definition_date_ref_1 := range attribute_value_date.DEFINITION {
+		StageBranch(stage, _renamed_attribute_definition_date_ref_1)
 	}
 
 }
@@ -1349,8 +1349,8 @@ func (stage *StageStruct) StageBranchATTRIBUTE_VALUE_ENUMERATION(attribute_value
 	//insertion point for the staging of instances referenced by pointers
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_definition_5 := range attribute_value_enumeration.DEFINITION {
-		StageBranch(stage, _a_definition_5)
+	for _, _renamed_attribute_definition_enumeration_ref_1 := range attribute_value_enumeration.DEFINITION {
+		StageBranch(stage, _renamed_attribute_definition_enumeration_ref_1)
 	}
 	for _, _a_values := range attribute_value_enumeration.VALUES {
 		StageBranch(stage, _a_values)
@@ -1370,8 +1370,8 @@ func (stage *StageStruct) StageBranchATTRIBUTE_VALUE_INTEGER(attribute_value_int
 	//insertion point for the staging of instances referenced by pointers
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_definition := range attribute_value_integer.DEFINITION {
-		StageBranch(stage, _a_definition)
+	for _, _renamed_attribute_definition_integer_ref_1 := range attribute_value_integer.DEFINITION {
+		StageBranch(stage, _renamed_attribute_definition_integer_ref_1)
 	}
 
 }
@@ -1388,8 +1388,8 @@ func (stage *StageStruct) StageBranchATTRIBUTE_VALUE_REAL(attribute_value_real *
 	//insertion point for the staging of instances referenced by pointers
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_definition_6 := range attribute_value_real.DEFINITION {
-		StageBranch(stage, _a_definition_6)
+	for _, _renamed_attribute_definition_real_ref_1 := range attribute_value_real.DEFINITION {
+		StageBranch(stage, _renamed_attribute_definition_real_ref_1)
 	}
 
 }
@@ -1406,8 +1406,8 @@ func (stage *StageStruct) StageBranchATTRIBUTE_VALUE_STRING(attribute_value_stri
 	//insertion point for the staging of instances referenced by pointers
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_definition_3 := range attribute_value_string.DEFINITION {
-		StageBranch(stage, _a_definition_3)
+	for _, _renamed_attribute_definition_string_ref_1 := range attribute_value_string.DEFINITION {
+		StageBranch(stage, _renamed_attribute_definition_string_ref_1)
 	}
 
 }
@@ -1430,8 +1430,8 @@ func (stage *StageStruct) StageBranchATTRIBUTE_VALUE_XHTML(attribute_value_xhtml
 	for _, _xhtml_content := range attribute_value_xhtml.THE_ORIGINAL_VALUE {
 		StageBranch(stage, _xhtml_content)
 	}
-	for _, _a_definition_1 := range attribute_value_xhtml.DEFINITION {
-		StageBranch(stage, _a_definition_1)
+	for _, _renamed_attribute_definition_xhtml_ref_1 := range attribute_value_xhtml.DEFINITION {
+		StageBranch(stage, _renamed_attribute_definition_xhtml_ref_1)
 	}
 
 }
@@ -1523,237 +1523,6 @@ func (stage *StageStruct) StageBranchA_DATATYPES(a_datatypes *A_DATATYPES) {
 	for _, _datatype_definition_xhtml := range a_datatypes.DATATYPE_DEFINITION_XHTML {
 		StageBranch(stage, _datatype_definition_xhtml)
 	}
-
-}
-
-func (stage *StageStruct) StageBranchA_DEFAULT_VALUE(a_default_value *A_DEFAULT_VALUE) {
-
-	// check if instance is already staged
-	if IsStaged(stage, a_default_value) {
-		return
-	}
-
-	a_default_value.Stage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _attribute_value_string := range a_default_value.ATTRIBUTE_VALUE_STRING {
-		StageBranch(stage, _attribute_value_string)
-	}
-
-}
-
-func (stage *StageStruct) StageBranchA_DEFAULT_VALUE_1(a_default_value_1 *A_DEFAULT_VALUE_1) {
-
-	// check if instance is already staged
-	if IsStaged(stage, a_default_value_1) {
-		return
-	}
-
-	a_default_value_1.Stage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _attribute_value_boolean := range a_default_value_1.ATTRIBUTE_VALUE_BOOLEAN {
-		StageBranch(stage, _attribute_value_boolean)
-	}
-
-}
-
-func (stage *StageStruct) StageBranchA_DEFAULT_VALUE_2(a_default_value_2 *A_DEFAULT_VALUE_2) {
-
-	// check if instance is already staged
-	if IsStaged(stage, a_default_value_2) {
-		return
-	}
-
-	a_default_value_2.Stage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _attribute_value_xhtml := range a_default_value_2.ATTRIBUTE_VALUE_XHTML {
-		StageBranch(stage, _attribute_value_xhtml)
-	}
-
-}
-
-func (stage *StageStruct) StageBranchA_DEFAULT_VALUE_3(a_default_value_3 *A_DEFAULT_VALUE_3) {
-
-	// check if instance is already staged
-	if IsStaged(stage, a_default_value_3) {
-		return
-	}
-
-	a_default_value_3.Stage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _attribute_value_date := range a_default_value_3.ATTRIBUTE_VALUE_DATE {
-		StageBranch(stage, _attribute_value_date)
-	}
-
-}
-
-func (stage *StageStruct) StageBranchA_DEFAULT_VALUE_4(a_default_value_4 *A_DEFAULT_VALUE_4) {
-
-	// check if instance is already staged
-	if IsStaged(stage, a_default_value_4) {
-		return
-	}
-
-	a_default_value_4.Stage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _attribute_value_real := range a_default_value_4.ATTRIBUTE_VALUE_REAL {
-		StageBranch(stage, _attribute_value_real)
-	}
-
-}
-
-func (stage *StageStruct) StageBranchA_DEFAULT_VALUE_5(a_default_value_5 *A_DEFAULT_VALUE_5) {
-
-	// check if instance is already staged
-	if IsStaged(stage, a_default_value_5) {
-		return
-	}
-
-	a_default_value_5.Stage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _attribute_value_enumeration := range a_default_value_5.ATTRIBUTE_VALUE_ENUMERATION {
-		StageBranch(stage, _attribute_value_enumeration)
-	}
-
-}
-
-func (stage *StageStruct) StageBranchA_DEFAULT_VALUE_6(a_default_value_6 *A_DEFAULT_VALUE_6) {
-
-	// check if instance is already staged
-	if IsStaged(stage, a_default_value_6) {
-		return
-	}
-
-	a_default_value_6.Stage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _attribute_value_integer := range a_default_value_6.ATTRIBUTE_VALUE_INTEGER {
-		StageBranch(stage, _attribute_value_integer)
-	}
-
-}
-
-func (stage *StageStruct) StageBranchA_DEFINITION(a_definition *A_DEFINITION) {
-
-	// check if instance is already staged
-	if IsStaged(stage, a_definition) {
-		return
-	}
-
-	a_definition.Stage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-}
-
-func (stage *StageStruct) StageBranchA_DEFINITION_1(a_definition_1 *A_DEFINITION_1) {
-
-	// check if instance is already staged
-	if IsStaged(stage, a_definition_1) {
-		return
-	}
-
-	a_definition_1.Stage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-}
-
-func (stage *StageStruct) StageBranchA_DEFINITION_2(a_definition_2 *A_DEFINITION_2) {
-
-	// check if instance is already staged
-	if IsStaged(stage, a_definition_2) {
-		return
-	}
-
-	a_definition_2.Stage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-}
-
-func (stage *StageStruct) StageBranchA_DEFINITION_3(a_definition_3 *A_DEFINITION_3) {
-
-	// check if instance is already staged
-	if IsStaged(stage, a_definition_3) {
-		return
-	}
-
-	a_definition_3.Stage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-}
-
-func (stage *StageStruct) StageBranchA_DEFINITION_4(a_definition_4 *A_DEFINITION_4) {
-
-	// check if instance is already staged
-	if IsStaged(stage, a_definition_4) {
-		return
-	}
-
-	a_definition_4.Stage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-}
-
-func (stage *StageStruct) StageBranchA_DEFINITION_5(a_definition_5 *A_DEFINITION_5) {
-
-	// check if instance is already staged
-	if IsStaged(stage, a_definition_5) {
-		return
-	}
-
-	a_definition_5.Stage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-}
-
-func (stage *StageStruct) StageBranchA_DEFINITION_6(a_definition_6 *A_DEFINITION_6) {
-
-	// check if instance is already staged
-	if IsStaged(stage, a_definition_6) {
-		return
-	}
-
-	a_definition_6.Stage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
 
 }
 
@@ -1937,6 +1706,9 @@ func (stage *StageStruct) StageBranchA_SPEC_RELATIONS(a_spec_relations *A_SPEC_R
 	//insertion point for the staging of instances referenced by pointers
 
 	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _spec_relation := range a_spec_relations.SPEC_RELATION {
+		StageBranch(stage, _spec_relation)
+	}
 
 }
 
@@ -1952,9 +1724,6 @@ func (stage *StageStruct) StageBranchA_SPEC_RELATIONS_1(a_spec_relations_1 *A_SP
 	//insertion point for the staging of instances referenced by pointers
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _spec_relation := range a_spec_relations_1.SPEC_RELATION {
-		StageBranch(stage, _spec_relation)
-	}
 
 }
 
@@ -2036,171 +1805,6 @@ func (stage *StageStruct) StageBranchA_TOOL_EXTENSIONS(a_tool_extensions *A_TOOL
 	for _, _req_if_tool_extension := range a_tool_extensions.REQ_IF_TOOL_EXTENSION {
 		StageBranch(stage, _req_if_tool_extension)
 	}
-
-}
-
-func (stage *StageStruct) StageBranchA_TYPE(a_type *A_TYPE) {
-
-	// check if instance is already staged
-	if IsStaged(stage, a_type) {
-		return
-	}
-
-	a_type.Stage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-}
-
-func (stage *StageStruct) StageBranchA_TYPE_1(a_type_1 *A_TYPE_1) {
-
-	// check if instance is already staged
-	if IsStaged(stage, a_type_1) {
-		return
-	}
-
-	a_type_1.Stage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-}
-
-func (stage *StageStruct) StageBranchA_TYPE_10(a_type_10 *A_TYPE_10) {
-
-	// check if instance is already staged
-	if IsStaged(stage, a_type_10) {
-		return
-	}
-
-	a_type_10.Stage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-}
-
-func (stage *StageStruct) StageBranchA_TYPE_2(a_type_2 *A_TYPE_2) {
-
-	// check if instance is already staged
-	if IsStaged(stage, a_type_2) {
-		return
-	}
-
-	a_type_2.Stage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-}
-
-func (stage *StageStruct) StageBranchA_TYPE_3(a_type_3 *A_TYPE_3) {
-
-	// check if instance is already staged
-	if IsStaged(stage, a_type_3) {
-		return
-	}
-
-	a_type_3.Stage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-}
-
-func (stage *StageStruct) StageBranchA_TYPE_4(a_type_4 *A_TYPE_4) {
-
-	// check if instance is already staged
-	if IsStaged(stage, a_type_4) {
-		return
-	}
-
-	a_type_4.Stage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-}
-
-func (stage *StageStruct) StageBranchA_TYPE_5(a_type_5 *A_TYPE_5) {
-
-	// check if instance is already staged
-	if IsStaged(stage, a_type_5) {
-		return
-	}
-
-	a_type_5.Stage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-}
-
-func (stage *StageStruct) StageBranchA_TYPE_6(a_type_6 *A_TYPE_6) {
-
-	// check if instance is already staged
-	if IsStaged(stage, a_type_6) {
-		return
-	}
-
-	a_type_6.Stage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-}
-
-func (stage *StageStruct) StageBranchA_TYPE_7(a_type_7 *A_TYPE_7) {
-
-	// check if instance is already staged
-	if IsStaged(stage, a_type_7) {
-		return
-	}
-
-	a_type_7.Stage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-}
-
-func (stage *StageStruct) StageBranchA_TYPE_8(a_type_8 *A_TYPE_8) {
-
-	// check if instance is already staged
-	if IsStaged(stage, a_type_8) {
-		return
-	}
-
-	a_type_8.Stage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-}
-
-func (stage *StageStruct) StageBranchA_TYPE_9(a_type_9 *A_TYPE_9) {
-
-	// check if instance is already staged
-	if IsStaged(stage, a_type_9) {
-		return
-	}
-
-	a_type_9.Stage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
 
 }
 
@@ -2438,11 +2042,11 @@ func (stage *StageStruct) StageBranchRELATION_GROUP(relation_group *RELATION_GRO
 	for _, _a_source_specification := range relation_group.SOURCE_SPECIFICATION {
 		StageBranch(stage, _a_source_specification)
 	}
-	for _, _a_spec_relations := range relation_group.SPEC_RELATIONS {
-		StageBranch(stage, _a_spec_relations)
+	for _, _a_spec_relations_1 := range relation_group.SPEC_RELATIONS {
+		StageBranch(stage, _a_spec_relations_1)
 	}
-	for _, _a_type_1 := range relation_group.TYPE {
-		StageBranch(stage, _a_type_1)
+	for _, _renamed_relation_group_type_ref_1 := range relation_group.TYPE {
+		StageBranch(stage, _renamed_relation_group_type_ref_1)
 	}
 
 }
@@ -2513,8 +2117,8 @@ func (stage *StageStruct) StageBranchREQ_IF_CONTENT(req_if_content *REQ_IF_CONTE
 	for _, _a_spec_objects := range req_if_content.SPEC_OBJECTS {
 		StageBranch(stage, _a_spec_objects)
 	}
-	for _, _a_spec_relations_1 := range req_if_content.SPEC_RELATIONS {
-		StageBranch(stage, _a_spec_relations_1)
+	for _, _a_spec_relations := range req_if_content.SPEC_RELATIONS {
+		StageBranch(stage, _a_spec_relations)
 	}
 	for _, _a_specifications := range req_if_content.SPECIFICATIONS {
 		StageBranch(stage, _a_specifications)
@@ -2555,6 +2159,402 @@ func (stage *StageStruct) StageBranchREQ_IF_TOOL_EXTENSION(req_if_tool_extension
 
 }
 
+func (stage *StageStruct) StageBranchRenamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1(renamed_attribute_definition_boolean_ref_1 *Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1) {
+
+	// check if instance is already staged
+	if IsStaged(stage, renamed_attribute_definition_boolean_ref_1) {
+		return
+	}
+
+	renamed_attribute_definition_boolean_ref_1.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) StageBranchRenamed_ATTRIBUTE_DEFINITION_DATE_REF_1(renamed_attribute_definition_date_ref_1 *Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1) {
+
+	// check if instance is already staged
+	if IsStaged(stage, renamed_attribute_definition_date_ref_1) {
+		return
+	}
+
+	renamed_attribute_definition_date_ref_1.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) StageBranchRenamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1(renamed_attribute_definition_enumeration_ref_1 *Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1) {
+
+	// check if instance is already staged
+	if IsStaged(stage, renamed_attribute_definition_enumeration_ref_1) {
+		return
+	}
+
+	renamed_attribute_definition_enumeration_ref_1.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) StageBranchRenamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1(renamed_attribute_definition_integer_ref_1 *Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1) {
+
+	// check if instance is already staged
+	if IsStaged(stage, renamed_attribute_definition_integer_ref_1) {
+		return
+	}
+
+	renamed_attribute_definition_integer_ref_1.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) StageBranchRenamed_ATTRIBUTE_DEFINITION_REAL_REF_1(renamed_attribute_definition_real_ref_1 *Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1) {
+
+	// check if instance is already staged
+	if IsStaged(stage, renamed_attribute_definition_real_ref_1) {
+		return
+	}
+
+	renamed_attribute_definition_real_ref_1.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) StageBranchRenamed_ATTRIBUTE_DEFINITION_STRING_REF_1(renamed_attribute_definition_string_ref_1 *Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1) {
+
+	// check if instance is already staged
+	if IsStaged(stage, renamed_attribute_definition_string_ref_1) {
+		return
+	}
+
+	renamed_attribute_definition_string_ref_1.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) StageBranchRenamed_ATTRIBUTE_DEFINITION_XHTML_REF_1(renamed_attribute_definition_xhtml_ref_1 *Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1) {
+
+	// check if instance is already staged
+	if IsStaged(stage, renamed_attribute_definition_xhtml_ref_1) {
+		return
+	}
+
+	renamed_attribute_definition_xhtml_ref_1.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) StageBranchRenamed_ATTRIBUTE_VALUE_BOOLEAN_1(renamed_attribute_value_boolean_1 *Renamed_ATTRIBUTE_VALUE_BOOLEAN_1) {
+
+	// check if instance is already staged
+	if IsStaged(stage, renamed_attribute_value_boolean_1) {
+		return
+	}
+
+	renamed_attribute_value_boolean_1.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _attribute_value_boolean := range renamed_attribute_value_boolean_1.ATTRIBUTE_VALUE_BOOLEAN {
+		StageBranch(stage, _attribute_value_boolean)
+	}
+
+}
+
+func (stage *StageStruct) StageBranchRenamed_ATTRIBUTE_VALUE_DATE_1(renamed_attribute_value_date_1 *Renamed_ATTRIBUTE_VALUE_DATE_1) {
+
+	// check if instance is already staged
+	if IsStaged(stage, renamed_attribute_value_date_1) {
+		return
+	}
+
+	renamed_attribute_value_date_1.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _attribute_value_date := range renamed_attribute_value_date_1.ATTRIBUTE_VALUE_DATE {
+		StageBranch(stage, _attribute_value_date)
+	}
+
+}
+
+func (stage *StageStruct) StageBranchRenamed_ATTRIBUTE_VALUE_ENUMERATION_1(renamed_attribute_value_enumeration_1 *Renamed_ATTRIBUTE_VALUE_ENUMERATION_1) {
+
+	// check if instance is already staged
+	if IsStaged(stage, renamed_attribute_value_enumeration_1) {
+		return
+	}
+
+	renamed_attribute_value_enumeration_1.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _attribute_value_enumeration := range renamed_attribute_value_enumeration_1.ATTRIBUTE_VALUE_ENUMERATION {
+		StageBranch(stage, _attribute_value_enumeration)
+	}
+
+}
+
+func (stage *StageStruct) StageBranchRenamed_ATTRIBUTE_VALUE_INTEGER_1(renamed_attribute_value_integer_1 *Renamed_ATTRIBUTE_VALUE_INTEGER_1) {
+
+	// check if instance is already staged
+	if IsStaged(stage, renamed_attribute_value_integer_1) {
+		return
+	}
+
+	renamed_attribute_value_integer_1.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _attribute_value_integer := range renamed_attribute_value_integer_1.ATTRIBUTE_VALUE_INTEGER {
+		StageBranch(stage, _attribute_value_integer)
+	}
+
+}
+
+func (stage *StageStruct) StageBranchRenamed_ATTRIBUTE_VALUE_REAL_1(renamed_attribute_value_real_1 *Renamed_ATTRIBUTE_VALUE_REAL_1) {
+
+	// check if instance is already staged
+	if IsStaged(stage, renamed_attribute_value_real_1) {
+		return
+	}
+
+	renamed_attribute_value_real_1.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _attribute_value_real := range renamed_attribute_value_real_1.ATTRIBUTE_VALUE_REAL {
+		StageBranch(stage, _attribute_value_real)
+	}
+
+}
+
+func (stage *StageStruct) StageBranchRenamed_ATTRIBUTE_VALUE_STRING_1(renamed_attribute_value_string_1 *Renamed_ATTRIBUTE_VALUE_STRING_1) {
+
+	// check if instance is already staged
+	if IsStaged(stage, renamed_attribute_value_string_1) {
+		return
+	}
+
+	renamed_attribute_value_string_1.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _attribute_value_string := range renamed_attribute_value_string_1.ATTRIBUTE_VALUE_STRING {
+		StageBranch(stage, _attribute_value_string)
+	}
+
+}
+
+func (stage *StageStruct) StageBranchRenamed_ATTRIBUTE_VALUE_XHTML_1(renamed_attribute_value_xhtml_1 *Renamed_ATTRIBUTE_VALUE_XHTML_1) {
+
+	// check if instance is already staged
+	if IsStaged(stage, renamed_attribute_value_xhtml_1) {
+		return
+	}
+
+	renamed_attribute_value_xhtml_1.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _attribute_value_xhtml := range renamed_attribute_value_xhtml_1.ATTRIBUTE_VALUE_XHTML {
+		StageBranch(stage, _attribute_value_xhtml)
+	}
+
+}
+
+func (stage *StageStruct) StageBranchRenamed_DATATYPE_DEFINITION_BOOLEAN_REF_1(renamed_datatype_definition_boolean_ref_1 *Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1) {
+
+	// check if instance is already staged
+	if IsStaged(stage, renamed_datatype_definition_boolean_ref_1) {
+		return
+	}
+
+	renamed_datatype_definition_boolean_ref_1.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) StageBranchRenamed_DATATYPE_DEFINITION_DATE_REF_1(renamed_datatype_definition_date_ref_1 *Renamed_DATATYPE_DEFINITION_DATE_REF_1) {
+
+	// check if instance is already staged
+	if IsStaged(stage, renamed_datatype_definition_date_ref_1) {
+		return
+	}
+
+	renamed_datatype_definition_date_ref_1.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) StageBranchRenamed_DATATYPE_DEFINITION_ENUMERATION_REF_1(renamed_datatype_definition_enumeration_ref_1 *Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1) {
+
+	// check if instance is already staged
+	if IsStaged(stage, renamed_datatype_definition_enumeration_ref_1) {
+		return
+	}
+
+	renamed_datatype_definition_enumeration_ref_1.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) StageBranchRenamed_DATATYPE_DEFINITION_INTEGER_REF_1(renamed_datatype_definition_integer_ref_1 *Renamed_DATATYPE_DEFINITION_INTEGER_REF_1) {
+
+	// check if instance is already staged
+	if IsStaged(stage, renamed_datatype_definition_integer_ref_1) {
+		return
+	}
+
+	renamed_datatype_definition_integer_ref_1.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) StageBranchRenamed_DATATYPE_DEFINITION_REAL_REF_1(renamed_datatype_definition_real_ref_1 *Renamed_DATATYPE_DEFINITION_REAL_REF_1) {
+
+	// check if instance is already staged
+	if IsStaged(stage, renamed_datatype_definition_real_ref_1) {
+		return
+	}
+
+	renamed_datatype_definition_real_ref_1.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) StageBranchRenamed_DATATYPE_DEFINITION_STRING_REF_1(renamed_datatype_definition_string_ref_1 *Renamed_DATATYPE_DEFINITION_STRING_REF_1) {
+
+	// check if instance is already staged
+	if IsStaged(stage, renamed_datatype_definition_string_ref_1) {
+		return
+	}
+
+	renamed_datatype_definition_string_ref_1.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) StageBranchRenamed_DATATYPE_DEFINITION_XHTML_REF_1(renamed_datatype_definition_xhtml_ref_1 *Renamed_DATATYPE_DEFINITION_XHTML_REF_1) {
+
+	// check if instance is already staged
+	if IsStaged(stage, renamed_datatype_definition_xhtml_ref_1) {
+		return
+	}
+
+	renamed_datatype_definition_xhtml_ref_1.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) StageBranchRenamed_RELATION_GROUP_TYPE_REF_1(renamed_relation_group_type_ref_1 *Renamed_RELATION_GROUP_TYPE_REF_1) {
+
+	// check if instance is already staged
+	if IsStaged(stage, renamed_relation_group_type_ref_1) {
+		return
+	}
+
+	renamed_relation_group_type_ref_1.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) StageBranchRenamed_SPECIFICATION_TYPE_REF_1(renamed_specification_type_ref_1 *Renamed_SPECIFICATION_TYPE_REF_1) {
+
+	// check if instance is already staged
+	if IsStaged(stage, renamed_specification_type_ref_1) {
+		return
+	}
+
+	renamed_specification_type_ref_1.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) StageBranchRenamed_SPEC_OBJECT_TYPE_REF_1(renamed_spec_object_type_ref_1 *Renamed_SPEC_OBJECT_TYPE_REF_1) {
+
+	// check if instance is already staged
+	if IsStaged(stage, renamed_spec_object_type_ref_1) {
+		return
+	}
+
+	renamed_spec_object_type_ref_1.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) StageBranchRenamed_SPEC_RELATION_TYPE_REF_1(renamed_spec_relation_type_ref_1 *Renamed_SPEC_RELATION_TYPE_REF_1) {
+
+	// check if instance is already staged
+	if IsStaged(stage, renamed_spec_relation_type_ref_1) {
+		return
+	}
+
+	renamed_spec_relation_type_ref_1.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
 func (stage *StageStruct) StageBranchSPECIFICATION(specification *SPECIFICATION) {
 
 	// check if instance is already staged
@@ -2576,8 +2576,8 @@ func (stage *StageStruct) StageBranchSPECIFICATION(specification *SPECIFICATION)
 	for _, _a_values_1 := range specification.VALUES {
 		StageBranch(stage, _a_values_1)
 	}
-	for _, _a_type_10 := range specification.TYPE {
-		StageBranch(stage, _a_type_10)
+	for _, _renamed_specification_type_ref_1 := range specification.TYPE {
+		StageBranch(stage, _renamed_specification_type_ref_1)
 	}
 
 }
@@ -2648,8 +2648,8 @@ func (stage *StageStruct) StageBranchSPEC_OBJECT(spec_object *SPEC_OBJECT) {
 	for _, _a_values_1 := range spec_object.VALUES {
 		StageBranch(stage, _a_values_1)
 	}
-	for _, _a_type_2 := range spec_object.TYPE {
-		StageBranch(stage, _a_type_2)
+	for _, _renamed_spec_object_type_ref_1 := range spec_object.TYPE {
+		StageBranch(stage, _renamed_spec_object_type_ref_1)
 	}
 
 }
@@ -2696,8 +2696,8 @@ func (stage *StageStruct) StageBranchSPEC_RELATION(spec_relation *SPEC_RELATION)
 	for _, _a_source := range spec_relation.SOURCE {
 		StageBranch(stage, _a_source)
 	}
-	for _, _a_type_4 := range spec_relation.TYPE {
-		StageBranch(stage, _a_type_4)
+	for _, _renamed_spec_relation_type_ref_1 := range spec_relation.TYPE {
+		StageBranch(stage, _renamed_spec_relation_type_ref_1)
 	}
 
 }
@@ -2825,62 +2825,6 @@ func CopyBranch[Type Gongstruct](from *Type) (to *Type) {
 		toT := CopyBranchA_DATATYPES(mapOrigCopy, fromT)
 		return any(toT).(*Type)
 
-	case *A_DEFAULT_VALUE:
-		toT := CopyBranchA_DEFAULT_VALUE(mapOrigCopy, fromT)
-		return any(toT).(*Type)
-
-	case *A_DEFAULT_VALUE_1:
-		toT := CopyBranchA_DEFAULT_VALUE_1(mapOrigCopy, fromT)
-		return any(toT).(*Type)
-
-	case *A_DEFAULT_VALUE_2:
-		toT := CopyBranchA_DEFAULT_VALUE_2(mapOrigCopy, fromT)
-		return any(toT).(*Type)
-
-	case *A_DEFAULT_VALUE_3:
-		toT := CopyBranchA_DEFAULT_VALUE_3(mapOrigCopy, fromT)
-		return any(toT).(*Type)
-
-	case *A_DEFAULT_VALUE_4:
-		toT := CopyBranchA_DEFAULT_VALUE_4(mapOrigCopy, fromT)
-		return any(toT).(*Type)
-
-	case *A_DEFAULT_VALUE_5:
-		toT := CopyBranchA_DEFAULT_VALUE_5(mapOrigCopy, fromT)
-		return any(toT).(*Type)
-
-	case *A_DEFAULT_VALUE_6:
-		toT := CopyBranchA_DEFAULT_VALUE_6(mapOrigCopy, fromT)
-		return any(toT).(*Type)
-
-	case *A_DEFINITION:
-		toT := CopyBranchA_DEFINITION(mapOrigCopy, fromT)
-		return any(toT).(*Type)
-
-	case *A_DEFINITION_1:
-		toT := CopyBranchA_DEFINITION_1(mapOrigCopy, fromT)
-		return any(toT).(*Type)
-
-	case *A_DEFINITION_2:
-		toT := CopyBranchA_DEFINITION_2(mapOrigCopy, fromT)
-		return any(toT).(*Type)
-
-	case *A_DEFINITION_3:
-		toT := CopyBranchA_DEFINITION_3(mapOrigCopy, fromT)
-		return any(toT).(*Type)
-
-	case *A_DEFINITION_4:
-		toT := CopyBranchA_DEFINITION_4(mapOrigCopy, fromT)
-		return any(toT).(*Type)
-
-	case *A_DEFINITION_5:
-		toT := CopyBranchA_DEFINITION_5(mapOrigCopy, fromT)
-		return any(toT).(*Type)
-
-	case *A_DEFINITION_6:
-		toT := CopyBranchA_DEFINITION_6(mapOrigCopy, fromT)
-		return any(toT).(*Type)
-
 	case *A_EDITABLE_ATTS:
 		toT := CopyBranchA_EDITABLE_ATTS(mapOrigCopy, fromT)
 		return any(toT).(*Type)
@@ -2939,50 +2883,6 @@ func CopyBranch[Type Gongstruct](from *Type) (to *Type) {
 
 	case *A_TOOL_EXTENSIONS:
 		toT := CopyBranchA_TOOL_EXTENSIONS(mapOrigCopy, fromT)
-		return any(toT).(*Type)
-
-	case *A_TYPE:
-		toT := CopyBranchA_TYPE(mapOrigCopy, fromT)
-		return any(toT).(*Type)
-
-	case *A_TYPE_1:
-		toT := CopyBranchA_TYPE_1(mapOrigCopy, fromT)
-		return any(toT).(*Type)
-
-	case *A_TYPE_10:
-		toT := CopyBranchA_TYPE_10(mapOrigCopy, fromT)
-		return any(toT).(*Type)
-
-	case *A_TYPE_2:
-		toT := CopyBranchA_TYPE_2(mapOrigCopy, fromT)
-		return any(toT).(*Type)
-
-	case *A_TYPE_3:
-		toT := CopyBranchA_TYPE_3(mapOrigCopy, fromT)
-		return any(toT).(*Type)
-
-	case *A_TYPE_4:
-		toT := CopyBranchA_TYPE_4(mapOrigCopy, fromT)
-		return any(toT).(*Type)
-
-	case *A_TYPE_5:
-		toT := CopyBranchA_TYPE_5(mapOrigCopy, fromT)
-		return any(toT).(*Type)
-
-	case *A_TYPE_6:
-		toT := CopyBranchA_TYPE_6(mapOrigCopy, fromT)
-		return any(toT).(*Type)
-
-	case *A_TYPE_7:
-		toT := CopyBranchA_TYPE_7(mapOrigCopy, fromT)
-		return any(toT).(*Type)
-
-	case *A_TYPE_8:
-		toT := CopyBranchA_TYPE_8(mapOrigCopy, fromT)
-		return any(toT).(*Type)
-
-	case *A_TYPE_9:
-		toT := CopyBranchA_TYPE_9(mapOrigCopy, fromT)
 		return any(toT).(*Type)
 
 	case *A_VALUES:
@@ -3051,6 +2951,106 @@ func CopyBranch[Type Gongstruct](from *Type) (to *Type) {
 
 	case *REQ_IF_TOOL_EXTENSION:
 		toT := CopyBranchREQ_IF_TOOL_EXTENSION(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
+	case *Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1:
+		toT := CopyBranchRenamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
+	case *Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1:
+		toT := CopyBranchRenamed_ATTRIBUTE_DEFINITION_DATE_REF_1(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
+	case *Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1:
+		toT := CopyBranchRenamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
+	case *Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1:
+		toT := CopyBranchRenamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
+	case *Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1:
+		toT := CopyBranchRenamed_ATTRIBUTE_DEFINITION_REAL_REF_1(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
+	case *Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1:
+		toT := CopyBranchRenamed_ATTRIBUTE_DEFINITION_STRING_REF_1(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
+	case *Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1:
+		toT := CopyBranchRenamed_ATTRIBUTE_DEFINITION_XHTML_REF_1(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
+	case *Renamed_ATTRIBUTE_VALUE_BOOLEAN_1:
+		toT := CopyBranchRenamed_ATTRIBUTE_VALUE_BOOLEAN_1(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
+	case *Renamed_ATTRIBUTE_VALUE_DATE_1:
+		toT := CopyBranchRenamed_ATTRIBUTE_VALUE_DATE_1(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
+	case *Renamed_ATTRIBUTE_VALUE_ENUMERATION_1:
+		toT := CopyBranchRenamed_ATTRIBUTE_VALUE_ENUMERATION_1(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
+	case *Renamed_ATTRIBUTE_VALUE_INTEGER_1:
+		toT := CopyBranchRenamed_ATTRIBUTE_VALUE_INTEGER_1(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
+	case *Renamed_ATTRIBUTE_VALUE_REAL_1:
+		toT := CopyBranchRenamed_ATTRIBUTE_VALUE_REAL_1(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
+	case *Renamed_ATTRIBUTE_VALUE_STRING_1:
+		toT := CopyBranchRenamed_ATTRIBUTE_VALUE_STRING_1(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
+	case *Renamed_ATTRIBUTE_VALUE_XHTML_1:
+		toT := CopyBranchRenamed_ATTRIBUTE_VALUE_XHTML_1(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
+	case *Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1:
+		toT := CopyBranchRenamed_DATATYPE_DEFINITION_BOOLEAN_REF_1(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
+	case *Renamed_DATATYPE_DEFINITION_DATE_REF_1:
+		toT := CopyBranchRenamed_DATATYPE_DEFINITION_DATE_REF_1(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
+	case *Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1:
+		toT := CopyBranchRenamed_DATATYPE_DEFINITION_ENUMERATION_REF_1(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
+	case *Renamed_DATATYPE_DEFINITION_INTEGER_REF_1:
+		toT := CopyBranchRenamed_DATATYPE_DEFINITION_INTEGER_REF_1(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
+	case *Renamed_DATATYPE_DEFINITION_REAL_REF_1:
+		toT := CopyBranchRenamed_DATATYPE_DEFINITION_REAL_REF_1(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
+	case *Renamed_DATATYPE_DEFINITION_STRING_REF_1:
+		toT := CopyBranchRenamed_DATATYPE_DEFINITION_STRING_REF_1(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
+	case *Renamed_DATATYPE_DEFINITION_XHTML_REF_1:
+		toT := CopyBranchRenamed_DATATYPE_DEFINITION_XHTML_REF_1(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
+	case *Renamed_RELATION_GROUP_TYPE_REF_1:
+		toT := CopyBranchRenamed_RELATION_GROUP_TYPE_REF_1(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
+	case *Renamed_SPECIFICATION_TYPE_REF_1:
+		toT := CopyBranchRenamed_SPECIFICATION_TYPE_REF_1(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
+	case *Renamed_SPEC_OBJECT_TYPE_REF_1:
+		toT := CopyBranchRenamed_SPEC_OBJECT_TYPE_REF_1(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
+	case *Renamed_SPEC_RELATION_TYPE_REF_1:
+		toT := CopyBranchRenamed_SPEC_RELATION_TYPE_REF_1(mapOrigCopy, fromT)
 		return any(toT).(*Type)
 
 	case *SPECIFICATION:
@@ -3129,11 +3129,11 @@ func CopyBranchATTRIBUTE_DEFINITION_BOOLEAN(mapOrigCopy map[any]any, attribute_d
 	for _, _a_alternative_id := range attribute_definition_booleanFrom.ALTERNATIVE_ID {
 		attribute_definition_booleanTo.ALTERNATIVE_ID = append(attribute_definition_booleanTo.ALTERNATIVE_ID, CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, _a_alternative_id))
 	}
-	for _, _a_default_value_1 := range attribute_definition_booleanFrom.DEFAULT_VALUE {
-		attribute_definition_booleanTo.DEFAULT_VALUE = append(attribute_definition_booleanTo.DEFAULT_VALUE, CopyBranchA_DEFAULT_VALUE_1(mapOrigCopy, _a_default_value_1))
+	for _, _renamed_attribute_value_boolean_1 := range attribute_definition_booleanFrom.DEFAULT_VALUE {
+		attribute_definition_booleanTo.DEFAULT_VALUE = append(attribute_definition_booleanTo.DEFAULT_VALUE, CopyBranchRenamed_ATTRIBUTE_VALUE_BOOLEAN_1(mapOrigCopy, _renamed_attribute_value_boolean_1))
 	}
-	for _, _a_type_7 := range attribute_definition_booleanFrom.TYPE {
-		attribute_definition_booleanTo.TYPE = append(attribute_definition_booleanTo.TYPE, CopyBranchA_TYPE_7(mapOrigCopy, _a_type_7))
+	for _, _renamed_datatype_definition_boolean_ref_1 := range attribute_definition_booleanFrom.TYPE {
+		attribute_definition_booleanTo.TYPE = append(attribute_definition_booleanTo.TYPE, CopyBranchRenamed_DATATYPE_DEFINITION_BOOLEAN_REF_1(mapOrigCopy, _renamed_datatype_definition_boolean_ref_1))
 	}
 
 	return
@@ -3157,11 +3157,11 @@ func CopyBranchATTRIBUTE_DEFINITION_DATE(mapOrigCopy map[any]any, attribute_defi
 	for _, _a_alternative_id := range attribute_definition_dateFrom.ALTERNATIVE_ID {
 		attribute_definition_dateTo.ALTERNATIVE_ID = append(attribute_definition_dateTo.ALTERNATIVE_ID, CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, _a_alternative_id))
 	}
-	for _, _a_default_value_3 := range attribute_definition_dateFrom.DEFAULT_VALUE {
-		attribute_definition_dateTo.DEFAULT_VALUE = append(attribute_definition_dateTo.DEFAULT_VALUE, CopyBranchA_DEFAULT_VALUE_3(mapOrigCopy, _a_default_value_3))
+	for _, _renamed_attribute_value_date_1 := range attribute_definition_dateFrom.DEFAULT_VALUE {
+		attribute_definition_dateTo.DEFAULT_VALUE = append(attribute_definition_dateTo.DEFAULT_VALUE, CopyBranchRenamed_ATTRIBUTE_VALUE_DATE_1(mapOrigCopy, _renamed_attribute_value_date_1))
 	}
-	for _, _a_type := range attribute_definition_dateFrom.TYPE {
-		attribute_definition_dateTo.TYPE = append(attribute_definition_dateTo.TYPE, CopyBranchA_TYPE(mapOrigCopy, _a_type))
+	for _, _renamed_datatype_definition_date_ref_1 := range attribute_definition_dateFrom.TYPE {
+		attribute_definition_dateTo.TYPE = append(attribute_definition_dateTo.TYPE, CopyBranchRenamed_DATATYPE_DEFINITION_DATE_REF_1(mapOrigCopy, _renamed_datatype_definition_date_ref_1))
 	}
 
 	return
@@ -3185,11 +3185,11 @@ func CopyBranchATTRIBUTE_DEFINITION_ENUMERATION(mapOrigCopy map[any]any, attribu
 	for _, _a_alternative_id := range attribute_definition_enumerationFrom.ALTERNATIVE_ID {
 		attribute_definition_enumerationTo.ALTERNATIVE_ID = append(attribute_definition_enumerationTo.ALTERNATIVE_ID, CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, _a_alternative_id))
 	}
-	for _, _a_default_value_5 := range attribute_definition_enumerationFrom.DEFAULT_VALUE {
-		attribute_definition_enumerationTo.DEFAULT_VALUE = append(attribute_definition_enumerationTo.DEFAULT_VALUE, CopyBranchA_DEFAULT_VALUE_5(mapOrigCopy, _a_default_value_5))
+	for _, _renamed_attribute_value_enumeration_1 := range attribute_definition_enumerationFrom.DEFAULT_VALUE {
+		attribute_definition_enumerationTo.DEFAULT_VALUE = append(attribute_definition_enumerationTo.DEFAULT_VALUE, CopyBranchRenamed_ATTRIBUTE_VALUE_ENUMERATION_1(mapOrigCopy, _renamed_attribute_value_enumeration_1))
 	}
-	for _, _a_type_9 := range attribute_definition_enumerationFrom.TYPE {
-		attribute_definition_enumerationTo.TYPE = append(attribute_definition_enumerationTo.TYPE, CopyBranchA_TYPE_9(mapOrigCopy, _a_type_9))
+	for _, _renamed_datatype_definition_enumeration_ref_1 := range attribute_definition_enumerationFrom.TYPE {
+		attribute_definition_enumerationTo.TYPE = append(attribute_definition_enumerationTo.TYPE, CopyBranchRenamed_DATATYPE_DEFINITION_ENUMERATION_REF_1(mapOrigCopy, _renamed_datatype_definition_enumeration_ref_1))
 	}
 
 	return
@@ -3213,11 +3213,11 @@ func CopyBranchATTRIBUTE_DEFINITION_INTEGER(mapOrigCopy map[any]any, attribute_d
 	for _, _a_alternative_id := range attribute_definition_integerFrom.ALTERNATIVE_ID {
 		attribute_definition_integerTo.ALTERNATIVE_ID = append(attribute_definition_integerTo.ALTERNATIVE_ID, CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, _a_alternative_id))
 	}
-	for _, _a_default_value_6 := range attribute_definition_integerFrom.DEFAULT_VALUE {
-		attribute_definition_integerTo.DEFAULT_VALUE = append(attribute_definition_integerTo.DEFAULT_VALUE, CopyBranchA_DEFAULT_VALUE_6(mapOrigCopy, _a_default_value_6))
+	for _, _renamed_attribute_value_integer_1 := range attribute_definition_integerFrom.DEFAULT_VALUE {
+		attribute_definition_integerTo.DEFAULT_VALUE = append(attribute_definition_integerTo.DEFAULT_VALUE, CopyBranchRenamed_ATTRIBUTE_VALUE_INTEGER_1(mapOrigCopy, _renamed_attribute_value_integer_1))
 	}
-	for _, _a_type_5 := range attribute_definition_integerFrom.TYPE {
-		attribute_definition_integerTo.TYPE = append(attribute_definition_integerTo.TYPE, CopyBranchA_TYPE_5(mapOrigCopy, _a_type_5))
+	for _, _renamed_datatype_definition_integer_ref_1 := range attribute_definition_integerFrom.TYPE {
+		attribute_definition_integerTo.TYPE = append(attribute_definition_integerTo.TYPE, CopyBranchRenamed_DATATYPE_DEFINITION_INTEGER_REF_1(mapOrigCopy, _renamed_datatype_definition_integer_ref_1))
 	}
 
 	return
@@ -3241,11 +3241,11 @@ func CopyBranchATTRIBUTE_DEFINITION_REAL(mapOrigCopy map[any]any, attribute_defi
 	for _, _a_alternative_id := range attribute_definition_realFrom.ALTERNATIVE_ID {
 		attribute_definition_realTo.ALTERNATIVE_ID = append(attribute_definition_realTo.ALTERNATIVE_ID, CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, _a_alternative_id))
 	}
-	for _, _a_default_value_4 := range attribute_definition_realFrom.DEFAULT_VALUE {
-		attribute_definition_realTo.DEFAULT_VALUE = append(attribute_definition_realTo.DEFAULT_VALUE, CopyBranchA_DEFAULT_VALUE_4(mapOrigCopy, _a_default_value_4))
+	for _, _renamed_attribute_value_real_1 := range attribute_definition_realFrom.DEFAULT_VALUE {
+		attribute_definition_realTo.DEFAULT_VALUE = append(attribute_definition_realTo.DEFAULT_VALUE, CopyBranchRenamed_ATTRIBUTE_VALUE_REAL_1(mapOrigCopy, _renamed_attribute_value_real_1))
 	}
-	for _, _a_type_3 := range attribute_definition_realFrom.TYPE {
-		attribute_definition_realTo.TYPE = append(attribute_definition_realTo.TYPE, CopyBranchA_TYPE_3(mapOrigCopy, _a_type_3))
+	for _, _renamed_datatype_definition_real_ref_1 := range attribute_definition_realFrom.TYPE {
+		attribute_definition_realTo.TYPE = append(attribute_definition_realTo.TYPE, CopyBranchRenamed_DATATYPE_DEFINITION_REAL_REF_1(mapOrigCopy, _renamed_datatype_definition_real_ref_1))
 	}
 
 	return
@@ -3269,11 +3269,11 @@ func CopyBranchATTRIBUTE_DEFINITION_STRING(mapOrigCopy map[any]any, attribute_de
 	for _, _a_alternative_id := range attribute_definition_stringFrom.ALTERNATIVE_ID {
 		attribute_definition_stringTo.ALTERNATIVE_ID = append(attribute_definition_stringTo.ALTERNATIVE_ID, CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, _a_alternative_id))
 	}
-	for _, _a_default_value := range attribute_definition_stringFrom.DEFAULT_VALUE {
-		attribute_definition_stringTo.DEFAULT_VALUE = append(attribute_definition_stringTo.DEFAULT_VALUE, CopyBranchA_DEFAULT_VALUE(mapOrigCopy, _a_default_value))
+	for _, _renamed_attribute_value_string_1 := range attribute_definition_stringFrom.DEFAULT_VALUE {
+		attribute_definition_stringTo.DEFAULT_VALUE = append(attribute_definition_stringTo.DEFAULT_VALUE, CopyBranchRenamed_ATTRIBUTE_VALUE_STRING_1(mapOrigCopy, _renamed_attribute_value_string_1))
 	}
-	for _, _a_type_8 := range attribute_definition_stringFrom.TYPE {
-		attribute_definition_stringTo.TYPE = append(attribute_definition_stringTo.TYPE, CopyBranchA_TYPE_8(mapOrigCopy, _a_type_8))
+	for _, _renamed_datatype_definition_string_ref_1 := range attribute_definition_stringFrom.TYPE {
+		attribute_definition_stringTo.TYPE = append(attribute_definition_stringTo.TYPE, CopyBranchRenamed_DATATYPE_DEFINITION_STRING_REF_1(mapOrigCopy, _renamed_datatype_definition_string_ref_1))
 	}
 
 	return
@@ -3297,11 +3297,11 @@ func CopyBranchATTRIBUTE_DEFINITION_XHTML(mapOrigCopy map[any]any, attribute_def
 	for _, _a_alternative_id := range attribute_definition_xhtmlFrom.ALTERNATIVE_ID {
 		attribute_definition_xhtmlTo.ALTERNATIVE_ID = append(attribute_definition_xhtmlTo.ALTERNATIVE_ID, CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, _a_alternative_id))
 	}
-	for _, _a_default_value_2 := range attribute_definition_xhtmlFrom.DEFAULT_VALUE {
-		attribute_definition_xhtmlTo.DEFAULT_VALUE = append(attribute_definition_xhtmlTo.DEFAULT_VALUE, CopyBranchA_DEFAULT_VALUE_2(mapOrigCopy, _a_default_value_2))
+	for _, _renamed_attribute_value_xhtml_1 := range attribute_definition_xhtmlFrom.DEFAULT_VALUE {
+		attribute_definition_xhtmlTo.DEFAULT_VALUE = append(attribute_definition_xhtmlTo.DEFAULT_VALUE, CopyBranchRenamed_ATTRIBUTE_VALUE_XHTML_1(mapOrigCopy, _renamed_attribute_value_xhtml_1))
 	}
-	for _, _a_type_6 := range attribute_definition_xhtmlFrom.TYPE {
-		attribute_definition_xhtmlTo.TYPE = append(attribute_definition_xhtmlTo.TYPE, CopyBranchA_TYPE_6(mapOrigCopy, _a_type_6))
+	for _, _renamed_datatype_definition_xhtml_ref_1 := range attribute_definition_xhtmlFrom.TYPE {
+		attribute_definition_xhtmlTo.TYPE = append(attribute_definition_xhtmlTo.TYPE, CopyBranchRenamed_DATATYPE_DEFINITION_XHTML_REF_1(mapOrigCopy, _renamed_datatype_definition_xhtml_ref_1))
 	}
 
 	return
@@ -3322,8 +3322,8 @@ func CopyBranchATTRIBUTE_VALUE_BOOLEAN(mapOrigCopy map[any]any, attribute_value_
 	//insertion point for the staging of instances referenced by pointers
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_definition_4 := range attribute_value_booleanFrom.DEFINITION {
-		attribute_value_booleanTo.DEFINITION = append(attribute_value_booleanTo.DEFINITION, CopyBranchA_DEFINITION_4(mapOrigCopy, _a_definition_4))
+	for _, _renamed_attribute_definition_boolean_ref_1 := range attribute_value_booleanFrom.DEFINITION {
+		attribute_value_booleanTo.DEFINITION = append(attribute_value_booleanTo.DEFINITION, CopyBranchRenamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1(mapOrigCopy, _renamed_attribute_definition_boolean_ref_1))
 	}
 
 	return
@@ -3344,8 +3344,8 @@ func CopyBranchATTRIBUTE_VALUE_DATE(mapOrigCopy map[any]any, attribute_value_dat
 	//insertion point for the staging of instances referenced by pointers
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_definition_2 := range attribute_value_dateFrom.DEFINITION {
-		attribute_value_dateTo.DEFINITION = append(attribute_value_dateTo.DEFINITION, CopyBranchA_DEFINITION_2(mapOrigCopy, _a_definition_2))
+	for _, _renamed_attribute_definition_date_ref_1 := range attribute_value_dateFrom.DEFINITION {
+		attribute_value_dateTo.DEFINITION = append(attribute_value_dateTo.DEFINITION, CopyBranchRenamed_ATTRIBUTE_DEFINITION_DATE_REF_1(mapOrigCopy, _renamed_attribute_definition_date_ref_1))
 	}
 
 	return
@@ -3366,8 +3366,8 @@ func CopyBranchATTRIBUTE_VALUE_ENUMERATION(mapOrigCopy map[any]any, attribute_va
 	//insertion point for the staging of instances referenced by pointers
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_definition_5 := range attribute_value_enumerationFrom.DEFINITION {
-		attribute_value_enumerationTo.DEFINITION = append(attribute_value_enumerationTo.DEFINITION, CopyBranchA_DEFINITION_5(mapOrigCopy, _a_definition_5))
+	for _, _renamed_attribute_definition_enumeration_ref_1 := range attribute_value_enumerationFrom.DEFINITION {
+		attribute_value_enumerationTo.DEFINITION = append(attribute_value_enumerationTo.DEFINITION, CopyBranchRenamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1(mapOrigCopy, _renamed_attribute_definition_enumeration_ref_1))
 	}
 	for _, _a_values := range attribute_value_enumerationFrom.VALUES {
 		attribute_value_enumerationTo.VALUES = append(attribute_value_enumerationTo.VALUES, CopyBranchA_VALUES(mapOrigCopy, _a_values))
@@ -3391,8 +3391,8 @@ func CopyBranchATTRIBUTE_VALUE_INTEGER(mapOrigCopy map[any]any, attribute_value_
 	//insertion point for the staging of instances referenced by pointers
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_definition := range attribute_value_integerFrom.DEFINITION {
-		attribute_value_integerTo.DEFINITION = append(attribute_value_integerTo.DEFINITION, CopyBranchA_DEFINITION(mapOrigCopy, _a_definition))
+	for _, _renamed_attribute_definition_integer_ref_1 := range attribute_value_integerFrom.DEFINITION {
+		attribute_value_integerTo.DEFINITION = append(attribute_value_integerTo.DEFINITION, CopyBranchRenamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1(mapOrigCopy, _renamed_attribute_definition_integer_ref_1))
 	}
 
 	return
@@ -3413,8 +3413,8 @@ func CopyBranchATTRIBUTE_VALUE_REAL(mapOrigCopy map[any]any, attribute_value_rea
 	//insertion point for the staging of instances referenced by pointers
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_definition_6 := range attribute_value_realFrom.DEFINITION {
-		attribute_value_realTo.DEFINITION = append(attribute_value_realTo.DEFINITION, CopyBranchA_DEFINITION_6(mapOrigCopy, _a_definition_6))
+	for _, _renamed_attribute_definition_real_ref_1 := range attribute_value_realFrom.DEFINITION {
+		attribute_value_realTo.DEFINITION = append(attribute_value_realTo.DEFINITION, CopyBranchRenamed_ATTRIBUTE_DEFINITION_REAL_REF_1(mapOrigCopy, _renamed_attribute_definition_real_ref_1))
 	}
 
 	return
@@ -3435,8 +3435,8 @@ func CopyBranchATTRIBUTE_VALUE_STRING(mapOrigCopy map[any]any, attribute_value_s
 	//insertion point for the staging of instances referenced by pointers
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_definition_3 := range attribute_value_stringFrom.DEFINITION {
-		attribute_value_stringTo.DEFINITION = append(attribute_value_stringTo.DEFINITION, CopyBranchA_DEFINITION_3(mapOrigCopy, _a_definition_3))
+	for _, _renamed_attribute_definition_string_ref_1 := range attribute_value_stringFrom.DEFINITION {
+		attribute_value_stringTo.DEFINITION = append(attribute_value_stringTo.DEFINITION, CopyBranchRenamed_ATTRIBUTE_DEFINITION_STRING_REF_1(mapOrigCopy, _renamed_attribute_definition_string_ref_1))
 	}
 
 	return
@@ -3463,8 +3463,8 @@ func CopyBranchATTRIBUTE_VALUE_XHTML(mapOrigCopy map[any]any, attribute_value_xh
 	for _, _xhtml_content := range attribute_value_xhtmlFrom.THE_ORIGINAL_VALUE {
 		attribute_value_xhtmlTo.THE_ORIGINAL_VALUE = append(attribute_value_xhtmlTo.THE_ORIGINAL_VALUE, CopyBranchXHTML_CONTENT(mapOrigCopy, _xhtml_content))
 	}
-	for _, _a_definition_1 := range attribute_value_xhtmlFrom.DEFINITION {
-		attribute_value_xhtmlTo.DEFINITION = append(attribute_value_xhtmlTo.DEFINITION, CopyBranchA_DEFINITION_1(mapOrigCopy, _a_definition_1))
+	for _, _renamed_attribute_definition_xhtml_ref_1 := range attribute_value_xhtmlFrom.DEFINITION {
+		attribute_value_xhtmlTo.DEFINITION = append(attribute_value_xhtmlTo.DEFINITION, CopyBranchRenamed_ATTRIBUTE_DEFINITION_XHTML_REF_1(mapOrigCopy, _renamed_attribute_definition_xhtml_ref_1))
 	}
 
 	return
@@ -3572,293 +3572,6 @@ func CopyBranchA_DATATYPES(mapOrigCopy map[any]any, a_datatypesFrom *A_DATATYPES
 	for _, _datatype_definition_xhtml := range a_datatypesFrom.DATATYPE_DEFINITION_XHTML {
 		a_datatypesTo.DATATYPE_DEFINITION_XHTML = append(a_datatypesTo.DATATYPE_DEFINITION_XHTML, CopyBranchDATATYPE_DEFINITION_XHTML(mapOrigCopy, _datatype_definition_xhtml))
 	}
-
-	return
-}
-
-func CopyBranchA_DEFAULT_VALUE(mapOrigCopy map[any]any, a_default_valueFrom *A_DEFAULT_VALUE) (a_default_valueTo *A_DEFAULT_VALUE) {
-
-	// a_default_valueFrom has already been copied
-	if _a_default_valueTo, ok := mapOrigCopy[a_default_valueFrom]; ok {
-		a_default_valueTo = _a_default_valueTo.(*A_DEFAULT_VALUE)
-		return
-	}
-
-	a_default_valueTo = new(A_DEFAULT_VALUE)
-	mapOrigCopy[a_default_valueFrom] = a_default_valueTo
-	a_default_valueFrom.CopyBasicFields(a_default_valueTo)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _attribute_value_string := range a_default_valueFrom.ATTRIBUTE_VALUE_STRING {
-		a_default_valueTo.ATTRIBUTE_VALUE_STRING = append(a_default_valueTo.ATTRIBUTE_VALUE_STRING, CopyBranchATTRIBUTE_VALUE_STRING(mapOrigCopy, _attribute_value_string))
-	}
-
-	return
-}
-
-func CopyBranchA_DEFAULT_VALUE_1(mapOrigCopy map[any]any, a_default_value_1From *A_DEFAULT_VALUE_1) (a_default_value_1To *A_DEFAULT_VALUE_1) {
-
-	// a_default_value_1From has already been copied
-	if _a_default_value_1To, ok := mapOrigCopy[a_default_value_1From]; ok {
-		a_default_value_1To = _a_default_value_1To.(*A_DEFAULT_VALUE_1)
-		return
-	}
-
-	a_default_value_1To = new(A_DEFAULT_VALUE_1)
-	mapOrigCopy[a_default_value_1From] = a_default_value_1To
-	a_default_value_1From.CopyBasicFields(a_default_value_1To)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _attribute_value_boolean := range a_default_value_1From.ATTRIBUTE_VALUE_BOOLEAN {
-		a_default_value_1To.ATTRIBUTE_VALUE_BOOLEAN = append(a_default_value_1To.ATTRIBUTE_VALUE_BOOLEAN, CopyBranchATTRIBUTE_VALUE_BOOLEAN(mapOrigCopy, _attribute_value_boolean))
-	}
-
-	return
-}
-
-func CopyBranchA_DEFAULT_VALUE_2(mapOrigCopy map[any]any, a_default_value_2From *A_DEFAULT_VALUE_2) (a_default_value_2To *A_DEFAULT_VALUE_2) {
-
-	// a_default_value_2From has already been copied
-	if _a_default_value_2To, ok := mapOrigCopy[a_default_value_2From]; ok {
-		a_default_value_2To = _a_default_value_2To.(*A_DEFAULT_VALUE_2)
-		return
-	}
-
-	a_default_value_2To = new(A_DEFAULT_VALUE_2)
-	mapOrigCopy[a_default_value_2From] = a_default_value_2To
-	a_default_value_2From.CopyBasicFields(a_default_value_2To)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _attribute_value_xhtml := range a_default_value_2From.ATTRIBUTE_VALUE_XHTML {
-		a_default_value_2To.ATTRIBUTE_VALUE_XHTML = append(a_default_value_2To.ATTRIBUTE_VALUE_XHTML, CopyBranchATTRIBUTE_VALUE_XHTML(mapOrigCopy, _attribute_value_xhtml))
-	}
-
-	return
-}
-
-func CopyBranchA_DEFAULT_VALUE_3(mapOrigCopy map[any]any, a_default_value_3From *A_DEFAULT_VALUE_3) (a_default_value_3To *A_DEFAULT_VALUE_3) {
-
-	// a_default_value_3From has already been copied
-	if _a_default_value_3To, ok := mapOrigCopy[a_default_value_3From]; ok {
-		a_default_value_3To = _a_default_value_3To.(*A_DEFAULT_VALUE_3)
-		return
-	}
-
-	a_default_value_3To = new(A_DEFAULT_VALUE_3)
-	mapOrigCopy[a_default_value_3From] = a_default_value_3To
-	a_default_value_3From.CopyBasicFields(a_default_value_3To)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _attribute_value_date := range a_default_value_3From.ATTRIBUTE_VALUE_DATE {
-		a_default_value_3To.ATTRIBUTE_VALUE_DATE = append(a_default_value_3To.ATTRIBUTE_VALUE_DATE, CopyBranchATTRIBUTE_VALUE_DATE(mapOrigCopy, _attribute_value_date))
-	}
-
-	return
-}
-
-func CopyBranchA_DEFAULT_VALUE_4(mapOrigCopy map[any]any, a_default_value_4From *A_DEFAULT_VALUE_4) (a_default_value_4To *A_DEFAULT_VALUE_4) {
-
-	// a_default_value_4From has already been copied
-	if _a_default_value_4To, ok := mapOrigCopy[a_default_value_4From]; ok {
-		a_default_value_4To = _a_default_value_4To.(*A_DEFAULT_VALUE_4)
-		return
-	}
-
-	a_default_value_4To = new(A_DEFAULT_VALUE_4)
-	mapOrigCopy[a_default_value_4From] = a_default_value_4To
-	a_default_value_4From.CopyBasicFields(a_default_value_4To)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _attribute_value_real := range a_default_value_4From.ATTRIBUTE_VALUE_REAL {
-		a_default_value_4To.ATTRIBUTE_VALUE_REAL = append(a_default_value_4To.ATTRIBUTE_VALUE_REAL, CopyBranchATTRIBUTE_VALUE_REAL(mapOrigCopy, _attribute_value_real))
-	}
-
-	return
-}
-
-func CopyBranchA_DEFAULT_VALUE_5(mapOrigCopy map[any]any, a_default_value_5From *A_DEFAULT_VALUE_5) (a_default_value_5To *A_DEFAULT_VALUE_5) {
-
-	// a_default_value_5From has already been copied
-	if _a_default_value_5To, ok := mapOrigCopy[a_default_value_5From]; ok {
-		a_default_value_5To = _a_default_value_5To.(*A_DEFAULT_VALUE_5)
-		return
-	}
-
-	a_default_value_5To = new(A_DEFAULT_VALUE_5)
-	mapOrigCopy[a_default_value_5From] = a_default_value_5To
-	a_default_value_5From.CopyBasicFields(a_default_value_5To)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _attribute_value_enumeration := range a_default_value_5From.ATTRIBUTE_VALUE_ENUMERATION {
-		a_default_value_5To.ATTRIBUTE_VALUE_ENUMERATION = append(a_default_value_5To.ATTRIBUTE_VALUE_ENUMERATION, CopyBranchATTRIBUTE_VALUE_ENUMERATION(mapOrigCopy, _attribute_value_enumeration))
-	}
-
-	return
-}
-
-func CopyBranchA_DEFAULT_VALUE_6(mapOrigCopy map[any]any, a_default_value_6From *A_DEFAULT_VALUE_6) (a_default_value_6To *A_DEFAULT_VALUE_6) {
-
-	// a_default_value_6From has already been copied
-	if _a_default_value_6To, ok := mapOrigCopy[a_default_value_6From]; ok {
-		a_default_value_6To = _a_default_value_6To.(*A_DEFAULT_VALUE_6)
-		return
-	}
-
-	a_default_value_6To = new(A_DEFAULT_VALUE_6)
-	mapOrigCopy[a_default_value_6From] = a_default_value_6To
-	a_default_value_6From.CopyBasicFields(a_default_value_6To)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _attribute_value_integer := range a_default_value_6From.ATTRIBUTE_VALUE_INTEGER {
-		a_default_value_6To.ATTRIBUTE_VALUE_INTEGER = append(a_default_value_6To.ATTRIBUTE_VALUE_INTEGER, CopyBranchATTRIBUTE_VALUE_INTEGER(mapOrigCopy, _attribute_value_integer))
-	}
-
-	return
-}
-
-func CopyBranchA_DEFINITION(mapOrigCopy map[any]any, a_definitionFrom *A_DEFINITION) (a_definitionTo *A_DEFINITION) {
-
-	// a_definitionFrom has already been copied
-	if _a_definitionTo, ok := mapOrigCopy[a_definitionFrom]; ok {
-		a_definitionTo = _a_definitionTo.(*A_DEFINITION)
-		return
-	}
-
-	a_definitionTo = new(A_DEFINITION)
-	mapOrigCopy[a_definitionFrom] = a_definitionTo
-	a_definitionFrom.CopyBasicFields(a_definitionTo)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-	return
-}
-
-func CopyBranchA_DEFINITION_1(mapOrigCopy map[any]any, a_definition_1From *A_DEFINITION_1) (a_definition_1To *A_DEFINITION_1) {
-
-	// a_definition_1From has already been copied
-	if _a_definition_1To, ok := mapOrigCopy[a_definition_1From]; ok {
-		a_definition_1To = _a_definition_1To.(*A_DEFINITION_1)
-		return
-	}
-
-	a_definition_1To = new(A_DEFINITION_1)
-	mapOrigCopy[a_definition_1From] = a_definition_1To
-	a_definition_1From.CopyBasicFields(a_definition_1To)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-	return
-}
-
-func CopyBranchA_DEFINITION_2(mapOrigCopy map[any]any, a_definition_2From *A_DEFINITION_2) (a_definition_2To *A_DEFINITION_2) {
-
-	// a_definition_2From has already been copied
-	if _a_definition_2To, ok := mapOrigCopy[a_definition_2From]; ok {
-		a_definition_2To = _a_definition_2To.(*A_DEFINITION_2)
-		return
-	}
-
-	a_definition_2To = new(A_DEFINITION_2)
-	mapOrigCopy[a_definition_2From] = a_definition_2To
-	a_definition_2From.CopyBasicFields(a_definition_2To)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-	return
-}
-
-func CopyBranchA_DEFINITION_3(mapOrigCopy map[any]any, a_definition_3From *A_DEFINITION_3) (a_definition_3To *A_DEFINITION_3) {
-
-	// a_definition_3From has already been copied
-	if _a_definition_3To, ok := mapOrigCopy[a_definition_3From]; ok {
-		a_definition_3To = _a_definition_3To.(*A_DEFINITION_3)
-		return
-	}
-
-	a_definition_3To = new(A_DEFINITION_3)
-	mapOrigCopy[a_definition_3From] = a_definition_3To
-	a_definition_3From.CopyBasicFields(a_definition_3To)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-	return
-}
-
-func CopyBranchA_DEFINITION_4(mapOrigCopy map[any]any, a_definition_4From *A_DEFINITION_4) (a_definition_4To *A_DEFINITION_4) {
-
-	// a_definition_4From has already been copied
-	if _a_definition_4To, ok := mapOrigCopy[a_definition_4From]; ok {
-		a_definition_4To = _a_definition_4To.(*A_DEFINITION_4)
-		return
-	}
-
-	a_definition_4To = new(A_DEFINITION_4)
-	mapOrigCopy[a_definition_4From] = a_definition_4To
-	a_definition_4From.CopyBasicFields(a_definition_4To)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-	return
-}
-
-func CopyBranchA_DEFINITION_5(mapOrigCopy map[any]any, a_definition_5From *A_DEFINITION_5) (a_definition_5To *A_DEFINITION_5) {
-
-	// a_definition_5From has already been copied
-	if _a_definition_5To, ok := mapOrigCopy[a_definition_5From]; ok {
-		a_definition_5To = _a_definition_5To.(*A_DEFINITION_5)
-		return
-	}
-
-	a_definition_5To = new(A_DEFINITION_5)
-	mapOrigCopy[a_definition_5From] = a_definition_5To
-	a_definition_5From.CopyBasicFields(a_definition_5To)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-	return
-}
-
-func CopyBranchA_DEFINITION_6(mapOrigCopy map[any]any, a_definition_6From *A_DEFINITION_6) (a_definition_6To *A_DEFINITION_6) {
-
-	// a_definition_6From has already been copied
-	if _a_definition_6To, ok := mapOrigCopy[a_definition_6From]; ok {
-		a_definition_6To = _a_definition_6To.(*A_DEFINITION_6)
-		return
-	}
-
-	a_definition_6To = new(A_DEFINITION_6)
-	mapOrigCopy[a_definition_6From] = a_definition_6To
-	a_definition_6From.CopyBasicFields(a_definition_6To)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
 
 	return
 }
@@ -4082,6 +3795,9 @@ func CopyBranchA_SPEC_RELATIONS(mapOrigCopy map[any]any, a_spec_relationsFrom *A
 	//insertion point for the staging of instances referenced by pointers
 
 	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _spec_relation := range a_spec_relationsFrom.SPEC_RELATION {
+		a_spec_relationsTo.SPEC_RELATION = append(a_spec_relationsTo.SPEC_RELATION, CopyBranchSPEC_RELATION(mapOrigCopy, _spec_relation))
+	}
 
 	return
 }
@@ -4101,9 +3817,6 @@ func CopyBranchA_SPEC_RELATIONS_1(mapOrigCopy map[any]any, a_spec_relations_1Fro
 	//insertion point for the staging of instances referenced by pointers
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _spec_relation := range a_spec_relations_1From.SPEC_RELATION {
-		a_spec_relations_1To.SPEC_RELATION = append(a_spec_relations_1To.SPEC_RELATION, CopyBranchSPEC_RELATION(mapOrigCopy, _spec_relation))
-	}
 
 	return
 }
@@ -4201,215 +3914,6 @@ func CopyBranchA_TOOL_EXTENSIONS(mapOrigCopy map[any]any, a_tool_extensionsFrom 
 	for _, _req_if_tool_extension := range a_tool_extensionsFrom.REQ_IF_TOOL_EXTENSION {
 		a_tool_extensionsTo.REQ_IF_TOOL_EXTENSION = append(a_tool_extensionsTo.REQ_IF_TOOL_EXTENSION, CopyBranchREQ_IF_TOOL_EXTENSION(mapOrigCopy, _req_if_tool_extension))
 	}
-
-	return
-}
-
-func CopyBranchA_TYPE(mapOrigCopy map[any]any, a_typeFrom *A_TYPE) (a_typeTo *A_TYPE) {
-
-	// a_typeFrom has already been copied
-	if _a_typeTo, ok := mapOrigCopy[a_typeFrom]; ok {
-		a_typeTo = _a_typeTo.(*A_TYPE)
-		return
-	}
-
-	a_typeTo = new(A_TYPE)
-	mapOrigCopy[a_typeFrom] = a_typeTo
-	a_typeFrom.CopyBasicFields(a_typeTo)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-	return
-}
-
-func CopyBranchA_TYPE_1(mapOrigCopy map[any]any, a_type_1From *A_TYPE_1) (a_type_1To *A_TYPE_1) {
-
-	// a_type_1From has already been copied
-	if _a_type_1To, ok := mapOrigCopy[a_type_1From]; ok {
-		a_type_1To = _a_type_1To.(*A_TYPE_1)
-		return
-	}
-
-	a_type_1To = new(A_TYPE_1)
-	mapOrigCopy[a_type_1From] = a_type_1To
-	a_type_1From.CopyBasicFields(a_type_1To)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-	return
-}
-
-func CopyBranchA_TYPE_10(mapOrigCopy map[any]any, a_type_10From *A_TYPE_10) (a_type_10To *A_TYPE_10) {
-
-	// a_type_10From has already been copied
-	if _a_type_10To, ok := mapOrigCopy[a_type_10From]; ok {
-		a_type_10To = _a_type_10To.(*A_TYPE_10)
-		return
-	}
-
-	a_type_10To = new(A_TYPE_10)
-	mapOrigCopy[a_type_10From] = a_type_10To
-	a_type_10From.CopyBasicFields(a_type_10To)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-	return
-}
-
-func CopyBranchA_TYPE_2(mapOrigCopy map[any]any, a_type_2From *A_TYPE_2) (a_type_2To *A_TYPE_2) {
-
-	// a_type_2From has already been copied
-	if _a_type_2To, ok := mapOrigCopy[a_type_2From]; ok {
-		a_type_2To = _a_type_2To.(*A_TYPE_2)
-		return
-	}
-
-	a_type_2To = new(A_TYPE_2)
-	mapOrigCopy[a_type_2From] = a_type_2To
-	a_type_2From.CopyBasicFields(a_type_2To)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-	return
-}
-
-func CopyBranchA_TYPE_3(mapOrigCopy map[any]any, a_type_3From *A_TYPE_3) (a_type_3To *A_TYPE_3) {
-
-	// a_type_3From has already been copied
-	if _a_type_3To, ok := mapOrigCopy[a_type_3From]; ok {
-		a_type_3To = _a_type_3To.(*A_TYPE_3)
-		return
-	}
-
-	a_type_3To = new(A_TYPE_3)
-	mapOrigCopy[a_type_3From] = a_type_3To
-	a_type_3From.CopyBasicFields(a_type_3To)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-	return
-}
-
-func CopyBranchA_TYPE_4(mapOrigCopy map[any]any, a_type_4From *A_TYPE_4) (a_type_4To *A_TYPE_4) {
-
-	// a_type_4From has already been copied
-	if _a_type_4To, ok := mapOrigCopy[a_type_4From]; ok {
-		a_type_4To = _a_type_4To.(*A_TYPE_4)
-		return
-	}
-
-	a_type_4To = new(A_TYPE_4)
-	mapOrigCopy[a_type_4From] = a_type_4To
-	a_type_4From.CopyBasicFields(a_type_4To)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-	return
-}
-
-func CopyBranchA_TYPE_5(mapOrigCopy map[any]any, a_type_5From *A_TYPE_5) (a_type_5To *A_TYPE_5) {
-
-	// a_type_5From has already been copied
-	if _a_type_5To, ok := mapOrigCopy[a_type_5From]; ok {
-		a_type_5To = _a_type_5To.(*A_TYPE_5)
-		return
-	}
-
-	a_type_5To = new(A_TYPE_5)
-	mapOrigCopy[a_type_5From] = a_type_5To
-	a_type_5From.CopyBasicFields(a_type_5To)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-	return
-}
-
-func CopyBranchA_TYPE_6(mapOrigCopy map[any]any, a_type_6From *A_TYPE_6) (a_type_6To *A_TYPE_6) {
-
-	// a_type_6From has already been copied
-	if _a_type_6To, ok := mapOrigCopy[a_type_6From]; ok {
-		a_type_6To = _a_type_6To.(*A_TYPE_6)
-		return
-	}
-
-	a_type_6To = new(A_TYPE_6)
-	mapOrigCopy[a_type_6From] = a_type_6To
-	a_type_6From.CopyBasicFields(a_type_6To)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-	return
-}
-
-func CopyBranchA_TYPE_7(mapOrigCopy map[any]any, a_type_7From *A_TYPE_7) (a_type_7To *A_TYPE_7) {
-
-	// a_type_7From has already been copied
-	if _a_type_7To, ok := mapOrigCopy[a_type_7From]; ok {
-		a_type_7To = _a_type_7To.(*A_TYPE_7)
-		return
-	}
-
-	a_type_7To = new(A_TYPE_7)
-	mapOrigCopy[a_type_7From] = a_type_7To
-	a_type_7From.CopyBasicFields(a_type_7To)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-	return
-}
-
-func CopyBranchA_TYPE_8(mapOrigCopy map[any]any, a_type_8From *A_TYPE_8) (a_type_8To *A_TYPE_8) {
-
-	// a_type_8From has already been copied
-	if _a_type_8To, ok := mapOrigCopy[a_type_8From]; ok {
-		a_type_8To = _a_type_8To.(*A_TYPE_8)
-		return
-	}
-
-	a_type_8To = new(A_TYPE_8)
-	mapOrigCopy[a_type_8From] = a_type_8To
-	a_type_8From.CopyBasicFields(a_type_8To)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-	return
-}
-
-func CopyBranchA_TYPE_9(mapOrigCopy map[any]any, a_type_9From *A_TYPE_9) (a_type_9To *A_TYPE_9) {
-
-	// a_type_9From has already been copied
-	if _a_type_9To, ok := mapOrigCopy[a_type_9From]; ok {
-		a_type_9To = _a_type_9To.(*A_TYPE_9)
-		return
-	}
-
-	a_type_9To = new(A_TYPE_9)
-	mapOrigCopy[a_type_9From] = a_type_9To
-	a_type_9From.CopyBasicFields(a_type_9To)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
 
 	return
 }
@@ -4695,11 +4199,11 @@ func CopyBranchRELATION_GROUP(mapOrigCopy map[any]any, relation_groupFrom *RELAT
 	for _, _a_source_specification := range relation_groupFrom.SOURCE_SPECIFICATION {
 		relation_groupTo.SOURCE_SPECIFICATION = append(relation_groupTo.SOURCE_SPECIFICATION, CopyBranchA_SOURCE_SPECIFICATION(mapOrigCopy, _a_source_specification))
 	}
-	for _, _a_spec_relations := range relation_groupFrom.SPEC_RELATIONS {
-		relation_groupTo.SPEC_RELATIONS = append(relation_groupTo.SPEC_RELATIONS, CopyBranchA_SPEC_RELATIONS(mapOrigCopy, _a_spec_relations))
+	for _, _a_spec_relations_1 := range relation_groupFrom.SPEC_RELATIONS {
+		relation_groupTo.SPEC_RELATIONS = append(relation_groupTo.SPEC_RELATIONS, CopyBranchA_SPEC_RELATIONS_1(mapOrigCopy, _a_spec_relations_1))
 	}
-	for _, _a_type_1 := range relation_groupFrom.TYPE {
-		relation_groupTo.TYPE = append(relation_groupTo.TYPE, CopyBranchA_TYPE_1(mapOrigCopy, _a_type_1))
+	for _, _renamed_relation_group_type_ref_1 := range relation_groupFrom.TYPE {
+		relation_groupTo.TYPE = append(relation_groupTo.TYPE, CopyBranchRenamed_RELATION_GROUP_TYPE_REF_1(mapOrigCopy, _renamed_relation_group_type_ref_1))
 	}
 
 	return
@@ -4782,8 +4286,8 @@ func CopyBranchREQ_IF_CONTENT(mapOrigCopy map[any]any, req_if_contentFrom *REQ_I
 	for _, _a_spec_objects := range req_if_contentFrom.SPEC_OBJECTS {
 		req_if_contentTo.SPEC_OBJECTS = append(req_if_contentTo.SPEC_OBJECTS, CopyBranchA_SPEC_OBJECTS(mapOrigCopy, _a_spec_objects))
 	}
-	for _, _a_spec_relations_1 := range req_if_contentFrom.SPEC_RELATIONS {
-		req_if_contentTo.SPEC_RELATIONS = append(req_if_contentTo.SPEC_RELATIONS, CopyBranchA_SPEC_RELATIONS_1(mapOrigCopy, _a_spec_relations_1))
+	for _, _a_spec_relations := range req_if_contentFrom.SPEC_RELATIONS {
+		req_if_contentTo.SPEC_RELATIONS = append(req_if_contentTo.SPEC_RELATIONS, CopyBranchA_SPEC_RELATIONS(mapOrigCopy, _a_spec_relations))
 	}
 	for _, _a_specifications := range req_if_contentFrom.SPECIFICATIONS {
 		req_if_contentTo.SPECIFICATIONS = append(req_if_contentTo.SPECIFICATIONS, CopyBranchA_SPECIFICATIONS(mapOrigCopy, _a_specifications))
@@ -4833,6 +4337,502 @@ func CopyBranchREQ_IF_TOOL_EXTENSION(mapOrigCopy map[any]any, req_if_tool_extens
 	return
 }
 
+func CopyBranchRenamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1(mapOrigCopy map[any]any, renamed_attribute_definition_boolean_ref_1From *Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1) (renamed_attribute_definition_boolean_ref_1To *Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1) {
+
+	// renamed_attribute_definition_boolean_ref_1From has already been copied
+	if _renamed_attribute_definition_boolean_ref_1To, ok := mapOrigCopy[renamed_attribute_definition_boolean_ref_1From]; ok {
+		renamed_attribute_definition_boolean_ref_1To = _renamed_attribute_definition_boolean_ref_1To.(*Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1)
+		return
+	}
+
+	renamed_attribute_definition_boolean_ref_1To = new(Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1)
+	mapOrigCopy[renamed_attribute_definition_boolean_ref_1From] = renamed_attribute_definition_boolean_ref_1To
+	renamed_attribute_definition_boolean_ref_1From.CopyBasicFields(renamed_attribute_definition_boolean_ref_1To)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+	return
+}
+
+func CopyBranchRenamed_ATTRIBUTE_DEFINITION_DATE_REF_1(mapOrigCopy map[any]any, renamed_attribute_definition_date_ref_1From *Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1) (renamed_attribute_definition_date_ref_1To *Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1) {
+
+	// renamed_attribute_definition_date_ref_1From has already been copied
+	if _renamed_attribute_definition_date_ref_1To, ok := mapOrigCopy[renamed_attribute_definition_date_ref_1From]; ok {
+		renamed_attribute_definition_date_ref_1To = _renamed_attribute_definition_date_ref_1To.(*Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1)
+		return
+	}
+
+	renamed_attribute_definition_date_ref_1To = new(Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1)
+	mapOrigCopy[renamed_attribute_definition_date_ref_1From] = renamed_attribute_definition_date_ref_1To
+	renamed_attribute_definition_date_ref_1From.CopyBasicFields(renamed_attribute_definition_date_ref_1To)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+	return
+}
+
+func CopyBranchRenamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1(mapOrigCopy map[any]any, renamed_attribute_definition_enumeration_ref_1From *Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1) (renamed_attribute_definition_enumeration_ref_1To *Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1) {
+
+	// renamed_attribute_definition_enumeration_ref_1From has already been copied
+	if _renamed_attribute_definition_enumeration_ref_1To, ok := mapOrigCopy[renamed_attribute_definition_enumeration_ref_1From]; ok {
+		renamed_attribute_definition_enumeration_ref_1To = _renamed_attribute_definition_enumeration_ref_1To.(*Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1)
+		return
+	}
+
+	renamed_attribute_definition_enumeration_ref_1To = new(Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1)
+	mapOrigCopy[renamed_attribute_definition_enumeration_ref_1From] = renamed_attribute_definition_enumeration_ref_1To
+	renamed_attribute_definition_enumeration_ref_1From.CopyBasicFields(renamed_attribute_definition_enumeration_ref_1To)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+	return
+}
+
+func CopyBranchRenamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1(mapOrigCopy map[any]any, renamed_attribute_definition_integer_ref_1From *Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1) (renamed_attribute_definition_integer_ref_1To *Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1) {
+
+	// renamed_attribute_definition_integer_ref_1From has already been copied
+	if _renamed_attribute_definition_integer_ref_1To, ok := mapOrigCopy[renamed_attribute_definition_integer_ref_1From]; ok {
+		renamed_attribute_definition_integer_ref_1To = _renamed_attribute_definition_integer_ref_1To.(*Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1)
+		return
+	}
+
+	renamed_attribute_definition_integer_ref_1To = new(Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1)
+	mapOrigCopy[renamed_attribute_definition_integer_ref_1From] = renamed_attribute_definition_integer_ref_1To
+	renamed_attribute_definition_integer_ref_1From.CopyBasicFields(renamed_attribute_definition_integer_ref_1To)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+	return
+}
+
+func CopyBranchRenamed_ATTRIBUTE_DEFINITION_REAL_REF_1(mapOrigCopy map[any]any, renamed_attribute_definition_real_ref_1From *Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1) (renamed_attribute_definition_real_ref_1To *Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1) {
+
+	// renamed_attribute_definition_real_ref_1From has already been copied
+	if _renamed_attribute_definition_real_ref_1To, ok := mapOrigCopy[renamed_attribute_definition_real_ref_1From]; ok {
+		renamed_attribute_definition_real_ref_1To = _renamed_attribute_definition_real_ref_1To.(*Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1)
+		return
+	}
+
+	renamed_attribute_definition_real_ref_1To = new(Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1)
+	mapOrigCopy[renamed_attribute_definition_real_ref_1From] = renamed_attribute_definition_real_ref_1To
+	renamed_attribute_definition_real_ref_1From.CopyBasicFields(renamed_attribute_definition_real_ref_1To)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+	return
+}
+
+func CopyBranchRenamed_ATTRIBUTE_DEFINITION_STRING_REF_1(mapOrigCopy map[any]any, renamed_attribute_definition_string_ref_1From *Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1) (renamed_attribute_definition_string_ref_1To *Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1) {
+
+	// renamed_attribute_definition_string_ref_1From has already been copied
+	if _renamed_attribute_definition_string_ref_1To, ok := mapOrigCopy[renamed_attribute_definition_string_ref_1From]; ok {
+		renamed_attribute_definition_string_ref_1To = _renamed_attribute_definition_string_ref_1To.(*Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1)
+		return
+	}
+
+	renamed_attribute_definition_string_ref_1To = new(Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1)
+	mapOrigCopy[renamed_attribute_definition_string_ref_1From] = renamed_attribute_definition_string_ref_1To
+	renamed_attribute_definition_string_ref_1From.CopyBasicFields(renamed_attribute_definition_string_ref_1To)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+	return
+}
+
+func CopyBranchRenamed_ATTRIBUTE_DEFINITION_XHTML_REF_1(mapOrigCopy map[any]any, renamed_attribute_definition_xhtml_ref_1From *Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1) (renamed_attribute_definition_xhtml_ref_1To *Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1) {
+
+	// renamed_attribute_definition_xhtml_ref_1From has already been copied
+	if _renamed_attribute_definition_xhtml_ref_1To, ok := mapOrigCopy[renamed_attribute_definition_xhtml_ref_1From]; ok {
+		renamed_attribute_definition_xhtml_ref_1To = _renamed_attribute_definition_xhtml_ref_1To.(*Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1)
+		return
+	}
+
+	renamed_attribute_definition_xhtml_ref_1To = new(Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1)
+	mapOrigCopy[renamed_attribute_definition_xhtml_ref_1From] = renamed_attribute_definition_xhtml_ref_1To
+	renamed_attribute_definition_xhtml_ref_1From.CopyBasicFields(renamed_attribute_definition_xhtml_ref_1To)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+	return
+}
+
+func CopyBranchRenamed_ATTRIBUTE_VALUE_BOOLEAN_1(mapOrigCopy map[any]any, renamed_attribute_value_boolean_1From *Renamed_ATTRIBUTE_VALUE_BOOLEAN_1) (renamed_attribute_value_boolean_1To *Renamed_ATTRIBUTE_VALUE_BOOLEAN_1) {
+
+	// renamed_attribute_value_boolean_1From has already been copied
+	if _renamed_attribute_value_boolean_1To, ok := mapOrigCopy[renamed_attribute_value_boolean_1From]; ok {
+		renamed_attribute_value_boolean_1To = _renamed_attribute_value_boolean_1To.(*Renamed_ATTRIBUTE_VALUE_BOOLEAN_1)
+		return
+	}
+
+	renamed_attribute_value_boolean_1To = new(Renamed_ATTRIBUTE_VALUE_BOOLEAN_1)
+	mapOrigCopy[renamed_attribute_value_boolean_1From] = renamed_attribute_value_boolean_1To
+	renamed_attribute_value_boolean_1From.CopyBasicFields(renamed_attribute_value_boolean_1To)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _attribute_value_boolean := range renamed_attribute_value_boolean_1From.ATTRIBUTE_VALUE_BOOLEAN {
+		renamed_attribute_value_boolean_1To.ATTRIBUTE_VALUE_BOOLEAN = append(renamed_attribute_value_boolean_1To.ATTRIBUTE_VALUE_BOOLEAN, CopyBranchATTRIBUTE_VALUE_BOOLEAN(mapOrigCopy, _attribute_value_boolean))
+	}
+
+	return
+}
+
+func CopyBranchRenamed_ATTRIBUTE_VALUE_DATE_1(mapOrigCopy map[any]any, renamed_attribute_value_date_1From *Renamed_ATTRIBUTE_VALUE_DATE_1) (renamed_attribute_value_date_1To *Renamed_ATTRIBUTE_VALUE_DATE_1) {
+
+	// renamed_attribute_value_date_1From has already been copied
+	if _renamed_attribute_value_date_1To, ok := mapOrigCopy[renamed_attribute_value_date_1From]; ok {
+		renamed_attribute_value_date_1To = _renamed_attribute_value_date_1To.(*Renamed_ATTRIBUTE_VALUE_DATE_1)
+		return
+	}
+
+	renamed_attribute_value_date_1To = new(Renamed_ATTRIBUTE_VALUE_DATE_1)
+	mapOrigCopy[renamed_attribute_value_date_1From] = renamed_attribute_value_date_1To
+	renamed_attribute_value_date_1From.CopyBasicFields(renamed_attribute_value_date_1To)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _attribute_value_date := range renamed_attribute_value_date_1From.ATTRIBUTE_VALUE_DATE {
+		renamed_attribute_value_date_1To.ATTRIBUTE_VALUE_DATE = append(renamed_attribute_value_date_1To.ATTRIBUTE_VALUE_DATE, CopyBranchATTRIBUTE_VALUE_DATE(mapOrigCopy, _attribute_value_date))
+	}
+
+	return
+}
+
+func CopyBranchRenamed_ATTRIBUTE_VALUE_ENUMERATION_1(mapOrigCopy map[any]any, renamed_attribute_value_enumeration_1From *Renamed_ATTRIBUTE_VALUE_ENUMERATION_1) (renamed_attribute_value_enumeration_1To *Renamed_ATTRIBUTE_VALUE_ENUMERATION_1) {
+
+	// renamed_attribute_value_enumeration_1From has already been copied
+	if _renamed_attribute_value_enumeration_1To, ok := mapOrigCopy[renamed_attribute_value_enumeration_1From]; ok {
+		renamed_attribute_value_enumeration_1To = _renamed_attribute_value_enumeration_1To.(*Renamed_ATTRIBUTE_VALUE_ENUMERATION_1)
+		return
+	}
+
+	renamed_attribute_value_enumeration_1To = new(Renamed_ATTRIBUTE_VALUE_ENUMERATION_1)
+	mapOrigCopy[renamed_attribute_value_enumeration_1From] = renamed_attribute_value_enumeration_1To
+	renamed_attribute_value_enumeration_1From.CopyBasicFields(renamed_attribute_value_enumeration_1To)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _attribute_value_enumeration := range renamed_attribute_value_enumeration_1From.ATTRIBUTE_VALUE_ENUMERATION {
+		renamed_attribute_value_enumeration_1To.ATTRIBUTE_VALUE_ENUMERATION = append(renamed_attribute_value_enumeration_1To.ATTRIBUTE_VALUE_ENUMERATION, CopyBranchATTRIBUTE_VALUE_ENUMERATION(mapOrigCopy, _attribute_value_enumeration))
+	}
+
+	return
+}
+
+func CopyBranchRenamed_ATTRIBUTE_VALUE_INTEGER_1(mapOrigCopy map[any]any, renamed_attribute_value_integer_1From *Renamed_ATTRIBUTE_VALUE_INTEGER_1) (renamed_attribute_value_integer_1To *Renamed_ATTRIBUTE_VALUE_INTEGER_1) {
+
+	// renamed_attribute_value_integer_1From has already been copied
+	if _renamed_attribute_value_integer_1To, ok := mapOrigCopy[renamed_attribute_value_integer_1From]; ok {
+		renamed_attribute_value_integer_1To = _renamed_attribute_value_integer_1To.(*Renamed_ATTRIBUTE_VALUE_INTEGER_1)
+		return
+	}
+
+	renamed_attribute_value_integer_1To = new(Renamed_ATTRIBUTE_VALUE_INTEGER_1)
+	mapOrigCopy[renamed_attribute_value_integer_1From] = renamed_attribute_value_integer_1To
+	renamed_attribute_value_integer_1From.CopyBasicFields(renamed_attribute_value_integer_1To)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _attribute_value_integer := range renamed_attribute_value_integer_1From.ATTRIBUTE_VALUE_INTEGER {
+		renamed_attribute_value_integer_1To.ATTRIBUTE_VALUE_INTEGER = append(renamed_attribute_value_integer_1To.ATTRIBUTE_VALUE_INTEGER, CopyBranchATTRIBUTE_VALUE_INTEGER(mapOrigCopy, _attribute_value_integer))
+	}
+
+	return
+}
+
+func CopyBranchRenamed_ATTRIBUTE_VALUE_REAL_1(mapOrigCopy map[any]any, renamed_attribute_value_real_1From *Renamed_ATTRIBUTE_VALUE_REAL_1) (renamed_attribute_value_real_1To *Renamed_ATTRIBUTE_VALUE_REAL_1) {
+
+	// renamed_attribute_value_real_1From has already been copied
+	if _renamed_attribute_value_real_1To, ok := mapOrigCopy[renamed_attribute_value_real_1From]; ok {
+		renamed_attribute_value_real_1To = _renamed_attribute_value_real_1To.(*Renamed_ATTRIBUTE_VALUE_REAL_1)
+		return
+	}
+
+	renamed_attribute_value_real_1To = new(Renamed_ATTRIBUTE_VALUE_REAL_1)
+	mapOrigCopy[renamed_attribute_value_real_1From] = renamed_attribute_value_real_1To
+	renamed_attribute_value_real_1From.CopyBasicFields(renamed_attribute_value_real_1To)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _attribute_value_real := range renamed_attribute_value_real_1From.ATTRIBUTE_VALUE_REAL {
+		renamed_attribute_value_real_1To.ATTRIBUTE_VALUE_REAL = append(renamed_attribute_value_real_1To.ATTRIBUTE_VALUE_REAL, CopyBranchATTRIBUTE_VALUE_REAL(mapOrigCopy, _attribute_value_real))
+	}
+
+	return
+}
+
+func CopyBranchRenamed_ATTRIBUTE_VALUE_STRING_1(mapOrigCopy map[any]any, renamed_attribute_value_string_1From *Renamed_ATTRIBUTE_VALUE_STRING_1) (renamed_attribute_value_string_1To *Renamed_ATTRIBUTE_VALUE_STRING_1) {
+
+	// renamed_attribute_value_string_1From has already been copied
+	if _renamed_attribute_value_string_1To, ok := mapOrigCopy[renamed_attribute_value_string_1From]; ok {
+		renamed_attribute_value_string_1To = _renamed_attribute_value_string_1To.(*Renamed_ATTRIBUTE_VALUE_STRING_1)
+		return
+	}
+
+	renamed_attribute_value_string_1To = new(Renamed_ATTRIBUTE_VALUE_STRING_1)
+	mapOrigCopy[renamed_attribute_value_string_1From] = renamed_attribute_value_string_1To
+	renamed_attribute_value_string_1From.CopyBasicFields(renamed_attribute_value_string_1To)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _attribute_value_string := range renamed_attribute_value_string_1From.ATTRIBUTE_VALUE_STRING {
+		renamed_attribute_value_string_1To.ATTRIBUTE_VALUE_STRING = append(renamed_attribute_value_string_1To.ATTRIBUTE_VALUE_STRING, CopyBranchATTRIBUTE_VALUE_STRING(mapOrigCopy, _attribute_value_string))
+	}
+
+	return
+}
+
+func CopyBranchRenamed_ATTRIBUTE_VALUE_XHTML_1(mapOrigCopy map[any]any, renamed_attribute_value_xhtml_1From *Renamed_ATTRIBUTE_VALUE_XHTML_1) (renamed_attribute_value_xhtml_1To *Renamed_ATTRIBUTE_VALUE_XHTML_1) {
+
+	// renamed_attribute_value_xhtml_1From has already been copied
+	if _renamed_attribute_value_xhtml_1To, ok := mapOrigCopy[renamed_attribute_value_xhtml_1From]; ok {
+		renamed_attribute_value_xhtml_1To = _renamed_attribute_value_xhtml_1To.(*Renamed_ATTRIBUTE_VALUE_XHTML_1)
+		return
+	}
+
+	renamed_attribute_value_xhtml_1To = new(Renamed_ATTRIBUTE_VALUE_XHTML_1)
+	mapOrigCopy[renamed_attribute_value_xhtml_1From] = renamed_attribute_value_xhtml_1To
+	renamed_attribute_value_xhtml_1From.CopyBasicFields(renamed_attribute_value_xhtml_1To)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _attribute_value_xhtml := range renamed_attribute_value_xhtml_1From.ATTRIBUTE_VALUE_XHTML {
+		renamed_attribute_value_xhtml_1To.ATTRIBUTE_VALUE_XHTML = append(renamed_attribute_value_xhtml_1To.ATTRIBUTE_VALUE_XHTML, CopyBranchATTRIBUTE_VALUE_XHTML(mapOrigCopy, _attribute_value_xhtml))
+	}
+
+	return
+}
+
+func CopyBranchRenamed_DATATYPE_DEFINITION_BOOLEAN_REF_1(mapOrigCopy map[any]any, renamed_datatype_definition_boolean_ref_1From *Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1) (renamed_datatype_definition_boolean_ref_1To *Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1) {
+
+	// renamed_datatype_definition_boolean_ref_1From has already been copied
+	if _renamed_datatype_definition_boolean_ref_1To, ok := mapOrigCopy[renamed_datatype_definition_boolean_ref_1From]; ok {
+		renamed_datatype_definition_boolean_ref_1To = _renamed_datatype_definition_boolean_ref_1To.(*Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1)
+		return
+	}
+
+	renamed_datatype_definition_boolean_ref_1To = new(Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1)
+	mapOrigCopy[renamed_datatype_definition_boolean_ref_1From] = renamed_datatype_definition_boolean_ref_1To
+	renamed_datatype_definition_boolean_ref_1From.CopyBasicFields(renamed_datatype_definition_boolean_ref_1To)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+	return
+}
+
+func CopyBranchRenamed_DATATYPE_DEFINITION_DATE_REF_1(mapOrigCopy map[any]any, renamed_datatype_definition_date_ref_1From *Renamed_DATATYPE_DEFINITION_DATE_REF_1) (renamed_datatype_definition_date_ref_1To *Renamed_DATATYPE_DEFINITION_DATE_REF_1) {
+
+	// renamed_datatype_definition_date_ref_1From has already been copied
+	if _renamed_datatype_definition_date_ref_1To, ok := mapOrigCopy[renamed_datatype_definition_date_ref_1From]; ok {
+		renamed_datatype_definition_date_ref_1To = _renamed_datatype_definition_date_ref_1To.(*Renamed_DATATYPE_DEFINITION_DATE_REF_1)
+		return
+	}
+
+	renamed_datatype_definition_date_ref_1To = new(Renamed_DATATYPE_DEFINITION_DATE_REF_1)
+	mapOrigCopy[renamed_datatype_definition_date_ref_1From] = renamed_datatype_definition_date_ref_1To
+	renamed_datatype_definition_date_ref_1From.CopyBasicFields(renamed_datatype_definition_date_ref_1To)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+	return
+}
+
+func CopyBranchRenamed_DATATYPE_DEFINITION_ENUMERATION_REF_1(mapOrigCopy map[any]any, renamed_datatype_definition_enumeration_ref_1From *Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1) (renamed_datatype_definition_enumeration_ref_1To *Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1) {
+
+	// renamed_datatype_definition_enumeration_ref_1From has already been copied
+	if _renamed_datatype_definition_enumeration_ref_1To, ok := mapOrigCopy[renamed_datatype_definition_enumeration_ref_1From]; ok {
+		renamed_datatype_definition_enumeration_ref_1To = _renamed_datatype_definition_enumeration_ref_1To.(*Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1)
+		return
+	}
+
+	renamed_datatype_definition_enumeration_ref_1To = new(Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1)
+	mapOrigCopy[renamed_datatype_definition_enumeration_ref_1From] = renamed_datatype_definition_enumeration_ref_1To
+	renamed_datatype_definition_enumeration_ref_1From.CopyBasicFields(renamed_datatype_definition_enumeration_ref_1To)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+	return
+}
+
+func CopyBranchRenamed_DATATYPE_DEFINITION_INTEGER_REF_1(mapOrigCopy map[any]any, renamed_datatype_definition_integer_ref_1From *Renamed_DATATYPE_DEFINITION_INTEGER_REF_1) (renamed_datatype_definition_integer_ref_1To *Renamed_DATATYPE_DEFINITION_INTEGER_REF_1) {
+
+	// renamed_datatype_definition_integer_ref_1From has already been copied
+	if _renamed_datatype_definition_integer_ref_1To, ok := mapOrigCopy[renamed_datatype_definition_integer_ref_1From]; ok {
+		renamed_datatype_definition_integer_ref_1To = _renamed_datatype_definition_integer_ref_1To.(*Renamed_DATATYPE_DEFINITION_INTEGER_REF_1)
+		return
+	}
+
+	renamed_datatype_definition_integer_ref_1To = new(Renamed_DATATYPE_DEFINITION_INTEGER_REF_1)
+	mapOrigCopy[renamed_datatype_definition_integer_ref_1From] = renamed_datatype_definition_integer_ref_1To
+	renamed_datatype_definition_integer_ref_1From.CopyBasicFields(renamed_datatype_definition_integer_ref_1To)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+	return
+}
+
+func CopyBranchRenamed_DATATYPE_DEFINITION_REAL_REF_1(mapOrigCopy map[any]any, renamed_datatype_definition_real_ref_1From *Renamed_DATATYPE_DEFINITION_REAL_REF_1) (renamed_datatype_definition_real_ref_1To *Renamed_DATATYPE_DEFINITION_REAL_REF_1) {
+
+	// renamed_datatype_definition_real_ref_1From has already been copied
+	if _renamed_datatype_definition_real_ref_1To, ok := mapOrigCopy[renamed_datatype_definition_real_ref_1From]; ok {
+		renamed_datatype_definition_real_ref_1To = _renamed_datatype_definition_real_ref_1To.(*Renamed_DATATYPE_DEFINITION_REAL_REF_1)
+		return
+	}
+
+	renamed_datatype_definition_real_ref_1To = new(Renamed_DATATYPE_DEFINITION_REAL_REF_1)
+	mapOrigCopy[renamed_datatype_definition_real_ref_1From] = renamed_datatype_definition_real_ref_1To
+	renamed_datatype_definition_real_ref_1From.CopyBasicFields(renamed_datatype_definition_real_ref_1To)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+	return
+}
+
+func CopyBranchRenamed_DATATYPE_DEFINITION_STRING_REF_1(mapOrigCopy map[any]any, renamed_datatype_definition_string_ref_1From *Renamed_DATATYPE_DEFINITION_STRING_REF_1) (renamed_datatype_definition_string_ref_1To *Renamed_DATATYPE_DEFINITION_STRING_REF_1) {
+
+	// renamed_datatype_definition_string_ref_1From has already been copied
+	if _renamed_datatype_definition_string_ref_1To, ok := mapOrigCopy[renamed_datatype_definition_string_ref_1From]; ok {
+		renamed_datatype_definition_string_ref_1To = _renamed_datatype_definition_string_ref_1To.(*Renamed_DATATYPE_DEFINITION_STRING_REF_1)
+		return
+	}
+
+	renamed_datatype_definition_string_ref_1To = new(Renamed_DATATYPE_DEFINITION_STRING_REF_1)
+	mapOrigCopy[renamed_datatype_definition_string_ref_1From] = renamed_datatype_definition_string_ref_1To
+	renamed_datatype_definition_string_ref_1From.CopyBasicFields(renamed_datatype_definition_string_ref_1To)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+	return
+}
+
+func CopyBranchRenamed_DATATYPE_DEFINITION_XHTML_REF_1(mapOrigCopy map[any]any, renamed_datatype_definition_xhtml_ref_1From *Renamed_DATATYPE_DEFINITION_XHTML_REF_1) (renamed_datatype_definition_xhtml_ref_1To *Renamed_DATATYPE_DEFINITION_XHTML_REF_1) {
+
+	// renamed_datatype_definition_xhtml_ref_1From has already been copied
+	if _renamed_datatype_definition_xhtml_ref_1To, ok := mapOrigCopy[renamed_datatype_definition_xhtml_ref_1From]; ok {
+		renamed_datatype_definition_xhtml_ref_1To = _renamed_datatype_definition_xhtml_ref_1To.(*Renamed_DATATYPE_DEFINITION_XHTML_REF_1)
+		return
+	}
+
+	renamed_datatype_definition_xhtml_ref_1To = new(Renamed_DATATYPE_DEFINITION_XHTML_REF_1)
+	mapOrigCopy[renamed_datatype_definition_xhtml_ref_1From] = renamed_datatype_definition_xhtml_ref_1To
+	renamed_datatype_definition_xhtml_ref_1From.CopyBasicFields(renamed_datatype_definition_xhtml_ref_1To)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+	return
+}
+
+func CopyBranchRenamed_RELATION_GROUP_TYPE_REF_1(mapOrigCopy map[any]any, renamed_relation_group_type_ref_1From *Renamed_RELATION_GROUP_TYPE_REF_1) (renamed_relation_group_type_ref_1To *Renamed_RELATION_GROUP_TYPE_REF_1) {
+
+	// renamed_relation_group_type_ref_1From has already been copied
+	if _renamed_relation_group_type_ref_1To, ok := mapOrigCopy[renamed_relation_group_type_ref_1From]; ok {
+		renamed_relation_group_type_ref_1To = _renamed_relation_group_type_ref_1To.(*Renamed_RELATION_GROUP_TYPE_REF_1)
+		return
+	}
+
+	renamed_relation_group_type_ref_1To = new(Renamed_RELATION_GROUP_TYPE_REF_1)
+	mapOrigCopy[renamed_relation_group_type_ref_1From] = renamed_relation_group_type_ref_1To
+	renamed_relation_group_type_ref_1From.CopyBasicFields(renamed_relation_group_type_ref_1To)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+	return
+}
+
+func CopyBranchRenamed_SPECIFICATION_TYPE_REF_1(mapOrigCopy map[any]any, renamed_specification_type_ref_1From *Renamed_SPECIFICATION_TYPE_REF_1) (renamed_specification_type_ref_1To *Renamed_SPECIFICATION_TYPE_REF_1) {
+
+	// renamed_specification_type_ref_1From has already been copied
+	if _renamed_specification_type_ref_1To, ok := mapOrigCopy[renamed_specification_type_ref_1From]; ok {
+		renamed_specification_type_ref_1To = _renamed_specification_type_ref_1To.(*Renamed_SPECIFICATION_TYPE_REF_1)
+		return
+	}
+
+	renamed_specification_type_ref_1To = new(Renamed_SPECIFICATION_TYPE_REF_1)
+	mapOrigCopy[renamed_specification_type_ref_1From] = renamed_specification_type_ref_1To
+	renamed_specification_type_ref_1From.CopyBasicFields(renamed_specification_type_ref_1To)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+	return
+}
+
+func CopyBranchRenamed_SPEC_OBJECT_TYPE_REF_1(mapOrigCopy map[any]any, renamed_spec_object_type_ref_1From *Renamed_SPEC_OBJECT_TYPE_REF_1) (renamed_spec_object_type_ref_1To *Renamed_SPEC_OBJECT_TYPE_REF_1) {
+
+	// renamed_spec_object_type_ref_1From has already been copied
+	if _renamed_spec_object_type_ref_1To, ok := mapOrigCopy[renamed_spec_object_type_ref_1From]; ok {
+		renamed_spec_object_type_ref_1To = _renamed_spec_object_type_ref_1To.(*Renamed_SPEC_OBJECT_TYPE_REF_1)
+		return
+	}
+
+	renamed_spec_object_type_ref_1To = new(Renamed_SPEC_OBJECT_TYPE_REF_1)
+	mapOrigCopy[renamed_spec_object_type_ref_1From] = renamed_spec_object_type_ref_1To
+	renamed_spec_object_type_ref_1From.CopyBasicFields(renamed_spec_object_type_ref_1To)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+	return
+}
+
+func CopyBranchRenamed_SPEC_RELATION_TYPE_REF_1(mapOrigCopy map[any]any, renamed_spec_relation_type_ref_1From *Renamed_SPEC_RELATION_TYPE_REF_1) (renamed_spec_relation_type_ref_1To *Renamed_SPEC_RELATION_TYPE_REF_1) {
+
+	// renamed_spec_relation_type_ref_1From has already been copied
+	if _renamed_spec_relation_type_ref_1To, ok := mapOrigCopy[renamed_spec_relation_type_ref_1From]; ok {
+		renamed_spec_relation_type_ref_1To = _renamed_spec_relation_type_ref_1To.(*Renamed_SPEC_RELATION_TYPE_REF_1)
+		return
+	}
+
+	renamed_spec_relation_type_ref_1To = new(Renamed_SPEC_RELATION_TYPE_REF_1)
+	mapOrigCopy[renamed_spec_relation_type_ref_1From] = renamed_spec_relation_type_ref_1To
+	renamed_spec_relation_type_ref_1From.CopyBasicFields(renamed_spec_relation_type_ref_1To)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+	return
+}
+
 func CopyBranchSPECIFICATION(mapOrigCopy map[any]any, specificationFrom *SPECIFICATION) (specificationTo *SPECIFICATION) {
 
 	// specificationFrom has already been copied
@@ -4857,8 +4857,8 @@ func CopyBranchSPECIFICATION(mapOrigCopy map[any]any, specificationFrom *SPECIFI
 	for _, _a_values_1 := range specificationFrom.VALUES {
 		specificationTo.VALUES = append(specificationTo.VALUES, CopyBranchA_VALUES_1(mapOrigCopy, _a_values_1))
 	}
-	for _, _a_type_10 := range specificationFrom.TYPE {
-		specificationTo.TYPE = append(specificationTo.TYPE, CopyBranchA_TYPE_10(mapOrigCopy, _a_type_10))
+	for _, _renamed_specification_type_ref_1 := range specificationFrom.TYPE {
+		specificationTo.TYPE = append(specificationTo.TYPE, CopyBranchRenamed_SPECIFICATION_TYPE_REF_1(mapOrigCopy, _renamed_specification_type_ref_1))
 	}
 
 	return
@@ -4941,8 +4941,8 @@ func CopyBranchSPEC_OBJECT(mapOrigCopy map[any]any, spec_objectFrom *SPEC_OBJECT
 	for _, _a_values_1 := range spec_objectFrom.VALUES {
 		spec_objectTo.VALUES = append(spec_objectTo.VALUES, CopyBranchA_VALUES_1(mapOrigCopy, _a_values_1))
 	}
-	for _, _a_type_2 := range spec_objectFrom.TYPE {
-		spec_objectTo.TYPE = append(spec_objectTo.TYPE, CopyBranchA_TYPE_2(mapOrigCopy, _a_type_2))
+	for _, _renamed_spec_object_type_ref_1 := range spec_objectFrom.TYPE {
+		spec_objectTo.TYPE = append(spec_objectTo.TYPE, CopyBranchRenamed_SPEC_OBJECT_TYPE_REF_1(mapOrigCopy, _renamed_spec_object_type_ref_1))
 	}
 
 	return
@@ -4997,8 +4997,8 @@ func CopyBranchSPEC_RELATION(mapOrigCopy map[any]any, spec_relationFrom *SPEC_RE
 	for _, _a_source := range spec_relationFrom.SOURCE {
 		spec_relationTo.SOURCE = append(spec_relationTo.SOURCE, CopyBranchA_SOURCE(mapOrigCopy, _a_source))
 	}
-	for _, _a_type_4 := range spec_relationFrom.TYPE {
-		spec_relationTo.TYPE = append(spec_relationTo.TYPE, CopyBranchA_TYPE_4(mapOrigCopy, _a_type_4))
+	for _, _renamed_spec_relation_type_ref_1 := range spec_relationFrom.TYPE {
+		spec_relationTo.TYPE = append(spec_relationTo.TYPE, CopyBranchRenamed_SPEC_RELATION_TYPE_REF_1(mapOrigCopy, _renamed_spec_relation_type_ref_1))
 	}
 
 	return
@@ -5113,48 +5113,6 @@ func UnstageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 	case *A_DATATYPES:
 		stage.UnstageBranchA_DATATYPES(target)
 
-	case *A_DEFAULT_VALUE:
-		stage.UnstageBranchA_DEFAULT_VALUE(target)
-
-	case *A_DEFAULT_VALUE_1:
-		stage.UnstageBranchA_DEFAULT_VALUE_1(target)
-
-	case *A_DEFAULT_VALUE_2:
-		stage.UnstageBranchA_DEFAULT_VALUE_2(target)
-
-	case *A_DEFAULT_VALUE_3:
-		stage.UnstageBranchA_DEFAULT_VALUE_3(target)
-
-	case *A_DEFAULT_VALUE_4:
-		stage.UnstageBranchA_DEFAULT_VALUE_4(target)
-
-	case *A_DEFAULT_VALUE_5:
-		stage.UnstageBranchA_DEFAULT_VALUE_5(target)
-
-	case *A_DEFAULT_VALUE_6:
-		stage.UnstageBranchA_DEFAULT_VALUE_6(target)
-
-	case *A_DEFINITION:
-		stage.UnstageBranchA_DEFINITION(target)
-
-	case *A_DEFINITION_1:
-		stage.UnstageBranchA_DEFINITION_1(target)
-
-	case *A_DEFINITION_2:
-		stage.UnstageBranchA_DEFINITION_2(target)
-
-	case *A_DEFINITION_3:
-		stage.UnstageBranchA_DEFINITION_3(target)
-
-	case *A_DEFINITION_4:
-		stage.UnstageBranchA_DEFINITION_4(target)
-
-	case *A_DEFINITION_5:
-		stage.UnstageBranchA_DEFINITION_5(target)
-
-	case *A_DEFINITION_6:
-		stage.UnstageBranchA_DEFINITION_6(target)
-
 	case *A_EDITABLE_ATTS:
 		stage.UnstageBranchA_EDITABLE_ATTS(target)
 
@@ -5199,39 +5157,6 @@ func UnstageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 
 	case *A_TOOL_EXTENSIONS:
 		stage.UnstageBranchA_TOOL_EXTENSIONS(target)
-
-	case *A_TYPE:
-		stage.UnstageBranchA_TYPE(target)
-
-	case *A_TYPE_1:
-		stage.UnstageBranchA_TYPE_1(target)
-
-	case *A_TYPE_10:
-		stage.UnstageBranchA_TYPE_10(target)
-
-	case *A_TYPE_2:
-		stage.UnstageBranchA_TYPE_2(target)
-
-	case *A_TYPE_3:
-		stage.UnstageBranchA_TYPE_3(target)
-
-	case *A_TYPE_4:
-		stage.UnstageBranchA_TYPE_4(target)
-
-	case *A_TYPE_5:
-		stage.UnstageBranchA_TYPE_5(target)
-
-	case *A_TYPE_6:
-		stage.UnstageBranchA_TYPE_6(target)
-
-	case *A_TYPE_7:
-		stage.UnstageBranchA_TYPE_7(target)
-
-	case *A_TYPE_8:
-		stage.UnstageBranchA_TYPE_8(target)
-
-	case *A_TYPE_9:
-		stage.UnstageBranchA_TYPE_9(target)
 
 	case *A_VALUES:
 		stage.UnstageBranchA_VALUES(target)
@@ -5283,6 +5208,81 @@ func UnstageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 
 	case *REQ_IF_TOOL_EXTENSION:
 		stage.UnstageBranchREQ_IF_TOOL_EXTENSION(target)
+
+	case *Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1:
+		stage.UnstageBranchRenamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1(target)
+
+	case *Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1:
+		stage.UnstageBranchRenamed_ATTRIBUTE_DEFINITION_DATE_REF_1(target)
+
+	case *Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1:
+		stage.UnstageBranchRenamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1(target)
+
+	case *Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1:
+		stage.UnstageBranchRenamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1(target)
+
+	case *Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1:
+		stage.UnstageBranchRenamed_ATTRIBUTE_DEFINITION_REAL_REF_1(target)
+
+	case *Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1:
+		stage.UnstageBranchRenamed_ATTRIBUTE_DEFINITION_STRING_REF_1(target)
+
+	case *Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1:
+		stage.UnstageBranchRenamed_ATTRIBUTE_DEFINITION_XHTML_REF_1(target)
+
+	case *Renamed_ATTRIBUTE_VALUE_BOOLEAN_1:
+		stage.UnstageBranchRenamed_ATTRIBUTE_VALUE_BOOLEAN_1(target)
+
+	case *Renamed_ATTRIBUTE_VALUE_DATE_1:
+		stage.UnstageBranchRenamed_ATTRIBUTE_VALUE_DATE_1(target)
+
+	case *Renamed_ATTRIBUTE_VALUE_ENUMERATION_1:
+		stage.UnstageBranchRenamed_ATTRIBUTE_VALUE_ENUMERATION_1(target)
+
+	case *Renamed_ATTRIBUTE_VALUE_INTEGER_1:
+		stage.UnstageBranchRenamed_ATTRIBUTE_VALUE_INTEGER_1(target)
+
+	case *Renamed_ATTRIBUTE_VALUE_REAL_1:
+		stage.UnstageBranchRenamed_ATTRIBUTE_VALUE_REAL_1(target)
+
+	case *Renamed_ATTRIBUTE_VALUE_STRING_1:
+		stage.UnstageBranchRenamed_ATTRIBUTE_VALUE_STRING_1(target)
+
+	case *Renamed_ATTRIBUTE_VALUE_XHTML_1:
+		stage.UnstageBranchRenamed_ATTRIBUTE_VALUE_XHTML_1(target)
+
+	case *Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1:
+		stage.UnstageBranchRenamed_DATATYPE_DEFINITION_BOOLEAN_REF_1(target)
+
+	case *Renamed_DATATYPE_DEFINITION_DATE_REF_1:
+		stage.UnstageBranchRenamed_DATATYPE_DEFINITION_DATE_REF_1(target)
+
+	case *Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1:
+		stage.UnstageBranchRenamed_DATATYPE_DEFINITION_ENUMERATION_REF_1(target)
+
+	case *Renamed_DATATYPE_DEFINITION_INTEGER_REF_1:
+		stage.UnstageBranchRenamed_DATATYPE_DEFINITION_INTEGER_REF_1(target)
+
+	case *Renamed_DATATYPE_DEFINITION_REAL_REF_1:
+		stage.UnstageBranchRenamed_DATATYPE_DEFINITION_REAL_REF_1(target)
+
+	case *Renamed_DATATYPE_DEFINITION_STRING_REF_1:
+		stage.UnstageBranchRenamed_DATATYPE_DEFINITION_STRING_REF_1(target)
+
+	case *Renamed_DATATYPE_DEFINITION_XHTML_REF_1:
+		stage.UnstageBranchRenamed_DATATYPE_DEFINITION_XHTML_REF_1(target)
+
+	case *Renamed_RELATION_GROUP_TYPE_REF_1:
+		stage.UnstageBranchRenamed_RELATION_GROUP_TYPE_REF_1(target)
+
+	case *Renamed_SPECIFICATION_TYPE_REF_1:
+		stage.UnstageBranchRenamed_SPECIFICATION_TYPE_REF_1(target)
+
+	case *Renamed_SPEC_OBJECT_TYPE_REF_1:
+		stage.UnstageBranchRenamed_SPEC_OBJECT_TYPE_REF_1(target)
+
+	case *Renamed_SPEC_RELATION_TYPE_REF_1:
+		stage.UnstageBranchRenamed_SPEC_RELATION_TYPE_REF_1(target)
 
 	case *SPECIFICATION:
 		stage.UnstageBranchSPECIFICATION(target)
@@ -5344,11 +5344,11 @@ func (stage *StageStruct) UnstageBranchATTRIBUTE_DEFINITION_BOOLEAN(attribute_de
 	for _, _a_alternative_id := range attribute_definition_boolean.ALTERNATIVE_ID {
 		UnstageBranch(stage, _a_alternative_id)
 	}
-	for _, _a_default_value_1 := range attribute_definition_boolean.DEFAULT_VALUE {
-		UnstageBranch(stage, _a_default_value_1)
+	for _, _renamed_attribute_value_boolean_1 := range attribute_definition_boolean.DEFAULT_VALUE {
+		UnstageBranch(stage, _renamed_attribute_value_boolean_1)
 	}
-	for _, _a_type_7 := range attribute_definition_boolean.TYPE {
-		UnstageBranch(stage, _a_type_7)
+	for _, _renamed_datatype_definition_boolean_ref_1 := range attribute_definition_boolean.TYPE {
+		UnstageBranch(stage, _renamed_datatype_definition_boolean_ref_1)
 	}
 
 }
@@ -5368,11 +5368,11 @@ func (stage *StageStruct) UnstageBranchATTRIBUTE_DEFINITION_DATE(attribute_defin
 	for _, _a_alternative_id := range attribute_definition_date.ALTERNATIVE_ID {
 		UnstageBranch(stage, _a_alternative_id)
 	}
-	for _, _a_default_value_3 := range attribute_definition_date.DEFAULT_VALUE {
-		UnstageBranch(stage, _a_default_value_3)
+	for _, _renamed_attribute_value_date_1 := range attribute_definition_date.DEFAULT_VALUE {
+		UnstageBranch(stage, _renamed_attribute_value_date_1)
 	}
-	for _, _a_type := range attribute_definition_date.TYPE {
-		UnstageBranch(stage, _a_type)
+	for _, _renamed_datatype_definition_date_ref_1 := range attribute_definition_date.TYPE {
+		UnstageBranch(stage, _renamed_datatype_definition_date_ref_1)
 	}
 
 }
@@ -5392,11 +5392,11 @@ func (stage *StageStruct) UnstageBranchATTRIBUTE_DEFINITION_ENUMERATION(attribut
 	for _, _a_alternative_id := range attribute_definition_enumeration.ALTERNATIVE_ID {
 		UnstageBranch(stage, _a_alternative_id)
 	}
-	for _, _a_default_value_5 := range attribute_definition_enumeration.DEFAULT_VALUE {
-		UnstageBranch(stage, _a_default_value_5)
+	for _, _renamed_attribute_value_enumeration_1 := range attribute_definition_enumeration.DEFAULT_VALUE {
+		UnstageBranch(stage, _renamed_attribute_value_enumeration_1)
 	}
-	for _, _a_type_9 := range attribute_definition_enumeration.TYPE {
-		UnstageBranch(stage, _a_type_9)
+	for _, _renamed_datatype_definition_enumeration_ref_1 := range attribute_definition_enumeration.TYPE {
+		UnstageBranch(stage, _renamed_datatype_definition_enumeration_ref_1)
 	}
 
 }
@@ -5416,11 +5416,11 @@ func (stage *StageStruct) UnstageBranchATTRIBUTE_DEFINITION_INTEGER(attribute_de
 	for _, _a_alternative_id := range attribute_definition_integer.ALTERNATIVE_ID {
 		UnstageBranch(stage, _a_alternative_id)
 	}
-	for _, _a_default_value_6 := range attribute_definition_integer.DEFAULT_VALUE {
-		UnstageBranch(stage, _a_default_value_6)
+	for _, _renamed_attribute_value_integer_1 := range attribute_definition_integer.DEFAULT_VALUE {
+		UnstageBranch(stage, _renamed_attribute_value_integer_1)
 	}
-	for _, _a_type_5 := range attribute_definition_integer.TYPE {
-		UnstageBranch(stage, _a_type_5)
+	for _, _renamed_datatype_definition_integer_ref_1 := range attribute_definition_integer.TYPE {
+		UnstageBranch(stage, _renamed_datatype_definition_integer_ref_1)
 	}
 
 }
@@ -5440,11 +5440,11 @@ func (stage *StageStruct) UnstageBranchATTRIBUTE_DEFINITION_REAL(attribute_defin
 	for _, _a_alternative_id := range attribute_definition_real.ALTERNATIVE_ID {
 		UnstageBranch(stage, _a_alternative_id)
 	}
-	for _, _a_default_value_4 := range attribute_definition_real.DEFAULT_VALUE {
-		UnstageBranch(stage, _a_default_value_4)
+	for _, _renamed_attribute_value_real_1 := range attribute_definition_real.DEFAULT_VALUE {
+		UnstageBranch(stage, _renamed_attribute_value_real_1)
 	}
-	for _, _a_type_3 := range attribute_definition_real.TYPE {
-		UnstageBranch(stage, _a_type_3)
+	for _, _renamed_datatype_definition_real_ref_1 := range attribute_definition_real.TYPE {
+		UnstageBranch(stage, _renamed_datatype_definition_real_ref_1)
 	}
 
 }
@@ -5464,11 +5464,11 @@ func (stage *StageStruct) UnstageBranchATTRIBUTE_DEFINITION_STRING(attribute_def
 	for _, _a_alternative_id := range attribute_definition_string.ALTERNATIVE_ID {
 		UnstageBranch(stage, _a_alternative_id)
 	}
-	for _, _a_default_value := range attribute_definition_string.DEFAULT_VALUE {
-		UnstageBranch(stage, _a_default_value)
+	for _, _renamed_attribute_value_string_1 := range attribute_definition_string.DEFAULT_VALUE {
+		UnstageBranch(stage, _renamed_attribute_value_string_1)
 	}
-	for _, _a_type_8 := range attribute_definition_string.TYPE {
-		UnstageBranch(stage, _a_type_8)
+	for _, _renamed_datatype_definition_string_ref_1 := range attribute_definition_string.TYPE {
+		UnstageBranch(stage, _renamed_datatype_definition_string_ref_1)
 	}
 
 }
@@ -5488,11 +5488,11 @@ func (stage *StageStruct) UnstageBranchATTRIBUTE_DEFINITION_XHTML(attribute_defi
 	for _, _a_alternative_id := range attribute_definition_xhtml.ALTERNATIVE_ID {
 		UnstageBranch(stage, _a_alternative_id)
 	}
-	for _, _a_default_value_2 := range attribute_definition_xhtml.DEFAULT_VALUE {
-		UnstageBranch(stage, _a_default_value_2)
+	for _, _renamed_attribute_value_xhtml_1 := range attribute_definition_xhtml.DEFAULT_VALUE {
+		UnstageBranch(stage, _renamed_attribute_value_xhtml_1)
 	}
-	for _, _a_type_6 := range attribute_definition_xhtml.TYPE {
-		UnstageBranch(stage, _a_type_6)
+	for _, _renamed_datatype_definition_xhtml_ref_1 := range attribute_definition_xhtml.TYPE {
+		UnstageBranch(stage, _renamed_datatype_definition_xhtml_ref_1)
 	}
 
 }
@@ -5509,8 +5509,8 @@ func (stage *StageStruct) UnstageBranchATTRIBUTE_VALUE_BOOLEAN(attribute_value_b
 	//insertion point for the staging of instances referenced by pointers
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_definition_4 := range attribute_value_boolean.DEFINITION {
-		UnstageBranch(stage, _a_definition_4)
+	for _, _renamed_attribute_definition_boolean_ref_1 := range attribute_value_boolean.DEFINITION {
+		UnstageBranch(stage, _renamed_attribute_definition_boolean_ref_1)
 	}
 
 }
@@ -5527,8 +5527,8 @@ func (stage *StageStruct) UnstageBranchATTRIBUTE_VALUE_DATE(attribute_value_date
 	//insertion point for the staging of instances referenced by pointers
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_definition_2 := range attribute_value_date.DEFINITION {
-		UnstageBranch(stage, _a_definition_2)
+	for _, _renamed_attribute_definition_date_ref_1 := range attribute_value_date.DEFINITION {
+		UnstageBranch(stage, _renamed_attribute_definition_date_ref_1)
 	}
 
 }
@@ -5545,8 +5545,8 @@ func (stage *StageStruct) UnstageBranchATTRIBUTE_VALUE_ENUMERATION(attribute_val
 	//insertion point for the staging of instances referenced by pointers
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_definition_5 := range attribute_value_enumeration.DEFINITION {
-		UnstageBranch(stage, _a_definition_5)
+	for _, _renamed_attribute_definition_enumeration_ref_1 := range attribute_value_enumeration.DEFINITION {
+		UnstageBranch(stage, _renamed_attribute_definition_enumeration_ref_1)
 	}
 	for _, _a_values := range attribute_value_enumeration.VALUES {
 		UnstageBranch(stage, _a_values)
@@ -5566,8 +5566,8 @@ func (stage *StageStruct) UnstageBranchATTRIBUTE_VALUE_INTEGER(attribute_value_i
 	//insertion point for the staging of instances referenced by pointers
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_definition := range attribute_value_integer.DEFINITION {
-		UnstageBranch(stage, _a_definition)
+	for _, _renamed_attribute_definition_integer_ref_1 := range attribute_value_integer.DEFINITION {
+		UnstageBranch(stage, _renamed_attribute_definition_integer_ref_1)
 	}
 
 }
@@ -5584,8 +5584,8 @@ func (stage *StageStruct) UnstageBranchATTRIBUTE_VALUE_REAL(attribute_value_real
 	//insertion point for the staging of instances referenced by pointers
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_definition_6 := range attribute_value_real.DEFINITION {
-		UnstageBranch(stage, _a_definition_6)
+	for _, _renamed_attribute_definition_real_ref_1 := range attribute_value_real.DEFINITION {
+		UnstageBranch(stage, _renamed_attribute_definition_real_ref_1)
 	}
 
 }
@@ -5602,8 +5602,8 @@ func (stage *StageStruct) UnstageBranchATTRIBUTE_VALUE_STRING(attribute_value_st
 	//insertion point for the staging of instances referenced by pointers
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_definition_3 := range attribute_value_string.DEFINITION {
-		UnstageBranch(stage, _a_definition_3)
+	for _, _renamed_attribute_definition_string_ref_1 := range attribute_value_string.DEFINITION {
+		UnstageBranch(stage, _renamed_attribute_definition_string_ref_1)
 	}
 
 }
@@ -5626,8 +5626,8 @@ func (stage *StageStruct) UnstageBranchATTRIBUTE_VALUE_XHTML(attribute_value_xht
 	for _, _xhtml_content := range attribute_value_xhtml.THE_ORIGINAL_VALUE {
 		UnstageBranch(stage, _xhtml_content)
 	}
-	for _, _a_definition_1 := range attribute_value_xhtml.DEFINITION {
-		UnstageBranch(stage, _a_definition_1)
+	for _, _renamed_attribute_definition_xhtml_ref_1 := range attribute_value_xhtml.DEFINITION {
+		UnstageBranch(stage, _renamed_attribute_definition_xhtml_ref_1)
 	}
 
 }
@@ -5719,237 +5719,6 @@ func (stage *StageStruct) UnstageBranchA_DATATYPES(a_datatypes *A_DATATYPES) {
 	for _, _datatype_definition_xhtml := range a_datatypes.DATATYPE_DEFINITION_XHTML {
 		UnstageBranch(stage, _datatype_definition_xhtml)
 	}
-
-}
-
-func (stage *StageStruct) UnstageBranchA_DEFAULT_VALUE(a_default_value *A_DEFAULT_VALUE) {
-
-	// check if instance is already staged
-	if !IsStaged(stage, a_default_value) {
-		return
-	}
-
-	a_default_value.Unstage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _attribute_value_string := range a_default_value.ATTRIBUTE_VALUE_STRING {
-		UnstageBranch(stage, _attribute_value_string)
-	}
-
-}
-
-func (stage *StageStruct) UnstageBranchA_DEFAULT_VALUE_1(a_default_value_1 *A_DEFAULT_VALUE_1) {
-
-	// check if instance is already staged
-	if !IsStaged(stage, a_default_value_1) {
-		return
-	}
-
-	a_default_value_1.Unstage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _attribute_value_boolean := range a_default_value_1.ATTRIBUTE_VALUE_BOOLEAN {
-		UnstageBranch(stage, _attribute_value_boolean)
-	}
-
-}
-
-func (stage *StageStruct) UnstageBranchA_DEFAULT_VALUE_2(a_default_value_2 *A_DEFAULT_VALUE_2) {
-
-	// check if instance is already staged
-	if !IsStaged(stage, a_default_value_2) {
-		return
-	}
-
-	a_default_value_2.Unstage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _attribute_value_xhtml := range a_default_value_2.ATTRIBUTE_VALUE_XHTML {
-		UnstageBranch(stage, _attribute_value_xhtml)
-	}
-
-}
-
-func (stage *StageStruct) UnstageBranchA_DEFAULT_VALUE_3(a_default_value_3 *A_DEFAULT_VALUE_3) {
-
-	// check if instance is already staged
-	if !IsStaged(stage, a_default_value_3) {
-		return
-	}
-
-	a_default_value_3.Unstage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _attribute_value_date := range a_default_value_3.ATTRIBUTE_VALUE_DATE {
-		UnstageBranch(stage, _attribute_value_date)
-	}
-
-}
-
-func (stage *StageStruct) UnstageBranchA_DEFAULT_VALUE_4(a_default_value_4 *A_DEFAULT_VALUE_4) {
-
-	// check if instance is already staged
-	if !IsStaged(stage, a_default_value_4) {
-		return
-	}
-
-	a_default_value_4.Unstage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _attribute_value_real := range a_default_value_4.ATTRIBUTE_VALUE_REAL {
-		UnstageBranch(stage, _attribute_value_real)
-	}
-
-}
-
-func (stage *StageStruct) UnstageBranchA_DEFAULT_VALUE_5(a_default_value_5 *A_DEFAULT_VALUE_5) {
-
-	// check if instance is already staged
-	if !IsStaged(stage, a_default_value_5) {
-		return
-	}
-
-	a_default_value_5.Unstage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _attribute_value_enumeration := range a_default_value_5.ATTRIBUTE_VALUE_ENUMERATION {
-		UnstageBranch(stage, _attribute_value_enumeration)
-	}
-
-}
-
-func (stage *StageStruct) UnstageBranchA_DEFAULT_VALUE_6(a_default_value_6 *A_DEFAULT_VALUE_6) {
-
-	// check if instance is already staged
-	if !IsStaged(stage, a_default_value_6) {
-		return
-	}
-
-	a_default_value_6.Unstage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _attribute_value_integer := range a_default_value_6.ATTRIBUTE_VALUE_INTEGER {
-		UnstageBranch(stage, _attribute_value_integer)
-	}
-
-}
-
-func (stage *StageStruct) UnstageBranchA_DEFINITION(a_definition *A_DEFINITION) {
-
-	// check if instance is already staged
-	if !IsStaged(stage, a_definition) {
-		return
-	}
-
-	a_definition.Unstage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-}
-
-func (stage *StageStruct) UnstageBranchA_DEFINITION_1(a_definition_1 *A_DEFINITION_1) {
-
-	// check if instance is already staged
-	if !IsStaged(stage, a_definition_1) {
-		return
-	}
-
-	a_definition_1.Unstage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-}
-
-func (stage *StageStruct) UnstageBranchA_DEFINITION_2(a_definition_2 *A_DEFINITION_2) {
-
-	// check if instance is already staged
-	if !IsStaged(stage, a_definition_2) {
-		return
-	}
-
-	a_definition_2.Unstage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-}
-
-func (stage *StageStruct) UnstageBranchA_DEFINITION_3(a_definition_3 *A_DEFINITION_3) {
-
-	// check if instance is already staged
-	if !IsStaged(stage, a_definition_3) {
-		return
-	}
-
-	a_definition_3.Unstage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-}
-
-func (stage *StageStruct) UnstageBranchA_DEFINITION_4(a_definition_4 *A_DEFINITION_4) {
-
-	// check if instance is already staged
-	if !IsStaged(stage, a_definition_4) {
-		return
-	}
-
-	a_definition_4.Unstage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-}
-
-func (stage *StageStruct) UnstageBranchA_DEFINITION_5(a_definition_5 *A_DEFINITION_5) {
-
-	// check if instance is already staged
-	if !IsStaged(stage, a_definition_5) {
-		return
-	}
-
-	a_definition_5.Unstage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-}
-
-func (stage *StageStruct) UnstageBranchA_DEFINITION_6(a_definition_6 *A_DEFINITION_6) {
-
-	// check if instance is already staged
-	if !IsStaged(stage, a_definition_6) {
-		return
-	}
-
-	a_definition_6.Unstage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
 
 }
 
@@ -6133,6 +5902,9 @@ func (stage *StageStruct) UnstageBranchA_SPEC_RELATIONS(a_spec_relations *A_SPEC
 	//insertion point for the staging of instances referenced by pointers
 
 	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _spec_relation := range a_spec_relations.SPEC_RELATION {
+		UnstageBranch(stage, _spec_relation)
+	}
 
 }
 
@@ -6148,9 +5920,6 @@ func (stage *StageStruct) UnstageBranchA_SPEC_RELATIONS_1(a_spec_relations_1 *A_
 	//insertion point for the staging of instances referenced by pointers
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _spec_relation := range a_spec_relations_1.SPEC_RELATION {
-		UnstageBranch(stage, _spec_relation)
-	}
 
 }
 
@@ -6232,171 +6001,6 @@ func (stage *StageStruct) UnstageBranchA_TOOL_EXTENSIONS(a_tool_extensions *A_TO
 	for _, _req_if_tool_extension := range a_tool_extensions.REQ_IF_TOOL_EXTENSION {
 		UnstageBranch(stage, _req_if_tool_extension)
 	}
-
-}
-
-func (stage *StageStruct) UnstageBranchA_TYPE(a_type *A_TYPE) {
-
-	// check if instance is already staged
-	if !IsStaged(stage, a_type) {
-		return
-	}
-
-	a_type.Unstage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-}
-
-func (stage *StageStruct) UnstageBranchA_TYPE_1(a_type_1 *A_TYPE_1) {
-
-	// check if instance is already staged
-	if !IsStaged(stage, a_type_1) {
-		return
-	}
-
-	a_type_1.Unstage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-}
-
-func (stage *StageStruct) UnstageBranchA_TYPE_10(a_type_10 *A_TYPE_10) {
-
-	// check if instance is already staged
-	if !IsStaged(stage, a_type_10) {
-		return
-	}
-
-	a_type_10.Unstage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-}
-
-func (stage *StageStruct) UnstageBranchA_TYPE_2(a_type_2 *A_TYPE_2) {
-
-	// check if instance is already staged
-	if !IsStaged(stage, a_type_2) {
-		return
-	}
-
-	a_type_2.Unstage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-}
-
-func (stage *StageStruct) UnstageBranchA_TYPE_3(a_type_3 *A_TYPE_3) {
-
-	// check if instance is already staged
-	if !IsStaged(stage, a_type_3) {
-		return
-	}
-
-	a_type_3.Unstage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-}
-
-func (stage *StageStruct) UnstageBranchA_TYPE_4(a_type_4 *A_TYPE_4) {
-
-	// check if instance is already staged
-	if !IsStaged(stage, a_type_4) {
-		return
-	}
-
-	a_type_4.Unstage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-}
-
-func (stage *StageStruct) UnstageBranchA_TYPE_5(a_type_5 *A_TYPE_5) {
-
-	// check if instance is already staged
-	if !IsStaged(stage, a_type_5) {
-		return
-	}
-
-	a_type_5.Unstage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-}
-
-func (stage *StageStruct) UnstageBranchA_TYPE_6(a_type_6 *A_TYPE_6) {
-
-	// check if instance is already staged
-	if !IsStaged(stage, a_type_6) {
-		return
-	}
-
-	a_type_6.Unstage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-}
-
-func (stage *StageStruct) UnstageBranchA_TYPE_7(a_type_7 *A_TYPE_7) {
-
-	// check if instance is already staged
-	if !IsStaged(stage, a_type_7) {
-		return
-	}
-
-	a_type_7.Unstage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-}
-
-func (stage *StageStruct) UnstageBranchA_TYPE_8(a_type_8 *A_TYPE_8) {
-
-	// check if instance is already staged
-	if !IsStaged(stage, a_type_8) {
-		return
-	}
-
-	a_type_8.Unstage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-}
-
-func (stage *StageStruct) UnstageBranchA_TYPE_9(a_type_9 *A_TYPE_9) {
-
-	// check if instance is already staged
-	if !IsStaged(stage, a_type_9) {
-		return
-	}
-
-	a_type_9.Unstage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
 
 }
 
@@ -6634,11 +6238,11 @@ func (stage *StageStruct) UnstageBranchRELATION_GROUP(relation_group *RELATION_G
 	for _, _a_source_specification := range relation_group.SOURCE_SPECIFICATION {
 		UnstageBranch(stage, _a_source_specification)
 	}
-	for _, _a_spec_relations := range relation_group.SPEC_RELATIONS {
-		UnstageBranch(stage, _a_spec_relations)
+	for _, _a_spec_relations_1 := range relation_group.SPEC_RELATIONS {
+		UnstageBranch(stage, _a_spec_relations_1)
 	}
-	for _, _a_type_1 := range relation_group.TYPE {
-		UnstageBranch(stage, _a_type_1)
+	for _, _renamed_relation_group_type_ref_1 := range relation_group.TYPE {
+		UnstageBranch(stage, _renamed_relation_group_type_ref_1)
 	}
 
 }
@@ -6709,8 +6313,8 @@ func (stage *StageStruct) UnstageBranchREQ_IF_CONTENT(req_if_content *REQ_IF_CON
 	for _, _a_spec_objects := range req_if_content.SPEC_OBJECTS {
 		UnstageBranch(stage, _a_spec_objects)
 	}
-	for _, _a_spec_relations_1 := range req_if_content.SPEC_RELATIONS {
-		UnstageBranch(stage, _a_spec_relations_1)
+	for _, _a_spec_relations := range req_if_content.SPEC_RELATIONS {
+		UnstageBranch(stage, _a_spec_relations)
 	}
 	for _, _a_specifications := range req_if_content.SPECIFICATIONS {
 		UnstageBranch(stage, _a_specifications)
@@ -6751,6 +6355,402 @@ func (stage *StageStruct) UnstageBranchREQ_IF_TOOL_EXTENSION(req_if_tool_extensi
 
 }
 
+func (stage *StageStruct) UnstageBranchRenamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1(renamed_attribute_definition_boolean_ref_1 *Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, renamed_attribute_definition_boolean_ref_1) {
+		return
+	}
+
+	renamed_attribute_definition_boolean_ref_1.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) UnstageBranchRenamed_ATTRIBUTE_DEFINITION_DATE_REF_1(renamed_attribute_definition_date_ref_1 *Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, renamed_attribute_definition_date_ref_1) {
+		return
+	}
+
+	renamed_attribute_definition_date_ref_1.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) UnstageBranchRenamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1(renamed_attribute_definition_enumeration_ref_1 *Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, renamed_attribute_definition_enumeration_ref_1) {
+		return
+	}
+
+	renamed_attribute_definition_enumeration_ref_1.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) UnstageBranchRenamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1(renamed_attribute_definition_integer_ref_1 *Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, renamed_attribute_definition_integer_ref_1) {
+		return
+	}
+
+	renamed_attribute_definition_integer_ref_1.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) UnstageBranchRenamed_ATTRIBUTE_DEFINITION_REAL_REF_1(renamed_attribute_definition_real_ref_1 *Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, renamed_attribute_definition_real_ref_1) {
+		return
+	}
+
+	renamed_attribute_definition_real_ref_1.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) UnstageBranchRenamed_ATTRIBUTE_DEFINITION_STRING_REF_1(renamed_attribute_definition_string_ref_1 *Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, renamed_attribute_definition_string_ref_1) {
+		return
+	}
+
+	renamed_attribute_definition_string_ref_1.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) UnstageBranchRenamed_ATTRIBUTE_DEFINITION_XHTML_REF_1(renamed_attribute_definition_xhtml_ref_1 *Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, renamed_attribute_definition_xhtml_ref_1) {
+		return
+	}
+
+	renamed_attribute_definition_xhtml_ref_1.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) UnstageBranchRenamed_ATTRIBUTE_VALUE_BOOLEAN_1(renamed_attribute_value_boolean_1 *Renamed_ATTRIBUTE_VALUE_BOOLEAN_1) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, renamed_attribute_value_boolean_1) {
+		return
+	}
+
+	renamed_attribute_value_boolean_1.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _attribute_value_boolean := range renamed_attribute_value_boolean_1.ATTRIBUTE_VALUE_BOOLEAN {
+		UnstageBranch(stage, _attribute_value_boolean)
+	}
+
+}
+
+func (stage *StageStruct) UnstageBranchRenamed_ATTRIBUTE_VALUE_DATE_1(renamed_attribute_value_date_1 *Renamed_ATTRIBUTE_VALUE_DATE_1) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, renamed_attribute_value_date_1) {
+		return
+	}
+
+	renamed_attribute_value_date_1.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _attribute_value_date := range renamed_attribute_value_date_1.ATTRIBUTE_VALUE_DATE {
+		UnstageBranch(stage, _attribute_value_date)
+	}
+
+}
+
+func (stage *StageStruct) UnstageBranchRenamed_ATTRIBUTE_VALUE_ENUMERATION_1(renamed_attribute_value_enumeration_1 *Renamed_ATTRIBUTE_VALUE_ENUMERATION_1) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, renamed_attribute_value_enumeration_1) {
+		return
+	}
+
+	renamed_attribute_value_enumeration_1.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _attribute_value_enumeration := range renamed_attribute_value_enumeration_1.ATTRIBUTE_VALUE_ENUMERATION {
+		UnstageBranch(stage, _attribute_value_enumeration)
+	}
+
+}
+
+func (stage *StageStruct) UnstageBranchRenamed_ATTRIBUTE_VALUE_INTEGER_1(renamed_attribute_value_integer_1 *Renamed_ATTRIBUTE_VALUE_INTEGER_1) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, renamed_attribute_value_integer_1) {
+		return
+	}
+
+	renamed_attribute_value_integer_1.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _attribute_value_integer := range renamed_attribute_value_integer_1.ATTRIBUTE_VALUE_INTEGER {
+		UnstageBranch(stage, _attribute_value_integer)
+	}
+
+}
+
+func (stage *StageStruct) UnstageBranchRenamed_ATTRIBUTE_VALUE_REAL_1(renamed_attribute_value_real_1 *Renamed_ATTRIBUTE_VALUE_REAL_1) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, renamed_attribute_value_real_1) {
+		return
+	}
+
+	renamed_attribute_value_real_1.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _attribute_value_real := range renamed_attribute_value_real_1.ATTRIBUTE_VALUE_REAL {
+		UnstageBranch(stage, _attribute_value_real)
+	}
+
+}
+
+func (stage *StageStruct) UnstageBranchRenamed_ATTRIBUTE_VALUE_STRING_1(renamed_attribute_value_string_1 *Renamed_ATTRIBUTE_VALUE_STRING_1) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, renamed_attribute_value_string_1) {
+		return
+	}
+
+	renamed_attribute_value_string_1.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _attribute_value_string := range renamed_attribute_value_string_1.ATTRIBUTE_VALUE_STRING {
+		UnstageBranch(stage, _attribute_value_string)
+	}
+
+}
+
+func (stage *StageStruct) UnstageBranchRenamed_ATTRIBUTE_VALUE_XHTML_1(renamed_attribute_value_xhtml_1 *Renamed_ATTRIBUTE_VALUE_XHTML_1) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, renamed_attribute_value_xhtml_1) {
+		return
+	}
+
+	renamed_attribute_value_xhtml_1.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+	for _, _attribute_value_xhtml := range renamed_attribute_value_xhtml_1.ATTRIBUTE_VALUE_XHTML {
+		UnstageBranch(stage, _attribute_value_xhtml)
+	}
+
+}
+
+func (stage *StageStruct) UnstageBranchRenamed_DATATYPE_DEFINITION_BOOLEAN_REF_1(renamed_datatype_definition_boolean_ref_1 *Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, renamed_datatype_definition_boolean_ref_1) {
+		return
+	}
+
+	renamed_datatype_definition_boolean_ref_1.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) UnstageBranchRenamed_DATATYPE_DEFINITION_DATE_REF_1(renamed_datatype_definition_date_ref_1 *Renamed_DATATYPE_DEFINITION_DATE_REF_1) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, renamed_datatype_definition_date_ref_1) {
+		return
+	}
+
+	renamed_datatype_definition_date_ref_1.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) UnstageBranchRenamed_DATATYPE_DEFINITION_ENUMERATION_REF_1(renamed_datatype_definition_enumeration_ref_1 *Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, renamed_datatype_definition_enumeration_ref_1) {
+		return
+	}
+
+	renamed_datatype_definition_enumeration_ref_1.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) UnstageBranchRenamed_DATATYPE_DEFINITION_INTEGER_REF_1(renamed_datatype_definition_integer_ref_1 *Renamed_DATATYPE_DEFINITION_INTEGER_REF_1) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, renamed_datatype_definition_integer_ref_1) {
+		return
+	}
+
+	renamed_datatype_definition_integer_ref_1.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) UnstageBranchRenamed_DATATYPE_DEFINITION_REAL_REF_1(renamed_datatype_definition_real_ref_1 *Renamed_DATATYPE_DEFINITION_REAL_REF_1) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, renamed_datatype_definition_real_ref_1) {
+		return
+	}
+
+	renamed_datatype_definition_real_ref_1.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) UnstageBranchRenamed_DATATYPE_DEFINITION_STRING_REF_1(renamed_datatype_definition_string_ref_1 *Renamed_DATATYPE_DEFINITION_STRING_REF_1) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, renamed_datatype_definition_string_ref_1) {
+		return
+	}
+
+	renamed_datatype_definition_string_ref_1.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) UnstageBranchRenamed_DATATYPE_DEFINITION_XHTML_REF_1(renamed_datatype_definition_xhtml_ref_1 *Renamed_DATATYPE_DEFINITION_XHTML_REF_1) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, renamed_datatype_definition_xhtml_ref_1) {
+		return
+	}
+
+	renamed_datatype_definition_xhtml_ref_1.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) UnstageBranchRenamed_RELATION_GROUP_TYPE_REF_1(renamed_relation_group_type_ref_1 *Renamed_RELATION_GROUP_TYPE_REF_1) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, renamed_relation_group_type_ref_1) {
+		return
+	}
+
+	renamed_relation_group_type_ref_1.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) UnstageBranchRenamed_SPECIFICATION_TYPE_REF_1(renamed_specification_type_ref_1 *Renamed_SPECIFICATION_TYPE_REF_1) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, renamed_specification_type_ref_1) {
+		return
+	}
+
+	renamed_specification_type_ref_1.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) UnstageBranchRenamed_SPEC_OBJECT_TYPE_REF_1(renamed_spec_object_type_ref_1 *Renamed_SPEC_OBJECT_TYPE_REF_1) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, renamed_spec_object_type_ref_1) {
+		return
+	}
+
+	renamed_spec_object_type_ref_1.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) UnstageBranchRenamed_SPEC_RELATION_TYPE_REF_1(renamed_spec_relation_type_ref_1 *Renamed_SPEC_RELATION_TYPE_REF_1) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, renamed_spec_relation_type_ref_1) {
+		return
+	}
+
+	renamed_spec_relation_type_ref_1.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
 func (stage *StageStruct) UnstageBranchSPECIFICATION(specification *SPECIFICATION) {
 
 	// check if instance is already staged
@@ -6772,8 +6772,8 @@ func (stage *StageStruct) UnstageBranchSPECIFICATION(specification *SPECIFICATIO
 	for _, _a_values_1 := range specification.VALUES {
 		UnstageBranch(stage, _a_values_1)
 	}
-	for _, _a_type_10 := range specification.TYPE {
-		UnstageBranch(stage, _a_type_10)
+	for _, _renamed_specification_type_ref_1 := range specification.TYPE {
+		UnstageBranch(stage, _renamed_specification_type_ref_1)
 	}
 
 }
@@ -6844,8 +6844,8 @@ func (stage *StageStruct) UnstageBranchSPEC_OBJECT(spec_object *SPEC_OBJECT) {
 	for _, _a_values_1 := range spec_object.VALUES {
 		UnstageBranch(stage, _a_values_1)
 	}
-	for _, _a_type_2 := range spec_object.TYPE {
-		UnstageBranch(stage, _a_type_2)
+	for _, _renamed_spec_object_type_ref_1 := range spec_object.TYPE {
+		UnstageBranch(stage, _renamed_spec_object_type_ref_1)
 	}
 
 }
@@ -6892,8 +6892,8 @@ func (stage *StageStruct) UnstageBranchSPEC_RELATION(spec_relation *SPEC_RELATIO
 	for _, _a_source := range spec_relation.SOURCE {
 		UnstageBranch(stage, _a_source)
 	}
-	for _, _a_type_4 := range spec_relation.TYPE {
-		UnstageBranch(stage, _a_type_4)
+	for _, _renamed_spec_relation_type_ref_1 := range spec_relation.TYPE {
+		UnstageBranch(stage, _renamed_spec_relation_type_ref_1)
 	}
 
 }

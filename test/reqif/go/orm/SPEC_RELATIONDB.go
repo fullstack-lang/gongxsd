@@ -304,19 +304,19 @@ func (backRepoSPEC_RELATION *BackRepoSPEC_RELATIONStruct) CommitPhaseTwoInstance
 		// 1. reset
 		spec_relationDB.SPEC_RELATIONPointersEncoding.TYPE = make([]int, 0)
 		// 2. encode
-		for _, a_type_4AssocEnd := range spec_relation.TYPE {
-			a_type_4AssocEnd_DB :=
-				backRepo.BackRepoA_TYPE_4.GetA_TYPE_4DBFromA_TYPE_4Ptr(a_type_4AssocEnd)
+		for _, renamed_spec_relation_type_ref_1AssocEnd := range spec_relation.TYPE {
+			renamed_spec_relation_type_ref_1AssocEnd_DB :=
+				backRepo.BackRepoRenamed_SPEC_RELATION_TYPE_REF_1.GetRenamed_SPEC_RELATION_TYPE_REF_1DBFromRenamed_SPEC_RELATION_TYPE_REF_1Ptr(renamed_spec_relation_type_ref_1AssocEnd)
 			
-			// the stage might be inconsistant, meaning that the a_type_4AssocEnd_DB might
+			// the stage might be inconsistant, meaning that the renamed_spec_relation_type_ref_1AssocEnd_DB might
 			// be missing from the stage. In this case, the commit operation is robust
 			// An alternative would be to crash here to reveal the missing element.
-			if a_type_4AssocEnd_DB == nil {
+			if renamed_spec_relation_type_ref_1AssocEnd_DB == nil {
 				continue
 			}
 			
 			spec_relationDB.SPEC_RELATIONPointersEncoding.TYPE =
-				append(spec_relationDB.SPEC_RELATIONPointersEncoding.TYPE, int(a_type_4AssocEnd_DB.ID))
+				append(spec_relationDB.SPEC_RELATIONPointersEncoding.TYPE, int(renamed_spec_relation_type_ref_1AssocEnd_DB.ID))
 		}
 
 		query := backRepoSPEC_RELATION.db.Save(&spec_relationDB)
@@ -460,12 +460,12 @@ func (spec_relationDB *SPEC_RELATIONDB) DecodePointers(backRepo *BackRepoStruct,
 	}
 
 	// This loop redeem spec_relation.TYPE in the stage from the encode in the back repo
-	// It parses all A_TYPE_4DB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// It parses all Renamed_SPEC_RELATION_TYPE_REF_1DB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance
 	// 1. reset the slice
 	spec_relation.TYPE = spec_relation.TYPE[:0]
-	for _, _A_TYPE_4id := range spec_relationDB.SPEC_RELATIONPointersEncoding.TYPE {
-		spec_relation.TYPE = append(spec_relation.TYPE, backRepo.BackRepoA_TYPE_4.Map_A_TYPE_4DBID_A_TYPE_4Ptr[uint(_A_TYPE_4id)])
+	for _, _Renamed_SPEC_RELATION_TYPE_REF_1id := range spec_relationDB.SPEC_RELATIONPointersEncoding.TYPE {
+		spec_relation.TYPE = append(spec_relation.TYPE, backRepo.BackRepoRenamed_SPEC_RELATION_TYPE_REF_1.Map_Renamed_SPEC_RELATION_TYPE_REF_1DBID_Renamed_SPEC_RELATION_TYPE_REF_1Ptr[uint(_Renamed_SPEC_RELATION_TYPE_REF_1id)])
 	}
 
 	return

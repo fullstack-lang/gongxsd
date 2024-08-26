@@ -286,37 +286,37 @@ func (backRepoRELATION_GROUP *BackRepoRELATION_GROUPStruct) CommitPhaseTwoInstan
 		// 1. reset
 		relation_groupDB.RELATION_GROUPPointersEncoding.SPEC_RELATIONS = make([]int, 0)
 		// 2. encode
-		for _, a_spec_relationsAssocEnd := range relation_group.SPEC_RELATIONS {
-			a_spec_relationsAssocEnd_DB :=
-				backRepo.BackRepoA_SPEC_RELATIONS.GetA_SPEC_RELATIONSDBFromA_SPEC_RELATIONSPtr(a_spec_relationsAssocEnd)
+		for _, a_spec_relations_1AssocEnd := range relation_group.SPEC_RELATIONS {
+			a_spec_relations_1AssocEnd_DB :=
+				backRepo.BackRepoA_SPEC_RELATIONS_1.GetA_SPEC_RELATIONS_1DBFromA_SPEC_RELATIONS_1Ptr(a_spec_relations_1AssocEnd)
 			
-			// the stage might be inconsistant, meaning that the a_spec_relationsAssocEnd_DB might
+			// the stage might be inconsistant, meaning that the a_spec_relations_1AssocEnd_DB might
 			// be missing from the stage. In this case, the commit operation is robust
 			// An alternative would be to crash here to reveal the missing element.
-			if a_spec_relationsAssocEnd_DB == nil {
+			if a_spec_relations_1AssocEnd_DB == nil {
 				continue
 			}
 			
 			relation_groupDB.RELATION_GROUPPointersEncoding.SPEC_RELATIONS =
-				append(relation_groupDB.RELATION_GROUPPointersEncoding.SPEC_RELATIONS, int(a_spec_relationsAssocEnd_DB.ID))
+				append(relation_groupDB.RELATION_GROUPPointersEncoding.SPEC_RELATIONS, int(a_spec_relations_1AssocEnd_DB.ID))
 		}
 
 		// 1. reset
 		relation_groupDB.RELATION_GROUPPointersEncoding.TYPE = make([]int, 0)
 		// 2. encode
-		for _, a_type_1AssocEnd := range relation_group.TYPE {
-			a_type_1AssocEnd_DB :=
-				backRepo.BackRepoA_TYPE_1.GetA_TYPE_1DBFromA_TYPE_1Ptr(a_type_1AssocEnd)
+		for _, renamed_relation_group_type_ref_1AssocEnd := range relation_group.TYPE {
+			renamed_relation_group_type_ref_1AssocEnd_DB :=
+				backRepo.BackRepoRenamed_RELATION_GROUP_TYPE_REF_1.GetRenamed_RELATION_GROUP_TYPE_REF_1DBFromRenamed_RELATION_GROUP_TYPE_REF_1Ptr(renamed_relation_group_type_ref_1AssocEnd)
 			
-			// the stage might be inconsistant, meaning that the a_type_1AssocEnd_DB might
+			// the stage might be inconsistant, meaning that the renamed_relation_group_type_ref_1AssocEnd_DB might
 			// be missing from the stage. In this case, the commit operation is robust
 			// An alternative would be to crash here to reveal the missing element.
-			if a_type_1AssocEnd_DB == nil {
+			if renamed_relation_group_type_ref_1AssocEnd_DB == nil {
 				continue
 			}
 			
 			relation_groupDB.RELATION_GROUPPointersEncoding.TYPE =
-				append(relation_groupDB.RELATION_GROUPPointersEncoding.TYPE, int(a_type_1AssocEnd_DB.ID))
+				append(relation_groupDB.RELATION_GROUPPointersEncoding.TYPE, int(renamed_relation_group_type_ref_1AssocEnd_DB.ID))
 		}
 
 		query := backRepoRELATION_GROUP.db.Save(&relation_groupDB)
@@ -451,21 +451,21 @@ func (relation_groupDB *RELATION_GROUPDB) DecodePointers(backRepo *BackRepoStruc
 	}
 
 	// This loop redeem relation_group.SPEC_RELATIONS in the stage from the encode in the back repo
-	// It parses all A_SPEC_RELATIONSDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// It parses all A_SPEC_RELATIONS_1DB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance
 	// 1. reset the slice
 	relation_group.SPEC_RELATIONS = relation_group.SPEC_RELATIONS[:0]
-	for _, _A_SPEC_RELATIONSid := range relation_groupDB.RELATION_GROUPPointersEncoding.SPEC_RELATIONS {
-		relation_group.SPEC_RELATIONS = append(relation_group.SPEC_RELATIONS, backRepo.BackRepoA_SPEC_RELATIONS.Map_A_SPEC_RELATIONSDBID_A_SPEC_RELATIONSPtr[uint(_A_SPEC_RELATIONSid)])
+	for _, _A_SPEC_RELATIONS_1id := range relation_groupDB.RELATION_GROUPPointersEncoding.SPEC_RELATIONS {
+		relation_group.SPEC_RELATIONS = append(relation_group.SPEC_RELATIONS, backRepo.BackRepoA_SPEC_RELATIONS_1.Map_A_SPEC_RELATIONS_1DBID_A_SPEC_RELATIONS_1Ptr[uint(_A_SPEC_RELATIONS_1id)])
 	}
 
 	// This loop redeem relation_group.TYPE in the stage from the encode in the back repo
-	// It parses all A_TYPE_1DB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// It parses all Renamed_RELATION_GROUP_TYPE_REF_1DB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance
 	// 1. reset the slice
 	relation_group.TYPE = relation_group.TYPE[:0]
-	for _, _A_TYPE_1id := range relation_groupDB.RELATION_GROUPPointersEncoding.TYPE {
-		relation_group.TYPE = append(relation_group.TYPE, backRepo.BackRepoA_TYPE_1.Map_A_TYPE_1DBID_A_TYPE_1Ptr[uint(_A_TYPE_1id)])
+	for _, _Renamed_RELATION_GROUP_TYPE_REF_1id := range relation_groupDB.RELATION_GROUPPointersEncoding.TYPE {
+		relation_group.TYPE = append(relation_group.TYPE, backRepo.BackRepoRenamed_RELATION_GROUP_TYPE_REF_1.Map_Renamed_RELATION_GROUP_TYPE_REF_1DBID_Renamed_RELATION_GROUP_TYPE_REF_1Ptr[uint(_Renamed_RELATION_GROUP_TYPE_REF_1id)])
 	}
 
 	return

@@ -998,524 +998,6 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 
 	}
 
-	map_A_DEFAULT_VALUE_Identifiers := make(map[*A_DEFAULT_VALUE]string)
-	_ = map_A_DEFAULT_VALUE_Identifiers
-
-	a_default_valueOrdered := []*A_DEFAULT_VALUE{}
-	for a_default_value := range stage.A_DEFAULT_VALUEs {
-		a_default_valueOrdered = append(a_default_valueOrdered, a_default_value)
-	}
-	sort.Slice(a_default_valueOrdered[:], func(i, j int) bool {
-		return a_default_valueOrdered[i].Name < a_default_valueOrdered[j].Name
-	})
-	if len(a_default_valueOrdered) > 0 {
-		identifiersDecl += "\n"
-	}
-	for idx, a_default_value := range a_default_valueOrdered {
-
-		id = generatesIdentifier("A_DEFAULT_VALUE", idx, a_default_value.Name)
-		map_A_DEFAULT_VALUE_Identifiers[a_default_value] = id
-
-		decl = IdentifiersDecls
-		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
-		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "A_DEFAULT_VALUE")
-		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", a_default_value.Name)
-		identifiersDecl += decl
-
-		initializerStatements += "\n"
-		// Initialisation of values
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_default_value.Name))
-		initializerStatements += setValueField
-
-	}
-
-	map_A_DEFAULT_VALUE_1_Identifiers := make(map[*A_DEFAULT_VALUE_1]string)
-	_ = map_A_DEFAULT_VALUE_1_Identifiers
-
-	a_default_value_1Ordered := []*A_DEFAULT_VALUE_1{}
-	for a_default_value_1 := range stage.A_DEFAULT_VALUE_1s {
-		a_default_value_1Ordered = append(a_default_value_1Ordered, a_default_value_1)
-	}
-	sort.Slice(a_default_value_1Ordered[:], func(i, j int) bool {
-		return a_default_value_1Ordered[i].Name < a_default_value_1Ordered[j].Name
-	})
-	if len(a_default_value_1Ordered) > 0 {
-		identifiersDecl += "\n"
-	}
-	for idx, a_default_value_1 := range a_default_value_1Ordered {
-
-		id = generatesIdentifier("A_DEFAULT_VALUE_1", idx, a_default_value_1.Name)
-		map_A_DEFAULT_VALUE_1_Identifiers[a_default_value_1] = id
-
-		decl = IdentifiersDecls
-		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
-		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "A_DEFAULT_VALUE_1")
-		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", a_default_value_1.Name)
-		identifiersDecl += decl
-
-		initializerStatements += "\n"
-		// Initialisation of values
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_default_value_1.Name))
-		initializerStatements += setValueField
-
-	}
-
-	map_A_DEFAULT_VALUE_2_Identifiers := make(map[*A_DEFAULT_VALUE_2]string)
-	_ = map_A_DEFAULT_VALUE_2_Identifiers
-
-	a_default_value_2Ordered := []*A_DEFAULT_VALUE_2{}
-	for a_default_value_2 := range stage.A_DEFAULT_VALUE_2s {
-		a_default_value_2Ordered = append(a_default_value_2Ordered, a_default_value_2)
-	}
-	sort.Slice(a_default_value_2Ordered[:], func(i, j int) bool {
-		return a_default_value_2Ordered[i].Name < a_default_value_2Ordered[j].Name
-	})
-	if len(a_default_value_2Ordered) > 0 {
-		identifiersDecl += "\n"
-	}
-	for idx, a_default_value_2 := range a_default_value_2Ordered {
-
-		id = generatesIdentifier("A_DEFAULT_VALUE_2", idx, a_default_value_2.Name)
-		map_A_DEFAULT_VALUE_2_Identifiers[a_default_value_2] = id
-
-		decl = IdentifiersDecls
-		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
-		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "A_DEFAULT_VALUE_2")
-		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", a_default_value_2.Name)
-		identifiersDecl += decl
-
-		initializerStatements += "\n"
-		// Initialisation of values
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_default_value_2.Name))
-		initializerStatements += setValueField
-
-	}
-
-	map_A_DEFAULT_VALUE_3_Identifiers := make(map[*A_DEFAULT_VALUE_3]string)
-	_ = map_A_DEFAULT_VALUE_3_Identifiers
-
-	a_default_value_3Ordered := []*A_DEFAULT_VALUE_3{}
-	for a_default_value_3 := range stage.A_DEFAULT_VALUE_3s {
-		a_default_value_3Ordered = append(a_default_value_3Ordered, a_default_value_3)
-	}
-	sort.Slice(a_default_value_3Ordered[:], func(i, j int) bool {
-		return a_default_value_3Ordered[i].Name < a_default_value_3Ordered[j].Name
-	})
-	if len(a_default_value_3Ordered) > 0 {
-		identifiersDecl += "\n"
-	}
-	for idx, a_default_value_3 := range a_default_value_3Ordered {
-
-		id = generatesIdentifier("A_DEFAULT_VALUE_3", idx, a_default_value_3.Name)
-		map_A_DEFAULT_VALUE_3_Identifiers[a_default_value_3] = id
-
-		decl = IdentifiersDecls
-		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
-		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "A_DEFAULT_VALUE_3")
-		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", a_default_value_3.Name)
-		identifiersDecl += decl
-
-		initializerStatements += "\n"
-		// Initialisation of values
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_default_value_3.Name))
-		initializerStatements += setValueField
-
-	}
-
-	map_A_DEFAULT_VALUE_4_Identifiers := make(map[*A_DEFAULT_VALUE_4]string)
-	_ = map_A_DEFAULT_VALUE_4_Identifiers
-
-	a_default_value_4Ordered := []*A_DEFAULT_VALUE_4{}
-	for a_default_value_4 := range stage.A_DEFAULT_VALUE_4s {
-		a_default_value_4Ordered = append(a_default_value_4Ordered, a_default_value_4)
-	}
-	sort.Slice(a_default_value_4Ordered[:], func(i, j int) bool {
-		return a_default_value_4Ordered[i].Name < a_default_value_4Ordered[j].Name
-	})
-	if len(a_default_value_4Ordered) > 0 {
-		identifiersDecl += "\n"
-	}
-	for idx, a_default_value_4 := range a_default_value_4Ordered {
-
-		id = generatesIdentifier("A_DEFAULT_VALUE_4", idx, a_default_value_4.Name)
-		map_A_DEFAULT_VALUE_4_Identifiers[a_default_value_4] = id
-
-		decl = IdentifiersDecls
-		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
-		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "A_DEFAULT_VALUE_4")
-		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", a_default_value_4.Name)
-		identifiersDecl += decl
-
-		initializerStatements += "\n"
-		// Initialisation of values
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_default_value_4.Name))
-		initializerStatements += setValueField
-
-	}
-
-	map_A_DEFAULT_VALUE_5_Identifiers := make(map[*A_DEFAULT_VALUE_5]string)
-	_ = map_A_DEFAULT_VALUE_5_Identifiers
-
-	a_default_value_5Ordered := []*A_DEFAULT_VALUE_5{}
-	for a_default_value_5 := range stage.A_DEFAULT_VALUE_5s {
-		a_default_value_5Ordered = append(a_default_value_5Ordered, a_default_value_5)
-	}
-	sort.Slice(a_default_value_5Ordered[:], func(i, j int) bool {
-		return a_default_value_5Ordered[i].Name < a_default_value_5Ordered[j].Name
-	})
-	if len(a_default_value_5Ordered) > 0 {
-		identifiersDecl += "\n"
-	}
-	for idx, a_default_value_5 := range a_default_value_5Ordered {
-
-		id = generatesIdentifier("A_DEFAULT_VALUE_5", idx, a_default_value_5.Name)
-		map_A_DEFAULT_VALUE_5_Identifiers[a_default_value_5] = id
-
-		decl = IdentifiersDecls
-		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
-		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "A_DEFAULT_VALUE_5")
-		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", a_default_value_5.Name)
-		identifiersDecl += decl
-
-		initializerStatements += "\n"
-		// Initialisation of values
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_default_value_5.Name))
-		initializerStatements += setValueField
-
-	}
-
-	map_A_DEFAULT_VALUE_6_Identifiers := make(map[*A_DEFAULT_VALUE_6]string)
-	_ = map_A_DEFAULT_VALUE_6_Identifiers
-
-	a_default_value_6Ordered := []*A_DEFAULT_VALUE_6{}
-	for a_default_value_6 := range stage.A_DEFAULT_VALUE_6s {
-		a_default_value_6Ordered = append(a_default_value_6Ordered, a_default_value_6)
-	}
-	sort.Slice(a_default_value_6Ordered[:], func(i, j int) bool {
-		return a_default_value_6Ordered[i].Name < a_default_value_6Ordered[j].Name
-	})
-	if len(a_default_value_6Ordered) > 0 {
-		identifiersDecl += "\n"
-	}
-	for idx, a_default_value_6 := range a_default_value_6Ordered {
-
-		id = generatesIdentifier("A_DEFAULT_VALUE_6", idx, a_default_value_6.Name)
-		map_A_DEFAULT_VALUE_6_Identifiers[a_default_value_6] = id
-
-		decl = IdentifiersDecls
-		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
-		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "A_DEFAULT_VALUE_6")
-		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", a_default_value_6.Name)
-		identifiersDecl += decl
-
-		initializerStatements += "\n"
-		// Initialisation of values
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_default_value_6.Name))
-		initializerStatements += setValueField
-
-	}
-
-	map_A_DEFINITION_Identifiers := make(map[*A_DEFINITION]string)
-	_ = map_A_DEFINITION_Identifiers
-
-	a_definitionOrdered := []*A_DEFINITION{}
-	for a_definition := range stage.A_DEFINITIONs {
-		a_definitionOrdered = append(a_definitionOrdered, a_definition)
-	}
-	sort.Slice(a_definitionOrdered[:], func(i, j int) bool {
-		return a_definitionOrdered[i].Name < a_definitionOrdered[j].Name
-	})
-	if len(a_definitionOrdered) > 0 {
-		identifiersDecl += "\n"
-	}
-	for idx, a_definition := range a_definitionOrdered {
-
-		id = generatesIdentifier("A_DEFINITION", idx, a_definition.Name)
-		map_A_DEFINITION_Identifiers[a_definition] = id
-
-		decl = IdentifiersDecls
-		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
-		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "A_DEFINITION")
-		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", a_definition.Name)
-		identifiersDecl += decl
-
-		initializerStatements += "\n"
-		// Initialisation of values
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_definition.Name))
-		initializerStatements += setValueField
-
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "ATTRIBUTE_DEFINITION_INTEGER_REF")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_definition.ATTRIBUTE_DEFINITION_INTEGER_REF))
-		initializerStatements += setValueField
-
-	}
-
-	map_A_DEFINITION_1_Identifiers := make(map[*A_DEFINITION_1]string)
-	_ = map_A_DEFINITION_1_Identifiers
-
-	a_definition_1Ordered := []*A_DEFINITION_1{}
-	for a_definition_1 := range stage.A_DEFINITION_1s {
-		a_definition_1Ordered = append(a_definition_1Ordered, a_definition_1)
-	}
-	sort.Slice(a_definition_1Ordered[:], func(i, j int) bool {
-		return a_definition_1Ordered[i].Name < a_definition_1Ordered[j].Name
-	})
-	if len(a_definition_1Ordered) > 0 {
-		identifiersDecl += "\n"
-	}
-	for idx, a_definition_1 := range a_definition_1Ordered {
-
-		id = generatesIdentifier("A_DEFINITION_1", idx, a_definition_1.Name)
-		map_A_DEFINITION_1_Identifiers[a_definition_1] = id
-
-		decl = IdentifiersDecls
-		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
-		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "A_DEFINITION_1")
-		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", a_definition_1.Name)
-		identifiersDecl += decl
-
-		initializerStatements += "\n"
-		// Initialisation of values
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_definition_1.Name))
-		initializerStatements += setValueField
-
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "ATTRIBUTE_DEFINITION_XHTML_REF")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_definition_1.ATTRIBUTE_DEFINITION_XHTML_REF))
-		initializerStatements += setValueField
-
-	}
-
-	map_A_DEFINITION_2_Identifiers := make(map[*A_DEFINITION_2]string)
-	_ = map_A_DEFINITION_2_Identifiers
-
-	a_definition_2Ordered := []*A_DEFINITION_2{}
-	for a_definition_2 := range stage.A_DEFINITION_2s {
-		a_definition_2Ordered = append(a_definition_2Ordered, a_definition_2)
-	}
-	sort.Slice(a_definition_2Ordered[:], func(i, j int) bool {
-		return a_definition_2Ordered[i].Name < a_definition_2Ordered[j].Name
-	})
-	if len(a_definition_2Ordered) > 0 {
-		identifiersDecl += "\n"
-	}
-	for idx, a_definition_2 := range a_definition_2Ordered {
-
-		id = generatesIdentifier("A_DEFINITION_2", idx, a_definition_2.Name)
-		map_A_DEFINITION_2_Identifiers[a_definition_2] = id
-
-		decl = IdentifiersDecls
-		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
-		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "A_DEFINITION_2")
-		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", a_definition_2.Name)
-		identifiersDecl += decl
-
-		initializerStatements += "\n"
-		// Initialisation of values
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_definition_2.Name))
-		initializerStatements += setValueField
-
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "ATTRIBUTE_DEFINITION_DATE_REF")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_definition_2.ATTRIBUTE_DEFINITION_DATE_REF))
-		initializerStatements += setValueField
-
-	}
-
-	map_A_DEFINITION_3_Identifiers := make(map[*A_DEFINITION_3]string)
-	_ = map_A_DEFINITION_3_Identifiers
-
-	a_definition_3Ordered := []*A_DEFINITION_3{}
-	for a_definition_3 := range stage.A_DEFINITION_3s {
-		a_definition_3Ordered = append(a_definition_3Ordered, a_definition_3)
-	}
-	sort.Slice(a_definition_3Ordered[:], func(i, j int) bool {
-		return a_definition_3Ordered[i].Name < a_definition_3Ordered[j].Name
-	})
-	if len(a_definition_3Ordered) > 0 {
-		identifiersDecl += "\n"
-	}
-	for idx, a_definition_3 := range a_definition_3Ordered {
-
-		id = generatesIdentifier("A_DEFINITION_3", idx, a_definition_3.Name)
-		map_A_DEFINITION_3_Identifiers[a_definition_3] = id
-
-		decl = IdentifiersDecls
-		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
-		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "A_DEFINITION_3")
-		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", a_definition_3.Name)
-		identifiersDecl += decl
-
-		initializerStatements += "\n"
-		// Initialisation of values
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_definition_3.Name))
-		initializerStatements += setValueField
-
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "ATTRIBUTE_DEFINITION_STRING_REF")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_definition_3.ATTRIBUTE_DEFINITION_STRING_REF))
-		initializerStatements += setValueField
-
-	}
-
-	map_A_DEFINITION_4_Identifiers := make(map[*A_DEFINITION_4]string)
-	_ = map_A_DEFINITION_4_Identifiers
-
-	a_definition_4Ordered := []*A_DEFINITION_4{}
-	for a_definition_4 := range stage.A_DEFINITION_4s {
-		a_definition_4Ordered = append(a_definition_4Ordered, a_definition_4)
-	}
-	sort.Slice(a_definition_4Ordered[:], func(i, j int) bool {
-		return a_definition_4Ordered[i].Name < a_definition_4Ordered[j].Name
-	})
-	if len(a_definition_4Ordered) > 0 {
-		identifiersDecl += "\n"
-	}
-	for idx, a_definition_4 := range a_definition_4Ordered {
-
-		id = generatesIdentifier("A_DEFINITION_4", idx, a_definition_4.Name)
-		map_A_DEFINITION_4_Identifiers[a_definition_4] = id
-
-		decl = IdentifiersDecls
-		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
-		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "A_DEFINITION_4")
-		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", a_definition_4.Name)
-		identifiersDecl += decl
-
-		initializerStatements += "\n"
-		// Initialisation of values
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_definition_4.Name))
-		initializerStatements += setValueField
-
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "ATTRIBUTE_DEFINITION_BOOLEAN_REF")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_definition_4.ATTRIBUTE_DEFINITION_BOOLEAN_REF))
-		initializerStatements += setValueField
-
-	}
-
-	map_A_DEFINITION_5_Identifiers := make(map[*A_DEFINITION_5]string)
-	_ = map_A_DEFINITION_5_Identifiers
-
-	a_definition_5Ordered := []*A_DEFINITION_5{}
-	for a_definition_5 := range stage.A_DEFINITION_5s {
-		a_definition_5Ordered = append(a_definition_5Ordered, a_definition_5)
-	}
-	sort.Slice(a_definition_5Ordered[:], func(i, j int) bool {
-		return a_definition_5Ordered[i].Name < a_definition_5Ordered[j].Name
-	})
-	if len(a_definition_5Ordered) > 0 {
-		identifiersDecl += "\n"
-	}
-	for idx, a_definition_5 := range a_definition_5Ordered {
-
-		id = generatesIdentifier("A_DEFINITION_5", idx, a_definition_5.Name)
-		map_A_DEFINITION_5_Identifiers[a_definition_5] = id
-
-		decl = IdentifiersDecls
-		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
-		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "A_DEFINITION_5")
-		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", a_definition_5.Name)
-		identifiersDecl += decl
-
-		initializerStatements += "\n"
-		// Initialisation of values
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_definition_5.Name))
-		initializerStatements += setValueField
-
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "ATTRIBUTE_DEFINITION_ENUMERATION_REF")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_definition_5.ATTRIBUTE_DEFINITION_ENUMERATION_REF))
-		initializerStatements += setValueField
-
-	}
-
-	map_A_DEFINITION_6_Identifiers := make(map[*A_DEFINITION_6]string)
-	_ = map_A_DEFINITION_6_Identifiers
-
-	a_definition_6Ordered := []*A_DEFINITION_6{}
-	for a_definition_6 := range stage.A_DEFINITION_6s {
-		a_definition_6Ordered = append(a_definition_6Ordered, a_definition_6)
-	}
-	sort.Slice(a_definition_6Ordered[:], func(i, j int) bool {
-		return a_definition_6Ordered[i].Name < a_definition_6Ordered[j].Name
-	})
-	if len(a_definition_6Ordered) > 0 {
-		identifiersDecl += "\n"
-	}
-	for idx, a_definition_6 := range a_definition_6Ordered {
-
-		id = generatesIdentifier("A_DEFINITION_6", idx, a_definition_6.Name)
-		map_A_DEFINITION_6_Identifiers[a_definition_6] = id
-
-		decl = IdentifiersDecls
-		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
-		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "A_DEFINITION_6")
-		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", a_definition_6.Name)
-		identifiersDecl += decl
-
-		initializerStatements += "\n"
-		// Initialisation of values
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_definition_6.Name))
-		initializerStatements += setValueField
-
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "ATTRIBUTE_DEFINITION_REAL_REF")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_definition_6.ATTRIBUTE_DEFINITION_REAL_REF))
-		initializerStatements += setValueField
-
-	}
-
 	map_A_EDITABLE_ATTS_Identifiers := make(map[*A_EDITABLE_ATTS]string)
 	_ = map_A_EDITABLE_ATTS_Identifiers
 
@@ -1914,12 +1396,6 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_spec_relations.Name))
 		initializerStatements += setValueField
 
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "SPEC_RELATION_REF")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_spec_relations.SPEC_RELATION_REF))
-		initializerStatements += setValueField
-
 	}
 
 	map_A_SPEC_RELATIONS_1_Identifiers := make(map[*A_SPEC_RELATIONS_1]string)
@@ -1952,6 +1428,12 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
 		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
 		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_spec_relations_1.Name))
+		initializerStatements += setValueField
+
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "SPEC_RELATION_REF")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_spec_relations_1.SPEC_RELATION_REF))
 		initializerStatements += setValueField
 
 	}
@@ -2088,446 +1570,6 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
 		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
 		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_tool_extensions.Name))
-		initializerStatements += setValueField
-
-	}
-
-	map_A_TYPE_Identifiers := make(map[*A_TYPE]string)
-	_ = map_A_TYPE_Identifiers
-
-	a_typeOrdered := []*A_TYPE{}
-	for a_type := range stage.A_TYPEs {
-		a_typeOrdered = append(a_typeOrdered, a_type)
-	}
-	sort.Slice(a_typeOrdered[:], func(i, j int) bool {
-		return a_typeOrdered[i].Name < a_typeOrdered[j].Name
-	})
-	if len(a_typeOrdered) > 0 {
-		identifiersDecl += "\n"
-	}
-	for idx, a_type := range a_typeOrdered {
-
-		id = generatesIdentifier("A_TYPE", idx, a_type.Name)
-		map_A_TYPE_Identifiers[a_type] = id
-
-		decl = IdentifiersDecls
-		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
-		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "A_TYPE")
-		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", a_type.Name)
-		identifiersDecl += decl
-
-		initializerStatements += "\n"
-		// Initialisation of values
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_type.Name))
-		initializerStatements += setValueField
-
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "DATATYPE_DEFINITION_DATE_REF")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_type.DATATYPE_DEFINITION_DATE_REF))
-		initializerStatements += setValueField
-
-	}
-
-	map_A_TYPE_1_Identifiers := make(map[*A_TYPE_1]string)
-	_ = map_A_TYPE_1_Identifiers
-
-	a_type_1Ordered := []*A_TYPE_1{}
-	for a_type_1 := range stage.A_TYPE_1s {
-		a_type_1Ordered = append(a_type_1Ordered, a_type_1)
-	}
-	sort.Slice(a_type_1Ordered[:], func(i, j int) bool {
-		return a_type_1Ordered[i].Name < a_type_1Ordered[j].Name
-	})
-	if len(a_type_1Ordered) > 0 {
-		identifiersDecl += "\n"
-	}
-	for idx, a_type_1 := range a_type_1Ordered {
-
-		id = generatesIdentifier("A_TYPE_1", idx, a_type_1.Name)
-		map_A_TYPE_1_Identifiers[a_type_1] = id
-
-		decl = IdentifiersDecls
-		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
-		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "A_TYPE_1")
-		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", a_type_1.Name)
-		identifiersDecl += decl
-
-		initializerStatements += "\n"
-		// Initialisation of values
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_type_1.Name))
-		initializerStatements += setValueField
-
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "RELATION_GROUP_TYPE_REF")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_type_1.RELATION_GROUP_TYPE_REF))
-		initializerStatements += setValueField
-
-	}
-
-	map_A_TYPE_10_Identifiers := make(map[*A_TYPE_10]string)
-	_ = map_A_TYPE_10_Identifiers
-
-	a_type_10Ordered := []*A_TYPE_10{}
-	for a_type_10 := range stage.A_TYPE_10s {
-		a_type_10Ordered = append(a_type_10Ordered, a_type_10)
-	}
-	sort.Slice(a_type_10Ordered[:], func(i, j int) bool {
-		return a_type_10Ordered[i].Name < a_type_10Ordered[j].Name
-	})
-	if len(a_type_10Ordered) > 0 {
-		identifiersDecl += "\n"
-	}
-	for idx, a_type_10 := range a_type_10Ordered {
-
-		id = generatesIdentifier("A_TYPE_10", idx, a_type_10.Name)
-		map_A_TYPE_10_Identifiers[a_type_10] = id
-
-		decl = IdentifiersDecls
-		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
-		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "A_TYPE_10")
-		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", a_type_10.Name)
-		identifiersDecl += decl
-
-		initializerStatements += "\n"
-		// Initialisation of values
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_type_10.Name))
-		initializerStatements += setValueField
-
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "SPECIFICATION_TYPE_REF")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_type_10.SPECIFICATION_TYPE_REF))
-		initializerStatements += setValueField
-
-	}
-
-	map_A_TYPE_2_Identifiers := make(map[*A_TYPE_2]string)
-	_ = map_A_TYPE_2_Identifiers
-
-	a_type_2Ordered := []*A_TYPE_2{}
-	for a_type_2 := range stage.A_TYPE_2s {
-		a_type_2Ordered = append(a_type_2Ordered, a_type_2)
-	}
-	sort.Slice(a_type_2Ordered[:], func(i, j int) bool {
-		return a_type_2Ordered[i].Name < a_type_2Ordered[j].Name
-	})
-	if len(a_type_2Ordered) > 0 {
-		identifiersDecl += "\n"
-	}
-	for idx, a_type_2 := range a_type_2Ordered {
-
-		id = generatesIdentifier("A_TYPE_2", idx, a_type_2.Name)
-		map_A_TYPE_2_Identifiers[a_type_2] = id
-
-		decl = IdentifiersDecls
-		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
-		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "A_TYPE_2")
-		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", a_type_2.Name)
-		identifiersDecl += decl
-
-		initializerStatements += "\n"
-		// Initialisation of values
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_type_2.Name))
-		initializerStatements += setValueField
-
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "SPEC_OBJECT_TYPE_REF")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_type_2.SPEC_OBJECT_TYPE_REF))
-		initializerStatements += setValueField
-
-	}
-
-	map_A_TYPE_3_Identifiers := make(map[*A_TYPE_3]string)
-	_ = map_A_TYPE_3_Identifiers
-
-	a_type_3Ordered := []*A_TYPE_3{}
-	for a_type_3 := range stage.A_TYPE_3s {
-		a_type_3Ordered = append(a_type_3Ordered, a_type_3)
-	}
-	sort.Slice(a_type_3Ordered[:], func(i, j int) bool {
-		return a_type_3Ordered[i].Name < a_type_3Ordered[j].Name
-	})
-	if len(a_type_3Ordered) > 0 {
-		identifiersDecl += "\n"
-	}
-	for idx, a_type_3 := range a_type_3Ordered {
-
-		id = generatesIdentifier("A_TYPE_3", idx, a_type_3.Name)
-		map_A_TYPE_3_Identifiers[a_type_3] = id
-
-		decl = IdentifiersDecls
-		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
-		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "A_TYPE_3")
-		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", a_type_3.Name)
-		identifiersDecl += decl
-
-		initializerStatements += "\n"
-		// Initialisation of values
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_type_3.Name))
-		initializerStatements += setValueField
-
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "DATATYPE_DEFINITION_REAL_REF")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_type_3.DATATYPE_DEFINITION_REAL_REF))
-		initializerStatements += setValueField
-
-	}
-
-	map_A_TYPE_4_Identifiers := make(map[*A_TYPE_4]string)
-	_ = map_A_TYPE_4_Identifiers
-
-	a_type_4Ordered := []*A_TYPE_4{}
-	for a_type_4 := range stage.A_TYPE_4s {
-		a_type_4Ordered = append(a_type_4Ordered, a_type_4)
-	}
-	sort.Slice(a_type_4Ordered[:], func(i, j int) bool {
-		return a_type_4Ordered[i].Name < a_type_4Ordered[j].Name
-	})
-	if len(a_type_4Ordered) > 0 {
-		identifiersDecl += "\n"
-	}
-	for idx, a_type_4 := range a_type_4Ordered {
-
-		id = generatesIdentifier("A_TYPE_4", idx, a_type_4.Name)
-		map_A_TYPE_4_Identifiers[a_type_4] = id
-
-		decl = IdentifiersDecls
-		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
-		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "A_TYPE_4")
-		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", a_type_4.Name)
-		identifiersDecl += decl
-
-		initializerStatements += "\n"
-		// Initialisation of values
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_type_4.Name))
-		initializerStatements += setValueField
-
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "SPEC_RELATION_TYPE_REF")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_type_4.SPEC_RELATION_TYPE_REF))
-		initializerStatements += setValueField
-
-	}
-
-	map_A_TYPE_5_Identifiers := make(map[*A_TYPE_5]string)
-	_ = map_A_TYPE_5_Identifiers
-
-	a_type_5Ordered := []*A_TYPE_5{}
-	for a_type_5 := range stage.A_TYPE_5s {
-		a_type_5Ordered = append(a_type_5Ordered, a_type_5)
-	}
-	sort.Slice(a_type_5Ordered[:], func(i, j int) bool {
-		return a_type_5Ordered[i].Name < a_type_5Ordered[j].Name
-	})
-	if len(a_type_5Ordered) > 0 {
-		identifiersDecl += "\n"
-	}
-	for idx, a_type_5 := range a_type_5Ordered {
-
-		id = generatesIdentifier("A_TYPE_5", idx, a_type_5.Name)
-		map_A_TYPE_5_Identifiers[a_type_5] = id
-
-		decl = IdentifiersDecls
-		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
-		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "A_TYPE_5")
-		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", a_type_5.Name)
-		identifiersDecl += decl
-
-		initializerStatements += "\n"
-		// Initialisation of values
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_type_5.Name))
-		initializerStatements += setValueField
-
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "DATATYPE_DEFINITION_INTEGER_REF")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_type_5.DATATYPE_DEFINITION_INTEGER_REF))
-		initializerStatements += setValueField
-
-	}
-
-	map_A_TYPE_6_Identifiers := make(map[*A_TYPE_6]string)
-	_ = map_A_TYPE_6_Identifiers
-
-	a_type_6Ordered := []*A_TYPE_6{}
-	for a_type_6 := range stage.A_TYPE_6s {
-		a_type_6Ordered = append(a_type_6Ordered, a_type_6)
-	}
-	sort.Slice(a_type_6Ordered[:], func(i, j int) bool {
-		return a_type_6Ordered[i].Name < a_type_6Ordered[j].Name
-	})
-	if len(a_type_6Ordered) > 0 {
-		identifiersDecl += "\n"
-	}
-	for idx, a_type_6 := range a_type_6Ordered {
-
-		id = generatesIdentifier("A_TYPE_6", idx, a_type_6.Name)
-		map_A_TYPE_6_Identifiers[a_type_6] = id
-
-		decl = IdentifiersDecls
-		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
-		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "A_TYPE_6")
-		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", a_type_6.Name)
-		identifiersDecl += decl
-
-		initializerStatements += "\n"
-		// Initialisation of values
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_type_6.Name))
-		initializerStatements += setValueField
-
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "DATATYPE_DEFINITION_XHTML_REF")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_type_6.DATATYPE_DEFINITION_XHTML_REF))
-		initializerStatements += setValueField
-
-	}
-
-	map_A_TYPE_7_Identifiers := make(map[*A_TYPE_7]string)
-	_ = map_A_TYPE_7_Identifiers
-
-	a_type_7Ordered := []*A_TYPE_7{}
-	for a_type_7 := range stage.A_TYPE_7s {
-		a_type_7Ordered = append(a_type_7Ordered, a_type_7)
-	}
-	sort.Slice(a_type_7Ordered[:], func(i, j int) bool {
-		return a_type_7Ordered[i].Name < a_type_7Ordered[j].Name
-	})
-	if len(a_type_7Ordered) > 0 {
-		identifiersDecl += "\n"
-	}
-	for idx, a_type_7 := range a_type_7Ordered {
-
-		id = generatesIdentifier("A_TYPE_7", idx, a_type_7.Name)
-		map_A_TYPE_7_Identifiers[a_type_7] = id
-
-		decl = IdentifiersDecls
-		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
-		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "A_TYPE_7")
-		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", a_type_7.Name)
-		identifiersDecl += decl
-
-		initializerStatements += "\n"
-		// Initialisation of values
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_type_7.Name))
-		initializerStatements += setValueField
-
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "DATATYPE_DEFINITION_BOOLEAN_REF")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_type_7.DATATYPE_DEFINITION_BOOLEAN_REF))
-		initializerStatements += setValueField
-
-	}
-
-	map_A_TYPE_8_Identifiers := make(map[*A_TYPE_8]string)
-	_ = map_A_TYPE_8_Identifiers
-
-	a_type_8Ordered := []*A_TYPE_8{}
-	for a_type_8 := range stage.A_TYPE_8s {
-		a_type_8Ordered = append(a_type_8Ordered, a_type_8)
-	}
-	sort.Slice(a_type_8Ordered[:], func(i, j int) bool {
-		return a_type_8Ordered[i].Name < a_type_8Ordered[j].Name
-	})
-	if len(a_type_8Ordered) > 0 {
-		identifiersDecl += "\n"
-	}
-	for idx, a_type_8 := range a_type_8Ordered {
-
-		id = generatesIdentifier("A_TYPE_8", idx, a_type_8.Name)
-		map_A_TYPE_8_Identifiers[a_type_8] = id
-
-		decl = IdentifiersDecls
-		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
-		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "A_TYPE_8")
-		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", a_type_8.Name)
-		identifiersDecl += decl
-
-		initializerStatements += "\n"
-		// Initialisation of values
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_type_8.Name))
-		initializerStatements += setValueField
-
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "DATATYPE_DEFINITION_STRING_REF")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_type_8.DATATYPE_DEFINITION_STRING_REF))
-		initializerStatements += setValueField
-
-	}
-
-	map_A_TYPE_9_Identifiers := make(map[*A_TYPE_9]string)
-	_ = map_A_TYPE_9_Identifiers
-
-	a_type_9Ordered := []*A_TYPE_9{}
-	for a_type_9 := range stage.A_TYPE_9s {
-		a_type_9Ordered = append(a_type_9Ordered, a_type_9)
-	}
-	sort.Slice(a_type_9Ordered[:], func(i, j int) bool {
-		return a_type_9Ordered[i].Name < a_type_9Ordered[j].Name
-	})
-	if len(a_type_9Ordered) > 0 {
-		identifiersDecl += "\n"
-	}
-	for idx, a_type_9 := range a_type_9Ordered {
-
-		id = generatesIdentifier("A_TYPE_9", idx, a_type_9.Name)
-		map_A_TYPE_9_Identifiers[a_type_9] = id
-
-		decl = IdentifiersDecls
-		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
-		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "A_TYPE_9")
-		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", a_type_9.Name)
-		identifiersDecl += decl
-
-		initializerStatements += "\n"
-		// Initialisation of values
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_type_9.Name))
-		initializerStatements += setValueField
-
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "DATATYPE_DEFINITION_ENUMERATION_REF")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_type_9.DATATYPE_DEFINITION_ENUMERATION_REF))
 		initializerStatements += setValueField
 
 	}
@@ -3458,6 +2500,964 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 
 	}
 
+	map_Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1_Identifiers := make(map[*Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1]string)
+	_ = map_Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1_Identifiers
+
+	renamed_attribute_definition_boolean_ref_1Ordered := []*Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1{}
+	for renamed_attribute_definition_boolean_ref_1 := range stage.Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1s {
+		renamed_attribute_definition_boolean_ref_1Ordered = append(renamed_attribute_definition_boolean_ref_1Ordered, renamed_attribute_definition_boolean_ref_1)
+	}
+	sort.Slice(renamed_attribute_definition_boolean_ref_1Ordered[:], func(i, j int) bool {
+		return renamed_attribute_definition_boolean_ref_1Ordered[i].Name < renamed_attribute_definition_boolean_ref_1Ordered[j].Name
+	})
+	if len(renamed_attribute_definition_boolean_ref_1Ordered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, renamed_attribute_definition_boolean_ref_1 := range renamed_attribute_definition_boolean_ref_1Ordered {
+
+		id = generatesIdentifier("Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1", idx, renamed_attribute_definition_boolean_ref_1.Name)
+		map_Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1_Identifiers[renamed_attribute_definition_boolean_ref_1] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", renamed_attribute_definition_boolean_ref_1.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(renamed_attribute_definition_boolean_ref_1.Name))
+		initializerStatements += setValueField
+
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "ATTRIBUTE_DEFINITION_BOOLEAN_REF")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(renamed_attribute_definition_boolean_ref_1.ATTRIBUTE_DEFINITION_BOOLEAN_REF))
+		initializerStatements += setValueField
+
+	}
+
+	map_Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1_Identifiers := make(map[*Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1]string)
+	_ = map_Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1_Identifiers
+
+	renamed_attribute_definition_date_ref_1Ordered := []*Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1{}
+	for renamed_attribute_definition_date_ref_1 := range stage.Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1s {
+		renamed_attribute_definition_date_ref_1Ordered = append(renamed_attribute_definition_date_ref_1Ordered, renamed_attribute_definition_date_ref_1)
+	}
+	sort.Slice(renamed_attribute_definition_date_ref_1Ordered[:], func(i, j int) bool {
+		return renamed_attribute_definition_date_ref_1Ordered[i].Name < renamed_attribute_definition_date_ref_1Ordered[j].Name
+	})
+	if len(renamed_attribute_definition_date_ref_1Ordered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, renamed_attribute_definition_date_ref_1 := range renamed_attribute_definition_date_ref_1Ordered {
+
+		id = generatesIdentifier("Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1", idx, renamed_attribute_definition_date_ref_1.Name)
+		map_Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1_Identifiers[renamed_attribute_definition_date_ref_1] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", renamed_attribute_definition_date_ref_1.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(renamed_attribute_definition_date_ref_1.Name))
+		initializerStatements += setValueField
+
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "ATTRIBUTE_DEFINITION_DATE_REF")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(renamed_attribute_definition_date_ref_1.ATTRIBUTE_DEFINITION_DATE_REF))
+		initializerStatements += setValueField
+
+	}
+
+	map_Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1_Identifiers := make(map[*Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1]string)
+	_ = map_Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1_Identifiers
+
+	renamed_attribute_definition_enumeration_ref_1Ordered := []*Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1{}
+	for renamed_attribute_definition_enumeration_ref_1 := range stage.Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1s {
+		renamed_attribute_definition_enumeration_ref_1Ordered = append(renamed_attribute_definition_enumeration_ref_1Ordered, renamed_attribute_definition_enumeration_ref_1)
+	}
+	sort.Slice(renamed_attribute_definition_enumeration_ref_1Ordered[:], func(i, j int) bool {
+		return renamed_attribute_definition_enumeration_ref_1Ordered[i].Name < renamed_attribute_definition_enumeration_ref_1Ordered[j].Name
+	})
+	if len(renamed_attribute_definition_enumeration_ref_1Ordered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, renamed_attribute_definition_enumeration_ref_1 := range renamed_attribute_definition_enumeration_ref_1Ordered {
+
+		id = generatesIdentifier("Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1", idx, renamed_attribute_definition_enumeration_ref_1.Name)
+		map_Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1_Identifiers[renamed_attribute_definition_enumeration_ref_1] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", renamed_attribute_definition_enumeration_ref_1.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(renamed_attribute_definition_enumeration_ref_1.Name))
+		initializerStatements += setValueField
+
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "ATTRIBUTE_DEFINITION_ENUMERATION_REF")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(renamed_attribute_definition_enumeration_ref_1.ATTRIBUTE_DEFINITION_ENUMERATION_REF))
+		initializerStatements += setValueField
+
+	}
+
+	map_Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1_Identifiers := make(map[*Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1]string)
+	_ = map_Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1_Identifiers
+
+	renamed_attribute_definition_integer_ref_1Ordered := []*Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1{}
+	for renamed_attribute_definition_integer_ref_1 := range stage.Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1s {
+		renamed_attribute_definition_integer_ref_1Ordered = append(renamed_attribute_definition_integer_ref_1Ordered, renamed_attribute_definition_integer_ref_1)
+	}
+	sort.Slice(renamed_attribute_definition_integer_ref_1Ordered[:], func(i, j int) bool {
+		return renamed_attribute_definition_integer_ref_1Ordered[i].Name < renamed_attribute_definition_integer_ref_1Ordered[j].Name
+	})
+	if len(renamed_attribute_definition_integer_ref_1Ordered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, renamed_attribute_definition_integer_ref_1 := range renamed_attribute_definition_integer_ref_1Ordered {
+
+		id = generatesIdentifier("Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1", idx, renamed_attribute_definition_integer_ref_1.Name)
+		map_Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1_Identifiers[renamed_attribute_definition_integer_ref_1] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", renamed_attribute_definition_integer_ref_1.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(renamed_attribute_definition_integer_ref_1.Name))
+		initializerStatements += setValueField
+
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "ATTRIBUTE_DEFINITION_INTEGER_REF")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(renamed_attribute_definition_integer_ref_1.ATTRIBUTE_DEFINITION_INTEGER_REF))
+		initializerStatements += setValueField
+
+	}
+
+	map_Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1_Identifiers := make(map[*Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1]string)
+	_ = map_Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1_Identifiers
+
+	renamed_attribute_definition_real_ref_1Ordered := []*Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1{}
+	for renamed_attribute_definition_real_ref_1 := range stage.Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1s {
+		renamed_attribute_definition_real_ref_1Ordered = append(renamed_attribute_definition_real_ref_1Ordered, renamed_attribute_definition_real_ref_1)
+	}
+	sort.Slice(renamed_attribute_definition_real_ref_1Ordered[:], func(i, j int) bool {
+		return renamed_attribute_definition_real_ref_1Ordered[i].Name < renamed_attribute_definition_real_ref_1Ordered[j].Name
+	})
+	if len(renamed_attribute_definition_real_ref_1Ordered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, renamed_attribute_definition_real_ref_1 := range renamed_attribute_definition_real_ref_1Ordered {
+
+		id = generatesIdentifier("Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1", idx, renamed_attribute_definition_real_ref_1.Name)
+		map_Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1_Identifiers[renamed_attribute_definition_real_ref_1] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", renamed_attribute_definition_real_ref_1.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(renamed_attribute_definition_real_ref_1.Name))
+		initializerStatements += setValueField
+
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "ATTRIBUTE_DEFINITION_REAL_REF")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(renamed_attribute_definition_real_ref_1.ATTRIBUTE_DEFINITION_REAL_REF))
+		initializerStatements += setValueField
+
+	}
+
+	map_Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1_Identifiers := make(map[*Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1]string)
+	_ = map_Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1_Identifiers
+
+	renamed_attribute_definition_string_ref_1Ordered := []*Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1{}
+	for renamed_attribute_definition_string_ref_1 := range stage.Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1s {
+		renamed_attribute_definition_string_ref_1Ordered = append(renamed_attribute_definition_string_ref_1Ordered, renamed_attribute_definition_string_ref_1)
+	}
+	sort.Slice(renamed_attribute_definition_string_ref_1Ordered[:], func(i, j int) bool {
+		return renamed_attribute_definition_string_ref_1Ordered[i].Name < renamed_attribute_definition_string_ref_1Ordered[j].Name
+	})
+	if len(renamed_attribute_definition_string_ref_1Ordered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, renamed_attribute_definition_string_ref_1 := range renamed_attribute_definition_string_ref_1Ordered {
+
+		id = generatesIdentifier("Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1", idx, renamed_attribute_definition_string_ref_1.Name)
+		map_Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1_Identifiers[renamed_attribute_definition_string_ref_1] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", renamed_attribute_definition_string_ref_1.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(renamed_attribute_definition_string_ref_1.Name))
+		initializerStatements += setValueField
+
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "ATTRIBUTE_DEFINITION_STRING_REF")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(renamed_attribute_definition_string_ref_1.ATTRIBUTE_DEFINITION_STRING_REF))
+		initializerStatements += setValueField
+
+	}
+
+	map_Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1_Identifiers := make(map[*Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1]string)
+	_ = map_Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1_Identifiers
+
+	renamed_attribute_definition_xhtml_ref_1Ordered := []*Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1{}
+	for renamed_attribute_definition_xhtml_ref_1 := range stage.Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1s {
+		renamed_attribute_definition_xhtml_ref_1Ordered = append(renamed_attribute_definition_xhtml_ref_1Ordered, renamed_attribute_definition_xhtml_ref_1)
+	}
+	sort.Slice(renamed_attribute_definition_xhtml_ref_1Ordered[:], func(i, j int) bool {
+		return renamed_attribute_definition_xhtml_ref_1Ordered[i].Name < renamed_attribute_definition_xhtml_ref_1Ordered[j].Name
+	})
+	if len(renamed_attribute_definition_xhtml_ref_1Ordered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, renamed_attribute_definition_xhtml_ref_1 := range renamed_attribute_definition_xhtml_ref_1Ordered {
+
+		id = generatesIdentifier("Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1", idx, renamed_attribute_definition_xhtml_ref_1.Name)
+		map_Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1_Identifiers[renamed_attribute_definition_xhtml_ref_1] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", renamed_attribute_definition_xhtml_ref_1.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(renamed_attribute_definition_xhtml_ref_1.Name))
+		initializerStatements += setValueField
+
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "ATTRIBUTE_DEFINITION_XHTML_REF")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(renamed_attribute_definition_xhtml_ref_1.ATTRIBUTE_DEFINITION_XHTML_REF))
+		initializerStatements += setValueField
+
+	}
+
+	map_Renamed_ATTRIBUTE_VALUE_BOOLEAN_1_Identifiers := make(map[*Renamed_ATTRIBUTE_VALUE_BOOLEAN_1]string)
+	_ = map_Renamed_ATTRIBUTE_VALUE_BOOLEAN_1_Identifiers
+
+	renamed_attribute_value_boolean_1Ordered := []*Renamed_ATTRIBUTE_VALUE_BOOLEAN_1{}
+	for renamed_attribute_value_boolean_1 := range stage.Renamed_ATTRIBUTE_VALUE_BOOLEAN_1s {
+		renamed_attribute_value_boolean_1Ordered = append(renamed_attribute_value_boolean_1Ordered, renamed_attribute_value_boolean_1)
+	}
+	sort.Slice(renamed_attribute_value_boolean_1Ordered[:], func(i, j int) bool {
+		return renamed_attribute_value_boolean_1Ordered[i].Name < renamed_attribute_value_boolean_1Ordered[j].Name
+	})
+	if len(renamed_attribute_value_boolean_1Ordered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, renamed_attribute_value_boolean_1 := range renamed_attribute_value_boolean_1Ordered {
+
+		id = generatesIdentifier("Renamed_ATTRIBUTE_VALUE_BOOLEAN_1", idx, renamed_attribute_value_boolean_1.Name)
+		map_Renamed_ATTRIBUTE_VALUE_BOOLEAN_1_Identifiers[renamed_attribute_value_boolean_1] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "Renamed_ATTRIBUTE_VALUE_BOOLEAN_1")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", renamed_attribute_value_boolean_1.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(renamed_attribute_value_boolean_1.Name))
+		initializerStatements += setValueField
+
+	}
+
+	map_Renamed_ATTRIBUTE_VALUE_DATE_1_Identifiers := make(map[*Renamed_ATTRIBUTE_VALUE_DATE_1]string)
+	_ = map_Renamed_ATTRIBUTE_VALUE_DATE_1_Identifiers
+
+	renamed_attribute_value_date_1Ordered := []*Renamed_ATTRIBUTE_VALUE_DATE_1{}
+	for renamed_attribute_value_date_1 := range stage.Renamed_ATTRIBUTE_VALUE_DATE_1s {
+		renamed_attribute_value_date_1Ordered = append(renamed_attribute_value_date_1Ordered, renamed_attribute_value_date_1)
+	}
+	sort.Slice(renamed_attribute_value_date_1Ordered[:], func(i, j int) bool {
+		return renamed_attribute_value_date_1Ordered[i].Name < renamed_attribute_value_date_1Ordered[j].Name
+	})
+	if len(renamed_attribute_value_date_1Ordered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, renamed_attribute_value_date_1 := range renamed_attribute_value_date_1Ordered {
+
+		id = generatesIdentifier("Renamed_ATTRIBUTE_VALUE_DATE_1", idx, renamed_attribute_value_date_1.Name)
+		map_Renamed_ATTRIBUTE_VALUE_DATE_1_Identifiers[renamed_attribute_value_date_1] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "Renamed_ATTRIBUTE_VALUE_DATE_1")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", renamed_attribute_value_date_1.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(renamed_attribute_value_date_1.Name))
+		initializerStatements += setValueField
+
+	}
+
+	map_Renamed_ATTRIBUTE_VALUE_ENUMERATION_1_Identifiers := make(map[*Renamed_ATTRIBUTE_VALUE_ENUMERATION_1]string)
+	_ = map_Renamed_ATTRIBUTE_VALUE_ENUMERATION_1_Identifiers
+
+	renamed_attribute_value_enumeration_1Ordered := []*Renamed_ATTRIBUTE_VALUE_ENUMERATION_1{}
+	for renamed_attribute_value_enumeration_1 := range stage.Renamed_ATTRIBUTE_VALUE_ENUMERATION_1s {
+		renamed_attribute_value_enumeration_1Ordered = append(renamed_attribute_value_enumeration_1Ordered, renamed_attribute_value_enumeration_1)
+	}
+	sort.Slice(renamed_attribute_value_enumeration_1Ordered[:], func(i, j int) bool {
+		return renamed_attribute_value_enumeration_1Ordered[i].Name < renamed_attribute_value_enumeration_1Ordered[j].Name
+	})
+	if len(renamed_attribute_value_enumeration_1Ordered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, renamed_attribute_value_enumeration_1 := range renamed_attribute_value_enumeration_1Ordered {
+
+		id = generatesIdentifier("Renamed_ATTRIBUTE_VALUE_ENUMERATION_1", idx, renamed_attribute_value_enumeration_1.Name)
+		map_Renamed_ATTRIBUTE_VALUE_ENUMERATION_1_Identifiers[renamed_attribute_value_enumeration_1] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "Renamed_ATTRIBUTE_VALUE_ENUMERATION_1")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", renamed_attribute_value_enumeration_1.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(renamed_attribute_value_enumeration_1.Name))
+		initializerStatements += setValueField
+
+	}
+
+	map_Renamed_ATTRIBUTE_VALUE_INTEGER_1_Identifiers := make(map[*Renamed_ATTRIBUTE_VALUE_INTEGER_1]string)
+	_ = map_Renamed_ATTRIBUTE_VALUE_INTEGER_1_Identifiers
+
+	renamed_attribute_value_integer_1Ordered := []*Renamed_ATTRIBUTE_VALUE_INTEGER_1{}
+	for renamed_attribute_value_integer_1 := range stage.Renamed_ATTRIBUTE_VALUE_INTEGER_1s {
+		renamed_attribute_value_integer_1Ordered = append(renamed_attribute_value_integer_1Ordered, renamed_attribute_value_integer_1)
+	}
+	sort.Slice(renamed_attribute_value_integer_1Ordered[:], func(i, j int) bool {
+		return renamed_attribute_value_integer_1Ordered[i].Name < renamed_attribute_value_integer_1Ordered[j].Name
+	})
+	if len(renamed_attribute_value_integer_1Ordered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, renamed_attribute_value_integer_1 := range renamed_attribute_value_integer_1Ordered {
+
+		id = generatesIdentifier("Renamed_ATTRIBUTE_VALUE_INTEGER_1", idx, renamed_attribute_value_integer_1.Name)
+		map_Renamed_ATTRIBUTE_VALUE_INTEGER_1_Identifiers[renamed_attribute_value_integer_1] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "Renamed_ATTRIBUTE_VALUE_INTEGER_1")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", renamed_attribute_value_integer_1.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(renamed_attribute_value_integer_1.Name))
+		initializerStatements += setValueField
+
+	}
+
+	map_Renamed_ATTRIBUTE_VALUE_REAL_1_Identifiers := make(map[*Renamed_ATTRIBUTE_VALUE_REAL_1]string)
+	_ = map_Renamed_ATTRIBUTE_VALUE_REAL_1_Identifiers
+
+	renamed_attribute_value_real_1Ordered := []*Renamed_ATTRIBUTE_VALUE_REAL_1{}
+	for renamed_attribute_value_real_1 := range stage.Renamed_ATTRIBUTE_VALUE_REAL_1s {
+		renamed_attribute_value_real_1Ordered = append(renamed_attribute_value_real_1Ordered, renamed_attribute_value_real_1)
+	}
+	sort.Slice(renamed_attribute_value_real_1Ordered[:], func(i, j int) bool {
+		return renamed_attribute_value_real_1Ordered[i].Name < renamed_attribute_value_real_1Ordered[j].Name
+	})
+	if len(renamed_attribute_value_real_1Ordered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, renamed_attribute_value_real_1 := range renamed_attribute_value_real_1Ordered {
+
+		id = generatesIdentifier("Renamed_ATTRIBUTE_VALUE_REAL_1", idx, renamed_attribute_value_real_1.Name)
+		map_Renamed_ATTRIBUTE_VALUE_REAL_1_Identifiers[renamed_attribute_value_real_1] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "Renamed_ATTRIBUTE_VALUE_REAL_1")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", renamed_attribute_value_real_1.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(renamed_attribute_value_real_1.Name))
+		initializerStatements += setValueField
+
+	}
+
+	map_Renamed_ATTRIBUTE_VALUE_STRING_1_Identifiers := make(map[*Renamed_ATTRIBUTE_VALUE_STRING_1]string)
+	_ = map_Renamed_ATTRIBUTE_VALUE_STRING_1_Identifiers
+
+	renamed_attribute_value_string_1Ordered := []*Renamed_ATTRIBUTE_VALUE_STRING_1{}
+	for renamed_attribute_value_string_1 := range stage.Renamed_ATTRIBUTE_VALUE_STRING_1s {
+		renamed_attribute_value_string_1Ordered = append(renamed_attribute_value_string_1Ordered, renamed_attribute_value_string_1)
+	}
+	sort.Slice(renamed_attribute_value_string_1Ordered[:], func(i, j int) bool {
+		return renamed_attribute_value_string_1Ordered[i].Name < renamed_attribute_value_string_1Ordered[j].Name
+	})
+	if len(renamed_attribute_value_string_1Ordered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, renamed_attribute_value_string_1 := range renamed_attribute_value_string_1Ordered {
+
+		id = generatesIdentifier("Renamed_ATTRIBUTE_VALUE_STRING_1", idx, renamed_attribute_value_string_1.Name)
+		map_Renamed_ATTRIBUTE_VALUE_STRING_1_Identifiers[renamed_attribute_value_string_1] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "Renamed_ATTRIBUTE_VALUE_STRING_1")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", renamed_attribute_value_string_1.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(renamed_attribute_value_string_1.Name))
+		initializerStatements += setValueField
+
+	}
+
+	map_Renamed_ATTRIBUTE_VALUE_XHTML_1_Identifiers := make(map[*Renamed_ATTRIBUTE_VALUE_XHTML_1]string)
+	_ = map_Renamed_ATTRIBUTE_VALUE_XHTML_1_Identifiers
+
+	renamed_attribute_value_xhtml_1Ordered := []*Renamed_ATTRIBUTE_VALUE_XHTML_1{}
+	for renamed_attribute_value_xhtml_1 := range stage.Renamed_ATTRIBUTE_VALUE_XHTML_1s {
+		renamed_attribute_value_xhtml_1Ordered = append(renamed_attribute_value_xhtml_1Ordered, renamed_attribute_value_xhtml_1)
+	}
+	sort.Slice(renamed_attribute_value_xhtml_1Ordered[:], func(i, j int) bool {
+		return renamed_attribute_value_xhtml_1Ordered[i].Name < renamed_attribute_value_xhtml_1Ordered[j].Name
+	})
+	if len(renamed_attribute_value_xhtml_1Ordered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, renamed_attribute_value_xhtml_1 := range renamed_attribute_value_xhtml_1Ordered {
+
+		id = generatesIdentifier("Renamed_ATTRIBUTE_VALUE_XHTML_1", idx, renamed_attribute_value_xhtml_1.Name)
+		map_Renamed_ATTRIBUTE_VALUE_XHTML_1_Identifiers[renamed_attribute_value_xhtml_1] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "Renamed_ATTRIBUTE_VALUE_XHTML_1")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", renamed_attribute_value_xhtml_1.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(renamed_attribute_value_xhtml_1.Name))
+		initializerStatements += setValueField
+
+	}
+
+	map_Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1_Identifiers := make(map[*Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1]string)
+	_ = map_Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1_Identifiers
+
+	renamed_datatype_definition_boolean_ref_1Ordered := []*Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1{}
+	for renamed_datatype_definition_boolean_ref_1 := range stage.Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1s {
+		renamed_datatype_definition_boolean_ref_1Ordered = append(renamed_datatype_definition_boolean_ref_1Ordered, renamed_datatype_definition_boolean_ref_1)
+	}
+	sort.Slice(renamed_datatype_definition_boolean_ref_1Ordered[:], func(i, j int) bool {
+		return renamed_datatype_definition_boolean_ref_1Ordered[i].Name < renamed_datatype_definition_boolean_ref_1Ordered[j].Name
+	})
+	if len(renamed_datatype_definition_boolean_ref_1Ordered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, renamed_datatype_definition_boolean_ref_1 := range renamed_datatype_definition_boolean_ref_1Ordered {
+
+		id = generatesIdentifier("Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1", idx, renamed_datatype_definition_boolean_ref_1.Name)
+		map_Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1_Identifiers[renamed_datatype_definition_boolean_ref_1] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", renamed_datatype_definition_boolean_ref_1.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(renamed_datatype_definition_boolean_ref_1.Name))
+		initializerStatements += setValueField
+
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "DATATYPE_DEFINITION_BOOLEAN_REF")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(renamed_datatype_definition_boolean_ref_1.DATATYPE_DEFINITION_BOOLEAN_REF))
+		initializerStatements += setValueField
+
+	}
+
+	map_Renamed_DATATYPE_DEFINITION_DATE_REF_1_Identifiers := make(map[*Renamed_DATATYPE_DEFINITION_DATE_REF_1]string)
+	_ = map_Renamed_DATATYPE_DEFINITION_DATE_REF_1_Identifiers
+
+	renamed_datatype_definition_date_ref_1Ordered := []*Renamed_DATATYPE_DEFINITION_DATE_REF_1{}
+	for renamed_datatype_definition_date_ref_1 := range stage.Renamed_DATATYPE_DEFINITION_DATE_REF_1s {
+		renamed_datatype_definition_date_ref_1Ordered = append(renamed_datatype_definition_date_ref_1Ordered, renamed_datatype_definition_date_ref_1)
+	}
+	sort.Slice(renamed_datatype_definition_date_ref_1Ordered[:], func(i, j int) bool {
+		return renamed_datatype_definition_date_ref_1Ordered[i].Name < renamed_datatype_definition_date_ref_1Ordered[j].Name
+	})
+	if len(renamed_datatype_definition_date_ref_1Ordered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, renamed_datatype_definition_date_ref_1 := range renamed_datatype_definition_date_ref_1Ordered {
+
+		id = generatesIdentifier("Renamed_DATATYPE_DEFINITION_DATE_REF_1", idx, renamed_datatype_definition_date_ref_1.Name)
+		map_Renamed_DATATYPE_DEFINITION_DATE_REF_1_Identifiers[renamed_datatype_definition_date_ref_1] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "Renamed_DATATYPE_DEFINITION_DATE_REF_1")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", renamed_datatype_definition_date_ref_1.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(renamed_datatype_definition_date_ref_1.Name))
+		initializerStatements += setValueField
+
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "DATATYPE_DEFINITION_DATE_REF")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(renamed_datatype_definition_date_ref_1.DATATYPE_DEFINITION_DATE_REF))
+		initializerStatements += setValueField
+
+	}
+
+	map_Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1_Identifiers := make(map[*Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1]string)
+	_ = map_Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1_Identifiers
+
+	renamed_datatype_definition_enumeration_ref_1Ordered := []*Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1{}
+	for renamed_datatype_definition_enumeration_ref_1 := range stage.Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1s {
+		renamed_datatype_definition_enumeration_ref_1Ordered = append(renamed_datatype_definition_enumeration_ref_1Ordered, renamed_datatype_definition_enumeration_ref_1)
+	}
+	sort.Slice(renamed_datatype_definition_enumeration_ref_1Ordered[:], func(i, j int) bool {
+		return renamed_datatype_definition_enumeration_ref_1Ordered[i].Name < renamed_datatype_definition_enumeration_ref_1Ordered[j].Name
+	})
+	if len(renamed_datatype_definition_enumeration_ref_1Ordered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, renamed_datatype_definition_enumeration_ref_1 := range renamed_datatype_definition_enumeration_ref_1Ordered {
+
+		id = generatesIdentifier("Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1", idx, renamed_datatype_definition_enumeration_ref_1.Name)
+		map_Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1_Identifiers[renamed_datatype_definition_enumeration_ref_1] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", renamed_datatype_definition_enumeration_ref_1.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(renamed_datatype_definition_enumeration_ref_1.Name))
+		initializerStatements += setValueField
+
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "DATATYPE_DEFINITION_ENUMERATION_REF")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(renamed_datatype_definition_enumeration_ref_1.DATATYPE_DEFINITION_ENUMERATION_REF))
+		initializerStatements += setValueField
+
+	}
+
+	map_Renamed_DATATYPE_DEFINITION_INTEGER_REF_1_Identifiers := make(map[*Renamed_DATATYPE_DEFINITION_INTEGER_REF_1]string)
+	_ = map_Renamed_DATATYPE_DEFINITION_INTEGER_REF_1_Identifiers
+
+	renamed_datatype_definition_integer_ref_1Ordered := []*Renamed_DATATYPE_DEFINITION_INTEGER_REF_1{}
+	for renamed_datatype_definition_integer_ref_1 := range stage.Renamed_DATATYPE_DEFINITION_INTEGER_REF_1s {
+		renamed_datatype_definition_integer_ref_1Ordered = append(renamed_datatype_definition_integer_ref_1Ordered, renamed_datatype_definition_integer_ref_1)
+	}
+	sort.Slice(renamed_datatype_definition_integer_ref_1Ordered[:], func(i, j int) bool {
+		return renamed_datatype_definition_integer_ref_1Ordered[i].Name < renamed_datatype_definition_integer_ref_1Ordered[j].Name
+	})
+	if len(renamed_datatype_definition_integer_ref_1Ordered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, renamed_datatype_definition_integer_ref_1 := range renamed_datatype_definition_integer_ref_1Ordered {
+
+		id = generatesIdentifier("Renamed_DATATYPE_DEFINITION_INTEGER_REF_1", idx, renamed_datatype_definition_integer_ref_1.Name)
+		map_Renamed_DATATYPE_DEFINITION_INTEGER_REF_1_Identifiers[renamed_datatype_definition_integer_ref_1] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "Renamed_DATATYPE_DEFINITION_INTEGER_REF_1")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", renamed_datatype_definition_integer_ref_1.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(renamed_datatype_definition_integer_ref_1.Name))
+		initializerStatements += setValueField
+
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "DATATYPE_DEFINITION_INTEGER_REF")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(renamed_datatype_definition_integer_ref_1.DATATYPE_DEFINITION_INTEGER_REF))
+		initializerStatements += setValueField
+
+	}
+
+	map_Renamed_DATATYPE_DEFINITION_REAL_REF_1_Identifiers := make(map[*Renamed_DATATYPE_DEFINITION_REAL_REF_1]string)
+	_ = map_Renamed_DATATYPE_DEFINITION_REAL_REF_1_Identifiers
+
+	renamed_datatype_definition_real_ref_1Ordered := []*Renamed_DATATYPE_DEFINITION_REAL_REF_1{}
+	for renamed_datatype_definition_real_ref_1 := range stage.Renamed_DATATYPE_DEFINITION_REAL_REF_1s {
+		renamed_datatype_definition_real_ref_1Ordered = append(renamed_datatype_definition_real_ref_1Ordered, renamed_datatype_definition_real_ref_1)
+	}
+	sort.Slice(renamed_datatype_definition_real_ref_1Ordered[:], func(i, j int) bool {
+		return renamed_datatype_definition_real_ref_1Ordered[i].Name < renamed_datatype_definition_real_ref_1Ordered[j].Name
+	})
+	if len(renamed_datatype_definition_real_ref_1Ordered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, renamed_datatype_definition_real_ref_1 := range renamed_datatype_definition_real_ref_1Ordered {
+
+		id = generatesIdentifier("Renamed_DATATYPE_DEFINITION_REAL_REF_1", idx, renamed_datatype_definition_real_ref_1.Name)
+		map_Renamed_DATATYPE_DEFINITION_REAL_REF_1_Identifiers[renamed_datatype_definition_real_ref_1] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "Renamed_DATATYPE_DEFINITION_REAL_REF_1")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", renamed_datatype_definition_real_ref_1.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(renamed_datatype_definition_real_ref_1.Name))
+		initializerStatements += setValueField
+
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "DATATYPE_DEFINITION_REAL_REF")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(renamed_datatype_definition_real_ref_1.DATATYPE_DEFINITION_REAL_REF))
+		initializerStatements += setValueField
+
+	}
+
+	map_Renamed_DATATYPE_DEFINITION_STRING_REF_1_Identifiers := make(map[*Renamed_DATATYPE_DEFINITION_STRING_REF_1]string)
+	_ = map_Renamed_DATATYPE_DEFINITION_STRING_REF_1_Identifiers
+
+	renamed_datatype_definition_string_ref_1Ordered := []*Renamed_DATATYPE_DEFINITION_STRING_REF_1{}
+	for renamed_datatype_definition_string_ref_1 := range stage.Renamed_DATATYPE_DEFINITION_STRING_REF_1s {
+		renamed_datatype_definition_string_ref_1Ordered = append(renamed_datatype_definition_string_ref_1Ordered, renamed_datatype_definition_string_ref_1)
+	}
+	sort.Slice(renamed_datatype_definition_string_ref_1Ordered[:], func(i, j int) bool {
+		return renamed_datatype_definition_string_ref_1Ordered[i].Name < renamed_datatype_definition_string_ref_1Ordered[j].Name
+	})
+	if len(renamed_datatype_definition_string_ref_1Ordered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, renamed_datatype_definition_string_ref_1 := range renamed_datatype_definition_string_ref_1Ordered {
+
+		id = generatesIdentifier("Renamed_DATATYPE_DEFINITION_STRING_REF_1", idx, renamed_datatype_definition_string_ref_1.Name)
+		map_Renamed_DATATYPE_DEFINITION_STRING_REF_1_Identifiers[renamed_datatype_definition_string_ref_1] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "Renamed_DATATYPE_DEFINITION_STRING_REF_1")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", renamed_datatype_definition_string_ref_1.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(renamed_datatype_definition_string_ref_1.Name))
+		initializerStatements += setValueField
+
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "DATATYPE_DEFINITION_STRING_REF")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(renamed_datatype_definition_string_ref_1.DATATYPE_DEFINITION_STRING_REF))
+		initializerStatements += setValueField
+
+	}
+
+	map_Renamed_DATATYPE_DEFINITION_XHTML_REF_1_Identifiers := make(map[*Renamed_DATATYPE_DEFINITION_XHTML_REF_1]string)
+	_ = map_Renamed_DATATYPE_DEFINITION_XHTML_REF_1_Identifiers
+
+	renamed_datatype_definition_xhtml_ref_1Ordered := []*Renamed_DATATYPE_DEFINITION_XHTML_REF_1{}
+	for renamed_datatype_definition_xhtml_ref_1 := range stage.Renamed_DATATYPE_DEFINITION_XHTML_REF_1s {
+		renamed_datatype_definition_xhtml_ref_1Ordered = append(renamed_datatype_definition_xhtml_ref_1Ordered, renamed_datatype_definition_xhtml_ref_1)
+	}
+	sort.Slice(renamed_datatype_definition_xhtml_ref_1Ordered[:], func(i, j int) bool {
+		return renamed_datatype_definition_xhtml_ref_1Ordered[i].Name < renamed_datatype_definition_xhtml_ref_1Ordered[j].Name
+	})
+	if len(renamed_datatype_definition_xhtml_ref_1Ordered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, renamed_datatype_definition_xhtml_ref_1 := range renamed_datatype_definition_xhtml_ref_1Ordered {
+
+		id = generatesIdentifier("Renamed_DATATYPE_DEFINITION_XHTML_REF_1", idx, renamed_datatype_definition_xhtml_ref_1.Name)
+		map_Renamed_DATATYPE_DEFINITION_XHTML_REF_1_Identifiers[renamed_datatype_definition_xhtml_ref_1] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "Renamed_DATATYPE_DEFINITION_XHTML_REF_1")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", renamed_datatype_definition_xhtml_ref_1.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(renamed_datatype_definition_xhtml_ref_1.Name))
+		initializerStatements += setValueField
+
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "DATATYPE_DEFINITION_XHTML_REF")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(renamed_datatype_definition_xhtml_ref_1.DATATYPE_DEFINITION_XHTML_REF))
+		initializerStatements += setValueField
+
+	}
+
+	map_Renamed_RELATION_GROUP_TYPE_REF_1_Identifiers := make(map[*Renamed_RELATION_GROUP_TYPE_REF_1]string)
+	_ = map_Renamed_RELATION_GROUP_TYPE_REF_1_Identifiers
+
+	renamed_relation_group_type_ref_1Ordered := []*Renamed_RELATION_GROUP_TYPE_REF_1{}
+	for renamed_relation_group_type_ref_1 := range stage.Renamed_RELATION_GROUP_TYPE_REF_1s {
+		renamed_relation_group_type_ref_1Ordered = append(renamed_relation_group_type_ref_1Ordered, renamed_relation_group_type_ref_1)
+	}
+	sort.Slice(renamed_relation_group_type_ref_1Ordered[:], func(i, j int) bool {
+		return renamed_relation_group_type_ref_1Ordered[i].Name < renamed_relation_group_type_ref_1Ordered[j].Name
+	})
+	if len(renamed_relation_group_type_ref_1Ordered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, renamed_relation_group_type_ref_1 := range renamed_relation_group_type_ref_1Ordered {
+
+		id = generatesIdentifier("Renamed_RELATION_GROUP_TYPE_REF_1", idx, renamed_relation_group_type_ref_1.Name)
+		map_Renamed_RELATION_GROUP_TYPE_REF_1_Identifiers[renamed_relation_group_type_ref_1] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "Renamed_RELATION_GROUP_TYPE_REF_1")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", renamed_relation_group_type_ref_1.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(renamed_relation_group_type_ref_1.Name))
+		initializerStatements += setValueField
+
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "RELATION_GROUP_TYPE_REF")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(renamed_relation_group_type_ref_1.RELATION_GROUP_TYPE_REF))
+		initializerStatements += setValueField
+
+	}
+
+	map_Renamed_SPECIFICATION_TYPE_REF_1_Identifiers := make(map[*Renamed_SPECIFICATION_TYPE_REF_1]string)
+	_ = map_Renamed_SPECIFICATION_TYPE_REF_1_Identifiers
+
+	renamed_specification_type_ref_1Ordered := []*Renamed_SPECIFICATION_TYPE_REF_1{}
+	for renamed_specification_type_ref_1 := range stage.Renamed_SPECIFICATION_TYPE_REF_1s {
+		renamed_specification_type_ref_1Ordered = append(renamed_specification_type_ref_1Ordered, renamed_specification_type_ref_1)
+	}
+	sort.Slice(renamed_specification_type_ref_1Ordered[:], func(i, j int) bool {
+		return renamed_specification_type_ref_1Ordered[i].Name < renamed_specification_type_ref_1Ordered[j].Name
+	})
+	if len(renamed_specification_type_ref_1Ordered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, renamed_specification_type_ref_1 := range renamed_specification_type_ref_1Ordered {
+
+		id = generatesIdentifier("Renamed_SPECIFICATION_TYPE_REF_1", idx, renamed_specification_type_ref_1.Name)
+		map_Renamed_SPECIFICATION_TYPE_REF_1_Identifiers[renamed_specification_type_ref_1] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "Renamed_SPECIFICATION_TYPE_REF_1")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", renamed_specification_type_ref_1.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(renamed_specification_type_ref_1.Name))
+		initializerStatements += setValueField
+
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "SPECIFICATION_TYPE_REF")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(renamed_specification_type_ref_1.SPECIFICATION_TYPE_REF))
+		initializerStatements += setValueField
+
+	}
+
+	map_Renamed_SPEC_OBJECT_TYPE_REF_1_Identifiers := make(map[*Renamed_SPEC_OBJECT_TYPE_REF_1]string)
+	_ = map_Renamed_SPEC_OBJECT_TYPE_REF_1_Identifiers
+
+	renamed_spec_object_type_ref_1Ordered := []*Renamed_SPEC_OBJECT_TYPE_REF_1{}
+	for renamed_spec_object_type_ref_1 := range stage.Renamed_SPEC_OBJECT_TYPE_REF_1s {
+		renamed_spec_object_type_ref_1Ordered = append(renamed_spec_object_type_ref_1Ordered, renamed_spec_object_type_ref_1)
+	}
+	sort.Slice(renamed_spec_object_type_ref_1Ordered[:], func(i, j int) bool {
+		return renamed_spec_object_type_ref_1Ordered[i].Name < renamed_spec_object_type_ref_1Ordered[j].Name
+	})
+	if len(renamed_spec_object_type_ref_1Ordered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, renamed_spec_object_type_ref_1 := range renamed_spec_object_type_ref_1Ordered {
+
+		id = generatesIdentifier("Renamed_SPEC_OBJECT_TYPE_REF_1", idx, renamed_spec_object_type_ref_1.Name)
+		map_Renamed_SPEC_OBJECT_TYPE_REF_1_Identifiers[renamed_spec_object_type_ref_1] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "Renamed_SPEC_OBJECT_TYPE_REF_1")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", renamed_spec_object_type_ref_1.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(renamed_spec_object_type_ref_1.Name))
+		initializerStatements += setValueField
+
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "SPEC_OBJECT_TYPE_REF")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(renamed_spec_object_type_ref_1.SPEC_OBJECT_TYPE_REF))
+		initializerStatements += setValueField
+
+	}
+
+	map_Renamed_SPEC_RELATION_TYPE_REF_1_Identifiers := make(map[*Renamed_SPEC_RELATION_TYPE_REF_1]string)
+	_ = map_Renamed_SPEC_RELATION_TYPE_REF_1_Identifiers
+
+	renamed_spec_relation_type_ref_1Ordered := []*Renamed_SPEC_RELATION_TYPE_REF_1{}
+	for renamed_spec_relation_type_ref_1 := range stage.Renamed_SPEC_RELATION_TYPE_REF_1s {
+		renamed_spec_relation_type_ref_1Ordered = append(renamed_spec_relation_type_ref_1Ordered, renamed_spec_relation_type_ref_1)
+	}
+	sort.Slice(renamed_spec_relation_type_ref_1Ordered[:], func(i, j int) bool {
+		return renamed_spec_relation_type_ref_1Ordered[i].Name < renamed_spec_relation_type_ref_1Ordered[j].Name
+	})
+	if len(renamed_spec_relation_type_ref_1Ordered) > 0 {
+		identifiersDecl += "\n"
+	}
+	for idx, renamed_spec_relation_type_ref_1 := range renamed_spec_relation_type_ref_1Ordered {
+
+		id = generatesIdentifier("Renamed_SPEC_RELATION_TYPE_REF_1", idx, renamed_spec_relation_type_ref_1.Name)
+		map_Renamed_SPEC_RELATION_TYPE_REF_1_Identifiers[renamed_spec_relation_type_ref_1] = id
+
+		decl = IdentifiersDecls
+		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
+		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "Renamed_SPEC_RELATION_TYPE_REF_1")
+		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", renamed_spec_relation_type_ref_1.Name)
+		identifiersDecl += decl
+
+		initializerStatements += "\n"
+		// Initialisation of values
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(renamed_spec_relation_type_ref_1.Name))
+		initializerStatements += setValueField
+
+		setValueField = StringInitStatement
+		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "SPEC_RELATION_TYPE_REF")
+		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(renamed_spec_relation_type_ref_1.SPEC_RELATION_TYPE_REF))
+		initializerStatements += setValueField
+
+	}
+
 	map_SPECIFICATION_Identifiers := make(map[*SPECIFICATION]string)
 	_ = map_SPECIFICATION_Identifiers
 
@@ -3937,19 +3937,19 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			pointersInitializesStatements += setPointerField
 		}
 
-		for _, _a_default_value_1 := range attribute_definition_boolean.DEFAULT_VALUE {
+		for _, _renamed_attribute_value_boolean_1 := range attribute_definition_boolean.DEFAULT_VALUE {
 			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "DEFAULT_VALUE")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_A_DEFAULT_VALUE_1_Identifiers[_a_default_value_1])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Renamed_ATTRIBUTE_VALUE_BOOLEAN_1_Identifiers[_renamed_attribute_value_boolean_1])
 			pointersInitializesStatements += setPointerField
 		}
 
-		for _, _a_type_7 := range attribute_definition_boolean.TYPE {
+		for _, _renamed_datatype_definition_boolean_ref_1 := range attribute_definition_boolean.TYPE {
 			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "TYPE")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_A_TYPE_7_Identifiers[_a_type_7])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1_Identifiers[_renamed_datatype_definition_boolean_ref_1])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -3971,19 +3971,19 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			pointersInitializesStatements += setPointerField
 		}
 
-		for _, _a_default_value_3 := range attribute_definition_date.DEFAULT_VALUE {
+		for _, _renamed_attribute_value_date_1 := range attribute_definition_date.DEFAULT_VALUE {
 			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "DEFAULT_VALUE")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_A_DEFAULT_VALUE_3_Identifiers[_a_default_value_3])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Renamed_ATTRIBUTE_VALUE_DATE_1_Identifiers[_renamed_attribute_value_date_1])
 			pointersInitializesStatements += setPointerField
 		}
 
-		for _, _a_type := range attribute_definition_date.TYPE {
+		for _, _renamed_datatype_definition_date_ref_1 := range attribute_definition_date.TYPE {
 			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "TYPE")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_A_TYPE_Identifiers[_a_type])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Renamed_DATATYPE_DEFINITION_DATE_REF_1_Identifiers[_renamed_datatype_definition_date_ref_1])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -4005,19 +4005,19 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			pointersInitializesStatements += setPointerField
 		}
 
-		for _, _a_default_value_5 := range attribute_definition_enumeration.DEFAULT_VALUE {
+		for _, _renamed_attribute_value_enumeration_1 := range attribute_definition_enumeration.DEFAULT_VALUE {
 			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "DEFAULT_VALUE")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_A_DEFAULT_VALUE_5_Identifiers[_a_default_value_5])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Renamed_ATTRIBUTE_VALUE_ENUMERATION_1_Identifiers[_renamed_attribute_value_enumeration_1])
 			pointersInitializesStatements += setPointerField
 		}
 
-		for _, _a_type_9 := range attribute_definition_enumeration.TYPE {
+		for _, _renamed_datatype_definition_enumeration_ref_1 := range attribute_definition_enumeration.TYPE {
 			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "TYPE")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_A_TYPE_9_Identifiers[_a_type_9])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1_Identifiers[_renamed_datatype_definition_enumeration_ref_1])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -4039,19 +4039,19 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			pointersInitializesStatements += setPointerField
 		}
 
-		for _, _a_default_value_6 := range attribute_definition_integer.DEFAULT_VALUE {
+		for _, _renamed_attribute_value_integer_1 := range attribute_definition_integer.DEFAULT_VALUE {
 			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "DEFAULT_VALUE")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_A_DEFAULT_VALUE_6_Identifiers[_a_default_value_6])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Renamed_ATTRIBUTE_VALUE_INTEGER_1_Identifiers[_renamed_attribute_value_integer_1])
 			pointersInitializesStatements += setPointerField
 		}
 
-		for _, _a_type_5 := range attribute_definition_integer.TYPE {
+		for _, _renamed_datatype_definition_integer_ref_1 := range attribute_definition_integer.TYPE {
 			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "TYPE")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_A_TYPE_5_Identifiers[_a_type_5])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Renamed_DATATYPE_DEFINITION_INTEGER_REF_1_Identifiers[_renamed_datatype_definition_integer_ref_1])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -4073,19 +4073,19 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			pointersInitializesStatements += setPointerField
 		}
 
-		for _, _a_default_value_4 := range attribute_definition_real.DEFAULT_VALUE {
+		for _, _renamed_attribute_value_real_1 := range attribute_definition_real.DEFAULT_VALUE {
 			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "DEFAULT_VALUE")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_A_DEFAULT_VALUE_4_Identifiers[_a_default_value_4])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Renamed_ATTRIBUTE_VALUE_REAL_1_Identifiers[_renamed_attribute_value_real_1])
 			pointersInitializesStatements += setPointerField
 		}
 
-		for _, _a_type_3 := range attribute_definition_real.TYPE {
+		for _, _renamed_datatype_definition_real_ref_1 := range attribute_definition_real.TYPE {
 			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "TYPE")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_A_TYPE_3_Identifiers[_a_type_3])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Renamed_DATATYPE_DEFINITION_REAL_REF_1_Identifiers[_renamed_datatype_definition_real_ref_1])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -4107,19 +4107,19 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			pointersInitializesStatements += setPointerField
 		}
 
-		for _, _a_default_value := range attribute_definition_string.DEFAULT_VALUE {
+		for _, _renamed_attribute_value_string_1 := range attribute_definition_string.DEFAULT_VALUE {
 			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "DEFAULT_VALUE")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_A_DEFAULT_VALUE_Identifiers[_a_default_value])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Renamed_ATTRIBUTE_VALUE_STRING_1_Identifiers[_renamed_attribute_value_string_1])
 			pointersInitializesStatements += setPointerField
 		}
 
-		for _, _a_type_8 := range attribute_definition_string.TYPE {
+		for _, _renamed_datatype_definition_string_ref_1 := range attribute_definition_string.TYPE {
 			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "TYPE")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_A_TYPE_8_Identifiers[_a_type_8])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Renamed_DATATYPE_DEFINITION_STRING_REF_1_Identifiers[_renamed_datatype_definition_string_ref_1])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -4141,19 +4141,19 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			pointersInitializesStatements += setPointerField
 		}
 
-		for _, _a_default_value_2 := range attribute_definition_xhtml.DEFAULT_VALUE {
+		for _, _renamed_attribute_value_xhtml_1 := range attribute_definition_xhtml.DEFAULT_VALUE {
 			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "DEFAULT_VALUE")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_A_DEFAULT_VALUE_2_Identifiers[_a_default_value_2])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Renamed_ATTRIBUTE_VALUE_XHTML_1_Identifiers[_renamed_attribute_value_xhtml_1])
 			pointersInitializesStatements += setPointerField
 		}
 
-		for _, _a_type_6 := range attribute_definition_xhtml.TYPE {
+		for _, _renamed_datatype_definition_xhtml_ref_1 := range attribute_definition_xhtml.TYPE {
 			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "TYPE")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_A_TYPE_6_Identifiers[_a_type_6])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Renamed_DATATYPE_DEFINITION_XHTML_REF_1_Identifiers[_renamed_datatype_definition_xhtml_ref_1])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -4167,11 +4167,11 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		map_ATTRIBUTE_VALUE_BOOLEAN_Identifiers[attribute_value_boolean] = id
 
 		// Initialisation of values
-		for _, _a_definition_4 := range attribute_value_boolean.DEFINITION {
+		for _, _renamed_attribute_definition_boolean_ref_1 := range attribute_value_boolean.DEFINITION {
 			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "DEFINITION")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_A_DEFINITION_4_Identifiers[_a_definition_4])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1_Identifiers[_renamed_attribute_definition_boolean_ref_1])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -4185,11 +4185,11 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		map_ATTRIBUTE_VALUE_DATE_Identifiers[attribute_value_date] = id
 
 		// Initialisation of values
-		for _, _a_definition_2 := range attribute_value_date.DEFINITION {
+		for _, _renamed_attribute_definition_date_ref_1 := range attribute_value_date.DEFINITION {
 			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "DEFINITION")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_A_DEFINITION_2_Identifiers[_a_definition_2])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1_Identifiers[_renamed_attribute_definition_date_ref_1])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -4203,11 +4203,11 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		map_ATTRIBUTE_VALUE_ENUMERATION_Identifiers[attribute_value_enumeration] = id
 
 		// Initialisation of values
-		for _, _a_definition_5 := range attribute_value_enumeration.DEFINITION {
+		for _, _renamed_attribute_definition_enumeration_ref_1 := range attribute_value_enumeration.DEFINITION {
 			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "DEFINITION")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_A_DEFINITION_5_Identifiers[_a_definition_5])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1_Identifiers[_renamed_attribute_definition_enumeration_ref_1])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -4229,11 +4229,11 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		map_ATTRIBUTE_VALUE_INTEGER_Identifiers[attribute_value_integer] = id
 
 		// Initialisation of values
-		for _, _a_definition := range attribute_value_integer.DEFINITION {
+		for _, _renamed_attribute_definition_integer_ref_1 := range attribute_value_integer.DEFINITION {
 			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "DEFINITION")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_A_DEFINITION_Identifiers[_a_definition])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1_Identifiers[_renamed_attribute_definition_integer_ref_1])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -4247,11 +4247,11 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		map_ATTRIBUTE_VALUE_REAL_Identifiers[attribute_value_real] = id
 
 		// Initialisation of values
-		for _, _a_definition_6 := range attribute_value_real.DEFINITION {
+		for _, _renamed_attribute_definition_real_ref_1 := range attribute_value_real.DEFINITION {
 			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "DEFINITION")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_A_DEFINITION_6_Identifiers[_a_definition_6])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1_Identifiers[_renamed_attribute_definition_real_ref_1])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -4265,11 +4265,11 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		map_ATTRIBUTE_VALUE_STRING_Identifiers[attribute_value_string] = id
 
 		// Initialisation of values
-		for _, _a_definition_3 := range attribute_value_string.DEFINITION {
+		for _, _renamed_attribute_definition_string_ref_1 := range attribute_value_string.DEFINITION {
 			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "DEFINITION")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_A_DEFINITION_3_Identifiers[_a_definition_3])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1_Identifiers[_renamed_attribute_definition_string_ref_1])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -4299,11 +4299,11 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			pointersInitializesStatements += setPointerField
 		}
 
-		for _, _a_definition_1 := range attribute_value_xhtml.DEFINITION {
+		for _, _renamed_attribute_definition_xhtml_ref_1 := range attribute_value_xhtml.DEFINITION {
 			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "DEFINITION")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_A_DEFINITION_1_Identifiers[_a_definition_1])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1_Identifiers[_renamed_attribute_definition_xhtml_ref_1])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -4427,202 +4427,6 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			pointersInitializesStatements += setPointerField
 		}
 
-	}
-
-	for idx, a_default_value := range a_default_valueOrdered {
-		var setPointerField string
-		_ = setPointerField
-
-		id = generatesIdentifier("A_DEFAULT_VALUE", idx, a_default_value.Name)
-		map_A_DEFAULT_VALUE_Identifiers[a_default_value] = id
-
-		// Initialisation of values
-		for _, _attribute_value_string := range a_default_value.ATTRIBUTE_VALUE_STRING {
-			setPointerField = SliceOfPointersFieldInitStatement
-			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ATTRIBUTE_VALUE_STRING")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_VALUE_STRING_Identifiers[_attribute_value_string])
-			pointersInitializesStatements += setPointerField
-		}
-
-	}
-
-	for idx, a_default_value_1 := range a_default_value_1Ordered {
-		var setPointerField string
-		_ = setPointerField
-
-		id = generatesIdentifier("A_DEFAULT_VALUE_1", idx, a_default_value_1.Name)
-		map_A_DEFAULT_VALUE_1_Identifiers[a_default_value_1] = id
-
-		// Initialisation of values
-		for _, _attribute_value_boolean := range a_default_value_1.ATTRIBUTE_VALUE_BOOLEAN {
-			setPointerField = SliceOfPointersFieldInitStatement
-			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ATTRIBUTE_VALUE_BOOLEAN")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_VALUE_BOOLEAN_Identifiers[_attribute_value_boolean])
-			pointersInitializesStatements += setPointerField
-		}
-
-	}
-
-	for idx, a_default_value_2 := range a_default_value_2Ordered {
-		var setPointerField string
-		_ = setPointerField
-
-		id = generatesIdentifier("A_DEFAULT_VALUE_2", idx, a_default_value_2.Name)
-		map_A_DEFAULT_VALUE_2_Identifiers[a_default_value_2] = id
-
-		// Initialisation of values
-		for _, _attribute_value_xhtml := range a_default_value_2.ATTRIBUTE_VALUE_XHTML {
-			setPointerField = SliceOfPointersFieldInitStatement
-			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ATTRIBUTE_VALUE_XHTML")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_VALUE_XHTML_Identifiers[_attribute_value_xhtml])
-			pointersInitializesStatements += setPointerField
-		}
-
-	}
-
-	for idx, a_default_value_3 := range a_default_value_3Ordered {
-		var setPointerField string
-		_ = setPointerField
-
-		id = generatesIdentifier("A_DEFAULT_VALUE_3", idx, a_default_value_3.Name)
-		map_A_DEFAULT_VALUE_3_Identifiers[a_default_value_3] = id
-
-		// Initialisation of values
-		for _, _attribute_value_date := range a_default_value_3.ATTRIBUTE_VALUE_DATE {
-			setPointerField = SliceOfPointersFieldInitStatement
-			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ATTRIBUTE_VALUE_DATE")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_VALUE_DATE_Identifiers[_attribute_value_date])
-			pointersInitializesStatements += setPointerField
-		}
-
-	}
-
-	for idx, a_default_value_4 := range a_default_value_4Ordered {
-		var setPointerField string
-		_ = setPointerField
-
-		id = generatesIdentifier("A_DEFAULT_VALUE_4", idx, a_default_value_4.Name)
-		map_A_DEFAULT_VALUE_4_Identifiers[a_default_value_4] = id
-
-		// Initialisation of values
-		for _, _attribute_value_real := range a_default_value_4.ATTRIBUTE_VALUE_REAL {
-			setPointerField = SliceOfPointersFieldInitStatement
-			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ATTRIBUTE_VALUE_REAL")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_VALUE_REAL_Identifiers[_attribute_value_real])
-			pointersInitializesStatements += setPointerField
-		}
-
-	}
-
-	for idx, a_default_value_5 := range a_default_value_5Ordered {
-		var setPointerField string
-		_ = setPointerField
-
-		id = generatesIdentifier("A_DEFAULT_VALUE_5", idx, a_default_value_5.Name)
-		map_A_DEFAULT_VALUE_5_Identifiers[a_default_value_5] = id
-
-		// Initialisation of values
-		for _, _attribute_value_enumeration := range a_default_value_5.ATTRIBUTE_VALUE_ENUMERATION {
-			setPointerField = SliceOfPointersFieldInitStatement
-			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ATTRIBUTE_VALUE_ENUMERATION")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_VALUE_ENUMERATION_Identifiers[_attribute_value_enumeration])
-			pointersInitializesStatements += setPointerField
-		}
-
-	}
-
-	for idx, a_default_value_6 := range a_default_value_6Ordered {
-		var setPointerField string
-		_ = setPointerField
-
-		id = generatesIdentifier("A_DEFAULT_VALUE_6", idx, a_default_value_6.Name)
-		map_A_DEFAULT_VALUE_6_Identifiers[a_default_value_6] = id
-
-		// Initialisation of values
-		for _, _attribute_value_integer := range a_default_value_6.ATTRIBUTE_VALUE_INTEGER {
-			setPointerField = SliceOfPointersFieldInitStatement
-			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ATTRIBUTE_VALUE_INTEGER")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_VALUE_INTEGER_Identifiers[_attribute_value_integer])
-			pointersInitializesStatements += setPointerField
-		}
-
-	}
-
-	for idx, a_definition := range a_definitionOrdered {
-		var setPointerField string
-		_ = setPointerField
-
-		id = generatesIdentifier("A_DEFINITION", idx, a_definition.Name)
-		map_A_DEFINITION_Identifiers[a_definition] = id
-
-		// Initialisation of values
-	}
-
-	for idx, a_definition_1 := range a_definition_1Ordered {
-		var setPointerField string
-		_ = setPointerField
-
-		id = generatesIdentifier("A_DEFINITION_1", idx, a_definition_1.Name)
-		map_A_DEFINITION_1_Identifiers[a_definition_1] = id
-
-		// Initialisation of values
-	}
-
-	for idx, a_definition_2 := range a_definition_2Ordered {
-		var setPointerField string
-		_ = setPointerField
-
-		id = generatesIdentifier("A_DEFINITION_2", idx, a_definition_2.Name)
-		map_A_DEFINITION_2_Identifiers[a_definition_2] = id
-
-		// Initialisation of values
-	}
-
-	for idx, a_definition_3 := range a_definition_3Ordered {
-		var setPointerField string
-		_ = setPointerField
-
-		id = generatesIdentifier("A_DEFINITION_3", idx, a_definition_3.Name)
-		map_A_DEFINITION_3_Identifiers[a_definition_3] = id
-
-		// Initialisation of values
-	}
-
-	for idx, a_definition_4 := range a_definition_4Ordered {
-		var setPointerField string
-		_ = setPointerField
-
-		id = generatesIdentifier("A_DEFINITION_4", idx, a_definition_4.Name)
-		map_A_DEFINITION_4_Identifiers[a_definition_4] = id
-
-		// Initialisation of values
-	}
-
-	for idx, a_definition_5 := range a_definition_5Ordered {
-		var setPointerField string
-		_ = setPointerField
-
-		id = generatesIdentifier("A_DEFINITION_5", idx, a_definition_5.Name)
-		map_A_DEFINITION_5_Identifiers[a_definition_5] = id
-
-		// Initialisation of values
-	}
-
-	for idx, a_definition_6 := range a_definition_6Ordered {
-		var setPointerField string
-		_ = setPointerField
-
-		id = generatesIdentifier("A_DEFINITION_6", idx, a_definition_6.Name)
-		map_A_DEFINITION_6_Identifiers[a_definition_6] = id
-
-		// Initialisation of values
 	}
 
 	for idx, a_editable_atts := range a_editable_attsOrdered {
@@ -4811,6 +4615,14 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		map_A_SPEC_RELATIONS_Identifiers[a_spec_relations] = id
 
 		// Initialisation of values
+		for _, _spec_relation := range a_spec_relations.SPEC_RELATION {
+			setPointerField = SliceOfPointersFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "SPEC_RELATION")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_SPEC_RELATION_Identifiers[_spec_relation])
+			pointersInitializesStatements += setPointerField
+		}
+
 	}
 
 	for idx, a_spec_relations_1 := range a_spec_relations_1Ordered {
@@ -4821,14 +4633,6 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		map_A_SPEC_RELATIONS_1_Identifiers[a_spec_relations_1] = id
 
 		// Initialisation of values
-		for _, _spec_relation := range a_spec_relations_1.SPEC_RELATION {
-			setPointerField = SliceOfPointersFieldInitStatement
-			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "SPEC_RELATION")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_SPEC_RELATION_Identifiers[_spec_relation])
-			pointersInitializesStatements += setPointerField
-		}
-
 	}
 
 	for idx, a_spec_relation_groups := range a_spec_relation_groupsOrdered {
@@ -4925,116 +4729,6 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			pointersInitializesStatements += setPointerField
 		}
 
-	}
-
-	for idx, a_type := range a_typeOrdered {
-		var setPointerField string
-		_ = setPointerField
-
-		id = generatesIdentifier("A_TYPE", idx, a_type.Name)
-		map_A_TYPE_Identifiers[a_type] = id
-
-		// Initialisation of values
-	}
-
-	for idx, a_type_1 := range a_type_1Ordered {
-		var setPointerField string
-		_ = setPointerField
-
-		id = generatesIdentifier("A_TYPE_1", idx, a_type_1.Name)
-		map_A_TYPE_1_Identifiers[a_type_1] = id
-
-		// Initialisation of values
-	}
-
-	for idx, a_type_10 := range a_type_10Ordered {
-		var setPointerField string
-		_ = setPointerField
-
-		id = generatesIdentifier("A_TYPE_10", idx, a_type_10.Name)
-		map_A_TYPE_10_Identifiers[a_type_10] = id
-
-		// Initialisation of values
-	}
-
-	for idx, a_type_2 := range a_type_2Ordered {
-		var setPointerField string
-		_ = setPointerField
-
-		id = generatesIdentifier("A_TYPE_2", idx, a_type_2.Name)
-		map_A_TYPE_2_Identifiers[a_type_2] = id
-
-		// Initialisation of values
-	}
-
-	for idx, a_type_3 := range a_type_3Ordered {
-		var setPointerField string
-		_ = setPointerField
-
-		id = generatesIdentifier("A_TYPE_3", idx, a_type_3.Name)
-		map_A_TYPE_3_Identifiers[a_type_3] = id
-
-		// Initialisation of values
-	}
-
-	for idx, a_type_4 := range a_type_4Ordered {
-		var setPointerField string
-		_ = setPointerField
-
-		id = generatesIdentifier("A_TYPE_4", idx, a_type_4.Name)
-		map_A_TYPE_4_Identifiers[a_type_4] = id
-
-		// Initialisation of values
-	}
-
-	for idx, a_type_5 := range a_type_5Ordered {
-		var setPointerField string
-		_ = setPointerField
-
-		id = generatesIdentifier("A_TYPE_5", idx, a_type_5.Name)
-		map_A_TYPE_5_Identifiers[a_type_5] = id
-
-		// Initialisation of values
-	}
-
-	for idx, a_type_6 := range a_type_6Ordered {
-		var setPointerField string
-		_ = setPointerField
-
-		id = generatesIdentifier("A_TYPE_6", idx, a_type_6.Name)
-		map_A_TYPE_6_Identifiers[a_type_6] = id
-
-		// Initialisation of values
-	}
-
-	for idx, a_type_7 := range a_type_7Ordered {
-		var setPointerField string
-		_ = setPointerField
-
-		id = generatesIdentifier("A_TYPE_7", idx, a_type_7.Name)
-		map_A_TYPE_7_Identifiers[a_type_7] = id
-
-		// Initialisation of values
-	}
-
-	for idx, a_type_8 := range a_type_8Ordered {
-		var setPointerField string
-		_ = setPointerField
-
-		id = generatesIdentifier("A_TYPE_8", idx, a_type_8.Name)
-		map_A_TYPE_8_Identifiers[a_type_8] = id
-
-		// Initialisation of values
-	}
-
-	for idx, a_type_9 := range a_type_9Ordered {
-		var setPointerField string
-		_ = setPointerField
-
-		id = generatesIdentifier("A_TYPE_9", idx, a_type_9.Name)
-		map_A_TYPE_9_Identifiers[a_type_9] = id
-
-		// Initialisation of values
 	}
 
 	for idx, a_values := range a_valuesOrdered {
@@ -5307,19 +5001,19 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			pointersInitializesStatements += setPointerField
 		}
 
-		for _, _a_spec_relations := range relation_group.SPEC_RELATIONS {
+		for _, _a_spec_relations_1 := range relation_group.SPEC_RELATIONS {
 			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "SPEC_RELATIONS")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_A_SPEC_RELATIONS_Identifiers[_a_spec_relations])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_A_SPEC_RELATIONS_1_Identifiers[_a_spec_relations_1])
 			pointersInitializesStatements += setPointerField
 		}
 
-		for _, _a_type_1 := range relation_group.TYPE {
+		for _, _renamed_relation_group_type_ref_1 := range relation_group.TYPE {
 			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "TYPE")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_A_TYPE_1_Identifiers[_a_type_1])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Renamed_RELATION_GROUP_TYPE_REF_1_Identifiers[_renamed_relation_group_type_ref_1])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -5417,11 +5111,11 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			pointersInitializesStatements += setPointerField
 		}
 
-		for _, _a_spec_relations_1 := range req_if_content.SPEC_RELATIONS {
+		for _, _a_spec_relations := range req_if_content.SPEC_RELATIONS {
 			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "SPEC_RELATIONS")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_A_SPEC_RELATIONS_1_Identifiers[_a_spec_relations_1])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_A_SPEC_RELATIONS_Identifiers[_a_spec_relations])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -5463,6 +5157,312 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		// Initialisation of values
 	}
 
+	for idx, renamed_attribute_definition_boolean_ref_1 := range renamed_attribute_definition_boolean_ref_1Ordered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1", idx, renamed_attribute_definition_boolean_ref_1.Name)
+		map_Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1_Identifiers[renamed_attribute_definition_boolean_ref_1] = id
+
+		// Initialisation of values
+	}
+
+	for idx, renamed_attribute_definition_date_ref_1 := range renamed_attribute_definition_date_ref_1Ordered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1", idx, renamed_attribute_definition_date_ref_1.Name)
+		map_Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1_Identifiers[renamed_attribute_definition_date_ref_1] = id
+
+		// Initialisation of values
+	}
+
+	for idx, renamed_attribute_definition_enumeration_ref_1 := range renamed_attribute_definition_enumeration_ref_1Ordered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1", idx, renamed_attribute_definition_enumeration_ref_1.Name)
+		map_Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1_Identifiers[renamed_attribute_definition_enumeration_ref_1] = id
+
+		// Initialisation of values
+	}
+
+	for idx, renamed_attribute_definition_integer_ref_1 := range renamed_attribute_definition_integer_ref_1Ordered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1", idx, renamed_attribute_definition_integer_ref_1.Name)
+		map_Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1_Identifiers[renamed_attribute_definition_integer_ref_1] = id
+
+		// Initialisation of values
+	}
+
+	for idx, renamed_attribute_definition_real_ref_1 := range renamed_attribute_definition_real_ref_1Ordered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1", idx, renamed_attribute_definition_real_ref_1.Name)
+		map_Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1_Identifiers[renamed_attribute_definition_real_ref_1] = id
+
+		// Initialisation of values
+	}
+
+	for idx, renamed_attribute_definition_string_ref_1 := range renamed_attribute_definition_string_ref_1Ordered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1", idx, renamed_attribute_definition_string_ref_1.Name)
+		map_Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1_Identifiers[renamed_attribute_definition_string_ref_1] = id
+
+		// Initialisation of values
+	}
+
+	for idx, renamed_attribute_definition_xhtml_ref_1 := range renamed_attribute_definition_xhtml_ref_1Ordered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1", idx, renamed_attribute_definition_xhtml_ref_1.Name)
+		map_Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1_Identifiers[renamed_attribute_definition_xhtml_ref_1] = id
+
+		// Initialisation of values
+	}
+
+	for idx, renamed_attribute_value_boolean_1 := range renamed_attribute_value_boolean_1Ordered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("Renamed_ATTRIBUTE_VALUE_BOOLEAN_1", idx, renamed_attribute_value_boolean_1.Name)
+		map_Renamed_ATTRIBUTE_VALUE_BOOLEAN_1_Identifiers[renamed_attribute_value_boolean_1] = id
+
+		// Initialisation of values
+		for _, _attribute_value_boolean := range renamed_attribute_value_boolean_1.ATTRIBUTE_VALUE_BOOLEAN {
+			setPointerField = SliceOfPointersFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ATTRIBUTE_VALUE_BOOLEAN")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_VALUE_BOOLEAN_Identifiers[_attribute_value_boolean])
+			pointersInitializesStatements += setPointerField
+		}
+
+	}
+
+	for idx, renamed_attribute_value_date_1 := range renamed_attribute_value_date_1Ordered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("Renamed_ATTRIBUTE_VALUE_DATE_1", idx, renamed_attribute_value_date_1.Name)
+		map_Renamed_ATTRIBUTE_VALUE_DATE_1_Identifiers[renamed_attribute_value_date_1] = id
+
+		// Initialisation of values
+		for _, _attribute_value_date := range renamed_attribute_value_date_1.ATTRIBUTE_VALUE_DATE {
+			setPointerField = SliceOfPointersFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ATTRIBUTE_VALUE_DATE")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_VALUE_DATE_Identifiers[_attribute_value_date])
+			pointersInitializesStatements += setPointerField
+		}
+
+	}
+
+	for idx, renamed_attribute_value_enumeration_1 := range renamed_attribute_value_enumeration_1Ordered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("Renamed_ATTRIBUTE_VALUE_ENUMERATION_1", idx, renamed_attribute_value_enumeration_1.Name)
+		map_Renamed_ATTRIBUTE_VALUE_ENUMERATION_1_Identifiers[renamed_attribute_value_enumeration_1] = id
+
+		// Initialisation of values
+		for _, _attribute_value_enumeration := range renamed_attribute_value_enumeration_1.ATTRIBUTE_VALUE_ENUMERATION {
+			setPointerField = SliceOfPointersFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ATTRIBUTE_VALUE_ENUMERATION")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_VALUE_ENUMERATION_Identifiers[_attribute_value_enumeration])
+			pointersInitializesStatements += setPointerField
+		}
+
+	}
+
+	for idx, renamed_attribute_value_integer_1 := range renamed_attribute_value_integer_1Ordered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("Renamed_ATTRIBUTE_VALUE_INTEGER_1", idx, renamed_attribute_value_integer_1.Name)
+		map_Renamed_ATTRIBUTE_VALUE_INTEGER_1_Identifiers[renamed_attribute_value_integer_1] = id
+
+		// Initialisation of values
+		for _, _attribute_value_integer := range renamed_attribute_value_integer_1.ATTRIBUTE_VALUE_INTEGER {
+			setPointerField = SliceOfPointersFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ATTRIBUTE_VALUE_INTEGER")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_VALUE_INTEGER_Identifiers[_attribute_value_integer])
+			pointersInitializesStatements += setPointerField
+		}
+
+	}
+
+	for idx, renamed_attribute_value_real_1 := range renamed_attribute_value_real_1Ordered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("Renamed_ATTRIBUTE_VALUE_REAL_1", idx, renamed_attribute_value_real_1.Name)
+		map_Renamed_ATTRIBUTE_VALUE_REAL_1_Identifiers[renamed_attribute_value_real_1] = id
+
+		// Initialisation of values
+		for _, _attribute_value_real := range renamed_attribute_value_real_1.ATTRIBUTE_VALUE_REAL {
+			setPointerField = SliceOfPointersFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ATTRIBUTE_VALUE_REAL")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_VALUE_REAL_Identifiers[_attribute_value_real])
+			pointersInitializesStatements += setPointerField
+		}
+
+	}
+
+	for idx, renamed_attribute_value_string_1 := range renamed_attribute_value_string_1Ordered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("Renamed_ATTRIBUTE_VALUE_STRING_1", idx, renamed_attribute_value_string_1.Name)
+		map_Renamed_ATTRIBUTE_VALUE_STRING_1_Identifiers[renamed_attribute_value_string_1] = id
+
+		// Initialisation of values
+		for _, _attribute_value_string := range renamed_attribute_value_string_1.ATTRIBUTE_VALUE_STRING {
+			setPointerField = SliceOfPointersFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ATTRIBUTE_VALUE_STRING")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_VALUE_STRING_Identifiers[_attribute_value_string])
+			pointersInitializesStatements += setPointerField
+		}
+
+	}
+
+	for idx, renamed_attribute_value_xhtml_1 := range renamed_attribute_value_xhtml_1Ordered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("Renamed_ATTRIBUTE_VALUE_XHTML_1", idx, renamed_attribute_value_xhtml_1.Name)
+		map_Renamed_ATTRIBUTE_VALUE_XHTML_1_Identifiers[renamed_attribute_value_xhtml_1] = id
+
+		// Initialisation of values
+		for _, _attribute_value_xhtml := range renamed_attribute_value_xhtml_1.ATTRIBUTE_VALUE_XHTML {
+			setPointerField = SliceOfPointersFieldInitStatement
+			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ATTRIBUTE_VALUE_XHTML")
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_VALUE_XHTML_Identifiers[_attribute_value_xhtml])
+			pointersInitializesStatements += setPointerField
+		}
+
+	}
+
+	for idx, renamed_datatype_definition_boolean_ref_1 := range renamed_datatype_definition_boolean_ref_1Ordered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1", idx, renamed_datatype_definition_boolean_ref_1.Name)
+		map_Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1_Identifiers[renamed_datatype_definition_boolean_ref_1] = id
+
+		// Initialisation of values
+	}
+
+	for idx, renamed_datatype_definition_date_ref_1 := range renamed_datatype_definition_date_ref_1Ordered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("Renamed_DATATYPE_DEFINITION_DATE_REF_1", idx, renamed_datatype_definition_date_ref_1.Name)
+		map_Renamed_DATATYPE_DEFINITION_DATE_REF_1_Identifiers[renamed_datatype_definition_date_ref_1] = id
+
+		// Initialisation of values
+	}
+
+	for idx, renamed_datatype_definition_enumeration_ref_1 := range renamed_datatype_definition_enumeration_ref_1Ordered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1", idx, renamed_datatype_definition_enumeration_ref_1.Name)
+		map_Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1_Identifiers[renamed_datatype_definition_enumeration_ref_1] = id
+
+		// Initialisation of values
+	}
+
+	for idx, renamed_datatype_definition_integer_ref_1 := range renamed_datatype_definition_integer_ref_1Ordered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("Renamed_DATATYPE_DEFINITION_INTEGER_REF_1", idx, renamed_datatype_definition_integer_ref_1.Name)
+		map_Renamed_DATATYPE_DEFINITION_INTEGER_REF_1_Identifiers[renamed_datatype_definition_integer_ref_1] = id
+
+		// Initialisation of values
+	}
+
+	for idx, renamed_datatype_definition_real_ref_1 := range renamed_datatype_definition_real_ref_1Ordered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("Renamed_DATATYPE_DEFINITION_REAL_REF_1", idx, renamed_datatype_definition_real_ref_1.Name)
+		map_Renamed_DATATYPE_DEFINITION_REAL_REF_1_Identifiers[renamed_datatype_definition_real_ref_1] = id
+
+		// Initialisation of values
+	}
+
+	for idx, renamed_datatype_definition_string_ref_1 := range renamed_datatype_definition_string_ref_1Ordered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("Renamed_DATATYPE_DEFINITION_STRING_REF_1", idx, renamed_datatype_definition_string_ref_1.Name)
+		map_Renamed_DATATYPE_DEFINITION_STRING_REF_1_Identifiers[renamed_datatype_definition_string_ref_1] = id
+
+		// Initialisation of values
+	}
+
+	for idx, renamed_datatype_definition_xhtml_ref_1 := range renamed_datatype_definition_xhtml_ref_1Ordered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("Renamed_DATATYPE_DEFINITION_XHTML_REF_1", idx, renamed_datatype_definition_xhtml_ref_1.Name)
+		map_Renamed_DATATYPE_DEFINITION_XHTML_REF_1_Identifiers[renamed_datatype_definition_xhtml_ref_1] = id
+
+		// Initialisation of values
+	}
+
+	for idx, renamed_relation_group_type_ref_1 := range renamed_relation_group_type_ref_1Ordered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("Renamed_RELATION_GROUP_TYPE_REF_1", idx, renamed_relation_group_type_ref_1.Name)
+		map_Renamed_RELATION_GROUP_TYPE_REF_1_Identifiers[renamed_relation_group_type_ref_1] = id
+
+		// Initialisation of values
+	}
+
+	for idx, renamed_specification_type_ref_1 := range renamed_specification_type_ref_1Ordered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("Renamed_SPECIFICATION_TYPE_REF_1", idx, renamed_specification_type_ref_1.Name)
+		map_Renamed_SPECIFICATION_TYPE_REF_1_Identifiers[renamed_specification_type_ref_1] = id
+
+		// Initialisation of values
+	}
+
+	for idx, renamed_spec_object_type_ref_1 := range renamed_spec_object_type_ref_1Ordered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("Renamed_SPEC_OBJECT_TYPE_REF_1", idx, renamed_spec_object_type_ref_1.Name)
+		map_Renamed_SPEC_OBJECT_TYPE_REF_1_Identifiers[renamed_spec_object_type_ref_1] = id
+
+		// Initialisation of values
+	}
+
+	for idx, renamed_spec_relation_type_ref_1 := range renamed_spec_relation_type_ref_1Ordered {
+		var setPointerField string
+		_ = setPointerField
+
+		id = generatesIdentifier("Renamed_SPEC_RELATION_TYPE_REF_1", idx, renamed_spec_relation_type_ref_1.Name)
+		map_Renamed_SPEC_RELATION_TYPE_REF_1_Identifiers[renamed_spec_relation_type_ref_1] = id
+
+		// Initialisation of values
+	}
+
 	for idx, specification := range specificationOrdered {
 		var setPointerField string
 		_ = setPointerField
@@ -5495,11 +5495,11 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			pointersInitializesStatements += setPointerField
 		}
 
-		for _, _a_type_10 := range specification.TYPE {
+		for _, _renamed_specification_type_ref_1 := range specification.TYPE {
 			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "TYPE")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_A_TYPE_10_Identifiers[_a_type_10])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Renamed_SPECIFICATION_TYPE_REF_1_Identifiers[_renamed_specification_type_ref_1])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -5597,11 +5597,11 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			pointersInitializesStatements += setPointerField
 		}
 
-		for _, _a_type_2 := range spec_object.TYPE {
+		for _, _renamed_spec_object_type_ref_1 := range spec_object.TYPE {
 			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "TYPE")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_A_TYPE_2_Identifiers[_a_type_2])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Renamed_SPEC_OBJECT_TYPE_REF_1_Identifiers[_renamed_spec_object_type_ref_1])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -5665,11 +5665,11 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 			pointersInitializesStatements += setPointerField
 		}
 
-		for _, _a_type_4 := range spec_relation.TYPE {
+		for _, _renamed_spec_relation_type_ref_1 := range spec_relation.TYPE {
 			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "TYPE")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_A_TYPE_4_Identifiers[_a_type_4])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Renamed_SPEC_RELATION_TYPE_REF_1_Identifiers[_renamed_spec_relation_type_ref_1])
 			pointersInitializesStatements += setPointerField
 		}
 

@@ -272,37 +272,37 @@ func (backRepoATTRIBUTE_DEFINITION_BOOLEAN *BackRepoATTRIBUTE_DEFINITION_BOOLEAN
 		// 1. reset
 		attribute_definition_booleanDB.ATTRIBUTE_DEFINITION_BOOLEANPointersEncoding.DEFAULT_VALUE = make([]int, 0)
 		// 2. encode
-		for _, a_default_value_1AssocEnd := range attribute_definition_boolean.DEFAULT_VALUE {
-			a_default_value_1AssocEnd_DB :=
-				backRepo.BackRepoA_DEFAULT_VALUE_1.GetA_DEFAULT_VALUE_1DBFromA_DEFAULT_VALUE_1Ptr(a_default_value_1AssocEnd)
+		for _, renamed_attribute_value_boolean_1AssocEnd := range attribute_definition_boolean.DEFAULT_VALUE {
+			renamed_attribute_value_boolean_1AssocEnd_DB :=
+				backRepo.BackRepoRenamed_ATTRIBUTE_VALUE_BOOLEAN_1.GetRenamed_ATTRIBUTE_VALUE_BOOLEAN_1DBFromRenamed_ATTRIBUTE_VALUE_BOOLEAN_1Ptr(renamed_attribute_value_boolean_1AssocEnd)
 			
-			// the stage might be inconsistant, meaning that the a_default_value_1AssocEnd_DB might
+			// the stage might be inconsistant, meaning that the renamed_attribute_value_boolean_1AssocEnd_DB might
 			// be missing from the stage. In this case, the commit operation is robust
 			// An alternative would be to crash here to reveal the missing element.
-			if a_default_value_1AssocEnd_DB == nil {
+			if renamed_attribute_value_boolean_1AssocEnd_DB == nil {
 				continue
 			}
 			
 			attribute_definition_booleanDB.ATTRIBUTE_DEFINITION_BOOLEANPointersEncoding.DEFAULT_VALUE =
-				append(attribute_definition_booleanDB.ATTRIBUTE_DEFINITION_BOOLEANPointersEncoding.DEFAULT_VALUE, int(a_default_value_1AssocEnd_DB.ID))
+				append(attribute_definition_booleanDB.ATTRIBUTE_DEFINITION_BOOLEANPointersEncoding.DEFAULT_VALUE, int(renamed_attribute_value_boolean_1AssocEnd_DB.ID))
 		}
 
 		// 1. reset
 		attribute_definition_booleanDB.ATTRIBUTE_DEFINITION_BOOLEANPointersEncoding.TYPE = make([]int, 0)
 		// 2. encode
-		for _, a_type_7AssocEnd := range attribute_definition_boolean.TYPE {
-			a_type_7AssocEnd_DB :=
-				backRepo.BackRepoA_TYPE_7.GetA_TYPE_7DBFromA_TYPE_7Ptr(a_type_7AssocEnd)
+		for _, renamed_datatype_definition_boolean_ref_1AssocEnd := range attribute_definition_boolean.TYPE {
+			renamed_datatype_definition_boolean_ref_1AssocEnd_DB :=
+				backRepo.BackRepoRenamed_DATATYPE_DEFINITION_BOOLEAN_REF_1.GetRenamed_DATATYPE_DEFINITION_BOOLEAN_REF_1DBFromRenamed_DATATYPE_DEFINITION_BOOLEAN_REF_1Ptr(renamed_datatype_definition_boolean_ref_1AssocEnd)
 			
-			// the stage might be inconsistant, meaning that the a_type_7AssocEnd_DB might
+			// the stage might be inconsistant, meaning that the renamed_datatype_definition_boolean_ref_1AssocEnd_DB might
 			// be missing from the stage. In this case, the commit operation is robust
 			// An alternative would be to crash here to reveal the missing element.
-			if a_type_7AssocEnd_DB == nil {
+			if renamed_datatype_definition_boolean_ref_1AssocEnd_DB == nil {
 				continue
 			}
 			
 			attribute_definition_booleanDB.ATTRIBUTE_DEFINITION_BOOLEANPointersEncoding.TYPE =
-				append(attribute_definition_booleanDB.ATTRIBUTE_DEFINITION_BOOLEANPointersEncoding.TYPE, int(a_type_7AssocEnd_DB.ID))
+				append(attribute_definition_booleanDB.ATTRIBUTE_DEFINITION_BOOLEANPointersEncoding.TYPE, int(renamed_datatype_definition_boolean_ref_1AssocEnd_DB.ID))
 		}
 
 		query := backRepoATTRIBUTE_DEFINITION_BOOLEAN.db.Save(&attribute_definition_booleanDB)
@@ -428,21 +428,21 @@ func (attribute_definition_booleanDB *ATTRIBUTE_DEFINITION_BOOLEANDB) DecodePoin
 	}
 
 	// This loop redeem attribute_definition_boolean.DEFAULT_VALUE in the stage from the encode in the back repo
-	// It parses all A_DEFAULT_VALUE_1DB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// It parses all Renamed_ATTRIBUTE_VALUE_BOOLEAN_1DB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance
 	// 1. reset the slice
 	attribute_definition_boolean.DEFAULT_VALUE = attribute_definition_boolean.DEFAULT_VALUE[:0]
-	for _, _A_DEFAULT_VALUE_1id := range attribute_definition_booleanDB.ATTRIBUTE_DEFINITION_BOOLEANPointersEncoding.DEFAULT_VALUE {
-		attribute_definition_boolean.DEFAULT_VALUE = append(attribute_definition_boolean.DEFAULT_VALUE, backRepo.BackRepoA_DEFAULT_VALUE_1.Map_A_DEFAULT_VALUE_1DBID_A_DEFAULT_VALUE_1Ptr[uint(_A_DEFAULT_VALUE_1id)])
+	for _, _Renamed_ATTRIBUTE_VALUE_BOOLEAN_1id := range attribute_definition_booleanDB.ATTRIBUTE_DEFINITION_BOOLEANPointersEncoding.DEFAULT_VALUE {
+		attribute_definition_boolean.DEFAULT_VALUE = append(attribute_definition_boolean.DEFAULT_VALUE, backRepo.BackRepoRenamed_ATTRIBUTE_VALUE_BOOLEAN_1.Map_Renamed_ATTRIBUTE_VALUE_BOOLEAN_1DBID_Renamed_ATTRIBUTE_VALUE_BOOLEAN_1Ptr[uint(_Renamed_ATTRIBUTE_VALUE_BOOLEAN_1id)])
 	}
 
 	// This loop redeem attribute_definition_boolean.TYPE in the stage from the encode in the back repo
-	// It parses all A_TYPE_7DB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// It parses all Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1DB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance
 	// 1. reset the slice
 	attribute_definition_boolean.TYPE = attribute_definition_boolean.TYPE[:0]
-	for _, _A_TYPE_7id := range attribute_definition_booleanDB.ATTRIBUTE_DEFINITION_BOOLEANPointersEncoding.TYPE {
-		attribute_definition_boolean.TYPE = append(attribute_definition_boolean.TYPE, backRepo.BackRepoA_TYPE_7.Map_A_TYPE_7DBID_A_TYPE_7Ptr[uint(_A_TYPE_7id)])
+	for _, _Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1id := range attribute_definition_booleanDB.ATTRIBUTE_DEFINITION_BOOLEANPointersEncoding.TYPE {
+		attribute_definition_boolean.TYPE = append(attribute_definition_boolean.TYPE, backRepo.BackRepoRenamed_DATATYPE_DEFINITION_BOOLEAN_REF_1.Map_Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1DBID_Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1Ptr[uint(_Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1id)])
 	}
 
 	return

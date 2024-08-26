@@ -266,19 +266,19 @@ func (backRepoATTRIBUTE_VALUE_XHTML *BackRepoATTRIBUTE_VALUE_XHTMLStruct) Commit
 		// 1. reset
 		attribute_value_xhtmlDB.ATTRIBUTE_VALUE_XHTMLPointersEncoding.DEFINITION = make([]int, 0)
 		// 2. encode
-		for _, a_definition_1AssocEnd := range attribute_value_xhtml.DEFINITION {
-			a_definition_1AssocEnd_DB :=
-				backRepo.BackRepoA_DEFINITION_1.GetA_DEFINITION_1DBFromA_DEFINITION_1Ptr(a_definition_1AssocEnd)
+		for _, renamed_attribute_definition_xhtml_ref_1AssocEnd := range attribute_value_xhtml.DEFINITION {
+			renamed_attribute_definition_xhtml_ref_1AssocEnd_DB :=
+				backRepo.BackRepoRenamed_ATTRIBUTE_DEFINITION_XHTML_REF_1.GetRenamed_ATTRIBUTE_DEFINITION_XHTML_REF_1DBFromRenamed_ATTRIBUTE_DEFINITION_XHTML_REF_1Ptr(renamed_attribute_definition_xhtml_ref_1AssocEnd)
 			
-			// the stage might be inconsistant, meaning that the a_definition_1AssocEnd_DB might
+			// the stage might be inconsistant, meaning that the renamed_attribute_definition_xhtml_ref_1AssocEnd_DB might
 			// be missing from the stage. In this case, the commit operation is robust
 			// An alternative would be to crash here to reveal the missing element.
-			if a_definition_1AssocEnd_DB == nil {
+			if renamed_attribute_definition_xhtml_ref_1AssocEnd_DB == nil {
 				continue
 			}
 			
 			attribute_value_xhtmlDB.ATTRIBUTE_VALUE_XHTMLPointersEncoding.DEFINITION =
-				append(attribute_value_xhtmlDB.ATTRIBUTE_VALUE_XHTMLPointersEncoding.DEFINITION, int(a_definition_1AssocEnd_DB.ID))
+				append(attribute_value_xhtmlDB.ATTRIBUTE_VALUE_XHTMLPointersEncoding.DEFINITION, int(renamed_attribute_definition_xhtml_ref_1AssocEnd_DB.ID))
 		}
 
 		query := backRepoATTRIBUTE_VALUE_XHTML.db.Save(&attribute_value_xhtmlDB)
@@ -413,12 +413,12 @@ func (attribute_value_xhtmlDB *ATTRIBUTE_VALUE_XHTMLDB) DecodePointers(backRepo 
 	}
 
 	// This loop redeem attribute_value_xhtml.DEFINITION in the stage from the encode in the back repo
-	// It parses all A_DEFINITION_1DB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// It parses all Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1DB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance
 	// 1. reset the slice
 	attribute_value_xhtml.DEFINITION = attribute_value_xhtml.DEFINITION[:0]
-	for _, _A_DEFINITION_1id := range attribute_value_xhtmlDB.ATTRIBUTE_VALUE_XHTMLPointersEncoding.DEFINITION {
-		attribute_value_xhtml.DEFINITION = append(attribute_value_xhtml.DEFINITION, backRepo.BackRepoA_DEFINITION_1.Map_A_DEFINITION_1DBID_A_DEFINITION_1Ptr[uint(_A_DEFINITION_1id)])
+	for _, _Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1id := range attribute_value_xhtmlDB.ATTRIBUTE_VALUE_XHTMLPointersEncoding.DEFINITION {
+		attribute_value_xhtml.DEFINITION = append(attribute_value_xhtml.DEFINITION, backRepo.BackRepoRenamed_ATTRIBUTE_DEFINITION_XHTML_REF_1.Map_Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1DBID_Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1Ptr[uint(_Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1id)])
 	}
 
 	return
