@@ -2,7 +2,6 @@ package models
 
 import (
 	"cmp"
-	"log"
 	"slices"
 	"sort"
 	"strconv"
@@ -25,7 +24,7 @@ func (schema *Schema) FactorDuplicates() {
 	schema.analyseMapOfElements(map_NameXSD_Type_Element)
 	schema.factorElementsWithinChoices(map_NameXSD_Type_Element)
 
-	log.Println("")
+	// log.Println("")
 
 	// Step 2 choices within complex types
 	map_Choices := make(map[choiceId][]*Choice)
@@ -33,7 +32,7 @@ func (schema *Schema) FactorDuplicates() {
 	schema.analyseMapOfChoices(map_Choices)
 	schema.factorChoicesWithinComplexType(map_Choices)
 
-	log.Println("")
+	// log.Println("")
 
 	// Step 3 complex types within elements
 	map_ComplexTypes := make(map[complexTypeId][]*ComplexType)
@@ -41,7 +40,7 @@ func (schema *Schema) FactorDuplicates() {
 	schema.analyseMapOfComplexTypes(map_ComplexTypes)
 	schema.factorComplexTypesWithinElements(map_ComplexTypes)
 
-	log.Println("")
+	// log.Println("")
 
 	// Step 4
 	map_ElementsWithinAlls := make(map[elementId][]*Element)
@@ -49,13 +48,13 @@ func (schema *Schema) FactorDuplicates() {
 	schema.analyseMapOfElementWithinAlls(map_ElementsWithinAlls)
 	schema.factorElementsWithinAlls(map_ElementsWithinAlls)
 
-	log.Println("")
+	// log.Println("")
 
 	map_ElementsWithinAlls = make(map[elementId][]*Element)
 	schema.extractMapOfElementsWithinAll(map_ElementsWithinAlls)
 	schema.analyseMapOfElementWithinAlls(map_ElementsWithinAlls)
 
-	log.Println("")
+	// log.Println("")
 }
 
 //
@@ -117,7 +116,8 @@ func (*Schema) analyseMapOfElementWithinAlls(map_Elements map[elementId][]*Eleme
 	})
 
 	for _, elementId := range elements {
-		log.Println("element", elementId.elementName, elementId.elementType, len(map_Elements[elementId]))
+		_ = elementId
+		// log.Println("element", elementId.elementName, elementId.elementType, len(map_Elements[elementId]))
 	}
 }
 
@@ -210,7 +210,8 @@ func (*Schema) analyseMapOfComplexTypes(map_ComplexTypes map[complexTypeId][]*Co
 	})
 
 	for _, complextypeId := range complextypes {
-		log.Println("complex type", complextypeId.elementName, complextypeId.elementType, len(map_ComplexTypes[complextypeId]))
+		_ = complextypeId
+		// log.Println("complex type", complextypeId.elementName, complextypeId.elementType, len(map_ComplexTypes[complextypeId]))
 	}
 }
 
@@ -301,7 +302,8 @@ func (*Schema) analyseMapOfChoices(map_Choices map[choiceId][]*Choice) {
 	})
 
 	for _, choiceId := range choices {
-		log.Println("choice", choiceId.elementName, choiceId.elementType, len(map_Choices[choiceId]))
+		_ = choiceId
+		// log.Println("choice", choiceId.elementName, choiceId.elementType, len(map_Choices[choiceId]))
 	}
 }
 
@@ -370,7 +372,8 @@ func (*Schema) analyseMapOfElements(map_NameXSD_Type_Element map[string]map[stri
 	for _, elementName := range elementsNames {
 
 		for elementType := range map_NameXSD_Type_Element[elementName] {
-			log.Println(elementName, elementType, len(map_NameXSD_Type_Element[elementName][elementType]))
+			_ = elementType
+			// log.Println(elementName, elementType, len(map_NameXSD_Type_Element[elementName][elementType]))
 		}
 	}
 }

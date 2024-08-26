@@ -29,7 +29,7 @@ func (impl *BeforeCommitImplementation) BeforeCommit(stage *models.StageStruct) 
 	defer file.Close()
 
 	stage.Checkout()
-	// stage.Marshall(file, "github.com/fullstack-lang/gongxsd/test/reqif/go/models", "main")
+	stage.Marshall(file, "github.com/fullstack-lang/gongxsd/test/reqif/go/models", "main")
 }
 
 type Stack struct {
@@ -95,6 +95,24 @@ func NewStack(
 
 	stack.Stage = stage
 	stack.BackRepo = backRepo
+
+	if unmarshallFromCode != "" {
+		stage.Checkout()
+		stage.Reset()
+		stage.Commit()
+		err := models.ParseAstFile(stage, unmarshallFromCode)
+
+		// if the application is run with -unmarshallFromCode=xxx.go -marshallOnCommit
+		// xxx.go might be absent the first time. However, this shall not be a show stopper.
+		if err != nil {
+			log.Println("no file to read " + err.Error())
+		}
+
+		stage.Commit()
+	} else {
+		// in case the database is used, checkout the content to the stage
+		stage.Checkout()
+	}
 
 	// hook automatic marshall to go code at every commit
 	if marshallOnCommit != "" {
