@@ -272,37 +272,37 @@ func (backRepoATTRIBUTE_DEFINITION_STRING *BackRepoATTRIBUTE_DEFINITION_STRINGSt
 		// 1. reset
 		attribute_definition_stringDB.ATTRIBUTE_DEFINITION_STRINGPointersEncoding.DEFAULT_VALUE = make([]int, 0)
 		// 2. encode
-		for _, renamed_attribute_value_string_1AssocEnd := range attribute_definition_string.DEFAULT_VALUE {
-			renamed_attribute_value_string_1AssocEnd_DB :=
-				backRepo.BackRepoRenamed_ATTRIBUTE_VALUE_STRING_1.GetRenamed_ATTRIBUTE_VALUE_STRING_1DBFromRenamed_ATTRIBUTE_VALUE_STRING_1Ptr(renamed_attribute_value_string_1AssocEnd)
+		for _, a_attribute_value_stringAssocEnd := range attribute_definition_string.DEFAULT_VALUE {
+			a_attribute_value_stringAssocEnd_DB :=
+				backRepo.BackRepoA_ATTRIBUTE_VALUE_STRING.GetA_ATTRIBUTE_VALUE_STRINGDBFromA_ATTRIBUTE_VALUE_STRINGPtr(a_attribute_value_stringAssocEnd)
 			
-			// the stage might be inconsistant, meaning that the renamed_attribute_value_string_1AssocEnd_DB might
+			// the stage might be inconsistant, meaning that the a_attribute_value_stringAssocEnd_DB might
 			// be missing from the stage. In this case, the commit operation is robust
 			// An alternative would be to crash here to reveal the missing element.
-			if renamed_attribute_value_string_1AssocEnd_DB == nil {
+			if a_attribute_value_stringAssocEnd_DB == nil {
 				continue
 			}
 			
 			attribute_definition_stringDB.ATTRIBUTE_DEFINITION_STRINGPointersEncoding.DEFAULT_VALUE =
-				append(attribute_definition_stringDB.ATTRIBUTE_DEFINITION_STRINGPointersEncoding.DEFAULT_VALUE, int(renamed_attribute_value_string_1AssocEnd_DB.ID))
+				append(attribute_definition_stringDB.ATTRIBUTE_DEFINITION_STRINGPointersEncoding.DEFAULT_VALUE, int(a_attribute_value_stringAssocEnd_DB.ID))
 		}
 
 		// 1. reset
 		attribute_definition_stringDB.ATTRIBUTE_DEFINITION_STRINGPointersEncoding.TYPE = make([]int, 0)
 		// 2. encode
-		for _, renamed_datatype_definition_string_ref_1AssocEnd := range attribute_definition_string.TYPE {
-			renamed_datatype_definition_string_ref_1AssocEnd_DB :=
-				backRepo.BackRepoRenamed_DATATYPE_DEFINITION_STRING_REF_1.GetRenamed_DATATYPE_DEFINITION_STRING_REF_1DBFromRenamed_DATATYPE_DEFINITION_STRING_REF_1Ptr(renamed_datatype_definition_string_ref_1AssocEnd)
+		for _, a_datatype_definition_string_refAssocEnd := range attribute_definition_string.TYPE {
+			a_datatype_definition_string_refAssocEnd_DB :=
+				backRepo.BackRepoA_DATATYPE_DEFINITION_STRING_REF.GetA_DATATYPE_DEFINITION_STRING_REFDBFromA_DATATYPE_DEFINITION_STRING_REFPtr(a_datatype_definition_string_refAssocEnd)
 			
-			// the stage might be inconsistant, meaning that the renamed_datatype_definition_string_ref_1AssocEnd_DB might
+			// the stage might be inconsistant, meaning that the a_datatype_definition_string_refAssocEnd_DB might
 			// be missing from the stage. In this case, the commit operation is robust
 			// An alternative would be to crash here to reveal the missing element.
-			if renamed_datatype_definition_string_ref_1AssocEnd_DB == nil {
+			if a_datatype_definition_string_refAssocEnd_DB == nil {
 				continue
 			}
 			
 			attribute_definition_stringDB.ATTRIBUTE_DEFINITION_STRINGPointersEncoding.TYPE =
-				append(attribute_definition_stringDB.ATTRIBUTE_DEFINITION_STRINGPointersEncoding.TYPE, int(renamed_datatype_definition_string_ref_1AssocEnd_DB.ID))
+				append(attribute_definition_stringDB.ATTRIBUTE_DEFINITION_STRINGPointersEncoding.TYPE, int(a_datatype_definition_string_refAssocEnd_DB.ID))
 		}
 
 		query := backRepoATTRIBUTE_DEFINITION_STRING.db.Save(&attribute_definition_stringDB)
@@ -428,21 +428,21 @@ func (attribute_definition_stringDB *ATTRIBUTE_DEFINITION_STRINGDB) DecodePointe
 	}
 
 	// This loop redeem attribute_definition_string.DEFAULT_VALUE in the stage from the encode in the back repo
-	// It parses all Renamed_ATTRIBUTE_VALUE_STRING_1DB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// It parses all A_ATTRIBUTE_VALUE_STRINGDB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance
 	// 1. reset the slice
 	attribute_definition_string.DEFAULT_VALUE = attribute_definition_string.DEFAULT_VALUE[:0]
-	for _, _Renamed_ATTRIBUTE_VALUE_STRING_1id := range attribute_definition_stringDB.ATTRIBUTE_DEFINITION_STRINGPointersEncoding.DEFAULT_VALUE {
-		attribute_definition_string.DEFAULT_VALUE = append(attribute_definition_string.DEFAULT_VALUE, backRepo.BackRepoRenamed_ATTRIBUTE_VALUE_STRING_1.Map_Renamed_ATTRIBUTE_VALUE_STRING_1DBID_Renamed_ATTRIBUTE_VALUE_STRING_1Ptr[uint(_Renamed_ATTRIBUTE_VALUE_STRING_1id)])
+	for _, _A_ATTRIBUTE_VALUE_STRINGid := range attribute_definition_stringDB.ATTRIBUTE_DEFINITION_STRINGPointersEncoding.DEFAULT_VALUE {
+		attribute_definition_string.DEFAULT_VALUE = append(attribute_definition_string.DEFAULT_VALUE, backRepo.BackRepoA_ATTRIBUTE_VALUE_STRING.Map_A_ATTRIBUTE_VALUE_STRINGDBID_A_ATTRIBUTE_VALUE_STRINGPtr[uint(_A_ATTRIBUTE_VALUE_STRINGid)])
 	}
 
 	// This loop redeem attribute_definition_string.TYPE in the stage from the encode in the back repo
-	// It parses all Renamed_DATATYPE_DEFINITION_STRING_REF_1DB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// It parses all A_DATATYPE_DEFINITION_STRING_REFDB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance
 	// 1. reset the slice
 	attribute_definition_string.TYPE = attribute_definition_string.TYPE[:0]
-	for _, _Renamed_DATATYPE_DEFINITION_STRING_REF_1id := range attribute_definition_stringDB.ATTRIBUTE_DEFINITION_STRINGPointersEncoding.TYPE {
-		attribute_definition_string.TYPE = append(attribute_definition_string.TYPE, backRepo.BackRepoRenamed_DATATYPE_DEFINITION_STRING_REF_1.Map_Renamed_DATATYPE_DEFINITION_STRING_REF_1DBID_Renamed_DATATYPE_DEFINITION_STRING_REF_1Ptr[uint(_Renamed_DATATYPE_DEFINITION_STRING_REF_1id)])
+	for _, _A_DATATYPE_DEFINITION_STRING_REFid := range attribute_definition_stringDB.ATTRIBUTE_DEFINITION_STRINGPointersEncoding.TYPE {
+		attribute_definition_string.TYPE = append(attribute_definition_string.TYPE, backRepo.BackRepoA_DATATYPE_DEFINITION_STRING_REF.Map_A_DATATYPE_DEFINITION_STRING_REFDBID_A_DATATYPE_DEFINITION_STRING_REFPtr[uint(_A_DATATYPE_DEFINITION_STRING_REFid)])
 	}
 
 	return

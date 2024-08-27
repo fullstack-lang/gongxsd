@@ -272,37 +272,37 @@ func (backRepoATTRIBUTE_DEFINITION_DATE *BackRepoATTRIBUTE_DEFINITION_DATEStruct
 		// 1. reset
 		attribute_definition_dateDB.ATTRIBUTE_DEFINITION_DATEPointersEncoding.DEFAULT_VALUE = make([]int, 0)
 		// 2. encode
-		for _, renamed_attribute_value_date_1AssocEnd := range attribute_definition_date.DEFAULT_VALUE {
-			renamed_attribute_value_date_1AssocEnd_DB :=
-				backRepo.BackRepoRenamed_ATTRIBUTE_VALUE_DATE_1.GetRenamed_ATTRIBUTE_VALUE_DATE_1DBFromRenamed_ATTRIBUTE_VALUE_DATE_1Ptr(renamed_attribute_value_date_1AssocEnd)
+		for _, a_attribute_value_dateAssocEnd := range attribute_definition_date.DEFAULT_VALUE {
+			a_attribute_value_dateAssocEnd_DB :=
+				backRepo.BackRepoA_ATTRIBUTE_VALUE_DATE.GetA_ATTRIBUTE_VALUE_DATEDBFromA_ATTRIBUTE_VALUE_DATEPtr(a_attribute_value_dateAssocEnd)
 			
-			// the stage might be inconsistant, meaning that the renamed_attribute_value_date_1AssocEnd_DB might
+			// the stage might be inconsistant, meaning that the a_attribute_value_dateAssocEnd_DB might
 			// be missing from the stage. In this case, the commit operation is robust
 			// An alternative would be to crash here to reveal the missing element.
-			if renamed_attribute_value_date_1AssocEnd_DB == nil {
+			if a_attribute_value_dateAssocEnd_DB == nil {
 				continue
 			}
 			
 			attribute_definition_dateDB.ATTRIBUTE_DEFINITION_DATEPointersEncoding.DEFAULT_VALUE =
-				append(attribute_definition_dateDB.ATTRIBUTE_DEFINITION_DATEPointersEncoding.DEFAULT_VALUE, int(renamed_attribute_value_date_1AssocEnd_DB.ID))
+				append(attribute_definition_dateDB.ATTRIBUTE_DEFINITION_DATEPointersEncoding.DEFAULT_VALUE, int(a_attribute_value_dateAssocEnd_DB.ID))
 		}
 
 		// 1. reset
 		attribute_definition_dateDB.ATTRIBUTE_DEFINITION_DATEPointersEncoding.TYPE = make([]int, 0)
 		// 2. encode
-		for _, renamed_datatype_definition_date_ref_1AssocEnd := range attribute_definition_date.TYPE {
-			renamed_datatype_definition_date_ref_1AssocEnd_DB :=
-				backRepo.BackRepoRenamed_DATATYPE_DEFINITION_DATE_REF_1.GetRenamed_DATATYPE_DEFINITION_DATE_REF_1DBFromRenamed_DATATYPE_DEFINITION_DATE_REF_1Ptr(renamed_datatype_definition_date_ref_1AssocEnd)
+		for _, a_datatype_definition_date_refAssocEnd := range attribute_definition_date.TYPE {
+			a_datatype_definition_date_refAssocEnd_DB :=
+				backRepo.BackRepoA_DATATYPE_DEFINITION_DATE_REF.GetA_DATATYPE_DEFINITION_DATE_REFDBFromA_DATATYPE_DEFINITION_DATE_REFPtr(a_datatype_definition_date_refAssocEnd)
 			
-			// the stage might be inconsistant, meaning that the renamed_datatype_definition_date_ref_1AssocEnd_DB might
+			// the stage might be inconsistant, meaning that the a_datatype_definition_date_refAssocEnd_DB might
 			// be missing from the stage. In this case, the commit operation is robust
 			// An alternative would be to crash here to reveal the missing element.
-			if renamed_datatype_definition_date_ref_1AssocEnd_DB == nil {
+			if a_datatype_definition_date_refAssocEnd_DB == nil {
 				continue
 			}
 			
 			attribute_definition_dateDB.ATTRIBUTE_DEFINITION_DATEPointersEncoding.TYPE =
-				append(attribute_definition_dateDB.ATTRIBUTE_DEFINITION_DATEPointersEncoding.TYPE, int(renamed_datatype_definition_date_ref_1AssocEnd_DB.ID))
+				append(attribute_definition_dateDB.ATTRIBUTE_DEFINITION_DATEPointersEncoding.TYPE, int(a_datatype_definition_date_refAssocEnd_DB.ID))
 		}
 
 		query := backRepoATTRIBUTE_DEFINITION_DATE.db.Save(&attribute_definition_dateDB)
@@ -428,21 +428,21 @@ func (attribute_definition_dateDB *ATTRIBUTE_DEFINITION_DATEDB) DecodePointers(b
 	}
 
 	// This loop redeem attribute_definition_date.DEFAULT_VALUE in the stage from the encode in the back repo
-	// It parses all Renamed_ATTRIBUTE_VALUE_DATE_1DB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// It parses all A_ATTRIBUTE_VALUE_DATEDB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance
 	// 1. reset the slice
 	attribute_definition_date.DEFAULT_VALUE = attribute_definition_date.DEFAULT_VALUE[:0]
-	for _, _Renamed_ATTRIBUTE_VALUE_DATE_1id := range attribute_definition_dateDB.ATTRIBUTE_DEFINITION_DATEPointersEncoding.DEFAULT_VALUE {
-		attribute_definition_date.DEFAULT_VALUE = append(attribute_definition_date.DEFAULT_VALUE, backRepo.BackRepoRenamed_ATTRIBUTE_VALUE_DATE_1.Map_Renamed_ATTRIBUTE_VALUE_DATE_1DBID_Renamed_ATTRIBUTE_VALUE_DATE_1Ptr[uint(_Renamed_ATTRIBUTE_VALUE_DATE_1id)])
+	for _, _A_ATTRIBUTE_VALUE_DATEid := range attribute_definition_dateDB.ATTRIBUTE_DEFINITION_DATEPointersEncoding.DEFAULT_VALUE {
+		attribute_definition_date.DEFAULT_VALUE = append(attribute_definition_date.DEFAULT_VALUE, backRepo.BackRepoA_ATTRIBUTE_VALUE_DATE.Map_A_ATTRIBUTE_VALUE_DATEDBID_A_ATTRIBUTE_VALUE_DATEPtr[uint(_A_ATTRIBUTE_VALUE_DATEid)])
 	}
 
 	// This loop redeem attribute_definition_date.TYPE in the stage from the encode in the back repo
-	// It parses all Renamed_DATATYPE_DEFINITION_DATE_REF_1DB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// It parses all A_DATATYPE_DEFINITION_DATE_REFDB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance
 	// 1. reset the slice
 	attribute_definition_date.TYPE = attribute_definition_date.TYPE[:0]
-	for _, _Renamed_DATATYPE_DEFINITION_DATE_REF_1id := range attribute_definition_dateDB.ATTRIBUTE_DEFINITION_DATEPointersEncoding.TYPE {
-		attribute_definition_date.TYPE = append(attribute_definition_date.TYPE, backRepo.BackRepoRenamed_DATATYPE_DEFINITION_DATE_REF_1.Map_Renamed_DATATYPE_DEFINITION_DATE_REF_1DBID_Renamed_DATATYPE_DEFINITION_DATE_REF_1Ptr[uint(_Renamed_DATATYPE_DEFINITION_DATE_REF_1id)])
+	for _, _A_DATATYPE_DEFINITION_DATE_REFid := range attribute_definition_dateDB.ATTRIBUTE_DEFINITION_DATEPointersEncoding.TYPE {
+		attribute_definition_date.TYPE = append(attribute_definition_date.TYPE, backRepo.BackRepoA_DATATYPE_DEFINITION_DATE_REF.Map_A_DATATYPE_DEFINITION_DATE_REFDBID_A_DATATYPE_DEFINITION_DATE_REFPtr[uint(_A_DATATYPE_DEFINITION_DATE_REFid)])
 	}
 
 	return

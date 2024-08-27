@@ -253,6 +253,170 @@ func (from *A_ALTERNATIVE_ID) CopyBasicFields(to *A_ALTERNATIVE_ID) {
 	to.Name = from.Name
 }
 
+type A_ATTRIBUTE_DEFINITION_BOOLEAN_REF_WOP struct {
+	// insertion point
+	Name string
+	ATTRIBUTE_DEFINITION_BOOLEAN_REF string
+}
+
+func (from *A_ATTRIBUTE_DEFINITION_BOOLEAN_REF) CopyBasicFields(to *A_ATTRIBUTE_DEFINITION_BOOLEAN_REF) {
+	// insertion point
+	to.Name = from.Name
+	to.ATTRIBUTE_DEFINITION_BOOLEAN_REF = from.ATTRIBUTE_DEFINITION_BOOLEAN_REF
+}
+
+type A_ATTRIBUTE_DEFINITION_DATE_REF_WOP struct {
+	// insertion point
+	Name string
+	ATTRIBUTE_DEFINITION_DATE_REF string
+}
+
+func (from *A_ATTRIBUTE_DEFINITION_DATE_REF) CopyBasicFields(to *A_ATTRIBUTE_DEFINITION_DATE_REF) {
+	// insertion point
+	to.Name = from.Name
+	to.ATTRIBUTE_DEFINITION_DATE_REF = from.ATTRIBUTE_DEFINITION_DATE_REF
+}
+
+type A_ATTRIBUTE_DEFINITION_ENUMERATION_REF_WOP struct {
+	// insertion point
+	Name string
+	ATTRIBUTE_DEFINITION_ENUMERATION_REF string
+}
+
+func (from *A_ATTRIBUTE_DEFINITION_ENUMERATION_REF) CopyBasicFields(to *A_ATTRIBUTE_DEFINITION_ENUMERATION_REF) {
+	// insertion point
+	to.Name = from.Name
+	to.ATTRIBUTE_DEFINITION_ENUMERATION_REF = from.ATTRIBUTE_DEFINITION_ENUMERATION_REF
+}
+
+type A_ATTRIBUTE_DEFINITION_INTEGER_REF_WOP struct {
+	// insertion point
+	Name string
+	ATTRIBUTE_DEFINITION_INTEGER_REF string
+}
+
+func (from *A_ATTRIBUTE_DEFINITION_INTEGER_REF) CopyBasicFields(to *A_ATTRIBUTE_DEFINITION_INTEGER_REF) {
+	// insertion point
+	to.Name = from.Name
+	to.ATTRIBUTE_DEFINITION_INTEGER_REF = from.ATTRIBUTE_DEFINITION_INTEGER_REF
+}
+
+type A_ATTRIBUTE_DEFINITION_REAL_REF_WOP struct {
+	// insertion point
+	Name string
+	ATTRIBUTE_DEFINITION_REAL_REF string
+}
+
+func (from *A_ATTRIBUTE_DEFINITION_REAL_REF) CopyBasicFields(to *A_ATTRIBUTE_DEFINITION_REAL_REF) {
+	// insertion point
+	to.Name = from.Name
+	to.ATTRIBUTE_DEFINITION_REAL_REF = from.ATTRIBUTE_DEFINITION_REAL_REF
+}
+
+type A_ATTRIBUTE_DEFINITION_STRING_REF_WOP struct {
+	// insertion point
+	Name string
+	ATTRIBUTE_DEFINITION_STRING_REF string
+}
+
+func (from *A_ATTRIBUTE_DEFINITION_STRING_REF) CopyBasicFields(to *A_ATTRIBUTE_DEFINITION_STRING_REF) {
+	// insertion point
+	to.Name = from.Name
+	to.ATTRIBUTE_DEFINITION_STRING_REF = from.ATTRIBUTE_DEFINITION_STRING_REF
+}
+
+type A_ATTRIBUTE_DEFINITION_XHTML_REF_WOP struct {
+	// insertion point
+	Name string
+	ATTRIBUTE_DEFINITION_XHTML_REF string
+}
+
+func (from *A_ATTRIBUTE_DEFINITION_XHTML_REF) CopyBasicFields(to *A_ATTRIBUTE_DEFINITION_XHTML_REF) {
+	// insertion point
+	to.Name = from.Name
+	to.ATTRIBUTE_DEFINITION_XHTML_REF = from.ATTRIBUTE_DEFINITION_XHTML_REF
+}
+
+type A_ATTRIBUTE_VALUE_BOOLEAN_WOP struct {
+	// insertion point
+	Name string
+}
+
+func (from *A_ATTRIBUTE_VALUE_BOOLEAN) CopyBasicFields(to *A_ATTRIBUTE_VALUE_BOOLEAN) {
+	// insertion point
+	to.Name = from.Name
+}
+
+type A_ATTRIBUTE_VALUE_DATE_WOP struct {
+	// insertion point
+	Name string
+}
+
+func (from *A_ATTRIBUTE_VALUE_DATE) CopyBasicFields(to *A_ATTRIBUTE_VALUE_DATE) {
+	// insertion point
+	to.Name = from.Name
+}
+
+type A_ATTRIBUTE_VALUE_ENUMERATION_WOP struct {
+	// insertion point
+	Name string
+}
+
+func (from *A_ATTRIBUTE_VALUE_ENUMERATION) CopyBasicFields(to *A_ATTRIBUTE_VALUE_ENUMERATION) {
+	// insertion point
+	to.Name = from.Name
+}
+
+type A_ATTRIBUTE_VALUE_INTEGER_WOP struct {
+	// insertion point
+	Name string
+}
+
+func (from *A_ATTRIBUTE_VALUE_INTEGER) CopyBasicFields(to *A_ATTRIBUTE_VALUE_INTEGER) {
+	// insertion point
+	to.Name = from.Name
+}
+
+type A_ATTRIBUTE_VALUE_REAL_WOP struct {
+	// insertion point
+	Name string
+}
+
+func (from *A_ATTRIBUTE_VALUE_REAL) CopyBasicFields(to *A_ATTRIBUTE_VALUE_REAL) {
+	// insertion point
+	to.Name = from.Name
+}
+
+type A_ATTRIBUTE_VALUE_STRING_WOP struct {
+	// insertion point
+	Name string
+}
+
+func (from *A_ATTRIBUTE_VALUE_STRING) CopyBasicFields(to *A_ATTRIBUTE_VALUE_STRING) {
+	// insertion point
+	to.Name = from.Name
+}
+
+type A_ATTRIBUTE_VALUE_XHTML_WOP struct {
+	// insertion point
+	Name string
+}
+
+func (from *A_ATTRIBUTE_VALUE_XHTML) CopyBasicFields(to *A_ATTRIBUTE_VALUE_XHTML) {
+	// insertion point
+	to.Name = from.Name
+}
+
+type A_ATTRIBUTE_VALUE_XHTML_1_WOP struct {
+	// insertion point
+	Name string
+}
+
+func (from *A_ATTRIBUTE_VALUE_XHTML_1) CopyBasicFields(to *A_ATTRIBUTE_VALUE_XHTML_1) {
+	// insertion point
+	to.Name = from.Name
+}
+
 type A_CHILDREN_WOP struct {
 	// insertion point
 	Name string
@@ -283,6 +447,90 @@ func (from *A_DATATYPES) CopyBasicFields(to *A_DATATYPES) {
 	to.Name = from.Name
 }
 
+type A_DATATYPE_DEFINITION_BOOLEAN_REF_WOP struct {
+	// insertion point
+	Name string
+	DATATYPE_DEFINITION_BOOLEAN_REF string
+}
+
+func (from *A_DATATYPE_DEFINITION_BOOLEAN_REF) CopyBasicFields(to *A_DATATYPE_DEFINITION_BOOLEAN_REF) {
+	// insertion point
+	to.Name = from.Name
+	to.DATATYPE_DEFINITION_BOOLEAN_REF = from.DATATYPE_DEFINITION_BOOLEAN_REF
+}
+
+type A_DATATYPE_DEFINITION_DATE_REF_WOP struct {
+	// insertion point
+	Name string
+	DATATYPE_DEFINITION_DATE_REF string
+}
+
+func (from *A_DATATYPE_DEFINITION_DATE_REF) CopyBasicFields(to *A_DATATYPE_DEFINITION_DATE_REF) {
+	// insertion point
+	to.Name = from.Name
+	to.DATATYPE_DEFINITION_DATE_REF = from.DATATYPE_DEFINITION_DATE_REF
+}
+
+type A_DATATYPE_DEFINITION_ENUMERATION_REF_WOP struct {
+	// insertion point
+	Name string
+	DATATYPE_DEFINITION_ENUMERATION_REF string
+}
+
+func (from *A_DATATYPE_DEFINITION_ENUMERATION_REF) CopyBasicFields(to *A_DATATYPE_DEFINITION_ENUMERATION_REF) {
+	// insertion point
+	to.Name = from.Name
+	to.DATATYPE_DEFINITION_ENUMERATION_REF = from.DATATYPE_DEFINITION_ENUMERATION_REF
+}
+
+type A_DATATYPE_DEFINITION_INTEGER_REF_WOP struct {
+	// insertion point
+	Name string
+	DATATYPE_DEFINITION_INTEGER_REF string
+}
+
+func (from *A_DATATYPE_DEFINITION_INTEGER_REF) CopyBasicFields(to *A_DATATYPE_DEFINITION_INTEGER_REF) {
+	// insertion point
+	to.Name = from.Name
+	to.DATATYPE_DEFINITION_INTEGER_REF = from.DATATYPE_DEFINITION_INTEGER_REF
+}
+
+type A_DATATYPE_DEFINITION_REAL_REF_WOP struct {
+	// insertion point
+	Name string
+	DATATYPE_DEFINITION_REAL_REF string
+}
+
+func (from *A_DATATYPE_DEFINITION_REAL_REF) CopyBasicFields(to *A_DATATYPE_DEFINITION_REAL_REF) {
+	// insertion point
+	to.Name = from.Name
+	to.DATATYPE_DEFINITION_REAL_REF = from.DATATYPE_DEFINITION_REAL_REF
+}
+
+type A_DATATYPE_DEFINITION_STRING_REF_WOP struct {
+	// insertion point
+	Name string
+	DATATYPE_DEFINITION_STRING_REF string
+}
+
+func (from *A_DATATYPE_DEFINITION_STRING_REF) CopyBasicFields(to *A_DATATYPE_DEFINITION_STRING_REF) {
+	// insertion point
+	to.Name = from.Name
+	to.DATATYPE_DEFINITION_STRING_REF = from.DATATYPE_DEFINITION_STRING_REF
+}
+
+type A_DATATYPE_DEFINITION_XHTML_REF_WOP struct {
+	// insertion point
+	Name string
+	DATATYPE_DEFINITION_XHTML_REF string
+}
+
+func (from *A_DATATYPE_DEFINITION_XHTML_REF) CopyBasicFields(to *A_DATATYPE_DEFINITION_XHTML_REF) {
+	// insertion point
+	to.Name = from.Name
+	to.DATATYPE_DEFINITION_XHTML_REF = from.DATATYPE_DEFINITION_XHTML_REF
+}
+
 type A_EDITABLE_ATTS_WOP struct {
 	// insertion point
 	Name string
@@ -307,6 +555,18 @@ func (from *A_EDITABLE_ATTS) CopyBasicFields(to *A_EDITABLE_ATTS) {
 	to.ATTRIBUTE_DEFINITION_XHTML_REF = from.ATTRIBUTE_DEFINITION_XHTML_REF
 }
 
+type A_ENUM_VALUE_REF_WOP struct {
+	// insertion point
+	Name string
+	ENUM_VALUE_REF string
+}
+
+func (from *A_ENUM_VALUE_REF) CopyBasicFields(to *A_ENUM_VALUE_REF) {
+	// insertion point
+	to.Name = from.Name
+	to.ENUM_VALUE_REF = from.ENUM_VALUE_REF
+}
+
 type A_OBJECT_WOP struct {
 	// insertion point
 	Name string
@@ -327,6 +587,18 @@ type A_PROPERTIES_WOP struct {
 func (from *A_PROPERTIES) CopyBasicFields(to *A_PROPERTIES) {
 	// insertion point
 	to.Name = from.Name
+}
+
+type A_RELATION_GROUP_TYPE_REF_WOP struct {
+	// insertion point
+	Name string
+	RELATION_GROUP_TYPE_REF string
+}
+
+func (from *A_RELATION_GROUP_TYPE_REF) CopyBasicFields(to *A_RELATION_GROUP_TYPE_REF) {
+	// insertion point
+	to.Name = from.Name
+	to.RELATION_GROUP_TYPE_REF = from.RELATION_GROUP_TYPE_REF
 }
 
 type A_SOURCE_WOP struct {
@@ -363,6 +635,18 @@ func (from *A_SPECIFICATIONS) CopyBasicFields(to *A_SPECIFICATIONS) {
 	to.Name = from.Name
 }
 
+type A_SPECIFICATION_TYPE_REF_WOP struct {
+	// insertion point
+	Name string
+	SPECIFICATION_TYPE_REF string
+}
+
+func (from *A_SPECIFICATION_TYPE_REF) CopyBasicFields(to *A_SPECIFICATION_TYPE_REF) {
+	// insertion point
+	to.Name = from.Name
+	to.SPECIFICATION_TYPE_REF = from.SPECIFICATION_TYPE_REF
+}
+
 type A_SPECIFIED_VALUES_WOP struct {
 	// insertion point
 	Name string
@@ -393,6 +677,18 @@ func (from *A_SPEC_OBJECTS) CopyBasicFields(to *A_SPEC_OBJECTS) {
 	to.Name = from.Name
 }
 
+type A_SPEC_OBJECT_TYPE_REF_WOP struct {
+	// insertion point
+	Name string
+	SPEC_OBJECT_TYPE_REF string
+}
+
+func (from *A_SPEC_OBJECT_TYPE_REF) CopyBasicFields(to *A_SPEC_OBJECT_TYPE_REF) {
+	// insertion point
+	to.Name = from.Name
+	to.SPEC_OBJECT_TYPE_REF = from.SPEC_OBJECT_TYPE_REF
+}
+
 type A_SPEC_RELATIONS_WOP struct {
 	// insertion point
 	Name string
@@ -403,18 +699,6 @@ func (from *A_SPEC_RELATIONS) CopyBasicFields(to *A_SPEC_RELATIONS) {
 	to.Name = from.Name
 }
 
-type A_SPEC_RELATIONS_1_WOP struct {
-	// insertion point
-	Name string
-	SPEC_RELATION_REF string
-}
-
-func (from *A_SPEC_RELATIONS_1) CopyBasicFields(to *A_SPEC_RELATIONS_1) {
-	// insertion point
-	to.Name = from.Name
-	to.SPEC_RELATION_REF = from.SPEC_RELATION_REF
-}
-
 type A_SPEC_RELATION_GROUPS_WOP struct {
 	// insertion point
 	Name string
@@ -423,6 +707,30 @@ type A_SPEC_RELATION_GROUPS_WOP struct {
 func (from *A_SPEC_RELATION_GROUPS) CopyBasicFields(to *A_SPEC_RELATION_GROUPS) {
 	// insertion point
 	to.Name = from.Name
+}
+
+type A_SPEC_RELATION_REF_WOP struct {
+	// insertion point
+	Name string
+	SPEC_RELATION_REF string
+}
+
+func (from *A_SPEC_RELATION_REF) CopyBasicFields(to *A_SPEC_RELATION_REF) {
+	// insertion point
+	to.Name = from.Name
+	to.SPEC_RELATION_REF = from.SPEC_RELATION_REF
+}
+
+type A_SPEC_RELATION_TYPE_REF_WOP struct {
+	// insertion point
+	Name string
+	SPEC_RELATION_TYPE_REF string
+}
+
+func (from *A_SPEC_RELATION_TYPE_REF) CopyBasicFields(to *A_SPEC_RELATION_TYPE_REF) {
+	// insertion point
+	to.Name = from.Name
+	to.SPEC_RELATION_TYPE_REF = from.SPEC_RELATION_TYPE_REF
 }
 
 type A_SPEC_TYPES_WOP struct {
@@ -451,28 +759,6 @@ type A_TOOL_EXTENSIONS_WOP struct {
 }
 
 func (from *A_TOOL_EXTENSIONS) CopyBasicFields(to *A_TOOL_EXTENSIONS) {
-	// insertion point
-	to.Name = from.Name
-}
-
-type A_VALUES_WOP struct {
-	// insertion point
-	Name string
-	ENUM_VALUE_REF string
-}
-
-func (from *A_VALUES) CopyBasicFields(to *A_VALUES) {
-	// insertion point
-	to.Name = from.Name
-	to.ENUM_VALUE_REF = from.ENUM_VALUE_REF
-}
-
-type A_VALUES_1_WOP struct {
-	// insertion point
-	Name string
-}
-
-func (from *A_VALUES_1) CopyBasicFields(to *A_VALUES_1) {
 	// insertion point
 	to.Name = from.Name
 }
@@ -739,292 +1025,6 @@ type REQ_IF_TOOL_EXTENSION_WOP struct {
 func (from *REQ_IF_TOOL_EXTENSION) CopyBasicFields(to *REQ_IF_TOOL_EXTENSION) {
 	// insertion point
 	to.Name = from.Name
-}
-
-type Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1_WOP struct {
-	// insertion point
-	Name string
-	ATTRIBUTE_DEFINITION_BOOLEAN_REF string
-}
-
-func (from *Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1) CopyBasicFields(to *Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1) {
-	// insertion point
-	to.Name = from.Name
-	to.ATTRIBUTE_DEFINITION_BOOLEAN_REF = from.ATTRIBUTE_DEFINITION_BOOLEAN_REF
-}
-
-type Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1_WOP struct {
-	// insertion point
-	Name string
-	ATTRIBUTE_DEFINITION_DATE_REF string
-}
-
-func (from *Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1) CopyBasicFields(to *Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1) {
-	// insertion point
-	to.Name = from.Name
-	to.ATTRIBUTE_DEFINITION_DATE_REF = from.ATTRIBUTE_DEFINITION_DATE_REF
-}
-
-type Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1_WOP struct {
-	// insertion point
-	Name string
-	ATTRIBUTE_DEFINITION_ENUMERATION_REF string
-}
-
-func (from *Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1) CopyBasicFields(to *Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1) {
-	// insertion point
-	to.Name = from.Name
-	to.ATTRIBUTE_DEFINITION_ENUMERATION_REF = from.ATTRIBUTE_DEFINITION_ENUMERATION_REF
-}
-
-type Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1_WOP struct {
-	// insertion point
-	Name string
-	ATTRIBUTE_DEFINITION_INTEGER_REF string
-}
-
-func (from *Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1) CopyBasicFields(to *Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1) {
-	// insertion point
-	to.Name = from.Name
-	to.ATTRIBUTE_DEFINITION_INTEGER_REF = from.ATTRIBUTE_DEFINITION_INTEGER_REF
-}
-
-type Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1_WOP struct {
-	// insertion point
-	Name string
-	ATTRIBUTE_DEFINITION_REAL_REF string
-}
-
-func (from *Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1) CopyBasicFields(to *Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1) {
-	// insertion point
-	to.Name = from.Name
-	to.ATTRIBUTE_DEFINITION_REAL_REF = from.ATTRIBUTE_DEFINITION_REAL_REF
-}
-
-type Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1_WOP struct {
-	// insertion point
-	Name string
-	ATTRIBUTE_DEFINITION_STRING_REF string
-}
-
-func (from *Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1) CopyBasicFields(to *Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1) {
-	// insertion point
-	to.Name = from.Name
-	to.ATTRIBUTE_DEFINITION_STRING_REF = from.ATTRIBUTE_DEFINITION_STRING_REF
-}
-
-type Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1_WOP struct {
-	// insertion point
-	Name string
-	ATTRIBUTE_DEFINITION_XHTML_REF string
-}
-
-func (from *Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1) CopyBasicFields(to *Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1) {
-	// insertion point
-	to.Name = from.Name
-	to.ATTRIBUTE_DEFINITION_XHTML_REF = from.ATTRIBUTE_DEFINITION_XHTML_REF
-}
-
-type Renamed_ATTRIBUTE_VALUE_BOOLEAN_1_WOP struct {
-	// insertion point
-	Name string
-}
-
-func (from *Renamed_ATTRIBUTE_VALUE_BOOLEAN_1) CopyBasicFields(to *Renamed_ATTRIBUTE_VALUE_BOOLEAN_1) {
-	// insertion point
-	to.Name = from.Name
-}
-
-type Renamed_ATTRIBUTE_VALUE_DATE_1_WOP struct {
-	// insertion point
-	Name string
-}
-
-func (from *Renamed_ATTRIBUTE_VALUE_DATE_1) CopyBasicFields(to *Renamed_ATTRIBUTE_VALUE_DATE_1) {
-	// insertion point
-	to.Name = from.Name
-}
-
-type Renamed_ATTRIBUTE_VALUE_ENUMERATION_1_WOP struct {
-	// insertion point
-	Name string
-}
-
-func (from *Renamed_ATTRIBUTE_VALUE_ENUMERATION_1) CopyBasicFields(to *Renamed_ATTRIBUTE_VALUE_ENUMERATION_1) {
-	// insertion point
-	to.Name = from.Name
-}
-
-type Renamed_ATTRIBUTE_VALUE_INTEGER_1_WOP struct {
-	// insertion point
-	Name string
-}
-
-func (from *Renamed_ATTRIBUTE_VALUE_INTEGER_1) CopyBasicFields(to *Renamed_ATTRIBUTE_VALUE_INTEGER_1) {
-	// insertion point
-	to.Name = from.Name
-}
-
-type Renamed_ATTRIBUTE_VALUE_REAL_1_WOP struct {
-	// insertion point
-	Name string
-}
-
-func (from *Renamed_ATTRIBUTE_VALUE_REAL_1) CopyBasicFields(to *Renamed_ATTRIBUTE_VALUE_REAL_1) {
-	// insertion point
-	to.Name = from.Name
-}
-
-type Renamed_ATTRIBUTE_VALUE_STRING_1_WOP struct {
-	// insertion point
-	Name string
-}
-
-func (from *Renamed_ATTRIBUTE_VALUE_STRING_1) CopyBasicFields(to *Renamed_ATTRIBUTE_VALUE_STRING_1) {
-	// insertion point
-	to.Name = from.Name
-}
-
-type Renamed_ATTRIBUTE_VALUE_XHTML_1_WOP struct {
-	// insertion point
-	Name string
-}
-
-func (from *Renamed_ATTRIBUTE_VALUE_XHTML_1) CopyBasicFields(to *Renamed_ATTRIBUTE_VALUE_XHTML_1) {
-	// insertion point
-	to.Name = from.Name
-}
-
-type Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1_WOP struct {
-	// insertion point
-	Name string
-	DATATYPE_DEFINITION_BOOLEAN_REF string
-}
-
-func (from *Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1) CopyBasicFields(to *Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1) {
-	// insertion point
-	to.Name = from.Name
-	to.DATATYPE_DEFINITION_BOOLEAN_REF = from.DATATYPE_DEFINITION_BOOLEAN_REF
-}
-
-type Renamed_DATATYPE_DEFINITION_DATE_REF_1_WOP struct {
-	// insertion point
-	Name string
-	DATATYPE_DEFINITION_DATE_REF string
-}
-
-func (from *Renamed_DATATYPE_DEFINITION_DATE_REF_1) CopyBasicFields(to *Renamed_DATATYPE_DEFINITION_DATE_REF_1) {
-	// insertion point
-	to.Name = from.Name
-	to.DATATYPE_DEFINITION_DATE_REF = from.DATATYPE_DEFINITION_DATE_REF
-}
-
-type Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1_WOP struct {
-	// insertion point
-	Name string
-	DATATYPE_DEFINITION_ENUMERATION_REF string
-}
-
-func (from *Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1) CopyBasicFields(to *Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1) {
-	// insertion point
-	to.Name = from.Name
-	to.DATATYPE_DEFINITION_ENUMERATION_REF = from.DATATYPE_DEFINITION_ENUMERATION_REF
-}
-
-type Renamed_DATATYPE_DEFINITION_INTEGER_REF_1_WOP struct {
-	// insertion point
-	Name string
-	DATATYPE_DEFINITION_INTEGER_REF string
-}
-
-func (from *Renamed_DATATYPE_DEFINITION_INTEGER_REF_1) CopyBasicFields(to *Renamed_DATATYPE_DEFINITION_INTEGER_REF_1) {
-	// insertion point
-	to.Name = from.Name
-	to.DATATYPE_DEFINITION_INTEGER_REF = from.DATATYPE_DEFINITION_INTEGER_REF
-}
-
-type Renamed_DATATYPE_DEFINITION_REAL_REF_1_WOP struct {
-	// insertion point
-	Name string
-	DATATYPE_DEFINITION_REAL_REF string
-}
-
-func (from *Renamed_DATATYPE_DEFINITION_REAL_REF_1) CopyBasicFields(to *Renamed_DATATYPE_DEFINITION_REAL_REF_1) {
-	// insertion point
-	to.Name = from.Name
-	to.DATATYPE_DEFINITION_REAL_REF = from.DATATYPE_DEFINITION_REAL_REF
-}
-
-type Renamed_DATATYPE_DEFINITION_STRING_REF_1_WOP struct {
-	// insertion point
-	Name string
-	DATATYPE_DEFINITION_STRING_REF string
-}
-
-func (from *Renamed_DATATYPE_DEFINITION_STRING_REF_1) CopyBasicFields(to *Renamed_DATATYPE_DEFINITION_STRING_REF_1) {
-	// insertion point
-	to.Name = from.Name
-	to.DATATYPE_DEFINITION_STRING_REF = from.DATATYPE_DEFINITION_STRING_REF
-}
-
-type Renamed_DATATYPE_DEFINITION_XHTML_REF_1_WOP struct {
-	// insertion point
-	Name string
-	DATATYPE_DEFINITION_XHTML_REF string
-}
-
-func (from *Renamed_DATATYPE_DEFINITION_XHTML_REF_1) CopyBasicFields(to *Renamed_DATATYPE_DEFINITION_XHTML_REF_1) {
-	// insertion point
-	to.Name = from.Name
-	to.DATATYPE_DEFINITION_XHTML_REF = from.DATATYPE_DEFINITION_XHTML_REF
-}
-
-type Renamed_RELATION_GROUP_TYPE_REF_1_WOP struct {
-	// insertion point
-	Name string
-	RELATION_GROUP_TYPE_REF string
-}
-
-func (from *Renamed_RELATION_GROUP_TYPE_REF_1) CopyBasicFields(to *Renamed_RELATION_GROUP_TYPE_REF_1) {
-	// insertion point
-	to.Name = from.Name
-	to.RELATION_GROUP_TYPE_REF = from.RELATION_GROUP_TYPE_REF
-}
-
-type Renamed_SPECIFICATION_TYPE_REF_1_WOP struct {
-	// insertion point
-	Name string
-	SPECIFICATION_TYPE_REF string
-}
-
-func (from *Renamed_SPECIFICATION_TYPE_REF_1) CopyBasicFields(to *Renamed_SPECIFICATION_TYPE_REF_1) {
-	// insertion point
-	to.Name = from.Name
-	to.SPECIFICATION_TYPE_REF = from.SPECIFICATION_TYPE_REF
-}
-
-type Renamed_SPEC_OBJECT_TYPE_REF_1_WOP struct {
-	// insertion point
-	Name string
-	SPEC_OBJECT_TYPE_REF string
-}
-
-func (from *Renamed_SPEC_OBJECT_TYPE_REF_1) CopyBasicFields(to *Renamed_SPEC_OBJECT_TYPE_REF_1) {
-	// insertion point
-	to.Name = from.Name
-	to.SPEC_OBJECT_TYPE_REF = from.SPEC_OBJECT_TYPE_REF
-}
-
-type Renamed_SPEC_RELATION_TYPE_REF_1_WOP struct {
-	// insertion point
-	Name string
-	SPEC_RELATION_TYPE_REF string
-}
-
-func (from *Renamed_SPEC_RELATION_TYPE_REF_1) CopyBasicFields(to *Renamed_SPEC_RELATION_TYPE_REF_1) {
-	// insertion point
-	to.Name = from.Name
-	to.SPEC_RELATION_TYPE_REF = from.SPEC_RELATION_TYPE_REF
 }
 
 type SPECIFICATION_WOP struct {

@@ -272,37 +272,37 @@ func (backRepoATTRIBUTE_DEFINITION_INTEGER *BackRepoATTRIBUTE_DEFINITION_INTEGER
 		// 1. reset
 		attribute_definition_integerDB.ATTRIBUTE_DEFINITION_INTEGERPointersEncoding.DEFAULT_VALUE = make([]int, 0)
 		// 2. encode
-		for _, renamed_attribute_value_integer_1AssocEnd := range attribute_definition_integer.DEFAULT_VALUE {
-			renamed_attribute_value_integer_1AssocEnd_DB :=
-				backRepo.BackRepoRenamed_ATTRIBUTE_VALUE_INTEGER_1.GetRenamed_ATTRIBUTE_VALUE_INTEGER_1DBFromRenamed_ATTRIBUTE_VALUE_INTEGER_1Ptr(renamed_attribute_value_integer_1AssocEnd)
+		for _, a_attribute_value_integerAssocEnd := range attribute_definition_integer.DEFAULT_VALUE {
+			a_attribute_value_integerAssocEnd_DB :=
+				backRepo.BackRepoA_ATTRIBUTE_VALUE_INTEGER.GetA_ATTRIBUTE_VALUE_INTEGERDBFromA_ATTRIBUTE_VALUE_INTEGERPtr(a_attribute_value_integerAssocEnd)
 			
-			// the stage might be inconsistant, meaning that the renamed_attribute_value_integer_1AssocEnd_DB might
+			// the stage might be inconsistant, meaning that the a_attribute_value_integerAssocEnd_DB might
 			// be missing from the stage. In this case, the commit operation is robust
 			// An alternative would be to crash here to reveal the missing element.
-			if renamed_attribute_value_integer_1AssocEnd_DB == nil {
+			if a_attribute_value_integerAssocEnd_DB == nil {
 				continue
 			}
 			
 			attribute_definition_integerDB.ATTRIBUTE_DEFINITION_INTEGERPointersEncoding.DEFAULT_VALUE =
-				append(attribute_definition_integerDB.ATTRIBUTE_DEFINITION_INTEGERPointersEncoding.DEFAULT_VALUE, int(renamed_attribute_value_integer_1AssocEnd_DB.ID))
+				append(attribute_definition_integerDB.ATTRIBUTE_DEFINITION_INTEGERPointersEncoding.DEFAULT_VALUE, int(a_attribute_value_integerAssocEnd_DB.ID))
 		}
 
 		// 1. reset
 		attribute_definition_integerDB.ATTRIBUTE_DEFINITION_INTEGERPointersEncoding.TYPE = make([]int, 0)
 		// 2. encode
-		for _, renamed_datatype_definition_integer_ref_1AssocEnd := range attribute_definition_integer.TYPE {
-			renamed_datatype_definition_integer_ref_1AssocEnd_DB :=
-				backRepo.BackRepoRenamed_DATATYPE_DEFINITION_INTEGER_REF_1.GetRenamed_DATATYPE_DEFINITION_INTEGER_REF_1DBFromRenamed_DATATYPE_DEFINITION_INTEGER_REF_1Ptr(renamed_datatype_definition_integer_ref_1AssocEnd)
+		for _, a_datatype_definition_integer_refAssocEnd := range attribute_definition_integer.TYPE {
+			a_datatype_definition_integer_refAssocEnd_DB :=
+				backRepo.BackRepoA_DATATYPE_DEFINITION_INTEGER_REF.GetA_DATATYPE_DEFINITION_INTEGER_REFDBFromA_DATATYPE_DEFINITION_INTEGER_REFPtr(a_datatype_definition_integer_refAssocEnd)
 			
-			// the stage might be inconsistant, meaning that the renamed_datatype_definition_integer_ref_1AssocEnd_DB might
+			// the stage might be inconsistant, meaning that the a_datatype_definition_integer_refAssocEnd_DB might
 			// be missing from the stage. In this case, the commit operation is robust
 			// An alternative would be to crash here to reveal the missing element.
-			if renamed_datatype_definition_integer_ref_1AssocEnd_DB == nil {
+			if a_datatype_definition_integer_refAssocEnd_DB == nil {
 				continue
 			}
 			
 			attribute_definition_integerDB.ATTRIBUTE_DEFINITION_INTEGERPointersEncoding.TYPE =
-				append(attribute_definition_integerDB.ATTRIBUTE_DEFINITION_INTEGERPointersEncoding.TYPE, int(renamed_datatype_definition_integer_ref_1AssocEnd_DB.ID))
+				append(attribute_definition_integerDB.ATTRIBUTE_DEFINITION_INTEGERPointersEncoding.TYPE, int(a_datatype_definition_integer_refAssocEnd_DB.ID))
 		}
 
 		query := backRepoATTRIBUTE_DEFINITION_INTEGER.db.Save(&attribute_definition_integerDB)
@@ -428,21 +428,21 @@ func (attribute_definition_integerDB *ATTRIBUTE_DEFINITION_INTEGERDB) DecodePoin
 	}
 
 	// This loop redeem attribute_definition_integer.DEFAULT_VALUE in the stage from the encode in the back repo
-	// It parses all Renamed_ATTRIBUTE_VALUE_INTEGER_1DB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// It parses all A_ATTRIBUTE_VALUE_INTEGERDB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance
 	// 1. reset the slice
 	attribute_definition_integer.DEFAULT_VALUE = attribute_definition_integer.DEFAULT_VALUE[:0]
-	for _, _Renamed_ATTRIBUTE_VALUE_INTEGER_1id := range attribute_definition_integerDB.ATTRIBUTE_DEFINITION_INTEGERPointersEncoding.DEFAULT_VALUE {
-		attribute_definition_integer.DEFAULT_VALUE = append(attribute_definition_integer.DEFAULT_VALUE, backRepo.BackRepoRenamed_ATTRIBUTE_VALUE_INTEGER_1.Map_Renamed_ATTRIBUTE_VALUE_INTEGER_1DBID_Renamed_ATTRIBUTE_VALUE_INTEGER_1Ptr[uint(_Renamed_ATTRIBUTE_VALUE_INTEGER_1id)])
+	for _, _A_ATTRIBUTE_VALUE_INTEGERid := range attribute_definition_integerDB.ATTRIBUTE_DEFINITION_INTEGERPointersEncoding.DEFAULT_VALUE {
+		attribute_definition_integer.DEFAULT_VALUE = append(attribute_definition_integer.DEFAULT_VALUE, backRepo.BackRepoA_ATTRIBUTE_VALUE_INTEGER.Map_A_ATTRIBUTE_VALUE_INTEGERDBID_A_ATTRIBUTE_VALUE_INTEGERPtr[uint(_A_ATTRIBUTE_VALUE_INTEGERid)])
 	}
 
 	// This loop redeem attribute_definition_integer.TYPE in the stage from the encode in the back repo
-	// It parses all Renamed_DATATYPE_DEFINITION_INTEGER_REF_1DB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// It parses all A_DATATYPE_DEFINITION_INTEGER_REFDB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance
 	// 1. reset the slice
 	attribute_definition_integer.TYPE = attribute_definition_integer.TYPE[:0]
-	for _, _Renamed_DATATYPE_DEFINITION_INTEGER_REF_1id := range attribute_definition_integerDB.ATTRIBUTE_DEFINITION_INTEGERPointersEncoding.TYPE {
-		attribute_definition_integer.TYPE = append(attribute_definition_integer.TYPE, backRepo.BackRepoRenamed_DATATYPE_DEFINITION_INTEGER_REF_1.Map_Renamed_DATATYPE_DEFINITION_INTEGER_REF_1DBID_Renamed_DATATYPE_DEFINITION_INTEGER_REF_1Ptr[uint(_Renamed_DATATYPE_DEFINITION_INTEGER_REF_1id)])
+	for _, _A_DATATYPE_DEFINITION_INTEGER_REFid := range attribute_definition_integerDB.ATTRIBUTE_DEFINITION_INTEGERPointersEncoding.TYPE {
+		attribute_definition_integer.TYPE = append(attribute_definition_integer.TYPE, backRepo.BackRepoA_DATATYPE_DEFINITION_INTEGER_REF.Map_A_DATATYPE_DEFINITION_INTEGER_REFDBID_A_DATATYPE_DEFINITION_INTEGER_REFPtr[uint(_A_DATATYPE_DEFINITION_INTEGER_REFid)])
 	}
 
 	return

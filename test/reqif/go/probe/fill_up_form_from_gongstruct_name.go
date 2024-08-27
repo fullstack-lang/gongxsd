@@ -234,6 +234,201 @@ func FillUpFormFromGongstructName(
 		a_alternative_id := new(models.A_ALTERNATIVE_ID)
 		formGroup.HasSuppressButton = !isNewInstance
 		FillUpForm(a_alternative_id, formGroup, probe)
+	case "A_ATTRIBUTE_DEFINITION_BOOLEAN_REF":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "A_ATTRIBUTE_DEFINITION_BOOLEAN_REF Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__A_ATTRIBUTE_DEFINITION_BOOLEAN_REFFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		a_attribute_definition_boolean_ref := new(models.A_ATTRIBUTE_DEFINITION_BOOLEAN_REF)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(a_attribute_definition_boolean_ref, formGroup, probe)
+	case "A_ATTRIBUTE_DEFINITION_DATE_REF":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "A_ATTRIBUTE_DEFINITION_DATE_REF Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__A_ATTRIBUTE_DEFINITION_DATE_REFFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		a_attribute_definition_date_ref := new(models.A_ATTRIBUTE_DEFINITION_DATE_REF)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(a_attribute_definition_date_ref, formGroup, probe)
+	case "A_ATTRIBUTE_DEFINITION_ENUMERATION_REF":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "A_ATTRIBUTE_DEFINITION_ENUMERATION_REF Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__A_ATTRIBUTE_DEFINITION_ENUMERATION_REFFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		a_attribute_definition_enumeration_ref := new(models.A_ATTRIBUTE_DEFINITION_ENUMERATION_REF)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(a_attribute_definition_enumeration_ref, formGroup, probe)
+	case "A_ATTRIBUTE_DEFINITION_INTEGER_REF":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "A_ATTRIBUTE_DEFINITION_INTEGER_REF Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__A_ATTRIBUTE_DEFINITION_INTEGER_REFFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		a_attribute_definition_integer_ref := new(models.A_ATTRIBUTE_DEFINITION_INTEGER_REF)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(a_attribute_definition_integer_ref, formGroup, probe)
+	case "A_ATTRIBUTE_DEFINITION_REAL_REF":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "A_ATTRIBUTE_DEFINITION_REAL_REF Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__A_ATTRIBUTE_DEFINITION_REAL_REFFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		a_attribute_definition_real_ref := new(models.A_ATTRIBUTE_DEFINITION_REAL_REF)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(a_attribute_definition_real_ref, formGroup, probe)
+	case "A_ATTRIBUTE_DEFINITION_STRING_REF":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "A_ATTRIBUTE_DEFINITION_STRING_REF Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__A_ATTRIBUTE_DEFINITION_STRING_REFFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		a_attribute_definition_string_ref := new(models.A_ATTRIBUTE_DEFINITION_STRING_REF)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(a_attribute_definition_string_ref, formGroup, probe)
+	case "A_ATTRIBUTE_DEFINITION_XHTML_REF":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "A_ATTRIBUTE_DEFINITION_XHTML_REF Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__A_ATTRIBUTE_DEFINITION_XHTML_REFFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		a_attribute_definition_xhtml_ref := new(models.A_ATTRIBUTE_DEFINITION_XHTML_REF)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(a_attribute_definition_xhtml_ref, formGroup, probe)
+	case "A_ATTRIBUTE_VALUE_BOOLEAN":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "A_ATTRIBUTE_VALUE_BOOLEAN Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__A_ATTRIBUTE_VALUE_BOOLEANFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		a_attribute_value_boolean := new(models.A_ATTRIBUTE_VALUE_BOOLEAN)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(a_attribute_value_boolean, formGroup, probe)
+	case "A_ATTRIBUTE_VALUE_DATE":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "A_ATTRIBUTE_VALUE_DATE Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__A_ATTRIBUTE_VALUE_DATEFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		a_attribute_value_date := new(models.A_ATTRIBUTE_VALUE_DATE)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(a_attribute_value_date, formGroup, probe)
+	case "A_ATTRIBUTE_VALUE_ENUMERATION":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "A_ATTRIBUTE_VALUE_ENUMERATION Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__A_ATTRIBUTE_VALUE_ENUMERATIONFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		a_attribute_value_enumeration := new(models.A_ATTRIBUTE_VALUE_ENUMERATION)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(a_attribute_value_enumeration, formGroup, probe)
+	case "A_ATTRIBUTE_VALUE_INTEGER":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "A_ATTRIBUTE_VALUE_INTEGER Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__A_ATTRIBUTE_VALUE_INTEGERFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		a_attribute_value_integer := new(models.A_ATTRIBUTE_VALUE_INTEGER)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(a_attribute_value_integer, formGroup, probe)
+	case "A_ATTRIBUTE_VALUE_REAL":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "A_ATTRIBUTE_VALUE_REAL Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__A_ATTRIBUTE_VALUE_REALFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		a_attribute_value_real := new(models.A_ATTRIBUTE_VALUE_REAL)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(a_attribute_value_real, formGroup, probe)
+	case "A_ATTRIBUTE_VALUE_STRING":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "A_ATTRIBUTE_VALUE_STRING Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__A_ATTRIBUTE_VALUE_STRINGFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		a_attribute_value_string := new(models.A_ATTRIBUTE_VALUE_STRING)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(a_attribute_value_string, formGroup, probe)
+	case "A_ATTRIBUTE_VALUE_XHTML":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "A_ATTRIBUTE_VALUE_XHTML Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__A_ATTRIBUTE_VALUE_XHTMLFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		a_attribute_value_xhtml := new(models.A_ATTRIBUTE_VALUE_XHTML)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(a_attribute_value_xhtml, formGroup, probe)
+	case "A_ATTRIBUTE_VALUE_XHTML_1":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "A_ATTRIBUTE_VALUE_XHTML_1 Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__A_ATTRIBUTE_VALUE_XHTML_1FormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		a_attribute_value_xhtml_1 := new(models.A_ATTRIBUTE_VALUE_XHTML_1)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(a_attribute_value_xhtml_1, formGroup, probe)
 	case "A_CHILDREN":
 		formGroup := (&form.FormGroup{
 			Name:  form.FormGroupDefaultName.ToString(),
@@ -273,6 +468,97 @@ func FillUpFormFromGongstructName(
 		a_datatypes := new(models.A_DATATYPES)
 		formGroup.HasSuppressButton = !isNewInstance
 		FillUpForm(a_datatypes, formGroup, probe)
+	case "A_DATATYPE_DEFINITION_BOOLEAN_REF":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "A_DATATYPE_DEFINITION_BOOLEAN_REF Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__A_DATATYPE_DEFINITION_BOOLEAN_REFFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		a_datatype_definition_boolean_ref := new(models.A_DATATYPE_DEFINITION_BOOLEAN_REF)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(a_datatype_definition_boolean_ref, formGroup, probe)
+	case "A_DATATYPE_DEFINITION_DATE_REF":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "A_DATATYPE_DEFINITION_DATE_REF Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__A_DATATYPE_DEFINITION_DATE_REFFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		a_datatype_definition_date_ref := new(models.A_DATATYPE_DEFINITION_DATE_REF)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(a_datatype_definition_date_ref, formGroup, probe)
+	case "A_DATATYPE_DEFINITION_ENUMERATION_REF":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "A_DATATYPE_DEFINITION_ENUMERATION_REF Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__A_DATATYPE_DEFINITION_ENUMERATION_REFFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		a_datatype_definition_enumeration_ref := new(models.A_DATATYPE_DEFINITION_ENUMERATION_REF)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(a_datatype_definition_enumeration_ref, formGroup, probe)
+	case "A_DATATYPE_DEFINITION_INTEGER_REF":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "A_DATATYPE_DEFINITION_INTEGER_REF Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__A_DATATYPE_DEFINITION_INTEGER_REFFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		a_datatype_definition_integer_ref := new(models.A_DATATYPE_DEFINITION_INTEGER_REF)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(a_datatype_definition_integer_ref, formGroup, probe)
+	case "A_DATATYPE_DEFINITION_REAL_REF":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "A_DATATYPE_DEFINITION_REAL_REF Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__A_DATATYPE_DEFINITION_REAL_REFFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		a_datatype_definition_real_ref := new(models.A_DATATYPE_DEFINITION_REAL_REF)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(a_datatype_definition_real_ref, formGroup, probe)
+	case "A_DATATYPE_DEFINITION_STRING_REF":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "A_DATATYPE_DEFINITION_STRING_REF Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__A_DATATYPE_DEFINITION_STRING_REFFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		a_datatype_definition_string_ref := new(models.A_DATATYPE_DEFINITION_STRING_REF)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(a_datatype_definition_string_ref, formGroup, probe)
+	case "A_DATATYPE_DEFINITION_XHTML_REF":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "A_DATATYPE_DEFINITION_XHTML_REF Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__A_DATATYPE_DEFINITION_XHTML_REFFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		a_datatype_definition_xhtml_ref := new(models.A_DATATYPE_DEFINITION_XHTML_REF)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(a_datatype_definition_xhtml_ref, formGroup, probe)
 	case "A_EDITABLE_ATTS":
 		formGroup := (&form.FormGroup{
 			Name:  form.FormGroupDefaultName.ToString(),
@@ -286,6 +572,19 @@ func FillUpFormFromGongstructName(
 		a_editable_atts := new(models.A_EDITABLE_ATTS)
 		formGroup.HasSuppressButton = !isNewInstance
 		FillUpForm(a_editable_atts, formGroup, probe)
+	case "A_ENUM_VALUE_REF":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "A_ENUM_VALUE_REF Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__A_ENUM_VALUE_REFFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		a_enum_value_ref := new(models.A_ENUM_VALUE_REF)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(a_enum_value_ref, formGroup, probe)
 	case "A_OBJECT":
 		formGroup := (&form.FormGroup{
 			Name:  form.FormGroupDefaultName.ToString(),
@@ -312,6 +611,19 @@ func FillUpFormFromGongstructName(
 		a_properties := new(models.A_PROPERTIES)
 		formGroup.HasSuppressButton = !isNewInstance
 		FillUpForm(a_properties, formGroup, probe)
+	case "A_RELATION_GROUP_TYPE_REF":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "A_RELATION_GROUP_TYPE_REF Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__A_RELATION_GROUP_TYPE_REFFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		a_relation_group_type_ref := new(models.A_RELATION_GROUP_TYPE_REF)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(a_relation_group_type_ref, formGroup, probe)
 	case "A_SOURCE":
 		formGroup := (&form.FormGroup{
 			Name:  form.FormGroupDefaultName.ToString(),
@@ -351,6 +663,19 @@ func FillUpFormFromGongstructName(
 		a_specifications := new(models.A_SPECIFICATIONS)
 		formGroup.HasSuppressButton = !isNewInstance
 		FillUpForm(a_specifications, formGroup, probe)
+	case "A_SPECIFICATION_TYPE_REF":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "A_SPECIFICATION_TYPE_REF Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__A_SPECIFICATION_TYPE_REFFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		a_specification_type_ref := new(models.A_SPECIFICATION_TYPE_REF)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(a_specification_type_ref, formGroup, probe)
 	case "A_SPECIFIED_VALUES":
 		formGroup := (&form.FormGroup{
 			Name:  form.FormGroupDefaultName.ToString(),
@@ -390,6 +715,19 @@ func FillUpFormFromGongstructName(
 		a_spec_objects := new(models.A_SPEC_OBJECTS)
 		formGroup.HasSuppressButton = !isNewInstance
 		FillUpForm(a_spec_objects, formGroup, probe)
+	case "A_SPEC_OBJECT_TYPE_REF":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "A_SPEC_OBJECT_TYPE_REF Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__A_SPEC_OBJECT_TYPE_REFFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		a_spec_object_type_ref := new(models.A_SPEC_OBJECT_TYPE_REF)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(a_spec_object_type_ref, formGroup, probe)
 	case "A_SPEC_RELATIONS":
 		formGroup := (&form.FormGroup{
 			Name:  form.FormGroupDefaultName.ToString(),
@@ -403,19 +741,6 @@ func FillUpFormFromGongstructName(
 		a_spec_relations := new(models.A_SPEC_RELATIONS)
 		formGroup.HasSuppressButton = !isNewInstance
 		FillUpForm(a_spec_relations, formGroup, probe)
-	case "A_SPEC_RELATIONS_1":
-		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
-			Label: prefix + "A_SPEC_RELATIONS_1 Form",
-		}).Stage(formStage)
-		formGroup.OnSave = __gong__New__A_SPEC_RELATIONS_1FormCallback(
-			nil,
-			probe,
-			formGroup,
-		)
-		a_spec_relations_1 := new(models.A_SPEC_RELATIONS_1)
-		formGroup.HasSuppressButton = !isNewInstance
-		FillUpForm(a_spec_relations_1, formGroup, probe)
 	case "A_SPEC_RELATION_GROUPS":
 		formGroup := (&form.FormGroup{
 			Name:  form.FormGroupDefaultName.ToString(),
@@ -429,6 +754,32 @@ func FillUpFormFromGongstructName(
 		a_spec_relation_groups := new(models.A_SPEC_RELATION_GROUPS)
 		formGroup.HasSuppressButton = !isNewInstance
 		FillUpForm(a_spec_relation_groups, formGroup, probe)
+	case "A_SPEC_RELATION_REF":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "A_SPEC_RELATION_REF Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__A_SPEC_RELATION_REFFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		a_spec_relation_ref := new(models.A_SPEC_RELATION_REF)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(a_spec_relation_ref, formGroup, probe)
+	case "A_SPEC_RELATION_TYPE_REF":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "A_SPEC_RELATION_TYPE_REF Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__A_SPEC_RELATION_TYPE_REFFormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		a_spec_relation_type_ref := new(models.A_SPEC_RELATION_TYPE_REF)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(a_spec_relation_type_ref, formGroup, probe)
 	case "A_SPEC_TYPES":
 		formGroup := (&form.FormGroup{
 			Name:  form.FormGroupDefaultName.ToString(),
@@ -468,32 +819,6 @@ func FillUpFormFromGongstructName(
 		a_tool_extensions := new(models.A_TOOL_EXTENSIONS)
 		formGroup.HasSuppressButton = !isNewInstance
 		FillUpForm(a_tool_extensions, formGroup, probe)
-	case "A_VALUES":
-		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
-			Label: prefix + "A_VALUES Form",
-		}).Stage(formStage)
-		formGroup.OnSave = __gong__New__A_VALUESFormCallback(
-			nil,
-			probe,
-			formGroup,
-		)
-		a_values := new(models.A_VALUES)
-		formGroup.HasSuppressButton = !isNewInstance
-		FillUpForm(a_values, formGroup, probe)
-	case "A_VALUES_1":
-		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
-			Label: prefix + "A_VALUES_1 Form",
-		}).Stage(formStage)
-		formGroup.OnSave = __gong__New__A_VALUES_1FormCallback(
-			nil,
-			probe,
-			formGroup,
-		)
-		a_values_1 := new(models.A_VALUES_1)
-		formGroup.HasSuppressButton = !isNewInstance
-		FillUpForm(a_values_1, formGroup, probe)
 	case "DATATYPE_DEFINITION_BOOLEAN":
 		formGroup := (&form.FormGroup{
 			Name:  form.FormGroupDefaultName.ToString(),
@@ -689,331 +1014,6 @@ func FillUpFormFromGongstructName(
 		req_if_tool_extension := new(models.REQ_IF_TOOL_EXTENSION)
 		formGroup.HasSuppressButton = !isNewInstance
 		FillUpForm(req_if_tool_extension, formGroup, probe)
-	case "Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1":
-		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
-			Label: prefix + "Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1 Form",
-		}).Stage(formStage)
-		formGroup.OnSave = __gong__New__Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1FormCallback(
-			nil,
-			probe,
-			formGroup,
-		)
-		renamed_attribute_definition_boolean_ref_1 := new(models.Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1)
-		formGroup.HasSuppressButton = !isNewInstance
-		FillUpForm(renamed_attribute_definition_boolean_ref_1, formGroup, probe)
-	case "Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1":
-		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
-			Label: prefix + "Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1 Form",
-		}).Stage(formStage)
-		formGroup.OnSave = __gong__New__Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1FormCallback(
-			nil,
-			probe,
-			formGroup,
-		)
-		renamed_attribute_definition_date_ref_1 := new(models.Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1)
-		formGroup.HasSuppressButton = !isNewInstance
-		FillUpForm(renamed_attribute_definition_date_ref_1, formGroup, probe)
-	case "Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1":
-		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
-			Label: prefix + "Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1 Form",
-		}).Stage(formStage)
-		formGroup.OnSave = __gong__New__Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1FormCallback(
-			nil,
-			probe,
-			formGroup,
-		)
-		renamed_attribute_definition_enumeration_ref_1 := new(models.Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1)
-		formGroup.HasSuppressButton = !isNewInstance
-		FillUpForm(renamed_attribute_definition_enumeration_ref_1, formGroup, probe)
-	case "Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1":
-		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
-			Label: prefix + "Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1 Form",
-		}).Stage(formStage)
-		formGroup.OnSave = __gong__New__Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1FormCallback(
-			nil,
-			probe,
-			formGroup,
-		)
-		renamed_attribute_definition_integer_ref_1 := new(models.Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1)
-		formGroup.HasSuppressButton = !isNewInstance
-		FillUpForm(renamed_attribute_definition_integer_ref_1, formGroup, probe)
-	case "Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1":
-		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
-			Label: prefix + "Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1 Form",
-		}).Stage(formStage)
-		formGroup.OnSave = __gong__New__Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1FormCallback(
-			nil,
-			probe,
-			formGroup,
-		)
-		renamed_attribute_definition_real_ref_1 := new(models.Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1)
-		formGroup.HasSuppressButton = !isNewInstance
-		FillUpForm(renamed_attribute_definition_real_ref_1, formGroup, probe)
-	case "Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1":
-		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
-			Label: prefix + "Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1 Form",
-		}).Stage(formStage)
-		formGroup.OnSave = __gong__New__Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1FormCallback(
-			nil,
-			probe,
-			formGroup,
-		)
-		renamed_attribute_definition_string_ref_1 := new(models.Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1)
-		formGroup.HasSuppressButton = !isNewInstance
-		FillUpForm(renamed_attribute_definition_string_ref_1, formGroup, probe)
-	case "Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1":
-		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
-			Label: prefix + "Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1 Form",
-		}).Stage(formStage)
-		formGroup.OnSave = __gong__New__Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1FormCallback(
-			nil,
-			probe,
-			formGroup,
-		)
-		renamed_attribute_definition_xhtml_ref_1 := new(models.Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1)
-		formGroup.HasSuppressButton = !isNewInstance
-		FillUpForm(renamed_attribute_definition_xhtml_ref_1, formGroup, probe)
-	case "Renamed_ATTRIBUTE_VALUE_BOOLEAN_1":
-		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
-			Label: prefix + "Renamed_ATTRIBUTE_VALUE_BOOLEAN_1 Form",
-		}).Stage(formStage)
-		formGroup.OnSave = __gong__New__Renamed_ATTRIBUTE_VALUE_BOOLEAN_1FormCallback(
-			nil,
-			probe,
-			formGroup,
-		)
-		renamed_attribute_value_boolean_1 := new(models.Renamed_ATTRIBUTE_VALUE_BOOLEAN_1)
-		formGroup.HasSuppressButton = !isNewInstance
-		FillUpForm(renamed_attribute_value_boolean_1, formGroup, probe)
-	case "Renamed_ATTRIBUTE_VALUE_DATE_1":
-		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
-			Label: prefix + "Renamed_ATTRIBUTE_VALUE_DATE_1 Form",
-		}).Stage(formStage)
-		formGroup.OnSave = __gong__New__Renamed_ATTRIBUTE_VALUE_DATE_1FormCallback(
-			nil,
-			probe,
-			formGroup,
-		)
-		renamed_attribute_value_date_1 := new(models.Renamed_ATTRIBUTE_VALUE_DATE_1)
-		formGroup.HasSuppressButton = !isNewInstance
-		FillUpForm(renamed_attribute_value_date_1, formGroup, probe)
-	case "Renamed_ATTRIBUTE_VALUE_ENUMERATION_1":
-		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
-			Label: prefix + "Renamed_ATTRIBUTE_VALUE_ENUMERATION_1 Form",
-		}).Stage(formStage)
-		formGroup.OnSave = __gong__New__Renamed_ATTRIBUTE_VALUE_ENUMERATION_1FormCallback(
-			nil,
-			probe,
-			formGroup,
-		)
-		renamed_attribute_value_enumeration_1 := new(models.Renamed_ATTRIBUTE_VALUE_ENUMERATION_1)
-		formGroup.HasSuppressButton = !isNewInstance
-		FillUpForm(renamed_attribute_value_enumeration_1, formGroup, probe)
-	case "Renamed_ATTRIBUTE_VALUE_INTEGER_1":
-		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
-			Label: prefix + "Renamed_ATTRIBUTE_VALUE_INTEGER_1 Form",
-		}).Stage(formStage)
-		formGroup.OnSave = __gong__New__Renamed_ATTRIBUTE_VALUE_INTEGER_1FormCallback(
-			nil,
-			probe,
-			formGroup,
-		)
-		renamed_attribute_value_integer_1 := new(models.Renamed_ATTRIBUTE_VALUE_INTEGER_1)
-		formGroup.HasSuppressButton = !isNewInstance
-		FillUpForm(renamed_attribute_value_integer_1, formGroup, probe)
-	case "Renamed_ATTRIBUTE_VALUE_REAL_1":
-		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
-			Label: prefix + "Renamed_ATTRIBUTE_VALUE_REAL_1 Form",
-		}).Stage(formStage)
-		formGroup.OnSave = __gong__New__Renamed_ATTRIBUTE_VALUE_REAL_1FormCallback(
-			nil,
-			probe,
-			formGroup,
-		)
-		renamed_attribute_value_real_1 := new(models.Renamed_ATTRIBUTE_VALUE_REAL_1)
-		formGroup.HasSuppressButton = !isNewInstance
-		FillUpForm(renamed_attribute_value_real_1, formGroup, probe)
-	case "Renamed_ATTRIBUTE_VALUE_STRING_1":
-		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
-			Label: prefix + "Renamed_ATTRIBUTE_VALUE_STRING_1 Form",
-		}).Stage(formStage)
-		formGroup.OnSave = __gong__New__Renamed_ATTRIBUTE_VALUE_STRING_1FormCallback(
-			nil,
-			probe,
-			formGroup,
-		)
-		renamed_attribute_value_string_1 := new(models.Renamed_ATTRIBUTE_VALUE_STRING_1)
-		formGroup.HasSuppressButton = !isNewInstance
-		FillUpForm(renamed_attribute_value_string_1, formGroup, probe)
-	case "Renamed_ATTRIBUTE_VALUE_XHTML_1":
-		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
-			Label: prefix + "Renamed_ATTRIBUTE_VALUE_XHTML_1 Form",
-		}).Stage(formStage)
-		formGroup.OnSave = __gong__New__Renamed_ATTRIBUTE_VALUE_XHTML_1FormCallback(
-			nil,
-			probe,
-			formGroup,
-		)
-		renamed_attribute_value_xhtml_1 := new(models.Renamed_ATTRIBUTE_VALUE_XHTML_1)
-		formGroup.HasSuppressButton = !isNewInstance
-		FillUpForm(renamed_attribute_value_xhtml_1, formGroup, probe)
-	case "Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1":
-		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
-			Label: prefix + "Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1 Form",
-		}).Stage(formStage)
-		formGroup.OnSave = __gong__New__Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1FormCallback(
-			nil,
-			probe,
-			formGroup,
-		)
-		renamed_datatype_definition_boolean_ref_1 := new(models.Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1)
-		formGroup.HasSuppressButton = !isNewInstance
-		FillUpForm(renamed_datatype_definition_boolean_ref_1, formGroup, probe)
-	case "Renamed_DATATYPE_DEFINITION_DATE_REF_1":
-		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
-			Label: prefix + "Renamed_DATATYPE_DEFINITION_DATE_REF_1 Form",
-		}).Stage(formStage)
-		formGroup.OnSave = __gong__New__Renamed_DATATYPE_DEFINITION_DATE_REF_1FormCallback(
-			nil,
-			probe,
-			formGroup,
-		)
-		renamed_datatype_definition_date_ref_1 := new(models.Renamed_DATATYPE_DEFINITION_DATE_REF_1)
-		formGroup.HasSuppressButton = !isNewInstance
-		FillUpForm(renamed_datatype_definition_date_ref_1, formGroup, probe)
-	case "Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1":
-		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
-			Label: prefix + "Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1 Form",
-		}).Stage(formStage)
-		formGroup.OnSave = __gong__New__Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1FormCallback(
-			nil,
-			probe,
-			formGroup,
-		)
-		renamed_datatype_definition_enumeration_ref_1 := new(models.Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1)
-		formGroup.HasSuppressButton = !isNewInstance
-		FillUpForm(renamed_datatype_definition_enumeration_ref_1, formGroup, probe)
-	case "Renamed_DATATYPE_DEFINITION_INTEGER_REF_1":
-		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
-			Label: prefix + "Renamed_DATATYPE_DEFINITION_INTEGER_REF_1 Form",
-		}).Stage(formStage)
-		formGroup.OnSave = __gong__New__Renamed_DATATYPE_DEFINITION_INTEGER_REF_1FormCallback(
-			nil,
-			probe,
-			formGroup,
-		)
-		renamed_datatype_definition_integer_ref_1 := new(models.Renamed_DATATYPE_DEFINITION_INTEGER_REF_1)
-		formGroup.HasSuppressButton = !isNewInstance
-		FillUpForm(renamed_datatype_definition_integer_ref_1, formGroup, probe)
-	case "Renamed_DATATYPE_DEFINITION_REAL_REF_1":
-		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
-			Label: prefix + "Renamed_DATATYPE_DEFINITION_REAL_REF_1 Form",
-		}).Stage(formStage)
-		formGroup.OnSave = __gong__New__Renamed_DATATYPE_DEFINITION_REAL_REF_1FormCallback(
-			nil,
-			probe,
-			formGroup,
-		)
-		renamed_datatype_definition_real_ref_1 := new(models.Renamed_DATATYPE_DEFINITION_REAL_REF_1)
-		formGroup.HasSuppressButton = !isNewInstance
-		FillUpForm(renamed_datatype_definition_real_ref_1, formGroup, probe)
-	case "Renamed_DATATYPE_DEFINITION_STRING_REF_1":
-		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
-			Label: prefix + "Renamed_DATATYPE_DEFINITION_STRING_REF_1 Form",
-		}).Stage(formStage)
-		formGroup.OnSave = __gong__New__Renamed_DATATYPE_DEFINITION_STRING_REF_1FormCallback(
-			nil,
-			probe,
-			formGroup,
-		)
-		renamed_datatype_definition_string_ref_1 := new(models.Renamed_DATATYPE_DEFINITION_STRING_REF_1)
-		formGroup.HasSuppressButton = !isNewInstance
-		FillUpForm(renamed_datatype_definition_string_ref_1, formGroup, probe)
-	case "Renamed_DATATYPE_DEFINITION_XHTML_REF_1":
-		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
-			Label: prefix + "Renamed_DATATYPE_DEFINITION_XHTML_REF_1 Form",
-		}).Stage(formStage)
-		formGroup.OnSave = __gong__New__Renamed_DATATYPE_DEFINITION_XHTML_REF_1FormCallback(
-			nil,
-			probe,
-			formGroup,
-		)
-		renamed_datatype_definition_xhtml_ref_1 := new(models.Renamed_DATATYPE_DEFINITION_XHTML_REF_1)
-		formGroup.HasSuppressButton = !isNewInstance
-		FillUpForm(renamed_datatype_definition_xhtml_ref_1, formGroup, probe)
-	case "Renamed_RELATION_GROUP_TYPE_REF_1":
-		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
-			Label: prefix + "Renamed_RELATION_GROUP_TYPE_REF_1 Form",
-		}).Stage(formStage)
-		formGroup.OnSave = __gong__New__Renamed_RELATION_GROUP_TYPE_REF_1FormCallback(
-			nil,
-			probe,
-			formGroup,
-		)
-		renamed_relation_group_type_ref_1 := new(models.Renamed_RELATION_GROUP_TYPE_REF_1)
-		formGroup.HasSuppressButton = !isNewInstance
-		FillUpForm(renamed_relation_group_type_ref_1, formGroup, probe)
-	case "Renamed_SPECIFICATION_TYPE_REF_1":
-		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
-			Label: prefix + "Renamed_SPECIFICATION_TYPE_REF_1 Form",
-		}).Stage(formStage)
-		formGroup.OnSave = __gong__New__Renamed_SPECIFICATION_TYPE_REF_1FormCallback(
-			nil,
-			probe,
-			formGroup,
-		)
-		renamed_specification_type_ref_1 := new(models.Renamed_SPECIFICATION_TYPE_REF_1)
-		formGroup.HasSuppressButton = !isNewInstance
-		FillUpForm(renamed_specification_type_ref_1, formGroup, probe)
-	case "Renamed_SPEC_OBJECT_TYPE_REF_1":
-		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
-			Label: prefix + "Renamed_SPEC_OBJECT_TYPE_REF_1 Form",
-		}).Stage(formStage)
-		formGroup.OnSave = __gong__New__Renamed_SPEC_OBJECT_TYPE_REF_1FormCallback(
-			nil,
-			probe,
-			formGroup,
-		)
-		renamed_spec_object_type_ref_1 := new(models.Renamed_SPEC_OBJECT_TYPE_REF_1)
-		formGroup.HasSuppressButton = !isNewInstance
-		FillUpForm(renamed_spec_object_type_ref_1, formGroup, probe)
-	case "Renamed_SPEC_RELATION_TYPE_REF_1":
-		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
-			Label: prefix + "Renamed_SPEC_RELATION_TYPE_REF_1 Form",
-		}).Stage(formStage)
-		formGroup.OnSave = __gong__New__Renamed_SPEC_RELATION_TYPE_REF_1FormCallback(
-			nil,
-			probe,
-			formGroup,
-		)
-		renamed_spec_relation_type_ref_1 := new(models.Renamed_SPEC_RELATION_TYPE_REF_1)
-		formGroup.HasSuppressButton = !isNewInstance
-		FillUpForm(renamed_spec_relation_type_ref_1, formGroup, probe)
 	case "SPECIFICATION":
 		formGroup := (&form.FormGroup{
 			Name:  form.FormGroupDefaultName.ToString(),

@@ -223,19 +223,19 @@ func (backRepoATTRIBUTE_VALUE_STRING *BackRepoATTRIBUTE_VALUE_STRINGStruct) Comm
 		// 1. reset
 		attribute_value_stringDB.ATTRIBUTE_VALUE_STRINGPointersEncoding.DEFINITION = make([]int, 0)
 		// 2. encode
-		for _, renamed_attribute_definition_string_ref_1AssocEnd := range attribute_value_string.DEFINITION {
-			renamed_attribute_definition_string_ref_1AssocEnd_DB :=
-				backRepo.BackRepoRenamed_ATTRIBUTE_DEFINITION_STRING_REF_1.GetRenamed_ATTRIBUTE_DEFINITION_STRING_REF_1DBFromRenamed_ATTRIBUTE_DEFINITION_STRING_REF_1Ptr(renamed_attribute_definition_string_ref_1AssocEnd)
+		for _, a_attribute_definition_string_refAssocEnd := range attribute_value_string.DEFINITION {
+			a_attribute_definition_string_refAssocEnd_DB :=
+				backRepo.BackRepoA_ATTRIBUTE_DEFINITION_STRING_REF.GetA_ATTRIBUTE_DEFINITION_STRING_REFDBFromA_ATTRIBUTE_DEFINITION_STRING_REFPtr(a_attribute_definition_string_refAssocEnd)
 			
-			// the stage might be inconsistant, meaning that the renamed_attribute_definition_string_ref_1AssocEnd_DB might
+			// the stage might be inconsistant, meaning that the a_attribute_definition_string_refAssocEnd_DB might
 			// be missing from the stage. In this case, the commit operation is robust
 			// An alternative would be to crash here to reveal the missing element.
-			if renamed_attribute_definition_string_ref_1AssocEnd_DB == nil {
+			if a_attribute_definition_string_refAssocEnd_DB == nil {
 				continue
 			}
 			
 			attribute_value_stringDB.ATTRIBUTE_VALUE_STRINGPointersEncoding.DEFINITION =
-				append(attribute_value_stringDB.ATTRIBUTE_VALUE_STRINGPointersEncoding.DEFINITION, int(renamed_attribute_definition_string_ref_1AssocEnd_DB.ID))
+				append(attribute_value_stringDB.ATTRIBUTE_VALUE_STRINGPointersEncoding.DEFINITION, int(a_attribute_definition_string_refAssocEnd_DB.ID))
 		}
 
 		query := backRepoATTRIBUTE_VALUE_STRING.db.Save(&attribute_value_stringDB)
@@ -352,12 +352,12 @@ func (attribute_value_stringDB *ATTRIBUTE_VALUE_STRINGDB) DecodePointers(backRep
 
 	// insertion point for checkout of pointer encoding
 	// This loop redeem attribute_value_string.DEFINITION in the stage from the encode in the back repo
-	// It parses all Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1DB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// It parses all A_ATTRIBUTE_DEFINITION_STRING_REFDB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance
 	// 1. reset the slice
 	attribute_value_string.DEFINITION = attribute_value_string.DEFINITION[:0]
-	for _, _Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1id := range attribute_value_stringDB.ATTRIBUTE_VALUE_STRINGPointersEncoding.DEFINITION {
-		attribute_value_string.DEFINITION = append(attribute_value_string.DEFINITION, backRepo.BackRepoRenamed_ATTRIBUTE_DEFINITION_STRING_REF_1.Map_Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1DBID_Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1Ptr[uint(_Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1id)])
+	for _, _A_ATTRIBUTE_DEFINITION_STRING_REFid := range attribute_value_stringDB.ATTRIBUTE_VALUE_STRINGPointersEncoding.DEFINITION {
+		attribute_value_string.DEFINITION = append(attribute_value_string.DEFINITION, backRepo.BackRepoA_ATTRIBUTE_DEFINITION_STRING_REF.Map_A_ATTRIBUTE_DEFINITION_STRING_REFDBID_A_ATTRIBUTE_DEFINITION_STRING_REFPtr[uint(_A_ATTRIBUTE_DEFINITION_STRING_REFid)])
 	}
 
 	return

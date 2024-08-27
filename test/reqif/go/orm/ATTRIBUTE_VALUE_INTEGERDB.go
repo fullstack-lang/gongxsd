@@ -223,19 +223,19 @@ func (backRepoATTRIBUTE_VALUE_INTEGER *BackRepoATTRIBUTE_VALUE_INTEGERStruct) Co
 		// 1. reset
 		attribute_value_integerDB.ATTRIBUTE_VALUE_INTEGERPointersEncoding.DEFINITION = make([]int, 0)
 		// 2. encode
-		for _, renamed_attribute_definition_integer_ref_1AssocEnd := range attribute_value_integer.DEFINITION {
-			renamed_attribute_definition_integer_ref_1AssocEnd_DB :=
-				backRepo.BackRepoRenamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1.GetRenamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1DBFromRenamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1Ptr(renamed_attribute_definition_integer_ref_1AssocEnd)
+		for _, a_attribute_definition_integer_refAssocEnd := range attribute_value_integer.DEFINITION {
+			a_attribute_definition_integer_refAssocEnd_DB :=
+				backRepo.BackRepoA_ATTRIBUTE_DEFINITION_INTEGER_REF.GetA_ATTRIBUTE_DEFINITION_INTEGER_REFDBFromA_ATTRIBUTE_DEFINITION_INTEGER_REFPtr(a_attribute_definition_integer_refAssocEnd)
 			
-			// the stage might be inconsistant, meaning that the renamed_attribute_definition_integer_ref_1AssocEnd_DB might
+			// the stage might be inconsistant, meaning that the a_attribute_definition_integer_refAssocEnd_DB might
 			// be missing from the stage. In this case, the commit operation is robust
 			// An alternative would be to crash here to reveal the missing element.
-			if renamed_attribute_definition_integer_ref_1AssocEnd_DB == nil {
+			if a_attribute_definition_integer_refAssocEnd_DB == nil {
 				continue
 			}
 			
 			attribute_value_integerDB.ATTRIBUTE_VALUE_INTEGERPointersEncoding.DEFINITION =
-				append(attribute_value_integerDB.ATTRIBUTE_VALUE_INTEGERPointersEncoding.DEFINITION, int(renamed_attribute_definition_integer_ref_1AssocEnd_DB.ID))
+				append(attribute_value_integerDB.ATTRIBUTE_VALUE_INTEGERPointersEncoding.DEFINITION, int(a_attribute_definition_integer_refAssocEnd_DB.ID))
 		}
 
 		query := backRepoATTRIBUTE_VALUE_INTEGER.db.Save(&attribute_value_integerDB)
@@ -352,12 +352,12 @@ func (attribute_value_integerDB *ATTRIBUTE_VALUE_INTEGERDB) DecodePointers(backR
 
 	// insertion point for checkout of pointer encoding
 	// This loop redeem attribute_value_integer.DEFINITION in the stage from the encode in the back repo
-	// It parses all Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1DB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// It parses all A_ATTRIBUTE_DEFINITION_INTEGER_REFDB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance
 	// 1. reset the slice
 	attribute_value_integer.DEFINITION = attribute_value_integer.DEFINITION[:0]
-	for _, _Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1id := range attribute_value_integerDB.ATTRIBUTE_VALUE_INTEGERPointersEncoding.DEFINITION {
-		attribute_value_integer.DEFINITION = append(attribute_value_integer.DEFINITION, backRepo.BackRepoRenamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1.Map_Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1DBID_Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1Ptr[uint(_Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1id)])
+	for _, _A_ATTRIBUTE_DEFINITION_INTEGER_REFid := range attribute_value_integerDB.ATTRIBUTE_VALUE_INTEGERPointersEncoding.DEFINITION {
+		attribute_value_integer.DEFINITION = append(attribute_value_integer.DEFINITION, backRepo.BackRepoA_ATTRIBUTE_DEFINITION_INTEGER_REF.Map_A_ATTRIBUTE_DEFINITION_INTEGER_REFDBID_A_ATTRIBUTE_DEFINITION_INTEGER_REFPtr[uint(_A_ATTRIBUTE_DEFINITION_INTEGER_REFid)])
 	}
 
 	return

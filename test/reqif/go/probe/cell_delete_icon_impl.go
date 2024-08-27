@@ -62,17 +62,65 @@ func (cellDeleteIconImpl *CellDeleteIconImpl[T]) CellIconUpdated(stage *gongtabl
 		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
 	case *models.A_ALTERNATIVE_ID:
 		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
+	case *models.A_ATTRIBUTE_DEFINITION_BOOLEAN_REF:
+		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
+	case *models.A_ATTRIBUTE_DEFINITION_DATE_REF:
+		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
+	case *models.A_ATTRIBUTE_DEFINITION_ENUMERATION_REF:
+		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
+	case *models.A_ATTRIBUTE_DEFINITION_INTEGER_REF:
+		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
+	case *models.A_ATTRIBUTE_DEFINITION_REAL_REF:
+		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
+	case *models.A_ATTRIBUTE_DEFINITION_STRING_REF:
+		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
+	case *models.A_ATTRIBUTE_DEFINITION_XHTML_REF:
+		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
+	case *models.A_ATTRIBUTE_VALUE_BOOLEAN:
+		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
+	case *models.A_ATTRIBUTE_VALUE_DATE:
+		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
+	case *models.A_ATTRIBUTE_VALUE_ENUMERATION:
+		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
+	case *models.A_ATTRIBUTE_VALUE_INTEGER:
+		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
+	case *models.A_ATTRIBUTE_VALUE_REAL:
+		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
+	case *models.A_ATTRIBUTE_VALUE_STRING:
+		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
+	case *models.A_ATTRIBUTE_VALUE_XHTML:
+		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
+	case *models.A_ATTRIBUTE_VALUE_XHTML_1:
+		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
 	case *models.A_CHILDREN:
 		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
 	case *models.A_CORE_CONTENT:
 		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
 	case *models.A_DATATYPES:
 		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
+	case *models.A_DATATYPE_DEFINITION_BOOLEAN_REF:
+		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
+	case *models.A_DATATYPE_DEFINITION_DATE_REF:
+		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
+	case *models.A_DATATYPE_DEFINITION_ENUMERATION_REF:
+		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
+	case *models.A_DATATYPE_DEFINITION_INTEGER_REF:
+		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
+	case *models.A_DATATYPE_DEFINITION_REAL_REF:
+		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
+	case *models.A_DATATYPE_DEFINITION_STRING_REF:
+		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
+	case *models.A_DATATYPE_DEFINITION_XHTML_REF:
+		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
 	case *models.A_EDITABLE_ATTS:
+		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
+	case *models.A_ENUM_VALUE_REF:
 		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
 	case *models.A_OBJECT:
 		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
 	case *models.A_PROPERTIES:
+		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
+	case *models.A_RELATION_GROUP_TYPE_REF:
 		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
 	case *models.A_SOURCE:
 		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
@@ -80,27 +128,29 @@ func (cellDeleteIconImpl *CellDeleteIconImpl[T]) CellIconUpdated(stage *gongtabl
 		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
 	case *models.A_SPECIFICATIONS:
 		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
+	case *models.A_SPECIFICATION_TYPE_REF:
+		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
 	case *models.A_SPECIFIED_VALUES:
 		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
 	case *models.A_SPEC_ATTRIBUTES:
 		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
 	case *models.A_SPEC_OBJECTS:
 		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
+	case *models.A_SPEC_OBJECT_TYPE_REF:
+		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
 	case *models.A_SPEC_RELATIONS:
 		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
-	case *models.A_SPEC_RELATIONS_1:
-		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
 	case *models.A_SPEC_RELATION_GROUPS:
+		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
+	case *models.A_SPEC_RELATION_REF:
+		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
+	case *models.A_SPEC_RELATION_TYPE_REF:
 		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
 	case *models.A_SPEC_TYPES:
 		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
 	case *models.A_THE_HEADER:
 		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
 	case *models.A_TOOL_EXTENSIONS:
-		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
-	case *models.A_VALUES:
-		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
-	case *models.A_VALUES_1:
 		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
 	case *models.DATATYPE_DEFINITION_BOOLEAN:
 		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
@@ -131,56 +181,6 @@ func (cellDeleteIconImpl *CellDeleteIconImpl[T]) CellIconUpdated(stage *gongtabl
 	case *models.REQ_IF_HEADER:
 		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
 	case *models.REQ_IF_TOOL_EXTENSION:
-		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
-	case *models.Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1:
-		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
-	case *models.Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1:
-		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
-	case *models.Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1:
-		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
-	case *models.Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1:
-		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
-	case *models.Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1:
-		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
-	case *models.Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1:
-		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
-	case *models.Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1:
-		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
-	case *models.Renamed_ATTRIBUTE_VALUE_BOOLEAN_1:
-		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
-	case *models.Renamed_ATTRIBUTE_VALUE_DATE_1:
-		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
-	case *models.Renamed_ATTRIBUTE_VALUE_ENUMERATION_1:
-		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
-	case *models.Renamed_ATTRIBUTE_VALUE_INTEGER_1:
-		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
-	case *models.Renamed_ATTRIBUTE_VALUE_REAL_1:
-		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
-	case *models.Renamed_ATTRIBUTE_VALUE_STRING_1:
-		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
-	case *models.Renamed_ATTRIBUTE_VALUE_XHTML_1:
-		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
-	case *models.Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1:
-		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
-	case *models.Renamed_DATATYPE_DEFINITION_DATE_REF_1:
-		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
-	case *models.Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1:
-		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
-	case *models.Renamed_DATATYPE_DEFINITION_INTEGER_REF_1:
-		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
-	case *models.Renamed_DATATYPE_DEFINITION_REAL_REF_1:
-		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
-	case *models.Renamed_DATATYPE_DEFINITION_STRING_REF_1:
-		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
-	case *models.Renamed_DATATYPE_DEFINITION_XHTML_REF_1:
-		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
-	case *models.Renamed_RELATION_GROUP_TYPE_REF_1:
-		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
-	case *models.Renamed_SPECIFICATION_TYPE_REF_1:
-		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
-	case *models.Renamed_SPEC_OBJECT_TYPE_REF_1:
-		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
-	case *models.Renamed_SPEC_RELATION_TYPE_REF_1:
 		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
 	case *models.SPECIFICATION:
 		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)

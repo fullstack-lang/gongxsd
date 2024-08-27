@@ -52,46 +52,96 @@ func fillUpTablePointerToGongstruct[T models.PointerToGongstruct](
 		fillUpTable[models.ATTRIBUTE_VALUE_XHTML](probe)
 	case *models.A_ALTERNATIVE_ID:
 		fillUpTable[models.A_ALTERNATIVE_ID](probe)
+	case *models.A_ATTRIBUTE_DEFINITION_BOOLEAN_REF:
+		fillUpTable[models.A_ATTRIBUTE_DEFINITION_BOOLEAN_REF](probe)
+	case *models.A_ATTRIBUTE_DEFINITION_DATE_REF:
+		fillUpTable[models.A_ATTRIBUTE_DEFINITION_DATE_REF](probe)
+	case *models.A_ATTRIBUTE_DEFINITION_ENUMERATION_REF:
+		fillUpTable[models.A_ATTRIBUTE_DEFINITION_ENUMERATION_REF](probe)
+	case *models.A_ATTRIBUTE_DEFINITION_INTEGER_REF:
+		fillUpTable[models.A_ATTRIBUTE_DEFINITION_INTEGER_REF](probe)
+	case *models.A_ATTRIBUTE_DEFINITION_REAL_REF:
+		fillUpTable[models.A_ATTRIBUTE_DEFINITION_REAL_REF](probe)
+	case *models.A_ATTRIBUTE_DEFINITION_STRING_REF:
+		fillUpTable[models.A_ATTRIBUTE_DEFINITION_STRING_REF](probe)
+	case *models.A_ATTRIBUTE_DEFINITION_XHTML_REF:
+		fillUpTable[models.A_ATTRIBUTE_DEFINITION_XHTML_REF](probe)
+	case *models.A_ATTRIBUTE_VALUE_BOOLEAN:
+		fillUpTable[models.A_ATTRIBUTE_VALUE_BOOLEAN](probe)
+	case *models.A_ATTRIBUTE_VALUE_DATE:
+		fillUpTable[models.A_ATTRIBUTE_VALUE_DATE](probe)
+	case *models.A_ATTRIBUTE_VALUE_ENUMERATION:
+		fillUpTable[models.A_ATTRIBUTE_VALUE_ENUMERATION](probe)
+	case *models.A_ATTRIBUTE_VALUE_INTEGER:
+		fillUpTable[models.A_ATTRIBUTE_VALUE_INTEGER](probe)
+	case *models.A_ATTRIBUTE_VALUE_REAL:
+		fillUpTable[models.A_ATTRIBUTE_VALUE_REAL](probe)
+	case *models.A_ATTRIBUTE_VALUE_STRING:
+		fillUpTable[models.A_ATTRIBUTE_VALUE_STRING](probe)
+	case *models.A_ATTRIBUTE_VALUE_XHTML:
+		fillUpTable[models.A_ATTRIBUTE_VALUE_XHTML](probe)
+	case *models.A_ATTRIBUTE_VALUE_XHTML_1:
+		fillUpTable[models.A_ATTRIBUTE_VALUE_XHTML_1](probe)
 	case *models.A_CHILDREN:
 		fillUpTable[models.A_CHILDREN](probe)
 	case *models.A_CORE_CONTENT:
 		fillUpTable[models.A_CORE_CONTENT](probe)
 	case *models.A_DATATYPES:
 		fillUpTable[models.A_DATATYPES](probe)
+	case *models.A_DATATYPE_DEFINITION_BOOLEAN_REF:
+		fillUpTable[models.A_DATATYPE_DEFINITION_BOOLEAN_REF](probe)
+	case *models.A_DATATYPE_DEFINITION_DATE_REF:
+		fillUpTable[models.A_DATATYPE_DEFINITION_DATE_REF](probe)
+	case *models.A_DATATYPE_DEFINITION_ENUMERATION_REF:
+		fillUpTable[models.A_DATATYPE_DEFINITION_ENUMERATION_REF](probe)
+	case *models.A_DATATYPE_DEFINITION_INTEGER_REF:
+		fillUpTable[models.A_DATATYPE_DEFINITION_INTEGER_REF](probe)
+	case *models.A_DATATYPE_DEFINITION_REAL_REF:
+		fillUpTable[models.A_DATATYPE_DEFINITION_REAL_REF](probe)
+	case *models.A_DATATYPE_DEFINITION_STRING_REF:
+		fillUpTable[models.A_DATATYPE_DEFINITION_STRING_REF](probe)
+	case *models.A_DATATYPE_DEFINITION_XHTML_REF:
+		fillUpTable[models.A_DATATYPE_DEFINITION_XHTML_REF](probe)
 	case *models.A_EDITABLE_ATTS:
 		fillUpTable[models.A_EDITABLE_ATTS](probe)
+	case *models.A_ENUM_VALUE_REF:
+		fillUpTable[models.A_ENUM_VALUE_REF](probe)
 	case *models.A_OBJECT:
 		fillUpTable[models.A_OBJECT](probe)
 	case *models.A_PROPERTIES:
 		fillUpTable[models.A_PROPERTIES](probe)
+	case *models.A_RELATION_GROUP_TYPE_REF:
+		fillUpTable[models.A_RELATION_GROUP_TYPE_REF](probe)
 	case *models.A_SOURCE:
 		fillUpTable[models.A_SOURCE](probe)
 	case *models.A_SOURCE_SPECIFICATION:
 		fillUpTable[models.A_SOURCE_SPECIFICATION](probe)
 	case *models.A_SPECIFICATIONS:
 		fillUpTable[models.A_SPECIFICATIONS](probe)
+	case *models.A_SPECIFICATION_TYPE_REF:
+		fillUpTable[models.A_SPECIFICATION_TYPE_REF](probe)
 	case *models.A_SPECIFIED_VALUES:
 		fillUpTable[models.A_SPECIFIED_VALUES](probe)
 	case *models.A_SPEC_ATTRIBUTES:
 		fillUpTable[models.A_SPEC_ATTRIBUTES](probe)
 	case *models.A_SPEC_OBJECTS:
 		fillUpTable[models.A_SPEC_OBJECTS](probe)
+	case *models.A_SPEC_OBJECT_TYPE_REF:
+		fillUpTable[models.A_SPEC_OBJECT_TYPE_REF](probe)
 	case *models.A_SPEC_RELATIONS:
 		fillUpTable[models.A_SPEC_RELATIONS](probe)
-	case *models.A_SPEC_RELATIONS_1:
-		fillUpTable[models.A_SPEC_RELATIONS_1](probe)
 	case *models.A_SPEC_RELATION_GROUPS:
 		fillUpTable[models.A_SPEC_RELATION_GROUPS](probe)
+	case *models.A_SPEC_RELATION_REF:
+		fillUpTable[models.A_SPEC_RELATION_REF](probe)
+	case *models.A_SPEC_RELATION_TYPE_REF:
+		fillUpTable[models.A_SPEC_RELATION_TYPE_REF](probe)
 	case *models.A_SPEC_TYPES:
 		fillUpTable[models.A_SPEC_TYPES](probe)
 	case *models.A_THE_HEADER:
 		fillUpTable[models.A_THE_HEADER](probe)
 	case *models.A_TOOL_EXTENSIONS:
 		fillUpTable[models.A_TOOL_EXTENSIONS](probe)
-	case *models.A_VALUES:
-		fillUpTable[models.A_VALUES](probe)
-	case *models.A_VALUES_1:
-		fillUpTable[models.A_VALUES_1](probe)
 	case *models.DATATYPE_DEFINITION_BOOLEAN:
 		fillUpTable[models.DATATYPE_DEFINITION_BOOLEAN](probe)
 	case *models.DATATYPE_DEFINITION_DATE:
@@ -122,56 +172,6 @@ func fillUpTablePointerToGongstruct[T models.PointerToGongstruct](
 		fillUpTable[models.REQ_IF_HEADER](probe)
 	case *models.REQ_IF_TOOL_EXTENSION:
 		fillUpTable[models.REQ_IF_TOOL_EXTENSION](probe)
-	case *models.Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1:
-		fillUpTable[models.Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1](probe)
-	case *models.Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1:
-		fillUpTable[models.Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1](probe)
-	case *models.Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1:
-		fillUpTable[models.Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1](probe)
-	case *models.Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1:
-		fillUpTable[models.Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1](probe)
-	case *models.Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1:
-		fillUpTable[models.Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1](probe)
-	case *models.Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1:
-		fillUpTable[models.Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1](probe)
-	case *models.Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1:
-		fillUpTable[models.Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1](probe)
-	case *models.Renamed_ATTRIBUTE_VALUE_BOOLEAN_1:
-		fillUpTable[models.Renamed_ATTRIBUTE_VALUE_BOOLEAN_1](probe)
-	case *models.Renamed_ATTRIBUTE_VALUE_DATE_1:
-		fillUpTable[models.Renamed_ATTRIBUTE_VALUE_DATE_1](probe)
-	case *models.Renamed_ATTRIBUTE_VALUE_ENUMERATION_1:
-		fillUpTable[models.Renamed_ATTRIBUTE_VALUE_ENUMERATION_1](probe)
-	case *models.Renamed_ATTRIBUTE_VALUE_INTEGER_1:
-		fillUpTable[models.Renamed_ATTRIBUTE_VALUE_INTEGER_1](probe)
-	case *models.Renamed_ATTRIBUTE_VALUE_REAL_1:
-		fillUpTable[models.Renamed_ATTRIBUTE_VALUE_REAL_1](probe)
-	case *models.Renamed_ATTRIBUTE_VALUE_STRING_1:
-		fillUpTable[models.Renamed_ATTRIBUTE_VALUE_STRING_1](probe)
-	case *models.Renamed_ATTRIBUTE_VALUE_XHTML_1:
-		fillUpTable[models.Renamed_ATTRIBUTE_VALUE_XHTML_1](probe)
-	case *models.Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1:
-		fillUpTable[models.Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1](probe)
-	case *models.Renamed_DATATYPE_DEFINITION_DATE_REF_1:
-		fillUpTable[models.Renamed_DATATYPE_DEFINITION_DATE_REF_1](probe)
-	case *models.Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1:
-		fillUpTable[models.Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1](probe)
-	case *models.Renamed_DATATYPE_DEFINITION_INTEGER_REF_1:
-		fillUpTable[models.Renamed_DATATYPE_DEFINITION_INTEGER_REF_1](probe)
-	case *models.Renamed_DATATYPE_DEFINITION_REAL_REF_1:
-		fillUpTable[models.Renamed_DATATYPE_DEFINITION_REAL_REF_1](probe)
-	case *models.Renamed_DATATYPE_DEFINITION_STRING_REF_1:
-		fillUpTable[models.Renamed_DATATYPE_DEFINITION_STRING_REF_1](probe)
-	case *models.Renamed_DATATYPE_DEFINITION_XHTML_REF_1:
-		fillUpTable[models.Renamed_DATATYPE_DEFINITION_XHTML_REF_1](probe)
-	case *models.Renamed_RELATION_GROUP_TYPE_REF_1:
-		fillUpTable[models.Renamed_RELATION_GROUP_TYPE_REF_1](probe)
-	case *models.Renamed_SPECIFICATION_TYPE_REF_1:
-		fillUpTable[models.Renamed_SPECIFICATION_TYPE_REF_1](probe)
-	case *models.Renamed_SPEC_OBJECT_TYPE_REF_1:
-		fillUpTable[models.Renamed_SPEC_OBJECT_TYPE_REF_1](probe)
-	case *models.Renamed_SPEC_RELATION_TYPE_REF_1:
-		fillUpTable[models.Renamed_SPEC_RELATION_TYPE_REF_1](probe)
 	case *models.SPECIFICATION:
 		fillUpTable[models.SPECIFICATION](probe)
 	case *models.SPECIFICATION_TYPE:

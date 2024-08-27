@@ -13,7 +13,7 @@ func PostProcessingNames(stage *StageStruct) {
 
 	for x := range *GetGongstructInstancesSet[ComplexType](stage) {
 
-		if x.NameXSD == "" {
+		if x.IsAnonymous {
 			continue
 		}
 		x.Name = x.NameXSD

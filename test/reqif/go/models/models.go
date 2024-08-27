@@ -40,11 +40,11 @@ type ATTRIBUTE_DEFINITION_BOOLEAN struct {
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
 	ALTERNATIVE_ID []*A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
 
-	// generated from anonymous type within outer element "DEFAULT-VALUE" of type Renamed_ATTRIBUTE-VALUE-BOOLEAN.
-	DEFAULT_VALUE []*Renamed_ATTRIBUTE_VALUE_BOOLEAN_1 `xml:"DEFAULT-VALUE,omitempty"`
+	// generated from anonymous type within outer element "DEFAULT-VALUE" of type A_ATTRIBUTE-VALUE-BOOLEAN.
+	DEFAULT_VALUE []*A_ATTRIBUTE_VALUE_BOOLEAN `xml:"DEFAULT-VALUE,omitempty"`
 
-	// generated from anonymous type within outer element "TYPE" of type Renamed_DATATYPE-DEFINITION-BOOLEAN-REF.
-	TYPE []*Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1 `xml:"TYPE,omitempty"`
+	// generated from anonymous type within outer element "TYPE" of type A_DATATYPE-DEFINITION-BOOLEAN-REF.
+	TYPE []*A_DATATYPE_DEFINITION_BOOLEAN_REF `xml:"TYPE,omitempty"`
 }
 
 // ATTRIBUTE_DEFINITION_DATE Named source named complex type "ATTRIBUTE-DEFINITION-DATE"
@@ -71,11 +71,11 @@ type ATTRIBUTE_DEFINITION_DATE struct {
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
 	ALTERNATIVE_ID []*A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
 
-	// generated from anonymous type within outer element "DEFAULT-VALUE" of type Renamed_ATTRIBUTE-VALUE-DATE.
-	DEFAULT_VALUE []*Renamed_ATTRIBUTE_VALUE_DATE_1 `xml:"DEFAULT-VALUE,omitempty"`
+	// generated from anonymous type within outer element "DEFAULT-VALUE" of type A_ATTRIBUTE-VALUE-DATE.
+	DEFAULT_VALUE []*A_ATTRIBUTE_VALUE_DATE `xml:"DEFAULT-VALUE,omitempty"`
 
-	// generated from anonymous type within outer element "TYPE" of type Renamed_DATATYPE-DEFINITION-DATE-REF.
-	TYPE []*Renamed_DATATYPE_DEFINITION_DATE_REF_1 `xml:"TYPE,omitempty"`
+	// generated from anonymous type within outer element "TYPE" of type A_DATATYPE-DEFINITION-DATE-REF.
+	TYPE []*A_DATATYPE_DEFINITION_DATE_REF `xml:"TYPE,omitempty"`
 }
 
 // ATTRIBUTE_DEFINITION_ENUMERATION Named source named complex type "ATTRIBUTE-DEFINITION-ENUMERATION"
@@ -105,11 +105,11 @@ type ATTRIBUTE_DEFINITION_ENUMERATION struct {
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
 	ALTERNATIVE_ID []*A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
 
-	// generated from anonymous type within outer element "DEFAULT-VALUE" of type Renamed_ATTRIBUTE-VALUE-ENUMERATION.
-	DEFAULT_VALUE []*Renamed_ATTRIBUTE_VALUE_ENUMERATION_1 `xml:"DEFAULT-VALUE,omitempty"`
+	// generated from anonymous type within outer element "DEFAULT-VALUE" of type A_ATTRIBUTE-VALUE-ENUMERATION.
+	DEFAULT_VALUE []*A_ATTRIBUTE_VALUE_ENUMERATION `xml:"DEFAULT-VALUE,omitempty"`
 
-	// generated from anonymous type within outer element "TYPE" of type Renamed_DATATYPE-DEFINITION-ENUMERATION-REF.
-	TYPE []*Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1 `xml:"TYPE,omitempty"`
+	// generated from anonymous type within outer element "TYPE" of type A_DATATYPE-DEFINITION-ENUMERATION-REF.
+	TYPE []*A_DATATYPE_DEFINITION_ENUMERATION_REF `xml:"TYPE,omitempty"`
 }
 
 // ATTRIBUTE_DEFINITION_INTEGER Named source named complex type "ATTRIBUTE-DEFINITION-INTEGER"
@@ -136,11 +136,11 @@ type ATTRIBUTE_DEFINITION_INTEGER struct {
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
 	ALTERNATIVE_ID []*A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
 
-	// generated from anonymous type within outer element "DEFAULT-VALUE" of type Renamed_ATTRIBUTE-VALUE-INTEGER.
-	DEFAULT_VALUE []*Renamed_ATTRIBUTE_VALUE_INTEGER_1 `xml:"DEFAULT-VALUE,omitempty"`
+	// generated from anonymous type within outer element "DEFAULT-VALUE" of type A_ATTRIBUTE-VALUE-INTEGER.
+	DEFAULT_VALUE []*A_ATTRIBUTE_VALUE_INTEGER `xml:"DEFAULT-VALUE,omitempty"`
 
-	// generated from anonymous type within outer element "TYPE" of type Renamed_DATATYPE-DEFINITION-INTEGER-REF.
-	TYPE []*Renamed_DATATYPE_DEFINITION_INTEGER_REF_1 `xml:"TYPE,omitempty"`
+	// generated from anonymous type within outer element "TYPE" of type A_DATATYPE-DEFINITION-INTEGER-REF.
+	TYPE []*A_DATATYPE_DEFINITION_INTEGER_REF `xml:"TYPE,omitempty"`
 }
 
 // ATTRIBUTE_DEFINITION_REAL Named source named complex type "ATTRIBUTE-DEFINITION-REAL"
@@ -167,11 +167,11 @@ type ATTRIBUTE_DEFINITION_REAL struct {
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
 	ALTERNATIVE_ID []*A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
 
-	// generated from anonymous type within outer element "DEFAULT-VALUE" of type Renamed_ATTRIBUTE-VALUE-REAL.
-	DEFAULT_VALUE []*Renamed_ATTRIBUTE_VALUE_REAL_1 `xml:"DEFAULT-VALUE,omitempty"`
+	// generated from anonymous type within outer element "DEFAULT-VALUE" of type A_ATTRIBUTE-VALUE-REAL.
+	DEFAULT_VALUE []*A_ATTRIBUTE_VALUE_REAL `xml:"DEFAULT-VALUE,omitempty"`
 
-	// generated from anonymous type within outer element "TYPE" of type Renamed_DATATYPE-DEFINITION-REAL-REF.
-	TYPE []*Renamed_DATATYPE_DEFINITION_REAL_REF_1 `xml:"TYPE,omitempty"`
+	// generated from anonymous type within outer element "TYPE" of type A_DATATYPE-DEFINITION-REAL-REF.
+	TYPE []*A_DATATYPE_DEFINITION_REAL_REF `xml:"TYPE,omitempty"`
 }
 
 // ATTRIBUTE_DEFINITION_STRING Named source named complex type "ATTRIBUTE-DEFINITION-STRING"
@@ -198,11 +198,11 @@ type ATTRIBUTE_DEFINITION_STRING struct {
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
 	ALTERNATIVE_ID []*A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
 
-	// generated from anonymous type within outer element "DEFAULT-VALUE" of type Renamed_ATTRIBUTE-VALUE-STRING.
-	DEFAULT_VALUE []*Renamed_ATTRIBUTE_VALUE_STRING_1 `xml:"DEFAULT-VALUE,omitempty"`
+	// generated from anonymous type within outer element "DEFAULT-VALUE" of type A_ATTRIBUTE-VALUE-STRING.
+	DEFAULT_VALUE []*A_ATTRIBUTE_VALUE_STRING `xml:"DEFAULT-VALUE,omitempty"`
 
-	// generated from anonymous type within outer element "TYPE" of type Renamed_DATATYPE-DEFINITION-STRING-REF.
-	TYPE []*Renamed_DATATYPE_DEFINITION_STRING_REF_1 `xml:"TYPE,omitempty"`
+	// generated from anonymous type within outer element "TYPE" of type A_DATATYPE-DEFINITION-STRING-REF.
+	TYPE []*A_DATATYPE_DEFINITION_STRING_REF `xml:"TYPE,omitempty"`
 }
 
 // ATTRIBUTE_DEFINITION_XHTML Named source named complex type "ATTRIBUTE-DEFINITION-XHTML"
@@ -229,11 +229,11 @@ type ATTRIBUTE_DEFINITION_XHTML struct {
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
 	ALTERNATIVE_ID []*A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
 
-	// generated from anonymous type within outer element "DEFAULT-VALUE" of type Renamed_ATTRIBUTE-VALUE-XHTML.
-	DEFAULT_VALUE []*Renamed_ATTRIBUTE_VALUE_XHTML_1 `xml:"DEFAULT-VALUE,omitempty"`
+	// generated from anonymous type within outer element "DEFAULT-VALUE" of type A_ATTRIBUTE-VALUE-XHTML.
+	DEFAULT_VALUE []*A_ATTRIBUTE_VALUE_XHTML `xml:"DEFAULT-VALUE,omitempty"`
 
-	// generated from anonymous type within outer element "TYPE" of type Renamed_DATATYPE-DEFINITION-XHTML-REF.
-	TYPE []*Renamed_DATATYPE_DEFINITION_XHTML_REF_1 `xml:"TYPE,omitempty"`
+	// generated from anonymous type within outer element "TYPE" of type A_DATATYPE-DEFINITION-XHTML-REF.
+	TYPE []*A_DATATYPE_DEFINITION_XHTML_REF `xml:"TYPE,omitempty"`
 }
 
 // ATTRIBUTE_VALUE_BOOLEAN Named source named complex type "ATTRIBUTE-VALUE-BOOLEAN"
@@ -245,8 +245,8 @@ type ATTRIBUTE_VALUE_BOOLEAN struct {
 	// generated from attribute "THE-VALUE
 	THE_VALUE bool `xml:"THE-VALUE,attr,omitempty"`
 
-	// generated from anonymous type within outer element "DEFINITION" of type Renamed_ATTRIBUTE-DEFINITION-BOOLEAN-REF.
-	DEFINITION []*Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1 `xml:"DEFINITION,omitempty"`
+	// generated from anonymous type within outer element "DEFINITION" of type A_ATTRIBUTE-DEFINITION-BOOLEAN-REF.
+	DEFINITION []*A_ATTRIBUTE_DEFINITION_BOOLEAN_REF `xml:"DEFINITION,omitempty"`
 }
 
 // ATTRIBUTE_VALUE_DATE Named source named complex type "ATTRIBUTE-VALUE-DATE"
@@ -258,8 +258,8 @@ type ATTRIBUTE_VALUE_DATE struct {
 	// generated from attribute "THE-VALUE
 	THE_VALUE string `xml:"THE-VALUE,attr,omitempty"`
 
-	// generated from anonymous type within outer element "DEFINITION" of type Renamed_ATTRIBUTE-DEFINITION-DATE-REF.
-	DEFINITION []*Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1 `xml:"DEFINITION,omitempty"`
+	// generated from anonymous type within outer element "DEFINITION" of type A_ATTRIBUTE-DEFINITION-DATE-REF.
+	DEFINITION []*A_ATTRIBUTE_DEFINITION_DATE_REF `xml:"DEFINITION,omitempty"`
 }
 
 // ATTRIBUTE_VALUE_ENUMERATION Named source named complex type "ATTRIBUTE-VALUE-ENUMERATION"
@@ -268,11 +268,11 @@ type ATTRIBUTE_VALUE_ENUMERATION struct {
 
 	// insertion point for fields
 
-	// generated from anonymous type within outer element "DEFINITION" of type Renamed_ATTRIBUTE-DEFINITION-ENUMERATION-REF.
-	DEFINITION []*Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1 `xml:"DEFINITION,omitempty"`
+	// generated from anonymous type within outer element "DEFINITION" of type A_ATTRIBUTE-DEFINITION-ENUMERATION-REF.
+	DEFINITION []*A_ATTRIBUTE_DEFINITION_ENUMERATION_REF `xml:"DEFINITION,omitempty"`
 
-	// generated from anonymous type within outer element "VALUES" of type A_VALUES.
-	VALUES []*A_VALUES `xml:"VALUES,omitempty"`
+	// generated from anonymous type within outer element "VALUES" of type A_ENUM-VALUE-REF.
+	VALUES []*A_ENUM_VALUE_REF `xml:"VALUES,omitempty"`
 }
 
 // ATTRIBUTE_VALUE_INTEGER Named source named complex type "ATTRIBUTE-VALUE-INTEGER"
@@ -284,8 +284,8 @@ type ATTRIBUTE_VALUE_INTEGER struct {
 	// generated from attribute "THE-VALUE
 	THE_VALUE int `xml:"THE-VALUE,attr,omitempty"`
 
-	// generated from anonymous type within outer element "DEFINITION" of type Renamed_ATTRIBUTE-DEFINITION-INTEGER-REF.
-	DEFINITION []*Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1 `xml:"DEFINITION,omitempty"`
+	// generated from anonymous type within outer element "DEFINITION" of type A_ATTRIBUTE-DEFINITION-INTEGER-REF.
+	DEFINITION []*A_ATTRIBUTE_DEFINITION_INTEGER_REF `xml:"DEFINITION,omitempty"`
 }
 
 // ATTRIBUTE_VALUE_REAL Named source named complex type "ATTRIBUTE-VALUE-REAL"
@@ -297,8 +297,8 @@ type ATTRIBUTE_VALUE_REAL struct {
 	// generated from attribute "THE-VALUE
 	THE_VALUE float64 `xml:"THE-VALUE,attr,omitempty"`
 
-	// generated from anonymous type within outer element "DEFINITION" of type Renamed_ATTRIBUTE-DEFINITION-REAL-REF.
-	DEFINITION []*Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1 `xml:"DEFINITION,omitempty"`
+	// generated from anonymous type within outer element "DEFINITION" of type A_ATTRIBUTE-DEFINITION-REAL-REF.
+	DEFINITION []*A_ATTRIBUTE_DEFINITION_REAL_REF `xml:"DEFINITION,omitempty"`
 }
 
 // ATTRIBUTE_VALUE_STRING Named source named complex type "ATTRIBUTE-VALUE-STRING"
@@ -310,8 +310,8 @@ type ATTRIBUTE_VALUE_STRING struct {
 	// generated from attribute "THE-VALUE
 	THE_VALUE string `xml:"THE-VALUE,attr,omitempty"`
 
-	// generated from anonymous type within outer element "DEFINITION" of type Renamed_ATTRIBUTE-DEFINITION-STRING-REF.
-	DEFINITION []*Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1 `xml:"DEFINITION,omitempty"`
+	// generated from anonymous type within outer element "DEFINITION" of type A_ATTRIBUTE-DEFINITION-STRING-REF.
+	DEFINITION []*A_ATTRIBUTE_DEFINITION_STRING_REF `xml:"DEFINITION,omitempty"`
 }
 
 // ATTRIBUTE_VALUE_XHTML Named source named complex type "ATTRIBUTE-VALUE-XHTML"
@@ -329,8 +329,8 @@ type ATTRIBUTE_VALUE_XHTML struct {
 	// generated from element "THE-ORIGINAL-VALUE" of type XHTML-CONTENT order 58 depth 0
 	THE_ORIGINAL_VALUE []*XHTML_CONTENT `xml:"THE-ORIGINAL-VALUE,omitempty"`
 
-	// generated from anonymous type within outer element "DEFINITION" of type Renamed_ATTRIBUTE-DEFINITION-XHTML-REF.
-	DEFINITION []*Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1 `xml:"DEFINITION,omitempty"`
+	// generated from anonymous type within outer element "DEFINITION" of type A_ATTRIBUTE-DEFINITION-XHTML-REF.
+	DEFINITION []*A_ATTRIBUTE_DEFINITION_XHTML_REF `xml:"DEFINITION,omitempty"`
 }
 
 // A_ALTERNATIVE_ID Named source within outer element "ALTERNATIVE-ID"
@@ -341,6 +341,174 @@ type A_ALTERNATIVE_ID struct {
 
 	// generated from element "ALTERNATIVE-ID" of type ALTERNATIVE-ID order 2 depth 1
 	ALTERNATIVE_ID []*ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
+}
+
+// A_ATTRIBUTE_DEFINITION_BOOLEAN_REF Named source within outer element "DEFINITION"
+type A_ATTRIBUTE_DEFINITION_BOOLEAN_REF struct {
+	Name string `xml:"-"`
+
+	// insertion point for fields
+
+	// generated from element "ATTRIBUTE-DEFINITION-BOOLEAN-REF" of type LOCAL-REF order 44 depth 1
+	ATTRIBUTE_DEFINITION_BOOLEAN_REF string `xml:"ATTRIBUTE-DEFINITION-BOOLEAN-REF,omitempty"`
+}
+
+// A_ATTRIBUTE_DEFINITION_DATE_REF Named source within outer element "DEFINITION"
+type A_ATTRIBUTE_DEFINITION_DATE_REF struct {
+	Name string `xml:"-"`
+
+	// insertion point for fields
+
+	// generated from element "ATTRIBUTE-DEFINITION-DATE-REF" of type LOCAL-REF order 46 depth 1
+	ATTRIBUTE_DEFINITION_DATE_REF string `xml:"ATTRIBUTE-DEFINITION-DATE-REF,omitempty"`
+}
+
+// A_ATTRIBUTE_DEFINITION_ENUMERATION_REF Named source within outer element "DEFINITION"
+type A_ATTRIBUTE_DEFINITION_ENUMERATION_REF struct {
+	Name string `xml:"-"`
+
+	// insertion point for fields
+
+	// generated from element "ATTRIBUTE-DEFINITION-ENUMERATION-REF" of type LOCAL-REF order 48 depth 1
+	ATTRIBUTE_DEFINITION_ENUMERATION_REF string `xml:"ATTRIBUTE-DEFINITION-ENUMERATION-REF,omitempty"`
+}
+
+// A_ATTRIBUTE_DEFINITION_INTEGER_REF Named source within outer element "DEFINITION"
+type A_ATTRIBUTE_DEFINITION_INTEGER_REF struct {
+	Name string `xml:"-"`
+
+	// insertion point for fields
+
+	// generated from element "ATTRIBUTE-DEFINITION-INTEGER-REF" of type LOCAL-REF order 52 depth 1
+	ATTRIBUTE_DEFINITION_INTEGER_REF string `xml:"ATTRIBUTE-DEFINITION-INTEGER-REF,omitempty"`
+}
+
+// A_ATTRIBUTE_DEFINITION_REAL_REF Named source within outer element "DEFINITION"
+type A_ATTRIBUTE_DEFINITION_REAL_REF struct {
+	Name string `xml:"-"`
+
+	// insertion point for fields
+
+	// generated from element "ATTRIBUTE-DEFINITION-REAL-REF" of type LOCAL-REF order 54 depth 1
+	ATTRIBUTE_DEFINITION_REAL_REF string `xml:"ATTRIBUTE-DEFINITION-REAL-REF,omitempty"`
+}
+
+// A_ATTRIBUTE_DEFINITION_STRING_REF Named source within outer element "DEFINITION"
+type A_ATTRIBUTE_DEFINITION_STRING_REF struct {
+	Name string `xml:"-"`
+
+	// insertion point for fields
+
+	// generated from element "ATTRIBUTE-DEFINITION-STRING-REF" of type LOCAL-REF order 56 depth 1
+	ATTRIBUTE_DEFINITION_STRING_REF string `xml:"ATTRIBUTE-DEFINITION-STRING-REF,omitempty"`
+}
+
+// A_ATTRIBUTE_DEFINITION_XHTML_REF Named source within outer element "DEFINITION"
+type A_ATTRIBUTE_DEFINITION_XHTML_REF struct {
+	Name string `xml:"-"`
+
+	// insertion point for fields
+
+	// generated from element "ATTRIBUTE-DEFINITION-XHTML-REF" of type LOCAL-REF order 60 depth 1
+	ATTRIBUTE_DEFINITION_XHTML_REF string `xml:"ATTRIBUTE-DEFINITION-XHTML-REF,omitempty"`
+}
+
+// A_ATTRIBUTE_VALUE_BOOLEAN Named source within outer element "DEFAULT-VALUE"
+type A_ATTRIBUTE_VALUE_BOOLEAN struct {
+	Name string `xml:"-"`
+
+	// insertion point for fields
+
+	// generated from element "ATTRIBUTE-VALUE-BOOLEAN" of type ATTRIBUTE-VALUE-BOOLEAN order 4 depth 1
+	ATTRIBUTE_VALUE_BOOLEAN []*ATTRIBUTE_VALUE_BOOLEAN `xml:"ATTRIBUTE-VALUE-BOOLEAN,omitempty"`
+}
+
+// A_ATTRIBUTE_VALUE_DATE Named source within outer element "DEFAULT-VALUE"
+type A_ATTRIBUTE_VALUE_DATE struct {
+	Name string `xml:"-"`
+
+	// insertion point for fields
+
+	// generated from element "ATTRIBUTE-VALUE-DATE" of type ATTRIBUTE-VALUE-DATE order 10 depth 1
+	ATTRIBUTE_VALUE_DATE []*ATTRIBUTE_VALUE_DATE `xml:"ATTRIBUTE-VALUE-DATE,omitempty"`
+}
+
+// A_ATTRIBUTE_VALUE_ENUMERATION Named source within outer element "DEFAULT-VALUE"
+type A_ATTRIBUTE_VALUE_ENUMERATION struct {
+	Name string `xml:"-"`
+
+	// insertion point for fields
+
+	// generated from element "ATTRIBUTE-VALUE-ENUMERATION" of type ATTRIBUTE-VALUE-ENUMERATION order 14 depth 1
+	ATTRIBUTE_VALUE_ENUMERATION []*ATTRIBUTE_VALUE_ENUMERATION `xml:"ATTRIBUTE-VALUE-ENUMERATION,omitempty"`
+}
+
+// A_ATTRIBUTE_VALUE_INTEGER Named source within outer element "DEFAULT-VALUE"
+type A_ATTRIBUTE_VALUE_INTEGER struct {
+	Name string `xml:"-"`
+
+	// insertion point for fields
+
+	// generated from element "ATTRIBUTE-VALUE-INTEGER" of type ATTRIBUTE-VALUE-INTEGER order 22 depth 1
+	ATTRIBUTE_VALUE_INTEGER []*ATTRIBUTE_VALUE_INTEGER `xml:"ATTRIBUTE-VALUE-INTEGER,omitempty"`
+}
+
+// A_ATTRIBUTE_VALUE_REAL Named source within outer element "DEFAULT-VALUE"
+type A_ATTRIBUTE_VALUE_REAL struct {
+	Name string `xml:"-"`
+
+	// insertion point for fields
+
+	// generated from element "ATTRIBUTE-VALUE-REAL" of type ATTRIBUTE-VALUE-REAL order 28 depth 1
+	ATTRIBUTE_VALUE_REAL []*ATTRIBUTE_VALUE_REAL `xml:"ATTRIBUTE-VALUE-REAL,omitempty"`
+}
+
+// A_ATTRIBUTE_VALUE_STRING Named source within outer element "DEFAULT-VALUE"
+type A_ATTRIBUTE_VALUE_STRING struct {
+	Name string `xml:"-"`
+
+	// insertion point for fields
+
+	// generated from element "ATTRIBUTE-VALUE-STRING" of type ATTRIBUTE-VALUE-STRING order 34 depth 1
+	ATTRIBUTE_VALUE_STRING []*ATTRIBUTE_VALUE_STRING `xml:"ATTRIBUTE-VALUE-STRING,omitempty"`
+}
+
+// A_ATTRIBUTE_VALUE_XHTML Named source within outer element "DEFAULT-VALUE"
+type A_ATTRIBUTE_VALUE_XHTML struct {
+	Name string `xml:"-"`
+
+	// insertion point for fields
+
+	// generated from element "ATTRIBUTE-VALUE-XHTML" of type ATTRIBUTE-VALUE-XHTML order 40 depth 1
+	ATTRIBUTE_VALUE_XHTML []*ATTRIBUTE_VALUE_XHTML `xml:"ATTRIBUTE-VALUE-XHTML,omitempty"`
+}
+
+// A_ATTRIBUTE_VALUE_XHTML_1 Named source within outer element "VALUES"
+type A_ATTRIBUTE_VALUE_XHTML_1 struct {
+	Name string `xml:"-"`
+
+	// insertion point for fields
+
+	// generated from element "ATTRIBUTE-VALUE-BOOLEAN" of type ATTRIBUTE-VALUE-BOOLEAN order 4 depth 1
+	ATTRIBUTE_VALUE_BOOLEAN []*ATTRIBUTE_VALUE_BOOLEAN `xml:"ATTRIBUTE-VALUE-BOOLEAN,omitempty"`
+
+	// generated from element "ATTRIBUTE-VALUE-DATE" of type ATTRIBUTE-VALUE-DATE order 10 depth 1
+	ATTRIBUTE_VALUE_DATE []*ATTRIBUTE_VALUE_DATE `xml:"ATTRIBUTE-VALUE-DATE,omitempty"`
+
+	// generated from element "ATTRIBUTE-VALUE-ENUMERATION" of type ATTRIBUTE-VALUE-ENUMERATION order 14 depth 1
+	ATTRIBUTE_VALUE_ENUMERATION []*ATTRIBUTE_VALUE_ENUMERATION `xml:"ATTRIBUTE-VALUE-ENUMERATION,omitempty"`
+
+	// generated from element "ATTRIBUTE-VALUE-INTEGER" of type ATTRIBUTE-VALUE-INTEGER order 22 depth 1
+	ATTRIBUTE_VALUE_INTEGER []*ATTRIBUTE_VALUE_INTEGER `xml:"ATTRIBUTE-VALUE-INTEGER,omitempty"`
+
+	// generated from element "ATTRIBUTE-VALUE-REAL" of type ATTRIBUTE-VALUE-REAL order 28 depth 1
+	ATTRIBUTE_VALUE_REAL []*ATTRIBUTE_VALUE_REAL `xml:"ATTRIBUTE-VALUE-REAL,omitempty"`
+
+	// generated from element "ATTRIBUTE-VALUE-STRING" of type ATTRIBUTE-VALUE-STRING order 34 depth 1
+	ATTRIBUTE_VALUE_STRING []*ATTRIBUTE_VALUE_STRING `xml:"ATTRIBUTE-VALUE-STRING,omitempty"`
+
+	// generated from element "ATTRIBUTE-VALUE-XHTML" of type ATTRIBUTE-VALUE-XHTML order 40 depth 1
+	ATTRIBUTE_VALUE_XHTML []*ATTRIBUTE_VALUE_XHTML `xml:"ATTRIBUTE-VALUE-XHTML,omitempty"`
 }
 
 // A_CHILDREN Named source within outer element "CHILDREN"
@@ -361,6 +529,76 @@ type A_CORE_CONTENT struct {
 
 	// generated from element "REQ-IF-CONTENT" of type REQ-IF-CONTENT order 104 depth 1
 	REQ_IF_CONTENT []*REQ_IF_CONTENT `xml:"REQ-IF-CONTENT,omitempty"`
+}
+
+// A_DATATYPE_DEFINITION_BOOLEAN_REF Named source within outer element "TYPE"
+type A_DATATYPE_DEFINITION_BOOLEAN_REF struct {
+	Name string `xml:"-"`
+
+	// insertion point for fields
+
+	// generated from element "DATATYPE-DEFINITION-BOOLEAN-REF" of type LOCAL-REF order 6 depth 1
+	DATATYPE_DEFINITION_BOOLEAN_REF string `xml:"DATATYPE-DEFINITION-BOOLEAN-REF,omitempty"`
+}
+
+// A_DATATYPE_DEFINITION_DATE_REF Named source within outer element "TYPE"
+type A_DATATYPE_DEFINITION_DATE_REF struct {
+	Name string `xml:"-"`
+
+	// insertion point for fields
+
+	// generated from element "DATATYPE-DEFINITION-DATE-REF" of type LOCAL-REF order 12 depth 1
+	DATATYPE_DEFINITION_DATE_REF string `xml:"DATATYPE-DEFINITION-DATE-REF,omitempty"`
+}
+
+// A_DATATYPE_DEFINITION_ENUMERATION_REF Named source within outer element "TYPE"
+type A_DATATYPE_DEFINITION_ENUMERATION_REF struct {
+	Name string `xml:"-"`
+
+	// insertion point for fields
+
+	// generated from element "DATATYPE-DEFINITION-ENUMERATION-REF" of type LOCAL-REF order 18 depth 1
+	DATATYPE_DEFINITION_ENUMERATION_REF string `xml:"DATATYPE-DEFINITION-ENUMERATION-REF,omitempty"`
+}
+
+// A_DATATYPE_DEFINITION_INTEGER_REF Named source within outer element "TYPE"
+type A_DATATYPE_DEFINITION_INTEGER_REF struct {
+	Name string `xml:"-"`
+
+	// insertion point for fields
+
+	// generated from element "DATATYPE-DEFINITION-INTEGER-REF" of type LOCAL-REF order 24 depth 1
+	DATATYPE_DEFINITION_INTEGER_REF string `xml:"DATATYPE-DEFINITION-INTEGER-REF,omitempty"`
+}
+
+// A_DATATYPE_DEFINITION_REAL_REF Named source within outer element "TYPE"
+type A_DATATYPE_DEFINITION_REAL_REF struct {
+	Name string `xml:"-"`
+
+	// insertion point for fields
+
+	// generated from element "DATATYPE-DEFINITION-REAL-REF" of type LOCAL-REF order 30 depth 1
+	DATATYPE_DEFINITION_REAL_REF string `xml:"DATATYPE-DEFINITION-REAL-REF,omitempty"`
+}
+
+// A_DATATYPE_DEFINITION_STRING_REF Named source within outer element "TYPE"
+type A_DATATYPE_DEFINITION_STRING_REF struct {
+	Name string `xml:"-"`
+
+	// insertion point for fields
+
+	// generated from element "DATATYPE-DEFINITION-STRING-REF" of type LOCAL-REF order 36 depth 1
+	DATATYPE_DEFINITION_STRING_REF string `xml:"DATATYPE-DEFINITION-STRING-REF,omitempty"`
+}
+
+// A_DATATYPE_DEFINITION_XHTML_REF Named source within outer element "TYPE"
+type A_DATATYPE_DEFINITION_XHTML_REF struct {
+	Name string `xml:"-"`
+
+	// insertion point for fields
+
+	// generated from element "DATATYPE-DEFINITION-XHTML-REF" of type LOCAL-REF order 42 depth 1
+	DATATYPE_DEFINITION_XHTML_REF string `xml:"DATATYPE-DEFINITION-XHTML-REF,omitempty"`
 }
 
 // A_DATATYPES Named source within outer element "DATATYPES"
@@ -419,6 +657,16 @@ type A_EDITABLE_ATTS struct {
 	ATTRIBUTE_DEFINITION_XHTML_REF string `xml:"ATTRIBUTE-DEFINITION-XHTML-REF,omitempty"`
 }
 
+// A_ENUM_VALUE_REF Named source within outer element "VALUES"
+type A_ENUM_VALUE_REF struct {
+	Name string `xml:"-"`
+
+	// insertion point for fields
+
+	// generated from element "ENUM-VALUE-REF" of type LOCAL-REF order 50 depth 1
+	ENUM_VALUE_REF string `xml:"ENUM-VALUE-REF,omitempty"`
+}
+
 // A_OBJECT Named source within outer element "OBJECT"
 type A_OBJECT struct {
 	Name string `xml:"-"`
@@ -437,6 +685,16 @@ type A_PROPERTIES struct {
 
 	// generated from element "EMBEDDED-VALUE" of type EMBEDDED-VALUE order 80 depth 1
 	EMBEDDED_VALUE []*EMBEDDED_VALUE `xml:"EMBEDDED-VALUE,omitempty"`
+}
+
+// A_RELATION_GROUP_TYPE_REF Named source within outer element "TYPE"
+type A_RELATION_GROUP_TYPE_REF struct {
+	Name string `xml:"-"`
+
+	// insertion point for fields
+
+	// generated from element "RELATION-GROUP-TYPE-REF" of type LOCAL-REF order 90 depth 1
+	RELATION_GROUP_TYPE_REF string `xml:"RELATION-GROUP-TYPE-REF,omitempty"`
 }
 
 // A_SOURCE Named source within outer element "SOURCE"
@@ -487,6 +745,16 @@ type A_SPEC_ATTRIBUTES struct {
 	ATTRIBUTE_DEFINITION_XHTML []*ATTRIBUTE_DEFINITION_XHTML `xml:"ATTRIBUTE-DEFINITION-XHTML,omitempty"`
 }
 
+// A_SPEC_OBJECT_TYPE_REF Named source within outer element "TYPE"
+type A_SPEC_OBJECT_TYPE_REF struct {
+	Name string `xml:"-"`
+
+	// insertion point for fields
+
+	// generated from element "SPEC-OBJECT-TYPE-REF" of type LOCAL-REF order 160 depth 1
+	SPEC_OBJECT_TYPE_REF string `xml:"SPEC-OBJECT-TYPE-REF,omitempty"`
+}
+
 // A_SPEC_OBJECTS Named source within outer element "SPEC-OBJECTS"
 type A_SPEC_OBJECTS struct {
 	Name string `xml:"-"`
@@ -507,14 +775,24 @@ type A_SPEC_RELATION_GROUPS struct {
 	RELATION_GROUP []*RELATION_GROUP `xml:"RELATION-GROUP,omitempty"`
 }
 
-// A_SPEC_RELATIONS_1 Named source within outer element "SPEC-RELATIONS"
-type A_SPEC_RELATIONS_1 struct {
+// A_SPEC_RELATION_REF Named source within outer element "SPEC-RELATIONS"
+type A_SPEC_RELATION_REF struct {
 	Name string `xml:"-"`
 
 	// insertion point for fields
 
 	// generated from element "SPEC-RELATION-REF" of type LOCAL-REF order 86 depth 1
 	SPEC_RELATION_REF string `xml:"SPEC-RELATION-REF,omitempty"`
+}
+
+// A_SPEC_RELATION_TYPE_REF Named source within outer element "TYPE"
+type A_SPEC_RELATION_TYPE_REF struct {
+	Name string `xml:"-"`
+
+	// insertion point for fields
+
+	// generated from element "SPEC-RELATION-TYPE-REF" of type LOCAL-REF order 186 depth 1
+	SPEC_RELATION_TYPE_REF string `xml:"SPEC-RELATION-TYPE-REF,omitempty"`
 }
 
 // A_SPEC_RELATIONS Named source within outer element "SPEC-RELATIONS"
@@ -544,6 +822,16 @@ type A_SPEC_TYPES struct {
 
 	// generated from element "SPECIFICATION-TYPE" of type SPECIFICATION-TYPE order 119 depth 1
 	SPECIFICATION_TYPE []*SPECIFICATION_TYPE `xml:"SPECIFICATION-TYPE,omitempty"`
+}
+
+// A_SPECIFICATION_TYPE_REF Named source within outer element "TYPE"
+type A_SPECIFICATION_TYPE_REF struct {
+	Name string `xml:"-"`
+
+	// insertion point for fields
+
+	// generated from element "SPECIFICATION-TYPE-REF" of type LOCAL-REF order 210 depth 1
+	SPECIFICATION_TYPE_REF string `xml:"SPECIFICATION-TYPE-REF,omitempty"`
 }
 
 // A_SPECIFICATIONS Named source within outer element "SPECIFICATIONS"
@@ -584,44 +872,6 @@ type A_TOOL_EXTENSIONS struct {
 
 	// generated from element "REQ-IF-TOOL-EXTENSION" of type REQ-IF-TOOL-EXTENSION order 106 depth 1
 	REQ_IF_TOOL_EXTENSION []*REQ_IF_TOOL_EXTENSION `xml:"REQ-IF-TOOL-EXTENSION,omitempty"`
-}
-
-// A_VALUES Named source within outer element "VALUES"
-type A_VALUES struct {
-	Name string `xml:"-"`
-
-	// insertion point for fields
-
-	// generated from element "ENUM-VALUE-REF" of type LOCAL-REF order 50 depth 1
-	ENUM_VALUE_REF string `xml:"ENUM-VALUE-REF,omitempty"`
-}
-
-// A_VALUES_1 Named source within outer element "VALUES"
-type A_VALUES_1 struct {
-	Name string `xml:"-"`
-
-	// insertion point for fields
-
-	// generated from element "ATTRIBUTE-VALUE-BOOLEAN" of type ATTRIBUTE-VALUE-BOOLEAN order 4 depth 1
-	ATTRIBUTE_VALUE_BOOLEAN []*ATTRIBUTE_VALUE_BOOLEAN `xml:"ATTRIBUTE-VALUE-BOOLEAN,omitempty"`
-
-	// generated from element "ATTRIBUTE-VALUE-DATE" of type ATTRIBUTE-VALUE-DATE order 10 depth 1
-	ATTRIBUTE_VALUE_DATE []*ATTRIBUTE_VALUE_DATE `xml:"ATTRIBUTE-VALUE-DATE,omitempty"`
-
-	// generated from element "ATTRIBUTE-VALUE-ENUMERATION" of type ATTRIBUTE-VALUE-ENUMERATION order 14 depth 1
-	ATTRIBUTE_VALUE_ENUMERATION []*ATTRIBUTE_VALUE_ENUMERATION `xml:"ATTRIBUTE-VALUE-ENUMERATION,omitempty"`
-
-	// generated from element "ATTRIBUTE-VALUE-INTEGER" of type ATTRIBUTE-VALUE-INTEGER order 22 depth 1
-	ATTRIBUTE_VALUE_INTEGER []*ATTRIBUTE_VALUE_INTEGER `xml:"ATTRIBUTE-VALUE-INTEGER,omitempty"`
-
-	// generated from element "ATTRIBUTE-VALUE-REAL" of type ATTRIBUTE-VALUE-REAL order 28 depth 1
-	ATTRIBUTE_VALUE_REAL []*ATTRIBUTE_VALUE_REAL `xml:"ATTRIBUTE-VALUE-REAL,omitempty"`
-
-	// generated from element "ATTRIBUTE-VALUE-STRING" of type ATTRIBUTE-VALUE-STRING order 34 depth 1
-	ATTRIBUTE_VALUE_STRING []*ATTRIBUTE_VALUE_STRING `xml:"ATTRIBUTE-VALUE-STRING,omitempty"`
-
-	// generated from element "ATTRIBUTE-VALUE-XHTML" of type ATTRIBUTE-VALUE-XHTML order 40 depth 1
-	ATTRIBUTE_VALUE_XHTML []*ATTRIBUTE_VALUE_XHTML `xml:"ATTRIBUTE-VALUE-XHTML,omitempty"`
 }
 
 // DATATYPE_DEFINITION_BOOLEAN Named source named complex type "DATATYPE-DEFINITION-BOOLEAN"
@@ -861,11 +1111,11 @@ type RELATION_GROUP struct {
 	// generated from anonymous type within outer element "SOURCE-SPECIFICATION" of type A_SOURCE-SPECIFICATION.
 	SOURCE_SPECIFICATION []*A_SOURCE_SPECIFICATION `xml:"SOURCE-SPECIFICATION,omitempty"`
 
-	// generated from anonymous type within outer element "SPEC-RELATIONS" of type A_SPEC-RELATIONS.
-	SPEC_RELATIONS []*A_SPEC_RELATIONS_1 `xml:"SPEC-RELATIONS,omitempty"`
+	// generated from anonymous type within outer element "SPEC-RELATIONS" of type A_SPEC-RELATION-REF.
+	SPEC_RELATIONS []*A_SPEC_RELATION_REF `xml:"SPEC-RELATIONS,omitempty"`
 
-	// generated from anonymous type within outer element "TYPE" of type Renamed_RELATION-GROUP-TYPE-REF.
-	TYPE []*Renamed_RELATION_GROUP_TYPE_REF_1 `xml:"TYPE,omitempty"`
+	// generated from anonymous type within outer element "TYPE" of type A_RELATION-GROUP-TYPE-REF.
+	TYPE []*A_RELATION_GROUP_TYPE_REF `xml:"TYPE,omitempty"`
 }
 
 // RELATION_GROUP_TYPE Named source named complex type "RELATION-GROUP-TYPE"
@@ -975,256 +1225,6 @@ type REQ_IF_TOOL_EXTENSION struct {
 	// insertion point for fields
 }
 
-// Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1 Named source within outer element "DEFINITION"
-type Renamed_ATTRIBUTE_DEFINITION_BOOLEAN_REF_1 struct {
-	Name string `xml:"-"`
-
-	// insertion point for fields
-
-	// generated from element "ATTRIBUTE-DEFINITION-BOOLEAN-REF" of type LOCAL-REF order 44 depth 1
-	ATTRIBUTE_DEFINITION_BOOLEAN_REF string `xml:"ATTRIBUTE-DEFINITION-BOOLEAN-REF,omitempty"`
-}
-
-// Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1 Named source within outer element "DEFINITION"
-type Renamed_ATTRIBUTE_DEFINITION_DATE_REF_1 struct {
-	Name string `xml:"-"`
-
-	// insertion point for fields
-
-	// generated from element "ATTRIBUTE-DEFINITION-DATE-REF" of type LOCAL-REF order 46 depth 1
-	ATTRIBUTE_DEFINITION_DATE_REF string `xml:"ATTRIBUTE-DEFINITION-DATE-REF,omitempty"`
-}
-
-// Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1 Named source within outer element "DEFINITION"
-type Renamed_ATTRIBUTE_DEFINITION_ENUMERATION_REF_1 struct {
-	Name string `xml:"-"`
-
-	// insertion point for fields
-
-	// generated from element "ATTRIBUTE-DEFINITION-ENUMERATION-REF" of type LOCAL-REF order 48 depth 1
-	ATTRIBUTE_DEFINITION_ENUMERATION_REF string `xml:"ATTRIBUTE-DEFINITION-ENUMERATION-REF,omitempty"`
-}
-
-// Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1 Named source within outer element "DEFINITION"
-type Renamed_ATTRIBUTE_DEFINITION_INTEGER_REF_1 struct {
-	Name string `xml:"-"`
-
-	// insertion point for fields
-
-	// generated from element "ATTRIBUTE-DEFINITION-INTEGER-REF" of type LOCAL-REF order 52 depth 1
-	ATTRIBUTE_DEFINITION_INTEGER_REF string `xml:"ATTRIBUTE-DEFINITION-INTEGER-REF,omitempty"`
-}
-
-// Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1 Named source within outer element "DEFINITION"
-type Renamed_ATTRIBUTE_DEFINITION_REAL_REF_1 struct {
-	Name string `xml:"-"`
-
-	// insertion point for fields
-
-	// generated from element "ATTRIBUTE-DEFINITION-REAL-REF" of type LOCAL-REF order 54 depth 1
-	ATTRIBUTE_DEFINITION_REAL_REF string `xml:"ATTRIBUTE-DEFINITION-REAL-REF,omitempty"`
-}
-
-// Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1 Named source within outer element "DEFINITION"
-type Renamed_ATTRIBUTE_DEFINITION_STRING_REF_1 struct {
-	Name string `xml:"-"`
-
-	// insertion point for fields
-
-	// generated from element "ATTRIBUTE-DEFINITION-STRING-REF" of type LOCAL-REF order 56 depth 1
-	ATTRIBUTE_DEFINITION_STRING_REF string `xml:"ATTRIBUTE-DEFINITION-STRING-REF,omitempty"`
-}
-
-// Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1 Named source within outer element "DEFINITION"
-type Renamed_ATTRIBUTE_DEFINITION_XHTML_REF_1 struct {
-	Name string `xml:"-"`
-
-	// insertion point for fields
-
-	// generated from element "ATTRIBUTE-DEFINITION-XHTML-REF" of type LOCAL-REF order 60 depth 1
-	ATTRIBUTE_DEFINITION_XHTML_REF string `xml:"ATTRIBUTE-DEFINITION-XHTML-REF,omitempty"`
-}
-
-// Renamed_ATTRIBUTE_VALUE_BOOLEAN_1 Named source within outer element "DEFAULT-VALUE"
-type Renamed_ATTRIBUTE_VALUE_BOOLEAN_1 struct {
-	Name string `xml:"-"`
-
-	// insertion point for fields
-
-	// generated from element "ATTRIBUTE-VALUE-BOOLEAN" of type ATTRIBUTE-VALUE-BOOLEAN order 4 depth 1
-	ATTRIBUTE_VALUE_BOOLEAN []*ATTRIBUTE_VALUE_BOOLEAN `xml:"ATTRIBUTE-VALUE-BOOLEAN,omitempty"`
-}
-
-// Renamed_ATTRIBUTE_VALUE_DATE_1 Named source within outer element "DEFAULT-VALUE"
-type Renamed_ATTRIBUTE_VALUE_DATE_1 struct {
-	Name string `xml:"-"`
-
-	// insertion point for fields
-
-	// generated from element "ATTRIBUTE-VALUE-DATE" of type ATTRIBUTE-VALUE-DATE order 10 depth 1
-	ATTRIBUTE_VALUE_DATE []*ATTRIBUTE_VALUE_DATE `xml:"ATTRIBUTE-VALUE-DATE,omitempty"`
-}
-
-// Renamed_ATTRIBUTE_VALUE_ENUMERATION_1 Named source within outer element "DEFAULT-VALUE"
-type Renamed_ATTRIBUTE_VALUE_ENUMERATION_1 struct {
-	Name string `xml:"-"`
-
-	// insertion point for fields
-
-	// generated from element "ATTRIBUTE-VALUE-ENUMERATION" of type ATTRIBUTE-VALUE-ENUMERATION order 14 depth 1
-	ATTRIBUTE_VALUE_ENUMERATION []*ATTRIBUTE_VALUE_ENUMERATION `xml:"ATTRIBUTE-VALUE-ENUMERATION,omitempty"`
-}
-
-// Renamed_ATTRIBUTE_VALUE_INTEGER_1 Named source within outer element "DEFAULT-VALUE"
-type Renamed_ATTRIBUTE_VALUE_INTEGER_1 struct {
-	Name string `xml:"-"`
-
-	// insertion point for fields
-
-	// generated from element "ATTRIBUTE-VALUE-INTEGER" of type ATTRIBUTE-VALUE-INTEGER order 22 depth 1
-	ATTRIBUTE_VALUE_INTEGER []*ATTRIBUTE_VALUE_INTEGER `xml:"ATTRIBUTE-VALUE-INTEGER,omitempty"`
-}
-
-// Renamed_ATTRIBUTE_VALUE_REAL_1 Named source within outer element "DEFAULT-VALUE"
-type Renamed_ATTRIBUTE_VALUE_REAL_1 struct {
-	Name string `xml:"-"`
-
-	// insertion point for fields
-
-	// generated from element "ATTRIBUTE-VALUE-REAL" of type ATTRIBUTE-VALUE-REAL order 28 depth 1
-	ATTRIBUTE_VALUE_REAL []*ATTRIBUTE_VALUE_REAL `xml:"ATTRIBUTE-VALUE-REAL,omitempty"`
-}
-
-// Renamed_ATTRIBUTE_VALUE_STRING_1 Named source within outer element "DEFAULT-VALUE"
-type Renamed_ATTRIBUTE_VALUE_STRING_1 struct {
-	Name string `xml:"-"`
-
-	// insertion point for fields
-
-	// generated from element "ATTRIBUTE-VALUE-STRING" of type ATTRIBUTE-VALUE-STRING order 34 depth 1
-	ATTRIBUTE_VALUE_STRING []*ATTRIBUTE_VALUE_STRING `xml:"ATTRIBUTE-VALUE-STRING,omitempty"`
-}
-
-// Renamed_ATTRIBUTE_VALUE_XHTML_1 Named source within outer element "DEFAULT-VALUE"
-type Renamed_ATTRIBUTE_VALUE_XHTML_1 struct {
-	Name string `xml:"-"`
-
-	// insertion point for fields
-
-	// generated from element "ATTRIBUTE-VALUE-XHTML" of type ATTRIBUTE-VALUE-XHTML order 40 depth 1
-	ATTRIBUTE_VALUE_XHTML []*ATTRIBUTE_VALUE_XHTML `xml:"ATTRIBUTE-VALUE-XHTML,omitempty"`
-}
-
-// Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1 Named source within outer element "TYPE"
-type Renamed_DATATYPE_DEFINITION_BOOLEAN_REF_1 struct {
-	Name string `xml:"-"`
-
-	// insertion point for fields
-
-	// generated from element "DATATYPE-DEFINITION-BOOLEAN-REF" of type LOCAL-REF order 6 depth 1
-	DATATYPE_DEFINITION_BOOLEAN_REF string `xml:"DATATYPE-DEFINITION-BOOLEAN-REF,omitempty"`
-}
-
-// Renamed_DATATYPE_DEFINITION_DATE_REF_1 Named source within outer element "TYPE"
-type Renamed_DATATYPE_DEFINITION_DATE_REF_1 struct {
-	Name string `xml:"-"`
-
-	// insertion point for fields
-
-	// generated from element "DATATYPE-DEFINITION-DATE-REF" of type LOCAL-REF order 12 depth 1
-	DATATYPE_DEFINITION_DATE_REF string `xml:"DATATYPE-DEFINITION-DATE-REF,omitempty"`
-}
-
-// Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1 Named source within outer element "TYPE"
-type Renamed_DATATYPE_DEFINITION_ENUMERATION_REF_1 struct {
-	Name string `xml:"-"`
-
-	// insertion point for fields
-
-	// generated from element "DATATYPE-DEFINITION-ENUMERATION-REF" of type LOCAL-REF order 18 depth 1
-	DATATYPE_DEFINITION_ENUMERATION_REF string `xml:"DATATYPE-DEFINITION-ENUMERATION-REF,omitempty"`
-}
-
-// Renamed_DATATYPE_DEFINITION_INTEGER_REF_1 Named source within outer element "TYPE"
-type Renamed_DATATYPE_DEFINITION_INTEGER_REF_1 struct {
-	Name string `xml:"-"`
-
-	// insertion point for fields
-
-	// generated from element "DATATYPE-DEFINITION-INTEGER-REF" of type LOCAL-REF order 24 depth 1
-	DATATYPE_DEFINITION_INTEGER_REF string `xml:"DATATYPE-DEFINITION-INTEGER-REF,omitempty"`
-}
-
-// Renamed_DATATYPE_DEFINITION_REAL_REF_1 Named source within outer element "TYPE"
-type Renamed_DATATYPE_DEFINITION_REAL_REF_1 struct {
-	Name string `xml:"-"`
-
-	// insertion point for fields
-
-	// generated from element "DATATYPE-DEFINITION-REAL-REF" of type LOCAL-REF order 30 depth 1
-	DATATYPE_DEFINITION_REAL_REF string `xml:"DATATYPE-DEFINITION-REAL-REF,omitempty"`
-}
-
-// Renamed_DATATYPE_DEFINITION_STRING_REF_1 Named source within outer element "TYPE"
-type Renamed_DATATYPE_DEFINITION_STRING_REF_1 struct {
-	Name string `xml:"-"`
-
-	// insertion point for fields
-
-	// generated from element "DATATYPE-DEFINITION-STRING-REF" of type LOCAL-REF order 36 depth 1
-	DATATYPE_DEFINITION_STRING_REF string `xml:"DATATYPE-DEFINITION-STRING-REF,omitempty"`
-}
-
-// Renamed_DATATYPE_DEFINITION_XHTML_REF_1 Named source within outer element "TYPE"
-type Renamed_DATATYPE_DEFINITION_XHTML_REF_1 struct {
-	Name string `xml:"-"`
-
-	// insertion point for fields
-
-	// generated from element "DATATYPE-DEFINITION-XHTML-REF" of type LOCAL-REF order 42 depth 1
-	DATATYPE_DEFINITION_XHTML_REF string `xml:"DATATYPE-DEFINITION-XHTML-REF,omitempty"`
-}
-
-// Renamed_RELATION_GROUP_TYPE_REF_1 Named source within outer element "TYPE"
-type Renamed_RELATION_GROUP_TYPE_REF_1 struct {
-	Name string `xml:"-"`
-
-	// insertion point for fields
-
-	// generated from element "RELATION-GROUP-TYPE-REF" of type LOCAL-REF order 90 depth 1
-	RELATION_GROUP_TYPE_REF string `xml:"RELATION-GROUP-TYPE-REF,omitempty"`
-}
-
-// Renamed_SPEC_OBJECT_TYPE_REF_1 Named source within outer element "TYPE"
-type Renamed_SPEC_OBJECT_TYPE_REF_1 struct {
-	Name string `xml:"-"`
-
-	// insertion point for fields
-
-	// generated from element "SPEC-OBJECT-TYPE-REF" of type LOCAL-REF order 160 depth 1
-	SPEC_OBJECT_TYPE_REF string `xml:"SPEC-OBJECT-TYPE-REF,omitempty"`
-}
-
-// Renamed_SPEC_RELATION_TYPE_REF_1 Named source within outer element "TYPE"
-type Renamed_SPEC_RELATION_TYPE_REF_1 struct {
-	Name string `xml:"-"`
-
-	// insertion point for fields
-
-	// generated from element "SPEC-RELATION-TYPE-REF" of type LOCAL-REF order 186 depth 1
-	SPEC_RELATION_TYPE_REF string `xml:"SPEC-RELATION-TYPE-REF,omitempty"`
-}
-
-// Renamed_SPECIFICATION_TYPE_REF_1 Named source within outer element "TYPE"
-type Renamed_SPECIFICATION_TYPE_REF_1 struct {
-	Name string `xml:"-"`
-
-	// insertion point for fields
-
-	// generated from element "SPECIFICATION-TYPE-REF" of type LOCAL-REF order 210 depth 1
-	SPECIFICATION_TYPE_REF string `xml:"SPECIFICATION-TYPE-REF,omitempty"`
-}
-
 // SPEC_HIERARCHY Named source named complex type "SPEC-HIERARCHY"
 type SPEC_HIERARCHY struct {
 	Name string `xml:"-"`
@@ -1283,11 +1283,11 @@ type SPEC_OBJECT struct {
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
 	ALTERNATIVE_ID []*A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
 
-	// generated from anonymous type within outer element "VALUES" of type A_VALUES.
-	VALUES []*A_VALUES_1 `xml:"VALUES,omitempty"`
+	// generated from anonymous type within outer element "VALUES" of type A_ATTRIBUTE-VALUE-XHTML.
+	VALUES []*A_ATTRIBUTE_VALUE_XHTML_1 `xml:"VALUES,omitempty"`
 
-	// generated from anonymous type within outer element "TYPE" of type Renamed_SPEC-OBJECT-TYPE-REF.
-	TYPE []*Renamed_SPEC_OBJECT_TYPE_REF_1 `xml:"TYPE,omitempty"`
+	// generated from anonymous type within outer element "TYPE" of type A_SPEC-OBJECT-TYPE-REF.
+	TYPE []*A_SPEC_OBJECT_TYPE_REF `xml:"TYPE,omitempty"`
 }
 
 // SPEC_OBJECT_TYPE Named source named complex type "SPEC-OBJECT-TYPE"
@@ -1336,14 +1336,14 @@ type SPEC_RELATION struct {
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
 	ALTERNATIVE_ID []*A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
 
-	// generated from anonymous type within outer element "VALUES" of type A_VALUES.
-	VALUES []*A_VALUES_1 `xml:"VALUES,omitempty"`
+	// generated from anonymous type within outer element "VALUES" of type A_ATTRIBUTE-VALUE-XHTML.
+	VALUES []*A_ATTRIBUTE_VALUE_XHTML_1 `xml:"VALUES,omitempty"`
 
 	// generated from anonymous type within outer element "SOURCE" of type A_SOURCE.
 	SOURCE []*A_SOURCE `xml:"SOURCE,omitempty"`
 
-	// generated from anonymous type within outer element "TYPE" of type Renamed_SPEC-RELATION-TYPE-REF.
-	TYPE []*Renamed_SPEC_RELATION_TYPE_REF_1 `xml:"TYPE,omitempty"`
+	// generated from anonymous type within outer element "TYPE" of type A_SPEC-RELATION-TYPE-REF.
+	TYPE []*A_SPEC_RELATION_TYPE_REF `xml:"TYPE,omitempty"`
 }
 
 // SPEC_RELATION_TYPE Named source named complex type "SPEC-RELATION-TYPE"
@@ -1395,11 +1395,11 @@ type SPECIFICATION struct {
 	// generated from anonymous type within outer element "CHILDREN" of type A_CHILDREN.
 	CHILDREN []*A_CHILDREN `xml:"CHILDREN,omitempty"`
 
-	// generated from anonymous type within outer element "VALUES" of type A_VALUES.
-	VALUES []*A_VALUES_1 `xml:"VALUES,omitempty"`
+	// generated from anonymous type within outer element "VALUES" of type A_ATTRIBUTE-VALUE-XHTML.
+	VALUES []*A_ATTRIBUTE_VALUE_XHTML_1 `xml:"VALUES,omitempty"`
 
-	// generated from anonymous type within outer element "TYPE" of type Renamed_SPECIFICATION-TYPE-REF.
-	TYPE []*Renamed_SPECIFICATION_TYPE_REF_1 `xml:"TYPE,omitempty"`
+	// generated from anonymous type within outer element "TYPE" of type A_SPECIFICATION-TYPE-REF.
+	TYPE []*A_SPECIFICATION_TYPE_REF `xml:"TYPE,omitempty"`
 }
 
 // SPECIFICATION_TYPE Named source named complex type "SPECIFICATION-TYPE"

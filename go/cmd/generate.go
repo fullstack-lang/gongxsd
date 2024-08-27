@@ -52,7 +52,7 @@ var generateCmd = &cobra.Command{
 		}
 
 		// suppress duplicates
-		if strings.Contains(xsdFilePath, "dtc-11-04-05.xsd") {
+		if strings.Contains(xsdFilePath, "dtc-11-04-05") {
 			models.SchemaSingloton.FactorDuplicates()
 			models.SchemaSingloton.RenameTypeAnonymousComplexType()
 		}
