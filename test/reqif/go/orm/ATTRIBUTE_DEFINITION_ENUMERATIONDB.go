@@ -279,37 +279,37 @@ func (backRepoATTRIBUTE_DEFINITION_ENUMERATION *BackRepoATTRIBUTE_DEFINITION_ENU
 		// 1. reset
 		attribute_definition_enumerationDB.ATTRIBUTE_DEFINITION_ENUMERATIONPointersEncoding.DEFAULT_VALUE = make([]int, 0)
 		// 2. encode
-		for _, a_default_value_5AssocEnd := range attribute_definition_enumeration.DEFAULT_VALUE {
-			a_default_value_5AssocEnd_DB :=
-				backRepo.BackRepoA_DEFAULT_VALUE_5.GetA_DEFAULT_VALUE_5DBFromA_DEFAULT_VALUE_5Ptr(a_default_value_5AssocEnd)
+		for _, a_attribute_value_enumerationAssocEnd := range attribute_definition_enumeration.DEFAULT_VALUE {
+			a_attribute_value_enumerationAssocEnd_DB :=
+				backRepo.BackRepoA_ATTRIBUTE_VALUE_ENUMERATION.GetA_ATTRIBUTE_VALUE_ENUMERATIONDBFromA_ATTRIBUTE_VALUE_ENUMERATIONPtr(a_attribute_value_enumerationAssocEnd)
 			
-			// the stage might be inconsistant, meaning that the a_default_value_5AssocEnd_DB might
+			// the stage might be inconsistant, meaning that the a_attribute_value_enumerationAssocEnd_DB might
 			// be missing from the stage. In this case, the commit operation is robust
 			// An alternative would be to crash here to reveal the missing element.
-			if a_default_value_5AssocEnd_DB == nil {
+			if a_attribute_value_enumerationAssocEnd_DB == nil {
 				continue
 			}
 			
 			attribute_definition_enumerationDB.ATTRIBUTE_DEFINITION_ENUMERATIONPointersEncoding.DEFAULT_VALUE =
-				append(attribute_definition_enumerationDB.ATTRIBUTE_DEFINITION_ENUMERATIONPointersEncoding.DEFAULT_VALUE, int(a_default_value_5AssocEnd_DB.ID))
+				append(attribute_definition_enumerationDB.ATTRIBUTE_DEFINITION_ENUMERATIONPointersEncoding.DEFAULT_VALUE, int(a_attribute_value_enumerationAssocEnd_DB.ID))
 		}
 
 		// 1. reset
 		attribute_definition_enumerationDB.ATTRIBUTE_DEFINITION_ENUMERATIONPointersEncoding.TYPE = make([]int, 0)
 		// 2. encode
-		for _, a_type_9AssocEnd := range attribute_definition_enumeration.TYPE {
-			a_type_9AssocEnd_DB :=
-				backRepo.BackRepoA_TYPE_9.GetA_TYPE_9DBFromA_TYPE_9Ptr(a_type_9AssocEnd)
+		for _, a_datatype_definition_enumeration_refAssocEnd := range attribute_definition_enumeration.TYPE {
+			a_datatype_definition_enumeration_refAssocEnd_DB :=
+				backRepo.BackRepoA_DATATYPE_DEFINITION_ENUMERATION_REF.GetA_DATATYPE_DEFINITION_ENUMERATION_REFDBFromA_DATATYPE_DEFINITION_ENUMERATION_REFPtr(a_datatype_definition_enumeration_refAssocEnd)
 			
-			// the stage might be inconsistant, meaning that the a_type_9AssocEnd_DB might
+			// the stage might be inconsistant, meaning that the a_datatype_definition_enumeration_refAssocEnd_DB might
 			// be missing from the stage. In this case, the commit operation is robust
 			// An alternative would be to crash here to reveal the missing element.
-			if a_type_9AssocEnd_DB == nil {
+			if a_datatype_definition_enumeration_refAssocEnd_DB == nil {
 				continue
 			}
 			
 			attribute_definition_enumerationDB.ATTRIBUTE_DEFINITION_ENUMERATIONPointersEncoding.TYPE =
-				append(attribute_definition_enumerationDB.ATTRIBUTE_DEFINITION_ENUMERATIONPointersEncoding.TYPE, int(a_type_9AssocEnd_DB.ID))
+				append(attribute_definition_enumerationDB.ATTRIBUTE_DEFINITION_ENUMERATIONPointersEncoding.TYPE, int(a_datatype_definition_enumeration_refAssocEnd_DB.ID))
 		}
 
 		query := backRepoATTRIBUTE_DEFINITION_ENUMERATION.db.Save(&attribute_definition_enumerationDB)
@@ -435,21 +435,21 @@ func (attribute_definition_enumerationDB *ATTRIBUTE_DEFINITION_ENUMERATIONDB) De
 	}
 
 	// This loop redeem attribute_definition_enumeration.DEFAULT_VALUE in the stage from the encode in the back repo
-	// It parses all A_DEFAULT_VALUE_5DB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// It parses all A_ATTRIBUTE_VALUE_ENUMERATIONDB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance
 	// 1. reset the slice
 	attribute_definition_enumeration.DEFAULT_VALUE = attribute_definition_enumeration.DEFAULT_VALUE[:0]
-	for _, _A_DEFAULT_VALUE_5id := range attribute_definition_enumerationDB.ATTRIBUTE_DEFINITION_ENUMERATIONPointersEncoding.DEFAULT_VALUE {
-		attribute_definition_enumeration.DEFAULT_VALUE = append(attribute_definition_enumeration.DEFAULT_VALUE, backRepo.BackRepoA_DEFAULT_VALUE_5.Map_A_DEFAULT_VALUE_5DBID_A_DEFAULT_VALUE_5Ptr[uint(_A_DEFAULT_VALUE_5id)])
+	for _, _A_ATTRIBUTE_VALUE_ENUMERATIONid := range attribute_definition_enumerationDB.ATTRIBUTE_DEFINITION_ENUMERATIONPointersEncoding.DEFAULT_VALUE {
+		attribute_definition_enumeration.DEFAULT_VALUE = append(attribute_definition_enumeration.DEFAULT_VALUE, backRepo.BackRepoA_ATTRIBUTE_VALUE_ENUMERATION.Map_A_ATTRIBUTE_VALUE_ENUMERATIONDBID_A_ATTRIBUTE_VALUE_ENUMERATIONPtr[uint(_A_ATTRIBUTE_VALUE_ENUMERATIONid)])
 	}
 
 	// This loop redeem attribute_definition_enumeration.TYPE in the stage from the encode in the back repo
-	// It parses all A_TYPE_9DB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// It parses all A_DATATYPE_DEFINITION_ENUMERATION_REFDB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance
 	// 1. reset the slice
 	attribute_definition_enumeration.TYPE = attribute_definition_enumeration.TYPE[:0]
-	for _, _A_TYPE_9id := range attribute_definition_enumerationDB.ATTRIBUTE_DEFINITION_ENUMERATIONPointersEncoding.TYPE {
-		attribute_definition_enumeration.TYPE = append(attribute_definition_enumeration.TYPE, backRepo.BackRepoA_TYPE_9.Map_A_TYPE_9DBID_A_TYPE_9Ptr[uint(_A_TYPE_9id)])
+	for _, _A_DATATYPE_DEFINITION_ENUMERATION_REFid := range attribute_definition_enumerationDB.ATTRIBUTE_DEFINITION_ENUMERATIONPointersEncoding.TYPE {
+		attribute_definition_enumeration.TYPE = append(attribute_definition_enumeration.TYPE, backRepo.BackRepoA_DATATYPE_DEFINITION_ENUMERATION_REF.Map_A_DATATYPE_DEFINITION_ENUMERATION_REFDBID_A_DATATYPE_DEFINITION_ENUMERATION_REFPtr[uint(_A_DATATYPE_DEFINITION_ENUMERATION_REFid)])
 	}
 
 	return

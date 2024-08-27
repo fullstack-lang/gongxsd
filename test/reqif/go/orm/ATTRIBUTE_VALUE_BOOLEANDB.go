@@ -224,19 +224,19 @@ func (backRepoATTRIBUTE_VALUE_BOOLEAN *BackRepoATTRIBUTE_VALUE_BOOLEANStruct) Co
 		// 1. reset
 		attribute_value_booleanDB.ATTRIBUTE_VALUE_BOOLEANPointersEncoding.DEFINITION = make([]int, 0)
 		// 2. encode
-		for _, a_definition_4AssocEnd := range attribute_value_boolean.DEFINITION {
-			a_definition_4AssocEnd_DB :=
-				backRepo.BackRepoA_DEFINITION_4.GetA_DEFINITION_4DBFromA_DEFINITION_4Ptr(a_definition_4AssocEnd)
+		for _, a_attribute_definition_boolean_refAssocEnd := range attribute_value_boolean.DEFINITION {
+			a_attribute_definition_boolean_refAssocEnd_DB :=
+				backRepo.BackRepoA_ATTRIBUTE_DEFINITION_BOOLEAN_REF.GetA_ATTRIBUTE_DEFINITION_BOOLEAN_REFDBFromA_ATTRIBUTE_DEFINITION_BOOLEAN_REFPtr(a_attribute_definition_boolean_refAssocEnd)
 			
-			// the stage might be inconsistant, meaning that the a_definition_4AssocEnd_DB might
+			// the stage might be inconsistant, meaning that the a_attribute_definition_boolean_refAssocEnd_DB might
 			// be missing from the stage. In this case, the commit operation is robust
 			// An alternative would be to crash here to reveal the missing element.
-			if a_definition_4AssocEnd_DB == nil {
+			if a_attribute_definition_boolean_refAssocEnd_DB == nil {
 				continue
 			}
 			
 			attribute_value_booleanDB.ATTRIBUTE_VALUE_BOOLEANPointersEncoding.DEFINITION =
-				append(attribute_value_booleanDB.ATTRIBUTE_VALUE_BOOLEANPointersEncoding.DEFINITION, int(a_definition_4AssocEnd_DB.ID))
+				append(attribute_value_booleanDB.ATTRIBUTE_VALUE_BOOLEANPointersEncoding.DEFINITION, int(a_attribute_definition_boolean_refAssocEnd_DB.ID))
 		}
 
 		query := backRepoATTRIBUTE_VALUE_BOOLEAN.db.Save(&attribute_value_booleanDB)
@@ -353,12 +353,12 @@ func (attribute_value_booleanDB *ATTRIBUTE_VALUE_BOOLEANDB) DecodePointers(backR
 
 	// insertion point for checkout of pointer encoding
 	// This loop redeem attribute_value_boolean.DEFINITION in the stage from the encode in the back repo
-	// It parses all A_DEFINITION_4DB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// It parses all A_ATTRIBUTE_DEFINITION_BOOLEAN_REFDB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance
 	// 1. reset the slice
 	attribute_value_boolean.DEFINITION = attribute_value_boolean.DEFINITION[:0]
-	for _, _A_DEFINITION_4id := range attribute_value_booleanDB.ATTRIBUTE_VALUE_BOOLEANPointersEncoding.DEFINITION {
-		attribute_value_boolean.DEFINITION = append(attribute_value_boolean.DEFINITION, backRepo.BackRepoA_DEFINITION_4.Map_A_DEFINITION_4DBID_A_DEFINITION_4Ptr[uint(_A_DEFINITION_4id)])
+	for _, _A_ATTRIBUTE_DEFINITION_BOOLEAN_REFid := range attribute_value_booleanDB.ATTRIBUTE_VALUE_BOOLEANPointersEncoding.DEFINITION {
+		attribute_value_boolean.DEFINITION = append(attribute_value_boolean.DEFINITION, backRepo.BackRepoA_ATTRIBUTE_DEFINITION_BOOLEAN_REF.Map_A_ATTRIBUTE_DEFINITION_BOOLEAN_REFDBID_A_ATTRIBUTE_DEFINITION_BOOLEAN_REFPtr[uint(_A_ATTRIBUTE_DEFINITION_BOOLEAN_REFid)])
 	}
 
 	return

@@ -286,37 +286,37 @@ func (backRepoSPECIFICATION *BackRepoSPECIFICATIONStruct) CommitPhaseTwoInstance
 		// 1. reset
 		specificationDB.SPECIFICATIONPointersEncoding.VALUES = make([]int, 0)
 		// 2. encode
-		for _, a_values_1AssocEnd := range specification.VALUES {
-			a_values_1AssocEnd_DB :=
-				backRepo.BackRepoA_VALUES_1.GetA_VALUES_1DBFromA_VALUES_1Ptr(a_values_1AssocEnd)
+		for _, a_attribute_value_xhtml_1AssocEnd := range specification.VALUES {
+			a_attribute_value_xhtml_1AssocEnd_DB :=
+				backRepo.BackRepoA_ATTRIBUTE_VALUE_XHTML_1.GetA_ATTRIBUTE_VALUE_XHTML_1DBFromA_ATTRIBUTE_VALUE_XHTML_1Ptr(a_attribute_value_xhtml_1AssocEnd)
 			
-			// the stage might be inconsistant, meaning that the a_values_1AssocEnd_DB might
+			// the stage might be inconsistant, meaning that the a_attribute_value_xhtml_1AssocEnd_DB might
 			// be missing from the stage. In this case, the commit operation is robust
 			// An alternative would be to crash here to reveal the missing element.
-			if a_values_1AssocEnd_DB == nil {
+			if a_attribute_value_xhtml_1AssocEnd_DB == nil {
 				continue
 			}
 			
 			specificationDB.SPECIFICATIONPointersEncoding.VALUES =
-				append(specificationDB.SPECIFICATIONPointersEncoding.VALUES, int(a_values_1AssocEnd_DB.ID))
+				append(specificationDB.SPECIFICATIONPointersEncoding.VALUES, int(a_attribute_value_xhtml_1AssocEnd_DB.ID))
 		}
 
 		// 1. reset
 		specificationDB.SPECIFICATIONPointersEncoding.TYPE = make([]int, 0)
 		// 2. encode
-		for _, a_type_10AssocEnd := range specification.TYPE {
-			a_type_10AssocEnd_DB :=
-				backRepo.BackRepoA_TYPE_10.GetA_TYPE_10DBFromA_TYPE_10Ptr(a_type_10AssocEnd)
+		for _, a_specification_type_refAssocEnd := range specification.TYPE {
+			a_specification_type_refAssocEnd_DB :=
+				backRepo.BackRepoA_SPECIFICATION_TYPE_REF.GetA_SPECIFICATION_TYPE_REFDBFromA_SPECIFICATION_TYPE_REFPtr(a_specification_type_refAssocEnd)
 			
-			// the stage might be inconsistant, meaning that the a_type_10AssocEnd_DB might
+			// the stage might be inconsistant, meaning that the a_specification_type_refAssocEnd_DB might
 			// be missing from the stage. In this case, the commit operation is robust
 			// An alternative would be to crash here to reveal the missing element.
-			if a_type_10AssocEnd_DB == nil {
+			if a_specification_type_refAssocEnd_DB == nil {
 				continue
 			}
 			
 			specificationDB.SPECIFICATIONPointersEncoding.TYPE =
-				append(specificationDB.SPECIFICATIONPointersEncoding.TYPE, int(a_type_10AssocEnd_DB.ID))
+				append(specificationDB.SPECIFICATIONPointersEncoding.TYPE, int(a_specification_type_refAssocEnd_DB.ID))
 		}
 
 		query := backRepoSPECIFICATION.db.Save(&specificationDB)
@@ -451,21 +451,21 @@ func (specificationDB *SPECIFICATIONDB) DecodePointers(backRepo *BackRepoStruct,
 	}
 
 	// This loop redeem specification.VALUES in the stage from the encode in the back repo
-	// It parses all A_VALUES_1DB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// It parses all A_ATTRIBUTE_VALUE_XHTML_1DB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance
 	// 1. reset the slice
 	specification.VALUES = specification.VALUES[:0]
-	for _, _A_VALUES_1id := range specificationDB.SPECIFICATIONPointersEncoding.VALUES {
-		specification.VALUES = append(specification.VALUES, backRepo.BackRepoA_VALUES_1.Map_A_VALUES_1DBID_A_VALUES_1Ptr[uint(_A_VALUES_1id)])
+	for _, _A_ATTRIBUTE_VALUE_XHTML_1id := range specificationDB.SPECIFICATIONPointersEncoding.VALUES {
+		specification.VALUES = append(specification.VALUES, backRepo.BackRepoA_ATTRIBUTE_VALUE_XHTML_1.Map_A_ATTRIBUTE_VALUE_XHTML_1DBID_A_ATTRIBUTE_VALUE_XHTML_1Ptr[uint(_A_ATTRIBUTE_VALUE_XHTML_1id)])
 	}
 
 	// This loop redeem specification.TYPE in the stage from the encode in the back repo
-	// It parses all A_TYPE_10DB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// It parses all A_SPECIFICATION_TYPE_REFDB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance
 	// 1. reset the slice
 	specification.TYPE = specification.TYPE[:0]
-	for _, _A_TYPE_10id := range specificationDB.SPECIFICATIONPointersEncoding.TYPE {
-		specification.TYPE = append(specification.TYPE, backRepo.BackRepoA_TYPE_10.Map_A_TYPE_10DBID_A_TYPE_10Ptr[uint(_A_TYPE_10id)])
+	for _, _A_SPECIFICATION_TYPE_REFid := range specificationDB.SPECIFICATIONPointersEncoding.TYPE {
+		specification.TYPE = append(specification.TYPE, backRepo.BackRepoA_SPECIFICATION_TYPE_REF.Map_A_SPECIFICATION_TYPE_REFDBID_A_SPECIFICATION_TYPE_REFPtr[uint(_A_SPECIFICATION_TYPE_REFid)])
 	}
 
 	return

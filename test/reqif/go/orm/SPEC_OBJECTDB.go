@@ -265,37 +265,37 @@ func (backRepoSPEC_OBJECT *BackRepoSPEC_OBJECTStruct) CommitPhaseTwoInstance(bac
 		// 1. reset
 		spec_objectDB.SPEC_OBJECTPointersEncoding.VALUES = make([]int, 0)
 		// 2. encode
-		for _, a_values_1AssocEnd := range spec_object.VALUES {
-			a_values_1AssocEnd_DB :=
-				backRepo.BackRepoA_VALUES_1.GetA_VALUES_1DBFromA_VALUES_1Ptr(a_values_1AssocEnd)
+		for _, a_attribute_value_xhtml_1AssocEnd := range spec_object.VALUES {
+			a_attribute_value_xhtml_1AssocEnd_DB :=
+				backRepo.BackRepoA_ATTRIBUTE_VALUE_XHTML_1.GetA_ATTRIBUTE_VALUE_XHTML_1DBFromA_ATTRIBUTE_VALUE_XHTML_1Ptr(a_attribute_value_xhtml_1AssocEnd)
 			
-			// the stage might be inconsistant, meaning that the a_values_1AssocEnd_DB might
+			// the stage might be inconsistant, meaning that the a_attribute_value_xhtml_1AssocEnd_DB might
 			// be missing from the stage. In this case, the commit operation is robust
 			// An alternative would be to crash here to reveal the missing element.
-			if a_values_1AssocEnd_DB == nil {
+			if a_attribute_value_xhtml_1AssocEnd_DB == nil {
 				continue
 			}
 			
 			spec_objectDB.SPEC_OBJECTPointersEncoding.VALUES =
-				append(spec_objectDB.SPEC_OBJECTPointersEncoding.VALUES, int(a_values_1AssocEnd_DB.ID))
+				append(spec_objectDB.SPEC_OBJECTPointersEncoding.VALUES, int(a_attribute_value_xhtml_1AssocEnd_DB.ID))
 		}
 
 		// 1. reset
 		spec_objectDB.SPEC_OBJECTPointersEncoding.TYPE = make([]int, 0)
 		// 2. encode
-		for _, a_type_2AssocEnd := range spec_object.TYPE {
-			a_type_2AssocEnd_DB :=
-				backRepo.BackRepoA_TYPE_2.GetA_TYPE_2DBFromA_TYPE_2Ptr(a_type_2AssocEnd)
+		for _, a_spec_object_type_refAssocEnd := range spec_object.TYPE {
+			a_spec_object_type_refAssocEnd_DB :=
+				backRepo.BackRepoA_SPEC_OBJECT_TYPE_REF.GetA_SPEC_OBJECT_TYPE_REFDBFromA_SPEC_OBJECT_TYPE_REFPtr(a_spec_object_type_refAssocEnd)
 			
-			// the stage might be inconsistant, meaning that the a_type_2AssocEnd_DB might
+			// the stage might be inconsistant, meaning that the a_spec_object_type_refAssocEnd_DB might
 			// be missing from the stage. In this case, the commit operation is robust
 			// An alternative would be to crash here to reveal the missing element.
-			if a_type_2AssocEnd_DB == nil {
+			if a_spec_object_type_refAssocEnd_DB == nil {
 				continue
 			}
 			
 			spec_objectDB.SPEC_OBJECTPointersEncoding.TYPE =
-				append(spec_objectDB.SPEC_OBJECTPointersEncoding.TYPE, int(a_type_2AssocEnd_DB.ID))
+				append(spec_objectDB.SPEC_OBJECTPointersEncoding.TYPE, int(a_spec_object_type_refAssocEnd_DB.ID))
 		}
 
 		query := backRepoSPEC_OBJECT.db.Save(&spec_objectDB)
@@ -421,21 +421,21 @@ func (spec_objectDB *SPEC_OBJECTDB) DecodePointers(backRepo *BackRepoStruct, spe
 	}
 
 	// This loop redeem spec_object.VALUES in the stage from the encode in the back repo
-	// It parses all A_VALUES_1DB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// It parses all A_ATTRIBUTE_VALUE_XHTML_1DB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance
 	// 1. reset the slice
 	spec_object.VALUES = spec_object.VALUES[:0]
-	for _, _A_VALUES_1id := range spec_objectDB.SPEC_OBJECTPointersEncoding.VALUES {
-		spec_object.VALUES = append(spec_object.VALUES, backRepo.BackRepoA_VALUES_1.Map_A_VALUES_1DBID_A_VALUES_1Ptr[uint(_A_VALUES_1id)])
+	for _, _A_ATTRIBUTE_VALUE_XHTML_1id := range spec_objectDB.SPEC_OBJECTPointersEncoding.VALUES {
+		spec_object.VALUES = append(spec_object.VALUES, backRepo.BackRepoA_ATTRIBUTE_VALUE_XHTML_1.Map_A_ATTRIBUTE_VALUE_XHTML_1DBID_A_ATTRIBUTE_VALUE_XHTML_1Ptr[uint(_A_ATTRIBUTE_VALUE_XHTML_1id)])
 	}
 
 	// This loop redeem spec_object.TYPE in the stage from the encode in the back repo
-	// It parses all A_TYPE_2DB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// It parses all A_SPEC_OBJECT_TYPE_REFDB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance
 	// 1. reset the slice
 	spec_object.TYPE = spec_object.TYPE[:0]
-	for _, _A_TYPE_2id := range spec_objectDB.SPEC_OBJECTPointersEncoding.TYPE {
-		spec_object.TYPE = append(spec_object.TYPE, backRepo.BackRepoA_TYPE_2.Map_A_TYPE_2DBID_A_TYPE_2Ptr[uint(_A_TYPE_2id)])
+	for _, _A_SPEC_OBJECT_TYPE_REFid := range spec_objectDB.SPEC_OBJECTPointersEncoding.TYPE {
+		spec_object.TYPE = append(spec_object.TYPE, backRepo.BackRepoA_SPEC_OBJECT_TYPE_REF.Map_A_SPEC_OBJECT_TYPE_REFDBID_A_SPEC_OBJECT_TYPE_REFPtr[uint(_A_SPEC_OBJECT_TYPE_REFid)])
 	}
 
 	return

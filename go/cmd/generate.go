@@ -7,6 +7,7 @@ import (
 	"encoding/xml"
 	"fmt"
 	"os"
+	"strings"
 	"time"
 
 	"github.com/spf13/cobra"
@@ -51,7 +52,10 @@ var generateCmd = &cobra.Command{
 		}
 
 		// suppress duplicates
-		models.SchemaSingloton.FactorDuplicates()
+		if strings.Contains(xsdFilePath, "dtc-11-04-05") {
+			models.SchemaSingloton.FactorDuplicates()
+			models.SchemaSingloton.RenameTypeAnonymousComplexType()
+		}
 
 		stack.Stage.StageBranchSchema(&models.SchemaSingloton)
 

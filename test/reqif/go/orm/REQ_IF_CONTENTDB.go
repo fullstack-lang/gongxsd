@@ -286,19 +286,19 @@ func (backRepoREQ_IF_CONTENT *BackRepoREQ_IF_CONTENTStruct) CommitPhaseTwoInstan
 		// 1. reset
 		req_if_contentDB.REQ_IF_CONTENTPointersEncoding.SPEC_RELATIONS = make([]int, 0)
 		// 2. encode
-		for _, a_spec_relations_1AssocEnd := range req_if_content.SPEC_RELATIONS {
-			a_spec_relations_1AssocEnd_DB :=
-				backRepo.BackRepoA_SPEC_RELATIONS_1.GetA_SPEC_RELATIONS_1DBFromA_SPEC_RELATIONS_1Ptr(a_spec_relations_1AssocEnd)
+		for _, a_spec_relationsAssocEnd := range req_if_content.SPEC_RELATIONS {
+			a_spec_relationsAssocEnd_DB :=
+				backRepo.BackRepoA_SPEC_RELATIONS.GetA_SPEC_RELATIONSDBFromA_SPEC_RELATIONSPtr(a_spec_relationsAssocEnd)
 			
-			// the stage might be inconsistant, meaning that the a_spec_relations_1AssocEnd_DB might
+			// the stage might be inconsistant, meaning that the a_spec_relationsAssocEnd_DB might
 			// be missing from the stage. In this case, the commit operation is robust
 			// An alternative would be to crash here to reveal the missing element.
-			if a_spec_relations_1AssocEnd_DB == nil {
+			if a_spec_relationsAssocEnd_DB == nil {
 				continue
 			}
 			
 			req_if_contentDB.REQ_IF_CONTENTPointersEncoding.SPEC_RELATIONS =
-				append(req_if_contentDB.REQ_IF_CONTENTPointersEncoding.SPEC_RELATIONS, int(a_spec_relations_1AssocEnd_DB.ID))
+				append(req_if_contentDB.REQ_IF_CONTENTPointersEncoding.SPEC_RELATIONS, int(a_spec_relationsAssocEnd_DB.ID))
 		}
 
 		// 1. reset
@@ -478,12 +478,12 @@ func (req_if_contentDB *REQ_IF_CONTENTDB) DecodePointers(backRepo *BackRepoStruc
 	}
 
 	// This loop redeem req_if_content.SPEC_RELATIONS in the stage from the encode in the back repo
-	// It parses all A_SPEC_RELATIONS_1DB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// It parses all A_SPEC_RELATIONSDB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance
 	// 1. reset the slice
 	req_if_content.SPEC_RELATIONS = req_if_content.SPEC_RELATIONS[:0]
-	for _, _A_SPEC_RELATIONS_1id := range req_if_contentDB.REQ_IF_CONTENTPointersEncoding.SPEC_RELATIONS {
-		req_if_content.SPEC_RELATIONS = append(req_if_content.SPEC_RELATIONS, backRepo.BackRepoA_SPEC_RELATIONS_1.Map_A_SPEC_RELATIONS_1DBID_A_SPEC_RELATIONS_1Ptr[uint(_A_SPEC_RELATIONS_1id)])
+	for _, _A_SPEC_RELATIONSid := range req_if_contentDB.REQ_IF_CONTENTPointersEncoding.SPEC_RELATIONS {
+		req_if_content.SPEC_RELATIONS = append(req_if_content.SPEC_RELATIONS, backRepo.BackRepoA_SPEC_RELATIONS.Map_A_SPEC_RELATIONSDBID_A_SPEC_RELATIONSPtr[uint(_A_SPEC_RELATIONSid)])
 	}
 
 	// This loop redeem req_if_content.SPECIFICATIONS in the stage from the encode in the back repo

@@ -223,19 +223,19 @@ func (backRepoATTRIBUTE_VALUE_REAL *BackRepoATTRIBUTE_VALUE_REALStruct) CommitPh
 		// 1. reset
 		attribute_value_realDB.ATTRIBUTE_VALUE_REALPointersEncoding.DEFINITION = make([]int, 0)
 		// 2. encode
-		for _, a_definition_6AssocEnd := range attribute_value_real.DEFINITION {
-			a_definition_6AssocEnd_DB :=
-				backRepo.BackRepoA_DEFINITION_6.GetA_DEFINITION_6DBFromA_DEFINITION_6Ptr(a_definition_6AssocEnd)
+		for _, a_attribute_definition_real_refAssocEnd := range attribute_value_real.DEFINITION {
+			a_attribute_definition_real_refAssocEnd_DB :=
+				backRepo.BackRepoA_ATTRIBUTE_DEFINITION_REAL_REF.GetA_ATTRIBUTE_DEFINITION_REAL_REFDBFromA_ATTRIBUTE_DEFINITION_REAL_REFPtr(a_attribute_definition_real_refAssocEnd)
 			
-			// the stage might be inconsistant, meaning that the a_definition_6AssocEnd_DB might
+			// the stage might be inconsistant, meaning that the a_attribute_definition_real_refAssocEnd_DB might
 			// be missing from the stage. In this case, the commit operation is robust
 			// An alternative would be to crash here to reveal the missing element.
-			if a_definition_6AssocEnd_DB == nil {
+			if a_attribute_definition_real_refAssocEnd_DB == nil {
 				continue
 			}
 			
 			attribute_value_realDB.ATTRIBUTE_VALUE_REALPointersEncoding.DEFINITION =
-				append(attribute_value_realDB.ATTRIBUTE_VALUE_REALPointersEncoding.DEFINITION, int(a_definition_6AssocEnd_DB.ID))
+				append(attribute_value_realDB.ATTRIBUTE_VALUE_REALPointersEncoding.DEFINITION, int(a_attribute_definition_real_refAssocEnd_DB.ID))
 		}
 
 		query := backRepoATTRIBUTE_VALUE_REAL.db.Save(&attribute_value_realDB)
@@ -352,12 +352,12 @@ func (attribute_value_realDB *ATTRIBUTE_VALUE_REALDB) DecodePointers(backRepo *B
 
 	// insertion point for checkout of pointer encoding
 	// This loop redeem attribute_value_real.DEFINITION in the stage from the encode in the back repo
-	// It parses all A_DEFINITION_6DB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// It parses all A_ATTRIBUTE_DEFINITION_REAL_REFDB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance
 	// 1. reset the slice
 	attribute_value_real.DEFINITION = attribute_value_real.DEFINITION[:0]
-	for _, _A_DEFINITION_6id := range attribute_value_realDB.ATTRIBUTE_VALUE_REALPointersEncoding.DEFINITION {
-		attribute_value_real.DEFINITION = append(attribute_value_real.DEFINITION, backRepo.BackRepoA_DEFINITION_6.Map_A_DEFINITION_6DBID_A_DEFINITION_6Ptr[uint(_A_DEFINITION_6id)])
+	for _, _A_ATTRIBUTE_DEFINITION_REAL_REFid := range attribute_value_realDB.ATTRIBUTE_VALUE_REALPointersEncoding.DEFINITION {
+		attribute_value_real.DEFINITION = append(attribute_value_real.DEFINITION, backRepo.BackRepoA_ATTRIBUTE_DEFINITION_REAL_REF.Map_A_ATTRIBUTE_DEFINITION_REAL_REFDBID_A_ATTRIBUTE_DEFINITION_REAL_REFPtr[uint(_A_ATTRIBUTE_DEFINITION_REAL_REFid)])
 	}
 
 	return

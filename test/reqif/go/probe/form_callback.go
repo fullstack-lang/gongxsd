@@ -1091,12 +1091,12 @@ func (attribute_value_booleanFormCallback *ATTRIBUTE_VALUE_BOOLEANFormCallback) 
 			FormDivBasicFieldToField(&(attribute_value_boolean_.Name), formDiv)
 		case "THE_VALUE":
 			FormDivBasicFieldToField(&(attribute_value_boolean_.THE_VALUE), formDiv)
-		case "A_DEFAULT_VALUE_1:ATTRIBUTE_VALUE_BOOLEAN":
+		case "A_ATTRIBUTE_VALUE_BOOLEAN:ATTRIBUTE_VALUE_BOOLEAN":
 			// we need to retrieve the field owner before the change
-			var pastA_DEFAULT_VALUE_1Owner *models.A_DEFAULT_VALUE_1
+			var pastA_ATTRIBUTE_VALUE_BOOLEANOwner *models.A_ATTRIBUTE_VALUE_BOOLEAN
 			var rf models.ReverseField
 			_ = rf
-			rf.GongstructName = "A_DEFAULT_VALUE_1"
+			rf.GongstructName = "A_ATTRIBUTE_VALUE_BOOLEAN"
 			rf.Fieldname = "ATTRIBUTE_VALUE_BOOLEAN"
 			reverseFieldOwner := orm.GetReverseFieldOwner(
 				attribute_value_booleanFormCallback.probe.stageOfInterest,
@@ -1105,40 +1105,40 @@ func (attribute_value_booleanFormCallback *ATTRIBUTE_VALUE_BOOLEANFormCallback) 
 				&rf)
 
 			if reverseFieldOwner != nil {
-				pastA_DEFAULT_VALUE_1Owner = reverseFieldOwner.(*models.A_DEFAULT_VALUE_1)
+				pastA_ATTRIBUTE_VALUE_BOOLEANOwner = reverseFieldOwner.(*models.A_ATTRIBUTE_VALUE_BOOLEAN)
 			}
 			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastA_DEFAULT_VALUE_1Owner != nil {
-					idx := slices.Index(pastA_DEFAULT_VALUE_1Owner.ATTRIBUTE_VALUE_BOOLEAN, attribute_value_boolean_)
-					pastA_DEFAULT_VALUE_1Owner.ATTRIBUTE_VALUE_BOOLEAN = slices.Delete(pastA_DEFAULT_VALUE_1Owner.ATTRIBUTE_VALUE_BOOLEAN, idx, idx+1)
+				if pastA_ATTRIBUTE_VALUE_BOOLEANOwner != nil {
+					idx := slices.Index(pastA_ATTRIBUTE_VALUE_BOOLEANOwner.ATTRIBUTE_VALUE_BOOLEAN, attribute_value_boolean_)
+					pastA_ATTRIBUTE_VALUE_BOOLEANOwner.ATTRIBUTE_VALUE_BOOLEAN = slices.Delete(pastA_ATTRIBUTE_VALUE_BOOLEANOwner.ATTRIBUTE_VALUE_BOOLEAN, idx, idx+1)
 				}
 			} else {
 				// we need to retrieve the field owner after the change
 				// parse all astrcut and get the one with the name in the
 				// div
-				for _a_default_value_1 := range *models.GetGongstructInstancesSet[models.A_DEFAULT_VALUE_1](attribute_value_booleanFormCallback.probe.stageOfInterest) {
+				for _a_attribute_value_boolean := range *models.GetGongstructInstancesSet[models.A_ATTRIBUTE_VALUE_BOOLEAN](attribute_value_booleanFormCallback.probe.stageOfInterest) {
 
 					// the match is base on the name
-					if _a_default_value_1.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newA_DEFAULT_VALUE_1Owner := _a_default_value_1 // we have a match
-						if pastA_DEFAULT_VALUE_1Owner != nil {
-							if newA_DEFAULT_VALUE_1Owner != pastA_DEFAULT_VALUE_1Owner {
-								idx := slices.Index(pastA_DEFAULT_VALUE_1Owner.ATTRIBUTE_VALUE_BOOLEAN, attribute_value_boolean_)
-								pastA_DEFAULT_VALUE_1Owner.ATTRIBUTE_VALUE_BOOLEAN = slices.Delete(pastA_DEFAULT_VALUE_1Owner.ATTRIBUTE_VALUE_BOOLEAN, idx, idx+1)
-								newA_DEFAULT_VALUE_1Owner.ATTRIBUTE_VALUE_BOOLEAN = append(newA_DEFAULT_VALUE_1Owner.ATTRIBUTE_VALUE_BOOLEAN, attribute_value_boolean_)
+					if _a_attribute_value_boolean.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newA_ATTRIBUTE_VALUE_BOOLEANOwner := _a_attribute_value_boolean // we have a match
+						if pastA_ATTRIBUTE_VALUE_BOOLEANOwner != nil {
+							if newA_ATTRIBUTE_VALUE_BOOLEANOwner != pastA_ATTRIBUTE_VALUE_BOOLEANOwner {
+								idx := slices.Index(pastA_ATTRIBUTE_VALUE_BOOLEANOwner.ATTRIBUTE_VALUE_BOOLEAN, attribute_value_boolean_)
+								pastA_ATTRIBUTE_VALUE_BOOLEANOwner.ATTRIBUTE_VALUE_BOOLEAN = slices.Delete(pastA_ATTRIBUTE_VALUE_BOOLEANOwner.ATTRIBUTE_VALUE_BOOLEAN, idx, idx+1)
+								newA_ATTRIBUTE_VALUE_BOOLEANOwner.ATTRIBUTE_VALUE_BOOLEAN = append(newA_ATTRIBUTE_VALUE_BOOLEANOwner.ATTRIBUTE_VALUE_BOOLEAN, attribute_value_boolean_)
 							}
 						} else {
-							newA_DEFAULT_VALUE_1Owner.ATTRIBUTE_VALUE_BOOLEAN = append(newA_DEFAULT_VALUE_1Owner.ATTRIBUTE_VALUE_BOOLEAN, attribute_value_boolean_)
+							newA_ATTRIBUTE_VALUE_BOOLEANOwner.ATTRIBUTE_VALUE_BOOLEAN = append(newA_ATTRIBUTE_VALUE_BOOLEANOwner.ATTRIBUTE_VALUE_BOOLEAN, attribute_value_boolean_)
 						}
 					}
 				}
 			}
-		case "A_VALUES_1:ATTRIBUTE_VALUE_BOOLEAN":
+		case "A_ATTRIBUTE_VALUE_XHTML_1:ATTRIBUTE_VALUE_BOOLEAN":
 			// we need to retrieve the field owner before the change
-			var pastA_VALUES_1Owner *models.A_VALUES_1
+			var pastA_ATTRIBUTE_VALUE_XHTML_1Owner *models.A_ATTRIBUTE_VALUE_XHTML_1
 			var rf models.ReverseField
 			_ = rf
-			rf.GongstructName = "A_VALUES_1"
+			rf.GongstructName = "A_ATTRIBUTE_VALUE_XHTML_1"
 			rf.Fieldname = "ATTRIBUTE_VALUE_BOOLEAN"
 			reverseFieldOwner := orm.GetReverseFieldOwner(
 				attribute_value_booleanFormCallback.probe.stageOfInterest,
@@ -1147,30 +1147,30 @@ func (attribute_value_booleanFormCallback *ATTRIBUTE_VALUE_BOOLEANFormCallback) 
 				&rf)
 
 			if reverseFieldOwner != nil {
-				pastA_VALUES_1Owner = reverseFieldOwner.(*models.A_VALUES_1)
+				pastA_ATTRIBUTE_VALUE_XHTML_1Owner = reverseFieldOwner.(*models.A_ATTRIBUTE_VALUE_XHTML_1)
 			}
 			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastA_VALUES_1Owner != nil {
-					idx := slices.Index(pastA_VALUES_1Owner.ATTRIBUTE_VALUE_BOOLEAN, attribute_value_boolean_)
-					pastA_VALUES_1Owner.ATTRIBUTE_VALUE_BOOLEAN = slices.Delete(pastA_VALUES_1Owner.ATTRIBUTE_VALUE_BOOLEAN, idx, idx+1)
+				if pastA_ATTRIBUTE_VALUE_XHTML_1Owner != nil {
+					idx := slices.Index(pastA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_BOOLEAN, attribute_value_boolean_)
+					pastA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_BOOLEAN = slices.Delete(pastA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_BOOLEAN, idx, idx+1)
 				}
 			} else {
 				// we need to retrieve the field owner after the change
 				// parse all astrcut and get the one with the name in the
 				// div
-				for _a_values_1 := range *models.GetGongstructInstancesSet[models.A_VALUES_1](attribute_value_booleanFormCallback.probe.stageOfInterest) {
+				for _a_attribute_value_xhtml_1 := range *models.GetGongstructInstancesSet[models.A_ATTRIBUTE_VALUE_XHTML_1](attribute_value_booleanFormCallback.probe.stageOfInterest) {
 
 					// the match is base on the name
-					if _a_values_1.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newA_VALUES_1Owner := _a_values_1 // we have a match
-						if pastA_VALUES_1Owner != nil {
-							if newA_VALUES_1Owner != pastA_VALUES_1Owner {
-								idx := slices.Index(pastA_VALUES_1Owner.ATTRIBUTE_VALUE_BOOLEAN, attribute_value_boolean_)
-								pastA_VALUES_1Owner.ATTRIBUTE_VALUE_BOOLEAN = slices.Delete(pastA_VALUES_1Owner.ATTRIBUTE_VALUE_BOOLEAN, idx, idx+1)
-								newA_VALUES_1Owner.ATTRIBUTE_VALUE_BOOLEAN = append(newA_VALUES_1Owner.ATTRIBUTE_VALUE_BOOLEAN, attribute_value_boolean_)
+					if _a_attribute_value_xhtml_1.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newA_ATTRIBUTE_VALUE_XHTML_1Owner := _a_attribute_value_xhtml_1 // we have a match
+						if pastA_ATTRIBUTE_VALUE_XHTML_1Owner != nil {
+							if newA_ATTRIBUTE_VALUE_XHTML_1Owner != pastA_ATTRIBUTE_VALUE_XHTML_1Owner {
+								idx := slices.Index(pastA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_BOOLEAN, attribute_value_boolean_)
+								pastA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_BOOLEAN = slices.Delete(pastA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_BOOLEAN, idx, idx+1)
+								newA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_BOOLEAN = append(newA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_BOOLEAN, attribute_value_boolean_)
 							}
 						} else {
-							newA_VALUES_1Owner.ATTRIBUTE_VALUE_BOOLEAN = append(newA_VALUES_1Owner.ATTRIBUTE_VALUE_BOOLEAN, attribute_value_boolean_)
+							newA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_BOOLEAN = append(newA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_BOOLEAN, attribute_value_boolean_)
 						}
 					}
 				}
@@ -1254,12 +1254,12 @@ func (attribute_value_dateFormCallback *ATTRIBUTE_VALUE_DATEFormCallback) OnSave
 			FormDivBasicFieldToField(&(attribute_value_date_.Name), formDiv)
 		case "THE_VALUE":
 			FormDivBasicFieldToField(&(attribute_value_date_.THE_VALUE), formDiv)
-		case "A_DEFAULT_VALUE_3:ATTRIBUTE_VALUE_DATE":
+		case "A_ATTRIBUTE_VALUE_DATE:ATTRIBUTE_VALUE_DATE":
 			// we need to retrieve the field owner before the change
-			var pastA_DEFAULT_VALUE_3Owner *models.A_DEFAULT_VALUE_3
+			var pastA_ATTRIBUTE_VALUE_DATEOwner *models.A_ATTRIBUTE_VALUE_DATE
 			var rf models.ReverseField
 			_ = rf
-			rf.GongstructName = "A_DEFAULT_VALUE_3"
+			rf.GongstructName = "A_ATTRIBUTE_VALUE_DATE"
 			rf.Fieldname = "ATTRIBUTE_VALUE_DATE"
 			reverseFieldOwner := orm.GetReverseFieldOwner(
 				attribute_value_dateFormCallback.probe.stageOfInterest,
@@ -1268,40 +1268,40 @@ func (attribute_value_dateFormCallback *ATTRIBUTE_VALUE_DATEFormCallback) OnSave
 				&rf)
 
 			if reverseFieldOwner != nil {
-				pastA_DEFAULT_VALUE_3Owner = reverseFieldOwner.(*models.A_DEFAULT_VALUE_3)
+				pastA_ATTRIBUTE_VALUE_DATEOwner = reverseFieldOwner.(*models.A_ATTRIBUTE_VALUE_DATE)
 			}
 			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastA_DEFAULT_VALUE_3Owner != nil {
-					idx := slices.Index(pastA_DEFAULT_VALUE_3Owner.ATTRIBUTE_VALUE_DATE, attribute_value_date_)
-					pastA_DEFAULT_VALUE_3Owner.ATTRIBUTE_VALUE_DATE = slices.Delete(pastA_DEFAULT_VALUE_3Owner.ATTRIBUTE_VALUE_DATE, idx, idx+1)
+				if pastA_ATTRIBUTE_VALUE_DATEOwner != nil {
+					idx := slices.Index(pastA_ATTRIBUTE_VALUE_DATEOwner.ATTRIBUTE_VALUE_DATE, attribute_value_date_)
+					pastA_ATTRIBUTE_VALUE_DATEOwner.ATTRIBUTE_VALUE_DATE = slices.Delete(pastA_ATTRIBUTE_VALUE_DATEOwner.ATTRIBUTE_VALUE_DATE, idx, idx+1)
 				}
 			} else {
 				// we need to retrieve the field owner after the change
 				// parse all astrcut and get the one with the name in the
 				// div
-				for _a_default_value_3 := range *models.GetGongstructInstancesSet[models.A_DEFAULT_VALUE_3](attribute_value_dateFormCallback.probe.stageOfInterest) {
+				for _a_attribute_value_date := range *models.GetGongstructInstancesSet[models.A_ATTRIBUTE_VALUE_DATE](attribute_value_dateFormCallback.probe.stageOfInterest) {
 
 					// the match is base on the name
-					if _a_default_value_3.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newA_DEFAULT_VALUE_3Owner := _a_default_value_3 // we have a match
-						if pastA_DEFAULT_VALUE_3Owner != nil {
-							if newA_DEFAULT_VALUE_3Owner != pastA_DEFAULT_VALUE_3Owner {
-								idx := slices.Index(pastA_DEFAULT_VALUE_3Owner.ATTRIBUTE_VALUE_DATE, attribute_value_date_)
-								pastA_DEFAULT_VALUE_3Owner.ATTRIBUTE_VALUE_DATE = slices.Delete(pastA_DEFAULT_VALUE_3Owner.ATTRIBUTE_VALUE_DATE, idx, idx+1)
-								newA_DEFAULT_VALUE_3Owner.ATTRIBUTE_VALUE_DATE = append(newA_DEFAULT_VALUE_3Owner.ATTRIBUTE_VALUE_DATE, attribute_value_date_)
+					if _a_attribute_value_date.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newA_ATTRIBUTE_VALUE_DATEOwner := _a_attribute_value_date // we have a match
+						if pastA_ATTRIBUTE_VALUE_DATEOwner != nil {
+							if newA_ATTRIBUTE_VALUE_DATEOwner != pastA_ATTRIBUTE_VALUE_DATEOwner {
+								idx := slices.Index(pastA_ATTRIBUTE_VALUE_DATEOwner.ATTRIBUTE_VALUE_DATE, attribute_value_date_)
+								pastA_ATTRIBUTE_VALUE_DATEOwner.ATTRIBUTE_VALUE_DATE = slices.Delete(pastA_ATTRIBUTE_VALUE_DATEOwner.ATTRIBUTE_VALUE_DATE, idx, idx+1)
+								newA_ATTRIBUTE_VALUE_DATEOwner.ATTRIBUTE_VALUE_DATE = append(newA_ATTRIBUTE_VALUE_DATEOwner.ATTRIBUTE_VALUE_DATE, attribute_value_date_)
 							}
 						} else {
-							newA_DEFAULT_VALUE_3Owner.ATTRIBUTE_VALUE_DATE = append(newA_DEFAULT_VALUE_3Owner.ATTRIBUTE_VALUE_DATE, attribute_value_date_)
+							newA_ATTRIBUTE_VALUE_DATEOwner.ATTRIBUTE_VALUE_DATE = append(newA_ATTRIBUTE_VALUE_DATEOwner.ATTRIBUTE_VALUE_DATE, attribute_value_date_)
 						}
 					}
 				}
 			}
-		case "A_VALUES_1:ATTRIBUTE_VALUE_DATE":
+		case "A_ATTRIBUTE_VALUE_XHTML_1:ATTRIBUTE_VALUE_DATE":
 			// we need to retrieve the field owner before the change
-			var pastA_VALUES_1Owner *models.A_VALUES_1
+			var pastA_ATTRIBUTE_VALUE_XHTML_1Owner *models.A_ATTRIBUTE_VALUE_XHTML_1
 			var rf models.ReverseField
 			_ = rf
-			rf.GongstructName = "A_VALUES_1"
+			rf.GongstructName = "A_ATTRIBUTE_VALUE_XHTML_1"
 			rf.Fieldname = "ATTRIBUTE_VALUE_DATE"
 			reverseFieldOwner := orm.GetReverseFieldOwner(
 				attribute_value_dateFormCallback.probe.stageOfInterest,
@@ -1310,30 +1310,30 @@ func (attribute_value_dateFormCallback *ATTRIBUTE_VALUE_DATEFormCallback) OnSave
 				&rf)
 
 			if reverseFieldOwner != nil {
-				pastA_VALUES_1Owner = reverseFieldOwner.(*models.A_VALUES_1)
+				pastA_ATTRIBUTE_VALUE_XHTML_1Owner = reverseFieldOwner.(*models.A_ATTRIBUTE_VALUE_XHTML_1)
 			}
 			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastA_VALUES_1Owner != nil {
-					idx := slices.Index(pastA_VALUES_1Owner.ATTRIBUTE_VALUE_DATE, attribute_value_date_)
-					pastA_VALUES_1Owner.ATTRIBUTE_VALUE_DATE = slices.Delete(pastA_VALUES_1Owner.ATTRIBUTE_VALUE_DATE, idx, idx+1)
+				if pastA_ATTRIBUTE_VALUE_XHTML_1Owner != nil {
+					idx := slices.Index(pastA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_DATE, attribute_value_date_)
+					pastA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_DATE = slices.Delete(pastA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_DATE, idx, idx+1)
 				}
 			} else {
 				// we need to retrieve the field owner after the change
 				// parse all astrcut and get the one with the name in the
 				// div
-				for _a_values_1 := range *models.GetGongstructInstancesSet[models.A_VALUES_1](attribute_value_dateFormCallback.probe.stageOfInterest) {
+				for _a_attribute_value_xhtml_1 := range *models.GetGongstructInstancesSet[models.A_ATTRIBUTE_VALUE_XHTML_1](attribute_value_dateFormCallback.probe.stageOfInterest) {
 
 					// the match is base on the name
-					if _a_values_1.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newA_VALUES_1Owner := _a_values_1 // we have a match
-						if pastA_VALUES_1Owner != nil {
-							if newA_VALUES_1Owner != pastA_VALUES_1Owner {
-								idx := slices.Index(pastA_VALUES_1Owner.ATTRIBUTE_VALUE_DATE, attribute_value_date_)
-								pastA_VALUES_1Owner.ATTRIBUTE_VALUE_DATE = slices.Delete(pastA_VALUES_1Owner.ATTRIBUTE_VALUE_DATE, idx, idx+1)
-								newA_VALUES_1Owner.ATTRIBUTE_VALUE_DATE = append(newA_VALUES_1Owner.ATTRIBUTE_VALUE_DATE, attribute_value_date_)
+					if _a_attribute_value_xhtml_1.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newA_ATTRIBUTE_VALUE_XHTML_1Owner := _a_attribute_value_xhtml_1 // we have a match
+						if pastA_ATTRIBUTE_VALUE_XHTML_1Owner != nil {
+							if newA_ATTRIBUTE_VALUE_XHTML_1Owner != pastA_ATTRIBUTE_VALUE_XHTML_1Owner {
+								idx := slices.Index(pastA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_DATE, attribute_value_date_)
+								pastA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_DATE = slices.Delete(pastA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_DATE, idx, idx+1)
+								newA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_DATE = append(newA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_DATE, attribute_value_date_)
 							}
 						} else {
-							newA_VALUES_1Owner.ATTRIBUTE_VALUE_DATE = append(newA_VALUES_1Owner.ATTRIBUTE_VALUE_DATE, attribute_value_date_)
+							newA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_DATE = append(newA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_DATE, attribute_value_date_)
 						}
 					}
 				}
@@ -1415,12 +1415,12 @@ func (attribute_value_enumerationFormCallback *ATTRIBUTE_VALUE_ENUMERATIONFormCa
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(attribute_value_enumeration_.Name), formDiv)
-		case "A_DEFAULT_VALUE_5:ATTRIBUTE_VALUE_ENUMERATION":
+		case "A_ATTRIBUTE_VALUE_ENUMERATION:ATTRIBUTE_VALUE_ENUMERATION":
 			// we need to retrieve the field owner before the change
-			var pastA_DEFAULT_VALUE_5Owner *models.A_DEFAULT_VALUE_5
+			var pastA_ATTRIBUTE_VALUE_ENUMERATIONOwner *models.A_ATTRIBUTE_VALUE_ENUMERATION
 			var rf models.ReverseField
 			_ = rf
-			rf.GongstructName = "A_DEFAULT_VALUE_5"
+			rf.GongstructName = "A_ATTRIBUTE_VALUE_ENUMERATION"
 			rf.Fieldname = "ATTRIBUTE_VALUE_ENUMERATION"
 			reverseFieldOwner := orm.GetReverseFieldOwner(
 				attribute_value_enumerationFormCallback.probe.stageOfInterest,
@@ -1429,40 +1429,40 @@ func (attribute_value_enumerationFormCallback *ATTRIBUTE_VALUE_ENUMERATIONFormCa
 				&rf)
 
 			if reverseFieldOwner != nil {
-				pastA_DEFAULT_VALUE_5Owner = reverseFieldOwner.(*models.A_DEFAULT_VALUE_5)
+				pastA_ATTRIBUTE_VALUE_ENUMERATIONOwner = reverseFieldOwner.(*models.A_ATTRIBUTE_VALUE_ENUMERATION)
 			}
 			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastA_DEFAULT_VALUE_5Owner != nil {
-					idx := slices.Index(pastA_DEFAULT_VALUE_5Owner.ATTRIBUTE_VALUE_ENUMERATION, attribute_value_enumeration_)
-					pastA_DEFAULT_VALUE_5Owner.ATTRIBUTE_VALUE_ENUMERATION = slices.Delete(pastA_DEFAULT_VALUE_5Owner.ATTRIBUTE_VALUE_ENUMERATION, idx, idx+1)
+				if pastA_ATTRIBUTE_VALUE_ENUMERATIONOwner != nil {
+					idx := slices.Index(pastA_ATTRIBUTE_VALUE_ENUMERATIONOwner.ATTRIBUTE_VALUE_ENUMERATION, attribute_value_enumeration_)
+					pastA_ATTRIBUTE_VALUE_ENUMERATIONOwner.ATTRIBUTE_VALUE_ENUMERATION = slices.Delete(pastA_ATTRIBUTE_VALUE_ENUMERATIONOwner.ATTRIBUTE_VALUE_ENUMERATION, idx, idx+1)
 				}
 			} else {
 				// we need to retrieve the field owner after the change
 				// parse all astrcut and get the one with the name in the
 				// div
-				for _a_default_value_5 := range *models.GetGongstructInstancesSet[models.A_DEFAULT_VALUE_5](attribute_value_enumerationFormCallback.probe.stageOfInterest) {
+				for _a_attribute_value_enumeration := range *models.GetGongstructInstancesSet[models.A_ATTRIBUTE_VALUE_ENUMERATION](attribute_value_enumerationFormCallback.probe.stageOfInterest) {
 
 					// the match is base on the name
-					if _a_default_value_5.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newA_DEFAULT_VALUE_5Owner := _a_default_value_5 // we have a match
-						if pastA_DEFAULT_VALUE_5Owner != nil {
-							if newA_DEFAULT_VALUE_5Owner != pastA_DEFAULT_VALUE_5Owner {
-								idx := slices.Index(pastA_DEFAULT_VALUE_5Owner.ATTRIBUTE_VALUE_ENUMERATION, attribute_value_enumeration_)
-								pastA_DEFAULT_VALUE_5Owner.ATTRIBUTE_VALUE_ENUMERATION = slices.Delete(pastA_DEFAULT_VALUE_5Owner.ATTRIBUTE_VALUE_ENUMERATION, idx, idx+1)
-								newA_DEFAULT_VALUE_5Owner.ATTRIBUTE_VALUE_ENUMERATION = append(newA_DEFAULT_VALUE_5Owner.ATTRIBUTE_VALUE_ENUMERATION, attribute_value_enumeration_)
+					if _a_attribute_value_enumeration.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newA_ATTRIBUTE_VALUE_ENUMERATIONOwner := _a_attribute_value_enumeration // we have a match
+						if pastA_ATTRIBUTE_VALUE_ENUMERATIONOwner != nil {
+							if newA_ATTRIBUTE_VALUE_ENUMERATIONOwner != pastA_ATTRIBUTE_VALUE_ENUMERATIONOwner {
+								idx := slices.Index(pastA_ATTRIBUTE_VALUE_ENUMERATIONOwner.ATTRIBUTE_VALUE_ENUMERATION, attribute_value_enumeration_)
+								pastA_ATTRIBUTE_VALUE_ENUMERATIONOwner.ATTRIBUTE_VALUE_ENUMERATION = slices.Delete(pastA_ATTRIBUTE_VALUE_ENUMERATIONOwner.ATTRIBUTE_VALUE_ENUMERATION, idx, idx+1)
+								newA_ATTRIBUTE_VALUE_ENUMERATIONOwner.ATTRIBUTE_VALUE_ENUMERATION = append(newA_ATTRIBUTE_VALUE_ENUMERATIONOwner.ATTRIBUTE_VALUE_ENUMERATION, attribute_value_enumeration_)
 							}
 						} else {
-							newA_DEFAULT_VALUE_5Owner.ATTRIBUTE_VALUE_ENUMERATION = append(newA_DEFAULT_VALUE_5Owner.ATTRIBUTE_VALUE_ENUMERATION, attribute_value_enumeration_)
+							newA_ATTRIBUTE_VALUE_ENUMERATIONOwner.ATTRIBUTE_VALUE_ENUMERATION = append(newA_ATTRIBUTE_VALUE_ENUMERATIONOwner.ATTRIBUTE_VALUE_ENUMERATION, attribute_value_enumeration_)
 						}
 					}
 				}
 			}
-		case "A_VALUES_1:ATTRIBUTE_VALUE_ENUMERATION":
+		case "A_ATTRIBUTE_VALUE_XHTML_1:ATTRIBUTE_VALUE_ENUMERATION":
 			// we need to retrieve the field owner before the change
-			var pastA_VALUES_1Owner *models.A_VALUES_1
+			var pastA_ATTRIBUTE_VALUE_XHTML_1Owner *models.A_ATTRIBUTE_VALUE_XHTML_1
 			var rf models.ReverseField
 			_ = rf
-			rf.GongstructName = "A_VALUES_1"
+			rf.GongstructName = "A_ATTRIBUTE_VALUE_XHTML_1"
 			rf.Fieldname = "ATTRIBUTE_VALUE_ENUMERATION"
 			reverseFieldOwner := orm.GetReverseFieldOwner(
 				attribute_value_enumerationFormCallback.probe.stageOfInterest,
@@ -1471,30 +1471,30 @@ func (attribute_value_enumerationFormCallback *ATTRIBUTE_VALUE_ENUMERATIONFormCa
 				&rf)
 
 			if reverseFieldOwner != nil {
-				pastA_VALUES_1Owner = reverseFieldOwner.(*models.A_VALUES_1)
+				pastA_ATTRIBUTE_VALUE_XHTML_1Owner = reverseFieldOwner.(*models.A_ATTRIBUTE_VALUE_XHTML_1)
 			}
 			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastA_VALUES_1Owner != nil {
-					idx := slices.Index(pastA_VALUES_1Owner.ATTRIBUTE_VALUE_ENUMERATION, attribute_value_enumeration_)
-					pastA_VALUES_1Owner.ATTRIBUTE_VALUE_ENUMERATION = slices.Delete(pastA_VALUES_1Owner.ATTRIBUTE_VALUE_ENUMERATION, idx, idx+1)
+				if pastA_ATTRIBUTE_VALUE_XHTML_1Owner != nil {
+					idx := slices.Index(pastA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_ENUMERATION, attribute_value_enumeration_)
+					pastA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_ENUMERATION = slices.Delete(pastA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_ENUMERATION, idx, idx+1)
 				}
 			} else {
 				// we need to retrieve the field owner after the change
 				// parse all astrcut and get the one with the name in the
 				// div
-				for _a_values_1 := range *models.GetGongstructInstancesSet[models.A_VALUES_1](attribute_value_enumerationFormCallback.probe.stageOfInterest) {
+				for _a_attribute_value_xhtml_1 := range *models.GetGongstructInstancesSet[models.A_ATTRIBUTE_VALUE_XHTML_1](attribute_value_enumerationFormCallback.probe.stageOfInterest) {
 
 					// the match is base on the name
-					if _a_values_1.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newA_VALUES_1Owner := _a_values_1 // we have a match
-						if pastA_VALUES_1Owner != nil {
-							if newA_VALUES_1Owner != pastA_VALUES_1Owner {
-								idx := slices.Index(pastA_VALUES_1Owner.ATTRIBUTE_VALUE_ENUMERATION, attribute_value_enumeration_)
-								pastA_VALUES_1Owner.ATTRIBUTE_VALUE_ENUMERATION = slices.Delete(pastA_VALUES_1Owner.ATTRIBUTE_VALUE_ENUMERATION, idx, idx+1)
-								newA_VALUES_1Owner.ATTRIBUTE_VALUE_ENUMERATION = append(newA_VALUES_1Owner.ATTRIBUTE_VALUE_ENUMERATION, attribute_value_enumeration_)
+					if _a_attribute_value_xhtml_1.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newA_ATTRIBUTE_VALUE_XHTML_1Owner := _a_attribute_value_xhtml_1 // we have a match
+						if pastA_ATTRIBUTE_VALUE_XHTML_1Owner != nil {
+							if newA_ATTRIBUTE_VALUE_XHTML_1Owner != pastA_ATTRIBUTE_VALUE_XHTML_1Owner {
+								idx := slices.Index(pastA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_ENUMERATION, attribute_value_enumeration_)
+								pastA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_ENUMERATION = slices.Delete(pastA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_ENUMERATION, idx, idx+1)
+								newA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_ENUMERATION = append(newA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_ENUMERATION, attribute_value_enumeration_)
 							}
 						} else {
-							newA_VALUES_1Owner.ATTRIBUTE_VALUE_ENUMERATION = append(newA_VALUES_1Owner.ATTRIBUTE_VALUE_ENUMERATION, attribute_value_enumeration_)
+							newA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_ENUMERATION = append(newA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_ENUMERATION, attribute_value_enumeration_)
 						}
 					}
 				}
@@ -1578,12 +1578,12 @@ func (attribute_value_integerFormCallback *ATTRIBUTE_VALUE_INTEGERFormCallback) 
 			FormDivBasicFieldToField(&(attribute_value_integer_.Name), formDiv)
 		case "THE_VALUE":
 			FormDivBasicFieldToField(&(attribute_value_integer_.THE_VALUE), formDiv)
-		case "A_DEFAULT_VALUE_6:ATTRIBUTE_VALUE_INTEGER":
+		case "A_ATTRIBUTE_VALUE_INTEGER:ATTRIBUTE_VALUE_INTEGER":
 			// we need to retrieve the field owner before the change
-			var pastA_DEFAULT_VALUE_6Owner *models.A_DEFAULT_VALUE_6
+			var pastA_ATTRIBUTE_VALUE_INTEGEROwner *models.A_ATTRIBUTE_VALUE_INTEGER
 			var rf models.ReverseField
 			_ = rf
-			rf.GongstructName = "A_DEFAULT_VALUE_6"
+			rf.GongstructName = "A_ATTRIBUTE_VALUE_INTEGER"
 			rf.Fieldname = "ATTRIBUTE_VALUE_INTEGER"
 			reverseFieldOwner := orm.GetReverseFieldOwner(
 				attribute_value_integerFormCallback.probe.stageOfInterest,
@@ -1592,40 +1592,40 @@ func (attribute_value_integerFormCallback *ATTRIBUTE_VALUE_INTEGERFormCallback) 
 				&rf)
 
 			if reverseFieldOwner != nil {
-				pastA_DEFAULT_VALUE_6Owner = reverseFieldOwner.(*models.A_DEFAULT_VALUE_6)
+				pastA_ATTRIBUTE_VALUE_INTEGEROwner = reverseFieldOwner.(*models.A_ATTRIBUTE_VALUE_INTEGER)
 			}
 			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastA_DEFAULT_VALUE_6Owner != nil {
-					idx := slices.Index(pastA_DEFAULT_VALUE_6Owner.ATTRIBUTE_VALUE_INTEGER, attribute_value_integer_)
-					pastA_DEFAULT_VALUE_6Owner.ATTRIBUTE_VALUE_INTEGER = slices.Delete(pastA_DEFAULT_VALUE_6Owner.ATTRIBUTE_VALUE_INTEGER, idx, idx+1)
+				if pastA_ATTRIBUTE_VALUE_INTEGEROwner != nil {
+					idx := slices.Index(pastA_ATTRIBUTE_VALUE_INTEGEROwner.ATTRIBUTE_VALUE_INTEGER, attribute_value_integer_)
+					pastA_ATTRIBUTE_VALUE_INTEGEROwner.ATTRIBUTE_VALUE_INTEGER = slices.Delete(pastA_ATTRIBUTE_VALUE_INTEGEROwner.ATTRIBUTE_VALUE_INTEGER, idx, idx+1)
 				}
 			} else {
 				// we need to retrieve the field owner after the change
 				// parse all astrcut and get the one with the name in the
 				// div
-				for _a_default_value_6 := range *models.GetGongstructInstancesSet[models.A_DEFAULT_VALUE_6](attribute_value_integerFormCallback.probe.stageOfInterest) {
+				for _a_attribute_value_integer := range *models.GetGongstructInstancesSet[models.A_ATTRIBUTE_VALUE_INTEGER](attribute_value_integerFormCallback.probe.stageOfInterest) {
 
 					// the match is base on the name
-					if _a_default_value_6.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newA_DEFAULT_VALUE_6Owner := _a_default_value_6 // we have a match
-						if pastA_DEFAULT_VALUE_6Owner != nil {
-							if newA_DEFAULT_VALUE_6Owner != pastA_DEFAULT_VALUE_6Owner {
-								idx := slices.Index(pastA_DEFAULT_VALUE_6Owner.ATTRIBUTE_VALUE_INTEGER, attribute_value_integer_)
-								pastA_DEFAULT_VALUE_6Owner.ATTRIBUTE_VALUE_INTEGER = slices.Delete(pastA_DEFAULT_VALUE_6Owner.ATTRIBUTE_VALUE_INTEGER, idx, idx+1)
-								newA_DEFAULT_VALUE_6Owner.ATTRIBUTE_VALUE_INTEGER = append(newA_DEFAULT_VALUE_6Owner.ATTRIBUTE_VALUE_INTEGER, attribute_value_integer_)
+					if _a_attribute_value_integer.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newA_ATTRIBUTE_VALUE_INTEGEROwner := _a_attribute_value_integer // we have a match
+						if pastA_ATTRIBUTE_VALUE_INTEGEROwner != nil {
+							if newA_ATTRIBUTE_VALUE_INTEGEROwner != pastA_ATTRIBUTE_VALUE_INTEGEROwner {
+								idx := slices.Index(pastA_ATTRIBUTE_VALUE_INTEGEROwner.ATTRIBUTE_VALUE_INTEGER, attribute_value_integer_)
+								pastA_ATTRIBUTE_VALUE_INTEGEROwner.ATTRIBUTE_VALUE_INTEGER = slices.Delete(pastA_ATTRIBUTE_VALUE_INTEGEROwner.ATTRIBUTE_VALUE_INTEGER, idx, idx+1)
+								newA_ATTRIBUTE_VALUE_INTEGEROwner.ATTRIBUTE_VALUE_INTEGER = append(newA_ATTRIBUTE_VALUE_INTEGEROwner.ATTRIBUTE_VALUE_INTEGER, attribute_value_integer_)
 							}
 						} else {
-							newA_DEFAULT_VALUE_6Owner.ATTRIBUTE_VALUE_INTEGER = append(newA_DEFAULT_VALUE_6Owner.ATTRIBUTE_VALUE_INTEGER, attribute_value_integer_)
+							newA_ATTRIBUTE_VALUE_INTEGEROwner.ATTRIBUTE_VALUE_INTEGER = append(newA_ATTRIBUTE_VALUE_INTEGEROwner.ATTRIBUTE_VALUE_INTEGER, attribute_value_integer_)
 						}
 					}
 				}
 			}
-		case "A_VALUES_1:ATTRIBUTE_VALUE_INTEGER":
+		case "A_ATTRIBUTE_VALUE_XHTML_1:ATTRIBUTE_VALUE_INTEGER":
 			// we need to retrieve the field owner before the change
-			var pastA_VALUES_1Owner *models.A_VALUES_1
+			var pastA_ATTRIBUTE_VALUE_XHTML_1Owner *models.A_ATTRIBUTE_VALUE_XHTML_1
 			var rf models.ReverseField
 			_ = rf
-			rf.GongstructName = "A_VALUES_1"
+			rf.GongstructName = "A_ATTRIBUTE_VALUE_XHTML_1"
 			rf.Fieldname = "ATTRIBUTE_VALUE_INTEGER"
 			reverseFieldOwner := orm.GetReverseFieldOwner(
 				attribute_value_integerFormCallback.probe.stageOfInterest,
@@ -1634,30 +1634,30 @@ func (attribute_value_integerFormCallback *ATTRIBUTE_VALUE_INTEGERFormCallback) 
 				&rf)
 
 			if reverseFieldOwner != nil {
-				pastA_VALUES_1Owner = reverseFieldOwner.(*models.A_VALUES_1)
+				pastA_ATTRIBUTE_VALUE_XHTML_1Owner = reverseFieldOwner.(*models.A_ATTRIBUTE_VALUE_XHTML_1)
 			}
 			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastA_VALUES_1Owner != nil {
-					idx := slices.Index(pastA_VALUES_1Owner.ATTRIBUTE_VALUE_INTEGER, attribute_value_integer_)
-					pastA_VALUES_1Owner.ATTRIBUTE_VALUE_INTEGER = slices.Delete(pastA_VALUES_1Owner.ATTRIBUTE_VALUE_INTEGER, idx, idx+1)
+				if pastA_ATTRIBUTE_VALUE_XHTML_1Owner != nil {
+					idx := slices.Index(pastA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_INTEGER, attribute_value_integer_)
+					pastA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_INTEGER = slices.Delete(pastA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_INTEGER, idx, idx+1)
 				}
 			} else {
 				// we need to retrieve the field owner after the change
 				// parse all astrcut and get the one with the name in the
 				// div
-				for _a_values_1 := range *models.GetGongstructInstancesSet[models.A_VALUES_1](attribute_value_integerFormCallback.probe.stageOfInterest) {
+				for _a_attribute_value_xhtml_1 := range *models.GetGongstructInstancesSet[models.A_ATTRIBUTE_VALUE_XHTML_1](attribute_value_integerFormCallback.probe.stageOfInterest) {
 
 					// the match is base on the name
-					if _a_values_1.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newA_VALUES_1Owner := _a_values_1 // we have a match
-						if pastA_VALUES_1Owner != nil {
-							if newA_VALUES_1Owner != pastA_VALUES_1Owner {
-								idx := slices.Index(pastA_VALUES_1Owner.ATTRIBUTE_VALUE_INTEGER, attribute_value_integer_)
-								pastA_VALUES_1Owner.ATTRIBUTE_VALUE_INTEGER = slices.Delete(pastA_VALUES_1Owner.ATTRIBUTE_VALUE_INTEGER, idx, idx+1)
-								newA_VALUES_1Owner.ATTRIBUTE_VALUE_INTEGER = append(newA_VALUES_1Owner.ATTRIBUTE_VALUE_INTEGER, attribute_value_integer_)
+					if _a_attribute_value_xhtml_1.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newA_ATTRIBUTE_VALUE_XHTML_1Owner := _a_attribute_value_xhtml_1 // we have a match
+						if pastA_ATTRIBUTE_VALUE_XHTML_1Owner != nil {
+							if newA_ATTRIBUTE_VALUE_XHTML_1Owner != pastA_ATTRIBUTE_VALUE_XHTML_1Owner {
+								idx := slices.Index(pastA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_INTEGER, attribute_value_integer_)
+								pastA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_INTEGER = slices.Delete(pastA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_INTEGER, idx, idx+1)
+								newA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_INTEGER = append(newA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_INTEGER, attribute_value_integer_)
 							}
 						} else {
-							newA_VALUES_1Owner.ATTRIBUTE_VALUE_INTEGER = append(newA_VALUES_1Owner.ATTRIBUTE_VALUE_INTEGER, attribute_value_integer_)
+							newA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_INTEGER = append(newA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_INTEGER, attribute_value_integer_)
 						}
 					}
 				}
@@ -1741,12 +1741,12 @@ func (attribute_value_realFormCallback *ATTRIBUTE_VALUE_REALFormCallback) OnSave
 			FormDivBasicFieldToField(&(attribute_value_real_.Name), formDiv)
 		case "THE_VALUE":
 			FormDivBasicFieldToField(&(attribute_value_real_.THE_VALUE), formDiv)
-		case "A_DEFAULT_VALUE_4:ATTRIBUTE_VALUE_REAL":
+		case "A_ATTRIBUTE_VALUE_REAL:ATTRIBUTE_VALUE_REAL":
 			// we need to retrieve the field owner before the change
-			var pastA_DEFAULT_VALUE_4Owner *models.A_DEFAULT_VALUE_4
+			var pastA_ATTRIBUTE_VALUE_REALOwner *models.A_ATTRIBUTE_VALUE_REAL
 			var rf models.ReverseField
 			_ = rf
-			rf.GongstructName = "A_DEFAULT_VALUE_4"
+			rf.GongstructName = "A_ATTRIBUTE_VALUE_REAL"
 			rf.Fieldname = "ATTRIBUTE_VALUE_REAL"
 			reverseFieldOwner := orm.GetReverseFieldOwner(
 				attribute_value_realFormCallback.probe.stageOfInterest,
@@ -1755,40 +1755,40 @@ func (attribute_value_realFormCallback *ATTRIBUTE_VALUE_REALFormCallback) OnSave
 				&rf)
 
 			if reverseFieldOwner != nil {
-				pastA_DEFAULT_VALUE_4Owner = reverseFieldOwner.(*models.A_DEFAULT_VALUE_4)
+				pastA_ATTRIBUTE_VALUE_REALOwner = reverseFieldOwner.(*models.A_ATTRIBUTE_VALUE_REAL)
 			}
 			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastA_DEFAULT_VALUE_4Owner != nil {
-					idx := slices.Index(pastA_DEFAULT_VALUE_4Owner.ATTRIBUTE_VALUE_REAL, attribute_value_real_)
-					pastA_DEFAULT_VALUE_4Owner.ATTRIBUTE_VALUE_REAL = slices.Delete(pastA_DEFAULT_VALUE_4Owner.ATTRIBUTE_VALUE_REAL, idx, idx+1)
+				if pastA_ATTRIBUTE_VALUE_REALOwner != nil {
+					idx := slices.Index(pastA_ATTRIBUTE_VALUE_REALOwner.ATTRIBUTE_VALUE_REAL, attribute_value_real_)
+					pastA_ATTRIBUTE_VALUE_REALOwner.ATTRIBUTE_VALUE_REAL = slices.Delete(pastA_ATTRIBUTE_VALUE_REALOwner.ATTRIBUTE_VALUE_REAL, idx, idx+1)
 				}
 			} else {
 				// we need to retrieve the field owner after the change
 				// parse all astrcut and get the one with the name in the
 				// div
-				for _a_default_value_4 := range *models.GetGongstructInstancesSet[models.A_DEFAULT_VALUE_4](attribute_value_realFormCallback.probe.stageOfInterest) {
+				for _a_attribute_value_real := range *models.GetGongstructInstancesSet[models.A_ATTRIBUTE_VALUE_REAL](attribute_value_realFormCallback.probe.stageOfInterest) {
 
 					// the match is base on the name
-					if _a_default_value_4.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newA_DEFAULT_VALUE_4Owner := _a_default_value_4 // we have a match
-						if pastA_DEFAULT_VALUE_4Owner != nil {
-							if newA_DEFAULT_VALUE_4Owner != pastA_DEFAULT_VALUE_4Owner {
-								idx := slices.Index(pastA_DEFAULT_VALUE_4Owner.ATTRIBUTE_VALUE_REAL, attribute_value_real_)
-								pastA_DEFAULT_VALUE_4Owner.ATTRIBUTE_VALUE_REAL = slices.Delete(pastA_DEFAULT_VALUE_4Owner.ATTRIBUTE_VALUE_REAL, idx, idx+1)
-								newA_DEFAULT_VALUE_4Owner.ATTRIBUTE_VALUE_REAL = append(newA_DEFAULT_VALUE_4Owner.ATTRIBUTE_VALUE_REAL, attribute_value_real_)
+					if _a_attribute_value_real.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newA_ATTRIBUTE_VALUE_REALOwner := _a_attribute_value_real // we have a match
+						if pastA_ATTRIBUTE_VALUE_REALOwner != nil {
+							if newA_ATTRIBUTE_VALUE_REALOwner != pastA_ATTRIBUTE_VALUE_REALOwner {
+								idx := slices.Index(pastA_ATTRIBUTE_VALUE_REALOwner.ATTRIBUTE_VALUE_REAL, attribute_value_real_)
+								pastA_ATTRIBUTE_VALUE_REALOwner.ATTRIBUTE_VALUE_REAL = slices.Delete(pastA_ATTRIBUTE_VALUE_REALOwner.ATTRIBUTE_VALUE_REAL, idx, idx+1)
+								newA_ATTRIBUTE_VALUE_REALOwner.ATTRIBUTE_VALUE_REAL = append(newA_ATTRIBUTE_VALUE_REALOwner.ATTRIBUTE_VALUE_REAL, attribute_value_real_)
 							}
 						} else {
-							newA_DEFAULT_VALUE_4Owner.ATTRIBUTE_VALUE_REAL = append(newA_DEFAULT_VALUE_4Owner.ATTRIBUTE_VALUE_REAL, attribute_value_real_)
+							newA_ATTRIBUTE_VALUE_REALOwner.ATTRIBUTE_VALUE_REAL = append(newA_ATTRIBUTE_VALUE_REALOwner.ATTRIBUTE_VALUE_REAL, attribute_value_real_)
 						}
 					}
 				}
 			}
-		case "A_VALUES_1:ATTRIBUTE_VALUE_REAL":
+		case "A_ATTRIBUTE_VALUE_XHTML_1:ATTRIBUTE_VALUE_REAL":
 			// we need to retrieve the field owner before the change
-			var pastA_VALUES_1Owner *models.A_VALUES_1
+			var pastA_ATTRIBUTE_VALUE_XHTML_1Owner *models.A_ATTRIBUTE_VALUE_XHTML_1
 			var rf models.ReverseField
 			_ = rf
-			rf.GongstructName = "A_VALUES_1"
+			rf.GongstructName = "A_ATTRIBUTE_VALUE_XHTML_1"
 			rf.Fieldname = "ATTRIBUTE_VALUE_REAL"
 			reverseFieldOwner := orm.GetReverseFieldOwner(
 				attribute_value_realFormCallback.probe.stageOfInterest,
@@ -1797,30 +1797,30 @@ func (attribute_value_realFormCallback *ATTRIBUTE_VALUE_REALFormCallback) OnSave
 				&rf)
 
 			if reverseFieldOwner != nil {
-				pastA_VALUES_1Owner = reverseFieldOwner.(*models.A_VALUES_1)
+				pastA_ATTRIBUTE_VALUE_XHTML_1Owner = reverseFieldOwner.(*models.A_ATTRIBUTE_VALUE_XHTML_1)
 			}
 			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastA_VALUES_1Owner != nil {
-					idx := slices.Index(pastA_VALUES_1Owner.ATTRIBUTE_VALUE_REAL, attribute_value_real_)
-					pastA_VALUES_1Owner.ATTRIBUTE_VALUE_REAL = slices.Delete(pastA_VALUES_1Owner.ATTRIBUTE_VALUE_REAL, idx, idx+1)
+				if pastA_ATTRIBUTE_VALUE_XHTML_1Owner != nil {
+					idx := slices.Index(pastA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_REAL, attribute_value_real_)
+					pastA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_REAL = slices.Delete(pastA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_REAL, idx, idx+1)
 				}
 			} else {
 				// we need to retrieve the field owner after the change
 				// parse all astrcut and get the one with the name in the
 				// div
-				for _a_values_1 := range *models.GetGongstructInstancesSet[models.A_VALUES_1](attribute_value_realFormCallback.probe.stageOfInterest) {
+				for _a_attribute_value_xhtml_1 := range *models.GetGongstructInstancesSet[models.A_ATTRIBUTE_VALUE_XHTML_1](attribute_value_realFormCallback.probe.stageOfInterest) {
 
 					// the match is base on the name
-					if _a_values_1.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newA_VALUES_1Owner := _a_values_1 // we have a match
-						if pastA_VALUES_1Owner != nil {
-							if newA_VALUES_1Owner != pastA_VALUES_1Owner {
-								idx := slices.Index(pastA_VALUES_1Owner.ATTRIBUTE_VALUE_REAL, attribute_value_real_)
-								pastA_VALUES_1Owner.ATTRIBUTE_VALUE_REAL = slices.Delete(pastA_VALUES_1Owner.ATTRIBUTE_VALUE_REAL, idx, idx+1)
-								newA_VALUES_1Owner.ATTRIBUTE_VALUE_REAL = append(newA_VALUES_1Owner.ATTRIBUTE_VALUE_REAL, attribute_value_real_)
+					if _a_attribute_value_xhtml_1.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newA_ATTRIBUTE_VALUE_XHTML_1Owner := _a_attribute_value_xhtml_1 // we have a match
+						if pastA_ATTRIBUTE_VALUE_XHTML_1Owner != nil {
+							if newA_ATTRIBUTE_VALUE_XHTML_1Owner != pastA_ATTRIBUTE_VALUE_XHTML_1Owner {
+								idx := slices.Index(pastA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_REAL, attribute_value_real_)
+								pastA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_REAL = slices.Delete(pastA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_REAL, idx, idx+1)
+								newA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_REAL = append(newA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_REAL, attribute_value_real_)
 							}
 						} else {
-							newA_VALUES_1Owner.ATTRIBUTE_VALUE_REAL = append(newA_VALUES_1Owner.ATTRIBUTE_VALUE_REAL, attribute_value_real_)
+							newA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_REAL = append(newA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_REAL, attribute_value_real_)
 						}
 					}
 				}
@@ -1904,12 +1904,12 @@ func (attribute_value_stringFormCallback *ATTRIBUTE_VALUE_STRINGFormCallback) On
 			FormDivBasicFieldToField(&(attribute_value_string_.Name), formDiv)
 		case "THE_VALUE":
 			FormDivBasicFieldToField(&(attribute_value_string_.THE_VALUE), formDiv)
-		case "A_DEFAULT_VALUE:ATTRIBUTE_VALUE_STRING":
+		case "A_ATTRIBUTE_VALUE_STRING:ATTRIBUTE_VALUE_STRING":
 			// we need to retrieve the field owner before the change
-			var pastA_DEFAULT_VALUEOwner *models.A_DEFAULT_VALUE
+			var pastA_ATTRIBUTE_VALUE_STRINGOwner *models.A_ATTRIBUTE_VALUE_STRING
 			var rf models.ReverseField
 			_ = rf
-			rf.GongstructName = "A_DEFAULT_VALUE"
+			rf.GongstructName = "A_ATTRIBUTE_VALUE_STRING"
 			rf.Fieldname = "ATTRIBUTE_VALUE_STRING"
 			reverseFieldOwner := orm.GetReverseFieldOwner(
 				attribute_value_stringFormCallback.probe.stageOfInterest,
@@ -1918,40 +1918,40 @@ func (attribute_value_stringFormCallback *ATTRIBUTE_VALUE_STRINGFormCallback) On
 				&rf)
 
 			if reverseFieldOwner != nil {
-				pastA_DEFAULT_VALUEOwner = reverseFieldOwner.(*models.A_DEFAULT_VALUE)
+				pastA_ATTRIBUTE_VALUE_STRINGOwner = reverseFieldOwner.(*models.A_ATTRIBUTE_VALUE_STRING)
 			}
 			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastA_DEFAULT_VALUEOwner != nil {
-					idx := slices.Index(pastA_DEFAULT_VALUEOwner.ATTRIBUTE_VALUE_STRING, attribute_value_string_)
-					pastA_DEFAULT_VALUEOwner.ATTRIBUTE_VALUE_STRING = slices.Delete(pastA_DEFAULT_VALUEOwner.ATTRIBUTE_VALUE_STRING, idx, idx+1)
+				if pastA_ATTRIBUTE_VALUE_STRINGOwner != nil {
+					idx := slices.Index(pastA_ATTRIBUTE_VALUE_STRINGOwner.ATTRIBUTE_VALUE_STRING, attribute_value_string_)
+					pastA_ATTRIBUTE_VALUE_STRINGOwner.ATTRIBUTE_VALUE_STRING = slices.Delete(pastA_ATTRIBUTE_VALUE_STRINGOwner.ATTRIBUTE_VALUE_STRING, idx, idx+1)
 				}
 			} else {
 				// we need to retrieve the field owner after the change
 				// parse all astrcut and get the one with the name in the
 				// div
-				for _a_default_value := range *models.GetGongstructInstancesSet[models.A_DEFAULT_VALUE](attribute_value_stringFormCallback.probe.stageOfInterest) {
+				for _a_attribute_value_string := range *models.GetGongstructInstancesSet[models.A_ATTRIBUTE_VALUE_STRING](attribute_value_stringFormCallback.probe.stageOfInterest) {
 
 					// the match is base on the name
-					if _a_default_value.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newA_DEFAULT_VALUEOwner := _a_default_value // we have a match
-						if pastA_DEFAULT_VALUEOwner != nil {
-							if newA_DEFAULT_VALUEOwner != pastA_DEFAULT_VALUEOwner {
-								idx := slices.Index(pastA_DEFAULT_VALUEOwner.ATTRIBUTE_VALUE_STRING, attribute_value_string_)
-								pastA_DEFAULT_VALUEOwner.ATTRIBUTE_VALUE_STRING = slices.Delete(pastA_DEFAULT_VALUEOwner.ATTRIBUTE_VALUE_STRING, idx, idx+1)
-								newA_DEFAULT_VALUEOwner.ATTRIBUTE_VALUE_STRING = append(newA_DEFAULT_VALUEOwner.ATTRIBUTE_VALUE_STRING, attribute_value_string_)
+					if _a_attribute_value_string.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newA_ATTRIBUTE_VALUE_STRINGOwner := _a_attribute_value_string // we have a match
+						if pastA_ATTRIBUTE_VALUE_STRINGOwner != nil {
+							if newA_ATTRIBUTE_VALUE_STRINGOwner != pastA_ATTRIBUTE_VALUE_STRINGOwner {
+								idx := slices.Index(pastA_ATTRIBUTE_VALUE_STRINGOwner.ATTRIBUTE_VALUE_STRING, attribute_value_string_)
+								pastA_ATTRIBUTE_VALUE_STRINGOwner.ATTRIBUTE_VALUE_STRING = slices.Delete(pastA_ATTRIBUTE_VALUE_STRINGOwner.ATTRIBUTE_VALUE_STRING, idx, idx+1)
+								newA_ATTRIBUTE_VALUE_STRINGOwner.ATTRIBUTE_VALUE_STRING = append(newA_ATTRIBUTE_VALUE_STRINGOwner.ATTRIBUTE_VALUE_STRING, attribute_value_string_)
 							}
 						} else {
-							newA_DEFAULT_VALUEOwner.ATTRIBUTE_VALUE_STRING = append(newA_DEFAULT_VALUEOwner.ATTRIBUTE_VALUE_STRING, attribute_value_string_)
+							newA_ATTRIBUTE_VALUE_STRINGOwner.ATTRIBUTE_VALUE_STRING = append(newA_ATTRIBUTE_VALUE_STRINGOwner.ATTRIBUTE_VALUE_STRING, attribute_value_string_)
 						}
 					}
 				}
 			}
-		case "A_VALUES_1:ATTRIBUTE_VALUE_STRING":
+		case "A_ATTRIBUTE_VALUE_XHTML_1:ATTRIBUTE_VALUE_STRING":
 			// we need to retrieve the field owner before the change
-			var pastA_VALUES_1Owner *models.A_VALUES_1
+			var pastA_ATTRIBUTE_VALUE_XHTML_1Owner *models.A_ATTRIBUTE_VALUE_XHTML_1
 			var rf models.ReverseField
 			_ = rf
-			rf.GongstructName = "A_VALUES_1"
+			rf.GongstructName = "A_ATTRIBUTE_VALUE_XHTML_1"
 			rf.Fieldname = "ATTRIBUTE_VALUE_STRING"
 			reverseFieldOwner := orm.GetReverseFieldOwner(
 				attribute_value_stringFormCallback.probe.stageOfInterest,
@@ -1960,30 +1960,30 @@ func (attribute_value_stringFormCallback *ATTRIBUTE_VALUE_STRINGFormCallback) On
 				&rf)
 
 			if reverseFieldOwner != nil {
-				pastA_VALUES_1Owner = reverseFieldOwner.(*models.A_VALUES_1)
+				pastA_ATTRIBUTE_VALUE_XHTML_1Owner = reverseFieldOwner.(*models.A_ATTRIBUTE_VALUE_XHTML_1)
 			}
 			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastA_VALUES_1Owner != nil {
-					idx := slices.Index(pastA_VALUES_1Owner.ATTRIBUTE_VALUE_STRING, attribute_value_string_)
-					pastA_VALUES_1Owner.ATTRIBUTE_VALUE_STRING = slices.Delete(pastA_VALUES_1Owner.ATTRIBUTE_VALUE_STRING, idx, idx+1)
+				if pastA_ATTRIBUTE_VALUE_XHTML_1Owner != nil {
+					idx := slices.Index(pastA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_STRING, attribute_value_string_)
+					pastA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_STRING = slices.Delete(pastA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_STRING, idx, idx+1)
 				}
 			} else {
 				// we need to retrieve the field owner after the change
 				// parse all astrcut and get the one with the name in the
 				// div
-				for _a_values_1 := range *models.GetGongstructInstancesSet[models.A_VALUES_1](attribute_value_stringFormCallback.probe.stageOfInterest) {
+				for _a_attribute_value_xhtml_1 := range *models.GetGongstructInstancesSet[models.A_ATTRIBUTE_VALUE_XHTML_1](attribute_value_stringFormCallback.probe.stageOfInterest) {
 
 					// the match is base on the name
-					if _a_values_1.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newA_VALUES_1Owner := _a_values_1 // we have a match
-						if pastA_VALUES_1Owner != nil {
-							if newA_VALUES_1Owner != pastA_VALUES_1Owner {
-								idx := slices.Index(pastA_VALUES_1Owner.ATTRIBUTE_VALUE_STRING, attribute_value_string_)
-								pastA_VALUES_1Owner.ATTRIBUTE_VALUE_STRING = slices.Delete(pastA_VALUES_1Owner.ATTRIBUTE_VALUE_STRING, idx, idx+1)
-								newA_VALUES_1Owner.ATTRIBUTE_VALUE_STRING = append(newA_VALUES_1Owner.ATTRIBUTE_VALUE_STRING, attribute_value_string_)
+					if _a_attribute_value_xhtml_1.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newA_ATTRIBUTE_VALUE_XHTML_1Owner := _a_attribute_value_xhtml_1 // we have a match
+						if pastA_ATTRIBUTE_VALUE_XHTML_1Owner != nil {
+							if newA_ATTRIBUTE_VALUE_XHTML_1Owner != pastA_ATTRIBUTE_VALUE_XHTML_1Owner {
+								idx := slices.Index(pastA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_STRING, attribute_value_string_)
+								pastA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_STRING = slices.Delete(pastA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_STRING, idx, idx+1)
+								newA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_STRING = append(newA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_STRING, attribute_value_string_)
 							}
 						} else {
-							newA_VALUES_1Owner.ATTRIBUTE_VALUE_STRING = append(newA_VALUES_1Owner.ATTRIBUTE_VALUE_STRING, attribute_value_string_)
+							newA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_STRING = append(newA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_STRING, attribute_value_string_)
 						}
 					}
 				}
@@ -2067,12 +2067,12 @@ func (attribute_value_xhtmlFormCallback *ATTRIBUTE_VALUE_XHTMLFormCallback) OnSa
 			FormDivBasicFieldToField(&(attribute_value_xhtml_.Name), formDiv)
 		case "IS_SIMPLIFIED":
 			FormDivBasicFieldToField(&(attribute_value_xhtml_.IS_SIMPLIFIED), formDiv)
-		case "A_DEFAULT_VALUE_2:ATTRIBUTE_VALUE_XHTML":
+		case "A_ATTRIBUTE_VALUE_XHTML:ATTRIBUTE_VALUE_XHTML":
 			// we need to retrieve the field owner before the change
-			var pastA_DEFAULT_VALUE_2Owner *models.A_DEFAULT_VALUE_2
+			var pastA_ATTRIBUTE_VALUE_XHTMLOwner *models.A_ATTRIBUTE_VALUE_XHTML
 			var rf models.ReverseField
 			_ = rf
-			rf.GongstructName = "A_DEFAULT_VALUE_2"
+			rf.GongstructName = "A_ATTRIBUTE_VALUE_XHTML"
 			rf.Fieldname = "ATTRIBUTE_VALUE_XHTML"
 			reverseFieldOwner := orm.GetReverseFieldOwner(
 				attribute_value_xhtmlFormCallback.probe.stageOfInterest,
@@ -2081,40 +2081,40 @@ func (attribute_value_xhtmlFormCallback *ATTRIBUTE_VALUE_XHTMLFormCallback) OnSa
 				&rf)
 
 			if reverseFieldOwner != nil {
-				pastA_DEFAULT_VALUE_2Owner = reverseFieldOwner.(*models.A_DEFAULT_VALUE_2)
+				pastA_ATTRIBUTE_VALUE_XHTMLOwner = reverseFieldOwner.(*models.A_ATTRIBUTE_VALUE_XHTML)
 			}
 			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastA_DEFAULT_VALUE_2Owner != nil {
-					idx := slices.Index(pastA_DEFAULT_VALUE_2Owner.ATTRIBUTE_VALUE_XHTML, attribute_value_xhtml_)
-					pastA_DEFAULT_VALUE_2Owner.ATTRIBUTE_VALUE_XHTML = slices.Delete(pastA_DEFAULT_VALUE_2Owner.ATTRIBUTE_VALUE_XHTML, idx, idx+1)
+				if pastA_ATTRIBUTE_VALUE_XHTMLOwner != nil {
+					idx := slices.Index(pastA_ATTRIBUTE_VALUE_XHTMLOwner.ATTRIBUTE_VALUE_XHTML, attribute_value_xhtml_)
+					pastA_ATTRIBUTE_VALUE_XHTMLOwner.ATTRIBUTE_VALUE_XHTML = slices.Delete(pastA_ATTRIBUTE_VALUE_XHTMLOwner.ATTRIBUTE_VALUE_XHTML, idx, idx+1)
 				}
 			} else {
 				// we need to retrieve the field owner after the change
 				// parse all astrcut and get the one with the name in the
 				// div
-				for _a_default_value_2 := range *models.GetGongstructInstancesSet[models.A_DEFAULT_VALUE_2](attribute_value_xhtmlFormCallback.probe.stageOfInterest) {
+				for _a_attribute_value_xhtml := range *models.GetGongstructInstancesSet[models.A_ATTRIBUTE_VALUE_XHTML](attribute_value_xhtmlFormCallback.probe.stageOfInterest) {
 
 					// the match is base on the name
-					if _a_default_value_2.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newA_DEFAULT_VALUE_2Owner := _a_default_value_2 // we have a match
-						if pastA_DEFAULT_VALUE_2Owner != nil {
-							if newA_DEFAULT_VALUE_2Owner != pastA_DEFAULT_VALUE_2Owner {
-								idx := slices.Index(pastA_DEFAULT_VALUE_2Owner.ATTRIBUTE_VALUE_XHTML, attribute_value_xhtml_)
-								pastA_DEFAULT_VALUE_2Owner.ATTRIBUTE_VALUE_XHTML = slices.Delete(pastA_DEFAULT_VALUE_2Owner.ATTRIBUTE_VALUE_XHTML, idx, idx+1)
-								newA_DEFAULT_VALUE_2Owner.ATTRIBUTE_VALUE_XHTML = append(newA_DEFAULT_VALUE_2Owner.ATTRIBUTE_VALUE_XHTML, attribute_value_xhtml_)
+					if _a_attribute_value_xhtml.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newA_ATTRIBUTE_VALUE_XHTMLOwner := _a_attribute_value_xhtml // we have a match
+						if pastA_ATTRIBUTE_VALUE_XHTMLOwner != nil {
+							if newA_ATTRIBUTE_VALUE_XHTMLOwner != pastA_ATTRIBUTE_VALUE_XHTMLOwner {
+								idx := slices.Index(pastA_ATTRIBUTE_VALUE_XHTMLOwner.ATTRIBUTE_VALUE_XHTML, attribute_value_xhtml_)
+								pastA_ATTRIBUTE_VALUE_XHTMLOwner.ATTRIBUTE_VALUE_XHTML = slices.Delete(pastA_ATTRIBUTE_VALUE_XHTMLOwner.ATTRIBUTE_VALUE_XHTML, idx, idx+1)
+								newA_ATTRIBUTE_VALUE_XHTMLOwner.ATTRIBUTE_VALUE_XHTML = append(newA_ATTRIBUTE_VALUE_XHTMLOwner.ATTRIBUTE_VALUE_XHTML, attribute_value_xhtml_)
 							}
 						} else {
-							newA_DEFAULT_VALUE_2Owner.ATTRIBUTE_VALUE_XHTML = append(newA_DEFAULT_VALUE_2Owner.ATTRIBUTE_VALUE_XHTML, attribute_value_xhtml_)
+							newA_ATTRIBUTE_VALUE_XHTMLOwner.ATTRIBUTE_VALUE_XHTML = append(newA_ATTRIBUTE_VALUE_XHTMLOwner.ATTRIBUTE_VALUE_XHTML, attribute_value_xhtml_)
 						}
 					}
 				}
 			}
-		case "A_VALUES_1:ATTRIBUTE_VALUE_XHTML":
+		case "A_ATTRIBUTE_VALUE_XHTML_1:ATTRIBUTE_VALUE_XHTML":
 			// we need to retrieve the field owner before the change
-			var pastA_VALUES_1Owner *models.A_VALUES_1
+			var pastA_ATTRIBUTE_VALUE_XHTML_1Owner *models.A_ATTRIBUTE_VALUE_XHTML_1
 			var rf models.ReverseField
 			_ = rf
-			rf.GongstructName = "A_VALUES_1"
+			rf.GongstructName = "A_ATTRIBUTE_VALUE_XHTML_1"
 			rf.Fieldname = "ATTRIBUTE_VALUE_XHTML"
 			reverseFieldOwner := orm.GetReverseFieldOwner(
 				attribute_value_xhtmlFormCallback.probe.stageOfInterest,
@@ -2123,30 +2123,30 @@ func (attribute_value_xhtmlFormCallback *ATTRIBUTE_VALUE_XHTMLFormCallback) OnSa
 				&rf)
 
 			if reverseFieldOwner != nil {
-				pastA_VALUES_1Owner = reverseFieldOwner.(*models.A_VALUES_1)
+				pastA_ATTRIBUTE_VALUE_XHTML_1Owner = reverseFieldOwner.(*models.A_ATTRIBUTE_VALUE_XHTML_1)
 			}
 			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastA_VALUES_1Owner != nil {
-					idx := slices.Index(pastA_VALUES_1Owner.ATTRIBUTE_VALUE_XHTML, attribute_value_xhtml_)
-					pastA_VALUES_1Owner.ATTRIBUTE_VALUE_XHTML = slices.Delete(pastA_VALUES_1Owner.ATTRIBUTE_VALUE_XHTML, idx, idx+1)
+				if pastA_ATTRIBUTE_VALUE_XHTML_1Owner != nil {
+					idx := slices.Index(pastA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_XHTML, attribute_value_xhtml_)
+					pastA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_XHTML = slices.Delete(pastA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_XHTML, idx, idx+1)
 				}
 			} else {
 				// we need to retrieve the field owner after the change
 				// parse all astrcut and get the one with the name in the
 				// div
-				for _a_values_1 := range *models.GetGongstructInstancesSet[models.A_VALUES_1](attribute_value_xhtmlFormCallback.probe.stageOfInterest) {
+				for _a_attribute_value_xhtml_1 := range *models.GetGongstructInstancesSet[models.A_ATTRIBUTE_VALUE_XHTML_1](attribute_value_xhtmlFormCallback.probe.stageOfInterest) {
 
 					// the match is base on the name
-					if _a_values_1.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newA_VALUES_1Owner := _a_values_1 // we have a match
-						if pastA_VALUES_1Owner != nil {
-							if newA_VALUES_1Owner != pastA_VALUES_1Owner {
-								idx := slices.Index(pastA_VALUES_1Owner.ATTRIBUTE_VALUE_XHTML, attribute_value_xhtml_)
-								pastA_VALUES_1Owner.ATTRIBUTE_VALUE_XHTML = slices.Delete(pastA_VALUES_1Owner.ATTRIBUTE_VALUE_XHTML, idx, idx+1)
-								newA_VALUES_1Owner.ATTRIBUTE_VALUE_XHTML = append(newA_VALUES_1Owner.ATTRIBUTE_VALUE_XHTML, attribute_value_xhtml_)
+					if _a_attribute_value_xhtml_1.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newA_ATTRIBUTE_VALUE_XHTML_1Owner := _a_attribute_value_xhtml_1 // we have a match
+						if pastA_ATTRIBUTE_VALUE_XHTML_1Owner != nil {
+							if newA_ATTRIBUTE_VALUE_XHTML_1Owner != pastA_ATTRIBUTE_VALUE_XHTML_1Owner {
+								idx := slices.Index(pastA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_XHTML, attribute_value_xhtml_)
+								pastA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_XHTML = slices.Delete(pastA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_XHTML, idx, idx+1)
+								newA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_XHTML = append(newA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_XHTML, attribute_value_xhtml_)
 							}
 						} else {
-							newA_VALUES_1Owner.ATTRIBUTE_VALUE_XHTML = append(newA_VALUES_1Owner.ATTRIBUTE_VALUE_XHTML, attribute_value_xhtml_)
+							newA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_XHTML = append(newA_ATTRIBUTE_VALUE_XHTML_1Owner.ATTRIBUTE_VALUE_XHTML, attribute_value_xhtml_)
 						}
 					}
 				}
@@ -3268,6 +3268,1889 @@ func (a_alternative_idFormCallback *A_ALTERNATIVE_IDFormCallback) OnSave() {
 
 	fillUpTree(a_alternative_idFormCallback.probe)
 }
+func __gong__New__A_ATTRIBUTE_DEFINITION_BOOLEAN_REFFormCallback(
+	a_attribute_definition_boolean_ref *models.A_ATTRIBUTE_DEFINITION_BOOLEAN_REF,
+	probe *Probe,
+	formGroup *table.FormGroup,
+) (a_attribute_definition_boolean_refFormCallback *A_ATTRIBUTE_DEFINITION_BOOLEAN_REFFormCallback) {
+	a_attribute_definition_boolean_refFormCallback = new(A_ATTRIBUTE_DEFINITION_BOOLEAN_REFFormCallback)
+	a_attribute_definition_boolean_refFormCallback.probe = probe
+	a_attribute_definition_boolean_refFormCallback.a_attribute_definition_boolean_ref = a_attribute_definition_boolean_ref
+	a_attribute_definition_boolean_refFormCallback.formGroup = formGroup
+
+	a_attribute_definition_boolean_refFormCallback.CreationMode = (a_attribute_definition_boolean_ref == nil)
+
+	return
+}
+
+type A_ATTRIBUTE_DEFINITION_BOOLEAN_REFFormCallback struct {
+	a_attribute_definition_boolean_ref *models.A_ATTRIBUTE_DEFINITION_BOOLEAN_REF
+
+	// If the form call is called on the creation of a new instnace
+	CreationMode bool
+
+	probe *Probe
+
+	formGroup *table.FormGroup
+}
+
+func (a_attribute_definition_boolean_refFormCallback *A_ATTRIBUTE_DEFINITION_BOOLEAN_REFFormCallback) OnSave() {
+
+	log.Println("A_ATTRIBUTE_DEFINITION_BOOLEAN_REFFormCallback, OnSave")
+
+	// checkout formStage to have the form group on the stage synchronized with the
+	// back repo (and front repo)
+	a_attribute_definition_boolean_refFormCallback.probe.formStage.Checkout()
+
+	if a_attribute_definition_boolean_refFormCallback.a_attribute_definition_boolean_ref == nil {
+		a_attribute_definition_boolean_refFormCallback.a_attribute_definition_boolean_ref = new(models.A_ATTRIBUTE_DEFINITION_BOOLEAN_REF).Stage(a_attribute_definition_boolean_refFormCallback.probe.stageOfInterest)
+	}
+	a_attribute_definition_boolean_ref_ := a_attribute_definition_boolean_refFormCallback.a_attribute_definition_boolean_ref
+	_ = a_attribute_definition_boolean_ref_
+
+	for _, formDiv := range a_attribute_definition_boolean_refFormCallback.formGroup.FormDivs {
+		switch formDiv.Name {
+		// insertion point per field
+		case "Name":
+			FormDivBasicFieldToField(&(a_attribute_definition_boolean_ref_.Name), formDiv)
+		case "ATTRIBUTE_DEFINITION_BOOLEAN_REF":
+			FormDivBasicFieldToField(&(a_attribute_definition_boolean_ref_.ATTRIBUTE_DEFINITION_BOOLEAN_REF), formDiv)
+		case "ATTRIBUTE_VALUE_BOOLEAN:DEFINITION":
+			// we need to retrieve the field owner before the change
+			var pastATTRIBUTE_VALUE_BOOLEANOwner *models.ATTRIBUTE_VALUE_BOOLEAN
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "ATTRIBUTE_VALUE_BOOLEAN"
+			rf.Fieldname = "DEFINITION"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				a_attribute_definition_boolean_refFormCallback.probe.stageOfInterest,
+				a_attribute_definition_boolean_refFormCallback.probe.backRepoOfInterest,
+				a_attribute_definition_boolean_ref_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastATTRIBUTE_VALUE_BOOLEANOwner = reverseFieldOwner.(*models.ATTRIBUTE_VALUE_BOOLEAN)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastATTRIBUTE_VALUE_BOOLEANOwner != nil {
+					idx := slices.Index(pastATTRIBUTE_VALUE_BOOLEANOwner.DEFINITION, a_attribute_definition_boolean_ref_)
+					pastATTRIBUTE_VALUE_BOOLEANOwner.DEFINITION = slices.Delete(pastATTRIBUTE_VALUE_BOOLEANOwner.DEFINITION, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _attribute_value_boolean := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_VALUE_BOOLEAN](a_attribute_definition_boolean_refFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _attribute_value_boolean.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newATTRIBUTE_VALUE_BOOLEANOwner := _attribute_value_boolean // we have a match
+						if pastATTRIBUTE_VALUE_BOOLEANOwner != nil {
+							if newATTRIBUTE_VALUE_BOOLEANOwner != pastATTRIBUTE_VALUE_BOOLEANOwner {
+								idx := slices.Index(pastATTRIBUTE_VALUE_BOOLEANOwner.DEFINITION, a_attribute_definition_boolean_ref_)
+								pastATTRIBUTE_VALUE_BOOLEANOwner.DEFINITION = slices.Delete(pastATTRIBUTE_VALUE_BOOLEANOwner.DEFINITION, idx, idx+1)
+								newATTRIBUTE_VALUE_BOOLEANOwner.DEFINITION = append(newATTRIBUTE_VALUE_BOOLEANOwner.DEFINITION, a_attribute_definition_boolean_ref_)
+							}
+						} else {
+							newATTRIBUTE_VALUE_BOOLEANOwner.DEFINITION = append(newATTRIBUTE_VALUE_BOOLEANOwner.DEFINITION, a_attribute_definition_boolean_ref_)
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// manage the suppress operation
+	if a_attribute_definition_boolean_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_attribute_definition_boolean_ref_.Unstage(a_attribute_definition_boolean_refFormCallback.probe.stageOfInterest)
+	}
+
+	a_attribute_definition_boolean_refFormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.A_ATTRIBUTE_DEFINITION_BOOLEAN_REF](
+		a_attribute_definition_boolean_refFormCallback.probe,
+	)
+	a_attribute_definition_boolean_refFormCallback.probe.tableStage.Commit()
+
+	// display a new form by reset the form stage
+	if a_attribute_definition_boolean_refFormCallback.CreationMode || a_attribute_definition_boolean_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_attribute_definition_boolean_refFormCallback.probe.formStage.Reset()
+		newFormGroup := (&table.FormGroup{
+			Name: table.FormGroupDefaultName.ToString(),
+		}).Stage(a_attribute_definition_boolean_refFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__A_ATTRIBUTE_DEFINITION_BOOLEAN_REFFormCallback(
+			nil,
+			a_attribute_definition_boolean_refFormCallback.probe,
+			newFormGroup,
+		)
+		a_attribute_definition_boolean_ref := new(models.A_ATTRIBUTE_DEFINITION_BOOLEAN_REF)
+		FillUpForm(a_attribute_definition_boolean_ref, newFormGroup, a_attribute_definition_boolean_refFormCallback.probe)
+		a_attribute_definition_boolean_refFormCallback.probe.formStage.Commit()
+	}
+
+	fillUpTree(a_attribute_definition_boolean_refFormCallback.probe)
+}
+func __gong__New__A_ATTRIBUTE_DEFINITION_DATE_REFFormCallback(
+	a_attribute_definition_date_ref *models.A_ATTRIBUTE_DEFINITION_DATE_REF,
+	probe *Probe,
+	formGroup *table.FormGroup,
+) (a_attribute_definition_date_refFormCallback *A_ATTRIBUTE_DEFINITION_DATE_REFFormCallback) {
+	a_attribute_definition_date_refFormCallback = new(A_ATTRIBUTE_DEFINITION_DATE_REFFormCallback)
+	a_attribute_definition_date_refFormCallback.probe = probe
+	a_attribute_definition_date_refFormCallback.a_attribute_definition_date_ref = a_attribute_definition_date_ref
+	a_attribute_definition_date_refFormCallback.formGroup = formGroup
+
+	a_attribute_definition_date_refFormCallback.CreationMode = (a_attribute_definition_date_ref == nil)
+
+	return
+}
+
+type A_ATTRIBUTE_DEFINITION_DATE_REFFormCallback struct {
+	a_attribute_definition_date_ref *models.A_ATTRIBUTE_DEFINITION_DATE_REF
+
+	// If the form call is called on the creation of a new instnace
+	CreationMode bool
+
+	probe *Probe
+
+	formGroup *table.FormGroup
+}
+
+func (a_attribute_definition_date_refFormCallback *A_ATTRIBUTE_DEFINITION_DATE_REFFormCallback) OnSave() {
+
+	log.Println("A_ATTRIBUTE_DEFINITION_DATE_REFFormCallback, OnSave")
+
+	// checkout formStage to have the form group on the stage synchronized with the
+	// back repo (and front repo)
+	a_attribute_definition_date_refFormCallback.probe.formStage.Checkout()
+
+	if a_attribute_definition_date_refFormCallback.a_attribute_definition_date_ref == nil {
+		a_attribute_definition_date_refFormCallback.a_attribute_definition_date_ref = new(models.A_ATTRIBUTE_DEFINITION_DATE_REF).Stage(a_attribute_definition_date_refFormCallback.probe.stageOfInterest)
+	}
+	a_attribute_definition_date_ref_ := a_attribute_definition_date_refFormCallback.a_attribute_definition_date_ref
+	_ = a_attribute_definition_date_ref_
+
+	for _, formDiv := range a_attribute_definition_date_refFormCallback.formGroup.FormDivs {
+		switch formDiv.Name {
+		// insertion point per field
+		case "Name":
+			FormDivBasicFieldToField(&(a_attribute_definition_date_ref_.Name), formDiv)
+		case "ATTRIBUTE_DEFINITION_DATE_REF":
+			FormDivBasicFieldToField(&(a_attribute_definition_date_ref_.ATTRIBUTE_DEFINITION_DATE_REF), formDiv)
+		case "ATTRIBUTE_VALUE_DATE:DEFINITION":
+			// we need to retrieve the field owner before the change
+			var pastATTRIBUTE_VALUE_DATEOwner *models.ATTRIBUTE_VALUE_DATE
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "ATTRIBUTE_VALUE_DATE"
+			rf.Fieldname = "DEFINITION"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				a_attribute_definition_date_refFormCallback.probe.stageOfInterest,
+				a_attribute_definition_date_refFormCallback.probe.backRepoOfInterest,
+				a_attribute_definition_date_ref_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastATTRIBUTE_VALUE_DATEOwner = reverseFieldOwner.(*models.ATTRIBUTE_VALUE_DATE)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastATTRIBUTE_VALUE_DATEOwner != nil {
+					idx := slices.Index(pastATTRIBUTE_VALUE_DATEOwner.DEFINITION, a_attribute_definition_date_ref_)
+					pastATTRIBUTE_VALUE_DATEOwner.DEFINITION = slices.Delete(pastATTRIBUTE_VALUE_DATEOwner.DEFINITION, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _attribute_value_date := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_VALUE_DATE](a_attribute_definition_date_refFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _attribute_value_date.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newATTRIBUTE_VALUE_DATEOwner := _attribute_value_date // we have a match
+						if pastATTRIBUTE_VALUE_DATEOwner != nil {
+							if newATTRIBUTE_VALUE_DATEOwner != pastATTRIBUTE_VALUE_DATEOwner {
+								idx := slices.Index(pastATTRIBUTE_VALUE_DATEOwner.DEFINITION, a_attribute_definition_date_ref_)
+								pastATTRIBUTE_VALUE_DATEOwner.DEFINITION = slices.Delete(pastATTRIBUTE_VALUE_DATEOwner.DEFINITION, idx, idx+1)
+								newATTRIBUTE_VALUE_DATEOwner.DEFINITION = append(newATTRIBUTE_VALUE_DATEOwner.DEFINITION, a_attribute_definition_date_ref_)
+							}
+						} else {
+							newATTRIBUTE_VALUE_DATEOwner.DEFINITION = append(newATTRIBUTE_VALUE_DATEOwner.DEFINITION, a_attribute_definition_date_ref_)
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// manage the suppress operation
+	if a_attribute_definition_date_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_attribute_definition_date_ref_.Unstage(a_attribute_definition_date_refFormCallback.probe.stageOfInterest)
+	}
+
+	a_attribute_definition_date_refFormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.A_ATTRIBUTE_DEFINITION_DATE_REF](
+		a_attribute_definition_date_refFormCallback.probe,
+	)
+	a_attribute_definition_date_refFormCallback.probe.tableStage.Commit()
+
+	// display a new form by reset the form stage
+	if a_attribute_definition_date_refFormCallback.CreationMode || a_attribute_definition_date_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_attribute_definition_date_refFormCallback.probe.formStage.Reset()
+		newFormGroup := (&table.FormGroup{
+			Name: table.FormGroupDefaultName.ToString(),
+		}).Stage(a_attribute_definition_date_refFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__A_ATTRIBUTE_DEFINITION_DATE_REFFormCallback(
+			nil,
+			a_attribute_definition_date_refFormCallback.probe,
+			newFormGroup,
+		)
+		a_attribute_definition_date_ref := new(models.A_ATTRIBUTE_DEFINITION_DATE_REF)
+		FillUpForm(a_attribute_definition_date_ref, newFormGroup, a_attribute_definition_date_refFormCallback.probe)
+		a_attribute_definition_date_refFormCallback.probe.formStage.Commit()
+	}
+
+	fillUpTree(a_attribute_definition_date_refFormCallback.probe)
+}
+func __gong__New__A_ATTRIBUTE_DEFINITION_ENUMERATION_REFFormCallback(
+	a_attribute_definition_enumeration_ref *models.A_ATTRIBUTE_DEFINITION_ENUMERATION_REF,
+	probe *Probe,
+	formGroup *table.FormGroup,
+) (a_attribute_definition_enumeration_refFormCallback *A_ATTRIBUTE_DEFINITION_ENUMERATION_REFFormCallback) {
+	a_attribute_definition_enumeration_refFormCallback = new(A_ATTRIBUTE_DEFINITION_ENUMERATION_REFFormCallback)
+	a_attribute_definition_enumeration_refFormCallback.probe = probe
+	a_attribute_definition_enumeration_refFormCallback.a_attribute_definition_enumeration_ref = a_attribute_definition_enumeration_ref
+	a_attribute_definition_enumeration_refFormCallback.formGroup = formGroup
+
+	a_attribute_definition_enumeration_refFormCallback.CreationMode = (a_attribute_definition_enumeration_ref == nil)
+
+	return
+}
+
+type A_ATTRIBUTE_DEFINITION_ENUMERATION_REFFormCallback struct {
+	a_attribute_definition_enumeration_ref *models.A_ATTRIBUTE_DEFINITION_ENUMERATION_REF
+
+	// If the form call is called on the creation of a new instnace
+	CreationMode bool
+
+	probe *Probe
+
+	formGroup *table.FormGroup
+}
+
+func (a_attribute_definition_enumeration_refFormCallback *A_ATTRIBUTE_DEFINITION_ENUMERATION_REFFormCallback) OnSave() {
+
+	log.Println("A_ATTRIBUTE_DEFINITION_ENUMERATION_REFFormCallback, OnSave")
+
+	// checkout formStage to have the form group on the stage synchronized with the
+	// back repo (and front repo)
+	a_attribute_definition_enumeration_refFormCallback.probe.formStage.Checkout()
+
+	if a_attribute_definition_enumeration_refFormCallback.a_attribute_definition_enumeration_ref == nil {
+		a_attribute_definition_enumeration_refFormCallback.a_attribute_definition_enumeration_ref = new(models.A_ATTRIBUTE_DEFINITION_ENUMERATION_REF).Stage(a_attribute_definition_enumeration_refFormCallback.probe.stageOfInterest)
+	}
+	a_attribute_definition_enumeration_ref_ := a_attribute_definition_enumeration_refFormCallback.a_attribute_definition_enumeration_ref
+	_ = a_attribute_definition_enumeration_ref_
+
+	for _, formDiv := range a_attribute_definition_enumeration_refFormCallback.formGroup.FormDivs {
+		switch formDiv.Name {
+		// insertion point per field
+		case "Name":
+			FormDivBasicFieldToField(&(a_attribute_definition_enumeration_ref_.Name), formDiv)
+		case "ATTRIBUTE_DEFINITION_ENUMERATION_REF":
+			FormDivBasicFieldToField(&(a_attribute_definition_enumeration_ref_.ATTRIBUTE_DEFINITION_ENUMERATION_REF), formDiv)
+		case "ATTRIBUTE_VALUE_ENUMERATION:DEFINITION":
+			// we need to retrieve the field owner before the change
+			var pastATTRIBUTE_VALUE_ENUMERATIONOwner *models.ATTRIBUTE_VALUE_ENUMERATION
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "ATTRIBUTE_VALUE_ENUMERATION"
+			rf.Fieldname = "DEFINITION"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				a_attribute_definition_enumeration_refFormCallback.probe.stageOfInterest,
+				a_attribute_definition_enumeration_refFormCallback.probe.backRepoOfInterest,
+				a_attribute_definition_enumeration_ref_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastATTRIBUTE_VALUE_ENUMERATIONOwner = reverseFieldOwner.(*models.ATTRIBUTE_VALUE_ENUMERATION)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastATTRIBUTE_VALUE_ENUMERATIONOwner != nil {
+					idx := slices.Index(pastATTRIBUTE_VALUE_ENUMERATIONOwner.DEFINITION, a_attribute_definition_enumeration_ref_)
+					pastATTRIBUTE_VALUE_ENUMERATIONOwner.DEFINITION = slices.Delete(pastATTRIBUTE_VALUE_ENUMERATIONOwner.DEFINITION, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _attribute_value_enumeration := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_VALUE_ENUMERATION](a_attribute_definition_enumeration_refFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _attribute_value_enumeration.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newATTRIBUTE_VALUE_ENUMERATIONOwner := _attribute_value_enumeration // we have a match
+						if pastATTRIBUTE_VALUE_ENUMERATIONOwner != nil {
+							if newATTRIBUTE_VALUE_ENUMERATIONOwner != pastATTRIBUTE_VALUE_ENUMERATIONOwner {
+								idx := slices.Index(pastATTRIBUTE_VALUE_ENUMERATIONOwner.DEFINITION, a_attribute_definition_enumeration_ref_)
+								pastATTRIBUTE_VALUE_ENUMERATIONOwner.DEFINITION = slices.Delete(pastATTRIBUTE_VALUE_ENUMERATIONOwner.DEFINITION, idx, idx+1)
+								newATTRIBUTE_VALUE_ENUMERATIONOwner.DEFINITION = append(newATTRIBUTE_VALUE_ENUMERATIONOwner.DEFINITION, a_attribute_definition_enumeration_ref_)
+							}
+						} else {
+							newATTRIBUTE_VALUE_ENUMERATIONOwner.DEFINITION = append(newATTRIBUTE_VALUE_ENUMERATIONOwner.DEFINITION, a_attribute_definition_enumeration_ref_)
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// manage the suppress operation
+	if a_attribute_definition_enumeration_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_attribute_definition_enumeration_ref_.Unstage(a_attribute_definition_enumeration_refFormCallback.probe.stageOfInterest)
+	}
+
+	a_attribute_definition_enumeration_refFormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.A_ATTRIBUTE_DEFINITION_ENUMERATION_REF](
+		a_attribute_definition_enumeration_refFormCallback.probe,
+	)
+	a_attribute_definition_enumeration_refFormCallback.probe.tableStage.Commit()
+
+	// display a new form by reset the form stage
+	if a_attribute_definition_enumeration_refFormCallback.CreationMode || a_attribute_definition_enumeration_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_attribute_definition_enumeration_refFormCallback.probe.formStage.Reset()
+		newFormGroup := (&table.FormGroup{
+			Name: table.FormGroupDefaultName.ToString(),
+		}).Stage(a_attribute_definition_enumeration_refFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__A_ATTRIBUTE_DEFINITION_ENUMERATION_REFFormCallback(
+			nil,
+			a_attribute_definition_enumeration_refFormCallback.probe,
+			newFormGroup,
+		)
+		a_attribute_definition_enumeration_ref := new(models.A_ATTRIBUTE_DEFINITION_ENUMERATION_REF)
+		FillUpForm(a_attribute_definition_enumeration_ref, newFormGroup, a_attribute_definition_enumeration_refFormCallback.probe)
+		a_attribute_definition_enumeration_refFormCallback.probe.formStage.Commit()
+	}
+
+	fillUpTree(a_attribute_definition_enumeration_refFormCallback.probe)
+}
+func __gong__New__A_ATTRIBUTE_DEFINITION_INTEGER_REFFormCallback(
+	a_attribute_definition_integer_ref *models.A_ATTRIBUTE_DEFINITION_INTEGER_REF,
+	probe *Probe,
+	formGroup *table.FormGroup,
+) (a_attribute_definition_integer_refFormCallback *A_ATTRIBUTE_DEFINITION_INTEGER_REFFormCallback) {
+	a_attribute_definition_integer_refFormCallback = new(A_ATTRIBUTE_DEFINITION_INTEGER_REFFormCallback)
+	a_attribute_definition_integer_refFormCallback.probe = probe
+	a_attribute_definition_integer_refFormCallback.a_attribute_definition_integer_ref = a_attribute_definition_integer_ref
+	a_attribute_definition_integer_refFormCallback.formGroup = formGroup
+
+	a_attribute_definition_integer_refFormCallback.CreationMode = (a_attribute_definition_integer_ref == nil)
+
+	return
+}
+
+type A_ATTRIBUTE_DEFINITION_INTEGER_REFFormCallback struct {
+	a_attribute_definition_integer_ref *models.A_ATTRIBUTE_DEFINITION_INTEGER_REF
+
+	// If the form call is called on the creation of a new instnace
+	CreationMode bool
+
+	probe *Probe
+
+	formGroup *table.FormGroup
+}
+
+func (a_attribute_definition_integer_refFormCallback *A_ATTRIBUTE_DEFINITION_INTEGER_REFFormCallback) OnSave() {
+
+	log.Println("A_ATTRIBUTE_DEFINITION_INTEGER_REFFormCallback, OnSave")
+
+	// checkout formStage to have the form group on the stage synchronized with the
+	// back repo (and front repo)
+	a_attribute_definition_integer_refFormCallback.probe.formStage.Checkout()
+
+	if a_attribute_definition_integer_refFormCallback.a_attribute_definition_integer_ref == nil {
+		a_attribute_definition_integer_refFormCallback.a_attribute_definition_integer_ref = new(models.A_ATTRIBUTE_DEFINITION_INTEGER_REF).Stage(a_attribute_definition_integer_refFormCallback.probe.stageOfInterest)
+	}
+	a_attribute_definition_integer_ref_ := a_attribute_definition_integer_refFormCallback.a_attribute_definition_integer_ref
+	_ = a_attribute_definition_integer_ref_
+
+	for _, formDiv := range a_attribute_definition_integer_refFormCallback.formGroup.FormDivs {
+		switch formDiv.Name {
+		// insertion point per field
+		case "Name":
+			FormDivBasicFieldToField(&(a_attribute_definition_integer_ref_.Name), formDiv)
+		case "ATTRIBUTE_DEFINITION_INTEGER_REF":
+			FormDivBasicFieldToField(&(a_attribute_definition_integer_ref_.ATTRIBUTE_DEFINITION_INTEGER_REF), formDiv)
+		case "ATTRIBUTE_VALUE_INTEGER:DEFINITION":
+			// we need to retrieve the field owner before the change
+			var pastATTRIBUTE_VALUE_INTEGEROwner *models.ATTRIBUTE_VALUE_INTEGER
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "ATTRIBUTE_VALUE_INTEGER"
+			rf.Fieldname = "DEFINITION"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				a_attribute_definition_integer_refFormCallback.probe.stageOfInterest,
+				a_attribute_definition_integer_refFormCallback.probe.backRepoOfInterest,
+				a_attribute_definition_integer_ref_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastATTRIBUTE_VALUE_INTEGEROwner = reverseFieldOwner.(*models.ATTRIBUTE_VALUE_INTEGER)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastATTRIBUTE_VALUE_INTEGEROwner != nil {
+					idx := slices.Index(pastATTRIBUTE_VALUE_INTEGEROwner.DEFINITION, a_attribute_definition_integer_ref_)
+					pastATTRIBUTE_VALUE_INTEGEROwner.DEFINITION = slices.Delete(pastATTRIBUTE_VALUE_INTEGEROwner.DEFINITION, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _attribute_value_integer := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_VALUE_INTEGER](a_attribute_definition_integer_refFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _attribute_value_integer.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newATTRIBUTE_VALUE_INTEGEROwner := _attribute_value_integer // we have a match
+						if pastATTRIBUTE_VALUE_INTEGEROwner != nil {
+							if newATTRIBUTE_VALUE_INTEGEROwner != pastATTRIBUTE_VALUE_INTEGEROwner {
+								idx := slices.Index(pastATTRIBUTE_VALUE_INTEGEROwner.DEFINITION, a_attribute_definition_integer_ref_)
+								pastATTRIBUTE_VALUE_INTEGEROwner.DEFINITION = slices.Delete(pastATTRIBUTE_VALUE_INTEGEROwner.DEFINITION, idx, idx+1)
+								newATTRIBUTE_VALUE_INTEGEROwner.DEFINITION = append(newATTRIBUTE_VALUE_INTEGEROwner.DEFINITION, a_attribute_definition_integer_ref_)
+							}
+						} else {
+							newATTRIBUTE_VALUE_INTEGEROwner.DEFINITION = append(newATTRIBUTE_VALUE_INTEGEROwner.DEFINITION, a_attribute_definition_integer_ref_)
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// manage the suppress operation
+	if a_attribute_definition_integer_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_attribute_definition_integer_ref_.Unstage(a_attribute_definition_integer_refFormCallback.probe.stageOfInterest)
+	}
+
+	a_attribute_definition_integer_refFormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.A_ATTRIBUTE_DEFINITION_INTEGER_REF](
+		a_attribute_definition_integer_refFormCallback.probe,
+	)
+	a_attribute_definition_integer_refFormCallback.probe.tableStage.Commit()
+
+	// display a new form by reset the form stage
+	if a_attribute_definition_integer_refFormCallback.CreationMode || a_attribute_definition_integer_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_attribute_definition_integer_refFormCallback.probe.formStage.Reset()
+		newFormGroup := (&table.FormGroup{
+			Name: table.FormGroupDefaultName.ToString(),
+		}).Stage(a_attribute_definition_integer_refFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__A_ATTRIBUTE_DEFINITION_INTEGER_REFFormCallback(
+			nil,
+			a_attribute_definition_integer_refFormCallback.probe,
+			newFormGroup,
+		)
+		a_attribute_definition_integer_ref := new(models.A_ATTRIBUTE_DEFINITION_INTEGER_REF)
+		FillUpForm(a_attribute_definition_integer_ref, newFormGroup, a_attribute_definition_integer_refFormCallback.probe)
+		a_attribute_definition_integer_refFormCallback.probe.formStage.Commit()
+	}
+
+	fillUpTree(a_attribute_definition_integer_refFormCallback.probe)
+}
+func __gong__New__A_ATTRIBUTE_DEFINITION_REAL_REFFormCallback(
+	a_attribute_definition_real_ref *models.A_ATTRIBUTE_DEFINITION_REAL_REF,
+	probe *Probe,
+	formGroup *table.FormGroup,
+) (a_attribute_definition_real_refFormCallback *A_ATTRIBUTE_DEFINITION_REAL_REFFormCallback) {
+	a_attribute_definition_real_refFormCallback = new(A_ATTRIBUTE_DEFINITION_REAL_REFFormCallback)
+	a_attribute_definition_real_refFormCallback.probe = probe
+	a_attribute_definition_real_refFormCallback.a_attribute_definition_real_ref = a_attribute_definition_real_ref
+	a_attribute_definition_real_refFormCallback.formGroup = formGroup
+
+	a_attribute_definition_real_refFormCallback.CreationMode = (a_attribute_definition_real_ref == nil)
+
+	return
+}
+
+type A_ATTRIBUTE_DEFINITION_REAL_REFFormCallback struct {
+	a_attribute_definition_real_ref *models.A_ATTRIBUTE_DEFINITION_REAL_REF
+
+	// If the form call is called on the creation of a new instnace
+	CreationMode bool
+
+	probe *Probe
+
+	formGroup *table.FormGroup
+}
+
+func (a_attribute_definition_real_refFormCallback *A_ATTRIBUTE_DEFINITION_REAL_REFFormCallback) OnSave() {
+
+	log.Println("A_ATTRIBUTE_DEFINITION_REAL_REFFormCallback, OnSave")
+
+	// checkout formStage to have the form group on the stage synchronized with the
+	// back repo (and front repo)
+	a_attribute_definition_real_refFormCallback.probe.formStage.Checkout()
+
+	if a_attribute_definition_real_refFormCallback.a_attribute_definition_real_ref == nil {
+		a_attribute_definition_real_refFormCallback.a_attribute_definition_real_ref = new(models.A_ATTRIBUTE_DEFINITION_REAL_REF).Stage(a_attribute_definition_real_refFormCallback.probe.stageOfInterest)
+	}
+	a_attribute_definition_real_ref_ := a_attribute_definition_real_refFormCallback.a_attribute_definition_real_ref
+	_ = a_attribute_definition_real_ref_
+
+	for _, formDiv := range a_attribute_definition_real_refFormCallback.formGroup.FormDivs {
+		switch formDiv.Name {
+		// insertion point per field
+		case "Name":
+			FormDivBasicFieldToField(&(a_attribute_definition_real_ref_.Name), formDiv)
+		case "ATTRIBUTE_DEFINITION_REAL_REF":
+			FormDivBasicFieldToField(&(a_attribute_definition_real_ref_.ATTRIBUTE_DEFINITION_REAL_REF), formDiv)
+		case "ATTRIBUTE_VALUE_REAL:DEFINITION":
+			// we need to retrieve the field owner before the change
+			var pastATTRIBUTE_VALUE_REALOwner *models.ATTRIBUTE_VALUE_REAL
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "ATTRIBUTE_VALUE_REAL"
+			rf.Fieldname = "DEFINITION"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				a_attribute_definition_real_refFormCallback.probe.stageOfInterest,
+				a_attribute_definition_real_refFormCallback.probe.backRepoOfInterest,
+				a_attribute_definition_real_ref_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastATTRIBUTE_VALUE_REALOwner = reverseFieldOwner.(*models.ATTRIBUTE_VALUE_REAL)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastATTRIBUTE_VALUE_REALOwner != nil {
+					idx := slices.Index(pastATTRIBUTE_VALUE_REALOwner.DEFINITION, a_attribute_definition_real_ref_)
+					pastATTRIBUTE_VALUE_REALOwner.DEFINITION = slices.Delete(pastATTRIBUTE_VALUE_REALOwner.DEFINITION, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _attribute_value_real := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_VALUE_REAL](a_attribute_definition_real_refFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _attribute_value_real.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newATTRIBUTE_VALUE_REALOwner := _attribute_value_real // we have a match
+						if pastATTRIBUTE_VALUE_REALOwner != nil {
+							if newATTRIBUTE_VALUE_REALOwner != pastATTRIBUTE_VALUE_REALOwner {
+								idx := slices.Index(pastATTRIBUTE_VALUE_REALOwner.DEFINITION, a_attribute_definition_real_ref_)
+								pastATTRIBUTE_VALUE_REALOwner.DEFINITION = slices.Delete(pastATTRIBUTE_VALUE_REALOwner.DEFINITION, idx, idx+1)
+								newATTRIBUTE_VALUE_REALOwner.DEFINITION = append(newATTRIBUTE_VALUE_REALOwner.DEFINITION, a_attribute_definition_real_ref_)
+							}
+						} else {
+							newATTRIBUTE_VALUE_REALOwner.DEFINITION = append(newATTRIBUTE_VALUE_REALOwner.DEFINITION, a_attribute_definition_real_ref_)
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// manage the suppress operation
+	if a_attribute_definition_real_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_attribute_definition_real_ref_.Unstage(a_attribute_definition_real_refFormCallback.probe.stageOfInterest)
+	}
+
+	a_attribute_definition_real_refFormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.A_ATTRIBUTE_DEFINITION_REAL_REF](
+		a_attribute_definition_real_refFormCallback.probe,
+	)
+	a_attribute_definition_real_refFormCallback.probe.tableStage.Commit()
+
+	// display a new form by reset the form stage
+	if a_attribute_definition_real_refFormCallback.CreationMode || a_attribute_definition_real_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_attribute_definition_real_refFormCallback.probe.formStage.Reset()
+		newFormGroup := (&table.FormGroup{
+			Name: table.FormGroupDefaultName.ToString(),
+		}).Stage(a_attribute_definition_real_refFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__A_ATTRIBUTE_DEFINITION_REAL_REFFormCallback(
+			nil,
+			a_attribute_definition_real_refFormCallback.probe,
+			newFormGroup,
+		)
+		a_attribute_definition_real_ref := new(models.A_ATTRIBUTE_DEFINITION_REAL_REF)
+		FillUpForm(a_attribute_definition_real_ref, newFormGroup, a_attribute_definition_real_refFormCallback.probe)
+		a_attribute_definition_real_refFormCallback.probe.formStage.Commit()
+	}
+
+	fillUpTree(a_attribute_definition_real_refFormCallback.probe)
+}
+func __gong__New__A_ATTRIBUTE_DEFINITION_STRING_REFFormCallback(
+	a_attribute_definition_string_ref *models.A_ATTRIBUTE_DEFINITION_STRING_REF,
+	probe *Probe,
+	formGroup *table.FormGroup,
+) (a_attribute_definition_string_refFormCallback *A_ATTRIBUTE_DEFINITION_STRING_REFFormCallback) {
+	a_attribute_definition_string_refFormCallback = new(A_ATTRIBUTE_DEFINITION_STRING_REFFormCallback)
+	a_attribute_definition_string_refFormCallback.probe = probe
+	a_attribute_definition_string_refFormCallback.a_attribute_definition_string_ref = a_attribute_definition_string_ref
+	a_attribute_definition_string_refFormCallback.formGroup = formGroup
+
+	a_attribute_definition_string_refFormCallback.CreationMode = (a_attribute_definition_string_ref == nil)
+
+	return
+}
+
+type A_ATTRIBUTE_DEFINITION_STRING_REFFormCallback struct {
+	a_attribute_definition_string_ref *models.A_ATTRIBUTE_DEFINITION_STRING_REF
+
+	// If the form call is called on the creation of a new instnace
+	CreationMode bool
+
+	probe *Probe
+
+	formGroup *table.FormGroup
+}
+
+func (a_attribute_definition_string_refFormCallback *A_ATTRIBUTE_DEFINITION_STRING_REFFormCallback) OnSave() {
+
+	log.Println("A_ATTRIBUTE_DEFINITION_STRING_REFFormCallback, OnSave")
+
+	// checkout formStage to have the form group on the stage synchronized with the
+	// back repo (and front repo)
+	a_attribute_definition_string_refFormCallback.probe.formStage.Checkout()
+
+	if a_attribute_definition_string_refFormCallback.a_attribute_definition_string_ref == nil {
+		a_attribute_definition_string_refFormCallback.a_attribute_definition_string_ref = new(models.A_ATTRIBUTE_DEFINITION_STRING_REF).Stage(a_attribute_definition_string_refFormCallback.probe.stageOfInterest)
+	}
+	a_attribute_definition_string_ref_ := a_attribute_definition_string_refFormCallback.a_attribute_definition_string_ref
+	_ = a_attribute_definition_string_ref_
+
+	for _, formDiv := range a_attribute_definition_string_refFormCallback.formGroup.FormDivs {
+		switch formDiv.Name {
+		// insertion point per field
+		case "Name":
+			FormDivBasicFieldToField(&(a_attribute_definition_string_ref_.Name), formDiv)
+		case "ATTRIBUTE_DEFINITION_STRING_REF":
+			FormDivBasicFieldToField(&(a_attribute_definition_string_ref_.ATTRIBUTE_DEFINITION_STRING_REF), formDiv)
+		case "ATTRIBUTE_VALUE_STRING:DEFINITION":
+			// we need to retrieve the field owner before the change
+			var pastATTRIBUTE_VALUE_STRINGOwner *models.ATTRIBUTE_VALUE_STRING
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "ATTRIBUTE_VALUE_STRING"
+			rf.Fieldname = "DEFINITION"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				a_attribute_definition_string_refFormCallback.probe.stageOfInterest,
+				a_attribute_definition_string_refFormCallback.probe.backRepoOfInterest,
+				a_attribute_definition_string_ref_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastATTRIBUTE_VALUE_STRINGOwner = reverseFieldOwner.(*models.ATTRIBUTE_VALUE_STRING)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastATTRIBUTE_VALUE_STRINGOwner != nil {
+					idx := slices.Index(pastATTRIBUTE_VALUE_STRINGOwner.DEFINITION, a_attribute_definition_string_ref_)
+					pastATTRIBUTE_VALUE_STRINGOwner.DEFINITION = slices.Delete(pastATTRIBUTE_VALUE_STRINGOwner.DEFINITION, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _attribute_value_string := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_VALUE_STRING](a_attribute_definition_string_refFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _attribute_value_string.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newATTRIBUTE_VALUE_STRINGOwner := _attribute_value_string // we have a match
+						if pastATTRIBUTE_VALUE_STRINGOwner != nil {
+							if newATTRIBUTE_VALUE_STRINGOwner != pastATTRIBUTE_VALUE_STRINGOwner {
+								idx := slices.Index(pastATTRIBUTE_VALUE_STRINGOwner.DEFINITION, a_attribute_definition_string_ref_)
+								pastATTRIBUTE_VALUE_STRINGOwner.DEFINITION = slices.Delete(pastATTRIBUTE_VALUE_STRINGOwner.DEFINITION, idx, idx+1)
+								newATTRIBUTE_VALUE_STRINGOwner.DEFINITION = append(newATTRIBUTE_VALUE_STRINGOwner.DEFINITION, a_attribute_definition_string_ref_)
+							}
+						} else {
+							newATTRIBUTE_VALUE_STRINGOwner.DEFINITION = append(newATTRIBUTE_VALUE_STRINGOwner.DEFINITION, a_attribute_definition_string_ref_)
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// manage the suppress operation
+	if a_attribute_definition_string_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_attribute_definition_string_ref_.Unstage(a_attribute_definition_string_refFormCallback.probe.stageOfInterest)
+	}
+
+	a_attribute_definition_string_refFormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.A_ATTRIBUTE_DEFINITION_STRING_REF](
+		a_attribute_definition_string_refFormCallback.probe,
+	)
+	a_attribute_definition_string_refFormCallback.probe.tableStage.Commit()
+
+	// display a new form by reset the form stage
+	if a_attribute_definition_string_refFormCallback.CreationMode || a_attribute_definition_string_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_attribute_definition_string_refFormCallback.probe.formStage.Reset()
+		newFormGroup := (&table.FormGroup{
+			Name: table.FormGroupDefaultName.ToString(),
+		}).Stage(a_attribute_definition_string_refFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__A_ATTRIBUTE_DEFINITION_STRING_REFFormCallback(
+			nil,
+			a_attribute_definition_string_refFormCallback.probe,
+			newFormGroup,
+		)
+		a_attribute_definition_string_ref := new(models.A_ATTRIBUTE_DEFINITION_STRING_REF)
+		FillUpForm(a_attribute_definition_string_ref, newFormGroup, a_attribute_definition_string_refFormCallback.probe)
+		a_attribute_definition_string_refFormCallback.probe.formStage.Commit()
+	}
+
+	fillUpTree(a_attribute_definition_string_refFormCallback.probe)
+}
+func __gong__New__A_ATTRIBUTE_DEFINITION_XHTML_REFFormCallback(
+	a_attribute_definition_xhtml_ref *models.A_ATTRIBUTE_DEFINITION_XHTML_REF,
+	probe *Probe,
+	formGroup *table.FormGroup,
+) (a_attribute_definition_xhtml_refFormCallback *A_ATTRIBUTE_DEFINITION_XHTML_REFFormCallback) {
+	a_attribute_definition_xhtml_refFormCallback = new(A_ATTRIBUTE_DEFINITION_XHTML_REFFormCallback)
+	a_attribute_definition_xhtml_refFormCallback.probe = probe
+	a_attribute_definition_xhtml_refFormCallback.a_attribute_definition_xhtml_ref = a_attribute_definition_xhtml_ref
+	a_attribute_definition_xhtml_refFormCallback.formGroup = formGroup
+
+	a_attribute_definition_xhtml_refFormCallback.CreationMode = (a_attribute_definition_xhtml_ref == nil)
+
+	return
+}
+
+type A_ATTRIBUTE_DEFINITION_XHTML_REFFormCallback struct {
+	a_attribute_definition_xhtml_ref *models.A_ATTRIBUTE_DEFINITION_XHTML_REF
+
+	// If the form call is called on the creation of a new instnace
+	CreationMode bool
+
+	probe *Probe
+
+	formGroup *table.FormGroup
+}
+
+func (a_attribute_definition_xhtml_refFormCallback *A_ATTRIBUTE_DEFINITION_XHTML_REFFormCallback) OnSave() {
+
+	log.Println("A_ATTRIBUTE_DEFINITION_XHTML_REFFormCallback, OnSave")
+
+	// checkout formStage to have the form group on the stage synchronized with the
+	// back repo (and front repo)
+	a_attribute_definition_xhtml_refFormCallback.probe.formStage.Checkout()
+
+	if a_attribute_definition_xhtml_refFormCallback.a_attribute_definition_xhtml_ref == nil {
+		a_attribute_definition_xhtml_refFormCallback.a_attribute_definition_xhtml_ref = new(models.A_ATTRIBUTE_DEFINITION_XHTML_REF).Stage(a_attribute_definition_xhtml_refFormCallback.probe.stageOfInterest)
+	}
+	a_attribute_definition_xhtml_ref_ := a_attribute_definition_xhtml_refFormCallback.a_attribute_definition_xhtml_ref
+	_ = a_attribute_definition_xhtml_ref_
+
+	for _, formDiv := range a_attribute_definition_xhtml_refFormCallback.formGroup.FormDivs {
+		switch formDiv.Name {
+		// insertion point per field
+		case "Name":
+			FormDivBasicFieldToField(&(a_attribute_definition_xhtml_ref_.Name), formDiv)
+		case "ATTRIBUTE_DEFINITION_XHTML_REF":
+			FormDivBasicFieldToField(&(a_attribute_definition_xhtml_ref_.ATTRIBUTE_DEFINITION_XHTML_REF), formDiv)
+		case "ATTRIBUTE_VALUE_XHTML:DEFINITION":
+			// we need to retrieve the field owner before the change
+			var pastATTRIBUTE_VALUE_XHTMLOwner *models.ATTRIBUTE_VALUE_XHTML
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "ATTRIBUTE_VALUE_XHTML"
+			rf.Fieldname = "DEFINITION"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				a_attribute_definition_xhtml_refFormCallback.probe.stageOfInterest,
+				a_attribute_definition_xhtml_refFormCallback.probe.backRepoOfInterest,
+				a_attribute_definition_xhtml_ref_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastATTRIBUTE_VALUE_XHTMLOwner = reverseFieldOwner.(*models.ATTRIBUTE_VALUE_XHTML)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastATTRIBUTE_VALUE_XHTMLOwner != nil {
+					idx := slices.Index(pastATTRIBUTE_VALUE_XHTMLOwner.DEFINITION, a_attribute_definition_xhtml_ref_)
+					pastATTRIBUTE_VALUE_XHTMLOwner.DEFINITION = slices.Delete(pastATTRIBUTE_VALUE_XHTMLOwner.DEFINITION, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _attribute_value_xhtml := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_VALUE_XHTML](a_attribute_definition_xhtml_refFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _attribute_value_xhtml.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newATTRIBUTE_VALUE_XHTMLOwner := _attribute_value_xhtml // we have a match
+						if pastATTRIBUTE_VALUE_XHTMLOwner != nil {
+							if newATTRIBUTE_VALUE_XHTMLOwner != pastATTRIBUTE_VALUE_XHTMLOwner {
+								idx := slices.Index(pastATTRIBUTE_VALUE_XHTMLOwner.DEFINITION, a_attribute_definition_xhtml_ref_)
+								pastATTRIBUTE_VALUE_XHTMLOwner.DEFINITION = slices.Delete(pastATTRIBUTE_VALUE_XHTMLOwner.DEFINITION, idx, idx+1)
+								newATTRIBUTE_VALUE_XHTMLOwner.DEFINITION = append(newATTRIBUTE_VALUE_XHTMLOwner.DEFINITION, a_attribute_definition_xhtml_ref_)
+							}
+						} else {
+							newATTRIBUTE_VALUE_XHTMLOwner.DEFINITION = append(newATTRIBUTE_VALUE_XHTMLOwner.DEFINITION, a_attribute_definition_xhtml_ref_)
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// manage the suppress operation
+	if a_attribute_definition_xhtml_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_attribute_definition_xhtml_ref_.Unstage(a_attribute_definition_xhtml_refFormCallback.probe.stageOfInterest)
+	}
+
+	a_attribute_definition_xhtml_refFormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.A_ATTRIBUTE_DEFINITION_XHTML_REF](
+		a_attribute_definition_xhtml_refFormCallback.probe,
+	)
+	a_attribute_definition_xhtml_refFormCallback.probe.tableStage.Commit()
+
+	// display a new form by reset the form stage
+	if a_attribute_definition_xhtml_refFormCallback.CreationMode || a_attribute_definition_xhtml_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_attribute_definition_xhtml_refFormCallback.probe.formStage.Reset()
+		newFormGroup := (&table.FormGroup{
+			Name: table.FormGroupDefaultName.ToString(),
+		}).Stage(a_attribute_definition_xhtml_refFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__A_ATTRIBUTE_DEFINITION_XHTML_REFFormCallback(
+			nil,
+			a_attribute_definition_xhtml_refFormCallback.probe,
+			newFormGroup,
+		)
+		a_attribute_definition_xhtml_ref := new(models.A_ATTRIBUTE_DEFINITION_XHTML_REF)
+		FillUpForm(a_attribute_definition_xhtml_ref, newFormGroup, a_attribute_definition_xhtml_refFormCallback.probe)
+		a_attribute_definition_xhtml_refFormCallback.probe.formStage.Commit()
+	}
+
+	fillUpTree(a_attribute_definition_xhtml_refFormCallback.probe)
+}
+func __gong__New__A_ATTRIBUTE_VALUE_BOOLEANFormCallback(
+	a_attribute_value_boolean *models.A_ATTRIBUTE_VALUE_BOOLEAN,
+	probe *Probe,
+	formGroup *table.FormGroup,
+) (a_attribute_value_booleanFormCallback *A_ATTRIBUTE_VALUE_BOOLEANFormCallback) {
+	a_attribute_value_booleanFormCallback = new(A_ATTRIBUTE_VALUE_BOOLEANFormCallback)
+	a_attribute_value_booleanFormCallback.probe = probe
+	a_attribute_value_booleanFormCallback.a_attribute_value_boolean = a_attribute_value_boolean
+	a_attribute_value_booleanFormCallback.formGroup = formGroup
+
+	a_attribute_value_booleanFormCallback.CreationMode = (a_attribute_value_boolean == nil)
+
+	return
+}
+
+type A_ATTRIBUTE_VALUE_BOOLEANFormCallback struct {
+	a_attribute_value_boolean *models.A_ATTRIBUTE_VALUE_BOOLEAN
+
+	// If the form call is called on the creation of a new instnace
+	CreationMode bool
+
+	probe *Probe
+
+	formGroup *table.FormGroup
+}
+
+func (a_attribute_value_booleanFormCallback *A_ATTRIBUTE_VALUE_BOOLEANFormCallback) OnSave() {
+
+	log.Println("A_ATTRIBUTE_VALUE_BOOLEANFormCallback, OnSave")
+
+	// checkout formStage to have the form group on the stage synchronized with the
+	// back repo (and front repo)
+	a_attribute_value_booleanFormCallback.probe.formStage.Checkout()
+
+	if a_attribute_value_booleanFormCallback.a_attribute_value_boolean == nil {
+		a_attribute_value_booleanFormCallback.a_attribute_value_boolean = new(models.A_ATTRIBUTE_VALUE_BOOLEAN).Stage(a_attribute_value_booleanFormCallback.probe.stageOfInterest)
+	}
+	a_attribute_value_boolean_ := a_attribute_value_booleanFormCallback.a_attribute_value_boolean
+	_ = a_attribute_value_boolean_
+
+	for _, formDiv := range a_attribute_value_booleanFormCallback.formGroup.FormDivs {
+		switch formDiv.Name {
+		// insertion point per field
+		case "Name":
+			FormDivBasicFieldToField(&(a_attribute_value_boolean_.Name), formDiv)
+		case "ATTRIBUTE_DEFINITION_BOOLEAN:DEFAULT_VALUE":
+			// we need to retrieve the field owner before the change
+			var pastATTRIBUTE_DEFINITION_BOOLEANOwner *models.ATTRIBUTE_DEFINITION_BOOLEAN
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "ATTRIBUTE_DEFINITION_BOOLEAN"
+			rf.Fieldname = "DEFAULT_VALUE"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				a_attribute_value_booleanFormCallback.probe.stageOfInterest,
+				a_attribute_value_booleanFormCallback.probe.backRepoOfInterest,
+				a_attribute_value_boolean_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastATTRIBUTE_DEFINITION_BOOLEANOwner = reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_BOOLEAN)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastATTRIBUTE_DEFINITION_BOOLEANOwner != nil {
+					idx := slices.Index(pastATTRIBUTE_DEFINITION_BOOLEANOwner.DEFAULT_VALUE, a_attribute_value_boolean_)
+					pastATTRIBUTE_DEFINITION_BOOLEANOwner.DEFAULT_VALUE = slices.Delete(pastATTRIBUTE_DEFINITION_BOOLEANOwner.DEFAULT_VALUE, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _attribute_definition_boolean := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_BOOLEAN](a_attribute_value_booleanFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _attribute_definition_boolean.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newATTRIBUTE_DEFINITION_BOOLEANOwner := _attribute_definition_boolean // we have a match
+						if pastATTRIBUTE_DEFINITION_BOOLEANOwner != nil {
+							if newATTRIBUTE_DEFINITION_BOOLEANOwner != pastATTRIBUTE_DEFINITION_BOOLEANOwner {
+								idx := slices.Index(pastATTRIBUTE_DEFINITION_BOOLEANOwner.DEFAULT_VALUE, a_attribute_value_boolean_)
+								pastATTRIBUTE_DEFINITION_BOOLEANOwner.DEFAULT_VALUE = slices.Delete(pastATTRIBUTE_DEFINITION_BOOLEANOwner.DEFAULT_VALUE, idx, idx+1)
+								newATTRIBUTE_DEFINITION_BOOLEANOwner.DEFAULT_VALUE = append(newATTRIBUTE_DEFINITION_BOOLEANOwner.DEFAULT_VALUE, a_attribute_value_boolean_)
+							}
+						} else {
+							newATTRIBUTE_DEFINITION_BOOLEANOwner.DEFAULT_VALUE = append(newATTRIBUTE_DEFINITION_BOOLEANOwner.DEFAULT_VALUE, a_attribute_value_boolean_)
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// manage the suppress operation
+	if a_attribute_value_booleanFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_attribute_value_boolean_.Unstage(a_attribute_value_booleanFormCallback.probe.stageOfInterest)
+	}
+
+	a_attribute_value_booleanFormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.A_ATTRIBUTE_VALUE_BOOLEAN](
+		a_attribute_value_booleanFormCallback.probe,
+	)
+	a_attribute_value_booleanFormCallback.probe.tableStage.Commit()
+
+	// display a new form by reset the form stage
+	if a_attribute_value_booleanFormCallback.CreationMode || a_attribute_value_booleanFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_attribute_value_booleanFormCallback.probe.formStage.Reset()
+		newFormGroup := (&table.FormGroup{
+			Name: table.FormGroupDefaultName.ToString(),
+		}).Stage(a_attribute_value_booleanFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__A_ATTRIBUTE_VALUE_BOOLEANFormCallback(
+			nil,
+			a_attribute_value_booleanFormCallback.probe,
+			newFormGroup,
+		)
+		a_attribute_value_boolean := new(models.A_ATTRIBUTE_VALUE_BOOLEAN)
+		FillUpForm(a_attribute_value_boolean, newFormGroup, a_attribute_value_booleanFormCallback.probe)
+		a_attribute_value_booleanFormCallback.probe.formStage.Commit()
+	}
+
+	fillUpTree(a_attribute_value_booleanFormCallback.probe)
+}
+func __gong__New__A_ATTRIBUTE_VALUE_DATEFormCallback(
+	a_attribute_value_date *models.A_ATTRIBUTE_VALUE_DATE,
+	probe *Probe,
+	formGroup *table.FormGroup,
+) (a_attribute_value_dateFormCallback *A_ATTRIBUTE_VALUE_DATEFormCallback) {
+	a_attribute_value_dateFormCallback = new(A_ATTRIBUTE_VALUE_DATEFormCallback)
+	a_attribute_value_dateFormCallback.probe = probe
+	a_attribute_value_dateFormCallback.a_attribute_value_date = a_attribute_value_date
+	a_attribute_value_dateFormCallback.formGroup = formGroup
+
+	a_attribute_value_dateFormCallback.CreationMode = (a_attribute_value_date == nil)
+
+	return
+}
+
+type A_ATTRIBUTE_VALUE_DATEFormCallback struct {
+	a_attribute_value_date *models.A_ATTRIBUTE_VALUE_DATE
+
+	// If the form call is called on the creation of a new instnace
+	CreationMode bool
+
+	probe *Probe
+
+	formGroup *table.FormGroup
+}
+
+func (a_attribute_value_dateFormCallback *A_ATTRIBUTE_VALUE_DATEFormCallback) OnSave() {
+
+	log.Println("A_ATTRIBUTE_VALUE_DATEFormCallback, OnSave")
+
+	// checkout formStage to have the form group on the stage synchronized with the
+	// back repo (and front repo)
+	a_attribute_value_dateFormCallback.probe.formStage.Checkout()
+
+	if a_attribute_value_dateFormCallback.a_attribute_value_date == nil {
+		a_attribute_value_dateFormCallback.a_attribute_value_date = new(models.A_ATTRIBUTE_VALUE_DATE).Stage(a_attribute_value_dateFormCallback.probe.stageOfInterest)
+	}
+	a_attribute_value_date_ := a_attribute_value_dateFormCallback.a_attribute_value_date
+	_ = a_attribute_value_date_
+
+	for _, formDiv := range a_attribute_value_dateFormCallback.formGroup.FormDivs {
+		switch formDiv.Name {
+		// insertion point per field
+		case "Name":
+			FormDivBasicFieldToField(&(a_attribute_value_date_.Name), formDiv)
+		case "ATTRIBUTE_DEFINITION_DATE:DEFAULT_VALUE":
+			// we need to retrieve the field owner before the change
+			var pastATTRIBUTE_DEFINITION_DATEOwner *models.ATTRIBUTE_DEFINITION_DATE
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "ATTRIBUTE_DEFINITION_DATE"
+			rf.Fieldname = "DEFAULT_VALUE"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				a_attribute_value_dateFormCallback.probe.stageOfInterest,
+				a_attribute_value_dateFormCallback.probe.backRepoOfInterest,
+				a_attribute_value_date_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastATTRIBUTE_DEFINITION_DATEOwner = reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_DATE)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastATTRIBUTE_DEFINITION_DATEOwner != nil {
+					idx := slices.Index(pastATTRIBUTE_DEFINITION_DATEOwner.DEFAULT_VALUE, a_attribute_value_date_)
+					pastATTRIBUTE_DEFINITION_DATEOwner.DEFAULT_VALUE = slices.Delete(pastATTRIBUTE_DEFINITION_DATEOwner.DEFAULT_VALUE, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _attribute_definition_date := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_DATE](a_attribute_value_dateFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _attribute_definition_date.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newATTRIBUTE_DEFINITION_DATEOwner := _attribute_definition_date // we have a match
+						if pastATTRIBUTE_DEFINITION_DATEOwner != nil {
+							if newATTRIBUTE_DEFINITION_DATEOwner != pastATTRIBUTE_DEFINITION_DATEOwner {
+								idx := slices.Index(pastATTRIBUTE_DEFINITION_DATEOwner.DEFAULT_VALUE, a_attribute_value_date_)
+								pastATTRIBUTE_DEFINITION_DATEOwner.DEFAULT_VALUE = slices.Delete(pastATTRIBUTE_DEFINITION_DATEOwner.DEFAULT_VALUE, idx, idx+1)
+								newATTRIBUTE_DEFINITION_DATEOwner.DEFAULT_VALUE = append(newATTRIBUTE_DEFINITION_DATEOwner.DEFAULT_VALUE, a_attribute_value_date_)
+							}
+						} else {
+							newATTRIBUTE_DEFINITION_DATEOwner.DEFAULT_VALUE = append(newATTRIBUTE_DEFINITION_DATEOwner.DEFAULT_VALUE, a_attribute_value_date_)
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// manage the suppress operation
+	if a_attribute_value_dateFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_attribute_value_date_.Unstage(a_attribute_value_dateFormCallback.probe.stageOfInterest)
+	}
+
+	a_attribute_value_dateFormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.A_ATTRIBUTE_VALUE_DATE](
+		a_attribute_value_dateFormCallback.probe,
+	)
+	a_attribute_value_dateFormCallback.probe.tableStage.Commit()
+
+	// display a new form by reset the form stage
+	if a_attribute_value_dateFormCallback.CreationMode || a_attribute_value_dateFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_attribute_value_dateFormCallback.probe.formStage.Reset()
+		newFormGroup := (&table.FormGroup{
+			Name: table.FormGroupDefaultName.ToString(),
+		}).Stage(a_attribute_value_dateFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__A_ATTRIBUTE_VALUE_DATEFormCallback(
+			nil,
+			a_attribute_value_dateFormCallback.probe,
+			newFormGroup,
+		)
+		a_attribute_value_date := new(models.A_ATTRIBUTE_VALUE_DATE)
+		FillUpForm(a_attribute_value_date, newFormGroup, a_attribute_value_dateFormCallback.probe)
+		a_attribute_value_dateFormCallback.probe.formStage.Commit()
+	}
+
+	fillUpTree(a_attribute_value_dateFormCallback.probe)
+}
+func __gong__New__A_ATTRIBUTE_VALUE_ENUMERATIONFormCallback(
+	a_attribute_value_enumeration *models.A_ATTRIBUTE_VALUE_ENUMERATION,
+	probe *Probe,
+	formGroup *table.FormGroup,
+) (a_attribute_value_enumerationFormCallback *A_ATTRIBUTE_VALUE_ENUMERATIONFormCallback) {
+	a_attribute_value_enumerationFormCallback = new(A_ATTRIBUTE_VALUE_ENUMERATIONFormCallback)
+	a_attribute_value_enumerationFormCallback.probe = probe
+	a_attribute_value_enumerationFormCallback.a_attribute_value_enumeration = a_attribute_value_enumeration
+	a_attribute_value_enumerationFormCallback.formGroup = formGroup
+
+	a_attribute_value_enumerationFormCallback.CreationMode = (a_attribute_value_enumeration == nil)
+
+	return
+}
+
+type A_ATTRIBUTE_VALUE_ENUMERATIONFormCallback struct {
+	a_attribute_value_enumeration *models.A_ATTRIBUTE_VALUE_ENUMERATION
+
+	// If the form call is called on the creation of a new instnace
+	CreationMode bool
+
+	probe *Probe
+
+	formGroup *table.FormGroup
+}
+
+func (a_attribute_value_enumerationFormCallback *A_ATTRIBUTE_VALUE_ENUMERATIONFormCallback) OnSave() {
+
+	log.Println("A_ATTRIBUTE_VALUE_ENUMERATIONFormCallback, OnSave")
+
+	// checkout formStage to have the form group on the stage synchronized with the
+	// back repo (and front repo)
+	a_attribute_value_enumerationFormCallback.probe.formStage.Checkout()
+
+	if a_attribute_value_enumerationFormCallback.a_attribute_value_enumeration == nil {
+		a_attribute_value_enumerationFormCallback.a_attribute_value_enumeration = new(models.A_ATTRIBUTE_VALUE_ENUMERATION).Stage(a_attribute_value_enumerationFormCallback.probe.stageOfInterest)
+	}
+	a_attribute_value_enumeration_ := a_attribute_value_enumerationFormCallback.a_attribute_value_enumeration
+	_ = a_attribute_value_enumeration_
+
+	for _, formDiv := range a_attribute_value_enumerationFormCallback.formGroup.FormDivs {
+		switch formDiv.Name {
+		// insertion point per field
+		case "Name":
+			FormDivBasicFieldToField(&(a_attribute_value_enumeration_.Name), formDiv)
+		case "ATTRIBUTE_DEFINITION_ENUMERATION:DEFAULT_VALUE":
+			// we need to retrieve the field owner before the change
+			var pastATTRIBUTE_DEFINITION_ENUMERATIONOwner *models.ATTRIBUTE_DEFINITION_ENUMERATION
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "ATTRIBUTE_DEFINITION_ENUMERATION"
+			rf.Fieldname = "DEFAULT_VALUE"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				a_attribute_value_enumerationFormCallback.probe.stageOfInterest,
+				a_attribute_value_enumerationFormCallback.probe.backRepoOfInterest,
+				a_attribute_value_enumeration_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastATTRIBUTE_DEFINITION_ENUMERATIONOwner = reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_ENUMERATION)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastATTRIBUTE_DEFINITION_ENUMERATIONOwner != nil {
+					idx := slices.Index(pastATTRIBUTE_DEFINITION_ENUMERATIONOwner.DEFAULT_VALUE, a_attribute_value_enumeration_)
+					pastATTRIBUTE_DEFINITION_ENUMERATIONOwner.DEFAULT_VALUE = slices.Delete(pastATTRIBUTE_DEFINITION_ENUMERATIONOwner.DEFAULT_VALUE, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _attribute_definition_enumeration := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_ENUMERATION](a_attribute_value_enumerationFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _attribute_definition_enumeration.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newATTRIBUTE_DEFINITION_ENUMERATIONOwner := _attribute_definition_enumeration // we have a match
+						if pastATTRIBUTE_DEFINITION_ENUMERATIONOwner != nil {
+							if newATTRIBUTE_DEFINITION_ENUMERATIONOwner != pastATTRIBUTE_DEFINITION_ENUMERATIONOwner {
+								idx := slices.Index(pastATTRIBUTE_DEFINITION_ENUMERATIONOwner.DEFAULT_VALUE, a_attribute_value_enumeration_)
+								pastATTRIBUTE_DEFINITION_ENUMERATIONOwner.DEFAULT_VALUE = slices.Delete(pastATTRIBUTE_DEFINITION_ENUMERATIONOwner.DEFAULT_VALUE, idx, idx+1)
+								newATTRIBUTE_DEFINITION_ENUMERATIONOwner.DEFAULT_VALUE = append(newATTRIBUTE_DEFINITION_ENUMERATIONOwner.DEFAULT_VALUE, a_attribute_value_enumeration_)
+							}
+						} else {
+							newATTRIBUTE_DEFINITION_ENUMERATIONOwner.DEFAULT_VALUE = append(newATTRIBUTE_DEFINITION_ENUMERATIONOwner.DEFAULT_VALUE, a_attribute_value_enumeration_)
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// manage the suppress operation
+	if a_attribute_value_enumerationFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_attribute_value_enumeration_.Unstage(a_attribute_value_enumerationFormCallback.probe.stageOfInterest)
+	}
+
+	a_attribute_value_enumerationFormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.A_ATTRIBUTE_VALUE_ENUMERATION](
+		a_attribute_value_enumerationFormCallback.probe,
+	)
+	a_attribute_value_enumerationFormCallback.probe.tableStage.Commit()
+
+	// display a new form by reset the form stage
+	if a_attribute_value_enumerationFormCallback.CreationMode || a_attribute_value_enumerationFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_attribute_value_enumerationFormCallback.probe.formStage.Reset()
+		newFormGroup := (&table.FormGroup{
+			Name: table.FormGroupDefaultName.ToString(),
+		}).Stage(a_attribute_value_enumerationFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__A_ATTRIBUTE_VALUE_ENUMERATIONFormCallback(
+			nil,
+			a_attribute_value_enumerationFormCallback.probe,
+			newFormGroup,
+		)
+		a_attribute_value_enumeration := new(models.A_ATTRIBUTE_VALUE_ENUMERATION)
+		FillUpForm(a_attribute_value_enumeration, newFormGroup, a_attribute_value_enumerationFormCallback.probe)
+		a_attribute_value_enumerationFormCallback.probe.formStage.Commit()
+	}
+
+	fillUpTree(a_attribute_value_enumerationFormCallback.probe)
+}
+func __gong__New__A_ATTRIBUTE_VALUE_INTEGERFormCallback(
+	a_attribute_value_integer *models.A_ATTRIBUTE_VALUE_INTEGER,
+	probe *Probe,
+	formGroup *table.FormGroup,
+) (a_attribute_value_integerFormCallback *A_ATTRIBUTE_VALUE_INTEGERFormCallback) {
+	a_attribute_value_integerFormCallback = new(A_ATTRIBUTE_VALUE_INTEGERFormCallback)
+	a_attribute_value_integerFormCallback.probe = probe
+	a_attribute_value_integerFormCallback.a_attribute_value_integer = a_attribute_value_integer
+	a_attribute_value_integerFormCallback.formGroup = formGroup
+
+	a_attribute_value_integerFormCallback.CreationMode = (a_attribute_value_integer == nil)
+
+	return
+}
+
+type A_ATTRIBUTE_VALUE_INTEGERFormCallback struct {
+	a_attribute_value_integer *models.A_ATTRIBUTE_VALUE_INTEGER
+
+	// If the form call is called on the creation of a new instnace
+	CreationMode bool
+
+	probe *Probe
+
+	formGroup *table.FormGroup
+}
+
+func (a_attribute_value_integerFormCallback *A_ATTRIBUTE_VALUE_INTEGERFormCallback) OnSave() {
+
+	log.Println("A_ATTRIBUTE_VALUE_INTEGERFormCallback, OnSave")
+
+	// checkout formStage to have the form group on the stage synchronized with the
+	// back repo (and front repo)
+	a_attribute_value_integerFormCallback.probe.formStage.Checkout()
+
+	if a_attribute_value_integerFormCallback.a_attribute_value_integer == nil {
+		a_attribute_value_integerFormCallback.a_attribute_value_integer = new(models.A_ATTRIBUTE_VALUE_INTEGER).Stage(a_attribute_value_integerFormCallback.probe.stageOfInterest)
+	}
+	a_attribute_value_integer_ := a_attribute_value_integerFormCallback.a_attribute_value_integer
+	_ = a_attribute_value_integer_
+
+	for _, formDiv := range a_attribute_value_integerFormCallback.formGroup.FormDivs {
+		switch formDiv.Name {
+		// insertion point per field
+		case "Name":
+			FormDivBasicFieldToField(&(a_attribute_value_integer_.Name), formDiv)
+		case "ATTRIBUTE_DEFINITION_INTEGER:DEFAULT_VALUE":
+			// we need to retrieve the field owner before the change
+			var pastATTRIBUTE_DEFINITION_INTEGEROwner *models.ATTRIBUTE_DEFINITION_INTEGER
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "ATTRIBUTE_DEFINITION_INTEGER"
+			rf.Fieldname = "DEFAULT_VALUE"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				a_attribute_value_integerFormCallback.probe.stageOfInterest,
+				a_attribute_value_integerFormCallback.probe.backRepoOfInterest,
+				a_attribute_value_integer_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastATTRIBUTE_DEFINITION_INTEGEROwner = reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_INTEGER)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastATTRIBUTE_DEFINITION_INTEGEROwner != nil {
+					idx := slices.Index(pastATTRIBUTE_DEFINITION_INTEGEROwner.DEFAULT_VALUE, a_attribute_value_integer_)
+					pastATTRIBUTE_DEFINITION_INTEGEROwner.DEFAULT_VALUE = slices.Delete(pastATTRIBUTE_DEFINITION_INTEGEROwner.DEFAULT_VALUE, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _attribute_definition_integer := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_INTEGER](a_attribute_value_integerFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _attribute_definition_integer.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newATTRIBUTE_DEFINITION_INTEGEROwner := _attribute_definition_integer // we have a match
+						if pastATTRIBUTE_DEFINITION_INTEGEROwner != nil {
+							if newATTRIBUTE_DEFINITION_INTEGEROwner != pastATTRIBUTE_DEFINITION_INTEGEROwner {
+								idx := slices.Index(pastATTRIBUTE_DEFINITION_INTEGEROwner.DEFAULT_VALUE, a_attribute_value_integer_)
+								pastATTRIBUTE_DEFINITION_INTEGEROwner.DEFAULT_VALUE = slices.Delete(pastATTRIBUTE_DEFINITION_INTEGEROwner.DEFAULT_VALUE, idx, idx+1)
+								newATTRIBUTE_DEFINITION_INTEGEROwner.DEFAULT_VALUE = append(newATTRIBUTE_DEFINITION_INTEGEROwner.DEFAULT_VALUE, a_attribute_value_integer_)
+							}
+						} else {
+							newATTRIBUTE_DEFINITION_INTEGEROwner.DEFAULT_VALUE = append(newATTRIBUTE_DEFINITION_INTEGEROwner.DEFAULT_VALUE, a_attribute_value_integer_)
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// manage the suppress operation
+	if a_attribute_value_integerFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_attribute_value_integer_.Unstage(a_attribute_value_integerFormCallback.probe.stageOfInterest)
+	}
+
+	a_attribute_value_integerFormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.A_ATTRIBUTE_VALUE_INTEGER](
+		a_attribute_value_integerFormCallback.probe,
+	)
+	a_attribute_value_integerFormCallback.probe.tableStage.Commit()
+
+	// display a new form by reset the form stage
+	if a_attribute_value_integerFormCallback.CreationMode || a_attribute_value_integerFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_attribute_value_integerFormCallback.probe.formStage.Reset()
+		newFormGroup := (&table.FormGroup{
+			Name: table.FormGroupDefaultName.ToString(),
+		}).Stage(a_attribute_value_integerFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__A_ATTRIBUTE_VALUE_INTEGERFormCallback(
+			nil,
+			a_attribute_value_integerFormCallback.probe,
+			newFormGroup,
+		)
+		a_attribute_value_integer := new(models.A_ATTRIBUTE_VALUE_INTEGER)
+		FillUpForm(a_attribute_value_integer, newFormGroup, a_attribute_value_integerFormCallback.probe)
+		a_attribute_value_integerFormCallback.probe.formStage.Commit()
+	}
+
+	fillUpTree(a_attribute_value_integerFormCallback.probe)
+}
+func __gong__New__A_ATTRIBUTE_VALUE_REALFormCallback(
+	a_attribute_value_real *models.A_ATTRIBUTE_VALUE_REAL,
+	probe *Probe,
+	formGroup *table.FormGroup,
+) (a_attribute_value_realFormCallback *A_ATTRIBUTE_VALUE_REALFormCallback) {
+	a_attribute_value_realFormCallback = new(A_ATTRIBUTE_VALUE_REALFormCallback)
+	a_attribute_value_realFormCallback.probe = probe
+	a_attribute_value_realFormCallback.a_attribute_value_real = a_attribute_value_real
+	a_attribute_value_realFormCallback.formGroup = formGroup
+
+	a_attribute_value_realFormCallback.CreationMode = (a_attribute_value_real == nil)
+
+	return
+}
+
+type A_ATTRIBUTE_VALUE_REALFormCallback struct {
+	a_attribute_value_real *models.A_ATTRIBUTE_VALUE_REAL
+
+	// If the form call is called on the creation of a new instnace
+	CreationMode bool
+
+	probe *Probe
+
+	formGroup *table.FormGroup
+}
+
+func (a_attribute_value_realFormCallback *A_ATTRIBUTE_VALUE_REALFormCallback) OnSave() {
+
+	log.Println("A_ATTRIBUTE_VALUE_REALFormCallback, OnSave")
+
+	// checkout formStage to have the form group on the stage synchronized with the
+	// back repo (and front repo)
+	a_attribute_value_realFormCallback.probe.formStage.Checkout()
+
+	if a_attribute_value_realFormCallback.a_attribute_value_real == nil {
+		a_attribute_value_realFormCallback.a_attribute_value_real = new(models.A_ATTRIBUTE_VALUE_REAL).Stage(a_attribute_value_realFormCallback.probe.stageOfInterest)
+	}
+	a_attribute_value_real_ := a_attribute_value_realFormCallback.a_attribute_value_real
+	_ = a_attribute_value_real_
+
+	for _, formDiv := range a_attribute_value_realFormCallback.formGroup.FormDivs {
+		switch formDiv.Name {
+		// insertion point per field
+		case "Name":
+			FormDivBasicFieldToField(&(a_attribute_value_real_.Name), formDiv)
+		case "ATTRIBUTE_DEFINITION_REAL:DEFAULT_VALUE":
+			// we need to retrieve the field owner before the change
+			var pastATTRIBUTE_DEFINITION_REALOwner *models.ATTRIBUTE_DEFINITION_REAL
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "ATTRIBUTE_DEFINITION_REAL"
+			rf.Fieldname = "DEFAULT_VALUE"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				a_attribute_value_realFormCallback.probe.stageOfInterest,
+				a_attribute_value_realFormCallback.probe.backRepoOfInterest,
+				a_attribute_value_real_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastATTRIBUTE_DEFINITION_REALOwner = reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_REAL)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastATTRIBUTE_DEFINITION_REALOwner != nil {
+					idx := slices.Index(pastATTRIBUTE_DEFINITION_REALOwner.DEFAULT_VALUE, a_attribute_value_real_)
+					pastATTRIBUTE_DEFINITION_REALOwner.DEFAULT_VALUE = slices.Delete(pastATTRIBUTE_DEFINITION_REALOwner.DEFAULT_VALUE, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _attribute_definition_real := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_REAL](a_attribute_value_realFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _attribute_definition_real.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newATTRIBUTE_DEFINITION_REALOwner := _attribute_definition_real // we have a match
+						if pastATTRIBUTE_DEFINITION_REALOwner != nil {
+							if newATTRIBUTE_DEFINITION_REALOwner != pastATTRIBUTE_DEFINITION_REALOwner {
+								idx := slices.Index(pastATTRIBUTE_DEFINITION_REALOwner.DEFAULT_VALUE, a_attribute_value_real_)
+								pastATTRIBUTE_DEFINITION_REALOwner.DEFAULT_VALUE = slices.Delete(pastATTRIBUTE_DEFINITION_REALOwner.DEFAULT_VALUE, idx, idx+1)
+								newATTRIBUTE_DEFINITION_REALOwner.DEFAULT_VALUE = append(newATTRIBUTE_DEFINITION_REALOwner.DEFAULT_VALUE, a_attribute_value_real_)
+							}
+						} else {
+							newATTRIBUTE_DEFINITION_REALOwner.DEFAULT_VALUE = append(newATTRIBUTE_DEFINITION_REALOwner.DEFAULT_VALUE, a_attribute_value_real_)
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// manage the suppress operation
+	if a_attribute_value_realFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_attribute_value_real_.Unstage(a_attribute_value_realFormCallback.probe.stageOfInterest)
+	}
+
+	a_attribute_value_realFormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.A_ATTRIBUTE_VALUE_REAL](
+		a_attribute_value_realFormCallback.probe,
+	)
+	a_attribute_value_realFormCallback.probe.tableStage.Commit()
+
+	// display a new form by reset the form stage
+	if a_attribute_value_realFormCallback.CreationMode || a_attribute_value_realFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_attribute_value_realFormCallback.probe.formStage.Reset()
+		newFormGroup := (&table.FormGroup{
+			Name: table.FormGroupDefaultName.ToString(),
+		}).Stage(a_attribute_value_realFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__A_ATTRIBUTE_VALUE_REALFormCallback(
+			nil,
+			a_attribute_value_realFormCallback.probe,
+			newFormGroup,
+		)
+		a_attribute_value_real := new(models.A_ATTRIBUTE_VALUE_REAL)
+		FillUpForm(a_attribute_value_real, newFormGroup, a_attribute_value_realFormCallback.probe)
+		a_attribute_value_realFormCallback.probe.formStage.Commit()
+	}
+
+	fillUpTree(a_attribute_value_realFormCallback.probe)
+}
+func __gong__New__A_ATTRIBUTE_VALUE_STRINGFormCallback(
+	a_attribute_value_string *models.A_ATTRIBUTE_VALUE_STRING,
+	probe *Probe,
+	formGroup *table.FormGroup,
+) (a_attribute_value_stringFormCallback *A_ATTRIBUTE_VALUE_STRINGFormCallback) {
+	a_attribute_value_stringFormCallback = new(A_ATTRIBUTE_VALUE_STRINGFormCallback)
+	a_attribute_value_stringFormCallback.probe = probe
+	a_attribute_value_stringFormCallback.a_attribute_value_string = a_attribute_value_string
+	a_attribute_value_stringFormCallback.formGroup = formGroup
+
+	a_attribute_value_stringFormCallback.CreationMode = (a_attribute_value_string == nil)
+
+	return
+}
+
+type A_ATTRIBUTE_VALUE_STRINGFormCallback struct {
+	a_attribute_value_string *models.A_ATTRIBUTE_VALUE_STRING
+
+	// If the form call is called on the creation of a new instnace
+	CreationMode bool
+
+	probe *Probe
+
+	formGroup *table.FormGroup
+}
+
+func (a_attribute_value_stringFormCallback *A_ATTRIBUTE_VALUE_STRINGFormCallback) OnSave() {
+
+	log.Println("A_ATTRIBUTE_VALUE_STRINGFormCallback, OnSave")
+
+	// checkout formStage to have the form group on the stage synchronized with the
+	// back repo (and front repo)
+	a_attribute_value_stringFormCallback.probe.formStage.Checkout()
+
+	if a_attribute_value_stringFormCallback.a_attribute_value_string == nil {
+		a_attribute_value_stringFormCallback.a_attribute_value_string = new(models.A_ATTRIBUTE_VALUE_STRING).Stage(a_attribute_value_stringFormCallback.probe.stageOfInterest)
+	}
+	a_attribute_value_string_ := a_attribute_value_stringFormCallback.a_attribute_value_string
+	_ = a_attribute_value_string_
+
+	for _, formDiv := range a_attribute_value_stringFormCallback.formGroup.FormDivs {
+		switch formDiv.Name {
+		// insertion point per field
+		case "Name":
+			FormDivBasicFieldToField(&(a_attribute_value_string_.Name), formDiv)
+		case "ATTRIBUTE_DEFINITION_STRING:DEFAULT_VALUE":
+			// we need to retrieve the field owner before the change
+			var pastATTRIBUTE_DEFINITION_STRINGOwner *models.ATTRIBUTE_DEFINITION_STRING
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "ATTRIBUTE_DEFINITION_STRING"
+			rf.Fieldname = "DEFAULT_VALUE"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				a_attribute_value_stringFormCallback.probe.stageOfInterest,
+				a_attribute_value_stringFormCallback.probe.backRepoOfInterest,
+				a_attribute_value_string_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastATTRIBUTE_DEFINITION_STRINGOwner = reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_STRING)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastATTRIBUTE_DEFINITION_STRINGOwner != nil {
+					idx := slices.Index(pastATTRIBUTE_DEFINITION_STRINGOwner.DEFAULT_VALUE, a_attribute_value_string_)
+					pastATTRIBUTE_DEFINITION_STRINGOwner.DEFAULT_VALUE = slices.Delete(pastATTRIBUTE_DEFINITION_STRINGOwner.DEFAULT_VALUE, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _attribute_definition_string := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_STRING](a_attribute_value_stringFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _attribute_definition_string.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newATTRIBUTE_DEFINITION_STRINGOwner := _attribute_definition_string // we have a match
+						if pastATTRIBUTE_DEFINITION_STRINGOwner != nil {
+							if newATTRIBUTE_DEFINITION_STRINGOwner != pastATTRIBUTE_DEFINITION_STRINGOwner {
+								idx := slices.Index(pastATTRIBUTE_DEFINITION_STRINGOwner.DEFAULT_VALUE, a_attribute_value_string_)
+								pastATTRIBUTE_DEFINITION_STRINGOwner.DEFAULT_VALUE = slices.Delete(pastATTRIBUTE_DEFINITION_STRINGOwner.DEFAULT_VALUE, idx, idx+1)
+								newATTRIBUTE_DEFINITION_STRINGOwner.DEFAULT_VALUE = append(newATTRIBUTE_DEFINITION_STRINGOwner.DEFAULT_VALUE, a_attribute_value_string_)
+							}
+						} else {
+							newATTRIBUTE_DEFINITION_STRINGOwner.DEFAULT_VALUE = append(newATTRIBUTE_DEFINITION_STRINGOwner.DEFAULT_VALUE, a_attribute_value_string_)
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// manage the suppress operation
+	if a_attribute_value_stringFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_attribute_value_string_.Unstage(a_attribute_value_stringFormCallback.probe.stageOfInterest)
+	}
+
+	a_attribute_value_stringFormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.A_ATTRIBUTE_VALUE_STRING](
+		a_attribute_value_stringFormCallback.probe,
+	)
+	a_attribute_value_stringFormCallback.probe.tableStage.Commit()
+
+	// display a new form by reset the form stage
+	if a_attribute_value_stringFormCallback.CreationMode || a_attribute_value_stringFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_attribute_value_stringFormCallback.probe.formStage.Reset()
+		newFormGroup := (&table.FormGroup{
+			Name: table.FormGroupDefaultName.ToString(),
+		}).Stage(a_attribute_value_stringFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__A_ATTRIBUTE_VALUE_STRINGFormCallback(
+			nil,
+			a_attribute_value_stringFormCallback.probe,
+			newFormGroup,
+		)
+		a_attribute_value_string := new(models.A_ATTRIBUTE_VALUE_STRING)
+		FillUpForm(a_attribute_value_string, newFormGroup, a_attribute_value_stringFormCallback.probe)
+		a_attribute_value_stringFormCallback.probe.formStage.Commit()
+	}
+
+	fillUpTree(a_attribute_value_stringFormCallback.probe)
+}
+func __gong__New__A_ATTRIBUTE_VALUE_XHTMLFormCallback(
+	a_attribute_value_xhtml *models.A_ATTRIBUTE_VALUE_XHTML,
+	probe *Probe,
+	formGroup *table.FormGroup,
+) (a_attribute_value_xhtmlFormCallback *A_ATTRIBUTE_VALUE_XHTMLFormCallback) {
+	a_attribute_value_xhtmlFormCallback = new(A_ATTRIBUTE_VALUE_XHTMLFormCallback)
+	a_attribute_value_xhtmlFormCallback.probe = probe
+	a_attribute_value_xhtmlFormCallback.a_attribute_value_xhtml = a_attribute_value_xhtml
+	a_attribute_value_xhtmlFormCallback.formGroup = formGroup
+
+	a_attribute_value_xhtmlFormCallback.CreationMode = (a_attribute_value_xhtml == nil)
+
+	return
+}
+
+type A_ATTRIBUTE_VALUE_XHTMLFormCallback struct {
+	a_attribute_value_xhtml *models.A_ATTRIBUTE_VALUE_XHTML
+
+	// If the form call is called on the creation of a new instnace
+	CreationMode bool
+
+	probe *Probe
+
+	formGroup *table.FormGroup
+}
+
+func (a_attribute_value_xhtmlFormCallback *A_ATTRIBUTE_VALUE_XHTMLFormCallback) OnSave() {
+
+	log.Println("A_ATTRIBUTE_VALUE_XHTMLFormCallback, OnSave")
+
+	// checkout formStage to have the form group on the stage synchronized with the
+	// back repo (and front repo)
+	a_attribute_value_xhtmlFormCallback.probe.formStage.Checkout()
+
+	if a_attribute_value_xhtmlFormCallback.a_attribute_value_xhtml == nil {
+		a_attribute_value_xhtmlFormCallback.a_attribute_value_xhtml = new(models.A_ATTRIBUTE_VALUE_XHTML).Stage(a_attribute_value_xhtmlFormCallback.probe.stageOfInterest)
+	}
+	a_attribute_value_xhtml_ := a_attribute_value_xhtmlFormCallback.a_attribute_value_xhtml
+	_ = a_attribute_value_xhtml_
+
+	for _, formDiv := range a_attribute_value_xhtmlFormCallback.formGroup.FormDivs {
+		switch formDiv.Name {
+		// insertion point per field
+		case "Name":
+			FormDivBasicFieldToField(&(a_attribute_value_xhtml_.Name), formDiv)
+		case "ATTRIBUTE_DEFINITION_XHTML:DEFAULT_VALUE":
+			// we need to retrieve the field owner before the change
+			var pastATTRIBUTE_DEFINITION_XHTMLOwner *models.ATTRIBUTE_DEFINITION_XHTML
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "ATTRIBUTE_DEFINITION_XHTML"
+			rf.Fieldname = "DEFAULT_VALUE"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				a_attribute_value_xhtmlFormCallback.probe.stageOfInterest,
+				a_attribute_value_xhtmlFormCallback.probe.backRepoOfInterest,
+				a_attribute_value_xhtml_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastATTRIBUTE_DEFINITION_XHTMLOwner = reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_XHTML)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastATTRIBUTE_DEFINITION_XHTMLOwner != nil {
+					idx := slices.Index(pastATTRIBUTE_DEFINITION_XHTMLOwner.DEFAULT_VALUE, a_attribute_value_xhtml_)
+					pastATTRIBUTE_DEFINITION_XHTMLOwner.DEFAULT_VALUE = slices.Delete(pastATTRIBUTE_DEFINITION_XHTMLOwner.DEFAULT_VALUE, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _attribute_definition_xhtml := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_XHTML](a_attribute_value_xhtmlFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _attribute_definition_xhtml.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newATTRIBUTE_DEFINITION_XHTMLOwner := _attribute_definition_xhtml // we have a match
+						if pastATTRIBUTE_DEFINITION_XHTMLOwner != nil {
+							if newATTRIBUTE_DEFINITION_XHTMLOwner != pastATTRIBUTE_DEFINITION_XHTMLOwner {
+								idx := slices.Index(pastATTRIBUTE_DEFINITION_XHTMLOwner.DEFAULT_VALUE, a_attribute_value_xhtml_)
+								pastATTRIBUTE_DEFINITION_XHTMLOwner.DEFAULT_VALUE = slices.Delete(pastATTRIBUTE_DEFINITION_XHTMLOwner.DEFAULT_VALUE, idx, idx+1)
+								newATTRIBUTE_DEFINITION_XHTMLOwner.DEFAULT_VALUE = append(newATTRIBUTE_DEFINITION_XHTMLOwner.DEFAULT_VALUE, a_attribute_value_xhtml_)
+							}
+						} else {
+							newATTRIBUTE_DEFINITION_XHTMLOwner.DEFAULT_VALUE = append(newATTRIBUTE_DEFINITION_XHTMLOwner.DEFAULT_VALUE, a_attribute_value_xhtml_)
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// manage the suppress operation
+	if a_attribute_value_xhtmlFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_attribute_value_xhtml_.Unstage(a_attribute_value_xhtmlFormCallback.probe.stageOfInterest)
+	}
+
+	a_attribute_value_xhtmlFormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.A_ATTRIBUTE_VALUE_XHTML](
+		a_attribute_value_xhtmlFormCallback.probe,
+	)
+	a_attribute_value_xhtmlFormCallback.probe.tableStage.Commit()
+
+	// display a new form by reset the form stage
+	if a_attribute_value_xhtmlFormCallback.CreationMode || a_attribute_value_xhtmlFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_attribute_value_xhtmlFormCallback.probe.formStage.Reset()
+		newFormGroup := (&table.FormGroup{
+			Name: table.FormGroupDefaultName.ToString(),
+		}).Stage(a_attribute_value_xhtmlFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__A_ATTRIBUTE_VALUE_XHTMLFormCallback(
+			nil,
+			a_attribute_value_xhtmlFormCallback.probe,
+			newFormGroup,
+		)
+		a_attribute_value_xhtml := new(models.A_ATTRIBUTE_VALUE_XHTML)
+		FillUpForm(a_attribute_value_xhtml, newFormGroup, a_attribute_value_xhtmlFormCallback.probe)
+		a_attribute_value_xhtmlFormCallback.probe.formStage.Commit()
+	}
+
+	fillUpTree(a_attribute_value_xhtmlFormCallback.probe)
+}
+func __gong__New__A_ATTRIBUTE_VALUE_XHTML_1FormCallback(
+	a_attribute_value_xhtml_1 *models.A_ATTRIBUTE_VALUE_XHTML_1,
+	probe *Probe,
+	formGroup *table.FormGroup,
+) (a_attribute_value_xhtml_1FormCallback *A_ATTRIBUTE_VALUE_XHTML_1FormCallback) {
+	a_attribute_value_xhtml_1FormCallback = new(A_ATTRIBUTE_VALUE_XHTML_1FormCallback)
+	a_attribute_value_xhtml_1FormCallback.probe = probe
+	a_attribute_value_xhtml_1FormCallback.a_attribute_value_xhtml_1 = a_attribute_value_xhtml_1
+	a_attribute_value_xhtml_1FormCallback.formGroup = formGroup
+
+	a_attribute_value_xhtml_1FormCallback.CreationMode = (a_attribute_value_xhtml_1 == nil)
+
+	return
+}
+
+type A_ATTRIBUTE_VALUE_XHTML_1FormCallback struct {
+	a_attribute_value_xhtml_1 *models.A_ATTRIBUTE_VALUE_XHTML_1
+
+	// If the form call is called on the creation of a new instnace
+	CreationMode bool
+
+	probe *Probe
+
+	formGroup *table.FormGroup
+}
+
+func (a_attribute_value_xhtml_1FormCallback *A_ATTRIBUTE_VALUE_XHTML_1FormCallback) OnSave() {
+
+	log.Println("A_ATTRIBUTE_VALUE_XHTML_1FormCallback, OnSave")
+
+	// checkout formStage to have the form group on the stage synchronized with the
+	// back repo (and front repo)
+	a_attribute_value_xhtml_1FormCallback.probe.formStage.Checkout()
+
+	if a_attribute_value_xhtml_1FormCallback.a_attribute_value_xhtml_1 == nil {
+		a_attribute_value_xhtml_1FormCallback.a_attribute_value_xhtml_1 = new(models.A_ATTRIBUTE_VALUE_XHTML_1).Stage(a_attribute_value_xhtml_1FormCallback.probe.stageOfInterest)
+	}
+	a_attribute_value_xhtml_1_ := a_attribute_value_xhtml_1FormCallback.a_attribute_value_xhtml_1
+	_ = a_attribute_value_xhtml_1_
+
+	for _, formDiv := range a_attribute_value_xhtml_1FormCallback.formGroup.FormDivs {
+		switch formDiv.Name {
+		// insertion point per field
+		case "Name":
+			FormDivBasicFieldToField(&(a_attribute_value_xhtml_1_.Name), formDiv)
+		case "SPECIFICATION:VALUES":
+			// we need to retrieve the field owner before the change
+			var pastSPECIFICATIONOwner *models.SPECIFICATION
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "SPECIFICATION"
+			rf.Fieldname = "VALUES"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				a_attribute_value_xhtml_1FormCallback.probe.stageOfInterest,
+				a_attribute_value_xhtml_1FormCallback.probe.backRepoOfInterest,
+				a_attribute_value_xhtml_1_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastSPECIFICATIONOwner = reverseFieldOwner.(*models.SPECIFICATION)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastSPECIFICATIONOwner != nil {
+					idx := slices.Index(pastSPECIFICATIONOwner.VALUES, a_attribute_value_xhtml_1_)
+					pastSPECIFICATIONOwner.VALUES = slices.Delete(pastSPECIFICATIONOwner.VALUES, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _specification := range *models.GetGongstructInstancesSet[models.SPECIFICATION](a_attribute_value_xhtml_1FormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _specification.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newSPECIFICATIONOwner := _specification // we have a match
+						if pastSPECIFICATIONOwner != nil {
+							if newSPECIFICATIONOwner != pastSPECIFICATIONOwner {
+								idx := slices.Index(pastSPECIFICATIONOwner.VALUES, a_attribute_value_xhtml_1_)
+								pastSPECIFICATIONOwner.VALUES = slices.Delete(pastSPECIFICATIONOwner.VALUES, idx, idx+1)
+								newSPECIFICATIONOwner.VALUES = append(newSPECIFICATIONOwner.VALUES, a_attribute_value_xhtml_1_)
+							}
+						} else {
+							newSPECIFICATIONOwner.VALUES = append(newSPECIFICATIONOwner.VALUES, a_attribute_value_xhtml_1_)
+						}
+					}
+				}
+			}
+		case "SPEC_OBJECT:VALUES":
+			// we need to retrieve the field owner before the change
+			var pastSPEC_OBJECTOwner *models.SPEC_OBJECT
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "SPEC_OBJECT"
+			rf.Fieldname = "VALUES"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				a_attribute_value_xhtml_1FormCallback.probe.stageOfInterest,
+				a_attribute_value_xhtml_1FormCallback.probe.backRepoOfInterest,
+				a_attribute_value_xhtml_1_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastSPEC_OBJECTOwner = reverseFieldOwner.(*models.SPEC_OBJECT)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastSPEC_OBJECTOwner != nil {
+					idx := slices.Index(pastSPEC_OBJECTOwner.VALUES, a_attribute_value_xhtml_1_)
+					pastSPEC_OBJECTOwner.VALUES = slices.Delete(pastSPEC_OBJECTOwner.VALUES, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _spec_object := range *models.GetGongstructInstancesSet[models.SPEC_OBJECT](a_attribute_value_xhtml_1FormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _spec_object.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newSPEC_OBJECTOwner := _spec_object // we have a match
+						if pastSPEC_OBJECTOwner != nil {
+							if newSPEC_OBJECTOwner != pastSPEC_OBJECTOwner {
+								idx := slices.Index(pastSPEC_OBJECTOwner.VALUES, a_attribute_value_xhtml_1_)
+								pastSPEC_OBJECTOwner.VALUES = slices.Delete(pastSPEC_OBJECTOwner.VALUES, idx, idx+1)
+								newSPEC_OBJECTOwner.VALUES = append(newSPEC_OBJECTOwner.VALUES, a_attribute_value_xhtml_1_)
+							}
+						} else {
+							newSPEC_OBJECTOwner.VALUES = append(newSPEC_OBJECTOwner.VALUES, a_attribute_value_xhtml_1_)
+						}
+					}
+				}
+			}
+		case "SPEC_RELATION:VALUES":
+			// we need to retrieve the field owner before the change
+			var pastSPEC_RELATIONOwner *models.SPEC_RELATION
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "SPEC_RELATION"
+			rf.Fieldname = "VALUES"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				a_attribute_value_xhtml_1FormCallback.probe.stageOfInterest,
+				a_attribute_value_xhtml_1FormCallback.probe.backRepoOfInterest,
+				a_attribute_value_xhtml_1_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastSPEC_RELATIONOwner = reverseFieldOwner.(*models.SPEC_RELATION)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastSPEC_RELATIONOwner != nil {
+					idx := slices.Index(pastSPEC_RELATIONOwner.VALUES, a_attribute_value_xhtml_1_)
+					pastSPEC_RELATIONOwner.VALUES = slices.Delete(pastSPEC_RELATIONOwner.VALUES, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _spec_relation := range *models.GetGongstructInstancesSet[models.SPEC_RELATION](a_attribute_value_xhtml_1FormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _spec_relation.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newSPEC_RELATIONOwner := _spec_relation // we have a match
+						if pastSPEC_RELATIONOwner != nil {
+							if newSPEC_RELATIONOwner != pastSPEC_RELATIONOwner {
+								idx := slices.Index(pastSPEC_RELATIONOwner.VALUES, a_attribute_value_xhtml_1_)
+								pastSPEC_RELATIONOwner.VALUES = slices.Delete(pastSPEC_RELATIONOwner.VALUES, idx, idx+1)
+								newSPEC_RELATIONOwner.VALUES = append(newSPEC_RELATIONOwner.VALUES, a_attribute_value_xhtml_1_)
+							}
+						} else {
+							newSPEC_RELATIONOwner.VALUES = append(newSPEC_RELATIONOwner.VALUES, a_attribute_value_xhtml_1_)
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// manage the suppress operation
+	if a_attribute_value_xhtml_1FormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_attribute_value_xhtml_1_.Unstage(a_attribute_value_xhtml_1FormCallback.probe.stageOfInterest)
+	}
+
+	a_attribute_value_xhtml_1FormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.A_ATTRIBUTE_VALUE_XHTML_1](
+		a_attribute_value_xhtml_1FormCallback.probe,
+	)
+	a_attribute_value_xhtml_1FormCallback.probe.tableStage.Commit()
+
+	// display a new form by reset the form stage
+	if a_attribute_value_xhtml_1FormCallback.CreationMode || a_attribute_value_xhtml_1FormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_attribute_value_xhtml_1FormCallback.probe.formStage.Reset()
+		newFormGroup := (&table.FormGroup{
+			Name: table.FormGroupDefaultName.ToString(),
+		}).Stage(a_attribute_value_xhtml_1FormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__A_ATTRIBUTE_VALUE_XHTML_1FormCallback(
+			nil,
+			a_attribute_value_xhtml_1FormCallback.probe,
+			newFormGroup,
+		)
+		a_attribute_value_xhtml_1 := new(models.A_ATTRIBUTE_VALUE_XHTML_1)
+		FillUpForm(a_attribute_value_xhtml_1, newFormGroup, a_attribute_value_xhtml_1FormCallback.probe)
+		a_attribute_value_xhtml_1FormCallback.probe.formStage.Commit()
+	}
+
+	fillUpTree(a_attribute_value_xhtml_1FormCallback.probe)
+}
 func __gong__New__A_CHILDRENFormCallback(
 	a_children *models.A_CHILDREN,
 	probe *Probe,
@@ -3667,23 +5550,23 @@ func (a_datatypesFormCallback *A_DATATYPESFormCallback) OnSave() {
 
 	fillUpTree(a_datatypesFormCallback.probe)
 }
-func __gong__New__A_DEFAULT_VALUEFormCallback(
-	a_default_value *models.A_DEFAULT_VALUE,
+func __gong__New__A_DATATYPE_DEFINITION_BOOLEAN_REFFormCallback(
+	a_datatype_definition_boolean_ref *models.A_DATATYPE_DEFINITION_BOOLEAN_REF,
 	probe *Probe,
 	formGroup *table.FormGroup,
-) (a_default_valueFormCallback *A_DEFAULT_VALUEFormCallback) {
-	a_default_valueFormCallback = new(A_DEFAULT_VALUEFormCallback)
-	a_default_valueFormCallback.probe = probe
-	a_default_valueFormCallback.a_default_value = a_default_value
-	a_default_valueFormCallback.formGroup = formGroup
+) (a_datatype_definition_boolean_refFormCallback *A_DATATYPE_DEFINITION_BOOLEAN_REFFormCallback) {
+	a_datatype_definition_boolean_refFormCallback = new(A_DATATYPE_DEFINITION_BOOLEAN_REFFormCallback)
+	a_datatype_definition_boolean_refFormCallback.probe = probe
+	a_datatype_definition_boolean_refFormCallback.a_datatype_definition_boolean_ref = a_datatype_definition_boolean_ref
+	a_datatype_definition_boolean_refFormCallback.formGroup = formGroup
 
-	a_default_valueFormCallback.CreationMode = (a_default_value == nil)
+	a_datatype_definition_boolean_refFormCallback.CreationMode = (a_datatype_definition_boolean_ref == nil)
 
 	return
 }
 
-type A_DEFAULT_VALUEFormCallback struct {
-	a_default_value *models.A_DEFAULT_VALUE
+type A_DATATYPE_DEFINITION_BOOLEAN_REFFormCallback struct {
+	a_datatype_definition_boolean_ref *models.A_DATATYPE_DEFINITION_BOOLEAN_REF
 
 	// If the form call is called on the creation of a new instnace
 	CreationMode bool
@@ -3693,155 +5576,38 @@ type A_DEFAULT_VALUEFormCallback struct {
 	formGroup *table.FormGroup
 }
 
-func (a_default_valueFormCallback *A_DEFAULT_VALUEFormCallback) OnSave() {
+func (a_datatype_definition_boolean_refFormCallback *A_DATATYPE_DEFINITION_BOOLEAN_REFFormCallback) OnSave() {
 
-	log.Println("A_DEFAULT_VALUEFormCallback, OnSave")
-
-	// checkout formStage to have the form group on the stage synchronized with the
-	// back repo (and front repo)
-	a_default_valueFormCallback.probe.formStage.Checkout()
-
-	if a_default_valueFormCallback.a_default_value == nil {
-		a_default_valueFormCallback.a_default_value = new(models.A_DEFAULT_VALUE).Stage(a_default_valueFormCallback.probe.stageOfInterest)
-	}
-	a_default_value_ := a_default_valueFormCallback.a_default_value
-	_ = a_default_value_
-
-	for _, formDiv := range a_default_valueFormCallback.formGroup.FormDivs {
-		switch formDiv.Name {
-		// insertion point per field
-		case "Name":
-			FormDivBasicFieldToField(&(a_default_value_.Name), formDiv)
-		case "ATTRIBUTE_DEFINITION_STRING:DEFAULT_VALUE":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_DEFINITION_STRINGOwner *models.ATTRIBUTE_DEFINITION_STRING
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_DEFINITION_STRING"
-			rf.Fieldname = "DEFAULT_VALUE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_default_valueFormCallback.probe.stageOfInterest,
-				a_default_valueFormCallback.probe.backRepoOfInterest,
-				a_default_value_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_DEFINITION_STRINGOwner = reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_STRING)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_DEFINITION_STRINGOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_DEFINITION_STRINGOwner.DEFAULT_VALUE, a_default_value_)
-					pastATTRIBUTE_DEFINITION_STRINGOwner.DEFAULT_VALUE = slices.Delete(pastATTRIBUTE_DEFINITION_STRINGOwner.DEFAULT_VALUE, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_definition_string := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_STRING](a_default_valueFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_definition_string.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_DEFINITION_STRINGOwner := _attribute_definition_string // we have a match
-						if pastATTRIBUTE_DEFINITION_STRINGOwner != nil {
-							if newATTRIBUTE_DEFINITION_STRINGOwner != pastATTRIBUTE_DEFINITION_STRINGOwner {
-								idx := slices.Index(pastATTRIBUTE_DEFINITION_STRINGOwner.DEFAULT_VALUE, a_default_value_)
-								pastATTRIBUTE_DEFINITION_STRINGOwner.DEFAULT_VALUE = slices.Delete(pastATTRIBUTE_DEFINITION_STRINGOwner.DEFAULT_VALUE, idx, idx+1)
-								newATTRIBUTE_DEFINITION_STRINGOwner.DEFAULT_VALUE = append(newATTRIBUTE_DEFINITION_STRINGOwner.DEFAULT_VALUE, a_default_value_)
-							}
-						} else {
-							newATTRIBUTE_DEFINITION_STRINGOwner.DEFAULT_VALUE = append(newATTRIBUTE_DEFINITION_STRINGOwner.DEFAULT_VALUE, a_default_value_)
-						}
-					}
-				}
-			}
-		}
-	}
-
-	// manage the suppress operation
-	if a_default_valueFormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_default_value_.Unstage(a_default_valueFormCallback.probe.stageOfInterest)
-	}
-
-	a_default_valueFormCallback.probe.stageOfInterest.Commit()
-	fillUpTable[models.A_DEFAULT_VALUE](
-		a_default_valueFormCallback.probe,
-	)
-	a_default_valueFormCallback.probe.tableStage.Commit()
-
-	// display a new form by reset the form stage
-	if a_default_valueFormCallback.CreationMode || a_default_valueFormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_default_valueFormCallback.probe.formStage.Reset()
-		newFormGroup := (&table.FormGroup{
-			Name: table.FormGroupDefaultName.ToString(),
-		}).Stage(a_default_valueFormCallback.probe.formStage)
-		newFormGroup.OnSave = __gong__New__A_DEFAULT_VALUEFormCallback(
-			nil,
-			a_default_valueFormCallback.probe,
-			newFormGroup,
-		)
-		a_default_value := new(models.A_DEFAULT_VALUE)
-		FillUpForm(a_default_value, newFormGroup, a_default_valueFormCallback.probe)
-		a_default_valueFormCallback.probe.formStage.Commit()
-	}
-
-	fillUpTree(a_default_valueFormCallback.probe)
-}
-func __gong__New__A_DEFAULT_VALUE_1FormCallback(
-	a_default_value_1 *models.A_DEFAULT_VALUE_1,
-	probe *Probe,
-	formGroup *table.FormGroup,
-) (a_default_value_1FormCallback *A_DEFAULT_VALUE_1FormCallback) {
-	a_default_value_1FormCallback = new(A_DEFAULT_VALUE_1FormCallback)
-	a_default_value_1FormCallback.probe = probe
-	a_default_value_1FormCallback.a_default_value_1 = a_default_value_1
-	a_default_value_1FormCallback.formGroup = formGroup
-
-	a_default_value_1FormCallback.CreationMode = (a_default_value_1 == nil)
-
-	return
-}
-
-type A_DEFAULT_VALUE_1FormCallback struct {
-	a_default_value_1 *models.A_DEFAULT_VALUE_1
-
-	// If the form call is called on the creation of a new instnace
-	CreationMode bool
-
-	probe *Probe
-
-	formGroup *table.FormGroup
-}
-
-func (a_default_value_1FormCallback *A_DEFAULT_VALUE_1FormCallback) OnSave() {
-
-	log.Println("A_DEFAULT_VALUE_1FormCallback, OnSave")
+	log.Println("A_DATATYPE_DEFINITION_BOOLEAN_REFFormCallback, OnSave")
 
 	// checkout formStage to have the form group on the stage synchronized with the
 	// back repo (and front repo)
-	a_default_value_1FormCallback.probe.formStage.Checkout()
+	a_datatype_definition_boolean_refFormCallback.probe.formStage.Checkout()
 
-	if a_default_value_1FormCallback.a_default_value_1 == nil {
-		a_default_value_1FormCallback.a_default_value_1 = new(models.A_DEFAULT_VALUE_1).Stage(a_default_value_1FormCallback.probe.stageOfInterest)
+	if a_datatype_definition_boolean_refFormCallback.a_datatype_definition_boolean_ref == nil {
+		a_datatype_definition_boolean_refFormCallback.a_datatype_definition_boolean_ref = new(models.A_DATATYPE_DEFINITION_BOOLEAN_REF).Stage(a_datatype_definition_boolean_refFormCallback.probe.stageOfInterest)
 	}
-	a_default_value_1_ := a_default_value_1FormCallback.a_default_value_1
-	_ = a_default_value_1_
+	a_datatype_definition_boolean_ref_ := a_datatype_definition_boolean_refFormCallback.a_datatype_definition_boolean_ref
+	_ = a_datatype_definition_boolean_ref_
 
-	for _, formDiv := range a_default_value_1FormCallback.formGroup.FormDivs {
+	for _, formDiv := range a_datatype_definition_boolean_refFormCallback.formGroup.FormDivs {
 		switch formDiv.Name {
 		// insertion point per field
 		case "Name":
-			FormDivBasicFieldToField(&(a_default_value_1_.Name), formDiv)
-		case "ATTRIBUTE_DEFINITION_BOOLEAN:DEFAULT_VALUE":
+			FormDivBasicFieldToField(&(a_datatype_definition_boolean_ref_.Name), formDiv)
+		case "DATATYPE_DEFINITION_BOOLEAN_REF":
+			FormDivBasicFieldToField(&(a_datatype_definition_boolean_ref_.DATATYPE_DEFINITION_BOOLEAN_REF), formDiv)
+		case "ATTRIBUTE_DEFINITION_BOOLEAN:TYPE":
 			// we need to retrieve the field owner before the change
 			var pastATTRIBUTE_DEFINITION_BOOLEANOwner *models.ATTRIBUTE_DEFINITION_BOOLEAN
 			var rf models.ReverseField
 			_ = rf
 			rf.GongstructName = "ATTRIBUTE_DEFINITION_BOOLEAN"
-			rf.Fieldname = "DEFAULT_VALUE"
+			rf.Fieldname = "TYPE"
 			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_default_value_1FormCallback.probe.stageOfInterest,
-				a_default_value_1FormCallback.probe.backRepoOfInterest,
-				a_default_value_1_,
+				a_datatype_definition_boolean_refFormCallback.probe.stageOfInterest,
+				a_datatype_definition_boolean_refFormCallback.probe.backRepoOfInterest,
+				a_datatype_definition_boolean_ref_,
 				&rf)
 
 			if reverseFieldOwner != nil {
@@ -3849,26 +5615,26 @@ func (a_default_value_1FormCallback *A_DEFAULT_VALUE_1FormCallback) OnSave() {
 			}
 			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
 				if pastATTRIBUTE_DEFINITION_BOOLEANOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_DEFINITION_BOOLEANOwner.DEFAULT_VALUE, a_default_value_1_)
-					pastATTRIBUTE_DEFINITION_BOOLEANOwner.DEFAULT_VALUE = slices.Delete(pastATTRIBUTE_DEFINITION_BOOLEANOwner.DEFAULT_VALUE, idx, idx+1)
+					idx := slices.Index(pastATTRIBUTE_DEFINITION_BOOLEANOwner.TYPE, a_datatype_definition_boolean_ref_)
+					pastATTRIBUTE_DEFINITION_BOOLEANOwner.TYPE = slices.Delete(pastATTRIBUTE_DEFINITION_BOOLEANOwner.TYPE, idx, idx+1)
 				}
 			} else {
 				// we need to retrieve the field owner after the change
 				// parse all astrcut and get the one with the name in the
 				// div
-				for _attribute_definition_boolean := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_BOOLEAN](a_default_value_1FormCallback.probe.stageOfInterest) {
+				for _attribute_definition_boolean := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_BOOLEAN](a_datatype_definition_boolean_refFormCallback.probe.stageOfInterest) {
 
 					// the match is base on the name
 					if _attribute_definition_boolean.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
 						newATTRIBUTE_DEFINITION_BOOLEANOwner := _attribute_definition_boolean // we have a match
 						if pastATTRIBUTE_DEFINITION_BOOLEANOwner != nil {
 							if newATTRIBUTE_DEFINITION_BOOLEANOwner != pastATTRIBUTE_DEFINITION_BOOLEANOwner {
-								idx := slices.Index(pastATTRIBUTE_DEFINITION_BOOLEANOwner.DEFAULT_VALUE, a_default_value_1_)
-								pastATTRIBUTE_DEFINITION_BOOLEANOwner.DEFAULT_VALUE = slices.Delete(pastATTRIBUTE_DEFINITION_BOOLEANOwner.DEFAULT_VALUE, idx, idx+1)
-								newATTRIBUTE_DEFINITION_BOOLEANOwner.DEFAULT_VALUE = append(newATTRIBUTE_DEFINITION_BOOLEANOwner.DEFAULT_VALUE, a_default_value_1_)
+								idx := slices.Index(pastATTRIBUTE_DEFINITION_BOOLEANOwner.TYPE, a_datatype_definition_boolean_ref_)
+								pastATTRIBUTE_DEFINITION_BOOLEANOwner.TYPE = slices.Delete(pastATTRIBUTE_DEFINITION_BOOLEANOwner.TYPE, idx, idx+1)
+								newATTRIBUTE_DEFINITION_BOOLEANOwner.TYPE = append(newATTRIBUTE_DEFINITION_BOOLEANOwner.TYPE, a_datatype_definition_boolean_ref_)
 							}
 						} else {
-							newATTRIBUTE_DEFINITION_BOOLEANOwner.DEFAULT_VALUE = append(newATTRIBUTE_DEFINITION_BOOLEANOwner.DEFAULT_VALUE, a_default_value_1_)
+							newATTRIBUTE_DEFINITION_BOOLEANOwner.TYPE = append(newATTRIBUTE_DEFINITION_BOOLEANOwner.TYPE, a_datatype_definition_boolean_ref_)
 						}
 					}
 				}
@@ -3877,51 +5643,51 @@ func (a_default_value_1FormCallback *A_DEFAULT_VALUE_1FormCallback) OnSave() {
 	}
 
 	// manage the suppress operation
-	if a_default_value_1FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_default_value_1_.Unstage(a_default_value_1FormCallback.probe.stageOfInterest)
+	if a_datatype_definition_boolean_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_datatype_definition_boolean_ref_.Unstage(a_datatype_definition_boolean_refFormCallback.probe.stageOfInterest)
 	}
 
-	a_default_value_1FormCallback.probe.stageOfInterest.Commit()
-	fillUpTable[models.A_DEFAULT_VALUE_1](
-		a_default_value_1FormCallback.probe,
+	a_datatype_definition_boolean_refFormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.A_DATATYPE_DEFINITION_BOOLEAN_REF](
+		a_datatype_definition_boolean_refFormCallback.probe,
 	)
-	a_default_value_1FormCallback.probe.tableStage.Commit()
+	a_datatype_definition_boolean_refFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
-	if a_default_value_1FormCallback.CreationMode || a_default_value_1FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_default_value_1FormCallback.probe.formStage.Reset()
+	if a_datatype_definition_boolean_refFormCallback.CreationMode || a_datatype_definition_boolean_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_datatype_definition_boolean_refFormCallback.probe.formStage.Reset()
 		newFormGroup := (&table.FormGroup{
 			Name: table.FormGroupDefaultName.ToString(),
-		}).Stage(a_default_value_1FormCallback.probe.formStage)
-		newFormGroup.OnSave = __gong__New__A_DEFAULT_VALUE_1FormCallback(
+		}).Stage(a_datatype_definition_boolean_refFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__A_DATATYPE_DEFINITION_BOOLEAN_REFFormCallback(
 			nil,
-			a_default_value_1FormCallback.probe,
+			a_datatype_definition_boolean_refFormCallback.probe,
 			newFormGroup,
 		)
-		a_default_value_1 := new(models.A_DEFAULT_VALUE_1)
-		FillUpForm(a_default_value_1, newFormGroup, a_default_value_1FormCallback.probe)
-		a_default_value_1FormCallback.probe.formStage.Commit()
+		a_datatype_definition_boolean_ref := new(models.A_DATATYPE_DEFINITION_BOOLEAN_REF)
+		FillUpForm(a_datatype_definition_boolean_ref, newFormGroup, a_datatype_definition_boolean_refFormCallback.probe)
+		a_datatype_definition_boolean_refFormCallback.probe.formStage.Commit()
 	}
 
-	fillUpTree(a_default_value_1FormCallback.probe)
+	fillUpTree(a_datatype_definition_boolean_refFormCallback.probe)
 }
-func __gong__New__A_DEFAULT_VALUE_2FormCallback(
-	a_default_value_2 *models.A_DEFAULT_VALUE_2,
+func __gong__New__A_DATATYPE_DEFINITION_DATE_REFFormCallback(
+	a_datatype_definition_date_ref *models.A_DATATYPE_DEFINITION_DATE_REF,
 	probe *Probe,
 	formGroup *table.FormGroup,
-) (a_default_value_2FormCallback *A_DEFAULT_VALUE_2FormCallback) {
-	a_default_value_2FormCallback = new(A_DEFAULT_VALUE_2FormCallback)
-	a_default_value_2FormCallback.probe = probe
-	a_default_value_2FormCallback.a_default_value_2 = a_default_value_2
-	a_default_value_2FormCallback.formGroup = formGroup
+) (a_datatype_definition_date_refFormCallback *A_DATATYPE_DEFINITION_DATE_REFFormCallback) {
+	a_datatype_definition_date_refFormCallback = new(A_DATATYPE_DEFINITION_DATE_REFFormCallback)
+	a_datatype_definition_date_refFormCallback.probe = probe
+	a_datatype_definition_date_refFormCallback.a_datatype_definition_date_ref = a_datatype_definition_date_ref
+	a_datatype_definition_date_refFormCallback.formGroup = formGroup
 
-	a_default_value_2FormCallback.CreationMode = (a_default_value_2 == nil)
+	a_datatype_definition_date_refFormCallback.CreationMode = (a_datatype_definition_date_ref == nil)
 
 	return
 }
 
-type A_DEFAULT_VALUE_2FormCallback struct {
-	a_default_value_2 *models.A_DEFAULT_VALUE_2
+type A_DATATYPE_DEFINITION_DATE_REFFormCallback struct {
+	a_datatype_definition_date_ref *models.A_DATATYPE_DEFINITION_DATE_REF
 
 	// If the form call is called on the creation of a new instnace
 	CreationMode bool
@@ -3931,155 +5697,38 @@ type A_DEFAULT_VALUE_2FormCallback struct {
 	formGroup *table.FormGroup
 }
 
-func (a_default_value_2FormCallback *A_DEFAULT_VALUE_2FormCallback) OnSave() {
+func (a_datatype_definition_date_refFormCallback *A_DATATYPE_DEFINITION_DATE_REFFormCallback) OnSave() {
 
-	log.Println("A_DEFAULT_VALUE_2FormCallback, OnSave")
-
-	// checkout formStage to have the form group on the stage synchronized with the
-	// back repo (and front repo)
-	a_default_value_2FormCallback.probe.formStage.Checkout()
-
-	if a_default_value_2FormCallback.a_default_value_2 == nil {
-		a_default_value_2FormCallback.a_default_value_2 = new(models.A_DEFAULT_VALUE_2).Stage(a_default_value_2FormCallback.probe.stageOfInterest)
-	}
-	a_default_value_2_ := a_default_value_2FormCallback.a_default_value_2
-	_ = a_default_value_2_
-
-	for _, formDiv := range a_default_value_2FormCallback.formGroup.FormDivs {
-		switch formDiv.Name {
-		// insertion point per field
-		case "Name":
-			FormDivBasicFieldToField(&(a_default_value_2_.Name), formDiv)
-		case "ATTRIBUTE_DEFINITION_XHTML:DEFAULT_VALUE":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_DEFINITION_XHTMLOwner *models.ATTRIBUTE_DEFINITION_XHTML
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_DEFINITION_XHTML"
-			rf.Fieldname = "DEFAULT_VALUE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_default_value_2FormCallback.probe.stageOfInterest,
-				a_default_value_2FormCallback.probe.backRepoOfInterest,
-				a_default_value_2_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_DEFINITION_XHTMLOwner = reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_XHTML)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_DEFINITION_XHTMLOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_DEFINITION_XHTMLOwner.DEFAULT_VALUE, a_default_value_2_)
-					pastATTRIBUTE_DEFINITION_XHTMLOwner.DEFAULT_VALUE = slices.Delete(pastATTRIBUTE_DEFINITION_XHTMLOwner.DEFAULT_VALUE, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_definition_xhtml := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_XHTML](a_default_value_2FormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_definition_xhtml.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_DEFINITION_XHTMLOwner := _attribute_definition_xhtml // we have a match
-						if pastATTRIBUTE_DEFINITION_XHTMLOwner != nil {
-							if newATTRIBUTE_DEFINITION_XHTMLOwner != pastATTRIBUTE_DEFINITION_XHTMLOwner {
-								idx := slices.Index(pastATTRIBUTE_DEFINITION_XHTMLOwner.DEFAULT_VALUE, a_default_value_2_)
-								pastATTRIBUTE_DEFINITION_XHTMLOwner.DEFAULT_VALUE = slices.Delete(pastATTRIBUTE_DEFINITION_XHTMLOwner.DEFAULT_VALUE, idx, idx+1)
-								newATTRIBUTE_DEFINITION_XHTMLOwner.DEFAULT_VALUE = append(newATTRIBUTE_DEFINITION_XHTMLOwner.DEFAULT_VALUE, a_default_value_2_)
-							}
-						} else {
-							newATTRIBUTE_DEFINITION_XHTMLOwner.DEFAULT_VALUE = append(newATTRIBUTE_DEFINITION_XHTMLOwner.DEFAULT_VALUE, a_default_value_2_)
-						}
-					}
-				}
-			}
-		}
-	}
-
-	// manage the suppress operation
-	if a_default_value_2FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_default_value_2_.Unstage(a_default_value_2FormCallback.probe.stageOfInterest)
-	}
-
-	a_default_value_2FormCallback.probe.stageOfInterest.Commit()
-	fillUpTable[models.A_DEFAULT_VALUE_2](
-		a_default_value_2FormCallback.probe,
-	)
-	a_default_value_2FormCallback.probe.tableStage.Commit()
-
-	// display a new form by reset the form stage
-	if a_default_value_2FormCallback.CreationMode || a_default_value_2FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_default_value_2FormCallback.probe.formStage.Reset()
-		newFormGroup := (&table.FormGroup{
-			Name: table.FormGroupDefaultName.ToString(),
-		}).Stage(a_default_value_2FormCallback.probe.formStage)
-		newFormGroup.OnSave = __gong__New__A_DEFAULT_VALUE_2FormCallback(
-			nil,
-			a_default_value_2FormCallback.probe,
-			newFormGroup,
-		)
-		a_default_value_2 := new(models.A_DEFAULT_VALUE_2)
-		FillUpForm(a_default_value_2, newFormGroup, a_default_value_2FormCallback.probe)
-		a_default_value_2FormCallback.probe.formStage.Commit()
-	}
-
-	fillUpTree(a_default_value_2FormCallback.probe)
-}
-func __gong__New__A_DEFAULT_VALUE_3FormCallback(
-	a_default_value_3 *models.A_DEFAULT_VALUE_3,
-	probe *Probe,
-	formGroup *table.FormGroup,
-) (a_default_value_3FormCallback *A_DEFAULT_VALUE_3FormCallback) {
-	a_default_value_3FormCallback = new(A_DEFAULT_VALUE_3FormCallback)
-	a_default_value_3FormCallback.probe = probe
-	a_default_value_3FormCallback.a_default_value_3 = a_default_value_3
-	a_default_value_3FormCallback.formGroup = formGroup
-
-	a_default_value_3FormCallback.CreationMode = (a_default_value_3 == nil)
-
-	return
-}
-
-type A_DEFAULT_VALUE_3FormCallback struct {
-	a_default_value_3 *models.A_DEFAULT_VALUE_3
-
-	// If the form call is called on the creation of a new instnace
-	CreationMode bool
-
-	probe *Probe
-
-	formGroup *table.FormGroup
-}
-
-func (a_default_value_3FormCallback *A_DEFAULT_VALUE_3FormCallback) OnSave() {
-
-	log.Println("A_DEFAULT_VALUE_3FormCallback, OnSave")
+	log.Println("A_DATATYPE_DEFINITION_DATE_REFFormCallback, OnSave")
 
 	// checkout formStage to have the form group on the stage synchronized with the
 	// back repo (and front repo)
-	a_default_value_3FormCallback.probe.formStage.Checkout()
+	a_datatype_definition_date_refFormCallback.probe.formStage.Checkout()
 
-	if a_default_value_3FormCallback.a_default_value_3 == nil {
-		a_default_value_3FormCallback.a_default_value_3 = new(models.A_DEFAULT_VALUE_3).Stage(a_default_value_3FormCallback.probe.stageOfInterest)
+	if a_datatype_definition_date_refFormCallback.a_datatype_definition_date_ref == nil {
+		a_datatype_definition_date_refFormCallback.a_datatype_definition_date_ref = new(models.A_DATATYPE_DEFINITION_DATE_REF).Stage(a_datatype_definition_date_refFormCallback.probe.stageOfInterest)
 	}
-	a_default_value_3_ := a_default_value_3FormCallback.a_default_value_3
-	_ = a_default_value_3_
+	a_datatype_definition_date_ref_ := a_datatype_definition_date_refFormCallback.a_datatype_definition_date_ref
+	_ = a_datatype_definition_date_ref_
 
-	for _, formDiv := range a_default_value_3FormCallback.formGroup.FormDivs {
+	for _, formDiv := range a_datatype_definition_date_refFormCallback.formGroup.FormDivs {
 		switch formDiv.Name {
 		// insertion point per field
 		case "Name":
-			FormDivBasicFieldToField(&(a_default_value_3_.Name), formDiv)
-		case "ATTRIBUTE_DEFINITION_DATE:DEFAULT_VALUE":
+			FormDivBasicFieldToField(&(a_datatype_definition_date_ref_.Name), formDiv)
+		case "DATATYPE_DEFINITION_DATE_REF":
+			FormDivBasicFieldToField(&(a_datatype_definition_date_ref_.DATATYPE_DEFINITION_DATE_REF), formDiv)
+		case "ATTRIBUTE_DEFINITION_DATE:TYPE":
 			// we need to retrieve the field owner before the change
 			var pastATTRIBUTE_DEFINITION_DATEOwner *models.ATTRIBUTE_DEFINITION_DATE
 			var rf models.ReverseField
 			_ = rf
 			rf.GongstructName = "ATTRIBUTE_DEFINITION_DATE"
-			rf.Fieldname = "DEFAULT_VALUE"
+			rf.Fieldname = "TYPE"
 			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_default_value_3FormCallback.probe.stageOfInterest,
-				a_default_value_3FormCallback.probe.backRepoOfInterest,
-				a_default_value_3_,
+				a_datatype_definition_date_refFormCallback.probe.stageOfInterest,
+				a_datatype_definition_date_refFormCallback.probe.backRepoOfInterest,
+				a_datatype_definition_date_ref_,
 				&rf)
 
 			if reverseFieldOwner != nil {
@@ -4087,26 +5736,26 @@ func (a_default_value_3FormCallback *A_DEFAULT_VALUE_3FormCallback) OnSave() {
 			}
 			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
 				if pastATTRIBUTE_DEFINITION_DATEOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_DEFINITION_DATEOwner.DEFAULT_VALUE, a_default_value_3_)
-					pastATTRIBUTE_DEFINITION_DATEOwner.DEFAULT_VALUE = slices.Delete(pastATTRIBUTE_DEFINITION_DATEOwner.DEFAULT_VALUE, idx, idx+1)
+					idx := slices.Index(pastATTRIBUTE_DEFINITION_DATEOwner.TYPE, a_datatype_definition_date_ref_)
+					pastATTRIBUTE_DEFINITION_DATEOwner.TYPE = slices.Delete(pastATTRIBUTE_DEFINITION_DATEOwner.TYPE, idx, idx+1)
 				}
 			} else {
 				// we need to retrieve the field owner after the change
 				// parse all astrcut and get the one with the name in the
 				// div
-				for _attribute_definition_date := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_DATE](a_default_value_3FormCallback.probe.stageOfInterest) {
+				for _attribute_definition_date := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_DATE](a_datatype_definition_date_refFormCallback.probe.stageOfInterest) {
 
 					// the match is base on the name
 					if _attribute_definition_date.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
 						newATTRIBUTE_DEFINITION_DATEOwner := _attribute_definition_date // we have a match
 						if pastATTRIBUTE_DEFINITION_DATEOwner != nil {
 							if newATTRIBUTE_DEFINITION_DATEOwner != pastATTRIBUTE_DEFINITION_DATEOwner {
-								idx := slices.Index(pastATTRIBUTE_DEFINITION_DATEOwner.DEFAULT_VALUE, a_default_value_3_)
-								pastATTRIBUTE_DEFINITION_DATEOwner.DEFAULT_VALUE = slices.Delete(pastATTRIBUTE_DEFINITION_DATEOwner.DEFAULT_VALUE, idx, idx+1)
-								newATTRIBUTE_DEFINITION_DATEOwner.DEFAULT_VALUE = append(newATTRIBUTE_DEFINITION_DATEOwner.DEFAULT_VALUE, a_default_value_3_)
+								idx := slices.Index(pastATTRIBUTE_DEFINITION_DATEOwner.TYPE, a_datatype_definition_date_ref_)
+								pastATTRIBUTE_DEFINITION_DATEOwner.TYPE = slices.Delete(pastATTRIBUTE_DEFINITION_DATEOwner.TYPE, idx, idx+1)
+								newATTRIBUTE_DEFINITION_DATEOwner.TYPE = append(newATTRIBUTE_DEFINITION_DATEOwner.TYPE, a_datatype_definition_date_ref_)
 							}
 						} else {
-							newATTRIBUTE_DEFINITION_DATEOwner.DEFAULT_VALUE = append(newATTRIBUTE_DEFINITION_DATEOwner.DEFAULT_VALUE, a_default_value_3_)
+							newATTRIBUTE_DEFINITION_DATEOwner.TYPE = append(newATTRIBUTE_DEFINITION_DATEOwner.TYPE, a_datatype_definition_date_ref_)
 						}
 					}
 				}
@@ -4115,51 +5764,51 @@ func (a_default_value_3FormCallback *A_DEFAULT_VALUE_3FormCallback) OnSave() {
 	}
 
 	// manage the suppress operation
-	if a_default_value_3FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_default_value_3_.Unstage(a_default_value_3FormCallback.probe.stageOfInterest)
+	if a_datatype_definition_date_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_datatype_definition_date_ref_.Unstage(a_datatype_definition_date_refFormCallback.probe.stageOfInterest)
 	}
 
-	a_default_value_3FormCallback.probe.stageOfInterest.Commit()
-	fillUpTable[models.A_DEFAULT_VALUE_3](
-		a_default_value_3FormCallback.probe,
+	a_datatype_definition_date_refFormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.A_DATATYPE_DEFINITION_DATE_REF](
+		a_datatype_definition_date_refFormCallback.probe,
 	)
-	a_default_value_3FormCallback.probe.tableStage.Commit()
+	a_datatype_definition_date_refFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
-	if a_default_value_3FormCallback.CreationMode || a_default_value_3FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_default_value_3FormCallback.probe.formStage.Reset()
+	if a_datatype_definition_date_refFormCallback.CreationMode || a_datatype_definition_date_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_datatype_definition_date_refFormCallback.probe.formStage.Reset()
 		newFormGroup := (&table.FormGroup{
 			Name: table.FormGroupDefaultName.ToString(),
-		}).Stage(a_default_value_3FormCallback.probe.formStage)
-		newFormGroup.OnSave = __gong__New__A_DEFAULT_VALUE_3FormCallback(
+		}).Stage(a_datatype_definition_date_refFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__A_DATATYPE_DEFINITION_DATE_REFFormCallback(
 			nil,
-			a_default_value_3FormCallback.probe,
+			a_datatype_definition_date_refFormCallback.probe,
 			newFormGroup,
 		)
-		a_default_value_3 := new(models.A_DEFAULT_VALUE_3)
-		FillUpForm(a_default_value_3, newFormGroup, a_default_value_3FormCallback.probe)
-		a_default_value_3FormCallback.probe.formStage.Commit()
+		a_datatype_definition_date_ref := new(models.A_DATATYPE_DEFINITION_DATE_REF)
+		FillUpForm(a_datatype_definition_date_ref, newFormGroup, a_datatype_definition_date_refFormCallback.probe)
+		a_datatype_definition_date_refFormCallback.probe.formStage.Commit()
 	}
 
-	fillUpTree(a_default_value_3FormCallback.probe)
+	fillUpTree(a_datatype_definition_date_refFormCallback.probe)
 }
-func __gong__New__A_DEFAULT_VALUE_4FormCallback(
-	a_default_value_4 *models.A_DEFAULT_VALUE_4,
+func __gong__New__A_DATATYPE_DEFINITION_ENUMERATION_REFFormCallback(
+	a_datatype_definition_enumeration_ref *models.A_DATATYPE_DEFINITION_ENUMERATION_REF,
 	probe *Probe,
 	formGroup *table.FormGroup,
-) (a_default_value_4FormCallback *A_DEFAULT_VALUE_4FormCallback) {
-	a_default_value_4FormCallback = new(A_DEFAULT_VALUE_4FormCallback)
-	a_default_value_4FormCallback.probe = probe
-	a_default_value_4FormCallback.a_default_value_4 = a_default_value_4
-	a_default_value_4FormCallback.formGroup = formGroup
+) (a_datatype_definition_enumeration_refFormCallback *A_DATATYPE_DEFINITION_ENUMERATION_REFFormCallback) {
+	a_datatype_definition_enumeration_refFormCallback = new(A_DATATYPE_DEFINITION_ENUMERATION_REFFormCallback)
+	a_datatype_definition_enumeration_refFormCallback.probe = probe
+	a_datatype_definition_enumeration_refFormCallback.a_datatype_definition_enumeration_ref = a_datatype_definition_enumeration_ref
+	a_datatype_definition_enumeration_refFormCallback.formGroup = formGroup
 
-	a_default_value_4FormCallback.CreationMode = (a_default_value_4 == nil)
+	a_datatype_definition_enumeration_refFormCallback.CreationMode = (a_datatype_definition_enumeration_ref == nil)
 
 	return
 }
 
-type A_DEFAULT_VALUE_4FormCallback struct {
-	a_default_value_4 *models.A_DEFAULT_VALUE_4
+type A_DATATYPE_DEFINITION_ENUMERATION_REFFormCallback struct {
+	a_datatype_definition_enumeration_ref *models.A_DATATYPE_DEFINITION_ENUMERATION_REF
 
 	// If the form call is called on the creation of a new instnace
 	CreationMode bool
@@ -4169,155 +5818,38 @@ type A_DEFAULT_VALUE_4FormCallback struct {
 	formGroup *table.FormGroup
 }
 
-func (a_default_value_4FormCallback *A_DEFAULT_VALUE_4FormCallback) OnSave() {
+func (a_datatype_definition_enumeration_refFormCallback *A_DATATYPE_DEFINITION_ENUMERATION_REFFormCallback) OnSave() {
 
-	log.Println("A_DEFAULT_VALUE_4FormCallback, OnSave")
-
-	// checkout formStage to have the form group on the stage synchronized with the
-	// back repo (and front repo)
-	a_default_value_4FormCallback.probe.formStage.Checkout()
-
-	if a_default_value_4FormCallback.a_default_value_4 == nil {
-		a_default_value_4FormCallback.a_default_value_4 = new(models.A_DEFAULT_VALUE_4).Stage(a_default_value_4FormCallback.probe.stageOfInterest)
-	}
-	a_default_value_4_ := a_default_value_4FormCallback.a_default_value_4
-	_ = a_default_value_4_
-
-	for _, formDiv := range a_default_value_4FormCallback.formGroup.FormDivs {
-		switch formDiv.Name {
-		// insertion point per field
-		case "Name":
-			FormDivBasicFieldToField(&(a_default_value_4_.Name), formDiv)
-		case "ATTRIBUTE_DEFINITION_REAL:DEFAULT_VALUE":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_DEFINITION_REALOwner *models.ATTRIBUTE_DEFINITION_REAL
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_DEFINITION_REAL"
-			rf.Fieldname = "DEFAULT_VALUE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_default_value_4FormCallback.probe.stageOfInterest,
-				a_default_value_4FormCallback.probe.backRepoOfInterest,
-				a_default_value_4_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_DEFINITION_REALOwner = reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_REAL)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_DEFINITION_REALOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_DEFINITION_REALOwner.DEFAULT_VALUE, a_default_value_4_)
-					pastATTRIBUTE_DEFINITION_REALOwner.DEFAULT_VALUE = slices.Delete(pastATTRIBUTE_DEFINITION_REALOwner.DEFAULT_VALUE, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_definition_real := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_REAL](a_default_value_4FormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_definition_real.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_DEFINITION_REALOwner := _attribute_definition_real // we have a match
-						if pastATTRIBUTE_DEFINITION_REALOwner != nil {
-							if newATTRIBUTE_DEFINITION_REALOwner != pastATTRIBUTE_DEFINITION_REALOwner {
-								idx := slices.Index(pastATTRIBUTE_DEFINITION_REALOwner.DEFAULT_VALUE, a_default_value_4_)
-								pastATTRIBUTE_DEFINITION_REALOwner.DEFAULT_VALUE = slices.Delete(pastATTRIBUTE_DEFINITION_REALOwner.DEFAULT_VALUE, idx, idx+1)
-								newATTRIBUTE_DEFINITION_REALOwner.DEFAULT_VALUE = append(newATTRIBUTE_DEFINITION_REALOwner.DEFAULT_VALUE, a_default_value_4_)
-							}
-						} else {
-							newATTRIBUTE_DEFINITION_REALOwner.DEFAULT_VALUE = append(newATTRIBUTE_DEFINITION_REALOwner.DEFAULT_VALUE, a_default_value_4_)
-						}
-					}
-				}
-			}
-		}
-	}
-
-	// manage the suppress operation
-	if a_default_value_4FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_default_value_4_.Unstage(a_default_value_4FormCallback.probe.stageOfInterest)
-	}
-
-	a_default_value_4FormCallback.probe.stageOfInterest.Commit()
-	fillUpTable[models.A_DEFAULT_VALUE_4](
-		a_default_value_4FormCallback.probe,
-	)
-	a_default_value_4FormCallback.probe.tableStage.Commit()
-
-	// display a new form by reset the form stage
-	if a_default_value_4FormCallback.CreationMode || a_default_value_4FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_default_value_4FormCallback.probe.formStage.Reset()
-		newFormGroup := (&table.FormGroup{
-			Name: table.FormGroupDefaultName.ToString(),
-		}).Stage(a_default_value_4FormCallback.probe.formStage)
-		newFormGroup.OnSave = __gong__New__A_DEFAULT_VALUE_4FormCallback(
-			nil,
-			a_default_value_4FormCallback.probe,
-			newFormGroup,
-		)
-		a_default_value_4 := new(models.A_DEFAULT_VALUE_4)
-		FillUpForm(a_default_value_4, newFormGroup, a_default_value_4FormCallback.probe)
-		a_default_value_4FormCallback.probe.formStage.Commit()
-	}
-
-	fillUpTree(a_default_value_4FormCallback.probe)
-}
-func __gong__New__A_DEFAULT_VALUE_5FormCallback(
-	a_default_value_5 *models.A_DEFAULT_VALUE_5,
-	probe *Probe,
-	formGroup *table.FormGroup,
-) (a_default_value_5FormCallback *A_DEFAULT_VALUE_5FormCallback) {
-	a_default_value_5FormCallback = new(A_DEFAULT_VALUE_5FormCallback)
-	a_default_value_5FormCallback.probe = probe
-	a_default_value_5FormCallback.a_default_value_5 = a_default_value_5
-	a_default_value_5FormCallback.formGroup = formGroup
-
-	a_default_value_5FormCallback.CreationMode = (a_default_value_5 == nil)
-
-	return
-}
-
-type A_DEFAULT_VALUE_5FormCallback struct {
-	a_default_value_5 *models.A_DEFAULT_VALUE_5
-
-	// If the form call is called on the creation of a new instnace
-	CreationMode bool
-
-	probe *Probe
-
-	formGroup *table.FormGroup
-}
-
-func (a_default_value_5FormCallback *A_DEFAULT_VALUE_5FormCallback) OnSave() {
-
-	log.Println("A_DEFAULT_VALUE_5FormCallback, OnSave")
+	log.Println("A_DATATYPE_DEFINITION_ENUMERATION_REFFormCallback, OnSave")
 
 	// checkout formStage to have the form group on the stage synchronized with the
 	// back repo (and front repo)
-	a_default_value_5FormCallback.probe.formStage.Checkout()
+	a_datatype_definition_enumeration_refFormCallback.probe.formStage.Checkout()
 
-	if a_default_value_5FormCallback.a_default_value_5 == nil {
-		a_default_value_5FormCallback.a_default_value_5 = new(models.A_DEFAULT_VALUE_5).Stage(a_default_value_5FormCallback.probe.stageOfInterest)
+	if a_datatype_definition_enumeration_refFormCallback.a_datatype_definition_enumeration_ref == nil {
+		a_datatype_definition_enumeration_refFormCallback.a_datatype_definition_enumeration_ref = new(models.A_DATATYPE_DEFINITION_ENUMERATION_REF).Stage(a_datatype_definition_enumeration_refFormCallback.probe.stageOfInterest)
 	}
-	a_default_value_5_ := a_default_value_5FormCallback.a_default_value_5
-	_ = a_default_value_5_
+	a_datatype_definition_enumeration_ref_ := a_datatype_definition_enumeration_refFormCallback.a_datatype_definition_enumeration_ref
+	_ = a_datatype_definition_enumeration_ref_
 
-	for _, formDiv := range a_default_value_5FormCallback.formGroup.FormDivs {
+	for _, formDiv := range a_datatype_definition_enumeration_refFormCallback.formGroup.FormDivs {
 		switch formDiv.Name {
 		// insertion point per field
 		case "Name":
-			FormDivBasicFieldToField(&(a_default_value_5_.Name), formDiv)
-		case "ATTRIBUTE_DEFINITION_ENUMERATION:DEFAULT_VALUE":
+			FormDivBasicFieldToField(&(a_datatype_definition_enumeration_ref_.Name), formDiv)
+		case "DATATYPE_DEFINITION_ENUMERATION_REF":
+			FormDivBasicFieldToField(&(a_datatype_definition_enumeration_ref_.DATATYPE_DEFINITION_ENUMERATION_REF), formDiv)
+		case "ATTRIBUTE_DEFINITION_ENUMERATION:TYPE":
 			// we need to retrieve the field owner before the change
 			var pastATTRIBUTE_DEFINITION_ENUMERATIONOwner *models.ATTRIBUTE_DEFINITION_ENUMERATION
 			var rf models.ReverseField
 			_ = rf
 			rf.GongstructName = "ATTRIBUTE_DEFINITION_ENUMERATION"
-			rf.Fieldname = "DEFAULT_VALUE"
+			rf.Fieldname = "TYPE"
 			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_default_value_5FormCallback.probe.stageOfInterest,
-				a_default_value_5FormCallback.probe.backRepoOfInterest,
-				a_default_value_5_,
+				a_datatype_definition_enumeration_refFormCallback.probe.stageOfInterest,
+				a_datatype_definition_enumeration_refFormCallback.probe.backRepoOfInterest,
+				a_datatype_definition_enumeration_ref_,
 				&rf)
 
 			if reverseFieldOwner != nil {
@@ -4325,26 +5857,26 @@ func (a_default_value_5FormCallback *A_DEFAULT_VALUE_5FormCallback) OnSave() {
 			}
 			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
 				if pastATTRIBUTE_DEFINITION_ENUMERATIONOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_DEFINITION_ENUMERATIONOwner.DEFAULT_VALUE, a_default_value_5_)
-					pastATTRIBUTE_DEFINITION_ENUMERATIONOwner.DEFAULT_VALUE = slices.Delete(pastATTRIBUTE_DEFINITION_ENUMERATIONOwner.DEFAULT_VALUE, idx, idx+1)
+					idx := slices.Index(pastATTRIBUTE_DEFINITION_ENUMERATIONOwner.TYPE, a_datatype_definition_enumeration_ref_)
+					pastATTRIBUTE_DEFINITION_ENUMERATIONOwner.TYPE = slices.Delete(pastATTRIBUTE_DEFINITION_ENUMERATIONOwner.TYPE, idx, idx+1)
 				}
 			} else {
 				// we need to retrieve the field owner after the change
 				// parse all astrcut and get the one with the name in the
 				// div
-				for _attribute_definition_enumeration := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_ENUMERATION](a_default_value_5FormCallback.probe.stageOfInterest) {
+				for _attribute_definition_enumeration := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_ENUMERATION](a_datatype_definition_enumeration_refFormCallback.probe.stageOfInterest) {
 
 					// the match is base on the name
 					if _attribute_definition_enumeration.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
 						newATTRIBUTE_DEFINITION_ENUMERATIONOwner := _attribute_definition_enumeration // we have a match
 						if pastATTRIBUTE_DEFINITION_ENUMERATIONOwner != nil {
 							if newATTRIBUTE_DEFINITION_ENUMERATIONOwner != pastATTRIBUTE_DEFINITION_ENUMERATIONOwner {
-								idx := slices.Index(pastATTRIBUTE_DEFINITION_ENUMERATIONOwner.DEFAULT_VALUE, a_default_value_5_)
-								pastATTRIBUTE_DEFINITION_ENUMERATIONOwner.DEFAULT_VALUE = slices.Delete(pastATTRIBUTE_DEFINITION_ENUMERATIONOwner.DEFAULT_VALUE, idx, idx+1)
-								newATTRIBUTE_DEFINITION_ENUMERATIONOwner.DEFAULT_VALUE = append(newATTRIBUTE_DEFINITION_ENUMERATIONOwner.DEFAULT_VALUE, a_default_value_5_)
+								idx := slices.Index(pastATTRIBUTE_DEFINITION_ENUMERATIONOwner.TYPE, a_datatype_definition_enumeration_ref_)
+								pastATTRIBUTE_DEFINITION_ENUMERATIONOwner.TYPE = slices.Delete(pastATTRIBUTE_DEFINITION_ENUMERATIONOwner.TYPE, idx, idx+1)
+								newATTRIBUTE_DEFINITION_ENUMERATIONOwner.TYPE = append(newATTRIBUTE_DEFINITION_ENUMERATIONOwner.TYPE, a_datatype_definition_enumeration_ref_)
 							}
 						} else {
-							newATTRIBUTE_DEFINITION_ENUMERATIONOwner.DEFAULT_VALUE = append(newATTRIBUTE_DEFINITION_ENUMERATIONOwner.DEFAULT_VALUE, a_default_value_5_)
+							newATTRIBUTE_DEFINITION_ENUMERATIONOwner.TYPE = append(newATTRIBUTE_DEFINITION_ENUMERATIONOwner.TYPE, a_datatype_definition_enumeration_ref_)
 						}
 					}
 				}
@@ -4353,51 +5885,51 @@ func (a_default_value_5FormCallback *A_DEFAULT_VALUE_5FormCallback) OnSave() {
 	}
 
 	// manage the suppress operation
-	if a_default_value_5FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_default_value_5_.Unstage(a_default_value_5FormCallback.probe.stageOfInterest)
+	if a_datatype_definition_enumeration_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_datatype_definition_enumeration_ref_.Unstage(a_datatype_definition_enumeration_refFormCallback.probe.stageOfInterest)
 	}
 
-	a_default_value_5FormCallback.probe.stageOfInterest.Commit()
-	fillUpTable[models.A_DEFAULT_VALUE_5](
-		a_default_value_5FormCallback.probe,
+	a_datatype_definition_enumeration_refFormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.A_DATATYPE_DEFINITION_ENUMERATION_REF](
+		a_datatype_definition_enumeration_refFormCallback.probe,
 	)
-	a_default_value_5FormCallback.probe.tableStage.Commit()
+	a_datatype_definition_enumeration_refFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
-	if a_default_value_5FormCallback.CreationMode || a_default_value_5FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_default_value_5FormCallback.probe.formStage.Reset()
+	if a_datatype_definition_enumeration_refFormCallback.CreationMode || a_datatype_definition_enumeration_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_datatype_definition_enumeration_refFormCallback.probe.formStage.Reset()
 		newFormGroup := (&table.FormGroup{
 			Name: table.FormGroupDefaultName.ToString(),
-		}).Stage(a_default_value_5FormCallback.probe.formStage)
-		newFormGroup.OnSave = __gong__New__A_DEFAULT_VALUE_5FormCallback(
+		}).Stage(a_datatype_definition_enumeration_refFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__A_DATATYPE_DEFINITION_ENUMERATION_REFFormCallback(
 			nil,
-			a_default_value_5FormCallback.probe,
+			a_datatype_definition_enumeration_refFormCallback.probe,
 			newFormGroup,
 		)
-		a_default_value_5 := new(models.A_DEFAULT_VALUE_5)
-		FillUpForm(a_default_value_5, newFormGroup, a_default_value_5FormCallback.probe)
-		a_default_value_5FormCallback.probe.formStage.Commit()
+		a_datatype_definition_enumeration_ref := new(models.A_DATATYPE_DEFINITION_ENUMERATION_REF)
+		FillUpForm(a_datatype_definition_enumeration_ref, newFormGroup, a_datatype_definition_enumeration_refFormCallback.probe)
+		a_datatype_definition_enumeration_refFormCallback.probe.formStage.Commit()
 	}
 
-	fillUpTree(a_default_value_5FormCallback.probe)
+	fillUpTree(a_datatype_definition_enumeration_refFormCallback.probe)
 }
-func __gong__New__A_DEFAULT_VALUE_6FormCallback(
-	a_default_value_6 *models.A_DEFAULT_VALUE_6,
+func __gong__New__A_DATATYPE_DEFINITION_INTEGER_REFFormCallback(
+	a_datatype_definition_integer_ref *models.A_DATATYPE_DEFINITION_INTEGER_REF,
 	probe *Probe,
 	formGroup *table.FormGroup,
-) (a_default_value_6FormCallback *A_DEFAULT_VALUE_6FormCallback) {
-	a_default_value_6FormCallback = new(A_DEFAULT_VALUE_6FormCallback)
-	a_default_value_6FormCallback.probe = probe
-	a_default_value_6FormCallback.a_default_value_6 = a_default_value_6
-	a_default_value_6FormCallback.formGroup = formGroup
+) (a_datatype_definition_integer_refFormCallback *A_DATATYPE_DEFINITION_INTEGER_REFFormCallback) {
+	a_datatype_definition_integer_refFormCallback = new(A_DATATYPE_DEFINITION_INTEGER_REFFormCallback)
+	a_datatype_definition_integer_refFormCallback.probe = probe
+	a_datatype_definition_integer_refFormCallback.a_datatype_definition_integer_ref = a_datatype_definition_integer_ref
+	a_datatype_definition_integer_refFormCallback.formGroup = formGroup
 
-	a_default_value_6FormCallback.CreationMode = (a_default_value_6 == nil)
+	a_datatype_definition_integer_refFormCallback.CreationMode = (a_datatype_definition_integer_ref == nil)
 
 	return
 }
 
-type A_DEFAULT_VALUE_6FormCallback struct {
-	a_default_value_6 *models.A_DEFAULT_VALUE_6
+type A_DATATYPE_DEFINITION_INTEGER_REFFormCallback struct {
+	a_datatype_definition_integer_ref *models.A_DATATYPE_DEFINITION_INTEGER_REF
 
 	// If the form call is called on the creation of a new instnace
 	CreationMode bool
@@ -4407,36 +5939,38 @@ type A_DEFAULT_VALUE_6FormCallback struct {
 	formGroup *table.FormGroup
 }
 
-func (a_default_value_6FormCallback *A_DEFAULT_VALUE_6FormCallback) OnSave() {
+func (a_datatype_definition_integer_refFormCallback *A_DATATYPE_DEFINITION_INTEGER_REFFormCallback) OnSave() {
 
-	log.Println("A_DEFAULT_VALUE_6FormCallback, OnSave")
+	log.Println("A_DATATYPE_DEFINITION_INTEGER_REFFormCallback, OnSave")
 
 	// checkout formStage to have the form group on the stage synchronized with the
 	// back repo (and front repo)
-	a_default_value_6FormCallback.probe.formStage.Checkout()
+	a_datatype_definition_integer_refFormCallback.probe.formStage.Checkout()
 
-	if a_default_value_6FormCallback.a_default_value_6 == nil {
-		a_default_value_6FormCallback.a_default_value_6 = new(models.A_DEFAULT_VALUE_6).Stage(a_default_value_6FormCallback.probe.stageOfInterest)
+	if a_datatype_definition_integer_refFormCallback.a_datatype_definition_integer_ref == nil {
+		a_datatype_definition_integer_refFormCallback.a_datatype_definition_integer_ref = new(models.A_DATATYPE_DEFINITION_INTEGER_REF).Stage(a_datatype_definition_integer_refFormCallback.probe.stageOfInterest)
 	}
-	a_default_value_6_ := a_default_value_6FormCallback.a_default_value_6
-	_ = a_default_value_6_
+	a_datatype_definition_integer_ref_ := a_datatype_definition_integer_refFormCallback.a_datatype_definition_integer_ref
+	_ = a_datatype_definition_integer_ref_
 
-	for _, formDiv := range a_default_value_6FormCallback.formGroup.FormDivs {
+	for _, formDiv := range a_datatype_definition_integer_refFormCallback.formGroup.FormDivs {
 		switch formDiv.Name {
 		// insertion point per field
 		case "Name":
-			FormDivBasicFieldToField(&(a_default_value_6_.Name), formDiv)
-		case "ATTRIBUTE_DEFINITION_INTEGER:DEFAULT_VALUE":
+			FormDivBasicFieldToField(&(a_datatype_definition_integer_ref_.Name), formDiv)
+		case "DATATYPE_DEFINITION_INTEGER_REF":
+			FormDivBasicFieldToField(&(a_datatype_definition_integer_ref_.DATATYPE_DEFINITION_INTEGER_REF), formDiv)
+		case "ATTRIBUTE_DEFINITION_INTEGER:TYPE":
 			// we need to retrieve the field owner before the change
 			var pastATTRIBUTE_DEFINITION_INTEGEROwner *models.ATTRIBUTE_DEFINITION_INTEGER
 			var rf models.ReverseField
 			_ = rf
 			rf.GongstructName = "ATTRIBUTE_DEFINITION_INTEGER"
-			rf.Fieldname = "DEFAULT_VALUE"
+			rf.Fieldname = "TYPE"
 			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_default_value_6FormCallback.probe.stageOfInterest,
-				a_default_value_6FormCallback.probe.backRepoOfInterest,
-				a_default_value_6_,
+				a_datatype_definition_integer_refFormCallback.probe.stageOfInterest,
+				a_datatype_definition_integer_refFormCallback.probe.backRepoOfInterest,
+				a_datatype_definition_integer_ref_,
 				&rf)
 
 			if reverseFieldOwner != nil {
@@ -4444,26 +5978,26 @@ func (a_default_value_6FormCallback *A_DEFAULT_VALUE_6FormCallback) OnSave() {
 			}
 			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
 				if pastATTRIBUTE_DEFINITION_INTEGEROwner != nil {
-					idx := slices.Index(pastATTRIBUTE_DEFINITION_INTEGEROwner.DEFAULT_VALUE, a_default_value_6_)
-					pastATTRIBUTE_DEFINITION_INTEGEROwner.DEFAULT_VALUE = slices.Delete(pastATTRIBUTE_DEFINITION_INTEGEROwner.DEFAULT_VALUE, idx, idx+1)
+					idx := slices.Index(pastATTRIBUTE_DEFINITION_INTEGEROwner.TYPE, a_datatype_definition_integer_ref_)
+					pastATTRIBUTE_DEFINITION_INTEGEROwner.TYPE = slices.Delete(pastATTRIBUTE_DEFINITION_INTEGEROwner.TYPE, idx, idx+1)
 				}
 			} else {
 				// we need to retrieve the field owner after the change
 				// parse all astrcut and get the one with the name in the
 				// div
-				for _attribute_definition_integer := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_INTEGER](a_default_value_6FormCallback.probe.stageOfInterest) {
+				for _attribute_definition_integer := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_INTEGER](a_datatype_definition_integer_refFormCallback.probe.stageOfInterest) {
 
 					// the match is base on the name
 					if _attribute_definition_integer.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
 						newATTRIBUTE_DEFINITION_INTEGEROwner := _attribute_definition_integer // we have a match
 						if pastATTRIBUTE_DEFINITION_INTEGEROwner != nil {
 							if newATTRIBUTE_DEFINITION_INTEGEROwner != pastATTRIBUTE_DEFINITION_INTEGEROwner {
-								idx := slices.Index(pastATTRIBUTE_DEFINITION_INTEGEROwner.DEFAULT_VALUE, a_default_value_6_)
-								pastATTRIBUTE_DEFINITION_INTEGEROwner.DEFAULT_VALUE = slices.Delete(pastATTRIBUTE_DEFINITION_INTEGEROwner.DEFAULT_VALUE, idx, idx+1)
-								newATTRIBUTE_DEFINITION_INTEGEROwner.DEFAULT_VALUE = append(newATTRIBUTE_DEFINITION_INTEGEROwner.DEFAULT_VALUE, a_default_value_6_)
+								idx := slices.Index(pastATTRIBUTE_DEFINITION_INTEGEROwner.TYPE, a_datatype_definition_integer_ref_)
+								pastATTRIBUTE_DEFINITION_INTEGEROwner.TYPE = slices.Delete(pastATTRIBUTE_DEFINITION_INTEGEROwner.TYPE, idx, idx+1)
+								newATTRIBUTE_DEFINITION_INTEGEROwner.TYPE = append(newATTRIBUTE_DEFINITION_INTEGEROwner.TYPE, a_datatype_definition_integer_ref_)
 							}
 						} else {
-							newATTRIBUTE_DEFINITION_INTEGEROwner.DEFAULT_VALUE = append(newATTRIBUTE_DEFINITION_INTEGEROwner.DEFAULT_VALUE, a_default_value_6_)
+							newATTRIBUTE_DEFINITION_INTEGEROwner.TYPE = append(newATTRIBUTE_DEFINITION_INTEGEROwner.TYPE, a_datatype_definition_integer_ref_)
 						}
 					}
 				}
@@ -4472,51 +6006,51 @@ func (a_default_value_6FormCallback *A_DEFAULT_VALUE_6FormCallback) OnSave() {
 	}
 
 	// manage the suppress operation
-	if a_default_value_6FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_default_value_6_.Unstage(a_default_value_6FormCallback.probe.stageOfInterest)
+	if a_datatype_definition_integer_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_datatype_definition_integer_ref_.Unstage(a_datatype_definition_integer_refFormCallback.probe.stageOfInterest)
 	}
 
-	a_default_value_6FormCallback.probe.stageOfInterest.Commit()
-	fillUpTable[models.A_DEFAULT_VALUE_6](
-		a_default_value_6FormCallback.probe,
+	a_datatype_definition_integer_refFormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.A_DATATYPE_DEFINITION_INTEGER_REF](
+		a_datatype_definition_integer_refFormCallback.probe,
 	)
-	a_default_value_6FormCallback.probe.tableStage.Commit()
+	a_datatype_definition_integer_refFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
-	if a_default_value_6FormCallback.CreationMode || a_default_value_6FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_default_value_6FormCallback.probe.formStage.Reset()
+	if a_datatype_definition_integer_refFormCallback.CreationMode || a_datatype_definition_integer_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_datatype_definition_integer_refFormCallback.probe.formStage.Reset()
 		newFormGroup := (&table.FormGroup{
 			Name: table.FormGroupDefaultName.ToString(),
-		}).Stage(a_default_value_6FormCallback.probe.formStage)
-		newFormGroup.OnSave = __gong__New__A_DEFAULT_VALUE_6FormCallback(
+		}).Stage(a_datatype_definition_integer_refFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__A_DATATYPE_DEFINITION_INTEGER_REFFormCallback(
 			nil,
-			a_default_value_6FormCallback.probe,
+			a_datatype_definition_integer_refFormCallback.probe,
 			newFormGroup,
 		)
-		a_default_value_6 := new(models.A_DEFAULT_VALUE_6)
-		FillUpForm(a_default_value_6, newFormGroup, a_default_value_6FormCallback.probe)
-		a_default_value_6FormCallback.probe.formStage.Commit()
+		a_datatype_definition_integer_ref := new(models.A_DATATYPE_DEFINITION_INTEGER_REF)
+		FillUpForm(a_datatype_definition_integer_ref, newFormGroup, a_datatype_definition_integer_refFormCallback.probe)
+		a_datatype_definition_integer_refFormCallback.probe.formStage.Commit()
 	}
 
-	fillUpTree(a_default_value_6FormCallback.probe)
+	fillUpTree(a_datatype_definition_integer_refFormCallback.probe)
 }
-func __gong__New__A_DEFINITIONFormCallback(
-	a_definition *models.A_DEFINITION,
+func __gong__New__A_DATATYPE_DEFINITION_REAL_REFFormCallback(
+	a_datatype_definition_real_ref *models.A_DATATYPE_DEFINITION_REAL_REF,
 	probe *Probe,
 	formGroup *table.FormGroup,
-) (a_definitionFormCallback *A_DEFINITIONFormCallback) {
-	a_definitionFormCallback = new(A_DEFINITIONFormCallback)
-	a_definitionFormCallback.probe = probe
-	a_definitionFormCallback.a_definition = a_definition
-	a_definitionFormCallback.formGroup = formGroup
+) (a_datatype_definition_real_refFormCallback *A_DATATYPE_DEFINITION_REAL_REFFormCallback) {
+	a_datatype_definition_real_refFormCallback = new(A_DATATYPE_DEFINITION_REAL_REFFormCallback)
+	a_datatype_definition_real_refFormCallback.probe = probe
+	a_datatype_definition_real_refFormCallback.a_datatype_definition_real_ref = a_datatype_definition_real_ref
+	a_datatype_definition_real_refFormCallback.formGroup = formGroup
 
-	a_definitionFormCallback.CreationMode = (a_definition == nil)
+	a_datatype_definition_real_refFormCallback.CreationMode = (a_datatype_definition_real_ref == nil)
 
 	return
 }
 
-type A_DEFINITIONFormCallback struct {
-	a_definition *models.A_DEFINITION
+type A_DATATYPE_DEFINITION_REAL_REFFormCallback struct {
+	a_datatype_definition_real_ref *models.A_DATATYPE_DEFINITION_REAL_REF
 
 	// If the form call is called on the creation of a new instnace
 	CreationMode bool
@@ -4526,65 +6060,65 @@ type A_DEFINITIONFormCallback struct {
 	formGroup *table.FormGroup
 }
 
-func (a_definitionFormCallback *A_DEFINITIONFormCallback) OnSave() {
+func (a_datatype_definition_real_refFormCallback *A_DATATYPE_DEFINITION_REAL_REFFormCallback) OnSave() {
 
-	log.Println("A_DEFINITIONFormCallback, OnSave")
+	log.Println("A_DATATYPE_DEFINITION_REAL_REFFormCallback, OnSave")
 
 	// checkout formStage to have the form group on the stage synchronized with the
 	// back repo (and front repo)
-	a_definitionFormCallback.probe.formStage.Checkout()
+	a_datatype_definition_real_refFormCallback.probe.formStage.Checkout()
 
-	if a_definitionFormCallback.a_definition == nil {
-		a_definitionFormCallback.a_definition = new(models.A_DEFINITION).Stage(a_definitionFormCallback.probe.stageOfInterest)
+	if a_datatype_definition_real_refFormCallback.a_datatype_definition_real_ref == nil {
+		a_datatype_definition_real_refFormCallback.a_datatype_definition_real_ref = new(models.A_DATATYPE_DEFINITION_REAL_REF).Stage(a_datatype_definition_real_refFormCallback.probe.stageOfInterest)
 	}
-	a_definition_ := a_definitionFormCallback.a_definition
-	_ = a_definition_
+	a_datatype_definition_real_ref_ := a_datatype_definition_real_refFormCallback.a_datatype_definition_real_ref
+	_ = a_datatype_definition_real_ref_
 
-	for _, formDiv := range a_definitionFormCallback.formGroup.FormDivs {
+	for _, formDiv := range a_datatype_definition_real_refFormCallback.formGroup.FormDivs {
 		switch formDiv.Name {
 		// insertion point per field
 		case "Name":
-			FormDivBasicFieldToField(&(a_definition_.Name), formDiv)
-		case "ATTRIBUTE_DEFINITION_INTEGER_REF":
-			FormDivBasicFieldToField(&(a_definition_.ATTRIBUTE_DEFINITION_INTEGER_REF), formDiv)
-		case "ATTRIBUTE_VALUE_INTEGER:DEFINITION":
+			FormDivBasicFieldToField(&(a_datatype_definition_real_ref_.Name), formDiv)
+		case "DATATYPE_DEFINITION_REAL_REF":
+			FormDivBasicFieldToField(&(a_datatype_definition_real_ref_.DATATYPE_DEFINITION_REAL_REF), formDiv)
+		case "ATTRIBUTE_DEFINITION_REAL:TYPE":
 			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_VALUE_INTEGEROwner *models.ATTRIBUTE_VALUE_INTEGER
+			var pastATTRIBUTE_DEFINITION_REALOwner *models.ATTRIBUTE_DEFINITION_REAL
 			var rf models.ReverseField
 			_ = rf
-			rf.GongstructName = "ATTRIBUTE_VALUE_INTEGER"
-			rf.Fieldname = "DEFINITION"
+			rf.GongstructName = "ATTRIBUTE_DEFINITION_REAL"
+			rf.Fieldname = "TYPE"
 			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_definitionFormCallback.probe.stageOfInterest,
-				a_definitionFormCallback.probe.backRepoOfInterest,
-				a_definition_,
+				a_datatype_definition_real_refFormCallback.probe.stageOfInterest,
+				a_datatype_definition_real_refFormCallback.probe.backRepoOfInterest,
+				a_datatype_definition_real_ref_,
 				&rf)
 
 			if reverseFieldOwner != nil {
-				pastATTRIBUTE_VALUE_INTEGEROwner = reverseFieldOwner.(*models.ATTRIBUTE_VALUE_INTEGER)
+				pastATTRIBUTE_DEFINITION_REALOwner = reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_REAL)
 			}
 			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_VALUE_INTEGEROwner != nil {
-					idx := slices.Index(pastATTRIBUTE_VALUE_INTEGEROwner.DEFINITION, a_definition_)
-					pastATTRIBUTE_VALUE_INTEGEROwner.DEFINITION = slices.Delete(pastATTRIBUTE_VALUE_INTEGEROwner.DEFINITION, idx, idx+1)
+				if pastATTRIBUTE_DEFINITION_REALOwner != nil {
+					idx := slices.Index(pastATTRIBUTE_DEFINITION_REALOwner.TYPE, a_datatype_definition_real_ref_)
+					pastATTRIBUTE_DEFINITION_REALOwner.TYPE = slices.Delete(pastATTRIBUTE_DEFINITION_REALOwner.TYPE, idx, idx+1)
 				}
 			} else {
 				// we need to retrieve the field owner after the change
 				// parse all astrcut and get the one with the name in the
 				// div
-				for _attribute_value_integer := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_VALUE_INTEGER](a_definitionFormCallback.probe.stageOfInterest) {
+				for _attribute_definition_real := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_REAL](a_datatype_definition_real_refFormCallback.probe.stageOfInterest) {
 
 					// the match is base on the name
-					if _attribute_value_integer.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_VALUE_INTEGEROwner := _attribute_value_integer // we have a match
-						if pastATTRIBUTE_VALUE_INTEGEROwner != nil {
-							if newATTRIBUTE_VALUE_INTEGEROwner != pastATTRIBUTE_VALUE_INTEGEROwner {
-								idx := slices.Index(pastATTRIBUTE_VALUE_INTEGEROwner.DEFINITION, a_definition_)
-								pastATTRIBUTE_VALUE_INTEGEROwner.DEFINITION = slices.Delete(pastATTRIBUTE_VALUE_INTEGEROwner.DEFINITION, idx, idx+1)
-								newATTRIBUTE_VALUE_INTEGEROwner.DEFINITION = append(newATTRIBUTE_VALUE_INTEGEROwner.DEFINITION, a_definition_)
+					if _attribute_definition_real.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newATTRIBUTE_DEFINITION_REALOwner := _attribute_definition_real // we have a match
+						if pastATTRIBUTE_DEFINITION_REALOwner != nil {
+							if newATTRIBUTE_DEFINITION_REALOwner != pastATTRIBUTE_DEFINITION_REALOwner {
+								idx := slices.Index(pastATTRIBUTE_DEFINITION_REALOwner.TYPE, a_datatype_definition_real_ref_)
+								pastATTRIBUTE_DEFINITION_REALOwner.TYPE = slices.Delete(pastATTRIBUTE_DEFINITION_REALOwner.TYPE, idx, idx+1)
+								newATTRIBUTE_DEFINITION_REALOwner.TYPE = append(newATTRIBUTE_DEFINITION_REALOwner.TYPE, a_datatype_definition_real_ref_)
 							}
 						} else {
-							newATTRIBUTE_VALUE_INTEGEROwner.DEFINITION = append(newATTRIBUTE_VALUE_INTEGEROwner.DEFINITION, a_definition_)
+							newATTRIBUTE_DEFINITION_REALOwner.TYPE = append(newATTRIBUTE_DEFINITION_REALOwner.TYPE, a_datatype_definition_real_ref_)
 						}
 					}
 				}
@@ -4593,51 +6127,51 @@ func (a_definitionFormCallback *A_DEFINITIONFormCallback) OnSave() {
 	}
 
 	// manage the suppress operation
-	if a_definitionFormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_definition_.Unstage(a_definitionFormCallback.probe.stageOfInterest)
+	if a_datatype_definition_real_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_datatype_definition_real_ref_.Unstage(a_datatype_definition_real_refFormCallback.probe.stageOfInterest)
 	}
 
-	a_definitionFormCallback.probe.stageOfInterest.Commit()
-	fillUpTable[models.A_DEFINITION](
-		a_definitionFormCallback.probe,
+	a_datatype_definition_real_refFormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.A_DATATYPE_DEFINITION_REAL_REF](
+		a_datatype_definition_real_refFormCallback.probe,
 	)
-	a_definitionFormCallback.probe.tableStage.Commit()
+	a_datatype_definition_real_refFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
-	if a_definitionFormCallback.CreationMode || a_definitionFormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_definitionFormCallback.probe.formStage.Reset()
+	if a_datatype_definition_real_refFormCallback.CreationMode || a_datatype_definition_real_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_datatype_definition_real_refFormCallback.probe.formStage.Reset()
 		newFormGroup := (&table.FormGroup{
 			Name: table.FormGroupDefaultName.ToString(),
-		}).Stage(a_definitionFormCallback.probe.formStage)
-		newFormGroup.OnSave = __gong__New__A_DEFINITIONFormCallback(
+		}).Stage(a_datatype_definition_real_refFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__A_DATATYPE_DEFINITION_REAL_REFFormCallback(
 			nil,
-			a_definitionFormCallback.probe,
+			a_datatype_definition_real_refFormCallback.probe,
 			newFormGroup,
 		)
-		a_definition := new(models.A_DEFINITION)
-		FillUpForm(a_definition, newFormGroup, a_definitionFormCallback.probe)
-		a_definitionFormCallback.probe.formStage.Commit()
+		a_datatype_definition_real_ref := new(models.A_DATATYPE_DEFINITION_REAL_REF)
+		FillUpForm(a_datatype_definition_real_ref, newFormGroup, a_datatype_definition_real_refFormCallback.probe)
+		a_datatype_definition_real_refFormCallback.probe.formStage.Commit()
 	}
 
-	fillUpTree(a_definitionFormCallback.probe)
+	fillUpTree(a_datatype_definition_real_refFormCallback.probe)
 }
-func __gong__New__A_DEFINITION_1FormCallback(
-	a_definition_1 *models.A_DEFINITION_1,
+func __gong__New__A_DATATYPE_DEFINITION_STRING_REFFormCallback(
+	a_datatype_definition_string_ref *models.A_DATATYPE_DEFINITION_STRING_REF,
 	probe *Probe,
 	formGroup *table.FormGroup,
-) (a_definition_1FormCallback *A_DEFINITION_1FormCallback) {
-	a_definition_1FormCallback = new(A_DEFINITION_1FormCallback)
-	a_definition_1FormCallback.probe = probe
-	a_definition_1FormCallback.a_definition_1 = a_definition_1
-	a_definition_1FormCallback.formGroup = formGroup
+) (a_datatype_definition_string_refFormCallback *A_DATATYPE_DEFINITION_STRING_REFFormCallback) {
+	a_datatype_definition_string_refFormCallback = new(A_DATATYPE_DEFINITION_STRING_REFFormCallback)
+	a_datatype_definition_string_refFormCallback.probe = probe
+	a_datatype_definition_string_refFormCallback.a_datatype_definition_string_ref = a_datatype_definition_string_ref
+	a_datatype_definition_string_refFormCallback.formGroup = formGroup
 
-	a_definition_1FormCallback.CreationMode = (a_definition_1 == nil)
+	a_datatype_definition_string_refFormCallback.CreationMode = (a_datatype_definition_string_ref == nil)
 
 	return
 }
 
-type A_DEFINITION_1FormCallback struct {
-	a_definition_1 *models.A_DEFINITION_1
+type A_DATATYPE_DEFINITION_STRING_REFFormCallback struct {
+	a_datatype_definition_string_ref *models.A_DATATYPE_DEFINITION_STRING_REF
 
 	// If the form call is called on the creation of a new instnace
 	CreationMode bool
@@ -4647,65 +6181,65 @@ type A_DEFINITION_1FormCallback struct {
 	formGroup *table.FormGroup
 }
 
-func (a_definition_1FormCallback *A_DEFINITION_1FormCallback) OnSave() {
+func (a_datatype_definition_string_refFormCallback *A_DATATYPE_DEFINITION_STRING_REFFormCallback) OnSave() {
 
-	log.Println("A_DEFINITION_1FormCallback, OnSave")
+	log.Println("A_DATATYPE_DEFINITION_STRING_REFFormCallback, OnSave")
 
 	// checkout formStage to have the form group on the stage synchronized with the
 	// back repo (and front repo)
-	a_definition_1FormCallback.probe.formStage.Checkout()
+	a_datatype_definition_string_refFormCallback.probe.formStage.Checkout()
 
-	if a_definition_1FormCallback.a_definition_1 == nil {
-		a_definition_1FormCallback.a_definition_1 = new(models.A_DEFINITION_1).Stage(a_definition_1FormCallback.probe.stageOfInterest)
+	if a_datatype_definition_string_refFormCallback.a_datatype_definition_string_ref == nil {
+		a_datatype_definition_string_refFormCallback.a_datatype_definition_string_ref = new(models.A_DATATYPE_DEFINITION_STRING_REF).Stage(a_datatype_definition_string_refFormCallback.probe.stageOfInterest)
 	}
-	a_definition_1_ := a_definition_1FormCallback.a_definition_1
-	_ = a_definition_1_
+	a_datatype_definition_string_ref_ := a_datatype_definition_string_refFormCallback.a_datatype_definition_string_ref
+	_ = a_datatype_definition_string_ref_
 
-	for _, formDiv := range a_definition_1FormCallback.formGroup.FormDivs {
+	for _, formDiv := range a_datatype_definition_string_refFormCallback.formGroup.FormDivs {
 		switch formDiv.Name {
 		// insertion point per field
 		case "Name":
-			FormDivBasicFieldToField(&(a_definition_1_.Name), formDiv)
-		case "ATTRIBUTE_DEFINITION_XHTML_REF":
-			FormDivBasicFieldToField(&(a_definition_1_.ATTRIBUTE_DEFINITION_XHTML_REF), formDiv)
-		case "ATTRIBUTE_VALUE_XHTML:DEFINITION":
+			FormDivBasicFieldToField(&(a_datatype_definition_string_ref_.Name), formDiv)
+		case "DATATYPE_DEFINITION_STRING_REF":
+			FormDivBasicFieldToField(&(a_datatype_definition_string_ref_.DATATYPE_DEFINITION_STRING_REF), formDiv)
+		case "ATTRIBUTE_DEFINITION_STRING:TYPE":
 			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_VALUE_XHTMLOwner *models.ATTRIBUTE_VALUE_XHTML
+			var pastATTRIBUTE_DEFINITION_STRINGOwner *models.ATTRIBUTE_DEFINITION_STRING
 			var rf models.ReverseField
 			_ = rf
-			rf.GongstructName = "ATTRIBUTE_VALUE_XHTML"
-			rf.Fieldname = "DEFINITION"
+			rf.GongstructName = "ATTRIBUTE_DEFINITION_STRING"
+			rf.Fieldname = "TYPE"
 			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_definition_1FormCallback.probe.stageOfInterest,
-				a_definition_1FormCallback.probe.backRepoOfInterest,
-				a_definition_1_,
+				a_datatype_definition_string_refFormCallback.probe.stageOfInterest,
+				a_datatype_definition_string_refFormCallback.probe.backRepoOfInterest,
+				a_datatype_definition_string_ref_,
 				&rf)
 
 			if reverseFieldOwner != nil {
-				pastATTRIBUTE_VALUE_XHTMLOwner = reverseFieldOwner.(*models.ATTRIBUTE_VALUE_XHTML)
+				pastATTRIBUTE_DEFINITION_STRINGOwner = reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_STRING)
 			}
 			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_VALUE_XHTMLOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_VALUE_XHTMLOwner.DEFINITION, a_definition_1_)
-					pastATTRIBUTE_VALUE_XHTMLOwner.DEFINITION = slices.Delete(pastATTRIBUTE_VALUE_XHTMLOwner.DEFINITION, idx, idx+1)
+				if pastATTRIBUTE_DEFINITION_STRINGOwner != nil {
+					idx := slices.Index(pastATTRIBUTE_DEFINITION_STRINGOwner.TYPE, a_datatype_definition_string_ref_)
+					pastATTRIBUTE_DEFINITION_STRINGOwner.TYPE = slices.Delete(pastATTRIBUTE_DEFINITION_STRINGOwner.TYPE, idx, idx+1)
 				}
 			} else {
 				// we need to retrieve the field owner after the change
 				// parse all astrcut and get the one with the name in the
 				// div
-				for _attribute_value_xhtml := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_VALUE_XHTML](a_definition_1FormCallback.probe.stageOfInterest) {
+				for _attribute_definition_string := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_STRING](a_datatype_definition_string_refFormCallback.probe.stageOfInterest) {
 
 					// the match is base on the name
-					if _attribute_value_xhtml.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_VALUE_XHTMLOwner := _attribute_value_xhtml // we have a match
-						if pastATTRIBUTE_VALUE_XHTMLOwner != nil {
-							if newATTRIBUTE_VALUE_XHTMLOwner != pastATTRIBUTE_VALUE_XHTMLOwner {
-								idx := slices.Index(pastATTRIBUTE_VALUE_XHTMLOwner.DEFINITION, a_definition_1_)
-								pastATTRIBUTE_VALUE_XHTMLOwner.DEFINITION = slices.Delete(pastATTRIBUTE_VALUE_XHTMLOwner.DEFINITION, idx, idx+1)
-								newATTRIBUTE_VALUE_XHTMLOwner.DEFINITION = append(newATTRIBUTE_VALUE_XHTMLOwner.DEFINITION, a_definition_1_)
+					if _attribute_definition_string.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newATTRIBUTE_DEFINITION_STRINGOwner := _attribute_definition_string // we have a match
+						if pastATTRIBUTE_DEFINITION_STRINGOwner != nil {
+							if newATTRIBUTE_DEFINITION_STRINGOwner != pastATTRIBUTE_DEFINITION_STRINGOwner {
+								idx := slices.Index(pastATTRIBUTE_DEFINITION_STRINGOwner.TYPE, a_datatype_definition_string_ref_)
+								pastATTRIBUTE_DEFINITION_STRINGOwner.TYPE = slices.Delete(pastATTRIBUTE_DEFINITION_STRINGOwner.TYPE, idx, idx+1)
+								newATTRIBUTE_DEFINITION_STRINGOwner.TYPE = append(newATTRIBUTE_DEFINITION_STRINGOwner.TYPE, a_datatype_definition_string_ref_)
 							}
 						} else {
-							newATTRIBUTE_VALUE_XHTMLOwner.DEFINITION = append(newATTRIBUTE_VALUE_XHTMLOwner.DEFINITION, a_definition_1_)
+							newATTRIBUTE_DEFINITION_STRINGOwner.TYPE = append(newATTRIBUTE_DEFINITION_STRINGOwner.TYPE, a_datatype_definition_string_ref_)
 						}
 					}
 				}
@@ -4714,51 +6248,51 @@ func (a_definition_1FormCallback *A_DEFINITION_1FormCallback) OnSave() {
 	}
 
 	// manage the suppress operation
-	if a_definition_1FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_definition_1_.Unstage(a_definition_1FormCallback.probe.stageOfInterest)
+	if a_datatype_definition_string_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_datatype_definition_string_ref_.Unstage(a_datatype_definition_string_refFormCallback.probe.stageOfInterest)
 	}
 
-	a_definition_1FormCallback.probe.stageOfInterest.Commit()
-	fillUpTable[models.A_DEFINITION_1](
-		a_definition_1FormCallback.probe,
+	a_datatype_definition_string_refFormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.A_DATATYPE_DEFINITION_STRING_REF](
+		a_datatype_definition_string_refFormCallback.probe,
 	)
-	a_definition_1FormCallback.probe.tableStage.Commit()
+	a_datatype_definition_string_refFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
-	if a_definition_1FormCallback.CreationMode || a_definition_1FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_definition_1FormCallback.probe.formStage.Reset()
+	if a_datatype_definition_string_refFormCallback.CreationMode || a_datatype_definition_string_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_datatype_definition_string_refFormCallback.probe.formStage.Reset()
 		newFormGroup := (&table.FormGroup{
 			Name: table.FormGroupDefaultName.ToString(),
-		}).Stage(a_definition_1FormCallback.probe.formStage)
-		newFormGroup.OnSave = __gong__New__A_DEFINITION_1FormCallback(
+		}).Stage(a_datatype_definition_string_refFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__A_DATATYPE_DEFINITION_STRING_REFFormCallback(
 			nil,
-			a_definition_1FormCallback.probe,
+			a_datatype_definition_string_refFormCallback.probe,
 			newFormGroup,
 		)
-		a_definition_1 := new(models.A_DEFINITION_1)
-		FillUpForm(a_definition_1, newFormGroup, a_definition_1FormCallback.probe)
-		a_definition_1FormCallback.probe.formStage.Commit()
+		a_datatype_definition_string_ref := new(models.A_DATATYPE_DEFINITION_STRING_REF)
+		FillUpForm(a_datatype_definition_string_ref, newFormGroup, a_datatype_definition_string_refFormCallback.probe)
+		a_datatype_definition_string_refFormCallback.probe.formStage.Commit()
 	}
 
-	fillUpTree(a_definition_1FormCallback.probe)
+	fillUpTree(a_datatype_definition_string_refFormCallback.probe)
 }
-func __gong__New__A_DEFINITION_2FormCallback(
-	a_definition_2 *models.A_DEFINITION_2,
+func __gong__New__A_DATATYPE_DEFINITION_XHTML_REFFormCallback(
+	a_datatype_definition_xhtml_ref *models.A_DATATYPE_DEFINITION_XHTML_REF,
 	probe *Probe,
 	formGroup *table.FormGroup,
-) (a_definition_2FormCallback *A_DEFINITION_2FormCallback) {
-	a_definition_2FormCallback = new(A_DEFINITION_2FormCallback)
-	a_definition_2FormCallback.probe = probe
-	a_definition_2FormCallback.a_definition_2 = a_definition_2
-	a_definition_2FormCallback.formGroup = formGroup
+) (a_datatype_definition_xhtml_refFormCallback *A_DATATYPE_DEFINITION_XHTML_REFFormCallback) {
+	a_datatype_definition_xhtml_refFormCallback = new(A_DATATYPE_DEFINITION_XHTML_REFFormCallback)
+	a_datatype_definition_xhtml_refFormCallback.probe = probe
+	a_datatype_definition_xhtml_refFormCallback.a_datatype_definition_xhtml_ref = a_datatype_definition_xhtml_ref
+	a_datatype_definition_xhtml_refFormCallback.formGroup = formGroup
 
-	a_definition_2FormCallback.CreationMode = (a_definition_2 == nil)
+	a_datatype_definition_xhtml_refFormCallback.CreationMode = (a_datatype_definition_xhtml_ref == nil)
 
 	return
 }
 
-type A_DEFINITION_2FormCallback struct {
-	a_definition_2 *models.A_DEFINITION_2
+type A_DATATYPE_DEFINITION_XHTML_REFFormCallback struct {
+	a_datatype_definition_xhtml_ref *models.A_DATATYPE_DEFINITION_XHTML_REF
 
 	// If the form call is called on the creation of a new instnace
 	CreationMode bool
@@ -4768,65 +6302,65 @@ type A_DEFINITION_2FormCallback struct {
 	formGroup *table.FormGroup
 }
 
-func (a_definition_2FormCallback *A_DEFINITION_2FormCallback) OnSave() {
+func (a_datatype_definition_xhtml_refFormCallback *A_DATATYPE_DEFINITION_XHTML_REFFormCallback) OnSave() {
 
-	log.Println("A_DEFINITION_2FormCallback, OnSave")
+	log.Println("A_DATATYPE_DEFINITION_XHTML_REFFormCallback, OnSave")
 
 	// checkout formStage to have the form group on the stage synchronized with the
 	// back repo (and front repo)
-	a_definition_2FormCallback.probe.formStage.Checkout()
+	a_datatype_definition_xhtml_refFormCallback.probe.formStage.Checkout()
 
-	if a_definition_2FormCallback.a_definition_2 == nil {
-		a_definition_2FormCallback.a_definition_2 = new(models.A_DEFINITION_2).Stage(a_definition_2FormCallback.probe.stageOfInterest)
+	if a_datatype_definition_xhtml_refFormCallback.a_datatype_definition_xhtml_ref == nil {
+		a_datatype_definition_xhtml_refFormCallback.a_datatype_definition_xhtml_ref = new(models.A_DATATYPE_DEFINITION_XHTML_REF).Stage(a_datatype_definition_xhtml_refFormCallback.probe.stageOfInterest)
 	}
-	a_definition_2_ := a_definition_2FormCallback.a_definition_2
-	_ = a_definition_2_
+	a_datatype_definition_xhtml_ref_ := a_datatype_definition_xhtml_refFormCallback.a_datatype_definition_xhtml_ref
+	_ = a_datatype_definition_xhtml_ref_
 
-	for _, formDiv := range a_definition_2FormCallback.formGroup.FormDivs {
+	for _, formDiv := range a_datatype_definition_xhtml_refFormCallback.formGroup.FormDivs {
 		switch formDiv.Name {
 		// insertion point per field
 		case "Name":
-			FormDivBasicFieldToField(&(a_definition_2_.Name), formDiv)
-		case "ATTRIBUTE_DEFINITION_DATE_REF":
-			FormDivBasicFieldToField(&(a_definition_2_.ATTRIBUTE_DEFINITION_DATE_REF), formDiv)
-		case "ATTRIBUTE_VALUE_DATE:DEFINITION":
+			FormDivBasicFieldToField(&(a_datatype_definition_xhtml_ref_.Name), formDiv)
+		case "DATATYPE_DEFINITION_XHTML_REF":
+			FormDivBasicFieldToField(&(a_datatype_definition_xhtml_ref_.DATATYPE_DEFINITION_XHTML_REF), formDiv)
+		case "ATTRIBUTE_DEFINITION_XHTML:TYPE":
 			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_VALUE_DATEOwner *models.ATTRIBUTE_VALUE_DATE
+			var pastATTRIBUTE_DEFINITION_XHTMLOwner *models.ATTRIBUTE_DEFINITION_XHTML
 			var rf models.ReverseField
 			_ = rf
-			rf.GongstructName = "ATTRIBUTE_VALUE_DATE"
-			rf.Fieldname = "DEFINITION"
+			rf.GongstructName = "ATTRIBUTE_DEFINITION_XHTML"
+			rf.Fieldname = "TYPE"
 			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_definition_2FormCallback.probe.stageOfInterest,
-				a_definition_2FormCallback.probe.backRepoOfInterest,
-				a_definition_2_,
+				a_datatype_definition_xhtml_refFormCallback.probe.stageOfInterest,
+				a_datatype_definition_xhtml_refFormCallback.probe.backRepoOfInterest,
+				a_datatype_definition_xhtml_ref_,
 				&rf)
 
 			if reverseFieldOwner != nil {
-				pastATTRIBUTE_VALUE_DATEOwner = reverseFieldOwner.(*models.ATTRIBUTE_VALUE_DATE)
+				pastATTRIBUTE_DEFINITION_XHTMLOwner = reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_XHTML)
 			}
 			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_VALUE_DATEOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_VALUE_DATEOwner.DEFINITION, a_definition_2_)
-					pastATTRIBUTE_VALUE_DATEOwner.DEFINITION = slices.Delete(pastATTRIBUTE_VALUE_DATEOwner.DEFINITION, idx, idx+1)
+				if pastATTRIBUTE_DEFINITION_XHTMLOwner != nil {
+					idx := slices.Index(pastATTRIBUTE_DEFINITION_XHTMLOwner.TYPE, a_datatype_definition_xhtml_ref_)
+					pastATTRIBUTE_DEFINITION_XHTMLOwner.TYPE = slices.Delete(pastATTRIBUTE_DEFINITION_XHTMLOwner.TYPE, idx, idx+1)
 				}
 			} else {
 				// we need to retrieve the field owner after the change
 				// parse all astrcut and get the one with the name in the
 				// div
-				for _attribute_value_date := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_VALUE_DATE](a_definition_2FormCallback.probe.stageOfInterest) {
+				for _attribute_definition_xhtml := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_XHTML](a_datatype_definition_xhtml_refFormCallback.probe.stageOfInterest) {
 
 					// the match is base on the name
-					if _attribute_value_date.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_VALUE_DATEOwner := _attribute_value_date // we have a match
-						if pastATTRIBUTE_VALUE_DATEOwner != nil {
-							if newATTRIBUTE_VALUE_DATEOwner != pastATTRIBUTE_VALUE_DATEOwner {
-								idx := slices.Index(pastATTRIBUTE_VALUE_DATEOwner.DEFINITION, a_definition_2_)
-								pastATTRIBUTE_VALUE_DATEOwner.DEFINITION = slices.Delete(pastATTRIBUTE_VALUE_DATEOwner.DEFINITION, idx, idx+1)
-								newATTRIBUTE_VALUE_DATEOwner.DEFINITION = append(newATTRIBUTE_VALUE_DATEOwner.DEFINITION, a_definition_2_)
+					if _attribute_definition_xhtml.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newATTRIBUTE_DEFINITION_XHTMLOwner := _attribute_definition_xhtml // we have a match
+						if pastATTRIBUTE_DEFINITION_XHTMLOwner != nil {
+							if newATTRIBUTE_DEFINITION_XHTMLOwner != pastATTRIBUTE_DEFINITION_XHTMLOwner {
+								idx := slices.Index(pastATTRIBUTE_DEFINITION_XHTMLOwner.TYPE, a_datatype_definition_xhtml_ref_)
+								pastATTRIBUTE_DEFINITION_XHTMLOwner.TYPE = slices.Delete(pastATTRIBUTE_DEFINITION_XHTMLOwner.TYPE, idx, idx+1)
+								newATTRIBUTE_DEFINITION_XHTMLOwner.TYPE = append(newATTRIBUTE_DEFINITION_XHTMLOwner.TYPE, a_datatype_definition_xhtml_ref_)
 							}
 						} else {
-							newATTRIBUTE_VALUE_DATEOwner.DEFINITION = append(newATTRIBUTE_VALUE_DATEOwner.DEFINITION, a_definition_2_)
+							newATTRIBUTE_DEFINITION_XHTMLOwner.TYPE = append(newATTRIBUTE_DEFINITION_XHTMLOwner.TYPE, a_datatype_definition_xhtml_ref_)
 						}
 					}
 				}
@@ -4835,517 +6369,33 @@ func (a_definition_2FormCallback *A_DEFINITION_2FormCallback) OnSave() {
 	}
 
 	// manage the suppress operation
-	if a_definition_2FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_definition_2_.Unstage(a_definition_2FormCallback.probe.stageOfInterest)
+	if a_datatype_definition_xhtml_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_datatype_definition_xhtml_ref_.Unstage(a_datatype_definition_xhtml_refFormCallback.probe.stageOfInterest)
 	}
 
-	a_definition_2FormCallback.probe.stageOfInterest.Commit()
-	fillUpTable[models.A_DEFINITION_2](
-		a_definition_2FormCallback.probe,
+	a_datatype_definition_xhtml_refFormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.A_DATATYPE_DEFINITION_XHTML_REF](
+		a_datatype_definition_xhtml_refFormCallback.probe,
 	)
-	a_definition_2FormCallback.probe.tableStage.Commit()
+	a_datatype_definition_xhtml_refFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
-	if a_definition_2FormCallback.CreationMode || a_definition_2FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_definition_2FormCallback.probe.formStage.Reset()
+	if a_datatype_definition_xhtml_refFormCallback.CreationMode || a_datatype_definition_xhtml_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_datatype_definition_xhtml_refFormCallback.probe.formStage.Reset()
 		newFormGroup := (&table.FormGroup{
 			Name: table.FormGroupDefaultName.ToString(),
-		}).Stage(a_definition_2FormCallback.probe.formStage)
-		newFormGroup.OnSave = __gong__New__A_DEFINITION_2FormCallback(
+		}).Stage(a_datatype_definition_xhtml_refFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__A_DATATYPE_DEFINITION_XHTML_REFFormCallback(
 			nil,
-			a_definition_2FormCallback.probe,
+			a_datatype_definition_xhtml_refFormCallback.probe,
 			newFormGroup,
 		)
-		a_definition_2 := new(models.A_DEFINITION_2)
-		FillUpForm(a_definition_2, newFormGroup, a_definition_2FormCallback.probe)
-		a_definition_2FormCallback.probe.formStage.Commit()
+		a_datatype_definition_xhtml_ref := new(models.A_DATATYPE_DEFINITION_XHTML_REF)
+		FillUpForm(a_datatype_definition_xhtml_ref, newFormGroup, a_datatype_definition_xhtml_refFormCallback.probe)
+		a_datatype_definition_xhtml_refFormCallback.probe.formStage.Commit()
 	}
 
-	fillUpTree(a_definition_2FormCallback.probe)
-}
-func __gong__New__A_DEFINITION_3FormCallback(
-	a_definition_3 *models.A_DEFINITION_3,
-	probe *Probe,
-	formGroup *table.FormGroup,
-) (a_definition_3FormCallback *A_DEFINITION_3FormCallback) {
-	a_definition_3FormCallback = new(A_DEFINITION_3FormCallback)
-	a_definition_3FormCallback.probe = probe
-	a_definition_3FormCallback.a_definition_3 = a_definition_3
-	a_definition_3FormCallback.formGroup = formGroup
-
-	a_definition_3FormCallback.CreationMode = (a_definition_3 == nil)
-
-	return
-}
-
-type A_DEFINITION_3FormCallback struct {
-	a_definition_3 *models.A_DEFINITION_3
-
-	// If the form call is called on the creation of a new instnace
-	CreationMode bool
-
-	probe *Probe
-
-	formGroup *table.FormGroup
-}
-
-func (a_definition_3FormCallback *A_DEFINITION_3FormCallback) OnSave() {
-
-	log.Println("A_DEFINITION_3FormCallback, OnSave")
-
-	// checkout formStage to have the form group on the stage synchronized with the
-	// back repo (and front repo)
-	a_definition_3FormCallback.probe.formStage.Checkout()
-
-	if a_definition_3FormCallback.a_definition_3 == nil {
-		a_definition_3FormCallback.a_definition_3 = new(models.A_DEFINITION_3).Stage(a_definition_3FormCallback.probe.stageOfInterest)
-	}
-	a_definition_3_ := a_definition_3FormCallback.a_definition_3
-	_ = a_definition_3_
-
-	for _, formDiv := range a_definition_3FormCallback.formGroup.FormDivs {
-		switch formDiv.Name {
-		// insertion point per field
-		case "Name":
-			FormDivBasicFieldToField(&(a_definition_3_.Name), formDiv)
-		case "ATTRIBUTE_DEFINITION_STRING_REF":
-			FormDivBasicFieldToField(&(a_definition_3_.ATTRIBUTE_DEFINITION_STRING_REF), formDiv)
-		case "ATTRIBUTE_VALUE_STRING:DEFINITION":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_VALUE_STRINGOwner *models.ATTRIBUTE_VALUE_STRING
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_VALUE_STRING"
-			rf.Fieldname = "DEFINITION"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_definition_3FormCallback.probe.stageOfInterest,
-				a_definition_3FormCallback.probe.backRepoOfInterest,
-				a_definition_3_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_VALUE_STRINGOwner = reverseFieldOwner.(*models.ATTRIBUTE_VALUE_STRING)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_VALUE_STRINGOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_VALUE_STRINGOwner.DEFINITION, a_definition_3_)
-					pastATTRIBUTE_VALUE_STRINGOwner.DEFINITION = slices.Delete(pastATTRIBUTE_VALUE_STRINGOwner.DEFINITION, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_value_string := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_VALUE_STRING](a_definition_3FormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_value_string.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_VALUE_STRINGOwner := _attribute_value_string // we have a match
-						if pastATTRIBUTE_VALUE_STRINGOwner != nil {
-							if newATTRIBUTE_VALUE_STRINGOwner != pastATTRIBUTE_VALUE_STRINGOwner {
-								idx := slices.Index(pastATTRIBUTE_VALUE_STRINGOwner.DEFINITION, a_definition_3_)
-								pastATTRIBUTE_VALUE_STRINGOwner.DEFINITION = slices.Delete(pastATTRIBUTE_VALUE_STRINGOwner.DEFINITION, idx, idx+1)
-								newATTRIBUTE_VALUE_STRINGOwner.DEFINITION = append(newATTRIBUTE_VALUE_STRINGOwner.DEFINITION, a_definition_3_)
-							}
-						} else {
-							newATTRIBUTE_VALUE_STRINGOwner.DEFINITION = append(newATTRIBUTE_VALUE_STRINGOwner.DEFINITION, a_definition_3_)
-						}
-					}
-				}
-			}
-		}
-	}
-
-	// manage the suppress operation
-	if a_definition_3FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_definition_3_.Unstage(a_definition_3FormCallback.probe.stageOfInterest)
-	}
-
-	a_definition_3FormCallback.probe.stageOfInterest.Commit()
-	fillUpTable[models.A_DEFINITION_3](
-		a_definition_3FormCallback.probe,
-	)
-	a_definition_3FormCallback.probe.tableStage.Commit()
-
-	// display a new form by reset the form stage
-	if a_definition_3FormCallback.CreationMode || a_definition_3FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_definition_3FormCallback.probe.formStage.Reset()
-		newFormGroup := (&table.FormGroup{
-			Name: table.FormGroupDefaultName.ToString(),
-		}).Stage(a_definition_3FormCallback.probe.formStage)
-		newFormGroup.OnSave = __gong__New__A_DEFINITION_3FormCallback(
-			nil,
-			a_definition_3FormCallback.probe,
-			newFormGroup,
-		)
-		a_definition_3 := new(models.A_DEFINITION_3)
-		FillUpForm(a_definition_3, newFormGroup, a_definition_3FormCallback.probe)
-		a_definition_3FormCallback.probe.formStage.Commit()
-	}
-
-	fillUpTree(a_definition_3FormCallback.probe)
-}
-func __gong__New__A_DEFINITION_4FormCallback(
-	a_definition_4 *models.A_DEFINITION_4,
-	probe *Probe,
-	formGroup *table.FormGroup,
-) (a_definition_4FormCallback *A_DEFINITION_4FormCallback) {
-	a_definition_4FormCallback = new(A_DEFINITION_4FormCallback)
-	a_definition_4FormCallback.probe = probe
-	a_definition_4FormCallback.a_definition_4 = a_definition_4
-	a_definition_4FormCallback.formGroup = formGroup
-
-	a_definition_4FormCallback.CreationMode = (a_definition_4 == nil)
-
-	return
-}
-
-type A_DEFINITION_4FormCallback struct {
-	a_definition_4 *models.A_DEFINITION_4
-
-	// If the form call is called on the creation of a new instnace
-	CreationMode bool
-
-	probe *Probe
-
-	formGroup *table.FormGroup
-}
-
-func (a_definition_4FormCallback *A_DEFINITION_4FormCallback) OnSave() {
-
-	log.Println("A_DEFINITION_4FormCallback, OnSave")
-
-	// checkout formStage to have the form group on the stage synchronized with the
-	// back repo (and front repo)
-	a_definition_4FormCallback.probe.formStage.Checkout()
-
-	if a_definition_4FormCallback.a_definition_4 == nil {
-		a_definition_4FormCallback.a_definition_4 = new(models.A_DEFINITION_4).Stage(a_definition_4FormCallback.probe.stageOfInterest)
-	}
-	a_definition_4_ := a_definition_4FormCallback.a_definition_4
-	_ = a_definition_4_
-
-	for _, formDiv := range a_definition_4FormCallback.formGroup.FormDivs {
-		switch formDiv.Name {
-		// insertion point per field
-		case "Name":
-			FormDivBasicFieldToField(&(a_definition_4_.Name), formDiv)
-		case "ATTRIBUTE_DEFINITION_BOOLEAN_REF":
-			FormDivBasicFieldToField(&(a_definition_4_.ATTRIBUTE_DEFINITION_BOOLEAN_REF), formDiv)
-		case "ATTRIBUTE_VALUE_BOOLEAN:DEFINITION":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_VALUE_BOOLEANOwner *models.ATTRIBUTE_VALUE_BOOLEAN
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_VALUE_BOOLEAN"
-			rf.Fieldname = "DEFINITION"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_definition_4FormCallback.probe.stageOfInterest,
-				a_definition_4FormCallback.probe.backRepoOfInterest,
-				a_definition_4_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_VALUE_BOOLEANOwner = reverseFieldOwner.(*models.ATTRIBUTE_VALUE_BOOLEAN)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_VALUE_BOOLEANOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_VALUE_BOOLEANOwner.DEFINITION, a_definition_4_)
-					pastATTRIBUTE_VALUE_BOOLEANOwner.DEFINITION = slices.Delete(pastATTRIBUTE_VALUE_BOOLEANOwner.DEFINITION, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_value_boolean := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_VALUE_BOOLEAN](a_definition_4FormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_value_boolean.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_VALUE_BOOLEANOwner := _attribute_value_boolean // we have a match
-						if pastATTRIBUTE_VALUE_BOOLEANOwner != nil {
-							if newATTRIBUTE_VALUE_BOOLEANOwner != pastATTRIBUTE_VALUE_BOOLEANOwner {
-								idx := slices.Index(pastATTRIBUTE_VALUE_BOOLEANOwner.DEFINITION, a_definition_4_)
-								pastATTRIBUTE_VALUE_BOOLEANOwner.DEFINITION = slices.Delete(pastATTRIBUTE_VALUE_BOOLEANOwner.DEFINITION, idx, idx+1)
-								newATTRIBUTE_VALUE_BOOLEANOwner.DEFINITION = append(newATTRIBUTE_VALUE_BOOLEANOwner.DEFINITION, a_definition_4_)
-							}
-						} else {
-							newATTRIBUTE_VALUE_BOOLEANOwner.DEFINITION = append(newATTRIBUTE_VALUE_BOOLEANOwner.DEFINITION, a_definition_4_)
-						}
-					}
-				}
-			}
-		}
-	}
-
-	// manage the suppress operation
-	if a_definition_4FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_definition_4_.Unstage(a_definition_4FormCallback.probe.stageOfInterest)
-	}
-
-	a_definition_4FormCallback.probe.stageOfInterest.Commit()
-	fillUpTable[models.A_DEFINITION_4](
-		a_definition_4FormCallback.probe,
-	)
-	a_definition_4FormCallback.probe.tableStage.Commit()
-
-	// display a new form by reset the form stage
-	if a_definition_4FormCallback.CreationMode || a_definition_4FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_definition_4FormCallback.probe.formStage.Reset()
-		newFormGroup := (&table.FormGroup{
-			Name: table.FormGroupDefaultName.ToString(),
-		}).Stage(a_definition_4FormCallback.probe.formStage)
-		newFormGroup.OnSave = __gong__New__A_DEFINITION_4FormCallback(
-			nil,
-			a_definition_4FormCallback.probe,
-			newFormGroup,
-		)
-		a_definition_4 := new(models.A_DEFINITION_4)
-		FillUpForm(a_definition_4, newFormGroup, a_definition_4FormCallback.probe)
-		a_definition_4FormCallback.probe.formStage.Commit()
-	}
-
-	fillUpTree(a_definition_4FormCallback.probe)
-}
-func __gong__New__A_DEFINITION_5FormCallback(
-	a_definition_5 *models.A_DEFINITION_5,
-	probe *Probe,
-	formGroup *table.FormGroup,
-) (a_definition_5FormCallback *A_DEFINITION_5FormCallback) {
-	a_definition_5FormCallback = new(A_DEFINITION_5FormCallback)
-	a_definition_5FormCallback.probe = probe
-	a_definition_5FormCallback.a_definition_5 = a_definition_5
-	a_definition_5FormCallback.formGroup = formGroup
-
-	a_definition_5FormCallback.CreationMode = (a_definition_5 == nil)
-
-	return
-}
-
-type A_DEFINITION_5FormCallback struct {
-	a_definition_5 *models.A_DEFINITION_5
-
-	// If the form call is called on the creation of a new instnace
-	CreationMode bool
-
-	probe *Probe
-
-	formGroup *table.FormGroup
-}
-
-func (a_definition_5FormCallback *A_DEFINITION_5FormCallback) OnSave() {
-
-	log.Println("A_DEFINITION_5FormCallback, OnSave")
-
-	// checkout formStage to have the form group on the stage synchronized with the
-	// back repo (and front repo)
-	a_definition_5FormCallback.probe.formStage.Checkout()
-
-	if a_definition_5FormCallback.a_definition_5 == nil {
-		a_definition_5FormCallback.a_definition_5 = new(models.A_DEFINITION_5).Stage(a_definition_5FormCallback.probe.stageOfInterest)
-	}
-	a_definition_5_ := a_definition_5FormCallback.a_definition_5
-	_ = a_definition_5_
-
-	for _, formDiv := range a_definition_5FormCallback.formGroup.FormDivs {
-		switch formDiv.Name {
-		// insertion point per field
-		case "Name":
-			FormDivBasicFieldToField(&(a_definition_5_.Name), formDiv)
-		case "ATTRIBUTE_DEFINITION_ENUMERATION_REF":
-			FormDivBasicFieldToField(&(a_definition_5_.ATTRIBUTE_DEFINITION_ENUMERATION_REF), formDiv)
-		case "ATTRIBUTE_VALUE_ENUMERATION:DEFINITION":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_VALUE_ENUMERATIONOwner *models.ATTRIBUTE_VALUE_ENUMERATION
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_VALUE_ENUMERATION"
-			rf.Fieldname = "DEFINITION"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_definition_5FormCallback.probe.stageOfInterest,
-				a_definition_5FormCallback.probe.backRepoOfInterest,
-				a_definition_5_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_VALUE_ENUMERATIONOwner = reverseFieldOwner.(*models.ATTRIBUTE_VALUE_ENUMERATION)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_VALUE_ENUMERATIONOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_VALUE_ENUMERATIONOwner.DEFINITION, a_definition_5_)
-					pastATTRIBUTE_VALUE_ENUMERATIONOwner.DEFINITION = slices.Delete(pastATTRIBUTE_VALUE_ENUMERATIONOwner.DEFINITION, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_value_enumeration := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_VALUE_ENUMERATION](a_definition_5FormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_value_enumeration.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_VALUE_ENUMERATIONOwner := _attribute_value_enumeration // we have a match
-						if pastATTRIBUTE_VALUE_ENUMERATIONOwner != nil {
-							if newATTRIBUTE_VALUE_ENUMERATIONOwner != pastATTRIBUTE_VALUE_ENUMERATIONOwner {
-								idx := slices.Index(pastATTRIBUTE_VALUE_ENUMERATIONOwner.DEFINITION, a_definition_5_)
-								pastATTRIBUTE_VALUE_ENUMERATIONOwner.DEFINITION = slices.Delete(pastATTRIBUTE_VALUE_ENUMERATIONOwner.DEFINITION, idx, idx+1)
-								newATTRIBUTE_VALUE_ENUMERATIONOwner.DEFINITION = append(newATTRIBUTE_VALUE_ENUMERATIONOwner.DEFINITION, a_definition_5_)
-							}
-						} else {
-							newATTRIBUTE_VALUE_ENUMERATIONOwner.DEFINITION = append(newATTRIBUTE_VALUE_ENUMERATIONOwner.DEFINITION, a_definition_5_)
-						}
-					}
-				}
-			}
-		}
-	}
-
-	// manage the suppress operation
-	if a_definition_5FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_definition_5_.Unstage(a_definition_5FormCallback.probe.stageOfInterest)
-	}
-
-	a_definition_5FormCallback.probe.stageOfInterest.Commit()
-	fillUpTable[models.A_DEFINITION_5](
-		a_definition_5FormCallback.probe,
-	)
-	a_definition_5FormCallback.probe.tableStage.Commit()
-
-	// display a new form by reset the form stage
-	if a_definition_5FormCallback.CreationMode || a_definition_5FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_definition_5FormCallback.probe.formStage.Reset()
-		newFormGroup := (&table.FormGroup{
-			Name: table.FormGroupDefaultName.ToString(),
-		}).Stage(a_definition_5FormCallback.probe.formStage)
-		newFormGroup.OnSave = __gong__New__A_DEFINITION_5FormCallback(
-			nil,
-			a_definition_5FormCallback.probe,
-			newFormGroup,
-		)
-		a_definition_5 := new(models.A_DEFINITION_5)
-		FillUpForm(a_definition_5, newFormGroup, a_definition_5FormCallback.probe)
-		a_definition_5FormCallback.probe.formStage.Commit()
-	}
-
-	fillUpTree(a_definition_5FormCallback.probe)
-}
-func __gong__New__A_DEFINITION_6FormCallback(
-	a_definition_6 *models.A_DEFINITION_6,
-	probe *Probe,
-	formGroup *table.FormGroup,
-) (a_definition_6FormCallback *A_DEFINITION_6FormCallback) {
-	a_definition_6FormCallback = new(A_DEFINITION_6FormCallback)
-	a_definition_6FormCallback.probe = probe
-	a_definition_6FormCallback.a_definition_6 = a_definition_6
-	a_definition_6FormCallback.formGroup = formGroup
-
-	a_definition_6FormCallback.CreationMode = (a_definition_6 == nil)
-
-	return
-}
-
-type A_DEFINITION_6FormCallback struct {
-	a_definition_6 *models.A_DEFINITION_6
-
-	// If the form call is called on the creation of a new instnace
-	CreationMode bool
-
-	probe *Probe
-
-	formGroup *table.FormGroup
-}
-
-func (a_definition_6FormCallback *A_DEFINITION_6FormCallback) OnSave() {
-
-	log.Println("A_DEFINITION_6FormCallback, OnSave")
-
-	// checkout formStage to have the form group on the stage synchronized with the
-	// back repo (and front repo)
-	a_definition_6FormCallback.probe.formStage.Checkout()
-
-	if a_definition_6FormCallback.a_definition_6 == nil {
-		a_definition_6FormCallback.a_definition_6 = new(models.A_DEFINITION_6).Stage(a_definition_6FormCallback.probe.stageOfInterest)
-	}
-	a_definition_6_ := a_definition_6FormCallback.a_definition_6
-	_ = a_definition_6_
-
-	for _, formDiv := range a_definition_6FormCallback.formGroup.FormDivs {
-		switch formDiv.Name {
-		// insertion point per field
-		case "Name":
-			FormDivBasicFieldToField(&(a_definition_6_.Name), formDiv)
-		case "ATTRIBUTE_DEFINITION_REAL_REF":
-			FormDivBasicFieldToField(&(a_definition_6_.ATTRIBUTE_DEFINITION_REAL_REF), formDiv)
-		case "ATTRIBUTE_VALUE_REAL:DEFINITION":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_VALUE_REALOwner *models.ATTRIBUTE_VALUE_REAL
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_VALUE_REAL"
-			rf.Fieldname = "DEFINITION"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_definition_6FormCallback.probe.stageOfInterest,
-				a_definition_6FormCallback.probe.backRepoOfInterest,
-				a_definition_6_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_VALUE_REALOwner = reverseFieldOwner.(*models.ATTRIBUTE_VALUE_REAL)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_VALUE_REALOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_VALUE_REALOwner.DEFINITION, a_definition_6_)
-					pastATTRIBUTE_VALUE_REALOwner.DEFINITION = slices.Delete(pastATTRIBUTE_VALUE_REALOwner.DEFINITION, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_value_real := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_VALUE_REAL](a_definition_6FormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_value_real.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_VALUE_REALOwner := _attribute_value_real // we have a match
-						if pastATTRIBUTE_VALUE_REALOwner != nil {
-							if newATTRIBUTE_VALUE_REALOwner != pastATTRIBUTE_VALUE_REALOwner {
-								idx := slices.Index(pastATTRIBUTE_VALUE_REALOwner.DEFINITION, a_definition_6_)
-								pastATTRIBUTE_VALUE_REALOwner.DEFINITION = slices.Delete(pastATTRIBUTE_VALUE_REALOwner.DEFINITION, idx, idx+1)
-								newATTRIBUTE_VALUE_REALOwner.DEFINITION = append(newATTRIBUTE_VALUE_REALOwner.DEFINITION, a_definition_6_)
-							}
-						} else {
-							newATTRIBUTE_VALUE_REALOwner.DEFINITION = append(newATTRIBUTE_VALUE_REALOwner.DEFINITION, a_definition_6_)
-						}
-					}
-				}
-			}
-		}
-	}
-
-	// manage the suppress operation
-	if a_definition_6FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_definition_6_.Unstage(a_definition_6FormCallback.probe.stageOfInterest)
-	}
-
-	a_definition_6FormCallback.probe.stageOfInterest.Commit()
-	fillUpTable[models.A_DEFINITION_6](
-		a_definition_6FormCallback.probe,
-	)
-	a_definition_6FormCallback.probe.tableStage.Commit()
-
-	// display a new form by reset the form stage
-	if a_definition_6FormCallback.CreationMode || a_definition_6FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_definition_6FormCallback.probe.formStage.Reset()
-		newFormGroup := (&table.FormGroup{
-			Name: table.FormGroupDefaultName.ToString(),
-		}).Stage(a_definition_6FormCallback.probe.formStage)
-		newFormGroup.OnSave = __gong__New__A_DEFINITION_6FormCallback(
-			nil,
-			a_definition_6FormCallback.probe,
-			newFormGroup,
-		)
-		a_definition_6 := new(models.A_DEFINITION_6)
-		FillUpForm(a_definition_6, newFormGroup, a_definition_6FormCallback.probe)
-		a_definition_6FormCallback.probe.formStage.Commit()
-	}
-
-	fillUpTree(a_definition_6FormCallback.probe)
+	fillUpTree(a_datatype_definition_xhtml_refFormCallback.probe)
 }
 func __gong__New__A_EDITABLE_ATTSFormCallback(
 	a_editable_atts *models.A_EDITABLE_ATTS,
@@ -5479,6 +6529,127 @@ func (a_editable_attsFormCallback *A_EDITABLE_ATTSFormCallback) OnSave() {
 	}
 
 	fillUpTree(a_editable_attsFormCallback.probe)
+}
+func __gong__New__A_ENUM_VALUE_REFFormCallback(
+	a_enum_value_ref *models.A_ENUM_VALUE_REF,
+	probe *Probe,
+	formGroup *table.FormGroup,
+) (a_enum_value_refFormCallback *A_ENUM_VALUE_REFFormCallback) {
+	a_enum_value_refFormCallback = new(A_ENUM_VALUE_REFFormCallback)
+	a_enum_value_refFormCallback.probe = probe
+	a_enum_value_refFormCallback.a_enum_value_ref = a_enum_value_ref
+	a_enum_value_refFormCallback.formGroup = formGroup
+
+	a_enum_value_refFormCallback.CreationMode = (a_enum_value_ref == nil)
+
+	return
+}
+
+type A_ENUM_VALUE_REFFormCallback struct {
+	a_enum_value_ref *models.A_ENUM_VALUE_REF
+
+	// If the form call is called on the creation of a new instnace
+	CreationMode bool
+
+	probe *Probe
+
+	formGroup *table.FormGroup
+}
+
+func (a_enum_value_refFormCallback *A_ENUM_VALUE_REFFormCallback) OnSave() {
+
+	log.Println("A_ENUM_VALUE_REFFormCallback, OnSave")
+
+	// checkout formStage to have the form group on the stage synchronized with the
+	// back repo (and front repo)
+	a_enum_value_refFormCallback.probe.formStage.Checkout()
+
+	if a_enum_value_refFormCallback.a_enum_value_ref == nil {
+		a_enum_value_refFormCallback.a_enum_value_ref = new(models.A_ENUM_VALUE_REF).Stage(a_enum_value_refFormCallback.probe.stageOfInterest)
+	}
+	a_enum_value_ref_ := a_enum_value_refFormCallback.a_enum_value_ref
+	_ = a_enum_value_ref_
+
+	for _, formDiv := range a_enum_value_refFormCallback.formGroup.FormDivs {
+		switch formDiv.Name {
+		// insertion point per field
+		case "Name":
+			FormDivBasicFieldToField(&(a_enum_value_ref_.Name), formDiv)
+		case "ENUM_VALUE_REF":
+			FormDivBasicFieldToField(&(a_enum_value_ref_.ENUM_VALUE_REF), formDiv)
+		case "ATTRIBUTE_VALUE_ENUMERATION:VALUES":
+			// we need to retrieve the field owner before the change
+			var pastATTRIBUTE_VALUE_ENUMERATIONOwner *models.ATTRIBUTE_VALUE_ENUMERATION
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "ATTRIBUTE_VALUE_ENUMERATION"
+			rf.Fieldname = "VALUES"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				a_enum_value_refFormCallback.probe.stageOfInterest,
+				a_enum_value_refFormCallback.probe.backRepoOfInterest,
+				a_enum_value_ref_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastATTRIBUTE_VALUE_ENUMERATIONOwner = reverseFieldOwner.(*models.ATTRIBUTE_VALUE_ENUMERATION)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastATTRIBUTE_VALUE_ENUMERATIONOwner != nil {
+					idx := slices.Index(pastATTRIBUTE_VALUE_ENUMERATIONOwner.VALUES, a_enum_value_ref_)
+					pastATTRIBUTE_VALUE_ENUMERATIONOwner.VALUES = slices.Delete(pastATTRIBUTE_VALUE_ENUMERATIONOwner.VALUES, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _attribute_value_enumeration := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_VALUE_ENUMERATION](a_enum_value_refFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _attribute_value_enumeration.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newATTRIBUTE_VALUE_ENUMERATIONOwner := _attribute_value_enumeration // we have a match
+						if pastATTRIBUTE_VALUE_ENUMERATIONOwner != nil {
+							if newATTRIBUTE_VALUE_ENUMERATIONOwner != pastATTRIBUTE_VALUE_ENUMERATIONOwner {
+								idx := slices.Index(pastATTRIBUTE_VALUE_ENUMERATIONOwner.VALUES, a_enum_value_ref_)
+								pastATTRIBUTE_VALUE_ENUMERATIONOwner.VALUES = slices.Delete(pastATTRIBUTE_VALUE_ENUMERATIONOwner.VALUES, idx, idx+1)
+								newATTRIBUTE_VALUE_ENUMERATIONOwner.VALUES = append(newATTRIBUTE_VALUE_ENUMERATIONOwner.VALUES, a_enum_value_ref_)
+							}
+						} else {
+							newATTRIBUTE_VALUE_ENUMERATIONOwner.VALUES = append(newATTRIBUTE_VALUE_ENUMERATIONOwner.VALUES, a_enum_value_ref_)
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// manage the suppress operation
+	if a_enum_value_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_enum_value_ref_.Unstage(a_enum_value_refFormCallback.probe.stageOfInterest)
+	}
+
+	a_enum_value_refFormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.A_ENUM_VALUE_REF](
+		a_enum_value_refFormCallback.probe,
+	)
+	a_enum_value_refFormCallback.probe.tableStage.Commit()
+
+	// display a new form by reset the form stage
+	if a_enum_value_refFormCallback.CreationMode || a_enum_value_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_enum_value_refFormCallback.probe.formStage.Reset()
+		newFormGroup := (&table.FormGroup{
+			Name: table.FormGroupDefaultName.ToString(),
+		}).Stage(a_enum_value_refFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__A_ENUM_VALUE_REFFormCallback(
+			nil,
+			a_enum_value_refFormCallback.probe,
+			newFormGroup,
+		)
+		a_enum_value_ref := new(models.A_ENUM_VALUE_REF)
+		FillUpForm(a_enum_value_ref, newFormGroup, a_enum_value_refFormCallback.probe)
+		a_enum_value_refFormCallback.probe.formStage.Commit()
+	}
+
+	fillUpTree(a_enum_value_refFormCallback.probe)
 }
 func __gong__New__A_OBJECTFormCallback(
 	a_object *models.A_OBJECT,
@@ -5719,6 +6890,127 @@ func (a_propertiesFormCallback *A_PROPERTIESFormCallback) OnSave() {
 	}
 
 	fillUpTree(a_propertiesFormCallback.probe)
+}
+func __gong__New__A_RELATION_GROUP_TYPE_REFFormCallback(
+	a_relation_group_type_ref *models.A_RELATION_GROUP_TYPE_REF,
+	probe *Probe,
+	formGroup *table.FormGroup,
+) (a_relation_group_type_refFormCallback *A_RELATION_GROUP_TYPE_REFFormCallback) {
+	a_relation_group_type_refFormCallback = new(A_RELATION_GROUP_TYPE_REFFormCallback)
+	a_relation_group_type_refFormCallback.probe = probe
+	a_relation_group_type_refFormCallback.a_relation_group_type_ref = a_relation_group_type_ref
+	a_relation_group_type_refFormCallback.formGroup = formGroup
+
+	a_relation_group_type_refFormCallback.CreationMode = (a_relation_group_type_ref == nil)
+
+	return
+}
+
+type A_RELATION_GROUP_TYPE_REFFormCallback struct {
+	a_relation_group_type_ref *models.A_RELATION_GROUP_TYPE_REF
+
+	// If the form call is called on the creation of a new instnace
+	CreationMode bool
+
+	probe *Probe
+
+	formGroup *table.FormGroup
+}
+
+func (a_relation_group_type_refFormCallback *A_RELATION_GROUP_TYPE_REFFormCallback) OnSave() {
+
+	log.Println("A_RELATION_GROUP_TYPE_REFFormCallback, OnSave")
+
+	// checkout formStage to have the form group on the stage synchronized with the
+	// back repo (and front repo)
+	a_relation_group_type_refFormCallback.probe.formStage.Checkout()
+
+	if a_relation_group_type_refFormCallback.a_relation_group_type_ref == nil {
+		a_relation_group_type_refFormCallback.a_relation_group_type_ref = new(models.A_RELATION_GROUP_TYPE_REF).Stage(a_relation_group_type_refFormCallback.probe.stageOfInterest)
+	}
+	a_relation_group_type_ref_ := a_relation_group_type_refFormCallback.a_relation_group_type_ref
+	_ = a_relation_group_type_ref_
+
+	for _, formDiv := range a_relation_group_type_refFormCallback.formGroup.FormDivs {
+		switch formDiv.Name {
+		// insertion point per field
+		case "Name":
+			FormDivBasicFieldToField(&(a_relation_group_type_ref_.Name), formDiv)
+		case "RELATION_GROUP_TYPE_REF":
+			FormDivBasicFieldToField(&(a_relation_group_type_ref_.RELATION_GROUP_TYPE_REF), formDiv)
+		case "RELATION_GROUP:TYPE":
+			// we need to retrieve the field owner before the change
+			var pastRELATION_GROUPOwner *models.RELATION_GROUP
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "RELATION_GROUP"
+			rf.Fieldname = "TYPE"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				a_relation_group_type_refFormCallback.probe.stageOfInterest,
+				a_relation_group_type_refFormCallback.probe.backRepoOfInterest,
+				a_relation_group_type_ref_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastRELATION_GROUPOwner = reverseFieldOwner.(*models.RELATION_GROUP)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastRELATION_GROUPOwner != nil {
+					idx := slices.Index(pastRELATION_GROUPOwner.TYPE, a_relation_group_type_ref_)
+					pastRELATION_GROUPOwner.TYPE = slices.Delete(pastRELATION_GROUPOwner.TYPE, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _relation_group := range *models.GetGongstructInstancesSet[models.RELATION_GROUP](a_relation_group_type_refFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _relation_group.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newRELATION_GROUPOwner := _relation_group // we have a match
+						if pastRELATION_GROUPOwner != nil {
+							if newRELATION_GROUPOwner != pastRELATION_GROUPOwner {
+								idx := slices.Index(pastRELATION_GROUPOwner.TYPE, a_relation_group_type_ref_)
+								pastRELATION_GROUPOwner.TYPE = slices.Delete(pastRELATION_GROUPOwner.TYPE, idx, idx+1)
+								newRELATION_GROUPOwner.TYPE = append(newRELATION_GROUPOwner.TYPE, a_relation_group_type_ref_)
+							}
+						} else {
+							newRELATION_GROUPOwner.TYPE = append(newRELATION_GROUPOwner.TYPE, a_relation_group_type_ref_)
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// manage the suppress operation
+	if a_relation_group_type_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_relation_group_type_ref_.Unstage(a_relation_group_type_refFormCallback.probe.stageOfInterest)
+	}
+
+	a_relation_group_type_refFormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.A_RELATION_GROUP_TYPE_REF](
+		a_relation_group_type_refFormCallback.probe,
+	)
+	a_relation_group_type_refFormCallback.probe.tableStage.Commit()
+
+	// display a new form by reset the form stage
+	if a_relation_group_type_refFormCallback.CreationMode || a_relation_group_type_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_relation_group_type_refFormCallback.probe.formStage.Reset()
+		newFormGroup := (&table.FormGroup{
+			Name: table.FormGroupDefaultName.ToString(),
+		}).Stage(a_relation_group_type_refFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__A_RELATION_GROUP_TYPE_REFFormCallback(
+			nil,
+			a_relation_group_type_refFormCallback.probe,
+			newFormGroup,
+		)
+		a_relation_group_type_ref := new(models.A_RELATION_GROUP_TYPE_REF)
+		FillUpForm(a_relation_group_type_ref, newFormGroup, a_relation_group_type_refFormCallback.probe)
+		a_relation_group_type_refFormCallback.probe.formStage.Commit()
+	}
+
+	fillUpTree(a_relation_group_type_refFormCallback.probe)
 }
 func __gong__New__A_SOURCEFormCallback(
 	a_source *models.A_SOURCE,
@@ -6080,6 +7372,127 @@ func (a_specificationsFormCallback *A_SPECIFICATIONSFormCallback) OnSave() {
 	}
 
 	fillUpTree(a_specificationsFormCallback.probe)
+}
+func __gong__New__A_SPECIFICATION_TYPE_REFFormCallback(
+	a_specification_type_ref *models.A_SPECIFICATION_TYPE_REF,
+	probe *Probe,
+	formGroup *table.FormGroup,
+) (a_specification_type_refFormCallback *A_SPECIFICATION_TYPE_REFFormCallback) {
+	a_specification_type_refFormCallback = new(A_SPECIFICATION_TYPE_REFFormCallback)
+	a_specification_type_refFormCallback.probe = probe
+	a_specification_type_refFormCallback.a_specification_type_ref = a_specification_type_ref
+	a_specification_type_refFormCallback.formGroup = formGroup
+
+	a_specification_type_refFormCallback.CreationMode = (a_specification_type_ref == nil)
+
+	return
+}
+
+type A_SPECIFICATION_TYPE_REFFormCallback struct {
+	a_specification_type_ref *models.A_SPECIFICATION_TYPE_REF
+
+	// If the form call is called on the creation of a new instnace
+	CreationMode bool
+
+	probe *Probe
+
+	formGroup *table.FormGroup
+}
+
+func (a_specification_type_refFormCallback *A_SPECIFICATION_TYPE_REFFormCallback) OnSave() {
+
+	log.Println("A_SPECIFICATION_TYPE_REFFormCallback, OnSave")
+
+	// checkout formStage to have the form group on the stage synchronized with the
+	// back repo (and front repo)
+	a_specification_type_refFormCallback.probe.formStage.Checkout()
+
+	if a_specification_type_refFormCallback.a_specification_type_ref == nil {
+		a_specification_type_refFormCallback.a_specification_type_ref = new(models.A_SPECIFICATION_TYPE_REF).Stage(a_specification_type_refFormCallback.probe.stageOfInterest)
+	}
+	a_specification_type_ref_ := a_specification_type_refFormCallback.a_specification_type_ref
+	_ = a_specification_type_ref_
+
+	for _, formDiv := range a_specification_type_refFormCallback.formGroup.FormDivs {
+		switch formDiv.Name {
+		// insertion point per field
+		case "Name":
+			FormDivBasicFieldToField(&(a_specification_type_ref_.Name), formDiv)
+		case "SPECIFICATION_TYPE_REF":
+			FormDivBasicFieldToField(&(a_specification_type_ref_.SPECIFICATION_TYPE_REF), formDiv)
+		case "SPECIFICATION:TYPE":
+			// we need to retrieve the field owner before the change
+			var pastSPECIFICATIONOwner *models.SPECIFICATION
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "SPECIFICATION"
+			rf.Fieldname = "TYPE"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				a_specification_type_refFormCallback.probe.stageOfInterest,
+				a_specification_type_refFormCallback.probe.backRepoOfInterest,
+				a_specification_type_ref_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastSPECIFICATIONOwner = reverseFieldOwner.(*models.SPECIFICATION)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastSPECIFICATIONOwner != nil {
+					idx := slices.Index(pastSPECIFICATIONOwner.TYPE, a_specification_type_ref_)
+					pastSPECIFICATIONOwner.TYPE = slices.Delete(pastSPECIFICATIONOwner.TYPE, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _specification := range *models.GetGongstructInstancesSet[models.SPECIFICATION](a_specification_type_refFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _specification.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newSPECIFICATIONOwner := _specification // we have a match
+						if pastSPECIFICATIONOwner != nil {
+							if newSPECIFICATIONOwner != pastSPECIFICATIONOwner {
+								idx := slices.Index(pastSPECIFICATIONOwner.TYPE, a_specification_type_ref_)
+								pastSPECIFICATIONOwner.TYPE = slices.Delete(pastSPECIFICATIONOwner.TYPE, idx, idx+1)
+								newSPECIFICATIONOwner.TYPE = append(newSPECIFICATIONOwner.TYPE, a_specification_type_ref_)
+							}
+						} else {
+							newSPECIFICATIONOwner.TYPE = append(newSPECIFICATIONOwner.TYPE, a_specification_type_ref_)
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// manage the suppress operation
+	if a_specification_type_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_specification_type_ref_.Unstage(a_specification_type_refFormCallback.probe.stageOfInterest)
+	}
+
+	a_specification_type_refFormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.A_SPECIFICATION_TYPE_REF](
+		a_specification_type_refFormCallback.probe,
+	)
+	a_specification_type_refFormCallback.probe.tableStage.Commit()
+
+	// display a new form by reset the form stage
+	if a_specification_type_refFormCallback.CreationMode || a_specification_type_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_specification_type_refFormCallback.probe.formStage.Reset()
+		newFormGroup := (&table.FormGroup{
+			Name: table.FormGroupDefaultName.ToString(),
+		}).Stage(a_specification_type_refFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__A_SPECIFICATION_TYPE_REFFormCallback(
+			nil,
+			a_specification_type_refFormCallback.probe,
+			newFormGroup,
+		)
+		a_specification_type_ref := new(models.A_SPECIFICATION_TYPE_REF)
+		FillUpForm(a_specification_type_ref, newFormGroup, a_specification_type_refFormCallback.probe)
+		a_specification_type_refFormCallback.probe.formStage.Commit()
+	}
+
+	fillUpTree(a_specification_type_refFormCallback.probe)
 }
 func __gong__New__A_SPECIFIED_VALUESFormCallback(
 	a_specified_values *models.A_SPECIFIED_VALUES,
@@ -6564,6 +7977,127 @@ func (a_spec_objectsFormCallback *A_SPEC_OBJECTSFormCallback) OnSave() {
 
 	fillUpTree(a_spec_objectsFormCallback.probe)
 }
+func __gong__New__A_SPEC_OBJECT_TYPE_REFFormCallback(
+	a_spec_object_type_ref *models.A_SPEC_OBJECT_TYPE_REF,
+	probe *Probe,
+	formGroup *table.FormGroup,
+) (a_spec_object_type_refFormCallback *A_SPEC_OBJECT_TYPE_REFFormCallback) {
+	a_spec_object_type_refFormCallback = new(A_SPEC_OBJECT_TYPE_REFFormCallback)
+	a_spec_object_type_refFormCallback.probe = probe
+	a_spec_object_type_refFormCallback.a_spec_object_type_ref = a_spec_object_type_ref
+	a_spec_object_type_refFormCallback.formGroup = formGroup
+
+	a_spec_object_type_refFormCallback.CreationMode = (a_spec_object_type_ref == nil)
+
+	return
+}
+
+type A_SPEC_OBJECT_TYPE_REFFormCallback struct {
+	a_spec_object_type_ref *models.A_SPEC_OBJECT_TYPE_REF
+
+	// If the form call is called on the creation of a new instnace
+	CreationMode bool
+
+	probe *Probe
+
+	formGroup *table.FormGroup
+}
+
+func (a_spec_object_type_refFormCallback *A_SPEC_OBJECT_TYPE_REFFormCallback) OnSave() {
+
+	log.Println("A_SPEC_OBJECT_TYPE_REFFormCallback, OnSave")
+
+	// checkout formStage to have the form group on the stage synchronized with the
+	// back repo (and front repo)
+	a_spec_object_type_refFormCallback.probe.formStage.Checkout()
+
+	if a_spec_object_type_refFormCallback.a_spec_object_type_ref == nil {
+		a_spec_object_type_refFormCallback.a_spec_object_type_ref = new(models.A_SPEC_OBJECT_TYPE_REF).Stage(a_spec_object_type_refFormCallback.probe.stageOfInterest)
+	}
+	a_spec_object_type_ref_ := a_spec_object_type_refFormCallback.a_spec_object_type_ref
+	_ = a_spec_object_type_ref_
+
+	for _, formDiv := range a_spec_object_type_refFormCallback.formGroup.FormDivs {
+		switch formDiv.Name {
+		// insertion point per field
+		case "Name":
+			FormDivBasicFieldToField(&(a_spec_object_type_ref_.Name), formDiv)
+		case "SPEC_OBJECT_TYPE_REF":
+			FormDivBasicFieldToField(&(a_spec_object_type_ref_.SPEC_OBJECT_TYPE_REF), formDiv)
+		case "SPEC_OBJECT:TYPE":
+			// we need to retrieve the field owner before the change
+			var pastSPEC_OBJECTOwner *models.SPEC_OBJECT
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "SPEC_OBJECT"
+			rf.Fieldname = "TYPE"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				a_spec_object_type_refFormCallback.probe.stageOfInterest,
+				a_spec_object_type_refFormCallback.probe.backRepoOfInterest,
+				a_spec_object_type_ref_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastSPEC_OBJECTOwner = reverseFieldOwner.(*models.SPEC_OBJECT)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastSPEC_OBJECTOwner != nil {
+					idx := slices.Index(pastSPEC_OBJECTOwner.TYPE, a_spec_object_type_ref_)
+					pastSPEC_OBJECTOwner.TYPE = slices.Delete(pastSPEC_OBJECTOwner.TYPE, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _spec_object := range *models.GetGongstructInstancesSet[models.SPEC_OBJECT](a_spec_object_type_refFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _spec_object.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newSPEC_OBJECTOwner := _spec_object // we have a match
+						if pastSPEC_OBJECTOwner != nil {
+							if newSPEC_OBJECTOwner != pastSPEC_OBJECTOwner {
+								idx := slices.Index(pastSPEC_OBJECTOwner.TYPE, a_spec_object_type_ref_)
+								pastSPEC_OBJECTOwner.TYPE = slices.Delete(pastSPEC_OBJECTOwner.TYPE, idx, idx+1)
+								newSPEC_OBJECTOwner.TYPE = append(newSPEC_OBJECTOwner.TYPE, a_spec_object_type_ref_)
+							}
+						} else {
+							newSPEC_OBJECTOwner.TYPE = append(newSPEC_OBJECTOwner.TYPE, a_spec_object_type_ref_)
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// manage the suppress operation
+	if a_spec_object_type_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_spec_object_type_ref_.Unstage(a_spec_object_type_refFormCallback.probe.stageOfInterest)
+	}
+
+	a_spec_object_type_refFormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.A_SPEC_OBJECT_TYPE_REF](
+		a_spec_object_type_refFormCallback.probe,
+	)
+	a_spec_object_type_refFormCallback.probe.tableStage.Commit()
+
+	// display a new form by reset the form stage
+	if a_spec_object_type_refFormCallback.CreationMode || a_spec_object_type_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_spec_object_type_refFormCallback.probe.formStage.Reset()
+		newFormGroup := (&table.FormGroup{
+			Name: table.FormGroupDefaultName.ToString(),
+		}).Stage(a_spec_object_type_refFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__A_SPEC_OBJECT_TYPE_REFFormCallback(
+			nil,
+			a_spec_object_type_refFormCallback.probe,
+			newFormGroup,
+		)
+		a_spec_object_type_ref := new(models.A_SPEC_OBJECT_TYPE_REF)
+		FillUpForm(a_spec_object_type_ref, newFormGroup, a_spec_object_type_refFormCallback.probe)
+		a_spec_object_type_refFormCallback.probe.formStage.Commit()
+	}
+
+	fillUpTree(a_spec_object_type_refFormCallback.probe)
+}
 func __gong__New__A_SPEC_RELATIONSFormCallback(
 	a_spec_relations *models.A_SPEC_RELATIONS,
 	probe *Probe,
@@ -6609,14 +8143,12 @@ func (a_spec_relationsFormCallback *A_SPEC_RELATIONSFormCallback) OnSave() {
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(a_spec_relations_.Name), formDiv)
-		case "SPEC_RELATION_REF":
-			FormDivBasicFieldToField(&(a_spec_relations_.SPEC_RELATION_REF), formDiv)
-		case "RELATION_GROUP:SPEC_RELATIONS":
+		case "REQ_IF_CONTENT:SPEC_RELATIONS":
 			// we need to retrieve the field owner before the change
-			var pastRELATION_GROUPOwner *models.RELATION_GROUP
+			var pastREQ_IF_CONTENTOwner *models.REQ_IF_CONTENT
 			var rf models.ReverseField
 			_ = rf
-			rf.GongstructName = "RELATION_GROUP"
+			rf.GongstructName = "REQ_IF_CONTENT"
 			rf.Fieldname = "SPEC_RELATIONS"
 			reverseFieldOwner := orm.GetReverseFieldOwner(
 				a_spec_relationsFormCallback.probe.stageOfInterest,
@@ -6625,30 +8157,30 @@ func (a_spec_relationsFormCallback *A_SPEC_RELATIONSFormCallback) OnSave() {
 				&rf)
 
 			if reverseFieldOwner != nil {
-				pastRELATION_GROUPOwner = reverseFieldOwner.(*models.RELATION_GROUP)
+				pastREQ_IF_CONTENTOwner = reverseFieldOwner.(*models.REQ_IF_CONTENT)
 			}
 			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastRELATION_GROUPOwner != nil {
-					idx := slices.Index(pastRELATION_GROUPOwner.SPEC_RELATIONS, a_spec_relations_)
-					pastRELATION_GROUPOwner.SPEC_RELATIONS = slices.Delete(pastRELATION_GROUPOwner.SPEC_RELATIONS, idx, idx+1)
+				if pastREQ_IF_CONTENTOwner != nil {
+					idx := slices.Index(pastREQ_IF_CONTENTOwner.SPEC_RELATIONS, a_spec_relations_)
+					pastREQ_IF_CONTENTOwner.SPEC_RELATIONS = slices.Delete(pastREQ_IF_CONTENTOwner.SPEC_RELATIONS, idx, idx+1)
 				}
 			} else {
 				// we need to retrieve the field owner after the change
 				// parse all astrcut and get the one with the name in the
 				// div
-				for _relation_group := range *models.GetGongstructInstancesSet[models.RELATION_GROUP](a_spec_relationsFormCallback.probe.stageOfInterest) {
+				for _req_if_content := range *models.GetGongstructInstancesSet[models.REQ_IF_CONTENT](a_spec_relationsFormCallback.probe.stageOfInterest) {
 
 					// the match is base on the name
-					if _relation_group.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newRELATION_GROUPOwner := _relation_group // we have a match
-						if pastRELATION_GROUPOwner != nil {
-							if newRELATION_GROUPOwner != pastRELATION_GROUPOwner {
-								idx := slices.Index(pastRELATION_GROUPOwner.SPEC_RELATIONS, a_spec_relations_)
-								pastRELATION_GROUPOwner.SPEC_RELATIONS = slices.Delete(pastRELATION_GROUPOwner.SPEC_RELATIONS, idx, idx+1)
-								newRELATION_GROUPOwner.SPEC_RELATIONS = append(newRELATION_GROUPOwner.SPEC_RELATIONS, a_spec_relations_)
+					if _req_if_content.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newREQ_IF_CONTENTOwner := _req_if_content // we have a match
+						if pastREQ_IF_CONTENTOwner != nil {
+							if newREQ_IF_CONTENTOwner != pastREQ_IF_CONTENTOwner {
+								idx := slices.Index(pastREQ_IF_CONTENTOwner.SPEC_RELATIONS, a_spec_relations_)
+								pastREQ_IF_CONTENTOwner.SPEC_RELATIONS = slices.Delete(pastREQ_IF_CONTENTOwner.SPEC_RELATIONS, idx, idx+1)
+								newREQ_IF_CONTENTOwner.SPEC_RELATIONS = append(newREQ_IF_CONTENTOwner.SPEC_RELATIONS, a_spec_relations_)
 							}
 						} else {
-							newRELATION_GROUPOwner.SPEC_RELATIONS = append(newRELATION_GROUPOwner.SPEC_RELATIONS, a_spec_relations_)
+							newREQ_IF_CONTENTOwner.SPEC_RELATIONS = append(newREQ_IF_CONTENTOwner.SPEC_RELATIONS, a_spec_relations_)
 						}
 					}
 				}
@@ -6684,125 +8216,6 @@ func (a_spec_relationsFormCallback *A_SPEC_RELATIONSFormCallback) OnSave() {
 	}
 
 	fillUpTree(a_spec_relationsFormCallback.probe)
-}
-func __gong__New__A_SPEC_RELATIONS_1FormCallback(
-	a_spec_relations_1 *models.A_SPEC_RELATIONS_1,
-	probe *Probe,
-	formGroup *table.FormGroup,
-) (a_spec_relations_1FormCallback *A_SPEC_RELATIONS_1FormCallback) {
-	a_spec_relations_1FormCallback = new(A_SPEC_RELATIONS_1FormCallback)
-	a_spec_relations_1FormCallback.probe = probe
-	a_spec_relations_1FormCallback.a_spec_relations_1 = a_spec_relations_1
-	a_spec_relations_1FormCallback.formGroup = formGroup
-
-	a_spec_relations_1FormCallback.CreationMode = (a_spec_relations_1 == nil)
-
-	return
-}
-
-type A_SPEC_RELATIONS_1FormCallback struct {
-	a_spec_relations_1 *models.A_SPEC_RELATIONS_1
-
-	// If the form call is called on the creation of a new instnace
-	CreationMode bool
-
-	probe *Probe
-
-	formGroup *table.FormGroup
-}
-
-func (a_spec_relations_1FormCallback *A_SPEC_RELATIONS_1FormCallback) OnSave() {
-
-	log.Println("A_SPEC_RELATIONS_1FormCallback, OnSave")
-
-	// checkout formStage to have the form group on the stage synchronized with the
-	// back repo (and front repo)
-	a_spec_relations_1FormCallback.probe.formStage.Checkout()
-
-	if a_spec_relations_1FormCallback.a_spec_relations_1 == nil {
-		a_spec_relations_1FormCallback.a_spec_relations_1 = new(models.A_SPEC_RELATIONS_1).Stage(a_spec_relations_1FormCallback.probe.stageOfInterest)
-	}
-	a_spec_relations_1_ := a_spec_relations_1FormCallback.a_spec_relations_1
-	_ = a_spec_relations_1_
-
-	for _, formDiv := range a_spec_relations_1FormCallback.formGroup.FormDivs {
-		switch formDiv.Name {
-		// insertion point per field
-		case "Name":
-			FormDivBasicFieldToField(&(a_spec_relations_1_.Name), formDiv)
-		case "REQ_IF_CONTENT:SPEC_RELATIONS":
-			// we need to retrieve the field owner before the change
-			var pastREQ_IF_CONTENTOwner *models.REQ_IF_CONTENT
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "REQ_IF_CONTENT"
-			rf.Fieldname = "SPEC_RELATIONS"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_spec_relations_1FormCallback.probe.stageOfInterest,
-				a_spec_relations_1FormCallback.probe.backRepoOfInterest,
-				a_spec_relations_1_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastREQ_IF_CONTENTOwner = reverseFieldOwner.(*models.REQ_IF_CONTENT)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastREQ_IF_CONTENTOwner != nil {
-					idx := slices.Index(pastREQ_IF_CONTENTOwner.SPEC_RELATIONS, a_spec_relations_1_)
-					pastREQ_IF_CONTENTOwner.SPEC_RELATIONS = slices.Delete(pastREQ_IF_CONTENTOwner.SPEC_RELATIONS, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _req_if_content := range *models.GetGongstructInstancesSet[models.REQ_IF_CONTENT](a_spec_relations_1FormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _req_if_content.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newREQ_IF_CONTENTOwner := _req_if_content // we have a match
-						if pastREQ_IF_CONTENTOwner != nil {
-							if newREQ_IF_CONTENTOwner != pastREQ_IF_CONTENTOwner {
-								idx := slices.Index(pastREQ_IF_CONTENTOwner.SPEC_RELATIONS, a_spec_relations_1_)
-								pastREQ_IF_CONTENTOwner.SPEC_RELATIONS = slices.Delete(pastREQ_IF_CONTENTOwner.SPEC_RELATIONS, idx, idx+1)
-								newREQ_IF_CONTENTOwner.SPEC_RELATIONS = append(newREQ_IF_CONTENTOwner.SPEC_RELATIONS, a_spec_relations_1_)
-							}
-						} else {
-							newREQ_IF_CONTENTOwner.SPEC_RELATIONS = append(newREQ_IF_CONTENTOwner.SPEC_RELATIONS, a_spec_relations_1_)
-						}
-					}
-				}
-			}
-		}
-	}
-
-	// manage the suppress operation
-	if a_spec_relations_1FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_spec_relations_1_.Unstage(a_spec_relations_1FormCallback.probe.stageOfInterest)
-	}
-
-	a_spec_relations_1FormCallback.probe.stageOfInterest.Commit()
-	fillUpTable[models.A_SPEC_RELATIONS_1](
-		a_spec_relations_1FormCallback.probe,
-	)
-	a_spec_relations_1FormCallback.probe.tableStage.Commit()
-
-	// display a new form by reset the form stage
-	if a_spec_relations_1FormCallback.CreationMode || a_spec_relations_1FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_spec_relations_1FormCallback.probe.formStage.Reset()
-		newFormGroup := (&table.FormGroup{
-			Name: table.FormGroupDefaultName.ToString(),
-		}).Stage(a_spec_relations_1FormCallback.probe.formStage)
-		newFormGroup.OnSave = __gong__New__A_SPEC_RELATIONS_1FormCallback(
-			nil,
-			a_spec_relations_1FormCallback.probe,
-			newFormGroup,
-		)
-		a_spec_relations_1 := new(models.A_SPEC_RELATIONS_1)
-		FillUpForm(a_spec_relations_1, newFormGroup, a_spec_relations_1FormCallback.probe)
-		a_spec_relations_1FormCallback.probe.formStage.Commit()
-	}
-
-	fillUpTree(a_spec_relations_1FormCallback.probe)
 }
 func __gong__New__A_SPEC_RELATION_GROUPSFormCallback(
 	a_spec_relation_groups *models.A_SPEC_RELATION_GROUPS,
@@ -6922,6 +8335,248 @@ func (a_spec_relation_groupsFormCallback *A_SPEC_RELATION_GROUPSFormCallback) On
 	}
 
 	fillUpTree(a_spec_relation_groupsFormCallback.probe)
+}
+func __gong__New__A_SPEC_RELATION_REFFormCallback(
+	a_spec_relation_ref *models.A_SPEC_RELATION_REF,
+	probe *Probe,
+	formGroup *table.FormGroup,
+) (a_spec_relation_refFormCallback *A_SPEC_RELATION_REFFormCallback) {
+	a_spec_relation_refFormCallback = new(A_SPEC_RELATION_REFFormCallback)
+	a_spec_relation_refFormCallback.probe = probe
+	a_spec_relation_refFormCallback.a_spec_relation_ref = a_spec_relation_ref
+	a_spec_relation_refFormCallback.formGroup = formGroup
+
+	a_spec_relation_refFormCallback.CreationMode = (a_spec_relation_ref == nil)
+
+	return
+}
+
+type A_SPEC_RELATION_REFFormCallback struct {
+	a_spec_relation_ref *models.A_SPEC_RELATION_REF
+
+	// If the form call is called on the creation of a new instnace
+	CreationMode bool
+
+	probe *Probe
+
+	formGroup *table.FormGroup
+}
+
+func (a_spec_relation_refFormCallback *A_SPEC_RELATION_REFFormCallback) OnSave() {
+
+	log.Println("A_SPEC_RELATION_REFFormCallback, OnSave")
+
+	// checkout formStage to have the form group on the stage synchronized with the
+	// back repo (and front repo)
+	a_spec_relation_refFormCallback.probe.formStage.Checkout()
+
+	if a_spec_relation_refFormCallback.a_spec_relation_ref == nil {
+		a_spec_relation_refFormCallback.a_spec_relation_ref = new(models.A_SPEC_RELATION_REF).Stage(a_spec_relation_refFormCallback.probe.stageOfInterest)
+	}
+	a_spec_relation_ref_ := a_spec_relation_refFormCallback.a_spec_relation_ref
+	_ = a_spec_relation_ref_
+
+	for _, formDiv := range a_spec_relation_refFormCallback.formGroup.FormDivs {
+		switch formDiv.Name {
+		// insertion point per field
+		case "Name":
+			FormDivBasicFieldToField(&(a_spec_relation_ref_.Name), formDiv)
+		case "SPEC_RELATION_REF":
+			FormDivBasicFieldToField(&(a_spec_relation_ref_.SPEC_RELATION_REF), formDiv)
+		case "RELATION_GROUP:SPEC_RELATIONS":
+			// we need to retrieve the field owner before the change
+			var pastRELATION_GROUPOwner *models.RELATION_GROUP
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "RELATION_GROUP"
+			rf.Fieldname = "SPEC_RELATIONS"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				a_spec_relation_refFormCallback.probe.stageOfInterest,
+				a_spec_relation_refFormCallback.probe.backRepoOfInterest,
+				a_spec_relation_ref_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastRELATION_GROUPOwner = reverseFieldOwner.(*models.RELATION_GROUP)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastRELATION_GROUPOwner != nil {
+					idx := slices.Index(pastRELATION_GROUPOwner.SPEC_RELATIONS, a_spec_relation_ref_)
+					pastRELATION_GROUPOwner.SPEC_RELATIONS = slices.Delete(pastRELATION_GROUPOwner.SPEC_RELATIONS, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _relation_group := range *models.GetGongstructInstancesSet[models.RELATION_GROUP](a_spec_relation_refFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _relation_group.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newRELATION_GROUPOwner := _relation_group // we have a match
+						if pastRELATION_GROUPOwner != nil {
+							if newRELATION_GROUPOwner != pastRELATION_GROUPOwner {
+								idx := slices.Index(pastRELATION_GROUPOwner.SPEC_RELATIONS, a_spec_relation_ref_)
+								pastRELATION_GROUPOwner.SPEC_RELATIONS = slices.Delete(pastRELATION_GROUPOwner.SPEC_RELATIONS, idx, idx+1)
+								newRELATION_GROUPOwner.SPEC_RELATIONS = append(newRELATION_GROUPOwner.SPEC_RELATIONS, a_spec_relation_ref_)
+							}
+						} else {
+							newRELATION_GROUPOwner.SPEC_RELATIONS = append(newRELATION_GROUPOwner.SPEC_RELATIONS, a_spec_relation_ref_)
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// manage the suppress operation
+	if a_spec_relation_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_spec_relation_ref_.Unstage(a_spec_relation_refFormCallback.probe.stageOfInterest)
+	}
+
+	a_spec_relation_refFormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.A_SPEC_RELATION_REF](
+		a_spec_relation_refFormCallback.probe,
+	)
+	a_spec_relation_refFormCallback.probe.tableStage.Commit()
+
+	// display a new form by reset the form stage
+	if a_spec_relation_refFormCallback.CreationMode || a_spec_relation_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_spec_relation_refFormCallback.probe.formStage.Reset()
+		newFormGroup := (&table.FormGroup{
+			Name: table.FormGroupDefaultName.ToString(),
+		}).Stage(a_spec_relation_refFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__A_SPEC_RELATION_REFFormCallback(
+			nil,
+			a_spec_relation_refFormCallback.probe,
+			newFormGroup,
+		)
+		a_spec_relation_ref := new(models.A_SPEC_RELATION_REF)
+		FillUpForm(a_spec_relation_ref, newFormGroup, a_spec_relation_refFormCallback.probe)
+		a_spec_relation_refFormCallback.probe.formStage.Commit()
+	}
+
+	fillUpTree(a_spec_relation_refFormCallback.probe)
+}
+func __gong__New__A_SPEC_RELATION_TYPE_REFFormCallback(
+	a_spec_relation_type_ref *models.A_SPEC_RELATION_TYPE_REF,
+	probe *Probe,
+	formGroup *table.FormGroup,
+) (a_spec_relation_type_refFormCallback *A_SPEC_RELATION_TYPE_REFFormCallback) {
+	a_spec_relation_type_refFormCallback = new(A_SPEC_RELATION_TYPE_REFFormCallback)
+	a_spec_relation_type_refFormCallback.probe = probe
+	a_spec_relation_type_refFormCallback.a_spec_relation_type_ref = a_spec_relation_type_ref
+	a_spec_relation_type_refFormCallback.formGroup = formGroup
+
+	a_spec_relation_type_refFormCallback.CreationMode = (a_spec_relation_type_ref == nil)
+
+	return
+}
+
+type A_SPEC_RELATION_TYPE_REFFormCallback struct {
+	a_spec_relation_type_ref *models.A_SPEC_RELATION_TYPE_REF
+
+	// If the form call is called on the creation of a new instnace
+	CreationMode bool
+
+	probe *Probe
+
+	formGroup *table.FormGroup
+}
+
+func (a_spec_relation_type_refFormCallback *A_SPEC_RELATION_TYPE_REFFormCallback) OnSave() {
+
+	log.Println("A_SPEC_RELATION_TYPE_REFFormCallback, OnSave")
+
+	// checkout formStage to have the form group on the stage synchronized with the
+	// back repo (and front repo)
+	a_spec_relation_type_refFormCallback.probe.formStage.Checkout()
+
+	if a_spec_relation_type_refFormCallback.a_spec_relation_type_ref == nil {
+		a_spec_relation_type_refFormCallback.a_spec_relation_type_ref = new(models.A_SPEC_RELATION_TYPE_REF).Stage(a_spec_relation_type_refFormCallback.probe.stageOfInterest)
+	}
+	a_spec_relation_type_ref_ := a_spec_relation_type_refFormCallback.a_spec_relation_type_ref
+	_ = a_spec_relation_type_ref_
+
+	for _, formDiv := range a_spec_relation_type_refFormCallback.formGroup.FormDivs {
+		switch formDiv.Name {
+		// insertion point per field
+		case "Name":
+			FormDivBasicFieldToField(&(a_spec_relation_type_ref_.Name), formDiv)
+		case "SPEC_RELATION_TYPE_REF":
+			FormDivBasicFieldToField(&(a_spec_relation_type_ref_.SPEC_RELATION_TYPE_REF), formDiv)
+		case "SPEC_RELATION:TYPE":
+			// we need to retrieve the field owner before the change
+			var pastSPEC_RELATIONOwner *models.SPEC_RELATION
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "SPEC_RELATION"
+			rf.Fieldname = "TYPE"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				a_spec_relation_type_refFormCallback.probe.stageOfInterest,
+				a_spec_relation_type_refFormCallback.probe.backRepoOfInterest,
+				a_spec_relation_type_ref_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastSPEC_RELATIONOwner = reverseFieldOwner.(*models.SPEC_RELATION)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastSPEC_RELATIONOwner != nil {
+					idx := slices.Index(pastSPEC_RELATIONOwner.TYPE, a_spec_relation_type_ref_)
+					pastSPEC_RELATIONOwner.TYPE = slices.Delete(pastSPEC_RELATIONOwner.TYPE, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _spec_relation := range *models.GetGongstructInstancesSet[models.SPEC_RELATION](a_spec_relation_type_refFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _spec_relation.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newSPEC_RELATIONOwner := _spec_relation // we have a match
+						if pastSPEC_RELATIONOwner != nil {
+							if newSPEC_RELATIONOwner != pastSPEC_RELATIONOwner {
+								idx := slices.Index(pastSPEC_RELATIONOwner.TYPE, a_spec_relation_type_ref_)
+								pastSPEC_RELATIONOwner.TYPE = slices.Delete(pastSPEC_RELATIONOwner.TYPE, idx, idx+1)
+								newSPEC_RELATIONOwner.TYPE = append(newSPEC_RELATIONOwner.TYPE, a_spec_relation_type_ref_)
+							}
+						} else {
+							newSPEC_RELATIONOwner.TYPE = append(newSPEC_RELATIONOwner.TYPE, a_spec_relation_type_ref_)
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// manage the suppress operation
+	if a_spec_relation_type_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_spec_relation_type_ref_.Unstage(a_spec_relation_type_refFormCallback.probe.stageOfInterest)
+	}
+
+	a_spec_relation_type_refFormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.A_SPEC_RELATION_TYPE_REF](
+		a_spec_relation_type_refFormCallback.probe,
+	)
+	a_spec_relation_type_refFormCallback.probe.tableStage.Commit()
+
+	// display a new form by reset the form stage
+	if a_spec_relation_type_refFormCallback.CreationMode || a_spec_relation_type_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_spec_relation_type_refFormCallback.probe.formStage.Reset()
+		newFormGroup := (&table.FormGroup{
+			Name: table.FormGroupDefaultName.ToString(),
+		}).Stage(a_spec_relation_type_refFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__A_SPEC_RELATION_TYPE_REFFormCallback(
+			nil,
+			a_spec_relation_type_refFormCallback.probe,
+			newFormGroup,
+		)
+		a_spec_relation_type_ref := new(models.A_SPEC_RELATION_TYPE_REF)
+		FillUpForm(a_spec_relation_type_ref, newFormGroup, a_spec_relation_type_refFormCallback.probe)
+		a_spec_relation_type_refFormCallback.probe.formStage.Commit()
+	}
+
+	fillUpTree(a_spec_relation_type_refFormCallback.probe)
 }
 func __gong__New__A_SPEC_TYPESFormCallback(
 	a_spec_types *models.A_SPEC_TYPES,
@@ -7279,1661 +8934,6 @@ func (a_tool_extensionsFormCallback *A_TOOL_EXTENSIONSFormCallback) OnSave() {
 	}
 
 	fillUpTree(a_tool_extensionsFormCallback.probe)
-}
-func __gong__New__A_TYPEFormCallback(
-	a_type *models.A_TYPE,
-	probe *Probe,
-	formGroup *table.FormGroup,
-) (a_typeFormCallback *A_TYPEFormCallback) {
-	a_typeFormCallback = new(A_TYPEFormCallback)
-	a_typeFormCallback.probe = probe
-	a_typeFormCallback.a_type = a_type
-	a_typeFormCallback.formGroup = formGroup
-
-	a_typeFormCallback.CreationMode = (a_type == nil)
-
-	return
-}
-
-type A_TYPEFormCallback struct {
-	a_type *models.A_TYPE
-
-	// If the form call is called on the creation of a new instnace
-	CreationMode bool
-
-	probe *Probe
-
-	formGroup *table.FormGroup
-}
-
-func (a_typeFormCallback *A_TYPEFormCallback) OnSave() {
-
-	log.Println("A_TYPEFormCallback, OnSave")
-
-	// checkout formStage to have the form group on the stage synchronized with the
-	// back repo (and front repo)
-	a_typeFormCallback.probe.formStage.Checkout()
-
-	if a_typeFormCallback.a_type == nil {
-		a_typeFormCallback.a_type = new(models.A_TYPE).Stage(a_typeFormCallback.probe.stageOfInterest)
-	}
-	a_type_ := a_typeFormCallback.a_type
-	_ = a_type_
-
-	for _, formDiv := range a_typeFormCallback.formGroup.FormDivs {
-		switch formDiv.Name {
-		// insertion point per field
-		case "Name":
-			FormDivBasicFieldToField(&(a_type_.Name), formDiv)
-		case "DATATYPE_DEFINITION_DATE_REF":
-			FormDivBasicFieldToField(&(a_type_.DATATYPE_DEFINITION_DATE_REF), formDiv)
-		case "ATTRIBUTE_DEFINITION_DATE:TYPE":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_DEFINITION_DATEOwner *models.ATTRIBUTE_DEFINITION_DATE
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_DEFINITION_DATE"
-			rf.Fieldname = "TYPE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_typeFormCallback.probe.stageOfInterest,
-				a_typeFormCallback.probe.backRepoOfInterest,
-				a_type_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_DEFINITION_DATEOwner = reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_DATE)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_DEFINITION_DATEOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_DEFINITION_DATEOwner.TYPE, a_type_)
-					pastATTRIBUTE_DEFINITION_DATEOwner.TYPE = slices.Delete(pastATTRIBUTE_DEFINITION_DATEOwner.TYPE, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_definition_date := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_DATE](a_typeFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_definition_date.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_DEFINITION_DATEOwner := _attribute_definition_date // we have a match
-						if pastATTRIBUTE_DEFINITION_DATEOwner != nil {
-							if newATTRIBUTE_DEFINITION_DATEOwner != pastATTRIBUTE_DEFINITION_DATEOwner {
-								idx := slices.Index(pastATTRIBUTE_DEFINITION_DATEOwner.TYPE, a_type_)
-								pastATTRIBUTE_DEFINITION_DATEOwner.TYPE = slices.Delete(pastATTRIBUTE_DEFINITION_DATEOwner.TYPE, idx, idx+1)
-								newATTRIBUTE_DEFINITION_DATEOwner.TYPE = append(newATTRIBUTE_DEFINITION_DATEOwner.TYPE, a_type_)
-							}
-						} else {
-							newATTRIBUTE_DEFINITION_DATEOwner.TYPE = append(newATTRIBUTE_DEFINITION_DATEOwner.TYPE, a_type_)
-						}
-					}
-				}
-			}
-		}
-	}
-
-	// manage the suppress operation
-	if a_typeFormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_type_.Unstage(a_typeFormCallback.probe.stageOfInterest)
-	}
-
-	a_typeFormCallback.probe.stageOfInterest.Commit()
-	fillUpTable[models.A_TYPE](
-		a_typeFormCallback.probe,
-	)
-	a_typeFormCallback.probe.tableStage.Commit()
-
-	// display a new form by reset the form stage
-	if a_typeFormCallback.CreationMode || a_typeFormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_typeFormCallback.probe.formStage.Reset()
-		newFormGroup := (&table.FormGroup{
-			Name: table.FormGroupDefaultName.ToString(),
-		}).Stage(a_typeFormCallback.probe.formStage)
-		newFormGroup.OnSave = __gong__New__A_TYPEFormCallback(
-			nil,
-			a_typeFormCallback.probe,
-			newFormGroup,
-		)
-		a_type := new(models.A_TYPE)
-		FillUpForm(a_type, newFormGroup, a_typeFormCallback.probe)
-		a_typeFormCallback.probe.formStage.Commit()
-	}
-
-	fillUpTree(a_typeFormCallback.probe)
-}
-func __gong__New__A_TYPE_1FormCallback(
-	a_type_1 *models.A_TYPE_1,
-	probe *Probe,
-	formGroup *table.FormGroup,
-) (a_type_1FormCallback *A_TYPE_1FormCallback) {
-	a_type_1FormCallback = new(A_TYPE_1FormCallback)
-	a_type_1FormCallback.probe = probe
-	a_type_1FormCallback.a_type_1 = a_type_1
-	a_type_1FormCallback.formGroup = formGroup
-
-	a_type_1FormCallback.CreationMode = (a_type_1 == nil)
-
-	return
-}
-
-type A_TYPE_1FormCallback struct {
-	a_type_1 *models.A_TYPE_1
-
-	// If the form call is called on the creation of a new instnace
-	CreationMode bool
-
-	probe *Probe
-
-	formGroup *table.FormGroup
-}
-
-func (a_type_1FormCallback *A_TYPE_1FormCallback) OnSave() {
-
-	log.Println("A_TYPE_1FormCallback, OnSave")
-
-	// checkout formStage to have the form group on the stage synchronized with the
-	// back repo (and front repo)
-	a_type_1FormCallback.probe.formStage.Checkout()
-
-	if a_type_1FormCallback.a_type_1 == nil {
-		a_type_1FormCallback.a_type_1 = new(models.A_TYPE_1).Stage(a_type_1FormCallback.probe.stageOfInterest)
-	}
-	a_type_1_ := a_type_1FormCallback.a_type_1
-	_ = a_type_1_
-
-	for _, formDiv := range a_type_1FormCallback.formGroup.FormDivs {
-		switch formDiv.Name {
-		// insertion point per field
-		case "Name":
-			FormDivBasicFieldToField(&(a_type_1_.Name), formDiv)
-		case "RELATION_GROUP_TYPE_REF":
-			FormDivBasicFieldToField(&(a_type_1_.RELATION_GROUP_TYPE_REF), formDiv)
-		case "RELATION_GROUP:TYPE":
-			// we need to retrieve the field owner before the change
-			var pastRELATION_GROUPOwner *models.RELATION_GROUP
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "RELATION_GROUP"
-			rf.Fieldname = "TYPE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_type_1FormCallback.probe.stageOfInterest,
-				a_type_1FormCallback.probe.backRepoOfInterest,
-				a_type_1_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastRELATION_GROUPOwner = reverseFieldOwner.(*models.RELATION_GROUP)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastRELATION_GROUPOwner != nil {
-					idx := slices.Index(pastRELATION_GROUPOwner.TYPE, a_type_1_)
-					pastRELATION_GROUPOwner.TYPE = slices.Delete(pastRELATION_GROUPOwner.TYPE, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _relation_group := range *models.GetGongstructInstancesSet[models.RELATION_GROUP](a_type_1FormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _relation_group.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newRELATION_GROUPOwner := _relation_group // we have a match
-						if pastRELATION_GROUPOwner != nil {
-							if newRELATION_GROUPOwner != pastRELATION_GROUPOwner {
-								idx := slices.Index(pastRELATION_GROUPOwner.TYPE, a_type_1_)
-								pastRELATION_GROUPOwner.TYPE = slices.Delete(pastRELATION_GROUPOwner.TYPE, idx, idx+1)
-								newRELATION_GROUPOwner.TYPE = append(newRELATION_GROUPOwner.TYPE, a_type_1_)
-							}
-						} else {
-							newRELATION_GROUPOwner.TYPE = append(newRELATION_GROUPOwner.TYPE, a_type_1_)
-						}
-					}
-				}
-			}
-		}
-	}
-
-	// manage the suppress operation
-	if a_type_1FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_type_1_.Unstage(a_type_1FormCallback.probe.stageOfInterest)
-	}
-
-	a_type_1FormCallback.probe.stageOfInterest.Commit()
-	fillUpTable[models.A_TYPE_1](
-		a_type_1FormCallback.probe,
-	)
-	a_type_1FormCallback.probe.tableStage.Commit()
-
-	// display a new form by reset the form stage
-	if a_type_1FormCallback.CreationMode || a_type_1FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_type_1FormCallback.probe.formStage.Reset()
-		newFormGroup := (&table.FormGroup{
-			Name: table.FormGroupDefaultName.ToString(),
-		}).Stage(a_type_1FormCallback.probe.formStage)
-		newFormGroup.OnSave = __gong__New__A_TYPE_1FormCallback(
-			nil,
-			a_type_1FormCallback.probe,
-			newFormGroup,
-		)
-		a_type_1 := new(models.A_TYPE_1)
-		FillUpForm(a_type_1, newFormGroup, a_type_1FormCallback.probe)
-		a_type_1FormCallback.probe.formStage.Commit()
-	}
-
-	fillUpTree(a_type_1FormCallback.probe)
-}
-func __gong__New__A_TYPE_10FormCallback(
-	a_type_10 *models.A_TYPE_10,
-	probe *Probe,
-	formGroup *table.FormGroup,
-) (a_type_10FormCallback *A_TYPE_10FormCallback) {
-	a_type_10FormCallback = new(A_TYPE_10FormCallback)
-	a_type_10FormCallback.probe = probe
-	a_type_10FormCallback.a_type_10 = a_type_10
-	a_type_10FormCallback.formGroup = formGroup
-
-	a_type_10FormCallback.CreationMode = (a_type_10 == nil)
-
-	return
-}
-
-type A_TYPE_10FormCallback struct {
-	a_type_10 *models.A_TYPE_10
-
-	// If the form call is called on the creation of a new instnace
-	CreationMode bool
-
-	probe *Probe
-
-	formGroup *table.FormGroup
-}
-
-func (a_type_10FormCallback *A_TYPE_10FormCallback) OnSave() {
-
-	log.Println("A_TYPE_10FormCallback, OnSave")
-
-	// checkout formStage to have the form group on the stage synchronized with the
-	// back repo (and front repo)
-	a_type_10FormCallback.probe.formStage.Checkout()
-
-	if a_type_10FormCallback.a_type_10 == nil {
-		a_type_10FormCallback.a_type_10 = new(models.A_TYPE_10).Stage(a_type_10FormCallback.probe.stageOfInterest)
-	}
-	a_type_10_ := a_type_10FormCallback.a_type_10
-	_ = a_type_10_
-
-	for _, formDiv := range a_type_10FormCallback.formGroup.FormDivs {
-		switch formDiv.Name {
-		// insertion point per field
-		case "Name":
-			FormDivBasicFieldToField(&(a_type_10_.Name), formDiv)
-		case "SPECIFICATION_TYPE_REF":
-			FormDivBasicFieldToField(&(a_type_10_.SPECIFICATION_TYPE_REF), formDiv)
-		case "SPECIFICATION:TYPE":
-			// we need to retrieve the field owner before the change
-			var pastSPECIFICATIONOwner *models.SPECIFICATION
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "SPECIFICATION"
-			rf.Fieldname = "TYPE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_type_10FormCallback.probe.stageOfInterest,
-				a_type_10FormCallback.probe.backRepoOfInterest,
-				a_type_10_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastSPECIFICATIONOwner = reverseFieldOwner.(*models.SPECIFICATION)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastSPECIFICATIONOwner != nil {
-					idx := slices.Index(pastSPECIFICATIONOwner.TYPE, a_type_10_)
-					pastSPECIFICATIONOwner.TYPE = slices.Delete(pastSPECIFICATIONOwner.TYPE, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _specification := range *models.GetGongstructInstancesSet[models.SPECIFICATION](a_type_10FormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _specification.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newSPECIFICATIONOwner := _specification // we have a match
-						if pastSPECIFICATIONOwner != nil {
-							if newSPECIFICATIONOwner != pastSPECIFICATIONOwner {
-								idx := slices.Index(pastSPECIFICATIONOwner.TYPE, a_type_10_)
-								pastSPECIFICATIONOwner.TYPE = slices.Delete(pastSPECIFICATIONOwner.TYPE, idx, idx+1)
-								newSPECIFICATIONOwner.TYPE = append(newSPECIFICATIONOwner.TYPE, a_type_10_)
-							}
-						} else {
-							newSPECIFICATIONOwner.TYPE = append(newSPECIFICATIONOwner.TYPE, a_type_10_)
-						}
-					}
-				}
-			}
-		}
-	}
-
-	// manage the suppress operation
-	if a_type_10FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_type_10_.Unstage(a_type_10FormCallback.probe.stageOfInterest)
-	}
-
-	a_type_10FormCallback.probe.stageOfInterest.Commit()
-	fillUpTable[models.A_TYPE_10](
-		a_type_10FormCallback.probe,
-	)
-	a_type_10FormCallback.probe.tableStage.Commit()
-
-	// display a new form by reset the form stage
-	if a_type_10FormCallback.CreationMode || a_type_10FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_type_10FormCallback.probe.formStage.Reset()
-		newFormGroup := (&table.FormGroup{
-			Name: table.FormGroupDefaultName.ToString(),
-		}).Stage(a_type_10FormCallback.probe.formStage)
-		newFormGroup.OnSave = __gong__New__A_TYPE_10FormCallback(
-			nil,
-			a_type_10FormCallback.probe,
-			newFormGroup,
-		)
-		a_type_10 := new(models.A_TYPE_10)
-		FillUpForm(a_type_10, newFormGroup, a_type_10FormCallback.probe)
-		a_type_10FormCallback.probe.formStage.Commit()
-	}
-
-	fillUpTree(a_type_10FormCallback.probe)
-}
-func __gong__New__A_TYPE_2FormCallback(
-	a_type_2 *models.A_TYPE_2,
-	probe *Probe,
-	formGroup *table.FormGroup,
-) (a_type_2FormCallback *A_TYPE_2FormCallback) {
-	a_type_2FormCallback = new(A_TYPE_2FormCallback)
-	a_type_2FormCallback.probe = probe
-	a_type_2FormCallback.a_type_2 = a_type_2
-	a_type_2FormCallback.formGroup = formGroup
-
-	a_type_2FormCallback.CreationMode = (a_type_2 == nil)
-
-	return
-}
-
-type A_TYPE_2FormCallback struct {
-	a_type_2 *models.A_TYPE_2
-
-	// If the form call is called on the creation of a new instnace
-	CreationMode bool
-
-	probe *Probe
-
-	formGroup *table.FormGroup
-}
-
-func (a_type_2FormCallback *A_TYPE_2FormCallback) OnSave() {
-
-	log.Println("A_TYPE_2FormCallback, OnSave")
-
-	// checkout formStage to have the form group on the stage synchronized with the
-	// back repo (and front repo)
-	a_type_2FormCallback.probe.formStage.Checkout()
-
-	if a_type_2FormCallback.a_type_2 == nil {
-		a_type_2FormCallback.a_type_2 = new(models.A_TYPE_2).Stage(a_type_2FormCallback.probe.stageOfInterest)
-	}
-	a_type_2_ := a_type_2FormCallback.a_type_2
-	_ = a_type_2_
-
-	for _, formDiv := range a_type_2FormCallback.formGroup.FormDivs {
-		switch formDiv.Name {
-		// insertion point per field
-		case "Name":
-			FormDivBasicFieldToField(&(a_type_2_.Name), formDiv)
-		case "SPEC_OBJECT_TYPE_REF":
-			FormDivBasicFieldToField(&(a_type_2_.SPEC_OBJECT_TYPE_REF), formDiv)
-		case "SPEC_OBJECT:TYPE":
-			// we need to retrieve the field owner before the change
-			var pastSPEC_OBJECTOwner *models.SPEC_OBJECT
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "SPEC_OBJECT"
-			rf.Fieldname = "TYPE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_type_2FormCallback.probe.stageOfInterest,
-				a_type_2FormCallback.probe.backRepoOfInterest,
-				a_type_2_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastSPEC_OBJECTOwner = reverseFieldOwner.(*models.SPEC_OBJECT)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastSPEC_OBJECTOwner != nil {
-					idx := slices.Index(pastSPEC_OBJECTOwner.TYPE, a_type_2_)
-					pastSPEC_OBJECTOwner.TYPE = slices.Delete(pastSPEC_OBJECTOwner.TYPE, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _spec_object := range *models.GetGongstructInstancesSet[models.SPEC_OBJECT](a_type_2FormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _spec_object.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newSPEC_OBJECTOwner := _spec_object // we have a match
-						if pastSPEC_OBJECTOwner != nil {
-							if newSPEC_OBJECTOwner != pastSPEC_OBJECTOwner {
-								idx := slices.Index(pastSPEC_OBJECTOwner.TYPE, a_type_2_)
-								pastSPEC_OBJECTOwner.TYPE = slices.Delete(pastSPEC_OBJECTOwner.TYPE, idx, idx+1)
-								newSPEC_OBJECTOwner.TYPE = append(newSPEC_OBJECTOwner.TYPE, a_type_2_)
-							}
-						} else {
-							newSPEC_OBJECTOwner.TYPE = append(newSPEC_OBJECTOwner.TYPE, a_type_2_)
-						}
-					}
-				}
-			}
-		}
-	}
-
-	// manage the suppress operation
-	if a_type_2FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_type_2_.Unstage(a_type_2FormCallback.probe.stageOfInterest)
-	}
-
-	a_type_2FormCallback.probe.stageOfInterest.Commit()
-	fillUpTable[models.A_TYPE_2](
-		a_type_2FormCallback.probe,
-	)
-	a_type_2FormCallback.probe.tableStage.Commit()
-
-	// display a new form by reset the form stage
-	if a_type_2FormCallback.CreationMode || a_type_2FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_type_2FormCallback.probe.formStage.Reset()
-		newFormGroup := (&table.FormGroup{
-			Name: table.FormGroupDefaultName.ToString(),
-		}).Stage(a_type_2FormCallback.probe.formStage)
-		newFormGroup.OnSave = __gong__New__A_TYPE_2FormCallback(
-			nil,
-			a_type_2FormCallback.probe,
-			newFormGroup,
-		)
-		a_type_2 := new(models.A_TYPE_2)
-		FillUpForm(a_type_2, newFormGroup, a_type_2FormCallback.probe)
-		a_type_2FormCallback.probe.formStage.Commit()
-	}
-
-	fillUpTree(a_type_2FormCallback.probe)
-}
-func __gong__New__A_TYPE_3FormCallback(
-	a_type_3 *models.A_TYPE_3,
-	probe *Probe,
-	formGroup *table.FormGroup,
-) (a_type_3FormCallback *A_TYPE_3FormCallback) {
-	a_type_3FormCallback = new(A_TYPE_3FormCallback)
-	a_type_3FormCallback.probe = probe
-	a_type_3FormCallback.a_type_3 = a_type_3
-	a_type_3FormCallback.formGroup = formGroup
-
-	a_type_3FormCallback.CreationMode = (a_type_3 == nil)
-
-	return
-}
-
-type A_TYPE_3FormCallback struct {
-	a_type_3 *models.A_TYPE_3
-
-	// If the form call is called on the creation of a new instnace
-	CreationMode bool
-
-	probe *Probe
-
-	formGroup *table.FormGroup
-}
-
-func (a_type_3FormCallback *A_TYPE_3FormCallback) OnSave() {
-
-	log.Println("A_TYPE_3FormCallback, OnSave")
-
-	// checkout formStage to have the form group on the stage synchronized with the
-	// back repo (and front repo)
-	a_type_3FormCallback.probe.formStage.Checkout()
-
-	if a_type_3FormCallback.a_type_3 == nil {
-		a_type_3FormCallback.a_type_3 = new(models.A_TYPE_3).Stage(a_type_3FormCallback.probe.stageOfInterest)
-	}
-	a_type_3_ := a_type_3FormCallback.a_type_3
-	_ = a_type_3_
-
-	for _, formDiv := range a_type_3FormCallback.formGroup.FormDivs {
-		switch formDiv.Name {
-		// insertion point per field
-		case "Name":
-			FormDivBasicFieldToField(&(a_type_3_.Name), formDiv)
-		case "DATATYPE_DEFINITION_REAL_REF":
-			FormDivBasicFieldToField(&(a_type_3_.DATATYPE_DEFINITION_REAL_REF), formDiv)
-		case "ATTRIBUTE_DEFINITION_REAL:TYPE":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_DEFINITION_REALOwner *models.ATTRIBUTE_DEFINITION_REAL
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_DEFINITION_REAL"
-			rf.Fieldname = "TYPE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_type_3FormCallback.probe.stageOfInterest,
-				a_type_3FormCallback.probe.backRepoOfInterest,
-				a_type_3_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_DEFINITION_REALOwner = reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_REAL)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_DEFINITION_REALOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_DEFINITION_REALOwner.TYPE, a_type_3_)
-					pastATTRIBUTE_DEFINITION_REALOwner.TYPE = slices.Delete(pastATTRIBUTE_DEFINITION_REALOwner.TYPE, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_definition_real := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_REAL](a_type_3FormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_definition_real.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_DEFINITION_REALOwner := _attribute_definition_real // we have a match
-						if pastATTRIBUTE_DEFINITION_REALOwner != nil {
-							if newATTRIBUTE_DEFINITION_REALOwner != pastATTRIBUTE_DEFINITION_REALOwner {
-								idx := slices.Index(pastATTRIBUTE_DEFINITION_REALOwner.TYPE, a_type_3_)
-								pastATTRIBUTE_DEFINITION_REALOwner.TYPE = slices.Delete(pastATTRIBUTE_DEFINITION_REALOwner.TYPE, idx, idx+1)
-								newATTRIBUTE_DEFINITION_REALOwner.TYPE = append(newATTRIBUTE_DEFINITION_REALOwner.TYPE, a_type_3_)
-							}
-						} else {
-							newATTRIBUTE_DEFINITION_REALOwner.TYPE = append(newATTRIBUTE_DEFINITION_REALOwner.TYPE, a_type_3_)
-						}
-					}
-				}
-			}
-		}
-	}
-
-	// manage the suppress operation
-	if a_type_3FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_type_3_.Unstage(a_type_3FormCallback.probe.stageOfInterest)
-	}
-
-	a_type_3FormCallback.probe.stageOfInterest.Commit()
-	fillUpTable[models.A_TYPE_3](
-		a_type_3FormCallback.probe,
-	)
-	a_type_3FormCallback.probe.tableStage.Commit()
-
-	// display a new form by reset the form stage
-	if a_type_3FormCallback.CreationMode || a_type_3FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_type_3FormCallback.probe.formStage.Reset()
-		newFormGroup := (&table.FormGroup{
-			Name: table.FormGroupDefaultName.ToString(),
-		}).Stage(a_type_3FormCallback.probe.formStage)
-		newFormGroup.OnSave = __gong__New__A_TYPE_3FormCallback(
-			nil,
-			a_type_3FormCallback.probe,
-			newFormGroup,
-		)
-		a_type_3 := new(models.A_TYPE_3)
-		FillUpForm(a_type_3, newFormGroup, a_type_3FormCallback.probe)
-		a_type_3FormCallback.probe.formStage.Commit()
-	}
-
-	fillUpTree(a_type_3FormCallback.probe)
-}
-func __gong__New__A_TYPE_4FormCallback(
-	a_type_4 *models.A_TYPE_4,
-	probe *Probe,
-	formGroup *table.FormGroup,
-) (a_type_4FormCallback *A_TYPE_4FormCallback) {
-	a_type_4FormCallback = new(A_TYPE_4FormCallback)
-	a_type_4FormCallback.probe = probe
-	a_type_4FormCallback.a_type_4 = a_type_4
-	a_type_4FormCallback.formGroup = formGroup
-
-	a_type_4FormCallback.CreationMode = (a_type_4 == nil)
-
-	return
-}
-
-type A_TYPE_4FormCallback struct {
-	a_type_4 *models.A_TYPE_4
-
-	// If the form call is called on the creation of a new instnace
-	CreationMode bool
-
-	probe *Probe
-
-	formGroup *table.FormGroup
-}
-
-func (a_type_4FormCallback *A_TYPE_4FormCallback) OnSave() {
-
-	log.Println("A_TYPE_4FormCallback, OnSave")
-
-	// checkout formStage to have the form group on the stage synchronized with the
-	// back repo (and front repo)
-	a_type_4FormCallback.probe.formStage.Checkout()
-
-	if a_type_4FormCallback.a_type_4 == nil {
-		a_type_4FormCallback.a_type_4 = new(models.A_TYPE_4).Stage(a_type_4FormCallback.probe.stageOfInterest)
-	}
-	a_type_4_ := a_type_4FormCallback.a_type_4
-	_ = a_type_4_
-
-	for _, formDiv := range a_type_4FormCallback.formGroup.FormDivs {
-		switch formDiv.Name {
-		// insertion point per field
-		case "Name":
-			FormDivBasicFieldToField(&(a_type_4_.Name), formDiv)
-		case "SPEC_RELATION_TYPE_REF":
-			FormDivBasicFieldToField(&(a_type_4_.SPEC_RELATION_TYPE_REF), formDiv)
-		case "SPEC_RELATION:TYPE":
-			// we need to retrieve the field owner before the change
-			var pastSPEC_RELATIONOwner *models.SPEC_RELATION
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "SPEC_RELATION"
-			rf.Fieldname = "TYPE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_type_4FormCallback.probe.stageOfInterest,
-				a_type_4FormCallback.probe.backRepoOfInterest,
-				a_type_4_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastSPEC_RELATIONOwner = reverseFieldOwner.(*models.SPEC_RELATION)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastSPEC_RELATIONOwner != nil {
-					idx := slices.Index(pastSPEC_RELATIONOwner.TYPE, a_type_4_)
-					pastSPEC_RELATIONOwner.TYPE = slices.Delete(pastSPEC_RELATIONOwner.TYPE, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _spec_relation := range *models.GetGongstructInstancesSet[models.SPEC_RELATION](a_type_4FormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _spec_relation.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newSPEC_RELATIONOwner := _spec_relation // we have a match
-						if pastSPEC_RELATIONOwner != nil {
-							if newSPEC_RELATIONOwner != pastSPEC_RELATIONOwner {
-								idx := slices.Index(pastSPEC_RELATIONOwner.TYPE, a_type_4_)
-								pastSPEC_RELATIONOwner.TYPE = slices.Delete(pastSPEC_RELATIONOwner.TYPE, idx, idx+1)
-								newSPEC_RELATIONOwner.TYPE = append(newSPEC_RELATIONOwner.TYPE, a_type_4_)
-							}
-						} else {
-							newSPEC_RELATIONOwner.TYPE = append(newSPEC_RELATIONOwner.TYPE, a_type_4_)
-						}
-					}
-				}
-			}
-		}
-	}
-
-	// manage the suppress operation
-	if a_type_4FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_type_4_.Unstage(a_type_4FormCallback.probe.stageOfInterest)
-	}
-
-	a_type_4FormCallback.probe.stageOfInterest.Commit()
-	fillUpTable[models.A_TYPE_4](
-		a_type_4FormCallback.probe,
-	)
-	a_type_4FormCallback.probe.tableStage.Commit()
-
-	// display a new form by reset the form stage
-	if a_type_4FormCallback.CreationMode || a_type_4FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_type_4FormCallback.probe.formStage.Reset()
-		newFormGroup := (&table.FormGroup{
-			Name: table.FormGroupDefaultName.ToString(),
-		}).Stage(a_type_4FormCallback.probe.formStage)
-		newFormGroup.OnSave = __gong__New__A_TYPE_4FormCallback(
-			nil,
-			a_type_4FormCallback.probe,
-			newFormGroup,
-		)
-		a_type_4 := new(models.A_TYPE_4)
-		FillUpForm(a_type_4, newFormGroup, a_type_4FormCallback.probe)
-		a_type_4FormCallback.probe.formStage.Commit()
-	}
-
-	fillUpTree(a_type_4FormCallback.probe)
-}
-func __gong__New__A_TYPE_5FormCallback(
-	a_type_5 *models.A_TYPE_5,
-	probe *Probe,
-	formGroup *table.FormGroup,
-) (a_type_5FormCallback *A_TYPE_5FormCallback) {
-	a_type_5FormCallback = new(A_TYPE_5FormCallback)
-	a_type_5FormCallback.probe = probe
-	a_type_5FormCallback.a_type_5 = a_type_5
-	a_type_5FormCallback.formGroup = formGroup
-
-	a_type_5FormCallback.CreationMode = (a_type_5 == nil)
-
-	return
-}
-
-type A_TYPE_5FormCallback struct {
-	a_type_5 *models.A_TYPE_5
-
-	// If the form call is called on the creation of a new instnace
-	CreationMode bool
-
-	probe *Probe
-
-	formGroup *table.FormGroup
-}
-
-func (a_type_5FormCallback *A_TYPE_5FormCallback) OnSave() {
-
-	log.Println("A_TYPE_5FormCallback, OnSave")
-
-	// checkout formStage to have the form group on the stage synchronized with the
-	// back repo (and front repo)
-	a_type_5FormCallback.probe.formStage.Checkout()
-
-	if a_type_5FormCallback.a_type_5 == nil {
-		a_type_5FormCallback.a_type_5 = new(models.A_TYPE_5).Stage(a_type_5FormCallback.probe.stageOfInterest)
-	}
-	a_type_5_ := a_type_5FormCallback.a_type_5
-	_ = a_type_5_
-
-	for _, formDiv := range a_type_5FormCallback.formGroup.FormDivs {
-		switch formDiv.Name {
-		// insertion point per field
-		case "Name":
-			FormDivBasicFieldToField(&(a_type_5_.Name), formDiv)
-		case "DATATYPE_DEFINITION_INTEGER_REF":
-			FormDivBasicFieldToField(&(a_type_5_.DATATYPE_DEFINITION_INTEGER_REF), formDiv)
-		case "ATTRIBUTE_DEFINITION_INTEGER:TYPE":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_DEFINITION_INTEGEROwner *models.ATTRIBUTE_DEFINITION_INTEGER
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_DEFINITION_INTEGER"
-			rf.Fieldname = "TYPE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_type_5FormCallback.probe.stageOfInterest,
-				a_type_5FormCallback.probe.backRepoOfInterest,
-				a_type_5_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_DEFINITION_INTEGEROwner = reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_INTEGER)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_DEFINITION_INTEGEROwner != nil {
-					idx := slices.Index(pastATTRIBUTE_DEFINITION_INTEGEROwner.TYPE, a_type_5_)
-					pastATTRIBUTE_DEFINITION_INTEGEROwner.TYPE = slices.Delete(pastATTRIBUTE_DEFINITION_INTEGEROwner.TYPE, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_definition_integer := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_INTEGER](a_type_5FormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_definition_integer.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_DEFINITION_INTEGEROwner := _attribute_definition_integer // we have a match
-						if pastATTRIBUTE_DEFINITION_INTEGEROwner != nil {
-							if newATTRIBUTE_DEFINITION_INTEGEROwner != pastATTRIBUTE_DEFINITION_INTEGEROwner {
-								idx := slices.Index(pastATTRIBUTE_DEFINITION_INTEGEROwner.TYPE, a_type_5_)
-								pastATTRIBUTE_DEFINITION_INTEGEROwner.TYPE = slices.Delete(pastATTRIBUTE_DEFINITION_INTEGEROwner.TYPE, idx, idx+1)
-								newATTRIBUTE_DEFINITION_INTEGEROwner.TYPE = append(newATTRIBUTE_DEFINITION_INTEGEROwner.TYPE, a_type_5_)
-							}
-						} else {
-							newATTRIBUTE_DEFINITION_INTEGEROwner.TYPE = append(newATTRIBUTE_DEFINITION_INTEGEROwner.TYPE, a_type_5_)
-						}
-					}
-				}
-			}
-		}
-	}
-
-	// manage the suppress operation
-	if a_type_5FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_type_5_.Unstage(a_type_5FormCallback.probe.stageOfInterest)
-	}
-
-	a_type_5FormCallback.probe.stageOfInterest.Commit()
-	fillUpTable[models.A_TYPE_5](
-		a_type_5FormCallback.probe,
-	)
-	a_type_5FormCallback.probe.tableStage.Commit()
-
-	// display a new form by reset the form stage
-	if a_type_5FormCallback.CreationMode || a_type_5FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_type_5FormCallback.probe.formStage.Reset()
-		newFormGroup := (&table.FormGroup{
-			Name: table.FormGroupDefaultName.ToString(),
-		}).Stage(a_type_5FormCallback.probe.formStage)
-		newFormGroup.OnSave = __gong__New__A_TYPE_5FormCallback(
-			nil,
-			a_type_5FormCallback.probe,
-			newFormGroup,
-		)
-		a_type_5 := new(models.A_TYPE_5)
-		FillUpForm(a_type_5, newFormGroup, a_type_5FormCallback.probe)
-		a_type_5FormCallback.probe.formStage.Commit()
-	}
-
-	fillUpTree(a_type_5FormCallback.probe)
-}
-func __gong__New__A_TYPE_6FormCallback(
-	a_type_6 *models.A_TYPE_6,
-	probe *Probe,
-	formGroup *table.FormGroup,
-) (a_type_6FormCallback *A_TYPE_6FormCallback) {
-	a_type_6FormCallback = new(A_TYPE_6FormCallback)
-	a_type_6FormCallback.probe = probe
-	a_type_6FormCallback.a_type_6 = a_type_6
-	a_type_6FormCallback.formGroup = formGroup
-
-	a_type_6FormCallback.CreationMode = (a_type_6 == nil)
-
-	return
-}
-
-type A_TYPE_6FormCallback struct {
-	a_type_6 *models.A_TYPE_6
-
-	// If the form call is called on the creation of a new instnace
-	CreationMode bool
-
-	probe *Probe
-
-	formGroup *table.FormGroup
-}
-
-func (a_type_6FormCallback *A_TYPE_6FormCallback) OnSave() {
-
-	log.Println("A_TYPE_6FormCallback, OnSave")
-
-	// checkout formStage to have the form group on the stage synchronized with the
-	// back repo (and front repo)
-	a_type_6FormCallback.probe.formStage.Checkout()
-
-	if a_type_6FormCallback.a_type_6 == nil {
-		a_type_6FormCallback.a_type_6 = new(models.A_TYPE_6).Stage(a_type_6FormCallback.probe.stageOfInterest)
-	}
-	a_type_6_ := a_type_6FormCallback.a_type_6
-	_ = a_type_6_
-
-	for _, formDiv := range a_type_6FormCallback.formGroup.FormDivs {
-		switch formDiv.Name {
-		// insertion point per field
-		case "Name":
-			FormDivBasicFieldToField(&(a_type_6_.Name), formDiv)
-		case "DATATYPE_DEFINITION_XHTML_REF":
-			FormDivBasicFieldToField(&(a_type_6_.DATATYPE_DEFINITION_XHTML_REF), formDiv)
-		case "ATTRIBUTE_DEFINITION_XHTML:TYPE":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_DEFINITION_XHTMLOwner *models.ATTRIBUTE_DEFINITION_XHTML
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_DEFINITION_XHTML"
-			rf.Fieldname = "TYPE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_type_6FormCallback.probe.stageOfInterest,
-				a_type_6FormCallback.probe.backRepoOfInterest,
-				a_type_6_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_DEFINITION_XHTMLOwner = reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_XHTML)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_DEFINITION_XHTMLOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_DEFINITION_XHTMLOwner.TYPE, a_type_6_)
-					pastATTRIBUTE_DEFINITION_XHTMLOwner.TYPE = slices.Delete(pastATTRIBUTE_DEFINITION_XHTMLOwner.TYPE, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_definition_xhtml := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_XHTML](a_type_6FormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_definition_xhtml.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_DEFINITION_XHTMLOwner := _attribute_definition_xhtml // we have a match
-						if pastATTRIBUTE_DEFINITION_XHTMLOwner != nil {
-							if newATTRIBUTE_DEFINITION_XHTMLOwner != pastATTRIBUTE_DEFINITION_XHTMLOwner {
-								idx := slices.Index(pastATTRIBUTE_DEFINITION_XHTMLOwner.TYPE, a_type_6_)
-								pastATTRIBUTE_DEFINITION_XHTMLOwner.TYPE = slices.Delete(pastATTRIBUTE_DEFINITION_XHTMLOwner.TYPE, idx, idx+1)
-								newATTRIBUTE_DEFINITION_XHTMLOwner.TYPE = append(newATTRIBUTE_DEFINITION_XHTMLOwner.TYPE, a_type_6_)
-							}
-						} else {
-							newATTRIBUTE_DEFINITION_XHTMLOwner.TYPE = append(newATTRIBUTE_DEFINITION_XHTMLOwner.TYPE, a_type_6_)
-						}
-					}
-				}
-			}
-		}
-	}
-
-	// manage the suppress operation
-	if a_type_6FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_type_6_.Unstage(a_type_6FormCallback.probe.stageOfInterest)
-	}
-
-	a_type_6FormCallback.probe.stageOfInterest.Commit()
-	fillUpTable[models.A_TYPE_6](
-		a_type_6FormCallback.probe,
-	)
-	a_type_6FormCallback.probe.tableStage.Commit()
-
-	// display a new form by reset the form stage
-	if a_type_6FormCallback.CreationMode || a_type_6FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_type_6FormCallback.probe.formStage.Reset()
-		newFormGroup := (&table.FormGroup{
-			Name: table.FormGroupDefaultName.ToString(),
-		}).Stage(a_type_6FormCallback.probe.formStage)
-		newFormGroup.OnSave = __gong__New__A_TYPE_6FormCallback(
-			nil,
-			a_type_6FormCallback.probe,
-			newFormGroup,
-		)
-		a_type_6 := new(models.A_TYPE_6)
-		FillUpForm(a_type_6, newFormGroup, a_type_6FormCallback.probe)
-		a_type_6FormCallback.probe.formStage.Commit()
-	}
-
-	fillUpTree(a_type_6FormCallback.probe)
-}
-func __gong__New__A_TYPE_7FormCallback(
-	a_type_7 *models.A_TYPE_7,
-	probe *Probe,
-	formGroup *table.FormGroup,
-) (a_type_7FormCallback *A_TYPE_7FormCallback) {
-	a_type_7FormCallback = new(A_TYPE_7FormCallback)
-	a_type_7FormCallback.probe = probe
-	a_type_7FormCallback.a_type_7 = a_type_7
-	a_type_7FormCallback.formGroup = formGroup
-
-	a_type_7FormCallback.CreationMode = (a_type_7 == nil)
-
-	return
-}
-
-type A_TYPE_7FormCallback struct {
-	a_type_7 *models.A_TYPE_7
-
-	// If the form call is called on the creation of a new instnace
-	CreationMode bool
-
-	probe *Probe
-
-	formGroup *table.FormGroup
-}
-
-func (a_type_7FormCallback *A_TYPE_7FormCallback) OnSave() {
-
-	log.Println("A_TYPE_7FormCallback, OnSave")
-
-	// checkout formStage to have the form group on the stage synchronized with the
-	// back repo (and front repo)
-	a_type_7FormCallback.probe.formStage.Checkout()
-
-	if a_type_7FormCallback.a_type_7 == nil {
-		a_type_7FormCallback.a_type_7 = new(models.A_TYPE_7).Stage(a_type_7FormCallback.probe.stageOfInterest)
-	}
-	a_type_7_ := a_type_7FormCallback.a_type_7
-	_ = a_type_7_
-
-	for _, formDiv := range a_type_7FormCallback.formGroup.FormDivs {
-		switch formDiv.Name {
-		// insertion point per field
-		case "Name":
-			FormDivBasicFieldToField(&(a_type_7_.Name), formDiv)
-		case "DATATYPE_DEFINITION_BOOLEAN_REF":
-			FormDivBasicFieldToField(&(a_type_7_.DATATYPE_DEFINITION_BOOLEAN_REF), formDiv)
-		case "ATTRIBUTE_DEFINITION_BOOLEAN:TYPE":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_DEFINITION_BOOLEANOwner *models.ATTRIBUTE_DEFINITION_BOOLEAN
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_DEFINITION_BOOLEAN"
-			rf.Fieldname = "TYPE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_type_7FormCallback.probe.stageOfInterest,
-				a_type_7FormCallback.probe.backRepoOfInterest,
-				a_type_7_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_DEFINITION_BOOLEANOwner = reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_BOOLEAN)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_DEFINITION_BOOLEANOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_DEFINITION_BOOLEANOwner.TYPE, a_type_7_)
-					pastATTRIBUTE_DEFINITION_BOOLEANOwner.TYPE = slices.Delete(pastATTRIBUTE_DEFINITION_BOOLEANOwner.TYPE, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_definition_boolean := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_BOOLEAN](a_type_7FormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_definition_boolean.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_DEFINITION_BOOLEANOwner := _attribute_definition_boolean // we have a match
-						if pastATTRIBUTE_DEFINITION_BOOLEANOwner != nil {
-							if newATTRIBUTE_DEFINITION_BOOLEANOwner != pastATTRIBUTE_DEFINITION_BOOLEANOwner {
-								idx := slices.Index(pastATTRIBUTE_DEFINITION_BOOLEANOwner.TYPE, a_type_7_)
-								pastATTRIBUTE_DEFINITION_BOOLEANOwner.TYPE = slices.Delete(pastATTRIBUTE_DEFINITION_BOOLEANOwner.TYPE, idx, idx+1)
-								newATTRIBUTE_DEFINITION_BOOLEANOwner.TYPE = append(newATTRIBUTE_DEFINITION_BOOLEANOwner.TYPE, a_type_7_)
-							}
-						} else {
-							newATTRIBUTE_DEFINITION_BOOLEANOwner.TYPE = append(newATTRIBUTE_DEFINITION_BOOLEANOwner.TYPE, a_type_7_)
-						}
-					}
-				}
-			}
-		}
-	}
-
-	// manage the suppress operation
-	if a_type_7FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_type_7_.Unstage(a_type_7FormCallback.probe.stageOfInterest)
-	}
-
-	a_type_7FormCallback.probe.stageOfInterest.Commit()
-	fillUpTable[models.A_TYPE_7](
-		a_type_7FormCallback.probe,
-	)
-	a_type_7FormCallback.probe.tableStage.Commit()
-
-	// display a new form by reset the form stage
-	if a_type_7FormCallback.CreationMode || a_type_7FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_type_7FormCallback.probe.formStage.Reset()
-		newFormGroup := (&table.FormGroup{
-			Name: table.FormGroupDefaultName.ToString(),
-		}).Stage(a_type_7FormCallback.probe.formStage)
-		newFormGroup.OnSave = __gong__New__A_TYPE_7FormCallback(
-			nil,
-			a_type_7FormCallback.probe,
-			newFormGroup,
-		)
-		a_type_7 := new(models.A_TYPE_7)
-		FillUpForm(a_type_7, newFormGroup, a_type_7FormCallback.probe)
-		a_type_7FormCallback.probe.formStage.Commit()
-	}
-
-	fillUpTree(a_type_7FormCallback.probe)
-}
-func __gong__New__A_TYPE_8FormCallback(
-	a_type_8 *models.A_TYPE_8,
-	probe *Probe,
-	formGroup *table.FormGroup,
-) (a_type_8FormCallback *A_TYPE_8FormCallback) {
-	a_type_8FormCallback = new(A_TYPE_8FormCallback)
-	a_type_8FormCallback.probe = probe
-	a_type_8FormCallback.a_type_8 = a_type_8
-	a_type_8FormCallback.formGroup = formGroup
-
-	a_type_8FormCallback.CreationMode = (a_type_8 == nil)
-
-	return
-}
-
-type A_TYPE_8FormCallback struct {
-	a_type_8 *models.A_TYPE_8
-
-	// If the form call is called on the creation of a new instnace
-	CreationMode bool
-
-	probe *Probe
-
-	formGroup *table.FormGroup
-}
-
-func (a_type_8FormCallback *A_TYPE_8FormCallback) OnSave() {
-
-	log.Println("A_TYPE_8FormCallback, OnSave")
-
-	// checkout formStage to have the form group on the stage synchronized with the
-	// back repo (and front repo)
-	a_type_8FormCallback.probe.formStage.Checkout()
-
-	if a_type_8FormCallback.a_type_8 == nil {
-		a_type_8FormCallback.a_type_8 = new(models.A_TYPE_8).Stage(a_type_8FormCallback.probe.stageOfInterest)
-	}
-	a_type_8_ := a_type_8FormCallback.a_type_8
-	_ = a_type_8_
-
-	for _, formDiv := range a_type_8FormCallback.formGroup.FormDivs {
-		switch formDiv.Name {
-		// insertion point per field
-		case "Name":
-			FormDivBasicFieldToField(&(a_type_8_.Name), formDiv)
-		case "DATATYPE_DEFINITION_STRING_REF":
-			FormDivBasicFieldToField(&(a_type_8_.DATATYPE_DEFINITION_STRING_REF), formDiv)
-		case "ATTRIBUTE_DEFINITION_STRING:TYPE":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_DEFINITION_STRINGOwner *models.ATTRIBUTE_DEFINITION_STRING
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_DEFINITION_STRING"
-			rf.Fieldname = "TYPE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_type_8FormCallback.probe.stageOfInterest,
-				a_type_8FormCallback.probe.backRepoOfInterest,
-				a_type_8_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_DEFINITION_STRINGOwner = reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_STRING)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_DEFINITION_STRINGOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_DEFINITION_STRINGOwner.TYPE, a_type_8_)
-					pastATTRIBUTE_DEFINITION_STRINGOwner.TYPE = slices.Delete(pastATTRIBUTE_DEFINITION_STRINGOwner.TYPE, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_definition_string := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_STRING](a_type_8FormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_definition_string.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_DEFINITION_STRINGOwner := _attribute_definition_string // we have a match
-						if pastATTRIBUTE_DEFINITION_STRINGOwner != nil {
-							if newATTRIBUTE_DEFINITION_STRINGOwner != pastATTRIBUTE_DEFINITION_STRINGOwner {
-								idx := slices.Index(pastATTRIBUTE_DEFINITION_STRINGOwner.TYPE, a_type_8_)
-								pastATTRIBUTE_DEFINITION_STRINGOwner.TYPE = slices.Delete(pastATTRIBUTE_DEFINITION_STRINGOwner.TYPE, idx, idx+1)
-								newATTRIBUTE_DEFINITION_STRINGOwner.TYPE = append(newATTRIBUTE_DEFINITION_STRINGOwner.TYPE, a_type_8_)
-							}
-						} else {
-							newATTRIBUTE_DEFINITION_STRINGOwner.TYPE = append(newATTRIBUTE_DEFINITION_STRINGOwner.TYPE, a_type_8_)
-						}
-					}
-				}
-			}
-		}
-	}
-
-	// manage the suppress operation
-	if a_type_8FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_type_8_.Unstage(a_type_8FormCallback.probe.stageOfInterest)
-	}
-
-	a_type_8FormCallback.probe.stageOfInterest.Commit()
-	fillUpTable[models.A_TYPE_8](
-		a_type_8FormCallback.probe,
-	)
-	a_type_8FormCallback.probe.tableStage.Commit()
-
-	// display a new form by reset the form stage
-	if a_type_8FormCallback.CreationMode || a_type_8FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_type_8FormCallback.probe.formStage.Reset()
-		newFormGroup := (&table.FormGroup{
-			Name: table.FormGroupDefaultName.ToString(),
-		}).Stage(a_type_8FormCallback.probe.formStage)
-		newFormGroup.OnSave = __gong__New__A_TYPE_8FormCallback(
-			nil,
-			a_type_8FormCallback.probe,
-			newFormGroup,
-		)
-		a_type_8 := new(models.A_TYPE_8)
-		FillUpForm(a_type_8, newFormGroup, a_type_8FormCallback.probe)
-		a_type_8FormCallback.probe.formStage.Commit()
-	}
-
-	fillUpTree(a_type_8FormCallback.probe)
-}
-func __gong__New__A_TYPE_9FormCallback(
-	a_type_9 *models.A_TYPE_9,
-	probe *Probe,
-	formGroup *table.FormGroup,
-) (a_type_9FormCallback *A_TYPE_9FormCallback) {
-	a_type_9FormCallback = new(A_TYPE_9FormCallback)
-	a_type_9FormCallback.probe = probe
-	a_type_9FormCallback.a_type_9 = a_type_9
-	a_type_9FormCallback.formGroup = formGroup
-
-	a_type_9FormCallback.CreationMode = (a_type_9 == nil)
-
-	return
-}
-
-type A_TYPE_9FormCallback struct {
-	a_type_9 *models.A_TYPE_9
-
-	// If the form call is called on the creation of a new instnace
-	CreationMode bool
-
-	probe *Probe
-
-	formGroup *table.FormGroup
-}
-
-func (a_type_9FormCallback *A_TYPE_9FormCallback) OnSave() {
-
-	log.Println("A_TYPE_9FormCallback, OnSave")
-
-	// checkout formStage to have the form group on the stage synchronized with the
-	// back repo (and front repo)
-	a_type_9FormCallback.probe.formStage.Checkout()
-
-	if a_type_9FormCallback.a_type_9 == nil {
-		a_type_9FormCallback.a_type_9 = new(models.A_TYPE_9).Stage(a_type_9FormCallback.probe.stageOfInterest)
-	}
-	a_type_9_ := a_type_9FormCallback.a_type_9
-	_ = a_type_9_
-
-	for _, formDiv := range a_type_9FormCallback.formGroup.FormDivs {
-		switch formDiv.Name {
-		// insertion point per field
-		case "Name":
-			FormDivBasicFieldToField(&(a_type_9_.Name), formDiv)
-		case "DATATYPE_DEFINITION_ENUMERATION_REF":
-			FormDivBasicFieldToField(&(a_type_9_.DATATYPE_DEFINITION_ENUMERATION_REF), formDiv)
-		case "ATTRIBUTE_DEFINITION_ENUMERATION:TYPE":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_DEFINITION_ENUMERATIONOwner *models.ATTRIBUTE_DEFINITION_ENUMERATION
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_DEFINITION_ENUMERATION"
-			rf.Fieldname = "TYPE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_type_9FormCallback.probe.stageOfInterest,
-				a_type_9FormCallback.probe.backRepoOfInterest,
-				a_type_9_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_DEFINITION_ENUMERATIONOwner = reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_ENUMERATION)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_DEFINITION_ENUMERATIONOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_DEFINITION_ENUMERATIONOwner.TYPE, a_type_9_)
-					pastATTRIBUTE_DEFINITION_ENUMERATIONOwner.TYPE = slices.Delete(pastATTRIBUTE_DEFINITION_ENUMERATIONOwner.TYPE, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_definition_enumeration := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_ENUMERATION](a_type_9FormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_definition_enumeration.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_DEFINITION_ENUMERATIONOwner := _attribute_definition_enumeration // we have a match
-						if pastATTRIBUTE_DEFINITION_ENUMERATIONOwner != nil {
-							if newATTRIBUTE_DEFINITION_ENUMERATIONOwner != pastATTRIBUTE_DEFINITION_ENUMERATIONOwner {
-								idx := slices.Index(pastATTRIBUTE_DEFINITION_ENUMERATIONOwner.TYPE, a_type_9_)
-								pastATTRIBUTE_DEFINITION_ENUMERATIONOwner.TYPE = slices.Delete(pastATTRIBUTE_DEFINITION_ENUMERATIONOwner.TYPE, idx, idx+1)
-								newATTRIBUTE_DEFINITION_ENUMERATIONOwner.TYPE = append(newATTRIBUTE_DEFINITION_ENUMERATIONOwner.TYPE, a_type_9_)
-							}
-						} else {
-							newATTRIBUTE_DEFINITION_ENUMERATIONOwner.TYPE = append(newATTRIBUTE_DEFINITION_ENUMERATIONOwner.TYPE, a_type_9_)
-						}
-					}
-				}
-			}
-		}
-	}
-
-	// manage the suppress operation
-	if a_type_9FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_type_9_.Unstage(a_type_9FormCallback.probe.stageOfInterest)
-	}
-
-	a_type_9FormCallback.probe.stageOfInterest.Commit()
-	fillUpTable[models.A_TYPE_9](
-		a_type_9FormCallback.probe,
-	)
-	a_type_9FormCallback.probe.tableStage.Commit()
-
-	// display a new form by reset the form stage
-	if a_type_9FormCallback.CreationMode || a_type_9FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_type_9FormCallback.probe.formStage.Reset()
-		newFormGroup := (&table.FormGroup{
-			Name: table.FormGroupDefaultName.ToString(),
-		}).Stage(a_type_9FormCallback.probe.formStage)
-		newFormGroup.OnSave = __gong__New__A_TYPE_9FormCallback(
-			nil,
-			a_type_9FormCallback.probe,
-			newFormGroup,
-		)
-		a_type_9 := new(models.A_TYPE_9)
-		FillUpForm(a_type_9, newFormGroup, a_type_9FormCallback.probe)
-		a_type_9FormCallback.probe.formStage.Commit()
-	}
-
-	fillUpTree(a_type_9FormCallback.probe)
-}
-func __gong__New__A_VALUESFormCallback(
-	a_values *models.A_VALUES,
-	probe *Probe,
-	formGroup *table.FormGroup,
-) (a_valuesFormCallback *A_VALUESFormCallback) {
-	a_valuesFormCallback = new(A_VALUESFormCallback)
-	a_valuesFormCallback.probe = probe
-	a_valuesFormCallback.a_values = a_values
-	a_valuesFormCallback.formGroup = formGroup
-
-	a_valuesFormCallback.CreationMode = (a_values == nil)
-
-	return
-}
-
-type A_VALUESFormCallback struct {
-	a_values *models.A_VALUES
-
-	// If the form call is called on the creation of a new instnace
-	CreationMode bool
-
-	probe *Probe
-
-	formGroup *table.FormGroup
-}
-
-func (a_valuesFormCallback *A_VALUESFormCallback) OnSave() {
-
-	log.Println("A_VALUESFormCallback, OnSave")
-
-	// checkout formStage to have the form group on the stage synchronized with the
-	// back repo (and front repo)
-	a_valuesFormCallback.probe.formStage.Checkout()
-
-	if a_valuesFormCallback.a_values == nil {
-		a_valuesFormCallback.a_values = new(models.A_VALUES).Stage(a_valuesFormCallback.probe.stageOfInterest)
-	}
-	a_values_ := a_valuesFormCallback.a_values
-	_ = a_values_
-
-	for _, formDiv := range a_valuesFormCallback.formGroup.FormDivs {
-		switch formDiv.Name {
-		// insertion point per field
-		case "Name":
-			FormDivBasicFieldToField(&(a_values_.Name), formDiv)
-		case "ENUM_VALUE_REF":
-			FormDivBasicFieldToField(&(a_values_.ENUM_VALUE_REF), formDiv)
-		case "ATTRIBUTE_VALUE_ENUMERATION:VALUES":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_VALUE_ENUMERATIONOwner *models.ATTRIBUTE_VALUE_ENUMERATION
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_VALUE_ENUMERATION"
-			rf.Fieldname = "VALUES"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_valuesFormCallback.probe.stageOfInterest,
-				a_valuesFormCallback.probe.backRepoOfInterest,
-				a_values_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_VALUE_ENUMERATIONOwner = reverseFieldOwner.(*models.ATTRIBUTE_VALUE_ENUMERATION)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_VALUE_ENUMERATIONOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_VALUE_ENUMERATIONOwner.VALUES, a_values_)
-					pastATTRIBUTE_VALUE_ENUMERATIONOwner.VALUES = slices.Delete(pastATTRIBUTE_VALUE_ENUMERATIONOwner.VALUES, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_value_enumeration := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_VALUE_ENUMERATION](a_valuesFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_value_enumeration.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_VALUE_ENUMERATIONOwner := _attribute_value_enumeration // we have a match
-						if pastATTRIBUTE_VALUE_ENUMERATIONOwner != nil {
-							if newATTRIBUTE_VALUE_ENUMERATIONOwner != pastATTRIBUTE_VALUE_ENUMERATIONOwner {
-								idx := slices.Index(pastATTRIBUTE_VALUE_ENUMERATIONOwner.VALUES, a_values_)
-								pastATTRIBUTE_VALUE_ENUMERATIONOwner.VALUES = slices.Delete(pastATTRIBUTE_VALUE_ENUMERATIONOwner.VALUES, idx, idx+1)
-								newATTRIBUTE_VALUE_ENUMERATIONOwner.VALUES = append(newATTRIBUTE_VALUE_ENUMERATIONOwner.VALUES, a_values_)
-							}
-						} else {
-							newATTRIBUTE_VALUE_ENUMERATIONOwner.VALUES = append(newATTRIBUTE_VALUE_ENUMERATIONOwner.VALUES, a_values_)
-						}
-					}
-				}
-			}
-		}
-	}
-
-	// manage the suppress operation
-	if a_valuesFormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_values_.Unstage(a_valuesFormCallback.probe.stageOfInterest)
-	}
-
-	a_valuesFormCallback.probe.stageOfInterest.Commit()
-	fillUpTable[models.A_VALUES](
-		a_valuesFormCallback.probe,
-	)
-	a_valuesFormCallback.probe.tableStage.Commit()
-
-	// display a new form by reset the form stage
-	if a_valuesFormCallback.CreationMode || a_valuesFormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_valuesFormCallback.probe.formStage.Reset()
-		newFormGroup := (&table.FormGroup{
-			Name: table.FormGroupDefaultName.ToString(),
-		}).Stage(a_valuesFormCallback.probe.formStage)
-		newFormGroup.OnSave = __gong__New__A_VALUESFormCallback(
-			nil,
-			a_valuesFormCallback.probe,
-			newFormGroup,
-		)
-		a_values := new(models.A_VALUES)
-		FillUpForm(a_values, newFormGroup, a_valuesFormCallback.probe)
-		a_valuesFormCallback.probe.formStage.Commit()
-	}
-
-	fillUpTree(a_valuesFormCallback.probe)
-}
-func __gong__New__A_VALUES_1FormCallback(
-	a_values_1 *models.A_VALUES_1,
-	probe *Probe,
-	formGroup *table.FormGroup,
-) (a_values_1FormCallback *A_VALUES_1FormCallback) {
-	a_values_1FormCallback = new(A_VALUES_1FormCallback)
-	a_values_1FormCallback.probe = probe
-	a_values_1FormCallback.a_values_1 = a_values_1
-	a_values_1FormCallback.formGroup = formGroup
-
-	a_values_1FormCallback.CreationMode = (a_values_1 == nil)
-
-	return
-}
-
-type A_VALUES_1FormCallback struct {
-	a_values_1 *models.A_VALUES_1
-
-	// If the form call is called on the creation of a new instnace
-	CreationMode bool
-
-	probe *Probe
-
-	formGroup *table.FormGroup
-}
-
-func (a_values_1FormCallback *A_VALUES_1FormCallback) OnSave() {
-
-	log.Println("A_VALUES_1FormCallback, OnSave")
-
-	// checkout formStage to have the form group on the stage synchronized with the
-	// back repo (and front repo)
-	a_values_1FormCallback.probe.formStage.Checkout()
-
-	if a_values_1FormCallback.a_values_1 == nil {
-		a_values_1FormCallback.a_values_1 = new(models.A_VALUES_1).Stage(a_values_1FormCallback.probe.stageOfInterest)
-	}
-	a_values_1_ := a_values_1FormCallback.a_values_1
-	_ = a_values_1_
-
-	for _, formDiv := range a_values_1FormCallback.formGroup.FormDivs {
-		switch formDiv.Name {
-		// insertion point per field
-		case "Name":
-			FormDivBasicFieldToField(&(a_values_1_.Name), formDiv)
-		case "SPECIFICATION:VALUES":
-			// we need to retrieve the field owner before the change
-			var pastSPECIFICATIONOwner *models.SPECIFICATION
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "SPECIFICATION"
-			rf.Fieldname = "VALUES"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_values_1FormCallback.probe.stageOfInterest,
-				a_values_1FormCallback.probe.backRepoOfInterest,
-				a_values_1_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastSPECIFICATIONOwner = reverseFieldOwner.(*models.SPECIFICATION)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastSPECIFICATIONOwner != nil {
-					idx := slices.Index(pastSPECIFICATIONOwner.VALUES, a_values_1_)
-					pastSPECIFICATIONOwner.VALUES = slices.Delete(pastSPECIFICATIONOwner.VALUES, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _specification := range *models.GetGongstructInstancesSet[models.SPECIFICATION](a_values_1FormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _specification.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newSPECIFICATIONOwner := _specification // we have a match
-						if pastSPECIFICATIONOwner != nil {
-							if newSPECIFICATIONOwner != pastSPECIFICATIONOwner {
-								idx := slices.Index(pastSPECIFICATIONOwner.VALUES, a_values_1_)
-								pastSPECIFICATIONOwner.VALUES = slices.Delete(pastSPECIFICATIONOwner.VALUES, idx, idx+1)
-								newSPECIFICATIONOwner.VALUES = append(newSPECIFICATIONOwner.VALUES, a_values_1_)
-							}
-						} else {
-							newSPECIFICATIONOwner.VALUES = append(newSPECIFICATIONOwner.VALUES, a_values_1_)
-						}
-					}
-				}
-			}
-		case "SPEC_OBJECT:VALUES":
-			// we need to retrieve the field owner before the change
-			var pastSPEC_OBJECTOwner *models.SPEC_OBJECT
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "SPEC_OBJECT"
-			rf.Fieldname = "VALUES"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_values_1FormCallback.probe.stageOfInterest,
-				a_values_1FormCallback.probe.backRepoOfInterest,
-				a_values_1_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastSPEC_OBJECTOwner = reverseFieldOwner.(*models.SPEC_OBJECT)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastSPEC_OBJECTOwner != nil {
-					idx := slices.Index(pastSPEC_OBJECTOwner.VALUES, a_values_1_)
-					pastSPEC_OBJECTOwner.VALUES = slices.Delete(pastSPEC_OBJECTOwner.VALUES, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _spec_object := range *models.GetGongstructInstancesSet[models.SPEC_OBJECT](a_values_1FormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _spec_object.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newSPEC_OBJECTOwner := _spec_object // we have a match
-						if pastSPEC_OBJECTOwner != nil {
-							if newSPEC_OBJECTOwner != pastSPEC_OBJECTOwner {
-								idx := slices.Index(pastSPEC_OBJECTOwner.VALUES, a_values_1_)
-								pastSPEC_OBJECTOwner.VALUES = slices.Delete(pastSPEC_OBJECTOwner.VALUES, idx, idx+1)
-								newSPEC_OBJECTOwner.VALUES = append(newSPEC_OBJECTOwner.VALUES, a_values_1_)
-							}
-						} else {
-							newSPEC_OBJECTOwner.VALUES = append(newSPEC_OBJECTOwner.VALUES, a_values_1_)
-						}
-					}
-				}
-			}
-		case "SPEC_RELATION:VALUES":
-			// we need to retrieve the field owner before the change
-			var pastSPEC_RELATIONOwner *models.SPEC_RELATION
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "SPEC_RELATION"
-			rf.Fieldname = "VALUES"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_values_1FormCallback.probe.stageOfInterest,
-				a_values_1FormCallback.probe.backRepoOfInterest,
-				a_values_1_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastSPEC_RELATIONOwner = reverseFieldOwner.(*models.SPEC_RELATION)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastSPEC_RELATIONOwner != nil {
-					idx := slices.Index(pastSPEC_RELATIONOwner.VALUES, a_values_1_)
-					pastSPEC_RELATIONOwner.VALUES = slices.Delete(pastSPEC_RELATIONOwner.VALUES, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _spec_relation := range *models.GetGongstructInstancesSet[models.SPEC_RELATION](a_values_1FormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _spec_relation.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newSPEC_RELATIONOwner := _spec_relation // we have a match
-						if pastSPEC_RELATIONOwner != nil {
-							if newSPEC_RELATIONOwner != pastSPEC_RELATIONOwner {
-								idx := slices.Index(pastSPEC_RELATIONOwner.VALUES, a_values_1_)
-								pastSPEC_RELATIONOwner.VALUES = slices.Delete(pastSPEC_RELATIONOwner.VALUES, idx, idx+1)
-								newSPEC_RELATIONOwner.VALUES = append(newSPEC_RELATIONOwner.VALUES, a_values_1_)
-							}
-						} else {
-							newSPEC_RELATIONOwner.VALUES = append(newSPEC_RELATIONOwner.VALUES, a_values_1_)
-						}
-					}
-				}
-			}
-		}
-	}
-
-	// manage the suppress operation
-	if a_values_1FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_values_1_.Unstage(a_values_1FormCallback.probe.stageOfInterest)
-	}
-
-	a_values_1FormCallback.probe.stageOfInterest.Commit()
-	fillUpTable[models.A_VALUES_1](
-		a_values_1FormCallback.probe,
-	)
-	a_values_1FormCallback.probe.tableStage.Commit()
-
-	// display a new form by reset the form stage
-	if a_values_1FormCallback.CreationMode || a_values_1FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_values_1FormCallback.probe.formStage.Reset()
-		newFormGroup := (&table.FormGroup{
-			Name: table.FormGroupDefaultName.ToString(),
-		}).Stage(a_values_1FormCallback.probe.formStage)
-		newFormGroup.OnSave = __gong__New__A_VALUES_1FormCallback(
-			nil,
-			a_values_1FormCallback.probe,
-			newFormGroup,
-		)
-		a_values_1 := new(models.A_VALUES_1)
-		FillUpForm(a_values_1, newFormGroup, a_values_1FormCallback.probe)
-		a_values_1FormCallback.probe.formStage.Commit()
-	}
-
-	fillUpTree(a_values_1FormCallback.probe)
 }
 func __gong__New__DATATYPE_DEFINITION_BOOLEANFormCallback(
 	datatype_definition_boolean *models.DATATYPE_DEFINITION_BOOLEAN,
@@ -11484,12 +11484,12 @@ func (spec_relationFormCallback *SPEC_RELATIONFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(spec_relation_.LAST_CHANGE), formDiv)
 		case "LONG_NAME":
 			FormDivBasicFieldToField(&(spec_relation_.LONG_NAME), formDiv)
-		case "A_SPEC_RELATIONS_1:SPEC_RELATION":
+		case "A_SPEC_RELATIONS:SPEC_RELATION":
 			// we need to retrieve the field owner before the change
-			var pastA_SPEC_RELATIONS_1Owner *models.A_SPEC_RELATIONS_1
+			var pastA_SPEC_RELATIONSOwner *models.A_SPEC_RELATIONS
 			var rf models.ReverseField
 			_ = rf
-			rf.GongstructName = "A_SPEC_RELATIONS_1"
+			rf.GongstructName = "A_SPEC_RELATIONS"
 			rf.Fieldname = "SPEC_RELATION"
 			reverseFieldOwner := orm.GetReverseFieldOwner(
 				spec_relationFormCallback.probe.stageOfInterest,
@@ -11498,30 +11498,30 @@ func (spec_relationFormCallback *SPEC_RELATIONFormCallback) OnSave() {
 				&rf)
 
 			if reverseFieldOwner != nil {
-				pastA_SPEC_RELATIONS_1Owner = reverseFieldOwner.(*models.A_SPEC_RELATIONS_1)
+				pastA_SPEC_RELATIONSOwner = reverseFieldOwner.(*models.A_SPEC_RELATIONS)
 			}
 			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastA_SPEC_RELATIONS_1Owner != nil {
-					idx := slices.Index(pastA_SPEC_RELATIONS_1Owner.SPEC_RELATION, spec_relation_)
-					pastA_SPEC_RELATIONS_1Owner.SPEC_RELATION = slices.Delete(pastA_SPEC_RELATIONS_1Owner.SPEC_RELATION, idx, idx+1)
+				if pastA_SPEC_RELATIONSOwner != nil {
+					idx := slices.Index(pastA_SPEC_RELATIONSOwner.SPEC_RELATION, spec_relation_)
+					pastA_SPEC_RELATIONSOwner.SPEC_RELATION = slices.Delete(pastA_SPEC_RELATIONSOwner.SPEC_RELATION, idx, idx+1)
 				}
 			} else {
 				// we need to retrieve the field owner after the change
 				// parse all astrcut and get the one with the name in the
 				// div
-				for _a_spec_relations_1 := range *models.GetGongstructInstancesSet[models.A_SPEC_RELATIONS_1](spec_relationFormCallback.probe.stageOfInterest) {
+				for _a_spec_relations := range *models.GetGongstructInstancesSet[models.A_SPEC_RELATIONS](spec_relationFormCallback.probe.stageOfInterest) {
 
 					// the match is base on the name
-					if _a_spec_relations_1.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newA_SPEC_RELATIONS_1Owner := _a_spec_relations_1 // we have a match
-						if pastA_SPEC_RELATIONS_1Owner != nil {
-							if newA_SPEC_RELATIONS_1Owner != pastA_SPEC_RELATIONS_1Owner {
-								idx := slices.Index(pastA_SPEC_RELATIONS_1Owner.SPEC_RELATION, spec_relation_)
-								pastA_SPEC_RELATIONS_1Owner.SPEC_RELATION = slices.Delete(pastA_SPEC_RELATIONS_1Owner.SPEC_RELATION, idx, idx+1)
-								newA_SPEC_RELATIONS_1Owner.SPEC_RELATION = append(newA_SPEC_RELATIONS_1Owner.SPEC_RELATION, spec_relation_)
+					if _a_spec_relations.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newA_SPEC_RELATIONSOwner := _a_spec_relations // we have a match
+						if pastA_SPEC_RELATIONSOwner != nil {
+							if newA_SPEC_RELATIONSOwner != pastA_SPEC_RELATIONSOwner {
+								idx := slices.Index(pastA_SPEC_RELATIONSOwner.SPEC_RELATION, spec_relation_)
+								pastA_SPEC_RELATIONSOwner.SPEC_RELATION = slices.Delete(pastA_SPEC_RELATIONSOwner.SPEC_RELATION, idx, idx+1)
+								newA_SPEC_RELATIONSOwner.SPEC_RELATION = append(newA_SPEC_RELATIONSOwner.SPEC_RELATION, spec_relation_)
 							}
 						} else {
-							newA_SPEC_RELATIONS_1Owner.SPEC_RELATION = append(newA_SPEC_RELATIONS_1Owner.SPEC_RELATION, spec_relation_)
+							newA_SPEC_RELATIONSOwner.SPEC_RELATION = append(newA_SPEC_RELATIONSOwner.SPEC_RELATION, spec_relation_)
 						}
 					}
 				}

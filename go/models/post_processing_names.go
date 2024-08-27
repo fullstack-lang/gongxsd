@@ -1,7 +1,5 @@
 package models
 
-import "fmt"
-
 func prefix(s string) string {
 	return s + "_Inlined"
 }
@@ -14,11 +12,11 @@ func PostProcessingNames(stage *StageStruct) {
 	setOfGoIdentifiers := make(map[string]any)
 
 	for x := range *GetGongstructInstancesSet[ComplexType](stage) {
-		x.Name = x.NameXSD
 
-		if x.NameXSD == "" {
+		if x.IsAnonymous {
 			continue
 		}
+		x.Name = x.NameXSD
 
 		computeGoIdentifier(x.Name, &x.WithGoIdentifier, setOfGoIdentifiers)
 
@@ -199,7 +197,9 @@ func PostProcessingNames(stage *StageStruct) {
 		if x.ComplexType != nil {
 			map_EmbeddedComplexType[x.ComplexType] = x
 
-			x.ComplexType.Name = "A_" + x.Name
+			if x.ComplexType.Name == "" {
+				x.ComplexType.Name = "A_" + x.Name
+			}
 			computeGoIdentifier(x.ComplexType.Name, &x.ComplexType.WithGoIdentifier, setOfGoIdentifiers)
 
 			setOfGoIdentifiers := make(map[string]any)
@@ -215,23 +215,4 @@ func PostProcessingNames(stage *StageStruct) {
 		}
 	}
 
-}
-
-func computeGoIdentifier(name string, x *WithGoIdentifier, setOfGoIdentifiers map[string]any) {
-	var hasNameCollision bool
-	initialGoIdentifier := xsdNameToGoIdentifier(name)
-
-	goIdentifier := initialGoIdentifier
-	index := 0
-	for index == 0 || hasNameCollision {
-		index++
-		_, hasNameCollision = setOfGoIdentifiers[goIdentifier]
-
-		if hasNameCollision {
-			goIdentifier = initialGoIdentifier + fmt.Sprintf("_%d", index)
-			x.HasNameConflict = true
-		}
-	}
-	setOfGoIdentifiers[goIdentifier] = nil
-	x.GoIdentifier = goIdentifier
 }

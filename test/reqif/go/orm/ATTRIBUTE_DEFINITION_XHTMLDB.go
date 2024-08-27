@@ -272,37 +272,37 @@ func (backRepoATTRIBUTE_DEFINITION_XHTML *BackRepoATTRIBUTE_DEFINITION_XHTMLStru
 		// 1. reset
 		attribute_definition_xhtmlDB.ATTRIBUTE_DEFINITION_XHTMLPointersEncoding.DEFAULT_VALUE = make([]int, 0)
 		// 2. encode
-		for _, a_default_value_2AssocEnd := range attribute_definition_xhtml.DEFAULT_VALUE {
-			a_default_value_2AssocEnd_DB :=
-				backRepo.BackRepoA_DEFAULT_VALUE_2.GetA_DEFAULT_VALUE_2DBFromA_DEFAULT_VALUE_2Ptr(a_default_value_2AssocEnd)
+		for _, a_attribute_value_xhtmlAssocEnd := range attribute_definition_xhtml.DEFAULT_VALUE {
+			a_attribute_value_xhtmlAssocEnd_DB :=
+				backRepo.BackRepoA_ATTRIBUTE_VALUE_XHTML.GetA_ATTRIBUTE_VALUE_XHTMLDBFromA_ATTRIBUTE_VALUE_XHTMLPtr(a_attribute_value_xhtmlAssocEnd)
 			
-			// the stage might be inconsistant, meaning that the a_default_value_2AssocEnd_DB might
+			// the stage might be inconsistant, meaning that the a_attribute_value_xhtmlAssocEnd_DB might
 			// be missing from the stage. In this case, the commit operation is robust
 			// An alternative would be to crash here to reveal the missing element.
-			if a_default_value_2AssocEnd_DB == nil {
+			if a_attribute_value_xhtmlAssocEnd_DB == nil {
 				continue
 			}
 			
 			attribute_definition_xhtmlDB.ATTRIBUTE_DEFINITION_XHTMLPointersEncoding.DEFAULT_VALUE =
-				append(attribute_definition_xhtmlDB.ATTRIBUTE_DEFINITION_XHTMLPointersEncoding.DEFAULT_VALUE, int(a_default_value_2AssocEnd_DB.ID))
+				append(attribute_definition_xhtmlDB.ATTRIBUTE_DEFINITION_XHTMLPointersEncoding.DEFAULT_VALUE, int(a_attribute_value_xhtmlAssocEnd_DB.ID))
 		}
 
 		// 1. reset
 		attribute_definition_xhtmlDB.ATTRIBUTE_DEFINITION_XHTMLPointersEncoding.TYPE = make([]int, 0)
 		// 2. encode
-		for _, a_type_6AssocEnd := range attribute_definition_xhtml.TYPE {
-			a_type_6AssocEnd_DB :=
-				backRepo.BackRepoA_TYPE_6.GetA_TYPE_6DBFromA_TYPE_6Ptr(a_type_6AssocEnd)
+		for _, a_datatype_definition_xhtml_refAssocEnd := range attribute_definition_xhtml.TYPE {
+			a_datatype_definition_xhtml_refAssocEnd_DB :=
+				backRepo.BackRepoA_DATATYPE_DEFINITION_XHTML_REF.GetA_DATATYPE_DEFINITION_XHTML_REFDBFromA_DATATYPE_DEFINITION_XHTML_REFPtr(a_datatype_definition_xhtml_refAssocEnd)
 			
-			// the stage might be inconsistant, meaning that the a_type_6AssocEnd_DB might
+			// the stage might be inconsistant, meaning that the a_datatype_definition_xhtml_refAssocEnd_DB might
 			// be missing from the stage. In this case, the commit operation is robust
 			// An alternative would be to crash here to reveal the missing element.
-			if a_type_6AssocEnd_DB == nil {
+			if a_datatype_definition_xhtml_refAssocEnd_DB == nil {
 				continue
 			}
 			
 			attribute_definition_xhtmlDB.ATTRIBUTE_DEFINITION_XHTMLPointersEncoding.TYPE =
-				append(attribute_definition_xhtmlDB.ATTRIBUTE_DEFINITION_XHTMLPointersEncoding.TYPE, int(a_type_6AssocEnd_DB.ID))
+				append(attribute_definition_xhtmlDB.ATTRIBUTE_DEFINITION_XHTMLPointersEncoding.TYPE, int(a_datatype_definition_xhtml_refAssocEnd_DB.ID))
 		}
 
 		query := backRepoATTRIBUTE_DEFINITION_XHTML.db.Save(&attribute_definition_xhtmlDB)
@@ -428,21 +428,21 @@ func (attribute_definition_xhtmlDB *ATTRIBUTE_DEFINITION_XHTMLDB) DecodePointers
 	}
 
 	// This loop redeem attribute_definition_xhtml.DEFAULT_VALUE in the stage from the encode in the back repo
-	// It parses all A_DEFAULT_VALUE_2DB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// It parses all A_ATTRIBUTE_VALUE_XHTMLDB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance
 	// 1. reset the slice
 	attribute_definition_xhtml.DEFAULT_VALUE = attribute_definition_xhtml.DEFAULT_VALUE[:0]
-	for _, _A_DEFAULT_VALUE_2id := range attribute_definition_xhtmlDB.ATTRIBUTE_DEFINITION_XHTMLPointersEncoding.DEFAULT_VALUE {
-		attribute_definition_xhtml.DEFAULT_VALUE = append(attribute_definition_xhtml.DEFAULT_VALUE, backRepo.BackRepoA_DEFAULT_VALUE_2.Map_A_DEFAULT_VALUE_2DBID_A_DEFAULT_VALUE_2Ptr[uint(_A_DEFAULT_VALUE_2id)])
+	for _, _A_ATTRIBUTE_VALUE_XHTMLid := range attribute_definition_xhtmlDB.ATTRIBUTE_DEFINITION_XHTMLPointersEncoding.DEFAULT_VALUE {
+		attribute_definition_xhtml.DEFAULT_VALUE = append(attribute_definition_xhtml.DEFAULT_VALUE, backRepo.BackRepoA_ATTRIBUTE_VALUE_XHTML.Map_A_ATTRIBUTE_VALUE_XHTMLDBID_A_ATTRIBUTE_VALUE_XHTMLPtr[uint(_A_ATTRIBUTE_VALUE_XHTMLid)])
 	}
 
 	// This loop redeem attribute_definition_xhtml.TYPE in the stage from the encode in the back repo
-	// It parses all A_TYPE_6DB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// It parses all A_DATATYPE_DEFINITION_XHTML_REFDB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance
 	// 1. reset the slice
 	attribute_definition_xhtml.TYPE = attribute_definition_xhtml.TYPE[:0]
-	for _, _A_TYPE_6id := range attribute_definition_xhtmlDB.ATTRIBUTE_DEFINITION_XHTMLPointersEncoding.TYPE {
-		attribute_definition_xhtml.TYPE = append(attribute_definition_xhtml.TYPE, backRepo.BackRepoA_TYPE_6.Map_A_TYPE_6DBID_A_TYPE_6Ptr[uint(_A_TYPE_6id)])
+	for _, _A_DATATYPE_DEFINITION_XHTML_REFid := range attribute_definition_xhtmlDB.ATTRIBUTE_DEFINITION_XHTMLPointersEncoding.TYPE {
+		attribute_definition_xhtml.TYPE = append(attribute_definition_xhtml.TYPE, backRepo.BackRepoA_DATATYPE_DEFINITION_XHTML_REF.Map_A_DATATYPE_DEFINITION_XHTML_REFDBID_A_DATATYPE_DEFINITION_XHTML_REFPtr[uint(_A_DATATYPE_DEFINITION_XHTML_REFid)])
 	}
 
 	return

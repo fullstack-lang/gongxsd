@@ -222,6 +222,156 @@ func fillUpTree(
 
 				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
 			}
+		case "A_ATTRIBUTE_DEFINITION_BOOLEAN_REF":
+			nodeGongstruct.Name = name
+			set := *models.GetGongstructInstancesSet[models.A_ATTRIBUTE_DEFINITION_BOOLEAN_REF](probe.stageOfInterest)
+			for _a_attribute_definition_boolean_ref := range set {
+				nodeInstance := (&tree.Node{Name: _a_attribute_definition_boolean_ref.GetName()}).Stage(probe.treeStage)
+				nodeInstance.IsNodeClickable = true
+				nodeInstance.Impl = NewInstanceNodeCallback(_a_attribute_definition_boolean_ref, "A_ATTRIBUTE_DEFINITION_BOOLEAN_REF", probe)
+
+				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
+			}
+		case "A_ATTRIBUTE_DEFINITION_DATE_REF":
+			nodeGongstruct.Name = name
+			set := *models.GetGongstructInstancesSet[models.A_ATTRIBUTE_DEFINITION_DATE_REF](probe.stageOfInterest)
+			for _a_attribute_definition_date_ref := range set {
+				nodeInstance := (&tree.Node{Name: _a_attribute_definition_date_ref.GetName()}).Stage(probe.treeStage)
+				nodeInstance.IsNodeClickable = true
+				nodeInstance.Impl = NewInstanceNodeCallback(_a_attribute_definition_date_ref, "A_ATTRIBUTE_DEFINITION_DATE_REF", probe)
+
+				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
+			}
+		case "A_ATTRIBUTE_DEFINITION_ENUMERATION_REF":
+			nodeGongstruct.Name = name
+			set := *models.GetGongstructInstancesSet[models.A_ATTRIBUTE_DEFINITION_ENUMERATION_REF](probe.stageOfInterest)
+			for _a_attribute_definition_enumeration_ref := range set {
+				nodeInstance := (&tree.Node{Name: _a_attribute_definition_enumeration_ref.GetName()}).Stage(probe.treeStage)
+				nodeInstance.IsNodeClickable = true
+				nodeInstance.Impl = NewInstanceNodeCallback(_a_attribute_definition_enumeration_ref, "A_ATTRIBUTE_DEFINITION_ENUMERATION_REF", probe)
+
+				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
+			}
+		case "A_ATTRIBUTE_DEFINITION_INTEGER_REF":
+			nodeGongstruct.Name = name
+			set := *models.GetGongstructInstancesSet[models.A_ATTRIBUTE_DEFINITION_INTEGER_REF](probe.stageOfInterest)
+			for _a_attribute_definition_integer_ref := range set {
+				nodeInstance := (&tree.Node{Name: _a_attribute_definition_integer_ref.GetName()}).Stage(probe.treeStage)
+				nodeInstance.IsNodeClickable = true
+				nodeInstance.Impl = NewInstanceNodeCallback(_a_attribute_definition_integer_ref, "A_ATTRIBUTE_DEFINITION_INTEGER_REF", probe)
+
+				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
+			}
+		case "A_ATTRIBUTE_DEFINITION_REAL_REF":
+			nodeGongstruct.Name = name
+			set := *models.GetGongstructInstancesSet[models.A_ATTRIBUTE_DEFINITION_REAL_REF](probe.stageOfInterest)
+			for _a_attribute_definition_real_ref := range set {
+				nodeInstance := (&tree.Node{Name: _a_attribute_definition_real_ref.GetName()}).Stage(probe.treeStage)
+				nodeInstance.IsNodeClickable = true
+				nodeInstance.Impl = NewInstanceNodeCallback(_a_attribute_definition_real_ref, "A_ATTRIBUTE_DEFINITION_REAL_REF", probe)
+
+				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
+			}
+		case "A_ATTRIBUTE_DEFINITION_STRING_REF":
+			nodeGongstruct.Name = name
+			set := *models.GetGongstructInstancesSet[models.A_ATTRIBUTE_DEFINITION_STRING_REF](probe.stageOfInterest)
+			for _a_attribute_definition_string_ref := range set {
+				nodeInstance := (&tree.Node{Name: _a_attribute_definition_string_ref.GetName()}).Stage(probe.treeStage)
+				nodeInstance.IsNodeClickable = true
+				nodeInstance.Impl = NewInstanceNodeCallback(_a_attribute_definition_string_ref, "A_ATTRIBUTE_DEFINITION_STRING_REF", probe)
+
+				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
+			}
+		case "A_ATTRIBUTE_DEFINITION_XHTML_REF":
+			nodeGongstruct.Name = name
+			set := *models.GetGongstructInstancesSet[models.A_ATTRIBUTE_DEFINITION_XHTML_REF](probe.stageOfInterest)
+			for _a_attribute_definition_xhtml_ref := range set {
+				nodeInstance := (&tree.Node{Name: _a_attribute_definition_xhtml_ref.GetName()}).Stage(probe.treeStage)
+				nodeInstance.IsNodeClickable = true
+				nodeInstance.Impl = NewInstanceNodeCallback(_a_attribute_definition_xhtml_ref, "A_ATTRIBUTE_DEFINITION_XHTML_REF", probe)
+
+				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
+			}
+		case "A_ATTRIBUTE_VALUE_BOOLEAN":
+			nodeGongstruct.Name = name
+			set := *models.GetGongstructInstancesSet[models.A_ATTRIBUTE_VALUE_BOOLEAN](probe.stageOfInterest)
+			for _a_attribute_value_boolean := range set {
+				nodeInstance := (&tree.Node{Name: _a_attribute_value_boolean.GetName()}).Stage(probe.treeStage)
+				nodeInstance.IsNodeClickable = true
+				nodeInstance.Impl = NewInstanceNodeCallback(_a_attribute_value_boolean, "A_ATTRIBUTE_VALUE_BOOLEAN", probe)
+
+				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
+			}
+		case "A_ATTRIBUTE_VALUE_DATE":
+			nodeGongstruct.Name = name
+			set := *models.GetGongstructInstancesSet[models.A_ATTRIBUTE_VALUE_DATE](probe.stageOfInterest)
+			for _a_attribute_value_date := range set {
+				nodeInstance := (&tree.Node{Name: _a_attribute_value_date.GetName()}).Stage(probe.treeStage)
+				nodeInstance.IsNodeClickable = true
+				nodeInstance.Impl = NewInstanceNodeCallback(_a_attribute_value_date, "A_ATTRIBUTE_VALUE_DATE", probe)
+
+				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
+			}
+		case "A_ATTRIBUTE_VALUE_ENUMERATION":
+			nodeGongstruct.Name = name
+			set := *models.GetGongstructInstancesSet[models.A_ATTRIBUTE_VALUE_ENUMERATION](probe.stageOfInterest)
+			for _a_attribute_value_enumeration := range set {
+				nodeInstance := (&tree.Node{Name: _a_attribute_value_enumeration.GetName()}).Stage(probe.treeStage)
+				nodeInstance.IsNodeClickable = true
+				nodeInstance.Impl = NewInstanceNodeCallback(_a_attribute_value_enumeration, "A_ATTRIBUTE_VALUE_ENUMERATION", probe)
+
+				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
+			}
+		case "A_ATTRIBUTE_VALUE_INTEGER":
+			nodeGongstruct.Name = name
+			set := *models.GetGongstructInstancesSet[models.A_ATTRIBUTE_VALUE_INTEGER](probe.stageOfInterest)
+			for _a_attribute_value_integer := range set {
+				nodeInstance := (&tree.Node{Name: _a_attribute_value_integer.GetName()}).Stage(probe.treeStage)
+				nodeInstance.IsNodeClickable = true
+				nodeInstance.Impl = NewInstanceNodeCallback(_a_attribute_value_integer, "A_ATTRIBUTE_VALUE_INTEGER", probe)
+
+				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
+			}
+		case "A_ATTRIBUTE_VALUE_REAL":
+			nodeGongstruct.Name = name
+			set := *models.GetGongstructInstancesSet[models.A_ATTRIBUTE_VALUE_REAL](probe.stageOfInterest)
+			for _a_attribute_value_real := range set {
+				nodeInstance := (&tree.Node{Name: _a_attribute_value_real.GetName()}).Stage(probe.treeStage)
+				nodeInstance.IsNodeClickable = true
+				nodeInstance.Impl = NewInstanceNodeCallback(_a_attribute_value_real, "A_ATTRIBUTE_VALUE_REAL", probe)
+
+				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
+			}
+		case "A_ATTRIBUTE_VALUE_STRING":
+			nodeGongstruct.Name = name
+			set := *models.GetGongstructInstancesSet[models.A_ATTRIBUTE_VALUE_STRING](probe.stageOfInterest)
+			for _a_attribute_value_string := range set {
+				nodeInstance := (&tree.Node{Name: _a_attribute_value_string.GetName()}).Stage(probe.treeStage)
+				nodeInstance.IsNodeClickable = true
+				nodeInstance.Impl = NewInstanceNodeCallback(_a_attribute_value_string, "A_ATTRIBUTE_VALUE_STRING", probe)
+
+				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
+			}
+		case "A_ATTRIBUTE_VALUE_XHTML":
+			nodeGongstruct.Name = name
+			set := *models.GetGongstructInstancesSet[models.A_ATTRIBUTE_VALUE_XHTML](probe.stageOfInterest)
+			for _a_attribute_value_xhtml := range set {
+				nodeInstance := (&tree.Node{Name: _a_attribute_value_xhtml.GetName()}).Stage(probe.treeStage)
+				nodeInstance.IsNodeClickable = true
+				nodeInstance.Impl = NewInstanceNodeCallback(_a_attribute_value_xhtml, "A_ATTRIBUTE_VALUE_XHTML", probe)
+
+				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
+			}
+		case "A_ATTRIBUTE_VALUE_XHTML_1":
+			nodeGongstruct.Name = name
+			set := *models.GetGongstructInstancesSet[models.A_ATTRIBUTE_VALUE_XHTML_1](probe.stageOfInterest)
+			for _a_attribute_value_xhtml_1 := range set {
+				nodeInstance := (&tree.Node{Name: _a_attribute_value_xhtml_1.GetName()}).Stage(probe.treeStage)
+				nodeInstance.IsNodeClickable = true
+				nodeInstance.Impl = NewInstanceNodeCallback(_a_attribute_value_xhtml_1, "A_ATTRIBUTE_VALUE_XHTML_1", probe)
+
+				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
+			}
 		case "A_CHILDREN":
 			nodeGongstruct.Name = name
 			set := *models.GetGongstructInstancesSet[models.A_CHILDREN](probe.stageOfInterest)
@@ -252,143 +402,73 @@ func fillUpTree(
 
 				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
 			}
-		case "A_DEFAULT_VALUE":
+		case "A_DATATYPE_DEFINITION_BOOLEAN_REF":
 			nodeGongstruct.Name = name
-			set := *models.GetGongstructInstancesSet[models.A_DEFAULT_VALUE](probe.stageOfInterest)
-			for _a_default_value := range set {
-				nodeInstance := (&tree.Node{Name: _a_default_value.GetName()}).Stage(probe.treeStage)
+			set := *models.GetGongstructInstancesSet[models.A_DATATYPE_DEFINITION_BOOLEAN_REF](probe.stageOfInterest)
+			for _a_datatype_definition_boolean_ref := range set {
+				nodeInstance := (&tree.Node{Name: _a_datatype_definition_boolean_ref.GetName()}).Stage(probe.treeStage)
 				nodeInstance.IsNodeClickable = true
-				nodeInstance.Impl = NewInstanceNodeCallback(_a_default_value, "A_DEFAULT_VALUE", probe)
+				nodeInstance.Impl = NewInstanceNodeCallback(_a_datatype_definition_boolean_ref, "A_DATATYPE_DEFINITION_BOOLEAN_REF", probe)
 
 				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
 			}
-		case "A_DEFAULT_VALUE_1":
+		case "A_DATATYPE_DEFINITION_DATE_REF":
 			nodeGongstruct.Name = name
-			set := *models.GetGongstructInstancesSet[models.A_DEFAULT_VALUE_1](probe.stageOfInterest)
-			for _a_default_value_1 := range set {
-				nodeInstance := (&tree.Node{Name: _a_default_value_1.GetName()}).Stage(probe.treeStage)
+			set := *models.GetGongstructInstancesSet[models.A_DATATYPE_DEFINITION_DATE_REF](probe.stageOfInterest)
+			for _a_datatype_definition_date_ref := range set {
+				nodeInstance := (&tree.Node{Name: _a_datatype_definition_date_ref.GetName()}).Stage(probe.treeStage)
 				nodeInstance.IsNodeClickable = true
-				nodeInstance.Impl = NewInstanceNodeCallback(_a_default_value_1, "A_DEFAULT_VALUE_1", probe)
+				nodeInstance.Impl = NewInstanceNodeCallback(_a_datatype_definition_date_ref, "A_DATATYPE_DEFINITION_DATE_REF", probe)
 
 				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
 			}
-		case "A_DEFAULT_VALUE_2":
+		case "A_DATATYPE_DEFINITION_ENUMERATION_REF":
 			nodeGongstruct.Name = name
-			set := *models.GetGongstructInstancesSet[models.A_DEFAULT_VALUE_2](probe.stageOfInterest)
-			for _a_default_value_2 := range set {
-				nodeInstance := (&tree.Node{Name: _a_default_value_2.GetName()}).Stage(probe.treeStage)
+			set := *models.GetGongstructInstancesSet[models.A_DATATYPE_DEFINITION_ENUMERATION_REF](probe.stageOfInterest)
+			for _a_datatype_definition_enumeration_ref := range set {
+				nodeInstance := (&tree.Node{Name: _a_datatype_definition_enumeration_ref.GetName()}).Stage(probe.treeStage)
 				nodeInstance.IsNodeClickable = true
-				nodeInstance.Impl = NewInstanceNodeCallback(_a_default_value_2, "A_DEFAULT_VALUE_2", probe)
+				nodeInstance.Impl = NewInstanceNodeCallback(_a_datatype_definition_enumeration_ref, "A_DATATYPE_DEFINITION_ENUMERATION_REF", probe)
 
 				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
 			}
-		case "A_DEFAULT_VALUE_3":
+		case "A_DATATYPE_DEFINITION_INTEGER_REF":
 			nodeGongstruct.Name = name
-			set := *models.GetGongstructInstancesSet[models.A_DEFAULT_VALUE_3](probe.stageOfInterest)
-			for _a_default_value_3 := range set {
-				nodeInstance := (&tree.Node{Name: _a_default_value_3.GetName()}).Stage(probe.treeStage)
+			set := *models.GetGongstructInstancesSet[models.A_DATATYPE_DEFINITION_INTEGER_REF](probe.stageOfInterest)
+			for _a_datatype_definition_integer_ref := range set {
+				nodeInstance := (&tree.Node{Name: _a_datatype_definition_integer_ref.GetName()}).Stage(probe.treeStage)
 				nodeInstance.IsNodeClickable = true
-				nodeInstance.Impl = NewInstanceNodeCallback(_a_default_value_3, "A_DEFAULT_VALUE_3", probe)
+				nodeInstance.Impl = NewInstanceNodeCallback(_a_datatype_definition_integer_ref, "A_DATATYPE_DEFINITION_INTEGER_REF", probe)
 
 				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
 			}
-		case "A_DEFAULT_VALUE_4":
+		case "A_DATATYPE_DEFINITION_REAL_REF":
 			nodeGongstruct.Name = name
-			set := *models.GetGongstructInstancesSet[models.A_DEFAULT_VALUE_4](probe.stageOfInterest)
-			for _a_default_value_4 := range set {
-				nodeInstance := (&tree.Node{Name: _a_default_value_4.GetName()}).Stage(probe.treeStage)
+			set := *models.GetGongstructInstancesSet[models.A_DATATYPE_DEFINITION_REAL_REF](probe.stageOfInterest)
+			for _a_datatype_definition_real_ref := range set {
+				nodeInstance := (&tree.Node{Name: _a_datatype_definition_real_ref.GetName()}).Stage(probe.treeStage)
 				nodeInstance.IsNodeClickable = true
-				nodeInstance.Impl = NewInstanceNodeCallback(_a_default_value_4, "A_DEFAULT_VALUE_4", probe)
+				nodeInstance.Impl = NewInstanceNodeCallback(_a_datatype_definition_real_ref, "A_DATATYPE_DEFINITION_REAL_REF", probe)
 
 				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
 			}
-		case "A_DEFAULT_VALUE_5":
+		case "A_DATATYPE_DEFINITION_STRING_REF":
 			nodeGongstruct.Name = name
-			set := *models.GetGongstructInstancesSet[models.A_DEFAULT_VALUE_5](probe.stageOfInterest)
-			for _a_default_value_5 := range set {
-				nodeInstance := (&tree.Node{Name: _a_default_value_5.GetName()}).Stage(probe.treeStage)
+			set := *models.GetGongstructInstancesSet[models.A_DATATYPE_DEFINITION_STRING_REF](probe.stageOfInterest)
+			for _a_datatype_definition_string_ref := range set {
+				nodeInstance := (&tree.Node{Name: _a_datatype_definition_string_ref.GetName()}).Stage(probe.treeStage)
 				nodeInstance.IsNodeClickable = true
-				nodeInstance.Impl = NewInstanceNodeCallback(_a_default_value_5, "A_DEFAULT_VALUE_5", probe)
+				nodeInstance.Impl = NewInstanceNodeCallback(_a_datatype_definition_string_ref, "A_DATATYPE_DEFINITION_STRING_REF", probe)
 
 				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
 			}
-		case "A_DEFAULT_VALUE_6":
+		case "A_DATATYPE_DEFINITION_XHTML_REF":
 			nodeGongstruct.Name = name
-			set := *models.GetGongstructInstancesSet[models.A_DEFAULT_VALUE_6](probe.stageOfInterest)
-			for _a_default_value_6 := range set {
-				nodeInstance := (&tree.Node{Name: _a_default_value_6.GetName()}).Stage(probe.treeStage)
+			set := *models.GetGongstructInstancesSet[models.A_DATATYPE_DEFINITION_XHTML_REF](probe.stageOfInterest)
+			for _a_datatype_definition_xhtml_ref := range set {
+				nodeInstance := (&tree.Node{Name: _a_datatype_definition_xhtml_ref.GetName()}).Stage(probe.treeStage)
 				nodeInstance.IsNodeClickable = true
-				nodeInstance.Impl = NewInstanceNodeCallback(_a_default_value_6, "A_DEFAULT_VALUE_6", probe)
-
-				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
-			}
-		case "A_DEFINITION":
-			nodeGongstruct.Name = name
-			set := *models.GetGongstructInstancesSet[models.A_DEFINITION](probe.stageOfInterest)
-			for _a_definition := range set {
-				nodeInstance := (&tree.Node{Name: _a_definition.GetName()}).Stage(probe.treeStage)
-				nodeInstance.IsNodeClickable = true
-				nodeInstance.Impl = NewInstanceNodeCallback(_a_definition, "A_DEFINITION", probe)
-
-				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
-			}
-		case "A_DEFINITION_1":
-			nodeGongstruct.Name = name
-			set := *models.GetGongstructInstancesSet[models.A_DEFINITION_1](probe.stageOfInterest)
-			for _a_definition_1 := range set {
-				nodeInstance := (&tree.Node{Name: _a_definition_1.GetName()}).Stage(probe.treeStage)
-				nodeInstance.IsNodeClickable = true
-				nodeInstance.Impl = NewInstanceNodeCallback(_a_definition_1, "A_DEFINITION_1", probe)
-
-				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
-			}
-		case "A_DEFINITION_2":
-			nodeGongstruct.Name = name
-			set := *models.GetGongstructInstancesSet[models.A_DEFINITION_2](probe.stageOfInterest)
-			for _a_definition_2 := range set {
-				nodeInstance := (&tree.Node{Name: _a_definition_2.GetName()}).Stage(probe.treeStage)
-				nodeInstance.IsNodeClickable = true
-				nodeInstance.Impl = NewInstanceNodeCallback(_a_definition_2, "A_DEFINITION_2", probe)
-
-				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
-			}
-		case "A_DEFINITION_3":
-			nodeGongstruct.Name = name
-			set := *models.GetGongstructInstancesSet[models.A_DEFINITION_3](probe.stageOfInterest)
-			for _a_definition_3 := range set {
-				nodeInstance := (&tree.Node{Name: _a_definition_3.GetName()}).Stage(probe.treeStage)
-				nodeInstance.IsNodeClickable = true
-				nodeInstance.Impl = NewInstanceNodeCallback(_a_definition_3, "A_DEFINITION_3", probe)
-
-				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
-			}
-		case "A_DEFINITION_4":
-			nodeGongstruct.Name = name
-			set := *models.GetGongstructInstancesSet[models.A_DEFINITION_4](probe.stageOfInterest)
-			for _a_definition_4 := range set {
-				nodeInstance := (&tree.Node{Name: _a_definition_4.GetName()}).Stage(probe.treeStage)
-				nodeInstance.IsNodeClickable = true
-				nodeInstance.Impl = NewInstanceNodeCallback(_a_definition_4, "A_DEFINITION_4", probe)
-
-				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
-			}
-		case "A_DEFINITION_5":
-			nodeGongstruct.Name = name
-			set := *models.GetGongstructInstancesSet[models.A_DEFINITION_5](probe.stageOfInterest)
-			for _a_definition_5 := range set {
-				nodeInstance := (&tree.Node{Name: _a_definition_5.GetName()}).Stage(probe.treeStage)
-				nodeInstance.IsNodeClickable = true
-				nodeInstance.Impl = NewInstanceNodeCallback(_a_definition_5, "A_DEFINITION_5", probe)
-
-				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
-			}
-		case "A_DEFINITION_6":
-			nodeGongstruct.Name = name
-			set := *models.GetGongstructInstancesSet[models.A_DEFINITION_6](probe.stageOfInterest)
-			for _a_definition_6 := range set {
-				nodeInstance := (&tree.Node{Name: _a_definition_6.GetName()}).Stage(probe.treeStage)
-				nodeInstance.IsNodeClickable = true
-				nodeInstance.Impl = NewInstanceNodeCallback(_a_definition_6, "A_DEFINITION_6", probe)
+				nodeInstance.Impl = NewInstanceNodeCallback(_a_datatype_definition_xhtml_ref, "A_DATATYPE_DEFINITION_XHTML_REF", probe)
 
 				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
 			}
@@ -399,6 +479,16 @@ func fillUpTree(
 				nodeInstance := (&tree.Node{Name: _a_editable_atts.GetName()}).Stage(probe.treeStage)
 				nodeInstance.IsNodeClickable = true
 				nodeInstance.Impl = NewInstanceNodeCallback(_a_editable_atts, "A_EDITABLE_ATTS", probe)
+
+				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
+			}
+		case "A_ENUM_VALUE_REF":
+			nodeGongstruct.Name = name
+			set := *models.GetGongstructInstancesSet[models.A_ENUM_VALUE_REF](probe.stageOfInterest)
+			for _a_enum_value_ref := range set {
+				nodeInstance := (&tree.Node{Name: _a_enum_value_ref.GetName()}).Stage(probe.treeStage)
+				nodeInstance.IsNodeClickable = true
+				nodeInstance.Impl = NewInstanceNodeCallback(_a_enum_value_ref, "A_ENUM_VALUE_REF", probe)
 
 				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
 			}
@@ -419,6 +509,16 @@ func fillUpTree(
 				nodeInstance := (&tree.Node{Name: _a_properties.GetName()}).Stage(probe.treeStage)
 				nodeInstance.IsNodeClickable = true
 				nodeInstance.Impl = NewInstanceNodeCallback(_a_properties, "A_PROPERTIES", probe)
+
+				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
+			}
+		case "A_RELATION_GROUP_TYPE_REF":
+			nodeGongstruct.Name = name
+			set := *models.GetGongstructInstancesSet[models.A_RELATION_GROUP_TYPE_REF](probe.stageOfInterest)
+			for _a_relation_group_type_ref := range set {
+				nodeInstance := (&tree.Node{Name: _a_relation_group_type_ref.GetName()}).Stage(probe.treeStage)
+				nodeInstance.IsNodeClickable = true
+				nodeInstance.Impl = NewInstanceNodeCallback(_a_relation_group_type_ref, "A_RELATION_GROUP_TYPE_REF", probe)
 
 				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
 			}
@@ -452,6 +552,16 @@ func fillUpTree(
 
 				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
 			}
+		case "A_SPECIFICATION_TYPE_REF":
+			nodeGongstruct.Name = name
+			set := *models.GetGongstructInstancesSet[models.A_SPECIFICATION_TYPE_REF](probe.stageOfInterest)
+			for _a_specification_type_ref := range set {
+				nodeInstance := (&tree.Node{Name: _a_specification_type_ref.GetName()}).Stage(probe.treeStage)
+				nodeInstance.IsNodeClickable = true
+				nodeInstance.Impl = NewInstanceNodeCallback(_a_specification_type_ref, "A_SPECIFICATION_TYPE_REF", probe)
+
+				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
+			}
 		case "A_SPECIFIED_VALUES":
 			nodeGongstruct.Name = name
 			set := *models.GetGongstructInstancesSet[models.A_SPECIFIED_VALUES](probe.stageOfInterest)
@@ -482,6 +592,16 @@ func fillUpTree(
 
 				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
 			}
+		case "A_SPEC_OBJECT_TYPE_REF":
+			nodeGongstruct.Name = name
+			set := *models.GetGongstructInstancesSet[models.A_SPEC_OBJECT_TYPE_REF](probe.stageOfInterest)
+			for _a_spec_object_type_ref := range set {
+				nodeInstance := (&tree.Node{Name: _a_spec_object_type_ref.GetName()}).Stage(probe.treeStage)
+				nodeInstance.IsNodeClickable = true
+				nodeInstance.Impl = NewInstanceNodeCallback(_a_spec_object_type_ref, "A_SPEC_OBJECT_TYPE_REF", probe)
+
+				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
+			}
 		case "A_SPEC_RELATIONS":
 			nodeGongstruct.Name = name
 			set := *models.GetGongstructInstancesSet[models.A_SPEC_RELATIONS](probe.stageOfInterest)
@@ -492,16 +612,6 @@ func fillUpTree(
 
 				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
 			}
-		case "A_SPEC_RELATIONS_1":
-			nodeGongstruct.Name = name
-			set := *models.GetGongstructInstancesSet[models.A_SPEC_RELATIONS_1](probe.stageOfInterest)
-			for _a_spec_relations_1 := range set {
-				nodeInstance := (&tree.Node{Name: _a_spec_relations_1.GetName()}).Stage(probe.treeStage)
-				nodeInstance.IsNodeClickable = true
-				nodeInstance.Impl = NewInstanceNodeCallback(_a_spec_relations_1, "A_SPEC_RELATIONS_1", probe)
-
-				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
-			}
 		case "A_SPEC_RELATION_GROUPS":
 			nodeGongstruct.Name = name
 			set := *models.GetGongstructInstancesSet[models.A_SPEC_RELATION_GROUPS](probe.stageOfInterest)
@@ -509,6 +619,26 @@ func fillUpTree(
 				nodeInstance := (&tree.Node{Name: _a_spec_relation_groups.GetName()}).Stage(probe.treeStage)
 				nodeInstance.IsNodeClickable = true
 				nodeInstance.Impl = NewInstanceNodeCallback(_a_spec_relation_groups, "A_SPEC_RELATION_GROUPS", probe)
+
+				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
+			}
+		case "A_SPEC_RELATION_REF":
+			nodeGongstruct.Name = name
+			set := *models.GetGongstructInstancesSet[models.A_SPEC_RELATION_REF](probe.stageOfInterest)
+			for _a_spec_relation_ref := range set {
+				nodeInstance := (&tree.Node{Name: _a_spec_relation_ref.GetName()}).Stage(probe.treeStage)
+				nodeInstance.IsNodeClickable = true
+				nodeInstance.Impl = NewInstanceNodeCallback(_a_spec_relation_ref, "A_SPEC_RELATION_REF", probe)
+
+				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
+			}
+		case "A_SPEC_RELATION_TYPE_REF":
+			nodeGongstruct.Name = name
+			set := *models.GetGongstructInstancesSet[models.A_SPEC_RELATION_TYPE_REF](probe.stageOfInterest)
+			for _a_spec_relation_type_ref := range set {
+				nodeInstance := (&tree.Node{Name: _a_spec_relation_type_ref.GetName()}).Stage(probe.treeStage)
+				nodeInstance.IsNodeClickable = true
+				nodeInstance.Impl = NewInstanceNodeCallback(_a_spec_relation_type_ref, "A_SPEC_RELATION_TYPE_REF", probe)
 
 				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
 			}
@@ -539,136 +669,6 @@ func fillUpTree(
 				nodeInstance := (&tree.Node{Name: _a_tool_extensions.GetName()}).Stage(probe.treeStage)
 				nodeInstance.IsNodeClickable = true
 				nodeInstance.Impl = NewInstanceNodeCallback(_a_tool_extensions, "A_TOOL_EXTENSIONS", probe)
-
-				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
-			}
-		case "A_TYPE":
-			nodeGongstruct.Name = name
-			set := *models.GetGongstructInstancesSet[models.A_TYPE](probe.stageOfInterest)
-			for _a_type := range set {
-				nodeInstance := (&tree.Node{Name: _a_type.GetName()}).Stage(probe.treeStage)
-				nodeInstance.IsNodeClickable = true
-				nodeInstance.Impl = NewInstanceNodeCallback(_a_type, "A_TYPE", probe)
-
-				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
-			}
-		case "A_TYPE_1":
-			nodeGongstruct.Name = name
-			set := *models.GetGongstructInstancesSet[models.A_TYPE_1](probe.stageOfInterest)
-			for _a_type_1 := range set {
-				nodeInstance := (&tree.Node{Name: _a_type_1.GetName()}).Stage(probe.treeStage)
-				nodeInstance.IsNodeClickable = true
-				nodeInstance.Impl = NewInstanceNodeCallback(_a_type_1, "A_TYPE_1", probe)
-
-				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
-			}
-		case "A_TYPE_10":
-			nodeGongstruct.Name = name
-			set := *models.GetGongstructInstancesSet[models.A_TYPE_10](probe.stageOfInterest)
-			for _a_type_10 := range set {
-				nodeInstance := (&tree.Node{Name: _a_type_10.GetName()}).Stage(probe.treeStage)
-				nodeInstance.IsNodeClickable = true
-				nodeInstance.Impl = NewInstanceNodeCallback(_a_type_10, "A_TYPE_10", probe)
-
-				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
-			}
-		case "A_TYPE_2":
-			nodeGongstruct.Name = name
-			set := *models.GetGongstructInstancesSet[models.A_TYPE_2](probe.stageOfInterest)
-			for _a_type_2 := range set {
-				nodeInstance := (&tree.Node{Name: _a_type_2.GetName()}).Stage(probe.treeStage)
-				nodeInstance.IsNodeClickable = true
-				nodeInstance.Impl = NewInstanceNodeCallback(_a_type_2, "A_TYPE_2", probe)
-
-				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
-			}
-		case "A_TYPE_3":
-			nodeGongstruct.Name = name
-			set := *models.GetGongstructInstancesSet[models.A_TYPE_3](probe.stageOfInterest)
-			for _a_type_3 := range set {
-				nodeInstance := (&tree.Node{Name: _a_type_3.GetName()}).Stage(probe.treeStage)
-				nodeInstance.IsNodeClickable = true
-				nodeInstance.Impl = NewInstanceNodeCallback(_a_type_3, "A_TYPE_3", probe)
-
-				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
-			}
-		case "A_TYPE_4":
-			nodeGongstruct.Name = name
-			set := *models.GetGongstructInstancesSet[models.A_TYPE_4](probe.stageOfInterest)
-			for _a_type_4 := range set {
-				nodeInstance := (&tree.Node{Name: _a_type_4.GetName()}).Stage(probe.treeStage)
-				nodeInstance.IsNodeClickable = true
-				nodeInstance.Impl = NewInstanceNodeCallback(_a_type_4, "A_TYPE_4", probe)
-
-				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
-			}
-		case "A_TYPE_5":
-			nodeGongstruct.Name = name
-			set := *models.GetGongstructInstancesSet[models.A_TYPE_5](probe.stageOfInterest)
-			for _a_type_5 := range set {
-				nodeInstance := (&tree.Node{Name: _a_type_5.GetName()}).Stage(probe.treeStage)
-				nodeInstance.IsNodeClickable = true
-				nodeInstance.Impl = NewInstanceNodeCallback(_a_type_5, "A_TYPE_5", probe)
-
-				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
-			}
-		case "A_TYPE_6":
-			nodeGongstruct.Name = name
-			set := *models.GetGongstructInstancesSet[models.A_TYPE_6](probe.stageOfInterest)
-			for _a_type_6 := range set {
-				nodeInstance := (&tree.Node{Name: _a_type_6.GetName()}).Stage(probe.treeStage)
-				nodeInstance.IsNodeClickable = true
-				nodeInstance.Impl = NewInstanceNodeCallback(_a_type_6, "A_TYPE_6", probe)
-
-				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
-			}
-		case "A_TYPE_7":
-			nodeGongstruct.Name = name
-			set := *models.GetGongstructInstancesSet[models.A_TYPE_7](probe.stageOfInterest)
-			for _a_type_7 := range set {
-				nodeInstance := (&tree.Node{Name: _a_type_7.GetName()}).Stage(probe.treeStage)
-				nodeInstance.IsNodeClickable = true
-				nodeInstance.Impl = NewInstanceNodeCallback(_a_type_7, "A_TYPE_7", probe)
-
-				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
-			}
-		case "A_TYPE_8":
-			nodeGongstruct.Name = name
-			set := *models.GetGongstructInstancesSet[models.A_TYPE_8](probe.stageOfInterest)
-			for _a_type_8 := range set {
-				nodeInstance := (&tree.Node{Name: _a_type_8.GetName()}).Stage(probe.treeStage)
-				nodeInstance.IsNodeClickable = true
-				nodeInstance.Impl = NewInstanceNodeCallback(_a_type_8, "A_TYPE_8", probe)
-
-				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
-			}
-		case "A_TYPE_9":
-			nodeGongstruct.Name = name
-			set := *models.GetGongstructInstancesSet[models.A_TYPE_9](probe.stageOfInterest)
-			for _a_type_9 := range set {
-				nodeInstance := (&tree.Node{Name: _a_type_9.GetName()}).Stage(probe.treeStage)
-				nodeInstance.IsNodeClickable = true
-				nodeInstance.Impl = NewInstanceNodeCallback(_a_type_9, "A_TYPE_9", probe)
-
-				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
-			}
-		case "A_VALUES":
-			nodeGongstruct.Name = name
-			set := *models.GetGongstructInstancesSet[models.A_VALUES](probe.stageOfInterest)
-			for _a_values := range set {
-				nodeInstance := (&tree.Node{Name: _a_values.GetName()}).Stage(probe.treeStage)
-				nodeInstance.IsNodeClickable = true
-				nodeInstance.Impl = NewInstanceNodeCallback(_a_values, "A_VALUES", probe)
-
-				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
-			}
-		case "A_VALUES_1":
-			nodeGongstruct.Name = name
-			set := *models.GetGongstructInstancesSet[models.A_VALUES_1](probe.stageOfInterest)
-			for _a_values_1 := range set {
-				nodeInstance := (&tree.Node{Name: _a_values_1.GetName()}).Stage(probe.treeStage)
-				nodeInstance.IsNodeClickable = true
-				nodeInstance.Impl = NewInstanceNodeCallback(_a_values_1, "A_VALUES_1", probe)
 
 				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
 			}
