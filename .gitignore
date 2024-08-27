@@ -13,3 +13,4 @@ test/reqif/go/roundtrip/__debug_bin*
 test/reqif/go/cmd/reqif/req*.exe
 
 test/reqif/go/cmd/reqif/reqif
+test/reqif/go/cmd/reqif/__debug_bin*
