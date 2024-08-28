@@ -38,13 +38,17 @@ func Generate(stage *StageStruct, outputFilePath string) {
 				fields,
 			)
 		} else {
+			var outerElementName string
+			if ct.OuterElement != nil {
+				outerElementName = ct.OuterElement.Name
+			}
 			templInsertionLevel0[ModelsFileTmplLevel0AllGongstructsCode] += Replace3(
 				ModelsFileTmplLevel1Code[ModelsFileTmplLevel1NamedStructCode],
 
 				"{{"+string(rune(ModelsFileTmplLevel2Structname))+"}}", ct.GoIdentifier,
 
 				"{{"+string(rune(ModelsFileTmplLevel2Source))+"}}",
-				`within outer element "`+ct.OuterElement.Name+`"`,
+				`within outer element "`+outerElementName+`"`,
 
 				"{{"+string(rune(ModelsFileTmplLevel2Fields))+"}}",
 				fields,
