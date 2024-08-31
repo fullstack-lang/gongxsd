@@ -112,10 +112,6 @@ func fillUpTablePointerToGongstruct[T models.PointerToGongstruct](
 		fillUpTable[models.A_PROPERTIES](probe)
 	case *models.A_RELATION_GROUP_TYPE_REF:
 		fillUpTable[models.A_RELATION_GROUP_TYPE_REF](probe)
-	case *models.A_SOURCE:
-		fillUpTable[models.A_SOURCE](probe)
-	case *models.A_SOURCE_SPECIFICATION:
-		fillUpTable[models.A_SOURCE_SPECIFICATION](probe)
 	case *models.A_SPECIFICATIONS:
 		fillUpTable[models.A_SPECIFICATIONS](probe)
 	case *models.A_SPECIFICATION_TYPE_REF:
@@ -138,6 +134,10 @@ func fillUpTablePointerToGongstruct[T models.PointerToGongstruct](
 		fillUpTable[models.A_SPEC_RELATION_TYPE_REF](probe)
 	case *models.A_SPEC_TYPES:
 		fillUpTable[models.A_SPEC_TYPES](probe)
+	case *models.A_TARGET_1:
+		fillUpTable[models.A_TARGET_1](probe)
+	case *models.A_TARGET_SPECIFICATION_1:
+		fillUpTable[models.A_TARGET_SPECIFICATION_1](probe)
 	case *models.A_THE_HEADER:
 		fillUpTable[models.A_THE_HEADER](probe)
 	case *models.A_TOOL_EXTENSIONS:

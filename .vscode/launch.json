@@ -80,47 +80,6 @@
             ]
         },
         {
-            "name": "go read reqif",
-            "type": "go",
-            "request": "launch",
-            "mode": "debug",
-            "program": "${workspaceFolder}/go/cmd/gongxsd-cli",
-            "args": [
-                "read",
-                "../../../test/reqif/dtc-11-04-05.xsd",
-                "-o",
-                "../../../test/reqif/go/models/models.go"
-            ]
-        },
-        {
-            "name": "gen reqif",
-            "type": "go",
-            "request": "launch",
-            "mode": "debug",
-            "program": "${workspaceFolder}/go/cmd/gongxsd-cli",
-            "args": [
-                "generate",
-                "../../../test/reqif/dtc-11-04-05.xsd",
-                "-v",
-                "-o",
-                "../../../test/reqif/go/models/models.go"
-            ]
-        },
-        {
-            "name": "gen reqif reduced",
-            "type": "go",
-            "request": "launch",
-            "mode": "debug",
-            "program": "${workspaceFolder}/go/cmd/gongxsd-cli",
-            "args": [
-                "generate",
-                "../../../test/reqif/dtc-11-04-05 reduced.xsd",
-                "-v",
-                "-o",
-                "../../../test/reqif/go/models/models.go"
-            ]
-        },
-        {
             "name": "gongxsd-cli read xsd",
             "type": "go",
             "request": "launch",
@@ -184,6 +143,36 @@
             "args": [
                 "generate",
                 "../../../test/reqif/dtc-11-04-05.xsd",
+                "-v",
+                "-o",
+                "../../../test/reqif/go/models/models.go"
+            ]
+        },
+        {
+            "name": "go read reqif",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceFolder}/go/cmd/gongxsd-cli",
+            "args": [
+                "read",
+                "../../../test/reqif/dtc-11-04-05.xsd",
+                "-v",
+                "-o",
+                "../../../test/reqif/go/models/models.go",
+                "-m",
+                "../../../test/reqif/tmp/stage"
+            ]
+        },
+        {
+            "name": "gen reqif reduced",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceFolder}/go/cmd/gongxsd-cli",
+            "args": [
+                "generate",
+                "../../../test/reqif/dtc-11-04-05 reduced.xsd",
                 "-v",
                 "-o",
                 "../../../test/reqif/go/models/models.go"

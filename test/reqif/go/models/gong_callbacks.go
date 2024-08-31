@@ -190,14 +190,6 @@ func AfterCreateFromFront[Type Gongstruct](stage *StageStruct, instance *Type) {
 		if stage.OnAfterA_RELATION_GROUP_TYPE_REFCreateCallback != nil {
 			stage.OnAfterA_RELATION_GROUP_TYPE_REFCreateCallback.OnAfterCreate(stage, target)
 		}
-	case *A_SOURCE:
-		if stage.OnAfterA_SOURCECreateCallback != nil {
-			stage.OnAfterA_SOURCECreateCallback.OnAfterCreate(stage, target)
-		}
-	case *A_SOURCE_SPECIFICATION:
-		if stage.OnAfterA_SOURCE_SPECIFICATIONCreateCallback != nil {
-			stage.OnAfterA_SOURCE_SPECIFICATIONCreateCallback.OnAfterCreate(stage, target)
-		}
 	case *A_SPECIFICATIONS:
 		if stage.OnAfterA_SPECIFICATIONSCreateCallback != nil {
 			stage.OnAfterA_SPECIFICATIONSCreateCallback.OnAfterCreate(stage, target)
@@ -241,6 +233,14 @@ func AfterCreateFromFront[Type Gongstruct](stage *StageStruct, instance *Type) {
 	case *A_SPEC_TYPES:
 		if stage.OnAfterA_SPEC_TYPESCreateCallback != nil {
 			stage.OnAfterA_SPEC_TYPESCreateCallback.OnAfterCreate(stage, target)
+		}
+	case *A_TARGET_1:
+		if stage.OnAfterA_TARGET_1CreateCallback != nil {
+			stage.OnAfterA_TARGET_1CreateCallback.OnAfterCreate(stage, target)
+		}
+	case *A_TARGET_SPECIFICATION_1:
+		if stage.OnAfterA_TARGET_SPECIFICATION_1CreateCallback != nil {
+			stage.OnAfterA_TARGET_SPECIFICATION_1CreateCallback.OnAfterCreate(stage, target)
 		}
 	case *A_THE_HEADER:
 		if stage.OnAfterA_THE_HEADERCreateCallback != nil {
@@ -582,16 +582,6 @@ func AfterUpdateFromFront[Type Gongstruct](stage *StageStruct, old, new *Type) {
 		if stage.OnAfterA_RELATION_GROUP_TYPE_REFUpdateCallback != nil {
 			stage.OnAfterA_RELATION_GROUP_TYPE_REFUpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
 		}
-	case *A_SOURCE:
-		newTarget := any(new).(*A_SOURCE)
-		if stage.OnAfterA_SOURCEUpdateCallback != nil {
-			stage.OnAfterA_SOURCEUpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
-		}
-	case *A_SOURCE_SPECIFICATION:
-		newTarget := any(new).(*A_SOURCE_SPECIFICATION)
-		if stage.OnAfterA_SOURCE_SPECIFICATIONUpdateCallback != nil {
-			stage.OnAfterA_SOURCE_SPECIFICATIONUpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
-		}
 	case *A_SPECIFICATIONS:
 		newTarget := any(new).(*A_SPECIFICATIONS)
 		if stage.OnAfterA_SPECIFICATIONSUpdateCallback != nil {
@@ -646,6 +636,16 @@ func AfterUpdateFromFront[Type Gongstruct](stage *StageStruct, old, new *Type) {
 		newTarget := any(new).(*A_SPEC_TYPES)
 		if stage.OnAfterA_SPEC_TYPESUpdateCallback != nil {
 			stage.OnAfterA_SPEC_TYPESUpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
+		}
+	case *A_TARGET_1:
+		newTarget := any(new).(*A_TARGET_1)
+		if stage.OnAfterA_TARGET_1UpdateCallback != nil {
+			stage.OnAfterA_TARGET_1UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
+		}
+	case *A_TARGET_SPECIFICATION_1:
+		newTarget := any(new).(*A_TARGET_SPECIFICATION_1)
+		if stage.OnAfterA_TARGET_SPECIFICATION_1UpdateCallback != nil {
+			stage.OnAfterA_TARGET_SPECIFICATION_1UpdateCallback.OnAfterUpdate(stage, oldTarget, newTarget)
 		}
 	case *A_THE_HEADER:
 		newTarget := any(new).(*A_THE_HEADER)
@@ -1012,16 +1012,6 @@ func AfterDeleteFromFront[Type Gongstruct](stage *StageStruct, staged, front *Ty
 			staged := any(staged).(*A_RELATION_GROUP_TYPE_REF)
 			stage.OnAfterA_RELATION_GROUP_TYPE_REFDeleteCallback.OnAfterDelete(stage, staged, front)
 		}
-	case *A_SOURCE:
-		if stage.OnAfterA_SOURCEDeleteCallback != nil {
-			staged := any(staged).(*A_SOURCE)
-			stage.OnAfterA_SOURCEDeleteCallback.OnAfterDelete(stage, staged, front)
-		}
-	case *A_SOURCE_SPECIFICATION:
-		if stage.OnAfterA_SOURCE_SPECIFICATIONDeleteCallback != nil {
-			staged := any(staged).(*A_SOURCE_SPECIFICATION)
-			stage.OnAfterA_SOURCE_SPECIFICATIONDeleteCallback.OnAfterDelete(stage, staged, front)
-		}
 	case *A_SPECIFICATIONS:
 		if stage.OnAfterA_SPECIFICATIONSDeleteCallback != nil {
 			staged := any(staged).(*A_SPECIFICATIONS)
@@ -1076,6 +1066,16 @@ func AfterDeleteFromFront[Type Gongstruct](stage *StageStruct, staged, front *Ty
 		if stage.OnAfterA_SPEC_TYPESDeleteCallback != nil {
 			staged := any(staged).(*A_SPEC_TYPES)
 			stage.OnAfterA_SPEC_TYPESDeleteCallback.OnAfterDelete(stage, staged, front)
+		}
+	case *A_TARGET_1:
+		if stage.OnAfterA_TARGET_1DeleteCallback != nil {
+			staged := any(staged).(*A_TARGET_1)
+			stage.OnAfterA_TARGET_1DeleteCallback.OnAfterDelete(stage, staged, front)
+		}
+	case *A_TARGET_SPECIFICATION_1:
+		if stage.OnAfterA_TARGET_SPECIFICATION_1DeleteCallback != nil {
+			staged := any(staged).(*A_TARGET_SPECIFICATION_1)
+			stage.OnAfterA_TARGET_SPECIFICATION_1DeleteCallback.OnAfterDelete(stage, staged, front)
 		}
 	case *A_THE_HEADER:
 		if stage.OnAfterA_THE_HEADERDeleteCallback != nil {
@@ -1396,14 +1396,6 @@ func AfterReadFromFront[Type Gongstruct](stage *StageStruct, instance *Type) {
 		if stage.OnAfterA_RELATION_GROUP_TYPE_REFReadCallback != nil {
 			stage.OnAfterA_RELATION_GROUP_TYPE_REFReadCallback.OnAfterRead(stage, target)
 		}
-	case *A_SOURCE:
-		if stage.OnAfterA_SOURCEReadCallback != nil {
-			stage.OnAfterA_SOURCEReadCallback.OnAfterRead(stage, target)
-		}
-	case *A_SOURCE_SPECIFICATION:
-		if stage.OnAfterA_SOURCE_SPECIFICATIONReadCallback != nil {
-			stage.OnAfterA_SOURCE_SPECIFICATIONReadCallback.OnAfterRead(stage, target)
-		}
 	case *A_SPECIFICATIONS:
 		if stage.OnAfterA_SPECIFICATIONSReadCallback != nil {
 			stage.OnAfterA_SPECIFICATIONSReadCallback.OnAfterRead(stage, target)
@@ -1447,6 +1439,14 @@ func AfterReadFromFront[Type Gongstruct](stage *StageStruct, instance *Type) {
 	case *A_SPEC_TYPES:
 		if stage.OnAfterA_SPEC_TYPESReadCallback != nil {
 			stage.OnAfterA_SPEC_TYPESReadCallback.OnAfterRead(stage, target)
+		}
+	case *A_TARGET_1:
+		if stage.OnAfterA_TARGET_1ReadCallback != nil {
+			stage.OnAfterA_TARGET_1ReadCallback.OnAfterRead(stage, target)
+		}
+	case *A_TARGET_SPECIFICATION_1:
+		if stage.OnAfterA_TARGET_SPECIFICATION_1ReadCallback != nil {
+			stage.OnAfterA_TARGET_SPECIFICATION_1ReadCallback.OnAfterRead(stage, target)
 		}
 	case *A_THE_HEADER:
 		if stage.OnAfterA_THE_HEADERReadCallback != nil {
@@ -1697,12 +1697,6 @@ func SetCallbackAfterUpdateFromFront[Type Gongstruct](stage *StageStruct, callba
 	case *A_RELATION_GROUP_TYPE_REF:
 		stage.OnAfterA_RELATION_GROUP_TYPE_REFUpdateCallback = any(callback).(OnAfterUpdateInterface[A_RELATION_GROUP_TYPE_REF])
 	
-	case *A_SOURCE:
-		stage.OnAfterA_SOURCEUpdateCallback = any(callback).(OnAfterUpdateInterface[A_SOURCE])
-	
-	case *A_SOURCE_SPECIFICATION:
-		stage.OnAfterA_SOURCE_SPECIFICATIONUpdateCallback = any(callback).(OnAfterUpdateInterface[A_SOURCE_SPECIFICATION])
-	
 	case *A_SPECIFICATIONS:
 		stage.OnAfterA_SPECIFICATIONSUpdateCallback = any(callback).(OnAfterUpdateInterface[A_SPECIFICATIONS])
 	
@@ -1735,6 +1729,12 @@ func SetCallbackAfterUpdateFromFront[Type Gongstruct](stage *StageStruct, callba
 	
 	case *A_SPEC_TYPES:
 		stage.OnAfterA_SPEC_TYPESUpdateCallback = any(callback).(OnAfterUpdateInterface[A_SPEC_TYPES])
+	
+	case *A_TARGET_1:
+		stage.OnAfterA_TARGET_1UpdateCallback = any(callback).(OnAfterUpdateInterface[A_TARGET_1])
+	
+	case *A_TARGET_SPECIFICATION_1:
+		stage.OnAfterA_TARGET_SPECIFICATION_1UpdateCallback = any(callback).(OnAfterUpdateInterface[A_TARGET_SPECIFICATION_1])
 	
 	case *A_THE_HEADER:
 		stage.OnAfterA_THE_HEADERUpdateCallback = any(callback).(OnAfterUpdateInterface[A_THE_HEADER])
@@ -1956,12 +1956,6 @@ func SetCallbackAfterCreateFromFront[Type Gongstruct](stage *StageStruct, callba
 	case *A_RELATION_GROUP_TYPE_REF:
 		stage.OnAfterA_RELATION_GROUP_TYPE_REFCreateCallback = any(callback).(OnAfterCreateInterface[A_RELATION_GROUP_TYPE_REF])
 	
-	case *A_SOURCE:
-		stage.OnAfterA_SOURCECreateCallback = any(callback).(OnAfterCreateInterface[A_SOURCE])
-	
-	case *A_SOURCE_SPECIFICATION:
-		stage.OnAfterA_SOURCE_SPECIFICATIONCreateCallback = any(callback).(OnAfterCreateInterface[A_SOURCE_SPECIFICATION])
-	
 	case *A_SPECIFICATIONS:
 		stage.OnAfterA_SPECIFICATIONSCreateCallback = any(callback).(OnAfterCreateInterface[A_SPECIFICATIONS])
 	
@@ -1994,6 +1988,12 @@ func SetCallbackAfterCreateFromFront[Type Gongstruct](stage *StageStruct, callba
 	
 	case *A_SPEC_TYPES:
 		stage.OnAfterA_SPEC_TYPESCreateCallback = any(callback).(OnAfterCreateInterface[A_SPEC_TYPES])
+	
+	case *A_TARGET_1:
+		stage.OnAfterA_TARGET_1CreateCallback = any(callback).(OnAfterCreateInterface[A_TARGET_1])
+	
+	case *A_TARGET_SPECIFICATION_1:
+		stage.OnAfterA_TARGET_SPECIFICATION_1CreateCallback = any(callback).(OnAfterCreateInterface[A_TARGET_SPECIFICATION_1])
 	
 	case *A_THE_HEADER:
 		stage.OnAfterA_THE_HEADERCreateCallback = any(callback).(OnAfterCreateInterface[A_THE_HEADER])
@@ -2215,12 +2215,6 @@ func SetCallbackAfterDeleteFromFront[Type Gongstruct](stage *StageStruct, callba
 	case *A_RELATION_GROUP_TYPE_REF:
 		stage.OnAfterA_RELATION_GROUP_TYPE_REFDeleteCallback = any(callback).(OnAfterDeleteInterface[A_RELATION_GROUP_TYPE_REF])
 	
-	case *A_SOURCE:
-		stage.OnAfterA_SOURCEDeleteCallback = any(callback).(OnAfterDeleteInterface[A_SOURCE])
-	
-	case *A_SOURCE_SPECIFICATION:
-		stage.OnAfterA_SOURCE_SPECIFICATIONDeleteCallback = any(callback).(OnAfterDeleteInterface[A_SOURCE_SPECIFICATION])
-	
 	case *A_SPECIFICATIONS:
 		stage.OnAfterA_SPECIFICATIONSDeleteCallback = any(callback).(OnAfterDeleteInterface[A_SPECIFICATIONS])
 	
@@ -2253,6 +2247,12 @@ func SetCallbackAfterDeleteFromFront[Type Gongstruct](stage *StageStruct, callba
 	
 	case *A_SPEC_TYPES:
 		stage.OnAfterA_SPEC_TYPESDeleteCallback = any(callback).(OnAfterDeleteInterface[A_SPEC_TYPES])
+	
+	case *A_TARGET_1:
+		stage.OnAfterA_TARGET_1DeleteCallback = any(callback).(OnAfterDeleteInterface[A_TARGET_1])
+	
+	case *A_TARGET_SPECIFICATION_1:
+		stage.OnAfterA_TARGET_SPECIFICATION_1DeleteCallback = any(callback).(OnAfterDeleteInterface[A_TARGET_SPECIFICATION_1])
 	
 	case *A_THE_HEADER:
 		stage.OnAfterA_THE_HEADERDeleteCallback = any(callback).(OnAfterDeleteInterface[A_THE_HEADER])
@@ -2474,12 +2474,6 @@ func SetCallbackAfterReadFromFront[Type Gongstruct](stage *StageStruct, callback
 	case *A_RELATION_GROUP_TYPE_REF:
 		stage.OnAfterA_RELATION_GROUP_TYPE_REFReadCallback = any(callback).(OnAfterReadInterface[A_RELATION_GROUP_TYPE_REF])
 	
-	case *A_SOURCE:
-		stage.OnAfterA_SOURCEReadCallback = any(callback).(OnAfterReadInterface[A_SOURCE])
-	
-	case *A_SOURCE_SPECIFICATION:
-		stage.OnAfterA_SOURCE_SPECIFICATIONReadCallback = any(callback).(OnAfterReadInterface[A_SOURCE_SPECIFICATION])
-	
 	case *A_SPECIFICATIONS:
 		stage.OnAfterA_SPECIFICATIONSReadCallback = any(callback).(OnAfterReadInterface[A_SPECIFICATIONS])
 	
@@ -2512,6 +2506,12 @@ func SetCallbackAfterReadFromFront[Type Gongstruct](stage *StageStruct, callback
 	
 	case *A_SPEC_TYPES:
 		stage.OnAfterA_SPEC_TYPESReadCallback = any(callback).(OnAfterReadInterface[A_SPEC_TYPES])
+	
+	case *A_TARGET_1:
+		stage.OnAfterA_TARGET_1ReadCallback = any(callback).(OnAfterReadInterface[A_TARGET_1])
+	
+	case *A_TARGET_SPECIFICATION_1:
+		stage.OnAfterA_TARGET_SPECIFICATION_1ReadCallback = any(callback).(OnAfterReadInterface[A_TARGET_SPECIFICATION_1])
 	
 	case *A_THE_HEADER:
 		stage.OnAfterA_THE_HEADERReadCallback = any(callback).(OnAfterReadInterface[A_THE_HEADER])

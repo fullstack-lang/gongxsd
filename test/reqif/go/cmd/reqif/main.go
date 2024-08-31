@@ -68,6 +68,7 @@ func main() {
 	stack.Stage.StageBranchREQ_IF(&req_if)
 
 	stack.Stage.Commit()
+	stack.Probe.Refresh()
 
 	log.Printf("Server ready serve on localhost:" + strconv.Itoa(*port))
 	err = r.Run(":" + strconv.Itoa(*port))

@@ -797,30 +797,6 @@ func GetReverseFieldOwnerName[T models.Gongstruct](
 			}
 		}
 
-	case *models.A_SOURCE:
-		switch reverseField.GongstructName {
-		// insertion point
-		case "SPEC_RELATION":
-			switch reverseField.Fieldname {
-			case "SOURCE":
-				if _spec_relation, ok := stage.SPEC_RELATION_SOURCE_reverseMap[inst]; ok {
-					res = _spec_relation.Name
-				}
-			}
-		}
-
-	case *models.A_SOURCE_SPECIFICATION:
-		switch reverseField.GongstructName {
-		// insertion point
-		case "RELATION_GROUP":
-			switch reverseField.Fieldname {
-			case "SOURCE_SPECIFICATION":
-				if _relation_group, ok := stage.RELATION_GROUP_SOURCE_SPECIFICATION_reverseMap[inst]; ok {
-					res = _relation_group.Name
-				}
-			}
-		}
-
 	case *models.A_SPECIFICATIONS:
 		switch reverseField.GongstructName {
 		// insertion point
@@ -970,6 +946,38 @@ func GetReverseFieldOwnerName[T models.Gongstruct](
 			case "SPEC_TYPES":
 				if _req_if_content, ok := stage.REQ_IF_CONTENT_SPEC_TYPES_reverseMap[inst]; ok {
 					res = _req_if_content.Name
+				}
+			}
+		}
+
+	case *models.A_TARGET_1:
+		switch reverseField.GongstructName {
+		// insertion point
+		case "SPEC_RELATION":
+			switch reverseField.Fieldname {
+			case "SOURCE":
+				if _spec_relation, ok := stage.SPEC_RELATION_SOURCE_reverseMap[inst]; ok {
+					res = _spec_relation.Name
+				}
+			case "TARGET":
+				if _spec_relation, ok := stage.SPEC_RELATION_TARGET_reverseMap[inst]; ok {
+					res = _spec_relation.Name
+				}
+			}
+		}
+
+	case *models.A_TARGET_SPECIFICATION_1:
+		switch reverseField.GongstructName {
+		// insertion point
+		case "RELATION_GROUP":
+			switch reverseField.Fieldname {
+			case "SOURCE_SPECIFICATION":
+				if _relation_group, ok := stage.RELATION_GROUP_SOURCE_SPECIFICATION_reverseMap[inst]; ok {
+					res = _relation_group.Name
+				}
+			case "TARGET_SPECIFICATION":
+				if _relation_group, ok := stage.RELATION_GROUP_TARGET_SPECIFICATION_reverseMap[inst]; ok {
+					res = _relation_group.Name
 				}
 			}
 		}
@@ -1911,26 +1919,6 @@ func GetReverseFieldOwner[T models.Gongstruct](
 			}
 		}
 
-	case *models.A_SOURCE:
-		switch reverseField.GongstructName {
-		// insertion point
-		case "SPEC_RELATION":
-			switch reverseField.Fieldname {
-			case "SOURCE":
-				res = stage.SPEC_RELATION_SOURCE_reverseMap[inst]
-			}
-		}
-
-	case *models.A_SOURCE_SPECIFICATION:
-		switch reverseField.GongstructName {
-		// insertion point
-		case "RELATION_GROUP":
-			switch reverseField.Fieldname {
-			case "SOURCE_SPECIFICATION":
-				res = stage.RELATION_GROUP_SOURCE_SPECIFICATION_reverseMap[inst]
-			}
-		}
-
 	case *models.A_SPECIFICATIONS:
 		switch reverseField.GongstructName {
 		// insertion point
@@ -2053,6 +2041,30 @@ func GetReverseFieldOwner[T models.Gongstruct](
 			switch reverseField.Fieldname {
 			case "SPEC_TYPES":
 				res = stage.REQ_IF_CONTENT_SPEC_TYPES_reverseMap[inst]
+			}
+		}
+
+	case *models.A_TARGET_1:
+		switch reverseField.GongstructName {
+		// insertion point
+		case "SPEC_RELATION":
+			switch reverseField.Fieldname {
+			case "SOURCE":
+				res = stage.SPEC_RELATION_SOURCE_reverseMap[inst]
+			case "TARGET":
+				res = stage.SPEC_RELATION_TARGET_reverseMap[inst]
+			}
+		}
+
+	case *models.A_TARGET_SPECIFICATION_1:
+		switch reverseField.GongstructName {
+		// insertion point
+		case "RELATION_GROUP":
+			switch reverseField.Fieldname {
+			case "SOURCE_SPECIFICATION":
+				res = stage.RELATION_GROUP_SOURCE_SPECIFICATION_reverseMap[inst]
+			case "TARGET_SPECIFICATION":
+				res = stage.RELATION_GROUP_TARGET_SPECIFICATION_reverseMap[inst]
 			}
 		}
 

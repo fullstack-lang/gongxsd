@@ -1235,12 +1235,6 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 	case *A_RELATION_GROUP_TYPE_REF:
 		// insertion point per field
 
-	case *A_SOURCE:
-		// insertion point per field
-
-	case *A_SOURCE_SPECIFICATION:
-		// insertion point per field
-
 	case *A_SPECIFICATIONS:
 		// insertion point per field
 		if fieldName == "SPECIFICATION" {
@@ -1578,6 +1572,12 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 			}
 		}
 
+	case *A_TARGET_1:
+		// insertion point per field
+
+	case *A_TARGET_SPECIFICATION_1:
+		// insertion point per field
+
 	case *A_THE_HEADER:
 		// insertion point per field
 		if fieldName == "REQ_IF_HEADER" {
@@ -1873,7 +1873,7 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 					for _, fieldInstance := range reference {
 						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
 							_inferedTypeInstance.SOURCE_SPECIFICATION =
-								append(_inferedTypeInstance.SOURCE_SPECIFICATION, any(fieldInstance).(*A_SOURCE_SPECIFICATION))
+								append(_inferedTypeInstance.SOURCE_SPECIFICATION, any(fieldInstance).(*A_TARGET_SPECIFICATION_1))
 						}
 					}
 				}
@@ -1893,6 +1893,25 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
 							_inferedTypeInstance.SPEC_RELATIONS =
 								append(_inferedTypeInstance.SPEC_RELATIONS, any(fieldInstance).(*A_SPEC_RELATION_REF))
+						}
+					}
+				}
+			}
+		}
+		if fieldName == "TARGET_SPECIFICATION" {
+
+			// walk all instances of the owning type
+			for _instance := range *GetGongstructInstancesSetFromPointerType[OwningType](stage) {
+				if any(_instance).(*RELATION_GROUP) != owningInstanceInfered {
+					_inferedTypeInstance := any(_instance).(*RELATION_GROUP)
+					reference := make([]FieldType, 0)
+					targetFieldSlice := any(_inferedTypeInstance.TARGET_SPECIFICATION).([]FieldType)
+					copy(targetFieldSlice, reference)
+					_inferedTypeInstance.TARGET_SPECIFICATION = _inferedTypeInstance.TARGET_SPECIFICATION[0:]
+					for _, fieldInstance := range reference {
+						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
+							_inferedTypeInstance.TARGET_SPECIFICATION =
+								append(_inferedTypeInstance.TARGET_SPECIFICATION, any(fieldInstance).(*A_TARGET_SPECIFICATION_1))
 						}
 					}
 				}
@@ -2495,7 +2514,26 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 					for _, fieldInstance := range reference {
 						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
 							_inferedTypeInstance.SOURCE =
-								append(_inferedTypeInstance.SOURCE, any(fieldInstance).(*A_SOURCE))
+								append(_inferedTypeInstance.SOURCE, any(fieldInstance).(*A_TARGET_1))
+						}
+					}
+				}
+			}
+		}
+		if fieldName == "TARGET" {
+
+			// walk all instances of the owning type
+			for _instance := range *GetGongstructInstancesSetFromPointerType[OwningType](stage) {
+				if any(_instance).(*SPEC_RELATION) != owningInstanceInfered {
+					_inferedTypeInstance := any(_instance).(*SPEC_RELATION)
+					reference := make([]FieldType, 0)
+					targetFieldSlice := any(_inferedTypeInstance.TARGET).([]FieldType)
+					copy(targetFieldSlice, reference)
+					_inferedTypeInstance.TARGET = _inferedTypeInstance.TARGET[0:]
+					for _, fieldInstance := range reference {
+						if _, ok := setOfFieldInstances[any(fieldInstance).(FieldType)]; !ok {
+							_inferedTypeInstance.TARGET =
+								append(_inferedTypeInstance.TARGET, any(fieldInstance).(*A_TARGET_1))
 						}
 					}
 				}
@@ -3160,12 +3198,6 @@ func (stage *StageStruct) ComputeReverseMaps() {
 	// Compute reverse map for named struct A_RELATION_GROUP_TYPE_REF
 	// insertion point per field
 
-	// Compute reverse map for named struct A_SOURCE
-	// insertion point per field
-
-	// Compute reverse map for named struct A_SOURCE_SPECIFICATION
-	// insertion point per field
-
 	// Compute reverse map for named struct A_SPECIFICATIONS
 	// insertion point per field
 	clear(stage.A_SPECIFICATIONS_SPECIFICATION_reverseMap)
@@ -3327,6 +3359,12 @@ func (stage *StageStruct) ComputeReverseMaps() {
 		}
 	}
 
+	// Compute reverse map for named struct A_TARGET_1
+	// insertion point per field
+
+	// Compute reverse map for named struct A_TARGET_SPECIFICATION_1
+	// insertion point per field
+
 	// Compute reverse map for named struct A_THE_HEADER
 	// insertion point per field
 	clear(stage.A_THE_HEADER_REQ_IF_HEADER_reverseMap)
@@ -3467,11 +3505,11 @@ func (stage *StageStruct) ComputeReverseMaps() {
 		}
 	}
 	clear(stage.RELATION_GROUP_SOURCE_SPECIFICATION_reverseMap)
-	stage.RELATION_GROUP_SOURCE_SPECIFICATION_reverseMap = make(map[*A_SOURCE_SPECIFICATION]*RELATION_GROUP)
+	stage.RELATION_GROUP_SOURCE_SPECIFICATION_reverseMap = make(map[*A_TARGET_SPECIFICATION_1]*RELATION_GROUP)
 	for relation_group := range stage.RELATION_GROUPs {
 		_ = relation_group
-		for _, _a_source_specification := range relation_group.SOURCE_SPECIFICATION {
-			stage.RELATION_GROUP_SOURCE_SPECIFICATION_reverseMap[_a_source_specification] = relation_group
+		for _, _a_target_specification_1 := range relation_group.SOURCE_SPECIFICATION {
+			stage.RELATION_GROUP_SOURCE_SPECIFICATION_reverseMap[_a_target_specification_1] = relation_group
 		}
 	}
 	clear(stage.RELATION_GROUP_SPEC_RELATIONS_reverseMap)
@@ -3480,6 +3518,14 @@ func (stage *StageStruct) ComputeReverseMaps() {
 		_ = relation_group
 		for _, _a_spec_relation_ref := range relation_group.SPEC_RELATIONS {
 			stage.RELATION_GROUP_SPEC_RELATIONS_reverseMap[_a_spec_relation_ref] = relation_group
+		}
+	}
+	clear(stage.RELATION_GROUP_TARGET_SPECIFICATION_reverseMap)
+	stage.RELATION_GROUP_TARGET_SPECIFICATION_reverseMap = make(map[*A_TARGET_SPECIFICATION_1]*RELATION_GROUP)
+	for relation_group := range stage.RELATION_GROUPs {
+		_ = relation_group
+		for _, _a_target_specification_1 := range relation_group.TARGET_SPECIFICATION {
+			stage.RELATION_GROUP_TARGET_SPECIFICATION_reverseMap[_a_target_specification_1] = relation_group
 		}
 	}
 	clear(stage.RELATION_GROUP_TYPE_reverseMap)
@@ -3748,11 +3794,19 @@ func (stage *StageStruct) ComputeReverseMaps() {
 		}
 	}
 	clear(stage.SPEC_RELATION_SOURCE_reverseMap)
-	stage.SPEC_RELATION_SOURCE_reverseMap = make(map[*A_SOURCE]*SPEC_RELATION)
+	stage.SPEC_RELATION_SOURCE_reverseMap = make(map[*A_TARGET_1]*SPEC_RELATION)
 	for spec_relation := range stage.SPEC_RELATIONs {
 		_ = spec_relation
-		for _, _a_source := range spec_relation.SOURCE {
-			stage.SPEC_RELATION_SOURCE_reverseMap[_a_source] = spec_relation
+		for _, _a_target_1 := range spec_relation.SOURCE {
+			stage.SPEC_RELATION_SOURCE_reverseMap[_a_target_1] = spec_relation
+		}
+	}
+	clear(stage.SPEC_RELATION_TARGET_reverseMap)
+	stage.SPEC_RELATION_TARGET_reverseMap = make(map[*A_TARGET_1]*SPEC_RELATION)
+	for spec_relation := range stage.SPEC_RELATIONs {
+		_ = spec_relation
+		for _, _a_target_1 := range spec_relation.TARGET {
+			stage.SPEC_RELATION_TARGET_reverseMap[_a_target_1] = spec_relation
 		}
 	}
 	clear(stage.SPEC_RELATION_TYPE_reverseMap)

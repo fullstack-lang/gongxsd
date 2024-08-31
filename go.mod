@@ -3,8 +3,8 @@ module github.com/fullstack-lang/gongxsd
 go 1.23.0
 
 require (
-	github.com/fullstack-lang/gong v0.0.0-20240816085628-99ca5bc5404d
-	github.com/fullstack-lang/gongdoc v0.0.0-20240827065650-b63072ddee9c
+	github.com/fullstack-lang/gong v0.0.0-20240831002215-4395b4af1bb1
+	github.com/fullstack-lang/gongdoc v0.0.0-20240831012341-ee12ba018308
 	github.com/fullstack-lang/gongtable v0.0.0-20240807014722-c7bc4ee6cbec
 	github.com/fullstack-lang/gongtree v0.0.0-20240827005529-c2093d710c7e
 	github.com/fullstack-lang/maticons v0.0.0-20230823061653-70c364fbdd00

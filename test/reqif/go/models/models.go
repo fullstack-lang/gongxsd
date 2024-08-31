@@ -697,26 +697,6 @@ type A_RELATION_GROUP_TYPE_REF struct {
 	RELATION_GROUP_TYPE_REF string `xml:"RELATION-GROUP-TYPE-REF,omitempty"`
 }
 
-// A_SOURCE Named source within outer element "SOURCE"
-type A_SOURCE struct {
-	Name string `xml:"-"`
-
-	// insertion point for fields
-
-	// generated from element "SPEC-OBJECT-REF" of type GLOBAL-REF order 182 depth 1
-	SPEC_OBJECT_REF string `xml:"SPEC-OBJECT-REF,omitempty"`
-}
-
-// A_SOURCE_SPECIFICATION Named source within outer element "SOURCE-SPECIFICATION"
-type A_SOURCE_SPECIFICATION struct {
-	Name string `xml:"-"`
-
-	// insertion point for fields
-
-	// generated from element "SPECIFICATION-REF" of type GLOBAL-REF order 84 depth 1
-	SPECIFICATION_REF string `xml:"SPECIFICATION-REF,omitempty"`
-}
-
 // A_SPEC_ATTRIBUTES Named source within outer element "SPEC-ATTRIBUTES"
 type A_SPEC_ATTRIBUTES struct {
 	Name string `xml:"-"`
@@ -854,7 +834,27 @@ type A_SPECIFIED_VALUES struct {
 	ENUM_VALUE []*ENUM_VALUE `xml:"ENUM-VALUE,omitempty"`
 }
 
-// A_THE_HEADER Named source within outer element "THE-HEADER"
+// A_TARGET_1 Named source within outer element "SOURCE"
+type A_TARGET_1 struct {
+	Name string `xml:"-"`
+
+	// insertion point for fields
+
+	// generated from element "SPEC-OBJECT-REF" of type GLOBAL-REF order 182 depth 1
+	SPEC_OBJECT_REF string `xml:"SPEC-OBJECT-REF,omitempty"`
+}
+
+// A_TARGET_SPECIFICATION_1 Named source within outer element "SOURCE-SPECIFICATION"
+type A_TARGET_SPECIFICATION_1 struct {
+	Name string `xml:"-"`
+
+	// insertion point for fields
+
+	// generated from element "SPECIFICATION-REF" of type GLOBAL-REF order 84 depth 1
+	SPECIFICATION_REF string `xml:"SPECIFICATION-REF,omitempty"`
+}
+
+// A_THE_HEADER Named source within out	er element "THE-HEADER"
 type A_THE_HEADER struct {
 	Name string `xml:"-"`
 
@@ -1108,11 +1108,14 @@ type RELATION_GROUP struct {
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
 	ALTERNATIVE_ID []*A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
 
-	// generated from anonymous type within outer element "SOURCE-SPECIFICATION" of type A_SOURCE-SPECIFICATION.
-	SOURCE_SPECIFICATION []*A_SOURCE_SPECIFICATION `xml:"SOURCE-SPECIFICATION,omitempty"`
+	// generated from anonymous type within outer element "SOURCE-SPECIFICATION" of type A_TARGET-SPECIFICATION.
+	SOURCE_SPECIFICATION []*A_TARGET_SPECIFICATION_1 `xml:"SOURCE-SPECIFICATION,omitempty"`
 
 	// generated from anonymous type within outer element "SPEC-RELATIONS" of type A_SPEC-RELATION-REF.
 	SPEC_RELATIONS []*A_SPEC_RELATION_REF `xml:"SPEC-RELATIONS,omitempty"`
+
+	// generated from anonymous type within outer element "TARGET-SPECIFICATION" of type A_TARGET-SPECIFICATION.
+	TARGET_SPECIFICATION []*A_TARGET_SPECIFICATION_1 `xml:"TARGET-SPECIFICATION,omitempty"`
 
 	// generated from anonymous type within outer element "TYPE" of type A_RELATION-GROUP-TYPE-REF.
 	TYPE []*A_RELATION_GROUP_TYPE_REF `xml:"TYPE,omitempty"`
@@ -1339,8 +1342,11 @@ type SPEC_RELATION struct {
 	// generated from anonymous type within outer element "VALUES" of type A_ATTRIBUTE-VALUE-XHTML.
 	VALUES []*A_ATTRIBUTE_VALUE_XHTML_1 `xml:"VALUES,omitempty"`
 
-	// generated from anonymous type within outer element "SOURCE" of type A_SOURCE.
-	SOURCE []*A_SOURCE `xml:"SOURCE,omitempty"`
+	// generated from anonymous type within outer element "SOURCE" of type A_TARGET.
+	SOURCE []*A_TARGET_1 `xml:"SOURCE,omitempty"`
+
+	// generated from anonymous type within outer element "TARGET" of type A_TARGET.
+	TARGET []*A_TARGET_1 `xml:"TARGET,omitempty"`
 
 	// generated from anonymous type within outer element "TYPE" of type A_SPEC-RELATION-TYPE-REF.
 	TYPE []*A_SPEC_RELATION_TYPE_REF `xml:"TYPE,omitempty"`

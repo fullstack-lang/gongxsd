@@ -37,7 +37,7 @@ github.com/dustin/go-humanize
 # github.com/frankban/quicktest v1.14.6
 ## explicit; go 1.13
 github.com/frankban/quicktest
-# github.com/fullstack-lang/gong v0.0.0-20240816085628-99ca5bc5404d
+# github.com/fullstack-lang/gong v0.0.0-20240831002215-4395b4af1bb1
 ## explicit; go 1.21.0
 github.com/fullstack-lang/gong/go/controllers
 github.com/fullstack-lang/gong/go/fullstack
@@ -45,7 +45,7 @@ github.com/fullstack-lang/gong/go/ignore
 github.com/fullstack-lang/gong/go/models
 github.com/fullstack-lang/gong/go/orm
 github.com/fullstack-lang/gong/ng-github.com-fullstack-lang-gong/projects
-# github.com/fullstack-lang/gongdoc v0.0.0-20240827065650-b63072ddee9c
+# github.com/fullstack-lang/gongdoc v0.0.0-20240831012341-ee12ba018308
 ## explicit; go 1.21.0
 github.com/fullstack-lang/gongdoc/go/adapter
 github.com/fullstack-lang/gongdoc/go/controllers
