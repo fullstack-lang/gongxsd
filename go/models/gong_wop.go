@@ -129,6 +129,9 @@ type ComplexType_WOP struct {
 	IsAnonymous bool
 	NameXSD string
 	OuterElementName string
+	Order int
+	Depth int
+	IsDuplicatedInXSD bool
 }
 
 func (from *ComplexType) CopyBasicFields(to *ComplexType) {
@@ -139,6 +142,9 @@ func (from *ComplexType) CopyBasicFields(to *ComplexType) {
 	to.IsAnonymous = from.IsAnonymous
 	to.NameXSD = from.NameXSD
 	to.OuterElementName = from.OuterElementName
+	to.Order = from.Order
+	to.Depth = from.Depth
+	to.IsDuplicatedInXSD = from.IsDuplicatedInXSD
 }
 
 type Documentation_WOP struct {

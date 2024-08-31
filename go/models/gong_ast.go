@@ -1367,6 +1367,20 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					// remove first and last char
 					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
 					__gong__map_ComplexType[identifier].OuterElementName = fielValue
+				case "Order":
+					// convert string to int
+					fielValue, err := strconv.ParseInt(basicLit.Value, 10, 64)
+					if err != nil {
+						log.Fatalln(err)
+					}
+					__gong__map_ComplexType[identifier].Order = int(exprSign) * int(fielValue)
+				case "Depth":
+					// convert string to int
+					fielValue, err := strconv.ParseInt(basicLit.Value, 10, 64)
+					if err != nil {
+						log.Fatalln(err)
+					}
+					__gong__map_ComplexType[identifier].Depth = int(exprSign) * int(fielValue)
 				}
 			case "Documentation":
 				switch fieldName {
@@ -1821,6 +1835,13 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 				case "ComplexContent":
 					targetIdentifier := ident.Name
 					__gong__map_ComplexType[identifier].ComplexContent = __gong__map_ComplexContent[targetIdentifier]
+				case "IsDuplicatedInXSD":
+					// convert string to boolean
+					fielValue, err := strconv.ParseBool(ident.Name)
+					if err != nil {
+						log.Fatalln(err)
+					}
+					__gong__map_ComplexType[identifier].IsDuplicatedInXSD = fielValue
 				}
 			case "Documentation":
 				switch fieldName {

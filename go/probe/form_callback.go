@@ -1363,6 +1363,12 @@ func (complextypeFormCallback *ComplexTypeFormCallback) OnSave() {
 			FormDivSelectFieldToField(&(complextype_.SimpleContent), complextypeFormCallback.probe.stageOfInterest, formDiv)
 		case "ComplexContent":
 			FormDivSelectFieldToField(&(complextype_.ComplexContent), complextypeFormCallback.probe.stageOfInterest, formDiv)
+		case "Order":
+			FormDivBasicFieldToField(&(complextype_.Order), formDiv)
+		case "Depth":
+			FormDivBasicFieldToField(&(complextype_.Depth), formDiv)
+		case "IsDuplicatedInXSD":
+			FormDivBasicFieldToField(&(complextype_.IsDuplicatedInXSD), formDiv)
 		case "Schema:ComplexTypes":
 			// we need to retrieve the field owner before the change
 			var pastSchemaOwner *models.Schema

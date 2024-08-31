@@ -854,7 +854,7 @@ type A_TARGET_SPECIFICATION_1 struct {
 	SPECIFICATION_REF string `xml:"SPECIFICATION-REF,omitempty"`
 }
 
-// A_THE_HEADER Named source within outer element "THE-HEADER"
+// A_THE_HEADER Named source within out	er element "THE-HEADER"
 type A_THE_HEADER struct {
 	Name string `xml:"-"`
 

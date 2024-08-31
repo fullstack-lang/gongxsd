@@ -5,12 +5,9 @@ package cmd
 
 import (
 	"log"
-	"path/filepath"
 	"strconv"
 
 	"github.com/spf13/cobra"
-
-	"github.com/fullstack-lang/gongxsd/go/models"
 )
 
 // readCmd represents the read command
@@ -26,11 +23,11 @@ var readCmd = &cobra.Command{
 		stack.Stage.Commit()
 		stack.Probe.Refresh()
 
-		xlFilePath := filepath.Join(
-			filepath.Dir(*outputModelFilePath),
-			"schema.xlsx")
+		// xlFilePath := filepath.Join(
+		// 	filepath.Dir(*outputModelFilePath),
+		// 	"schema.xlsx")
 
-		models.SerializeStage(stack.Stage, xlFilePath)
+		// models.SerializeStage(stack.Stage, xlFilePath)
 
 		log.Printf("Server ready serve on localhost:" + strconv.Itoa(*port))
 		err := r.Run(":" + strconv.Itoa(*port))

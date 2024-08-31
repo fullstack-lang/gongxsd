@@ -119,6 +119,16 @@ type ComplexTypeDB struct {
 
 	// Declation for basic field complextypeDB.OuterElementName
 	OuterElementName_Data sql.NullString
+
+	// Declation for basic field complextypeDB.Order
+	Order_Data sql.NullInt64
+
+	// Declation for basic field complextypeDB.Depth
+	Depth_Data sql.NullInt64
+
+	// Declation for basic field complextypeDB.IsDuplicatedInXSD
+	// provide the sql storage for the boolan
+	IsDuplicatedInXSD_Data sql.NullBool
 	
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
@@ -153,6 +163,12 @@ type ComplexTypeWOP struct {
 	NameXSD string `xlsx:"5"`
 
 	OuterElementName string `xlsx:"6"`
+
+	Order int `xlsx:"7"`
+
+	Depth int `xlsx:"8"`
+
+	IsDuplicatedInXSD bool `xlsx:"9"`
 	// insertion for WOP pointer fields
 }
 
@@ -165,6 +181,9 @@ var ComplexType_Fields = []string{
 	"IsAnonymous",
 	"NameXSD",
 	"OuterElementName",
+	"Order",
+	"Depth",
+	"IsDuplicatedInXSD",
 }
 
 type BackRepoComplexTypeStruct struct {
@@ -722,6 +741,15 @@ func (complextypeDB *ComplexTypeDB) CopyBasicFieldsFromComplexType(complextype *
 
 	complextypeDB.OuterElementName_Data.String = complextype.OuterElementName
 	complextypeDB.OuterElementName_Data.Valid = true
+
+	complextypeDB.Order_Data.Int64 = int64(complextype.Order)
+	complextypeDB.Order_Data.Valid = true
+
+	complextypeDB.Depth_Data.Int64 = int64(complextype.Depth)
+	complextypeDB.Depth_Data.Valid = true
+
+	complextypeDB.IsDuplicatedInXSD_Data.Bool = complextype.IsDuplicatedInXSD
+	complextypeDB.IsDuplicatedInXSD_Data.Valid = true
 }
 
 // CopyBasicFieldsFromComplexType_WOP
@@ -745,6 +773,15 @@ func (complextypeDB *ComplexTypeDB) CopyBasicFieldsFromComplexType_WOP(complexty
 
 	complextypeDB.OuterElementName_Data.String = complextype.OuterElementName
 	complextypeDB.OuterElementName_Data.Valid = true
+
+	complextypeDB.Order_Data.Int64 = int64(complextype.Order)
+	complextypeDB.Order_Data.Valid = true
+
+	complextypeDB.Depth_Data.Int64 = int64(complextype.Depth)
+	complextypeDB.Depth_Data.Valid = true
+
+	complextypeDB.IsDuplicatedInXSD_Data.Bool = complextype.IsDuplicatedInXSD
+	complextypeDB.IsDuplicatedInXSD_Data.Valid = true
 }
 
 // CopyBasicFieldsFromComplexTypeWOP
@@ -768,6 +805,15 @@ func (complextypeDB *ComplexTypeDB) CopyBasicFieldsFromComplexTypeWOP(complextyp
 
 	complextypeDB.OuterElementName_Data.String = complextype.OuterElementName
 	complextypeDB.OuterElementName_Data.Valid = true
+
+	complextypeDB.Order_Data.Int64 = int64(complextype.Order)
+	complextypeDB.Order_Data.Valid = true
+
+	complextypeDB.Depth_Data.Int64 = int64(complextype.Depth)
+	complextypeDB.Depth_Data.Valid = true
+
+	complextypeDB.IsDuplicatedInXSD_Data.Bool = complextype.IsDuplicatedInXSD
+	complextypeDB.IsDuplicatedInXSD_Data.Valid = true
 }
 
 // CopyBasicFieldsToComplexType
@@ -779,6 +825,9 @@ func (complextypeDB *ComplexTypeDB) CopyBasicFieldsToComplexType(complextype *mo
 	complextype.IsAnonymous = complextypeDB.IsAnonymous_Data.Bool
 	complextype.NameXSD = complextypeDB.NameXSD_Data.String
 	complextype.OuterElementName = complextypeDB.OuterElementName_Data.String
+	complextype.Order = int(complextypeDB.Order_Data.Int64)
+	complextype.Depth = int(complextypeDB.Depth_Data.Int64)
+	complextype.IsDuplicatedInXSD = complextypeDB.IsDuplicatedInXSD_Data.Bool
 }
 
 // CopyBasicFieldsToComplexType_WOP
@@ -790,6 +839,9 @@ func (complextypeDB *ComplexTypeDB) CopyBasicFieldsToComplexType_WOP(complextype
 	complextype.IsAnonymous = complextypeDB.IsAnonymous_Data.Bool
 	complextype.NameXSD = complextypeDB.NameXSD_Data.String
 	complextype.OuterElementName = complextypeDB.OuterElementName_Data.String
+	complextype.Order = int(complextypeDB.Order_Data.Int64)
+	complextype.Depth = int(complextypeDB.Depth_Data.Int64)
+	complextype.IsDuplicatedInXSD = complextypeDB.IsDuplicatedInXSD_Data.Bool
 }
 
 // CopyBasicFieldsToComplexTypeWOP
@@ -802,6 +854,9 @@ func (complextypeDB *ComplexTypeDB) CopyBasicFieldsToComplexTypeWOP(complextype 
 	complextype.IsAnonymous = complextypeDB.IsAnonymous_Data.Bool
 	complextype.NameXSD = complextypeDB.NameXSD_Data.String
 	complextype.OuterElementName = complextypeDB.OuterElementName_Data.String
+	complextype.Order = int(complextypeDB.Order_Data.Int64)
+	complextype.Depth = int(complextypeDB.Depth_Data.Int64)
+	complextype.IsDuplicatedInXSD = complextypeDB.IsDuplicatedInXSD_Data.Bool
 }
 
 // Backup generates a json file from a slice of all ComplexTypeDB instances in the backrepo
