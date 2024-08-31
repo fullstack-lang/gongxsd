@@ -360,8 +360,6 @@ var __gong__map_A_ENUM_VALUE_REF = make(map[string]*A_ENUM_VALUE_REF)
 var __gong__map_A_OBJECT = make(map[string]*A_OBJECT)
 var __gong__map_A_PROPERTIES = make(map[string]*A_PROPERTIES)
 var __gong__map_A_RELATION_GROUP_TYPE_REF = make(map[string]*A_RELATION_GROUP_TYPE_REF)
-var __gong__map_A_SOURCE = make(map[string]*A_SOURCE)
-var __gong__map_A_SOURCE_SPECIFICATION = make(map[string]*A_SOURCE_SPECIFICATION)
 var __gong__map_A_SPECIFICATIONS = make(map[string]*A_SPECIFICATIONS)
 var __gong__map_A_SPECIFICATION_TYPE_REF = make(map[string]*A_SPECIFICATION_TYPE_REF)
 var __gong__map_A_SPECIFIED_VALUES = make(map[string]*A_SPECIFIED_VALUES)
@@ -373,6 +371,8 @@ var __gong__map_A_SPEC_RELATION_GROUPS = make(map[string]*A_SPEC_RELATION_GROUPS
 var __gong__map_A_SPEC_RELATION_REF = make(map[string]*A_SPEC_RELATION_REF)
 var __gong__map_A_SPEC_RELATION_TYPE_REF = make(map[string]*A_SPEC_RELATION_TYPE_REF)
 var __gong__map_A_SPEC_TYPES = make(map[string]*A_SPEC_TYPES)
+var __gong__map_A_TARGET_1 = make(map[string]*A_TARGET_1)
+var __gong__map_A_TARGET_SPECIFICATION_1 = make(map[string]*A_TARGET_SPECIFICATION_1)
 var __gong__map_A_THE_HEADER = make(map[string]*A_THE_HEADER)
 var __gong__map_A_TOOL_EXTENSIONS = make(map[string]*A_TOOL_EXTENSIONS)
 var __gong__map_DATATYPE_DEFINITION_BOOLEAN = make(map[string]*DATATYPE_DEFINITION_BOOLEAN)
@@ -754,14 +754,6 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 										instanceA_RELATION_GROUP_TYPE_REF := (&A_RELATION_GROUP_TYPE_REF{Name: instanceName}).Stage(stage)
 										instance = any(instanceA_RELATION_GROUP_TYPE_REF)
 										__gong__map_A_RELATION_GROUP_TYPE_REF[identifier] = instanceA_RELATION_GROUP_TYPE_REF
-									case "A_SOURCE":
-										instanceA_SOURCE := (&A_SOURCE{Name: instanceName}).Stage(stage)
-										instance = any(instanceA_SOURCE)
-										__gong__map_A_SOURCE[identifier] = instanceA_SOURCE
-									case "A_SOURCE_SPECIFICATION":
-										instanceA_SOURCE_SPECIFICATION := (&A_SOURCE_SPECIFICATION{Name: instanceName}).Stage(stage)
-										instance = any(instanceA_SOURCE_SPECIFICATION)
-										__gong__map_A_SOURCE_SPECIFICATION[identifier] = instanceA_SOURCE_SPECIFICATION
 									case "A_SPECIFICATIONS":
 										instanceA_SPECIFICATIONS := (&A_SPECIFICATIONS{Name: instanceName}).Stage(stage)
 										instance = any(instanceA_SPECIFICATIONS)
@@ -806,6 +798,14 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 										instanceA_SPEC_TYPES := (&A_SPEC_TYPES{Name: instanceName}).Stage(stage)
 										instance = any(instanceA_SPEC_TYPES)
 										__gong__map_A_SPEC_TYPES[identifier] = instanceA_SPEC_TYPES
+									case "A_TARGET_1":
+										instanceA_TARGET_1 := (&A_TARGET_1{Name: instanceName}).Stage(stage)
+										instance = any(instanceA_TARGET_1)
+										__gong__map_A_TARGET_1[identifier] = instanceA_TARGET_1
+									case "A_TARGET_SPECIFICATION_1":
+										instanceA_TARGET_SPECIFICATION_1 := (&A_TARGET_SPECIFICATION_1{Name: instanceName}).Stage(stage)
+										instance = any(instanceA_TARGET_SPECIFICATION_1)
+										__gong__map_A_TARGET_SPECIFICATION_1[identifier] = instanceA_TARGET_SPECIFICATION_1
 									case "A_THE_HEADER":
 										instanceA_THE_HEADER := (&A_THE_HEADER{Name: instanceName}).Stage(stage)
 										instance = any(instanceA_THE_HEADER)
@@ -1126,14 +1126,6 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 							switch fieldName {
 							// insertion point for date assign code
 							}
-						case "A_SOURCE":
-							switch fieldName {
-							// insertion point for date assign code
-							}
-						case "A_SOURCE_SPECIFICATION":
-							switch fieldName {
-							// insertion point for date assign code
-							}
 						case "A_SPECIFICATIONS":
 							switch fieldName {
 							// insertion point for date assign code
@@ -1175,6 +1167,14 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 							// insertion point for date assign code
 							}
 						case "A_SPEC_TYPES":
+							switch fieldName {
+							// insertion point for date assign code
+							}
+						case "A_TARGET_1":
+							switch fieldName {
+							// insertion point for date assign code
+							}
+						case "A_TARGET_SPECIFICATION_1":
 							switch fieldName {
 							// insertion point for date assign code
 							}
@@ -1823,14 +1823,6 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 						switch fieldName {
 						// insertion point for slice of pointers assign code
 						}
-					case "A_SOURCE":
-						switch fieldName {
-						// insertion point for slice of pointers assign code
-						}
-					case "A_SOURCE_SPECIFICATION":
-						switch fieldName {
-						// insertion point for slice of pointers assign code
-						}
 					case "A_SPECIFICATIONS":
 						switch fieldName {
 						// insertion point for slice of pointers assign code
@@ -1971,6 +1963,14 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 							__gong__map_A_SPEC_TYPES[identifier].SPECIFICATION_TYPE =
 								append(__gong__map_A_SPEC_TYPES[identifier].SPECIFICATION_TYPE, target)
 						}
+					case "A_TARGET_1":
+						switch fieldName {
+						// insertion point for slice of pointers assign code
+						}
+					case "A_TARGET_SPECIFICATION_1":
+						switch fieldName {
+						// insertion point for slice of pointers assign code
+						}
 					case "A_THE_HEADER":
 						switch fieldName {
 						// insertion point for slice of pointers assign code
@@ -2099,7 +2099,7 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 						case "SOURCE_SPECIFICATION":
 							// remove first and last char
 							targetIdentifier := ident.Name
-							target := __gong__map_A_SOURCE_SPECIFICATION[targetIdentifier]
+							target := __gong__map_A_TARGET_SPECIFICATION_1[targetIdentifier]
 							__gong__map_RELATION_GROUP[identifier].SOURCE_SPECIFICATION =
 								append(__gong__map_RELATION_GROUP[identifier].SOURCE_SPECIFICATION, target)
 						case "SPEC_RELATIONS":
@@ -2108,6 +2108,12 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 							target := __gong__map_A_SPEC_RELATION_REF[targetIdentifier]
 							__gong__map_RELATION_GROUP[identifier].SPEC_RELATIONS =
 								append(__gong__map_RELATION_GROUP[identifier].SPEC_RELATIONS, target)
+						case "TARGET_SPECIFICATION":
+							// remove first and last char
+							targetIdentifier := ident.Name
+							target := __gong__map_A_TARGET_SPECIFICATION_1[targetIdentifier]
+							__gong__map_RELATION_GROUP[identifier].TARGET_SPECIFICATION =
+								append(__gong__map_RELATION_GROUP[identifier].TARGET_SPECIFICATION, target)
 						case "TYPE":
 							// remove first and last char
 							targetIdentifier := ident.Name
@@ -2329,9 +2335,15 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 						case "SOURCE":
 							// remove first and last char
 							targetIdentifier := ident.Name
-							target := __gong__map_A_SOURCE[targetIdentifier]
+							target := __gong__map_A_TARGET_1[targetIdentifier]
 							__gong__map_SPEC_RELATION[identifier].SOURCE =
 								append(__gong__map_SPEC_RELATION[identifier].SOURCE, target)
+						case "TARGET":
+							// remove first and last char
+							targetIdentifier := ident.Name
+							target := __gong__map_A_TARGET_1[targetIdentifier]
+							__gong__map_SPEC_RELATION[identifier].TARGET =
+								append(__gong__map_SPEC_RELATION[identifier].TARGET, target)
 						case "TYPE":
 							// remove first and last char
 							targetIdentifier := ident.Name
@@ -3010,30 +3022,6 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
 					__gong__map_A_RELATION_GROUP_TYPE_REF[identifier].RELATION_GROUP_TYPE_REF = fielValue
 				}
-			case "A_SOURCE":
-				switch fieldName {
-				// insertion point for field dependant code
-				case "Name":
-					// remove first and last char
-					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
-					__gong__map_A_SOURCE[identifier].Name = fielValue
-				case "SPEC_OBJECT_REF":
-					// remove first and last char
-					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
-					__gong__map_A_SOURCE[identifier].SPEC_OBJECT_REF = fielValue
-				}
-			case "A_SOURCE_SPECIFICATION":
-				switch fieldName {
-				// insertion point for field dependant code
-				case "Name":
-					// remove first and last char
-					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
-					__gong__map_A_SOURCE_SPECIFICATION[identifier].Name = fielValue
-				case "SPECIFICATION_REF":
-					// remove first and last char
-					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
-					__gong__map_A_SOURCE_SPECIFICATION[identifier].SPECIFICATION_REF = fielValue
-				}
 			case "A_SPECIFICATIONS":
 				switch fieldName {
 				// insertion point for field dependant code
@@ -3137,6 +3125,30 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					// remove first and last char
 					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
 					__gong__map_A_SPEC_TYPES[identifier].Name = fielValue
+				}
+			case "A_TARGET_1":
+				switch fieldName {
+				// insertion point for field dependant code
+				case "Name":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_A_TARGET_1[identifier].Name = fielValue
+				case "SPEC_OBJECT_REF":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_A_TARGET_1[identifier].SPEC_OBJECT_REF = fielValue
+				}
+			case "A_TARGET_SPECIFICATION_1":
+				switch fieldName {
+				// insertion point for field dependant code
+				case "Name":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_A_TARGET_SPECIFICATION_1[identifier].Name = fielValue
+				case "SPECIFICATION_REF":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_A_TARGET_SPECIFICATION_1[identifier].SPECIFICATION_REF = fielValue
 				}
 			case "A_THE_HEADER":
 				switch fieldName {
@@ -3967,14 +3979,6 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 				switch fieldName {
 				// insertion point for field dependant code
 				}
-			case "A_SOURCE":
-				switch fieldName {
-				// insertion point for field dependant code
-				}
-			case "A_SOURCE_SPECIFICATION":
-				switch fieldName {
-				// insertion point for field dependant code
-				}
 			case "A_SPECIFICATIONS":
 				switch fieldName {
 				// insertion point for field dependant code
@@ -4016,6 +4020,14 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 				// insertion point for field dependant code
 				}
 			case "A_SPEC_TYPES":
+				switch fieldName {
+				// insertion point for field dependant code
+				}
+			case "A_TARGET_1":
+				switch fieldName {
+				// insertion point for field dependant code
+				}
+			case "A_TARGET_SPECIFICATION_1":
 				switch fieldName {
 				// insertion point for field dependant code
 				}
@@ -4345,14 +4357,6 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					switch fieldName {
 					// insertion point for enum assign code
 					}
-				case "A_SOURCE":
-					switch fieldName {
-					// insertion point for enum assign code
-					}
-				case "A_SOURCE_SPECIFICATION":
-					switch fieldName {
-					// insertion point for enum assign code
-					}
 				case "A_SPECIFICATIONS":
 					switch fieldName {
 					// insertion point for enum assign code
@@ -4394,6 +4398,14 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					// insertion point for enum assign code
 					}
 				case "A_SPEC_TYPES":
+					switch fieldName {
+					// insertion point for enum assign code
+					}
+				case "A_TARGET_1":
+					switch fieldName {
+					// insertion point for enum assign code
+					}
+				case "A_TARGET_SPECIFICATION_1":
 					switch fieldName {
 					// insertion point for enum assign code
 					}

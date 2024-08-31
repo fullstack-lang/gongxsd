@@ -2,6 +2,7 @@ package models
 
 import (
 	"cmp"
+	"log"
 	"slices"
 	"sort"
 	"strconv"
@@ -42,7 +43,7 @@ func (schema *Schema) FactorDuplicates() {
 
 	// log.Println("")
 
-	// Step 4
+	// Step 4 : elements within alls
 	map_ElementsWithinAlls := make(map[elementId][]*Element)
 	schema.extractMapOfElementsWithinAll(map_ElementsWithinAlls)
 	schema.analyseMapOfElementWithinAlls(map_ElementsWithinAlls)
@@ -62,10 +63,11 @@ func (schema *Schema) FactorDuplicates() {
 //
 
 type elementId struct {
-	minOccurs   int
-	maxOccurs   int
-	elementName string
-	elementType string
+	elementName       string
+	minOccurs         int
+	maxOccurs         int
+	choiceElementName string
+	choiceElementType string
 }
 
 func genElementId(element *Element) (res elementId) {
@@ -75,10 +77,11 @@ func genElementId(element *Element) (res elementId) {
 	minOccurs, _ := strconv.Atoi(choice.MinOccurs)
 	maxOccurs, _ := strconv.Atoi(choice.MaxOccurs)
 	res = elementId{
-		minOccurs:   minOccurs,
-		maxOccurs:   maxOccurs,
-		elementName: choice.Elements[0].NameXSD,
-		elementType: choice.Elements[0].Type,
+		elementName:       element.NameXSD,
+		minOccurs:         minOccurs,
+		maxOccurs:         maxOccurs,
+		choiceElementName: choice.Elements[0].NameXSD,
+		choiceElementType: choice.Elements[0].Type,
 	}
 	return
 }
@@ -110,14 +113,16 @@ func (schema *Schema) extractMapOfElementsWithinAll(map_Elements map[elementId][
 }
 
 func (*Schema) analyseMapOfElementWithinAlls(map_Elements map[elementId][]*Element) {
-	elements := maps.Keys(map_Elements)
-	slices.SortFunc(elements, func(a, b elementId) int {
-		return cmp.Compare(a.elementName, b.elementName)
+	elementIds := maps.Keys(map_Elements)
+	slices.SortFunc(elementIds, func(a, b elementId) int {
+		return cmp.Compare(a.choiceElementName, b.choiceElementName)
 	})
 
-	for _, elementId := range elements {
-		_ = elementId
-		// log.Println("element", elementId.elementName, elementId.elementType, len(map_Elements[elementId]))
+	for _, elementId := range elementIds {
+		elements, ok := map_Elements[elementId]
+		if ok {
+			log.Println("element", elements[0].NameXSD, elementId.choiceElementName, elementId.choiceElementType, len(map_Elements[elementId]))
+		}
 	}
 }
 
@@ -125,7 +130,7 @@ func (*Schema) factorElementsWithinAlls(map_ElementsWithinAlls map[elementId][]*
 
 	elements := maps.Keys(map_ElementsWithinAlls)
 	slices.SortFunc(elements, func(a, b elementId) int {
-		return cmp.Compare(a.elementName, b.elementName)
+		return cmp.Compare(a.choiceElementName, b.choiceElementName)
 	})
 
 	for _, elementId := range elements {
@@ -156,10 +161,10 @@ func (*Schema) factorElementsWithinAlls(map_ElementsWithinAlls map[elementId][]*
 //
 
 type complexTypeId struct {
-	minOccurs   int
-	maxOccurs   int
-	elementName string
-	elementType string
+	minOccurs         int
+	maxOccurs         int
+	choiceElementName string
+	choiceElementType string
 }
 
 func genComplexTypeId(complexType *ComplexType) (res complexTypeId) {
@@ -169,10 +174,10 @@ func genComplexTypeId(complexType *ComplexType) (res complexTypeId) {
 	minOccurs, _ := strconv.Atoi(choice.MinOccurs)
 	maxOccurs, _ := strconv.Atoi(choice.MaxOccurs)
 	res = complexTypeId{
-		minOccurs:   minOccurs,
-		maxOccurs:   maxOccurs,
-		elementName: choice.Elements[0].NameXSD,
-		elementType: choice.Elements[0].Type,
+		minOccurs:         minOccurs,
+		maxOccurs:         maxOccurs,
+		choiceElementName: choice.Elements[0].NameXSD,
+		choiceElementType: choice.Elements[0].Type,
 	}
 	return
 }
@@ -206,7 +211,7 @@ func (schema *Schema) extractMapOfComplexTypesWithinElements(map_ComplexTypes ma
 func (*Schema) analyseMapOfComplexTypes(map_ComplexTypes map[complexTypeId][]*ComplexType) {
 	complextypes := maps.Keys(map_ComplexTypes)
 	slices.SortFunc(complextypes, func(a, b complexTypeId) int {
-		return cmp.Compare(a.elementName, b.elementName)
+		return cmp.Compare(a.choiceElementName, b.choiceElementName)
 	})
 
 	for _, complextypeId := range complextypes {
@@ -219,7 +224,7 @@ func (*Schema) factorComplexTypesWithinElements(map_ComplexTypes map[complexType
 
 	complextypes := maps.Keys(map_ComplexTypes)
 	slices.SortFunc(complextypes, func(a, b complexTypeId) int {
-		return cmp.Compare(a.elementName, b.elementName)
+		return cmp.Compare(a.choiceElementName, b.choiceElementName)
 	})
 
 	for _, complextypeId := range complextypes {
@@ -247,10 +252,10 @@ func (*Schema) factorComplexTypesWithinElements(map_ComplexTypes map[complexType
 
 // if choice is with only those elements, one can factor them
 type choiceId struct {
-	minOccurs   int
-	maxOccurs   int
-	elementName string
-	elementType string
+	minOccurs         int
+	maxOccurs         int
+	choiceElementName string
+	choiceElementType string
 }
 
 // choices within complex type
@@ -259,10 +264,10 @@ func genChoiceId(choice *Choice) (res choiceId) {
 	minOccurs, _ := strconv.Atoi(choice.MinOccurs)
 	maxOccurs, _ := strconv.Atoi(choice.MaxOccurs)
 	res = choiceId{
-		minOccurs:   minOccurs,
-		maxOccurs:   maxOccurs,
-		elementName: choice.Elements[0].NameXSD,
-		elementType: choice.Elements[0].Type,
+		minOccurs:         minOccurs,
+		maxOccurs:         maxOccurs,
+		choiceElementName: choice.Elements[0].NameXSD,
+		choiceElementType: choice.Elements[0].Type,
 	}
 	return
 }
@@ -298,7 +303,7 @@ func (schema *Schema) extractMapOfChoicesWithinComplexTypes(map_Choices map[choi
 func (*Schema) analyseMapOfChoices(map_Choices map[choiceId][]*Choice) {
 	choices := maps.Keys(map_Choices)
 	slices.SortFunc(choices, func(a, b choiceId) int {
-		return cmp.Compare(a.elementName, b.elementName)
+		return cmp.Compare(a.choiceElementName, b.choiceElementName)
 	})
 
 	for _, choiceId := range choices {

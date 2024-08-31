@@ -2176,64 +2176,6 @@ func FillUpForm[T models.Gongstruct](
 			}
 		}
 
-	case *models.A_SOURCE:
-		// insertion point
-		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		BasicFieldtoForm("SPEC_OBJECT_REF", instanceWithInferedType.SPEC_OBJECT_REF, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		{
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "SPEC_RELATION"
-			rf.Fieldname = "SOURCE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
-			if reverseFieldOwner != nil {
-				AssociationReverseFieldToForm(
-					reverseFieldOwner.(*models.SPEC_RELATION),
-					"SOURCE",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			} else {
-				AssociationReverseFieldToForm[*models.SPEC_RELATION, *models.A_SOURCE](
-					nil,
-					"SOURCE",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			}
-		}
-
-	case *models.A_SOURCE_SPECIFICATION:
-		// insertion point
-		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		BasicFieldtoForm("SPECIFICATION_REF", instanceWithInferedType.SPECIFICATION_REF, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
-		{
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "RELATION_GROUP"
-			rf.Fieldname = "SOURCE_SPECIFICATION"
-			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
-			if reverseFieldOwner != nil {
-				AssociationReverseFieldToForm(
-					reverseFieldOwner.(*models.RELATION_GROUP),
-					"SOURCE_SPECIFICATION",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			} else {
-				AssociationReverseFieldToForm[*models.RELATION_GROUP, *models.A_SOURCE_SPECIFICATION](
-					nil,
-					"SOURCE_SPECIFICATION",
-					instanceWithInferedType,
-					formGroup,
-					probe)
-			}
-		}
-
 	case *models.A_SPECIFICATIONS:
 		// insertion point
 		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
@@ -2615,6 +2557,108 @@ func FillUpForm[T models.Gongstruct](
 				AssociationReverseFieldToForm[*models.REQ_IF_CONTENT, *models.A_SPEC_TYPES](
 					nil,
 					"SPEC_TYPES",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
+
+	case *models.A_TARGET_1:
+		// insertion point
+		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		BasicFieldtoForm("SPEC_OBJECT_REF", instanceWithInferedType.SPEC_OBJECT_REF, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		{
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "SPEC_RELATION"
+			rf.Fieldname = "SOURCE"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.SPEC_RELATION),
+					"SOURCE",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.SPEC_RELATION, *models.A_TARGET_1](
+					nil,
+					"SOURCE",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
+		{
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "SPEC_RELATION"
+			rf.Fieldname = "TARGET"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.SPEC_RELATION),
+					"TARGET",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.SPEC_RELATION, *models.A_TARGET_1](
+					nil,
+					"TARGET",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
+
+	case *models.A_TARGET_SPECIFICATION_1:
+		// insertion point
+		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		BasicFieldtoForm("SPECIFICATION_REF", instanceWithInferedType.SPECIFICATION_REF, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		{
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "RELATION_GROUP"
+			rf.Fieldname = "SOURCE_SPECIFICATION"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.RELATION_GROUP),
+					"SOURCE_SPECIFICATION",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.RELATION_GROUP, *models.A_TARGET_SPECIFICATION_1](
+					nil,
+					"SOURCE_SPECIFICATION",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
+		{
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "RELATION_GROUP"
+			rf.Fieldname = "TARGET_SPECIFICATION"
+			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.RELATION_GROUP),
+					"TARGET_SPECIFICATION",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.RELATION_GROUP, *models.A_TARGET_SPECIFICATION_1](
+					nil,
+					"TARGET_SPECIFICATION",
 					instanceWithInferedType,
 					formGroup,
 					probe)
@@ -3025,6 +3069,7 @@ func FillUpForm[T models.Gongstruct](
 		AssociationSliceToForm("ALTERNATIVE_ID", instanceWithInferedType, &instanceWithInferedType.ALTERNATIVE_ID, formGroup, probe)
 		AssociationSliceToForm("SOURCE_SPECIFICATION", instanceWithInferedType, &instanceWithInferedType.SOURCE_SPECIFICATION, formGroup, probe)
 		AssociationSliceToForm("SPEC_RELATIONS", instanceWithInferedType, &instanceWithInferedType.SPEC_RELATIONS, formGroup, probe)
+		AssociationSliceToForm("TARGET_SPECIFICATION", instanceWithInferedType, &instanceWithInferedType.TARGET_SPECIFICATION, formGroup, probe)
 		AssociationSliceToForm("TYPE", instanceWithInferedType, &instanceWithInferedType.TYPE, formGroup, probe)
 		{
 			var rf models.ReverseField
@@ -3408,6 +3453,7 @@ func FillUpForm[T models.Gongstruct](
 		AssociationSliceToForm("ALTERNATIVE_ID", instanceWithInferedType, &instanceWithInferedType.ALTERNATIVE_ID, formGroup, probe)
 		AssociationSliceToForm("VALUES", instanceWithInferedType, &instanceWithInferedType.VALUES, formGroup, probe)
 		AssociationSliceToForm("SOURCE", instanceWithInferedType, &instanceWithInferedType.SOURCE, formGroup, probe)
+		AssociationSliceToForm("TARGET", instanceWithInferedType, &instanceWithInferedType.TARGET, formGroup, probe)
 		AssociationSliceToForm("TYPE", instanceWithInferedType, &instanceWithInferedType.TYPE, formGroup, probe)
 		{
 			var rf models.ReverseField

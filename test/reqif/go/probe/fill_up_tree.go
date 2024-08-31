@@ -522,26 +522,6 @@ func fillUpTree(
 
 				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
 			}
-		case "A_SOURCE":
-			nodeGongstruct.Name = name
-			set := *models.GetGongstructInstancesSet[models.A_SOURCE](probe.stageOfInterest)
-			for _a_source := range set {
-				nodeInstance := (&tree.Node{Name: _a_source.GetName()}).Stage(probe.treeStage)
-				nodeInstance.IsNodeClickable = true
-				nodeInstance.Impl = NewInstanceNodeCallback(_a_source, "A_SOURCE", probe)
-
-				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
-			}
-		case "A_SOURCE_SPECIFICATION":
-			nodeGongstruct.Name = name
-			set := *models.GetGongstructInstancesSet[models.A_SOURCE_SPECIFICATION](probe.stageOfInterest)
-			for _a_source_specification := range set {
-				nodeInstance := (&tree.Node{Name: _a_source_specification.GetName()}).Stage(probe.treeStage)
-				nodeInstance.IsNodeClickable = true
-				nodeInstance.Impl = NewInstanceNodeCallback(_a_source_specification, "A_SOURCE_SPECIFICATION", probe)
-
-				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
-			}
 		case "A_SPECIFICATIONS":
 			nodeGongstruct.Name = name
 			set := *models.GetGongstructInstancesSet[models.A_SPECIFICATIONS](probe.stageOfInterest)
@@ -649,6 +629,26 @@ func fillUpTree(
 				nodeInstance := (&tree.Node{Name: _a_spec_types.GetName()}).Stage(probe.treeStage)
 				nodeInstance.IsNodeClickable = true
 				nodeInstance.Impl = NewInstanceNodeCallback(_a_spec_types, "A_SPEC_TYPES", probe)
+
+				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
+			}
+		case "A_TARGET_1":
+			nodeGongstruct.Name = name
+			set := *models.GetGongstructInstancesSet[models.A_TARGET_1](probe.stageOfInterest)
+			for _a_target_1 := range set {
+				nodeInstance := (&tree.Node{Name: _a_target_1.GetName()}).Stage(probe.treeStage)
+				nodeInstance.IsNodeClickable = true
+				nodeInstance.Impl = NewInstanceNodeCallback(_a_target_1, "A_TARGET_1", probe)
+
+				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
+			}
+		case "A_TARGET_SPECIFICATION_1":
+			nodeGongstruct.Name = name
+			set := *models.GetGongstructInstancesSet[models.A_TARGET_SPECIFICATION_1](probe.stageOfInterest)
+			for _a_target_specification_1 := range set {
+				nodeInstance := (&tree.Node{Name: _a_target_specification_1.GetName()}).Stage(probe.treeStage)
+				nodeInstance.IsNodeClickable = true
+				nodeInstance.Impl = NewInstanceNodeCallback(_a_target_specification_1, "A_TARGET_SPECIFICATION_1", probe)
 
 				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
 			}

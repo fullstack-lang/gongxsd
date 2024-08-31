@@ -575,24 +575,6 @@ type StageStruct struct {
 	OnAfterA_RELATION_GROUP_TYPE_REFDeleteCallback OnAfterDeleteInterface[A_RELATION_GROUP_TYPE_REF]
 	OnAfterA_RELATION_GROUP_TYPE_REFReadCallback   OnAfterReadInterface[A_RELATION_GROUP_TYPE_REF]
 
-	A_SOURCEs           map[*A_SOURCE]any
-	A_SOURCEs_mapString map[string]*A_SOURCE
-
-	// insertion point for slice of pointers maps
-	OnAfterA_SOURCECreateCallback OnAfterCreateInterface[A_SOURCE]
-	OnAfterA_SOURCEUpdateCallback OnAfterUpdateInterface[A_SOURCE]
-	OnAfterA_SOURCEDeleteCallback OnAfterDeleteInterface[A_SOURCE]
-	OnAfterA_SOURCEReadCallback   OnAfterReadInterface[A_SOURCE]
-
-	A_SOURCE_SPECIFICATIONs           map[*A_SOURCE_SPECIFICATION]any
-	A_SOURCE_SPECIFICATIONs_mapString map[string]*A_SOURCE_SPECIFICATION
-
-	// insertion point for slice of pointers maps
-	OnAfterA_SOURCE_SPECIFICATIONCreateCallback OnAfterCreateInterface[A_SOURCE_SPECIFICATION]
-	OnAfterA_SOURCE_SPECIFICATIONUpdateCallback OnAfterUpdateInterface[A_SOURCE_SPECIFICATION]
-	OnAfterA_SOURCE_SPECIFICATIONDeleteCallback OnAfterDeleteInterface[A_SOURCE_SPECIFICATION]
-	OnAfterA_SOURCE_SPECIFICATIONReadCallback   OnAfterReadInterface[A_SOURCE_SPECIFICATION]
-
 	A_SPECIFICATIONSs           map[*A_SPECIFICATIONS]any
 	A_SPECIFICATIONSs_mapString map[string]*A_SPECIFICATIONS
 
@@ -724,6 +706,24 @@ type StageStruct struct {
 	OnAfterA_SPEC_TYPESDeleteCallback OnAfterDeleteInterface[A_SPEC_TYPES]
 	OnAfterA_SPEC_TYPESReadCallback   OnAfterReadInterface[A_SPEC_TYPES]
 
+	A_TARGET_1s           map[*A_TARGET_1]any
+	A_TARGET_1s_mapString map[string]*A_TARGET_1
+
+	// insertion point for slice of pointers maps
+	OnAfterA_TARGET_1CreateCallback OnAfterCreateInterface[A_TARGET_1]
+	OnAfterA_TARGET_1UpdateCallback OnAfterUpdateInterface[A_TARGET_1]
+	OnAfterA_TARGET_1DeleteCallback OnAfterDeleteInterface[A_TARGET_1]
+	OnAfterA_TARGET_1ReadCallback   OnAfterReadInterface[A_TARGET_1]
+
+	A_TARGET_SPECIFICATION_1s           map[*A_TARGET_SPECIFICATION_1]any
+	A_TARGET_SPECIFICATION_1s_mapString map[string]*A_TARGET_SPECIFICATION_1
+
+	// insertion point for slice of pointers maps
+	OnAfterA_TARGET_SPECIFICATION_1CreateCallback OnAfterCreateInterface[A_TARGET_SPECIFICATION_1]
+	OnAfterA_TARGET_SPECIFICATION_1UpdateCallback OnAfterUpdateInterface[A_TARGET_SPECIFICATION_1]
+	OnAfterA_TARGET_SPECIFICATION_1DeleteCallback OnAfterDeleteInterface[A_TARGET_SPECIFICATION_1]
+	OnAfterA_TARGET_SPECIFICATION_1ReadCallback   OnAfterReadInterface[A_TARGET_SPECIFICATION_1]
+
 	A_THE_HEADERs           map[*A_THE_HEADER]any
 	A_THE_HEADERs_mapString map[string]*A_THE_HEADER
 
@@ -853,9 +853,11 @@ type StageStruct struct {
 	// insertion point for slice of pointers maps
 	RELATION_GROUP_ALTERNATIVE_ID_reverseMap map[*A_ALTERNATIVE_ID]*RELATION_GROUP
 
-	RELATION_GROUP_SOURCE_SPECIFICATION_reverseMap map[*A_SOURCE_SPECIFICATION]*RELATION_GROUP
+	RELATION_GROUP_SOURCE_SPECIFICATION_reverseMap map[*A_TARGET_SPECIFICATION_1]*RELATION_GROUP
 
 	RELATION_GROUP_SPEC_RELATIONS_reverseMap map[*A_SPEC_RELATION_REF]*RELATION_GROUP
+
+	RELATION_GROUP_TARGET_SPECIFICATION_reverseMap map[*A_TARGET_SPECIFICATION_1]*RELATION_GROUP
 
 	RELATION_GROUP_TYPE_reverseMap map[*A_RELATION_GROUP_TYPE_REF]*RELATION_GROUP
 
@@ -1014,7 +1016,9 @@ type StageStruct struct {
 
 	SPEC_RELATION_VALUES_reverseMap map[*A_ATTRIBUTE_VALUE_XHTML_1]*SPEC_RELATION
 
-	SPEC_RELATION_SOURCE_reverseMap map[*A_SOURCE]*SPEC_RELATION
+	SPEC_RELATION_SOURCE_reverseMap map[*A_TARGET_1]*SPEC_RELATION
+
+	SPEC_RELATION_TARGET_reverseMap map[*A_TARGET_1]*SPEC_RELATION
 
 	SPEC_RELATION_TYPE_reverseMap map[*A_SPEC_RELATION_TYPE_REF]*SPEC_RELATION
 
@@ -1205,10 +1209,6 @@ type BackRepoInterface interface {
 	CheckoutA_PROPERTIES(a_properties *A_PROPERTIES)
 	CommitA_RELATION_GROUP_TYPE_REF(a_relation_group_type_ref *A_RELATION_GROUP_TYPE_REF)
 	CheckoutA_RELATION_GROUP_TYPE_REF(a_relation_group_type_ref *A_RELATION_GROUP_TYPE_REF)
-	CommitA_SOURCE(a_source *A_SOURCE)
-	CheckoutA_SOURCE(a_source *A_SOURCE)
-	CommitA_SOURCE_SPECIFICATION(a_source_specification *A_SOURCE_SPECIFICATION)
-	CheckoutA_SOURCE_SPECIFICATION(a_source_specification *A_SOURCE_SPECIFICATION)
 	CommitA_SPECIFICATIONS(a_specifications *A_SPECIFICATIONS)
 	CheckoutA_SPECIFICATIONS(a_specifications *A_SPECIFICATIONS)
 	CommitA_SPECIFICATION_TYPE_REF(a_specification_type_ref *A_SPECIFICATION_TYPE_REF)
@@ -1231,6 +1231,10 @@ type BackRepoInterface interface {
 	CheckoutA_SPEC_RELATION_TYPE_REF(a_spec_relation_type_ref *A_SPEC_RELATION_TYPE_REF)
 	CommitA_SPEC_TYPES(a_spec_types *A_SPEC_TYPES)
 	CheckoutA_SPEC_TYPES(a_spec_types *A_SPEC_TYPES)
+	CommitA_TARGET_1(a_target_1 *A_TARGET_1)
+	CheckoutA_TARGET_1(a_target_1 *A_TARGET_1)
+	CommitA_TARGET_SPECIFICATION_1(a_target_specification_1 *A_TARGET_SPECIFICATION_1)
+	CheckoutA_TARGET_SPECIFICATION_1(a_target_specification_1 *A_TARGET_SPECIFICATION_1)
 	CommitA_THE_HEADER(a_the_header *A_THE_HEADER)
 	CheckoutA_THE_HEADER(a_the_header *A_THE_HEADER)
 	CommitA_TOOL_EXTENSIONS(a_tool_extensions *A_TOOL_EXTENSIONS)
@@ -1426,12 +1430,6 @@ func NewStage(path string) (stage *StageStruct) {
 		A_RELATION_GROUP_TYPE_REFs:           make(map[*A_RELATION_GROUP_TYPE_REF]any),
 		A_RELATION_GROUP_TYPE_REFs_mapString: make(map[string]*A_RELATION_GROUP_TYPE_REF),
 
-		A_SOURCEs:           make(map[*A_SOURCE]any),
-		A_SOURCEs_mapString: make(map[string]*A_SOURCE),
-
-		A_SOURCE_SPECIFICATIONs:           make(map[*A_SOURCE_SPECIFICATION]any),
-		A_SOURCE_SPECIFICATIONs_mapString: make(map[string]*A_SOURCE_SPECIFICATION),
-
 		A_SPECIFICATIONSs:           make(map[*A_SPECIFICATIONS]any),
 		A_SPECIFICATIONSs_mapString: make(map[string]*A_SPECIFICATIONS),
 
@@ -1464,6 +1462,12 @@ func NewStage(path string) (stage *StageStruct) {
 
 		A_SPEC_TYPESs:           make(map[*A_SPEC_TYPES]any),
 		A_SPEC_TYPESs_mapString: make(map[string]*A_SPEC_TYPES),
+
+		A_TARGET_1s:           make(map[*A_TARGET_1]any),
+		A_TARGET_1s_mapString: make(map[string]*A_TARGET_1),
+
+		A_TARGET_SPECIFICATION_1s:           make(map[*A_TARGET_SPECIFICATION_1]any),
+		A_TARGET_SPECIFICATION_1s_mapString: make(map[string]*A_TARGET_SPECIFICATION_1),
 
 		A_THE_HEADERs:           make(map[*A_THE_HEADER]any),
 		A_THE_HEADERs_mapString: make(map[string]*A_THE_HEADER),
@@ -1619,8 +1623,6 @@ func (stage *StageStruct) Commit() {
 	stage.Map_GongStructName_InstancesNb["A_OBJECT"] = len(stage.A_OBJECTs)
 	stage.Map_GongStructName_InstancesNb["A_PROPERTIES"] = len(stage.A_PROPERTIESs)
 	stage.Map_GongStructName_InstancesNb["A_RELATION_GROUP_TYPE_REF"] = len(stage.A_RELATION_GROUP_TYPE_REFs)
-	stage.Map_GongStructName_InstancesNb["A_SOURCE"] = len(stage.A_SOURCEs)
-	stage.Map_GongStructName_InstancesNb["A_SOURCE_SPECIFICATION"] = len(stage.A_SOURCE_SPECIFICATIONs)
 	stage.Map_GongStructName_InstancesNb["A_SPECIFICATIONS"] = len(stage.A_SPECIFICATIONSs)
 	stage.Map_GongStructName_InstancesNb["A_SPECIFICATION_TYPE_REF"] = len(stage.A_SPECIFICATION_TYPE_REFs)
 	stage.Map_GongStructName_InstancesNb["A_SPECIFIED_VALUES"] = len(stage.A_SPECIFIED_VALUESs)
@@ -1632,6 +1634,8 @@ func (stage *StageStruct) Commit() {
 	stage.Map_GongStructName_InstancesNb["A_SPEC_RELATION_REF"] = len(stage.A_SPEC_RELATION_REFs)
 	stage.Map_GongStructName_InstancesNb["A_SPEC_RELATION_TYPE_REF"] = len(stage.A_SPEC_RELATION_TYPE_REFs)
 	stage.Map_GongStructName_InstancesNb["A_SPEC_TYPES"] = len(stage.A_SPEC_TYPESs)
+	stage.Map_GongStructName_InstancesNb["A_TARGET_1"] = len(stage.A_TARGET_1s)
+	stage.Map_GongStructName_InstancesNb["A_TARGET_SPECIFICATION_1"] = len(stage.A_TARGET_SPECIFICATION_1s)
 	stage.Map_GongStructName_InstancesNb["A_THE_HEADER"] = len(stage.A_THE_HEADERs)
 	stage.Map_GongStructName_InstancesNb["A_TOOL_EXTENSIONS"] = len(stage.A_TOOL_EXTENSIONSs)
 	stage.Map_GongStructName_InstancesNb["DATATYPE_DEFINITION_BOOLEAN"] = len(stage.DATATYPE_DEFINITION_BOOLEANs)
@@ -1713,8 +1717,6 @@ func (stage *StageStruct) Checkout() {
 	stage.Map_GongStructName_InstancesNb["A_OBJECT"] = len(stage.A_OBJECTs)
 	stage.Map_GongStructName_InstancesNb["A_PROPERTIES"] = len(stage.A_PROPERTIESs)
 	stage.Map_GongStructName_InstancesNb["A_RELATION_GROUP_TYPE_REF"] = len(stage.A_RELATION_GROUP_TYPE_REFs)
-	stage.Map_GongStructName_InstancesNb["A_SOURCE"] = len(stage.A_SOURCEs)
-	stage.Map_GongStructName_InstancesNb["A_SOURCE_SPECIFICATION"] = len(stage.A_SOURCE_SPECIFICATIONs)
 	stage.Map_GongStructName_InstancesNb["A_SPECIFICATIONS"] = len(stage.A_SPECIFICATIONSs)
 	stage.Map_GongStructName_InstancesNb["A_SPECIFICATION_TYPE_REF"] = len(stage.A_SPECIFICATION_TYPE_REFs)
 	stage.Map_GongStructName_InstancesNb["A_SPECIFIED_VALUES"] = len(stage.A_SPECIFIED_VALUESs)
@@ -1726,6 +1728,8 @@ func (stage *StageStruct) Checkout() {
 	stage.Map_GongStructName_InstancesNb["A_SPEC_RELATION_REF"] = len(stage.A_SPEC_RELATION_REFs)
 	stage.Map_GongStructName_InstancesNb["A_SPEC_RELATION_TYPE_REF"] = len(stage.A_SPEC_RELATION_TYPE_REFs)
 	stage.Map_GongStructName_InstancesNb["A_SPEC_TYPES"] = len(stage.A_SPEC_TYPESs)
+	stage.Map_GongStructName_InstancesNb["A_TARGET_1"] = len(stage.A_TARGET_1s)
+	stage.Map_GongStructName_InstancesNb["A_TARGET_SPECIFICATION_1"] = len(stage.A_TARGET_SPECIFICATION_1s)
 	stage.Map_GongStructName_InstancesNb["A_THE_HEADER"] = len(stage.A_THE_HEADERs)
 	stage.Map_GongStructName_InstancesNb["A_TOOL_EXTENSIONS"] = len(stage.A_TOOL_EXTENSIONSs)
 	stage.Map_GongStructName_InstancesNb["DATATYPE_DEFINITION_BOOLEAN"] = len(stage.DATATYPE_DEFINITION_BOOLEANs)
@@ -4083,106 +4087,6 @@ func (a_relation_group_type_ref *A_RELATION_GROUP_TYPE_REF) GetName() (res strin
 	return a_relation_group_type_ref.Name
 }
 
-// Stage puts a_source to the model stage
-func (a_source *A_SOURCE) Stage(stage *StageStruct) *A_SOURCE {
-	stage.A_SOURCEs[a_source] = __member
-	stage.A_SOURCEs_mapString[a_source.Name] = a_source
-
-	return a_source
-}
-
-// Unstage removes a_source off the model stage
-func (a_source *A_SOURCE) Unstage(stage *StageStruct) *A_SOURCE {
-	delete(stage.A_SOURCEs, a_source)
-	delete(stage.A_SOURCEs_mapString, a_source.Name)
-	return a_source
-}
-
-// UnstageVoid removes a_source off the model stage
-func (a_source *A_SOURCE) UnstageVoid(stage *StageStruct) {
-	delete(stage.A_SOURCEs, a_source)
-	delete(stage.A_SOURCEs_mapString, a_source.Name)
-}
-
-// commit a_source to the back repo (if it is already staged)
-func (a_source *A_SOURCE) Commit(stage *StageStruct) *A_SOURCE {
-	if _, ok := stage.A_SOURCEs[a_source]; ok {
-		if stage.BackRepo != nil {
-			stage.BackRepo.CommitA_SOURCE(a_source)
-		}
-	}
-	return a_source
-}
-
-func (a_source *A_SOURCE) CommitVoid(stage *StageStruct) {
-	a_source.Commit(stage)
-}
-
-// Checkout a_source to the back repo (if it is already staged)
-func (a_source *A_SOURCE) Checkout(stage *StageStruct) *A_SOURCE {
-	if _, ok := stage.A_SOURCEs[a_source]; ok {
-		if stage.BackRepo != nil {
-			stage.BackRepo.CheckoutA_SOURCE(a_source)
-		}
-	}
-	return a_source
-}
-
-// for satisfaction of GongStruct interface
-func (a_source *A_SOURCE) GetName() (res string) {
-	return a_source.Name
-}
-
-// Stage puts a_source_specification to the model stage
-func (a_source_specification *A_SOURCE_SPECIFICATION) Stage(stage *StageStruct) *A_SOURCE_SPECIFICATION {
-	stage.A_SOURCE_SPECIFICATIONs[a_source_specification] = __member
-	stage.A_SOURCE_SPECIFICATIONs_mapString[a_source_specification.Name] = a_source_specification
-
-	return a_source_specification
-}
-
-// Unstage removes a_source_specification off the model stage
-func (a_source_specification *A_SOURCE_SPECIFICATION) Unstage(stage *StageStruct) *A_SOURCE_SPECIFICATION {
-	delete(stage.A_SOURCE_SPECIFICATIONs, a_source_specification)
-	delete(stage.A_SOURCE_SPECIFICATIONs_mapString, a_source_specification.Name)
-	return a_source_specification
-}
-
-// UnstageVoid removes a_source_specification off the model stage
-func (a_source_specification *A_SOURCE_SPECIFICATION) UnstageVoid(stage *StageStruct) {
-	delete(stage.A_SOURCE_SPECIFICATIONs, a_source_specification)
-	delete(stage.A_SOURCE_SPECIFICATIONs_mapString, a_source_specification.Name)
-}
-
-// commit a_source_specification to the back repo (if it is already staged)
-func (a_source_specification *A_SOURCE_SPECIFICATION) Commit(stage *StageStruct) *A_SOURCE_SPECIFICATION {
-	if _, ok := stage.A_SOURCE_SPECIFICATIONs[a_source_specification]; ok {
-		if stage.BackRepo != nil {
-			stage.BackRepo.CommitA_SOURCE_SPECIFICATION(a_source_specification)
-		}
-	}
-	return a_source_specification
-}
-
-func (a_source_specification *A_SOURCE_SPECIFICATION) CommitVoid(stage *StageStruct) {
-	a_source_specification.Commit(stage)
-}
-
-// Checkout a_source_specification to the back repo (if it is already staged)
-func (a_source_specification *A_SOURCE_SPECIFICATION) Checkout(stage *StageStruct) *A_SOURCE_SPECIFICATION {
-	if _, ok := stage.A_SOURCE_SPECIFICATIONs[a_source_specification]; ok {
-		if stage.BackRepo != nil {
-			stage.BackRepo.CheckoutA_SOURCE_SPECIFICATION(a_source_specification)
-		}
-	}
-	return a_source_specification
-}
-
-// for satisfaction of GongStruct interface
-func (a_source_specification *A_SOURCE_SPECIFICATION) GetName() (res string) {
-	return a_source_specification.Name
-}
-
 // Stage puts a_specifications to the model stage
 func (a_specifications *A_SPECIFICATIONS) Stage(stage *StageStruct) *A_SPECIFICATIONS {
 	stage.A_SPECIFICATIONSs[a_specifications] = __member
@@ -4731,6 +4635,106 @@ func (a_spec_types *A_SPEC_TYPES) Checkout(stage *StageStruct) *A_SPEC_TYPES {
 // for satisfaction of GongStruct interface
 func (a_spec_types *A_SPEC_TYPES) GetName() (res string) {
 	return a_spec_types.Name
+}
+
+// Stage puts a_target_1 to the model stage
+func (a_target_1 *A_TARGET_1) Stage(stage *StageStruct) *A_TARGET_1 {
+	stage.A_TARGET_1s[a_target_1] = __member
+	stage.A_TARGET_1s_mapString[a_target_1.Name] = a_target_1
+
+	return a_target_1
+}
+
+// Unstage removes a_target_1 off the model stage
+func (a_target_1 *A_TARGET_1) Unstage(stage *StageStruct) *A_TARGET_1 {
+	delete(stage.A_TARGET_1s, a_target_1)
+	delete(stage.A_TARGET_1s_mapString, a_target_1.Name)
+	return a_target_1
+}
+
+// UnstageVoid removes a_target_1 off the model stage
+func (a_target_1 *A_TARGET_1) UnstageVoid(stage *StageStruct) {
+	delete(stage.A_TARGET_1s, a_target_1)
+	delete(stage.A_TARGET_1s_mapString, a_target_1.Name)
+}
+
+// commit a_target_1 to the back repo (if it is already staged)
+func (a_target_1 *A_TARGET_1) Commit(stage *StageStruct) *A_TARGET_1 {
+	if _, ok := stage.A_TARGET_1s[a_target_1]; ok {
+		if stage.BackRepo != nil {
+			stage.BackRepo.CommitA_TARGET_1(a_target_1)
+		}
+	}
+	return a_target_1
+}
+
+func (a_target_1 *A_TARGET_1) CommitVoid(stage *StageStruct) {
+	a_target_1.Commit(stage)
+}
+
+// Checkout a_target_1 to the back repo (if it is already staged)
+func (a_target_1 *A_TARGET_1) Checkout(stage *StageStruct) *A_TARGET_1 {
+	if _, ok := stage.A_TARGET_1s[a_target_1]; ok {
+		if stage.BackRepo != nil {
+			stage.BackRepo.CheckoutA_TARGET_1(a_target_1)
+		}
+	}
+	return a_target_1
+}
+
+// for satisfaction of GongStruct interface
+func (a_target_1 *A_TARGET_1) GetName() (res string) {
+	return a_target_1.Name
+}
+
+// Stage puts a_target_specification_1 to the model stage
+func (a_target_specification_1 *A_TARGET_SPECIFICATION_1) Stage(stage *StageStruct) *A_TARGET_SPECIFICATION_1 {
+	stage.A_TARGET_SPECIFICATION_1s[a_target_specification_1] = __member
+	stage.A_TARGET_SPECIFICATION_1s_mapString[a_target_specification_1.Name] = a_target_specification_1
+
+	return a_target_specification_1
+}
+
+// Unstage removes a_target_specification_1 off the model stage
+func (a_target_specification_1 *A_TARGET_SPECIFICATION_1) Unstage(stage *StageStruct) *A_TARGET_SPECIFICATION_1 {
+	delete(stage.A_TARGET_SPECIFICATION_1s, a_target_specification_1)
+	delete(stage.A_TARGET_SPECIFICATION_1s_mapString, a_target_specification_1.Name)
+	return a_target_specification_1
+}
+
+// UnstageVoid removes a_target_specification_1 off the model stage
+func (a_target_specification_1 *A_TARGET_SPECIFICATION_1) UnstageVoid(stage *StageStruct) {
+	delete(stage.A_TARGET_SPECIFICATION_1s, a_target_specification_1)
+	delete(stage.A_TARGET_SPECIFICATION_1s_mapString, a_target_specification_1.Name)
+}
+
+// commit a_target_specification_1 to the back repo (if it is already staged)
+func (a_target_specification_1 *A_TARGET_SPECIFICATION_1) Commit(stage *StageStruct) *A_TARGET_SPECIFICATION_1 {
+	if _, ok := stage.A_TARGET_SPECIFICATION_1s[a_target_specification_1]; ok {
+		if stage.BackRepo != nil {
+			stage.BackRepo.CommitA_TARGET_SPECIFICATION_1(a_target_specification_1)
+		}
+	}
+	return a_target_specification_1
+}
+
+func (a_target_specification_1 *A_TARGET_SPECIFICATION_1) CommitVoid(stage *StageStruct) {
+	a_target_specification_1.Commit(stage)
+}
+
+// Checkout a_target_specification_1 to the back repo (if it is already staged)
+func (a_target_specification_1 *A_TARGET_SPECIFICATION_1) Checkout(stage *StageStruct) *A_TARGET_SPECIFICATION_1 {
+	if _, ok := stage.A_TARGET_SPECIFICATION_1s[a_target_specification_1]; ok {
+		if stage.BackRepo != nil {
+			stage.BackRepo.CheckoutA_TARGET_SPECIFICATION_1(a_target_specification_1)
+		}
+	}
+	return a_target_specification_1
+}
+
+// for satisfaction of GongStruct interface
+func (a_target_specification_1 *A_TARGET_SPECIFICATION_1) GetName() (res string) {
+	return a_target_specification_1.Name
 }
 
 // Stage puts a_the_header to the model stage
@@ -6031,8 +6035,6 @@ type AllModelsStructCreateInterface interface { // insertion point for Callbacks
 	CreateORMA_OBJECT(A_OBJECT *A_OBJECT)
 	CreateORMA_PROPERTIES(A_PROPERTIES *A_PROPERTIES)
 	CreateORMA_RELATION_GROUP_TYPE_REF(A_RELATION_GROUP_TYPE_REF *A_RELATION_GROUP_TYPE_REF)
-	CreateORMA_SOURCE(A_SOURCE *A_SOURCE)
-	CreateORMA_SOURCE_SPECIFICATION(A_SOURCE_SPECIFICATION *A_SOURCE_SPECIFICATION)
 	CreateORMA_SPECIFICATIONS(A_SPECIFICATIONS *A_SPECIFICATIONS)
 	CreateORMA_SPECIFICATION_TYPE_REF(A_SPECIFICATION_TYPE_REF *A_SPECIFICATION_TYPE_REF)
 	CreateORMA_SPECIFIED_VALUES(A_SPECIFIED_VALUES *A_SPECIFIED_VALUES)
@@ -6044,6 +6046,8 @@ type AllModelsStructCreateInterface interface { // insertion point for Callbacks
 	CreateORMA_SPEC_RELATION_REF(A_SPEC_RELATION_REF *A_SPEC_RELATION_REF)
 	CreateORMA_SPEC_RELATION_TYPE_REF(A_SPEC_RELATION_TYPE_REF *A_SPEC_RELATION_TYPE_REF)
 	CreateORMA_SPEC_TYPES(A_SPEC_TYPES *A_SPEC_TYPES)
+	CreateORMA_TARGET_1(A_TARGET_1 *A_TARGET_1)
+	CreateORMA_TARGET_SPECIFICATION_1(A_TARGET_SPECIFICATION_1 *A_TARGET_SPECIFICATION_1)
 	CreateORMA_THE_HEADER(A_THE_HEADER *A_THE_HEADER)
 	CreateORMA_TOOL_EXTENSIONS(A_TOOL_EXTENSIONS *A_TOOL_EXTENSIONS)
 	CreateORMDATATYPE_DEFINITION_BOOLEAN(DATATYPE_DEFINITION_BOOLEAN *DATATYPE_DEFINITION_BOOLEAN)
@@ -6118,8 +6122,6 @@ type AllModelsStructDeleteInterface interface { // insertion point for Callbacks
 	DeleteORMA_OBJECT(A_OBJECT *A_OBJECT)
 	DeleteORMA_PROPERTIES(A_PROPERTIES *A_PROPERTIES)
 	DeleteORMA_RELATION_GROUP_TYPE_REF(A_RELATION_GROUP_TYPE_REF *A_RELATION_GROUP_TYPE_REF)
-	DeleteORMA_SOURCE(A_SOURCE *A_SOURCE)
-	DeleteORMA_SOURCE_SPECIFICATION(A_SOURCE_SPECIFICATION *A_SOURCE_SPECIFICATION)
 	DeleteORMA_SPECIFICATIONS(A_SPECIFICATIONS *A_SPECIFICATIONS)
 	DeleteORMA_SPECIFICATION_TYPE_REF(A_SPECIFICATION_TYPE_REF *A_SPECIFICATION_TYPE_REF)
 	DeleteORMA_SPECIFIED_VALUES(A_SPECIFIED_VALUES *A_SPECIFIED_VALUES)
@@ -6131,6 +6133,8 @@ type AllModelsStructDeleteInterface interface { // insertion point for Callbacks
 	DeleteORMA_SPEC_RELATION_REF(A_SPEC_RELATION_REF *A_SPEC_RELATION_REF)
 	DeleteORMA_SPEC_RELATION_TYPE_REF(A_SPEC_RELATION_TYPE_REF *A_SPEC_RELATION_TYPE_REF)
 	DeleteORMA_SPEC_TYPES(A_SPEC_TYPES *A_SPEC_TYPES)
+	DeleteORMA_TARGET_1(A_TARGET_1 *A_TARGET_1)
+	DeleteORMA_TARGET_SPECIFICATION_1(A_TARGET_SPECIFICATION_1 *A_TARGET_SPECIFICATION_1)
 	DeleteORMA_THE_HEADER(A_THE_HEADER *A_THE_HEADER)
 	DeleteORMA_TOOL_EXTENSIONS(A_TOOL_EXTENSIONS *A_TOOL_EXTENSIONS)
 	DeleteORMDATATYPE_DEFINITION_BOOLEAN(DATATYPE_DEFINITION_BOOLEAN *DATATYPE_DEFINITION_BOOLEAN)
@@ -6297,12 +6301,6 @@ func (stage *StageStruct) Reset() { // insertion point for array reset
 	stage.A_RELATION_GROUP_TYPE_REFs = make(map[*A_RELATION_GROUP_TYPE_REF]any)
 	stage.A_RELATION_GROUP_TYPE_REFs_mapString = make(map[string]*A_RELATION_GROUP_TYPE_REF)
 
-	stage.A_SOURCEs = make(map[*A_SOURCE]any)
-	stage.A_SOURCEs_mapString = make(map[string]*A_SOURCE)
-
-	stage.A_SOURCE_SPECIFICATIONs = make(map[*A_SOURCE_SPECIFICATION]any)
-	stage.A_SOURCE_SPECIFICATIONs_mapString = make(map[string]*A_SOURCE_SPECIFICATION)
-
 	stage.A_SPECIFICATIONSs = make(map[*A_SPECIFICATIONS]any)
 	stage.A_SPECIFICATIONSs_mapString = make(map[string]*A_SPECIFICATIONS)
 
@@ -6335,6 +6333,12 @@ func (stage *StageStruct) Reset() { // insertion point for array reset
 
 	stage.A_SPEC_TYPESs = make(map[*A_SPEC_TYPES]any)
 	stage.A_SPEC_TYPESs_mapString = make(map[string]*A_SPEC_TYPES)
+
+	stage.A_TARGET_1s = make(map[*A_TARGET_1]any)
+	stage.A_TARGET_1s_mapString = make(map[string]*A_TARGET_1)
+
+	stage.A_TARGET_SPECIFICATION_1s = make(map[*A_TARGET_SPECIFICATION_1]any)
+	stage.A_TARGET_SPECIFICATION_1s_mapString = make(map[string]*A_TARGET_SPECIFICATION_1)
 
 	stage.A_THE_HEADERs = make(map[*A_THE_HEADER]any)
 	stage.A_THE_HEADERs_mapString = make(map[string]*A_THE_HEADER)
@@ -6552,12 +6556,6 @@ func (stage *StageStruct) Nil() { // insertion point for array nil
 	stage.A_RELATION_GROUP_TYPE_REFs = nil
 	stage.A_RELATION_GROUP_TYPE_REFs_mapString = nil
 
-	stage.A_SOURCEs = nil
-	stage.A_SOURCEs_mapString = nil
-
-	stage.A_SOURCE_SPECIFICATIONs = nil
-	stage.A_SOURCE_SPECIFICATIONs_mapString = nil
-
 	stage.A_SPECIFICATIONSs = nil
 	stage.A_SPECIFICATIONSs_mapString = nil
 
@@ -6590,6 +6588,12 @@ func (stage *StageStruct) Nil() { // insertion point for array nil
 
 	stage.A_SPEC_TYPESs = nil
 	stage.A_SPEC_TYPESs_mapString = nil
+
+	stage.A_TARGET_1s = nil
+	stage.A_TARGET_1s_mapString = nil
+
+	stage.A_TARGET_SPECIFICATION_1s = nil
+	stage.A_TARGET_SPECIFICATION_1s_mapString = nil
 
 	stage.A_THE_HEADERs = nil
 	stage.A_THE_HEADERs_mapString = nil
@@ -6853,14 +6857,6 @@ func (stage *StageStruct) Unstage() { // insertion point for array nil
 		a_relation_group_type_ref.Unstage(stage)
 	}
 
-	for a_source := range stage.A_SOURCEs {
-		a_source.Unstage(stage)
-	}
-
-	for a_source_specification := range stage.A_SOURCE_SPECIFICATIONs {
-		a_source_specification.Unstage(stage)
-	}
-
 	for a_specifications := range stage.A_SPECIFICATIONSs {
 		a_specifications.Unstage(stage)
 	}
@@ -6903,6 +6899,14 @@ func (stage *StageStruct) Unstage() { // insertion point for array nil
 
 	for a_spec_types := range stage.A_SPEC_TYPESs {
 		a_spec_types.Unstage(stage)
+	}
+
+	for a_target_1 := range stage.A_TARGET_1s {
+		a_target_1.Unstage(stage)
+	}
+
+	for a_target_specification_1 := range stage.A_TARGET_SPECIFICATION_1s {
+		a_target_specification_1.Unstage(stage)
 	}
 
 	for a_the_header := range stage.A_THE_HEADERs {
@@ -7157,10 +7161,6 @@ func GongGetSet[Type GongstructSet](stage *StageStruct) *Type {
 		return any(&stage.A_PROPERTIESs).(*Type)
 	case map[*A_RELATION_GROUP_TYPE_REF]any:
 		return any(&stage.A_RELATION_GROUP_TYPE_REFs).(*Type)
-	case map[*A_SOURCE]any:
-		return any(&stage.A_SOURCEs).(*Type)
-	case map[*A_SOURCE_SPECIFICATION]any:
-		return any(&stage.A_SOURCE_SPECIFICATIONs).(*Type)
 	case map[*A_SPECIFICATIONS]any:
 		return any(&stage.A_SPECIFICATIONSs).(*Type)
 	case map[*A_SPECIFICATION_TYPE_REF]any:
@@ -7183,6 +7183,10 @@ func GongGetSet[Type GongstructSet](stage *StageStruct) *Type {
 		return any(&stage.A_SPEC_RELATION_TYPE_REFs).(*Type)
 	case map[*A_SPEC_TYPES]any:
 		return any(&stage.A_SPEC_TYPESs).(*Type)
+	case map[*A_TARGET_1]any:
+		return any(&stage.A_TARGET_1s).(*Type)
+	case map[*A_TARGET_SPECIFICATION_1]any:
+		return any(&stage.A_TARGET_SPECIFICATION_1s).(*Type)
 	case map[*A_THE_HEADER]any:
 		return any(&stage.A_THE_HEADERs).(*Type)
 	case map[*A_TOOL_EXTENSIONS]any:
@@ -7337,10 +7341,6 @@ func GongGetMap[Type GongstructMapString](stage *StageStruct) *Type {
 		return any(&stage.A_PROPERTIESs_mapString).(*Type)
 	case map[string]*A_RELATION_GROUP_TYPE_REF:
 		return any(&stage.A_RELATION_GROUP_TYPE_REFs_mapString).(*Type)
-	case map[string]*A_SOURCE:
-		return any(&stage.A_SOURCEs_mapString).(*Type)
-	case map[string]*A_SOURCE_SPECIFICATION:
-		return any(&stage.A_SOURCE_SPECIFICATIONs_mapString).(*Type)
 	case map[string]*A_SPECIFICATIONS:
 		return any(&stage.A_SPECIFICATIONSs_mapString).(*Type)
 	case map[string]*A_SPECIFICATION_TYPE_REF:
@@ -7363,6 +7363,10 @@ func GongGetMap[Type GongstructMapString](stage *StageStruct) *Type {
 		return any(&stage.A_SPEC_RELATION_TYPE_REFs_mapString).(*Type)
 	case map[string]*A_SPEC_TYPES:
 		return any(&stage.A_SPEC_TYPESs_mapString).(*Type)
+	case map[string]*A_TARGET_1:
+		return any(&stage.A_TARGET_1s_mapString).(*Type)
+	case map[string]*A_TARGET_SPECIFICATION_1:
+		return any(&stage.A_TARGET_SPECIFICATION_1s_mapString).(*Type)
 	case map[string]*A_THE_HEADER:
 		return any(&stage.A_THE_HEADERs_mapString).(*Type)
 	case map[string]*A_TOOL_EXTENSIONS:
@@ -7517,10 +7521,6 @@ func GetGongstructInstancesSet[Type Gongstruct](stage *StageStruct) *map[*Type]a
 		return any(&stage.A_PROPERTIESs).(*map[*Type]any)
 	case A_RELATION_GROUP_TYPE_REF:
 		return any(&stage.A_RELATION_GROUP_TYPE_REFs).(*map[*Type]any)
-	case A_SOURCE:
-		return any(&stage.A_SOURCEs).(*map[*Type]any)
-	case A_SOURCE_SPECIFICATION:
-		return any(&stage.A_SOURCE_SPECIFICATIONs).(*map[*Type]any)
 	case A_SPECIFICATIONS:
 		return any(&stage.A_SPECIFICATIONSs).(*map[*Type]any)
 	case A_SPECIFICATION_TYPE_REF:
@@ -7543,6 +7543,10 @@ func GetGongstructInstancesSet[Type Gongstruct](stage *StageStruct) *map[*Type]a
 		return any(&stage.A_SPEC_RELATION_TYPE_REFs).(*map[*Type]any)
 	case A_SPEC_TYPES:
 		return any(&stage.A_SPEC_TYPESs).(*map[*Type]any)
+	case A_TARGET_1:
+		return any(&stage.A_TARGET_1s).(*map[*Type]any)
+	case A_TARGET_SPECIFICATION_1:
+		return any(&stage.A_TARGET_SPECIFICATION_1s).(*map[*Type]any)
 	case A_THE_HEADER:
 		return any(&stage.A_THE_HEADERs).(*map[*Type]any)
 	case A_TOOL_EXTENSIONS:
@@ -7697,10 +7701,6 @@ func GetGongstructInstancesSetFromPointerType[Type PointerToGongstruct](stage *S
 		return any(&stage.A_PROPERTIESs).(*map[Type]any)
 	case *A_RELATION_GROUP_TYPE_REF:
 		return any(&stage.A_RELATION_GROUP_TYPE_REFs).(*map[Type]any)
-	case *A_SOURCE:
-		return any(&stage.A_SOURCEs).(*map[Type]any)
-	case *A_SOURCE_SPECIFICATION:
-		return any(&stage.A_SOURCE_SPECIFICATIONs).(*map[Type]any)
 	case *A_SPECIFICATIONS:
 		return any(&stage.A_SPECIFICATIONSs).(*map[Type]any)
 	case *A_SPECIFICATION_TYPE_REF:
@@ -7723,6 +7723,10 @@ func GetGongstructInstancesSetFromPointerType[Type PointerToGongstruct](stage *S
 		return any(&stage.A_SPEC_RELATION_TYPE_REFs).(*map[Type]any)
 	case *A_SPEC_TYPES:
 		return any(&stage.A_SPEC_TYPESs).(*map[Type]any)
+	case *A_TARGET_1:
+		return any(&stage.A_TARGET_1s).(*map[Type]any)
+	case *A_TARGET_SPECIFICATION_1:
+		return any(&stage.A_TARGET_SPECIFICATION_1s).(*map[Type]any)
 	case *A_THE_HEADER:
 		return any(&stage.A_THE_HEADERs).(*map[Type]any)
 	case *A_TOOL_EXTENSIONS:
@@ -7877,10 +7881,6 @@ func GetGongstructInstancesMap[Type Gongstruct](stage *StageStruct) *map[string]
 		return any(&stage.A_PROPERTIESs_mapString).(*map[string]*Type)
 	case A_RELATION_GROUP_TYPE_REF:
 		return any(&stage.A_RELATION_GROUP_TYPE_REFs_mapString).(*map[string]*Type)
-	case A_SOURCE:
-		return any(&stage.A_SOURCEs_mapString).(*map[string]*Type)
-	case A_SOURCE_SPECIFICATION:
-		return any(&stage.A_SOURCE_SPECIFICATIONs_mapString).(*map[string]*Type)
 	case A_SPECIFICATIONS:
 		return any(&stage.A_SPECIFICATIONSs_mapString).(*map[string]*Type)
 	case A_SPECIFICATION_TYPE_REF:
@@ -7903,6 +7903,10 @@ func GetGongstructInstancesMap[Type Gongstruct](stage *StageStruct) *map[string]
 		return any(&stage.A_SPEC_RELATION_TYPE_REFs_mapString).(*map[string]*Type)
 	case A_SPEC_TYPES:
 		return any(&stage.A_SPEC_TYPESs_mapString).(*map[string]*Type)
+	case A_TARGET_1:
+		return any(&stage.A_TARGET_1s_mapString).(*map[string]*Type)
+	case A_TARGET_SPECIFICATION_1:
+		return any(&stage.A_TARGET_SPECIFICATION_1s_mapString).(*map[string]*Type)
 	case A_THE_HEADER:
 		return any(&stage.A_THE_HEADERs_mapString).(*map[string]*Type)
 	case A_TOOL_EXTENSIONS:
@@ -8263,14 +8267,6 @@ func GetAssociationName[Type Gongstruct]() *Type {
 		return any(&A_RELATION_GROUP_TYPE_REF{
 			// Initialisation of associations
 		}).(*Type)
-	case A_SOURCE:
-		return any(&A_SOURCE{
-			// Initialisation of associations
-		}).(*Type)
-	case A_SOURCE_SPECIFICATION:
-		return any(&A_SOURCE_SPECIFICATION{
-			// Initialisation of associations
-		}).(*Type)
 	case A_SPECIFICATIONS:
 		return any(&A_SPECIFICATIONS{
 			// Initialisation of associations
@@ -8347,6 +8343,14 @@ func GetAssociationName[Type Gongstruct]() *Type {
 			// field is initialized with an instance of SPECIFICATION_TYPE with the name of the field
 			SPECIFICATION_TYPE: []*SPECIFICATION_TYPE{{Name: "SPECIFICATION_TYPE"}},
 		}).(*Type)
+	case A_TARGET_1:
+		return any(&A_TARGET_1{
+			// Initialisation of associations
+		}).(*Type)
+	case A_TARGET_SPECIFICATION_1:
+		return any(&A_TARGET_SPECIFICATION_1{
+			// Initialisation of associations
+		}).(*Type)
 	case A_THE_HEADER:
 		return any(&A_THE_HEADER{
 			// Initialisation of associations
@@ -8420,10 +8424,12 @@ func GetAssociationName[Type Gongstruct]() *Type {
 			// Initialisation of associations
 			// field is initialized with an instance of A_ALTERNATIVE_ID with the name of the field
 			ALTERNATIVE_ID: []*A_ALTERNATIVE_ID{{Name: "ALTERNATIVE_ID"}},
-			// field is initialized with an instance of A_SOURCE_SPECIFICATION with the name of the field
-			SOURCE_SPECIFICATION: []*A_SOURCE_SPECIFICATION{{Name: "SOURCE_SPECIFICATION"}},
+			// field is initialized with an instance of A_TARGET_SPECIFICATION_1 with the name of the field
+			SOURCE_SPECIFICATION: []*A_TARGET_SPECIFICATION_1{{Name: "SOURCE_SPECIFICATION"}},
 			// field is initialized with an instance of A_SPEC_RELATION_REF with the name of the field
 			SPEC_RELATIONS: []*A_SPEC_RELATION_REF{{Name: "SPEC_RELATIONS"}},
+			// field is initialized with an instance of A_TARGET_SPECIFICATION_1 with the name of the field
+			TARGET_SPECIFICATION: []*A_TARGET_SPECIFICATION_1{{Name: "TARGET_SPECIFICATION"}},
 			// field is initialized with an instance of A_RELATION_GROUP_TYPE_REF with the name of the field
 			TYPE: []*A_RELATION_GROUP_TYPE_REF{{Name: "TYPE"}},
 		}).(*Type)
@@ -8526,8 +8532,10 @@ func GetAssociationName[Type Gongstruct]() *Type {
 			ALTERNATIVE_ID: []*A_ALTERNATIVE_ID{{Name: "ALTERNATIVE_ID"}},
 			// field is initialized with an instance of A_ATTRIBUTE_VALUE_XHTML_1 with the name of the field
 			VALUES: []*A_ATTRIBUTE_VALUE_XHTML_1{{Name: "VALUES"}},
-			// field is initialized with an instance of A_SOURCE with the name of the field
-			SOURCE: []*A_SOURCE{{Name: "SOURCE"}},
+			// field is initialized with an instance of A_TARGET_1 with the name of the field
+			SOURCE: []*A_TARGET_1{{Name: "SOURCE"}},
+			// field is initialized with an instance of A_TARGET_1 with the name of the field
+			TARGET: []*A_TARGET_1{{Name: "TARGET"}},
 			// field is initialized with an instance of A_SPEC_RELATION_TYPE_REF with the name of the field
 			TYPE: []*A_SPEC_RELATION_TYPE_REF{{Name: "TYPE"}},
 		}).(*Type)
@@ -8791,16 +8799,6 @@ func GetPointerReverseMap[Start, End Gongstruct](fieldname string, stage *StageS
 		switch fieldname {
 		// insertion point for per direct association field
 		}
-	// reverse maps of direct associations of A_SOURCE
-	case A_SOURCE:
-		switch fieldname {
-		// insertion point for per direct association field
-		}
-	// reverse maps of direct associations of A_SOURCE_SPECIFICATION
-	case A_SOURCE_SPECIFICATION:
-		switch fieldname {
-		// insertion point for per direct association field
-		}
 	// reverse maps of direct associations of A_SPECIFICATIONS
 	case A_SPECIFICATIONS:
 		switch fieldname {
@@ -8853,6 +8851,16 @@ func GetPointerReverseMap[Start, End Gongstruct](fieldname string, stage *StageS
 		}
 	// reverse maps of direct associations of A_SPEC_TYPES
 	case A_SPEC_TYPES:
+		switch fieldname {
+		// insertion point for per direct association field
+		}
+	// reverse maps of direct associations of A_TARGET_1
+	case A_TARGET_1:
+		switch fieldname {
+		// insertion point for per direct association field
+		}
+	// reverse maps of direct associations of A_TARGET_SPECIFICATION_1
+	case A_TARGET_SPECIFICATION_1:
 		switch fieldname {
 		// insertion point for per direct association field
 		}
@@ -9675,16 +9683,6 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 		switch fieldname {
 		// insertion point for per direct association field
 		}
-	// reverse maps of direct associations of A_SOURCE
-	case A_SOURCE:
-		switch fieldname {
-		// insertion point for per direct association field
-		}
-	// reverse maps of direct associations of A_SOURCE_SPECIFICATION
-	case A_SOURCE_SPECIFICATION:
-		switch fieldname {
-		// insertion point for per direct association field
-		}
 	// reverse maps of direct associations of A_SPECIFICATIONS
 	case A_SPECIFICATIONS:
 		switch fieldname {
@@ -9868,6 +9866,16 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 			}
 			return any(res).(map[*End]*Start)
 		}
+	// reverse maps of direct associations of A_TARGET_1
+	case A_TARGET_1:
+		switch fieldname {
+		// insertion point for per direct association field
+		}
+	// reverse maps of direct associations of A_TARGET_SPECIFICATION_1
+	case A_TARGET_SPECIFICATION_1:
+		switch fieldname {
+		// insertion point for per direct association field
+		}
 	// reverse maps of direct associations of A_THE_HEADER
 	case A_THE_HEADER:
 		switch fieldname {
@@ -10032,10 +10040,10 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 			}
 			return any(res).(map[*End]*Start)
 		case "SOURCE_SPECIFICATION":
-			res := make(map[*A_SOURCE_SPECIFICATION]*RELATION_GROUP)
+			res := make(map[*A_TARGET_SPECIFICATION_1]*RELATION_GROUP)
 			for relation_group := range stage.RELATION_GROUPs {
-				for _, a_source_specification_ := range relation_group.SOURCE_SPECIFICATION {
-					res[a_source_specification_] = relation_group
+				for _, a_target_specification_1_ := range relation_group.SOURCE_SPECIFICATION {
+					res[a_target_specification_1_] = relation_group
 				}
 			}
 			return any(res).(map[*End]*Start)
@@ -10044,6 +10052,14 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 			for relation_group := range stage.RELATION_GROUPs {
 				for _, a_spec_relation_ref_ := range relation_group.SPEC_RELATIONS {
 					res[a_spec_relation_ref_] = relation_group
+				}
+			}
+			return any(res).(map[*End]*Start)
+		case "TARGET_SPECIFICATION":
+			res := make(map[*A_TARGET_SPECIFICATION_1]*RELATION_GROUP)
+			for relation_group := range stage.RELATION_GROUPs {
+				for _, a_target_specification_1_ := range relation_group.TARGET_SPECIFICATION {
+					res[a_target_specification_1_] = relation_group
 				}
 			}
 			return any(res).(map[*End]*Start)
@@ -10335,10 +10351,18 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 			}
 			return any(res).(map[*End]*Start)
 		case "SOURCE":
-			res := make(map[*A_SOURCE]*SPEC_RELATION)
+			res := make(map[*A_TARGET_1]*SPEC_RELATION)
 			for spec_relation := range stage.SPEC_RELATIONs {
-				for _, a_source_ := range spec_relation.SOURCE {
-					res[a_source_] = spec_relation
+				for _, a_target_1_ := range spec_relation.SOURCE {
+					res[a_target_1_] = spec_relation
+				}
+			}
+			return any(res).(map[*End]*Start)
+		case "TARGET":
+			res := make(map[*A_TARGET_1]*SPEC_RELATION)
+			for spec_relation := range stage.SPEC_RELATIONs {
+				for _, a_target_1_ := range spec_relation.TARGET {
+					res[a_target_1_] = spec_relation
 				}
 			}
 			return any(res).(map[*End]*Start)
@@ -10481,10 +10505,6 @@ func GetGongstructName[Type Gongstruct]() (res string) {
 		res = "A_PROPERTIES"
 	case A_RELATION_GROUP_TYPE_REF:
 		res = "A_RELATION_GROUP_TYPE_REF"
-	case A_SOURCE:
-		res = "A_SOURCE"
-	case A_SOURCE_SPECIFICATION:
-		res = "A_SOURCE_SPECIFICATION"
 	case A_SPECIFICATIONS:
 		res = "A_SPECIFICATIONS"
 	case A_SPECIFICATION_TYPE_REF:
@@ -10507,6 +10527,10 @@ func GetGongstructName[Type Gongstruct]() (res string) {
 		res = "A_SPEC_RELATION_TYPE_REF"
 	case A_SPEC_TYPES:
 		res = "A_SPEC_TYPES"
+	case A_TARGET_1:
+		res = "A_TARGET_1"
+	case A_TARGET_SPECIFICATION_1:
+		res = "A_TARGET_SPECIFICATION_1"
 	case A_THE_HEADER:
 		res = "A_THE_HEADER"
 	case A_TOOL_EXTENSIONS:
@@ -10661,10 +10685,6 @@ func GetPointerToGongstructName[Type PointerToGongstruct]() (res string) {
 		res = "A_PROPERTIES"
 	case *A_RELATION_GROUP_TYPE_REF:
 		res = "A_RELATION_GROUP_TYPE_REF"
-	case *A_SOURCE:
-		res = "A_SOURCE"
-	case *A_SOURCE_SPECIFICATION:
-		res = "A_SOURCE_SPECIFICATION"
 	case *A_SPECIFICATIONS:
 		res = "A_SPECIFICATIONS"
 	case *A_SPECIFICATION_TYPE_REF:
@@ -10687,6 +10707,10 @@ func GetPointerToGongstructName[Type PointerToGongstruct]() (res string) {
 		res = "A_SPEC_RELATION_TYPE_REF"
 	case *A_SPEC_TYPES:
 		res = "A_SPEC_TYPES"
+	case *A_TARGET_1:
+		res = "A_TARGET_1"
+	case *A_TARGET_SPECIFICATION_1:
+		res = "A_TARGET_SPECIFICATION_1"
 	case *A_THE_HEADER:
 		res = "A_THE_HEADER"
 	case *A_TOOL_EXTENSIONS:
@@ -10840,10 +10864,6 @@ func GetFields[Type Gongstruct]() (res []string) {
 		res = []string{"Name", "EMBEDDED_VALUE"}
 	case A_RELATION_GROUP_TYPE_REF:
 		res = []string{"Name", "RELATION_GROUP_TYPE_REF"}
-	case A_SOURCE:
-		res = []string{"Name", "SPEC_OBJECT_REF"}
-	case A_SOURCE_SPECIFICATION:
-		res = []string{"Name", "SPECIFICATION_REF"}
 	case A_SPECIFICATIONS:
 		res = []string{"Name", "SPECIFICATION"}
 	case A_SPECIFICATION_TYPE_REF:
@@ -10866,6 +10886,10 @@ func GetFields[Type Gongstruct]() (res []string) {
 		res = []string{"Name", "SPEC_RELATION_TYPE_REF"}
 	case A_SPEC_TYPES:
 		res = []string{"Name", "RELATION_GROUP_TYPE", "SPEC_OBJECT_TYPE", "SPEC_RELATION_TYPE", "SPECIFICATION_TYPE"}
+	case A_TARGET_1:
+		res = []string{"Name", "SPEC_OBJECT_REF"}
+	case A_TARGET_SPECIFICATION_1:
+		res = []string{"Name", "SPECIFICATION_REF"}
 	case A_THE_HEADER:
 		res = []string{"Name", "REQ_IF_HEADER"}
 	case A_TOOL_EXTENSIONS:
@@ -10889,7 +10913,7 @@ func GetFields[Type Gongstruct]() (res []string) {
 	case ENUM_VALUE:
 		res = []string{"Name", "DESC", "IDENTIFIER", "LAST_CHANGE", "LONG_NAME", "ALTERNATIVE_ID", "PROPERTIES"}
 	case RELATION_GROUP:
-		res = []string{"Name", "DESC", "IDENTIFIER", "LAST_CHANGE", "LONG_NAME", "ALTERNATIVE_ID", "SOURCE_SPECIFICATION", "SPEC_RELATIONS", "TYPE"}
+		res = []string{"Name", "DESC", "IDENTIFIER", "LAST_CHANGE", "LONG_NAME", "ALTERNATIVE_ID", "SOURCE_SPECIFICATION", "SPEC_RELATIONS", "TARGET_SPECIFICATION", "TYPE"}
 	case RELATION_GROUP_TYPE:
 		res = []string{"Name", "DESC", "IDENTIFIER", "LAST_CHANGE", "LONG_NAME", "ALTERNATIVE_ID", "SPEC_ATTRIBUTES"}
 	case REQ_IF:
@@ -10911,7 +10935,7 @@ func GetFields[Type Gongstruct]() (res []string) {
 	case SPEC_OBJECT_TYPE:
 		res = []string{"Name", "DESC", "IDENTIFIER", "LAST_CHANGE", "LONG_NAME", "ALTERNATIVE_ID", "SPEC_ATTRIBUTES"}
 	case SPEC_RELATION:
-		res = []string{"Name", "DESC", "IDENTIFIER", "LAST_CHANGE", "LONG_NAME", "ALTERNATIVE_ID", "VALUES", "SOURCE", "TYPE"}
+		res = []string{"Name", "DESC", "IDENTIFIER", "LAST_CHANGE", "LONG_NAME", "ALTERNATIVE_ID", "VALUES", "SOURCE", "TARGET", "TYPE"}
 	case SPEC_RELATION_TYPE:
 		res = []string{"Name", "DESC", "IDENTIFIER", "LAST_CHANGE", "LONG_NAME", "ALTERNATIVE_ID", "SPEC_ATTRIBUTES"}
 	case XHTML_CONTENT:
@@ -11309,18 +11333,6 @@ func GetReverseFields[Type Gongstruct]() (res []ReverseField) {
 		rf.GongstructName = "RELATION_GROUP"
 		rf.Fieldname = "TYPE"
 		res = append(res, rf)
-	case A_SOURCE:
-		var rf ReverseField
-		_ = rf
-		rf.GongstructName = "SPEC_RELATION"
-		rf.Fieldname = "SOURCE"
-		res = append(res, rf)
-	case A_SOURCE_SPECIFICATION:
-		var rf ReverseField
-		_ = rf
-		rf.GongstructName = "RELATION_GROUP"
-		rf.Fieldname = "SOURCE_SPECIFICATION"
-		res = append(res, rf)
 	case A_SPECIFICATIONS:
 		var rf ReverseField
 		_ = rf
@@ -11395,6 +11407,24 @@ func GetReverseFields[Type Gongstruct]() (res []ReverseField) {
 		_ = rf
 		rf.GongstructName = "REQ_IF_CONTENT"
 		rf.Fieldname = "SPEC_TYPES"
+		res = append(res, rf)
+	case A_TARGET_1:
+		var rf ReverseField
+		_ = rf
+		rf.GongstructName = "SPEC_RELATION"
+		rf.Fieldname = "SOURCE"
+		res = append(res, rf)
+		rf.GongstructName = "SPEC_RELATION"
+		rf.Fieldname = "TARGET"
+		res = append(res, rf)
+	case A_TARGET_SPECIFICATION_1:
+		var rf ReverseField
+		_ = rf
+		rf.GongstructName = "RELATION_GROUP"
+		rf.Fieldname = "SOURCE_SPECIFICATION"
+		res = append(res, rf)
+		rf.GongstructName = "RELATION_GROUP"
+		rf.Fieldname = "TARGET_SPECIFICATION"
 		res = append(res, rf)
 	case A_THE_HEADER:
 		var rf ReverseField
@@ -11649,10 +11679,6 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 		res = []string{"Name", "EMBEDDED_VALUE"}
 	case *A_RELATION_GROUP_TYPE_REF:
 		res = []string{"Name", "RELATION_GROUP_TYPE_REF"}
-	case *A_SOURCE:
-		res = []string{"Name", "SPEC_OBJECT_REF"}
-	case *A_SOURCE_SPECIFICATION:
-		res = []string{"Name", "SPECIFICATION_REF"}
 	case *A_SPECIFICATIONS:
 		res = []string{"Name", "SPECIFICATION"}
 	case *A_SPECIFICATION_TYPE_REF:
@@ -11675,6 +11701,10 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 		res = []string{"Name", "SPEC_RELATION_TYPE_REF"}
 	case *A_SPEC_TYPES:
 		res = []string{"Name", "RELATION_GROUP_TYPE", "SPEC_OBJECT_TYPE", "SPEC_RELATION_TYPE", "SPECIFICATION_TYPE"}
+	case *A_TARGET_1:
+		res = []string{"Name", "SPEC_OBJECT_REF"}
+	case *A_TARGET_SPECIFICATION_1:
+		res = []string{"Name", "SPECIFICATION_REF"}
 	case *A_THE_HEADER:
 		res = []string{"Name", "REQ_IF_HEADER"}
 	case *A_TOOL_EXTENSIONS:
@@ -11698,7 +11728,7 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 	case *ENUM_VALUE:
 		res = []string{"Name", "DESC", "IDENTIFIER", "LAST_CHANGE", "LONG_NAME", "ALTERNATIVE_ID", "PROPERTIES"}
 	case *RELATION_GROUP:
-		res = []string{"Name", "DESC", "IDENTIFIER", "LAST_CHANGE", "LONG_NAME", "ALTERNATIVE_ID", "SOURCE_SPECIFICATION", "SPEC_RELATIONS", "TYPE"}
+		res = []string{"Name", "DESC", "IDENTIFIER", "LAST_CHANGE", "LONG_NAME", "ALTERNATIVE_ID", "SOURCE_SPECIFICATION", "SPEC_RELATIONS", "TARGET_SPECIFICATION", "TYPE"}
 	case *RELATION_GROUP_TYPE:
 		res = []string{"Name", "DESC", "IDENTIFIER", "LAST_CHANGE", "LONG_NAME", "ALTERNATIVE_ID", "SPEC_ATTRIBUTES"}
 	case *REQ_IF:
@@ -11720,7 +11750,7 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 	case *SPEC_OBJECT_TYPE:
 		res = []string{"Name", "DESC", "IDENTIFIER", "LAST_CHANGE", "LONG_NAME", "ALTERNATIVE_ID", "SPEC_ATTRIBUTES"}
 	case *SPEC_RELATION:
-		res = []string{"Name", "DESC", "IDENTIFIER", "LAST_CHANGE", "LONG_NAME", "ALTERNATIVE_ID", "VALUES", "SOURCE", "TYPE"}
+		res = []string{"Name", "DESC", "IDENTIFIER", "LAST_CHANGE", "LONG_NAME", "ALTERNATIVE_ID", "VALUES", "SOURCE", "TARGET", "TYPE"}
 	case *SPEC_RELATION_TYPE:
 		res = []string{"Name", "DESC", "IDENTIFIER", "LAST_CHANGE", "LONG_NAME", "ALTERNATIVE_ID", "SPEC_ATTRIBUTES"}
 	case *XHTML_CONTENT:
@@ -12535,22 +12565,6 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		case "RELATION_GROUP_TYPE_REF":
 			res = inferedInstance.RELATION_GROUP_TYPE_REF
 		}
-	case *A_SOURCE:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res = inferedInstance.Name
-		case "SPEC_OBJECT_REF":
-			res = inferedInstance.SPEC_OBJECT_REF
-		}
-	case *A_SOURCE_SPECIFICATION:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res = inferedInstance.Name
-		case "SPECIFICATION_REF":
-			res = inferedInstance.SPECIFICATION_REF
-		}
 	case *A_SPECIFICATIONS:
 		switch fieldName {
 		// string value of fields
@@ -12736,6 +12750,22 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 				}
 				res += __instance__.Name
 			}
+		}
+	case *A_TARGET_1:
+		switch fieldName {
+		// string value of fields
+		case "Name":
+			res = inferedInstance.Name
+		case "SPEC_OBJECT_REF":
+			res = inferedInstance.SPEC_OBJECT_REF
+		}
+	case *A_TARGET_SPECIFICATION_1:
+		switch fieldName {
+		// string value of fields
+		case "Name":
+			res = inferedInstance.Name
+		case "SPECIFICATION_REF":
+			res = inferedInstance.SPECIFICATION_REF
 		}
 	case *A_THE_HEADER:
 		switch fieldName {
@@ -12996,6 +13026,13 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 			}
 		case "SPEC_RELATIONS":
 			for idx, __instance__ := range inferedInstance.SPEC_RELATIONS {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
+		case "TARGET_SPECIFICATION":
+			for idx, __instance__ := range inferedInstance.TARGET_SPECIFICATION {
 				if idx > 0 {
 					res += "\n"
 				}
@@ -13350,6 +13387,13 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 			}
 		case "SOURCE":
 			for idx, __instance__ := range inferedInstance.SOURCE {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
+		case "TARGET":
+			for idx, __instance__ := range inferedInstance.TARGET {
 				if idx > 0 {
 					res += "\n"
 				}
@@ -14209,22 +14253,6 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		case "RELATION_GROUP_TYPE_REF":
 			res = inferedInstance.RELATION_GROUP_TYPE_REF
 		}
-	case A_SOURCE:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res = inferedInstance.Name
-		case "SPEC_OBJECT_REF":
-			res = inferedInstance.SPEC_OBJECT_REF
-		}
-	case A_SOURCE_SPECIFICATION:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res = inferedInstance.Name
-		case "SPECIFICATION_REF":
-			res = inferedInstance.SPECIFICATION_REF
-		}
 	case A_SPECIFICATIONS:
 		switch fieldName {
 		// string value of fields
@@ -14410,6 +14438,22 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 				}
 				res += __instance__.Name
 			}
+		}
+	case A_TARGET_1:
+		switch fieldName {
+		// string value of fields
+		case "Name":
+			res = inferedInstance.Name
+		case "SPEC_OBJECT_REF":
+			res = inferedInstance.SPEC_OBJECT_REF
+		}
+	case A_TARGET_SPECIFICATION_1:
+		switch fieldName {
+		// string value of fields
+		case "Name":
+			res = inferedInstance.Name
+		case "SPECIFICATION_REF":
+			res = inferedInstance.SPECIFICATION_REF
 		}
 	case A_THE_HEADER:
 		switch fieldName {
@@ -14670,6 +14714,13 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 			}
 		case "SPEC_RELATIONS":
 			for idx, __instance__ := range inferedInstance.SPEC_RELATIONS {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
+		case "TARGET_SPECIFICATION":
+			for idx, __instance__ := range inferedInstance.TARGET_SPECIFICATION {
 				if idx > 0 {
 					res += "\n"
 				}
@@ -15024,6 +15075,13 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 			}
 		case "SOURCE":
 			for idx, __instance__ := range inferedInstance.SOURCE {
+				if idx > 0 {
+					res += "\n"
+				}
+				res += __instance__.Name
+			}
+		case "TARGET":
+			for idx, __instance__ := range inferedInstance.TARGET {
 				if idx > 0 {
 					res += "\n"
 				}

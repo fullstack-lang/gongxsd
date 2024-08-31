@@ -143,12 +143,6 @@ func IsStaged[Type Gongstruct](stage *StageStruct, instance *Type) (ok bool) {
 	case *A_RELATION_GROUP_TYPE_REF:
 		ok = stage.IsStagedA_RELATION_GROUP_TYPE_REF(target)
 
-	case *A_SOURCE:
-		ok = stage.IsStagedA_SOURCE(target)
-
-	case *A_SOURCE_SPECIFICATION:
-		ok = stage.IsStagedA_SOURCE_SPECIFICATION(target)
-
 	case *A_SPECIFICATIONS:
 		ok = stage.IsStagedA_SPECIFICATIONS(target)
 
@@ -181,6 +175,12 @@ func IsStaged[Type Gongstruct](stage *StageStruct, instance *Type) (ok bool) {
 
 	case *A_SPEC_TYPES:
 		ok = stage.IsStagedA_SPEC_TYPES(target)
+
+	case *A_TARGET_1:
+		ok = stage.IsStagedA_TARGET_1(target)
+
+	case *A_TARGET_SPECIFICATION_1:
+		ok = stage.IsStagedA_TARGET_SPECIFICATION_1(target)
 
 	case *A_THE_HEADER:
 		ok = stage.IsStagedA_THE_HEADER(target)
@@ -586,20 +586,6 @@ func (stage *StageStruct) IsStagedA_RELATION_GROUP_TYPE_REF(a_relation_group_typ
 	return
 }
 
-func (stage *StageStruct) IsStagedA_SOURCE(a_source *A_SOURCE) (ok bool) {
-
-	_, ok = stage.A_SOURCEs[a_source]
-
-	return
-}
-
-func (stage *StageStruct) IsStagedA_SOURCE_SPECIFICATION(a_source_specification *A_SOURCE_SPECIFICATION) (ok bool) {
-
-	_, ok = stage.A_SOURCE_SPECIFICATIONs[a_source_specification]
-
-	return
-}
-
 func (stage *StageStruct) IsStagedA_SPECIFICATIONS(a_specifications *A_SPECIFICATIONS) (ok bool) {
 
 	_, ok = stage.A_SPECIFICATIONSs[a_specifications]
@@ -673,6 +659,20 @@ func (stage *StageStruct) IsStagedA_SPEC_RELATION_TYPE_REF(a_spec_relation_type_
 func (stage *StageStruct) IsStagedA_SPEC_TYPES(a_spec_types *A_SPEC_TYPES) (ok bool) {
 
 	_, ok = stage.A_SPEC_TYPESs[a_spec_types]
+
+	return
+}
+
+func (stage *StageStruct) IsStagedA_TARGET_1(a_target_1 *A_TARGET_1) (ok bool) {
+
+	_, ok = stage.A_TARGET_1s[a_target_1]
+
+	return
+}
+
+func (stage *StageStruct) IsStagedA_TARGET_SPECIFICATION_1(a_target_specification_1 *A_TARGET_SPECIFICATION_1) (ok bool) {
+
+	_, ok = stage.A_TARGET_SPECIFICATION_1s[a_target_specification_1]
 
 	return
 }
@@ -998,12 +998,6 @@ func StageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 	case *A_RELATION_GROUP_TYPE_REF:
 		stage.StageBranchA_RELATION_GROUP_TYPE_REF(target)
 
-	case *A_SOURCE:
-		stage.StageBranchA_SOURCE(target)
-
-	case *A_SOURCE_SPECIFICATION:
-		stage.StageBranchA_SOURCE_SPECIFICATION(target)
-
 	case *A_SPECIFICATIONS:
 		stage.StageBranchA_SPECIFICATIONS(target)
 
@@ -1036,6 +1030,12 @@ func StageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 
 	case *A_SPEC_TYPES:
 		stage.StageBranchA_SPEC_TYPES(target)
+
+	case *A_TARGET_1:
+		stage.StageBranchA_TARGET_1(target)
+
+	case *A_TARGET_SPECIFICATION_1:
+		stage.StageBranchA_TARGET_SPECIFICATION_1(target)
 
 	case *A_THE_HEADER:
 		stage.StageBranchA_THE_HEADER(target)
@@ -1976,36 +1976,6 @@ func (stage *StageStruct) StageBranchA_RELATION_GROUP_TYPE_REF(a_relation_group_
 
 }
 
-func (stage *StageStruct) StageBranchA_SOURCE(a_source *A_SOURCE) {
-
-	// check if instance is already staged
-	if IsStaged(stage, a_source) {
-		return
-	}
-
-	a_source.Stage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-}
-
-func (stage *StageStruct) StageBranchA_SOURCE_SPECIFICATION(a_source_specification *A_SOURCE_SPECIFICATION) {
-
-	// check if instance is already staged
-	if IsStaged(stage, a_source_specification) {
-		return
-	}
-
-	a_source_specification.Stage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-}
-
 func (stage *StageStruct) StageBranchA_SPECIFICATIONS(a_specifications *A_SPECIFICATIONS) {
 
 	// check if instance is already staged
@@ -2216,6 +2186,36 @@ func (stage *StageStruct) StageBranchA_SPEC_TYPES(a_spec_types *A_SPEC_TYPES) {
 	for _, _specification_type := range a_spec_types.SPECIFICATION_TYPE {
 		StageBranch(stage, _specification_type)
 	}
+
+}
+
+func (stage *StageStruct) StageBranchA_TARGET_1(a_target_1 *A_TARGET_1) {
+
+	// check if instance is already staged
+	if IsStaged(stage, a_target_1) {
+		return
+	}
+
+	a_target_1.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) StageBranchA_TARGET_SPECIFICATION_1(a_target_specification_1 *A_TARGET_SPECIFICATION_1) {
+
+	// check if instance is already staged
+	if IsStaged(stage, a_target_specification_1) {
+		return
+	}
+
+	a_target_specification_1.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
 
 }
 
@@ -2435,11 +2435,14 @@ func (stage *StageStruct) StageBranchRELATION_GROUP(relation_group *RELATION_GRO
 	for _, _a_alternative_id := range relation_group.ALTERNATIVE_ID {
 		StageBranch(stage, _a_alternative_id)
 	}
-	for _, _a_source_specification := range relation_group.SOURCE_SPECIFICATION {
-		StageBranch(stage, _a_source_specification)
+	for _, _a_target_specification_1 := range relation_group.SOURCE_SPECIFICATION {
+		StageBranch(stage, _a_target_specification_1)
 	}
 	for _, _a_spec_relation_ref := range relation_group.SPEC_RELATIONS {
 		StageBranch(stage, _a_spec_relation_ref)
+	}
+	for _, _a_target_specification_1 := range relation_group.TARGET_SPECIFICATION {
+		StageBranch(stage, _a_target_specification_1)
 	}
 	for _, _a_relation_group_type_ref := range relation_group.TYPE {
 		StageBranch(stage, _a_relation_group_type_ref)
@@ -2693,8 +2696,11 @@ func (stage *StageStruct) StageBranchSPEC_RELATION(spec_relation *SPEC_RELATION)
 	for _, _a_attribute_value_xhtml_1 := range spec_relation.VALUES {
 		StageBranch(stage, _a_attribute_value_xhtml_1)
 	}
-	for _, _a_source := range spec_relation.SOURCE {
-		StageBranch(stage, _a_source)
+	for _, _a_target_1 := range spec_relation.SOURCE {
+		StageBranch(stage, _a_target_1)
+	}
+	for _, _a_target_1 := range spec_relation.TARGET {
+		StageBranch(stage, _a_target_1)
 	}
 	for _, _a_spec_relation_type_ref := range spec_relation.TYPE {
 		StageBranch(stage, _a_spec_relation_type_ref)
@@ -2933,14 +2939,6 @@ func CopyBranch[Type Gongstruct](from *Type) (to *Type) {
 		toT := CopyBranchA_RELATION_GROUP_TYPE_REF(mapOrigCopy, fromT)
 		return any(toT).(*Type)
 
-	case *A_SOURCE:
-		toT := CopyBranchA_SOURCE(mapOrigCopy, fromT)
-		return any(toT).(*Type)
-
-	case *A_SOURCE_SPECIFICATION:
-		toT := CopyBranchA_SOURCE_SPECIFICATION(mapOrigCopy, fromT)
-		return any(toT).(*Type)
-
 	case *A_SPECIFICATIONS:
 		toT := CopyBranchA_SPECIFICATIONS(mapOrigCopy, fromT)
 		return any(toT).(*Type)
@@ -2983,6 +2981,14 @@ func CopyBranch[Type Gongstruct](from *Type) (to *Type) {
 
 	case *A_SPEC_TYPES:
 		toT := CopyBranchA_SPEC_TYPES(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
+	case *A_TARGET_1:
+		toT := CopyBranchA_TARGET_1(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
+	case *A_TARGET_SPECIFICATION_1:
+		toT := CopyBranchA_TARGET_SPECIFICATION_1(mapOrigCopy, fromT)
 		return any(toT).(*Type)
 
 	case *A_THE_HEADER:
@@ -4134,44 +4140,6 @@ func CopyBranchA_RELATION_GROUP_TYPE_REF(mapOrigCopy map[any]any, a_relation_gro
 	return
 }
 
-func CopyBranchA_SOURCE(mapOrigCopy map[any]any, a_sourceFrom *A_SOURCE) (a_sourceTo *A_SOURCE) {
-
-	// a_sourceFrom has already been copied
-	if _a_sourceTo, ok := mapOrigCopy[a_sourceFrom]; ok {
-		a_sourceTo = _a_sourceTo.(*A_SOURCE)
-		return
-	}
-
-	a_sourceTo = new(A_SOURCE)
-	mapOrigCopy[a_sourceFrom] = a_sourceTo
-	a_sourceFrom.CopyBasicFields(a_sourceTo)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-	return
-}
-
-func CopyBranchA_SOURCE_SPECIFICATION(mapOrigCopy map[any]any, a_source_specificationFrom *A_SOURCE_SPECIFICATION) (a_source_specificationTo *A_SOURCE_SPECIFICATION) {
-
-	// a_source_specificationFrom has already been copied
-	if _a_source_specificationTo, ok := mapOrigCopy[a_source_specificationFrom]; ok {
-		a_source_specificationTo = _a_source_specificationTo.(*A_SOURCE_SPECIFICATION)
-		return
-	}
-
-	a_source_specificationTo = new(A_SOURCE_SPECIFICATION)
-	mapOrigCopy[a_source_specificationFrom] = a_source_specificationTo
-	a_source_specificationFrom.CopyBasicFields(a_source_specificationTo)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-	return
-}
-
 func CopyBranchA_SPECIFICATIONS(mapOrigCopy map[any]any, a_specificationsFrom *A_SPECIFICATIONS) (a_specificationsTo *A_SPECIFICATIONS) {
 
 	// a_specificationsFrom has already been copied
@@ -4425,6 +4393,44 @@ func CopyBranchA_SPEC_TYPES(mapOrigCopy map[any]any, a_spec_typesFrom *A_SPEC_TY
 	for _, _specification_type := range a_spec_typesFrom.SPECIFICATION_TYPE {
 		a_spec_typesTo.SPECIFICATION_TYPE = append(a_spec_typesTo.SPECIFICATION_TYPE, CopyBranchSPECIFICATION_TYPE(mapOrigCopy, _specification_type))
 	}
+
+	return
+}
+
+func CopyBranchA_TARGET_1(mapOrigCopy map[any]any, a_target_1From *A_TARGET_1) (a_target_1To *A_TARGET_1) {
+
+	// a_target_1From has already been copied
+	if _a_target_1To, ok := mapOrigCopy[a_target_1From]; ok {
+		a_target_1To = _a_target_1To.(*A_TARGET_1)
+		return
+	}
+
+	a_target_1To = new(A_TARGET_1)
+	mapOrigCopy[a_target_1From] = a_target_1To
+	a_target_1From.CopyBasicFields(a_target_1To)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+	return
+}
+
+func CopyBranchA_TARGET_SPECIFICATION_1(mapOrigCopy map[any]any, a_target_specification_1From *A_TARGET_SPECIFICATION_1) (a_target_specification_1To *A_TARGET_SPECIFICATION_1) {
+
+	// a_target_specification_1From has already been copied
+	if _a_target_specification_1To, ok := mapOrigCopy[a_target_specification_1From]; ok {
+		a_target_specification_1To = _a_target_specification_1To.(*A_TARGET_SPECIFICATION_1)
+		return
+	}
+
+	a_target_specification_1To = new(A_TARGET_SPECIFICATION_1)
+	mapOrigCopy[a_target_specification_1From] = a_target_specification_1To
+	a_target_specification_1From.CopyBasicFields(a_target_specification_1To)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
 
 	return
 }
@@ -4692,11 +4698,14 @@ func CopyBranchRELATION_GROUP(mapOrigCopy map[any]any, relation_groupFrom *RELAT
 	for _, _a_alternative_id := range relation_groupFrom.ALTERNATIVE_ID {
 		relation_groupTo.ALTERNATIVE_ID = append(relation_groupTo.ALTERNATIVE_ID, CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, _a_alternative_id))
 	}
-	for _, _a_source_specification := range relation_groupFrom.SOURCE_SPECIFICATION {
-		relation_groupTo.SOURCE_SPECIFICATION = append(relation_groupTo.SOURCE_SPECIFICATION, CopyBranchA_SOURCE_SPECIFICATION(mapOrigCopy, _a_source_specification))
+	for _, _a_target_specification_1 := range relation_groupFrom.SOURCE_SPECIFICATION {
+		relation_groupTo.SOURCE_SPECIFICATION = append(relation_groupTo.SOURCE_SPECIFICATION, CopyBranchA_TARGET_SPECIFICATION_1(mapOrigCopy, _a_target_specification_1))
 	}
 	for _, _a_spec_relation_ref := range relation_groupFrom.SPEC_RELATIONS {
 		relation_groupTo.SPEC_RELATIONS = append(relation_groupTo.SPEC_RELATIONS, CopyBranchA_SPEC_RELATION_REF(mapOrigCopy, _a_spec_relation_ref))
+	}
+	for _, _a_target_specification_1 := range relation_groupFrom.TARGET_SPECIFICATION {
+		relation_groupTo.TARGET_SPECIFICATION = append(relation_groupTo.TARGET_SPECIFICATION, CopyBranchA_TARGET_SPECIFICATION_1(mapOrigCopy, _a_target_specification_1))
 	}
 	for _, _a_relation_group_type_ref := range relation_groupFrom.TYPE {
 		relation_groupTo.TYPE = append(relation_groupTo.TYPE, CopyBranchA_RELATION_GROUP_TYPE_REF(mapOrigCopy, _a_relation_group_type_ref))
@@ -4994,8 +5003,11 @@ func CopyBranchSPEC_RELATION(mapOrigCopy map[any]any, spec_relationFrom *SPEC_RE
 	for _, _a_attribute_value_xhtml_1 := range spec_relationFrom.VALUES {
 		spec_relationTo.VALUES = append(spec_relationTo.VALUES, CopyBranchA_ATTRIBUTE_VALUE_XHTML_1(mapOrigCopy, _a_attribute_value_xhtml_1))
 	}
-	for _, _a_source := range spec_relationFrom.SOURCE {
-		spec_relationTo.SOURCE = append(spec_relationTo.SOURCE, CopyBranchA_SOURCE(mapOrigCopy, _a_source))
+	for _, _a_target_1 := range spec_relationFrom.SOURCE {
+		spec_relationTo.SOURCE = append(spec_relationTo.SOURCE, CopyBranchA_TARGET_1(mapOrigCopy, _a_target_1))
+	}
+	for _, _a_target_1 := range spec_relationFrom.TARGET {
+		spec_relationTo.TARGET = append(spec_relationTo.TARGET, CopyBranchA_TARGET_1(mapOrigCopy, _a_target_1))
 	}
 	for _, _a_spec_relation_type_ref := range spec_relationFrom.TYPE {
 		spec_relationTo.TYPE = append(spec_relationTo.TYPE, CopyBranchA_SPEC_RELATION_TYPE_REF(mapOrigCopy, _a_spec_relation_type_ref))
@@ -5194,12 +5206,6 @@ func UnstageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 	case *A_RELATION_GROUP_TYPE_REF:
 		stage.UnstageBranchA_RELATION_GROUP_TYPE_REF(target)
 
-	case *A_SOURCE:
-		stage.UnstageBranchA_SOURCE(target)
-
-	case *A_SOURCE_SPECIFICATION:
-		stage.UnstageBranchA_SOURCE_SPECIFICATION(target)
-
 	case *A_SPECIFICATIONS:
 		stage.UnstageBranchA_SPECIFICATIONS(target)
 
@@ -5232,6 +5238,12 @@ func UnstageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 
 	case *A_SPEC_TYPES:
 		stage.UnstageBranchA_SPEC_TYPES(target)
+
+	case *A_TARGET_1:
+		stage.UnstageBranchA_TARGET_1(target)
+
+	case *A_TARGET_SPECIFICATION_1:
+		stage.UnstageBranchA_TARGET_SPECIFICATION_1(target)
 
 	case *A_THE_HEADER:
 		stage.UnstageBranchA_THE_HEADER(target)
@@ -6172,36 +6184,6 @@ func (stage *StageStruct) UnstageBranchA_RELATION_GROUP_TYPE_REF(a_relation_grou
 
 }
 
-func (stage *StageStruct) UnstageBranchA_SOURCE(a_source *A_SOURCE) {
-
-	// check if instance is already staged
-	if !IsStaged(stage, a_source) {
-		return
-	}
-
-	a_source.Unstage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-}
-
-func (stage *StageStruct) UnstageBranchA_SOURCE_SPECIFICATION(a_source_specification *A_SOURCE_SPECIFICATION) {
-
-	// check if instance is already staged
-	if !IsStaged(stage, a_source_specification) {
-		return
-	}
-
-	a_source_specification.Unstage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-}
-
 func (stage *StageStruct) UnstageBranchA_SPECIFICATIONS(a_specifications *A_SPECIFICATIONS) {
 
 	// check if instance is already staged
@@ -6412,6 +6394,36 @@ func (stage *StageStruct) UnstageBranchA_SPEC_TYPES(a_spec_types *A_SPEC_TYPES) 
 	for _, _specification_type := range a_spec_types.SPECIFICATION_TYPE {
 		UnstageBranch(stage, _specification_type)
 	}
+
+}
+
+func (stage *StageStruct) UnstageBranchA_TARGET_1(a_target_1 *A_TARGET_1) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, a_target_1) {
+		return
+	}
+
+	a_target_1.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *StageStruct) UnstageBranchA_TARGET_SPECIFICATION_1(a_target_specification_1 *A_TARGET_SPECIFICATION_1) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, a_target_specification_1) {
+		return
+	}
+
+	a_target_specification_1.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
 
 }
 
@@ -6631,11 +6643,14 @@ func (stage *StageStruct) UnstageBranchRELATION_GROUP(relation_group *RELATION_G
 	for _, _a_alternative_id := range relation_group.ALTERNATIVE_ID {
 		UnstageBranch(stage, _a_alternative_id)
 	}
-	for _, _a_source_specification := range relation_group.SOURCE_SPECIFICATION {
-		UnstageBranch(stage, _a_source_specification)
+	for _, _a_target_specification_1 := range relation_group.SOURCE_SPECIFICATION {
+		UnstageBranch(stage, _a_target_specification_1)
 	}
 	for _, _a_spec_relation_ref := range relation_group.SPEC_RELATIONS {
 		UnstageBranch(stage, _a_spec_relation_ref)
+	}
+	for _, _a_target_specification_1 := range relation_group.TARGET_SPECIFICATION {
+		UnstageBranch(stage, _a_target_specification_1)
 	}
 	for _, _a_relation_group_type_ref := range relation_group.TYPE {
 		UnstageBranch(stage, _a_relation_group_type_ref)
@@ -6889,8 +6904,11 @@ func (stage *StageStruct) UnstageBranchSPEC_RELATION(spec_relation *SPEC_RELATIO
 	for _, _a_attribute_value_xhtml_1 := range spec_relation.VALUES {
 		UnstageBranch(stage, _a_attribute_value_xhtml_1)
 	}
-	for _, _a_source := range spec_relation.SOURCE {
-		UnstageBranch(stage, _a_source)
+	for _, _a_target_1 := range spec_relation.SOURCE {
+		UnstageBranch(stage, _a_target_1)
+	}
+	for _, _a_target_1 := range spec_relation.TARGET {
+		UnstageBranch(stage, _a_target_1)
 	}
 	for _, _a_spec_relation_type_ref := range spec_relation.TYPE {
 		UnstageBranch(stage, _a_spec_relation_type_ref)

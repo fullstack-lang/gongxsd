@@ -122,10 +122,6 @@ func (cellDeleteIconImpl *CellDeleteIconImpl[T]) CellIconUpdated(stage *gongtabl
 		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
 	case *models.A_RELATION_GROUP_TYPE_REF:
 		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
-	case *models.A_SOURCE:
-		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
-	case *models.A_SOURCE_SPECIFICATION:
-		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
 	case *models.A_SPECIFICATIONS:
 		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
 	case *models.A_SPECIFICATION_TYPE_REF:
@@ -147,6 +143,10 @@ func (cellDeleteIconImpl *CellDeleteIconImpl[T]) CellIconUpdated(stage *gongtabl
 	case *models.A_SPEC_RELATION_TYPE_REF:
 		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
 	case *models.A_SPEC_TYPES:
+		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
+	case *models.A_TARGET_1:
+		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
+	case *models.A_TARGET_SPECIFICATION_1:
 		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
 	case *models.A_THE_HEADER:
 		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
