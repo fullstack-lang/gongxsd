@@ -119,9 +119,9 @@ func (modelGroup *ModelGroup) generateElements(
 				elem.Type = Name(elem.Type)
 			}
 
-			sliceOrPointer := " []*"
-			if elem.MaxOccurs == "1" {
-				sliceOrPointer = " *"
+			sliceOrPointer := " *"
+			if elem.MaxOccurs == "unbounded" {
+				sliceOrPointer = " []*"
 			}
 
 			// an element can be of 3 types:

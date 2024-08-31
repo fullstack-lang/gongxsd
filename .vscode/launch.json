@@ -2,18 +2,22 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch Edge",
+            "name": "gongxsd-cli read xsd",
+            "type": "go",
             "request": "launch",
-            "type": "msedge",
-            "url": "http://localhost:4200",
-            "webRoot": "${workspaceFolder}/ng"
+            "mode": "debug",
+            "program": "${workspaceFolder}/go/cmd/gongxsd-cli",
+            "args": [
+                "read",
+                "../../../test/xsd/schema.xsd",
+                "-m",
+                "stages/stage"
+            ]
         },
         {
-            "name": "Launch Chrome",
-            "request": "launch",
-            "type": "chrome",
-            "url": "http://localhost:4200",
-            "webRoot": "${workspaceFolder}/ng"
+            "name": "",
+            "type": "go",
+            "request": "launch"
         },
         {
             "name": "gongxsd-cli read books",
@@ -31,7 +35,7 @@
             ]
         },
         {
-            "name": "gen books models.go",
+            "name": "gongxsd-cli gen books",
             "type": "go",
             "request": "launch",
             "mode": "debug",
@@ -42,54 +46,6 @@
                 "-v",
                 "-o",
                 "../../../test/books/go/models/models.go"
-            ]
-        },
-        {
-            "name": "gen musicxml models.go",
-            "type": "go",
-            "request": "launch",
-            "mode": "debug",
-            "program": "${workspaceFolder}/go/cmd/gongxsd-cli",
-            "args": [
-                "generate",
-                "../../../test/musicxml/musicxml.xsd",
-                "-v",
-                "-o",
-                "../../../test/musicxml/go/models/models.go"
-            ]
-        },
-        {
-            "name": "roundtrip musicxml",
-            "type": "go",
-            "request": "launch",
-            "mode": "debug",
-            "program": "${workspaceFolder}/test/musicxml/go/roundtrip",
-            "args": []
-        },
-        {
-            "name": "read musicxml",
-            "type": "go",
-            "request": "launch",
-            "mode": "debug",
-            "program": "${workspaceFolder}/go/cmd/gongxsd-cli",
-            "args": [
-                "read",
-                "../../../test/musicxml/musicxml.xsd",
-                "-o",
-                "../../../test/musicxml/go/models/models.go"
-            ]
-        },
-        {
-            "name": "gongxsd-cli read xsd",
-            "type": "go",
-            "request": "launch",
-            "mode": "debug",
-            "program": "${workspaceFolder}/go/cmd/gongxsd-cli",
-            "args": [
-                "read",
-                "../../../test/xsd/schema.xsd",
-                "-m",
-                "stages/stage"
             ]
         },
         {
@@ -114,25 +70,57 @@
             ]
         },
         {
-            "name": "test inline1",
+            "name": "",
             "type": "go",
-            "request": "launch",
-            "mode": "debug",
-            "program": "${workspaceFolder}/test/xsd/inline1"
+            "request": "launch"
         },
         {
-            "name": "test inline2",
+            "name": "gongxsd-cli gen musicxml",
             "type": "go",
             "request": "launch",
             "mode": "debug",
-            "program": "${workspaceFolder}/test/xsd/inline2"
+            "program": "${workspaceFolder}/go/cmd/gongxsd-cli",
+            "args": [
+                "generate",
+                "../../../test/musicxml/musicxml.xsd",
+                "-v",
+                "-o",
+                "../../../test/musicxml/go/models/models.go"
+            ]
         },
         {
-            "name": "test inline3",
+            "name": "gongxsd-cli read musicxml",
             "type": "go",
             "request": "launch",
             "mode": "debug",
-            "program": "${workspaceFolder}/test/xsd/inline3"
+            "program": "${workspaceFolder}/go/cmd/gongxsd-cli",
+            "args": [
+                "read",
+                "../../../test/musicxml/musicxml.xsd",
+                "-o",
+                "../../../test/musicxml/go/models/models.go"
+            ]
+        },
+        {
+            "name": "roundtrip musicxml",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceFolder}/test/musicxml/go/roundtrip",
+            "args": []
+        },
+        {
+            "name": "musicxml read sample",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceFolder}/test/musicxml/go/cmd/musicxml",
+            "args": []
+        },
+        {
+            "name": "",
+            "type": "go",
+            "request": "launch"
         },
         {
             "name": "gen reqif models.go",
@@ -193,6 +181,32 @@
             "mode": "debug",
             "program": "${workspaceFolder}/test/reqif/go/cmd/reqif",
             "args": []
+        },
+        {
+            "name": "",
+            "type": "go",
+            "request": "launch"
+        },
+        {
+            "name": "test inline1",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceFolder}/test/xsd/inline1"
+        },
+        {
+            "name": "test inline2",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceFolder}/test/xsd/inline2"
+        },
+        {
+            "name": "test inline3",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceFolder}/test/xsd/inline3"
         },
     ]
 }

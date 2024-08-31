@@ -263,6 +263,19 @@
 			]
 		},
 		{
+			"label": "01 - gongc musicxml -clean",
+			"type": "shell",
+			"options": {
+				"cwd": "${workspaceFolder}/test/musicxml"
+			},
+			"command": "gongc",
+			"group": "build",
+			"args": [
+				"-clean",
+				"go/models",
+			]
+		},
+		{
 			"label": "02 - run musicxml -unmarshallFromCode=stage.go -marshallOnCommit=stage",
 			"type": "shell",
 			"options": {
@@ -274,7 +287,9 @@
 				"main.go",
 				"-diagrams",
 				"-unmarshallFromCode=stage.go",
-				"-marshallOnCommit=stage"
+				"-marshallOnCommit=stage",
+				"-musicxmlFile",
+				"../../../MozaChloSample.musicxml"
 			],
 			"group": "build"
 		},
