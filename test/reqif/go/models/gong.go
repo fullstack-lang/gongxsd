@@ -62,12 +62,6 @@ type StageStruct struct {
 	ATTRIBUTE_DEFINITION_BOOLEANs_mapString map[string]*ATTRIBUTE_DEFINITION_BOOLEAN
 
 	// insertion point for slice of pointers maps
-	ATTRIBUTE_DEFINITION_BOOLEAN_ALTERNATIVE_ID_reverseMap map[*A_ALTERNATIVE_ID]*ATTRIBUTE_DEFINITION_BOOLEAN
-
-	ATTRIBUTE_DEFINITION_BOOLEAN_DEFAULT_VALUE_reverseMap map[*A_ATTRIBUTE_VALUE_BOOLEAN]*ATTRIBUTE_DEFINITION_BOOLEAN
-
-	ATTRIBUTE_DEFINITION_BOOLEAN_TYPE_reverseMap map[*A_DATATYPE_DEFINITION_BOOLEAN_REF]*ATTRIBUTE_DEFINITION_BOOLEAN
-
 	OnAfterATTRIBUTE_DEFINITION_BOOLEANCreateCallback OnAfterCreateInterface[ATTRIBUTE_DEFINITION_BOOLEAN]
 	OnAfterATTRIBUTE_DEFINITION_BOOLEANUpdateCallback OnAfterUpdateInterface[ATTRIBUTE_DEFINITION_BOOLEAN]
 	OnAfterATTRIBUTE_DEFINITION_BOOLEANDeleteCallback OnAfterDeleteInterface[ATTRIBUTE_DEFINITION_BOOLEAN]
@@ -77,12 +71,6 @@ type StageStruct struct {
 	ATTRIBUTE_DEFINITION_DATEs_mapString map[string]*ATTRIBUTE_DEFINITION_DATE
 
 	// insertion point for slice of pointers maps
-	ATTRIBUTE_DEFINITION_DATE_ALTERNATIVE_ID_reverseMap map[*A_ALTERNATIVE_ID]*ATTRIBUTE_DEFINITION_DATE
-
-	ATTRIBUTE_DEFINITION_DATE_DEFAULT_VALUE_reverseMap map[*A_ATTRIBUTE_VALUE_DATE]*ATTRIBUTE_DEFINITION_DATE
-
-	ATTRIBUTE_DEFINITION_DATE_TYPE_reverseMap map[*A_DATATYPE_DEFINITION_DATE_REF]*ATTRIBUTE_DEFINITION_DATE
-
 	OnAfterATTRIBUTE_DEFINITION_DATECreateCallback OnAfterCreateInterface[ATTRIBUTE_DEFINITION_DATE]
 	OnAfterATTRIBUTE_DEFINITION_DATEUpdateCallback OnAfterUpdateInterface[ATTRIBUTE_DEFINITION_DATE]
 	OnAfterATTRIBUTE_DEFINITION_DATEDeleteCallback OnAfterDeleteInterface[ATTRIBUTE_DEFINITION_DATE]
@@ -92,12 +80,6 @@ type StageStruct struct {
 	ATTRIBUTE_DEFINITION_ENUMERATIONs_mapString map[string]*ATTRIBUTE_DEFINITION_ENUMERATION
 
 	// insertion point for slice of pointers maps
-	ATTRIBUTE_DEFINITION_ENUMERATION_ALTERNATIVE_ID_reverseMap map[*A_ALTERNATIVE_ID]*ATTRIBUTE_DEFINITION_ENUMERATION
-
-	ATTRIBUTE_DEFINITION_ENUMERATION_DEFAULT_VALUE_reverseMap map[*A_ATTRIBUTE_VALUE_ENUMERATION]*ATTRIBUTE_DEFINITION_ENUMERATION
-
-	ATTRIBUTE_DEFINITION_ENUMERATION_TYPE_reverseMap map[*A_DATATYPE_DEFINITION_ENUMERATION_REF]*ATTRIBUTE_DEFINITION_ENUMERATION
-
 	OnAfterATTRIBUTE_DEFINITION_ENUMERATIONCreateCallback OnAfterCreateInterface[ATTRIBUTE_DEFINITION_ENUMERATION]
 	OnAfterATTRIBUTE_DEFINITION_ENUMERATIONUpdateCallback OnAfterUpdateInterface[ATTRIBUTE_DEFINITION_ENUMERATION]
 	OnAfterATTRIBUTE_DEFINITION_ENUMERATIONDeleteCallback OnAfterDeleteInterface[ATTRIBUTE_DEFINITION_ENUMERATION]
@@ -107,12 +89,6 @@ type StageStruct struct {
 	ATTRIBUTE_DEFINITION_INTEGERs_mapString map[string]*ATTRIBUTE_DEFINITION_INTEGER
 
 	// insertion point for slice of pointers maps
-	ATTRIBUTE_DEFINITION_INTEGER_ALTERNATIVE_ID_reverseMap map[*A_ALTERNATIVE_ID]*ATTRIBUTE_DEFINITION_INTEGER
-
-	ATTRIBUTE_DEFINITION_INTEGER_DEFAULT_VALUE_reverseMap map[*A_ATTRIBUTE_VALUE_INTEGER]*ATTRIBUTE_DEFINITION_INTEGER
-
-	ATTRIBUTE_DEFINITION_INTEGER_TYPE_reverseMap map[*A_DATATYPE_DEFINITION_INTEGER_REF]*ATTRIBUTE_DEFINITION_INTEGER
-
 	OnAfterATTRIBUTE_DEFINITION_INTEGERCreateCallback OnAfterCreateInterface[ATTRIBUTE_DEFINITION_INTEGER]
 	OnAfterATTRIBUTE_DEFINITION_INTEGERUpdateCallback OnAfterUpdateInterface[ATTRIBUTE_DEFINITION_INTEGER]
 	OnAfterATTRIBUTE_DEFINITION_INTEGERDeleteCallback OnAfterDeleteInterface[ATTRIBUTE_DEFINITION_INTEGER]
@@ -122,12 +98,6 @@ type StageStruct struct {
 	ATTRIBUTE_DEFINITION_REALs_mapString map[string]*ATTRIBUTE_DEFINITION_REAL
 
 	// insertion point for slice of pointers maps
-	ATTRIBUTE_DEFINITION_REAL_ALTERNATIVE_ID_reverseMap map[*A_ALTERNATIVE_ID]*ATTRIBUTE_DEFINITION_REAL
-
-	ATTRIBUTE_DEFINITION_REAL_DEFAULT_VALUE_reverseMap map[*A_ATTRIBUTE_VALUE_REAL]*ATTRIBUTE_DEFINITION_REAL
-
-	ATTRIBUTE_DEFINITION_REAL_TYPE_reverseMap map[*A_DATATYPE_DEFINITION_REAL_REF]*ATTRIBUTE_DEFINITION_REAL
-
 	OnAfterATTRIBUTE_DEFINITION_REALCreateCallback OnAfterCreateInterface[ATTRIBUTE_DEFINITION_REAL]
 	OnAfterATTRIBUTE_DEFINITION_REALUpdateCallback OnAfterUpdateInterface[ATTRIBUTE_DEFINITION_REAL]
 	OnAfterATTRIBUTE_DEFINITION_REALDeleteCallback OnAfterDeleteInterface[ATTRIBUTE_DEFINITION_REAL]
@@ -137,12 +107,6 @@ type StageStruct struct {
 	ATTRIBUTE_DEFINITION_STRINGs_mapString map[string]*ATTRIBUTE_DEFINITION_STRING
 
 	// insertion point for slice of pointers maps
-	ATTRIBUTE_DEFINITION_STRING_ALTERNATIVE_ID_reverseMap map[*A_ALTERNATIVE_ID]*ATTRIBUTE_DEFINITION_STRING
-
-	ATTRIBUTE_DEFINITION_STRING_DEFAULT_VALUE_reverseMap map[*A_ATTRIBUTE_VALUE_STRING]*ATTRIBUTE_DEFINITION_STRING
-
-	ATTRIBUTE_DEFINITION_STRING_TYPE_reverseMap map[*A_DATATYPE_DEFINITION_STRING_REF]*ATTRIBUTE_DEFINITION_STRING
-
 	OnAfterATTRIBUTE_DEFINITION_STRINGCreateCallback OnAfterCreateInterface[ATTRIBUTE_DEFINITION_STRING]
 	OnAfterATTRIBUTE_DEFINITION_STRINGUpdateCallback OnAfterUpdateInterface[ATTRIBUTE_DEFINITION_STRING]
 	OnAfterATTRIBUTE_DEFINITION_STRINGDeleteCallback OnAfterDeleteInterface[ATTRIBUTE_DEFINITION_STRING]
@@ -152,12 +116,6 @@ type StageStruct struct {
 	ATTRIBUTE_DEFINITION_XHTMLs_mapString map[string]*ATTRIBUTE_DEFINITION_XHTML
 
 	// insertion point for slice of pointers maps
-	ATTRIBUTE_DEFINITION_XHTML_ALTERNATIVE_ID_reverseMap map[*A_ALTERNATIVE_ID]*ATTRIBUTE_DEFINITION_XHTML
-
-	ATTRIBUTE_DEFINITION_XHTML_DEFAULT_VALUE_reverseMap map[*A_ATTRIBUTE_VALUE_XHTML]*ATTRIBUTE_DEFINITION_XHTML
-
-	ATTRIBUTE_DEFINITION_XHTML_TYPE_reverseMap map[*A_DATATYPE_DEFINITION_XHTML_REF]*ATTRIBUTE_DEFINITION_XHTML
-
 	OnAfterATTRIBUTE_DEFINITION_XHTMLCreateCallback OnAfterCreateInterface[ATTRIBUTE_DEFINITION_XHTML]
 	OnAfterATTRIBUTE_DEFINITION_XHTMLUpdateCallback OnAfterUpdateInterface[ATTRIBUTE_DEFINITION_XHTML]
 	OnAfterATTRIBUTE_DEFINITION_XHTMLDeleteCallback OnAfterDeleteInterface[ATTRIBUTE_DEFINITION_XHTML]
@@ -167,8 +125,6 @@ type StageStruct struct {
 	ATTRIBUTE_VALUE_BOOLEANs_mapString map[string]*ATTRIBUTE_VALUE_BOOLEAN
 
 	// insertion point for slice of pointers maps
-	ATTRIBUTE_VALUE_BOOLEAN_DEFINITION_reverseMap map[*A_ATTRIBUTE_DEFINITION_BOOLEAN_REF]*ATTRIBUTE_VALUE_BOOLEAN
-
 	OnAfterATTRIBUTE_VALUE_BOOLEANCreateCallback OnAfterCreateInterface[ATTRIBUTE_VALUE_BOOLEAN]
 	OnAfterATTRIBUTE_VALUE_BOOLEANUpdateCallback OnAfterUpdateInterface[ATTRIBUTE_VALUE_BOOLEAN]
 	OnAfterATTRIBUTE_VALUE_BOOLEANDeleteCallback OnAfterDeleteInterface[ATTRIBUTE_VALUE_BOOLEAN]
@@ -178,8 +134,6 @@ type StageStruct struct {
 	ATTRIBUTE_VALUE_DATEs_mapString map[string]*ATTRIBUTE_VALUE_DATE
 
 	// insertion point for slice of pointers maps
-	ATTRIBUTE_VALUE_DATE_DEFINITION_reverseMap map[*A_ATTRIBUTE_DEFINITION_DATE_REF]*ATTRIBUTE_VALUE_DATE
-
 	OnAfterATTRIBUTE_VALUE_DATECreateCallback OnAfterCreateInterface[ATTRIBUTE_VALUE_DATE]
 	OnAfterATTRIBUTE_VALUE_DATEUpdateCallback OnAfterUpdateInterface[ATTRIBUTE_VALUE_DATE]
 	OnAfterATTRIBUTE_VALUE_DATEDeleteCallback OnAfterDeleteInterface[ATTRIBUTE_VALUE_DATE]
@@ -189,10 +143,6 @@ type StageStruct struct {
 	ATTRIBUTE_VALUE_ENUMERATIONs_mapString map[string]*ATTRIBUTE_VALUE_ENUMERATION
 
 	// insertion point for slice of pointers maps
-	ATTRIBUTE_VALUE_ENUMERATION_DEFINITION_reverseMap map[*A_ATTRIBUTE_DEFINITION_ENUMERATION_REF]*ATTRIBUTE_VALUE_ENUMERATION
-
-	ATTRIBUTE_VALUE_ENUMERATION_VALUES_reverseMap map[*A_ENUM_VALUE_REF]*ATTRIBUTE_VALUE_ENUMERATION
-
 	OnAfterATTRIBUTE_VALUE_ENUMERATIONCreateCallback OnAfterCreateInterface[ATTRIBUTE_VALUE_ENUMERATION]
 	OnAfterATTRIBUTE_VALUE_ENUMERATIONUpdateCallback OnAfterUpdateInterface[ATTRIBUTE_VALUE_ENUMERATION]
 	OnAfterATTRIBUTE_VALUE_ENUMERATIONDeleteCallback OnAfterDeleteInterface[ATTRIBUTE_VALUE_ENUMERATION]
@@ -202,8 +152,6 @@ type StageStruct struct {
 	ATTRIBUTE_VALUE_INTEGERs_mapString map[string]*ATTRIBUTE_VALUE_INTEGER
 
 	// insertion point for slice of pointers maps
-	ATTRIBUTE_VALUE_INTEGER_DEFINITION_reverseMap map[*A_ATTRIBUTE_DEFINITION_INTEGER_REF]*ATTRIBUTE_VALUE_INTEGER
-
 	OnAfterATTRIBUTE_VALUE_INTEGERCreateCallback OnAfterCreateInterface[ATTRIBUTE_VALUE_INTEGER]
 	OnAfterATTRIBUTE_VALUE_INTEGERUpdateCallback OnAfterUpdateInterface[ATTRIBUTE_VALUE_INTEGER]
 	OnAfterATTRIBUTE_VALUE_INTEGERDeleteCallback OnAfterDeleteInterface[ATTRIBUTE_VALUE_INTEGER]
@@ -213,8 +161,6 @@ type StageStruct struct {
 	ATTRIBUTE_VALUE_REALs_mapString map[string]*ATTRIBUTE_VALUE_REAL
 
 	// insertion point for slice of pointers maps
-	ATTRIBUTE_VALUE_REAL_DEFINITION_reverseMap map[*A_ATTRIBUTE_DEFINITION_REAL_REF]*ATTRIBUTE_VALUE_REAL
-
 	OnAfterATTRIBUTE_VALUE_REALCreateCallback OnAfterCreateInterface[ATTRIBUTE_VALUE_REAL]
 	OnAfterATTRIBUTE_VALUE_REALUpdateCallback OnAfterUpdateInterface[ATTRIBUTE_VALUE_REAL]
 	OnAfterATTRIBUTE_VALUE_REALDeleteCallback OnAfterDeleteInterface[ATTRIBUTE_VALUE_REAL]
@@ -224,8 +170,6 @@ type StageStruct struct {
 	ATTRIBUTE_VALUE_STRINGs_mapString map[string]*ATTRIBUTE_VALUE_STRING
 
 	// insertion point for slice of pointers maps
-	ATTRIBUTE_VALUE_STRING_DEFINITION_reverseMap map[*A_ATTRIBUTE_DEFINITION_STRING_REF]*ATTRIBUTE_VALUE_STRING
-
 	OnAfterATTRIBUTE_VALUE_STRINGCreateCallback OnAfterCreateInterface[ATTRIBUTE_VALUE_STRING]
 	OnAfterATTRIBUTE_VALUE_STRINGUpdateCallback OnAfterUpdateInterface[ATTRIBUTE_VALUE_STRING]
 	OnAfterATTRIBUTE_VALUE_STRINGDeleteCallback OnAfterDeleteInterface[ATTRIBUTE_VALUE_STRING]
@@ -235,12 +179,6 @@ type StageStruct struct {
 	ATTRIBUTE_VALUE_XHTMLs_mapString map[string]*ATTRIBUTE_VALUE_XHTML
 
 	// insertion point for slice of pointers maps
-	ATTRIBUTE_VALUE_XHTML_THE_VALUE_reverseMap map[*XHTML_CONTENT]*ATTRIBUTE_VALUE_XHTML
-
-	ATTRIBUTE_VALUE_XHTML_THE_ORIGINAL_VALUE_reverseMap map[*XHTML_CONTENT]*ATTRIBUTE_VALUE_XHTML
-
-	ATTRIBUTE_VALUE_XHTML_DEFINITION_reverseMap map[*A_ATTRIBUTE_DEFINITION_XHTML_REF]*ATTRIBUTE_VALUE_XHTML
-
 	OnAfterATTRIBUTE_VALUE_XHTMLCreateCallback OnAfterCreateInterface[ATTRIBUTE_VALUE_XHTML]
 	OnAfterATTRIBUTE_VALUE_XHTMLUpdateCallback OnAfterUpdateInterface[ATTRIBUTE_VALUE_XHTML]
 	OnAfterATTRIBUTE_VALUE_XHTMLDeleteCallback OnAfterDeleteInterface[ATTRIBUTE_VALUE_XHTML]
@@ -575,6 +513,15 @@ type StageStruct struct {
 	OnAfterA_RELATION_GROUP_TYPE_REFDeleteCallback OnAfterDeleteInterface[A_RELATION_GROUP_TYPE_REF]
 	OnAfterA_RELATION_GROUP_TYPE_REFReadCallback   OnAfterReadInterface[A_RELATION_GROUP_TYPE_REF]
 
+	A_SOURCE_SPECIFICATION_1s           map[*A_SOURCE_SPECIFICATION_1]any
+	A_SOURCE_SPECIFICATION_1s_mapString map[string]*A_SOURCE_SPECIFICATION_1
+
+	// insertion point for slice of pointers maps
+	OnAfterA_SOURCE_SPECIFICATION_1CreateCallback OnAfterCreateInterface[A_SOURCE_SPECIFICATION_1]
+	OnAfterA_SOURCE_SPECIFICATION_1UpdateCallback OnAfterUpdateInterface[A_SOURCE_SPECIFICATION_1]
+	OnAfterA_SOURCE_SPECIFICATION_1DeleteCallback OnAfterDeleteInterface[A_SOURCE_SPECIFICATION_1]
+	OnAfterA_SOURCE_SPECIFICATION_1ReadCallback   OnAfterReadInterface[A_SOURCE_SPECIFICATION_1]
+
 	A_SPECIFICATIONSs           map[*A_SPECIFICATIONS]any
 	A_SPECIFICATIONSs_mapString map[string]*A_SPECIFICATIONS
 
@@ -715,15 +662,6 @@ type StageStruct struct {
 	OnAfterA_TARGET_1DeleteCallback OnAfterDeleteInterface[A_TARGET_1]
 	OnAfterA_TARGET_1ReadCallback   OnAfterReadInterface[A_TARGET_1]
 
-	A_TARGET_SPECIFICATION_1s           map[*A_TARGET_SPECIFICATION_1]any
-	A_TARGET_SPECIFICATION_1s_mapString map[string]*A_TARGET_SPECIFICATION_1
-
-	// insertion point for slice of pointers maps
-	OnAfterA_TARGET_SPECIFICATION_1CreateCallback OnAfterCreateInterface[A_TARGET_SPECIFICATION_1]
-	OnAfterA_TARGET_SPECIFICATION_1UpdateCallback OnAfterUpdateInterface[A_TARGET_SPECIFICATION_1]
-	OnAfterA_TARGET_SPECIFICATION_1DeleteCallback OnAfterDeleteInterface[A_TARGET_SPECIFICATION_1]
-	OnAfterA_TARGET_SPECIFICATION_1ReadCallback   OnAfterReadInterface[A_TARGET_SPECIFICATION_1]
-
 	A_THE_HEADERs           map[*A_THE_HEADER]any
 	A_THE_HEADERs_mapString map[string]*A_THE_HEADER
 
@@ -750,8 +688,6 @@ type StageStruct struct {
 	DATATYPE_DEFINITION_BOOLEANs_mapString map[string]*DATATYPE_DEFINITION_BOOLEAN
 
 	// insertion point for slice of pointers maps
-	DATATYPE_DEFINITION_BOOLEAN_ALTERNATIVE_ID_reverseMap map[*A_ALTERNATIVE_ID]*DATATYPE_DEFINITION_BOOLEAN
-
 	OnAfterDATATYPE_DEFINITION_BOOLEANCreateCallback OnAfterCreateInterface[DATATYPE_DEFINITION_BOOLEAN]
 	OnAfterDATATYPE_DEFINITION_BOOLEANUpdateCallback OnAfterUpdateInterface[DATATYPE_DEFINITION_BOOLEAN]
 	OnAfterDATATYPE_DEFINITION_BOOLEANDeleteCallback OnAfterDeleteInterface[DATATYPE_DEFINITION_BOOLEAN]
@@ -761,8 +697,6 @@ type StageStruct struct {
 	DATATYPE_DEFINITION_DATEs_mapString map[string]*DATATYPE_DEFINITION_DATE
 
 	// insertion point for slice of pointers maps
-	DATATYPE_DEFINITION_DATE_ALTERNATIVE_ID_reverseMap map[*A_ALTERNATIVE_ID]*DATATYPE_DEFINITION_DATE
-
 	OnAfterDATATYPE_DEFINITION_DATECreateCallback OnAfterCreateInterface[DATATYPE_DEFINITION_DATE]
 	OnAfterDATATYPE_DEFINITION_DATEUpdateCallback OnAfterUpdateInterface[DATATYPE_DEFINITION_DATE]
 	OnAfterDATATYPE_DEFINITION_DATEDeleteCallback OnAfterDeleteInterface[DATATYPE_DEFINITION_DATE]
@@ -772,10 +706,6 @@ type StageStruct struct {
 	DATATYPE_DEFINITION_ENUMERATIONs_mapString map[string]*DATATYPE_DEFINITION_ENUMERATION
 
 	// insertion point for slice of pointers maps
-	DATATYPE_DEFINITION_ENUMERATION_ALTERNATIVE_ID_reverseMap map[*A_ALTERNATIVE_ID]*DATATYPE_DEFINITION_ENUMERATION
-
-	DATATYPE_DEFINITION_ENUMERATION_SPECIFIED_VALUES_reverseMap map[*A_SPECIFIED_VALUES]*DATATYPE_DEFINITION_ENUMERATION
-
 	OnAfterDATATYPE_DEFINITION_ENUMERATIONCreateCallback OnAfterCreateInterface[DATATYPE_DEFINITION_ENUMERATION]
 	OnAfterDATATYPE_DEFINITION_ENUMERATIONUpdateCallback OnAfterUpdateInterface[DATATYPE_DEFINITION_ENUMERATION]
 	OnAfterDATATYPE_DEFINITION_ENUMERATIONDeleteCallback OnAfterDeleteInterface[DATATYPE_DEFINITION_ENUMERATION]
@@ -785,8 +715,6 @@ type StageStruct struct {
 	DATATYPE_DEFINITION_INTEGERs_mapString map[string]*DATATYPE_DEFINITION_INTEGER
 
 	// insertion point for slice of pointers maps
-	DATATYPE_DEFINITION_INTEGER_ALTERNATIVE_ID_reverseMap map[*A_ALTERNATIVE_ID]*DATATYPE_DEFINITION_INTEGER
-
 	OnAfterDATATYPE_DEFINITION_INTEGERCreateCallback OnAfterCreateInterface[DATATYPE_DEFINITION_INTEGER]
 	OnAfterDATATYPE_DEFINITION_INTEGERUpdateCallback OnAfterUpdateInterface[DATATYPE_DEFINITION_INTEGER]
 	OnAfterDATATYPE_DEFINITION_INTEGERDeleteCallback OnAfterDeleteInterface[DATATYPE_DEFINITION_INTEGER]
@@ -796,8 +724,6 @@ type StageStruct struct {
 	DATATYPE_DEFINITION_REALs_mapString map[string]*DATATYPE_DEFINITION_REAL
 
 	// insertion point for slice of pointers maps
-	DATATYPE_DEFINITION_REAL_ALTERNATIVE_ID_reverseMap map[*A_ALTERNATIVE_ID]*DATATYPE_DEFINITION_REAL
-
 	OnAfterDATATYPE_DEFINITION_REALCreateCallback OnAfterCreateInterface[DATATYPE_DEFINITION_REAL]
 	OnAfterDATATYPE_DEFINITION_REALUpdateCallback OnAfterUpdateInterface[DATATYPE_DEFINITION_REAL]
 	OnAfterDATATYPE_DEFINITION_REALDeleteCallback OnAfterDeleteInterface[DATATYPE_DEFINITION_REAL]
@@ -807,8 +733,6 @@ type StageStruct struct {
 	DATATYPE_DEFINITION_STRINGs_mapString map[string]*DATATYPE_DEFINITION_STRING
 
 	// insertion point for slice of pointers maps
-	DATATYPE_DEFINITION_STRING_ALTERNATIVE_ID_reverseMap map[*A_ALTERNATIVE_ID]*DATATYPE_DEFINITION_STRING
-
 	OnAfterDATATYPE_DEFINITION_STRINGCreateCallback OnAfterCreateInterface[DATATYPE_DEFINITION_STRING]
 	OnAfterDATATYPE_DEFINITION_STRINGUpdateCallback OnAfterUpdateInterface[DATATYPE_DEFINITION_STRING]
 	OnAfterDATATYPE_DEFINITION_STRINGDeleteCallback OnAfterDeleteInterface[DATATYPE_DEFINITION_STRING]
@@ -818,8 +742,6 @@ type StageStruct struct {
 	DATATYPE_DEFINITION_XHTMLs_mapString map[string]*DATATYPE_DEFINITION_XHTML
 
 	// insertion point for slice of pointers maps
-	DATATYPE_DEFINITION_XHTML_ALTERNATIVE_ID_reverseMap map[*A_ALTERNATIVE_ID]*DATATYPE_DEFINITION_XHTML
-
 	OnAfterDATATYPE_DEFINITION_XHTMLCreateCallback OnAfterCreateInterface[DATATYPE_DEFINITION_XHTML]
 	OnAfterDATATYPE_DEFINITION_XHTMLUpdateCallback OnAfterUpdateInterface[DATATYPE_DEFINITION_XHTML]
 	OnAfterDATATYPE_DEFINITION_XHTMLDeleteCallback OnAfterDeleteInterface[DATATYPE_DEFINITION_XHTML]
@@ -838,10 +760,6 @@ type StageStruct struct {
 	ENUM_VALUEs_mapString map[string]*ENUM_VALUE
 
 	// insertion point for slice of pointers maps
-	ENUM_VALUE_ALTERNATIVE_ID_reverseMap map[*A_ALTERNATIVE_ID]*ENUM_VALUE
-
-	ENUM_VALUE_PROPERTIES_reverseMap map[*A_PROPERTIES]*ENUM_VALUE
-
 	OnAfterENUM_VALUECreateCallback OnAfterCreateInterface[ENUM_VALUE]
 	OnAfterENUM_VALUEUpdateCallback OnAfterUpdateInterface[ENUM_VALUE]
 	OnAfterENUM_VALUEDeleteCallback OnAfterDeleteInterface[ENUM_VALUE]
@@ -851,16 +769,6 @@ type StageStruct struct {
 	RELATION_GROUPs_mapString map[string]*RELATION_GROUP
 
 	// insertion point for slice of pointers maps
-	RELATION_GROUP_ALTERNATIVE_ID_reverseMap map[*A_ALTERNATIVE_ID]*RELATION_GROUP
-
-	RELATION_GROUP_SOURCE_SPECIFICATION_reverseMap map[*A_TARGET_SPECIFICATION_1]*RELATION_GROUP
-
-	RELATION_GROUP_SPEC_RELATIONS_reverseMap map[*A_SPEC_RELATION_REF]*RELATION_GROUP
-
-	RELATION_GROUP_TARGET_SPECIFICATION_reverseMap map[*A_TARGET_SPECIFICATION_1]*RELATION_GROUP
-
-	RELATION_GROUP_TYPE_reverseMap map[*A_RELATION_GROUP_TYPE_REF]*RELATION_GROUP
-
 	OnAfterRELATION_GROUPCreateCallback OnAfterCreateInterface[RELATION_GROUP]
 	OnAfterRELATION_GROUPUpdateCallback OnAfterUpdateInterface[RELATION_GROUP]
 	OnAfterRELATION_GROUPDeleteCallback OnAfterDeleteInterface[RELATION_GROUP]
@@ -870,10 +778,6 @@ type StageStruct struct {
 	RELATION_GROUP_TYPEs_mapString map[string]*RELATION_GROUP_TYPE
 
 	// insertion point for slice of pointers maps
-	RELATION_GROUP_TYPE_ALTERNATIVE_ID_reverseMap map[*A_ALTERNATIVE_ID]*RELATION_GROUP_TYPE
-
-	RELATION_GROUP_TYPE_SPEC_ATTRIBUTES_reverseMap map[*A_SPEC_ATTRIBUTES]*RELATION_GROUP_TYPE
-
 	OnAfterRELATION_GROUP_TYPECreateCallback OnAfterCreateInterface[RELATION_GROUP_TYPE]
 	OnAfterRELATION_GROUP_TYPEUpdateCallback OnAfterUpdateInterface[RELATION_GROUP_TYPE]
 	OnAfterRELATION_GROUP_TYPEDeleteCallback OnAfterDeleteInterface[RELATION_GROUP_TYPE]
@@ -883,12 +787,6 @@ type StageStruct struct {
 	REQ_IFs_mapString map[string]*REQ_IF
 
 	// insertion point for slice of pointers maps
-	REQ_IF_THE_HEADER_reverseMap map[*A_THE_HEADER]*REQ_IF
-
-	REQ_IF_CORE_CONTENT_reverseMap map[*A_CORE_CONTENT]*REQ_IF
-
-	REQ_IF_TOOL_EXTENSIONS_reverseMap map[*A_TOOL_EXTENSIONS]*REQ_IF
-
 	OnAfterREQ_IFCreateCallback OnAfterCreateInterface[REQ_IF]
 	OnAfterREQ_IFUpdateCallback OnAfterUpdateInterface[REQ_IF]
 	OnAfterREQ_IFDeleteCallback OnAfterDeleteInterface[REQ_IF]
@@ -898,18 +796,6 @@ type StageStruct struct {
 	REQ_IF_CONTENTs_mapString map[string]*REQ_IF_CONTENT
 
 	// insertion point for slice of pointers maps
-	REQ_IF_CONTENT_DATATYPES_reverseMap map[*A_DATATYPES]*REQ_IF_CONTENT
-
-	REQ_IF_CONTENT_SPEC_TYPES_reverseMap map[*A_SPEC_TYPES]*REQ_IF_CONTENT
-
-	REQ_IF_CONTENT_SPEC_OBJECTS_reverseMap map[*A_SPEC_OBJECTS]*REQ_IF_CONTENT
-
-	REQ_IF_CONTENT_SPEC_RELATIONS_reverseMap map[*A_SPEC_RELATIONS]*REQ_IF_CONTENT
-
-	REQ_IF_CONTENT_SPECIFICATIONS_reverseMap map[*A_SPECIFICATIONS]*REQ_IF_CONTENT
-
-	REQ_IF_CONTENT_SPEC_RELATION_GROUPS_reverseMap map[*A_SPEC_RELATION_GROUPS]*REQ_IF_CONTENT
-
 	OnAfterREQ_IF_CONTENTCreateCallback OnAfterCreateInterface[REQ_IF_CONTENT]
 	OnAfterREQ_IF_CONTENTUpdateCallback OnAfterUpdateInterface[REQ_IF_CONTENT]
 	OnAfterREQ_IF_CONTENTDeleteCallback OnAfterDeleteInterface[REQ_IF_CONTENT]
@@ -937,14 +823,6 @@ type StageStruct struct {
 	SPECIFICATIONs_mapString map[string]*SPECIFICATION
 
 	// insertion point for slice of pointers maps
-	SPECIFICATION_ALTERNATIVE_ID_reverseMap map[*A_ALTERNATIVE_ID]*SPECIFICATION
-
-	SPECIFICATION_CHILDREN_reverseMap map[*A_CHILDREN]*SPECIFICATION
-
-	SPECIFICATION_VALUES_reverseMap map[*A_ATTRIBUTE_VALUE_XHTML_1]*SPECIFICATION
-
-	SPECIFICATION_TYPE_reverseMap map[*A_SPECIFICATION_TYPE_REF]*SPECIFICATION
-
 	OnAfterSPECIFICATIONCreateCallback OnAfterCreateInterface[SPECIFICATION]
 	OnAfterSPECIFICATIONUpdateCallback OnAfterUpdateInterface[SPECIFICATION]
 	OnAfterSPECIFICATIONDeleteCallback OnAfterDeleteInterface[SPECIFICATION]
@@ -954,10 +832,6 @@ type StageStruct struct {
 	SPECIFICATION_TYPEs_mapString map[string]*SPECIFICATION_TYPE
 
 	// insertion point for slice of pointers maps
-	SPECIFICATION_TYPE_ALTERNATIVE_ID_reverseMap map[*A_ALTERNATIVE_ID]*SPECIFICATION_TYPE
-
-	SPECIFICATION_TYPE_SPEC_ATTRIBUTES_reverseMap map[*A_SPEC_ATTRIBUTES]*SPECIFICATION_TYPE
-
 	OnAfterSPECIFICATION_TYPECreateCallback OnAfterCreateInterface[SPECIFICATION_TYPE]
 	OnAfterSPECIFICATION_TYPEUpdateCallback OnAfterUpdateInterface[SPECIFICATION_TYPE]
 	OnAfterSPECIFICATION_TYPEDeleteCallback OnAfterDeleteInterface[SPECIFICATION_TYPE]
@@ -967,14 +841,6 @@ type StageStruct struct {
 	SPEC_HIERARCHYs_mapString map[string]*SPEC_HIERARCHY
 
 	// insertion point for slice of pointers maps
-	SPEC_HIERARCHY_ALTERNATIVE_ID_reverseMap map[*A_ALTERNATIVE_ID]*SPEC_HIERARCHY
-
-	SPEC_HIERARCHY_CHILDREN_reverseMap map[*A_CHILDREN]*SPEC_HIERARCHY
-
-	SPEC_HIERARCHY_EDITABLE_ATTS_reverseMap map[*A_EDITABLE_ATTS]*SPEC_HIERARCHY
-
-	SPEC_HIERARCHY_OBJECT_reverseMap map[*A_OBJECT]*SPEC_HIERARCHY
-
 	OnAfterSPEC_HIERARCHYCreateCallback OnAfterCreateInterface[SPEC_HIERARCHY]
 	OnAfterSPEC_HIERARCHYUpdateCallback OnAfterUpdateInterface[SPEC_HIERARCHY]
 	OnAfterSPEC_HIERARCHYDeleteCallback OnAfterDeleteInterface[SPEC_HIERARCHY]
@@ -984,12 +850,6 @@ type StageStruct struct {
 	SPEC_OBJECTs_mapString map[string]*SPEC_OBJECT
 
 	// insertion point for slice of pointers maps
-	SPEC_OBJECT_ALTERNATIVE_ID_reverseMap map[*A_ALTERNATIVE_ID]*SPEC_OBJECT
-
-	SPEC_OBJECT_VALUES_reverseMap map[*A_ATTRIBUTE_VALUE_XHTML_1]*SPEC_OBJECT
-
-	SPEC_OBJECT_TYPE_reverseMap map[*A_SPEC_OBJECT_TYPE_REF]*SPEC_OBJECT
-
 	OnAfterSPEC_OBJECTCreateCallback OnAfterCreateInterface[SPEC_OBJECT]
 	OnAfterSPEC_OBJECTUpdateCallback OnAfterUpdateInterface[SPEC_OBJECT]
 	OnAfterSPEC_OBJECTDeleteCallback OnAfterDeleteInterface[SPEC_OBJECT]
@@ -999,10 +859,6 @@ type StageStruct struct {
 	SPEC_OBJECT_TYPEs_mapString map[string]*SPEC_OBJECT_TYPE
 
 	// insertion point for slice of pointers maps
-	SPEC_OBJECT_TYPE_ALTERNATIVE_ID_reverseMap map[*A_ALTERNATIVE_ID]*SPEC_OBJECT_TYPE
-
-	SPEC_OBJECT_TYPE_SPEC_ATTRIBUTES_reverseMap map[*A_SPEC_ATTRIBUTES]*SPEC_OBJECT_TYPE
-
 	OnAfterSPEC_OBJECT_TYPECreateCallback OnAfterCreateInterface[SPEC_OBJECT_TYPE]
 	OnAfterSPEC_OBJECT_TYPEUpdateCallback OnAfterUpdateInterface[SPEC_OBJECT_TYPE]
 	OnAfterSPEC_OBJECT_TYPEDeleteCallback OnAfterDeleteInterface[SPEC_OBJECT_TYPE]
@@ -1012,16 +868,6 @@ type StageStruct struct {
 	SPEC_RELATIONs_mapString map[string]*SPEC_RELATION
 
 	// insertion point for slice of pointers maps
-	SPEC_RELATION_ALTERNATIVE_ID_reverseMap map[*A_ALTERNATIVE_ID]*SPEC_RELATION
-
-	SPEC_RELATION_VALUES_reverseMap map[*A_ATTRIBUTE_VALUE_XHTML_1]*SPEC_RELATION
-
-	SPEC_RELATION_SOURCE_reverseMap map[*A_TARGET_1]*SPEC_RELATION
-
-	SPEC_RELATION_TARGET_reverseMap map[*A_TARGET_1]*SPEC_RELATION
-
-	SPEC_RELATION_TYPE_reverseMap map[*A_SPEC_RELATION_TYPE_REF]*SPEC_RELATION
-
 	OnAfterSPEC_RELATIONCreateCallback OnAfterCreateInterface[SPEC_RELATION]
 	OnAfterSPEC_RELATIONUpdateCallback OnAfterUpdateInterface[SPEC_RELATION]
 	OnAfterSPEC_RELATIONDeleteCallback OnAfterDeleteInterface[SPEC_RELATION]
@@ -1031,10 +877,6 @@ type StageStruct struct {
 	SPEC_RELATION_TYPEs_mapString map[string]*SPEC_RELATION_TYPE
 
 	// insertion point for slice of pointers maps
-	SPEC_RELATION_TYPE_ALTERNATIVE_ID_reverseMap map[*A_ALTERNATIVE_ID]*SPEC_RELATION_TYPE
-
-	SPEC_RELATION_TYPE_SPEC_ATTRIBUTES_reverseMap map[*A_SPEC_ATTRIBUTES]*SPEC_RELATION_TYPE
-
 	OnAfterSPEC_RELATION_TYPECreateCallback OnAfterCreateInterface[SPEC_RELATION_TYPE]
 	OnAfterSPEC_RELATION_TYPEUpdateCallback OnAfterUpdateInterface[SPEC_RELATION_TYPE]
 	OnAfterSPEC_RELATION_TYPEDeleteCallback OnAfterDeleteInterface[SPEC_RELATION_TYPE]
@@ -1209,6 +1051,8 @@ type BackRepoInterface interface {
 	CheckoutA_PROPERTIES(a_properties *A_PROPERTIES)
 	CommitA_RELATION_GROUP_TYPE_REF(a_relation_group_type_ref *A_RELATION_GROUP_TYPE_REF)
 	CheckoutA_RELATION_GROUP_TYPE_REF(a_relation_group_type_ref *A_RELATION_GROUP_TYPE_REF)
+	CommitA_SOURCE_SPECIFICATION_1(a_source_specification_1 *A_SOURCE_SPECIFICATION_1)
+	CheckoutA_SOURCE_SPECIFICATION_1(a_source_specification_1 *A_SOURCE_SPECIFICATION_1)
 	CommitA_SPECIFICATIONS(a_specifications *A_SPECIFICATIONS)
 	CheckoutA_SPECIFICATIONS(a_specifications *A_SPECIFICATIONS)
 	CommitA_SPECIFICATION_TYPE_REF(a_specification_type_ref *A_SPECIFICATION_TYPE_REF)
@@ -1233,8 +1077,6 @@ type BackRepoInterface interface {
 	CheckoutA_SPEC_TYPES(a_spec_types *A_SPEC_TYPES)
 	CommitA_TARGET_1(a_target_1 *A_TARGET_1)
 	CheckoutA_TARGET_1(a_target_1 *A_TARGET_1)
-	CommitA_TARGET_SPECIFICATION_1(a_target_specification_1 *A_TARGET_SPECIFICATION_1)
-	CheckoutA_TARGET_SPECIFICATION_1(a_target_specification_1 *A_TARGET_SPECIFICATION_1)
 	CommitA_THE_HEADER(a_the_header *A_THE_HEADER)
 	CheckoutA_THE_HEADER(a_the_header *A_THE_HEADER)
 	CommitA_TOOL_EXTENSIONS(a_tool_extensions *A_TOOL_EXTENSIONS)
@@ -1430,6 +1272,9 @@ func NewStage(path string) (stage *StageStruct) {
 		A_RELATION_GROUP_TYPE_REFs:           make(map[*A_RELATION_GROUP_TYPE_REF]any),
 		A_RELATION_GROUP_TYPE_REFs_mapString: make(map[string]*A_RELATION_GROUP_TYPE_REF),
 
+		A_SOURCE_SPECIFICATION_1s:           make(map[*A_SOURCE_SPECIFICATION_1]any),
+		A_SOURCE_SPECIFICATION_1s_mapString: make(map[string]*A_SOURCE_SPECIFICATION_1),
+
 		A_SPECIFICATIONSs:           make(map[*A_SPECIFICATIONS]any),
 		A_SPECIFICATIONSs_mapString: make(map[string]*A_SPECIFICATIONS),
 
@@ -1465,9 +1310,6 @@ func NewStage(path string) (stage *StageStruct) {
 
 		A_TARGET_1s:           make(map[*A_TARGET_1]any),
 		A_TARGET_1s_mapString: make(map[string]*A_TARGET_1),
-
-		A_TARGET_SPECIFICATION_1s:           make(map[*A_TARGET_SPECIFICATION_1]any),
-		A_TARGET_SPECIFICATION_1s_mapString: make(map[string]*A_TARGET_SPECIFICATION_1),
 
 		A_THE_HEADERs:           make(map[*A_THE_HEADER]any),
 		A_THE_HEADERs_mapString: make(map[string]*A_THE_HEADER),
@@ -1623,6 +1465,7 @@ func (stage *StageStruct) Commit() {
 	stage.Map_GongStructName_InstancesNb["A_OBJECT"] = len(stage.A_OBJECTs)
 	stage.Map_GongStructName_InstancesNb["A_PROPERTIES"] = len(stage.A_PROPERTIESs)
 	stage.Map_GongStructName_InstancesNb["A_RELATION_GROUP_TYPE_REF"] = len(stage.A_RELATION_GROUP_TYPE_REFs)
+	stage.Map_GongStructName_InstancesNb["A_SOURCE_SPECIFICATION_1"] = len(stage.A_SOURCE_SPECIFICATION_1s)
 	stage.Map_GongStructName_InstancesNb["A_SPECIFICATIONS"] = len(stage.A_SPECIFICATIONSs)
 	stage.Map_GongStructName_InstancesNb["A_SPECIFICATION_TYPE_REF"] = len(stage.A_SPECIFICATION_TYPE_REFs)
 	stage.Map_GongStructName_InstancesNb["A_SPECIFIED_VALUES"] = len(stage.A_SPECIFIED_VALUESs)
@@ -1635,7 +1478,6 @@ func (stage *StageStruct) Commit() {
 	stage.Map_GongStructName_InstancesNb["A_SPEC_RELATION_TYPE_REF"] = len(stage.A_SPEC_RELATION_TYPE_REFs)
 	stage.Map_GongStructName_InstancesNb["A_SPEC_TYPES"] = len(stage.A_SPEC_TYPESs)
 	stage.Map_GongStructName_InstancesNb["A_TARGET_1"] = len(stage.A_TARGET_1s)
-	stage.Map_GongStructName_InstancesNb["A_TARGET_SPECIFICATION_1"] = len(stage.A_TARGET_SPECIFICATION_1s)
 	stage.Map_GongStructName_InstancesNb["A_THE_HEADER"] = len(stage.A_THE_HEADERs)
 	stage.Map_GongStructName_InstancesNb["A_TOOL_EXTENSIONS"] = len(stage.A_TOOL_EXTENSIONSs)
 	stage.Map_GongStructName_InstancesNb["DATATYPE_DEFINITION_BOOLEAN"] = len(stage.DATATYPE_DEFINITION_BOOLEANs)
@@ -1717,6 +1559,7 @@ func (stage *StageStruct) Checkout() {
 	stage.Map_GongStructName_InstancesNb["A_OBJECT"] = len(stage.A_OBJECTs)
 	stage.Map_GongStructName_InstancesNb["A_PROPERTIES"] = len(stage.A_PROPERTIESs)
 	stage.Map_GongStructName_InstancesNb["A_RELATION_GROUP_TYPE_REF"] = len(stage.A_RELATION_GROUP_TYPE_REFs)
+	stage.Map_GongStructName_InstancesNb["A_SOURCE_SPECIFICATION_1"] = len(stage.A_SOURCE_SPECIFICATION_1s)
 	stage.Map_GongStructName_InstancesNb["A_SPECIFICATIONS"] = len(stage.A_SPECIFICATIONSs)
 	stage.Map_GongStructName_InstancesNb["A_SPECIFICATION_TYPE_REF"] = len(stage.A_SPECIFICATION_TYPE_REFs)
 	stage.Map_GongStructName_InstancesNb["A_SPECIFIED_VALUES"] = len(stage.A_SPECIFIED_VALUESs)
@@ -1729,7 +1572,6 @@ func (stage *StageStruct) Checkout() {
 	stage.Map_GongStructName_InstancesNb["A_SPEC_RELATION_TYPE_REF"] = len(stage.A_SPEC_RELATION_TYPE_REFs)
 	stage.Map_GongStructName_InstancesNb["A_SPEC_TYPES"] = len(stage.A_SPEC_TYPESs)
 	stage.Map_GongStructName_InstancesNb["A_TARGET_1"] = len(stage.A_TARGET_1s)
-	stage.Map_GongStructName_InstancesNb["A_TARGET_SPECIFICATION_1"] = len(stage.A_TARGET_SPECIFICATION_1s)
 	stage.Map_GongStructName_InstancesNb["A_THE_HEADER"] = len(stage.A_THE_HEADERs)
 	stage.Map_GongStructName_InstancesNb["A_TOOL_EXTENSIONS"] = len(stage.A_TOOL_EXTENSIONSs)
 	stage.Map_GongStructName_InstancesNb["DATATYPE_DEFINITION_BOOLEAN"] = len(stage.DATATYPE_DEFINITION_BOOLEANs)
@@ -4087,6 +3929,56 @@ func (a_relation_group_type_ref *A_RELATION_GROUP_TYPE_REF) GetName() (res strin
 	return a_relation_group_type_ref.Name
 }
 
+// Stage puts a_source_specification_1 to the model stage
+func (a_source_specification_1 *A_SOURCE_SPECIFICATION_1) Stage(stage *StageStruct) *A_SOURCE_SPECIFICATION_1 {
+	stage.A_SOURCE_SPECIFICATION_1s[a_source_specification_1] = __member
+	stage.A_SOURCE_SPECIFICATION_1s_mapString[a_source_specification_1.Name] = a_source_specification_1
+
+	return a_source_specification_1
+}
+
+// Unstage removes a_source_specification_1 off the model stage
+func (a_source_specification_1 *A_SOURCE_SPECIFICATION_1) Unstage(stage *StageStruct) *A_SOURCE_SPECIFICATION_1 {
+	delete(stage.A_SOURCE_SPECIFICATION_1s, a_source_specification_1)
+	delete(stage.A_SOURCE_SPECIFICATION_1s_mapString, a_source_specification_1.Name)
+	return a_source_specification_1
+}
+
+// UnstageVoid removes a_source_specification_1 off the model stage
+func (a_source_specification_1 *A_SOURCE_SPECIFICATION_1) UnstageVoid(stage *StageStruct) {
+	delete(stage.A_SOURCE_SPECIFICATION_1s, a_source_specification_1)
+	delete(stage.A_SOURCE_SPECIFICATION_1s_mapString, a_source_specification_1.Name)
+}
+
+// commit a_source_specification_1 to the back repo (if it is already staged)
+func (a_source_specification_1 *A_SOURCE_SPECIFICATION_1) Commit(stage *StageStruct) *A_SOURCE_SPECIFICATION_1 {
+	if _, ok := stage.A_SOURCE_SPECIFICATION_1s[a_source_specification_1]; ok {
+		if stage.BackRepo != nil {
+			stage.BackRepo.CommitA_SOURCE_SPECIFICATION_1(a_source_specification_1)
+		}
+	}
+	return a_source_specification_1
+}
+
+func (a_source_specification_1 *A_SOURCE_SPECIFICATION_1) CommitVoid(stage *StageStruct) {
+	a_source_specification_1.Commit(stage)
+}
+
+// Checkout a_source_specification_1 to the back repo (if it is already staged)
+func (a_source_specification_1 *A_SOURCE_SPECIFICATION_1) Checkout(stage *StageStruct) *A_SOURCE_SPECIFICATION_1 {
+	if _, ok := stage.A_SOURCE_SPECIFICATION_1s[a_source_specification_1]; ok {
+		if stage.BackRepo != nil {
+			stage.BackRepo.CheckoutA_SOURCE_SPECIFICATION_1(a_source_specification_1)
+		}
+	}
+	return a_source_specification_1
+}
+
+// for satisfaction of GongStruct interface
+func (a_source_specification_1 *A_SOURCE_SPECIFICATION_1) GetName() (res string) {
+	return a_source_specification_1.Name
+}
+
 // Stage puts a_specifications to the model stage
 func (a_specifications *A_SPECIFICATIONS) Stage(stage *StageStruct) *A_SPECIFICATIONS {
 	stage.A_SPECIFICATIONSs[a_specifications] = __member
@@ -4685,56 +4577,6 @@ func (a_target_1 *A_TARGET_1) Checkout(stage *StageStruct) *A_TARGET_1 {
 // for satisfaction of GongStruct interface
 func (a_target_1 *A_TARGET_1) GetName() (res string) {
 	return a_target_1.Name
-}
-
-// Stage puts a_target_specification_1 to the model stage
-func (a_target_specification_1 *A_TARGET_SPECIFICATION_1) Stage(stage *StageStruct) *A_TARGET_SPECIFICATION_1 {
-	stage.A_TARGET_SPECIFICATION_1s[a_target_specification_1] = __member
-	stage.A_TARGET_SPECIFICATION_1s_mapString[a_target_specification_1.Name] = a_target_specification_1
-
-	return a_target_specification_1
-}
-
-// Unstage removes a_target_specification_1 off the model stage
-func (a_target_specification_1 *A_TARGET_SPECIFICATION_1) Unstage(stage *StageStruct) *A_TARGET_SPECIFICATION_1 {
-	delete(stage.A_TARGET_SPECIFICATION_1s, a_target_specification_1)
-	delete(stage.A_TARGET_SPECIFICATION_1s_mapString, a_target_specification_1.Name)
-	return a_target_specification_1
-}
-
-// UnstageVoid removes a_target_specification_1 off the model stage
-func (a_target_specification_1 *A_TARGET_SPECIFICATION_1) UnstageVoid(stage *StageStruct) {
-	delete(stage.A_TARGET_SPECIFICATION_1s, a_target_specification_1)
-	delete(stage.A_TARGET_SPECIFICATION_1s_mapString, a_target_specification_1.Name)
-}
-
-// commit a_target_specification_1 to the back repo (if it is already staged)
-func (a_target_specification_1 *A_TARGET_SPECIFICATION_1) Commit(stage *StageStruct) *A_TARGET_SPECIFICATION_1 {
-	if _, ok := stage.A_TARGET_SPECIFICATION_1s[a_target_specification_1]; ok {
-		if stage.BackRepo != nil {
-			stage.BackRepo.CommitA_TARGET_SPECIFICATION_1(a_target_specification_1)
-		}
-	}
-	return a_target_specification_1
-}
-
-func (a_target_specification_1 *A_TARGET_SPECIFICATION_1) CommitVoid(stage *StageStruct) {
-	a_target_specification_1.Commit(stage)
-}
-
-// Checkout a_target_specification_1 to the back repo (if it is already staged)
-func (a_target_specification_1 *A_TARGET_SPECIFICATION_1) Checkout(stage *StageStruct) *A_TARGET_SPECIFICATION_1 {
-	if _, ok := stage.A_TARGET_SPECIFICATION_1s[a_target_specification_1]; ok {
-		if stage.BackRepo != nil {
-			stage.BackRepo.CheckoutA_TARGET_SPECIFICATION_1(a_target_specification_1)
-		}
-	}
-	return a_target_specification_1
-}
-
-// for satisfaction of GongStruct interface
-func (a_target_specification_1 *A_TARGET_SPECIFICATION_1) GetName() (res string) {
-	return a_target_specification_1.Name
 }
 
 // Stage puts a_the_header to the model stage
@@ -6035,6 +5877,7 @@ type AllModelsStructCreateInterface interface { // insertion point for Callbacks
 	CreateORMA_OBJECT(A_OBJECT *A_OBJECT)
 	CreateORMA_PROPERTIES(A_PROPERTIES *A_PROPERTIES)
 	CreateORMA_RELATION_GROUP_TYPE_REF(A_RELATION_GROUP_TYPE_REF *A_RELATION_GROUP_TYPE_REF)
+	CreateORMA_SOURCE_SPECIFICATION_1(A_SOURCE_SPECIFICATION_1 *A_SOURCE_SPECIFICATION_1)
 	CreateORMA_SPECIFICATIONS(A_SPECIFICATIONS *A_SPECIFICATIONS)
 	CreateORMA_SPECIFICATION_TYPE_REF(A_SPECIFICATION_TYPE_REF *A_SPECIFICATION_TYPE_REF)
 	CreateORMA_SPECIFIED_VALUES(A_SPECIFIED_VALUES *A_SPECIFIED_VALUES)
@@ -6047,7 +5890,6 @@ type AllModelsStructCreateInterface interface { // insertion point for Callbacks
 	CreateORMA_SPEC_RELATION_TYPE_REF(A_SPEC_RELATION_TYPE_REF *A_SPEC_RELATION_TYPE_REF)
 	CreateORMA_SPEC_TYPES(A_SPEC_TYPES *A_SPEC_TYPES)
 	CreateORMA_TARGET_1(A_TARGET_1 *A_TARGET_1)
-	CreateORMA_TARGET_SPECIFICATION_1(A_TARGET_SPECIFICATION_1 *A_TARGET_SPECIFICATION_1)
 	CreateORMA_THE_HEADER(A_THE_HEADER *A_THE_HEADER)
 	CreateORMA_TOOL_EXTENSIONS(A_TOOL_EXTENSIONS *A_TOOL_EXTENSIONS)
 	CreateORMDATATYPE_DEFINITION_BOOLEAN(DATATYPE_DEFINITION_BOOLEAN *DATATYPE_DEFINITION_BOOLEAN)
@@ -6122,6 +5964,7 @@ type AllModelsStructDeleteInterface interface { // insertion point for Callbacks
 	DeleteORMA_OBJECT(A_OBJECT *A_OBJECT)
 	DeleteORMA_PROPERTIES(A_PROPERTIES *A_PROPERTIES)
 	DeleteORMA_RELATION_GROUP_TYPE_REF(A_RELATION_GROUP_TYPE_REF *A_RELATION_GROUP_TYPE_REF)
+	DeleteORMA_SOURCE_SPECIFICATION_1(A_SOURCE_SPECIFICATION_1 *A_SOURCE_SPECIFICATION_1)
 	DeleteORMA_SPECIFICATIONS(A_SPECIFICATIONS *A_SPECIFICATIONS)
 	DeleteORMA_SPECIFICATION_TYPE_REF(A_SPECIFICATION_TYPE_REF *A_SPECIFICATION_TYPE_REF)
 	DeleteORMA_SPECIFIED_VALUES(A_SPECIFIED_VALUES *A_SPECIFIED_VALUES)
@@ -6134,7 +5977,6 @@ type AllModelsStructDeleteInterface interface { // insertion point for Callbacks
 	DeleteORMA_SPEC_RELATION_TYPE_REF(A_SPEC_RELATION_TYPE_REF *A_SPEC_RELATION_TYPE_REF)
 	DeleteORMA_SPEC_TYPES(A_SPEC_TYPES *A_SPEC_TYPES)
 	DeleteORMA_TARGET_1(A_TARGET_1 *A_TARGET_1)
-	DeleteORMA_TARGET_SPECIFICATION_1(A_TARGET_SPECIFICATION_1 *A_TARGET_SPECIFICATION_1)
 	DeleteORMA_THE_HEADER(A_THE_HEADER *A_THE_HEADER)
 	DeleteORMA_TOOL_EXTENSIONS(A_TOOL_EXTENSIONS *A_TOOL_EXTENSIONS)
 	DeleteORMDATATYPE_DEFINITION_BOOLEAN(DATATYPE_DEFINITION_BOOLEAN *DATATYPE_DEFINITION_BOOLEAN)
@@ -6301,6 +6143,9 @@ func (stage *StageStruct) Reset() { // insertion point for array reset
 	stage.A_RELATION_GROUP_TYPE_REFs = make(map[*A_RELATION_GROUP_TYPE_REF]any)
 	stage.A_RELATION_GROUP_TYPE_REFs_mapString = make(map[string]*A_RELATION_GROUP_TYPE_REF)
 
+	stage.A_SOURCE_SPECIFICATION_1s = make(map[*A_SOURCE_SPECIFICATION_1]any)
+	stage.A_SOURCE_SPECIFICATION_1s_mapString = make(map[string]*A_SOURCE_SPECIFICATION_1)
+
 	stage.A_SPECIFICATIONSs = make(map[*A_SPECIFICATIONS]any)
 	stage.A_SPECIFICATIONSs_mapString = make(map[string]*A_SPECIFICATIONS)
 
@@ -6336,9 +6181,6 @@ func (stage *StageStruct) Reset() { // insertion point for array reset
 
 	stage.A_TARGET_1s = make(map[*A_TARGET_1]any)
 	stage.A_TARGET_1s_mapString = make(map[string]*A_TARGET_1)
-
-	stage.A_TARGET_SPECIFICATION_1s = make(map[*A_TARGET_SPECIFICATION_1]any)
-	stage.A_TARGET_SPECIFICATION_1s_mapString = make(map[string]*A_TARGET_SPECIFICATION_1)
 
 	stage.A_THE_HEADERs = make(map[*A_THE_HEADER]any)
 	stage.A_THE_HEADERs_mapString = make(map[string]*A_THE_HEADER)
@@ -6556,6 +6398,9 @@ func (stage *StageStruct) Nil() { // insertion point for array nil
 	stage.A_RELATION_GROUP_TYPE_REFs = nil
 	stage.A_RELATION_GROUP_TYPE_REFs_mapString = nil
 
+	stage.A_SOURCE_SPECIFICATION_1s = nil
+	stage.A_SOURCE_SPECIFICATION_1s_mapString = nil
+
 	stage.A_SPECIFICATIONSs = nil
 	stage.A_SPECIFICATIONSs_mapString = nil
 
@@ -6591,9 +6436,6 @@ func (stage *StageStruct) Nil() { // insertion point for array nil
 
 	stage.A_TARGET_1s = nil
 	stage.A_TARGET_1s_mapString = nil
-
-	stage.A_TARGET_SPECIFICATION_1s = nil
-	stage.A_TARGET_SPECIFICATION_1s_mapString = nil
 
 	stage.A_THE_HEADERs = nil
 	stage.A_THE_HEADERs_mapString = nil
@@ -6857,6 +6699,10 @@ func (stage *StageStruct) Unstage() { // insertion point for array nil
 		a_relation_group_type_ref.Unstage(stage)
 	}
 
+	for a_source_specification_1 := range stage.A_SOURCE_SPECIFICATION_1s {
+		a_source_specification_1.Unstage(stage)
+	}
+
 	for a_specifications := range stage.A_SPECIFICATIONSs {
 		a_specifications.Unstage(stage)
 	}
@@ -6903,10 +6749,6 @@ func (stage *StageStruct) Unstage() { // insertion point for array nil
 
 	for a_target_1 := range stage.A_TARGET_1s {
 		a_target_1.Unstage(stage)
-	}
-
-	for a_target_specification_1 := range stage.A_TARGET_SPECIFICATION_1s {
-		a_target_specification_1.Unstage(stage)
 	}
 
 	for a_the_header := range stage.A_THE_HEADERs {
@@ -7161,6 +7003,8 @@ func GongGetSet[Type GongstructSet](stage *StageStruct) *Type {
 		return any(&stage.A_PROPERTIESs).(*Type)
 	case map[*A_RELATION_GROUP_TYPE_REF]any:
 		return any(&stage.A_RELATION_GROUP_TYPE_REFs).(*Type)
+	case map[*A_SOURCE_SPECIFICATION_1]any:
+		return any(&stage.A_SOURCE_SPECIFICATION_1s).(*Type)
 	case map[*A_SPECIFICATIONS]any:
 		return any(&stage.A_SPECIFICATIONSs).(*Type)
 	case map[*A_SPECIFICATION_TYPE_REF]any:
@@ -7185,8 +7029,6 @@ func GongGetSet[Type GongstructSet](stage *StageStruct) *Type {
 		return any(&stage.A_SPEC_TYPESs).(*Type)
 	case map[*A_TARGET_1]any:
 		return any(&stage.A_TARGET_1s).(*Type)
-	case map[*A_TARGET_SPECIFICATION_1]any:
-		return any(&stage.A_TARGET_SPECIFICATION_1s).(*Type)
 	case map[*A_THE_HEADER]any:
 		return any(&stage.A_THE_HEADERs).(*Type)
 	case map[*A_TOOL_EXTENSIONS]any:
@@ -7341,6 +7183,8 @@ func GongGetMap[Type GongstructMapString](stage *StageStruct) *Type {
 		return any(&stage.A_PROPERTIESs_mapString).(*Type)
 	case map[string]*A_RELATION_GROUP_TYPE_REF:
 		return any(&stage.A_RELATION_GROUP_TYPE_REFs_mapString).(*Type)
+	case map[string]*A_SOURCE_SPECIFICATION_1:
+		return any(&stage.A_SOURCE_SPECIFICATION_1s_mapString).(*Type)
 	case map[string]*A_SPECIFICATIONS:
 		return any(&stage.A_SPECIFICATIONSs_mapString).(*Type)
 	case map[string]*A_SPECIFICATION_TYPE_REF:
@@ -7365,8 +7209,6 @@ func GongGetMap[Type GongstructMapString](stage *StageStruct) *Type {
 		return any(&stage.A_SPEC_TYPESs_mapString).(*Type)
 	case map[string]*A_TARGET_1:
 		return any(&stage.A_TARGET_1s_mapString).(*Type)
-	case map[string]*A_TARGET_SPECIFICATION_1:
-		return any(&stage.A_TARGET_SPECIFICATION_1s_mapString).(*Type)
 	case map[string]*A_THE_HEADER:
 		return any(&stage.A_THE_HEADERs_mapString).(*Type)
 	case map[string]*A_TOOL_EXTENSIONS:
@@ -7521,6 +7363,8 @@ func GetGongstructInstancesSet[Type Gongstruct](stage *StageStruct) *map[*Type]a
 		return any(&stage.A_PROPERTIESs).(*map[*Type]any)
 	case A_RELATION_GROUP_TYPE_REF:
 		return any(&stage.A_RELATION_GROUP_TYPE_REFs).(*map[*Type]any)
+	case A_SOURCE_SPECIFICATION_1:
+		return any(&stage.A_SOURCE_SPECIFICATION_1s).(*map[*Type]any)
 	case A_SPECIFICATIONS:
 		return any(&stage.A_SPECIFICATIONSs).(*map[*Type]any)
 	case A_SPECIFICATION_TYPE_REF:
@@ -7545,8 +7389,6 @@ func GetGongstructInstancesSet[Type Gongstruct](stage *StageStruct) *map[*Type]a
 		return any(&stage.A_SPEC_TYPESs).(*map[*Type]any)
 	case A_TARGET_1:
 		return any(&stage.A_TARGET_1s).(*map[*Type]any)
-	case A_TARGET_SPECIFICATION_1:
-		return any(&stage.A_TARGET_SPECIFICATION_1s).(*map[*Type]any)
 	case A_THE_HEADER:
 		return any(&stage.A_THE_HEADERs).(*map[*Type]any)
 	case A_TOOL_EXTENSIONS:
@@ -7701,6 +7543,8 @@ func GetGongstructInstancesSetFromPointerType[Type PointerToGongstruct](stage *S
 		return any(&stage.A_PROPERTIESs).(*map[Type]any)
 	case *A_RELATION_GROUP_TYPE_REF:
 		return any(&stage.A_RELATION_GROUP_TYPE_REFs).(*map[Type]any)
+	case *A_SOURCE_SPECIFICATION_1:
+		return any(&stage.A_SOURCE_SPECIFICATION_1s).(*map[Type]any)
 	case *A_SPECIFICATIONS:
 		return any(&stage.A_SPECIFICATIONSs).(*map[Type]any)
 	case *A_SPECIFICATION_TYPE_REF:
@@ -7725,8 +7569,6 @@ func GetGongstructInstancesSetFromPointerType[Type PointerToGongstruct](stage *S
 		return any(&stage.A_SPEC_TYPESs).(*map[Type]any)
 	case *A_TARGET_1:
 		return any(&stage.A_TARGET_1s).(*map[Type]any)
-	case *A_TARGET_SPECIFICATION_1:
-		return any(&stage.A_TARGET_SPECIFICATION_1s).(*map[Type]any)
 	case *A_THE_HEADER:
 		return any(&stage.A_THE_HEADERs).(*map[Type]any)
 	case *A_TOOL_EXTENSIONS:
@@ -7881,6 +7723,8 @@ func GetGongstructInstancesMap[Type Gongstruct](stage *StageStruct) *map[string]
 		return any(&stage.A_PROPERTIESs_mapString).(*map[string]*Type)
 	case A_RELATION_GROUP_TYPE_REF:
 		return any(&stage.A_RELATION_GROUP_TYPE_REFs_mapString).(*map[string]*Type)
+	case A_SOURCE_SPECIFICATION_1:
+		return any(&stage.A_SOURCE_SPECIFICATION_1s_mapString).(*map[string]*Type)
 	case A_SPECIFICATIONS:
 		return any(&stage.A_SPECIFICATIONSs_mapString).(*map[string]*Type)
 	case A_SPECIFICATION_TYPE_REF:
@@ -7905,8 +7749,6 @@ func GetGongstructInstancesMap[Type Gongstruct](stage *StageStruct) *map[string]
 		return any(&stage.A_SPEC_TYPESs_mapString).(*map[string]*Type)
 	case A_TARGET_1:
 		return any(&stage.A_TARGET_1s_mapString).(*map[string]*Type)
-	case A_TARGET_SPECIFICATION_1:
-		return any(&stage.A_TARGET_SPECIFICATION_1s_mapString).(*map[string]*Type)
 	case A_THE_HEADER:
 		return any(&stage.A_THE_HEADERs_mapString).(*map[string]*Type)
 	case A_TOOL_EXTENSIONS:
@@ -7979,119 +7821,119 @@ func GetAssociationName[Type Gongstruct]() *Type {
 		return any(&ATTRIBUTE_DEFINITION_BOOLEAN{
 			// Initialisation of associations
 			// field is initialized with an instance of A_ALTERNATIVE_ID with the name of the field
-			ALTERNATIVE_ID: []*A_ALTERNATIVE_ID{{Name: "ALTERNATIVE_ID"}},
+			ALTERNATIVE_ID: &A_ALTERNATIVE_ID{Name: "ALTERNATIVE_ID"},
 			// field is initialized with an instance of A_ATTRIBUTE_VALUE_BOOLEAN with the name of the field
-			DEFAULT_VALUE: []*A_ATTRIBUTE_VALUE_BOOLEAN{{Name: "DEFAULT_VALUE"}},
+			DEFAULT_VALUE: &A_ATTRIBUTE_VALUE_BOOLEAN{Name: "DEFAULT_VALUE"},
 			// field is initialized with an instance of A_DATATYPE_DEFINITION_BOOLEAN_REF with the name of the field
-			TYPE: []*A_DATATYPE_DEFINITION_BOOLEAN_REF{{Name: "TYPE"}},
+			TYPE: &A_DATATYPE_DEFINITION_BOOLEAN_REF{Name: "TYPE"},
 		}).(*Type)
 	case ATTRIBUTE_DEFINITION_DATE:
 		return any(&ATTRIBUTE_DEFINITION_DATE{
 			// Initialisation of associations
 			// field is initialized with an instance of A_ALTERNATIVE_ID with the name of the field
-			ALTERNATIVE_ID: []*A_ALTERNATIVE_ID{{Name: "ALTERNATIVE_ID"}},
+			ALTERNATIVE_ID: &A_ALTERNATIVE_ID{Name: "ALTERNATIVE_ID"},
 			// field is initialized with an instance of A_ATTRIBUTE_VALUE_DATE with the name of the field
-			DEFAULT_VALUE: []*A_ATTRIBUTE_VALUE_DATE{{Name: "DEFAULT_VALUE"}},
+			DEFAULT_VALUE: &A_ATTRIBUTE_VALUE_DATE{Name: "DEFAULT_VALUE"},
 			// field is initialized with an instance of A_DATATYPE_DEFINITION_DATE_REF with the name of the field
-			TYPE: []*A_DATATYPE_DEFINITION_DATE_REF{{Name: "TYPE"}},
+			TYPE: &A_DATATYPE_DEFINITION_DATE_REF{Name: "TYPE"},
 		}).(*Type)
 	case ATTRIBUTE_DEFINITION_ENUMERATION:
 		return any(&ATTRIBUTE_DEFINITION_ENUMERATION{
 			// Initialisation of associations
 			// field is initialized with an instance of A_ALTERNATIVE_ID with the name of the field
-			ALTERNATIVE_ID: []*A_ALTERNATIVE_ID{{Name: "ALTERNATIVE_ID"}},
+			ALTERNATIVE_ID: &A_ALTERNATIVE_ID{Name: "ALTERNATIVE_ID"},
 			// field is initialized with an instance of A_ATTRIBUTE_VALUE_ENUMERATION with the name of the field
-			DEFAULT_VALUE: []*A_ATTRIBUTE_VALUE_ENUMERATION{{Name: "DEFAULT_VALUE"}},
+			DEFAULT_VALUE: &A_ATTRIBUTE_VALUE_ENUMERATION{Name: "DEFAULT_VALUE"},
 			// field is initialized with an instance of A_DATATYPE_DEFINITION_ENUMERATION_REF with the name of the field
-			TYPE: []*A_DATATYPE_DEFINITION_ENUMERATION_REF{{Name: "TYPE"}},
+			TYPE: &A_DATATYPE_DEFINITION_ENUMERATION_REF{Name: "TYPE"},
 		}).(*Type)
 	case ATTRIBUTE_DEFINITION_INTEGER:
 		return any(&ATTRIBUTE_DEFINITION_INTEGER{
 			// Initialisation of associations
 			// field is initialized with an instance of A_ALTERNATIVE_ID with the name of the field
-			ALTERNATIVE_ID: []*A_ALTERNATIVE_ID{{Name: "ALTERNATIVE_ID"}},
+			ALTERNATIVE_ID: &A_ALTERNATIVE_ID{Name: "ALTERNATIVE_ID"},
 			// field is initialized with an instance of A_ATTRIBUTE_VALUE_INTEGER with the name of the field
-			DEFAULT_VALUE: []*A_ATTRIBUTE_VALUE_INTEGER{{Name: "DEFAULT_VALUE"}},
+			DEFAULT_VALUE: &A_ATTRIBUTE_VALUE_INTEGER{Name: "DEFAULT_VALUE"},
 			// field is initialized with an instance of A_DATATYPE_DEFINITION_INTEGER_REF with the name of the field
-			TYPE: []*A_DATATYPE_DEFINITION_INTEGER_REF{{Name: "TYPE"}},
+			TYPE: &A_DATATYPE_DEFINITION_INTEGER_REF{Name: "TYPE"},
 		}).(*Type)
 	case ATTRIBUTE_DEFINITION_REAL:
 		return any(&ATTRIBUTE_DEFINITION_REAL{
 			// Initialisation of associations
 			// field is initialized with an instance of A_ALTERNATIVE_ID with the name of the field
-			ALTERNATIVE_ID: []*A_ALTERNATIVE_ID{{Name: "ALTERNATIVE_ID"}},
+			ALTERNATIVE_ID: &A_ALTERNATIVE_ID{Name: "ALTERNATIVE_ID"},
 			// field is initialized with an instance of A_ATTRIBUTE_VALUE_REAL with the name of the field
-			DEFAULT_VALUE: []*A_ATTRIBUTE_VALUE_REAL{{Name: "DEFAULT_VALUE"}},
+			DEFAULT_VALUE: &A_ATTRIBUTE_VALUE_REAL{Name: "DEFAULT_VALUE"},
 			// field is initialized with an instance of A_DATATYPE_DEFINITION_REAL_REF with the name of the field
-			TYPE: []*A_DATATYPE_DEFINITION_REAL_REF{{Name: "TYPE"}},
+			TYPE: &A_DATATYPE_DEFINITION_REAL_REF{Name: "TYPE"},
 		}).(*Type)
 	case ATTRIBUTE_DEFINITION_STRING:
 		return any(&ATTRIBUTE_DEFINITION_STRING{
 			// Initialisation of associations
 			// field is initialized with an instance of A_ALTERNATIVE_ID with the name of the field
-			ALTERNATIVE_ID: []*A_ALTERNATIVE_ID{{Name: "ALTERNATIVE_ID"}},
+			ALTERNATIVE_ID: &A_ALTERNATIVE_ID{Name: "ALTERNATIVE_ID"},
 			// field is initialized with an instance of A_ATTRIBUTE_VALUE_STRING with the name of the field
-			DEFAULT_VALUE: []*A_ATTRIBUTE_VALUE_STRING{{Name: "DEFAULT_VALUE"}},
+			DEFAULT_VALUE: &A_ATTRIBUTE_VALUE_STRING{Name: "DEFAULT_VALUE"},
 			// field is initialized with an instance of A_DATATYPE_DEFINITION_STRING_REF with the name of the field
-			TYPE: []*A_DATATYPE_DEFINITION_STRING_REF{{Name: "TYPE"}},
+			TYPE: &A_DATATYPE_DEFINITION_STRING_REF{Name: "TYPE"},
 		}).(*Type)
 	case ATTRIBUTE_DEFINITION_XHTML:
 		return any(&ATTRIBUTE_DEFINITION_XHTML{
 			// Initialisation of associations
 			// field is initialized with an instance of A_ALTERNATIVE_ID with the name of the field
-			ALTERNATIVE_ID: []*A_ALTERNATIVE_ID{{Name: "ALTERNATIVE_ID"}},
+			ALTERNATIVE_ID: &A_ALTERNATIVE_ID{Name: "ALTERNATIVE_ID"},
 			// field is initialized with an instance of A_ATTRIBUTE_VALUE_XHTML with the name of the field
-			DEFAULT_VALUE: []*A_ATTRIBUTE_VALUE_XHTML{{Name: "DEFAULT_VALUE"}},
+			DEFAULT_VALUE: &A_ATTRIBUTE_VALUE_XHTML{Name: "DEFAULT_VALUE"},
 			// field is initialized with an instance of A_DATATYPE_DEFINITION_XHTML_REF with the name of the field
-			TYPE: []*A_DATATYPE_DEFINITION_XHTML_REF{{Name: "TYPE"}},
+			TYPE: &A_DATATYPE_DEFINITION_XHTML_REF{Name: "TYPE"},
 		}).(*Type)
 	case ATTRIBUTE_VALUE_BOOLEAN:
 		return any(&ATTRIBUTE_VALUE_BOOLEAN{
 			// Initialisation of associations
 			// field is initialized with an instance of A_ATTRIBUTE_DEFINITION_BOOLEAN_REF with the name of the field
-			DEFINITION: []*A_ATTRIBUTE_DEFINITION_BOOLEAN_REF{{Name: "DEFINITION"}},
+			DEFINITION: &A_ATTRIBUTE_DEFINITION_BOOLEAN_REF{Name: "DEFINITION"},
 		}).(*Type)
 	case ATTRIBUTE_VALUE_DATE:
 		return any(&ATTRIBUTE_VALUE_DATE{
 			// Initialisation of associations
 			// field is initialized with an instance of A_ATTRIBUTE_DEFINITION_DATE_REF with the name of the field
-			DEFINITION: []*A_ATTRIBUTE_DEFINITION_DATE_REF{{Name: "DEFINITION"}},
+			DEFINITION: &A_ATTRIBUTE_DEFINITION_DATE_REF{Name: "DEFINITION"},
 		}).(*Type)
 	case ATTRIBUTE_VALUE_ENUMERATION:
 		return any(&ATTRIBUTE_VALUE_ENUMERATION{
 			// Initialisation of associations
 			// field is initialized with an instance of A_ATTRIBUTE_DEFINITION_ENUMERATION_REF with the name of the field
-			DEFINITION: []*A_ATTRIBUTE_DEFINITION_ENUMERATION_REF{{Name: "DEFINITION"}},
+			DEFINITION: &A_ATTRIBUTE_DEFINITION_ENUMERATION_REF{Name: "DEFINITION"},
 			// field is initialized with an instance of A_ENUM_VALUE_REF with the name of the field
-			VALUES: []*A_ENUM_VALUE_REF{{Name: "VALUES"}},
+			VALUES: &A_ENUM_VALUE_REF{Name: "VALUES"},
 		}).(*Type)
 	case ATTRIBUTE_VALUE_INTEGER:
 		return any(&ATTRIBUTE_VALUE_INTEGER{
 			// Initialisation of associations
 			// field is initialized with an instance of A_ATTRIBUTE_DEFINITION_INTEGER_REF with the name of the field
-			DEFINITION: []*A_ATTRIBUTE_DEFINITION_INTEGER_REF{{Name: "DEFINITION"}},
+			DEFINITION: &A_ATTRIBUTE_DEFINITION_INTEGER_REF{Name: "DEFINITION"},
 		}).(*Type)
 	case ATTRIBUTE_VALUE_REAL:
 		return any(&ATTRIBUTE_VALUE_REAL{
 			// Initialisation of associations
 			// field is initialized with an instance of A_ATTRIBUTE_DEFINITION_REAL_REF with the name of the field
-			DEFINITION: []*A_ATTRIBUTE_DEFINITION_REAL_REF{{Name: "DEFINITION"}},
+			DEFINITION: &A_ATTRIBUTE_DEFINITION_REAL_REF{Name: "DEFINITION"},
 		}).(*Type)
 	case ATTRIBUTE_VALUE_STRING:
 		return any(&ATTRIBUTE_VALUE_STRING{
 			// Initialisation of associations
 			// field is initialized with an instance of A_ATTRIBUTE_DEFINITION_STRING_REF with the name of the field
-			DEFINITION: []*A_ATTRIBUTE_DEFINITION_STRING_REF{{Name: "DEFINITION"}},
+			DEFINITION: &A_ATTRIBUTE_DEFINITION_STRING_REF{Name: "DEFINITION"},
 		}).(*Type)
 	case ATTRIBUTE_VALUE_XHTML:
 		return any(&ATTRIBUTE_VALUE_XHTML{
 			// Initialisation of associations
 			// field is initialized with an instance of XHTML_CONTENT with the name of the field
-			THE_VALUE: []*XHTML_CONTENT{{Name: "THE_VALUE"}},
+			THE_VALUE: &XHTML_CONTENT{Name: "THE_VALUE"},
 			// field is initialized with an instance of XHTML_CONTENT with the name of the field
-			THE_ORIGINAL_VALUE: []*XHTML_CONTENT{{Name: "THE_ORIGINAL_VALUE"}},
+			THE_ORIGINAL_VALUE: &XHTML_CONTENT{Name: "THE_ORIGINAL_VALUE"},
 			// field is initialized with an instance of A_ATTRIBUTE_DEFINITION_XHTML_REF with the name of the field
-			DEFINITION: []*A_ATTRIBUTE_DEFINITION_XHTML_REF{{Name: "DEFINITION"}},
+			DEFINITION: &A_ATTRIBUTE_DEFINITION_XHTML_REF{Name: "DEFINITION"},
 		}).(*Type)
 	case A_ALTERNATIVE_ID:
 		return any(&A_ALTERNATIVE_ID{
@@ -8267,6 +8109,10 @@ func GetAssociationName[Type Gongstruct]() *Type {
 		return any(&A_RELATION_GROUP_TYPE_REF{
 			// Initialisation of associations
 		}).(*Type)
+	case A_SOURCE_SPECIFICATION_1:
+		return any(&A_SOURCE_SPECIFICATION_1{
+			// Initialisation of associations
+		}).(*Type)
 	case A_SPECIFICATIONS:
 		return any(&A_SPECIFICATIONS{
 			// Initialisation of associations
@@ -8347,10 +8193,6 @@ func GetAssociationName[Type Gongstruct]() *Type {
 		return any(&A_TARGET_1{
 			// Initialisation of associations
 		}).(*Type)
-	case A_TARGET_SPECIFICATION_1:
-		return any(&A_TARGET_SPECIFICATION_1{
-			// Initialisation of associations
-		}).(*Type)
 	case A_THE_HEADER:
 		return any(&A_THE_HEADER{
 			// Initialisation of associations
@@ -8367,45 +8209,45 @@ func GetAssociationName[Type Gongstruct]() *Type {
 		return any(&DATATYPE_DEFINITION_BOOLEAN{
 			// Initialisation of associations
 			// field is initialized with an instance of A_ALTERNATIVE_ID with the name of the field
-			ALTERNATIVE_ID: []*A_ALTERNATIVE_ID{{Name: "ALTERNATIVE_ID"}},
+			ALTERNATIVE_ID: &A_ALTERNATIVE_ID{Name: "ALTERNATIVE_ID"},
 		}).(*Type)
 	case DATATYPE_DEFINITION_DATE:
 		return any(&DATATYPE_DEFINITION_DATE{
 			// Initialisation of associations
 			// field is initialized with an instance of A_ALTERNATIVE_ID with the name of the field
-			ALTERNATIVE_ID: []*A_ALTERNATIVE_ID{{Name: "ALTERNATIVE_ID"}},
+			ALTERNATIVE_ID: &A_ALTERNATIVE_ID{Name: "ALTERNATIVE_ID"},
 		}).(*Type)
 	case DATATYPE_DEFINITION_ENUMERATION:
 		return any(&DATATYPE_DEFINITION_ENUMERATION{
 			// Initialisation of associations
 			// field is initialized with an instance of A_ALTERNATIVE_ID with the name of the field
-			ALTERNATIVE_ID: []*A_ALTERNATIVE_ID{{Name: "ALTERNATIVE_ID"}},
+			ALTERNATIVE_ID: &A_ALTERNATIVE_ID{Name: "ALTERNATIVE_ID"},
 			// field is initialized with an instance of A_SPECIFIED_VALUES with the name of the field
-			SPECIFIED_VALUES: []*A_SPECIFIED_VALUES{{Name: "SPECIFIED_VALUES"}},
+			SPECIFIED_VALUES: &A_SPECIFIED_VALUES{Name: "SPECIFIED_VALUES"},
 		}).(*Type)
 	case DATATYPE_DEFINITION_INTEGER:
 		return any(&DATATYPE_DEFINITION_INTEGER{
 			// Initialisation of associations
 			// field is initialized with an instance of A_ALTERNATIVE_ID with the name of the field
-			ALTERNATIVE_ID: []*A_ALTERNATIVE_ID{{Name: "ALTERNATIVE_ID"}},
+			ALTERNATIVE_ID: &A_ALTERNATIVE_ID{Name: "ALTERNATIVE_ID"},
 		}).(*Type)
 	case DATATYPE_DEFINITION_REAL:
 		return any(&DATATYPE_DEFINITION_REAL{
 			// Initialisation of associations
 			// field is initialized with an instance of A_ALTERNATIVE_ID with the name of the field
-			ALTERNATIVE_ID: []*A_ALTERNATIVE_ID{{Name: "ALTERNATIVE_ID"}},
+			ALTERNATIVE_ID: &A_ALTERNATIVE_ID{Name: "ALTERNATIVE_ID"},
 		}).(*Type)
 	case DATATYPE_DEFINITION_STRING:
 		return any(&DATATYPE_DEFINITION_STRING{
 			// Initialisation of associations
 			// field is initialized with an instance of A_ALTERNATIVE_ID with the name of the field
-			ALTERNATIVE_ID: []*A_ALTERNATIVE_ID{{Name: "ALTERNATIVE_ID"}},
+			ALTERNATIVE_ID: &A_ALTERNATIVE_ID{Name: "ALTERNATIVE_ID"},
 		}).(*Type)
 	case DATATYPE_DEFINITION_XHTML:
 		return any(&DATATYPE_DEFINITION_XHTML{
 			// Initialisation of associations
 			// field is initialized with an instance of A_ALTERNATIVE_ID with the name of the field
-			ALTERNATIVE_ID: []*A_ALTERNATIVE_ID{{Name: "ALTERNATIVE_ID"}},
+			ALTERNATIVE_ID: &A_ALTERNATIVE_ID{Name: "ALTERNATIVE_ID"},
 		}).(*Type)
 	case EMBEDDED_VALUE:
 		return any(&EMBEDDED_VALUE{
@@ -8415,57 +8257,57 @@ func GetAssociationName[Type Gongstruct]() *Type {
 		return any(&ENUM_VALUE{
 			// Initialisation of associations
 			// field is initialized with an instance of A_ALTERNATIVE_ID with the name of the field
-			ALTERNATIVE_ID: []*A_ALTERNATIVE_ID{{Name: "ALTERNATIVE_ID"}},
+			ALTERNATIVE_ID: &A_ALTERNATIVE_ID{Name: "ALTERNATIVE_ID"},
 			// field is initialized with an instance of A_PROPERTIES with the name of the field
-			PROPERTIES: []*A_PROPERTIES{{Name: "PROPERTIES"}},
+			PROPERTIES: &A_PROPERTIES{Name: "PROPERTIES"},
 		}).(*Type)
 	case RELATION_GROUP:
 		return any(&RELATION_GROUP{
 			// Initialisation of associations
 			// field is initialized with an instance of A_ALTERNATIVE_ID with the name of the field
-			ALTERNATIVE_ID: []*A_ALTERNATIVE_ID{{Name: "ALTERNATIVE_ID"}},
-			// field is initialized with an instance of A_TARGET_SPECIFICATION_1 with the name of the field
-			SOURCE_SPECIFICATION: []*A_TARGET_SPECIFICATION_1{{Name: "SOURCE_SPECIFICATION"}},
+			ALTERNATIVE_ID: &A_ALTERNATIVE_ID{Name: "ALTERNATIVE_ID"},
+			// field is initialized with an instance of A_SOURCE_SPECIFICATION_1 with the name of the field
+			SOURCE_SPECIFICATION: &A_SOURCE_SPECIFICATION_1{Name: "SOURCE_SPECIFICATION"},
 			// field is initialized with an instance of A_SPEC_RELATION_REF with the name of the field
-			SPEC_RELATIONS: []*A_SPEC_RELATION_REF{{Name: "SPEC_RELATIONS"}},
-			// field is initialized with an instance of A_TARGET_SPECIFICATION_1 with the name of the field
-			TARGET_SPECIFICATION: []*A_TARGET_SPECIFICATION_1{{Name: "TARGET_SPECIFICATION"}},
+			SPEC_RELATIONS: &A_SPEC_RELATION_REF{Name: "SPEC_RELATIONS"},
+			// field is initialized with an instance of A_SOURCE_SPECIFICATION_1 with the name of the field
+			TARGET_SPECIFICATION: &A_SOURCE_SPECIFICATION_1{Name: "TARGET_SPECIFICATION"},
 			// field is initialized with an instance of A_RELATION_GROUP_TYPE_REF with the name of the field
-			TYPE: []*A_RELATION_GROUP_TYPE_REF{{Name: "TYPE"}},
+			TYPE: &A_RELATION_GROUP_TYPE_REF{Name: "TYPE"},
 		}).(*Type)
 	case RELATION_GROUP_TYPE:
 		return any(&RELATION_GROUP_TYPE{
 			// Initialisation of associations
 			// field is initialized with an instance of A_ALTERNATIVE_ID with the name of the field
-			ALTERNATIVE_ID: []*A_ALTERNATIVE_ID{{Name: "ALTERNATIVE_ID"}},
+			ALTERNATIVE_ID: &A_ALTERNATIVE_ID{Name: "ALTERNATIVE_ID"},
 			// field is initialized with an instance of A_SPEC_ATTRIBUTES with the name of the field
-			SPEC_ATTRIBUTES: []*A_SPEC_ATTRIBUTES{{Name: "SPEC_ATTRIBUTES"}},
+			SPEC_ATTRIBUTES: &A_SPEC_ATTRIBUTES{Name: "SPEC_ATTRIBUTES"},
 		}).(*Type)
 	case REQ_IF:
 		return any(&REQ_IF{
 			// Initialisation of associations
 			// field is initialized with an instance of A_THE_HEADER with the name of the field
-			THE_HEADER: []*A_THE_HEADER{{Name: "THE_HEADER"}},
+			THE_HEADER: &A_THE_HEADER{Name: "THE_HEADER"},
 			// field is initialized with an instance of A_CORE_CONTENT with the name of the field
-			CORE_CONTENT: []*A_CORE_CONTENT{{Name: "CORE_CONTENT"}},
+			CORE_CONTENT: &A_CORE_CONTENT{Name: "CORE_CONTENT"},
 			// field is initialized with an instance of A_TOOL_EXTENSIONS with the name of the field
-			TOOL_EXTENSIONS: []*A_TOOL_EXTENSIONS{{Name: "TOOL_EXTENSIONS"}},
+			TOOL_EXTENSIONS: &A_TOOL_EXTENSIONS{Name: "TOOL_EXTENSIONS"},
 		}).(*Type)
 	case REQ_IF_CONTENT:
 		return any(&REQ_IF_CONTENT{
 			// Initialisation of associations
 			// field is initialized with an instance of A_DATATYPES with the name of the field
-			DATATYPES: []*A_DATATYPES{{Name: "DATATYPES"}},
+			DATATYPES: &A_DATATYPES{Name: "DATATYPES"},
 			// field is initialized with an instance of A_SPEC_TYPES with the name of the field
-			SPEC_TYPES: []*A_SPEC_TYPES{{Name: "SPEC_TYPES"}},
+			SPEC_TYPES: &A_SPEC_TYPES{Name: "SPEC_TYPES"},
 			// field is initialized with an instance of A_SPEC_OBJECTS with the name of the field
-			SPEC_OBJECTS: []*A_SPEC_OBJECTS{{Name: "SPEC_OBJECTS"}},
+			SPEC_OBJECTS: &A_SPEC_OBJECTS{Name: "SPEC_OBJECTS"},
 			// field is initialized with an instance of A_SPEC_RELATIONS with the name of the field
-			SPEC_RELATIONS: []*A_SPEC_RELATIONS{{Name: "SPEC_RELATIONS"}},
+			SPEC_RELATIONS: &A_SPEC_RELATIONS{Name: "SPEC_RELATIONS"},
 			// field is initialized with an instance of A_SPECIFICATIONS with the name of the field
-			SPECIFICATIONS: []*A_SPECIFICATIONS{{Name: "SPECIFICATIONS"}},
+			SPECIFICATIONS: &A_SPECIFICATIONS{Name: "SPECIFICATIONS"},
 			// field is initialized with an instance of A_SPEC_RELATION_GROUPS with the name of the field
-			SPEC_RELATION_GROUPS: []*A_SPEC_RELATION_GROUPS{{Name: "SPEC_RELATION_GROUPS"}},
+			SPEC_RELATION_GROUPS: &A_SPEC_RELATION_GROUPS{Name: "SPEC_RELATION_GROUPS"},
 		}).(*Type)
 	case REQ_IF_HEADER:
 		return any(&REQ_IF_HEADER{
@@ -8479,73 +8321,73 @@ func GetAssociationName[Type Gongstruct]() *Type {
 		return any(&SPECIFICATION{
 			// Initialisation of associations
 			// field is initialized with an instance of A_ALTERNATIVE_ID with the name of the field
-			ALTERNATIVE_ID: []*A_ALTERNATIVE_ID{{Name: "ALTERNATIVE_ID"}},
+			ALTERNATIVE_ID: &A_ALTERNATIVE_ID{Name: "ALTERNATIVE_ID"},
 			// field is initialized with an instance of A_CHILDREN with the name of the field
-			CHILDREN: []*A_CHILDREN{{Name: "CHILDREN"}},
+			CHILDREN: &A_CHILDREN{Name: "CHILDREN"},
 			// field is initialized with an instance of A_ATTRIBUTE_VALUE_XHTML_1 with the name of the field
-			VALUES: []*A_ATTRIBUTE_VALUE_XHTML_1{{Name: "VALUES"}},
+			VALUES: &A_ATTRIBUTE_VALUE_XHTML_1{Name: "VALUES"},
 			// field is initialized with an instance of A_SPECIFICATION_TYPE_REF with the name of the field
-			TYPE: []*A_SPECIFICATION_TYPE_REF{{Name: "TYPE"}},
+			TYPE: &A_SPECIFICATION_TYPE_REF{Name: "TYPE"},
 		}).(*Type)
 	case SPECIFICATION_TYPE:
 		return any(&SPECIFICATION_TYPE{
 			// Initialisation of associations
 			// field is initialized with an instance of A_ALTERNATIVE_ID with the name of the field
-			ALTERNATIVE_ID: []*A_ALTERNATIVE_ID{{Name: "ALTERNATIVE_ID"}},
+			ALTERNATIVE_ID: &A_ALTERNATIVE_ID{Name: "ALTERNATIVE_ID"},
 			// field is initialized with an instance of A_SPEC_ATTRIBUTES with the name of the field
-			SPEC_ATTRIBUTES: []*A_SPEC_ATTRIBUTES{{Name: "SPEC_ATTRIBUTES"}},
+			SPEC_ATTRIBUTES: &A_SPEC_ATTRIBUTES{Name: "SPEC_ATTRIBUTES"},
 		}).(*Type)
 	case SPEC_HIERARCHY:
 		return any(&SPEC_HIERARCHY{
 			// Initialisation of associations
 			// field is initialized with an instance of A_ALTERNATIVE_ID with the name of the field
-			ALTERNATIVE_ID: []*A_ALTERNATIVE_ID{{Name: "ALTERNATIVE_ID"}},
+			ALTERNATIVE_ID: &A_ALTERNATIVE_ID{Name: "ALTERNATIVE_ID"},
 			// field is initialized with an instance of A_CHILDREN with the name of the field
-			CHILDREN: []*A_CHILDREN{{Name: "CHILDREN"}},
+			CHILDREN: &A_CHILDREN{Name: "CHILDREN"},
 			// field is initialized with an instance of A_EDITABLE_ATTS with the name of the field
-			EDITABLE_ATTS: []*A_EDITABLE_ATTS{{Name: "EDITABLE_ATTS"}},
+			EDITABLE_ATTS: &A_EDITABLE_ATTS{Name: "EDITABLE_ATTS"},
 			// field is initialized with an instance of A_OBJECT with the name of the field
-			OBJECT: []*A_OBJECT{{Name: "OBJECT"}},
+			OBJECT: &A_OBJECT{Name: "OBJECT"},
 		}).(*Type)
 	case SPEC_OBJECT:
 		return any(&SPEC_OBJECT{
 			// Initialisation of associations
 			// field is initialized with an instance of A_ALTERNATIVE_ID with the name of the field
-			ALTERNATIVE_ID: []*A_ALTERNATIVE_ID{{Name: "ALTERNATIVE_ID"}},
+			ALTERNATIVE_ID: &A_ALTERNATIVE_ID{Name: "ALTERNATIVE_ID"},
 			// field is initialized with an instance of A_ATTRIBUTE_VALUE_XHTML_1 with the name of the field
-			VALUES: []*A_ATTRIBUTE_VALUE_XHTML_1{{Name: "VALUES"}},
+			VALUES: &A_ATTRIBUTE_VALUE_XHTML_1{Name: "VALUES"},
 			// field is initialized with an instance of A_SPEC_OBJECT_TYPE_REF with the name of the field
-			TYPE: []*A_SPEC_OBJECT_TYPE_REF{{Name: "TYPE"}},
+			TYPE: &A_SPEC_OBJECT_TYPE_REF{Name: "TYPE"},
 		}).(*Type)
 	case SPEC_OBJECT_TYPE:
 		return any(&SPEC_OBJECT_TYPE{
 			// Initialisation of associations
 			// field is initialized with an instance of A_ALTERNATIVE_ID with the name of the field
-			ALTERNATIVE_ID: []*A_ALTERNATIVE_ID{{Name: "ALTERNATIVE_ID"}},
+			ALTERNATIVE_ID: &A_ALTERNATIVE_ID{Name: "ALTERNATIVE_ID"},
 			// field is initialized with an instance of A_SPEC_ATTRIBUTES with the name of the field
-			SPEC_ATTRIBUTES: []*A_SPEC_ATTRIBUTES{{Name: "SPEC_ATTRIBUTES"}},
+			SPEC_ATTRIBUTES: &A_SPEC_ATTRIBUTES{Name: "SPEC_ATTRIBUTES"},
 		}).(*Type)
 	case SPEC_RELATION:
 		return any(&SPEC_RELATION{
 			// Initialisation of associations
 			// field is initialized with an instance of A_ALTERNATIVE_ID with the name of the field
-			ALTERNATIVE_ID: []*A_ALTERNATIVE_ID{{Name: "ALTERNATIVE_ID"}},
+			ALTERNATIVE_ID: &A_ALTERNATIVE_ID{Name: "ALTERNATIVE_ID"},
 			// field is initialized with an instance of A_ATTRIBUTE_VALUE_XHTML_1 with the name of the field
-			VALUES: []*A_ATTRIBUTE_VALUE_XHTML_1{{Name: "VALUES"}},
+			VALUES: &A_ATTRIBUTE_VALUE_XHTML_1{Name: "VALUES"},
 			// field is initialized with an instance of A_TARGET_1 with the name of the field
-			SOURCE: []*A_TARGET_1{{Name: "SOURCE"}},
+			SOURCE: &A_TARGET_1{Name: "SOURCE"},
 			// field is initialized with an instance of A_TARGET_1 with the name of the field
-			TARGET: []*A_TARGET_1{{Name: "TARGET"}},
+			TARGET: &A_TARGET_1{Name: "TARGET"},
 			// field is initialized with an instance of A_SPEC_RELATION_TYPE_REF with the name of the field
-			TYPE: []*A_SPEC_RELATION_TYPE_REF{{Name: "TYPE"}},
+			TYPE: &A_SPEC_RELATION_TYPE_REF{Name: "TYPE"},
 		}).(*Type)
 	case SPEC_RELATION_TYPE:
 		return any(&SPEC_RELATION_TYPE{
 			// Initialisation of associations
 			// field is initialized with an instance of A_ALTERNATIVE_ID with the name of the field
-			ALTERNATIVE_ID: []*A_ALTERNATIVE_ID{{Name: "ALTERNATIVE_ID"}},
+			ALTERNATIVE_ID: &A_ALTERNATIVE_ID{Name: "ALTERNATIVE_ID"},
 			// field is initialized with an instance of A_SPEC_ATTRIBUTES with the name of the field
-			SPEC_ATTRIBUTES: []*A_SPEC_ATTRIBUTES{{Name: "SPEC_ATTRIBUTES"}},
+			SPEC_ATTRIBUTES: &A_SPEC_ATTRIBUTES{Name: "SPEC_ATTRIBUTES"},
 		}).(*Type)
 	case XHTML_CONTENT:
 		return any(&XHTML_CONTENT{
@@ -8578,71 +8420,598 @@ func GetPointerReverseMap[Start, End Gongstruct](fieldname string, stage *StageS
 	case ATTRIBUTE_DEFINITION_BOOLEAN:
 		switch fieldname {
 		// insertion point for per direct association field
+		case "ALTERNATIVE_ID":
+			res := make(map[*A_ALTERNATIVE_ID][]*ATTRIBUTE_DEFINITION_BOOLEAN)
+			for attribute_definition_boolean := range stage.ATTRIBUTE_DEFINITION_BOOLEANs {
+				if attribute_definition_boolean.ALTERNATIVE_ID != nil {
+					a_alternative_id_ := attribute_definition_boolean.ALTERNATIVE_ID
+					var attribute_definition_booleans []*ATTRIBUTE_DEFINITION_BOOLEAN
+					_, ok := res[a_alternative_id_]
+					if ok {
+						attribute_definition_booleans = res[a_alternative_id_]
+					} else {
+						attribute_definition_booleans = make([]*ATTRIBUTE_DEFINITION_BOOLEAN, 0)
+					}
+					attribute_definition_booleans = append(attribute_definition_booleans, attribute_definition_boolean)
+					res[a_alternative_id_] = attribute_definition_booleans
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "DEFAULT_VALUE":
+			res := make(map[*A_ATTRIBUTE_VALUE_BOOLEAN][]*ATTRIBUTE_DEFINITION_BOOLEAN)
+			for attribute_definition_boolean := range stage.ATTRIBUTE_DEFINITION_BOOLEANs {
+				if attribute_definition_boolean.DEFAULT_VALUE != nil {
+					a_attribute_value_boolean_ := attribute_definition_boolean.DEFAULT_VALUE
+					var attribute_definition_booleans []*ATTRIBUTE_DEFINITION_BOOLEAN
+					_, ok := res[a_attribute_value_boolean_]
+					if ok {
+						attribute_definition_booleans = res[a_attribute_value_boolean_]
+					} else {
+						attribute_definition_booleans = make([]*ATTRIBUTE_DEFINITION_BOOLEAN, 0)
+					}
+					attribute_definition_booleans = append(attribute_definition_booleans, attribute_definition_boolean)
+					res[a_attribute_value_boolean_] = attribute_definition_booleans
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "TYPE":
+			res := make(map[*A_DATATYPE_DEFINITION_BOOLEAN_REF][]*ATTRIBUTE_DEFINITION_BOOLEAN)
+			for attribute_definition_boolean := range stage.ATTRIBUTE_DEFINITION_BOOLEANs {
+				if attribute_definition_boolean.TYPE != nil {
+					a_datatype_definition_boolean_ref_ := attribute_definition_boolean.TYPE
+					var attribute_definition_booleans []*ATTRIBUTE_DEFINITION_BOOLEAN
+					_, ok := res[a_datatype_definition_boolean_ref_]
+					if ok {
+						attribute_definition_booleans = res[a_datatype_definition_boolean_ref_]
+					} else {
+						attribute_definition_booleans = make([]*ATTRIBUTE_DEFINITION_BOOLEAN, 0)
+					}
+					attribute_definition_booleans = append(attribute_definition_booleans, attribute_definition_boolean)
+					res[a_datatype_definition_boolean_ref_] = attribute_definition_booleans
+				}
+			}
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of ATTRIBUTE_DEFINITION_DATE
 	case ATTRIBUTE_DEFINITION_DATE:
 		switch fieldname {
 		// insertion point for per direct association field
+		case "ALTERNATIVE_ID":
+			res := make(map[*A_ALTERNATIVE_ID][]*ATTRIBUTE_DEFINITION_DATE)
+			for attribute_definition_date := range stage.ATTRIBUTE_DEFINITION_DATEs {
+				if attribute_definition_date.ALTERNATIVE_ID != nil {
+					a_alternative_id_ := attribute_definition_date.ALTERNATIVE_ID
+					var attribute_definition_dates []*ATTRIBUTE_DEFINITION_DATE
+					_, ok := res[a_alternative_id_]
+					if ok {
+						attribute_definition_dates = res[a_alternative_id_]
+					} else {
+						attribute_definition_dates = make([]*ATTRIBUTE_DEFINITION_DATE, 0)
+					}
+					attribute_definition_dates = append(attribute_definition_dates, attribute_definition_date)
+					res[a_alternative_id_] = attribute_definition_dates
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "DEFAULT_VALUE":
+			res := make(map[*A_ATTRIBUTE_VALUE_DATE][]*ATTRIBUTE_DEFINITION_DATE)
+			for attribute_definition_date := range stage.ATTRIBUTE_DEFINITION_DATEs {
+				if attribute_definition_date.DEFAULT_VALUE != nil {
+					a_attribute_value_date_ := attribute_definition_date.DEFAULT_VALUE
+					var attribute_definition_dates []*ATTRIBUTE_DEFINITION_DATE
+					_, ok := res[a_attribute_value_date_]
+					if ok {
+						attribute_definition_dates = res[a_attribute_value_date_]
+					} else {
+						attribute_definition_dates = make([]*ATTRIBUTE_DEFINITION_DATE, 0)
+					}
+					attribute_definition_dates = append(attribute_definition_dates, attribute_definition_date)
+					res[a_attribute_value_date_] = attribute_definition_dates
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "TYPE":
+			res := make(map[*A_DATATYPE_DEFINITION_DATE_REF][]*ATTRIBUTE_DEFINITION_DATE)
+			for attribute_definition_date := range stage.ATTRIBUTE_DEFINITION_DATEs {
+				if attribute_definition_date.TYPE != nil {
+					a_datatype_definition_date_ref_ := attribute_definition_date.TYPE
+					var attribute_definition_dates []*ATTRIBUTE_DEFINITION_DATE
+					_, ok := res[a_datatype_definition_date_ref_]
+					if ok {
+						attribute_definition_dates = res[a_datatype_definition_date_ref_]
+					} else {
+						attribute_definition_dates = make([]*ATTRIBUTE_DEFINITION_DATE, 0)
+					}
+					attribute_definition_dates = append(attribute_definition_dates, attribute_definition_date)
+					res[a_datatype_definition_date_ref_] = attribute_definition_dates
+				}
+			}
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of ATTRIBUTE_DEFINITION_ENUMERATION
 	case ATTRIBUTE_DEFINITION_ENUMERATION:
 		switch fieldname {
 		// insertion point for per direct association field
+		case "ALTERNATIVE_ID":
+			res := make(map[*A_ALTERNATIVE_ID][]*ATTRIBUTE_DEFINITION_ENUMERATION)
+			for attribute_definition_enumeration := range stage.ATTRIBUTE_DEFINITION_ENUMERATIONs {
+				if attribute_definition_enumeration.ALTERNATIVE_ID != nil {
+					a_alternative_id_ := attribute_definition_enumeration.ALTERNATIVE_ID
+					var attribute_definition_enumerations []*ATTRIBUTE_DEFINITION_ENUMERATION
+					_, ok := res[a_alternative_id_]
+					if ok {
+						attribute_definition_enumerations = res[a_alternative_id_]
+					} else {
+						attribute_definition_enumerations = make([]*ATTRIBUTE_DEFINITION_ENUMERATION, 0)
+					}
+					attribute_definition_enumerations = append(attribute_definition_enumerations, attribute_definition_enumeration)
+					res[a_alternative_id_] = attribute_definition_enumerations
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "DEFAULT_VALUE":
+			res := make(map[*A_ATTRIBUTE_VALUE_ENUMERATION][]*ATTRIBUTE_DEFINITION_ENUMERATION)
+			for attribute_definition_enumeration := range stage.ATTRIBUTE_DEFINITION_ENUMERATIONs {
+				if attribute_definition_enumeration.DEFAULT_VALUE != nil {
+					a_attribute_value_enumeration_ := attribute_definition_enumeration.DEFAULT_VALUE
+					var attribute_definition_enumerations []*ATTRIBUTE_DEFINITION_ENUMERATION
+					_, ok := res[a_attribute_value_enumeration_]
+					if ok {
+						attribute_definition_enumerations = res[a_attribute_value_enumeration_]
+					} else {
+						attribute_definition_enumerations = make([]*ATTRIBUTE_DEFINITION_ENUMERATION, 0)
+					}
+					attribute_definition_enumerations = append(attribute_definition_enumerations, attribute_definition_enumeration)
+					res[a_attribute_value_enumeration_] = attribute_definition_enumerations
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "TYPE":
+			res := make(map[*A_DATATYPE_DEFINITION_ENUMERATION_REF][]*ATTRIBUTE_DEFINITION_ENUMERATION)
+			for attribute_definition_enumeration := range stage.ATTRIBUTE_DEFINITION_ENUMERATIONs {
+				if attribute_definition_enumeration.TYPE != nil {
+					a_datatype_definition_enumeration_ref_ := attribute_definition_enumeration.TYPE
+					var attribute_definition_enumerations []*ATTRIBUTE_DEFINITION_ENUMERATION
+					_, ok := res[a_datatype_definition_enumeration_ref_]
+					if ok {
+						attribute_definition_enumerations = res[a_datatype_definition_enumeration_ref_]
+					} else {
+						attribute_definition_enumerations = make([]*ATTRIBUTE_DEFINITION_ENUMERATION, 0)
+					}
+					attribute_definition_enumerations = append(attribute_definition_enumerations, attribute_definition_enumeration)
+					res[a_datatype_definition_enumeration_ref_] = attribute_definition_enumerations
+				}
+			}
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of ATTRIBUTE_DEFINITION_INTEGER
 	case ATTRIBUTE_DEFINITION_INTEGER:
 		switch fieldname {
 		// insertion point for per direct association field
+		case "ALTERNATIVE_ID":
+			res := make(map[*A_ALTERNATIVE_ID][]*ATTRIBUTE_DEFINITION_INTEGER)
+			for attribute_definition_integer := range stage.ATTRIBUTE_DEFINITION_INTEGERs {
+				if attribute_definition_integer.ALTERNATIVE_ID != nil {
+					a_alternative_id_ := attribute_definition_integer.ALTERNATIVE_ID
+					var attribute_definition_integers []*ATTRIBUTE_DEFINITION_INTEGER
+					_, ok := res[a_alternative_id_]
+					if ok {
+						attribute_definition_integers = res[a_alternative_id_]
+					} else {
+						attribute_definition_integers = make([]*ATTRIBUTE_DEFINITION_INTEGER, 0)
+					}
+					attribute_definition_integers = append(attribute_definition_integers, attribute_definition_integer)
+					res[a_alternative_id_] = attribute_definition_integers
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "DEFAULT_VALUE":
+			res := make(map[*A_ATTRIBUTE_VALUE_INTEGER][]*ATTRIBUTE_DEFINITION_INTEGER)
+			for attribute_definition_integer := range stage.ATTRIBUTE_DEFINITION_INTEGERs {
+				if attribute_definition_integer.DEFAULT_VALUE != nil {
+					a_attribute_value_integer_ := attribute_definition_integer.DEFAULT_VALUE
+					var attribute_definition_integers []*ATTRIBUTE_DEFINITION_INTEGER
+					_, ok := res[a_attribute_value_integer_]
+					if ok {
+						attribute_definition_integers = res[a_attribute_value_integer_]
+					} else {
+						attribute_definition_integers = make([]*ATTRIBUTE_DEFINITION_INTEGER, 0)
+					}
+					attribute_definition_integers = append(attribute_definition_integers, attribute_definition_integer)
+					res[a_attribute_value_integer_] = attribute_definition_integers
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "TYPE":
+			res := make(map[*A_DATATYPE_DEFINITION_INTEGER_REF][]*ATTRIBUTE_DEFINITION_INTEGER)
+			for attribute_definition_integer := range stage.ATTRIBUTE_DEFINITION_INTEGERs {
+				if attribute_definition_integer.TYPE != nil {
+					a_datatype_definition_integer_ref_ := attribute_definition_integer.TYPE
+					var attribute_definition_integers []*ATTRIBUTE_DEFINITION_INTEGER
+					_, ok := res[a_datatype_definition_integer_ref_]
+					if ok {
+						attribute_definition_integers = res[a_datatype_definition_integer_ref_]
+					} else {
+						attribute_definition_integers = make([]*ATTRIBUTE_DEFINITION_INTEGER, 0)
+					}
+					attribute_definition_integers = append(attribute_definition_integers, attribute_definition_integer)
+					res[a_datatype_definition_integer_ref_] = attribute_definition_integers
+				}
+			}
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of ATTRIBUTE_DEFINITION_REAL
 	case ATTRIBUTE_DEFINITION_REAL:
 		switch fieldname {
 		// insertion point for per direct association field
+		case "ALTERNATIVE_ID":
+			res := make(map[*A_ALTERNATIVE_ID][]*ATTRIBUTE_DEFINITION_REAL)
+			for attribute_definition_real := range stage.ATTRIBUTE_DEFINITION_REALs {
+				if attribute_definition_real.ALTERNATIVE_ID != nil {
+					a_alternative_id_ := attribute_definition_real.ALTERNATIVE_ID
+					var attribute_definition_reals []*ATTRIBUTE_DEFINITION_REAL
+					_, ok := res[a_alternative_id_]
+					if ok {
+						attribute_definition_reals = res[a_alternative_id_]
+					} else {
+						attribute_definition_reals = make([]*ATTRIBUTE_DEFINITION_REAL, 0)
+					}
+					attribute_definition_reals = append(attribute_definition_reals, attribute_definition_real)
+					res[a_alternative_id_] = attribute_definition_reals
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "DEFAULT_VALUE":
+			res := make(map[*A_ATTRIBUTE_VALUE_REAL][]*ATTRIBUTE_DEFINITION_REAL)
+			for attribute_definition_real := range stage.ATTRIBUTE_DEFINITION_REALs {
+				if attribute_definition_real.DEFAULT_VALUE != nil {
+					a_attribute_value_real_ := attribute_definition_real.DEFAULT_VALUE
+					var attribute_definition_reals []*ATTRIBUTE_DEFINITION_REAL
+					_, ok := res[a_attribute_value_real_]
+					if ok {
+						attribute_definition_reals = res[a_attribute_value_real_]
+					} else {
+						attribute_definition_reals = make([]*ATTRIBUTE_DEFINITION_REAL, 0)
+					}
+					attribute_definition_reals = append(attribute_definition_reals, attribute_definition_real)
+					res[a_attribute_value_real_] = attribute_definition_reals
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "TYPE":
+			res := make(map[*A_DATATYPE_DEFINITION_REAL_REF][]*ATTRIBUTE_DEFINITION_REAL)
+			for attribute_definition_real := range stage.ATTRIBUTE_DEFINITION_REALs {
+				if attribute_definition_real.TYPE != nil {
+					a_datatype_definition_real_ref_ := attribute_definition_real.TYPE
+					var attribute_definition_reals []*ATTRIBUTE_DEFINITION_REAL
+					_, ok := res[a_datatype_definition_real_ref_]
+					if ok {
+						attribute_definition_reals = res[a_datatype_definition_real_ref_]
+					} else {
+						attribute_definition_reals = make([]*ATTRIBUTE_DEFINITION_REAL, 0)
+					}
+					attribute_definition_reals = append(attribute_definition_reals, attribute_definition_real)
+					res[a_datatype_definition_real_ref_] = attribute_definition_reals
+				}
+			}
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of ATTRIBUTE_DEFINITION_STRING
 	case ATTRIBUTE_DEFINITION_STRING:
 		switch fieldname {
 		// insertion point for per direct association field
+		case "ALTERNATIVE_ID":
+			res := make(map[*A_ALTERNATIVE_ID][]*ATTRIBUTE_DEFINITION_STRING)
+			for attribute_definition_string := range stage.ATTRIBUTE_DEFINITION_STRINGs {
+				if attribute_definition_string.ALTERNATIVE_ID != nil {
+					a_alternative_id_ := attribute_definition_string.ALTERNATIVE_ID
+					var attribute_definition_strings []*ATTRIBUTE_DEFINITION_STRING
+					_, ok := res[a_alternative_id_]
+					if ok {
+						attribute_definition_strings = res[a_alternative_id_]
+					} else {
+						attribute_definition_strings = make([]*ATTRIBUTE_DEFINITION_STRING, 0)
+					}
+					attribute_definition_strings = append(attribute_definition_strings, attribute_definition_string)
+					res[a_alternative_id_] = attribute_definition_strings
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "DEFAULT_VALUE":
+			res := make(map[*A_ATTRIBUTE_VALUE_STRING][]*ATTRIBUTE_DEFINITION_STRING)
+			for attribute_definition_string := range stage.ATTRIBUTE_DEFINITION_STRINGs {
+				if attribute_definition_string.DEFAULT_VALUE != nil {
+					a_attribute_value_string_ := attribute_definition_string.DEFAULT_VALUE
+					var attribute_definition_strings []*ATTRIBUTE_DEFINITION_STRING
+					_, ok := res[a_attribute_value_string_]
+					if ok {
+						attribute_definition_strings = res[a_attribute_value_string_]
+					} else {
+						attribute_definition_strings = make([]*ATTRIBUTE_DEFINITION_STRING, 0)
+					}
+					attribute_definition_strings = append(attribute_definition_strings, attribute_definition_string)
+					res[a_attribute_value_string_] = attribute_definition_strings
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "TYPE":
+			res := make(map[*A_DATATYPE_DEFINITION_STRING_REF][]*ATTRIBUTE_DEFINITION_STRING)
+			for attribute_definition_string := range stage.ATTRIBUTE_DEFINITION_STRINGs {
+				if attribute_definition_string.TYPE != nil {
+					a_datatype_definition_string_ref_ := attribute_definition_string.TYPE
+					var attribute_definition_strings []*ATTRIBUTE_DEFINITION_STRING
+					_, ok := res[a_datatype_definition_string_ref_]
+					if ok {
+						attribute_definition_strings = res[a_datatype_definition_string_ref_]
+					} else {
+						attribute_definition_strings = make([]*ATTRIBUTE_DEFINITION_STRING, 0)
+					}
+					attribute_definition_strings = append(attribute_definition_strings, attribute_definition_string)
+					res[a_datatype_definition_string_ref_] = attribute_definition_strings
+				}
+			}
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of ATTRIBUTE_DEFINITION_XHTML
 	case ATTRIBUTE_DEFINITION_XHTML:
 		switch fieldname {
 		// insertion point for per direct association field
+		case "ALTERNATIVE_ID":
+			res := make(map[*A_ALTERNATIVE_ID][]*ATTRIBUTE_DEFINITION_XHTML)
+			for attribute_definition_xhtml := range stage.ATTRIBUTE_DEFINITION_XHTMLs {
+				if attribute_definition_xhtml.ALTERNATIVE_ID != nil {
+					a_alternative_id_ := attribute_definition_xhtml.ALTERNATIVE_ID
+					var attribute_definition_xhtmls []*ATTRIBUTE_DEFINITION_XHTML
+					_, ok := res[a_alternative_id_]
+					if ok {
+						attribute_definition_xhtmls = res[a_alternative_id_]
+					} else {
+						attribute_definition_xhtmls = make([]*ATTRIBUTE_DEFINITION_XHTML, 0)
+					}
+					attribute_definition_xhtmls = append(attribute_definition_xhtmls, attribute_definition_xhtml)
+					res[a_alternative_id_] = attribute_definition_xhtmls
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "DEFAULT_VALUE":
+			res := make(map[*A_ATTRIBUTE_VALUE_XHTML][]*ATTRIBUTE_DEFINITION_XHTML)
+			for attribute_definition_xhtml := range stage.ATTRIBUTE_DEFINITION_XHTMLs {
+				if attribute_definition_xhtml.DEFAULT_VALUE != nil {
+					a_attribute_value_xhtml_ := attribute_definition_xhtml.DEFAULT_VALUE
+					var attribute_definition_xhtmls []*ATTRIBUTE_DEFINITION_XHTML
+					_, ok := res[a_attribute_value_xhtml_]
+					if ok {
+						attribute_definition_xhtmls = res[a_attribute_value_xhtml_]
+					} else {
+						attribute_definition_xhtmls = make([]*ATTRIBUTE_DEFINITION_XHTML, 0)
+					}
+					attribute_definition_xhtmls = append(attribute_definition_xhtmls, attribute_definition_xhtml)
+					res[a_attribute_value_xhtml_] = attribute_definition_xhtmls
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "TYPE":
+			res := make(map[*A_DATATYPE_DEFINITION_XHTML_REF][]*ATTRIBUTE_DEFINITION_XHTML)
+			for attribute_definition_xhtml := range stage.ATTRIBUTE_DEFINITION_XHTMLs {
+				if attribute_definition_xhtml.TYPE != nil {
+					a_datatype_definition_xhtml_ref_ := attribute_definition_xhtml.TYPE
+					var attribute_definition_xhtmls []*ATTRIBUTE_DEFINITION_XHTML
+					_, ok := res[a_datatype_definition_xhtml_ref_]
+					if ok {
+						attribute_definition_xhtmls = res[a_datatype_definition_xhtml_ref_]
+					} else {
+						attribute_definition_xhtmls = make([]*ATTRIBUTE_DEFINITION_XHTML, 0)
+					}
+					attribute_definition_xhtmls = append(attribute_definition_xhtmls, attribute_definition_xhtml)
+					res[a_datatype_definition_xhtml_ref_] = attribute_definition_xhtmls
+				}
+			}
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of ATTRIBUTE_VALUE_BOOLEAN
 	case ATTRIBUTE_VALUE_BOOLEAN:
 		switch fieldname {
 		// insertion point for per direct association field
+		case "DEFINITION":
+			res := make(map[*A_ATTRIBUTE_DEFINITION_BOOLEAN_REF][]*ATTRIBUTE_VALUE_BOOLEAN)
+			for attribute_value_boolean := range stage.ATTRIBUTE_VALUE_BOOLEANs {
+				if attribute_value_boolean.DEFINITION != nil {
+					a_attribute_definition_boolean_ref_ := attribute_value_boolean.DEFINITION
+					var attribute_value_booleans []*ATTRIBUTE_VALUE_BOOLEAN
+					_, ok := res[a_attribute_definition_boolean_ref_]
+					if ok {
+						attribute_value_booleans = res[a_attribute_definition_boolean_ref_]
+					} else {
+						attribute_value_booleans = make([]*ATTRIBUTE_VALUE_BOOLEAN, 0)
+					}
+					attribute_value_booleans = append(attribute_value_booleans, attribute_value_boolean)
+					res[a_attribute_definition_boolean_ref_] = attribute_value_booleans
+				}
+			}
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of ATTRIBUTE_VALUE_DATE
 	case ATTRIBUTE_VALUE_DATE:
 		switch fieldname {
 		// insertion point for per direct association field
+		case "DEFINITION":
+			res := make(map[*A_ATTRIBUTE_DEFINITION_DATE_REF][]*ATTRIBUTE_VALUE_DATE)
+			for attribute_value_date := range stage.ATTRIBUTE_VALUE_DATEs {
+				if attribute_value_date.DEFINITION != nil {
+					a_attribute_definition_date_ref_ := attribute_value_date.DEFINITION
+					var attribute_value_dates []*ATTRIBUTE_VALUE_DATE
+					_, ok := res[a_attribute_definition_date_ref_]
+					if ok {
+						attribute_value_dates = res[a_attribute_definition_date_ref_]
+					} else {
+						attribute_value_dates = make([]*ATTRIBUTE_VALUE_DATE, 0)
+					}
+					attribute_value_dates = append(attribute_value_dates, attribute_value_date)
+					res[a_attribute_definition_date_ref_] = attribute_value_dates
+				}
+			}
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of ATTRIBUTE_VALUE_ENUMERATION
 	case ATTRIBUTE_VALUE_ENUMERATION:
 		switch fieldname {
 		// insertion point for per direct association field
+		case "DEFINITION":
+			res := make(map[*A_ATTRIBUTE_DEFINITION_ENUMERATION_REF][]*ATTRIBUTE_VALUE_ENUMERATION)
+			for attribute_value_enumeration := range stage.ATTRIBUTE_VALUE_ENUMERATIONs {
+				if attribute_value_enumeration.DEFINITION != nil {
+					a_attribute_definition_enumeration_ref_ := attribute_value_enumeration.DEFINITION
+					var attribute_value_enumerations []*ATTRIBUTE_VALUE_ENUMERATION
+					_, ok := res[a_attribute_definition_enumeration_ref_]
+					if ok {
+						attribute_value_enumerations = res[a_attribute_definition_enumeration_ref_]
+					} else {
+						attribute_value_enumerations = make([]*ATTRIBUTE_VALUE_ENUMERATION, 0)
+					}
+					attribute_value_enumerations = append(attribute_value_enumerations, attribute_value_enumeration)
+					res[a_attribute_definition_enumeration_ref_] = attribute_value_enumerations
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "VALUES":
+			res := make(map[*A_ENUM_VALUE_REF][]*ATTRIBUTE_VALUE_ENUMERATION)
+			for attribute_value_enumeration := range stage.ATTRIBUTE_VALUE_ENUMERATIONs {
+				if attribute_value_enumeration.VALUES != nil {
+					a_enum_value_ref_ := attribute_value_enumeration.VALUES
+					var attribute_value_enumerations []*ATTRIBUTE_VALUE_ENUMERATION
+					_, ok := res[a_enum_value_ref_]
+					if ok {
+						attribute_value_enumerations = res[a_enum_value_ref_]
+					} else {
+						attribute_value_enumerations = make([]*ATTRIBUTE_VALUE_ENUMERATION, 0)
+					}
+					attribute_value_enumerations = append(attribute_value_enumerations, attribute_value_enumeration)
+					res[a_enum_value_ref_] = attribute_value_enumerations
+				}
+			}
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of ATTRIBUTE_VALUE_INTEGER
 	case ATTRIBUTE_VALUE_INTEGER:
 		switch fieldname {
 		// insertion point for per direct association field
+		case "DEFINITION":
+			res := make(map[*A_ATTRIBUTE_DEFINITION_INTEGER_REF][]*ATTRIBUTE_VALUE_INTEGER)
+			for attribute_value_integer := range stage.ATTRIBUTE_VALUE_INTEGERs {
+				if attribute_value_integer.DEFINITION != nil {
+					a_attribute_definition_integer_ref_ := attribute_value_integer.DEFINITION
+					var attribute_value_integers []*ATTRIBUTE_VALUE_INTEGER
+					_, ok := res[a_attribute_definition_integer_ref_]
+					if ok {
+						attribute_value_integers = res[a_attribute_definition_integer_ref_]
+					} else {
+						attribute_value_integers = make([]*ATTRIBUTE_VALUE_INTEGER, 0)
+					}
+					attribute_value_integers = append(attribute_value_integers, attribute_value_integer)
+					res[a_attribute_definition_integer_ref_] = attribute_value_integers
+				}
+			}
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of ATTRIBUTE_VALUE_REAL
 	case ATTRIBUTE_VALUE_REAL:
 		switch fieldname {
 		// insertion point for per direct association field
+		case "DEFINITION":
+			res := make(map[*A_ATTRIBUTE_DEFINITION_REAL_REF][]*ATTRIBUTE_VALUE_REAL)
+			for attribute_value_real := range stage.ATTRIBUTE_VALUE_REALs {
+				if attribute_value_real.DEFINITION != nil {
+					a_attribute_definition_real_ref_ := attribute_value_real.DEFINITION
+					var attribute_value_reals []*ATTRIBUTE_VALUE_REAL
+					_, ok := res[a_attribute_definition_real_ref_]
+					if ok {
+						attribute_value_reals = res[a_attribute_definition_real_ref_]
+					} else {
+						attribute_value_reals = make([]*ATTRIBUTE_VALUE_REAL, 0)
+					}
+					attribute_value_reals = append(attribute_value_reals, attribute_value_real)
+					res[a_attribute_definition_real_ref_] = attribute_value_reals
+				}
+			}
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of ATTRIBUTE_VALUE_STRING
 	case ATTRIBUTE_VALUE_STRING:
 		switch fieldname {
 		// insertion point for per direct association field
+		case "DEFINITION":
+			res := make(map[*A_ATTRIBUTE_DEFINITION_STRING_REF][]*ATTRIBUTE_VALUE_STRING)
+			for attribute_value_string := range stage.ATTRIBUTE_VALUE_STRINGs {
+				if attribute_value_string.DEFINITION != nil {
+					a_attribute_definition_string_ref_ := attribute_value_string.DEFINITION
+					var attribute_value_strings []*ATTRIBUTE_VALUE_STRING
+					_, ok := res[a_attribute_definition_string_ref_]
+					if ok {
+						attribute_value_strings = res[a_attribute_definition_string_ref_]
+					} else {
+						attribute_value_strings = make([]*ATTRIBUTE_VALUE_STRING, 0)
+					}
+					attribute_value_strings = append(attribute_value_strings, attribute_value_string)
+					res[a_attribute_definition_string_ref_] = attribute_value_strings
+				}
+			}
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of ATTRIBUTE_VALUE_XHTML
 	case ATTRIBUTE_VALUE_XHTML:
 		switch fieldname {
 		// insertion point for per direct association field
+		case "THE_VALUE":
+			res := make(map[*XHTML_CONTENT][]*ATTRIBUTE_VALUE_XHTML)
+			for attribute_value_xhtml := range stage.ATTRIBUTE_VALUE_XHTMLs {
+				if attribute_value_xhtml.THE_VALUE != nil {
+					xhtml_content_ := attribute_value_xhtml.THE_VALUE
+					var attribute_value_xhtmls []*ATTRIBUTE_VALUE_XHTML
+					_, ok := res[xhtml_content_]
+					if ok {
+						attribute_value_xhtmls = res[xhtml_content_]
+					} else {
+						attribute_value_xhtmls = make([]*ATTRIBUTE_VALUE_XHTML, 0)
+					}
+					attribute_value_xhtmls = append(attribute_value_xhtmls, attribute_value_xhtml)
+					res[xhtml_content_] = attribute_value_xhtmls
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "THE_ORIGINAL_VALUE":
+			res := make(map[*XHTML_CONTENT][]*ATTRIBUTE_VALUE_XHTML)
+			for attribute_value_xhtml := range stage.ATTRIBUTE_VALUE_XHTMLs {
+				if attribute_value_xhtml.THE_ORIGINAL_VALUE != nil {
+					xhtml_content_ := attribute_value_xhtml.THE_ORIGINAL_VALUE
+					var attribute_value_xhtmls []*ATTRIBUTE_VALUE_XHTML
+					_, ok := res[xhtml_content_]
+					if ok {
+						attribute_value_xhtmls = res[xhtml_content_]
+					} else {
+						attribute_value_xhtmls = make([]*ATTRIBUTE_VALUE_XHTML, 0)
+					}
+					attribute_value_xhtmls = append(attribute_value_xhtmls, attribute_value_xhtml)
+					res[xhtml_content_] = attribute_value_xhtmls
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "DEFINITION":
+			res := make(map[*A_ATTRIBUTE_DEFINITION_XHTML_REF][]*ATTRIBUTE_VALUE_XHTML)
+			for attribute_value_xhtml := range stage.ATTRIBUTE_VALUE_XHTMLs {
+				if attribute_value_xhtml.DEFINITION != nil {
+					a_attribute_definition_xhtml_ref_ := attribute_value_xhtml.DEFINITION
+					var attribute_value_xhtmls []*ATTRIBUTE_VALUE_XHTML
+					_, ok := res[a_attribute_definition_xhtml_ref_]
+					if ok {
+						attribute_value_xhtmls = res[a_attribute_definition_xhtml_ref_]
+					} else {
+						attribute_value_xhtmls = make([]*ATTRIBUTE_VALUE_XHTML, 0)
+					}
+					attribute_value_xhtmls = append(attribute_value_xhtmls, attribute_value_xhtml)
+					res[a_attribute_definition_xhtml_ref_] = attribute_value_xhtmls
+				}
+			}
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of A_ALTERNATIVE_ID
 	case A_ALTERNATIVE_ID:
@@ -8799,6 +9168,11 @@ func GetPointerReverseMap[Start, End Gongstruct](fieldname string, stage *StageS
 		switch fieldname {
 		// insertion point for per direct association field
 		}
+	// reverse maps of direct associations of A_SOURCE_SPECIFICATION_1
+	case A_SOURCE_SPECIFICATION_1:
+		switch fieldname {
+		// insertion point for per direct association field
+		}
 	// reverse maps of direct associations of A_SPECIFICATIONS
 	case A_SPECIFICATIONS:
 		switch fieldname {
@@ -8859,11 +9233,6 @@ func GetPointerReverseMap[Start, End Gongstruct](fieldname string, stage *StageS
 		switch fieldname {
 		// insertion point for per direct association field
 		}
-	// reverse maps of direct associations of A_TARGET_SPECIFICATION_1
-	case A_TARGET_SPECIFICATION_1:
-		switch fieldname {
-		// insertion point for per direct association field
-		}
 	// reverse maps of direct associations of A_THE_HEADER
 	case A_THE_HEADER:
 		switch fieldname {
@@ -8878,36 +9247,172 @@ func GetPointerReverseMap[Start, End Gongstruct](fieldname string, stage *StageS
 	case DATATYPE_DEFINITION_BOOLEAN:
 		switch fieldname {
 		// insertion point for per direct association field
+		case "ALTERNATIVE_ID":
+			res := make(map[*A_ALTERNATIVE_ID][]*DATATYPE_DEFINITION_BOOLEAN)
+			for datatype_definition_boolean := range stage.DATATYPE_DEFINITION_BOOLEANs {
+				if datatype_definition_boolean.ALTERNATIVE_ID != nil {
+					a_alternative_id_ := datatype_definition_boolean.ALTERNATIVE_ID
+					var datatype_definition_booleans []*DATATYPE_DEFINITION_BOOLEAN
+					_, ok := res[a_alternative_id_]
+					if ok {
+						datatype_definition_booleans = res[a_alternative_id_]
+					} else {
+						datatype_definition_booleans = make([]*DATATYPE_DEFINITION_BOOLEAN, 0)
+					}
+					datatype_definition_booleans = append(datatype_definition_booleans, datatype_definition_boolean)
+					res[a_alternative_id_] = datatype_definition_booleans
+				}
+			}
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of DATATYPE_DEFINITION_DATE
 	case DATATYPE_DEFINITION_DATE:
 		switch fieldname {
 		// insertion point for per direct association field
+		case "ALTERNATIVE_ID":
+			res := make(map[*A_ALTERNATIVE_ID][]*DATATYPE_DEFINITION_DATE)
+			for datatype_definition_date := range stage.DATATYPE_DEFINITION_DATEs {
+				if datatype_definition_date.ALTERNATIVE_ID != nil {
+					a_alternative_id_ := datatype_definition_date.ALTERNATIVE_ID
+					var datatype_definition_dates []*DATATYPE_DEFINITION_DATE
+					_, ok := res[a_alternative_id_]
+					if ok {
+						datatype_definition_dates = res[a_alternative_id_]
+					} else {
+						datatype_definition_dates = make([]*DATATYPE_DEFINITION_DATE, 0)
+					}
+					datatype_definition_dates = append(datatype_definition_dates, datatype_definition_date)
+					res[a_alternative_id_] = datatype_definition_dates
+				}
+			}
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of DATATYPE_DEFINITION_ENUMERATION
 	case DATATYPE_DEFINITION_ENUMERATION:
 		switch fieldname {
 		// insertion point for per direct association field
+		case "ALTERNATIVE_ID":
+			res := make(map[*A_ALTERNATIVE_ID][]*DATATYPE_DEFINITION_ENUMERATION)
+			for datatype_definition_enumeration := range stage.DATATYPE_DEFINITION_ENUMERATIONs {
+				if datatype_definition_enumeration.ALTERNATIVE_ID != nil {
+					a_alternative_id_ := datatype_definition_enumeration.ALTERNATIVE_ID
+					var datatype_definition_enumerations []*DATATYPE_DEFINITION_ENUMERATION
+					_, ok := res[a_alternative_id_]
+					if ok {
+						datatype_definition_enumerations = res[a_alternative_id_]
+					} else {
+						datatype_definition_enumerations = make([]*DATATYPE_DEFINITION_ENUMERATION, 0)
+					}
+					datatype_definition_enumerations = append(datatype_definition_enumerations, datatype_definition_enumeration)
+					res[a_alternative_id_] = datatype_definition_enumerations
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "SPECIFIED_VALUES":
+			res := make(map[*A_SPECIFIED_VALUES][]*DATATYPE_DEFINITION_ENUMERATION)
+			for datatype_definition_enumeration := range stage.DATATYPE_DEFINITION_ENUMERATIONs {
+				if datatype_definition_enumeration.SPECIFIED_VALUES != nil {
+					a_specified_values_ := datatype_definition_enumeration.SPECIFIED_VALUES
+					var datatype_definition_enumerations []*DATATYPE_DEFINITION_ENUMERATION
+					_, ok := res[a_specified_values_]
+					if ok {
+						datatype_definition_enumerations = res[a_specified_values_]
+					} else {
+						datatype_definition_enumerations = make([]*DATATYPE_DEFINITION_ENUMERATION, 0)
+					}
+					datatype_definition_enumerations = append(datatype_definition_enumerations, datatype_definition_enumeration)
+					res[a_specified_values_] = datatype_definition_enumerations
+				}
+			}
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of DATATYPE_DEFINITION_INTEGER
 	case DATATYPE_DEFINITION_INTEGER:
 		switch fieldname {
 		// insertion point for per direct association field
+		case "ALTERNATIVE_ID":
+			res := make(map[*A_ALTERNATIVE_ID][]*DATATYPE_DEFINITION_INTEGER)
+			for datatype_definition_integer := range stage.DATATYPE_DEFINITION_INTEGERs {
+				if datatype_definition_integer.ALTERNATIVE_ID != nil {
+					a_alternative_id_ := datatype_definition_integer.ALTERNATIVE_ID
+					var datatype_definition_integers []*DATATYPE_DEFINITION_INTEGER
+					_, ok := res[a_alternative_id_]
+					if ok {
+						datatype_definition_integers = res[a_alternative_id_]
+					} else {
+						datatype_definition_integers = make([]*DATATYPE_DEFINITION_INTEGER, 0)
+					}
+					datatype_definition_integers = append(datatype_definition_integers, datatype_definition_integer)
+					res[a_alternative_id_] = datatype_definition_integers
+				}
+			}
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of DATATYPE_DEFINITION_REAL
 	case DATATYPE_DEFINITION_REAL:
 		switch fieldname {
 		// insertion point for per direct association field
+		case "ALTERNATIVE_ID":
+			res := make(map[*A_ALTERNATIVE_ID][]*DATATYPE_DEFINITION_REAL)
+			for datatype_definition_real := range stage.DATATYPE_DEFINITION_REALs {
+				if datatype_definition_real.ALTERNATIVE_ID != nil {
+					a_alternative_id_ := datatype_definition_real.ALTERNATIVE_ID
+					var datatype_definition_reals []*DATATYPE_DEFINITION_REAL
+					_, ok := res[a_alternative_id_]
+					if ok {
+						datatype_definition_reals = res[a_alternative_id_]
+					} else {
+						datatype_definition_reals = make([]*DATATYPE_DEFINITION_REAL, 0)
+					}
+					datatype_definition_reals = append(datatype_definition_reals, datatype_definition_real)
+					res[a_alternative_id_] = datatype_definition_reals
+				}
+			}
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of DATATYPE_DEFINITION_STRING
 	case DATATYPE_DEFINITION_STRING:
 		switch fieldname {
 		// insertion point for per direct association field
+		case "ALTERNATIVE_ID":
+			res := make(map[*A_ALTERNATIVE_ID][]*DATATYPE_DEFINITION_STRING)
+			for datatype_definition_string := range stage.DATATYPE_DEFINITION_STRINGs {
+				if datatype_definition_string.ALTERNATIVE_ID != nil {
+					a_alternative_id_ := datatype_definition_string.ALTERNATIVE_ID
+					var datatype_definition_strings []*DATATYPE_DEFINITION_STRING
+					_, ok := res[a_alternative_id_]
+					if ok {
+						datatype_definition_strings = res[a_alternative_id_]
+					} else {
+						datatype_definition_strings = make([]*DATATYPE_DEFINITION_STRING, 0)
+					}
+					datatype_definition_strings = append(datatype_definition_strings, datatype_definition_string)
+					res[a_alternative_id_] = datatype_definition_strings
+				}
+			}
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of DATATYPE_DEFINITION_XHTML
 	case DATATYPE_DEFINITION_XHTML:
 		switch fieldname {
 		// insertion point for per direct association field
+		case "ALTERNATIVE_ID":
+			res := make(map[*A_ALTERNATIVE_ID][]*DATATYPE_DEFINITION_XHTML)
+			for datatype_definition_xhtml := range stage.DATATYPE_DEFINITION_XHTMLs {
+				if datatype_definition_xhtml.ALTERNATIVE_ID != nil {
+					a_alternative_id_ := datatype_definition_xhtml.ALTERNATIVE_ID
+					var datatype_definition_xhtmls []*DATATYPE_DEFINITION_XHTML
+					_, ok := res[a_alternative_id_]
+					if ok {
+						datatype_definition_xhtmls = res[a_alternative_id_]
+					} else {
+						datatype_definition_xhtmls = make([]*DATATYPE_DEFINITION_XHTML, 0)
+					}
+					datatype_definition_xhtmls = append(datatype_definition_xhtmls, datatype_definition_xhtml)
+					res[a_alternative_id_] = datatype_definition_xhtmls
+				}
+			}
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of EMBEDDED_VALUE
 	case EMBEDDED_VALUE:
@@ -8918,26 +9423,332 @@ func GetPointerReverseMap[Start, End Gongstruct](fieldname string, stage *StageS
 	case ENUM_VALUE:
 		switch fieldname {
 		// insertion point for per direct association field
+		case "ALTERNATIVE_ID":
+			res := make(map[*A_ALTERNATIVE_ID][]*ENUM_VALUE)
+			for enum_value := range stage.ENUM_VALUEs {
+				if enum_value.ALTERNATIVE_ID != nil {
+					a_alternative_id_ := enum_value.ALTERNATIVE_ID
+					var enum_values []*ENUM_VALUE
+					_, ok := res[a_alternative_id_]
+					if ok {
+						enum_values = res[a_alternative_id_]
+					} else {
+						enum_values = make([]*ENUM_VALUE, 0)
+					}
+					enum_values = append(enum_values, enum_value)
+					res[a_alternative_id_] = enum_values
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "PROPERTIES":
+			res := make(map[*A_PROPERTIES][]*ENUM_VALUE)
+			for enum_value := range stage.ENUM_VALUEs {
+				if enum_value.PROPERTIES != nil {
+					a_properties_ := enum_value.PROPERTIES
+					var enum_values []*ENUM_VALUE
+					_, ok := res[a_properties_]
+					if ok {
+						enum_values = res[a_properties_]
+					} else {
+						enum_values = make([]*ENUM_VALUE, 0)
+					}
+					enum_values = append(enum_values, enum_value)
+					res[a_properties_] = enum_values
+				}
+			}
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of RELATION_GROUP
 	case RELATION_GROUP:
 		switch fieldname {
 		// insertion point for per direct association field
+		case "ALTERNATIVE_ID":
+			res := make(map[*A_ALTERNATIVE_ID][]*RELATION_GROUP)
+			for relation_group := range stage.RELATION_GROUPs {
+				if relation_group.ALTERNATIVE_ID != nil {
+					a_alternative_id_ := relation_group.ALTERNATIVE_ID
+					var relation_groups []*RELATION_GROUP
+					_, ok := res[a_alternative_id_]
+					if ok {
+						relation_groups = res[a_alternative_id_]
+					} else {
+						relation_groups = make([]*RELATION_GROUP, 0)
+					}
+					relation_groups = append(relation_groups, relation_group)
+					res[a_alternative_id_] = relation_groups
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "SOURCE_SPECIFICATION":
+			res := make(map[*A_SOURCE_SPECIFICATION_1][]*RELATION_GROUP)
+			for relation_group := range stage.RELATION_GROUPs {
+				if relation_group.SOURCE_SPECIFICATION != nil {
+					a_source_specification_1_ := relation_group.SOURCE_SPECIFICATION
+					var relation_groups []*RELATION_GROUP
+					_, ok := res[a_source_specification_1_]
+					if ok {
+						relation_groups = res[a_source_specification_1_]
+					} else {
+						relation_groups = make([]*RELATION_GROUP, 0)
+					}
+					relation_groups = append(relation_groups, relation_group)
+					res[a_source_specification_1_] = relation_groups
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "SPEC_RELATIONS":
+			res := make(map[*A_SPEC_RELATION_REF][]*RELATION_GROUP)
+			for relation_group := range stage.RELATION_GROUPs {
+				if relation_group.SPEC_RELATIONS != nil {
+					a_spec_relation_ref_ := relation_group.SPEC_RELATIONS
+					var relation_groups []*RELATION_GROUP
+					_, ok := res[a_spec_relation_ref_]
+					if ok {
+						relation_groups = res[a_spec_relation_ref_]
+					} else {
+						relation_groups = make([]*RELATION_GROUP, 0)
+					}
+					relation_groups = append(relation_groups, relation_group)
+					res[a_spec_relation_ref_] = relation_groups
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "TARGET_SPECIFICATION":
+			res := make(map[*A_SOURCE_SPECIFICATION_1][]*RELATION_GROUP)
+			for relation_group := range stage.RELATION_GROUPs {
+				if relation_group.TARGET_SPECIFICATION != nil {
+					a_source_specification_1_ := relation_group.TARGET_SPECIFICATION
+					var relation_groups []*RELATION_GROUP
+					_, ok := res[a_source_specification_1_]
+					if ok {
+						relation_groups = res[a_source_specification_1_]
+					} else {
+						relation_groups = make([]*RELATION_GROUP, 0)
+					}
+					relation_groups = append(relation_groups, relation_group)
+					res[a_source_specification_1_] = relation_groups
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "TYPE":
+			res := make(map[*A_RELATION_GROUP_TYPE_REF][]*RELATION_GROUP)
+			for relation_group := range stage.RELATION_GROUPs {
+				if relation_group.TYPE != nil {
+					a_relation_group_type_ref_ := relation_group.TYPE
+					var relation_groups []*RELATION_GROUP
+					_, ok := res[a_relation_group_type_ref_]
+					if ok {
+						relation_groups = res[a_relation_group_type_ref_]
+					} else {
+						relation_groups = make([]*RELATION_GROUP, 0)
+					}
+					relation_groups = append(relation_groups, relation_group)
+					res[a_relation_group_type_ref_] = relation_groups
+				}
+			}
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of RELATION_GROUP_TYPE
 	case RELATION_GROUP_TYPE:
 		switch fieldname {
 		// insertion point for per direct association field
+		case "ALTERNATIVE_ID":
+			res := make(map[*A_ALTERNATIVE_ID][]*RELATION_GROUP_TYPE)
+			for relation_group_type := range stage.RELATION_GROUP_TYPEs {
+				if relation_group_type.ALTERNATIVE_ID != nil {
+					a_alternative_id_ := relation_group_type.ALTERNATIVE_ID
+					var relation_group_types []*RELATION_GROUP_TYPE
+					_, ok := res[a_alternative_id_]
+					if ok {
+						relation_group_types = res[a_alternative_id_]
+					} else {
+						relation_group_types = make([]*RELATION_GROUP_TYPE, 0)
+					}
+					relation_group_types = append(relation_group_types, relation_group_type)
+					res[a_alternative_id_] = relation_group_types
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "SPEC_ATTRIBUTES":
+			res := make(map[*A_SPEC_ATTRIBUTES][]*RELATION_GROUP_TYPE)
+			for relation_group_type := range stage.RELATION_GROUP_TYPEs {
+				if relation_group_type.SPEC_ATTRIBUTES != nil {
+					a_spec_attributes_ := relation_group_type.SPEC_ATTRIBUTES
+					var relation_group_types []*RELATION_GROUP_TYPE
+					_, ok := res[a_spec_attributes_]
+					if ok {
+						relation_group_types = res[a_spec_attributes_]
+					} else {
+						relation_group_types = make([]*RELATION_GROUP_TYPE, 0)
+					}
+					relation_group_types = append(relation_group_types, relation_group_type)
+					res[a_spec_attributes_] = relation_group_types
+				}
+			}
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of REQ_IF
 	case REQ_IF:
 		switch fieldname {
 		// insertion point for per direct association field
+		case "THE_HEADER":
+			res := make(map[*A_THE_HEADER][]*REQ_IF)
+			for req_if := range stage.REQ_IFs {
+				if req_if.THE_HEADER != nil {
+					a_the_header_ := req_if.THE_HEADER
+					var req_ifs []*REQ_IF
+					_, ok := res[a_the_header_]
+					if ok {
+						req_ifs = res[a_the_header_]
+					} else {
+						req_ifs = make([]*REQ_IF, 0)
+					}
+					req_ifs = append(req_ifs, req_if)
+					res[a_the_header_] = req_ifs
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "CORE_CONTENT":
+			res := make(map[*A_CORE_CONTENT][]*REQ_IF)
+			for req_if := range stage.REQ_IFs {
+				if req_if.CORE_CONTENT != nil {
+					a_core_content_ := req_if.CORE_CONTENT
+					var req_ifs []*REQ_IF
+					_, ok := res[a_core_content_]
+					if ok {
+						req_ifs = res[a_core_content_]
+					} else {
+						req_ifs = make([]*REQ_IF, 0)
+					}
+					req_ifs = append(req_ifs, req_if)
+					res[a_core_content_] = req_ifs
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "TOOL_EXTENSIONS":
+			res := make(map[*A_TOOL_EXTENSIONS][]*REQ_IF)
+			for req_if := range stage.REQ_IFs {
+				if req_if.TOOL_EXTENSIONS != nil {
+					a_tool_extensions_ := req_if.TOOL_EXTENSIONS
+					var req_ifs []*REQ_IF
+					_, ok := res[a_tool_extensions_]
+					if ok {
+						req_ifs = res[a_tool_extensions_]
+					} else {
+						req_ifs = make([]*REQ_IF, 0)
+					}
+					req_ifs = append(req_ifs, req_if)
+					res[a_tool_extensions_] = req_ifs
+				}
+			}
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of REQ_IF_CONTENT
 	case REQ_IF_CONTENT:
 		switch fieldname {
 		// insertion point for per direct association field
+		case "DATATYPES":
+			res := make(map[*A_DATATYPES][]*REQ_IF_CONTENT)
+			for req_if_content := range stage.REQ_IF_CONTENTs {
+				if req_if_content.DATATYPES != nil {
+					a_datatypes_ := req_if_content.DATATYPES
+					var req_if_contents []*REQ_IF_CONTENT
+					_, ok := res[a_datatypes_]
+					if ok {
+						req_if_contents = res[a_datatypes_]
+					} else {
+						req_if_contents = make([]*REQ_IF_CONTENT, 0)
+					}
+					req_if_contents = append(req_if_contents, req_if_content)
+					res[a_datatypes_] = req_if_contents
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "SPEC_TYPES":
+			res := make(map[*A_SPEC_TYPES][]*REQ_IF_CONTENT)
+			for req_if_content := range stage.REQ_IF_CONTENTs {
+				if req_if_content.SPEC_TYPES != nil {
+					a_spec_types_ := req_if_content.SPEC_TYPES
+					var req_if_contents []*REQ_IF_CONTENT
+					_, ok := res[a_spec_types_]
+					if ok {
+						req_if_contents = res[a_spec_types_]
+					} else {
+						req_if_contents = make([]*REQ_IF_CONTENT, 0)
+					}
+					req_if_contents = append(req_if_contents, req_if_content)
+					res[a_spec_types_] = req_if_contents
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "SPEC_OBJECTS":
+			res := make(map[*A_SPEC_OBJECTS][]*REQ_IF_CONTENT)
+			for req_if_content := range stage.REQ_IF_CONTENTs {
+				if req_if_content.SPEC_OBJECTS != nil {
+					a_spec_objects_ := req_if_content.SPEC_OBJECTS
+					var req_if_contents []*REQ_IF_CONTENT
+					_, ok := res[a_spec_objects_]
+					if ok {
+						req_if_contents = res[a_spec_objects_]
+					} else {
+						req_if_contents = make([]*REQ_IF_CONTENT, 0)
+					}
+					req_if_contents = append(req_if_contents, req_if_content)
+					res[a_spec_objects_] = req_if_contents
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "SPEC_RELATIONS":
+			res := make(map[*A_SPEC_RELATIONS][]*REQ_IF_CONTENT)
+			for req_if_content := range stage.REQ_IF_CONTENTs {
+				if req_if_content.SPEC_RELATIONS != nil {
+					a_spec_relations_ := req_if_content.SPEC_RELATIONS
+					var req_if_contents []*REQ_IF_CONTENT
+					_, ok := res[a_spec_relations_]
+					if ok {
+						req_if_contents = res[a_spec_relations_]
+					} else {
+						req_if_contents = make([]*REQ_IF_CONTENT, 0)
+					}
+					req_if_contents = append(req_if_contents, req_if_content)
+					res[a_spec_relations_] = req_if_contents
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "SPECIFICATIONS":
+			res := make(map[*A_SPECIFICATIONS][]*REQ_IF_CONTENT)
+			for req_if_content := range stage.REQ_IF_CONTENTs {
+				if req_if_content.SPECIFICATIONS != nil {
+					a_specifications_ := req_if_content.SPECIFICATIONS
+					var req_if_contents []*REQ_IF_CONTENT
+					_, ok := res[a_specifications_]
+					if ok {
+						req_if_contents = res[a_specifications_]
+					} else {
+						req_if_contents = make([]*REQ_IF_CONTENT, 0)
+					}
+					req_if_contents = append(req_if_contents, req_if_content)
+					res[a_specifications_] = req_if_contents
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "SPEC_RELATION_GROUPS":
+			res := make(map[*A_SPEC_RELATION_GROUPS][]*REQ_IF_CONTENT)
+			for req_if_content := range stage.REQ_IF_CONTENTs {
+				if req_if_content.SPEC_RELATION_GROUPS != nil {
+					a_spec_relation_groups_ := req_if_content.SPEC_RELATION_GROUPS
+					var req_if_contents []*REQ_IF_CONTENT
+					_, ok := res[a_spec_relation_groups_]
+					if ok {
+						req_if_contents = res[a_spec_relation_groups_]
+					} else {
+						req_if_contents = make([]*REQ_IF_CONTENT, 0)
+					}
+					req_if_contents = append(req_if_contents, req_if_content)
+					res[a_spec_relation_groups_] = req_if_contents
+				}
+			}
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of REQ_IF_HEADER
 	case REQ_IF_HEADER:
@@ -8953,36 +9764,410 @@ func GetPointerReverseMap[Start, End Gongstruct](fieldname string, stage *StageS
 	case SPECIFICATION:
 		switch fieldname {
 		// insertion point for per direct association field
+		case "ALTERNATIVE_ID":
+			res := make(map[*A_ALTERNATIVE_ID][]*SPECIFICATION)
+			for specification := range stage.SPECIFICATIONs {
+				if specification.ALTERNATIVE_ID != nil {
+					a_alternative_id_ := specification.ALTERNATIVE_ID
+					var specifications []*SPECIFICATION
+					_, ok := res[a_alternative_id_]
+					if ok {
+						specifications = res[a_alternative_id_]
+					} else {
+						specifications = make([]*SPECIFICATION, 0)
+					}
+					specifications = append(specifications, specification)
+					res[a_alternative_id_] = specifications
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "CHILDREN":
+			res := make(map[*A_CHILDREN][]*SPECIFICATION)
+			for specification := range stage.SPECIFICATIONs {
+				if specification.CHILDREN != nil {
+					a_children_ := specification.CHILDREN
+					var specifications []*SPECIFICATION
+					_, ok := res[a_children_]
+					if ok {
+						specifications = res[a_children_]
+					} else {
+						specifications = make([]*SPECIFICATION, 0)
+					}
+					specifications = append(specifications, specification)
+					res[a_children_] = specifications
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "VALUES":
+			res := make(map[*A_ATTRIBUTE_VALUE_XHTML_1][]*SPECIFICATION)
+			for specification := range stage.SPECIFICATIONs {
+				if specification.VALUES != nil {
+					a_attribute_value_xhtml_1_ := specification.VALUES
+					var specifications []*SPECIFICATION
+					_, ok := res[a_attribute_value_xhtml_1_]
+					if ok {
+						specifications = res[a_attribute_value_xhtml_1_]
+					} else {
+						specifications = make([]*SPECIFICATION, 0)
+					}
+					specifications = append(specifications, specification)
+					res[a_attribute_value_xhtml_1_] = specifications
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "TYPE":
+			res := make(map[*A_SPECIFICATION_TYPE_REF][]*SPECIFICATION)
+			for specification := range stage.SPECIFICATIONs {
+				if specification.TYPE != nil {
+					a_specification_type_ref_ := specification.TYPE
+					var specifications []*SPECIFICATION
+					_, ok := res[a_specification_type_ref_]
+					if ok {
+						specifications = res[a_specification_type_ref_]
+					} else {
+						specifications = make([]*SPECIFICATION, 0)
+					}
+					specifications = append(specifications, specification)
+					res[a_specification_type_ref_] = specifications
+				}
+			}
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of SPECIFICATION_TYPE
 	case SPECIFICATION_TYPE:
 		switch fieldname {
 		// insertion point for per direct association field
+		case "ALTERNATIVE_ID":
+			res := make(map[*A_ALTERNATIVE_ID][]*SPECIFICATION_TYPE)
+			for specification_type := range stage.SPECIFICATION_TYPEs {
+				if specification_type.ALTERNATIVE_ID != nil {
+					a_alternative_id_ := specification_type.ALTERNATIVE_ID
+					var specification_types []*SPECIFICATION_TYPE
+					_, ok := res[a_alternative_id_]
+					if ok {
+						specification_types = res[a_alternative_id_]
+					} else {
+						specification_types = make([]*SPECIFICATION_TYPE, 0)
+					}
+					specification_types = append(specification_types, specification_type)
+					res[a_alternative_id_] = specification_types
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "SPEC_ATTRIBUTES":
+			res := make(map[*A_SPEC_ATTRIBUTES][]*SPECIFICATION_TYPE)
+			for specification_type := range stage.SPECIFICATION_TYPEs {
+				if specification_type.SPEC_ATTRIBUTES != nil {
+					a_spec_attributes_ := specification_type.SPEC_ATTRIBUTES
+					var specification_types []*SPECIFICATION_TYPE
+					_, ok := res[a_spec_attributes_]
+					if ok {
+						specification_types = res[a_spec_attributes_]
+					} else {
+						specification_types = make([]*SPECIFICATION_TYPE, 0)
+					}
+					specification_types = append(specification_types, specification_type)
+					res[a_spec_attributes_] = specification_types
+				}
+			}
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of SPEC_HIERARCHY
 	case SPEC_HIERARCHY:
 		switch fieldname {
 		// insertion point for per direct association field
+		case "ALTERNATIVE_ID":
+			res := make(map[*A_ALTERNATIVE_ID][]*SPEC_HIERARCHY)
+			for spec_hierarchy := range stage.SPEC_HIERARCHYs {
+				if spec_hierarchy.ALTERNATIVE_ID != nil {
+					a_alternative_id_ := spec_hierarchy.ALTERNATIVE_ID
+					var spec_hierarchys []*SPEC_HIERARCHY
+					_, ok := res[a_alternative_id_]
+					if ok {
+						spec_hierarchys = res[a_alternative_id_]
+					} else {
+						spec_hierarchys = make([]*SPEC_HIERARCHY, 0)
+					}
+					spec_hierarchys = append(spec_hierarchys, spec_hierarchy)
+					res[a_alternative_id_] = spec_hierarchys
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "CHILDREN":
+			res := make(map[*A_CHILDREN][]*SPEC_HIERARCHY)
+			for spec_hierarchy := range stage.SPEC_HIERARCHYs {
+				if spec_hierarchy.CHILDREN != nil {
+					a_children_ := spec_hierarchy.CHILDREN
+					var spec_hierarchys []*SPEC_HIERARCHY
+					_, ok := res[a_children_]
+					if ok {
+						spec_hierarchys = res[a_children_]
+					} else {
+						spec_hierarchys = make([]*SPEC_HIERARCHY, 0)
+					}
+					spec_hierarchys = append(spec_hierarchys, spec_hierarchy)
+					res[a_children_] = spec_hierarchys
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "EDITABLE_ATTS":
+			res := make(map[*A_EDITABLE_ATTS][]*SPEC_HIERARCHY)
+			for spec_hierarchy := range stage.SPEC_HIERARCHYs {
+				if spec_hierarchy.EDITABLE_ATTS != nil {
+					a_editable_atts_ := spec_hierarchy.EDITABLE_ATTS
+					var spec_hierarchys []*SPEC_HIERARCHY
+					_, ok := res[a_editable_atts_]
+					if ok {
+						spec_hierarchys = res[a_editable_atts_]
+					} else {
+						spec_hierarchys = make([]*SPEC_HIERARCHY, 0)
+					}
+					spec_hierarchys = append(spec_hierarchys, spec_hierarchy)
+					res[a_editable_atts_] = spec_hierarchys
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "OBJECT":
+			res := make(map[*A_OBJECT][]*SPEC_HIERARCHY)
+			for spec_hierarchy := range stage.SPEC_HIERARCHYs {
+				if spec_hierarchy.OBJECT != nil {
+					a_object_ := spec_hierarchy.OBJECT
+					var spec_hierarchys []*SPEC_HIERARCHY
+					_, ok := res[a_object_]
+					if ok {
+						spec_hierarchys = res[a_object_]
+					} else {
+						spec_hierarchys = make([]*SPEC_HIERARCHY, 0)
+					}
+					spec_hierarchys = append(spec_hierarchys, spec_hierarchy)
+					res[a_object_] = spec_hierarchys
+				}
+			}
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of SPEC_OBJECT
 	case SPEC_OBJECT:
 		switch fieldname {
 		// insertion point for per direct association field
+		case "ALTERNATIVE_ID":
+			res := make(map[*A_ALTERNATIVE_ID][]*SPEC_OBJECT)
+			for spec_object := range stage.SPEC_OBJECTs {
+				if spec_object.ALTERNATIVE_ID != nil {
+					a_alternative_id_ := spec_object.ALTERNATIVE_ID
+					var spec_objects []*SPEC_OBJECT
+					_, ok := res[a_alternative_id_]
+					if ok {
+						spec_objects = res[a_alternative_id_]
+					} else {
+						spec_objects = make([]*SPEC_OBJECT, 0)
+					}
+					spec_objects = append(spec_objects, spec_object)
+					res[a_alternative_id_] = spec_objects
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "VALUES":
+			res := make(map[*A_ATTRIBUTE_VALUE_XHTML_1][]*SPEC_OBJECT)
+			for spec_object := range stage.SPEC_OBJECTs {
+				if spec_object.VALUES != nil {
+					a_attribute_value_xhtml_1_ := spec_object.VALUES
+					var spec_objects []*SPEC_OBJECT
+					_, ok := res[a_attribute_value_xhtml_1_]
+					if ok {
+						spec_objects = res[a_attribute_value_xhtml_1_]
+					} else {
+						spec_objects = make([]*SPEC_OBJECT, 0)
+					}
+					spec_objects = append(spec_objects, spec_object)
+					res[a_attribute_value_xhtml_1_] = spec_objects
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "TYPE":
+			res := make(map[*A_SPEC_OBJECT_TYPE_REF][]*SPEC_OBJECT)
+			for spec_object := range stage.SPEC_OBJECTs {
+				if spec_object.TYPE != nil {
+					a_spec_object_type_ref_ := spec_object.TYPE
+					var spec_objects []*SPEC_OBJECT
+					_, ok := res[a_spec_object_type_ref_]
+					if ok {
+						spec_objects = res[a_spec_object_type_ref_]
+					} else {
+						spec_objects = make([]*SPEC_OBJECT, 0)
+					}
+					spec_objects = append(spec_objects, spec_object)
+					res[a_spec_object_type_ref_] = spec_objects
+				}
+			}
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of SPEC_OBJECT_TYPE
 	case SPEC_OBJECT_TYPE:
 		switch fieldname {
 		// insertion point for per direct association field
+		case "ALTERNATIVE_ID":
+			res := make(map[*A_ALTERNATIVE_ID][]*SPEC_OBJECT_TYPE)
+			for spec_object_type := range stage.SPEC_OBJECT_TYPEs {
+				if spec_object_type.ALTERNATIVE_ID != nil {
+					a_alternative_id_ := spec_object_type.ALTERNATIVE_ID
+					var spec_object_types []*SPEC_OBJECT_TYPE
+					_, ok := res[a_alternative_id_]
+					if ok {
+						spec_object_types = res[a_alternative_id_]
+					} else {
+						spec_object_types = make([]*SPEC_OBJECT_TYPE, 0)
+					}
+					spec_object_types = append(spec_object_types, spec_object_type)
+					res[a_alternative_id_] = spec_object_types
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "SPEC_ATTRIBUTES":
+			res := make(map[*A_SPEC_ATTRIBUTES][]*SPEC_OBJECT_TYPE)
+			for spec_object_type := range stage.SPEC_OBJECT_TYPEs {
+				if spec_object_type.SPEC_ATTRIBUTES != nil {
+					a_spec_attributes_ := spec_object_type.SPEC_ATTRIBUTES
+					var spec_object_types []*SPEC_OBJECT_TYPE
+					_, ok := res[a_spec_attributes_]
+					if ok {
+						spec_object_types = res[a_spec_attributes_]
+					} else {
+						spec_object_types = make([]*SPEC_OBJECT_TYPE, 0)
+					}
+					spec_object_types = append(spec_object_types, spec_object_type)
+					res[a_spec_attributes_] = spec_object_types
+				}
+			}
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of SPEC_RELATION
 	case SPEC_RELATION:
 		switch fieldname {
 		// insertion point for per direct association field
+		case "ALTERNATIVE_ID":
+			res := make(map[*A_ALTERNATIVE_ID][]*SPEC_RELATION)
+			for spec_relation := range stage.SPEC_RELATIONs {
+				if spec_relation.ALTERNATIVE_ID != nil {
+					a_alternative_id_ := spec_relation.ALTERNATIVE_ID
+					var spec_relations []*SPEC_RELATION
+					_, ok := res[a_alternative_id_]
+					if ok {
+						spec_relations = res[a_alternative_id_]
+					} else {
+						spec_relations = make([]*SPEC_RELATION, 0)
+					}
+					spec_relations = append(spec_relations, spec_relation)
+					res[a_alternative_id_] = spec_relations
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "VALUES":
+			res := make(map[*A_ATTRIBUTE_VALUE_XHTML_1][]*SPEC_RELATION)
+			for spec_relation := range stage.SPEC_RELATIONs {
+				if spec_relation.VALUES != nil {
+					a_attribute_value_xhtml_1_ := spec_relation.VALUES
+					var spec_relations []*SPEC_RELATION
+					_, ok := res[a_attribute_value_xhtml_1_]
+					if ok {
+						spec_relations = res[a_attribute_value_xhtml_1_]
+					} else {
+						spec_relations = make([]*SPEC_RELATION, 0)
+					}
+					spec_relations = append(spec_relations, spec_relation)
+					res[a_attribute_value_xhtml_1_] = spec_relations
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "SOURCE":
+			res := make(map[*A_TARGET_1][]*SPEC_RELATION)
+			for spec_relation := range stage.SPEC_RELATIONs {
+				if spec_relation.SOURCE != nil {
+					a_target_1_ := spec_relation.SOURCE
+					var spec_relations []*SPEC_RELATION
+					_, ok := res[a_target_1_]
+					if ok {
+						spec_relations = res[a_target_1_]
+					} else {
+						spec_relations = make([]*SPEC_RELATION, 0)
+					}
+					spec_relations = append(spec_relations, spec_relation)
+					res[a_target_1_] = spec_relations
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "TARGET":
+			res := make(map[*A_TARGET_1][]*SPEC_RELATION)
+			for spec_relation := range stage.SPEC_RELATIONs {
+				if spec_relation.TARGET != nil {
+					a_target_1_ := spec_relation.TARGET
+					var spec_relations []*SPEC_RELATION
+					_, ok := res[a_target_1_]
+					if ok {
+						spec_relations = res[a_target_1_]
+					} else {
+						spec_relations = make([]*SPEC_RELATION, 0)
+					}
+					spec_relations = append(spec_relations, spec_relation)
+					res[a_target_1_] = spec_relations
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "TYPE":
+			res := make(map[*A_SPEC_RELATION_TYPE_REF][]*SPEC_RELATION)
+			for spec_relation := range stage.SPEC_RELATIONs {
+				if spec_relation.TYPE != nil {
+					a_spec_relation_type_ref_ := spec_relation.TYPE
+					var spec_relations []*SPEC_RELATION
+					_, ok := res[a_spec_relation_type_ref_]
+					if ok {
+						spec_relations = res[a_spec_relation_type_ref_]
+					} else {
+						spec_relations = make([]*SPEC_RELATION, 0)
+					}
+					spec_relations = append(spec_relations, spec_relation)
+					res[a_spec_relation_type_ref_] = spec_relations
+				}
+			}
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of SPEC_RELATION_TYPE
 	case SPEC_RELATION_TYPE:
 		switch fieldname {
 		// insertion point for per direct association field
+		case "ALTERNATIVE_ID":
+			res := make(map[*A_ALTERNATIVE_ID][]*SPEC_RELATION_TYPE)
+			for spec_relation_type := range stage.SPEC_RELATION_TYPEs {
+				if spec_relation_type.ALTERNATIVE_ID != nil {
+					a_alternative_id_ := spec_relation_type.ALTERNATIVE_ID
+					var spec_relation_types []*SPEC_RELATION_TYPE
+					_, ok := res[a_alternative_id_]
+					if ok {
+						spec_relation_types = res[a_alternative_id_]
+					} else {
+						spec_relation_types = make([]*SPEC_RELATION_TYPE, 0)
+					}
+					spec_relation_types = append(spec_relation_types, spec_relation_type)
+					res[a_alternative_id_] = spec_relation_types
+				}
+			}
+			return any(res).(map[*End][]*Start)
+		case "SPEC_ATTRIBUTES":
+			res := make(map[*A_SPEC_ATTRIBUTES][]*SPEC_RELATION_TYPE)
+			for spec_relation_type := range stage.SPEC_RELATION_TYPEs {
+				if spec_relation_type.SPEC_ATTRIBUTES != nil {
+					a_spec_attributes_ := spec_relation_type.SPEC_ATTRIBUTES
+					var spec_relation_types []*SPEC_RELATION_TYPE
+					_, ok := res[a_spec_attributes_]
+					if ok {
+						spec_relation_types = res[a_spec_attributes_]
+					} else {
+						spec_relation_types = make([]*SPEC_RELATION_TYPE, 0)
+					}
+					spec_relation_types = append(spec_relation_types, spec_relation_type)
+					res[a_spec_attributes_] = spec_relation_types
+				}
+			}
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of XHTML_CONTENT
 	case XHTML_CONTENT:
@@ -9014,319 +10199,71 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 	case ATTRIBUTE_DEFINITION_BOOLEAN:
 		switch fieldname {
 		// insertion point for per direct association field
-		case "ALTERNATIVE_ID":
-			res := make(map[*A_ALTERNATIVE_ID]*ATTRIBUTE_DEFINITION_BOOLEAN)
-			for attribute_definition_boolean := range stage.ATTRIBUTE_DEFINITION_BOOLEANs {
-				for _, a_alternative_id_ := range attribute_definition_boolean.ALTERNATIVE_ID {
-					res[a_alternative_id_] = attribute_definition_boolean
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "DEFAULT_VALUE":
-			res := make(map[*A_ATTRIBUTE_VALUE_BOOLEAN]*ATTRIBUTE_DEFINITION_BOOLEAN)
-			for attribute_definition_boolean := range stage.ATTRIBUTE_DEFINITION_BOOLEANs {
-				for _, a_attribute_value_boolean_ := range attribute_definition_boolean.DEFAULT_VALUE {
-					res[a_attribute_value_boolean_] = attribute_definition_boolean
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "TYPE":
-			res := make(map[*A_DATATYPE_DEFINITION_BOOLEAN_REF]*ATTRIBUTE_DEFINITION_BOOLEAN)
-			for attribute_definition_boolean := range stage.ATTRIBUTE_DEFINITION_BOOLEANs {
-				for _, a_datatype_definition_boolean_ref_ := range attribute_definition_boolean.TYPE {
-					res[a_datatype_definition_boolean_ref_] = attribute_definition_boolean
-				}
-			}
-			return any(res).(map[*End]*Start)
 		}
 	// reverse maps of direct associations of ATTRIBUTE_DEFINITION_DATE
 	case ATTRIBUTE_DEFINITION_DATE:
 		switch fieldname {
 		// insertion point for per direct association field
-		case "ALTERNATIVE_ID":
-			res := make(map[*A_ALTERNATIVE_ID]*ATTRIBUTE_DEFINITION_DATE)
-			for attribute_definition_date := range stage.ATTRIBUTE_DEFINITION_DATEs {
-				for _, a_alternative_id_ := range attribute_definition_date.ALTERNATIVE_ID {
-					res[a_alternative_id_] = attribute_definition_date
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "DEFAULT_VALUE":
-			res := make(map[*A_ATTRIBUTE_VALUE_DATE]*ATTRIBUTE_DEFINITION_DATE)
-			for attribute_definition_date := range stage.ATTRIBUTE_DEFINITION_DATEs {
-				for _, a_attribute_value_date_ := range attribute_definition_date.DEFAULT_VALUE {
-					res[a_attribute_value_date_] = attribute_definition_date
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "TYPE":
-			res := make(map[*A_DATATYPE_DEFINITION_DATE_REF]*ATTRIBUTE_DEFINITION_DATE)
-			for attribute_definition_date := range stage.ATTRIBUTE_DEFINITION_DATEs {
-				for _, a_datatype_definition_date_ref_ := range attribute_definition_date.TYPE {
-					res[a_datatype_definition_date_ref_] = attribute_definition_date
-				}
-			}
-			return any(res).(map[*End]*Start)
 		}
 	// reverse maps of direct associations of ATTRIBUTE_DEFINITION_ENUMERATION
 	case ATTRIBUTE_DEFINITION_ENUMERATION:
 		switch fieldname {
 		// insertion point for per direct association field
-		case "ALTERNATIVE_ID":
-			res := make(map[*A_ALTERNATIVE_ID]*ATTRIBUTE_DEFINITION_ENUMERATION)
-			for attribute_definition_enumeration := range stage.ATTRIBUTE_DEFINITION_ENUMERATIONs {
-				for _, a_alternative_id_ := range attribute_definition_enumeration.ALTERNATIVE_ID {
-					res[a_alternative_id_] = attribute_definition_enumeration
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "DEFAULT_VALUE":
-			res := make(map[*A_ATTRIBUTE_VALUE_ENUMERATION]*ATTRIBUTE_DEFINITION_ENUMERATION)
-			for attribute_definition_enumeration := range stage.ATTRIBUTE_DEFINITION_ENUMERATIONs {
-				for _, a_attribute_value_enumeration_ := range attribute_definition_enumeration.DEFAULT_VALUE {
-					res[a_attribute_value_enumeration_] = attribute_definition_enumeration
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "TYPE":
-			res := make(map[*A_DATATYPE_DEFINITION_ENUMERATION_REF]*ATTRIBUTE_DEFINITION_ENUMERATION)
-			for attribute_definition_enumeration := range stage.ATTRIBUTE_DEFINITION_ENUMERATIONs {
-				for _, a_datatype_definition_enumeration_ref_ := range attribute_definition_enumeration.TYPE {
-					res[a_datatype_definition_enumeration_ref_] = attribute_definition_enumeration
-				}
-			}
-			return any(res).(map[*End]*Start)
 		}
 	// reverse maps of direct associations of ATTRIBUTE_DEFINITION_INTEGER
 	case ATTRIBUTE_DEFINITION_INTEGER:
 		switch fieldname {
 		// insertion point for per direct association field
-		case "ALTERNATIVE_ID":
-			res := make(map[*A_ALTERNATIVE_ID]*ATTRIBUTE_DEFINITION_INTEGER)
-			for attribute_definition_integer := range stage.ATTRIBUTE_DEFINITION_INTEGERs {
-				for _, a_alternative_id_ := range attribute_definition_integer.ALTERNATIVE_ID {
-					res[a_alternative_id_] = attribute_definition_integer
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "DEFAULT_VALUE":
-			res := make(map[*A_ATTRIBUTE_VALUE_INTEGER]*ATTRIBUTE_DEFINITION_INTEGER)
-			for attribute_definition_integer := range stage.ATTRIBUTE_DEFINITION_INTEGERs {
-				for _, a_attribute_value_integer_ := range attribute_definition_integer.DEFAULT_VALUE {
-					res[a_attribute_value_integer_] = attribute_definition_integer
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "TYPE":
-			res := make(map[*A_DATATYPE_DEFINITION_INTEGER_REF]*ATTRIBUTE_DEFINITION_INTEGER)
-			for attribute_definition_integer := range stage.ATTRIBUTE_DEFINITION_INTEGERs {
-				for _, a_datatype_definition_integer_ref_ := range attribute_definition_integer.TYPE {
-					res[a_datatype_definition_integer_ref_] = attribute_definition_integer
-				}
-			}
-			return any(res).(map[*End]*Start)
 		}
 	// reverse maps of direct associations of ATTRIBUTE_DEFINITION_REAL
 	case ATTRIBUTE_DEFINITION_REAL:
 		switch fieldname {
 		// insertion point for per direct association field
-		case "ALTERNATIVE_ID":
-			res := make(map[*A_ALTERNATIVE_ID]*ATTRIBUTE_DEFINITION_REAL)
-			for attribute_definition_real := range stage.ATTRIBUTE_DEFINITION_REALs {
-				for _, a_alternative_id_ := range attribute_definition_real.ALTERNATIVE_ID {
-					res[a_alternative_id_] = attribute_definition_real
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "DEFAULT_VALUE":
-			res := make(map[*A_ATTRIBUTE_VALUE_REAL]*ATTRIBUTE_DEFINITION_REAL)
-			for attribute_definition_real := range stage.ATTRIBUTE_DEFINITION_REALs {
-				for _, a_attribute_value_real_ := range attribute_definition_real.DEFAULT_VALUE {
-					res[a_attribute_value_real_] = attribute_definition_real
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "TYPE":
-			res := make(map[*A_DATATYPE_DEFINITION_REAL_REF]*ATTRIBUTE_DEFINITION_REAL)
-			for attribute_definition_real := range stage.ATTRIBUTE_DEFINITION_REALs {
-				for _, a_datatype_definition_real_ref_ := range attribute_definition_real.TYPE {
-					res[a_datatype_definition_real_ref_] = attribute_definition_real
-				}
-			}
-			return any(res).(map[*End]*Start)
 		}
 	// reverse maps of direct associations of ATTRIBUTE_DEFINITION_STRING
 	case ATTRIBUTE_DEFINITION_STRING:
 		switch fieldname {
 		// insertion point for per direct association field
-		case "ALTERNATIVE_ID":
-			res := make(map[*A_ALTERNATIVE_ID]*ATTRIBUTE_DEFINITION_STRING)
-			for attribute_definition_string := range stage.ATTRIBUTE_DEFINITION_STRINGs {
-				for _, a_alternative_id_ := range attribute_definition_string.ALTERNATIVE_ID {
-					res[a_alternative_id_] = attribute_definition_string
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "DEFAULT_VALUE":
-			res := make(map[*A_ATTRIBUTE_VALUE_STRING]*ATTRIBUTE_DEFINITION_STRING)
-			for attribute_definition_string := range stage.ATTRIBUTE_DEFINITION_STRINGs {
-				for _, a_attribute_value_string_ := range attribute_definition_string.DEFAULT_VALUE {
-					res[a_attribute_value_string_] = attribute_definition_string
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "TYPE":
-			res := make(map[*A_DATATYPE_DEFINITION_STRING_REF]*ATTRIBUTE_DEFINITION_STRING)
-			for attribute_definition_string := range stage.ATTRIBUTE_DEFINITION_STRINGs {
-				for _, a_datatype_definition_string_ref_ := range attribute_definition_string.TYPE {
-					res[a_datatype_definition_string_ref_] = attribute_definition_string
-				}
-			}
-			return any(res).(map[*End]*Start)
 		}
 	// reverse maps of direct associations of ATTRIBUTE_DEFINITION_XHTML
 	case ATTRIBUTE_DEFINITION_XHTML:
 		switch fieldname {
 		// insertion point for per direct association field
-		case "ALTERNATIVE_ID":
-			res := make(map[*A_ALTERNATIVE_ID]*ATTRIBUTE_DEFINITION_XHTML)
-			for attribute_definition_xhtml := range stage.ATTRIBUTE_DEFINITION_XHTMLs {
-				for _, a_alternative_id_ := range attribute_definition_xhtml.ALTERNATIVE_ID {
-					res[a_alternative_id_] = attribute_definition_xhtml
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "DEFAULT_VALUE":
-			res := make(map[*A_ATTRIBUTE_VALUE_XHTML]*ATTRIBUTE_DEFINITION_XHTML)
-			for attribute_definition_xhtml := range stage.ATTRIBUTE_DEFINITION_XHTMLs {
-				for _, a_attribute_value_xhtml_ := range attribute_definition_xhtml.DEFAULT_VALUE {
-					res[a_attribute_value_xhtml_] = attribute_definition_xhtml
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "TYPE":
-			res := make(map[*A_DATATYPE_DEFINITION_XHTML_REF]*ATTRIBUTE_DEFINITION_XHTML)
-			for attribute_definition_xhtml := range stage.ATTRIBUTE_DEFINITION_XHTMLs {
-				for _, a_datatype_definition_xhtml_ref_ := range attribute_definition_xhtml.TYPE {
-					res[a_datatype_definition_xhtml_ref_] = attribute_definition_xhtml
-				}
-			}
-			return any(res).(map[*End]*Start)
 		}
 	// reverse maps of direct associations of ATTRIBUTE_VALUE_BOOLEAN
 	case ATTRIBUTE_VALUE_BOOLEAN:
 		switch fieldname {
 		// insertion point for per direct association field
-		case "DEFINITION":
-			res := make(map[*A_ATTRIBUTE_DEFINITION_BOOLEAN_REF]*ATTRIBUTE_VALUE_BOOLEAN)
-			for attribute_value_boolean := range stage.ATTRIBUTE_VALUE_BOOLEANs {
-				for _, a_attribute_definition_boolean_ref_ := range attribute_value_boolean.DEFINITION {
-					res[a_attribute_definition_boolean_ref_] = attribute_value_boolean
-				}
-			}
-			return any(res).(map[*End]*Start)
 		}
 	// reverse maps of direct associations of ATTRIBUTE_VALUE_DATE
 	case ATTRIBUTE_VALUE_DATE:
 		switch fieldname {
 		// insertion point for per direct association field
-		case "DEFINITION":
-			res := make(map[*A_ATTRIBUTE_DEFINITION_DATE_REF]*ATTRIBUTE_VALUE_DATE)
-			for attribute_value_date := range stage.ATTRIBUTE_VALUE_DATEs {
-				for _, a_attribute_definition_date_ref_ := range attribute_value_date.DEFINITION {
-					res[a_attribute_definition_date_ref_] = attribute_value_date
-				}
-			}
-			return any(res).(map[*End]*Start)
 		}
 	// reverse maps of direct associations of ATTRIBUTE_VALUE_ENUMERATION
 	case ATTRIBUTE_VALUE_ENUMERATION:
 		switch fieldname {
 		// insertion point for per direct association field
-		case "DEFINITION":
-			res := make(map[*A_ATTRIBUTE_DEFINITION_ENUMERATION_REF]*ATTRIBUTE_VALUE_ENUMERATION)
-			for attribute_value_enumeration := range stage.ATTRIBUTE_VALUE_ENUMERATIONs {
-				for _, a_attribute_definition_enumeration_ref_ := range attribute_value_enumeration.DEFINITION {
-					res[a_attribute_definition_enumeration_ref_] = attribute_value_enumeration
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "VALUES":
-			res := make(map[*A_ENUM_VALUE_REF]*ATTRIBUTE_VALUE_ENUMERATION)
-			for attribute_value_enumeration := range stage.ATTRIBUTE_VALUE_ENUMERATIONs {
-				for _, a_enum_value_ref_ := range attribute_value_enumeration.VALUES {
-					res[a_enum_value_ref_] = attribute_value_enumeration
-				}
-			}
-			return any(res).(map[*End]*Start)
 		}
 	// reverse maps of direct associations of ATTRIBUTE_VALUE_INTEGER
 	case ATTRIBUTE_VALUE_INTEGER:
 		switch fieldname {
 		// insertion point for per direct association field
-		case "DEFINITION":
-			res := make(map[*A_ATTRIBUTE_DEFINITION_INTEGER_REF]*ATTRIBUTE_VALUE_INTEGER)
-			for attribute_value_integer := range stage.ATTRIBUTE_VALUE_INTEGERs {
-				for _, a_attribute_definition_integer_ref_ := range attribute_value_integer.DEFINITION {
-					res[a_attribute_definition_integer_ref_] = attribute_value_integer
-				}
-			}
-			return any(res).(map[*End]*Start)
 		}
 	// reverse maps of direct associations of ATTRIBUTE_VALUE_REAL
 	case ATTRIBUTE_VALUE_REAL:
 		switch fieldname {
 		// insertion point for per direct association field
-		case "DEFINITION":
-			res := make(map[*A_ATTRIBUTE_DEFINITION_REAL_REF]*ATTRIBUTE_VALUE_REAL)
-			for attribute_value_real := range stage.ATTRIBUTE_VALUE_REALs {
-				for _, a_attribute_definition_real_ref_ := range attribute_value_real.DEFINITION {
-					res[a_attribute_definition_real_ref_] = attribute_value_real
-				}
-			}
-			return any(res).(map[*End]*Start)
 		}
 	// reverse maps of direct associations of ATTRIBUTE_VALUE_STRING
 	case ATTRIBUTE_VALUE_STRING:
 		switch fieldname {
 		// insertion point for per direct association field
-		case "DEFINITION":
-			res := make(map[*A_ATTRIBUTE_DEFINITION_STRING_REF]*ATTRIBUTE_VALUE_STRING)
-			for attribute_value_string := range stage.ATTRIBUTE_VALUE_STRINGs {
-				for _, a_attribute_definition_string_ref_ := range attribute_value_string.DEFINITION {
-					res[a_attribute_definition_string_ref_] = attribute_value_string
-				}
-			}
-			return any(res).(map[*End]*Start)
 		}
 	// reverse maps of direct associations of ATTRIBUTE_VALUE_XHTML
 	case ATTRIBUTE_VALUE_XHTML:
 		switch fieldname {
 		// insertion point for per direct association field
-		case "THE_VALUE":
-			res := make(map[*XHTML_CONTENT]*ATTRIBUTE_VALUE_XHTML)
-			for attribute_value_xhtml := range stage.ATTRIBUTE_VALUE_XHTMLs {
-				for _, xhtml_content_ := range attribute_value_xhtml.THE_VALUE {
-					res[xhtml_content_] = attribute_value_xhtml
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "THE_ORIGINAL_VALUE":
-			res := make(map[*XHTML_CONTENT]*ATTRIBUTE_VALUE_XHTML)
-			for attribute_value_xhtml := range stage.ATTRIBUTE_VALUE_XHTMLs {
-				for _, xhtml_content_ := range attribute_value_xhtml.THE_ORIGINAL_VALUE {
-					res[xhtml_content_] = attribute_value_xhtml
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "DEFINITION":
-			res := make(map[*A_ATTRIBUTE_DEFINITION_XHTML_REF]*ATTRIBUTE_VALUE_XHTML)
-			for attribute_value_xhtml := range stage.ATTRIBUTE_VALUE_XHTMLs {
-				for _, a_attribute_definition_xhtml_ref_ := range attribute_value_xhtml.DEFINITION {
-					res[a_attribute_definition_xhtml_ref_] = attribute_value_xhtml
-				}
-			}
-			return any(res).(map[*End]*Start)
 		}
 	// reverse maps of direct associations of A_ALTERNATIVE_ID
 	case A_ALTERNATIVE_ID:
@@ -9683,6 +10620,11 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 		switch fieldname {
 		// insertion point for per direct association field
 		}
+	// reverse maps of direct associations of A_SOURCE_SPECIFICATION_1
+	case A_SOURCE_SPECIFICATION_1:
+		switch fieldname {
+		// insertion point for per direct association field
+		}
 	// reverse maps of direct associations of A_SPECIFICATIONS
 	case A_SPECIFICATIONS:
 		switch fieldname {
@@ -9871,11 +10813,6 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 		switch fieldname {
 		// insertion point for per direct association field
 		}
-	// reverse maps of direct associations of A_TARGET_SPECIFICATION_1
-	case A_TARGET_SPECIFICATION_1:
-		switch fieldname {
-		// insertion point for per direct association field
-		}
 	// reverse maps of direct associations of A_THE_HEADER
 	case A_THE_HEADER:
 		switch fieldname {
@@ -9906,100 +10843,36 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 	case DATATYPE_DEFINITION_BOOLEAN:
 		switch fieldname {
 		// insertion point for per direct association field
-		case "ALTERNATIVE_ID":
-			res := make(map[*A_ALTERNATIVE_ID]*DATATYPE_DEFINITION_BOOLEAN)
-			for datatype_definition_boolean := range stage.DATATYPE_DEFINITION_BOOLEANs {
-				for _, a_alternative_id_ := range datatype_definition_boolean.ALTERNATIVE_ID {
-					res[a_alternative_id_] = datatype_definition_boolean
-				}
-			}
-			return any(res).(map[*End]*Start)
 		}
 	// reverse maps of direct associations of DATATYPE_DEFINITION_DATE
 	case DATATYPE_DEFINITION_DATE:
 		switch fieldname {
 		// insertion point for per direct association field
-		case "ALTERNATIVE_ID":
-			res := make(map[*A_ALTERNATIVE_ID]*DATATYPE_DEFINITION_DATE)
-			for datatype_definition_date := range stage.DATATYPE_DEFINITION_DATEs {
-				for _, a_alternative_id_ := range datatype_definition_date.ALTERNATIVE_ID {
-					res[a_alternative_id_] = datatype_definition_date
-				}
-			}
-			return any(res).(map[*End]*Start)
 		}
 	// reverse maps of direct associations of DATATYPE_DEFINITION_ENUMERATION
 	case DATATYPE_DEFINITION_ENUMERATION:
 		switch fieldname {
 		// insertion point for per direct association field
-		case "ALTERNATIVE_ID":
-			res := make(map[*A_ALTERNATIVE_ID]*DATATYPE_DEFINITION_ENUMERATION)
-			for datatype_definition_enumeration := range stage.DATATYPE_DEFINITION_ENUMERATIONs {
-				for _, a_alternative_id_ := range datatype_definition_enumeration.ALTERNATIVE_ID {
-					res[a_alternative_id_] = datatype_definition_enumeration
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "SPECIFIED_VALUES":
-			res := make(map[*A_SPECIFIED_VALUES]*DATATYPE_DEFINITION_ENUMERATION)
-			for datatype_definition_enumeration := range stage.DATATYPE_DEFINITION_ENUMERATIONs {
-				for _, a_specified_values_ := range datatype_definition_enumeration.SPECIFIED_VALUES {
-					res[a_specified_values_] = datatype_definition_enumeration
-				}
-			}
-			return any(res).(map[*End]*Start)
 		}
 	// reverse maps of direct associations of DATATYPE_DEFINITION_INTEGER
 	case DATATYPE_DEFINITION_INTEGER:
 		switch fieldname {
 		// insertion point for per direct association field
-		case "ALTERNATIVE_ID":
-			res := make(map[*A_ALTERNATIVE_ID]*DATATYPE_DEFINITION_INTEGER)
-			for datatype_definition_integer := range stage.DATATYPE_DEFINITION_INTEGERs {
-				for _, a_alternative_id_ := range datatype_definition_integer.ALTERNATIVE_ID {
-					res[a_alternative_id_] = datatype_definition_integer
-				}
-			}
-			return any(res).(map[*End]*Start)
 		}
 	// reverse maps of direct associations of DATATYPE_DEFINITION_REAL
 	case DATATYPE_DEFINITION_REAL:
 		switch fieldname {
 		// insertion point for per direct association field
-		case "ALTERNATIVE_ID":
-			res := make(map[*A_ALTERNATIVE_ID]*DATATYPE_DEFINITION_REAL)
-			for datatype_definition_real := range stage.DATATYPE_DEFINITION_REALs {
-				for _, a_alternative_id_ := range datatype_definition_real.ALTERNATIVE_ID {
-					res[a_alternative_id_] = datatype_definition_real
-				}
-			}
-			return any(res).(map[*End]*Start)
 		}
 	// reverse maps of direct associations of DATATYPE_DEFINITION_STRING
 	case DATATYPE_DEFINITION_STRING:
 		switch fieldname {
 		// insertion point for per direct association field
-		case "ALTERNATIVE_ID":
-			res := make(map[*A_ALTERNATIVE_ID]*DATATYPE_DEFINITION_STRING)
-			for datatype_definition_string := range stage.DATATYPE_DEFINITION_STRINGs {
-				for _, a_alternative_id_ := range datatype_definition_string.ALTERNATIVE_ID {
-					res[a_alternative_id_] = datatype_definition_string
-				}
-			}
-			return any(res).(map[*End]*Start)
 		}
 	// reverse maps of direct associations of DATATYPE_DEFINITION_XHTML
 	case DATATYPE_DEFINITION_XHTML:
 		switch fieldname {
 		// insertion point for per direct association field
-		case "ALTERNATIVE_ID":
-			res := make(map[*A_ALTERNATIVE_ID]*DATATYPE_DEFINITION_XHTML)
-			for datatype_definition_xhtml := range stage.DATATYPE_DEFINITION_XHTMLs {
-				for _, a_alternative_id_ := range datatype_definition_xhtml.ALTERNATIVE_ID {
-					res[a_alternative_id_] = datatype_definition_xhtml
-				}
-			}
-			return any(res).(map[*End]*Start)
 		}
 	// reverse maps of direct associations of EMBEDDED_VALUE
 	case EMBEDDED_VALUE:
@@ -10010,170 +10883,26 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 	case ENUM_VALUE:
 		switch fieldname {
 		// insertion point for per direct association field
-		case "ALTERNATIVE_ID":
-			res := make(map[*A_ALTERNATIVE_ID]*ENUM_VALUE)
-			for enum_value := range stage.ENUM_VALUEs {
-				for _, a_alternative_id_ := range enum_value.ALTERNATIVE_ID {
-					res[a_alternative_id_] = enum_value
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "PROPERTIES":
-			res := make(map[*A_PROPERTIES]*ENUM_VALUE)
-			for enum_value := range stage.ENUM_VALUEs {
-				for _, a_properties_ := range enum_value.PROPERTIES {
-					res[a_properties_] = enum_value
-				}
-			}
-			return any(res).(map[*End]*Start)
 		}
 	// reverse maps of direct associations of RELATION_GROUP
 	case RELATION_GROUP:
 		switch fieldname {
 		// insertion point for per direct association field
-		case "ALTERNATIVE_ID":
-			res := make(map[*A_ALTERNATIVE_ID]*RELATION_GROUP)
-			for relation_group := range stage.RELATION_GROUPs {
-				for _, a_alternative_id_ := range relation_group.ALTERNATIVE_ID {
-					res[a_alternative_id_] = relation_group
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "SOURCE_SPECIFICATION":
-			res := make(map[*A_TARGET_SPECIFICATION_1]*RELATION_GROUP)
-			for relation_group := range stage.RELATION_GROUPs {
-				for _, a_target_specification_1_ := range relation_group.SOURCE_SPECIFICATION {
-					res[a_target_specification_1_] = relation_group
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "SPEC_RELATIONS":
-			res := make(map[*A_SPEC_RELATION_REF]*RELATION_GROUP)
-			for relation_group := range stage.RELATION_GROUPs {
-				for _, a_spec_relation_ref_ := range relation_group.SPEC_RELATIONS {
-					res[a_spec_relation_ref_] = relation_group
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "TARGET_SPECIFICATION":
-			res := make(map[*A_TARGET_SPECIFICATION_1]*RELATION_GROUP)
-			for relation_group := range stage.RELATION_GROUPs {
-				for _, a_target_specification_1_ := range relation_group.TARGET_SPECIFICATION {
-					res[a_target_specification_1_] = relation_group
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "TYPE":
-			res := make(map[*A_RELATION_GROUP_TYPE_REF]*RELATION_GROUP)
-			for relation_group := range stage.RELATION_GROUPs {
-				for _, a_relation_group_type_ref_ := range relation_group.TYPE {
-					res[a_relation_group_type_ref_] = relation_group
-				}
-			}
-			return any(res).(map[*End]*Start)
 		}
 	// reverse maps of direct associations of RELATION_GROUP_TYPE
 	case RELATION_GROUP_TYPE:
 		switch fieldname {
 		// insertion point for per direct association field
-		case "ALTERNATIVE_ID":
-			res := make(map[*A_ALTERNATIVE_ID]*RELATION_GROUP_TYPE)
-			for relation_group_type := range stage.RELATION_GROUP_TYPEs {
-				for _, a_alternative_id_ := range relation_group_type.ALTERNATIVE_ID {
-					res[a_alternative_id_] = relation_group_type
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "SPEC_ATTRIBUTES":
-			res := make(map[*A_SPEC_ATTRIBUTES]*RELATION_GROUP_TYPE)
-			for relation_group_type := range stage.RELATION_GROUP_TYPEs {
-				for _, a_spec_attributes_ := range relation_group_type.SPEC_ATTRIBUTES {
-					res[a_spec_attributes_] = relation_group_type
-				}
-			}
-			return any(res).(map[*End]*Start)
 		}
 	// reverse maps of direct associations of REQ_IF
 	case REQ_IF:
 		switch fieldname {
 		// insertion point for per direct association field
-		case "THE_HEADER":
-			res := make(map[*A_THE_HEADER]*REQ_IF)
-			for req_if := range stage.REQ_IFs {
-				for _, a_the_header_ := range req_if.THE_HEADER {
-					res[a_the_header_] = req_if
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "CORE_CONTENT":
-			res := make(map[*A_CORE_CONTENT]*REQ_IF)
-			for req_if := range stage.REQ_IFs {
-				for _, a_core_content_ := range req_if.CORE_CONTENT {
-					res[a_core_content_] = req_if
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "TOOL_EXTENSIONS":
-			res := make(map[*A_TOOL_EXTENSIONS]*REQ_IF)
-			for req_if := range stage.REQ_IFs {
-				for _, a_tool_extensions_ := range req_if.TOOL_EXTENSIONS {
-					res[a_tool_extensions_] = req_if
-				}
-			}
-			return any(res).(map[*End]*Start)
 		}
 	// reverse maps of direct associations of REQ_IF_CONTENT
 	case REQ_IF_CONTENT:
 		switch fieldname {
 		// insertion point for per direct association field
-		case "DATATYPES":
-			res := make(map[*A_DATATYPES]*REQ_IF_CONTENT)
-			for req_if_content := range stage.REQ_IF_CONTENTs {
-				for _, a_datatypes_ := range req_if_content.DATATYPES {
-					res[a_datatypes_] = req_if_content
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "SPEC_TYPES":
-			res := make(map[*A_SPEC_TYPES]*REQ_IF_CONTENT)
-			for req_if_content := range stage.REQ_IF_CONTENTs {
-				for _, a_spec_types_ := range req_if_content.SPEC_TYPES {
-					res[a_spec_types_] = req_if_content
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "SPEC_OBJECTS":
-			res := make(map[*A_SPEC_OBJECTS]*REQ_IF_CONTENT)
-			for req_if_content := range stage.REQ_IF_CONTENTs {
-				for _, a_spec_objects_ := range req_if_content.SPEC_OBJECTS {
-					res[a_spec_objects_] = req_if_content
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "SPEC_RELATIONS":
-			res := make(map[*A_SPEC_RELATIONS]*REQ_IF_CONTENT)
-			for req_if_content := range stage.REQ_IF_CONTENTs {
-				for _, a_spec_relations_ := range req_if_content.SPEC_RELATIONS {
-					res[a_spec_relations_] = req_if_content
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "SPECIFICATIONS":
-			res := make(map[*A_SPECIFICATIONS]*REQ_IF_CONTENT)
-			for req_if_content := range stage.REQ_IF_CONTENTs {
-				for _, a_specifications_ := range req_if_content.SPECIFICATIONS {
-					res[a_specifications_] = req_if_content
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "SPEC_RELATION_GROUPS":
-			res := make(map[*A_SPEC_RELATION_GROUPS]*REQ_IF_CONTENT)
-			for req_if_content := range stage.REQ_IF_CONTENTs {
-				for _, a_spec_relation_groups_ := range req_if_content.SPEC_RELATION_GROUPS {
-					res[a_spec_relation_groups_] = req_if_content
-				}
-			}
-			return any(res).(map[*End]*Start)
 		}
 	// reverse maps of direct associations of REQ_IF_HEADER
 	case REQ_IF_HEADER:
@@ -10189,212 +10918,36 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 	case SPECIFICATION:
 		switch fieldname {
 		// insertion point for per direct association field
-		case "ALTERNATIVE_ID":
-			res := make(map[*A_ALTERNATIVE_ID]*SPECIFICATION)
-			for specification := range stage.SPECIFICATIONs {
-				for _, a_alternative_id_ := range specification.ALTERNATIVE_ID {
-					res[a_alternative_id_] = specification
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "CHILDREN":
-			res := make(map[*A_CHILDREN]*SPECIFICATION)
-			for specification := range stage.SPECIFICATIONs {
-				for _, a_children_ := range specification.CHILDREN {
-					res[a_children_] = specification
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "VALUES":
-			res := make(map[*A_ATTRIBUTE_VALUE_XHTML_1]*SPECIFICATION)
-			for specification := range stage.SPECIFICATIONs {
-				for _, a_attribute_value_xhtml_1_ := range specification.VALUES {
-					res[a_attribute_value_xhtml_1_] = specification
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "TYPE":
-			res := make(map[*A_SPECIFICATION_TYPE_REF]*SPECIFICATION)
-			for specification := range stage.SPECIFICATIONs {
-				for _, a_specification_type_ref_ := range specification.TYPE {
-					res[a_specification_type_ref_] = specification
-				}
-			}
-			return any(res).(map[*End]*Start)
 		}
 	// reverse maps of direct associations of SPECIFICATION_TYPE
 	case SPECIFICATION_TYPE:
 		switch fieldname {
 		// insertion point for per direct association field
-		case "ALTERNATIVE_ID":
-			res := make(map[*A_ALTERNATIVE_ID]*SPECIFICATION_TYPE)
-			for specification_type := range stage.SPECIFICATION_TYPEs {
-				for _, a_alternative_id_ := range specification_type.ALTERNATIVE_ID {
-					res[a_alternative_id_] = specification_type
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "SPEC_ATTRIBUTES":
-			res := make(map[*A_SPEC_ATTRIBUTES]*SPECIFICATION_TYPE)
-			for specification_type := range stage.SPECIFICATION_TYPEs {
-				for _, a_spec_attributes_ := range specification_type.SPEC_ATTRIBUTES {
-					res[a_spec_attributes_] = specification_type
-				}
-			}
-			return any(res).(map[*End]*Start)
 		}
 	// reverse maps of direct associations of SPEC_HIERARCHY
 	case SPEC_HIERARCHY:
 		switch fieldname {
 		// insertion point for per direct association field
-		case "ALTERNATIVE_ID":
-			res := make(map[*A_ALTERNATIVE_ID]*SPEC_HIERARCHY)
-			for spec_hierarchy := range stage.SPEC_HIERARCHYs {
-				for _, a_alternative_id_ := range spec_hierarchy.ALTERNATIVE_ID {
-					res[a_alternative_id_] = spec_hierarchy
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "CHILDREN":
-			res := make(map[*A_CHILDREN]*SPEC_HIERARCHY)
-			for spec_hierarchy := range stage.SPEC_HIERARCHYs {
-				for _, a_children_ := range spec_hierarchy.CHILDREN {
-					res[a_children_] = spec_hierarchy
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "EDITABLE_ATTS":
-			res := make(map[*A_EDITABLE_ATTS]*SPEC_HIERARCHY)
-			for spec_hierarchy := range stage.SPEC_HIERARCHYs {
-				for _, a_editable_atts_ := range spec_hierarchy.EDITABLE_ATTS {
-					res[a_editable_atts_] = spec_hierarchy
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "OBJECT":
-			res := make(map[*A_OBJECT]*SPEC_HIERARCHY)
-			for spec_hierarchy := range stage.SPEC_HIERARCHYs {
-				for _, a_object_ := range spec_hierarchy.OBJECT {
-					res[a_object_] = spec_hierarchy
-				}
-			}
-			return any(res).(map[*End]*Start)
 		}
 	// reverse maps of direct associations of SPEC_OBJECT
 	case SPEC_OBJECT:
 		switch fieldname {
 		// insertion point for per direct association field
-		case "ALTERNATIVE_ID":
-			res := make(map[*A_ALTERNATIVE_ID]*SPEC_OBJECT)
-			for spec_object := range stage.SPEC_OBJECTs {
-				for _, a_alternative_id_ := range spec_object.ALTERNATIVE_ID {
-					res[a_alternative_id_] = spec_object
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "VALUES":
-			res := make(map[*A_ATTRIBUTE_VALUE_XHTML_1]*SPEC_OBJECT)
-			for spec_object := range stage.SPEC_OBJECTs {
-				for _, a_attribute_value_xhtml_1_ := range spec_object.VALUES {
-					res[a_attribute_value_xhtml_1_] = spec_object
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "TYPE":
-			res := make(map[*A_SPEC_OBJECT_TYPE_REF]*SPEC_OBJECT)
-			for spec_object := range stage.SPEC_OBJECTs {
-				for _, a_spec_object_type_ref_ := range spec_object.TYPE {
-					res[a_spec_object_type_ref_] = spec_object
-				}
-			}
-			return any(res).(map[*End]*Start)
 		}
 	// reverse maps of direct associations of SPEC_OBJECT_TYPE
 	case SPEC_OBJECT_TYPE:
 		switch fieldname {
 		// insertion point for per direct association field
-		case "ALTERNATIVE_ID":
-			res := make(map[*A_ALTERNATIVE_ID]*SPEC_OBJECT_TYPE)
-			for spec_object_type := range stage.SPEC_OBJECT_TYPEs {
-				for _, a_alternative_id_ := range spec_object_type.ALTERNATIVE_ID {
-					res[a_alternative_id_] = spec_object_type
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "SPEC_ATTRIBUTES":
-			res := make(map[*A_SPEC_ATTRIBUTES]*SPEC_OBJECT_TYPE)
-			for spec_object_type := range stage.SPEC_OBJECT_TYPEs {
-				for _, a_spec_attributes_ := range spec_object_type.SPEC_ATTRIBUTES {
-					res[a_spec_attributes_] = spec_object_type
-				}
-			}
-			return any(res).(map[*End]*Start)
 		}
 	// reverse maps of direct associations of SPEC_RELATION
 	case SPEC_RELATION:
 		switch fieldname {
 		// insertion point for per direct association field
-		case "ALTERNATIVE_ID":
-			res := make(map[*A_ALTERNATIVE_ID]*SPEC_RELATION)
-			for spec_relation := range stage.SPEC_RELATIONs {
-				for _, a_alternative_id_ := range spec_relation.ALTERNATIVE_ID {
-					res[a_alternative_id_] = spec_relation
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "VALUES":
-			res := make(map[*A_ATTRIBUTE_VALUE_XHTML_1]*SPEC_RELATION)
-			for spec_relation := range stage.SPEC_RELATIONs {
-				for _, a_attribute_value_xhtml_1_ := range spec_relation.VALUES {
-					res[a_attribute_value_xhtml_1_] = spec_relation
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "SOURCE":
-			res := make(map[*A_TARGET_1]*SPEC_RELATION)
-			for spec_relation := range stage.SPEC_RELATIONs {
-				for _, a_target_1_ := range spec_relation.SOURCE {
-					res[a_target_1_] = spec_relation
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "TARGET":
-			res := make(map[*A_TARGET_1]*SPEC_RELATION)
-			for spec_relation := range stage.SPEC_RELATIONs {
-				for _, a_target_1_ := range spec_relation.TARGET {
-					res[a_target_1_] = spec_relation
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "TYPE":
-			res := make(map[*A_SPEC_RELATION_TYPE_REF]*SPEC_RELATION)
-			for spec_relation := range stage.SPEC_RELATIONs {
-				for _, a_spec_relation_type_ref_ := range spec_relation.TYPE {
-					res[a_spec_relation_type_ref_] = spec_relation
-				}
-			}
-			return any(res).(map[*End]*Start)
 		}
 	// reverse maps of direct associations of SPEC_RELATION_TYPE
 	case SPEC_RELATION_TYPE:
 		switch fieldname {
 		// insertion point for per direct association field
-		case "ALTERNATIVE_ID":
-			res := make(map[*A_ALTERNATIVE_ID]*SPEC_RELATION_TYPE)
-			for spec_relation_type := range stage.SPEC_RELATION_TYPEs {
-				for _, a_alternative_id_ := range spec_relation_type.ALTERNATIVE_ID {
-					res[a_alternative_id_] = spec_relation_type
-				}
-			}
-			return any(res).(map[*End]*Start)
-		case "SPEC_ATTRIBUTES":
-			res := make(map[*A_SPEC_ATTRIBUTES]*SPEC_RELATION_TYPE)
-			for spec_relation_type := range stage.SPEC_RELATION_TYPEs {
-				for _, a_spec_attributes_ := range spec_relation_type.SPEC_ATTRIBUTES {
-					res[a_spec_attributes_] = spec_relation_type
-				}
-			}
-			return any(res).(map[*End]*Start)
 		}
 	// reverse maps of direct associations of XHTML_CONTENT
 	case XHTML_CONTENT:
@@ -10505,6 +11058,8 @@ func GetGongstructName[Type Gongstruct]() (res string) {
 		res = "A_PROPERTIES"
 	case A_RELATION_GROUP_TYPE_REF:
 		res = "A_RELATION_GROUP_TYPE_REF"
+	case A_SOURCE_SPECIFICATION_1:
+		res = "A_SOURCE_SPECIFICATION_1"
 	case A_SPECIFICATIONS:
 		res = "A_SPECIFICATIONS"
 	case A_SPECIFICATION_TYPE_REF:
@@ -10529,8 +11084,6 @@ func GetGongstructName[Type Gongstruct]() (res string) {
 		res = "A_SPEC_TYPES"
 	case A_TARGET_1:
 		res = "A_TARGET_1"
-	case A_TARGET_SPECIFICATION_1:
-		res = "A_TARGET_SPECIFICATION_1"
 	case A_THE_HEADER:
 		res = "A_THE_HEADER"
 	case A_TOOL_EXTENSIONS:
@@ -10685,6 +11238,8 @@ func GetPointerToGongstructName[Type PointerToGongstruct]() (res string) {
 		res = "A_PROPERTIES"
 	case *A_RELATION_GROUP_TYPE_REF:
 		res = "A_RELATION_GROUP_TYPE_REF"
+	case *A_SOURCE_SPECIFICATION_1:
+		res = "A_SOURCE_SPECIFICATION_1"
 	case *A_SPECIFICATIONS:
 		res = "A_SPECIFICATIONS"
 	case *A_SPECIFICATION_TYPE_REF:
@@ -10709,8 +11264,6 @@ func GetPointerToGongstructName[Type PointerToGongstruct]() (res string) {
 		res = "A_SPEC_TYPES"
 	case *A_TARGET_1:
 		res = "A_TARGET_1"
-	case *A_TARGET_SPECIFICATION_1:
-		res = "A_TARGET_SPECIFICATION_1"
 	case *A_THE_HEADER:
 		res = "A_THE_HEADER"
 	case *A_TOOL_EXTENSIONS:
@@ -10864,6 +11417,8 @@ func GetFields[Type Gongstruct]() (res []string) {
 		res = []string{"Name", "EMBEDDED_VALUE"}
 	case A_RELATION_GROUP_TYPE_REF:
 		res = []string{"Name", "RELATION_GROUP_TYPE_REF"}
+	case A_SOURCE_SPECIFICATION_1:
+		res = []string{"Name", "SPECIFICATION_REF"}
 	case A_SPECIFICATIONS:
 		res = []string{"Name", "SPECIFICATION"}
 	case A_SPECIFICATION_TYPE_REF:
@@ -10888,8 +11443,6 @@ func GetFields[Type Gongstruct]() (res []string) {
 		res = []string{"Name", "RELATION_GROUP_TYPE", "SPEC_OBJECT_TYPE", "SPEC_RELATION_TYPE", "SPECIFICATION_TYPE"}
 	case A_TARGET_1:
 		res = []string{"Name", "SPEC_OBJECT_REF"}
-	case A_TARGET_SPECIFICATION_1:
-		res = []string{"Name", "SPECIFICATION_REF"}
 	case A_THE_HEADER:
 		res = []string{"Name", "REQ_IF_HEADER"}
 	case A_TOOL_EXTENSIONS:
@@ -11072,372 +11625,141 @@ func GetReverseFields[Type Gongstruct]() (res []ReverseField) {
 	case A_ALTERNATIVE_ID:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "ATTRIBUTE_DEFINITION_BOOLEAN"
-		rf.Fieldname = "ALTERNATIVE_ID"
-		res = append(res, rf)
-		rf.GongstructName = "ATTRIBUTE_DEFINITION_DATE"
-		rf.Fieldname = "ALTERNATIVE_ID"
-		res = append(res, rf)
-		rf.GongstructName = "ATTRIBUTE_DEFINITION_ENUMERATION"
-		rf.Fieldname = "ALTERNATIVE_ID"
-		res = append(res, rf)
-		rf.GongstructName = "ATTRIBUTE_DEFINITION_INTEGER"
-		rf.Fieldname = "ALTERNATIVE_ID"
-		res = append(res, rf)
-		rf.GongstructName = "ATTRIBUTE_DEFINITION_REAL"
-		rf.Fieldname = "ALTERNATIVE_ID"
-		res = append(res, rf)
-		rf.GongstructName = "ATTRIBUTE_DEFINITION_STRING"
-		rf.Fieldname = "ALTERNATIVE_ID"
-		res = append(res, rf)
-		rf.GongstructName = "ATTRIBUTE_DEFINITION_XHTML"
-		rf.Fieldname = "ALTERNATIVE_ID"
-		res = append(res, rf)
-		rf.GongstructName = "DATATYPE_DEFINITION_BOOLEAN"
-		rf.Fieldname = "ALTERNATIVE_ID"
-		res = append(res, rf)
-		rf.GongstructName = "DATATYPE_DEFINITION_DATE"
-		rf.Fieldname = "ALTERNATIVE_ID"
-		res = append(res, rf)
-		rf.GongstructName = "DATATYPE_DEFINITION_ENUMERATION"
-		rf.Fieldname = "ALTERNATIVE_ID"
-		res = append(res, rf)
-		rf.GongstructName = "DATATYPE_DEFINITION_INTEGER"
-		rf.Fieldname = "ALTERNATIVE_ID"
-		res = append(res, rf)
-		rf.GongstructName = "DATATYPE_DEFINITION_REAL"
-		rf.Fieldname = "ALTERNATIVE_ID"
-		res = append(res, rf)
-		rf.GongstructName = "DATATYPE_DEFINITION_STRING"
-		rf.Fieldname = "ALTERNATIVE_ID"
-		res = append(res, rf)
-		rf.GongstructName = "DATATYPE_DEFINITION_XHTML"
-		rf.Fieldname = "ALTERNATIVE_ID"
-		res = append(res, rf)
-		rf.GongstructName = "ENUM_VALUE"
-		rf.Fieldname = "ALTERNATIVE_ID"
-		res = append(res, rf)
-		rf.GongstructName = "RELATION_GROUP"
-		rf.Fieldname = "ALTERNATIVE_ID"
-		res = append(res, rf)
-		rf.GongstructName = "RELATION_GROUP_TYPE"
-		rf.Fieldname = "ALTERNATIVE_ID"
-		res = append(res, rf)
-		rf.GongstructName = "SPECIFICATION"
-		rf.Fieldname = "ALTERNATIVE_ID"
-		res = append(res, rf)
-		rf.GongstructName = "SPECIFICATION_TYPE"
-		rf.Fieldname = "ALTERNATIVE_ID"
-		res = append(res, rf)
-		rf.GongstructName = "SPEC_HIERARCHY"
-		rf.Fieldname = "ALTERNATIVE_ID"
-		res = append(res, rf)
-		rf.GongstructName = "SPEC_OBJECT"
-		rf.Fieldname = "ALTERNATIVE_ID"
-		res = append(res, rf)
-		rf.GongstructName = "SPEC_OBJECT_TYPE"
-		rf.Fieldname = "ALTERNATIVE_ID"
-		res = append(res, rf)
-		rf.GongstructName = "SPEC_RELATION"
-		rf.Fieldname = "ALTERNATIVE_ID"
-		res = append(res, rf)
-		rf.GongstructName = "SPEC_RELATION_TYPE"
-		rf.Fieldname = "ALTERNATIVE_ID"
-		res = append(res, rf)
 	case A_ATTRIBUTE_DEFINITION_BOOLEAN_REF:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "ATTRIBUTE_VALUE_BOOLEAN"
-		rf.Fieldname = "DEFINITION"
-		res = append(res, rf)
 	case A_ATTRIBUTE_DEFINITION_DATE_REF:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "ATTRIBUTE_VALUE_DATE"
-		rf.Fieldname = "DEFINITION"
-		res = append(res, rf)
 	case A_ATTRIBUTE_DEFINITION_ENUMERATION_REF:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "ATTRIBUTE_VALUE_ENUMERATION"
-		rf.Fieldname = "DEFINITION"
-		res = append(res, rf)
 	case A_ATTRIBUTE_DEFINITION_INTEGER_REF:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "ATTRIBUTE_VALUE_INTEGER"
-		rf.Fieldname = "DEFINITION"
-		res = append(res, rf)
 	case A_ATTRIBUTE_DEFINITION_REAL_REF:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "ATTRIBUTE_VALUE_REAL"
-		rf.Fieldname = "DEFINITION"
-		res = append(res, rf)
 	case A_ATTRIBUTE_DEFINITION_STRING_REF:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "ATTRIBUTE_VALUE_STRING"
-		rf.Fieldname = "DEFINITION"
-		res = append(res, rf)
 	case A_ATTRIBUTE_DEFINITION_XHTML_REF:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "ATTRIBUTE_VALUE_XHTML"
-		rf.Fieldname = "DEFINITION"
-		res = append(res, rf)
 	case A_ATTRIBUTE_VALUE_BOOLEAN:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "ATTRIBUTE_DEFINITION_BOOLEAN"
-		rf.Fieldname = "DEFAULT_VALUE"
-		res = append(res, rf)
 	case A_ATTRIBUTE_VALUE_DATE:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "ATTRIBUTE_DEFINITION_DATE"
-		rf.Fieldname = "DEFAULT_VALUE"
-		res = append(res, rf)
 	case A_ATTRIBUTE_VALUE_ENUMERATION:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "ATTRIBUTE_DEFINITION_ENUMERATION"
-		rf.Fieldname = "DEFAULT_VALUE"
-		res = append(res, rf)
 	case A_ATTRIBUTE_VALUE_INTEGER:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "ATTRIBUTE_DEFINITION_INTEGER"
-		rf.Fieldname = "DEFAULT_VALUE"
-		res = append(res, rf)
 	case A_ATTRIBUTE_VALUE_REAL:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "ATTRIBUTE_DEFINITION_REAL"
-		rf.Fieldname = "DEFAULT_VALUE"
-		res = append(res, rf)
 	case A_ATTRIBUTE_VALUE_STRING:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "ATTRIBUTE_DEFINITION_STRING"
-		rf.Fieldname = "DEFAULT_VALUE"
-		res = append(res, rf)
 	case A_ATTRIBUTE_VALUE_XHTML:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "ATTRIBUTE_DEFINITION_XHTML"
-		rf.Fieldname = "DEFAULT_VALUE"
-		res = append(res, rf)
 	case A_ATTRIBUTE_VALUE_XHTML_1:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "SPECIFICATION"
-		rf.Fieldname = "VALUES"
-		res = append(res, rf)
-		rf.GongstructName = "SPEC_OBJECT"
-		rf.Fieldname = "VALUES"
-		res = append(res, rf)
-		rf.GongstructName = "SPEC_RELATION"
-		rf.Fieldname = "VALUES"
-		res = append(res, rf)
 	case A_CHILDREN:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "SPECIFICATION"
-		rf.Fieldname = "CHILDREN"
-		res = append(res, rf)
-		rf.GongstructName = "SPEC_HIERARCHY"
-		rf.Fieldname = "CHILDREN"
-		res = append(res, rf)
 	case A_CORE_CONTENT:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "REQ_IF"
-		rf.Fieldname = "CORE_CONTENT"
-		res = append(res, rf)
 	case A_DATATYPES:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "REQ_IF_CONTENT"
-		rf.Fieldname = "DATATYPES"
-		res = append(res, rf)
 	case A_DATATYPE_DEFINITION_BOOLEAN_REF:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "ATTRIBUTE_DEFINITION_BOOLEAN"
-		rf.Fieldname = "TYPE"
-		res = append(res, rf)
 	case A_DATATYPE_DEFINITION_DATE_REF:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "ATTRIBUTE_DEFINITION_DATE"
-		rf.Fieldname = "TYPE"
-		res = append(res, rf)
 	case A_DATATYPE_DEFINITION_ENUMERATION_REF:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "ATTRIBUTE_DEFINITION_ENUMERATION"
-		rf.Fieldname = "TYPE"
-		res = append(res, rf)
 	case A_DATATYPE_DEFINITION_INTEGER_REF:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "ATTRIBUTE_DEFINITION_INTEGER"
-		rf.Fieldname = "TYPE"
-		res = append(res, rf)
 	case A_DATATYPE_DEFINITION_REAL_REF:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "ATTRIBUTE_DEFINITION_REAL"
-		rf.Fieldname = "TYPE"
-		res = append(res, rf)
 	case A_DATATYPE_DEFINITION_STRING_REF:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "ATTRIBUTE_DEFINITION_STRING"
-		rf.Fieldname = "TYPE"
-		res = append(res, rf)
 	case A_DATATYPE_DEFINITION_XHTML_REF:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "ATTRIBUTE_DEFINITION_XHTML"
-		rf.Fieldname = "TYPE"
-		res = append(res, rf)
 	case A_EDITABLE_ATTS:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "SPEC_HIERARCHY"
-		rf.Fieldname = "EDITABLE_ATTS"
-		res = append(res, rf)
 	case A_ENUM_VALUE_REF:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "ATTRIBUTE_VALUE_ENUMERATION"
-		rf.Fieldname = "VALUES"
-		res = append(res, rf)
 	case A_OBJECT:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "SPEC_HIERARCHY"
-		rf.Fieldname = "OBJECT"
-		res = append(res, rf)
 	case A_PROPERTIES:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "ENUM_VALUE"
-		rf.Fieldname = "PROPERTIES"
-		res = append(res, rf)
 	case A_RELATION_GROUP_TYPE_REF:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "RELATION_GROUP"
-		rf.Fieldname = "TYPE"
-		res = append(res, rf)
+	case A_SOURCE_SPECIFICATION_1:
+		var rf ReverseField
+		_ = rf
 	case A_SPECIFICATIONS:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "REQ_IF_CONTENT"
-		rf.Fieldname = "SPECIFICATIONS"
-		res = append(res, rf)
 	case A_SPECIFICATION_TYPE_REF:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "SPECIFICATION"
-		rf.Fieldname = "TYPE"
-		res = append(res, rf)
 	case A_SPECIFIED_VALUES:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "DATATYPE_DEFINITION_ENUMERATION"
-		rf.Fieldname = "SPECIFIED_VALUES"
-		res = append(res, rf)
 	case A_SPEC_ATTRIBUTES:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "RELATION_GROUP_TYPE"
-		rf.Fieldname = "SPEC_ATTRIBUTES"
-		res = append(res, rf)
-		rf.GongstructName = "SPECIFICATION_TYPE"
-		rf.Fieldname = "SPEC_ATTRIBUTES"
-		res = append(res, rf)
-		rf.GongstructName = "SPEC_OBJECT_TYPE"
-		rf.Fieldname = "SPEC_ATTRIBUTES"
-		res = append(res, rf)
-		rf.GongstructName = "SPEC_RELATION_TYPE"
-		rf.Fieldname = "SPEC_ATTRIBUTES"
-		res = append(res, rf)
 	case A_SPEC_OBJECTS:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "REQ_IF_CONTENT"
-		rf.Fieldname = "SPEC_OBJECTS"
-		res = append(res, rf)
 	case A_SPEC_OBJECT_TYPE_REF:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "SPEC_OBJECT"
-		rf.Fieldname = "TYPE"
-		res = append(res, rf)
 	case A_SPEC_RELATIONS:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "REQ_IF_CONTENT"
-		rf.Fieldname = "SPEC_RELATIONS"
-		res = append(res, rf)
 	case A_SPEC_RELATION_GROUPS:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "REQ_IF_CONTENT"
-		rf.Fieldname = "SPEC_RELATION_GROUPS"
-		res = append(res, rf)
 	case A_SPEC_RELATION_REF:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "RELATION_GROUP"
-		rf.Fieldname = "SPEC_RELATIONS"
-		res = append(res, rf)
 	case A_SPEC_RELATION_TYPE_REF:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "SPEC_RELATION"
-		rf.Fieldname = "TYPE"
-		res = append(res, rf)
 	case A_SPEC_TYPES:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "REQ_IF_CONTENT"
-		rf.Fieldname = "SPEC_TYPES"
-		res = append(res, rf)
 	case A_TARGET_1:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "SPEC_RELATION"
-		rf.Fieldname = "SOURCE"
-		res = append(res, rf)
-		rf.GongstructName = "SPEC_RELATION"
-		rf.Fieldname = "TARGET"
-		res = append(res, rf)
-	case A_TARGET_SPECIFICATION_1:
-		var rf ReverseField
-		_ = rf
-		rf.GongstructName = "RELATION_GROUP"
-		rf.Fieldname = "SOURCE_SPECIFICATION"
-		res = append(res, rf)
-		rf.GongstructName = "RELATION_GROUP"
-		rf.Fieldname = "TARGET_SPECIFICATION"
-		res = append(res, rf)
 	case A_THE_HEADER:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "REQ_IF"
-		rf.Fieldname = "THE_HEADER"
-		res = append(res, rf)
 	case A_TOOL_EXTENSIONS:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "REQ_IF"
-		rf.Fieldname = "TOOL_EXTENSIONS"
-		res = append(res, rf)
 	case DATATYPE_DEFINITION_BOOLEAN:
 		var rf ReverseField
 		_ = rf
@@ -11570,12 +11892,6 @@ func GetReverseFields[Type Gongstruct]() (res []ReverseField) {
 	case XHTML_CONTENT:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "ATTRIBUTE_VALUE_XHTML"
-		rf.Fieldname = "THE_VALUE"
-		res = append(res, rf)
-		rf.GongstructName = "ATTRIBUTE_VALUE_XHTML"
-		rf.Fieldname = "THE_ORIGINAL_VALUE"
-		res = append(res, rf)
 	}
 	return
 }
@@ -11679,6 +11995,8 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 		res = []string{"Name", "EMBEDDED_VALUE"}
 	case *A_RELATION_GROUP_TYPE_REF:
 		res = []string{"Name", "RELATION_GROUP_TYPE_REF"}
+	case *A_SOURCE_SPECIFICATION_1:
+		res = []string{"Name", "SPECIFICATION_REF"}
 	case *A_SPECIFICATIONS:
 		res = []string{"Name", "SPECIFICATION"}
 	case *A_SPECIFICATION_TYPE_REF:
@@ -11703,8 +12021,6 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 		res = []string{"Name", "RELATION_GROUP_TYPE", "SPEC_OBJECT_TYPE", "SPEC_RELATION_TYPE", "SPECIFICATION_TYPE"}
 	case *A_TARGET_1:
 		res = []string{"Name", "SPEC_OBJECT_REF"}
-	case *A_TARGET_SPECIFICATION_1:
-		res = []string{"Name", "SPECIFICATION_REF"}
 	case *A_THE_HEADER:
 		res = []string{"Name", "REQ_IF_HEADER"}
 	case *A_TOOL_EXTENSIONS:
@@ -11787,25 +12103,16 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		case "LONG_NAME":
 			res = inferedInstance.LONG_NAME
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		case "DEFAULT_VALUE":
-			for idx, __instance__ := range inferedInstance.DEFAULT_VALUE {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.DEFAULT_VALUE != nil {
+				res = inferedInstance.DEFAULT_VALUE.Name
 			}
 		case "TYPE":
-			for idx, __instance__ := range inferedInstance.TYPE {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.TYPE != nil {
+				res = inferedInstance.TYPE.Name
 			}
 		}
 	case *ATTRIBUTE_DEFINITION_DATE:
@@ -11824,25 +12131,16 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		case "LONG_NAME":
 			res = inferedInstance.LONG_NAME
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		case "DEFAULT_VALUE":
-			for idx, __instance__ := range inferedInstance.DEFAULT_VALUE {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.DEFAULT_VALUE != nil {
+				res = inferedInstance.DEFAULT_VALUE.Name
 			}
 		case "TYPE":
-			for idx, __instance__ := range inferedInstance.TYPE {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.TYPE != nil {
+				res = inferedInstance.TYPE.Name
 			}
 		}
 	case *ATTRIBUTE_DEFINITION_ENUMERATION:
@@ -11863,25 +12161,16 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		case "MULTI_VALUED":
 			res = fmt.Sprintf("%t", inferedInstance.MULTI_VALUED)
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		case "DEFAULT_VALUE":
-			for idx, __instance__ := range inferedInstance.DEFAULT_VALUE {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.DEFAULT_VALUE != nil {
+				res = inferedInstance.DEFAULT_VALUE.Name
 			}
 		case "TYPE":
-			for idx, __instance__ := range inferedInstance.TYPE {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.TYPE != nil {
+				res = inferedInstance.TYPE.Name
 			}
 		}
 	case *ATTRIBUTE_DEFINITION_INTEGER:
@@ -11900,25 +12189,16 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		case "LONG_NAME":
 			res = inferedInstance.LONG_NAME
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		case "DEFAULT_VALUE":
-			for idx, __instance__ := range inferedInstance.DEFAULT_VALUE {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.DEFAULT_VALUE != nil {
+				res = inferedInstance.DEFAULT_VALUE.Name
 			}
 		case "TYPE":
-			for idx, __instance__ := range inferedInstance.TYPE {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.TYPE != nil {
+				res = inferedInstance.TYPE.Name
 			}
 		}
 	case *ATTRIBUTE_DEFINITION_REAL:
@@ -11937,25 +12217,16 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		case "LONG_NAME":
 			res = inferedInstance.LONG_NAME
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		case "DEFAULT_VALUE":
-			for idx, __instance__ := range inferedInstance.DEFAULT_VALUE {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.DEFAULT_VALUE != nil {
+				res = inferedInstance.DEFAULT_VALUE.Name
 			}
 		case "TYPE":
-			for idx, __instance__ := range inferedInstance.TYPE {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.TYPE != nil {
+				res = inferedInstance.TYPE.Name
 			}
 		}
 	case *ATTRIBUTE_DEFINITION_STRING:
@@ -11974,25 +12245,16 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		case "LONG_NAME":
 			res = inferedInstance.LONG_NAME
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		case "DEFAULT_VALUE":
-			for idx, __instance__ := range inferedInstance.DEFAULT_VALUE {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.DEFAULT_VALUE != nil {
+				res = inferedInstance.DEFAULT_VALUE.Name
 			}
 		case "TYPE":
-			for idx, __instance__ := range inferedInstance.TYPE {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.TYPE != nil {
+				res = inferedInstance.TYPE.Name
 			}
 		}
 	case *ATTRIBUTE_DEFINITION_XHTML:
@@ -12011,25 +12273,16 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		case "LONG_NAME":
 			res = inferedInstance.LONG_NAME
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		case "DEFAULT_VALUE":
-			for idx, __instance__ := range inferedInstance.DEFAULT_VALUE {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.DEFAULT_VALUE != nil {
+				res = inferedInstance.DEFAULT_VALUE.Name
 			}
 		case "TYPE":
-			for idx, __instance__ := range inferedInstance.TYPE {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.TYPE != nil {
+				res = inferedInstance.TYPE.Name
 			}
 		}
 	case *ATTRIBUTE_VALUE_BOOLEAN:
@@ -12040,11 +12293,8 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		case "THE_VALUE":
 			res = fmt.Sprintf("%t", inferedInstance.THE_VALUE)
 		case "DEFINITION":
-			for idx, __instance__ := range inferedInstance.DEFINITION {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.DEFINITION != nil {
+				res = inferedInstance.DEFINITION.Name
 			}
 		}
 	case *ATTRIBUTE_VALUE_DATE:
@@ -12055,11 +12305,8 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		case "THE_VALUE":
 			res = inferedInstance.THE_VALUE
 		case "DEFINITION":
-			for idx, __instance__ := range inferedInstance.DEFINITION {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.DEFINITION != nil {
+				res = inferedInstance.DEFINITION.Name
 			}
 		}
 	case *ATTRIBUTE_VALUE_ENUMERATION:
@@ -12068,18 +12315,12 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		case "Name":
 			res = inferedInstance.Name
 		case "DEFINITION":
-			for idx, __instance__ := range inferedInstance.DEFINITION {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.DEFINITION != nil {
+				res = inferedInstance.DEFINITION.Name
 			}
 		case "VALUES":
-			for idx, __instance__ := range inferedInstance.VALUES {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.VALUES != nil {
+				res = inferedInstance.VALUES.Name
 			}
 		}
 	case *ATTRIBUTE_VALUE_INTEGER:
@@ -12090,11 +12331,8 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		case "THE_VALUE":
 			res = fmt.Sprintf("%d", inferedInstance.THE_VALUE)
 		case "DEFINITION":
-			for idx, __instance__ := range inferedInstance.DEFINITION {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.DEFINITION != nil {
+				res = inferedInstance.DEFINITION.Name
 			}
 		}
 	case *ATTRIBUTE_VALUE_REAL:
@@ -12105,11 +12343,8 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		case "THE_VALUE":
 			res = fmt.Sprintf("%f", inferedInstance.THE_VALUE)
 		case "DEFINITION":
-			for idx, __instance__ := range inferedInstance.DEFINITION {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.DEFINITION != nil {
+				res = inferedInstance.DEFINITION.Name
 			}
 		}
 	case *ATTRIBUTE_VALUE_STRING:
@@ -12120,11 +12355,8 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		case "THE_VALUE":
 			res = inferedInstance.THE_VALUE
 		case "DEFINITION":
-			for idx, __instance__ := range inferedInstance.DEFINITION {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.DEFINITION != nil {
+				res = inferedInstance.DEFINITION.Name
 			}
 		}
 	case *ATTRIBUTE_VALUE_XHTML:
@@ -12135,25 +12367,16 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		case "IS_SIMPLIFIED":
 			res = fmt.Sprintf("%t", inferedInstance.IS_SIMPLIFIED)
 		case "THE_VALUE":
-			for idx, __instance__ := range inferedInstance.THE_VALUE {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.THE_VALUE != nil {
+				res = inferedInstance.THE_VALUE.Name
 			}
 		case "THE_ORIGINAL_VALUE":
-			for idx, __instance__ := range inferedInstance.THE_ORIGINAL_VALUE {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.THE_ORIGINAL_VALUE != nil {
+				res = inferedInstance.THE_ORIGINAL_VALUE.Name
 			}
 		case "DEFINITION":
-			for idx, __instance__ := range inferedInstance.DEFINITION {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.DEFINITION != nil {
+				res = inferedInstance.DEFINITION.Name
 			}
 		}
 	case *A_ALTERNATIVE_ID:
@@ -12565,6 +12788,14 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		case "RELATION_GROUP_TYPE_REF":
 			res = inferedInstance.RELATION_GROUP_TYPE_REF
 		}
+	case *A_SOURCE_SPECIFICATION_1:
+		switch fieldName {
+		// string value of fields
+		case "Name":
+			res = inferedInstance.Name
+		case "SPECIFICATION_REF":
+			res = inferedInstance.SPECIFICATION_REF
+		}
 	case *A_SPECIFICATIONS:
 		switch fieldName {
 		// string value of fields
@@ -12759,14 +12990,6 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		case "SPEC_OBJECT_REF":
 			res = inferedInstance.SPEC_OBJECT_REF
 		}
-	case *A_TARGET_SPECIFICATION_1:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res = inferedInstance.Name
-		case "SPECIFICATION_REF":
-			res = inferedInstance.SPECIFICATION_REF
-		}
 	case *A_THE_HEADER:
 		switch fieldName {
 		// string value of fields
@@ -12807,11 +13030,8 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		case "LONG_NAME":
 			res = inferedInstance.LONG_NAME
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		}
 	case *DATATYPE_DEFINITION_DATE:
@@ -12828,11 +13048,8 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		case "LONG_NAME":
 			res = inferedInstance.LONG_NAME
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		}
 	case *DATATYPE_DEFINITION_ENUMERATION:
@@ -12849,18 +13066,12 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		case "LONG_NAME":
 			res = inferedInstance.LONG_NAME
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		case "SPECIFIED_VALUES":
-			for idx, __instance__ := range inferedInstance.SPECIFIED_VALUES {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.SPECIFIED_VALUES != nil {
+				res = inferedInstance.SPECIFIED_VALUES.Name
 			}
 		}
 	case *DATATYPE_DEFINITION_INTEGER:
@@ -12881,11 +13092,8 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		case "MIN":
 			res = fmt.Sprintf("%d", inferedInstance.MIN)
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		}
 	case *DATATYPE_DEFINITION_REAL:
@@ -12908,11 +13116,8 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		case "MIN":
 			res = fmt.Sprintf("%f", inferedInstance.MIN)
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		}
 	case *DATATYPE_DEFINITION_STRING:
@@ -12931,11 +13136,8 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		case "MAX_LENGTH":
 			res = fmt.Sprintf("%d", inferedInstance.MAX_LENGTH)
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		}
 	case *DATATYPE_DEFINITION_XHTML:
@@ -12952,11 +13154,8 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		case "LONG_NAME":
 			res = inferedInstance.LONG_NAME
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		}
 	case *EMBEDDED_VALUE:
@@ -12983,18 +13182,12 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		case "LONG_NAME":
 			res = inferedInstance.LONG_NAME
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		case "PROPERTIES":
-			for idx, __instance__ := range inferedInstance.PROPERTIES {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.PROPERTIES != nil {
+				res = inferedInstance.PROPERTIES.Name
 			}
 		}
 	case *RELATION_GROUP:
@@ -13011,39 +13204,24 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		case "LONG_NAME":
 			res = inferedInstance.LONG_NAME
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		case "SOURCE_SPECIFICATION":
-			for idx, __instance__ := range inferedInstance.SOURCE_SPECIFICATION {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.SOURCE_SPECIFICATION != nil {
+				res = inferedInstance.SOURCE_SPECIFICATION.Name
 			}
 		case "SPEC_RELATIONS":
-			for idx, __instance__ := range inferedInstance.SPEC_RELATIONS {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.SPEC_RELATIONS != nil {
+				res = inferedInstance.SPEC_RELATIONS.Name
 			}
 		case "TARGET_SPECIFICATION":
-			for idx, __instance__ := range inferedInstance.TARGET_SPECIFICATION {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.TARGET_SPECIFICATION != nil {
+				res = inferedInstance.TARGET_SPECIFICATION.Name
 			}
 		case "TYPE":
-			for idx, __instance__ := range inferedInstance.TYPE {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.TYPE != nil {
+				res = inferedInstance.TYPE.Name
 			}
 		}
 	case *RELATION_GROUP_TYPE:
@@ -13060,18 +13238,12 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		case "LONG_NAME":
 			res = inferedInstance.LONG_NAME
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		case "SPEC_ATTRIBUTES":
-			for idx, __instance__ := range inferedInstance.SPEC_ATTRIBUTES {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.SPEC_ATTRIBUTES != nil {
+				res = inferedInstance.SPEC_ATTRIBUTES.Name
 			}
 		}
 	case *REQ_IF:
@@ -13082,25 +13254,16 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		case "Lang":
 			res = inferedInstance.Lang
 		case "THE_HEADER":
-			for idx, __instance__ := range inferedInstance.THE_HEADER {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.THE_HEADER != nil {
+				res = inferedInstance.THE_HEADER.Name
 			}
 		case "CORE_CONTENT":
-			for idx, __instance__ := range inferedInstance.CORE_CONTENT {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.CORE_CONTENT != nil {
+				res = inferedInstance.CORE_CONTENT.Name
 			}
 		case "TOOL_EXTENSIONS":
-			for idx, __instance__ := range inferedInstance.TOOL_EXTENSIONS {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.TOOL_EXTENSIONS != nil {
+				res = inferedInstance.TOOL_EXTENSIONS.Name
 			}
 		}
 	case *REQ_IF_CONTENT:
@@ -13109,46 +13272,28 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		case "Name":
 			res = inferedInstance.Name
 		case "DATATYPES":
-			for idx, __instance__ := range inferedInstance.DATATYPES {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.DATATYPES != nil {
+				res = inferedInstance.DATATYPES.Name
 			}
 		case "SPEC_TYPES":
-			for idx, __instance__ := range inferedInstance.SPEC_TYPES {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.SPEC_TYPES != nil {
+				res = inferedInstance.SPEC_TYPES.Name
 			}
 		case "SPEC_OBJECTS":
-			for idx, __instance__ := range inferedInstance.SPEC_OBJECTS {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.SPEC_OBJECTS != nil {
+				res = inferedInstance.SPEC_OBJECTS.Name
 			}
 		case "SPEC_RELATIONS":
-			for idx, __instance__ := range inferedInstance.SPEC_RELATIONS {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.SPEC_RELATIONS != nil {
+				res = inferedInstance.SPEC_RELATIONS.Name
 			}
 		case "SPECIFICATIONS":
-			for idx, __instance__ := range inferedInstance.SPECIFICATIONS {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.SPECIFICATIONS != nil {
+				res = inferedInstance.SPECIFICATIONS.Name
 			}
 		case "SPEC_RELATION_GROUPS":
-			for idx, __instance__ := range inferedInstance.SPEC_RELATION_GROUPS {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.SPEC_RELATION_GROUPS != nil {
+				res = inferedInstance.SPEC_RELATION_GROUPS.Name
 			}
 		}
 	case *REQ_IF_HEADER:
@@ -13193,32 +13338,20 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		case "LONG_NAME":
 			res = inferedInstance.LONG_NAME
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		case "CHILDREN":
-			for idx, __instance__ := range inferedInstance.CHILDREN {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.CHILDREN != nil {
+				res = inferedInstance.CHILDREN.Name
 			}
 		case "VALUES":
-			for idx, __instance__ := range inferedInstance.VALUES {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.VALUES != nil {
+				res = inferedInstance.VALUES.Name
 			}
 		case "TYPE":
-			for idx, __instance__ := range inferedInstance.TYPE {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.TYPE != nil {
+				res = inferedInstance.TYPE.Name
 			}
 		}
 	case *SPECIFICATION_TYPE:
@@ -13235,18 +13368,12 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		case "LONG_NAME":
 			res = inferedInstance.LONG_NAME
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		case "SPEC_ATTRIBUTES":
-			for idx, __instance__ := range inferedInstance.SPEC_ATTRIBUTES {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.SPEC_ATTRIBUTES != nil {
+				res = inferedInstance.SPEC_ATTRIBUTES.Name
 			}
 		}
 	case *SPEC_HIERARCHY:
@@ -13267,32 +13394,20 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		case "LONG_NAME":
 			res = inferedInstance.LONG_NAME
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		case "CHILDREN":
-			for idx, __instance__ := range inferedInstance.CHILDREN {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.CHILDREN != nil {
+				res = inferedInstance.CHILDREN.Name
 			}
 		case "EDITABLE_ATTS":
-			for idx, __instance__ := range inferedInstance.EDITABLE_ATTS {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.EDITABLE_ATTS != nil {
+				res = inferedInstance.EDITABLE_ATTS.Name
 			}
 		case "OBJECT":
-			for idx, __instance__ := range inferedInstance.OBJECT {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.OBJECT != nil {
+				res = inferedInstance.OBJECT.Name
 			}
 		}
 	case *SPEC_OBJECT:
@@ -13309,25 +13424,16 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		case "LONG_NAME":
 			res = inferedInstance.LONG_NAME
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		case "VALUES":
-			for idx, __instance__ := range inferedInstance.VALUES {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.VALUES != nil {
+				res = inferedInstance.VALUES.Name
 			}
 		case "TYPE":
-			for idx, __instance__ := range inferedInstance.TYPE {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.TYPE != nil {
+				res = inferedInstance.TYPE.Name
 			}
 		}
 	case *SPEC_OBJECT_TYPE:
@@ -13344,18 +13450,12 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		case "LONG_NAME":
 			res = inferedInstance.LONG_NAME
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		case "SPEC_ATTRIBUTES":
-			for idx, __instance__ := range inferedInstance.SPEC_ATTRIBUTES {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.SPEC_ATTRIBUTES != nil {
+				res = inferedInstance.SPEC_ATTRIBUTES.Name
 			}
 		}
 	case *SPEC_RELATION:
@@ -13372,39 +13472,24 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		case "LONG_NAME":
 			res = inferedInstance.LONG_NAME
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		case "VALUES":
-			for idx, __instance__ := range inferedInstance.VALUES {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.VALUES != nil {
+				res = inferedInstance.VALUES.Name
 			}
 		case "SOURCE":
-			for idx, __instance__ := range inferedInstance.SOURCE {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.SOURCE != nil {
+				res = inferedInstance.SOURCE.Name
 			}
 		case "TARGET":
-			for idx, __instance__ := range inferedInstance.TARGET {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.TARGET != nil {
+				res = inferedInstance.TARGET.Name
 			}
 		case "TYPE":
-			for idx, __instance__ := range inferedInstance.TYPE {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.TYPE != nil {
+				res = inferedInstance.TYPE.Name
 			}
 		}
 	case *SPEC_RELATION_TYPE:
@@ -13421,18 +13506,12 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		case "LONG_NAME":
 			res = inferedInstance.LONG_NAME
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		case "SPEC_ATTRIBUTES":
-			for idx, __instance__ := range inferedInstance.SPEC_ATTRIBUTES {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.SPEC_ATTRIBUTES != nil {
+				res = inferedInstance.SPEC_ATTRIBUTES.Name
 			}
 		}
 	case *XHTML_CONTENT:
@@ -13475,25 +13554,16 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		case "LONG_NAME":
 			res = inferedInstance.LONG_NAME
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		case "DEFAULT_VALUE":
-			for idx, __instance__ := range inferedInstance.DEFAULT_VALUE {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.DEFAULT_VALUE != nil {
+				res = inferedInstance.DEFAULT_VALUE.Name
 			}
 		case "TYPE":
-			for idx, __instance__ := range inferedInstance.TYPE {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.TYPE != nil {
+				res = inferedInstance.TYPE.Name
 			}
 		}
 	case ATTRIBUTE_DEFINITION_DATE:
@@ -13512,25 +13582,16 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		case "LONG_NAME":
 			res = inferedInstance.LONG_NAME
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		case "DEFAULT_VALUE":
-			for idx, __instance__ := range inferedInstance.DEFAULT_VALUE {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.DEFAULT_VALUE != nil {
+				res = inferedInstance.DEFAULT_VALUE.Name
 			}
 		case "TYPE":
-			for idx, __instance__ := range inferedInstance.TYPE {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.TYPE != nil {
+				res = inferedInstance.TYPE.Name
 			}
 		}
 	case ATTRIBUTE_DEFINITION_ENUMERATION:
@@ -13551,25 +13612,16 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		case "MULTI_VALUED":
 			res = fmt.Sprintf("%t", inferedInstance.MULTI_VALUED)
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		case "DEFAULT_VALUE":
-			for idx, __instance__ := range inferedInstance.DEFAULT_VALUE {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.DEFAULT_VALUE != nil {
+				res = inferedInstance.DEFAULT_VALUE.Name
 			}
 		case "TYPE":
-			for idx, __instance__ := range inferedInstance.TYPE {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.TYPE != nil {
+				res = inferedInstance.TYPE.Name
 			}
 		}
 	case ATTRIBUTE_DEFINITION_INTEGER:
@@ -13588,25 +13640,16 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		case "LONG_NAME":
 			res = inferedInstance.LONG_NAME
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		case "DEFAULT_VALUE":
-			for idx, __instance__ := range inferedInstance.DEFAULT_VALUE {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.DEFAULT_VALUE != nil {
+				res = inferedInstance.DEFAULT_VALUE.Name
 			}
 		case "TYPE":
-			for idx, __instance__ := range inferedInstance.TYPE {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.TYPE != nil {
+				res = inferedInstance.TYPE.Name
 			}
 		}
 	case ATTRIBUTE_DEFINITION_REAL:
@@ -13625,25 +13668,16 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		case "LONG_NAME":
 			res = inferedInstance.LONG_NAME
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		case "DEFAULT_VALUE":
-			for idx, __instance__ := range inferedInstance.DEFAULT_VALUE {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.DEFAULT_VALUE != nil {
+				res = inferedInstance.DEFAULT_VALUE.Name
 			}
 		case "TYPE":
-			for idx, __instance__ := range inferedInstance.TYPE {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.TYPE != nil {
+				res = inferedInstance.TYPE.Name
 			}
 		}
 	case ATTRIBUTE_DEFINITION_STRING:
@@ -13662,25 +13696,16 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		case "LONG_NAME":
 			res = inferedInstance.LONG_NAME
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		case "DEFAULT_VALUE":
-			for idx, __instance__ := range inferedInstance.DEFAULT_VALUE {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.DEFAULT_VALUE != nil {
+				res = inferedInstance.DEFAULT_VALUE.Name
 			}
 		case "TYPE":
-			for idx, __instance__ := range inferedInstance.TYPE {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.TYPE != nil {
+				res = inferedInstance.TYPE.Name
 			}
 		}
 	case ATTRIBUTE_DEFINITION_XHTML:
@@ -13699,25 +13724,16 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		case "LONG_NAME":
 			res = inferedInstance.LONG_NAME
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		case "DEFAULT_VALUE":
-			for idx, __instance__ := range inferedInstance.DEFAULT_VALUE {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.DEFAULT_VALUE != nil {
+				res = inferedInstance.DEFAULT_VALUE.Name
 			}
 		case "TYPE":
-			for idx, __instance__ := range inferedInstance.TYPE {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.TYPE != nil {
+				res = inferedInstance.TYPE.Name
 			}
 		}
 	case ATTRIBUTE_VALUE_BOOLEAN:
@@ -13728,11 +13744,8 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		case "THE_VALUE":
 			res = fmt.Sprintf("%t", inferedInstance.THE_VALUE)
 		case "DEFINITION":
-			for idx, __instance__ := range inferedInstance.DEFINITION {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.DEFINITION != nil {
+				res = inferedInstance.DEFINITION.Name
 			}
 		}
 	case ATTRIBUTE_VALUE_DATE:
@@ -13743,11 +13756,8 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		case "THE_VALUE":
 			res = inferedInstance.THE_VALUE
 		case "DEFINITION":
-			for idx, __instance__ := range inferedInstance.DEFINITION {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.DEFINITION != nil {
+				res = inferedInstance.DEFINITION.Name
 			}
 		}
 	case ATTRIBUTE_VALUE_ENUMERATION:
@@ -13756,18 +13766,12 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		case "Name":
 			res = inferedInstance.Name
 		case "DEFINITION":
-			for idx, __instance__ := range inferedInstance.DEFINITION {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.DEFINITION != nil {
+				res = inferedInstance.DEFINITION.Name
 			}
 		case "VALUES":
-			for idx, __instance__ := range inferedInstance.VALUES {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.VALUES != nil {
+				res = inferedInstance.VALUES.Name
 			}
 		}
 	case ATTRIBUTE_VALUE_INTEGER:
@@ -13778,11 +13782,8 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		case "THE_VALUE":
 			res = fmt.Sprintf("%d", inferedInstance.THE_VALUE)
 		case "DEFINITION":
-			for idx, __instance__ := range inferedInstance.DEFINITION {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.DEFINITION != nil {
+				res = inferedInstance.DEFINITION.Name
 			}
 		}
 	case ATTRIBUTE_VALUE_REAL:
@@ -13793,11 +13794,8 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		case "THE_VALUE":
 			res = fmt.Sprintf("%f", inferedInstance.THE_VALUE)
 		case "DEFINITION":
-			for idx, __instance__ := range inferedInstance.DEFINITION {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.DEFINITION != nil {
+				res = inferedInstance.DEFINITION.Name
 			}
 		}
 	case ATTRIBUTE_VALUE_STRING:
@@ -13808,11 +13806,8 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		case "THE_VALUE":
 			res = inferedInstance.THE_VALUE
 		case "DEFINITION":
-			for idx, __instance__ := range inferedInstance.DEFINITION {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.DEFINITION != nil {
+				res = inferedInstance.DEFINITION.Name
 			}
 		}
 	case ATTRIBUTE_VALUE_XHTML:
@@ -13823,25 +13818,16 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		case "IS_SIMPLIFIED":
 			res = fmt.Sprintf("%t", inferedInstance.IS_SIMPLIFIED)
 		case "THE_VALUE":
-			for idx, __instance__ := range inferedInstance.THE_VALUE {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.THE_VALUE != nil {
+				res = inferedInstance.THE_VALUE.Name
 			}
 		case "THE_ORIGINAL_VALUE":
-			for idx, __instance__ := range inferedInstance.THE_ORIGINAL_VALUE {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.THE_ORIGINAL_VALUE != nil {
+				res = inferedInstance.THE_ORIGINAL_VALUE.Name
 			}
 		case "DEFINITION":
-			for idx, __instance__ := range inferedInstance.DEFINITION {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.DEFINITION != nil {
+				res = inferedInstance.DEFINITION.Name
 			}
 		}
 	case A_ALTERNATIVE_ID:
@@ -14253,6 +14239,14 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		case "RELATION_GROUP_TYPE_REF":
 			res = inferedInstance.RELATION_GROUP_TYPE_REF
 		}
+	case A_SOURCE_SPECIFICATION_1:
+		switch fieldName {
+		// string value of fields
+		case "Name":
+			res = inferedInstance.Name
+		case "SPECIFICATION_REF":
+			res = inferedInstance.SPECIFICATION_REF
+		}
 	case A_SPECIFICATIONS:
 		switch fieldName {
 		// string value of fields
@@ -14447,14 +14441,6 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		case "SPEC_OBJECT_REF":
 			res = inferedInstance.SPEC_OBJECT_REF
 		}
-	case A_TARGET_SPECIFICATION_1:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res = inferedInstance.Name
-		case "SPECIFICATION_REF":
-			res = inferedInstance.SPECIFICATION_REF
-		}
 	case A_THE_HEADER:
 		switch fieldName {
 		// string value of fields
@@ -14495,11 +14481,8 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		case "LONG_NAME":
 			res = inferedInstance.LONG_NAME
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		}
 	case DATATYPE_DEFINITION_DATE:
@@ -14516,11 +14499,8 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		case "LONG_NAME":
 			res = inferedInstance.LONG_NAME
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		}
 	case DATATYPE_DEFINITION_ENUMERATION:
@@ -14537,18 +14517,12 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		case "LONG_NAME":
 			res = inferedInstance.LONG_NAME
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		case "SPECIFIED_VALUES":
-			for idx, __instance__ := range inferedInstance.SPECIFIED_VALUES {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.SPECIFIED_VALUES != nil {
+				res = inferedInstance.SPECIFIED_VALUES.Name
 			}
 		}
 	case DATATYPE_DEFINITION_INTEGER:
@@ -14569,11 +14543,8 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		case "MIN":
 			res = fmt.Sprintf("%d", inferedInstance.MIN)
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		}
 	case DATATYPE_DEFINITION_REAL:
@@ -14596,11 +14567,8 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		case "MIN":
 			res = fmt.Sprintf("%f", inferedInstance.MIN)
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		}
 	case DATATYPE_DEFINITION_STRING:
@@ -14619,11 +14587,8 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		case "MAX_LENGTH":
 			res = fmt.Sprintf("%d", inferedInstance.MAX_LENGTH)
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		}
 	case DATATYPE_DEFINITION_XHTML:
@@ -14640,11 +14605,8 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		case "LONG_NAME":
 			res = inferedInstance.LONG_NAME
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		}
 	case EMBEDDED_VALUE:
@@ -14671,18 +14633,12 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		case "LONG_NAME":
 			res = inferedInstance.LONG_NAME
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		case "PROPERTIES":
-			for idx, __instance__ := range inferedInstance.PROPERTIES {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.PROPERTIES != nil {
+				res = inferedInstance.PROPERTIES.Name
 			}
 		}
 	case RELATION_GROUP:
@@ -14699,39 +14655,24 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		case "LONG_NAME":
 			res = inferedInstance.LONG_NAME
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		case "SOURCE_SPECIFICATION":
-			for idx, __instance__ := range inferedInstance.SOURCE_SPECIFICATION {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.SOURCE_SPECIFICATION != nil {
+				res = inferedInstance.SOURCE_SPECIFICATION.Name
 			}
 		case "SPEC_RELATIONS":
-			for idx, __instance__ := range inferedInstance.SPEC_RELATIONS {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.SPEC_RELATIONS != nil {
+				res = inferedInstance.SPEC_RELATIONS.Name
 			}
 		case "TARGET_SPECIFICATION":
-			for idx, __instance__ := range inferedInstance.TARGET_SPECIFICATION {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.TARGET_SPECIFICATION != nil {
+				res = inferedInstance.TARGET_SPECIFICATION.Name
 			}
 		case "TYPE":
-			for idx, __instance__ := range inferedInstance.TYPE {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.TYPE != nil {
+				res = inferedInstance.TYPE.Name
 			}
 		}
 	case RELATION_GROUP_TYPE:
@@ -14748,18 +14689,12 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		case "LONG_NAME":
 			res = inferedInstance.LONG_NAME
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		case "SPEC_ATTRIBUTES":
-			for idx, __instance__ := range inferedInstance.SPEC_ATTRIBUTES {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.SPEC_ATTRIBUTES != nil {
+				res = inferedInstance.SPEC_ATTRIBUTES.Name
 			}
 		}
 	case REQ_IF:
@@ -14770,25 +14705,16 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		case "Lang":
 			res = inferedInstance.Lang
 		case "THE_HEADER":
-			for idx, __instance__ := range inferedInstance.THE_HEADER {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.THE_HEADER != nil {
+				res = inferedInstance.THE_HEADER.Name
 			}
 		case "CORE_CONTENT":
-			for idx, __instance__ := range inferedInstance.CORE_CONTENT {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.CORE_CONTENT != nil {
+				res = inferedInstance.CORE_CONTENT.Name
 			}
 		case "TOOL_EXTENSIONS":
-			for idx, __instance__ := range inferedInstance.TOOL_EXTENSIONS {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.TOOL_EXTENSIONS != nil {
+				res = inferedInstance.TOOL_EXTENSIONS.Name
 			}
 		}
 	case REQ_IF_CONTENT:
@@ -14797,46 +14723,28 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		case "Name":
 			res = inferedInstance.Name
 		case "DATATYPES":
-			for idx, __instance__ := range inferedInstance.DATATYPES {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.DATATYPES != nil {
+				res = inferedInstance.DATATYPES.Name
 			}
 		case "SPEC_TYPES":
-			for idx, __instance__ := range inferedInstance.SPEC_TYPES {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.SPEC_TYPES != nil {
+				res = inferedInstance.SPEC_TYPES.Name
 			}
 		case "SPEC_OBJECTS":
-			for idx, __instance__ := range inferedInstance.SPEC_OBJECTS {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.SPEC_OBJECTS != nil {
+				res = inferedInstance.SPEC_OBJECTS.Name
 			}
 		case "SPEC_RELATIONS":
-			for idx, __instance__ := range inferedInstance.SPEC_RELATIONS {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.SPEC_RELATIONS != nil {
+				res = inferedInstance.SPEC_RELATIONS.Name
 			}
 		case "SPECIFICATIONS":
-			for idx, __instance__ := range inferedInstance.SPECIFICATIONS {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.SPECIFICATIONS != nil {
+				res = inferedInstance.SPECIFICATIONS.Name
 			}
 		case "SPEC_RELATION_GROUPS":
-			for idx, __instance__ := range inferedInstance.SPEC_RELATION_GROUPS {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.SPEC_RELATION_GROUPS != nil {
+				res = inferedInstance.SPEC_RELATION_GROUPS.Name
 			}
 		}
 	case REQ_IF_HEADER:
@@ -14881,32 +14789,20 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		case "LONG_NAME":
 			res = inferedInstance.LONG_NAME
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		case "CHILDREN":
-			for idx, __instance__ := range inferedInstance.CHILDREN {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.CHILDREN != nil {
+				res = inferedInstance.CHILDREN.Name
 			}
 		case "VALUES":
-			for idx, __instance__ := range inferedInstance.VALUES {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.VALUES != nil {
+				res = inferedInstance.VALUES.Name
 			}
 		case "TYPE":
-			for idx, __instance__ := range inferedInstance.TYPE {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.TYPE != nil {
+				res = inferedInstance.TYPE.Name
 			}
 		}
 	case SPECIFICATION_TYPE:
@@ -14923,18 +14819,12 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		case "LONG_NAME":
 			res = inferedInstance.LONG_NAME
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		case "SPEC_ATTRIBUTES":
-			for idx, __instance__ := range inferedInstance.SPEC_ATTRIBUTES {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.SPEC_ATTRIBUTES != nil {
+				res = inferedInstance.SPEC_ATTRIBUTES.Name
 			}
 		}
 	case SPEC_HIERARCHY:
@@ -14955,32 +14845,20 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		case "LONG_NAME":
 			res = inferedInstance.LONG_NAME
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		case "CHILDREN":
-			for idx, __instance__ := range inferedInstance.CHILDREN {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.CHILDREN != nil {
+				res = inferedInstance.CHILDREN.Name
 			}
 		case "EDITABLE_ATTS":
-			for idx, __instance__ := range inferedInstance.EDITABLE_ATTS {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.EDITABLE_ATTS != nil {
+				res = inferedInstance.EDITABLE_ATTS.Name
 			}
 		case "OBJECT":
-			for idx, __instance__ := range inferedInstance.OBJECT {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.OBJECT != nil {
+				res = inferedInstance.OBJECT.Name
 			}
 		}
 	case SPEC_OBJECT:
@@ -14997,25 +14875,16 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		case "LONG_NAME":
 			res = inferedInstance.LONG_NAME
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		case "VALUES":
-			for idx, __instance__ := range inferedInstance.VALUES {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.VALUES != nil {
+				res = inferedInstance.VALUES.Name
 			}
 		case "TYPE":
-			for idx, __instance__ := range inferedInstance.TYPE {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.TYPE != nil {
+				res = inferedInstance.TYPE.Name
 			}
 		}
 	case SPEC_OBJECT_TYPE:
@@ -15032,18 +14901,12 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		case "LONG_NAME":
 			res = inferedInstance.LONG_NAME
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		case "SPEC_ATTRIBUTES":
-			for idx, __instance__ := range inferedInstance.SPEC_ATTRIBUTES {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.SPEC_ATTRIBUTES != nil {
+				res = inferedInstance.SPEC_ATTRIBUTES.Name
 			}
 		}
 	case SPEC_RELATION:
@@ -15060,39 +14923,24 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		case "LONG_NAME":
 			res = inferedInstance.LONG_NAME
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		case "VALUES":
-			for idx, __instance__ := range inferedInstance.VALUES {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.VALUES != nil {
+				res = inferedInstance.VALUES.Name
 			}
 		case "SOURCE":
-			for idx, __instance__ := range inferedInstance.SOURCE {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.SOURCE != nil {
+				res = inferedInstance.SOURCE.Name
 			}
 		case "TARGET":
-			for idx, __instance__ := range inferedInstance.TARGET {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.TARGET != nil {
+				res = inferedInstance.TARGET.Name
 			}
 		case "TYPE":
-			for idx, __instance__ := range inferedInstance.TYPE {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.TYPE != nil {
+				res = inferedInstance.TYPE.Name
 			}
 		}
 	case SPEC_RELATION_TYPE:
@@ -15109,18 +14957,12 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		case "LONG_NAME":
 			res = inferedInstance.LONG_NAME
 		case "ALTERNATIVE_ID":
-			for idx, __instance__ := range inferedInstance.ALTERNATIVE_ID {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.ALTERNATIVE_ID != nil {
+				res = inferedInstance.ALTERNATIVE_ID.Name
 			}
 		case "SPEC_ATTRIBUTES":
-			for idx, __instance__ := range inferedInstance.SPEC_ATTRIBUTES {
-				if idx > 0 {
-					res += "\n"
-				}
-				res += __instance__.Name
+			if inferedInstance.SPEC_ATTRIBUTES != nil {
+				res = inferedInstance.SPEC_ATTRIBUTES.Name
 			}
 		}
 	case XHTML_CONTENT:

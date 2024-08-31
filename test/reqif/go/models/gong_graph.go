@@ -143,6 +143,9 @@ func IsStaged[Type Gongstruct](stage *StageStruct, instance *Type) (ok bool) {
 	case *A_RELATION_GROUP_TYPE_REF:
 		ok = stage.IsStagedA_RELATION_GROUP_TYPE_REF(target)
 
+	case *A_SOURCE_SPECIFICATION_1:
+		ok = stage.IsStagedA_SOURCE_SPECIFICATION_1(target)
+
 	case *A_SPECIFICATIONS:
 		ok = stage.IsStagedA_SPECIFICATIONS(target)
 
@@ -178,9 +181,6 @@ func IsStaged[Type Gongstruct](stage *StageStruct, instance *Type) (ok bool) {
 
 	case *A_TARGET_1:
 		ok = stage.IsStagedA_TARGET_1(target)
-
-	case *A_TARGET_SPECIFICATION_1:
-		ok = stage.IsStagedA_TARGET_SPECIFICATION_1(target)
 
 	case *A_THE_HEADER:
 		ok = stage.IsStagedA_THE_HEADER(target)
@@ -586,6 +586,13 @@ func (stage *StageStruct) IsStagedA_RELATION_GROUP_TYPE_REF(a_relation_group_typ
 	return
 }
 
+func (stage *StageStruct) IsStagedA_SOURCE_SPECIFICATION_1(a_source_specification_1 *A_SOURCE_SPECIFICATION_1) (ok bool) {
+
+	_, ok = stage.A_SOURCE_SPECIFICATION_1s[a_source_specification_1]
+
+	return
+}
+
 func (stage *StageStruct) IsStagedA_SPECIFICATIONS(a_specifications *A_SPECIFICATIONS) (ok bool) {
 
 	_, ok = stage.A_SPECIFICATIONSs[a_specifications]
@@ -666,13 +673,6 @@ func (stage *StageStruct) IsStagedA_SPEC_TYPES(a_spec_types *A_SPEC_TYPES) (ok b
 func (stage *StageStruct) IsStagedA_TARGET_1(a_target_1 *A_TARGET_1) (ok bool) {
 
 	_, ok = stage.A_TARGET_1s[a_target_1]
-
-	return
-}
-
-func (stage *StageStruct) IsStagedA_TARGET_SPECIFICATION_1(a_target_specification_1 *A_TARGET_SPECIFICATION_1) (ok bool) {
-
-	_, ok = stage.A_TARGET_SPECIFICATION_1s[a_target_specification_1]
 
 	return
 }
@@ -998,6 +998,9 @@ func StageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 	case *A_RELATION_GROUP_TYPE_REF:
 		stage.StageBranchA_RELATION_GROUP_TYPE_REF(target)
 
+	case *A_SOURCE_SPECIFICATION_1:
+		stage.StageBranchA_SOURCE_SPECIFICATION_1(target)
+
 	case *A_SPECIFICATIONS:
 		stage.StageBranchA_SPECIFICATIONS(target)
 
@@ -1033,9 +1036,6 @@ func StageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 
 	case *A_TARGET_1:
 		stage.StageBranchA_TARGET_1(target)
-
-	case *A_TARGET_SPECIFICATION_1:
-		stage.StageBranchA_TARGET_SPECIFICATION_1(target)
 
 	case *A_THE_HEADER:
 		stage.StageBranchA_THE_HEADER(target)
@@ -1143,17 +1143,17 @@ func (stage *StageStruct) StageBranchATTRIBUTE_DEFINITION_BOOLEAN(attribute_defi
 	attribute_definition_boolean.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if attribute_definition_boolean.ALTERNATIVE_ID != nil {
+		StageBranch(stage, attribute_definition_boolean.ALTERNATIVE_ID)
+	}
+	if attribute_definition_boolean.DEFAULT_VALUE != nil {
+		StageBranch(stage, attribute_definition_boolean.DEFAULT_VALUE)
+	}
+	if attribute_definition_boolean.TYPE != nil {
+		StageBranch(stage, attribute_definition_boolean.TYPE)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range attribute_definition_boolean.ALTERNATIVE_ID {
-		StageBranch(stage, _a_alternative_id)
-	}
-	for _, _a_attribute_value_boolean := range attribute_definition_boolean.DEFAULT_VALUE {
-		StageBranch(stage, _a_attribute_value_boolean)
-	}
-	for _, _a_datatype_definition_boolean_ref := range attribute_definition_boolean.TYPE {
-		StageBranch(stage, _a_datatype_definition_boolean_ref)
-	}
 
 }
 
@@ -1167,17 +1167,17 @@ func (stage *StageStruct) StageBranchATTRIBUTE_DEFINITION_DATE(attribute_definit
 	attribute_definition_date.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if attribute_definition_date.ALTERNATIVE_ID != nil {
+		StageBranch(stage, attribute_definition_date.ALTERNATIVE_ID)
+	}
+	if attribute_definition_date.DEFAULT_VALUE != nil {
+		StageBranch(stage, attribute_definition_date.DEFAULT_VALUE)
+	}
+	if attribute_definition_date.TYPE != nil {
+		StageBranch(stage, attribute_definition_date.TYPE)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range attribute_definition_date.ALTERNATIVE_ID {
-		StageBranch(stage, _a_alternative_id)
-	}
-	for _, _a_attribute_value_date := range attribute_definition_date.DEFAULT_VALUE {
-		StageBranch(stage, _a_attribute_value_date)
-	}
-	for _, _a_datatype_definition_date_ref := range attribute_definition_date.TYPE {
-		StageBranch(stage, _a_datatype_definition_date_ref)
-	}
 
 }
 
@@ -1191,17 +1191,17 @@ func (stage *StageStruct) StageBranchATTRIBUTE_DEFINITION_ENUMERATION(attribute_
 	attribute_definition_enumeration.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if attribute_definition_enumeration.ALTERNATIVE_ID != nil {
+		StageBranch(stage, attribute_definition_enumeration.ALTERNATIVE_ID)
+	}
+	if attribute_definition_enumeration.DEFAULT_VALUE != nil {
+		StageBranch(stage, attribute_definition_enumeration.DEFAULT_VALUE)
+	}
+	if attribute_definition_enumeration.TYPE != nil {
+		StageBranch(stage, attribute_definition_enumeration.TYPE)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range attribute_definition_enumeration.ALTERNATIVE_ID {
-		StageBranch(stage, _a_alternative_id)
-	}
-	for _, _a_attribute_value_enumeration := range attribute_definition_enumeration.DEFAULT_VALUE {
-		StageBranch(stage, _a_attribute_value_enumeration)
-	}
-	for _, _a_datatype_definition_enumeration_ref := range attribute_definition_enumeration.TYPE {
-		StageBranch(stage, _a_datatype_definition_enumeration_ref)
-	}
 
 }
 
@@ -1215,17 +1215,17 @@ func (stage *StageStruct) StageBranchATTRIBUTE_DEFINITION_INTEGER(attribute_defi
 	attribute_definition_integer.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if attribute_definition_integer.ALTERNATIVE_ID != nil {
+		StageBranch(stage, attribute_definition_integer.ALTERNATIVE_ID)
+	}
+	if attribute_definition_integer.DEFAULT_VALUE != nil {
+		StageBranch(stage, attribute_definition_integer.DEFAULT_VALUE)
+	}
+	if attribute_definition_integer.TYPE != nil {
+		StageBranch(stage, attribute_definition_integer.TYPE)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range attribute_definition_integer.ALTERNATIVE_ID {
-		StageBranch(stage, _a_alternative_id)
-	}
-	for _, _a_attribute_value_integer := range attribute_definition_integer.DEFAULT_VALUE {
-		StageBranch(stage, _a_attribute_value_integer)
-	}
-	for _, _a_datatype_definition_integer_ref := range attribute_definition_integer.TYPE {
-		StageBranch(stage, _a_datatype_definition_integer_ref)
-	}
 
 }
 
@@ -1239,17 +1239,17 @@ func (stage *StageStruct) StageBranchATTRIBUTE_DEFINITION_REAL(attribute_definit
 	attribute_definition_real.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if attribute_definition_real.ALTERNATIVE_ID != nil {
+		StageBranch(stage, attribute_definition_real.ALTERNATIVE_ID)
+	}
+	if attribute_definition_real.DEFAULT_VALUE != nil {
+		StageBranch(stage, attribute_definition_real.DEFAULT_VALUE)
+	}
+	if attribute_definition_real.TYPE != nil {
+		StageBranch(stage, attribute_definition_real.TYPE)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range attribute_definition_real.ALTERNATIVE_ID {
-		StageBranch(stage, _a_alternative_id)
-	}
-	for _, _a_attribute_value_real := range attribute_definition_real.DEFAULT_VALUE {
-		StageBranch(stage, _a_attribute_value_real)
-	}
-	for _, _a_datatype_definition_real_ref := range attribute_definition_real.TYPE {
-		StageBranch(stage, _a_datatype_definition_real_ref)
-	}
 
 }
 
@@ -1263,17 +1263,17 @@ func (stage *StageStruct) StageBranchATTRIBUTE_DEFINITION_STRING(attribute_defin
 	attribute_definition_string.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if attribute_definition_string.ALTERNATIVE_ID != nil {
+		StageBranch(stage, attribute_definition_string.ALTERNATIVE_ID)
+	}
+	if attribute_definition_string.DEFAULT_VALUE != nil {
+		StageBranch(stage, attribute_definition_string.DEFAULT_VALUE)
+	}
+	if attribute_definition_string.TYPE != nil {
+		StageBranch(stage, attribute_definition_string.TYPE)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range attribute_definition_string.ALTERNATIVE_ID {
-		StageBranch(stage, _a_alternative_id)
-	}
-	for _, _a_attribute_value_string := range attribute_definition_string.DEFAULT_VALUE {
-		StageBranch(stage, _a_attribute_value_string)
-	}
-	for _, _a_datatype_definition_string_ref := range attribute_definition_string.TYPE {
-		StageBranch(stage, _a_datatype_definition_string_ref)
-	}
 
 }
 
@@ -1287,17 +1287,17 @@ func (stage *StageStruct) StageBranchATTRIBUTE_DEFINITION_XHTML(attribute_defini
 	attribute_definition_xhtml.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if attribute_definition_xhtml.ALTERNATIVE_ID != nil {
+		StageBranch(stage, attribute_definition_xhtml.ALTERNATIVE_ID)
+	}
+	if attribute_definition_xhtml.DEFAULT_VALUE != nil {
+		StageBranch(stage, attribute_definition_xhtml.DEFAULT_VALUE)
+	}
+	if attribute_definition_xhtml.TYPE != nil {
+		StageBranch(stage, attribute_definition_xhtml.TYPE)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range attribute_definition_xhtml.ALTERNATIVE_ID {
-		StageBranch(stage, _a_alternative_id)
-	}
-	for _, _a_attribute_value_xhtml := range attribute_definition_xhtml.DEFAULT_VALUE {
-		StageBranch(stage, _a_attribute_value_xhtml)
-	}
-	for _, _a_datatype_definition_xhtml_ref := range attribute_definition_xhtml.TYPE {
-		StageBranch(stage, _a_datatype_definition_xhtml_ref)
-	}
 
 }
 
@@ -1311,11 +1311,11 @@ func (stage *StageStruct) StageBranchATTRIBUTE_VALUE_BOOLEAN(attribute_value_boo
 	attribute_value_boolean.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if attribute_value_boolean.DEFINITION != nil {
+		StageBranch(stage, attribute_value_boolean.DEFINITION)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_attribute_definition_boolean_ref := range attribute_value_boolean.DEFINITION {
-		StageBranch(stage, _a_attribute_definition_boolean_ref)
-	}
 
 }
 
@@ -1329,11 +1329,11 @@ func (stage *StageStruct) StageBranchATTRIBUTE_VALUE_DATE(attribute_value_date *
 	attribute_value_date.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if attribute_value_date.DEFINITION != nil {
+		StageBranch(stage, attribute_value_date.DEFINITION)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_attribute_definition_date_ref := range attribute_value_date.DEFINITION {
-		StageBranch(stage, _a_attribute_definition_date_ref)
-	}
 
 }
 
@@ -1347,14 +1347,14 @@ func (stage *StageStruct) StageBranchATTRIBUTE_VALUE_ENUMERATION(attribute_value
 	attribute_value_enumeration.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if attribute_value_enumeration.DEFINITION != nil {
+		StageBranch(stage, attribute_value_enumeration.DEFINITION)
+	}
+	if attribute_value_enumeration.VALUES != nil {
+		StageBranch(stage, attribute_value_enumeration.VALUES)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_attribute_definition_enumeration_ref := range attribute_value_enumeration.DEFINITION {
-		StageBranch(stage, _a_attribute_definition_enumeration_ref)
-	}
-	for _, _a_enum_value_ref := range attribute_value_enumeration.VALUES {
-		StageBranch(stage, _a_enum_value_ref)
-	}
 
 }
 
@@ -1368,11 +1368,11 @@ func (stage *StageStruct) StageBranchATTRIBUTE_VALUE_INTEGER(attribute_value_int
 	attribute_value_integer.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if attribute_value_integer.DEFINITION != nil {
+		StageBranch(stage, attribute_value_integer.DEFINITION)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_attribute_definition_integer_ref := range attribute_value_integer.DEFINITION {
-		StageBranch(stage, _a_attribute_definition_integer_ref)
-	}
 
 }
 
@@ -1386,11 +1386,11 @@ func (stage *StageStruct) StageBranchATTRIBUTE_VALUE_REAL(attribute_value_real *
 	attribute_value_real.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if attribute_value_real.DEFINITION != nil {
+		StageBranch(stage, attribute_value_real.DEFINITION)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_attribute_definition_real_ref := range attribute_value_real.DEFINITION {
-		StageBranch(stage, _a_attribute_definition_real_ref)
-	}
 
 }
 
@@ -1404,11 +1404,11 @@ func (stage *StageStruct) StageBranchATTRIBUTE_VALUE_STRING(attribute_value_stri
 	attribute_value_string.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if attribute_value_string.DEFINITION != nil {
+		StageBranch(stage, attribute_value_string.DEFINITION)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_attribute_definition_string_ref := range attribute_value_string.DEFINITION {
-		StageBranch(stage, _a_attribute_definition_string_ref)
-	}
 
 }
 
@@ -1422,17 +1422,17 @@ func (stage *StageStruct) StageBranchATTRIBUTE_VALUE_XHTML(attribute_value_xhtml
 	attribute_value_xhtml.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if attribute_value_xhtml.THE_VALUE != nil {
+		StageBranch(stage, attribute_value_xhtml.THE_VALUE)
+	}
+	if attribute_value_xhtml.THE_ORIGINAL_VALUE != nil {
+		StageBranch(stage, attribute_value_xhtml.THE_ORIGINAL_VALUE)
+	}
+	if attribute_value_xhtml.DEFINITION != nil {
+		StageBranch(stage, attribute_value_xhtml.DEFINITION)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _xhtml_content := range attribute_value_xhtml.THE_VALUE {
-		StageBranch(stage, _xhtml_content)
-	}
-	for _, _xhtml_content := range attribute_value_xhtml.THE_ORIGINAL_VALUE {
-		StageBranch(stage, _xhtml_content)
-	}
-	for _, _a_attribute_definition_xhtml_ref := range attribute_value_xhtml.DEFINITION {
-		StageBranch(stage, _a_attribute_definition_xhtml_ref)
-	}
 
 }
 
@@ -1976,6 +1976,21 @@ func (stage *StageStruct) StageBranchA_RELATION_GROUP_TYPE_REF(a_relation_group_
 
 }
 
+func (stage *StageStruct) StageBranchA_SOURCE_SPECIFICATION_1(a_source_specification_1 *A_SOURCE_SPECIFICATION_1) {
+
+	// check if instance is already staged
+	if IsStaged(stage, a_source_specification_1) {
+		return
+	}
+
+	a_source_specification_1.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
 func (stage *StageStruct) StageBranchA_SPECIFICATIONS(a_specifications *A_SPECIFICATIONS) {
 
 	// check if instance is already staged
@@ -2204,21 +2219,6 @@ func (stage *StageStruct) StageBranchA_TARGET_1(a_target_1 *A_TARGET_1) {
 
 }
 
-func (stage *StageStruct) StageBranchA_TARGET_SPECIFICATION_1(a_target_specification_1 *A_TARGET_SPECIFICATION_1) {
-
-	// check if instance is already staged
-	if IsStaged(stage, a_target_specification_1) {
-		return
-	}
-
-	a_target_specification_1.Stage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-}
-
 func (stage *StageStruct) StageBranchA_THE_HEADER(a_the_header *A_THE_HEADER) {
 
 	// check if instance is already staged
@@ -2265,11 +2265,11 @@ func (stage *StageStruct) StageBranchDATATYPE_DEFINITION_BOOLEAN(datatype_defini
 	datatype_definition_boolean.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if datatype_definition_boolean.ALTERNATIVE_ID != nil {
+		StageBranch(stage, datatype_definition_boolean.ALTERNATIVE_ID)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range datatype_definition_boolean.ALTERNATIVE_ID {
-		StageBranch(stage, _a_alternative_id)
-	}
 
 }
 
@@ -2283,11 +2283,11 @@ func (stage *StageStruct) StageBranchDATATYPE_DEFINITION_DATE(datatype_definitio
 	datatype_definition_date.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if datatype_definition_date.ALTERNATIVE_ID != nil {
+		StageBranch(stage, datatype_definition_date.ALTERNATIVE_ID)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range datatype_definition_date.ALTERNATIVE_ID {
-		StageBranch(stage, _a_alternative_id)
-	}
 
 }
 
@@ -2301,14 +2301,14 @@ func (stage *StageStruct) StageBranchDATATYPE_DEFINITION_ENUMERATION(datatype_de
 	datatype_definition_enumeration.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if datatype_definition_enumeration.ALTERNATIVE_ID != nil {
+		StageBranch(stage, datatype_definition_enumeration.ALTERNATIVE_ID)
+	}
+	if datatype_definition_enumeration.SPECIFIED_VALUES != nil {
+		StageBranch(stage, datatype_definition_enumeration.SPECIFIED_VALUES)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range datatype_definition_enumeration.ALTERNATIVE_ID {
-		StageBranch(stage, _a_alternative_id)
-	}
-	for _, _a_specified_values := range datatype_definition_enumeration.SPECIFIED_VALUES {
-		StageBranch(stage, _a_specified_values)
-	}
 
 }
 
@@ -2322,11 +2322,11 @@ func (stage *StageStruct) StageBranchDATATYPE_DEFINITION_INTEGER(datatype_defini
 	datatype_definition_integer.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if datatype_definition_integer.ALTERNATIVE_ID != nil {
+		StageBranch(stage, datatype_definition_integer.ALTERNATIVE_ID)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range datatype_definition_integer.ALTERNATIVE_ID {
-		StageBranch(stage, _a_alternative_id)
-	}
 
 }
 
@@ -2340,11 +2340,11 @@ func (stage *StageStruct) StageBranchDATATYPE_DEFINITION_REAL(datatype_definitio
 	datatype_definition_real.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if datatype_definition_real.ALTERNATIVE_ID != nil {
+		StageBranch(stage, datatype_definition_real.ALTERNATIVE_ID)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range datatype_definition_real.ALTERNATIVE_ID {
-		StageBranch(stage, _a_alternative_id)
-	}
 
 }
 
@@ -2358,11 +2358,11 @@ func (stage *StageStruct) StageBranchDATATYPE_DEFINITION_STRING(datatype_definit
 	datatype_definition_string.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if datatype_definition_string.ALTERNATIVE_ID != nil {
+		StageBranch(stage, datatype_definition_string.ALTERNATIVE_ID)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range datatype_definition_string.ALTERNATIVE_ID {
-		StageBranch(stage, _a_alternative_id)
-	}
 
 }
 
@@ -2376,11 +2376,11 @@ func (stage *StageStruct) StageBranchDATATYPE_DEFINITION_XHTML(datatype_definiti
 	datatype_definition_xhtml.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if datatype_definition_xhtml.ALTERNATIVE_ID != nil {
+		StageBranch(stage, datatype_definition_xhtml.ALTERNATIVE_ID)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range datatype_definition_xhtml.ALTERNATIVE_ID {
-		StageBranch(stage, _a_alternative_id)
-	}
 
 }
 
@@ -2409,14 +2409,14 @@ func (stage *StageStruct) StageBranchENUM_VALUE(enum_value *ENUM_VALUE) {
 	enum_value.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if enum_value.ALTERNATIVE_ID != nil {
+		StageBranch(stage, enum_value.ALTERNATIVE_ID)
+	}
+	if enum_value.PROPERTIES != nil {
+		StageBranch(stage, enum_value.PROPERTIES)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range enum_value.ALTERNATIVE_ID {
-		StageBranch(stage, _a_alternative_id)
-	}
-	for _, _a_properties := range enum_value.PROPERTIES {
-		StageBranch(stage, _a_properties)
-	}
 
 }
 
@@ -2430,23 +2430,23 @@ func (stage *StageStruct) StageBranchRELATION_GROUP(relation_group *RELATION_GRO
 	relation_group.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if relation_group.ALTERNATIVE_ID != nil {
+		StageBranch(stage, relation_group.ALTERNATIVE_ID)
+	}
+	if relation_group.SOURCE_SPECIFICATION != nil {
+		StageBranch(stage, relation_group.SOURCE_SPECIFICATION)
+	}
+	if relation_group.SPEC_RELATIONS != nil {
+		StageBranch(stage, relation_group.SPEC_RELATIONS)
+	}
+	if relation_group.TARGET_SPECIFICATION != nil {
+		StageBranch(stage, relation_group.TARGET_SPECIFICATION)
+	}
+	if relation_group.TYPE != nil {
+		StageBranch(stage, relation_group.TYPE)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range relation_group.ALTERNATIVE_ID {
-		StageBranch(stage, _a_alternative_id)
-	}
-	for _, _a_target_specification_1 := range relation_group.SOURCE_SPECIFICATION {
-		StageBranch(stage, _a_target_specification_1)
-	}
-	for _, _a_spec_relation_ref := range relation_group.SPEC_RELATIONS {
-		StageBranch(stage, _a_spec_relation_ref)
-	}
-	for _, _a_target_specification_1 := range relation_group.TARGET_SPECIFICATION {
-		StageBranch(stage, _a_target_specification_1)
-	}
-	for _, _a_relation_group_type_ref := range relation_group.TYPE {
-		StageBranch(stage, _a_relation_group_type_ref)
-	}
 
 }
 
@@ -2460,14 +2460,14 @@ func (stage *StageStruct) StageBranchRELATION_GROUP_TYPE(relation_group_type *RE
 	relation_group_type.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if relation_group_type.ALTERNATIVE_ID != nil {
+		StageBranch(stage, relation_group_type.ALTERNATIVE_ID)
+	}
+	if relation_group_type.SPEC_ATTRIBUTES != nil {
+		StageBranch(stage, relation_group_type.SPEC_ATTRIBUTES)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range relation_group_type.ALTERNATIVE_ID {
-		StageBranch(stage, _a_alternative_id)
-	}
-	for _, _a_spec_attributes := range relation_group_type.SPEC_ATTRIBUTES {
-		StageBranch(stage, _a_spec_attributes)
-	}
 
 }
 
@@ -2481,17 +2481,17 @@ func (stage *StageStruct) StageBranchREQ_IF(req_if *REQ_IF) {
 	req_if.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if req_if.THE_HEADER != nil {
+		StageBranch(stage, req_if.THE_HEADER)
+	}
+	if req_if.CORE_CONTENT != nil {
+		StageBranch(stage, req_if.CORE_CONTENT)
+	}
+	if req_if.TOOL_EXTENSIONS != nil {
+		StageBranch(stage, req_if.TOOL_EXTENSIONS)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_the_header := range req_if.THE_HEADER {
-		StageBranch(stage, _a_the_header)
-	}
-	for _, _a_core_content := range req_if.CORE_CONTENT {
-		StageBranch(stage, _a_core_content)
-	}
-	for _, _a_tool_extensions := range req_if.TOOL_EXTENSIONS {
-		StageBranch(stage, _a_tool_extensions)
-	}
 
 }
 
@@ -2505,26 +2505,26 @@ func (stage *StageStruct) StageBranchREQ_IF_CONTENT(req_if_content *REQ_IF_CONTE
 	req_if_content.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if req_if_content.DATATYPES != nil {
+		StageBranch(stage, req_if_content.DATATYPES)
+	}
+	if req_if_content.SPEC_TYPES != nil {
+		StageBranch(stage, req_if_content.SPEC_TYPES)
+	}
+	if req_if_content.SPEC_OBJECTS != nil {
+		StageBranch(stage, req_if_content.SPEC_OBJECTS)
+	}
+	if req_if_content.SPEC_RELATIONS != nil {
+		StageBranch(stage, req_if_content.SPEC_RELATIONS)
+	}
+	if req_if_content.SPECIFICATIONS != nil {
+		StageBranch(stage, req_if_content.SPECIFICATIONS)
+	}
+	if req_if_content.SPEC_RELATION_GROUPS != nil {
+		StageBranch(stage, req_if_content.SPEC_RELATION_GROUPS)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_datatypes := range req_if_content.DATATYPES {
-		StageBranch(stage, _a_datatypes)
-	}
-	for _, _a_spec_types := range req_if_content.SPEC_TYPES {
-		StageBranch(stage, _a_spec_types)
-	}
-	for _, _a_spec_objects := range req_if_content.SPEC_OBJECTS {
-		StageBranch(stage, _a_spec_objects)
-	}
-	for _, _a_spec_relations := range req_if_content.SPEC_RELATIONS {
-		StageBranch(stage, _a_spec_relations)
-	}
-	for _, _a_specifications := range req_if_content.SPECIFICATIONS {
-		StageBranch(stage, _a_specifications)
-	}
-	for _, _a_spec_relation_groups := range req_if_content.SPEC_RELATION_GROUPS {
-		StageBranch(stage, _a_spec_relation_groups)
-	}
 
 }
 
@@ -2568,20 +2568,20 @@ func (stage *StageStruct) StageBranchSPECIFICATION(specification *SPECIFICATION)
 	specification.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if specification.ALTERNATIVE_ID != nil {
+		StageBranch(stage, specification.ALTERNATIVE_ID)
+	}
+	if specification.CHILDREN != nil {
+		StageBranch(stage, specification.CHILDREN)
+	}
+	if specification.VALUES != nil {
+		StageBranch(stage, specification.VALUES)
+	}
+	if specification.TYPE != nil {
+		StageBranch(stage, specification.TYPE)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range specification.ALTERNATIVE_ID {
-		StageBranch(stage, _a_alternative_id)
-	}
-	for _, _a_children := range specification.CHILDREN {
-		StageBranch(stage, _a_children)
-	}
-	for _, _a_attribute_value_xhtml_1 := range specification.VALUES {
-		StageBranch(stage, _a_attribute_value_xhtml_1)
-	}
-	for _, _a_specification_type_ref := range specification.TYPE {
-		StageBranch(stage, _a_specification_type_ref)
-	}
 
 }
 
@@ -2595,14 +2595,14 @@ func (stage *StageStruct) StageBranchSPECIFICATION_TYPE(specification_type *SPEC
 	specification_type.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if specification_type.ALTERNATIVE_ID != nil {
+		StageBranch(stage, specification_type.ALTERNATIVE_ID)
+	}
+	if specification_type.SPEC_ATTRIBUTES != nil {
+		StageBranch(stage, specification_type.SPEC_ATTRIBUTES)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range specification_type.ALTERNATIVE_ID {
-		StageBranch(stage, _a_alternative_id)
-	}
-	for _, _a_spec_attributes := range specification_type.SPEC_ATTRIBUTES {
-		StageBranch(stage, _a_spec_attributes)
-	}
 
 }
 
@@ -2616,20 +2616,20 @@ func (stage *StageStruct) StageBranchSPEC_HIERARCHY(spec_hierarchy *SPEC_HIERARC
 	spec_hierarchy.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if spec_hierarchy.ALTERNATIVE_ID != nil {
+		StageBranch(stage, spec_hierarchy.ALTERNATIVE_ID)
+	}
+	if spec_hierarchy.CHILDREN != nil {
+		StageBranch(stage, spec_hierarchy.CHILDREN)
+	}
+	if spec_hierarchy.EDITABLE_ATTS != nil {
+		StageBranch(stage, spec_hierarchy.EDITABLE_ATTS)
+	}
+	if spec_hierarchy.OBJECT != nil {
+		StageBranch(stage, spec_hierarchy.OBJECT)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range spec_hierarchy.ALTERNATIVE_ID {
-		StageBranch(stage, _a_alternative_id)
-	}
-	for _, _a_children := range spec_hierarchy.CHILDREN {
-		StageBranch(stage, _a_children)
-	}
-	for _, _a_editable_atts := range spec_hierarchy.EDITABLE_ATTS {
-		StageBranch(stage, _a_editable_atts)
-	}
-	for _, _a_object := range spec_hierarchy.OBJECT {
-		StageBranch(stage, _a_object)
-	}
 
 }
 
@@ -2643,17 +2643,17 @@ func (stage *StageStruct) StageBranchSPEC_OBJECT(spec_object *SPEC_OBJECT) {
 	spec_object.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if spec_object.ALTERNATIVE_ID != nil {
+		StageBranch(stage, spec_object.ALTERNATIVE_ID)
+	}
+	if spec_object.VALUES != nil {
+		StageBranch(stage, spec_object.VALUES)
+	}
+	if spec_object.TYPE != nil {
+		StageBranch(stage, spec_object.TYPE)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range spec_object.ALTERNATIVE_ID {
-		StageBranch(stage, _a_alternative_id)
-	}
-	for _, _a_attribute_value_xhtml_1 := range spec_object.VALUES {
-		StageBranch(stage, _a_attribute_value_xhtml_1)
-	}
-	for _, _a_spec_object_type_ref := range spec_object.TYPE {
-		StageBranch(stage, _a_spec_object_type_ref)
-	}
 
 }
 
@@ -2667,14 +2667,14 @@ func (stage *StageStruct) StageBranchSPEC_OBJECT_TYPE(spec_object_type *SPEC_OBJ
 	spec_object_type.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if spec_object_type.ALTERNATIVE_ID != nil {
+		StageBranch(stage, spec_object_type.ALTERNATIVE_ID)
+	}
+	if spec_object_type.SPEC_ATTRIBUTES != nil {
+		StageBranch(stage, spec_object_type.SPEC_ATTRIBUTES)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range spec_object_type.ALTERNATIVE_ID {
-		StageBranch(stage, _a_alternative_id)
-	}
-	for _, _a_spec_attributes := range spec_object_type.SPEC_ATTRIBUTES {
-		StageBranch(stage, _a_spec_attributes)
-	}
 
 }
 
@@ -2688,23 +2688,23 @@ func (stage *StageStruct) StageBranchSPEC_RELATION(spec_relation *SPEC_RELATION)
 	spec_relation.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if spec_relation.ALTERNATIVE_ID != nil {
+		StageBranch(stage, spec_relation.ALTERNATIVE_ID)
+	}
+	if spec_relation.VALUES != nil {
+		StageBranch(stage, spec_relation.VALUES)
+	}
+	if spec_relation.SOURCE != nil {
+		StageBranch(stage, spec_relation.SOURCE)
+	}
+	if spec_relation.TARGET != nil {
+		StageBranch(stage, spec_relation.TARGET)
+	}
+	if spec_relation.TYPE != nil {
+		StageBranch(stage, spec_relation.TYPE)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range spec_relation.ALTERNATIVE_ID {
-		StageBranch(stage, _a_alternative_id)
-	}
-	for _, _a_attribute_value_xhtml_1 := range spec_relation.VALUES {
-		StageBranch(stage, _a_attribute_value_xhtml_1)
-	}
-	for _, _a_target_1 := range spec_relation.SOURCE {
-		StageBranch(stage, _a_target_1)
-	}
-	for _, _a_target_1 := range spec_relation.TARGET {
-		StageBranch(stage, _a_target_1)
-	}
-	for _, _a_spec_relation_type_ref := range spec_relation.TYPE {
-		StageBranch(stage, _a_spec_relation_type_ref)
-	}
 
 }
 
@@ -2718,14 +2718,14 @@ func (stage *StageStruct) StageBranchSPEC_RELATION_TYPE(spec_relation_type *SPEC
 	spec_relation_type.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if spec_relation_type.ALTERNATIVE_ID != nil {
+		StageBranch(stage, spec_relation_type.ALTERNATIVE_ID)
+	}
+	if spec_relation_type.SPEC_ATTRIBUTES != nil {
+		StageBranch(stage, spec_relation_type.SPEC_ATTRIBUTES)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range spec_relation_type.ALTERNATIVE_ID {
-		StageBranch(stage, _a_alternative_id)
-	}
-	for _, _a_spec_attributes := range spec_relation_type.SPEC_ATTRIBUTES {
-		StageBranch(stage, _a_spec_attributes)
-	}
 
 }
 
@@ -2939,6 +2939,10 @@ func CopyBranch[Type Gongstruct](from *Type) (to *Type) {
 		toT := CopyBranchA_RELATION_GROUP_TYPE_REF(mapOrigCopy, fromT)
 		return any(toT).(*Type)
 
+	case *A_SOURCE_SPECIFICATION_1:
+		toT := CopyBranchA_SOURCE_SPECIFICATION_1(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
 	case *A_SPECIFICATIONS:
 		toT := CopyBranchA_SPECIFICATIONS(mapOrigCopy, fromT)
 		return any(toT).(*Type)
@@ -2985,10 +2989,6 @@ func CopyBranch[Type Gongstruct](from *Type) (to *Type) {
 
 	case *A_TARGET_1:
 		toT := CopyBranchA_TARGET_1(mapOrigCopy, fromT)
-		return any(toT).(*Type)
-
-	case *A_TARGET_SPECIFICATION_1:
-		toT := CopyBranchA_TARGET_SPECIFICATION_1(mapOrigCopy, fromT)
 		return any(toT).(*Type)
 
 	case *A_THE_HEADER:
@@ -3130,17 +3130,17 @@ func CopyBranchATTRIBUTE_DEFINITION_BOOLEAN(mapOrigCopy map[any]any, attribute_d
 	attribute_definition_booleanFrom.CopyBasicFields(attribute_definition_booleanTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if attribute_definition_booleanFrom.ALTERNATIVE_ID != nil {
+		attribute_definition_booleanTo.ALTERNATIVE_ID = CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, attribute_definition_booleanFrom.ALTERNATIVE_ID)
+	}
+	if attribute_definition_booleanFrom.DEFAULT_VALUE != nil {
+		attribute_definition_booleanTo.DEFAULT_VALUE = CopyBranchA_ATTRIBUTE_VALUE_BOOLEAN(mapOrigCopy, attribute_definition_booleanFrom.DEFAULT_VALUE)
+	}
+	if attribute_definition_booleanFrom.TYPE != nil {
+		attribute_definition_booleanTo.TYPE = CopyBranchA_DATATYPE_DEFINITION_BOOLEAN_REF(mapOrigCopy, attribute_definition_booleanFrom.TYPE)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range attribute_definition_booleanFrom.ALTERNATIVE_ID {
-		attribute_definition_booleanTo.ALTERNATIVE_ID = append(attribute_definition_booleanTo.ALTERNATIVE_ID, CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, _a_alternative_id))
-	}
-	for _, _a_attribute_value_boolean := range attribute_definition_booleanFrom.DEFAULT_VALUE {
-		attribute_definition_booleanTo.DEFAULT_VALUE = append(attribute_definition_booleanTo.DEFAULT_VALUE, CopyBranchA_ATTRIBUTE_VALUE_BOOLEAN(mapOrigCopy, _a_attribute_value_boolean))
-	}
-	for _, _a_datatype_definition_boolean_ref := range attribute_definition_booleanFrom.TYPE {
-		attribute_definition_booleanTo.TYPE = append(attribute_definition_booleanTo.TYPE, CopyBranchA_DATATYPE_DEFINITION_BOOLEAN_REF(mapOrigCopy, _a_datatype_definition_boolean_ref))
-	}
 
 	return
 }
@@ -3158,17 +3158,17 @@ func CopyBranchATTRIBUTE_DEFINITION_DATE(mapOrigCopy map[any]any, attribute_defi
 	attribute_definition_dateFrom.CopyBasicFields(attribute_definition_dateTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if attribute_definition_dateFrom.ALTERNATIVE_ID != nil {
+		attribute_definition_dateTo.ALTERNATIVE_ID = CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, attribute_definition_dateFrom.ALTERNATIVE_ID)
+	}
+	if attribute_definition_dateFrom.DEFAULT_VALUE != nil {
+		attribute_definition_dateTo.DEFAULT_VALUE = CopyBranchA_ATTRIBUTE_VALUE_DATE(mapOrigCopy, attribute_definition_dateFrom.DEFAULT_VALUE)
+	}
+	if attribute_definition_dateFrom.TYPE != nil {
+		attribute_definition_dateTo.TYPE = CopyBranchA_DATATYPE_DEFINITION_DATE_REF(mapOrigCopy, attribute_definition_dateFrom.TYPE)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range attribute_definition_dateFrom.ALTERNATIVE_ID {
-		attribute_definition_dateTo.ALTERNATIVE_ID = append(attribute_definition_dateTo.ALTERNATIVE_ID, CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, _a_alternative_id))
-	}
-	for _, _a_attribute_value_date := range attribute_definition_dateFrom.DEFAULT_VALUE {
-		attribute_definition_dateTo.DEFAULT_VALUE = append(attribute_definition_dateTo.DEFAULT_VALUE, CopyBranchA_ATTRIBUTE_VALUE_DATE(mapOrigCopy, _a_attribute_value_date))
-	}
-	for _, _a_datatype_definition_date_ref := range attribute_definition_dateFrom.TYPE {
-		attribute_definition_dateTo.TYPE = append(attribute_definition_dateTo.TYPE, CopyBranchA_DATATYPE_DEFINITION_DATE_REF(mapOrigCopy, _a_datatype_definition_date_ref))
-	}
 
 	return
 }
@@ -3186,17 +3186,17 @@ func CopyBranchATTRIBUTE_DEFINITION_ENUMERATION(mapOrigCopy map[any]any, attribu
 	attribute_definition_enumerationFrom.CopyBasicFields(attribute_definition_enumerationTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if attribute_definition_enumerationFrom.ALTERNATIVE_ID != nil {
+		attribute_definition_enumerationTo.ALTERNATIVE_ID = CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, attribute_definition_enumerationFrom.ALTERNATIVE_ID)
+	}
+	if attribute_definition_enumerationFrom.DEFAULT_VALUE != nil {
+		attribute_definition_enumerationTo.DEFAULT_VALUE = CopyBranchA_ATTRIBUTE_VALUE_ENUMERATION(mapOrigCopy, attribute_definition_enumerationFrom.DEFAULT_VALUE)
+	}
+	if attribute_definition_enumerationFrom.TYPE != nil {
+		attribute_definition_enumerationTo.TYPE = CopyBranchA_DATATYPE_DEFINITION_ENUMERATION_REF(mapOrigCopy, attribute_definition_enumerationFrom.TYPE)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range attribute_definition_enumerationFrom.ALTERNATIVE_ID {
-		attribute_definition_enumerationTo.ALTERNATIVE_ID = append(attribute_definition_enumerationTo.ALTERNATIVE_ID, CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, _a_alternative_id))
-	}
-	for _, _a_attribute_value_enumeration := range attribute_definition_enumerationFrom.DEFAULT_VALUE {
-		attribute_definition_enumerationTo.DEFAULT_VALUE = append(attribute_definition_enumerationTo.DEFAULT_VALUE, CopyBranchA_ATTRIBUTE_VALUE_ENUMERATION(mapOrigCopy, _a_attribute_value_enumeration))
-	}
-	for _, _a_datatype_definition_enumeration_ref := range attribute_definition_enumerationFrom.TYPE {
-		attribute_definition_enumerationTo.TYPE = append(attribute_definition_enumerationTo.TYPE, CopyBranchA_DATATYPE_DEFINITION_ENUMERATION_REF(mapOrigCopy, _a_datatype_definition_enumeration_ref))
-	}
 
 	return
 }
@@ -3214,17 +3214,17 @@ func CopyBranchATTRIBUTE_DEFINITION_INTEGER(mapOrigCopy map[any]any, attribute_d
 	attribute_definition_integerFrom.CopyBasicFields(attribute_definition_integerTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if attribute_definition_integerFrom.ALTERNATIVE_ID != nil {
+		attribute_definition_integerTo.ALTERNATIVE_ID = CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, attribute_definition_integerFrom.ALTERNATIVE_ID)
+	}
+	if attribute_definition_integerFrom.DEFAULT_VALUE != nil {
+		attribute_definition_integerTo.DEFAULT_VALUE = CopyBranchA_ATTRIBUTE_VALUE_INTEGER(mapOrigCopy, attribute_definition_integerFrom.DEFAULT_VALUE)
+	}
+	if attribute_definition_integerFrom.TYPE != nil {
+		attribute_definition_integerTo.TYPE = CopyBranchA_DATATYPE_DEFINITION_INTEGER_REF(mapOrigCopy, attribute_definition_integerFrom.TYPE)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range attribute_definition_integerFrom.ALTERNATIVE_ID {
-		attribute_definition_integerTo.ALTERNATIVE_ID = append(attribute_definition_integerTo.ALTERNATIVE_ID, CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, _a_alternative_id))
-	}
-	for _, _a_attribute_value_integer := range attribute_definition_integerFrom.DEFAULT_VALUE {
-		attribute_definition_integerTo.DEFAULT_VALUE = append(attribute_definition_integerTo.DEFAULT_VALUE, CopyBranchA_ATTRIBUTE_VALUE_INTEGER(mapOrigCopy, _a_attribute_value_integer))
-	}
-	for _, _a_datatype_definition_integer_ref := range attribute_definition_integerFrom.TYPE {
-		attribute_definition_integerTo.TYPE = append(attribute_definition_integerTo.TYPE, CopyBranchA_DATATYPE_DEFINITION_INTEGER_REF(mapOrigCopy, _a_datatype_definition_integer_ref))
-	}
 
 	return
 }
@@ -3242,17 +3242,17 @@ func CopyBranchATTRIBUTE_DEFINITION_REAL(mapOrigCopy map[any]any, attribute_defi
 	attribute_definition_realFrom.CopyBasicFields(attribute_definition_realTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if attribute_definition_realFrom.ALTERNATIVE_ID != nil {
+		attribute_definition_realTo.ALTERNATIVE_ID = CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, attribute_definition_realFrom.ALTERNATIVE_ID)
+	}
+	if attribute_definition_realFrom.DEFAULT_VALUE != nil {
+		attribute_definition_realTo.DEFAULT_VALUE = CopyBranchA_ATTRIBUTE_VALUE_REAL(mapOrigCopy, attribute_definition_realFrom.DEFAULT_VALUE)
+	}
+	if attribute_definition_realFrom.TYPE != nil {
+		attribute_definition_realTo.TYPE = CopyBranchA_DATATYPE_DEFINITION_REAL_REF(mapOrigCopy, attribute_definition_realFrom.TYPE)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range attribute_definition_realFrom.ALTERNATIVE_ID {
-		attribute_definition_realTo.ALTERNATIVE_ID = append(attribute_definition_realTo.ALTERNATIVE_ID, CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, _a_alternative_id))
-	}
-	for _, _a_attribute_value_real := range attribute_definition_realFrom.DEFAULT_VALUE {
-		attribute_definition_realTo.DEFAULT_VALUE = append(attribute_definition_realTo.DEFAULT_VALUE, CopyBranchA_ATTRIBUTE_VALUE_REAL(mapOrigCopy, _a_attribute_value_real))
-	}
-	for _, _a_datatype_definition_real_ref := range attribute_definition_realFrom.TYPE {
-		attribute_definition_realTo.TYPE = append(attribute_definition_realTo.TYPE, CopyBranchA_DATATYPE_DEFINITION_REAL_REF(mapOrigCopy, _a_datatype_definition_real_ref))
-	}
 
 	return
 }
@@ -3270,17 +3270,17 @@ func CopyBranchATTRIBUTE_DEFINITION_STRING(mapOrigCopy map[any]any, attribute_de
 	attribute_definition_stringFrom.CopyBasicFields(attribute_definition_stringTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if attribute_definition_stringFrom.ALTERNATIVE_ID != nil {
+		attribute_definition_stringTo.ALTERNATIVE_ID = CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, attribute_definition_stringFrom.ALTERNATIVE_ID)
+	}
+	if attribute_definition_stringFrom.DEFAULT_VALUE != nil {
+		attribute_definition_stringTo.DEFAULT_VALUE = CopyBranchA_ATTRIBUTE_VALUE_STRING(mapOrigCopy, attribute_definition_stringFrom.DEFAULT_VALUE)
+	}
+	if attribute_definition_stringFrom.TYPE != nil {
+		attribute_definition_stringTo.TYPE = CopyBranchA_DATATYPE_DEFINITION_STRING_REF(mapOrigCopy, attribute_definition_stringFrom.TYPE)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range attribute_definition_stringFrom.ALTERNATIVE_ID {
-		attribute_definition_stringTo.ALTERNATIVE_ID = append(attribute_definition_stringTo.ALTERNATIVE_ID, CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, _a_alternative_id))
-	}
-	for _, _a_attribute_value_string := range attribute_definition_stringFrom.DEFAULT_VALUE {
-		attribute_definition_stringTo.DEFAULT_VALUE = append(attribute_definition_stringTo.DEFAULT_VALUE, CopyBranchA_ATTRIBUTE_VALUE_STRING(mapOrigCopy, _a_attribute_value_string))
-	}
-	for _, _a_datatype_definition_string_ref := range attribute_definition_stringFrom.TYPE {
-		attribute_definition_stringTo.TYPE = append(attribute_definition_stringTo.TYPE, CopyBranchA_DATATYPE_DEFINITION_STRING_REF(mapOrigCopy, _a_datatype_definition_string_ref))
-	}
 
 	return
 }
@@ -3298,17 +3298,17 @@ func CopyBranchATTRIBUTE_DEFINITION_XHTML(mapOrigCopy map[any]any, attribute_def
 	attribute_definition_xhtmlFrom.CopyBasicFields(attribute_definition_xhtmlTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if attribute_definition_xhtmlFrom.ALTERNATIVE_ID != nil {
+		attribute_definition_xhtmlTo.ALTERNATIVE_ID = CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, attribute_definition_xhtmlFrom.ALTERNATIVE_ID)
+	}
+	if attribute_definition_xhtmlFrom.DEFAULT_VALUE != nil {
+		attribute_definition_xhtmlTo.DEFAULT_VALUE = CopyBranchA_ATTRIBUTE_VALUE_XHTML(mapOrigCopy, attribute_definition_xhtmlFrom.DEFAULT_VALUE)
+	}
+	if attribute_definition_xhtmlFrom.TYPE != nil {
+		attribute_definition_xhtmlTo.TYPE = CopyBranchA_DATATYPE_DEFINITION_XHTML_REF(mapOrigCopy, attribute_definition_xhtmlFrom.TYPE)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range attribute_definition_xhtmlFrom.ALTERNATIVE_ID {
-		attribute_definition_xhtmlTo.ALTERNATIVE_ID = append(attribute_definition_xhtmlTo.ALTERNATIVE_ID, CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, _a_alternative_id))
-	}
-	for _, _a_attribute_value_xhtml := range attribute_definition_xhtmlFrom.DEFAULT_VALUE {
-		attribute_definition_xhtmlTo.DEFAULT_VALUE = append(attribute_definition_xhtmlTo.DEFAULT_VALUE, CopyBranchA_ATTRIBUTE_VALUE_XHTML(mapOrigCopy, _a_attribute_value_xhtml))
-	}
-	for _, _a_datatype_definition_xhtml_ref := range attribute_definition_xhtmlFrom.TYPE {
-		attribute_definition_xhtmlTo.TYPE = append(attribute_definition_xhtmlTo.TYPE, CopyBranchA_DATATYPE_DEFINITION_XHTML_REF(mapOrigCopy, _a_datatype_definition_xhtml_ref))
-	}
 
 	return
 }
@@ -3326,11 +3326,11 @@ func CopyBranchATTRIBUTE_VALUE_BOOLEAN(mapOrigCopy map[any]any, attribute_value_
 	attribute_value_booleanFrom.CopyBasicFields(attribute_value_booleanTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if attribute_value_booleanFrom.DEFINITION != nil {
+		attribute_value_booleanTo.DEFINITION = CopyBranchA_ATTRIBUTE_DEFINITION_BOOLEAN_REF(mapOrigCopy, attribute_value_booleanFrom.DEFINITION)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_attribute_definition_boolean_ref := range attribute_value_booleanFrom.DEFINITION {
-		attribute_value_booleanTo.DEFINITION = append(attribute_value_booleanTo.DEFINITION, CopyBranchA_ATTRIBUTE_DEFINITION_BOOLEAN_REF(mapOrigCopy, _a_attribute_definition_boolean_ref))
-	}
 
 	return
 }
@@ -3348,11 +3348,11 @@ func CopyBranchATTRIBUTE_VALUE_DATE(mapOrigCopy map[any]any, attribute_value_dat
 	attribute_value_dateFrom.CopyBasicFields(attribute_value_dateTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if attribute_value_dateFrom.DEFINITION != nil {
+		attribute_value_dateTo.DEFINITION = CopyBranchA_ATTRIBUTE_DEFINITION_DATE_REF(mapOrigCopy, attribute_value_dateFrom.DEFINITION)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_attribute_definition_date_ref := range attribute_value_dateFrom.DEFINITION {
-		attribute_value_dateTo.DEFINITION = append(attribute_value_dateTo.DEFINITION, CopyBranchA_ATTRIBUTE_DEFINITION_DATE_REF(mapOrigCopy, _a_attribute_definition_date_ref))
-	}
 
 	return
 }
@@ -3370,14 +3370,14 @@ func CopyBranchATTRIBUTE_VALUE_ENUMERATION(mapOrigCopy map[any]any, attribute_va
 	attribute_value_enumerationFrom.CopyBasicFields(attribute_value_enumerationTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if attribute_value_enumerationFrom.DEFINITION != nil {
+		attribute_value_enumerationTo.DEFINITION = CopyBranchA_ATTRIBUTE_DEFINITION_ENUMERATION_REF(mapOrigCopy, attribute_value_enumerationFrom.DEFINITION)
+	}
+	if attribute_value_enumerationFrom.VALUES != nil {
+		attribute_value_enumerationTo.VALUES = CopyBranchA_ENUM_VALUE_REF(mapOrigCopy, attribute_value_enumerationFrom.VALUES)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_attribute_definition_enumeration_ref := range attribute_value_enumerationFrom.DEFINITION {
-		attribute_value_enumerationTo.DEFINITION = append(attribute_value_enumerationTo.DEFINITION, CopyBranchA_ATTRIBUTE_DEFINITION_ENUMERATION_REF(mapOrigCopy, _a_attribute_definition_enumeration_ref))
-	}
-	for _, _a_enum_value_ref := range attribute_value_enumerationFrom.VALUES {
-		attribute_value_enumerationTo.VALUES = append(attribute_value_enumerationTo.VALUES, CopyBranchA_ENUM_VALUE_REF(mapOrigCopy, _a_enum_value_ref))
-	}
 
 	return
 }
@@ -3395,11 +3395,11 @@ func CopyBranchATTRIBUTE_VALUE_INTEGER(mapOrigCopy map[any]any, attribute_value_
 	attribute_value_integerFrom.CopyBasicFields(attribute_value_integerTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if attribute_value_integerFrom.DEFINITION != nil {
+		attribute_value_integerTo.DEFINITION = CopyBranchA_ATTRIBUTE_DEFINITION_INTEGER_REF(mapOrigCopy, attribute_value_integerFrom.DEFINITION)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_attribute_definition_integer_ref := range attribute_value_integerFrom.DEFINITION {
-		attribute_value_integerTo.DEFINITION = append(attribute_value_integerTo.DEFINITION, CopyBranchA_ATTRIBUTE_DEFINITION_INTEGER_REF(mapOrigCopy, _a_attribute_definition_integer_ref))
-	}
 
 	return
 }
@@ -3417,11 +3417,11 @@ func CopyBranchATTRIBUTE_VALUE_REAL(mapOrigCopy map[any]any, attribute_value_rea
 	attribute_value_realFrom.CopyBasicFields(attribute_value_realTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if attribute_value_realFrom.DEFINITION != nil {
+		attribute_value_realTo.DEFINITION = CopyBranchA_ATTRIBUTE_DEFINITION_REAL_REF(mapOrigCopy, attribute_value_realFrom.DEFINITION)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_attribute_definition_real_ref := range attribute_value_realFrom.DEFINITION {
-		attribute_value_realTo.DEFINITION = append(attribute_value_realTo.DEFINITION, CopyBranchA_ATTRIBUTE_DEFINITION_REAL_REF(mapOrigCopy, _a_attribute_definition_real_ref))
-	}
 
 	return
 }
@@ -3439,11 +3439,11 @@ func CopyBranchATTRIBUTE_VALUE_STRING(mapOrigCopy map[any]any, attribute_value_s
 	attribute_value_stringFrom.CopyBasicFields(attribute_value_stringTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if attribute_value_stringFrom.DEFINITION != nil {
+		attribute_value_stringTo.DEFINITION = CopyBranchA_ATTRIBUTE_DEFINITION_STRING_REF(mapOrigCopy, attribute_value_stringFrom.DEFINITION)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_attribute_definition_string_ref := range attribute_value_stringFrom.DEFINITION {
-		attribute_value_stringTo.DEFINITION = append(attribute_value_stringTo.DEFINITION, CopyBranchA_ATTRIBUTE_DEFINITION_STRING_REF(mapOrigCopy, _a_attribute_definition_string_ref))
-	}
 
 	return
 }
@@ -3461,17 +3461,17 @@ func CopyBranchATTRIBUTE_VALUE_XHTML(mapOrigCopy map[any]any, attribute_value_xh
 	attribute_value_xhtmlFrom.CopyBasicFields(attribute_value_xhtmlTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if attribute_value_xhtmlFrom.THE_VALUE != nil {
+		attribute_value_xhtmlTo.THE_VALUE = CopyBranchXHTML_CONTENT(mapOrigCopy, attribute_value_xhtmlFrom.THE_VALUE)
+	}
+	if attribute_value_xhtmlFrom.THE_ORIGINAL_VALUE != nil {
+		attribute_value_xhtmlTo.THE_ORIGINAL_VALUE = CopyBranchXHTML_CONTENT(mapOrigCopy, attribute_value_xhtmlFrom.THE_ORIGINAL_VALUE)
+	}
+	if attribute_value_xhtmlFrom.DEFINITION != nil {
+		attribute_value_xhtmlTo.DEFINITION = CopyBranchA_ATTRIBUTE_DEFINITION_XHTML_REF(mapOrigCopy, attribute_value_xhtmlFrom.DEFINITION)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _xhtml_content := range attribute_value_xhtmlFrom.THE_VALUE {
-		attribute_value_xhtmlTo.THE_VALUE = append(attribute_value_xhtmlTo.THE_VALUE, CopyBranchXHTML_CONTENT(mapOrigCopy, _xhtml_content))
-	}
-	for _, _xhtml_content := range attribute_value_xhtmlFrom.THE_ORIGINAL_VALUE {
-		attribute_value_xhtmlTo.THE_ORIGINAL_VALUE = append(attribute_value_xhtmlTo.THE_ORIGINAL_VALUE, CopyBranchXHTML_CONTENT(mapOrigCopy, _xhtml_content))
-	}
-	for _, _a_attribute_definition_xhtml_ref := range attribute_value_xhtmlFrom.DEFINITION {
-		attribute_value_xhtmlTo.DEFINITION = append(attribute_value_xhtmlTo.DEFINITION, CopyBranchA_ATTRIBUTE_DEFINITION_XHTML_REF(mapOrigCopy, _a_attribute_definition_xhtml_ref))
-	}
 
 	return
 }
@@ -4140,6 +4140,25 @@ func CopyBranchA_RELATION_GROUP_TYPE_REF(mapOrigCopy map[any]any, a_relation_gro
 	return
 }
 
+func CopyBranchA_SOURCE_SPECIFICATION_1(mapOrigCopy map[any]any, a_source_specification_1From *A_SOURCE_SPECIFICATION_1) (a_source_specification_1To *A_SOURCE_SPECIFICATION_1) {
+
+	// a_source_specification_1From has already been copied
+	if _a_source_specification_1To, ok := mapOrigCopy[a_source_specification_1From]; ok {
+		a_source_specification_1To = _a_source_specification_1To.(*A_SOURCE_SPECIFICATION_1)
+		return
+	}
+
+	a_source_specification_1To = new(A_SOURCE_SPECIFICATION_1)
+	mapOrigCopy[a_source_specification_1From] = a_source_specification_1To
+	a_source_specification_1From.CopyBasicFields(a_source_specification_1To)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+	return
+}
+
 func CopyBranchA_SPECIFICATIONS(mapOrigCopy map[any]any, a_specificationsFrom *A_SPECIFICATIONS) (a_specificationsTo *A_SPECIFICATIONS) {
 
 	// a_specificationsFrom has already been copied
@@ -4416,25 +4435,6 @@ func CopyBranchA_TARGET_1(mapOrigCopy map[any]any, a_target_1From *A_TARGET_1) (
 	return
 }
 
-func CopyBranchA_TARGET_SPECIFICATION_1(mapOrigCopy map[any]any, a_target_specification_1From *A_TARGET_SPECIFICATION_1) (a_target_specification_1To *A_TARGET_SPECIFICATION_1) {
-
-	// a_target_specification_1From has already been copied
-	if _a_target_specification_1To, ok := mapOrigCopy[a_target_specification_1From]; ok {
-		a_target_specification_1To = _a_target_specification_1To.(*A_TARGET_SPECIFICATION_1)
-		return
-	}
-
-	a_target_specification_1To = new(A_TARGET_SPECIFICATION_1)
-	mapOrigCopy[a_target_specification_1From] = a_target_specification_1To
-	a_target_specification_1From.CopyBasicFields(a_target_specification_1To)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-	return
-}
-
 func CopyBranchA_THE_HEADER(mapOrigCopy map[any]any, a_the_headerFrom *A_THE_HEADER) (a_the_headerTo *A_THE_HEADER) {
 
 	// a_the_headerFrom has already been copied
@@ -4492,11 +4492,11 @@ func CopyBranchDATATYPE_DEFINITION_BOOLEAN(mapOrigCopy map[any]any, datatype_def
 	datatype_definition_booleanFrom.CopyBasicFields(datatype_definition_booleanTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if datatype_definition_booleanFrom.ALTERNATIVE_ID != nil {
+		datatype_definition_booleanTo.ALTERNATIVE_ID = CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, datatype_definition_booleanFrom.ALTERNATIVE_ID)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range datatype_definition_booleanFrom.ALTERNATIVE_ID {
-		datatype_definition_booleanTo.ALTERNATIVE_ID = append(datatype_definition_booleanTo.ALTERNATIVE_ID, CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, _a_alternative_id))
-	}
 
 	return
 }
@@ -4514,11 +4514,11 @@ func CopyBranchDATATYPE_DEFINITION_DATE(mapOrigCopy map[any]any, datatype_defini
 	datatype_definition_dateFrom.CopyBasicFields(datatype_definition_dateTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if datatype_definition_dateFrom.ALTERNATIVE_ID != nil {
+		datatype_definition_dateTo.ALTERNATIVE_ID = CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, datatype_definition_dateFrom.ALTERNATIVE_ID)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range datatype_definition_dateFrom.ALTERNATIVE_ID {
-		datatype_definition_dateTo.ALTERNATIVE_ID = append(datatype_definition_dateTo.ALTERNATIVE_ID, CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, _a_alternative_id))
-	}
 
 	return
 }
@@ -4536,14 +4536,14 @@ func CopyBranchDATATYPE_DEFINITION_ENUMERATION(mapOrigCopy map[any]any, datatype
 	datatype_definition_enumerationFrom.CopyBasicFields(datatype_definition_enumerationTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if datatype_definition_enumerationFrom.ALTERNATIVE_ID != nil {
+		datatype_definition_enumerationTo.ALTERNATIVE_ID = CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, datatype_definition_enumerationFrom.ALTERNATIVE_ID)
+	}
+	if datatype_definition_enumerationFrom.SPECIFIED_VALUES != nil {
+		datatype_definition_enumerationTo.SPECIFIED_VALUES = CopyBranchA_SPECIFIED_VALUES(mapOrigCopy, datatype_definition_enumerationFrom.SPECIFIED_VALUES)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range datatype_definition_enumerationFrom.ALTERNATIVE_ID {
-		datatype_definition_enumerationTo.ALTERNATIVE_ID = append(datatype_definition_enumerationTo.ALTERNATIVE_ID, CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, _a_alternative_id))
-	}
-	for _, _a_specified_values := range datatype_definition_enumerationFrom.SPECIFIED_VALUES {
-		datatype_definition_enumerationTo.SPECIFIED_VALUES = append(datatype_definition_enumerationTo.SPECIFIED_VALUES, CopyBranchA_SPECIFIED_VALUES(mapOrigCopy, _a_specified_values))
-	}
 
 	return
 }
@@ -4561,11 +4561,11 @@ func CopyBranchDATATYPE_DEFINITION_INTEGER(mapOrigCopy map[any]any, datatype_def
 	datatype_definition_integerFrom.CopyBasicFields(datatype_definition_integerTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if datatype_definition_integerFrom.ALTERNATIVE_ID != nil {
+		datatype_definition_integerTo.ALTERNATIVE_ID = CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, datatype_definition_integerFrom.ALTERNATIVE_ID)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range datatype_definition_integerFrom.ALTERNATIVE_ID {
-		datatype_definition_integerTo.ALTERNATIVE_ID = append(datatype_definition_integerTo.ALTERNATIVE_ID, CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, _a_alternative_id))
-	}
 
 	return
 }
@@ -4583,11 +4583,11 @@ func CopyBranchDATATYPE_DEFINITION_REAL(mapOrigCopy map[any]any, datatype_defini
 	datatype_definition_realFrom.CopyBasicFields(datatype_definition_realTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if datatype_definition_realFrom.ALTERNATIVE_ID != nil {
+		datatype_definition_realTo.ALTERNATIVE_ID = CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, datatype_definition_realFrom.ALTERNATIVE_ID)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range datatype_definition_realFrom.ALTERNATIVE_ID {
-		datatype_definition_realTo.ALTERNATIVE_ID = append(datatype_definition_realTo.ALTERNATIVE_ID, CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, _a_alternative_id))
-	}
 
 	return
 }
@@ -4605,11 +4605,11 @@ func CopyBranchDATATYPE_DEFINITION_STRING(mapOrigCopy map[any]any, datatype_defi
 	datatype_definition_stringFrom.CopyBasicFields(datatype_definition_stringTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if datatype_definition_stringFrom.ALTERNATIVE_ID != nil {
+		datatype_definition_stringTo.ALTERNATIVE_ID = CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, datatype_definition_stringFrom.ALTERNATIVE_ID)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range datatype_definition_stringFrom.ALTERNATIVE_ID {
-		datatype_definition_stringTo.ALTERNATIVE_ID = append(datatype_definition_stringTo.ALTERNATIVE_ID, CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, _a_alternative_id))
-	}
 
 	return
 }
@@ -4627,11 +4627,11 @@ func CopyBranchDATATYPE_DEFINITION_XHTML(mapOrigCopy map[any]any, datatype_defin
 	datatype_definition_xhtmlFrom.CopyBasicFields(datatype_definition_xhtmlTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if datatype_definition_xhtmlFrom.ALTERNATIVE_ID != nil {
+		datatype_definition_xhtmlTo.ALTERNATIVE_ID = CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, datatype_definition_xhtmlFrom.ALTERNATIVE_ID)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range datatype_definition_xhtmlFrom.ALTERNATIVE_ID {
-		datatype_definition_xhtmlTo.ALTERNATIVE_ID = append(datatype_definition_xhtmlTo.ALTERNATIVE_ID, CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, _a_alternative_id))
-	}
 
 	return
 }
@@ -4668,14 +4668,14 @@ func CopyBranchENUM_VALUE(mapOrigCopy map[any]any, enum_valueFrom *ENUM_VALUE) (
 	enum_valueFrom.CopyBasicFields(enum_valueTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if enum_valueFrom.ALTERNATIVE_ID != nil {
+		enum_valueTo.ALTERNATIVE_ID = CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, enum_valueFrom.ALTERNATIVE_ID)
+	}
+	if enum_valueFrom.PROPERTIES != nil {
+		enum_valueTo.PROPERTIES = CopyBranchA_PROPERTIES(mapOrigCopy, enum_valueFrom.PROPERTIES)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range enum_valueFrom.ALTERNATIVE_ID {
-		enum_valueTo.ALTERNATIVE_ID = append(enum_valueTo.ALTERNATIVE_ID, CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, _a_alternative_id))
-	}
-	for _, _a_properties := range enum_valueFrom.PROPERTIES {
-		enum_valueTo.PROPERTIES = append(enum_valueTo.PROPERTIES, CopyBranchA_PROPERTIES(mapOrigCopy, _a_properties))
-	}
 
 	return
 }
@@ -4693,23 +4693,23 @@ func CopyBranchRELATION_GROUP(mapOrigCopy map[any]any, relation_groupFrom *RELAT
 	relation_groupFrom.CopyBasicFields(relation_groupTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if relation_groupFrom.ALTERNATIVE_ID != nil {
+		relation_groupTo.ALTERNATIVE_ID = CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, relation_groupFrom.ALTERNATIVE_ID)
+	}
+	if relation_groupFrom.SOURCE_SPECIFICATION != nil {
+		relation_groupTo.SOURCE_SPECIFICATION = CopyBranchA_SOURCE_SPECIFICATION_1(mapOrigCopy, relation_groupFrom.SOURCE_SPECIFICATION)
+	}
+	if relation_groupFrom.SPEC_RELATIONS != nil {
+		relation_groupTo.SPEC_RELATIONS = CopyBranchA_SPEC_RELATION_REF(mapOrigCopy, relation_groupFrom.SPEC_RELATIONS)
+	}
+	if relation_groupFrom.TARGET_SPECIFICATION != nil {
+		relation_groupTo.TARGET_SPECIFICATION = CopyBranchA_SOURCE_SPECIFICATION_1(mapOrigCopy, relation_groupFrom.TARGET_SPECIFICATION)
+	}
+	if relation_groupFrom.TYPE != nil {
+		relation_groupTo.TYPE = CopyBranchA_RELATION_GROUP_TYPE_REF(mapOrigCopy, relation_groupFrom.TYPE)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range relation_groupFrom.ALTERNATIVE_ID {
-		relation_groupTo.ALTERNATIVE_ID = append(relation_groupTo.ALTERNATIVE_ID, CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, _a_alternative_id))
-	}
-	for _, _a_target_specification_1 := range relation_groupFrom.SOURCE_SPECIFICATION {
-		relation_groupTo.SOURCE_SPECIFICATION = append(relation_groupTo.SOURCE_SPECIFICATION, CopyBranchA_TARGET_SPECIFICATION_1(mapOrigCopy, _a_target_specification_1))
-	}
-	for _, _a_spec_relation_ref := range relation_groupFrom.SPEC_RELATIONS {
-		relation_groupTo.SPEC_RELATIONS = append(relation_groupTo.SPEC_RELATIONS, CopyBranchA_SPEC_RELATION_REF(mapOrigCopy, _a_spec_relation_ref))
-	}
-	for _, _a_target_specification_1 := range relation_groupFrom.TARGET_SPECIFICATION {
-		relation_groupTo.TARGET_SPECIFICATION = append(relation_groupTo.TARGET_SPECIFICATION, CopyBranchA_TARGET_SPECIFICATION_1(mapOrigCopy, _a_target_specification_1))
-	}
-	for _, _a_relation_group_type_ref := range relation_groupFrom.TYPE {
-		relation_groupTo.TYPE = append(relation_groupTo.TYPE, CopyBranchA_RELATION_GROUP_TYPE_REF(mapOrigCopy, _a_relation_group_type_ref))
-	}
 
 	return
 }
@@ -4727,14 +4727,14 @@ func CopyBranchRELATION_GROUP_TYPE(mapOrigCopy map[any]any, relation_group_typeF
 	relation_group_typeFrom.CopyBasicFields(relation_group_typeTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if relation_group_typeFrom.ALTERNATIVE_ID != nil {
+		relation_group_typeTo.ALTERNATIVE_ID = CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, relation_group_typeFrom.ALTERNATIVE_ID)
+	}
+	if relation_group_typeFrom.SPEC_ATTRIBUTES != nil {
+		relation_group_typeTo.SPEC_ATTRIBUTES = CopyBranchA_SPEC_ATTRIBUTES(mapOrigCopy, relation_group_typeFrom.SPEC_ATTRIBUTES)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range relation_group_typeFrom.ALTERNATIVE_ID {
-		relation_group_typeTo.ALTERNATIVE_ID = append(relation_group_typeTo.ALTERNATIVE_ID, CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, _a_alternative_id))
-	}
-	for _, _a_spec_attributes := range relation_group_typeFrom.SPEC_ATTRIBUTES {
-		relation_group_typeTo.SPEC_ATTRIBUTES = append(relation_group_typeTo.SPEC_ATTRIBUTES, CopyBranchA_SPEC_ATTRIBUTES(mapOrigCopy, _a_spec_attributes))
-	}
 
 	return
 }
@@ -4752,17 +4752,17 @@ func CopyBranchREQ_IF(mapOrigCopy map[any]any, req_ifFrom *REQ_IF) (req_ifTo *RE
 	req_ifFrom.CopyBasicFields(req_ifTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if req_ifFrom.THE_HEADER != nil {
+		req_ifTo.THE_HEADER = CopyBranchA_THE_HEADER(mapOrigCopy, req_ifFrom.THE_HEADER)
+	}
+	if req_ifFrom.CORE_CONTENT != nil {
+		req_ifTo.CORE_CONTENT = CopyBranchA_CORE_CONTENT(mapOrigCopy, req_ifFrom.CORE_CONTENT)
+	}
+	if req_ifFrom.TOOL_EXTENSIONS != nil {
+		req_ifTo.TOOL_EXTENSIONS = CopyBranchA_TOOL_EXTENSIONS(mapOrigCopy, req_ifFrom.TOOL_EXTENSIONS)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_the_header := range req_ifFrom.THE_HEADER {
-		req_ifTo.THE_HEADER = append(req_ifTo.THE_HEADER, CopyBranchA_THE_HEADER(mapOrigCopy, _a_the_header))
-	}
-	for _, _a_core_content := range req_ifFrom.CORE_CONTENT {
-		req_ifTo.CORE_CONTENT = append(req_ifTo.CORE_CONTENT, CopyBranchA_CORE_CONTENT(mapOrigCopy, _a_core_content))
-	}
-	for _, _a_tool_extensions := range req_ifFrom.TOOL_EXTENSIONS {
-		req_ifTo.TOOL_EXTENSIONS = append(req_ifTo.TOOL_EXTENSIONS, CopyBranchA_TOOL_EXTENSIONS(mapOrigCopy, _a_tool_extensions))
-	}
 
 	return
 }
@@ -4780,26 +4780,26 @@ func CopyBranchREQ_IF_CONTENT(mapOrigCopy map[any]any, req_if_contentFrom *REQ_I
 	req_if_contentFrom.CopyBasicFields(req_if_contentTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if req_if_contentFrom.DATATYPES != nil {
+		req_if_contentTo.DATATYPES = CopyBranchA_DATATYPES(mapOrigCopy, req_if_contentFrom.DATATYPES)
+	}
+	if req_if_contentFrom.SPEC_TYPES != nil {
+		req_if_contentTo.SPEC_TYPES = CopyBranchA_SPEC_TYPES(mapOrigCopy, req_if_contentFrom.SPEC_TYPES)
+	}
+	if req_if_contentFrom.SPEC_OBJECTS != nil {
+		req_if_contentTo.SPEC_OBJECTS = CopyBranchA_SPEC_OBJECTS(mapOrigCopy, req_if_contentFrom.SPEC_OBJECTS)
+	}
+	if req_if_contentFrom.SPEC_RELATIONS != nil {
+		req_if_contentTo.SPEC_RELATIONS = CopyBranchA_SPEC_RELATIONS(mapOrigCopy, req_if_contentFrom.SPEC_RELATIONS)
+	}
+	if req_if_contentFrom.SPECIFICATIONS != nil {
+		req_if_contentTo.SPECIFICATIONS = CopyBranchA_SPECIFICATIONS(mapOrigCopy, req_if_contentFrom.SPECIFICATIONS)
+	}
+	if req_if_contentFrom.SPEC_RELATION_GROUPS != nil {
+		req_if_contentTo.SPEC_RELATION_GROUPS = CopyBranchA_SPEC_RELATION_GROUPS(mapOrigCopy, req_if_contentFrom.SPEC_RELATION_GROUPS)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_datatypes := range req_if_contentFrom.DATATYPES {
-		req_if_contentTo.DATATYPES = append(req_if_contentTo.DATATYPES, CopyBranchA_DATATYPES(mapOrigCopy, _a_datatypes))
-	}
-	for _, _a_spec_types := range req_if_contentFrom.SPEC_TYPES {
-		req_if_contentTo.SPEC_TYPES = append(req_if_contentTo.SPEC_TYPES, CopyBranchA_SPEC_TYPES(mapOrigCopy, _a_spec_types))
-	}
-	for _, _a_spec_objects := range req_if_contentFrom.SPEC_OBJECTS {
-		req_if_contentTo.SPEC_OBJECTS = append(req_if_contentTo.SPEC_OBJECTS, CopyBranchA_SPEC_OBJECTS(mapOrigCopy, _a_spec_objects))
-	}
-	for _, _a_spec_relations := range req_if_contentFrom.SPEC_RELATIONS {
-		req_if_contentTo.SPEC_RELATIONS = append(req_if_contentTo.SPEC_RELATIONS, CopyBranchA_SPEC_RELATIONS(mapOrigCopy, _a_spec_relations))
-	}
-	for _, _a_specifications := range req_if_contentFrom.SPECIFICATIONS {
-		req_if_contentTo.SPECIFICATIONS = append(req_if_contentTo.SPECIFICATIONS, CopyBranchA_SPECIFICATIONS(mapOrigCopy, _a_specifications))
-	}
-	for _, _a_spec_relation_groups := range req_if_contentFrom.SPEC_RELATION_GROUPS {
-		req_if_contentTo.SPEC_RELATION_GROUPS = append(req_if_contentTo.SPEC_RELATION_GROUPS, CopyBranchA_SPEC_RELATION_GROUPS(mapOrigCopy, _a_spec_relation_groups))
-	}
 
 	return
 }
@@ -4855,20 +4855,20 @@ func CopyBranchSPECIFICATION(mapOrigCopy map[any]any, specificationFrom *SPECIFI
 	specificationFrom.CopyBasicFields(specificationTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if specificationFrom.ALTERNATIVE_ID != nil {
+		specificationTo.ALTERNATIVE_ID = CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, specificationFrom.ALTERNATIVE_ID)
+	}
+	if specificationFrom.CHILDREN != nil {
+		specificationTo.CHILDREN = CopyBranchA_CHILDREN(mapOrigCopy, specificationFrom.CHILDREN)
+	}
+	if specificationFrom.VALUES != nil {
+		specificationTo.VALUES = CopyBranchA_ATTRIBUTE_VALUE_XHTML_1(mapOrigCopy, specificationFrom.VALUES)
+	}
+	if specificationFrom.TYPE != nil {
+		specificationTo.TYPE = CopyBranchA_SPECIFICATION_TYPE_REF(mapOrigCopy, specificationFrom.TYPE)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range specificationFrom.ALTERNATIVE_ID {
-		specificationTo.ALTERNATIVE_ID = append(specificationTo.ALTERNATIVE_ID, CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, _a_alternative_id))
-	}
-	for _, _a_children := range specificationFrom.CHILDREN {
-		specificationTo.CHILDREN = append(specificationTo.CHILDREN, CopyBranchA_CHILDREN(mapOrigCopy, _a_children))
-	}
-	for _, _a_attribute_value_xhtml_1 := range specificationFrom.VALUES {
-		specificationTo.VALUES = append(specificationTo.VALUES, CopyBranchA_ATTRIBUTE_VALUE_XHTML_1(mapOrigCopy, _a_attribute_value_xhtml_1))
-	}
-	for _, _a_specification_type_ref := range specificationFrom.TYPE {
-		specificationTo.TYPE = append(specificationTo.TYPE, CopyBranchA_SPECIFICATION_TYPE_REF(mapOrigCopy, _a_specification_type_ref))
-	}
 
 	return
 }
@@ -4886,14 +4886,14 @@ func CopyBranchSPECIFICATION_TYPE(mapOrigCopy map[any]any, specification_typeFro
 	specification_typeFrom.CopyBasicFields(specification_typeTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if specification_typeFrom.ALTERNATIVE_ID != nil {
+		specification_typeTo.ALTERNATIVE_ID = CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, specification_typeFrom.ALTERNATIVE_ID)
+	}
+	if specification_typeFrom.SPEC_ATTRIBUTES != nil {
+		specification_typeTo.SPEC_ATTRIBUTES = CopyBranchA_SPEC_ATTRIBUTES(mapOrigCopy, specification_typeFrom.SPEC_ATTRIBUTES)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range specification_typeFrom.ALTERNATIVE_ID {
-		specification_typeTo.ALTERNATIVE_ID = append(specification_typeTo.ALTERNATIVE_ID, CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, _a_alternative_id))
-	}
-	for _, _a_spec_attributes := range specification_typeFrom.SPEC_ATTRIBUTES {
-		specification_typeTo.SPEC_ATTRIBUTES = append(specification_typeTo.SPEC_ATTRIBUTES, CopyBranchA_SPEC_ATTRIBUTES(mapOrigCopy, _a_spec_attributes))
-	}
 
 	return
 }
@@ -4911,20 +4911,20 @@ func CopyBranchSPEC_HIERARCHY(mapOrigCopy map[any]any, spec_hierarchyFrom *SPEC_
 	spec_hierarchyFrom.CopyBasicFields(spec_hierarchyTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if spec_hierarchyFrom.ALTERNATIVE_ID != nil {
+		spec_hierarchyTo.ALTERNATIVE_ID = CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, spec_hierarchyFrom.ALTERNATIVE_ID)
+	}
+	if spec_hierarchyFrom.CHILDREN != nil {
+		spec_hierarchyTo.CHILDREN = CopyBranchA_CHILDREN(mapOrigCopy, spec_hierarchyFrom.CHILDREN)
+	}
+	if spec_hierarchyFrom.EDITABLE_ATTS != nil {
+		spec_hierarchyTo.EDITABLE_ATTS = CopyBranchA_EDITABLE_ATTS(mapOrigCopy, spec_hierarchyFrom.EDITABLE_ATTS)
+	}
+	if spec_hierarchyFrom.OBJECT != nil {
+		spec_hierarchyTo.OBJECT = CopyBranchA_OBJECT(mapOrigCopy, spec_hierarchyFrom.OBJECT)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range spec_hierarchyFrom.ALTERNATIVE_ID {
-		spec_hierarchyTo.ALTERNATIVE_ID = append(spec_hierarchyTo.ALTERNATIVE_ID, CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, _a_alternative_id))
-	}
-	for _, _a_children := range spec_hierarchyFrom.CHILDREN {
-		spec_hierarchyTo.CHILDREN = append(spec_hierarchyTo.CHILDREN, CopyBranchA_CHILDREN(mapOrigCopy, _a_children))
-	}
-	for _, _a_editable_atts := range spec_hierarchyFrom.EDITABLE_ATTS {
-		spec_hierarchyTo.EDITABLE_ATTS = append(spec_hierarchyTo.EDITABLE_ATTS, CopyBranchA_EDITABLE_ATTS(mapOrigCopy, _a_editable_atts))
-	}
-	for _, _a_object := range spec_hierarchyFrom.OBJECT {
-		spec_hierarchyTo.OBJECT = append(spec_hierarchyTo.OBJECT, CopyBranchA_OBJECT(mapOrigCopy, _a_object))
-	}
 
 	return
 }
@@ -4942,17 +4942,17 @@ func CopyBranchSPEC_OBJECT(mapOrigCopy map[any]any, spec_objectFrom *SPEC_OBJECT
 	spec_objectFrom.CopyBasicFields(spec_objectTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if spec_objectFrom.ALTERNATIVE_ID != nil {
+		spec_objectTo.ALTERNATIVE_ID = CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, spec_objectFrom.ALTERNATIVE_ID)
+	}
+	if spec_objectFrom.VALUES != nil {
+		spec_objectTo.VALUES = CopyBranchA_ATTRIBUTE_VALUE_XHTML_1(mapOrigCopy, spec_objectFrom.VALUES)
+	}
+	if spec_objectFrom.TYPE != nil {
+		spec_objectTo.TYPE = CopyBranchA_SPEC_OBJECT_TYPE_REF(mapOrigCopy, spec_objectFrom.TYPE)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range spec_objectFrom.ALTERNATIVE_ID {
-		spec_objectTo.ALTERNATIVE_ID = append(spec_objectTo.ALTERNATIVE_ID, CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, _a_alternative_id))
-	}
-	for _, _a_attribute_value_xhtml_1 := range spec_objectFrom.VALUES {
-		spec_objectTo.VALUES = append(spec_objectTo.VALUES, CopyBranchA_ATTRIBUTE_VALUE_XHTML_1(mapOrigCopy, _a_attribute_value_xhtml_1))
-	}
-	for _, _a_spec_object_type_ref := range spec_objectFrom.TYPE {
-		spec_objectTo.TYPE = append(spec_objectTo.TYPE, CopyBranchA_SPEC_OBJECT_TYPE_REF(mapOrigCopy, _a_spec_object_type_ref))
-	}
 
 	return
 }
@@ -4970,14 +4970,14 @@ func CopyBranchSPEC_OBJECT_TYPE(mapOrigCopy map[any]any, spec_object_typeFrom *S
 	spec_object_typeFrom.CopyBasicFields(spec_object_typeTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if spec_object_typeFrom.ALTERNATIVE_ID != nil {
+		spec_object_typeTo.ALTERNATIVE_ID = CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, spec_object_typeFrom.ALTERNATIVE_ID)
+	}
+	if spec_object_typeFrom.SPEC_ATTRIBUTES != nil {
+		spec_object_typeTo.SPEC_ATTRIBUTES = CopyBranchA_SPEC_ATTRIBUTES(mapOrigCopy, spec_object_typeFrom.SPEC_ATTRIBUTES)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range spec_object_typeFrom.ALTERNATIVE_ID {
-		spec_object_typeTo.ALTERNATIVE_ID = append(spec_object_typeTo.ALTERNATIVE_ID, CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, _a_alternative_id))
-	}
-	for _, _a_spec_attributes := range spec_object_typeFrom.SPEC_ATTRIBUTES {
-		spec_object_typeTo.SPEC_ATTRIBUTES = append(spec_object_typeTo.SPEC_ATTRIBUTES, CopyBranchA_SPEC_ATTRIBUTES(mapOrigCopy, _a_spec_attributes))
-	}
 
 	return
 }
@@ -4995,23 +4995,23 @@ func CopyBranchSPEC_RELATION(mapOrigCopy map[any]any, spec_relationFrom *SPEC_RE
 	spec_relationFrom.CopyBasicFields(spec_relationTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if spec_relationFrom.ALTERNATIVE_ID != nil {
+		spec_relationTo.ALTERNATIVE_ID = CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, spec_relationFrom.ALTERNATIVE_ID)
+	}
+	if spec_relationFrom.VALUES != nil {
+		spec_relationTo.VALUES = CopyBranchA_ATTRIBUTE_VALUE_XHTML_1(mapOrigCopy, spec_relationFrom.VALUES)
+	}
+	if spec_relationFrom.SOURCE != nil {
+		spec_relationTo.SOURCE = CopyBranchA_TARGET_1(mapOrigCopy, spec_relationFrom.SOURCE)
+	}
+	if spec_relationFrom.TARGET != nil {
+		spec_relationTo.TARGET = CopyBranchA_TARGET_1(mapOrigCopy, spec_relationFrom.TARGET)
+	}
+	if spec_relationFrom.TYPE != nil {
+		spec_relationTo.TYPE = CopyBranchA_SPEC_RELATION_TYPE_REF(mapOrigCopy, spec_relationFrom.TYPE)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range spec_relationFrom.ALTERNATIVE_ID {
-		spec_relationTo.ALTERNATIVE_ID = append(spec_relationTo.ALTERNATIVE_ID, CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, _a_alternative_id))
-	}
-	for _, _a_attribute_value_xhtml_1 := range spec_relationFrom.VALUES {
-		spec_relationTo.VALUES = append(spec_relationTo.VALUES, CopyBranchA_ATTRIBUTE_VALUE_XHTML_1(mapOrigCopy, _a_attribute_value_xhtml_1))
-	}
-	for _, _a_target_1 := range spec_relationFrom.SOURCE {
-		spec_relationTo.SOURCE = append(spec_relationTo.SOURCE, CopyBranchA_TARGET_1(mapOrigCopy, _a_target_1))
-	}
-	for _, _a_target_1 := range spec_relationFrom.TARGET {
-		spec_relationTo.TARGET = append(spec_relationTo.TARGET, CopyBranchA_TARGET_1(mapOrigCopy, _a_target_1))
-	}
-	for _, _a_spec_relation_type_ref := range spec_relationFrom.TYPE {
-		spec_relationTo.TYPE = append(spec_relationTo.TYPE, CopyBranchA_SPEC_RELATION_TYPE_REF(mapOrigCopy, _a_spec_relation_type_ref))
-	}
 
 	return
 }
@@ -5029,14 +5029,14 @@ func CopyBranchSPEC_RELATION_TYPE(mapOrigCopy map[any]any, spec_relation_typeFro
 	spec_relation_typeFrom.CopyBasicFields(spec_relation_typeTo)
 
 	//insertion point for the staging of instances referenced by pointers
+	if spec_relation_typeFrom.ALTERNATIVE_ID != nil {
+		spec_relation_typeTo.ALTERNATIVE_ID = CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, spec_relation_typeFrom.ALTERNATIVE_ID)
+	}
+	if spec_relation_typeFrom.SPEC_ATTRIBUTES != nil {
+		spec_relation_typeTo.SPEC_ATTRIBUTES = CopyBranchA_SPEC_ATTRIBUTES(mapOrigCopy, spec_relation_typeFrom.SPEC_ATTRIBUTES)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range spec_relation_typeFrom.ALTERNATIVE_ID {
-		spec_relation_typeTo.ALTERNATIVE_ID = append(spec_relation_typeTo.ALTERNATIVE_ID, CopyBranchA_ALTERNATIVE_ID(mapOrigCopy, _a_alternative_id))
-	}
-	for _, _a_spec_attributes := range spec_relation_typeFrom.SPEC_ATTRIBUTES {
-		spec_relation_typeTo.SPEC_ATTRIBUTES = append(spec_relation_typeTo.SPEC_ATTRIBUTES, CopyBranchA_SPEC_ATTRIBUTES(mapOrigCopy, _a_spec_attributes))
-	}
 
 	return
 }
@@ -5206,6 +5206,9 @@ func UnstageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 	case *A_RELATION_GROUP_TYPE_REF:
 		stage.UnstageBranchA_RELATION_GROUP_TYPE_REF(target)
 
+	case *A_SOURCE_SPECIFICATION_1:
+		stage.UnstageBranchA_SOURCE_SPECIFICATION_1(target)
+
 	case *A_SPECIFICATIONS:
 		stage.UnstageBranchA_SPECIFICATIONS(target)
 
@@ -5241,9 +5244,6 @@ func UnstageBranch[Type Gongstruct](stage *StageStruct, instance *Type) {
 
 	case *A_TARGET_1:
 		stage.UnstageBranchA_TARGET_1(target)
-
-	case *A_TARGET_SPECIFICATION_1:
-		stage.UnstageBranchA_TARGET_SPECIFICATION_1(target)
 
 	case *A_THE_HEADER:
 		stage.UnstageBranchA_THE_HEADER(target)
@@ -5351,17 +5351,17 @@ func (stage *StageStruct) UnstageBranchATTRIBUTE_DEFINITION_BOOLEAN(attribute_de
 	attribute_definition_boolean.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if attribute_definition_boolean.ALTERNATIVE_ID != nil {
+		UnstageBranch(stage, attribute_definition_boolean.ALTERNATIVE_ID)
+	}
+	if attribute_definition_boolean.DEFAULT_VALUE != nil {
+		UnstageBranch(stage, attribute_definition_boolean.DEFAULT_VALUE)
+	}
+	if attribute_definition_boolean.TYPE != nil {
+		UnstageBranch(stage, attribute_definition_boolean.TYPE)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range attribute_definition_boolean.ALTERNATIVE_ID {
-		UnstageBranch(stage, _a_alternative_id)
-	}
-	for _, _a_attribute_value_boolean := range attribute_definition_boolean.DEFAULT_VALUE {
-		UnstageBranch(stage, _a_attribute_value_boolean)
-	}
-	for _, _a_datatype_definition_boolean_ref := range attribute_definition_boolean.TYPE {
-		UnstageBranch(stage, _a_datatype_definition_boolean_ref)
-	}
 
 }
 
@@ -5375,17 +5375,17 @@ func (stage *StageStruct) UnstageBranchATTRIBUTE_DEFINITION_DATE(attribute_defin
 	attribute_definition_date.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if attribute_definition_date.ALTERNATIVE_ID != nil {
+		UnstageBranch(stage, attribute_definition_date.ALTERNATIVE_ID)
+	}
+	if attribute_definition_date.DEFAULT_VALUE != nil {
+		UnstageBranch(stage, attribute_definition_date.DEFAULT_VALUE)
+	}
+	if attribute_definition_date.TYPE != nil {
+		UnstageBranch(stage, attribute_definition_date.TYPE)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range attribute_definition_date.ALTERNATIVE_ID {
-		UnstageBranch(stage, _a_alternative_id)
-	}
-	for _, _a_attribute_value_date := range attribute_definition_date.DEFAULT_VALUE {
-		UnstageBranch(stage, _a_attribute_value_date)
-	}
-	for _, _a_datatype_definition_date_ref := range attribute_definition_date.TYPE {
-		UnstageBranch(stage, _a_datatype_definition_date_ref)
-	}
 
 }
 
@@ -5399,17 +5399,17 @@ func (stage *StageStruct) UnstageBranchATTRIBUTE_DEFINITION_ENUMERATION(attribut
 	attribute_definition_enumeration.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if attribute_definition_enumeration.ALTERNATIVE_ID != nil {
+		UnstageBranch(stage, attribute_definition_enumeration.ALTERNATIVE_ID)
+	}
+	if attribute_definition_enumeration.DEFAULT_VALUE != nil {
+		UnstageBranch(stage, attribute_definition_enumeration.DEFAULT_VALUE)
+	}
+	if attribute_definition_enumeration.TYPE != nil {
+		UnstageBranch(stage, attribute_definition_enumeration.TYPE)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range attribute_definition_enumeration.ALTERNATIVE_ID {
-		UnstageBranch(stage, _a_alternative_id)
-	}
-	for _, _a_attribute_value_enumeration := range attribute_definition_enumeration.DEFAULT_VALUE {
-		UnstageBranch(stage, _a_attribute_value_enumeration)
-	}
-	for _, _a_datatype_definition_enumeration_ref := range attribute_definition_enumeration.TYPE {
-		UnstageBranch(stage, _a_datatype_definition_enumeration_ref)
-	}
 
 }
 
@@ -5423,17 +5423,17 @@ func (stage *StageStruct) UnstageBranchATTRIBUTE_DEFINITION_INTEGER(attribute_de
 	attribute_definition_integer.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if attribute_definition_integer.ALTERNATIVE_ID != nil {
+		UnstageBranch(stage, attribute_definition_integer.ALTERNATIVE_ID)
+	}
+	if attribute_definition_integer.DEFAULT_VALUE != nil {
+		UnstageBranch(stage, attribute_definition_integer.DEFAULT_VALUE)
+	}
+	if attribute_definition_integer.TYPE != nil {
+		UnstageBranch(stage, attribute_definition_integer.TYPE)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range attribute_definition_integer.ALTERNATIVE_ID {
-		UnstageBranch(stage, _a_alternative_id)
-	}
-	for _, _a_attribute_value_integer := range attribute_definition_integer.DEFAULT_VALUE {
-		UnstageBranch(stage, _a_attribute_value_integer)
-	}
-	for _, _a_datatype_definition_integer_ref := range attribute_definition_integer.TYPE {
-		UnstageBranch(stage, _a_datatype_definition_integer_ref)
-	}
 
 }
 
@@ -5447,17 +5447,17 @@ func (stage *StageStruct) UnstageBranchATTRIBUTE_DEFINITION_REAL(attribute_defin
 	attribute_definition_real.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if attribute_definition_real.ALTERNATIVE_ID != nil {
+		UnstageBranch(stage, attribute_definition_real.ALTERNATIVE_ID)
+	}
+	if attribute_definition_real.DEFAULT_VALUE != nil {
+		UnstageBranch(stage, attribute_definition_real.DEFAULT_VALUE)
+	}
+	if attribute_definition_real.TYPE != nil {
+		UnstageBranch(stage, attribute_definition_real.TYPE)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range attribute_definition_real.ALTERNATIVE_ID {
-		UnstageBranch(stage, _a_alternative_id)
-	}
-	for _, _a_attribute_value_real := range attribute_definition_real.DEFAULT_VALUE {
-		UnstageBranch(stage, _a_attribute_value_real)
-	}
-	for _, _a_datatype_definition_real_ref := range attribute_definition_real.TYPE {
-		UnstageBranch(stage, _a_datatype_definition_real_ref)
-	}
 
 }
 
@@ -5471,17 +5471,17 @@ func (stage *StageStruct) UnstageBranchATTRIBUTE_DEFINITION_STRING(attribute_def
 	attribute_definition_string.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if attribute_definition_string.ALTERNATIVE_ID != nil {
+		UnstageBranch(stage, attribute_definition_string.ALTERNATIVE_ID)
+	}
+	if attribute_definition_string.DEFAULT_VALUE != nil {
+		UnstageBranch(stage, attribute_definition_string.DEFAULT_VALUE)
+	}
+	if attribute_definition_string.TYPE != nil {
+		UnstageBranch(stage, attribute_definition_string.TYPE)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range attribute_definition_string.ALTERNATIVE_ID {
-		UnstageBranch(stage, _a_alternative_id)
-	}
-	for _, _a_attribute_value_string := range attribute_definition_string.DEFAULT_VALUE {
-		UnstageBranch(stage, _a_attribute_value_string)
-	}
-	for _, _a_datatype_definition_string_ref := range attribute_definition_string.TYPE {
-		UnstageBranch(stage, _a_datatype_definition_string_ref)
-	}
 
 }
 
@@ -5495,17 +5495,17 @@ func (stage *StageStruct) UnstageBranchATTRIBUTE_DEFINITION_XHTML(attribute_defi
 	attribute_definition_xhtml.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if attribute_definition_xhtml.ALTERNATIVE_ID != nil {
+		UnstageBranch(stage, attribute_definition_xhtml.ALTERNATIVE_ID)
+	}
+	if attribute_definition_xhtml.DEFAULT_VALUE != nil {
+		UnstageBranch(stage, attribute_definition_xhtml.DEFAULT_VALUE)
+	}
+	if attribute_definition_xhtml.TYPE != nil {
+		UnstageBranch(stage, attribute_definition_xhtml.TYPE)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range attribute_definition_xhtml.ALTERNATIVE_ID {
-		UnstageBranch(stage, _a_alternative_id)
-	}
-	for _, _a_attribute_value_xhtml := range attribute_definition_xhtml.DEFAULT_VALUE {
-		UnstageBranch(stage, _a_attribute_value_xhtml)
-	}
-	for _, _a_datatype_definition_xhtml_ref := range attribute_definition_xhtml.TYPE {
-		UnstageBranch(stage, _a_datatype_definition_xhtml_ref)
-	}
 
 }
 
@@ -5519,11 +5519,11 @@ func (stage *StageStruct) UnstageBranchATTRIBUTE_VALUE_BOOLEAN(attribute_value_b
 	attribute_value_boolean.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if attribute_value_boolean.DEFINITION != nil {
+		UnstageBranch(stage, attribute_value_boolean.DEFINITION)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_attribute_definition_boolean_ref := range attribute_value_boolean.DEFINITION {
-		UnstageBranch(stage, _a_attribute_definition_boolean_ref)
-	}
 
 }
 
@@ -5537,11 +5537,11 @@ func (stage *StageStruct) UnstageBranchATTRIBUTE_VALUE_DATE(attribute_value_date
 	attribute_value_date.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if attribute_value_date.DEFINITION != nil {
+		UnstageBranch(stage, attribute_value_date.DEFINITION)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_attribute_definition_date_ref := range attribute_value_date.DEFINITION {
-		UnstageBranch(stage, _a_attribute_definition_date_ref)
-	}
 
 }
 
@@ -5555,14 +5555,14 @@ func (stage *StageStruct) UnstageBranchATTRIBUTE_VALUE_ENUMERATION(attribute_val
 	attribute_value_enumeration.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if attribute_value_enumeration.DEFINITION != nil {
+		UnstageBranch(stage, attribute_value_enumeration.DEFINITION)
+	}
+	if attribute_value_enumeration.VALUES != nil {
+		UnstageBranch(stage, attribute_value_enumeration.VALUES)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_attribute_definition_enumeration_ref := range attribute_value_enumeration.DEFINITION {
-		UnstageBranch(stage, _a_attribute_definition_enumeration_ref)
-	}
-	for _, _a_enum_value_ref := range attribute_value_enumeration.VALUES {
-		UnstageBranch(stage, _a_enum_value_ref)
-	}
 
 }
 
@@ -5576,11 +5576,11 @@ func (stage *StageStruct) UnstageBranchATTRIBUTE_VALUE_INTEGER(attribute_value_i
 	attribute_value_integer.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if attribute_value_integer.DEFINITION != nil {
+		UnstageBranch(stage, attribute_value_integer.DEFINITION)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_attribute_definition_integer_ref := range attribute_value_integer.DEFINITION {
-		UnstageBranch(stage, _a_attribute_definition_integer_ref)
-	}
 
 }
 
@@ -5594,11 +5594,11 @@ func (stage *StageStruct) UnstageBranchATTRIBUTE_VALUE_REAL(attribute_value_real
 	attribute_value_real.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if attribute_value_real.DEFINITION != nil {
+		UnstageBranch(stage, attribute_value_real.DEFINITION)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_attribute_definition_real_ref := range attribute_value_real.DEFINITION {
-		UnstageBranch(stage, _a_attribute_definition_real_ref)
-	}
 
 }
 
@@ -5612,11 +5612,11 @@ func (stage *StageStruct) UnstageBranchATTRIBUTE_VALUE_STRING(attribute_value_st
 	attribute_value_string.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if attribute_value_string.DEFINITION != nil {
+		UnstageBranch(stage, attribute_value_string.DEFINITION)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_attribute_definition_string_ref := range attribute_value_string.DEFINITION {
-		UnstageBranch(stage, _a_attribute_definition_string_ref)
-	}
 
 }
 
@@ -5630,17 +5630,17 @@ func (stage *StageStruct) UnstageBranchATTRIBUTE_VALUE_XHTML(attribute_value_xht
 	attribute_value_xhtml.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if attribute_value_xhtml.THE_VALUE != nil {
+		UnstageBranch(stage, attribute_value_xhtml.THE_VALUE)
+	}
+	if attribute_value_xhtml.THE_ORIGINAL_VALUE != nil {
+		UnstageBranch(stage, attribute_value_xhtml.THE_ORIGINAL_VALUE)
+	}
+	if attribute_value_xhtml.DEFINITION != nil {
+		UnstageBranch(stage, attribute_value_xhtml.DEFINITION)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _xhtml_content := range attribute_value_xhtml.THE_VALUE {
-		UnstageBranch(stage, _xhtml_content)
-	}
-	for _, _xhtml_content := range attribute_value_xhtml.THE_ORIGINAL_VALUE {
-		UnstageBranch(stage, _xhtml_content)
-	}
-	for _, _a_attribute_definition_xhtml_ref := range attribute_value_xhtml.DEFINITION {
-		UnstageBranch(stage, _a_attribute_definition_xhtml_ref)
-	}
 
 }
 
@@ -6184,6 +6184,21 @@ func (stage *StageStruct) UnstageBranchA_RELATION_GROUP_TYPE_REF(a_relation_grou
 
 }
 
+func (stage *StageStruct) UnstageBranchA_SOURCE_SPECIFICATION_1(a_source_specification_1 *A_SOURCE_SPECIFICATION_1) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, a_source_specification_1) {
+		return
+	}
+
+	a_source_specification_1.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
 func (stage *StageStruct) UnstageBranchA_SPECIFICATIONS(a_specifications *A_SPECIFICATIONS) {
 
 	// check if instance is already staged
@@ -6412,21 +6427,6 @@ func (stage *StageStruct) UnstageBranchA_TARGET_1(a_target_1 *A_TARGET_1) {
 
 }
 
-func (stage *StageStruct) UnstageBranchA_TARGET_SPECIFICATION_1(a_target_specification_1 *A_TARGET_SPECIFICATION_1) {
-
-	// check if instance is already staged
-	if !IsStaged(stage, a_target_specification_1) {
-		return
-	}
-
-	a_target_specification_1.Unstage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-
-}
-
 func (stage *StageStruct) UnstageBranchA_THE_HEADER(a_the_header *A_THE_HEADER) {
 
 	// check if instance is already staged
@@ -6473,11 +6473,11 @@ func (stage *StageStruct) UnstageBranchDATATYPE_DEFINITION_BOOLEAN(datatype_defi
 	datatype_definition_boolean.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if datatype_definition_boolean.ALTERNATIVE_ID != nil {
+		UnstageBranch(stage, datatype_definition_boolean.ALTERNATIVE_ID)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range datatype_definition_boolean.ALTERNATIVE_ID {
-		UnstageBranch(stage, _a_alternative_id)
-	}
 
 }
 
@@ -6491,11 +6491,11 @@ func (stage *StageStruct) UnstageBranchDATATYPE_DEFINITION_DATE(datatype_definit
 	datatype_definition_date.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if datatype_definition_date.ALTERNATIVE_ID != nil {
+		UnstageBranch(stage, datatype_definition_date.ALTERNATIVE_ID)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range datatype_definition_date.ALTERNATIVE_ID {
-		UnstageBranch(stage, _a_alternative_id)
-	}
 
 }
 
@@ -6509,14 +6509,14 @@ func (stage *StageStruct) UnstageBranchDATATYPE_DEFINITION_ENUMERATION(datatype_
 	datatype_definition_enumeration.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if datatype_definition_enumeration.ALTERNATIVE_ID != nil {
+		UnstageBranch(stage, datatype_definition_enumeration.ALTERNATIVE_ID)
+	}
+	if datatype_definition_enumeration.SPECIFIED_VALUES != nil {
+		UnstageBranch(stage, datatype_definition_enumeration.SPECIFIED_VALUES)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range datatype_definition_enumeration.ALTERNATIVE_ID {
-		UnstageBranch(stage, _a_alternative_id)
-	}
-	for _, _a_specified_values := range datatype_definition_enumeration.SPECIFIED_VALUES {
-		UnstageBranch(stage, _a_specified_values)
-	}
 
 }
 
@@ -6530,11 +6530,11 @@ func (stage *StageStruct) UnstageBranchDATATYPE_DEFINITION_INTEGER(datatype_defi
 	datatype_definition_integer.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if datatype_definition_integer.ALTERNATIVE_ID != nil {
+		UnstageBranch(stage, datatype_definition_integer.ALTERNATIVE_ID)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range datatype_definition_integer.ALTERNATIVE_ID {
-		UnstageBranch(stage, _a_alternative_id)
-	}
 
 }
 
@@ -6548,11 +6548,11 @@ func (stage *StageStruct) UnstageBranchDATATYPE_DEFINITION_REAL(datatype_definit
 	datatype_definition_real.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if datatype_definition_real.ALTERNATIVE_ID != nil {
+		UnstageBranch(stage, datatype_definition_real.ALTERNATIVE_ID)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range datatype_definition_real.ALTERNATIVE_ID {
-		UnstageBranch(stage, _a_alternative_id)
-	}
 
 }
 
@@ -6566,11 +6566,11 @@ func (stage *StageStruct) UnstageBranchDATATYPE_DEFINITION_STRING(datatype_defin
 	datatype_definition_string.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if datatype_definition_string.ALTERNATIVE_ID != nil {
+		UnstageBranch(stage, datatype_definition_string.ALTERNATIVE_ID)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range datatype_definition_string.ALTERNATIVE_ID {
-		UnstageBranch(stage, _a_alternative_id)
-	}
 
 }
 
@@ -6584,11 +6584,11 @@ func (stage *StageStruct) UnstageBranchDATATYPE_DEFINITION_XHTML(datatype_defini
 	datatype_definition_xhtml.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if datatype_definition_xhtml.ALTERNATIVE_ID != nil {
+		UnstageBranch(stage, datatype_definition_xhtml.ALTERNATIVE_ID)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range datatype_definition_xhtml.ALTERNATIVE_ID {
-		UnstageBranch(stage, _a_alternative_id)
-	}
 
 }
 
@@ -6617,14 +6617,14 @@ func (stage *StageStruct) UnstageBranchENUM_VALUE(enum_value *ENUM_VALUE) {
 	enum_value.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if enum_value.ALTERNATIVE_ID != nil {
+		UnstageBranch(stage, enum_value.ALTERNATIVE_ID)
+	}
+	if enum_value.PROPERTIES != nil {
+		UnstageBranch(stage, enum_value.PROPERTIES)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range enum_value.ALTERNATIVE_ID {
-		UnstageBranch(stage, _a_alternative_id)
-	}
-	for _, _a_properties := range enum_value.PROPERTIES {
-		UnstageBranch(stage, _a_properties)
-	}
 
 }
 
@@ -6638,23 +6638,23 @@ func (stage *StageStruct) UnstageBranchRELATION_GROUP(relation_group *RELATION_G
 	relation_group.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if relation_group.ALTERNATIVE_ID != nil {
+		UnstageBranch(stage, relation_group.ALTERNATIVE_ID)
+	}
+	if relation_group.SOURCE_SPECIFICATION != nil {
+		UnstageBranch(stage, relation_group.SOURCE_SPECIFICATION)
+	}
+	if relation_group.SPEC_RELATIONS != nil {
+		UnstageBranch(stage, relation_group.SPEC_RELATIONS)
+	}
+	if relation_group.TARGET_SPECIFICATION != nil {
+		UnstageBranch(stage, relation_group.TARGET_SPECIFICATION)
+	}
+	if relation_group.TYPE != nil {
+		UnstageBranch(stage, relation_group.TYPE)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range relation_group.ALTERNATIVE_ID {
-		UnstageBranch(stage, _a_alternative_id)
-	}
-	for _, _a_target_specification_1 := range relation_group.SOURCE_SPECIFICATION {
-		UnstageBranch(stage, _a_target_specification_1)
-	}
-	for _, _a_spec_relation_ref := range relation_group.SPEC_RELATIONS {
-		UnstageBranch(stage, _a_spec_relation_ref)
-	}
-	for _, _a_target_specification_1 := range relation_group.TARGET_SPECIFICATION {
-		UnstageBranch(stage, _a_target_specification_1)
-	}
-	for _, _a_relation_group_type_ref := range relation_group.TYPE {
-		UnstageBranch(stage, _a_relation_group_type_ref)
-	}
 
 }
 
@@ -6668,14 +6668,14 @@ func (stage *StageStruct) UnstageBranchRELATION_GROUP_TYPE(relation_group_type *
 	relation_group_type.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if relation_group_type.ALTERNATIVE_ID != nil {
+		UnstageBranch(stage, relation_group_type.ALTERNATIVE_ID)
+	}
+	if relation_group_type.SPEC_ATTRIBUTES != nil {
+		UnstageBranch(stage, relation_group_type.SPEC_ATTRIBUTES)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range relation_group_type.ALTERNATIVE_ID {
-		UnstageBranch(stage, _a_alternative_id)
-	}
-	for _, _a_spec_attributes := range relation_group_type.SPEC_ATTRIBUTES {
-		UnstageBranch(stage, _a_spec_attributes)
-	}
 
 }
 
@@ -6689,17 +6689,17 @@ func (stage *StageStruct) UnstageBranchREQ_IF(req_if *REQ_IF) {
 	req_if.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if req_if.THE_HEADER != nil {
+		UnstageBranch(stage, req_if.THE_HEADER)
+	}
+	if req_if.CORE_CONTENT != nil {
+		UnstageBranch(stage, req_if.CORE_CONTENT)
+	}
+	if req_if.TOOL_EXTENSIONS != nil {
+		UnstageBranch(stage, req_if.TOOL_EXTENSIONS)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_the_header := range req_if.THE_HEADER {
-		UnstageBranch(stage, _a_the_header)
-	}
-	for _, _a_core_content := range req_if.CORE_CONTENT {
-		UnstageBranch(stage, _a_core_content)
-	}
-	for _, _a_tool_extensions := range req_if.TOOL_EXTENSIONS {
-		UnstageBranch(stage, _a_tool_extensions)
-	}
 
 }
 
@@ -6713,26 +6713,26 @@ func (stage *StageStruct) UnstageBranchREQ_IF_CONTENT(req_if_content *REQ_IF_CON
 	req_if_content.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if req_if_content.DATATYPES != nil {
+		UnstageBranch(stage, req_if_content.DATATYPES)
+	}
+	if req_if_content.SPEC_TYPES != nil {
+		UnstageBranch(stage, req_if_content.SPEC_TYPES)
+	}
+	if req_if_content.SPEC_OBJECTS != nil {
+		UnstageBranch(stage, req_if_content.SPEC_OBJECTS)
+	}
+	if req_if_content.SPEC_RELATIONS != nil {
+		UnstageBranch(stage, req_if_content.SPEC_RELATIONS)
+	}
+	if req_if_content.SPECIFICATIONS != nil {
+		UnstageBranch(stage, req_if_content.SPECIFICATIONS)
+	}
+	if req_if_content.SPEC_RELATION_GROUPS != nil {
+		UnstageBranch(stage, req_if_content.SPEC_RELATION_GROUPS)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_datatypes := range req_if_content.DATATYPES {
-		UnstageBranch(stage, _a_datatypes)
-	}
-	for _, _a_spec_types := range req_if_content.SPEC_TYPES {
-		UnstageBranch(stage, _a_spec_types)
-	}
-	for _, _a_spec_objects := range req_if_content.SPEC_OBJECTS {
-		UnstageBranch(stage, _a_spec_objects)
-	}
-	for _, _a_spec_relations := range req_if_content.SPEC_RELATIONS {
-		UnstageBranch(stage, _a_spec_relations)
-	}
-	for _, _a_specifications := range req_if_content.SPECIFICATIONS {
-		UnstageBranch(stage, _a_specifications)
-	}
-	for _, _a_spec_relation_groups := range req_if_content.SPEC_RELATION_GROUPS {
-		UnstageBranch(stage, _a_spec_relation_groups)
-	}
 
 }
 
@@ -6776,20 +6776,20 @@ func (stage *StageStruct) UnstageBranchSPECIFICATION(specification *SPECIFICATIO
 	specification.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if specification.ALTERNATIVE_ID != nil {
+		UnstageBranch(stage, specification.ALTERNATIVE_ID)
+	}
+	if specification.CHILDREN != nil {
+		UnstageBranch(stage, specification.CHILDREN)
+	}
+	if specification.VALUES != nil {
+		UnstageBranch(stage, specification.VALUES)
+	}
+	if specification.TYPE != nil {
+		UnstageBranch(stage, specification.TYPE)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range specification.ALTERNATIVE_ID {
-		UnstageBranch(stage, _a_alternative_id)
-	}
-	for _, _a_children := range specification.CHILDREN {
-		UnstageBranch(stage, _a_children)
-	}
-	for _, _a_attribute_value_xhtml_1 := range specification.VALUES {
-		UnstageBranch(stage, _a_attribute_value_xhtml_1)
-	}
-	for _, _a_specification_type_ref := range specification.TYPE {
-		UnstageBranch(stage, _a_specification_type_ref)
-	}
 
 }
 
@@ -6803,14 +6803,14 @@ func (stage *StageStruct) UnstageBranchSPECIFICATION_TYPE(specification_type *SP
 	specification_type.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if specification_type.ALTERNATIVE_ID != nil {
+		UnstageBranch(stage, specification_type.ALTERNATIVE_ID)
+	}
+	if specification_type.SPEC_ATTRIBUTES != nil {
+		UnstageBranch(stage, specification_type.SPEC_ATTRIBUTES)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range specification_type.ALTERNATIVE_ID {
-		UnstageBranch(stage, _a_alternative_id)
-	}
-	for _, _a_spec_attributes := range specification_type.SPEC_ATTRIBUTES {
-		UnstageBranch(stage, _a_spec_attributes)
-	}
 
 }
 
@@ -6824,20 +6824,20 @@ func (stage *StageStruct) UnstageBranchSPEC_HIERARCHY(spec_hierarchy *SPEC_HIERA
 	spec_hierarchy.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if spec_hierarchy.ALTERNATIVE_ID != nil {
+		UnstageBranch(stage, spec_hierarchy.ALTERNATIVE_ID)
+	}
+	if spec_hierarchy.CHILDREN != nil {
+		UnstageBranch(stage, spec_hierarchy.CHILDREN)
+	}
+	if spec_hierarchy.EDITABLE_ATTS != nil {
+		UnstageBranch(stage, spec_hierarchy.EDITABLE_ATTS)
+	}
+	if spec_hierarchy.OBJECT != nil {
+		UnstageBranch(stage, spec_hierarchy.OBJECT)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range spec_hierarchy.ALTERNATIVE_ID {
-		UnstageBranch(stage, _a_alternative_id)
-	}
-	for _, _a_children := range spec_hierarchy.CHILDREN {
-		UnstageBranch(stage, _a_children)
-	}
-	for _, _a_editable_atts := range spec_hierarchy.EDITABLE_ATTS {
-		UnstageBranch(stage, _a_editable_atts)
-	}
-	for _, _a_object := range spec_hierarchy.OBJECT {
-		UnstageBranch(stage, _a_object)
-	}
 
 }
 
@@ -6851,17 +6851,17 @@ func (stage *StageStruct) UnstageBranchSPEC_OBJECT(spec_object *SPEC_OBJECT) {
 	spec_object.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if spec_object.ALTERNATIVE_ID != nil {
+		UnstageBranch(stage, spec_object.ALTERNATIVE_ID)
+	}
+	if spec_object.VALUES != nil {
+		UnstageBranch(stage, spec_object.VALUES)
+	}
+	if spec_object.TYPE != nil {
+		UnstageBranch(stage, spec_object.TYPE)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range spec_object.ALTERNATIVE_ID {
-		UnstageBranch(stage, _a_alternative_id)
-	}
-	for _, _a_attribute_value_xhtml_1 := range spec_object.VALUES {
-		UnstageBranch(stage, _a_attribute_value_xhtml_1)
-	}
-	for _, _a_spec_object_type_ref := range spec_object.TYPE {
-		UnstageBranch(stage, _a_spec_object_type_ref)
-	}
 
 }
 
@@ -6875,14 +6875,14 @@ func (stage *StageStruct) UnstageBranchSPEC_OBJECT_TYPE(spec_object_type *SPEC_O
 	spec_object_type.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if spec_object_type.ALTERNATIVE_ID != nil {
+		UnstageBranch(stage, spec_object_type.ALTERNATIVE_ID)
+	}
+	if spec_object_type.SPEC_ATTRIBUTES != nil {
+		UnstageBranch(stage, spec_object_type.SPEC_ATTRIBUTES)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range spec_object_type.ALTERNATIVE_ID {
-		UnstageBranch(stage, _a_alternative_id)
-	}
-	for _, _a_spec_attributes := range spec_object_type.SPEC_ATTRIBUTES {
-		UnstageBranch(stage, _a_spec_attributes)
-	}
 
 }
 
@@ -6896,23 +6896,23 @@ func (stage *StageStruct) UnstageBranchSPEC_RELATION(spec_relation *SPEC_RELATIO
 	spec_relation.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if spec_relation.ALTERNATIVE_ID != nil {
+		UnstageBranch(stage, spec_relation.ALTERNATIVE_ID)
+	}
+	if spec_relation.VALUES != nil {
+		UnstageBranch(stage, spec_relation.VALUES)
+	}
+	if spec_relation.SOURCE != nil {
+		UnstageBranch(stage, spec_relation.SOURCE)
+	}
+	if spec_relation.TARGET != nil {
+		UnstageBranch(stage, spec_relation.TARGET)
+	}
+	if spec_relation.TYPE != nil {
+		UnstageBranch(stage, spec_relation.TYPE)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range spec_relation.ALTERNATIVE_ID {
-		UnstageBranch(stage, _a_alternative_id)
-	}
-	for _, _a_attribute_value_xhtml_1 := range spec_relation.VALUES {
-		UnstageBranch(stage, _a_attribute_value_xhtml_1)
-	}
-	for _, _a_target_1 := range spec_relation.SOURCE {
-		UnstageBranch(stage, _a_target_1)
-	}
-	for _, _a_target_1 := range spec_relation.TARGET {
-		UnstageBranch(stage, _a_target_1)
-	}
-	for _, _a_spec_relation_type_ref := range spec_relation.TYPE {
-		UnstageBranch(stage, _a_spec_relation_type_ref)
-	}
 
 }
 
@@ -6926,14 +6926,14 @@ func (stage *StageStruct) UnstageBranchSPEC_RELATION_TYPE(spec_relation_type *SP
 	spec_relation_type.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
+	if spec_relation_type.ALTERNATIVE_ID != nil {
+		UnstageBranch(stage, spec_relation_type.ALTERNATIVE_ID)
+	}
+	if spec_relation_type.SPEC_ATTRIBUTES != nil {
+		UnstageBranch(stage, spec_relation_type.SPEC_ATTRIBUTES)
+	}
 
 	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _a_alternative_id := range spec_relation_type.ALTERNATIVE_ID {
-		UnstageBranch(stage, _a_alternative_id)
-	}
-	for _, _a_spec_attributes := range spec_relation_type.SPEC_ATTRIBUTES {
-		UnstageBranch(stage, _a_spec_attributes)
-	}
 
 }
 

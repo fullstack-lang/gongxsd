@@ -47,14 +47,17 @@ type ATTRIBUTE_DEFINITION_INTEGERAPI struct {
 type ATTRIBUTE_DEFINITION_INTEGERPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
 
-	// field ALTERNATIVE_ID is a slice of pointers to another Struct (optional or 0..1)
-	ALTERNATIVE_ID IntSlice `gorm:"type:TEXT"`
+	// field ALTERNATIVE_ID is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	ALTERNATIVE_IDID sql.NullInt64
 
-	// field DEFAULT_VALUE is a slice of pointers to another Struct (optional or 0..1)
-	DEFAULT_VALUE IntSlice `gorm:"type:TEXT"`
+	// field DEFAULT_VALUE is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	DEFAULT_VALUEID sql.NullInt64
 
-	// field TYPE is a slice of pointers to another Struct (optional or 0..1)
-	TYPE IntSlice `gorm:"type:TEXT"`
+	// field TYPE is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	TYPEID sql.NullInt64
 }
 
 // ATTRIBUTE_DEFINITION_INTEGERDB describes a attribute_definition_integer in the database
@@ -251,58 +254,40 @@ func (backRepoATTRIBUTE_DEFINITION_INTEGER *BackRepoATTRIBUTE_DEFINITION_INTEGER
 		attribute_definition_integerDB.CopyBasicFieldsFromATTRIBUTE_DEFINITION_INTEGER(attribute_definition_integer)
 
 		// insertion point for translating pointers encodings into actual pointers
-		// 1. reset
-		attribute_definition_integerDB.ATTRIBUTE_DEFINITION_INTEGERPointersEncoding.ALTERNATIVE_ID = make([]int, 0)
-		// 2. encode
-		for _, a_alternative_idAssocEnd := range attribute_definition_integer.ALTERNATIVE_ID {
-			a_alternative_idAssocEnd_DB :=
-				backRepo.BackRepoA_ALTERNATIVE_ID.GetA_ALTERNATIVE_IDDBFromA_ALTERNATIVE_IDPtr(a_alternative_idAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the a_alternative_idAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if a_alternative_idAssocEnd_DB == nil {
-				continue
+		// commit pointer value attribute_definition_integer.ALTERNATIVE_ID translates to updating the attribute_definition_integer.ALTERNATIVE_IDID
+		attribute_definition_integerDB.ALTERNATIVE_IDID.Valid = true // allow for a 0 value (nil association)
+		if attribute_definition_integer.ALTERNATIVE_ID != nil {
+			if ALTERNATIVE_IDId, ok := backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDPtr_A_ALTERNATIVE_IDDBID[attribute_definition_integer.ALTERNATIVE_ID]; ok {
+				attribute_definition_integerDB.ALTERNATIVE_IDID.Int64 = int64(ALTERNATIVE_IDId)
+				attribute_definition_integerDB.ALTERNATIVE_IDID.Valid = true
 			}
-			
-			attribute_definition_integerDB.ATTRIBUTE_DEFINITION_INTEGERPointersEncoding.ALTERNATIVE_ID =
-				append(attribute_definition_integerDB.ATTRIBUTE_DEFINITION_INTEGERPointersEncoding.ALTERNATIVE_ID, int(a_alternative_idAssocEnd_DB.ID))
+		} else {
+			attribute_definition_integerDB.ALTERNATIVE_IDID.Int64 = 0
+			attribute_definition_integerDB.ALTERNATIVE_IDID.Valid = true
 		}
 
-		// 1. reset
-		attribute_definition_integerDB.ATTRIBUTE_DEFINITION_INTEGERPointersEncoding.DEFAULT_VALUE = make([]int, 0)
-		// 2. encode
-		for _, a_attribute_value_integerAssocEnd := range attribute_definition_integer.DEFAULT_VALUE {
-			a_attribute_value_integerAssocEnd_DB :=
-				backRepo.BackRepoA_ATTRIBUTE_VALUE_INTEGER.GetA_ATTRIBUTE_VALUE_INTEGERDBFromA_ATTRIBUTE_VALUE_INTEGERPtr(a_attribute_value_integerAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the a_attribute_value_integerAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if a_attribute_value_integerAssocEnd_DB == nil {
-				continue
+		// commit pointer value attribute_definition_integer.DEFAULT_VALUE translates to updating the attribute_definition_integer.DEFAULT_VALUEID
+		attribute_definition_integerDB.DEFAULT_VALUEID.Valid = true // allow for a 0 value (nil association)
+		if attribute_definition_integer.DEFAULT_VALUE != nil {
+			if DEFAULT_VALUEId, ok := backRepo.BackRepoA_ATTRIBUTE_VALUE_INTEGER.Map_A_ATTRIBUTE_VALUE_INTEGERPtr_A_ATTRIBUTE_VALUE_INTEGERDBID[attribute_definition_integer.DEFAULT_VALUE]; ok {
+				attribute_definition_integerDB.DEFAULT_VALUEID.Int64 = int64(DEFAULT_VALUEId)
+				attribute_definition_integerDB.DEFAULT_VALUEID.Valid = true
 			}
-			
-			attribute_definition_integerDB.ATTRIBUTE_DEFINITION_INTEGERPointersEncoding.DEFAULT_VALUE =
-				append(attribute_definition_integerDB.ATTRIBUTE_DEFINITION_INTEGERPointersEncoding.DEFAULT_VALUE, int(a_attribute_value_integerAssocEnd_DB.ID))
+		} else {
+			attribute_definition_integerDB.DEFAULT_VALUEID.Int64 = 0
+			attribute_definition_integerDB.DEFAULT_VALUEID.Valid = true
 		}
 
-		// 1. reset
-		attribute_definition_integerDB.ATTRIBUTE_DEFINITION_INTEGERPointersEncoding.TYPE = make([]int, 0)
-		// 2. encode
-		for _, a_datatype_definition_integer_refAssocEnd := range attribute_definition_integer.TYPE {
-			a_datatype_definition_integer_refAssocEnd_DB :=
-				backRepo.BackRepoA_DATATYPE_DEFINITION_INTEGER_REF.GetA_DATATYPE_DEFINITION_INTEGER_REFDBFromA_DATATYPE_DEFINITION_INTEGER_REFPtr(a_datatype_definition_integer_refAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the a_datatype_definition_integer_refAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if a_datatype_definition_integer_refAssocEnd_DB == nil {
-				continue
+		// commit pointer value attribute_definition_integer.TYPE translates to updating the attribute_definition_integer.TYPEID
+		attribute_definition_integerDB.TYPEID.Valid = true // allow for a 0 value (nil association)
+		if attribute_definition_integer.TYPE != nil {
+			if TYPEId, ok := backRepo.BackRepoA_DATATYPE_DEFINITION_INTEGER_REF.Map_A_DATATYPE_DEFINITION_INTEGER_REFPtr_A_DATATYPE_DEFINITION_INTEGER_REFDBID[attribute_definition_integer.TYPE]; ok {
+				attribute_definition_integerDB.TYPEID.Int64 = int64(TYPEId)
+				attribute_definition_integerDB.TYPEID.Valid = true
 			}
-			
-			attribute_definition_integerDB.ATTRIBUTE_DEFINITION_INTEGERPointersEncoding.TYPE =
-				append(attribute_definition_integerDB.ATTRIBUTE_DEFINITION_INTEGERPointersEncoding.TYPE, int(a_datatype_definition_integer_refAssocEnd_DB.ID))
+		} else {
+			attribute_definition_integerDB.TYPEID.Int64 = 0
+			attribute_definition_integerDB.TYPEID.Valid = true
 		}
 
 		query := backRepoATTRIBUTE_DEFINITION_INTEGER.db.Save(&attribute_definition_integerDB)
@@ -418,33 +403,21 @@ func (backRepoATTRIBUTE_DEFINITION_INTEGER *BackRepoATTRIBUTE_DEFINITION_INTEGER
 func (attribute_definition_integerDB *ATTRIBUTE_DEFINITION_INTEGERDB) DecodePointers(backRepo *BackRepoStruct, attribute_definition_integer *models.ATTRIBUTE_DEFINITION_INTEGER) {
 
 	// insertion point for checkout of pointer encoding
-	// This loop redeem attribute_definition_integer.ALTERNATIVE_ID in the stage from the encode in the back repo
-	// It parses all A_ALTERNATIVE_IDDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	attribute_definition_integer.ALTERNATIVE_ID = attribute_definition_integer.ALTERNATIVE_ID[:0]
-	for _, _A_ALTERNATIVE_IDid := range attribute_definition_integerDB.ATTRIBUTE_DEFINITION_INTEGERPointersEncoding.ALTERNATIVE_ID {
-		attribute_definition_integer.ALTERNATIVE_ID = append(attribute_definition_integer.ALTERNATIVE_ID, backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(_A_ALTERNATIVE_IDid)])
+	// ALTERNATIVE_ID field
+	attribute_definition_integer.ALTERNATIVE_ID = nil
+	if attribute_definition_integerDB.ALTERNATIVE_IDID.Int64 != 0 {
+		attribute_definition_integer.ALTERNATIVE_ID = backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(attribute_definition_integerDB.ALTERNATIVE_IDID.Int64)]
 	}
-
-	// This loop redeem attribute_definition_integer.DEFAULT_VALUE in the stage from the encode in the back repo
-	// It parses all A_ATTRIBUTE_VALUE_INTEGERDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	attribute_definition_integer.DEFAULT_VALUE = attribute_definition_integer.DEFAULT_VALUE[:0]
-	for _, _A_ATTRIBUTE_VALUE_INTEGERid := range attribute_definition_integerDB.ATTRIBUTE_DEFINITION_INTEGERPointersEncoding.DEFAULT_VALUE {
-		attribute_definition_integer.DEFAULT_VALUE = append(attribute_definition_integer.DEFAULT_VALUE, backRepo.BackRepoA_ATTRIBUTE_VALUE_INTEGER.Map_A_ATTRIBUTE_VALUE_INTEGERDBID_A_ATTRIBUTE_VALUE_INTEGERPtr[uint(_A_ATTRIBUTE_VALUE_INTEGERid)])
+	// DEFAULT_VALUE field
+	attribute_definition_integer.DEFAULT_VALUE = nil
+	if attribute_definition_integerDB.DEFAULT_VALUEID.Int64 != 0 {
+		attribute_definition_integer.DEFAULT_VALUE = backRepo.BackRepoA_ATTRIBUTE_VALUE_INTEGER.Map_A_ATTRIBUTE_VALUE_INTEGERDBID_A_ATTRIBUTE_VALUE_INTEGERPtr[uint(attribute_definition_integerDB.DEFAULT_VALUEID.Int64)]
 	}
-
-	// This loop redeem attribute_definition_integer.TYPE in the stage from the encode in the back repo
-	// It parses all A_DATATYPE_DEFINITION_INTEGER_REFDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	attribute_definition_integer.TYPE = attribute_definition_integer.TYPE[:0]
-	for _, _A_DATATYPE_DEFINITION_INTEGER_REFid := range attribute_definition_integerDB.ATTRIBUTE_DEFINITION_INTEGERPointersEncoding.TYPE {
-		attribute_definition_integer.TYPE = append(attribute_definition_integer.TYPE, backRepo.BackRepoA_DATATYPE_DEFINITION_INTEGER_REF.Map_A_DATATYPE_DEFINITION_INTEGER_REFDBID_A_DATATYPE_DEFINITION_INTEGER_REFPtr[uint(_A_DATATYPE_DEFINITION_INTEGER_REFid)])
+	// TYPE field
+	attribute_definition_integer.TYPE = nil
+	if attribute_definition_integerDB.TYPEID.Int64 != 0 {
+		attribute_definition_integer.TYPE = backRepo.BackRepoA_DATATYPE_DEFINITION_INTEGER_REF.Map_A_DATATYPE_DEFINITION_INTEGER_REFDBID_A_DATATYPE_DEFINITION_INTEGER_REFPtr[uint(attribute_definition_integerDB.TYPEID.Int64)]
 	}
-
 	return
 }
 
@@ -733,6 +706,24 @@ func (backRepoATTRIBUTE_DEFINITION_INTEGER *BackRepoATTRIBUTE_DEFINITION_INTEGER
 		_ = attribute_definition_integerDB
 
 		// insertion point for reindexing pointers encoding
+		// reindexing ALTERNATIVE_ID field
+		if attribute_definition_integerDB.ALTERNATIVE_IDID.Int64 != 0 {
+			attribute_definition_integerDB.ALTERNATIVE_IDID.Int64 = int64(BackRepoA_ALTERNATIVE_IDid_atBckpTime_newID[uint(attribute_definition_integerDB.ALTERNATIVE_IDID.Int64)])
+			attribute_definition_integerDB.ALTERNATIVE_IDID.Valid = true
+		}
+
+		// reindexing DEFAULT_VALUE field
+		if attribute_definition_integerDB.DEFAULT_VALUEID.Int64 != 0 {
+			attribute_definition_integerDB.DEFAULT_VALUEID.Int64 = int64(BackRepoA_ATTRIBUTE_VALUE_INTEGERid_atBckpTime_newID[uint(attribute_definition_integerDB.DEFAULT_VALUEID.Int64)])
+			attribute_definition_integerDB.DEFAULT_VALUEID.Valid = true
+		}
+
+		// reindexing TYPE field
+		if attribute_definition_integerDB.TYPEID.Int64 != 0 {
+			attribute_definition_integerDB.TYPEID.Int64 = int64(BackRepoA_DATATYPE_DEFINITION_INTEGER_REFid_atBckpTime_newID[uint(attribute_definition_integerDB.TYPEID.Int64)])
+			attribute_definition_integerDB.TYPEID.Valid = true
+		}
+
 		// update databse with new index encoding
 		query := backRepoATTRIBUTE_DEFINITION_INTEGER.db.Model(attribute_definition_integerDB).Updates(*attribute_definition_integerDB)
 		if query.Error != nil {

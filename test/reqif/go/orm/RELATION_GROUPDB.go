@@ -47,20 +47,25 @@ type RELATION_GROUPAPI struct {
 type RELATION_GROUPPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
 
-	// field ALTERNATIVE_ID is a slice of pointers to another Struct (optional or 0..1)
-	ALTERNATIVE_ID IntSlice `gorm:"type:TEXT"`
+	// field ALTERNATIVE_ID is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	ALTERNATIVE_IDID sql.NullInt64
 
-	// field SOURCE_SPECIFICATION is a slice of pointers to another Struct (optional or 0..1)
-	SOURCE_SPECIFICATION IntSlice `gorm:"type:TEXT"`
+	// field SOURCE_SPECIFICATION is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	SOURCE_SPECIFICATIONID sql.NullInt64
 
-	// field SPEC_RELATIONS is a slice of pointers to another Struct (optional or 0..1)
-	SPEC_RELATIONS IntSlice `gorm:"type:TEXT"`
+	// field SPEC_RELATIONS is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	SPEC_RELATIONSID sql.NullInt64
 
-	// field TARGET_SPECIFICATION is a slice of pointers to another Struct (optional or 0..1)
-	TARGET_SPECIFICATION IntSlice `gorm:"type:TEXT"`
+	// field TARGET_SPECIFICATION is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	TARGET_SPECIFICATIONID sql.NullInt64
 
-	// field TYPE is a slice of pointers to another Struct (optional or 0..1)
-	TYPE IntSlice `gorm:"type:TEXT"`
+	// field TYPE is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	TYPEID sql.NullInt64
 }
 
 // RELATION_GROUPDB describes a relation_group in the database
@@ -250,94 +255,64 @@ func (backRepoRELATION_GROUP *BackRepoRELATION_GROUPStruct) CommitPhaseTwoInstan
 		relation_groupDB.CopyBasicFieldsFromRELATION_GROUP(relation_group)
 
 		// insertion point for translating pointers encodings into actual pointers
-		// 1. reset
-		relation_groupDB.RELATION_GROUPPointersEncoding.ALTERNATIVE_ID = make([]int, 0)
-		// 2. encode
-		for _, a_alternative_idAssocEnd := range relation_group.ALTERNATIVE_ID {
-			a_alternative_idAssocEnd_DB :=
-				backRepo.BackRepoA_ALTERNATIVE_ID.GetA_ALTERNATIVE_IDDBFromA_ALTERNATIVE_IDPtr(a_alternative_idAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the a_alternative_idAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if a_alternative_idAssocEnd_DB == nil {
-				continue
+		// commit pointer value relation_group.ALTERNATIVE_ID translates to updating the relation_group.ALTERNATIVE_IDID
+		relation_groupDB.ALTERNATIVE_IDID.Valid = true // allow for a 0 value (nil association)
+		if relation_group.ALTERNATIVE_ID != nil {
+			if ALTERNATIVE_IDId, ok := backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDPtr_A_ALTERNATIVE_IDDBID[relation_group.ALTERNATIVE_ID]; ok {
+				relation_groupDB.ALTERNATIVE_IDID.Int64 = int64(ALTERNATIVE_IDId)
+				relation_groupDB.ALTERNATIVE_IDID.Valid = true
 			}
-			
-			relation_groupDB.RELATION_GROUPPointersEncoding.ALTERNATIVE_ID =
-				append(relation_groupDB.RELATION_GROUPPointersEncoding.ALTERNATIVE_ID, int(a_alternative_idAssocEnd_DB.ID))
+		} else {
+			relation_groupDB.ALTERNATIVE_IDID.Int64 = 0
+			relation_groupDB.ALTERNATIVE_IDID.Valid = true
 		}
 
-		// 1. reset
-		relation_groupDB.RELATION_GROUPPointersEncoding.SOURCE_SPECIFICATION = make([]int, 0)
-		// 2. encode
-		for _, a_target_specification_1AssocEnd := range relation_group.SOURCE_SPECIFICATION {
-			a_target_specification_1AssocEnd_DB :=
-				backRepo.BackRepoA_TARGET_SPECIFICATION_1.GetA_TARGET_SPECIFICATION_1DBFromA_TARGET_SPECIFICATION_1Ptr(a_target_specification_1AssocEnd)
-			
-			// the stage might be inconsistant, meaning that the a_target_specification_1AssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if a_target_specification_1AssocEnd_DB == nil {
-				continue
+		// commit pointer value relation_group.SOURCE_SPECIFICATION translates to updating the relation_group.SOURCE_SPECIFICATIONID
+		relation_groupDB.SOURCE_SPECIFICATIONID.Valid = true // allow for a 0 value (nil association)
+		if relation_group.SOURCE_SPECIFICATION != nil {
+			if SOURCE_SPECIFICATIONId, ok := backRepo.BackRepoA_SOURCE_SPECIFICATION_1.Map_A_SOURCE_SPECIFICATION_1Ptr_A_SOURCE_SPECIFICATION_1DBID[relation_group.SOURCE_SPECIFICATION]; ok {
+				relation_groupDB.SOURCE_SPECIFICATIONID.Int64 = int64(SOURCE_SPECIFICATIONId)
+				relation_groupDB.SOURCE_SPECIFICATIONID.Valid = true
 			}
-			
-			relation_groupDB.RELATION_GROUPPointersEncoding.SOURCE_SPECIFICATION =
-				append(relation_groupDB.RELATION_GROUPPointersEncoding.SOURCE_SPECIFICATION, int(a_target_specification_1AssocEnd_DB.ID))
+		} else {
+			relation_groupDB.SOURCE_SPECIFICATIONID.Int64 = 0
+			relation_groupDB.SOURCE_SPECIFICATIONID.Valid = true
 		}
 
-		// 1. reset
-		relation_groupDB.RELATION_GROUPPointersEncoding.SPEC_RELATIONS = make([]int, 0)
-		// 2. encode
-		for _, a_spec_relation_refAssocEnd := range relation_group.SPEC_RELATIONS {
-			a_spec_relation_refAssocEnd_DB :=
-				backRepo.BackRepoA_SPEC_RELATION_REF.GetA_SPEC_RELATION_REFDBFromA_SPEC_RELATION_REFPtr(a_spec_relation_refAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the a_spec_relation_refAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if a_spec_relation_refAssocEnd_DB == nil {
-				continue
+		// commit pointer value relation_group.SPEC_RELATIONS translates to updating the relation_group.SPEC_RELATIONSID
+		relation_groupDB.SPEC_RELATIONSID.Valid = true // allow for a 0 value (nil association)
+		if relation_group.SPEC_RELATIONS != nil {
+			if SPEC_RELATIONSId, ok := backRepo.BackRepoA_SPEC_RELATION_REF.Map_A_SPEC_RELATION_REFPtr_A_SPEC_RELATION_REFDBID[relation_group.SPEC_RELATIONS]; ok {
+				relation_groupDB.SPEC_RELATIONSID.Int64 = int64(SPEC_RELATIONSId)
+				relation_groupDB.SPEC_RELATIONSID.Valid = true
 			}
-			
-			relation_groupDB.RELATION_GROUPPointersEncoding.SPEC_RELATIONS =
-				append(relation_groupDB.RELATION_GROUPPointersEncoding.SPEC_RELATIONS, int(a_spec_relation_refAssocEnd_DB.ID))
+		} else {
+			relation_groupDB.SPEC_RELATIONSID.Int64 = 0
+			relation_groupDB.SPEC_RELATIONSID.Valid = true
 		}
 
-		// 1. reset
-		relation_groupDB.RELATION_GROUPPointersEncoding.TARGET_SPECIFICATION = make([]int, 0)
-		// 2. encode
-		for _, a_target_specification_1AssocEnd := range relation_group.TARGET_SPECIFICATION {
-			a_target_specification_1AssocEnd_DB :=
-				backRepo.BackRepoA_TARGET_SPECIFICATION_1.GetA_TARGET_SPECIFICATION_1DBFromA_TARGET_SPECIFICATION_1Ptr(a_target_specification_1AssocEnd)
-			
-			// the stage might be inconsistant, meaning that the a_target_specification_1AssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if a_target_specification_1AssocEnd_DB == nil {
-				continue
+		// commit pointer value relation_group.TARGET_SPECIFICATION translates to updating the relation_group.TARGET_SPECIFICATIONID
+		relation_groupDB.TARGET_SPECIFICATIONID.Valid = true // allow for a 0 value (nil association)
+		if relation_group.TARGET_SPECIFICATION != nil {
+			if TARGET_SPECIFICATIONId, ok := backRepo.BackRepoA_SOURCE_SPECIFICATION_1.Map_A_SOURCE_SPECIFICATION_1Ptr_A_SOURCE_SPECIFICATION_1DBID[relation_group.TARGET_SPECIFICATION]; ok {
+				relation_groupDB.TARGET_SPECIFICATIONID.Int64 = int64(TARGET_SPECIFICATIONId)
+				relation_groupDB.TARGET_SPECIFICATIONID.Valid = true
 			}
-			
-			relation_groupDB.RELATION_GROUPPointersEncoding.TARGET_SPECIFICATION =
-				append(relation_groupDB.RELATION_GROUPPointersEncoding.TARGET_SPECIFICATION, int(a_target_specification_1AssocEnd_DB.ID))
+		} else {
+			relation_groupDB.TARGET_SPECIFICATIONID.Int64 = 0
+			relation_groupDB.TARGET_SPECIFICATIONID.Valid = true
 		}
 
-		// 1. reset
-		relation_groupDB.RELATION_GROUPPointersEncoding.TYPE = make([]int, 0)
-		// 2. encode
-		for _, a_relation_group_type_refAssocEnd := range relation_group.TYPE {
-			a_relation_group_type_refAssocEnd_DB :=
-				backRepo.BackRepoA_RELATION_GROUP_TYPE_REF.GetA_RELATION_GROUP_TYPE_REFDBFromA_RELATION_GROUP_TYPE_REFPtr(a_relation_group_type_refAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the a_relation_group_type_refAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if a_relation_group_type_refAssocEnd_DB == nil {
-				continue
+		// commit pointer value relation_group.TYPE translates to updating the relation_group.TYPEID
+		relation_groupDB.TYPEID.Valid = true // allow for a 0 value (nil association)
+		if relation_group.TYPE != nil {
+			if TYPEId, ok := backRepo.BackRepoA_RELATION_GROUP_TYPE_REF.Map_A_RELATION_GROUP_TYPE_REFPtr_A_RELATION_GROUP_TYPE_REFDBID[relation_group.TYPE]; ok {
+				relation_groupDB.TYPEID.Int64 = int64(TYPEId)
+				relation_groupDB.TYPEID.Valid = true
 			}
-			
-			relation_groupDB.RELATION_GROUPPointersEncoding.TYPE =
-				append(relation_groupDB.RELATION_GROUPPointersEncoding.TYPE, int(a_relation_group_type_refAssocEnd_DB.ID))
+		} else {
+			relation_groupDB.TYPEID.Int64 = 0
+			relation_groupDB.TYPEID.Valid = true
 		}
 
 		query := backRepoRELATION_GROUP.db.Save(&relation_groupDB)
@@ -453,51 +428,31 @@ func (backRepoRELATION_GROUP *BackRepoRELATION_GROUPStruct) CheckoutPhaseTwoInst
 func (relation_groupDB *RELATION_GROUPDB) DecodePointers(backRepo *BackRepoStruct, relation_group *models.RELATION_GROUP) {
 
 	// insertion point for checkout of pointer encoding
-	// This loop redeem relation_group.ALTERNATIVE_ID in the stage from the encode in the back repo
-	// It parses all A_ALTERNATIVE_IDDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	relation_group.ALTERNATIVE_ID = relation_group.ALTERNATIVE_ID[:0]
-	for _, _A_ALTERNATIVE_IDid := range relation_groupDB.RELATION_GROUPPointersEncoding.ALTERNATIVE_ID {
-		relation_group.ALTERNATIVE_ID = append(relation_group.ALTERNATIVE_ID, backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(_A_ALTERNATIVE_IDid)])
+	// ALTERNATIVE_ID field
+	relation_group.ALTERNATIVE_ID = nil
+	if relation_groupDB.ALTERNATIVE_IDID.Int64 != 0 {
+		relation_group.ALTERNATIVE_ID = backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(relation_groupDB.ALTERNATIVE_IDID.Int64)]
 	}
-
-	// This loop redeem relation_group.SOURCE_SPECIFICATION in the stage from the encode in the back repo
-	// It parses all A_TARGET_SPECIFICATION_1DB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	relation_group.SOURCE_SPECIFICATION = relation_group.SOURCE_SPECIFICATION[:0]
-	for _, _A_TARGET_SPECIFICATION_1id := range relation_groupDB.RELATION_GROUPPointersEncoding.SOURCE_SPECIFICATION {
-		relation_group.SOURCE_SPECIFICATION = append(relation_group.SOURCE_SPECIFICATION, backRepo.BackRepoA_TARGET_SPECIFICATION_1.Map_A_TARGET_SPECIFICATION_1DBID_A_TARGET_SPECIFICATION_1Ptr[uint(_A_TARGET_SPECIFICATION_1id)])
+	// SOURCE_SPECIFICATION field
+	relation_group.SOURCE_SPECIFICATION = nil
+	if relation_groupDB.SOURCE_SPECIFICATIONID.Int64 != 0 {
+		relation_group.SOURCE_SPECIFICATION = backRepo.BackRepoA_SOURCE_SPECIFICATION_1.Map_A_SOURCE_SPECIFICATION_1DBID_A_SOURCE_SPECIFICATION_1Ptr[uint(relation_groupDB.SOURCE_SPECIFICATIONID.Int64)]
 	}
-
-	// This loop redeem relation_group.SPEC_RELATIONS in the stage from the encode in the back repo
-	// It parses all A_SPEC_RELATION_REFDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	relation_group.SPEC_RELATIONS = relation_group.SPEC_RELATIONS[:0]
-	for _, _A_SPEC_RELATION_REFid := range relation_groupDB.RELATION_GROUPPointersEncoding.SPEC_RELATIONS {
-		relation_group.SPEC_RELATIONS = append(relation_group.SPEC_RELATIONS, backRepo.BackRepoA_SPEC_RELATION_REF.Map_A_SPEC_RELATION_REFDBID_A_SPEC_RELATION_REFPtr[uint(_A_SPEC_RELATION_REFid)])
+	// SPEC_RELATIONS field
+	relation_group.SPEC_RELATIONS = nil
+	if relation_groupDB.SPEC_RELATIONSID.Int64 != 0 {
+		relation_group.SPEC_RELATIONS = backRepo.BackRepoA_SPEC_RELATION_REF.Map_A_SPEC_RELATION_REFDBID_A_SPEC_RELATION_REFPtr[uint(relation_groupDB.SPEC_RELATIONSID.Int64)]
 	}
-
-	// This loop redeem relation_group.TARGET_SPECIFICATION in the stage from the encode in the back repo
-	// It parses all A_TARGET_SPECIFICATION_1DB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	relation_group.TARGET_SPECIFICATION = relation_group.TARGET_SPECIFICATION[:0]
-	for _, _A_TARGET_SPECIFICATION_1id := range relation_groupDB.RELATION_GROUPPointersEncoding.TARGET_SPECIFICATION {
-		relation_group.TARGET_SPECIFICATION = append(relation_group.TARGET_SPECIFICATION, backRepo.BackRepoA_TARGET_SPECIFICATION_1.Map_A_TARGET_SPECIFICATION_1DBID_A_TARGET_SPECIFICATION_1Ptr[uint(_A_TARGET_SPECIFICATION_1id)])
+	// TARGET_SPECIFICATION field
+	relation_group.TARGET_SPECIFICATION = nil
+	if relation_groupDB.TARGET_SPECIFICATIONID.Int64 != 0 {
+		relation_group.TARGET_SPECIFICATION = backRepo.BackRepoA_SOURCE_SPECIFICATION_1.Map_A_SOURCE_SPECIFICATION_1DBID_A_SOURCE_SPECIFICATION_1Ptr[uint(relation_groupDB.TARGET_SPECIFICATIONID.Int64)]
 	}
-
-	// This loop redeem relation_group.TYPE in the stage from the encode in the back repo
-	// It parses all A_RELATION_GROUP_TYPE_REFDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	relation_group.TYPE = relation_group.TYPE[:0]
-	for _, _A_RELATION_GROUP_TYPE_REFid := range relation_groupDB.RELATION_GROUPPointersEncoding.TYPE {
-		relation_group.TYPE = append(relation_group.TYPE, backRepo.BackRepoA_RELATION_GROUP_TYPE_REF.Map_A_RELATION_GROUP_TYPE_REFDBID_A_RELATION_GROUP_TYPE_REFPtr[uint(_A_RELATION_GROUP_TYPE_REFid)])
+	// TYPE field
+	relation_group.TYPE = nil
+	if relation_groupDB.TYPEID.Int64 != 0 {
+		relation_group.TYPE = backRepo.BackRepoA_RELATION_GROUP_TYPE_REF.Map_A_RELATION_GROUP_TYPE_REFDBID_A_RELATION_GROUP_TYPE_REFPtr[uint(relation_groupDB.TYPEID.Int64)]
 	}
-
 	return
 }
 
@@ -774,6 +729,36 @@ func (backRepoRELATION_GROUP *BackRepoRELATION_GROUPStruct) RestorePhaseTwo() {
 		_ = relation_groupDB
 
 		// insertion point for reindexing pointers encoding
+		// reindexing ALTERNATIVE_ID field
+		if relation_groupDB.ALTERNATIVE_IDID.Int64 != 0 {
+			relation_groupDB.ALTERNATIVE_IDID.Int64 = int64(BackRepoA_ALTERNATIVE_IDid_atBckpTime_newID[uint(relation_groupDB.ALTERNATIVE_IDID.Int64)])
+			relation_groupDB.ALTERNATIVE_IDID.Valid = true
+		}
+
+		// reindexing SOURCE_SPECIFICATION field
+		if relation_groupDB.SOURCE_SPECIFICATIONID.Int64 != 0 {
+			relation_groupDB.SOURCE_SPECIFICATIONID.Int64 = int64(BackRepoA_SOURCE_SPECIFICATION_1id_atBckpTime_newID[uint(relation_groupDB.SOURCE_SPECIFICATIONID.Int64)])
+			relation_groupDB.SOURCE_SPECIFICATIONID.Valid = true
+		}
+
+		// reindexing SPEC_RELATIONS field
+		if relation_groupDB.SPEC_RELATIONSID.Int64 != 0 {
+			relation_groupDB.SPEC_RELATIONSID.Int64 = int64(BackRepoA_SPEC_RELATION_REFid_atBckpTime_newID[uint(relation_groupDB.SPEC_RELATIONSID.Int64)])
+			relation_groupDB.SPEC_RELATIONSID.Valid = true
+		}
+
+		// reindexing TARGET_SPECIFICATION field
+		if relation_groupDB.TARGET_SPECIFICATIONID.Int64 != 0 {
+			relation_groupDB.TARGET_SPECIFICATIONID.Int64 = int64(BackRepoA_SOURCE_SPECIFICATION_1id_atBckpTime_newID[uint(relation_groupDB.TARGET_SPECIFICATIONID.Int64)])
+			relation_groupDB.TARGET_SPECIFICATIONID.Valid = true
+		}
+
+		// reindexing TYPE field
+		if relation_groupDB.TYPEID.Int64 != 0 {
+			relation_groupDB.TYPEID.Int64 = int64(BackRepoA_RELATION_GROUP_TYPE_REFid_atBckpTime_newID[uint(relation_groupDB.TYPEID.Int64)])
+			relation_groupDB.TYPEID.Valid = true
+		}
+
 		// update databse with new index encoding
 		query := backRepoRELATION_GROUP.db.Model(relation_groupDB).Updates(*relation_groupDB)
 		if query.Error != nil {

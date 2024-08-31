@@ -47,11 +47,13 @@ type ENUM_VALUEAPI struct {
 type ENUM_VALUEPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
 
-	// field ALTERNATIVE_ID is a slice of pointers to another Struct (optional or 0..1)
-	ALTERNATIVE_ID IntSlice `gorm:"type:TEXT"`
+	// field ALTERNATIVE_ID is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	ALTERNATIVE_IDID sql.NullInt64
 
-	// field PROPERTIES is a slice of pointers to another Struct (optional or 0..1)
-	PROPERTIES IntSlice `gorm:"type:TEXT"`
+	// field PROPERTIES is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	PROPERTIESID sql.NullInt64
 }
 
 // ENUM_VALUEDB describes a enum_value in the database
@@ -241,40 +243,28 @@ func (backRepoENUM_VALUE *BackRepoENUM_VALUEStruct) CommitPhaseTwoInstance(backR
 		enum_valueDB.CopyBasicFieldsFromENUM_VALUE(enum_value)
 
 		// insertion point for translating pointers encodings into actual pointers
-		// 1. reset
-		enum_valueDB.ENUM_VALUEPointersEncoding.ALTERNATIVE_ID = make([]int, 0)
-		// 2. encode
-		for _, a_alternative_idAssocEnd := range enum_value.ALTERNATIVE_ID {
-			a_alternative_idAssocEnd_DB :=
-				backRepo.BackRepoA_ALTERNATIVE_ID.GetA_ALTERNATIVE_IDDBFromA_ALTERNATIVE_IDPtr(a_alternative_idAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the a_alternative_idAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if a_alternative_idAssocEnd_DB == nil {
-				continue
+		// commit pointer value enum_value.ALTERNATIVE_ID translates to updating the enum_value.ALTERNATIVE_IDID
+		enum_valueDB.ALTERNATIVE_IDID.Valid = true // allow for a 0 value (nil association)
+		if enum_value.ALTERNATIVE_ID != nil {
+			if ALTERNATIVE_IDId, ok := backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDPtr_A_ALTERNATIVE_IDDBID[enum_value.ALTERNATIVE_ID]; ok {
+				enum_valueDB.ALTERNATIVE_IDID.Int64 = int64(ALTERNATIVE_IDId)
+				enum_valueDB.ALTERNATIVE_IDID.Valid = true
 			}
-			
-			enum_valueDB.ENUM_VALUEPointersEncoding.ALTERNATIVE_ID =
-				append(enum_valueDB.ENUM_VALUEPointersEncoding.ALTERNATIVE_ID, int(a_alternative_idAssocEnd_DB.ID))
+		} else {
+			enum_valueDB.ALTERNATIVE_IDID.Int64 = 0
+			enum_valueDB.ALTERNATIVE_IDID.Valid = true
 		}
 
-		// 1. reset
-		enum_valueDB.ENUM_VALUEPointersEncoding.PROPERTIES = make([]int, 0)
-		// 2. encode
-		for _, a_propertiesAssocEnd := range enum_value.PROPERTIES {
-			a_propertiesAssocEnd_DB :=
-				backRepo.BackRepoA_PROPERTIES.GetA_PROPERTIESDBFromA_PROPERTIESPtr(a_propertiesAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the a_propertiesAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if a_propertiesAssocEnd_DB == nil {
-				continue
+		// commit pointer value enum_value.PROPERTIES translates to updating the enum_value.PROPERTIESID
+		enum_valueDB.PROPERTIESID.Valid = true // allow for a 0 value (nil association)
+		if enum_value.PROPERTIES != nil {
+			if PROPERTIESId, ok := backRepo.BackRepoA_PROPERTIES.Map_A_PROPERTIESPtr_A_PROPERTIESDBID[enum_value.PROPERTIES]; ok {
+				enum_valueDB.PROPERTIESID.Int64 = int64(PROPERTIESId)
+				enum_valueDB.PROPERTIESID.Valid = true
 			}
-			
-			enum_valueDB.ENUM_VALUEPointersEncoding.PROPERTIES =
-				append(enum_valueDB.ENUM_VALUEPointersEncoding.PROPERTIES, int(a_propertiesAssocEnd_DB.ID))
+		} else {
+			enum_valueDB.PROPERTIESID.Int64 = 0
+			enum_valueDB.PROPERTIESID.Valid = true
 		}
 
 		query := backRepoENUM_VALUE.db.Save(&enum_valueDB)
@@ -390,24 +380,16 @@ func (backRepoENUM_VALUE *BackRepoENUM_VALUEStruct) CheckoutPhaseTwoInstance(bac
 func (enum_valueDB *ENUM_VALUEDB) DecodePointers(backRepo *BackRepoStruct, enum_value *models.ENUM_VALUE) {
 
 	// insertion point for checkout of pointer encoding
-	// This loop redeem enum_value.ALTERNATIVE_ID in the stage from the encode in the back repo
-	// It parses all A_ALTERNATIVE_IDDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	enum_value.ALTERNATIVE_ID = enum_value.ALTERNATIVE_ID[:0]
-	for _, _A_ALTERNATIVE_IDid := range enum_valueDB.ENUM_VALUEPointersEncoding.ALTERNATIVE_ID {
-		enum_value.ALTERNATIVE_ID = append(enum_value.ALTERNATIVE_ID, backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(_A_ALTERNATIVE_IDid)])
+	// ALTERNATIVE_ID field
+	enum_value.ALTERNATIVE_ID = nil
+	if enum_valueDB.ALTERNATIVE_IDID.Int64 != 0 {
+		enum_value.ALTERNATIVE_ID = backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(enum_valueDB.ALTERNATIVE_IDID.Int64)]
 	}
-
-	// This loop redeem enum_value.PROPERTIES in the stage from the encode in the back repo
-	// It parses all A_PROPERTIESDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	enum_value.PROPERTIES = enum_value.PROPERTIES[:0]
-	for _, _A_PROPERTIESid := range enum_valueDB.ENUM_VALUEPointersEncoding.PROPERTIES {
-		enum_value.PROPERTIES = append(enum_value.PROPERTIES, backRepo.BackRepoA_PROPERTIES.Map_A_PROPERTIESDBID_A_PROPERTIESPtr[uint(_A_PROPERTIESid)])
+	// PROPERTIES field
+	enum_value.PROPERTIES = nil
+	if enum_valueDB.PROPERTIESID.Int64 != 0 {
+		enum_value.PROPERTIES = backRepo.BackRepoA_PROPERTIES.Map_A_PROPERTIESDBID_A_PROPERTIESPtr[uint(enum_valueDB.PROPERTIESID.Int64)]
 	}
-
 	return
 }
 
@@ -684,6 +666,18 @@ func (backRepoENUM_VALUE *BackRepoENUM_VALUEStruct) RestorePhaseTwo() {
 		_ = enum_valueDB
 
 		// insertion point for reindexing pointers encoding
+		// reindexing ALTERNATIVE_ID field
+		if enum_valueDB.ALTERNATIVE_IDID.Int64 != 0 {
+			enum_valueDB.ALTERNATIVE_IDID.Int64 = int64(BackRepoA_ALTERNATIVE_IDid_atBckpTime_newID[uint(enum_valueDB.ALTERNATIVE_IDID.Int64)])
+			enum_valueDB.ALTERNATIVE_IDID.Valid = true
+		}
+
+		// reindexing PROPERTIES field
+		if enum_valueDB.PROPERTIESID.Int64 != 0 {
+			enum_valueDB.PROPERTIESID.Int64 = int64(BackRepoA_PROPERTIESid_atBckpTime_newID[uint(enum_valueDB.PROPERTIESID.Int64)])
+			enum_valueDB.PROPERTIESID.Valid = true
+		}
+
 		// update databse with new index encoding
 		query := backRepoENUM_VALUE.db.Model(enum_valueDB).Updates(*enum_valueDB)
 		if query.Error != nil {

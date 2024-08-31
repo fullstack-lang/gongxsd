@@ -47,14 +47,17 @@ type SPEC_OBJECTAPI struct {
 type SPEC_OBJECTPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
 
-	// field ALTERNATIVE_ID is a slice of pointers to another Struct (optional or 0..1)
-	ALTERNATIVE_ID IntSlice `gorm:"type:TEXT"`
+	// field ALTERNATIVE_ID is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	ALTERNATIVE_IDID sql.NullInt64
 
-	// field VALUES is a slice of pointers to another Struct (optional or 0..1)
-	VALUES IntSlice `gorm:"type:TEXT"`
+	// field VALUES is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	VALUESID sql.NullInt64
 
-	// field TYPE is a slice of pointers to another Struct (optional or 0..1)
-	TYPE IntSlice `gorm:"type:TEXT"`
+	// field TYPE is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	TYPEID sql.NullInt64
 }
 
 // SPEC_OBJECTDB describes a spec_object in the database
@@ -244,58 +247,40 @@ func (backRepoSPEC_OBJECT *BackRepoSPEC_OBJECTStruct) CommitPhaseTwoInstance(bac
 		spec_objectDB.CopyBasicFieldsFromSPEC_OBJECT(spec_object)
 
 		// insertion point for translating pointers encodings into actual pointers
-		// 1. reset
-		spec_objectDB.SPEC_OBJECTPointersEncoding.ALTERNATIVE_ID = make([]int, 0)
-		// 2. encode
-		for _, a_alternative_idAssocEnd := range spec_object.ALTERNATIVE_ID {
-			a_alternative_idAssocEnd_DB :=
-				backRepo.BackRepoA_ALTERNATIVE_ID.GetA_ALTERNATIVE_IDDBFromA_ALTERNATIVE_IDPtr(a_alternative_idAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the a_alternative_idAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if a_alternative_idAssocEnd_DB == nil {
-				continue
+		// commit pointer value spec_object.ALTERNATIVE_ID translates to updating the spec_object.ALTERNATIVE_IDID
+		spec_objectDB.ALTERNATIVE_IDID.Valid = true // allow for a 0 value (nil association)
+		if spec_object.ALTERNATIVE_ID != nil {
+			if ALTERNATIVE_IDId, ok := backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDPtr_A_ALTERNATIVE_IDDBID[spec_object.ALTERNATIVE_ID]; ok {
+				spec_objectDB.ALTERNATIVE_IDID.Int64 = int64(ALTERNATIVE_IDId)
+				spec_objectDB.ALTERNATIVE_IDID.Valid = true
 			}
-			
-			spec_objectDB.SPEC_OBJECTPointersEncoding.ALTERNATIVE_ID =
-				append(spec_objectDB.SPEC_OBJECTPointersEncoding.ALTERNATIVE_ID, int(a_alternative_idAssocEnd_DB.ID))
+		} else {
+			spec_objectDB.ALTERNATIVE_IDID.Int64 = 0
+			spec_objectDB.ALTERNATIVE_IDID.Valid = true
 		}
 
-		// 1. reset
-		spec_objectDB.SPEC_OBJECTPointersEncoding.VALUES = make([]int, 0)
-		// 2. encode
-		for _, a_attribute_value_xhtml_1AssocEnd := range spec_object.VALUES {
-			a_attribute_value_xhtml_1AssocEnd_DB :=
-				backRepo.BackRepoA_ATTRIBUTE_VALUE_XHTML_1.GetA_ATTRIBUTE_VALUE_XHTML_1DBFromA_ATTRIBUTE_VALUE_XHTML_1Ptr(a_attribute_value_xhtml_1AssocEnd)
-			
-			// the stage might be inconsistant, meaning that the a_attribute_value_xhtml_1AssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if a_attribute_value_xhtml_1AssocEnd_DB == nil {
-				continue
+		// commit pointer value spec_object.VALUES translates to updating the spec_object.VALUESID
+		spec_objectDB.VALUESID.Valid = true // allow for a 0 value (nil association)
+		if spec_object.VALUES != nil {
+			if VALUESId, ok := backRepo.BackRepoA_ATTRIBUTE_VALUE_XHTML_1.Map_A_ATTRIBUTE_VALUE_XHTML_1Ptr_A_ATTRIBUTE_VALUE_XHTML_1DBID[spec_object.VALUES]; ok {
+				spec_objectDB.VALUESID.Int64 = int64(VALUESId)
+				spec_objectDB.VALUESID.Valid = true
 			}
-			
-			spec_objectDB.SPEC_OBJECTPointersEncoding.VALUES =
-				append(spec_objectDB.SPEC_OBJECTPointersEncoding.VALUES, int(a_attribute_value_xhtml_1AssocEnd_DB.ID))
+		} else {
+			spec_objectDB.VALUESID.Int64 = 0
+			spec_objectDB.VALUESID.Valid = true
 		}
 
-		// 1. reset
-		spec_objectDB.SPEC_OBJECTPointersEncoding.TYPE = make([]int, 0)
-		// 2. encode
-		for _, a_spec_object_type_refAssocEnd := range spec_object.TYPE {
-			a_spec_object_type_refAssocEnd_DB :=
-				backRepo.BackRepoA_SPEC_OBJECT_TYPE_REF.GetA_SPEC_OBJECT_TYPE_REFDBFromA_SPEC_OBJECT_TYPE_REFPtr(a_spec_object_type_refAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the a_spec_object_type_refAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if a_spec_object_type_refAssocEnd_DB == nil {
-				continue
+		// commit pointer value spec_object.TYPE translates to updating the spec_object.TYPEID
+		spec_objectDB.TYPEID.Valid = true // allow for a 0 value (nil association)
+		if spec_object.TYPE != nil {
+			if TYPEId, ok := backRepo.BackRepoA_SPEC_OBJECT_TYPE_REF.Map_A_SPEC_OBJECT_TYPE_REFPtr_A_SPEC_OBJECT_TYPE_REFDBID[spec_object.TYPE]; ok {
+				spec_objectDB.TYPEID.Int64 = int64(TYPEId)
+				spec_objectDB.TYPEID.Valid = true
 			}
-			
-			spec_objectDB.SPEC_OBJECTPointersEncoding.TYPE =
-				append(spec_objectDB.SPEC_OBJECTPointersEncoding.TYPE, int(a_spec_object_type_refAssocEnd_DB.ID))
+		} else {
+			spec_objectDB.TYPEID.Int64 = 0
+			spec_objectDB.TYPEID.Valid = true
 		}
 
 		query := backRepoSPEC_OBJECT.db.Save(&spec_objectDB)
@@ -411,33 +396,21 @@ func (backRepoSPEC_OBJECT *BackRepoSPEC_OBJECTStruct) CheckoutPhaseTwoInstance(b
 func (spec_objectDB *SPEC_OBJECTDB) DecodePointers(backRepo *BackRepoStruct, spec_object *models.SPEC_OBJECT) {
 
 	// insertion point for checkout of pointer encoding
-	// This loop redeem spec_object.ALTERNATIVE_ID in the stage from the encode in the back repo
-	// It parses all A_ALTERNATIVE_IDDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	spec_object.ALTERNATIVE_ID = spec_object.ALTERNATIVE_ID[:0]
-	for _, _A_ALTERNATIVE_IDid := range spec_objectDB.SPEC_OBJECTPointersEncoding.ALTERNATIVE_ID {
-		spec_object.ALTERNATIVE_ID = append(spec_object.ALTERNATIVE_ID, backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(_A_ALTERNATIVE_IDid)])
+	// ALTERNATIVE_ID field
+	spec_object.ALTERNATIVE_ID = nil
+	if spec_objectDB.ALTERNATIVE_IDID.Int64 != 0 {
+		spec_object.ALTERNATIVE_ID = backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(spec_objectDB.ALTERNATIVE_IDID.Int64)]
 	}
-
-	// This loop redeem spec_object.VALUES in the stage from the encode in the back repo
-	// It parses all A_ATTRIBUTE_VALUE_XHTML_1DB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	spec_object.VALUES = spec_object.VALUES[:0]
-	for _, _A_ATTRIBUTE_VALUE_XHTML_1id := range spec_objectDB.SPEC_OBJECTPointersEncoding.VALUES {
-		spec_object.VALUES = append(spec_object.VALUES, backRepo.BackRepoA_ATTRIBUTE_VALUE_XHTML_1.Map_A_ATTRIBUTE_VALUE_XHTML_1DBID_A_ATTRIBUTE_VALUE_XHTML_1Ptr[uint(_A_ATTRIBUTE_VALUE_XHTML_1id)])
+	// VALUES field
+	spec_object.VALUES = nil
+	if spec_objectDB.VALUESID.Int64 != 0 {
+		spec_object.VALUES = backRepo.BackRepoA_ATTRIBUTE_VALUE_XHTML_1.Map_A_ATTRIBUTE_VALUE_XHTML_1DBID_A_ATTRIBUTE_VALUE_XHTML_1Ptr[uint(spec_objectDB.VALUESID.Int64)]
 	}
-
-	// This loop redeem spec_object.TYPE in the stage from the encode in the back repo
-	// It parses all A_SPEC_OBJECT_TYPE_REFDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	spec_object.TYPE = spec_object.TYPE[:0]
-	for _, _A_SPEC_OBJECT_TYPE_REFid := range spec_objectDB.SPEC_OBJECTPointersEncoding.TYPE {
-		spec_object.TYPE = append(spec_object.TYPE, backRepo.BackRepoA_SPEC_OBJECT_TYPE_REF.Map_A_SPEC_OBJECT_TYPE_REFDBID_A_SPEC_OBJECT_TYPE_REFPtr[uint(_A_SPEC_OBJECT_TYPE_REFid)])
+	// TYPE field
+	spec_object.TYPE = nil
+	if spec_objectDB.TYPEID.Int64 != 0 {
+		spec_object.TYPE = backRepo.BackRepoA_SPEC_OBJECT_TYPE_REF.Map_A_SPEC_OBJECT_TYPE_REFDBID_A_SPEC_OBJECT_TYPE_REFPtr[uint(spec_objectDB.TYPEID.Int64)]
 	}
-
 	return
 }
 
@@ -714,6 +687,24 @@ func (backRepoSPEC_OBJECT *BackRepoSPEC_OBJECTStruct) RestorePhaseTwo() {
 		_ = spec_objectDB
 
 		// insertion point for reindexing pointers encoding
+		// reindexing ALTERNATIVE_ID field
+		if spec_objectDB.ALTERNATIVE_IDID.Int64 != 0 {
+			spec_objectDB.ALTERNATIVE_IDID.Int64 = int64(BackRepoA_ALTERNATIVE_IDid_atBckpTime_newID[uint(spec_objectDB.ALTERNATIVE_IDID.Int64)])
+			spec_objectDB.ALTERNATIVE_IDID.Valid = true
+		}
+
+		// reindexing VALUES field
+		if spec_objectDB.VALUESID.Int64 != 0 {
+			spec_objectDB.VALUESID.Int64 = int64(BackRepoA_ATTRIBUTE_VALUE_XHTML_1id_atBckpTime_newID[uint(spec_objectDB.VALUESID.Int64)])
+			spec_objectDB.VALUESID.Valid = true
+		}
+
+		// reindexing TYPE field
+		if spec_objectDB.TYPEID.Int64 != 0 {
+			spec_objectDB.TYPEID.Int64 = int64(BackRepoA_SPEC_OBJECT_TYPE_REFid_atBckpTime_newID[uint(spec_objectDB.TYPEID.Int64)])
+			spec_objectDB.TYPEID.Valid = true
+		}
+
 		// update databse with new index encoding
 		query := backRepoSPEC_OBJECT.db.Model(spec_objectDB).Updates(*spec_objectDB)
 		if query.Error != nil {

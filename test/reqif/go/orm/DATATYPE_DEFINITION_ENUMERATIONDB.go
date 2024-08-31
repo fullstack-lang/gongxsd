@@ -47,11 +47,13 @@ type DATATYPE_DEFINITION_ENUMERATIONAPI struct {
 type DATATYPE_DEFINITION_ENUMERATIONPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
 
-	// field ALTERNATIVE_ID is a slice of pointers to another Struct (optional or 0..1)
-	ALTERNATIVE_ID IntSlice `gorm:"type:TEXT"`
+	// field ALTERNATIVE_ID is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	ALTERNATIVE_IDID sql.NullInt64
 
-	// field SPECIFIED_VALUES is a slice of pointers to another Struct (optional or 0..1)
-	SPECIFIED_VALUES IntSlice `gorm:"type:TEXT"`
+	// field SPECIFIED_VALUES is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	SPECIFIED_VALUESID sql.NullInt64
 }
 
 // DATATYPE_DEFINITION_ENUMERATIONDB describes a datatype_definition_enumeration in the database
@@ -241,40 +243,28 @@ func (backRepoDATATYPE_DEFINITION_ENUMERATION *BackRepoDATATYPE_DEFINITION_ENUME
 		datatype_definition_enumerationDB.CopyBasicFieldsFromDATATYPE_DEFINITION_ENUMERATION(datatype_definition_enumeration)
 
 		// insertion point for translating pointers encodings into actual pointers
-		// 1. reset
-		datatype_definition_enumerationDB.DATATYPE_DEFINITION_ENUMERATIONPointersEncoding.ALTERNATIVE_ID = make([]int, 0)
-		// 2. encode
-		for _, a_alternative_idAssocEnd := range datatype_definition_enumeration.ALTERNATIVE_ID {
-			a_alternative_idAssocEnd_DB :=
-				backRepo.BackRepoA_ALTERNATIVE_ID.GetA_ALTERNATIVE_IDDBFromA_ALTERNATIVE_IDPtr(a_alternative_idAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the a_alternative_idAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if a_alternative_idAssocEnd_DB == nil {
-				continue
+		// commit pointer value datatype_definition_enumeration.ALTERNATIVE_ID translates to updating the datatype_definition_enumeration.ALTERNATIVE_IDID
+		datatype_definition_enumerationDB.ALTERNATIVE_IDID.Valid = true // allow for a 0 value (nil association)
+		if datatype_definition_enumeration.ALTERNATIVE_ID != nil {
+			if ALTERNATIVE_IDId, ok := backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDPtr_A_ALTERNATIVE_IDDBID[datatype_definition_enumeration.ALTERNATIVE_ID]; ok {
+				datatype_definition_enumerationDB.ALTERNATIVE_IDID.Int64 = int64(ALTERNATIVE_IDId)
+				datatype_definition_enumerationDB.ALTERNATIVE_IDID.Valid = true
 			}
-			
-			datatype_definition_enumerationDB.DATATYPE_DEFINITION_ENUMERATIONPointersEncoding.ALTERNATIVE_ID =
-				append(datatype_definition_enumerationDB.DATATYPE_DEFINITION_ENUMERATIONPointersEncoding.ALTERNATIVE_ID, int(a_alternative_idAssocEnd_DB.ID))
+		} else {
+			datatype_definition_enumerationDB.ALTERNATIVE_IDID.Int64 = 0
+			datatype_definition_enumerationDB.ALTERNATIVE_IDID.Valid = true
 		}
 
-		// 1. reset
-		datatype_definition_enumerationDB.DATATYPE_DEFINITION_ENUMERATIONPointersEncoding.SPECIFIED_VALUES = make([]int, 0)
-		// 2. encode
-		for _, a_specified_valuesAssocEnd := range datatype_definition_enumeration.SPECIFIED_VALUES {
-			a_specified_valuesAssocEnd_DB :=
-				backRepo.BackRepoA_SPECIFIED_VALUES.GetA_SPECIFIED_VALUESDBFromA_SPECIFIED_VALUESPtr(a_specified_valuesAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the a_specified_valuesAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if a_specified_valuesAssocEnd_DB == nil {
-				continue
+		// commit pointer value datatype_definition_enumeration.SPECIFIED_VALUES translates to updating the datatype_definition_enumeration.SPECIFIED_VALUESID
+		datatype_definition_enumerationDB.SPECIFIED_VALUESID.Valid = true // allow for a 0 value (nil association)
+		if datatype_definition_enumeration.SPECIFIED_VALUES != nil {
+			if SPECIFIED_VALUESId, ok := backRepo.BackRepoA_SPECIFIED_VALUES.Map_A_SPECIFIED_VALUESPtr_A_SPECIFIED_VALUESDBID[datatype_definition_enumeration.SPECIFIED_VALUES]; ok {
+				datatype_definition_enumerationDB.SPECIFIED_VALUESID.Int64 = int64(SPECIFIED_VALUESId)
+				datatype_definition_enumerationDB.SPECIFIED_VALUESID.Valid = true
 			}
-			
-			datatype_definition_enumerationDB.DATATYPE_DEFINITION_ENUMERATIONPointersEncoding.SPECIFIED_VALUES =
-				append(datatype_definition_enumerationDB.DATATYPE_DEFINITION_ENUMERATIONPointersEncoding.SPECIFIED_VALUES, int(a_specified_valuesAssocEnd_DB.ID))
+		} else {
+			datatype_definition_enumerationDB.SPECIFIED_VALUESID.Int64 = 0
+			datatype_definition_enumerationDB.SPECIFIED_VALUESID.Valid = true
 		}
 
 		query := backRepoDATATYPE_DEFINITION_ENUMERATION.db.Save(&datatype_definition_enumerationDB)
@@ -390,24 +380,16 @@ func (backRepoDATATYPE_DEFINITION_ENUMERATION *BackRepoDATATYPE_DEFINITION_ENUME
 func (datatype_definition_enumerationDB *DATATYPE_DEFINITION_ENUMERATIONDB) DecodePointers(backRepo *BackRepoStruct, datatype_definition_enumeration *models.DATATYPE_DEFINITION_ENUMERATION) {
 
 	// insertion point for checkout of pointer encoding
-	// This loop redeem datatype_definition_enumeration.ALTERNATIVE_ID in the stage from the encode in the back repo
-	// It parses all A_ALTERNATIVE_IDDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	datatype_definition_enumeration.ALTERNATIVE_ID = datatype_definition_enumeration.ALTERNATIVE_ID[:0]
-	for _, _A_ALTERNATIVE_IDid := range datatype_definition_enumerationDB.DATATYPE_DEFINITION_ENUMERATIONPointersEncoding.ALTERNATIVE_ID {
-		datatype_definition_enumeration.ALTERNATIVE_ID = append(datatype_definition_enumeration.ALTERNATIVE_ID, backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(_A_ALTERNATIVE_IDid)])
+	// ALTERNATIVE_ID field
+	datatype_definition_enumeration.ALTERNATIVE_ID = nil
+	if datatype_definition_enumerationDB.ALTERNATIVE_IDID.Int64 != 0 {
+		datatype_definition_enumeration.ALTERNATIVE_ID = backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(datatype_definition_enumerationDB.ALTERNATIVE_IDID.Int64)]
 	}
-
-	// This loop redeem datatype_definition_enumeration.SPECIFIED_VALUES in the stage from the encode in the back repo
-	// It parses all A_SPECIFIED_VALUESDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	datatype_definition_enumeration.SPECIFIED_VALUES = datatype_definition_enumeration.SPECIFIED_VALUES[:0]
-	for _, _A_SPECIFIED_VALUESid := range datatype_definition_enumerationDB.DATATYPE_DEFINITION_ENUMERATIONPointersEncoding.SPECIFIED_VALUES {
-		datatype_definition_enumeration.SPECIFIED_VALUES = append(datatype_definition_enumeration.SPECIFIED_VALUES, backRepo.BackRepoA_SPECIFIED_VALUES.Map_A_SPECIFIED_VALUESDBID_A_SPECIFIED_VALUESPtr[uint(_A_SPECIFIED_VALUESid)])
+	// SPECIFIED_VALUES field
+	datatype_definition_enumeration.SPECIFIED_VALUES = nil
+	if datatype_definition_enumerationDB.SPECIFIED_VALUESID.Int64 != 0 {
+		datatype_definition_enumeration.SPECIFIED_VALUES = backRepo.BackRepoA_SPECIFIED_VALUES.Map_A_SPECIFIED_VALUESDBID_A_SPECIFIED_VALUESPtr[uint(datatype_definition_enumerationDB.SPECIFIED_VALUESID.Int64)]
 	}
-
 	return
 }
 
@@ -684,6 +666,18 @@ func (backRepoDATATYPE_DEFINITION_ENUMERATION *BackRepoDATATYPE_DEFINITION_ENUME
 		_ = datatype_definition_enumerationDB
 
 		// insertion point for reindexing pointers encoding
+		// reindexing ALTERNATIVE_ID field
+		if datatype_definition_enumerationDB.ALTERNATIVE_IDID.Int64 != 0 {
+			datatype_definition_enumerationDB.ALTERNATIVE_IDID.Int64 = int64(BackRepoA_ALTERNATIVE_IDid_atBckpTime_newID[uint(datatype_definition_enumerationDB.ALTERNATIVE_IDID.Int64)])
+			datatype_definition_enumerationDB.ALTERNATIVE_IDID.Valid = true
+		}
+
+		// reindexing SPECIFIED_VALUES field
+		if datatype_definition_enumerationDB.SPECIFIED_VALUESID.Int64 != 0 {
+			datatype_definition_enumerationDB.SPECIFIED_VALUESID.Int64 = int64(BackRepoA_SPECIFIED_VALUESid_atBckpTime_newID[uint(datatype_definition_enumerationDB.SPECIFIED_VALUESID.Int64)])
+			datatype_definition_enumerationDB.SPECIFIED_VALUESID.Valid = true
+		}
+
 		// update databse with new index encoding
 		query := backRepoDATATYPE_DEFINITION_ENUMERATION.db.Model(datatype_definition_enumerationDB).Updates(*datatype_definition_enumerationDB)
 		if query.Error != nil {

@@ -47,17 +47,21 @@ type SPEC_HIERARCHYAPI struct {
 type SPEC_HIERARCHYPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
 
-	// field ALTERNATIVE_ID is a slice of pointers to another Struct (optional or 0..1)
-	ALTERNATIVE_ID IntSlice `gorm:"type:TEXT"`
+	// field ALTERNATIVE_ID is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	ALTERNATIVE_IDID sql.NullInt64
 
-	// field CHILDREN is a slice of pointers to another Struct (optional or 0..1)
-	CHILDREN IntSlice `gorm:"type:TEXT"`
+	// field CHILDREN is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	CHILDRENID sql.NullInt64
 
-	// field EDITABLE_ATTS is a slice of pointers to another Struct (optional or 0..1)
-	EDITABLE_ATTS IntSlice `gorm:"type:TEXT"`
+	// field EDITABLE_ATTS is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	EDITABLE_ATTSID sql.NullInt64
 
-	// field OBJECT is a slice of pointers to another Struct (optional or 0..1)
-	OBJECT IntSlice `gorm:"type:TEXT"`
+	// field OBJECT is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	OBJECTID sql.NullInt64
 }
 
 // SPEC_HIERARCHYDB describes a spec_hierarchy in the database
@@ -261,76 +265,52 @@ func (backRepoSPEC_HIERARCHY *BackRepoSPEC_HIERARCHYStruct) CommitPhaseTwoInstan
 		spec_hierarchyDB.CopyBasicFieldsFromSPEC_HIERARCHY(spec_hierarchy)
 
 		// insertion point for translating pointers encodings into actual pointers
-		// 1. reset
-		spec_hierarchyDB.SPEC_HIERARCHYPointersEncoding.ALTERNATIVE_ID = make([]int, 0)
-		// 2. encode
-		for _, a_alternative_idAssocEnd := range spec_hierarchy.ALTERNATIVE_ID {
-			a_alternative_idAssocEnd_DB :=
-				backRepo.BackRepoA_ALTERNATIVE_ID.GetA_ALTERNATIVE_IDDBFromA_ALTERNATIVE_IDPtr(a_alternative_idAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the a_alternative_idAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if a_alternative_idAssocEnd_DB == nil {
-				continue
+		// commit pointer value spec_hierarchy.ALTERNATIVE_ID translates to updating the spec_hierarchy.ALTERNATIVE_IDID
+		spec_hierarchyDB.ALTERNATIVE_IDID.Valid = true // allow for a 0 value (nil association)
+		if spec_hierarchy.ALTERNATIVE_ID != nil {
+			if ALTERNATIVE_IDId, ok := backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDPtr_A_ALTERNATIVE_IDDBID[spec_hierarchy.ALTERNATIVE_ID]; ok {
+				spec_hierarchyDB.ALTERNATIVE_IDID.Int64 = int64(ALTERNATIVE_IDId)
+				spec_hierarchyDB.ALTERNATIVE_IDID.Valid = true
 			}
-			
-			spec_hierarchyDB.SPEC_HIERARCHYPointersEncoding.ALTERNATIVE_ID =
-				append(spec_hierarchyDB.SPEC_HIERARCHYPointersEncoding.ALTERNATIVE_ID, int(a_alternative_idAssocEnd_DB.ID))
+		} else {
+			spec_hierarchyDB.ALTERNATIVE_IDID.Int64 = 0
+			spec_hierarchyDB.ALTERNATIVE_IDID.Valid = true
 		}
 
-		// 1. reset
-		spec_hierarchyDB.SPEC_HIERARCHYPointersEncoding.CHILDREN = make([]int, 0)
-		// 2. encode
-		for _, a_childrenAssocEnd := range spec_hierarchy.CHILDREN {
-			a_childrenAssocEnd_DB :=
-				backRepo.BackRepoA_CHILDREN.GetA_CHILDRENDBFromA_CHILDRENPtr(a_childrenAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the a_childrenAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if a_childrenAssocEnd_DB == nil {
-				continue
+		// commit pointer value spec_hierarchy.CHILDREN translates to updating the spec_hierarchy.CHILDRENID
+		spec_hierarchyDB.CHILDRENID.Valid = true // allow for a 0 value (nil association)
+		if spec_hierarchy.CHILDREN != nil {
+			if CHILDRENId, ok := backRepo.BackRepoA_CHILDREN.Map_A_CHILDRENPtr_A_CHILDRENDBID[spec_hierarchy.CHILDREN]; ok {
+				spec_hierarchyDB.CHILDRENID.Int64 = int64(CHILDRENId)
+				spec_hierarchyDB.CHILDRENID.Valid = true
 			}
-			
-			spec_hierarchyDB.SPEC_HIERARCHYPointersEncoding.CHILDREN =
-				append(spec_hierarchyDB.SPEC_HIERARCHYPointersEncoding.CHILDREN, int(a_childrenAssocEnd_DB.ID))
+		} else {
+			spec_hierarchyDB.CHILDRENID.Int64 = 0
+			spec_hierarchyDB.CHILDRENID.Valid = true
 		}
 
-		// 1. reset
-		spec_hierarchyDB.SPEC_HIERARCHYPointersEncoding.EDITABLE_ATTS = make([]int, 0)
-		// 2. encode
-		for _, a_editable_attsAssocEnd := range spec_hierarchy.EDITABLE_ATTS {
-			a_editable_attsAssocEnd_DB :=
-				backRepo.BackRepoA_EDITABLE_ATTS.GetA_EDITABLE_ATTSDBFromA_EDITABLE_ATTSPtr(a_editable_attsAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the a_editable_attsAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if a_editable_attsAssocEnd_DB == nil {
-				continue
+		// commit pointer value spec_hierarchy.EDITABLE_ATTS translates to updating the spec_hierarchy.EDITABLE_ATTSID
+		spec_hierarchyDB.EDITABLE_ATTSID.Valid = true // allow for a 0 value (nil association)
+		if spec_hierarchy.EDITABLE_ATTS != nil {
+			if EDITABLE_ATTSId, ok := backRepo.BackRepoA_EDITABLE_ATTS.Map_A_EDITABLE_ATTSPtr_A_EDITABLE_ATTSDBID[spec_hierarchy.EDITABLE_ATTS]; ok {
+				spec_hierarchyDB.EDITABLE_ATTSID.Int64 = int64(EDITABLE_ATTSId)
+				spec_hierarchyDB.EDITABLE_ATTSID.Valid = true
 			}
-			
-			spec_hierarchyDB.SPEC_HIERARCHYPointersEncoding.EDITABLE_ATTS =
-				append(spec_hierarchyDB.SPEC_HIERARCHYPointersEncoding.EDITABLE_ATTS, int(a_editable_attsAssocEnd_DB.ID))
+		} else {
+			spec_hierarchyDB.EDITABLE_ATTSID.Int64 = 0
+			spec_hierarchyDB.EDITABLE_ATTSID.Valid = true
 		}
 
-		// 1. reset
-		spec_hierarchyDB.SPEC_HIERARCHYPointersEncoding.OBJECT = make([]int, 0)
-		// 2. encode
-		for _, a_objectAssocEnd := range spec_hierarchy.OBJECT {
-			a_objectAssocEnd_DB :=
-				backRepo.BackRepoA_OBJECT.GetA_OBJECTDBFromA_OBJECTPtr(a_objectAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the a_objectAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if a_objectAssocEnd_DB == nil {
-				continue
+		// commit pointer value spec_hierarchy.OBJECT translates to updating the spec_hierarchy.OBJECTID
+		spec_hierarchyDB.OBJECTID.Valid = true // allow for a 0 value (nil association)
+		if spec_hierarchy.OBJECT != nil {
+			if OBJECTId, ok := backRepo.BackRepoA_OBJECT.Map_A_OBJECTPtr_A_OBJECTDBID[spec_hierarchy.OBJECT]; ok {
+				spec_hierarchyDB.OBJECTID.Int64 = int64(OBJECTId)
+				spec_hierarchyDB.OBJECTID.Valid = true
 			}
-			
-			spec_hierarchyDB.SPEC_HIERARCHYPointersEncoding.OBJECT =
-				append(spec_hierarchyDB.SPEC_HIERARCHYPointersEncoding.OBJECT, int(a_objectAssocEnd_DB.ID))
+		} else {
+			spec_hierarchyDB.OBJECTID.Int64 = 0
+			spec_hierarchyDB.OBJECTID.Valid = true
 		}
 
 		query := backRepoSPEC_HIERARCHY.db.Save(&spec_hierarchyDB)
@@ -446,42 +426,26 @@ func (backRepoSPEC_HIERARCHY *BackRepoSPEC_HIERARCHYStruct) CheckoutPhaseTwoInst
 func (spec_hierarchyDB *SPEC_HIERARCHYDB) DecodePointers(backRepo *BackRepoStruct, spec_hierarchy *models.SPEC_HIERARCHY) {
 
 	// insertion point for checkout of pointer encoding
-	// This loop redeem spec_hierarchy.ALTERNATIVE_ID in the stage from the encode in the back repo
-	// It parses all A_ALTERNATIVE_IDDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	spec_hierarchy.ALTERNATIVE_ID = spec_hierarchy.ALTERNATIVE_ID[:0]
-	for _, _A_ALTERNATIVE_IDid := range spec_hierarchyDB.SPEC_HIERARCHYPointersEncoding.ALTERNATIVE_ID {
-		spec_hierarchy.ALTERNATIVE_ID = append(spec_hierarchy.ALTERNATIVE_ID, backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(_A_ALTERNATIVE_IDid)])
+	// ALTERNATIVE_ID field
+	spec_hierarchy.ALTERNATIVE_ID = nil
+	if spec_hierarchyDB.ALTERNATIVE_IDID.Int64 != 0 {
+		spec_hierarchy.ALTERNATIVE_ID = backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(spec_hierarchyDB.ALTERNATIVE_IDID.Int64)]
 	}
-
-	// This loop redeem spec_hierarchy.CHILDREN in the stage from the encode in the back repo
-	// It parses all A_CHILDRENDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	spec_hierarchy.CHILDREN = spec_hierarchy.CHILDREN[:0]
-	for _, _A_CHILDRENid := range spec_hierarchyDB.SPEC_HIERARCHYPointersEncoding.CHILDREN {
-		spec_hierarchy.CHILDREN = append(spec_hierarchy.CHILDREN, backRepo.BackRepoA_CHILDREN.Map_A_CHILDRENDBID_A_CHILDRENPtr[uint(_A_CHILDRENid)])
+	// CHILDREN field
+	spec_hierarchy.CHILDREN = nil
+	if spec_hierarchyDB.CHILDRENID.Int64 != 0 {
+		spec_hierarchy.CHILDREN = backRepo.BackRepoA_CHILDREN.Map_A_CHILDRENDBID_A_CHILDRENPtr[uint(spec_hierarchyDB.CHILDRENID.Int64)]
 	}
-
-	// This loop redeem spec_hierarchy.EDITABLE_ATTS in the stage from the encode in the back repo
-	// It parses all A_EDITABLE_ATTSDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	spec_hierarchy.EDITABLE_ATTS = spec_hierarchy.EDITABLE_ATTS[:0]
-	for _, _A_EDITABLE_ATTSid := range spec_hierarchyDB.SPEC_HIERARCHYPointersEncoding.EDITABLE_ATTS {
-		spec_hierarchy.EDITABLE_ATTS = append(spec_hierarchy.EDITABLE_ATTS, backRepo.BackRepoA_EDITABLE_ATTS.Map_A_EDITABLE_ATTSDBID_A_EDITABLE_ATTSPtr[uint(_A_EDITABLE_ATTSid)])
+	// EDITABLE_ATTS field
+	spec_hierarchy.EDITABLE_ATTS = nil
+	if spec_hierarchyDB.EDITABLE_ATTSID.Int64 != 0 {
+		spec_hierarchy.EDITABLE_ATTS = backRepo.BackRepoA_EDITABLE_ATTS.Map_A_EDITABLE_ATTSDBID_A_EDITABLE_ATTSPtr[uint(spec_hierarchyDB.EDITABLE_ATTSID.Int64)]
 	}
-
-	// This loop redeem spec_hierarchy.OBJECT in the stage from the encode in the back repo
-	// It parses all A_OBJECTDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	spec_hierarchy.OBJECT = spec_hierarchy.OBJECT[:0]
-	for _, _A_OBJECTid := range spec_hierarchyDB.SPEC_HIERARCHYPointersEncoding.OBJECT {
-		spec_hierarchy.OBJECT = append(spec_hierarchy.OBJECT, backRepo.BackRepoA_OBJECT.Map_A_OBJECTDBID_A_OBJECTPtr[uint(_A_OBJECTid)])
+	// OBJECT field
+	spec_hierarchy.OBJECT = nil
+	if spec_hierarchyDB.OBJECTID.Int64 != 0 {
+		spec_hierarchy.OBJECT = backRepo.BackRepoA_OBJECT.Map_A_OBJECTDBID_A_OBJECTPtr[uint(spec_hierarchyDB.OBJECTID.Int64)]
 	}
-
 	return
 }
 
@@ -782,6 +746,30 @@ func (backRepoSPEC_HIERARCHY *BackRepoSPEC_HIERARCHYStruct) RestorePhaseTwo() {
 		_ = spec_hierarchyDB
 
 		// insertion point for reindexing pointers encoding
+		// reindexing ALTERNATIVE_ID field
+		if spec_hierarchyDB.ALTERNATIVE_IDID.Int64 != 0 {
+			spec_hierarchyDB.ALTERNATIVE_IDID.Int64 = int64(BackRepoA_ALTERNATIVE_IDid_atBckpTime_newID[uint(spec_hierarchyDB.ALTERNATIVE_IDID.Int64)])
+			spec_hierarchyDB.ALTERNATIVE_IDID.Valid = true
+		}
+
+		// reindexing CHILDREN field
+		if spec_hierarchyDB.CHILDRENID.Int64 != 0 {
+			spec_hierarchyDB.CHILDRENID.Int64 = int64(BackRepoA_CHILDRENid_atBckpTime_newID[uint(spec_hierarchyDB.CHILDRENID.Int64)])
+			spec_hierarchyDB.CHILDRENID.Valid = true
+		}
+
+		// reindexing EDITABLE_ATTS field
+		if spec_hierarchyDB.EDITABLE_ATTSID.Int64 != 0 {
+			spec_hierarchyDB.EDITABLE_ATTSID.Int64 = int64(BackRepoA_EDITABLE_ATTSid_atBckpTime_newID[uint(spec_hierarchyDB.EDITABLE_ATTSID.Int64)])
+			spec_hierarchyDB.EDITABLE_ATTSID.Valid = true
+		}
+
+		// reindexing OBJECT field
+		if spec_hierarchyDB.OBJECTID.Int64 != 0 {
+			spec_hierarchyDB.OBJECTID.Int64 = int64(BackRepoA_OBJECTid_atBckpTime_newID[uint(spec_hierarchyDB.OBJECTID.Int64)])
+			spec_hierarchyDB.OBJECTID.Valid = true
+		}
+
 		// update databse with new index encoding
 		query := backRepoSPEC_HIERARCHY.db.Model(spec_hierarchyDB).Updates(*spec_hierarchyDB)
 		if query.Error != nil {

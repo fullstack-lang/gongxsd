@@ -47,8 +47,9 @@ type DATATYPE_DEFINITION_XHTMLAPI struct {
 type DATATYPE_DEFINITION_XHTMLPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
 
-	// field ALTERNATIVE_ID is a slice of pointers to another Struct (optional or 0..1)
-	ALTERNATIVE_ID IntSlice `gorm:"type:TEXT"`
+	// field ALTERNATIVE_ID is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	ALTERNATIVE_IDID sql.NullInt64
 }
 
 // DATATYPE_DEFINITION_XHTMLDB describes a datatype_definition_xhtml in the database
@@ -238,22 +239,16 @@ func (backRepoDATATYPE_DEFINITION_XHTML *BackRepoDATATYPE_DEFINITION_XHTMLStruct
 		datatype_definition_xhtmlDB.CopyBasicFieldsFromDATATYPE_DEFINITION_XHTML(datatype_definition_xhtml)
 
 		// insertion point for translating pointers encodings into actual pointers
-		// 1. reset
-		datatype_definition_xhtmlDB.DATATYPE_DEFINITION_XHTMLPointersEncoding.ALTERNATIVE_ID = make([]int, 0)
-		// 2. encode
-		for _, a_alternative_idAssocEnd := range datatype_definition_xhtml.ALTERNATIVE_ID {
-			a_alternative_idAssocEnd_DB :=
-				backRepo.BackRepoA_ALTERNATIVE_ID.GetA_ALTERNATIVE_IDDBFromA_ALTERNATIVE_IDPtr(a_alternative_idAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the a_alternative_idAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if a_alternative_idAssocEnd_DB == nil {
-				continue
+		// commit pointer value datatype_definition_xhtml.ALTERNATIVE_ID translates to updating the datatype_definition_xhtml.ALTERNATIVE_IDID
+		datatype_definition_xhtmlDB.ALTERNATIVE_IDID.Valid = true // allow for a 0 value (nil association)
+		if datatype_definition_xhtml.ALTERNATIVE_ID != nil {
+			if ALTERNATIVE_IDId, ok := backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDPtr_A_ALTERNATIVE_IDDBID[datatype_definition_xhtml.ALTERNATIVE_ID]; ok {
+				datatype_definition_xhtmlDB.ALTERNATIVE_IDID.Int64 = int64(ALTERNATIVE_IDId)
+				datatype_definition_xhtmlDB.ALTERNATIVE_IDID.Valid = true
 			}
-			
-			datatype_definition_xhtmlDB.DATATYPE_DEFINITION_XHTMLPointersEncoding.ALTERNATIVE_ID =
-				append(datatype_definition_xhtmlDB.DATATYPE_DEFINITION_XHTMLPointersEncoding.ALTERNATIVE_ID, int(a_alternative_idAssocEnd_DB.ID))
+		} else {
+			datatype_definition_xhtmlDB.ALTERNATIVE_IDID.Int64 = 0
+			datatype_definition_xhtmlDB.ALTERNATIVE_IDID.Valid = true
 		}
 
 		query := backRepoDATATYPE_DEFINITION_XHTML.db.Save(&datatype_definition_xhtmlDB)
@@ -369,15 +364,11 @@ func (backRepoDATATYPE_DEFINITION_XHTML *BackRepoDATATYPE_DEFINITION_XHTMLStruct
 func (datatype_definition_xhtmlDB *DATATYPE_DEFINITION_XHTMLDB) DecodePointers(backRepo *BackRepoStruct, datatype_definition_xhtml *models.DATATYPE_DEFINITION_XHTML) {
 
 	// insertion point for checkout of pointer encoding
-	// This loop redeem datatype_definition_xhtml.ALTERNATIVE_ID in the stage from the encode in the back repo
-	// It parses all A_ALTERNATIVE_IDDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	datatype_definition_xhtml.ALTERNATIVE_ID = datatype_definition_xhtml.ALTERNATIVE_ID[:0]
-	for _, _A_ALTERNATIVE_IDid := range datatype_definition_xhtmlDB.DATATYPE_DEFINITION_XHTMLPointersEncoding.ALTERNATIVE_ID {
-		datatype_definition_xhtml.ALTERNATIVE_ID = append(datatype_definition_xhtml.ALTERNATIVE_ID, backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(_A_ALTERNATIVE_IDid)])
+	// ALTERNATIVE_ID field
+	datatype_definition_xhtml.ALTERNATIVE_ID = nil
+	if datatype_definition_xhtmlDB.ALTERNATIVE_IDID.Int64 != 0 {
+		datatype_definition_xhtml.ALTERNATIVE_ID = backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(datatype_definition_xhtmlDB.ALTERNATIVE_IDID.Int64)]
 	}
-
 	return
 }
 
@@ -654,6 +645,12 @@ func (backRepoDATATYPE_DEFINITION_XHTML *BackRepoDATATYPE_DEFINITION_XHTMLStruct
 		_ = datatype_definition_xhtmlDB
 
 		// insertion point for reindexing pointers encoding
+		// reindexing ALTERNATIVE_ID field
+		if datatype_definition_xhtmlDB.ALTERNATIVE_IDID.Int64 != 0 {
+			datatype_definition_xhtmlDB.ALTERNATIVE_IDID.Int64 = int64(BackRepoA_ALTERNATIVE_IDid_atBckpTime_newID[uint(datatype_definition_xhtmlDB.ALTERNATIVE_IDID.Int64)])
+			datatype_definition_xhtmlDB.ALTERNATIVE_IDID.Valid = true
+		}
+
 		// update databse with new index encoding
 		query := backRepoDATATYPE_DEFINITION_XHTML.db.Model(datatype_definition_xhtmlDB).Updates(*datatype_definition_xhtmlDB)
 		if query.Error != nil {

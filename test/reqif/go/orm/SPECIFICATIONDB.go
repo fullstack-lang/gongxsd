@@ -47,17 +47,21 @@ type SPECIFICATIONAPI struct {
 type SPECIFICATIONPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
 
-	// field ALTERNATIVE_ID is a slice of pointers to another Struct (optional or 0..1)
-	ALTERNATIVE_ID IntSlice `gorm:"type:TEXT"`
+	// field ALTERNATIVE_ID is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	ALTERNATIVE_IDID sql.NullInt64
 
-	// field CHILDREN is a slice of pointers to another Struct (optional or 0..1)
-	CHILDREN IntSlice `gorm:"type:TEXT"`
+	// field CHILDREN is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	CHILDRENID sql.NullInt64
 
-	// field VALUES is a slice of pointers to another Struct (optional or 0..1)
-	VALUES IntSlice `gorm:"type:TEXT"`
+	// field VALUES is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	VALUESID sql.NullInt64
 
-	// field TYPE is a slice of pointers to another Struct (optional or 0..1)
-	TYPE IntSlice `gorm:"type:TEXT"`
+	// field TYPE is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	TYPEID sql.NullInt64
 }
 
 // SPECIFICATIONDB describes a specification in the database
@@ -247,76 +251,52 @@ func (backRepoSPECIFICATION *BackRepoSPECIFICATIONStruct) CommitPhaseTwoInstance
 		specificationDB.CopyBasicFieldsFromSPECIFICATION(specification)
 
 		// insertion point for translating pointers encodings into actual pointers
-		// 1. reset
-		specificationDB.SPECIFICATIONPointersEncoding.ALTERNATIVE_ID = make([]int, 0)
-		// 2. encode
-		for _, a_alternative_idAssocEnd := range specification.ALTERNATIVE_ID {
-			a_alternative_idAssocEnd_DB :=
-				backRepo.BackRepoA_ALTERNATIVE_ID.GetA_ALTERNATIVE_IDDBFromA_ALTERNATIVE_IDPtr(a_alternative_idAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the a_alternative_idAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if a_alternative_idAssocEnd_DB == nil {
-				continue
+		// commit pointer value specification.ALTERNATIVE_ID translates to updating the specification.ALTERNATIVE_IDID
+		specificationDB.ALTERNATIVE_IDID.Valid = true // allow for a 0 value (nil association)
+		if specification.ALTERNATIVE_ID != nil {
+			if ALTERNATIVE_IDId, ok := backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDPtr_A_ALTERNATIVE_IDDBID[specification.ALTERNATIVE_ID]; ok {
+				specificationDB.ALTERNATIVE_IDID.Int64 = int64(ALTERNATIVE_IDId)
+				specificationDB.ALTERNATIVE_IDID.Valid = true
 			}
-			
-			specificationDB.SPECIFICATIONPointersEncoding.ALTERNATIVE_ID =
-				append(specificationDB.SPECIFICATIONPointersEncoding.ALTERNATIVE_ID, int(a_alternative_idAssocEnd_DB.ID))
+		} else {
+			specificationDB.ALTERNATIVE_IDID.Int64 = 0
+			specificationDB.ALTERNATIVE_IDID.Valid = true
 		}
 
-		// 1. reset
-		specificationDB.SPECIFICATIONPointersEncoding.CHILDREN = make([]int, 0)
-		// 2. encode
-		for _, a_childrenAssocEnd := range specification.CHILDREN {
-			a_childrenAssocEnd_DB :=
-				backRepo.BackRepoA_CHILDREN.GetA_CHILDRENDBFromA_CHILDRENPtr(a_childrenAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the a_childrenAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if a_childrenAssocEnd_DB == nil {
-				continue
+		// commit pointer value specification.CHILDREN translates to updating the specification.CHILDRENID
+		specificationDB.CHILDRENID.Valid = true // allow for a 0 value (nil association)
+		if specification.CHILDREN != nil {
+			if CHILDRENId, ok := backRepo.BackRepoA_CHILDREN.Map_A_CHILDRENPtr_A_CHILDRENDBID[specification.CHILDREN]; ok {
+				specificationDB.CHILDRENID.Int64 = int64(CHILDRENId)
+				specificationDB.CHILDRENID.Valid = true
 			}
-			
-			specificationDB.SPECIFICATIONPointersEncoding.CHILDREN =
-				append(specificationDB.SPECIFICATIONPointersEncoding.CHILDREN, int(a_childrenAssocEnd_DB.ID))
+		} else {
+			specificationDB.CHILDRENID.Int64 = 0
+			specificationDB.CHILDRENID.Valid = true
 		}
 
-		// 1. reset
-		specificationDB.SPECIFICATIONPointersEncoding.VALUES = make([]int, 0)
-		// 2. encode
-		for _, a_attribute_value_xhtml_1AssocEnd := range specification.VALUES {
-			a_attribute_value_xhtml_1AssocEnd_DB :=
-				backRepo.BackRepoA_ATTRIBUTE_VALUE_XHTML_1.GetA_ATTRIBUTE_VALUE_XHTML_1DBFromA_ATTRIBUTE_VALUE_XHTML_1Ptr(a_attribute_value_xhtml_1AssocEnd)
-			
-			// the stage might be inconsistant, meaning that the a_attribute_value_xhtml_1AssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if a_attribute_value_xhtml_1AssocEnd_DB == nil {
-				continue
+		// commit pointer value specification.VALUES translates to updating the specification.VALUESID
+		specificationDB.VALUESID.Valid = true // allow for a 0 value (nil association)
+		if specification.VALUES != nil {
+			if VALUESId, ok := backRepo.BackRepoA_ATTRIBUTE_VALUE_XHTML_1.Map_A_ATTRIBUTE_VALUE_XHTML_1Ptr_A_ATTRIBUTE_VALUE_XHTML_1DBID[specification.VALUES]; ok {
+				specificationDB.VALUESID.Int64 = int64(VALUESId)
+				specificationDB.VALUESID.Valid = true
 			}
-			
-			specificationDB.SPECIFICATIONPointersEncoding.VALUES =
-				append(specificationDB.SPECIFICATIONPointersEncoding.VALUES, int(a_attribute_value_xhtml_1AssocEnd_DB.ID))
+		} else {
+			specificationDB.VALUESID.Int64 = 0
+			specificationDB.VALUESID.Valid = true
 		}
 
-		// 1. reset
-		specificationDB.SPECIFICATIONPointersEncoding.TYPE = make([]int, 0)
-		// 2. encode
-		for _, a_specification_type_refAssocEnd := range specification.TYPE {
-			a_specification_type_refAssocEnd_DB :=
-				backRepo.BackRepoA_SPECIFICATION_TYPE_REF.GetA_SPECIFICATION_TYPE_REFDBFromA_SPECIFICATION_TYPE_REFPtr(a_specification_type_refAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the a_specification_type_refAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if a_specification_type_refAssocEnd_DB == nil {
-				continue
+		// commit pointer value specification.TYPE translates to updating the specification.TYPEID
+		specificationDB.TYPEID.Valid = true // allow for a 0 value (nil association)
+		if specification.TYPE != nil {
+			if TYPEId, ok := backRepo.BackRepoA_SPECIFICATION_TYPE_REF.Map_A_SPECIFICATION_TYPE_REFPtr_A_SPECIFICATION_TYPE_REFDBID[specification.TYPE]; ok {
+				specificationDB.TYPEID.Int64 = int64(TYPEId)
+				specificationDB.TYPEID.Valid = true
 			}
-			
-			specificationDB.SPECIFICATIONPointersEncoding.TYPE =
-				append(specificationDB.SPECIFICATIONPointersEncoding.TYPE, int(a_specification_type_refAssocEnd_DB.ID))
+		} else {
+			specificationDB.TYPEID.Int64 = 0
+			specificationDB.TYPEID.Valid = true
 		}
 
 		query := backRepoSPECIFICATION.db.Save(&specificationDB)
@@ -432,42 +412,26 @@ func (backRepoSPECIFICATION *BackRepoSPECIFICATIONStruct) CheckoutPhaseTwoInstan
 func (specificationDB *SPECIFICATIONDB) DecodePointers(backRepo *BackRepoStruct, specification *models.SPECIFICATION) {
 
 	// insertion point for checkout of pointer encoding
-	// This loop redeem specification.ALTERNATIVE_ID in the stage from the encode in the back repo
-	// It parses all A_ALTERNATIVE_IDDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	specification.ALTERNATIVE_ID = specification.ALTERNATIVE_ID[:0]
-	for _, _A_ALTERNATIVE_IDid := range specificationDB.SPECIFICATIONPointersEncoding.ALTERNATIVE_ID {
-		specification.ALTERNATIVE_ID = append(specification.ALTERNATIVE_ID, backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(_A_ALTERNATIVE_IDid)])
+	// ALTERNATIVE_ID field
+	specification.ALTERNATIVE_ID = nil
+	if specificationDB.ALTERNATIVE_IDID.Int64 != 0 {
+		specification.ALTERNATIVE_ID = backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(specificationDB.ALTERNATIVE_IDID.Int64)]
 	}
-
-	// This loop redeem specification.CHILDREN in the stage from the encode in the back repo
-	// It parses all A_CHILDRENDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	specification.CHILDREN = specification.CHILDREN[:0]
-	for _, _A_CHILDRENid := range specificationDB.SPECIFICATIONPointersEncoding.CHILDREN {
-		specification.CHILDREN = append(specification.CHILDREN, backRepo.BackRepoA_CHILDREN.Map_A_CHILDRENDBID_A_CHILDRENPtr[uint(_A_CHILDRENid)])
+	// CHILDREN field
+	specification.CHILDREN = nil
+	if specificationDB.CHILDRENID.Int64 != 0 {
+		specification.CHILDREN = backRepo.BackRepoA_CHILDREN.Map_A_CHILDRENDBID_A_CHILDRENPtr[uint(specificationDB.CHILDRENID.Int64)]
 	}
-
-	// This loop redeem specification.VALUES in the stage from the encode in the back repo
-	// It parses all A_ATTRIBUTE_VALUE_XHTML_1DB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	specification.VALUES = specification.VALUES[:0]
-	for _, _A_ATTRIBUTE_VALUE_XHTML_1id := range specificationDB.SPECIFICATIONPointersEncoding.VALUES {
-		specification.VALUES = append(specification.VALUES, backRepo.BackRepoA_ATTRIBUTE_VALUE_XHTML_1.Map_A_ATTRIBUTE_VALUE_XHTML_1DBID_A_ATTRIBUTE_VALUE_XHTML_1Ptr[uint(_A_ATTRIBUTE_VALUE_XHTML_1id)])
+	// VALUES field
+	specification.VALUES = nil
+	if specificationDB.VALUESID.Int64 != 0 {
+		specification.VALUES = backRepo.BackRepoA_ATTRIBUTE_VALUE_XHTML_1.Map_A_ATTRIBUTE_VALUE_XHTML_1DBID_A_ATTRIBUTE_VALUE_XHTML_1Ptr[uint(specificationDB.VALUESID.Int64)]
 	}
-
-	// This loop redeem specification.TYPE in the stage from the encode in the back repo
-	// It parses all A_SPECIFICATION_TYPE_REFDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	specification.TYPE = specification.TYPE[:0]
-	for _, _A_SPECIFICATION_TYPE_REFid := range specificationDB.SPECIFICATIONPointersEncoding.TYPE {
-		specification.TYPE = append(specification.TYPE, backRepo.BackRepoA_SPECIFICATION_TYPE_REF.Map_A_SPECIFICATION_TYPE_REFDBID_A_SPECIFICATION_TYPE_REFPtr[uint(_A_SPECIFICATION_TYPE_REFid)])
+	// TYPE field
+	specification.TYPE = nil
+	if specificationDB.TYPEID.Int64 != 0 {
+		specification.TYPE = backRepo.BackRepoA_SPECIFICATION_TYPE_REF.Map_A_SPECIFICATION_TYPE_REFDBID_A_SPECIFICATION_TYPE_REFPtr[uint(specificationDB.TYPEID.Int64)]
 	}
-
 	return
 }
 
@@ -744,6 +708,30 @@ func (backRepoSPECIFICATION *BackRepoSPECIFICATIONStruct) RestorePhaseTwo() {
 		_ = specificationDB
 
 		// insertion point for reindexing pointers encoding
+		// reindexing ALTERNATIVE_ID field
+		if specificationDB.ALTERNATIVE_IDID.Int64 != 0 {
+			specificationDB.ALTERNATIVE_IDID.Int64 = int64(BackRepoA_ALTERNATIVE_IDid_atBckpTime_newID[uint(specificationDB.ALTERNATIVE_IDID.Int64)])
+			specificationDB.ALTERNATIVE_IDID.Valid = true
+		}
+
+		// reindexing CHILDREN field
+		if specificationDB.CHILDRENID.Int64 != 0 {
+			specificationDB.CHILDRENID.Int64 = int64(BackRepoA_CHILDRENid_atBckpTime_newID[uint(specificationDB.CHILDRENID.Int64)])
+			specificationDB.CHILDRENID.Valid = true
+		}
+
+		// reindexing VALUES field
+		if specificationDB.VALUESID.Int64 != 0 {
+			specificationDB.VALUESID.Int64 = int64(BackRepoA_ATTRIBUTE_VALUE_XHTML_1id_atBckpTime_newID[uint(specificationDB.VALUESID.Int64)])
+			specificationDB.VALUESID.Valid = true
+		}
+
+		// reindexing TYPE field
+		if specificationDB.TYPEID.Int64 != 0 {
+			specificationDB.TYPEID.Int64 = int64(BackRepoA_SPECIFICATION_TYPE_REFid_atBckpTime_newID[uint(specificationDB.TYPEID.Int64)])
+			specificationDB.TYPEID.Valid = true
+		}
+
 		// update databse with new index encoding
 		query := backRepoSPECIFICATION.db.Model(specificationDB).Updates(*specificationDB)
 		if query.Error != nil {
