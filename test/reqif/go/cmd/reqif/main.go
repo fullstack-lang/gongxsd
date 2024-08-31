@@ -9,6 +9,7 @@ import (
 	"os"
 	"strconv"
 
+	"github.com/fullstack-lang/gongxsd/test/reqif/go/processing"
 	reqif_stack "github.com/fullstack-lang/gongxsd/test/reqif/go/stack"
 	reqif_static "github.com/fullstack-lang/gongxsd/test/reqif/go/static"
 
@@ -25,6 +26,8 @@ var (
 	embeddedDiagrams = flag.Bool("embeddedDiagrams", false, "parse/analysis go/models and go/embeddedDiagrams")
 
 	port = flag.Int("port", 8080, "port server")
+
+	reqifFile = flag.String("reqifFile", "", "")
 )
 
 func main() {
@@ -43,7 +46,7 @@ func main() {
 	stack.Probe.Refresh()
 
 	// Open the XML file
-	xmlFile, err := os.Open("../../../samples/Sample.reqif")
+	xmlFile, err := os.Open(*reqifFile)
 	if err != nil {
 		fmt.Println("Error opening file:", err)
 		return
@@ -66,6 +69,8 @@ func main() {
 	}
 
 	stack.Stage.StageBranchREQ_IF(&req_if)
+
+	processing.PostProcessing(stack.Stage)
 
 	stack.Stage.Commit()
 	stack.Probe.Refresh()
