@@ -47,23 +47,29 @@ type REQ_IF_CONTENTAPI struct {
 type REQ_IF_CONTENTPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
 
-	// field DATATYPES is a slice of pointers to another Struct (optional or 0..1)
-	DATATYPES IntSlice `gorm:"type:TEXT"`
+	// field DATATYPES is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	DATATYPESID sql.NullInt64
 
-	// field SPEC_TYPES is a slice of pointers to another Struct (optional or 0..1)
-	SPEC_TYPES IntSlice `gorm:"type:TEXT"`
+	// field SPEC_TYPES is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	SPEC_TYPESID sql.NullInt64
 
-	// field SPEC_OBJECTS is a slice of pointers to another Struct (optional or 0..1)
-	SPEC_OBJECTS IntSlice `gorm:"type:TEXT"`
+	// field SPEC_OBJECTS is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	SPEC_OBJECTSID sql.NullInt64
 
-	// field SPEC_RELATIONS is a slice of pointers to another Struct (optional or 0..1)
-	SPEC_RELATIONS IntSlice `gorm:"type:TEXT"`
+	// field SPEC_RELATIONS is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	SPEC_RELATIONSID sql.NullInt64
 
-	// field SPECIFICATIONS is a slice of pointers to another Struct (optional or 0..1)
-	SPECIFICATIONS IntSlice `gorm:"type:TEXT"`
+	// field SPECIFICATIONS is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	SPECIFICATIONSID sql.NullInt64
 
-	// field SPEC_RELATION_GROUPS is a slice of pointers to another Struct (optional or 0..1)
-	SPEC_RELATION_GROUPS IntSlice `gorm:"type:TEXT"`
+	// field SPEC_RELATION_GROUPS is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	SPEC_RELATION_GROUPSID sql.NullInt64
 }
 
 // REQ_IF_CONTENTDB describes a req_if_content in the database
@@ -229,112 +235,76 @@ func (backRepoREQ_IF_CONTENT *BackRepoREQ_IF_CONTENTStruct) CommitPhaseTwoInstan
 		req_if_contentDB.CopyBasicFieldsFromREQ_IF_CONTENT(req_if_content)
 
 		// insertion point for translating pointers encodings into actual pointers
-		// 1. reset
-		req_if_contentDB.REQ_IF_CONTENTPointersEncoding.DATATYPES = make([]int, 0)
-		// 2. encode
-		for _, a_datatypesAssocEnd := range req_if_content.DATATYPES {
-			a_datatypesAssocEnd_DB :=
-				backRepo.BackRepoA_DATATYPES.GetA_DATATYPESDBFromA_DATATYPESPtr(a_datatypesAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the a_datatypesAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if a_datatypesAssocEnd_DB == nil {
-				continue
+		// commit pointer value req_if_content.DATATYPES translates to updating the req_if_content.DATATYPESID
+		req_if_contentDB.DATATYPESID.Valid = true // allow for a 0 value (nil association)
+		if req_if_content.DATATYPES != nil {
+			if DATATYPESId, ok := backRepo.BackRepoA_DATATYPES.Map_A_DATATYPESPtr_A_DATATYPESDBID[req_if_content.DATATYPES]; ok {
+				req_if_contentDB.DATATYPESID.Int64 = int64(DATATYPESId)
+				req_if_contentDB.DATATYPESID.Valid = true
 			}
-			
-			req_if_contentDB.REQ_IF_CONTENTPointersEncoding.DATATYPES =
-				append(req_if_contentDB.REQ_IF_CONTENTPointersEncoding.DATATYPES, int(a_datatypesAssocEnd_DB.ID))
+		} else {
+			req_if_contentDB.DATATYPESID.Int64 = 0
+			req_if_contentDB.DATATYPESID.Valid = true
 		}
 
-		// 1. reset
-		req_if_contentDB.REQ_IF_CONTENTPointersEncoding.SPEC_TYPES = make([]int, 0)
-		// 2. encode
-		for _, a_spec_typesAssocEnd := range req_if_content.SPEC_TYPES {
-			a_spec_typesAssocEnd_DB :=
-				backRepo.BackRepoA_SPEC_TYPES.GetA_SPEC_TYPESDBFromA_SPEC_TYPESPtr(a_spec_typesAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the a_spec_typesAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if a_spec_typesAssocEnd_DB == nil {
-				continue
+		// commit pointer value req_if_content.SPEC_TYPES translates to updating the req_if_content.SPEC_TYPESID
+		req_if_contentDB.SPEC_TYPESID.Valid = true // allow for a 0 value (nil association)
+		if req_if_content.SPEC_TYPES != nil {
+			if SPEC_TYPESId, ok := backRepo.BackRepoA_SPEC_TYPES.Map_A_SPEC_TYPESPtr_A_SPEC_TYPESDBID[req_if_content.SPEC_TYPES]; ok {
+				req_if_contentDB.SPEC_TYPESID.Int64 = int64(SPEC_TYPESId)
+				req_if_contentDB.SPEC_TYPESID.Valid = true
 			}
-			
-			req_if_contentDB.REQ_IF_CONTENTPointersEncoding.SPEC_TYPES =
-				append(req_if_contentDB.REQ_IF_CONTENTPointersEncoding.SPEC_TYPES, int(a_spec_typesAssocEnd_DB.ID))
+		} else {
+			req_if_contentDB.SPEC_TYPESID.Int64 = 0
+			req_if_contentDB.SPEC_TYPESID.Valid = true
 		}
 
-		// 1. reset
-		req_if_contentDB.REQ_IF_CONTENTPointersEncoding.SPEC_OBJECTS = make([]int, 0)
-		// 2. encode
-		for _, a_spec_objectsAssocEnd := range req_if_content.SPEC_OBJECTS {
-			a_spec_objectsAssocEnd_DB :=
-				backRepo.BackRepoA_SPEC_OBJECTS.GetA_SPEC_OBJECTSDBFromA_SPEC_OBJECTSPtr(a_spec_objectsAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the a_spec_objectsAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if a_spec_objectsAssocEnd_DB == nil {
-				continue
+		// commit pointer value req_if_content.SPEC_OBJECTS translates to updating the req_if_content.SPEC_OBJECTSID
+		req_if_contentDB.SPEC_OBJECTSID.Valid = true // allow for a 0 value (nil association)
+		if req_if_content.SPEC_OBJECTS != nil {
+			if SPEC_OBJECTSId, ok := backRepo.BackRepoA_SPEC_OBJECTS.Map_A_SPEC_OBJECTSPtr_A_SPEC_OBJECTSDBID[req_if_content.SPEC_OBJECTS]; ok {
+				req_if_contentDB.SPEC_OBJECTSID.Int64 = int64(SPEC_OBJECTSId)
+				req_if_contentDB.SPEC_OBJECTSID.Valid = true
 			}
-			
-			req_if_contentDB.REQ_IF_CONTENTPointersEncoding.SPEC_OBJECTS =
-				append(req_if_contentDB.REQ_IF_CONTENTPointersEncoding.SPEC_OBJECTS, int(a_spec_objectsAssocEnd_DB.ID))
+		} else {
+			req_if_contentDB.SPEC_OBJECTSID.Int64 = 0
+			req_if_contentDB.SPEC_OBJECTSID.Valid = true
 		}
 
-		// 1. reset
-		req_if_contentDB.REQ_IF_CONTENTPointersEncoding.SPEC_RELATIONS = make([]int, 0)
-		// 2. encode
-		for _, a_spec_relationsAssocEnd := range req_if_content.SPEC_RELATIONS {
-			a_spec_relationsAssocEnd_DB :=
-				backRepo.BackRepoA_SPEC_RELATIONS.GetA_SPEC_RELATIONSDBFromA_SPEC_RELATIONSPtr(a_spec_relationsAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the a_spec_relationsAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if a_spec_relationsAssocEnd_DB == nil {
-				continue
+		// commit pointer value req_if_content.SPEC_RELATIONS translates to updating the req_if_content.SPEC_RELATIONSID
+		req_if_contentDB.SPEC_RELATIONSID.Valid = true // allow for a 0 value (nil association)
+		if req_if_content.SPEC_RELATIONS != nil {
+			if SPEC_RELATIONSId, ok := backRepo.BackRepoA_SPEC_RELATIONS.Map_A_SPEC_RELATIONSPtr_A_SPEC_RELATIONSDBID[req_if_content.SPEC_RELATIONS]; ok {
+				req_if_contentDB.SPEC_RELATIONSID.Int64 = int64(SPEC_RELATIONSId)
+				req_if_contentDB.SPEC_RELATIONSID.Valid = true
 			}
-			
-			req_if_contentDB.REQ_IF_CONTENTPointersEncoding.SPEC_RELATIONS =
-				append(req_if_contentDB.REQ_IF_CONTENTPointersEncoding.SPEC_RELATIONS, int(a_spec_relationsAssocEnd_DB.ID))
+		} else {
+			req_if_contentDB.SPEC_RELATIONSID.Int64 = 0
+			req_if_contentDB.SPEC_RELATIONSID.Valid = true
 		}
 
-		// 1. reset
-		req_if_contentDB.REQ_IF_CONTENTPointersEncoding.SPECIFICATIONS = make([]int, 0)
-		// 2. encode
-		for _, a_specificationsAssocEnd := range req_if_content.SPECIFICATIONS {
-			a_specificationsAssocEnd_DB :=
-				backRepo.BackRepoA_SPECIFICATIONS.GetA_SPECIFICATIONSDBFromA_SPECIFICATIONSPtr(a_specificationsAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the a_specificationsAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if a_specificationsAssocEnd_DB == nil {
-				continue
+		// commit pointer value req_if_content.SPECIFICATIONS translates to updating the req_if_content.SPECIFICATIONSID
+		req_if_contentDB.SPECIFICATIONSID.Valid = true // allow for a 0 value (nil association)
+		if req_if_content.SPECIFICATIONS != nil {
+			if SPECIFICATIONSId, ok := backRepo.BackRepoA_SPECIFICATIONS.Map_A_SPECIFICATIONSPtr_A_SPECIFICATIONSDBID[req_if_content.SPECIFICATIONS]; ok {
+				req_if_contentDB.SPECIFICATIONSID.Int64 = int64(SPECIFICATIONSId)
+				req_if_contentDB.SPECIFICATIONSID.Valid = true
 			}
-			
-			req_if_contentDB.REQ_IF_CONTENTPointersEncoding.SPECIFICATIONS =
-				append(req_if_contentDB.REQ_IF_CONTENTPointersEncoding.SPECIFICATIONS, int(a_specificationsAssocEnd_DB.ID))
+		} else {
+			req_if_contentDB.SPECIFICATIONSID.Int64 = 0
+			req_if_contentDB.SPECIFICATIONSID.Valid = true
 		}
 
-		// 1. reset
-		req_if_contentDB.REQ_IF_CONTENTPointersEncoding.SPEC_RELATION_GROUPS = make([]int, 0)
-		// 2. encode
-		for _, a_spec_relation_groupsAssocEnd := range req_if_content.SPEC_RELATION_GROUPS {
-			a_spec_relation_groupsAssocEnd_DB :=
-				backRepo.BackRepoA_SPEC_RELATION_GROUPS.GetA_SPEC_RELATION_GROUPSDBFromA_SPEC_RELATION_GROUPSPtr(a_spec_relation_groupsAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the a_spec_relation_groupsAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if a_spec_relation_groupsAssocEnd_DB == nil {
-				continue
+		// commit pointer value req_if_content.SPEC_RELATION_GROUPS translates to updating the req_if_content.SPEC_RELATION_GROUPSID
+		req_if_contentDB.SPEC_RELATION_GROUPSID.Valid = true // allow for a 0 value (nil association)
+		if req_if_content.SPEC_RELATION_GROUPS != nil {
+			if SPEC_RELATION_GROUPSId, ok := backRepo.BackRepoA_SPEC_RELATION_GROUPS.Map_A_SPEC_RELATION_GROUPSPtr_A_SPEC_RELATION_GROUPSDBID[req_if_content.SPEC_RELATION_GROUPS]; ok {
+				req_if_contentDB.SPEC_RELATION_GROUPSID.Int64 = int64(SPEC_RELATION_GROUPSId)
+				req_if_contentDB.SPEC_RELATION_GROUPSID.Valid = true
 			}
-			
-			req_if_contentDB.REQ_IF_CONTENTPointersEncoding.SPEC_RELATION_GROUPS =
-				append(req_if_contentDB.REQ_IF_CONTENTPointersEncoding.SPEC_RELATION_GROUPS, int(a_spec_relation_groupsAssocEnd_DB.ID))
+		} else {
+			req_if_contentDB.SPEC_RELATION_GROUPSID.Int64 = 0
+			req_if_contentDB.SPEC_RELATION_GROUPSID.Valid = true
 		}
 
 		query := backRepoREQ_IF_CONTENT.db.Save(&req_if_contentDB)
@@ -450,60 +420,36 @@ func (backRepoREQ_IF_CONTENT *BackRepoREQ_IF_CONTENTStruct) CheckoutPhaseTwoInst
 func (req_if_contentDB *REQ_IF_CONTENTDB) DecodePointers(backRepo *BackRepoStruct, req_if_content *models.REQ_IF_CONTENT) {
 
 	// insertion point for checkout of pointer encoding
-	// This loop redeem req_if_content.DATATYPES in the stage from the encode in the back repo
-	// It parses all A_DATATYPESDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	req_if_content.DATATYPES = req_if_content.DATATYPES[:0]
-	for _, _A_DATATYPESid := range req_if_contentDB.REQ_IF_CONTENTPointersEncoding.DATATYPES {
-		req_if_content.DATATYPES = append(req_if_content.DATATYPES, backRepo.BackRepoA_DATATYPES.Map_A_DATATYPESDBID_A_DATATYPESPtr[uint(_A_DATATYPESid)])
+	// DATATYPES field
+	req_if_content.DATATYPES = nil
+	if req_if_contentDB.DATATYPESID.Int64 != 0 {
+		req_if_content.DATATYPES = backRepo.BackRepoA_DATATYPES.Map_A_DATATYPESDBID_A_DATATYPESPtr[uint(req_if_contentDB.DATATYPESID.Int64)]
 	}
-
-	// This loop redeem req_if_content.SPEC_TYPES in the stage from the encode in the back repo
-	// It parses all A_SPEC_TYPESDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	req_if_content.SPEC_TYPES = req_if_content.SPEC_TYPES[:0]
-	for _, _A_SPEC_TYPESid := range req_if_contentDB.REQ_IF_CONTENTPointersEncoding.SPEC_TYPES {
-		req_if_content.SPEC_TYPES = append(req_if_content.SPEC_TYPES, backRepo.BackRepoA_SPEC_TYPES.Map_A_SPEC_TYPESDBID_A_SPEC_TYPESPtr[uint(_A_SPEC_TYPESid)])
+	// SPEC_TYPES field
+	req_if_content.SPEC_TYPES = nil
+	if req_if_contentDB.SPEC_TYPESID.Int64 != 0 {
+		req_if_content.SPEC_TYPES = backRepo.BackRepoA_SPEC_TYPES.Map_A_SPEC_TYPESDBID_A_SPEC_TYPESPtr[uint(req_if_contentDB.SPEC_TYPESID.Int64)]
 	}
-
-	// This loop redeem req_if_content.SPEC_OBJECTS in the stage from the encode in the back repo
-	// It parses all A_SPEC_OBJECTSDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	req_if_content.SPEC_OBJECTS = req_if_content.SPEC_OBJECTS[:0]
-	for _, _A_SPEC_OBJECTSid := range req_if_contentDB.REQ_IF_CONTENTPointersEncoding.SPEC_OBJECTS {
-		req_if_content.SPEC_OBJECTS = append(req_if_content.SPEC_OBJECTS, backRepo.BackRepoA_SPEC_OBJECTS.Map_A_SPEC_OBJECTSDBID_A_SPEC_OBJECTSPtr[uint(_A_SPEC_OBJECTSid)])
+	// SPEC_OBJECTS field
+	req_if_content.SPEC_OBJECTS = nil
+	if req_if_contentDB.SPEC_OBJECTSID.Int64 != 0 {
+		req_if_content.SPEC_OBJECTS = backRepo.BackRepoA_SPEC_OBJECTS.Map_A_SPEC_OBJECTSDBID_A_SPEC_OBJECTSPtr[uint(req_if_contentDB.SPEC_OBJECTSID.Int64)]
 	}
-
-	// This loop redeem req_if_content.SPEC_RELATIONS in the stage from the encode in the back repo
-	// It parses all A_SPEC_RELATIONSDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	req_if_content.SPEC_RELATIONS = req_if_content.SPEC_RELATIONS[:0]
-	for _, _A_SPEC_RELATIONSid := range req_if_contentDB.REQ_IF_CONTENTPointersEncoding.SPEC_RELATIONS {
-		req_if_content.SPEC_RELATIONS = append(req_if_content.SPEC_RELATIONS, backRepo.BackRepoA_SPEC_RELATIONS.Map_A_SPEC_RELATIONSDBID_A_SPEC_RELATIONSPtr[uint(_A_SPEC_RELATIONSid)])
+	// SPEC_RELATIONS field
+	req_if_content.SPEC_RELATIONS = nil
+	if req_if_contentDB.SPEC_RELATIONSID.Int64 != 0 {
+		req_if_content.SPEC_RELATIONS = backRepo.BackRepoA_SPEC_RELATIONS.Map_A_SPEC_RELATIONSDBID_A_SPEC_RELATIONSPtr[uint(req_if_contentDB.SPEC_RELATIONSID.Int64)]
 	}
-
-	// This loop redeem req_if_content.SPECIFICATIONS in the stage from the encode in the back repo
-	// It parses all A_SPECIFICATIONSDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	req_if_content.SPECIFICATIONS = req_if_content.SPECIFICATIONS[:0]
-	for _, _A_SPECIFICATIONSid := range req_if_contentDB.REQ_IF_CONTENTPointersEncoding.SPECIFICATIONS {
-		req_if_content.SPECIFICATIONS = append(req_if_content.SPECIFICATIONS, backRepo.BackRepoA_SPECIFICATIONS.Map_A_SPECIFICATIONSDBID_A_SPECIFICATIONSPtr[uint(_A_SPECIFICATIONSid)])
+	// SPECIFICATIONS field
+	req_if_content.SPECIFICATIONS = nil
+	if req_if_contentDB.SPECIFICATIONSID.Int64 != 0 {
+		req_if_content.SPECIFICATIONS = backRepo.BackRepoA_SPECIFICATIONS.Map_A_SPECIFICATIONSDBID_A_SPECIFICATIONSPtr[uint(req_if_contentDB.SPECIFICATIONSID.Int64)]
 	}
-
-	// This loop redeem req_if_content.SPEC_RELATION_GROUPS in the stage from the encode in the back repo
-	// It parses all A_SPEC_RELATION_GROUPSDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	req_if_content.SPEC_RELATION_GROUPS = req_if_content.SPEC_RELATION_GROUPS[:0]
-	for _, _A_SPEC_RELATION_GROUPSid := range req_if_contentDB.REQ_IF_CONTENTPointersEncoding.SPEC_RELATION_GROUPS {
-		req_if_content.SPEC_RELATION_GROUPS = append(req_if_content.SPEC_RELATION_GROUPS, backRepo.BackRepoA_SPEC_RELATION_GROUPS.Map_A_SPEC_RELATION_GROUPSDBID_A_SPEC_RELATION_GROUPSPtr[uint(_A_SPEC_RELATION_GROUPSid)])
+	// SPEC_RELATION_GROUPS field
+	req_if_content.SPEC_RELATION_GROUPS = nil
+	if req_if_contentDB.SPEC_RELATION_GROUPSID.Int64 != 0 {
+		req_if_content.SPEC_RELATION_GROUPS = backRepo.BackRepoA_SPEC_RELATION_GROUPS.Map_A_SPEC_RELATION_GROUPSDBID_A_SPEC_RELATION_GROUPSPtr[uint(req_if_contentDB.SPEC_RELATION_GROUPSID.Int64)]
 	}
-
 	return
 }
 
@@ -732,6 +678,42 @@ func (backRepoREQ_IF_CONTENT *BackRepoREQ_IF_CONTENTStruct) RestorePhaseTwo() {
 		_ = req_if_contentDB
 
 		// insertion point for reindexing pointers encoding
+		// reindexing DATATYPES field
+		if req_if_contentDB.DATATYPESID.Int64 != 0 {
+			req_if_contentDB.DATATYPESID.Int64 = int64(BackRepoA_DATATYPESid_atBckpTime_newID[uint(req_if_contentDB.DATATYPESID.Int64)])
+			req_if_contentDB.DATATYPESID.Valid = true
+		}
+
+		// reindexing SPEC_TYPES field
+		if req_if_contentDB.SPEC_TYPESID.Int64 != 0 {
+			req_if_contentDB.SPEC_TYPESID.Int64 = int64(BackRepoA_SPEC_TYPESid_atBckpTime_newID[uint(req_if_contentDB.SPEC_TYPESID.Int64)])
+			req_if_contentDB.SPEC_TYPESID.Valid = true
+		}
+
+		// reindexing SPEC_OBJECTS field
+		if req_if_contentDB.SPEC_OBJECTSID.Int64 != 0 {
+			req_if_contentDB.SPEC_OBJECTSID.Int64 = int64(BackRepoA_SPEC_OBJECTSid_atBckpTime_newID[uint(req_if_contentDB.SPEC_OBJECTSID.Int64)])
+			req_if_contentDB.SPEC_OBJECTSID.Valid = true
+		}
+
+		// reindexing SPEC_RELATIONS field
+		if req_if_contentDB.SPEC_RELATIONSID.Int64 != 0 {
+			req_if_contentDB.SPEC_RELATIONSID.Int64 = int64(BackRepoA_SPEC_RELATIONSid_atBckpTime_newID[uint(req_if_contentDB.SPEC_RELATIONSID.Int64)])
+			req_if_contentDB.SPEC_RELATIONSID.Valid = true
+		}
+
+		// reindexing SPECIFICATIONS field
+		if req_if_contentDB.SPECIFICATIONSID.Int64 != 0 {
+			req_if_contentDB.SPECIFICATIONSID.Int64 = int64(BackRepoA_SPECIFICATIONSid_atBckpTime_newID[uint(req_if_contentDB.SPECIFICATIONSID.Int64)])
+			req_if_contentDB.SPECIFICATIONSID.Valid = true
+		}
+
+		// reindexing SPEC_RELATION_GROUPS field
+		if req_if_contentDB.SPEC_RELATION_GROUPSID.Int64 != 0 {
+			req_if_contentDB.SPEC_RELATION_GROUPSID.Int64 = int64(BackRepoA_SPEC_RELATION_GROUPSid_atBckpTime_newID[uint(req_if_contentDB.SPEC_RELATION_GROUPSID.Int64)])
+			req_if_contentDB.SPEC_RELATION_GROUPSID.Valid = true
+		}
+
 		// update databse with new index encoding
 		query := backRepoREQ_IF_CONTENT.db.Model(req_if_contentDB).Updates(*req_if_contentDB)
 		if query.Error != nil {

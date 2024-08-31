@@ -47,14 +47,17 @@ type REQ_IFAPI struct {
 type REQ_IFPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
 
-	// field THE_HEADER is a slice of pointers to another Struct (optional or 0..1)
-	THE_HEADER IntSlice `gorm:"type:TEXT"`
+	// field THE_HEADER is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	THE_HEADERID sql.NullInt64
 
-	// field CORE_CONTENT is a slice of pointers to another Struct (optional or 0..1)
-	CORE_CONTENT IntSlice `gorm:"type:TEXT"`
+	// field CORE_CONTENT is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	CORE_CONTENTID sql.NullInt64
 
-	// field TOOL_EXTENSIONS is a slice of pointers to another Struct (optional or 0..1)
-	TOOL_EXTENSIONS IntSlice `gorm:"type:TEXT"`
+	// field TOOL_EXTENSIONS is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	TOOL_EXTENSIONSID sql.NullInt64
 }
 
 // REQ_IFDB describes a req_if in the database
@@ -226,58 +229,40 @@ func (backRepoREQ_IF *BackRepoREQ_IFStruct) CommitPhaseTwoInstance(backRepo *Bac
 		req_ifDB.CopyBasicFieldsFromREQ_IF(req_if)
 
 		// insertion point for translating pointers encodings into actual pointers
-		// 1. reset
-		req_ifDB.REQ_IFPointersEncoding.THE_HEADER = make([]int, 0)
-		// 2. encode
-		for _, a_the_headerAssocEnd := range req_if.THE_HEADER {
-			a_the_headerAssocEnd_DB :=
-				backRepo.BackRepoA_THE_HEADER.GetA_THE_HEADERDBFromA_THE_HEADERPtr(a_the_headerAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the a_the_headerAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if a_the_headerAssocEnd_DB == nil {
-				continue
+		// commit pointer value req_if.THE_HEADER translates to updating the req_if.THE_HEADERID
+		req_ifDB.THE_HEADERID.Valid = true // allow for a 0 value (nil association)
+		if req_if.THE_HEADER != nil {
+			if THE_HEADERId, ok := backRepo.BackRepoA_THE_HEADER.Map_A_THE_HEADERPtr_A_THE_HEADERDBID[req_if.THE_HEADER]; ok {
+				req_ifDB.THE_HEADERID.Int64 = int64(THE_HEADERId)
+				req_ifDB.THE_HEADERID.Valid = true
 			}
-			
-			req_ifDB.REQ_IFPointersEncoding.THE_HEADER =
-				append(req_ifDB.REQ_IFPointersEncoding.THE_HEADER, int(a_the_headerAssocEnd_DB.ID))
+		} else {
+			req_ifDB.THE_HEADERID.Int64 = 0
+			req_ifDB.THE_HEADERID.Valid = true
 		}
 
-		// 1. reset
-		req_ifDB.REQ_IFPointersEncoding.CORE_CONTENT = make([]int, 0)
-		// 2. encode
-		for _, a_core_contentAssocEnd := range req_if.CORE_CONTENT {
-			a_core_contentAssocEnd_DB :=
-				backRepo.BackRepoA_CORE_CONTENT.GetA_CORE_CONTENTDBFromA_CORE_CONTENTPtr(a_core_contentAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the a_core_contentAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if a_core_contentAssocEnd_DB == nil {
-				continue
+		// commit pointer value req_if.CORE_CONTENT translates to updating the req_if.CORE_CONTENTID
+		req_ifDB.CORE_CONTENTID.Valid = true // allow for a 0 value (nil association)
+		if req_if.CORE_CONTENT != nil {
+			if CORE_CONTENTId, ok := backRepo.BackRepoA_CORE_CONTENT.Map_A_CORE_CONTENTPtr_A_CORE_CONTENTDBID[req_if.CORE_CONTENT]; ok {
+				req_ifDB.CORE_CONTENTID.Int64 = int64(CORE_CONTENTId)
+				req_ifDB.CORE_CONTENTID.Valid = true
 			}
-			
-			req_ifDB.REQ_IFPointersEncoding.CORE_CONTENT =
-				append(req_ifDB.REQ_IFPointersEncoding.CORE_CONTENT, int(a_core_contentAssocEnd_DB.ID))
+		} else {
+			req_ifDB.CORE_CONTENTID.Int64 = 0
+			req_ifDB.CORE_CONTENTID.Valid = true
 		}
 
-		// 1. reset
-		req_ifDB.REQ_IFPointersEncoding.TOOL_EXTENSIONS = make([]int, 0)
-		// 2. encode
-		for _, a_tool_extensionsAssocEnd := range req_if.TOOL_EXTENSIONS {
-			a_tool_extensionsAssocEnd_DB :=
-				backRepo.BackRepoA_TOOL_EXTENSIONS.GetA_TOOL_EXTENSIONSDBFromA_TOOL_EXTENSIONSPtr(a_tool_extensionsAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the a_tool_extensionsAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if a_tool_extensionsAssocEnd_DB == nil {
-				continue
+		// commit pointer value req_if.TOOL_EXTENSIONS translates to updating the req_if.TOOL_EXTENSIONSID
+		req_ifDB.TOOL_EXTENSIONSID.Valid = true // allow for a 0 value (nil association)
+		if req_if.TOOL_EXTENSIONS != nil {
+			if TOOL_EXTENSIONSId, ok := backRepo.BackRepoA_TOOL_EXTENSIONS.Map_A_TOOL_EXTENSIONSPtr_A_TOOL_EXTENSIONSDBID[req_if.TOOL_EXTENSIONS]; ok {
+				req_ifDB.TOOL_EXTENSIONSID.Int64 = int64(TOOL_EXTENSIONSId)
+				req_ifDB.TOOL_EXTENSIONSID.Valid = true
 			}
-			
-			req_ifDB.REQ_IFPointersEncoding.TOOL_EXTENSIONS =
-				append(req_ifDB.REQ_IFPointersEncoding.TOOL_EXTENSIONS, int(a_tool_extensionsAssocEnd_DB.ID))
+		} else {
+			req_ifDB.TOOL_EXTENSIONSID.Int64 = 0
+			req_ifDB.TOOL_EXTENSIONSID.Valid = true
 		}
 
 		query := backRepoREQ_IF.db.Save(&req_ifDB)
@@ -393,33 +378,21 @@ func (backRepoREQ_IF *BackRepoREQ_IFStruct) CheckoutPhaseTwoInstance(backRepo *B
 func (req_ifDB *REQ_IFDB) DecodePointers(backRepo *BackRepoStruct, req_if *models.REQ_IF) {
 
 	// insertion point for checkout of pointer encoding
-	// This loop redeem req_if.THE_HEADER in the stage from the encode in the back repo
-	// It parses all A_THE_HEADERDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	req_if.THE_HEADER = req_if.THE_HEADER[:0]
-	for _, _A_THE_HEADERid := range req_ifDB.REQ_IFPointersEncoding.THE_HEADER {
-		req_if.THE_HEADER = append(req_if.THE_HEADER, backRepo.BackRepoA_THE_HEADER.Map_A_THE_HEADERDBID_A_THE_HEADERPtr[uint(_A_THE_HEADERid)])
+	// THE_HEADER field
+	req_if.THE_HEADER = nil
+	if req_ifDB.THE_HEADERID.Int64 != 0 {
+		req_if.THE_HEADER = backRepo.BackRepoA_THE_HEADER.Map_A_THE_HEADERDBID_A_THE_HEADERPtr[uint(req_ifDB.THE_HEADERID.Int64)]
 	}
-
-	// This loop redeem req_if.CORE_CONTENT in the stage from the encode in the back repo
-	// It parses all A_CORE_CONTENTDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	req_if.CORE_CONTENT = req_if.CORE_CONTENT[:0]
-	for _, _A_CORE_CONTENTid := range req_ifDB.REQ_IFPointersEncoding.CORE_CONTENT {
-		req_if.CORE_CONTENT = append(req_if.CORE_CONTENT, backRepo.BackRepoA_CORE_CONTENT.Map_A_CORE_CONTENTDBID_A_CORE_CONTENTPtr[uint(_A_CORE_CONTENTid)])
+	// CORE_CONTENT field
+	req_if.CORE_CONTENT = nil
+	if req_ifDB.CORE_CONTENTID.Int64 != 0 {
+		req_if.CORE_CONTENT = backRepo.BackRepoA_CORE_CONTENT.Map_A_CORE_CONTENTDBID_A_CORE_CONTENTPtr[uint(req_ifDB.CORE_CONTENTID.Int64)]
 	}
-
-	// This loop redeem req_if.TOOL_EXTENSIONS in the stage from the encode in the back repo
-	// It parses all A_TOOL_EXTENSIONSDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	req_if.TOOL_EXTENSIONS = req_if.TOOL_EXTENSIONS[:0]
-	for _, _A_TOOL_EXTENSIONSid := range req_ifDB.REQ_IFPointersEncoding.TOOL_EXTENSIONS {
-		req_if.TOOL_EXTENSIONS = append(req_if.TOOL_EXTENSIONS, backRepo.BackRepoA_TOOL_EXTENSIONS.Map_A_TOOL_EXTENSIONSDBID_A_TOOL_EXTENSIONSPtr[uint(_A_TOOL_EXTENSIONSid)])
+	// TOOL_EXTENSIONS field
+	req_if.TOOL_EXTENSIONS = nil
+	if req_ifDB.TOOL_EXTENSIONSID.Int64 != 0 {
+		req_if.TOOL_EXTENSIONS = backRepo.BackRepoA_TOOL_EXTENSIONS.Map_A_TOOL_EXTENSIONSDBID_A_TOOL_EXTENSIONSPtr[uint(req_ifDB.TOOL_EXTENSIONSID.Int64)]
 	}
-
 	return
 }
 
@@ -660,6 +633,24 @@ func (backRepoREQ_IF *BackRepoREQ_IFStruct) RestorePhaseTwo() {
 		_ = req_ifDB
 
 		// insertion point for reindexing pointers encoding
+		// reindexing THE_HEADER field
+		if req_ifDB.THE_HEADERID.Int64 != 0 {
+			req_ifDB.THE_HEADERID.Int64 = int64(BackRepoA_THE_HEADERid_atBckpTime_newID[uint(req_ifDB.THE_HEADERID.Int64)])
+			req_ifDB.THE_HEADERID.Valid = true
+		}
+
+		// reindexing CORE_CONTENT field
+		if req_ifDB.CORE_CONTENTID.Int64 != 0 {
+			req_ifDB.CORE_CONTENTID.Int64 = int64(BackRepoA_CORE_CONTENTid_atBckpTime_newID[uint(req_ifDB.CORE_CONTENTID.Int64)])
+			req_ifDB.CORE_CONTENTID.Valid = true
+		}
+
+		// reindexing TOOL_EXTENSIONS field
+		if req_ifDB.TOOL_EXTENSIONSID.Int64 != 0 {
+			req_ifDB.TOOL_EXTENSIONSID.Int64 = int64(BackRepoA_TOOL_EXTENSIONSid_atBckpTime_newID[uint(req_ifDB.TOOL_EXTENSIONSID.Int64)])
+			req_ifDB.TOOL_EXTENSIONSID.Valid = true
+		}
+
 		// update databse with new index encoding
 		query := backRepoREQ_IF.db.Model(req_ifDB).Updates(*req_ifDB)
 		if query.Error != nil {

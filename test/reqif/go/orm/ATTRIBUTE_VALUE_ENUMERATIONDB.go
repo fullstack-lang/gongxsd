@@ -47,11 +47,13 @@ type ATTRIBUTE_VALUE_ENUMERATIONAPI struct {
 type ATTRIBUTE_VALUE_ENUMERATIONPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
 
-	// field DEFINITION is a slice of pointers to another Struct (optional or 0..1)
-	DEFINITION IntSlice `gorm:"type:TEXT"`
+	// field DEFINITION is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	DEFINITIONID sql.NullInt64
 
-	// field VALUES is a slice of pointers to another Struct (optional or 0..1)
-	VALUES IntSlice `gorm:"type:TEXT"`
+	// field VALUES is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	VALUESID sql.NullInt64
 }
 
 // ATTRIBUTE_VALUE_ENUMERATIONDB describes a attribute_value_enumeration in the database
@@ -217,40 +219,28 @@ func (backRepoATTRIBUTE_VALUE_ENUMERATION *BackRepoATTRIBUTE_VALUE_ENUMERATIONSt
 		attribute_value_enumerationDB.CopyBasicFieldsFromATTRIBUTE_VALUE_ENUMERATION(attribute_value_enumeration)
 
 		// insertion point for translating pointers encodings into actual pointers
-		// 1. reset
-		attribute_value_enumerationDB.ATTRIBUTE_VALUE_ENUMERATIONPointersEncoding.DEFINITION = make([]int, 0)
-		// 2. encode
-		for _, a_attribute_definition_enumeration_refAssocEnd := range attribute_value_enumeration.DEFINITION {
-			a_attribute_definition_enumeration_refAssocEnd_DB :=
-				backRepo.BackRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REF.GetA_ATTRIBUTE_DEFINITION_ENUMERATION_REFDBFromA_ATTRIBUTE_DEFINITION_ENUMERATION_REFPtr(a_attribute_definition_enumeration_refAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the a_attribute_definition_enumeration_refAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if a_attribute_definition_enumeration_refAssocEnd_DB == nil {
-				continue
+		// commit pointer value attribute_value_enumeration.DEFINITION translates to updating the attribute_value_enumeration.DEFINITIONID
+		attribute_value_enumerationDB.DEFINITIONID.Valid = true // allow for a 0 value (nil association)
+		if attribute_value_enumeration.DEFINITION != nil {
+			if DEFINITIONId, ok := backRepo.BackRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REF.Map_A_ATTRIBUTE_DEFINITION_ENUMERATION_REFPtr_A_ATTRIBUTE_DEFINITION_ENUMERATION_REFDBID[attribute_value_enumeration.DEFINITION]; ok {
+				attribute_value_enumerationDB.DEFINITIONID.Int64 = int64(DEFINITIONId)
+				attribute_value_enumerationDB.DEFINITIONID.Valid = true
 			}
-			
-			attribute_value_enumerationDB.ATTRIBUTE_VALUE_ENUMERATIONPointersEncoding.DEFINITION =
-				append(attribute_value_enumerationDB.ATTRIBUTE_VALUE_ENUMERATIONPointersEncoding.DEFINITION, int(a_attribute_definition_enumeration_refAssocEnd_DB.ID))
+		} else {
+			attribute_value_enumerationDB.DEFINITIONID.Int64 = 0
+			attribute_value_enumerationDB.DEFINITIONID.Valid = true
 		}
 
-		// 1. reset
-		attribute_value_enumerationDB.ATTRIBUTE_VALUE_ENUMERATIONPointersEncoding.VALUES = make([]int, 0)
-		// 2. encode
-		for _, a_enum_value_refAssocEnd := range attribute_value_enumeration.VALUES {
-			a_enum_value_refAssocEnd_DB :=
-				backRepo.BackRepoA_ENUM_VALUE_REF.GetA_ENUM_VALUE_REFDBFromA_ENUM_VALUE_REFPtr(a_enum_value_refAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the a_enum_value_refAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if a_enum_value_refAssocEnd_DB == nil {
-				continue
+		// commit pointer value attribute_value_enumeration.VALUES translates to updating the attribute_value_enumeration.VALUESID
+		attribute_value_enumerationDB.VALUESID.Valid = true // allow for a 0 value (nil association)
+		if attribute_value_enumeration.VALUES != nil {
+			if VALUESId, ok := backRepo.BackRepoA_ENUM_VALUE_REF.Map_A_ENUM_VALUE_REFPtr_A_ENUM_VALUE_REFDBID[attribute_value_enumeration.VALUES]; ok {
+				attribute_value_enumerationDB.VALUESID.Int64 = int64(VALUESId)
+				attribute_value_enumerationDB.VALUESID.Valid = true
 			}
-			
-			attribute_value_enumerationDB.ATTRIBUTE_VALUE_ENUMERATIONPointersEncoding.VALUES =
-				append(attribute_value_enumerationDB.ATTRIBUTE_VALUE_ENUMERATIONPointersEncoding.VALUES, int(a_enum_value_refAssocEnd_DB.ID))
+		} else {
+			attribute_value_enumerationDB.VALUESID.Int64 = 0
+			attribute_value_enumerationDB.VALUESID.Valid = true
 		}
 
 		query := backRepoATTRIBUTE_VALUE_ENUMERATION.db.Save(&attribute_value_enumerationDB)
@@ -366,24 +356,16 @@ func (backRepoATTRIBUTE_VALUE_ENUMERATION *BackRepoATTRIBUTE_VALUE_ENUMERATIONSt
 func (attribute_value_enumerationDB *ATTRIBUTE_VALUE_ENUMERATIONDB) DecodePointers(backRepo *BackRepoStruct, attribute_value_enumeration *models.ATTRIBUTE_VALUE_ENUMERATION) {
 
 	// insertion point for checkout of pointer encoding
-	// This loop redeem attribute_value_enumeration.DEFINITION in the stage from the encode in the back repo
-	// It parses all A_ATTRIBUTE_DEFINITION_ENUMERATION_REFDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	attribute_value_enumeration.DEFINITION = attribute_value_enumeration.DEFINITION[:0]
-	for _, _A_ATTRIBUTE_DEFINITION_ENUMERATION_REFid := range attribute_value_enumerationDB.ATTRIBUTE_VALUE_ENUMERATIONPointersEncoding.DEFINITION {
-		attribute_value_enumeration.DEFINITION = append(attribute_value_enumeration.DEFINITION, backRepo.BackRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REF.Map_A_ATTRIBUTE_DEFINITION_ENUMERATION_REFDBID_A_ATTRIBUTE_DEFINITION_ENUMERATION_REFPtr[uint(_A_ATTRIBUTE_DEFINITION_ENUMERATION_REFid)])
+	// DEFINITION field
+	attribute_value_enumeration.DEFINITION = nil
+	if attribute_value_enumerationDB.DEFINITIONID.Int64 != 0 {
+		attribute_value_enumeration.DEFINITION = backRepo.BackRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REF.Map_A_ATTRIBUTE_DEFINITION_ENUMERATION_REFDBID_A_ATTRIBUTE_DEFINITION_ENUMERATION_REFPtr[uint(attribute_value_enumerationDB.DEFINITIONID.Int64)]
 	}
-
-	// This loop redeem attribute_value_enumeration.VALUES in the stage from the encode in the back repo
-	// It parses all A_ENUM_VALUE_REFDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	attribute_value_enumeration.VALUES = attribute_value_enumeration.VALUES[:0]
-	for _, _A_ENUM_VALUE_REFid := range attribute_value_enumerationDB.ATTRIBUTE_VALUE_ENUMERATIONPointersEncoding.VALUES {
-		attribute_value_enumeration.VALUES = append(attribute_value_enumeration.VALUES, backRepo.BackRepoA_ENUM_VALUE_REF.Map_A_ENUM_VALUE_REFDBID_A_ENUM_VALUE_REFPtr[uint(_A_ENUM_VALUE_REFid)])
+	// VALUES field
+	attribute_value_enumeration.VALUES = nil
+	if attribute_value_enumerationDB.VALUESID.Int64 != 0 {
+		attribute_value_enumeration.VALUES = backRepo.BackRepoA_ENUM_VALUE_REF.Map_A_ENUM_VALUE_REFDBID_A_ENUM_VALUE_REFPtr[uint(attribute_value_enumerationDB.VALUESID.Int64)]
 	}
-
 	return
 }
 
@@ -612,6 +594,18 @@ func (backRepoATTRIBUTE_VALUE_ENUMERATION *BackRepoATTRIBUTE_VALUE_ENUMERATIONSt
 		_ = attribute_value_enumerationDB
 
 		// insertion point for reindexing pointers encoding
+		// reindexing DEFINITION field
+		if attribute_value_enumerationDB.DEFINITIONID.Int64 != 0 {
+			attribute_value_enumerationDB.DEFINITIONID.Int64 = int64(BackRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REFid_atBckpTime_newID[uint(attribute_value_enumerationDB.DEFINITIONID.Int64)])
+			attribute_value_enumerationDB.DEFINITIONID.Valid = true
+		}
+
+		// reindexing VALUES field
+		if attribute_value_enumerationDB.VALUESID.Int64 != 0 {
+			attribute_value_enumerationDB.VALUESID.Int64 = int64(BackRepoA_ENUM_VALUE_REFid_atBckpTime_newID[uint(attribute_value_enumerationDB.VALUESID.Int64)])
+			attribute_value_enumerationDB.VALUESID.Valid = true
+		}
+
 		// update databse with new index encoding
 		query := backRepoATTRIBUTE_VALUE_ENUMERATION.db.Model(attribute_value_enumerationDB).Updates(*attribute_value_enumerationDB)
 		if query.Error != nil {

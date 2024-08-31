@@ -38,13 +38,13 @@ type ATTRIBUTE_DEFINITION_BOOLEAN struct {
 	LONG_NAME string `xml:"LONG-NAME,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID *A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
 
 	// generated from anonymous type within outer element "DEFAULT-VALUE" of type A_ATTRIBUTE-VALUE-BOOLEAN.
-	DEFAULT_VALUE []*A_ATTRIBUTE_VALUE_BOOLEAN `xml:"DEFAULT-VALUE,omitempty"`
+	DEFAULT_VALUE *A_ATTRIBUTE_VALUE_BOOLEAN `xml:"DEFAULT-VALUE,omitempty"`
 
 	// generated from anonymous type within outer element "TYPE" of type A_DATATYPE-DEFINITION-BOOLEAN-REF.
-	TYPE []*A_DATATYPE_DEFINITION_BOOLEAN_REF `xml:"TYPE,omitempty"`
+	TYPE *A_DATATYPE_DEFINITION_BOOLEAN_REF `xml:"TYPE,omitempty"`
 }
 
 // ATTRIBUTE_DEFINITION_DATE Named source named complex type "ATTRIBUTE-DEFINITION-DATE"
@@ -69,13 +69,13 @@ type ATTRIBUTE_DEFINITION_DATE struct {
 	LONG_NAME string `xml:"LONG-NAME,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID *A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
 
 	// generated from anonymous type within outer element "DEFAULT-VALUE" of type A_ATTRIBUTE-VALUE-DATE.
-	DEFAULT_VALUE []*A_ATTRIBUTE_VALUE_DATE `xml:"DEFAULT-VALUE,omitempty"`
+	DEFAULT_VALUE *A_ATTRIBUTE_VALUE_DATE `xml:"DEFAULT-VALUE,omitempty"`
 
 	// generated from anonymous type within outer element "TYPE" of type A_DATATYPE-DEFINITION-DATE-REF.
-	TYPE []*A_DATATYPE_DEFINITION_DATE_REF `xml:"TYPE,omitempty"`
+	TYPE *A_DATATYPE_DEFINITION_DATE_REF `xml:"TYPE,omitempty"`
 }
 
 // ATTRIBUTE_DEFINITION_ENUMERATION Named source named complex type "ATTRIBUTE-DEFINITION-ENUMERATION"
@@ -103,13 +103,13 @@ type ATTRIBUTE_DEFINITION_ENUMERATION struct {
 	MULTI_VALUED bool `xml:"MULTI-VALUED,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID *A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
 
 	// generated from anonymous type within outer element "DEFAULT-VALUE" of type A_ATTRIBUTE-VALUE-ENUMERATION.
-	DEFAULT_VALUE []*A_ATTRIBUTE_VALUE_ENUMERATION `xml:"DEFAULT-VALUE,omitempty"`
+	DEFAULT_VALUE *A_ATTRIBUTE_VALUE_ENUMERATION `xml:"DEFAULT-VALUE,omitempty"`
 
 	// generated from anonymous type within outer element "TYPE" of type A_DATATYPE-DEFINITION-ENUMERATION-REF.
-	TYPE []*A_DATATYPE_DEFINITION_ENUMERATION_REF `xml:"TYPE,omitempty"`
+	TYPE *A_DATATYPE_DEFINITION_ENUMERATION_REF `xml:"TYPE,omitempty"`
 }
 
 // ATTRIBUTE_DEFINITION_INTEGER Named source named complex type "ATTRIBUTE-DEFINITION-INTEGER"
@@ -134,13 +134,13 @@ type ATTRIBUTE_DEFINITION_INTEGER struct {
 	LONG_NAME string `xml:"LONG-NAME,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID *A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
 
 	// generated from anonymous type within outer element "DEFAULT-VALUE" of type A_ATTRIBUTE-VALUE-INTEGER.
-	DEFAULT_VALUE []*A_ATTRIBUTE_VALUE_INTEGER `xml:"DEFAULT-VALUE,omitempty"`
+	DEFAULT_VALUE *A_ATTRIBUTE_VALUE_INTEGER `xml:"DEFAULT-VALUE,omitempty"`
 
 	// generated from anonymous type within outer element "TYPE" of type A_DATATYPE-DEFINITION-INTEGER-REF.
-	TYPE []*A_DATATYPE_DEFINITION_INTEGER_REF `xml:"TYPE,omitempty"`
+	TYPE *A_DATATYPE_DEFINITION_INTEGER_REF `xml:"TYPE,omitempty"`
 }
 
 // ATTRIBUTE_DEFINITION_REAL Named source named complex type "ATTRIBUTE-DEFINITION-REAL"
@@ -165,13 +165,13 @@ type ATTRIBUTE_DEFINITION_REAL struct {
 	LONG_NAME string `xml:"LONG-NAME,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID *A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
 
 	// generated from anonymous type within outer element "DEFAULT-VALUE" of type A_ATTRIBUTE-VALUE-REAL.
-	DEFAULT_VALUE []*A_ATTRIBUTE_VALUE_REAL `xml:"DEFAULT-VALUE,omitempty"`
+	DEFAULT_VALUE *A_ATTRIBUTE_VALUE_REAL `xml:"DEFAULT-VALUE,omitempty"`
 
 	// generated from anonymous type within outer element "TYPE" of type A_DATATYPE-DEFINITION-REAL-REF.
-	TYPE []*A_DATATYPE_DEFINITION_REAL_REF `xml:"TYPE,omitempty"`
+	TYPE *A_DATATYPE_DEFINITION_REAL_REF `xml:"TYPE,omitempty"`
 }
 
 // ATTRIBUTE_DEFINITION_STRING Named source named complex type "ATTRIBUTE-DEFINITION-STRING"
@@ -196,13 +196,13 @@ type ATTRIBUTE_DEFINITION_STRING struct {
 	LONG_NAME string `xml:"LONG-NAME,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID *A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
 
 	// generated from anonymous type within outer element "DEFAULT-VALUE" of type A_ATTRIBUTE-VALUE-STRING.
-	DEFAULT_VALUE []*A_ATTRIBUTE_VALUE_STRING `xml:"DEFAULT-VALUE,omitempty"`
+	DEFAULT_VALUE *A_ATTRIBUTE_VALUE_STRING `xml:"DEFAULT-VALUE,omitempty"`
 
 	// generated from anonymous type within outer element "TYPE" of type A_DATATYPE-DEFINITION-STRING-REF.
-	TYPE []*A_DATATYPE_DEFINITION_STRING_REF `xml:"TYPE,omitempty"`
+	TYPE *A_DATATYPE_DEFINITION_STRING_REF `xml:"TYPE,omitempty"`
 }
 
 // ATTRIBUTE_DEFINITION_XHTML Named source named complex type "ATTRIBUTE-DEFINITION-XHTML"
@@ -227,13 +227,13 @@ type ATTRIBUTE_DEFINITION_XHTML struct {
 	LONG_NAME string `xml:"LONG-NAME,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID *A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
 
 	// generated from anonymous type within outer element "DEFAULT-VALUE" of type A_ATTRIBUTE-VALUE-XHTML.
-	DEFAULT_VALUE []*A_ATTRIBUTE_VALUE_XHTML `xml:"DEFAULT-VALUE,omitempty"`
+	DEFAULT_VALUE *A_ATTRIBUTE_VALUE_XHTML `xml:"DEFAULT-VALUE,omitempty"`
 
 	// generated from anonymous type within outer element "TYPE" of type A_DATATYPE-DEFINITION-XHTML-REF.
-	TYPE []*A_DATATYPE_DEFINITION_XHTML_REF `xml:"TYPE,omitempty"`
+	TYPE *A_DATATYPE_DEFINITION_XHTML_REF `xml:"TYPE,omitempty"`
 }
 
 // ATTRIBUTE_VALUE_BOOLEAN Named source named complex type "ATTRIBUTE-VALUE-BOOLEAN"
@@ -246,7 +246,7 @@ type ATTRIBUTE_VALUE_BOOLEAN struct {
 	THE_VALUE bool `xml:"THE-VALUE,attr,omitempty"`
 
 	// generated from anonymous type within outer element "DEFINITION" of type A_ATTRIBUTE-DEFINITION-BOOLEAN-REF.
-	DEFINITION []*A_ATTRIBUTE_DEFINITION_BOOLEAN_REF `xml:"DEFINITION,omitempty"`
+	DEFINITION *A_ATTRIBUTE_DEFINITION_BOOLEAN_REF `xml:"DEFINITION,omitempty"`
 }
 
 // ATTRIBUTE_VALUE_DATE Named source named complex type "ATTRIBUTE-VALUE-DATE"
@@ -259,7 +259,7 @@ type ATTRIBUTE_VALUE_DATE struct {
 	THE_VALUE string `xml:"THE-VALUE,attr,omitempty"`
 
 	// generated from anonymous type within outer element "DEFINITION" of type A_ATTRIBUTE-DEFINITION-DATE-REF.
-	DEFINITION []*A_ATTRIBUTE_DEFINITION_DATE_REF `xml:"DEFINITION,omitempty"`
+	DEFINITION *A_ATTRIBUTE_DEFINITION_DATE_REF `xml:"DEFINITION,omitempty"`
 }
 
 // ATTRIBUTE_VALUE_ENUMERATION Named source named complex type "ATTRIBUTE-VALUE-ENUMERATION"
@@ -269,10 +269,10 @@ type ATTRIBUTE_VALUE_ENUMERATION struct {
 	// insertion point for fields
 
 	// generated from anonymous type within outer element "DEFINITION" of type A_ATTRIBUTE-DEFINITION-ENUMERATION-REF.
-	DEFINITION []*A_ATTRIBUTE_DEFINITION_ENUMERATION_REF `xml:"DEFINITION,omitempty"`
+	DEFINITION *A_ATTRIBUTE_DEFINITION_ENUMERATION_REF `xml:"DEFINITION,omitempty"`
 
 	// generated from anonymous type within outer element "VALUES" of type A_ENUM-VALUE-REF.
-	VALUES []*A_ENUM_VALUE_REF `xml:"VALUES,omitempty"`
+	VALUES *A_ENUM_VALUE_REF `xml:"VALUES,omitempty"`
 }
 
 // ATTRIBUTE_VALUE_INTEGER Named source named complex type "ATTRIBUTE-VALUE-INTEGER"
@@ -285,7 +285,7 @@ type ATTRIBUTE_VALUE_INTEGER struct {
 	THE_VALUE int `xml:"THE-VALUE,attr,omitempty"`
 
 	// generated from anonymous type within outer element "DEFINITION" of type A_ATTRIBUTE-DEFINITION-INTEGER-REF.
-	DEFINITION []*A_ATTRIBUTE_DEFINITION_INTEGER_REF `xml:"DEFINITION,omitempty"`
+	DEFINITION *A_ATTRIBUTE_DEFINITION_INTEGER_REF `xml:"DEFINITION,omitempty"`
 }
 
 // ATTRIBUTE_VALUE_REAL Named source named complex type "ATTRIBUTE-VALUE-REAL"
@@ -298,7 +298,7 @@ type ATTRIBUTE_VALUE_REAL struct {
 	THE_VALUE float64 `xml:"THE-VALUE,attr,omitempty"`
 
 	// generated from anonymous type within outer element "DEFINITION" of type A_ATTRIBUTE-DEFINITION-REAL-REF.
-	DEFINITION []*A_ATTRIBUTE_DEFINITION_REAL_REF `xml:"DEFINITION,omitempty"`
+	DEFINITION *A_ATTRIBUTE_DEFINITION_REAL_REF `xml:"DEFINITION,omitempty"`
 }
 
 // ATTRIBUTE_VALUE_STRING Named source named complex type "ATTRIBUTE-VALUE-STRING"
@@ -311,7 +311,7 @@ type ATTRIBUTE_VALUE_STRING struct {
 	THE_VALUE string `xml:"THE-VALUE,attr,omitempty"`
 
 	// generated from anonymous type within outer element "DEFINITION" of type A_ATTRIBUTE-DEFINITION-STRING-REF.
-	DEFINITION []*A_ATTRIBUTE_DEFINITION_STRING_REF `xml:"DEFINITION,omitempty"`
+	DEFINITION *A_ATTRIBUTE_DEFINITION_STRING_REF `xml:"DEFINITION,omitempty"`
 }
 
 // ATTRIBUTE_VALUE_XHTML Named source named complex type "ATTRIBUTE-VALUE-XHTML"
@@ -324,13 +324,13 @@ type ATTRIBUTE_VALUE_XHTML struct {
 	IS_SIMPLIFIED bool `xml:"IS-SIMPLIFIED,attr,omitempty"`
 
 	// generated from element "THE-VALUE" of type XHTML-CONTENT order 57 depth 0
-	THE_VALUE []*XHTML_CONTENT `xml:"THE-VALUE,omitempty"`
+	THE_VALUE *XHTML_CONTENT `xml:"THE-VALUE,omitempty"`
 
 	// generated from element "THE-ORIGINAL-VALUE" of type XHTML-CONTENT order 58 depth 0
-	THE_ORIGINAL_VALUE []*XHTML_CONTENT `xml:"THE-ORIGINAL-VALUE,omitempty"`
+	THE_ORIGINAL_VALUE *XHTML_CONTENT `xml:"THE-ORIGINAL-VALUE,omitempty"`
 
 	// generated from anonymous type within outer element "DEFINITION" of type A_ATTRIBUTE-DEFINITION-XHTML-REF.
-	DEFINITION []*A_ATTRIBUTE_DEFINITION_XHTML_REF `xml:"DEFINITION,omitempty"`
+	DEFINITION *A_ATTRIBUTE_DEFINITION_XHTML_REF `xml:"DEFINITION,omitempty"`
 }
 
 // A_ALTERNATIVE_ID Named source within outer element "ALTERNATIVE-ID"
@@ -473,16 +473,6 @@ type A_ATTRIBUTE_VALUE_STRING struct {
 	ATTRIBUTE_VALUE_STRING []*ATTRIBUTE_VALUE_STRING `xml:"ATTRIBUTE-VALUE-STRING,omitempty"`
 }
 
-// A_ATTRIBUTE_VALUE_XHTML Named source within outer element "DEFAULT-VALUE"
-type A_ATTRIBUTE_VALUE_XHTML struct {
-	Name string `xml:"-"`
-
-	// insertion point for fields
-
-	// generated from element "ATTRIBUTE-VALUE-XHTML" of type ATTRIBUTE-VALUE-XHTML order 40 depth 1
-	ATTRIBUTE_VALUE_XHTML []*ATTRIBUTE_VALUE_XHTML `xml:"ATTRIBUTE-VALUE-XHTML,omitempty"`
-}
-
 // A_ATTRIBUTE_VALUE_XHTML_1 Named source within outer element "VALUES"
 type A_ATTRIBUTE_VALUE_XHTML_1 struct {
 	Name string `xml:"-"`
@@ -506,6 +496,16 @@ type A_ATTRIBUTE_VALUE_XHTML_1 struct {
 
 	// generated from element "ATTRIBUTE-VALUE-STRING" of type ATTRIBUTE-VALUE-STRING order 34 depth 1
 	ATTRIBUTE_VALUE_STRING []*ATTRIBUTE_VALUE_STRING `xml:"ATTRIBUTE-VALUE-STRING,omitempty"`
+
+	// generated from element "ATTRIBUTE-VALUE-XHTML" of type ATTRIBUTE-VALUE-XHTML order 40 depth 1
+	ATTRIBUTE_VALUE_XHTML []*ATTRIBUTE_VALUE_XHTML `xml:"ATTRIBUTE-VALUE-XHTML,omitempty"`
+}
+
+// A_ATTRIBUTE_VALUE_XHTML Named source within outer element "DEFAULT-VALUE"
+type A_ATTRIBUTE_VALUE_XHTML struct {
+	Name string `xml:"-"`
+
+	// insertion point for fields
 
 	// generated from element "ATTRIBUTE-VALUE-XHTML" of type ATTRIBUTE-VALUE-XHTML order 40 depth 1
 	ATTRIBUTE_VALUE_XHTML []*ATTRIBUTE_VALUE_XHTML `xml:"ATTRIBUTE-VALUE-XHTML,omitempty"`
@@ -697,6 +697,16 @@ type A_RELATION_GROUP_TYPE_REF struct {
 	RELATION_GROUP_TYPE_REF string `xml:"RELATION-GROUP-TYPE-REF,omitempty"`
 }
 
+// A_SOURCE_SPECIFICATION_1 Named source within outer element "SOURCE-SPECIFICATION"
+type A_SOURCE_SPECIFICATION_1 struct {
+	Name string `xml:"-"`
+
+	// insertion point for fields
+
+	// generated from element "SPECIFICATION-REF" of type GLOBAL-REF order 84 depth 1
+	SPECIFICATION_REF string `xml:"SPECIFICATION-REF,omitempty"`
+}
+
 // A_SPEC_ATTRIBUTES Named source within outer element "SPEC-ATTRIBUTES"
 type A_SPEC_ATTRIBUTES struct {
 	Name string `xml:"-"`
@@ -834,7 +844,7 @@ type A_SPECIFIED_VALUES struct {
 	ENUM_VALUE []*ENUM_VALUE `xml:"ENUM-VALUE,omitempty"`
 }
 
-// A_TARGET_1 Named source within outer element "SOURCE"
+// A_TARGET_1 Named source within outer element "TARGET"
 type A_TARGET_1 struct {
 	Name string `xml:"-"`
 
@@ -844,17 +854,7 @@ type A_TARGET_1 struct {
 	SPEC_OBJECT_REF string `xml:"SPEC-OBJECT-REF,omitempty"`
 }
 
-// A_TARGET_SPECIFICATION_1 Named source within outer element "SOURCE-SPECIFICATION"
-type A_TARGET_SPECIFICATION_1 struct {
-	Name string `xml:"-"`
-
-	// insertion point for fields
-
-	// generated from element "SPECIFICATION-REF" of type GLOBAL-REF order 84 depth 1
-	SPECIFICATION_REF string `xml:"SPECIFICATION-REF,omitempty"`
-}
-
-// A_THE_HEADER Named source within out	er element "THE-HEADER"
+// A_THE_HEADER Named source within outer element "THE-HEADER"
 type A_THE_HEADER struct {
 	Name string `xml:"-"`
 
@@ -893,7 +893,7 @@ type DATATYPE_DEFINITION_BOOLEAN struct {
 	LONG_NAME string `xml:"LONG-NAME,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID *A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
 }
 
 // DATATYPE_DEFINITION_DATE Named source named complex type "DATATYPE-DEFINITION-DATE"
@@ -915,7 +915,7 @@ type DATATYPE_DEFINITION_DATE struct {
 	LONG_NAME string `xml:"LONG-NAME,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID *A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
 }
 
 // DATATYPE_DEFINITION_ENUMERATION Named source named complex type "DATATYPE-DEFINITION-ENUMERATION"
@@ -937,10 +937,10 @@ type DATATYPE_DEFINITION_ENUMERATION struct {
 	LONG_NAME string `xml:"LONG-NAME,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID *A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
 
 	// generated from anonymous type within outer element "SPECIFIED-VALUES" of type A_SPECIFIED-VALUES.
-	SPECIFIED_VALUES []*A_SPECIFIED_VALUES `xml:"SPECIFIED-VALUES,omitempty"`
+	SPECIFIED_VALUES *A_SPECIFIED_VALUES `xml:"SPECIFIED-VALUES,omitempty"`
 }
 
 // DATATYPE_DEFINITION_INTEGER Named source named complex type "DATATYPE-DEFINITION-INTEGER"
@@ -968,7 +968,7 @@ type DATATYPE_DEFINITION_INTEGER struct {
 	MIN int `xml:"MIN,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID *A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
 }
 
 // DATATYPE_DEFINITION_REAL Named source named complex type "DATATYPE-DEFINITION-REAL"
@@ -999,7 +999,7 @@ type DATATYPE_DEFINITION_REAL struct {
 	MIN float64 `xml:"MIN,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID *A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
 }
 
 // DATATYPE_DEFINITION_STRING Named source named complex type "DATATYPE-DEFINITION-STRING"
@@ -1024,7 +1024,7 @@ type DATATYPE_DEFINITION_STRING struct {
 	MAX_LENGTH int `xml:"MAX-LENGTH,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID *A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
 }
 
 // DATATYPE_DEFINITION_XHTML Named source named complex type "DATATYPE-DEFINITION-XHTML"
@@ -1046,7 +1046,7 @@ type DATATYPE_DEFINITION_XHTML struct {
 	LONG_NAME string `xml:"LONG-NAME,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID *A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
 }
 
 // EMBEDDED_VALUE Named source named complex type "EMBEDDED-VALUE"
@@ -1081,10 +1081,10 @@ type ENUM_VALUE struct {
 	LONG_NAME string `xml:"LONG-NAME,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID *A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
 
 	// generated from anonymous type within outer element "PROPERTIES" of type A_PROPERTIES.
-	PROPERTIES []*A_PROPERTIES `xml:"PROPERTIES,omitempty"`
+	PROPERTIES *A_PROPERTIES `xml:"PROPERTIES,omitempty"`
 }
 
 // RELATION_GROUP Named source named complex type "RELATION-GROUP"
@@ -1106,19 +1106,19 @@ type RELATION_GROUP struct {
 	LONG_NAME string `xml:"LONG-NAME,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID *A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
 
-	// generated from anonymous type within outer element "SOURCE-SPECIFICATION" of type A_TARGET-SPECIFICATION.
-	SOURCE_SPECIFICATION []*A_TARGET_SPECIFICATION_1 `xml:"SOURCE-SPECIFICATION,omitempty"`
+	// generated from anonymous type within outer element "SOURCE-SPECIFICATION" of type A_SOURCE-SPECIFICATION.
+	SOURCE_SPECIFICATION *A_SOURCE_SPECIFICATION_1 `xml:"SOURCE-SPECIFICATION,omitempty"`
 
 	// generated from anonymous type within outer element "SPEC-RELATIONS" of type A_SPEC-RELATION-REF.
-	SPEC_RELATIONS []*A_SPEC_RELATION_REF `xml:"SPEC-RELATIONS,omitempty"`
+	SPEC_RELATIONS *A_SPEC_RELATION_REF `xml:"SPEC-RELATIONS,omitempty"`
 
-	// generated from anonymous type within outer element "TARGET-SPECIFICATION" of type A_TARGET-SPECIFICATION.
-	TARGET_SPECIFICATION []*A_TARGET_SPECIFICATION_1 `xml:"TARGET-SPECIFICATION,omitempty"`
+	// generated from anonymous type within outer element "TARGET-SPECIFICATION" of type A_SOURCE-SPECIFICATION.
+	TARGET_SPECIFICATION *A_SOURCE_SPECIFICATION_1 `xml:"TARGET-SPECIFICATION,omitempty"`
 
 	// generated from anonymous type within outer element "TYPE" of type A_RELATION-GROUP-TYPE-REF.
-	TYPE []*A_RELATION_GROUP_TYPE_REF `xml:"TYPE,omitempty"`
+	TYPE *A_RELATION_GROUP_TYPE_REF `xml:"TYPE,omitempty"`
 }
 
 // RELATION_GROUP_TYPE Named source named complex type "RELATION-GROUP-TYPE"
@@ -1140,10 +1140,10 @@ type RELATION_GROUP_TYPE struct {
 	LONG_NAME string `xml:"LONG-NAME,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID *A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
 
 	// generated from anonymous type within outer element "SPEC-ATTRIBUTES" of type A_SPEC-ATTRIBUTES.
-	SPEC_ATTRIBUTES []*A_SPEC_ATTRIBUTES `xml:"SPEC-ATTRIBUTES,omitempty"`
+	SPEC_ATTRIBUTES *A_SPEC_ATTRIBUTES `xml:"SPEC-ATTRIBUTES,omitempty"`
 }
 
 // REQ_IF Named source named complex type "REQ-IF"
@@ -1156,13 +1156,13 @@ type REQ_IF struct {
 	Lang string `xml:"http://www.w3.org/XML/1998/namespace lang,attr,omitempty"`
 
 	// generated from anonymous type within outer element "THE-HEADER" of type A_THE-HEADER.
-	THE_HEADER []*A_THE_HEADER `xml:"THE-HEADER,omitempty"`
+	THE_HEADER *A_THE_HEADER `xml:"THE-HEADER,omitempty"`
 
 	// generated from anonymous type within outer element "CORE-CONTENT" of type A_CORE-CONTENT.
-	CORE_CONTENT []*A_CORE_CONTENT `xml:"CORE-CONTENT,omitempty"`
+	CORE_CONTENT *A_CORE_CONTENT `xml:"CORE-CONTENT,omitempty"`
 
 	// generated from anonymous type within outer element "TOOL-EXTENSIONS" of type A_TOOL-EXTENSIONS.
-	TOOL_EXTENSIONS []*A_TOOL_EXTENSIONS `xml:"TOOL-EXTENSIONS,omitempty"`
+	TOOL_EXTENSIONS *A_TOOL_EXTENSIONS `xml:"TOOL-EXTENSIONS,omitempty"`
 }
 
 // REQ_IF_CONTENT Named source named complex type "REQ-IF-CONTENT"
@@ -1172,22 +1172,22 @@ type REQ_IF_CONTENT struct {
 	// insertion point for fields
 
 	// generated from anonymous type within outer element "DATATYPES" of type A_DATATYPES.
-	DATATYPES []*A_DATATYPES `xml:"DATATYPES,omitempty"`
+	DATATYPES *A_DATATYPES `xml:"DATATYPES,omitempty"`
 
 	// generated from anonymous type within outer element "SPEC-TYPES" of type A_SPEC-TYPES.
-	SPEC_TYPES []*A_SPEC_TYPES `xml:"SPEC-TYPES,omitempty"`
+	SPEC_TYPES *A_SPEC_TYPES `xml:"SPEC-TYPES,omitempty"`
 
 	// generated from anonymous type within outer element "SPEC-OBJECTS" of type A_SPEC-OBJECTS.
-	SPEC_OBJECTS []*A_SPEC_OBJECTS `xml:"SPEC-OBJECTS,omitempty"`
+	SPEC_OBJECTS *A_SPEC_OBJECTS `xml:"SPEC-OBJECTS,omitempty"`
 
 	// generated from anonymous type within outer element "SPEC-RELATIONS" of type A_SPEC-RELATIONS.
-	SPEC_RELATIONS []*A_SPEC_RELATIONS `xml:"SPEC-RELATIONS,omitempty"`
+	SPEC_RELATIONS *A_SPEC_RELATIONS `xml:"SPEC-RELATIONS,omitempty"`
 
 	// generated from anonymous type within outer element "SPECIFICATIONS" of type A_SPECIFICATIONS.
-	SPECIFICATIONS []*A_SPECIFICATIONS `xml:"SPECIFICATIONS,omitempty"`
+	SPECIFICATIONS *A_SPECIFICATIONS `xml:"SPECIFICATIONS,omitempty"`
 
 	// generated from anonymous type within outer element "SPEC-RELATION-GROUPS" of type A_SPEC-RELATION-GROUPS.
-	SPEC_RELATION_GROUPS []*A_SPEC_RELATION_GROUPS `xml:"SPEC-RELATION-GROUPS,omitempty"`
+	SPEC_RELATION_GROUPS *A_SPEC_RELATION_GROUPS `xml:"SPEC-RELATION-GROUPS,omitempty"`
 }
 
 // REQ_IF_HEADER Named source named complex type "REQ-IF-HEADER"
@@ -1253,16 +1253,16 @@ type SPEC_HIERARCHY struct {
 	LONG_NAME string `xml:"LONG-NAME,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID *A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
 
 	// generated from anonymous type within outer element "CHILDREN" of type A_CHILDREN.
-	CHILDREN []*A_CHILDREN `xml:"CHILDREN,omitempty"`
+	CHILDREN *A_CHILDREN `xml:"CHILDREN,omitempty"`
 
 	// generated from anonymous type within outer element "EDITABLE-ATTS" of type A_EDITABLE-ATTS.
-	EDITABLE_ATTS []*A_EDITABLE_ATTS `xml:"EDITABLE-ATTS,omitempty"`
+	EDITABLE_ATTS *A_EDITABLE_ATTS `xml:"EDITABLE-ATTS,omitempty"`
 
 	// generated from anonymous type within outer element "OBJECT" of type A_OBJECT.
-	OBJECT []*A_OBJECT `xml:"OBJECT,omitempty"`
+	OBJECT *A_OBJECT `xml:"OBJECT,omitempty"`
 }
 
 // SPEC_OBJECT Named source named complex type "SPEC-OBJECT"
@@ -1284,13 +1284,13 @@ type SPEC_OBJECT struct {
 	LONG_NAME string `xml:"LONG-NAME,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID *A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
 
 	// generated from anonymous type within outer element "VALUES" of type A_ATTRIBUTE-VALUE-XHTML.
-	VALUES []*A_ATTRIBUTE_VALUE_XHTML_1 `xml:"VALUES,omitempty"`
+	VALUES *A_ATTRIBUTE_VALUE_XHTML_1 `xml:"VALUES,omitempty"`
 
 	// generated from anonymous type within outer element "TYPE" of type A_SPEC-OBJECT-TYPE-REF.
-	TYPE []*A_SPEC_OBJECT_TYPE_REF `xml:"TYPE,omitempty"`
+	TYPE *A_SPEC_OBJECT_TYPE_REF `xml:"TYPE,omitempty"`
 }
 
 // SPEC_OBJECT_TYPE Named source named complex type "SPEC-OBJECT-TYPE"
@@ -1312,10 +1312,10 @@ type SPEC_OBJECT_TYPE struct {
 	LONG_NAME string `xml:"LONG-NAME,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID *A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
 
 	// generated from anonymous type within outer element "SPEC-ATTRIBUTES" of type A_SPEC-ATTRIBUTES.
-	SPEC_ATTRIBUTES []*A_SPEC_ATTRIBUTES `xml:"SPEC-ATTRIBUTES,omitempty"`
+	SPEC_ATTRIBUTES *A_SPEC_ATTRIBUTES `xml:"SPEC-ATTRIBUTES,omitempty"`
 }
 
 // SPEC_RELATION Named source named complex type "SPEC-RELATION"
@@ -1337,19 +1337,19 @@ type SPEC_RELATION struct {
 	LONG_NAME string `xml:"LONG-NAME,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID *A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
 
 	// generated from anonymous type within outer element "VALUES" of type A_ATTRIBUTE-VALUE-XHTML.
-	VALUES []*A_ATTRIBUTE_VALUE_XHTML_1 `xml:"VALUES,omitempty"`
+	VALUES *A_ATTRIBUTE_VALUE_XHTML_1 `xml:"VALUES,omitempty"`
 
 	// generated from anonymous type within outer element "SOURCE" of type A_TARGET.
-	SOURCE []*A_TARGET_1 `xml:"SOURCE,omitempty"`
+	SOURCE *A_TARGET_1 `xml:"SOURCE,omitempty"`
 
 	// generated from anonymous type within outer element "TARGET" of type A_TARGET.
-	TARGET []*A_TARGET_1 `xml:"TARGET,omitempty"`
+	TARGET *A_TARGET_1 `xml:"TARGET,omitempty"`
 
 	// generated from anonymous type within outer element "TYPE" of type A_SPEC-RELATION-TYPE-REF.
-	TYPE []*A_SPEC_RELATION_TYPE_REF `xml:"TYPE,omitempty"`
+	TYPE *A_SPEC_RELATION_TYPE_REF `xml:"TYPE,omitempty"`
 }
 
 // SPEC_RELATION_TYPE Named source named complex type "SPEC-RELATION-TYPE"
@@ -1371,10 +1371,10 @@ type SPEC_RELATION_TYPE struct {
 	LONG_NAME string `xml:"LONG-NAME,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID *A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
 
 	// generated from anonymous type within outer element "SPEC-ATTRIBUTES" of type A_SPEC-ATTRIBUTES.
-	SPEC_ATTRIBUTES []*A_SPEC_ATTRIBUTES `xml:"SPEC-ATTRIBUTES,omitempty"`
+	SPEC_ATTRIBUTES *A_SPEC_ATTRIBUTES `xml:"SPEC-ATTRIBUTES,omitempty"`
 }
 
 // SPECIFICATION Named source named complex type "SPECIFICATION"
@@ -1396,16 +1396,16 @@ type SPECIFICATION struct {
 	LONG_NAME string `xml:"LONG-NAME,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID *A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
 
 	// generated from anonymous type within outer element "CHILDREN" of type A_CHILDREN.
-	CHILDREN []*A_CHILDREN `xml:"CHILDREN,omitempty"`
+	CHILDREN *A_CHILDREN `xml:"CHILDREN,omitempty"`
 
 	// generated from anonymous type within outer element "VALUES" of type A_ATTRIBUTE-VALUE-XHTML.
-	VALUES []*A_ATTRIBUTE_VALUE_XHTML_1 `xml:"VALUES,omitempty"`
+	VALUES *A_ATTRIBUTE_VALUE_XHTML_1 `xml:"VALUES,omitempty"`
 
 	// generated from anonymous type within outer element "TYPE" of type A_SPECIFICATION-TYPE-REF.
-	TYPE []*A_SPECIFICATION_TYPE_REF `xml:"TYPE,omitempty"`
+	TYPE *A_SPECIFICATION_TYPE_REF `xml:"TYPE,omitempty"`
 }
 
 // SPECIFICATION_TYPE Named source named complex type "SPECIFICATION-TYPE"
@@ -1427,10 +1427,10 @@ type SPECIFICATION_TYPE struct {
 	LONG_NAME string `xml:"LONG-NAME,attr,omitempty"`
 
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
-	ALTERNATIVE_ID []*A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
+	ALTERNATIVE_ID *A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
 
 	// generated from anonymous type within outer element "SPEC-ATTRIBUTES" of type A_SPEC-ATTRIBUTES.
-	SPEC_ATTRIBUTES []*A_SPEC_ATTRIBUTES `xml:"SPEC-ATTRIBUTES,omitempty"`
+	SPEC_ATTRIBUTES *A_SPEC_ATTRIBUTES `xml:"SPEC-ATTRIBUTES,omitempty"`
 }
 
 // XHTML_CONTENT Named source named complex type "XHTML-CONTENT"

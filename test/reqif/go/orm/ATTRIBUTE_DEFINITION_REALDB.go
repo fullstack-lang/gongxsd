@@ -47,14 +47,17 @@ type ATTRIBUTE_DEFINITION_REALAPI struct {
 type ATTRIBUTE_DEFINITION_REALPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
 
-	// field ALTERNATIVE_ID is a slice of pointers to another Struct (optional or 0..1)
-	ALTERNATIVE_ID IntSlice `gorm:"type:TEXT"`
+	// field ALTERNATIVE_ID is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	ALTERNATIVE_IDID sql.NullInt64
 
-	// field DEFAULT_VALUE is a slice of pointers to another Struct (optional or 0..1)
-	DEFAULT_VALUE IntSlice `gorm:"type:TEXT"`
+	// field DEFAULT_VALUE is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	DEFAULT_VALUEID sql.NullInt64
 
-	// field TYPE is a slice of pointers to another Struct (optional or 0..1)
-	TYPE IntSlice `gorm:"type:TEXT"`
+	// field TYPE is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	TYPEID sql.NullInt64
 }
 
 // ATTRIBUTE_DEFINITION_REALDB describes a attribute_definition_real in the database
@@ -251,58 +254,40 @@ func (backRepoATTRIBUTE_DEFINITION_REAL *BackRepoATTRIBUTE_DEFINITION_REALStruct
 		attribute_definition_realDB.CopyBasicFieldsFromATTRIBUTE_DEFINITION_REAL(attribute_definition_real)
 
 		// insertion point for translating pointers encodings into actual pointers
-		// 1. reset
-		attribute_definition_realDB.ATTRIBUTE_DEFINITION_REALPointersEncoding.ALTERNATIVE_ID = make([]int, 0)
-		// 2. encode
-		for _, a_alternative_idAssocEnd := range attribute_definition_real.ALTERNATIVE_ID {
-			a_alternative_idAssocEnd_DB :=
-				backRepo.BackRepoA_ALTERNATIVE_ID.GetA_ALTERNATIVE_IDDBFromA_ALTERNATIVE_IDPtr(a_alternative_idAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the a_alternative_idAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if a_alternative_idAssocEnd_DB == nil {
-				continue
+		// commit pointer value attribute_definition_real.ALTERNATIVE_ID translates to updating the attribute_definition_real.ALTERNATIVE_IDID
+		attribute_definition_realDB.ALTERNATIVE_IDID.Valid = true // allow for a 0 value (nil association)
+		if attribute_definition_real.ALTERNATIVE_ID != nil {
+			if ALTERNATIVE_IDId, ok := backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDPtr_A_ALTERNATIVE_IDDBID[attribute_definition_real.ALTERNATIVE_ID]; ok {
+				attribute_definition_realDB.ALTERNATIVE_IDID.Int64 = int64(ALTERNATIVE_IDId)
+				attribute_definition_realDB.ALTERNATIVE_IDID.Valid = true
 			}
-			
-			attribute_definition_realDB.ATTRIBUTE_DEFINITION_REALPointersEncoding.ALTERNATIVE_ID =
-				append(attribute_definition_realDB.ATTRIBUTE_DEFINITION_REALPointersEncoding.ALTERNATIVE_ID, int(a_alternative_idAssocEnd_DB.ID))
+		} else {
+			attribute_definition_realDB.ALTERNATIVE_IDID.Int64 = 0
+			attribute_definition_realDB.ALTERNATIVE_IDID.Valid = true
 		}
 
-		// 1. reset
-		attribute_definition_realDB.ATTRIBUTE_DEFINITION_REALPointersEncoding.DEFAULT_VALUE = make([]int, 0)
-		// 2. encode
-		for _, a_attribute_value_realAssocEnd := range attribute_definition_real.DEFAULT_VALUE {
-			a_attribute_value_realAssocEnd_DB :=
-				backRepo.BackRepoA_ATTRIBUTE_VALUE_REAL.GetA_ATTRIBUTE_VALUE_REALDBFromA_ATTRIBUTE_VALUE_REALPtr(a_attribute_value_realAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the a_attribute_value_realAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if a_attribute_value_realAssocEnd_DB == nil {
-				continue
+		// commit pointer value attribute_definition_real.DEFAULT_VALUE translates to updating the attribute_definition_real.DEFAULT_VALUEID
+		attribute_definition_realDB.DEFAULT_VALUEID.Valid = true // allow for a 0 value (nil association)
+		if attribute_definition_real.DEFAULT_VALUE != nil {
+			if DEFAULT_VALUEId, ok := backRepo.BackRepoA_ATTRIBUTE_VALUE_REAL.Map_A_ATTRIBUTE_VALUE_REALPtr_A_ATTRIBUTE_VALUE_REALDBID[attribute_definition_real.DEFAULT_VALUE]; ok {
+				attribute_definition_realDB.DEFAULT_VALUEID.Int64 = int64(DEFAULT_VALUEId)
+				attribute_definition_realDB.DEFAULT_VALUEID.Valid = true
 			}
-			
-			attribute_definition_realDB.ATTRIBUTE_DEFINITION_REALPointersEncoding.DEFAULT_VALUE =
-				append(attribute_definition_realDB.ATTRIBUTE_DEFINITION_REALPointersEncoding.DEFAULT_VALUE, int(a_attribute_value_realAssocEnd_DB.ID))
+		} else {
+			attribute_definition_realDB.DEFAULT_VALUEID.Int64 = 0
+			attribute_definition_realDB.DEFAULT_VALUEID.Valid = true
 		}
 
-		// 1. reset
-		attribute_definition_realDB.ATTRIBUTE_DEFINITION_REALPointersEncoding.TYPE = make([]int, 0)
-		// 2. encode
-		for _, a_datatype_definition_real_refAssocEnd := range attribute_definition_real.TYPE {
-			a_datatype_definition_real_refAssocEnd_DB :=
-				backRepo.BackRepoA_DATATYPE_DEFINITION_REAL_REF.GetA_DATATYPE_DEFINITION_REAL_REFDBFromA_DATATYPE_DEFINITION_REAL_REFPtr(a_datatype_definition_real_refAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the a_datatype_definition_real_refAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if a_datatype_definition_real_refAssocEnd_DB == nil {
-				continue
+		// commit pointer value attribute_definition_real.TYPE translates to updating the attribute_definition_real.TYPEID
+		attribute_definition_realDB.TYPEID.Valid = true // allow for a 0 value (nil association)
+		if attribute_definition_real.TYPE != nil {
+			if TYPEId, ok := backRepo.BackRepoA_DATATYPE_DEFINITION_REAL_REF.Map_A_DATATYPE_DEFINITION_REAL_REFPtr_A_DATATYPE_DEFINITION_REAL_REFDBID[attribute_definition_real.TYPE]; ok {
+				attribute_definition_realDB.TYPEID.Int64 = int64(TYPEId)
+				attribute_definition_realDB.TYPEID.Valid = true
 			}
-			
-			attribute_definition_realDB.ATTRIBUTE_DEFINITION_REALPointersEncoding.TYPE =
-				append(attribute_definition_realDB.ATTRIBUTE_DEFINITION_REALPointersEncoding.TYPE, int(a_datatype_definition_real_refAssocEnd_DB.ID))
+		} else {
+			attribute_definition_realDB.TYPEID.Int64 = 0
+			attribute_definition_realDB.TYPEID.Valid = true
 		}
 
 		query := backRepoATTRIBUTE_DEFINITION_REAL.db.Save(&attribute_definition_realDB)
@@ -418,33 +403,21 @@ func (backRepoATTRIBUTE_DEFINITION_REAL *BackRepoATTRIBUTE_DEFINITION_REALStruct
 func (attribute_definition_realDB *ATTRIBUTE_DEFINITION_REALDB) DecodePointers(backRepo *BackRepoStruct, attribute_definition_real *models.ATTRIBUTE_DEFINITION_REAL) {
 
 	// insertion point for checkout of pointer encoding
-	// This loop redeem attribute_definition_real.ALTERNATIVE_ID in the stage from the encode in the back repo
-	// It parses all A_ALTERNATIVE_IDDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	attribute_definition_real.ALTERNATIVE_ID = attribute_definition_real.ALTERNATIVE_ID[:0]
-	for _, _A_ALTERNATIVE_IDid := range attribute_definition_realDB.ATTRIBUTE_DEFINITION_REALPointersEncoding.ALTERNATIVE_ID {
-		attribute_definition_real.ALTERNATIVE_ID = append(attribute_definition_real.ALTERNATIVE_ID, backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(_A_ALTERNATIVE_IDid)])
+	// ALTERNATIVE_ID field
+	attribute_definition_real.ALTERNATIVE_ID = nil
+	if attribute_definition_realDB.ALTERNATIVE_IDID.Int64 != 0 {
+		attribute_definition_real.ALTERNATIVE_ID = backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(attribute_definition_realDB.ALTERNATIVE_IDID.Int64)]
 	}
-
-	// This loop redeem attribute_definition_real.DEFAULT_VALUE in the stage from the encode in the back repo
-	// It parses all A_ATTRIBUTE_VALUE_REALDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	attribute_definition_real.DEFAULT_VALUE = attribute_definition_real.DEFAULT_VALUE[:0]
-	for _, _A_ATTRIBUTE_VALUE_REALid := range attribute_definition_realDB.ATTRIBUTE_DEFINITION_REALPointersEncoding.DEFAULT_VALUE {
-		attribute_definition_real.DEFAULT_VALUE = append(attribute_definition_real.DEFAULT_VALUE, backRepo.BackRepoA_ATTRIBUTE_VALUE_REAL.Map_A_ATTRIBUTE_VALUE_REALDBID_A_ATTRIBUTE_VALUE_REALPtr[uint(_A_ATTRIBUTE_VALUE_REALid)])
+	// DEFAULT_VALUE field
+	attribute_definition_real.DEFAULT_VALUE = nil
+	if attribute_definition_realDB.DEFAULT_VALUEID.Int64 != 0 {
+		attribute_definition_real.DEFAULT_VALUE = backRepo.BackRepoA_ATTRIBUTE_VALUE_REAL.Map_A_ATTRIBUTE_VALUE_REALDBID_A_ATTRIBUTE_VALUE_REALPtr[uint(attribute_definition_realDB.DEFAULT_VALUEID.Int64)]
 	}
-
-	// This loop redeem attribute_definition_real.TYPE in the stage from the encode in the back repo
-	// It parses all A_DATATYPE_DEFINITION_REAL_REFDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	attribute_definition_real.TYPE = attribute_definition_real.TYPE[:0]
-	for _, _A_DATATYPE_DEFINITION_REAL_REFid := range attribute_definition_realDB.ATTRIBUTE_DEFINITION_REALPointersEncoding.TYPE {
-		attribute_definition_real.TYPE = append(attribute_definition_real.TYPE, backRepo.BackRepoA_DATATYPE_DEFINITION_REAL_REF.Map_A_DATATYPE_DEFINITION_REAL_REFDBID_A_DATATYPE_DEFINITION_REAL_REFPtr[uint(_A_DATATYPE_DEFINITION_REAL_REFid)])
+	// TYPE field
+	attribute_definition_real.TYPE = nil
+	if attribute_definition_realDB.TYPEID.Int64 != 0 {
+		attribute_definition_real.TYPE = backRepo.BackRepoA_DATATYPE_DEFINITION_REAL_REF.Map_A_DATATYPE_DEFINITION_REAL_REFDBID_A_DATATYPE_DEFINITION_REAL_REFPtr[uint(attribute_definition_realDB.TYPEID.Int64)]
 	}
-
 	return
 }
 
@@ -733,6 +706,24 @@ func (backRepoATTRIBUTE_DEFINITION_REAL *BackRepoATTRIBUTE_DEFINITION_REALStruct
 		_ = attribute_definition_realDB
 
 		// insertion point for reindexing pointers encoding
+		// reindexing ALTERNATIVE_ID field
+		if attribute_definition_realDB.ALTERNATIVE_IDID.Int64 != 0 {
+			attribute_definition_realDB.ALTERNATIVE_IDID.Int64 = int64(BackRepoA_ALTERNATIVE_IDid_atBckpTime_newID[uint(attribute_definition_realDB.ALTERNATIVE_IDID.Int64)])
+			attribute_definition_realDB.ALTERNATIVE_IDID.Valid = true
+		}
+
+		// reindexing DEFAULT_VALUE field
+		if attribute_definition_realDB.DEFAULT_VALUEID.Int64 != 0 {
+			attribute_definition_realDB.DEFAULT_VALUEID.Int64 = int64(BackRepoA_ATTRIBUTE_VALUE_REALid_atBckpTime_newID[uint(attribute_definition_realDB.DEFAULT_VALUEID.Int64)])
+			attribute_definition_realDB.DEFAULT_VALUEID.Valid = true
+		}
+
+		// reindexing TYPE field
+		if attribute_definition_realDB.TYPEID.Int64 != 0 {
+			attribute_definition_realDB.TYPEID.Int64 = int64(BackRepoA_DATATYPE_DEFINITION_REAL_REFid_atBckpTime_newID[uint(attribute_definition_realDB.TYPEID.Int64)])
+			attribute_definition_realDB.TYPEID.Valid = true
+		}
+
 		// update databse with new index encoding
 		query := backRepoATTRIBUTE_DEFINITION_REAL.db.Model(attribute_definition_realDB).Updates(*attribute_definition_realDB)
 		if query.Error != nil {

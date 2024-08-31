@@ -6,8 +6,9 @@ import "encoding/xml"
 // to avoid compilation error if no xml element is generated
 var _ xml.Attr
 
-// A_books is generated from outer element "books"
+// A_books Named source within outer element "books"
 type A_books struct {
+	Name string `xml:"-"`
 
 	// insertion point for fields
 
@@ -15,7 +16,7 @@ type A_books struct {
 	Book []*BookType `xml:"book,omitempty"`
 }
 
-// BookType is generated from named complex type "bookType"
+// BookType Named source named complex type "bookType"
 type BookType struct {
 	Name string `xml:"-"`
 
@@ -31,7 +32,7 @@ type BookType struct {
 	Credit []*Credit `xml:"credit,omitempty"`
 }
 
-// Credit is generated from named complex type "credit"
+// Credit Named source named complex type "credit"
 type Credit struct {
 	Name string `xml:"-"`
 
@@ -53,7 +54,7 @@ type Credit struct {
 	Credit_symbol string `xml:"credit-symbol,omitempty"`
 }
 
-// Link is generated from named complex type "link"
+// Link Named source named complex type "link"
 type Link struct {
 	Name string `xml:"-"`
 
@@ -66,7 +67,7 @@ type Link struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Group_bookDetailsGroup is generated from named group "bookDetailsGroup"
+// Group_bookDetailsGroup UnNamed source named group "bookDetailsGroup"
 type Group_bookDetailsGroup struct {
 
 	// insertion point for fields
@@ -84,7 +85,7 @@ type Group_bookDetailsGroup struct {
 	Format string `xml:"format,omitempty"`
 }
 
-// AttributeGroup_commonAttributes is generated from named attribute group "commonAttributes"
+// AttributeGroup_commonAttributes UnNamed source named attribute group "commonAttributes"
 type AttributeGroup_commonAttributes struct {
 
 	// insertion point for fields
@@ -96,7 +97,7 @@ type AttributeGroup_commonAttributes struct {
 	Bestseller bool `xml:"bestseller,attr,omitempty"`
 }
 
-// AttributeGroup_extendedAttributes is generated from named attribute group "extendedAttributes"
+// AttributeGroup_extendedAttributes UnNamed source named attribute group "extendedAttributes"
 type AttributeGroup_extendedAttributes struct {
 
 	// insertion point for fields
@@ -108,7 +109,7 @@ type AttributeGroup_extendedAttributes struct {
 	AttributeGroup_commonAttributes
 }
 
-// Books is generated from element books within root schema
+// Books Named source element books within root schema
 type Books struct {
 	Name string `xml:"-"`
 

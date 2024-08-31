@@ -194,6 +194,12 @@ func (attribute_definition_booleanFormCallback *ATTRIBUTE_DEFINITION_BOOLEANForm
 			FormDivBasicFieldToField(&(attribute_definition_boolean_.LAST_CHANGE), formDiv)
 		case "LONG_NAME":
 			FormDivBasicFieldToField(&(attribute_definition_boolean_.LONG_NAME), formDiv)
+		case "ALTERNATIVE_ID":
+			FormDivSelectFieldToField(&(attribute_definition_boolean_.ALTERNATIVE_ID), attribute_definition_booleanFormCallback.probe.stageOfInterest, formDiv)
+		case "DEFAULT_VALUE":
+			FormDivSelectFieldToField(&(attribute_definition_boolean_.DEFAULT_VALUE), attribute_definition_booleanFormCallback.probe.stageOfInterest, formDiv)
+		case "TYPE":
+			FormDivSelectFieldToField(&(attribute_definition_boolean_.TYPE), attribute_definition_booleanFormCallback.probe.stageOfInterest, formDiv)
 		case "A_SPEC_ATTRIBUTES:ATTRIBUTE_DEFINITION_BOOLEAN":
 			// we need to retrieve the field owner before the change
 			var pastA_SPEC_ATTRIBUTESOwner *models.A_SPEC_ATTRIBUTES
@@ -323,6 +329,12 @@ func (attribute_definition_dateFormCallback *ATTRIBUTE_DEFINITION_DATEFormCallba
 			FormDivBasicFieldToField(&(attribute_definition_date_.LAST_CHANGE), formDiv)
 		case "LONG_NAME":
 			FormDivBasicFieldToField(&(attribute_definition_date_.LONG_NAME), formDiv)
+		case "ALTERNATIVE_ID":
+			FormDivSelectFieldToField(&(attribute_definition_date_.ALTERNATIVE_ID), attribute_definition_dateFormCallback.probe.stageOfInterest, formDiv)
+		case "DEFAULT_VALUE":
+			FormDivSelectFieldToField(&(attribute_definition_date_.DEFAULT_VALUE), attribute_definition_dateFormCallback.probe.stageOfInterest, formDiv)
+		case "TYPE":
+			FormDivSelectFieldToField(&(attribute_definition_date_.TYPE), attribute_definition_dateFormCallback.probe.stageOfInterest, formDiv)
 		case "A_SPEC_ATTRIBUTES:ATTRIBUTE_DEFINITION_DATE":
 			// we need to retrieve the field owner before the change
 			var pastA_SPEC_ATTRIBUTESOwner *models.A_SPEC_ATTRIBUTES
@@ -454,6 +466,12 @@ func (attribute_definition_enumerationFormCallback *ATTRIBUTE_DEFINITION_ENUMERA
 			FormDivBasicFieldToField(&(attribute_definition_enumeration_.LONG_NAME), formDiv)
 		case "MULTI_VALUED":
 			FormDivBasicFieldToField(&(attribute_definition_enumeration_.MULTI_VALUED), formDiv)
+		case "ALTERNATIVE_ID":
+			FormDivSelectFieldToField(&(attribute_definition_enumeration_.ALTERNATIVE_ID), attribute_definition_enumerationFormCallback.probe.stageOfInterest, formDiv)
+		case "DEFAULT_VALUE":
+			FormDivSelectFieldToField(&(attribute_definition_enumeration_.DEFAULT_VALUE), attribute_definition_enumerationFormCallback.probe.stageOfInterest, formDiv)
+		case "TYPE":
+			FormDivSelectFieldToField(&(attribute_definition_enumeration_.TYPE), attribute_definition_enumerationFormCallback.probe.stageOfInterest, formDiv)
 		case "A_SPEC_ATTRIBUTES:ATTRIBUTE_DEFINITION_ENUMERATION":
 			// we need to retrieve the field owner before the change
 			var pastA_SPEC_ATTRIBUTESOwner *models.A_SPEC_ATTRIBUTES
@@ -583,6 +601,12 @@ func (attribute_definition_integerFormCallback *ATTRIBUTE_DEFINITION_INTEGERForm
 			FormDivBasicFieldToField(&(attribute_definition_integer_.LAST_CHANGE), formDiv)
 		case "LONG_NAME":
 			FormDivBasicFieldToField(&(attribute_definition_integer_.LONG_NAME), formDiv)
+		case "ALTERNATIVE_ID":
+			FormDivSelectFieldToField(&(attribute_definition_integer_.ALTERNATIVE_ID), attribute_definition_integerFormCallback.probe.stageOfInterest, formDiv)
+		case "DEFAULT_VALUE":
+			FormDivSelectFieldToField(&(attribute_definition_integer_.DEFAULT_VALUE), attribute_definition_integerFormCallback.probe.stageOfInterest, formDiv)
+		case "TYPE":
+			FormDivSelectFieldToField(&(attribute_definition_integer_.TYPE), attribute_definition_integerFormCallback.probe.stageOfInterest, formDiv)
 		case "A_SPEC_ATTRIBUTES:ATTRIBUTE_DEFINITION_INTEGER":
 			// we need to retrieve the field owner before the change
 			var pastA_SPEC_ATTRIBUTESOwner *models.A_SPEC_ATTRIBUTES
@@ -712,6 +736,12 @@ func (attribute_definition_realFormCallback *ATTRIBUTE_DEFINITION_REALFormCallba
 			FormDivBasicFieldToField(&(attribute_definition_real_.LAST_CHANGE), formDiv)
 		case "LONG_NAME":
 			FormDivBasicFieldToField(&(attribute_definition_real_.LONG_NAME), formDiv)
+		case "ALTERNATIVE_ID":
+			FormDivSelectFieldToField(&(attribute_definition_real_.ALTERNATIVE_ID), attribute_definition_realFormCallback.probe.stageOfInterest, formDiv)
+		case "DEFAULT_VALUE":
+			FormDivSelectFieldToField(&(attribute_definition_real_.DEFAULT_VALUE), attribute_definition_realFormCallback.probe.stageOfInterest, formDiv)
+		case "TYPE":
+			FormDivSelectFieldToField(&(attribute_definition_real_.TYPE), attribute_definition_realFormCallback.probe.stageOfInterest, formDiv)
 		case "A_SPEC_ATTRIBUTES:ATTRIBUTE_DEFINITION_REAL":
 			// we need to retrieve the field owner before the change
 			var pastA_SPEC_ATTRIBUTESOwner *models.A_SPEC_ATTRIBUTES
@@ -841,6 +871,12 @@ func (attribute_definition_stringFormCallback *ATTRIBUTE_DEFINITION_STRINGFormCa
 			FormDivBasicFieldToField(&(attribute_definition_string_.LAST_CHANGE), formDiv)
 		case "LONG_NAME":
 			FormDivBasicFieldToField(&(attribute_definition_string_.LONG_NAME), formDiv)
+		case "ALTERNATIVE_ID":
+			FormDivSelectFieldToField(&(attribute_definition_string_.ALTERNATIVE_ID), attribute_definition_stringFormCallback.probe.stageOfInterest, formDiv)
+		case "DEFAULT_VALUE":
+			FormDivSelectFieldToField(&(attribute_definition_string_.DEFAULT_VALUE), attribute_definition_stringFormCallback.probe.stageOfInterest, formDiv)
+		case "TYPE":
+			FormDivSelectFieldToField(&(attribute_definition_string_.TYPE), attribute_definition_stringFormCallback.probe.stageOfInterest, formDiv)
 		case "A_SPEC_ATTRIBUTES:ATTRIBUTE_DEFINITION_STRING":
 			// we need to retrieve the field owner before the change
 			var pastA_SPEC_ATTRIBUTESOwner *models.A_SPEC_ATTRIBUTES
@@ -970,6 +1006,12 @@ func (attribute_definition_xhtmlFormCallback *ATTRIBUTE_DEFINITION_XHTMLFormCall
 			FormDivBasicFieldToField(&(attribute_definition_xhtml_.LAST_CHANGE), formDiv)
 		case "LONG_NAME":
 			FormDivBasicFieldToField(&(attribute_definition_xhtml_.LONG_NAME), formDiv)
+		case "ALTERNATIVE_ID":
+			FormDivSelectFieldToField(&(attribute_definition_xhtml_.ALTERNATIVE_ID), attribute_definition_xhtmlFormCallback.probe.stageOfInterest, formDiv)
+		case "DEFAULT_VALUE":
+			FormDivSelectFieldToField(&(attribute_definition_xhtml_.DEFAULT_VALUE), attribute_definition_xhtmlFormCallback.probe.stageOfInterest, formDiv)
+		case "TYPE":
+			FormDivSelectFieldToField(&(attribute_definition_xhtml_.TYPE), attribute_definition_xhtmlFormCallback.probe.stageOfInterest, formDiv)
 		case "A_SPEC_ATTRIBUTES:ATTRIBUTE_DEFINITION_XHTML":
 			// we need to retrieve the field owner before the change
 			var pastA_SPEC_ATTRIBUTESOwner *models.A_SPEC_ATTRIBUTES
@@ -1091,6 +1133,8 @@ func (attribute_value_booleanFormCallback *ATTRIBUTE_VALUE_BOOLEANFormCallback) 
 			FormDivBasicFieldToField(&(attribute_value_boolean_.Name), formDiv)
 		case "THE_VALUE":
 			FormDivBasicFieldToField(&(attribute_value_boolean_.THE_VALUE), formDiv)
+		case "DEFINITION":
+			FormDivSelectFieldToField(&(attribute_value_boolean_.DEFINITION), attribute_value_booleanFormCallback.probe.stageOfInterest, formDiv)
 		case "A_ATTRIBUTE_VALUE_BOOLEAN:ATTRIBUTE_VALUE_BOOLEAN":
 			// we need to retrieve the field owner before the change
 			var pastA_ATTRIBUTE_VALUE_BOOLEANOwner *models.A_ATTRIBUTE_VALUE_BOOLEAN
@@ -1254,6 +1298,8 @@ func (attribute_value_dateFormCallback *ATTRIBUTE_VALUE_DATEFormCallback) OnSave
 			FormDivBasicFieldToField(&(attribute_value_date_.Name), formDiv)
 		case "THE_VALUE":
 			FormDivBasicFieldToField(&(attribute_value_date_.THE_VALUE), formDiv)
+		case "DEFINITION":
+			FormDivSelectFieldToField(&(attribute_value_date_.DEFINITION), attribute_value_dateFormCallback.probe.stageOfInterest, formDiv)
 		case "A_ATTRIBUTE_VALUE_DATE:ATTRIBUTE_VALUE_DATE":
 			// we need to retrieve the field owner before the change
 			var pastA_ATTRIBUTE_VALUE_DATEOwner *models.A_ATTRIBUTE_VALUE_DATE
@@ -1415,6 +1461,10 @@ func (attribute_value_enumerationFormCallback *ATTRIBUTE_VALUE_ENUMERATIONFormCa
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(attribute_value_enumeration_.Name), formDiv)
+		case "DEFINITION":
+			FormDivSelectFieldToField(&(attribute_value_enumeration_.DEFINITION), attribute_value_enumerationFormCallback.probe.stageOfInterest, formDiv)
+		case "VALUES":
+			FormDivSelectFieldToField(&(attribute_value_enumeration_.VALUES), attribute_value_enumerationFormCallback.probe.stageOfInterest, formDiv)
 		case "A_ATTRIBUTE_VALUE_ENUMERATION:ATTRIBUTE_VALUE_ENUMERATION":
 			// we need to retrieve the field owner before the change
 			var pastA_ATTRIBUTE_VALUE_ENUMERATIONOwner *models.A_ATTRIBUTE_VALUE_ENUMERATION
@@ -1578,6 +1628,8 @@ func (attribute_value_integerFormCallback *ATTRIBUTE_VALUE_INTEGERFormCallback) 
 			FormDivBasicFieldToField(&(attribute_value_integer_.Name), formDiv)
 		case "THE_VALUE":
 			FormDivBasicFieldToField(&(attribute_value_integer_.THE_VALUE), formDiv)
+		case "DEFINITION":
+			FormDivSelectFieldToField(&(attribute_value_integer_.DEFINITION), attribute_value_integerFormCallback.probe.stageOfInterest, formDiv)
 		case "A_ATTRIBUTE_VALUE_INTEGER:ATTRIBUTE_VALUE_INTEGER":
 			// we need to retrieve the field owner before the change
 			var pastA_ATTRIBUTE_VALUE_INTEGEROwner *models.A_ATTRIBUTE_VALUE_INTEGER
@@ -1741,6 +1793,8 @@ func (attribute_value_realFormCallback *ATTRIBUTE_VALUE_REALFormCallback) OnSave
 			FormDivBasicFieldToField(&(attribute_value_real_.Name), formDiv)
 		case "THE_VALUE":
 			FormDivBasicFieldToField(&(attribute_value_real_.THE_VALUE), formDiv)
+		case "DEFINITION":
+			FormDivSelectFieldToField(&(attribute_value_real_.DEFINITION), attribute_value_realFormCallback.probe.stageOfInterest, formDiv)
 		case "A_ATTRIBUTE_VALUE_REAL:ATTRIBUTE_VALUE_REAL":
 			// we need to retrieve the field owner before the change
 			var pastA_ATTRIBUTE_VALUE_REALOwner *models.A_ATTRIBUTE_VALUE_REAL
@@ -1904,6 +1958,8 @@ func (attribute_value_stringFormCallback *ATTRIBUTE_VALUE_STRINGFormCallback) On
 			FormDivBasicFieldToField(&(attribute_value_string_.Name), formDiv)
 		case "THE_VALUE":
 			FormDivBasicFieldToField(&(attribute_value_string_.THE_VALUE), formDiv)
+		case "DEFINITION":
+			FormDivSelectFieldToField(&(attribute_value_string_.DEFINITION), attribute_value_stringFormCallback.probe.stageOfInterest, formDiv)
 		case "A_ATTRIBUTE_VALUE_STRING:ATTRIBUTE_VALUE_STRING":
 			// we need to retrieve the field owner before the change
 			var pastA_ATTRIBUTE_VALUE_STRINGOwner *models.A_ATTRIBUTE_VALUE_STRING
@@ -2067,6 +2123,12 @@ func (attribute_value_xhtmlFormCallback *ATTRIBUTE_VALUE_XHTMLFormCallback) OnSa
 			FormDivBasicFieldToField(&(attribute_value_xhtml_.Name), formDiv)
 		case "IS_SIMPLIFIED":
 			FormDivBasicFieldToField(&(attribute_value_xhtml_.IS_SIMPLIFIED), formDiv)
+		case "THE_VALUE":
+			FormDivSelectFieldToField(&(attribute_value_xhtml_.THE_VALUE), attribute_value_xhtmlFormCallback.probe.stageOfInterest, formDiv)
+		case "THE_ORIGINAL_VALUE":
+			FormDivSelectFieldToField(&(attribute_value_xhtml_.THE_ORIGINAL_VALUE), attribute_value_xhtmlFormCallback.probe.stageOfInterest, formDiv)
+		case "DEFINITION":
+			FormDivSelectFieldToField(&(attribute_value_xhtml_.DEFINITION), attribute_value_xhtmlFormCallback.probe.stageOfInterest, formDiv)
 		case "A_ATTRIBUTE_VALUE_XHTML:ATTRIBUTE_VALUE_XHTML":
 			// we need to retrieve the field owner before the change
 			var pastA_ATTRIBUTE_VALUE_XHTMLOwner *models.A_ATTRIBUTE_VALUE_XHTML
@@ -2228,1014 +2290,6 @@ func (a_alternative_idFormCallback *A_ALTERNATIVE_IDFormCallback) OnSave() {
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(a_alternative_id_.Name), formDiv)
-		case "ATTRIBUTE_DEFINITION_BOOLEAN:ALTERNATIVE_ID":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_DEFINITION_BOOLEANOwner *models.ATTRIBUTE_DEFINITION_BOOLEAN
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_DEFINITION_BOOLEAN"
-			rf.Fieldname = "ALTERNATIVE_ID"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_alternative_idFormCallback.probe.stageOfInterest,
-				a_alternative_idFormCallback.probe.backRepoOfInterest,
-				a_alternative_id_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_DEFINITION_BOOLEANOwner = reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_BOOLEAN)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_DEFINITION_BOOLEANOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_DEFINITION_BOOLEANOwner.ALTERNATIVE_ID, a_alternative_id_)
-					pastATTRIBUTE_DEFINITION_BOOLEANOwner.ALTERNATIVE_ID = slices.Delete(pastATTRIBUTE_DEFINITION_BOOLEANOwner.ALTERNATIVE_ID, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_definition_boolean := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_BOOLEAN](a_alternative_idFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_definition_boolean.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_DEFINITION_BOOLEANOwner := _attribute_definition_boolean // we have a match
-						if pastATTRIBUTE_DEFINITION_BOOLEANOwner != nil {
-							if newATTRIBUTE_DEFINITION_BOOLEANOwner != pastATTRIBUTE_DEFINITION_BOOLEANOwner {
-								idx := slices.Index(pastATTRIBUTE_DEFINITION_BOOLEANOwner.ALTERNATIVE_ID, a_alternative_id_)
-								pastATTRIBUTE_DEFINITION_BOOLEANOwner.ALTERNATIVE_ID = slices.Delete(pastATTRIBUTE_DEFINITION_BOOLEANOwner.ALTERNATIVE_ID, idx, idx+1)
-								newATTRIBUTE_DEFINITION_BOOLEANOwner.ALTERNATIVE_ID = append(newATTRIBUTE_DEFINITION_BOOLEANOwner.ALTERNATIVE_ID, a_alternative_id_)
-							}
-						} else {
-							newATTRIBUTE_DEFINITION_BOOLEANOwner.ALTERNATIVE_ID = append(newATTRIBUTE_DEFINITION_BOOLEANOwner.ALTERNATIVE_ID, a_alternative_id_)
-						}
-					}
-				}
-			}
-		case "ATTRIBUTE_DEFINITION_DATE:ALTERNATIVE_ID":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_DEFINITION_DATEOwner *models.ATTRIBUTE_DEFINITION_DATE
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_DEFINITION_DATE"
-			rf.Fieldname = "ALTERNATIVE_ID"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_alternative_idFormCallback.probe.stageOfInterest,
-				a_alternative_idFormCallback.probe.backRepoOfInterest,
-				a_alternative_id_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_DEFINITION_DATEOwner = reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_DATE)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_DEFINITION_DATEOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_DEFINITION_DATEOwner.ALTERNATIVE_ID, a_alternative_id_)
-					pastATTRIBUTE_DEFINITION_DATEOwner.ALTERNATIVE_ID = slices.Delete(pastATTRIBUTE_DEFINITION_DATEOwner.ALTERNATIVE_ID, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_definition_date := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_DATE](a_alternative_idFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_definition_date.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_DEFINITION_DATEOwner := _attribute_definition_date // we have a match
-						if pastATTRIBUTE_DEFINITION_DATEOwner != nil {
-							if newATTRIBUTE_DEFINITION_DATEOwner != pastATTRIBUTE_DEFINITION_DATEOwner {
-								idx := slices.Index(pastATTRIBUTE_DEFINITION_DATEOwner.ALTERNATIVE_ID, a_alternative_id_)
-								pastATTRIBUTE_DEFINITION_DATEOwner.ALTERNATIVE_ID = slices.Delete(pastATTRIBUTE_DEFINITION_DATEOwner.ALTERNATIVE_ID, idx, idx+1)
-								newATTRIBUTE_DEFINITION_DATEOwner.ALTERNATIVE_ID = append(newATTRIBUTE_DEFINITION_DATEOwner.ALTERNATIVE_ID, a_alternative_id_)
-							}
-						} else {
-							newATTRIBUTE_DEFINITION_DATEOwner.ALTERNATIVE_ID = append(newATTRIBUTE_DEFINITION_DATEOwner.ALTERNATIVE_ID, a_alternative_id_)
-						}
-					}
-				}
-			}
-		case "ATTRIBUTE_DEFINITION_ENUMERATION:ALTERNATIVE_ID":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_DEFINITION_ENUMERATIONOwner *models.ATTRIBUTE_DEFINITION_ENUMERATION
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_DEFINITION_ENUMERATION"
-			rf.Fieldname = "ALTERNATIVE_ID"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_alternative_idFormCallback.probe.stageOfInterest,
-				a_alternative_idFormCallback.probe.backRepoOfInterest,
-				a_alternative_id_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_DEFINITION_ENUMERATIONOwner = reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_ENUMERATION)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_DEFINITION_ENUMERATIONOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_DEFINITION_ENUMERATIONOwner.ALTERNATIVE_ID, a_alternative_id_)
-					pastATTRIBUTE_DEFINITION_ENUMERATIONOwner.ALTERNATIVE_ID = slices.Delete(pastATTRIBUTE_DEFINITION_ENUMERATIONOwner.ALTERNATIVE_ID, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_definition_enumeration := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_ENUMERATION](a_alternative_idFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_definition_enumeration.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_DEFINITION_ENUMERATIONOwner := _attribute_definition_enumeration // we have a match
-						if pastATTRIBUTE_DEFINITION_ENUMERATIONOwner != nil {
-							if newATTRIBUTE_DEFINITION_ENUMERATIONOwner != pastATTRIBUTE_DEFINITION_ENUMERATIONOwner {
-								idx := slices.Index(pastATTRIBUTE_DEFINITION_ENUMERATIONOwner.ALTERNATIVE_ID, a_alternative_id_)
-								pastATTRIBUTE_DEFINITION_ENUMERATIONOwner.ALTERNATIVE_ID = slices.Delete(pastATTRIBUTE_DEFINITION_ENUMERATIONOwner.ALTERNATIVE_ID, idx, idx+1)
-								newATTRIBUTE_DEFINITION_ENUMERATIONOwner.ALTERNATIVE_ID = append(newATTRIBUTE_DEFINITION_ENUMERATIONOwner.ALTERNATIVE_ID, a_alternative_id_)
-							}
-						} else {
-							newATTRIBUTE_DEFINITION_ENUMERATIONOwner.ALTERNATIVE_ID = append(newATTRIBUTE_DEFINITION_ENUMERATIONOwner.ALTERNATIVE_ID, a_alternative_id_)
-						}
-					}
-				}
-			}
-		case "ATTRIBUTE_DEFINITION_INTEGER:ALTERNATIVE_ID":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_DEFINITION_INTEGEROwner *models.ATTRIBUTE_DEFINITION_INTEGER
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_DEFINITION_INTEGER"
-			rf.Fieldname = "ALTERNATIVE_ID"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_alternative_idFormCallback.probe.stageOfInterest,
-				a_alternative_idFormCallback.probe.backRepoOfInterest,
-				a_alternative_id_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_DEFINITION_INTEGEROwner = reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_INTEGER)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_DEFINITION_INTEGEROwner != nil {
-					idx := slices.Index(pastATTRIBUTE_DEFINITION_INTEGEROwner.ALTERNATIVE_ID, a_alternative_id_)
-					pastATTRIBUTE_DEFINITION_INTEGEROwner.ALTERNATIVE_ID = slices.Delete(pastATTRIBUTE_DEFINITION_INTEGEROwner.ALTERNATIVE_ID, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_definition_integer := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_INTEGER](a_alternative_idFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_definition_integer.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_DEFINITION_INTEGEROwner := _attribute_definition_integer // we have a match
-						if pastATTRIBUTE_DEFINITION_INTEGEROwner != nil {
-							if newATTRIBUTE_DEFINITION_INTEGEROwner != pastATTRIBUTE_DEFINITION_INTEGEROwner {
-								idx := slices.Index(pastATTRIBUTE_DEFINITION_INTEGEROwner.ALTERNATIVE_ID, a_alternative_id_)
-								pastATTRIBUTE_DEFINITION_INTEGEROwner.ALTERNATIVE_ID = slices.Delete(pastATTRIBUTE_DEFINITION_INTEGEROwner.ALTERNATIVE_ID, idx, idx+1)
-								newATTRIBUTE_DEFINITION_INTEGEROwner.ALTERNATIVE_ID = append(newATTRIBUTE_DEFINITION_INTEGEROwner.ALTERNATIVE_ID, a_alternative_id_)
-							}
-						} else {
-							newATTRIBUTE_DEFINITION_INTEGEROwner.ALTERNATIVE_ID = append(newATTRIBUTE_DEFINITION_INTEGEROwner.ALTERNATIVE_ID, a_alternative_id_)
-						}
-					}
-				}
-			}
-		case "ATTRIBUTE_DEFINITION_REAL:ALTERNATIVE_ID":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_DEFINITION_REALOwner *models.ATTRIBUTE_DEFINITION_REAL
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_DEFINITION_REAL"
-			rf.Fieldname = "ALTERNATIVE_ID"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_alternative_idFormCallback.probe.stageOfInterest,
-				a_alternative_idFormCallback.probe.backRepoOfInterest,
-				a_alternative_id_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_DEFINITION_REALOwner = reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_REAL)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_DEFINITION_REALOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_DEFINITION_REALOwner.ALTERNATIVE_ID, a_alternative_id_)
-					pastATTRIBUTE_DEFINITION_REALOwner.ALTERNATIVE_ID = slices.Delete(pastATTRIBUTE_DEFINITION_REALOwner.ALTERNATIVE_ID, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_definition_real := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_REAL](a_alternative_idFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_definition_real.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_DEFINITION_REALOwner := _attribute_definition_real // we have a match
-						if pastATTRIBUTE_DEFINITION_REALOwner != nil {
-							if newATTRIBUTE_DEFINITION_REALOwner != pastATTRIBUTE_DEFINITION_REALOwner {
-								idx := slices.Index(pastATTRIBUTE_DEFINITION_REALOwner.ALTERNATIVE_ID, a_alternative_id_)
-								pastATTRIBUTE_DEFINITION_REALOwner.ALTERNATIVE_ID = slices.Delete(pastATTRIBUTE_DEFINITION_REALOwner.ALTERNATIVE_ID, idx, idx+1)
-								newATTRIBUTE_DEFINITION_REALOwner.ALTERNATIVE_ID = append(newATTRIBUTE_DEFINITION_REALOwner.ALTERNATIVE_ID, a_alternative_id_)
-							}
-						} else {
-							newATTRIBUTE_DEFINITION_REALOwner.ALTERNATIVE_ID = append(newATTRIBUTE_DEFINITION_REALOwner.ALTERNATIVE_ID, a_alternative_id_)
-						}
-					}
-				}
-			}
-		case "ATTRIBUTE_DEFINITION_STRING:ALTERNATIVE_ID":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_DEFINITION_STRINGOwner *models.ATTRIBUTE_DEFINITION_STRING
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_DEFINITION_STRING"
-			rf.Fieldname = "ALTERNATIVE_ID"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_alternative_idFormCallback.probe.stageOfInterest,
-				a_alternative_idFormCallback.probe.backRepoOfInterest,
-				a_alternative_id_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_DEFINITION_STRINGOwner = reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_STRING)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_DEFINITION_STRINGOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_DEFINITION_STRINGOwner.ALTERNATIVE_ID, a_alternative_id_)
-					pastATTRIBUTE_DEFINITION_STRINGOwner.ALTERNATIVE_ID = slices.Delete(pastATTRIBUTE_DEFINITION_STRINGOwner.ALTERNATIVE_ID, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_definition_string := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_STRING](a_alternative_idFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_definition_string.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_DEFINITION_STRINGOwner := _attribute_definition_string // we have a match
-						if pastATTRIBUTE_DEFINITION_STRINGOwner != nil {
-							if newATTRIBUTE_DEFINITION_STRINGOwner != pastATTRIBUTE_DEFINITION_STRINGOwner {
-								idx := slices.Index(pastATTRIBUTE_DEFINITION_STRINGOwner.ALTERNATIVE_ID, a_alternative_id_)
-								pastATTRIBUTE_DEFINITION_STRINGOwner.ALTERNATIVE_ID = slices.Delete(pastATTRIBUTE_DEFINITION_STRINGOwner.ALTERNATIVE_ID, idx, idx+1)
-								newATTRIBUTE_DEFINITION_STRINGOwner.ALTERNATIVE_ID = append(newATTRIBUTE_DEFINITION_STRINGOwner.ALTERNATIVE_ID, a_alternative_id_)
-							}
-						} else {
-							newATTRIBUTE_DEFINITION_STRINGOwner.ALTERNATIVE_ID = append(newATTRIBUTE_DEFINITION_STRINGOwner.ALTERNATIVE_ID, a_alternative_id_)
-						}
-					}
-				}
-			}
-		case "ATTRIBUTE_DEFINITION_XHTML:ALTERNATIVE_ID":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_DEFINITION_XHTMLOwner *models.ATTRIBUTE_DEFINITION_XHTML
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_DEFINITION_XHTML"
-			rf.Fieldname = "ALTERNATIVE_ID"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_alternative_idFormCallback.probe.stageOfInterest,
-				a_alternative_idFormCallback.probe.backRepoOfInterest,
-				a_alternative_id_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_DEFINITION_XHTMLOwner = reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_XHTML)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_DEFINITION_XHTMLOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_DEFINITION_XHTMLOwner.ALTERNATIVE_ID, a_alternative_id_)
-					pastATTRIBUTE_DEFINITION_XHTMLOwner.ALTERNATIVE_ID = slices.Delete(pastATTRIBUTE_DEFINITION_XHTMLOwner.ALTERNATIVE_ID, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_definition_xhtml := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_XHTML](a_alternative_idFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_definition_xhtml.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_DEFINITION_XHTMLOwner := _attribute_definition_xhtml // we have a match
-						if pastATTRIBUTE_DEFINITION_XHTMLOwner != nil {
-							if newATTRIBUTE_DEFINITION_XHTMLOwner != pastATTRIBUTE_DEFINITION_XHTMLOwner {
-								idx := slices.Index(pastATTRIBUTE_DEFINITION_XHTMLOwner.ALTERNATIVE_ID, a_alternative_id_)
-								pastATTRIBUTE_DEFINITION_XHTMLOwner.ALTERNATIVE_ID = slices.Delete(pastATTRIBUTE_DEFINITION_XHTMLOwner.ALTERNATIVE_ID, idx, idx+1)
-								newATTRIBUTE_DEFINITION_XHTMLOwner.ALTERNATIVE_ID = append(newATTRIBUTE_DEFINITION_XHTMLOwner.ALTERNATIVE_ID, a_alternative_id_)
-							}
-						} else {
-							newATTRIBUTE_DEFINITION_XHTMLOwner.ALTERNATIVE_ID = append(newATTRIBUTE_DEFINITION_XHTMLOwner.ALTERNATIVE_ID, a_alternative_id_)
-						}
-					}
-				}
-			}
-		case "DATATYPE_DEFINITION_BOOLEAN:ALTERNATIVE_ID":
-			// we need to retrieve the field owner before the change
-			var pastDATATYPE_DEFINITION_BOOLEANOwner *models.DATATYPE_DEFINITION_BOOLEAN
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "DATATYPE_DEFINITION_BOOLEAN"
-			rf.Fieldname = "ALTERNATIVE_ID"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_alternative_idFormCallback.probe.stageOfInterest,
-				a_alternative_idFormCallback.probe.backRepoOfInterest,
-				a_alternative_id_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastDATATYPE_DEFINITION_BOOLEANOwner = reverseFieldOwner.(*models.DATATYPE_DEFINITION_BOOLEAN)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastDATATYPE_DEFINITION_BOOLEANOwner != nil {
-					idx := slices.Index(pastDATATYPE_DEFINITION_BOOLEANOwner.ALTERNATIVE_ID, a_alternative_id_)
-					pastDATATYPE_DEFINITION_BOOLEANOwner.ALTERNATIVE_ID = slices.Delete(pastDATATYPE_DEFINITION_BOOLEANOwner.ALTERNATIVE_ID, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _datatype_definition_boolean := range *models.GetGongstructInstancesSet[models.DATATYPE_DEFINITION_BOOLEAN](a_alternative_idFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _datatype_definition_boolean.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newDATATYPE_DEFINITION_BOOLEANOwner := _datatype_definition_boolean // we have a match
-						if pastDATATYPE_DEFINITION_BOOLEANOwner != nil {
-							if newDATATYPE_DEFINITION_BOOLEANOwner != pastDATATYPE_DEFINITION_BOOLEANOwner {
-								idx := slices.Index(pastDATATYPE_DEFINITION_BOOLEANOwner.ALTERNATIVE_ID, a_alternative_id_)
-								pastDATATYPE_DEFINITION_BOOLEANOwner.ALTERNATIVE_ID = slices.Delete(pastDATATYPE_DEFINITION_BOOLEANOwner.ALTERNATIVE_ID, idx, idx+1)
-								newDATATYPE_DEFINITION_BOOLEANOwner.ALTERNATIVE_ID = append(newDATATYPE_DEFINITION_BOOLEANOwner.ALTERNATIVE_ID, a_alternative_id_)
-							}
-						} else {
-							newDATATYPE_DEFINITION_BOOLEANOwner.ALTERNATIVE_ID = append(newDATATYPE_DEFINITION_BOOLEANOwner.ALTERNATIVE_ID, a_alternative_id_)
-						}
-					}
-				}
-			}
-		case "DATATYPE_DEFINITION_DATE:ALTERNATIVE_ID":
-			// we need to retrieve the field owner before the change
-			var pastDATATYPE_DEFINITION_DATEOwner *models.DATATYPE_DEFINITION_DATE
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "DATATYPE_DEFINITION_DATE"
-			rf.Fieldname = "ALTERNATIVE_ID"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_alternative_idFormCallback.probe.stageOfInterest,
-				a_alternative_idFormCallback.probe.backRepoOfInterest,
-				a_alternative_id_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastDATATYPE_DEFINITION_DATEOwner = reverseFieldOwner.(*models.DATATYPE_DEFINITION_DATE)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastDATATYPE_DEFINITION_DATEOwner != nil {
-					idx := slices.Index(pastDATATYPE_DEFINITION_DATEOwner.ALTERNATIVE_ID, a_alternative_id_)
-					pastDATATYPE_DEFINITION_DATEOwner.ALTERNATIVE_ID = slices.Delete(pastDATATYPE_DEFINITION_DATEOwner.ALTERNATIVE_ID, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _datatype_definition_date := range *models.GetGongstructInstancesSet[models.DATATYPE_DEFINITION_DATE](a_alternative_idFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _datatype_definition_date.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newDATATYPE_DEFINITION_DATEOwner := _datatype_definition_date // we have a match
-						if pastDATATYPE_DEFINITION_DATEOwner != nil {
-							if newDATATYPE_DEFINITION_DATEOwner != pastDATATYPE_DEFINITION_DATEOwner {
-								idx := slices.Index(pastDATATYPE_DEFINITION_DATEOwner.ALTERNATIVE_ID, a_alternative_id_)
-								pastDATATYPE_DEFINITION_DATEOwner.ALTERNATIVE_ID = slices.Delete(pastDATATYPE_DEFINITION_DATEOwner.ALTERNATIVE_ID, idx, idx+1)
-								newDATATYPE_DEFINITION_DATEOwner.ALTERNATIVE_ID = append(newDATATYPE_DEFINITION_DATEOwner.ALTERNATIVE_ID, a_alternative_id_)
-							}
-						} else {
-							newDATATYPE_DEFINITION_DATEOwner.ALTERNATIVE_ID = append(newDATATYPE_DEFINITION_DATEOwner.ALTERNATIVE_ID, a_alternative_id_)
-						}
-					}
-				}
-			}
-		case "DATATYPE_DEFINITION_ENUMERATION:ALTERNATIVE_ID":
-			// we need to retrieve the field owner before the change
-			var pastDATATYPE_DEFINITION_ENUMERATIONOwner *models.DATATYPE_DEFINITION_ENUMERATION
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "DATATYPE_DEFINITION_ENUMERATION"
-			rf.Fieldname = "ALTERNATIVE_ID"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_alternative_idFormCallback.probe.stageOfInterest,
-				a_alternative_idFormCallback.probe.backRepoOfInterest,
-				a_alternative_id_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastDATATYPE_DEFINITION_ENUMERATIONOwner = reverseFieldOwner.(*models.DATATYPE_DEFINITION_ENUMERATION)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastDATATYPE_DEFINITION_ENUMERATIONOwner != nil {
-					idx := slices.Index(pastDATATYPE_DEFINITION_ENUMERATIONOwner.ALTERNATIVE_ID, a_alternative_id_)
-					pastDATATYPE_DEFINITION_ENUMERATIONOwner.ALTERNATIVE_ID = slices.Delete(pastDATATYPE_DEFINITION_ENUMERATIONOwner.ALTERNATIVE_ID, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _datatype_definition_enumeration := range *models.GetGongstructInstancesSet[models.DATATYPE_DEFINITION_ENUMERATION](a_alternative_idFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _datatype_definition_enumeration.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newDATATYPE_DEFINITION_ENUMERATIONOwner := _datatype_definition_enumeration // we have a match
-						if pastDATATYPE_DEFINITION_ENUMERATIONOwner != nil {
-							if newDATATYPE_DEFINITION_ENUMERATIONOwner != pastDATATYPE_DEFINITION_ENUMERATIONOwner {
-								idx := slices.Index(pastDATATYPE_DEFINITION_ENUMERATIONOwner.ALTERNATIVE_ID, a_alternative_id_)
-								pastDATATYPE_DEFINITION_ENUMERATIONOwner.ALTERNATIVE_ID = slices.Delete(pastDATATYPE_DEFINITION_ENUMERATIONOwner.ALTERNATIVE_ID, idx, idx+1)
-								newDATATYPE_DEFINITION_ENUMERATIONOwner.ALTERNATIVE_ID = append(newDATATYPE_DEFINITION_ENUMERATIONOwner.ALTERNATIVE_ID, a_alternative_id_)
-							}
-						} else {
-							newDATATYPE_DEFINITION_ENUMERATIONOwner.ALTERNATIVE_ID = append(newDATATYPE_DEFINITION_ENUMERATIONOwner.ALTERNATIVE_ID, a_alternative_id_)
-						}
-					}
-				}
-			}
-		case "DATATYPE_DEFINITION_INTEGER:ALTERNATIVE_ID":
-			// we need to retrieve the field owner before the change
-			var pastDATATYPE_DEFINITION_INTEGEROwner *models.DATATYPE_DEFINITION_INTEGER
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "DATATYPE_DEFINITION_INTEGER"
-			rf.Fieldname = "ALTERNATIVE_ID"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_alternative_idFormCallback.probe.stageOfInterest,
-				a_alternative_idFormCallback.probe.backRepoOfInterest,
-				a_alternative_id_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastDATATYPE_DEFINITION_INTEGEROwner = reverseFieldOwner.(*models.DATATYPE_DEFINITION_INTEGER)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastDATATYPE_DEFINITION_INTEGEROwner != nil {
-					idx := slices.Index(pastDATATYPE_DEFINITION_INTEGEROwner.ALTERNATIVE_ID, a_alternative_id_)
-					pastDATATYPE_DEFINITION_INTEGEROwner.ALTERNATIVE_ID = slices.Delete(pastDATATYPE_DEFINITION_INTEGEROwner.ALTERNATIVE_ID, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _datatype_definition_integer := range *models.GetGongstructInstancesSet[models.DATATYPE_DEFINITION_INTEGER](a_alternative_idFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _datatype_definition_integer.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newDATATYPE_DEFINITION_INTEGEROwner := _datatype_definition_integer // we have a match
-						if pastDATATYPE_DEFINITION_INTEGEROwner != nil {
-							if newDATATYPE_DEFINITION_INTEGEROwner != pastDATATYPE_DEFINITION_INTEGEROwner {
-								idx := slices.Index(pastDATATYPE_DEFINITION_INTEGEROwner.ALTERNATIVE_ID, a_alternative_id_)
-								pastDATATYPE_DEFINITION_INTEGEROwner.ALTERNATIVE_ID = slices.Delete(pastDATATYPE_DEFINITION_INTEGEROwner.ALTERNATIVE_ID, idx, idx+1)
-								newDATATYPE_DEFINITION_INTEGEROwner.ALTERNATIVE_ID = append(newDATATYPE_DEFINITION_INTEGEROwner.ALTERNATIVE_ID, a_alternative_id_)
-							}
-						} else {
-							newDATATYPE_DEFINITION_INTEGEROwner.ALTERNATIVE_ID = append(newDATATYPE_DEFINITION_INTEGEROwner.ALTERNATIVE_ID, a_alternative_id_)
-						}
-					}
-				}
-			}
-		case "DATATYPE_DEFINITION_REAL:ALTERNATIVE_ID":
-			// we need to retrieve the field owner before the change
-			var pastDATATYPE_DEFINITION_REALOwner *models.DATATYPE_DEFINITION_REAL
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "DATATYPE_DEFINITION_REAL"
-			rf.Fieldname = "ALTERNATIVE_ID"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_alternative_idFormCallback.probe.stageOfInterest,
-				a_alternative_idFormCallback.probe.backRepoOfInterest,
-				a_alternative_id_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastDATATYPE_DEFINITION_REALOwner = reverseFieldOwner.(*models.DATATYPE_DEFINITION_REAL)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastDATATYPE_DEFINITION_REALOwner != nil {
-					idx := slices.Index(pastDATATYPE_DEFINITION_REALOwner.ALTERNATIVE_ID, a_alternative_id_)
-					pastDATATYPE_DEFINITION_REALOwner.ALTERNATIVE_ID = slices.Delete(pastDATATYPE_DEFINITION_REALOwner.ALTERNATIVE_ID, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _datatype_definition_real := range *models.GetGongstructInstancesSet[models.DATATYPE_DEFINITION_REAL](a_alternative_idFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _datatype_definition_real.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newDATATYPE_DEFINITION_REALOwner := _datatype_definition_real // we have a match
-						if pastDATATYPE_DEFINITION_REALOwner != nil {
-							if newDATATYPE_DEFINITION_REALOwner != pastDATATYPE_DEFINITION_REALOwner {
-								idx := slices.Index(pastDATATYPE_DEFINITION_REALOwner.ALTERNATIVE_ID, a_alternative_id_)
-								pastDATATYPE_DEFINITION_REALOwner.ALTERNATIVE_ID = slices.Delete(pastDATATYPE_DEFINITION_REALOwner.ALTERNATIVE_ID, idx, idx+1)
-								newDATATYPE_DEFINITION_REALOwner.ALTERNATIVE_ID = append(newDATATYPE_DEFINITION_REALOwner.ALTERNATIVE_ID, a_alternative_id_)
-							}
-						} else {
-							newDATATYPE_DEFINITION_REALOwner.ALTERNATIVE_ID = append(newDATATYPE_DEFINITION_REALOwner.ALTERNATIVE_ID, a_alternative_id_)
-						}
-					}
-				}
-			}
-		case "DATATYPE_DEFINITION_STRING:ALTERNATIVE_ID":
-			// we need to retrieve the field owner before the change
-			var pastDATATYPE_DEFINITION_STRINGOwner *models.DATATYPE_DEFINITION_STRING
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "DATATYPE_DEFINITION_STRING"
-			rf.Fieldname = "ALTERNATIVE_ID"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_alternative_idFormCallback.probe.stageOfInterest,
-				a_alternative_idFormCallback.probe.backRepoOfInterest,
-				a_alternative_id_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastDATATYPE_DEFINITION_STRINGOwner = reverseFieldOwner.(*models.DATATYPE_DEFINITION_STRING)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastDATATYPE_DEFINITION_STRINGOwner != nil {
-					idx := slices.Index(pastDATATYPE_DEFINITION_STRINGOwner.ALTERNATIVE_ID, a_alternative_id_)
-					pastDATATYPE_DEFINITION_STRINGOwner.ALTERNATIVE_ID = slices.Delete(pastDATATYPE_DEFINITION_STRINGOwner.ALTERNATIVE_ID, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _datatype_definition_string := range *models.GetGongstructInstancesSet[models.DATATYPE_DEFINITION_STRING](a_alternative_idFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _datatype_definition_string.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newDATATYPE_DEFINITION_STRINGOwner := _datatype_definition_string // we have a match
-						if pastDATATYPE_DEFINITION_STRINGOwner != nil {
-							if newDATATYPE_DEFINITION_STRINGOwner != pastDATATYPE_DEFINITION_STRINGOwner {
-								idx := slices.Index(pastDATATYPE_DEFINITION_STRINGOwner.ALTERNATIVE_ID, a_alternative_id_)
-								pastDATATYPE_DEFINITION_STRINGOwner.ALTERNATIVE_ID = slices.Delete(pastDATATYPE_DEFINITION_STRINGOwner.ALTERNATIVE_ID, idx, idx+1)
-								newDATATYPE_DEFINITION_STRINGOwner.ALTERNATIVE_ID = append(newDATATYPE_DEFINITION_STRINGOwner.ALTERNATIVE_ID, a_alternative_id_)
-							}
-						} else {
-							newDATATYPE_DEFINITION_STRINGOwner.ALTERNATIVE_ID = append(newDATATYPE_DEFINITION_STRINGOwner.ALTERNATIVE_ID, a_alternative_id_)
-						}
-					}
-				}
-			}
-		case "DATATYPE_DEFINITION_XHTML:ALTERNATIVE_ID":
-			// we need to retrieve the field owner before the change
-			var pastDATATYPE_DEFINITION_XHTMLOwner *models.DATATYPE_DEFINITION_XHTML
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "DATATYPE_DEFINITION_XHTML"
-			rf.Fieldname = "ALTERNATIVE_ID"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_alternative_idFormCallback.probe.stageOfInterest,
-				a_alternative_idFormCallback.probe.backRepoOfInterest,
-				a_alternative_id_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastDATATYPE_DEFINITION_XHTMLOwner = reverseFieldOwner.(*models.DATATYPE_DEFINITION_XHTML)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastDATATYPE_DEFINITION_XHTMLOwner != nil {
-					idx := slices.Index(pastDATATYPE_DEFINITION_XHTMLOwner.ALTERNATIVE_ID, a_alternative_id_)
-					pastDATATYPE_DEFINITION_XHTMLOwner.ALTERNATIVE_ID = slices.Delete(pastDATATYPE_DEFINITION_XHTMLOwner.ALTERNATIVE_ID, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _datatype_definition_xhtml := range *models.GetGongstructInstancesSet[models.DATATYPE_DEFINITION_XHTML](a_alternative_idFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _datatype_definition_xhtml.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newDATATYPE_DEFINITION_XHTMLOwner := _datatype_definition_xhtml // we have a match
-						if pastDATATYPE_DEFINITION_XHTMLOwner != nil {
-							if newDATATYPE_DEFINITION_XHTMLOwner != pastDATATYPE_DEFINITION_XHTMLOwner {
-								idx := slices.Index(pastDATATYPE_DEFINITION_XHTMLOwner.ALTERNATIVE_ID, a_alternative_id_)
-								pastDATATYPE_DEFINITION_XHTMLOwner.ALTERNATIVE_ID = slices.Delete(pastDATATYPE_DEFINITION_XHTMLOwner.ALTERNATIVE_ID, idx, idx+1)
-								newDATATYPE_DEFINITION_XHTMLOwner.ALTERNATIVE_ID = append(newDATATYPE_DEFINITION_XHTMLOwner.ALTERNATIVE_ID, a_alternative_id_)
-							}
-						} else {
-							newDATATYPE_DEFINITION_XHTMLOwner.ALTERNATIVE_ID = append(newDATATYPE_DEFINITION_XHTMLOwner.ALTERNATIVE_ID, a_alternative_id_)
-						}
-					}
-				}
-			}
-		case "ENUM_VALUE:ALTERNATIVE_ID":
-			// we need to retrieve the field owner before the change
-			var pastENUM_VALUEOwner *models.ENUM_VALUE
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ENUM_VALUE"
-			rf.Fieldname = "ALTERNATIVE_ID"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_alternative_idFormCallback.probe.stageOfInterest,
-				a_alternative_idFormCallback.probe.backRepoOfInterest,
-				a_alternative_id_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastENUM_VALUEOwner = reverseFieldOwner.(*models.ENUM_VALUE)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastENUM_VALUEOwner != nil {
-					idx := slices.Index(pastENUM_VALUEOwner.ALTERNATIVE_ID, a_alternative_id_)
-					pastENUM_VALUEOwner.ALTERNATIVE_ID = slices.Delete(pastENUM_VALUEOwner.ALTERNATIVE_ID, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _enum_value := range *models.GetGongstructInstancesSet[models.ENUM_VALUE](a_alternative_idFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _enum_value.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newENUM_VALUEOwner := _enum_value // we have a match
-						if pastENUM_VALUEOwner != nil {
-							if newENUM_VALUEOwner != pastENUM_VALUEOwner {
-								idx := slices.Index(pastENUM_VALUEOwner.ALTERNATIVE_ID, a_alternative_id_)
-								pastENUM_VALUEOwner.ALTERNATIVE_ID = slices.Delete(pastENUM_VALUEOwner.ALTERNATIVE_ID, idx, idx+1)
-								newENUM_VALUEOwner.ALTERNATIVE_ID = append(newENUM_VALUEOwner.ALTERNATIVE_ID, a_alternative_id_)
-							}
-						} else {
-							newENUM_VALUEOwner.ALTERNATIVE_ID = append(newENUM_VALUEOwner.ALTERNATIVE_ID, a_alternative_id_)
-						}
-					}
-				}
-			}
-		case "RELATION_GROUP:ALTERNATIVE_ID":
-			// we need to retrieve the field owner before the change
-			var pastRELATION_GROUPOwner *models.RELATION_GROUP
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "RELATION_GROUP"
-			rf.Fieldname = "ALTERNATIVE_ID"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_alternative_idFormCallback.probe.stageOfInterest,
-				a_alternative_idFormCallback.probe.backRepoOfInterest,
-				a_alternative_id_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastRELATION_GROUPOwner = reverseFieldOwner.(*models.RELATION_GROUP)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastRELATION_GROUPOwner != nil {
-					idx := slices.Index(pastRELATION_GROUPOwner.ALTERNATIVE_ID, a_alternative_id_)
-					pastRELATION_GROUPOwner.ALTERNATIVE_ID = slices.Delete(pastRELATION_GROUPOwner.ALTERNATIVE_ID, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _relation_group := range *models.GetGongstructInstancesSet[models.RELATION_GROUP](a_alternative_idFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _relation_group.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newRELATION_GROUPOwner := _relation_group // we have a match
-						if pastRELATION_GROUPOwner != nil {
-							if newRELATION_GROUPOwner != pastRELATION_GROUPOwner {
-								idx := slices.Index(pastRELATION_GROUPOwner.ALTERNATIVE_ID, a_alternative_id_)
-								pastRELATION_GROUPOwner.ALTERNATIVE_ID = slices.Delete(pastRELATION_GROUPOwner.ALTERNATIVE_ID, idx, idx+1)
-								newRELATION_GROUPOwner.ALTERNATIVE_ID = append(newRELATION_GROUPOwner.ALTERNATIVE_ID, a_alternative_id_)
-							}
-						} else {
-							newRELATION_GROUPOwner.ALTERNATIVE_ID = append(newRELATION_GROUPOwner.ALTERNATIVE_ID, a_alternative_id_)
-						}
-					}
-				}
-			}
-		case "RELATION_GROUP_TYPE:ALTERNATIVE_ID":
-			// we need to retrieve the field owner before the change
-			var pastRELATION_GROUP_TYPEOwner *models.RELATION_GROUP_TYPE
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "RELATION_GROUP_TYPE"
-			rf.Fieldname = "ALTERNATIVE_ID"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_alternative_idFormCallback.probe.stageOfInterest,
-				a_alternative_idFormCallback.probe.backRepoOfInterest,
-				a_alternative_id_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastRELATION_GROUP_TYPEOwner = reverseFieldOwner.(*models.RELATION_GROUP_TYPE)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastRELATION_GROUP_TYPEOwner != nil {
-					idx := slices.Index(pastRELATION_GROUP_TYPEOwner.ALTERNATIVE_ID, a_alternative_id_)
-					pastRELATION_GROUP_TYPEOwner.ALTERNATIVE_ID = slices.Delete(pastRELATION_GROUP_TYPEOwner.ALTERNATIVE_ID, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _relation_group_type := range *models.GetGongstructInstancesSet[models.RELATION_GROUP_TYPE](a_alternative_idFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _relation_group_type.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newRELATION_GROUP_TYPEOwner := _relation_group_type // we have a match
-						if pastRELATION_GROUP_TYPEOwner != nil {
-							if newRELATION_GROUP_TYPEOwner != pastRELATION_GROUP_TYPEOwner {
-								idx := slices.Index(pastRELATION_GROUP_TYPEOwner.ALTERNATIVE_ID, a_alternative_id_)
-								pastRELATION_GROUP_TYPEOwner.ALTERNATIVE_ID = slices.Delete(pastRELATION_GROUP_TYPEOwner.ALTERNATIVE_ID, idx, idx+1)
-								newRELATION_GROUP_TYPEOwner.ALTERNATIVE_ID = append(newRELATION_GROUP_TYPEOwner.ALTERNATIVE_ID, a_alternative_id_)
-							}
-						} else {
-							newRELATION_GROUP_TYPEOwner.ALTERNATIVE_ID = append(newRELATION_GROUP_TYPEOwner.ALTERNATIVE_ID, a_alternative_id_)
-						}
-					}
-				}
-			}
-		case "SPECIFICATION:ALTERNATIVE_ID":
-			// we need to retrieve the field owner before the change
-			var pastSPECIFICATIONOwner *models.SPECIFICATION
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "SPECIFICATION"
-			rf.Fieldname = "ALTERNATIVE_ID"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_alternative_idFormCallback.probe.stageOfInterest,
-				a_alternative_idFormCallback.probe.backRepoOfInterest,
-				a_alternative_id_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastSPECIFICATIONOwner = reverseFieldOwner.(*models.SPECIFICATION)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastSPECIFICATIONOwner != nil {
-					idx := slices.Index(pastSPECIFICATIONOwner.ALTERNATIVE_ID, a_alternative_id_)
-					pastSPECIFICATIONOwner.ALTERNATIVE_ID = slices.Delete(pastSPECIFICATIONOwner.ALTERNATIVE_ID, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _specification := range *models.GetGongstructInstancesSet[models.SPECIFICATION](a_alternative_idFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _specification.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newSPECIFICATIONOwner := _specification // we have a match
-						if pastSPECIFICATIONOwner != nil {
-							if newSPECIFICATIONOwner != pastSPECIFICATIONOwner {
-								idx := slices.Index(pastSPECIFICATIONOwner.ALTERNATIVE_ID, a_alternative_id_)
-								pastSPECIFICATIONOwner.ALTERNATIVE_ID = slices.Delete(pastSPECIFICATIONOwner.ALTERNATIVE_ID, idx, idx+1)
-								newSPECIFICATIONOwner.ALTERNATIVE_ID = append(newSPECIFICATIONOwner.ALTERNATIVE_ID, a_alternative_id_)
-							}
-						} else {
-							newSPECIFICATIONOwner.ALTERNATIVE_ID = append(newSPECIFICATIONOwner.ALTERNATIVE_ID, a_alternative_id_)
-						}
-					}
-				}
-			}
-		case "SPECIFICATION_TYPE:ALTERNATIVE_ID":
-			// we need to retrieve the field owner before the change
-			var pastSPECIFICATION_TYPEOwner *models.SPECIFICATION_TYPE
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "SPECIFICATION_TYPE"
-			rf.Fieldname = "ALTERNATIVE_ID"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_alternative_idFormCallback.probe.stageOfInterest,
-				a_alternative_idFormCallback.probe.backRepoOfInterest,
-				a_alternative_id_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastSPECIFICATION_TYPEOwner = reverseFieldOwner.(*models.SPECIFICATION_TYPE)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastSPECIFICATION_TYPEOwner != nil {
-					idx := slices.Index(pastSPECIFICATION_TYPEOwner.ALTERNATIVE_ID, a_alternative_id_)
-					pastSPECIFICATION_TYPEOwner.ALTERNATIVE_ID = slices.Delete(pastSPECIFICATION_TYPEOwner.ALTERNATIVE_ID, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _specification_type := range *models.GetGongstructInstancesSet[models.SPECIFICATION_TYPE](a_alternative_idFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _specification_type.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newSPECIFICATION_TYPEOwner := _specification_type // we have a match
-						if pastSPECIFICATION_TYPEOwner != nil {
-							if newSPECIFICATION_TYPEOwner != pastSPECIFICATION_TYPEOwner {
-								idx := slices.Index(pastSPECIFICATION_TYPEOwner.ALTERNATIVE_ID, a_alternative_id_)
-								pastSPECIFICATION_TYPEOwner.ALTERNATIVE_ID = slices.Delete(pastSPECIFICATION_TYPEOwner.ALTERNATIVE_ID, idx, idx+1)
-								newSPECIFICATION_TYPEOwner.ALTERNATIVE_ID = append(newSPECIFICATION_TYPEOwner.ALTERNATIVE_ID, a_alternative_id_)
-							}
-						} else {
-							newSPECIFICATION_TYPEOwner.ALTERNATIVE_ID = append(newSPECIFICATION_TYPEOwner.ALTERNATIVE_ID, a_alternative_id_)
-						}
-					}
-				}
-			}
-		case "SPEC_HIERARCHY:ALTERNATIVE_ID":
-			// we need to retrieve the field owner before the change
-			var pastSPEC_HIERARCHYOwner *models.SPEC_HIERARCHY
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "SPEC_HIERARCHY"
-			rf.Fieldname = "ALTERNATIVE_ID"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_alternative_idFormCallback.probe.stageOfInterest,
-				a_alternative_idFormCallback.probe.backRepoOfInterest,
-				a_alternative_id_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastSPEC_HIERARCHYOwner = reverseFieldOwner.(*models.SPEC_HIERARCHY)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastSPEC_HIERARCHYOwner != nil {
-					idx := slices.Index(pastSPEC_HIERARCHYOwner.ALTERNATIVE_ID, a_alternative_id_)
-					pastSPEC_HIERARCHYOwner.ALTERNATIVE_ID = slices.Delete(pastSPEC_HIERARCHYOwner.ALTERNATIVE_ID, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _spec_hierarchy := range *models.GetGongstructInstancesSet[models.SPEC_HIERARCHY](a_alternative_idFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _spec_hierarchy.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newSPEC_HIERARCHYOwner := _spec_hierarchy // we have a match
-						if pastSPEC_HIERARCHYOwner != nil {
-							if newSPEC_HIERARCHYOwner != pastSPEC_HIERARCHYOwner {
-								idx := slices.Index(pastSPEC_HIERARCHYOwner.ALTERNATIVE_ID, a_alternative_id_)
-								pastSPEC_HIERARCHYOwner.ALTERNATIVE_ID = slices.Delete(pastSPEC_HIERARCHYOwner.ALTERNATIVE_ID, idx, idx+1)
-								newSPEC_HIERARCHYOwner.ALTERNATIVE_ID = append(newSPEC_HIERARCHYOwner.ALTERNATIVE_ID, a_alternative_id_)
-							}
-						} else {
-							newSPEC_HIERARCHYOwner.ALTERNATIVE_ID = append(newSPEC_HIERARCHYOwner.ALTERNATIVE_ID, a_alternative_id_)
-						}
-					}
-				}
-			}
-		case "SPEC_OBJECT:ALTERNATIVE_ID":
-			// we need to retrieve the field owner before the change
-			var pastSPEC_OBJECTOwner *models.SPEC_OBJECT
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "SPEC_OBJECT"
-			rf.Fieldname = "ALTERNATIVE_ID"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_alternative_idFormCallback.probe.stageOfInterest,
-				a_alternative_idFormCallback.probe.backRepoOfInterest,
-				a_alternative_id_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastSPEC_OBJECTOwner = reverseFieldOwner.(*models.SPEC_OBJECT)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastSPEC_OBJECTOwner != nil {
-					idx := slices.Index(pastSPEC_OBJECTOwner.ALTERNATIVE_ID, a_alternative_id_)
-					pastSPEC_OBJECTOwner.ALTERNATIVE_ID = slices.Delete(pastSPEC_OBJECTOwner.ALTERNATIVE_ID, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _spec_object := range *models.GetGongstructInstancesSet[models.SPEC_OBJECT](a_alternative_idFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _spec_object.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newSPEC_OBJECTOwner := _spec_object // we have a match
-						if pastSPEC_OBJECTOwner != nil {
-							if newSPEC_OBJECTOwner != pastSPEC_OBJECTOwner {
-								idx := slices.Index(pastSPEC_OBJECTOwner.ALTERNATIVE_ID, a_alternative_id_)
-								pastSPEC_OBJECTOwner.ALTERNATIVE_ID = slices.Delete(pastSPEC_OBJECTOwner.ALTERNATIVE_ID, idx, idx+1)
-								newSPEC_OBJECTOwner.ALTERNATIVE_ID = append(newSPEC_OBJECTOwner.ALTERNATIVE_ID, a_alternative_id_)
-							}
-						} else {
-							newSPEC_OBJECTOwner.ALTERNATIVE_ID = append(newSPEC_OBJECTOwner.ALTERNATIVE_ID, a_alternative_id_)
-						}
-					}
-				}
-			}
-		case "SPEC_OBJECT_TYPE:ALTERNATIVE_ID":
-			// we need to retrieve the field owner before the change
-			var pastSPEC_OBJECT_TYPEOwner *models.SPEC_OBJECT_TYPE
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "SPEC_OBJECT_TYPE"
-			rf.Fieldname = "ALTERNATIVE_ID"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_alternative_idFormCallback.probe.stageOfInterest,
-				a_alternative_idFormCallback.probe.backRepoOfInterest,
-				a_alternative_id_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastSPEC_OBJECT_TYPEOwner = reverseFieldOwner.(*models.SPEC_OBJECT_TYPE)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastSPEC_OBJECT_TYPEOwner != nil {
-					idx := slices.Index(pastSPEC_OBJECT_TYPEOwner.ALTERNATIVE_ID, a_alternative_id_)
-					pastSPEC_OBJECT_TYPEOwner.ALTERNATIVE_ID = slices.Delete(pastSPEC_OBJECT_TYPEOwner.ALTERNATIVE_ID, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _spec_object_type := range *models.GetGongstructInstancesSet[models.SPEC_OBJECT_TYPE](a_alternative_idFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _spec_object_type.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newSPEC_OBJECT_TYPEOwner := _spec_object_type // we have a match
-						if pastSPEC_OBJECT_TYPEOwner != nil {
-							if newSPEC_OBJECT_TYPEOwner != pastSPEC_OBJECT_TYPEOwner {
-								idx := slices.Index(pastSPEC_OBJECT_TYPEOwner.ALTERNATIVE_ID, a_alternative_id_)
-								pastSPEC_OBJECT_TYPEOwner.ALTERNATIVE_ID = slices.Delete(pastSPEC_OBJECT_TYPEOwner.ALTERNATIVE_ID, idx, idx+1)
-								newSPEC_OBJECT_TYPEOwner.ALTERNATIVE_ID = append(newSPEC_OBJECT_TYPEOwner.ALTERNATIVE_ID, a_alternative_id_)
-							}
-						} else {
-							newSPEC_OBJECT_TYPEOwner.ALTERNATIVE_ID = append(newSPEC_OBJECT_TYPEOwner.ALTERNATIVE_ID, a_alternative_id_)
-						}
-					}
-				}
-			}
-		case "SPEC_RELATION:ALTERNATIVE_ID":
-			// we need to retrieve the field owner before the change
-			var pastSPEC_RELATIONOwner *models.SPEC_RELATION
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "SPEC_RELATION"
-			rf.Fieldname = "ALTERNATIVE_ID"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_alternative_idFormCallback.probe.stageOfInterest,
-				a_alternative_idFormCallback.probe.backRepoOfInterest,
-				a_alternative_id_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastSPEC_RELATIONOwner = reverseFieldOwner.(*models.SPEC_RELATION)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastSPEC_RELATIONOwner != nil {
-					idx := slices.Index(pastSPEC_RELATIONOwner.ALTERNATIVE_ID, a_alternative_id_)
-					pastSPEC_RELATIONOwner.ALTERNATIVE_ID = slices.Delete(pastSPEC_RELATIONOwner.ALTERNATIVE_ID, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _spec_relation := range *models.GetGongstructInstancesSet[models.SPEC_RELATION](a_alternative_idFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _spec_relation.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newSPEC_RELATIONOwner := _spec_relation // we have a match
-						if pastSPEC_RELATIONOwner != nil {
-							if newSPEC_RELATIONOwner != pastSPEC_RELATIONOwner {
-								idx := slices.Index(pastSPEC_RELATIONOwner.ALTERNATIVE_ID, a_alternative_id_)
-								pastSPEC_RELATIONOwner.ALTERNATIVE_ID = slices.Delete(pastSPEC_RELATIONOwner.ALTERNATIVE_ID, idx, idx+1)
-								newSPEC_RELATIONOwner.ALTERNATIVE_ID = append(newSPEC_RELATIONOwner.ALTERNATIVE_ID, a_alternative_id_)
-							}
-						} else {
-							newSPEC_RELATIONOwner.ALTERNATIVE_ID = append(newSPEC_RELATIONOwner.ALTERNATIVE_ID, a_alternative_id_)
-						}
-					}
-				}
-			}
-		case "SPEC_RELATION_TYPE:ALTERNATIVE_ID":
-			// we need to retrieve the field owner before the change
-			var pastSPEC_RELATION_TYPEOwner *models.SPEC_RELATION_TYPE
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "SPEC_RELATION_TYPE"
-			rf.Fieldname = "ALTERNATIVE_ID"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_alternative_idFormCallback.probe.stageOfInterest,
-				a_alternative_idFormCallback.probe.backRepoOfInterest,
-				a_alternative_id_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastSPEC_RELATION_TYPEOwner = reverseFieldOwner.(*models.SPEC_RELATION_TYPE)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastSPEC_RELATION_TYPEOwner != nil {
-					idx := slices.Index(pastSPEC_RELATION_TYPEOwner.ALTERNATIVE_ID, a_alternative_id_)
-					pastSPEC_RELATION_TYPEOwner.ALTERNATIVE_ID = slices.Delete(pastSPEC_RELATION_TYPEOwner.ALTERNATIVE_ID, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _spec_relation_type := range *models.GetGongstructInstancesSet[models.SPEC_RELATION_TYPE](a_alternative_idFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _spec_relation_type.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newSPEC_RELATION_TYPEOwner := _spec_relation_type // we have a match
-						if pastSPEC_RELATION_TYPEOwner != nil {
-							if newSPEC_RELATION_TYPEOwner != pastSPEC_RELATION_TYPEOwner {
-								idx := slices.Index(pastSPEC_RELATION_TYPEOwner.ALTERNATIVE_ID, a_alternative_id_)
-								pastSPEC_RELATION_TYPEOwner.ALTERNATIVE_ID = slices.Delete(pastSPEC_RELATION_TYPEOwner.ALTERNATIVE_ID, idx, idx+1)
-								newSPEC_RELATION_TYPEOwner.ALTERNATIVE_ID = append(newSPEC_RELATION_TYPEOwner.ALTERNATIVE_ID, a_alternative_id_)
-							}
-						} else {
-							newSPEC_RELATION_TYPEOwner.ALTERNATIVE_ID = append(newSPEC_RELATION_TYPEOwner.ALTERNATIVE_ID, a_alternative_id_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -3315,48 +2369,6 @@ func (a_attribute_definition_boolean_refFormCallback *A_ATTRIBUTE_DEFINITION_BOO
 			FormDivBasicFieldToField(&(a_attribute_definition_boolean_ref_.Name), formDiv)
 		case "ATTRIBUTE_DEFINITION_BOOLEAN_REF":
 			FormDivBasicFieldToField(&(a_attribute_definition_boolean_ref_.ATTRIBUTE_DEFINITION_BOOLEAN_REF), formDiv)
-		case "ATTRIBUTE_VALUE_BOOLEAN:DEFINITION":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_VALUE_BOOLEANOwner *models.ATTRIBUTE_VALUE_BOOLEAN
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_VALUE_BOOLEAN"
-			rf.Fieldname = "DEFINITION"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_attribute_definition_boolean_refFormCallback.probe.stageOfInterest,
-				a_attribute_definition_boolean_refFormCallback.probe.backRepoOfInterest,
-				a_attribute_definition_boolean_ref_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_VALUE_BOOLEANOwner = reverseFieldOwner.(*models.ATTRIBUTE_VALUE_BOOLEAN)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_VALUE_BOOLEANOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_VALUE_BOOLEANOwner.DEFINITION, a_attribute_definition_boolean_ref_)
-					pastATTRIBUTE_VALUE_BOOLEANOwner.DEFINITION = slices.Delete(pastATTRIBUTE_VALUE_BOOLEANOwner.DEFINITION, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_value_boolean := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_VALUE_BOOLEAN](a_attribute_definition_boolean_refFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_value_boolean.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_VALUE_BOOLEANOwner := _attribute_value_boolean // we have a match
-						if pastATTRIBUTE_VALUE_BOOLEANOwner != nil {
-							if newATTRIBUTE_VALUE_BOOLEANOwner != pastATTRIBUTE_VALUE_BOOLEANOwner {
-								idx := slices.Index(pastATTRIBUTE_VALUE_BOOLEANOwner.DEFINITION, a_attribute_definition_boolean_ref_)
-								pastATTRIBUTE_VALUE_BOOLEANOwner.DEFINITION = slices.Delete(pastATTRIBUTE_VALUE_BOOLEANOwner.DEFINITION, idx, idx+1)
-								newATTRIBUTE_VALUE_BOOLEANOwner.DEFINITION = append(newATTRIBUTE_VALUE_BOOLEANOwner.DEFINITION, a_attribute_definition_boolean_ref_)
-							}
-						} else {
-							newATTRIBUTE_VALUE_BOOLEANOwner.DEFINITION = append(newATTRIBUTE_VALUE_BOOLEANOwner.DEFINITION, a_attribute_definition_boolean_ref_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -3436,48 +2448,6 @@ func (a_attribute_definition_date_refFormCallback *A_ATTRIBUTE_DEFINITION_DATE_R
 			FormDivBasicFieldToField(&(a_attribute_definition_date_ref_.Name), formDiv)
 		case "ATTRIBUTE_DEFINITION_DATE_REF":
 			FormDivBasicFieldToField(&(a_attribute_definition_date_ref_.ATTRIBUTE_DEFINITION_DATE_REF), formDiv)
-		case "ATTRIBUTE_VALUE_DATE:DEFINITION":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_VALUE_DATEOwner *models.ATTRIBUTE_VALUE_DATE
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_VALUE_DATE"
-			rf.Fieldname = "DEFINITION"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_attribute_definition_date_refFormCallback.probe.stageOfInterest,
-				a_attribute_definition_date_refFormCallback.probe.backRepoOfInterest,
-				a_attribute_definition_date_ref_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_VALUE_DATEOwner = reverseFieldOwner.(*models.ATTRIBUTE_VALUE_DATE)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_VALUE_DATEOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_VALUE_DATEOwner.DEFINITION, a_attribute_definition_date_ref_)
-					pastATTRIBUTE_VALUE_DATEOwner.DEFINITION = slices.Delete(pastATTRIBUTE_VALUE_DATEOwner.DEFINITION, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_value_date := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_VALUE_DATE](a_attribute_definition_date_refFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_value_date.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_VALUE_DATEOwner := _attribute_value_date // we have a match
-						if pastATTRIBUTE_VALUE_DATEOwner != nil {
-							if newATTRIBUTE_VALUE_DATEOwner != pastATTRIBUTE_VALUE_DATEOwner {
-								idx := slices.Index(pastATTRIBUTE_VALUE_DATEOwner.DEFINITION, a_attribute_definition_date_ref_)
-								pastATTRIBUTE_VALUE_DATEOwner.DEFINITION = slices.Delete(pastATTRIBUTE_VALUE_DATEOwner.DEFINITION, idx, idx+1)
-								newATTRIBUTE_VALUE_DATEOwner.DEFINITION = append(newATTRIBUTE_VALUE_DATEOwner.DEFINITION, a_attribute_definition_date_ref_)
-							}
-						} else {
-							newATTRIBUTE_VALUE_DATEOwner.DEFINITION = append(newATTRIBUTE_VALUE_DATEOwner.DEFINITION, a_attribute_definition_date_ref_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -3557,48 +2527,6 @@ func (a_attribute_definition_enumeration_refFormCallback *A_ATTRIBUTE_DEFINITION
 			FormDivBasicFieldToField(&(a_attribute_definition_enumeration_ref_.Name), formDiv)
 		case "ATTRIBUTE_DEFINITION_ENUMERATION_REF":
 			FormDivBasicFieldToField(&(a_attribute_definition_enumeration_ref_.ATTRIBUTE_DEFINITION_ENUMERATION_REF), formDiv)
-		case "ATTRIBUTE_VALUE_ENUMERATION:DEFINITION":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_VALUE_ENUMERATIONOwner *models.ATTRIBUTE_VALUE_ENUMERATION
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_VALUE_ENUMERATION"
-			rf.Fieldname = "DEFINITION"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_attribute_definition_enumeration_refFormCallback.probe.stageOfInterest,
-				a_attribute_definition_enumeration_refFormCallback.probe.backRepoOfInterest,
-				a_attribute_definition_enumeration_ref_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_VALUE_ENUMERATIONOwner = reverseFieldOwner.(*models.ATTRIBUTE_VALUE_ENUMERATION)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_VALUE_ENUMERATIONOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_VALUE_ENUMERATIONOwner.DEFINITION, a_attribute_definition_enumeration_ref_)
-					pastATTRIBUTE_VALUE_ENUMERATIONOwner.DEFINITION = slices.Delete(pastATTRIBUTE_VALUE_ENUMERATIONOwner.DEFINITION, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_value_enumeration := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_VALUE_ENUMERATION](a_attribute_definition_enumeration_refFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_value_enumeration.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_VALUE_ENUMERATIONOwner := _attribute_value_enumeration // we have a match
-						if pastATTRIBUTE_VALUE_ENUMERATIONOwner != nil {
-							if newATTRIBUTE_VALUE_ENUMERATIONOwner != pastATTRIBUTE_VALUE_ENUMERATIONOwner {
-								idx := slices.Index(pastATTRIBUTE_VALUE_ENUMERATIONOwner.DEFINITION, a_attribute_definition_enumeration_ref_)
-								pastATTRIBUTE_VALUE_ENUMERATIONOwner.DEFINITION = slices.Delete(pastATTRIBUTE_VALUE_ENUMERATIONOwner.DEFINITION, idx, idx+1)
-								newATTRIBUTE_VALUE_ENUMERATIONOwner.DEFINITION = append(newATTRIBUTE_VALUE_ENUMERATIONOwner.DEFINITION, a_attribute_definition_enumeration_ref_)
-							}
-						} else {
-							newATTRIBUTE_VALUE_ENUMERATIONOwner.DEFINITION = append(newATTRIBUTE_VALUE_ENUMERATIONOwner.DEFINITION, a_attribute_definition_enumeration_ref_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -3678,48 +2606,6 @@ func (a_attribute_definition_integer_refFormCallback *A_ATTRIBUTE_DEFINITION_INT
 			FormDivBasicFieldToField(&(a_attribute_definition_integer_ref_.Name), formDiv)
 		case "ATTRIBUTE_DEFINITION_INTEGER_REF":
 			FormDivBasicFieldToField(&(a_attribute_definition_integer_ref_.ATTRIBUTE_DEFINITION_INTEGER_REF), formDiv)
-		case "ATTRIBUTE_VALUE_INTEGER:DEFINITION":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_VALUE_INTEGEROwner *models.ATTRIBUTE_VALUE_INTEGER
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_VALUE_INTEGER"
-			rf.Fieldname = "DEFINITION"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_attribute_definition_integer_refFormCallback.probe.stageOfInterest,
-				a_attribute_definition_integer_refFormCallback.probe.backRepoOfInterest,
-				a_attribute_definition_integer_ref_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_VALUE_INTEGEROwner = reverseFieldOwner.(*models.ATTRIBUTE_VALUE_INTEGER)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_VALUE_INTEGEROwner != nil {
-					idx := slices.Index(pastATTRIBUTE_VALUE_INTEGEROwner.DEFINITION, a_attribute_definition_integer_ref_)
-					pastATTRIBUTE_VALUE_INTEGEROwner.DEFINITION = slices.Delete(pastATTRIBUTE_VALUE_INTEGEROwner.DEFINITION, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_value_integer := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_VALUE_INTEGER](a_attribute_definition_integer_refFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_value_integer.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_VALUE_INTEGEROwner := _attribute_value_integer // we have a match
-						if pastATTRIBUTE_VALUE_INTEGEROwner != nil {
-							if newATTRIBUTE_VALUE_INTEGEROwner != pastATTRIBUTE_VALUE_INTEGEROwner {
-								idx := slices.Index(pastATTRIBUTE_VALUE_INTEGEROwner.DEFINITION, a_attribute_definition_integer_ref_)
-								pastATTRIBUTE_VALUE_INTEGEROwner.DEFINITION = slices.Delete(pastATTRIBUTE_VALUE_INTEGEROwner.DEFINITION, idx, idx+1)
-								newATTRIBUTE_VALUE_INTEGEROwner.DEFINITION = append(newATTRIBUTE_VALUE_INTEGEROwner.DEFINITION, a_attribute_definition_integer_ref_)
-							}
-						} else {
-							newATTRIBUTE_VALUE_INTEGEROwner.DEFINITION = append(newATTRIBUTE_VALUE_INTEGEROwner.DEFINITION, a_attribute_definition_integer_ref_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -3799,48 +2685,6 @@ func (a_attribute_definition_real_refFormCallback *A_ATTRIBUTE_DEFINITION_REAL_R
 			FormDivBasicFieldToField(&(a_attribute_definition_real_ref_.Name), formDiv)
 		case "ATTRIBUTE_DEFINITION_REAL_REF":
 			FormDivBasicFieldToField(&(a_attribute_definition_real_ref_.ATTRIBUTE_DEFINITION_REAL_REF), formDiv)
-		case "ATTRIBUTE_VALUE_REAL:DEFINITION":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_VALUE_REALOwner *models.ATTRIBUTE_VALUE_REAL
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_VALUE_REAL"
-			rf.Fieldname = "DEFINITION"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_attribute_definition_real_refFormCallback.probe.stageOfInterest,
-				a_attribute_definition_real_refFormCallback.probe.backRepoOfInterest,
-				a_attribute_definition_real_ref_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_VALUE_REALOwner = reverseFieldOwner.(*models.ATTRIBUTE_VALUE_REAL)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_VALUE_REALOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_VALUE_REALOwner.DEFINITION, a_attribute_definition_real_ref_)
-					pastATTRIBUTE_VALUE_REALOwner.DEFINITION = slices.Delete(pastATTRIBUTE_VALUE_REALOwner.DEFINITION, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_value_real := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_VALUE_REAL](a_attribute_definition_real_refFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_value_real.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_VALUE_REALOwner := _attribute_value_real // we have a match
-						if pastATTRIBUTE_VALUE_REALOwner != nil {
-							if newATTRIBUTE_VALUE_REALOwner != pastATTRIBUTE_VALUE_REALOwner {
-								idx := slices.Index(pastATTRIBUTE_VALUE_REALOwner.DEFINITION, a_attribute_definition_real_ref_)
-								pastATTRIBUTE_VALUE_REALOwner.DEFINITION = slices.Delete(pastATTRIBUTE_VALUE_REALOwner.DEFINITION, idx, idx+1)
-								newATTRIBUTE_VALUE_REALOwner.DEFINITION = append(newATTRIBUTE_VALUE_REALOwner.DEFINITION, a_attribute_definition_real_ref_)
-							}
-						} else {
-							newATTRIBUTE_VALUE_REALOwner.DEFINITION = append(newATTRIBUTE_VALUE_REALOwner.DEFINITION, a_attribute_definition_real_ref_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -3920,48 +2764,6 @@ func (a_attribute_definition_string_refFormCallback *A_ATTRIBUTE_DEFINITION_STRI
 			FormDivBasicFieldToField(&(a_attribute_definition_string_ref_.Name), formDiv)
 		case "ATTRIBUTE_DEFINITION_STRING_REF":
 			FormDivBasicFieldToField(&(a_attribute_definition_string_ref_.ATTRIBUTE_DEFINITION_STRING_REF), formDiv)
-		case "ATTRIBUTE_VALUE_STRING:DEFINITION":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_VALUE_STRINGOwner *models.ATTRIBUTE_VALUE_STRING
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_VALUE_STRING"
-			rf.Fieldname = "DEFINITION"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_attribute_definition_string_refFormCallback.probe.stageOfInterest,
-				a_attribute_definition_string_refFormCallback.probe.backRepoOfInterest,
-				a_attribute_definition_string_ref_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_VALUE_STRINGOwner = reverseFieldOwner.(*models.ATTRIBUTE_VALUE_STRING)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_VALUE_STRINGOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_VALUE_STRINGOwner.DEFINITION, a_attribute_definition_string_ref_)
-					pastATTRIBUTE_VALUE_STRINGOwner.DEFINITION = slices.Delete(pastATTRIBUTE_VALUE_STRINGOwner.DEFINITION, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_value_string := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_VALUE_STRING](a_attribute_definition_string_refFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_value_string.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_VALUE_STRINGOwner := _attribute_value_string // we have a match
-						if pastATTRIBUTE_VALUE_STRINGOwner != nil {
-							if newATTRIBUTE_VALUE_STRINGOwner != pastATTRIBUTE_VALUE_STRINGOwner {
-								idx := slices.Index(pastATTRIBUTE_VALUE_STRINGOwner.DEFINITION, a_attribute_definition_string_ref_)
-								pastATTRIBUTE_VALUE_STRINGOwner.DEFINITION = slices.Delete(pastATTRIBUTE_VALUE_STRINGOwner.DEFINITION, idx, idx+1)
-								newATTRIBUTE_VALUE_STRINGOwner.DEFINITION = append(newATTRIBUTE_VALUE_STRINGOwner.DEFINITION, a_attribute_definition_string_ref_)
-							}
-						} else {
-							newATTRIBUTE_VALUE_STRINGOwner.DEFINITION = append(newATTRIBUTE_VALUE_STRINGOwner.DEFINITION, a_attribute_definition_string_ref_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -4041,48 +2843,6 @@ func (a_attribute_definition_xhtml_refFormCallback *A_ATTRIBUTE_DEFINITION_XHTML
 			FormDivBasicFieldToField(&(a_attribute_definition_xhtml_ref_.Name), formDiv)
 		case "ATTRIBUTE_DEFINITION_XHTML_REF":
 			FormDivBasicFieldToField(&(a_attribute_definition_xhtml_ref_.ATTRIBUTE_DEFINITION_XHTML_REF), formDiv)
-		case "ATTRIBUTE_VALUE_XHTML:DEFINITION":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_VALUE_XHTMLOwner *models.ATTRIBUTE_VALUE_XHTML
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_VALUE_XHTML"
-			rf.Fieldname = "DEFINITION"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_attribute_definition_xhtml_refFormCallback.probe.stageOfInterest,
-				a_attribute_definition_xhtml_refFormCallback.probe.backRepoOfInterest,
-				a_attribute_definition_xhtml_ref_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_VALUE_XHTMLOwner = reverseFieldOwner.(*models.ATTRIBUTE_VALUE_XHTML)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_VALUE_XHTMLOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_VALUE_XHTMLOwner.DEFINITION, a_attribute_definition_xhtml_ref_)
-					pastATTRIBUTE_VALUE_XHTMLOwner.DEFINITION = slices.Delete(pastATTRIBUTE_VALUE_XHTMLOwner.DEFINITION, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_value_xhtml := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_VALUE_XHTML](a_attribute_definition_xhtml_refFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_value_xhtml.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_VALUE_XHTMLOwner := _attribute_value_xhtml // we have a match
-						if pastATTRIBUTE_VALUE_XHTMLOwner != nil {
-							if newATTRIBUTE_VALUE_XHTMLOwner != pastATTRIBUTE_VALUE_XHTMLOwner {
-								idx := slices.Index(pastATTRIBUTE_VALUE_XHTMLOwner.DEFINITION, a_attribute_definition_xhtml_ref_)
-								pastATTRIBUTE_VALUE_XHTMLOwner.DEFINITION = slices.Delete(pastATTRIBUTE_VALUE_XHTMLOwner.DEFINITION, idx, idx+1)
-								newATTRIBUTE_VALUE_XHTMLOwner.DEFINITION = append(newATTRIBUTE_VALUE_XHTMLOwner.DEFINITION, a_attribute_definition_xhtml_ref_)
-							}
-						} else {
-							newATTRIBUTE_VALUE_XHTMLOwner.DEFINITION = append(newATTRIBUTE_VALUE_XHTMLOwner.DEFINITION, a_attribute_definition_xhtml_ref_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -4160,48 +2920,6 @@ func (a_attribute_value_booleanFormCallback *A_ATTRIBUTE_VALUE_BOOLEANFormCallba
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(a_attribute_value_boolean_.Name), formDiv)
-		case "ATTRIBUTE_DEFINITION_BOOLEAN:DEFAULT_VALUE":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_DEFINITION_BOOLEANOwner *models.ATTRIBUTE_DEFINITION_BOOLEAN
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_DEFINITION_BOOLEAN"
-			rf.Fieldname = "DEFAULT_VALUE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_attribute_value_booleanFormCallback.probe.stageOfInterest,
-				a_attribute_value_booleanFormCallback.probe.backRepoOfInterest,
-				a_attribute_value_boolean_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_DEFINITION_BOOLEANOwner = reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_BOOLEAN)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_DEFINITION_BOOLEANOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_DEFINITION_BOOLEANOwner.DEFAULT_VALUE, a_attribute_value_boolean_)
-					pastATTRIBUTE_DEFINITION_BOOLEANOwner.DEFAULT_VALUE = slices.Delete(pastATTRIBUTE_DEFINITION_BOOLEANOwner.DEFAULT_VALUE, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_definition_boolean := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_BOOLEAN](a_attribute_value_booleanFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_definition_boolean.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_DEFINITION_BOOLEANOwner := _attribute_definition_boolean // we have a match
-						if pastATTRIBUTE_DEFINITION_BOOLEANOwner != nil {
-							if newATTRIBUTE_DEFINITION_BOOLEANOwner != pastATTRIBUTE_DEFINITION_BOOLEANOwner {
-								idx := slices.Index(pastATTRIBUTE_DEFINITION_BOOLEANOwner.DEFAULT_VALUE, a_attribute_value_boolean_)
-								pastATTRIBUTE_DEFINITION_BOOLEANOwner.DEFAULT_VALUE = slices.Delete(pastATTRIBUTE_DEFINITION_BOOLEANOwner.DEFAULT_VALUE, idx, idx+1)
-								newATTRIBUTE_DEFINITION_BOOLEANOwner.DEFAULT_VALUE = append(newATTRIBUTE_DEFINITION_BOOLEANOwner.DEFAULT_VALUE, a_attribute_value_boolean_)
-							}
-						} else {
-							newATTRIBUTE_DEFINITION_BOOLEANOwner.DEFAULT_VALUE = append(newATTRIBUTE_DEFINITION_BOOLEANOwner.DEFAULT_VALUE, a_attribute_value_boolean_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -4279,48 +2997,6 @@ func (a_attribute_value_dateFormCallback *A_ATTRIBUTE_VALUE_DATEFormCallback) On
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(a_attribute_value_date_.Name), formDiv)
-		case "ATTRIBUTE_DEFINITION_DATE:DEFAULT_VALUE":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_DEFINITION_DATEOwner *models.ATTRIBUTE_DEFINITION_DATE
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_DEFINITION_DATE"
-			rf.Fieldname = "DEFAULT_VALUE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_attribute_value_dateFormCallback.probe.stageOfInterest,
-				a_attribute_value_dateFormCallback.probe.backRepoOfInterest,
-				a_attribute_value_date_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_DEFINITION_DATEOwner = reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_DATE)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_DEFINITION_DATEOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_DEFINITION_DATEOwner.DEFAULT_VALUE, a_attribute_value_date_)
-					pastATTRIBUTE_DEFINITION_DATEOwner.DEFAULT_VALUE = slices.Delete(pastATTRIBUTE_DEFINITION_DATEOwner.DEFAULT_VALUE, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_definition_date := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_DATE](a_attribute_value_dateFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_definition_date.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_DEFINITION_DATEOwner := _attribute_definition_date // we have a match
-						if pastATTRIBUTE_DEFINITION_DATEOwner != nil {
-							if newATTRIBUTE_DEFINITION_DATEOwner != pastATTRIBUTE_DEFINITION_DATEOwner {
-								idx := slices.Index(pastATTRIBUTE_DEFINITION_DATEOwner.DEFAULT_VALUE, a_attribute_value_date_)
-								pastATTRIBUTE_DEFINITION_DATEOwner.DEFAULT_VALUE = slices.Delete(pastATTRIBUTE_DEFINITION_DATEOwner.DEFAULT_VALUE, idx, idx+1)
-								newATTRIBUTE_DEFINITION_DATEOwner.DEFAULT_VALUE = append(newATTRIBUTE_DEFINITION_DATEOwner.DEFAULT_VALUE, a_attribute_value_date_)
-							}
-						} else {
-							newATTRIBUTE_DEFINITION_DATEOwner.DEFAULT_VALUE = append(newATTRIBUTE_DEFINITION_DATEOwner.DEFAULT_VALUE, a_attribute_value_date_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -4398,48 +3074,6 @@ func (a_attribute_value_enumerationFormCallback *A_ATTRIBUTE_VALUE_ENUMERATIONFo
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(a_attribute_value_enumeration_.Name), formDiv)
-		case "ATTRIBUTE_DEFINITION_ENUMERATION:DEFAULT_VALUE":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_DEFINITION_ENUMERATIONOwner *models.ATTRIBUTE_DEFINITION_ENUMERATION
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_DEFINITION_ENUMERATION"
-			rf.Fieldname = "DEFAULT_VALUE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_attribute_value_enumerationFormCallback.probe.stageOfInterest,
-				a_attribute_value_enumerationFormCallback.probe.backRepoOfInterest,
-				a_attribute_value_enumeration_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_DEFINITION_ENUMERATIONOwner = reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_ENUMERATION)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_DEFINITION_ENUMERATIONOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_DEFINITION_ENUMERATIONOwner.DEFAULT_VALUE, a_attribute_value_enumeration_)
-					pastATTRIBUTE_DEFINITION_ENUMERATIONOwner.DEFAULT_VALUE = slices.Delete(pastATTRIBUTE_DEFINITION_ENUMERATIONOwner.DEFAULT_VALUE, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_definition_enumeration := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_ENUMERATION](a_attribute_value_enumerationFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_definition_enumeration.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_DEFINITION_ENUMERATIONOwner := _attribute_definition_enumeration // we have a match
-						if pastATTRIBUTE_DEFINITION_ENUMERATIONOwner != nil {
-							if newATTRIBUTE_DEFINITION_ENUMERATIONOwner != pastATTRIBUTE_DEFINITION_ENUMERATIONOwner {
-								idx := slices.Index(pastATTRIBUTE_DEFINITION_ENUMERATIONOwner.DEFAULT_VALUE, a_attribute_value_enumeration_)
-								pastATTRIBUTE_DEFINITION_ENUMERATIONOwner.DEFAULT_VALUE = slices.Delete(pastATTRIBUTE_DEFINITION_ENUMERATIONOwner.DEFAULT_VALUE, idx, idx+1)
-								newATTRIBUTE_DEFINITION_ENUMERATIONOwner.DEFAULT_VALUE = append(newATTRIBUTE_DEFINITION_ENUMERATIONOwner.DEFAULT_VALUE, a_attribute_value_enumeration_)
-							}
-						} else {
-							newATTRIBUTE_DEFINITION_ENUMERATIONOwner.DEFAULT_VALUE = append(newATTRIBUTE_DEFINITION_ENUMERATIONOwner.DEFAULT_VALUE, a_attribute_value_enumeration_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -4517,48 +3151,6 @@ func (a_attribute_value_integerFormCallback *A_ATTRIBUTE_VALUE_INTEGERFormCallba
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(a_attribute_value_integer_.Name), formDiv)
-		case "ATTRIBUTE_DEFINITION_INTEGER:DEFAULT_VALUE":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_DEFINITION_INTEGEROwner *models.ATTRIBUTE_DEFINITION_INTEGER
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_DEFINITION_INTEGER"
-			rf.Fieldname = "DEFAULT_VALUE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_attribute_value_integerFormCallback.probe.stageOfInterest,
-				a_attribute_value_integerFormCallback.probe.backRepoOfInterest,
-				a_attribute_value_integer_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_DEFINITION_INTEGEROwner = reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_INTEGER)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_DEFINITION_INTEGEROwner != nil {
-					idx := slices.Index(pastATTRIBUTE_DEFINITION_INTEGEROwner.DEFAULT_VALUE, a_attribute_value_integer_)
-					pastATTRIBUTE_DEFINITION_INTEGEROwner.DEFAULT_VALUE = slices.Delete(pastATTRIBUTE_DEFINITION_INTEGEROwner.DEFAULT_VALUE, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_definition_integer := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_INTEGER](a_attribute_value_integerFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_definition_integer.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_DEFINITION_INTEGEROwner := _attribute_definition_integer // we have a match
-						if pastATTRIBUTE_DEFINITION_INTEGEROwner != nil {
-							if newATTRIBUTE_DEFINITION_INTEGEROwner != pastATTRIBUTE_DEFINITION_INTEGEROwner {
-								idx := slices.Index(pastATTRIBUTE_DEFINITION_INTEGEROwner.DEFAULT_VALUE, a_attribute_value_integer_)
-								pastATTRIBUTE_DEFINITION_INTEGEROwner.DEFAULT_VALUE = slices.Delete(pastATTRIBUTE_DEFINITION_INTEGEROwner.DEFAULT_VALUE, idx, idx+1)
-								newATTRIBUTE_DEFINITION_INTEGEROwner.DEFAULT_VALUE = append(newATTRIBUTE_DEFINITION_INTEGEROwner.DEFAULT_VALUE, a_attribute_value_integer_)
-							}
-						} else {
-							newATTRIBUTE_DEFINITION_INTEGEROwner.DEFAULT_VALUE = append(newATTRIBUTE_DEFINITION_INTEGEROwner.DEFAULT_VALUE, a_attribute_value_integer_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -4636,48 +3228,6 @@ func (a_attribute_value_realFormCallback *A_ATTRIBUTE_VALUE_REALFormCallback) On
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(a_attribute_value_real_.Name), formDiv)
-		case "ATTRIBUTE_DEFINITION_REAL:DEFAULT_VALUE":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_DEFINITION_REALOwner *models.ATTRIBUTE_DEFINITION_REAL
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_DEFINITION_REAL"
-			rf.Fieldname = "DEFAULT_VALUE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_attribute_value_realFormCallback.probe.stageOfInterest,
-				a_attribute_value_realFormCallback.probe.backRepoOfInterest,
-				a_attribute_value_real_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_DEFINITION_REALOwner = reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_REAL)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_DEFINITION_REALOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_DEFINITION_REALOwner.DEFAULT_VALUE, a_attribute_value_real_)
-					pastATTRIBUTE_DEFINITION_REALOwner.DEFAULT_VALUE = slices.Delete(pastATTRIBUTE_DEFINITION_REALOwner.DEFAULT_VALUE, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_definition_real := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_REAL](a_attribute_value_realFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_definition_real.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_DEFINITION_REALOwner := _attribute_definition_real // we have a match
-						if pastATTRIBUTE_DEFINITION_REALOwner != nil {
-							if newATTRIBUTE_DEFINITION_REALOwner != pastATTRIBUTE_DEFINITION_REALOwner {
-								idx := slices.Index(pastATTRIBUTE_DEFINITION_REALOwner.DEFAULT_VALUE, a_attribute_value_real_)
-								pastATTRIBUTE_DEFINITION_REALOwner.DEFAULT_VALUE = slices.Delete(pastATTRIBUTE_DEFINITION_REALOwner.DEFAULT_VALUE, idx, idx+1)
-								newATTRIBUTE_DEFINITION_REALOwner.DEFAULT_VALUE = append(newATTRIBUTE_DEFINITION_REALOwner.DEFAULT_VALUE, a_attribute_value_real_)
-							}
-						} else {
-							newATTRIBUTE_DEFINITION_REALOwner.DEFAULT_VALUE = append(newATTRIBUTE_DEFINITION_REALOwner.DEFAULT_VALUE, a_attribute_value_real_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -4755,48 +3305,6 @@ func (a_attribute_value_stringFormCallback *A_ATTRIBUTE_VALUE_STRINGFormCallback
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(a_attribute_value_string_.Name), formDiv)
-		case "ATTRIBUTE_DEFINITION_STRING:DEFAULT_VALUE":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_DEFINITION_STRINGOwner *models.ATTRIBUTE_DEFINITION_STRING
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_DEFINITION_STRING"
-			rf.Fieldname = "DEFAULT_VALUE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_attribute_value_stringFormCallback.probe.stageOfInterest,
-				a_attribute_value_stringFormCallback.probe.backRepoOfInterest,
-				a_attribute_value_string_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_DEFINITION_STRINGOwner = reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_STRING)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_DEFINITION_STRINGOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_DEFINITION_STRINGOwner.DEFAULT_VALUE, a_attribute_value_string_)
-					pastATTRIBUTE_DEFINITION_STRINGOwner.DEFAULT_VALUE = slices.Delete(pastATTRIBUTE_DEFINITION_STRINGOwner.DEFAULT_VALUE, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_definition_string := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_STRING](a_attribute_value_stringFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_definition_string.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_DEFINITION_STRINGOwner := _attribute_definition_string // we have a match
-						if pastATTRIBUTE_DEFINITION_STRINGOwner != nil {
-							if newATTRIBUTE_DEFINITION_STRINGOwner != pastATTRIBUTE_DEFINITION_STRINGOwner {
-								idx := slices.Index(pastATTRIBUTE_DEFINITION_STRINGOwner.DEFAULT_VALUE, a_attribute_value_string_)
-								pastATTRIBUTE_DEFINITION_STRINGOwner.DEFAULT_VALUE = slices.Delete(pastATTRIBUTE_DEFINITION_STRINGOwner.DEFAULT_VALUE, idx, idx+1)
-								newATTRIBUTE_DEFINITION_STRINGOwner.DEFAULT_VALUE = append(newATTRIBUTE_DEFINITION_STRINGOwner.DEFAULT_VALUE, a_attribute_value_string_)
-							}
-						} else {
-							newATTRIBUTE_DEFINITION_STRINGOwner.DEFAULT_VALUE = append(newATTRIBUTE_DEFINITION_STRINGOwner.DEFAULT_VALUE, a_attribute_value_string_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -4874,48 +3382,6 @@ func (a_attribute_value_xhtmlFormCallback *A_ATTRIBUTE_VALUE_XHTMLFormCallback) 
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(a_attribute_value_xhtml_.Name), formDiv)
-		case "ATTRIBUTE_DEFINITION_XHTML:DEFAULT_VALUE":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_DEFINITION_XHTMLOwner *models.ATTRIBUTE_DEFINITION_XHTML
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_DEFINITION_XHTML"
-			rf.Fieldname = "DEFAULT_VALUE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_attribute_value_xhtmlFormCallback.probe.stageOfInterest,
-				a_attribute_value_xhtmlFormCallback.probe.backRepoOfInterest,
-				a_attribute_value_xhtml_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_DEFINITION_XHTMLOwner = reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_XHTML)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_DEFINITION_XHTMLOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_DEFINITION_XHTMLOwner.DEFAULT_VALUE, a_attribute_value_xhtml_)
-					pastATTRIBUTE_DEFINITION_XHTMLOwner.DEFAULT_VALUE = slices.Delete(pastATTRIBUTE_DEFINITION_XHTMLOwner.DEFAULT_VALUE, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_definition_xhtml := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_XHTML](a_attribute_value_xhtmlFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_definition_xhtml.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_DEFINITION_XHTMLOwner := _attribute_definition_xhtml // we have a match
-						if pastATTRIBUTE_DEFINITION_XHTMLOwner != nil {
-							if newATTRIBUTE_DEFINITION_XHTMLOwner != pastATTRIBUTE_DEFINITION_XHTMLOwner {
-								idx := slices.Index(pastATTRIBUTE_DEFINITION_XHTMLOwner.DEFAULT_VALUE, a_attribute_value_xhtml_)
-								pastATTRIBUTE_DEFINITION_XHTMLOwner.DEFAULT_VALUE = slices.Delete(pastATTRIBUTE_DEFINITION_XHTMLOwner.DEFAULT_VALUE, idx, idx+1)
-								newATTRIBUTE_DEFINITION_XHTMLOwner.DEFAULT_VALUE = append(newATTRIBUTE_DEFINITION_XHTMLOwner.DEFAULT_VALUE, a_attribute_value_xhtml_)
-							}
-						} else {
-							newATTRIBUTE_DEFINITION_XHTMLOwner.DEFAULT_VALUE = append(newATTRIBUTE_DEFINITION_XHTMLOwner.DEFAULT_VALUE, a_attribute_value_xhtml_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -4993,132 +3459,6 @@ func (a_attribute_value_xhtml_1FormCallback *A_ATTRIBUTE_VALUE_XHTML_1FormCallba
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(a_attribute_value_xhtml_1_.Name), formDiv)
-		case "SPECIFICATION:VALUES":
-			// we need to retrieve the field owner before the change
-			var pastSPECIFICATIONOwner *models.SPECIFICATION
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "SPECIFICATION"
-			rf.Fieldname = "VALUES"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_attribute_value_xhtml_1FormCallback.probe.stageOfInterest,
-				a_attribute_value_xhtml_1FormCallback.probe.backRepoOfInterest,
-				a_attribute_value_xhtml_1_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastSPECIFICATIONOwner = reverseFieldOwner.(*models.SPECIFICATION)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastSPECIFICATIONOwner != nil {
-					idx := slices.Index(pastSPECIFICATIONOwner.VALUES, a_attribute_value_xhtml_1_)
-					pastSPECIFICATIONOwner.VALUES = slices.Delete(pastSPECIFICATIONOwner.VALUES, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _specification := range *models.GetGongstructInstancesSet[models.SPECIFICATION](a_attribute_value_xhtml_1FormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _specification.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newSPECIFICATIONOwner := _specification // we have a match
-						if pastSPECIFICATIONOwner != nil {
-							if newSPECIFICATIONOwner != pastSPECIFICATIONOwner {
-								idx := slices.Index(pastSPECIFICATIONOwner.VALUES, a_attribute_value_xhtml_1_)
-								pastSPECIFICATIONOwner.VALUES = slices.Delete(pastSPECIFICATIONOwner.VALUES, idx, idx+1)
-								newSPECIFICATIONOwner.VALUES = append(newSPECIFICATIONOwner.VALUES, a_attribute_value_xhtml_1_)
-							}
-						} else {
-							newSPECIFICATIONOwner.VALUES = append(newSPECIFICATIONOwner.VALUES, a_attribute_value_xhtml_1_)
-						}
-					}
-				}
-			}
-		case "SPEC_OBJECT:VALUES":
-			// we need to retrieve the field owner before the change
-			var pastSPEC_OBJECTOwner *models.SPEC_OBJECT
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "SPEC_OBJECT"
-			rf.Fieldname = "VALUES"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_attribute_value_xhtml_1FormCallback.probe.stageOfInterest,
-				a_attribute_value_xhtml_1FormCallback.probe.backRepoOfInterest,
-				a_attribute_value_xhtml_1_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastSPEC_OBJECTOwner = reverseFieldOwner.(*models.SPEC_OBJECT)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastSPEC_OBJECTOwner != nil {
-					idx := slices.Index(pastSPEC_OBJECTOwner.VALUES, a_attribute_value_xhtml_1_)
-					pastSPEC_OBJECTOwner.VALUES = slices.Delete(pastSPEC_OBJECTOwner.VALUES, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _spec_object := range *models.GetGongstructInstancesSet[models.SPEC_OBJECT](a_attribute_value_xhtml_1FormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _spec_object.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newSPEC_OBJECTOwner := _spec_object // we have a match
-						if pastSPEC_OBJECTOwner != nil {
-							if newSPEC_OBJECTOwner != pastSPEC_OBJECTOwner {
-								idx := slices.Index(pastSPEC_OBJECTOwner.VALUES, a_attribute_value_xhtml_1_)
-								pastSPEC_OBJECTOwner.VALUES = slices.Delete(pastSPEC_OBJECTOwner.VALUES, idx, idx+1)
-								newSPEC_OBJECTOwner.VALUES = append(newSPEC_OBJECTOwner.VALUES, a_attribute_value_xhtml_1_)
-							}
-						} else {
-							newSPEC_OBJECTOwner.VALUES = append(newSPEC_OBJECTOwner.VALUES, a_attribute_value_xhtml_1_)
-						}
-					}
-				}
-			}
-		case "SPEC_RELATION:VALUES":
-			// we need to retrieve the field owner before the change
-			var pastSPEC_RELATIONOwner *models.SPEC_RELATION
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "SPEC_RELATION"
-			rf.Fieldname = "VALUES"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_attribute_value_xhtml_1FormCallback.probe.stageOfInterest,
-				a_attribute_value_xhtml_1FormCallback.probe.backRepoOfInterest,
-				a_attribute_value_xhtml_1_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastSPEC_RELATIONOwner = reverseFieldOwner.(*models.SPEC_RELATION)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastSPEC_RELATIONOwner != nil {
-					idx := slices.Index(pastSPEC_RELATIONOwner.VALUES, a_attribute_value_xhtml_1_)
-					pastSPEC_RELATIONOwner.VALUES = slices.Delete(pastSPEC_RELATIONOwner.VALUES, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _spec_relation := range *models.GetGongstructInstancesSet[models.SPEC_RELATION](a_attribute_value_xhtml_1FormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _spec_relation.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newSPEC_RELATIONOwner := _spec_relation // we have a match
-						if pastSPEC_RELATIONOwner != nil {
-							if newSPEC_RELATIONOwner != pastSPEC_RELATIONOwner {
-								idx := slices.Index(pastSPEC_RELATIONOwner.VALUES, a_attribute_value_xhtml_1_)
-								pastSPEC_RELATIONOwner.VALUES = slices.Delete(pastSPEC_RELATIONOwner.VALUES, idx, idx+1)
-								newSPEC_RELATIONOwner.VALUES = append(newSPEC_RELATIONOwner.VALUES, a_attribute_value_xhtml_1_)
-							}
-						} else {
-							newSPEC_RELATIONOwner.VALUES = append(newSPEC_RELATIONOwner.VALUES, a_attribute_value_xhtml_1_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -5196,90 +3536,6 @@ func (a_childrenFormCallback *A_CHILDRENFormCallback) OnSave() {
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(a_children_.Name), formDiv)
-		case "SPECIFICATION:CHILDREN":
-			// we need to retrieve the field owner before the change
-			var pastSPECIFICATIONOwner *models.SPECIFICATION
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "SPECIFICATION"
-			rf.Fieldname = "CHILDREN"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_childrenFormCallback.probe.stageOfInterest,
-				a_childrenFormCallback.probe.backRepoOfInterest,
-				a_children_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastSPECIFICATIONOwner = reverseFieldOwner.(*models.SPECIFICATION)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastSPECIFICATIONOwner != nil {
-					idx := slices.Index(pastSPECIFICATIONOwner.CHILDREN, a_children_)
-					pastSPECIFICATIONOwner.CHILDREN = slices.Delete(pastSPECIFICATIONOwner.CHILDREN, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _specification := range *models.GetGongstructInstancesSet[models.SPECIFICATION](a_childrenFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _specification.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newSPECIFICATIONOwner := _specification // we have a match
-						if pastSPECIFICATIONOwner != nil {
-							if newSPECIFICATIONOwner != pastSPECIFICATIONOwner {
-								idx := slices.Index(pastSPECIFICATIONOwner.CHILDREN, a_children_)
-								pastSPECIFICATIONOwner.CHILDREN = slices.Delete(pastSPECIFICATIONOwner.CHILDREN, idx, idx+1)
-								newSPECIFICATIONOwner.CHILDREN = append(newSPECIFICATIONOwner.CHILDREN, a_children_)
-							}
-						} else {
-							newSPECIFICATIONOwner.CHILDREN = append(newSPECIFICATIONOwner.CHILDREN, a_children_)
-						}
-					}
-				}
-			}
-		case "SPEC_HIERARCHY:CHILDREN":
-			// we need to retrieve the field owner before the change
-			var pastSPEC_HIERARCHYOwner *models.SPEC_HIERARCHY
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "SPEC_HIERARCHY"
-			rf.Fieldname = "CHILDREN"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_childrenFormCallback.probe.stageOfInterest,
-				a_childrenFormCallback.probe.backRepoOfInterest,
-				a_children_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastSPEC_HIERARCHYOwner = reverseFieldOwner.(*models.SPEC_HIERARCHY)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastSPEC_HIERARCHYOwner != nil {
-					idx := slices.Index(pastSPEC_HIERARCHYOwner.CHILDREN, a_children_)
-					pastSPEC_HIERARCHYOwner.CHILDREN = slices.Delete(pastSPEC_HIERARCHYOwner.CHILDREN, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _spec_hierarchy := range *models.GetGongstructInstancesSet[models.SPEC_HIERARCHY](a_childrenFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _spec_hierarchy.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newSPEC_HIERARCHYOwner := _spec_hierarchy // we have a match
-						if pastSPEC_HIERARCHYOwner != nil {
-							if newSPEC_HIERARCHYOwner != pastSPEC_HIERARCHYOwner {
-								idx := slices.Index(pastSPEC_HIERARCHYOwner.CHILDREN, a_children_)
-								pastSPEC_HIERARCHYOwner.CHILDREN = slices.Delete(pastSPEC_HIERARCHYOwner.CHILDREN, idx, idx+1)
-								newSPEC_HIERARCHYOwner.CHILDREN = append(newSPEC_HIERARCHYOwner.CHILDREN, a_children_)
-							}
-						} else {
-							newSPEC_HIERARCHYOwner.CHILDREN = append(newSPEC_HIERARCHYOwner.CHILDREN, a_children_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -5357,48 +3613,6 @@ func (a_core_contentFormCallback *A_CORE_CONTENTFormCallback) OnSave() {
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(a_core_content_.Name), formDiv)
-		case "REQ_IF:CORE_CONTENT":
-			// we need to retrieve the field owner before the change
-			var pastREQ_IFOwner *models.REQ_IF
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "REQ_IF"
-			rf.Fieldname = "CORE_CONTENT"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_core_contentFormCallback.probe.stageOfInterest,
-				a_core_contentFormCallback.probe.backRepoOfInterest,
-				a_core_content_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastREQ_IFOwner = reverseFieldOwner.(*models.REQ_IF)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastREQ_IFOwner != nil {
-					idx := slices.Index(pastREQ_IFOwner.CORE_CONTENT, a_core_content_)
-					pastREQ_IFOwner.CORE_CONTENT = slices.Delete(pastREQ_IFOwner.CORE_CONTENT, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _req_if := range *models.GetGongstructInstancesSet[models.REQ_IF](a_core_contentFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _req_if.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newREQ_IFOwner := _req_if // we have a match
-						if pastREQ_IFOwner != nil {
-							if newREQ_IFOwner != pastREQ_IFOwner {
-								idx := slices.Index(pastREQ_IFOwner.CORE_CONTENT, a_core_content_)
-								pastREQ_IFOwner.CORE_CONTENT = slices.Delete(pastREQ_IFOwner.CORE_CONTENT, idx, idx+1)
-								newREQ_IFOwner.CORE_CONTENT = append(newREQ_IFOwner.CORE_CONTENT, a_core_content_)
-							}
-						} else {
-							newREQ_IFOwner.CORE_CONTENT = append(newREQ_IFOwner.CORE_CONTENT, a_core_content_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -5476,48 +3690,6 @@ func (a_datatypesFormCallback *A_DATATYPESFormCallback) OnSave() {
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(a_datatypes_.Name), formDiv)
-		case "REQ_IF_CONTENT:DATATYPES":
-			// we need to retrieve the field owner before the change
-			var pastREQ_IF_CONTENTOwner *models.REQ_IF_CONTENT
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "REQ_IF_CONTENT"
-			rf.Fieldname = "DATATYPES"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_datatypesFormCallback.probe.stageOfInterest,
-				a_datatypesFormCallback.probe.backRepoOfInterest,
-				a_datatypes_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastREQ_IF_CONTENTOwner = reverseFieldOwner.(*models.REQ_IF_CONTENT)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastREQ_IF_CONTENTOwner != nil {
-					idx := slices.Index(pastREQ_IF_CONTENTOwner.DATATYPES, a_datatypes_)
-					pastREQ_IF_CONTENTOwner.DATATYPES = slices.Delete(pastREQ_IF_CONTENTOwner.DATATYPES, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _req_if_content := range *models.GetGongstructInstancesSet[models.REQ_IF_CONTENT](a_datatypesFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _req_if_content.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newREQ_IF_CONTENTOwner := _req_if_content // we have a match
-						if pastREQ_IF_CONTENTOwner != nil {
-							if newREQ_IF_CONTENTOwner != pastREQ_IF_CONTENTOwner {
-								idx := slices.Index(pastREQ_IF_CONTENTOwner.DATATYPES, a_datatypes_)
-								pastREQ_IF_CONTENTOwner.DATATYPES = slices.Delete(pastREQ_IF_CONTENTOwner.DATATYPES, idx, idx+1)
-								newREQ_IF_CONTENTOwner.DATATYPES = append(newREQ_IF_CONTENTOwner.DATATYPES, a_datatypes_)
-							}
-						} else {
-							newREQ_IF_CONTENTOwner.DATATYPES = append(newREQ_IF_CONTENTOwner.DATATYPES, a_datatypes_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -5597,48 +3769,6 @@ func (a_datatype_definition_boolean_refFormCallback *A_DATATYPE_DEFINITION_BOOLE
 			FormDivBasicFieldToField(&(a_datatype_definition_boolean_ref_.Name), formDiv)
 		case "DATATYPE_DEFINITION_BOOLEAN_REF":
 			FormDivBasicFieldToField(&(a_datatype_definition_boolean_ref_.DATATYPE_DEFINITION_BOOLEAN_REF), formDiv)
-		case "ATTRIBUTE_DEFINITION_BOOLEAN:TYPE":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_DEFINITION_BOOLEANOwner *models.ATTRIBUTE_DEFINITION_BOOLEAN
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_DEFINITION_BOOLEAN"
-			rf.Fieldname = "TYPE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_datatype_definition_boolean_refFormCallback.probe.stageOfInterest,
-				a_datatype_definition_boolean_refFormCallback.probe.backRepoOfInterest,
-				a_datatype_definition_boolean_ref_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_DEFINITION_BOOLEANOwner = reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_BOOLEAN)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_DEFINITION_BOOLEANOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_DEFINITION_BOOLEANOwner.TYPE, a_datatype_definition_boolean_ref_)
-					pastATTRIBUTE_DEFINITION_BOOLEANOwner.TYPE = slices.Delete(pastATTRIBUTE_DEFINITION_BOOLEANOwner.TYPE, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_definition_boolean := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_BOOLEAN](a_datatype_definition_boolean_refFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_definition_boolean.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_DEFINITION_BOOLEANOwner := _attribute_definition_boolean // we have a match
-						if pastATTRIBUTE_DEFINITION_BOOLEANOwner != nil {
-							if newATTRIBUTE_DEFINITION_BOOLEANOwner != pastATTRIBUTE_DEFINITION_BOOLEANOwner {
-								idx := slices.Index(pastATTRIBUTE_DEFINITION_BOOLEANOwner.TYPE, a_datatype_definition_boolean_ref_)
-								pastATTRIBUTE_DEFINITION_BOOLEANOwner.TYPE = slices.Delete(pastATTRIBUTE_DEFINITION_BOOLEANOwner.TYPE, idx, idx+1)
-								newATTRIBUTE_DEFINITION_BOOLEANOwner.TYPE = append(newATTRIBUTE_DEFINITION_BOOLEANOwner.TYPE, a_datatype_definition_boolean_ref_)
-							}
-						} else {
-							newATTRIBUTE_DEFINITION_BOOLEANOwner.TYPE = append(newATTRIBUTE_DEFINITION_BOOLEANOwner.TYPE, a_datatype_definition_boolean_ref_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -5718,48 +3848,6 @@ func (a_datatype_definition_date_refFormCallback *A_DATATYPE_DEFINITION_DATE_REF
 			FormDivBasicFieldToField(&(a_datatype_definition_date_ref_.Name), formDiv)
 		case "DATATYPE_DEFINITION_DATE_REF":
 			FormDivBasicFieldToField(&(a_datatype_definition_date_ref_.DATATYPE_DEFINITION_DATE_REF), formDiv)
-		case "ATTRIBUTE_DEFINITION_DATE:TYPE":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_DEFINITION_DATEOwner *models.ATTRIBUTE_DEFINITION_DATE
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_DEFINITION_DATE"
-			rf.Fieldname = "TYPE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_datatype_definition_date_refFormCallback.probe.stageOfInterest,
-				a_datatype_definition_date_refFormCallback.probe.backRepoOfInterest,
-				a_datatype_definition_date_ref_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_DEFINITION_DATEOwner = reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_DATE)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_DEFINITION_DATEOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_DEFINITION_DATEOwner.TYPE, a_datatype_definition_date_ref_)
-					pastATTRIBUTE_DEFINITION_DATEOwner.TYPE = slices.Delete(pastATTRIBUTE_DEFINITION_DATEOwner.TYPE, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_definition_date := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_DATE](a_datatype_definition_date_refFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_definition_date.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_DEFINITION_DATEOwner := _attribute_definition_date // we have a match
-						if pastATTRIBUTE_DEFINITION_DATEOwner != nil {
-							if newATTRIBUTE_DEFINITION_DATEOwner != pastATTRIBUTE_DEFINITION_DATEOwner {
-								idx := slices.Index(pastATTRIBUTE_DEFINITION_DATEOwner.TYPE, a_datatype_definition_date_ref_)
-								pastATTRIBUTE_DEFINITION_DATEOwner.TYPE = slices.Delete(pastATTRIBUTE_DEFINITION_DATEOwner.TYPE, idx, idx+1)
-								newATTRIBUTE_DEFINITION_DATEOwner.TYPE = append(newATTRIBUTE_DEFINITION_DATEOwner.TYPE, a_datatype_definition_date_ref_)
-							}
-						} else {
-							newATTRIBUTE_DEFINITION_DATEOwner.TYPE = append(newATTRIBUTE_DEFINITION_DATEOwner.TYPE, a_datatype_definition_date_ref_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -5839,48 +3927,6 @@ func (a_datatype_definition_enumeration_refFormCallback *A_DATATYPE_DEFINITION_E
 			FormDivBasicFieldToField(&(a_datatype_definition_enumeration_ref_.Name), formDiv)
 		case "DATATYPE_DEFINITION_ENUMERATION_REF":
 			FormDivBasicFieldToField(&(a_datatype_definition_enumeration_ref_.DATATYPE_DEFINITION_ENUMERATION_REF), formDiv)
-		case "ATTRIBUTE_DEFINITION_ENUMERATION:TYPE":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_DEFINITION_ENUMERATIONOwner *models.ATTRIBUTE_DEFINITION_ENUMERATION
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_DEFINITION_ENUMERATION"
-			rf.Fieldname = "TYPE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_datatype_definition_enumeration_refFormCallback.probe.stageOfInterest,
-				a_datatype_definition_enumeration_refFormCallback.probe.backRepoOfInterest,
-				a_datatype_definition_enumeration_ref_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_DEFINITION_ENUMERATIONOwner = reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_ENUMERATION)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_DEFINITION_ENUMERATIONOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_DEFINITION_ENUMERATIONOwner.TYPE, a_datatype_definition_enumeration_ref_)
-					pastATTRIBUTE_DEFINITION_ENUMERATIONOwner.TYPE = slices.Delete(pastATTRIBUTE_DEFINITION_ENUMERATIONOwner.TYPE, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_definition_enumeration := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_ENUMERATION](a_datatype_definition_enumeration_refFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_definition_enumeration.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_DEFINITION_ENUMERATIONOwner := _attribute_definition_enumeration // we have a match
-						if pastATTRIBUTE_DEFINITION_ENUMERATIONOwner != nil {
-							if newATTRIBUTE_DEFINITION_ENUMERATIONOwner != pastATTRIBUTE_DEFINITION_ENUMERATIONOwner {
-								idx := slices.Index(pastATTRIBUTE_DEFINITION_ENUMERATIONOwner.TYPE, a_datatype_definition_enumeration_ref_)
-								pastATTRIBUTE_DEFINITION_ENUMERATIONOwner.TYPE = slices.Delete(pastATTRIBUTE_DEFINITION_ENUMERATIONOwner.TYPE, idx, idx+1)
-								newATTRIBUTE_DEFINITION_ENUMERATIONOwner.TYPE = append(newATTRIBUTE_DEFINITION_ENUMERATIONOwner.TYPE, a_datatype_definition_enumeration_ref_)
-							}
-						} else {
-							newATTRIBUTE_DEFINITION_ENUMERATIONOwner.TYPE = append(newATTRIBUTE_DEFINITION_ENUMERATIONOwner.TYPE, a_datatype_definition_enumeration_ref_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -5960,48 +4006,6 @@ func (a_datatype_definition_integer_refFormCallback *A_DATATYPE_DEFINITION_INTEG
 			FormDivBasicFieldToField(&(a_datatype_definition_integer_ref_.Name), formDiv)
 		case "DATATYPE_DEFINITION_INTEGER_REF":
 			FormDivBasicFieldToField(&(a_datatype_definition_integer_ref_.DATATYPE_DEFINITION_INTEGER_REF), formDiv)
-		case "ATTRIBUTE_DEFINITION_INTEGER:TYPE":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_DEFINITION_INTEGEROwner *models.ATTRIBUTE_DEFINITION_INTEGER
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_DEFINITION_INTEGER"
-			rf.Fieldname = "TYPE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_datatype_definition_integer_refFormCallback.probe.stageOfInterest,
-				a_datatype_definition_integer_refFormCallback.probe.backRepoOfInterest,
-				a_datatype_definition_integer_ref_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_DEFINITION_INTEGEROwner = reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_INTEGER)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_DEFINITION_INTEGEROwner != nil {
-					idx := slices.Index(pastATTRIBUTE_DEFINITION_INTEGEROwner.TYPE, a_datatype_definition_integer_ref_)
-					pastATTRIBUTE_DEFINITION_INTEGEROwner.TYPE = slices.Delete(pastATTRIBUTE_DEFINITION_INTEGEROwner.TYPE, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_definition_integer := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_INTEGER](a_datatype_definition_integer_refFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_definition_integer.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_DEFINITION_INTEGEROwner := _attribute_definition_integer // we have a match
-						if pastATTRIBUTE_DEFINITION_INTEGEROwner != nil {
-							if newATTRIBUTE_DEFINITION_INTEGEROwner != pastATTRIBUTE_DEFINITION_INTEGEROwner {
-								idx := slices.Index(pastATTRIBUTE_DEFINITION_INTEGEROwner.TYPE, a_datatype_definition_integer_ref_)
-								pastATTRIBUTE_DEFINITION_INTEGEROwner.TYPE = slices.Delete(pastATTRIBUTE_DEFINITION_INTEGEROwner.TYPE, idx, idx+1)
-								newATTRIBUTE_DEFINITION_INTEGEROwner.TYPE = append(newATTRIBUTE_DEFINITION_INTEGEROwner.TYPE, a_datatype_definition_integer_ref_)
-							}
-						} else {
-							newATTRIBUTE_DEFINITION_INTEGEROwner.TYPE = append(newATTRIBUTE_DEFINITION_INTEGEROwner.TYPE, a_datatype_definition_integer_ref_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -6081,48 +4085,6 @@ func (a_datatype_definition_real_refFormCallback *A_DATATYPE_DEFINITION_REAL_REF
 			FormDivBasicFieldToField(&(a_datatype_definition_real_ref_.Name), formDiv)
 		case "DATATYPE_DEFINITION_REAL_REF":
 			FormDivBasicFieldToField(&(a_datatype_definition_real_ref_.DATATYPE_DEFINITION_REAL_REF), formDiv)
-		case "ATTRIBUTE_DEFINITION_REAL:TYPE":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_DEFINITION_REALOwner *models.ATTRIBUTE_DEFINITION_REAL
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_DEFINITION_REAL"
-			rf.Fieldname = "TYPE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_datatype_definition_real_refFormCallback.probe.stageOfInterest,
-				a_datatype_definition_real_refFormCallback.probe.backRepoOfInterest,
-				a_datatype_definition_real_ref_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_DEFINITION_REALOwner = reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_REAL)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_DEFINITION_REALOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_DEFINITION_REALOwner.TYPE, a_datatype_definition_real_ref_)
-					pastATTRIBUTE_DEFINITION_REALOwner.TYPE = slices.Delete(pastATTRIBUTE_DEFINITION_REALOwner.TYPE, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_definition_real := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_REAL](a_datatype_definition_real_refFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_definition_real.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_DEFINITION_REALOwner := _attribute_definition_real // we have a match
-						if pastATTRIBUTE_DEFINITION_REALOwner != nil {
-							if newATTRIBUTE_DEFINITION_REALOwner != pastATTRIBUTE_DEFINITION_REALOwner {
-								idx := slices.Index(pastATTRIBUTE_DEFINITION_REALOwner.TYPE, a_datatype_definition_real_ref_)
-								pastATTRIBUTE_DEFINITION_REALOwner.TYPE = slices.Delete(pastATTRIBUTE_DEFINITION_REALOwner.TYPE, idx, idx+1)
-								newATTRIBUTE_DEFINITION_REALOwner.TYPE = append(newATTRIBUTE_DEFINITION_REALOwner.TYPE, a_datatype_definition_real_ref_)
-							}
-						} else {
-							newATTRIBUTE_DEFINITION_REALOwner.TYPE = append(newATTRIBUTE_DEFINITION_REALOwner.TYPE, a_datatype_definition_real_ref_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -6202,48 +4164,6 @@ func (a_datatype_definition_string_refFormCallback *A_DATATYPE_DEFINITION_STRING
 			FormDivBasicFieldToField(&(a_datatype_definition_string_ref_.Name), formDiv)
 		case "DATATYPE_DEFINITION_STRING_REF":
 			FormDivBasicFieldToField(&(a_datatype_definition_string_ref_.DATATYPE_DEFINITION_STRING_REF), formDiv)
-		case "ATTRIBUTE_DEFINITION_STRING:TYPE":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_DEFINITION_STRINGOwner *models.ATTRIBUTE_DEFINITION_STRING
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_DEFINITION_STRING"
-			rf.Fieldname = "TYPE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_datatype_definition_string_refFormCallback.probe.stageOfInterest,
-				a_datatype_definition_string_refFormCallback.probe.backRepoOfInterest,
-				a_datatype_definition_string_ref_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_DEFINITION_STRINGOwner = reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_STRING)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_DEFINITION_STRINGOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_DEFINITION_STRINGOwner.TYPE, a_datatype_definition_string_ref_)
-					pastATTRIBUTE_DEFINITION_STRINGOwner.TYPE = slices.Delete(pastATTRIBUTE_DEFINITION_STRINGOwner.TYPE, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_definition_string := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_STRING](a_datatype_definition_string_refFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_definition_string.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_DEFINITION_STRINGOwner := _attribute_definition_string // we have a match
-						if pastATTRIBUTE_DEFINITION_STRINGOwner != nil {
-							if newATTRIBUTE_DEFINITION_STRINGOwner != pastATTRIBUTE_DEFINITION_STRINGOwner {
-								idx := slices.Index(pastATTRIBUTE_DEFINITION_STRINGOwner.TYPE, a_datatype_definition_string_ref_)
-								pastATTRIBUTE_DEFINITION_STRINGOwner.TYPE = slices.Delete(pastATTRIBUTE_DEFINITION_STRINGOwner.TYPE, idx, idx+1)
-								newATTRIBUTE_DEFINITION_STRINGOwner.TYPE = append(newATTRIBUTE_DEFINITION_STRINGOwner.TYPE, a_datatype_definition_string_ref_)
-							}
-						} else {
-							newATTRIBUTE_DEFINITION_STRINGOwner.TYPE = append(newATTRIBUTE_DEFINITION_STRINGOwner.TYPE, a_datatype_definition_string_ref_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -6323,48 +4243,6 @@ func (a_datatype_definition_xhtml_refFormCallback *A_DATATYPE_DEFINITION_XHTML_R
 			FormDivBasicFieldToField(&(a_datatype_definition_xhtml_ref_.Name), formDiv)
 		case "DATATYPE_DEFINITION_XHTML_REF":
 			FormDivBasicFieldToField(&(a_datatype_definition_xhtml_ref_.DATATYPE_DEFINITION_XHTML_REF), formDiv)
-		case "ATTRIBUTE_DEFINITION_XHTML:TYPE":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_DEFINITION_XHTMLOwner *models.ATTRIBUTE_DEFINITION_XHTML
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_DEFINITION_XHTML"
-			rf.Fieldname = "TYPE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_datatype_definition_xhtml_refFormCallback.probe.stageOfInterest,
-				a_datatype_definition_xhtml_refFormCallback.probe.backRepoOfInterest,
-				a_datatype_definition_xhtml_ref_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_DEFINITION_XHTMLOwner = reverseFieldOwner.(*models.ATTRIBUTE_DEFINITION_XHTML)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_DEFINITION_XHTMLOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_DEFINITION_XHTMLOwner.TYPE, a_datatype_definition_xhtml_ref_)
-					pastATTRIBUTE_DEFINITION_XHTMLOwner.TYPE = slices.Delete(pastATTRIBUTE_DEFINITION_XHTMLOwner.TYPE, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_definition_xhtml := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_XHTML](a_datatype_definition_xhtml_refFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_definition_xhtml.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_DEFINITION_XHTMLOwner := _attribute_definition_xhtml // we have a match
-						if pastATTRIBUTE_DEFINITION_XHTMLOwner != nil {
-							if newATTRIBUTE_DEFINITION_XHTMLOwner != pastATTRIBUTE_DEFINITION_XHTMLOwner {
-								idx := slices.Index(pastATTRIBUTE_DEFINITION_XHTMLOwner.TYPE, a_datatype_definition_xhtml_ref_)
-								pastATTRIBUTE_DEFINITION_XHTMLOwner.TYPE = slices.Delete(pastATTRIBUTE_DEFINITION_XHTMLOwner.TYPE, idx, idx+1)
-								newATTRIBUTE_DEFINITION_XHTMLOwner.TYPE = append(newATTRIBUTE_DEFINITION_XHTMLOwner.TYPE, a_datatype_definition_xhtml_ref_)
-							}
-						} else {
-							newATTRIBUTE_DEFINITION_XHTMLOwner.TYPE = append(newATTRIBUTE_DEFINITION_XHTMLOwner.TYPE, a_datatype_definition_xhtml_ref_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -6456,48 +4334,6 @@ func (a_editable_attsFormCallback *A_EDITABLE_ATTSFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(a_editable_atts_.ATTRIBUTE_DEFINITION_STRING_REF), formDiv)
 		case "ATTRIBUTE_DEFINITION_XHTML_REF":
 			FormDivBasicFieldToField(&(a_editable_atts_.ATTRIBUTE_DEFINITION_XHTML_REF), formDiv)
-		case "SPEC_HIERARCHY:EDITABLE_ATTS":
-			// we need to retrieve the field owner before the change
-			var pastSPEC_HIERARCHYOwner *models.SPEC_HIERARCHY
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "SPEC_HIERARCHY"
-			rf.Fieldname = "EDITABLE_ATTS"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_editable_attsFormCallback.probe.stageOfInterest,
-				a_editable_attsFormCallback.probe.backRepoOfInterest,
-				a_editable_atts_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastSPEC_HIERARCHYOwner = reverseFieldOwner.(*models.SPEC_HIERARCHY)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastSPEC_HIERARCHYOwner != nil {
-					idx := slices.Index(pastSPEC_HIERARCHYOwner.EDITABLE_ATTS, a_editable_atts_)
-					pastSPEC_HIERARCHYOwner.EDITABLE_ATTS = slices.Delete(pastSPEC_HIERARCHYOwner.EDITABLE_ATTS, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _spec_hierarchy := range *models.GetGongstructInstancesSet[models.SPEC_HIERARCHY](a_editable_attsFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _spec_hierarchy.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newSPEC_HIERARCHYOwner := _spec_hierarchy // we have a match
-						if pastSPEC_HIERARCHYOwner != nil {
-							if newSPEC_HIERARCHYOwner != pastSPEC_HIERARCHYOwner {
-								idx := slices.Index(pastSPEC_HIERARCHYOwner.EDITABLE_ATTS, a_editable_atts_)
-								pastSPEC_HIERARCHYOwner.EDITABLE_ATTS = slices.Delete(pastSPEC_HIERARCHYOwner.EDITABLE_ATTS, idx, idx+1)
-								newSPEC_HIERARCHYOwner.EDITABLE_ATTS = append(newSPEC_HIERARCHYOwner.EDITABLE_ATTS, a_editable_atts_)
-							}
-						} else {
-							newSPEC_HIERARCHYOwner.EDITABLE_ATTS = append(newSPEC_HIERARCHYOwner.EDITABLE_ATTS, a_editable_atts_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -6577,48 +4413,6 @@ func (a_enum_value_refFormCallback *A_ENUM_VALUE_REFFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(a_enum_value_ref_.Name), formDiv)
 		case "ENUM_VALUE_REF":
 			FormDivBasicFieldToField(&(a_enum_value_ref_.ENUM_VALUE_REF), formDiv)
-		case "ATTRIBUTE_VALUE_ENUMERATION:VALUES":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_VALUE_ENUMERATIONOwner *models.ATTRIBUTE_VALUE_ENUMERATION
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_VALUE_ENUMERATION"
-			rf.Fieldname = "VALUES"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_enum_value_refFormCallback.probe.stageOfInterest,
-				a_enum_value_refFormCallback.probe.backRepoOfInterest,
-				a_enum_value_ref_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_VALUE_ENUMERATIONOwner = reverseFieldOwner.(*models.ATTRIBUTE_VALUE_ENUMERATION)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_VALUE_ENUMERATIONOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_VALUE_ENUMERATIONOwner.VALUES, a_enum_value_ref_)
-					pastATTRIBUTE_VALUE_ENUMERATIONOwner.VALUES = slices.Delete(pastATTRIBUTE_VALUE_ENUMERATIONOwner.VALUES, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_value_enumeration := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_VALUE_ENUMERATION](a_enum_value_refFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_value_enumeration.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_VALUE_ENUMERATIONOwner := _attribute_value_enumeration // we have a match
-						if pastATTRIBUTE_VALUE_ENUMERATIONOwner != nil {
-							if newATTRIBUTE_VALUE_ENUMERATIONOwner != pastATTRIBUTE_VALUE_ENUMERATIONOwner {
-								idx := slices.Index(pastATTRIBUTE_VALUE_ENUMERATIONOwner.VALUES, a_enum_value_ref_)
-								pastATTRIBUTE_VALUE_ENUMERATIONOwner.VALUES = slices.Delete(pastATTRIBUTE_VALUE_ENUMERATIONOwner.VALUES, idx, idx+1)
-								newATTRIBUTE_VALUE_ENUMERATIONOwner.VALUES = append(newATTRIBUTE_VALUE_ENUMERATIONOwner.VALUES, a_enum_value_ref_)
-							}
-						} else {
-							newATTRIBUTE_VALUE_ENUMERATIONOwner.VALUES = append(newATTRIBUTE_VALUE_ENUMERATIONOwner.VALUES, a_enum_value_ref_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -6698,48 +4492,6 @@ func (a_objectFormCallback *A_OBJECTFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(a_object_.Name), formDiv)
 		case "SPEC_OBJECT_REF":
 			FormDivBasicFieldToField(&(a_object_.SPEC_OBJECT_REF), formDiv)
-		case "SPEC_HIERARCHY:OBJECT":
-			// we need to retrieve the field owner before the change
-			var pastSPEC_HIERARCHYOwner *models.SPEC_HIERARCHY
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "SPEC_HIERARCHY"
-			rf.Fieldname = "OBJECT"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_objectFormCallback.probe.stageOfInterest,
-				a_objectFormCallback.probe.backRepoOfInterest,
-				a_object_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastSPEC_HIERARCHYOwner = reverseFieldOwner.(*models.SPEC_HIERARCHY)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastSPEC_HIERARCHYOwner != nil {
-					idx := slices.Index(pastSPEC_HIERARCHYOwner.OBJECT, a_object_)
-					pastSPEC_HIERARCHYOwner.OBJECT = slices.Delete(pastSPEC_HIERARCHYOwner.OBJECT, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _spec_hierarchy := range *models.GetGongstructInstancesSet[models.SPEC_HIERARCHY](a_objectFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _spec_hierarchy.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newSPEC_HIERARCHYOwner := _spec_hierarchy // we have a match
-						if pastSPEC_HIERARCHYOwner != nil {
-							if newSPEC_HIERARCHYOwner != pastSPEC_HIERARCHYOwner {
-								idx := slices.Index(pastSPEC_HIERARCHYOwner.OBJECT, a_object_)
-								pastSPEC_HIERARCHYOwner.OBJECT = slices.Delete(pastSPEC_HIERARCHYOwner.OBJECT, idx, idx+1)
-								newSPEC_HIERARCHYOwner.OBJECT = append(newSPEC_HIERARCHYOwner.OBJECT, a_object_)
-							}
-						} else {
-							newSPEC_HIERARCHYOwner.OBJECT = append(newSPEC_HIERARCHYOwner.OBJECT, a_object_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -6817,48 +4569,6 @@ func (a_propertiesFormCallback *A_PROPERTIESFormCallback) OnSave() {
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(a_properties_.Name), formDiv)
-		case "ENUM_VALUE:PROPERTIES":
-			// we need to retrieve the field owner before the change
-			var pastENUM_VALUEOwner *models.ENUM_VALUE
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ENUM_VALUE"
-			rf.Fieldname = "PROPERTIES"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_propertiesFormCallback.probe.stageOfInterest,
-				a_propertiesFormCallback.probe.backRepoOfInterest,
-				a_properties_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastENUM_VALUEOwner = reverseFieldOwner.(*models.ENUM_VALUE)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastENUM_VALUEOwner != nil {
-					idx := slices.Index(pastENUM_VALUEOwner.PROPERTIES, a_properties_)
-					pastENUM_VALUEOwner.PROPERTIES = slices.Delete(pastENUM_VALUEOwner.PROPERTIES, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _enum_value := range *models.GetGongstructInstancesSet[models.ENUM_VALUE](a_propertiesFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _enum_value.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newENUM_VALUEOwner := _enum_value // we have a match
-						if pastENUM_VALUEOwner != nil {
-							if newENUM_VALUEOwner != pastENUM_VALUEOwner {
-								idx := slices.Index(pastENUM_VALUEOwner.PROPERTIES, a_properties_)
-								pastENUM_VALUEOwner.PROPERTIES = slices.Delete(pastENUM_VALUEOwner.PROPERTIES, idx, idx+1)
-								newENUM_VALUEOwner.PROPERTIES = append(newENUM_VALUEOwner.PROPERTIES, a_properties_)
-							}
-						} else {
-							newENUM_VALUEOwner.PROPERTIES = append(newENUM_VALUEOwner.PROPERTIES, a_properties_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -6938,48 +4648,6 @@ func (a_relation_group_type_refFormCallback *A_RELATION_GROUP_TYPE_REFFormCallba
 			FormDivBasicFieldToField(&(a_relation_group_type_ref_.Name), formDiv)
 		case "RELATION_GROUP_TYPE_REF":
 			FormDivBasicFieldToField(&(a_relation_group_type_ref_.RELATION_GROUP_TYPE_REF), formDiv)
-		case "RELATION_GROUP:TYPE":
-			// we need to retrieve the field owner before the change
-			var pastRELATION_GROUPOwner *models.RELATION_GROUP
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "RELATION_GROUP"
-			rf.Fieldname = "TYPE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_relation_group_type_refFormCallback.probe.stageOfInterest,
-				a_relation_group_type_refFormCallback.probe.backRepoOfInterest,
-				a_relation_group_type_ref_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastRELATION_GROUPOwner = reverseFieldOwner.(*models.RELATION_GROUP)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastRELATION_GROUPOwner != nil {
-					idx := slices.Index(pastRELATION_GROUPOwner.TYPE, a_relation_group_type_ref_)
-					pastRELATION_GROUPOwner.TYPE = slices.Delete(pastRELATION_GROUPOwner.TYPE, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _relation_group := range *models.GetGongstructInstancesSet[models.RELATION_GROUP](a_relation_group_type_refFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _relation_group.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newRELATION_GROUPOwner := _relation_group // we have a match
-						if pastRELATION_GROUPOwner != nil {
-							if newRELATION_GROUPOwner != pastRELATION_GROUPOwner {
-								idx := slices.Index(pastRELATION_GROUPOwner.TYPE, a_relation_group_type_ref_)
-								pastRELATION_GROUPOwner.TYPE = slices.Delete(pastRELATION_GROUPOwner.TYPE, idx, idx+1)
-								newRELATION_GROUPOwner.TYPE = append(newRELATION_GROUPOwner.TYPE, a_relation_group_type_ref_)
-							}
-						} else {
-							newRELATION_GROUPOwner.TYPE = append(newRELATION_GROUPOwner.TYPE, a_relation_group_type_ref_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -7011,6 +4679,85 @@ func (a_relation_group_type_refFormCallback *A_RELATION_GROUP_TYPE_REFFormCallba
 	}
 
 	fillUpTree(a_relation_group_type_refFormCallback.probe)
+}
+func __gong__New__A_SOURCE_SPECIFICATION_1FormCallback(
+	a_source_specification_1 *models.A_SOURCE_SPECIFICATION_1,
+	probe *Probe,
+	formGroup *table.FormGroup,
+) (a_source_specification_1FormCallback *A_SOURCE_SPECIFICATION_1FormCallback) {
+	a_source_specification_1FormCallback = new(A_SOURCE_SPECIFICATION_1FormCallback)
+	a_source_specification_1FormCallback.probe = probe
+	a_source_specification_1FormCallback.a_source_specification_1 = a_source_specification_1
+	a_source_specification_1FormCallback.formGroup = formGroup
+
+	a_source_specification_1FormCallback.CreationMode = (a_source_specification_1 == nil)
+
+	return
+}
+
+type A_SOURCE_SPECIFICATION_1FormCallback struct {
+	a_source_specification_1 *models.A_SOURCE_SPECIFICATION_1
+
+	// If the form call is called on the creation of a new instnace
+	CreationMode bool
+
+	probe *Probe
+
+	formGroup *table.FormGroup
+}
+
+func (a_source_specification_1FormCallback *A_SOURCE_SPECIFICATION_1FormCallback) OnSave() {
+
+	log.Println("A_SOURCE_SPECIFICATION_1FormCallback, OnSave")
+
+	// checkout formStage to have the form group on the stage synchronized with the
+	// back repo (and front repo)
+	a_source_specification_1FormCallback.probe.formStage.Checkout()
+
+	if a_source_specification_1FormCallback.a_source_specification_1 == nil {
+		a_source_specification_1FormCallback.a_source_specification_1 = new(models.A_SOURCE_SPECIFICATION_1).Stage(a_source_specification_1FormCallback.probe.stageOfInterest)
+	}
+	a_source_specification_1_ := a_source_specification_1FormCallback.a_source_specification_1
+	_ = a_source_specification_1_
+
+	for _, formDiv := range a_source_specification_1FormCallback.formGroup.FormDivs {
+		switch formDiv.Name {
+		// insertion point per field
+		case "Name":
+			FormDivBasicFieldToField(&(a_source_specification_1_.Name), formDiv)
+		case "SPECIFICATION_REF":
+			FormDivBasicFieldToField(&(a_source_specification_1_.SPECIFICATION_REF), formDiv)
+		}
+	}
+
+	// manage the suppress operation
+	if a_source_specification_1FormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_source_specification_1_.Unstage(a_source_specification_1FormCallback.probe.stageOfInterest)
+	}
+
+	a_source_specification_1FormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.A_SOURCE_SPECIFICATION_1](
+		a_source_specification_1FormCallback.probe,
+	)
+	a_source_specification_1FormCallback.probe.tableStage.Commit()
+
+	// display a new form by reset the form stage
+	if a_source_specification_1FormCallback.CreationMode || a_source_specification_1FormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_source_specification_1FormCallback.probe.formStage.Reset()
+		newFormGroup := (&table.FormGroup{
+			Name: table.FormGroupDefaultName.ToString(),
+		}).Stage(a_source_specification_1FormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__A_SOURCE_SPECIFICATION_1FormCallback(
+			nil,
+			a_source_specification_1FormCallback.probe,
+			newFormGroup,
+		)
+		a_source_specification_1 := new(models.A_SOURCE_SPECIFICATION_1)
+		FillUpForm(a_source_specification_1, newFormGroup, a_source_specification_1FormCallback.probe)
+		a_source_specification_1FormCallback.probe.formStage.Commit()
+	}
+
+	fillUpTree(a_source_specification_1FormCallback.probe)
 }
 func __gong__New__A_SPECIFICATIONSFormCallback(
 	a_specifications *models.A_SPECIFICATIONS,
@@ -7057,48 +4804,6 @@ func (a_specificationsFormCallback *A_SPECIFICATIONSFormCallback) OnSave() {
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(a_specifications_.Name), formDiv)
-		case "REQ_IF_CONTENT:SPECIFICATIONS":
-			// we need to retrieve the field owner before the change
-			var pastREQ_IF_CONTENTOwner *models.REQ_IF_CONTENT
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "REQ_IF_CONTENT"
-			rf.Fieldname = "SPECIFICATIONS"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_specificationsFormCallback.probe.stageOfInterest,
-				a_specificationsFormCallback.probe.backRepoOfInterest,
-				a_specifications_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastREQ_IF_CONTENTOwner = reverseFieldOwner.(*models.REQ_IF_CONTENT)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastREQ_IF_CONTENTOwner != nil {
-					idx := slices.Index(pastREQ_IF_CONTENTOwner.SPECIFICATIONS, a_specifications_)
-					pastREQ_IF_CONTENTOwner.SPECIFICATIONS = slices.Delete(pastREQ_IF_CONTENTOwner.SPECIFICATIONS, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _req_if_content := range *models.GetGongstructInstancesSet[models.REQ_IF_CONTENT](a_specificationsFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _req_if_content.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newREQ_IF_CONTENTOwner := _req_if_content // we have a match
-						if pastREQ_IF_CONTENTOwner != nil {
-							if newREQ_IF_CONTENTOwner != pastREQ_IF_CONTENTOwner {
-								idx := slices.Index(pastREQ_IF_CONTENTOwner.SPECIFICATIONS, a_specifications_)
-								pastREQ_IF_CONTENTOwner.SPECIFICATIONS = slices.Delete(pastREQ_IF_CONTENTOwner.SPECIFICATIONS, idx, idx+1)
-								newREQ_IF_CONTENTOwner.SPECIFICATIONS = append(newREQ_IF_CONTENTOwner.SPECIFICATIONS, a_specifications_)
-							}
-						} else {
-							newREQ_IF_CONTENTOwner.SPECIFICATIONS = append(newREQ_IF_CONTENTOwner.SPECIFICATIONS, a_specifications_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -7178,48 +4883,6 @@ func (a_specification_type_refFormCallback *A_SPECIFICATION_TYPE_REFFormCallback
 			FormDivBasicFieldToField(&(a_specification_type_ref_.Name), formDiv)
 		case "SPECIFICATION_TYPE_REF":
 			FormDivBasicFieldToField(&(a_specification_type_ref_.SPECIFICATION_TYPE_REF), formDiv)
-		case "SPECIFICATION:TYPE":
-			// we need to retrieve the field owner before the change
-			var pastSPECIFICATIONOwner *models.SPECIFICATION
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "SPECIFICATION"
-			rf.Fieldname = "TYPE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_specification_type_refFormCallback.probe.stageOfInterest,
-				a_specification_type_refFormCallback.probe.backRepoOfInterest,
-				a_specification_type_ref_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastSPECIFICATIONOwner = reverseFieldOwner.(*models.SPECIFICATION)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastSPECIFICATIONOwner != nil {
-					idx := slices.Index(pastSPECIFICATIONOwner.TYPE, a_specification_type_ref_)
-					pastSPECIFICATIONOwner.TYPE = slices.Delete(pastSPECIFICATIONOwner.TYPE, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _specification := range *models.GetGongstructInstancesSet[models.SPECIFICATION](a_specification_type_refFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _specification.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newSPECIFICATIONOwner := _specification // we have a match
-						if pastSPECIFICATIONOwner != nil {
-							if newSPECIFICATIONOwner != pastSPECIFICATIONOwner {
-								idx := slices.Index(pastSPECIFICATIONOwner.TYPE, a_specification_type_ref_)
-								pastSPECIFICATIONOwner.TYPE = slices.Delete(pastSPECIFICATIONOwner.TYPE, idx, idx+1)
-								newSPECIFICATIONOwner.TYPE = append(newSPECIFICATIONOwner.TYPE, a_specification_type_ref_)
-							}
-						} else {
-							newSPECIFICATIONOwner.TYPE = append(newSPECIFICATIONOwner.TYPE, a_specification_type_ref_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -7297,48 +4960,6 @@ func (a_specified_valuesFormCallback *A_SPECIFIED_VALUESFormCallback) OnSave() {
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(a_specified_values_.Name), formDiv)
-		case "DATATYPE_DEFINITION_ENUMERATION:SPECIFIED_VALUES":
-			// we need to retrieve the field owner before the change
-			var pastDATATYPE_DEFINITION_ENUMERATIONOwner *models.DATATYPE_DEFINITION_ENUMERATION
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "DATATYPE_DEFINITION_ENUMERATION"
-			rf.Fieldname = "SPECIFIED_VALUES"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_specified_valuesFormCallback.probe.stageOfInterest,
-				a_specified_valuesFormCallback.probe.backRepoOfInterest,
-				a_specified_values_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastDATATYPE_DEFINITION_ENUMERATIONOwner = reverseFieldOwner.(*models.DATATYPE_DEFINITION_ENUMERATION)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastDATATYPE_DEFINITION_ENUMERATIONOwner != nil {
-					idx := slices.Index(pastDATATYPE_DEFINITION_ENUMERATIONOwner.SPECIFIED_VALUES, a_specified_values_)
-					pastDATATYPE_DEFINITION_ENUMERATIONOwner.SPECIFIED_VALUES = slices.Delete(pastDATATYPE_DEFINITION_ENUMERATIONOwner.SPECIFIED_VALUES, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _datatype_definition_enumeration := range *models.GetGongstructInstancesSet[models.DATATYPE_DEFINITION_ENUMERATION](a_specified_valuesFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _datatype_definition_enumeration.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newDATATYPE_DEFINITION_ENUMERATIONOwner := _datatype_definition_enumeration // we have a match
-						if pastDATATYPE_DEFINITION_ENUMERATIONOwner != nil {
-							if newDATATYPE_DEFINITION_ENUMERATIONOwner != pastDATATYPE_DEFINITION_ENUMERATIONOwner {
-								idx := slices.Index(pastDATATYPE_DEFINITION_ENUMERATIONOwner.SPECIFIED_VALUES, a_specified_values_)
-								pastDATATYPE_DEFINITION_ENUMERATIONOwner.SPECIFIED_VALUES = slices.Delete(pastDATATYPE_DEFINITION_ENUMERATIONOwner.SPECIFIED_VALUES, idx, idx+1)
-								newDATATYPE_DEFINITION_ENUMERATIONOwner.SPECIFIED_VALUES = append(newDATATYPE_DEFINITION_ENUMERATIONOwner.SPECIFIED_VALUES, a_specified_values_)
-							}
-						} else {
-							newDATATYPE_DEFINITION_ENUMERATIONOwner.SPECIFIED_VALUES = append(newDATATYPE_DEFINITION_ENUMERATIONOwner.SPECIFIED_VALUES, a_specified_values_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -7416,174 +5037,6 @@ func (a_spec_attributesFormCallback *A_SPEC_ATTRIBUTESFormCallback) OnSave() {
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(a_spec_attributes_.Name), formDiv)
-		case "RELATION_GROUP_TYPE:SPEC_ATTRIBUTES":
-			// we need to retrieve the field owner before the change
-			var pastRELATION_GROUP_TYPEOwner *models.RELATION_GROUP_TYPE
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "RELATION_GROUP_TYPE"
-			rf.Fieldname = "SPEC_ATTRIBUTES"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_spec_attributesFormCallback.probe.stageOfInterest,
-				a_spec_attributesFormCallback.probe.backRepoOfInterest,
-				a_spec_attributes_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastRELATION_GROUP_TYPEOwner = reverseFieldOwner.(*models.RELATION_GROUP_TYPE)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastRELATION_GROUP_TYPEOwner != nil {
-					idx := slices.Index(pastRELATION_GROUP_TYPEOwner.SPEC_ATTRIBUTES, a_spec_attributes_)
-					pastRELATION_GROUP_TYPEOwner.SPEC_ATTRIBUTES = slices.Delete(pastRELATION_GROUP_TYPEOwner.SPEC_ATTRIBUTES, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _relation_group_type := range *models.GetGongstructInstancesSet[models.RELATION_GROUP_TYPE](a_spec_attributesFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _relation_group_type.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newRELATION_GROUP_TYPEOwner := _relation_group_type // we have a match
-						if pastRELATION_GROUP_TYPEOwner != nil {
-							if newRELATION_GROUP_TYPEOwner != pastRELATION_GROUP_TYPEOwner {
-								idx := slices.Index(pastRELATION_GROUP_TYPEOwner.SPEC_ATTRIBUTES, a_spec_attributes_)
-								pastRELATION_GROUP_TYPEOwner.SPEC_ATTRIBUTES = slices.Delete(pastRELATION_GROUP_TYPEOwner.SPEC_ATTRIBUTES, idx, idx+1)
-								newRELATION_GROUP_TYPEOwner.SPEC_ATTRIBUTES = append(newRELATION_GROUP_TYPEOwner.SPEC_ATTRIBUTES, a_spec_attributes_)
-							}
-						} else {
-							newRELATION_GROUP_TYPEOwner.SPEC_ATTRIBUTES = append(newRELATION_GROUP_TYPEOwner.SPEC_ATTRIBUTES, a_spec_attributes_)
-						}
-					}
-				}
-			}
-		case "SPECIFICATION_TYPE:SPEC_ATTRIBUTES":
-			// we need to retrieve the field owner before the change
-			var pastSPECIFICATION_TYPEOwner *models.SPECIFICATION_TYPE
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "SPECIFICATION_TYPE"
-			rf.Fieldname = "SPEC_ATTRIBUTES"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_spec_attributesFormCallback.probe.stageOfInterest,
-				a_spec_attributesFormCallback.probe.backRepoOfInterest,
-				a_spec_attributes_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastSPECIFICATION_TYPEOwner = reverseFieldOwner.(*models.SPECIFICATION_TYPE)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastSPECIFICATION_TYPEOwner != nil {
-					idx := slices.Index(pastSPECIFICATION_TYPEOwner.SPEC_ATTRIBUTES, a_spec_attributes_)
-					pastSPECIFICATION_TYPEOwner.SPEC_ATTRIBUTES = slices.Delete(pastSPECIFICATION_TYPEOwner.SPEC_ATTRIBUTES, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _specification_type := range *models.GetGongstructInstancesSet[models.SPECIFICATION_TYPE](a_spec_attributesFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _specification_type.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newSPECIFICATION_TYPEOwner := _specification_type // we have a match
-						if pastSPECIFICATION_TYPEOwner != nil {
-							if newSPECIFICATION_TYPEOwner != pastSPECIFICATION_TYPEOwner {
-								idx := slices.Index(pastSPECIFICATION_TYPEOwner.SPEC_ATTRIBUTES, a_spec_attributes_)
-								pastSPECIFICATION_TYPEOwner.SPEC_ATTRIBUTES = slices.Delete(pastSPECIFICATION_TYPEOwner.SPEC_ATTRIBUTES, idx, idx+1)
-								newSPECIFICATION_TYPEOwner.SPEC_ATTRIBUTES = append(newSPECIFICATION_TYPEOwner.SPEC_ATTRIBUTES, a_spec_attributes_)
-							}
-						} else {
-							newSPECIFICATION_TYPEOwner.SPEC_ATTRIBUTES = append(newSPECIFICATION_TYPEOwner.SPEC_ATTRIBUTES, a_spec_attributes_)
-						}
-					}
-				}
-			}
-		case "SPEC_OBJECT_TYPE:SPEC_ATTRIBUTES":
-			// we need to retrieve the field owner before the change
-			var pastSPEC_OBJECT_TYPEOwner *models.SPEC_OBJECT_TYPE
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "SPEC_OBJECT_TYPE"
-			rf.Fieldname = "SPEC_ATTRIBUTES"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_spec_attributesFormCallback.probe.stageOfInterest,
-				a_spec_attributesFormCallback.probe.backRepoOfInterest,
-				a_spec_attributes_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastSPEC_OBJECT_TYPEOwner = reverseFieldOwner.(*models.SPEC_OBJECT_TYPE)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastSPEC_OBJECT_TYPEOwner != nil {
-					idx := slices.Index(pastSPEC_OBJECT_TYPEOwner.SPEC_ATTRIBUTES, a_spec_attributes_)
-					pastSPEC_OBJECT_TYPEOwner.SPEC_ATTRIBUTES = slices.Delete(pastSPEC_OBJECT_TYPEOwner.SPEC_ATTRIBUTES, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _spec_object_type := range *models.GetGongstructInstancesSet[models.SPEC_OBJECT_TYPE](a_spec_attributesFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _spec_object_type.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newSPEC_OBJECT_TYPEOwner := _spec_object_type // we have a match
-						if pastSPEC_OBJECT_TYPEOwner != nil {
-							if newSPEC_OBJECT_TYPEOwner != pastSPEC_OBJECT_TYPEOwner {
-								idx := slices.Index(pastSPEC_OBJECT_TYPEOwner.SPEC_ATTRIBUTES, a_spec_attributes_)
-								pastSPEC_OBJECT_TYPEOwner.SPEC_ATTRIBUTES = slices.Delete(pastSPEC_OBJECT_TYPEOwner.SPEC_ATTRIBUTES, idx, idx+1)
-								newSPEC_OBJECT_TYPEOwner.SPEC_ATTRIBUTES = append(newSPEC_OBJECT_TYPEOwner.SPEC_ATTRIBUTES, a_spec_attributes_)
-							}
-						} else {
-							newSPEC_OBJECT_TYPEOwner.SPEC_ATTRIBUTES = append(newSPEC_OBJECT_TYPEOwner.SPEC_ATTRIBUTES, a_spec_attributes_)
-						}
-					}
-				}
-			}
-		case "SPEC_RELATION_TYPE:SPEC_ATTRIBUTES":
-			// we need to retrieve the field owner before the change
-			var pastSPEC_RELATION_TYPEOwner *models.SPEC_RELATION_TYPE
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "SPEC_RELATION_TYPE"
-			rf.Fieldname = "SPEC_ATTRIBUTES"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_spec_attributesFormCallback.probe.stageOfInterest,
-				a_spec_attributesFormCallback.probe.backRepoOfInterest,
-				a_spec_attributes_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastSPEC_RELATION_TYPEOwner = reverseFieldOwner.(*models.SPEC_RELATION_TYPE)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastSPEC_RELATION_TYPEOwner != nil {
-					idx := slices.Index(pastSPEC_RELATION_TYPEOwner.SPEC_ATTRIBUTES, a_spec_attributes_)
-					pastSPEC_RELATION_TYPEOwner.SPEC_ATTRIBUTES = slices.Delete(pastSPEC_RELATION_TYPEOwner.SPEC_ATTRIBUTES, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _spec_relation_type := range *models.GetGongstructInstancesSet[models.SPEC_RELATION_TYPE](a_spec_attributesFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _spec_relation_type.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newSPEC_RELATION_TYPEOwner := _spec_relation_type // we have a match
-						if pastSPEC_RELATION_TYPEOwner != nil {
-							if newSPEC_RELATION_TYPEOwner != pastSPEC_RELATION_TYPEOwner {
-								idx := slices.Index(pastSPEC_RELATION_TYPEOwner.SPEC_ATTRIBUTES, a_spec_attributes_)
-								pastSPEC_RELATION_TYPEOwner.SPEC_ATTRIBUTES = slices.Delete(pastSPEC_RELATION_TYPEOwner.SPEC_ATTRIBUTES, idx, idx+1)
-								newSPEC_RELATION_TYPEOwner.SPEC_ATTRIBUTES = append(newSPEC_RELATION_TYPEOwner.SPEC_ATTRIBUTES, a_spec_attributes_)
-							}
-						} else {
-							newSPEC_RELATION_TYPEOwner.SPEC_ATTRIBUTES = append(newSPEC_RELATION_TYPEOwner.SPEC_ATTRIBUTES, a_spec_attributes_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -7661,48 +5114,6 @@ func (a_spec_objectsFormCallback *A_SPEC_OBJECTSFormCallback) OnSave() {
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(a_spec_objects_.Name), formDiv)
-		case "REQ_IF_CONTENT:SPEC_OBJECTS":
-			// we need to retrieve the field owner before the change
-			var pastREQ_IF_CONTENTOwner *models.REQ_IF_CONTENT
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "REQ_IF_CONTENT"
-			rf.Fieldname = "SPEC_OBJECTS"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_spec_objectsFormCallback.probe.stageOfInterest,
-				a_spec_objectsFormCallback.probe.backRepoOfInterest,
-				a_spec_objects_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastREQ_IF_CONTENTOwner = reverseFieldOwner.(*models.REQ_IF_CONTENT)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastREQ_IF_CONTENTOwner != nil {
-					idx := slices.Index(pastREQ_IF_CONTENTOwner.SPEC_OBJECTS, a_spec_objects_)
-					pastREQ_IF_CONTENTOwner.SPEC_OBJECTS = slices.Delete(pastREQ_IF_CONTENTOwner.SPEC_OBJECTS, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _req_if_content := range *models.GetGongstructInstancesSet[models.REQ_IF_CONTENT](a_spec_objectsFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _req_if_content.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newREQ_IF_CONTENTOwner := _req_if_content // we have a match
-						if pastREQ_IF_CONTENTOwner != nil {
-							if newREQ_IF_CONTENTOwner != pastREQ_IF_CONTENTOwner {
-								idx := slices.Index(pastREQ_IF_CONTENTOwner.SPEC_OBJECTS, a_spec_objects_)
-								pastREQ_IF_CONTENTOwner.SPEC_OBJECTS = slices.Delete(pastREQ_IF_CONTENTOwner.SPEC_OBJECTS, idx, idx+1)
-								newREQ_IF_CONTENTOwner.SPEC_OBJECTS = append(newREQ_IF_CONTENTOwner.SPEC_OBJECTS, a_spec_objects_)
-							}
-						} else {
-							newREQ_IF_CONTENTOwner.SPEC_OBJECTS = append(newREQ_IF_CONTENTOwner.SPEC_OBJECTS, a_spec_objects_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -7782,48 +5193,6 @@ func (a_spec_object_type_refFormCallback *A_SPEC_OBJECT_TYPE_REFFormCallback) On
 			FormDivBasicFieldToField(&(a_spec_object_type_ref_.Name), formDiv)
 		case "SPEC_OBJECT_TYPE_REF":
 			FormDivBasicFieldToField(&(a_spec_object_type_ref_.SPEC_OBJECT_TYPE_REF), formDiv)
-		case "SPEC_OBJECT:TYPE":
-			// we need to retrieve the field owner before the change
-			var pastSPEC_OBJECTOwner *models.SPEC_OBJECT
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "SPEC_OBJECT"
-			rf.Fieldname = "TYPE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_spec_object_type_refFormCallback.probe.stageOfInterest,
-				a_spec_object_type_refFormCallback.probe.backRepoOfInterest,
-				a_spec_object_type_ref_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastSPEC_OBJECTOwner = reverseFieldOwner.(*models.SPEC_OBJECT)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastSPEC_OBJECTOwner != nil {
-					idx := slices.Index(pastSPEC_OBJECTOwner.TYPE, a_spec_object_type_ref_)
-					pastSPEC_OBJECTOwner.TYPE = slices.Delete(pastSPEC_OBJECTOwner.TYPE, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _spec_object := range *models.GetGongstructInstancesSet[models.SPEC_OBJECT](a_spec_object_type_refFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _spec_object.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newSPEC_OBJECTOwner := _spec_object // we have a match
-						if pastSPEC_OBJECTOwner != nil {
-							if newSPEC_OBJECTOwner != pastSPEC_OBJECTOwner {
-								idx := slices.Index(pastSPEC_OBJECTOwner.TYPE, a_spec_object_type_ref_)
-								pastSPEC_OBJECTOwner.TYPE = slices.Delete(pastSPEC_OBJECTOwner.TYPE, idx, idx+1)
-								newSPEC_OBJECTOwner.TYPE = append(newSPEC_OBJECTOwner.TYPE, a_spec_object_type_ref_)
-							}
-						} else {
-							newSPEC_OBJECTOwner.TYPE = append(newSPEC_OBJECTOwner.TYPE, a_spec_object_type_ref_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -7901,48 +5270,6 @@ func (a_spec_relationsFormCallback *A_SPEC_RELATIONSFormCallback) OnSave() {
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(a_spec_relations_.Name), formDiv)
-		case "REQ_IF_CONTENT:SPEC_RELATIONS":
-			// we need to retrieve the field owner before the change
-			var pastREQ_IF_CONTENTOwner *models.REQ_IF_CONTENT
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "REQ_IF_CONTENT"
-			rf.Fieldname = "SPEC_RELATIONS"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_spec_relationsFormCallback.probe.stageOfInterest,
-				a_spec_relationsFormCallback.probe.backRepoOfInterest,
-				a_spec_relations_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastREQ_IF_CONTENTOwner = reverseFieldOwner.(*models.REQ_IF_CONTENT)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastREQ_IF_CONTENTOwner != nil {
-					idx := slices.Index(pastREQ_IF_CONTENTOwner.SPEC_RELATIONS, a_spec_relations_)
-					pastREQ_IF_CONTENTOwner.SPEC_RELATIONS = slices.Delete(pastREQ_IF_CONTENTOwner.SPEC_RELATIONS, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _req_if_content := range *models.GetGongstructInstancesSet[models.REQ_IF_CONTENT](a_spec_relationsFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _req_if_content.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newREQ_IF_CONTENTOwner := _req_if_content // we have a match
-						if pastREQ_IF_CONTENTOwner != nil {
-							if newREQ_IF_CONTENTOwner != pastREQ_IF_CONTENTOwner {
-								idx := slices.Index(pastREQ_IF_CONTENTOwner.SPEC_RELATIONS, a_spec_relations_)
-								pastREQ_IF_CONTENTOwner.SPEC_RELATIONS = slices.Delete(pastREQ_IF_CONTENTOwner.SPEC_RELATIONS, idx, idx+1)
-								newREQ_IF_CONTENTOwner.SPEC_RELATIONS = append(newREQ_IF_CONTENTOwner.SPEC_RELATIONS, a_spec_relations_)
-							}
-						} else {
-							newREQ_IF_CONTENTOwner.SPEC_RELATIONS = append(newREQ_IF_CONTENTOwner.SPEC_RELATIONS, a_spec_relations_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -8020,48 +5347,6 @@ func (a_spec_relation_groupsFormCallback *A_SPEC_RELATION_GROUPSFormCallback) On
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(a_spec_relation_groups_.Name), formDiv)
-		case "REQ_IF_CONTENT:SPEC_RELATION_GROUPS":
-			// we need to retrieve the field owner before the change
-			var pastREQ_IF_CONTENTOwner *models.REQ_IF_CONTENT
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "REQ_IF_CONTENT"
-			rf.Fieldname = "SPEC_RELATION_GROUPS"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_spec_relation_groupsFormCallback.probe.stageOfInterest,
-				a_spec_relation_groupsFormCallback.probe.backRepoOfInterest,
-				a_spec_relation_groups_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastREQ_IF_CONTENTOwner = reverseFieldOwner.(*models.REQ_IF_CONTENT)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastREQ_IF_CONTENTOwner != nil {
-					idx := slices.Index(pastREQ_IF_CONTENTOwner.SPEC_RELATION_GROUPS, a_spec_relation_groups_)
-					pastREQ_IF_CONTENTOwner.SPEC_RELATION_GROUPS = slices.Delete(pastREQ_IF_CONTENTOwner.SPEC_RELATION_GROUPS, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _req_if_content := range *models.GetGongstructInstancesSet[models.REQ_IF_CONTENT](a_spec_relation_groupsFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _req_if_content.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newREQ_IF_CONTENTOwner := _req_if_content // we have a match
-						if pastREQ_IF_CONTENTOwner != nil {
-							if newREQ_IF_CONTENTOwner != pastREQ_IF_CONTENTOwner {
-								idx := slices.Index(pastREQ_IF_CONTENTOwner.SPEC_RELATION_GROUPS, a_spec_relation_groups_)
-								pastREQ_IF_CONTENTOwner.SPEC_RELATION_GROUPS = slices.Delete(pastREQ_IF_CONTENTOwner.SPEC_RELATION_GROUPS, idx, idx+1)
-								newREQ_IF_CONTENTOwner.SPEC_RELATION_GROUPS = append(newREQ_IF_CONTENTOwner.SPEC_RELATION_GROUPS, a_spec_relation_groups_)
-							}
-						} else {
-							newREQ_IF_CONTENTOwner.SPEC_RELATION_GROUPS = append(newREQ_IF_CONTENTOwner.SPEC_RELATION_GROUPS, a_spec_relation_groups_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -8141,48 +5426,6 @@ func (a_spec_relation_refFormCallback *A_SPEC_RELATION_REFFormCallback) OnSave()
 			FormDivBasicFieldToField(&(a_spec_relation_ref_.Name), formDiv)
 		case "SPEC_RELATION_REF":
 			FormDivBasicFieldToField(&(a_spec_relation_ref_.SPEC_RELATION_REF), formDiv)
-		case "RELATION_GROUP:SPEC_RELATIONS":
-			// we need to retrieve the field owner before the change
-			var pastRELATION_GROUPOwner *models.RELATION_GROUP
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "RELATION_GROUP"
-			rf.Fieldname = "SPEC_RELATIONS"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_spec_relation_refFormCallback.probe.stageOfInterest,
-				a_spec_relation_refFormCallback.probe.backRepoOfInterest,
-				a_spec_relation_ref_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastRELATION_GROUPOwner = reverseFieldOwner.(*models.RELATION_GROUP)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastRELATION_GROUPOwner != nil {
-					idx := slices.Index(pastRELATION_GROUPOwner.SPEC_RELATIONS, a_spec_relation_ref_)
-					pastRELATION_GROUPOwner.SPEC_RELATIONS = slices.Delete(pastRELATION_GROUPOwner.SPEC_RELATIONS, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _relation_group := range *models.GetGongstructInstancesSet[models.RELATION_GROUP](a_spec_relation_refFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _relation_group.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newRELATION_GROUPOwner := _relation_group // we have a match
-						if pastRELATION_GROUPOwner != nil {
-							if newRELATION_GROUPOwner != pastRELATION_GROUPOwner {
-								idx := slices.Index(pastRELATION_GROUPOwner.SPEC_RELATIONS, a_spec_relation_ref_)
-								pastRELATION_GROUPOwner.SPEC_RELATIONS = slices.Delete(pastRELATION_GROUPOwner.SPEC_RELATIONS, idx, idx+1)
-								newRELATION_GROUPOwner.SPEC_RELATIONS = append(newRELATION_GROUPOwner.SPEC_RELATIONS, a_spec_relation_ref_)
-							}
-						} else {
-							newRELATION_GROUPOwner.SPEC_RELATIONS = append(newRELATION_GROUPOwner.SPEC_RELATIONS, a_spec_relation_ref_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -8262,48 +5505,6 @@ func (a_spec_relation_type_refFormCallback *A_SPEC_RELATION_TYPE_REFFormCallback
 			FormDivBasicFieldToField(&(a_spec_relation_type_ref_.Name), formDiv)
 		case "SPEC_RELATION_TYPE_REF":
 			FormDivBasicFieldToField(&(a_spec_relation_type_ref_.SPEC_RELATION_TYPE_REF), formDiv)
-		case "SPEC_RELATION:TYPE":
-			// we need to retrieve the field owner before the change
-			var pastSPEC_RELATIONOwner *models.SPEC_RELATION
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "SPEC_RELATION"
-			rf.Fieldname = "TYPE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_spec_relation_type_refFormCallback.probe.stageOfInterest,
-				a_spec_relation_type_refFormCallback.probe.backRepoOfInterest,
-				a_spec_relation_type_ref_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastSPEC_RELATIONOwner = reverseFieldOwner.(*models.SPEC_RELATION)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastSPEC_RELATIONOwner != nil {
-					idx := slices.Index(pastSPEC_RELATIONOwner.TYPE, a_spec_relation_type_ref_)
-					pastSPEC_RELATIONOwner.TYPE = slices.Delete(pastSPEC_RELATIONOwner.TYPE, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _spec_relation := range *models.GetGongstructInstancesSet[models.SPEC_RELATION](a_spec_relation_type_refFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _spec_relation.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newSPEC_RELATIONOwner := _spec_relation // we have a match
-						if pastSPEC_RELATIONOwner != nil {
-							if newSPEC_RELATIONOwner != pastSPEC_RELATIONOwner {
-								idx := slices.Index(pastSPEC_RELATIONOwner.TYPE, a_spec_relation_type_ref_)
-								pastSPEC_RELATIONOwner.TYPE = slices.Delete(pastSPEC_RELATIONOwner.TYPE, idx, idx+1)
-								newSPEC_RELATIONOwner.TYPE = append(newSPEC_RELATIONOwner.TYPE, a_spec_relation_type_ref_)
-							}
-						} else {
-							newSPEC_RELATIONOwner.TYPE = append(newSPEC_RELATIONOwner.TYPE, a_spec_relation_type_ref_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -8381,48 +5582,6 @@ func (a_spec_typesFormCallback *A_SPEC_TYPESFormCallback) OnSave() {
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(a_spec_types_.Name), formDiv)
-		case "REQ_IF_CONTENT:SPEC_TYPES":
-			// we need to retrieve the field owner before the change
-			var pastREQ_IF_CONTENTOwner *models.REQ_IF_CONTENT
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "REQ_IF_CONTENT"
-			rf.Fieldname = "SPEC_TYPES"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_spec_typesFormCallback.probe.stageOfInterest,
-				a_spec_typesFormCallback.probe.backRepoOfInterest,
-				a_spec_types_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastREQ_IF_CONTENTOwner = reverseFieldOwner.(*models.REQ_IF_CONTENT)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastREQ_IF_CONTENTOwner != nil {
-					idx := slices.Index(pastREQ_IF_CONTENTOwner.SPEC_TYPES, a_spec_types_)
-					pastREQ_IF_CONTENTOwner.SPEC_TYPES = slices.Delete(pastREQ_IF_CONTENTOwner.SPEC_TYPES, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _req_if_content := range *models.GetGongstructInstancesSet[models.REQ_IF_CONTENT](a_spec_typesFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _req_if_content.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newREQ_IF_CONTENTOwner := _req_if_content // we have a match
-						if pastREQ_IF_CONTENTOwner != nil {
-							if newREQ_IF_CONTENTOwner != pastREQ_IF_CONTENTOwner {
-								idx := slices.Index(pastREQ_IF_CONTENTOwner.SPEC_TYPES, a_spec_types_)
-								pastREQ_IF_CONTENTOwner.SPEC_TYPES = slices.Delete(pastREQ_IF_CONTENTOwner.SPEC_TYPES, idx, idx+1)
-								newREQ_IF_CONTENTOwner.SPEC_TYPES = append(newREQ_IF_CONTENTOwner.SPEC_TYPES, a_spec_types_)
-							}
-						} else {
-							newREQ_IF_CONTENTOwner.SPEC_TYPES = append(newREQ_IF_CONTENTOwner.SPEC_TYPES, a_spec_types_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -8502,90 +5661,6 @@ func (a_target_1FormCallback *A_TARGET_1FormCallback) OnSave() {
 			FormDivBasicFieldToField(&(a_target_1_.Name), formDiv)
 		case "SPEC_OBJECT_REF":
 			FormDivBasicFieldToField(&(a_target_1_.SPEC_OBJECT_REF), formDiv)
-		case "SPEC_RELATION:SOURCE":
-			// we need to retrieve the field owner before the change
-			var pastSPEC_RELATIONOwner *models.SPEC_RELATION
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "SPEC_RELATION"
-			rf.Fieldname = "SOURCE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_target_1FormCallback.probe.stageOfInterest,
-				a_target_1FormCallback.probe.backRepoOfInterest,
-				a_target_1_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastSPEC_RELATIONOwner = reverseFieldOwner.(*models.SPEC_RELATION)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastSPEC_RELATIONOwner != nil {
-					idx := slices.Index(pastSPEC_RELATIONOwner.SOURCE, a_target_1_)
-					pastSPEC_RELATIONOwner.SOURCE = slices.Delete(pastSPEC_RELATIONOwner.SOURCE, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _spec_relation := range *models.GetGongstructInstancesSet[models.SPEC_RELATION](a_target_1FormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _spec_relation.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newSPEC_RELATIONOwner := _spec_relation // we have a match
-						if pastSPEC_RELATIONOwner != nil {
-							if newSPEC_RELATIONOwner != pastSPEC_RELATIONOwner {
-								idx := slices.Index(pastSPEC_RELATIONOwner.SOURCE, a_target_1_)
-								pastSPEC_RELATIONOwner.SOURCE = slices.Delete(pastSPEC_RELATIONOwner.SOURCE, idx, idx+1)
-								newSPEC_RELATIONOwner.SOURCE = append(newSPEC_RELATIONOwner.SOURCE, a_target_1_)
-							}
-						} else {
-							newSPEC_RELATIONOwner.SOURCE = append(newSPEC_RELATIONOwner.SOURCE, a_target_1_)
-						}
-					}
-				}
-			}
-		case "SPEC_RELATION:TARGET":
-			// we need to retrieve the field owner before the change
-			var pastSPEC_RELATIONOwner *models.SPEC_RELATION
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "SPEC_RELATION"
-			rf.Fieldname = "TARGET"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_target_1FormCallback.probe.stageOfInterest,
-				a_target_1FormCallback.probe.backRepoOfInterest,
-				a_target_1_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastSPEC_RELATIONOwner = reverseFieldOwner.(*models.SPEC_RELATION)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastSPEC_RELATIONOwner != nil {
-					idx := slices.Index(pastSPEC_RELATIONOwner.TARGET, a_target_1_)
-					pastSPEC_RELATIONOwner.TARGET = slices.Delete(pastSPEC_RELATIONOwner.TARGET, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _spec_relation := range *models.GetGongstructInstancesSet[models.SPEC_RELATION](a_target_1FormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _spec_relation.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newSPEC_RELATIONOwner := _spec_relation // we have a match
-						if pastSPEC_RELATIONOwner != nil {
-							if newSPEC_RELATIONOwner != pastSPEC_RELATIONOwner {
-								idx := slices.Index(pastSPEC_RELATIONOwner.TARGET, a_target_1_)
-								pastSPEC_RELATIONOwner.TARGET = slices.Delete(pastSPEC_RELATIONOwner.TARGET, idx, idx+1)
-								newSPEC_RELATIONOwner.TARGET = append(newSPEC_RELATIONOwner.TARGET, a_target_1_)
-							}
-						} else {
-							newSPEC_RELATIONOwner.TARGET = append(newSPEC_RELATIONOwner.TARGET, a_target_1_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -8617,169 +5692,6 @@ func (a_target_1FormCallback *A_TARGET_1FormCallback) OnSave() {
 	}
 
 	fillUpTree(a_target_1FormCallback.probe)
-}
-func __gong__New__A_TARGET_SPECIFICATION_1FormCallback(
-	a_target_specification_1 *models.A_TARGET_SPECIFICATION_1,
-	probe *Probe,
-	formGroup *table.FormGroup,
-) (a_target_specification_1FormCallback *A_TARGET_SPECIFICATION_1FormCallback) {
-	a_target_specification_1FormCallback = new(A_TARGET_SPECIFICATION_1FormCallback)
-	a_target_specification_1FormCallback.probe = probe
-	a_target_specification_1FormCallback.a_target_specification_1 = a_target_specification_1
-	a_target_specification_1FormCallback.formGroup = formGroup
-
-	a_target_specification_1FormCallback.CreationMode = (a_target_specification_1 == nil)
-
-	return
-}
-
-type A_TARGET_SPECIFICATION_1FormCallback struct {
-	a_target_specification_1 *models.A_TARGET_SPECIFICATION_1
-
-	// If the form call is called on the creation of a new instnace
-	CreationMode bool
-
-	probe *Probe
-
-	formGroup *table.FormGroup
-}
-
-func (a_target_specification_1FormCallback *A_TARGET_SPECIFICATION_1FormCallback) OnSave() {
-
-	log.Println("A_TARGET_SPECIFICATION_1FormCallback, OnSave")
-
-	// checkout formStage to have the form group on the stage synchronized with the
-	// back repo (and front repo)
-	a_target_specification_1FormCallback.probe.formStage.Checkout()
-
-	if a_target_specification_1FormCallback.a_target_specification_1 == nil {
-		a_target_specification_1FormCallback.a_target_specification_1 = new(models.A_TARGET_SPECIFICATION_1).Stage(a_target_specification_1FormCallback.probe.stageOfInterest)
-	}
-	a_target_specification_1_ := a_target_specification_1FormCallback.a_target_specification_1
-	_ = a_target_specification_1_
-
-	for _, formDiv := range a_target_specification_1FormCallback.formGroup.FormDivs {
-		switch formDiv.Name {
-		// insertion point per field
-		case "Name":
-			FormDivBasicFieldToField(&(a_target_specification_1_.Name), formDiv)
-		case "SPECIFICATION_REF":
-			FormDivBasicFieldToField(&(a_target_specification_1_.SPECIFICATION_REF), formDiv)
-		case "RELATION_GROUP:SOURCE_SPECIFICATION":
-			// we need to retrieve the field owner before the change
-			var pastRELATION_GROUPOwner *models.RELATION_GROUP
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "RELATION_GROUP"
-			rf.Fieldname = "SOURCE_SPECIFICATION"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_target_specification_1FormCallback.probe.stageOfInterest,
-				a_target_specification_1FormCallback.probe.backRepoOfInterest,
-				a_target_specification_1_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastRELATION_GROUPOwner = reverseFieldOwner.(*models.RELATION_GROUP)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastRELATION_GROUPOwner != nil {
-					idx := slices.Index(pastRELATION_GROUPOwner.SOURCE_SPECIFICATION, a_target_specification_1_)
-					pastRELATION_GROUPOwner.SOURCE_SPECIFICATION = slices.Delete(pastRELATION_GROUPOwner.SOURCE_SPECIFICATION, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _relation_group := range *models.GetGongstructInstancesSet[models.RELATION_GROUP](a_target_specification_1FormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _relation_group.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newRELATION_GROUPOwner := _relation_group // we have a match
-						if pastRELATION_GROUPOwner != nil {
-							if newRELATION_GROUPOwner != pastRELATION_GROUPOwner {
-								idx := slices.Index(pastRELATION_GROUPOwner.SOURCE_SPECIFICATION, a_target_specification_1_)
-								pastRELATION_GROUPOwner.SOURCE_SPECIFICATION = slices.Delete(pastRELATION_GROUPOwner.SOURCE_SPECIFICATION, idx, idx+1)
-								newRELATION_GROUPOwner.SOURCE_SPECIFICATION = append(newRELATION_GROUPOwner.SOURCE_SPECIFICATION, a_target_specification_1_)
-							}
-						} else {
-							newRELATION_GROUPOwner.SOURCE_SPECIFICATION = append(newRELATION_GROUPOwner.SOURCE_SPECIFICATION, a_target_specification_1_)
-						}
-					}
-				}
-			}
-		case "RELATION_GROUP:TARGET_SPECIFICATION":
-			// we need to retrieve the field owner before the change
-			var pastRELATION_GROUPOwner *models.RELATION_GROUP
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "RELATION_GROUP"
-			rf.Fieldname = "TARGET_SPECIFICATION"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_target_specification_1FormCallback.probe.stageOfInterest,
-				a_target_specification_1FormCallback.probe.backRepoOfInterest,
-				a_target_specification_1_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastRELATION_GROUPOwner = reverseFieldOwner.(*models.RELATION_GROUP)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastRELATION_GROUPOwner != nil {
-					idx := slices.Index(pastRELATION_GROUPOwner.TARGET_SPECIFICATION, a_target_specification_1_)
-					pastRELATION_GROUPOwner.TARGET_SPECIFICATION = slices.Delete(pastRELATION_GROUPOwner.TARGET_SPECIFICATION, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _relation_group := range *models.GetGongstructInstancesSet[models.RELATION_GROUP](a_target_specification_1FormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _relation_group.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newRELATION_GROUPOwner := _relation_group // we have a match
-						if pastRELATION_GROUPOwner != nil {
-							if newRELATION_GROUPOwner != pastRELATION_GROUPOwner {
-								idx := slices.Index(pastRELATION_GROUPOwner.TARGET_SPECIFICATION, a_target_specification_1_)
-								pastRELATION_GROUPOwner.TARGET_SPECIFICATION = slices.Delete(pastRELATION_GROUPOwner.TARGET_SPECIFICATION, idx, idx+1)
-								newRELATION_GROUPOwner.TARGET_SPECIFICATION = append(newRELATION_GROUPOwner.TARGET_SPECIFICATION, a_target_specification_1_)
-							}
-						} else {
-							newRELATION_GROUPOwner.TARGET_SPECIFICATION = append(newRELATION_GROUPOwner.TARGET_SPECIFICATION, a_target_specification_1_)
-						}
-					}
-				}
-			}
-		}
-	}
-
-	// manage the suppress operation
-	if a_target_specification_1FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_target_specification_1_.Unstage(a_target_specification_1FormCallback.probe.stageOfInterest)
-	}
-
-	a_target_specification_1FormCallback.probe.stageOfInterest.Commit()
-	fillUpTable[models.A_TARGET_SPECIFICATION_1](
-		a_target_specification_1FormCallback.probe,
-	)
-	a_target_specification_1FormCallback.probe.tableStage.Commit()
-
-	// display a new form by reset the form stage
-	if a_target_specification_1FormCallback.CreationMode || a_target_specification_1FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_target_specification_1FormCallback.probe.formStage.Reset()
-		newFormGroup := (&table.FormGroup{
-			Name: table.FormGroupDefaultName.ToString(),
-		}).Stage(a_target_specification_1FormCallback.probe.formStage)
-		newFormGroup.OnSave = __gong__New__A_TARGET_SPECIFICATION_1FormCallback(
-			nil,
-			a_target_specification_1FormCallback.probe,
-			newFormGroup,
-		)
-		a_target_specification_1 := new(models.A_TARGET_SPECIFICATION_1)
-		FillUpForm(a_target_specification_1, newFormGroup, a_target_specification_1FormCallback.probe)
-		a_target_specification_1FormCallback.probe.formStage.Commit()
-	}
-
-	fillUpTree(a_target_specification_1FormCallback.probe)
 }
 func __gong__New__A_THE_HEADERFormCallback(
 	a_the_header *models.A_THE_HEADER,
@@ -8826,48 +5738,6 @@ func (a_the_headerFormCallback *A_THE_HEADERFormCallback) OnSave() {
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(a_the_header_.Name), formDiv)
-		case "REQ_IF:THE_HEADER":
-			// we need to retrieve the field owner before the change
-			var pastREQ_IFOwner *models.REQ_IF
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "REQ_IF"
-			rf.Fieldname = "THE_HEADER"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_the_headerFormCallback.probe.stageOfInterest,
-				a_the_headerFormCallback.probe.backRepoOfInterest,
-				a_the_header_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastREQ_IFOwner = reverseFieldOwner.(*models.REQ_IF)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastREQ_IFOwner != nil {
-					idx := slices.Index(pastREQ_IFOwner.THE_HEADER, a_the_header_)
-					pastREQ_IFOwner.THE_HEADER = slices.Delete(pastREQ_IFOwner.THE_HEADER, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _req_if := range *models.GetGongstructInstancesSet[models.REQ_IF](a_the_headerFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _req_if.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newREQ_IFOwner := _req_if // we have a match
-						if pastREQ_IFOwner != nil {
-							if newREQ_IFOwner != pastREQ_IFOwner {
-								idx := slices.Index(pastREQ_IFOwner.THE_HEADER, a_the_header_)
-								pastREQ_IFOwner.THE_HEADER = slices.Delete(pastREQ_IFOwner.THE_HEADER, idx, idx+1)
-								newREQ_IFOwner.THE_HEADER = append(newREQ_IFOwner.THE_HEADER, a_the_header_)
-							}
-						} else {
-							newREQ_IFOwner.THE_HEADER = append(newREQ_IFOwner.THE_HEADER, a_the_header_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -8945,48 +5815,6 @@ func (a_tool_extensionsFormCallback *A_TOOL_EXTENSIONSFormCallback) OnSave() {
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(a_tool_extensions_.Name), formDiv)
-		case "REQ_IF:TOOL_EXTENSIONS":
-			// we need to retrieve the field owner before the change
-			var pastREQ_IFOwner *models.REQ_IF
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "REQ_IF"
-			rf.Fieldname = "TOOL_EXTENSIONS"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				a_tool_extensionsFormCallback.probe.stageOfInterest,
-				a_tool_extensionsFormCallback.probe.backRepoOfInterest,
-				a_tool_extensions_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastREQ_IFOwner = reverseFieldOwner.(*models.REQ_IF)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastREQ_IFOwner != nil {
-					idx := slices.Index(pastREQ_IFOwner.TOOL_EXTENSIONS, a_tool_extensions_)
-					pastREQ_IFOwner.TOOL_EXTENSIONS = slices.Delete(pastREQ_IFOwner.TOOL_EXTENSIONS, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _req_if := range *models.GetGongstructInstancesSet[models.REQ_IF](a_tool_extensionsFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _req_if.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newREQ_IFOwner := _req_if // we have a match
-						if pastREQ_IFOwner != nil {
-							if newREQ_IFOwner != pastREQ_IFOwner {
-								idx := slices.Index(pastREQ_IFOwner.TOOL_EXTENSIONS, a_tool_extensions_)
-								pastREQ_IFOwner.TOOL_EXTENSIONS = slices.Delete(pastREQ_IFOwner.TOOL_EXTENSIONS, idx, idx+1)
-								newREQ_IFOwner.TOOL_EXTENSIONS = append(newREQ_IFOwner.TOOL_EXTENSIONS, a_tool_extensions_)
-							}
-						} else {
-							newREQ_IFOwner.TOOL_EXTENSIONS = append(newREQ_IFOwner.TOOL_EXTENSIONS, a_tool_extensions_)
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -9072,6 +5900,8 @@ func (datatype_definition_booleanFormCallback *DATATYPE_DEFINITION_BOOLEANFormCa
 			FormDivBasicFieldToField(&(datatype_definition_boolean_.LAST_CHANGE), formDiv)
 		case "LONG_NAME":
 			FormDivBasicFieldToField(&(datatype_definition_boolean_.LONG_NAME), formDiv)
+		case "ALTERNATIVE_ID":
+			FormDivSelectFieldToField(&(datatype_definition_boolean_.ALTERNATIVE_ID), datatype_definition_booleanFormCallback.probe.stageOfInterest, formDiv)
 		case "A_DATATYPES:DATATYPE_DEFINITION_BOOLEAN":
 			// we need to retrieve the field owner before the change
 			var pastA_DATATYPESOwner *models.A_DATATYPES
@@ -9199,6 +6029,8 @@ func (datatype_definition_dateFormCallback *DATATYPE_DEFINITION_DATEFormCallback
 			FormDivBasicFieldToField(&(datatype_definition_date_.LAST_CHANGE), formDiv)
 		case "LONG_NAME":
 			FormDivBasicFieldToField(&(datatype_definition_date_.LONG_NAME), formDiv)
+		case "ALTERNATIVE_ID":
+			FormDivSelectFieldToField(&(datatype_definition_date_.ALTERNATIVE_ID), datatype_definition_dateFormCallback.probe.stageOfInterest, formDiv)
 		case "A_DATATYPES:DATATYPE_DEFINITION_DATE":
 			// we need to retrieve the field owner before the change
 			var pastA_DATATYPESOwner *models.A_DATATYPES
@@ -9326,6 +6158,10 @@ func (datatype_definition_enumerationFormCallback *DATATYPE_DEFINITION_ENUMERATI
 			FormDivBasicFieldToField(&(datatype_definition_enumeration_.LAST_CHANGE), formDiv)
 		case "LONG_NAME":
 			FormDivBasicFieldToField(&(datatype_definition_enumeration_.LONG_NAME), formDiv)
+		case "ALTERNATIVE_ID":
+			FormDivSelectFieldToField(&(datatype_definition_enumeration_.ALTERNATIVE_ID), datatype_definition_enumerationFormCallback.probe.stageOfInterest, formDiv)
+		case "SPECIFIED_VALUES":
+			FormDivSelectFieldToField(&(datatype_definition_enumeration_.SPECIFIED_VALUES), datatype_definition_enumerationFormCallback.probe.stageOfInterest, formDiv)
 		case "A_DATATYPES:DATATYPE_DEFINITION_ENUMERATION":
 			// we need to retrieve the field owner before the change
 			var pastA_DATATYPESOwner *models.A_DATATYPES
@@ -9457,6 +6293,8 @@ func (datatype_definition_integerFormCallback *DATATYPE_DEFINITION_INTEGERFormCa
 			FormDivBasicFieldToField(&(datatype_definition_integer_.MAX), formDiv)
 		case "MIN":
 			FormDivBasicFieldToField(&(datatype_definition_integer_.MIN), formDiv)
+		case "ALTERNATIVE_ID":
+			FormDivSelectFieldToField(&(datatype_definition_integer_.ALTERNATIVE_ID), datatype_definition_integerFormCallback.probe.stageOfInterest, formDiv)
 		case "A_DATATYPES:DATATYPE_DEFINITION_INTEGER":
 			// we need to retrieve the field owner before the change
 			var pastA_DATATYPESOwner *models.A_DATATYPES
@@ -9590,6 +6428,8 @@ func (datatype_definition_realFormCallback *DATATYPE_DEFINITION_REALFormCallback
 			FormDivBasicFieldToField(&(datatype_definition_real_.MAX), formDiv)
 		case "MIN":
 			FormDivBasicFieldToField(&(datatype_definition_real_.MIN), formDiv)
+		case "ALTERNATIVE_ID":
+			FormDivSelectFieldToField(&(datatype_definition_real_.ALTERNATIVE_ID), datatype_definition_realFormCallback.probe.stageOfInterest, formDiv)
 		case "A_DATATYPES:DATATYPE_DEFINITION_REAL":
 			// we need to retrieve the field owner before the change
 			var pastA_DATATYPESOwner *models.A_DATATYPES
@@ -9719,6 +6559,8 @@ func (datatype_definition_stringFormCallback *DATATYPE_DEFINITION_STRINGFormCall
 			FormDivBasicFieldToField(&(datatype_definition_string_.LONG_NAME), formDiv)
 		case "MAX_LENGTH":
 			FormDivBasicFieldToField(&(datatype_definition_string_.MAX_LENGTH), formDiv)
+		case "ALTERNATIVE_ID":
+			FormDivSelectFieldToField(&(datatype_definition_string_.ALTERNATIVE_ID), datatype_definition_stringFormCallback.probe.stageOfInterest, formDiv)
 		case "A_DATATYPES:DATATYPE_DEFINITION_STRING":
 			// we need to retrieve the field owner before the change
 			var pastA_DATATYPESOwner *models.A_DATATYPES
@@ -9846,6 +6688,8 @@ func (datatype_definition_xhtmlFormCallback *DATATYPE_DEFINITION_XHTMLFormCallba
 			FormDivBasicFieldToField(&(datatype_definition_xhtml_.LAST_CHANGE), formDiv)
 		case "LONG_NAME":
 			FormDivBasicFieldToField(&(datatype_definition_xhtml_.LONG_NAME), formDiv)
+		case "ALTERNATIVE_ID":
+			FormDivSelectFieldToField(&(datatype_definition_xhtml_.ALTERNATIVE_ID), datatype_definition_xhtmlFormCallback.probe.stageOfInterest, formDiv)
 		case "A_DATATYPES:DATATYPE_DEFINITION_XHTML":
 			// we need to retrieve the field owner before the change
 			var pastA_DATATYPESOwner *models.A_DATATYPES
@@ -10096,6 +6940,10 @@ func (enum_valueFormCallback *ENUM_VALUEFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(enum_value_.LAST_CHANGE), formDiv)
 		case "LONG_NAME":
 			FormDivBasicFieldToField(&(enum_value_.LONG_NAME), formDiv)
+		case "ALTERNATIVE_ID":
+			FormDivSelectFieldToField(&(enum_value_.ALTERNATIVE_ID), enum_valueFormCallback.probe.stageOfInterest, formDiv)
+		case "PROPERTIES":
+			FormDivSelectFieldToField(&(enum_value_.PROPERTIES), enum_valueFormCallback.probe.stageOfInterest, formDiv)
 		case "A_SPECIFIED_VALUES:ENUM_VALUE":
 			// we need to retrieve the field owner before the change
 			var pastA_SPECIFIED_VALUESOwner *models.A_SPECIFIED_VALUES
@@ -10223,6 +7071,16 @@ func (relation_groupFormCallback *RELATION_GROUPFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(relation_group_.LAST_CHANGE), formDiv)
 		case "LONG_NAME":
 			FormDivBasicFieldToField(&(relation_group_.LONG_NAME), formDiv)
+		case "ALTERNATIVE_ID":
+			FormDivSelectFieldToField(&(relation_group_.ALTERNATIVE_ID), relation_groupFormCallback.probe.stageOfInterest, formDiv)
+		case "SOURCE_SPECIFICATION":
+			FormDivSelectFieldToField(&(relation_group_.SOURCE_SPECIFICATION), relation_groupFormCallback.probe.stageOfInterest, formDiv)
+		case "SPEC_RELATIONS":
+			FormDivSelectFieldToField(&(relation_group_.SPEC_RELATIONS), relation_groupFormCallback.probe.stageOfInterest, formDiv)
+		case "TARGET_SPECIFICATION":
+			FormDivSelectFieldToField(&(relation_group_.TARGET_SPECIFICATION), relation_groupFormCallback.probe.stageOfInterest, formDiv)
+		case "TYPE":
+			FormDivSelectFieldToField(&(relation_group_.TYPE), relation_groupFormCallback.probe.stageOfInterest, formDiv)
 		case "A_SPEC_RELATION_GROUPS:RELATION_GROUP":
 			// we need to retrieve the field owner before the change
 			var pastA_SPEC_RELATION_GROUPSOwner *models.A_SPEC_RELATION_GROUPS
@@ -10350,6 +7208,10 @@ func (relation_group_typeFormCallback *RELATION_GROUP_TYPEFormCallback) OnSave()
 			FormDivBasicFieldToField(&(relation_group_type_.LAST_CHANGE), formDiv)
 		case "LONG_NAME":
 			FormDivBasicFieldToField(&(relation_group_type_.LONG_NAME), formDiv)
+		case "ALTERNATIVE_ID":
+			FormDivSelectFieldToField(&(relation_group_type_.ALTERNATIVE_ID), relation_group_typeFormCallback.probe.stageOfInterest, formDiv)
+		case "SPEC_ATTRIBUTES":
+			FormDivSelectFieldToField(&(relation_group_type_.SPEC_ATTRIBUTES), relation_group_typeFormCallback.probe.stageOfInterest, formDiv)
 		case "A_SPEC_TYPES:RELATION_GROUP_TYPE":
 			// we need to retrieve the field owner before the change
 			var pastA_SPEC_TYPESOwner *models.A_SPEC_TYPES
@@ -10471,6 +7333,12 @@ func (req_ifFormCallback *REQ_IFFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(req_if_.Name), formDiv)
 		case "Lang":
 			FormDivBasicFieldToField(&(req_if_.Lang), formDiv)
+		case "THE_HEADER":
+			FormDivSelectFieldToField(&(req_if_.THE_HEADER), req_ifFormCallback.probe.stageOfInterest, formDiv)
+		case "CORE_CONTENT":
+			FormDivSelectFieldToField(&(req_if_.CORE_CONTENT), req_ifFormCallback.probe.stageOfInterest, formDiv)
+		case "TOOL_EXTENSIONS":
+			FormDivSelectFieldToField(&(req_if_.TOOL_EXTENSIONS), req_ifFormCallback.probe.stageOfInterest, formDiv)
 		}
 	}
 
@@ -10548,6 +7416,18 @@ func (req_if_contentFormCallback *REQ_IF_CONTENTFormCallback) OnSave() {
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(req_if_content_.Name), formDiv)
+		case "DATATYPES":
+			FormDivSelectFieldToField(&(req_if_content_.DATATYPES), req_if_contentFormCallback.probe.stageOfInterest, formDiv)
+		case "SPEC_TYPES":
+			FormDivSelectFieldToField(&(req_if_content_.SPEC_TYPES), req_if_contentFormCallback.probe.stageOfInterest, formDiv)
+		case "SPEC_OBJECTS":
+			FormDivSelectFieldToField(&(req_if_content_.SPEC_OBJECTS), req_if_contentFormCallback.probe.stageOfInterest, formDiv)
+		case "SPEC_RELATIONS":
+			FormDivSelectFieldToField(&(req_if_content_.SPEC_RELATIONS), req_if_contentFormCallback.probe.stageOfInterest, formDiv)
+		case "SPECIFICATIONS":
+			FormDivSelectFieldToField(&(req_if_content_.SPECIFICATIONS), req_if_contentFormCallback.probe.stageOfInterest, formDiv)
+		case "SPEC_RELATION_GROUPS":
+			FormDivSelectFieldToField(&(req_if_content_.SPEC_RELATION_GROUPS), req_if_contentFormCallback.probe.stageOfInterest, formDiv)
 		case "A_CORE_CONTENT:REQ_IF_CONTENT":
 			// we need to retrieve the field owner before the change
 			var pastA_CORE_CONTENTOwner *models.A_CORE_CONTENT
@@ -10929,6 +7809,14 @@ func (specificationFormCallback *SPECIFICATIONFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(specification_.LAST_CHANGE), formDiv)
 		case "LONG_NAME":
 			FormDivBasicFieldToField(&(specification_.LONG_NAME), formDiv)
+		case "ALTERNATIVE_ID":
+			FormDivSelectFieldToField(&(specification_.ALTERNATIVE_ID), specificationFormCallback.probe.stageOfInterest, formDiv)
+		case "CHILDREN":
+			FormDivSelectFieldToField(&(specification_.CHILDREN), specificationFormCallback.probe.stageOfInterest, formDiv)
+		case "VALUES":
+			FormDivSelectFieldToField(&(specification_.VALUES), specificationFormCallback.probe.stageOfInterest, formDiv)
+		case "TYPE":
+			FormDivSelectFieldToField(&(specification_.TYPE), specificationFormCallback.probe.stageOfInterest, formDiv)
 		case "A_SPECIFICATIONS:SPECIFICATION":
 			// we need to retrieve the field owner before the change
 			var pastA_SPECIFICATIONSOwner *models.A_SPECIFICATIONS
@@ -11056,6 +7944,10 @@ func (specification_typeFormCallback *SPECIFICATION_TYPEFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(specification_type_.LAST_CHANGE), formDiv)
 		case "LONG_NAME":
 			FormDivBasicFieldToField(&(specification_type_.LONG_NAME), formDiv)
+		case "ALTERNATIVE_ID":
+			FormDivSelectFieldToField(&(specification_type_.ALTERNATIVE_ID), specification_typeFormCallback.probe.stageOfInterest, formDiv)
+		case "SPEC_ATTRIBUTES":
+			FormDivSelectFieldToField(&(specification_type_.SPEC_ATTRIBUTES), specification_typeFormCallback.probe.stageOfInterest, formDiv)
 		case "A_SPEC_TYPES:SPECIFICATION_TYPE":
 			// we need to retrieve the field owner before the change
 			var pastA_SPEC_TYPESOwner *models.A_SPEC_TYPES
@@ -11187,6 +8079,14 @@ func (spec_hierarchyFormCallback *SPEC_HIERARCHYFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(spec_hierarchy_.LAST_CHANGE), formDiv)
 		case "LONG_NAME":
 			FormDivBasicFieldToField(&(spec_hierarchy_.LONG_NAME), formDiv)
+		case "ALTERNATIVE_ID":
+			FormDivSelectFieldToField(&(spec_hierarchy_.ALTERNATIVE_ID), spec_hierarchyFormCallback.probe.stageOfInterest, formDiv)
+		case "CHILDREN":
+			FormDivSelectFieldToField(&(spec_hierarchy_.CHILDREN), spec_hierarchyFormCallback.probe.stageOfInterest, formDiv)
+		case "EDITABLE_ATTS":
+			FormDivSelectFieldToField(&(spec_hierarchy_.EDITABLE_ATTS), spec_hierarchyFormCallback.probe.stageOfInterest, formDiv)
+		case "OBJECT":
+			FormDivSelectFieldToField(&(spec_hierarchy_.OBJECT), spec_hierarchyFormCallback.probe.stageOfInterest, formDiv)
 		case "A_CHILDREN:SPEC_HIERARCHY":
 			// we need to retrieve the field owner before the change
 			var pastA_CHILDRENOwner *models.A_CHILDREN
@@ -11314,6 +8214,12 @@ func (spec_objectFormCallback *SPEC_OBJECTFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(spec_object_.LAST_CHANGE), formDiv)
 		case "LONG_NAME":
 			FormDivBasicFieldToField(&(spec_object_.LONG_NAME), formDiv)
+		case "ALTERNATIVE_ID":
+			FormDivSelectFieldToField(&(spec_object_.ALTERNATIVE_ID), spec_objectFormCallback.probe.stageOfInterest, formDiv)
+		case "VALUES":
+			FormDivSelectFieldToField(&(spec_object_.VALUES), spec_objectFormCallback.probe.stageOfInterest, formDiv)
+		case "TYPE":
+			FormDivSelectFieldToField(&(spec_object_.TYPE), spec_objectFormCallback.probe.stageOfInterest, formDiv)
 		case "A_SPEC_OBJECTS:SPEC_OBJECT":
 			// we need to retrieve the field owner before the change
 			var pastA_SPEC_OBJECTSOwner *models.A_SPEC_OBJECTS
@@ -11441,6 +8347,10 @@ func (spec_object_typeFormCallback *SPEC_OBJECT_TYPEFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(spec_object_type_.LAST_CHANGE), formDiv)
 		case "LONG_NAME":
 			FormDivBasicFieldToField(&(spec_object_type_.LONG_NAME), formDiv)
+		case "ALTERNATIVE_ID":
+			FormDivSelectFieldToField(&(spec_object_type_.ALTERNATIVE_ID), spec_object_typeFormCallback.probe.stageOfInterest, formDiv)
+		case "SPEC_ATTRIBUTES":
+			FormDivSelectFieldToField(&(spec_object_type_.SPEC_ATTRIBUTES), spec_object_typeFormCallback.probe.stageOfInterest, formDiv)
 		case "A_SPEC_TYPES:SPEC_OBJECT_TYPE":
 			// we need to retrieve the field owner before the change
 			var pastA_SPEC_TYPESOwner *models.A_SPEC_TYPES
@@ -11568,6 +8478,16 @@ func (spec_relationFormCallback *SPEC_RELATIONFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(spec_relation_.LAST_CHANGE), formDiv)
 		case "LONG_NAME":
 			FormDivBasicFieldToField(&(spec_relation_.LONG_NAME), formDiv)
+		case "ALTERNATIVE_ID":
+			FormDivSelectFieldToField(&(spec_relation_.ALTERNATIVE_ID), spec_relationFormCallback.probe.stageOfInterest, formDiv)
+		case "VALUES":
+			FormDivSelectFieldToField(&(spec_relation_.VALUES), spec_relationFormCallback.probe.stageOfInterest, formDiv)
+		case "SOURCE":
+			FormDivSelectFieldToField(&(spec_relation_.SOURCE), spec_relationFormCallback.probe.stageOfInterest, formDiv)
+		case "TARGET":
+			FormDivSelectFieldToField(&(spec_relation_.TARGET), spec_relationFormCallback.probe.stageOfInterest, formDiv)
+		case "TYPE":
+			FormDivSelectFieldToField(&(spec_relation_.TYPE), spec_relationFormCallback.probe.stageOfInterest, formDiv)
 		case "A_SPEC_RELATIONS:SPEC_RELATION":
 			// we need to retrieve the field owner before the change
 			var pastA_SPEC_RELATIONSOwner *models.A_SPEC_RELATIONS
@@ -11695,6 +8615,10 @@ func (spec_relation_typeFormCallback *SPEC_RELATION_TYPEFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(spec_relation_type_.LAST_CHANGE), formDiv)
 		case "LONG_NAME":
 			FormDivBasicFieldToField(&(spec_relation_type_.LONG_NAME), formDiv)
+		case "ALTERNATIVE_ID":
+			FormDivSelectFieldToField(&(spec_relation_type_.ALTERNATIVE_ID), spec_relation_typeFormCallback.probe.stageOfInterest, formDiv)
+		case "SPEC_ATTRIBUTES":
+			FormDivSelectFieldToField(&(spec_relation_type_.SPEC_ATTRIBUTES), spec_relation_typeFormCallback.probe.stageOfInterest, formDiv)
 		case "A_SPEC_TYPES:SPEC_RELATION_TYPE":
 			// we need to retrieve the field owner before the change
 			var pastA_SPEC_TYPESOwner *models.A_SPEC_TYPES
@@ -11814,90 +8738,6 @@ func (xhtml_contentFormCallback *XHTML_CONTENTFormCallback) OnSave() {
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(xhtml_content_.Name), formDiv)
-		case "ATTRIBUTE_VALUE_XHTML:THE_VALUE":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_VALUE_XHTMLOwner *models.ATTRIBUTE_VALUE_XHTML
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_VALUE_XHTML"
-			rf.Fieldname = "THE_VALUE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				xhtml_contentFormCallback.probe.stageOfInterest,
-				xhtml_contentFormCallback.probe.backRepoOfInterest,
-				xhtml_content_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_VALUE_XHTMLOwner = reverseFieldOwner.(*models.ATTRIBUTE_VALUE_XHTML)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_VALUE_XHTMLOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_VALUE_XHTMLOwner.THE_VALUE, xhtml_content_)
-					pastATTRIBUTE_VALUE_XHTMLOwner.THE_VALUE = slices.Delete(pastATTRIBUTE_VALUE_XHTMLOwner.THE_VALUE, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_value_xhtml := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_VALUE_XHTML](xhtml_contentFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_value_xhtml.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_VALUE_XHTMLOwner := _attribute_value_xhtml // we have a match
-						if pastATTRIBUTE_VALUE_XHTMLOwner != nil {
-							if newATTRIBUTE_VALUE_XHTMLOwner != pastATTRIBUTE_VALUE_XHTMLOwner {
-								idx := slices.Index(pastATTRIBUTE_VALUE_XHTMLOwner.THE_VALUE, xhtml_content_)
-								pastATTRIBUTE_VALUE_XHTMLOwner.THE_VALUE = slices.Delete(pastATTRIBUTE_VALUE_XHTMLOwner.THE_VALUE, idx, idx+1)
-								newATTRIBUTE_VALUE_XHTMLOwner.THE_VALUE = append(newATTRIBUTE_VALUE_XHTMLOwner.THE_VALUE, xhtml_content_)
-							}
-						} else {
-							newATTRIBUTE_VALUE_XHTMLOwner.THE_VALUE = append(newATTRIBUTE_VALUE_XHTMLOwner.THE_VALUE, xhtml_content_)
-						}
-					}
-				}
-			}
-		case "ATTRIBUTE_VALUE_XHTML:THE_ORIGINAL_VALUE":
-			// we need to retrieve the field owner before the change
-			var pastATTRIBUTE_VALUE_XHTMLOwner *models.ATTRIBUTE_VALUE_XHTML
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "ATTRIBUTE_VALUE_XHTML"
-			rf.Fieldname = "THE_ORIGINAL_VALUE"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				xhtml_contentFormCallback.probe.stageOfInterest,
-				xhtml_contentFormCallback.probe.backRepoOfInterest,
-				xhtml_content_,
-				&rf)
-
-			if reverseFieldOwner != nil {
-				pastATTRIBUTE_VALUE_XHTMLOwner = reverseFieldOwner.(*models.ATTRIBUTE_VALUE_XHTML)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastATTRIBUTE_VALUE_XHTMLOwner != nil {
-					idx := slices.Index(pastATTRIBUTE_VALUE_XHTMLOwner.THE_ORIGINAL_VALUE, xhtml_content_)
-					pastATTRIBUTE_VALUE_XHTMLOwner.THE_ORIGINAL_VALUE = slices.Delete(pastATTRIBUTE_VALUE_XHTMLOwner.THE_ORIGINAL_VALUE, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _attribute_value_xhtml := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_VALUE_XHTML](xhtml_contentFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _attribute_value_xhtml.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newATTRIBUTE_VALUE_XHTMLOwner := _attribute_value_xhtml // we have a match
-						if pastATTRIBUTE_VALUE_XHTMLOwner != nil {
-							if newATTRIBUTE_VALUE_XHTMLOwner != pastATTRIBUTE_VALUE_XHTMLOwner {
-								idx := slices.Index(pastATTRIBUTE_VALUE_XHTMLOwner.THE_ORIGINAL_VALUE, xhtml_content_)
-								pastATTRIBUTE_VALUE_XHTMLOwner.THE_ORIGINAL_VALUE = slices.Delete(pastATTRIBUTE_VALUE_XHTMLOwner.THE_ORIGINAL_VALUE, idx, idx+1)
-								newATTRIBUTE_VALUE_XHTMLOwner.THE_ORIGINAL_VALUE = append(newATTRIBUTE_VALUE_XHTMLOwner.THE_ORIGINAL_VALUE, xhtml_content_)
-							}
-						} else {
-							newATTRIBUTE_VALUE_XHTMLOwner.THE_ORIGINAL_VALUE = append(newATTRIBUTE_VALUE_XHTMLOwner.THE_ORIGINAL_VALUE, xhtml_content_)
-						}
-					}
-				}
-			}
 		}
 	}
 

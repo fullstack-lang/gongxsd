@@ -624,6 +624,19 @@ func FillUpFormFromGongstructName(
 		a_relation_group_type_ref := new(models.A_RELATION_GROUP_TYPE_REF)
 		formGroup.HasSuppressButton = !isNewInstance
 		FillUpForm(a_relation_group_type_ref, formGroup, probe)
+	case "A_SOURCE_SPECIFICATION_1":
+		formGroup := (&form.FormGroup{
+			Name:  form.FormGroupDefaultName.ToString(),
+			Label: prefix + "A_SOURCE_SPECIFICATION_1 Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__A_SOURCE_SPECIFICATION_1FormCallback(
+			nil,
+			probe,
+			formGroup,
+		)
+		a_source_specification_1 := new(models.A_SOURCE_SPECIFICATION_1)
+		formGroup.HasSuppressButton = !isNewInstance
+		FillUpForm(a_source_specification_1, formGroup, probe)
 	case "A_SPECIFICATIONS":
 		formGroup := (&form.FormGroup{
 			Name:  form.FormGroupDefaultName.ToString(),
@@ -780,19 +793,6 @@ func FillUpFormFromGongstructName(
 		a_target_1 := new(models.A_TARGET_1)
 		formGroup.HasSuppressButton = !isNewInstance
 		FillUpForm(a_target_1, formGroup, probe)
-	case "A_TARGET_SPECIFICATION_1":
-		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
-			Label: prefix + "A_TARGET_SPECIFICATION_1 Form",
-		}).Stage(formStage)
-		formGroup.OnSave = __gong__New__A_TARGET_SPECIFICATION_1FormCallback(
-			nil,
-			probe,
-			formGroup,
-		)
-		a_target_specification_1 := new(models.A_TARGET_SPECIFICATION_1)
-		formGroup.HasSuppressButton = !isNewInstance
-		FillUpForm(a_target_specification_1, formGroup, probe)
 	case "A_THE_HEADER":
 		formGroup := (&form.FormGroup{
 			Name:  form.FormGroupDefaultName.ToString(),

@@ -190,6 +190,9 @@ func (nodeImplGongstruct *TreeNodeImplGongstruct) OnAfterUpdate(
 	if nodeImplGongstruct.gongStruct.GetName() == "A_RELATION_GROUP_TYPE_REF" {
 		fillUpTable[models.A_RELATION_GROUP_TYPE_REF](nodeImplGongstruct.probe)
 	}
+	if nodeImplGongstruct.gongStruct.GetName() == "A_SOURCE_SPECIFICATION_1" {
+		fillUpTable[models.A_SOURCE_SPECIFICATION_1](nodeImplGongstruct.probe)
+	}
 	if nodeImplGongstruct.gongStruct.GetName() == "A_SPECIFICATIONS" {
 		fillUpTable[models.A_SPECIFICATIONS](nodeImplGongstruct.probe)
 	}
@@ -225,9 +228,6 @@ func (nodeImplGongstruct *TreeNodeImplGongstruct) OnAfterUpdate(
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "A_TARGET_1" {
 		fillUpTable[models.A_TARGET_1](nodeImplGongstruct.probe)
-	}
-	if nodeImplGongstruct.gongStruct.GetName() == "A_TARGET_SPECIFICATION_1" {
-		fillUpTable[models.A_TARGET_SPECIFICATION_1](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "A_THE_HEADER" {
 		fillUpTable[models.A_THE_HEADER](nodeImplGongstruct.probe)

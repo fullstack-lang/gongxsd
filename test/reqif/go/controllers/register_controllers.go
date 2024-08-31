@@ -369,6 +369,13 @@ func registerControllers(r *gin.Engine) {
 		v1.PUT("/v1/a_relation_group_type_refs/:id", GetController().UpdateA_RELATION_GROUP_TYPE_REF)
 		v1.DELETE("/v1/a_relation_group_type_refs/:id", GetController().DeleteA_RELATION_GROUP_TYPE_REF)
 
+		v1.GET("/v1/a_source_specification_1s", GetController().GetA_SOURCE_SPECIFICATION_1s)
+		v1.GET("/v1/a_source_specification_1s/:id", GetController().GetA_SOURCE_SPECIFICATION_1)
+		v1.POST("/v1/a_source_specification_1s", GetController().PostA_SOURCE_SPECIFICATION_1)
+		v1.PATCH("/v1/a_source_specification_1s/:id", GetController().UpdateA_SOURCE_SPECIFICATION_1)
+		v1.PUT("/v1/a_source_specification_1s/:id", GetController().UpdateA_SOURCE_SPECIFICATION_1)
+		v1.DELETE("/v1/a_source_specification_1s/:id", GetController().DeleteA_SOURCE_SPECIFICATION_1)
+
 		v1.GET("/v1/a_specificationss", GetController().GetA_SPECIFICATIONSs)
 		v1.GET("/v1/a_specificationss/:id", GetController().GetA_SPECIFICATIONS)
 		v1.POST("/v1/a_specificationss", GetController().PostA_SPECIFICATIONS)
@@ -452,13 +459,6 @@ func registerControllers(r *gin.Engine) {
 		v1.PATCH("/v1/a_target_1s/:id", GetController().UpdateA_TARGET_1)
 		v1.PUT("/v1/a_target_1s/:id", GetController().UpdateA_TARGET_1)
 		v1.DELETE("/v1/a_target_1s/:id", GetController().DeleteA_TARGET_1)
-
-		v1.GET("/v1/a_target_specification_1s", GetController().GetA_TARGET_SPECIFICATION_1s)
-		v1.GET("/v1/a_target_specification_1s/:id", GetController().GetA_TARGET_SPECIFICATION_1)
-		v1.POST("/v1/a_target_specification_1s", GetController().PostA_TARGET_SPECIFICATION_1)
-		v1.PATCH("/v1/a_target_specification_1s/:id", GetController().UpdateA_TARGET_SPECIFICATION_1)
-		v1.PUT("/v1/a_target_specification_1s/:id", GetController().UpdateA_TARGET_SPECIFICATION_1)
-		v1.DELETE("/v1/a_target_specification_1s/:id", GetController().DeleteA_TARGET_SPECIFICATION_1)
 
 		v1.GET("/v1/a_the_headers", GetController().GetA_THE_HEADERs)
 		v1.GET("/v1/a_the_headers/:id", GetController().GetA_THE_HEADER)

@@ -119,6 +119,11 @@ func (modelGroup *ModelGroup) generateElements(
 				elem.Type = Name(elem.Type)
 			}
 
+			sliceOrPointer := " []*"
+			if elem.MaxOccurs == "1" {
+				sliceOrPointer = " *"
+			}
+
 			// an element can be of 3 types:
 			// 1. a simple type
 			// 2. a named complex type
@@ -134,7 +139,7 @@ func (modelGroup *ModelGroup) generateElements(
 					if ct, ok := ctMap[elem.Type]; ok {
 						*fields += "\n\n\t// generated from element \"" + elem.NameXSD + "\" of type " + ct.Name +
 							" order " + fmt.Sprintf("%d", elem.Order) + " depth " + fmt.Sprintf("%d", elem.Depth) +
-							"\n\t" + elem.GoIdentifier + " []*" + ct.GoIdentifier + " " + "`" + `xml:"` + elem.NameXSD + `,omitempty"` + "`"
+							"\n\t" + elem.GoIdentifier + sliceOrPointer + ct.GoIdentifier + " " + "`" + `xml:"` + elem.NameXSD + `,omitempty"` + "`"
 					} else {
 						log.Println("element", elem.NameXSD, "unknown type", elem.Type)
 					}
@@ -145,7 +150,7 @@ func (modelGroup *ModelGroup) generateElements(
 						ct := elem.ComplexType
 						*fields += "\n\n\t// generated from anonymous type within outer element \"" + elem.NameXSD +
 							"\" of type " + ct.Name + "." +
-							"\n\t" + elem.GoIdentifier + " []*" + ct.GoIdentifier + " " + "`" + `xml:"` + elem.NameXSD + `,omitempty"` + "`"
+							"\n\t" + elem.GoIdentifier + sliceOrPointer + ct.GoIdentifier + " " + "`" + `xml:"` + elem.NameXSD + `,omitempty"` + "`"
 					}
 				}
 
