@@ -473,6 +473,16 @@ type A_ATTRIBUTE_VALUE_STRING struct {
 	ATTRIBUTE_VALUE_STRING *ATTRIBUTE_VALUE_STRING `xml:"ATTRIBUTE-VALUE-STRING,omitempty"`
 }
 
+// A_ATTRIBUTE_VALUE_XHTML_1 Named source within outer element "DEFAULT-VALUE"
+type A_ATTRIBUTE_VALUE_XHTML_1 struct {
+	Name string `xml:"-"`
+
+	// insertion point for fields
+
+	// generated from element "ATTRIBUTE-VALUE-XHTML" of type ATTRIBUTE-VALUE-XHTML order 40 depth 1
+	ATTRIBUTE_VALUE_XHTML *ATTRIBUTE_VALUE_XHTML `xml:"ATTRIBUTE-VALUE-XHTML,omitempty"`
+}
+
 // A_ATTRIBUTE_VALUE_XHTML Named source within outer element "VALUES"
 type A_ATTRIBUTE_VALUE_XHTML struct {
 	Name string `xml:"-"`
@@ -496,16 +506,6 @@ type A_ATTRIBUTE_VALUE_XHTML struct {
 
 	// generated from element "ATTRIBUTE-VALUE-STRING" of type ATTRIBUTE-VALUE-STRING order 34 depth 1
 	ATTRIBUTE_VALUE_STRING *ATTRIBUTE_VALUE_STRING `xml:"ATTRIBUTE-VALUE-STRING,omitempty"`
-
-	// generated from element "ATTRIBUTE-VALUE-XHTML" of type ATTRIBUTE-VALUE-XHTML order 40 depth 1
-	ATTRIBUTE_VALUE_XHTML *ATTRIBUTE_VALUE_XHTML `xml:"ATTRIBUTE-VALUE-XHTML,omitempty"`
-}
-
-// A_ATTRIBUTE_VALUE_XHTML_1 Named source within outer element "DEFAULT-VALUE"
-type A_ATTRIBUTE_VALUE_XHTML_1 struct {
-	Name string `xml:"-"`
-
-	// insertion point for fields
 
 	// generated from element "ATTRIBUTE-VALUE-XHTML" of type ATTRIBUTE-VALUE-XHTML order 40 depth 1
 	ATTRIBUTE_VALUE_XHTML *ATTRIBUTE_VALUE_XHTML `xml:"ATTRIBUTE-VALUE-XHTML,omitempty"`
