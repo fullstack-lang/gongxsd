@@ -5,7 +5,7 @@ import (
 	"log"
 )
 
-var Order int
+var Order = 1
 var Depth int
 
 type Element struct {

@@ -1,5 +1,7 @@
 package models
 
+import "encoding/xml"
+
 type AttributeGroup struct {
 	Name string
 	ElementWithNameAttribute
@@ -11,6 +13,8 @@ type AttributeGroup struct {
 	Ref string `xml:"ref,attr"`
 
 	Attributes []*Attribute `xml:"attribute"`
+
+	ParticleAbstract
 }
 
 func (ag *AttributeGroup) generateAttributes(
@@ -27,4 +31,24 @@ func (ag *AttributeGroup) generateAttributes(
 		}
 	}
 
+}
+
+func (ag *AttributeGroup) SetParentAndChildren(parent Particle) {
+	ag.Parent = parent
+}
+
+func (e *AttributeGroup) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
+
+	e.Order = Order
+	e.Depth = Depth
+	Order = Order + 1
+
+	type Alias AttributeGroup
+	aux := (*Alias)(e)
+
+	Depth = Depth + 1
+	err := d.DecodeElement(aux, &start)
+	Depth = Depth - 1
+
+	return err
 }

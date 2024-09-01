@@ -1,6 +1,9 @@
 package models
 
-import "log"
+import (
+	"encoding/xml"
+	"log"
+)
 
 type ComplexType struct {
 	Name string
@@ -87,4 +90,20 @@ func (ct *ComplexType) GetFields(stage *StageStruct) (fields string) {
 	ct.ModelGroup.generateElements(map_Name_Elems, stMap, ctMap, groupMap, setOfFieldsGoIdentifiers, &fields)
 
 	return
+}
+
+func (e *ComplexType) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
+
+	e.Order = Order
+	e.Depth = Depth
+	Order = Order + 1
+
+	type Alias ComplexType
+	aux := (*Alias)(e)
+
+	Depth = Depth + 1
+	err := d.DecodeElement(aux, &start)
+	Depth = Depth - 1
+
+	return err
 }

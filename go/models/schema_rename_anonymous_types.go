@@ -13,7 +13,12 @@ func (schema *Schema) RenameTypeAnonymousComplexType() {
 		for _, all := range namedComplexType.Alls {
 			for _, element := range all.Elements {
 				switch element.NameXSD {
-				case "TYPE", "DEFINITION", "DEFAULT-VALUE", "SPEC-RELATIONS", "VALUES", "ATTRIBUTE-VALUE-XHTML":
+				case "TYPE",
+					"DEFINITION",
+					"DEFAULT-VALUE",
+					"SPEC-RELATIONS",
+					"VALUES",
+					"ATTRIBUTE-VALUE-XHTML":
 					log.Println("Found an instance of anonymous complex type", element.NameXSD)
 					if anonymousComplexType := element.ComplexType; anonymousComplexType != nil {
 						for _, choice := range anonymousComplexType.Choices {
