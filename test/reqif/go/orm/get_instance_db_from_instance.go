@@ -199,9 +199,9 @@ func GetInstanceDBFromInstance[T models.Gongstruct, T2 GongstructDB](
 		a_relation_group_type_refInstance := any(concreteInstance).(*models.A_RELATION_GROUP_TYPE_REF)
 		ret2 := backRepo.BackRepoA_RELATION_GROUP_TYPE_REF.GetA_RELATION_GROUP_TYPE_REFDBFromA_RELATION_GROUP_TYPE_REFPtr(a_relation_group_type_refInstance)
 		ret = any(ret2).(*T2)
-	case *models.A_SOURCE_SPECIFICATION_1:
-		a_source_specification_1Instance := any(concreteInstance).(*models.A_SOURCE_SPECIFICATION_1)
-		ret2 := backRepo.BackRepoA_SOURCE_SPECIFICATION_1.GetA_SOURCE_SPECIFICATION_1DBFromA_SOURCE_SPECIFICATION_1Ptr(a_source_specification_1Instance)
+	case *models.A_SOURCE_1:
+		a_source_1Instance := any(concreteInstance).(*models.A_SOURCE_1)
+		ret2 := backRepo.BackRepoA_SOURCE_1.GetA_SOURCE_1DBFromA_SOURCE_1Ptr(a_source_1Instance)
 		ret = any(ret2).(*T2)
 	case *models.A_SPECIFICATIONS:
 		a_specificationsInstance := any(concreteInstance).(*models.A_SPECIFICATIONS)
@@ -247,9 +247,9 @@ func GetInstanceDBFromInstance[T models.Gongstruct, T2 GongstructDB](
 		a_spec_typesInstance := any(concreteInstance).(*models.A_SPEC_TYPES)
 		ret2 := backRepo.BackRepoA_SPEC_TYPES.GetA_SPEC_TYPESDBFromA_SPEC_TYPESPtr(a_spec_typesInstance)
 		ret = any(ret2).(*T2)
-	case *models.A_TARGET_1:
-		a_target_1Instance := any(concreteInstance).(*models.A_TARGET_1)
-		ret2 := backRepo.BackRepoA_TARGET_1.GetA_TARGET_1DBFromA_TARGET_1Ptr(a_target_1Instance)
+	case *models.A_TARGET_SPECIFICATION_1:
+		a_target_specification_1Instance := any(concreteInstance).(*models.A_TARGET_SPECIFICATION_1)
+		ret2 := backRepo.BackRepoA_TARGET_SPECIFICATION_1.GetA_TARGET_SPECIFICATION_1DBFromA_TARGET_SPECIFICATION_1Ptr(a_target_specification_1Instance)
 		ret = any(ret2).(*T2)
 	case *models.A_THE_HEADER:
 		a_the_headerInstance := any(concreteInstance).(*models.A_THE_HEADER)
@@ -594,8 +594,8 @@ func GetID[T models.Gongstruct](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)
-	case *models.A_SOURCE_SPECIFICATION_1:
-		tmp := GetInstanceDBFromInstance[models.A_SOURCE_SPECIFICATION_1, A_SOURCE_SPECIFICATION_1DB](
+	case *models.A_SOURCE_1:
+		tmp := GetInstanceDBFromInstance[models.A_SOURCE_1, A_SOURCE_1DB](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)
@@ -654,8 +654,8 @@ func GetID[T models.Gongstruct](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)
-	case *models.A_TARGET_1:
-		tmp := GetInstanceDBFromInstance[models.A_TARGET_1, A_TARGET_1DB](
+	case *models.A_TARGET_SPECIFICATION_1:
+		tmp := GetInstanceDBFromInstance[models.A_TARGET_SPECIFICATION_1, A_TARGET_SPECIFICATION_1DB](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)
@@ -1027,8 +1027,8 @@ func GetIDPointer[T models.PointerToGongstruct](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)
-	case *models.A_SOURCE_SPECIFICATION_1:
-		tmp := GetInstanceDBFromInstance[models.A_SOURCE_SPECIFICATION_1, A_SOURCE_SPECIFICATION_1DB](
+	case *models.A_SOURCE_1:
+		tmp := GetInstanceDBFromInstance[models.A_SOURCE_1, A_SOURCE_1DB](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)
@@ -1087,8 +1087,8 @@ func GetIDPointer[T models.PointerToGongstruct](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)
-	case *models.A_TARGET_1:
-		tmp := GetInstanceDBFromInstance[models.A_TARGET_1, A_TARGET_1DB](
+	case *models.A_TARGET_SPECIFICATION_1:
+		tmp := GetInstanceDBFromInstance[models.A_TARGET_SPECIFICATION_1, A_TARGET_SPECIFICATION_1DB](
 			stage, backRepo, inst,
 		)
 		id = int(tmp.ID)

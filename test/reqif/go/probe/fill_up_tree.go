@@ -522,13 +522,13 @@ func fillUpTree(
 
 				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
 			}
-		case "A_SOURCE_SPECIFICATION_1":
+		case "A_SOURCE_1":
 			nodeGongstruct.Name = name
-			set := *models.GetGongstructInstancesSet[models.A_SOURCE_SPECIFICATION_1](probe.stageOfInterest)
-			for _a_source_specification_1 := range set {
-				nodeInstance := (&tree.Node{Name: _a_source_specification_1.GetName()}).Stage(probe.treeStage)
+			set := *models.GetGongstructInstancesSet[models.A_SOURCE_1](probe.stageOfInterest)
+			for _a_source_1 := range set {
+				nodeInstance := (&tree.Node{Name: _a_source_1.GetName()}).Stage(probe.treeStage)
 				nodeInstance.IsNodeClickable = true
-				nodeInstance.Impl = NewInstanceNodeCallback(_a_source_specification_1, "A_SOURCE_SPECIFICATION_1", probe)
+				nodeInstance.Impl = NewInstanceNodeCallback(_a_source_1, "A_SOURCE_1", probe)
 
 				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
 			}
@@ -642,13 +642,13 @@ func fillUpTree(
 
 				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
 			}
-		case "A_TARGET_1":
+		case "A_TARGET_SPECIFICATION_1":
 			nodeGongstruct.Name = name
-			set := *models.GetGongstructInstancesSet[models.A_TARGET_1](probe.stageOfInterest)
-			for _a_target_1 := range set {
-				nodeInstance := (&tree.Node{Name: _a_target_1.GetName()}).Stage(probe.treeStage)
+			set := *models.GetGongstructInstancesSet[models.A_TARGET_SPECIFICATION_1](probe.stageOfInterest)
+			for _a_target_specification_1 := range set {
+				nodeInstance := (&tree.Node{Name: _a_target_specification_1.GetName()}).Stage(probe.treeStage)
 				nodeInstance.IsNodeClickable = true
-				nodeInstance.Impl = NewInstanceNodeCallback(_a_target_1, "A_TARGET_1", probe)
+				nodeInstance.Impl = NewInstanceNodeCallback(_a_target_specification_1, "A_TARGET_SPECIFICATION_1", probe)
 
 				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
 			}

@@ -2472,6 +2472,18 @@ func (a_attribute_value_xhtmlFormCallback *A_ATTRIBUTE_VALUE_XHTMLFormCallback) 
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(a_attribute_value_xhtml_.Name), formDiv)
+		case "ATTRIBUTE_VALUE_BOOLEAN":
+			FormDivSelectFieldToField(&(a_attribute_value_xhtml_.ATTRIBUTE_VALUE_BOOLEAN), a_attribute_value_xhtmlFormCallback.probe.stageOfInterest, formDiv)
+		case "ATTRIBUTE_VALUE_DATE":
+			FormDivSelectFieldToField(&(a_attribute_value_xhtml_.ATTRIBUTE_VALUE_DATE), a_attribute_value_xhtmlFormCallback.probe.stageOfInterest, formDiv)
+		case "ATTRIBUTE_VALUE_ENUMERATION":
+			FormDivSelectFieldToField(&(a_attribute_value_xhtml_.ATTRIBUTE_VALUE_ENUMERATION), a_attribute_value_xhtmlFormCallback.probe.stageOfInterest, formDiv)
+		case "ATTRIBUTE_VALUE_INTEGER":
+			FormDivSelectFieldToField(&(a_attribute_value_xhtml_.ATTRIBUTE_VALUE_INTEGER), a_attribute_value_xhtmlFormCallback.probe.stageOfInterest, formDiv)
+		case "ATTRIBUTE_VALUE_REAL":
+			FormDivSelectFieldToField(&(a_attribute_value_xhtml_.ATTRIBUTE_VALUE_REAL), a_attribute_value_xhtmlFormCallback.probe.stageOfInterest, formDiv)
+		case "ATTRIBUTE_VALUE_STRING":
+			FormDivSelectFieldToField(&(a_attribute_value_xhtml_.ATTRIBUTE_VALUE_STRING), a_attribute_value_xhtmlFormCallback.probe.stageOfInterest, formDiv)
 		case "ATTRIBUTE_VALUE_XHTML":
 			FormDivSelectFieldToField(&(a_attribute_value_xhtml_.ATTRIBUTE_VALUE_XHTML), a_attribute_value_xhtmlFormCallback.probe.stageOfInterest, formDiv)
 		}
@@ -2551,18 +2563,6 @@ func (a_attribute_value_xhtml_1FormCallback *A_ATTRIBUTE_VALUE_XHTML_1FormCallba
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(a_attribute_value_xhtml_1_.Name), formDiv)
-		case "ATTRIBUTE_VALUE_BOOLEAN":
-			FormDivSelectFieldToField(&(a_attribute_value_xhtml_1_.ATTRIBUTE_VALUE_BOOLEAN), a_attribute_value_xhtml_1FormCallback.probe.stageOfInterest, formDiv)
-		case "ATTRIBUTE_VALUE_DATE":
-			FormDivSelectFieldToField(&(a_attribute_value_xhtml_1_.ATTRIBUTE_VALUE_DATE), a_attribute_value_xhtml_1FormCallback.probe.stageOfInterest, formDiv)
-		case "ATTRIBUTE_VALUE_ENUMERATION":
-			FormDivSelectFieldToField(&(a_attribute_value_xhtml_1_.ATTRIBUTE_VALUE_ENUMERATION), a_attribute_value_xhtml_1FormCallback.probe.stageOfInterest, formDiv)
-		case "ATTRIBUTE_VALUE_INTEGER":
-			FormDivSelectFieldToField(&(a_attribute_value_xhtml_1_.ATTRIBUTE_VALUE_INTEGER), a_attribute_value_xhtml_1FormCallback.probe.stageOfInterest, formDiv)
-		case "ATTRIBUTE_VALUE_REAL":
-			FormDivSelectFieldToField(&(a_attribute_value_xhtml_1_.ATTRIBUTE_VALUE_REAL), a_attribute_value_xhtml_1FormCallback.probe.stageOfInterest, formDiv)
-		case "ATTRIBUTE_VALUE_STRING":
-			FormDivSelectFieldToField(&(a_attribute_value_xhtml_1_.ATTRIBUTE_VALUE_STRING), a_attribute_value_xhtml_1FormCallback.probe.stageOfInterest, formDiv)
 		case "ATTRIBUTE_VALUE_XHTML":
 			FormDivSelectFieldToField(&(a_attribute_value_xhtml_1_.ATTRIBUTE_VALUE_XHTML), a_attribute_value_xhtml_1FormCallback.probe.stageOfInterest, formDiv)
 		}
@@ -3806,23 +3806,23 @@ func (a_relation_group_type_refFormCallback *A_RELATION_GROUP_TYPE_REFFormCallba
 
 	fillUpTree(a_relation_group_type_refFormCallback.probe)
 }
-func __gong__New__A_SOURCE_SPECIFICATION_1FormCallback(
-	a_source_specification_1 *models.A_SOURCE_SPECIFICATION_1,
+func __gong__New__A_SOURCE_1FormCallback(
+	a_source_1 *models.A_SOURCE_1,
 	probe *Probe,
 	formGroup *table.FormGroup,
-) (a_source_specification_1FormCallback *A_SOURCE_SPECIFICATION_1FormCallback) {
-	a_source_specification_1FormCallback = new(A_SOURCE_SPECIFICATION_1FormCallback)
-	a_source_specification_1FormCallback.probe = probe
-	a_source_specification_1FormCallback.a_source_specification_1 = a_source_specification_1
-	a_source_specification_1FormCallback.formGroup = formGroup
+) (a_source_1FormCallback *A_SOURCE_1FormCallback) {
+	a_source_1FormCallback = new(A_SOURCE_1FormCallback)
+	a_source_1FormCallback.probe = probe
+	a_source_1FormCallback.a_source_1 = a_source_1
+	a_source_1FormCallback.formGroup = formGroup
 
-	a_source_specification_1FormCallback.CreationMode = (a_source_specification_1 == nil)
+	a_source_1FormCallback.CreationMode = (a_source_1 == nil)
 
 	return
 }
 
-type A_SOURCE_SPECIFICATION_1FormCallback struct {
-	a_source_specification_1 *models.A_SOURCE_SPECIFICATION_1
+type A_SOURCE_1FormCallback struct {
+	a_source_1 *models.A_SOURCE_1
 
 	// If the form call is called on the creation of a new instnace
 	CreationMode bool
@@ -3832,58 +3832,58 @@ type A_SOURCE_SPECIFICATION_1FormCallback struct {
 	formGroup *table.FormGroup
 }
 
-func (a_source_specification_1FormCallback *A_SOURCE_SPECIFICATION_1FormCallback) OnSave() {
+func (a_source_1FormCallback *A_SOURCE_1FormCallback) OnSave() {
 
-	log.Println("A_SOURCE_SPECIFICATION_1FormCallback, OnSave")
+	log.Println("A_SOURCE_1FormCallback, OnSave")
 
 	// checkout formStage to have the form group on the stage synchronized with the
 	// back repo (and front repo)
-	a_source_specification_1FormCallback.probe.formStage.Checkout()
+	a_source_1FormCallback.probe.formStage.Checkout()
 
-	if a_source_specification_1FormCallback.a_source_specification_1 == nil {
-		a_source_specification_1FormCallback.a_source_specification_1 = new(models.A_SOURCE_SPECIFICATION_1).Stage(a_source_specification_1FormCallback.probe.stageOfInterest)
+	if a_source_1FormCallback.a_source_1 == nil {
+		a_source_1FormCallback.a_source_1 = new(models.A_SOURCE_1).Stage(a_source_1FormCallback.probe.stageOfInterest)
 	}
-	a_source_specification_1_ := a_source_specification_1FormCallback.a_source_specification_1
-	_ = a_source_specification_1_
+	a_source_1_ := a_source_1FormCallback.a_source_1
+	_ = a_source_1_
 
-	for _, formDiv := range a_source_specification_1FormCallback.formGroup.FormDivs {
+	for _, formDiv := range a_source_1FormCallback.formGroup.FormDivs {
 		switch formDiv.Name {
 		// insertion point per field
 		case "Name":
-			FormDivBasicFieldToField(&(a_source_specification_1_.Name), formDiv)
-		case "SPECIFICATION_REF":
-			FormDivBasicFieldToField(&(a_source_specification_1_.SPECIFICATION_REF), formDiv)
+			FormDivBasicFieldToField(&(a_source_1_.Name), formDiv)
+		case "SPEC_OBJECT_REF":
+			FormDivBasicFieldToField(&(a_source_1_.SPEC_OBJECT_REF), formDiv)
 		}
 	}
 
 	// manage the suppress operation
-	if a_source_specification_1FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_source_specification_1_.Unstage(a_source_specification_1FormCallback.probe.stageOfInterest)
+	if a_source_1FormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_source_1_.Unstage(a_source_1FormCallback.probe.stageOfInterest)
 	}
 
-	a_source_specification_1FormCallback.probe.stageOfInterest.Commit()
-	fillUpTable[models.A_SOURCE_SPECIFICATION_1](
-		a_source_specification_1FormCallback.probe,
+	a_source_1FormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.A_SOURCE_1](
+		a_source_1FormCallback.probe,
 	)
-	a_source_specification_1FormCallback.probe.tableStage.Commit()
+	a_source_1FormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
-	if a_source_specification_1FormCallback.CreationMode || a_source_specification_1FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_source_specification_1FormCallback.probe.formStage.Reset()
+	if a_source_1FormCallback.CreationMode || a_source_1FormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_source_1FormCallback.probe.formStage.Reset()
 		newFormGroup := (&table.FormGroup{
 			Name: table.FormGroupDefaultName.ToString(),
-		}).Stage(a_source_specification_1FormCallback.probe.formStage)
-		newFormGroup.OnSave = __gong__New__A_SOURCE_SPECIFICATION_1FormCallback(
+		}).Stage(a_source_1FormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__A_SOURCE_1FormCallback(
 			nil,
-			a_source_specification_1FormCallback.probe,
+			a_source_1FormCallback.probe,
 			newFormGroup,
 		)
-		a_source_specification_1 := new(models.A_SOURCE_SPECIFICATION_1)
-		FillUpForm(a_source_specification_1, newFormGroup, a_source_specification_1FormCallback.probe)
-		a_source_specification_1FormCallback.probe.formStage.Commit()
+		a_source_1 := new(models.A_SOURCE_1)
+		FillUpForm(a_source_1, newFormGroup, a_source_1FormCallback.probe)
+		a_source_1FormCallback.probe.formStage.Commit()
 	}
 
-	fillUpTree(a_source_specification_1FormCallback.probe)
+	fillUpTree(a_source_1FormCallback.probe)
 }
 func __gong__New__A_SPECIFICATIONSFormCallback(
 	a_specifications *models.A_SPECIFICATIONS,
@@ -4772,23 +4772,23 @@ func (a_spec_typesFormCallback *A_SPEC_TYPESFormCallback) OnSave() {
 
 	fillUpTree(a_spec_typesFormCallback.probe)
 }
-func __gong__New__A_TARGET_1FormCallback(
-	a_target_1 *models.A_TARGET_1,
+func __gong__New__A_TARGET_SPECIFICATION_1FormCallback(
+	a_target_specification_1 *models.A_TARGET_SPECIFICATION_1,
 	probe *Probe,
 	formGroup *table.FormGroup,
-) (a_target_1FormCallback *A_TARGET_1FormCallback) {
-	a_target_1FormCallback = new(A_TARGET_1FormCallback)
-	a_target_1FormCallback.probe = probe
-	a_target_1FormCallback.a_target_1 = a_target_1
-	a_target_1FormCallback.formGroup = formGroup
+) (a_target_specification_1FormCallback *A_TARGET_SPECIFICATION_1FormCallback) {
+	a_target_specification_1FormCallback = new(A_TARGET_SPECIFICATION_1FormCallback)
+	a_target_specification_1FormCallback.probe = probe
+	a_target_specification_1FormCallback.a_target_specification_1 = a_target_specification_1
+	a_target_specification_1FormCallback.formGroup = formGroup
 
-	a_target_1FormCallback.CreationMode = (a_target_1 == nil)
+	a_target_specification_1FormCallback.CreationMode = (a_target_specification_1 == nil)
 
 	return
 }
 
-type A_TARGET_1FormCallback struct {
-	a_target_1 *models.A_TARGET_1
+type A_TARGET_SPECIFICATION_1FormCallback struct {
+	a_target_specification_1 *models.A_TARGET_SPECIFICATION_1
 
 	// If the form call is called on the creation of a new instnace
 	CreationMode bool
@@ -4798,58 +4798,58 @@ type A_TARGET_1FormCallback struct {
 	formGroup *table.FormGroup
 }
 
-func (a_target_1FormCallback *A_TARGET_1FormCallback) OnSave() {
+func (a_target_specification_1FormCallback *A_TARGET_SPECIFICATION_1FormCallback) OnSave() {
 
-	log.Println("A_TARGET_1FormCallback, OnSave")
+	log.Println("A_TARGET_SPECIFICATION_1FormCallback, OnSave")
 
 	// checkout formStage to have the form group on the stage synchronized with the
 	// back repo (and front repo)
-	a_target_1FormCallback.probe.formStage.Checkout()
+	a_target_specification_1FormCallback.probe.formStage.Checkout()
 
-	if a_target_1FormCallback.a_target_1 == nil {
-		a_target_1FormCallback.a_target_1 = new(models.A_TARGET_1).Stage(a_target_1FormCallback.probe.stageOfInterest)
+	if a_target_specification_1FormCallback.a_target_specification_1 == nil {
+		a_target_specification_1FormCallback.a_target_specification_1 = new(models.A_TARGET_SPECIFICATION_1).Stage(a_target_specification_1FormCallback.probe.stageOfInterest)
 	}
-	a_target_1_ := a_target_1FormCallback.a_target_1
-	_ = a_target_1_
+	a_target_specification_1_ := a_target_specification_1FormCallback.a_target_specification_1
+	_ = a_target_specification_1_
 
-	for _, formDiv := range a_target_1FormCallback.formGroup.FormDivs {
+	for _, formDiv := range a_target_specification_1FormCallback.formGroup.FormDivs {
 		switch formDiv.Name {
 		// insertion point per field
 		case "Name":
-			FormDivBasicFieldToField(&(a_target_1_.Name), formDiv)
-		case "SPEC_OBJECT_REF":
-			FormDivBasicFieldToField(&(a_target_1_.SPEC_OBJECT_REF), formDiv)
+			FormDivBasicFieldToField(&(a_target_specification_1_.Name), formDiv)
+		case "SPECIFICATION_REF":
+			FormDivBasicFieldToField(&(a_target_specification_1_.SPECIFICATION_REF), formDiv)
 		}
 	}
 
 	// manage the suppress operation
-	if a_target_1FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_target_1_.Unstage(a_target_1FormCallback.probe.stageOfInterest)
+	if a_target_specification_1FormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_target_specification_1_.Unstage(a_target_specification_1FormCallback.probe.stageOfInterest)
 	}
 
-	a_target_1FormCallback.probe.stageOfInterest.Commit()
-	fillUpTable[models.A_TARGET_1](
-		a_target_1FormCallback.probe,
+	a_target_specification_1FormCallback.probe.stageOfInterest.Commit()
+	fillUpTable[models.A_TARGET_SPECIFICATION_1](
+		a_target_specification_1FormCallback.probe,
 	)
-	a_target_1FormCallback.probe.tableStage.Commit()
+	a_target_specification_1FormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
-	if a_target_1FormCallback.CreationMode || a_target_1FormCallback.formGroup.HasSuppressButtonBeenPressed {
-		a_target_1FormCallback.probe.formStage.Reset()
+	if a_target_specification_1FormCallback.CreationMode || a_target_specification_1FormCallback.formGroup.HasSuppressButtonBeenPressed {
+		a_target_specification_1FormCallback.probe.formStage.Reset()
 		newFormGroup := (&table.FormGroup{
 			Name: table.FormGroupDefaultName.ToString(),
-		}).Stage(a_target_1FormCallback.probe.formStage)
-		newFormGroup.OnSave = __gong__New__A_TARGET_1FormCallback(
+		}).Stage(a_target_specification_1FormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__A_TARGET_SPECIFICATION_1FormCallback(
 			nil,
-			a_target_1FormCallback.probe,
+			a_target_specification_1FormCallback.probe,
 			newFormGroup,
 		)
-		a_target_1 := new(models.A_TARGET_1)
-		FillUpForm(a_target_1, newFormGroup, a_target_1FormCallback.probe)
-		a_target_1FormCallback.probe.formStage.Commit()
+		a_target_specification_1 := new(models.A_TARGET_SPECIFICATION_1)
+		FillUpForm(a_target_specification_1, newFormGroup, a_target_specification_1FormCallback.probe)
+		a_target_specification_1FormCallback.probe.formStage.Commit()
 	}
 
-	fillUpTree(a_target_1FormCallback.probe)
+	fillUpTree(a_target_specification_1FormCallback.probe)
 }
 func __gong__New__A_THE_HEADERFormCallback(
 	a_the_header *models.A_THE_HEADER,

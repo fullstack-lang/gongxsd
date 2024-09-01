@@ -14,16 +14,16 @@ import (
 )
 
 // declaration in order to justify use of the models import
-var __A_TARGET_1__dummysDeclaration__ models.A_TARGET_1
-var __A_TARGET_1_time__dummyDeclaration time.Duration
+var __A_SOURCE_1__dummysDeclaration__ models.A_SOURCE_1
+var __A_SOURCE_1_time__dummyDeclaration time.Duration
 
-var mutexA_TARGET_1 sync.Mutex
+var mutexA_SOURCE_1 sync.Mutex
 
-// An A_TARGET_1ID parameter model.
+// An A_SOURCE_1ID parameter model.
 //
 // This is used for operations that want the ID of an order in the path
-// swagger:parameters getA_TARGET_1 updateA_TARGET_1 deleteA_TARGET_1
-type A_TARGET_1ID struct {
+// swagger:parameters getA_SOURCE_1 updateA_SOURCE_1 deleteA_SOURCE_1
+type A_SOURCE_1ID struct {
 	// The ID of the order
 	//
 	// in: path
@@ -31,29 +31,29 @@ type A_TARGET_1ID struct {
 	ID int64
 }
 
-// A_TARGET_1Input is a schema that can validate the user’s
+// A_SOURCE_1Input is a schema that can validate the user’s
 // input to prevent us from getting invalid data
-// swagger:parameters postA_TARGET_1 updateA_TARGET_1
-type A_TARGET_1Input struct {
-	// The A_TARGET_1 to submit or modify
+// swagger:parameters postA_SOURCE_1 updateA_SOURCE_1
+type A_SOURCE_1Input struct {
+	// The A_SOURCE_1 to submit or modify
 	// in: body
-	A_TARGET_1 *orm.A_TARGET_1API
+	A_SOURCE_1 *orm.A_SOURCE_1API
 }
 
-// GetA_TARGET_1s
+// GetA_SOURCE_1s
 //
-// swagger:route GET /a_target_1s a_target_1s getA_TARGET_1s
+// swagger:route GET /a_source_1s a_source_1s getA_SOURCE_1s
 //
-// # Get all a_target_1s
+// # Get all a_source_1s
 //
 // Responses:
 // default: genericError
 //
-//	200: a_target_1DBResponse
-func (controller *Controller) GetA_TARGET_1s(c *gin.Context) {
+//	200: a_source_1DBResponse
+func (controller *Controller) GetA_SOURCE_1s(c *gin.Context) {
 
 	// source slice
-	var a_target_1DBs []orm.A_TARGET_1DB
+	var a_source_1DBs []orm.A_SOURCE_1DB
 
 	_values := c.Request.URL.Query()
 	stackPath := ""
@@ -61,16 +61,16 @@ func (controller *Controller) GetA_TARGET_1s(c *gin.Context) {
 		value := _values["GONG__StackPath"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("GetA_TARGET_1s", "GONG__StackPath", stackPath)
+			// log.Println("GetA_SOURCE_1s", "GONG__StackPath", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
 		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
 	}
-	db := backRepo.BackRepoA_TARGET_1.GetDB()
+	db := backRepo.BackRepoA_SOURCE_1.GetDB()
 
-	query := db.Find(&a_target_1DBs)
+	query := db.Find(&a_source_1DBs)
 	if query.Error != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
@@ -81,29 +81,29 @@ func (controller *Controller) GetA_TARGET_1s(c *gin.Context) {
 	}
 
 	// slice that will be transmitted to the front
-	a_target_1APIs := make([]orm.A_TARGET_1API, 0)
+	a_source_1APIs := make([]orm.A_SOURCE_1API, 0)
 
-	// for each a_target_1, update fields from the database nullable fields
-	for idx := range a_target_1DBs {
-		a_target_1DB := &a_target_1DBs[idx]
-		_ = a_target_1DB
-		var a_target_1API orm.A_TARGET_1API
+	// for each a_source_1, update fields from the database nullable fields
+	for idx := range a_source_1DBs {
+		a_source_1DB := &a_source_1DBs[idx]
+		_ = a_source_1DB
+		var a_source_1API orm.A_SOURCE_1API
 
 		// insertion point for updating fields
-		a_target_1API.ID = a_target_1DB.ID
-		a_target_1DB.CopyBasicFieldsToA_TARGET_1_WOP(&a_target_1API.A_TARGET_1_WOP)
-		a_target_1API.A_TARGET_1PointersEncoding = a_target_1DB.A_TARGET_1PointersEncoding
-		a_target_1APIs = append(a_target_1APIs, a_target_1API)
+		a_source_1API.ID = a_source_1DB.ID
+		a_source_1DB.CopyBasicFieldsToA_SOURCE_1_WOP(&a_source_1API.A_SOURCE_1_WOP)
+		a_source_1API.A_SOURCE_1PointersEncoding = a_source_1DB.A_SOURCE_1PointersEncoding
+		a_source_1APIs = append(a_source_1APIs, a_source_1API)
 	}
 
-	c.JSON(http.StatusOK, a_target_1APIs)
+	c.JSON(http.StatusOK, a_source_1APIs)
 }
 
-// PostA_TARGET_1
+// PostA_SOURCE_1
 //
-// swagger:route POST /a_target_1s a_target_1s postA_TARGET_1
+// swagger:route POST /a_source_1s a_source_1s postA_SOURCE_1
 //
-// Creates a a_target_1
+// Creates a a_source_1
 //
 //	Consumes:
 //	- application/json
@@ -113,10 +113,10 @@ func (controller *Controller) GetA_TARGET_1s(c *gin.Context) {
 //
 //	Responses:
 //	  200: nodeDBResponse
-func (controller *Controller) PostA_TARGET_1(c *gin.Context) {
+func (controller *Controller) PostA_SOURCE_1(c *gin.Context) {
 
-	mutexA_TARGET_1.Lock()
-	defer mutexA_TARGET_1.Unlock()
+	mutexA_SOURCE_1.Lock()
+	defer mutexA_SOURCE_1.Unlock()
 
 	_values := c.Request.URL.Query()
 	stackPath := ""
@@ -124,17 +124,17 @@ func (controller *Controller) PostA_TARGET_1(c *gin.Context) {
 		value := _values["GONG__StackPath"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("PostA_TARGET_1s", "GONG__StackPath", stackPath)
+			// log.Println("PostA_SOURCE_1s", "GONG__StackPath", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
 		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
 	}
-	db := backRepo.BackRepoA_TARGET_1.GetDB()
+	db := backRepo.BackRepoA_SOURCE_1.GetDB()
 
 	// Validate input
-	var input orm.A_TARGET_1API
+	var input orm.A_SOURCE_1API
 
 	err := c.ShouldBindJSON(&input)
 	if err != nil {
@@ -146,12 +146,12 @@ func (controller *Controller) PostA_TARGET_1(c *gin.Context) {
 		return
 	}
 
-	// Create a_target_1
-	a_target_1DB := orm.A_TARGET_1DB{}
-	a_target_1DB.A_TARGET_1PointersEncoding = input.A_TARGET_1PointersEncoding
-	a_target_1DB.CopyBasicFieldsFromA_TARGET_1_WOP(&input.A_TARGET_1_WOP)
+	// Create a_source_1
+	a_source_1DB := orm.A_SOURCE_1DB{}
+	a_source_1DB.A_SOURCE_1PointersEncoding = input.A_SOURCE_1PointersEncoding
+	a_source_1DB.CopyBasicFieldsFromA_SOURCE_1_WOP(&input.A_SOURCE_1_WOP)
 
-	query := db.Create(&a_target_1DB)
+	query := db.Create(&a_source_1DB)
 	if query.Error != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
@@ -162,31 +162,31 @@ func (controller *Controller) PostA_TARGET_1(c *gin.Context) {
 	}
 
 	// get an instance (not staged) from DB instance, and call callback function
-	backRepo.BackRepoA_TARGET_1.CheckoutPhaseOneInstance(&a_target_1DB)
-	a_target_1 := backRepo.BackRepoA_TARGET_1.Map_A_TARGET_1DBID_A_TARGET_1Ptr[a_target_1DB.ID]
+	backRepo.BackRepoA_SOURCE_1.CheckoutPhaseOneInstance(&a_source_1DB)
+	a_source_1 := backRepo.BackRepoA_SOURCE_1.Map_A_SOURCE_1DBID_A_SOURCE_1Ptr[a_source_1DB.ID]
 
-	if a_target_1 != nil {
-		models.AfterCreateFromFront(backRepo.GetStage(), a_target_1)
+	if a_source_1 != nil {
+		models.AfterCreateFromFront(backRepo.GetStage(), a_source_1)
 	}
 
 	// a POST is equivalent to a back repo commit increase
 	// (this will be improved with implementation of unit of work design pattern)
 	backRepo.IncrementPushFromFrontNb()
 
-	c.JSON(http.StatusOK, a_target_1DB)
+	c.JSON(http.StatusOK, a_source_1DB)
 }
 
-// GetA_TARGET_1
+// GetA_SOURCE_1
 //
-// swagger:route GET /a_target_1s/{ID} a_target_1s getA_TARGET_1
+// swagger:route GET /a_source_1s/{ID} a_source_1s getA_SOURCE_1
 //
-// Gets the details for a a_target_1.
+// Gets the details for a a_source_1.
 //
 // Responses:
 // default: genericError
 //
-//	200: a_target_1DBResponse
-func (controller *Controller) GetA_TARGET_1(c *gin.Context) {
+//	200: a_source_1DBResponse
+func (controller *Controller) GetA_SOURCE_1(c *gin.Context) {
 
 	_values := c.Request.URL.Query()
 	stackPath := ""
@@ -194,18 +194,18 @@ func (controller *Controller) GetA_TARGET_1(c *gin.Context) {
 		value := _values["GONG__StackPath"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("GetA_TARGET_1", "GONG__StackPath", stackPath)
+			// log.Println("GetA_SOURCE_1", "GONG__StackPath", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
 		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
 	}
-	db := backRepo.BackRepoA_TARGET_1.GetDB()
+	db := backRepo.BackRepoA_SOURCE_1.GetDB()
 
-	// Get a_target_1DB in DB
-	var a_target_1DB orm.A_TARGET_1DB
-	if err := db.First(&a_target_1DB, c.Param("id")).Error; err != nil {
+	// Get a_source_1DB in DB
+	var a_source_1DB orm.A_SOURCE_1DB
+	if err := db.First(&a_source_1DB, c.Param("id")).Error; err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -214,28 +214,28 @@ func (controller *Controller) GetA_TARGET_1(c *gin.Context) {
 		return
 	}
 
-	var a_target_1API orm.A_TARGET_1API
-	a_target_1API.ID = a_target_1DB.ID
-	a_target_1API.A_TARGET_1PointersEncoding = a_target_1DB.A_TARGET_1PointersEncoding
-	a_target_1DB.CopyBasicFieldsToA_TARGET_1_WOP(&a_target_1API.A_TARGET_1_WOP)
+	var a_source_1API orm.A_SOURCE_1API
+	a_source_1API.ID = a_source_1DB.ID
+	a_source_1API.A_SOURCE_1PointersEncoding = a_source_1DB.A_SOURCE_1PointersEncoding
+	a_source_1DB.CopyBasicFieldsToA_SOURCE_1_WOP(&a_source_1API.A_SOURCE_1_WOP)
 
-	c.JSON(http.StatusOK, a_target_1API)
+	c.JSON(http.StatusOK, a_source_1API)
 }
 
-// UpdateA_TARGET_1
+// UpdateA_SOURCE_1
 //
-// swagger:route PATCH /a_target_1s/{ID} a_target_1s updateA_TARGET_1
+// swagger:route PATCH /a_source_1s/{ID} a_source_1s updateA_SOURCE_1
 //
-// # Update a a_target_1
+// # Update a a_source_1
 //
 // Responses:
 // default: genericError
 //
-//	200: a_target_1DBResponse
-func (controller *Controller) UpdateA_TARGET_1(c *gin.Context) {
+//	200: a_source_1DBResponse
+func (controller *Controller) UpdateA_SOURCE_1(c *gin.Context) {
 
-	mutexA_TARGET_1.Lock()
-	defer mutexA_TARGET_1.Unlock()
+	mutexA_SOURCE_1.Lock()
+	defer mutexA_SOURCE_1.Unlock()
 
 	_values := c.Request.URL.Query()
 	stackPath := ""
@@ -243,17 +243,17 @@ func (controller *Controller) UpdateA_TARGET_1(c *gin.Context) {
 		value := _values["GONG__StackPath"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("UpdateA_TARGET_1", "GONG__StackPath", stackPath)
+			// log.Println("UpdateA_SOURCE_1", "GONG__StackPath", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
 		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
 	}
-	db := backRepo.BackRepoA_TARGET_1.GetDB()
+	db := backRepo.BackRepoA_SOURCE_1.GetDB()
 
 	// Validate input
-	var input orm.A_TARGET_1API
+	var input orm.A_SOURCE_1API
 	if err := c.ShouldBindJSON(&input); err != nil {
 		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -261,10 +261,10 @@ func (controller *Controller) UpdateA_TARGET_1(c *gin.Context) {
 	}
 
 	// Get model if exist
-	var a_target_1DB orm.A_TARGET_1DB
+	var a_source_1DB orm.A_SOURCE_1DB
 
-	// fetch the a_target_1
-	query := db.First(&a_target_1DB, c.Param("id"))
+	// fetch the a_source_1
+	query := db.First(&a_source_1DB, c.Param("id"))
 
 	if query.Error != nil {
 		var returnError GenericError
@@ -276,10 +276,10 @@ func (controller *Controller) UpdateA_TARGET_1(c *gin.Context) {
 	}
 
 	// update
-	a_target_1DB.CopyBasicFieldsFromA_TARGET_1_WOP(&input.A_TARGET_1_WOP)
-	a_target_1DB.A_TARGET_1PointersEncoding = input.A_TARGET_1PointersEncoding
+	a_source_1DB.CopyBasicFieldsFromA_SOURCE_1_WOP(&input.A_SOURCE_1_WOP)
+	a_source_1DB.A_SOURCE_1PointersEncoding = input.A_SOURCE_1PointersEncoding
 
-	query = db.Model(&a_target_1DB).Updates(a_target_1DB)
+	query = db.Model(&a_source_1DB).Updates(a_source_1DB)
 	if query.Error != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
@@ -290,16 +290,16 @@ func (controller *Controller) UpdateA_TARGET_1(c *gin.Context) {
 	}
 
 	// get an instance (not staged) from DB instance, and call callback function
-	a_target_1New := new(models.A_TARGET_1)
-	a_target_1DB.CopyBasicFieldsToA_TARGET_1(a_target_1New)
+	a_source_1New := new(models.A_SOURCE_1)
+	a_source_1DB.CopyBasicFieldsToA_SOURCE_1(a_source_1New)
 
 	// redeem pointers
-	a_target_1DB.DecodePointers(backRepo, a_target_1New)
+	a_source_1DB.DecodePointers(backRepo, a_source_1New)
 
 	// get stage instance from DB instance, and call callback function
-	a_target_1Old := backRepo.BackRepoA_TARGET_1.Map_A_TARGET_1DBID_A_TARGET_1Ptr[a_target_1DB.ID]
-	if a_target_1Old != nil {
-		models.AfterUpdateFromFront(backRepo.GetStage(), a_target_1Old, a_target_1New)
+	a_source_1Old := backRepo.BackRepoA_SOURCE_1.Map_A_SOURCE_1DBID_A_SOURCE_1Ptr[a_source_1DB.ID]
+	if a_source_1Old != nil {
+		models.AfterUpdateFromFront(backRepo.GetStage(), a_source_1Old, a_source_1New)
 	}
 
 	// an UPDATE generates a back repo commit increase
@@ -308,23 +308,23 @@ func (controller *Controller) UpdateA_TARGET_1(c *gin.Context) {
 	// generates a checkout
 	backRepo.IncrementPushFromFrontNb()
 
-	// return status OK with the marshalling of the the a_target_1DB
-	c.JSON(http.StatusOK, a_target_1DB)
+	// return status OK with the marshalling of the the a_source_1DB
+	c.JSON(http.StatusOK, a_source_1DB)
 }
 
-// DeleteA_TARGET_1
+// DeleteA_SOURCE_1
 //
-// swagger:route DELETE /a_target_1s/{ID} a_target_1s deleteA_TARGET_1
+// swagger:route DELETE /a_source_1s/{ID} a_source_1s deleteA_SOURCE_1
 //
-// # Delete a a_target_1
+// # Delete a a_source_1
 //
 // default: genericError
 //
-//	200: a_target_1DBResponse
-func (controller *Controller) DeleteA_TARGET_1(c *gin.Context) {
+//	200: a_source_1DBResponse
+func (controller *Controller) DeleteA_SOURCE_1(c *gin.Context) {
 
-	mutexA_TARGET_1.Lock()
-	defer mutexA_TARGET_1.Unlock()
+	mutexA_SOURCE_1.Lock()
+	defer mutexA_SOURCE_1.Unlock()
 
 	_values := c.Request.URL.Query()
 	stackPath := ""
@@ -332,18 +332,18 @@ func (controller *Controller) DeleteA_TARGET_1(c *gin.Context) {
 		value := _values["GONG__StackPath"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("DeleteA_TARGET_1", "GONG__StackPath", stackPath)
+			// log.Println("DeleteA_SOURCE_1", "GONG__StackPath", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
 		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
 	}
-	db := backRepo.BackRepoA_TARGET_1.GetDB()
+	db := backRepo.BackRepoA_SOURCE_1.GetDB()
 
 	// Get model if exist
-	var a_target_1DB orm.A_TARGET_1DB
-	if err := db.First(&a_target_1DB, c.Param("id")).Error; err != nil {
+	var a_source_1DB orm.A_SOURCE_1DB
+	if err := db.First(&a_source_1DB, c.Param("id")).Error; err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -353,16 +353,16 @@ func (controller *Controller) DeleteA_TARGET_1(c *gin.Context) {
 	}
 
 	// with gorm.Model field, default delete is a soft delete. Unscoped() force delete
-	db.Unscoped().Delete(&a_target_1DB)
+	db.Unscoped().Delete(&a_source_1DB)
 
 	// get an instance (not staged) from DB instance, and call callback function
-	a_target_1Deleted := new(models.A_TARGET_1)
-	a_target_1DB.CopyBasicFieldsToA_TARGET_1(a_target_1Deleted)
+	a_source_1Deleted := new(models.A_SOURCE_1)
+	a_source_1DB.CopyBasicFieldsToA_SOURCE_1(a_source_1Deleted)
 
 	// get stage instance from DB instance, and call callback function
-	a_target_1Staged := backRepo.BackRepoA_TARGET_1.Map_A_TARGET_1DBID_A_TARGET_1Ptr[a_target_1DB.ID]
-	if a_target_1Staged != nil {
-		models.AfterDeleteFromFront(backRepo.GetStage(), a_target_1Staged, a_target_1Deleted)
+	a_source_1Staged := backRepo.BackRepoA_SOURCE_1.Map_A_SOURCE_1DBID_A_SOURCE_1Ptr[a_source_1DB.ID]
+	if a_source_1Staged != nil {
+		models.AfterDeleteFromFront(backRepo.GetStage(), a_source_1Staged, a_source_1Deleted)
 	}
 
 	// a DELETE generates a back repo commit increase

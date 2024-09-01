@@ -47,30 +47,6 @@ type A_ATTRIBUTE_VALUE_XHTML_1API struct {
 type A_ATTRIBUTE_VALUE_XHTML_1PointersEncoding struct {
 	// insertion for pointer fields encoding declaration
 
-	// field ATTRIBUTE_VALUE_BOOLEAN is a pointer to another Struct (optional or 0..1)
-	// This field is generated into another field to enable AS ONE association
-	ATTRIBUTE_VALUE_BOOLEANID sql.NullInt64
-
-	// field ATTRIBUTE_VALUE_DATE is a pointer to another Struct (optional or 0..1)
-	// This field is generated into another field to enable AS ONE association
-	ATTRIBUTE_VALUE_DATEID sql.NullInt64
-
-	// field ATTRIBUTE_VALUE_ENUMERATION is a pointer to another Struct (optional or 0..1)
-	// This field is generated into another field to enable AS ONE association
-	ATTRIBUTE_VALUE_ENUMERATIONID sql.NullInt64
-
-	// field ATTRIBUTE_VALUE_INTEGER is a pointer to another Struct (optional or 0..1)
-	// This field is generated into another field to enable AS ONE association
-	ATTRIBUTE_VALUE_INTEGERID sql.NullInt64
-
-	// field ATTRIBUTE_VALUE_REAL is a pointer to another Struct (optional or 0..1)
-	// This field is generated into another field to enable AS ONE association
-	ATTRIBUTE_VALUE_REALID sql.NullInt64
-
-	// field ATTRIBUTE_VALUE_STRING is a pointer to another Struct (optional or 0..1)
-	// This field is generated into another field to enable AS ONE association
-	ATTRIBUTE_VALUE_STRINGID sql.NullInt64
-
 	// field ATTRIBUTE_VALUE_XHTML is a pointer to another Struct (optional or 0..1)
 	// This field is generated into another field to enable AS ONE association
 	ATTRIBUTE_VALUE_XHTMLID sql.NullInt64
@@ -239,78 +215,6 @@ func (backRepoA_ATTRIBUTE_VALUE_XHTML_1 *BackRepoA_ATTRIBUTE_VALUE_XHTML_1Struct
 		a_attribute_value_xhtml_1DB.CopyBasicFieldsFromA_ATTRIBUTE_VALUE_XHTML_1(a_attribute_value_xhtml_1)
 
 		// insertion point for translating pointers encodings into actual pointers
-		// commit pointer value a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_BOOLEAN translates to updating the a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_BOOLEANID
-		a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_BOOLEANID.Valid = true // allow for a 0 value (nil association)
-		if a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_BOOLEAN != nil {
-			if ATTRIBUTE_VALUE_BOOLEANId, ok := backRepo.BackRepoATTRIBUTE_VALUE_BOOLEAN.Map_ATTRIBUTE_VALUE_BOOLEANPtr_ATTRIBUTE_VALUE_BOOLEANDBID[a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_BOOLEAN]; ok {
-				a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_BOOLEANID.Int64 = int64(ATTRIBUTE_VALUE_BOOLEANId)
-				a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_BOOLEANID.Valid = true
-			}
-		} else {
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_BOOLEANID.Int64 = 0
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_BOOLEANID.Valid = true
-		}
-
-		// commit pointer value a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_DATE translates to updating the a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_DATEID
-		a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_DATEID.Valid = true // allow for a 0 value (nil association)
-		if a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_DATE != nil {
-			if ATTRIBUTE_VALUE_DATEId, ok := backRepo.BackRepoATTRIBUTE_VALUE_DATE.Map_ATTRIBUTE_VALUE_DATEPtr_ATTRIBUTE_VALUE_DATEDBID[a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_DATE]; ok {
-				a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_DATEID.Int64 = int64(ATTRIBUTE_VALUE_DATEId)
-				a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_DATEID.Valid = true
-			}
-		} else {
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_DATEID.Int64 = 0
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_DATEID.Valid = true
-		}
-
-		// commit pointer value a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_ENUMERATION translates to updating the a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_ENUMERATIONID
-		a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_ENUMERATIONID.Valid = true // allow for a 0 value (nil association)
-		if a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_ENUMERATION != nil {
-			if ATTRIBUTE_VALUE_ENUMERATIONId, ok := backRepo.BackRepoATTRIBUTE_VALUE_ENUMERATION.Map_ATTRIBUTE_VALUE_ENUMERATIONPtr_ATTRIBUTE_VALUE_ENUMERATIONDBID[a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_ENUMERATION]; ok {
-				a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_ENUMERATIONID.Int64 = int64(ATTRIBUTE_VALUE_ENUMERATIONId)
-				a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_ENUMERATIONID.Valid = true
-			}
-		} else {
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_ENUMERATIONID.Int64 = 0
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_ENUMERATIONID.Valid = true
-		}
-
-		// commit pointer value a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_INTEGER translates to updating the a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_INTEGERID
-		a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_INTEGERID.Valid = true // allow for a 0 value (nil association)
-		if a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_INTEGER != nil {
-			if ATTRIBUTE_VALUE_INTEGERId, ok := backRepo.BackRepoATTRIBUTE_VALUE_INTEGER.Map_ATTRIBUTE_VALUE_INTEGERPtr_ATTRIBUTE_VALUE_INTEGERDBID[a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_INTEGER]; ok {
-				a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_INTEGERID.Int64 = int64(ATTRIBUTE_VALUE_INTEGERId)
-				a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_INTEGERID.Valid = true
-			}
-		} else {
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_INTEGERID.Int64 = 0
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_INTEGERID.Valid = true
-		}
-
-		// commit pointer value a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_REAL translates to updating the a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_REALID
-		a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_REALID.Valid = true // allow for a 0 value (nil association)
-		if a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_REAL != nil {
-			if ATTRIBUTE_VALUE_REALId, ok := backRepo.BackRepoATTRIBUTE_VALUE_REAL.Map_ATTRIBUTE_VALUE_REALPtr_ATTRIBUTE_VALUE_REALDBID[a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_REAL]; ok {
-				a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_REALID.Int64 = int64(ATTRIBUTE_VALUE_REALId)
-				a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_REALID.Valid = true
-			}
-		} else {
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_REALID.Int64 = 0
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_REALID.Valid = true
-		}
-
-		// commit pointer value a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_STRING translates to updating the a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_STRINGID
-		a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_STRINGID.Valid = true // allow for a 0 value (nil association)
-		if a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_STRING != nil {
-			if ATTRIBUTE_VALUE_STRINGId, ok := backRepo.BackRepoATTRIBUTE_VALUE_STRING.Map_ATTRIBUTE_VALUE_STRINGPtr_ATTRIBUTE_VALUE_STRINGDBID[a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_STRING]; ok {
-				a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_STRINGID.Int64 = int64(ATTRIBUTE_VALUE_STRINGId)
-				a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_STRINGID.Valid = true
-			}
-		} else {
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_STRINGID.Int64 = 0
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_STRINGID.Valid = true
-		}
-
 		// commit pointer value a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_XHTML translates to updating the a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_XHTMLID
 		a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_XHTMLID.Valid = true // allow for a 0 value (nil association)
 		if a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_XHTML != nil {
@@ -436,36 +340,6 @@ func (backRepoA_ATTRIBUTE_VALUE_XHTML_1 *BackRepoA_ATTRIBUTE_VALUE_XHTML_1Struct
 func (a_attribute_value_xhtml_1DB *A_ATTRIBUTE_VALUE_XHTML_1DB) DecodePointers(backRepo *BackRepoStruct, a_attribute_value_xhtml_1 *models.A_ATTRIBUTE_VALUE_XHTML_1) {
 
 	// insertion point for checkout of pointer encoding
-	// ATTRIBUTE_VALUE_BOOLEAN field
-	a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_BOOLEAN = nil
-	if a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_BOOLEANID.Int64 != 0 {
-		a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_BOOLEAN = backRepo.BackRepoATTRIBUTE_VALUE_BOOLEAN.Map_ATTRIBUTE_VALUE_BOOLEANDBID_ATTRIBUTE_VALUE_BOOLEANPtr[uint(a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_BOOLEANID.Int64)]
-	}
-	// ATTRIBUTE_VALUE_DATE field
-	a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_DATE = nil
-	if a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_DATEID.Int64 != 0 {
-		a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_DATE = backRepo.BackRepoATTRIBUTE_VALUE_DATE.Map_ATTRIBUTE_VALUE_DATEDBID_ATTRIBUTE_VALUE_DATEPtr[uint(a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_DATEID.Int64)]
-	}
-	// ATTRIBUTE_VALUE_ENUMERATION field
-	a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_ENUMERATION = nil
-	if a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_ENUMERATIONID.Int64 != 0 {
-		a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_ENUMERATION = backRepo.BackRepoATTRIBUTE_VALUE_ENUMERATION.Map_ATTRIBUTE_VALUE_ENUMERATIONDBID_ATTRIBUTE_VALUE_ENUMERATIONPtr[uint(a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_ENUMERATIONID.Int64)]
-	}
-	// ATTRIBUTE_VALUE_INTEGER field
-	a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_INTEGER = nil
-	if a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_INTEGERID.Int64 != 0 {
-		a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_INTEGER = backRepo.BackRepoATTRIBUTE_VALUE_INTEGER.Map_ATTRIBUTE_VALUE_INTEGERDBID_ATTRIBUTE_VALUE_INTEGERPtr[uint(a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_INTEGERID.Int64)]
-	}
-	// ATTRIBUTE_VALUE_REAL field
-	a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_REAL = nil
-	if a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_REALID.Int64 != 0 {
-		a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_REAL = backRepo.BackRepoATTRIBUTE_VALUE_REAL.Map_ATTRIBUTE_VALUE_REALDBID_ATTRIBUTE_VALUE_REALPtr[uint(a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_REALID.Int64)]
-	}
-	// ATTRIBUTE_VALUE_STRING field
-	a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_STRING = nil
-	if a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_STRINGID.Int64 != 0 {
-		a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_STRING = backRepo.BackRepoATTRIBUTE_VALUE_STRING.Map_ATTRIBUTE_VALUE_STRINGDBID_ATTRIBUTE_VALUE_STRINGPtr[uint(a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_STRINGID.Int64)]
-	}
 	// ATTRIBUTE_VALUE_XHTML field
 	a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_XHTML = nil
 	if a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_XHTMLID.Int64 != 0 {
@@ -699,42 +573,6 @@ func (backRepoA_ATTRIBUTE_VALUE_XHTML_1 *BackRepoA_ATTRIBUTE_VALUE_XHTML_1Struct
 		_ = a_attribute_value_xhtml_1DB
 
 		// insertion point for reindexing pointers encoding
-		// reindexing ATTRIBUTE_VALUE_BOOLEAN field
-		if a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_BOOLEANID.Int64 != 0 {
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_BOOLEANID.Int64 = int64(BackRepoATTRIBUTE_VALUE_BOOLEANid_atBckpTime_newID[uint(a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_BOOLEANID.Int64)])
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_BOOLEANID.Valid = true
-		}
-
-		// reindexing ATTRIBUTE_VALUE_DATE field
-		if a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_DATEID.Int64 != 0 {
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_DATEID.Int64 = int64(BackRepoATTRIBUTE_VALUE_DATEid_atBckpTime_newID[uint(a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_DATEID.Int64)])
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_DATEID.Valid = true
-		}
-
-		// reindexing ATTRIBUTE_VALUE_ENUMERATION field
-		if a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_ENUMERATIONID.Int64 != 0 {
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_ENUMERATIONID.Int64 = int64(BackRepoATTRIBUTE_VALUE_ENUMERATIONid_atBckpTime_newID[uint(a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_ENUMERATIONID.Int64)])
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_ENUMERATIONID.Valid = true
-		}
-
-		// reindexing ATTRIBUTE_VALUE_INTEGER field
-		if a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_INTEGERID.Int64 != 0 {
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_INTEGERID.Int64 = int64(BackRepoATTRIBUTE_VALUE_INTEGERid_atBckpTime_newID[uint(a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_INTEGERID.Int64)])
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_INTEGERID.Valid = true
-		}
-
-		// reindexing ATTRIBUTE_VALUE_REAL field
-		if a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_REALID.Int64 != 0 {
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_REALID.Int64 = int64(BackRepoATTRIBUTE_VALUE_REALid_atBckpTime_newID[uint(a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_REALID.Int64)])
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_REALID.Valid = true
-		}
-
-		// reindexing ATTRIBUTE_VALUE_STRING field
-		if a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_STRINGID.Int64 != 0 {
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_STRINGID.Int64 = int64(BackRepoATTRIBUTE_VALUE_STRINGid_atBckpTime_newID[uint(a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_STRINGID.Int64)])
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_STRINGID.Valid = true
-		}
-
 		// reindexing ATTRIBUTE_VALUE_XHTML field
 		if a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_XHTMLID.Int64 != 0 {
 			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_XHTMLID.Int64 = int64(BackRepoATTRIBUTE_VALUE_XHTMLid_atBckpTime_newID[uint(a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_XHTMLID.Int64)])

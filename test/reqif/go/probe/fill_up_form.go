@@ -305,18 +305,18 @@ func FillUpForm[T models.Gongstruct](
 		// insertion point
 		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
-		AssociationFieldToForm("ATTRIBUTE_VALUE_XHTML", instanceWithInferedType.ATTRIBUTE_VALUE_XHTML, formGroup, probe)
-
-	case *models.A_ATTRIBUTE_VALUE_XHTML_1:
-		// insertion point
-		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
 		AssociationFieldToForm("ATTRIBUTE_VALUE_BOOLEAN", instanceWithInferedType.ATTRIBUTE_VALUE_BOOLEAN, formGroup, probe)
 		AssociationFieldToForm("ATTRIBUTE_VALUE_DATE", instanceWithInferedType.ATTRIBUTE_VALUE_DATE, formGroup, probe)
 		AssociationFieldToForm("ATTRIBUTE_VALUE_ENUMERATION", instanceWithInferedType.ATTRIBUTE_VALUE_ENUMERATION, formGroup, probe)
 		AssociationFieldToForm("ATTRIBUTE_VALUE_INTEGER", instanceWithInferedType.ATTRIBUTE_VALUE_INTEGER, formGroup, probe)
 		AssociationFieldToForm("ATTRIBUTE_VALUE_REAL", instanceWithInferedType.ATTRIBUTE_VALUE_REAL, formGroup, probe)
 		AssociationFieldToForm("ATTRIBUTE_VALUE_STRING", instanceWithInferedType.ATTRIBUTE_VALUE_STRING, formGroup, probe)
+		AssociationFieldToForm("ATTRIBUTE_VALUE_XHTML", instanceWithInferedType.ATTRIBUTE_VALUE_XHTML, formGroup, probe)
+
+	case *models.A_ATTRIBUTE_VALUE_XHTML_1:
+		// insertion point
+		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
 		AssociationFieldToForm("ATTRIBUTE_VALUE_XHTML", instanceWithInferedType.ATTRIBUTE_VALUE_XHTML, formGroup, probe)
 
 	case *models.A_CHILDREN:
@@ -438,11 +438,11 @@ func FillUpForm[T models.Gongstruct](
 		BasicFieldtoForm("RELATION_GROUP_TYPE_REF", instanceWithInferedType.RELATION_GROUP_TYPE_REF, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
 
-	case *models.A_SOURCE_SPECIFICATION_1:
+	case *models.A_SOURCE_1:
 		// insertion point
 		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
-		BasicFieldtoForm("SPECIFICATION_REF", instanceWithInferedType.SPECIFICATION_REF, instanceWithInferedType, probe.formStage, formGroup,
+		BasicFieldtoForm("SPEC_OBJECT_REF", instanceWithInferedType.SPEC_OBJECT_REF, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
 
 	case *models.A_SPECIFICATIONS:
@@ -524,11 +524,11 @@ func FillUpForm[T models.Gongstruct](
 		AssociationFieldToForm("SPEC_RELATION_TYPE", instanceWithInferedType.SPEC_RELATION_TYPE, formGroup, probe)
 		AssociationFieldToForm("SPECIFICATION_TYPE", instanceWithInferedType.SPECIFICATION_TYPE, formGroup, probe)
 
-	case *models.A_TARGET_1:
+	case *models.A_TARGET_SPECIFICATION_1:
 		// insertion point
 		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
-		BasicFieldtoForm("SPEC_OBJECT_REF", instanceWithInferedType.SPEC_OBJECT_REF, instanceWithInferedType, probe.formStage, formGroup,
+		BasicFieldtoForm("SPECIFICATION_REF", instanceWithInferedType.SPECIFICATION_REF, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
 
 	case *models.A_THE_HEADER:

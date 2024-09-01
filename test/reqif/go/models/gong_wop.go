@@ -601,16 +601,16 @@ func (from *A_RELATION_GROUP_TYPE_REF) CopyBasicFields(to *A_RELATION_GROUP_TYPE
 	to.RELATION_GROUP_TYPE_REF = from.RELATION_GROUP_TYPE_REF
 }
 
-type A_SOURCE_SPECIFICATION_1_WOP struct {
+type A_SOURCE_1_WOP struct {
 	// insertion point
 	Name string
-	SPECIFICATION_REF string
+	SPEC_OBJECT_REF string
 }
 
-func (from *A_SOURCE_SPECIFICATION_1) CopyBasicFields(to *A_SOURCE_SPECIFICATION_1) {
+func (from *A_SOURCE_1) CopyBasicFields(to *A_SOURCE_1) {
 	// insertion point
 	to.Name = from.Name
-	to.SPECIFICATION_REF = from.SPECIFICATION_REF
+	to.SPEC_OBJECT_REF = from.SPEC_OBJECT_REF
 }
 
 type A_SPECIFICATIONS_WOP struct {
@@ -731,16 +731,16 @@ func (from *A_SPEC_TYPES) CopyBasicFields(to *A_SPEC_TYPES) {
 	to.Name = from.Name
 }
 
-type A_TARGET_1_WOP struct {
+type A_TARGET_SPECIFICATION_1_WOP struct {
 	// insertion point
 	Name string
-	SPEC_OBJECT_REF string
+	SPECIFICATION_REF string
 }
 
-func (from *A_TARGET_1) CopyBasicFields(to *A_TARGET_1) {
+func (from *A_TARGET_SPECIFICATION_1) CopyBasicFields(to *A_TARGET_SPECIFICATION_1) {
 	// insertion point
 	to.Name = from.Name
-	to.SPEC_OBJECT_REF = from.SPEC_OBJECT_REF
+	to.SPECIFICATION_REF = from.SPECIFICATION_REF
 }
 
 type A_THE_HEADER_WOP struct {
