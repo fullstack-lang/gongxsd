@@ -817,21 +817,21 @@ type RELATION_GROUP struct {
 	// generated from anonymous type within outer element "ALTERNATIVE-ID" of type A_ALTERNATIVE-ID.
 	ALTERNATIVE_ID *A_ALTERNATIVE_ID `xml:"ALTERNATIVE-ID,omitempty"`
 
-	// generated from anonymous type within outer element "SOURCE-SPECIFICATION" of type A_TARGET-SPECIFICATION.
-	SOURCE_SPECIFICATION *A_TARGET_SPECIFICATION_1 `xml:"SOURCE-SPECIFICATION,omitempty"`
+	// generated from anonymous type within outer element "SOURCE-SPECIFICATION" of type A_SOURCE-SPECIFICATION.
+	SOURCE_SPECIFICATION *A_SOURCE_SPECIFICATION_1 `xml:"SOURCE-SPECIFICATION,omitempty"`
 
 	// generated from anonymous type within outer element "SPEC-RELATIONS" of type A_SPEC-RELATION-REF.
 	SPEC_RELATIONS *A_SPEC_RELATION_REF `xml:"SPEC-RELATIONS,omitempty"`
 
-	// generated from anonymous type within outer element "TARGET-SPECIFICATION" of type A_TARGET-SPECIFICATION.
-	TARGET_SPECIFICATION *A_TARGET_SPECIFICATION_1 `xml:"TARGET-SPECIFICATION,omitempty"`
+	// generated from anonymous type within outer element "TARGET-SPECIFICATION" of type A_SOURCE-SPECIFICATION.
+	TARGET_SPECIFICATION *A_SOURCE_SPECIFICATION_1 `xml:"TARGET-SPECIFICATION,omitempty"`
 
 	// generated from anonymous type within outer element "TYPE" of type A_RELATION-GROUP-TYPE-REF.
 	TYPE *A_RELATION_GROUP_TYPE_REF `xml:"TYPE,omitempty"`
 }
 
-// A_TARGET_SPECIFICATION_1 Named source within outer element "SOURCE-SPECIFICATION"
-type A_TARGET_SPECIFICATION_1 struct {
+// A_SOURCE_SPECIFICATION_1 Named source within outer element "TARGET-SPECIFICATION"
+type A_SOURCE_SPECIFICATION_1 struct {
 	Name string `xml:"-"`
 
 	// insertion point for fields
