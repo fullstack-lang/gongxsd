@@ -57,11 +57,10 @@ func process(args []string) (r *gin.Engine, stack *gongxsd_stack.Stack) {
 		fmt.Printf("generating file %s\n", *outputModelFilePath)
 	}
 
-	// set outer particles
-	for _, ct := range models.SchemaSingloton.ComplexTypes {
-		ct.ModelGroup.ComputeIsUnbounded()
-	}
-
+	// and XSD is a acyclic directed graph (ADG) and it can be interesting
+	// to navigate this ADG. Therefore, one first set the interface links between
+	// the XSD nodes
+	models.SchemaSingloton.SetParentAndChildren(nil)
 	models.Generate(stack.Stage, *outputModelFilePath)
 
 	if Verbose {

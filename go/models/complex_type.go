@@ -28,8 +28,6 @@ type ComplexType struct {
 	Attributes      []*Attribute      `xml:"attribute"`
 	AttributeGroups []*AttributeGroup `xml:"attributeGroup"`
 
-	ParticleAbstract
-
 	IsDuplicatedInXSD bool
 
 	OuterParticleOwnerAbstract

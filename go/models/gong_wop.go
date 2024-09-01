@@ -10,21 +10,21 @@ var __GONG_time_The_fool_doth_think_he_is_wise__ = time.Hour
 type All_WOP struct {
 	// insertion point
 	Name string
-	MinOccurs string
-	MaxOccurs string
 	OuterElementName string
 	Order int
 	Depth int
+	MinOccurs string
+	MaxOccurs string
 }
 
 func (from *All) CopyBasicFields(to *All) {
 	// insertion point
 	to.Name = from.Name
-	to.MinOccurs = from.MinOccurs
-	to.MaxOccurs = from.MaxOccurs
 	to.OuterElementName = from.OuterElementName
 	to.Order = from.Order
 	to.Depth = from.Depth
+	to.MinOccurs = from.MinOccurs
+	to.MaxOccurs = from.MaxOccurs
 }
 
 type Annotation_WOP struct {
@@ -92,22 +92,22 @@ func (from *AttributeGroup) CopyBasicFields(to *AttributeGroup) {
 type Choice_WOP struct {
 	// insertion point
 	Name string
-	MinOccurs string
-	MaxOccurs string
 	OuterElementName string
 	Order int
 	Depth int
+	MinOccurs string
+	MaxOccurs string
 	IsDuplicatedInXSD bool
 }
 
 func (from *Choice) CopyBasicFields(to *Choice) {
 	// insertion point
 	to.Name = from.Name
-	to.MinOccurs = from.MinOccurs
-	to.MaxOccurs = from.MaxOccurs
 	to.OuterElementName = from.OuterElementName
 	to.Order = from.Order
 	to.Depth = from.Depth
+	to.MinOccurs = from.MinOccurs
+	to.MaxOccurs = from.MaxOccurs
 	to.IsDuplicatedInXSD = from.IsDuplicatedInXSD
 }
 
@@ -131,6 +131,8 @@ type ComplexType_WOP struct {
 	OuterElementName string
 	Order int
 	Depth int
+	MinOccurs string
+	MaxOccurs string
 	IsDuplicatedInXSD bool
 }
 
@@ -144,6 +146,8 @@ func (from *ComplexType) CopyBasicFields(to *ComplexType) {
 	to.OuterElementName = from.OuterElementName
 	to.Order = from.Order
 	to.Depth = from.Depth
+	to.MinOccurs = from.MinOccurs
+	to.MaxOccurs = from.MaxOccurs
 	to.IsDuplicatedInXSD = from.IsDuplicatedInXSD
 }
 
@@ -223,6 +227,10 @@ type Extension_WOP struct {
 	// insertion point
 	Name string
 	OuterElementName string
+	Order int
+	Depth int
+	MinOccurs string
+	MaxOccurs string
 	Base string
 	Ref string
 }
@@ -231,6 +239,10 @@ func (from *Extension) CopyBasicFields(to *Extension) {
 	// insertion point
 	to.Name = from.Name
 	to.OuterElementName = from.OuterElementName
+	to.Order = from.Order
+	to.Depth = from.Depth
+	to.MinOccurs = from.MinOccurs
+	to.MaxOccurs = from.MaxOccurs
 	to.Base = from.Base
 	to.Ref = from.Ref
 }
@@ -246,6 +258,8 @@ type Group_WOP struct {
 	OuterElementName string
 	Order int
 	Depth int
+	MinOccurs string
+	MaxOccurs string
 }
 
 func (from *Group) CopyBasicFields(to *Group) {
@@ -259,6 +273,8 @@ func (from *Group) CopyBasicFields(to *Group) {
 	to.OuterElementName = from.OuterElementName
 	to.Order = from.Order
 	to.Depth = from.Depth
+	to.MinOccurs = from.MinOccurs
+	to.MaxOccurs = from.MaxOccurs
 }
 
 type Length_WOP struct {
@@ -349,32 +365,36 @@ type Schema_WOP struct {
 	// insertion point
 	Name string
 	Xs string
+	Order int
+	Depth int
 }
 
 func (from *Schema) CopyBasicFields(to *Schema) {
 	// insertion point
 	to.Name = from.Name
 	to.Xs = from.Xs
+	to.Order = from.Order
+	to.Depth = from.Depth
 }
 
 type Sequence_WOP struct {
 	// insertion point
 	Name string
-	MinOccurs string
-	MaxOccurs string
 	OuterElementName string
 	Order int
 	Depth int
+	MinOccurs string
+	MaxOccurs string
 }
 
 func (from *Sequence) CopyBasicFields(to *Sequence) {
 	// insertion point
 	to.Name = from.Name
-	to.MinOccurs = from.MinOccurs
-	to.MaxOccurs = from.MaxOccurs
 	to.OuterElementName = from.OuterElementName
 	to.Order = from.Order
 	to.Depth = from.Depth
+	to.MinOccurs = from.MinOccurs
+	to.MaxOccurs = from.MaxOccurs
 }
 
 type SimpleContent_WOP struct {

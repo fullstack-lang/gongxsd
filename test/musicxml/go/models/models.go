@@ -45,19 +45,6 @@ type A_measure_1 struct {
 	Part []*A_part_1 `xml:"part,omitempty"`
 }
 
-// A_part Named source within outer element "part"
-type A_part struct {
-	Name string `xml:"-"`
-
-	// insertion point for fields
-
-	// generated from attribute group "part-attributes
-	AttributeGroup_part_attributes
-
-	// generated from anonymous type within outer element "measure" of type A_measure.
-	Measure []*A_measure `xml:"measure,omitempty"`
-}
-
 // A_part_1 Named source within outer element "part"
 type A_part_1 struct {
 	Name string `xml:"-"`
@@ -71,9 +58,22 @@ type A_part_1 struct {
 	Group_music_data
 }
 
+// A_part Named source within outer element "part"
+type A_part struct {
+	Name string `xml:"-"`
+
+	// insertion point for fields
+
+	// generated from attribute group "part-attributes
+	AttributeGroup_part_attributes
+
+	// generated from anonymous type within outer element "measure" of type A_measure.
+	Measure []*A_measure `xml:"measure,omitempty"`
+}
+
 // A_score_partwise Named source within outer element "score-partwise"
 type A_score_partwise struct {
-	// Name string `xml:"-"`
+	Name string `xml:"-"`
 
 	// insertion point for fields
 
@@ -89,7 +89,7 @@ type A_score_partwise struct {
 
 // A_score_timewise Named source within outer element "score-timewise"
 type A_score_timewise struct {
-	// Name string `xml:"-"`
+	Name string `xml:"-"`
 
 	// insertion point for fields
 
@@ -271,55 +271,55 @@ type Articulations struct {
 	AttributeGroup_optional_unique_id
 
 	// generated from element "accent" of type empty-placement order 234 depth 0
-	Accent *Empty_placement `xml:"accent,omitempty"`
+	Accent []*Empty_placement `xml:"accent,omitempty"`
 
 	// generated from element "strong-accent" of type strong-accent order 235 depth 0
-	Strong_accent *Strong_accent `xml:"strong-accent,omitempty"`
+	Strong_accent []*Strong_accent `xml:"strong-accent,omitempty"`
 
 	// generated from element "staccato" of type empty-placement order 236 depth 0
-	Staccato *Empty_placement `xml:"staccato,omitempty"`
+	Staccato []*Empty_placement `xml:"staccato,omitempty"`
 
 	// generated from element "tenuto" of type empty-placement order 237 depth 0
-	Tenuto *Empty_placement `xml:"tenuto,omitempty"`
+	Tenuto []*Empty_placement `xml:"tenuto,omitempty"`
 
 	// generated from element "detached-legato" of type empty-placement order 238 depth 0
-	Detached_legato *Empty_placement `xml:"detached-legato,omitempty"`
+	Detached_legato []*Empty_placement `xml:"detached-legato,omitempty"`
 
 	// generated from element "staccatissimo" of type empty-placement order 239 depth 0
-	Staccatissimo *Empty_placement `xml:"staccatissimo,omitempty"`
+	Staccatissimo []*Empty_placement `xml:"staccatissimo,omitempty"`
 
 	// generated from element "spiccato" of type empty-placement order 240 depth 0
-	Spiccato *Empty_placement `xml:"spiccato,omitempty"`
+	Spiccato []*Empty_placement `xml:"spiccato,omitempty"`
 
 	// generated from element "scoop" of type empty-line order 241 depth 0
-	Scoop *Empty_line `xml:"scoop,omitempty"`
+	Scoop []*Empty_line `xml:"scoop,omitempty"`
 
 	// generated from element "plop" of type empty-line order 242 depth 0
-	Plop *Empty_line `xml:"plop,omitempty"`
+	Plop []*Empty_line `xml:"plop,omitempty"`
 
 	// generated from element "doit" of type empty-line order 243 depth 0
-	Doit *Empty_line `xml:"doit,omitempty"`
+	Doit []*Empty_line `xml:"doit,omitempty"`
 
 	// generated from element "falloff" of type empty-line order 244 depth 0
-	Falloff *Empty_line `xml:"falloff,omitempty"`
+	Falloff []*Empty_line `xml:"falloff,omitempty"`
 
 	// generated from element "breath-mark" of type breath-mark order 245 depth 0
-	Breath_mark *Breath_mark `xml:"breath-mark,omitempty"`
+	Breath_mark []*Breath_mark `xml:"breath-mark,omitempty"`
 
 	// generated from element "caesura" of type caesura order 246 depth 0
-	Caesura *Caesura `xml:"caesura,omitempty"`
+	Caesura []*Caesura `xml:"caesura,omitempty"`
 
 	// generated from element "stress" of type empty-placement order 247 depth 0
-	Stress *Empty_placement `xml:"stress,omitempty"`
+	Stress []*Empty_placement `xml:"stress,omitempty"`
 
 	// generated from element "unstress" of type empty-placement order 248 depth 0
-	Unstress *Empty_placement `xml:"unstress,omitempty"`
+	Unstress []*Empty_placement `xml:"unstress,omitempty"`
 
 	// generated from element "soft-accent" of type empty-placement order 249 depth 0
-	Soft_accent *Empty_placement `xml:"soft-accent,omitempty"`
+	Soft_accent []*Empty_placement `xml:"soft-accent,omitempty"`
 
 	// generated from element "other-articulation" of type other-placement-text order 250 depth 0
-	Other_articulation *Other_placement_text `xml:"other-articulation,omitempty"`
+	Other_articulation []*Other_placement_text `xml:"other-articulation,omitempty"`
 }
 
 // Assess Named source named complex type "assess"
@@ -742,10 +742,10 @@ type Credit struct {
 	Bookmark []*Bookmark `xml:"bookmark,omitempty"`
 
 	// generated from element "credit-words" of type formatted-text-id order 408 depth 0
-	Credit_words *Formatted_text_id `xml:"credit-words,omitempty"`
+	Credit_words []*Formatted_text_id `xml:"credit-words,omitempty"`
 
 	// generated from element "credit-symbol" of type formatted-symbol-id order 409 depth 0
-	Credit_symbol *Formatted_symbol_id `xml:"credit-symbol,omitempty"`
+	Credit_symbol []*Formatted_symbol_id `xml:"credit-symbol,omitempty"`
 }
 
 // Dashes Named source named complex type "dashes"
@@ -921,10 +921,10 @@ type Direction_type struct {
 	Coda []*Coda `xml:"coda,omitempty"`
 
 	// generated from element "words" of type formatted-text-id order 109 depth 0
-	Words *Formatted_text_id `xml:"words,omitempty"`
+	Words []*Formatted_text_id `xml:"words,omitempty"`
 
 	// generated from element "symbol" of type formatted-symbol-id order 110 depth 0
-	Symbol *Formatted_symbol_id `xml:"symbol,omitempty"`
+	Symbol []*Formatted_symbol_id `xml:"symbol,omitempty"`
 
 	// generated from element "wedge" of type wedge order 111 depth 0
 	Wedge *Wedge `xml:"wedge,omitempty"`
@@ -1107,7 +1107,7 @@ type Dynamics struct {
 	Sfzp string `xml:"sfzp,omitempty"`
 
 	// generated from element "other-dynamics" of type other-text order 26 depth 0
-	Other_dynamics *Other_text `xml:"other-dynamics,omitempty"`
+	Other_dynamics []*Other_text `xml:"other-dynamics,omitempty"`
 }
 
 // Effect Named source named complex type "effect"
@@ -1276,7 +1276,7 @@ type Encoding struct {
 	// insertion point for fields
 
 	// generated from element "encoder" of type typed-text order 203 depth 0
-	Encoder *Typed_text `xml:"encoder,omitempty"`
+	Encoder []*Typed_text `xml:"encoder,omitempty"`
 
 	// generated from element "software" of type string order 204 depth 0
 	Software string `xml:"software,omitempty"`
@@ -1285,7 +1285,7 @@ type Encoding struct {
 	Encoding_description string `xml:"encoding-description,omitempty"`
 
 	// generated from element "supports" of type supports order 206 depth 0
-	Supports *Supports `xml:"supports,omitempty"`
+	Supports []*Supports `xml:"supports,omitempty"`
 }
 
 // Ending Named source named complex type "ending"
@@ -2184,13 +2184,13 @@ type Listen struct {
 	// insertion point for fields
 
 	// generated from element "assess" of type assess order 281 depth 0
-	Assess *Assess `xml:"assess,omitempty"`
+	Assess []*Assess `xml:"assess,omitempty"`
 
 	// generated from element "wait" of type wait order 282 depth 0
-	Wait *Wait `xml:"wait,omitempty"`
+	Wait []*Wait `xml:"wait,omitempty"`
 
 	// generated from element "other-listen" of type other-listening order 283 depth 0
-	Other_listen *Other_listening `xml:"other-listen,omitempty"`
+	Other_listen []*Other_listening `xml:"other-listen,omitempty"`
 }
 
 // Listening Named source named complex type "listening"
@@ -2200,10 +2200,10 @@ type Listening struct {
 	// insertion point for fields
 
 	// generated from element "sync" of type sync order 146 depth 0
-	Sync *Sync `xml:"sync,omitempty"`
+	Sync []*Sync `xml:"sync,omitempty"`
 
 	// generated from element "other-listening" of type other-listening order 147 depth 0
-	Other_listening *Other_listening `xml:"other-listening,omitempty"`
+	Other_listening []*Other_listening `xml:"other-listening,omitempty"`
 
 	// generated from element "offset" of type offset order 148 depth 0
 	Offset *Offset `xml:"offset,omitempty"`
@@ -2243,13 +2243,13 @@ type Lyric struct {
 	AttributeGroup_optional_unique_id
 
 	// generated from element "elision" of type elision order 286 depth 0
-	Elision *Elision `xml:"elision,omitempty"`
+	Elision []*Elision `xml:"elision,omitempty"`
 
 	// generated from element "syllabic" of type syllabic order 287 depth 0
 	Syllabic string `xml:"syllabic,omitempty"`
 
 	// generated from element "text" of type text-element-data order 288 depth 0
-	Text *Text_element_data `xml:"text,omitempty"`
+	Text []*Text_element_data `xml:"text,omitempty"`
 
 	// generated from element "extend" of type extend order 289 depth 0
 	Extend *Extend `xml:"extend,omitempty"`
@@ -2602,10 +2602,10 @@ type Name_display struct {
 	AttributeGroup_print_object
 
 	// generated from element "display-text" of type formatted-text order 35 depth 0
-	Display_text *Formatted_text `xml:"display-text,omitempty"`
+	Display_text []*Formatted_text `xml:"display-text,omitempty"`
 
 	// generated from element "accidental-text" of type accidental-text order 36 depth 0
-	Accidental_text *Accidental_text `xml:"accidental-text,omitempty"`
+	Accidental_text []*Accidental_text `xml:"accidental-text,omitempty"`
 }
 
 // Non_arpeggiate Named source named complex type "non-arpeggiate"
@@ -2649,46 +2649,46 @@ type Notations struct {
 	Group_editorial
 
 	// generated from element "tied" of type tied order 297 depth 0
-	Tied *Tied `xml:"tied,omitempty"`
+	Tied []*Tied `xml:"tied,omitempty"`
 
 	// generated from element "slur" of type slur order 298 depth 0
-	Slur *Slur `xml:"slur,omitempty"`
+	Slur []*Slur `xml:"slur,omitempty"`
 
 	// generated from element "tuplet" of type tuplet order 299 depth 0
-	Tuplet *Tuplet `xml:"tuplet,omitempty"`
+	Tuplet []*Tuplet `xml:"tuplet,omitempty"`
 
 	// generated from element "glissando" of type glissando order 300 depth 0
-	Glissando *Glissando `xml:"glissando,omitempty"`
+	Glissando []*Glissando `xml:"glissando,omitempty"`
 
 	// generated from element "slide" of type slide order 301 depth 0
-	Slide *Slide `xml:"slide,omitempty"`
+	Slide []*Slide `xml:"slide,omitempty"`
 
 	// generated from element "ornaments" of type ornaments order 302 depth 0
-	Ornaments *Ornaments `xml:"ornaments,omitempty"`
+	Ornaments []*Ornaments `xml:"ornaments,omitempty"`
 
 	// generated from element "technical" of type technical order 303 depth 0
-	Technical *Technical `xml:"technical,omitempty"`
+	Technical []*Technical `xml:"technical,omitempty"`
 
 	// generated from element "articulations" of type articulations order 304 depth 0
-	Articulations *Articulations `xml:"articulations,omitempty"`
+	Articulations []*Articulations `xml:"articulations,omitempty"`
 
 	// generated from element "dynamics" of type dynamics order 305 depth 0
-	Dynamics *Dynamics `xml:"dynamics,omitempty"`
+	Dynamics []*Dynamics `xml:"dynamics,omitempty"`
 
 	// generated from element "fermata" of type fermata order 306 depth 0
-	Fermata *Fermata `xml:"fermata,omitempty"`
+	Fermata []*Fermata `xml:"fermata,omitempty"`
 
 	// generated from element "arpeggiate" of type arpeggiate order 307 depth 0
-	Arpeggiate *Arpeggiate `xml:"arpeggiate,omitempty"`
+	Arpeggiate []*Arpeggiate `xml:"arpeggiate,omitempty"`
 
 	// generated from element "non-arpeggiate" of type non-arpeggiate order 308 depth 0
-	Non_arpeggiate *Non_arpeggiate `xml:"non-arpeggiate,omitempty"`
+	Non_arpeggiate []*Non_arpeggiate `xml:"non-arpeggiate,omitempty"`
 
 	// generated from element "accidental-mark" of type accidental-mark order 309 depth 0
-	Accidental_mark *Accidental_mark `xml:"accidental-mark,omitempty"`
+	Accidental_mark []*Accidental_mark `xml:"accidental-mark,omitempty"`
 
 	// generated from element "other-notation" of type other-notation order 310 depth 0
-	Other_notation *Other_notation `xml:"other-notation,omitempty"`
+	Other_notation []*Other_notation `xml:"other-notation,omitempty"`
 }
 
 // Note Named source named complex type "note"
@@ -2843,10 +2843,10 @@ type Notehead_text struct {
 	// insertion point for fields
 
 	// generated from element "display-text" of type formatted-text order 337 depth 0
-	Display_text *Formatted_text `xml:"display-text,omitempty"`
+	Display_text []*Formatted_text `xml:"display-text,omitempty"`
 
 	// generated from element "accidental-text" of type accidental-text order 338 depth 0
-	Accidental_text *Accidental_text `xml:"accidental-text,omitempty"`
+	Accidental_text []*Accidental_text `xml:"accidental-text,omitempty"`
 }
 
 // Numeral Named source named complex type "numeral"
@@ -2952,49 +2952,49 @@ type Ornaments struct {
 	AttributeGroup_optional_unique_id
 
 	// generated from element "trill-mark" of type empty-trill-sound order 339 depth 0
-	Trill_mark *Empty_trill_sound `xml:"trill-mark,omitempty"`
+	Trill_mark []*Empty_trill_sound `xml:"trill-mark,omitempty"`
 
 	// generated from element "turn" of type horizontal-turn order 340 depth 0
-	Turn *Horizontal_turn `xml:"turn,omitempty"`
+	Turn []*Horizontal_turn `xml:"turn,omitempty"`
 
 	// generated from element "delayed-turn" of type horizontal-turn order 341 depth 0
-	Delayed_turn *Horizontal_turn `xml:"delayed-turn,omitempty"`
+	Delayed_turn []*Horizontal_turn `xml:"delayed-turn,omitempty"`
 
 	// generated from element "inverted-turn" of type horizontal-turn order 342 depth 0
-	Inverted_turn *Horizontal_turn `xml:"inverted-turn,omitempty"`
+	Inverted_turn []*Horizontal_turn `xml:"inverted-turn,omitempty"`
 
 	// generated from element "delayed-inverted-turn" of type horizontal-turn order 343 depth 0
-	Delayed_inverted_turn *Horizontal_turn `xml:"delayed-inverted-turn,omitempty"`
+	Delayed_inverted_turn []*Horizontal_turn `xml:"delayed-inverted-turn,omitempty"`
 
 	// generated from element "vertical-turn" of type empty-trill-sound order 344 depth 0
-	Vertical_turn *Empty_trill_sound `xml:"vertical-turn,omitempty"`
+	Vertical_turn []*Empty_trill_sound `xml:"vertical-turn,omitempty"`
 
 	// generated from element "inverted-vertical-turn" of type empty-trill-sound order 345 depth 0
-	Inverted_vertical_turn *Empty_trill_sound `xml:"inverted-vertical-turn,omitempty"`
+	Inverted_vertical_turn []*Empty_trill_sound `xml:"inverted-vertical-turn,omitempty"`
 
 	// generated from element "shake" of type empty-trill-sound order 346 depth 0
-	Shake *Empty_trill_sound `xml:"shake,omitempty"`
+	Shake []*Empty_trill_sound `xml:"shake,omitempty"`
 
 	// generated from element "wavy-line" of type wavy-line order 347 depth 0
-	Wavy_line *Wavy_line `xml:"wavy-line,omitempty"`
+	Wavy_line []*Wavy_line `xml:"wavy-line,omitempty"`
 
 	// generated from element "mordent" of type mordent order 348 depth 0
-	Mordent *Mordent `xml:"mordent,omitempty"`
+	Mordent []*Mordent `xml:"mordent,omitempty"`
 
 	// generated from element "inverted-mordent" of type mordent order 349 depth 0
-	Inverted_mordent *Mordent `xml:"inverted-mordent,omitempty"`
+	Inverted_mordent []*Mordent `xml:"inverted-mordent,omitempty"`
 
 	// generated from element "schleifer" of type empty-placement order 350 depth 0
-	Schleifer *Empty_placement `xml:"schleifer,omitempty"`
+	Schleifer []*Empty_placement `xml:"schleifer,omitempty"`
 
 	// generated from element "tremolo" of type tremolo order 351 depth 0
-	Tremolo *Tremolo `xml:"tremolo,omitempty"`
+	Tremolo []*Tremolo `xml:"tremolo,omitempty"`
 
 	// generated from element "haydn" of type empty-trill-sound order 352 depth 0
-	Haydn *Empty_trill_sound `xml:"haydn,omitempty"`
+	Haydn []*Empty_trill_sound `xml:"haydn,omitempty"`
 
 	// generated from element "other-ornament" of type other-placement-text order 353 depth 0
-	Other_ornament *Other_placement_text `xml:"other-ornament,omitempty"`
+	Other_ornament []*Other_placement_text `xml:"other-ornament,omitempty"`
 
 	// generated from element "accidental-mark" of type accidental-mark order 354 depth 0
 	Accidental_mark []*Accidental_mark `xml:"accidental-mark,omitempty"`
@@ -3390,7 +3390,7 @@ type Play struct {
 	Semi_pitched string `xml:"semi-pitched,omitempty"`
 
 	// generated from element "other-play" of type other-play order 40 depth 0
-	Other_play *Other_play `xml:"other-play,omitempty"`
+	Other_play []*Other_play `xml:"other-play,omitempty"`
 }
 
 // Player Named source named complex type "player"
@@ -3597,10 +3597,10 @@ type Score_part struct {
 	Player []*Player `xml:"player,omitempty"`
 
 	// generated from element "midi-device" of type midi-device order 445 depth 0
-	Midi_device *Midi_device `xml:"midi-device,omitempty"`
+	Midi_device []*Midi_device `xml:"midi-device,omitempty"`
 
 	// generated from element "midi-instrument" of type midi-instrument order 446 depth 0
-	Midi_instrument *Midi_instrument `xml:"midi-instrument,omitempty"`
+	Midi_instrument []*Midi_instrument `xml:"midi-instrument,omitempty"`
 }
 
 // Segno Named source named complex type "segno"
@@ -3752,16 +3752,16 @@ type Sound struct {
 	AttributeGroup_optional_unique_id
 
 	// generated from element "instrument-change" of type instrument-change order 189 depth 0
-	Instrument_change *Instrument_change `xml:"instrument-change,omitempty"`
+	Instrument_change []*Instrument_change `xml:"instrument-change,omitempty"`
 
 	// generated from element "midi-device" of type midi-device order 190 depth 0
-	Midi_device *Midi_device `xml:"midi-device,omitempty"`
+	Midi_device []*Midi_device `xml:"midi-device,omitempty"`
 
 	// generated from element "midi-instrument" of type midi-instrument order 191 depth 0
-	Midi_instrument *Midi_instrument `xml:"midi-instrument,omitempty"`
+	Midi_instrument []*Midi_instrument `xml:"midi-instrument,omitempty"`
 
 	// generated from element "play" of type play order 192 depth 0
-	Play *Play `xml:"play,omitempty"`
+	Play []*Play `xml:"play,omitempty"`
 
 	// generated from element "swing" of type swing order 193 depth 0
 	Swing *Swing `xml:"swing,omitempty"`
@@ -4062,97 +4062,97 @@ type Technical struct {
 	AttributeGroup_optional_unique_id
 
 	// generated from element "up-bow" of type empty-placement order 359 depth 0
-	Up_bow *Empty_placement `xml:"up-bow,omitempty"`
+	Up_bow []*Empty_placement `xml:"up-bow,omitempty"`
 
 	// generated from element "down-bow" of type empty-placement order 360 depth 0
-	Down_bow *Empty_placement `xml:"down-bow,omitempty"`
+	Down_bow []*Empty_placement `xml:"down-bow,omitempty"`
 
 	// generated from element "harmonic" of type harmonic order 361 depth 0
-	Harmonic *Harmonic `xml:"harmonic,omitempty"`
+	Harmonic []*Harmonic `xml:"harmonic,omitempty"`
 
 	// generated from element "open-string" of type empty-placement order 362 depth 0
-	Open_string *Empty_placement `xml:"open-string,omitempty"`
+	Open_string []*Empty_placement `xml:"open-string,omitempty"`
 
 	// generated from element "thumb-position" of type empty-placement order 363 depth 0
-	Thumb_position *Empty_placement `xml:"thumb-position,omitempty"`
+	Thumb_position []*Empty_placement `xml:"thumb-position,omitempty"`
 
 	// generated from element "fingering" of type fingering order 364 depth 0
-	Fingering *Fingering `xml:"fingering,omitempty"`
+	Fingering []*Fingering `xml:"fingering,omitempty"`
 
 	// generated from element "pluck" of type placement-text order 365 depth 0
-	Pluck *Placement_text `xml:"pluck,omitempty"`
+	Pluck []*Placement_text `xml:"pluck,omitempty"`
 
 	// generated from element "double-tongue" of type empty-placement order 366 depth 0
-	Double_tongue *Empty_placement `xml:"double-tongue,omitempty"`
+	Double_tongue []*Empty_placement `xml:"double-tongue,omitempty"`
 
 	// generated from element "triple-tongue" of type empty-placement order 367 depth 0
-	Triple_tongue *Empty_placement `xml:"triple-tongue,omitempty"`
+	Triple_tongue []*Empty_placement `xml:"triple-tongue,omitempty"`
 
 	// generated from element "stopped" of type empty-placement-smufl order 368 depth 0
-	Stopped *Empty_placement_smufl `xml:"stopped,omitempty"`
+	Stopped []*Empty_placement_smufl `xml:"stopped,omitempty"`
 
 	// generated from element "snap-pizzicato" of type empty-placement order 369 depth 0
-	Snap_pizzicato *Empty_placement `xml:"snap-pizzicato,omitempty"`
+	Snap_pizzicato []*Empty_placement `xml:"snap-pizzicato,omitempty"`
 
 	// generated from element "fret" of type fret order 370 depth 0
-	Fret *Fret `xml:"fret,omitempty"`
+	Fret []*Fret `xml:"fret,omitempty"`
 
 	// generated from element "string" of type string-type order 371 depth 0
-	String *String_type `xml:"string,omitempty"`
+	String []*String_type `xml:"string,omitempty"`
 
 	// generated from element "hammer-on" of type hammer-on-pull-off order 372 depth 0
-	Hammer_on *Hammer_on_pull_off `xml:"hammer-on,omitempty"`
+	Hammer_on []*Hammer_on_pull_off `xml:"hammer-on,omitempty"`
 
 	// generated from element "pull-off" of type hammer-on-pull-off order 373 depth 0
-	Pull_off *Hammer_on_pull_off `xml:"pull-off,omitempty"`
+	Pull_off []*Hammer_on_pull_off `xml:"pull-off,omitempty"`
 
 	// generated from element "bend" of type bend order 374 depth 0
-	Bend *Bend `xml:"bend,omitempty"`
+	Bend []*Bend `xml:"bend,omitempty"`
 
 	// generated from element "tap" of type tap order 375 depth 0
-	Tap *Tap `xml:"tap,omitempty"`
+	Tap []*Tap `xml:"tap,omitempty"`
 
 	// generated from element "heel" of type heel-toe order 376 depth 0
-	Heel *Heel_toe `xml:"heel,omitempty"`
+	Heel []*Heel_toe `xml:"heel,omitempty"`
 
 	// generated from element "toe" of type heel-toe order 377 depth 0
-	Toe *Heel_toe `xml:"toe,omitempty"`
+	Toe []*Heel_toe `xml:"toe,omitempty"`
 
 	// generated from element "fingernails" of type empty-placement order 378 depth 0
-	Fingernails *Empty_placement `xml:"fingernails,omitempty"`
+	Fingernails []*Empty_placement `xml:"fingernails,omitempty"`
 
 	// generated from element "hole" of type hole order 379 depth 0
-	Hole *Hole `xml:"hole,omitempty"`
+	Hole []*Hole `xml:"hole,omitempty"`
 
 	// generated from element "arrow" of type arrow order 380 depth 0
-	Arrow *Arrow `xml:"arrow,omitempty"`
+	Arrow []*Arrow `xml:"arrow,omitempty"`
 
 	// generated from element "handbell" of type handbell order 381 depth 0
-	Handbell *Handbell `xml:"handbell,omitempty"`
+	Handbell []*Handbell `xml:"handbell,omitempty"`
 
 	// generated from element "brass-bend" of type empty-placement order 382 depth 0
-	Brass_bend *Empty_placement `xml:"brass-bend,omitempty"`
+	Brass_bend []*Empty_placement `xml:"brass-bend,omitempty"`
 
 	// generated from element "flip" of type empty-placement order 383 depth 0
-	Flip *Empty_placement `xml:"flip,omitempty"`
+	Flip []*Empty_placement `xml:"flip,omitempty"`
 
 	// generated from element "smear" of type empty-placement order 384 depth 0
-	Smear *Empty_placement `xml:"smear,omitempty"`
+	Smear []*Empty_placement `xml:"smear,omitempty"`
 
 	// generated from element "open" of type empty-placement-smufl order 385 depth 0
-	Open *Empty_placement_smufl `xml:"open,omitempty"`
+	Open []*Empty_placement_smufl `xml:"open,omitempty"`
 
 	// generated from element "half-muted" of type empty-placement-smufl order 386 depth 0
-	Half_muted *Empty_placement_smufl `xml:"half-muted,omitempty"`
+	Half_muted []*Empty_placement_smufl `xml:"half-muted,omitempty"`
 
 	// generated from element "harmon-mute" of type harmon-mute order 387 depth 0
-	Harmon_mute *Harmon_mute `xml:"harmon-mute,omitempty"`
+	Harmon_mute []*Harmon_mute `xml:"harmon-mute,omitempty"`
 
 	// generated from element "golpe" of type empty-placement order 388 depth 0
-	Golpe *Empty_placement `xml:"golpe,omitempty"`
+	Golpe []*Empty_placement `xml:"golpe,omitempty"`
 
 	// generated from element "other-technical" of type other-placement-text order 389 depth 0
-	Other_technical *Other_placement_text `xml:"other-technical,omitempty"`
+	Other_technical []*Other_placement_text `xml:"other-technical,omitempty"`
 }
 
 // Text_element_data Named source named complex type "text-element-data"
@@ -4740,46 +4740,46 @@ type Group_music_data struct {
 	// insertion point for fields
 
 	// generated from element "note" of type note order 537 depth 1
-	Note *Note `xml:"note,omitempty"`
+	Note []*Note `xml:"note,omitempty"`
 
 	// generated from element "backup" of type backup order 538 depth 1
-	Backup *Backup `xml:"backup,omitempty"`
+	Backup []*Backup `xml:"backup,omitempty"`
 
 	// generated from element "forward" of type forward order 539 depth 1
-	Forward *Forward `xml:"forward,omitempty"`
+	Forward []*Forward `xml:"forward,omitempty"`
 
 	// generated from element "direction" of type direction order 540 depth 1
-	Direction *Direction `xml:"direction,omitempty"`
+	Direction []*Direction `xml:"direction,omitempty"`
 
 	// generated from element "attributes" of type attributes order 541 depth 1
-	Attributes *Attributes `xml:"attributes,omitempty"`
+	Attributes []*Attributes `xml:"attributes,omitempty"`
 
 	// generated from element "harmony" of type harmony order 542 depth 1
-	Harmony *Harmony `xml:"harmony,omitempty"`
+	Harmony []*Harmony `xml:"harmony,omitempty"`
 
 	// generated from element "figured-bass" of type figured-bass order 543 depth 1
-	Figured_bass *Figured_bass `xml:"figured-bass,omitempty"`
+	Figured_bass []*Figured_bass `xml:"figured-bass,omitempty"`
 
 	// generated from element "print" of type print order 544 depth 1
-	Print *Print `xml:"print,omitempty"`
+	Print []*Print `xml:"print,omitempty"`
 
 	// generated from element "sound" of type sound order 545 depth 1
-	Sound *Sound `xml:"sound,omitempty"`
+	Sound []*Sound `xml:"sound,omitempty"`
 
 	// generated from element "listening" of type listening order 546 depth 1
-	Listening *Listening `xml:"listening,omitempty"`
+	Listening []*Listening `xml:"listening,omitempty"`
 
 	// generated from element "barline" of type barline order 547 depth 1
-	Barline *Barline `xml:"barline,omitempty"`
+	Barline []*Barline `xml:"barline,omitempty"`
 
 	// generated from element "grouping" of type grouping order 548 depth 1
-	Grouping *Grouping `xml:"grouping,omitempty"`
+	Grouping []*Grouping `xml:"grouping,omitempty"`
 
 	// generated from element "link" of type link order 549 depth 1
-	Link *Link `xml:"link,omitempty"`
+	Link []*Link `xml:"link,omitempty"`
 
 	// generated from element "bookmark" of type bookmark order 550 depth 1
-	Bookmark *Bookmark `xml:"bookmark,omitempty"`
+	Bookmark []*Bookmark `xml:"bookmark,omitempty"`
 }
 
 // Group_non_traditional_key UnNamed source named group "non-traditional-key"

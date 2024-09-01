@@ -47,8 +47,9 @@ type A_ATTRIBUTE_VALUE_DATEAPI struct {
 type A_ATTRIBUTE_VALUE_DATEPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
 
-	// field ATTRIBUTE_VALUE_DATE is a slice of pointers to another Struct (optional or 0..1)
-	ATTRIBUTE_VALUE_DATE IntSlice `gorm:"type:TEXT"`
+	// field ATTRIBUTE_VALUE_DATE is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	ATTRIBUTE_VALUE_DATEID sql.NullInt64
 }
 
 // A_ATTRIBUTE_VALUE_DATEDB describes a a_attribute_value_date in the database
@@ -214,22 +215,16 @@ func (backRepoA_ATTRIBUTE_VALUE_DATE *BackRepoA_ATTRIBUTE_VALUE_DATEStruct) Comm
 		a_attribute_value_dateDB.CopyBasicFieldsFromA_ATTRIBUTE_VALUE_DATE(a_attribute_value_date)
 
 		// insertion point for translating pointers encodings into actual pointers
-		// 1. reset
-		a_attribute_value_dateDB.A_ATTRIBUTE_VALUE_DATEPointersEncoding.ATTRIBUTE_VALUE_DATE = make([]int, 0)
-		// 2. encode
-		for _, attribute_value_dateAssocEnd := range a_attribute_value_date.ATTRIBUTE_VALUE_DATE {
-			attribute_value_dateAssocEnd_DB :=
-				backRepo.BackRepoATTRIBUTE_VALUE_DATE.GetATTRIBUTE_VALUE_DATEDBFromATTRIBUTE_VALUE_DATEPtr(attribute_value_dateAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the attribute_value_dateAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if attribute_value_dateAssocEnd_DB == nil {
-				continue
+		// commit pointer value a_attribute_value_date.ATTRIBUTE_VALUE_DATE translates to updating the a_attribute_value_date.ATTRIBUTE_VALUE_DATEID
+		a_attribute_value_dateDB.ATTRIBUTE_VALUE_DATEID.Valid = true // allow for a 0 value (nil association)
+		if a_attribute_value_date.ATTRIBUTE_VALUE_DATE != nil {
+			if ATTRIBUTE_VALUE_DATEId, ok := backRepo.BackRepoATTRIBUTE_VALUE_DATE.Map_ATTRIBUTE_VALUE_DATEPtr_ATTRIBUTE_VALUE_DATEDBID[a_attribute_value_date.ATTRIBUTE_VALUE_DATE]; ok {
+				a_attribute_value_dateDB.ATTRIBUTE_VALUE_DATEID.Int64 = int64(ATTRIBUTE_VALUE_DATEId)
+				a_attribute_value_dateDB.ATTRIBUTE_VALUE_DATEID.Valid = true
 			}
-			
-			a_attribute_value_dateDB.A_ATTRIBUTE_VALUE_DATEPointersEncoding.ATTRIBUTE_VALUE_DATE =
-				append(a_attribute_value_dateDB.A_ATTRIBUTE_VALUE_DATEPointersEncoding.ATTRIBUTE_VALUE_DATE, int(attribute_value_dateAssocEnd_DB.ID))
+		} else {
+			a_attribute_value_dateDB.ATTRIBUTE_VALUE_DATEID.Int64 = 0
+			a_attribute_value_dateDB.ATTRIBUTE_VALUE_DATEID.Valid = true
 		}
 
 		query := backRepoA_ATTRIBUTE_VALUE_DATE.db.Save(&a_attribute_value_dateDB)
@@ -345,15 +340,11 @@ func (backRepoA_ATTRIBUTE_VALUE_DATE *BackRepoA_ATTRIBUTE_VALUE_DATEStruct) Chec
 func (a_attribute_value_dateDB *A_ATTRIBUTE_VALUE_DATEDB) DecodePointers(backRepo *BackRepoStruct, a_attribute_value_date *models.A_ATTRIBUTE_VALUE_DATE) {
 
 	// insertion point for checkout of pointer encoding
-	// This loop redeem a_attribute_value_date.ATTRIBUTE_VALUE_DATE in the stage from the encode in the back repo
-	// It parses all ATTRIBUTE_VALUE_DATEDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	a_attribute_value_date.ATTRIBUTE_VALUE_DATE = a_attribute_value_date.ATTRIBUTE_VALUE_DATE[:0]
-	for _, _ATTRIBUTE_VALUE_DATEid := range a_attribute_value_dateDB.A_ATTRIBUTE_VALUE_DATEPointersEncoding.ATTRIBUTE_VALUE_DATE {
-		a_attribute_value_date.ATTRIBUTE_VALUE_DATE = append(a_attribute_value_date.ATTRIBUTE_VALUE_DATE, backRepo.BackRepoATTRIBUTE_VALUE_DATE.Map_ATTRIBUTE_VALUE_DATEDBID_ATTRIBUTE_VALUE_DATEPtr[uint(_ATTRIBUTE_VALUE_DATEid)])
+	// ATTRIBUTE_VALUE_DATE field
+	a_attribute_value_date.ATTRIBUTE_VALUE_DATE = nil
+	if a_attribute_value_dateDB.ATTRIBUTE_VALUE_DATEID.Int64 != 0 {
+		a_attribute_value_date.ATTRIBUTE_VALUE_DATE = backRepo.BackRepoATTRIBUTE_VALUE_DATE.Map_ATTRIBUTE_VALUE_DATEDBID_ATTRIBUTE_VALUE_DATEPtr[uint(a_attribute_value_dateDB.ATTRIBUTE_VALUE_DATEID.Int64)]
 	}
-
 	return
 }
 
@@ -582,6 +573,12 @@ func (backRepoA_ATTRIBUTE_VALUE_DATE *BackRepoA_ATTRIBUTE_VALUE_DATEStruct) Rest
 		_ = a_attribute_value_dateDB
 
 		// insertion point for reindexing pointers encoding
+		// reindexing ATTRIBUTE_VALUE_DATE field
+		if a_attribute_value_dateDB.ATTRIBUTE_VALUE_DATEID.Int64 != 0 {
+			a_attribute_value_dateDB.ATTRIBUTE_VALUE_DATEID.Int64 = int64(BackRepoATTRIBUTE_VALUE_DATEid_atBckpTime_newID[uint(a_attribute_value_dateDB.ATTRIBUTE_VALUE_DATEID.Int64)])
+			a_attribute_value_dateDB.ATTRIBUTE_VALUE_DATEID.Valid = true
+		}
+
 		// update databse with new index encoding
 		query := backRepoA_ATTRIBUTE_VALUE_DATE.db.Model(a_attribute_value_dateDB).Updates(*a_attribute_value_dateDB)
 		if query.Error != nil {

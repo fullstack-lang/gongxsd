@@ -81,12 +81,6 @@ type AllDB struct {
 	// Declation for basic field allDB.Name
 	Name_Data sql.NullString
 
-	// Declation for basic field allDB.MinOccurs
-	MinOccurs_Data sql.NullString
-
-	// Declation for basic field allDB.MaxOccurs
-	MaxOccurs_Data sql.NullString
-
 	// Declation for basic field allDB.OuterElementName
 	OuterElementName_Data sql.NullString
 
@@ -95,6 +89,12 @@ type AllDB struct {
 
 	// Declation for basic field allDB.Depth
 	Depth_Data sql.NullInt64
+
+	// Declation for basic field allDB.MinOccurs
+	MinOccurs_Data sql.NullString
+
+	// Declation for basic field allDB.MaxOccurs
+	MaxOccurs_Data sql.NullString
 	
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
@@ -120,15 +120,15 @@ type AllWOP struct {
 
 	Name string `xlsx:"1"`
 
-	MinOccurs string `xlsx:"2"`
+	OuterElementName string `xlsx:"2"`
 
-	MaxOccurs string `xlsx:"3"`
+	Order int `xlsx:"3"`
 
-	OuterElementName string `xlsx:"4"`
+	Depth int `xlsx:"4"`
 
-	Order int `xlsx:"5"`
+	MinOccurs string `xlsx:"5"`
 
-	Depth int `xlsx:"6"`
+	MaxOccurs string `xlsx:"6"`
 	// insertion for WOP pointer fields
 }
 
@@ -136,11 +136,11 @@ var All_Fields = []string{
 	// insertion for WOP basic fields
 	"ID",
 	"Name",
-	"MinOccurs",
-	"MaxOccurs",
 	"OuterElementName",
 	"Order",
 	"Depth",
+	"MinOccurs",
+	"MaxOccurs",
 }
 
 type BackRepoAllStruct struct {
@@ -562,12 +562,6 @@ func (allDB *AllDB) CopyBasicFieldsFromAll(all *models.All) {
 	allDB.Name_Data.String = all.Name
 	allDB.Name_Data.Valid = true
 
-	allDB.MinOccurs_Data.String = all.MinOccurs
-	allDB.MinOccurs_Data.Valid = true
-
-	allDB.MaxOccurs_Data.String = all.MaxOccurs
-	allDB.MaxOccurs_Data.Valid = true
-
 	allDB.OuterElementName_Data.String = all.OuterElementName
 	allDB.OuterElementName_Data.Valid = true
 
@@ -576,6 +570,12 @@ func (allDB *AllDB) CopyBasicFieldsFromAll(all *models.All) {
 
 	allDB.Depth_Data.Int64 = int64(all.Depth)
 	allDB.Depth_Data.Valid = true
+
+	allDB.MinOccurs_Data.String = all.MinOccurs
+	allDB.MinOccurs_Data.Valid = true
+
+	allDB.MaxOccurs_Data.String = all.MaxOccurs
+	allDB.MaxOccurs_Data.Valid = true
 }
 
 // CopyBasicFieldsFromAll_WOP
@@ -585,12 +585,6 @@ func (allDB *AllDB) CopyBasicFieldsFromAll_WOP(all *models.All_WOP) {
 	allDB.Name_Data.String = all.Name
 	allDB.Name_Data.Valid = true
 
-	allDB.MinOccurs_Data.String = all.MinOccurs
-	allDB.MinOccurs_Data.Valid = true
-
-	allDB.MaxOccurs_Data.String = all.MaxOccurs
-	allDB.MaxOccurs_Data.Valid = true
-
 	allDB.OuterElementName_Data.String = all.OuterElementName
 	allDB.OuterElementName_Data.Valid = true
 
@@ -599,6 +593,12 @@ func (allDB *AllDB) CopyBasicFieldsFromAll_WOP(all *models.All_WOP) {
 
 	allDB.Depth_Data.Int64 = int64(all.Depth)
 	allDB.Depth_Data.Valid = true
+
+	allDB.MinOccurs_Data.String = all.MinOccurs
+	allDB.MinOccurs_Data.Valid = true
+
+	allDB.MaxOccurs_Data.String = all.MaxOccurs
+	allDB.MaxOccurs_Data.Valid = true
 }
 
 // CopyBasicFieldsFromAllWOP
@@ -608,12 +608,6 @@ func (allDB *AllDB) CopyBasicFieldsFromAllWOP(all *AllWOP) {
 	allDB.Name_Data.String = all.Name
 	allDB.Name_Data.Valid = true
 
-	allDB.MinOccurs_Data.String = all.MinOccurs
-	allDB.MinOccurs_Data.Valid = true
-
-	allDB.MaxOccurs_Data.String = all.MaxOccurs
-	allDB.MaxOccurs_Data.Valid = true
-
 	allDB.OuterElementName_Data.String = all.OuterElementName
 	allDB.OuterElementName_Data.Valid = true
 
@@ -622,28 +616,34 @@ func (allDB *AllDB) CopyBasicFieldsFromAllWOP(all *AllWOP) {
 
 	allDB.Depth_Data.Int64 = int64(all.Depth)
 	allDB.Depth_Data.Valid = true
+
+	allDB.MinOccurs_Data.String = all.MinOccurs
+	allDB.MinOccurs_Data.Valid = true
+
+	allDB.MaxOccurs_Data.String = all.MaxOccurs
+	allDB.MaxOccurs_Data.Valid = true
 }
 
 // CopyBasicFieldsToAll
 func (allDB *AllDB) CopyBasicFieldsToAll(all *models.All) {
 	// insertion point for checkout of basic fields (back repo to stage)
 	all.Name = allDB.Name_Data.String
-	all.MinOccurs = allDB.MinOccurs_Data.String
-	all.MaxOccurs = allDB.MaxOccurs_Data.String
 	all.OuterElementName = allDB.OuterElementName_Data.String
 	all.Order = int(allDB.Order_Data.Int64)
 	all.Depth = int(allDB.Depth_Data.Int64)
+	all.MinOccurs = allDB.MinOccurs_Data.String
+	all.MaxOccurs = allDB.MaxOccurs_Data.String
 }
 
 // CopyBasicFieldsToAll_WOP
 func (allDB *AllDB) CopyBasicFieldsToAll_WOP(all *models.All_WOP) {
 	// insertion point for checkout of basic fields (back repo to stage)
 	all.Name = allDB.Name_Data.String
-	all.MinOccurs = allDB.MinOccurs_Data.String
-	all.MaxOccurs = allDB.MaxOccurs_Data.String
 	all.OuterElementName = allDB.OuterElementName_Data.String
 	all.Order = int(allDB.Order_Data.Int64)
 	all.Depth = int(allDB.Depth_Data.Int64)
+	all.MinOccurs = allDB.MinOccurs_Data.String
+	all.MaxOccurs = allDB.MaxOccurs_Data.String
 }
 
 // CopyBasicFieldsToAllWOP
@@ -651,11 +651,11 @@ func (allDB *AllDB) CopyBasicFieldsToAllWOP(all *AllWOP) {
 	all.ID = int(allDB.ID)
 	// insertion point for checkout of basic fields (back repo to stage)
 	all.Name = allDB.Name_Data.String
-	all.MinOccurs = allDB.MinOccurs_Data.String
-	all.MaxOccurs = allDB.MaxOccurs_Data.String
 	all.OuterElementName = allDB.OuterElementName_Data.String
 	all.Order = int(allDB.Order_Data.Int64)
 	all.Depth = int(allDB.Depth_Data.Int64)
+	all.MinOccurs = allDB.MinOccurs_Data.String
+	all.MaxOccurs = allDB.MaxOccurs_Data.String
 }
 
 // Backup generates a json file from a slice of all AllDB instances in the backrepo

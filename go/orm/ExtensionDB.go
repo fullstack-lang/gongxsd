@@ -83,6 +83,18 @@ type ExtensionDB struct {
 	// Declation for basic field extensionDB.OuterElementName
 	OuterElementName_Data sql.NullString
 
+	// Declation for basic field extensionDB.Order
+	Order_Data sql.NullInt64
+
+	// Declation for basic field extensionDB.Depth
+	Depth_Data sql.NullInt64
+
+	// Declation for basic field extensionDB.MinOccurs
+	MinOccurs_Data sql.NullString
+
+	// Declation for basic field extensionDB.MaxOccurs
+	MaxOccurs_Data sql.NullString
+
 	// Declation for basic field extensionDB.Base
 	Base_Data sql.NullString
 
@@ -115,9 +127,17 @@ type ExtensionWOP struct {
 
 	OuterElementName string `xlsx:"2"`
 
-	Base string `xlsx:"3"`
+	Order int `xlsx:"3"`
 
-	Ref string `xlsx:"4"`
+	Depth int `xlsx:"4"`
+
+	MinOccurs string `xlsx:"5"`
+
+	MaxOccurs string `xlsx:"6"`
+
+	Base string `xlsx:"7"`
+
+	Ref string `xlsx:"8"`
 	// insertion for WOP pointer fields
 }
 
@@ -126,6 +146,10 @@ var Extension_Fields = []string{
 	"ID",
 	"Name",
 	"OuterElementName",
+	"Order",
+	"Depth",
+	"MinOccurs",
+	"MaxOccurs",
 	"Base",
 	"Ref",
 }
@@ -562,6 +586,18 @@ func (extensionDB *ExtensionDB) CopyBasicFieldsFromExtension(extension *models.E
 	extensionDB.OuterElementName_Data.String = extension.OuterElementName
 	extensionDB.OuterElementName_Data.Valid = true
 
+	extensionDB.Order_Data.Int64 = int64(extension.Order)
+	extensionDB.Order_Data.Valid = true
+
+	extensionDB.Depth_Data.Int64 = int64(extension.Depth)
+	extensionDB.Depth_Data.Valid = true
+
+	extensionDB.MinOccurs_Data.String = extension.MinOccurs
+	extensionDB.MinOccurs_Data.Valid = true
+
+	extensionDB.MaxOccurs_Data.String = extension.MaxOccurs
+	extensionDB.MaxOccurs_Data.Valid = true
+
 	extensionDB.Base_Data.String = extension.Base
 	extensionDB.Base_Data.Valid = true
 
@@ -578,6 +614,18 @@ func (extensionDB *ExtensionDB) CopyBasicFieldsFromExtension_WOP(extension *mode
 
 	extensionDB.OuterElementName_Data.String = extension.OuterElementName
 	extensionDB.OuterElementName_Data.Valid = true
+
+	extensionDB.Order_Data.Int64 = int64(extension.Order)
+	extensionDB.Order_Data.Valid = true
+
+	extensionDB.Depth_Data.Int64 = int64(extension.Depth)
+	extensionDB.Depth_Data.Valid = true
+
+	extensionDB.MinOccurs_Data.String = extension.MinOccurs
+	extensionDB.MinOccurs_Data.Valid = true
+
+	extensionDB.MaxOccurs_Data.String = extension.MaxOccurs
+	extensionDB.MaxOccurs_Data.Valid = true
 
 	extensionDB.Base_Data.String = extension.Base
 	extensionDB.Base_Data.Valid = true
@@ -596,6 +644,18 @@ func (extensionDB *ExtensionDB) CopyBasicFieldsFromExtensionWOP(extension *Exten
 	extensionDB.OuterElementName_Data.String = extension.OuterElementName
 	extensionDB.OuterElementName_Data.Valid = true
 
+	extensionDB.Order_Data.Int64 = int64(extension.Order)
+	extensionDB.Order_Data.Valid = true
+
+	extensionDB.Depth_Data.Int64 = int64(extension.Depth)
+	extensionDB.Depth_Data.Valid = true
+
+	extensionDB.MinOccurs_Data.String = extension.MinOccurs
+	extensionDB.MinOccurs_Data.Valid = true
+
+	extensionDB.MaxOccurs_Data.String = extension.MaxOccurs
+	extensionDB.MaxOccurs_Data.Valid = true
+
 	extensionDB.Base_Data.String = extension.Base
 	extensionDB.Base_Data.Valid = true
 
@@ -608,6 +668,10 @@ func (extensionDB *ExtensionDB) CopyBasicFieldsToExtension(extension *models.Ext
 	// insertion point for checkout of basic fields (back repo to stage)
 	extension.Name = extensionDB.Name_Data.String
 	extension.OuterElementName = extensionDB.OuterElementName_Data.String
+	extension.Order = int(extensionDB.Order_Data.Int64)
+	extension.Depth = int(extensionDB.Depth_Data.Int64)
+	extension.MinOccurs = extensionDB.MinOccurs_Data.String
+	extension.MaxOccurs = extensionDB.MaxOccurs_Data.String
 	extension.Base = extensionDB.Base_Data.String
 	extension.Ref = extensionDB.Ref_Data.String
 }
@@ -617,6 +681,10 @@ func (extensionDB *ExtensionDB) CopyBasicFieldsToExtension_WOP(extension *models
 	// insertion point for checkout of basic fields (back repo to stage)
 	extension.Name = extensionDB.Name_Data.String
 	extension.OuterElementName = extensionDB.OuterElementName_Data.String
+	extension.Order = int(extensionDB.Order_Data.Int64)
+	extension.Depth = int(extensionDB.Depth_Data.Int64)
+	extension.MinOccurs = extensionDB.MinOccurs_Data.String
+	extension.MaxOccurs = extensionDB.MaxOccurs_Data.String
 	extension.Base = extensionDB.Base_Data.String
 	extension.Ref = extensionDB.Ref_Data.String
 }
@@ -627,6 +695,10 @@ func (extensionDB *ExtensionDB) CopyBasicFieldsToExtensionWOP(extension *Extensi
 	// insertion point for checkout of basic fields (back repo to stage)
 	extension.Name = extensionDB.Name_Data.String
 	extension.OuterElementName = extensionDB.OuterElementName_Data.String
+	extension.Order = int(extensionDB.Order_Data.Int64)
+	extension.Depth = int(extensionDB.Depth_Data.Int64)
+	extension.MinOccurs = extensionDB.MinOccurs_Data.String
+	extension.MaxOccurs = extensionDB.MaxOccurs_Data.String
 	extension.Base = extensionDB.Base_Data.String
 	extension.Ref = extensionDB.Ref_Data.String
 }

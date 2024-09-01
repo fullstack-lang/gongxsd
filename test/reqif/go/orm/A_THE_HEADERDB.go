@@ -47,8 +47,9 @@ type A_THE_HEADERAPI struct {
 type A_THE_HEADERPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
 
-	// field REQ_IF_HEADER is a slice of pointers to another Struct (optional or 0..1)
-	REQ_IF_HEADER IntSlice `gorm:"type:TEXT"`
+	// field REQ_IF_HEADER is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	REQ_IF_HEADERID sql.NullInt64
 }
 
 // A_THE_HEADERDB describes a a_the_header in the database
@@ -214,22 +215,16 @@ func (backRepoA_THE_HEADER *BackRepoA_THE_HEADERStruct) CommitPhaseTwoInstance(b
 		a_the_headerDB.CopyBasicFieldsFromA_THE_HEADER(a_the_header)
 
 		// insertion point for translating pointers encodings into actual pointers
-		// 1. reset
-		a_the_headerDB.A_THE_HEADERPointersEncoding.REQ_IF_HEADER = make([]int, 0)
-		// 2. encode
-		for _, req_if_headerAssocEnd := range a_the_header.REQ_IF_HEADER {
-			req_if_headerAssocEnd_DB :=
-				backRepo.BackRepoREQ_IF_HEADER.GetREQ_IF_HEADERDBFromREQ_IF_HEADERPtr(req_if_headerAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the req_if_headerAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if req_if_headerAssocEnd_DB == nil {
-				continue
+		// commit pointer value a_the_header.REQ_IF_HEADER translates to updating the a_the_header.REQ_IF_HEADERID
+		a_the_headerDB.REQ_IF_HEADERID.Valid = true // allow for a 0 value (nil association)
+		if a_the_header.REQ_IF_HEADER != nil {
+			if REQ_IF_HEADERId, ok := backRepo.BackRepoREQ_IF_HEADER.Map_REQ_IF_HEADERPtr_REQ_IF_HEADERDBID[a_the_header.REQ_IF_HEADER]; ok {
+				a_the_headerDB.REQ_IF_HEADERID.Int64 = int64(REQ_IF_HEADERId)
+				a_the_headerDB.REQ_IF_HEADERID.Valid = true
 			}
-			
-			a_the_headerDB.A_THE_HEADERPointersEncoding.REQ_IF_HEADER =
-				append(a_the_headerDB.A_THE_HEADERPointersEncoding.REQ_IF_HEADER, int(req_if_headerAssocEnd_DB.ID))
+		} else {
+			a_the_headerDB.REQ_IF_HEADERID.Int64 = 0
+			a_the_headerDB.REQ_IF_HEADERID.Valid = true
 		}
 
 		query := backRepoA_THE_HEADER.db.Save(&a_the_headerDB)
@@ -345,15 +340,11 @@ func (backRepoA_THE_HEADER *BackRepoA_THE_HEADERStruct) CheckoutPhaseTwoInstance
 func (a_the_headerDB *A_THE_HEADERDB) DecodePointers(backRepo *BackRepoStruct, a_the_header *models.A_THE_HEADER) {
 
 	// insertion point for checkout of pointer encoding
-	// This loop redeem a_the_header.REQ_IF_HEADER in the stage from the encode in the back repo
-	// It parses all REQ_IF_HEADERDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	a_the_header.REQ_IF_HEADER = a_the_header.REQ_IF_HEADER[:0]
-	for _, _REQ_IF_HEADERid := range a_the_headerDB.A_THE_HEADERPointersEncoding.REQ_IF_HEADER {
-		a_the_header.REQ_IF_HEADER = append(a_the_header.REQ_IF_HEADER, backRepo.BackRepoREQ_IF_HEADER.Map_REQ_IF_HEADERDBID_REQ_IF_HEADERPtr[uint(_REQ_IF_HEADERid)])
+	// REQ_IF_HEADER field
+	a_the_header.REQ_IF_HEADER = nil
+	if a_the_headerDB.REQ_IF_HEADERID.Int64 != 0 {
+		a_the_header.REQ_IF_HEADER = backRepo.BackRepoREQ_IF_HEADER.Map_REQ_IF_HEADERDBID_REQ_IF_HEADERPtr[uint(a_the_headerDB.REQ_IF_HEADERID.Int64)]
 	}
-
 	return
 }
 
@@ -582,6 +573,12 @@ func (backRepoA_THE_HEADER *BackRepoA_THE_HEADERStruct) RestorePhaseTwo() {
 		_ = a_the_headerDB
 
 		// insertion point for reindexing pointers encoding
+		// reindexing REQ_IF_HEADER field
+		if a_the_headerDB.REQ_IF_HEADERID.Int64 != 0 {
+			a_the_headerDB.REQ_IF_HEADERID.Int64 = int64(BackRepoREQ_IF_HEADERid_atBckpTime_newID[uint(a_the_headerDB.REQ_IF_HEADERID.Int64)])
+			a_the_headerDB.REQ_IF_HEADERID.Valid = true
+		}
+
 		// update databse with new index encoding
 		query := backRepoA_THE_HEADER.db.Model(a_the_headerDB).Updates(*a_the_headerDB)
 		if query.Error != nil {

@@ -47,8 +47,9 @@ type A_ALTERNATIVE_IDAPI struct {
 type A_ALTERNATIVE_IDPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
 
-	// field ALTERNATIVE_ID is a slice of pointers to another Struct (optional or 0..1)
-	ALTERNATIVE_ID IntSlice `gorm:"type:TEXT"`
+	// field ALTERNATIVE_ID is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	ALTERNATIVE_IDID sql.NullInt64
 }
 
 // A_ALTERNATIVE_IDDB describes a a_alternative_id in the database
@@ -214,22 +215,16 @@ func (backRepoA_ALTERNATIVE_ID *BackRepoA_ALTERNATIVE_IDStruct) CommitPhaseTwoIn
 		a_alternative_idDB.CopyBasicFieldsFromA_ALTERNATIVE_ID(a_alternative_id)
 
 		// insertion point for translating pointers encodings into actual pointers
-		// 1. reset
-		a_alternative_idDB.A_ALTERNATIVE_IDPointersEncoding.ALTERNATIVE_ID = make([]int, 0)
-		// 2. encode
-		for _, alternative_idAssocEnd := range a_alternative_id.ALTERNATIVE_ID {
-			alternative_idAssocEnd_DB :=
-				backRepo.BackRepoALTERNATIVE_ID.GetALTERNATIVE_IDDBFromALTERNATIVE_IDPtr(alternative_idAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the alternative_idAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if alternative_idAssocEnd_DB == nil {
-				continue
+		// commit pointer value a_alternative_id.ALTERNATIVE_ID translates to updating the a_alternative_id.ALTERNATIVE_IDID
+		a_alternative_idDB.ALTERNATIVE_IDID.Valid = true // allow for a 0 value (nil association)
+		if a_alternative_id.ALTERNATIVE_ID != nil {
+			if ALTERNATIVE_IDId, ok := backRepo.BackRepoALTERNATIVE_ID.Map_ALTERNATIVE_IDPtr_ALTERNATIVE_IDDBID[a_alternative_id.ALTERNATIVE_ID]; ok {
+				a_alternative_idDB.ALTERNATIVE_IDID.Int64 = int64(ALTERNATIVE_IDId)
+				a_alternative_idDB.ALTERNATIVE_IDID.Valid = true
 			}
-			
-			a_alternative_idDB.A_ALTERNATIVE_IDPointersEncoding.ALTERNATIVE_ID =
-				append(a_alternative_idDB.A_ALTERNATIVE_IDPointersEncoding.ALTERNATIVE_ID, int(alternative_idAssocEnd_DB.ID))
+		} else {
+			a_alternative_idDB.ALTERNATIVE_IDID.Int64 = 0
+			a_alternative_idDB.ALTERNATIVE_IDID.Valid = true
 		}
 
 		query := backRepoA_ALTERNATIVE_ID.db.Save(&a_alternative_idDB)
@@ -345,15 +340,11 @@ func (backRepoA_ALTERNATIVE_ID *BackRepoA_ALTERNATIVE_IDStruct) CheckoutPhaseTwo
 func (a_alternative_idDB *A_ALTERNATIVE_IDDB) DecodePointers(backRepo *BackRepoStruct, a_alternative_id *models.A_ALTERNATIVE_ID) {
 
 	// insertion point for checkout of pointer encoding
-	// This loop redeem a_alternative_id.ALTERNATIVE_ID in the stage from the encode in the back repo
-	// It parses all ALTERNATIVE_IDDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	a_alternative_id.ALTERNATIVE_ID = a_alternative_id.ALTERNATIVE_ID[:0]
-	for _, _ALTERNATIVE_IDid := range a_alternative_idDB.A_ALTERNATIVE_IDPointersEncoding.ALTERNATIVE_ID {
-		a_alternative_id.ALTERNATIVE_ID = append(a_alternative_id.ALTERNATIVE_ID, backRepo.BackRepoALTERNATIVE_ID.Map_ALTERNATIVE_IDDBID_ALTERNATIVE_IDPtr[uint(_ALTERNATIVE_IDid)])
+	// ALTERNATIVE_ID field
+	a_alternative_id.ALTERNATIVE_ID = nil
+	if a_alternative_idDB.ALTERNATIVE_IDID.Int64 != 0 {
+		a_alternative_id.ALTERNATIVE_ID = backRepo.BackRepoALTERNATIVE_ID.Map_ALTERNATIVE_IDDBID_ALTERNATIVE_IDPtr[uint(a_alternative_idDB.ALTERNATIVE_IDID.Int64)]
 	}
-
 	return
 }
 
@@ -582,6 +573,12 @@ func (backRepoA_ALTERNATIVE_ID *BackRepoA_ALTERNATIVE_IDStruct) RestorePhaseTwo(
 		_ = a_alternative_idDB
 
 		// insertion point for reindexing pointers encoding
+		// reindexing ALTERNATIVE_ID field
+		if a_alternative_idDB.ALTERNATIVE_IDID.Int64 != 0 {
+			a_alternative_idDB.ALTERNATIVE_IDID.Int64 = int64(BackRepoALTERNATIVE_IDid_atBckpTime_newID[uint(a_alternative_idDB.ALTERNATIVE_IDID.Int64)])
+			a_alternative_idDB.ALTERNATIVE_IDID.Valid = true
+		}
+
 		// update databse with new index encoding
 		query := backRepoA_ALTERNATIVE_ID.db.Model(a_alternative_idDB).Updates(*a_alternative_idDB)
 		if query.Error != nil {

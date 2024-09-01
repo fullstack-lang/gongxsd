@@ -81,12 +81,6 @@ type ChoiceDB struct {
 	// Declation for basic field choiceDB.Name
 	Name_Data sql.NullString
 
-	// Declation for basic field choiceDB.MinOccurs
-	MinOccurs_Data sql.NullString
-
-	// Declation for basic field choiceDB.MaxOccurs
-	MaxOccurs_Data sql.NullString
-
 	// Declation for basic field choiceDB.OuterElementName
 	OuterElementName_Data sql.NullString
 
@@ -95,6 +89,12 @@ type ChoiceDB struct {
 
 	// Declation for basic field choiceDB.Depth
 	Depth_Data sql.NullInt64
+
+	// Declation for basic field choiceDB.MinOccurs
+	MinOccurs_Data sql.NullString
+
+	// Declation for basic field choiceDB.MaxOccurs
+	MaxOccurs_Data sql.NullString
 
 	// Declation for basic field choiceDB.IsDuplicatedInXSD
 	// provide the sql storage for the boolan
@@ -124,15 +124,15 @@ type ChoiceWOP struct {
 
 	Name string `xlsx:"1"`
 
-	MinOccurs string `xlsx:"2"`
+	OuterElementName string `xlsx:"2"`
 
-	MaxOccurs string `xlsx:"3"`
+	Order int `xlsx:"3"`
 
-	OuterElementName string `xlsx:"4"`
+	Depth int `xlsx:"4"`
 
-	Order int `xlsx:"5"`
+	MinOccurs string `xlsx:"5"`
 
-	Depth int `xlsx:"6"`
+	MaxOccurs string `xlsx:"6"`
 
 	IsDuplicatedInXSD bool `xlsx:"7"`
 	// insertion for WOP pointer fields
@@ -142,11 +142,11 @@ var Choice_Fields = []string{
 	// insertion for WOP basic fields
 	"ID",
 	"Name",
-	"MinOccurs",
-	"MaxOccurs",
 	"OuterElementName",
 	"Order",
 	"Depth",
+	"MinOccurs",
+	"MaxOccurs",
 	"IsDuplicatedInXSD",
 }
 
@@ -569,12 +569,6 @@ func (choiceDB *ChoiceDB) CopyBasicFieldsFromChoice(choice *models.Choice) {
 	choiceDB.Name_Data.String = choice.Name
 	choiceDB.Name_Data.Valid = true
 
-	choiceDB.MinOccurs_Data.String = choice.MinOccurs
-	choiceDB.MinOccurs_Data.Valid = true
-
-	choiceDB.MaxOccurs_Data.String = choice.MaxOccurs
-	choiceDB.MaxOccurs_Data.Valid = true
-
 	choiceDB.OuterElementName_Data.String = choice.OuterElementName
 	choiceDB.OuterElementName_Data.Valid = true
 
@@ -583,6 +577,12 @@ func (choiceDB *ChoiceDB) CopyBasicFieldsFromChoice(choice *models.Choice) {
 
 	choiceDB.Depth_Data.Int64 = int64(choice.Depth)
 	choiceDB.Depth_Data.Valid = true
+
+	choiceDB.MinOccurs_Data.String = choice.MinOccurs
+	choiceDB.MinOccurs_Data.Valid = true
+
+	choiceDB.MaxOccurs_Data.String = choice.MaxOccurs
+	choiceDB.MaxOccurs_Data.Valid = true
 
 	choiceDB.IsDuplicatedInXSD_Data.Bool = choice.IsDuplicatedInXSD
 	choiceDB.IsDuplicatedInXSD_Data.Valid = true
@@ -595,12 +595,6 @@ func (choiceDB *ChoiceDB) CopyBasicFieldsFromChoice_WOP(choice *models.Choice_WO
 	choiceDB.Name_Data.String = choice.Name
 	choiceDB.Name_Data.Valid = true
 
-	choiceDB.MinOccurs_Data.String = choice.MinOccurs
-	choiceDB.MinOccurs_Data.Valid = true
-
-	choiceDB.MaxOccurs_Data.String = choice.MaxOccurs
-	choiceDB.MaxOccurs_Data.Valid = true
-
 	choiceDB.OuterElementName_Data.String = choice.OuterElementName
 	choiceDB.OuterElementName_Data.Valid = true
 
@@ -609,6 +603,12 @@ func (choiceDB *ChoiceDB) CopyBasicFieldsFromChoice_WOP(choice *models.Choice_WO
 
 	choiceDB.Depth_Data.Int64 = int64(choice.Depth)
 	choiceDB.Depth_Data.Valid = true
+
+	choiceDB.MinOccurs_Data.String = choice.MinOccurs
+	choiceDB.MinOccurs_Data.Valid = true
+
+	choiceDB.MaxOccurs_Data.String = choice.MaxOccurs
+	choiceDB.MaxOccurs_Data.Valid = true
 
 	choiceDB.IsDuplicatedInXSD_Data.Bool = choice.IsDuplicatedInXSD
 	choiceDB.IsDuplicatedInXSD_Data.Valid = true
@@ -621,12 +621,6 @@ func (choiceDB *ChoiceDB) CopyBasicFieldsFromChoiceWOP(choice *ChoiceWOP) {
 	choiceDB.Name_Data.String = choice.Name
 	choiceDB.Name_Data.Valid = true
 
-	choiceDB.MinOccurs_Data.String = choice.MinOccurs
-	choiceDB.MinOccurs_Data.Valid = true
-
-	choiceDB.MaxOccurs_Data.String = choice.MaxOccurs
-	choiceDB.MaxOccurs_Data.Valid = true
-
 	choiceDB.OuterElementName_Data.String = choice.OuterElementName
 	choiceDB.OuterElementName_Data.Valid = true
 
@@ -636,6 +630,12 @@ func (choiceDB *ChoiceDB) CopyBasicFieldsFromChoiceWOP(choice *ChoiceWOP) {
 	choiceDB.Depth_Data.Int64 = int64(choice.Depth)
 	choiceDB.Depth_Data.Valid = true
 
+	choiceDB.MinOccurs_Data.String = choice.MinOccurs
+	choiceDB.MinOccurs_Data.Valid = true
+
+	choiceDB.MaxOccurs_Data.String = choice.MaxOccurs
+	choiceDB.MaxOccurs_Data.Valid = true
+
 	choiceDB.IsDuplicatedInXSD_Data.Bool = choice.IsDuplicatedInXSD
 	choiceDB.IsDuplicatedInXSD_Data.Valid = true
 }
@@ -644,11 +644,11 @@ func (choiceDB *ChoiceDB) CopyBasicFieldsFromChoiceWOP(choice *ChoiceWOP) {
 func (choiceDB *ChoiceDB) CopyBasicFieldsToChoice(choice *models.Choice) {
 	// insertion point for checkout of basic fields (back repo to stage)
 	choice.Name = choiceDB.Name_Data.String
-	choice.MinOccurs = choiceDB.MinOccurs_Data.String
-	choice.MaxOccurs = choiceDB.MaxOccurs_Data.String
 	choice.OuterElementName = choiceDB.OuterElementName_Data.String
 	choice.Order = int(choiceDB.Order_Data.Int64)
 	choice.Depth = int(choiceDB.Depth_Data.Int64)
+	choice.MinOccurs = choiceDB.MinOccurs_Data.String
+	choice.MaxOccurs = choiceDB.MaxOccurs_Data.String
 	choice.IsDuplicatedInXSD = choiceDB.IsDuplicatedInXSD_Data.Bool
 }
 
@@ -656,11 +656,11 @@ func (choiceDB *ChoiceDB) CopyBasicFieldsToChoice(choice *models.Choice) {
 func (choiceDB *ChoiceDB) CopyBasicFieldsToChoice_WOP(choice *models.Choice_WOP) {
 	// insertion point for checkout of basic fields (back repo to stage)
 	choice.Name = choiceDB.Name_Data.String
-	choice.MinOccurs = choiceDB.MinOccurs_Data.String
-	choice.MaxOccurs = choiceDB.MaxOccurs_Data.String
 	choice.OuterElementName = choiceDB.OuterElementName_Data.String
 	choice.Order = int(choiceDB.Order_Data.Int64)
 	choice.Depth = int(choiceDB.Depth_Data.Int64)
+	choice.MinOccurs = choiceDB.MinOccurs_Data.String
+	choice.MaxOccurs = choiceDB.MaxOccurs_Data.String
 	choice.IsDuplicatedInXSD = choiceDB.IsDuplicatedInXSD_Data.Bool
 }
 
@@ -669,11 +669,11 @@ func (choiceDB *ChoiceDB) CopyBasicFieldsToChoiceWOP(choice *ChoiceWOP) {
 	choice.ID = int(choiceDB.ID)
 	// insertion point for checkout of basic fields (back repo to stage)
 	choice.Name = choiceDB.Name_Data.String
-	choice.MinOccurs = choiceDB.MinOccurs_Data.String
-	choice.MaxOccurs = choiceDB.MaxOccurs_Data.String
 	choice.OuterElementName = choiceDB.OuterElementName_Data.String
 	choice.Order = int(choiceDB.Order_Data.Int64)
 	choice.Depth = int(choiceDB.Depth_Data.Int64)
+	choice.MinOccurs = choiceDB.MinOccurs_Data.String
+	choice.MaxOccurs = choiceDB.MaxOccurs_Data.String
 	choice.IsDuplicatedInXSD = choiceDB.IsDuplicatedInXSD_Data.Bool
 }
 

@@ -47,8 +47,9 @@ type A_SPEC_RELATIONSAPI struct {
 type A_SPEC_RELATIONSPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
 
-	// field SPEC_RELATION is a slice of pointers to another Struct (optional or 0..1)
-	SPEC_RELATION IntSlice `gorm:"type:TEXT"`
+	// field SPEC_RELATION is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	SPEC_RELATIONID sql.NullInt64
 }
 
 // A_SPEC_RELATIONSDB describes a a_spec_relations in the database
@@ -214,22 +215,16 @@ func (backRepoA_SPEC_RELATIONS *BackRepoA_SPEC_RELATIONSStruct) CommitPhaseTwoIn
 		a_spec_relationsDB.CopyBasicFieldsFromA_SPEC_RELATIONS(a_spec_relations)
 
 		// insertion point for translating pointers encodings into actual pointers
-		// 1. reset
-		a_spec_relationsDB.A_SPEC_RELATIONSPointersEncoding.SPEC_RELATION = make([]int, 0)
-		// 2. encode
-		for _, spec_relationAssocEnd := range a_spec_relations.SPEC_RELATION {
-			spec_relationAssocEnd_DB :=
-				backRepo.BackRepoSPEC_RELATION.GetSPEC_RELATIONDBFromSPEC_RELATIONPtr(spec_relationAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the spec_relationAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if spec_relationAssocEnd_DB == nil {
-				continue
+		// commit pointer value a_spec_relations.SPEC_RELATION translates to updating the a_spec_relations.SPEC_RELATIONID
+		a_spec_relationsDB.SPEC_RELATIONID.Valid = true // allow for a 0 value (nil association)
+		if a_spec_relations.SPEC_RELATION != nil {
+			if SPEC_RELATIONId, ok := backRepo.BackRepoSPEC_RELATION.Map_SPEC_RELATIONPtr_SPEC_RELATIONDBID[a_spec_relations.SPEC_RELATION]; ok {
+				a_spec_relationsDB.SPEC_RELATIONID.Int64 = int64(SPEC_RELATIONId)
+				a_spec_relationsDB.SPEC_RELATIONID.Valid = true
 			}
-			
-			a_spec_relationsDB.A_SPEC_RELATIONSPointersEncoding.SPEC_RELATION =
-				append(a_spec_relationsDB.A_SPEC_RELATIONSPointersEncoding.SPEC_RELATION, int(spec_relationAssocEnd_DB.ID))
+		} else {
+			a_spec_relationsDB.SPEC_RELATIONID.Int64 = 0
+			a_spec_relationsDB.SPEC_RELATIONID.Valid = true
 		}
 
 		query := backRepoA_SPEC_RELATIONS.db.Save(&a_spec_relationsDB)
@@ -345,15 +340,11 @@ func (backRepoA_SPEC_RELATIONS *BackRepoA_SPEC_RELATIONSStruct) CheckoutPhaseTwo
 func (a_spec_relationsDB *A_SPEC_RELATIONSDB) DecodePointers(backRepo *BackRepoStruct, a_spec_relations *models.A_SPEC_RELATIONS) {
 
 	// insertion point for checkout of pointer encoding
-	// This loop redeem a_spec_relations.SPEC_RELATION in the stage from the encode in the back repo
-	// It parses all SPEC_RELATIONDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	a_spec_relations.SPEC_RELATION = a_spec_relations.SPEC_RELATION[:0]
-	for _, _SPEC_RELATIONid := range a_spec_relationsDB.A_SPEC_RELATIONSPointersEncoding.SPEC_RELATION {
-		a_spec_relations.SPEC_RELATION = append(a_spec_relations.SPEC_RELATION, backRepo.BackRepoSPEC_RELATION.Map_SPEC_RELATIONDBID_SPEC_RELATIONPtr[uint(_SPEC_RELATIONid)])
+	// SPEC_RELATION field
+	a_spec_relations.SPEC_RELATION = nil
+	if a_spec_relationsDB.SPEC_RELATIONID.Int64 != 0 {
+		a_spec_relations.SPEC_RELATION = backRepo.BackRepoSPEC_RELATION.Map_SPEC_RELATIONDBID_SPEC_RELATIONPtr[uint(a_spec_relationsDB.SPEC_RELATIONID.Int64)]
 	}
-
 	return
 }
 
@@ -582,6 +573,12 @@ func (backRepoA_SPEC_RELATIONS *BackRepoA_SPEC_RELATIONSStruct) RestorePhaseTwo(
 		_ = a_spec_relationsDB
 
 		// insertion point for reindexing pointers encoding
+		// reindexing SPEC_RELATION field
+		if a_spec_relationsDB.SPEC_RELATIONID.Int64 != 0 {
+			a_spec_relationsDB.SPEC_RELATIONID.Int64 = int64(BackRepoSPEC_RELATIONid_atBckpTime_newID[uint(a_spec_relationsDB.SPEC_RELATIONID.Int64)])
+			a_spec_relationsDB.SPEC_RELATIONID.Valid = true
+		}
+
 		// update databse with new index encoding
 		query := backRepoA_SPEC_RELATIONS.db.Model(a_spec_relationsDB).Updates(*a_spec_relationsDB)
 		if query.Error != nil {

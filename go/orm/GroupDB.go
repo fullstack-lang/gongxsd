@@ -110,6 +110,12 @@ type GroupDB struct {
 
 	// Declation for basic field groupDB.Depth
 	Depth_Data sql.NullInt64
+
+	// Declation for basic field groupDB.MinOccurs
+	MinOccurs_Data sql.NullString
+
+	// Declation for basic field groupDB.MaxOccurs
+	MaxOccurs_Data sql.NullString
 	
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
@@ -150,6 +156,10 @@ type GroupWOP struct {
 	Order int `xlsx:"8"`
 
 	Depth int `xlsx:"9"`
+
+	MinOccurs string `xlsx:"10"`
+
+	MaxOccurs string `xlsx:"11"`
 	// insertion for WOP pointer fields
 }
 
@@ -165,6 +175,8 @@ var Group_Fields = []string{
 	"OuterElementName",
 	"Order",
 	"Depth",
+	"MinOccurs",
+	"MaxOccurs",
 }
 
 type BackRepoGroupStruct struct {
@@ -626,6 +638,12 @@ func (groupDB *GroupDB) CopyBasicFieldsFromGroup(group *models.Group) {
 
 	groupDB.Depth_Data.Int64 = int64(group.Depth)
 	groupDB.Depth_Data.Valid = true
+
+	groupDB.MinOccurs_Data.String = group.MinOccurs
+	groupDB.MinOccurs_Data.Valid = true
+
+	groupDB.MaxOccurs_Data.String = group.MaxOccurs
+	groupDB.MaxOccurs_Data.Valid = true
 }
 
 // CopyBasicFieldsFromGroup_WOP
@@ -658,6 +676,12 @@ func (groupDB *GroupDB) CopyBasicFieldsFromGroup_WOP(group *models.Group_WOP) {
 
 	groupDB.Depth_Data.Int64 = int64(group.Depth)
 	groupDB.Depth_Data.Valid = true
+
+	groupDB.MinOccurs_Data.String = group.MinOccurs
+	groupDB.MinOccurs_Data.Valid = true
+
+	groupDB.MaxOccurs_Data.String = group.MaxOccurs
+	groupDB.MaxOccurs_Data.Valid = true
 }
 
 // CopyBasicFieldsFromGroupWOP
@@ -690,6 +714,12 @@ func (groupDB *GroupDB) CopyBasicFieldsFromGroupWOP(group *GroupWOP) {
 
 	groupDB.Depth_Data.Int64 = int64(group.Depth)
 	groupDB.Depth_Data.Valid = true
+
+	groupDB.MinOccurs_Data.String = group.MinOccurs
+	groupDB.MinOccurs_Data.Valid = true
+
+	groupDB.MaxOccurs_Data.String = group.MaxOccurs
+	groupDB.MaxOccurs_Data.Valid = true
 }
 
 // CopyBasicFieldsToGroup
@@ -704,6 +734,8 @@ func (groupDB *GroupDB) CopyBasicFieldsToGroup(group *models.Group) {
 	group.OuterElementName = groupDB.OuterElementName_Data.String
 	group.Order = int(groupDB.Order_Data.Int64)
 	group.Depth = int(groupDB.Depth_Data.Int64)
+	group.MinOccurs = groupDB.MinOccurs_Data.String
+	group.MaxOccurs = groupDB.MaxOccurs_Data.String
 }
 
 // CopyBasicFieldsToGroup_WOP
@@ -718,6 +750,8 @@ func (groupDB *GroupDB) CopyBasicFieldsToGroup_WOP(group *models.Group_WOP) {
 	group.OuterElementName = groupDB.OuterElementName_Data.String
 	group.Order = int(groupDB.Order_Data.Int64)
 	group.Depth = int(groupDB.Depth_Data.Int64)
+	group.MinOccurs = groupDB.MinOccurs_Data.String
+	group.MaxOccurs = groupDB.MaxOccurs_Data.String
 }
 
 // CopyBasicFieldsToGroupWOP
@@ -733,6 +767,8 @@ func (groupDB *GroupDB) CopyBasicFieldsToGroupWOP(group *GroupWOP) {
 	group.OuterElementName = groupDB.OuterElementName_Data.String
 	group.Order = int(groupDB.Order_Data.Int64)
 	group.Depth = int(groupDB.Depth_Data.Int64)
+	group.MinOccurs = groupDB.MinOccurs_Data.String
+	group.MaxOccurs = groupDB.MaxOccurs_Data.String
 }
 
 // Backup generates a json file from a slice of all GroupDB instances in the backrepo

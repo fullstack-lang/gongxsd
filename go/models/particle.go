@@ -9,6 +9,8 @@ package models
 // can occur in the content model of an XML schema, whether it's an individual element or a grouping of elements.
 type Particle interface {
 	GetOrder() int
+	GetParent() Particle
+	SetParentAndChildren(Particle) //
 }
 
 var _ Particle = (*Element)(nil)
@@ -23,9 +25,21 @@ type ParticleAbstract struct {
 	// It is important to preserve the order output that is defined in the xsd
 	Order int `xml:"-"`
 	Depth int `xml:"-"`
+
+	Parent   Particle
+	Children []Particle
 }
 
 // GetOrder implements Particle.
 func (p *ParticleAbstract) GetOrder() int {
 	return p.Order
+}
+
+// GetOrder implements Particle.
+func (p *ParticleAbstract) GetParent() Particle {
+	return p.Parent
+}
+
+func (p *ParticleAbstract) GetChildren() Particle {
+	return p.GetChildren()
 }

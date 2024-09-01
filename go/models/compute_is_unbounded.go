@@ -7,8 +7,10 @@ func computeIsBounded(particle Particle) (res bool) {
 		if v.GetIsLocalyUnbounded() {
 			return true
 		} else {
-			// check if outer particle is unbounded
-
+			// check if outer particle is unbounded recursively
+			if parent := particle.GetParent(); parent != nil {
+				return computeIsBounded(parent)
+			}
 		}
 	}
 

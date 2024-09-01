@@ -20,6 +20,9 @@ type ModelGroup struct {
 	Groups    []*Group    `xml:"group"`
 
 	Elements []*Element `xml:"element"`
+
+	ParticleAbstract
+	OccurrenceDefinitionAbstract
 }
 
 func (modelGroup *ModelGroup) nameRecursively(name string) {
@@ -136,13 +139,15 @@ func (modelGroup *ModelGroup) generateElements(
 				// 1. a simple type
 				*fields += "\n\n\t// generated from element \"" + elem.NameXSD + "\" of type " + elem.Type +
 					" order " + fmt.Sprintf("%d", elem.Order) + " depth " + fmt.Sprintf("%d", elem.Depth) +
+
 					"\n\t" + elem.GoIdentifier + " " + goType + " " + "`" + `xml:"` + elem.NameXSD + `,omitempty"` + "`"
 			} else {
 				if elem.Type != "" {
 					if ct, ok := ctMap[elem.Type]; ok {
 						*fields += "\n\n\t// generated from element \"" + elem.NameXSD + "\" of type " + ct.Name +
 							" order " + fmt.Sprintf("%d", elem.Order) + " depth " + fmt.Sprintf("%d", elem.Depth) +
-							"\n\t" + elem.GoIdentifier + sliceOrPointer + ct.GoIdentifier + " " + "`" + `xml:"` + elem.NameXSD + `,omitempty"` + "`"
+							"\n\t" + elem.GoIdentifier + sliceOrPointer + ct.GoIdentifier + " " + "`" + `xml:"` +
+							elem.NameXSD + `,omitempty"` + "`"
 					} else {
 						log.Println("element", elem.NameXSD, "unknown type", elem.Type)
 					}
@@ -153,7 +158,8 @@ func (modelGroup *ModelGroup) generateElements(
 						ct := elem.ComplexType
 						*fields += "\n\n\t// generated from anonymous type within outer element \"" + elem.NameXSD +
 							"\" of type " + ct.Name + "." +
-							"\n\t" + elem.GoIdentifier + sliceOrPointer + ct.GoIdentifier + " " + "`" + `xml:"` + elem.NameXSD + `,omitempty"` + "`"
+							"\n\t" + elem.GoIdentifier + sliceOrPointer + ct.GoIdentifier + " " + "`" + `xml:"` + elem.NameXSD +
+							`,omitempty"` + "`"
 					}
 				}
 
@@ -180,5 +186,26 @@ func (modelGroup *ModelGroup) generateElements(
 
 		}
 
+	}
+}
+
+func (modelGroup *ModelGroup) SetParentAndChildren(parent Particle) {
+
+	modelGroup.Parent = parent
+	for _, p := range modelGroup.Alls {
+		modelGroup.Children = append(modelGroup.Children, p)
+		p.SetParentAndChildren(modelGroup)
+	}
+	for _, p := range modelGroup.Sequences {
+		modelGroup.Children = append(modelGroup.Children, p)
+		p.SetParentAndChildren(modelGroup)
+	}
+	for _, p := range modelGroup.Choices {
+		modelGroup.Children = append(modelGroup.Children, p)
+		p.SetParentAndChildren(modelGroup)
+	}
+	for _, p := range modelGroup.Elements {
+		modelGroup.Children = append(modelGroup.Children, p)
+		p.SetParentAndChildren(modelGroup)
 	}
 }

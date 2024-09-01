@@ -47,8 +47,9 @@ type A_ATTRIBUTE_VALUE_REALAPI struct {
 type A_ATTRIBUTE_VALUE_REALPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
 
-	// field ATTRIBUTE_VALUE_REAL is a slice of pointers to another Struct (optional or 0..1)
-	ATTRIBUTE_VALUE_REAL IntSlice `gorm:"type:TEXT"`
+	// field ATTRIBUTE_VALUE_REAL is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	ATTRIBUTE_VALUE_REALID sql.NullInt64
 }
 
 // A_ATTRIBUTE_VALUE_REALDB describes a a_attribute_value_real in the database
@@ -214,22 +215,16 @@ func (backRepoA_ATTRIBUTE_VALUE_REAL *BackRepoA_ATTRIBUTE_VALUE_REALStruct) Comm
 		a_attribute_value_realDB.CopyBasicFieldsFromA_ATTRIBUTE_VALUE_REAL(a_attribute_value_real)
 
 		// insertion point for translating pointers encodings into actual pointers
-		// 1. reset
-		a_attribute_value_realDB.A_ATTRIBUTE_VALUE_REALPointersEncoding.ATTRIBUTE_VALUE_REAL = make([]int, 0)
-		// 2. encode
-		for _, attribute_value_realAssocEnd := range a_attribute_value_real.ATTRIBUTE_VALUE_REAL {
-			attribute_value_realAssocEnd_DB :=
-				backRepo.BackRepoATTRIBUTE_VALUE_REAL.GetATTRIBUTE_VALUE_REALDBFromATTRIBUTE_VALUE_REALPtr(attribute_value_realAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the attribute_value_realAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if attribute_value_realAssocEnd_DB == nil {
-				continue
+		// commit pointer value a_attribute_value_real.ATTRIBUTE_VALUE_REAL translates to updating the a_attribute_value_real.ATTRIBUTE_VALUE_REALID
+		a_attribute_value_realDB.ATTRIBUTE_VALUE_REALID.Valid = true // allow for a 0 value (nil association)
+		if a_attribute_value_real.ATTRIBUTE_VALUE_REAL != nil {
+			if ATTRIBUTE_VALUE_REALId, ok := backRepo.BackRepoATTRIBUTE_VALUE_REAL.Map_ATTRIBUTE_VALUE_REALPtr_ATTRIBUTE_VALUE_REALDBID[a_attribute_value_real.ATTRIBUTE_VALUE_REAL]; ok {
+				a_attribute_value_realDB.ATTRIBUTE_VALUE_REALID.Int64 = int64(ATTRIBUTE_VALUE_REALId)
+				a_attribute_value_realDB.ATTRIBUTE_VALUE_REALID.Valid = true
 			}
-			
-			a_attribute_value_realDB.A_ATTRIBUTE_VALUE_REALPointersEncoding.ATTRIBUTE_VALUE_REAL =
-				append(a_attribute_value_realDB.A_ATTRIBUTE_VALUE_REALPointersEncoding.ATTRIBUTE_VALUE_REAL, int(attribute_value_realAssocEnd_DB.ID))
+		} else {
+			a_attribute_value_realDB.ATTRIBUTE_VALUE_REALID.Int64 = 0
+			a_attribute_value_realDB.ATTRIBUTE_VALUE_REALID.Valid = true
 		}
 
 		query := backRepoA_ATTRIBUTE_VALUE_REAL.db.Save(&a_attribute_value_realDB)
@@ -345,15 +340,11 @@ func (backRepoA_ATTRIBUTE_VALUE_REAL *BackRepoA_ATTRIBUTE_VALUE_REALStruct) Chec
 func (a_attribute_value_realDB *A_ATTRIBUTE_VALUE_REALDB) DecodePointers(backRepo *BackRepoStruct, a_attribute_value_real *models.A_ATTRIBUTE_VALUE_REAL) {
 
 	// insertion point for checkout of pointer encoding
-	// This loop redeem a_attribute_value_real.ATTRIBUTE_VALUE_REAL in the stage from the encode in the back repo
-	// It parses all ATTRIBUTE_VALUE_REALDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	a_attribute_value_real.ATTRIBUTE_VALUE_REAL = a_attribute_value_real.ATTRIBUTE_VALUE_REAL[:0]
-	for _, _ATTRIBUTE_VALUE_REALid := range a_attribute_value_realDB.A_ATTRIBUTE_VALUE_REALPointersEncoding.ATTRIBUTE_VALUE_REAL {
-		a_attribute_value_real.ATTRIBUTE_VALUE_REAL = append(a_attribute_value_real.ATTRIBUTE_VALUE_REAL, backRepo.BackRepoATTRIBUTE_VALUE_REAL.Map_ATTRIBUTE_VALUE_REALDBID_ATTRIBUTE_VALUE_REALPtr[uint(_ATTRIBUTE_VALUE_REALid)])
+	// ATTRIBUTE_VALUE_REAL field
+	a_attribute_value_real.ATTRIBUTE_VALUE_REAL = nil
+	if a_attribute_value_realDB.ATTRIBUTE_VALUE_REALID.Int64 != 0 {
+		a_attribute_value_real.ATTRIBUTE_VALUE_REAL = backRepo.BackRepoATTRIBUTE_VALUE_REAL.Map_ATTRIBUTE_VALUE_REALDBID_ATTRIBUTE_VALUE_REALPtr[uint(a_attribute_value_realDB.ATTRIBUTE_VALUE_REALID.Int64)]
 	}
-
 	return
 }
 
@@ -582,6 +573,12 @@ func (backRepoA_ATTRIBUTE_VALUE_REAL *BackRepoA_ATTRIBUTE_VALUE_REALStruct) Rest
 		_ = a_attribute_value_realDB
 
 		// insertion point for reindexing pointers encoding
+		// reindexing ATTRIBUTE_VALUE_REAL field
+		if a_attribute_value_realDB.ATTRIBUTE_VALUE_REALID.Int64 != 0 {
+			a_attribute_value_realDB.ATTRIBUTE_VALUE_REALID.Int64 = int64(BackRepoATTRIBUTE_VALUE_REALid_atBckpTime_newID[uint(a_attribute_value_realDB.ATTRIBUTE_VALUE_REALID.Int64)])
+			a_attribute_value_realDB.ATTRIBUTE_VALUE_REALID.Valid = true
+		}
+
 		// update databse with new index encoding
 		query := backRepoA_ATTRIBUTE_VALUE_REAL.db.Model(a_attribute_value_realDB).Updates(*a_attribute_value_realDB)
 		if query.Error != nil {

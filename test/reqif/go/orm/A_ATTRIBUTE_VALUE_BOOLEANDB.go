@@ -47,8 +47,9 @@ type A_ATTRIBUTE_VALUE_BOOLEANAPI struct {
 type A_ATTRIBUTE_VALUE_BOOLEANPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
 
-	// field ATTRIBUTE_VALUE_BOOLEAN is a slice of pointers to another Struct (optional or 0..1)
-	ATTRIBUTE_VALUE_BOOLEAN IntSlice `gorm:"type:TEXT"`
+	// field ATTRIBUTE_VALUE_BOOLEAN is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	ATTRIBUTE_VALUE_BOOLEANID sql.NullInt64
 }
 
 // A_ATTRIBUTE_VALUE_BOOLEANDB describes a a_attribute_value_boolean in the database
@@ -214,22 +215,16 @@ func (backRepoA_ATTRIBUTE_VALUE_BOOLEAN *BackRepoA_ATTRIBUTE_VALUE_BOOLEANStruct
 		a_attribute_value_booleanDB.CopyBasicFieldsFromA_ATTRIBUTE_VALUE_BOOLEAN(a_attribute_value_boolean)
 
 		// insertion point for translating pointers encodings into actual pointers
-		// 1. reset
-		a_attribute_value_booleanDB.A_ATTRIBUTE_VALUE_BOOLEANPointersEncoding.ATTRIBUTE_VALUE_BOOLEAN = make([]int, 0)
-		// 2. encode
-		for _, attribute_value_booleanAssocEnd := range a_attribute_value_boolean.ATTRIBUTE_VALUE_BOOLEAN {
-			attribute_value_booleanAssocEnd_DB :=
-				backRepo.BackRepoATTRIBUTE_VALUE_BOOLEAN.GetATTRIBUTE_VALUE_BOOLEANDBFromATTRIBUTE_VALUE_BOOLEANPtr(attribute_value_booleanAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the attribute_value_booleanAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if attribute_value_booleanAssocEnd_DB == nil {
-				continue
+		// commit pointer value a_attribute_value_boolean.ATTRIBUTE_VALUE_BOOLEAN translates to updating the a_attribute_value_boolean.ATTRIBUTE_VALUE_BOOLEANID
+		a_attribute_value_booleanDB.ATTRIBUTE_VALUE_BOOLEANID.Valid = true // allow for a 0 value (nil association)
+		if a_attribute_value_boolean.ATTRIBUTE_VALUE_BOOLEAN != nil {
+			if ATTRIBUTE_VALUE_BOOLEANId, ok := backRepo.BackRepoATTRIBUTE_VALUE_BOOLEAN.Map_ATTRIBUTE_VALUE_BOOLEANPtr_ATTRIBUTE_VALUE_BOOLEANDBID[a_attribute_value_boolean.ATTRIBUTE_VALUE_BOOLEAN]; ok {
+				a_attribute_value_booleanDB.ATTRIBUTE_VALUE_BOOLEANID.Int64 = int64(ATTRIBUTE_VALUE_BOOLEANId)
+				a_attribute_value_booleanDB.ATTRIBUTE_VALUE_BOOLEANID.Valid = true
 			}
-			
-			a_attribute_value_booleanDB.A_ATTRIBUTE_VALUE_BOOLEANPointersEncoding.ATTRIBUTE_VALUE_BOOLEAN =
-				append(a_attribute_value_booleanDB.A_ATTRIBUTE_VALUE_BOOLEANPointersEncoding.ATTRIBUTE_VALUE_BOOLEAN, int(attribute_value_booleanAssocEnd_DB.ID))
+		} else {
+			a_attribute_value_booleanDB.ATTRIBUTE_VALUE_BOOLEANID.Int64 = 0
+			a_attribute_value_booleanDB.ATTRIBUTE_VALUE_BOOLEANID.Valid = true
 		}
 
 		query := backRepoA_ATTRIBUTE_VALUE_BOOLEAN.db.Save(&a_attribute_value_booleanDB)
@@ -345,15 +340,11 @@ func (backRepoA_ATTRIBUTE_VALUE_BOOLEAN *BackRepoA_ATTRIBUTE_VALUE_BOOLEANStruct
 func (a_attribute_value_booleanDB *A_ATTRIBUTE_VALUE_BOOLEANDB) DecodePointers(backRepo *BackRepoStruct, a_attribute_value_boolean *models.A_ATTRIBUTE_VALUE_BOOLEAN) {
 
 	// insertion point for checkout of pointer encoding
-	// This loop redeem a_attribute_value_boolean.ATTRIBUTE_VALUE_BOOLEAN in the stage from the encode in the back repo
-	// It parses all ATTRIBUTE_VALUE_BOOLEANDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	a_attribute_value_boolean.ATTRIBUTE_VALUE_BOOLEAN = a_attribute_value_boolean.ATTRIBUTE_VALUE_BOOLEAN[:0]
-	for _, _ATTRIBUTE_VALUE_BOOLEANid := range a_attribute_value_booleanDB.A_ATTRIBUTE_VALUE_BOOLEANPointersEncoding.ATTRIBUTE_VALUE_BOOLEAN {
-		a_attribute_value_boolean.ATTRIBUTE_VALUE_BOOLEAN = append(a_attribute_value_boolean.ATTRIBUTE_VALUE_BOOLEAN, backRepo.BackRepoATTRIBUTE_VALUE_BOOLEAN.Map_ATTRIBUTE_VALUE_BOOLEANDBID_ATTRIBUTE_VALUE_BOOLEANPtr[uint(_ATTRIBUTE_VALUE_BOOLEANid)])
+	// ATTRIBUTE_VALUE_BOOLEAN field
+	a_attribute_value_boolean.ATTRIBUTE_VALUE_BOOLEAN = nil
+	if a_attribute_value_booleanDB.ATTRIBUTE_VALUE_BOOLEANID.Int64 != 0 {
+		a_attribute_value_boolean.ATTRIBUTE_VALUE_BOOLEAN = backRepo.BackRepoATTRIBUTE_VALUE_BOOLEAN.Map_ATTRIBUTE_VALUE_BOOLEANDBID_ATTRIBUTE_VALUE_BOOLEANPtr[uint(a_attribute_value_booleanDB.ATTRIBUTE_VALUE_BOOLEANID.Int64)]
 	}
-
 	return
 }
 
@@ -582,6 +573,12 @@ func (backRepoA_ATTRIBUTE_VALUE_BOOLEAN *BackRepoA_ATTRIBUTE_VALUE_BOOLEANStruct
 		_ = a_attribute_value_booleanDB
 
 		// insertion point for reindexing pointers encoding
+		// reindexing ATTRIBUTE_VALUE_BOOLEAN field
+		if a_attribute_value_booleanDB.ATTRIBUTE_VALUE_BOOLEANID.Int64 != 0 {
+			a_attribute_value_booleanDB.ATTRIBUTE_VALUE_BOOLEANID.Int64 = int64(BackRepoATTRIBUTE_VALUE_BOOLEANid_atBckpTime_newID[uint(a_attribute_value_booleanDB.ATTRIBUTE_VALUE_BOOLEANID.Int64)])
+			a_attribute_value_booleanDB.ATTRIBUTE_VALUE_BOOLEANID.Valid = true
+		}
+
 		// update databse with new index encoding
 		query := backRepoA_ATTRIBUTE_VALUE_BOOLEAN.db.Model(a_attribute_value_booleanDB).Updates(*a_attribute_value_booleanDB)
 		if query.Error != nil {

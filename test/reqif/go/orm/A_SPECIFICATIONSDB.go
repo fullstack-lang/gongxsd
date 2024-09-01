@@ -47,8 +47,9 @@ type A_SPECIFICATIONSAPI struct {
 type A_SPECIFICATIONSPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
 
-	// field SPECIFICATION is a slice of pointers to another Struct (optional or 0..1)
-	SPECIFICATION IntSlice `gorm:"type:TEXT"`
+	// field SPECIFICATION is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	SPECIFICATIONID sql.NullInt64
 }
 
 // A_SPECIFICATIONSDB describes a a_specifications in the database
@@ -214,22 +215,16 @@ func (backRepoA_SPECIFICATIONS *BackRepoA_SPECIFICATIONSStruct) CommitPhaseTwoIn
 		a_specificationsDB.CopyBasicFieldsFromA_SPECIFICATIONS(a_specifications)
 
 		// insertion point for translating pointers encodings into actual pointers
-		// 1. reset
-		a_specificationsDB.A_SPECIFICATIONSPointersEncoding.SPECIFICATION = make([]int, 0)
-		// 2. encode
-		for _, specificationAssocEnd := range a_specifications.SPECIFICATION {
-			specificationAssocEnd_DB :=
-				backRepo.BackRepoSPECIFICATION.GetSPECIFICATIONDBFromSPECIFICATIONPtr(specificationAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the specificationAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if specificationAssocEnd_DB == nil {
-				continue
+		// commit pointer value a_specifications.SPECIFICATION translates to updating the a_specifications.SPECIFICATIONID
+		a_specificationsDB.SPECIFICATIONID.Valid = true // allow for a 0 value (nil association)
+		if a_specifications.SPECIFICATION != nil {
+			if SPECIFICATIONId, ok := backRepo.BackRepoSPECIFICATION.Map_SPECIFICATIONPtr_SPECIFICATIONDBID[a_specifications.SPECIFICATION]; ok {
+				a_specificationsDB.SPECIFICATIONID.Int64 = int64(SPECIFICATIONId)
+				a_specificationsDB.SPECIFICATIONID.Valid = true
 			}
-			
-			a_specificationsDB.A_SPECIFICATIONSPointersEncoding.SPECIFICATION =
-				append(a_specificationsDB.A_SPECIFICATIONSPointersEncoding.SPECIFICATION, int(specificationAssocEnd_DB.ID))
+		} else {
+			a_specificationsDB.SPECIFICATIONID.Int64 = 0
+			a_specificationsDB.SPECIFICATIONID.Valid = true
 		}
 
 		query := backRepoA_SPECIFICATIONS.db.Save(&a_specificationsDB)
@@ -345,15 +340,11 @@ func (backRepoA_SPECIFICATIONS *BackRepoA_SPECIFICATIONSStruct) CheckoutPhaseTwo
 func (a_specificationsDB *A_SPECIFICATIONSDB) DecodePointers(backRepo *BackRepoStruct, a_specifications *models.A_SPECIFICATIONS) {
 
 	// insertion point for checkout of pointer encoding
-	// This loop redeem a_specifications.SPECIFICATION in the stage from the encode in the back repo
-	// It parses all SPECIFICATIONDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	a_specifications.SPECIFICATION = a_specifications.SPECIFICATION[:0]
-	for _, _SPECIFICATIONid := range a_specificationsDB.A_SPECIFICATIONSPointersEncoding.SPECIFICATION {
-		a_specifications.SPECIFICATION = append(a_specifications.SPECIFICATION, backRepo.BackRepoSPECIFICATION.Map_SPECIFICATIONDBID_SPECIFICATIONPtr[uint(_SPECIFICATIONid)])
+	// SPECIFICATION field
+	a_specifications.SPECIFICATION = nil
+	if a_specificationsDB.SPECIFICATIONID.Int64 != 0 {
+		a_specifications.SPECIFICATION = backRepo.BackRepoSPECIFICATION.Map_SPECIFICATIONDBID_SPECIFICATIONPtr[uint(a_specificationsDB.SPECIFICATIONID.Int64)]
 	}
-
 	return
 }
 
@@ -582,6 +573,12 @@ func (backRepoA_SPECIFICATIONS *BackRepoA_SPECIFICATIONSStruct) RestorePhaseTwo(
 		_ = a_specificationsDB
 
 		// insertion point for reindexing pointers encoding
+		// reindexing SPECIFICATION field
+		if a_specificationsDB.SPECIFICATIONID.Int64 != 0 {
+			a_specificationsDB.SPECIFICATIONID.Int64 = int64(BackRepoSPECIFICATIONid_atBckpTime_newID[uint(a_specificationsDB.SPECIFICATIONID.Int64)])
+			a_specificationsDB.SPECIFICATIONID.Valid = true
+		}
+
 		// update databse with new index encoding
 		query := backRepoA_SPECIFICATIONS.db.Model(a_specificationsDB).Updates(*a_specificationsDB)
 		if query.Error != nil {

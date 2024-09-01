@@ -47,8 +47,9 @@ type A_ATTRIBUTE_VALUE_STRINGAPI struct {
 type A_ATTRIBUTE_VALUE_STRINGPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
 
-	// field ATTRIBUTE_VALUE_STRING is a slice of pointers to another Struct (optional or 0..1)
-	ATTRIBUTE_VALUE_STRING IntSlice `gorm:"type:TEXT"`
+	// field ATTRIBUTE_VALUE_STRING is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	ATTRIBUTE_VALUE_STRINGID sql.NullInt64
 }
 
 // A_ATTRIBUTE_VALUE_STRINGDB describes a a_attribute_value_string in the database
@@ -214,22 +215,16 @@ func (backRepoA_ATTRIBUTE_VALUE_STRING *BackRepoA_ATTRIBUTE_VALUE_STRINGStruct) 
 		a_attribute_value_stringDB.CopyBasicFieldsFromA_ATTRIBUTE_VALUE_STRING(a_attribute_value_string)
 
 		// insertion point for translating pointers encodings into actual pointers
-		// 1. reset
-		a_attribute_value_stringDB.A_ATTRIBUTE_VALUE_STRINGPointersEncoding.ATTRIBUTE_VALUE_STRING = make([]int, 0)
-		// 2. encode
-		for _, attribute_value_stringAssocEnd := range a_attribute_value_string.ATTRIBUTE_VALUE_STRING {
-			attribute_value_stringAssocEnd_DB :=
-				backRepo.BackRepoATTRIBUTE_VALUE_STRING.GetATTRIBUTE_VALUE_STRINGDBFromATTRIBUTE_VALUE_STRINGPtr(attribute_value_stringAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the attribute_value_stringAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if attribute_value_stringAssocEnd_DB == nil {
-				continue
+		// commit pointer value a_attribute_value_string.ATTRIBUTE_VALUE_STRING translates to updating the a_attribute_value_string.ATTRIBUTE_VALUE_STRINGID
+		a_attribute_value_stringDB.ATTRIBUTE_VALUE_STRINGID.Valid = true // allow for a 0 value (nil association)
+		if a_attribute_value_string.ATTRIBUTE_VALUE_STRING != nil {
+			if ATTRIBUTE_VALUE_STRINGId, ok := backRepo.BackRepoATTRIBUTE_VALUE_STRING.Map_ATTRIBUTE_VALUE_STRINGPtr_ATTRIBUTE_VALUE_STRINGDBID[a_attribute_value_string.ATTRIBUTE_VALUE_STRING]; ok {
+				a_attribute_value_stringDB.ATTRIBUTE_VALUE_STRINGID.Int64 = int64(ATTRIBUTE_VALUE_STRINGId)
+				a_attribute_value_stringDB.ATTRIBUTE_VALUE_STRINGID.Valid = true
 			}
-			
-			a_attribute_value_stringDB.A_ATTRIBUTE_VALUE_STRINGPointersEncoding.ATTRIBUTE_VALUE_STRING =
-				append(a_attribute_value_stringDB.A_ATTRIBUTE_VALUE_STRINGPointersEncoding.ATTRIBUTE_VALUE_STRING, int(attribute_value_stringAssocEnd_DB.ID))
+		} else {
+			a_attribute_value_stringDB.ATTRIBUTE_VALUE_STRINGID.Int64 = 0
+			a_attribute_value_stringDB.ATTRIBUTE_VALUE_STRINGID.Valid = true
 		}
 
 		query := backRepoA_ATTRIBUTE_VALUE_STRING.db.Save(&a_attribute_value_stringDB)
@@ -345,15 +340,11 @@ func (backRepoA_ATTRIBUTE_VALUE_STRING *BackRepoA_ATTRIBUTE_VALUE_STRINGStruct) 
 func (a_attribute_value_stringDB *A_ATTRIBUTE_VALUE_STRINGDB) DecodePointers(backRepo *BackRepoStruct, a_attribute_value_string *models.A_ATTRIBUTE_VALUE_STRING) {
 
 	// insertion point for checkout of pointer encoding
-	// This loop redeem a_attribute_value_string.ATTRIBUTE_VALUE_STRING in the stage from the encode in the back repo
-	// It parses all ATTRIBUTE_VALUE_STRINGDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	a_attribute_value_string.ATTRIBUTE_VALUE_STRING = a_attribute_value_string.ATTRIBUTE_VALUE_STRING[:0]
-	for _, _ATTRIBUTE_VALUE_STRINGid := range a_attribute_value_stringDB.A_ATTRIBUTE_VALUE_STRINGPointersEncoding.ATTRIBUTE_VALUE_STRING {
-		a_attribute_value_string.ATTRIBUTE_VALUE_STRING = append(a_attribute_value_string.ATTRIBUTE_VALUE_STRING, backRepo.BackRepoATTRIBUTE_VALUE_STRING.Map_ATTRIBUTE_VALUE_STRINGDBID_ATTRIBUTE_VALUE_STRINGPtr[uint(_ATTRIBUTE_VALUE_STRINGid)])
+	// ATTRIBUTE_VALUE_STRING field
+	a_attribute_value_string.ATTRIBUTE_VALUE_STRING = nil
+	if a_attribute_value_stringDB.ATTRIBUTE_VALUE_STRINGID.Int64 != 0 {
+		a_attribute_value_string.ATTRIBUTE_VALUE_STRING = backRepo.BackRepoATTRIBUTE_VALUE_STRING.Map_ATTRIBUTE_VALUE_STRINGDBID_ATTRIBUTE_VALUE_STRINGPtr[uint(a_attribute_value_stringDB.ATTRIBUTE_VALUE_STRINGID.Int64)]
 	}
-
 	return
 }
 
@@ -582,6 +573,12 @@ func (backRepoA_ATTRIBUTE_VALUE_STRING *BackRepoA_ATTRIBUTE_VALUE_STRINGStruct) 
 		_ = a_attribute_value_stringDB
 
 		// insertion point for reindexing pointers encoding
+		// reindexing ATTRIBUTE_VALUE_STRING field
+		if a_attribute_value_stringDB.ATTRIBUTE_VALUE_STRINGID.Int64 != 0 {
+			a_attribute_value_stringDB.ATTRIBUTE_VALUE_STRINGID.Int64 = int64(BackRepoATTRIBUTE_VALUE_STRINGid_atBckpTime_newID[uint(a_attribute_value_stringDB.ATTRIBUTE_VALUE_STRINGID.Int64)])
+			a_attribute_value_stringDB.ATTRIBUTE_VALUE_STRINGID.Valid = true
+		}
+
 		// update databse with new index encoding
 		query := backRepoA_ATTRIBUTE_VALUE_STRING.db.Model(a_attribute_value_stringDB).Updates(*a_attribute_value_stringDB)
 		if query.Error != nil {

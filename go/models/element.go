@@ -1,6 +1,9 @@
 package models
 
-import "encoding/xml"
+import (
+	"encoding/xml"
+	"log"
+)
 
 var Order int
 var Depth int
@@ -51,4 +54,16 @@ func (e *Element) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
 	Depth = Depth - 1
 
 	return err
+}
+
+func (e *Element) SetParentAndChildren(parent Particle) {
+
+	if parent == e {
+		log.Fatalln("setting parent as itself")
+	}
+
+	e.Parent = parent
+	if e.ComplexType != nil {
+		e.Children = append(e.Children, e.ComplexType)
+	}
 }
