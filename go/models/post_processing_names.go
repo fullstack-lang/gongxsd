@@ -1,5 +1,10 @@
 package models
 
+import (
+	"cmp"
+	"slices"
+)
+
 func prefix(s string) string {
 	return s + "_Inlined"
 }
@@ -11,7 +16,7 @@ func PostProcessingNames(stage *StageStruct) {
 	map_EmbeddedGroup := make(map[*Group]*Element)
 	setOfGoIdentifiers := make(map[string]any)
 
-	for x := range *GetGongstructInstancesSet[ComplexType](stage) {
+	for _, x := range GetGongstrucsSorted[*ComplexType](stage) {
 
 		if x.IsAnonymous {
 			continue
@@ -36,7 +41,7 @@ func PostProcessingNames(stage *StageStruct) {
 			x.SimpleContent.Name = prefix(x.Name)
 		}
 	}
-	for x := range *GetGongstructInstancesSet[Group](stage) {
+	for _, x := range GetGongstrucsSorted[*Group](stage) {
 
 		if x.Ref != "" {
 			continue
@@ -55,7 +60,7 @@ func PostProcessingNames(stage *StageStruct) {
 			x.Annotation.Name = prefix(x.Name)
 		}
 	}
-	for x := range *GetGongstructInstancesSet[SimpleType](stage) {
+	for _, x := range GetGongstrucsSorted[*SimpleType](stage) {
 		x.Name = x.NameXSD
 
 		if x.Restriction != nil {
@@ -65,13 +70,13 @@ func PostProcessingNames(stage *StageStruct) {
 			x.Annotation.Name = prefix(x.Name)
 		}
 	}
-	for x := range *GetGongstructInstancesSet[Schema](stage) {
+	for _, x := range GetGongstrucsSorted[*Schema](stage) {
 		x.Name = "Schema"
 		if x.Annotation != nil {
 			x.Annotation.Name = prefix(x.Name)
 		}
 	}
-	for x := range *GetGongstructInstancesSet[Restriction](stage) {
+	for _, x := range GetGongstrucsSorted[*Restriction](stage) {
 		for _, e := range x.Enumerations {
 			e.Name = prefix(x.Name)
 		}
@@ -108,69 +113,69 @@ func PostProcessingNames(stage *StageStruct) {
 	//
 	// Restrictions
 	//
-	for x := range *GetGongstructInstancesSet[Enumeration](stage) {
+	for _, x := range GetGongstrucsSorted[*Enumeration](stage) {
 		if x.Annotation != nil {
 			x.Annotation.Name = prefix(x.Name)
 		}
 	}
-	for x := range *GetGongstructInstancesSet[Enumeration](stage) {
+	for _, x := range GetGongstrucsSorted[*Enumeration](stage) {
 		if x.Annotation != nil {
 			x.Annotation.Name = prefix(x.Name)
 		}
 	}
-	for x := range *GetGongstructInstancesSet[MinInclusive](stage) {
+	for _, x := range GetGongstrucsSorted[*MinInclusive](stage) {
 		if x.Annotation != nil {
 			x.Annotation.Name = prefix(x.Name)
 		}
 	}
-	for x := range *GetGongstructInstancesSet[MaxInclusive](stage) {
+	for _, x := range GetGongstrucsSorted[*MaxInclusive](stage) {
 		if x.Annotation != nil {
 			x.Annotation.Name = prefix(x.Name)
 		}
 	}
-	for x := range *GetGongstructInstancesSet[Pattern](stage) {
+	for _, x := range GetGongstrucsSorted[*Pattern](stage) {
 		if x.Annotation != nil {
 			x.Annotation.Name = prefix(x.Name)
 		}
 	}
-	for x := range *GetGongstructInstancesSet[WhiteSpace](stage) {
+	for _, x := range GetGongstrucsSorted[*WhiteSpace](stage) {
 		if x.Annotation != nil {
 			x.Annotation.Name = prefix(x.Name)
 		}
 	}
-	for x := range *GetGongstructInstancesSet[MinLength](stage) {
+	for _, x := range GetGongstrucsSorted[*MinLength](stage) {
 		if x.Annotation != nil {
 			x.Annotation.Name = prefix(x.Name)
 		}
 	}
-	for x := range *GetGongstructInstancesSet[MaxLength](stage) {
+	for _, x := range GetGongstrucsSorted[*MaxLength](stage) {
 		if x.Annotation != nil {
 			x.Annotation.Name = prefix(x.Name)
 		}
 	}
-	for x := range *GetGongstructInstancesSet[Length](stage) {
+	for _, x := range GetGongstrucsSorted[*Length](stage) {
 		if x.Annotation != nil {
 			x.Annotation.Name = prefix(x.Name)
 		}
 	}
-	for x := range *GetGongstructInstancesSet[TotalDigit](stage) {
+	for _, x := range GetGongstrucsSorted[*TotalDigit](stage) {
 		if x.Annotation != nil {
 			x.Annotation.Name = prefix(x.Name)
 		}
 	}
 
-	for x := range *GetGongstructInstancesSet[Annotation](stage) {
+	for _, x := range GetGongstrucsSorted[*Annotation](stage) {
 		for _, d := range x.Documentations {
 			d.Name = prefix(x.Name)
 		}
 	}
-	for x := range *GetGongstructInstancesSet[Attribute](stage) {
+	for _, x := range GetGongstrucsSorted[*Attribute](stage) {
 		x.Name = x.NameXSD
 		if x.Annotation != nil {
 			x.Annotation.Name = prefix(x.Name)
 		}
 	}
-	for x := range *GetGongstructInstancesSet[AttributeGroup](stage) {
+	for _, x := range GetGongstrucsSorted[*AttributeGroup](stage) {
 		x.Name = x.NameXSD
 
 		computeGoIdentifier("AttributeGroup_"+x.Name, &x.WithGoIdentifier, setOfGoIdentifiers)
@@ -180,7 +185,7 @@ func PostProcessingNames(stage *StageStruct) {
 		}
 	}
 
-	for x := range *GetGongstructInstancesSet[SimpleContent](stage) {
+	for _, x := range GetGongstrucsSorted[*SimpleContent](stage) {
 
 		if x.Extension != nil {
 			x.Extension.Name = prefix(x.Name)
@@ -190,7 +195,12 @@ func PostProcessingNames(stage *StageStruct) {
 		}
 	}
 
-	for x := range *GetGongstructInstancesSet[Element](stage) {
+	elems := GetGongstrucsSorted[*Element](stage)
+	slices.SortFunc(elems,
+		func(a, b *Element) int {
+			return cmp.Compare(a.GetOrder(), b.GetOrder())
+		})
+	for _, x := range elems {
 		x.Name = x.NameXSD
 		x.GoIdentifier = xsdNameToGoIdentifier(x.Name)
 

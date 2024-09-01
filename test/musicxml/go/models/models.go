@@ -6746,11 +6746,11 @@ type A_score_partwise struct {
 	Group_score_header
 
 	// generated from anonymous type within outer element "part" of type A_part.
-	Part []*A_part_1 `xml:"part,omitempty"`
+	Part []*A_part `xml:"part,omitempty"`
 }
 
-// A_part_1 Named source within outer element "part"
-type A_part_1 struct {
+// A_part Named source within outer element "part"
+type A_part struct {
 	Name string `xml:"-"`
 
 	// insertion point for fields
@@ -6759,11 +6759,11 @@ type A_part_1 struct {
 	AttributeGroup_part_attributes
 
 	// generated from anonymous type within outer element "measure" of type A_measure.
-	Measure []*A_measure_1 `xml:"measure,omitempty"`
+	Measure []*A_measure `xml:"measure,omitempty"`
 }
 
-// A_measure_1 Named source within outer element "measure"
-type A_measure_1 struct {
+// A_measure Named source within outer element "measure"
+type A_measure struct {
 	Name string `xml:"-"`
 
 	// insertion point for fields
@@ -6804,11 +6804,11 @@ type A_score_timewise struct {
 	Group_score_header
 
 	// generated from anonymous type within outer element "measure" of type A_measure.
-	Measure []*A_measure `xml:"measure,omitempty"`
+	Measure []*A_measure_1 `xml:"measure,omitempty"`
 }
 
-// A_measure Named source within outer element "measure"
-type A_measure struct {
+// A_measure_1 Named source within outer element "measure"
+type A_measure_1 struct {
 	Name string `xml:"-"`
 
 	// insertion point for fields
@@ -6817,11 +6817,11 @@ type A_measure struct {
 	AttributeGroup_measure_attributes
 
 	// generated from anonymous type within outer element "part" of type A_part.
-	Part []*A_part `xml:"part,omitempty"`
+	Part []*A_part_1 `xml:"part,omitempty"`
 }
 
-// A_part Named source within outer element "part"
-type A_part struct {
+// A_part_1 Named source within outer element "part"
+type A_part_1 struct {
 	Name string `xml:"-"`
 
 	// insertion point for fields
