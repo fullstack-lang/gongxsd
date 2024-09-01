@@ -31,10 +31,12 @@ const (
 
 var ModelsFileTmplLevel1Code map[ModelsFileTmplLevel1]string = // new line
 map[ModelsFileTmplLevel1]string{
-	ModelsFileTmplLevel1NamedStructCode: `
+	ModelsFileTmplLevel1NamedStructCode: `` +
+		`
 // {{` + string(rune(ModelsFileTmplLevel2Structname)) +
 		`}} Named source {{` + string(rune(ModelsFileTmplLevel2Source)) +
-		`}}
+		`}}` + `{{` + string(rune(ModelsFileTmplLevel2Comment)) + `}}` +
+		`
 type {{` + string(rune(ModelsFileTmplLevel2Structname)) + `}} struct {
 	Name string ` + "`" + "xml:\"-\"" + "`" + `
 
@@ -56,6 +58,7 @@ type ModelsFileTmplLevel2 int
 
 const (
 	ModelsFileTmplLevel2Structname ModelsFileTmplLevel2 = iota
+	ModelsFileTmplLevel2Comment
 	ModelsFileTmplLevel2Source
 	ModelsFileTmplLevel2Fields
 	ModelsFileTmplLevel2Nb
@@ -64,6 +67,7 @@ const (
 var ModelsFileTmplLevel2Code map[ModelsFileTmplLevel2]string = // new line
 map[ModelsFileTmplLevel2]string{
 	ModelsFileTmplLevel2Structname: ``,
+	ModelsFileTmplLevel2Comment:    ``,
 	ModelsFileTmplLevel2Source:     ``,
 	ModelsFileTmplLevel2Fields:     ``,
 }
