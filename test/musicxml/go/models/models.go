@@ -6,8 +6,9 @@ import "encoding/xml"
 // to avoid compilation error if no xml element is generated
 var _ xml.Attr
 
-// A_directive is generated from outer element "directive"
+// A_directive Named source within outer element "directive"
 type A_directive struct {
+	Name string `xml:"-"`
 
 	// insertion point for fields
 
@@ -18,20 +19,9 @@ type A_directive struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// A_measure is generated from outer element "measure"
+// A_measure Named source within outer element "measure"
 type A_measure struct {
-
-	// insertion point for fields
-
-	// generated from attribute group "measure-attributes
-	AttributeGroup_measure_attributes
-
-	// generated from anonymous type within outer element "part" of type A_part.
-	Part []*A_part `xml:"part,omitempty"`
-}
-
-// A_measure_1 is generated from outer element "measure"
-type A_measure_1 struct {
+	Name string `xml:"-"`
 
 	// insertion point for fields
 
@@ -42,8 +32,22 @@ type A_measure_1 struct {
 	Group_music_data
 }
 
-// A_part is generated from outer element "part"
-type A_part struct {
+// A_measure_1 Named source within outer element "measure"
+type A_measure_1 struct {
+	Name string `xml:"-"`
+
+	// insertion point for fields
+
+	// generated from attribute group "measure-attributes
+	AttributeGroup_measure_attributes
+
+	// generated from anonymous type within outer element "part" of type A_part.
+	Part []*A_part_1 `xml:"part,omitempty"`
+}
+
+// A_part_1 Named source within outer element "part"
+type A_part_1 struct {
+	Name string `xml:"-"`
 
 	// insertion point for fields
 
@@ -54,8 +58,9 @@ type A_part struct {
 	Group_music_data
 }
 
-// A_part_1 is generated from outer element "part"
-type A_part_1 struct {
+// A_part Named source within outer element "part"
+type A_part struct {
+	Name string `xml:"-"`
 
 	// insertion point for fields
 
@@ -63,11 +68,12 @@ type A_part_1 struct {
 	AttributeGroup_part_attributes
 
 	// generated from anonymous type within outer element "measure" of type A_measure.
-	Measure []*A_measure_1 `xml:"measure,omitempty"`
+	Measure []*A_measure `xml:"measure,omitempty"`
 }
 
-// A_score_partwise is generated from outer element "score-partwise"
+// A_score_partwise Named source within outer element "score-partwise"
 type A_score_partwise struct {
+	Name string `xml:"-"`
 
 	// insertion point for fields
 
@@ -78,11 +84,12 @@ type A_score_partwise struct {
 	Group_score_header
 
 	// generated from anonymous type within outer element "part" of type A_part.
-	Part []*A_part_1 `xml:"part,omitempty"`
+	Part []*A_part `xml:"part,omitempty"`
 }
 
-// A_score_timewise is generated from outer element "score-timewise"
+// A_score_timewise Named source within outer element "score-timewise"
 type A_score_timewise struct {
+	Name string `xml:"-"`
 
 	// insertion point for fields
 
@@ -93,10 +100,10 @@ type A_score_timewise struct {
 	Group_score_header
 
 	// generated from anonymous type within outer element "measure" of type A_measure.
-	Measure []*A_measure `xml:"measure,omitempty"`
+	Measure []*A_measure_1 `xml:"measure,omitempty"`
 }
 
-// Accidental is generated from named complex type "accidental"
+// Accidental Named source named complex type "accidental"
 type Accidental struct {
 	Name string `xml:"-"`
 
@@ -115,7 +122,7 @@ type Accidental struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Accidental_mark is generated from named complex type "accidental-mark"
+// Accidental_mark Named source named complex type "accidental-mark"
 type Accidental_mark struct {
 	Name string `xml:"-"`
 
@@ -128,7 +135,7 @@ type Accidental_mark struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Accidental_text is generated from named complex type "accidental-text"
+// Accidental_text Named source named complex type "accidental-text"
 type Accidental_text struct {
 	Name string `xml:"-"`
 
@@ -141,7 +148,7 @@ type Accidental_text struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Accord is generated from named complex type "accord"
+// Accord Named source named complex type "accord"
 type Accord struct {
 	Name string `xml:"-"`
 
@@ -154,7 +161,7 @@ type Accord struct {
 	Group_tuning
 }
 
-// Accordion_registration is generated from named complex type "accordion-registration"
+// Accordion_registration Named source named complex type "accordion-registration"
 type Accordion_registration struct {
 	Name string `xml:"-"`
 
@@ -176,7 +183,7 @@ type Accordion_registration struct {
 	Accordion_low string `xml:"accordion-low,omitempty"`
 }
 
-// Appearance is generated from named complex type "appearance"
+// Appearance Named source named complex type "appearance"
 type Appearance struct {
 	Name string `xml:"-"`
 
@@ -198,7 +205,7 @@ type Appearance struct {
 	Other_appearance []*Other_appearance `xml:"other-appearance,omitempty"`
 }
 
-// Arpeggiate is generated from named complex type "arpeggiate"
+// Arpeggiate Named source named complex type "arpeggiate"
 type Arpeggiate struct {
 	Name string `xml:"-"`
 
@@ -226,7 +233,7 @@ type Arpeggiate struct {
 	AttributeGroup_optional_unique_id
 }
 
-// Arrow is generated from named complex type "arrow"
+// Arrow Named source named complex type "arrow"
 type Arrow struct {
 	Name string `xml:"-"`
 
@@ -254,7 +261,7 @@ type Arrow struct {
 	Circular_arrow string `xml:"circular-arrow,omitempty"`
 }
 
-// Articulations is generated from named complex type "articulations"
+// Articulations Named source named complex type "articulations"
 type Articulations struct {
 	Name string `xml:"-"`
 
@@ -315,7 +322,7 @@ type Articulations struct {
 	Other_articulation []*Other_placement_text `xml:"other-articulation,omitempty"`
 }
 
-// Assess is generated from named complex type "assess"
+// Assess Named source named complex type "assess"
 type Assess struct {
 	Name string `xml:"-"`
 
@@ -331,7 +338,7 @@ type Assess struct {
 	Time_only string `xml:"time-only,attr,omitempty"`
 }
 
-// Attributes is generated from named complex type "attributes"
+// Attributes Named source named complex type "attributes"
 type Attributes struct {
 	Name string `xml:"-"`
 
@@ -353,7 +360,7 @@ type Attributes struct {
 	Staves int `xml:"staves,omitempty"`
 
 	// generated from element "part-symbol" of type part-symbol order 46 depth 0
-	Part_symbol []*Part_symbol `xml:"part-symbol,omitempty"`
+	Part_symbol *Part_symbol `xml:"part-symbol,omitempty"`
 
 	// generated from element "instruments" of type nonNegativeInteger order 47 depth 0
 	Instruments int `xml:"instruments,omitempty"`
@@ -377,7 +384,7 @@ type Attributes struct {
 	Measure_style []*Measure_style `xml:"measure-style,omitempty"`
 }
 
-// Backup is generated from named complex type "backup"
+// Backup Named source named complex type "backup"
 type Backup struct {
 	Name string `xml:"-"`
 
@@ -390,7 +397,7 @@ type Backup struct {
 	Group_editorial
 }
 
-// Bar_style_color is generated from named complex type "bar-style-color"
+// Bar_style_color Named source named complex type "bar-style-color"
 type Bar_style_color struct {
 	Name string `xml:"-"`
 
@@ -400,7 +407,7 @@ type Bar_style_color struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Barline is generated from named complex type "barline"
+// Barline Named source named complex type "barline"
 type Barline struct {
 	Name string `xml:"-"`
 
@@ -422,31 +429,31 @@ type Barline struct {
 	AttributeGroup_optional_unique_id
 
 	// generated from element "bar-style" of type bar-style-color order 81 depth 0
-	Bar_style []*Bar_style_color `xml:"bar-style,omitempty"`
+	Bar_style *Bar_style_color `xml:"bar-style,omitempty"`
 
 	// generated from group with order 82 depth 0
 	Group_editorial
 
 	// generated from element "wavy-line" of type wavy-line order 83 depth 0
-	Wavy_line []*Wavy_line `xml:"wavy-line,omitempty"`
+	Wavy_line *Wavy_line `xml:"wavy-line,omitempty"`
 
 	// generated from element "segno" of type segno order 84 depth 0
-	Segno_1 []*Segno `xml:"segno,omitempty"`
+	Segno_1 *Segno `xml:"segno,omitempty"`
 
 	// generated from element "coda" of type coda order 85 depth 0
-	Coda_1 []*Coda `xml:"coda,omitempty"`
+	Coda_1 *Coda `xml:"coda,omitempty"`
 
 	// generated from element "fermata" of type fermata order 86 depth 0
-	Fermata []*Fermata `xml:"fermata,omitempty"`
+	Fermata *Fermata `xml:"fermata,omitempty"`
 
 	// generated from element "ending" of type ending order 87 depth 0
-	Ending []*Ending `xml:"ending,omitempty"`
+	Ending *Ending `xml:"ending,omitempty"`
 
 	// generated from element "repeat" of type repeat order 88 depth 0
-	Repeat []*Repeat `xml:"repeat,omitempty"`
+	Repeat *Repeat `xml:"repeat,omitempty"`
 }
 
-// Barre is generated from named complex type "barre"
+// Barre Named source named complex type "barre"
 type Barre struct {
 	Name string `xml:"-"`
 
@@ -459,7 +466,7 @@ type Barre struct {
 	AttributeGroup_color
 }
 
-// Bass is generated from named complex type "bass"
+// Bass Named source named complex type "bass"
 type Bass struct {
 	Name string `xml:"-"`
 
@@ -469,16 +476,16 @@ type Bass struct {
 	Arrangement string `xml:"arrangement,attr,omitempty"`
 
 	// generated from element "bass-separator" of type style-text order 93 depth 0
-	Bass_separator []*Style_text `xml:"bass-separator,omitempty"`
+	Bass_separator *Style_text `xml:"bass-separator,omitempty"`
 
 	// generated from element "bass-step" of type bass-step order 94 depth 0
-	Bass_step []*Bass_step `xml:"bass-step,omitempty"`
+	Bass_step *Bass_step `xml:"bass-step,omitempty"`
 
 	// generated from element "bass-alter" of type harmony-alter order 95 depth 0
-	Bass_alter []*Harmony_alter `xml:"bass-alter,omitempty"`
+	Bass_alter *Harmony_alter `xml:"bass-alter,omitempty"`
 }
 
-// Bass_step is generated from named complex type "bass-step"
+// Bass_step Named source named complex type "bass-step"
 type Bass_step struct {
 	Name string `xml:"-"`
 
@@ -491,7 +498,7 @@ type Bass_step struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Beam is generated from named complex type "beam"
+// Beam Named source named complex type "beam"
 type Beam struct {
 	Name string `xml:"-"`
 
@@ -510,7 +517,7 @@ type Beam struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Beat_repeat is generated from named complex type "beat-repeat"
+// Beat_repeat Named source named complex type "beat-repeat"
 type Beat_repeat struct {
 	Name string `xml:"-"`
 
@@ -529,7 +536,7 @@ type Beat_repeat struct {
 	Group_slash
 }
 
-// Beat_unit_tied is generated from named complex type "beat-unit-tied"
+// Beat_unit_tied Named source named complex type "beat-unit-tied"
 type Beat_unit_tied struct {
 	Name string `xml:"-"`
 
@@ -539,7 +546,7 @@ type Beat_unit_tied struct {
 	Group_beat_unit
 }
 
-// Beater is generated from named complex type "beater"
+// Beater Named source named complex type "beater"
 type Beater struct {
 	Name string `xml:"-"`
 
@@ -552,7 +559,7 @@ type Beater struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Bend is generated from named complex type "bend"
+// Bend Named source named complex type "bend"
 type Bend struct {
 	Name string `xml:"-"`
 
@@ -574,13 +581,13 @@ type Bend struct {
 	Pre_bend string `xml:"pre-bend,omitempty"`
 
 	// generated from element "release" of type release order 259 depth 0
-	Release []*Release `xml:"release,omitempty"`
+	Release *Release `xml:"release,omitempty"`
 
 	// generated from element "with-bar" of type placement-text order 260 depth 0
-	With_bar []*Placement_text `xml:"with-bar,omitempty"`
+	With_bar *Placement_text `xml:"with-bar,omitempty"`
 }
 
-// Bookmark is generated from named complex type "bookmark"
+// Bookmark Named source named complex type "bookmark"
 type Bookmark struct {
 	Name string `xml:"-"`
 
@@ -596,7 +603,7 @@ type Bookmark struct {
 	AttributeGroup_element_position
 }
 
-// Bracket is generated from named complex type "bracket"
+// Bracket Named source named complex type "bracket"
 type Bracket struct {
 	Name string `xml:"-"`
 
@@ -630,7 +637,7 @@ type Bracket struct {
 	AttributeGroup_optional_unique_id
 }
 
-// Breath_mark is generated from named complex type "breath-mark"
+// Breath_mark Named source named complex type "breath-mark"
 type Breath_mark struct {
 	Name string `xml:"-"`
 
@@ -640,7 +647,7 @@ type Breath_mark struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Caesura is generated from named complex type "caesura"
+// Caesura Named source named complex type "caesura"
 type Caesura struct {
 	Name string `xml:"-"`
 
@@ -650,7 +657,7 @@ type Caesura struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Cancel is generated from named complex type "cancel"
+// Cancel Named source named complex type "cancel"
 type Cancel struct {
 	Name string `xml:"-"`
 
@@ -663,7 +670,7 @@ type Cancel struct {
 	EnclosedText int `xml:",chardata"`
 }
 
-// Clef is generated from named complex type "clef"
+// Clef Named source named complex type "clef"
 type Clef struct {
 	Name string `xml:"-"`
 
@@ -694,7 +701,7 @@ type Clef struct {
 	Group_clef
 }
 
-// Coda is generated from named complex type "coda"
+// Coda Named source named complex type "coda"
 type Coda struct {
 	Name string `xml:"-"`
 
@@ -710,7 +717,7 @@ type Coda struct {
 	AttributeGroup_optional_unique_id
 }
 
-// Credit is generated from named complex type "credit"
+// Credit Named source named complex type "credit"
 type Credit struct {
 	Name string `xml:"-"`
 
@@ -726,7 +733,7 @@ type Credit struct {
 	Credit_type string `xml:"credit-type,omitempty"`
 
 	// generated from element "credit-image" of type image order 403 depth 0
-	Credit_image []*Image `xml:"credit-image,omitempty"`
+	Credit_image *Image `xml:"credit-image,omitempty"`
 
 	// generated from element "link" of type link order 406 depth 0
 	Link []*Link `xml:"link,omitempty"`
@@ -741,7 +748,7 @@ type Credit struct {
 	Credit_symbol []*Formatted_symbol_id `xml:"credit-symbol,omitempty"`
 }
 
-// Dashes is generated from named complex type "dashes"
+// Dashes Named source named complex type "dashes"
 type Dashes struct {
 	Name string `xml:"-"`
 
@@ -766,14 +773,14 @@ type Dashes struct {
 	AttributeGroup_optional_unique_id
 }
 
-// Defaults is generated from named complex type "defaults"
+// Defaults Named source named complex type "defaults"
 type Defaults struct {
 	Name string `xml:"-"`
 
 	// insertion point for fields
 
 	// generated from element "scaling" of type scaling order 410 depth 0
-	Scaling []*Scaling `xml:"scaling,omitempty"`
+	Scaling *Scaling `xml:"scaling,omitempty"`
 
 	// generated from element "concert-score" of type empty order 411 depth 0
 	Concert_score string `xml:"concert-score,omitempty"`
@@ -782,13 +789,13 @@ type Defaults struct {
 	Group_layout
 
 	// generated from element "appearance" of type appearance order 413 depth 0
-	Appearance []*Appearance `xml:"appearance,omitempty"`
+	Appearance *Appearance `xml:"appearance,omitempty"`
 
 	// generated from element "music-font" of type empty-font order 414 depth 0
-	Music_font []*Empty_font `xml:"music-font,omitempty"`
+	Music_font *Empty_font `xml:"music-font,omitempty"`
 
 	// generated from element "word-font" of type empty-font order 415 depth 0
-	Word_font []*Empty_font `xml:"word-font,omitempty"`
+	Word_font *Empty_font `xml:"word-font,omitempty"`
 
 	// generated from element "lyric-font" of type lyric-font order 416 depth 0
 	Lyric_font []*Lyric_font `xml:"lyric-font,omitempty"`
@@ -797,7 +804,7 @@ type Defaults struct {
 	Lyric_language []*Lyric_language `xml:"lyric-language,omitempty"`
 }
 
-// Degree is generated from named complex type "degree"
+// Degree Named source named complex type "degree"
 type Degree struct {
 	Name string `xml:"-"`
 
@@ -807,16 +814,16 @@ type Degree struct {
 	AttributeGroup_print_object
 
 	// generated from element "degree-value" of type degree-value order 97 depth 0
-	Degree_value []*Degree_value `xml:"degree-value,omitempty"`
+	Degree_value *Degree_value `xml:"degree-value,omitempty"`
 
 	// generated from element "degree-alter" of type degree-alter order 98 depth 0
-	Degree_alter []*Degree_alter `xml:"degree-alter,omitempty"`
+	Degree_alter *Degree_alter `xml:"degree-alter,omitempty"`
 
 	// generated from element "degree-type" of type degree-type order 99 depth 0
-	Degree_type []*Degree_type `xml:"degree-type,omitempty"`
+	Degree_type *Degree_type `xml:"degree-type,omitempty"`
 }
 
-// Degree_alter is generated from named complex type "degree-alter"
+// Degree_alter Named source named complex type "degree-alter"
 type Degree_alter struct {
 	Name string `xml:"-"`
 
@@ -829,7 +836,7 @@ type Degree_alter struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Degree_type is generated from named complex type "degree-type"
+// Degree_type Named source named complex type "degree-type"
 type Degree_type struct {
 	Name string `xml:"-"`
 
@@ -842,7 +849,7 @@ type Degree_type struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Degree_value is generated from named complex type "degree-value"
+// Degree_value Named source named complex type "degree-value"
 type Degree_value struct {
 	Name string `xml:"-"`
 
@@ -858,7 +865,7 @@ type Degree_value struct {
 	EnclosedText int `xml:",chardata"`
 }
 
-// Direction is generated from named complex type "direction"
+// Direction Named source named complex type "direction"
 type Direction struct {
 	Name string `xml:"-"`
 
@@ -880,7 +887,7 @@ type Direction struct {
 	Direction_type []*Direction_type `xml:"direction-type,omitempty"`
 
 	// generated from element "offset" of type offset order 101 depth 0
-	Offset []*Offset `xml:"offset,omitempty"`
+	Offset *Offset `xml:"offset,omitempty"`
 
 	// generated from group with order 102 depth 0
 	Group_editorial_voice_direction
@@ -889,13 +896,13 @@ type Direction struct {
 	Group_staff
 
 	// generated from element "sound" of type sound order 104 depth 0
-	Sound []*Sound `xml:"sound,omitempty"`
+	Sound *Sound `xml:"sound,omitempty"`
 
 	// generated from element "listening" of type listening order 105 depth 0
-	Listening []*Listening `xml:"listening,omitempty"`
+	Listening *Listening `xml:"listening,omitempty"`
 }
 
-// Direction_type is generated from named complex type "direction-type"
+// Direction_type Named source named complex type "direction-type"
 type Direction_type struct {
 	Name string `xml:"-"`
 
@@ -920,64 +927,64 @@ type Direction_type struct {
 	Symbol []*Formatted_symbol_id `xml:"symbol,omitempty"`
 
 	// generated from element "wedge" of type wedge order 111 depth 0
-	Wedge []*Wedge `xml:"wedge,omitempty"`
+	Wedge *Wedge `xml:"wedge,omitempty"`
 
 	// generated from element "dynamics" of type dynamics order 112 depth 0
 	Dynamics []*Dynamics `xml:"dynamics,omitempty"`
 
 	// generated from element "dashes" of type dashes order 113 depth 0
-	Dashes []*Dashes `xml:"dashes,omitempty"`
+	Dashes *Dashes `xml:"dashes,omitempty"`
 
 	// generated from element "bracket" of type bracket order 114 depth 0
-	Bracket []*Bracket `xml:"bracket,omitempty"`
+	Bracket *Bracket `xml:"bracket,omitempty"`
 
 	// generated from element "pedal" of type pedal order 115 depth 0
-	Pedal []*Pedal `xml:"pedal,omitempty"`
+	Pedal *Pedal `xml:"pedal,omitempty"`
 
 	// generated from element "metronome" of type metronome order 116 depth 0
-	Metronome []*Metronome `xml:"metronome,omitempty"`
+	Metronome *Metronome `xml:"metronome,omitempty"`
 
 	// generated from element "octave-shift" of type octave-shift order 117 depth 0
-	Octave_shift []*Octave_shift `xml:"octave-shift,omitempty"`
+	Octave_shift *Octave_shift `xml:"octave-shift,omitempty"`
 
 	// generated from element "harp-pedals" of type harp-pedals order 118 depth 0
-	Harp_pedals []*Harp_pedals `xml:"harp-pedals,omitempty"`
+	Harp_pedals *Harp_pedals `xml:"harp-pedals,omitempty"`
 
 	// generated from element "damp" of type empty-print-style-align-id order 119 depth 0
-	Damp []*Empty_print_style_align_id `xml:"damp,omitempty"`
+	Damp *Empty_print_style_align_id `xml:"damp,omitempty"`
 
 	// generated from element "damp-all" of type empty-print-style-align-id order 120 depth 0
-	Damp_all []*Empty_print_style_align_id `xml:"damp-all,omitempty"`
+	Damp_all *Empty_print_style_align_id `xml:"damp-all,omitempty"`
 
 	// generated from element "eyeglasses" of type empty-print-style-align-id order 121 depth 0
-	Eyeglasses []*Empty_print_style_align_id `xml:"eyeglasses,omitempty"`
+	Eyeglasses *Empty_print_style_align_id `xml:"eyeglasses,omitempty"`
 
 	// generated from element "string-mute" of type string-mute order 122 depth 0
-	String_mute []*String_mute `xml:"string-mute,omitempty"`
+	String_mute *String_mute `xml:"string-mute,omitempty"`
 
 	// generated from element "scordatura" of type scordatura order 123 depth 0
-	Scordatura []*Scordatura `xml:"scordatura,omitempty"`
+	Scordatura *Scordatura `xml:"scordatura,omitempty"`
 
 	// generated from element "image" of type image order 124 depth 0
-	Image []*Image `xml:"image,omitempty"`
+	Image *Image `xml:"image,omitempty"`
 
 	// generated from element "principal-voice" of type principal-voice order 125 depth 0
-	Principal_voice []*Principal_voice `xml:"principal-voice,omitempty"`
+	Principal_voice *Principal_voice `xml:"principal-voice,omitempty"`
 
 	// generated from element "percussion" of type percussion order 126 depth 0
 	Percussion []*Percussion `xml:"percussion,omitempty"`
 
 	// generated from element "accordion-registration" of type accordion-registration order 127 depth 0
-	Accordion_registration []*Accordion_registration `xml:"accordion-registration,omitempty"`
+	Accordion_registration *Accordion_registration `xml:"accordion-registration,omitempty"`
 
 	// generated from element "staff-divide" of type staff-divide order 128 depth 0
-	Staff_divide []*Staff_divide `xml:"staff-divide,omitempty"`
+	Staff_divide *Staff_divide `xml:"staff-divide,omitempty"`
 
 	// generated from element "other-direction" of type other-direction order 129 depth 0
-	Other_direction []*Other_direction `xml:"other-direction,omitempty"`
+	Other_direction *Other_direction `xml:"other-direction,omitempty"`
 }
 
-// Distance is generated from named complex type "distance"
+// Distance Named source named complex type "distance"
 type Distance struct {
 	Name string `xml:"-"`
 
@@ -990,7 +997,7 @@ type Distance struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Double is generated from named complex type "double"
+// Double Named source named complex type "double"
 type Double struct {
 	Name string `xml:"-"`
 
@@ -1000,7 +1007,7 @@ type Double struct {
 	Above string `xml:"above,attr,omitempty"`
 }
 
-// Dynamics is generated from named complex type "dynamics"
+// Dynamics Named source named complex type "dynamics"
 type Dynamics struct {
 	Name string `xml:"-"`
 
@@ -1103,7 +1110,7 @@ type Dynamics struct {
 	Other_dynamics []*Other_text `xml:"other-dynamics,omitempty"`
 }
 
-// Effect is generated from named complex type "effect"
+// Effect Named source named complex type "effect"
 type Effect struct {
 	Name string `xml:"-"`
 
@@ -1116,7 +1123,7 @@ type Effect struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Elision is generated from named complex type "elision"
+// Elision Named source named complex type "elision"
 type Elision struct {
 	Name string `xml:"-"`
 
@@ -1129,14 +1136,14 @@ type Elision struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Empty is generated from named complex type "empty"
+// Empty Named source named complex type "empty"
 type Empty struct {
 	Name string `xml:"-"`
 
 	// insertion point for fields
 }
 
-// Empty_font is generated from named complex type "empty-font"
+// Empty_font Named source named complex type "empty-font"
 type Empty_font struct {
 	Name string `xml:"-"`
 
@@ -1146,7 +1153,7 @@ type Empty_font struct {
 	AttributeGroup_font
 }
 
-// Empty_line is generated from named complex type "empty-line"
+// Empty_line Named source named complex type "empty-line"
 type Empty_line struct {
 	Name string `xml:"-"`
 
@@ -1171,7 +1178,7 @@ type Empty_line struct {
 	AttributeGroup_placement
 }
 
-// Empty_placement is generated from named complex type "empty-placement"
+// Empty_placement Named source named complex type "empty-placement"
 type Empty_placement struct {
 	Name string `xml:"-"`
 
@@ -1184,7 +1191,7 @@ type Empty_placement struct {
 	AttributeGroup_placement
 }
 
-// Empty_placement_smufl is generated from named complex type "empty-placement-smufl"
+// Empty_placement_smufl Named source named complex type "empty-placement-smufl"
 type Empty_placement_smufl struct {
 	Name string `xml:"-"`
 
@@ -1200,7 +1207,7 @@ type Empty_placement_smufl struct {
 	AttributeGroup_smufl
 }
 
-// Empty_print_object_style_align is generated from named complex type "empty-print-object-style-align"
+// Empty_print_object_style_align Named source named complex type "empty-print-object-style-align"
 type Empty_print_object_style_align struct {
 	Name string `xml:"-"`
 
@@ -1213,7 +1220,7 @@ type Empty_print_object_style_align struct {
 	AttributeGroup_print_style_align
 }
 
-// Empty_print_style is generated from named complex type "empty-print-style"
+// Empty_print_style Named source named complex type "empty-print-style"
 type Empty_print_style struct {
 	Name string `xml:"-"`
 
@@ -1223,7 +1230,7 @@ type Empty_print_style struct {
 	AttributeGroup_print_style
 }
 
-// Empty_print_style_align is generated from named complex type "empty-print-style-align"
+// Empty_print_style_align Named source named complex type "empty-print-style-align"
 type Empty_print_style_align struct {
 	Name string `xml:"-"`
 
@@ -1233,7 +1240,7 @@ type Empty_print_style_align struct {
 	AttributeGroup_print_style_align
 }
 
-// Empty_print_style_align_id is generated from named complex type "empty-print-style-align-id"
+// Empty_print_style_align_id Named source named complex type "empty-print-style-align-id"
 type Empty_print_style_align_id struct {
 	Name string `xml:"-"`
 
@@ -1246,7 +1253,7 @@ type Empty_print_style_align_id struct {
 	AttributeGroup_optional_unique_id
 }
 
-// Empty_trill_sound is generated from named complex type "empty-trill-sound"
+// Empty_trill_sound Named source named complex type "empty-trill-sound"
 type Empty_trill_sound struct {
 	Name string `xml:"-"`
 
@@ -1262,7 +1269,7 @@ type Empty_trill_sound struct {
 	AttributeGroup_trill_sound
 }
 
-// Encoding is generated from named complex type "encoding"
+// Encoding Named source named complex type "encoding"
 type Encoding struct {
 	Name string `xml:"-"`
 
@@ -1281,7 +1288,7 @@ type Encoding struct {
 	Supports []*Supports `xml:"supports,omitempty"`
 }
 
-// Ending is generated from named complex type "ending"
+// Ending Named source named complex type "ending"
 type Ending struct {
 	Name string `xml:"-"`
 
@@ -1306,7 +1313,7 @@ type Ending struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Extend is generated from named complex type "extend"
+// Extend Named source named complex type "extend"
 type Extend struct {
 	Name string `xml:"-"`
 
@@ -1322,7 +1329,7 @@ type Extend struct {
 	AttributeGroup_color
 }
 
-// Feature is generated from named complex type "feature"
+// Feature Named source named complex type "feature"
 type Feature struct {
 	Name string `xml:"-"`
 
@@ -1335,7 +1342,7 @@ type Feature struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Fermata is generated from named complex type "fermata"
+// Fermata Named source named complex type "fermata"
 type Fermata struct {
 	Name string `xml:"-"`
 
@@ -1348,29 +1355,29 @@ type Fermata struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Figure is generated from named complex type "figure"
+// Figure Named source named complex type "figure"
 type Figure struct {
 	Name string `xml:"-"`
 
 	// insertion point for fields
 
 	// generated from element "prefix" of type style-text order 261 depth 0
-	Prefix []*Style_text `xml:"prefix,omitempty"`
+	Prefix *Style_text `xml:"prefix,omitempty"`
 
 	// generated from element "figure-number" of type style-text order 262 depth 0
-	Figure_number []*Style_text `xml:"figure-number,omitempty"`
+	Figure_number *Style_text `xml:"figure-number,omitempty"`
 
 	// generated from element "suffix" of type style-text order 263 depth 0
-	Suffix []*Style_text `xml:"suffix,omitempty"`
+	Suffix *Style_text `xml:"suffix,omitempty"`
 
 	// generated from element "extend" of type extend order 264 depth 0
-	Extend []*Extend `xml:"extend,omitempty"`
+	Extend *Extend `xml:"extend,omitempty"`
 
 	// generated from group with order 265 depth 0
 	Group_editorial
 }
 
-// Figured_bass is generated from named complex type "figured-bass"
+// Figured_bass Named source named complex type "figured-bass"
 type Figured_bass struct {
 	Name string `xml:"-"`
 
@@ -1401,7 +1408,7 @@ type Figured_bass struct {
 	Group_editorial
 }
 
-// Fingering is generated from named complex type "fingering"
+// Fingering Named source named complex type "fingering"
 type Fingering struct {
 	Name string `xml:"-"`
 
@@ -1417,7 +1424,7 @@ type Fingering struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// First_fret is generated from named complex type "first-fret"
+// First_fret Named source named complex type "first-fret"
 type First_fret struct {
 	Name string `xml:"-"`
 
@@ -1433,7 +1440,7 @@ type First_fret struct {
 	EnclosedText int `xml:",chardata"`
 }
 
-// For_part is generated from named complex type "for-part"
+// For_part Named source named complex type "for-part"
 type For_part struct {
 	Name string `xml:"-"`
 
@@ -1446,13 +1453,13 @@ type For_part struct {
 	AttributeGroup_optional_unique_id
 
 	// generated from element "part-clef" of type part-clef order 56 depth 0
-	Part_clef []*Part_clef `xml:"part-clef,omitempty"`
+	Part_clef *Part_clef `xml:"part-clef,omitempty"`
 
 	// generated from element "part-transpose" of type part-transpose order 57 depth 0
-	Part_transpose []*Part_transpose `xml:"part-transpose,omitempty"`
+	Part_transpose *Part_transpose `xml:"part-transpose,omitempty"`
 }
 
-// Formatted_symbol is generated from named complex type "formatted-symbol"
+// Formatted_symbol Named source named complex type "formatted-symbol"
 type Formatted_symbol struct {
 	Name string `xml:"-"`
 
@@ -1462,7 +1469,7 @@ type Formatted_symbol struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Formatted_symbol_id is generated from named complex type "formatted-symbol-id"
+// Formatted_symbol_id Named source named complex type "formatted-symbol-id"
 type Formatted_symbol_id struct {
 	Name string `xml:"-"`
 
@@ -1472,7 +1479,7 @@ type Formatted_symbol_id struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Formatted_text is generated from named complex type "formatted-text"
+// Formatted_text Named source named complex type "formatted-text"
 type Formatted_text struct {
 	Name string `xml:"-"`
 
@@ -1482,7 +1489,7 @@ type Formatted_text struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Formatted_text_id is generated from named complex type "formatted-text-id"
+// Formatted_text_id Named source named complex type "formatted-text-id"
 type Formatted_text_id struct {
 	Name string `xml:"-"`
 
@@ -1492,7 +1499,7 @@ type Formatted_text_id struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Forward is generated from named complex type "forward"
+// Forward Named source named complex type "forward"
 type Forward struct {
 	Name string `xml:"-"`
 
@@ -1508,7 +1515,7 @@ type Forward struct {
 	Group_staff
 }
 
-// Frame is generated from named complex type "frame"
+// Frame Named source named complex type "frame"
 type Frame struct {
 	Name string `xml:"-"`
 
@@ -1545,32 +1552,32 @@ type Frame struct {
 	Frame_frets int `xml:"frame-frets,omitempty"`
 
 	// generated from element "first-fret" of type first-fret order 132 depth 0
-	First_fret []*First_fret `xml:"first-fret,omitempty"`
+	First_fret *First_fret `xml:"first-fret,omitempty"`
 
 	// generated from element "frame-note" of type frame-note order 133 depth 0
 	Frame_note []*Frame_note `xml:"frame-note,omitempty"`
 }
 
-// Frame_note is generated from named complex type "frame-note"
+// Frame_note Named source named complex type "frame-note"
 type Frame_note struct {
 	Name string `xml:"-"`
 
 	// insertion point for fields
 
 	// generated from element "string" of type string-type order 134 depth 0
-	String []*String_type `xml:"string,omitempty"`
+	String *String_type `xml:"string,omitempty"`
 
 	// generated from element "fret" of type fret order 135 depth 0
-	Fret []*Fret `xml:"fret,omitempty"`
+	Fret *Fret `xml:"fret,omitempty"`
 
 	// generated from element "fingering" of type fingering order 136 depth 0
-	Fingering []*Fingering `xml:"fingering,omitempty"`
+	Fingering *Fingering `xml:"fingering,omitempty"`
 
 	// generated from element "barre" of type barre order 137 depth 0
-	Barre []*Barre `xml:"barre,omitempty"`
+	Barre *Barre `xml:"barre,omitempty"`
 }
 
-// Fret is generated from named complex type "fret"
+// Fret Named source named complex type "fret"
 type Fret struct {
 	Name string `xml:"-"`
 
@@ -1580,7 +1587,7 @@ type Fret struct {
 	EnclosedText int `xml:",chardata"`
 }
 
-// Glass is generated from named complex type "glass"
+// Glass Named source named complex type "glass"
 type Glass struct {
 	Name string `xml:"-"`
 
@@ -1593,7 +1600,7 @@ type Glass struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Glissando is generated from named complex type "glissando"
+// Glissando Named source named complex type "glissando"
 type Glissando struct {
 	Name string `xml:"-"`
 
@@ -1609,7 +1616,7 @@ type Glissando struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Glyph is generated from named complex type "glyph"
+// Glyph Named source named complex type "glyph"
 type Glyph struct {
 	Name string `xml:"-"`
 
@@ -1622,7 +1629,7 @@ type Glyph struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Grace is generated from named complex type "grace"
+// Grace Named source named complex type "grace"
 type Grace struct {
 	Name string `xml:"-"`
 
@@ -1641,7 +1648,7 @@ type Grace struct {
 	Slash string `xml:"slash,attr,omitempty"`
 }
 
-// Group_barline is generated from named complex type "group-barline"
+// Group_barline Named source named complex type "group-barline"
 type Group_barline struct {
 	Name string `xml:"-"`
 
@@ -1651,7 +1658,7 @@ type Group_barline struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Group_name is generated from named complex type "group-name"
+// Group_name Named source named complex type "group-name"
 type Group_name struct {
 	Name string `xml:"-"`
 
@@ -1661,7 +1668,7 @@ type Group_name struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Group_symbol is generated from named complex type "group-symbol"
+// Group_symbol Named source named complex type "group-symbol"
 type Group_symbol struct {
 	Name string `xml:"-"`
 
@@ -1671,7 +1678,7 @@ type Group_symbol struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Grouping is generated from named complex type "grouping"
+// Grouping Named source named complex type "grouping"
 type Grouping struct {
 	Name string `xml:"-"`
 
@@ -1693,7 +1700,7 @@ type Grouping struct {
 	Feature []*Feature `xml:"feature,omitempty"`
 }
 
-// Hammer_on_pull_off is generated from named complex type "hammer-on-pull-off"
+// Hammer_on_pull_off Named source named complex type "hammer-on-pull-off"
 type Hammer_on_pull_off struct {
 	Name string `xml:"-"`
 
@@ -1709,7 +1716,7 @@ type Hammer_on_pull_off struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Handbell is generated from named complex type "handbell"
+// Handbell Named source named complex type "handbell"
 type Handbell struct {
 	Name string `xml:"-"`
 
@@ -1719,7 +1726,7 @@ type Handbell struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Harmon_closed is generated from named complex type "harmon-closed"
+// Harmon_closed Named source named complex type "harmon-closed"
 type Harmon_closed struct {
 	Name string `xml:"-"`
 
@@ -1732,7 +1739,7 @@ type Harmon_closed struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Harmon_mute is generated from named complex type "harmon-mute"
+// Harmon_mute Named source named complex type "harmon-mute"
 type Harmon_mute struct {
 	Name string `xml:"-"`
 
@@ -1745,10 +1752,10 @@ type Harmon_mute struct {
 	AttributeGroup_placement
 
 	// generated from element "harmon-closed" of type harmon-closed order 272 depth 0
-	Harmon_closed []*Harmon_closed `xml:"harmon-closed,omitempty"`
+	Harmon_closed *Harmon_closed `xml:"harmon-closed,omitempty"`
 }
 
-// Harmonic is generated from named complex type "harmonic"
+// Harmonic Named source named complex type "harmonic"
 type Harmonic struct {
 	Name string `xml:"-"`
 
@@ -1779,7 +1786,7 @@ type Harmonic struct {
 	Sounding_pitch string `xml:"sounding-pitch,omitempty"`
 }
 
-// Harmony is generated from named complex type "harmony"
+// Harmony Named source named complex type "harmony"
 type Harmony struct {
 	Name string `xml:"-"`
 
@@ -1813,10 +1820,10 @@ type Harmony struct {
 	Group_harmony_chord
 
 	// generated from element "frame" of type frame order 140 depth 0
-	Frame []*Frame `xml:"frame,omitempty"`
+	Frame *Frame `xml:"frame,omitempty"`
 
 	// generated from element "offset" of type offset order 141 depth 0
-	Offset []*Offset `xml:"offset,omitempty"`
+	Offset *Offset `xml:"offset,omitempty"`
 
 	// generated from group with order 142 depth 0
 	Group_editorial
@@ -1825,7 +1832,7 @@ type Harmony struct {
 	Group_staff
 }
 
-// Harmony_alter is generated from named complex type "harmony-alter"
+// Harmony_alter Named source named complex type "harmony-alter"
 type Harmony_alter struct {
 	Name string `xml:"-"`
 
@@ -1838,7 +1845,7 @@ type Harmony_alter struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Harp_pedals is generated from named complex type "harp-pedals"
+// Harp_pedals Named source named complex type "harp-pedals"
 type Harp_pedals struct {
 	Name string `xml:"-"`
 
@@ -1854,14 +1861,14 @@ type Harp_pedals struct {
 	Pedal_tuning []*Pedal_tuning `xml:"pedal-tuning,omitempty"`
 }
 
-// Heel_toe is generated from named complex type "heel-toe"
+// Heel_toe Named source named complex type "heel-toe"
 type Heel_toe struct {
 	Name string `xml:"-"`
 
 	// insertion point for fields
 }
 
-// Hole is generated from named complex type "hole"
+// Hole Named source named complex type "hole"
 type Hole struct {
 	Name string `xml:"-"`
 
@@ -1877,13 +1884,13 @@ type Hole struct {
 	Hole_type string `xml:"hole-type,omitempty"`
 
 	// generated from element "hole-closed" of type hole-closed order 279 depth 0
-	Hole_closed []*Hole_closed `xml:"hole-closed,omitempty"`
+	Hole_closed *Hole_closed `xml:"hole-closed,omitempty"`
 
 	// generated from element "hole-shape" of type string order 280 depth 0
 	Hole_shape string `xml:"hole-shape,omitempty"`
 }
 
-// Hole_closed is generated from named complex type "hole-closed"
+// Hole_closed Named source named complex type "hole-closed"
 type Hole_closed struct {
 	Name string `xml:"-"`
 
@@ -1896,7 +1903,7 @@ type Hole_closed struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Horizontal_turn is generated from named complex type "horizontal-turn"
+// Horizontal_turn Named source named complex type "horizontal-turn"
 type Horizontal_turn struct {
 	Name string `xml:"-"`
 
@@ -1915,7 +1922,7 @@ type Horizontal_turn struct {
 	AttributeGroup_trill_sound
 }
 
-// Identification is generated from named complex type "identification"
+// Identification Named source named complex type "identification"
 type Identification struct {
 	Name string `xml:"-"`
 
@@ -1928,7 +1935,7 @@ type Identification struct {
 	Rights []*Typed_text `xml:"rights,omitempty"`
 
 	// generated from element "encoding" of type encoding order 209 depth 0
-	Encoding []*Encoding `xml:"encoding,omitempty"`
+	Encoding *Encoding `xml:"encoding,omitempty"`
 
 	// generated from element "source" of type string order 210 depth 0
 	Source string `xml:"source,omitempty"`
@@ -1937,10 +1944,10 @@ type Identification struct {
 	Relation []*Typed_text `xml:"relation,omitempty"`
 
 	// generated from element "miscellaneous" of type miscellaneous order 212 depth 0
-	Miscellaneous []*Miscellaneous `xml:"miscellaneous,omitempty"`
+	Miscellaneous *Miscellaneous `xml:"miscellaneous,omitempty"`
 }
 
-// Image is generated from named complex type "image"
+// Image Named source named complex type "image"
 type Image struct {
 	Name string `xml:"-"`
 
@@ -1953,7 +1960,7 @@ type Image struct {
 	AttributeGroup_optional_unique_id
 }
 
-// Instrument is generated from named complex type "instrument"
+// Instrument Named source named complex type "instrument"
 type Instrument struct {
 	Name string `xml:"-"`
 
@@ -1963,7 +1970,7 @@ type Instrument struct {
 	Id string `xml:"id,attr,omitempty"`
 }
 
-// Instrument_change is generated from named complex type "instrument-change"
+// Instrument_change Named source named complex type "instrument-change"
 type Instrument_change struct {
 	Name string `xml:"-"`
 
@@ -1976,7 +1983,7 @@ type Instrument_change struct {
 	Group_virtual_instrument_data
 }
 
-// Instrument_link is generated from named complex type "instrument-link"
+// Instrument_link Named source named complex type "instrument-link"
 type Instrument_link struct {
 	Name string `xml:"-"`
 
@@ -1986,7 +1993,7 @@ type Instrument_link struct {
 	Id string `xml:"id,attr,omitempty"`
 }
 
-// Interchangeable is generated from named complex type "interchangeable"
+// Interchangeable Named source named complex type "interchangeable"
 type Interchangeable struct {
 	Name string `xml:"-"`
 
@@ -2005,7 +2012,7 @@ type Interchangeable struct {
 	Group_time_signature
 }
 
-// Inversion is generated from named complex type "inversion"
+// Inversion Named source named complex type "inversion"
 type Inversion struct {
 	Name string `xml:"-"`
 
@@ -2018,7 +2025,7 @@ type Inversion struct {
 	EnclosedText int `xml:",chardata"`
 }
 
-// Key is generated from named complex type "key"
+// Key Named source named complex type "key"
 type Key struct {
 	Name string `xml:"-"`
 
@@ -2046,7 +2053,7 @@ type Key struct {
 	Key_octave []*Key_octave `xml:"key-octave,omitempty"`
 }
 
-// Key_accidental is generated from named complex type "key-accidental"
+// Key_accidental Named source named complex type "key-accidental"
 type Key_accidental struct {
 	Name string `xml:"-"`
 
@@ -2059,7 +2066,7 @@ type Key_accidental struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Key_octave is generated from named complex type "key-octave"
+// Key_octave Named source named complex type "key-octave"
 type Key_octave struct {
 	Name string `xml:"-"`
 
@@ -2075,7 +2082,7 @@ type Key_octave struct {
 	EnclosedText int `xml:",chardata"`
 }
 
-// Kind is generated from named complex type "kind"
+// Kind Named source named complex type "kind"
 type Kind struct {
 	Name string `xml:"-"`
 
@@ -2100,7 +2107,7 @@ type Kind struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Level is generated from named complex type "level"
+// Level Named source named complex type "level"
 type Level struct {
 	Name string `xml:"-"`
 
@@ -2116,7 +2123,7 @@ type Level struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Line_detail is generated from named complex type "line-detail"
+// Line_detail Named source named complex type "line-detail"
 type Line_detail struct {
 	Name string `xml:"-"`
 
@@ -2138,7 +2145,7 @@ type Line_detail struct {
 	AttributeGroup_print_object
 }
 
-// Line_width is generated from named complex type "line-width"
+// Line_width Named source named complex type "line-width"
 type Line_width struct {
 	Name string `xml:"-"`
 
@@ -2151,7 +2158,7 @@ type Line_width struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Link is generated from named complex type "link"
+// Link Named source named complex type "link"
 type Link struct {
 	Name string `xml:"-"`
 
@@ -2170,7 +2177,7 @@ type Link struct {
 	AttributeGroup_position
 }
 
-// Listen is generated from named complex type "listen"
+// Listen Named source named complex type "listen"
 type Listen struct {
 	Name string `xml:"-"`
 
@@ -2186,7 +2193,7 @@ type Listen struct {
 	Other_listen []*Other_listening `xml:"other-listen,omitempty"`
 }
 
-// Listening is generated from named complex type "listening"
+// Listening Named source named complex type "listening"
 type Listening struct {
 	Name string `xml:"-"`
 
@@ -2199,10 +2206,10 @@ type Listening struct {
 	Other_listening []*Other_listening `xml:"other-listening,omitempty"`
 
 	// generated from element "offset" of type offset order 148 depth 0
-	Offset []*Offset `xml:"offset,omitempty"`
+	Offset *Offset `xml:"offset,omitempty"`
 }
 
-// Lyric is generated from named complex type "lyric"
+// Lyric Named source named complex type "lyric"
 type Lyric struct {
 	Name string `xml:"-"`
 
@@ -2245,7 +2252,7 @@ type Lyric struct {
 	Text []*Text_element_data `xml:"text,omitempty"`
 
 	// generated from element "extend" of type extend order 289 depth 0
-	Extend []*Extend `xml:"extend,omitempty"`
+	Extend *Extend `xml:"extend,omitempty"`
 
 	// generated from element "laughing" of type empty order 291 depth 0
 	Laughing string `xml:"laughing,omitempty"`
@@ -2263,7 +2270,7 @@ type Lyric struct {
 	Group_editorial
 }
 
-// Lyric_font is generated from named complex type "lyric-font"
+// Lyric_font Named source named complex type "lyric-font"
 type Lyric_font struct {
 	Name string `xml:"-"`
 
@@ -2279,7 +2286,7 @@ type Lyric_font struct {
 	AttributeGroup_font
 }
 
-// Lyric_language is generated from named complex type "lyric-language"
+// Lyric_language Named source named complex type "lyric-language"
 type Lyric_language struct {
 	Name string `xml:"-"`
 
@@ -2295,7 +2302,7 @@ type Lyric_language struct {
 	Lang string `xml:"http://www.w3.org/XML/1998/namespace lang,attr,omitempty"`
 }
 
-// Measure_layout is generated from named complex type "measure-layout"
+// Measure_layout Named source named complex type "measure-layout"
 type Measure_layout struct {
 	Name string `xml:"-"`
 
@@ -2305,7 +2312,7 @@ type Measure_layout struct {
 	Measure_distance string `xml:"measure-distance,omitempty"`
 }
 
-// Measure_numbering is generated from named complex type "measure-numbering"
+// Measure_numbering Named source named complex type "measure-numbering"
 type Measure_numbering struct {
 	Name string `xml:"-"`
 
@@ -2327,7 +2334,7 @@ type Measure_numbering struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Measure_repeat is generated from named complex type "measure-repeat"
+// Measure_repeat Named source named complex type "measure-repeat"
 type Measure_repeat struct {
 	Name string `xml:"-"`
 
@@ -2343,7 +2350,7 @@ type Measure_repeat struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Measure_style is generated from named complex type "measure-style"
+// Measure_style Named source named complex type "measure-style"
 type Measure_style struct {
 	Name string `xml:"-"`
 
@@ -2362,19 +2369,19 @@ type Measure_style struct {
 	AttributeGroup_optional_unique_id
 
 	// generated from element "multiple-rest" of type multiple-rest order 63 depth 0
-	Multiple_rest []*Multiple_rest `xml:"multiple-rest,omitempty"`
+	Multiple_rest *Multiple_rest `xml:"multiple-rest,omitempty"`
 
 	// generated from element "measure-repeat" of type measure-repeat order 64 depth 0
-	Measure_repeat []*Measure_repeat `xml:"measure-repeat,omitempty"`
+	Measure_repeat *Measure_repeat `xml:"measure-repeat,omitempty"`
 
 	// generated from element "beat-repeat" of type beat-repeat order 65 depth 0
-	Beat_repeat []*Beat_repeat `xml:"beat-repeat,omitempty"`
+	Beat_repeat *Beat_repeat `xml:"beat-repeat,omitempty"`
 
 	// generated from element "slash" of type slash order 66 depth 0
-	Slash []*Slash `xml:"slash,omitempty"`
+	Slash *Slash `xml:"slash,omitempty"`
 }
 
-// Membrane is generated from named complex type "membrane"
+// Membrane Named source named complex type "membrane"
 type Membrane struct {
 	Name string `xml:"-"`
 
@@ -2387,7 +2394,7 @@ type Membrane struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Metal is generated from named complex type "metal"
+// Metal Named source named complex type "metal"
 type Metal struct {
 	Name string `xml:"-"`
 
@@ -2400,7 +2407,7 @@ type Metal struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Metronome is generated from named complex type "metronome"
+// Metronome Named source named complex type "metronome"
 type Metronome struct {
 	Name string `xml:"-"`
 
@@ -2425,7 +2432,7 @@ type Metronome struct {
 	Group_beat_unit
 
 	// generated from element "per-minute" of type per-minute order 151 depth 0
-	Per_minute []*Per_minute `xml:"per-minute,omitempty"`
+	Per_minute *Per_minute `xml:"per-minute,omitempty"`
 
 	// generated from element "beat-unit-tied" of type beat-unit-tied order 153 depth 0
 	Beat_unit_tied []*Beat_unit_tied `xml:"beat-unit-tied,omitempty"`
@@ -2440,7 +2447,7 @@ type Metronome struct {
 	Metronome_note []*Metronome_note `xml:"metronome-note,omitempty"`
 }
 
-// Metronome_beam is generated from named complex type "metronome-beam"
+// Metronome_beam Named source named complex type "metronome-beam"
 type Metronome_beam struct {
 	Name string `xml:"-"`
 
@@ -2453,7 +2460,7 @@ type Metronome_beam struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Metronome_note is generated from named complex type "metronome-note"
+// Metronome_note Named source named complex type "metronome-note"
 type Metronome_note struct {
 	Name string `xml:"-"`
 
@@ -2469,13 +2476,13 @@ type Metronome_note struct {
 	Metronome_beam []*Metronome_beam `xml:"metronome-beam,omitempty"`
 
 	// generated from element "metronome-tied" of type metronome-tied order 161 depth 0
-	Metronome_tied []*Metronome_tied `xml:"metronome-tied,omitempty"`
+	Metronome_tied *Metronome_tied `xml:"metronome-tied,omitempty"`
 
 	// generated from element "metronome-tuplet" of type metronome-tuplet order 162 depth 0
-	Metronome_tuplet []*Metronome_tuplet `xml:"metronome-tuplet,omitempty"`
+	Metronome_tuplet *Metronome_tuplet `xml:"metronome-tuplet,omitempty"`
 }
 
-// Metronome_tied is generated from named complex type "metronome-tied"
+// Metronome_tied Named source named complex type "metronome-tied"
 type Metronome_tied struct {
 	Name string `xml:"-"`
 
@@ -2485,14 +2492,14 @@ type Metronome_tied struct {
 	Type string `xml:"type,attr,omitempty"`
 }
 
-// Metronome_tuplet is generated from named complex type "metronome-tuplet"
+// Metronome_tuplet Named source named complex type "metronome-tuplet"
 type Metronome_tuplet struct {
 	Name string `xml:"-"`
 
 	// insertion point for fields
 }
 
-// Midi_device is generated from named complex type "midi-device"
+// Midi_device Named source named complex type "midi-device"
 type Midi_device struct {
 	Name string `xml:"-"`
 
@@ -2508,7 +2515,7 @@ type Midi_device struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Midi_instrument is generated from named complex type "midi-instrument"
+// Midi_instrument Named source named complex type "midi-instrument"
 type Midi_instrument struct {
 	Name string `xml:"-"`
 
@@ -2542,7 +2549,7 @@ type Midi_instrument struct {
 	Elevation string `xml:"elevation,omitempty"`
 }
 
-// Miscellaneous is generated from named complex type "miscellaneous"
+// Miscellaneous Named source named complex type "miscellaneous"
 type Miscellaneous struct {
 	Name string `xml:"-"`
 
@@ -2552,7 +2559,7 @@ type Miscellaneous struct {
 	Miscellaneous_field []*Miscellaneous_field `xml:"miscellaneous-field,omitempty"`
 }
 
-// Miscellaneous_field is generated from named complex type "miscellaneous-field"
+// Miscellaneous_field Named source named complex type "miscellaneous-field"
 type Miscellaneous_field struct {
 	Name string `xml:"-"`
 
@@ -2565,14 +2572,14 @@ type Miscellaneous_field struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Mordent is generated from named complex type "mordent"
+// Mordent Named source named complex type "mordent"
 type Mordent struct {
 	Name string `xml:"-"`
 
 	// insertion point for fields
 }
 
-// Multiple_rest is generated from named complex type "multiple-rest"
+// Multiple_rest Named source named complex type "multiple-rest"
 type Multiple_rest struct {
 	Name string `xml:"-"`
 
@@ -2585,7 +2592,7 @@ type Multiple_rest struct {
 	EnclosedText int `xml:",chardata"`
 }
 
-// Name_display is generated from named complex type "name-display"
+// Name_display Named source named complex type "name-display"
 type Name_display struct {
 	Name string `xml:"-"`
 
@@ -2601,7 +2608,7 @@ type Name_display struct {
 	Accidental_text []*Accidental_text `xml:"accidental-text,omitempty"`
 }
 
-// Non_arpeggiate is generated from named complex type "non-arpeggiate"
+// Non_arpeggiate Named source named complex type "non-arpeggiate"
 type Non_arpeggiate struct {
 	Name string `xml:"-"`
 
@@ -2626,7 +2633,7 @@ type Non_arpeggiate struct {
 	AttributeGroup_optional_unique_id
 }
 
-// Notations is generated from named complex type "notations"
+// Notations Named source named complex type "notations"
 type Notations struct {
 	Name string `xml:"-"`
 
@@ -2684,7 +2691,7 @@ type Notations struct {
 	Other_notation []*Other_notation `xml:"other-notation,omitempty"`
 }
 
-// Note is generated from named complex type "note"
+// Note Named source named complex type "note"
 type Note struct {
 	Name string `xml:"-"`
 
@@ -2727,13 +2734,13 @@ type Note struct {
 	AttributeGroup_optional_unique_id
 
 	// generated from element "grace" of type grace order 311 depth 0
-	Grace []*Grace `xml:"grace,omitempty"`
+	Grace *Grace `xml:"grace,omitempty"`
 
 	// generated from group with order 312 depth 0
 	Group_full_note
 
 	// generated from element "tie" of type tie order 313 depth 0
-	Tie []*Tie `xml:"tie,omitempty"`
+	Tie *Tie `xml:"tie,omitempty"`
 
 	// generated from element "cue" of type empty order 314 depth 0
 	Cue string `xml:"cue,omitempty"`
@@ -2748,31 +2755,31 @@ type Note struct {
 	Group_editorial_voice
 
 	// generated from element "type" of type note-type order 324 depth 0
-	Type []*Note_type `xml:"type,omitempty"`
+	Type *Note_type `xml:"type,omitempty"`
 
 	// generated from element "dot" of type empty-placement order 325 depth 0
 	Dot []*Empty_placement `xml:"dot,omitempty"`
 
 	// generated from element "accidental" of type accidental order 326 depth 0
-	Accidental []*Accidental `xml:"accidental,omitempty"`
+	Accidental *Accidental `xml:"accidental,omitempty"`
 
 	// generated from element "time-modification" of type time-modification order 327 depth 0
-	Time_modification []*Time_modification `xml:"time-modification,omitempty"`
+	Time_modification *Time_modification `xml:"time-modification,omitempty"`
 
 	// generated from element "stem" of type stem order 328 depth 0
-	Stem []*Stem `xml:"stem,omitempty"`
+	Stem *Stem `xml:"stem,omitempty"`
 
 	// generated from element "notehead" of type notehead order 329 depth 0
-	Notehead []*Notehead `xml:"notehead,omitempty"`
+	Notehead *Notehead `xml:"notehead,omitempty"`
 
 	// generated from element "notehead-text" of type notehead-text order 330 depth 0
-	Notehead_text []*Notehead_text `xml:"notehead-text,omitempty"`
+	Notehead_text *Notehead_text `xml:"notehead-text,omitempty"`
 
 	// generated from group with order 331 depth 0
 	Group_staff
 
 	// generated from element "beam" of type beam order 332 depth 0
-	Beam []*Beam `xml:"beam,omitempty"`
+	Beam *Beam `xml:"beam,omitempty"`
 
 	// generated from element "notations" of type notations order 333 depth 0
 	Notations []*Notations `xml:"notations,omitempty"`
@@ -2781,13 +2788,13 @@ type Note struct {
 	Lyric []*Lyric `xml:"lyric,omitempty"`
 
 	// generated from element "play" of type play order 335 depth 0
-	Play []*Play `xml:"play,omitempty"`
+	Play *Play `xml:"play,omitempty"`
 
 	// generated from element "listen" of type listen order 336 depth 0
-	Listen []*Listen `xml:"listen,omitempty"`
+	Listen *Listen `xml:"listen,omitempty"`
 }
 
-// Note_size is generated from named complex type "note-size"
+// Note_size Named source named complex type "note-size"
 type Note_size struct {
 	Name string `xml:"-"`
 
@@ -2800,7 +2807,7 @@ type Note_size struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Note_type is generated from named complex type "note-type"
+// Note_type Named source named complex type "note-type"
 type Note_type struct {
 	Name string `xml:"-"`
 
@@ -2813,7 +2820,7 @@ type Note_type struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Notehead is generated from named complex type "notehead"
+// Notehead Named source named complex type "notehead"
 type Notehead struct {
 	Name string `xml:"-"`
 
@@ -2829,7 +2836,7 @@ type Notehead struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Notehead_text is generated from named complex type "notehead-text"
+// Notehead_text Named source named complex type "notehead-text"
 type Notehead_text struct {
 	Name string `xml:"-"`
 
@@ -2842,23 +2849,23 @@ type Notehead_text struct {
 	Accidental_text []*Accidental_text `xml:"accidental-text,omitempty"`
 }
 
-// Numeral is generated from named complex type "numeral"
+// Numeral Named source named complex type "numeral"
 type Numeral struct {
 	Name string `xml:"-"`
 
 	// insertion point for fields
 
 	// generated from element "numeral-root" of type numeral-root order 163 depth 0
-	Numeral_root []*Numeral_root `xml:"numeral-root,omitempty"`
+	Numeral_root *Numeral_root `xml:"numeral-root,omitempty"`
 
 	// generated from element "numeral-alter" of type harmony-alter order 164 depth 0
-	Numeral_alter []*Harmony_alter `xml:"numeral-alter,omitempty"`
+	Numeral_alter *Harmony_alter `xml:"numeral-alter,omitempty"`
 
 	// generated from element "numeral-key" of type numeral-key order 165 depth 0
-	Numeral_key []*Numeral_key `xml:"numeral-key,omitempty"`
+	Numeral_key *Numeral_key `xml:"numeral-key,omitempty"`
 }
 
-// Numeral_key is generated from named complex type "numeral-key"
+// Numeral_key Named source named complex type "numeral-key"
 type Numeral_key struct {
 	Name string `xml:"-"`
 
@@ -2874,7 +2881,7 @@ type Numeral_key struct {
 	Numeral_mode string `xml:"numeral-mode,omitempty"`
 }
 
-// Numeral_root is generated from named complex type "numeral-root"
+// Numeral_root Named source named complex type "numeral-root"
 type Numeral_root struct {
 	Name string `xml:"-"`
 
@@ -2887,7 +2894,7 @@ type Numeral_root struct {
 	EnclosedText int `xml:",chardata"`
 }
 
-// Octave_shift is generated from named complex type "octave-shift"
+// Octave_shift Named source named complex type "octave-shift"
 type Octave_shift struct {
 	Name string `xml:"-"`
 
@@ -2912,7 +2919,7 @@ type Octave_shift struct {
 	AttributeGroup_optional_unique_id
 }
 
-// Offset is generated from named complex type "offset"
+// Offset Named source named complex type "offset"
 type Offset struct {
 	Name string `xml:"-"`
 
@@ -2925,7 +2932,7 @@ type Offset struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Opus is generated from named complex type "opus"
+// Opus Named source named complex type "opus"
 type Opus struct {
 	Name string `xml:"-"`
 
@@ -2935,7 +2942,7 @@ type Opus struct {
 	AttributeGroup_link_attributes
 }
 
-// Ornaments is generated from named complex type "ornaments"
+// Ornaments Named source named complex type "ornaments"
 type Ornaments struct {
 	Name string `xml:"-"`
 
@@ -2993,7 +3000,7 @@ type Ornaments struct {
 	Accidental_mark []*Accidental_mark `xml:"accidental-mark,omitempty"`
 }
 
-// Other_appearance is generated from named complex type "other-appearance"
+// Other_appearance Named source named complex type "other-appearance"
 type Other_appearance struct {
 	Name string `xml:"-"`
 
@@ -3006,7 +3013,7 @@ type Other_appearance struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Other_direction is generated from named complex type "other-direction"
+// Other_direction Named source named complex type "other-direction"
 type Other_direction struct {
 	Name string `xml:"-"`
 
@@ -3016,7 +3023,7 @@ type Other_direction struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Other_listening is generated from named complex type "other-listening"
+// Other_listening Named source named complex type "other-listening"
 type Other_listening struct {
 	Name string `xml:"-"`
 
@@ -3035,7 +3042,7 @@ type Other_listening struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Other_notation is generated from named complex type "other-notation"
+// Other_notation Named source named complex type "other-notation"
 type Other_notation struct {
 	Name string `xml:"-"`
 
@@ -3051,7 +3058,7 @@ type Other_notation struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Other_placement_text is generated from named complex type "other-placement-text"
+// Other_placement_text Named source named complex type "other-placement-text"
 type Other_placement_text struct {
 	Name string `xml:"-"`
 
@@ -3061,7 +3068,7 @@ type Other_placement_text struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Other_play is generated from named complex type "other-play"
+// Other_play Named source named complex type "other-play"
 type Other_play struct {
 	Name string `xml:"-"`
 
@@ -3074,7 +3081,7 @@ type Other_play struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Other_text is generated from named complex type "other-text"
+// Other_text Named source named complex type "other-text"
 type Other_text struct {
 	Name string `xml:"-"`
 
@@ -3084,7 +3091,7 @@ type Other_text struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Page_layout is generated from named complex type "page-layout"
+// Page_layout Named source named complex type "page-layout"
 type Page_layout struct {
 	Name string `xml:"-"`
 
@@ -3097,10 +3104,10 @@ type Page_layout struct {
 	Page_width string `xml:"page-width,omitempty"`
 
 	// generated from element "page-margins" of type page-margins order 222 depth 0
-	Page_margins []*Page_margins `xml:"page-margins,omitempty"`
+	Page_margins *Page_margins `xml:"page-margins,omitempty"`
 }
 
-// Page_margins is generated from named complex type "page-margins"
+// Page_margins Named source named complex type "page-margins"
 type Page_margins struct {
 	Name string `xml:"-"`
 
@@ -3113,7 +3120,7 @@ type Page_margins struct {
 	Group_all_margins
 }
 
-// Part_clef is generated from named complex type "part-clef"
+// Part_clef Named source named complex type "part-clef"
 type Part_clef struct {
 	Name string `xml:"-"`
 
@@ -3123,7 +3130,7 @@ type Part_clef struct {
 	Group_clef
 }
 
-// Part_group is generated from named complex type "part-group"
+// Part_group Named source named complex type "part-group"
 type Part_group struct {
 	Name string `xml:"-"`
 
@@ -3136,22 +3143,22 @@ type Part_group struct {
 	Number string `xml:"number,attr,omitempty"`
 
 	// generated from element "group-name" of type group-name order 418 depth 0
-	Group_name []*Group_name `xml:"group-name,omitempty"`
+	Group_name *Group_name `xml:"group-name,omitempty"`
 
 	// generated from element "group-name-display" of type name-display order 419 depth 0
-	Group_name_display []*Name_display `xml:"group-name-display,omitempty"`
+	Group_name_display *Name_display `xml:"group-name-display,omitempty"`
 
 	// generated from element "group-abbreviation" of type group-name order 420 depth 0
-	Group_abbreviation []*Group_name `xml:"group-abbreviation,omitempty"`
+	Group_abbreviation *Group_name `xml:"group-abbreviation,omitempty"`
 
 	// generated from element "group-abbreviation-display" of type name-display order 421 depth 0
-	Group_abbreviation_display []*Name_display `xml:"group-abbreviation-display,omitempty"`
+	Group_abbreviation_display *Name_display `xml:"group-abbreviation-display,omitempty"`
 
 	// generated from element "group-symbol" of type group-symbol order 422 depth 0
-	Group_symbol []*Group_symbol `xml:"group-symbol,omitempty"`
+	Group_symbol *Group_symbol `xml:"group-symbol,omitempty"`
 
 	// generated from element "group-barline" of type group-barline order 423 depth 0
-	Group_barline []*Group_barline `xml:"group-barline,omitempty"`
+	Group_barline *Group_barline `xml:"group-barline,omitempty"`
 
 	// generated from element "group-time" of type empty order 424 depth 0
 	Group_time string `xml:"group-time,omitempty"`
@@ -3160,7 +3167,7 @@ type Part_group struct {
 	Group_editorial
 }
 
-// Part_link is generated from named complex type "part-link"
+// Part_link Named source named complex type "part-link"
 type Part_link struct {
 	Name string `xml:"-"`
 
@@ -3176,7 +3183,7 @@ type Part_link struct {
 	Group_link string `xml:"group-link,omitempty"`
 }
 
-// Part_list is generated from named complex type "part-list"
+// Part_list Named source named complex type "part-list"
 type Part_list struct {
 	Name string `xml:"-"`
 
@@ -3189,7 +3196,7 @@ type Part_list struct {
 	Group_score_part
 }
 
-// Part_name is generated from named complex type "part-name"
+// Part_name Named source named complex type "part-name"
 type Part_name struct {
 	Name string `xml:"-"`
 
@@ -3199,7 +3206,7 @@ type Part_name struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Part_symbol is generated from named complex type "part-symbol"
+// Part_symbol Named source named complex type "part-symbol"
 type Part_symbol struct {
 	Name string `xml:"-"`
 
@@ -3215,7 +3222,7 @@ type Part_symbol struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Part_transpose is generated from named complex type "part-transpose"
+// Part_transpose Named source named complex type "part-transpose"
 type Part_transpose struct {
 	Name string `xml:"-"`
 
@@ -3225,7 +3232,7 @@ type Part_transpose struct {
 	Group_transpose
 }
 
-// Pedal is generated from named complex type "pedal"
+// Pedal Named source named complex type "pedal"
 type Pedal struct {
 	Name string `xml:"-"`
 
@@ -3253,7 +3260,7 @@ type Pedal struct {
 	AttributeGroup_optional_unique_id
 }
 
-// Pedal_tuning is generated from named complex type "pedal-tuning"
+// Pedal_tuning Named source named complex type "pedal-tuning"
 type Pedal_tuning struct {
 	Name string `xml:"-"`
 
@@ -3266,7 +3273,7 @@ type Pedal_tuning struct {
 	Pedal_alter string `xml:"pedal-alter,omitempty"`
 }
 
-// Per_minute is generated from named complex type "per-minute"
+// Per_minute Named source named complex type "per-minute"
 type Per_minute struct {
 	Name string `xml:"-"`
 
@@ -3276,7 +3283,7 @@ type Per_minute struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Percussion is generated from named complex type "percussion"
+// Percussion Named source named complex type "percussion"
 type Percussion struct {
 	Name string `xml:"-"`
 
@@ -3292,40 +3299,40 @@ type Percussion struct {
 	AttributeGroup_optional_unique_id
 
 	// generated from element "glass" of type glass order 170 depth 0
-	Glass []*Glass `xml:"glass,omitempty"`
+	Glass *Glass `xml:"glass,omitempty"`
 
 	// generated from element "metal" of type metal order 171 depth 0
-	Metal []*Metal `xml:"metal,omitempty"`
+	Metal *Metal `xml:"metal,omitempty"`
 
 	// generated from element "wood" of type wood order 172 depth 0
-	Wood []*Wood `xml:"wood,omitempty"`
+	Wood *Wood `xml:"wood,omitempty"`
 
 	// generated from element "pitched" of type pitched order 173 depth 0
-	Pitched []*Pitched `xml:"pitched,omitempty"`
+	Pitched *Pitched `xml:"pitched,omitempty"`
 
 	// generated from element "membrane" of type membrane order 174 depth 0
-	Membrane []*Membrane `xml:"membrane,omitempty"`
+	Membrane *Membrane `xml:"membrane,omitempty"`
 
 	// generated from element "effect" of type effect order 175 depth 0
-	Effect []*Effect `xml:"effect,omitempty"`
+	Effect *Effect `xml:"effect,omitempty"`
 
 	// generated from element "timpani" of type timpani order 176 depth 0
-	Timpani []*Timpani `xml:"timpani,omitempty"`
+	Timpani *Timpani `xml:"timpani,omitempty"`
 
 	// generated from element "beater" of type beater order 177 depth 0
-	Beater []*Beater `xml:"beater,omitempty"`
+	Beater *Beater `xml:"beater,omitempty"`
 
 	// generated from element "stick" of type stick order 178 depth 0
-	Stick []*Stick `xml:"stick,omitempty"`
+	Stick *Stick `xml:"stick,omitempty"`
 
 	// generated from element "stick-location" of type stick-location order 179 depth 0
 	Stick_location string `xml:"stick-location,omitempty"`
 
 	// generated from element "other-percussion" of type other-text order 180 depth 0
-	Other_percussion []*Other_text `xml:"other-percussion,omitempty"`
+	Other_percussion *Other_text `xml:"other-percussion,omitempty"`
 }
 
-// Pitch is generated from named complex type "pitch"
+// Pitch Named source named complex type "pitch"
 type Pitch struct {
 	Name string `xml:"-"`
 
@@ -3341,7 +3348,7 @@ type Pitch struct {
 	Octave int `xml:"octave,omitempty"`
 }
 
-// Pitched is generated from named complex type "pitched"
+// Pitched Named source named complex type "pitched"
 type Pitched struct {
 	Name string `xml:"-"`
 
@@ -3354,7 +3361,7 @@ type Pitched struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Placement_text is generated from named complex type "placement-text"
+// Placement_text Named source named complex type "placement-text"
 type Placement_text struct {
 	Name string `xml:"-"`
 
@@ -3364,7 +3371,7 @@ type Placement_text struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Play is generated from named complex type "play"
+// Play Named source named complex type "play"
 type Play struct {
 	Name string `xml:"-"`
 
@@ -3386,7 +3393,7 @@ type Play struct {
 	Other_play []*Other_play `xml:"other-play,omitempty"`
 }
 
-// Player is generated from named complex type "player"
+// Player Named source named complex type "player"
 type Player struct {
 	Name string `xml:"-"`
 
@@ -3399,7 +3406,7 @@ type Player struct {
 	Player_name string `xml:"player-name,omitempty"`
 }
 
-// Principal_voice is generated from named complex type "principal-voice"
+// Principal_voice Named source named complex type "principal-voice"
 type Principal_voice struct {
 	Name string `xml:"-"`
 
@@ -3415,7 +3422,7 @@ type Principal_voice struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Print is generated from named complex type "print"
+// Print Named source named complex type "print"
 type Print struct {
 	Name string `xml:"-"`
 
@@ -3431,26 +3438,26 @@ type Print struct {
 	Group_layout
 
 	// generated from element "measure-layout" of type measure-layout order 182 depth 0
-	Measure_layout []*Measure_layout `xml:"measure-layout,omitempty"`
+	Measure_layout *Measure_layout `xml:"measure-layout,omitempty"`
 
 	// generated from element "measure-numbering" of type measure-numbering order 183 depth 0
-	Measure_numbering []*Measure_numbering `xml:"measure-numbering,omitempty"`
+	Measure_numbering *Measure_numbering `xml:"measure-numbering,omitempty"`
 
 	// generated from element "part-name-display" of type name-display order 184 depth 0
-	Part_name_display []*Name_display `xml:"part-name-display,omitempty"`
+	Part_name_display *Name_display `xml:"part-name-display,omitempty"`
 
 	// generated from element "part-abbreviation-display" of type name-display order 185 depth 0
-	Part_abbreviation_display []*Name_display `xml:"part-abbreviation-display,omitempty"`
+	Part_abbreviation_display *Name_display `xml:"part-abbreviation-display,omitempty"`
 }
 
-// Release is generated from named complex type "release"
+// Release Named source named complex type "release"
 type Release struct {
 	Name string `xml:"-"`
 
 	// insertion point for fields
 }
 
-// Repeat is generated from named complex type "repeat"
+// Repeat Named source named complex type "repeat"
 type Repeat struct {
 	Name string `xml:"-"`
 
@@ -3469,7 +3476,7 @@ type Repeat struct {
 	Winged string `xml:"winged,attr,omitempty"`
 }
 
-// Rest is generated from named complex type "rest"
+// Rest Named source named complex type "rest"
 type Rest struct {
 	Name string `xml:"-"`
 
@@ -3482,20 +3489,20 @@ type Rest struct {
 	Group_display_step_octave
 }
 
-// Root is generated from named complex type "root"
+// Root Named source named complex type "root"
 type Root struct {
 	Name string `xml:"-"`
 
 	// insertion point for fields
 
 	// generated from element "root-step" of type root-step order 186 depth 0
-	Root_step []*Root_step `xml:"root-step,omitempty"`
+	Root_step *Root_step `xml:"root-step,omitempty"`
 
 	// generated from element "root-alter" of type harmony-alter order 187 depth 0
-	Root_alter []*Harmony_alter `xml:"root-alter,omitempty"`
+	Root_alter *Harmony_alter `xml:"root-alter,omitempty"`
 }
 
-// Root_step is generated from named complex type "root-step"
+// Root_step Named source named complex type "root-step"
 type Root_step struct {
 	Name string `xml:"-"`
 
@@ -3508,7 +3515,7 @@ type Root_step struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Scaling is generated from named complex type "scaling"
+// Scaling Named source named complex type "scaling"
 type Scaling struct {
 	Name string `xml:"-"`
 
@@ -3521,7 +3528,7 @@ type Scaling struct {
 	Tenths string `xml:"tenths,omitempty"`
 }
 
-// Scordatura is generated from named complex type "scordatura"
+// Scordatura Named source named complex type "scordatura"
 type Scordatura struct {
 	Name string `xml:"-"`
 
@@ -3534,7 +3541,7 @@ type Scordatura struct {
 	Accord []*Accord `xml:"accord,omitempty"`
 }
 
-// Score_instrument is generated from named complex type "score-instrument"
+// Score_instrument Named source named complex type "score-instrument"
 type Score_instrument struct {
 	Name string `xml:"-"`
 
@@ -3553,7 +3560,7 @@ type Score_instrument struct {
 	Group_virtual_instrument_data
 }
 
-// Score_part is generated from named complex type "score-part"
+// Score_part Named source named complex type "score-part"
 type Score_part struct {
 	Name string `xml:"-"`
 
@@ -3563,22 +3570,22 @@ type Score_part struct {
 	Id string `xml:"id,attr,omitempty"`
 
 	// generated from element "identification" of type identification order 436 depth 0
-	Identification []*Identification `xml:"identification,omitempty"`
+	Identification *Identification `xml:"identification,omitempty"`
 
 	// generated from element "part-link" of type part-link order 437 depth 0
 	Part_link []*Part_link `xml:"part-link,omitempty"`
 
 	// generated from element "part-name" of type part-name order 438 depth 0
-	Part_name []*Part_name `xml:"part-name,omitempty"`
+	Part_name *Part_name `xml:"part-name,omitempty"`
 
 	// generated from element "part-name-display" of type name-display order 439 depth 0
-	Part_name_display []*Name_display `xml:"part-name-display,omitempty"`
+	Part_name_display *Name_display `xml:"part-name-display,omitempty"`
 
 	// generated from element "part-abbreviation" of type part-name order 440 depth 0
-	Part_abbreviation []*Part_name `xml:"part-abbreviation,omitempty"`
+	Part_abbreviation *Part_name `xml:"part-abbreviation,omitempty"`
 
 	// generated from element "part-abbreviation-display" of type name-display order 441 depth 0
-	Part_abbreviation_display []*Name_display `xml:"part-abbreviation-display,omitempty"`
+	Part_abbreviation_display *Name_display `xml:"part-abbreviation-display,omitempty"`
 
 	// generated from element "group" of type string order 442 depth 0
 	Group string `xml:"group,omitempty"`
@@ -3596,7 +3603,7 @@ type Score_part struct {
 	Midi_instrument []*Midi_instrument `xml:"midi-instrument,omitempty"`
 }
 
-// Segno is generated from named complex type "segno"
+// Segno Named source named complex type "segno"
 type Segno struct {
 	Name string `xml:"-"`
 
@@ -3612,7 +3619,7 @@ type Segno struct {
 	AttributeGroup_optional_unique_id
 }
 
-// Slash is generated from named complex type "slash"
+// Slash Named source named complex type "slash"
 type Slash struct {
 	Name string `xml:"-"`
 
@@ -3631,7 +3638,7 @@ type Slash struct {
 	Group_slash
 }
 
-// Slide is generated from named complex type "slide"
+// Slide Named source named complex type "slide"
 type Slide struct {
 	Name string `xml:"-"`
 
@@ -3647,7 +3654,7 @@ type Slide struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Slur is generated from named complex type "slur"
+// Slur Named source named complex type "slur"
 type Slur struct {
 	Name string `xml:"-"`
 
@@ -3684,7 +3691,7 @@ type Slur struct {
 	AttributeGroup_optional_unique_id
 }
 
-// Sound is generated from named complex type "sound"
+// Sound Named source named complex type "sound"
 type Sound struct {
 	Name string `xml:"-"`
 
@@ -3757,13 +3764,13 @@ type Sound struct {
 	Play []*Play `xml:"play,omitempty"`
 
 	// generated from element "swing" of type swing order 193 depth 0
-	Swing []*Swing `xml:"swing,omitempty"`
+	Swing *Swing `xml:"swing,omitempty"`
 
 	// generated from element "offset" of type offset order 194 depth 0
-	Offset []*Offset `xml:"offset,omitempty"`
+	Offset *Offset `xml:"offset,omitempty"`
 }
 
-// Staff_details is generated from named complex type "staff-details"
+// Staff_details Named source named complex type "staff-details"
 type Staff_details struct {
 	Name string `xml:"-"`
 
@@ -3797,10 +3804,10 @@ type Staff_details struct {
 	Capo int `xml:"capo,omitempty"`
 
 	// generated from element "staff-size" of type staff-size order 75 depth 0
-	Staff_size []*Staff_size `xml:"staff-size,omitempty"`
+	Staff_size *Staff_size `xml:"staff-size,omitempty"`
 }
 
-// Staff_divide is generated from named complex type "staff-divide"
+// Staff_divide Named source named complex type "staff-divide"
 type Staff_divide struct {
 	Name string `xml:"-"`
 
@@ -3816,7 +3823,7 @@ type Staff_divide struct {
 	AttributeGroup_optional_unique_id
 }
 
-// Staff_layout is generated from named complex type "staff-layout"
+// Staff_layout Named source named complex type "staff-layout"
 type Staff_layout struct {
 	Name string `xml:"-"`
 
@@ -3829,7 +3836,7 @@ type Staff_layout struct {
 	Staff_distance string `xml:"staff-distance,omitempty"`
 }
 
-// Staff_size is generated from named complex type "staff-size"
+// Staff_size Named source named complex type "staff-size"
 type Staff_size struct {
 	Name string `xml:"-"`
 
@@ -3842,7 +3849,7 @@ type Staff_size struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Staff_tuning is generated from named complex type "staff-tuning"
+// Staff_tuning Named source named complex type "staff-tuning"
 type Staff_tuning struct {
 	Name string `xml:"-"`
 
@@ -3855,7 +3862,7 @@ type Staff_tuning struct {
 	Group_tuning
 }
 
-// Stem is generated from named complex type "stem"
+// Stem Named source named complex type "stem"
 type Stem struct {
 	Name string `xml:"-"`
 
@@ -3865,7 +3872,7 @@ type Stem struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Stick is generated from named complex type "stick"
+// Stick Named source named complex type "stick"
 type Stick struct {
 	Name string `xml:"-"`
 
@@ -3887,7 +3894,7 @@ type Stick struct {
 	Stick_material string `xml:"stick-material,omitempty"`
 }
 
-// String_mute is generated from named complex type "string-mute"
+// String_mute Named source named complex type "string-mute"
 type String_mute struct {
 	Name string `xml:"-"`
 
@@ -3903,7 +3910,7 @@ type String_mute struct {
 	AttributeGroup_optional_unique_id
 }
 
-// String_type is generated from named complex type "string-type"
+// String_type Named source named complex type "string-type"
 type String_type struct {
 	Name string `xml:"-"`
 
@@ -3913,14 +3920,14 @@ type String_type struct {
 	EnclosedText int `xml:",chardata"`
 }
 
-// Strong_accent is generated from named complex type "strong-accent"
+// Strong_accent Named source named complex type "strong-accent"
 type Strong_accent struct {
 	Name string `xml:"-"`
 
 	// insertion point for fields
 }
 
-// Style_text is generated from named complex type "style-text"
+// Style_text Named source named complex type "style-text"
 type Style_text struct {
 	Name string `xml:"-"`
 
@@ -3930,7 +3937,7 @@ type Style_text struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Supports is generated from named complex type "supports"
+// Supports Named source named complex type "supports"
 type Supports struct {
 	Name string `xml:"-"`
 
@@ -3949,7 +3956,7 @@ type Supports struct {
 	Value string `xml:"value,attr,omitempty"`
 }
 
-// Swing is generated from named complex type "swing"
+// Swing Named source named complex type "swing"
 type Swing struct {
 	Name string `xml:"-"`
 
@@ -3971,7 +3978,7 @@ type Swing struct {
 	Swing_style string `xml:"swing-style,omitempty"`
 }
 
-// Sync is generated from named complex type "sync"
+// Sync Named source named complex type "sync"
 type Sync struct {
 	Name string `xml:"-"`
 
@@ -3990,27 +3997,27 @@ type Sync struct {
 	Time_only string `xml:"time-only,attr,omitempty"`
 }
 
-// System_dividers is generated from named complex type "system-dividers"
+// System_dividers Named source named complex type "system-dividers"
 type System_dividers struct {
 	Name string `xml:"-"`
 
 	// insertion point for fields
 
 	// generated from element "left-divider" of type empty-print-object-style-align order 227 depth 0
-	Left_divider []*Empty_print_object_style_align `xml:"left-divider,omitempty"`
+	Left_divider *Empty_print_object_style_align `xml:"left-divider,omitempty"`
 
 	// generated from element "right-divider" of type empty-print-object-style-align order 228 depth 0
-	Right_divider []*Empty_print_object_style_align `xml:"right-divider,omitempty"`
+	Right_divider *Empty_print_object_style_align `xml:"right-divider,omitempty"`
 }
 
-// System_layout is generated from named complex type "system-layout"
+// System_layout Named source named complex type "system-layout"
 type System_layout struct {
 	Name string `xml:"-"`
 
 	// insertion point for fields
 
 	// generated from element "system-margins" of type system-margins order 229 depth 0
-	System_margins []*System_margins `xml:"system-margins,omitempty"`
+	System_margins *System_margins `xml:"system-margins,omitempty"`
 
 	// generated from element "system-distance" of type tenths order 230 depth 0
 	System_distance string `xml:"system-distance,omitempty"`
@@ -4019,10 +4026,10 @@ type System_layout struct {
 	Top_system_distance string `xml:"top-system-distance,omitempty"`
 
 	// generated from element "system-dividers" of type system-dividers order 232 depth 0
-	System_dividers []*System_dividers `xml:"system-dividers,omitempty"`
+	System_dividers *System_dividers `xml:"system-dividers,omitempty"`
 }
 
-// System_margins is generated from named complex type "system-margins"
+// System_margins Named source named complex type "system-margins"
 type System_margins struct {
 	Name string `xml:"-"`
 
@@ -4032,7 +4039,7 @@ type System_margins struct {
 	Group_left_right_margins
 }
 
-// Tap is generated from named complex type "tap"
+// Tap Named source named complex type "tap"
 type Tap struct {
 	Name string `xml:"-"`
 
@@ -4045,7 +4052,7 @@ type Tap struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Technical is generated from named complex type "technical"
+// Technical Named source named complex type "technical"
 type Technical struct {
 	Name string `xml:"-"`
 
@@ -4148,7 +4155,7 @@ type Technical struct {
 	Other_technical []*Other_placement_text `xml:"other-technical,omitempty"`
 }
 
-// Text_element_data is generated from named complex type "text-element-data"
+// Text_element_data Named source named complex type "text-element-data"
 type Text_element_data struct {
 	Name string `xml:"-"`
 
@@ -4161,7 +4168,7 @@ type Text_element_data struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Tie is generated from named complex type "tie"
+// Tie Named source named complex type "tie"
 type Tie struct {
 	Name string `xml:"-"`
 
@@ -4174,7 +4181,7 @@ type Tie struct {
 	Time_only string `xml:"time-only,attr,omitempty"`
 }
 
-// Tied is generated from named complex type "tied"
+// Tied Named source named complex type "tied"
 type Tied struct {
 	Name string `xml:"-"`
 
@@ -4211,7 +4218,7 @@ type Tied struct {
 	AttributeGroup_optional_unique_id
 }
 
-// Time is generated from named complex type "time"
+// Time Named source named complex type "time"
 type Time struct {
 	Name string `xml:"-"`
 
@@ -4239,13 +4246,13 @@ type Time struct {
 	Group_time_signature
 
 	// generated from element "interchangeable" of type interchangeable order 78 depth 0
-	Interchangeable []*Interchangeable `xml:"interchangeable,omitempty"`
+	Interchangeable *Interchangeable `xml:"interchangeable,omitempty"`
 
 	// generated from element "senza-misura" of type string order 79 depth 0
 	Senza_misura string `xml:"senza-misura,omitempty"`
 }
 
-// Time_modification is generated from named complex type "time-modification"
+// Time_modification Named source named complex type "time-modification"
 type Time_modification struct {
 	Name string `xml:"-"`
 
@@ -4264,7 +4271,7 @@ type Time_modification struct {
 	Normal_dot string `xml:"normal-dot,omitempty"`
 }
 
-// Timpani is generated from named complex type "timpani"
+// Timpani Named source named complex type "timpani"
 type Timpani struct {
 	Name string `xml:"-"`
 
@@ -4274,7 +4281,7 @@ type Timpani struct {
 	Smufl string `xml:"smufl,attr,omitempty"`
 }
 
-// Transpose is generated from named complex type "transpose"
+// Transpose Named source named complex type "transpose"
 type Transpose struct {
 	Name string `xml:"-"`
 
@@ -4290,7 +4297,7 @@ type Transpose struct {
 	Group_transpose
 }
 
-// Tremolo is generated from named complex type "tremolo"
+// Tremolo Named source named complex type "tremolo"
 type Tremolo struct {
 	Name string `xml:"-"`
 
@@ -4303,7 +4310,7 @@ type Tremolo struct {
 	EnclosedText int `xml:",chardata"`
 }
 
-// Tuplet is generated from named complex type "tuplet"
+// Tuplet Named source named complex type "tuplet"
 type Tuplet struct {
 	Name string `xml:"-"`
 
@@ -4337,13 +4344,13 @@ type Tuplet struct {
 	AttributeGroup_optional_unique_id
 
 	// generated from element "tuplet-actual" of type tuplet-portion order 394 depth 0
-	Tuplet_actual []*Tuplet_portion `xml:"tuplet-actual,omitempty"`
+	Tuplet_actual *Tuplet_portion `xml:"tuplet-actual,omitempty"`
 
 	// generated from element "tuplet-normal" of type tuplet-portion order 395 depth 0
-	Tuplet_normal []*Tuplet_portion `xml:"tuplet-normal,omitempty"`
+	Tuplet_normal *Tuplet_portion `xml:"tuplet-normal,omitempty"`
 }
 
-// Tuplet_dot is generated from named complex type "tuplet-dot"
+// Tuplet_dot Named source named complex type "tuplet-dot"
 type Tuplet_dot struct {
 	Name string `xml:"-"`
 
@@ -4356,7 +4363,7 @@ type Tuplet_dot struct {
 	AttributeGroup_color
 }
 
-// Tuplet_number is generated from named complex type "tuplet-number"
+// Tuplet_number Named source named complex type "tuplet-number"
 type Tuplet_number struct {
 	Name string `xml:"-"`
 
@@ -4366,23 +4373,23 @@ type Tuplet_number struct {
 	EnclosedText int `xml:",chardata"`
 }
 
-// Tuplet_portion is generated from named complex type "tuplet-portion"
+// Tuplet_portion Named source named complex type "tuplet-portion"
 type Tuplet_portion struct {
 	Name string `xml:"-"`
 
 	// insertion point for fields
 
 	// generated from element "tuplet-number" of type tuplet-number order 396 depth 0
-	Tuplet_number []*Tuplet_number `xml:"tuplet-number,omitempty"`
+	Tuplet_number *Tuplet_number `xml:"tuplet-number,omitempty"`
 
 	// generated from element "tuplet-type" of type tuplet-type order 397 depth 0
-	Tuplet_type []*Tuplet_type `xml:"tuplet-type,omitempty"`
+	Tuplet_type *Tuplet_type `xml:"tuplet-type,omitempty"`
 
 	// generated from element "tuplet-dot" of type tuplet-dot order 398 depth 0
 	Tuplet_dot []*Tuplet_dot `xml:"tuplet-dot,omitempty"`
 }
 
-// Tuplet_type is generated from named complex type "tuplet-type"
+// Tuplet_type Named source named complex type "tuplet-type"
 type Tuplet_type struct {
 	Name string `xml:"-"`
 
@@ -4392,7 +4399,7 @@ type Tuplet_type struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Typed_text is generated from named complex type "typed-text"
+// Typed_text Named source named complex type "typed-text"
 type Typed_text struct {
 	Name string `xml:"-"`
 
@@ -4405,7 +4412,7 @@ type Typed_text struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Unpitched is generated from named complex type "unpitched"
+// Unpitched Named source named complex type "unpitched"
 type Unpitched struct {
 	Name string `xml:"-"`
 
@@ -4415,7 +4422,7 @@ type Unpitched struct {
 	Group_display_step_octave
 }
 
-// Virtual_instrument is generated from named complex type "virtual-instrument"
+// Virtual_instrument Named source named complex type "virtual-instrument"
 type Virtual_instrument struct {
 	Name string `xml:"-"`
 
@@ -4428,7 +4435,7 @@ type Virtual_instrument struct {
 	Virtual_name string `xml:"virtual-name,omitempty"`
 }
 
-// Wait is generated from named complex type "wait"
+// Wait Named source named complex type "wait"
 type Wait struct {
 	Name string `xml:"-"`
 
@@ -4441,7 +4448,7 @@ type Wait struct {
 	Time_only string `xml:"time-only,attr,omitempty"`
 }
 
-// Wavy_line is generated from named complex type "wavy-line"
+// Wavy_line Named source named complex type "wavy-line"
 type Wavy_line struct {
 	Name string `xml:"-"`
 
@@ -4469,7 +4476,7 @@ type Wavy_line struct {
 	AttributeGroup_trill_sound
 }
 
-// Wedge is generated from named complex type "wedge"
+// Wedge Named source named complex type "wedge"
 type Wedge struct {
 	Name string `xml:"-"`
 
@@ -4503,7 +4510,7 @@ type Wedge struct {
 	AttributeGroup_optional_unique_id
 }
 
-// Wood is generated from named complex type "wood"
+// Wood Named source named complex type "wood"
 type Wood struct {
 	Name string `xml:"-"`
 
@@ -4516,7 +4523,7 @@ type Wood struct {
 	EnclosedText string `xml:",chardata"`
 }
 
-// Work is generated from named complex type "work"
+// Work Named source named complex type "work"
 type Work struct {
 	Name string `xml:"-"`
 
@@ -4529,10 +4536,10 @@ type Work struct {
 	Work_title string `xml:"work-title,omitempty"`
 
 	// generated from element "opus" of type opus order 451 depth 0
-	Opus []*Opus `xml:"opus,omitempty"`
+	Opus *Opus `xml:"opus,omitempty"`
 }
 
-// Group_all_margins is generated from named group "all-margins"
+// Group_all_margins UnNamed source named group "all-margins"
 type Group_all_margins struct {
 
 	// insertion point for fields
@@ -4547,7 +4554,7 @@ type Group_all_margins struct {
 	Bottom_margin string `xml:"bottom-margin,omitempty"`
 }
 
-// Group_beat_unit is generated from named group "beat-unit"
+// Group_beat_unit UnNamed source named group "beat-unit"
 type Group_beat_unit struct {
 
 	// insertion point for fields
@@ -4559,7 +4566,7 @@ type Group_beat_unit struct {
 	Beat_unit_dot string `xml:"beat-unit-dot,omitempty"`
 }
 
-// Group_clef is generated from named group "clef"
+// Group_clef UnNamed source named group "clef"
 type Group_clef struct {
 
 	// insertion point for fields
@@ -4574,7 +4581,7 @@ type Group_clef struct {
 	Clef_octave_change int `xml:"clef-octave-change,omitempty"`
 }
 
-// Group_display_step_octave is generated from named group "display-step-octave"
+// Group_display_step_octave UnNamed source named group "display-step-octave"
 type Group_display_step_octave struct {
 
 	// insertion point for fields
@@ -4586,7 +4593,7 @@ type Group_display_step_octave struct {
 	Display_octave int `xml:"display-octave,omitempty"`
 }
 
-// Group_duration is generated from named group "duration"
+// Group_duration UnNamed source named group "duration"
 type Group_duration struct {
 
 	// insertion point for fields
@@ -4595,7 +4602,7 @@ type Group_duration struct {
 	Duration string `xml:"duration,omitempty"`
 }
 
-// Group_editorial is generated from named group "editorial"
+// Group_editorial UnNamed source named group "editorial"
 type Group_editorial struct {
 
 	// insertion point for fields
@@ -4607,7 +4614,7 @@ type Group_editorial struct {
 	Group_level
 }
 
-// Group_editorial_voice is generated from named group "editorial-voice"
+// Group_editorial_voice UnNamed source named group "editorial-voice"
 type Group_editorial_voice struct {
 
 	// insertion point for fields
@@ -4622,7 +4629,7 @@ type Group_editorial_voice struct {
 	Group_voice
 }
 
-// Group_editorial_voice_direction is generated from named group "editorial-voice-direction"
+// Group_editorial_voice_direction UnNamed source named group "editorial-voice-direction"
 type Group_editorial_voice_direction struct {
 
 	// insertion point for fields
@@ -4637,16 +4644,16 @@ type Group_editorial_voice_direction struct {
 	Group_voice
 }
 
-// Group_footnote is generated from named group "footnote"
+// Group_footnote UnNamed source named group "footnote"
 type Group_footnote struct {
 
 	// insertion point for fields
 
 	// generated from element "footnote" of type formatted-text order 464 depth 1
-	Footnote []*Formatted_text `xml:"footnote,omitempty"`
+	Footnote *Formatted_text `xml:"footnote,omitempty"`
 }
 
-// Group_full_note is generated from named group "full-note"
+// Group_full_note UnNamed source named group "full-note"
 type Group_full_note struct {
 
 	// insertion point for fields
@@ -4655,58 +4662,58 @@ type Group_full_note struct {
 	Chord string `xml:"chord,omitempty"`
 
 	// generated from element "pitch" of type pitch order 533 depth 1
-	Pitch []*Pitch `xml:"pitch,omitempty"`
+	Pitch *Pitch `xml:"pitch,omitempty"`
 
 	// generated from element "unpitched" of type unpitched order 534 depth 1
-	Unpitched []*Unpitched `xml:"unpitched,omitempty"`
+	Unpitched *Unpitched `xml:"unpitched,omitempty"`
 
 	// generated from element "rest" of type rest order 535 depth 1
-	Rest []*Rest `xml:"rest,omitempty"`
+	Rest *Rest `xml:"rest,omitempty"`
 }
 
-// Group_harmony_chord is generated from named group "harmony-chord"
+// Group_harmony_chord UnNamed source named group "harmony-chord"
 type Group_harmony_chord struct {
 
 	// insertion point for fields
 
 	// generated from element "root" of type root order 508 depth 1
-	Root []*Root `xml:"root,omitempty"`
+	Root *Root `xml:"root,omitempty"`
 
 	// generated from element "numeral" of type numeral order 509 depth 1
-	Numeral []*Numeral `xml:"numeral,omitempty"`
+	Numeral *Numeral `xml:"numeral,omitempty"`
 
 	// generated from element "function" of type style-text order 510 depth 1
-	Function []*Style_text `xml:"function,omitempty"`
+	Function *Style_text `xml:"function,omitempty"`
 
 	// generated from element "kind" of type kind order 511 depth 1
-	Kind []*Kind `xml:"kind,omitempty"`
+	Kind *Kind `xml:"kind,omitempty"`
 
 	// generated from element "inversion" of type inversion order 512 depth 1
-	Inversion []*Inversion `xml:"inversion,omitempty"`
+	Inversion *Inversion `xml:"inversion,omitempty"`
 
 	// generated from element "bass" of type bass order 513 depth 1
-	Bass []*Bass `xml:"bass,omitempty"`
+	Bass *Bass `xml:"bass,omitempty"`
 
 	// generated from element "degree" of type degree order 514 depth 1
 	Degree []*Degree `xml:"degree,omitempty"`
 }
 
-// Group_layout is generated from named group "layout"
+// Group_layout UnNamed source named group "layout"
 type Group_layout struct {
 
 	// insertion point for fields
 
 	// generated from element "page-layout" of type page-layout order 520 depth 1
-	Page_layout []*Page_layout `xml:"page-layout,omitempty"`
+	Page_layout *Page_layout `xml:"page-layout,omitempty"`
 
 	// generated from element "system-layout" of type system-layout order 521 depth 1
-	System_layout []*System_layout `xml:"system-layout,omitempty"`
+	System_layout *System_layout `xml:"system-layout,omitempty"`
 
 	// generated from element "staff-layout" of type staff-layout order 522 depth 1
 	Staff_layout []*Staff_layout `xml:"staff-layout,omitempty"`
 }
 
-// Group_left_right_margins is generated from named group "left-right-margins"
+// Group_left_right_margins UnNamed source named group "left-right-margins"
 type Group_left_right_margins struct {
 
 	// insertion point for fields
@@ -4718,16 +4725,16 @@ type Group_left_right_margins struct {
 	Right_margin string `xml:"right-margin,omitempty"`
 }
 
-// Group_level is generated from named group "level"
+// Group_level UnNamed source named group "level"
 type Group_level struct {
 
 	// insertion point for fields
 
 	// generated from element "level" of type level order 466 depth 1
-	Level []*Level `xml:"level,omitempty"`
+	Level *Level `xml:"level,omitempty"`
 }
 
-// Group_music_data is generated from named group "music-data"
+// Group_music_data UnNamed source named group "music-data"
 type Group_music_data struct {
 
 	// insertion point for fields
@@ -4775,7 +4782,7 @@ type Group_music_data struct {
 	Bookmark []*Bookmark `xml:"bookmark,omitempty"`
 }
 
-// Group_non_traditional_key is generated from named group "non-traditional-key"
+// Group_non_traditional_key UnNamed source named group "non-traditional-key"
 type Group_non_traditional_key struct {
 
 	// insertion point for fields
@@ -4787,25 +4794,25 @@ type Group_non_traditional_key struct {
 	Key_alter string `xml:"key-alter,omitempty"`
 
 	// generated from element "key-accidental" of type key-accidental order 487 depth 1
-	Key_accidental []*Key_accidental `xml:"key-accidental,omitempty"`
+	Key_accidental *Key_accidental `xml:"key-accidental,omitempty"`
 }
 
-// Group_part_group is generated from named group "part-group"
+// Group_part_group UnNamed source named group "part-group"
 type Group_part_group struct {
 
 	// insertion point for fields
 
 	// generated from element "part-group" of type part-group order 552 depth 1
-	Part_group []*Part_group `xml:"part-group,omitempty"`
+	Part_group *Part_group `xml:"part-group,omitempty"`
 }
 
-// Group_score_header is generated from named group "score-header"
+// Group_score_header UnNamed source named group "score-header"
 type Group_score_header struct {
 
 	// insertion point for fields
 
 	// generated from element "work" of type work order 554 depth 1
-	Work []*Work `xml:"work,omitempty"`
+	Work *Work `xml:"work,omitempty"`
 
 	// generated from element "movement-number" of type string order 555 depth 1
 	Movement_number string `xml:"movement-number,omitempty"`
@@ -4814,28 +4821,28 @@ type Group_score_header struct {
 	Movement_title string `xml:"movement-title,omitempty"`
 
 	// generated from element "identification" of type identification order 557 depth 1
-	Identification []*Identification `xml:"identification,omitempty"`
+	Identification *Identification `xml:"identification,omitempty"`
 
 	// generated from element "defaults" of type defaults order 558 depth 1
-	Defaults []*Defaults `xml:"defaults,omitempty"`
+	Defaults *Defaults `xml:"defaults,omitempty"`
 
 	// generated from element "credit" of type credit order 559 depth 1
 	Credit []*Credit `xml:"credit,omitempty"`
 
 	// generated from element "part-list" of type part-list order 560 depth 1
-	Part_list []*Part_list `xml:"part-list,omitempty"`
+	Part_list *Part_list `xml:"part-list,omitempty"`
 }
 
-// Group_score_part is generated from named group "score-part"
+// Group_score_part UnNamed source named group "score-part"
 type Group_score_part struct {
 
 	// insertion point for fields
 
 	// generated from element "score-part" of type score-part order 562 depth 1
-	Score_part []*Score_part `xml:"score-part,omitempty"`
+	Score_part *Score_part `xml:"score-part,omitempty"`
 }
 
-// Group_slash is generated from named group "slash"
+// Group_slash UnNamed source named group "slash"
 type Group_slash struct {
 
 	// insertion point for fields
@@ -4850,7 +4857,7 @@ type Group_slash struct {
 	Except_voice string `xml:"except-voice,omitempty"`
 }
 
-// Group_staff is generated from named group "staff"
+// Group_staff UnNamed source named group "staff"
 type Group_staff struct {
 
 	// insertion point for fields
@@ -4859,7 +4866,7 @@ type Group_staff struct {
 	Staff int `xml:"staff,omitempty"`
 }
 
-// Group_time_signature is generated from named group "time-signature"
+// Group_time_signature UnNamed source named group "time-signature"
 type Group_time_signature struct {
 
 	// insertion point for fields
@@ -4871,13 +4878,13 @@ type Group_time_signature struct {
 	Beat_type string `xml:"beat-type,omitempty"`
 }
 
-// Group_traditional_key is generated from named group "traditional-key"
+// Group_traditional_key UnNamed source named group "traditional-key"
 type Group_traditional_key struct {
 
 	// insertion point for fields
 
 	// generated from element "cancel" of type cancel order 496 depth 1
-	Cancel []*Cancel `xml:"cancel,omitempty"`
+	Cancel *Cancel `xml:"cancel,omitempty"`
 
 	// generated from element "fifths" of type fifths order 497 depth 1
 	Fifths int `xml:"fifths,omitempty"`
@@ -4886,7 +4893,7 @@ type Group_traditional_key struct {
 	Mode string `xml:"mode,omitempty"`
 }
 
-// Group_transpose is generated from named group "transpose"
+// Group_transpose UnNamed source named group "transpose"
 type Group_transpose struct {
 
 	// insertion point for fields
@@ -4904,7 +4911,7 @@ type Group_transpose struct {
 	Double float64 `xml:"double,omitempty"`
 }
 
-// Group_tuning is generated from named group "tuning"
+// Group_tuning UnNamed source named group "tuning"
 type Group_tuning struct {
 
 	// insertion point for fields
@@ -4919,7 +4926,7 @@ type Group_tuning struct {
 	Tuning_octave int `xml:"tuning-octave,omitempty"`
 }
 
-// Group_virtual_instrument_data is generated from named group "virtual-instrument-data"
+// Group_virtual_instrument_data UnNamed source named group "virtual-instrument-data"
 type Group_virtual_instrument_data struct {
 
 	// insertion point for fields
@@ -4934,10 +4941,10 @@ type Group_virtual_instrument_data struct {
 	Ensemble string `xml:"ensemble,omitempty"`
 
 	// generated from element "virtual-instrument" of type virtual-instrument order 477 depth 1
-	Virtual_instrument []*Virtual_instrument `xml:"virtual-instrument,omitempty"`
+	Virtual_instrument *Virtual_instrument `xml:"virtual-instrument,omitempty"`
 }
 
-// Group_voice is generated from named group "voice"
+// Group_voice UnNamed source named group "voice"
 type Group_voice struct {
 
 	// insertion point for fields
@@ -4946,7 +4953,7 @@ type Group_voice struct {
 	Voice string `xml:"voice,omitempty"`
 }
 
-// AttributeGroup_bend_sound is generated from named attribute group "bend-sound"
+// AttributeGroup_bend_sound UnNamed source named attribute group "bend-sound"
 type AttributeGroup_bend_sound struct {
 
 	// insertion point for fields
@@ -4964,7 +4971,7 @@ type AttributeGroup_bend_sound struct {
 	Last_beat string `xml:"last-beat,attr,omitempty"`
 }
 
-// AttributeGroup_bezier is generated from named attribute group "bezier"
+// AttributeGroup_bezier UnNamed source named attribute group "bezier"
 type AttributeGroup_bezier struct {
 
 	// insertion point for fields
@@ -4988,7 +4995,7 @@ type AttributeGroup_bezier struct {
 	Bezier_offset2 string `xml:"bezier-offset2,attr,omitempty"`
 }
 
-// AttributeGroup_color is generated from named attribute group "color"
+// AttributeGroup_color UnNamed source named attribute group "color"
 type AttributeGroup_color struct {
 
 	// insertion point for fields
@@ -4997,7 +5004,7 @@ type AttributeGroup_color struct {
 	Color string `xml:"color,attr,omitempty"`
 }
 
-// AttributeGroup_dashed_formatting is generated from named attribute group "dashed-formatting"
+// AttributeGroup_dashed_formatting UnNamed source named attribute group "dashed-formatting"
 type AttributeGroup_dashed_formatting struct {
 
 	// insertion point for fields
@@ -5009,7 +5016,7 @@ type AttributeGroup_dashed_formatting struct {
 	Space_length string `xml:"space-length,attr,omitempty"`
 }
 
-// AttributeGroup_directive is generated from named attribute group "directive"
+// AttributeGroup_directive UnNamed source named attribute group "directive"
 type AttributeGroup_directive struct {
 
 	// insertion point for fields
@@ -5018,7 +5025,7 @@ type AttributeGroup_directive struct {
 	Directive string `xml:"directive,attr,omitempty"`
 }
 
-// AttributeGroup_document_attributes is generated from named attribute group "document-attributes"
+// AttributeGroup_document_attributes UnNamed source named attribute group "document-attributes"
 type AttributeGroup_document_attributes struct {
 
 	// insertion point for fields
@@ -5027,7 +5034,7 @@ type AttributeGroup_document_attributes struct {
 	Version string `xml:"version,attr,omitempty"`
 }
 
-// AttributeGroup_element_position is generated from named attribute group "element-position"
+// AttributeGroup_element_position UnNamed source named attribute group "element-position"
 type AttributeGroup_element_position struct {
 
 	// insertion point for fields
@@ -5039,7 +5046,7 @@ type AttributeGroup_element_position struct {
 	Position int `xml:"position,attr,omitempty"`
 }
 
-// AttributeGroup_enclosure is generated from named attribute group "enclosure"
+// AttributeGroup_enclosure UnNamed source named attribute group "enclosure"
 type AttributeGroup_enclosure struct {
 
 	// insertion point for fields
@@ -5048,7 +5055,7 @@ type AttributeGroup_enclosure struct {
 	Enclosure string `xml:"enclosure,attr,omitempty"`
 }
 
-// AttributeGroup_font is generated from named attribute group "font"
+// AttributeGroup_font UnNamed source named attribute group "font"
 type AttributeGroup_font struct {
 
 	// insertion point for fields
@@ -5066,7 +5073,7 @@ type AttributeGroup_font struct {
 	Font_weight string `xml:"font-weight,attr,omitempty"`
 }
 
-// AttributeGroup_group_name_text is generated from named attribute group "group-name-text"
+// AttributeGroup_group_name_text UnNamed source named attribute group "group-name-text"
 type AttributeGroup_group_name_text struct {
 
 	// insertion point for fields
@@ -5078,7 +5085,7 @@ type AttributeGroup_group_name_text struct {
 	AttributeGroup_justify
 }
 
-// AttributeGroup_halign is generated from named attribute group "halign"
+// AttributeGroup_halign UnNamed source named attribute group "halign"
 type AttributeGroup_halign struct {
 
 	// insertion point for fields
@@ -5087,7 +5094,7 @@ type AttributeGroup_halign struct {
 	Halign string `xml:"halign,attr,omitempty"`
 }
 
-// AttributeGroup_image_attributes is generated from named attribute group "image-attributes"
+// AttributeGroup_image_attributes UnNamed source named attribute group "image-attributes"
 type AttributeGroup_image_attributes struct {
 
 	// insertion point for fields
@@ -5114,7 +5121,7 @@ type AttributeGroup_image_attributes struct {
 	AttributeGroup_valign_image
 }
 
-// AttributeGroup_justify is generated from named attribute group "justify"
+// AttributeGroup_justify UnNamed source named attribute group "justify"
 type AttributeGroup_justify struct {
 
 	// insertion point for fields
@@ -5123,7 +5130,7 @@ type AttributeGroup_justify struct {
 	Justify string `xml:"justify,attr,omitempty"`
 }
 
-// AttributeGroup_letter_spacing is generated from named attribute group "letter-spacing"
+// AttributeGroup_letter_spacing UnNamed source named attribute group "letter-spacing"
 type AttributeGroup_letter_spacing struct {
 
 	// insertion point for fields
@@ -5132,7 +5139,7 @@ type AttributeGroup_letter_spacing struct {
 	Letter_spacing string `xml:"letter-spacing,attr,omitempty"`
 }
 
-// AttributeGroup_level_display is generated from named attribute group "level-display"
+// AttributeGroup_level_display UnNamed source named attribute group "level-display"
 type AttributeGroup_level_display struct {
 
 	// insertion point for fields
@@ -5147,7 +5154,7 @@ type AttributeGroup_level_display struct {
 	Size string `xml:"size,attr,omitempty"`
 }
 
-// AttributeGroup_line_height is generated from named attribute group "line-height"
+// AttributeGroup_line_height UnNamed source named attribute group "line-height"
 type AttributeGroup_line_height struct {
 
 	// insertion point for fields
@@ -5156,7 +5163,7 @@ type AttributeGroup_line_height struct {
 	Line_height string `xml:"line-height,attr,omitempty"`
 }
 
-// AttributeGroup_line_length is generated from named attribute group "line-length"
+// AttributeGroup_line_length UnNamed source named attribute group "line-length"
 type AttributeGroup_line_length struct {
 
 	// insertion point for fields
@@ -5165,7 +5172,7 @@ type AttributeGroup_line_length struct {
 	Line_length string `xml:"line-length,attr,omitempty"`
 }
 
-// AttributeGroup_line_shape is generated from named attribute group "line-shape"
+// AttributeGroup_line_shape UnNamed source named attribute group "line-shape"
 type AttributeGroup_line_shape struct {
 
 	// insertion point for fields
@@ -5174,7 +5181,7 @@ type AttributeGroup_line_shape struct {
 	Line_shape string `xml:"line-shape,attr,omitempty"`
 }
 
-// AttributeGroup_line_type is generated from named attribute group "line-type"
+// AttributeGroup_line_type UnNamed source named attribute group "line-type"
 type AttributeGroup_line_type struct {
 
 	// insertion point for fields
@@ -5183,7 +5190,7 @@ type AttributeGroup_line_type struct {
 	Line_type string `xml:"line-type,attr,omitempty"`
 }
 
-// AttributeGroup_link_attributes is generated from named attribute group "link-attributes"
+// AttributeGroup_link_attributes UnNamed source named attribute group "link-attributes"
 type AttributeGroup_link_attributes struct {
 
 	// insertion point for fields
@@ -5207,7 +5214,7 @@ type AttributeGroup_link_attributes struct {
 	Actuate string `xml:"http://www.w3.org/1999/xlink actuate,attr,omitempty"`
 }
 
-// AttributeGroup_measure_attributes is generated from named attribute group "measure-attributes"
+// AttributeGroup_measure_attributes UnNamed source named attribute group "measure-attributes"
 type AttributeGroup_measure_attributes struct {
 
 	// insertion point for fields
@@ -5231,7 +5238,7 @@ type AttributeGroup_measure_attributes struct {
 	AttributeGroup_optional_unique_id
 }
 
-// AttributeGroup_optional_unique_id is generated from named attribute group "optional-unique-id"
+// AttributeGroup_optional_unique_id UnNamed source named attribute group "optional-unique-id"
 type AttributeGroup_optional_unique_id struct {
 
 	// insertion point for fields
@@ -5240,7 +5247,7 @@ type AttributeGroup_optional_unique_id struct {
 	Id string `xml:"id,attr,omitempty"`
 }
 
-// AttributeGroup_orientation is generated from named attribute group "orientation"
+// AttributeGroup_orientation UnNamed source named attribute group "orientation"
 type AttributeGroup_orientation struct {
 
 	// insertion point for fields
@@ -5249,7 +5256,7 @@ type AttributeGroup_orientation struct {
 	Orientation string `xml:"orientation,attr,omitempty"`
 }
 
-// AttributeGroup_part_attributes is generated from named attribute group "part-attributes"
+// AttributeGroup_part_attributes UnNamed source named attribute group "part-attributes"
 type AttributeGroup_part_attributes struct {
 
 	// insertion point for fields
@@ -5258,7 +5265,7 @@ type AttributeGroup_part_attributes struct {
 	Id string `xml:"id,attr,omitempty"`
 }
 
-// AttributeGroup_part_name_text is generated from named attribute group "part-name-text"
+// AttributeGroup_part_name_text UnNamed source named attribute group "part-name-text"
 type AttributeGroup_part_name_text struct {
 
 	// insertion point for fields
@@ -5273,7 +5280,7 @@ type AttributeGroup_part_name_text struct {
 	AttributeGroup_justify
 }
 
-// AttributeGroup_placement is generated from named attribute group "placement"
+// AttributeGroup_placement UnNamed source named attribute group "placement"
 type AttributeGroup_placement struct {
 
 	// insertion point for fields
@@ -5282,7 +5289,7 @@ type AttributeGroup_placement struct {
 	Placement string `xml:"placement,attr,omitempty"`
 }
 
-// AttributeGroup_position is generated from named attribute group "position"
+// AttributeGroup_position UnNamed source named attribute group "position"
 type AttributeGroup_position struct {
 
 	// insertion point for fields
@@ -5300,7 +5307,7 @@ type AttributeGroup_position struct {
 	Relative_y string `xml:"relative-y,attr,omitempty"`
 }
 
-// AttributeGroup_print_attributes is generated from named attribute group "print-attributes"
+// AttributeGroup_print_attributes UnNamed source named attribute group "print-attributes"
 type AttributeGroup_print_attributes struct {
 
 	// insertion point for fields
@@ -5321,7 +5328,7 @@ type AttributeGroup_print_attributes struct {
 	Page_number string `xml:"page-number,attr,omitempty"`
 }
 
-// AttributeGroup_print_object is generated from named attribute group "print-object"
+// AttributeGroup_print_object UnNamed source named attribute group "print-object"
 type AttributeGroup_print_object struct {
 
 	// insertion point for fields
@@ -5330,7 +5337,7 @@ type AttributeGroup_print_object struct {
 	Print_object string `xml:"print-object,attr,omitempty"`
 }
 
-// AttributeGroup_print_spacing is generated from named attribute group "print-spacing"
+// AttributeGroup_print_spacing UnNamed source named attribute group "print-spacing"
 type AttributeGroup_print_spacing struct {
 
 	// insertion point for fields
@@ -5339,7 +5346,7 @@ type AttributeGroup_print_spacing struct {
 	Print_spacing string `xml:"print-spacing,attr,omitempty"`
 }
 
-// AttributeGroup_print_style is generated from named attribute group "print-style"
+// AttributeGroup_print_style UnNamed source named attribute group "print-style"
 type AttributeGroup_print_style struct {
 
 	// insertion point for fields
@@ -5354,7 +5361,7 @@ type AttributeGroup_print_style struct {
 	AttributeGroup_color
 }
 
-// AttributeGroup_print_style_align is generated from named attribute group "print-style-align"
+// AttributeGroup_print_style_align UnNamed source named attribute group "print-style-align"
 type AttributeGroup_print_style_align struct {
 
 	// insertion point for fields
@@ -5369,7 +5376,7 @@ type AttributeGroup_print_style_align struct {
 	AttributeGroup_valign
 }
 
-// AttributeGroup_printout is generated from named attribute group "printout"
+// AttributeGroup_printout UnNamed source named attribute group "printout"
 type AttributeGroup_printout struct {
 
 	// insertion point for fields
@@ -5387,7 +5394,7 @@ type AttributeGroup_printout struct {
 	AttributeGroup_print_spacing
 }
 
-// AttributeGroup_smufl is generated from named attribute group "smufl"
+// AttributeGroup_smufl UnNamed source named attribute group "smufl"
 type AttributeGroup_smufl struct {
 
 	// insertion point for fields
@@ -5396,7 +5403,7 @@ type AttributeGroup_smufl struct {
 	Smufl string `xml:"smufl,attr,omitempty"`
 }
 
-// AttributeGroup_symbol_formatting is generated from named attribute group "symbol-formatting"
+// AttributeGroup_symbol_formatting UnNamed source named attribute group "symbol-formatting"
 type AttributeGroup_symbol_formatting struct {
 
 	// insertion point for fields
@@ -5426,7 +5433,7 @@ type AttributeGroup_symbol_formatting struct {
 	AttributeGroup_enclosure
 }
 
-// AttributeGroup_system_relation is generated from named attribute group "system-relation"
+// AttributeGroup_system_relation UnNamed source named attribute group "system-relation"
 type AttributeGroup_system_relation struct {
 
 	// insertion point for fields
@@ -5435,7 +5442,7 @@ type AttributeGroup_system_relation struct {
 	System string `xml:"system,attr,omitempty"`
 }
 
-// AttributeGroup_text_decoration is generated from named attribute group "text-decoration"
+// AttributeGroup_text_decoration UnNamed source named attribute group "text-decoration"
 type AttributeGroup_text_decoration struct {
 
 	// insertion point for fields
@@ -5450,7 +5457,7 @@ type AttributeGroup_text_decoration struct {
 	Line_through int `xml:"line-through,attr,omitempty"`
 }
 
-// AttributeGroup_text_direction is generated from named attribute group "text-direction"
+// AttributeGroup_text_direction UnNamed source named attribute group "text-direction"
 type AttributeGroup_text_direction struct {
 
 	// insertion point for fields
@@ -5459,7 +5466,7 @@ type AttributeGroup_text_direction struct {
 	Dir string `xml:"dir,attr,omitempty"`
 }
 
-// AttributeGroup_text_formatting is generated from named attribute group "text-formatting"
+// AttributeGroup_text_formatting UnNamed source named attribute group "text-formatting"
 type AttributeGroup_text_formatting struct {
 
 	// insertion point for fields
@@ -5495,7 +5502,7 @@ type AttributeGroup_text_formatting struct {
 	AttributeGroup_enclosure
 }
 
-// AttributeGroup_text_rotation is generated from named attribute group "text-rotation"
+// AttributeGroup_text_rotation UnNamed source named attribute group "text-rotation"
 type AttributeGroup_text_rotation struct {
 
 	// insertion point for fields
@@ -5504,7 +5511,7 @@ type AttributeGroup_text_rotation struct {
 	Rotation string `xml:"rotation,attr,omitempty"`
 }
 
-// AttributeGroup_trill_sound is generated from named attribute group "trill-sound"
+// AttributeGroup_trill_sound UnNamed source named attribute group "trill-sound"
 type AttributeGroup_trill_sound struct {
 
 	// insertion point for fields
@@ -5531,7 +5538,7 @@ type AttributeGroup_trill_sound struct {
 	Last_beat string `xml:"last-beat,attr,omitempty"`
 }
 
-// AttributeGroup_valign is generated from named attribute group "valign"
+// AttributeGroup_valign UnNamed source named attribute group "valign"
 type AttributeGroup_valign struct {
 
 	// insertion point for fields
@@ -5540,7 +5547,7 @@ type AttributeGroup_valign struct {
 	Valign string `xml:"valign,attr,omitempty"`
 }
 
-// AttributeGroup_valign_image is generated from named attribute group "valign-image"
+// AttributeGroup_valign_image UnNamed source named attribute group "valign-image"
 type AttributeGroup_valign_image struct {
 
 	// insertion point for fields
@@ -5549,7 +5556,7 @@ type AttributeGroup_valign_image struct {
 	Valign string `xml:"valign,attr,omitempty"`
 }
 
-// AttributeGroup_x_position is generated from named attribute group "x-position"
+// AttributeGroup_x_position UnNamed source named attribute group "x-position"
 type AttributeGroup_x_position struct {
 
 	// insertion point for fields
@@ -5567,7 +5574,7 @@ type AttributeGroup_x_position struct {
 	Relative_y string `xml:"relative-y,attr,omitempty"`
 }
 
-// AttributeGroup_y_position is generated from named attribute group "y-position"
+// AttributeGroup_y_position UnNamed source named attribute group "y-position"
 type AttributeGroup_y_position struct {
 
 	// insertion point for fields
@@ -5585,7 +5592,7 @@ type AttributeGroup_y_position struct {
 	Relative_y string `xml:"relative-y,attr,omitempty"`
 }
 
-// Score_partwise is generated from element score-partwise within root schema
+// Score_partwise Named source element score-partwise within root schema
 type Score_partwise struct {
 	Name string `xml:"-"`
 
@@ -5598,7 +5605,7 @@ type Score_partwise struct {
 	A_score_partwise
 }
 
-// Score_timewise is generated from element score-timewise within root schema
+// Score_timewise Named source element score-timewise within root schema
 type Score_timewise struct {
 	Name string `xml:"-"`
 

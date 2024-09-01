@@ -4377,7 +4377,7 @@ func GetFields[Type Gongstruct]() (res []string) {
 	switch any(ret).(type) {
 	// insertion point for generic get gongstruct name
 	case All:
-		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth"}
+		res = []string{"Name", "Annotation", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth", "MinOccurs", "MaxOccurs"}
 	case Annotation:
 		res = []string{"Name", "Documentations"}
 	case Attribute:
@@ -4385,11 +4385,11 @@ func GetFields[Type Gongstruct]() (res []string) {
 	case AttributeGroup:
 		res = []string{"Name", "NameXSD", "Annotation", "HasNameConflict", "GoIdentifier", "AttributeGroups", "Ref", "Attributes"}
 	case Choice:
-		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth", "IsDuplicatedInXSD"}
+		res = []string{"Name", "Annotation", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth", "MinOccurs", "MaxOccurs", "IsDuplicatedInXSD"}
 	case ComplexContent:
 		res = []string{"Name"}
 	case ComplexType:
-		res = []string{"Name", "HasNameConflict", "GoIdentifier", "IsAnonymous", "OuterElement", "Annotation", "NameXSD", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Extension", "SimpleContent", "ComplexContent", "Attributes", "AttributeGroups", "Order", "Depth", "IsDuplicatedInXSD"}
+		res = []string{"Name", "HasNameConflict", "GoIdentifier", "IsAnonymous", "OuterElement", "Annotation", "NameXSD", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth", "MinOccurs", "MaxOccurs", "Extension", "SimpleContent", "ComplexContent", "Attributes", "AttributeGroups", "IsDuplicatedInXSD"}
 	case Documentation:
 		res = []string{"Name", "Text", "Source", "Lang"}
 	case Element:
@@ -4397,9 +4397,9 @@ func GetFields[Type Gongstruct]() (res []string) {
 	case Enumeration:
 		res = []string{"Name", "Annotation", "Value"}
 	case Extension:
-		res = []string{"Name", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Base", "Ref", "Attributes"}
+		res = []string{"Name", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth", "MinOccurs", "MaxOccurs", "Base", "Ref", "Attributes"}
 	case Group:
-		res = []string{"Name", "Annotation", "NameXSD", "Ref", "IsAnonymous", "OuterElement", "HasNameConflict", "GoIdentifier", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth"}
+		res = []string{"Name", "Annotation", "NameXSD", "Ref", "IsAnonymous", "OuterElement", "HasNameConflict", "GoIdentifier", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth", "MinOccurs", "MaxOccurs"}
 	case Length:
 		res = []string{"Name", "Annotation", "Value"}
 	case MaxInclusive:
@@ -4415,9 +4415,9 @@ func GetFields[Type Gongstruct]() (res []string) {
 	case Restriction:
 		res = []string{"Name", "Annotation", "Base", "Enumerations", "MinInclusive", "MaxInclusive", "Pattern", "WhiteSpace", "MinLength", "MaxLength", "Length", "TotalDigit"}
 	case Schema:
-		res = []string{"Name", "Xs", "Annotation", "Elements", "SimpleTypes", "ComplexTypes", "AttributeGroups", "Groups"}
+		res = []string{"Name", "Xs", "Annotation", "Elements", "SimpleTypes", "ComplexTypes", "AttributeGroups", "Groups", "Order", "Depth"}
 	case Sequence:
-		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth"}
+		res = []string{"Name", "Annotation", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth", "MinOccurs", "MaxOccurs"}
 	case SimpleContent:
 		res = []string{"Name", "Extension", "Restriction"}
 	case SimpleType:
@@ -4665,7 +4665,7 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 	switch any(ret).(type) {
 	// insertion point for generic get gongstruct name
 	case *All:
-		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth"}
+		res = []string{"Name", "Annotation", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth", "MinOccurs", "MaxOccurs"}
 	case *Annotation:
 		res = []string{"Name", "Documentations"}
 	case *Attribute:
@@ -4673,11 +4673,11 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 	case *AttributeGroup:
 		res = []string{"Name", "NameXSD", "Annotation", "HasNameConflict", "GoIdentifier", "AttributeGroups", "Ref", "Attributes"}
 	case *Choice:
-		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth", "IsDuplicatedInXSD"}
+		res = []string{"Name", "Annotation", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth", "MinOccurs", "MaxOccurs", "IsDuplicatedInXSD"}
 	case *ComplexContent:
 		res = []string{"Name"}
 	case *ComplexType:
-		res = []string{"Name", "HasNameConflict", "GoIdentifier", "IsAnonymous", "OuterElement", "Annotation", "NameXSD", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Extension", "SimpleContent", "ComplexContent", "Attributes", "AttributeGroups", "Order", "Depth", "IsDuplicatedInXSD"}
+		res = []string{"Name", "HasNameConflict", "GoIdentifier", "IsAnonymous", "OuterElement", "Annotation", "NameXSD", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth", "MinOccurs", "MaxOccurs", "Extension", "SimpleContent", "ComplexContent", "Attributes", "AttributeGroups", "IsDuplicatedInXSD"}
 	case *Documentation:
 		res = []string{"Name", "Text", "Source", "Lang"}
 	case *Element:
@@ -4685,9 +4685,9 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 	case *Enumeration:
 		res = []string{"Name", "Annotation", "Value"}
 	case *Extension:
-		res = []string{"Name", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Base", "Ref", "Attributes"}
+		res = []string{"Name", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth", "MinOccurs", "MaxOccurs", "Base", "Ref", "Attributes"}
 	case *Group:
-		res = []string{"Name", "Annotation", "NameXSD", "Ref", "IsAnonymous", "OuterElement", "HasNameConflict", "GoIdentifier", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth"}
+		res = []string{"Name", "Annotation", "NameXSD", "Ref", "IsAnonymous", "OuterElement", "HasNameConflict", "GoIdentifier", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth", "MinOccurs", "MaxOccurs"}
 	case *Length:
 		res = []string{"Name", "Annotation", "Value"}
 	case *MaxInclusive:
@@ -4703,9 +4703,9 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 	case *Restriction:
 		res = []string{"Name", "Annotation", "Base", "Enumerations", "MinInclusive", "MaxInclusive", "Pattern", "WhiteSpace", "MinLength", "MaxLength", "Length", "TotalDigit"}
 	case *Schema:
-		res = []string{"Name", "Xs", "Annotation", "Elements", "SimpleTypes", "ComplexTypes", "AttributeGroups", "Groups"}
+		res = []string{"Name", "Xs", "Annotation", "Elements", "SimpleTypes", "ComplexTypes", "AttributeGroups", "Groups", "Order", "Depth"}
 	case *Sequence:
-		res = []string{"Name", "Annotation", "MinOccurs", "MaxOccurs", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth"}
+		res = []string{"Name", "Annotation", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth", "MinOccurs", "MaxOccurs"}
 	case *SimpleContent:
 		res = []string{"Name", "Extension", "Restriction"}
 	case *SimpleType:
@@ -4733,10 +4733,6 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 			if inferedInstance.Annotation != nil {
 				res = inferedInstance.Annotation.Name
 			}
-		case "MinOccurs":
-			res = inferedInstance.MinOccurs
-		case "MaxOccurs":
-			res = inferedInstance.MaxOccurs
 		case "OuterElementName":
 			res = inferedInstance.OuterElementName
 		case "Sequences":
@@ -4778,6 +4774,10 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 			res = fmt.Sprintf("%d", inferedInstance.Order)
 		case "Depth":
 			res = fmt.Sprintf("%d", inferedInstance.Depth)
+		case "MinOccurs":
+			res = inferedInstance.MinOccurs
+		case "MaxOccurs":
+			res = inferedInstance.MaxOccurs
 		}
 	case *Annotation:
 		switch fieldName {
@@ -4867,10 +4867,6 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 			if inferedInstance.Annotation != nil {
 				res = inferedInstance.Annotation.Name
 			}
-		case "MinOccurs":
-			res = inferedInstance.MinOccurs
-		case "MaxOccurs":
-			res = inferedInstance.MaxOccurs
 		case "OuterElementName":
 			res = inferedInstance.OuterElementName
 		case "Sequences":
@@ -4912,6 +4908,10 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 			res = fmt.Sprintf("%d", inferedInstance.Order)
 		case "Depth":
 			res = fmt.Sprintf("%d", inferedInstance.Depth)
+		case "MinOccurs":
+			res = inferedInstance.MinOccurs
+		case "MaxOccurs":
+			res = inferedInstance.MaxOccurs
 		case "IsDuplicatedInXSD":
 			res = fmt.Sprintf("%t", inferedInstance.IsDuplicatedInXSD)
 		}
@@ -4979,6 +4979,14 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 				}
 				res += __instance__.Name
 			}
+		case "Order":
+			res = fmt.Sprintf("%d", inferedInstance.Order)
+		case "Depth":
+			res = fmt.Sprintf("%d", inferedInstance.Depth)
+		case "MinOccurs":
+			res = inferedInstance.MinOccurs
+		case "MaxOccurs":
+			res = inferedInstance.MaxOccurs
 		case "Extension":
 			if inferedInstance.Extension != nil {
 				res = inferedInstance.Extension.Name
@@ -5005,10 +5013,6 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 				}
 				res += __instance__.Name
 			}
-		case "Order":
-			res = fmt.Sprintf("%d", inferedInstance.Order)
-		case "Depth":
-			res = fmt.Sprintf("%d", inferedInstance.Depth)
 		case "IsDuplicatedInXSD":
 			res = fmt.Sprintf("%t", inferedInstance.IsDuplicatedInXSD)
 		}
@@ -5137,6 +5141,14 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 				}
 				res += __instance__.Name
 			}
+		case "Order":
+			res = fmt.Sprintf("%d", inferedInstance.Order)
+		case "Depth":
+			res = fmt.Sprintf("%d", inferedInstance.Depth)
+		case "MinOccurs":
+			res = inferedInstance.MinOccurs
+		case "MaxOccurs":
+			res = inferedInstance.MaxOccurs
 		case "Base":
 			res = inferedInstance.Base
 		case "Ref":
@@ -5213,6 +5225,10 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 			res = fmt.Sprintf("%d", inferedInstance.Order)
 		case "Depth":
 			res = fmt.Sprintf("%d", inferedInstance.Depth)
+		case "MinOccurs":
+			res = inferedInstance.MinOccurs
+		case "MaxOccurs":
+			res = inferedInstance.MaxOccurs
 		}
 	case *Length:
 		switch fieldName {
@@ -5383,6 +5399,10 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 				}
 				res += __instance__.Name
 			}
+		case "Order":
+			res = fmt.Sprintf("%d", inferedInstance.Order)
+		case "Depth":
+			res = fmt.Sprintf("%d", inferedInstance.Depth)
 		}
 	case *Sequence:
 		switch fieldName {
@@ -5393,10 +5413,6 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 			if inferedInstance.Annotation != nil {
 				res = inferedInstance.Annotation.Name
 			}
-		case "MinOccurs":
-			res = inferedInstance.MinOccurs
-		case "MaxOccurs":
-			res = inferedInstance.MaxOccurs
 		case "OuterElementName":
 			res = inferedInstance.OuterElementName
 		case "Sequences":
@@ -5438,6 +5454,10 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 			res = fmt.Sprintf("%d", inferedInstance.Order)
 		case "Depth":
 			res = fmt.Sprintf("%d", inferedInstance.Depth)
+		case "MinOccurs":
+			res = inferedInstance.MinOccurs
+		case "MaxOccurs":
+			res = inferedInstance.MaxOccurs
 		}
 	case *SimpleContent:
 		switch fieldName {
@@ -5528,10 +5548,6 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 			if inferedInstance.Annotation != nil {
 				res = inferedInstance.Annotation.Name
 			}
-		case "MinOccurs":
-			res = inferedInstance.MinOccurs
-		case "MaxOccurs":
-			res = inferedInstance.MaxOccurs
 		case "OuterElementName":
 			res = inferedInstance.OuterElementName
 		case "Sequences":
@@ -5573,6 +5589,10 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 			res = fmt.Sprintf("%d", inferedInstance.Order)
 		case "Depth":
 			res = fmt.Sprintf("%d", inferedInstance.Depth)
+		case "MinOccurs":
+			res = inferedInstance.MinOccurs
+		case "MaxOccurs":
+			res = inferedInstance.MaxOccurs
 		}
 	case Annotation:
 		switch fieldName {
@@ -5662,10 +5682,6 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 			if inferedInstance.Annotation != nil {
 				res = inferedInstance.Annotation.Name
 			}
-		case "MinOccurs":
-			res = inferedInstance.MinOccurs
-		case "MaxOccurs":
-			res = inferedInstance.MaxOccurs
 		case "OuterElementName":
 			res = inferedInstance.OuterElementName
 		case "Sequences":
@@ -5707,6 +5723,10 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 			res = fmt.Sprintf("%d", inferedInstance.Order)
 		case "Depth":
 			res = fmt.Sprintf("%d", inferedInstance.Depth)
+		case "MinOccurs":
+			res = inferedInstance.MinOccurs
+		case "MaxOccurs":
+			res = inferedInstance.MaxOccurs
 		case "IsDuplicatedInXSD":
 			res = fmt.Sprintf("%t", inferedInstance.IsDuplicatedInXSD)
 		}
@@ -5774,6 +5794,14 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 				}
 				res += __instance__.Name
 			}
+		case "Order":
+			res = fmt.Sprintf("%d", inferedInstance.Order)
+		case "Depth":
+			res = fmt.Sprintf("%d", inferedInstance.Depth)
+		case "MinOccurs":
+			res = inferedInstance.MinOccurs
+		case "MaxOccurs":
+			res = inferedInstance.MaxOccurs
 		case "Extension":
 			if inferedInstance.Extension != nil {
 				res = inferedInstance.Extension.Name
@@ -5800,10 +5828,6 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 				}
 				res += __instance__.Name
 			}
-		case "Order":
-			res = fmt.Sprintf("%d", inferedInstance.Order)
-		case "Depth":
-			res = fmt.Sprintf("%d", inferedInstance.Depth)
 		case "IsDuplicatedInXSD":
 			res = fmt.Sprintf("%t", inferedInstance.IsDuplicatedInXSD)
 		}
@@ -5932,6 +5956,14 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 				}
 				res += __instance__.Name
 			}
+		case "Order":
+			res = fmt.Sprintf("%d", inferedInstance.Order)
+		case "Depth":
+			res = fmt.Sprintf("%d", inferedInstance.Depth)
+		case "MinOccurs":
+			res = inferedInstance.MinOccurs
+		case "MaxOccurs":
+			res = inferedInstance.MaxOccurs
 		case "Base":
 			res = inferedInstance.Base
 		case "Ref":
@@ -6008,6 +6040,10 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 			res = fmt.Sprintf("%d", inferedInstance.Order)
 		case "Depth":
 			res = fmt.Sprintf("%d", inferedInstance.Depth)
+		case "MinOccurs":
+			res = inferedInstance.MinOccurs
+		case "MaxOccurs":
+			res = inferedInstance.MaxOccurs
 		}
 	case Length:
 		switch fieldName {
@@ -6178,6 +6214,10 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 				}
 				res += __instance__.Name
 			}
+		case "Order":
+			res = fmt.Sprintf("%d", inferedInstance.Order)
+		case "Depth":
+			res = fmt.Sprintf("%d", inferedInstance.Depth)
 		}
 	case Sequence:
 		switch fieldName {
@@ -6188,10 +6228,6 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 			if inferedInstance.Annotation != nil {
 				res = inferedInstance.Annotation.Name
 			}
-		case "MinOccurs":
-			res = inferedInstance.MinOccurs
-		case "MaxOccurs":
-			res = inferedInstance.MaxOccurs
 		case "OuterElementName":
 			res = inferedInstance.OuterElementName
 		case "Sequences":
@@ -6233,6 +6269,10 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 			res = fmt.Sprintf("%d", inferedInstance.Order)
 		case "Depth":
 			res = fmt.Sprintf("%d", inferedInstance.Depth)
+		case "MinOccurs":
+			res = inferedInstance.MinOccurs
+		case "MaxOccurs":
+			res = inferedInstance.MaxOccurs
 		}
 	case SimpleContent:
 		switch fieldName {

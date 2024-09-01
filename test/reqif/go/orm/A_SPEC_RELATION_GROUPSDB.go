@@ -47,8 +47,9 @@ type A_SPEC_RELATION_GROUPSAPI struct {
 type A_SPEC_RELATION_GROUPSPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
 
-	// field RELATION_GROUP is a slice of pointers to another Struct (optional or 0..1)
-	RELATION_GROUP IntSlice `gorm:"type:TEXT"`
+	// field RELATION_GROUP is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	RELATION_GROUPID sql.NullInt64
 }
 
 // A_SPEC_RELATION_GROUPSDB describes a a_spec_relation_groups in the database
@@ -214,22 +215,16 @@ func (backRepoA_SPEC_RELATION_GROUPS *BackRepoA_SPEC_RELATION_GROUPSStruct) Comm
 		a_spec_relation_groupsDB.CopyBasicFieldsFromA_SPEC_RELATION_GROUPS(a_spec_relation_groups)
 
 		// insertion point for translating pointers encodings into actual pointers
-		// 1. reset
-		a_spec_relation_groupsDB.A_SPEC_RELATION_GROUPSPointersEncoding.RELATION_GROUP = make([]int, 0)
-		// 2. encode
-		for _, relation_groupAssocEnd := range a_spec_relation_groups.RELATION_GROUP {
-			relation_groupAssocEnd_DB :=
-				backRepo.BackRepoRELATION_GROUP.GetRELATION_GROUPDBFromRELATION_GROUPPtr(relation_groupAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the relation_groupAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if relation_groupAssocEnd_DB == nil {
-				continue
+		// commit pointer value a_spec_relation_groups.RELATION_GROUP translates to updating the a_spec_relation_groups.RELATION_GROUPID
+		a_spec_relation_groupsDB.RELATION_GROUPID.Valid = true // allow for a 0 value (nil association)
+		if a_spec_relation_groups.RELATION_GROUP != nil {
+			if RELATION_GROUPId, ok := backRepo.BackRepoRELATION_GROUP.Map_RELATION_GROUPPtr_RELATION_GROUPDBID[a_spec_relation_groups.RELATION_GROUP]; ok {
+				a_spec_relation_groupsDB.RELATION_GROUPID.Int64 = int64(RELATION_GROUPId)
+				a_spec_relation_groupsDB.RELATION_GROUPID.Valid = true
 			}
-			
-			a_spec_relation_groupsDB.A_SPEC_RELATION_GROUPSPointersEncoding.RELATION_GROUP =
-				append(a_spec_relation_groupsDB.A_SPEC_RELATION_GROUPSPointersEncoding.RELATION_GROUP, int(relation_groupAssocEnd_DB.ID))
+		} else {
+			a_spec_relation_groupsDB.RELATION_GROUPID.Int64 = 0
+			a_spec_relation_groupsDB.RELATION_GROUPID.Valid = true
 		}
 
 		query := backRepoA_SPEC_RELATION_GROUPS.db.Save(&a_spec_relation_groupsDB)
@@ -345,15 +340,11 @@ func (backRepoA_SPEC_RELATION_GROUPS *BackRepoA_SPEC_RELATION_GROUPSStruct) Chec
 func (a_spec_relation_groupsDB *A_SPEC_RELATION_GROUPSDB) DecodePointers(backRepo *BackRepoStruct, a_spec_relation_groups *models.A_SPEC_RELATION_GROUPS) {
 
 	// insertion point for checkout of pointer encoding
-	// This loop redeem a_spec_relation_groups.RELATION_GROUP in the stage from the encode in the back repo
-	// It parses all RELATION_GROUPDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	a_spec_relation_groups.RELATION_GROUP = a_spec_relation_groups.RELATION_GROUP[:0]
-	for _, _RELATION_GROUPid := range a_spec_relation_groupsDB.A_SPEC_RELATION_GROUPSPointersEncoding.RELATION_GROUP {
-		a_spec_relation_groups.RELATION_GROUP = append(a_spec_relation_groups.RELATION_GROUP, backRepo.BackRepoRELATION_GROUP.Map_RELATION_GROUPDBID_RELATION_GROUPPtr[uint(_RELATION_GROUPid)])
+	// RELATION_GROUP field
+	a_spec_relation_groups.RELATION_GROUP = nil
+	if a_spec_relation_groupsDB.RELATION_GROUPID.Int64 != 0 {
+		a_spec_relation_groups.RELATION_GROUP = backRepo.BackRepoRELATION_GROUP.Map_RELATION_GROUPDBID_RELATION_GROUPPtr[uint(a_spec_relation_groupsDB.RELATION_GROUPID.Int64)]
 	}
-
 	return
 }
 
@@ -582,6 +573,12 @@ func (backRepoA_SPEC_RELATION_GROUPS *BackRepoA_SPEC_RELATION_GROUPSStruct) Rest
 		_ = a_spec_relation_groupsDB
 
 		// insertion point for reindexing pointers encoding
+		// reindexing RELATION_GROUP field
+		if a_spec_relation_groupsDB.RELATION_GROUPID.Int64 != 0 {
+			a_spec_relation_groupsDB.RELATION_GROUPID.Int64 = int64(BackRepoRELATION_GROUPid_atBckpTime_newID[uint(a_spec_relation_groupsDB.RELATION_GROUPID.Int64)])
+			a_spec_relation_groupsDB.RELATION_GROUPID.Valid = true
+		}
+
 		// update databse with new index encoding
 		query := backRepoA_SPEC_RELATION_GROUPS.db.Model(a_spec_relation_groupsDB).Updates(*a_spec_relation_groupsDB)
 		if query.Error != nil {

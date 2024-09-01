@@ -83,6 +83,12 @@ type SchemaDB struct {
 
 	// Declation for basic field schemaDB.Xs
 	Xs_Data sql.NullString
+
+	// Declation for basic field schemaDB.Order
+	Order_Data sql.NullInt64
+
+	// Declation for basic field schemaDB.Depth
+	Depth_Data sql.NullInt64
 	
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
@@ -109,6 +115,10 @@ type SchemaWOP struct {
 	Name string `xlsx:"1"`
 
 	Xs string `xlsx:"2"`
+
+	Order int `xlsx:"3"`
+
+	Depth int `xlsx:"4"`
 	// insertion for WOP pointer fields
 }
 
@@ -117,6 +127,8 @@ var Schema_Fields = []string{
 	"ID",
 	"Name",
 	"Xs",
+	"Order",
+	"Depth",
 }
 
 type BackRepoSchemaStruct struct {
@@ -540,6 +552,12 @@ func (schemaDB *SchemaDB) CopyBasicFieldsFromSchema(schema *models.Schema) {
 
 	schemaDB.Xs_Data.String = schema.Xs
 	schemaDB.Xs_Data.Valid = true
+
+	schemaDB.Order_Data.Int64 = int64(schema.Order)
+	schemaDB.Order_Data.Valid = true
+
+	schemaDB.Depth_Data.Int64 = int64(schema.Depth)
+	schemaDB.Depth_Data.Valid = true
 }
 
 // CopyBasicFieldsFromSchema_WOP
@@ -551,6 +569,12 @@ func (schemaDB *SchemaDB) CopyBasicFieldsFromSchema_WOP(schema *models.Schema_WO
 
 	schemaDB.Xs_Data.String = schema.Xs
 	schemaDB.Xs_Data.Valid = true
+
+	schemaDB.Order_Data.Int64 = int64(schema.Order)
+	schemaDB.Order_Data.Valid = true
+
+	schemaDB.Depth_Data.Int64 = int64(schema.Depth)
+	schemaDB.Depth_Data.Valid = true
 }
 
 // CopyBasicFieldsFromSchemaWOP
@@ -562,6 +586,12 @@ func (schemaDB *SchemaDB) CopyBasicFieldsFromSchemaWOP(schema *SchemaWOP) {
 
 	schemaDB.Xs_Data.String = schema.Xs
 	schemaDB.Xs_Data.Valid = true
+
+	schemaDB.Order_Data.Int64 = int64(schema.Order)
+	schemaDB.Order_Data.Valid = true
+
+	schemaDB.Depth_Data.Int64 = int64(schema.Depth)
+	schemaDB.Depth_Data.Valid = true
 }
 
 // CopyBasicFieldsToSchema
@@ -569,6 +599,8 @@ func (schemaDB *SchemaDB) CopyBasicFieldsToSchema(schema *models.Schema) {
 	// insertion point for checkout of basic fields (back repo to stage)
 	schema.Name = schemaDB.Name_Data.String
 	schema.Xs = schemaDB.Xs_Data.String
+	schema.Order = int(schemaDB.Order_Data.Int64)
+	schema.Depth = int(schemaDB.Depth_Data.Int64)
 }
 
 // CopyBasicFieldsToSchema_WOP
@@ -576,6 +608,8 @@ func (schemaDB *SchemaDB) CopyBasicFieldsToSchema_WOP(schema *models.Schema_WOP)
 	// insertion point for checkout of basic fields (back repo to stage)
 	schema.Name = schemaDB.Name_Data.String
 	schema.Xs = schemaDB.Xs_Data.String
+	schema.Order = int(schemaDB.Order_Data.Int64)
+	schema.Depth = int(schemaDB.Depth_Data.Int64)
 }
 
 // CopyBasicFieldsToSchemaWOP
@@ -584,6 +618,8 @@ func (schemaDB *SchemaDB) CopyBasicFieldsToSchemaWOP(schema *SchemaWOP) {
 	// insertion point for checkout of basic fields (back repo to stage)
 	schema.Name = schemaDB.Name_Data.String
 	schema.Xs = schemaDB.Xs_Data.String
+	schema.Order = int(schemaDB.Order_Data.Int64)
+	schema.Depth = int(schemaDB.Depth_Data.Int64)
 }
 
 // Backup generates a json file from a slice of all SchemaDB instances in the backrepo

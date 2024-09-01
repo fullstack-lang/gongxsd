@@ -88,11 +88,15 @@
         <credit-words>Wolfgang&#xA;      Amadeus Mozart</credit-words>
     </credit>
     <part-list>
-        <score-part id="P1">
-            <part-name>Voice</part-name>
+        <score-part id="P2">
+            <part-name>Piano</part-name>
             <score-instrument id="P1-I1">
                 <instrument-name>Voice</instrument-name>
                 <instrument-sound>voice.vocals</instrument-sound>
+            </score-instrument>
+            <score-instrument id="P2-I2">
+                <instrument-name>Acoustic Grand Piano</instrument-name>
+                <instrument-sound>keyboard.piano</instrument-sound>
             </score-instrument>
             <midi-instrument id="P1-I1">
                 <midi-channel>1</midi-channel>
@@ -100,13 +104,6 @@
                 <volume>80</volume>
                 <pan>0</pan>
             </midi-instrument>
-        </score-part>
-        <score-part id="P2">
-            <part-name>Piano</part-name>
-            <score-instrument id="P2-I2">
-                <instrument-name>Acoustic Grand Piano</instrument-name>
-                <instrument-sound>keyboard.piano</instrument-sound>
-            </score-instrument>
             <midi-instrument id="P2-I2">
                 <midi-channel>2</midi-channel>
                 <midi-program>1</midi-program>
@@ -833,7 +830,6 @@
                 <type>16th</type>
                 <accidental>flat</accidental>
                 <stem>up</stem>
-                <beam number="1">continue</beam>
                 <beam number="2">backward hook</beam>
                 <notations>
                     <slur type="stop" number="1" default-x="7" default-y="-35" bezier-x="-13" bezier-y="-16"></slur>
@@ -868,7 +864,6 @@
                 <voice>1</voice>
                 <type>16th</type>
                 <stem>up</stem>
-                <beam number="1">end</beam>
                 <beam number="2">backward hook</beam>
                 <notations>
                     <slur type="stop" number="1" default-x="7" default-y="-43" bezier-x="-15" bezier-y="-14"></slur>
@@ -1592,7 +1587,6 @@
                 <type>16th</type>
                 <stem>up</stem>
                 <staff>1</staff>
-                <beam number="1">begin</beam>
                 <beam number="2">begin</beam>
             </note>
             <note default-x="112">
@@ -1605,7 +1599,6 @@
                 <type>16th</type>
                 <stem>up</stem>
                 <staff>1</staff>
-                <beam number="1">end</beam>
                 <beam number="2">end</beam>
             </note>
             <note default-x="131">
@@ -1619,7 +1612,6 @@
                 <type>16th</type>
                 <stem>down</stem>
                 <staff>1</staff>
-                <beam number="1">begin</beam>
                 <beam number="2">begin</beam>
             </note>
             <note default-x="150">
@@ -1633,7 +1625,6 @@
                 <type>16th</type>
                 <stem>down</stem>
                 <staff>1</staff>
-                <beam number="1">continue</beam>
                 <beam number="2">continue</beam>
             </note>
             <note default-x="170">
@@ -1646,7 +1637,6 @@
                 <type>16th</type>
                 <stem>down</stem>
                 <staff>1</staff>
-                <beam number="1">continue</beam>
                 <beam number="2">continue</beam>
             </note>
             <note default-x="188">
@@ -1659,7 +1649,6 @@
                 <type>16th</type>
                 <stem>down</stem>
                 <staff>1</staff>
-                <beam number="1">end</beam>
                 <beam number="2">end</beam>
             </note>
             <note default-x="208">
@@ -1673,7 +1662,6 @@
                 <type>16th</type>
                 <stem>down</stem>
                 <staff>1</staff>
-                <beam number="1">begin</beam>
                 <beam number="2">begin</beam>
             </note>
             <note default-x="227">
@@ -1686,7 +1674,6 @@
                 <type>16th</type>
                 <stem>down</stem>
                 <staff>1</staff>
-                <beam number="1">continue</beam>
                 <beam number="2">continue</beam>
             </note>
             <note default-x="246">
@@ -1699,7 +1686,6 @@
                 <type>16th</type>
                 <stem>down</stem>
                 <staff>1</staff>
-                <beam number="1">continue</beam>
                 <beam number="2">continue</beam>
             </note>
             <note default-x="267">
@@ -1713,7 +1699,6 @@
                 <type>16th</type>
                 <stem>down</stem>
                 <staff>1</staff>
-                <beam number="1">end</beam>
                 <beam number="2">end</beam>
             </note>
             <note default-x="10">

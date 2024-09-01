@@ -47,26 +47,33 @@ type A_DATATYPESAPI struct {
 type A_DATATYPESPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
 
-	// field DATATYPE_DEFINITION_BOOLEAN is a slice of pointers to another Struct (optional or 0..1)
-	DATATYPE_DEFINITION_BOOLEAN IntSlice `gorm:"type:TEXT"`
+	// field DATATYPE_DEFINITION_BOOLEAN is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	DATATYPE_DEFINITION_BOOLEANID sql.NullInt64
 
-	// field DATATYPE_DEFINITION_DATE is a slice of pointers to another Struct (optional or 0..1)
-	DATATYPE_DEFINITION_DATE IntSlice `gorm:"type:TEXT"`
+	// field DATATYPE_DEFINITION_DATE is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	DATATYPE_DEFINITION_DATEID sql.NullInt64
 
-	// field DATATYPE_DEFINITION_ENUMERATION is a slice of pointers to another Struct (optional or 0..1)
-	DATATYPE_DEFINITION_ENUMERATION IntSlice `gorm:"type:TEXT"`
+	// field DATATYPE_DEFINITION_ENUMERATION is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	DATATYPE_DEFINITION_ENUMERATIONID sql.NullInt64
 
-	// field DATATYPE_DEFINITION_INTEGER is a slice of pointers to another Struct (optional or 0..1)
-	DATATYPE_DEFINITION_INTEGER IntSlice `gorm:"type:TEXT"`
+	// field DATATYPE_DEFINITION_INTEGER is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	DATATYPE_DEFINITION_INTEGERID sql.NullInt64
 
-	// field DATATYPE_DEFINITION_REAL is a slice of pointers to another Struct (optional or 0..1)
-	DATATYPE_DEFINITION_REAL IntSlice `gorm:"type:TEXT"`
+	// field DATATYPE_DEFINITION_REAL is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	DATATYPE_DEFINITION_REALID sql.NullInt64
 
-	// field DATATYPE_DEFINITION_STRING is a slice of pointers to another Struct (optional or 0..1)
-	DATATYPE_DEFINITION_STRING IntSlice `gorm:"type:TEXT"`
+	// field DATATYPE_DEFINITION_STRING is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	DATATYPE_DEFINITION_STRINGID sql.NullInt64
 
-	// field DATATYPE_DEFINITION_XHTML is a slice of pointers to another Struct (optional or 0..1)
-	DATATYPE_DEFINITION_XHTML IntSlice `gorm:"type:TEXT"`
+	// field DATATYPE_DEFINITION_XHTML is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	DATATYPE_DEFINITION_XHTMLID sql.NullInt64
 }
 
 // A_DATATYPESDB describes a a_datatypes in the database
@@ -232,130 +239,88 @@ func (backRepoA_DATATYPES *BackRepoA_DATATYPESStruct) CommitPhaseTwoInstance(bac
 		a_datatypesDB.CopyBasicFieldsFromA_DATATYPES(a_datatypes)
 
 		// insertion point for translating pointers encodings into actual pointers
-		// 1. reset
-		a_datatypesDB.A_DATATYPESPointersEncoding.DATATYPE_DEFINITION_BOOLEAN = make([]int, 0)
-		// 2. encode
-		for _, datatype_definition_booleanAssocEnd := range a_datatypes.DATATYPE_DEFINITION_BOOLEAN {
-			datatype_definition_booleanAssocEnd_DB :=
-				backRepo.BackRepoDATATYPE_DEFINITION_BOOLEAN.GetDATATYPE_DEFINITION_BOOLEANDBFromDATATYPE_DEFINITION_BOOLEANPtr(datatype_definition_booleanAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the datatype_definition_booleanAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if datatype_definition_booleanAssocEnd_DB == nil {
-				continue
+		// commit pointer value a_datatypes.DATATYPE_DEFINITION_BOOLEAN translates to updating the a_datatypes.DATATYPE_DEFINITION_BOOLEANID
+		a_datatypesDB.DATATYPE_DEFINITION_BOOLEANID.Valid = true // allow for a 0 value (nil association)
+		if a_datatypes.DATATYPE_DEFINITION_BOOLEAN != nil {
+			if DATATYPE_DEFINITION_BOOLEANId, ok := backRepo.BackRepoDATATYPE_DEFINITION_BOOLEAN.Map_DATATYPE_DEFINITION_BOOLEANPtr_DATATYPE_DEFINITION_BOOLEANDBID[a_datatypes.DATATYPE_DEFINITION_BOOLEAN]; ok {
+				a_datatypesDB.DATATYPE_DEFINITION_BOOLEANID.Int64 = int64(DATATYPE_DEFINITION_BOOLEANId)
+				a_datatypesDB.DATATYPE_DEFINITION_BOOLEANID.Valid = true
 			}
-			
-			a_datatypesDB.A_DATATYPESPointersEncoding.DATATYPE_DEFINITION_BOOLEAN =
-				append(a_datatypesDB.A_DATATYPESPointersEncoding.DATATYPE_DEFINITION_BOOLEAN, int(datatype_definition_booleanAssocEnd_DB.ID))
+		} else {
+			a_datatypesDB.DATATYPE_DEFINITION_BOOLEANID.Int64 = 0
+			a_datatypesDB.DATATYPE_DEFINITION_BOOLEANID.Valid = true
 		}
 
-		// 1. reset
-		a_datatypesDB.A_DATATYPESPointersEncoding.DATATYPE_DEFINITION_DATE = make([]int, 0)
-		// 2. encode
-		for _, datatype_definition_dateAssocEnd := range a_datatypes.DATATYPE_DEFINITION_DATE {
-			datatype_definition_dateAssocEnd_DB :=
-				backRepo.BackRepoDATATYPE_DEFINITION_DATE.GetDATATYPE_DEFINITION_DATEDBFromDATATYPE_DEFINITION_DATEPtr(datatype_definition_dateAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the datatype_definition_dateAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if datatype_definition_dateAssocEnd_DB == nil {
-				continue
+		// commit pointer value a_datatypes.DATATYPE_DEFINITION_DATE translates to updating the a_datatypes.DATATYPE_DEFINITION_DATEID
+		a_datatypesDB.DATATYPE_DEFINITION_DATEID.Valid = true // allow for a 0 value (nil association)
+		if a_datatypes.DATATYPE_DEFINITION_DATE != nil {
+			if DATATYPE_DEFINITION_DATEId, ok := backRepo.BackRepoDATATYPE_DEFINITION_DATE.Map_DATATYPE_DEFINITION_DATEPtr_DATATYPE_DEFINITION_DATEDBID[a_datatypes.DATATYPE_DEFINITION_DATE]; ok {
+				a_datatypesDB.DATATYPE_DEFINITION_DATEID.Int64 = int64(DATATYPE_DEFINITION_DATEId)
+				a_datatypesDB.DATATYPE_DEFINITION_DATEID.Valid = true
 			}
-			
-			a_datatypesDB.A_DATATYPESPointersEncoding.DATATYPE_DEFINITION_DATE =
-				append(a_datatypesDB.A_DATATYPESPointersEncoding.DATATYPE_DEFINITION_DATE, int(datatype_definition_dateAssocEnd_DB.ID))
+		} else {
+			a_datatypesDB.DATATYPE_DEFINITION_DATEID.Int64 = 0
+			a_datatypesDB.DATATYPE_DEFINITION_DATEID.Valid = true
 		}
 
-		// 1. reset
-		a_datatypesDB.A_DATATYPESPointersEncoding.DATATYPE_DEFINITION_ENUMERATION = make([]int, 0)
-		// 2. encode
-		for _, datatype_definition_enumerationAssocEnd := range a_datatypes.DATATYPE_DEFINITION_ENUMERATION {
-			datatype_definition_enumerationAssocEnd_DB :=
-				backRepo.BackRepoDATATYPE_DEFINITION_ENUMERATION.GetDATATYPE_DEFINITION_ENUMERATIONDBFromDATATYPE_DEFINITION_ENUMERATIONPtr(datatype_definition_enumerationAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the datatype_definition_enumerationAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if datatype_definition_enumerationAssocEnd_DB == nil {
-				continue
+		// commit pointer value a_datatypes.DATATYPE_DEFINITION_ENUMERATION translates to updating the a_datatypes.DATATYPE_DEFINITION_ENUMERATIONID
+		a_datatypesDB.DATATYPE_DEFINITION_ENUMERATIONID.Valid = true // allow for a 0 value (nil association)
+		if a_datatypes.DATATYPE_DEFINITION_ENUMERATION != nil {
+			if DATATYPE_DEFINITION_ENUMERATIONId, ok := backRepo.BackRepoDATATYPE_DEFINITION_ENUMERATION.Map_DATATYPE_DEFINITION_ENUMERATIONPtr_DATATYPE_DEFINITION_ENUMERATIONDBID[a_datatypes.DATATYPE_DEFINITION_ENUMERATION]; ok {
+				a_datatypesDB.DATATYPE_DEFINITION_ENUMERATIONID.Int64 = int64(DATATYPE_DEFINITION_ENUMERATIONId)
+				a_datatypesDB.DATATYPE_DEFINITION_ENUMERATIONID.Valid = true
 			}
-			
-			a_datatypesDB.A_DATATYPESPointersEncoding.DATATYPE_DEFINITION_ENUMERATION =
-				append(a_datatypesDB.A_DATATYPESPointersEncoding.DATATYPE_DEFINITION_ENUMERATION, int(datatype_definition_enumerationAssocEnd_DB.ID))
+		} else {
+			a_datatypesDB.DATATYPE_DEFINITION_ENUMERATIONID.Int64 = 0
+			a_datatypesDB.DATATYPE_DEFINITION_ENUMERATIONID.Valid = true
 		}
 
-		// 1. reset
-		a_datatypesDB.A_DATATYPESPointersEncoding.DATATYPE_DEFINITION_INTEGER = make([]int, 0)
-		// 2. encode
-		for _, datatype_definition_integerAssocEnd := range a_datatypes.DATATYPE_DEFINITION_INTEGER {
-			datatype_definition_integerAssocEnd_DB :=
-				backRepo.BackRepoDATATYPE_DEFINITION_INTEGER.GetDATATYPE_DEFINITION_INTEGERDBFromDATATYPE_DEFINITION_INTEGERPtr(datatype_definition_integerAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the datatype_definition_integerAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if datatype_definition_integerAssocEnd_DB == nil {
-				continue
+		// commit pointer value a_datatypes.DATATYPE_DEFINITION_INTEGER translates to updating the a_datatypes.DATATYPE_DEFINITION_INTEGERID
+		a_datatypesDB.DATATYPE_DEFINITION_INTEGERID.Valid = true // allow for a 0 value (nil association)
+		if a_datatypes.DATATYPE_DEFINITION_INTEGER != nil {
+			if DATATYPE_DEFINITION_INTEGERId, ok := backRepo.BackRepoDATATYPE_DEFINITION_INTEGER.Map_DATATYPE_DEFINITION_INTEGERPtr_DATATYPE_DEFINITION_INTEGERDBID[a_datatypes.DATATYPE_DEFINITION_INTEGER]; ok {
+				a_datatypesDB.DATATYPE_DEFINITION_INTEGERID.Int64 = int64(DATATYPE_DEFINITION_INTEGERId)
+				a_datatypesDB.DATATYPE_DEFINITION_INTEGERID.Valid = true
 			}
-			
-			a_datatypesDB.A_DATATYPESPointersEncoding.DATATYPE_DEFINITION_INTEGER =
-				append(a_datatypesDB.A_DATATYPESPointersEncoding.DATATYPE_DEFINITION_INTEGER, int(datatype_definition_integerAssocEnd_DB.ID))
+		} else {
+			a_datatypesDB.DATATYPE_DEFINITION_INTEGERID.Int64 = 0
+			a_datatypesDB.DATATYPE_DEFINITION_INTEGERID.Valid = true
 		}
 
-		// 1. reset
-		a_datatypesDB.A_DATATYPESPointersEncoding.DATATYPE_DEFINITION_REAL = make([]int, 0)
-		// 2. encode
-		for _, datatype_definition_realAssocEnd := range a_datatypes.DATATYPE_DEFINITION_REAL {
-			datatype_definition_realAssocEnd_DB :=
-				backRepo.BackRepoDATATYPE_DEFINITION_REAL.GetDATATYPE_DEFINITION_REALDBFromDATATYPE_DEFINITION_REALPtr(datatype_definition_realAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the datatype_definition_realAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if datatype_definition_realAssocEnd_DB == nil {
-				continue
+		// commit pointer value a_datatypes.DATATYPE_DEFINITION_REAL translates to updating the a_datatypes.DATATYPE_DEFINITION_REALID
+		a_datatypesDB.DATATYPE_DEFINITION_REALID.Valid = true // allow for a 0 value (nil association)
+		if a_datatypes.DATATYPE_DEFINITION_REAL != nil {
+			if DATATYPE_DEFINITION_REALId, ok := backRepo.BackRepoDATATYPE_DEFINITION_REAL.Map_DATATYPE_DEFINITION_REALPtr_DATATYPE_DEFINITION_REALDBID[a_datatypes.DATATYPE_DEFINITION_REAL]; ok {
+				a_datatypesDB.DATATYPE_DEFINITION_REALID.Int64 = int64(DATATYPE_DEFINITION_REALId)
+				a_datatypesDB.DATATYPE_DEFINITION_REALID.Valid = true
 			}
-			
-			a_datatypesDB.A_DATATYPESPointersEncoding.DATATYPE_DEFINITION_REAL =
-				append(a_datatypesDB.A_DATATYPESPointersEncoding.DATATYPE_DEFINITION_REAL, int(datatype_definition_realAssocEnd_DB.ID))
+		} else {
+			a_datatypesDB.DATATYPE_DEFINITION_REALID.Int64 = 0
+			a_datatypesDB.DATATYPE_DEFINITION_REALID.Valid = true
 		}
 
-		// 1. reset
-		a_datatypesDB.A_DATATYPESPointersEncoding.DATATYPE_DEFINITION_STRING = make([]int, 0)
-		// 2. encode
-		for _, datatype_definition_stringAssocEnd := range a_datatypes.DATATYPE_DEFINITION_STRING {
-			datatype_definition_stringAssocEnd_DB :=
-				backRepo.BackRepoDATATYPE_DEFINITION_STRING.GetDATATYPE_DEFINITION_STRINGDBFromDATATYPE_DEFINITION_STRINGPtr(datatype_definition_stringAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the datatype_definition_stringAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if datatype_definition_stringAssocEnd_DB == nil {
-				continue
+		// commit pointer value a_datatypes.DATATYPE_DEFINITION_STRING translates to updating the a_datatypes.DATATYPE_DEFINITION_STRINGID
+		a_datatypesDB.DATATYPE_DEFINITION_STRINGID.Valid = true // allow for a 0 value (nil association)
+		if a_datatypes.DATATYPE_DEFINITION_STRING != nil {
+			if DATATYPE_DEFINITION_STRINGId, ok := backRepo.BackRepoDATATYPE_DEFINITION_STRING.Map_DATATYPE_DEFINITION_STRINGPtr_DATATYPE_DEFINITION_STRINGDBID[a_datatypes.DATATYPE_DEFINITION_STRING]; ok {
+				a_datatypesDB.DATATYPE_DEFINITION_STRINGID.Int64 = int64(DATATYPE_DEFINITION_STRINGId)
+				a_datatypesDB.DATATYPE_DEFINITION_STRINGID.Valid = true
 			}
-			
-			a_datatypesDB.A_DATATYPESPointersEncoding.DATATYPE_DEFINITION_STRING =
-				append(a_datatypesDB.A_DATATYPESPointersEncoding.DATATYPE_DEFINITION_STRING, int(datatype_definition_stringAssocEnd_DB.ID))
+		} else {
+			a_datatypesDB.DATATYPE_DEFINITION_STRINGID.Int64 = 0
+			a_datatypesDB.DATATYPE_DEFINITION_STRINGID.Valid = true
 		}
 
-		// 1. reset
-		a_datatypesDB.A_DATATYPESPointersEncoding.DATATYPE_DEFINITION_XHTML = make([]int, 0)
-		// 2. encode
-		for _, datatype_definition_xhtmlAssocEnd := range a_datatypes.DATATYPE_DEFINITION_XHTML {
-			datatype_definition_xhtmlAssocEnd_DB :=
-				backRepo.BackRepoDATATYPE_DEFINITION_XHTML.GetDATATYPE_DEFINITION_XHTMLDBFromDATATYPE_DEFINITION_XHTMLPtr(datatype_definition_xhtmlAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the datatype_definition_xhtmlAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if datatype_definition_xhtmlAssocEnd_DB == nil {
-				continue
+		// commit pointer value a_datatypes.DATATYPE_DEFINITION_XHTML translates to updating the a_datatypes.DATATYPE_DEFINITION_XHTMLID
+		a_datatypesDB.DATATYPE_DEFINITION_XHTMLID.Valid = true // allow for a 0 value (nil association)
+		if a_datatypes.DATATYPE_DEFINITION_XHTML != nil {
+			if DATATYPE_DEFINITION_XHTMLId, ok := backRepo.BackRepoDATATYPE_DEFINITION_XHTML.Map_DATATYPE_DEFINITION_XHTMLPtr_DATATYPE_DEFINITION_XHTMLDBID[a_datatypes.DATATYPE_DEFINITION_XHTML]; ok {
+				a_datatypesDB.DATATYPE_DEFINITION_XHTMLID.Int64 = int64(DATATYPE_DEFINITION_XHTMLId)
+				a_datatypesDB.DATATYPE_DEFINITION_XHTMLID.Valid = true
 			}
-			
-			a_datatypesDB.A_DATATYPESPointersEncoding.DATATYPE_DEFINITION_XHTML =
-				append(a_datatypesDB.A_DATATYPESPointersEncoding.DATATYPE_DEFINITION_XHTML, int(datatype_definition_xhtmlAssocEnd_DB.ID))
+		} else {
+			a_datatypesDB.DATATYPE_DEFINITION_XHTMLID.Int64 = 0
+			a_datatypesDB.DATATYPE_DEFINITION_XHTMLID.Valid = true
 		}
 
 		query := backRepoA_DATATYPES.db.Save(&a_datatypesDB)
@@ -471,69 +436,41 @@ func (backRepoA_DATATYPES *BackRepoA_DATATYPESStruct) CheckoutPhaseTwoInstance(b
 func (a_datatypesDB *A_DATATYPESDB) DecodePointers(backRepo *BackRepoStruct, a_datatypes *models.A_DATATYPES) {
 
 	// insertion point for checkout of pointer encoding
-	// This loop redeem a_datatypes.DATATYPE_DEFINITION_BOOLEAN in the stage from the encode in the back repo
-	// It parses all DATATYPE_DEFINITION_BOOLEANDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	a_datatypes.DATATYPE_DEFINITION_BOOLEAN = a_datatypes.DATATYPE_DEFINITION_BOOLEAN[:0]
-	for _, _DATATYPE_DEFINITION_BOOLEANid := range a_datatypesDB.A_DATATYPESPointersEncoding.DATATYPE_DEFINITION_BOOLEAN {
-		a_datatypes.DATATYPE_DEFINITION_BOOLEAN = append(a_datatypes.DATATYPE_DEFINITION_BOOLEAN, backRepo.BackRepoDATATYPE_DEFINITION_BOOLEAN.Map_DATATYPE_DEFINITION_BOOLEANDBID_DATATYPE_DEFINITION_BOOLEANPtr[uint(_DATATYPE_DEFINITION_BOOLEANid)])
+	// DATATYPE_DEFINITION_BOOLEAN field
+	a_datatypes.DATATYPE_DEFINITION_BOOLEAN = nil
+	if a_datatypesDB.DATATYPE_DEFINITION_BOOLEANID.Int64 != 0 {
+		a_datatypes.DATATYPE_DEFINITION_BOOLEAN = backRepo.BackRepoDATATYPE_DEFINITION_BOOLEAN.Map_DATATYPE_DEFINITION_BOOLEANDBID_DATATYPE_DEFINITION_BOOLEANPtr[uint(a_datatypesDB.DATATYPE_DEFINITION_BOOLEANID.Int64)]
 	}
-
-	// This loop redeem a_datatypes.DATATYPE_DEFINITION_DATE in the stage from the encode in the back repo
-	// It parses all DATATYPE_DEFINITION_DATEDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	a_datatypes.DATATYPE_DEFINITION_DATE = a_datatypes.DATATYPE_DEFINITION_DATE[:0]
-	for _, _DATATYPE_DEFINITION_DATEid := range a_datatypesDB.A_DATATYPESPointersEncoding.DATATYPE_DEFINITION_DATE {
-		a_datatypes.DATATYPE_DEFINITION_DATE = append(a_datatypes.DATATYPE_DEFINITION_DATE, backRepo.BackRepoDATATYPE_DEFINITION_DATE.Map_DATATYPE_DEFINITION_DATEDBID_DATATYPE_DEFINITION_DATEPtr[uint(_DATATYPE_DEFINITION_DATEid)])
+	// DATATYPE_DEFINITION_DATE field
+	a_datatypes.DATATYPE_DEFINITION_DATE = nil
+	if a_datatypesDB.DATATYPE_DEFINITION_DATEID.Int64 != 0 {
+		a_datatypes.DATATYPE_DEFINITION_DATE = backRepo.BackRepoDATATYPE_DEFINITION_DATE.Map_DATATYPE_DEFINITION_DATEDBID_DATATYPE_DEFINITION_DATEPtr[uint(a_datatypesDB.DATATYPE_DEFINITION_DATEID.Int64)]
 	}
-
-	// This loop redeem a_datatypes.DATATYPE_DEFINITION_ENUMERATION in the stage from the encode in the back repo
-	// It parses all DATATYPE_DEFINITION_ENUMERATIONDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	a_datatypes.DATATYPE_DEFINITION_ENUMERATION = a_datatypes.DATATYPE_DEFINITION_ENUMERATION[:0]
-	for _, _DATATYPE_DEFINITION_ENUMERATIONid := range a_datatypesDB.A_DATATYPESPointersEncoding.DATATYPE_DEFINITION_ENUMERATION {
-		a_datatypes.DATATYPE_DEFINITION_ENUMERATION = append(a_datatypes.DATATYPE_DEFINITION_ENUMERATION, backRepo.BackRepoDATATYPE_DEFINITION_ENUMERATION.Map_DATATYPE_DEFINITION_ENUMERATIONDBID_DATATYPE_DEFINITION_ENUMERATIONPtr[uint(_DATATYPE_DEFINITION_ENUMERATIONid)])
+	// DATATYPE_DEFINITION_ENUMERATION field
+	a_datatypes.DATATYPE_DEFINITION_ENUMERATION = nil
+	if a_datatypesDB.DATATYPE_DEFINITION_ENUMERATIONID.Int64 != 0 {
+		a_datatypes.DATATYPE_DEFINITION_ENUMERATION = backRepo.BackRepoDATATYPE_DEFINITION_ENUMERATION.Map_DATATYPE_DEFINITION_ENUMERATIONDBID_DATATYPE_DEFINITION_ENUMERATIONPtr[uint(a_datatypesDB.DATATYPE_DEFINITION_ENUMERATIONID.Int64)]
 	}
-
-	// This loop redeem a_datatypes.DATATYPE_DEFINITION_INTEGER in the stage from the encode in the back repo
-	// It parses all DATATYPE_DEFINITION_INTEGERDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	a_datatypes.DATATYPE_DEFINITION_INTEGER = a_datatypes.DATATYPE_DEFINITION_INTEGER[:0]
-	for _, _DATATYPE_DEFINITION_INTEGERid := range a_datatypesDB.A_DATATYPESPointersEncoding.DATATYPE_DEFINITION_INTEGER {
-		a_datatypes.DATATYPE_DEFINITION_INTEGER = append(a_datatypes.DATATYPE_DEFINITION_INTEGER, backRepo.BackRepoDATATYPE_DEFINITION_INTEGER.Map_DATATYPE_DEFINITION_INTEGERDBID_DATATYPE_DEFINITION_INTEGERPtr[uint(_DATATYPE_DEFINITION_INTEGERid)])
+	// DATATYPE_DEFINITION_INTEGER field
+	a_datatypes.DATATYPE_DEFINITION_INTEGER = nil
+	if a_datatypesDB.DATATYPE_DEFINITION_INTEGERID.Int64 != 0 {
+		a_datatypes.DATATYPE_DEFINITION_INTEGER = backRepo.BackRepoDATATYPE_DEFINITION_INTEGER.Map_DATATYPE_DEFINITION_INTEGERDBID_DATATYPE_DEFINITION_INTEGERPtr[uint(a_datatypesDB.DATATYPE_DEFINITION_INTEGERID.Int64)]
 	}
-
-	// This loop redeem a_datatypes.DATATYPE_DEFINITION_REAL in the stage from the encode in the back repo
-	// It parses all DATATYPE_DEFINITION_REALDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	a_datatypes.DATATYPE_DEFINITION_REAL = a_datatypes.DATATYPE_DEFINITION_REAL[:0]
-	for _, _DATATYPE_DEFINITION_REALid := range a_datatypesDB.A_DATATYPESPointersEncoding.DATATYPE_DEFINITION_REAL {
-		a_datatypes.DATATYPE_DEFINITION_REAL = append(a_datatypes.DATATYPE_DEFINITION_REAL, backRepo.BackRepoDATATYPE_DEFINITION_REAL.Map_DATATYPE_DEFINITION_REALDBID_DATATYPE_DEFINITION_REALPtr[uint(_DATATYPE_DEFINITION_REALid)])
+	// DATATYPE_DEFINITION_REAL field
+	a_datatypes.DATATYPE_DEFINITION_REAL = nil
+	if a_datatypesDB.DATATYPE_DEFINITION_REALID.Int64 != 0 {
+		a_datatypes.DATATYPE_DEFINITION_REAL = backRepo.BackRepoDATATYPE_DEFINITION_REAL.Map_DATATYPE_DEFINITION_REALDBID_DATATYPE_DEFINITION_REALPtr[uint(a_datatypesDB.DATATYPE_DEFINITION_REALID.Int64)]
 	}
-
-	// This loop redeem a_datatypes.DATATYPE_DEFINITION_STRING in the stage from the encode in the back repo
-	// It parses all DATATYPE_DEFINITION_STRINGDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	a_datatypes.DATATYPE_DEFINITION_STRING = a_datatypes.DATATYPE_DEFINITION_STRING[:0]
-	for _, _DATATYPE_DEFINITION_STRINGid := range a_datatypesDB.A_DATATYPESPointersEncoding.DATATYPE_DEFINITION_STRING {
-		a_datatypes.DATATYPE_DEFINITION_STRING = append(a_datatypes.DATATYPE_DEFINITION_STRING, backRepo.BackRepoDATATYPE_DEFINITION_STRING.Map_DATATYPE_DEFINITION_STRINGDBID_DATATYPE_DEFINITION_STRINGPtr[uint(_DATATYPE_DEFINITION_STRINGid)])
+	// DATATYPE_DEFINITION_STRING field
+	a_datatypes.DATATYPE_DEFINITION_STRING = nil
+	if a_datatypesDB.DATATYPE_DEFINITION_STRINGID.Int64 != 0 {
+		a_datatypes.DATATYPE_DEFINITION_STRING = backRepo.BackRepoDATATYPE_DEFINITION_STRING.Map_DATATYPE_DEFINITION_STRINGDBID_DATATYPE_DEFINITION_STRINGPtr[uint(a_datatypesDB.DATATYPE_DEFINITION_STRINGID.Int64)]
 	}
-
-	// This loop redeem a_datatypes.DATATYPE_DEFINITION_XHTML in the stage from the encode in the back repo
-	// It parses all DATATYPE_DEFINITION_XHTMLDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	a_datatypes.DATATYPE_DEFINITION_XHTML = a_datatypes.DATATYPE_DEFINITION_XHTML[:0]
-	for _, _DATATYPE_DEFINITION_XHTMLid := range a_datatypesDB.A_DATATYPESPointersEncoding.DATATYPE_DEFINITION_XHTML {
-		a_datatypes.DATATYPE_DEFINITION_XHTML = append(a_datatypes.DATATYPE_DEFINITION_XHTML, backRepo.BackRepoDATATYPE_DEFINITION_XHTML.Map_DATATYPE_DEFINITION_XHTMLDBID_DATATYPE_DEFINITION_XHTMLPtr[uint(_DATATYPE_DEFINITION_XHTMLid)])
+	// DATATYPE_DEFINITION_XHTML field
+	a_datatypes.DATATYPE_DEFINITION_XHTML = nil
+	if a_datatypesDB.DATATYPE_DEFINITION_XHTMLID.Int64 != 0 {
+		a_datatypes.DATATYPE_DEFINITION_XHTML = backRepo.BackRepoDATATYPE_DEFINITION_XHTML.Map_DATATYPE_DEFINITION_XHTMLDBID_DATATYPE_DEFINITION_XHTMLPtr[uint(a_datatypesDB.DATATYPE_DEFINITION_XHTMLID.Int64)]
 	}
-
 	return
 }
 
@@ -762,6 +699,48 @@ func (backRepoA_DATATYPES *BackRepoA_DATATYPESStruct) RestorePhaseTwo() {
 		_ = a_datatypesDB
 
 		// insertion point for reindexing pointers encoding
+		// reindexing DATATYPE_DEFINITION_BOOLEAN field
+		if a_datatypesDB.DATATYPE_DEFINITION_BOOLEANID.Int64 != 0 {
+			a_datatypesDB.DATATYPE_DEFINITION_BOOLEANID.Int64 = int64(BackRepoDATATYPE_DEFINITION_BOOLEANid_atBckpTime_newID[uint(a_datatypesDB.DATATYPE_DEFINITION_BOOLEANID.Int64)])
+			a_datatypesDB.DATATYPE_DEFINITION_BOOLEANID.Valid = true
+		}
+
+		// reindexing DATATYPE_DEFINITION_DATE field
+		if a_datatypesDB.DATATYPE_DEFINITION_DATEID.Int64 != 0 {
+			a_datatypesDB.DATATYPE_DEFINITION_DATEID.Int64 = int64(BackRepoDATATYPE_DEFINITION_DATEid_atBckpTime_newID[uint(a_datatypesDB.DATATYPE_DEFINITION_DATEID.Int64)])
+			a_datatypesDB.DATATYPE_DEFINITION_DATEID.Valid = true
+		}
+
+		// reindexing DATATYPE_DEFINITION_ENUMERATION field
+		if a_datatypesDB.DATATYPE_DEFINITION_ENUMERATIONID.Int64 != 0 {
+			a_datatypesDB.DATATYPE_DEFINITION_ENUMERATIONID.Int64 = int64(BackRepoDATATYPE_DEFINITION_ENUMERATIONid_atBckpTime_newID[uint(a_datatypesDB.DATATYPE_DEFINITION_ENUMERATIONID.Int64)])
+			a_datatypesDB.DATATYPE_DEFINITION_ENUMERATIONID.Valid = true
+		}
+
+		// reindexing DATATYPE_DEFINITION_INTEGER field
+		if a_datatypesDB.DATATYPE_DEFINITION_INTEGERID.Int64 != 0 {
+			a_datatypesDB.DATATYPE_DEFINITION_INTEGERID.Int64 = int64(BackRepoDATATYPE_DEFINITION_INTEGERid_atBckpTime_newID[uint(a_datatypesDB.DATATYPE_DEFINITION_INTEGERID.Int64)])
+			a_datatypesDB.DATATYPE_DEFINITION_INTEGERID.Valid = true
+		}
+
+		// reindexing DATATYPE_DEFINITION_REAL field
+		if a_datatypesDB.DATATYPE_DEFINITION_REALID.Int64 != 0 {
+			a_datatypesDB.DATATYPE_DEFINITION_REALID.Int64 = int64(BackRepoDATATYPE_DEFINITION_REALid_atBckpTime_newID[uint(a_datatypesDB.DATATYPE_DEFINITION_REALID.Int64)])
+			a_datatypesDB.DATATYPE_DEFINITION_REALID.Valid = true
+		}
+
+		// reindexing DATATYPE_DEFINITION_STRING field
+		if a_datatypesDB.DATATYPE_DEFINITION_STRINGID.Int64 != 0 {
+			a_datatypesDB.DATATYPE_DEFINITION_STRINGID.Int64 = int64(BackRepoDATATYPE_DEFINITION_STRINGid_atBckpTime_newID[uint(a_datatypesDB.DATATYPE_DEFINITION_STRINGID.Int64)])
+			a_datatypesDB.DATATYPE_DEFINITION_STRINGID.Valid = true
+		}
+
+		// reindexing DATATYPE_DEFINITION_XHTML field
+		if a_datatypesDB.DATATYPE_DEFINITION_XHTMLID.Int64 != 0 {
+			a_datatypesDB.DATATYPE_DEFINITION_XHTMLID.Int64 = int64(BackRepoDATATYPE_DEFINITION_XHTMLid_atBckpTime_newID[uint(a_datatypesDB.DATATYPE_DEFINITION_XHTMLID.Int64)])
+			a_datatypesDB.DATATYPE_DEFINITION_XHTMLID.Valid = true
+		}
+
 		// update databse with new index encoding
 		query := backRepoA_DATATYPES.db.Model(a_datatypesDB).Updates(*a_datatypesDB)
 		if query.Error != nil {

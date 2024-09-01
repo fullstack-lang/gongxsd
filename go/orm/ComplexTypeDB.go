@@ -126,6 +126,12 @@ type ComplexTypeDB struct {
 	// Declation for basic field complextypeDB.Depth
 	Depth_Data sql.NullInt64
 
+	// Declation for basic field complextypeDB.MinOccurs
+	MinOccurs_Data sql.NullString
+
+	// Declation for basic field complextypeDB.MaxOccurs
+	MaxOccurs_Data sql.NullString
+
 	// Declation for basic field complextypeDB.IsDuplicatedInXSD
 	// provide the sql storage for the boolan
 	IsDuplicatedInXSD_Data sql.NullBool
@@ -168,7 +174,11 @@ type ComplexTypeWOP struct {
 
 	Depth int `xlsx:"8"`
 
-	IsDuplicatedInXSD bool `xlsx:"9"`
+	MinOccurs string `xlsx:"9"`
+
+	MaxOccurs string `xlsx:"10"`
+
+	IsDuplicatedInXSD bool `xlsx:"11"`
 	// insertion for WOP pointer fields
 }
 
@@ -183,6 +193,8 @@ var ComplexType_Fields = []string{
 	"OuterElementName",
 	"Order",
 	"Depth",
+	"MinOccurs",
+	"MaxOccurs",
 	"IsDuplicatedInXSD",
 }
 
@@ -748,6 +760,12 @@ func (complextypeDB *ComplexTypeDB) CopyBasicFieldsFromComplexType(complextype *
 	complextypeDB.Depth_Data.Int64 = int64(complextype.Depth)
 	complextypeDB.Depth_Data.Valid = true
 
+	complextypeDB.MinOccurs_Data.String = complextype.MinOccurs
+	complextypeDB.MinOccurs_Data.Valid = true
+
+	complextypeDB.MaxOccurs_Data.String = complextype.MaxOccurs
+	complextypeDB.MaxOccurs_Data.Valid = true
+
 	complextypeDB.IsDuplicatedInXSD_Data.Bool = complextype.IsDuplicatedInXSD
 	complextypeDB.IsDuplicatedInXSD_Data.Valid = true
 }
@@ -779,6 +797,12 @@ func (complextypeDB *ComplexTypeDB) CopyBasicFieldsFromComplexType_WOP(complexty
 
 	complextypeDB.Depth_Data.Int64 = int64(complextype.Depth)
 	complextypeDB.Depth_Data.Valid = true
+
+	complextypeDB.MinOccurs_Data.String = complextype.MinOccurs
+	complextypeDB.MinOccurs_Data.Valid = true
+
+	complextypeDB.MaxOccurs_Data.String = complextype.MaxOccurs
+	complextypeDB.MaxOccurs_Data.Valid = true
 
 	complextypeDB.IsDuplicatedInXSD_Data.Bool = complextype.IsDuplicatedInXSD
 	complextypeDB.IsDuplicatedInXSD_Data.Valid = true
@@ -812,6 +836,12 @@ func (complextypeDB *ComplexTypeDB) CopyBasicFieldsFromComplexTypeWOP(complextyp
 	complextypeDB.Depth_Data.Int64 = int64(complextype.Depth)
 	complextypeDB.Depth_Data.Valid = true
 
+	complextypeDB.MinOccurs_Data.String = complextype.MinOccurs
+	complextypeDB.MinOccurs_Data.Valid = true
+
+	complextypeDB.MaxOccurs_Data.String = complextype.MaxOccurs
+	complextypeDB.MaxOccurs_Data.Valid = true
+
 	complextypeDB.IsDuplicatedInXSD_Data.Bool = complextype.IsDuplicatedInXSD
 	complextypeDB.IsDuplicatedInXSD_Data.Valid = true
 }
@@ -827,6 +857,8 @@ func (complextypeDB *ComplexTypeDB) CopyBasicFieldsToComplexType(complextype *mo
 	complextype.OuterElementName = complextypeDB.OuterElementName_Data.String
 	complextype.Order = int(complextypeDB.Order_Data.Int64)
 	complextype.Depth = int(complextypeDB.Depth_Data.Int64)
+	complextype.MinOccurs = complextypeDB.MinOccurs_Data.String
+	complextype.MaxOccurs = complextypeDB.MaxOccurs_Data.String
 	complextype.IsDuplicatedInXSD = complextypeDB.IsDuplicatedInXSD_Data.Bool
 }
 
@@ -841,6 +873,8 @@ func (complextypeDB *ComplexTypeDB) CopyBasicFieldsToComplexType_WOP(complextype
 	complextype.OuterElementName = complextypeDB.OuterElementName_Data.String
 	complextype.Order = int(complextypeDB.Order_Data.Int64)
 	complextype.Depth = int(complextypeDB.Depth_Data.Int64)
+	complextype.MinOccurs = complextypeDB.MinOccurs_Data.String
+	complextype.MaxOccurs = complextypeDB.MaxOccurs_Data.String
 	complextype.IsDuplicatedInXSD = complextypeDB.IsDuplicatedInXSD_Data.Bool
 }
 
@@ -856,6 +890,8 @@ func (complextypeDB *ComplexTypeDB) CopyBasicFieldsToComplexTypeWOP(complextype 
 	complextype.OuterElementName = complextypeDB.OuterElementName_Data.String
 	complextype.Order = int(complextypeDB.Order_Data.Int64)
 	complextype.Depth = int(complextypeDB.Depth_Data.Int64)
+	complextype.MinOccurs = complextypeDB.MinOccurs_Data.String
+	complextype.MaxOccurs = complextypeDB.MaxOccurs_Data.String
 	complextype.IsDuplicatedInXSD = complextypeDB.IsDuplicatedInXSD_Data.Bool
 }
 

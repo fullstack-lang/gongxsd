@@ -47,8 +47,9 @@ type A_TOOL_EXTENSIONSAPI struct {
 type A_TOOL_EXTENSIONSPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
 
-	// field REQ_IF_TOOL_EXTENSION is a slice of pointers to another Struct (optional or 0..1)
-	REQ_IF_TOOL_EXTENSION IntSlice `gorm:"type:TEXT"`
+	// field REQ_IF_TOOL_EXTENSION is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	REQ_IF_TOOL_EXTENSIONID sql.NullInt64
 }
 
 // A_TOOL_EXTENSIONSDB describes a a_tool_extensions in the database
@@ -214,22 +215,16 @@ func (backRepoA_TOOL_EXTENSIONS *BackRepoA_TOOL_EXTENSIONSStruct) CommitPhaseTwo
 		a_tool_extensionsDB.CopyBasicFieldsFromA_TOOL_EXTENSIONS(a_tool_extensions)
 
 		// insertion point for translating pointers encodings into actual pointers
-		// 1. reset
-		a_tool_extensionsDB.A_TOOL_EXTENSIONSPointersEncoding.REQ_IF_TOOL_EXTENSION = make([]int, 0)
-		// 2. encode
-		for _, req_if_tool_extensionAssocEnd := range a_tool_extensions.REQ_IF_TOOL_EXTENSION {
-			req_if_tool_extensionAssocEnd_DB :=
-				backRepo.BackRepoREQ_IF_TOOL_EXTENSION.GetREQ_IF_TOOL_EXTENSIONDBFromREQ_IF_TOOL_EXTENSIONPtr(req_if_tool_extensionAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the req_if_tool_extensionAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if req_if_tool_extensionAssocEnd_DB == nil {
-				continue
+		// commit pointer value a_tool_extensions.REQ_IF_TOOL_EXTENSION translates to updating the a_tool_extensions.REQ_IF_TOOL_EXTENSIONID
+		a_tool_extensionsDB.REQ_IF_TOOL_EXTENSIONID.Valid = true // allow for a 0 value (nil association)
+		if a_tool_extensions.REQ_IF_TOOL_EXTENSION != nil {
+			if REQ_IF_TOOL_EXTENSIONId, ok := backRepo.BackRepoREQ_IF_TOOL_EXTENSION.Map_REQ_IF_TOOL_EXTENSIONPtr_REQ_IF_TOOL_EXTENSIONDBID[a_tool_extensions.REQ_IF_TOOL_EXTENSION]; ok {
+				a_tool_extensionsDB.REQ_IF_TOOL_EXTENSIONID.Int64 = int64(REQ_IF_TOOL_EXTENSIONId)
+				a_tool_extensionsDB.REQ_IF_TOOL_EXTENSIONID.Valid = true
 			}
-			
-			a_tool_extensionsDB.A_TOOL_EXTENSIONSPointersEncoding.REQ_IF_TOOL_EXTENSION =
-				append(a_tool_extensionsDB.A_TOOL_EXTENSIONSPointersEncoding.REQ_IF_TOOL_EXTENSION, int(req_if_tool_extensionAssocEnd_DB.ID))
+		} else {
+			a_tool_extensionsDB.REQ_IF_TOOL_EXTENSIONID.Int64 = 0
+			a_tool_extensionsDB.REQ_IF_TOOL_EXTENSIONID.Valid = true
 		}
 
 		query := backRepoA_TOOL_EXTENSIONS.db.Save(&a_tool_extensionsDB)
@@ -345,15 +340,11 @@ func (backRepoA_TOOL_EXTENSIONS *BackRepoA_TOOL_EXTENSIONSStruct) CheckoutPhaseT
 func (a_tool_extensionsDB *A_TOOL_EXTENSIONSDB) DecodePointers(backRepo *BackRepoStruct, a_tool_extensions *models.A_TOOL_EXTENSIONS) {
 
 	// insertion point for checkout of pointer encoding
-	// This loop redeem a_tool_extensions.REQ_IF_TOOL_EXTENSION in the stage from the encode in the back repo
-	// It parses all REQ_IF_TOOL_EXTENSIONDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	a_tool_extensions.REQ_IF_TOOL_EXTENSION = a_tool_extensions.REQ_IF_TOOL_EXTENSION[:0]
-	for _, _REQ_IF_TOOL_EXTENSIONid := range a_tool_extensionsDB.A_TOOL_EXTENSIONSPointersEncoding.REQ_IF_TOOL_EXTENSION {
-		a_tool_extensions.REQ_IF_TOOL_EXTENSION = append(a_tool_extensions.REQ_IF_TOOL_EXTENSION, backRepo.BackRepoREQ_IF_TOOL_EXTENSION.Map_REQ_IF_TOOL_EXTENSIONDBID_REQ_IF_TOOL_EXTENSIONPtr[uint(_REQ_IF_TOOL_EXTENSIONid)])
+	// REQ_IF_TOOL_EXTENSION field
+	a_tool_extensions.REQ_IF_TOOL_EXTENSION = nil
+	if a_tool_extensionsDB.REQ_IF_TOOL_EXTENSIONID.Int64 != 0 {
+		a_tool_extensions.REQ_IF_TOOL_EXTENSION = backRepo.BackRepoREQ_IF_TOOL_EXTENSION.Map_REQ_IF_TOOL_EXTENSIONDBID_REQ_IF_TOOL_EXTENSIONPtr[uint(a_tool_extensionsDB.REQ_IF_TOOL_EXTENSIONID.Int64)]
 	}
-
 	return
 }
 
@@ -582,6 +573,12 @@ func (backRepoA_TOOL_EXTENSIONS *BackRepoA_TOOL_EXTENSIONSStruct) RestorePhaseTw
 		_ = a_tool_extensionsDB
 
 		// insertion point for reindexing pointers encoding
+		// reindexing REQ_IF_TOOL_EXTENSION field
+		if a_tool_extensionsDB.REQ_IF_TOOL_EXTENSIONID.Int64 != 0 {
+			a_tool_extensionsDB.REQ_IF_TOOL_EXTENSIONID.Int64 = int64(BackRepoREQ_IF_TOOL_EXTENSIONid_atBckpTime_newID[uint(a_tool_extensionsDB.REQ_IF_TOOL_EXTENSIONID.Int64)])
+			a_tool_extensionsDB.REQ_IF_TOOL_EXTENSIONID.Valid = true
+		}
+
 		// update databse with new index encoding
 		query := backRepoA_TOOL_EXTENSIONS.db.Model(a_tool_extensionsDB).Updates(*a_tool_extensionsDB)
 		if query.Error != nil {

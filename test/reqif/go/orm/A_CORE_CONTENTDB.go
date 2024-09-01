@@ -47,8 +47,9 @@ type A_CORE_CONTENTAPI struct {
 type A_CORE_CONTENTPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
 
-	// field REQ_IF_CONTENT is a slice of pointers to another Struct (optional or 0..1)
-	REQ_IF_CONTENT IntSlice `gorm:"type:TEXT"`
+	// field REQ_IF_CONTENT is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	REQ_IF_CONTENTID sql.NullInt64
 }
 
 // A_CORE_CONTENTDB describes a a_core_content in the database
@@ -214,22 +215,16 @@ func (backRepoA_CORE_CONTENT *BackRepoA_CORE_CONTENTStruct) CommitPhaseTwoInstan
 		a_core_contentDB.CopyBasicFieldsFromA_CORE_CONTENT(a_core_content)
 
 		// insertion point for translating pointers encodings into actual pointers
-		// 1. reset
-		a_core_contentDB.A_CORE_CONTENTPointersEncoding.REQ_IF_CONTENT = make([]int, 0)
-		// 2. encode
-		for _, req_if_contentAssocEnd := range a_core_content.REQ_IF_CONTENT {
-			req_if_contentAssocEnd_DB :=
-				backRepo.BackRepoREQ_IF_CONTENT.GetREQ_IF_CONTENTDBFromREQ_IF_CONTENTPtr(req_if_contentAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the req_if_contentAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if req_if_contentAssocEnd_DB == nil {
-				continue
+		// commit pointer value a_core_content.REQ_IF_CONTENT translates to updating the a_core_content.REQ_IF_CONTENTID
+		a_core_contentDB.REQ_IF_CONTENTID.Valid = true // allow for a 0 value (nil association)
+		if a_core_content.REQ_IF_CONTENT != nil {
+			if REQ_IF_CONTENTId, ok := backRepo.BackRepoREQ_IF_CONTENT.Map_REQ_IF_CONTENTPtr_REQ_IF_CONTENTDBID[a_core_content.REQ_IF_CONTENT]; ok {
+				a_core_contentDB.REQ_IF_CONTENTID.Int64 = int64(REQ_IF_CONTENTId)
+				a_core_contentDB.REQ_IF_CONTENTID.Valid = true
 			}
-			
-			a_core_contentDB.A_CORE_CONTENTPointersEncoding.REQ_IF_CONTENT =
-				append(a_core_contentDB.A_CORE_CONTENTPointersEncoding.REQ_IF_CONTENT, int(req_if_contentAssocEnd_DB.ID))
+		} else {
+			a_core_contentDB.REQ_IF_CONTENTID.Int64 = 0
+			a_core_contentDB.REQ_IF_CONTENTID.Valid = true
 		}
 
 		query := backRepoA_CORE_CONTENT.db.Save(&a_core_contentDB)
@@ -345,15 +340,11 @@ func (backRepoA_CORE_CONTENT *BackRepoA_CORE_CONTENTStruct) CheckoutPhaseTwoInst
 func (a_core_contentDB *A_CORE_CONTENTDB) DecodePointers(backRepo *BackRepoStruct, a_core_content *models.A_CORE_CONTENT) {
 
 	// insertion point for checkout of pointer encoding
-	// This loop redeem a_core_content.REQ_IF_CONTENT in the stage from the encode in the back repo
-	// It parses all REQ_IF_CONTENTDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	a_core_content.REQ_IF_CONTENT = a_core_content.REQ_IF_CONTENT[:0]
-	for _, _REQ_IF_CONTENTid := range a_core_contentDB.A_CORE_CONTENTPointersEncoding.REQ_IF_CONTENT {
-		a_core_content.REQ_IF_CONTENT = append(a_core_content.REQ_IF_CONTENT, backRepo.BackRepoREQ_IF_CONTENT.Map_REQ_IF_CONTENTDBID_REQ_IF_CONTENTPtr[uint(_REQ_IF_CONTENTid)])
+	// REQ_IF_CONTENT field
+	a_core_content.REQ_IF_CONTENT = nil
+	if a_core_contentDB.REQ_IF_CONTENTID.Int64 != 0 {
+		a_core_content.REQ_IF_CONTENT = backRepo.BackRepoREQ_IF_CONTENT.Map_REQ_IF_CONTENTDBID_REQ_IF_CONTENTPtr[uint(a_core_contentDB.REQ_IF_CONTENTID.Int64)]
 	}
-
 	return
 }
 
@@ -582,6 +573,12 @@ func (backRepoA_CORE_CONTENT *BackRepoA_CORE_CONTENTStruct) RestorePhaseTwo() {
 		_ = a_core_contentDB
 
 		// insertion point for reindexing pointers encoding
+		// reindexing REQ_IF_CONTENT field
+		if a_core_contentDB.REQ_IF_CONTENTID.Int64 != 0 {
+			a_core_contentDB.REQ_IF_CONTENTID.Int64 = int64(BackRepoREQ_IF_CONTENTid_atBckpTime_newID[uint(a_core_contentDB.REQ_IF_CONTENTID.Int64)])
+			a_core_contentDB.REQ_IF_CONTENTID.Valid = true
+		}
+
 		// update databse with new index encoding
 		query := backRepoA_CORE_CONTENT.db.Model(a_core_contentDB).Updates(*a_core_contentDB)
 		if query.Error != nil {

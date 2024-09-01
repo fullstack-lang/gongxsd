@@ -47,8 +47,9 @@ type A_PROPERTIESAPI struct {
 type A_PROPERTIESPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
 
-	// field EMBEDDED_VALUE is a slice of pointers to another Struct (optional or 0..1)
-	EMBEDDED_VALUE IntSlice `gorm:"type:TEXT"`
+	// field EMBEDDED_VALUE is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	EMBEDDED_VALUEID sql.NullInt64
 }
 
 // A_PROPERTIESDB describes a a_properties in the database
@@ -214,22 +215,16 @@ func (backRepoA_PROPERTIES *BackRepoA_PROPERTIESStruct) CommitPhaseTwoInstance(b
 		a_propertiesDB.CopyBasicFieldsFromA_PROPERTIES(a_properties)
 
 		// insertion point for translating pointers encodings into actual pointers
-		// 1. reset
-		a_propertiesDB.A_PROPERTIESPointersEncoding.EMBEDDED_VALUE = make([]int, 0)
-		// 2. encode
-		for _, embedded_valueAssocEnd := range a_properties.EMBEDDED_VALUE {
-			embedded_valueAssocEnd_DB :=
-				backRepo.BackRepoEMBEDDED_VALUE.GetEMBEDDED_VALUEDBFromEMBEDDED_VALUEPtr(embedded_valueAssocEnd)
-			
-			// the stage might be inconsistant, meaning that the embedded_valueAssocEnd_DB might
-			// be missing from the stage. In this case, the commit operation is robust
-			// An alternative would be to crash here to reveal the missing element.
-			if embedded_valueAssocEnd_DB == nil {
-				continue
+		// commit pointer value a_properties.EMBEDDED_VALUE translates to updating the a_properties.EMBEDDED_VALUEID
+		a_propertiesDB.EMBEDDED_VALUEID.Valid = true // allow for a 0 value (nil association)
+		if a_properties.EMBEDDED_VALUE != nil {
+			if EMBEDDED_VALUEId, ok := backRepo.BackRepoEMBEDDED_VALUE.Map_EMBEDDED_VALUEPtr_EMBEDDED_VALUEDBID[a_properties.EMBEDDED_VALUE]; ok {
+				a_propertiesDB.EMBEDDED_VALUEID.Int64 = int64(EMBEDDED_VALUEId)
+				a_propertiesDB.EMBEDDED_VALUEID.Valid = true
 			}
-			
-			a_propertiesDB.A_PROPERTIESPointersEncoding.EMBEDDED_VALUE =
-				append(a_propertiesDB.A_PROPERTIESPointersEncoding.EMBEDDED_VALUE, int(embedded_valueAssocEnd_DB.ID))
+		} else {
+			a_propertiesDB.EMBEDDED_VALUEID.Int64 = 0
+			a_propertiesDB.EMBEDDED_VALUEID.Valid = true
 		}
 
 		query := backRepoA_PROPERTIES.db.Save(&a_propertiesDB)
@@ -345,15 +340,11 @@ func (backRepoA_PROPERTIES *BackRepoA_PROPERTIESStruct) CheckoutPhaseTwoInstance
 func (a_propertiesDB *A_PROPERTIESDB) DecodePointers(backRepo *BackRepoStruct, a_properties *models.A_PROPERTIES) {
 
 	// insertion point for checkout of pointer encoding
-	// This loop redeem a_properties.EMBEDDED_VALUE in the stage from the encode in the back repo
-	// It parses all EMBEDDED_VALUEDB in the back repo and if the reverse pointer encoding matches the back repo ID
-	// it appends the stage instance
-	// 1. reset the slice
-	a_properties.EMBEDDED_VALUE = a_properties.EMBEDDED_VALUE[:0]
-	for _, _EMBEDDED_VALUEid := range a_propertiesDB.A_PROPERTIESPointersEncoding.EMBEDDED_VALUE {
-		a_properties.EMBEDDED_VALUE = append(a_properties.EMBEDDED_VALUE, backRepo.BackRepoEMBEDDED_VALUE.Map_EMBEDDED_VALUEDBID_EMBEDDED_VALUEPtr[uint(_EMBEDDED_VALUEid)])
+	// EMBEDDED_VALUE field
+	a_properties.EMBEDDED_VALUE = nil
+	if a_propertiesDB.EMBEDDED_VALUEID.Int64 != 0 {
+		a_properties.EMBEDDED_VALUE = backRepo.BackRepoEMBEDDED_VALUE.Map_EMBEDDED_VALUEDBID_EMBEDDED_VALUEPtr[uint(a_propertiesDB.EMBEDDED_VALUEID.Int64)]
 	}
-
 	return
 }
 
@@ -582,6 +573,12 @@ func (backRepoA_PROPERTIES *BackRepoA_PROPERTIESStruct) RestorePhaseTwo() {
 		_ = a_propertiesDB
 
 		// insertion point for reindexing pointers encoding
+		// reindexing EMBEDDED_VALUE field
+		if a_propertiesDB.EMBEDDED_VALUEID.Int64 != 0 {
+			a_propertiesDB.EMBEDDED_VALUEID.Int64 = int64(BackRepoEMBEDDED_VALUEid_atBckpTime_newID[uint(a_propertiesDB.EMBEDDED_VALUEID.Int64)])
+			a_propertiesDB.EMBEDDED_VALUEID.Valid = true
+		}
+
 		// update databse with new index encoding
 		query := backRepoA_PROPERTIES.db.Model(a_propertiesDB).Updates(*a_propertiesDB)
 		if query.Error != nil {

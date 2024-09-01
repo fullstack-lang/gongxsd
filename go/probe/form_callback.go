@@ -65,16 +65,16 @@ func (allFormCallback *AllFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(all_.Name), formDiv)
 		case "Annotation":
 			FormDivSelectFieldToField(&(all_.Annotation), allFormCallback.probe.stageOfInterest, formDiv)
-		case "MinOccurs":
-			FormDivBasicFieldToField(&(all_.MinOccurs), formDiv)
-		case "MaxOccurs":
-			FormDivBasicFieldToField(&(all_.MaxOccurs), formDiv)
 		case "OuterElementName":
 			FormDivBasicFieldToField(&(all_.OuterElementName), formDiv)
 		case "Order":
 			FormDivBasicFieldToField(&(all_.Order), formDiv)
 		case "Depth":
 			FormDivBasicFieldToField(&(all_.Depth), formDiv)
+		case "MinOccurs":
+			FormDivBasicFieldToField(&(all_.MinOccurs), formDiv)
+		case "MaxOccurs":
+			FormDivBasicFieldToField(&(all_.MaxOccurs), formDiv)
 		case "All:Alls":
 			// we need to retrieve the field owner before the change
 			var pastAllOwner *models.All
@@ -925,16 +925,16 @@ func (choiceFormCallback *ChoiceFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(choice_.Name), formDiv)
 		case "Annotation":
 			FormDivSelectFieldToField(&(choice_.Annotation), choiceFormCallback.probe.stageOfInterest, formDiv)
-		case "MinOccurs":
-			FormDivBasicFieldToField(&(choice_.MinOccurs), formDiv)
-		case "MaxOccurs":
-			FormDivBasicFieldToField(&(choice_.MaxOccurs), formDiv)
 		case "OuterElementName":
 			FormDivBasicFieldToField(&(choice_.OuterElementName), formDiv)
 		case "Order":
 			FormDivBasicFieldToField(&(choice_.Order), formDiv)
 		case "Depth":
 			FormDivBasicFieldToField(&(choice_.Depth), formDiv)
+		case "MinOccurs":
+			FormDivBasicFieldToField(&(choice_.MinOccurs), formDiv)
+		case "MaxOccurs":
+			FormDivBasicFieldToField(&(choice_.MaxOccurs), formDiv)
 		case "IsDuplicatedInXSD":
 			FormDivBasicFieldToField(&(choice_.IsDuplicatedInXSD), formDiv)
 		case "All:Choices":
@@ -1357,16 +1357,20 @@ func (complextypeFormCallback *ComplexTypeFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(complextype_.NameXSD), formDiv)
 		case "OuterElementName":
 			FormDivBasicFieldToField(&(complextype_.OuterElementName), formDiv)
+		case "Order":
+			FormDivBasicFieldToField(&(complextype_.Order), formDiv)
+		case "Depth":
+			FormDivBasicFieldToField(&(complextype_.Depth), formDiv)
+		case "MinOccurs":
+			FormDivBasicFieldToField(&(complextype_.MinOccurs), formDiv)
+		case "MaxOccurs":
+			FormDivBasicFieldToField(&(complextype_.MaxOccurs), formDiv)
 		case "Extension":
 			FormDivSelectFieldToField(&(complextype_.Extension), complextypeFormCallback.probe.stageOfInterest, formDiv)
 		case "SimpleContent":
 			FormDivSelectFieldToField(&(complextype_.SimpleContent), complextypeFormCallback.probe.stageOfInterest, formDiv)
 		case "ComplexContent":
 			FormDivSelectFieldToField(&(complextype_.ComplexContent), complextypeFormCallback.probe.stageOfInterest, formDiv)
-		case "Order":
-			FormDivBasicFieldToField(&(complextype_.Order), formDiv)
-		case "Depth":
-			FormDivBasicFieldToField(&(complextype_.Depth), formDiv)
 		case "IsDuplicatedInXSD":
 			FormDivBasicFieldToField(&(complextype_.IsDuplicatedInXSD), formDiv)
 		case "Schema:ComplexTypes":
@@ -2149,6 +2153,14 @@ func (extensionFormCallback *ExtensionFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(extension_.Name), formDiv)
 		case "OuterElementName":
 			FormDivBasicFieldToField(&(extension_.OuterElementName), formDiv)
+		case "Order":
+			FormDivBasicFieldToField(&(extension_.Order), formDiv)
+		case "Depth":
+			FormDivBasicFieldToField(&(extension_.Depth), formDiv)
+		case "MinOccurs":
+			FormDivBasicFieldToField(&(extension_.MinOccurs), formDiv)
+		case "MaxOccurs":
+			FormDivBasicFieldToField(&(extension_.MaxOccurs), formDiv)
 		case "Base":
 			FormDivBasicFieldToField(&(extension_.Base), formDiv)
 		case "Ref":
@@ -2250,6 +2262,10 @@ func (groupFormCallback *GroupFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(group_.Order), formDiv)
 		case "Depth":
 			FormDivBasicFieldToField(&(group_.Depth), formDiv)
+		case "MinOccurs":
+			FormDivBasicFieldToField(&(group_.MinOccurs), formDiv)
+		case "MaxOccurs":
+			FormDivBasicFieldToField(&(group_.MaxOccurs), formDiv)
 		case "All:Groups":
 			// we need to retrieve the field owner before the change
 			var pastAllOwner *models.All
@@ -3250,6 +3266,10 @@ func (schemaFormCallback *SchemaFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(schema_.Xs), formDiv)
 		case "Annotation":
 			FormDivSelectFieldToField(&(schema_.Annotation), schemaFormCallback.probe.stageOfInterest, formDiv)
+		case "Order":
+			FormDivBasicFieldToField(&(schema_.Order), formDiv)
+		case "Depth":
+			FormDivBasicFieldToField(&(schema_.Depth), formDiv)
 		}
 	}
 
@@ -3329,16 +3349,16 @@ func (sequenceFormCallback *SequenceFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(sequence_.Name), formDiv)
 		case "Annotation":
 			FormDivSelectFieldToField(&(sequence_.Annotation), sequenceFormCallback.probe.stageOfInterest, formDiv)
-		case "MinOccurs":
-			FormDivBasicFieldToField(&(sequence_.MinOccurs), formDiv)
-		case "MaxOccurs":
-			FormDivBasicFieldToField(&(sequence_.MaxOccurs), formDiv)
 		case "OuterElementName":
 			FormDivBasicFieldToField(&(sequence_.OuterElementName), formDiv)
 		case "Order":
 			FormDivBasicFieldToField(&(sequence_.Order), formDiv)
 		case "Depth":
 			FormDivBasicFieldToField(&(sequence_.Depth), formDiv)
+		case "MinOccurs":
+			FormDivBasicFieldToField(&(sequence_.MinOccurs), formDiv)
+		case "MaxOccurs":
+			FormDivBasicFieldToField(&(sequence_.MaxOccurs), formDiv)
 		case "All:Sequences":
 			// we need to retrieve the field owner before the change
 			var pastAllOwner *models.All
