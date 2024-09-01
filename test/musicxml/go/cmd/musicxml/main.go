@@ -1,21 +1,10 @@
 package main
 
 import (
-	"encoding/xml"
 	"flag"
-	"fmt"
-	"io"
 	"log"
-	"os"
-	"strconv"
-
-	musicxml_stack "github.com/fullstack-lang/gongxsd/test/musicxml/go/stack"
-	musicxml_static "github.com/fullstack-lang/gongxsd/test/musicxml/go/static"
-
-	"github.com/fullstack-lang/gongxsd/test/musicxml/go/models"
-
-	"golang.org/x/text/encoding/unicode"
-	"golang.org/x/text/transform"
+	// musicxml_stack "github.com/fullstack-lang/gongxsd/test/musicxml/go/stack"
+	// musicxml_static "github.com/fullstack-lang/gongxsd/test/musicxml/go/static"
 )
 
 var (
@@ -41,51 +30,51 @@ func main() {
 	flag.Parse()
 
 	// setup the static file server and get the controller
-	r := musicxml_static.ServeStaticFiles(*logGINFlag)
+	// r := musicxml_static.ServeStaticFiles(*logGINFlag)
 
-	// setup stack
-	stack := musicxml_stack.NewStack(r, "musicxml", *unmarshallFromCode, *marshallOnCommit, "", *embeddedDiagrams, true)
-	stack.Probe.Refresh()
+	// // setup stack
+	// stack := musicxml_stack.NewStack(r, "musicxml", *unmarshallFromCode, *marshallOnCommit, "", *embeddedDiagrams, true)
+	// stack.Probe.Refresh()
 
-	// Open the XML file
-	xmlFile, err := os.Open(*musicxmlFile)
-	if err != nil {
-		fmt.Println("Error opening file:", err)
-		return
-	}
-	defer xmlFile.Close()
+	// // Open the XML file
+	// xmlFile, err := os.Open(*musicxmlFile)
+	// if err != nil {
+	// 	fmt.Println("Error opening file:", err)
+	// 	return
+	// }
+	// defer xmlFile.Close()
 
-	// Read the XML file
-	byteValue, err := io.ReadAll(xmlFile)
-	if err != nil {
-		fmt.Println("Error reading file:", err)
-		return
-	}
+	// // Read the XML file
+	// byteValue, err := io.ReadAll(xmlFile)
+	// if err != nil {
+	// 	fmt.Println("Error reading file:", err)
+	// 	return
+	// }
 
-	// Convert UTF-16 to UTF-8
-	utf16Decoder := unicode.UTF16(unicode.LittleEndian, unicode.UseBOM).NewDecoder()
-	utf8Data, _, err := transform.Bytes(utf16Decoder, byteValue)
-	if err != nil {
-		fmt.Println("Error converting to UTF-8:", err)
-		return
-	}
+	// // Convert UTF-16 to UTF-8
+	// utf16Decoder := unicode.UTF16(unicode.LittleEndian, unicode.UseBOM).NewDecoder()
+	// utf8Data, _, err := transform.Bytes(utf16Decoder, byteValue)
+	// if err != nil {
+	// 	fmt.Println("Error converting to UTF-8:", err)
+	// 	return
+	// }
 
-	// Unmarshal the XML into the Reqif struct
-	var scorePartwise models.Score_partwise
-	err = xml.Unmarshal(utf8Data, &scorePartwise)
-	if err != nil {
-		fmt.Println("Error unmarshalling XML:", err)
-		return
-	}
+	// // Unmarshal the XML into the Reqif struct
+	// var scorePartwise models.Score_partwise
+	// err = xml.Unmarshal(utf8Data, &scorePartwise)
+	// if err != nil {
+	// 	fmt.Println("Error unmarshalling XML:", err)
+	// 	return
+	// }
 
-	models.StageBranch(stack.Stage, &scorePartwise)
+	// models.StageBranch(stack.Stage, &scorePartwise)
 
-	stack.Stage.Commit()
-	stack.Probe.Refresh()
+	// stack.Stage.Commit()
+	// stack.Probe.Refresh()
 
-	log.Printf("Server ready serve on localhost:" + strconv.Itoa(*port))
-	err = r.Run(":" + strconv.Itoa(*port))
-	if err != nil {
-		log.Fatalln(err.Error())
-	}
+	// log.Printf("Server ready serve on localhost:" + strconv.Itoa(*port))
+	// err = r.Run(":" + strconv.Itoa(*port))
+	// if err != nil {
+	// 	log.Fatalln(err.Error())
+	// }
 }

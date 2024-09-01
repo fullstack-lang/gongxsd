@@ -31,7 +31,8 @@ type ComplexType struct {
 	ParticleAbstract
 
 	IsDuplicatedInXSD bool
-	OuterParticle     Particle
+
+	OuterParticleOwnerAbstract
 }
 
 func (ct *ComplexType) GetFields(stage *StageStruct) (fields string) {

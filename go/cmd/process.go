@@ -57,6 +57,11 @@ func process(args []string) (r *gin.Engine, stack *gongxsd_stack.Stack) {
 		fmt.Printf("generating file %s\n", *outputModelFilePath)
 	}
 
+	// set outer particles
+	for _, ct := range models.SchemaSingloton.ComplexTypes {
+		ct.ModelGroup.ComputeIsUnbounded()
+	}
+
 	models.Generate(stack.Stage, *outputModelFilePath)
 
 	if Verbose {

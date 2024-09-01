@@ -119,8 +119,11 @@ func (modelGroup *ModelGroup) generateElements(
 				elem.Type = Name(elem.Type)
 			}
 
+			// compute if the element is unbounded
+			unbounded := computeIsBounded(elem)
+
 			sliceOrPointer := " *"
-			if elem.MaxOccurs == "unbounded" {
+			if unbounded {
 				sliceOrPointer = " []*"
 			}
 
