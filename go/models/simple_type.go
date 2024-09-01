@@ -42,7 +42,7 @@ func (simpleType *SimpleType) IsStringEnumerate() bool {
 	if NsPrefix(base) != "" {
 		base = Name(base)
 	}
-	if restriction.Base != "token" {
+	if restriction.Base != "token" && restriction.Base != "string" {
 		return false
 	}
 
@@ -54,5 +54,32 @@ func (simpleType *SimpleType) IsStringEnumerate() bool {
 	return true
 }
 
-func (simpleType *SimpleType) generateGongEnum() {
+func (simpleType *SimpleType) SetParentAndChildren(parent Particle) {
+}
+
+func (simpleType *SimpleType) generateGongEnum() string {
+
+	enumValuesCode := ""
+	for _, enumeration := range simpleType.Restriction.Enumerations {
+		_ = enumeration
+		enumValuesCode +=
+			"\n\tEnum_" + xsdNameToGoIdentifier(simpleType.NameXSD) + "_" + xsdNameToGoIdentifier(enumeration.Value) +
+				" " + "Enum_" + xsdNameToGoIdentifier(simpleType.NameXSD) +
+				" = \"" + enumeration.Value + "\""
+	}
+
+	// log.Println("String Enumerate", st.Name)
+	tmp := Replace3(
+		Level1Code[Level1NamedEnumCode],
+
+		"{{"+string(rune(Level2EnumComment))+"}}",
+		"From xsd simple type with enumerate restriction \""+simpleType.NameXSD+"\"",
+
+		"{{"+string(rune(Level2Enumname))+"}}",
+		"Enum_"+xsdNameToGoIdentifier(simpleType.NameXSD),
+
+		"{{"+string(rune(Level2EnumValues))+"}}",
+		enumValuesCode,
+	)
+	return tmp
 }

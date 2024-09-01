@@ -78,6 +78,8 @@ type AttributeGroup_WOP struct {
 	HasNameConflict bool
 	GoIdentifier string
 	Ref string
+	Order int
+	Depth int
 }
 
 func (from *AttributeGroup) CopyBasicFields(to *AttributeGroup) {
@@ -87,6 +89,8 @@ func (from *AttributeGroup) CopyBasicFields(to *AttributeGroup) {
 	to.HasNameConflict = from.HasNameConflict
 	to.GoIdentifier = from.GoIdentifier
 	to.Ref = from.Ref
+	to.Order = from.Order
+	to.Depth = from.Depth
 }
 
 type Choice_WOP struct {
@@ -411,12 +415,16 @@ type SimpleType_WOP struct {
 	// insertion point
 	Name string
 	NameXSD string
+	Order int
+	Depth int
 }
 
 func (from *SimpleType) CopyBasicFields(to *SimpleType) {
 	// insertion point
 	to.Name = from.Name
 	to.NameXSD = from.NameXSD
+	to.Order = from.Order
+	to.Depth = from.Depth
 }
 
 type TotalDigit_WOP struct {

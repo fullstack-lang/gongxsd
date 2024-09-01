@@ -18,8 +18,8 @@ func Generate(stage *StageStruct, outputFilePath string) {
 	// generate the typescript file
 	codeGO := ModelsFileTemplate
 
-	templInsertionLevel0 := make(map[ModelsFileTmplLevel0]string)
-	for subStructTemplate := range ModelsFileTmplLevel0Code {
+	templInsertionLevel0 := make(map[Level0]string)
+	for subStructTemplate := range Level0Code {
 		templInsertionLevel0[subStructTemplate] = ""
 	}
 
@@ -27,7 +27,8 @@ func Generate(stage *StageStruct, outputFilePath string) {
 		particle Particle
 		code     string
 	}
-	var particleCodes []*ParticleCode
+	var gongStructsParticleCodes []*ParticleCode
+	var gongEnumsParticleCodes []*ParticleCode
 
 	for _, ct := range GetGongstrucsSorted[*ComplexType](stage) {
 
@@ -42,20 +43,20 @@ func Generate(stage *StageStruct, outputFilePath string) {
 
 		if !ct.IsAnonymous {
 			tmp := Replace4(
-				ModelsFileTmplLevel1Code[ModelsFileTmplLevel1NamedStructCode],
+				Level1Code[Level1NamedStructCode],
 
-				"{{"+string(rune(ModelsFileTmplLevel2Comment))+"}}",
+				"{{"+string(rune(Level2Comment))+"}}",
 				comment,
 
-				"{{"+string(rune(ModelsFileTmplLevel2Structname))+"}}", ct.GoIdentifier,
+				"{{"+string(rune(Level2Structname))+"}}", ct.GoIdentifier,
 
-				"{{"+string(rune(ModelsFileTmplLevel2Source))+"}}",
+				"{{"+string(rune(Level2Source))+"}}",
 				`named complex type "`+ct.Name+`"`,
 
-				"{{"+string(rune(ModelsFileTmplLevel2Fields))+"}}",
+				"{{"+string(rune(Level2Fields))+"}}",
 				fields,
 			)
-			particleCodes = append(particleCodes, &ParticleCode{
+			gongStructsParticleCodes = append(gongStructsParticleCodes, &ParticleCode{
 				particle: ct,
 				code:     tmp,
 			})
@@ -65,20 +66,20 @@ func Generate(stage *StageStruct, outputFilePath string) {
 				outerElementName = ct.OuterElement.Name
 			}
 			tmp := Replace4(
-				ModelsFileTmplLevel1Code[ModelsFileTmplLevel1NamedStructCode],
+				Level1Code[Level1NamedStructCode],
 
-				"{{"+string(rune(ModelsFileTmplLevel2Comment))+"}}",
+				"{{"+string(rune(Level2Comment))+"}}",
 				comment,
 
-				"{{"+string(rune(ModelsFileTmplLevel2Structname))+"}}", ct.GoIdentifier,
+				"{{"+string(rune(Level2Structname))+"}}", ct.GoIdentifier,
 
-				"{{"+string(rune(ModelsFileTmplLevel2Source))+"}}",
+				"{{"+string(rune(Level2Source))+"}}",
 				`within outer element "`+outerElementName+`"`,
 
-				"{{"+string(rune(ModelsFileTmplLevel2Fields))+"}}",
+				"{{"+string(rune(Level2Fields))+"}}",
 				fields,
 			)
-			particleCodes = append(particleCodes, &ParticleCode{
+			gongStructsParticleCodes = append(gongStructsParticleCodes, &ParticleCode{
 				particle: ct,
 				code:     tmp,
 			})
@@ -97,17 +98,17 @@ func Generate(stage *StageStruct, outputFilePath string) {
 
 		fields := group.GetFields(stage)
 		tmp := Replace3(
-			ModelsFileTmplLevel1Code[ModelsFileTmplLevel1UnNamedStructCode],
+			Level1Code[Level1UnNamedStructCode],
 
-			"{{"+string(rune(ModelsFileTmplLevel2Structname))+"}}", group.GoIdentifier,
+			"{{"+string(rune(Level2Structname))+"}}", group.GoIdentifier,
 
-			"{{"+string(rune(ModelsFileTmplLevel2Source))+"}}",
+			"{{"+string(rune(Level2Source))+"}}",
 			`named group "`+group.Name+`"`,
 
-			"{{"+string(rune(ModelsFileTmplLevel2Fields))+"}}",
+			"{{"+string(rune(Level2Fields))+"}}",
 			fields,
 		)
-		particleCodes = append(particleCodes, &ParticleCode{
+		gongStructsParticleCodes = append(gongStructsParticleCodes, &ParticleCode{
 			particle: group,
 			code:     tmp,
 		})
@@ -145,17 +146,17 @@ func Generate(stage *StageStruct, outputFilePath string) {
 		}
 
 		tmp := Replace3(
-			ModelsFileTmplLevel1Code[ModelsFileTmplLevel1UnNamedStructCode],
+			Level1Code[Level1UnNamedStructCode],
 
-			"{{"+string(rune(ModelsFileTmplLevel2Structname))+"}}", ag.GoIdentifier,
+			"{{"+string(rune(Level2Structname))+"}}", ag.GoIdentifier,
 
-			"{{"+string(rune(ModelsFileTmplLevel2Source))+"}}",
+			"{{"+string(rune(Level2Source))+"}}",
 			`named attribute group "`+ag.Name+`"`,
 
-			"{{"+string(rune(ModelsFileTmplLevel2Fields))+"}}",
+			"{{"+string(rune(Level2Fields))+"}}",
 			fields,
 		)
-		particleCodes = append(particleCodes, &ParticleCode{
+		gongStructsParticleCodes = append(gongStructsParticleCodes, &ParticleCode{
 			particle: ag,
 			code:     tmp,
 		})
@@ -192,21 +193,21 @@ func Generate(stage *StageStruct, outputFilePath string) {
 				"\n\t" + element.ComplexType.GoIdentifier
 
 			tmp := Replace4(
-				ModelsFileTmplLevel1Code[ModelsFileTmplLevel1NamedStructCode],
+				Level1Code[Level1NamedStructCode],
 
-				"{{"+string(rune(ModelsFileTmplLevel2Comment))+"}}",
+				"{{"+string(rune(Level2Comment))+"}}",
 				comment,
 
-				"{{"+string(rune(ModelsFileTmplLevel2Structname))+"}}",
+				"{{"+string(rune(Level2Structname))+"}}",
 				element.GoIdentifier,
 
-				"{{"+string(rune(ModelsFileTmplLevel2Source))+"}}",
+				"{{"+string(rune(Level2Source))+"}}",
 				"element "+element.NameXSD+" within root schema",
 
-				"{{"+string(rune(ModelsFileTmplLevel2Fields))+"}}",
+				"{{"+string(rune(Level2Fields))+"}}",
 				fields,
 			)
-			particleCodes = append(particleCodes, &ParticleCode{
+			gongStructsParticleCodes = append(gongStructsParticleCodes, &ParticleCode{
 				particle: element,
 				code:     tmp,
 			})
@@ -215,23 +216,36 @@ func Generate(stage *StageStruct, outputFilePath string) {
 
 	for _, st := range GetGongstrucsSorted[*SimpleType](stage) {
 		if st.IsStringEnumerate() {
-			// log.Println("String Enumerate", st.Name)
+
+			tmp := st.generateGongEnum()
+			gongEnumsParticleCodes = append(gongEnumsParticleCodes, &ParticleCode{
+				particle: st,
+				code:     tmp,
+			})
 		}
 	}
+
+	for _, pc := range gongEnumsParticleCodes {
+		if pc.particle.GetOrder() == 0 {
+			log.Println("order is zero")
+		}
+		templInsertionLevel0[Level0AllGongenumsCode] += pc.code
+	}
+
 	// generate all particle codes
-	slices.SortFunc(particleCodes,
+	slices.SortFunc(gongStructsParticleCodes,
 		func(a, b *ParticleCode) int {
 			return cmp.Compare(a.particle.GetOrder(), b.particle.GetOrder())
 		})
 
-	for _, pc := range particleCodes {
+	for _, pc := range gongStructsParticleCodes {
 		if pc.particle.GetOrder() == 0 {
 			log.Println("order is zero")
 		}
-		templInsertionLevel0[ModelsFileTmplLevel0AllGongstructsCode] += pc.code
+		templInsertionLevel0[Level0AllGongstructsCode] += pc.code
 	}
 
-	for insertionPerStructId := ModelsFileTmplLevel0(0); insertionPerStructId < ModelsFileTmplLevel0Nb; insertionPerStructId++ {
+	for insertionPerStructId := Level0(0); insertionPerStructId < Level0Nb; insertionPerStructId++ {
 		toReplace := "{{" + string(rune(insertionPerStructId)) + "}}"
 		codeGO = strings.ReplaceAll(codeGO, toReplace, templInsertionLevel0[insertionPerStructId])
 	}

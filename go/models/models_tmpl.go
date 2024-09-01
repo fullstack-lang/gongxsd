@@ -6,68 +6,100 @@ package models
 import "encoding/xml"
 
 // to avoid compilation error if no xml element is generated
-var _ xml.Attr
-{{` + string(rune(ModelsFileTmplLevel0AllGongstructsCode)) + `}}`
+var _ xml.Attr` +
+	`
 
-type ModelsFileTmplLevel0 int
+// insertion point for enums declaration{{` + string(rune(Level0AllGongenumsCode)) + `}}` +
+	`
+
+	// insertion point for gongstructs declarations{{` + string(rune(Level0AllGongstructsCode)) + `}}`
+
+type Level0 int
 
 const (
-	ModelsFileTmplLevel0AllGongstructsCode ModelsFileTmplLevel0 = iota
-	ModelsFileTmplLevel0Nb
+	Level0AllGongstructsCode Level0 = iota
+	Level0AllGongenumsCode
+	Level0Nb
 )
 
-var ModelsFileTmplLevel0Code map[ModelsFileTmplLevel0]string = // new line
-map[ModelsFileTmplLevel0]string{
-	ModelsFileTmplLevel0AllGongstructsCode: ``,
+var Level0Code map[Level0]string = // new line
+map[Level0]string{
+	Level0AllGongstructsCode: ``,
 }
 
-type ModelsFileTmplLevel1 int
+type Level1 int
 
 const (
-	ModelsFileTmplLevel1NamedStructCode ModelsFileTmplLevel1 = iota
-	ModelsFileTmplLevel1UnNamedStructCode
-	ModelsFileTmplLevel1Nb
+	Level1NamedStructCode Level1 = iota
+	Level1UnNamedStructCode
+	Level1NamedEnumCode
+	Level1Nb
 )
 
-var ModelsFileTmplLevel1Code map[ModelsFileTmplLevel1]string = // new line
-map[ModelsFileTmplLevel1]string{
-	ModelsFileTmplLevel1NamedStructCode: `` +
+var Level1Code map[Level1]string = // new line
+map[Level1]string{
+	Level1NamedStructCode: `
+
+// {{` + string(rune(Level2Structname)) +
+		`}} Named source {{` + string(rune(Level2Source)) +
+		`}}` + `{{` + string(rune(Level2Comment)) + `}}` +
 		`
-// {{` + string(rune(ModelsFileTmplLevel2Structname)) +
-		`}} Named source {{` + string(rune(ModelsFileTmplLevel2Source)) +
-		`}}` + `{{` + string(rune(ModelsFileTmplLevel2Comment)) + `}}` +
-		`
-type {{` + string(rune(ModelsFileTmplLevel2Structname)) + `}} struct {
+type {{` + string(rune(Level2Structname)) + `}} struct {
 	Name string ` + "`" + "xml:\"-\"" + "`" + `
 
-	// insertion point for fields{{` + string(rune(ModelsFileTmplLevel2Fields)) + `}}
-}
-`,
-	ModelsFileTmplLevel1UnNamedStructCode: `
-// {{` + string(rune(ModelsFileTmplLevel2Structname)) +
-		`}} UnNamed source {{` + string(rune(ModelsFileTmplLevel2Source)) +
+	// insertion point for fields{{` + string(rune(Level2Fields)) + `}}
+}`,
+	Level1UnNamedStructCode: `
+
+// {{` + string(rune(Level2Structname)) +
+		`}} UnNamed source {{` + string(rune(Level2Source)) +
 		`}}
-type {{` + string(rune(ModelsFileTmplLevel2Structname)) + `}} struct {
+type {{` + string(rune(Level2Structname)) + `}} struct {
 
-	// insertion point for fields{{` + string(rune(ModelsFileTmplLevel2Fields)) + `}}
-}
-`,
+	// insertion point for fields{{` + string(rune(Level2Fields)) + `}}
+}`,
+
+	Level1NamedEnumCode: `` +
+
+		`
+
+// {{` + string(rune(Level2EnumComment)) + `}}` +
+		`
+type {{` + string(rune(Level2Enumname)) + `}} string
+
+const ({{` + string(rune(Level2EnumValues)) + `}}
+)`,
 }
 
-type ModelsFileTmplLevel2 int
+type Level2 int
 
 const (
-	ModelsFileTmplLevel2Structname ModelsFileTmplLevel2 = iota
-	ModelsFileTmplLevel2Comment
-	ModelsFileTmplLevel2Source
-	ModelsFileTmplLevel2Fields
-	ModelsFileTmplLevel2Nb
+	Level2Structname Level2 = iota
+	Level2Comment
+	Level2Source
+	Level2Fields
+
+	Level2Enumname
+	Level2EnumComment
+	Level2EnumValues
+
+	Level2Nb
 )
 
-var ModelsFileTmplLevel2Code map[ModelsFileTmplLevel2]string = // new line
-map[ModelsFileTmplLevel2]string{
-	ModelsFileTmplLevel2Structname: ``,
-	ModelsFileTmplLevel2Comment:    ``,
-	ModelsFileTmplLevel2Source:     ``,
-	ModelsFileTmplLevel2Fields:     ``,
+var Level2Code map[Level2]string = // new line
+map[Level2]string{
+	Level2Structname: ``,
+	Level2Comment:    ``,
+	Level2Source:     ``,
+	Level2Fields:     ``,
+	Level2Enumname:   ``,
+	Level2EnumValues: ``,
 }
+
+type Level3 int
+
+const (
+	Level3EnumValueIdentifier Level3 = iota
+	Level3EnumValueString
+	Level3Nb
+)

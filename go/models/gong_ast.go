@@ -1305,6 +1305,20 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					// remove first and last char
 					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
 					__gong__map_AttributeGroup[identifier].Ref = fielValue
+				case "Order":
+					// convert string to int
+					fielValue, err := strconv.ParseInt(basicLit.Value, 10, 64)
+					if err != nil {
+						log.Fatalln(err)
+					}
+					__gong__map_AttributeGroup[identifier].Order = int(exprSign) * int(fielValue)
+				case "Depth":
+					// convert string to int
+					fielValue, err := strconv.ParseInt(basicLit.Value, 10, 64)
+					if err != nil {
+						log.Fatalln(err)
+					}
+					__gong__map_AttributeGroup[identifier].Depth = int(exprSign) * int(fielValue)
 				}
 			case "Choice":
 				switch fieldName {
@@ -1747,6 +1761,20 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					// remove first and last char
 					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
 					__gong__map_SimpleType[identifier].NameXSD = fielValue
+				case "Order":
+					// convert string to int
+					fielValue, err := strconv.ParseInt(basicLit.Value, 10, 64)
+					if err != nil {
+						log.Fatalln(err)
+					}
+					__gong__map_SimpleType[identifier].Order = int(exprSign) * int(fielValue)
+				case "Depth":
+					// convert string to int
+					fielValue, err := strconv.ParseInt(basicLit.Value, 10, 64)
+					if err != nil {
+						log.Fatalln(err)
+					}
+					__gong__map_SimpleType[identifier].Depth = int(exprSign) * int(fielValue)
 				}
 			case "TotalDigit":
 				switch fieldName {
