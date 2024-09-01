@@ -1,9 +1,11 @@
 package models
 
 import (
+	"cmp"
 	"fmt"
 	"log"
 	"os"
+	"slices"
 	"strings"
 )
 
@@ -21,6 +23,12 @@ func Generate(stage *StageStruct, outputFilePath string) {
 		templInsertionLevel0[subStructTemplate] = ""
 	}
 
+	type ParticleCode struct {
+		particle Particle
+		code     string
+	}
+	var particleCodes []*ParticleCode
+
 	for _, ct := range GetGongstrucsSorted[*ComplexType](stage) {
 
 		fields := ct.GetFields(stage)
@@ -33,7 +41,7 @@ func Generate(stage *StageStruct, outputFilePath string) {
 		}
 
 		if !ct.IsAnonymous {
-			templInsertionLevel0[ModelsFileTmplLevel0AllGongstructsCode] += Replace4(
+			tmp := Replace4(
 				ModelsFileTmplLevel1Code[ModelsFileTmplLevel1NamedStructCode],
 
 				"{{"+string(rune(ModelsFileTmplLevel2Comment))+"}}",
@@ -47,12 +55,16 @@ func Generate(stage *StageStruct, outputFilePath string) {
 				"{{"+string(rune(ModelsFileTmplLevel2Fields))+"}}",
 				fields,
 			)
+			particleCodes = append(particleCodes, &ParticleCode{
+				particle: ct,
+				code:     tmp,
+			})
 		} else {
 			var outerElementName string
 			if ct.OuterElement != nil {
 				outerElementName = ct.OuterElement.Name
 			}
-			templInsertionLevel0[ModelsFileTmplLevel0AllGongstructsCode] += Replace4(
+			tmp := Replace4(
 				ModelsFileTmplLevel1Code[ModelsFileTmplLevel1NamedStructCode],
 
 				"{{"+string(rune(ModelsFileTmplLevel2Comment))+"}}",
@@ -66,6 +78,10 @@ func Generate(stage *StageStruct, outputFilePath string) {
 				"{{"+string(rune(ModelsFileTmplLevel2Fields))+"}}",
 				fields,
 			)
+			particleCodes = append(particleCodes, &ParticleCode{
+				particle: ct,
+				code:     tmp,
+			})
 		}
 
 	}
@@ -80,7 +96,7 @@ func Generate(stage *StageStruct, outputFilePath string) {
 		}
 
 		fields := group.GetFields(stage)
-		templInsertionLevel0[ModelsFileTmplLevel0AllGongstructsCode] += Replace3(
+		tmp := Replace3(
 			ModelsFileTmplLevel1Code[ModelsFileTmplLevel1UnNamedStructCode],
 
 			"{{"+string(rune(ModelsFileTmplLevel2Structname))+"}}", group.GoIdentifier,
@@ -91,6 +107,10 @@ func Generate(stage *StageStruct, outputFilePath string) {
 			"{{"+string(rune(ModelsFileTmplLevel2Fields))+"}}",
 			fields,
 		)
+		particleCodes = append(particleCodes, &ParticleCode{
+			particle: group,
+			code:     tmp,
+		})
 	}
 
 	for _, ag := range GetGongstrucsSorted[*AttributeGroup](stage) {
@@ -124,7 +144,7 @@ func Generate(stage *StageStruct, outputFilePath string) {
 			}
 		}
 
-		templInsertionLevel0[ModelsFileTmplLevel0AllGongstructsCode] += Replace3(
+		tmp := Replace3(
 			ModelsFileTmplLevel1Code[ModelsFileTmplLevel1UnNamedStructCode],
 
 			"{{"+string(rune(ModelsFileTmplLevel2Structname))+"}}", ag.GoIdentifier,
@@ -135,6 +155,10 @@ func Generate(stage *StageStruct, outputFilePath string) {
 			"{{"+string(rune(ModelsFileTmplLevel2Fields))+"}}",
 			fields,
 		)
+		particleCodes = append(particleCodes, &ParticleCode{
+			particle: ag,
+			code:     tmp,
+		})
 	}
 
 	// elements do not need to be translated into gong struct
@@ -167,7 +191,7 @@ func Generate(stage *StageStruct, outputFilePath string) {
 			fields += "\n\n\t// generated from inline complex type" +
 				"\n\t" + element.ComplexType.GoIdentifier
 
-			templInsertionLevel0[ModelsFileTmplLevel0AllGongstructsCode] += Replace4(
+			tmp := Replace4(
 				ModelsFileTmplLevel1Code[ModelsFileTmplLevel1NamedStructCode],
 
 				"{{"+string(rune(ModelsFileTmplLevel2Comment))+"}}",
@@ -182,8 +206,23 @@ func Generate(stage *StageStruct, outputFilePath string) {
 				"{{"+string(rune(ModelsFileTmplLevel2Fields))+"}}",
 				fields,
 			)
+			particleCodes = append(particleCodes, &ParticleCode{
+				particle: element,
+				code:     tmp,
+			})
 		}
+	}
 
+	slices.SortFunc(particleCodes,
+		func(a, b *ParticleCode) int {
+			return cmp.Compare(a.particle.GetOrder(), b.particle.GetOrder())
+		})
+
+	for _, pc := range particleCodes {
+		if pc.particle.GetOrder() == 0 {
+			log.Println("order is zero")
+		}
+		templInsertionLevel0[ModelsFileTmplLevel0AllGongstructsCode] += pc.code
 	}
 
 	for insertionPerStructId := ModelsFileTmplLevel0(0); insertionPerStructId < ModelsFileTmplLevel0Nb; insertionPerStructId++ {
