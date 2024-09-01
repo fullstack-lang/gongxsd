@@ -275,18 +275,18 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000043_A_OBJECT := (&models.ComplexType{Name: `A_OBJECT`}).Stage(stage)
 	__ComplexType__000044_A_PROPERTIES := (&models.ComplexType{Name: `A_PROPERTIES`}).Stage(stage)
 	__ComplexType__000045_A_RELATION_GROUP_TYPE_REF := (&models.ComplexType{Name: `A_RELATION-GROUP-TYPE-REF`}).Stage(stage)
-	__ComplexType__000046_A_SPEC_ATTRIBUTES := (&models.ComplexType{Name: `A_SPEC-ATTRIBUTES`}).Stage(stage)
-	__ComplexType__000047_A_SPEC_OBJECT_TYPE_REF := (&models.ComplexType{Name: `A_SPEC-OBJECT-TYPE-REF`}).Stage(stage)
-	__ComplexType__000048_A_SPEC_OBJECTS := (&models.ComplexType{Name: `A_SPEC-OBJECTS`}).Stage(stage)
-	__ComplexType__000049_A_SPEC_RELATION_GROUPS := (&models.ComplexType{Name: `A_SPEC-RELATION-GROUPS`}).Stage(stage)
-	__ComplexType__000050_A_SPEC_RELATION_REF := (&models.ComplexType{Name: `A_SPEC-RELATION-REF`}).Stage(stage)
-	__ComplexType__000051_A_SPEC_RELATION_TYPE_REF := (&models.ComplexType{Name: `A_SPEC-RELATION-TYPE-REF`}).Stage(stage)
-	__ComplexType__000052_A_SPEC_RELATIONS := (&models.ComplexType{Name: `A_SPEC-RELATIONS`}).Stage(stage)
-	__ComplexType__000053_A_SPEC_TYPES := (&models.ComplexType{Name: `A_SPEC-TYPES`}).Stage(stage)
-	__ComplexType__000054_A_SPECIFICATION_TYPE_REF := (&models.ComplexType{Name: `A_SPECIFICATION-TYPE-REF`}).Stage(stage)
-	__ComplexType__000055_A_SPECIFICATIONS := (&models.ComplexType{Name: `A_SPECIFICATIONS`}).Stage(stage)
-	__ComplexType__000056_A_SPECIFIED_VALUES := (&models.ComplexType{Name: `A_SPECIFIED-VALUES`}).Stage(stage)
-	__ComplexType__000057_A_TARGET := (&models.ComplexType{Name: `A_TARGET`}).Stage(stage)
+	__ComplexType__000046_A_SOURCE := (&models.ComplexType{Name: `A_SOURCE`}).Stage(stage)
+	__ComplexType__000047_A_SPEC_ATTRIBUTES := (&models.ComplexType{Name: `A_SPEC-ATTRIBUTES`}).Stage(stage)
+	__ComplexType__000048_A_SPEC_OBJECT_TYPE_REF := (&models.ComplexType{Name: `A_SPEC-OBJECT-TYPE-REF`}).Stage(stage)
+	__ComplexType__000049_A_SPEC_OBJECTS := (&models.ComplexType{Name: `A_SPEC-OBJECTS`}).Stage(stage)
+	__ComplexType__000050_A_SPEC_RELATION_GROUPS := (&models.ComplexType{Name: `A_SPEC-RELATION-GROUPS`}).Stage(stage)
+	__ComplexType__000051_A_SPEC_RELATION_REF := (&models.ComplexType{Name: `A_SPEC-RELATION-REF`}).Stage(stage)
+	__ComplexType__000052_A_SPEC_RELATION_TYPE_REF := (&models.ComplexType{Name: `A_SPEC-RELATION-TYPE-REF`}).Stage(stage)
+	__ComplexType__000053_A_SPEC_RELATIONS := (&models.ComplexType{Name: `A_SPEC-RELATIONS`}).Stage(stage)
+	__ComplexType__000054_A_SPEC_TYPES := (&models.ComplexType{Name: `A_SPEC-TYPES`}).Stage(stage)
+	__ComplexType__000055_A_SPECIFICATION_TYPE_REF := (&models.ComplexType{Name: `A_SPECIFICATION-TYPE-REF`}).Stage(stage)
+	__ComplexType__000056_A_SPECIFICATIONS := (&models.ComplexType{Name: `A_SPECIFICATIONS`}).Stage(stage)
+	__ComplexType__000057_A_SPECIFIED_VALUES := (&models.ComplexType{Name: `A_SPECIFIED-VALUES`}).Stage(stage)
 	__ComplexType__000058_A_TARGET_SPECIFICATION := (&models.ComplexType{Name: `A_TARGET-SPECIFICATION`}).Stage(stage)
 	__ComplexType__000059_A_THE_HEADER := (&models.ComplexType{Name: `A_THE-HEADER`}).Stage(stage)
 	__ComplexType__000060_A_TOOL_EXTENSIONS := (&models.ComplexType{Name: `A_TOOL-EXTENSIONS`}).Stage(stage)
@@ -450,235 +450,235 @@ func _(stage *models.StageStruct) {
 	// Setup of values
 
 	__All__000000_ALTERNATIVE_ID_A_.Name = `ALTERNATIVE-ID_A_`
-	__All__000000_ALTERNATIVE_ID_A_.MinOccurs = ``
-	__All__000000_ALTERNATIVE_ID_A_.MaxOccurs = ``
 	__All__000000_ALTERNATIVE_ID_A_.OuterElementName = `ALTERNATIVE-ID_A_`
 	__All__000000_ALTERNATIVE_ID_A_.Order = 0
 	__All__000000_ALTERNATIVE_ID_A_.Depth = 0
+	__All__000000_ALTERNATIVE_ID_A_.MinOccurs = ``
+	__All__000000_ALTERNATIVE_ID_A_.MaxOccurs = ``
 
 	__All__000001_ATTRIBUTE_DEFINITION_BOOLEAN_A_.Name = `ATTRIBUTE-DEFINITION-BOOLEAN_A_`
-	__All__000001_ATTRIBUTE_DEFINITION_BOOLEAN_A_.MinOccurs = ``
-	__All__000001_ATTRIBUTE_DEFINITION_BOOLEAN_A_.MaxOccurs = ``
 	__All__000001_ATTRIBUTE_DEFINITION_BOOLEAN_A_.OuterElementName = `ATTRIBUTE-DEFINITION-BOOLEAN_A_`
 	__All__000001_ATTRIBUTE_DEFINITION_BOOLEAN_A_.Order = 0
 	__All__000001_ATTRIBUTE_DEFINITION_BOOLEAN_A_.Depth = 0
+	__All__000001_ATTRIBUTE_DEFINITION_BOOLEAN_A_.MinOccurs = ``
+	__All__000001_ATTRIBUTE_DEFINITION_BOOLEAN_A_.MaxOccurs = ``
 
 	__All__000002_ATTRIBUTE_DEFINITION_DATE_A_.Name = `ATTRIBUTE-DEFINITION-DATE_A_`
-	__All__000002_ATTRIBUTE_DEFINITION_DATE_A_.MinOccurs = ``
-	__All__000002_ATTRIBUTE_DEFINITION_DATE_A_.MaxOccurs = ``
 	__All__000002_ATTRIBUTE_DEFINITION_DATE_A_.OuterElementName = `ATTRIBUTE-DEFINITION-DATE_A_`
 	__All__000002_ATTRIBUTE_DEFINITION_DATE_A_.Order = 0
 	__All__000002_ATTRIBUTE_DEFINITION_DATE_A_.Depth = 0
+	__All__000002_ATTRIBUTE_DEFINITION_DATE_A_.MinOccurs = ``
+	__All__000002_ATTRIBUTE_DEFINITION_DATE_A_.MaxOccurs = ``
 
 	__All__000003_ATTRIBUTE_DEFINITION_ENUMERATION_A_.Name = `ATTRIBUTE-DEFINITION-ENUMERATION_A_`
-	__All__000003_ATTRIBUTE_DEFINITION_ENUMERATION_A_.MinOccurs = ``
-	__All__000003_ATTRIBUTE_DEFINITION_ENUMERATION_A_.MaxOccurs = ``
 	__All__000003_ATTRIBUTE_DEFINITION_ENUMERATION_A_.OuterElementName = `ATTRIBUTE-DEFINITION-ENUMERATION_A_`
 	__All__000003_ATTRIBUTE_DEFINITION_ENUMERATION_A_.Order = 0
 	__All__000003_ATTRIBUTE_DEFINITION_ENUMERATION_A_.Depth = 0
+	__All__000003_ATTRIBUTE_DEFINITION_ENUMERATION_A_.MinOccurs = ``
+	__All__000003_ATTRIBUTE_DEFINITION_ENUMERATION_A_.MaxOccurs = ``
 
 	__All__000004_ATTRIBUTE_DEFINITION_INTEGER_A_.Name = `ATTRIBUTE-DEFINITION-INTEGER_A_`
-	__All__000004_ATTRIBUTE_DEFINITION_INTEGER_A_.MinOccurs = ``
-	__All__000004_ATTRIBUTE_DEFINITION_INTEGER_A_.MaxOccurs = ``
 	__All__000004_ATTRIBUTE_DEFINITION_INTEGER_A_.OuterElementName = `ATTRIBUTE-DEFINITION-INTEGER_A_`
 	__All__000004_ATTRIBUTE_DEFINITION_INTEGER_A_.Order = 0
 	__All__000004_ATTRIBUTE_DEFINITION_INTEGER_A_.Depth = 0
+	__All__000004_ATTRIBUTE_DEFINITION_INTEGER_A_.MinOccurs = ``
+	__All__000004_ATTRIBUTE_DEFINITION_INTEGER_A_.MaxOccurs = ``
 
 	__All__000005_ATTRIBUTE_DEFINITION_REAL_A_.Name = `ATTRIBUTE-DEFINITION-REAL_A_`
-	__All__000005_ATTRIBUTE_DEFINITION_REAL_A_.MinOccurs = ``
-	__All__000005_ATTRIBUTE_DEFINITION_REAL_A_.MaxOccurs = ``
 	__All__000005_ATTRIBUTE_DEFINITION_REAL_A_.OuterElementName = `ATTRIBUTE-DEFINITION-REAL_A_`
 	__All__000005_ATTRIBUTE_DEFINITION_REAL_A_.Order = 0
 	__All__000005_ATTRIBUTE_DEFINITION_REAL_A_.Depth = 0
+	__All__000005_ATTRIBUTE_DEFINITION_REAL_A_.MinOccurs = ``
+	__All__000005_ATTRIBUTE_DEFINITION_REAL_A_.MaxOccurs = ``
 
 	__All__000006_ATTRIBUTE_DEFINITION_STRING_A_.Name = `ATTRIBUTE-DEFINITION-STRING_A_`
-	__All__000006_ATTRIBUTE_DEFINITION_STRING_A_.MinOccurs = ``
-	__All__000006_ATTRIBUTE_DEFINITION_STRING_A_.MaxOccurs = ``
 	__All__000006_ATTRIBUTE_DEFINITION_STRING_A_.OuterElementName = `ATTRIBUTE-DEFINITION-STRING_A_`
 	__All__000006_ATTRIBUTE_DEFINITION_STRING_A_.Order = 0
 	__All__000006_ATTRIBUTE_DEFINITION_STRING_A_.Depth = 0
+	__All__000006_ATTRIBUTE_DEFINITION_STRING_A_.MinOccurs = ``
+	__All__000006_ATTRIBUTE_DEFINITION_STRING_A_.MaxOccurs = ``
 
 	__All__000007_ATTRIBUTE_DEFINITION_XHTML_A_.Name = `ATTRIBUTE-DEFINITION-XHTML_A_`
-	__All__000007_ATTRIBUTE_DEFINITION_XHTML_A_.MinOccurs = ``
-	__All__000007_ATTRIBUTE_DEFINITION_XHTML_A_.MaxOccurs = ``
 	__All__000007_ATTRIBUTE_DEFINITION_XHTML_A_.OuterElementName = `ATTRIBUTE-DEFINITION-XHTML_A_`
 	__All__000007_ATTRIBUTE_DEFINITION_XHTML_A_.Order = 0
 	__All__000007_ATTRIBUTE_DEFINITION_XHTML_A_.Depth = 0
+	__All__000007_ATTRIBUTE_DEFINITION_XHTML_A_.MinOccurs = ``
+	__All__000007_ATTRIBUTE_DEFINITION_XHTML_A_.MaxOccurs = ``
 
 	__All__000008_ATTRIBUTE_VALUE_BOOLEAN_A_.Name = `ATTRIBUTE-VALUE-BOOLEAN_A_`
-	__All__000008_ATTRIBUTE_VALUE_BOOLEAN_A_.MinOccurs = ``
-	__All__000008_ATTRIBUTE_VALUE_BOOLEAN_A_.MaxOccurs = ``
 	__All__000008_ATTRIBUTE_VALUE_BOOLEAN_A_.OuterElementName = `ATTRIBUTE-VALUE-BOOLEAN_A_`
 	__All__000008_ATTRIBUTE_VALUE_BOOLEAN_A_.Order = 0
 	__All__000008_ATTRIBUTE_VALUE_BOOLEAN_A_.Depth = 0
+	__All__000008_ATTRIBUTE_VALUE_BOOLEAN_A_.MinOccurs = ``
+	__All__000008_ATTRIBUTE_VALUE_BOOLEAN_A_.MaxOccurs = ``
 
 	__All__000009_ATTRIBUTE_VALUE_DATE_A_.Name = `ATTRIBUTE-VALUE-DATE_A_`
-	__All__000009_ATTRIBUTE_VALUE_DATE_A_.MinOccurs = ``
-	__All__000009_ATTRIBUTE_VALUE_DATE_A_.MaxOccurs = ``
 	__All__000009_ATTRIBUTE_VALUE_DATE_A_.OuterElementName = `ATTRIBUTE-VALUE-DATE_A_`
 	__All__000009_ATTRIBUTE_VALUE_DATE_A_.Order = 0
 	__All__000009_ATTRIBUTE_VALUE_DATE_A_.Depth = 0
+	__All__000009_ATTRIBUTE_VALUE_DATE_A_.MinOccurs = ``
+	__All__000009_ATTRIBUTE_VALUE_DATE_A_.MaxOccurs = ``
 
 	__All__000010_ATTRIBUTE_VALUE_ENUMERATION_A_.Name = `ATTRIBUTE-VALUE-ENUMERATION_A_`
-	__All__000010_ATTRIBUTE_VALUE_ENUMERATION_A_.MinOccurs = ``
-	__All__000010_ATTRIBUTE_VALUE_ENUMERATION_A_.MaxOccurs = ``
 	__All__000010_ATTRIBUTE_VALUE_ENUMERATION_A_.OuterElementName = `ATTRIBUTE-VALUE-ENUMERATION_A_`
 	__All__000010_ATTRIBUTE_VALUE_ENUMERATION_A_.Order = 0
 	__All__000010_ATTRIBUTE_VALUE_ENUMERATION_A_.Depth = 0
+	__All__000010_ATTRIBUTE_VALUE_ENUMERATION_A_.MinOccurs = ``
+	__All__000010_ATTRIBUTE_VALUE_ENUMERATION_A_.MaxOccurs = ``
 
 	__All__000011_ATTRIBUTE_VALUE_INTEGER_A_.Name = `ATTRIBUTE-VALUE-INTEGER_A_`
-	__All__000011_ATTRIBUTE_VALUE_INTEGER_A_.MinOccurs = ``
-	__All__000011_ATTRIBUTE_VALUE_INTEGER_A_.MaxOccurs = ``
 	__All__000011_ATTRIBUTE_VALUE_INTEGER_A_.OuterElementName = `ATTRIBUTE-VALUE-INTEGER_A_`
 	__All__000011_ATTRIBUTE_VALUE_INTEGER_A_.Order = 0
 	__All__000011_ATTRIBUTE_VALUE_INTEGER_A_.Depth = 0
+	__All__000011_ATTRIBUTE_VALUE_INTEGER_A_.MinOccurs = ``
+	__All__000011_ATTRIBUTE_VALUE_INTEGER_A_.MaxOccurs = ``
 
 	__All__000012_ATTRIBUTE_VALUE_REAL_A_.Name = `ATTRIBUTE-VALUE-REAL_A_`
-	__All__000012_ATTRIBUTE_VALUE_REAL_A_.MinOccurs = ``
-	__All__000012_ATTRIBUTE_VALUE_REAL_A_.MaxOccurs = ``
 	__All__000012_ATTRIBUTE_VALUE_REAL_A_.OuterElementName = `ATTRIBUTE-VALUE-REAL_A_`
 	__All__000012_ATTRIBUTE_VALUE_REAL_A_.Order = 0
 	__All__000012_ATTRIBUTE_VALUE_REAL_A_.Depth = 0
+	__All__000012_ATTRIBUTE_VALUE_REAL_A_.MinOccurs = ``
+	__All__000012_ATTRIBUTE_VALUE_REAL_A_.MaxOccurs = ``
 
 	__All__000013_ATTRIBUTE_VALUE_STRING_A_.Name = `ATTRIBUTE-VALUE-STRING_A_`
-	__All__000013_ATTRIBUTE_VALUE_STRING_A_.MinOccurs = ``
-	__All__000013_ATTRIBUTE_VALUE_STRING_A_.MaxOccurs = ``
 	__All__000013_ATTRIBUTE_VALUE_STRING_A_.OuterElementName = `ATTRIBUTE-VALUE-STRING_A_`
 	__All__000013_ATTRIBUTE_VALUE_STRING_A_.Order = 0
 	__All__000013_ATTRIBUTE_VALUE_STRING_A_.Depth = 0
+	__All__000013_ATTRIBUTE_VALUE_STRING_A_.MinOccurs = ``
+	__All__000013_ATTRIBUTE_VALUE_STRING_A_.MaxOccurs = ``
 
 	__All__000014_ATTRIBUTE_VALUE_XHTML_A_.Name = `ATTRIBUTE-VALUE-XHTML_A_`
-	__All__000014_ATTRIBUTE_VALUE_XHTML_A_.MinOccurs = ``
-	__All__000014_ATTRIBUTE_VALUE_XHTML_A_.MaxOccurs = ``
 	__All__000014_ATTRIBUTE_VALUE_XHTML_A_.OuterElementName = `ATTRIBUTE-VALUE-XHTML_A_`
 	__All__000014_ATTRIBUTE_VALUE_XHTML_A_.Order = 0
 	__All__000014_ATTRIBUTE_VALUE_XHTML_A_.Depth = 0
+	__All__000014_ATTRIBUTE_VALUE_XHTML_A_.MinOccurs = ``
+	__All__000014_ATTRIBUTE_VALUE_XHTML_A_.MaxOccurs = ``
 
 	__All__000015_DATATYPE_DEFINITION_BOOLEAN_A_.Name = `DATATYPE-DEFINITION-BOOLEAN_A_`
-	__All__000015_DATATYPE_DEFINITION_BOOLEAN_A_.MinOccurs = ``
-	__All__000015_DATATYPE_DEFINITION_BOOLEAN_A_.MaxOccurs = ``
 	__All__000015_DATATYPE_DEFINITION_BOOLEAN_A_.OuterElementName = `DATATYPE-DEFINITION-BOOLEAN_A_`
 	__All__000015_DATATYPE_DEFINITION_BOOLEAN_A_.Order = 0
 	__All__000015_DATATYPE_DEFINITION_BOOLEAN_A_.Depth = 0
+	__All__000015_DATATYPE_DEFINITION_BOOLEAN_A_.MinOccurs = ``
+	__All__000015_DATATYPE_DEFINITION_BOOLEAN_A_.MaxOccurs = ``
 
 	__All__000016_DATATYPE_DEFINITION_DATE_A_.Name = `DATATYPE-DEFINITION-DATE_A_`
-	__All__000016_DATATYPE_DEFINITION_DATE_A_.MinOccurs = ``
-	__All__000016_DATATYPE_DEFINITION_DATE_A_.MaxOccurs = ``
 	__All__000016_DATATYPE_DEFINITION_DATE_A_.OuterElementName = `DATATYPE-DEFINITION-DATE_A_`
 	__All__000016_DATATYPE_DEFINITION_DATE_A_.Order = 0
 	__All__000016_DATATYPE_DEFINITION_DATE_A_.Depth = 0
+	__All__000016_DATATYPE_DEFINITION_DATE_A_.MinOccurs = ``
+	__All__000016_DATATYPE_DEFINITION_DATE_A_.MaxOccurs = ``
 
 	__All__000017_DATATYPE_DEFINITION_ENUMERATION_A_.Name = `DATATYPE-DEFINITION-ENUMERATION_A_`
-	__All__000017_DATATYPE_DEFINITION_ENUMERATION_A_.MinOccurs = ``
-	__All__000017_DATATYPE_DEFINITION_ENUMERATION_A_.MaxOccurs = ``
 	__All__000017_DATATYPE_DEFINITION_ENUMERATION_A_.OuterElementName = `DATATYPE-DEFINITION-ENUMERATION_A_`
 	__All__000017_DATATYPE_DEFINITION_ENUMERATION_A_.Order = 0
 	__All__000017_DATATYPE_DEFINITION_ENUMERATION_A_.Depth = 0
+	__All__000017_DATATYPE_DEFINITION_ENUMERATION_A_.MinOccurs = ``
+	__All__000017_DATATYPE_DEFINITION_ENUMERATION_A_.MaxOccurs = ``
 
 	__All__000018_DATATYPE_DEFINITION_INTEGER_A_.Name = `DATATYPE-DEFINITION-INTEGER_A_`
-	__All__000018_DATATYPE_DEFINITION_INTEGER_A_.MinOccurs = ``
-	__All__000018_DATATYPE_DEFINITION_INTEGER_A_.MaxOccurs = ``
 	__All__000018_DATATYPE_DEFINITION_INTEGER_A_.OuterElementName = `DATATYPE-DEFINITION-INTEGER_A_`
 	__All__000018_DATATYPE_DEFINITION_INTEGER_A_.Order = 0
 	__All__000018_DATATYPE_DEFINITION_INTEGER_A_.Depth = 0
+	__All__000018_DATATYPE_DEFINITION_INTEGER_A_.MinOccurs = ``
+	__All__000018_DATATYPE_DEFINITION_INTEGER_A_.MaxOccurs = ``
 
 	__All__000019_DATATYPE_DEFINITION_REAL_A_.Name = `DATATYPE-DEFINITION-REAL_A_`
-	__All__000019_DATATYPE_DEFINITION_REAL_A_.MinOccurs = ``
-	__All__000019_DATATYPE_DEFINITION_REAL_A_.MaxOccurs = ``
 	__All__000019_DATATYPE_DEFINITION_REAL_A_.OuterElementName = `DATATYPE-DEFINITION-REAL_A_`
 	__All__000019_DATATYPE_DEFINITION_REAL_A_.Order = 0
 	__All__000019_DATATYPE_DEFINITION_REAL_A_.Depth = 0
+	__All__000019_DATATYPE_DEFINITION_REAL_A_.MinOccurs = ``
+	__All__000019_DATATYPE_DEFINITION_REAL_A_.MaxOccurs = ``
 
 	__All__000020_DATATYPE_DEFINITION_STRING_A_.Name = `DATATYPE-DEFINITION-STRING_A_`
-	__All__000020_DATATYPE_DEFINITION_STRING_A_.MinOccurs = ``
-	__All__000020_DATATYPE_DEFINITION_STRING_A_.MaxOccurs = ``
 	__All__000020_DATATYPE_DEFINITION_STRING_A_.OuterElementName = `DATATYPE-DEFINITION-STRING_A_`
 	__All__000020_DATATYPE_DEFINITION_STRING_A_.Order = 0
 	__All__000020_DATATYPE_DEFINITION_STRING_A_.Depth = 0
+	__All__000020_DATATYPE_DEFINITION_STRING_A_.MinOccurs = ``
+	__All__000020_DATATYPE_DEFINITION_STRING_A_.MaxOccurs = ``
 
 	__All__000021_DATATYPE_DEFINITION_XHTML_A_.Name = `DATATYPE-DEFINITION-XHTML_A_`
-	__All__000021_DATATYPE_DEFINITION_XHTML_A_.MinOccurs = ``
-	__All__000021_DATATYPE_DEFINITION_XHTML_A_.MaxOccurs = ``
 	__All__000021_DATATYPE_DEFINITION_XHTML_A_.OuterElementName = `DATATYPE-DEFINITION-XHTML_A_`
 	__All__000021_DATATYPE_DEFINITION_XHTML_A_.Order = 0
 	__All__000021_DATATYPE_DEFINITION_XHTML_A_.Depth = 0
+	__All__000021_DATATYPE_DEFINITION_XHTML_A_.MinOccurs = ``
+	__All__000021_DATATYPE_DEFINITION_XHTML_A_.MaxOccurs = ``
 
 	__All__000022_EMBEDDED_VALUE_A_.Name = `EMBEDDED-VALUE_A_`
-	__All__000022_EMBEDDED_VALUE_A_.MinOccurs = ``
-	__All__000022_EMBEDDED_VALUE_A_.MaxOccurs = ``
 	__All__000022_EMBEDDED_VALUE_A_.OuterElementName = `EMBEDDED-VALUE_A_`
 	__All__000022_EMBEDDED_VALUE_A_.Order = 0
 	__All__000022_EMBEDDED_VALUE_A_.Depth = 0
+	__All__000022_EMBEDDED_VALUE_A_.MinOccurs = ``
+	__All__000022_EMBEDDED_VALUE_A_.MaxOccurs = ``
 
 	__All__000023_ENUM_VALUE_A_.Name = `ENUM-VALUE_A_`
-	__All__000023_ENUM_VALUE_A_.MinOccurs = ``
-	__All__000023_ENUM_VALUE_A_.MaxOccurs = ``
 	__All__000023_ENUM_VALUE_A_.OuterElementName = `ENUM-VALUE_A_`
 	__All__000023_ENUM_VALUE_A_.Order = 0
 	__All__000023_ENUM_VALUE_A_.Depth = 0
+	__All__000023_ENUM_VALUE_A_.MinOccurs = ``
+	__All__000023_ENUM_VALUE_A_.MaxOccurs = ``
 
 	__All__000024_RELATION_GROUP_TYPE_A_.Name = `RELATION-GROUP-TYPE_A_`
-	__All__000024_RELATION_GROUP_TYPE_A_.MinOccurs = ``
-	__All__000024_RELATION_GROUP_TYPE_A_.MaxOccurs = ``
 	__All__000024_RELATION_GROUP_TYPE_A_.OuterElementName = `RELATION-GROUP-TYPE_A_`
 	__All__000024_RELATION_GROUP_TYPE_A_.Order = 0
 	__All__000024_RELATION_GROUP_TYPE_A_.Depth = 0
+	__All__000024_RELATION_GROUP_TYPE_A_.MinOccurs = ``
+	__All__000024_RELATION_GROUP_TYPE_A_.MaxOccurs = ``
 
 	__All__000025_RELATION_GROUP_A_.Name = `RELATION-GROUP_A_`
-	__All__000025_RELATION_GROUP_A_.MinOccurs = ``
-	__All__000025_RELATION_GROUP_A_.MaxOccurs = ``
 	__All__000025_RELATION_GROUP_A_.OuterElementName = `RELATION-GROUP_A_`
 	__All__000025_RELATION_GROUP_A_.Order = 0
 	__All__000025_RELATION_GROUP_A_.Depth = 0
+	__All__000025_RELATION_GROUP_A_.MinOccurs = ``
+	__All__000025_RELATION_GROUP_A_.MaxOccurs = ``
 
 	__All__000026_SPEC_HIERARCHY_A_.Name = `SPEC-HIERARCHY_A_`
-	__All__000026_SPEC_HIERARCHY_A_.MinOccurs = ``
-	__All__000026_SPEC_HIERARCHY_A_.MaxOccurs = ``
 	__All__000026_SPEC_HIERARCHY_A_.OuterElementName = `SPEC-HIERARCHY_A_`
 	__All__000026_SPEC_HIERARCHY_A_.Order = 0
 	__All__000026_SPEC_HIERARCHY_A_.Depth = 0
+	__All__000026_SPEC_HIERARCHY_A_.MinOccurs = ``
+	__All__000026_SPEC_HIERARCHY_A_.MaxOccurs = ``
 
 	__All__000027_SPEC_OBJECT_TYPE_A_.Name = `SPEC-OBJECT-TYPE_A_`
-	__All__000027_SPEC_OBJECT_TYPE_A_.MinOccurs = ``
-	__All__000027_SPEC_OBJECT_TYPE_A_.MaxOccurs = ``
 	__All__000027_SPEC_OBJECT_TYPE_A_.OuterElementName = `SPEC-OBJECT-TYPE_A_`
 	__All__000027_SPEC_OBJECT_TYPE_A_.Order = 0
 	__All__000027_SPEC_OBJECT_TYPE_A_.Depth = 0
+	__All__000027_SPEC_OBJECT_TYPE_A_.MinOccurs = ``
+	__All__000027_SPEC_OBJECT_TYPE_A_.MaxOccurs = ``
 
 	__All__000028_SPEC_OBJECT_A_.Name = `SPEC-OBJECT_A_`
-	__All__000028_SPEC_OBJECT_A_.MinOccurs = ``
-	__All__000028_SPEC_OBJECT_A_.MaxOccurs = ``
 	__All__000028_SPEC_OBJECT_A_.OuterElementName = `SPEC-OBJECT_A_`
 	__All__000028_SPEC_OBJECT_A_.Order = 0
 	__All__000028_SPEC_OBJECT_A_.Depth = 0
+	__All__000028_SPEC_OBJECT_A_.MinOccurs = ``
+	__All__000028_SPEC_OBJECT_A_.MaxOccurs = ``
 
 	__All__000029_SPEC_RELATION_TYPE_A_.Name = `SPEC-RELATION-TYPE_A_`
-	__All__000029_SPEC_RELATION_TYPE_A_.MinOccurs = ``
-	__All__000029_SPEC_RELATION_TYPE_A_.MaxOccurs = ``
 	__All__000029_SPEC_RELATION_TYPE_A_.OuterElementName = `SPEC-RELATION-TYPE_A_`
 	__All__000029_SPEC_RELATION_TYPE_A_.Order = 0
 	__All__000029_SPEC_RELATION_TYPE_A_.Depth = 0
+	__All__000029_SPEC_RELATION_TYPE_A_.MinOccurs = ``
+	__All__000029_SPEC_RELATION_TYPE_A_.MaxOccurs = ``
 
 	__All__000030_SPEC_RELATION_A_.Name = `SPEC-RELATION_A_`
-	__All__000030_SPEC_RELATION_A_.MinOccurs = ``
-	__All__000030_SPEC_RELATION_A_.MaxOccurs = ``
 	__All__000030_SPEC_RELATION_A_.OuterElementName = `SPEC-RELATION_A_`
 	__All__000030_SPEC_RELATION_A_.Order = 0
 	__All__000030_SPEC_RELATION_A_.Depth = 0
+	__All__000030_SPEC_RELATION_A_.MinOccurs = ``
+	__All__000030_SPEC_RELATION_A_.MaxOccurs = ``
 
 	__All__000031_SPECIFICATION_TYPE_A_.Name = `SPECIFICATION-TYPE_A_`
-	__All__000031_SPECIFICATION_TYPE_A_.MinOccurs = ``
-	__All__000031_SPECIFICATION_TYPE_A_.MaxOccurs = ``
 	__All__000031_SPECIFICATION_TYPE_A_.OuterElementName = `SPECIFICATION-TYPE_A_`
 	__All__000031_SPECIFICATION_TYPE_A_.Order = 0
 	__All__000031_SPECIFICATION_TYPE_A_.Depth = 0
+	__All__000031_SPECIFICATION_TYPE_A_.MinOccurs = ``
+	__All__000031_SPECIFICATION_TYPE_A_.MaxOccurs = ``
 
 	__All__000032_SPECIFICATION_A_.Name = `SPECIFICATION_A_`
-	__All__000032_SPECIFICATION_A_.MinOccurs = ``
-	__All__000032_SPECIFICATION_A_.MaxOccurs = ``
 	__All__000032_SPECIFICATION_A_.OuterElementName = `SPECIFICATION_A_`
 	__All__000032_SPECIFICATION_A_.Order = 0
 	__All__000032_SPECIFICATION_A_.Depth = 0
+	__All__000032_SPECIFICATION_A_.MinOccurs = ``
+	__All__000032_SPECIFICATION_A_.MaxOccurs = ``
 
 	__Attribute__000000_.Name = ``
 	__Attribute__000000_.NameXSD = `http://www.w3.org/XML/1998/namespace lang`
@@ -1046,7 +1046,7 @@ func _(stage *models.StageStruct) {
 
 	__Attribute__000026_IDENTIFIER.Name = `IDENTIFIER`
 	__Attribute__000026_IDENTIFIER.NameXSD = `IDENTIFIER`
-	__Attribute__000026_IDENTIFIER.Type = `string`
+	__Attribute__000026_IDENTIFIER.Type = `ID`
 	__Attribute__000026_IDENTIFIER.HasNameConflict = false
 	__Attribute__000026_IDENTIFIER.GoIdentifier = `IDENTIFIER`
 	__Attribute__000026_IDENTIFIER.Default = ``
@@ -1172,7 +1172,7 @@ func _(stage *models.StageStruct) {
 
 	__Attribute__000035_IDENTIFIER.Name = `IDENTIFIER`
 	__Attribute__000035_IDENTIFIER.NameXSD = `IDENTIFIER`
-	__Attribute__000035_IDENTIFIER.Type = `ID`
+	__Attribute__000035_IDENTIFIER.Type = `string`
 	__Attribute__000035_IDENTIFIER.HasNameConflict = false
 	__Attribute__000035_IDENTIFIER.GoIdentifier = `IDENTIFIER`
 	__Attribute__000035_IDENTIFIER.Default = ``
@@ -2334,7 +2334,7 @@ func _(stage *models.StageStruct) {
 
 	__Attribute__000118_THE_VALUE.Name = `THE-VALUE`
 	__Attribute__000118_THE_VALUE.NameXSD = `THE-VALUE`
-	__Attribute__000118_THE_VALUE.Type = `boolean`
+	__Attribute__000118_THE_VALUE.Type = `dateTime`
 	__Attribute__000118_THE_VALUE.HasNameConflict = false
 	__Attribute__000118_THE_VALUE.GoIdentifier = `THE_VALUE`
 	__Attribute__000118_THE_VALUE.Default = ``
@@ -2348,7 +2348,7 @@ func _(stage *models.StageStruct) {
 
 	__Attribute__000119_THE_VALUE.Name = `THE-VALUE`
 	__Attribute__000119_THE_VALUE.NameXSD = `THE-VALUE`
-	__Attribute__000119_THE_VALUE.Type = `double`
+	__Attribute__000119_THE_VALUE.Type = `integer`
 	__Attribute__000119_THE_VALUE.HasNameConflict = false
 	__Attribute__000119_THE_VALUE.GoIdentifier = `THE_VALUE`
 	__Attribute__000119_THE_VALUE.Default = ``
@@ -2362,7 +2362,7 @@ func _(stage *models.StageStruct) {
 
 	__Attribute__000120_THE_VALUE.Name = `THE-VALUE`
 	__Attribute__000120_THE_VALUE.NameXSD = `THE-VALUE`
-	__Attribute__000120_THE_VALUE.Type = `string`
+	__Attribute__000120_THE_VALUE.Type = `boolean`
 	__Attribute__000120_THE_VALUE.HasNameConflict = false
 	__Attribute__000120_THE_VALUE.GoIdentifier = `THE_VALUE`
 	__Attribute__000120_THE_VALUE.Default = ``
@@ -2376,7 +2376,7 @@ func _(stage *models.StageStruct) {
 
 	__Attribute__000121_THE_VALUE.Name = `THE-VALUE`
 	__Attribute__000121_THE_VALUE.NameXSD = `THE-VALUE`
-	__Attribute__000121_THE_VALUE.Type = `integer`
+	__Attribute__000121_THE_VALUE.Type = `double`
 	__Attribute__000121_THE_VALUE.HasNameConflict = false
 	__Attribute__000121_THE_VALUE.GoIdentifier = `THE_VALUE`
 	__Attribute__000121_THE_VALUE.Default = ``
@@ -2390,7 +2390,7 @@ func _(stage *models.StageStruct) {
 
 	__Attribute__000122_THE_VALUE.Name = `THE-VALUE`
 	__Attribute__000122_THE_VALUE.NameXSD = `THE-VALUE`
-	__Attribute__000122_THE_VALUE.Type = `dateTime`
+	__Attribute__000122_THE_VALUE.Type = `string`
 	__Attribute__000122_THE_VALUE.HasNameConflict = false
 	__Attribute__000122_THE_VALUE.GoIdentifier = `THE_VALUE`
 	__Attribute__000122_THE_VALUE.Default = ``
@@ -2403,371 +2403,371 @@ func _(stage *models.StageStruct) {
 	__Attribute__000122_THE_VALUE.IDXSD = ``
 
 	__Choice__000000_.Name = ``
-	__Choice__000000_.MinOccurs = `0`
-	__Choice__000000_.MaxOccurs = `1`
 	__Choice__000000_.OuterElementName = ``
 	__Choice__000000_.Order = 0
 	__Choice__000000_.Depth = 0
+	__Choice__000000_.MinOccurs = `1`
+	__Choice__000000_.MaxOccurs = `1`
 	__Choice__000000_.IsDuplicatedInXSD = false
 
 	__Choice__000001_.Name = ``
-	__Choice__000001_.MinOccurs = `1`
-	__Choice__000001_.MaxOccurs = `1`
 	__Choice__000001_.OuterElementName = ``
 	__Choice__000001_.Order = 0
 	__Choice__000001_.Depth = 0
+	__Choice__000001_.MinOccurs = `0`
+	__Choice__000001_.MaxOccurs = `unbounded`
 	__Choice__000001_.IsDuplicatedInXSD = false
 
 	__Choice__000002_.Name = ``
-	__Choice__000002_.MinOccurs = `0`
-	__Choice__000002_.MaxOccurs = `1`
 	__Choice__000002_.OuterElementName = ``
 	__Choice__000002_.Order = 0
 	__Choice__000002_.Depth = 0
+	__Choice__000002_.MinOccurs = `0`
+	__Choice__000002_.MaxOccurs = `unbounded`
 	__Choice__000002_.IsDuplicatedInXSD = false
 
 	__Choice__000003_.Name = ``
-	__Choice__000003_.MinOccurs = `1`
-	__Choice__000003_.MaxOccurs = `1`
 	__Choice__000003_.OuterElementName = ``
 	__Choice__000003_.Order = 0
 	__Choice__000003_.Depth = 0
+	__Choice__000003_.MinOccurs = `0`
+	__Choice__000003_.MaxOccurs = `1`
 	__Choice__000003_.IsDuplicatedInXSD = false
 
 	__Choice__000004_.Name = ``
-	__Choice__000004_.MinOccurs = `0`
-	__Choice__000004_.MaxOccurs = `1`
 	__Choice__000004_.OuterElementName = ``
 	__Choice__000004_.Order = 0
 	__Choice__000004_.Depth = 0
+	__Choice__000004_.MinOccurs = `1`
+	__Choice__000004_.MaxOccurs = `1`
 	__Choice__000004_.IsDuplicatedInXSD = false
 
 	__Choice__000005_.Name = ``
-	__Choice__000005_.MinOccurs = `0`
-	__Choice__000005_.MaxOccurs = `1`
 	__Choice__000005_.OuterElementName = ``
 	__Choice__000005_.Order = 0
 	__Choice__000005_.Depth = 0
+	__Choice__000005_.MinOccurs = `1`
+	__Choice__000005_.MaxOccurs = `1`
 	__Choice__000005_.IsDuplicatedInXSD = false
 
 	__Choice__000006_.Name = ``
-	__Choice__000006_.MinOccurs = `1`
-	__Choice__000006_.MaxOccurs = `1`
 	__Choice__000006_.OuterElementName = ``
 	__Choice__000006_.Order = 0
 	__Choice__000006_.Depth = 0
+	__Choice__000006_.MinOccurs = `1`
+	__Choice__000006_.MaxOccurs = `1`
 	__Choice__000006_.IsDuplicatedInXSD = false
 
 	__Choice__000007_.Name = ``
-	__Choice__000007_.MinOccurs = `1`
-	__Choice__000007_.MaxOccurs = `1`
 	__Choice__000007_.OuterElementName = ``
 	__Choice__000007_.Order = 0
 	__Choice__000007_.Depth = 0
+	__Choice__000007_.MinOccurs = `0`
+	__Choice__000007_.MaxOccurs = `unbounded`
 	__Choice__000007_.IsDuplicatedInXSD = false
 
 	__Choice__000008_.Name = ``
-	__Choice__000008_.MinOccurs = `1`
-	__Choice__000008_.MaxOccurs = `1`
 	__Choice__000008_.OuterElementName = ``
 	__Choice__000008_.Order = 0
 	__Choice__000008_.Depth = 0
+	__Choice__000008_.MinOccurs = `0`
+	__Choice__000008_.MaxOccurs = `unbounded`
 	__Choice__000008_.IsDuplicatedInXSD = false
 
 	__Choice__000009_.Name = ``
-	__Choice__000009_.MinOccurs = `1`
-	__Choice__000009_.MaxOccurs = `1`
 	__Choice__000009_.OuterElementName = ``
 	__Choice__000009_.Order = 0
 	__Choice__000009_.Depth = 0
+	__Choice__000009_.MinOccurs = `0`
+	__Choice__000009_.MaxOccurs = `unbounded`
 	__Choice__000009_.IsDuplicatedInXSD = false
 
 	__Choice__000010_.Name = ``
-	__Choice__000010_.MinOccurs = `1`
-	__Choice__000010_.MaxOccurs = `1`
 	__Choice__000010_.OuterElementName = ``
 	__Choice__000010_.Order = 0
 	__Choice__000010_.Depth = 0
+	__Choice__000010_.MinOccurs = `0`
+	__Choice__000010_.MaxOccurs = `unbounded`
 	__Choice__000010_.IsDuplicatedInXSD = false
 
 	__Choice__000011_.Name = ``
-	__Choice__000011_.MinOccurs = `1`
-	__Choice__000011_.MaxOccurs = `1`
 	__Choice__000011_.OuterElementName = ``
 	__Choice__000011_.Order = 0
 	__Choice__000011_.Depth = 0
+	__Choice__000011_.MinOccurs = `1`
+	__Choice__000011_.MaxOccurs = `1`
 	__Choice__000011_.IsDuplicatedInXSD = false
 
 	__Choice__000012_.Name = ``
-	__Choice__000012_.MinOccurs = `0`
-	__Choice__000012_.MaxOccurs = `1`
 	__Choice__000012_.OuterElementName = ``
 	__Choice__000012_.Order = 0
 	__Choice__000012_.Depth = 0
+	__Choice__000012_.MinOccurs = `1`
+	__Choice__000012_.MaxOccurs = `1`
 	__Choice__000012_.IsDuplicatedInXSD = false
 
 	__Choice__000013_.Name = ``
-	__Choice__000013_.MinOccurs = `1`
-	__Choice__000013_.MaxOccurs = `1`
 	__Choice__000013_.OuterElementName = ``
 	__Choice__000013_.Order = 0
 	__Choice__000013_.Depth = 0
+	__Choice__000013_.MinOccurs = `1`
+	__Choice__000013_.MaxOccurs = `1`
 	__Choice__000013_.IsDuplicatedInXSD = false
 
 	__Choice__000014_.Name = ``
-	__Choice__000014_.MinOccurs = `0`
-	__Choice__000014_.MaxOccurs = `unbounded`
 	__Choice__000014_.OuterElementName = ``
 	__Choice__000014_.Order = 0
 	__Choice__000014_.Depth = 0
+	__Choice__000014_.MinOccurs = `0`
+	__Choice__000014_.MaxOccurs = `unbounded`
 	__Choice__000014_.IsDuplicatedInXSD = false
 
 	__Choice__000015_.Name = ``
-	__Choice__000015_.MinOccurs = `0`
-	__Choice__000015_.MaxOccurs = `unbounded`
 	__Choice__000015_.OuterElementName = ``
 	__Choice__000015_.Order = 0
 	__Choice__000015_.Depth = 0
+	__Choice__000015_.MinOccurs = `1`
+	__Choice__000015_.MaxOccurs = `1`
 	__Choice__000015_.IsDuplicatedInXSD = false
 
 	__Choice__000016_.Name = ``
-	__Choice__000016_.MinOccurs = `0`
-	__Choice__000016_.MaxOccurs = `unbounded`
 	__Choice__000016_.OuterElementName = ``
 	__Choice__000016_.Order = 0
 	__Choice__000016_.Depth = 0
+	__Choice__000016_.MinOccurs = `1`
+	__Choice__000016_.MaxOccurs = `1`
 	__Choice__000016_.IsDuplicatedInXSD = false
 
 	__Choice__000017_.Name = ``
-	__Choice__000017_.MinOccurs = `0`
-	__Choice__000017_.MaxOccurs = `unbounded`
 	__Choice__000017_.OuterElementName = ``
 	__Choice__000017_.Order = 0
 	__Choice__000017_.Depth = 0
+	__Choice__000017_.MinOccurs = `1`
+	__Choice__000017_.MaxOccurs = `1`
 	__Choice__000017_.IsDuplicatedInXSD = false
 
 	__Choice__000018_.Name = ``
-	__Choice__000018_.MinOccurs = `0`
-	__Choice__000018_.MaxOccurs = `unbounded`
 	__Choice__000018_.OuterElementName = ``
 	__Choice__000018_.Order = 0
 	__Choice__000018_.Depth = 0
+	__Choice__000018_.MinOccurs = `1`
+	__Choice__000018_.MaxOccurs = `1`
 	__Choice__000018_.IsDuplicatedInXSD = false
 
 	__Choice__000019_.Name = ``
-	__Choice__000019_.MinOccurs = `0`
-	__Choice__000019_.MaxOccurs = `unbounded`
 	__Choice__000019_.OuterElementName = ``
 	__Choice__000019_.Order = 0
 	__Choice__000019_.Depth = 0
+	__Choice__000019_.MinOccurs = `1`
+	__Choice__000019_.MaxOccurs = `1`
 	__Choice__000019_.IsDuplicatedInXSD = false
 
 	__Choice__000020_.Name = ``
-	__Choice__000020_.MinOccurs = `1`
-	__Choice__000020_.MaxOccurs = `1`
 	__Choice__000020_.OuterElementName = ``
 	__Choice__000020_.Order = 0
 	__Choice__000020_.Depth = 0
+	__Choice__000020_.MinOccurs = `0`
+	__Choice__000020_.MaxOccurs = `1`
 	__Choice__000020_.IsDuplicatedInXSD = false
 
 	__Choice__000021_.Name = ``
-	__Choice__000021_.MinOccurs = `1`
-	__Choice__000021_.MaxOccurs = `1`
 	__Choice__000021_.OuterElementName = ``
 	__Choice__000021_.Order = 0
 	__Choice__000021_.Depth = 0
+	__Choice__000021_.MinOccurs = `0`
+	__Choice__000021_.MaxOccurs = `1`
 	__Choice__000021_.IsDuplicatedInXSD = false
 
 	__Choice__000022_.Name = ``
-	__Choice__000022_.MinOccurs = `1`
-	__Choice__000022_.MaxOccurs = `1`
 	__Choice__000022_.OuterElementName = ``
 	__Choice__000022_.Order = 0
 	__Choice__000022_.Depth = 0
+	__Choice__000022_.MinOccurs = `0`
+	__Choice__000022_.MaxOccurs = `1`
 	__Choice__000022_.IsDuplicatedInXSD = false
 
 	__Choice__000023_.Name = ``
-	__Choice__000023_.MinOccurs = `0`
-	__Choice__000023_.MaxOccurs = `1`
 	__Choice__000023_.OuterElementName = ``
 	__Choice__000023_.Order = 0
 	__Choice__000023_.Depth = 0
+	__Choice__000023_.MinOccurs = `0`
+	__Choice__000023_.MaxOccurs = `unbounded`
 	__Choice__000023_.IsDuplicatedInXSD = false
 
 	__Choice__000024_.Name = ``
-	__Choice__000024_.MinOccurs = `1`
-	__Choice__000024_.MaxOccurs = `1`
 	__Choice__000024_.OuterElementName = ``
 	__Choice__000024_.Order = 0
 	__Choice__000024_.Depth = 0
+	__Choice__000024_.MinOccurs = `1`
+	__Choice__000024_.MaxOccurs = `1`
 	__Choice__000024_.IsDuplicatedInXSD = false
 
 	__Choice__000025_.Name = ``
-	__Choice__000025_.MinOccurs = `1`
-	__Choice__000025_.MaxOccurs = `1`
 	__Choice__000025_.OuterElementName = ``
 	__Choice__000025_.Order = 0
 	__Choice__000025_.Depth = 0
+	__Choice__000025_.MinOccurs = `0`
+	__Choice__000025_.MaxOccurs = `unbounded`
 	__Choice__000025_.IsDuplicatedInXSD = false
 
 	__Choice__000026_.Name = ``
-	__Choice__000026_.MinOccurs = `1`
-	__Choice__000026_.MaxOccurs = `1`
 	__Choice__000026_.OuterElementName = ``
 	__Choice__000026_.Order = 0
 	__Choice__000026_.Depth = 0
+	__Choice__000026_.MinOccurs = `0`
+	__Choice__000026_.MaxOccurs = `unbounded`
 	__Choice__000026_.IsDuplicatedInXSD = false
 
 	__Choice__000027_.Name = ``
-	__Choice__000027_.MinOccurs = `0`
-	__Choice__000027_.MaxOccurs = `unbounded`
 	__Choice__000027_.OuterElementName = ``
 	__Choice__000027_.Order = 0
 	__Choice__000027_.Depth = 0
+	__Choice__000027_.MinOccurs = `1`
+	__Choice__000027_.MaxOccurs = `1`
 	__Choice__000027_.IsDuplicatedInXSD = false
 
 	__Choice__000028_.Name = ``
-	__Choice__000028_.MinOccurs = `0`
-	__Choice__000028_.MaxOccurs = `unbounded`
 	__Choice__000028_.OuterElementName = ``
 	__Choice__000028_.Order = 0
 	__Choice__000028_.Depth = 0
+	__Choice__000028_.MinOccurs = `1`
+	__Choice__000028_.MaxOccurs = `1`
 	__Choice__000028_.IsDuplicatedInXSD = false
 
 	__Choice__000029_.Name = ``
-	__Choice__000029_.MinOccurs = `0`
-	__Choice__000029_.MaxOccurs = `unbounded`
 	__Choice__000029_.OuterElementName = ``
 	__Choice__000029_.Order = 0
 	__Choice__000029_.Depth = 0
+	__Choice__000029_.MinOccurs = `1`
+	__Choice__000029_.MaxOccurs = `1`
 	__Choice__000029_.IsDuplicatedInXSD = false
 
 	__Choice__000030_.Name = ``
-	__Choice__000030_.MinOccurs = `1`
-	__Choice__000030_.MaxOccurs = `1`
 	__Choice__000030_.OuterElementName = ``
 	__Choice__000030_.Order = 0
 	__Choice__000030_.Depth = 0
+	__Choice__000030_.MinOccurs = `1`
+	__Choice__000030_.MaxOccurs = `1`
 	__Choice__000030_.IsDuplicatedInXSD = false
 
 	__Choice__000031_.Name = ``
-	__Choice__000031_.MinOccurs = `0`
-	__Choice__000031_.MaxOccurs = `unbounded`
 	__Choice__000031_.OuterElementName = ``
 	__Choice__000031_.Order = 0
 	__Choice__000031_.Depth = 0
+	__Choice__000031_.MinOccurs = `1`
+	__Choice__000031_.MaxOccurs = `1`
 	__Choice__000031_.IsDuplicatedInXSD = false
 
 	__Choice__000032_.Name = ``
-	__Choice__000032_.MinOccurs = `0`
-	__Choice__000032_.MaxOccurs = `unbounded`
 	__Choice__000032_.OuterElementName = ``
 	__Choice__000032_.Order = 0
 	__Choice__000032_.Depth = 0
+	__Choice__000032_.MinOccurs = `0`
+	__Choice__000032_.MaxOccurs = `unbounded`
 	__Choice__000032_.IsDuplicatedInXSD = false
 
 	__Choice__000033_.Name = ``
-	__Choice__000033_.MinOccurs = `1`
-	__Choice__000033_.MaxOccurs = `1`
 	__Choice__000033_.OuterElementName = ``
 	__Choice__000033_.Order = 0
 	__Choice__000033_.Depth = 0
+	__Choice__000033_.MinOccurs = `0`
+	__Choice__000033_.MaxOccurs = `unbounded`
 	__Choice__000033_.IsDuplicatedInXSD = false
 
 	__Choice__000034_.Name = ``
-	__Choice__000034_.MinOccurs = `1`
-	__Choice__000034_.MaxOccurs = `1`
 	__Choice__000034_.OuterElementName = ``
 	__Choice__000034_.Order = 0
 	__Choice__000034_.Depth = 0
+	__Choice__000034_.MinOccurs = `0`
+	__Choice__000034_.MaxOccurs = `unbounded`
 	__Choice__000034_.IsDuplicatedInXSD = false
 
 	__Choice__000035_.Name = ``
-	__Choice__000035_.MinOccurs = `1`
-	__Choice__000035_.MaxOccurs = `1`
 	__Choice__000035_.OuterElementName = ``
 	__Choice__000035_.Order = 0
 	__Choice__000035_.Depth = 0
+	__Choice__000035_.MinOccurs = `0`
+	__Choice__000035_.MaxOccurs = `1`
 	__Choice__000035_.IsDuplicatedInXSD = false
 
 	__Choice__000036_.Name = ``
-	__Choice__000036_.MinOccurs = `0`
-	__Choice__000036_.MaxOccurs = `unbounded`
 	__Choice__000036_.OuterElementName = ``
 	__Choice__000036_.Order = 0
 	__Choice__000036_.Depth = 0
+	__Choice__000036_.MinOccurs = `0`
+	__Choice__000036_.MaxOccurs = `unbounded`
 	__Choice__000036_.IsDuplicatedInXSD = false
 
 	__Choice__000037_.Name = ``
-	__Choice__000037_.MinOccurs = `1`
-	__Choice__000037_.MaxOccurs = `1`
 	__Choice__000037_.OuterElementName = ``
 	__Choice__000037_.Order = 0
 	__Choice__000037_.Depth = 0
+	__Choice__000037_.MinOccurs = `1`
+	__Choice__000037_.MaxOccurs = `1`
 	__Choice__000037_.IsDuplicatedInXSD = false
 
 	__Choice__000038_.Name = ``
-	__Choice__000038_.MinOccurs = `1`
-	__Choice__000038_.MaxOccurs = `1`
 	__Choice__000038_.OuterElementName = ``
 	__Choice__000038_.Order = 0
 	__Choice__000038_.Depth = 0
+	__Choice__000038_.MinOccurs = `0`
+	__Choice__000038_.MaxOccurs = `1`
 	__Choice__000038_.IsDuplicatedInXSD = false
 
 	__Choice__000039_.Name = ``
-	__Choice__000039_.MinOccurs = `0`
-	__Choice__000039_.MaxOccurs = `1`
 	__Choice__000039_.OuterElementName = ``
 	__Choice__000039_.Order = 0
 	__Choice__000039_.Depth = 0
+	__Choice__000039_.MinOccurs = `0`
+	__Choice__000039_.MaxOccurs = `1`
 	__Choice__000039_.IsDuplicatedInXSD = false
 
 	__Choice__000040_.Name = ``
-	__Choice__000040_.MinOccurs = `1`
-	__Choice__000040_.MaxOccurs = `1`
 	__Choice__000040_.OuterElementName = ``
 	__Choice__000040_.Order = 0
 	__Choice__000040_.Depth = 0
+	__Choice__000040_.MinOccurs = `0`
+	__Choice__000040_.MaxOccurs = `1`
 	__Choice__000040_.IsDuplicatedInXSD = false
 
 	__Choice__000041_.Name = ``
-	__Choice__000041_.MinOccurs = `0`
-	__Choice__000041_.MaxOccurs = `unbounded`
 	__Choice__000041_.OuterElementName = ``
 	__Choice__000041_.Order = 0
 	__Choice__000041_.Depth = 0
+	__Choice__000041_.MinOccurs = `1`
+	__Choice__000041_.MaxOccurs = `1`
 	__Choice__000041_.IsDuplicatedInXSD = false
 
 	__Choice__000042_.Name = ``
-	__Choice__000042_.MinOccurs = `1`
-	__Choice__000042_.MaxOccurs = `1`
 	__Choice__000042_.OuterElementName = ``
 	__Choice__000042_.Order = 0
 	__Choice__000042_.Depth = 0
+	__Choice__000042_.MinOccurs = `1`
+	__Choice__000042_.MaxOccurs = `1`
 	__Choice__000042_.IsDuplicatedInXSD = false
 
 	__Choice__000043_.Name = ``
-	__Choice__000043_.MinOccurs = `0`
-	__Choice__000043_.MaxOccurs = `1`
 	__Choice__000043_.OuterElementName = ``
 	__Choice__000043_.Order = 0
 	__Choice__000043_.Depth = 0
+	__Choice__000043_.MinOccurs = `1`
+	__Choice__000043_.MaxOccurs = `1`
 	__Choice__000043_.IsDuplicatedInXSD = false
 
 	__Choice__000044_.Name = ``
-	__Choice__000044_.MinOccurs = `0`
-	__Choice__000044_.MaxOccurs = `unbounded`
 	__Choice__000044_.OuterElementName = ``
 	__Choice__000044_.Order = 0
 	__Choice__000044_.Depth = 0
+	__Choice__000044_.MinOccurs = `1`
+	__Choice__000044_.MaxOccurs = `1`
 	__Choice__000044_.IsDuplicatedInXSD = false
 
 	__Choice__000045_.Name = ``
-	__Choice__000045_.MinOccurs = `1`
-	__Choice__000045_.MaxOccurs = `1`
 	__Choice__000045_.OuterElementName = ``
 	__Choice__000045_.Order = 0
 	__Choice__000045_.Depth = 0
+	__Choice__000045_.MinOccurs = `1`
+	__Choice__000045_.MaxOccurs = `1`
 	__Choice__000045_.IsDuplicatedInXSD = false
 
 	__ComplexType__000000_ALTERNATIVE_ID.Name = `ALTERNATIVE-ID`
@@ -2776,6 +2776,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000000_ALTERNATIVE_ID.IsAnonymous = false
 	__ComplexType__000000_ALTERNATIVE_ID.NameXSD = `ALTERNATIVE-ID`
 	__ComplexType__000000_ALTERNATIVE_ID.OuterElementName = `ALTERNATIVE-ID`
+	__ComplexType__000000_ALTERNATIVE_ID.Order = 0
+	__ComplexType__000000_ALTERNATIVE_ID.Depth = 0
+	__ComplexType__000000_ALTERNATIVE_ID.MinOccurs = ``
+	__ComplexType__000000_ALTERNATIVE_ID.MaxOccurs = ``
+	__ComplexType__000000_ALTERNATIVE_ID.IsDuplicatedInXSD = false
 
 	__ComplexType__000001_ATTRIBUTE_DEFINITION_BOOLEAN.Name = `ATTRIBUTE-DEFINITION-BOOLEAN`
 	__ComplexType__000001_ATTRIBUTE_DEFINITION_BOOLEAN.HasNameConflict = false
@@ -2783,6 +2788,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000001_ATTRIBUTE_DEFINITION_BOOLEAN.IsAnonymous = false
 	__ComplexType__000001_ATTRIBUTE_DEFINITION_BOOLEAN.NameXSD = `ATTRIBUTE-DEFINITION-BOOLEAN`
 	__ComplexType__000001_ATTRIBUTE_DEFINITION_BOOLEAN.OuterElementName = `ATTRIBUTE-DEFINITION-BOOLEAN`
+	__ComplexType__000001_ATTRIBUTE_DEFINITION_BOOLEAN.Order = 0
+	__ComplexType__000001_ATTRIBUTE_DEFINITION_BOOLEAN.Depth = 0
+	__ComplexType__000001_ATTRIBUTE_DEFINITION_BOOLEAN.MinOccurs = ``
+	__ComplexType__000001_ATTRIBUTE_DEFINITION_BOOLEAN.MaxOccurs = ``
+	__ComplexType__000001_ATTRIBUTE_DEFINITION_BOOLEAN.IsDuplicatedInXSD = false
 
 	__ComplexType__000002_ATTRIBUTE_DEFINITION_DATE.Name = `ATTRIBUTE-DEFINITION-DATE`
 	__ComplexType__000002_ATTRIBUTE_DEFINITION_DATE.HasNameConflict = false
@@ -2790,6 +2800,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000002_ATTRIBUTE_DEFINITION_DATE.IsAnonymous = false
 	__ComplexType__000002_ATTRIBUTE_DEFINITION_DATE.NameXSD = `ATTRIBUTE-DEFINITION-DATE`
 	__ComplexType__000002_ATTRIBUTE_DEFINITION_DATE.OuterElementName = `ATTRIBUTE-DEFINITION-DATE`
+	__ComplexType__000002_ATTRIBUTE_DEFINITION_DATE.Order = 0
+	__ComplexType__000002_ATTRIBUTE_DEFINITION_DATE.Depth = 0
+	__ComplexType__000002_ATTRIBUTE_DEFINITION_DATE.MinOccurs = ``
+	__ComplexType__000002_ATTRIBUTE_DEFINITION_DATE.MaxOccurs = ``
+	__ComplexType__000002_ATTRIBUTE_DEFINITION_DATE.IsDuplicatedInXSD = false
 
 	__ComplexType__000003_ATTRIBUTE_DEFINITION_ENUMERATION.Name = `ATTRIBUTE-DEFINITION-ENUMERATION`
 	__ComplexType__000003_ATTRIBUTE_DEFINITION_ENUMERATION.HasNameConflict = false
@@ -2797,6 +2812,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000003_ATTRIBUTE_DEFINITION_ENUMERATION.IsAnonymous = false
 	__ComplexType__000003_ATTRIBUTE_DEFINITION_ENUMERATION.NameXSD = `ATTRIBUTE-DEFINITION-ENUMERATION`
 	__ComplexType__000003_ATTRIBUTE_DEFINITION_ENUMERATION.OuterElementName = `ATTRIBUTE-DEFINITION-ENUMERATION`
+	__ComplexType__000003_ATTRIBUTE_DEFINITION_ENUMERATION.Order = 0
+	__ComplexType__000003_ATTRIBUTE_DEFINITION_ENUMERATION.Depth = 0
+	__ComplexType__000003_ATTRIBUTE_DEFINITION_ENUMERATION.MinOccurs = ``
+	__ComplexType__000003_ATTRIBUTE_DEFINITION_ENUMERATION.MaxOccurs = ``
+	__ComplexType__000003_ATTRIBUTE_DEFINITION_ENUMERATION.IsDuplicatedInXSD = false
 
 	__ComplexType__000004_ATTRIBUTE_DEFINITION_INTEGER.Name = `ATTRIBUTE-DEFINITION-INTEGER`
 	__ComplexType__000004_ATTRIBUTE_DEFINITION_INTEGER.HasNameConflict = false
@@ -2804,6 +2824,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000004_ATTRIBUTE_DEFINITION_INTEGER.IsAnonymous = false
 	__ComplexType__000004_ATTRIBUTE_DEFINITION_INTEGER.NameXSD = `ATTRIBUTE-DEFINITION-INTEGER`
 	__ComplexType__000004_ATTRIBUTE_DEFINITION_INTEGER.OuterElementName = `ATTRIBUTE-DEFINITION-INTEGER`
+	__ComplexType__000004_ATTRIBUTE_DEFINITION_INTEGER.Order = 0
+	__ComplexType__000004_ATTRIBUTE_DEFINITION_INTEGER.Depth = 0
+	__ComplexType__000004_ATTRIBUTE_DEFINITION_INTEGER.MinOccurs = ``
+	__ComplexType__000004_ATTRIBUTE_DEFINITION_INTEGER.MaxOccurs = ``
+	__ComplexType__000004_ATTRIBUTE_DEFINITION_INTEGER.IsDuplicatedInXSD = false
 
 	__ComplexType__000005_ATTRIBUTE_DEFINITION_REAL.Name = `ATTRIBUTE-DEFINITION-REAL`
 	__ComplexType__000005_ATTRIBUTE_DEFINITION_REAL.HasNameConflict = false
@@ -2811,6 +2836,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000005_ATTRIBUTE_DEFINITION_REAL.IsAnonymous = false
 	__ComplexType__000005_ATTRIBUTE_DEFINITION_REAL.NameXSD = `ATTRIBUTE-DEFINITION-REAL`
 	__ComplexType__000005_ATTRIBUTE_DEFINITION_REAL.OuterElementName = `ATTRIBUTE-DEFINITION-REAL`
+	__ComplexType__000005_ATTRIBUTE_DEFINITION_REAL.Order = 0
+	__ComplexType__000005_ATTRIBUTE_DEFINITION_REAL.Depth = 0
+	__ComplexType__000005_ATTRIBUTE_DEFINITION_REAL.MinOccurs = ``
+	__ComplexType__000005_ATTRIBUTE_DEFINITION_REAL.MaxOccurs = ``
+	__ComplexType__000005_ATTRIBUTE_DEFINITION_REAL.IsDuplicatedInXSD = false
 
 	__ComplexType__000006_ATTRIBUTE_DEFINITION_STRING.Name = `ATTRIBUTE-DEFINITION-STRING`
 	__ComplexType__000006_ATTRIBUTE_DEFINITION_STRING.HasNameConflict = false
@@ -2818,6 +2848,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000006_ATTRIBUTE_DEFINITION_STRING.IsAnonymous = false
 	__ComplexType__000006_ATTRIBUTE_DEFINITION_STRING.NameXSD = `ATTRIBUTE-DEFINITION-STRING`
 	__ComplexType__000006_ATTRIBUTE_DEFINITION_STRING.OuterElementName = `ATTRIBUTE-DEFINITION-STRING`
+	__ComplexType__000006_ATTRIBUTE_DEFINITION_STRING.Order = 0
+	__ComplexType__000006_ATTRIBUTE_DEFINITION_STRING.Depth = 0
+	__ComplexType__000006_ATTRIBUTE_DEFINITION_STRING.MinOccurs = ``
+	__ComplexType__000006_ATTRIBUTE_DEFINITION_STRING.MaxOccurs = ``
+	__ComplexType__000006_ATTRIBUTE_DEFINITION_STRING.IsDuplicatedInXSD = false
 
 	__ComplexType__000007_ATTRIBUTE_DEFINITION_XHTML.Name = `ATTRIBUTE-DEFINITION-XHTML`
 	__ComplexType__000007_ATTRIBUTE_DEFINITION_XHTML.HasNameConflict = false
@@ -2825,6 +2860,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000007_ATTRIBUTE_DEFINITION_XHTML.IsAnonymous = false
 	__ComplexType__000007_ATTRIBUTE_DEFINITION_XHTML.NameXSD = `ATTRIBUTE-DEFINITION-XHTML`
 	__ComplexType__000007_ATTRIBUTE_DEFINITION_XHTML.OuterElementName = `ATTRIBUTE-DEFINITION-XHTML`
+	__ComplexType__000007_ATTRIBUTE_DEFINITION_XHTML.Order = 0
+	__ComplexType__000007_ATTRIBUTE_DEFINITION_XHTML.Depth = 0
+	__ComplexType__000007_ATTRIBUTE_DEFINITION_XHTML.MinOccurs = ``
+	__ComplexType__000007_ATTRIBUTE_DEFINITION_XHTML.MaxOccurs = ``
+	__ComplexType__000007_ATTRIBUTE_DEFINITION_XHTML.IsDuplicatedInXSD = false
 
 	__ComplexType__000008_ATTRIBUTE_VALUE_BOOLEAN.Name = `ATTRIBUTE-VALUE-BOOLEAN`
 	__ComplexType__000008_ATTRIBUTE_VALUE_BOOLEAN.HasNameConflict = false
@@ -2832,6 +2872,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000008_ATTRIBUTE_VALUE_BOOLEAN.IsAnonymous = false
 	__ComplexType__000008_ATTRIBUTE_VALUE_BOOLEAN.NameXSD = `ATTRIBUTE-VALUE-BOOLEAN`
 	__ComplexType__000008_ATTRIBUTE_VALUE_BOOLEAN.OuterElementName = `ATTRIBUTE-VALUE-BOOLEAN`
+	__ComplexType__000008_ATTRIBUTE_VALUE_BOOLEAN.Order = 0
+	__ComplexType__000008_ATTRIBUTE_VALUE_BOOLEAN.Depth = 0
+	__ComplexType__000008_ATTRIBUTE_VALUE_BOOLEAN.MinOccurs = ``
+	__ComplexType__000008_ATTRIBUTE_VALUE_BOOLEAN.MaxOccurs = ``
+	__ComplexType__000008_ATTRIBUTE_VALUE_BOOLEAN.IsDuplicatedInXSD = false
 
 	__ComplexType__000009_ATTRIBUTE_VALUE_DATE.Name = `ATTRIBUTE-VALUE-DATE`
 	__ComplexType__000009_ATTRIBUTE_VALUE_DATE.HasNameConflict = false
@@ -2839,6 +2884,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000009_ATTRIBUTE_VALUE_DATE.IsAnonymous = false
 	__ComplexType__000009_ATTRIBUTE_VALUE_DATE.NameXSD = `ATTRIBUTE-VALUE-DATE`
 	__ComplexType__000009_ATTRIBUTE_VALUE_DATE.OuterElementName = `ATTRIBUTE-VALUE-DATE`
+	__ComplexType__000009_ATTRIBUTE_VALUE_DATE.Order = 0
+	__ComplexType__000009_ATTRIBUTE_VALUE_DATE.Depth = 0
+	__ComplexType__000009_ATTRIBUTE_VALUE_DATE.MinOccurs = ``
+	__ComplexType__000009_ATTRIBUTE_VALUE_DATE.MaxOccurs = ``
+	__ComplexType__000009_ATTRIBUTE_VALUE_DATE.IsDuplicatedInXSD = false
 
 	__ComplexType__000010_ATTRIBUTE_VALUE_ENUMERATION.Name = `ATTRIBUTE-VALUE-ENUMERATION`
 	__ComplexType__000010_ATTRIBUTE_VALUE_ENUMERATION.HasNameConflict = false
@@ -2846,6 +2896,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000010_ATTRIBUTE_VALUE_ENUMERATION.IsAnonymous = false
 	__ComplexType__000010_ATTRIBUTE_VALUE_ENUMERATION.NameXSD = `ATTRIBUTE-VALUE-ENUMERATION`
 	__ComplexType__000010_ATTRIBUTE_VALUE_ENUMERATION.OuterElementName = `ATTRIBUTE-VALUE-ENUMERATION`
+	__ComplexType__000010_ATTRIBUTE_VALUE_ENUMERATION.Order = 0
+	__ComplexType__000010_ATTRIBUTE_VALUE_ENUMERATION.Depth = 0
+	__ComplexType__000010_ATTRIBUTE_VALUE_ENUMERATION.MinOccurs = ``
+	__ComplexType__000010_ATTRIBUTE_VALUE_ENUMERATION.MaxOccurs = ``
+	__ComplexType__000010_ATTRIBUTE_VALUE_ENUMERATION.IsDuplicatedInXSD = false
 
 	__ComplexType__000011_ATTRIBUTE_VALUE_INTEGER.Name = `ATTRIBUTE-VALUE-INTEGER`
 	__ComplexType__000011_ATTRIBUTE_VALUE_INTEGER.HasNameConflict = false
@@ -2853,6 +2908,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000011_ATTRIBUTE_VALUE_INTEGER.IsAnonymous = false
 	__ComplexType__000011_ATTRIBUTE_VALUE_INTEGER.NameXSD = `ATTRIBUTE-VALUE-INTEGER`
 	__ComplexType__000011_ATTRIBUTE_VALUE_INTEGER.OuterElementName = `ATTRIBUTE-VALUE-INTEGER`
+	__ComplexType__000011_ATTRIBUTE_VALUE_INTEGER.Order = 0
+	__ComplexType__000011_ATTRIBUTE_VALUE_INTEGER.Depth = 0
+	__ComplexType__000011_ATTRIBUTE_VALUE_INTEGER.MinOccurs = ``
+	__ComplexType__000011_ATTRIBUTE_VALUE_INTEGER.MaxOccurs = ``
+	__ComplexType__000011_ATTRIBUTE_VALUE_INTEGER.IsDuplicatedInXSD = false
 
 	__ComplexType__000012_ATTRIBUTE_VALUE_REAL.Name = `ATTRIBUTE-VALUE-REAL`
 	__ComplexType__000012_ATTRIBUTE_VALUE_REAL.HasNameConflict = false
@@ -2860,6 +2920,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000012_ATTRIBUTE_VALUE_REAL.IsAnonymous = false
 	__ComplexType__000012_ATTRIBUTE_VALUE_REAL.NameXSD = `ATTRIBUTE-VALUE-REAL`
 	__ComplexType__000012_ATTRIBUTE_VALUE_REAL.OuterElementName = `ATTRIBUTE-VALUE-REAL`
+	__ComplexType__000012_ATTRIBUTE_VALUE_REAL.Order = 0
+	__ComplexType__000012_ATTRIBUTE_VALUE_REAL.Depth = 0
+	__ComplexType__000012_ATTRIBUTE_VALUE_REAL.MinOccurs = ``
+	__ComplexType__000012_ATTRIBUTE_VALUE_REAL.MaxOccurs = ``
+	__ComplexType__000012_ATTRIBUTE_VALUE_REAL.IsDuplicatedInXSD = false
 
 	__ComplexType__000013_ATTRIBUTE_VALUE_STRING.Name = `ATTRIBUTE-VALUE-STRING`
 	__ComplexType__000013_ATTRIBUTE_VALUE_STRING.HasNameConflict = false
@@ -2867,6 +2932,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000013_ATTRIBUTE_VALUE_STRING.IsAnonymous = false
 	__ComplexType__000013_ATTRIBUTE_VALUE_STRING.NameXSD = `ATTRIBUTE-VALUE-STRING`
 	__ComplexType__000013_ATTRIBUTE_VALUE_STRING.OuterElementName = `ATTRIBUTE-VALUE-STRING`
+	__ComplexType__000013_ATTRIBUTE_VALUE_STRING.Order = 0
+	__ComplexType__000013_ATTRIBUTE_VALUE_STRING.Depth = 0
+	__ComplexType__000013_ATTRIBUTE_VALUE_STRING.MinOccurs = ``
+	__ComplexType__000013_ATTRIBUTE_VALUE_STRING.MaxOccurs = ``
+	__ComplexType__000013_ATTRIBUTE_VALUE_STRING.IsDuplicatedInXSD = false
 
 	__ComplexType__000014_ATTRIBUTE_VALUE_XHTML.Name = `ATTRIBUTE-VALUE-XHTML`
 	__ComplexType__000014_ATTRIBUTE_VALUE_XHTML.HasNameConflict = false
@@ -2874,6 +2944,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000014_ATTRIBUTE_VALUE_XHTML.IsAnonymous = false
 	__ComplexType__000014_ATTRIBUTE_VALUE_XHTML.NameXSD = `ATTRIBUTE-VALUE-XHTML`
 	__ComplexType__000014_ATTRIBUTE_VALUE_XHTML.OuterElementName = `ATTRIBUTE-VALUE-XHTML`
+	__ComplexType__000014_ATTRIBUTE_VALUE_XHTML.Order = 0
+	__ComplexType__000014_ATTRIBUTE_VALUE_XHTML.Depth = 0
+	__ComplexType__000014_ATTRIBUTE_VALUE_XHTML.MinOccurs = ``
+	__ComplexType__000014_ATTRIBUTE_VALUE_XHTML.MaxOccurs = ``
+	__ComplexType__000014_ATTRIBUTE_VALUE_XHTML.IsDuplicatedInXSD = false
 
 	__ComplexType__000015_A_ALTERNATIVE_ID.Name = `A_ALTERNATIVE-ID`
 	__ComplexType__000015_A_ALTERNATIVE_ID.HasNameConflict = false
@@ -2881,6 +2956,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000015_A_ALTERNATIVE_ID.IsAnonymous = true
 	__ComplexType__000015_A_ALTERNATIVE_ID.NameXSD = ``
 	__ComplexType__000015_A_ALTERNATIVE_ID.OuterElementName = `A_ALTERNATIVE-ID`
+	__ComplexType__000015_A_ALTERNATIVE_ID.Order = 0
+	__ComplexType__000015_A_ALTERNATIVE_ID.Depth = 0
+	__ComplexType__000015_A_ALTERNATIVE_ID.MinOccurs = ``
+	__ComplexType__000015_A_ALTERNATIVE_ID.MaxOccurs = ``
+	__ComplexType__000015_A_ALTERNATIVE_ID.IsDuplicatedInXSD = false
 
 	__ComplexType__000016_A_ATTRIBUTE_DEFINITION_BOOLEAN_REF.Name = `A_ATTRIBUTE-DEFINITION-BOOLEAN-REF`
 	__ComplexType__000016_A_ATTRIBUTE_DEFINITION_BOOLEAN_REF.HasNameConflict = false
@@ -2888,6 +2968,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000016_A_ATTRIBUTE_DEFINITION_BOOLEAN_REF.IsAnonymous = true
 	__ComplexType__000016_A_ATTRIBUTE_DEFINITION_BOOLEAN_REF.NameXSD = ``
 	__ComplexType__000016_A_ATTRIBUTE_DEFINITION_BOOLEAN_REF.OuterElementName = `A_ATTRIBUTE-DEFINITION-BOOLEAN-REF`
+	__ComplexType__000016_A_ATTRIBUTE_DEFINITION_BOOLEAN_REF.Order = 0
+	__ComplexType__000016_A_ATTRIBUTE_DEFINITION_BOOLEAN_REF.Depth = 0
+	__ComplexType__000016_A_ATTRIBUTE_DEFINITION_BOOLEAN_REF.MinOccurs = ``
+	__ComplexType__000016_A_ATTRIBUTE_DEFINITION_BOOLEAN_REF.MaxOccurs = ``
+	__ComplexType__000016_A_ATTRIBUTE_DEFINITION_BOOLEAN_REF.IsDuplicatedInXSD = false
 
 	__ComplexType__000017_A_ATTRIBUTE_DEFINITION_DATE_REF.Name = `A_ATTRIBUTE-DEFINITION-DATE-REF`
 	__ComplexType__000017_A_ATTRIBUTE_DEFINITION_DATE_REF.HasNameConflict = false
@@ -2895,6 +2980,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000017_A_ATTRIBUTE_DEFINITION_DATE_REF.IsAnonymous = true
 	__ComplexType__000017_A_ATTRIBUTE_DEFINITION_DATE_REF.NameXSD = ``
 	__ComplexType__000017_A_ATTRIBUTE_DEFINITION_DATE_REF.OuterElementName = `A_ATTRIBUTE-DEFINITION-DATE-REF`
+	__ComplexType__000017_A_ATTRIBUTE_DEFINITION_DATE_REF.Order = 0
+	__ComplexType__000017_A_ATTRIBUTE_DEFINITION_DATE_REF.Depth = 0
+	__ComplexType__000017_A_ATTRIBUTE_DEFINITION_DATE_REF.MinOccurs = ``
+	__ComplexType__000017_A_ATTRIBUTE_DEFINITION_DATE_REF.MaxOccurs = ``
+	__ComplexType__000017_A_ATTRIBUTE_DEFINITION_DATE_REF.IsDuplicatedInXSD = false
 
 	__ComplexType__000018_A_ATTRIBUTE_DEFINITION_ENUMERATION_REF.Name = `A_ATTRIBUTE-DEFINITION-ENUMERATION-REF`
 	__ComplexType__000018_A_ATTRIBUTE_DEFINITION_ENUMERATION_REF.HasNameConflict = false
@@ -2902,6 +2992,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000018_A_ATTRIBUTE_DEFINITION_ENUMERATION_REF.IsAnonymous = true
 	__ComplexType__000018_A_ATTRIBUTE_DEFINITION_ENUMERATION_REF.NameXSD = ``
 	__ComplexType__000018_A_ATTRIBUTE_DEFINITION_ENUMERATION_REF.OuterElementName = `A_ATTRIBUTE-DEFINITION-ENUMERATION-REF`
+	__ComplexType__000018_A_ATTRIBUTE_DEFINITION_ENUMERATION_REF.Order = 0
+	__ComplexType__000018_A_ATTRIBUTE_DEFINITION_ENUMERATION_REF.Depth = 0
+	__ComplexType__000018_A_ATTRIBUTE_DEFINITION_ENUMERATION_REF.MinOccurs = ``
+	__ComplexType__000018_A_ATTRIBUTE_DEFINITION_ENUMERATION_REF.MaxOccurs = ``
+	__ComplexType__000018_A_ATTRIBUTE_DEFINITION_ENUMERATION_REF.IsDuplicatedInXSD = false
 
 	__ComplexType__000019_A_ATTRIBUTE_DEFINITION_INTEGER_REF.Name = `A_ATTRIBUTE-DEFINITION-INTEGER-REF`
 	__ComplexType__000019_A_ATTRIBUTE_DEFINITION_INTEGER_REF.HasNameConflict = false
@@ -2909,6 +3004,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000019_A_ATTRIBUTE_DEFINITION_INTEGER_REF.IsAnonymous = true
 	__ComplexType__000019_A_ATTRIBUTE_DEFINITION_INTEGER_REF.NameXSD = ``
 	__ComplexType__000019_A_ATTRIBUTE_DEFINITION_INTEGER_REF.OuterElementName = `A_ATTRIBUTE-DEFINITION-INTEGER-REF`
+	__ComplexType__000019_A_ATTRIBUTE_DEFINITION_INTEGER_REF.Order = 0
+	__ComplexType__000019_A_ATTRIBUTE_DEFINITION_INTEGER_REF.Depth = 0
+	__ComplexType__000019_A_ATTRIBUTE_DEFINITION_INTEGER_REF.MinOccurs = ``
+	__ComplexType__000019_A_ATTRIBUTE_DEFINITION_INTEGER_REF.MaxOccurs = ``
+	__ComplexType__000019_A_ATTRIBUTE_DEFINITION_INTEGER_REF.IsDuplicatedInXSD = false
 
 	__ComplexType__000020_A_ATTRIBUTE_DEFINITION_REAL_REF.Name = `A_ATTRIBUTE-DEFINITION-REAL-REF`
 	__ComplexType__000020_A_ATTRIBUTE_DEFINITION_REAL_REF.HasNameConflict = false
@@ -2916,6 +3016,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000020_A_ATTRIBUTE_DEFINITION_REAL_REF.IsAnonymous = true
 	__ComplexType__000020_A_ATTRIBUTE_DEFINITION_REAL_REF.NameXSD = ``
 	__ComplexType__000020_A_ATTRIBUTE_DEFINITION_REAL_REF.OuterElementName = `A_ATTRIBUTE-DEFINITION-REAL-REF`
+	__ComplexType__000020_A_ATTRIBUTE_DEFINITION_REAL_REF.Order = 0
+	__ComplexType__000020_A_ATTRIBUTE_DEFINITION_REAL_REF.Depth = 0
+	__ComplexType__000020_A_ATTRIBUTE_DEFINITION_REAL_REF.MinOccurs = ``
+	__ComplexType__000020_A_ATTRIBUTE_DEFINITION_REAL_REF.MaxOccurs = ``
+	__ComplexType__000020_A_ATTRIBUTE_DEFINITION_REAL_REF.IsDuplicatedInXSD = false
 
 	__ComplexType__000021_A_ATTRIBUTE_DEFINITION_STRING_REF.Name = `A_ATTRIBUTE-DEFINITION-STRING-REF`
 	__ComplexType__000021_A_ATTRIBUTE_DEFINITION_STRING_REF.HasNameConflict = false
@@ -2923,6 +3028,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000021_A_ATTRIBUTE_DEFINITION_STRING_REF.IsAnonymous = true
 	__ComplexType__000021_A_ATTRIBUTE_DEFINITION_STRING_REF.NameXSD = ``
 	__ComplexType__000021_A_ATTRIBUTE_DEFINITION_STRING_REF.OuterElementName = `A_ATTRIBUTE-DEFINITION-STRING-REF`
+	__ComplexType__000021_A_ATTRIBUTE_DEFINITION_STRING_REF.Order = 0
+	__ComplexType__000021_A_ATTRIBUTE_DEFINITION_STRING_REF.Depth = 0
+	__ComplexType__000021_A_ATTRIBUTE_DEFINITION_STRING_REF.MinOccurs = ``
+	__ComplexType__000021_A_ATTRIBUTE_DEFINITION_STRING_REF.MaxOccurs = ``
+	__ComplexType__000021_A_ATTRIBUTE_DEFINITION_STRING_REF.IsDuplicatedInXSD = false
 
 	__ComplexType__000022_A_ATTRIBUTE_DEFINITION_XHTML_REF.Name = `A_ATTRIBUTE-DEFINITION-XHTML-REF`
 	__ComplexType__000022_A_ATTRIBUTE_DEFINITION_XHTML_REF.HasNameConflict = false
@@ -2930,6 +3040,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000022_A_ATTRIBUTE_DEFINITION_XHTML_REF.IsAnonymous = true
 	__ComplexType__000022_A_ATTRIBUTE_DEFINITION_XHTML_REF.NameXSD = ``
 	__ComplexType__000022_A_ATTRIBUTE_DEFINITION_XHTML_REF.OuterElementName = `A_ATTRIBUTE-DEFINITION-XHTML-REF`
+	__ComplexType__000022_A_ATTRIBUTE_DEFINITION_XHTML_REF.Order = 0
+	__ComplexType__000022_A_ATTRIBUTE_DEFINITION_XHTML_REF.Depth = 0
+	__ComplexType__000022_A_ATTRIBUTE_DEFINITION_XHTML_REF.MinOccurs = ``
+	__ComplexType__000022_A_ATTRIBUTE_DEFINITION_XHTML_REF.MaxOccurs = ``
+	__ComplexType__000022_A_ATTRIBUTE_DEFINITION_XHTML_REF.IsDuplicatedInXSD = false
 
 	__ComplexType__000023_A_ATTRIBUTE_VALUE_BOOLEAN.Name = `A_ATTRIBUTE-VALUE-BOOLEAN`
 	__ComplexType__000023_A_ATTRIBUTE_VALUE_BOOLEAN.HasNameConflict = false
@@ -2937,6 +3052,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000023_A_ATTRIBUTE_VALUE_BOOLEAN.IsAnonymous = true
 	__ComplexType__000023_A_ATTRIBUTE_VALUE_BOOLEAN.NameXSD = ``
 	__ComplexType__000023_A_ATTRIBUTE_VALUE_BOOLEAN.OuterElementName = `A_ATTRIBUTE-VALUE-BOOLEAN`
+	__ComplexType__000023_A_ATTRIBUTE_VALUE_BOOLEAN.Order = 0
+	__ComplexType__000023_A_ATTRIBUTE_VALUE_BOOLEAN.Depth = 0
+	__ComplexType__000023_A_ATTRIBUTE_VALUE_BOOLEAN.MinOccurs = ``
+	__ComplexType__000023_A_ATTRIBUTE_VALUE_BOOLEAN.MaxOccurs = ``
+	__ComplexType__000023_A_ATTRIBUTE_VALUE_BOOLEAN.IsDuplicatedInXSD = false
 
 	__ComplexType__000024_A_ATTRIBUTE_VALUE_DATE.Name = `A_ATTRIBUTE-VALUE-DATE`
 	__ComplexType__000024_A_ATTRIBUTE_VALUE_DATE.HasNameConflict = false
@@ -2944,6 +3064,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000024_A_ATTRIBUTE_VALUE_DATE.IsAnonymous = true
 	__ComplexType__000024_A_ATTRIBUTE_VALUE_DATE.NameXSD = ``
 	__ComplexType__000024_A_ATTRIBUTE_VALUE_DATE.OuterElementName = `A_ATTRIBUTE-VALUE-DATE`
+	__ComplexType__000024_A_ATTRIBUTE_VALUE_DATE.Order = 0
+	__ComplexType__000024_A_ATTRIBUTE_VALUE_DATE.Depth = 0
+	__ComplexType__000024_A_ATTRIBUTE_VALUE_DATE.MinOccurs = ``
+	__ComplexType__000024_A_ATTRIBUTE_VALUE_DATE.MaxOccurs = ``
+	__ComplexType__000024_A_ATTRIBUTE_VALUE_DATE.IsDuplicatedInXSD = false
 
 	__ComplexType__000025_A_ATTRIBUTE_VALUE_ENUMERATION.Name = `A_ATTRIBUTE-VALUE-ENUMERATION`
 	__ComplexType__000025_A_ATTRIBUTE_VALUE_ENUMERATION.HasNameConflict = false
@@ -2951,6 +3076,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000025_A_ATTRIBUTE_VALUE_ENUMERATION.IsAnonymous = true
 	__ComplexType__000025_A_ATTRIBUTE_VALUE_ENUMERATION.NameXSD = ``
 	__ComplexType__000025_A_ATTRIBUTE_VALUE_ENUMERATION.OuterElementName = `A_ATTRIBUTE-VALUE-ENUMERATION`
+	__ComplexType__000025_A_ATTRIBUTE_VALUE_ENUMERATION.Order = 0
+	__ComplexType__000025_A_ATTRIBUTE_VALUE_ENUMERATION.Depth = 0
+	__ComplexType__000025_A_ATTRIBUTE_VALUE_ENUMERATION.MinOccurs = ``
+	__ComplexType__000025_A_ATTRIBUTE_VALUE_ENUMERATION.MaxOccurs = ``
+	__ComplexType__000025_A_ATTRIBUTE_VALUE_ENUMERATION.IsDuplicatedInXSD = false
 
 	__ComplexType__000026_A_ATTRIBUTE_VALUE_INTEGER.Name = `A_ATTRIBUTE-VALUE-INTEGER`
 	__ComplexType__000026_A_ATTRIBUTE_VALUE_INTEGER.HasNameConflict = false
@@ -2958,6 +3088,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000026_A_ATTRIBUTE_VALUE_INTEGER.IsAnonymous = true
 	__ComplexType__000026_A_ATTRIBUTE_VALUE_INTEGER.NameXSD = ``
 	__ComplexType__000026_A_ATTRIBUTE_VALUE_INTEGER.OuterElementName = `A_ATTRIBUTE-VALUE-INTEGER`
+	__ComplexType__000026_A_ATTRIBUTE_VALUE_INTEGER.Order = 0
+	__ComplexType__000026_A_ATTRIBUTE_VALUE_INTEGER.Depth = 0
+	__ComplexType__000026_A_ATTRIBUTE_VALUE_INTEGER.MinOccurs = ``
+	__ComplexType__000026_A_ATTRIBUTE_VALUE_INTEGER.MaxOccurs = ``
+	__ComplexType__000026_A_ATTRIBUTE_VALUE_INTEGER.IsDuplicatedInXSD = false
 
 	__ComplexType__000027_A_ATTRIBUTE_VALUE_REAL.Name = `A_ATTRIBUTE-VALUE-REAL`
 	__ComplexType__000027_A_ATTRIBUTE_VALUE_REAL.HasNameConflict = false
@@ -2965,6 +3100,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000027_A_ATTRIBUTE_VALUE_REAL.IsAnonymous = true
 	__ComplexType__000027_A_ATTRIBUTE_VALUE_REAL.NameXSD = ``
 	__ComplexType__000027_A_ATTRIBUTE_VALUE_REAL.OuterElementName = `A_ATTRIBUTE-VALUE-REAL`
+	__ComplexType__000027_A_ATTRIBUTE_VALUE_REAL.Order = 0
+	__ComplexType__000027_A_ATTRIBUTE_VALUE_REAL.Depth = 0
+	__ComplexType__000027_A_ATTRIBUTE_VALUE_REAL.MinOccurs = ``
+	__ComplexType__000027_A_ATTRIBUTE_VALUE_REAL.MaxOccurs = ``
+	__ComplexType__000027_A_ATTRIBUTE_VALUE_REAL.IsDuplicatedInXSD = false
 
 	__ComplexType__000028_A_ATTRIBUTE_VALUE_STRING.Name = `A_ATTRIBUTE-VALUE-STRING`
 	__ComplexType__000028_A_ATTRIBUTE_VALUE_STRING.HasNameConflict = false
@@ -2972,6 +3112,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000028_A_ATTRIBUTE_VALUE_STRING.IsAnonymous = true
 	__ComplexType__000028_A_ATTRIBUTE_VALUE_STRING.NameXSD = ``
 	__ComplexType__000028_A_ATTRIBUTE_VALUE_STRING.OuterElementName = `A_ATTRIBUTE-VALUE-STRING`
+	__ComplexType__000028_A_ATTRIBUTE_VALUE_STRING.Order = 0
+	__ComplexType__000028_A_ATTRIBUTE_VALUE_STRING.Depth = 0
+	__ComplexType__000028_A_ATTRIBUTE_VALUE_STRING.MinOccurs = ``
+	__ComplexType__000028_A_ATTRIBUTE_VALUE_STRING.MaxOccurs = ``
+	__ComplexType__000028_A_ATTRIBUTE_VALUE_STRING.IsDuplicatedInXSD = false
 
 	__ComplexType__000029_A_ATTRIBUTE_VALUE_XHTML.Name = `A_ATTRIBUTE-VALUE-XHTML`
 	__ComplexType__000029_A_ATTRIBUTE_VALUE_XHTML.HasNameConflict = true
@@ -2979,6 +3124,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000029_A_ATTRIBUTE_VALUE_XHTML.IsAnonymous = true
 	__ComplexType__000029_A_ATTRIBUTE_VALUE_XHTML.NameXSD = ``
 	__ComplexType__000029_A_ATTRIBUTE_VALUE_XHTML.OuterElementName = `A_ATTRIBUTE-VALUE-XHTML`
+	__ComplexType__000029_A_ATTRIBUTE_VALUE_XHTML.Order = 0
+	__ComplexType__000029_A_ATTRIBUTE_VALUE_XHTML.Depth = 0
+	__ComplexType__000029_A_ATTRIBUTE_VALUE_XHTML.MinOccurs = ``
+	__ComplexType__000029_A_ATTRIBUTE_VALUE_XHTML.MaxOccurs = ``
+	__ComplexType__000029_A_ATTRIBUTE_VALUE_XHTML.IsDuplicatedInXSD = false
 
 	__ComplexType__000030_A_ATTRIBUTE_VALUE_XHTML.Name = `A_ATTRIBUTE-VALUE-XHTML`
 	__ComplexType__000030_A_ATTRIBUTE_VALUE_XHTML.HasNameConflict = false
@@ -2986,6 +3136,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000030_A_ATTRIBUTE_VALUE_XHTML.IsAnonymous = true
 	__ComplexType__000030_A_ATTRIBUTE_VALUE_XHTML.NameXSD = ``
 	__ComplexType__000030_A_ATTRIBUTE_VALUE_XHTML.OuterElementName = `A_ATTRIBUTE-VALUE-XHTML`
+	__ComplexType__000030_A_ATTRIBUTE_VALUE_XHTML.Order = 0
+	__ComplexType__000030_A_ATTRIBUTE_VALUE_XHTML.Depth = 0
+	__ComplexType__000030_A_ATTRIBUTE_VALUE_XHTML.MinOccurs = ``
+	__ComplexType__000030_A_ATTRIBUTE_VALUE_XHTML.MaxOccurs = ``
+	__ComplexType__000030_A_ATTRIBUTE_VALUE_XHTML.IsDuplicatedInXSD = false
 
 	__ComplexType__000031_A_CHILDREN.Name = `A_CHILDREN`
 	__ComplexType__000031_A_CHILDREN.HasNameConflict = false
@@ -2993,6 +3148,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000031_A_CHILDREN.IsAnonymous = true
 	__ComplexType__000031_A_CHILDREN.NameXSD = ``
 	__ComplexType__000031_A_CHILDREN.OuterElementName = `A_CHILDREN`
+	__ComplexType__000031_A_CHILDREN.Order = 0
+	__ComplexType__000031_A_CHILDREN.Depth = 0
+	__ComplexType__000031_A_CHILDREN.MinOccurs = ``
+	__ComplexType__000031_A_CHILDREN.MaxOccurs = ``
+	__ComplexType__000031_A_CHILDREN.IsDuplicatedInXSD = false
 
 	__ComplexType__000032_A_CORE_CONTENT.Name = `A_CORE-CONTENT`
 	__ComplexType__000032_A_CORE_CONTENT.HasNameConflict = false
@@ -3000,6 +3160,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000032_A_CORE_CONTENT.IsAnonymous = true
 	__ComplexType__000032_A_CORE_CONTENT.NameXSD = ``
 	__ComplexType__000032_A_CORE_CONTENT.OuterElementName = `A_CORE-CONTENT`
+	__ComplexType__000032_A_CORE_CONTENT.Order = 0
+	__ComplexType__000032_A_CORE_CONTENT.Depth = 0
+	__ComplexType__000032_A_CORE_CONTENT.MinOccurs = ``
+	__ComplexType__000032_A_CORE_CONTENT.MaxOccurs = ``
+	__ComplexType__000032_A_CORE_CONTENT.IsDuplicatedInXSD = false
 
 	__ComplexType__000033_A_DATATYPE_DEFINITION_BOOLEAN_REF.Name = `A_DATATYPE-DEFINITION-BOOLEAN-REF`
 	__ComplexType__000033_A_DATATYPE_DEFINITION_BOOLEAN_REF.HasNameConflict = false
@@ -3007,6 +3172,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000033_A_DATATYPE_DEFINITION_BOOLEAN_REF.IsAnonymous = true
 	__ComplexType__000033_A_DATATYPE_DEFINITION_BOOLEAN_REF.NameXSD = ``
 	__ComplexType__000033_A_DATATYPE_DEFINITION_BOOLEAN_REF.OuterElementName = `A_DATATYPE-DEFINITION-BOOLEAN-REF`
+	__ComplexType__000033_A_DATATYPE_DEFINITION_BOOLEAN_REF.Order = 0
+	__ComplexType__000033_A_DATATYPE_DEFINITION_BOOLEAN_REF.Depth = 0
+	__ComplexType__000033_A_DATATYPE_DEFINITION_BOOLEAN_REF.MinOccurs = ``
+	__ComplexType__000033_A_DATATYPE_DEFINITION_BOOLEAN_REF.MaxOccurs = ``
+	__ComplexType__000033_A_DATATYPE_DEFINITION_BOOLEAN_REF.IsDuplicatedInXSD = false
 
 	__ComplexType__000034_A_DATATYPE_DEFINITION_DATE_REF.Name = `A_DATATYPE-DEFINITION-DATE-REF`
 	__ComplexType__000034_A_DATATYPE_DEFINITION_DATE_REF.HasNameConflict = false
@@ -3014,6 +3184,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000034_A_DATATYPE_DEFINITION_DATE_REF.IsAnonymous = true
 	__ComplexType__000034_A_DATATYPE_DEFINITION_DATE_REF.NameXSD = ``
 	__ComplexType__000034_A_DATATYPE_DEFINITION_DATE_REF.OuterElementName = `A_DATATYPE-DEFINITION-DATE-REF`
+	__ComplexType__000034_A_DATATYPE_DEFINITION_DATE_REF.Order = 0
+	__ComplexType__000034_A_DATATYPE_DEFINITION_DATE_REF.Depth = 0
+	__ComplexType__000034_A_DATATYPE_DEFINITION_DATE_REF.MinOccurs = ``
+	__ComplexType__000034_A_DATATYPE_DEFINITION_DATE_REF.MaxOccurs = ``
+	__ComplexType__000034_A_DATATYPE_DEFINITION_DATE_REF.IsDuplicatedInXSD = false
 
 	__ComplexType__000035_A_DATATYPE_DEFINITION_ENUMERATION_REF.Name = `A_DATATYPE-DEFINITION-ENUMERATION-REF`
 	__ComplexType__000035_A_DATATYPE_DEFINITION_ENUMERATION_REF.HasNameConflict = false
@@ -3021,6 +3196,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000035_A_DATATYPE_DEFINITION_ENUMERATION_REF.IsAnonymous = true
 	__ComplexType__000035_A_DATATYPE_DEFINITION_ENUMERATION_REF.NameXSD = ``
 	__ComplexType__000035_A_DATATYPE_DEFINITION_ENUMERATION_REF.OuterElementName = `A_DATATYPE-DEFINITION-ENUMERATION-REF`
+	__ComplexType__000035_A_DATATYPE_DEFINITION_ENUMERATION_REF.Order = 0
+	__ComplexType__000035_A_DATATYPE_DEFINITION_ENUMERATION_REF.Depth = 0
+	__ComplexType__000035_A_DATATYPE_DEFINITION_ENUMERATION_REF.MinOccurs = ``
+	__ComplexType__000035_A_DATATYPE_DEFINITION_ENUMERATION_REF.MaxOccurs = ``
+	__ComplexType__000035_A_DATATYPE_DEFINITION_ENUMERATION_REF.IsDuplicatedInXSD = false
 
 	__ComplexType__000036_A_DATATYPE_DEFINITION_INTEGER_REF.Name = `A_DATATYPE-DEFINITION-INTEGER-REF`
 	__ComplexType__000036_A_DATATYPE_DEFINITION_INTEGER_REF.HasNameConflict = false
@@ -3028,6 +3208,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000036_A_DATATYPE_DEFINITION_INTEGER_REF.IsAnonymous = true
 	__ComplexType__000036_A_DATATYPE_DEFINITION_INTEGER_REF.NameXSD = ``
 	__ComplexType__000036_A_DATATYPE_DEFINITION_INTEGER_REF.OuterElementName = `A_DATATYPE-DEFINITION-INTEGER-REF`
+	__ComplexType__000036_A_DATATYPE_DEFINITION_INTEGER_REF.Order = 0
+	__ComplexType__000036_A_DATATYPE_DEFINITION_INTEGER_REF.Depth = 0
+	__ComplexType__000036_A_DATATYPE_DEFINITION_INTEGER_REF.MinOccurs = ``
+	__ComplexType__000036_A_DATATYPE_DEFINITION_INTEGER_REF.MaxOccurs = ``
+	__ComplexType__000036_A_DATATYPE_DEFINITION_INTEGER_REF.IsDuplicatedInXSD = false
 
 	__ComplexType__000037_A_DATATYPE_DEFINITION_REAL_REF.Name = `A_DATATYPE-DEFINITION-REAL-REF`
 	__ComplexType__000037_A_DATATYPE_DEFINITION_REAL_REF.HasNameConflict = false
@@ -3035,6 +3220,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000037_A_DATATYPE_DEFINITION_REAL_REF.IsAnonymous = true
 	__ComplexType__000037_A_DATATYPE_DEFINITION_REAL_REF.NameXSD = ``
 	__ComplexType__000037_A_DATATYPE_DEFINITION_REAL_REF.OuterElementName = `A_DATATYPE-DEFINITION-REAL-REF`
+	__ComplexType__000037_A_DATATYPE_DEFINITION_REAL_REF.Order = 0
+	__ComplexType__000037_A_DATATYPE_DEFINITION_REAL_REF.Depth = 0
+	__ComplexType__000037_A_DATATYPE_DEFINITION_REAL_REF.MinOccurs = ``
+	__ComplexType__000037_A_DATATYPE_DEFINITION_REAL_REF.MaxOccurs = ``
+	__ComplexType__000037_A_DATATYPE_DEFINITION_REAL_REF.IsDuplicatedInXSD = false
 
 	__ComplexType__000038_A_DATATYPE_DEFINITION_STRING_REF.Name = `A_DATATYPE-DEFINITION-STRING-REF`
 	__ComplexType__000038_A_DATATYPE_DEFINITION_STRING_REF.HasNameConflict = false
@@ -3042,6 +3232,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000038_A_DATATYPE_DEFINITION_STRING_REF.IsAnonymous = true
 	__ComplexType__000038_A_DATATYPE_DEFINITION_STRING_REF.NameXSD = ``
 	__ComplexType__000038_A_DATATYPE_DEFINITION_STRING_REF.OuterElementName = `A_DATATYPE-DEFINITION-STRING-REF`
+	__ComplexType__000038_A_DATATYPE_DEFINITION_STRING_REF.Order = 0
+	__ComplexType__000038_A_DATATYPE_DEFINITION_STRING_REF.Depth = 0
+	__ComplexType__000038_A_DATATYPE_DEFINITION_STRING_REF.MinOccurs = ``
+	__ComplexType__000038_A_DATATYPE_DEFINITION_STRING_REF.MaxOccurs = ``
+	__ComplexType__000038_A_DATATYPE_DEFINITION_STRING_REF.IsDuplicatedInXSD = false
 
 	__ComplexType__000039_A_DATATYPE_DEFINITION_XHTML_REF.Name = `A_DATATYPE-DEFINITION-XHTML-REF`
 	__ComplexType__000039_A_DATATYPE_DEFINITION_XHTML_REF.HasNameConflict = false
@@ -3049,6 +3244,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000039_A_DATATYPE_DEFINITION_XHTML_REF.IsAnonymous = true
 	__ComplexType__000039_A_DATATYPE_DEFINITION_XHTML_REF.NameXSD = ``
 	__ComplexType__000039_A_DATATYPE_DEFINITION_XHTML_REF.OuterElementName = `A_DATATYPE-DEFINITION-XHTML-REF`
+	__ComplexType__000039_A_DATATYPE_DEFINITION_XHTML_REF.Order = 0
+	__ComplexType__000039_A_DATATYPE_DEFINITION_XHTML_REF.Depth = 0
+	__ComplexType__000039_A_DATATYPE_DEFINITION_XHTML_REF.MinOccurs = ``
+	__ComplexType__000039_A_DATATYPE_DEFINITION_XHTML_REF.MaxOccurs = ``
+	__ComplexType__000039_A_DATATYPE_DEFINITION_XHTML_REF.IsDuplicatedInXSD = false
 
 	__ComplexType__000040_A_DATATYPES.Name = `A_DATATYPES`
 	__ComplexType__000040_A_DATATYPES.HasNameConflict = false
@@ -3056,6 +3256,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000040_A_DATATYPES.IsAnonymous = true
 	__ComplexType__000040_A_DATATYPES.NameXSD = ``
 	__ComplexType__000040_A_DATATYPES.OuterElementName = `A_DATATYPES`
+	__ComplexType__000040_A_DATATYPES.Order = 0
+	__ComplexType__000040_A_DATATYPES.Depth = 0
+	__ComplexType__000040_A_DATATYPES.MinOccurs = ``
+	__ComplexType__000040_A_DATATYPES.MaxOccurs = ``
+	__ComplexType__000040_A_DATATYPES.IsDuplicatedInXSD = false
 
 	__ComplexType__000041_A_EDITABLE_ATTS.Name = `A_EDITABLE-ATTS`
 	__ComplexType__000041_A_EDITABLE_ATTS.HasNameConflict = false
@@ -3063,6 +3268,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000041_A_EDITABLE_ATTS.IsAnonymous = true
 	__ComplexType__000041_A_EDITABLE_ATTS.NameXSD = ``
 	__ComplexType__000041_A_EDITABLE_ATTS.OuterElementName = `A_EDITABLE-ATTS`
+	__ComplexType__000041_A_EDITABLE_ATTS.Order = 0
+	__ComplexType__000041_A_EDITABLE_ATTS.Depth = 0
+	__ComplexType__000041_A_EDITABLE_ATTS.MinOccurs = ``
+	__ComplexType__000041_A_EDITABLE_ATTS.MaxOccurs = ``
+	__ComplexType__000041_A_EDITABLE_ATTS.IsDuplicatedInXSD = false
 
 	__ComplexType__000042_A_ENUM_VALUE_REF.Name = `A_ENUM-VALUE-REF`
 	__ComplexType__000042_A_ENUM_VALUE_REF.HasNameConflict = false
@@ -3070,6 +3280,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000042_A_ENUM_VALUE_REF.IsAnonymous = true
 	__ComplexType__000042_A_ENUM_VALUE_REF.NameXSD = ``
 	__ComplexType__000042_A_ENUM_VALUE_REF.OuterElementName = `A_ENUM-VALUE-REF`
+	__ComplexType__000042_A_ENUM_VALUE_REF.Order = 0
+	__ComplexType__000042_A_ENUM_VALUE_REF.Depth = 0
+	__ComplexType__000042_A_ENUM_VALUE_REF.MinOccurs = ``
+	__ComplexType__000042_A_ENUM_VALUE_REF.MaxOccurs = ``
+	__ComplexType__000042_A_ENUM_VALUE_REF.IsDuplicatedInXSD = false
 
 	__ComplexType__000043_A_OBJECT.Name = `A_OBJECT`
 	__ComplexType__000043_A_OBJECT.HasNameConflict = false
@@ -3077,6 +3292,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000043_A_OBJECT.IsAnonymous = true
 	__ComplexType__000043_A_OBJECT.NameXSD = ``
 	__ComplexType__000043_A_OBJECT.OuterElementName = `A_OBJECT`
+	__ComplexType__000043_A_OBJECT.Order = 0
+	__ComplexType__000043_A_OBJECT.Depth = 0
+	__ComplexType__000043_A_OBJECT.MinOccurs = ``
+	__ComplexType__000043_A_OBJECT.MaxOccurs = ``
+	__ComplexType__000043_A_OBJECT.IsDuplicatedInXSD = false
 
 	__ComplexType__000044_A_PROPERTIES.Name = `A_PROPERTIES`
 	__ComplexType__000044_A_PROPERTIES.HasNameConflict = false
@@ -3084,6 +3304,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000044_A_PROPERTIES.IsAnonymous = true
 	__ComplexType__000044_A_PROPERTIES.NameXSD = ``
 	__ComplexType__000044_A_PROPERTIES.OuterElementName = `A_PROPERTIES`
+	__ComplexType__000044_A_PROPERTIES.Order = 0
+	__ComplexType__000044_A_PROPERTIES.Depth = 0
+	__ComplexType__000044_A_PROPERTIES.MinOccurs = ``
+	__ComplexType__000044_A_PROPERTIES.MaxOccurs = ``
+	__ComplexType__000044_A_PROPERTIES.IsDuplicatedInXSD = false
 
 	__ComplexType__000045_A_RELATION_GROUP_TYPE_REF.Name = `A_RELATION-GROUP-TYPE-REF`
 	__ComplexType__000045_A_RELATION_GROUP_TYPE_REF.HasNameConflict = false
@@ -3091,90 +3316,155 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000045_A_RELATION_GROUP_TYPE_REF.IsAnonymous = true
 	__ComplexType__000045_A_RELATION_GROUP_TYPE_REF.NameXSD = ``
 	__ComplexType__000045_A_RELATION_GROUP_TYPE_REF.OuterElementName = `A_RELATION-GROUP-TYPE-REF`
+	__ComplexType__000045_A_RELATION_GROUP_TYPE_REF.Order = 0
+	__ComplexType__000045_A_RELATION_GROUP_TYPE_REF.Depth = 0
+	__ComplexType__000045_A_RELATION_GROUP_TYPE_REF.MinOccurs = ``
+	__ComplexType__000045_A_RELATION_GROUP_TYPE_REF.MaxOccurs = ``
+	__ComplexType__000045_A_RELATION_GROUP_TYPE_REF.IsDuplicatedInXSD = false
 
-	__ComplexType__000046_A_SPEC_ATTRIBUTES.Name = `A_SPEC-ATTRIBUTES`
-	__ComplexType__000046_A_SPEC_ATTRIBUTES.HasNameConflict = false
-	__ComplexType__000046_A_SPEC_ATTRIBUTES.GoIdentifier = `A_SPEC_ATTRIBUTES`
-	__ComplexType__000046_A_SPEC_ATTRIBUTES.IsAnonymous = true
-	__ComplexType__000046_A_SPEC_ATTRIBUTES.NameXSD = ``
-	__ComplexType__000046_A_SPEC_ATTRIBUTES.OuterElementName = `A_SPEC-ATTRIBUTES`
+	__ComplexType__000046_A_SOURCE.Name = `A_SOURCE`
+	__ComplexType__000046_A_SOURCE.HasNameConflict = true
+	__ComplexType__000046_A_SOURCE.GoIdentifier = `A_SOURCE_1`
+	__ComplexType__000046_A_SOURCE.IsAnonymous = true
+	__ComplexType__000046_A_SOURCE.NameXSD = ``
+	__ComplexType__000046_A_SOURCE.OuterElementName = `A_SOURCE`
+	__ComplexType__000046_A_SOURCE.Order = 0
+	__ComplexType__000046_A_SOURCE.Depth = 0
+	__ComplexType__000046_A_SOURCE.MinOccurs = ``
+	__ComplexType__000046_A_SOURCE.MaxOccurs = ``
+	__ComplexType__000046_A_SOURCE.IsDuplicatedInXSD = false
 
-	__ComplexType__000047_A_SPEC_OBJECT_TYPE_REF.Name = `A_SPEC-OBJECT-TYPE-REF`
-	__ComplexType__000047_A_SPEC_OBJECT_TYPE_REF.HasNameConflict = false
-	__ComplexType__000047_A_SPEC_OBJECT_TYPE_REF.GoIdentifier = `A_SPEC_OBJECT_TYPE_REF`
-	__ComplexType__000047_A_SPEC_OBJECT_TYPE_REF.IsAnonymous = true
-	__ComplexType__000047_A_SPEC_OBJECT_TYPE_REF.NameXSD = ``
-	__ComplexType__000047_A_SPEC_OBJECT_TYPE_REF.OuterElementName = `A_SPEC-OBJECT-TYPE-REF`
+	__ComplexType__000047_A_SPEC_ATTRIBUTES.Name = `A_SPEC-ATTRIBUTES`
+	__ComplexType__000047_A_SPEC_ATTRIBUTES.HasNameConflict = false
+	__ComplexType__000047_A_SPEC_ATTRIBUTES.GoIdentifier = `A_SPEC_ATTRIBUTES`
+	__ComplexType__000047_A_SPEC_ATTRIBUTES.IsAnonymous = true
+	__ComplexType__000047_A_SPEC_ATTRIBUTES.NameXSD = ``
+	__ComplexType__000047_A_SPEC_ATTRIBUTES.OuterElementName = `A_SPEC-ATTRIBUTES`
+	__ComplexType__000047_A_SPEC_ATTRIBUTES.Order = 0
+	__ComplexType__000047_A_SPEC_ATTRIBUTES.Depth = 0
+	__ComplexType__000047_A_SPEC_ATTRIBUTES.MinOccurs = ``
+	__ComplexType__000047_A_SPEC_ATTRIBUTES.MaxOccurs = ``
+	__ComplexType__000047_A_SPEC_ATTRIBUTES.IsDuplicatedInXSD = false
 
-	__ComplexType__000048_A_SPEC_OBJECTS.Name = `A_SPEC-OBJECTS`
-	__ComplexType__000048_A_SPEC_OBJECTS.HasNameConflict = false
-	__ComplexType__000048_A_SPEC_OBJECTS.GoIdentifier = `A_SPEC_OBJECTS`
-	__ComplexType__000048_A_SPEC_OBJECTS.IsAnonymous = true
-	__ComplexType__000048_A_SPEC_OBJECTS.NameXSD = ``
-	__ComplexType__000048_A_SPEC_OBJECTS.OuterElementName = `A_SPEC-OBJECTS`
+	__ComplexType__000048_A_SPEC_OBJECT_TYPE_REF.Name = `A_SPEC-OBJECT-TYPE-REF`
+	__ComplexType__000048_A_SPEC_OBJECT_TYPE_REF.HasNameConflict = false
+	__ComplexType__000048_A_SPEC_OBJECT_TYPE_REF.GoIdentifier = `A_SPEC_OBJECT_TYPE_REF`
+	__ComplexType__000048_A_SPEC_OBJECT_TYPE_REF.IsAnonymous = true
+	__ComplexType__000048_A_SPEC_OBJECT_TYPE_REF.NameXSD = ``
+	__ComplexType__000048_A_SPEC_OBJECT_TYPE_REF.OuterElementName = `A_SPEC-OBJECT-TYPE-REF`
+	__ComplexType__000048_A_SPEC_OBJECT_TYPE_REF.Order = 0
+	__ComplexType__000048_A_SPEC_OBJECT_TYPE_REF.Depth = 0
+	__ComplexType__000048_A_SPEC_OBJECT_TYPE_REF.MinOccurs = ``
+	__ComplexType__000048_A_SPEC_OBJECT_TYPE_REF.MaxOccurs = ``
+	__ComplexType__000048_A_SPEC_OBJECT_TYPE_REF.IsDuplicatedInXSD = false
 
-	__ComplexType__000049_A_SPEC_RELATION_GROUPS.Name = `A_SPEC-RELATION-GROUPS`
-	__ComplexType__000049_A_SPEC_RELATION_GROUPS.HasNameConflict = false
-	__ComplexType__000049_A_SPEC_RELATION_GROUPS.GoIdentifier = `A_SPEC_RELATION_GROUPS`
-	__ComplexType__000049_A_SPEC_RELATION_GROUPS.IsAnonymous = true
-	__ComplexType__000049_A_SPEC_RELATION_GROUPS.NameXSD = ``
-	__ComplexType__000049_A_SPEC_RELATION_GROUPS.OuterElementName = `A_SPEC-RELATION-GROUPS`
+	__ComplexType__000049_A_SPEC_OBJECTS.Name = `A_SPEC-OBJECTS`
+	__ComplexType__000049_A_SPEC_OBJECTS.HasNameConflict = false
+	__ComplexType__000049_A_SPEC_OBJECTS.GoIdentifier = `A_SPEC_OBJECTS`
+	__ComplexType__000049_A_SPEC_OBJECTS.IsAnonymous = true
+	__ComplexType__000049_A_SPEC_OBJECTS.NameXSD = ``
+	__ComplexType__000049_A_SPEC_OBJECTS.OuterElementName = `A_SPEC-OBJECTS`
+	__ComplexType__000049_A_SPEC_OBJECTS.Order = 0
+	__ComplexType__000049_A_SPEC_OBJECTS.Depth = 0
+	__ComplexType__000049_A_SPEC_OBJECTS.MinOccurs = ``
+	__ComplexType__000049_A_SPEC_OBJECTS.MaxOccurs = ``
+	__ComplexType__000049_A_SPEC_OBJECTS.IsDuplicatedInXSD = false
 
-	__ComplexType__000050_A_SPEC_RELATION_REF.Name = `A_SPEC-RELATION-REF`
-	__ComplexType__000050_A_SPEC_RELATION_REF.HasNameConflict = false
-	__ComplexType__000050_A_SPEC_RELATION_REF.GoIdentifier = `A_SPEC_RELATION_REF`
-	__ComplexType__000050_A_SPEC_RELATION_REF.IsAnonymous = true
-	__ComplexType__000050_A_SPEC_RELATION_REF.NameXSD = ``
-	__ComplexType__000050_A_SPEC_RELATION_REF.OuterElementName = `A_SPEC-RELATION-REF`
+	__ComplexType__000050_A_SPEC_RELATION_GROUPS.Name = `A_SPEC-RELATION-GROUPS`
+	__ComplexType__000050_A_SPEC_RELATION_GROUPS.HasNameConflict = false
+	__ComplexType__000050_A_SPEC_RELATION_GROUPS.GoIdentifier = `A_SPEC_RELATION_GROUPS`
+	__ComplexType__000050_A_SPEC_RELATION_GROUPS.IsAnonymous = true
+	__ComplexType__000050_A_SPEC_RELATION_GROUPS.NameXSD = ``
+	__ComplexType__000050_A_SPEC_RELATION_GROUPS.OuterElementName = `A_SPEC-RELATION-GROUPS`
+	__ComplexType__000050_A_SPEC_RELATION_GROUPS.Order = 0
+	__ComplexType__000050_A_SPEC_RELATION_GROUPS.Depth = 0
+	__ComplexType__000050_A_SPEC_RELATION_GROUPS.MinOccurs = ``
+	__ComplexType__000050_A_SPEC_RELATION_GROUPS.MaxOccurs = ``
+	__ComplexType__000050_A_SPEC_RELATION_GROUPS.IsDuplicatedInXSD = false
 
-	__ComplexType__000051_A_SPEC_RELATION_TYPE_REF.Name = `A_SPEC-RELATION-TYPE-REF`
-	__ComplexType__000051_A_SPEC_RELATION_TYPE_REF.HasNameConflict = false
-	__ComplexType__000051_A_SPEC_RELATION_TYPE_REF.GoIdentifier = `A_SPEC_RELATION_TYPE_REF`
-	__ComplexType__000051_A_SPEC_RELATION_TYPE_REF.IsAnonymous = true
-	__ComplexType__000051_A_SPEC_RELATION_TYPE_REF.NameXSD = ``
-	__ComplexType__000051_A_SPEC_RELATION_TYPE_REF.OuterElementName = `A_SPEC-RELATION-TYPE-REF`
+	__ComplexType__000051_A_SPEC_RELATION_REF.Name = `A_SPEC-RELATION-REF`
+	__ComplexType__000051_A_SPEC_RELATION_REF.HasNameConflict = false
+	__ComplexType__000051_A_SPEC_RELATION_REF.GoIdentifier = `A_SPEC_RELATION_REF`
+	__ComplexType__000051_A_SPEC_RELATION_REF.IsAnonymous = true
+	__ComplexType__000051_A_SPEC_RELATION_REF.NameXSD = ``
+	__ComplexType__000051_A_SPEC_RELATION_REF.OuterElementName = `A_SPEC-RELATION-REF`
+	__ComplexType__000051_A_SPEC_RELATION_REF.Order = 0
+	__ComplexType__000051_A_SPEC_RELATION_REF.Depth = 0
+	__ComplexType__000051_A_SPEC_RELATION_REF.MinOccurs = ``
+	__ComplexType__000051_A_SPEC_RELATION_REF.MaxOccurs = ``
+	__ComplexType__000051_A_SPEC_RELATION_REF.IsDuplicatedInXSD = false
 
-	__ComplexType__000052_A_SPEC_RELATIONS.Name = `A_SPEC-RELATIONS`
-	__ComplexType__000052_A_SPEC_RELATIONS.HasNameConflict = false
-	__ComplexType__000052_A_SPEC_RELATIONS.GoIdentifier = `A_SPEC_RELATIONS`
-	__ComplexType__000052_A_SPEC_RELATIONS.IsAnonymous = true
-	__ComplexType__000052_A_SPEC_RELATIONS.NameXSD = ``
-	__ComplexType__000052_A_SPEC_RELATIONS.OuterElementName = `A_SPEC-RELATIONS`
+	__ComplexType__000052_A_SPEC_RELATION_TYPE_REF.Name = `A_SPEC-RELATION-TYPE-REF`
+	__ComplexType__000052_A_SPEC_RELATION_TYPE_REF.HasNameConflict = false
+	__ComplexType__000052_A_SPEC_RELATION_TYPE_REF.GoIdentifier = `A_SPEC_RELATION_TYPE_REF`
+	__ComplexType__000052_A_SPEC_RELATION_TYPE_REF.IsAnonymous = true
+	__ComplexType__000052_A_SPEC_RELATION_TYPE_REF.NameXSD = ``
+	__ComplexType__000052_A_SPEC_RELATION_TYPE_REF.OuterElementName = `A_SPEC-RELATION-TYPE-REF`
+	__ComplexType__000052_A_SPEC_RELATION_TYPE_REF.Order = 0
+	__ComplexType__000052_A_SPEC_RELATION_TYPE_REF.Depth = 0
+	__ComplexType__000052_A_SPEC_RELATION_TYPE_REF.MinOccurs = ``
+	__ComplexType__000052_A_SPEC_RELATION_TYPE_REF.MaxOccurs = ``
+	__ComplexType__000052_A_SPEC_RELATION_TYPE_REF.IsDuplicatedInXSD = false
 
-	__ComplexType__000053_A_SPEC_TYPES.Name = `A_SPEC-TYPES`
-	__ComplexType__000053_A_SPEC_TYPES.HasNameConflict = false
-	__ComplexType__000053_A_SPEC_TYPES.GoIdentifier = `A_SPEC_TYPES`
-	__ComplexType__000053_A_SPEC_TYPES.IsAnonymous = true
-	__ComplexType__000053_A_SPEC_TYPES.NameXSD = ``
-	__ComplexType__000053_A_SPEC_TYPES.OuterElementName = `A_SPEC-TYPES`
+	__ComplexType__000053_A_SPEC_RELATIONS.Name = `A_SPEC-RELATIONS`
+	__ComplexType__000053_A_SPEC_RELATIONS.HasNameConflict = false
+	__ComplexType__000053_A_SPEC_RELATIONS.GoIdentifier = `A_SPEC_RELATIONS`
+	__ComplexType__000053_A_SPEC_RELATIONS.IsAnonymous = true
+	__ComplexType__000053_A_SPEC_RELATIONS.NameXSD = ``
+	__ComplexType__000053_A_SPEC_RELATIONS.OuterElementName = `A_SPEC-RELATIONS`
+	__ComplexType__000053_A_SPEC_RELATIONS.Order = 0
+	__ComplexType__000053_A_SPEC_RELATIONS.Depth = 0
+	__ComplexType__000053_A_SPEC_RELATIONS.MinOccurs = ``
+	__ComplexType__000053_A_SPEC_RELATIONS.MaxOccurs = ``
+	__ComplexType__000053_A_SPEC_RELATIONS.IsDuplicatedInXSD = false
 
-	__ComplexType__000054_A_SPECIFICATION_TYPE_REF.Name = `A_SPECIFICATION-TYPE-REF`
-	__ComplexType__000054_A_SPECIFICATION_TYPE_REF.HasNameConflict = false
-	__ComplexType__000054_A_SPECIFICATION_TYPE_REF.GoIdentifier = `A_SPECIFICATION_TYPE_REF`
-	__ComplexType__000054_A_SPECIFICATION_TYPE_REF.IsAnonymous = true
-	__ComplexType__000054_A_SPECIFICATION_TYPE_REF.NameXSD = ``
-	__ComplexType__000054_A_SPECIFICATION_TYPE_REF.OuterElementName = `A_SPECIFICATION-TYPE-REF`
+	__ComplexType__000054_A_SPEC_TYPES.Name = `A_SPEC-TYPES`
+	__ComplexType__000054_A_SPEC_TYPES.HasNameConflict = false
+	__ComplexType__000054_A_SPEC_TYPES.GoIdentifier = `A_SPEC_TYPES`
+	__ComplexType__000054_A_SPEC_TYPES.IsAnonymous = true
+	__ComplexType__000054_A_SPEC_TYPES.NameXSD = ``
+	__ComplexType__000054_A_SPEC_TYPES.OuterElementName = `A_SPEC-TYPES`
+	__ComplexType__000054_A_SPEC_TYPES.Order = 0
+	__ComplexType__000054_A_SPEC_TYPES.Depth = 0
+	__ComplexType__000054_A_SPEC_TYPES.MinOccurs = ``
+	__ComplexType__000054_A_SPEC_TYPES.MaxOccurs = ``
+	__ComplexType__000054_A_SPEC_TYPES.IsDuplicatedInXSD = false
 
-	__ComplexType__000055_A_SPECIFICATIONS.Name = `A_SPECIFICATIONS`
-	__ComplexType__000055_A_SPECIFICATIONS.HasNameConflict = false
-	__ComplexType__000055_A_SPECIFICATIONS.GoIdentifier = `A_SPECIFICATIONS`
-	__ComplexType__000055_A_SPECIFICATIONS.IsAnonymous = true
-	__ComplexType__000055_A_SPECIFICATIONS.NameXSD = ``
-	__ComplexType__000055_A_SPECIFICATIONS.OuterElementName = `A_SPECIFICATIONS`
+	__ComplexType__000055_A_SPECIFICATION_TYPE_REF.Name = `A_SPECIFICATION-TYPE-REF`
+	__ComplexType__000055_A_SPECIFICATION_TYPE_REF.HasNameConflict = false
+	__ComplexType__000055_A_SPECIFICATION_TYPE_REF.GoIdentifier = `A_SPECIFICATION_TYPE_REF`
+	__ComplexType__000055_A_SPECIFICATION_TYPE_REF.IsAnonymous = true
+	__ComplexType__000055_A_SPECIFICATION_TYPE_REF.NameXSD = ``
+	__ComplexType__000055_A_SPECIFICATION_TYPE_REF.OuterElementName = `A_SPECIFICATION-TYPE-REF`
+	__ComplexType__000055_A_SPECIFICATION_TYPE_REF.Order = 0
+	__ComplexType__000055_A_SPECIFICATION_TYPE_REF.Depth = 0
+	__ComplexType__000055_A_SPECIFICATION_TYPE_REF.MinOccurs = ``
+	__ComplexType__000055_A_SPECIFICATION_TYPE_REF.MaxOccurs = ``
+	__ComplexType__000055_A_SPECIFICATION_TYPE_REF.IsDuplicatedInXSD = false
 
-	__ComplexType__000056_A_SPECIFIED_VALUES.Name = `A_SPECIFIED-VALUES`
-	__ComplexType__000056_A_SPECIFIED_VALUES.HasNameConflict = false
-	__ComplexType__000056_A_SPECIFIED_VALUES.GoIdentifier = `A_SPECIFIED_VALUES`
-	__ComplexType__000056_A_SPECIFIED_VALUES.IsAnonymous = true
-	__ComplexType__000056_A_SPECIFIED_VALUES.NameXSD = ``
-	__ComplexType__000056_A_SPECIFIED_VALUES.OuterElementName = `A_SPECIFIED-VALUES`
+	__ComplexType__000056_A_SPECIFICATIONS.Name = `A_SPECIFICATIONS`
+	__ComplexType__000056_A_SPECIFICATIONS.HasNameConflict = false
+	__ComplexType__000056_A_SPECIFICATIONS.GoIdentifier = `A_SPECIFICATIONS`
+	__ComplexType__000056_A_SPECIFICATIONS.IsAnonymous = true
+	__ComplexType__000056_A_SPECIFICATIONS.NameXSD = ``
+	__ComplexType__000056_A_SPECIFICATIONS.OuterElementName = `A_SPECIFICATIONS`
+	__ComplexType__000056_A_SPECIFICATIONS.Order = 0
+	__ComplexType__000056_A_SPECIFICATIONS.Depth = 0
+	__ComplexType__000056_A_SPECIFICATIONS.MinOccurs = ``
+	__ComplexType__000056_A_SPECIFICATIONS.MaxOccurs = ``
+	__ComplexType__000056_A_SPECIFICATIONS.IsDuplicatedInXSD = false
 
-	__ComplexType__000057_A_TARGET.Name = `A_TARGET`
-	__ComplexType__000057_A_TARGET.HasNameConflict = true
-	__ComplexType__000057_A_TARGET.GoIdentifier = `A_TARGET_1`
-	__ComplexType__000057_A_TARGET.IsAnonymous = true
-	__ComplexType__000057_A_TARGET.NameXSD = ``
-	__ComplexType__000057_A_TARGET.OuterElementName = `A_TARGET`
+	__ComplexType__000057_A_SPECIFIED_VALUES.Name = `A_SPECIFIED-VALUES`
+	__ComplexType__000057_A_SPECIFIED_VALUES.HasNameConflict = false
+	__ComplexType__000057_A_SPECIFIED_VALUES.GoIdentifier = `A_SPECIFIED_VALUES`
+	__ComplexType__000057_A_SPECIFIED_VALUES.IsAnonymous = true
+	__ComplexType__000057_A_SPECIFIED_VALUES.NameXSD = ``
+	__ComplexType__000057_A_SPECIFIED_VALUES.OuterElementName = `A_SPECIFIED-VALUES`
+	__ComplexType__000057_A_SPECIFIED_VALUES.Order = 0
+	__ComplexType__000057_A_SPECIFIED_VALUES.Depth = 0
+	__ComplexType__000057_A_SPECIFIED_VALUES.MinOccurs = ``
+	__ComplexType__000057_A_SPECIFIED_VALUES.MaxOccurs = ``
+	__ComplexType__000057_A_SPECIFIED_VALUES.IsDuplicatedInXSD = false
 
 	__ComplexType__000058_A_TARGET_SPECIFICATION.Name = `A_TARGET-SPECIFICATION`
 	__ComplexType__000058_A_TARGET_SPECIFICATION.HasNameConflict = true
@@ -3182,6 +3472,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000058_A_TARGET_SPECIFICATION.IsAnonymous = true
 	__ComplexType__000058_A_TARGET_SPECIFICATION.NameXSD = ``
 	__ComplexType__000058_A_TARGET_SPECIFICATION.OuterElementName = `A_TARGET-SPECIFICATION`
+	__ComplexType__000058_A_TARGET_SPECIFICATION.Order = 0
+	__ComplexType__000058_A_TARGET_SPECIFICATION.Depth = 0
+	__ComplexType__000058_A_TARGET_SPECIFICATION.MinOccurs = ``
+	__ComplexType__000058_A_TARGET_SPECIFICATION.MaxOccurs = ``
+	__ComplexType__000058_A_TARGET_SPECIFICATION.IsDuplicatedInXSD = false
 
 	__ComplexType__000059_A_THE_HEADER.Name = `A_THE-HEADER`
 	__ComplexType__000059_A_THE_HEADER.HasNameConflict = false
@@ -3189,6 +3484,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000059_A_THE_HEADER.IsAnonymous = true
 	__ComplexType__000059_A_THE_HEADER.NameXSD = ``
 	__ComplexType__000059_A_THE_HEADER.OuterElementName = `A_THE-HEADER`
+	__ComplexType__000059_A_THE_HEADER.Order = 0
+	__ComplexType__000059_A_THE_HEADER.Depth = 0
+	__ComplexType__000059_A_THE_HEADER.MinOccurs = ``
+	__ComplexType__000059_A_THE_HEADER.MaxOccurs = ``
+	__ComplexType__000059_A_THE_HEADER.IsDuplicatedInXSD = false
 
 	__ComplexType__000060_A_TOOL_EXTENSIONS.Name = `A_TOOL-EXTENSIONS`
 	__ComplexType__000060_A_TOOL_EXTENSIONS.HasNameConflict = false
@@ -3196,6 +3496,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000060_A_TOOL_EXTENSIONS.IsAnonymous = true
 	__ComplexType__000060_A_TOOL_EXTENSIONS.NameXSD = ``
 	__ComplexType__000060_A_TOOL_EXTENSIONS.OuterElementName = `A_TOOL-EXTENSIONS`
+	__ComplexType__000060_A_TOOL_EXTENSIONS.Order = 0
+	__ComplexType__000060_A_TOOL_EXTENSIONS.Depth = 0
+	__ComplexType__000060_A_TOOL_EXTENSIONS.MinOccurs = ``
+	__ComplexType__000060_A_TOOL_EXTENSIONS.MaxOccurs = ``
+	__ComplexType__000060_A_TOOL_EXTENSIONS.IsDuplicatedInXSD = false
 
 	__ComplexType__000061_DATATYPE_DEFINITION_BOOLEAN.Name = `DATATYPE-DEFINITION-BOOLEAN`
 	__ComplexType__000061_DATATYPE_DEFINITION_BOOLEAN.HasNameConflict = false
@@ -3203,6 +3508,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000061_DATATYPE_DEFINITION_BOOLEAN.IsAnonymous = false
 	__ComplexType__000061_DATATYPE_DEFINITION_BOOLEAN.NameXSD = `DATATYPE-DEFINITION-BOOLEAN`
 	__ComplexType__000061_DATATYPE_DEFINITION_BOOLEAN.OuterElementName = `DATATYPE-DEFINITION-BOOLEAN`
+	__ComplexType__000061_DATATYPE_DEFINITION_BOOLEAN.Order = 0
+	__ComplexType__000061_DATATYPE_DEFINITION_BOOLEAN.Depth = 0
+	__ComplexType__000061_DATATYPE_DEFINITION_BOOLEAN.MinOccurs = ``
+	__ComplexType__000061_DATATYPE_DEFINITION_BOOLEAN.MaxOccurs = ``
+	__ComplexType__000061_DATATYPE_DEFINITION_BOOLEAN.IsDuplicatedInXSD = false
 
 	__ComplexType__000062_DATATYPE_DEFINITION_DATE.Name = `DATATYPE-DEFINITION-DATE`
 	__ComplexType__000062_DATATYPE_DEFINITION_DATE.HasNameConflict = false
@@ -3210,6 +3520,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000062_DATATYPE_DEFINITION_DATE.IsAnonymous = false
 	__ComplexType__000062_DATATYPE_DEFINITION_DATE.NameXSD = `DATATYPE-DEFINITION-DATE`
 	__ComplexType__000062_DATATYPE_DEFINITION_DATE.OuterElementName = `DATATYPE-DEFINITION-DATE`
+	__ComplexType__000062_DATATYPE_DEFINITION_DATE.Order = 0
+	__ComplexType__000062_DATATYPE_DEFINITION_DATE.Depth = 0
+	__ComplexType__000062_DATATYPE_DEFINITION_DATE.MinOccurs = ``
+	__ComplexType__000062_DATATYPE_DEFINITION_DATE.MaxOccurs = ``
+	__ComplexType__000062_DATATYPE_DEFINITION_DATE.IsDuplicatedInXSD = false
 
 	__ComplexType__000063_DATATYPE_DEFINITION_ENUMERATION.Name = `DATATYPE-DEFINITION-ENUMERATION`
 	__ComplexType__000063_DATATYPE_DEFINITION_ENUMERATION.HasNameConflict = false
@@ -3217,6 +3532,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000063_DATATYPE_DEFINITION_ENUMERATION.IsAnonymous = false
 	__ComplexType__000063_DATATYPE_DEFINITION_ENUMERATION.NameXSD = `DATATYPE-DEFINITION-ENUMERATION`
 	__ComplexType__000063_DATATYPE_DEFINITION_ENUMERATION.OuterElementName = `DATATYPE-DEFINITION-ENUMERATION`
+	__ComplexType__000063_DATATYPE_DEFINITION_ENUMERATION.Order = 0
+	__ComplexType__000063_DATATYPE_DEFINITION_ENUMERATION.Depth = 0
+	__ComplexType__000063_DATATYPE_DEFINITION_ENUMERATION.MinOccurs = ``
+	__ComplexType__000063_DATATYPE_DEFINITION_ENUMERATION.MaxOccurs = ``
+	__ComplexType__000063_DATATYPE_DEFINITION_ENUMERATION.IsDuplicatedInXSD = false
 
 	__ComplexType__000064_DATATYPE_DEFINITION_INTEGER.Name = `DATATYPE-DEFINITION-INTEGER`
 	__ComplexType__000064_DATATYPE_DEFINITION_INTEGER.HasNameConflict = false
@@ -3224,6 +3544,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000064_DATATYPE_DEFINITION_INTEGER.IsAnonymous = false
 	__ComplexType__000064_DATATYPE_DEFINITION_INTEGER.NameXSD = `DATATYPE-DEFINITION-INTEGER`
 	__ComplexType__000064_DATATYPE_DEFINITION_INTEGER.OuterElementName = `DATATYPE-DEFINITION-INTEGER`
+	__ComplexType__000064_DATATYPE_DEFINITION_INTEGER.Order = 0
+	__ComplexType__000064_DATATYPE_DEFINITION_INTEGER.Depth = 0
+	__ComplexType__000064_DATATYPE_DEFINITION_INTEGER.MinOccurs = ``
+	__ComplexType__000064_DATATYPE_DEFINITION_INTEGER.MaxOccurs = ``
+	__ComplexType__000064_DATATYPE_DEFINITION_INTEGER.IsDuplicatedInXSD = false
 
 	__ComplexType__000065_DATATYPE_DEFINITION_REAL.Name = `DATATYPE-DEFINITION-REAL`
 	__ComplexType__000065_DATATYPE_DEFINITION_REAL.HasNameConflict = false
@@ -3231,6 +3556,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000065_DATATYPE_DEFINITION_REAL.IsAnonymous = false
 	__ComplexType__000065_DATATYPE_DEFINITION_REAL.NameXSD = `DATATYPE-DEFINITION-REAL`
 	__ComplexType__000065_DATATYPE_DEFINITION_REAL.OuterElementName = `DATATYPE-DEFINITION-REAL`
+	__ComplexType__000065_DATATYPE_DEFINITION_REAL.Order = 0
+	__ComplexType__000065_DATATYPE_DEFINITION_REAL.Depth = 0
+	__ComplexType__000065_DATATYPE_DEFINITION_REAL.MinOccurs = ``
+	__ComplexType__000065_DATATYPE_DEFINITION_REAL.MaxOccurs = ``
+	__ComplexType__000065_DATATYPE_DEFINITION_REAL.IsDuplicatedInXSD = false
 
 	__ComplexType__000066_DATATYPE_DEFINITION_STRING.Name = `DATATYPE-DEFINITION-STRING`
 	__ComplexType__000066_DATATYPE_DEFINITION_STRING.HasNameConflict = false
@@ -3238,6 +3568,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000066_DATATYPE_DEFINITION_STRING.IsAnonymous = false
 	__ComplexType__000066_DATATYPE_DEFINITION_STRING.NameXSD = `DATATYPE-DEFINITION-STRING`
 	__ComplexType__000066_DATATYPE_DEFINITION_STRING.OuterElementName = `DATATYPE-DEFINITION-STRING`
+	__ComplexType__000066_DATATYPE_DEFINITION_STRING.Order = 0
+	__ComplexType__000066_DATATYPE_DEFINITION_STRING.Depth = 0
+	__ComplexType__000066_DATATYPE_DEFINITION_STRING.MinOccurs = ``
+	__ComplexType__000066_DATATYPE_DEFINITION_STRING.MaxOccurs = ``
+	__ComplexType__000066_DATATYPE_DEFINITION_STRING.IsDuplicatedInXSD = false
 
 	__ComplexType__000067_DATATYPE_DEFINITION_XHTML.Name = `DATATYPE-DEFINITION-XHTML`
 	__ComplexType__000067_DATATYPE_DEFINITION_XHTML.HasNameConflict = false
@@ -3245,6 +3580,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000067_DATATYPE_DEFINITION_XHTML.IsAnonymous = false
 	__ComplexType__000067_DATATYPE_DEFINITION_XHTML.NameXSD = `DATATYPE-DEFINITION-XHTML`
 	__ComplexType__000067_DATATYPE_DEFINITION_XHTML.OuterElementName = `DATATYPE-DEFINITION-XHTML`
+	__ComplexType__000067_DATATYPE_DEFINITION_XHTML.Order = 0
+	__ComplexType__000067_DATATYPE_DEFINITION_XHTML.Depth = 0
+	__ComplexType__000067_DATATYPE_DEFINITION_XHTML.MinOccurs = ``
+	__ComplexType__000067_DATATYPE_DEFINITION_XHTML.MaxOccurs = ``
+	__ComplexType__000067_DATATYPE_DEFINITION_XHTML.IsDuplicatedInXSD = false
 
 	__ComplexType__000068_EMBEDDED_VALUE.Name = `EMBEDDED-VALUE`
 	__ComplexType__000068_EMBEDDED_VALUE.HasNameConflict = false
@@ -3252,6 +3592,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000068_EMBEDDED_VALUE.IsAnonymous = false
 	__ComplexType__000068_EMBEDDED_VALUE.NameXSD = `EMBEDDED-VALUE`
 	__ComplexType__000068_EMBEDDED_VALUE.OuterElementName = `EMBEDDED-VALUE`
+	__ComplexType__000068_EMBEDDED_VALUE.Order = 0
+	__ComplexType__000068_EMBEDDED_VALUE.Depth = 0
+	__ComplexType__000068_EMBEDDED_VALUE.MinOccurs = ``
+	__ComplexType__000068_EMBEDDED_VALUE.MaxOccurs = ``
+	__ComplexType__000068_EMBEDDED_VALUE.IsDuplicatedInXSD = false
 
 	__ComplexType__000069_ENUM_VALUE.Name = `ENUM-VALUE`
 	__ComplexType__000069_ENUM_VALUE.HasNameConflict = false
@@ -3259,6 +3604,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000069_ENUM_VALUE.IsAnonymous = false
 	__ComplexType__000069_ENUM_VALUE.NameXSD = `ENUM-VALUE`
 	__ComplexType__000069_ENUM_VALUE.OuterElementName = `ENUM-VALUE`
+	__ComplexType__000069_ENUM_VALUE.Order = 0
+	__ComplexType__000069_ENUM_VALUE.Depth = 0
+	__ComplexType__000069_ENUM_VALUE.MinOccurs = ``
+	__ComplexType__000069_ENUM_VALUE.MaxOccurs = ``
+	__ComplexType__000069_ENUM_VALUE.IsDuplicatedInXSD = false
 
 	__ComplexType__000070_RELATION_GROUP.Name = `RELATION-GROUP`
 	__ComplexType__000070_RELATION_GROUP.HasNameConflict = false
@@ -3266,6 +3616,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000070_RELATION_GROUP.IsAnonymous = false
 	__ComplexType__000070_RELATION_GROUP.NameXSD = `RELATION-GROUP`
 	__ComplexType__000070_RELATION_GROUP.OuterElementName = `RELATION-GROUP`
+	__ComplexType__000070_RELATION_GROUP.Order = 0
+	__ComplexType__000070_RELATION_GROUP.Depth = 0
+	__ComplexType__000070_RELATION_GROUP.MinOccurs = ``
+	__ComplexType__000070_RELATION_GROUP.MaxOccurs = ``
+	__ComplexType__000070_RELATION_GROUP.IsDuplicatedInXSD = false
 
 	__ComplexType__000071_RELATION_GROUP_TYPE.Name = `RELATION-GROUP-TYPE`
 	__ComplexType__000071_RELATION_GROUP_TYPE.HasNameConflict = false
@@ -3273,6 +3628,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000071_RELATION_GROUP_TYPE.IsAnonymous = false
 	__ComplexType__000071_RELATION_GROUP_TYPE.NameXSD = `RELATION-GROUP-TYPE`
 	__ComplexType__000071_RELATION_GROUP_TYPE.OuterElementName = `RELATION-GROUP-TYPE`
+	__ComplexType__000071_RELATION_GROUP_TYPE.Order = 0
+	__ComplexType__000071_RELATION_GROUP_TYPE.Depth = 0
+	__ComplexType__000071_RELATION_GROUP_TYPE.MinOccurs = ``
+	__ComplexType__000071_RELATION_GROUP_TYPE.MaxOccurs = ``
+	__ComplexType__000071_RELATION_GROUP_TYPE.IsDuplicatedInXSD = false
 
 	__ComplexType__000072_REQ_IF.Name = `REQ-IF`
 	__ComplexType__000072_REQ_IF.HasNameConflict = false
@@ -3280,6 +3640,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000072_REQ_IF.IsAnonymous = false
 	__ComplexType__000072_REQ_IF.NameXSD = `REQ-IF`
 	__ComplexType__000072_REQ_IF.OuterElementName = `REQ-IF`
+	__ComplexType__000072_REQ_IF.Order = 0
+	__ComplexType__000072_REQ_IF.Depth = 0
+	__ComplexType__000072_REQ_IF.MinOccurs = ``
+	__ComplexType__000072_REQ_IF.MaxOccurs = ``
+	__ComplexType__000072_REQ_IF.IsDuplicatedInXSD = false
 
 	__ComplexType__000073_REQ_IF_CONTENT.Name = `REQ-IF-CONTENT`
 	__ComplexType__000073_REQ_IF_CONTENT.HasNameConflict = false
@@ -3287,6 +3652,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000073_REQ_IF_CONTENT.IsAnonymous = false
 	__ComplexType__000073_REQ_IF_CONTENT.NameXSD = `REQ-IF-CONTENT`
 	__ComplexType__000073_REQ_IF_CONTENT.OuterElementName = `REQ-IF-CONTENT`
+	__ComplexType__000073_REQ_IF_CONTENT.Order = 0
+	__ComplexType__000073_REQ_IF_CONTENT.Depth = 0
+	__ComplexType__000073_REQ_IF_CONTENT.MinOccurs = ``
+	__ComplexType__000073_REQ_IF_CONTENT.MaxOccurs = ``
+	__ComplexType__000073_REQ_IF_CONTENT.IsDuplicatedInXSD = false
 
 	__ComplexType__000074_REQ_IF_HEADER.Name = `REQ-IF-HEADER`
 	__ComplexType__000074_REQ_IF_HEADER.HasNameConflict = false
@@ -3294,6 +3664,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000074_REQ_IF_HEADER.IsAnonymous = false
 	__ComplexType__000074_REQ_IF_HEADER.NameXSD = `REQ-IF-HEADER`
 	__ComplexType__000074_REQ_IF_HEADER.OuterElementName = `REQ-IF-HEADER`
+	__ComplexType__000074_REQ_IF_HEADER.Order = 0
+	__ComplexType__000074_REQ_IF_HEADER.Depth = 0
+	__ComplexType__000074_REQ_IF_HEADER.MinOccurs = ``
+	__ComplexType__000074_REQ_IF_HEADER.MaxOccurs = ``
+	__ComplexType__000074_REQ_IF_HEADER.IsDuplicatedInXSD = false
 
 	__ComplexType__000075_REQ_IF_TOOL_EXTENSION.Name = `REQ-IF-TOOL-EXTENSION`
 	__ComplexType__000075_REQ_IF_TOOL_EXTENSION.HasNameConflict = false
@@ -3301,6 +3676,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000075_REQ_IF_TOOL_EXTENSION.IsAnonymous = false
 	__ComplexType__000075_REQ_IF_TOOL_EXTENSION.NameXSD = `REQ-IF-TOOL-EXTENSION`
 	__ComplexType__000075_REQ_IF_TOOL_EXTENSION.OuterElementName = `REQ-IF-TOOL-EXTENSION`
+	__ComplexType__000075_REQ_IF_TOOL_EXTENSION.Order = 0
+	__ComplexType__000075_REQ_IF_TOOL_EXTENSION.Depth = 0
+	__ComplexType__000075_REQ_IF_TOOL_EXTENSION.MinOccurs = ``
+	__ComplexType__000075_REQ_IF_TOOL_EXTENSION.MaxOccurs = ``
+	__ComplexType__000075_REQ_IF_TOOL_EXTENSION.IsDuplicatedInXSD = false
 
 	__ComplexType__000076_SPEC_HIERARCHY.Name = `SPEC-HIERARCHY`
 	__ComplexType__000076_SPEC_HIERARCHY.HasNameConflict = false
@@ -3308,6 +3688,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000076_SPEC_HIERARCHY.IsAnonymous = false
 	__ComplexType__000076_SPEC_HIERARCHY.NameXSD = `SPEC-HIERARCHY`
 	__ComplexType__000076_SPEC_HIERARCHY.OuterElementName = `SPEC-HIERARCHY`
+	__ComplexType__000076_SPEC_HIERARCHY.Order = 0
+	__ComplexType__000076_SPEC_HIERARCHY.Depth = 0
+	__ComplexType__000076_SPEC_HIERARCHY.MinOccurs = ``
+	__ComplexType__000076_SPEC_HIERARCHY.MaxOccurs = ``
+	__ComplexType__000076_SPEC_HIERARCHY.IsDuplicatedInXSD = false
 
 	__ComplexType__000077_SPEC_OBJECT.Name = `SPEC-OBJECT`
 	__ComplexType__000077_SPEC_OBJECT.HasNameConflict = false
@@ -3315,6 +3700,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000077_SPEC_OBJECT.IsAnonymous = false
 	__ComplexType__000077_SPEC_OBJECT.NameXSD = `SPEC-OBJECT`
 	__ComplexType__000077_SPEC_OBJECT.OuterElementName = `SPEC-OBJECT`
+	__ComplexType__000077_SPEC_OBJECT.Order = 0
+	__ComplexType__000077_SPEC_OBJECT.Depth = 0
+	__ComplexType__000077_SPEC_OBJECT.MinOccurs = ``
+	__ComplexType__000077_SPEC_OBJECT.MaxOccurs = ``
+	__ComplexType__000077_SPEC_OBJECT.IsDuplicatedInXSD = false
 
 	__ComplexType__000078_SPEC_OBJECT_TYPE.Name = `SPEC-OBJECT-TYPE`
 	__ComplexType__000078_SPEC_OBJECT_TYPE.HasNameConflict = false
@@ -3322,6 +3712,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000078_SPEC_OBJECT_TYPE.IsAnonymous = false
 	__ComplexType__000078_SPEC_OBJECT_TYPE.NameXSD = `SPEC-OBJECT-TYPE`
 	__ComplexType__000078_SPEC_OBJECT_TYPE.OuterElementName = `SPEC-OBJECT-TYPE`
+	__ComplexType__000078_SPEC_OBJECT_TYPE.Order = 0
+	__ComplexType__000078_SPEC_OBJECT_TYPE.Depth = 0
+	__ComplexType__000078_SPEC_OBJECT_TYPE.MinOccurs = ``
+	__ComplexType__000078_SPEC_OBJECT_TYPE.MaxOccurs = ``
+	__ComplexType__000078_SPEC_OBJECT_TYPE.IsDuplicatedInXSD = false
 
 	__ComplexType__000079_SPEC_RELATION.Name = `SPEC-RELATION`
 	__ComplexType__000079_SPEC_RELATION.HasNameConflict = false
@@ -3329,6 +3724,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000079_SPEC_RELATION.IsAnonymous = false
 	__ComplexType__000079_SPEC_RELATION.NameXSD = `SPEC-RELATION`
 	__ComplexType__000079_SPEC_RELATION.OuterElementName = `SPEC-RELATION`
+	__ComplexType__000079_SPEC_RELATION.Order = 0
+	__ComplexType__000079_SPEC_RELATION.Depth = 0
+	__ComplexType__000079_SPEC_RELATION.MinOccurs = ``
+	__ComplexType__000079_SPEC_RELATION.MaxOccurs = ``
+	__ComplexType__000079_SPEC_RELATION.IsDuplicatedInXSD = false
 
 	__ComplexType__000080_SPEC_RELATION_TYPE.Name = `SPEC-RELATION-TYPE`
 	__ComplexType__000080_SPEC_RELATION_TYPE.HasNameConflict = false
@@ -3336,6 +3736,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000080_SPEC_RELATION_TYPE.IsAnonymous = false
 	__ComplexType__000080_SPEC_RELATION_TYPE.NameXSD = `SPEC-RELATION-TYPE`
 	__ComplexType__000080_SPEC_RELATION_TYPE.OuterElementName = `SPEC-RELATION-TYPE`
+	__ComplexType__000080_SPEC_RELATION_TYPE.Order = 0
+	__ComplexType__000080_SPEC_RELATION_TYPE.Depth = 0
+	__ComplexType__000080_SPEC_RELATION_TYPE.MinOccurs = ``
+	__ComplexType__000080_SPEC_RELATION_TYPE.MaxOccurs = ``
+	__ComplexType__000080_SPEC_RELATION_TYPE.IsDuplicatedInXSD = false
 
 	__ComplexType__000081_SPECIFICATION.Name = `SPECIFICATION`
 	__ComplexType__000081_SPECIFICATION.HasNameConflict = false
@@ -3343,6 +3748,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000081_SPECIFICATION.IsAnonymous = false
 	__ComplexType__000081_SPECIFICATION.NameXSD = `SPECIFICATION`
 	__ComplexType__000081_SPECIFICATION.OuterElementName = `SPECIFICATION`
+	__ComplexType__000081_SPECIFICATION.Order = 0
+	__ComplexType__000081_SPECIFICATION.Depth = 0
+	__ComplexType__000081_SPECIFICATION.MinOccurs = ``
+	__ComplexType__000081_SPECIFICATION.MaxOccurs = ``
+	__ComplexType__000081_SPECIFICATION.IsDuplicatedInXSD = false
 
 	__ComplexType__000082_SPECIFICATION_TYPE.Name = `SPECIFICATION-TYPE`
 	__ComplexType__000082_SPECIFICATION_TYPE.HasNameConflict = false
@@ -3350,6 +3760,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000082_SPECIFICATION_TYPE.IsAnonymous = false
 	__ComplexType__000082_SPECIFICATION_TYPE.NameXSD = `SPECIFICATION-TYPE`
 	__ComplexType__000082_SPECIFICATION_TYPE.OuterElementName = `SPECIFICATION-TYPE`
+	__ComplexType__000082_SPECIFICATION_TYPE.Order = 0
+	__ComplexType__000082_SPECIFICATION_TYPE.Depth = 0
+	__ComplexType__000082_SPECIFICATION_TYPE.MinOccurs = ``
+	__ComplexType__000082_SPECIFICATION_TYPE.MaxOccurs = ``
+	__ComplexType__000082_SPECIFICATION_TYPE.IsDuplicatedInXSD = false
 
 	__ComplexType__000083_XHTML_CONTENT.Name = `XHTML-CONTENT`
 	__ComplexType__000083_XHTML_CONTENT.HasNameConflict = false
@@ -3357,6 +3772,11 @@ func _(stage *models.StageStruct) {
 	__ComplexType__000083_XHTML_CONTENT.IsAnonymous = false
 	__ComplexType__000083_XHTML_CONTENT.NameXSD = `XHTML-CONTENT`
 	__ComplexType__000083_XHTML_CONTENT.OuterElementName = `XHTML-CONTENT`
+	__ComplexType__000083_XHTML_CONTENT.Order = 0
+	__ComplexType__000083_XHTML_CONTENT.Depth = 0
+	__ComplexType__000083_XHTML_CONTENT.MinOccurs = ``
+	__ComplexType__000083_XHTML_CONTENT.MaxOccurs = ``
+	__ComplexType__000083_XHTML_CONTENT.IsDuplicatedInXSD = false
 
 	__Element__000000_ALTERNATIVE_ID.Name = `ALTERNATIVE-ID`
 	__Element__000000_ALTERNATIVE_ID.Order = 2
@@ -4157,7 +4577,7 @@ func _(stage *models.StageStruct) {
 	__Element__000041_DATATYPES.IsDuplicatedInXSD = false
 
 	__Element__000042_DEFAULT_VALUE.Name = `DEFAULT-VALUE`
-	__Element__000042_DEFAULT_VALUE.Order = 33
+	__Element__000042_DEFAULT_VALUE.Order = 27
 	__Element__000042_DEFAULT_VALUE.Depth = 0
 	__Element__000042_DEFAULT_VALUE.HasNameConflict = false
 	__Element__000042_DEFAULT_VALUE.GoIdentifier = `DEFAULT_VALUE`
@@ -4195,7 +4615,7 @@ func _(stage *models.StageStruct) {
 	__Element__000043_DEFAULT_VALUE.IsDuplicatedInXSD = false
 
 	__Element__000044_DEFAULT_VALUE.Name = `DEFAULT-VALUE`
-	__Element__000044_DEFAULT_VALUE.Order = 21
+	__Element__000044_DEFAULT_VALUE.Order = 9
 	__Element__000044_DEFAULT_VALUE.Depth = 0
 	__Element__000044_DEFAULT_VALUE.HasNameConflict = false
 	__Element__000044_DEFAULT_VALUE.GoIdentifier = `DEFAULT_VALUE`
@@ -4214,7 +4634,7 @@ func _(stage *models.StageStruct) {
 	__Element__000044_DEFAULT_VALUE.IsDuplicatedInXSD = false
 
 	__Element__000045_DEFAULT_VALUE.Name = `DEFAULT-VALUE`
-	__Element__000045_DEFAULT_VALUE.Order = 9
+	__Element__000045_DEFAULT_VALUE.Order = 13
 	__Element__000045_DEFAULT_VALUE.Depth = 0
 	__Element__000045_DEFAULT_VALUE.HasNameConflict = false
 	__Element__000045_DEFAULT_VALUE.GoIdentifier = `DEFAULT_VALUE`
@@ -4233,7 +4653,7 @@ func _(stage *models.StageStruct) {
 	__Element__000045_DEFAULT_VALUE.IsDuplicatedInXSD = false
 
 	__Element__000046_DEFAULT_VALUE.Name = `DEFAULT-VALUE`
-	__Element__000046_DEFAULT_VALUE.Order = 13
+	__Element__000046_DEFAULT_VALUE.Order = 39
 	__Element__000046_DEFAULT_VALUE.Depth = 0
 	__Element__000046_DEFAULT_VALUE.HasNameConflict = false
 	__Element__000046_DEFAULT_VALUE.GoIdentifier = `DEFAULT_VALUE`
@@ -4252,7 +4672,7 @@ func _(stage *models.StageStruct) {
 	__Element__000046_DEFAULT_VALUE.IsDuplicatedInXSD = false
 
 	__Element__000047_DEFAULT_VALUE.Name = `DEFAULT-VALUE`
-	__Element__000047_DEFAULT_VALUE.Order = 27
+	__Element__000047_DEFAULT_VALUE.Order = 33
 	__Element__000047_DEFAULT_VALUE.Depth = 0
 	__Element__000047_DEFAULT_VALUE.HasNameConflict = false
 	__Element__000047_DEFAULT_VALUE.GoIdentifier = `DEFAULT_VALUE`
@@ -4271,7 +4691,7 @@ func _(stage *models.StageStruct) {
 	__Element__000047_DEFAULT_VALUE.IsDuplicatedInXSD = false
 
 	__Element__000048_DEFAULT_VALUE.Name = `DEFAULT-VALUE`
-	__Element__000048_DEFAULT_VALUE.Order = 39
+	__Element__000048_DEFAULT_VALUE.Order = 21
 	__Element__000048_DEFAULT_VALUE.Depth = 0
 	__Element__000048_DEFAULT_VALUE.HasNameConflict = false
 	__Element__000048_DEFAULT_VALUE.GoIdentifier = `DEFAULT_VALUE`
@@ -4309,7 +4729,7 @@ func _(stage *models.StageStruct) {
 	__Element__000049_DEFINITION.IsDuplicatedInXSD = false
 
 	__Element__000050_DEFINITION.Name = `DEFINITION`
-	__Element__000050_DEFINITION.Order = 53
+	__Element__000050_DEFINITION.Order = 51
 	__Element__000050_DEFINITION.Depth = 0
 	__Element__000050_DEFINITION.HasNameConflict = false
 	__Element__000050_DEFINITION.GoIdentifier = `DEFINITION`
@@ -4328,7 +4748,7 @@ func _(stage *models.StageStruct) {
 	__Element__000050_DEFINITION.IsDuplicatedInXSD = false
 
 	__Element__000051_DEFINITION.Name = `DEFINITION`
-	__Element__000051_DEFINITION.Order = 47
+	__Element__000051_DEFINITION.Order = 59
 	__Element__000051_DEFINITION.Depth = 0
 	__Element__000051_DEFINITION.HasNameConflict = false
 	__Element__000051_DEFINITION.GoIdentifier = `DEFINITION`
@@ -4347,7 +4767,7 @@ func _(stage *models.StageStruct) {
 	__Element__000051_DEFINITION.IsDuplicatedInXSD = false
 
 	__Element__000052_DEFINITION.Name = `DEFINITION`
-	__Element__000052_DEFINITION.Order = 51
+	__Element__000052_DEFINITION.Order = 53
 	__Element__000052_DEFINITION.Depth = 0
 	__Element__000052_DEFINITION.HasNameConflict = false
 	__Element__000052_DEFINITION.GoIdentifier = `DEFINITION`
@@ -4385,7 +4805,7 @@ func _(stage *models.StageStruct) {
 	__Element__000053_DEFINITION.IsDuplicatedInXSD = false
 
 	__Element__000054_DEFINITION.Name = `DEFINITION`
-	__Element__000054_DEFINITION.Order = 59
+	__Element__000054_DEFINITION.Order = 47
 	__Element__000054_DEFINITION.Depth = 0
 	__Element__000054_DEFINITION.HasNameConflict = false
 	__Element__000054_DEFINITION.GoIdentifier = `DEFINITION`
@@ -5031,7 +5451,7 @@ func _(stage *models.StageStruct) {
 	__Element__000087_SPEC_RELATION_TYPE_REF.IsDuplicatedInXSD = false
 
 	__Element__000088_SPEC_RELATIONS.Name = `SPEC-RELATIONS`
-	__Element__000088_SPEC_RELATIONS.Order = 122
+	__Element__000088_SPEC_RELATIONS.Order = 85
 	__Element__000088_SPEC_RELATIONS.Depth = 0
 	__Element__000088_SPEC_RELATIONS.HasNameConflict = false
 	__Element__000088_SPEC_RELATIONS.GoIdentifier = `SPEC_RELATIONS`
@@ -5050,7 +5470,7 @@ func _(stage *models.StageStruct) {
 	__Element__000088_SPEC_RELATIONS.IsDuplicatedInXSD = false
 
 	__Element__000089_SPEC_RELATIONS.Name = `SPEC-RELATIONS`
-	__Element__000089_SPEC_RELATIONS.Order = 85
+	__Element__000089_SPEC_RELATIONS.Order = 122
 	__Element__000089_SPEC_RELATIONS.Depth = 0
 	__Element__000089_SPEC_RELATIONS.HasNameConflict = false
 	__Element__000089_SPEC_RELATIONS.GoIdentifier = `SPEC_RELATIONS`
@@ -5335,7 +5755,7 @@ func _(stage *models.StageStruct) {
 	__Element__000103_TOOL_EXTENSIONS.IsDuplicatedInXSD = false
 
 	__Element__000104_TYPE.Name = `TYPE`
-	__Element__000104_TYPE.Order = 89
+	__Element__000104_TYPE.Order = 209
 	__Element__000104_TYPE.Depth = 0
 	__Element__000104_TYPE.HasNameConflict = false
 	__Element__000104_TYPE.GoIdentifier = `TYPE`
@@ -5354,7 +5774,7 @@ func _(stage *models.StageStruct) {
 	__Element__000104_TYPE.IsDuplicatedInXSD = false
 
 	__Element__000105_TYPE.Name = `TYPE`
-	__Element__000105_TYPE.Order = 17
+	__Element__000105_TYPE.Order = 35
 	__Element__000105_TYPE.Depth = 0
 	__Element__000105_TYPE.HasNameConflict = false
 	__Element__000105_TYPE.GoIdentifier = `TYPE`
@@ -5373,7 +5793,7 @@ func _(stage *models.StageStruct) {
 	__Element__000105_TYPE.IsDuplicatedInXSD = false
 
 	__Element__000106_TYPE.Name = `TYPE`
-	__Element__000106_TYPE.Order = 41
+	__Element__000106_TYPE.Order = 185
 	__Element__000106_TYPE.Depth = 0
 	__Element__000106_TYPE.HasNameConflict = false
 	__Element__000106_TYPE.GoIdentifier = `TYPE`
@@ -5411,7 +5831,7 @@ func _(stage *models.StageStruct) {
 	__Element__000107_TYPE.IsDuplicatedInXSD = false
 
 	__Element__000108_TYPE.Name = `TYPE`
-	__Element__000108_TYPE.Order = 11
+	__Element__000108_TYPE.Order = 89
 	__Element__000108_TYPE.Depth = 0
 	__Element__000108_TYPE.HasNameConflict = false
 	__Element__000108_TYPE.GoIdentifier = `TYPE`
@@ -5430,7 +5850,7 @@ func _(stage *models.StageStruct) {
 	__Element__000108_TYPE.IsDuplicatedInXSD = false
 
 	__Element__000109_TYPE.Name = `TYPE`
-	__Element__000109_TYPE.Order = 159
+	__Element__000109_TYPE.Order = 17
 	__Element__000109_TYPE.Depth = 0
 	__Element__000109_TYPE.HasNameConflict = false
 	__Element__000109_TYPE.GoIdentifier = `TYPE`
@@ -5449,7 +5869,7 @@ func _(stage *models.StageStruct) {
 	__Element__000109_TYPE.IsDuplicatedInXSD = false
 
 	__Element__000110_TYPE.Name = `TYPE`
-	__Element__000110_TYPE.Order = 35
+	__Element__000110_TYPE.Order = 29
 	__Element__000110_TYPE.Depth = 0
 	__Element__000110_TYPE.HasNameConflict = false
 	__Element__000110_TYPE.GoIdentifier = `TYPE`
@@ -5487,7 +5907,7 @@ func _(stage *models.StageStruct) {
 	__Element__000111_TYPE.IsDuplicatedInXSD = false
 
 	__Element__000112_TYPE.Name = `TYPE`
-	__Element__000112_TYPE.Order = 29
+	__Element__000112_TYPE.Order = 159
 	__Element__000112_TYPE.Depth = 0
 	__Element__000112_TYPE.HasNameConflict = false
 	__Element__000112_TYPE.GoIdentifier = `TYPE`
@@ -5506,7 +5926,7 @@ func _(stage *models.StageStruct) {
 	__Element__000112_TYPE.IsDuplicatedInXSD = false
 
 	__Element__000113_TYPE.Name = `TYPE`
-	__Element__000113_TYPE.Order = 185
+	__Element__000113_TYPE.Order = 11
 	__Element__000113_TYPE.Depth = 0
 	__Element__000113_TYPE.HasNameConflict = false
 	__Element__000113_TYPE.GoIdentifier = `TYPE`
@@ -5525,7 +5945,7 @@ func _(stage *models.StageStruct) {
 	__Element__000113_TYPE.IsDuplicatedInXSD = false
 
 	__Element__000114_TYPE.Name = `TYPE`
-	__Element__000114_TYPE.Order = 209
+	__Element__000114_TYPE.Order = 41
 	__Element__000114_TYPE.Depth = 0
 	__Element__000114_TYPE.HasNameConflict = false
 	__Element__000114_TYPE.GoIdentifier = `TYPE`
@@ -5590,6 +6010,8 @@ func _(stage *models.StageStruct) {
 	__Group__000000_XHTML_CONTENT_G_.OuterElementName = `XHTML-CONTENT_G_`
 	__Group__000000_XHTML_CONTENT_G_.Order = 221
 	__Group__000000_XHTML_CONTENT_G_.Depth = 0
+	__Group__000000_XHTML_CONTENT_G_.MinOccurs = ``
+	__Group__000000_XHTML_CONTENT_G_.MaxOccurs = ``
 
 	__Restriction__000000_GLOBAL_REF_Inlined.Name = `GLOBAL-REF_Inlined`
 	__Restriction__000000_GLOBAL_REF_Inlined.Base = `string`
@@ -5599,34 +6021,36 @@ func _(stage *models.StageStruct) {
 
 	__Schema__000000_Schema.Name = `Schema`
 	__Schema__000000_Schema.Xs = ``
+	__Schema__000000_Schema.Order = 0
+	__Schema__000000_Schema.Depth = 0
 
 	__Sequence__000000_REQ_IF_CONTENT_S_.Name = `REQ-IF-CONTENT_S_`
-	__Sequence__000000_REQ_IF_CONTENT_S_.MinOccurs = ``
-	__Sequence__000000_REQ_IF_CONTENT_S_.MaxOccurs = ``
 	__Sequence__000000_REQ_IF_CONTENT_S_.OuterElementName = `REQ-IF-CONTENT_S_`
 	__Sequence__000000_REQ_IF_CONTENT_S_.Order = 0
 	__Sequence__000000_REQ_IF_CONTENT_S_.Depth = 0
+	__Sequence__000000_REQ_IF_CONTENT_S_.MinOccurs = ``
+	__Sequence__000000_REQ_IF_CONTENT_S_.MaxOccurs = ``
 
 	__Sequence__000001_REQ_IF_HEADER_S_.Name = `REQ-IF-HEADER_S_`
-	__Sequence__000001_REQ_IF_HEADER_S_.MinOccurs = ``
-	__Sequence__000001_REQ_IF_HEADER_S_.MaxOccurs = ``
 	__Sequence__000001_REQ_IF_HEADER_S_.OuterElementName = `REQ-IF-HEADER_S_`
 	__Sequence__000001_REQ_IF_HEADER_S_.Order = 0
 	__Sequence__000001_REQ_IF_HEADER_S_.Depth = 0
+	__Sequence__000001_REQ_IF_HEADER_S_.MinOccurs = ``
+	__Sequence__000001_REQ_IF_HEADER_S_.MaxOccurs = ``
 
 	__Sequence__000002_REQ_IF_TOOL_EXTENSION_S_.Name = `REQ-IF-TOOL-EXTENSION_S_`
-	__Sequence__000002_REQ_IF_TOOL_EXTENSION_S_.MinOccurs = ``
-	__Sequence__000002_REQ_IF_TOOL_EXTENSION_S_.MaxOccurs = ``
 	__Sequence__000002_REQ_IF_TOOL_EXTENSION_S_.OuterElementName = `REQ-IF-TOOL-EXTENSION_S_`
 	__Sequence__000002_REQ_IF_TOOL_EXTENSION_S_.Order = 0
 	__Sequence__000002_REQ_IF_TOOL_EXTENSION_S_.Depth = 0
+	__Sequence__000002_REQ_IF_TOOL_EXTENSION_S_.MinOccurs = ``
+	__Sequence__000002_REQ_IF_TOOL_EXTENSION_S_.MaxOccurs = ``
 
 	__Sequence__000003_REQ_IF_S_.Name = `REQ-IF_S_`
-	__Sequence__000003_REQ_IF_S_.MinOccurs = ``
-	__Sequence__000003_REQ_IF_S_.MaxOccurs = ``
 	__Sequence__000003_REQ_IF_S_.OuterElementName = `REQ-IF_S_`
 	__Sequence__000003_REQ_IF_S_.Order = 0
 	__Sequence__000003_REQ_IF_S_.Depth = 0
+	__Sequence__000003_REQ_IF_S_.MinOccurs = ``
+	__Sequence__000003_REQ_IF_S_.MaxOccurs = ``
 
 	__SimpleType__000000_GLOBAL_REF.Name = `GLOBAL-REF`
 	__SimpleType__000000_GLOBAL_REF.NameXSD = `GLOBAL-REF`
@@ -5639,33 +6063,33 @@ func _(stage *models.StageStruct) {
 	__All__000001_ATTRIBUTE_DEFINITION_BOOLEAN_A_.Elements = append(__All__000001_ATTRIBUTE_DEFINITION_BOOLEAN_A_.Elements, __Element__000043_DEFAULT_VALUE)
 	__All__000001_ATTRIBUTE_DEFINITION_BOOLEAN_A_.Elements = append(__All__000001_ATTRIBUTE_DEFINITION_BOOLEAN_A_.Elements, __Element__000107_TYPE)
 	__All__000002_ATTRIBUTE_DEFINITION_DATE_A_.Elements = append(__All__000002_ATTRIBUTE_DEFINITION_DATE_A_.Elements, __Element__000001_ALTERNATIVE_ID)
-	__All__000002_ATTRIBUTE_DEFINITION_DATE_A_.Elements = append(__All__000002_ATTRIBUTE_DEFINITION_DATE_A_.Elements, __Element__000045_DEFAULT_VALUE)
-	__All__000002_ATTRIBUTE_DEFINITION_DATE_A_.Elements = append(__All__000002_ATTRIBUTE_DEFINITION_DATE_A_.Elements, __Element__000108_TYPE)
-	__All__000003_ATTRIBUTE_DEFINITION_ENUMERATION_A_.Elements = append(__All__000003_ATTRIBUTE_DEFINITION_ENUMERATION_A_.Elements, __Element__000046_DEFAULT_VALUE)
+	__All__000002_ATTRIBUTE_DEFINITION_DATE_A_.Elements = append(__All__000002_ATTRIBUTE_DEFINITION_DATE_A_.Elements, __Element__000044_DEFAULT_VALUE)
+	__All__000002_ATTRIBUTE_DEFINITION_DATE_A_.Elements = append(__All__000002_ATTRIBUTE_DEFINITION_DATE_A_.Elements, __Element__000113_TYPE)
+	__All__000003_ATTRIBUTE_DEFINITION_ENUMERATION_A_.Elements = append(__All__000003_ATTRIBUTE_DEFINITION_ENUMERATION_A_.Elements, __Element__000045_DEFAULT_VALUE)
 	__All__000003_ATTRIBUTE_DEFINITION_ENUMERATION_A_.Elements = append(__All__000003_ATTRIBUTE_DEFINITION_ENUMERATION_A_.Elements, __Element__000001_ALTERNATIVE_ID)
-	__All__000003_ATTRIBUTE_DEFINITION_ENUMERATION_A_.Elements = append(__All__000003_ATTRIBUTE_DEFINITION_ENUMERATION_A_.Elements, __Element__000105_TYPE)
+	__All__000003_ATTRIBUTE_DEFINITION_ENUMERATION_A_.Elements = append(__All__000003_ATTRIBUTE_DEFINITION_ENUMERATION_A_.Elements, __Element__000109_TYPE)
 	__All__000004_ATTRIBUTE_DEFINITION_INTEGER_A_.Elements = append(__All__000004_ATTRIBUTE_DEFINITION_INTEGER_A_.Elements, __Element__000001_ALTERNATIVE_ID)
-	__All__000004_ATTRIBUTE_DEFINITION_INTEGER_A_.Elements = append(__All__000004_ATTRIBUTE_DEFINITION_INTEGER_A_.Elements, __Element__000044_DEFAULT_VALUE)
+	__All__000004_ATTRIBUTE_DEFINITION_INTEGER_A_.Elements = append(__All__000004_ATTRIBUTE_DEFINITION_INTEGER_A_.Elements, __Element__000048_DEFAULT_VALUE)
 	__All__000004_ATTRIBUTE_DEFINITION_INTEGER_A_.Elements = append(__All__000004_ATTRIBUTE_DEFINITION_INTEGER_A_.Elements, __Element__000111_TYPE)
 	__All__000005_ATTRIBUTE_DEFINITION_REAL_A_.Elements = append(__All__000005_ATTRIBUTE_DEFINITION_REAL_A_.Elements, __Element__000001_ALTERNATIVE_ID)
-	__All__000005_ATTRIBUTE_DEFINITION_REAL_A_.Elements = append(__All__000005_ATTRIBUTE_DEFINITION_REAL_A_.Elements, __Element__000047_DEFAULT_VALUE)
-	__All__000005_ATTRIBUTE_DEFINITION_REAL_A_.Elements = append(__All__000005_ATTRIBUTE_DEFINITION_REAL_A_.Elements, __Element__000112_TYPE)
+	__All__000005_ATTRIBUTE_DEFINITION_REAL_A_.Elements = append(__All__000005_ATTRIBUTE_DEFINITION_REAL_A_.Elements, __Element__000042_DEFAULT_VALUE)
+	__All__000005_ATTRIBUTE_DEFINITION_REAL_A_.Elements = append(__All__000005_ATTRIBUTE_DEFINITION_REAL_A_.Elements, __Element__000110_TYPE)
 	__All__000006_ATTRIBUTE_DEFINITION_STRING_A_.Elements = append(__All__000006_ATTRIBUTE_DEFINITION_STRING_A_.Elements, __Element__000001_ALTERNATIVE_ID)
-	__All__000006_ATTRIBUTE_DEFINITION_STRING_A_.Elements = append(__All__000006_ATTRIBUTE_DEFINITION_STRING_A_.Elements, __Element__000042_DEFAULT_VALUE)
-	__All__000006_ATTRIBUTE_DEFINITION_STRING_A_.Elements = append(__All__000006_ATTRIBUTE_DEFINITION_STRING_A_.Elements, __Element__000110_TYPE)
+	__All__000006_ATTRIBUTE_DEFINITION_STRING_A_.Elements = append(__All__000006_ATTRIBUTE_DEFINITION_STRING_A_.Elements, __Element__000047_DEFAULT_VALUE)
+	__All__000006_ATTRIBUTE_DEFINITION_STRING_A_.Elements = append(__All__000006_ATTRIBUTE_DEFINITION_STRING_A_.Elements, __Element__000105_TYPE)
 	__All__000007_ATTRIBUTE_DEFINITION_XHTML_A_.Elements = append(__All__000007_ATTRIBUTE_DEFINITION_XHTML_A_.Elements, __Element__000001_ALTERNATIVE_ID)
-	__All__000007_ATTRIBUTE_DEFINITION_XHTML_A_.Elements = append(__All__000007_ATTRIBUTE_DEFINITION_XHTML_A_.Elements, __Element__000048_DEFAULT_VALUE)
-	__All__000007_ATTRIBUTE_DEFINITION_XHTML_A_.Elements = append(__All__000007_ATTRIBUTE_DEFINITION_XHTML_A_.Elements, __Element__000106_TYPE)
+	__All__000007_ATTRIBUTE_DEFINITION_XHTML_A_.Elements = append(__All__000007_ATTRIBUTE_DEFINITION_XHTML_A_.Elements, __Element__000046_DEFAULT_VALUE)
+	__All__000007_ATTRIBUTE_DEFINITION_XHTML_A_.Elements = append(__All__000007_ATTRIBUTE_DEFINITION_XHTML_A_.Elements, __Element__000114_TYPE)
 	__All__000008_ATTRIBUTE_VALUE_BOOLEAN_A_.Elements = append(__All__000008_ATTRIBUTE_VALUE_BOOLEAN_A_.Elements, __Element__000055_DEFINITION)
 	__All__000009_ATTRIBUTE_VALUE_DATE_A_.Elements = append(__All__000009_ATTRIBUTE_VALUE_DATE_A_.Elements, __Element__000049_DEFINITION)
-	__All__000010_ATTRIBUTE_VALUE_ENUMERATION_A_.Elements = append(__All__000010_ATTRIBUTE_VALUE_ENUMERATION_A_.Elements, __Element__000051_DEFINITION)
+	__All__000010_ATTRIBUTE_VALUE_ENUMERATION_A_.Elements = append(__All__000010_ATTRIBUTE_VALUE_ENUMERATION_A_.Elements, __Element__000054_DEFINITION)
 	__All__000010_ATTRIBUTE_VALUE_ENUMERATION_A_.Elements = append(__All__000010_ATTRIBUTE_VALUE_ENUMERATION_A_.Elements, __Element__000115_VALUES)
-	__All__000011_ATTRIBUTE_VALUE_INTEGER_A_.Elements = append(__All__000011_ATTRIBUTE_VALUE_INTEGER_A_.Elements, __Element__000052_DEFINITION)
-	__All__000012_ATTRIBUTE_VALUE_REAL_A_.Elements = append(__All__000012_ATTRIBUTE_VALUE_REAL_A_.Elements, __Element__000050_DEFINITION)
+	__All__000011_ATTRIBUTE_VALUE_INTEGER_A_.Elements = append(__All__000011_ATTRIBUTE_VALUE_INTEGER_A_.Elements, __Element__000050_DEFINITION)
+	__All__000012_ATTRIBUTE_VALUE_REAL_A_.Elements = append(__All__000012_ATTRIBUTE_VALUE_REAL_A_.Elements, __Element__000052_DEFINITION)
 	__All__000013_ATTRIBUTE_VALUE_STRING_A_.Elements = append(__All__000013_ATTRIBUTE_VALUE_STRING_A_.Elements, __Element__000053_DEFINITION)
 	__All__000014_ATTRIBUTE_VALUE_XHTML_A_.Elements = append(__All__000014_ATTRIBUTE_VALUE_XHTML_A_.Elements, __Element__000101_THE_VALUE)
 	__All__000014_ATTRIBUTE_VALUE_XHTML_A_.Elements = append(__All__000014_ATTRIBUTE_VALUE_XHTML_A_.Elements, __Element__000100_THE_ORIGINAL_VALUE)
-	__All__000014_ATTRIBUTE_VALUE_XHTML_A_.Elements = append(__All__000014_ATTRIBUTE_VALUE_XHTML_A_.Elements, __Element__000054_DEFINITION)
+	__All__000014_ATTRIBUTE_VALUE_XHTML_A_.Elements = append(__All__000014_ATTRIBUTE_VALUE_XHTML_A_.Elements, __Element__000051_DEFINITION)
 	__All__000015_DATATYPE_DEFINITION_BOOLEAN_A_.Elements = append(__All__000015_DATATYPE_DEFINITION_BOOLEAN_A_.Elements, __Element__000001_ALTERNATIVE_ID)
 	__All__000016_DATATYPE_DEFINITION_DATE_A_.Elements = append(__All__000016_DATATYPE_DEFINITION_DATE_A_.Elements, __Element__000001_ALTERNATIVE_ID)
 	__All__000017_DATATYPE_DEFINITION_ENUMERATION_A_.Elements = append(__All__000017_DATATYPE_DEFINITION_ENUMERATION_A_.Elements, __Element__000001_ALTERNATIVE_ID)
@@ -5680,9 +6104,9 @@ func _(stage *models.StageStruct) {
 	__All__000024_RELATION_GROUP_TYPE_A_.Elements = append(__All__000024_RELATION_GROUP_TYPE_A_.Elements, __Element__000075_SPEC_ATTRIBUTES)
 	__All__000025_RELATION_GROUP_A_.Elements = append(__All__000025_RELATION_GROUP_A_.Elements, __Element__000001_ALTERNATIVE_ID)
 	__All__000025_RELATION_GROUP_A_.Elements = append(__All__000025_RELATION_GROUP_A_.Elements, __Element__000073_SOURCE_SPECIFICATION)
-	__All__000025_RELATION_GROUP_A_.Elements = append(__All__000025_RELATION_GROUP_A_.Elements, __Element__000089_SPEC_RELATIONS)
+	__All__000025_RELATION_GROUP_A_.Elements = append(__All__000025_RELATION_GROUP_A_.Elements, __Element__000088_SPEC_RELATIONS)
 	__All__000025_RELATION_GROUP_A_.Elements = append(__All__000025_RELATION_GROUP_A_.Elements, __Element__000098_TARGET_SPECIFICATION)
-	__All__000025_RELATION_GROUP_A_.Elements = append(__All__000025_RELATION_GROUP_A_.Elements, __Element__000104_TYPE)
+	__All__000025_RELATION_GROUP_A_.Elements = append(__All__000025_RELATION_GROUP_A_.Elements, __Element__000108_TYPE)
 	__All__000026_SPEC_HIERARCHY_A_.Elements = append(__All__000026_SPEC_HIERARCHY_A_.Elements, __Element__000001_ALTERNATIVE_ID)
 	__All__000026_SPEC_HIERARCHY_A_.Elements = append(__All__000026_SPEC_HIERARCHY_A_.Elements, __Element__000023_CHILDREN)
 	__All__000026_SPEC_HIERARCHY_A_.Elements = append(__All__000026_SPEC_HIERARCHY_A_.Elements, __Element__000056_EDITABLE_ATTS)
@@ -5691,394 +6115,394 @@ func _(stage *models.StageStruct) {
 	__All__000027_SPEC_OBJECT_TYPE_A_.Elements = append(__All__000027_SPEC_OBJECT_TYPE_A_.Elements, __Element__000075_SPEC_ATTRIBUTES)
 	__All__000028_SPEC_OBJECT_A_.Elements = append(__All__000028_SPEC_OBJECT_A_.Elements, __Element__000001_ALTERNATIVE_ID)
 	__All__000028_SPEC_OBJECT_A_.Elements = append(__All__000028_SPEC_OBJECT_A_.Elements, __Element__000116_VALUES)
-	__All__000028_SPEC_OBJECT_A_.Elements = append(__All__000028_SPEC_OBJECT_A_.Elements, __Element__000109_TYPE)
+	__All__000028_SPEC_OBJECT_A_.Elements = append(__All__000028_SPEC_OBJECT_A_.Elements, __Element__000112_TYPE)
 	__All__000029_SPEC_RELATION_TYPE_A_.Elements = append(__All__000029_SPEC_RELATION_TYPE_A_.Elements, __Element__000001_ALTERNATIVE_ID)
 	__All__000029_SPEC_RELATION_TYPE_A_.Elements = append(__All__000029_SPEC_RELATION_TYPE_A_.Elements, __Element__000075_SPEC_ATTRIBUTES)
 	__All__000030_SPEC_RELATION_A_.Elements = append(__All__000030_SPEC_RELATION_A_.Elements, __Element__000001_ALTERNATIVE_ID)
 	__All__000030_SPEC_RELATION_A_.Elements = append(__All__000030_SPEC_RELATION_A_.Elements, __Element__000116_VALUES)
 	__All__000030_SPEC_RELATION_A_.Elements = append(__All__000030_SPEC_RELATION_A_.Elements, __Element__000072_SOURCE)
 	__All__000030_SPEC_RELATION_A_.Elements = append(__All__000030_SPEC_RELATION_A_.Elements, __Element__000097_TARGET)
-	__All__000030_SPEC_RELATION_A_.Elements = append(__All__000030_SPEC_RELATION_A_.Elements, __Element__000113_TYPE)
+	__All__000030_SPEC_RELATION_A_.Elements = append(__All__000030_SPEC_RELATION_A_.Elements, __Element__000106_TYPE)
 	__All__000031_SPECIFICATION_TYPE_A_.Elements = append(__All__000031_SPECIFICATION_TYPE_A_.Elements, __Element__000001_ALTERNATIVE_ID)
 	__All__000031_SPECIFICATION_TYPE_A_.Elements = append(__All__000031_SPECIFICATION_TYPE_A_.Elements, __Element__000075_SPEC_ATTRIBUTES)
 	__All__000032_SPECIFICATION_A_.Elements = append(__All__000032_SPECIFICATION_A_.Elements, __Element__000001_ALTERNATIVE_ID)
 	__All__000032_SPECIFICATION_A_.Elements = append(__All__000032_SPECIFICATION_A_.Elements, __Element__000116_VALUES)
 	__All__000032_SPECIFICATION_A_.Elements = append(__All__000032_SPECIFICATION_A_.Elements, __Element__000023_CHILDREN)
-	__All__000032_SPECIFICATION_A_.Elements = append(__All__000032_SPECIFICATION_A_.Elements, __Element__000114_TYPE)
-	__Choice__000000_.Elements = append(__Choice__000000_.Elements, __Element__000016_ATTRIBUTE_VALUE_BOOLEAN)
-	__Choice__000001_.Elements = append(__Choice__000001_.Elements, __Element__000036_DATATYPE_DEFINITION_REAL_REF)
-	__Choice__000002_.Elements = append(__Choice__000002_.Elements, __Element__000022_ATTRIBUTE_VALUE_XHTML)
-	__Choice__000003_.Elements = append(__Choice__000003_.Elements, __Element__000092_SPECIFICATION_REF)
-	__Choice__000004_.Elements = append(__Choice__000004_.Elements, __Element__000017_ATTRIBUTE_VALUE_DATE)
-	__Choice__000005_.Elements = append(__Choice__000005_.Elements, __Element__000020_ATTRIBUTE_VALUE_REAL)
-	__Choice__000006_.Elements = append(__Choice__000006_.Elements, __Element__000009_ATTRIBUTE_DEFINITION_INTEGER_REF)
-	__Choice__000007_.Elements = append(__Choice__000007_.Elements, __Element__000011_ATTRIBUTE_DEFINITION_REAL_REF)
-	__Choice__000008_.Elements = append(__Choice__000008_.Elements, __Element__000057_EMBEDDED_VALUE)
-	__Choice__000009_.Elements = append(__Choice__000009_.Elements, __Element__000067_REQ_IF_CONTENT)
-	__Choice__000010_.Elements = append(__Choice__000010_.Elements, __Element__000078_SPEC_OBJECT_REF)
-	__Choice__000011_.Elements = append(__Choice__000011_.Elements, __Element__000087_SPEC_RELATION_TYPE_REF)
-	__Choice__000012_.Elements = append(__Choice__000012_.Elements, __Element__000019_ATTRIBUTE_VALUE_INTEGER)
-	__Choice__000013_.Elements = append(__Choice__000013_.Elements, __Element__000064_RELATION_GROUP_TYPE_REF)
-	__Choice__000014_.Elements = append(__Choice__000014_.Elements, __Element__000069_REQ_IF_TOOL_EXTENSION)
-	__Choice__000015_.Elements = append(__Choice__000015_.Elements, __Element__000077_SPEC_OBJECT)
-	__Choice__000016_.Elements = append(__Choice__000016_.Elements, __Element__000083_SPEC_RELATION)
-	__Choice__000017_.Elements = append(__Choice__000017_.Elements, __Element__000091_SPECIFICATION)
-	__Choice__000018_.Elements = append(__Choice__000018_.Elements, __Element__000003_ATTRIBUTE_DEFINITION_BOOLEAN_REF)
-	__Choice__000018_.Elements = append(__Choice__000018_.Elements, __Element__000005_ATTRIBUTE_DEFINITION_DATE_REF)
-	__Choice__000018_.Elements = append(__Choice__000018_.Elements, __Element__000007_ATTRIBUTE_DEFINITION_ENUMERATION_REF)
-	__Choice__000018_.Elements = append(__Choice__000018_.Elements, __Element__000009_ATTRIBUTE_DEFINITION_INTEGER_REF)
-	__Choice__000018_.Elements = append(__Choice__000018_.Elements, __Element__000011_ATTRIBUTE_DEFINITION_REAL_REF)
-	__Choice__000018_.Elements = append(__Choice__000018_.Elements, __Element__000013_ATTRIBUTE_DEFINITION_STRING_REF)
+	__All__000032_SPECIFICATION_A_.Elements = append(__All__000032_SPECIFICATION_A_.Elements, __Element__000104_TYPE)
+	__Choice__000000_.Elements = append(__Choice__000000_.Elements, __Element__000068_REQ_IF_HEADER)
+	__Choice__000001_.Elements = append(__Choice__000001_.Elements, __Element__000083_SPEC_RELATION)
+	__Choice__000002_.Elements = append(__Choice__000002_.Elements, __Element__000091_SPECIFICATION)
+	__Choice__000003_.Elements = append(__Choice__000003_.Elements, __Element__000000_ALTERNATIVE_ID)
+	__Choice__000004_.Elements = append(__Choice__000004_.Elements, __Element__000005_ATTRIBUTE_DEFINITION_DATE_REF)
+	__Choice__000005_.Elements = append(__Choice__000005_.Elements, __Element__000011_ATTRIBUTE_DEFINITION_REAL_REF)
+	__Choice__000006_.Elements = append(__Choice__000006_.Elements, __Element__000057_EMBEDDED_VALUE)
+	__Choice__000007_.Elements = append(__Choice__000007_.Elements, __Element__000002_ATTRIBUTE_DEFINITION_BOOLEAN)
+	__Choice__000007_.Elements = append(__Choice__000007_.Elements, __Element__000004_ATTRIBUTE_DEFINITION_DATE)
+	__Choice__000007_.Elements = append(__Choice__000007_.Elements, __Element__000006_ATTRIBUTE_DEFINITION_ENUMERATION)
+	__Choice__000007_.Elements = append(__Choice__000007_.Elements, __Element__000008_ATTRIBUTE_DEFINITION_INTEGER)
+	__Choice__000007_.Elements = append(__Choice__000007_.Elements, __Element__000010_ATTRIBUTE_DEFINITION_REAL)
+	__Choice__000007_.Elements = append(__Choice__000007_.Elements, __Element__000012_ATTRIBUTE_DEFINITION_STRING)
+	__Choice__000007_.Elements = append(__Choice__000007_.Elements, __Element__000014_ATTRIBUTE_DEFINITION_XHTML)
+	__Choice__000008_.Elements = append(__Choice__000008_.Elements, __Element__000069_REQ_IF_TOOL_EXTENSION)
+	__Choice__000009_.Elements = append(__Choice__000009_.Elements, __Element__000077_SPEC_OBJECT)
+	__Choice__000010_.Elements = append(__Choice__000010_.Elements, __Element__000003_ATTRIBUTE_DEFINITION_BOOLEAN_REF)
+	__Choice__000010_.Elements = append(__Choice__000010_.Elements, __Element__000005_ATTRIBUTE_DEFINITION_DATE_REF)
+	__Choice__000010_.Elements = append(__Choice__000010_.Elements, __Element__000007_ATTRIBUTE_DEFINITION_ENUMERATION_REF)
+	__Choice__000010_.Elements = append(__Choice__000010_.Elements, __Element__000009_ATTRIBUTE_DEFINITION_INTEGER_REF)
+	__Choice__000010_.Elements = append(__Choice__000010_.Elements, __Element__000011_ATTRIBUTE_DEFINITION_REAL_REF)
+	__Choice__000010_.Elements = append(__Choice__000010_.Elements, __Element__000013_ATTRIBUTE_DEFINITION_STRING_REF)
+	__Choice__000010_.Elements = append(__Choice__000010_.Elements, __Element__000015_ATTRIBUTE_DEFINITION_XHTML_REF)
+	__Choice__000011_.Elements = append(__Choice__000011_.Elements, __Element__000034_DATATYPE_DEFINITION_INTEGER_REF)
+	__Choice__000012_.Elements = append(__Choice__000012_.Elements, __Element__000040_DATATYPE_DEFINITION_XHTML_REF)
+	__Choice__000013_.Elements = append(__Choice__000013_.Elements, __Element__000081_SPEC_OBJECT_TYPE_REF)
+	__Choice__000014_.Elements = append(__Choice__000014_.Elements, __Element__000076_SPEC_HIERARCHY)
+	__Choice__000015_.Elements = append(__Choice__000015_.Elements, __Element__000087_SPEC_RELATION_TYPE_REF)
+	__Choice__000016_.Elements = append(__Choice__000016_.Elements, __Element__000036_DATATYPE_DEFINITION_REAL_REF)
+	__Choice__000017_.Elements = append(__Choice__000017_.Elements, __Element__000003_ATTRIBUTE_DEFINITION_BOOLEAN_REF)
 	__Choice__000018_.Elements = append(__Choice__000018_.Elements, __Element__000015_ATTRIBUTE_DEFINITION_XHTML_REF)
-	__Choice__000019_.Elements = append(__Choice__000019_.Elements, __Element__000016_ATTRIBUTE_VALUE_BOOLEAN)
-	__Choice__000019_.Elements = append(__Choice__000019_.Elements, __Element__000017_ATTRIBUTE_VALUE_DATE)
-	__Choice__000019_.Elements = append(__Choice__000019_.Elements, __Element__000018_ATTRIBUTE_VALUE_ENUMERATION)
-	__Choice__000019_.Elements = append(__Choice__000019_.Elements, __Element__000019_ATTRIBUTE_VALUE_INTEGER)
-	__Choice__000019_.Elements = append(__Choice__000019_.Elements, __Element__000020_ATTRIBUTE_VALUE_REAL)
-	__Choice__000019_.Elements = append(__Choice__000019_.Elements, __Element__000021_ATTRIBUTE_VALUE_STRING)
-	__Choice__000019_.Elements = append(__Choice__000019_.Elements, __Element__000022_ATTRIBUTE_VALUE_XHTML)
-	__Choice__000020_.Elements = append(__Choice__000020_.Elements, __Element__000081_SPEC_OBJECT_TYPE_REF)
-	__Choice__000021_.Elements = append(__Choice__000021_.Elements, __Element__000003_ATTRIBUTE_DEFINITION_BOOLEAN_REF)
-	__Choice__000022_.Elements = append(__Choice__000022_.Elements, __Element__000013_ATTRIBUTE_DEFINITION_STRING_REF)
-	__Choice__000023_.Elements = append(__Choice__000023_.Elements, __Element__000000_ALTERNATIVE_ID)
-	__Choice__000024_.Elements = append(__Choice__000024_.Elements, __Element__000038_DATATYPE_DEFINITION_STRING_REF)
-	__Choice__000025_.Elements = append(__Choice__000025_.Elements, __Element__000005_ATTRIBUTE_DEFINITION_DATE_REF)
-	__Choice__000026_.Elements = append(__Choice__000026_.Elements, __Element__000015_ATTRIBUTE_DEFINITION_XHTML_REF)
-	__Choice__000027_.Elements = append(__Choice__000027_.Elements, __Element__000058_ENUM_VALUE)
-	__Choice__000028_.Elements = append(__Choice__000028_.Elements, __Element__000085_SPEC_RELATION_REF)
-	__Choice__000029_.Elements = append(__Choice__000029_.Elements, __Element__000002_ATTRIBUTE_DEFINITION_BOOLEAN)
-	__Choice__000029_.Elements = append(__Choice__000029_.Elements, __Element__000004_ATTRIBUTE_DEFINITION_DATE)
-	__Choice__000029_.Elements = append(__Choice__000029_.Elements, __Element__000006_ATTRIBUTE_DEFINITION_ENUMERATION)
-	__Choice__000029_.Elements = append(__Choice__000029_.Elements, __Element__000008_ATTRIBUTE_DEFINITION_INTEGER)
-	__Choice__000029_.Elements = append(__Choice__000029_.Elements, __Element__000010_ATTRIBUTE_DEFINITION_REAL)
-	__Choice__000029_.Elements = append(__Choice__000029_.Elements, __Element__000012_ATTRIBUTE_DEFINITION_STRING)
-	__Choice__000029_.Elements = append(__Choice__000029_.Elements, __Element__000014_ATTRIBUTE_DEFINITION_XHTML)
-	__Choice__000030_.Elements = append(__Choice__000030_.Elements, __Element__000068_REQ_IF_HEADER)
-	__Choice__000031_.Elements = append(__Choice__000031_.Elements, __Element__000063_RELATION_GROUP_TYPE)
-	__Choice__000031_.Elements = append(__Choice__000031_.Elements, __Element__000080_SPEC_OBJECT_TYPE)
-	__Choice__000031_.Elements = append(__Choice__000031_.Elements, __Element__000086_SPEC_RELATION_TYPE)
-	__Choice__000031_.Elements = append(__Choice__000031_.Elements, __Element__000093_SPECIFICATION_TYPE)
-	__Choice__000032_.Elements = append(__Choice__000032_.Elements, __Element__000062_RELATION_GROUP)
-	__Choice__000033_.Elements = append(__Choice__000033_.Elements, __Element__000034_DATATYPE_DEFINITION_INTEGER_REF)
-	__Choice__000034_.Elements = append(__Choice__000034_.Elements, __Element__000040_DATATYPE_DEFINITION_XHTML_REF)
-	__Choice__000035_.Elements = append(__Choice__000035_.Elements, __Element__000007_ATTRIBUTE_DEFINITION_ENUMERATION_REF)
-	__Choice__000036_.Elements = append(__Choice__000036_.Elements, __Element__000076_SPEC_HIERARCHY)
-	__Choice__000037_.Elements = append(__Choice__000037_.Elements, __Element__000094_SPECIFICATION_TYPE_REF)
-	__Choice__000038_.Elements = append(__Choice__000038_.Elements, __Element__000030_DATATYPE_DEFINITION_DATE_REF)
-	__Choice__000039_.Elements = append(__Choice__000039_.Elements, __Element__000018_ATTRIBUTE_VALUE_ENUMERATION)
-	__Choice__000040_.Elements = append(__Choice__000040_.Elements, __Element__000032_DATATYPE_DEFINITION_ENUMERATION_REF)
-	__Choice__000041_.Elements = append(__Choice__000041_.Elements, __Element__000059_ENUM_VALUE_REF)
-	__Choice__000042_.Elements = append(__Choice__000042_.Elements, __Element__000028_DATATYPE_DEFINITION_BOOLEAN_REF)
-	__Choice__000043_.Elements = append(__Choice__000043_.Elements, __Element__000021_ATTRIBUTE_VALUE_STRING)
-	__Choice__000044_.Elements = append(__Choice__000044_.Elements, __Element__000027_DATATYPE_DEFINITION_BOOLEAN)
-	__Choice__000044_.Elements = append(__Choice__000044_.Elements, __Element__000029_DATATYPE_DEFINITION_DATE)
-	__Choice__000044_.Elements = append(__Choice__000044_.Elements, __Element__000031_DATATYPE_DEFINITION_ENUMERATION)
-	__Choice__000044_.Elements = append(__Choice__000044_.Elements, __Element__000033_DATATYPE_DEFINITION_INTEGER)
-	__Choice__000044_.Elements = append(__Choice__000044_.Elements, __Element__000035_DATATYPE_DEFINITION_REAL)
-	__Choice__000044_.Elements = append(__Choice__000044_.Elements, __Element__000037_DATATYPE_DEFINITION_STRING)
-	__Choice__000044_.Elements = append(__Choice__000044_.Elements, __Element__000039_DATATYPE_DEFINITION_XHTML)
-	__Choice__000045_.Elements = append(__Choice__000045_.Elements, __Element__000079_SPEC_OBJECT_REF)
+	__Choice__000019_.Elements = append(__Choice__000019_.Elements, __Element__000064_RELATION_GROUP_TYPE_REF)
+	__Choice__000020_.Elements = append(__Choice__000020_.Elements, __Element__000017_ATTRIBUTE_VALUE_DATE)
+	__Choice__000021_.Elements = append(__Choice__000021_.Elements, __Element__000020_ATTRIBUTE_VALUE_REAL)
+	__Choice__000022_.Elements = append(__Choice__000022_.Elements, __Element__000022_ATTRIBUTE_VALUE_XHTML)
+	__Choice__000023_.Elements = append(__Choice__000023_.Elements, __Element__000085_SPEC_RELATION_REF)
+	__Choice__000024_.Elements = append(__Choice__000024_.Elements, __Element__000067_REQ_IF_CONTENT)
+	__Choice__000025_.Elements = append(__Choice__000025_.Elements, __Element__000027_DATATYPE_DEFINITION_BOOLEAN)
+	__Choice__000025_.Elements = append(__Choice__000025_.Elements, __Element__000029_DATATYPE_DEFINITION_DATE)
+	__Choice__000025_.Elements = append(__Choice__000025_.Elements, __Element__000031_DATATYPE_DEFINITION_ENUMERATION)
+	__Choice__000025_.Elements = append(__Choice__000025_.Elements, __Element__000033_DATATYPE_DEFINITION_INTEGER)
+	__Choice__000025_.Elements = append(__Choice__000025_.Elements, __Element__000035_DATATYPE_DEFINITION_REAL)
+	__Choice__000025_.Elements = append(__Choice__000025_.Elements, __Element__000037_DATATYPE_DEFINITION_STRING)
+	__Choice__000025_.Elements = append(__Choice__000025_.Elements, __Element__000039_DATATYPE_DEFINITION_XHTML)
+	__Choice__000026_.Elements = append(__Choice__000026_.Elements, __Element__000016_ATTRIBUTE_VALUE_BOOLEAN)
+	__Choice__000026_.Elements = append(__Choice__000026_.Elements, __Element__000017_ATTRIBUTE_VALUE_DATE)
+	__Choice__000026_.Elements = append(__Choice__000026_.Elements, __Element__000018_ATTRIBUTE_VALUE_ENUMERATION)
+	__Choice__000026_.Elements = append(__Choice__000026_.Elements, __Element__000019_ATTRIBUTE_VALUE_INTEGER)
+	__Choice__000026_.Elements = append(__Choice__000026_.Elements, __Element__000020_ATTRIBUTE_VALUE_REAL)
+	__Choice__000026_.Elements = append(__Choice__000026_.Elements, __Element__000021_ATTRIBUTE_VALUE_STRING)
+	__Choice__000026_.Elements = append(__Choice__000026_.Elements, __Element__000022_ATTRIBUTE_VALUE_XHTML)
+	__Choice__000027_.Elements = append(__Choice__000027_.Elements, __Element__000078_SPEC_OBJECT_REF)
+	__Choice__000028_.Elements = append(__Choice__000028_.Elements, __Element__000032_DATATYPE_DEFINITION_ENUMERATION_REF)
+	__Choice__000029_.Elements = append(__Choice__000029_.Elements, __Element__000038_DATATYPE_DEFINITION_STRING_REF)
+	__Choice__000030_.Elements = append(__Choice__000030_.Elements, __Element__000094_SPECIFICATION_TYPE_REF)
+	__Choice__000031_.Elements = append(__Choice__000031_.Elements, __Element__000013_ATTRIBUTE_DEFINITION_STRING_REF)
+	__Choice__000032_.Elements = append(__Choice__000032_.Elements, __Element__000058_ENUM_VALUE)
+	__Choice__000033_.Elements = append(__Choice__000033_.Elements, __Element__000063_RELATION_GROUP_TYPE)
+	__Choice__000033_.Elements = append(__Choice__000033_.Elements, __Element__000080_SPEC_OBJECT_TYPE)
+	__Choice__000033_.Elements = append(__Choice__000033_.Elements, __Element__000086_SPEC_RELATION_TYPE)
+	__Choice__000033_.Elements = append(__Choice__000033_.Elements, __Element__000093_SPECIFICATION_TYPE)
+	__Choice__000034_.Elements = append(__Choice__000034_.Elements, __Element__000062_RELATION_GROUP)
+	__Choice__000035_.Elements = append(__Choice__000035_.Elements, __Element__000019_ATTRIBUTE_VALUE_INTEGER)
+	__Choice__000036_.Elements = append(__Choice__000036_.Elements, __Element__000059_ENUM_VALUE_REF)
+	__Choice__000037_.Elements = append(__Choice__000037_.Elements, __Element__000092_SPECIFICATION_REF)
+	__Choice__000038_.Elements = append(__Choice__000038_.Elements, __Element__000016_ATTRIBUTE_VALUE_BOOLEAN)
+	__Choice__000039_.Elements = append(__Choice__000039_.Elements, __Element__000021_ATTRIBUTE_VALUE_STRING)
+	__Choice__000040_.Elements = append(__Choice__000040_.Elements, __Element__000018_ATTRIBUTE_VALUE_ENUMERATION)
+	__Choice__000041_.Elements = append(__Choice__000041_.Elements, __Element__000007_ATTRIBUTE_DEFINITION_ENUMERATION_REF)
+	__Choice__000042_.Elements = append(__Choice__000042_.Elements, __Element__000009_ATTRIBUTE_DEFINITION_INTEGER_REF)
+	__Choice__000043_.Elements = append(__Choice__000043_.Elements, __Element__000079_SPEC_OBJECT_REF)
+	__Choice__000044_.Elements = append(__Choice__000044_.Elements, __Element__000028_DATATYPE_DEFINITION_BOOLEAN_REF)
+	__Choice__000045_.Elements = append(__Choice__000045_.Elements, __Element__000030_DATATYPE_DEFINITION_DATE_REF)
 	__ComplexType__000000_ALTERNATIVE_ID.Alls = append(__ComplexType__000000_ALTERNATIVE_ID.Alls, __All__000000_ALTERNATIVE_ID_A_)
-	__ComplexType__000000_ALTERNATIVE_ID.Attributes = append(__ComplexType__000000_ALTERNATIVE_ID.Attributes, __Attribute__000026_IDENTIFIER)
+	__ComplexType__000000_ALTERNATIVE_ID.Attributes = append(__ComplexType__000000_ALTERNATIVE_ID.Attributes, __Attribute__000035_IDENTIFIER)
 	__ComplexType__000001_ATTRIBUTE_DEFINITION_BOOLEAN.Alls = append(__ComplexType__000001_ATTRIBUTE_DEFINITION_BOOLEAN.Alls, __All__000001_ATTRIBUTE_DEFINITION_BOOLEAN_A_)
-	__ComplexType__000001_ATTRIBUTE_DEFINITION_BOOLEAN.Attributes = append(__ComplexType__000001_ATTRIBUTE_DEFINITION_BOOLEAN.Attributes, __Attribute__000024_DESC)
-	__ComplexType__000001_ATTRIBUTE_DEFINITION_BOOLEAN.Attributes = append(__ComplexType__000001_ATTRIBUTE_DEFINITION_BOOLEAN.Attributes, __Attribute__000039_IDENTIFIER)
+	__ComplexType__000001_ATTRIBUTE_DEFINITION_BOOLEAN.Attributes = append(__ComplexType__000001_ATTRIBUTE_DEFINITION_BOOLEAN.Attributes, __Attribute__000010_DESC)
+	__ComplexType__000001_ATTRIBUTE_DEFINITION_BOOLEAN.Attributes = append(__ComplexType__000001_ATTRIBUTE_DEFINITION_BOOLEAN.Attributes, __Attribute__000050_IDENTIFIER)
 	__ComplexType__000001_ATTRIBUTE_DEFINITION_BOOLEAN.Attributes = append(__ComplexType__000001_ATTRIBUTE_DEFINITION_BOOLEAN.Attributes, __Attribute__000054_IS_EDITABLE)
-	__ComplexType__000001_ATTRIBUTE_DEFINITION_BOOLEAN.Attributes = append(__ComplexType__000001_ATTRIBUTE_DEFINITION_BOOLEAN.Attributes, __Attribute__000064_LAST_CHANGE)
-	__ComplexType__000001_ATTRIBUTE_DEFINITION_BOOLEAN.Attributes = append(__ComplexType__000001_ATTRIBUTE_DEFINITION_BOOLEAN.Attributes, __Attribute__000092_LONG_NAME)
+	__ComplexType__000001_ATTRIBUTE_DEFINITION_BOOLEAN.Attributes = append(__ComplexType__000001_ATTRIBUTE_DEFINITION_BOOLEAN.Attributes, __Attribute__000068_LAST_CHANGE)
+	__ComplexType__000001_ATTRIBUTE_DEFINITION_BOOLEAN.Attributes = append(__ComplexType__000001_ATTRIBUTE_DEFINITION_BOOLEAN.Attributes, __Attribute__000101_LONG_NAME)
 	__ComplexType__000002_ATTRIBUTE_DEFINITION_DATE.Alls = append(__ComplexType__000002_ATTRIBUTE_DEFINITION_DATE.Alls, __All__000002_ATTRIBUTE_DEFINITION_DATE_A_)
-	__ComplexType__000002_ATTRIBUTE_DEFINITION_DATE.Attributes = append(__ComplexType__000002_ATTRIBUTE_DEFINITION_DATE.Attributes, __Attribute__000005_DESC)
-	__ComplexType__000002_ATTRIBUTE_DEFINITION_DATE.Attributes = append(__ComplexType__000002_ATTRIBUTE_DEFINITION_DATE.Attributes, __Attribute__000044_IDENTIFIER)
-	__ComplexType__000002_ATTRIBUTE_DEFINITION_DATE.Attributes = append(__ComplexType__000002_ATTRIBUTE_DEFINITION_DATE.Attributes, __Attribute__000052_IS_EDITABLE)
-	__ComplexType__000002_ATTRIBUTE_DEFINITION_DATE.Attributes = append(__ComplexType__000002_ATTRIBUTE_DEFINITION_DATE.Attributes, __Attribute__000067_LAST_CHANGE)
-	__ComplexType__000002_ATTRIBUTE_DEFINITION_DATE.Attributes = append(__ComplexType__000002_ATTRIBUTE_DEFINITION_DATE.Attributes, __Attribute__000096_LONG_NAME)
+	__ComplexType__000002_ATTRIBUTE_DEFINITION_DATE.Attributes = append(__ComplexType__000002_ATTRIBUTE_DEFINITION_DATE.Attributes, __Attribute__000023_DESC)
+	__ComplexType__000002_ATTRIBUTE_DEFINITION_DATE.Attributes = append(__ComplexType__000002_ATTRIBUTE_DEFINITION_DATE.Attributes, __Attribute__000028_IDENTIFIER)
+	__ComplexType__000002_ATTRIBUTE_DEFINITION_DATE.Attributes = append(__ComplexType__000002_ATTRIBUTE_DEFINITION_DATE.Attributes, __Attribute__000053_IS_EDITABLE)
+	__ComplexType__000002_ATTRIBUTE_DEFINITION_DATE.Attributes = append(__ComplexType__000002_ATTRIBUTE_DEFINITION_DATE.Attributes, __Attribute__000076_LAST_CHANGE)
+	__ComplexType__000002_ATTRIBUTE_DEFINITION_DATE.Attributes = append(__ComplexType__000002_ATTRIBUTE_DEFINITION_DATE.Attributes, __Attribute__000089_LONG_NAME)
 	__ComplexType__000003_ATTRIBUTE_DEFINITION_ENUMERATION.Alls = append(__ComplexType__000003_ATTRIBUTE_DEFINITION_ENUMERATION.Alls, __All__000003_ATTRIBUTE_DEFINITION_ENUMERATION_A_)
-	__ComplexType__000003_ATTRIBUTE_DEFINITION_ENUMERATION.Attributes = append(__ComplexType__000003_ATTRIBUTE_DEFINITION_ENUMERATION.Attributes, __Attribute__000011_DESC)
-	__ComplexType__000003_ATTRIBUTE_DEFINITION_ENUMERATION.Attributes = append(__ComplexType__000003_ATTRIBUTE_DEFINITION_ENUMERATION.Attributes, __Attribute__000051_IDENTIFIER)
-	__ComplexType__000003_ATTRIBUTE_DEFINITION_ENUMERATION.Attributes = append(__ComplexType__000003_ATTRIBUTE_DEFINITION_ENUMERATION.Attributes, __Attribute__000059_IS_EDITABLE)
-	__ComplexType__000003_ATTRIBUTE_DEFINITION_ENUMERATION.Attributes = append(__ComplexType__000003_ATTRIBUTE_DEFINITION_ENUMERATION.Attributes, __Attribute__000073_LAST_CHANGE)
-	__ComplexType__000003_ATTRIBUTE_DEFINITION_ENUMERATION.Attributes = append(__ComplexType__000003_ATTRIBUTE_DEFINITION_ENUMERATION.Attributes, __Attribute__000094_LONG_NAME)
+	__ComplexType__000003_ATTRIBUTE_DEFINITION_ENUMERATION.Attributes = append(__ComplexType__000003_ATTRIBUTE_DEFINITION_ENUMERATION.Attributes, __Attribute__000020_DESC)
+	__ComplexType__000003_ATTRIBUTE_DEFINITION_ENUMERATION.Attributes = append(__ComplexType__000003_ATTRIBUTE_DEFINITION_ENUMERATION.Attributes, __Attribute__000048_IDENTIFIER)
+	__ComplexType__000003_ATTRIBUTE_DEFINITION_ENUMERATION.Attributes = append(__ComplexType__000003_ATTRIBUTE_DEFINITION_ENUMERATION.Attributes, __Attribute__000056_IS_EDITABLE)
+	__ComplexType__000003_ATTRIBUTE_DEFINITION_ENUMERATION.Attributes = append(__ComplexType__000003_ATTRIBUTE_DEFINITION_ENUMERATION.Attributes, __Attribute__000082_LAST_CHANGE)
+	__ComplexType__000003_ATTRIBUTE_DEFINITION_ENUMERATION.Attributes = append(__ComplexType__000003_ATTRIBUTE_DEFINITION_ENUMERATION.Attributes, __Attribute__000098_LONG_NAME)
 	__ComplexType__000003_ATTRIBUTE_DEFINITION_ENUMERATION.Attributes = append(__ComplexType__000003_ATTRIBUTE_DEFINITION_ENUMERATION.Attributes, __Attribute__000116_MULTI_VALUED)
 	__ComplexType__000004_ATTRIBUTE_DEFINITION_INTEGER.Alls = append(__ComplexType__000004_ATTRIBUTE_DEFINITION_INTEGER.Alls, __All__000004_ATTRIBUTE_DEFINITION_INTEGER_A_)
-	__ComplexType__000004_ATTRIBUTE_DEFINITION_INTEGER.Attributes = append(__ComplexType__000004_ATTRIBUTE_DEFINITION_INTEGER.Attributes, __Attribute__000020_DESC)
-	__ComplexType__000004_ATTRIBUTE_DEFINITION_INTEGER.Attributes = append(__ComplexType__000004_ATTRIBUTE_DEFINITION_INTEGER.Attributes, __Attribute__000049_IDENTIFIER)
-	__ComplexType__000004_ATTRIBUTE_DEFINITION_INTEGER.Attributes = append(__ComplexType__000004_ATTRIBUTE_DEFINITION_INTEGER.Attributes, __Attribute__000056_IS_EDITABLE)
-	__ComplexType__000004_ATTRIBUTE_DEFINITION_INTEGER.Attributes = append(__ComplexType__000004_ATTRIBUTE_DEFINITION_INTEGER.Attributes, __Attribute__000081_LAST_CHANGE)
-	__ComplexType__000004_ATTRIBUTE_DEFINITION_INTEGER.Attributes = append(__ComplexType__000004_ATTRIBUTE_DEFINITION_INTEGER.Attributes, __Attribute__000107_LONG_NAME)
+	__ComplexType__000004_ATTRIBUTE_DEFINITION_INTEGER.Attributes = append(__ComplexType__000004_ATTRIBUTE_DEFINITION_INTEGER.Attributes, __Attribute__000002_DESC)
+	__ComplexType__000004_ATTRIBUTE_DEFINITION_INTEGER.Attributes = append(__ComplexType__000004_ATTRIBUTE_DEFINITION_INTEGER.Attributes, __Attribute__000043_IDENTIFIER)
+	__ComplexType__000004_ATTRIBUTE_DEFINITION_INTEGER.Attributes = append(__ComplexType__000004_ATTRIBUTE_DEFINITION_INTEGER.Attributes, __Attribute__000059_IS_EDITABLE)
+	__ComplexType__000004_ATTRIBUTE_DEFINITION_INTEGER.Attributes = append(__ComplexType__000004_ATTRIBUTE_DEFINITION_INTEGER.Attributes, __Attribute__000072_LAST_CHANGE)
+	__ComplexType__000004_ATTRIBUTE_DEFINITION_INTEGER.Attributes = append(__ComplexType__000004_ATTRIBUTE_DEFINITION_INTEGER.Attributes, __Attribute__000104_LONG_NAME)
 	__ComplexType__000005_ATTRIBUTE_DEFINITION_REAL.Alls = append(__ComplexType__000005_ATTRIBUTE_DEFINITION_REAL.Alls, __All__000005_ATTRIBUTE_DEFINITION_REAL_A_)
-	__ComplexType__000005_ATTRIBUTE_DEFINITION_REAL.Attributes = append(__ComplexType__000005_ATTRIBUTE_DEFINITION_REAL.Attributes, __Attribute__000009_DESC)
-	__ComplexType__000005_ATTRIBUTE_DEFINITION_REAL.Attributes = append(__ComplexType__000005_ATTRIBUTE_DEFINITION_REAL.Attributes, __Attribute__000032_IDENTIFIER)
-	__ComplexType__000005_ATTRIBUTE_DEFINITION_REAL.Attributes = append(__ComplexType__000005_ATTRIBUTE_DEFINITION_REAL.Attributes, __Attribute__000058_IS_EDITABLE)
-	__ComplexType__000005_ATTRIBUTE_DEFINITION_REAL.Attributes = append(__ComplexType__000005_ATTRIBUTE_DEFINITION_REAL.Attributes, __Attribute__000074_LAST_CHANGE)
-	__ComplexType__000005_ATTRIBUTE_DEFINITION_REAL.Attributes = append(__ComplexType__000005_ATTRIBUTE_DEFINITION_REAL.Attributes, __Attribute__000102_LONG_NAME)
+	__ComplexType__000005_ATTRIBUTE_DEFINITION_REAL.Attributes = append(__ComplexType__000005_ATTRIBUTE_DEFINITION_REAL.Attributes, __Attribute__000003_DESC)
+	__ComplexType__000005_ATTRIBUTE_DEFINITION_REAL.Attributes = append(__ComplexType__000005_ATTRIBUTE_DEFINITION_REAL.Attributes, __Attribute__000029_IDENTIFIER)
+	__ComplexType__000005_ATTRIBUTE_DEFINITION_REAL.Attributes = append(__ComplexType__000005_ATTRIBUTE_DEFINITION_REAL.Attributes, __Attribute__000057_IS_EDITABLE)
+	__ComplexType__000005_ATTRIBUTE_DEFINITION_REAL.Attributes = append(__ComplexType__000005_ATTRIBUTE_DEFINITION_REAL.Attributes, __Attribute__000077_LAST_CHANGE)
+	__ComplexType__000005_ATTRIBUTE_DEFINITION_REAL.Attributes = append(__ComplexType__000005_ATTRIBUTE_DEFINITION_REAL.Attributes, __Attribute__000088_LONG_NAME)
 	__ComplexType__000006_ATTRIBUTE_DEFINITION_STRING.Alls = append(__ComplexType__000006_ATTRIBUTE_DEFINITION_STRING.Alls, __All__000006_ATTRIBUTE_DEFINITION_STRING_A_)
-	__ComplexType__000006_ATTRIBUTE_DEFINITION_STRING.Attributes = append(__ComplexType__000006_ATTRIBUTE_DEFINITION_STRING.Attributes, __Attribute__000025_DESC)
-	__ComplexType__000006_ATTRIBUTE_DEFINITION_STRING.Attributes = append(__ComplexType__000006_ATTRIBUTE_DEFINITION_STRING.Attributes, __Attribute__000033_IDENTIFIER)
-	__ComplexType__000006_ATTRIBUTE_DEFINITION_STRING.Attributes = append(__ComplexType__000006_ATTRIBUTE_DEFINITION_STRING.Attributes, __Attribute__000057_IS_EDITABLE)
-	__ComplexType__000006_ATTRIBUTE_DEFINITION_STRING.Attributes = append(__ComplexType__000006_ATTRIBUTE_DEFINITION_STRING.Attributes, __Attribute__000072_LAST_CHANGE)
-	__ComplexType__000006_ATTRIBUTE_DEFINITION_STRING.Attributes = append(__ComplexType__000006_ATTRIBUTE_DEFINITION_STRING.Attributes, __Attribute__000106_LONG_NAME)
+	__ComplexType__000006_ATTRIBUTE_DEFINITION_STRING.Attributes = append(__ComplexType__000006_ATTRIBUTE_DEFINITION_STRING.Attributes, __Attribute__000011_DESC)
+	__ComplexType__000006_ATTRIBUTE_DEFINITION_STRING.Attributes = append(__ComplexType__000006_ATTRIBUTE_DEFINITION_STRING.Attributes, __Attribute__000037_IDENTIFIER)
+	__ComplexType__000006_ATTRIBUTE_DEFINITION_STRING.Attributes = append(__ComplexType__000006_ATTRIBUTE_DEFINITION_STRING.Attributes, __Attribute__000055_IS_EDITABLE)
+	__ComplexType__000006_ATTRIBUTE_DEFINITION_STRING.Attributes = append(__ComplexType__000006_ATTRIBUTE_DEFINITION_STRING.Attributes, __Attribute__000073_LAST_CHANGE)
+	__ComplexType__000006_ATTRIBUTE_DEFINITION_STRING.Attributes = append(__ComplexType__000006_ATTRIBUTE_DEFINITION_STRING.Attributes, __Attribute__000097_LONG_NAME)
 	__ComplexType__000007_ATTRIBUTE_DEFINITION_XHTML.Alls = append(__ComplexType__000007_ATTRIBUTE_DEFINITION_XHTML.Alls, __All__000007_ATTRIBUTE_DEFINITION_XHTML_A_)
-	__ComplexType__000007_ATTRIBUTE_DEFINITION_XHTML.Attributes = append(__ComplexType__000007_ATTRIBUTE_DEFINITION_XHTML.Attributes, __Attribute__000022_DESC)
-	__ComplexType__000007_ATTRIBUTE_DEFINITION_XHTML.Attributes = append(__ComplexType__000007_ATTRIBUTE_DEFINITION_XHTML.Attributes, __Attribute__000043_IDENTIFIER)
-	__ComplexType__000007_ATTRIBUTE_DEFINITION_XHTML.Attributes = append(__ComplexType__000007_ATTRIBUTE_DEFINITION_XHTML.Attributes, __Attribute__000053_IS_EDITABLE)
-	__ComplexType__000007_ATTRIBUTE_DEFINITION_XHTML.Attributes = append(__ComplexType__000007_ATTRIBUTE_DEFINITION_XHTML.Attributes, __Attribute__000071_LAST_CHANGE)
+	__ComplexType__000007_ATTRIBUTE_DEFINITION_XHTML.Attributes = append(__ComplexType__000007_ATTRIBUTE_DEFINITION_XHTML.Attributes, __Attribute__000008_DESC)
+	__ComplexType__000007_ATTRIBUTE_DEFINITION_XHTML.Attributes = append(__ComplexType__000007_ATTRIBUTE_DEFINITION_XHTML.Attributes, __Attribute__000049_IDENTIFIER)
+	__ComplexType__000007_ATTRIBUTE_DEFINITION_XHTML.Attributes = append(__ComplexType__000007_ATTRIBUTE_DEFINITION_XHTML.Attributes, __Attribute__000058_IS_EDITABLE)
+	__ComplexType__000007_ATTRIBUTE_DEFINITION_XHTML.Attributes = append(__ComplexType__000007_ATTRIBUTE_DEFINITION_XHTML.Attributes, __Attribute__000085_LAST_CHANGE)
 	__ComplexType__000007_ATTRIBUTE_DEFINITION_XHTML.Attributes = append(__ComplexType__000007_ATTRIBUTE_DEFINITION_XHTML.Attributes, __Attribute__000105_LONG_NAME)
 	__ComplexType__000008_ATTRIBUTE_VALUE_BOOLEAN.Alls = append(__ComplexType__000008_ATTRIBUTE_VALUE_BOOLEAN.Alls, __All__000008_ATTRIBUTE_VALUE_BOOLEAN_A_)
-	__ComplexType__000008_ATTRIBUTE_VALUE_BOOLEAN.Attributes = append(__ComplexType__000008_ATTRIBUTE_VALUE_BOOLEAN.Attributes, __Attribute__000118_THE_VALUE)
+	__ComplexType__000008_ATTRIBUTE_VALUE_BOOLEAN.Attributes = append(__ComplexType__000008_ATTRIBUTE_VALUE_BOOLEAN.Attributes, __Attribute__000120_THE_VALUE)
 	__ComplexType__000009_ATTRIBUTE_VALUE_DATE.Alls = append(__ComplexType__000009_ATTRIBUTE_VALUE_DATE.Alls, __All__000009_ATTRIBUTE_VALUE_DATE_A_)
-	__ComplexType__000009_ATTRIBUTE_VALUE_DATE.Attributes = append(__ComplexType__000009_ATTRIBUTE_VALUE_DATE.Attributes, __Attribute__000122_THE_VALUE)
+	__ComplexType__000009_ATTRIBUTE_VALUE_DATE.Attributes = append(__ComplexType__000009_ATTRIBUTE_VALUE_DATE.Attributes, __Attribute__000118_THE_VALUE)
 	__ComplexType__000010_ATTRIBUTE_VALUE_ENUMERATION.Alls = append(__ComplexType__000010_ATTRIBUTE_VALUE_ENUMERATION.Alls, __All__000010_ATTRIBUTE_VALUE_ENUMERATION_A_)
 	__ComplexType__000011_ATTRIBUTE_VALUE_INTEGER.Alls = append(__ComplexType__000011_ATTRIBUTE_VALUE_INTEGER.Alls, __All__000011_ATTRIBUTE_VALUE_INTEGER_A_)
-	__ComplexType__000011_ATTRIBUTE_VALUE_INTEGER.Attributes = append(__ComplexType__000011_ATTRIBUTE_VALUE_INTEGER.Attributes, __Attribute__000121_THE_VALUE)
+	__ComplexType__000011_ATTRIBUTE_VALUE_INTEGER.Attributes = append(__ComplexType__000011_ATTRIBUTE_VALUE_INTEGER.Attributes, __Attribute__000119_THE_VALUE)
 	__ComplexType__000012_ATTRIBUTE_VALUE_REAL.Alls = append(__ComplexType__000012_ATTRIBUTE_VALUE_REAL.Alls, __All__000012_ATTRIBUTE_VALUE_REAL_A_)
-	__ComplexType__000012_ATTRIBUTE_VALUE_REAL.Attributes = append(__ComplexType__000012_ATTRIBUTE_VALUE_REAL.Attributes, __Attribute__000119_THE_VALUE)
+	__ComplexType__000012_ATTRIBUTE_VALUE_REAL.Attributes = append(__ComplexType__000012_ATTRIBUTE_VALUE_REAL.Attributes, __Attribute__000121_THE_VALUE)
 	__ComplexType__000013_ATTRIBUTE_VALUE_STRING.Alls = append(__ComplexType__000013_ATTRIBUTE_VALUE_STRING.Alls, __All__000013_ATTRIBUTE_VALUE_STRING_A_)
-	__ComplexType__000013_ATTRIBUTE_VALUE_STRING.Attributes = append(__ComplexType__000013_ATTRIBUTE_VALUE_STRING.Attributes, __Attribute__000120_THE_VALUE)
+	__ComplexType__000013_ATTRIBUTE_VALUE_STRING.Attributes = append(__ComplexType__000013_ATTRIBUTE_VALUE_STRING.Attributes, __Attribute__000122_THE_VALUE)
 	__ComplexType__000014_ATTRIBUTE_VALUE_XHTML.Alls = append(__ComplexType__000014_ATTRIBUTE_VALUE_XHTML.Alls, __All__000014_ATTRIBUTE_VALUE_XHTML_A_)
 	__ComplexType__000014_ATTRIBUTE_VALUE_XHTML.Attributes = append(__ComplexType__000014_ATTRIBUTE_VALUE_XHTML.Attributes, __Attribute__000060_IS_SIMPLIFIED)
 	__ComplexType__000015_A_ALTERNATIVE_ID.OuterElement = __Element__000001_ALTERNATIVE_ID
-	__ComplexType__000015_A_ALTERNATIVE_ID.Choices = append(__ComplexType__000015_A_ALTERNATIVE_ID.Choices, __Choice__000023_)
+	__ComplexType__000015_A_ALTERNATIVE_ID.Choices = append(__ComplexType__000015_A_ALTERNATIVE_ID.Choices, __Choice__000003_)
 	__ComplexType__000016_A_ATTRIBUTE_DEFINITION_BOOLEAN_REF.OuterElement = __Element__000055_DEFINITION
-	__ComplexType__000016_A_ATTRIBUTE_DEFINITION_BOOLEAN_REF.Choices = append(__ComplexType__000016_A_ATTRIBUTE_DEFINITION_BOOLEAN_REF.Choices, __Choice__000021_)
+	__ComplexType__000016_A_ATTRIBUTE_DEFINITION_BOOLEAN_REF.Choices = append(__ComplexType__000016_A_ATTRIBUTE_DEFINITION_BOOLEAN_REF.Choices, __Choice__000017_)
 	__ComplexType__000017_A_ATTRIBUTE_DEFINITION_DATE_REF.OuterElement = __Element__000049_DEFINITION
-	__ComplexType__000017_A_ATTRIBUTE_DEFINITION_DATE_REF.Choices = append(__ComplexType__000017_A_ATTRIBUTE_DEFINITION_DATE_REF.Choices, __Choice__000025_)
-	__ComplexType__000018_A_ATTRIBUTE_DEFINITION_ENUMERATION_REF.OuterElement = __Element__000051_DEFINITION
-	__ComplexType__000018_A_ATTRIBUTE_DEFINITION_ENUMERATION_REF.Choices = append(__ComplexType__000018_A_ATTRIBUTE_DEFINITION_ENUMERATION_REF.Choices, __Choice__000035_)
-	__ComplexType__000019_A_ATTRIBUTE_DEFINITION_INTEGER_REF.OuterElement = __Element__000052_DEFINITION
-	__ComplexType__000019_A_ATTRIBUTE_DEFINITION_INTEGER_REF.Choices = append(__ComplexType__000019_A_ATTRIBUTE_DEFINITION_INTEGER_REF.Choices, __Choice__000006_)
-	__ComplexType__000020_A_ATTRIBUTE_DEFINITION_REAL_REF.OuterElement = __Element__000050_DEFINITION
-	__ComplexType__000020_A_ATTRIBUTE_DEFINITION_REAL_REF.Choices = append(__ComplexType__000020_A_ATTRIBUTE_DEFINITION_REAL_REF.Choices, __Choice__000007_)
+	__ComplexType__000017_A_ATTRIBUTE_DEFINITION_DATE_REF.Choices = append(__ComplexType__000017_A_ATTRIBUTE_DEFINITION_DATE_REF.Choices, __Choice__000004_)
+	__ComplexType__000018_A_ATTRIBUTE_DEFINITION_ENUMERATION_REF.OuterElement = __Element__000054_DEFINITION
+	__ComplexType__000018_A_ATTRIBUTE_DEFINITION_ENUMERATION_REF.Choices = append(__ComplexType__000018_A_ATTRIBUTE_DEFINITION_ENUMERATION_REF.Choices, __Choice__000041_)
+	__ComplexType__000019_A_ATTRIBUTE_DEFINITION_INTEGER_REF.OuterElement = __Element__000050_DEFINITION
+	__ComplexType__000019_A_ATTRIBUTE_DEFINITION_INTEGER_REF.Choices = append(__ComplexType__000019_A_ATTRIBUTE_DEFINITION_INTEGER_REF.Choices, __Choice__000042_)
+	__ComplexType__000020_A_ATTRIBUTE_DEFINITION_REAL_REF.OuterElement = __Element__000052_DEFINITION
+	__ComplexType__000020_A_ATTRIBUTE_DEFINITION_REAL_REF.Choices = append(__ComplexType__000020_A_ATTRIBUTE_DEFINITION_REAL_REF.Choices, __Choice__000005_)
 	__ComplexType__000021_A_ATTRIBUTE_DEFINITION_STRING_REF.OuterElement = __Element__000053_DEFINITION
-	__ComplexType__000021_A_ATTRIBUTE_DEFINITION_STRING_REF.Choices = append(__ComplexType__000021_A_ATTRIBUTE_DEFINITION_STRING_REF.Choices, __Choice__000022_)
-	__ComplexType__000022_A_ATTRIBUTE_DEFINITION_XHTML_REF.OuterElement = __Element__000054_DEFINITION
-	__ComplexType__000022_A_ATTRIBUTE_DEFINITION_XHTML_REF.Choices = append(__ComplexType__000022_A_ATTRIBUTE_DEFINITION_XHTML_REF.Choices, __Choice__000026_)
+	__ComplexType__000021_A_ATTRIBUTE_DEFINITION_STRING_REF.Choices = append(__ComplexType__000021_A_ATTRIBUTE_DEFINITION_STRING_REF.Choices, __Choice__000031_)
+	__ComplexType__000022_A_ATTRIBUTE_DEFINITION_XHTML_REF.OuterElement = __Element__000051_DEFINITION
+	__ComplexType__000022_A_ATTRIBUTE_DEFINITION_XHTML_REF.Choices = append(__ComplexType__000022_A_ATTRIBUTE_DEFINITION_XHTML_REF.Choices, __Choice__000018_)
 	__ComplexType__000023_A_ATTRIBUTE_VALUE_BOOLEAN.OuterElement = __Element__000043_DEFAULT_VALUE
-	__ComplexType__000023_A_ATTRIBUTE_VALUE_BOOLEAN.Choices = append(__ComplexType__000023_A_ATTRIBUTE_VALUE_BOOLEAN.Choices, __Choice__000000_)
-	__ComplexType__000024_A_ATTRIBUTE_VALUE_DATE.OuterElement = __Element__000045_DEFAULT_VALUE
-	__ComplexType__000024_A_ATTRIBUTE_VALUE_DATE.Choices = append(__ComplexType__000024_A_ATTRIBUTE_VALUE_DATE.Choices, __Choice__000004_)
-	__ComplexType__000025_A_ATTRIBUTE_VALUE_ENUMERATION.OuterElement = __Element__000046_DEFAULT_VALUE
-	__ComplexType__000025_A_ATTRIBUTE_VALUE_ENUMERATION.Choices = append(__ComplexType__000025_A_ATTRIBUTE_VALUE_ENUMERATION.Choices, __Choice__000039_)
-	__ComplexType__000026_A_ATTRIBUTE_VALUE_INTEGER.OuterElement = __Element__000044_DEFAULT_VALUE
-	__ComplexType__000026_A_ATTRIBUTE_VALUE_INTEGER.Choices = append(__ComplexType__000026_A_ATTRIBUTE_VALUE_INTEGER.Choices, __Choice__000012_)
-	__ComplexType__000027_A_ATTRIBUTE_VALUE_REAL.OuterElement = __Element__000047_DEFAULT_VALUE
-	__ComplexType__000027_A_ATTRIBUTE_VALUE_REAL.Choices = append(__ComplexType__000027_A_ATTRIBUTE_VALUE_REAL.Choices, __Choice__000005_)
-	__ComplexType__000028_A_ATTRIBUTE_VALUE_STRING.OuterElement = __Element__000042_DEFAULT_VALUE
-	__ComplexType__000028_A_ATTRIBUTE_VALUE_STRING.Choices = append(__ComplexType__000028_A_ATTRIBUTE_VALUE_STRING.Choices, __Choice__000043_)
-	__ComplexType__000029_A_ATTRIBUTE_VALUE_XHTML.OuterElement = __Element__000116_VALUES
-	__ComplexType__000029_A_ATTRIBUTE_VALUE_XHTML.Choices = append(__ComplexType__000029_A_ATTRIBUTE_VALUE_XHTML.Choices, __Choice__000019_)
-	__ComplexType__000030_A_ATTRIBUTE_VALUE_XHTML.OuterElement = __Element__000048_DEFAULT_VALUE
-	__ComplexType__000030_A_ATTRIBUTE_VALUE_XHTML.Choices = append(__ComplexType__000030_A_ATTRIBUTE_VALUE_XHTML.Choices, __Choice__000002_)
+	__ComplexType__000023_A_ATTRIBUTE_VALUE_BOOLEAN.Choices = append(__ComplexType__000023_A_ATTRIBUTE_VALUE_BOOLEAN.Choices, __Choice__000038_)
+	__ComplexType__000024_A_ATTRIBUTE_VALUE_DATE.OuterElement = __Element__000044_DEFAULT_VALUE
+	__ComplexType__000024_A_ATTRIBUTE_VALUE_DATE.Choices = append(__ComplexType__000024_A_ATTRIBUTE_VALUE_DATE.Choices, __Choice__000020_)
+	__ComplexType__000025_A_ATTRIBUTE_VALUE_ENUMERATION.OuterElement = __Element__000045_DEFAULT_VALUE
+	__ComplexType__000025_A_ATTRIBUTE_VALUE_ENUMERATION.Choices = append(__ComplexType__000025_A_ATTRIBUTE_VALUE_ENUMERATION.Choices, __Choice__000040_)
+	__ComplexType__000026_A_ATTRIBUTE_VALUE_INTEGER.OuterElement = __Element__000048_DEFAULT_VALUE
+	__ComplexType__000026_A_ATTRIBUTE_VALUE_INTEGER.Choices = append(__ComplexType__000026_A_ATTRIBUTE_VALUE_INTEGER.Choices, __Choice__000035_)
+	__ComplexType__000027_A_ATTRIBUTE_VALUE_REAL.OuterElement = __Element__000042_DEFAULT_VALUE
+	__ComplexType__000027_A_ATTRIBUTE_VALUE_REAL.Choices = append(__ComplexType__000027_A_ATTRIBUTE_VALUE_REAL.Choices, __Choice__000021_)
+	__ComplexType__000028_A_ATTRIBUTE_VALUE_STRING.OuterElement = __Element__000047_DEFAULT_VALUE
+	__ComplexType__000028_A_ATTRIBUTE_VALUE_STRING.Choices = append(__ComplexType__000028_A_ATTRIBUTE_VALUE_STRING.Choices, __Choice__000039_)
+	__ComplexType__000029_A_ATTRIBUTE_VALUE_XHTML.OuterElement = __Element__000046_DEFAULT_VALUE
+	__ComplexType__000029_A_ATTRIBUTE_VALUE_XHTML.Choices = append(__ComplexType__000029_A_ATTRIBUTE_VALUE_XHTML.Choices, __Choice__000022_)
+	__ComplexType__000030_A_ATTRIBUTE_VALUE_XHTML.OuterElement = __Element__000116_VALUES
+	__ComplexType__000030_A_ATTRIBUTE_VALUE_XHTML.Choices = append(__ComplexType__000030_A_ATTRIBUTE_VALUE_XHTML.Choices, __Choice__000026_)
 	__ComplexType__000031_A_CHILDREN.OuterElement = __Element__000023_CHILDREN
-	__ComplexType__000031_A_CHILDREN.Choices = append(__ComplexType__000031_A_CHILDREN.Choices, __Choice__000036_)
+	__ComplexType__000031_A_CHILDREN.Choices = append(__ComplexType__000031_A_CHILDREN.Choices, __Choice__000014_)
 	__ComplexType__000032_A_CORE_CONTENT.OuterElement = __Element__000025_CORE_CONTENT
-	__ComplexType__000032_A_CORE_CONTENT.Choices = append(__ComplexType__000032_A_CORE_CONTENT.Choices, __Choice__000009_)
+	__ComplexType__000032_A_CORE_CONTENT.Choices = append(__ComplexType__000032_A_CORE_CONTENT.Choices, __Choice__000024_)
 	__ComplexType__000033_A_DATATYPE_DEFINITION_BOOLEAN_REF.OuterElement = __Element__000107_TYPE
-	__ComplexType__000033_A_DATATYPE_DEFINITION_BOOLEAN_REF.Choices = append(__ComplexType__000033_A_DATATYPE_DEFINITION_BOOLEAN_REF.Choices, __Choice__000042_)
-	__ComplexType__000034_A_DATATYPE_DEFINITION_DATE_REF.OuterElement = __Element__000108_TYPE
-	__ComplexType__000034_A_DATATYPE_DEFINITION_DATE_REF.Choices = append(__ComplexType__000034_A_DATATYPE_DEFINITION_DATE_REF.Choices, __Choice__000038_)
-	__ComplexType__000035_A_DATATYPE_DEFINITION_ENUMERATION_REF.OuterElement = __Element__000105_TYPE
-	__ComplexType__000035_A_DATATYPE_DEFINITION_ENUMERATION_REF.Choices = append(__ComplexType__000035_A_DATATYPE_DEFINITION_ENUMERATION_REF.Choices, __Choice__000040_)
+	__ComplexType__000033_A_DATATYPE_DEFINITION_BOOLEAN_REF.Choices = append(__ComplexType__000033_A_DATATYPE_DEFINITION_BOOLEAN_REF.Choices, __Choice__000044_)
+	__ComplexType__000034_A_DATATYPE_DEFINITION_DATE_REF.OuterElement = __Element__000113_TYPE
+	__ComplexType__000034_A_DATATYPE_DEFINITION_DATE_REF.Choices = append(__ComplexType__000034_A_DATATYPE_DEFINITION_DATE_REF.Choices, __Choice__000045_)
+	__ComplexType__000035_A_DATATYPE_DEFINITION_ENUMERATION_REF.OuterElement = __Element__000109_TYPE
+	__ComplexType__000035_A_DATATYPE_DEFINITION_ENUMERATION_REF.Choices = append(__ComplexType__000035_A_DATATYPE_DEFINITION_ENUMERATION_REF.Choices, __Choice__000028_)
 	__ComplexType__000036_A_DATATYPE_DEFINITION_INTEGER_REF.OuterElement = __Element__000111_TYPE
-	__ComplexType__000036_A_DATATYPE_DEFINITION_INTEGER_REF.Choices = append(__ComplexType__000036_A_DATATYPE_DEFINITION_INTEGER_REF.Choices, __Choice__000033_)
-	__ComplexType__000037_A_DATATYPE_DEFINITION_REAL_REF.OuterElement = __Element__000112_TYPE
-	__ComplexType__000037_A_DATATYPE_DEFINITION_REAL_REF.Choices = append(__ComplexType__000037_A_DATATYPE_DEFINITION_REAL_REF.Choices, __Choice__000001_)
-	__ComplexType__000038_A_DATATYPE_DEFINITION_STRING_REF.OuterElement = __Element__000110_TYPE
-	__ComplexType__000038_A_DATATYPE_DEFINITION_STRING_REF.Choices = append(__ComplexType__000038_A_DATATYPE_DEFINITION_STRING_REF.Choices, __Choice__000024_)
-	__ComplexType__000039_A_DATATYPE_DEFINITION_XHTML_REF.OuterElement = __Element__000106_TYPE
-	__ComplexType__000039_A_DATATYPE_DEFINITION_XHTML_REF.Choices = append(__ComplexType__000039_A_DATATYPE_DEFINITION_XHTML_REF.Choices, __Choice__000034_)
+	__ComplexType__000036_A_DATATYPE_DEFINITION_INTEGER_REF.Choices = append(__ComplexType__000036_A_DATATYPE_DEFINITION_INTEGER_REF.Choices, __Choice__000011_)
+	__ComplexType__000037_A_DATATYPE_DEFINITION_REAL_REF.OuterElement = __Element__000110_TYPE
+	__ComplexType__000037_A_DATATYPE_DEFINITION_REAL_REF.Choices = append(__ComplexType__000037_A_DATATYPE_DEFINITION_REAL_REF.Choices, __Choice__000016_)
+	__ComplexType__000038_A_DATATYPE_DEFINITION_STRING_REF.OuterElement = __Element__000105_TYPE
+	__ComplexType__000038_A_DATATYPE_DEFINITION_STRING_REF.Choices = append(__ComplexType__000038_A_DATATYPE_DEFINITION_STRING_REF.Choices, __Choice__000029_)
+	__ComplexType__000039_A_DATATYPE_DEFINITION_XHTML_REF.OuterElement = __Element__000114_TYPE
+	__ComplexType__000039_A_DATATYPE_DEFINITION_XHTML_REF.Choices = append(__ComplexType__000039_A_DATATYPE_DEFINITION_XHTML_REF.Choices, __Choice__000012_)
 	__ComplexType__000040_A_DATATYPES.OuterElement = __Element__000041_DATATYPES
-	__ComplexType__000040_A_DATATYPES.Choices = append(__ComplexType__000040_A_DATATYPES.Choices, __Choice__000044_)
+	__ComplexType__000040_A_DATATYPES.Choices = append(__ComplexType__000040_A_DATATYPES.Choices, __Choice__000025_)
 	__ComplexType__000041_A_EDITABLE_ATTS.OuterElement = __Element__000056_EDITABLE_ATTS
-	__ComplexType__000041_A_EDITABLE_ATTS.Choices = append(__ComplexType__000041_A_EDITABLE_ATTS.Choices, __Choice__000018_)
+	__ComplexType__000041_A_EDITABLE_ATTS.Choices = append(__ComplexType__000041_A_EDITABLE_ATTS.Choices, __Choice__000010_)
 	__ComplexType__000042_A_ENUM_VALUE_REF.OuterElement = __Element__000115_VALUES
-	__ComplexType__000042_A_ENUM_VALUE_REF.Choices = append(__ComplexType__000042_A_ENUM_VALUE_REF.Choices, __Choice__000041_)
+	__ComplexType__000042_A_ENUM_VALUE_REF.Choices = append(__ComplexType__000042_A_ENUM_VALUE_REF.Choices, __Choice__000036_)
 	__ComplexType__000043_A_OBJECT.OuterElement = __Element__000060_OBJECT
-	__ComplexType__000043_A_OBJECT.Choices = append(__ComplexType__000043_A_OBJECT.Choices, __Choice__000045_)
+	__ComplexType__000043_A_OBJECT.Choices = append(__ComplexType__000043_A_OBJECT.Choices, __Choice__000043_)
 	__ComplexType__000044_A_PROPERTIES.OuterElement = __Element__000061_PROPERTIES
-	__ComplexType__000044_A_PROPERTIES.Choices = append(__ComplexType__000044_A_PROPERTIES.Choices, __Choice__000008_)
-	__ComplexType__000045_A_RELATION_GROUP_TYPE_REF.OuterElement = __Element__000104_TYPE
-	__ComplexType__000045_A_RELATION_GROUP_TYPE_REF.Choices = append(__ComplexType__000045_A_RELATION_GROUP_TYPE_REF.Choices, __Choice__000013_)
-	__ComplexType__000046_A_SPEC_ATTRIBUTES.OuterElement = __Element__000075_SPEC_ATTRIBUTES
-	__ComplexType__000046_A_SPEC_ATTRIBUTES.Choices = append(__ComplexType__000046_A_SPEC_ATTRIBUTES.Choices, __Choice__000029_)
-	__ComplexType__000047_A_SPEC_OBJECT_TYPE_REF.OuterElement = __Element__000109_TYPE
-	__ComplexType__000047_A_SPEC_OBJECT_TYPE_REF.Choices = append(__ComplexType__000047_A_SPEC_OBJECT_TYPE_REF.Choices, __Choice__000020_)
-	__ComplexType__000048_A_SPEC_OBJECTS.OuterElement = __Element__000082_SPEC_OBJECTS
-	__ComplexType__000048_A_SPEC_OBJECTS.Choices = append(__ComplexType__000048_A_SPEC_OBJECTS.Choices, __Choice__000015_)
-	__ComplexType__000049_A_SPEC_RELATION_GROUPS.OuterElement = __Element__000084_SPEC_RELATION_GROUPS
-	__ComplexType__000049_A_SPEC_RELATION_GROUPS.Choices = append(__ComplexType__000049_A_SPEC_RELATION_GROUPS.Choices, __Choice__000032_)
-	__ComplexType__000050_A_SPEC_RELATION_REF.OuterElement = __Element__000089_SPEC_RELATIONS
-	__ComplexType__000050_A_SPEC_RELATION_REF.Choices = append(__ComplexType__000050_A_SPEC_RELATION_REF.Choices, __Choice__000028_)
-	__ComplexType__000051_A_SPEC_RELATION_TYPE_REF.OuterElement = __Element__000113_TYPE
-	__ComplexType__000051_A_SPEC_RELATION_TYPE_REF.Choices = append(__ComplexType__000051_A_SPEC_RELATION_TYPE_REF.Choices, __Choice__000011_)
-	__ComplexType__000052_A_SPEC_RELATIONS.OuterElement = __Element__000088_SPEC_RELATIONS
-	__ComplexType__000052_A_SPEC_RELATIONS.Choices = append(__ComplexType__000052_A_SPEC_RELATIONS.Choices, __Choice__000016_)
-	__ComplexType__000053_A_SPEC_TYPES.OuterElement = __Element__000090_SPEC_TYPES
-	__ComplexType__000053_A_SPEC_TYPES.Choices = append(__ComplexType__000053_A_SPEC_TYPES.Choices, __Choice__000031_)
-	__ComplexType__000054_A_SPECIFICATION_TYPE_REF.OuterElement = __Element__000114_TYPE
-	__ComplexType__000054_A_SPECIFICATION_TYPE_REF.Choices = append(__ComplexType__000054_A_SPECIFICATION_TYPE_REF.Choices, __Choice__000037_)
-	__ComplexType__000055_A_SPECIFICATIONS.OuterElement = __Element__000095_SPECIFICATIONS
-	__ComplexType__000055_A_SPECIFICATIONS.Choices = append(__ComplexType__000055_A_SPECIFICATIONS.Choices, __Choice__000017_)
-	__ComplexType__000056_A_SPECIFIED_VALUES.OuterElement = __Element__000096_SPECIFIED_VALUES
-	__ComplexType__000056_A_SPECIFIED_VALUES.Choices = append(__ComplexType__000056_A_SPECIFIED_VALUES.Choices, __Choice__000027_)
-	__ComplexType__000057_A_TARGET.OuterElement = __Element__000072_SOURCE
-	__ComplexType__000057_A_TARGET.Choices = append(__ComplexType__000057_A_TARGET.Choices, __Choice__000010_)
+	__ComplexType__000044_A_PROPERTIES.Choices = append(__ComplexType__000044_A_PROPERTIES.Choices, __Choice__000006_)
+	__ComplexType__000045_A_RELATION_GROUP_TYPE_REF.OuterElement = __Element__000108_TYPE
+	__ComplexType__000045_A_RELATION_GROUP_TYPE_REF.Choices = append(__ComplexType__000045_A_RELATION_GROUP_TYPE_REF.Choices, __Choice__000019_)
+	__ComplexType__000046_A_SOURCE.OuterElement = __Element__000097_TARGET
+	__ComplexType__000046_A_SOURCE.Choices = append(__ComplexType__000046_A_SOURCE.Choices, __Choice__000027_)
+	__ComplexType__000047_A_SPEC_ATTRIBUTES.OuterElement = __Element__000075_SPEC_ATTRIBUTES
+	__ComplexType__000047_A_SPEC_ATTRIBUTES.Choices = append(__ComplexType__000047_A_SPEC_ATTRIBUTES.Choices, __Choice__000007_)
+	__ComplexType__000048_A_SPEC_OBJECT_TYPE_REF.OuterElement = __Element__000112_TYPE
+	__ComplexType__000048_A_SPEC_OBJECT_TYPE_REF.Choices = append(__ComplexType__000048_A_SPEC_OBJECT_TYPE_REF.Choices, __Choice__000013_)
+	__ComplexType__000049_A_SPEC_OBJECTS.OuterElement = __Element__000082_SPEC_OBJECTS
+	__ComplexType__000049_A_SPEC_OBJECTS.Choices = append(__ComplexType__000049_A_SPEC_OBJECTS.Choices, __Choice__000009_)
+	__ComplexType__000050_A_SPEC_RELATION_GROUPS.OuterElement = __Element__000084_SPEC_RELATION_GROUPS
+	__ComplexType__000050_A_SPEC_RELATION_GROUPS.Choices = append(__ComplexType__000050_A_SPEC_RELATION_GROUPS.Choices, __Choice__000034_)
+	__ComplexType__000051_A_SPEC_RELATION_REF.OuterElement = __Element__000088_SPEC_RELATIONS
+	__ComplexType__000051_A_SPEC_RELATION_REF.Choices = append(__ComplexType__000051_A_SPEC_RELATION_REF.Choices, __Choice__000023_)
+	__ComplexType__000052_A_SPEC_RELATION_TYPE_REF.OuterElement = __Element__000106_TYPE
+	__ComplexType__000052_A_SPEC_RELATION_TYPE_REF.Choices = append(__ComplexType__000052_A_SPEC_RELATION_TYPE_REF.Choices, __Choice__000015_)
+	__ComplexType__000053_A_SPEC_RELATIONS.OuterElement = __Element__000089_SPEC_RELATIONS
+	__ComplexType__000053_A_SPEC_RELATIONS.Choices = append(__ComplexType__000053_A_SPEC_RELATIONS.Choices, __Choice__000001_)
+	__ComplexType__000054_A_SPEC_TYPES.OuterElement = __Element__000090_SPEC_TYPES
+	__ComplexType__000054_A_SPEC_TYPES.Choices = append(__ComplexType__000054_A_SPEC_TYPES.Choices, __Choice__000033_)
+	__ComplexType__000055_A_SPECIFICATION_TYPE_REF.OuterElement = __Element__000104_TYPE
+	__ComplexType__000055_A_SPECIFICATION_TYPE_REF.Choices = append(__ComplexType__000055_A_SPECIFICATION_TYPE_REF.Choices, __Choice__000030_)
+	__ComplexType__000056_A_SPECIFICATIONS.OuterElement = __Element__000095_SPECIFICATIONS
+	__ComplexType__000056_A_SPECIFICATIONS.Choices = append(__ComplexType__000056_A_SPECIFICATIONS.Choices, __Choice__000002_)
+	__ComplexType__000057_A_SPECIFIED_VALUES.OuterElement = __Element__000096_SPECIFIED_VALUES
+	__ComplexType__000057_A_SPECIFIED_VALUES.Choices = append(__ComplexType__000057_A_SPECIFIED_VALUES.Choices, __Choice__000032_)
 	__ComplexType__000058_A_TARGET_SPECIFICATION.OuterElement = __Element__000073_SOURCE_SPECIFICATION
-	__ComplexType__000058_A_TARGET_SPECIFICATION.Choices = append(__ComplexType__000058_A_TARGET_SPECIFICATION.Choices, __Choice__000003_)
+	__ComplexType__000058_A_TARGET_SPECIFICATION.Choices = append(__ComplexType__000058_A_TARGET_SPECIFICATION.Choices, __Choice__000037_)
 	__ComplexType__000059_A_THE_HEADER.OuterElement = __Element__000099_THE_HEADER
-	__ComplexType__000059_A_THE_HEADER.Choices = append(__ComplexType__000059_A_THE_HEADER.Choices, __Choice__000030_)
+	__ComplexType__000059_A_THE_HEADER.Choices = append(__ComplexType__000059_A_THE_HEADER.Choices, __Choice__000000_)
 	__ComplexType__000060_A_TOOL_EXTENSIONS.OuterElement = __Element__000103_TOOL_EXTENSIONS
-	__ComplexType__000060_A_TOOL_EXTENSIONS.Choices = append(__ComplexType__000060_A_TOOL_EXTENSIONS.Choices, __Choice__000014_)
+	__ComplexType__000060_A_TOOL_EXTENSIONS.Choices = append(__ComplexType__000060_A_TOOL_EXTENSIONS.Choices, __Choice__000008_)
 	__ComplexType__000061_DATATYPE_DEFINITION_BOOLEAN.Alls = append(__ComplexType__000061_DATATYPE_DEFINITION_BOOLEAN.Alls, __All__000015_DATATYPE_DEFINITION_BOOLEAN_A_)
-	__ComplexType__000061_DATATYPE_DEFINITION_BOOLEAN.Attributes = append(__ComplexType__000061_DATATYPE_DEFINITION_BOOLEAN.Attributes, __Attribute__000017_DESC)
-	__ComplexType__000061_DATATYPE_DEFINITION_BOOLEAN.Attributes = append(__ComplexType__000061_DATATYPE_DEFINITION_BOOLEAN.Attributes, __Attribute__000038_IDENTIFIER)
+	__ComplexType__000061_DATATYPE_DEFINITION_BOOLEAN.Attributes = append(__ComplexType__000061_DATATYPE_DEFINITION_BOOLEAN.Attributes, __Attribute__000016_DESC)
+	__ComplexType__000061_DATATYPE_DEFINITION_BOOLEAN.Attributes = append(__ComplexType__000061_DATATYPE_DEFINITION_BOOLEAN.Attributes, __Attribute__000030_IDENTIFIER)
 	__ComplexType__000061_DATATYPE_DEFINITION_BOOLEAN.Attributes = append(__ComplexType__000061_DATATYPE_DEFINITION_BOOLEAN.Attributes, __Attribute__000079_LAST_CHANGE)
-	__ComplexType__000061_DATATYPE_DEFINITION_BOOLEAN.Attributes = append(__ComplexType__000061_DATATYPE_DEFINITION_BOOLEAN.Attributes, __Attribute__000091_LONG_NAME)
+	__ComplexType__000061_DATATYPE_DEFINITION_BOOLEAN.Attributes = append(__ComplexType__000061_DATATYPE_DEFINITION_BOOLEAN.Attributes, __Attribute__000095_LONG_NAME)
 	__ComplexType__000062_DATATYPE_DEFINITION_DATE.Alls = append(__ComplexType__000062_DATATYPE_DEFINITION_DATE.Alls, __All__000016_DATATYPE_DEFINITION_DATE_A_)
 	__ComplexType__000062_DATATYPE_DEFINITION_DATE.Attributes = append(__ComplexType__000062_DATATYPE_DEFINITION_DATE.Attributes, __Attribute__000006_DESC)
-	__ComplexType__000062_DATATYPE_DEFINITION_DATE.Attributes = append(__ComplexType__000062_DATATYPE_DEFINITION_DATE.Attributes, __Attribute__000031_IDENTIFIER)
-	__ComplexType__000062_DATATYPE_DEFINITION_DATE.Attributes = append(__ComplexType__000062_DATATYPE_DEFINITION_DATE.Attributes, __Attribute__000066_LAST_CHANGE)
-	__ComplexType__000062_DATATYPE_DEFINITION_DATE.Attributes = append(__ComplexType__000062_DATATYPE_DEFINITION_DATE.Attributes, __Attribute__000104_LONG_NAME)
+	__ComplexType__000062_DATATYPE_DEFINITION_DATE.Attributes = append(__ComplexType__000062_DATATYPE_DEFINITION_DATE.Attributes, __Attribute__000051_IDENTIFIER)
+	__ComplexType__000062_DATATYPE_DEFINITION_DATE.Attributes = append(__ComplexType__000062_DATATYPE_DEFINITION_DATE.Attributes, __Attribute__000064_LAST_CHANGE)
+	__ComplexType__000062_DATATYPE_DEFINITION_DATE.Attributes = append(__ComplexType__000062_DATATYPE_DEFINITION_DATE.Attributes, __Attribute__000091_LONG_NAME)
 	__ComplexType__000063_DATATYPE_DEFINITION_ENUMERATION.Alls = append(__ComplexType__000063_DATATYPE_DEFINITION_ENUMERATION.Alls, __All__000017_DATATYPE_DEFINITION_ENUMERATION_A_)
-	__ComplexType__000063_DATATYPE_DEFINITION_ENUMERATION.Attributes = append(__ComplexType__000063_DATATYPE_DEFINITION_ENUMERATION.Attributes, __Attribute__000013_DESC)
-	__ComplexType__000063_DATATYPE_DEFINITION_ENUMERATION.Attributes = append(__ComplexType__000063_DATATYPE_DEFINITION_ENUMERATION.Attributes, __Attribute__000037_IDENTIFIER)
-	__ComplexType__000063_DATATYPE_DEFINITION_ENUMERATION.Attributes = append(__ComplexType__000063_DATATYPE_DEFINITION_ENUMERATION.Attributes, __Attribute__000082_LAST_CHANGE)
-	__ComplexType__000063_DATATYPE_DEFINITION_ENUMERATION.Attributes = append(__ComplexType__000063_DATATYPE_DEFINITION_ENUMERATION.Attributes, __Attribute__000101_LONG_NAME)
+	__ComplexType__000063_DATATYPE_DEFINITION_ENUMERATION.Attributes = append(__ComplexType__000063_DATATYPE_DEFINITION_ENUMERATION.Attributes, __Attribute__000024_DESC)
+	__ComplexType__000063_DATATYPE_DEFINITION_ENUMERATION.Attributes = append(__ComplexType__000063_DATATYPE_DEFINITION_ENUMERATION.Attributes, __Attribute__000036_IDENTIFIER)
+	__ComplexType__000063_DATATYPE_DEFINITION_ENUMERATION.Attributes = append(__ComplexType__000063_DATATYPE_DEFINITION_ENUMERATION.Attributes, __Attribute__000070_LAST_CHANGE)
+	__ComplexType__000063_DATATYPE_DEFINITION_ENUMERATION.Attributes = append(__ComplexType__000063_DATATYPE_DEFINITION_ENUMERATION.Attributes, __Attribute__000102_LONG_NAME)
 	__ComplexType__000064_DATATYPE_DEFINITION_INTEGER.Alls = append(__ComplexType__000064_DATATYPE_DEFINITION_INTEGER.Alls, __All__000018_DATATYPE_DEFINITION_INTEGER_A_)
 	__ComplexType__000064_DATATYPE_DEFINITION_INTEGER.Attributes = append(__ComplexType__000064_DATATYPE_DEFINITION_INTEGER.Attributes, __Attribute__000004_DESC)
-	__ComplexType__000064_DATATYPE_DEFINITION_INTEGER.Attributes = append(__ComplexType__000064_DATATYPE_DEFINITION_INTEGER.Attributes, __Attribute__000046_IDENTIFIER)
-	__ComplexType__000064_DATATYPE_DEFINITION_INTEGER.Attributes = append(__ComplexType__000064_DATATYPE_DEFINITION_INTEGER.Attributes, __Attribute__000065_LAST_CHANGE)
-	__ComplexType__000064_DATATYPE_DEFINITION_INTEGER.Attributes = append(__ComplexType__000064_DATATYPE_DEFINITION_INTEGER.Attributes, __Attribute__000093_LONG_NAME)
+	__ComplexType__000064_DATATYPE_DEFINITION_INTEGER.Attributes = append(__ComplexType__000064_DATATYPE_DEFINITION_INTEGER.Attributes, __Attribute__000032_IDENTIFIER)
+	__ComplexType__000064_DATATYPE_DEFINITION_INTEGER.Attributes = append(__ComplexType__000064_DATATYPE_DEFINITION_INTEGER.Attributes, __Attribute__000063_LAST_CHANGE)
+	__ComplexType__000064_DATATYPE_DEFINITION_INTEGER.Attributes = append(__ComplexType__000064_DATATYPE_DEFINITION_INTEGER.Attributes, __Attribute__000087_LONG_NAME)
 	__ComplexType__000064_DATATYPE_DEFINITION_INTEGER.Attributes = append(__ComplexType__000064_DATATYPE_DEFINITION_INTEGER.Attributes, __Attribute__000111_MAX)
 	__ComplexType__000064_DATATYPE_DEFINITION_INTEGER.Attributes = append(__ComplexType__000064_DATATYPE_DEFINITION_INTEGER.Attributes, __Attribute__000114_MIN)
 	__ComplexType__000065_DATATYPE_DEFINITION_REAL.Alls = append(__ComplexType__000065_DATATYPE_DEFINITION_REAL.Alls, __All__000019_DATATYPE_DEFINITION_REAL_A_)
 	__ComplexType__000065_DATATYPE_DEFINITION_REAL.Attributes = append(__ComplexType__000065_DATATYPE_DEFINITION_REAL.Attributes, __Attribute__000001_ACCURACY)
 	__ComplexType__000065_DATATYPE_DEFINITION_REAL.Attributes = append(__ComplexType__000065_DATATYPE_DEFINITION_REAL.Attributes, __Attribute__000012_DESC)
-	__ComplexType__000065_DATATYPE_DEFINITION_REAL.Attributes = append(__ComplexType__000065_DATATYPE_DEFINITION_REAL.Attributes, __Attribute__000042_IDENTIFIER)
-	__ComplexType__000065_DATATYPE_DEFINITION_REAL.Attributes = append(__ComplexType__000065_DATATYPE_DEFINITION_REAL.Attributes, __Attribute__000076_LAST_CHANGE)
-	__ComplexType__000065_DATATYPE_DEFINITION_REAL.Attributes = append(__ComplexType__000065_DATATYPE_DEFINITION_REAL.Attributes, __Attribute__000108_LONG_NAME)
+	__ComplexType__000065_DATATYPE_DEFINITION_REAL.Attributes = append(__ComplexType__000065_DATATYPE_DEFINITION_REAL.Attributes, __Attribute__000047_IDENTIFIER)
+	__ComplexType__000065_DATATYPE_DEFINITION_REAL.Attributes = append(__ComplexType__000065_DATATYPE_DEFINITION_REAL.Attributes, __Attribute__000081_LAST_CHANGE)
+	__ComplexType__000065_DATATYPE_DEFINITION_REAL.Attributes = append(__ComplexType__000065_DATATYPE_DEFINITION_REAL.Attributes, __Attribute__000090_LONG_NAME)
 	__ComplexType__000065_DATATYPE_DEFINITION_REAL.Attributes = append(__ComplexType__000065_DATATYPE_DEFINITION_REAL.Attributes, __Attribute__000112_MAX)
 	__ComplexType__000065_DATATYPE_DEFINITION_REAL.Attributes = append(__ComplexType__000065_DATATYPE_DEFINITION_REAL.Attributes, __Attribute__000115_MIN)
 	__ComplexType__000066_DATATYPE_DEFINITION_STRING.Alls = append(__ComplexType__000066_DATATYPE_DEFINITION_STRING.Alls, __All__000020_DATATYPE_DEFINITION_STRING_A_)
-	__ComplexType__000066_DATATYPE_DEFINITION_STRING.Attributes = append(__ComplexType__000066_DATATYPE_DEFINITION_STRING.Attributes, __Attribute__000008_DESC)
-	__ComplexType__000066_DATATYPE_DEFINITION_STRING.Attributes = append(__ComplexType__000066_DATATYPE_DEFINITION_STRING.Attributes, __Attribute__000050_IDENTIFIER)
-	__ComplexType__000066_DATATYPE_DEFINITION_STRING.Attributes = append(__ComplexType__000066_DATATYPE_DEFINITION_STRING.Attributes, __Attribute__000078_LAST_CHANGE)
-	__ComplexType__000066_DATATYPE_DEFINITION_STRING.Attributes = append(__ComplexType__000066_DATATYPE_DEFINITION_STRING.Attributes, __Attribute__000089_LONG_NAME)
+	__ComplexType__000066_DATATYPE_DEFINITION_STRING.Attributes = append(__ComplexType__000066_DATATYPE_DEFINITION_STRING.Attributes, __Attribute__000013_DESC)
+	__ComplexType__000066_DATATYPE_DEFINITION_STRING.Attributes = append(__ComplexType__000066_DATATYPE_DEFINITION_STRING.Attributes, __Attribute__000034_IDENTIFIER)
+	__ComplexType__000066_DATATYPE_DEFINITION_STRING.Attributes = append(__ComplexType__000066_DATATYPE_DEFINITION_STRING.Attributes, __Attribute__000075_LAST_CHANGE)
+	__ComplexType__000066_DATATYPE_DEFINITION_STRING.Attributes = append(__ComplexType__000066_DATATYPE_DEFINITION_STRING.Attributes, __Attribute__000107_LONG_NAME)
 	__ComplexType__000066_DATATYPE_DEFINITION_STRING.Attributes = append(__ComplexType__000066_DATATYPE_DEFINITION_STRING.Attributes, __Attribute__000113_MAX_LENGTH)
 	__ComplexType__000067_DATATYPE_DEFINITION_XHTML.Alls = append(__ComplexType__000067_DATATYPE_DEFINITION_XHTML.Alls, __All__000021_DATATYPE_DEFINITION_XHTML_A_)
 	__ComplexType__000067_DATATYPE_DEFINITION_XHTML.Attributes = append(__ComplexType__000067_DATATYPE_DEFINITION_XHTML.Attributes, __Attribute__000021_DESC)
-	__ComplexType__000067_DATATYPE_DEFINITION_XHTML.Attributes = append(__ComplexType__000067_DATATYPE_DEFINITION_XHTML.Attributes, __Attribute__000036_IDENTIFIER)
-	__ComplexType__000067_DATATYPE_DEFINITION_XHTML.Attributes = append(__ComplexType__000067_DATATYPE_DEFINITION_XHTML.Attributes, __Attribute__000080_LAST_CHANGE)
-	__ComplexType__000067_DATATYPE_DEFINITION_XHTML.Attributes = append(__ComplexType__000067_DATATYPE_DEFINITION_XHTML.Attributes, __Attribute__000087_LONG_NAME)
+	__ComplexType__000067_DATATYPE_DEFINITION_XHTML.Attributes = append(__ComplexType__000067_DATATYPE_DEFINITION_XHTML.Attributes, __Attribute__000046_IDENTIFIER)
+	__ComplexType__000067_DATATYPE_DEFINITION_XHTML.Attributes = append(__ComplexType__000067_DATATYPE_DEFINITION_XHTML.Attributes, __Attribute__000086_LAST_CHANGE)
+	__ComplexType__000067_DATATYPE_DEFINITION_XHTML.Attributes = append(__ComplexType__000067_DATATYPE_DEFINITION_XHTML.Attributes, __Attribute__000109_LONG_NAME)
 	__ComplexType__000068_EMBEDDED_VALUE.Alls = append(__ComplexType__000068_EMBEDDED_VALUE.Alls, __All__000022_EMBEDDED_VALUE_A_)
 	__ComplexType__000068_EMBEDDED_VALUE.Attributes = append(__ComplexType__000068_EMBEDDED_VALUE.Attributes, __Attribute__000062_KEY)
 	__ComplexType__000068_EMBEDDED_VALUE.Attributes = append(__ComplexType__000068_EMBEDDED_VALUE.Attributes, __Attribute__000117_OTHER_CONTENT)
 	__ComplexType__000069_ENUM_VALUE.Alls = append(__ComplexType__000069_ENUM_VALUE.Alls, __All__000023_ENUM_VALUE_A_)
-	__ComplexType__000069_ENUM_VALUE.Attributes = append(__ComplexType__000069_ENUM_VALUE.Attributes, __Attribute__000019_DESC)
-	__ComplexType__000069_ENUM_VALUE.Attributes = append(__ComplexType__000069_ENUM_VALUE.Attributes, __Attribute__000047_IDENTIFIER)
-	__ComplexType__000069_ENUM_VALUE.Attributes = append(__ComplexType__000069_ENUM_VALUE.Attributes, __Attribute__000068_LAST_CHANGE)
-	__ComplexType__000069_ENUM_VALUE.Attributes = append(__ComplexType__000069_ENUM_VALUE.Attributes, __Attribute__000090_LONG_NAME)
+	__ComplexType__000069_ENUM_VALUE.Attributes = append(__ComplexType__000069_ENUM_VALUE.Attributes, __Attribute__000014_DESC)
+	__ComplexType__000069_ENUM_VALUE.Attributes = append(__ComplexType__000069_ENUM_VALUE.Attributes, __Attribute__000040_IDENTIFIER)
+	__ComplexType__000069_ENUM_VALUE.Attributes = append(__ComplexType__000069_ENUM_VALUE.Attributes, __Attribute__000084_LAST_CHANGE)
+	__ComplexType__000069_ENUM_VALUE.Attributes = append(__ComplexType__000069_ENUM_VALUE.Attributes, __Attribute__000092_LONG_NAME)
 	__ComplexType__000070_RELATION_GROUP.Alls = append(__ComplexType__000070_RELATION_GROUP.Alls, __All__000025_RELATION_GROUP_A_)
-	__ComplexType__000070_RELATION_GROUP.Attributes = append(__ComplexType__000070_RELATION_GROUP.Attributes, __Attribute__000016_DESC)
-	__ComplexType__000070_RELATION_GROUP.Attributes = append(__ComplexType__000070_RELATION_GROUP.Attributes, __Attribute__000034_IDENTIFIER)
-	__ComplexType__000070_RELATION_GROUP.Attributes = append(__ComplexType__000070_RELATION_GROUP.Attributes, __Attribute__000069_LAST_CHANGE)
-	__ComplexType__000070_RELATION_GROUP.Attributes = append(__ComplexType__000070_RELATION_GROUP.Attributes, __Attribute__000110_LONG_NAME)
+	__ComplexType__000070_RELATION_GROUP.Attributes = append(__ComplexType__000070_RELATION_GROUP.Attributes, __Attribute__000005_DESC)
+	__ComplexType__000070_RELATION_GROUP.Attributes = append(__ComplexType__000070_RELATION_GROUP.Attributes, __Attribute__000031_IDENTIFIER)
+	__ComplexType__000070_RELATION_GROUP.Attributes = append(__ComplexType__000070_RELATION_GROUP.Attributes, __Attribute__000078_LAST_CHANGE)
+	__ComplexType__000070_RELATION_GROUP.Attributes = append(__ComplexType__000070_RELATION_GROUP.Attributes, __Attribute__000099_LONG_NAME)
 	__ComplexType__000071_RELATION_GROUP_TYPE.Alls = append(__ComplexType__000071_RELATION_GROUP_TYPE.Alls, __All__000024_RELATION_GROUP_TYPE_A_)
-	__ComplexType__000071_RELATION_GROUP_TYPE.Attributes = append(__ComplexType__000071_RELATION_GROUP_TYPE.Attributes, __Attribute__000010_DESC)
-	__ComplexType__000071_RELATION_GROUP_TYPE.Attributes = append(__ComplexType__000071_RELATION_GROUP_TYPE.Attributes, __Attribute__000030_IDENTIFIER)
-	__ComplexType__000071_RELATION_GROUP_TYPE.Attributes = append(__ComplexType__000071_RELATION_GROUP_TYPE.Attributes, __Attribute__000063_LAST_CHANGE)
-	__ComplexType__000071_RELATION_GROUP_TYPE.Attributes = append(__ComplexType__000071_RELATION_GROUP_TYPE.Attributes, __Attribute__000103_LONG_NAME)
+	__ComplexType__000071_RELATION_GROUP_TYPE.Attributes = append(__ComplexType__000071_RELATION_GROUP_TYPE.Attributes, __Attribute__000007_DESC)
+	__ComplexType__000071_RELATION_GROUP_TYPE.Attributes = append(__ComplexType__000071_RELATION_GROUP_TYPE.Attributes, __Attribute__000041_IDENTIFIER)
+	__ComplexType__000071_RELATION_GROUP_TYPE.Attributes = append(__ComplexType__000071_RELATION_GROUP_TYPE.Attributes, __Attribute__000067_LAST_CHANGE)
+	__ComplexType__000071_RELATION_GROUP_TYPE.Attributes = append(__ComplexType__000071_RELATION_GROUP_TYPE.Attributes, __Attribute__000094_LONG_NAME)
 	__ComplexType__000072_REQ_IF.Sequences = append(__ComplexType__000072_REQ_IF.Sequences, __Sequence__000003_REQ_IF_S_)
 	__ComplexType__000072_REQ_IF.Attributes = append(__ComplexType__000072_REQ_IF.Attributes, __Attribute__000000_)
 	__ComplexType__000073_REQ_IF_CONTENT.Sequences = append(__ComplexType__000073_REQ_IF_CONTENT.Sequences, __Sequence__000000_REQ_IF_CONTENT_S_)
 	__ComplexType__000074_REQ_IF_HEADER.Sequences = append(__ComplexType__000074_REQ_IF_HEADER.Sequences, __Sequence__000001_REQ_IF_HEADER_S_)
-	__ComplexType__000074_REQ_IF_HEADER.Attributes = append(__ComplexType__000074_REQ_IF_HEADER.Attributes, __Attribute__000041_IDENTIFIER)
+	__ComplexType__000074_REQ_IF_HEADER.Attributes = append(__ComplexType__000074_REQ_IF_HEADER.Attributes, __Attribute__000026_IDENTIFIER)
 	__ComplexType__000075_REQ_IF_TOOL_EXTENSION.Sequences = append(__ComplexType__000075_REQ_IF_TOOL_EXTENSION.Sequences, __Sequence__000002_REQ_IF_TOOL_EXTENSION_S_)
 	__ComplexType__000076_SPEC_HIERARCHY.Alls = append(__ComplexType__000076_SPEC_HIERARCHY.Alls, __All__000026_SPEC_HIERARCHY_A_)
-	__ComplexType__000076_SPEC_HIERARCHY.Attributes = append(__ComplexType__000076_SPEC_HIERARCHY.Attributes, __Attribute__000015_DESC)
-	__ComplexType__000076_SPEC_HIERARCHY.Attributes = append(__ComplexType__000076_SPEC_HIERARCHY.Attributes, __Attribute__000028_IDENTIFIER)
-	__ComplexType__000076_SPEC_HIERARCHY.Attributes = append(__ComplexType__000076_SPEC_HIERARCHY.Attributes, __Attribute__000055_IS_EDITABLE)
+	__ComplexType__000076_SPEC_HIERARCHY.Attributes = append(__ComplexType__000076_SPEC_HIERARCHY.Attributes, __Attribute__000022_DESC)
+	__ComplexType__000076_SPEC_HIERARCHY.Attributes = append(__ComplexType__000076_SPEC_HIERARCHY.Attributes, __Attribute__000039_IDENTIFIER)
+	__ComplexType__000076_SPEC_HIERARCHY.Attributes = append(__ComplexType__000076_SPEC_HIERARCHY.Attributes, __Attribute__000052_IS_EDITABLE)
 	__ComplexType__000076_SPEC_HIERARCHY.Attributes = append(__ComplexType__000076_SPEC_HIERARCHY.Attributes, __Attribute__000061_IS_TABLE_INTERNAL)
-	__ComplexType__000076_SPEC_HIERARCHY.Attributes = append(__ComplexType__000076_SPEC_HIERARCHY.Attributes, __Attribute__000085_LAST_CHANGE)
-	__ComplexType__000076_SPEC_HIERARCHY.Attributes = append(__ComplexType__000076_SPEC_HIERARCHY.Attributes, __Attribute__000109_LONG_NAME)
+	__ComplexType__000076_SPEC_HIERARCHY.Attributes = append(__ComplexType__000076_SPEC_HIERARCHY.Attributes, __Attribute__000071_LAST_CHANGE)
+	__ComplexType__000076_SPEC_HIERARCHY.Attributes = append(__ComplexType__000076_SPEC_HIERARCHY.Attributes, __Attribute__000100_LONG_NAME)
 	__ComplexType__000077_SPEC_OBJECT.Alls = append(__ComplexType__000077_SPEC_OBJECT.Alls, __All__000028_SPEC_OBJECT_A_)
-	__ComplexType__000077_SPEC_OBJECT.Attributes = append(__ComplexType__000077_SPEC_OBJECT.Attributes, __Attribute__000003_DESC)
-	__ComplexType__000077_SPEC_OBJECT.Attributes = append(__ComplexType__000077_SPEC_OBJECT.Attributes, __Attribute__000029_IDENTIFIER)
-	__ComplexType__000077_SPEC_OBJECT.Attributes = append(__ComplexType__000077_SPEC_OBJECT.Attributes, __Attribute__000086_LAST_CHANGE)
-	__ComplexType__000077_SPEC_OBJECT.Attributes = append(__ComplexType__000077_SPEC_OBJECT.Attributes, __Attribute__000088_LONG_NAME)
+	__ComplexType__000077_SPEC_OBJECT.Attributes = append(__ComplexType__000077_SPEC_OBJECT.Attributes, __Attribute__000025_DESC)
+	__ComplexType__000077_SPEC_OBJECT.Attributes = append(__ComplexType__000077_SPEC_OBJECT.Attributes, __Attribute__000042_IDENTIFIER)
+	__ComplexType__000077_SPEC_OBJECT.Attributes = append(__ComplexType__000077_SPEC_OBJECT.Attributes, __Attribute__000080_LAST_CHANGE)
+	__ComplexType__000077_SPEC_OBJECT.Attributes = append(__ComplexType__000077_SPEC_OBJECT.Attributes, __Attribute__000096_LONG_NAME)
 	__ComplexType__000078_SPEC_OBJECT_TYPE.Alls = append(__ComplexType__000078_SPEC_OBJECT_TYPE.Alls, __All__000027_SPEC_OBJECT_TYPE_A_)
-	__ComplexType__000078_SPEC_OBJECT_TYPE.Attributes = append(__ComplexType__000078_SPEC_OBJECT_TYPE.Attributes, __Attribute__000023_DESC)
-	__ComplexType__000078_SPEC_OBJECT_TYPE.Attributes = append(__ComplexType__000078_SPEC_OBJECT_TYPE.Attributes, __Attribute__000040_IDENTIFIER)
-	__ComplexType__000078_SPEC_OBJECT_TYPE.Attributes = append(__ComplexType__000078_SPEC_OBJECT_TYPE.Attributes, __Attribute__000075_LAST_CHANGE)
-	__ComplexType__000078_SPEC_OBJECT_TYPE.Attributes = append(__ComplexType__000078_SPEC_OBJECT_TYPE.Attributes, __Attribute__000099_LONG_NAME)
+	__ComplexType__000078_SPEC_OBJECT_TYPE.Attributes = append(__ComplexType__000078_SPEC_OBJECT_TYPE.Attributes, __Attribute__000015_DESC)
+	__ComplexType__000078_SPEC_OBJECT_TYPE.Attributes = append(__ComplexType__000078_SPEC_OBJECT_TYPE.Attributes, __Attribute__000027_IDENTIFIER)
+	__ComplexType__000078_SPEC_OBJECT_TYPE.Attributes = append(__ComplexType__000078_SPEC_OBJECT_TYPE.Attributes, __Attribute__000065_LAST_CHANGE)
+	__ComplexType__000078_SPEC_OBJECT_TYPE.Attributes = append(__ComplexType__000078_SPEC_OBJECT_TYPE.Attributes, __Attribute__000106_LONG_NAME)
 	__ComplexType__000079_SPEC_RELATION.Alls = append(__ComplexType__000079_SPEC_RELATION.Alls, __All__000030_SPEC_RELATION_A_)
 	__ComplexType__000079_SPEC_RELATION.Attributes = append(__ComplexType__000079_SPEC_RELATION.Attributes, __Attribute__000018_DESC)
-	__ComplexType__000079_SPEC_RELATION.Attributes = append(__ComplexType__000079_SPEC_RELATION.Attributes, __Attribute__000035_IDENTIFIER)
-	__ComplexType__000079_SPEC_RELATION.Attributes = append(__ComplexType__000079_SPEC_RELATION.Attributes, __Attribute__000077_LAST_CHANGE)
-	__ComplexType__000079_SPEC_RELATION.Attributes = append(__ComplexType__000079_SPEC_RELATION.Attributes, __Attribute__000100_LONG_NAME)
+	__ComplexType__000079_SPEC_RELATION.Attributes = append(__ComplexType__000079_SPEC_RELATION.Attributes, __Attribute__000033_IDENTIFIER)
+	__ComplexType__000079_SPEC_RELATION.Attributes = append(__ComplexType__000079_SPEC_RELATION.Attributes, __Attribute__000069_LAST_CHANGE)
+	__ComplexType__000079_SPEC_RELATION.Attributes = append(__ComplexType__000079_SPEC_RELATION.Attributes, __Attribute__000110_LONG_NAME)
 	__ComplexType__000080_SPEC_RELATION_TYPE.Alls = append(__ComplexType__000080_SPEC_RELATION_TYPE.Alls, __All__000029_SPEC_RELATION_TYPE_A_)
-	__ComplexType__000080_SPEC_RELATION_TYPE.Attributes = append(__ComplexType__000080_SPEC_RELATION_TYPE.Attributes, __Attribute__000007_DESC)
-	__ComplexType__000080_SPEC_RELATION_TYPE.Attributes = append(__ComplexType__000080_SPEC_RELATION_TYPE.Attributes, __Attribute__000045_IDENTIFIER)
-	__ComplexType__000080_SPEC_RELATION_TYPE.Attributes = append(__ComplexType__000080_SPEC_RELATION_TYPE.Attributes, __Attribute__000070_LAST_CHANGE)
-	__ComplexType__000080_SPEC_RELATION_TYPE.Attributes = append(__ComplexType__000080_SPEC_RELATION_TYPE.Attributes, __Attribute__000095_LONG_NAME)
+	__ComplexType__000080_SPEC_RELATION_TYPE.Attributes = append(__ComplexType__000080_SPEC_RELATION_TYPE.Attributes, __Attribute__000019_DESC)
+	__ComplexType__000080_SPEC_RELATION_TYPE.Attributes = append(__ComplexType__000080_SPEC_RELATION_TYPE.Attributes, __Attribute__000038_IDENTIFIER)
+	__ComplexType__000080_SPEC_RELATION_TYPE.Attributes = append(__ComplexType__000080_SPEC_RELATION_TYPE.Attributes, __Attribute__000066_LAST_CHANGE)
+	__ComplexType__000080_SPEC_RELATION_TYPE.Attributes = append(__ComplexType__000080_SPEC_RELATION_TYPE.Attributes, __Attribute__000103_LONG_NAME)
 	__ComplexType__000081_SPECIFICATION.Alls = append(__ComplexType__000081_SPECIFICATION.Alls, __All__000032_SPECIFICATION_A_)
-	__ComplexType__000081_SPECIFICATION.Attributes = append(__ComplexType__000081_SPECIFICATION.Attributes, __Attribute__000014_DESC)
-	__ComplexType__000081_SPECIFICATION.Attributes = append(__ComplexType__000081_SPECIFICATION.Attributes, __Attribute__000027_IDENTIFIER)
-	__ComplexType__000081_SPECIFICATION.Attributes = append(__ComplexType__000081_SPECIFICATION.Attributes, __Attribute__000084_LAST_CHANGE)
-	__ComplexType__000081_SPECIFICATION.Attributes = append(__ComplexType__000081_SPECIFICATION.Attributes, __Attribute__000097_LONG_NAME)
+	__ComplexType__000081_SPECIFICATION.Attributes = append(__ComplexType__000081_SPECIFICATION.Attributes, __Attribute__000017_DESC)
+	__ComplexType__000081_SPECIFICATION.Attributes = append(__ComplexType__000081_SPECIFICATION.Attributes, __Attribute__000044_IDENTIFIER)
+	__ComplexType__000081_SPECIFICATION.Attributes = append(__ComplexType__000081_SPECIFICATION.Attributes, __Attribute__000083_LAST_CHANGE)
+	__ComplexType__000081_SPECIFICATION.Attributes = append(__ComplexType__000081_SPECIFICATION.Attributes, __Attribute__000093_LONG_NAME)
 	__ComplexType__000082_SPECIFICATION_TYPE.Alls = append(__ComplexType__000082_SPECIFICATION_TYPE.Alls, __All__000031_SPECIFICATION_TYPE_A_)
-	__ComplexType__000082_SPECIFICATION_TYPE.Attributes = append(__ComplexType__000082_SPECIFICATION_TYPE.Attributes, __Attribute__000002_DESC)
-	__ComplexType__000082_SPECIFICATION_TYPE.Attributes = append(__ComplexType__000082_SPECIFICATION_TYPE.Attributes, __Attribute__000048_IDENTIFIER)
-	__ComplexType__000082_SPECIFICATION_TYPE.Attributes = append(__ComplexType__000082_SPECIFICATION_TYPE.Attributes, __Attribute__000083_LAST_CHANGE)
-	__ComplexType__000082_SPECIFICATION_TYPE.Attributes = append(__ComplexType__000082_SPECIFICATION_TYPE.Attributes, __Attribute__000098_LONG_NAME)
+	__ComplexType__000082_SPECIFICATION_TYPE.Attributes = append(__ComplexType__000082_SPECIFICATION_TYPE.Attributes, __Attribute__000009_DESC)
+	__ComplexType__000082_SPECIFICATION_TYPE.Attributes = append(__ComplexType__000082_SPECIFICATION_TYPE.Attributes, __Attribute__000045_IDENTIFIER)
+	__ComplexType__000082_SPECIFICATION_TYPE.Attributes = append(__ComplexType__000082_SPECIFICATION_TYPE.Attributes, __Attribute__000074_LAST_CHANGE)
+	__ComplexType__000082_SPECIFICATION_TYPE.Attributes = append(__ComplexType__000082_SPECIFICATION_TYPE.Attributes, __Attribute__000108_LONG_NAME)
 	__ComplexType__000083_XHTML_CONTENT.Groups = append(__ComplexType__000083_XHTML_CONTENT.Groups, __Group__000000_XHTML_CONTENT_G_)
 	__Element__000001_ALTERNATIVE_ID.ComplexType = __ComplexType__000015_A_ALTERNATIVE_ID
 	__Element__000023_CHILDREN.ComplexType = __ComplexType__000031_A_CHILDREN
 	__Element__000025_CORE_CONTENT.ComplexType = __ComplexType__000032_A_CORE_CONTENT
 	__Element__000041_DATATYPES.ComplexType = __ComplexType__000040_A_DATATYPES
-	__Element__000042_DEFAULT_VALUE.ComplexType = __ComplexType__000028_A_ATTRIBUTE_VALUE_STRING
+	__Element__000042_DEFAULT_VALUE.ComplexType = __ComplexType__000027_A_ATTRIBUTE_VALUE_REAL
 	__Element__000043_DEFAULT_VALUE.ComplexType = __ComplexType__000023_A_ATTRIBUTE_VALUE_BOOLEAN
-	__Element__000044_DEFAULT_VALUE.ComplexType = __ComplexType__000026_A_ATTRIBUTE_VALUE_INTEGER
-	__Element__000045_DEFAULT_VALUE.ComplexType = __ComplexType__000024_A_ATTRIBUTE_VALUE_DATE
-	__Element__000046_DEFAULT_VALUE.ComplexType = __ComplexType__000025_A_ATTRIBUTE_VALUE_ENUMERATION
-	__Element__000047_DEFAULT_VALUE.ComplexType = __ComplexType__000027_A_ATTRIBUTE_VALUE_REAL
-	__Element__000048_DEFAULT_VALUE.ComplexType = __ComplexType__000030_A_ATTRIBUTE_VALUE_XHTML
+	__Element__000044_DEFAULT_VALUE.ComplexType = __ComplexType__000024_A_ATTRIBUTE_VALUE_DATE
+	__Element__000045_DEFAULT_VALUE.ComplexType = __ComplexType__000025_A_ATTRIBUTE_VALUE_ENUMERATION
+	__Element__000046_DEFAULT_VALUE.ComplexType = __ComplexType__000029_A_ATTRIBUTE_VALUE_XHTML
+	__Element__000047_DEFAULT_VALUE.ComplexType = __ComplexType__000028_A_ATTRIBUTE_VALUE_STRING
+	__Element__000048_DEFAULT_VALUE.ComplexType = __ComplexType__000026_A_ATTRIBUTE_VALUE_INTEGER
 	__Element__000049_DEFINITION.ComplexType = __ComplexType__000017_A_ATTRIBUTE_DEFINITION_DATE_REF
-	__Element__000050_DEFINITION.ComplexType = __ComplexType__000020_A_ATTRIBUTE_DEFINITION_REAL_REF
-	__Element__000051_DEFINITION.ComplexType = __ComplexType__000018_A_ATTRIBUTE_DEFINITION_ENUMERATION_REF
-	__Element__000052_DEFINITION.ComplexType = __ComplexType__000019_A_ATTRIBUTE_DEFINITION_INTEGER_REF
+	__Element__000050_DEFINITION.ComplexType = __ComplexType__000019_A_ATTRIBUTE_DEFINITION_INTEGER_REF
+	__Element__000051_DEFINITION.ComplexType = __ComplexType__000022_A_ATTRIBUTE_DEFINITION_XHTML_REF
+	__Element__000052_DEFINITION.ComplexType = __ComplexType__000020_A_ATTRIBUTE_DEFINITION_REAL_REF
 	__Element__000053_DEFINITION.ComplexType = __ComplexType__000021_A_ATTRIBUTE_DEFINITION_STRING_REF
-	__Element__000054_DEFINITION.ComplexType = __ComplexType__000022_A_ATTRIBUTE_DEFINITION_XHTML_REF
+	__Element__000054_DEFINITION.ComplexType = __ComplexType__000018_A_ATTRIBUTE_DEFINITION_ENUMERATION_REF
 	__Element__000055_DEFINITION.ComplexType = __ComplexType__000016_A_ATTRIBUTE_DEFINITION_BOOLEAN_REF
 	__Element__000056_EDITABLE_ATTS.ComplexType = __ComplexType__000041_A_EDITABLE_ATTS
 	__Element__000060_OBJECT.ComplexType = __ComplexType__000043_A_OBJECT
 	__Element__000061_PROPERTIES.ComplexType = __ComplexType__000044_A_PROPERTIES
-	__Element__000072_SOURCE.ComplexType = __ComplexType__000057_A_TARGET
+	__Element__000072_SOURCE.ComplexType = __ComplexType__000046_A_SOURCE
 	__Element__000073_SOURCE_SPECIFICATION.ComplexType = __ComplexType__000058_A_TARGET_SPECIFICATION
-	__Element__000075_SPEC_ATTRIBUTES.ComplexType = __ComplexType__000046_A_SPEC_ATTRIBUTES
-	__Element__000082_SPEC_OBJECTS.ComplexType = __ComplexType__000048_A_SPEC_OBJECTS
-	__Element__000084_SPEC_RELATION_GROUPS.ComplexType = __ComplexType__000049_A_SPEC_RELATION_GROUPS
-	__Element__000088_SPEC_RELATIONS.ComplexType = __ComplexType__000052_A_SPEC_RELATIONS
-	__Element__000089_SPEC_RELATIONS.ComplexType = __ComplexType__000050_A_SPEC_RELATION_REF
-	__Element__000090_SPEC_TYPES.ComplexType = __ComplexType__000053_A_SPEC_TYPES
-	__Element__000095_SPECIFICATIONS.ComplexType = __ComplexType__000055_A_SPECIFICATIONS
-	__Element__000096_SPECIFIED_VALUES.ComplexType = __ComplexType__000056_A_SPECIFIED_VALUES
-	__Element__000097_TARGET.ComplexType = __ComplexType__000057_A_TARGET
+	__Element__000075_SPEC_ATTRIBUTES.ComplexType = __ComplexType__000047_A_SPEC_ATTRIBUTES
+	__Element__000082_SPEC_OBJECTS.ComplexType = __ComplexType__000049_A_SPEC_OBJECTS
+	__Element__000084_SPEC_RELATION_GROUPS.ComplexType = __ComplexType__000050_A_SPEC_RELATION_GROUPS
+	__Element__000088_SPEC_RELATIONS.ComplexType = __ComplexType__000051_A_SPEC_RELATION_REF
+	__Element__000089_SPEC_RELATIONS.ComplexType = __ComplexType__000053_A_SPEC_RELATIONS
+	__Element__000090_SPEC_TYPES.ComplexType = __ComplexType__000054_A_SPEC_TYPES
+	__Element__000095_SPECIFICATIONS.ComplexType = __ComplexType__000056_A_SPECIFICATIONS
+	__Element__000096_SPECIFIED_VALUES.ComplexType = __ComplexType__000057_A_SPECIFIED_VALUES
+	__Element__000097_TARGET.ComplexType = __ComplexType__000046_A_SOURCE
 	__Element__000098_TARGET_SPECIFICATION.ComplexType = __ComplexType__000058_A_TARGET_SPECIFICATION
 	__Element__000099_THE_HEADER.ComplexType = __ComplexType__000059_A_THE_HEADER
 	__Element__000103_TOOL_EXTENSIONS.ComplexType = __ComplexType__000060_A_TOOL_EXTENSIONS
-	__Element__000104_TYPE.ComplexType = __ComplexType__000045_A_RELATION_GROUP_TYPE_REF
-	__Element__000105_TYPE.ComplexType = __ComplexType__000035_A_DATATYPE_DEFINITION_ENUMERATION_REF
-	__Element__000106_TYPE.ComplexType = __ComplexType__000039_A_DATATYPE_DEFINITION_XHTML_REF
+	__Element__000104_TYPE.ComplexType = __ComplexType__000055_A_SPECIFICATION_TYPE_REF
+	__Element__000105_TYPE.ComplexType = __ComplexType__000038_A_DATATYPE_DEFINITION_STRING_REF
+	__Element__000106_TYPE.ComplexType = __ComplexType__000052_A_SPEC_RELATION_TYPE_REF
 	__Element__000107_TYPE.ComplexType = __ComplexType__000033_A_DATATYPE_DEFINITION_BOOLEAN_REF
-	__Element__000108_TYPE.ComplexType = __ComplexType__000034_A_DATATYPE_DEFINITION_DATE_REF
-	__Element__000109_TYPE.ComplexType = __ComplexType__000047_A_SPEC_OBJECT_TYPE_REF
-	__Element__000110_TYPE.ComplexType = __ComplexType__000038_A_DATATYPE_DEFINITION_STRING_REF
+	__Element__000108_TYPE.ComplexType = __ComplexType__000045_A_RELATION_GROUP_TYPE_REF
+	__Element__000109_TYPE.ComplexType = __ComplexType__000035_A_DATATYPE_DEFINITION_ENUMERATION_REF
+	__Element__000110_TYPE.ComplexType = __ComplexType__000037_A_DATATYPE_DEFINITION_REAL_REF
 	__Element__000111_TYPE.ComplexType = __ComplexType__000036_A_DATATYPE_DEFINITION_INTEGER_REF
-	__Element__000112_TYPE.ComplexType = __ComplexType__000037_A_DATATYPE_DEFINITION_REAL_REF
-	__Element__000113_TYPE.ComplexType = __ComplexType__000051_A_SPEC_RELATION_TYPE_REF
-	__Element__000114_TYPE.ComplexType = __ComplexType__000054_A_SPECIFICATION_TYPE_REF
+	__Element__000112_TYPE.ComplexType = __ComplexType__000048_A_SPEC_OBJECT_TYPE_REF
+	__Element__000113_TYPE.ComplexType = __ComplexType__000034_A_DATATYPE_DEFINITION_DATE_REF
+	__Element__000114_TYPE.ComplexType = __ComplexType__000039_A_DATATYPE_DEFINITION_XHTML_REF
 	__Element__000115_VALUES.ComplexType = __ComplexType__000042_A_ENUM_VALUE_REF
-	__Element__000116_VALUES.ComplexType = __ComplexType__000029_A_ATTRIBUTE_VALUE_XHTML
+	__Element__000116_VALUES.ComplexType = __ComplexType__000030_A_ATTRIBUTE_VALUE_XHTML
 	__Schema__000000_Schema.Elements = append(__Schema__000000_Schema.Elements, __Element__000066_REQ_IF)
 	__Schema__000000_Schema.SimpleTypes = append(__Schema__000000_Schema.SimpleTypes, __SimpleType__000001_LOCAL_REF)
 	__Schema__000000_Schema.SimpleTypes = append(__Schema__000000_Schema.SimpleTypes, __SimpleType__000000_GLOBAL_REF)
@@ -6123,7 +6547,7 @@ func _(stage *models.StageStruct) {
 	__Sequence__000000_REQ_IF_CONTENT_S_.Elements = append(__Sequence__000000_REQ_IF_CONTENT_S_.Elements, __Element__000041_DATATYPES)
 	__Sequence__000000_REQ_IF_CONTENT_S_.Elements = append(__Sequence__000000_REQ_IF_CONTENT_S_.Elements, __Element__000090_SPEC_TYPES)
 	__Sequence__000000_REQ_IF_CONTENT_S_.Elements = append(__Sequence__000000_REQ_IF_CONTENT_S_.Elements, __Element__000082_SPEC_OBJECTS)
-	__Sequence__000000_REQ_IF_CONTENT_S_.Elements = append(__Sequence__000000_REQ_IF_CONTENT_S_.Elements, __Element__000088_SPEC_RELATIONS)
+	__Sequence__000000_REQ_IF_CONTENT_S_.Elements = append(__Sequence__000000_REQ_IF_CONTENT_S_.Elements, __Element__000089_SPEC_RELATIONS)
 	__Sequence__000000_REQ_IF_CONTENT_S_.Elements = append(__Sequence__000000_REQ_IF_CONTENT_S_.Elements, __Element__000095_SPECIFICATIONS)
 	__Sequence__000000_REQ_IF_CONTENT_S_.Elements = append(__Sequence__000000_REQ_IF_CONTENT_S_.Elements, __Element__000084_SPEC_RELATION_GROUPS)
 	__Sequence__000001_REQ_IF_HEADER_S_.Elements = append(__Sequence__000001_REQ_IF_HEADER_S_.Elements, __Element__000024_COMMENT)

@@ -25,9 +25,19 @@ func Generate(stage *StageStruct, outputFilePath string) {
 
 		fields := ct.GetFields(stage)
 
+		var comment string
+		if annotation := ct.Annotation; annotation != nil {
+			if len(annotation.Documentations) > 0 {
+				comment = PrefixLines(annotation.Documentations[0].Text)
+			}
+		}
+
 		if !ct.IsAnonymous {
-			templInsertionLevel0[ModelsFileTmplLevel0AllGongstructsCode] += Replace3(
+			templInsertionLevel0[ModelsFileTmplLevel0AllGongstructsCode] += Replace4(
 				ModelsFileTmplLevel1Code[ModelsFileTmplLevel1NamedStructCode],
+
+				"{{"+string(rune(ModelsFileTmplLevel2Comment))+"}}",
+				comment,
 
 				"{{"+string(rune(ModelsFileTmplLevel2Structname))+"}}", ct.GoIdentifier,
 
@@ -42,8 +52,11 @@ func Generate(stage *StageStruct, outputFilePath string) {
 			if ct.OuterElement != nil {
 				outerElementName = ct.OuterElement.Name
 			}
-			templInsertionLevel0[ModelsFileTmplLevel0AllGongstructsCode] += Replace3(
+			templInsertionLevel0[ModelsFileTmplLevel0AllGongstructsCode] += Replace4(
 				ModelsFileTmplLevel1Code[ModelsFileTmplLevel1NamedStructCode],
+
+				"{{"+string(rune(ModelsFileTmplLevel2Comment))+"}}",
+				comment,
 
 				"{{"+string(rune(ModelsFileTmplLevel2Structname))+"}}", ct.GoIdentifier,
 
@@ -143,12 +156,22 @@ func Generate(stage *StageStruct, outputFilePath string) {
 		fields := "\n\n\t// necessary since it is a root element" +
 			"\n\tXMLName xml.Name `xml:\"" + element.NameXSD + "\"`"
 
+		var comment string
+		if annotation := element.Annotation; annotation != nil {
+			if len(annotation.Documentations) > 0 {
+				comment = PrefixLines(annotation.Documentations[0].Text)
+			}
+		}
+
 		if element.ComplexType != nil {
 			fields += "\n\n\t// generated from inline complex type" +
 				"\n\t" + element.ComplexType.GoIdentifier
 
-			templInsertionLevel0[ModelsFileTmplLevel0AllGongstructsCode] += Replace3(
+			templInsertionLevel0[ModelsFileTmplLevel0AllGongstructsCode] += Replace4(
 				ModelsFileTmplLevel1Code[ModelsFileTmplLevel1NamedStructCode],
+
+				"{{"+string(rune(ModelsFileTmplLevel2Comment))+"}}",
+				comment,
 
 				"{{"+string(rune(ModelsFileTmplLevel2Structname))+"}}",
 				element.GoIdentifier,
