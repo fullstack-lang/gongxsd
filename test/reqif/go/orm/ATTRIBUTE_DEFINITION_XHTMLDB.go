@@ -269,7 +269,7 @@ func (backRepoATTRIBUTE_DEFINITION_XHTML *BackRepoATTRIBUTE_DEFINITION_XHTMLStru
 		// commit pointer value attribute_definition_xhtml.DEFAULT_VALUE translates to updating the attribute_definition_xhtml.DEFAULT_VALUEID
 		attribute_definition_xhtmlDB.DEFAULT_VALUEID.Valid = true // allow for a 0 value (nil association)
 		if attribute_definition_xhtml.DEFAULT_VALUE != nil {
-			if DEFAULT_VALUEId, ok := backRepo.BackRepoA_ATTRIBUTE_VALUE_XHTML_1.Map_A_ATTRIBUTE_VALUE_XHTML_1Ptr_A_ATTRIBUTE_VALUE_XHTML_1DBID[attribute_definition_xhtml.DEFAULT_VALUE]; ok {
+			if DEFAULT_VALUEId, ok := backRepo.BackRepoA_ATTRIBUTE_VALUE_XHTML.Map_A_ATTRIBUTE_VALUE_XHTMLPtr_A_ATTRIBUTE_VALUE_XHTMLDBID[attribute_definition_xhtml.DEFAULT_VALUE]; ok {
 				attribute_definition_xhtmlDB.DEFAULT_VALUEID.Int64 = int64(DEFAULT_VALUEId)
 				attribute_definition_xhtmlDB.DEFAULT_VALUEID.Valid = true
 			}
@@ -411,7 +411,7 @@ func (attribute_definition_xhtmlDB *ATTRIBUTE_DEFINITION_XHTMLDB) DecodePointers
 	// DEFAULT_VALUE field
 	attribute_definition_xhtml.DEFAULT_VALUE = nil
 	if attribute_definition_xhtmlDB.DEFAULT_VALUEID.Int64 != 0 {
-		attribute_definition_xhtml.DEFAULT_VALUE = backRepo.BackRepoA_ATTRIBUTE_VALUE_XHTML_1.Map_A_ATTRIBUTE_VALUE_XHTML_1DBID_A_ATTRIBUTE_VALUE_XHTML_1Ptr[uint(attribute_definition_xhtmlDB.DEFAULT_VALUEID.Int64)]
+		attribute_definition_xhtml.DEFAULT_VALUE = backRepo.BackRepoA_ATTRIBUTE_VALUE_XHTML.Map_A_ATTRIBUTE_VALUE_XHTMLDBID_A_ATTRIBUTE_VALUE_XHTMLPtr[uint(attribute_definition_xhtmlDB.DEFAULT_VALUEID.Int64)]
 	}
 	// TYPE field
 	attribute_definition_xhtml.TYPE = nil
@@ -714,7 +714,7 @@ func (backRepoATTRIBUTE_DEFINITION_XHTML *BackRepoATTRIBUTE_DEFINITION_XHTMLStru
 
 		// reindexing DEFAULT_VALUE field
 		if attribute_definition_xhtmlDB.DEFAULT_VALUEID.Int64 != 0 {
-			attribute_definition_xhtmlDB.DEFAULT_VALUEID.Int64 = int64(BackRepoA_ATTRIBUTE_VALUE_XHTML_1id_atBckpTime_newID[uint(attribute_definition_xhtmlDB.DEFAULT_VALUEID.Int64)])
+			attribute_definition_xhtmlDB.DEFAULT_VALUEID.Int64 = int64(BackRepoA_ATTRIBUTE_VALUE_XHTMLid_atBckpTime_newID[uint(attribute_definition_xhtmlDB.DEFAULT_VALUEID.Int64)])
 			attribute_definition_xhtmlDB.DEFAULT_VALUEID.Valid = true
 		}
 

@@ -278,7 +278,7 @@ func (backRepoSPECIFICATION *BackRepoSPECIFICATIONStruct) CommitPhaseTwoInstance
 		// commit pointer value specification.VALUES translates to updating the specification.VALUESID
 		specificationDB.VALUESID.Valid = true // allow for a 0 value (nil association)
 		if specification.VALUES != nil {
-			if VALUESId, ok := backRepo.BackRepoA_ATTRIBUTE_VALUE_XHTML.Map_A_ATTRIBUTE_VALUE_XHTMLPtr_A_ATTRIBUTE_VALUE_XHTMLDBID[specification.VALUES]; ok {
+			if VALUESId, ok := backRepo.BackRepoA_ATTRIBUTE_VALUE_XHTML_1.Map_A_ATTRIBUTE_VALUE_XHTML_1Ptr_A_ATTRIBUTE_VALUE_XHTML_1DBID[specification.VALUES]; ok {
 				specificationDB.VALUESID.Int64 = int64(VALUESId)
 				specificationDB.VALUESID.Valid = true
 			}
@@ -425,7 +425,7 @@ func (specificationDB *SPECIFICATIONDB) DecodePointers(backRepo *BackRepoStruct,
 	// VALUES field
 	specification.VALUES = nil
 	if specificationDB.VALUESID.Int64 != 0 {
-		specification.VALUES = backRepo.BackRepoA_ATTRIBUTE_VALUE_XHTML.Map_A_ATTRIBUTE_VALUE_XHTMLDBID_A_ATTRIBUTE_VALUE_XHTMLPtr[uint(specificationDB.VALUESID.Int64)]
+		specification.VALUES = backRepo.BackRepoA_ATTRIBUTE_VALUE_XHTML_1.Map_A_ATTRIBUTE_VALUE_XHTML_1DBID_A_ATTRIBUTE_VALUE_XHTML_1Ptr[uint(specificationDB.VALUESID.Int64)]
 	}
 	// TYPE field
 	specification.TYPE = nil
@@ -722,7 +722,7 @@ func (backRepoSPECIFICATION *BackRepoSPECIFICATIONStruct) RestorePhaseTwo() {
 
 		// reindexing VALUES field
 		if specificationDB.VALUESID.Int64 != 0 {
-			specificationDB.VALUESID.Int64 = int64(BackRepoA_ATTRIBUTE_VALUE_XHTMLid_atBckpTime_newID[uint(specificationDB.VALUESID.Int64)])
+			specificationDB.VALUESID.Int64 = int64(BackRepoA_ATTRIBUTE_VALUE_XHTML_1id_atBckpTime_newID[uint(specificationDB.VALUESID.Int64)])
 			specificationDB.VALUESID.Valid = true
 		}
 

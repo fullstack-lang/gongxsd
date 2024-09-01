@@ -98,6 +98,8 @@ type BackRepoData struct {
 
 	A_SOURCE_1APIs []*A_SOURCE_1API
 
+	A_SOURCE_SPECIFICATION_1APIs []*A_SOURCE_SPECIFICATION_1API
+
 	A_SPECIFICATIONSAPIs []*A_SPECIFICATIONSAPI
 
 	A_SPECIFICATION_TYPE_REFAPIs []*A_SPECIFICATION_TYPE_REFAPI
@@ -119,8 +121,6 @@ type BackRepoData struct {
 	A_SPEC_RELATION_TYPE_REFAPIs []*A_SPEC_RELATION_TYPE_REFAPI
 
 	A_SPEC_TYPESAPIs []*A_SPEC_TYPESAPI
-
-	A_TARGET_SPECIFICATION_1APIs []*A_TARGET_SPECIFICATION_1API
 
 	A_THE_HEADERAPIs []*A_THE_HEADERAPI
 
@@ -645,6 +645,16 @@ func CopyBackRepoToBackRepoData(backRepo *BackRepoStruct, backRepoData *BackRepo
 		backRepoData.A_SOURCE_1APIs = append(backRepoData.A_SOURCE_1APIs, &a_source_1API)
 	}
 
+	for _, a_source_specification_1DB := range backRepo.BackRepoA_SOURCE_SPECIFICATION_1.Map_A_SOURCE_SPECIFICATION_1DBID_A_SOURCE_SPECIFICATION_1DB {
+
+		var a_source_specification_1API A_SOURCE_SPECIFICATION_1API
+		a_source_specification_1API.ID = a_source_specification_1DB.ID
+		a_source_specification_1API.A_SOURCE_SPECIFICATION_1PointersEncoding = a_source_specification_1DB.A_SOURCE_SPECIFICATION_1PointersEncoding
+		a_source_specification_1DB.CopyBasicFieldsToA_SOURCE_SPECIFICATION_1_WOP(&a_source_specification_1API.A_SOURCE_SPECIFICATION_1_WOP)
+
+		backRepoData.A_SOURCE_SPECIFICATION_1APIs = append(backRepoData.A_SOURCE_SPECIFICATION_1APIs, &a_source_specification_1API)
+	}
+
 	for _, a_specificationsDB := range backRepo.BackRepoA_SPECIFICATIONS.Map_A_SPECIFICATIONSDBID_A_SPECIFICATIONSDB {
 
 		var a_specificationsAPI A_SPECIFICATIONSAPI
@@ -753,16 +763,6 @@ func CopyBackRepoToBackRepoData(backRepo *BackRepoStruct, backRepoData *BackRepo
 		a_spec_typesDB.CopyBasicFieldsToA_SPEC_TYPES_WOP(&a_spec_typesAPI.A_SPEC_TYPES_WOP)
 
 		backRepoData.A_SPEC_TYPESAPIs = append(backRepoData.A_SPEC_TYPESAPIs, &a_spec_typesAPI)
-	}
-
-	for _, a_target_specification_1DB := range backRepo.BackRepoA_TARGET_SPECIFICATION_1.Map_A_TARGET_SPECIFICATION_1DBID_A_TARGET_SPECIFICATION_1DB {
-
-		var a_target_specification_1API A_TARGET_SPECIFICATION_1API
-		a_target_specification_1API.ID = a_target_specification_1DB.ID
-		a_target_specification_1API.A_TARGET_SPECIFICATION_1PointersEncoding = a_target_specification_1DB.A_TARGET_SPECIFICATION_1PointersEncoding
-		a_target_specification_1DB.CopyBasicFieldsToA_TARGET_SPECIFICATION_1_WOP(&a_target_specification_1API.A_TARGET_SPECIFICATION_1_WOP)
-
-		backRepoData.A_TARGET_SPECIFICATION_1APIs = append(backRepoData.A_TARGET_SPECIFICATION_1APIs, &a_target_specification_1API)
 	}
 
 	for _, a_the_headerDB := range backRepo.BackRepoA_THE_HEADER.Map_A_THE_HEADERDBID_A_THE_HEADERDB {

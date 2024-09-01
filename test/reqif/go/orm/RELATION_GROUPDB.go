@@ -270,7 +270,7 @@ func (backRepoRELATION_GROUP *BackRepoRELATION_GROUPStruct) CommitPhaseTwoInstan
 		// commit pointer value relation_group.SOURCE_SPECIFICATION translates to updating the relation_group.SOURCE_SPECIFICATIONID
 		relation_groupDB.SOURCE_SPECIFICATIONID.Valid = true // allow for a 0 value (nil association)
 		if relation_group.SOURCE_SPECIFICATION != nil {
-			if SOURCE_SPECIFICATIONId, ok := backRepo.BackRepoA_TARGET_SPECIFICATION_1.Map_A_TARGET_SPECIFICATION_1Ptr_A_TARGET_SPECIFICATION_1DBID[relation_group.SOURCE_SPECIFICATION]; ok {
+			if SOURCE_SPECIFICATIONId, ok := backRepo.BackRepoA_SOURCE_SPECIFICATION_1.Map_A_SOURCE_SPECIFICATION_1Ptr_A_SOURCE_SPECIFICATION_1DBID[relation_group.SOURCE_SPECIFICATION]; ok {
 				relation_groupDB.SOURCE_SPECIFICATIONID.Int64 = int64(SOURCE_SPECIFICATIONId)
 				relation_groupDB.SOURCE_SPECIFICATIONID.Valid = true
 			}
@@ -294,7 +294,7 @@ func (backRepoRELATION_GROUP *BackRepoRELATION_GROUPStruct) CommitPhaseTwoInstan
 		// commit pointer value relation_group.TARGET_SPECIFICATION translates to updating the relation_group.TARGET_SPECIFICATIONID
 		relation_groupDB.TARGET_SPECIFICATIONID.Valid = true // allow for a 0 value (nil association)
 		if relation_group.TARGET_SPECIFICATION != nil {
-			if TARGET_SPECIFICATIONId, ok := backRepo.BackRepoA_TARGET_SPECIFICATION_1.Map_A_TARGET_SPECIFICATION_1Ptr_A_TARGET_SPECIFICATION_1DBID[relation_group.TARGET_SPECIFICATION]; ok {
+			if TARGET_SPECIFICATIONId, ok := backRepo.BackRepoA_SOURCE_SPECIFICATION_1.Map_A_SOURCE_SPECIFICATION_1Ptr_A_SOURCE_SPECIFICATION_1DBID[relation_group.TARGET_SPECIFICATION]; ok {
 				relation_groupDB.TARGET_SPECIFICATIONID.Int64 = int64(TARGET_SPECIFICATIONId)
 				relation_groupDB.TARGET_SPECIFICATIONID.Valid = true
 			}
@@ -436,7 +436,7 @@ func (relation_groupDB *RELATION_GROUPDB) DecodePointers(backRepo *BackRepoStruc
 	// SOURCE_SPECIFICATION field
 	relation_group.SOURCE_SPECIFICATION = nil
 	if relation_groupDB.SOURCE_SPECIFICATIONID.Int64 != 0 {
-		relation_group.SOURCE_SPECIFICATION = backRepo.BackRepoA_TARGET_SPECIFICATION_1.Map_A_TARGET_SPECIFICATION_1DBID_A_TARGET_SPECIFICATION_1Ptr[uint(relation_groupDB.SOURCE_SPECIFICATIONID.Int64)]
+		relation_group.SOURCE_SPECIFICATION = backRepo.BackRepoA_SOURCE_SPECIFICATION_1.Map_A_SOURCE_SPECIFICATION_1DBID_A_SOURCE_SPECIFICATION_1Ptr[uint(relation_groupDB.SOURCE_SPECIFICATIONID.Int64)]
 	}
 	// SPEC_RELATIONS field
 	relation_group.SPEC_RELATIONS = nil
@@ -446,7 +446,7 @@ func (relation_groupDB *RELATION_GROUPDB) DecodePointers(backRepo *BackRepoStruc
 	// TARGET_SPECIFICATION field
 	relation_group.TARGET_SPECIFICATION = nil
 	if relation_groupDB.TARGET_SPECIFICATIONID.Int64 != 0 {
-		relation_group.TARGET_SPECIFICATION = backRepo.BackRepoA_TARGET_SPECIFICATION_1.Map_A_TARGET_SPECIFICATION_1DBID_A_TARGET_SPECIFICATION_1Ptr[uint(relation_groupDB.TARGET_SPECIFICATIONID.Int64)]
+		relation_group.TARGET_SPECIFICATION = backRepo.BackRepoA_SOURCE_SPECIFICATION_1.Map_A_SOURCE_SPECIFICATION_1DBID_A_SOURCE_SPECIFICATION_1Ptr[uint(relation_groupDB.TARGET_SPECIFICATIONID.Int64)]
 	}
 	// TYPE field
 	relation_group.TYPE = nil
@@ -737,7 +737,7 @@ func (backRepoRELATION_GROUP *BackRepoRELATION_GROUPStruct) RestorePhaseTwo() {
 
 		// reindexing SOURCE_SPECIFICATION field
 		if relation_groupDB.SOURCE_SPECIFICATIONID.Int64 != 0 {
-			relation_groupDB.SOURCE_SPECIFICATIONID.Int64 = int64(BackRepoA_TARGET_SPECIFICATION_1id_atBckpTime_newID[uint(relation_groupDB.SOURCE_SPECIFICATIONID.Int64)])
+			relation_groupDB.SOURCE_SPECIFICATIONID.Int64 = int64(BackRepoA_SOURCE_SPECIFICATION_1id_atBckpTime_newID[uint(relation_groupDB.SOURCE_SPECIFICATIONID.Int64)])
 			relation_groupDB.SOURCE_SPECIFICATIONID.Valid = true
 		}
 
@@ -749,7 +749,7 @@ func (backRepoRELATION_GROUP *BackRepoRELATION_GROUPStruct) RestorePhaseTwo() {
 
 		// reindexing TARGET_SPECIFICATION field
 		if relation_groupDB.TARGET_SPECIFICATIONID.Int64 != 0 {
-			relation_groupDB.TARGET_SPECIFICATIONID.Int64 = int64(BackRepoA_TARGET_SPECIFICATION_1id_atBckpTime_newID[uint(relation_groupDB.TARGET_SPECIFICATIONID.Int64)])
+			relation_groupDB.TARGET_SPECIFICATIONID.Int64 = int64(BackRepoA_SOURCE_SPECIFICATION_1id_atBckpTime_newID[uint(relation_groupDB.TARGET_SPECIFICATIONID.Int64)])
 			relation_groupDB.TARGET_SPECIFICATIONID.Valid = true
 		}
 

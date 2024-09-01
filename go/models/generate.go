@@ -213,6 +213,12 @@ func Generate(stage *StageStruct, outputFilePath string) {
 		}
 	}
 
+	for _, st := range GetGongstrucsSorted[*SimpleType](stage) {
+		if st.IsStringEnumerate() {
+			// log.Println("String Enumerate", st.Name)
+		}
+	}
+	// generate all particle codes
 	slices.SortFunc(particleCodes,
 		func(a, b *ParticleCode) int {
 			return cmp.Compare(a.particle.GetOrder(), b.particle.GetOrder())

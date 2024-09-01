@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "gongxsd-cli read xsd",
+            "name": "read xsd",
             "type": "go",
             "request": "launch",
             "mode": "debug",
@@ -20,7 +20,7 @@
             "request": "launch"
         },
         {
-            "name": "gongxsd-cli read books",
+            "name": "read books",
             "type": "go",
             "request": "launch",
             "mode": "debug",
@@ -35,7 +35,7 @@
             ]
         },
         {
-            "name": "gongxsd-cli gen books",
+            "name": "gen books",
             "type": "go",
             "request": "launch",
             "mode": "debug",
@@ -57,7 +57,7 @@
             "args": []
         },
         {
-            "name": "gongxsd-cli alt read books",
+            "name": "alt read books",
             "type": "go",
             "request": "launch",
             "mode": "debug",
@@ -75,7 +75,7 @@
             "request": "launch"
         },
         {
-            "name": "gongxsd-cli gen musicxml",
+            "name": "gen musicxml",
             "type": "go",
             "request": "launch",
             "mode": "debug",
@@ -89,7 +89,7 @@
             ]
         },
         {
-            "name": "gongxsd-cli read musicxml",
+            "name": "read musicxml",
             "type": "go",
             "request": "launch",
             "mode": "debug",

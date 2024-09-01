@@ -262,7 +262,7 @@ func (backRepoSPEC_OBJECT *BackRepoSPEC_OBJECTStruct) CommitPhaseTwoInstance(bac
 		// commit pointer value spec_object.VALUES translates to updating the spec_object.VALUESID
 		spec_objectDB.VALUESID.Valid = true // allow for a 0 value (nil association)
 		if spec_object.VALUES != nil {
-			if VALUESId, ok := backRepo.BackRepoA_ATTRIBUTE_VALUE_XHTML.Map_A_ATTRIBUTE_VALUE_XHTMLPtr_A_ATTRIBUTE_VALUE_XHTMLDBID[spec_object.VALUES]; ok {
+			if VALUESId, ok := backRepo.BackRepoA_ATTRIBUTE_VALUE_XHTML_1.Map_A_ATTRIBUTE_VALUE_XHTML_1Ptr_A_ATTRIBUTE_VALUE_XHTML_1DBID[spec_object.VALUES]; ok {
 				spec_objectDB.VALUESID.Int64 = int64(VALUESId)
 				spec_objectDB.VALUESID.Valid = true
 			}
@@ -404,7 +404,7 @@ func (spec_objectDB *SPEC_OBJECTDB) DecodePointers(backRepo *BackRepoStruct, spe
 	// VALUES field
 	spec_object.VALUES = nil
 	if spec_objectDB.VALUESID.Int64 != 0 {
-		spec_object.VALUES = backRepo.BackRepoA_ATTRIBUTE_VALUE_XHTML.Map_A_ATTRIBUTE_VALUE_XHTMLDBID_A_ATTRIBUTE_VALUE_XHTMLPtr[uint(spec_objectDB.VALUESID.Int64)]
+		spec_object.VALUES = backRepo.BackRepoA_ATTRIBUTE_VALUE_XHTML_1.Map_A_ATTRIBUTE_VALUE_XHTML_1DBID_A_ATTRIBUTE_VALUE_XHTML_1Ptr[uint(spec_objectDB.VALUESID.Int64)]
 	}
 	// TYPE field
 	spec_object.TYPE = nil
@@ -695,7 +695,7 @@ func (backRepoSPEC_OBJECT *BackRepoSPEC_OBJECTStruct) RestorePhaseTwo() {
 
 		// reindexing VALUES field
 		if spec_objectDB.VALUESID.Int64 != 0 {
-			spec_objectDB.VALUESID.Int64 = int64(BackRepoA_ATTRIBUTE_VALUE_XHTMLid_atBckpTime_newID[uint(spec_objectDB.VALUESID.Int64)])
+			spec_objectDB.VALUESID.Int64 = int64(BackRepoA_ATTRIBUTE_VALUE_XHTML_1id_atBckpTime_newID[uint(spec_objectDB.VALUESID.Int64)])
 			spec_objectDB.VALUESID.Valid = true
 		}
 

@@ -174,6 +174,9 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 	case *A_SOURCE_1:
 		// insertion point per field
 
+	case *A_SOURCE_SPECIFICATION_1:
+		// insertion point per field
+
 	case *A_SPECIFICATIONS:
 		// insertion point per field
 
@@ -205,9 +208,6 @@ func EvictInOtherSlices[OwningType PointerToGongstruct, FieldType PointerToGongs
 		// insertion point per field
 
 	case *A_SPEC_TYPES:
-		// insertion point per field
-
-	case *A_TARGET_SPECIFICATION_1:
 		// insertion point per field
 
 	case *A_THE_HEADER:
@@ -435,6 +435,9 @@ func (stage *StageStruct) ComputeReverseMaps() {
 	// Compute reverse map for named struct A_SOURCE_1
 	// insertion point per field
 
+	// Compute reverse map for named struct A_SOURCE_SPECIFICATION_1
+	// insertion point per field
+
 	// Compute reverse map for named struct A_SPECIFICATIONS
 	// insertion point per field
 
@@ -466,9 +469,6 @@ func (stage *StageStruct) ComputeReverseMaps() {
 	// insertion point per field
 
 	// Compute reverse map for named struct A_SPEC_TYPES
-	// insertion point per field
-
-	// Compute reverse map for named struct A_TARGET_SPECIFICATION_1
 	// insertion point per field
 
 	// Compute reverse map for named struct A_THE_HEADER
