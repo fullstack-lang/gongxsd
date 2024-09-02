@@ -7,14 +7,11 @@ import (
 	"os"
 
 	models "github.com/fullstack-lang/gongxsd/test/musicxml/go/models"
-
-	"golang.org/x/text/encoding/unicode"
-	"golang.org/x/text/transform"
 )
 
 func main() {
 	// Open the XML file
-	xmlFile, err := os.Open("../../MozaChloSample.musicxml")
+	xmlFile, err := os.Open("../../phylotaxy music 2 september 2024 0800.musicxml")
 	if err != nil {
 		fmt.Println("Error opening file:", err)
 		return
@@ -28,17 +25,17 @@ func main() {
 		return
 	}
 
-	// Convert UTF-16 to UTF-8
-	utf16Decoder := unicode.UTF16(unicode.LittleEndian, unicode.UseBOM).NewDecoder()
-	utf8Data, _, err := transform.Bytes(utf16Decoder, byteValue)
-	if err != nil {
-		fmt.Println("Error converting to UTF-8:", err)
-		return
-	}
+	// // Convert UTF-16 to UTF-8
+	// utf16Decoder := unicode.UTF16(unicode.LittleEndian, unicode.UseBOM).NewDecoder()
+	// utf8Data, _, err := transform.Bytes(utf16Decoder, byteValue)
+	// if err != nil {
+	// 	fmt.Println("Error converting to UTF-8:", err)
+	// 	return
+	// }
 
 	// Unmarshal the XML into the Books struct
 	var scorePartwise models.Score_partwise
-	err = xml.Unmarshal(utf8Data, &scorePartwise)
+	err = xml.Unmarshal(byteValue, &scorePartwise)
 	if err != nil {
 		fmt.Println("Error unmarshalling XML:", err)
 		return
@@ -66,7 +63,7 @@ func main() {
 	}
 
 	// Write the XML to a new file
-	err = os.WriteFile("../../new_MozaChloSample.musicxml", []byte(xml.Header+string(output)), 0644)
+	err = os.WriteFile("../../new phylotaxy music 2 september 2024 0800.musicxml", []byte(xml.Header+string(output)), 0644)
 	if err != nil {
 		fmt.Println("Error writing to file:", err)
 		return
