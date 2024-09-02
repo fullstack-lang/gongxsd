@@ -84,6 +84,12 @@ type AttributeGroupDB struct {
 
 	// Declation for basic field attributegroupDB.Ref
 	Ref_Data sql.NullString
+
+	// Declation for basic field attributegroupDB.Order
+	Order_Data sql.NullInt64
+
+	// Declation for basic field attributegroupDB.Depth
+	Depth_Data sql.NullInt64
 	
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
@@ -116,6 +122,10 @@ type AttributeGroupWOP struct {
 	GoIdentifier string `xlsx:"4"`
 
 	Ref string `xlsx:"5"`
+
+	Order int `xlsx:"6"`
+
+	Depth int `xlsx:"7"`
 	// insertion for WOP pointer fields
 }
 
@@ -127,6 +137,8 @@ var AttributeGroup_Fields = []string{
 	"HasNameConflict",
 	"GoIdentifier",
 	"Ref",
+	"Order",
+	"Depth",
 }
 
 type BackRepoAttributeGroupStruct struct {
@@ -478,6 +490,12 @@ func (attributegroupDB *AttributeGroupDB) CopyBasicFieldsFromAttributeGroup(attr
 
 	attributegroupDB.Ref_Data.String = attributegroup.Ref
 	attributegroupDB.Ref_Data.Valid = true
+
+	attributegroupDB.Order_Data.Int64 = int64(attributegroup.Order)
+	attributegroupDB.Order_Data.Valid = true
+
+	attributegroupDB.Depth_Data.Int64 = int64(attributegroup.Depth)
+	attributegroupDB.Depth_Data.Valid = true
 }
 
 // CopyBasicFieldsFromAttributeGroup_WOP
@@ -498,6 +516,12 @@ func (attributegroupDB *AttributeGroupDB) CopyBasicFieldsFromAttributeGroup_WOP(
 
 	attributegroupDB.Ref_Data.String = attributegroup.Ref
 	attributegroupDB.Ref_Data.Valid = true
+
+	attributegroupDB.Order_Data.Int64 = int64(attributegroup.Order)
+	attributegroupDB.Order_Data.Valid = true
+
+	attributegroupDB.Depth_Data.Int64 = int64(attributegroup.Depth)
+	attributegroupDB.Depth_Data.Valid = true
 }
 
 // CopyBasicFieldsFromAttributeGroupWOP
@@ -518,6 +542,12 @@ func (attributegroupDB *AttributeGroupDB) CopyBasicFieldsFromAttributeGroupWOP(a
 
 	attributegroupDB.Ref_Data.String = attributegroup.Ref
 	attributegroupDB.Ref_Data.Valid = true
+
+	attributegroupDB.Order_Data.Int64 = int64(attributegroup.Order)
+	attributegroupDB.Order_Data.Valid = true
+
+	attributegroupDB.Depth_Data.Int64 = int64(attributegroup.Depth)
+	attributegroupDB.Depth_Data.Valid = true
 }
 
 // CopyBasicFieldsToAttributeGroup
@@ -528,6 +558,8 @@ func (attributegroupDB *AttributeGroupDB) CopyBasicFieldsToAttributeGroup(attrib
 	attributegroup.HasNameConflict = attributegroupDB.HasNameConflict_Data.Bool
 	attributegroup.GoIdentifier = attributegroupDB.GoIdentifier_Data.String
 	attributegroup.Ref = attributegroupDB.Ref_Data.String
+	attributegroup.Order = int(attributegroupDB.Order_Data.Int64)
+	attributegroup.Depth = int(attributegroupDB.Depth_Data.Int64)
 }
 
 // CopyBasicFieldsToAttributeGroup_WOP
@@ -538,6 +570,8 @@ func (attributegroupDB *AttributeGroupDB) CopyBasicFieldsToAttributeGroup_WOP(at
 	attributegroup.HasNameConflict = attributegroupDB.HasNameConflict_Data.Bool
 	attributegroup.GoIdentifier = attributegroupDB.GoIdentifier_Data.String
 	attributegroup.Ref = attributegroupDB.Ref_Data.String
+	attributegroup.Order = int(attributegroupDB.Order_Data.Int64)
+	attributegroup.Depth = int(attributegroupDB.Depth_Data.Int64)
 }
 
 // CopyBasicFieldsToAttributeGroupWOP
@@ -549,6 +583,8 @@ func (attributegroupDB *AttributeGroupDB) CopyBasicFieldsToAttributeGroupWOP(att
 	attributegroup.HasNameConflict = attributegroupDB.HasNameConflict_Data.Bool
 	attributegroup.GoIdentifier = attributegroupDB.GoIdentifier_Data.String
 	attributegroup.Ref = attributegroupDB.Ref_Data.String
+	attributegroup.Order = int(attributegroupDB.Order_Data.Int64)
+	attributegroup.Depth = int(attributegroupDB.Depth_Data.Int64)
 }
 
 // Backup generates a json file from a slice of all AttributeGroupDB instances in the backrepo

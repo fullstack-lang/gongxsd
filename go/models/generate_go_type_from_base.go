@@ -31,6 +31,11 @@ func generateGoTypeFromType(type_ string, stMap map[string]*SimpleType) (goType 
 	if goType == "" {
 
 		if st, ok := stMap[type_]; ok {
+
+			if st.IsStringEnumerate() {
+				// log.Println("string enum")
+				return "Enum_" + xsdNameToGoIdentifier(st.NameXSD)
+			}
 			if st.Restriction != nil {
 
 				// remove namespace from type

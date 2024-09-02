@@ -4383,7 +4383,7 @@ func GetFields[Type Gongstruct]() (res []string) {
 	case Attribute:
 		res = []string{"Name", "NameXSD", "Type", "Annotation", "HasNameConflict", "GoIdentifier", "Default", "Use", "Form", "Fixed", "Ref", "TargetNamespace", "SimpleType", "IDXSD"}
 	case AttributeGroup:
-		res = []string{"Name", "NameXSD", "Annotation", "HasNameConflict", "GoIdentifier", "AttributeGroups", "Ref", "Attributes"}
+		res = []string{"Name", "NameXSD", "Annotation", "HasNameConflict", "GoIdentifier", "AttributeGroups", "Ref", "Attributes", "Order", "Depth"}
 	case Choice:
 		res = []string{"Name", "Annotation", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth", "MinOccurs", "MaxOccurs", "IsDuplicatedInXSD"}
 	case ComplexContent:
@@ -4421,7 +4421,7 @@ func GetFields[Type Gongstruct]() (res []string) {
 	case SimpleContent:
 		res = []string{"Name", "Extension", "Restriction"}
 	case SimpleType:
-		res = []string{"Name", "Annotation", "NameXSD", "Restriction", "Union"}
+		res = []string{"Name", "Annotation", "NameXSD", "Restriction", "Union", "Order", "Depth"}
 	case TotalDigit:
 		res = []string{"Name", "Annotation", "Value"}
 	case Union:
@@ -4671,7 +4671,7 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 	case *Attribute:
 		res = []string{"Name", "NameXSD", "Type", "Annotation", "HasNameConflict", "GoIdentifier", "Default", "Use", "Form", "Fixed", "Ref", "TargetNamespace", "SimpleType", "IDXSD"}
 	case *AttributeGroup:
-		res = []string{"Name", "NameXSD", "Annotation", "HasNameConflict", "GoIdentifier", "AttributeGroups", "Ref", "Attributes"}
+		res = []string{"Name", "NameXSD", "Annotation", "HasNameConflict", "GoIdentifier", "AttributeGroups", "Ref", "Attributes", "Order", "Depth"}
 	case *Choice:
 		res = []string{"Name", "Annotation", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth", "MinOccurs", "MaxOccurs", "IsDuplicatedInXSD"}
 	case *ComplexContent:
@@ -4709,7 +4709,7 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 	case *SimpleContent:
 		res = []string{"Name", "Extension", "Restriction"}
 	case *SimpleType:
-		res = []string{"Name", "Annotation", "NameXSD", "Restriction", "Union"}
+		res = []string{"Name", "Annotation", "NameXSD", "Restriction", "Union", "Order", "Depth"}
 	case *TotalDigit:
 		res = []string{"Name", "Annotation", "Value"}
 	case *Union:
@@ -4857,6 +4857,10 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 				}
 				res += __instance__.Name
 			}
+		case "Order":
+			res = fmt.Sprintf("%d", inferedInstance.Order)
+		case "Depth":
+			res = fmt.Sprintf("%d", inferedInstance.Depth)
 		}
 	case *Choice:
 		switch fieldName {
@@ -5492,6 +5496,10 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 			if inferedInstance.Union != nil {
 				res = inferedInstance.Union.Name
 			}
+		case "Order":
+			res = fmt.Sprintf("%d", inferedInstance.Order)
+		case "Depth":
+			res = fmt.Sprintf("%d", inferedInstance.Depth)
 		}
 	case *TotalDigit:
 		switch fieldName {
@@ -5672,6 +5680,10 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 				}
 				res += __instance__.Name
 			}
+		case "Order":
+			res = fmt.Sprintf("%d", inferedInstance.Order)
+		case "Depth":
+			res = fmt.Sprintf("%d", inferedInstance.Depth)
 		}
 	case Choice:
 		switch fieldName {
@@ -6307,6 +6319,10 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 			if inferedInstance.Union != nil {
 				res = inferedInstance.Union.Name
 			}
+		case "Order":
+			res = fmt.Sprintf("%d", inferedInstance.Order)
+		case "Depth":
+			res = fmt.Sprintf("%d", inferedInstance.Depth)
 		}
 	case TotalDigit:
 		switch fieldName {

@@ -720,6 +720,10 @@ func (attributegroupFormCallback *AttributeGroupFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(attributegroup_.GoIdentifier), formDiv)
 		case "Ref":
 			FormDivBasicFieldToField(&(attributegroup_.Ref), formDiv)
+		case "Order":
+			FormDivBasicFieldToField(&(attributegroup_.Order), formDiv)
+		case "Depth":
+			FormDivBasicFieldToField(&(attributegroup_.Depth), formDiv)
 		case "AttributeGroup:AttributeGroups":
 			// we need to retrieve the field owner before the change
 			var pastAttributeGroupOwner *models.AttributeGroup
@@ -3777,6 +3781,10 @@ func (simpletypeFormCallback *SimpleTypeFormCallback) OnSave() {
 			FormDivSelectFieldToField(&(simpletype_.Restriction), simpletypeFormCallback.probe.stageOfInterest, formDiv)
 		case "Union":
 			FormDivSelectFieldToField(&(simpletype_.Union), simpletypeFormCallback.probe.stageOfInterest, formDiv)
+		case "Order":
+			FormDivBasicFieldToField(&(simpletype_.Order), formDiv)
+		case "Depth":
+			FormDivBasicFieldToField(&(simpletype_.Depth), formDiv)
 		case "Schema:SimpleTypes":
 			// we need to retrieve the field owner before the change
 			var pastSchemaOwner *models.Schema

@@ -116,6 +116,8 @@ type BackRepoStruct struct {
 
 	BackRepoA_SOURCE_1 BackRepoA_SOURCE_1Struct
 
+	BackRepoA_SOURCE_SPECIFICATION_1 BackRepoA_SOURCE_SPECIFICATION_1Struct
+
 	BackRepoA_SPECIFICATIONS BackRepoA_SPECIFICATIONSStruct
 
 	BackRepoA_SPECIFICATION_TYPE_REF BackRepoA_SPECIFICATION_TYPE_REFStruct
@@ -137,8 +139,6 @@ type BackRepoStruct struct {
 	BackRepoA_SPEC_RELATION_TYPE_REF BackRepoA_SPEC_RELATION_TYPE_REFStruct
 
 	BackRepoA_SPEC_TYPES BackRepoA_SPEC_TYPESStruct
-
-	BackRepoA_TARGET_SPECIFICATION_1 BackRepoA_TARGET_SPECIFICATION_1Struct
 
 	BackRepoA_THE_HEADER BackRepoA_THE_HEADERStruct
 
@@ -277,6 +277,7 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 		&A_PROPERTIESDB{},
 		&A_RELATION_GROUP_TYPE_REFDB{},
 		&A_SOURCE_1DB{},
+		&A_SOURCE_SPECIFICATION_1DB{},
 		&A_SPECIFICATIONSDB{},
 		&A_SPECIFICATION_TYPE_REFDB{},
 		&A_SPECIFIED_VALUESDB{},
@@ -288,7 +289,6 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 		&A_SPEC_RELATION_REFDB{},
 		&A_SPEC_RELATION_TYPE_REFDB{},
 		&A_SPEC_TYPESDB{},
-		&A_TARGET_SPECIFICATION_1DB{},
 		&A_THE_HEADERDB{},
 		&A_TOOL_EXTENSIONSDB{},
 		&DATATYPE_DEFINITION_BOOLEANDB{},
@@ -700,6 +700,14 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 		db:    db,
 		stage: stage,
 	}
+	backRepo.BackRepoA_SOURCE_SPECIFICATION_1 = BackRepoA_SOURCE_SPECIFICATION_1Struct{
+		Map_A_SOURCE_SPECIFICATION_1DBID_A_SOURCE_SPECIFICATION_1Ptr: make(map[uint]*models.A_SOURCE_SPECIFICATION_1, 0),
+		Map_A_SOURCE_SPECIFICATION_1DBID_A_SOURCE_SPECIFICATION_1DB:  make(map[uint]*A_SOURCE_SPECIFICATION_1DB, 0),
+		Map_A_SOURCE_SPECIFICATION_1Ptr_A_SOURCE_SPECIFICATION_1DBID: make(map[*models.A_SOURCE_SPECIFICATION_1]uint, 0),
+
+		db:    db,
+		stage: stage,
+	}
 	backRepo.BackRepoA_SPECIFICATIONS = BackRepoA_SPECIFICATIONSStruct{
 		Map_A_SPECIFICATIONSDBID_A_SPECIFICATIONSPtr: make(map[uint]*models.A_SPECIFICATIONS, 0),
 		Map_A_SPECIFICATIONSDBID_A_SPECIFICATIONSDB:  make(map[uint]*A_SPECIFICATIONSDB, 0),
@@ -784,14 +792,6 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 		Map_A_SPEC_TYPESDBID_A_SPEC_TYPESPtr: make(map[uint]*models.A_SPEC_TYPES, 0),
 		Map_A_SPEC_TYPESDBID_A_SPEC_TYPESDB:  make(map[uint]*A_SPEC_TYPESDB, 0),
 		Map_A_SPEC_TYPESPtr_A_SPEC_TYPESDBID: make(map[*models.A_SPEC_TYPES]uint, 0),
-
-		db:    db,
-		stage: stage,
-	}
-	backRepo.BackRepoA_TARGET_SPECIFICATION_1 = BackRepoA_TARGET_SPECIFICATION_1Struct{
-		Map_A_TARGET_SPECIFICATION_1DBID_A_TARGET_SPECIFICATION_1Ptr: make(map[uint]*models.A_TARGET_SPECIFICATION_1, 0),
-		Map_A_TARGET_SPECIFICATION_1DBID_A_TARGET_SPECIFICATION_1DB:  make(map[uint]*A_TARGET_SPECIFICATION_1DB, 0),
-		Map_A_TARGET_SPECIFICATION_1Ptr_A_TARGET_SPECIFICATION_1DBID: make(map[*models.A_TARGET_SPECIFICATION_1]uint, 0),
 
 		db:    db,
 		stage: stage,
@@ -1091,6 +1091,7 @@ func (backRepo *BackRepoStruct) Commit(stage *models.StageStruct) {
 	backRepo.BackRepoA_PROPERTIES.CommitPhaseOne(stage)
 	backRepo.BackRepoA_RELATION_GROUP_TYPE_REF.CommitPhaseOne(stage)
 	backRepo.BackRepoA_SOURCE_1.CommitPhaseOne(stage)
+	backRepo.BackRepoA_SOURCE_SPECIFICATION_1.CommitPhaseOne(stage)
 	backRepo.BackRepoA_SPECIFICATIONS.CommitPhaseOne(stage)
 	backRepo.BackRepoA_SPECIFICATION_TYPE_REF.CommitPhaseOne(stage)
 	backRepo.BackRepoA_SPECIFIED_VALUES.CommitPhaseOne(stage)
@@ -1102,7 +1103,6 @@ func (backRepo *BackRepoStruct) Commit(stage *models.StageStruct) {
 	backRepo.BackRepoA_SPEC_RELATION_REF.CommitPhaseOne(stage)
 	backRepo.BackRepoA_SPEC_RELATION_TYPE_REF.CommitPhaseOne(stage)
 	backRepo.BackRepoA_SPEC_TYPES.CommitPhaseOne(stage)
-	backRepo.BackRepoA_TARGET_SPECIFICATION_1.CommitPhaseOne(stage)
 	backRepo.BackRepoA_THE_HEADER.CommitPhaseOne(stage)
 	backRepo.BackRepoA_TOOL_EXTENSIONS.CommitPhaseOne(stage)
 	backRepo.BackRepoDATATYPE_DEFINITION_BOOLEAN.CommitPhaseOne(stage)
@@ -1177,6 +1177,7 @@ func (backRepo *BackRepoStruct) Commit(stage *models.StageStruct) {
 	backRepo.BackRepoA_PROPERTIES.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoA_RELATION_GROUP_TYPE_REF.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoA_SOURCE_1.CommitPhaseTwo(backRepo)
+	backRepo.BackRepoA_SOURCE_SPECIFICATION_1.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoA_SPECIFICATIONS.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoA_SPECIFICATION_TYPE_REF.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoA_SPECIFIED_VALUES.CommitPhaseTwo(backRepo)
@@ -1188,7 +1189,6 @@ func (backRepo *BackRepoStruct) Commit(stage *models.StageStruct) {
 	backRepo.BackRepoA_SPEC_RELATION_REF.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoA_SPEC_RELATION_TYPE_REF.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoA_SPEC_TYPES.CommitPhaseTwo(backRepo)
-	backRepo.BackRepoA_TARGET_SPECIFICATION_1.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoA_THE_HEADER.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoA_TOOL_EXTENSIONS.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoDATATYPE_DEFINITION_BOOLEAN.CommitPhaseTwo(backRepo)
@@ -1268,6 +1268,7 @@ func (backRepo *BackRepoStruct) Checkout(stage *models.StageStruct) {
 	backRepo.BackRepoA_PROPERTIES.CheckoutPhaseOne()
 	backRepo.BackRepoA_RELATION_GROUP_TYPE_REF.CheckoutPhaseOne()
 	backRepo.BackRepoA_SOURCE_1.CheckoutPhaseOne()
+	backRepo.BackRepoA_SOURCE_SPECIFICATION_1.CheckoutPhaseOne()
 	backRepo.BackRepoA_SPECIFICATIONS.CheckoutPhaseOne()
 	backRepo.BackRepoA_SPECIFICATION_TYPE_REF.CheckoutPhaseOne()
 	backRepo.BackRepoA_SPECIFIED_VALUES.CheckoutPhaseOne()
@@ -1279,7 +1280,6 @@ func (backRepo *BackRepoStruct) Checkout(stage *models.StageStruct) {
 	backRepo.BackRepoA_SPEC_RELATION_REF.CheckoutPhaseOne()
 	backRepo.BackRepoA_SPEC_RELATION_TYPE_REF.CheckoutPhaseOne()
 	backRepo.BackRepoA_SPEC_TYPES.CheckoutPhaseOne()
-	backRepo.BackRepoA_TARGET_SPECIFICATION_1.CheckoutPhaseOne()
 	backRepo.BackRepoA_THE_HEADER.CheckoutPhaseOne()
 	backRepo.BackRepoA_TOOL_EXTENSIONS.CheckoutPhaseOne()
 	backRepo.BackRepoDATATYPE_DEFINITION_BOOLEAN.CheckoutPhaseOne()
@@ -1354,6 +1354,7 @@ func (backRepo *BackRepoStruct) Checkout(stage *models.StageStruct) {
 	backRepo.BackRepoA_PROPERTIES.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoA_RELATION_GROUP_TYPE_REF.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoA_SOURCE_1.CheckoutPhaseTwo(backRepo)
+	backRepo.BackRepoA_SOURCE_SPECIFICATION_1.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoA_SPECIFICATIONS.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoA_SPECIFICATION_TYPE_REF.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoA_SPECIFIED_VALUES.CheckoutPhaseTwo(backRepo)
@@ -1365,7 +1366,6 @@ func (backRepo *BackRepoStruct) Checkout(stage *models.StageStruct) {
 	backRepo.BackRepoA_SPEC_RELATION_REF.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoA_SPEC_RELATION_TYPE_REF.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoA_SPEC_TYPES.CheckoutPhaseTwo(backRepo)
-	backRepo.BackRepoA_TARGET_SPECIFICATION_1.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoA_THE_HEADER.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoA_TOOL_EXTENSIONS.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoDATATYPE_DEFINITION_BOOLEAN.CheckoutPhaseTwo(backRepo)
@@ -1445,6 +1445,7 @@ func (backRepo *BackRepoStruct) Backup(stage *models.StageStruct, dirPath string
 	backRepo.BackRepoA_PROPERTIES.Backup(dirPath)
 	backRepo.BackRepoA_RELATION_GROUP_TYPE_REF.Backup(dirPath)
 	backRepo.BackRepoA_SOURCE_1.Backup(dirPath)
+	backRepo.BackRepoA_SOURCE_SPECIFICATION_1.Backup(dirPath)
 	backRepo.BackRepoA_SPECIFICATIONS.Backup(dirPath)
 	backRepo.BackRepoA_SPECIFICATION_TYPE_REF.Backup(dirPath)
 	backRepo.BackRepoA_SPECIFIED_VALUES.Backup(dirPath)
@@ -1456,7 +1457,6 @@ func (backRepo *BackRepoStruct) Backup(stage *models.StageStruct, dirPath string
 	backRepo.BackRepoA_SPEC_RELATION_REF.Backup(dirPath)
 	backRepo.BackRepoA_SPEC_RELATION_TYPE_REF.Backup(dirPath)
 	backRepo.BackRepoA_SPEC_TYPES.Backup(dirPath)
-	backRepo.BackRepoA_TARGET_SPECIFICATION_1.Backup(dirPath)
 	backRepo.BackRepoA_THE_HEADER.Backup(dirPath)
 	backRepo.BackRepoA_TOOL_EXTENSIONS.Backup(dirPath)
 	backRepo.BackRepoDATATYPE_DEFINITION_BOOLEAN.Backup(dirPath)
@@ -1539,6 +1539,7 @@ func (backRepo *BackRepoStruct) BackupXL(stage *models.StageStruct, dirPath stri
 	backRepo.BackRepoA_PROPERTIES.BackupXL(file)
 	backRepo.BackRepoA_RELATION_GROUP_TYPE_REF.BackupXL(file)
 	backRepo.BackRepoA_SOURCE_1.BackupXL(file)
+	backRepo.BackRepoA_SOURCE_SPECIFICATION_1.BackupXL(file)
 	backRepo.BackRepoA_SPECIFICATIONS.BackupXL(file)
 	backRepo.BackRepoA_SPECIFICATION_TYPE_REF.BackupXL(file)
 	backRepo.BackRepoA_SPECIFIED_VALUES.BackupXL(file)
@@ -1550,7 +1551,6 @@ func (backRepo *BackRepoStruct) BackupXL(stage *models.StageStruct, dirPath stri
 	backRepo.BackRepoA_SPEC_RELATION_REF.BackupXL(file)
 	backRepo.BackRepoA_SPEC_RELATION_TYPE_REF.BackupXL(file)
 	backRepo.BackRepoA_SPEC_TYPES.BackupXL(file)
-	backRepo.BackRepoA_TARGET_SPECIFICATION_1.BackupXL(file)
 	backRepo.BackRepoA_THE_HEADER.BackupXL(file)
 	backRepo.BackRepoA_TOOL_EXTENSIONS.BackupXL(file)
 	backRepo.BackRepoDATATYPE_DEFINITION_BOOLEAN.BackupXL(file)
@@ -1647,6 +1647,7 @@ func (backRepo *BackRepoStruct) Restore(stage *models.StageStruct, dirPath strin
 	backRepo.BackRepoA_PROPERTIES.RestorePhaseOne(dirPath)
 	backRepo.BackRepoA_RELATION_GROUP_TYPE_REF.RestorePhaseOne(dirPath)
 	backRepo.BackRepoA_SOURCE_1.RestorePhaseOne(dirPath)
+	backRepo.BackRepoA_SOURCE_SPECIFICATION_1.RestorePhaseOne(dirPath)
 	backRepo.BackRepoA_SPECIFICATIONS.RestorePhaseOne(dirPath)
 	backRepo.BackRepoA_SPECIFICATION_TYPE_REF.RestorePhaseOne(dirPath)
 	backRepo.BackRepoA_SPECIFIED_VALUES.RestorePhaseOne(dirPath)
@@ -1658,7 +1659,6 @@ func (backRepo *BackRepoStruct) Restore(stage *models.StageStruct, dirPath strin
 	backRepo.BackRepoA_SPEC_RELATION_REF.RestorePhaseOne(dirPath)
 	backRepo.BackRepoA_SPEC_RELATION_TYPE_REF.RestorePhaseOne(dirPath)
 	backRepo.BackRepoA_SPEC_TYPES.RestorePhaseOne(dirPath)
-	backRepo.BackRepoA_TARGET_SPECIFICATION_1.RestorePhaseOne(dirPath)
 	backRepo.BackRepoA_THE_HEADER.RestorePhaseOne(dirPath)
 	backRepo.BackRepoA_TOOL_EXTENSIONS.RestorePhaseOne(dirPath)
 	backRepo.BackRepoDATATYPE_DEFINITION_BOOLEAN.RestorePhaseOne(dirPath)
@@ -1737,6 +1737,7 @@ func (backRepo *BackRepoStruct) Restore(stage *models.StageStruct, dirPath strin
 	backRepo.BackRepoA_PROPERTIES.RestorePhaseTwo()
 	backRepo.BackRepoA_RELATION_GROUP_TYPE_REF.RestorePhaseTwo()
 	backRepo.BackRepoA_SOURCE_1.RestorePhaseTwo()
+	backRepo.BackRepoA_SOURCE_SPECIFICATION_1.RestorePhaseTwo()
 	backRepo.BackRepoA_SPECIFICATIONS.RestorePhaseTwo()
 	backRepo.BackRepoA_SPECIFICATION_TYPE_REF.RestorePhaseTwo()
 	backRepo.BackRepoA_SPECIFIED_VALUES.RestorePhaseTwo()
@@ -1748,7 +1749,6 @@ func (backRepo *BackRepoStruct) Restore(stage *models.StageStruct, dirPath strin
 	backRepo.BackRepoA_SPEC_RELATION_REF.RestorePhaseTwo()
 	backRepo.BackRepoA_SPEC_RELATION_TYPE_REF.RestorePhaseTwo()
 	backRepo.BackRepoA_SPEC_TYPES.RestorePhaseTwo()
-	backRepo.BackRepoA_TARGET_SPECIFICATION_1.RestorePhaseTwo()
 	backRepo.BackRepoA_THE_HEADER.RestorePhaseTwo()
 	backRepo.BackRepoA_TOOL_EXTENSIONS.RestorePhaseTwo()
 	backRepo.BackRepoDATATYPE_DEFINITION_BOOLEAN.RestorePhaseTwo()
@@ -1848,6 +1848,7 @@ func (backRepo *BackRepoStruct) RestoreXL(stage *models.StageStruct, dirPath str
 	backRepo.BackRepoA_PROPERTIES.RestoreXLPhaseOne(file)
 	backRepo.BackRepoA_RELATION_GROUP_TYPE_REF.RestoreXLPhaseOne(file)
 	backRepo.BackRepoA_SOURCE_1.RestoreXLPhaseOne(file)
+	backRepo.BackRepoA_SOURCE_SPECIFICATION_1.RestoreXLPhaseOne(file)
 	backRepo.BackRepoA_SPECIFICATIONS.RestoreXLPhaseOne(file)
 	backRepo.BackRepoA_SPECIFICATION_TYPE_REF.RestoreXLPhaseOne(file)
 	backRepo.BackRepoA_SPECIFIED_VALUES.RestoreXLPhaseOne(file)
@@ -1859,7 +1860,6 @@ func (backRepo *BackRepoStruct) RestoreXL(stage *models.StageStruct, dirPath str
 	backRepo.BackRepoA_SPEC_RELATION_REF.RestoreXLPhaseOne(file)
 	backRepo.BackRepoA_SPEC_RELATION_TYPE_REF.RestoreXLPhaseOne(file)
 	backRepo.BackRepoA_SPEC_TYPES.RestoreXLPhaseOne(file)
-	backRepo.BackRepoA_TARGET_SPECIFICATION_1.RestoreXLPhaseOne(file)
 	backRepo.BackRepoA_THE_HEADER.RestoreXLPhaseOne(file)
 	backRepo.BackRepoA_TOOL_EXTENSIONS.RestoreXLPhaseOne(file)
 	backRepo.BackRepoDATATYPE_DEFINITION_BOOLEAN.RestoreXLPhaseOne(file)

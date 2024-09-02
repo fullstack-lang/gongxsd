@@ -613,6 +613,18 @@ func (from *A_SOURCE_1) CopyBasicFields(to *A_SOURCE_1) {
 	to.SPEC_OBJECT_REF = from.SPEC_OBJECT_REF
 }
 
+type A_SOURCE_SPECIFICATION_1_WOP struct {
+	// insertion point
+	Name string
+	SPECIFICATION_REF string
+}
+
+func (from *A_SOURCE_SPECIFICATION_1) CopyBasicFields(to *A_SOURCE_SPECIFICATION_1) {
+	// insertion point
+	to.Name = from.Name
+	to.SPECIFICATION_REF = from.SPECIFICATION_REF
+}
+
 type A_SPECIFICATIONS_WOP struct {
 	// insertion point
 	Name string
@@ -729,18 +741,6 @@ type A_SPEC_TYPES_WOP struct {
 func (from *A_SPEC_TYPES) CopyBasicFields(to *A_SPEC_TYPES) {
 	// insertion point
 	to.Name = from.Name
-}
-
-type A_TARGET_SPECIFICATION_1_WOP struct {
-	// insertion point
-	Name string
-	SPECIFICATION_REF string
-}
-
-func (from *A_TARGET_SPECIFICATION_1) CopyBasicFields(to *A_TARGET_SPECIFICATION_1) {
-	// insertion point
-	to.Name = from.Name
-	to.SPECIFICATION_REF = from.SPECIFICATION_REF
 }
 
 type A_THE_HEADER_WOP struct {

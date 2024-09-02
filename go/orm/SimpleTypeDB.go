@@ -76,6 +76,12 @@ type SimpleTypeDB struct {
 
 	// Declation for basic field simpletypeDB.NameXSD
 	NameXSD_Data sql.NullString
+
+	// Declation for basic field simpletypeDB.Order
+	Order_Data sql.NullInt64
+
+	// Declation for basic field simpletypeDB.Depth
+	Depth_Data sql.NullInt64
 	
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
@@ -102,6 +108,10 @@ type SimpleTypeWOP struct {
 	Name string `xlsx:"1"`
 
 	NameXSD string `xlsx:"2"`
+
+	Order int `xlsx:"3"`
+
+	Depth int `xlsx:"4"`
 	// insertion for WOP pointer fields
 }
 
@@ -110,6 +120,8 @@ var SimpleType_Fields = []string{
 	"ID",
 	"Name",
 	"NameXSD",
+	"Order",
+	"Depth",
 }
 
 type BackRepoSimpleTypeStruct struct {
@@ -432,6 +444,12 @@ func (simpletypeDB *SimpleTypeDB) CopyBasicFieldsFromSimpleType(simpletype *mode
 
 	simpletypeDB.NameXSD_Data.String = simpletype.NameXSD
 	simpletypeDB.NameXSD_Data.Valid = true
+
+	simpletypeDB.Order_Data.Int64 = int64(simpletype.Order)
+	simpletypeDB.Order_Data.Valid = true
+
+	simpletypeDB.Depth_Data.Int64 = int64(simpletype.Depth)
+	simpletypeDB.Depth_Data.Valid = true
 }
 
 // CopyBasicFieldsFromSimpleType_WOP
@@ -443,6 +461,12 @@ func (simpletypeDB *SimpleTypeDB) CopyBasicFieldsFromSimpleType_WOP(simpletype *
 
 	simpletypeDB.NameXSD_Data.String = simpletype.NameXSD
 	simpletypeDB.NameXSD_Data.Valid = true
+
+	simpletypeDB.Order_Data.Int64 = int64(simpletype.Order)
+	simpletypeDB.Order_Data.Valid = true
+
+	simpletypeDB.Depth_Data.Int64 = int64(simpletype.Depth)
+	simpletypeDB.Depth_Data.Valid = true
 }
 
 // CopyBasicFieldsFromSimpleTypeWOP
@@ -454,6 +478,12 @@ func (simpletypeDB *SimpleTypeDB) CopyBasicFieldsFromSimpleTypeWOP(simpletype *S
 
 	simpletypeDB.NameXSD_Data.String = simpletype.NameXSD
 	simpletypeDB.NameXSD_Data.Valid = true
+
+	simpletypeDB.Order_Data.Int64 = int64(simpletype.Order)
+	simpletypeDB.Order_Data.Valid = true
+
+	simpletypeDB.Depth_Data.Int64 = int64(simpletype.Depth)
+	simpletypeDB.Depth_Data.Valid = true
 }
 
 // CopyBasicFieldsToSimpleType
@@ -461,6 +491,8 @@ func (simpletypeDB *SimpleTypeDB) CopyBasicFieldsToSimpleType(simpletype *models
 	// insertion point for checkout of basic fields (back repo to stage)
 	simpletype.Name = simpletypeDB.Name_Data.String
 	simpletype.NameXSD = simpletypeDB.NameXSD_Data.String
+	simpletype.Order = int(simpletypeDB.Order_Data.Int64)
+	simpletype.Depth = int(simpletypeDB.Depth_Data.Int64)
 }
 
 // CopyBasicFieldsToSimpleType_WOP
@@ -468,6 +500,8 @@ func (simpletypeDB *SimpleTypeDB) CopyBasicFieldsToSimpleType_WOP(simpletype *mo
 	// insertion point for checkout of basic fields (back repo to stage)
 	simpletype.Name = simpletypeDB.Name_Data.String
 	simpletype.NameXSD = simpletypeDB.NameXSD_Data.String
+	simpletype.Order = int(simpletypeDB.Order_Data.Int64)
+	simpletype.Depth = int(simpletypeDB.Depth_Data.Int64)
 }
 
 // CopyBasicFieldsToSimpleTypeWOP
@@ -476,6 +510,8 @@ func (simpletypeDB *SimpleTypeDB) CopyBasicFieldsToSimpleTypeWOP(simpletype *Sim
 	// insertion point for checkout of basic fields (back repo to stage)
 	simpletype.Name = simpletypeDB.Name_Data.String
 	simpletype.NameXSD = simpletypeDB.NameXSD_Data.String
+	simpletype.Order = int(simpletypeDB.Order_Data.Int64)
+	simpletype.Depth = int(simpletypeDB.Depth_Data.Int64)
 }
 
 // Backup generates a json file from a slice of all SimpleTypeDB instances in the backrepo

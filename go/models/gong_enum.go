@@ -2,164 +2,85 @@
 package models
 
 // insertion point of enum utility functions
-// Utility function for ModelsFileTmplLevel0
+// Utility function for Level0
 // if enum values are string, it is stored with the value
 // if enum values are int, they are stored with the code of the value
-func (modelsfiletmpllevel0 ModelsFileTmplLevel0) ToInt() (res int) {
+func (level0 Level0) ToInt() (res int) {
 
 	// migration of former implementation of enum
-	switch modelsfiletmpllevel0 {
+	switch level0 {
 	// insertion code per enum code
-	case ModelsFileTmplLevel0AllGongstructsCode:
+	case Level0AllGongstructsCode:
 		res = 0
-	case ModelsFileTmplLevel0Nb:
+	case Level0AllGongenumsCode:
 		res = 1
-	}
-	return
-}
-
-func (modelsfiletmpllevel0 *ModelsFileTmplLevel0) FromInt(input int) (err error) {
-
-	switch input {
-	// insertion code per enum code
-	case 0:
-		*modelsfiletmpllevel0 = ModelsFileTmplLevel0AllGongstructsCode
-		return
-	case 1:
-		*modelsfiletmpllevel0 = ModelsFileTmplLevel0Nb
-		return
-	default:
-		return errUnkownEnum
-	}
-}
-
-func (modelsfiletmpllevel0 *ModelsFileTmplLevel0) FromCodeString(input string) (err error) {
-
-	switch input {
-	// insertion code per enum code
-	case "ModelsFileTmplLevel0AllGongstructsCode":
-		*modelsfiletmpllevel0 = ModelsFileTmplLevel0AllGongstructsCode
-	case "ModelsFileTmplLevel0Nb":
-		*modelsfiletmpllevel0 = ModelsFileTmplLevel0Nb
-	default:
-		return errUnkownEnum
-	}
-	return
-}
-
-func (modelsfiletmpllevel0 *ModelsFileTmplLevel0) ToCodeString() (res string) {
-
-	switch *modelsfiletmpllevel0 {
-	// insertion code per enum code
-	case ModelsFileTmplLevel0AllGongstructsCode:
-		res = "ModelsFileTmplLevel0AllGongstructsCode"
-	case ModelsFileTmplLevel0Nb:
-		res = "ModelsFileTmplLevel0Nb"
-	}
-	return
-}
-
-func (modelsfiletmpllevel0 ModelsFileTmplLevel0) Codes() (res []string) {
-
-	res = make([]string, 0)
-
-	// insertion code per enum code
-	res = append(res, "ModelsFileTmplLevel0AllGongstructsCode")
-	res = append(res, "ModelsFileTmplLevel0Nb")
-
-	return
-}
-
-func (modelsfiletmpllevel0 ModelsFileTmplLevel0) CodeValues() (res []int) {
-
-	res = make([]int, 0)
-
-	// insertion code per enum code
-	res = append(res, 0)
-	res = append(res, 1)
-
-	return
-}
-
-// Utility function for ModelsFileTmplLevel1
-// if enum values are string, it is stored with the value
-// if enum values are int, they are stored with the code of the value
-func (modelsfiletmpllevel1 ModelsFileTmplLevel1) ToInt() (res int) {
-
-	// migration of former implementation of enum
-	switch modelsfiletmpllevel1 {
-	// insertion code per enum code
-	case ModelsFileTmplLevel1NamedStructCode:
-		res = 0
-	case ModelsFileTmplLevel1UnNamedStructCode:
-		res = 1
-	case ModelsFileTmplLevel1Nb:
+	case Level0Nb:
 		res = 2
 	}
 	return
 }
 
-func (modelsfiletmpllevel1 *ModelsFileTmplLevel1) FromInt(input int) (err error) {
+func (level0 *Level0) FromInt(input int) (err error) {
 
 	switch input {
 	// insertion code per enum code
 	case 0:
-		*modelsfiletmpllevel1 = ModelsFileTmplLevel1NamedStructCode
+		*level0 = Level0AllGongstructsCode
 		return
 	case 1:
-		*modelsfiletmpllevel1 = ModelsFileTmplLevel1UnNamedStructCode
+		*level0 = Level0AllGongenumsCode
 		return
 	case 2:
-		*modelsfiletmpllevel1 = ModelsFileTmplLevel1Nb
+		*level0 = Level0Nb
 		return
 	default:
 		return errUnkownEnum
 	}
 }
 
-func (modelsfiletmpllevel1 *ModelsFileTmplLevel1) FromCodeString(input string) (err error) {
+func (level0 *Level0) FromCodeString(input string) (err error) {
 
 	switch input {
 	// insertion code per enum code
-	case "ModelsFileTmplLevel1NamedStructCode":
-		*modelsfiletmpllevel1 = ModelsFileTmplLevel1NamedStructCode
-	case "ModelsFileTmplLevel1UnNamedStructCode":
-		*modelsfiletmpllevel1 = ModelsFileTmplLevel1UnNamedStructCode
-	case "ModelsFileTmplLevel1Nb":
-		*modelsfiletmpllevel1 = ModelsFileTmplLevel1Nb
+	case "Level0AllGongstructsCode":
+		*level0 = Level0AllGongstructsCode
+	case "Level0AllGongenumsCode":
+		*level0 = Level0AllGongenumsCode
+	case "Level0Nb":
+		*level0 = Level0Nb
 	default:
 		return errUnkownEnum
 	}
 	return
 }
 
-func (modelsfiletmpllevel1 *ModelsFileTmplLevel1) ToCodeString() (res string) {
+func (level0 *Level0) ToCodeString() (res string) {
 
-	switch *modelsfiletmpllevel1 {
+	switch *level0 {
 	// insertion code per enum code
-	case ModelsFileTmplLevel1NamedStructCode:
-		res = "ModelsFileTmplLevel1NamedStructCode"
-	case ModelsFileTmplLevel1UnNamedStructCode:
-		res = "ModelsFileTmplLevel1UnNamedStructCode"
-	case ModelsFileTmplLevel1Nb:
-		res = "ModelsFileTmplLevel1Nb"
+	case Level0AllGongstructsCode:
+		res = "Level0AllGongstructsCode"
+	case Level0AllGongenumsCode:
+		res = "Level0AllGongenumsCode"
+	case Level0Nb:
+		res = "Level0Nb"
 	}
 	return
 }
 
-func (modelsfiletmpllevel1 ModelsFileTmplLevel1) Codes() (res []string) {
+func (level0 Level0) Codes() (res []string) {
 
 	res = make([]string, 0)
 
 	// insertion code per enum code
-	res = append(res, "ModelsFileTmplLevel1NamedStructCode")
-	res = append(res, "ModelsFileTmplLevel1UnNamedStructCode")
-	res = append(res, "ModelsFileTmplLevel1Nb")
+	res = append(res, "Level0AllGongstructsCode")
+	res = append(res, "Level0AllGongenumsCode")
+	res = append(res, "Level0Nb")
 
 	return
 }
 
-func (modelsfiletmpllevel1 ModelsFileTmplLevel1) CodeValues() (res []int) {
+func (level0 Level0) CodeValues() (res []int) {
 
 	res = make([]int, 0)
 
@@ -171,95 +92,95 @@ func (modelsfiletmpllevel1 ModelsFileTmplLevel1) CodeValues() (res []int) {
 	return
 }
 
-// Utility function for ModelsFileTmplLevel2
+// Utility function for Level1
 // if enum values are string, it is stored with the value
 // if enum values are int, they are stored with the code of the value
-func (modelsfiletmpllevel2 ModelsFileTmplLevel2) ToInt() (res int) {
+func (level1 Level1) ToInt() (res int) {
 
 	// migration of former implementation of enum
-	switch modelsfiletmpllevel2 {
+	switch level1 {
 	// insertion code per enum code
-	case ModelsFileTmplLevel2Structname:
+	case Level1NamedStructCode:
 		res = 0
-	case ModelsFileTmplLevel2Source:
+	case Level1UnNamedStructCode:
 		res = 1
-	case ModelsFileTmplLevel2Fields:
+	case Level1NamedEnumCode:
 		res = 2
-	case ModelsFileTmplLevel2Nb:
+	case Level1Nb:
 		res = 3
 	}
 	return
 }
 
-func (modelsfiletmpllevel2 *ModelsFileTmplLevel2) FromInt(input int) (err error) {
+func (level1 *Level1) FromInt(input int) (err error) {
 
 	switch input {
 	// insertion code per enum code
 	case 0:
-		*modelsfiletmpllevel2 = ModelsFileTmplLevel2Structname
+		*level1 = Level1NamedStructCode
 		return
 	case 1:
-		*modelsfiletmpllevel2 = ModelsFileTmplLevel2Source
+		*level1 = Level1UnNamedStructCode
 		return
 	case 2:
-		*modelsfiletmpllevel2 = ModelsFileTmplLevel2Fields
+		*level1 = Level1NamedEnumCode
 		return
 	case 3:
-		*modelsfiletmpllevel2 = ModelsFileTmplLevel2Nb
+		*level1 = Level1Nb
 		return
 	default:
 		return errUnkownEnum
 	}
 }
 
-func (modelsfiletmpllevel2 *ModelsFileTmplLevel2) FromCodeString(input string) (err error) {
+func (level1 *Level1) FromCodeString(input string) (err error) {
 
 	switch input {
 	// insertion code per enum code
-	case "ModelsFileTmplLevel2Structname":
-		*modelsfiletmpllevel2 = ModelsFileTmplLevel2Structname
-	case "ModelsFileTmplLevel2Source":
-		*modelsfiletmpllevel2 = ModelsFileTmplLevel2Source
-	case "ModelsFileTmplLevel2Fields":
-		*modelsfiletmpllevel2 = ModelsFileTmplLevel2Fields
-	case "ModelsFileTmplLevel2Nb":
-		*modelsfiletmpllevel2 = ModelsFileTmplLevel2Nb
+	case "Level1NamedStructCode":
+		*level1 = Level1NamedStructCode
+	case "Level1UnNamedStructCode":
+		*level1 = Level1UnNamedStructCode
+	case "Level1NamedEnumCode":
+		*level1 = Level1NamedEnumCode
+	case "Level1Nb":
+		*level1 = Level1Nb
 	default:
 		return errUnkownEnum
 	}
 	return
 }
 
-func (modelsfiletmpllevel2 *ModelsFileTmplLevel2) ToCodeString() (res string) {
+func (level1 *Level1) ToCodeString() (res string) {
 
-	switch *modelsfiletmpllevel2 {
+	switch *level1 {
 	// insertion code per enum code
-	case ModelsFileTmplLevel2Structname:
-		res = "ModelsFileTmplLevel2Structname"
-	case ModelsFileTmplLevel2Source:
-		res = "ModelsFileTmplLevel2Source"
-	case ModelsFileTmplLevel2Fields:
-		res = "ModelsFileTmplLevel2Fields"
-	case ModelsFileTmplLevel2Nb:
-		res = "ModelsFileTmplLevel2Nb"
+	case Level1NamedStructCode:
+		res = "Level1NamedStructCode"
+	case Level1UnNamedStructCode:
+		res = "Level1UnNamedStructCode"
+	case Level1NamedEnumCode:
+		res = "Level1NamedEnumCode"
+	case Level1Nb:
+		res = "Level1Nb"
 	}
 	return
 }
 
-func (modelsfiletmpllevel2 ModelsFileTmplLevel2) Codes() (res []string) {
+func (level1 Level1) Codes() (res []string) {
 
 	res = make([]string, 0)
 
 	// insertion code per enum code
-	res = append(res, "ModelsFileTmplLevel2Structname")
-	res = append(res, "ModelsFileTmplLevel2Source")
-	res = append(res, "ModelsFileTmplLevel2Fields")
-	res = append(res, "ModelsFileTmplLevel2Nb")
+	res = append(res, "Level1NamedStructCode")
+	res = append(res, "Level1UnNamedStructCode")
+	res = append(res, "Level1NamedEnumCode")
+	res = append(res, "Level1Nb")
 
 	return
 }
 
-func (modelsfiletmpllevel2 ModelsFileTmplLevel2) CodeValues() (res []int) {
+func (level1 Level1) CodeValues() (res []int) {
 
 	res = make([]int, 0)
 
@@ -268,6 +189,129 @@ func (modelsfiletmpllevel2 ModelsFileTmplLevel2) CodeValues() (res []int) {
 	res = append(res, 1)
 	res = append(res, 2)
 	res = append(res, 3)
+
+	return
+}
+
+// Utility function for Level2
+// if enum values are string, it is stored with the value
+// if enum values are int, they are stored with the code of the value
+func (level2 Level2) ToInt() (res int) {
+
+	// migration of former implementation of enum
+	switch level2 {
+	// insertion code per enum code
+	case Level2Structname:
+		res = 0
+	case Level2Comment:
+		res = 1
+	case Level2Source:
+		res = 2
+	case Level2Fields:
+		res = 3
+	case Level2Enumname:
+		res = 4
+	case Level2Nb:
+		res = 5
+	}
+	return
+}
+
+func (level2 *Level2) FromInt(input int) (err error) {
+
+	switch input {
+	// insertion code per enum code
+	case 0:
+		*level2 = Level2Structname
+		return
+	case 1:
+		*level2 = Level2Comment
+		return
+	case 2:
+		*level2 = Level2Source
+		return
+	case 3:
+		*level2 = Level2Fields
+		return
+	case 4:
+		*level2 = Level2Enumname
+		return
+	case 5:
+		*level2 = Level2Nb
+		return
+	default:
+		return errUnkownEnum
+	}
+}
+
+func (level2 *Level2) FromCodeString(input string) (err error) {
+
+	switch input {
+	// insertion code per enum code
+	case "Level2Structname":
+		*level2 = Level2Structname
+	case "Level2Comment":
+		*level2 = Level2Comment
+	case "Level2Source":
+		*level2 = Level2Source
+	case "Level2Fields":
+		*level2 = Level2Fields
+	case "Level2Enumname":
+		*level2 = Level2Enumname
+	case "Level2Nb":
+		*level2 = Level2Nb
+	default:
+		return errUnkownEnum
+	}
+	return
+}
+
+func (level2 *Level2) ToCodeString() (res string) {
+
+	switch *level2 {
+	// insertion code per enum code
+	case Level2Structname:
+		res = "Level2Structname"
+	case Level2Comment:
+		res = "Level2Comment"
+	case Level2Source:
+		res = "Level2Source"
+	case Level2Fields:
+		res = "Level2Fields"
+	case Level2Enumname:
+		res = "Level2Enumname"
+	case Level2Nb:
+		res = "Level2Nb"
+	}
+	return
+}
+
+func (level2 Level2) Codes() (res []string) {
+
+	res = make([]string, 0)
+
+	// insertion code per enum code
+	res = append(res, "Level2Structname")
+	res = append(res, "Level2Comment")
+	res = append(res, "Level2Source")
+	res = append(res, "Level2Fields")
+	res = append(res, "Level2Enumname")
+	res = append(res, "Level2Nb")
+
+	return
+}
+
+func (level2 Level2) CodeValues() (res []int) {
+
+	res = make([]int, 0)
+
+	// insertion code per enum code
+	res = append(res, 0)
+	res = append(res, 1)
+	res = append(res, 2)
+	res = append(res, 3)
+	res = append(res, 4)
+	res = append(res, 5)
 
 	return
 }
@@ -285,13 +329,13 @@ type PointerToGongstructEnumStringField interface {
 }
 
 type GongstructEnumIntField interface {
-	int | ModelsFileTmplLevel0 | ModelsFileTmplLevel1 | ModelsFileTmplLevel2
+	int | Level0 | Level1 | Level2
 	Codes() []string
 	CodeValues() []int
 }
 
 type PointerToGongstructEnumIntField interface {
-	*ModelsFileTmplLevel0 | *ModelsFileTmplLevel1 | *ModelsFileTmplLevel2
+	*Level0 | *Level1 | *Level2
 	FromCodeString(input string) (err error)
 }
 
