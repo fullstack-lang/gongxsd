@@ -616,7 +616,7 @@ func (from *A_SOURCE_1) CopyBasicFields(to *A_SOURCE_1) {
 type A_SOURCE_SPECIFICATION_1_WOP struct {
 	// insertion point
 	Name string
-	SPECIFICATION_REF string
+	SPECIFICATION_REF Enum_GLOBAL_REF
 }
 
 func (from *A_SOURCE_SPECIFICATION_1) CopyBasicFields(to *A_SOURCE_SPECIFICATION_1) {
@@ -1160,10 +1160,12 @@ func (from *SPEC_RELATION_TYPE) CopyBasicFields(to *SPEC_RELATION_TYPE) {
 type XHTML_CONTENT_WOP struct {
 	// insertion point
 	Name string
+	EnclosedText string
 }
 
 func (from *XHTML_CONTENT) CopyBasicFields(to *XHTML_CONTENT) {
 	// insertion point
 	to.Name = from.Name
+	to.EnclosedText = from.EnclosedText
 }
 

@@ -1,5 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<score-partwise version="4.0">
+<score-partwise version="4.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="./musicxml.xsd">
     <work>
         <work-title>Generated from phylotaxy music 2 september 2024 0800</work-title>
     </work>

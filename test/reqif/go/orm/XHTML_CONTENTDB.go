@@ -61,6 +61,9 @@ type XHTML_CONTENTDB struct {
 
 	// Declation for basic field xhtml_contentDB.Name
 	Name_Data sql.NullString
+
+	// Declation for basic field xhtml_contentDB.EnclosedText
+	EnclosedText_Data sql.NullString
 	
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
@@ -85,6 +88,8 @@ type XHTML_CONTENTWOP struct {
 	// insertion for WOP basic fields
 
 	Name string `xlsx:"1"`
+
+	EnclosedText string `xlsx:"2"`
 	// insertion for WOP pointer fields
 }
 
@@ -92,6 +97,7 @@ var XHTML_CONTENT_Fields = []string{
 	// insertion for WOP basic fields
 	"ID",
 	"Name",
+	"EnclosedText",
 }
 
 type BackRepoXHTML_CONTENTStruct struct {
@@ -360,6 +366,9 @@ func (xhtml_contentDB *XHTML_CONTENTDB) CopyBasicFieldsFromXHTML_CONTENT(xhtml_c
 
 	xhtml_contentDB.Name_Data.String = xhtml_content.Name
 	xhtml_contentDB.Name_Data.Valid = true
+
+	xhtml_contentDB.EnclosedText_Data.String = xhtml_content.EnclosedText
+	xhtml_contentDB.EnclosedText_Data.Valid = true
 }
 
 // CopyBasicFieldsFromXHTML_CONTENT_WOP
@@ -368,6 +377,9 @@ func (xhtml_contentDB *XHTML_CONTENTDB) CopyBasicFieldsFromXHTML_CONTENT_WOP(xht
 
 	xhtml_contentDB.Name_Data.String = xhtml_content.Name
 	xhtml_contentDB.Name_Data.Valid = true
+
+	xhtml_contentDB.EnclosedText_Data.String = xhtml_content.EnclosedText
+	xhtml_contentDB.EnclosedText_Data.Valid = true
 }
 
 // CopyBasicFieldsFromXHTML_CONTENTWOP
@@ -376,18 +388,23 @@ func (xhtml_contentDB *XHTML_CONTENTDB) CopyBasicFieldsFromXHTML_CONTENTWOP(xhtm
 
 	xhtml_contentDB.Name_Data.String = xhtml_content.Name
 	xhtml_contentDB.Name_Data.Valid = true
+
+	xhtml_contentDB.EnclosedText_Data.String = xhtml_content.EnclosedText
+	xhtml_contentDB.EnclosedText_Data.Valid = true
 }
 
 // CopyBasicFieldsToXHTML_CONTENT
 func (xhtml_contentDB *XHTML_CONTENTDB) CopyBasicFieldsToXHTML_CONTENT(xhtml_content *models.XHTML_CONTENT) {
 	// insertion point for checkout of basic fields (back repo to stage)
 	xhtml_content.Name = xhtml_contentDB.Name_Data.String
+	xhtml_content.EnclosedText = xhtml_contentDB.EnclosedText_Data.String
 }
 
 // CopyBasicFieldsToXHTML_CONTENT_WOP
 func (xhtml_contentDB *XHTML_CONTENTDB) CopyBasicFieldsToXHTML_CONTENT_WOP(xhtml_content *models.XHTML_CONTENT_WOP) {
 	// insertion point for checkout of basic fields (back repo to stage)
 	xhtml_content.Name = xhtml_contentDB.Name_Data.String
+	xhtml_content.EnclosedText = xhtml_contentDB.EnclosedText_Data.String
 }
 
 // CopyBasicFieldsToXHTML_CONTENTWOP
@@ -395,6 +412,7 @@ func (xhtml_contentDB *XHTML_CONTENTDB) CopyBasicFieldsToXHTML_CONTENTWOP(xhtml_
 	xhtml_content.ID = int(xhtml_contentDB.ID)
 	// insertion point for checkout of basic fields (back repo to stage)
 	xhtml_content.Name = xhtml_contentDB.Name_Data.String
+	xhtml_content.EnclosedText = xhtml_contentDB.EnclosedText_Data.String
 }
 
 // Backup generates a json file from a slice of all XHTML_CONTENTDB instances in the backrepo

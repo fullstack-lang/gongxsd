@@ -5,11 +5,10 @@ import (
 	"cmp"
 	"errors"
 	"fmt"
+	"maps"
 	"math"
 	"slices"
 	"time"
-
-	"golang.org/x/exp/maps"
 )
 
 func __Gong__Abs(x int) int {
@@ -6796,7 +6795,9 @@ func CompareGongstructByName[T PointerToGongstruct](a, b T) int {
 
 func SortGongstructSetByName[T PointerToGongstruct](set map[T]any) (sortedSlice []T) {
 
-	sortedSlice = maps.Keys(set)
+	for i := range maps.Keys(set) {
+		sortedSlice = append(sortedSlice, i)
+	}
 	slices.SortFunc(sortedSlice, CompareGongstructByName)
 
 	return
@@ -11793,7 +11794,7 @@ func GetFields[Type Gongstruct]() (res []string) {
 	case SPEC_RELATION_TYPE:
 		res = []string{"Name", "DESC", "IDENTIFIER", "LAST_CHANGE", "LONG_NAME", "ALTERNATIVE_ID", "SPEC_ATTRIBUTES"}
 	case XHTML_CONTENT:
-		res = []string{"Name"}
+		res = []string{"Name", "EnclosedText"}
 	}
 	return
 }
@@ -12242,7 +12243,7 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 	case *SPEC_RELATION_TYPE:
 		res = []string{"Name", "DESC", "IDENTIFIER", "LAST_CHANGE", "LONG_NAME", "ALTERNATIVE_ID", "SPEC_ATTRIBUTES"}
 	case *XHTML_CONTENT:
-		res = []string{"Name"}
+		res = []string{"Name", "EnclosedText"}
 	}
 	return
 }
@@ -12899,7 +12900,8 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		case "Name":
 			res = inferedInstance.Name
 		case "SPECIFICATION_REF":
-			res = inferedInstance.SPECIFICATION_REF
+			enum := inferedInstance.SPECIFICATION_REF
+			res = enum.ToCodeString()
 		}
 	case *A_SPECIFICATIONS:
 		switch fieldName {
@@ -13562,6 +13564,8 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		// string value of fields
 		case "Name":
 			res = inferedInstance.Name
+		case "EnclosedText":
+			res = inferedInstance.EnclosedText
 		}
 	default:
 		_ = inferedInstance
@@ -14221,7 +14225,8 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		case "Name":
 			res = inferedInstance.Name
 		case "SPECIFICATION_REF":
-			res = inferedInstance.SPECIFICATION_REF
+			enum := inferedInstance.SPECIFICATION_REF
+			res = enum.ToCodeString()
 		}
 	case A_SPECIFICATIONS:
 		switch fieldName {
@@ -14884,10 +14889,103 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		// string value of fields
 		case "Name":
 			res = inferedInstance.Name
+		case "EnclosedText":
+			res = inferedInstance.EnclosedText
 		}
 	default:
 		_ = inferedInstance
 	}
+	return
+}
+
+func (stage *StageStruct) GetAllInstances() (res []any) {
+
+	// insertion point for generic get functions
+	res = append(res,  any(maps.Keys(stage.ALTERNATIVE_IDs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.ATTRIBUTE_DEFINITION_BOOLEANs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.ATTRIBUTE_DEFINITION_DATEs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.ATTRIBUTE_DEFINITION_ENUMERATIONs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.ATTRIBUTE_DEFINITION_INTEGERs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.ATTRIBUTE_DEFINITION_REALs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.ATTRIBUTE_DEFINITION_STRINGs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.ATTRIBUTE_DEFINITION_XHTMLs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.ATTRIBUTE_VALUE_BOOLEANs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.ATTRIBUTE_VALUE_DATEs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.ATTRIBUTE_VALUE_ENUMERATIONs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.ATTRIBUTE_VALUE_INTEGERs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.ATTRIBUTE_VALUE_REALs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.ATTRIBUTE_VALUE_STRINGs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.ATTRIBUTE_VALUE_XHTMLs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_ALTERNATIVE_IDs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_ATTRIBUTE_DEFINITION_BOOLEAN_REFs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_ATTRIBUTE_DEFINITION_DATE_REFs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_ATTRIBUTE_DEFINITION_ENUMERATION_REFs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_ATTRIBUTE_DEFINITION_INTEGER_REFs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_ATTRIBUTE_DEFINITION_REAL_REFs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_ATTRIBUTE_DEFINITION_STRING_REFs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_ATTRIBUTE_DEFINITION_XHTML_REFs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_ATTRIBUTE_VALUE_BOOLEANs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_ATTRIBUTE_VALUE_DATEs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_ATTRIBUTE_VALUE_ENUMERATIONs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_ATTRIBUTE_VALUE_INTEGERs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_ATTRIBUTE_VALUE_REALs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_ATTRIBUTE_VALUE_STRINGs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_ATTRIBUTE_VALUE_XHTMLs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_ATTRIBUTE_VALUE_XHTML_1s)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_CHILDRENs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_CORE_CONTENTs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_DATATYPESs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_DATATYPE_DEFINITION_BOOLEAN_REFs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_DATATYPE_DEFINITION_DATE_REFs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_DATATYPE_DEFINITION_ENUMERATION_REFs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_DATATYPE_DEFINITION_INTEGER_REFs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_DATATYPE_DEFINITION_REAL_REFs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_DATATYPE_DEFINITION_STRING_REFs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_DATATYPE_DEFINITION_XHTML_REFs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_EDITABLE_ATTSs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_ENUM_VALUE_REFs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_OBJECTs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_PROPERTIESs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_RELATION_GROUP_TYPE_REFs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_SOURCE_1s)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_SOURCE_SPECIFICATION_1s)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_SPECIFICATIONSs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_SPECIFICATION_TYPE_REFs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_SPECIFIED_VALUESs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_SPEC_ATTRIBUTESs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_SPEC_OBJECTSs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_SPEC_OBJECT_TYPE_REFs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_SPEC_RELATIONSs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_SPEC_RELATION_GROUPSs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_SPEC_RELATION_REFs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_SPEC_RELATION_TYPE_REFs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_SPEC_TYPESs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_THE_HEADERs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.A_TOOL_EXTENSIONSs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.DATATYPE_DEFINITION_BOOLEANs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.DATATYPE_DEFINITION_DATEs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.DATATYPE_DEFINITION_ENUMERATIONs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.DATATYPE_DEFINITION_INTEGERs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.DATATYPE_DEFINITION_REALs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.DATATYPE_DEFINITION_STRINGs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.DATATYPE_DEFINITION_XHTMLs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.EMBEDDED_VALUEs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.ENUM_VALUEs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.RELATION_GROUPs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.RELATION_GROUP_TYPEs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.REQ_IFs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.REQ_IF_CONTENTs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.REQ_IF_HEADERs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.REQ_IF_TOOL_EXTENSIONs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.SPECIFICATIONs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.SPECIFICATION_TYPEs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.SPEC_HIERARCHYs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.SPEC_OBJECTs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.SPEC_OBJECT_TYPEs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.SPEC_RELATIONs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.SPEC_RELATION_TYPEs)).([]any)...)
+	res = append(res,  any(maps.Keys(stage.XHTML_CONTENTs)).([]any)...)
+
 	return
 }
 

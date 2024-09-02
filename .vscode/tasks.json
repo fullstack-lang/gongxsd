@@ -443,5 +443,23 @@
 			],
 			"group": "build"
 		},
+		{
+			"label": "02 - run reqif toto.reqif -marshallOnCommit=stage",
+			"type": "shell",
+			"options": {
+				"cwd": "${workspaceFolder}/test/reqif/go/cmd/reqif"
+			},
+			"command": "go",
+			"args": [
+				"run",
+				"main.go",
+				"-diagrams",
+				// "-unmarshallFromCode=stage.go",
+				"-marshallOnCommit=stage",
+				"-reqifFile",
+				"../../../../../../../thomaspeugeot/toto.reqif"
+			],
+			"group": "build"
+		},
 	]
 }

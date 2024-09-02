@@ -2309,10 +2309,6 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					// remove first and last char
 					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
 					__gong__map_A_SOURCE_SPECIFICATION_1[identifier].Name = fielValue
-				case "SPECIFICATION_REF":
-					// remove first and last char
-					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
-					__gong__map_A_SOURCE_SPECIFICATION_1[identifier].SPECIFICATION_REF = fielValue
 				}
 			case "A_SPECIFICATIONS":
 				switch fieldName {
@@ -2978,6 +2974,10 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 					// remove first and last char
 					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
 					__gong__map_XHTML_CONTENT[identifier].Name = fielValue
+				case "EnclosedText":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_XHTML_CONTENT[identifier].EnclosedText = fielValue
 				}
 			}
 		case *ast.Ident:
@@ -3998,6 +3998,13 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 				case "A_SOURCE_SPECIFICATION_1":
 					switch fieldName {
 					// insertion point for enum assign code
+					case "SPECIFICATION_REF":
+						var val Enum_GLOBAL_REF
+						err := (&val).FromCodeString(enumValue)
+						if err != nil {
+							log.Fatalln(err)
+						}
+						__gong__map_A_SOURCE_SPECIFICATION_1[identifier].SPECIFICATION_REF = Enum_GLOBAL_REF(val)
 					}
 				case "A_SPECIFICATIONS":
 					switch fieldName {

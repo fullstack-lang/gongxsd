@@ -3931,7 +3931,7 @@ func (a_source_specification_1FormCallback *A_SOURCE_SPECIFICATION_1FormCallback
 		case "Name":
 			FormDivBasicFieldToField(&(a_source_specification_1_.Name), formDiv)
 		case "SPECIFICATION_REF":
-			FormDivBasicFieldToField(&(a_source_specification_1_.SPECIFICATION_REF), formDiv)
+			FormDivEnumStringFieldToField(&(a_source_specification_1_.SPECIFICATION_REF), formDiv)
 		}
 	}
 
@@ -7018,6 +7018,8 @@ func (xhtml_contentFormCallback *XHTML_CONTENTFormCallback) OnSave() {
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(xhtml_content_.Name), formDiv)
+		case "EnclosedText":
+			FormDivBasicFieldToField(&(xhtml_content_.EnclosedText), formDiv)
 		}
 	}
 

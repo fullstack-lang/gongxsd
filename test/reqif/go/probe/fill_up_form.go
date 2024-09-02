@@ -449,8 +449,7 @@ func FillUpForm[T models.Gongstruct](
 		// insertion point
 		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
-		BasicFieldtoForm("SPECIFICATION_REF", instanceWithInferedType.SPECIFICATION_REF, instanceWithInferedType, probe.formStage, formGroup,
-			false, false, 0, false, 0)
+		EnumTypeStringToForm("SPECIFICATION_REF", instanceWithInferedType.SPECIFICATION_REF, instanceWithInferedType, probe.formStage, formGroup)
 
 	case *models.A_SPECIFICATIONS:
 		// insertion point
@@ -878,6 +877,8 @@ func FillUpForm[T models.Gongstruct](
 	case *models.XHTML_CONTENT:
 		// insertion point
 		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		BasicFieldtoForm("EnclosedText", instanceWithInferedType.EnclosedText, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
 
 	default:

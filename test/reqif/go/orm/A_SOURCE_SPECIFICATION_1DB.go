@@ -89,7 +89,7 @@ type A_SOURCE_SPECIFICATION_1WOP struct {
 
 	Name string `xlsx:"1"`
 
-	SPECIFICATION_REF string `xlsx:"2"`
+	SPECIFICATION_REF models.Enum_GLOBAL_REF `xlsx:"2"`
 	// insertion for WOP pointer fields
 }
 
@@ -367,7 +367,7 @@ func (a_source_specification_1DB *A_SOURCE_SPECIFICATION_1DB) CopyBasicFieldsFro
 	a_source_specification_1DB.Name_Data.String = a_source_specification_1.Name
 	a_source_specification_1DB.Name_Data.Valid = true
 
-	a_source_specification_1DB.SPECIFICATION_REF_Data.String = a_source_specification_1.SPECIFICATION_REF
+	a_source_specification_1DB.SPECIFICATION_REF_Data.String = a_source_specification_1.SPECIFICATION_REF.ToString()
 	a_source_specification_1DB.SPECIFICATION_REF_Data.Valid = true
 }
 
@@ -378,7 +378,7 @@ func (a_source_specification_1DB *A_SOURCE_SPECIFICATION_1DB) CopyBasicFieldsFro
 	a_source_specification_1DB.Name_Data.String = a_source_specification_1.Name
 	a_source_specification_1DB.Name_Data.Valid = true
 
-	a_source_specification_1DB.SPECIFICATION_REF_Data.String = a_source_specification_1.SPECIFICATION_REF
+	a_source_specification_1DB.SPECIFICATION_REF_Data.String = a_source_specification_1.SPECIFICATION_REF.ToString()
 	a_source_specification_1DB.SPECIFICATION_REF_Data.Valid = true
 }
 
@@ -389,7 +389,7 @@ func (a_source_specification_1DB *A_SOURCE_SPECIFICATION_1DB) CopyBasicFieldsFro
 	a_source_specification_1DB.Name_Data.String = a_source_specification_1.Name
 	a_source_specification_1DB.Name_Data.Valid = true
 
-	a_source_specification_1DB.SPECIFICATION_REF_Data.String = a_source_specification_1.SPECIFICATION_REF
+	a_source_specification_1DB.SPECIFICATION_REF_Data.String = a_source_specification_1.SPECIFICATION_REF.ToString()
 	a_source_specification_1DB.SPECIFICATION_REF_Data.Valid = true
 }
 
@@ -397,14 +397,14 @@ func (a_source_specification_1DB *A_SOURCE_SPECIFICATION_1DB) CopyBasicFieldsFro
 func (a_source_specification_1DB *A_SOURCE_SPECIFICATION_1DB) CopyBasicFieldsToA_SOURCE_SPECIFICATION_1(a_source_specification_1 *models.A_SOURCE_SPECIFICATION_1) {
 	// insertion point for checkout of basic fields (back repo to stage)
 	a_source_specification_1.Name = a_source_specification_1DB.Name_Data.String
-	a_source_specification_1.SPECIFICATION_REF = a_source_specification_1DB.SPECIFICATION_REF_Data.String
+	a_source_specification_1.SPECIFICATION_REF.FromString(a_source_specification_1DB.SPECIFICATION_REF_Data.String)
 }
 
 // CopyBasicFieldsToA_SOURCE_SPECIFICATION_1_WOP
 func (a_source_specification_1DB *A_SOURCE_SPECIFICATION_1DB) CopyBasicFieldsToA_SOURCE_SPECIFICATION_1_WOP(a_source_specification_1 *models.A_SOURCE_SPECIFICATION_1_WOP) {
 	// insertion point for checkout of basic fields (back repo to stage)
 	a_source_specification_1.Name = a_source_specification_1DB.Name_Data.String
-	a_source_specification_1.SPECIFICATION_REF = a_source_specification_1DB.SPECIFICATION_REF_Data.String
+	a_source_specification_1.SPECIFICATION_REF.FromString(a_source_specification_1DB.SPECIFICATION_REF_Data.String)
 }
 
 // CopyBasicFieldsToA_SOURCE_SPECIFICATION_1WOP
@@ -412,7 +412,7 @@ func (a_source_specification_1DB *A_SOURCE_SPECIFICATION_1DB) CopyBasicFieldsToA
 	a_source_specification_1.ID = int(a_source_specification_1DB.ID)
 	// insertion point for checkout of basic fields (back repo to stage)
 	a_source_specification_1.Name = a_source_specification_1DB.Name_Data.String
-	a_source_specification_1.SPECIFICATION_REF = a_source_specification_1DB.SPECIFICATION_REF_Data.String
+	a_source_specification_1.SPECIFICATION_REF.FromString(a_source_specification_1DB.SPECIFICATION_REF_Data.String)
 }
 
 // Backup generates a json file from a slice of all A_SOURCE_SPECIFICATION_1DB instances in the backrepo

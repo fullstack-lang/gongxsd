@@ -6,6 +6,16 @@ import "encoding/xml"
 // to avoid compilation error if no xml element is generated
 var _ xml.Attr
 
+// insertion point for enums declaration
+
+// From xsd simple type with enumerate restriction "GLOBAL-REF"
+type Enum_GLOBAL_REF string
+
+const (
+)
+
+	// insertion point for gongstructs declarations
+
 // ALTERNATIVE_ID Named source named complex type "ALTERNATIVE-ID"
 type ALTERNATIVE_ID struct {
 	Name string `xml:"-"`
@@ -830,14 +840,14 @@ type RELATION_GROUP struct {
 	TYPE *A_RELATION_GROUP_TYPE_REF `xml:"TYPE,omitempty"`
 }
 
-// A_SOURCE_SPECIFICATION_1 Named source within outer element "TARGET-SPECIFICATION"
+// A_SOURCE_SPECIFICATION_1 Named source within outer element "SOURCE-SPECIFICATION"
 type A_SOURCE_SPECIFICATION_1 struct {
 	Name string `xml:"-"`
 
 	// insertion point for fields
 
 	// generated from element "SPECIFICATION-REF" of type GLOBAL-REF order 153 depth 3
-	SPECIFICATION_REF string `xml:"SPECIFICATION-REF,omitempty"`
+	SPECIFICATION_REF Enum_GLOBAL_REF `xml:"SPECIFICATION-REF,omitempty"`
 }
 
 // A_SPEC_RELATION_REF Named source within outer element "SPEC-RELATIONS"
@@ -1315,7 +1325,7 @@ type SPEC_RELATION struct {
 	TYPE *A_SPEC_RELATION_TYPE_REF `xml:"TYPE,omitempty"`
 }
 
-// A_SOURCE_1 Named source within outer element "TARGET"
+// A_SOURCE_1 Named source within outer element "SOURCE"
 type A_SOURCE_1 struct {
 	Name string `xml:"-"`
 
@@ -1438,4 +1448,7 @@ type XHTML_CONTENT struct {
 	Name string `xml:"-"`
 
 	// insertion point for fields
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	EnclosedText string `xml:",chardata"`
 }
