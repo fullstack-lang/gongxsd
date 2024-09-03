@@ -47,9 +47,8 @@ type A_SPEC_OBJECTSAPI struct {
 type A_SPEC_OBJECTSPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
 
-	// field SPEC_OBJECT is a pointer to another Struct (optional or 0..1)
-	// This field is generated into another field to enable AS ONE association
-	SPEC_OBJECTID sql.NullInt64
+	// field SPEC_OBJECT is a slice of pointers to another Struct (optional or 0..1)
+	SPEC_OBJECT IntSlice `gorm:"type:TEXT"`
 }
 
 // A_SPEC_OBJECTSDB describes a a_spec_objects in the database
@@ -215,16 +214,22 @@ func (backRepoA_SPEC_OBJECTS *BackRepoA_SPEC_OBJECTSStruct) CommitPhaseTwoInstan
 		a_spec_objectsDB.CopyBasicFieldsFromA_SPEC_OBJECTS(a_spec_objects)
 
 		// insertion point for translating pointers encodings into actual pointers
-		// commit pointer value a_spec_objects.SPEC_OBJECT translates to updating the a_spec_objects.SPEC_OBJECTID
-		a_spec_objectsDB.SPEC_OBJECTID.Valid = true // allow for a 0 value (nil association)
-		if a_spec_objects.SPEC_OBJECT != nil {
-			if SPEC_OBJECTId, ok := backRepo.BackRepoSPEC_OBJECT.Map_SPEC_OBJECTPtr_SPEC_OBJECTDBID[a_spec_objects.SPEC_OBJECT]; ok {
-				a_spec_objectsDB.SPEC_OBJECTID.Int64 = int64(SPEC_OBJECTId)
-				a_spec_objectsDB.SPEC_OBJECTID.Valid = true
+		// 1. reset
+		a_spec_objectsDB.A_SPEC_OBJECTSPointersEncoding.SPEC_OBJECT = make([]int, 0)
+		// 2. encode
+		for _, spec_objectAssocEnd := range a_spec_objects.SPEC_OBJECT {
+			spec_objectAssocEnd_DB :=
+				backRepo.BackRepoSPEC_OBJECT.GetSPEC_OBJECTDBFromSPEC_OBJECTPtr(spec_objectAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the spec_objectAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if spec_objectAssocEnd_DB == nil {
+				continue
 			}
-		} else {
-			a_spec_objectsDB.SPEC_OBJECTID.Int64 = 0
-			a_spec_objectsDB.SPEC_OBJECTID.Valid = true
+			
+			a_spec_objectsDB.A_SPEC_OBJECTSPointersEncoding.SPEC_OBJECT =
+				append(a_spec_objectsDB.A_SPEC_OBJECTSPointersEncoding.SPEC_OBJECT, int(spec_objectAssocEnd_DB.ID))
 		}
 
 		query := backRepoA_SPEC_OBJECTS.db.Save(&a_spec_objectsDB)
@@ -340,11 +345,15 @@ func (backRepoA_SPEC_OBJECTS *BackRepoA_SPEC_OBJECTSStruct) CheckoutPhaseTwoInst
 func (a_spec_objectsDB *A_SPEC_OBJECTSDB) DecodePointers(backRepo *BackRepoStruct, a_spec_objects *models.A_SPEC_OBJECTS) {
 
 	// insertion point for checkout of pointer encoding
-	// SPEC_OBJECT field
-	a_spec_objects.SPEC_OBJECT = nil
-	if a_spec_objectsDB.SPEC_OBJECTID.Int64 != 0 {
-		a_spec_objects.SPEC_OBJECT = backRepo.BackRepoSPEC_OBJECT.Map_SPEC_OBJECTDBID_SPEC_OBJECTPtr[uint(a_spec_objectsDB.SPEC_OBJECTID.Int64)]
+	// This loop redeem a_spec_objects.SPEC_OBJECT in the stage from the encode in the back repo
+	// It parses all SPEC_OBJECTDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	a_spec_objects.SPEC_OBJECT = a_spec_objects.SPEC_OBJECT[:0]
+	for _, _SPEC_OBJECTid := range a_spec_objectsDB.A_SPEC_OBJECTSPointersEncoding.SPEC_OBJECT {
+		a_spec_objects.SPEC_OBJECT = append(a_spec_objects.SPEC_OBJECT, backRepo.BackRepoSPEC_OBJECT.Map_SPEC_OBJECTDBID_SPEC_OBJECTPtr[uint(_SPEC_OBJECTid)])
 	}
+
 	return
 }
 
@@ -573,12 +582,6 @@ func (backRepoA_SPEC_OBJECTS *BackRepoA_SPEC_OBJECTSStruct) RestorePhaseTwo() {
 		_ = a_spec_objectsDB
 
 		// insertion point for reindexing pointers encoding
-		// reindexing SPEC_OBJECT field
-		if a_spec_objectsDB.SPEC_OBJECTID.Int64 != 0 {
-			a_spec_objectsDB.SPEC_OBJECTID.Int64 = int64(BackRepoSPEC_OBJECTid_atBckpTime_newID[uint(a_spec_objectsDB.SPEC_OBJECTID.Int64)])
-			a_spec_objectsDB.SPEC_OBJECTID.Valid = true
-		}
-
 		// update databse with new index encoding
 		query := backRepoA_SPEC_OBJECTS.db.Model(a_spec_objectsDB).Updates(*a_spec_objectsDB)
 		if query.Error != nil {

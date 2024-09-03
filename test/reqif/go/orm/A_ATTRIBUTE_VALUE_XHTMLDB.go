@@ -47,9 +47,8 @@ type A_ATTRIBUTE_VALUE_XHTMLAPI struct {
 type A_ATTRIBUTE_VALUE_XHTMLPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
 
-	// field ATTRIBUTE_VALUE_XHTML is a pointer to another Struct (optional or 0..1)
-	// This field is generated into another field to enable AS ONE association
-	ATTRIBUTE_VALUE_XHTMLID sql.NullInt64
+	// field ATTRIBUTE_VALUE_XHTML is a slice of pointers to another Struct (optional or 0..1)
+	ATTRIBUTE_VALUE_XHTML IntSlice `gorm:"type:TEXT"`
 }
 
 // A_ATTRIBUTE_VALUE_XHTMLDB describes a a_attribute_value_xhtml in the database
@@ -215,16 +214,22 @@ func (backRepoA_ATTRIBUTE_VALUE_XHTML *BackRepoA_ATTRIBUTE_VALUE_XHTMLStruct) Co
 		a_attribute_value_xhtmlDB.CopyBasicFieldsFromA_ATTRIBUTE_VALUE_XHTML(a_attribute_value_xhtml)
 
 		// insertion point for translating pointers encodings into actual pointers
-		// commit pointer value a_attribute_value_xhtml.ATTRIBUTE_VALUE_XHTML translates to updating the a_attribute_value_xhtml.ATTRIBUTE_VALUE_XHTMLID
-		a_attribute_value_xhtmlDB.ATTRIBUTE_VALUE_XHTMLID.Valid = true // allow for a 0 value (nil association)
-		if a_attribute_value_xhtml.ATTRIBUTE_VALUE_XHTML != nil {
-			if ATTRIBUTE_VALUE_XHTMLId, ok := backRepo.BackRepoATTRIBUTE_VALUE_XHTML.Map_ATTRIBUTE_VALUE_XHTMLPtr_ATTRIBUTE_VALUE_XHTMLDBID[a_attribute_value_xhtml.ATTRIBUTE_VALUE_XHTML]; ok {
-				a_attribute_value_xhtmlDB.ATTRIBUTE_VALUE_XHTMLID.Int64 = int64(ATTRIBUTE_VALUE_XHTMLId)
-				a_attribute_value_xhtmlDB.ATTRIBUTE_VALUE_XHTMLID.Valid = true
+		// 1. reset
+		a_attribute_value_xhtmlDB.A_ATTRIBUTE_VALUE_XHTMLPointersEncoding.ATTRIBUTE_VALUE_XHTML = make([]int, 0)
+		// 2. encode
+		for _, attribute_value_xhtmlAssocEnd := range a_attribute_value_xhtml.ATTRIBUTE_VALUE_XHTML {
+			attribute_value_xhtmlAssocEnd_DB :=
+				backRepo.BackRepoATTRIBUTE_VALUE_XHTML.GetATTRIBUTE_VALUE_XHTMLDBFromATTRIBUTE_VALUE_XHTMLPtr(attribute_value_xhtmlAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the attribute_value_xhtmlAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if attribute_value_xhtmlAssocEnd_DB == nil {
+				continue
 			}
-		} else {
-			a_attribute_value_xhtmlDB.ATTRIBUTE_VALUE_XHTMLID.Int64 = 0
-			a_attribute_value_xhtmlDB.ATTRIBUTE_VALUE_XHTMLID.Valid = true
+			
+			a_attribute_value_xhtmlDB.A_ATTRIBUTE_VALUE_XHTMLPointersEncoding.ATTRIBUTE_VALUE_XHTML =
+				append(a_attribute_value_xhtmlDB.A_ATTRIBUTE_VALUE_XHTMLPointersEncoding.ATTRIBUTE_VALUE_XHTML, int(attribute_value_xhtmlAssocEnd_DB.ID))
 		}
 
 		query := backRepoA_ATTRIBUTE_VALUE_XHTML.db.Save(&a_attribute_value_xhtmlDB)
@@ -340,11 +345,15 @@ func (backRepoA_ATTRIBUTE_VALUE_XHTML *BackRepoA_ATTRIBUTE_VALUE_XHTMLStruct) Ch
 func (a_attribute_value_xhtmlDB *A_ATTRIBUTE_VALUE_XHTMLDB) DecodePointers(backRepo *BackRepoStruct, a_attribute_value_xhtml *models.A_ATTRIBUTE_VALUE_XHTML) {
 
 	// insertion point for checkout of pointer encoding
-	// ATTRIBUTE_VALUE_XHTML field
-	a_attribute_value_xhtml.ATTRIBUTE_VALUE_XHTML = nil
-	if a_attribute_value_xhtmlDB.ATTRIBUTE_VALUE_XHTMLID.Int64 != 0 {
-		a_attribute_value_xhtml.ATTRIBUTE_VALUE_XHTML = backRepo.BackRepoATTRIBUTE_VALUE_XHTML.Map_ATTRIBUTE_VALUE_XHTMLDBID_ATTRIBUTE_VALUE_XHTMLPtr[uint(a_attribute_value_xhtmlDB.ATTRIBUTE_VALUE_XHTMLID.Int64)]
+	// This loop redeem a_attribute_value_xhtml.ATTRIBUTE_VALUE_XHTML in the stage from the encode in the back repo
+	// It parses all ATTRIBUTE_VALUE_XHTMLDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	a_attribute_value_xhtml.ATTRIBUTE_VALUE_XHTML = a_attribute_value_xhtml.ATTRIBUTE_VALUE_XHTML[:0]
+	for _, _ATTRIBUTE_VALUE_XHTMLid := range a_attribute_value_xhtmlDB.A_ATTRIBUTE_VALUE_XHTMLPointersEncoding.ATTRIBUTE_VALUE_XHTML {
+		a_attribute_value_xhtml.ATTRIBUTE_VALUE_XHTML = append(a_attribute_value_xhtml.ATTRIBUTE_VALUE_XHTML, backRepo.BackRepoATTRIBUTE_VALUE_XHTML.Map_ATTRIBUTE_VALUE_XHTMLDBID_ATTRIBUTE_VALUE_XHTMLPtr[uint(_ATTRIBUTE_VALUE_XHTMLid)])
 	}
+
 	return
 }
 
@@ -573,12 +582,6 @@ func (backRepoA_ATTRIBUTE_VALUE_XHTML *BackRepoA_ATTRIBUTE_VALUE_XHTMLStruct) Re
 		_ = a_attribute_value_xhtmlDB
 
 		// insertion point for reindexing pointers encoding
-		// reindexing ATTRIBUTE_VALUE_XHTML field
-		if a_attribute_value_xhtmlDB.ATTRIBUTE_VALUE_XHTMLID.Int64 != 0 {
-			a_attribute_value_xhtmlDB.ATTRIBUTE_VALUE_XHTMLID.Int64 = int64(BackRepoATTRIBUTE_VALUE_XHTMLid_atBckpTime_newID[uint(a_attribute_value_xhtmlDB.ATTRIBUTE_VALUE_XHTMLID.Int64)])
-			a_attribute_value_xhtmlDB.ATTRIBUTE_VALUE_XHTMLID.Valid = true
-		}
-
 		// update databse with new index encoding
 		query := backRepoA_ATTRIBUTE_VALUE_XHTML.db.Model(a_attribute_value_xhtmlDB).Updates(*a_attribute_value_xhtmlDB)
 		if query.Error != nil {

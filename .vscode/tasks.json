@@ -437,7 +437,7 @@
 				"main.go",
 				"-diagrams",
 				// "-unmarshallFromCode=stage.go",
-				"-marshallOnCommit=stage",
+				// "-marshallOnCommit=stage",
 				"-reqifFile",
 				"../../../samples/Sample3.reqif"
 			],
@@ -454,8 +454,6 @@
 				"run",
 				"main.go",
 				"-diagrams",
-				// "-unmarshallFromCode=stage.go",
-				"-marshallOnCommit=stage",
 				"-reqifFile",
 				"../../../../../../../thomaspeugeot/toto.reqif"
 			],

@@ -47,21 +47,17 @@ type A_SPEC_TYPESAPI struct {
 type A_SPEC_TYPESPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
 
-	// field RELATION_GROUP_TYPE is a pointer to another Struct (optional or 0..1)
-	// This field is generated into another field to enable AS ONE association
-	RELATION_GROUP_TYPEID sql.NullInt64
+	// field RELATION_GROUP_TYPE is a slice of pointers to another Struct (optional or 0..1)
+	RELATION_GROUP_TYPE IntSlice `gorm:"type:TEXT"`
 
-	// field SPEC_OBJECT_TYPE is a pointer to another Struct (optional or 0..1)
-	// This field is generated into another field to enable AS ONE association
-	SPEC_OBJECT_TYPEID sql.NullInt64
+	// field SPEC_OBJECT_TYPE is a slice of pointers to another Struct (optional or 0..1)
+	SPEC_OBJECT_TYPE IntSlice `gorm:"type:TEXT"`
 
-	// field SPEC_RELATION_TYPE is a pointer to another Struct (optional or 0..1)
-	// This field is generated into another field to enable AS ONE association
-	SPEC_RELATION_TYPEID sql.NullInt64
+	// field SPEC_RELATION_TYPE is a slice of pointers to another Struct (optional or 0..1)
+	SPEC_RELATION_TYPE IntSlice `gorm:"type:TEXT"`
 
-	// field SPECIFICATION_TYPE is a pointer to another Struct (optional or 0..1)
-	// This field is generated into another field to enable AS ONE association
-	SPECIFICATION_TYPEID sql.NullInt64
+	// field SPECIFICATION_TYPE is a slice of pointers to another Struct (optional or 0..1)
+	SPECIFICATION_TYPE IntSlice `gorm:"type:TEXT"`
 }
 
 // A_SPEC_TYPESDB describes a a_spec_types in the database
@@ -227,52 +223,76 @@ func (backRepoA_SPEC_TYPES *BackRepoA_SPEC_TYPESStruct) CommitPhaseTwoInstance(b
 		a_spec_typesDB.CopyBasicFieldsFromA_SPEC_TYPES(a_spec_types)
 
 		// insertion point for translating pointers encodings into actual pointers
-		// commit pointer value a_spec_types.RELATION_GROUP_TYPE translates to updating the a_spec_types.RELATION_GROUP_TYPEID
-		a_spec_typesDB.RELATION_GROUP_TYPEID.Valid = true // allow for a 0 value (nil association)
-		if a_spec_types.RELATION_GROUP_TYPE != nil {
-			if RELATION_GROUP_TYPEId, ok := backRepo.BackRepoRELATION_GROUP_TYPE.Map_RELATION_GROUP_TYPEPtr_RELATION_GROUP_TYPEDBID[a_spec_types.RELATION_GROUP_TYPE]; ok {
-				a_spec_typesDB.RELATION_GROUP_TYPEID.Int64 = int64(RELATION_GROUP_TYPEId)
-				a_spec_typesDB.RELATION_GROUP_TYPEID.Valid = true
+		// 1. reset
+		a_spec_typesDB.A_SPEC_TYPESPointersEncoding.RELATION_GROUP_TYPE = make([]int, 0)
+		// 2. encode
+		for _, relation_group_typeAssocEnd := range a_spec_types.RELATION_GROUP_TYPE {
+			relation_group_typeAssocEnd_DB :=
+				backRepo.BackRepoRELATION_GROUP_TYPE.GetRELATION_GROUP_TYPEDBFromRELATION_GROUP_TYPEPtr(relation_group_typeAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the relation_group_typeAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if relation_group_typeAssocEnd_DB == nil {
+				continue
 			}
-		} else {
-			a_spec_typesDB.RELATION_GROUP_TYPEID.Int64 = 0
-			a_spec_typesDB.RELATION_GROUP_TYPEID.Valid = true
+			
+			a_spec_typesDB.A_SPEC_TYPESPointersEncoding.RELATION_GROUP_TYPE =
+				append(a_spec_typesDB.A_SPEC_TYPESPointersEncoding.RELATION_GROUP_TYPE, int(relation_group_typeAssocEnd_DB.ID))
 		}
 
-		// commit pointer value a_spec_types.SPEC_OBJECT_TYPE translates to updating the a_spec_types.SPEC_OBJECT_TYPEID
-		a_spec_typesDB.SPEC_OBJECT_TYPEID.Valid = true // allow for a 0 value (nil association)
-		if a_spec_types.SPEC_OBJECT_TYPE != nil {
-			if SPEC_OBJECT_TYPEId, ok := backRepo.BackRepoSPEC_OBJECT_TYPE.Map_SPEC_OBJECT_TYPEPtr_SPEC_OBJECT_TYPEDBID[a_spec_types.SPEC_OBJECT_TYPE]; ok {
-				a_spec_typesDB.SPEC_OBJECT_TYPEID.Int64 = int64(SPEC_OBJECT_TYPEId)
-				a_spec_typesDB.SPEC_OBJECT_TYPEID.Valid = true
+		// 1. reset
+		a_spec_typesDB.A_SPEC_TYPESPointersEncoding.SPEC_OBJECT_TYPE = make([]int, 0)
+		// 2. encode
+		for _, spec_object_typeAssocEnd := range a_spec_types.SPEC_OBJECT_TYPE {
+			spec_object_typeAssocEnd_DB :=
+				backRepo.BackRepoSPEC_OBJECT_TYPE.GetSPEC_OBJECT_TYPEDBFromSPEC_OBJECT_TYPEPtr(spec_object_typeAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the spec_object_typeAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if spec_object_typeAssocEnd_DB == nil {
+				continue
 			}
-		} else {
-			a_spec_typesDB.SPEC_OBJECT_TYPEID.Int64 = 0
-			a_spec_typesDB.SPEC_OBJECT_TYPEID.Valid = true
+			
+			a_spec_typesDB.A_SPEC_TYPESPointersEncoding.SPEC_OBJECT_TYPE =
+				append(a_spec_typesDB.A_SPEC_TYPESPointersEncoding.SPEC_OBJECT_TYPE, int(spec_object_typeAssocEnd_DB.ID))
 		}
 
-		// commit pointer value a_spec_types.SPEC_RELATION_TYPE translates to updating the a_spec_types.SPEC_RELATION_TYPEID
-		a_spec_typesDB.SPEC_RELATION_TYPEID.Valid = true // allow for a 0 value (nil association)
-		if a_spec_types.SPEC_RELATION_TYPE != nil {
-			if SPEC_RELATION_TYPEId, ok := backRepo.BackRepoSPEC_RELATION_TYPE.Map_SPEC_RELATION_TYPEPtr_SPEC_RELATION_TYPEDBID[a_spec_types.SPEC_RELATION_TYPE]; ok {
-				a_spec_typesDB.SPEC_RELATION_TYPEID.Int64 = int64(SPEC_RELATION_TYPEId)
-				a_spec_typesDB.SPEC_RELATION_TYPEID.Valid = true
+		// 1. reset
+		a_spec_typesDB.A_SPEC_TYPESPointersEncoding.SPEC_RELATION_TYPE = make([]int, 0)
+		// 2. encode
+		for _, spec_relation_typeAssocEnd := range a_spec_types.SPEC_RELATION_TYPE {
+			spec_relation_typeAssocEnd_DB :=
+				backRepo.BackRepoSPEC_RELATION_TYPE.GetSPEC_RELATION_TYPEDBFromSPEC_RELATION_TYPEPtr(spec_relation_typeAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the spec_relation_typeAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if spec_relation_typeAssocEnd_DB == nil {
+				continue
 			}
-		} else {
-			a_spec_typesDB.SPEC_RELATION_TYPEID.Int64 = 0
-			a_spec_typesDB.SPEC_RELATION_TYPEID.Valid = true
+			
+			a_spec_typesDB.A_SPEC_TYPESPointersEncoding.SPEC_RELATION_TYPE =
+				append(a_spec_typesDB.A_SPEC_TYPESPointersEncoding.SPEC_RELATION_TYPE, int(spec_relation_typeAssocEnd_DB.ID))
 		}
 
-		// commit pointer value a_spec_types.SPECIFICATION_TYPE translates to updating the a_spec_types.SPECIFICATION_TYPEID
-		a_spec_typesDB.SPECIFICATION_TYPEID.Valid = true // allow for a 0 value (nil association)
-		if a_spec_types.SPECIFICATION_TYPE != nil {
-			if SPECIFICATION_TYPEId, ok := backRepo.BackRepoSPECIFICATION_TYPE.Map_SPECIFICATION_TYPEPtr_SPECIFICATION_TYPEDBID[a_spec_types.SPECIFICATION_TYPE]; ok {
-				a_spec_typesDB.SPECIFICATION_TYPEID.Int64 = int64(SPECIFICATION_TYPEId)
-				a_spec_typesDB.SPECIFICATION_TYPEID.Valid = true
+		// 1. reset
+		a_spec_typesDB.A_SPEC_TYPESPointersEncoding.SPECIFICATION_TYPE = make([]int, 0)
+		// 2. encode
+		for _, specification_typeAssocEnd := range a_spec_types.SPECIFICATION_TYPE {
+			specification_typeAssocEnd_DB :=
+				backRepo.BackRepoSPECIFICATION_TYPE.GetSPECIFICATION_TYPEDBFromSPECIFICATION_TYPEPtr(specification_typeAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the specification_typeAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if specification_typeAssocEnd_DB == nil {
+				continue
 			}
-		} else {
-			a_spec_typesDB.SPECIFICATION_TYPEID.Int64 = 0
-			a_spec_typesDB.SPECIFICATION_TYPEID.Valid = true
+			
+			a_spec_typesDB.A_SPEC_TYPESPointersEncoding.SPECIFICATION_TYPE =
+				append(a_spec_typesDB.A_SPEC_TYPESPointersEncoding.SPECIFICATION_TYPE, int(specification_typeAssocEnd_DB.ID))
 		}
 
 		query := backRepoA_SPEC_TYPES.db.Save(&a_spec_typesDB)
@@ -388,26 +408,42 @@ func (backRepoA_SPEC_TYPES *BackRepoA_SPEC_TYPESStruct) CheckoutPhaseTwoInstance
 func (a_spec_typesDB *A_SPEC_TYPESDB) DecodePointers(backRepo *BackRepoStruct, a_spec_types *models.A_SPEC_TYPES) {
 
 	// insertion point for checkout of pointer encoding
-	// RELATION_GROUP_TYPE field
-	a_spec_types.RELATION_GROUP_TYPE = nil
-	if a_spec_typesDB.RELATION_GROUP_TYPEID.Int64 != 0 {
-		a_spec_types.RELATION_GROUP_TYPE = backRepo.BackRepoRELATION_GROUP_TYPE.Map_RELATION_GROUP_TYPEDBID_RELATION_GROUP_TYPEPtr[uint(a_spec_typesDB.RELATION_GROUP_TYPEID.Int64)]
+	// This loop redeem a_spec_types.RELATION_GROUP_TYPE in the stage from the encode in the back repo
+	// It parses all RELATION_GROUP_TYPEDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	a_spec_types.RELATION_GROUP_TYPE = a_spec_types.RELATION_GROUP_TYPE[:0]
+	for _, _RELATION_GROUP_TYPEid := range a_spec_typesDB.A_SPEC_TYPESPointersEncoding.RELATION_GROUP_TYPE {
+		a_spec_types.RELATION_GROUP_TYPE = append(a_spec_types.RELATION_GROUP_TYPE, backRepo.BackRepoRELATION_GROUP_TYPE.Map_RELATION_GROUP_TYPEDBID_RELATION_GROUP_TYPEPtr[uint(_RELATION_GROUP_TYPEid)])
 	}
-	// SPEC_OBJECT_TYPE field
-	a_spec_types.SPEC_OBJECT_TYPE = nil
-	if a_spec_typesDB.SPEC_OBJECT_TYPEID.Int64 != 0 {
-		a_spec_types.SPEC_OBJECT_TYPE = backRepo.BackRepoSPEC_OBJECT_TYPE.Map_SPEC_OBJECT_TYPEDBID_SPEC_OBJECT_TYPEPtr[uint(a_spec_typesDB.SPEC_OBJECT_TYPEID.Int64)]
+
+	// This loop redeem a_spec_types.SPEC_OBJECT_TYPE in the stage from the encode in the back repo
+	// It parses all SPEC_OBJECT_TYPEDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	a_spec_types.SPEC_OBJECT_TYPE = a_spec_types.SPEC_OBJECT_TYPE[:0]
+	for _, _SPEC_OBJECT_TYPEid := range a_spec_typesDB.A_SPEC_TYPESPointersEncoding.SPEC_OBJECT_TYPE {
+		a_spec_types.SPEC_OBJECT_TYPE = append(a_spec_types.SPEC_OBJECT_TYPE, backRepo.BackRepoSPEC_OBJECT_TYPE.Map_SPEC_OBJECT_TYPEDBID_SPEC_OBJECT_TYPEPtr[uint(_SPEC_OBJECT_TYPEid)])
 	}
-	// SPEC_RELATION_TYPE field
-	a_spec_types.SPEC_RELATION_TYPE = nil
-	if a_spec_typesDB.SPEC_RELATION_TYPEID.Int64 != 0 {
-		a_spec_types.SPEC_RELATION_TYPE = backRepo.BackRepoSPEC_RELATION_TYPE.Map_SPEC_RELATION_TYPEDBID_SPEC_RELATION_TYPEPtr[uint(a_spec_typesDB.SPEC_RELATION_TYPEID.Int64)]
+
+	// This loop redeem a_spec_types.SPEC_RELATION_TYPE in the stage from the encode in the back repo
+	// It parses all SPEC_RELATION_TYPEDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	a_spec_types.SPEC_RELATION_TYPE = a_spec_types.SPEC_RELATION_TYPE[:0]
+	for _, _SPEC_RELATION_TYPEid := range a_spec_typesDB.A_SPEC_TYPESPointersEncoding.SPEC_RELATION_TYPE {
+		a_spec_types.SPEC_RELATION_TYPE = append(a_spec_types.SPEC_RELATION_TYPE, backRepo.BackRepoSPEC_RELATION_TYPE.Map_SPEC_RELATION_TYPEDBID_SPEC_RELATION_TYPEPtr[uint(_SPEC_RELATION_TYPEid)])
 	}
-	// SPECIFICATION_TYPE field
-	a_spec_types.SPECIFICATION_TYPE = nil
-	if a_spec_typesDB.SPECIFICATION_TYPEID.Int64 != 0 {
-		a_spec_types.SPECIFICATION_TYPE = backRepo.BackRepoSPECIFICATION_TYPE.Map_SPECIFICATION_TYPEDBID_SPECIFICATION_TYPEPtr[uint(a_spec_typesDB.SPECIFICATION_TYPEID.Int64)]
+
+	// This loop redeem a_spec_types.SPECIFICATION_TYPE in the stage from the encode in the back repo
+	// It parses all SPECIFICATION_TYPEDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	a_spec_types.SPECIFICATION_TYPE = a_spec_types.SPECIFICATION_TYPE[:0]
+	for _, _SPECIFICATION_TYPEid := range a_spec_typesDB.A_SPEC_TYPESPointersEncoding.SPECIFICATION_TYPE {
+		a_spec_types.SPECIFICATION_TYPE = append(a_spec_types.SPECIFICATION_TYPE, backRepo.BackRepoSPECIFICATION_TYPE.Map_SPECIFICATION_TYPEDBID_SPECIFICATION_TYPEPtr[uint(_SPECIFICATION_TYPEid)])
 	}
+
 	return
 }
 
@@ -636,30 +672,6 @@ func (backRepoA_SPEC_TYPES *BackRepoA_SPEC_TYPESStruct) RestorePhaseTwo() {
 		_ = a_spec_typesDB
 
 		// insertion point for reindexing pointers encoding
-		// reindexing RELATION_GROUP_TYPE field
-		if a_spec_typesDB.RELATION_GROUP_TYPEID.Int64 != 0 {
-			a_spec_typesDB.RELATION_GROUP_TYPEID.Int64 = int64(BackRepoRELATION_GROUP_TYPEid_atBckpTime_newID[uint(a_spec_typesDB.RELATION_GROUP_TYPEID.Int64)])
-			a_spec_typesDB.RELATION_GROUP_TYPEID.Valid = true
-		}
-
-		// reindexing SPEC_OBJECT_TYPE field
-		if a_spec_typesDB.SPEC_OBJECT_TYPEID.Int64 != 0 {
-			a_spec_typesDB.SPEC_OBJECT_TYPEID.Int64 = int64(BackRepoSPEC_OBJECT_TYPEid_atBckpTime_newID[uint(a_spec_typesDB.SPEC_OBJECT_TYPEID.Int64)])
-			a_spec_typesDB.SPEC_OBJECT_TYPEID.Valid = true
-		}
-
-		// reindexing SPEC_RELATION_TYPE field
-		if a_spec_typesDB.SPEC_RELATION_TYPEID.Int64 != 0 {
-			a_spec_typesDB.SPEC_RELATION_TYPEID.Int64 = int64(BackRepoSPEC_RELATION_TYPEid_atBckpTime_newID[uint(a_spec_typesDB.SPEC_RELATION_TYPEID.Int64)])
-			a_spec_typesDB.SPEC_RELATION_TYPEID.Valid = true
-		}
-
-		// reindexing SPECIFICATION_TYPE field
-		if a_spec_typesDB.SPECIFICATION_TYPEID.Int64 != 0 {
-			a_spec_typesDB.SPECIFICATION_TYPEID.Int64 = int64(BackRepoSPECIFICATION_TYPEid_atBckpTime_newID[uint(a_spec_typesDB.SPECIFICATION_TYPEID.Int64)])
-			a_spec_typesDB.SPECIFICATION_TYPEID.Valid = true
-		}
-
 		// update databse with new index encoding
 		query := backRepoA_SPEC_TYPES.db.Model(a_spec_typesDB).Updates(*a_spec_typesDB)
 		if query.Error != nil {

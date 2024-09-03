@@ -4413,11 +4413,11 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		map_A_ATTRIBUTE_VALUE_BOOLEAN_Identifiers[a_attribute_value_boolean] = id
 
 		// Initialisation of values
-		if a_attribute_value_boolean.ATTRIBUTE_VALUE_BOOLEAN != nil {
-			setPointerField = PointerFieldInitStatement
+		for _, _attribute_value_boolean := range a_attribute_value_boolean.ATTRIBUTE_VALUE_BOOLEAN {
+			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ATTRIBUTE_VALUE_BOOLEAN")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_VALUE_BOOLEAN_Identifiers[a_attribute_value_boolean.ATTRIBUTE_VALUE_BOOLEAN])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_VALUE_BOOLEAN_Identifiers[_attribute_value_boolean])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -4431,11 +4431,11 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		map_A_ATTRIBUTE_VALUE_DATE_Identifiers[a_attribute_value_date] = id
 
 		// Initialisation of values
-		if a_attribute_value_date.ATTRIBUTE_VALUE_DATE != nil {
-			setPointerField = PointerFieldInitStatement
+		for _, _attribute_value_date := range a_attribute_value_date.ATTRIBUTE_VALUE_DATE {
+			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ATTRIBUTE_VALUE_DATE")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_VALUE_DATE_Identifiers[a_attribute_value_date.ATTRIBUTE_VALUE_DATE])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_VALUE_DATE_Identifiers[_attribute_value_date])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -4449,11 +4449,11 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		map_A_ATTRIBUTE_VALUE_ENUMERATION_Identifiers[a_attribute_value_enumeration] = id
 
 		// Initialisation of values
-		if a_attribute_value_enumeration.ATTRIBUTE_VALUE_ENUMERATION != nil {
-			setPointerField = PointerFieldInitStatement
+		for _, _attribute_value_enumeration := range a_attribute_value_enumeration.ATTRIBUTE_VALUE_ENUMERATION {
+			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ATTRIBUTE_VALUE_ENUMERATION")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_VALUE_ENUMERATION_Identifiers[a_attribute_value_enumeration.ATTRIBUTE_VALUE_ENUMERATION])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_VALUE_ENUMERATION_Identifiers[_attribute_value_enumeration])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -4467,11 +4467,11 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		map_A_ATTRIBUTE_VALUE_INTEGER_Identifiers[a_attribute_value_integer] = id
 
 		// Initialisation of values
-		if a_attribute_value_integer.ATTRIBUTE_VALUE_INTEGER != nil {
-			setPointerField = PointerFieldInitStatement
+		for _, _attribute_value_integer := range a_attribute_value_integer.ATTRIBUTE_VALUE_INTEGER {
+			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ATTRIBUTE_VALUE_INTEGER")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_VALUE_INTEGER_Identifiers[a_attribute_value_integer.ATTRIBUTE_VALUE_INTEGER])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_VALUE_INTEGER_Identifiers[_attribute_value_integer])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -4485,11 +4485,11 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		map_A_ATTRIBUTE_VALUE_REAL_Identifiers[a_attribute_value_real] = id
 
 		// Initialisation of values
-		if a_attribute_value_real.ATTRIBUTE_VALUE_REAL != nil {
-			setPointerField = PointerFieldInitStatement
+		for _, _attribute_value_real := range a_attribute_value_real.ATTRIBUTE_VALUE_REAL {
+			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ATTRIBUTE_VALUE_REAL")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_VALUE_REAL_Identifiers[a_attribute_value_real.ATTRIBUTE_VALUE_REAL])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_VALUE_REAL_Identifiers[_attribute_value_real])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -4503,11 +4503,11 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		map_A_ATTRIBUTE_VALUE_STRING_Identifiers[a_attribute_value_string] = id
 
 		// Initialisation of values
-		if a_attribute_value_string.ATTRIBUTE_VALUE_STRING != nil {
-			setPointerField = PointerFieldInitStatement
+		for _, _attribute_value_string := range a_attribute_value_string.ATTRIBUTE_VALUE_STRING {
+			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ATTRIBUTE_VALUE_STRING")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_VALUE_STRING_Identifiers[a_attribute_value_string.ATTRIBUTE_VALUE_STRING])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_VALUE_STRING_Identifiers[_attribute_value_string])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -4521,11 +4521,11 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		map_A_ATTRIBUTE_VALUE_XHTML_Identifiers[a_attribute_value_xhtml] = id
 
 		// Initialisation of values
-		if a_attribute_value_xhtml.ATTRIBUTE_VALUE_XHTML != nil {
-			setPointerField = PointerFieldInitStatement
+		for _, _attribute_value_xhtml := range a_attribute_value_xhtml.ATTRIBUTE_VALUE_XHTML {
+			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ATTRIBUTE_VALUE_XHTML")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_VALUE_XHTML_Identifiers[a_attribute_value_xhtml.ATTRIBUTE_VALUE_XHTML])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_VALUE_XHTML_Identifiers[_attribute_value_xhtml])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -4539,59 +4539,59 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		map_A_ATTRIBUTE_VALUE_XHTML_1_Identifiers[a_attribute_value_xhtml_1] = id
 
 		// Initialisation of values
-		if a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_BOOLEAN != nil {
-			setPointerField = PointerFieldInitStatement
+		for _, _attribute_value_boolean := range a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_BOOLEAN {
+			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ATTRIBUTE_VALUE_BOOLEAN")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_VALUE_BOOLEAN_Identifiers[a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_BOOLEAN])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_VALUE_BOOLEAN_Identifiers[_attribute_value_boolean])
 			pointersInitializesStatements += setPointerField
 		}
 
-		if a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_DATE != nil {
-			setPointerField = PointerFieldInitStatement
+		for _, _attribute_value_date := range a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_DATE {
+			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ATTRIBUTE_VALUE_DATE")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_VALUE_DATE_Identifiers[a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_DATE])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_VALUE_DATE_Identifiers[_attribute_value_date])
 			pointersInitializesStatements += setPointerField
 		}
 
-		if a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_ENUMERATION != nil {
-			setPointerField = PointerFieldInitStatement
+		for _, _attribute_value_enumeration := range a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_ENUMERATION {
+			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ATTRIBUTE_VALUE_ENUMERATION")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_VALUE_ENUMERATION_Identifiers[a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_ENUMERATION])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_VALUE_ENUMERATION_Identifiers[_attribute_value_enumeration])
 			pointersInitializesStatements += setPointerField
 		}
 
-		if a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_INTEGER != nil {
-			setPointerField = PointerFieldInitStatement
+		for _, _attribute_value_integer := range a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_INTEGER {
+			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ATTRIBUTE_VALUE_INTEGER")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_VALUE_INTEGER_Identifiers[a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_INTEGER])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_VALUE_INTEGER_Identifiers[_attribute_value_integer])
 			pointersInitializesStatements += setPointerField
 		}
 
-		if a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_REAL != nil {
-			setPointerField = PointerFieldInitStatement
+		for _, _attribute_value_real := range a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_REAL {
+			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ATTRIBUTE_VALUE_REAL")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_VALUE_REAL_Identifiers[a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_REAL])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_VALUE_REAL_Identifiers[_attribute_value_real])
 			pointersInitializesStatements += setPointerField
 		}
 
-		if a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_STRING != nil {
-			setPointerField = PointerFieldInitStatement
+		for _, _attribute_value_string := range a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_STRING {
+			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ATTRIBUTE_VALUE_STRING")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_VALUE_STRING_Identifiers[a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_STRING])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_VALUE_STRING_Identifiers[_attribute_value_string])
 			pointersInitializesStatements += setPointerField
 		}
 
-		if a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_XHTML != nil {
-			setPointerField = PointerFieldInitStatement
+		for _, _attribute_value_xhtml := range a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_XHTML {
+			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ATTRIBUTE_VALUE_XHTML")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_VALUE_XHTML_Identifiers[a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_XHTML])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_VALUE_XHTML_Identifiers[_attribute_value_xhtml])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -4605,11 +4605,11 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		map_A_CHILDREN_Identifiers[a_children] = id
 
 		// Initialisation of values
-		if a_children.SPEC_HIERARCHY != nil {
-			setPointerField = PointerFieldInitStatement
+		for _, _spec_hierarchy := range a_children.SPEC_HIERARCHY {
+			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "SPEC_HIERARCHY")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_SPEC_HIERARCHY_Identifiers[a_children.SPEC_HIERARCHY])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_SPEC_HIERARCHY_Identifiers[_spec_hierarchy])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -4641,59 +4641,59 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		map_A_DATATYPES_Identifiers[a_datatypes] = id
 
 		// Initialisation of values
-		if a_datatypes.DATATYPE_DEFINITION_BOOLEAN != nil {
-			setPointerField = PointerFieldInitStatement
+		for _, _datatype_definition_boolean := range a_datatypes.DATATYPE_DEFINITION_BOOLEAN {
+			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "DATATYPE_DEFINITION_BOOLEAN")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_DATATYPE_DEFINITION_BOOLEAN_Identifiers[a_datatypes.DATATYPE_DEFINITION_BOOLEAN])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_DATATYPE_DEFINITION_BOOLEAN_Identifiers[_datatype_definition_boolean])
 			pointersInitializesStatements += setPointerField
 		}
 
-		if a_datatypes.DATATYPE_DEFINITION_DATE != nil {
-			setPointerField = PointerFieldInitStatement
+		for _, _datatype_definition_date := range a_datatypes.DATATYPE_DEFINITION_DATE {
+			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "DATATYPE_DEFINITION_DATE")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_DATATYPE_DEFINITION_DATE_Identifiers[a_datatypes.DATATYPE_DEFINITION_DATE])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_DATATYPE_DEFINITION_DATE_Identifiers[_datatype_definition_date])
 			pointersInitializesStatements += setPointerField
 		}
 
-		if a_datatypes.DATATYPE_DEFINITION_ENUMERATION != nil {
-			setPointerField = PointerFieldInitStatement
+		for _, _datatype_definition_enumeration := range a_datatypes.DATATYPE_DEFINITION_ENUMERATION {
+			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "DATATYPE_DEFINITION_ENUMERATION")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_DATATYPE_DEFINITION_ENUMERATION_Identifiers[a_datatypes.DATATYPE_DEFINITION_ENUMERATION])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_DATATYPE_DEFINITION_ENUMERATION_Identifiers[_datatype_definition_enumeration])
 			pointersInitializesStatements += setPointerField
 		}
 
-		if a_datatypes.DATATYPE_DEFINITION_INTEGER != nil {
-			setPointerField = PointerFieldInitStatement
+		for _, _datatype_definition_integer := range a_datatypes.DATATYPE_DEFINITION_INTEGER {
+			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "DATATYPE_DEFINITION_INTEGER")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_DATATYPE_DEFINITION_INTEGER_Identifiers[a_datatypes.DATATYPE_DEFINITION_INTEGER])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_DATATYPE_DEFINITION_INTEGER_Identifiers[_datatype_definition_integer])
 			pointersInitializesStatements += setPointerField
 		}
 
-		if a_datatypes.DATATYPE_DEFINITION_REAL != nil {
-			setPointerField = PointerFieldInitStatement
+		for _, _datatype_definition_real := range a_datatypes.DATATYPE_DEFINITION_REAL {
+			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "DATATYPE_DEFINITION_REAL")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_DATATYPE_DEFINITION_REAL_Identifiers[a_datatypes.DATATYPE_DEFINITION_REAL])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_DATATYPE_DEFINITION_REAL_Identifiers[_datatype_definition_real])
 			pointersInitializesStatements += setPointerField
 		}
 
-		if a_datatypes.DATATYPE_DEFINITION_STRING != nil {
-			setPointerField = PointerFieldInitStatement
+		for _, _datatype_definition_string := range a_datatypes.DATATYPE_DEFINITION_STRING {
+			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "DATATYPE_DEFINITION_STRING")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_DATATYPE_DEFINITION_STRING_Identifiers[a_datatypes.DATATYPE_DEFINITION_STRING])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_DATATYPE_DEFINITION_STRING_Identifiers[_datatype_definition_string])
 			pointersInitializesStatements += setPointerField
 		}
 
-		if a_datatypes.DATATYPE_DEFINITION_XHTML != nil {
-			setPointerField = PointerFieldInitStatement
+		for _, _datatype_definition_xhtml := range a_datatypes.DATATYPE_DEFINITION_XHTML {
+			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "DATATYPE_DEFINITION_XHTML")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_DATATYPE_DEFINITION_XHTML_Identifiers[a_datatypes.DATATYPE_DEFINITION_XHTML])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_DATATYPE_DEFINITION_XHTML_Identifiers[_datatype_definition_xhtml])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -4855,11 +4855,11 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		map_A_SPECIFICATIONS_Identifiers[a_specifications] = id
 
 		// Initialisation of values
-		if a_specifications.SPECIFICATION != nil {
-			setPointerField = PointerFieldInitStatement
+		for _, _specification := range a_specifications.SPECIFICATION {
+			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "SPECIFICATION")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_SPECIFICATION_Identifiers[a_specifications.SPECIFICATION])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_SPECIFICATION_Identifiers[_specification])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -4883,11 +4883,11 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		map_A_SPECIFIED_VALUES_Identifiers[a_specified_values] = id
 
 		// Initialisation of values
-		if a_specified_values.ENUM_VALUE != nil {
-			setPointerField = PointerFieldInitStatement
+		for _, _enum_value := range a_specified_values.ENUM_VALUE {
+			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ENUM_VALUE")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ENUM_VALUE_Identifiers[a_specified_values.ENUM_VALUE])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ENUM_VALUE_Identifiers[_enum_value])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -4901,59 +4901,59 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		map_A_SPEC_ATTRIBUTES_Identifiers[a_spec_attributes] = id
 
 		// Initialisation of values
-		if a_spec_attributes.ATTRIBUTE_DEFINITION_BOOLEAN != nil {
-			setPointerField = PointerFieldInitStatement
+		for _, _attribute_definition_boolean := range a_spec_attributes.ATTRIBUTE_DEFINITION_BOOLEAN {
+			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ATTRIBUTE_DEFINITION_BOOLEAN")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_DEFINITION_BOOLEAN_Identifiers[a_spec_attributes.ATTRIBUTE_DEFINITION_BOOLEAN])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_DEFINITION_BOOLEAN_Identifiers[_attribute_definition_boolean])
 			pointersInitializesStatements += setPointerField
 		}
 
-		if a_spec_attributes.ATTRIBUTE_DEFINITION_DATE != nil {
-			setPointerField = PointerFieldInitStatement
+		for _, _attribute_definition_date := range a_spec_attributes.ATTRIBUTE_DEFINITION_DATE {
+			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ATTRIBUTE_DEFINITION_DATE")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_DEFINITION_DATE_Identifiers[a_spec_attributes.ATTRIBUTE_DEFINITION_DATE])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_DEFINITION_DATE_Identifiers[_attribute_definition_date])
 			pointersInitializesStatements += setPointerField
 		}
 
-		if a_spec_attributes.ATTRIBUTE_DEFINITION_ENUMERATION != nil {
-			setPointerField = PointerFieldInitStatement
+		for _, _attribute_definition_enumeration := range a_spec_attributes.ATTRIBUTE_DEFINITION_ENUMERATION {
+			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ATTRIBUTE_DEFINITION_ENUMERATION")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_DEFINITION_ENUMERATION_Identifiers[a_spec_attributes.ATTRIBUTE_DEFINITION_ENUMERATION])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_DEFINITION_ENUMERATION_Identifiers[_attribute_definition_enumeration])
 			pointersInitializesStatements += setPointerField
 		}
 
-		if a_spec_attributes.ATTRIBUTE_DEFINITION_INTEGER != nil {
-			setPointerField = PointerFieldInitStatement
+		for _, _attribute_definition_integer := range a_spec_attributes.ATTRIBUTE_DEFINITION_INTEGER {
+			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ATTRIBUTE_DEFINITION_INTEGER")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_DEFINITION_INTEGER_Identifiers[a_spec_attributes.ATTRIBUTE_DEFINITION_INTEGER])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_DEFINITION_INTEGER_Identifiers[_attribute_definition_integer])
 			pointersInitializesStatements += setPointerField
 		}
 
-		if a_spec_attributes.ATTRIBUTE_DEFINITION_REAL != nil {
-			setPointerField = PointerFieldInitStatement
+		for _, _attribute_definition_real := range a_spec_attributes.ATTRIBUTE_DEFINITION_REAL {
+			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ATTRIBUTE_DEFINITION_REAL")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_DEFINITION_REAL_Identifiers[a_spec_attributes.ATTRIBUTE_DEFINITION_REAL])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_DEFINITION_REAL_Identifiers[_attribute_definition_real])
 			pointersInitializesStatements += setPointerField
 		}
 
-		if a_spec_attributes.ATTRIBUTE_DEFINITION_STRING != nil {
-			setPointerField = PointerFieldInitStatement
+		for _, _attribute_definition_string := range a_spec_attributes.ATTRIBUTE_DEFINITION_STRING {
+			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ATTRIBUTE_DEFINITION_STRING")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_DEFINITION_STRING_Identifiers[a_spec_attributes.ATTRIBUTE_DEFINITION_STRING])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_DEFINITION_STRING_Identifiers[_attribute_definition_string])
 			pointersInitializesStatements += setPointerField
 		}
 
-		if a_spec_attributes.ATTRIBUTE_DEFINITION_XHTML != nil {
-			setPointerField = PointerFieldInitStatement
+		for _, _attribute_definition_xhtml := range a_spec_attributes.ATTRIBUTE_DEFINITION_XHTML {
+			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "ATTRIBUTE_DEFINITION_XHTML")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_DEFINITION_XHTML_Identifiers[a_spec_attributes.ATTRIBUTE_DEFINITION_XHTML])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_ATTRIBUTE_DEFINITION_XHTML_Identifiers[_attribute_definition_xhtml])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -4967,11 +4967,11 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		map_A_SPEC_OBJECTS_Identifiers[a_spec_objects] = id
 
 		// Initialisation of values
-		if a_spec_objects.SPEC_OBJECT != nil {
-			setPointerField = PointerFieldInitStatement
+		for _, _spec_object := range a_spec_objects.SPEC_OBJECT {
+			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "SPEC_OBJECT")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_SPEC_OBJECT_Identifiers[a_spec_objects.SPEC_OBJECT])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_SPEC_OBJECT_Identifiers[_spec_object])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -4995,11 +4995,11 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		map_A_SPEC_RELATIONS_Identifiers[a_spec_relations] = id
 
 		// Initialisation of values
-		if a_spec_relations.SPEC_RELATION != nil {
-			setPointerField = PointerFieldInitStatement
+		for _, _spec_relation := range a_spec_relations.SPEC_RELATION {
+			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "SPEC_RELATION")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_SPEC_RELATION_Identifiers[a_spec_relations.SPEC_RELATION])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_SPEC_RELATION_Identifiers[_spec_relation])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -5013,11 +5013,11 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		map_A_SPEC_RELATION_GROUPS_Identifiers[a_spec_relation_groups] = id
 
 		// Initialisation of values
-		if a_spec_relation_groups.RELATION_GROUP != nil {
-			setPointerField = PointerFieldInitStatement
+		for _, _relation_group := range a_spec_relation_groups.RELATION_GROUP {
+			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "RELATION_GROUP")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_RELATION_GROUP_Identifiers[a_spec_relation_groups.RELATION_GROUP])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_RELATION_GROUP_Identifiers[_relation_group])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -5051,35 +5051,35 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		map_A_SPEC_TYPES_Identifiers[a_spec_types] = id
 
 		// Initialisation of values
-		if a_spec_types.RELATION_GROUP_TYPE != nil {
-			setPointerField = PointerFieldInitStatement
+		for _, _relation_group_type := range a_spec_types.RELATION_GROUP_TYPE {
+			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "RELATION_GROUP_TYPE")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_RELATION_GROUP_TYPE_Identifiers[a_spec_types.RELATION_GROUP_TYPE])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_RELATION_GROUP_TYPE_Identifiers[_relation_group_type])
 			pointersInitializesStatements += setPointerField
 		}
 
-		if a_spec_types.SPEC_OBJECT_TYPE != nil {
-			setPointerField = PointerFieldInitStatement
+		for _, _spec_object_type := range a_spec_types.SPEC_OBJECT_TYPE {
+			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "SPEC_OBJECT_TYPE")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_SPEC_OBJECT_TYPE_Identifiers[a_spec_types.SPEC_OBJECT_TYPE])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_SPEC_OBJECT_TYPE_Identifiers[_spec_object_type])
 			pointersInitializesStatements += setPointerField
 		}
 
-		if a_spec_types.SPEC_RELATION_TYPE != nil {
-			setPointerField = PointerFieldInitStatement
+		for _, _spec_relation_type := range a_spec_types.SPEC_RELATION_TYPE {
+			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "SPEC_RELATION_TYPE")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_SPEC_RELATION_TYPE_Identifiers[a_spec_types.SPEC_RELATION_TYPE])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_SPEC_RELATION_TYPE_Identifiers[_spec_relation_type])
 			pointersInitializesStatements += setPointerField
 		}
 
-		if a_spec_types.SPECIFICATION_TYPE != nil {
-			setPointerField = PointerFieldInitStatement
+		for _, _specification_type := range a_spec_types.SPECIFICATION_TYPE {
+			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "SPECIFICATION_TYPE")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_SPECIFICATION_TYPE_Identifiers[a_spec_types.SPECIFICATION_TYPE])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_SPECIFICATION_TYPE_Identifiers[_specification_type])
 			pointersInitializesStatements += setPointerField
 		}
 
@@ -5111,11 +5111,11 @@ func (stage *StageStruct) Marshall(file *os.File, modelsPackageName, packageName
 		map_A_TOOL_EXTENSIONS_Identifiers[a_tool_extensions] = id
 
 		// Initialisation of values
-		if a_tool_extensions.REQ_IF_TOOL_EXTENSION != nil {
-			setPointerField = PointerFieldInitStatement
+		for _, _req_if_tool_extension := range a_tool_extensions.REQ_IF_TOOL_EXTENSION {
+			setPointerField = SliceOfPointersFieldInitStatement
 			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
 			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "REQ_IF_TOOL_EXTENSION")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_REQ_IF_TOOL_EXTENSION_Identifiers[a_tool_extensions.REQ_IF_TOOL_EXTENSION])
+			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_REQ_IF_TOOL_EXTENSION_Identifiers[_req_if_tool_extension])
 			pointersInitializesStatements += setPointerField
 		}
 

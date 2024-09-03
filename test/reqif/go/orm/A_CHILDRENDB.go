@@ -47,9 +47,8 @@ type A_CHILDRENAPI struct {
 type A_CHILDRENPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
 
-	// field SPEC_HIERARCHY is a pointer to another Struct (optional or 0..1)
-	// This field is generated into another field to enable AS ONE association
-	SPEC_HIERARCHYID sql.NullInt64
+	// field SPEC_HIERARCHY is a slice of pointers to another Struct (optional or 0..1)
+	SPEC_HIERARCHY IntSlice `gorm:"type:TEXT"`
 }
 
 // A_CHILDRENDB describes a a_children in the database
@@ -215,16 +214,22 @@ func (backRepoA_CHILDREN *BackRepoA_CHILDRENStruct) CommitPhaseTwoInstance(backR
 		a_childrenDB.CopyBasicFieldsFromA_CHILDREN(a_children)
 
 		// insertion point for translating pointers encodings into actual pointers
-		// commit pointer value a_children.SPEC_HIERARCHY translates to updating the a_children.SPEC_HIERARCHYID
-		a_childrenDB.SPEC_HIERARCHYID.Valid = true // allow for a 0 value (nil association)
-		if a_children.SPEC_HIERARCHY != nil {
-			if SPEC_HIERARCHYId, ok := backRepo.BackRepoSPEC_HIERARCHY.Map_SPEC_HIERARCHYPtr_SPEC_HIERARCHYDBID[a_children.SPEC_HIERARCHY]; ok {
-				a_childrenDB.SPEC_HIERARCHYID.Int64 = int64(SPEC_HIERARCHYId)
-				a_childrenDB.SPEC_HIERARCHYID.Valid = true
+		// 1. reset
+		a_childrenDB.A_CHILDRENPointersEncoding.SPEC_HIERARCHY = make([]int, 0)
+		// 2. encode
+		for _, spec_hierarchyAssocEnd := range a_children.SPEC_HIERARCHY {
+			spec_hierarchyAssocEnd_DB :=
+				backRepo.BackRepoSPEC_HIERARCHY.GetSPEC_HIERARCHYDBFromSPEC_HIERARCHYPtr(spec_hierarchyAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the spec_hierarchyAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if spec_hierarchyAssocEnd_DB == nil {
+				continue
 			}
-		} else {
-			a_childrenDB.SPEC_HIERARCHYID.Int64 = 0
-			a_childrenDB.SPEC_HIERARCHYID.Valid = true
+			
+			a_childrenDB.A_CHILDRENPointersEncoding.SPEC_HIERARCHY =
+				append(a_childrenDB.A_CHILDRENPointersEncoding.SPEC_HIERARCHY, int(spec_hierarchyAssocEnd_DB.ID))
 		}
 
 		query := backRepoA_CHILDREN.db.Save(&a_childrenDB)
@@ -340,11 +345,15 @@ func (backRepoA_CHILDREN *BackRepoA_CHILDRENStruct) CheckoutPhaseTwoInstance(bac
 func (a_childrenDB *A_CHILDRENDB) DecodePointers(backRepo *BackRepoStruct, a_children *models.A_CHILDREN) {
 
 	// insertion point for checkout of pointer encoding
-	// SPEC_HIERARCHY field
-	a_children.SPEC_HIERARCHY = nil
-	if a_childrenDB.SPEC_HIERARCHYID.Int64 != 0 {
-		a_children.SPEC_HIERARCHY = backRepo.BackRepoSPEC_HIERARCHY.Map_SPEC_HIERARCHYDBID_SPEC_HIERARCHYPtr[uint(a_childrenDB.SPEC_HIERARCHYID.Int64)]
+	// This loop redeem a_children.SPEC_HIERARCHY in the stage from the encode in the back repo
+	// It parses all SPEC_HIERARCHYDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	a_children.SPEC_HIERARCHY = a_children.SPEC_HIERARCHY[:0]
+	for _, _SPEC_HIERARCHYid := range a_childrenDB.A_CHILDRENPointersEncoding.SPEC_HIERARCHY {
+		a_children.SPEC_HIERARCHY = append(a_children.SPEC_HIERARCHY, backRepo.BackRepoSPEC_HIERARCHY.Map_SPEC_HIERARCHYDBID_SPEC_HIERARCHYPtr[uint(_SPEC_HIERARCHYid)])
 	}
+
 	return
 }
 
@@ -573,12 +582,6 @@ func (backRepoA_CHILDREN *BackRepoA_CHILDRENStruct) RestorePhaseTwo() {
 		_ = a_childrenDB
 
 		// insertion point for reindexing pointers encoding
-		// reindexing SPEC_HIERARCHY field
-		if a_childrenDB.SPEC_HIERARCHYID.Int64 != 0 {
-			a_childrenDB.SPEC_HIERARCHYID.Int64 = int64(BackRepoSPEC_HIERARCHYid_atBckpTime_newID[uint(a_childrenDB.SPEC_HIERARCHYID.Int64)])
-			a_childrenDB.SPEC_HIERARCHYID.Valid = true
-		}
-
 		// update databse with new index encoding
 		query := backRepoA_CHILDREN.db.Model(a_childrenDB).Updates(*a_childrenDB)
 		if query.Error != nil {

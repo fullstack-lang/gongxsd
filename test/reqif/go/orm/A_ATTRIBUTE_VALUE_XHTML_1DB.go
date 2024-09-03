@@ -47,33 +47,26 @@ type A_ATTRIBUTE_VALUE_XHTML_1API struct {
 type A_ATTRIBUTE_VALUE_XHTML_1PointersEncoding struct {
 	// insertion for pointer fields encoding declaration
 
-	// field ATTRIBUTE_VALUE_BOOLEAN is a pointer to another Struct (optional or 0..1)
-	// This field is generated into another field to enable AS ONE association
-	ATTRIBUTE_VALUE_BOOLEANID sql.NullInt64
+	// field ATTRIBUTE_VALUE_BOOLEAN is a slice of pointers to another Struct (optional or 0..1)
+	ATTRIBUTE_VALUE_BOOLEAN IntSlice `gorm:"type:TEXT"`
 
-	// field ATTRIBUTE_VALUE_DATE is a pointer to another Struct (optional or 0..1)
-	// This field is generated into another field to enable AS ONE association
-	ATTRIBUTE_VALUE_DATEID sql.NullInt64
+	// field ATTRIBUTE_VALUE_DATE is a slice of pointers to another Struct (optional or 0..1)
+	ATTRIBUTE_VALUE_DATE IntSlice `gorm:"type:TEXT"`
 
-	// field ATTRIBUTE_VALUE_ENUMERATION is a pointer to another Struct (optional or 0..1)
-	// This field is generated into another field to enable AS ONE association
-	ATTRIBUTE_VALUE_ENUMERATIONID sql.NullInt64
+	// field ATTRIBUTE_VALUE_ENUMERATION is a slice of pointers to another Struct (optional or 0..1)
+	ATTRIBUTE_VALUE_ENUMERATION IntSlice `gorm:"type:TEXT"`
 
-	// field ATTRIBUTE_VALUE_INTEGER is a pointer to another Struct (optional or 0..1)
-	// This field is generated into another field to enable AS ONE association
-	ATTRIBUTE_VALUE_INTEGERID sql.NullInt64
+	// field ATTRIBUTE_VALUE_INTEGER is a slice of pointers to another Struct (optional or 0..1)
+	ATTRIBUTE_VALUE_INTEGER IntSlice `gorm:"type:TEXT"`
 
-	// field ATTRIBUTE_VALUE_REAL is a pointer to another Struct (optional or 0..1)
-	// This field is generated into another field to enable AS ONE association
-	ATTRIBUTE_VALUE_REALID sql.NullInt64
+	// field ATTRIBUTE_VALUE_REAL is a slice of pointers to another Struct (optional or 0..1)
+	ATTRIBUTE_VALUE_REAL IntSlice `gorm:"type:TEXT"`
 
-	// field ATTRIBUTE_VALUE_STRING is a pointer to another Struct (optional or 0..1)
-	// This field is generated into another field to enable AS ONE association
-	ATTRIBUTE_VALUE_STRINGID sql.NullInt64
+	// field ATTRIBUTE_VALUE_STRING is a slice of pointers to another Struct (optional or 0..1)
+	ATTRIBUTE_VALUE_STRING IntSlice `gorm:"type:TEXT"`
 
-	// field ATTRIBUTE_VALUE_XHTML is a pointer to another Struct (optional or 0..1)
-	// This field is generated into another field to enable AS ONE association
-	ATTRIBUTE_VALUE_XHTMLID sql.NullInt64
+	// field ATTRIBUTE_VALUE_XHTML is a slice of pointers to another Struct (optional or 0..1)
+	ATTRIBUTE_VALUE_XHTML IntSlice `gorm:"type:TEXT"`
 }
 
 // A_ATTRIBUTE_VALUE_XHTML_1DB describes a a_attribute_value_xhtml_1 in the database
@@ -239,88 +232,130 @@ func (backRepoA_ATTRIBUTE_VALUE_XHTML_1 *BackRepoA_ATTRIBUTE_VALUE_XHTML_1Struct
 		a_attribute_value_xhtml_1DB.CopyBasicFieldsFromA_ATTRIBUTE_VALUE_XHTML_1(a_attribute_value_xhtml_1)
 
 		// insertion point for translating pointers encodings into actual pointers
-		// commit pointer value a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_BOOLEAN translates to updating the a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_BOOLEANID
-		a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_BOOLEANID.Valid = true // allow for a 0 value (nil association)
-		if a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_BOOLEAN != nil {
-			if ATTRIBUTE_VALUE_BOOLEANId, ok := backRepo.BackRepoATTRIBUTE_VALUE_BOOLEAN.Map_ATTRIBUTE_VALUE_BOOLEANPtr_ATTRIBUTE_VALUE_BOOLEANDBID[a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_BOOLEAN]; ok {
-				a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_BOOLEANID.Int64 = int64(ATTRIBUTE_VALUE_BOOLEANId)
-				a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_BOOLEANID.Valid = true
+		// 1. reset
+		a_attribute_value_xhtml_1DB.A_ATTRIBUTE_VALUE_XHTML_1PointersEncoding.ATTRIBUTE_VALUE_BOOLEAN = make([]int, 0)
+		// 2. encode
+		for _, attribute_value_booleanAssocEnd := range a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_BOOLEAN {
+			attribute_value_booleanAssocEnd_DB :=
+				backRepo.BackRepoATTRIBUTE_VALUE_BOOLEAN.GetATTRIBUTE_VALUE_BOOLEANDBFromATTRIBUTE_VALUE_BOOLEANPtr(attribute_value_booleanAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the attribute_value_booleanAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if attribute_value_booleanAssocEnd_DB == nil {
+				continue
 			}
-		} else {
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_BOOLEANID.Int64 = 0
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_BOOLEANID.Valid = true
+			
+			a_attribute_value_xhtml_1DB.A_ATTRIBUTE_VALUE_XHTML_1PointersEncoding.ATTRIBUTE_VALUE_BOOLEAN =
+				append(a_attribute_value_xhtml_1DB.A_ATTRIBUTE_VALUE_XHTML_1PointersEncoding.ATTRIBUTE_VALUE_BOOLEAN, int(attribute_value_booleanAssocEnd_DB.ID))
 		}
 
-		// commit pointer value a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_DATE translates to updating the a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_DATEID
-		a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_DATEID.Valid = true // allow for a 0 value (nil association)
-		if a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_DATE != nil {
-			if ATTRIBUTE_VALUE_DATEId, ok := backRepo.BackRepoATTRIBUTE_VALUE_DATE.Map_ATTRIBUTE_VALUE_DATEPtr_ATTRIBUTE_VALUE_DATEDBID[a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_DATE]; ok {
-				a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_DATEID.Int64 = int64(ATTRIBUTE_VALUE_DATEId)
-				a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_DATEID.Valid = true
+		// 1. reset
+		a_attribute_value_xhtml_1DB.A_ATTRIBUTE_VALUE_XHTML_1PointersEncoding.ATTRIBUTE_VALUE_DATE = make([]int, 0)
+		// 2. encode
+		for _, attribute_value_dateAssocEnd := range a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_DATE {
+			attribute_value_dateAssocEnd_DB :=
+				backRepo.BackRepoATTRIBUTE_VALUE_DATE.GetATTRIBUTE_VALUE_DATEDBFromATTRIBUTE_VALUE_DATEPtr(attribute_value_dateAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the attribute_value_dateAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if attribute_value_dateAssocEnd_DB == nil {
+				continue
 			}
-		} else {
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_DATEID.Int64 = 0
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_DATEID.Valid = true
+			
+			a_attribute_value_xhtml_1DB.A_ATTRIBUTE_VALUE_XHTML_1PointersEncoding.ATTRIBUTE_VALUE_DATE =
+				append(a_attribute_value_xhtml_1DB.A_ATTRIBUTE_VALUE_XHTML_1PointersEncoding.ATTRIBUTE_VALUE_DATE, int(attribute_value_dateAssocEnd_DB.ID))
 		}
 
-		// commit pointer value a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_ENUMERATION translates to updating the a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_ENUMERATIONID
-		a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_ENUMERATIONID.Valid = true // allow for a 0 value (nil association)
-		if a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_ENUMERATION != nil {
-			if ATTRIBUTE_VALUE_ENUMERATIONId, ok := backRepo.BackRepoATTRIBUTE_VALUE_ENUMERATION.Map_ATTRIBUTE_VALUE_ENUMERATIONPtr_ATTRIBUTE_VALUE_ENUMERATIONDBID[a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_ENUMERATION]; ok {
-				a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_ENUMERATIONID.Int64 = int64(ATTRIBUTE_VALUE_ENUMERATIONId)
-				a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_ENUMERATIONID.Valid = true
+		// 1. reset
+		a_attribute_value_xhtml_1DB.A_ATTRIBUTE_VALUE_XHTML_1PointersEncoding.ATTRIBUTE_VALUE_ENUMERATION = make([]int, 0)
+		// 2. encode
+		for _, attribute_value_enumerationAssocEnd := range a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_ENUMERATION {
+			attribute_value_enumerationAssocEnd_DB :=
+				backRepo.BackRepoATTRIBUTE_VALUE_ENUMERATION.GetATTRIBUTE_VALUE_ENUMERATIONDBFromATTRIBUTE_VALUE_ENUMERATIONPtr(attribute_value_enumerationAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the attribute_value_enumerationAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if attribute_value_enumerationAssocEnd_DB == nil {
+				continue
 			}
-		} else {
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_ENUMERATIONID.Int64 = 0
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_ENUMERATIONID.Valid = true
+			
+			a_attribute_value_xhtml_1DB.A_ATTRIBUTE_VALUE_XHTML_1PointersEncoding.ATTRIBUTE_VALUE_ENUMERATION =
+				append(a_attribute_value_xhtml_1DB.A_ATTRIBUTE_VALUE_XHTML_1PointersEncoding.ATTRIBUTE_VALUE_ENUMERATION, int(attribute_value_enumerationAssocEnd_DB.ID))
 		}
 
-		// commit pointer value a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_INTEGER translates to updating the a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_INTEGERID
-		a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_INTEGERID.Valid = true // allow for a 0 value (nil association)
-		if a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_INTEGER != nil {
-			if ATTRIBUTE_VALUE_INTEGERId, ok := backRepo.BackRepoATTRIBUTE_VALUE_INTEGER.Map_ATTRIBUTE_VALUE_INTEGERPtr_ATTRIBUTE_VALUE_INTEGERDBID[a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_INTEGER]; ok {
-				a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_INTEGERID.Int64 = int64(ATTRIBUTE_VALUE_INTEGERId)
-				a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_INTEGERID.Valid = true
+		// 1. reset
+		a_attribute_value_xhtml_1DB.A_ATTRIBUTE_VALUE_XHTML_1PointersEncoding.ATTRIBUTE_VALUE_INTEGER = make([]int, 0)
+		// 2. encode
+		for _, attribute_value_integerAssocEnd := range a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_INTEGER {
+			attribute_value_integerAssocEnd_DB :=
+				backRepo.BackRepoATTRIBUTE_VALUE_INTEGER.GetATTRIBUTE_VALUE_INTEGERDBFromATTRIBUTE_VALUE_INTEGERPtr(attribute_value_integerAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the attribute_value_integerAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if attribute_value_integerAssocEnd_DB == nil {
+				continue
 			}
-		} else {
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_INTEGERID.Int64 = 0
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_INTEGERID.Valid = true
+			
+			a_attribute_value_xhtml_1DB.A_ATTRIBUTE_VALUE_XHTML_1PointersEncoding.ATTRIBUTE_VALUE_INTEGER =
+				append(a_attribute_value_xhtml_1DB.A_ATTRIBUTE_VALUE_XHTML_1PointersEncoding.ATTRIBUTE_VALUE_INTEGER, int(attribute_value_integerAssocEnd_DB.ID))
 		}
 
-		// commit pointer value a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_REAL translates to updating the a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_REALID
-		a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_REALID.Valid = true // allow for a 0 value (nil association)
-		if a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_REAL != nil {
-			if ATTRIBUTE_VALUE_REALId, ok := backRepo.BackRepoATTRIBUTE_VALUE_REAL.Map_ATTRIBUTE_VALUE_REALPtr_ATTRIBUTE_VALUE_REALDBID[a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_REAL]; ok {
-				a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_REALID.Int64 = int64(ATTRIBUTE_VALUE_REALId)
-				a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_REALID.Valid = true
+		// 1. reset
+		a_attribute_value_xhtml_1DB.A_ATTRIBUTE_VALUE_XHTML_1PointersEncoding.ATTRIBUTE_VALUE_REAL = make([]int, 0)
+		// 2. encode
+		for _, attribute_value_realAssocEnd := range a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_REAL {
+			attribute_value_realAssocEnd_DB :=
+				backRepo.BackRepoATTRIBUTE_VALUE_REAL.GetATTRIBUTE_VALUE_REALDBFromATTRIBUTE_VALUE_REALPtr(attribute_value_realAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the attribute_value_realAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if attribute_value_realAssocEnd_DB == nil {
+				continue
 			}
-		} else {
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_REALID.Int64 = 0
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_REALID.Valid = true
+			
+			a_attribute_value_xhtml_1DB.A_ATTRIBUTE_VALUE_XHTML_1PointersEncoding.ATTRIBUTE_VALUE_REAL =
+				append(a_attribute_value_xhtml_1DB.A_ATTRIBUTE_VALUE_XHTML_1PointersEncoding.ATTRIBUTE_VALUE_REAL, int(attribute_value_realAssocEnd_DB.ID))
 		}
 
-		// commit pointer value a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_STRING translates to updating the a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_STRINGID
-		a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_STRINGID.Valid = true // allow for a 0 value (nil association)
-		if a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_STRING != nil {
-			if ATTRIBUTE_VALUE_STRINGId, ok := backRepo.BackRepoATTRIBUTE_VALUE_STRING.Map_ATTRIBUTE_VALUE_STRINGPtr_ATTRIBUTE_VALUE_STRINGDBID[a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_STRING]; ok {
-				a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_STRINGID.Int64 = int64(ATTRIBUTE_VALUE_STRINGId)
-				a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_STRINGID.Valid = true
+		// 1. reset
+		a_attribute_value_xhtml_1DB.A_ATTRIBUTE_VALUE_XHTML_1PointersEncoding.ATTRIBUTE_VALUE_STRING = make([]int, 0)
+		// 2. encode
+		for _, attribute_value_stringAssocEnd := range a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_STRING {
+			attribute_value_stringAssocEnd_DB :=
+				backRepo.BackRepoATTRIBUTE_VALUE_STRING.GetATTRIBUTE_VALUE_STRINGDBFromATTRIBUTE_VALUE_STRINGPtr(attribute_value_stringAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the attribute_value_stringAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if attribute_value_stringAssocEnd_DB == nil {
+				continue
 			}
-		} else {
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_STRINGID.Int64 = 0
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_STRINGID.Valid = true
+			
+			a_attribute_value_xhtml_1DB.A_ATTRIBUTE_VALUE_XHTML_1PointersEncoding.ATTRIBUTE_VALUE_STRING =
+				append(a_attribute_value_xhtml_1DB.A_ATTRIBUTE_VALUE_XHTML_1PointersEncoding.ATTRIBUTE_VALUE_STRING, int(attribute_value_stringAssocEnd_DB.ID))
 		}
 
-		// commit pointer value a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_XHTML translates to updating the a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_XHTMLID
-		a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_XHTMLID.Valid = true // allow for a 0 value (nil association)
-		if a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_XHTML != nil {
-			if ATTRIBUTE_VALUE_XHTMLId, ok := backRepo.BackRepoATTRIBUTE_VALUE_XHTML.Map_ATTRIBUTE_VALUE_XHTMLPtr_ATTRIBUTE_VALUE_XHTMLDBID[a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_XHTML]; ok {
-				a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_XHTMLID.Int64 = int64(ATTRIBUTE_VALUE_XHTMLId)
-				a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_XHTMLID.Valid = true
+		// 1. reset
+		a_attribute_value_xhtml_1DB.A_ATTRIBUTE_VALUE_XHTML_1PointersEncoding.ATTRIBUTE_VALUE_XHTML = make([]int, 0)
+		// 2. encode
+		for _, attribute_value_xhtmlAssocEnd := range a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_XHTML {
+			attribute_value_xhtmlAssocEnd_DB :=
+				backRepo.BackRepoATTRIBUTE_VALUE_XHTML.GetATTRIBUTE_VALUE_XHTMLDBFromATTRIBUTE_VALUE_XHTMLPtr(attribute_value_xhtmlAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the attribute_value_xhtmlAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if attribute_value_xhtmlAssocEnd_DB == nil {
+				continue
 			}
-		} else {
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_XHTMLID.Int64 = 0
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_XHTMLID.Valid = true
+			
+			a_attribute_value_xhtml_1DB.A_ATTRIBUTE_VALUE_XHTML_1PointersEncoding.ATTRIBUTE_VALUE_XHTML =
+				append(a_attribute_value_xhtml_1DB.A_ATTRIBUTE_VALUE_XHTML_1PointersEncoding.ATTRIBUTE_VALUE_XHTML, int(attribute_value_xhtmlAssocEnd_DB.ID))
 		}
 
 		query := backRepoA_ATTRIBUTE_VALUE_XHTML_1.db.Save(&a_attribute_value_xhtml_1DB)
@@ -436,41 +471,69 @@ func (backRepoA_ATTRIBUTE_VALUE_XHTML_1 *BackRepoA_ATTRIBUTE_VALUE_XHTML_1Struct
 func (a_attribute_value_xhtml_1DB *A_ATTRIBUTE_VALUE_XHTML_1DB) DecodePointers(backRepo *BackRepoStruct, a_attribute_value_xhtml_1 *models.A_ATTRIBUTE_VALUE_XHTML_1) {
 
 	// insertion point for checkout of pointer encoding
-	// ATTRIBUTE_VALUE_BOOLEAN field
-	a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_BOOLEAN = nil
-	if a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_BOOLEANID.Int64 != 0 {
-		a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_BOOLEAN = backRepo.BackRepoATTRIBUTE_VALUE_BOOLEAN.Map_ATTRIBUTE_VALUE_BOOLEANDBID_ATTRIBUTE_VALUE_BOOLEANPtr[uint(a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_BOOLEANID.Int64)]
+	// This loop redeem a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_BOOLEAN in the stage from the encode in the back repo
+	// It parses all ATTRIBUTE_VALUE_BOOLEANDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_BOOLEAN = a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_BOOLEAN[:0]
+	for _, _ATTRIBUTE_VALUE_BOOLEANid := range a_attribute_value_xhtml_1DB.A_ATTRIBUTE_VALUE_XHTML_1PointersEncoding.ATTRIBUTE_VALUE_BOOLEAN {
+		a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_BOOLEAN = append(a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_BOOLEAN, backRepo.BackRepoATTRIBUTE_VALUE_BOOLEAN.Map_ATTRIBUTE_VALUE_BOOLEANDBID_ATTRIBUTE_VALUE_BOOLEANPtr[uint(_ATTRIBUTE_VALUE_BOOLEANid)])
 	}
-	// ATTRIBUTE_VALUE_DATE field
-	a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_DATE = nil
-	if a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_DATEID.Int64 != 0 {
-		a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_DATE = backRepo.BackRepoATTRIBUTE_VALUE_DATE.Map_ATTRIBUTE_VALUE_DATEDBID_ATTRIBUTE_VALUE_DATEPtr[uint(a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_DATEID.Int64)]
+
+	// This loop redeem a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_DATE in the stage from the encode in the back repo
+	// It parses all ATTRIBUTE_VALUE_DATEDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_DATE = a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_DATE[:0]
+	for _, _ATTRIBUTE_VALUE_DATEid := range a_attribute_value_xhtml_1DB.A_ATTRIBUTE_VALUE_XHTML_1PointersEncoding.ATTRIBUTE_VALUE_DATE {
+		a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_DATE = append(a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_DATE, backRepo.BackRepoATTRIBUTE_VALUE_DATE.Map_ATTRIBUTE_VALUE_DATEDBID_ATTRIBUTE_VALUE_DATEPtr[uint(_ATTRIBUTE_VALUE_DATEid)])
 	}
-	// ATTRIBUTE_VALUE_ENUMERATION field
-	a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_ENUMERATION = nil
-	if a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_ENUMERATIONID.Int64 != 0 {
-		a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_ENUMERATION = backRepo.BackRepoATTRIBUTE_VALUE_ENUMERATION.Map_ATTRIBUTE_VALUE_ENUMERATIONDBID_ATTRIBUTE_VALUE_ENUMERATIONPtr[uint(a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_ENUMERATIONID.Int64)]
+
+	// This loop redeem a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_ENUMERATION in the stage from the encode in the back repo
+	// It parses all ATTRIBUTE_VALUE_ENUMERATIONDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_ENUMERATION = a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_ENUMERATION[:0]
+	for _, _ATTRIBUTE_VALUE_ENUMERATIONid := range a_attribute_value_xhtml_1DB.A_ATTRIBUTE_VALUE_XHTML_1PointersEncoding.ATTRIBUTE_VALUE_ENUMERATION {
+		a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_ENUMERATION = append(a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_ENUMERATION, backRepo.BackRepoATTRIBUTE_VALUE_ENUMERATION.Map_ATTRIBUTE_VALUE_ENUMERATIONDBID_ATTRIBUTE_VALUE_ENUMERATIONPtr[uint(_ATTRIBUTE_VALUE_ENUMERATIONid)])
 	}
-	// ATTRIBUTE_VALUE_INTEGER field
-	a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_INTEGER = nil
-	if a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_INTEGERID.Int64 != 0 {
-		a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_INTEGER = backRepo.BackRepoATTRIBUTE_VALUE_INTEGER.Map_ATTRIBUTE_VALUE_INTEGERDBID_ATTRIBUTE_VALUE_INTEGERPtr[uint(a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_INTEGERID.Int64)]
+
+	// This loop redeem a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_INTEGER in the stage from the encode in the back repo
+	// It parses all ATTRIBUTE_VALUE_INTEGERDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_INTEGER = a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_INTEGER[:0]
+	for _, _ATTRIBUTE_VALUE_INTEGERid := range a_attribute_value_xhtml_1DB.A_ATTRIBUTE_VALUE_XHTML_1PointersEncoding.ATTRIBUTE_VALUE_INTEGER {
+		a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_INTEGER = append(a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_INTEGER, backRepo.BackRepoATTRIBUTE_VALUE_INTEGER.Map_ATTRIBUTE_VALUE_INTEGERDBID_ATTRIBUTE_VALUE_INTEGERPtr[uint(_ATTRIBUTE_VALUE_INTEGERid)])
 	}
-	// ATTRIBUTE_VALUE_REAL field
-	a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_REAL = nil
-	if a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_REALID.Int64 != 0 {
-		a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_REAL = backRepo.BackRepoATTRIBUTE_VALUE_REAL.Map_ATTRIBUTE_VALUE_REALDBID_ATTRIBUTE_VALUE_REALPtr[uint(a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_REALID.Int64)]
+
+	// This loop redeem a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_REAL in the stage from the encode in the back repo
+	// It parses all ATTRIBUTE_VALUE_REALDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_REAL = a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_REAL[:0]
+	for _, _ATTRIBUTE_VALUE_REALid := range a_attribute_value_xhtml_1DB.A_ATTRIBUTE_VALUE_XHTML_1PointersEncoding.ATTRIBUTE_VALUE_REAL {
+		a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_REAL = append(a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_REAL, backRepo.BackRepoATTRIBUTE_VALUE_REAL.Map_ATTRIBUTE_VALUE_REALDBID_ATTRIBUTE_VALUE_REALPtr[uint(_ATTRIBUTE_VALUE_REALid)])
 	}
-	// ATTRIBUTE_VALUE_STRING field
-	a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_STRING = nil
-	if a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_STRINGID.Int64 != 0 {
-		a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_STRING = backRepo.BackRepoATTRIBUTE_VALUE_STRING.Map_ATTRIBUTE_VALUE_STRINGDBID_ATTRIBUTE_VALUE_STRINGPtr[uint(a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_STRINGID.Int64)]
+
+	// This loop redeem a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_STRING in the stage from the encode in the back repo
+	// It parses all ATTRIBUTE_VALUE_STRINGDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_STRING = a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_STRING[:0]
+	for _, _ATTRIBUTE_VALUE_STRINGid := range a_attribute_value_xhtml_1DB.A_ATTRIBUTE_VALUE_XHTML_1PointersEncoding.ATTRIBUTE_VALUE_STRING {
+		a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_STRING = append(a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_STRING, backRepo.BackRepoATTRIBUTE_VALUE_STRING.Map_ATTRIBUTE_VALUE_STRINGDBID_ATTRIBUTE_VALUE_STRINGPtr[uint(_ATTRIBUTE_VALUE_STRINGid)])
 	}
-	// ATTRIBUTE_VALUE_XHTML field
-	a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_XHTML = nil
-	if a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_XHTMLID.Int64 != 0 {
-		a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_XHTML = backRepo.BackRepoATTRIBUTE_VALUE_XHTML.Map_ATTRIBUTE_VALUE_XHTMLDBID_ATTRIBUTE_VALUE_XHTMLPtr[uint(a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_XHTMLID.Int64)]
+
+	// This loop redeem a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_XHTML in the stage from the encode in the back repo
+	// It parses all ATTRIBUTE_VALUE_XHTMLDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_XHTML = a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_XHTML[:0]
+	for _, _ATTRIBUTE_VALUE_XHTMLid := range a_attribute_value_xhtml_1DB.A_ATTRIBUTE_VALUE_XHTML_1PointersEncoding.ATTRIBUTE_VALUE_XHTML {
+		a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_XHTML = append(a_attribute_value_xhtml_1.ATTRIBUTE_VALUE_XHTML, backRepo.BackRepoATTRIBUTE_VALUE_XHTML.Map_ATTRIBUTE_VALUE_XHTMLDBID_ATTRIBUTE_VALUE_XHTMLPtr[uint(_ATTRIBUTE_VALUE_XHTMLid)])
 	}
+
 	return
 }
 
@@ -699,48 +762,6 @@ func (backRepoA_ATTRIBUTE_VALUE_XHTML_1 *BackRepoA_ATTRIBUTE_VALUE_XHTML_1Struct
 		_ = a_attribute_value_xhtml_1DB
 
 		// insertion point for reindexing pointers encoding
-		// reindexing ATTRIBUTE_VALUE_BOOLEAN field
-		if a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_BOOLEANID.Int64 != 0 {
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_BOOLEANID.Int64 = int64(BackRepoATTRIBUTE_VALUE_BOOLEANid_atBckpTime_newID[uint(a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_BOOLEANID.Int64)])
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_BOOLEANID.Valid = true
-		}
-
-		// reindexing ATTRIBUTE_VALUE_DATE field
-		if a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_DATEID.Int64 != 0 {
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_DATEID.Int64 = int64(BackRepoATTRIBUTE_VALUE_DATEid_atBckpTime_newID[uint(a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_DATEID.Int64)])
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_DATEID.Valid = true
-		}
-
-		// reindexing ATTRIBUTE_VALUE_ENUMERATION field
-		if a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_ENUMERATIONID.Int64 != 0 {
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_ENUMERATIONID.Int64 = int64(BackRepoATTRIBUTE_VALUE_ENUMERATIONid_atBckpTime_newID[uint(a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_ENUMERATIONID.Int64)])
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_ENUMERATIONID.Valid = true
-		}
-
-		// reindexing ATTRIBUTE_VALUE_INTEGER field
-		if a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_INTEGERID.Int64 != 0 {
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_INTEGERID.Int64 = int64(BackRepoATTRIBUTE_VALUE_INTEGERid_atBckpTime_newID[uint(a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_INTEGERID.Int64)])
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_INTEGERID.Valid = true
-		}
-
-		// reindexing ATTRIBUTE_VALUE_REAL field
-		if a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_REALID.Int64 != 0 {
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_REALID.Int64 = int64(BackRepoATTRIBUTE_VALUE_REALid_atBckpTime_newID[uint(a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_REALID.Int64)])
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_REALID.Valid = true
-		}
-
-		// reindexing ATTRIBUTE_VALUE_STRING field
-		if a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_STRINGID.Int64 != 0 {
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_STRINGID.Int64 = int64(BackRepoATTRIBUTE_VALUE_STRINGid_atBckpTime_newID[uint(a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_STRINGID.Int64)])
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_STRINGID.Valid = true
-		}
-
-		// reindexing ATTRIBUTE_VALUE_XHTML field
-		if a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_XHTMLID.Int64 != 0 {
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_XHTMLID.Int64 = int64(BackRepoATTRIBUTE_VALUE_XHTMLid_atBckpTime_newID[uint(a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_XHTMLID.Int64)])
-			a_attribute_value_xhtml_1DB.ATTRIBUTE_VALUE_XHTMLID.Valid = true
-		}
-
 		// update databse with new index encoding
 		query := backRepoA_ATTRIBUTE_VALUE_XHTML_1.db.Model(a_attribute_value_xhtml_1DB).Updates(*a_attribute_value_xhtml_1DB)
 		if query.Error != nil {

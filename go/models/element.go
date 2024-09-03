@@ -65,5 +65,10 @@ func (e *Element) SetParentAndChildren(parent Particle) {
 	e.Parent = parent
 	if e.ComplexType != nil {
 		e.Children = append(e.Children, e.ComplexType)
+		e.ComplexType.SetParentAndChildren(e)
+	}
+	if e.SimpleType != nil {
+		e.Children = append(e.Children, e.ComplexType)
+		e.SimpleType.SetParentAndChildren(e)
 	}
 }

@@ -47,33 +47,26 @@ type A_SPEC_ATTRIBUTESAPI struct {
 type A_SPEC_ATTRIBUTESPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
 
-	// field ATTRIBUTE_DEFINITION_BOOLEAN is a pointer to another Struct (optional or 0..1)
-	// This field is generated into another field to enable AS ONE association
-	ATTRIBUTE_DEFINITION_BOOLEANID sql.NullInt64
+	// field ATTRIBUTE_DEFINITION_BOOLEAN is a slice of pointers to another Struct (optional or 0..1)
+	ATTRIBUTE_DEFINITION_BOOLEAN IntSlice `gorm:"type:TEXT"`
 
-	// field ATTRIBUTE_DEFINITION_DATE is a pointer to another Struct (optional or 0..1)
-	// This field is generated into another field to enable AS ONE association
-	ATTRIBUTE_DEFINITION_DATEID sql.NullInt64
+	// field ATTRIBUTE_DEFINITION_DATE is a slice of pointers to another Struct (optional or 0..1)
+	ATTRIBUTE_DEFINITION_DATE IntSlice `gorm:"type:TEXT"`
 
-	// field ATTRIBUTE_DEFINITION_ENUMERATION is a pointer to another Struct (optional or 0..1)
-	// This field is generated into another field to enable AS ONE association
-	ATTRIBUTE_DEFINITION_ENUMERATIONID sql.NullInt64
+	// field ATTRIBUTE_DEFINITION_ENUMERATION is a slice of pointers to another Struct (optional or 0..1)
+	ATTRIBUTE_DEFINITION_ENUMERATION IntSlice `gorm:"type:TEXT"`
 
-	// field ATTRIBUTE_DEFINITION_INTEGER is a pointer to another Struct (optional or 0..1)
-	// This field is generated into another field to enable AS ONE association
-	ATTRIBUTE_DEFINITION_INTEGERID sql.NullInt64
+	// field ATTRIBUTE_DEFINITION_INTEGER is a slice of pointers to another Struct (optional or 0..1)
+	ATTRIBUTE_DEFINITION_INTEGER IntSlice `gorm:"type:TEXT"`
 
-	// field ATTRIBUTE_DEFINITION_REAL is a pointer to another Struct (optional or 0..1)
-	// This field is generated into another field to enable AS ONE association
-	ATTRIBUTE_DEFINITION_REALID sql.NullInt64
+	// field ATTRIBUTE_DEFINITION_REAL is a slice of pointers to another Struct (optional or 0..1)
+	ATTRIBUTE_DEFINITION_REAL IntSlice `gorm:"type:TEXT"`
 
-	// field ATTRIBUTE_DEFINITION_STRING is a pointer to another Struct (optional or 0..1)
-	// This field is generated into another field to enable AS ONE association
-	ATTRIBUTE_DEFINITION_STRINGID sql.NullInt64
+	// field ATTRIBUTE_DEFINITION_STRING is a slice of pointers to another Struct (optional or 0..1)
+	ATTRIBUTE_DEFINITION_STRING IntSlice `gorm:"type:TEXT"`
 
-	// field ATTRIBUTE_DEFINITION_XHTML is a pointer to another Struct (optional or 0..1)
-	// This field is generated into another field to enable AS ONE association
-	ATTRIBUTE_DEFINITION_XHTMLID sql.NullInt64
+	// field ATTRIBUTE_DEFINITION_XHTML is a slice of pointers to another Struct (optional or 0..1)
+	ATTRIBUTE_DEFINITION_XHTML IntSlice `gorm:"type:TEXT"`
 }
 
 // A_SPEC_ATTRIBUTESDB describes a a_spec_attributes in the database
@@ -239,88 +232,130 @@ func (backRepoA_SPEC_ATTRIBUTES *BackRepoA_SPEC_ATTRIBUTESStruct) CommitPhaseTwo
 		a_spec_attributesDB.CopyBasicFieldsFromA_SPEC_ATTRIBUTES(a_spec_attributes)
 
 		// insertion point for translating pointers encodings into actual pointers
-		// commit pointer value a_spec_attributes.ATTRIBUTE_DEFINITION_BOOLEAN translates to updating the a_spec_attributes.ATTRIBUTE_DEFINITION_BOOLEANID
-		a_spec_attributesDB.ATTRIBUTE_DEFINITION_BOOLEANID.Valid = true // allow for a 0 value (nil association)
-		if a_spec_attributes.ATTRIBUTE_DEFINITION_BOOLEAN != nil {
-			if ATTRIBUTE_DEFINITION_BOOLEANId, ok := backRepo.BackRepoATTRIBUTE_DEFINITION_BOOLEAN.Map_ATTRIBUTE_DEFINITION_BOOLEANPtr_ATTRIBUTE_DEFINITION_BOOLEANDBID[a_spec_attributes.ATTRIBUTE_DEFINITION_BOOLEAN]; ok {
-				a_spec_attributesDB.ATTRIBUTE_DEFINITION_BOOLEANID.Int64 = int64(ATTRIBUTE_DEFINITION_BOOLEANId)
-				a_spec_attributesDB.ATTRIBUTE_DEFINITION_BOOLEANID.Valid = true
+		// 1. reset
+		a_spec_attributesDB.A_SPEC_ATTRIBUTESPointersEncoding.ATTRIBUTE_DEFINITION_BOOLEAN = make([]int, 0)
+		// 2. encode
+		for _, attribute_definition_booleanAssocEnd := range a_spec_attributes.ATTRIBUTE_DEFINITION_BOOLEAN {
+			attribute_definition_booleanAssocEnd_DB :=
+				backRepo.BackRepoATTRIBUTE_DEFINITION_BOOLEAN.GetATTRIBUTE_DEFINITION_BOOLEANDBFromATTRIBUTE_DEFINITION_BOOLEANPtr(attribute_definition_booleanAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the attribute_definition_booleanAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if attribute_definition_booleanAssocEnd_DB == nil {
+				continue
 			}
-		} else {
-			a_spec_attributesDB.ATTRIBUTE_DEFINITION_BOOLEANID.Int64 = 0
-			a_spec_attributesDB.ATTRIBUTE_DEFINITION_BOOLEANID.Valid = true
+			
+			a_spec_attributesDB.A_SPEC_ATTRIBUTESPointersEncoding.ATTRIBUTE_DEFINITION_BOOLEAN =
+				append(a_spec_attributesDB.A_SPEC_ATTRIBUTESPointersEncoding.ATTRIBUTE_DEFINITION_BOOLEAN, int(attribute_definition_booleanAssocEnd_DB.ID))
 		}
 
-		// commit pointer value a_spec_attributes.ATTRIBUTE_DEFINITION_DATE translates to updating the a_spec_attributes.ATTRIBUTE_DEFINITION_DATEID
-		a_spec_attributesDB.ATTRIBUTE_DEFINITION_DATEID.Valid = true // allow for a 0 value (nil association)
-		if a_spec_attributes.ATTRIBUTE_DEFINITION_DATE != nil {
-			if ATTRIBUTE_DEFINITION_DATEId, ok := backRepo.BackRepoATTRIBUTE_DEFINITION_DATE.Map_ATTRIBUTE_DEFINITION_DATEPtr_ATTRIBUTE_DEFINITION_DATEDBID[a_spec_attributes.ATTRIBUTE_DEFINITION_DATE]; ok {
-				a_spec_attributesDB.ATTRIBUTE_DEFINITION_DATEID.Int64 = int64(ATTRIBUTE_DEFINITION_DATEId)
-				a_spec_attributesDB.ATTRIBUTE_DEFINITION_DATEID.Valid = true
+		// 1. reset
+		a_spec_attributesDB.A_SPEC_ATTRIBUTESPointersEncoding.ATTRIBUTE_DEFINITION_DATE = make([]int, 0)
+		// 2. encode
+		for _, attribute_definition_dateAssocEnd := range a_spec_attributes.ATTRIBUTE_DEFINITION_DATE {
+			attribute_definition_dateAssocEnd_DB :=
+				backRepo.BackRepoATTRIBUTE_DEFINITION_DATE.GetATTRIBUTE_DEFINITION_DATEDBFromATTRIBUTE_DEFINITION_DATEPtr(attribute_definition_dateAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the attribute_definition_dateAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if attribute_definition_dateAssocEnd_DB == nil {
+				continue
 			}
-		} else {
-			a_spec_attributesDB.ATTRIBUTE_DEFINITION_DATEID.Int64 = 0
-			a_spec_attributesDB.ATTRIBUTE_DEFINITION_DATEID.Valid = true
+			
+			a_spec_attributesDB.A_SPEC_ATTRIBUTESPointersEncoding.ATTRIBUTE_DEFINITION_DATE =
+				append(a_spec_attributesDB.A_SPEC_ATTRIBUTESPointersEncoding.ATTRIBUTE_DEFINITION_DATE, int(attribute_definition_dateAssocEnd_DB.ID))
 		}
 
-		// commit pointer value a_spec_attributes.ATTRIBUTE_DEFINITION_ENUMERATION translates to updating the a_spec_attributes.ATTRIBUTE_DEFINITION_ENUMERATIONID
-		a_spec_attributesDB.ATTRIBUTE_DEFINITION_ENUMERATIONID.Valid = true // allow for a 0 value (nil association)
-		if a_spec_attributes.ATTRIBUTE_DEFINITION_ENUMERATION != nil {
-			if ATTRIBUTE_DEFINITION_ENUMERATIONId, ok := backRepo.BackRepoATTRIBUTE_DEFINITION_ENUMERATION.Map_ATTRIBUTE_DEFINITION_ENUMERATIONPtr_ATTRIBUTE_DEFINITION_ENUMERATIONDBID[a_spec_attributes.ATTRIBUTE_DEFINITION_ENUMERATION]; ok {
-				a_spec_attributesDB.ATTRIBUTE_DEFINITION_ENUMERATIONID.Int64 = int64(ATTRIBUTE_DEFINITION_ENUMERATIONId)
-				a_spec_attributesDB.ATTRIBUTE_DEFINITION_ENUMERATIONID.Valid = true
+		// 1. reset
+		a_spec_attributesDB.A_SPEC_ATTRIBUTESPointersEncoding.ATTRIBUTE_DEFINITION_ENUMERATION = make([]int, 0)
+		// 2. encode
+		for _, attribute_definition_enumerationAssocEnd := range a_spec_attributes.ATTRIBUTE_DEFINITION_ENUMERATION {
+			attribute_definition_enumerationAssocEnd_DB :=
+				backRepo.BackRepoATTRIBUTE_DEFINITION_ENUMERATION.GetATTRIBUTE_DEFINITION_ENUMERATIONDBFromATTRIBUTE_DEFINITION_ENUMERATIONPtr(attribute_definition_enumerationAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the attribute_definition_enumerationAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if attribute_definition_enumerationAssocEnd_DB == nil {
+				continue
 			}
-		} else {
-			a_spec_attributesDB.ATTRIBUTE_DEFINITION_ENUMERATIONID.Int64 = 0
-			a_spec_attributesDB.ATTRIBUTE_DEFINITION_ENUMERATIONID.Valid = true
+			
+			a_spec_attributesDB.A_SPEC_ATTRIBUTESPointersEncoding.ATTRIBUTE_DEFINITION_ENUMERATION =
+				append(a_spec_attributesDB.A_SPEC_ATTRIBUTESPointersEncoding.ATTRIBUTE_DEFINITION_ENUMERATION, int(attribute_definition_enumerationAssocEnd_DB.ID))
 		}
 
-		// commit pointer value a_spec_attributes.ATTRIBUTE_DEFINITION_INTEGER translates to updating the a_spec_attributes.ATTRIBUTE_DEFINITION_INTEGERID
-		a_spec_attributesDB.ATTRIBUTE_DEFINITION_INTEGERID.Valid = true // allow for a 0 value (nil association)
-		if a_spec_attributes.ATTRIBUTE_DEFINITION_INTEGER != nil {
-			if ATTRIBUTE_DEFINITION_INTEGERId, ok := backRepo.BackRepoATTRIBUTE_DEFINITION_INTEGER.Map_ATTRIBUTE_DEFINITION_INTEGERPtr_ATTRIBUTE_DEFINITION_INTEGERDBID[a_spec_attributes.ATTRIBUTE_DEFINITION_INTEGER]; ok {
-				a_spec_attributesDB.ATTRIBUTE_DEFINITION_INTEGERID.Int64 = int64(ATTRIBUTE_DEFINITION_INTEGERId)
-				a_spec_attributesDB.ATTRIBUTE_DEFINITION_INTEGERID.Valid = true
+		// 1. reset
+		a_spec_attributesDB.A_SPEC_ATTRIBUTESPointersEncoding.ATTRIBUTE_DEFINITION_INTEGER = make([]int, 0)
+		// 2. encode
+		for _, attribute_definition_integerAssocEnd := range a_spec_attributes.ATTRIBUTE_DEFINITION_INTEGER {
+			attribute_definition_integerAssocEnd_DB :=
+				backRepo.BackRepoATTRIBUTE_DEFINITION_INTEGER.GetATTRIBUTE_DEFINITION_INTEGERDBFromATTRIBUTE_DEFINITION_INTEGERPtr(attribute_definition_integerAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the attribute_definition_integerAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if attribute_definition_integerAssocEnd_DB == nil {
+				continue
 			}
-		} else {
-			a_spec_attributesDB.ATTRIBUTE_DEFINITION_INTEGERID.Int64 = 0
-			a_spec_attributesDB.ATTRIBUTE_DEFINITION_INTEGERID.Valid = true
+			
+			a_spec_attributesDB.A_SPEC_ATTRIBUTESPointersEncoding.ATTRIBUTE_DEFINITION_INTEGER =
+				append(a_spec_attributesDB.A_SPEC_ATTRIBUTESPointersEncoding.ATTRIBUTE_DEFINITION_INTEGER, int(attribute_definition_integerAssocEnd_DB.ID))
 		}
 
-		// commit pointer value a_spec_attributes.ATTRIBUTE_DEFINITION_REAL translates to updating the a_spec_attributes.ATTRIBUTE_DEFINITION_REALID
-		a_spec_attributesDB.ATTRIBUTE_DEFINITION_REALID.Valid = true // allow for a 0 value (nil association)
-		if a_spec_attributes.ATTRIBUTE_DEFINITION_REAL != nil {
-			if ATTRIBUTE_DEFINITION_REALId, ok := backRepo.BackRepoATTRIBUTE_DEFINITION_REAL.Map_ATTRIBUTE_DEFINITION_REALPtr_ATTRIBUTE_DEFINITION_REALDBID[a_spec_attributes.ATTRIBUTE_DEFINITION_REAL]; ok {
-				a_spec_attributesDB.ATTRIBUTE_DEFINITION_REALID.Int64 = int64(ATTRIBUTE_DEFINITION_REALId)
-				a_spec_attributesDB.ATTRIBUTE_DEFINITION_REALID.Valid = true
+		// 1. reset
+		a_spec_attributesDB.A_SPEC_ATTRIBUTESPointersEncoding.ATTRIBUTE_DEFINITION_REAL = make([]int, 0)
+		// 2. encode
+		for _, attribute_definition_realAssocEnd := range a_spec_attributes.ATTRIBUTE_DEFINITION_REAL {
+			attribute_definition_realAssocEnd_DB :=
+				backRepo.BackRepoATTRIBUTE_DEFINITION_REAL.GetATTRIBUTE_DEFINITION_REALDBFromATTRIBUTE_DEFINITION_REALPtr(attribute_definition_realAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the attribute_definition_realAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if attribute_definition_realAssocEnd_DB == nil {
+				continue
 			}
-		} else {
-			a_spec_attributesDB.ATTRIBUTE_DEFINITION_REALID.Int64 = 0
-			a_spec_attributesDB.ATTRIBUTE_DEFINITION_REALID.Valid = true
+			
+			a_spec_attributesDB.A_SPEC_ATTRIBUTESPointersEncoding.ATTRIBUTE_DEFINITION_REAL =
+				append(a_spec_attributesDB.A_SPEC_ATTRIBUTESPointersEncoding.ATTRIBUTE_DEFINITION_REAL, int(attribute_definition_realAssocEnd_DB.ID))
 		}
 
-		// commit pointer value a_spec_attributes.ATTRIBUTE_DEFINITION_STRING translates to updating the a_spec_attributes.ATTRIBUTE_DEFINITION_STRINGID
-		a_spec_attributesDB.ATTRIBUTE_DEFINITION_STRINGID.Valid = true // allow for a 0 value (nil association)
-		if a_spec_attributes.ATTRIBUTE_DEFINITION_STRING != nil {
-			if ATTRIBUTE_DEFINITION_STRINGId, ok := backRepo.BackRepoATTRIBUTE_DEFINITION_STRING.Map_ATTRIBUTE_DEFINITION_STRINGPtr_ATTRIBUTE_DEFINITION_STRINGDBID[a_spec_attributes.ATTRIBUTE_DEFINITION_STRING]; ok {
-				a_spec_attributesDB.ATTRIBUTE_DEFINITION_STRINGID.Int64 = int64(ATTRIBUTE_DEFINITION_STRINGId)
-				a_spec_attributesDB.ATTRIBUTE_DEFINITION_STRINGID.Valid = true
+		// 1. reset
+		a_spec_attributesDB.A_SPEC_ATTRIBUTESPointersEncoding.ATTRIBUTE_DEFINITION_STRING = make([]int, 0)
+		// 2. encode
+		for _, attribute_definition_stringAssocEnd := range a_spec_attributes.ATTRIBUTE_DEFINITION_STRING {
+			attribute_definition_stringAssocEnd_DB :=
+				backRepo.BackRepoATTRIBUTE_DEFINITION_STRING.GetATTRIBUTE_DEFINITION_STRINGDBFromATTRIBUTE_DEFINITION_STRINGPtr(attribute_definition_stringAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the attribute_definition_stringAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if attribute_definition_stringAssocEnd_DB == nil {
+				continue
 			}
-		} else {
-			a_spec_attributesDB.ATTRIBUTE_DEFINITION_STRINGID.Int64 = 0
-			a_spec_attributesDB.ATTRIBUTE_DEFINITION_STRINGID.Valid = true
+			
+			a_spec_attributesDB.A_SPEC_ATTRIBUTESPointersEncoding.ATTRIBUTE_DEFINITION_STRING =
+				append(a_spec_attributesDB.A_SPEC_ATTRIBUTESPointersEncoding.ATTRIBUTE_DEFINITION_STRING, int(attribute_definition_stringAssocEnd_DB.ID))
 		}
 
-		// commit pointer value a_spec_attributes.ATTRIBUTE_DEFINITION_XHTML translates to updating the a_spec_attributes.ATTRIBUTE_DEFINITION_XHTMLID
-		a_spec_attributesDB.ATTRIBUTE_DEFINITION_XHTMLID.Valid = true // allow for a 0 value (nil association)
-		if a_spec_attributes.ATTRIBUTE_DEFINITION_XHTML != nil {
-			if ATTRIBUTE_DEFINITION_XHTMLId, ok := backRepo.BackRepoATTRIBUTE_DEFINITION_XHTML.Map_ATTRIBUTE_DEFINITION_XHTMLPtr_ATTRIBUTE_DEFINITION_XHTMLDBID[a_spec_attributes.ATTRIBUTE_DEFINITION_XHTML]; ok {
-				a_spec_attributesDB.ATTRIBUTE_DEFINITION_XHTMLID.Int64 = int64(ATTRIBUTE_DEFINITION_XHTMLId)
-				a_spec_attributesDB.ATTRIBUTE_DEFINITION_XHTMLID.Valid = true
+		// 1. reset
+		a_spec_attributesDB.A_SPEC_ATTRIBUTESPointersEncoding.ATTRIBUTE_DEFINITION_XHTML = make([]int, 0)
+		// 2. encode
+		for _, attribute_definition_xhtmlAssocEnd := range a_spec_attributes.ATTRIBUTE_DEFINITION_XHTML {
+			attribute_definition_xhtmlAssocEnd_DB :=
+				backRepo.BackRepoATTRIBUTE_DEFINITION_XHTML.GetATTRIBUTE_DEFINITION_XHTMLDBFromATTRIBUTE_DEFINITION_XHTMLPtr(attribute_definition_xhtmlAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the attribute_definition_xhtmlAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if attribute_definition_xhtmlAssocEnd_DB == nil {
+				continue
 			}
-		} else {
-			a_spec_attributesDB.ATTRIBUTE_DEFINITION_XHTMLID.Int64 = 0
-			a_spec_attributesDB.ATTRIBUTE_DEFINITION_XHTMLID.Valid = true
+			
+			a_spec_attributesDB.A_SPEC_ATTRIBUTESPointersEncoding.ATTRIBUTE_DEFINITION_XHTML =
+				append(a_spec_attributesDB.A_SPEC_ATTRIBUTESPointersEncoding.ATTRIBUTE_DEFINITION_XHTML, int(attribute_definition_xhtmlAssocEnd_DB.ID))
 		}
 
 		query := backRepoA_SPEC_ATTRIBUTES.db.Save(&a_spec_attributesDB)
@@ -436,41 +471,69 @@ func (backRepoA_SPEC_ATTRIBUTES *BackRepoA_SPEC_ATTRIBUTESStruct) CheckoutPhaseT
 func (a_spec_attributesDB *A_SPEC_ATTRIBUTESDB) DecodePointers(backRepo *BackRepoStruct, a_spec_attributes *models.A_SPEC_ATTRIBUTES) {
 
 	// insertion point for checkout of pointer encoding
-	// ATTRIBUTE_DEFINITION_BOOLEAN field
-	a_spec_attributes.ATTRIBUTE_DEFINITION_BOOLEAN = nil
-	if a_spec_attributesDB.ATTRIBUTE_DEFINITION_BOOLEANID.Int64 != 0 {
-		a_spec_attributes.ATTRIBUTE_DEFINITION_BOOLEAN = backRepo.BackRepoATTRIBUTE_DEFINITION_BOOLEAN.Map_ATTRIBUTE_DEFINITION_BOOLEANDBID_ATTRIBUTE_DEFINITION_BOOLEANPtr[uint(a_spec_attributesDB.ATTRIBUTE_DEFINITION_BOOLEANID.Int64)]
+	// This loop redeem a_spec_attributes.ATTRIBUTE_DEFINITION_BOOLEAN in the stage from the encode in the back repo
+	// It parses all ATTRIBUTE_DEFINITION_BOOLEANDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	a_spec_attributes.ATTRIBUTE_DEFINITION_BOOLEAN = a_spec_attributes.ATTRIBUTE_DEFINITION_BOOLEAN[:0]
+	for _, _ATTRIBUTE_DEFINITION_BOOLEANid := range a_spec_attributesDB.A_SPEC_ATTRIBUTESPointersEncoding.ATTRIBUTE_DEFINITION_BOOLEAN {
+		a_spec_attributes.ATTRIBUTE_DEFINITION_BOOLEAN = append(a_spec_attributes.ATTRIBUTE_DEFINITION_BOOLEAN, backRepo.BackRepoATTRIBUTE_DEFINITION_BOOLEAN.Map_ATTRIBUTE_DEFINITION_BOOLEANDBID_ATTRIBUTE_DEFINITION_BOOLEANPtr[uint(_ATTRIBUTE_DEFINITION_BOOLEANid)])
 	}
-	// ATTRIBUTE_DEFINITION_DATE field
-	a_spec_attributes.ATTRIBUTE_DEFINITION_DATE = nil
-	if a_spec_attributesDB.ATTRIBUTE_DEFINITION_DATEID.Int64 != 0 {
-		a_spec_attributes.ATTRIBUTE_DEFINITION_DATE = backRepo.BackRepoATTRIBUTE_DEFINITION_DATE.Map_ATTRIBUTE_DEFINITION_DATEDBID_ATTRIBUTE_DEFINITION_DATEPtr[uint(a_spec_attributesDB.ATTRIBUTE_DEFINITION_DATEID.Int64)]
+
+	// This loop redeem a_spec_attributes.ATTRIBUTE_DEFINITION_DATE in the stage from the encode in the back repo
+	// It parses all ATTRIBUTE_DEFINITION_DATEDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	a_spec_attributes.ATTRIBUTE_DEFINITION_DATE = a_spec_attributes.ATTRIBUTE_DEFINITION_DATE[:0]
+	for _, _ATTRIBUTE_DEFINITION_DATEid := range a_spec_attributesDB.A_SPEC_ATTRIBUTESPointersEncoding.ATTRIBUTE_DEFINITION_DATE {
+		a_spec_attributes.ATTRIBUTE_DEFINITION_DATE = append(a_spec_attributes.ATTRIBUTE_DEFINITION_DATE, backRepo.BackRepoATTRIBUTE_DEFINITION_DATE.Map_ATTRIBUTE_DEFINITION_DATEDBID_ATTRIBUTE_DEFINITION_DATEPtr[uint(_ATTRIBUTE_DEFINITION_DATEid)])
 	}
-	// ATTRIBUTE_DEFINITION_ENUMERATION field
-	a_spec_attributes.ATTRIBUTE_DEFINITION_ENUMERATION = nil
-	if a_spec_attributesDB.ATTRIBUTE_DEFINITION_ENUMERATIONID.Int64 != 0 {
-		a_spec_attributes.ATTRIBUTE_DEFINITION_ENUMERATION = backRepo.BackRepoATTRIBUTE_DEFINITION_ENUMERATION.Map_ATTRIBUTE_DEFINITION_ENUMERATIONDBID_ATTRIBUTE_DEFINITION_ENUMERATIONPtr[uint(a_spec_attributesDB.ATTRIBUTE_DEFINITION_ENUMERATIONID.Int64)]
+
+	// This loop redeem a_spec_attributes.ATTRIBUTE_DEFINITION_ENUMERATION in the stage from the encode in the back repo
+	// It parses all ATTRIBUTE_DEFINITION_ENUMERATIONDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	a_spec_attributes.ATTRIBUTE_DEFINITION_ENUMERATION = a_spec_attributes.ATTRIBUTE_DEFINITION_ENUMERATION[:0]
+	for _, _ATTRIBUTE_DEFINITION_ENUMERATIONid := range a_spec_attributesDB.A_SPEC_ATTRIBUTESPointersEncoding.ATTRIBUTE_DEFINITION_ENUMERATION {
+		a_spec_attributes.ATTRIBUTE_DEFINITION_ENUMERATION = append(a_spec_attributes.ATTRIBUTE_DEFINITION_ENUMERATION, backRepo.BackRepoATTRIBUTE_DEFINITION_ENUMERATION.Map_ATTRIBUTE_DEFINITION_ENUMERATIONDBID_ATTRIBUTE_DEFINITION_ENUMERATIONPtr[uint(_ATTRIBUTE_DEFINITION_ENUMERATIONid)])
 	}
-	// ATTRIBUTE_DEFINITION_INTEGER field
-	a_spec_attributes.ATTRIBUTE_DEFINITION_INTEGER = nil
-	if a_spec_attributesDB.ATTRIBUTE_DEFINITION_INTEGERID.Int64 != 0 {
-		a_spec_attributes.ATTRIBUTE_DEFINITION_INTEGER = backRepo.BackRepoATTRIBUTE_DEFINITION_INTEGER.Map_ATTRIBUTE_DEFINITION_INTEGERDBID_ATTRIBUTE_DEFINITION_INTEGERPtr[uint(a_spec_attributesDB.ATTRIBUTE_DEFINITION_INTEGERID.Int64)]
+
+	// This loop redeem a_spec_attributes.ATTRIBUTE_DEFINITION_INTEGER in the stage from the encode in the back repo
+	// It parses all ATTRIBUTE_DEFINITION_INTEGERDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	a_spec_attributes.ATTRIBUTE_DEFINITION_INTEGER = a_spec_attributes.ATTRIBUTE_DEFINITION_INTEGER[:0]
+	for _, _ATTRIBUTE_DEFINITION_INTEGERid := range a_spec_attributesDB.A_SPEC_ATTRIBUTESPointersEncoding.ATTRIBUTE_DEFINITION_INTEGER {
+		a_spec_attributes.ATTRIBUTE_DEFINITION_INTEGER = append(a_spec_attributes.ATTRIBUTE_DEFINITION_INTEGER, backRepo.BackRepoATTRIBUTE_DEFINITION_INTEGER.Map_ATTRIBUTE_DEFINITION_INTEGERDBID_ATTRIBUTE_DEFINITION_INTEGERPtr[uint(_ATTRIBUTE_DEFINITION_INTEGERid)])
 	}
-	// ATTRIBUTE_DEFINITION_REAL field
-	a_spec_attributes.ATTRIBUTE_DEFINITION_REAL = nil
-	if a_spec_attributesDB.ATTRIBUTE_DEFINITION_REALID.Int64 != 0 {
-		a_spec_attributes.ATTRIBUTE_DEFINITION_REAL = backRepo.BackRepoATTRIBUTE_DEFINITION_REAL.Map_ATTRIBUTE_DEFINITION_REALDBID_ATTRIBUTE_DEFINITION_REALPtr[uint(a_spec_attributesDB.ATTRIBUTE_DEFINITION_REALID.Int64)]
+
+	// This loop redeem a_spec_attributes.ATTRIBUTE_DEFINITION_REAL in the stage from the encode in the back repo
+	// It parses all ATTRIBUTE_DEFINITION_REALDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	a_spec_attributes.ATTRIBUTE_DEFINITION_REAL = a_spec_attributes.ATTRIBUTE_DEFINITION_REAL[:0]
+	for _, _ATTRIBUTE_DEFINITION_REALid := range a_spec_attributesDB.A_SPEC_ATTRIBUTESPointersEncoding.ATTRIBUTE_DEFINITION_REAL {
+		a_spec_attributes.ATTRIBUTE_DEFINITION_REAL = append(a_spec_attributes.ATTRIBUTE_DEFINITION_REAL, backRepo.BackRepoATTRIBUTE_DEFINITION_REAL.Map_ATTRIBUTE_DEFINITION_REALDBID_ATTRIBUTE_DEFINITION_REALPtr[uint(_ATTRIBUTE_DEFINITION_REALid)])
 	}
-	// ATTRIBUTE_DEFINITION_STRING field
-	a_spec_attributes.ATTRIBUTE_DEFINITION_STRING = nil
-	if a_spec_attributesDB.ATTRIBUTE_DEFINITION_STRINGID.Int64 != 0 {
-		a_spec_attributes.ATTRIBUTE_DEFINITION_STRING = backRepo.BackRepoATTRIBUTE_DEFINITION_STRING.Map_ATTRIBUTE_DEFINITION_STRINGDBID_ATTRIBUTE_DEFINITION_STRINGPtr[uint(a_spec_attributesDB.ATTRIBUTE_DEFINITION_STRINGID.Int64)]
+
+	// This loop redeem a_spec_attributes.ATTRIBUTE_DEFINITION_STRING in the stage from the encode in the back repo
+	// It parses all ATTRIBUTE_DEFINITION_STRINGDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	a_spec_attributes.ATTRIBUTE_DEFINITION_STRING = a_spec_attributes.ATTRIBUTE_DEFINITION_STRING[:0]
+	for _, _ATTRIBUTE_DEFINITION_STRINGid := range a_spec_attributesDB.A_SPEC_ATTRIBUTESPointersEncoding.ATTRIBUTE_DEFINITION_STRING {
+		a_spec_attributes.ATTRIBUTE_DEFINITION_STRING = append(a_spec_attributes.ATTRIBUTE_DEFINITION_STRING, backRepo.BackRepoATTRIBUTE_DEFINITION_STRING.Map_ATTRIBUTE_DEFINITION_STRINGDBID_ATTRIBUTE_DEFINITION_STRINGPtr[uint(_ATTRIBUTE_DEFINITION_STRINGid)])
 	}
-	// ATTRIBUTE_DEFINITION_XHTML field
-	a_spec_attributes.ATTRIBUTE_DEFINITION_XHTML = nil
-	if a_spec_attributesDB.ATTRIBUTE_DEFINITION_XHTMLID.Int64 != 0 {
-		a_spec_attributes.ATTRIBUTE_DEFINITION_XHTML = backRepo.BackRepoATTRIBUTE_DEFINITION_XHTML.Map_ATTRIBUTE_DEFINITION_XHTMLDBID_ATTRIBUTE_DEFINITION_XHTMLPtr[uint(a_spec_attributesDB.ATTRIBUTE_DEFINITION_XHTMLID.Int64)]
+
+	// This loop redeem a_spec_attributes.ATTRIBUTE_DEFINITION_XHTML in the stage from the encode in the back repo
+	// It parses all ATTRIBUTE_DEFINITION_XHTMLDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	a_spec_attributes.ATTRIBUTE_DEFINITION_XHTML = a_spec_attributes.ATTRIBUTE_DEFINITION_XHTML[:0]
+	for _, _ATTRIBUTE_DEFINITION_XHTMLid := range a_spec_attributesDB.A_SPEC_ATTRIBUTESPointersEncoding.ATTRIBUTE_DEFINITION_XHTML {
+		a_spec_attributes.ATTRIBUTE_DEFINITION_XHTML = append(a_spec_attributes.ATTRIBUTE_DEFINITION_XHTML, backRepo.BackRepoATTRIBUTE_DEFINITION_XHTML.Map_ATTRIBUTE_DEFINITION_XHTMLDBID_ATTRIBUTE_DEFINITION_XHTMLPtr[uint(_ATTRIBUTE_DEFINITION_XHTMLid)])
 	}
+
 	return
 }
 
@@ -699,48 +762,6 @@ func (backRepoA_SPEC_ATTRIBUTES *BackRepoA_SPEC_ATTRIBUTESStruct) RestorePhaseTw
 		_ = a_spec_attributesDB
 
 		// insertion point for reindexing pointers encoding
-		// reindexing ATTRIBUTE_DEFINITION_BOOLEAN field
-		if a_spec_attributesDB.ATTRIBUTE_DEFINITION_BOOLEANID.Int64 != 0 {
-			a_spec_attributesDB.ATTRIBUTE_DEFINITION_BOOLEANID.Int64 = int64(BackRepoATTRIBUTE_DEFINITION_BOOLEANid_atBckpTime_newID[uint(a_spec_attributesDB.ATTRIBUTE_DEFINITION_BOOLEANID.Int64)])
-			a_spec_attributesDB.ATTRIBUTE_DEFINITION_BOOLEANID.Valid = true
-		}
-
-		// reindexing ATTRIBUTE_DEFINITION_DATE field
-		if a_spec_attributesDB.ATTRIBUTE_DEFINITION_DATEID.Int64 != 0 {
-			a_spec_attributesDB.ATTRIBUTE_DEFINITION_DATEID.Int64 = int64(BackRepoATTRIBUTE_DEFINITION_DATEid_atBckpTime_newID[uint(a_spec_attributesDB.ATTRIBUTE_DEFINITION_DATEID.Int64)])
-			a_spec_attributesDB.ATTRIBUTE_DEFINITION_DATEID.Valid = true
-		}
-
-		// reindexing ATTRIBUTE_DEFINITION_ENUMERATION field
-		if a_spec_attributesDB.ATTRIBUTE_DEFINITION_ENUMERATIONID.Int64 != 0 {
-			a_spec_attributesDB.ATTRIBUTE_DEFINITION_ENUMERATIONID.Int64 = int64(BackRepoATTRIBUTE_DEFINITION_ENUMERATIONid_atBckpTime_newID[uint(a_spec_attributesDB.ATTRIBUTE_DEFINITION_ENUMERATIONID.Int64)])
-			a_spec_attributesDB.ATTRIBUTE_DEFINITION_ENUMERATIONID.Valid = true
-		}
-
-		// reindexing ATTRIBUTE_DEFINITION_INTEGER field
-		if a_spec_attributesDB.ATTRIBUTE_DEFINITION_INTEGERID.Int64 != 0 {
-			a_spec_attributesDB.ATTRIBUTE_DEFINITION_INTEGERID.Int64 = int64(BackRepoATTRIBUTE_DEFINITION_INTEGERid_atBckpTime_newID[uint(a_spec_attributesDB.ATTRIBUTE_DEFINITION_INTEGERID.Int64)])
-			a_spec_attributesDB.ATTRIBUTE_DEFINITION_INTEGERID.Valid = true
-		}
-
-		// reindexing ATTRIBUTE_DEFINITION_REAL field
-		if a_spec_attributesDB.ATTRIBUTE_DEFINITION_REALID.Int64 != 0 {
-			a_spec_attributesDB.ATTRIBUTE_DEFINITION_REALID.Int64 = int64(BackRepoATTRIBUTE_DEFINITION_REALid_atBckpTime_newID[uint(a_spec_attributesDB.ATTRIBUTE_DEFINITION_REALID.Int64)])
-			a_spec_attributesDB.ATTRIBUTE_DEFINITION_REALID.Valid = true
-		}
-
-		// reindexing ATTRIBUTE_DEFINITION_STRING field
-		if a_spec_attributesDB.ATTRIBUTE_DEFINITION_STRINGID.Int64 != 0 {
-			a_spec_attributesDB.ATTRIBUTE_DEFINITION_STRINGID.Int64 = int64(BackRepoATTRIBUTE_DEFINITION_STRINGid_atBckpTime_newID[uint(a_spec_attributesDB.ATTRIBUTE_DEFINITION_STRINGID.Int64)])
-			a_spec_attributesDB.ATTRIBUTE_DEFINITION_STRINGID.Valid = true
-		}
-
-		// reindexing ATTRIBUTE_DEFINITION_XHTML field
-		if a_spec_attributesDB.ATTRIBUTE_DEFINITION_XHTMLID.Int64 != 0 {
-			a_spec_attributesDB.ATTRIBUTE_DEFINITION_XHTMLID.Int64 = int64(BackRepoATTRIBUTE_DEFINITION_XHTMLid_atBckpTime_newID[uint(a_spec_attributesDB.ATTRIBUTE_DEFINITION_XHTMLID.Int64)])
-			a_spec_attributesDB.ATTRIBUTE_DEFINITION_XHTMLID.Valid = true
-		}
-
 		// update databse with new index encoding
 		query := backRepoA_SPEC_ATTRIBUTES.db.Model(a_spec_attributesDB).Updates(*a_spec_attributesDB)
 		if query.Error != nil {

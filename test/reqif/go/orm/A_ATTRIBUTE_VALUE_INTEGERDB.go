@@ -47,9 +47,8 @@ type A_ATTRIBUTE_VALUE_INTEGERAPI struct {
 type A_ATTRIBUTE_VALUE_INTEGERPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
 
-	// field ATTRIBUTE_VALUE_INTEGER is a pointer to another Struct (optional or 0..1)
-	// This field is generated into another field to enable AS ONE association
-	ATTRIBUTE_VALUE_INTEGERID sql.NullInt64
+	// field ATTRIBUTE_VALUE_INTEGER is a slice of pointers to another Struct (optional or 0..1)
+	ATTRIBUTE_VALUE_INTEGER IntSlice `gorm:"type:TEXT"`
 }
 
 // A_ATTRIBUTE_VALUE_INTEGERDB describes a a_attribute_value_integer in the database
@@ -215,16 +214,22 @@ func (backRepoA_ATTRIBUTE_VALUE_INTEGER *BackRepoA_ATTRIBUTE_VALUE_INTEGERStruct
 		a_attribute_value_integerDB.CopyBasicFieldsFromA_ATTRIBUTE_VALUE_INTEGER(a_attribute_value_integer)
 
 		// insertion point for translating pointers encodings into actual pointers
-		// commit pointer value a_attribute_value_integer.ATTRIBUTE_VALUE_INTEGER translates to updating the a_attribute_value_integer.ATTRIBUTE_VALUE_INTEGERID
-		a_attribute_value_integerDB.ATTRIBUTE_VALUE_INTEGERID.Valid = true // allow for a 0 value (nil association)
-		if a_attribute_value_integer.ATTRIBUTE_VALUE_INTEGER != nil {
-			if ATTRIBUTE_VALUE_INTEGERId, ok := backRepo.BackRepoATTRIBUTE_VALUE_INTEGER.Map_ATTRIBUTE_VALUE_INTEGERPtr_ATTRIBUTE_VALUE_INTEGERDBID[a_attribute_value_integer.ATTRIBUTE_VALUE_INTEGER]; ok {
-				a_attribute_value_integerDB.ATTRIBUTE_VALUE_INTEGERID.Int64 = int64(ATTRIBUTE_VALUE_INTEGERId)
-				a_attribute_value_integerDB.ATTRIBUTE_VALUE_INTEGERID.Valid = true
+		// 1. reset
+		a_attribute_value_integerDB.A_ATTRIBUTE_VALUE_INTEGERPointersEncoding.ATTRIBUTE_VALUE_INTEGER = make([]int, 0)
+		// 2. encode
+		for _, attribute_value_integerAssocEnd := range a_attribute_value_integer.ATTRIBUTE_VALUE_INTEGER {
+			attribute_value_integerAssocEnd_DB :=
+				backRepo.BackRepoATTRIBUTE_VALUE_INTEGER.GetATTRIBUTE_VALUE_INTEGERDBFromATTRIBUTE_VALUE_INTEGERPtr(attribute_value_integerAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the attribute_value_integerAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if attribute_value_integerAssocEnd_DB == nil {
+				continue
 			}
-		} else {
-			a_attribute_value_integerDB.ATTRIBUTE_VALUE_INTEGERID.Int64 = 0
-			a_attribute_value_integerDB.ATTRIBUTE_VALUE_INTEGERID.Valid = true
+			
+			a_attribute_value_integerDB.A_ATTRIBUTE_VALUE_INTEGERPointersEncoding.ATTRIBUTE_VALUE_INTEGER =
+				append(a_attribute_value_integerDB.A_ATTRIBUTE_VALUE_INTEGERPointersEncoding.ATTRIBUTE_VALUE_INTEGER, int(attribute_value_integerAssocEnd_DB.ID))
 		}
 
 		query := backRepoA_ATTRIBUTE_VALUE_INTEGER.db.Save(&a_attribute_value_integerDB)
@@ -340,11 +345,15 @@ func (backRepoA_ATTRIBUTE_VALUE_INTEGER *BackRepoA_ATTRIBUTE_VALUE_INTEGERStruct
 func (a_attribute_value_integerDB *A_ATTRIBUTE_VALUE_INTEGERDB) DecodePointers(backRepo *BackRepoStruct, a_attribute_value_integer *models.A_ATTRIBUTE_VALUE_INTEGER) {
 
 	// insertion point for checkout of pointer encoding
-	// ATTRIBUTE_VALUE_INTEGER field
-	a_attribute_value_integer.ATTRIBUTE_VALUE_INTEGER = nil
-	if a_attribute_value_integerDB.ATTRIBUTE_VALUE_INTEGERID.Int64 != 0 {
-		a_attribute_value_integer.ATTRIBUTE_VALUE_INTEGER = backRepo.BackRepoATTRIBUTE_VALUE_INTEGER.Map_ATTRIBUTE_VALUE_INTEGERDBID_ATTRIBUTE_VALUE_INTEGERPtr[uint(a_attribute_value_integerDB.ATTRIBUTE_VALUE_INTEGERID.Int64)]
+	// This loop redeem a_attribute_value_integer.ATTRIBUTE_VALUE_INTEGER in the stage from the encode in the back repo
+	// It parses all ATTRIBUTE_VALUE_INTEGERDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	a_attribute_value_integer.ATTRIBUTE_VALUE_INTEGER = a_attribute_value_integer.ATTRIBUTE_VALUE_INTEGER[:0]
+	for _, _ATTRIBUTE_VALUE_INTEGERid := range a_attribute_value_integerDB.A_ATTRIBUTE_VALUE_INTEGERPointersEncoding.ATTRIBUTE_VALUE_INTEGER {
+		a_attribute_value_integer.ATTRIBUTE_VALUE_INTEGER = append(a_attribute_value_integer.ATTRIBUTE_VALUE_INTEGER, backRepo.BackRepoATTRIBUTE_VALUE_INTEGER.Map_ATTRIBUTE_VALUE_INTEGERDBID_ATTRIBUTE_VALUE_INTEGERPtr[uint(_ATTRIBUTE_VALUE_INTEGERid)])
 	}
+
 	return
 }
 
@@ -573,12 +582,6 @@ func (backRepoA_ATTRIBUTE_VALUE_INTEGER *BackRepoA_ATTRIBUTE_VALUE_INTEGERStruct
 		_ = a_attribute_value_integerDB
 
 		// insertion point for reindexing pointers encoding
-		// reindexing ATTRIBUTE_VALUE_INTEGER field
-		if a_attribute_value_integerDB.ATTRIBUTE_VALUE_INTEGERID.Int64 != 0 {
-			a_attribute_value_integerDB.ATTRIBUTE_VALUE_INTEGERID.Int64 = int64(BackRepoATTRIBUTE_VALUE_INTEGERid_atBckpTime_newID[uint(a_attribute_value_integerDB.ATTRIBUTE_VALUE_INTEGERID.Int64)])
-			a_attribute_value_integerDB.ATTRIBUTE_VALUE_INTEGERID.Valid = true
-		}
-
 		// update databse with new index encoding
 		query := backRepoA_ATTRIBUTE_VALUE_INTEGER.db.Model(a_attribute_value_integerDB).Updates(*a_attribute_value_integerDB)
 		if query.Error != nil {

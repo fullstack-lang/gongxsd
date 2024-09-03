@@ -47,9 +47,8 @@ type A_SPECIFIED_VALUESAPI struct {
 type A_SPECIFIED_VALUESPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
 
-	// field ENUM_VALUE is a pointer to another Struct (optional or 0..1)
-	// This field is generated into another field to enable AS ONE association
-	ENUM_VALUEID sql.NullInt64
+	// field ENUM_VALUE is a slice of pointers to another Struct (optional or 0..1)
+	ENUM_VALUE IntSlice `gorm:"type:TEXT"`
 }
 
 // A_SPECIFIED_VALUESDB describes a a_specified_values in the database
@@ -215,16 +214,22 @@ func (backRepoA_SPECIFIED_VALUES *BackRepoA_SPECIFIED_VALUESStruct) CommitPhaseT
 		a_specified_valuesDB.CopyBasicFieldsFromA_SPECIFIED_VALUES(a_specified_values)
 
 		// insertion point for translating pointers encodings into actual pointers
-		// commit pointer value a_specified_values.ENUM_VALUE translates to updating the a_specified_values.ENUM_VALUEID
-		a_specified_valuesDB.ENUM_VALUEID.Valid = true // allow for a 0 value (nil association)
-		if a_specified_values.ENUM_VALUE != nil {
-			if ENUM_VALUEId, ok := backRepo.BackRepoENUM_VALUE.Map_ENUM_VALUEPtr_ENUM_VALUEDBID[a_specified_values.ENUM_VALUE]; ok {
-				a_specified_valuesDB.ENUM_VALUEID.Int64 = int64(ENUM_VALUEId)
-				a_specified_valuesDB.ENUM_VALUEID.Valid = true
+		// 1. reset
+		a_specified_valuesDB.A_SPECIFIED_VALUESPointersEncoding.ENUM_VALUE = make([]int, 0)
+		// 2. encode
+		for _, enum_valueAssocEnd := range a_specified_values.ENUM_VALUE {
+			enum_valueAssocEnd_DB :=
+				backRepo.BackRepoENUM_VALUE.GetENUM_VALUEDBFromENUM_VALUEPtr(enum_valueAssocEnd)
+			
+			// the stage might be inconsistant, meaning that the enum_valueAssocEnd_DB might
+			// be missing from the stage. In this case, the commit operation is robust
+			// An alternative would be to crash here to reveal the missing element.
+			if enum_valueAssocEnd_DB == nil {
+				continue
 			}
-		} else {
-			a_specified_valuesDB.ENUM_VALUEID.Int64 = 0
-			a_specified_valuesDB.ENUM_VALUEID.Valid = true
+			
+			a_specified_valuesDB.A_SPECIFIED_VALUESPointersEncoding.ENUM_VALUE =
+				append(a_specified_valuesDB.A_SPECIFIED_VALUESPointersEncoding.ENUM_VALUE, int(enum_valueAssocEnd_DB.ID))
 		}
 
 		query := backRepoA_SPECIFIED_VALUES.db.Save(&a_specified_valuesDB)
@@ -340,11 +345,15 @@ func (backRepoA_SPECIFIED_VALUES *BackRepoA_SPECIFIED_VALUESStruct) CheckoutPhas
 func (a_specified_valuesDB *A_SPECIFIED_VALUESDB) DecodePointers(backRepo *BackRepoStruct, a_specified_values *models.A_SPECIFIED_VALUES) {
 
 	// insertion point for checkout of pointer encoding
-	// ENUM_VALUE field
-	a_specified_values.ENUM_VALUE = nil
-	if a_specified_valuesDB.ENUM_VALUEID.Int64 != 0 {
-		a_specified_values.ENUM_VALUE = backRepo.BackRepoENUM_VALUE.Map_ENUM_VALUEDBID_ENUM_VALUEPtr[uint(a_specified_valuesDB.ENUM_VALUEID.Int64)]
+	// This loop redeem a_specified_values.ENUM_VALUE in the stage from the encode in the back repo
+	// It parses all ENUM_VALUEDB in the back repo and if the reverse pointer encoding matches the back repo ID
+	// it appends the stage instance
+	// 1. reset the slice
+	a_specified_values.ENUM_VALUE = a_specified_values.ENUM_VALUE[:0]
+	for _, _ENUM_VALUEid := range a_specified_valuesDB.A_SPECIFIED_VALUESPointersEncoding.ENUM_VALUE {
+		a_specified_values.ENUM_VALUE = append(a_specified_values.ENUM_VALUE, backRepo.BackRepoENUM_VALUE.Map_ENUM_VALUEDBID_ENUM_VALUEPtr[uint(_ENUM_VALUEid)])
 	}
+
 	return
 }
 
@@ -573,12 +582,6 @@ func (backRepoA_SPECIFIED_VALUES *BackRepoA_SPECIFIED_VALUESStruct) RestorePhase
 		_ = a_specified_valuesDB
 
 		// insertion point for reindexing pointers encoding
-		// reindexing ENUM_VALUE field
-		if a_specified_valuesDB.ENUM_VALUEID.Int64 != 0 {
-			a_specified_valuesDB.ENUM_VALUEID.Int64 = int64(BackRepoENUM_VALUEid_atBckpTime_newID[uint(a_specified_valuesDB.ENUM_VALUEID.Int64)])
-			a_specified_valuesDB.ENUM_VALUEID.Valid = true
-		}
-
 		// update databse with new index encoding
 		query := backRepoA_SPECIFIED_VALUES.db.Model(a_specified_valuesDB).Updates(*a_specified_valuesDB)
 		if query.Error != nil {
