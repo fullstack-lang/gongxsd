@@ -437,7 +437,7 @@
 				"main.go",
 				"-diagrams",
 				// "-unmarshallFromCode=stage.go",
-				// "-marshallOnCommit=stage",
+				"-marshallOnCommit=stage",
 				"-reqifFile",
 				"../../../samples/Sample3.reqif"
 			],

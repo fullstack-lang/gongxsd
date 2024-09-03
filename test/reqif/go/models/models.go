@@ -11,10 +11,9 @@ var _ xml.Attr
 // From xsd simple type with enumerate restriction "GLOBAL-REF"
 type Enum_GLOBAL_REF string
 
-const (
-)
+const ()
 
-	// insertion point for gongstructs declarations
+// insertion point for gongstructs declarations
 
 // ALTERNATIVE_ID Named source named complex type "ALTERNATIVE-ID"
 type ALTERNATIVE_ID struct {
@@ -1450,5 +1449,6 @@ type XHTML_CONTENT struct {
 	// insertion point for fields
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
+	// gong:text
 	EnclosedText string `xml:",chardata"`
 }
