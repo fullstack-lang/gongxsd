@@ -372,7 +372,7 @@
 			]
 		},
 		{
-			"label": "02 - run reqif Sample.reqif -marshallOnCommit=stage",
+			"label": "02 - run reqif Sample.reqif -marshallOnCommit=sample",
 			"type": "shell",
 			"options": {
 				"cwd": "${workspaceFolder}/test/reqif/go/cmd/reqif"
@@ -382,15 +382,14 @@
 				"run",
 				"main.go",
 				"-diagrams",
-				// "-unmarshallFromCode=stage.go",
-				"-marshallOnCommit=stage",
+				"-marshallOnCommit=sample",
 				"-reqifFile",
 				"../../../samples/Sample.reqif"
 			],
 			"group": "build"
 		},
 		{
-			"label": "02 - run reqif Sample1.reqif -marshallOnCommit=stage",
+			"label": "02 - run reqif Sample1.reqif -marshallOnCommit=sample1",
 			"type": "shell",
 			"options": {
 				"cwd": "${workspaceFolder}/test/reqif/go/cmd/reqif"
@@ -400,15 +399,14 @@
 				"run",
 				"main.go",
 				"-diagrams",
-				// "-unmarshallFromCode=stage.go",
-				"-marshallOnCommit=stage",
+				"-marshallOnCommit=sample1",
 				"-reqifFile",
 				"../../../samples/Sample1.reqif"
 			],
 			"group": "build"
 		},
 		{
-			"label": "02 - run reqif Sample2.reqif -marshallOnCommit=stage",
+			"label": "02 - run reqif Sample2.reqif -marshallOnCommit=sample2",
 			"type": "shell",
 			"options": {
 				"cwd": "${workspaceFolder}/test/reqif/go/cmd/reqif"
@@ -418,15 +416,14 @@
 				"run",
 				"main.go",
 				"-diagrams",
-				// "-unmarshallFromCode=stage.go",
-				"-marshallOnCommit=stage",
+				"-marshallOnCommit=sample2",
 				"-reqifFile",
 				"../../../samples/Sample2.reqif"
 			],
 			"group": "build"
 		},
 		{
-			"label": "02 - run reqif Sample3.reqif -marshallOnCommit=stage",
+			"label": "02 - run reqif Sample3.reqif -marshallOnCommit=sample3",
 			"type": "shell",
 			"options": {
 				"cwd": "${workspaceFolder}/test/reqif/go/cmd/reqif"
@@ -436,8 +433,7 @@
 				"run",
 				"main.go",
 				"-diagrams",
-				// "-unmarshallFromCode=stage.go",
-				"-marshallOnCommit=stage",
+				"-marshallOnCommit=sample3",
 				"-reqifFile",
 				"../../../samples/Sample3.reqif"
 			],
