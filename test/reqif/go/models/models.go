@@ -1450,5 +1450,5 @@ type XHTML_CONTENT struct {
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
 	// gong:text
-	EnclosedText string `xml:",chardata"`
+	EnclosedText string `xml:",innerxml"`
 }
