@@ -77,10 +77,10 @@ func (ct *ComplexType) GetFields(stage *StageStruct) (fields string) {
 				ct.SimpleContent.Extension.Base = Name(ct.SimpleContent.Extension.Base)
 			}
 
-			// in case the extension has base type "xs:string", one has to had the chardata stuff
+			// in case the extension has base type "xs:string", one has to had the innerxml stuff
 			goType := generateGoTypeFromType(ct.SimpleContent.Extension.Base, stMap)
-			fields += "\n\n\t// in case the extension has base type xs:string, one has to had the chardata stuff" +
-				"\n\t" + "EnclosedText" + " " + goType + " " + "`" + `xml:",chardata"` + "`"
+			fields += "\n\n\t// in case the extension has base type xs:string, innerxml options seem to work in musicxml and reqif" +
+				"\n\t" + "EnclosedText" + " " + goType + " " + "`" + `xml:",innerxml"` + "`"
 		}
 	}
 

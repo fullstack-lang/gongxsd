@@ -65,7 +65,7 @@ func (simpleType *SimpleType) generateGongEnum() string {
 		enumValuesCode +=
 			"\n\tEnum_" + xsdNameToGoIdentifier(simpleType.NameXSD) + "_" + xsdNameToGoIdentifier(enumeration.Value) +
 				" " + "Enum_" + xsdNameToGoIdentifier(simpleType.NameXSD) +
-				" = \"" + enumeration.Value + "\""
+				" = \"" + enumeration.Value + "\"\n"
 	}
 
 	// log.Println("String Enumerate", st.Name)

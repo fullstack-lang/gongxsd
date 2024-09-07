@@ -839,7 +839,7 @@ type RELATION_GROUP struct {
 	TYPE *A_RELATION_GROUP_TYPE_REF `xml:"TYPE,omitempty"`
 }
 
-// A_SOURCE_SPECIFICATION_1 Named source within outer element "TARGET-SPECIFICATION"
+// A_SOURCE_SPECIFICATION_1 Named source within outer element "SOURCE-SPECIFICATION"
 type A_SOURCE_SPECIFICATION_1 struct {
 	Name string `xml:"-"`
 
@@ -1448,7 +1448,6 @@ type XHTML_CONTENT struct {
 
 	// insertion point for fields
 
-	// in case the extension has base type xs:string, one has to had the chardata stuff
-	// gong:text
-	EnclosedText string `xml:",chardata"`
+	// in case the extension has base type xs:string, one has to had the innerxml stuff
+	EnclosedText string `xml:",innerxml,inline"`
 }

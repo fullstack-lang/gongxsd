@@ -67,8 +67,17 @@ type {{` + string(rune(Level2Structname)) + `}} struct {
 		`
 type {{` + string(rune(Level2Enumname)) + `}} string
 
-const ({{` + string(rune(Level2EnumValues)) + `}}
-)`,
+// Implement custom marshaling for {{` + string(rune(Level2Enumname)) + `}}.
+func (e {{` + string(rune(Level2Enumname)) + `}}) MarshalXML(enc *xml.Encoder, start xml.StartElement) error {
+	// Start the XML element (which is handled outside this type).
+	// Write the string value directly as character data.
+	if err := enc.EncodeToken(xml.CharData(e)); err != nil {
+		return err
+	}
+	return nil
+}
+
+const ({{` + string(rune(Level2EnumValues)) + `}})`,
 }
 
 type Level2 int
