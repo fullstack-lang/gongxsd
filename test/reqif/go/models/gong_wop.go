@@ -1161,11 +1161,13 @@ type XHTML_CONTENT_WOP struct {
 	// insertion point
 	Name string
 	EnclosedText string
+	PureText string
 }
 
 func (from *XHTML_CONTENT) CopyBasicFields(to *XHTML_CONTENT) {
 	// insertion point
 	to.Name = from.Name
 	to.EnclosedText = from.EnclosedText
+	to.PureText = from.PureText
 }
 

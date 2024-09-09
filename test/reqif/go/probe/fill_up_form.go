@@ -1737,7 +1737,9 @@ func FillUpForm[T models.Gongstruct](
 		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
 		BasicFieldtoForm("EnclosedText", instanceWithInferedType.EnclosedText, instanceWithInferedType, probe.formStage, formGroup,
-			true, false, 0, false, 0)
+			true, true, 600, true, 400)
+		BasicFieldtoForm("PureText", instanceWithInferedType.PureText, instanceWithInferedType, probe.formStage, formGroup,
+			true, true, 600, true, 400)
 
 	default:
 		_ = instanceWithInferedType

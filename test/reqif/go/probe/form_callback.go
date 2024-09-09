@@ -8580,6 +8580,8 @@ func (xhtml_contentFormCallback *XHTML_CONTENTFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(xhtml_content_.Name), formDiv)
 		case "EnclosedText":
 			FormDivBasicFieldToField(&(xhtml_content_.EnclosedText), formDiv)
+		case "PureText":
+			FormDivBasicFieldToField(&(xhtml_content_.PureText), formDiv)
 		}
 	}
 

@@ -1449,6 +1449,10 @@ type XHTML_CONTENT struct {
 	// insertion point for fields
 
 	// in case the extension has base type xs:string, one has to had the chardata stuff
-	// gong:text
+	// gong:text gong:width 600 gong:height 400
 	EnclosedText string `xml:",innerxml"`
+
+	// in case the extension has base type xs:string, one has to had the chardata stuff
+	// gong:text gong:width 600 gong:height 400
+	PureText string `xml:"-"`
 }
