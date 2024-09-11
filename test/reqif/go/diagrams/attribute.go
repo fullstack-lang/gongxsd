@@ -140,26 +140,26 @@ func _(stage *models.StageStruct) {
 
 	__Field__000003_IDENTIFIER.Name = `IDENTIFIER`
 
-	//gong:ident [ref_models.ATTRIBUTE_DEFINITION_XHTML.IDENTIFIER] comment added to overcome the problem with the comment map association
-	__Field__000003_IDENTIFIER.Identifier = `ref_models.ATTRIBUTE_DEFINITION_XHTML.IDENTIFIER`
+	//gong:ident [ref_models.ATTRIBUTE_DEFINITION_ENUMERATION.IDENTIFIER] comment added to overcome the problem with the comment map association
+	__Field__000003_IDENTIFIER.Identifier = `ref_models.ATTRIBUTE_DEFINITION_ENUMERATION.IDENTIFIER`
 	__Field__000003_IDENTIFIER.FieldTypeAsString = ``
-	__Field__000003_IDENTIFIER.Structname = `ATTRIBUTE_DEFINITION_XHTML`
+	__Field__000003_IDENTIFIER.Structname = `ATTRIBUTE_DEFINITION_ENUMERATION`
 	__Field__000003_IDENTIFIER.Fieldtypename = `string`
 
 	__Field__000004_IDENTIFIER.Name = `IDENTIFIER`
 
-	//gong:ident [ref_models.ENUM_VALUE.IDENTIFIER] comment added to overcome the problem with the comment map association
-	__Field__000004_IDENTIFIER.Identifier = `ref_models.ENUM_VALUE.IDENTIFIER`
+	//gong:ident [ref_models.ATTRIBUTE_DEFINITION_XHTML.IDENTIFIER] comment added to overcome the problem with the comment map association
+	__Field__000004_IDENTIFIER.Identifier = `ref_models.ATTRIBUTE_DEFINITION_XHTML.IDENTIFIER`
 	__Field__000004_IDENTIFIER.FieldTypeAsString = ``
-	__Field__000004_IDENTIFIER.Structname = `ENUM_VALUE`
+	__Field__000004_IDENTIFIER.Structname = `ATTRIBUTE_DEFINITION_XHTML`
 	__Field__000004_IDENTIFIER.Fieldtypename = `string`
 
 	__Field__000005_IDENTIFIER.Name = `IDENTIFIER`
 
-	//gong:ident [ref_models.ATTRIBUTE_DEFINITION_ENUMERATION.IDENTIFIER] comment added to overcome the problem with the comment map association
-	__Field__000005_IDENTIFIER.Identifier = `ref_models.ATTRIBUTE_DEFINITION_ENUMERATION.IDENTIFIER`
+	//gong:ident [ref_models.ENUM_VALUE.IDENTIFIER] comment added to overcome the problem with the comment map association
+	__Field__000005_IDENTIFIER.Identifier = `ref_models.ENUM_VALUE.IDENTIFIER`
 	__Field__000005_IDENTIFIER.FieldTypeAsString = ``
-	__Field__000005_IDENTIFIER.Structname = `ATTRIBUTE_DEFINITION_ENUMERATION`
+	__Field__000005_IDENTIFIER.Structname = `ENUM_VALUE`
 	__Field__000005_IDENTIFIER.Fieldtypename = `string`
 
 	__Field__000006_IDENTIFIER.Name = `IDENTIFIER`
@@ -172,18 +172,18 @@ func _(stage *models.StageStruct) {
 
 	__Field__000007_IS_EDITABLE.Name = `IS_EDITABLE`
 
-	//gong:ident [ref_models.ATTRIBUTE_DEFINITION_ENUMERATION.IS_EDITABLE] comment added to overcome the problem with the comment map association
-	__Field__000007_IS_EDITABLE.Identifier = `ref_models.ATTRIBUTE_DEFINITION_ENUMERATION.IS_EDITABLE`
+	//gong:ident [ref_models.ATTRIBUTE_DEFINITION_XHTML.IS_EDITABLE] comment added to overcome the problem with the comment map association
+	__Field__000007_IS_EDITABLE.Identifier = `ref_models.ATTRIBUTE_DEFINITION_XHTML.IS_EDITABLE`
 	__Field__000007_IS_EDITABLE.FieldTypeAsString = ``
-	__Field__000007_IS_EDITABLE.Structname = `ATTRIBUTE_DEFINITION_ENUMERATION`
+	__Field__000007_IS_EDITABLE.Structname = `ATTRIBUTE_DEFINITION_XHTML`
 	__Field__000007_IS_EDITABLE.Fieldtypename = `bool`
 
 	__Field__000008_IS_EDITABLE.Name = `IS_EDITABLE`
 
-	//gong:ident [ref_models.ATTRIBUTE_DEFINITION_XHTML.IS_EDITABLE] comment added to overcome the problem with the comment map association
-	__Field__000008_IS_EDITABLE.Identifier = `ref_models.ATTRIBUTE_DEFINITION_XHTML.IS_EDITABLE`
+	//gong:ident [ref_models.ATTRIBUTE_DEFINITION_ENUMERATION.IS_EDITABLE] comment added to overcome the problem with the comment map association
+	__Field__000008_IS_EDITABLE.Identifier = `ref_models.ATTRIBUTE_DEFINITION_ENUMERATION.IS_EDITABLE`
 	__Field__000008_IS_EDITABLE.FieldTypeAsString = ``
-	__Field__000008_IS_EDITABLE.Structname = `ATTRIBUTE_DEFINITION_XHTML`
+	__Field__000008_IS_EDITABLE.Structname = `ATTRIBUTE_DEFINITION_ENUMERATION`
 	__Field__000008_IS_EDITABLE.Fieldtypename = `bool`
 
 	__Field__000009_KEY.Name = `KEY`
@@ -196,34 +196,34 @@ func _(stage *models.StageStruct) {
 
 	__Field__000010_LAST_CHANGE.Name = `LAST_CHANGE`
 
-	//gong:ident [ref_models.ATTRIBUTE_DEFINITION_ENUMERATION.LAST_CHANGE] comment added to overcome the problem with the comment map association
-	__Field__000010_LAST_CHANGE.Identifier = `ref_models.ATTRIBUTE_DEFINITION_ENUMERATION.LAST_CHANGE`
+	//gong:ident [ref_models.SPEC_OBJECT_TYPE.LAST_CHANGE] comment added to overcome the problem with the comment map association
+	__Field__000010_LAST_CHANGE.Identifier = `ref_models.SPEC_OBJECT_TYPE.LAST_CHANGE`
 	__Field__000010_LAST_CHANGE.FieldTypeAsString = ``
-	__Field__000010_LAST_CHANGE.Structname = `ATTRIBUTE_DEFINITION_ENUMERATION`
+	__Field__000010_LAST_CHANGE.Structname = `SPEC_OBJECT_TYPE`
 	__Field__000010_LAST_CHANGE.Fieldtypename = `string`
 
 	__Field__000011_LAST_CHANGE.Name = `LAST_CHANGE`
 
-	//gong:ident [ref_models.ATTRIBUTE_DEFINITION_XHTML.LAST_CHANGE] comment added to overcome the problem with the comment map association
-	__Field__000011_LAST_CHANGE.Identifier = `ref_models.ATTRIBUTE_DEFINITION_XHTML.LAST_CHANGE`
+	//gong:ident [ref_models.ENUM_VALUE.LAST_CHANGE] comment added to overcome the problem with the comment map association
+	__Field__000011_LAST_CHANGE.Identifier = `ref_models.ENUM_VALUE.LAST_CHANGE`
 	__Field__000011_LAST_CHANGE.FieldTypeAsString = ``
-	__Field__000011_LAST_CHANGE.Structname = `ATTRIBUTE_DEFINITION_XHTML`
+	__Field__000011_LAST_CHANGE.Structname = `ENUM_VALUE`
 	__Field__000011_LAST_CHANGE.Fieldtypename = `string`
 
 	__Field__000012_LAST_CHANGE.Name = `LAST_CHANGE`
 
-	//gong:ident [ref_models.SPEC_OBJECT_TYPE.LAST_CHANGE] comment added to overcome the problem with the comment map association
-	__Field__000012_LAST_CHANGE.Identifier = `ref_models.SPEC_OBJECT_TYPE.LAST_CHANGE`
+	//gong:ident [ref_models.ATTRIBUTE_DEFINITION_ENUMERATION.LAST_CHANGE] comment added to overcome the problem with the comment map association
+	__Field__000012_LAST_CHANGE.Identifier = `ref_models.ATTRIBUTE_DEFINITION_ENUMERATION.LAST_CHANGE`
 	__Field__000012_LAST_CHANGE.FieldTypeAsString = ``
-	__Field__000012_LAST_CHANGE.Structname = `SPEC_OBJECT_TYPE`
+	__Field__000012_LAST_CHANGE.Structname = `ATTRIBUTE_DEFINITION_ENUMERATION`
 	__Field__000012_LAST_CHANGE.Fieldtypename = `string`
 
 	__Field__000013_LAST_CHANGE.Name = `LAST_CHANGE`
 
-	//gong:ident [ref_models.ENUM_VALUE.LAST_CHANGE] comment added to overcome the problem with the comment map association
-	__Field__000013_LAST_CHANGE.Identifier = `ref_models.ENUM_VALUE.LAST_CHANGE`
+	//gong:ident [ref_models.ATTRIBUTE_DEFINITION_XHTML.LAST_CHANGE] comment added to overcome the problem with the comment map association
+	__Field__000013_LAST_CHANGE.Identifier = `ref_models.ATTRIBUTE_DEFINITION_XHTML.LAST_CHANGE`
 	__Field__000013_LAST_CHANGE.FieldTypeAsString = ``
-	__Field__000013_LAST_CHANGE.Structname = `ENUM_VALUE`
+	__Field__000013_LAST_CHANGE.Structname = `ATTRIBUTE_DEFINITION_XHTML`
 	__Field__000013_LAST_CHANGE.Fieldtypename = `string`
 
 	__Field__000014_LAST_CHANGE.Name = `LAST_CHANGE`
@@ -236,42 +236,42 @@ func _(stage *models.StageStruct) {
 
 	__Field__000015_LONG_NAME.Name = `LONG_NAME`
 
-	//gong:ident [ref_models.ENUM_VALUE.LONG_NAME] comment added to overcome the problem with the comment map association
-	__Field__000015_LONG_NAME.Identifier = `ref_models.ENUM_VALUE.LONG_NAME`
+	//gong:ident [ref_models.ATTRIBUTE_DEFINITION_ENUMERATION.LONG_NAME] comment added to overcome the problem with the comment map association
+	__Field__000015_LONG_NAME.Identifier = `ref_models.ATTRIBUTE_DEFINITION_ENUMERATION.LONG_NAME`
 	__Field__000015_LONG_NAME.FieldTypeAsString = ``
-	__Field__000015_LONG_NAME.Structname = `ENUM_VALUE`
+	__Field__000015_LONG_NAME.Structname = `ATTRIBUTE_DEFINITION_ENUMERATION`
 	__Field__000015_LONG_NAME.Fieldtypename = `string`
 
 	__Field__000016_LONG_NAME.Name = `LONG_NAME`
 
-	//gong:ident [ref_models.ATTRIBUTE_DEFINITION_ENUMERATION.LONG_NAME] comment added to overcome the problem with the comment map association
-	__Field__000016_LONG_NAME.Identifier = `ref_models.ATTRIBUTE_DEFINITION_ENUMERATION.LONG_NAME`
+	//gong:ident [ref_models.ATTRIBUTE_DEFINITION_XHTML.LONG_NAME] comment added to overcome the problem with the comment map association
+	__Field__000016_LONG_NAME.Identifier = `ref_models.ATTRIBUTE_DEFINITION_XHTML.LONG_NAME`
 	__Field__000016_LONG_NAME.FieldTypeAsString = ``
-	__Field__000016_LONG_NAME.Structname = `ATTRIBUTE_DEFINITION_ENUMERATION`
+	__Field__000016_LONG_NAME.Structname = `ATTRIBUTE_DEFINITION_XHTML`
 	__Field__000016_LONG_NAME.Fieldtypename = `string`
 
 	__Field__000017_LONG_NAME.Name = `LONG_NAME`
 
-	//gong:ident [ref_models.ATTRIBUTE_DEFINITION_XHTML.LONG_NAME] comment added to overcome the problem with the comment map association
-	__Field__000017_LONG_NAME.Identifier = `ref_models.ATTRIBUTE_DEFINITION_XHTML.LONG_NAME`
+	//gong:ident [ref_models.SPEC_OBJECT_TYPE.LONG_NAME] comment added to overcome the problem with the comment map association
+	__Field__000017_LONG_NAME.Identifier = `ref_models.SPEC_OBJECT_TYPE.LONG_NAME`
 	__Field__000017_LONG_NAME.FieldTypeAsString = ``
-	__Field__000017_LONG_NAME.Structname = `ATTRIBUTE_DEFINITION_XHTML`
+	__Field__000017_LONG_NAME.Structname = `SPEC_OBJECT_TYPE`
 	__Field__000017_LONG_NAME.Fieldtypename = `string`
 
 	__Field__000018_LONG_NAME.Name = `LONG_NAME`
 
-	//gong:ident [ref_models.DATATYPE_DEFINITION_ENUMERATION.LONG_NAME] comment added to overcome the problem with the comment map association
-	__Field__000018_LONG_NAME.Identifier = `ref_models.DATATYPE_DEFINITION_ENUMERATION.LONG_NAME`
+	//gong:ident [ref_models.ENUM_VALUE.LONG_NAME] comment added to overcome the problem with the comment map association
+	__Field__000018_LONG_NAME.Identifier = `ref_models.ENUM_VALUE.LONG_NAME`
 	__Field__000018_LONG_NAME.FieldTypeAsString = ``
-	__Field__000018_LONG_NAME.Structname = `DATATYPE_DEFINITION_ENUMERATION`
+	__Field__000018_LONG_NAME.Structname = `ENUM_VALUE`
 	__Field__000018_LONG_NAME.Fieldtypename = `string`
 
 	__Field__000019_LONG_NAME.Name = `LONG_NAME`
 
-	//gong:ident [ref_models.SPEC_OBJECT_TYPE.LONG_NAME] comment added to overcome the problem with the comment map association
-	__Field__000019_LONG_NAME.Identifier = `ref_models.SPEC_OBJECT_TYPE.LONG_NAME`
+	//gong:ident [ref_models.DATATYPE_DEFINITION_ENUMERATION.LONG_NAME] comment added to overcome the problem with the comment map association
+	__Field__000019_LONG_NAME.Identifier = `ref_models.DATATYPE_DEFINITION_ENUMERATION.LONG_NAME`
 	__Field__000019_LONG_NAME.FieldTypeAsString = ``
-	__Field__000019_LONG_NAME.Structname = `SPEC_OBJECT_TYPE`
+	__Field__000019_LONG_NAME.Structname = `DATATYPE_DEFINITION_ENUMERATION`
 	__Field__000019_LONG_NAME.Fieldtypename = `string`
 
 	__Field__000020_MULTI_VALUED.Name = `MULTI_VALUED`
@@ -663,11 +663,11 @@ func _(stage *models.StageStruct) {
 
 	__Link__000011_TYPE.Name = `TYPE`
 
-	//gong:ident [ref_models.ATTRIBUTE_DEFINITION_XHTML.TYPE] comment added to overcome the problem with the comment map association
-	__Link__000011_TYPE.Identifier = `ref_models.ATTRIBUTE_DEFINITION_XHTML.TYPE`
+	//gong:ident [ref_models.ATTRIBUTE_DEFINITION_ENUMERATION.TYPE] comment added to overcome the problem with the comment map association
+	__Link__000011_TYPE.Identifier = `ref_models.ATTRIBUTE_DEFINITION_ENUMERATION.TYPE`
 
-	//gong:ident [ref_models.A_DATATYPE_DEFINITION_XHTML_REF] comment added to overcome the problem with the comment map association
-	__Link__000011_TYPE.Fieldtypename = `ref_models.A_DATATYPE_DEFINITION_XHTML_REF`
+	//gong:ident [ref_models.A_DATATYPE_DEFINITION_ENUMERATION_REF] comment added to overcome the problem with the comment map association
+	__Link__000011_TYPE.Fieldtypename = `ref_models.A_DATATYPE_DEFINITION_ENUMERATION_REF`
 	__Link__000011_TYPE.FieldOffsetX = -50.000000
 	__Link__000011_TYPE.FieldOffsetY = -16.000000
 	__Link__000011_TYPE.TargetMultiplicity = models.ZERO_ONE
@@ -684,11 +684,11 @@ func _(stage *models.StageStruct) {
 
 	__Link__000012_TYPE.Name = `TYPE`
 
-	//gong:ident [ref_models.ATTRIBUTE_DEFINITION_ENUMERATION.TYPE] comment added to overcome the problem with the comment map association
-	__Link__000012_TYPE.Identifier = `ref_models.ATTRIBUTE_DEFINITION_ENUMERATION.TYPE`
+	//gong:ident [ref_models.ATTRIBUTE_DEFINITION_XHTML.TYPE] comment added to overcome the problem with the comment map association
+	__Link__000012_TYPE.Identifier = `ref_models.ATTRIBUTE_DEFINITION_XHTML.TYPE`
 
-	//gong:ident [ref_models.A_DATATYPE_DEFINITION_ENUMERATION_REF] comment added to overcome the problem with the comment map association
-	__Link__000012_TYPE.Fieldtypename = `ref_models.A_DATATYPE_DEFINITION_ENUMERATION_REF`
+	//gong:ident [ref_models.A_DATATYPE_DEFINITION_XHTML_REF] comment added to overcome the problem with the comment map association
+	__Link__000012_TYPE.Fieldtypename = `ref_models.A_DATATYPE_DEFINITION_XHTML_REF`
 	__Link__000012_TYPE.FieldOffsetX = -50.000000
 	__Link__000012_TYPE.FieldOffsetY = -16.000000
 	__Link__000012_TYPE.TargetMultiplicity = models.ZERO_ONE
@@ -711,8 +711,8 @@ func _(stage *models.StageStruct) {
 	__Position__000001_Pos_attribute_ATTRIBUTE_DEFINITION_XHTML.Y = 306.000000
 	__Position__000001_Pos_attribute_ATTRIBUTE_DEFINITION_XHTML.Name = `Pos-attribute-ATTRIBUTE_DEFINITION_XHTML`
 
-	__Position__000002_Pos_attribute_A_DATATYPES.X = 212.000000
-	__Position__000002_Pos_attribute_A_DATATYPES.Y = 926.999969
+	__Position__000002_Pos_attribute_A_DATATYPES.X = 241.000000
+	__Position__000002_Pos_attribute_A_DATATYPES.Y = 702.999969
 	__Position__000002_Pos_attribute_A_DATATYPES.Name = `Pos-attribute-A_DATATYPES`
 
 	__Position__000003_Pos_attribute_A_DATATYPE_DEFINITION_ENUMERATION_REF.X = 1224.999939
@@ -723,12 +723,12 @@ func _(stage *models.StageStruct) {
 	__Position__000004_Pos_attribute_A_DATATYPE_DEFINITION_XHTML_REF.Y = 340.000000
 	__Position__000004_Pos_attribute_A_DATATYPE_DEFINITION_XHTML_REF.Name = `Pos-attribute-A_DATATYPE_DEFINITION_XHTML_REF`
 
-	__Position__000005_Pos_attribute_A_PROPERTIES.X = 704.000000
-	__Position__000005_Pos_attribute_A_PROPERTIES.Y = 1117.999908
+	__Position__000005_Pos_attribute_A_PROPERTIES.X = 733.000000
+	__Position__000005_Pos_attribute_A_PROPERTIES.Y = 893.999908
 	__Position__000005_Pos_attribute_A_PROPERTIES.Name = `Pos-attribute-A_PROPERTIES`
 
-	__Position__000006_Pos_attribute_A_SPECIFIED_VALUES.X = 1351.999939
-	__Position__000006_Pos_attribute_A_SPECIFIED_VALUES.Y = 924.999969
+	__Position__000006_Pos_attribute_A_SPECIFIED_VALUES.X = 1380.999939
+	__Position__000006_Pos_attribute_A_SPECIFIED_VALUES.Y = 700.999969
 	__Position__000006_Pos_attribute_A_SPECIFIED_VALUES.Name = `Pos-attribute-A_SPECIFIED_VALUES`
 
 	__Position__000007_Pos_attribute_A_SPEC_ATTRIBUTES.X = 125.000000
@@ -739,16 +739,16 @@ func _(stage *models.StageStruct) {
 	__Position__000008_Pos_attribute_A_SPEC_TYPES.Y = 97.000000
 	__Position__000008_Pos_attribute_A_SPEC_TYPES.Name = `Pos-attribute-A_SPEC_TYPES`
 
-	__Position__000009_Pos_attribute_DATATYPE_DEFINITION_ENUMERATION.X = 785.000061
-	__Position__000009_Pos_attribute_DATATYPE_DEFINITION_ENUMERATION.Y = 899.999969
+	__Position__000009_Pos_attribute_DATATYPE_DEFINITION_ENUMERATION.X = 814.000061
+	__Position__000009_Pos_attribute_DATATYPE_DEFINITION_ENUMERATION.Y = 675.999969
 	__Position__000009_Pos_attribute_DATATYPE_DEFINITION_ENUMERATION.Name = `Pos-attribute-DATATYPE_DEFINITION_ENUMERATION`
 
-	__Position__000010_Pos_attribute_EMBEDDED_VALUE.X = 1293.999939
-	__Position__000010_Pos_attribute_EMBEDDED_VALUE.Y = 1109.999908
+	__Position__000010_Pos_attribute_EMBEDDED_VALUE.X = 1322.999939
+	__Position__000010_Pos_attribute_EMBEDDED_VALUE.Y = 885.999908
 	__Position__000010_Pos_attribute_EMBEDDED_VALUE.Name = `Pos-attribute-EMBEDDED_VALUE`
 
-	__Position__000011_Pos_attribute_ENUM_VALUE.X = 224.000000
-	__Position__000011_Pos_attribute_ENUM_VALUE.Y = 1096.999908
+	__Position__000011_Pos_attribute_ENUM_VALUE.X = 253.000000
+	__Position__000011_Pos_attribute_ENUM_VALUE.Y = 872.999908
 	__Position__000011_Pos_attribute_ENUM_VALUE.Name = `Pos-attribute-ENUM_VALUE`
 
 	__Position__000012_Pos_attribute_REQ_IF_CONTENT.X = 28.000000
@@ -827,18 +827,18 @@ func _(stage *models.StageStruct) {
 	__Classdiagram__000000_attribute.GongStructShapes = append(__Classdiagram__000000_attribute.GongStructShapes, __GongStructShape__000005_attribute_A_PROPERTIES)
 	__Classdiagram__000000_attribute.GongStructShapes = append(__Classdiagram__000000_attribute.GongStructShapes, __GongStructShape__000010_attribute_EMBEDDED_VALUE)
 	__GongStructShape__000000_attribute_ATTRIBUTE_DEFINITION_ENUMERATION.Position = __Position__000000_Pos_attribute_ATTRIBUTE_DEFINITION_ENUMERATION
-	__GongStructShape__000000_attribute_ATTRIBUTE_DEFINITION_ENUMERATION.Fields = append(__GongStructShape__000000_attribute_ATTRIBUTE_DEFINITION_ENUMERATION.Fields, __Field__000005_IDENTIFIER)
-	__GongStructShape__000000_attribute_ATTRIBUTE_DEFINITION_ENUMERATION.Fields = append(__GongStructShape__000000_attribute_ATTRIBUTE_DEFINITION_ENUMERATION.Fields, __Field__000007_IS_EDITABLE)
-	__GongStructShape__000000_attribute_ATTRIBUTE_DEFINITION_ENUMERATION.Fields = append(__GongStructShape__000000_attribute_ATTRIBUTE_DEFINITION_ENUMERATION.Fields, __Field__000010_LAST_CHANGE)
-	__GongStructShape__000000_attribute_ATTRIBUTE_DEFINITION_ENUMERATION.Fields = append(__GongStructShape__000000_attribute_ATTRIBUTE_DEFINITION_ENUMERATION.Fields, __Field__000016_LONG_NAME)
+	__GongStructShape__000000_attribute_ATTRIBUTE_DEFINITION_ENUMERATION.Fields = append(__GongStructShape__000000_attribute_ATTRIBUTE_DEFINITION_ENUMERATION.Fields, __Field__000003_IDENTIFIER)
+	__GongStructShape__000000_attribute_ATTRIBUTE_DEFINITION_ENUMERATION.Fields = append(__GongStructShape__000000_attribute_ATTRIBUTE_DEFINITION_ENUMERATION.Fields, __Field__000008_IS_EDITABLE)
+	__GongStructShape__000000_attribute_ATTRIBUTE_DEFINITION_ENUMERATION.Fields = append(__GongStructShape__000000_attribute_ATTRIBUTE_DEFINITION_ENUMERATION.Fields, __Field__000012_LAST_CHANGE)
+	__GongStructShape__000000_attribute_ATTRIBUTE_DEFINITION_ENUMERATION.Fields = append(__GongStructShape__000000_attribute_ATTRIBUTE_DEFINITION_ENUMERATION.Fields, __Field__000015_LONG_NAME)
 	__GongStructShape__000000_attribute_ATTRIBUTE_DEFINITION_ENUMERATION.Fields = append(__GongStructShape__000000_attribute_ATTRIBUTE_DEFINITION_ENUMERATION.Fields, __Field__000020_MULTI_VALUED)
-	__GongStructShape__000000_attribute_ATTRIBUTE_DEFINITION_ENUMERATION.Links = append(__GongStructShape__000000_attribute_ATTRIBUTE_DEFINITION_ENUMERATION.Links, __Link__000012_TYPE)
+	__GongStructShape__000000_attribute_ATTRIBUTE_DEFINITION_ENUMERATION.Links = append(__GongStructShape__000000_attribute_ATTRIBUTE_DEFINITION_ENUMERATION.Links, __Link__000011_TYPE)
 	__GongStructShape__000001_attribute_ATTRIBUTE_DEFINITION_XHTML.Position = __Position__000001_Pos_attribute_ATTRIBUTE_DEFINITION_XHTML
-	__GongStructShape__000001_attribute_ATTRIBUTE_DEFINITION_XHTML.Fields = append(__GongStructShape__000001_attribute_ATTRIBUTE_DEFINITION_XHTML.Fields, __Field__000003_IDENTIFIER)
-	__GongStructShape__000001_attribute_ATTRIBUTE_DEFINITION_XHTML.Fields = append(__GongStructShape__000001_attribute_ATTRIBUTE_DEFINITION_XHTML.Fields, __Field__000008_IS_EDITABLE)
-	__GongStructShape__000001_attribute_ATTRIBUTE_DEFINITION_XHTML.Fields = append(__GongStructShape__000001_attribute_ATTRIBUTE_DEFINITION_XHTML.Fields, __Field__000011_LAST_CHANGE)
-	__GongStructShape__000001_attribute_ATTRIBUTE_DEFINITION_XHTML.Fields = append(__GongStructShape__000001_attribute_ATTRIBUTE_DEFINITION_XHTML.Fields, __Field__000017_LONG_NAME)
-	__GongStructShape__000001_attribute_ATTRIBUTE_DEFINITION_XHTML.Links = append(__GongStructShape__000001_attribute_ATTRIBUTE_DEFINITION_XHTML.Links, __Link__000011_TYPE)
+	__GongStructShape__000001_attribute_ATTRIBUTE_DEFINITION_XHTML.Fields = append(__GongStructShape__000001_attribute_ATTRIBUTE_DEFINITION_XHTML.Fields, __Field__000004_IDENTIFIER)
+	__GongStructShape__000001_attribute_ATTRIBUTE_DEFINITION_XHTML.Fields = append(__GongStructShape__000001_attribute_ATTRIBUTE_DEFINITION_XHTML.Fields, __Field__000007_IS_EDITABLE)
+	__GongStructShape__000001_attribute_ATTRIBUTE_DEFINITION_XHTML.Fields = append(__GongStructShape__000001_attribute_ATTRIBUTE_DEFINITION_XHTML.Fields, __Field__000013_LAST_CHANGE)
+	__GongStructShape__000001_attribute_ATTRIBUTE_DEFINITION_XHTML.Fields = append(__GongStructShape__000001_attribute_ATTRIBUTE_DEFINITION_XHTML.Fields, __Field__000016_LONG_NAME)
+	__GongStructShape__000001_attribute_ATTRIBUTE_DEFINITION_XHTML.Links = append(__GongStructShape__000001_attribute_ATTRIBUTE_DEFINITION_XHTML.Links, __Link__000012_TYPE)
 	__GongStructShape__000002_attribute_A_DATATYPES.Position = __Position__000002_Pos_attribute_A_DATATYPES
 	__GongStructShape__000002_attribute_A_DATATYPES.Links = append(__GongStructShape__000002_attribute_A_DATATYPES.Links, __Link__000003_DATATYPE_DEFINITION_ENUMERATION)
 	__GongStructShape__000003_attribute_A_DATATYPE_DEFINITION_ENUMERATION_REF.Position = __Position__000003_Pos_attribute_A_DATATYPE_DEFINITION_ENUMERATION_REF
@@ -857,23 +857,23 @@ func _(stage *models.StageStruct) {
 	__GongStructShape__000009_attribute_DATATYPE_DEFINITION_ENUMERATION.Position = __Position__000009_Pos_attribute_DATATYPE_DEFINITION_ENUMERATION
 	__GongStructShape__000009_attribute_DATATYPE_DEFINITION_ENUMERATION.Fields = append(__GongStructShape__000009_attribute_DATATYPE_DEFINITION_ENUMERATION.Fields, __Field__000006_IDENTIFIER)
 	__GongStructShape__000009_attribute_DATATYPE_DEFINITION_ENUMERATION.Fields = append(__GongStructShape__000009_attribute_DATATYPE_DEFINITION_ENUMERATION.Fields, __Field__000014_LAST_CHANGE)
-	__GongStructShape__000009_attribute_DATATYPE_DEFINITION_ENUMERATION.Fields = append(__GongStructShape__000009_attribute_DATATYPE_DEFINITION_ENUMERATION.Fields, __Field__000018_LONG_NAME)
+	__GongStructShape__000009_attribute_DATATYPE_DEFINITION_ENUMERATION.Fields = append(__GongStructShape__000009_attribute_DATATYPE_DEFINITION_ENUMERATION.Fields, __Field__000019_LONG_NAME)
 	__GongStructShape__000009_attribute_DATATYPE_DEFINITION_ENUMERATION.Links = append(__GongStructShape__000009_attribute_DATATYPE_DEFINITION_ENUMERATION.Links, __Link__000007_SPECIFIED_VALUES)
 	__GongStructShape__000010_attribute_EMBEDDED_VALUE.Position = __Position__000010_Pos_attribute_EMBEDDED_VALUE
 	__GongStructShape__000010_attribute_EMBEDDED_VALUE.Fields = append(__GongStructShape__000010_attribute_EMBEDDED_VALUE.Fields, __Field__000009_KEY)
 	__GongStructShape__000010_attribute_EMBEDDED_VALUE.Fields = append(__GongStructShape__000010_attribute_EMBEDDED_VALUE.Fields, __Field__000021_OTHER_CONTENT)
 	__GongStructShape__000011_attribute_ENUM_VALUE.Position = __Position__000011_Pos_attribute_ENUM_VALUE
-	__GongStructShape__000011_attribute_ENUM_VALUE.Fields = append(__GongStructShape__000011_attribute_ENUM_VALUE.Fields, __Field__000004_IDENTIFIER)
-	__GongStructShape__000011_attribute_ENUM_VALUE.Fields = append(__GongStructShape__000011_attribute_ENUM_VALUE.Fields, __Field__000013_LAST_CHANGE)
-	__GongStructShape__000011_attribute_ENUM_VALUE.Fields = append(__GongStructShape__000011_attribute_ENUM_VALUE.Fields, __Field__000015_LONG_NAME)
+	__GongStructShape__000011_attribute_ENUM_VALUE.Fields = append(__GongStructShape__000011_attribute_ENUM_VALUE.Fields, __Field__000005_IDENTIFIER)
+	__GongStructShape__000011_attribute_ENUM_VALUE.Fields = append(__GongStructShape__000011_attribute_ENUM_VALUE.Fields, __Field__000011_LAST_CHANGE)
+	__GongStructShape__000011_attribute_ENUM_VALUE.Fields = append(__GongStructShape__000011_attribute_ENUM_VALUE.Fields, __Field__000018_LONG_NAME)
 	__GongStructShape__000011_attribute_ENUM_VALUE.Links = append(__GongStructShape__000011_attribute_ENUM_VALUE.Links, __Link__000006_PROPERTIES)
 	__GongStructShape__000012_attribute_REQ_IF_CONTENT.Position = __Position__000012_Pos_attribute_REQ_IF_CONTENT
 	__GongStructShape__000012_attribute_REQ_IF_CONTENT.Links = append(__GongStructShape__000012_attribute_REQ_IF_CONTENT.Links, __Link__000010_SPEC_TYPES)
 	__GongStructShape__000012_attribute_REQ_IF_CONTENT.Links = append(__GongStructShape__000012_attribute_REQ_IF_CONTENT.Links, __Link__000002_DATATYPES)
 	__GongStructShape__000013_attribute_SPEC_OBJECT_TYPE.Position = __Position__000013_Pos_attribute_SPEC_OBJECT_TYPE
 	__GongStructShape__000013_attribute_SPEC_OBJECT_TYPE.Fields = append(__GongStructShape__000013_attribute_SPEC_OBJECT_TYPE.Fields, __Field__000002_IDENTIFIER)
-	__GongStructShape__000013_attribute_SPEC_OBJECT_TYPE.Fields = append(__GongStructShape__000013_attribute_SPEC_OBJECT_TYPE.Fields, __Field__000012_LAST_CHANGE)
-	__GongStructShape__000013_attribute_SPEC_OBJECT_TYPE.Fields = append(__GongStructShape__000013_attribute_SPEC_OBJECT_TYPE.Fields, __Field__000019_LONG_NAME)
+	__GongStructShape__000013_attribute_SPEC_OBJECT_TYPE.Fields = append(__GongStructShape__000013_attribute_SPEC_OBJECT_TYPE.Fields, __Field__000010_LAST_CHANGE)
+	__GongStructShape__000013_attribute_SPEC_OBJECT_TYPE.Fields = append(__GongStructShape__000013_attribute_SPEC_OBJECT_TYPE.Fields, __Field__000017_LONG_NAME)
 	__GongStructShape__000013_attribute_SPEC_OBJECT_TYPE.Links = append(__GongStructShape__000013_attribute_SPEC_OBJECT_TYPE.Links, __Link__000008_SPEC_ATTRIBUTES)
 	__Link__000000_ATTRIBUTE_DEFINITION_ENUMERATION.Middlevertice = __Vertice__000005_Verticle_in_class_diagram_attribute_in_middle_between_attribute_A_SPEC_ATTRIBUTES_and_attribute_ATTRIBUTE_DEFINITION_ENUMERATION
 	__Link__000001_ATTRIBUTE_DEFINITION_XHTML.Middlevertice = __Vertice__000006_Verticle_in_class_diagram_attribute_in_middle_between_attribute_A_SPEC_ATTRIBUTES_and_attribute_ATTRIBUTE_DEFINITION_XHTML
@@ -886,6 +886,6 @@ func _(stage *models.StageStruct) {
 	__Link__000008_SPEC_ATTRIBUTES.Middlevertice = __Vertice__000012_Verticle_in_class_diagram_attribute_in_middle_between_attribute_SPEC_OBJECT_TYPE_and_attribute_A_SPEC_ATTRIBUTES
 	__Link__000009_SPEC_OBJECT_TYPE.Middlevertice = __Vertice__000007_Verticle_in_class_diagram_attribute_in_middle_between_attribute_A_SPEC_TYPES_and_attribute_SPEC_OBJECT_TYPE
 	__Link__000010_SPEC_TYPES.Middlevertice = __Vertice__000011_Verticle_in_class_diagram_attribute_in_middle_between_attribute_REQ_IF_CONTENT_and_attribute_A_SPEC_TYPES
-	__Link__000011_TYPE.Middlevertice = __Vertice__000001_Verticle_in_class_diagram_attribute_in_middle_between_attribute_ATTRIBUTE_DEFINITION_XHTML_and_attribute_A_DATATYPE_DEFINITION_XHTML_REF
-	__Link__000012_TYPE.Middlevertice = __Vertice__000000_Verticle_in_class_diagram_attribute_in_middle_between_attribute_ATTRIBUTE_DEFINITION_ENUMERATION_and_attribute_A_DATATYPE_DEFINITION_ENUMERATION_REF
+	__Link__000011_TYPE.Middlevertice = __Vertice__000000_Verticle_in_class_diagram_attribute_in_middle_between_attribute_ATTRIBUTE_DEFINITION_ENUMERATION_and_attribute_A_DATATYPE_DEFINITION_ENUMERATION_REF
+	__Link__000012_TYPE.Middlevertice = __Vertice__000001_Verticle_in_class_diagram_attribute_in_middle_between_attribute_ATTRIBUTE_DEFINITION_XHTML_and_attribute_A_DATATYPE_DEFINITION_XHTML_REF
 }
