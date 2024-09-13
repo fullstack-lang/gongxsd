@@ -211,8 +211,12 @@ func (level2 Level2) ToInt() (res int) {
 		res = 3
 	case Level2Enumname:
 		res = 4
-	case Level2Nb:
+	case Level2EnumComment:
 		res = 5
+	case Level2EnumValues:
+		res = 6
+	case Level2Nb:
+		res = 7
 	}
 	return
 }
@@ -237,6 +241,12 @@ func (level2 *Level2) FromInt(input int) (err error) {
 		*level2 = Level2Enumname
 		return
 	case 5:
+		*level2 = Level2EnumComment
+		return
+	case 6:
+		*level2 = Level2EnumValues
+		return
+	case 7:
 		*level2 = Level2Nb
 		return
 	default:
@@ -258,6 +268,10 @@ func (level2 *Level2) FromCodeString(input string) (err error) {
 		*level2 = Level2Fields
 	case "Level2Enumname":
 		*level2 = Level2Enumname
+	case "Level2EnumComment":
+		*level2 = Level2EnumComment
+	case "Level2EnumValues":
+		*level2 = Level2EnumValues
 	case "Level2Nb":
 		*level2 = Level2Nb
 	default:
@@ -280,6 +294,10 @@ func (level2 *Level2) ToCodeString() (res string) {
 		res = "Level2Fields"
 	case Level2Enumname:
 		res = "Level2Enumname"
+	case Level2EnumComment:
+		res = "Level2EnumComment"
+	case Level2EnumValues:
+		res = "Level2EnumValues"
 	case Level2Nb:
 		res = "Level2Nb"
 	}
@@ -296,6 +314,8 @@ func (level2 Level2) Codes() (res []string) {
 	res = append(res, "Level2Source")
 	res = append(res, "Level2Fields")
 	res = append(res, "Level2Enumname")
+	res = append(res, "Level2EnumComment")
+	res = append(res, "Level2EnumValues")
 	res = append(res, "Level2Nb")
 
 	return
@@ -312,6 +332,98 @@ func (level2 Level2) CodeValues() (res []int) {
 	res = append(res, 3)
 	res = append(res, 4)
 	res = append(res, 5)
+	res = append(res, 6)
+	res = append(res, 7)
+
+	return
+}
+
+// Utility function for Level3
+// if enum values are string, it is stored with the value
+// if enum values are int, they are stored with the code of the value
+func (level3 Level3) ToInt() (res int) {
+
+	// migration of former implementation of enum
+	switch level3 {
+	// insertion code per enum code
+	case Level3EnumValueIdentifier:
+		res = 0
+	case Level3EnumValueString:
+		res = 1
+	case Level3Nb:
+		res = 2
+	}
+	return
+}
+
+func (level3 *Level3) FromInt(input int) (err error) {
+
+	switch input {
+	// insertion code per enum code
+	case 0:
+		*level3 = Level3EnumValueIdentifier
+		return
+	case 1:
+		*level3 = Level3EnumValueString
+		return
+	case 2:
+		*level3 = Level3Nb
+		return
+	default:
+		return errUnkownEnum
+	}
+}
+
+func (level3 *Level3) FromCodeString(input string) (err error) {
+
+	switch input {
+	// insertion code per enum code
+	case "Level3EnumValueIdentifier":
+		*level3 = Level3EnumValueIdentifier
+	case "Level3EnumValueString":
+		*level3 = Level3EnumValueString
+	case "Level3Nb":
+		*level3 = Level3Nb
+	default:
+		return errUnkownEnum
+	}
+	return
+}
+
+func (level3 *Level3) ToCodeString() (res string) {
+
+	switch *level3 {
+	// insertion code per enum code
+	case Level3EnumValueIdentifier:
+		res = "Level3EnumValueIdentifier"
+	case Level3EnumValueString:
+		res = "Level3EnumValueString"
+	case Level3Nb:
+		res = "Level3Nb"
+	}
+	return
+}
+
+func (level3 Level3) Codes() (res []string) {
+
+	res = make([]string, 0)
+
+	// insertion code per enum code
+	res = append(res, "Level3EnumValueIdentifier")
+	res = append(res, "Level3EnumValueString")
+	res = append(res, "Level3Nb")
+
+	return
+}
+
+func (level3 Level3) CodeValues() (res []int) {
+
+	res = make([]int, 0)
+
+	// insertion code per enum code
+	res = append(res, 0)
+	res = append(res, 1)
+	res = append(res, 2)
 
 	return
 }
@@ -329,13 +441,13 @@ type PointerToGongstructEnumStringField interface {
 }
 
 type GongstructEnumIntField interface {
-	int | Level0 | Level1 | Level2
+	int | Level0 | Level1 | Level2 | Level3
 	Codes() []string
 	CodeValues() []int
 }
 
 type PointerToGongstructEnumIntField interface {
-	*Level0 | *Level1 | *Level2
+	*Level0 | *Level1 | *Level2 | *Level3
 	FromCodeString(input string) (err error)
 }
 
