@@ -70,12 +70,12 @@ func (controller *Controller) GetSchemas(c *gin.Context) {
 	}
 	db := backRepo.BackRepoSchema.GetDB()
 
-	query := db.Find(&schemaDBs)
-	if query.Error != nil {
+	_, err := db.Find(&schemaDBs)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -151,12 +151,12 @@ func (controller *Controller) PostSchema(c *gin.Context) {
 	schemaDB.SchemaPointersEncoding = input.SchemaPointersEncoding
 	schemaDB.CopyBasicFieldsFromSchema_WOP(&input.Schema_WOP)
 
-	query := db.Create(&schemaDB)
-	if query.Error != nil {
+	_, err = db.Create(&schemaDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -205,7 +205,7 @@ func (controller *Controller) GetSchema(c *gin.Context) {
 
 	// Get schemaDB in DB
 	var schemaDB orm.SchemaDB
-	if err := db.First(&schemaDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&schemaDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -264,13 +264,13 @@ func (controller *Controller) UpdateSchema(c *gin.Context) {
 	var schemaDB orm.SchemaDB
 
 	// fetch the schema
-	query := db.First(&schemaDB, c.Param("id"))
+	_, err := db.First(&schemaDB, c.Param("id"))
 
-	if query.Error != nil {
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -279,12 +279,13 @@ func (controller *Controller) UpdateSchema(c *gin.Context) {
 	schemaDB.CopyBasicFieldsFromSchema_WOP(&input.Schema_WOP)
 	schemaDB.SchemaPointersEncoding = input.SchemaPointersEncoding
 
-	query = db.Model(&schemaDB).Updates(schemaDB)
-	if query.Error != nil {
+	db, _ = db.Model(&schemaDB)
+	_, err = db.Updates(schemaDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -343,7 +344,7 @@ func (controller *Controller) DeleteSchema(c *gin.Context) {
 
 	// Get model if exist
 	var schemaDB orm.SchemaDB
-	if err := db.First(&schemaDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&schemaDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -353,7 +354,8 @@ func (controller *Controller) DeleteSchema(c *gin.Context) {
 	}
 
 	// with gorm.Model field, default delete is a soft delete. Unscoped() force delete
-	db.Unscoped().Delete(&schemaDB)
+	db.Unscoped()
+	db.Delete(&schemaDB)
 
 	// get an instance (not staged) from DB instance, and call callback function
 	schemaDeleted := new(models.Schema)

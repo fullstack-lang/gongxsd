@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/go/db"
 	"github.com/fullstack-lang/gongxsd/go/models"
 )
 
@@ -68,7 +69,7 @@ type TotalDigitDB struct {
 
 	// Declation for basic field totaldigitDB.Value
 	Value_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	TotalDigitPointersEncoding
@@ -114,7 +115,7 @@ type BackRepoTotalDigitStruct struct {
 	// stores TotalDigit according to their gorm ID
 	Map_TotalDigitDBID_TotalDigitPtr map[uint]*models.TotalDigit
 
-	db *gorm.DB
+	db db.DBInterface
 
 	stage *models.StageStruct
 }
@@ -124,7 +125,7 @@ func (backRepoTotalDigit *BackRepoTotalDigitStruct) GetStage() (stage *models.St
 	return
 }
 
-func (backRepoTotalDigit *BackRepoTotalDigitStruct) GetDB() *gorm.DB {
+func (backRepoTotalDigit *BackRepoTotalDigitStruct) GetDB() db.DBInterface {
 	return backRepoTotalDigit.db
 }
 
@@ -161,9 +162,10 @@ func (backRepoTotalDigit *BackRepoTotalDigitStruct) CommitDeleteInstance(id uint
 
 	// totaldigit is not staged anymore, remove totaldigitDB
 	totaldigitDB := backRepoTotalDigit.Map_TotalDigitDBID_TotalDigitDB[id]
-	query := backRepoTotalDigit.db.Unscoped().Delete(&totaldigitDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoTotalDigit.db.Unscoped()
+	_, err := db.Delete(&totaldigitDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -187,9 +189,9 @@ func (backRepoTotalDigit *BackRepoTotalDigitStruct) CommitPhaseOneInstance(total
 	var totaldigitDB TotalDigitDB
 	totaldigitDB.CopyBasicFieldsFromTotalDigit(totaldigit)
 
-	query := backRepoTotalDigit.db.Create(&totaldigitDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoTotalDigit.db.Create(&totaldigitDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -233,9 +235,9 @@ func (backRepoTotalDigit *BackRepoTotalDigitStruct) CommitPhaseTwoInstance(backR
 			totaldigitDB.AnnotationID.Valid = true
 		}
 
-		query := backRepoTotalDigit.db.Save(&totaldigitDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoTotalDigit.db.Save(&totaldigitDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -254,9 +256,9 @@ func (backRepoTotalDigit *BackRepoTotalDigitStruct) CommitPhaseTwoInstance(backR
 func (backRepoTotalDigit *BackRepoTotalDigitStruct) CheckoutPhaseOne() (Error error) {
 
 	totaldigitDBArray := make([]TotalDigitDB, 0)
-	query := backRepoTotalDigit.db.Find(&totaldigitDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoTotalDigit.db.Find(&totaldigitDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -372,7 +374,7 @@ func (backRepo *BackRepoStruct) CheckoutTotalDigit(totaldigit *models.TotalDigit
 			var totaldigitDB TotalDigitDB
 			totaldigitDB.ID = id
 
-			if err := backRepo.BackRepoTotalDigit.db.First(&totaldigitDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoTotalDigit.db.First(&totaldigitDB, id); err != nil {
 				log.Fatalln("CheckoutTotalDigit : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoTotalDigit.CheckoutPhaseOneInstance(&totaldigitDB)
@@ -531,9 +533,9 @@ func (backRepoTotalDigit *BackRepoTotalDigitStruct) rowVisitorTotalDigit(row *xl
 
 		totaldigitDB_ID_atBackupTime := totaldigitDB.ID
 		totaldigitDB.ID = 0
-		query := backRepoTotalDigit.db.Create(totaldigitDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoTotalDigit.db.Create(totaldigitDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoTotalDigit.Map_TotalDigitDBID_TotalDigitDB[totaldigitDB.ID] = totaldigitDB
 		BackRepoTotalDigitid_atBckpTime_newID[totaldigitDB_ID_atBackupTime] = totaldigitDB.ID
@@ -568,9 +570,9 @@ func (backRepoTotalDigit *BackRepoTotalDigitStruct) RestorePhaseOne(dirPath stri
 
 		totaldigitDB_ID_atBackupTime := totaldigitDB.ID
 		totaldigitDB.ID = 0
-		query := backRepoTotalDigit.db.Create(totaldigitDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoTotalDigit.db.Create(totaldigitDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoTotalDigit.Map_TotalDigitDBID_TotalDigitDB[totaldigitDB.ID] = totaldigitDB
 		BackRepoTotalDigitid_atBckpTime_newID[totaldigitDB_ID_atBackupTime] = totaldigitDB.ID
@@ -598,9 +600,10 @@ func (backRepoTotalDigit *BackRepoTotalDigitStruct) RestorePhaseTwo() {
 		}
 
 		// update databse with new index encoding
-		query := backRepoTotalDigit.db.Model(totaldigitDB).Updates(*totaldigitDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoTotalDigit.db.Model(totaldigitDB)
+		_, err := db.Updates(*totaldigitDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

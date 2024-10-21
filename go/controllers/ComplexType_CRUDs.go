@@ -70,12 +70,12 @@ func (controller *Controller) GetComplexTypes(c *gin.Context) {
 	}
 	db := backRepo.BackRepoComplexType.GetDB()
 
-	query := db.Find(&complextypeDBs)
-	if query.Error != nil {
+	_, err := db.Find(&complextypeDBs)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -151,12 +151,12 @@ func (controller *Controller) PostComplexType(c *gin.Context) {
 	complextypeDB.ComplexTypePointersEncoding = input.ComplexTypePointersEncoding
 	complextypeDB.CopyBasicFieldsFromComplexType_WOP(&input.ComplexType_WOP)
 
-	query := db.Create(&complextypeDB)
-	if query.Error != nil {
+	_, err = db.Create(&complextypeDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -205,7 +205,7 @@ func (controller *Controller) GetComplexType(c *gin.Context) {
 
 	// Get complextypeDB in DB
 	var complextypeDB orm.ComplexTypeDB
-	if err := db.First(&complextypeDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&complextypeDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -264,13 +264,13 @@ func (controller *Controller) UpdateComplexType(c *gin.Context) {
 	var complextypeDB orm.ComplexTypeDB
 
 	// fetch the complextype
-	query := db.First(&complextypeDB, c.Param("id"))
+	_, err := db.First(&complextypeDB, c.Param("id"))
 
-	if query.Error != nil {
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -279,12 +279,13 @@ func (controller *Controller) UpdateComplexType(c *gin.Context) {
 	complextypeDB.CopyBasicFieldsFromComplexType_WOP(&input.ComplexType_WOP)
 	complextypeDB.ComplexTypePointersEncoding = input.ComplexTypePointersEncoding
 
-	query = db.Model(&complextypeDB).Updates(complextypeDB)
-	if query.Error != nil {
+	db, _ = db.Model(&complextypeDB)
+	_, err = db.Updates(complextypeDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -343,7 +344,7 @@ func (controller *Controller) DeleteComplexType(c *gin.Context) {
 
 	// Get model if exist
 	var complextypeDB orm.ComplexTypeDB
-	if err := db.First(&complextypeDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&complextypeDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -353,7 +354,8 @@ func (controller *Controller) DeleteComplexType(c *gin.Context) {
 	}
 
 	// with gorm.Model field, default delete is a soft delete. Unscoped() force delete
-	db.Unscoped().Delete(&complextypeDB)
+	db.Unscoped()
+	db.Delete(&complextypeDB)
 
 	// get an instance (not staged) from DB instance, and call callback function
 	complextypeDeleted := new(models.ComplexType)

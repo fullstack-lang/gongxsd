@@ -70,12 +70,12 @@ func (controller *Controller) GetExtensions(c *gin.Context) {
 	}
 	db := backRepo.BackRepoExtension.GetDB()
 
-	query := db.Find(&extensionDBs)
-	if query.Error != nil {
+	_, err := db.Find(&extensionDBs)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -151,12 +151,12 @@ func (controller *Controller) PostExtension(c *gin.Context) {
 	extensionDB.ExtensionPointersEncoding = input.ExtensionPointersEncoding
 	extensionDB.CopyBasicFieldsFromExtension_WOP(&input.Extension_WOP)
 
-	query := db.Create(&extensionDB)
-	if query.Error != nil {
+	_, err = db.Create(&extensionDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -205,7 +205,7 @@ func (controller *Controller) GetExtension(c *gin.Context) {
 
 	// Get extensionDB in DB
 	var extensionDB orm.ExtensionDB
-	if err := db.First(&extensionDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&extensionDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -264,13 +264,13 @@ func (controller *Controller) UpdateExtension(c *gin.Context) {
 	var extensionDB orm.ExtensionDB
 
 	// fetch the extension
-	query := db.First(&extensionDB, c.Param("id"))
+	_, err := db.First(&extensionDB, c.Param("id"))
 
-	if query.Error != nil {
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -279,12 +279,13 @@ func (controller *Controller) UpdateExtension(c *gin.Context) {
 	extensionDB.CopyBasicFieldsFromExtension_WOP(&input.Extension_WOP)
 	extensionDB.ExtensionPointersEncoding = input.ExtensionPointersEncoding
 
-	query = db.Model(&extensionDB).Updates(extensionDB)
-	if query.Error != nil {
+	db, _ = db.Model(&extensionDB)
+	_, err = db.Updates(extensionDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -343,7 +344,7 @@ func (controller *Controller) DeleteExtension(c *gin.Context) {
 
 	// Get model if exist
 	var extensionDB orm.ExtensionDB
-	if err := db.First(&extensionDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&extensionDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -353,7 +354,8 @@ func (controller *Controller) DeleteExtension(c *gin.Context) {
 	}
 
 	// with gorm.Model field, default delete is a soft delete. Unscoped() force delete
-	db.Unscoped().Delete(&extensionDB)
+	db.Unscoped()
+	db.Delete(&extensionDB)
 
 	// get an instance (not staged) from DB instance, and call callback function
 	extensionDeleted := new(models.Extension)

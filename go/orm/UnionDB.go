@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/go/db"
 	"github.com/fullstack-lang/gongxsd/go/models"
 )
 
@@ -68,7 +69,7 @@ type UnionDB struct {
 
 	// Declation for basic field unionDB.MemberTypes
 	MemberTypes_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	UnionPointersEncoding
@@ -114,7 +115,7 @@ type BackRepoUnionStruct struct {
 	// stores Union according to their gorm ID
 	Map_UnionDBID_UnionPtr map[uint]*models.Union
 
-	db *gorm.DB
+	db db.DBInterface
 
 	stage *models.StageStruct
 }
@@ -124,7 +125,7 @@ func (backRepoUnion *BackRepoUnionStruct) GetStage() (stage *models.StageStruct)
 	return
 }
 
-func (backRepoUnion *BackRepoUnionStruct) GetDB() *gorm.DB {
+func (backRepoUnion *BackRepoUnionStruct) GetDB() db.DBInterface {
 	return backRepoUnion.db
 }
 
@@ -161,9 +162,10 @@ func (backRepoUnion *BackRepoUnionStruct) CommitDeleteInstance(id uint) (Error e
 
 	// union is not staged anymore, remove unionDB
 	unionDB := backRepoUnion.Map_UnionDBID_UnionDB[id]
-	query := backRepoUnion.db.Unscoped().Delete(&unionDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoUnion.db.Unscoped()
+	_, err := db.Delete(&unionDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -187,9 +189,9 @@ func (backRepoUnion *BackRepoUnionStruct) CommitPhaseOneInstance(union *models.U
 	var unionDB UnionDB
 	unionDB.CopyBasicFieldsFromUnion(union)
 
-	query := backRepoUnion.db.Create(&unionDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoUnion.db.Create(&unionDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -233,9 +235,9 @@ func (backRepoUnion *BackRepoUnionStruct) CommitPhaseTwoInstance(backRepo *BackR
 			unionDB.AnnotationID.Valid = true
 		}
 
-		query := backRepoUnion.db.Save(&unionDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoUnion.db.Save(&unionDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -254,9 +256,9 @@ func (backRepoUnion *BackRepoUnionStruct) CommitPhaseTwoInstance(backRepo *BackR
 func (backRepoUnion *BackRepoUnionStruct) CheckoutPhaseOne() (Error error) {
 
 	unionDBArray := make([]UnionDB, 0)
-	query := backRepoUnion.db.Find(&unionDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoUnion.db.Find(&unionDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -372,7 +374,7 @@ func (backRepo *BackRepoStruct) CheckoutUnion(union *models.Union) {
 			var unionDB UnionDB
 			unionDB.ID = id
 
-			if err := backRepo.BackRepoUnion.db.First(&unionDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoUnion.db.First(&unionDB, id); err != nil {
 				log.Fatalln("CheckoutUnion : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoUnion.CheckoutPhaseOneInstance(&unionDB)
@@ -531,9 +533,9 @@ func (backRepoUnion *BackRepoUnionStruct) rowVisitorUnion(row *xlsx.Row) error {
 
 		unionDB_ID_atBackupTime := unionDB.ID
 		unionDB.ID = 0
-		query := backRepoUnion.db.Create(unionDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoUnion.db.Create(unionDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoUnion.Map_UnionDBID_UnionDB[unionDB.ID] = unionDB
 		BackRepoUnionid_atBckpTime_newID[unionDB_ID_atBackupTime] = unionDB.ID
@@ -568,9 +570,9 @@ func (backRepoUnion *BackRepoUnionStruct) RestorePhaseOne(dirPath string) {
 
 		unionDB_ID_atBackupTime := unionDB.ID
 		unionDB.ID = 0
-		query := backRepoUnion.db.Create(unionDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoUnion.db.Create(unionDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoUnion.Map_UnionDBID_UnionDB[unionDB.ID] = unionDB
 		BackRepoUnionid_atBckpTime_newID[unionDB_ID_atBackupTime] = unionDB.ID
@@ -598,9 +600,10 @@ func (backRepoUnion *BackRepoUnionStruct) RestorePhaseTwo() {
 		}
 
 		// update databse with new index encoding
-		query := backRepoUnion.db.Model(unionDB).Updates(*unionDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoUnion.db.Model(unionDB)
+		_, err := db.Updates(*unionDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

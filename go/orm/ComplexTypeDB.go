@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/go/db"
 	"github.com/fullstack-lang/gongxsd/go/models"
 )
 
@@ -135,7 +136,7 @@ type ComplexTypeDB struct {
 	// Declation for basic field complextypeDB.IsDuplicatedInXSD
 	// provide the sql storage for the boolan
 	IsDuplicatedInXSD_Data sql.NullBool
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	ComplexTypePointersEncoding
@@ -208,7 +209,7 @@ type BackRepoComplexTypeStruct struct {
 	// stores ComplexType according to their gorm ID
 	Map_ComplexTypeDBID_ComplexTypePtr map[uint]*models.ComplexType
 
-	db *gorm.DB
+	db db.DBInterface
 
 	stage *models.StageStruct
 }
@@ -218,7 +219,7 @@ func (backRepoComplexType *BackRepoComplexTypeStruct) GetStage() (stage *models.
 	return
 }
 
-func (backRepoComplexType *BackRepoComplexTypeStruct) GetDB() *gorm.DB {
+func (backRepoComplexType *BackRepoComplexTypeStruct) GetDB() db.DBInterface {
 	return backRepoComplexType.db
 }
 
@@ -255,9 +256,10 @@ func (backRepoComplexType *BackRepoComplexTypeStruct) CommitDeleteInstance(id ui
 
 	// complextype is not staged anymore, remove complextypeDB
 	complextypeDB := backRepoComplexType.Map_ComplexTypeDBID_ComplexTypeDB[id]
-	query := backRepoComplexType.db.Unscoped().Delete(&complextypeDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoComplexType.db.Unscoped()
+	_, err := db.Delete(&complextypeDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -281,9 +283,9 @@ func (backRepoComplexType *BackRepoComplexTypeStruct) CommitPhaseOneInstance(com
 	var complextypeDB ComplexTypeDB
 	complextypeDB.CopyBasicFieldsFromComplexType(complextype)
 
-	query := backRepoComplexType.db.Create(&complextypeDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoComplexType.db.Create(&complextypeDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -501,9 +503,9 @@ func (backRepoComplexType *BackRepoComplexTypeStruct) CommitPhaseTwoInstance(bac
 				append(complextypeDB.ComplexTypePointersEncoding.AttributeGroups, int(attributegroupAssocEnd_DB.ID))
 		}
 
-		query := backRepoComplexType.db.Save(&complextypeDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoComplexType.db.Save(&complextypeDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -522,9 +524,9 @@ func (backRepoComplexType *BackRepoComplexTypeStruct) CommitPhaseTwoInstance(bac
 func (backRepoComplexType *BackRepoComplexTypeStruct) CheckoutPhaseOne() (Error error) {
 
 	complextypeDBArray := make([]ComplexTypeDB, 0)
-	query := backRepoComplexType.db.Find(&complextypeDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoComplexType.db.Find(&complextypeDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -723,7 +725,7 @@ func (backRepo *BackRepoStruct) CheckoutComplexType(complextype *models.ComplexT
 			var complextypeDB ComplexTypeDB
 			complextypeDB.ID = id
 
-			if err := backRepo.BackRepoComplexType.db.First(&complextypeDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoComplexType.db.First(&complextypeDB, id); err != nil {
 				log.Fatalln("CheckoutComplexType : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoComplexType.CheckoutPhaseOneInstance(&complextypeDB)
@@ -990,9 +992,9 @@ func (backRepoComplexType *BackRepoComplexTypeStruct) rowVisitorComplexType(row 
 
 		complextypeDB_ID_atBackupTime := complextypeDB.ID
 		complextypeDB.ID = 0
-		query := backRepoComplexType.db.Create(complextypeDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoComplexType.db.Create(complextypeDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoComplexType.Map_ComplexTypeDBID_ComplexTypeDB[complextypeDB.ID] = complextypeDB
 		BackRepoComplexTypeid_atBckpTime_newID[complextypeDB_ID_atBackupTime] = complextypeDB.ID
@@ -1027,9 +1029,9 @@ func (backRepoComplexType *BackRepoComplexTypeStruct) RestorePhaseOne(dirPath st
 
 		complextypeDB_ID_atBackupTime := complextypeDB.ID
 		complextypeDB.ID = 0
-		query := backRepoComplexType.db.Create(complextypeDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoComplexType.db.Create(complextypeDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoComplexType.Map_ComplexTypeDBID_ComplexTypeDB[complextypeDB.ID] = complextypeDB
 		BackRepoComplexTypeid_atBckpTime_newID[complextypeDB_ID_atBackupTime] = complextypeDB.ID
@@ -1081,9 +1083,10 @@ func (backRepoComplexType *BackRepoComplexTypeStruct) RestorePhaseTwo() {
 		}
 
 		// update databse with new index encoding
-		query := backRepoComplexType.db.Model(complextypeDB).Updates(*complextypeDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoComplexType.db.Model(complextypeDB)
+		_, err := db.Updates(*complextypeDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

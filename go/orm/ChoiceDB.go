@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/go/db"
 	"github.com/fullstack-lang/gongxsd/go/models"
 )
 
@@ -99,7 +100,7 @@ type ChoiceDB struct {
 	// Declation for basic field choiceDB.IsDuplicatedInXSD
 	// provide the sql storage for the boolan
 	IsDuplicatedInXSD_Data sql.NullBool
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	ChoicePointersEncoding
@@ -160,7 +161,7 @@ type BackRepoChoiceStruct struct {
 	// stores Choice according to their gorm ID
 	Map_ChoiceDBID_ChoicePtr map[uint]*models.Choice
 
-	db *gorm.DB
+	db db.DBInterface
 
 	stage *models.StageStruct
 }
@@ -170,7 +171,7 @@ func (backRepoChoice *BackRepoChoiceStruct) GetStage() (stage *models.StageStruc
 	return
 }
 
-func (backRepoChoice *BackRepoChoiceStruct) GetDB() *gorm.DB {
+func (backRepoChoice *BackRepoChoiceStruct) GetDB() db.DBInterface {
 	return backRepoChoice.db
 }
 
@@ -207,9 +208,10 @@ func (backRepoChoice *BackRepoChoiceStruct) CommitDeleteInstance(id uint) (Error
 
 	// choice is not staged anymore, remove choiceDB
 	choiceDB := backRepoChoice.Map_ChoiceDBID_ChoiceDB[id]
-	query := backRepoChoice.db.Unscoped().Delete(&choiceDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoChoice.db.Unscoped()
+	_, err := db.Delete(&choiceDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -233,9 +235,9 @@ func (backRepoChoice *BackRepoChoiceStruct) CommitPhaseOneInstance(choice *model
 	var choiceDB ChoiceDB
 	choiceDB.CopyBasicFieldsFromChoice(choice)
 
-	query := backRepoChoice.db.Create(&choiceDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoChoice.db.Create(&choiceDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -369,9 +371,9 @@ func (backRepoChoice *BackRepoChoiceStruct) CommitPhaseTwoInstance(backRepo *Bac
 				append(choiceDB.ChoicePointersEncoding.Elements, int(elementAssocEnd_DB.ID))
 		}
 
-		query := backRepoChoice.db.Save(&choiceDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoChoice.db.Save(&choiceDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -390,9 +392,9 @@ func (backRepoChoice *BackRepoChoiceStruct) CommitPhaseTwoInstance(backRepo *Bac
 func (backRepoChoice *BackRepoChoiceStruct) CheckoutPhaseOne() (Error error) {
 
 	choiceDBArray := make([]ChoiceDB, 0)
-	query := backRepoChoice.db.Find(&choiceDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoChoice.db.Find(&choiceDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -553,7 +555,7 @@ func (backRepo *BackRepoStruct) CheckoutChoice(choice *models.Choice) {
 			var choiceDB ChoiceDB
 			choiceDB.ID = id
 
-			if err := backRepo.BackRepoChoice.db.First(&choiceDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoChoice.db.First(&choiceDB, id); err != nil {
 				log.Fatalln("CheckoutChoice : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoChoice.CheckoutPhaseOneInstance(&choiceDB)
@@ -772,9 +774,9 @@ func (backRepoChoice *BackRepoChoiceStruct) rowVisitorChoice(row *xlsx.Row) erro
 
 		choiceDB_ID_atBackupTime := choiceDB.ID
 		choiceDB.ID = 0
-		query := backRepoChoice.db.Create(choiceDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoChoice.db.Create(choiceDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoChoice.Map_ChoiceDBID_ChoiceDB[choiceDB.ID] = choiceDB
 		BackRepoChoiceid_atBckpTime_newID[choiceDB_ID_atBackupTime] = choiceDB.ID
@@ -809,9 +811,9 @@ func (backRepoChoice *BackRepoChoiceStruct) RestorePhaseOne(dirPath string) {
 
 		choiceDB_ID_atBackupTime := choiceDB.ID
 		choiceDB.ID = 0
-		query := backRepoChoice.db.Create(choiceDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoChoice.db.Create(choiceDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoChoice.Map_ChoiceDBID_ChoiceDB[choiceDB.ID] = choiceDB
 		BackRepoChoiceid_atBckpTime_newID[choiceDB_ID_atBackupTime] = choiceDB.ID
@@ -839,9 +841,10 @@ func (backRepoChoice *BackRepoChoiceStruct) RestorePhaseTwo() {
 		}
 
 		// update databse with new index encoding
-		query := backRepoChoice.db.Model(choiceDB).Updates(*choiceDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoChoice.db.Model(choiceDB)
+		_, err := db.Updates(*choiceDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/go/db"
 	"github.com/fullstack-lang/gongxsd/go/models"
 )
 
@@ -68,7 +69,7 @@ type EnumerationDB struct {
 
 	// Declation for basic field enumerationDB.Value
 	Value_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	EnumerationPointersEncoding
@@ -114,7 +115,7 @@ type BackRepoEnumerationStruct struct {
 	// stores Enumeration according to their gorm ID
 	Map_EnumerationDBID_EnumerationPtr map[uint]*models.Enumeration
 
-	db *gorm.DB
+	db db.DBInterface
 
 	stage *models.StageStruct
 }
@@ -124,7 +125,7 @@ func (backRepoEnumeration *BackRepoEnumerationStruct) GetStage() (stage *models.
 	return
 }
 
-func (backRepoEnumeration *BackRepoEnumerationStruct) GetDB() *gorm.DB {
+func (backRepoEnumeration *BackRepoEnumerationStruct) GetDB() db.DBInterface {
 	return backRepoEnumeration.db
 }
 
@@ -161,9 +162,10 @@ func (backRepoEnumeration *BackRepoEnumerationStruct) CommitDeleteInstance(id ui
 
 	// enumeration is not staged anymore, remove enumerationDB
 	enumerationDB := backRepoEnumeration.Map_EnumerationDBID_EnumerationDB[id]
-	query := backRepoEnumeration.db.Unscoped().Delete(&enumerationDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoEnumeration.db.Unscoped()
+	_, err := db.Delete(&enumerationDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -187,9 +189,9 @@ func (backRepoEnumeration *BackRepoEnumerationStruct) CommitPhaseOneInstance(enu
 	var enumerationDB EnumerationDB
 	enumerationDB.CopyBasicFieldsFromEnumeration(enumeration)
 
-	query := backRepoEnumeration.db.Create(&enumerationDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoEnumeration.db.Create(&enumerationDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -233,9 +235,9 @@ func (backRepoEnumeration *BackRepoEnumerationStruct) CommitPhaseTwoInstance(bac
 			enumerationDB.AnnotationID.Valid = true
 		}
 
-		query := backRepoEnumeration.db.Save(&enumerationDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoEnumeration.db.Save(&enumerationDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -254,9 +256,9 @@ func (backRepoEnumeration *BackRepoEnumerationStruct) CommitPhaseTwoInstance(bac
 func (backRepoEnumeration *BackRepoEnumerationStruct) CheckoutPhaseOne() (Error error) {
 
 	enumerationDBArray := make([]EnumerationDB, 0)
-	query := backRepoEnumeration.db.Find(&enumerationDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoEnumeration.db.Find(&enumerationDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -372,7 +374,7 @@ func (backRepo *BackRepoStruct) CheckoutEnumeration(enumeration *models.Enumerat
 			var enumerationDB EnumerationDB
 			enumerationDB.ID = id
 
-			if err := backRepo.BackRepoEnumeration.db.First(&enumerationDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoEnumeration.db.First(&enumerationDB, id); err != nil {
 				log.Fatalln("CheckoutEnumeration : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoEnumeration.CheckoutPhaseOneInstance(&enumerationDB)
@@ -531,9 +533,9 @@ func (backRepoEnumeration *BackRepoEnumerationStruct) rowVisitorEnumeration(row 
 
 		enumerationDB_ID_atBackupTime := enumerationDB.ID
 		enumerationDB.ID = 0
-		query := backRepoEnumeration.db.Create(enumerationDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoEnumeration.db.Create(enumerationDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoEnumeration.Map_EnumerationDBID_EnumerationDB[enumerationDB.ID] = enumerationDB
 		BackRepoEnumerationid_atBckpTime_newID[enumerationDB_ID_atBackupTime] = enumerationDB.ID
@@ -568,9 +570,9 @@ func (backRepoEnumeration *BackRepoEnumerationStruct) RestorePhaseOne(dirPath st
 
 		enumerationDB_ID_atBackupTime := enumerationDB.ID
 		enumerationDB.ID = 0
-		query := backRepoEnumeration.db.Create(enumerationDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoEnumeration.db.Create(enumerationDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoEnumeration.Map_EnumerationDBID_EnumerationDB[enumerationDB.ID] = enumerationDB
 		BackRepoEnumerationid_atBckpTime_newID[enumerationDB_ID_atBackupTime] = enumerationDB.ID
@@ -598,9 +600,10 @@ func (backRepoEnumeration *BackRepoEnumerationStruct) RestorePhaseTwo() {
 		}
 
 		// update databse with new index encoding
-		query := backRepoEnumeration.db.Model(enumerationDB).Updates(*enumerationDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoEnumeration.db.Model(enumerationDB)
+		_, err := db.Updates(*enumerationDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

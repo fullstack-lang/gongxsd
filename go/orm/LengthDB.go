@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/go/db"
 	"github.com/fullstack-lang/gongxsd/go/models"
 )
 
@@ -68,7 +69,7 @@ type LengthDB struct {
 
 	// Declation for basic field lengthDB.Value
 	Value_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	LengthPointersEncoding
@@ -114,7 +115,7 @@ type BackRepoLengthStruct struct {
 	// stores Length according to their gorm ID
 	Map_LengthDBID_LengthPtr map[uint]*models.Length
 
-	db *gorm.DB
+	db db.DBInterface
 
 	stage *models.StageStruct
 }
@@ -124,7 +125,7 @@ func (backRepoLength *BackRepoLengthStruct) GetStage() (stage *models.StageStruc
 	return
 }
 
-func (backRepoLength *BackRepoLengthStruct) GetDB() *gorm.DB {
+func (backRepoLength *BackRepoLengthStruct) GetDB() db.DBInterface {
 	return backRepoLength.db
 }
 
@@ -161,9 +162,10 @@ func (backRepoLength *BackRepoLengthStruct) CommitDeleteInstance(id uint) (Error
 
 	// length is not staged anymore, remove lengthDB
 	lengthDB := backRepoLength.Map_LengthDBID_LengthDB[id]
-	query := backRepoLength.db.Unscoped().Delete(&lengthDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoLength.db.Unscoped()
+	_, err := db.Delete(&lengthDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -187,9 +189,9 @@ func (backRepoLength *BackRepoLengthStruct) CommitPhaseOneInstance(length *model
 	var lengthDB LengthDB
 	lengthDB.CopyBasicFieldsFromLength(length)
 
-	query := backRepoLength.db.Create(&lengthDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoLength.db.Create(&lengthDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -233,9 +235,9 @@ func (backRepoLength *BackRepoLengthStruct) CommitPhaseTwoInstance(backRepo *Bac
 			lengthDB.AnnotationID.Valid = true
 		}
 
-		query := backRepoLength.db.Save(&lengthDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoLength.db.Save(&lengthDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -254,9 +256,9 @@ func (backRepoLength *BackRepoLengthStruct) CommitPhaseTwoInstance(backRepo *Bac
 func (backRepoLength *BackRepoLengthStruct) CheckoutPhaseOne() (Error error) {
 
 	lengthDBArray := make([]LengthDB, 0)
-	query := backRepoLength.db.Find(&lengthDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoLength.db.Find(&lengthDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -372,7 +374,7 @@ func (backRepo *BackRepoStruct) CheckoutLength(length *models.Length) {
 			var lengthDB LengthDB
 			lengthDB.ID = id
 
-			if err := backRepo.BackRepoLength.db.First(&lengthDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoLength.db.First(&lengthDB, id); err != nil {
 				log.Fatalln("CheckoutLength : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoLength.CheckoutPhaseOneInstance(&lengthDB)
@@ -531,9 +533,9 @@ func (backRepoLength *BackRepoLengthStruct) rowVisitorLength(row *xlsx.Row) erro
 
 		lengthDB_ID_atBackupTime := lengthDB.ID
 		lengthDB.ID = 0
-		query := backRepoLength.db.Create(lengthDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoLength.db.Create(lengthDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoLength.Map_LengthDBID_LengthDB[lengthDB.ID] = lengthDB
 		BackRepoLengthid_atBckpTime_newID[lengthDB_ID_atBackupTime] = lengthDB.ID
@@ -568,9 +570,9 @@ func (backRepoLength *BackRepoLengthStruct) RestorePhaseOne(dirPath string) {
 
 		lengthDB_ID_atBackupTime := lengthDB.ID
 		lengthDB.ID = 0
-		query := backRepoLength.db.Create(lengthDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoLength.db.Create(lengthDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoLength.Map_LengthDBID_LengthDB[lengthDB.ID] = lengthDB
 		BackRepoLengthid_atBckpTime_newID[lengthDB_ID_atBackupTime] = lengthDB.ID
@@ -598,9 +600,10 @@ func (backRepoLength *BackRepoLengthStruct) RestorePhaseTwo() {
 		}
 
 		// update databse with new index encoding
-		query := backRepoLength.db.Model(lengthDB).Updates(*lengthDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoLength.db.Model(lengthDB)
+		_, err := db.Updates(*lengthDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

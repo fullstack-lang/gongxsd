@@ -70,12 +70,12 @@ func (controller *Controller) GetAnnotations(c *gin.Context) {
 	}
 	db := backRepo.BackRepoAnnotation.GetDB()
 
-	query := db.Find(&annotationDBs)
-	if query.Error != nil {
+	_, err := db.Find(&annotationDBs)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -151,12 +151,12 @@ func (controller *Controller) PostAnnotation(c *gin.Context) {
 	annotationDB.AnnotationPointersEncoding = input.AnnotationPointersEncoding
 	annotationDB.CopyBasicFieldsFromAnnotation_WOP(&input.Annotation_WOP)
 
-	query := db.Create(&annotationDB)
-	if query.Error != nil {
+	_, err = db.Create(&annotationDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -205,7 +205,7 @@ func (controller *Controller) GetAnnotation(c *gin.Context) {
 
 	// Get annotationDB in DB
 	var annotationDB orm.AnnotationDB
-	if err := db.First(&annotationDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&annotationDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -264,13 +264,13 @@ func (controller *Controller) UpdateAnnotation(c *gin.Context) {
 	var annotationDB orm.AnnotationDB
 
 	// fetch the annotation
-	query := db.First(&annotationDB, c.Param("id"))
+	_, err := db.First(&annotationDB, c.Param("id"))
 
-	if query.Error != nil {
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -279,12 +279,13 @@ func (controller *Controller) UpdateAnnotation(c *gin.Context) {
 	annotationDB.CopyBasicFieldsFromAnnotation_WOP(&input.Annotation_WOP)
 	annotationDB.AnnotationPointersEncoding = input.AnnotationPointersEncoding
 
-	query = db.Model(&annotationDB).Updates(annotationDB)
-	if query.Error != nil {
+	db, _ = db.Model(&annotationDB)
+	_, err = db.Updates(annotationDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -343,7 +344,7 @@ func (controller *Controller) DeleteAnnotation(c *gin.Context) {
 
 	// Get model if exist
 	var annotationDB orm.AnnotationDB
-	if err := db.First(&annotationDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&annotationDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -353,7 +354,8 @@ func (controller *Controller) DeleteAnnotation(c *gin.Context) {
 	}
 
 	// with gorm.Model field, default delete is a soft delete. Unscoped() force delete
-	db.Unscoped().Delete(&annotationDB)
+	db.Unscoped()
+	db.Delete(&annotationDB)
 
 	// get an instance (not staged) from DB instance, and call callback function
 	annotationDeleted := new(models.Annotation)

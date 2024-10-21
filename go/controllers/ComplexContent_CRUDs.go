@@ -70,12 +70,12 @@ func (controller *Controller) GetComplexContents(c *gin.Context) {
 	}
 	db := backRepo.BackRepoComplexContent.GetDB()
 
-	query := db.Find(&complexcontentDBs)
-	if query.Error != nil {
+	_, err := db.Find(&complexcontentDBs)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -151,12 +151,12 @@ func (controller *Controller) PostComplexContent(c *gin.Context) {
 	complexcontentDB.ComplexContentPointersEncoding = input.ComplexContentPointersEncoding
 	complexcontentDB.CopyBasicFieldsFromComplexContent_WOP(&input.ComplexContent_WOP)
 
-	query := db.Create(&complexcontentDB)
-	if query.Error != nil {
+	_, err = db.Create(&complexcontentDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -205,7 +205,7 @@ func (controller *Controller) GetComplexContent(c *gin.Context) {
 
 	// Get complexcontentDB in DB
 	var complexcontentDB orm.ComplexContentDB
-	if err := db.First(&complexcontentDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&complexcontentDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -264,13 +264,13 @@ func (controller *Controller) UpdateComplexContent(c *gin.Context) {
 	var complexcontentDB orm.ComplexContentDB
 
 	// fetch the complexcontent
-	query := db.First(&complexcontentDB, c.Param("id"))
+	_, err := db.First(&complexcontentDB, c.Param("id"))
 
-	if query.Error != nil {
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -279,12 +279,13 @@ func (controller *Controller) UpdateComplexContent(c *gin.Context) {
 	complexcontentDB.CopyBasicFieldsFromComplexContent_WOP(&input.ComplexContent_WOP)
 	complexcontentDB.ComplexContentPointersEncoding = input.ComplexContentPointersEncoding
 
-	query = db.Model(&complexcontentDB).Updates(complexcontentDB)
-	if query.Error != nil {
+	db, _ = db.Model(&complexcontentDB)
+	_, err = db.Updates(complexcontentDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -343,7 +344,7 @@ func (controller *Controller) DeleteComplexContent(c *gin.Context) {
 
 	// Get model if exist
 	var complexcontentDB orm.ComplexContentDB
-	if err := db.First(&complexcontentDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&complexcontentDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -353,7 +354,8 @@ func (controller *Controller) DeleteComplexContent(c *gin.Context) {
 	}
 
 	// with gorm.Model field, default delete is a soft delete. Unscoped() force delete
-	db.Unscoped().Delete(&complexcontentDB)
+	db.Unscoped()
+	db.Delete(&complexcontentDB)
 
 	// get an instance (not staged) from DB instance, and call callback function
 	complexcontentDeleted := new(models.ComplexContent)

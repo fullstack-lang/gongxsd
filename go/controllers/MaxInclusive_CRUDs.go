@@ -70,12 +70,12 @@ func (controller *Controller) GetMaxInclusives(c *gin.Context) {
 	}
 	db := backRepo.BackRepoMaxInclusive.GetDB()
 
-	query := db.Find(&maxinclusiveDBs)
-	if query.Error != nil {
+	_, err := db.Find(&maxinclusiveDBs)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -151,12 +151,12 @@ func (controller *Controller) PostMaxInclusive(c *gin.Context) {
 	maxinclusiveDB.MaxInclusivePointersEncoding = input.MaxInclusivePointersEncoding
 	maxinclusiveDB.CopyBasicFieldsFromMaxInclusive_WOP(&input.MaxInclusive_WOP)
 
-	query := db.Create(&maxinclusiveDB)
-	if query.Error != nil {
+	_, err = db.Create(&maxinclusiveDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -205,7 +205,7 @@ func (controller *Controller) GetMaxInclusive(c *gin.Context) {
 
 	// Get maxinclusiveDB in DB
 	var maxinclusiveDB orm.MaxInclusiveDB
-	if err := db.First(&maxinclusiveDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&maxinclusiveDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -264,13 +264,13 @@ func (controller *Controller) UpdateMaxInclusive(c *gin.Context) {
 	var maxinclusiveDB orm.MaxInclusiveDB
 
 	// fetch the maxinclusive
-	query := db.First(&maxinclusiveDB, c.Param("id"))
+	_, err := db.First(&maxinclusiveDB, c.Param("id"))
 
-	if query.Error != nil {
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -279,12 +279,13 @@ func (controller *Controller) UpdateMaxInclusive(c *gin.Context) {
 	maxinclusiveDB.CopyBasicFieldsFromMaxInclusive_WOP(&input.MaxInclusive_WOP)
 	maxinclusiveDB.MaxInclusivePointersEncoding = input.MaxInclusivePointersEncoding
 
-	query = db.Model(&maxinclusiveDB).Updates(maxinclusiveDB)
-	if query.Error != nil {
+	db, _ = db.Model(&maxinclusiveDB)
+	_, err = db.Updates(maxinclusiveDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -343,7 +344,7 @@ func (controller *Controller) DeleteMaxInclusive(c *gin.Context) {
 
 	// Get model if exist
 	var maxinclusiveDB orm.MaxInclusiveDB
-	if err := db.First(&maxinclusiveDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&maxinclusiveDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -353,7 +354,8 @@ func (controller *Controller) DeleteMaxInclusive(c *gin.Context) {
 	}
 
 	// with gorm.Model field, default delete is a soft delete. Unscoped() force delete
-	db.Unscoped().Delete(&maxinclusiveDB)
+	db.Unscoped()
+	db.Delete(&maxinclusiveDB)
 
 	// get an instance (not staged) from DB instance, and call callback function
 	maxinclusiveDeleted := new(models.MaxInclusive)

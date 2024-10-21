@@ -70,12 +70,12 @@ func (controller *Controller) GetMinInclusives(c *gin.Context) {
 	}
 	db := backRepo.BackRepoMinInclusive.GetDB()
 
-	query := db.Find(&mininclusiveDBs)
-	if query.Error != nil {
+	_, err := db.Find(&mininclusiveDBs)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -151,12 +151,12 @@ func (controller *Controller) PostMinInclusive(c *gin.Context) {
 	mininclusiveDB.MinInclusivePointersEncoding = input.MinInclusivePointersEncoding
 	mininclusiveDB.CopyBasicFieldsFromMinInclusive_WOP(&input.MinInclusive_WOP)
 
-	query := db.Create(&mininclusiveDB)
-	if query.Error != nil {
+	_, err = db.Create(&mininclusiveDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -205,7 +205,7 @@ func (controller *Controller) GetMinInclusive(c *gin.Context) {
 
 	// Get mininclusiveDB in DB
 	var mininclusiveDB orm.MinInclusiveDB
-	if err := db.First(&mininclusiveDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&mininclusiveDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -264,13 +264,13 @@ func (controller *Controller) UpdateMinInclusive(c *gin.Context) {
 	var mininclusiveDB orm.MinInclusiveDB
 
 	// fetch the mininclusive
-	query := db.First(&mininclusiveDB, c.Param("id"))
+	_, err := db.First(&mininclusiveDB, c.Param("id"))
 
-	if query.Error != nil {
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -279,12 +279,13 @@ func (controller *Controller) UpdateMinInclusive(c *gin.Context) {
 	mininclusiveDB.CopyBasicFieldsFromMinInclusive_WOP(&input.MinInclusive_WOP)
 	mininclusiveDB.MinInclusivePointersEncoding = input.MinInclusivePointersEncoding
 
-	query = db.Model(&mininclusiveDB).Updates(mininclusiveDB)
-	if query.Error != nil {
+	db, _ = db.Model(&mininclusiveDB)
+	_, err = db.Updates(mininclusiveDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -343,7 +344,7 @@ func (controller *Controller) DeleteMinInclusive(c *gin.Context) {
 
 	// Get model if exist
 	var mininclusiveDB orm.MinInclusiveDB
-	if err := db.First(&mininclusiveDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&mininclusiveDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -353,7 +354,8 @@ func (controller *Controller) DeleteMinInclusive(c *gin.Context) {
 	}
 
 	// with gorm.Model field, default delete is a soft delete. Unscoped() force delete
-	db.Unscoped().Delete(&mininclusiveDB)
+	db.Unscoped()
+	db.Delete(&mininclusiveDB)
 
 	// get an instance (not staged) from DB instance, and call callback function
 	mininclusiveDeleted := new(models.MinInclusive)

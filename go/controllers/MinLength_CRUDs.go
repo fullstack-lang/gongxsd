@@ -70,12 +70,12 @@ func (controller *Controller) GetMinLengths(c *gin.Context) {
 	}
 	db := backRepo.BackRepoMinLength.GetDB()
 
-	query := db.Find(&minlengthDBs)
-	if query.Error != nil {
+	_, err := db.Find(&minlengthDBs)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -151,12 +151,12 @@ func (controller *Controller) PostMinLength(c *gin.Context) {
 	minlengthDB.MinLengthPointersEncoding = input.MinLengthPointersEncoding
 	minlengthDB.CopyBasicFieldsFromMinLength_WOP(&input.MinLength_WOP)
 
-	query := db.Create(&minlengthDB)
-	if query.Error != nil {
+	_, err = db.Create(&minlengthDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -205,7 +205,7 @@ func (controller *Controller) GetMinLength(c *gin.Context) {
 
 	// Get minlengthDB in DB
 	var minlengthDB orm.MinLengthDB
-	if err := db.First(&minlengthDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&minlengthDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -264,13 +264,13 @@ func (controller *Controller) UpdateMinLength(c *gin.Context) {
 	var minlengthDB orm.MinLengthDB
 
 	// fetch the minlength
-	query := db.First(&minlengthDB, c.Param("id"))
+	_, err := db.First(&minlengthDB, c.Param("id"))
 
-	if query.Error != nil {
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -279,12 +279,13 @@ func (controller *Controller) UpdateMinLength(c *gin.Context) {
 	minlengthDB.CopyBasicFieldsFromMinLength_WOP(&input.MinLength_WOP)
 	minlengthDB.MinLengthPointersEncoding = input.MinLengthPointersEncoding
 
-	query = db.Model(&minlengthDB).Updates(minlengthDB)
-	if query.Error != nil {
+	db, _ = db.Model(&minlengthDB)
+	_, err = db.Updates(minlengthDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -343,7 +344,7 @@ func (controller *Controller) DeleteMinLength(c *gin.Context) {
 
 	// Get model if exist
 	var minlengthDB orm.MinLengthDB
-	if err := db.First(&minlengthDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&minlengthDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -353,7 +354,8 @@ func (controller *Controller) DeleteMinLength(c *gin.Context) {
 	}
 
 	// with gorm.Model field, default delete is a soft delete. Unscoped() force delete
-	db.Unscoped().Delete(&minlengthDB)
+	db.Unscoped()
+	db.Delete(&minlengthDB)
 
 	// get an instance (not staged) from DB instance, and call callback function
 	minlengthDeleted := new(models.MinLength)

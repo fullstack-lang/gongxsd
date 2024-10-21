@@ -70,12 +70,12 @@ func (controller *Controller) GetUnions(c *gin.Context) {
 	}
 	db := backRepo.BackRepoUnion.GetDB()
 
-	query := db.Find(&unionDBs)
-	if query.Error != nil {
+	_, err := db.Find(&unionDBs)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -151,12 +151,12 @@ func (controller *Controller) PostUnion(c *gin.Context) {
 	unionDB.UnionPointersEncoding = input.UnionPointersEncoding
 	unionDB.CopyBasicFieldsFromUnion_WOP(&input.Union_WOP)
 
-	query := db.Create(&unionDB)
-	if query.Error != nil {
+	_, err = db.Create(&unionDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -205,7 +205,7 @@ func (controller *Controller) GetUnion(c *gin.Context) {
 
 	// Get unionDB in DB
 	var unionDB orm.UnionDB
-	if err := db.First(&unionDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&unionDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -264,13 +264,13 @@ func (controller *Controller) UpdateUnion(c *gin.Context) {
 	var unionDB orm.UnionDB
 
 	// fetch the union
-	query := db.First(&unionDB, c.Param("id"))
+	_, err := db.First(&unionDB, c.Param("id"))
 
-	if query.Error != nil {
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -279,12 +279,13 @@ func (controller *Controller) UpdateUnion(c *gin.Context) {
 	unionDB.CopyBasicFieldsFromUnion_WOP(&input.Union_WOP)
 	unionDB.UnionPointersEncoding = input.UnionPointersEncoding
 
-	query = db.Model(&unionDB).Updates(unionDB)
-	if query.Error != nil {
+	db, _ = db.Model(&unionDB)
+	_, err = db.Updates(unionDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -343,7 +344,7 @@ func (controller *Controller) DeleteUnion(c *gin.Context) {
 
 	// Get model if exist
 	var unionDB orm.UnionDB
-	if err := db.First(&unionDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&unionDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -353,7 +354,8 @@ func (controller *Controller) DeleteUnion(c *gin.Context) {
 	}
 
 	// with gorm.Model field, default delete is a soft delete. Unscoped() force delete
-	db.Unscoped().Delete(&unionDB)
+	db.Unscoped()
+	db.Delete(&unionDB)
 
 	// get an instance (not staged) from DB instance, and call callback function
 	unionDeleted := new(models.Union)

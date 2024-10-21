@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/go/db"
 	"github.com/fullstack-lang/gongxsd/go/models"
 )
 
@@ -95,7 +96,7 @@ type SequenceDB struct {
 
 	// Declation for basic field sequenceDB.MaxOccurs
 	MaxOccurs_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	SequencePointersEncoding
@@ -153,7 +154,7 @@ type BackRepoSequenceStruct struct {
 	// stores Sequence according to their gorm ID
 	Map_SequenceDBID_SequencePtr map[uint]*models.Sequence
 
-	db *gorm.DB
+	db db.DBInterface
 
 	stage *models.StageStruct
 }
@@ -163,7 +164,7 @@ func (backRepoSequence *BackRepoSequenceStruct) GetStage() (stage *models.StageS
 	return
 }
 
-func (backRepoSequence *BackRepoSequenceStruct) GetDB() *gorm.DB {
+func (backRepoSequence *BackRepoSequenceStruct) GetDB() db.DBInterface {
 	return backRepoSequence.db
 }
 
@@ -200,9 +201,10 @@ func (backRepoSequence *BackRepoSequenceStruct) CommitDeleteInstance(id uint) (E
 
 	// sequence is not staged anymore, remove sequenceDB
 	sequenceDB := backRepoSequence.Map_SequenceDBID_SequenceDB[id]
-	query := backRepoSequence.db.Unscoped().Delete(&sequenceDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoSequence.db.Unscoped()
+	_, err := db.Delete(&sequenceDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -226,9 +228,9 @@ func (backRepoSequence *BackRepoSequenceStruct) CommitPhaseOneInstance(sequence 
 	var sequenceDB SequenceDB
 	sequenceDB.CopyBasicFieldsFromSequence(sequence)
 
-	query := backRepoSequence.db.Create(&sequenceDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoSequence.db.Create(&sequenceDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -362,9 +364,9 @@ func (backRepoSequence *BackRepoSequenceStruct) CommitPhaseTwoInstance(backRepo 
 				append(sequenceDB.SequencePointersEncoding.Elements, int(elementAssocEnd_DB.ID))
 		}
 
-		query := backRepoSequence.db.Save(&sequenceDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoSequence.db.Save(&sequenceDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -383,9 +385,9 @@ func (backRepoSequence *BackRepoSequenceStruct) CommitPhaseTwoInstance(backRepo 
 func (backRepoSequence *BackRepoSequenceStruct) CheckoutPhaseOne() (Error error) {
 
 	sequenceDBArray := make([]SequenceDB, 0)
-	query := backRepoSequence.db.Find(&sequenceDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoSequence.db.Find(&sequenceDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -546,7 +548,7 @@ func (backRepo *BackRepoStruct) CheckoutSequence(sequence *models.Sequence) {
 			var sequenceDB SequenceDB
 			sequenceDB.ID = id
 
-			if err := backRepo.BackRepoSequence.db.First(&sequenceDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoSequence.db.First(&sequenceDB, id); err != nil {
 				log.Fatalln("CheckoutSequence : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoSequence.CheckoutPhaseOneInstance(&sequenceDB)
@@ -753,9 +755,9 @@ func (backRepoSequence *BackRepoSequenceStruct) rowVisitorSequence(row *xlsx.Row
 
 		sequenceDB_ID_atBackupTime := sequenceDB.ID
 		sequenceDB.ID = 0
-		query := backRepoSequence.db.Create(sequenceDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoSequence.db.Create(sequenceDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoSequence.Map_SequenceDBID_SequenceDB[sequenceDB.ID] = sequenceDB
 		BackRepoSequenceid_atBckpTime_newID[sequenceDB_ID_atBackupTime] = sequenceDB.ID
@@ -790,9 +792,9 @@ func (backRepoSequence *BackRepoSequenceStruct) RestorePhaseOne(dirPath string) 
 
 		sequenceDB_ID_atBackupTime := sequenceDB.ID
 		sequenceDB.ID = 0
-		query := backRepoSequence.db.Create(sequenceDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoSequence.db.Create(sequenceDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoSequence.Map_SequenceDBID_SequenceDB[sequenceDB.ID] = sequenceDB
 		BackRepoSequenceid_atBckpTime_newID[sequenceDB_ID_atBackupTime] = sequenceDB.ID
@@ -820,9 +822,10 @@ func (backRepoSequence *BackRepoSequenceStruct) RestorePhaseTwo() {
 		}
 
 		// update databse with new index encoding
-		query := backRepoSequence.db.Model(sequenceDB).Updates(*sequenceDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoSequence.db.Model(sequenceDB)
+		_, err := db.Updates(*sequenceDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

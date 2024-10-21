@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/go/db"
 	"github.com/fullstack-lang/gongxsd/go/models"
 )
 
@@ -90,7 +91,7 @@ type AttributeGroupDB struct {
 
 	// Declation for basic field attributegroupDB.Depth
 	Depth_Data sql.NullInt64
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	AttributeGroupPointersEncoding
@@ -151,7 +152,7 @@ type BackRepoAttributeGroupStruct struct {
 	// stores AttributeGroup according to their gorm ID
 	Map_AttributeGroupDBID_AttributeGroupPtr map[uint]*models.AttributeGroup
 
-	db *gorm.DB
+	db db.DBInterface
 
 	stage *models.StageStruct
 }
@@ -161,7 +162,7 @@ func (backRepoAttributeGroup *BackRepoAttributeGroupStruct) GetStage() (stage *m
 	return
 }
 
-func (backRepoAttributeGroup *BackRepoAttributeGroupStruct) GetDB() *gorm.DB {
+func (backRepoAttributeGroup *BackRepoAttributeGroupStruct) GetDB() db.DBInterface {
 	return backRepoAttributeGroup.db
 }
 
@@ -198,9 +199,10 @@ func (backRepoAttributeGroup *BackRepoAttributeGroupStruct) CommitDeleteInstance
 
 	// attributegroup is not staged anymore, remove attributegroupDB
 	attributegroupDB := backRepoAttributeGroup.Map_AttributeGroupDBID_AttributeGroupDB[id]
-	query := backRepoAttributeGroup.db.Unscoped().Delete(&attributegroupDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoAttributeGroup.db.Unscoped()
+	_, err := db.Delete(&attributegroupDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -224,9 +226,9 @@ func (backRepoAttributeGroup *BackRepoAttributeGroupStruct) CommitPhaseOneInstan
 	var attributegroupDB AttributeGroupDB
 	attributegroupDB.CopyBasicFieldsFromAttributeGroup(attributegroup)
 
-	query := backRepoAttributeGroup.db.Create(&attributegroupDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoAttributeGroup.db.Create(&attributegroupDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -306,9 +308,9 @@ func (backRepoAttributeGroup *BackRepoAttributeGroupStruct) CommitPhaseTwoInstan
 				append(attributegroupDB.AttributeGroupPointersEncoding.Attributes, int(attributeAssocEnd_DB.ID))
 		}
 
-		query := backRepoAttributeGroup.db.Save(&attributegroupDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoAttributeGroup.db.Save(&attributegroupDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -327,9 +329,9 @@ func (backRepoAttributeGroup *BackRepoAttributeGroupStruct) CommitPhaseTwoInstan
 func (backRepoAttributeGroup *BackRepoAttributeGroupStruct) CheckoutPhaseOne() (Error error) {
 
 	attributegroupDBArray := make([]AttributeGroupDB, 0)
-	query := backRepoAttributeGroup.db.Find(&attributegroupDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoAttributeGroup.db.Find(&attributegroupDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -463,7 +465,7 @@ func (backRepo *BackRepoStruct) CheckoutAttributeGroup(attributegroup *models.At
 			var attributegroupDB AttributeGroupDB
 			attributegroupDB.ID = id
 
-			if err := backRepo.BackRepoAttributeGroup.db.First(&attributegroupDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoAttributeGroup.db.First(&attributegroupDB, id); err != nil {
 				log.Fatalln("CheckoutAttributeGroup : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoAttributeGroup.CheckoutPhaseOneInstance(&attributegroupDB)
@@ -682,9 +684,9 @@ func (backRepoAttributeGroup *BackRepoAttributeGroupStruct) rowVisitorAttributeG
 
 		attributegroupDB_ID_atBackupTime := attributegroupDB.ID
 		attributegroupDB.ID = 0
-		query := backRepoAttributeGroup.db.Create(attributegroupDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoAttributeGroup.db.Create(attributegroupDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoAttributeGroup.Map_AttributeGroupDBID_AttributeGroupDB[attributegroupDB.ID] = attributegroupDB
 		BackRepoAttributeGroupid_atBckpTime_newID[attributegroupDB_ID_atBackupTime] = attributegroupDB.ID
@@ -719,9 +721,9 @@ func (backRepoAttributeGroup *BackRepoAttributeGroupStruct) RestorePhaseOne(dirP
 
 		attributegroupDB_ID_atBackupTime := attributegroupDB.ID
 		attributegroupDB.ID = 0
-		query := backRepoAttributeGroup.db.Create(attributegroupDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoAttributeGroup.db.Create(attributegroupDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoAttributeGroup.Map_AttributeGroupDBID_AttributeGroupDB[attributegroupDB.ID] = attributegroupDB
 		BackRepoAttributeGroupid_atBckpTime_newID[attributegroupDB_ID_atBackupTime] = attributegroupDB.ID
@@ -749,9 +751,10 @@ func (backRepoAttributeGroup *BackRepoAttributeGroupStruct) RestorePhaseTwo() {
 		}
 
 		// update databse with new index encoding
-		query := backRepoAttributeGroup.db.Model(attributegroupDB).Updates(*attributegroupDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoAttributeGroup.db.Model(attributegroupDB)
+		_, err := db.Updates(*attributegroupDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

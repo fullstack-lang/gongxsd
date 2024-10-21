@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/go/db"
 	"github.com/fullstack-lang/gongxsd/go/models"
 )
 
@@ -69,7 +70,7 @@ type SimpleContentDB struct {
 
 	// Declation for basic field simplecontentDB.Name
 	Name_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	SimpleContentPointersEncoding
@@ -112,7 +113,7 @@ type BackRepoSimpleContentStruct struct {
 	// stores SimpleContent according to their gorm ID
 	Map_SimpleContentDBID_SimpleContentPtr map[uint]*models.SimpleContent
 
-	db *gorm.DB
+	db db.DBInterface
 
 	stage *models.StageStruct
 }
@@ -122,7 +123,7 @@ func (backRepoSimpleContent *BackRepoSimpleContentStruct) GetStage() (stage *mod
 	return
 }
 
-func (backRepoSimpleContent *BackRepoSimpleContentStruct) GetDB() *gorm.DB {
+func (backRepoSimpleContent *BackRepoSimpleContentStruct) GetDB() db.DBInterface {
 	return backRepoSimpleContent.db
 }
 
@@ -159,9 +160,10 @@ func (backRepoSimpleContent *BackRepoSimpleContentStruct) CommitDeleteInstance(i
 
 	// simplecontent is not staged anymore, remove simplecontentDB
 	simplecontentDB := backRepoSimpleContent.Map_SimpleContentDBID_SimpleContentDB[id]
-	query := backRepoSimpleContent.db.Unscoped().Delete(&simplecontentDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoSimpleContent.db.Unscoped()
+	_, err := db.Delete(&simplecontentDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -185,9 +187,9 @@ func (backRepoSimpleContent *BackRepoSimpleContentStruct) CommitPhaseOneInstance
 	var simplecontentDB SimpleContentDB
 	simplecontentDB.CopyBasicFieldsFromSimpleContent(simplecontent)
 
-	query := backRepoSimpleContent.db.Create(&simplecontentDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoSimpleContent.db.Create(&simplecontentDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -243,9 +245,9 @@ func (backRepoSimpleContent *BackRepoSimpleContentStruct) CommitPhaseTwoInstance
 			simplecontentDB.RestrictionID.Valid = true
 		}
 
-		query := backRepoSimpleContent.db.Save(&simplecontentDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoSimpleContent.db.Save(&simplecontentDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -264,9 +266,9 @@ func (backRepoSimpleContent *BackRepoSimpleContentStruct) CommitPhaseTwoInstance
 func (backRepoSimpleContent *BackRepoSimpleContentStruct) CheckoutPhaseOne() (Error error) {
 
 	simplecontentDBArray := make([]SimpleContentDB, 0)
-	query := backRepoSimpleContent.db.Find(&simplecontentDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoSimpleContent.db.Find(&simplecontentDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -387,7 +389,7 @@ func (backRepo *BackRepoStruct) CheckoutSimpleContent(simplecontent *models.Simp
 			var simplecontentDB SimpleContentDB
 			simplecontentDB.ID = id
 
-			if err := backRepo.BackRepoSimpleContent.db.First(&simplecontentDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoSimpleContent.db.First(&simplecontentDB, id); err != nil {
 				log.Fatalln("CheckoutSimpleContent : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoSimpleContent.CheckoutPhaseOneInstance(&simplecontentDB)
@@ -534,9 +536,9 @@ func (backRepoSimpleContent *BackRepoSimpleContentStruct) rowVisitorSimpleConten
 
 		simplecontentDB_ID_atBackupTime := simplecontentDB.ID
 		simplecontentDB.ID = 0
-		query := backRepoSimpleContent.db.Create(simplecontentDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoSimpleContent.db.Create(simplecontentDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoSimpleContent.Map_SimpleContentDBID_SimpleContentDB[simplecontentDB.ID] = simplecontentDB
 		BackRepoSimpleContentid_atBckpTime_newID[simplecontentDB_ID_atBackupTime] = simplecontentDB.ID
@@ -571,9 +573,9 @@ func (backRepoSimpleContent *BackRepoSimpleContentStruct) RestorePhaseOne(dirPat
 
 		simplecontentDB_ID_atBackupTime := simplecontentDB.ID
 		simplecontentDB.ID = 0
-		query := backRepoSimpleContent.db.Create(simplecontentDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoSimpleContent.db.Create(simplecontentDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoSimpleContent.Map_SimpleContentDBID_SimpleContentDB[simplecontentDB.ID] = simplecontentDB
 		BackRepoSimpleContentid_atBckpTime_newID[simplecontentDB_ID_atBackupTime] = simplecontentDB.ID
@@ -607,9 +609,10 @@ func (backRepoSimpleContent *BackRepoSimpleContentStruct) RestorePhaseTwo() {
 		}
 
 		// update databse with new index encoding
-		query := backRepoSimpleContent.db.Model(simplecontentDB).Updates(*simplecontentDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoSimpleContent.db.Model(simplecontentDB)
+		_, err := db.Updates(*simplecontentDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

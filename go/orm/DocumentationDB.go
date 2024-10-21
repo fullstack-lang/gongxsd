@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/go/db"
 	"github.com/fullstack-lang/gongxsd/go/models"
 )
 
@@ -70,7 +71,7 @@ type DocumentationDB struct {
 
 	// Declation for basic field documentationDB.Lang
 	Lang_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	DocumentationPointersEncoding
@@ -122,7 +123,7 @@ type BackRepoDocumentationStruct struct {
 	// stores Documentation according to their gorm ID
 	Map_DocumentationDBID_DocumentationPtr map[uint]*models.Documentation
 
-	db *gorm.DB
+	db db.DBInterface
 
 	stage *models.StageStruct
 }
@@ -132,7 +133,7 @@ func (backRepoDocumentation *BackRepoDocumentationStruct) GetStage() (stage *mod
 	return
 }
 
-func (backRepoDocumentation *BackRepoDocumentationStruct) GetDB() *gorm.DB {
+func (backRepoDocumentation *BackRepoDocumentationStruct) GetDB() db.DBInterface {
 	return backRepoDocumentation.db
 }
 
@@ -169,9 +170,10 @@ func (backRepoDocumentation *BackRepoDocumentationStruct) CommitDeleteInstance(i
 
 	// documentation is not staged anymore, remove documentationDB
 	documentationDB := backRepoDocumentation.Map_DocumentationDBID_DocumentationDB[id]
-	query := backRepoDocumentation.db.Unscoped().Delete(&documentationDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoDocumentation.db.Unscoped()
+	_, err := db.Delete(&documentationDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -195,9 +197,9 @@ func (backRepoDocumentation *BackRepoDocumentationStruct) CommitPhaseOneInstance
 	var documentationDB DocumentationDB
 	documentationDB.CopyBasicFieldsFromDocumentation(documentation)
 
-	query := backRepoDocumentation.db.Create(&documentationDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoDocumentation.db.Create(&documentationDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -229,9 +231,9 @@ func (backRepoDocumentation *BackRepoDocumentationStruct) CommitPhaseTwoInstance
 		documentationDB.CopyBasicFieldsFromDocumentation(documentation)
 
 		// insertion point for translating pointers encodings into actual pointers
-		query := backRepoDocumentation.db.Save(&documentationDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoDocumentation.db.Save(&documentationDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -250,9 +252,9 @@ func (backRepoDocumentation *BackRepoDocumentationStruct) CommitPhaseTwoInstance
 func (backRepoDocumentation *BackRepoDocumentationStruct) CheckoutPhaseOne() (Error error) {
 
 	documentationDBArray := make([]DocumentationDB, 0)
-	query := backRepoDocumentation.db.Find(&documentationDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoDocumentation.db.Find(&documentationDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -363,7 +365,7 @@ func (backRepo *BackRepoStruct) CheckoutDocumentation(documentation *models.Docu
 			var documentationDB DocumentationDB
 			documentationDB.ID = id
 
-			if err := backRepo.BackRepoDocumentation.db.First(&documentationDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoDocumentation.db.First(&documentationDB, id); err != nil {
 				log.Fatalln("CheckoutDocumentation : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoDocumentation.CheckoutPhaseOneInstance(&documentationDB)
@@ -546,9 +548,9 @@ func (backRepoDocumentation *BackRepoDocumentationStruct) rowVisitorDocumentatio
 
 		documentationDB_ID_atBackupTime := documentationDB.ID
 		documentationDB.ID = 0
-		query := backRepoDocumentation.db.Create(documentationDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoDocumentation.db.Create(documentationDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoDocumentation.Map_DocumentationDBID_DocumentationDB[documentationDB.ID] = documentationDB
 		BackRepoDocumentationid_atBckpTime_newID[documentationDB_ID_atBackupTime] = documentationDB.ID
@@ -583,9 +585,9 @@ func (backRepoDocumentation *BackRepoDocumentationStruct) RestorePhaseOne(dirPat
 
 		documentationDB_ID_atBackupTime := documentationDB.ID
 		documentationDB.ID = 0
-		query := backRepoDocumentation.db.Create(documentationDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoDocumentation.db.Create(documentationDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoDocumentation.Map_DocumentationDBID_DocumentationDB[documentationDB.ID] = documentationDB
 		BackRepoDocumentationid_atBckpTime_newID[documentationDB_ID_atBackupTime] = documentationDB.ID
@@ -607,9 +609,10 @@ func (backRepoDocumentation *BackRepoDocumentationStruct) RestorePhaseTwo() {
 
 		// insertion point for reindexing pointers encoding
 		// update databse with new index encoding
-		query := backRepoDocumentation.db.Model(documentationDB).Updates(*documentationDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoDocumentation.db.Model(documentationDB)
+		_, err := db.Updates(*documentationDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

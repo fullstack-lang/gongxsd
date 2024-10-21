@@ -70,12 +70,12 @@ func (controller *Controller) GetLengths(c *gin.Context) {
 	}
 	db := backRepo.BackRepoLength.GetDB()
 
-	query := db.Find(&lengthDBs)
-	if query.Error != nil {
+	_, err := db.Find(&lengthDBs)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -151,12 +151,12 @@ func (controller *Controller) PostLength(c *gin.Context) {
 	lengthDB.LengthPointersEncoding = input.LengthPointersEncoding
 	lengthDB.CopyBasicFieldsFromLength_WOP(&input.Length_WOP)
 
-	query := db.Create(&lengthDB)
-	if query.Error != nil {
+	_, err = db.Create(&lengthDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -205,7 +205,7 @@ func (controller *Controller) GetLength(c *gin.Context) {
 
 	// Get lengthDB in DB
 	var lengthDB orm.LengthDB
-	if err := db.First(&lengthDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&lengthDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -264,13 +264,13 @@ func (controller *Controller) UpdateLength(c *gin.Context) {
 	var lengthDB orm.LengthDB
 
 	// fetch the length
-	query := db.First(&lengthDB, c.Param("id"))
+	_, err := db.First(&lengthDB, c.Param("id"))
 
-	if query.Error != nil {
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -279,12 +279,13 @@ func (controller *Controller) UpdateLength(c *gin.Context) {
 	lengthDB.CopyBasicFieldsFromLength_WOP(&input.Length_WOP)
 	lengthDB.LengthPointersEncoding = input.LengthPointersEncoding
 
-	query = db.Model(&lengthDB).Updates(lengthDB)
-	if query.Error != nil {
+	db, _ = db.Model(&lengthDB)
+	_, err = db.Updates(lengthDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -343,7 +344,7 @@ func (controller *Controller) DeleteLength(c *gin.Context) {
 
 	// Get model if exist
 	var lengthDB orm.LengthDB
-	if err := db.First(&lengthDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&lengthDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -353,7 +354,8 @@ func (controller *Controller) DeleteLength(c *gin.Context) {
 	}
 
 	// with gorm.Model field, default delete is a soft delete. Unscoped() force delete
-	db.Unscoped().Delete(&lengthDB)
+	db.Unscoped()
+	db.Delete(&lengthDB)
 
 	// get an instance (not staged) from DB instance, and call callback function
 	lengthDeleted := new(models.Length)

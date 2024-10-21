@@ -70,12 +70,12 @@ func (controller *Controller) GetEnumerations(c *gin.Context) {
 	}
 	db := backRepo.BackRepoEnumeration.GetDB()
 
-	query := db.Find(&enumerationDBs)
-	if query.Error != nil {
+	_, err := db.Find(&enumerationDBs)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -151,12 +151,12 @@ func (controller *Controller) PostEnumeration(c *gin.Context) {
 	enumerationDB.EnumerationPointersEncoding = input.EnumerationPointersEncoding
 	enumerationDB.CopyBasicFieldsFromEnumeration_WOP(&input.Enumeration_WOP)
 
-	query := db.Create(&enumerationDB)
-	if query.Error != nil {
+	_, err = db.Create(&enumerationDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -205,7 +205,7 @@ func (controller *Controller) GetEnumeration(c *gin.Context) {
 
 	// Get enumerationDB in DB
 	var enumerationDB orm.EnumerationDB
-	if err := db.First(&enumerationDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&enumerationDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -264,13 +264,13 @@ func (controller *Controller) UpdateEnumeration(c *gin.Context) {
 	var enumerationDB orm.EnumerationDB
 
 	// fetch the enumeration
-	query := db.First(&enumerationDB, c.Param("id"))
+	_, err := db.First(&enumerationDB, c.Param("id"))
 
-	if query.Error != nil {
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -279,12 +279,13 @@ func (controller *Controller) UpdateEnumeration(c *gin.Context) {
 	enumerationDB.CopyBasicFieldsFromEnumeration_WOP(&input.Enumeration_WOP)
 	enumerationDB.EnumerationPointersEncoding = input.EnumerationPointersEncoding
 
-	query = db.Model(&enumerationDB).Updates(enumerationDB)
-	if query.Error != nil {
+	db, _ = db.Model(&enumerationDB)
+	_, err = db.Updates(enumerationDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -343,7 +344,7 @@ func (controller *Controller) DeleteEnumeration(c *gin.Context) {
 
 	// Get model if exist
 	var enumerationDB orm.EnumerationDB
-	if err := db.First(&enumerationDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&enumerationDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -353,7 +354,8 @@ func (controller *Controller) DeleteEnumeration(c *gin.Context) {
 	}
 
 	// with gorm.Model field, default delete is a soft delete. Unscoped() force delete
-	db.Unscoped().Delete(&enumerationDB)
+	db.Unscoped()
+	db.Delete(&enumerationDB)
 
 	// get an instance (not staged) from DB instance, and call callback function
 	enumerationDeleted := new(models.Enumeration)

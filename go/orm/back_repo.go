@@ -11,12 +11,9 @@ import (
 	"sync"
 
 	"github.com/fullstack-lang/gongxsd/go/models"
+	"github.com/fullstack-lang/gongxsd/go/orm/dbgorm"
 
 	"github.com/tealeg/xlsx/v3"
-
-	"github.com/glebarez/sqlite"
-	"gorm.io/gorm"
-	"gorm.io/gorm/schema"
 )
 
 // BackRepoStruct supports callback functions
@@ -87,33 +84,7 @@ type BackRepoStruct struct {
 
 func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepoStruct) {
 
-	// adjust naming strategy to the stack
-	gormConfig := &gorm.Config{
-		NamingStrategy: schema.NamingStrategy{
-			TablePrefix: "github_com_fullstack_lang_gong_test_go_", // table name prefix
-		},
-	}
-	db, err := gorm.Open(sqlite.Open(filename), gormConfig)
-
-	// since testsim is a multi threaded application. It is important to set up
-	// only one open connexion at a time
-	dbDB_inMemory, err := db.DB()
-	if err != nil {
-		panic("cannot access DB of db" + err.Error())
-	}
-	// it is mandatory to allow parallel access, otherwise, bizarre errors occurs
-	dbDB_inMemory.SetMaxOpenConns(1)
-
-	if err != nil {
-		panic("Failed to connect to database!")
-	}
-
-	// adjust naming strategy to the stack
-	db.Config.NamingStrategy = &schema.NamingStrategy{
-		TablePrefix: "github_com_fullstack_lang_gong_test_go_", // table name prefix
-	}
-
-	err = db.AutoMigrate( // insertion point for reference to structs
+	dbWrapper := dbgorm.NewDBWrapper(filename, "github_com_fullstack_lang_gongxsd_go",
 		&AllDB{},
 		&AnnotationDB{},
 		&AttributeDB{},
@@ -142,11 +113,6 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 		&WhiteSpaceDB{},
 	)
 
-	if err != nil {
-		msg := err.Error()
-		panic("problem with migration " + msg + " on package github.com/fullstack-lang/gong/test/go")
-	}
-
 	backRepo = new(BackRepoStruct)
 
 	// insertion point for per struct back repo declarations
@@ -155,7 +121,7 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 		Map_AllDBID_AllDB:  make(map[uint]*AllDB, 0),
 		Map_AllPtr_AllDBID: make(map[*models.All]uint, 0),
 
-		db:    db,
+		db:    dbWrapper,
 		stage: stage,
 	}
 	backRepo.BackRepoAnnotation = BackRepoAnnotationStruct{
@@ -163,7 +129,7 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 		Map_AnnotationDBID_AnnotationDB:  make(map[uint]*AnnotationDB, 0),
 		Map_AnnotationPtr_AnnotationDBID: make(map[*models.Annotation]uint, 0),
 
-		db:    db,
+		db:    dbWrapper,
 		stage: stage,
 	}
 	backRepo.BackRepoAttribute = BackRepoAttributeStruct{
@@ -171,7 +137,7 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 		Map_AttributeDBID_AttributeDB:  make(map[uint]*AttributeDB, 0),
 		Map_AttributePtr_AttributeDBID: make(map[*models.Attribute]uint, 0),
 
-		db:    db,
+		db:    dbWrapper,
 		stage: stage,
 	}
 	backRepo.BackRepoAttributeGroup = BackRepoAttributeGroupStruct{
@@ -179,7 +145,7 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 		Map_AttributeGroupDBID_AttributeGroupDB:  make(map[uint]*AttributeGroupDB, 0),
 		Map_AttributeGroupPtr_AttributeGroupDBID: make(map[*models.AttributeGroup]uint, 0),
 
-		db:    db,
+		db:    dbWrapper,
 		stage: stage,
 	}
 	backRepo.BackRepoChoice = BackRepoChoiceStruct{
@@ -187,7 +153,7 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 		Map_ChoiceDBID_ChoiceDB:  make(map[uint]*ChoiceDB, 0),
 		Map_ChoicePtr_ChoiceDBID: make(map[*models.Choice]uint, 0),
 
-		db:    db,
+		db:    dbWrapper,
 		stage: stage,
 	}
 	backRepo.BackRepoComplexContent = BackRepoComplexContentStruct{
@@ -195,7 +161,7 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 		Map_ComplexContentDBID_ComplexContentDB:  make(map[uint]*ComplexContentDB, 0),
 		Map_ComplexContentPtr_ComplexContentDBID: make(map[*models.ComplexContent]uint, 0),
 
-		db:    db,
+		db:    dbWrapper,
 		stage: stage,
 	}
 	backRepo.BackRepoComplexType = BackRepoComplexTypeStruct{
@@ -203,7 +169,7 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 		Map_ComplexTypeDBID_ComplexTypeDB:  make(map[uint]*ComplexTypeDB, 0),
 		Map_ComplexTypePtr_ComplexTypeDBID: make(map[*models.ComplexType]uint, 0),
 
-		db:    db,
+		db:    dbWrapper,
 		stage: stage,
 	}
 	backRepo.BackRepoDocumentation = BackRepoDocumentationStruct{
@@ -211,7 +177,7 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 		Map_DocumentationDBID_DocumentationDB:  make(map[uint]*DocumentationDB, 0),
 		Map_DocumentationPtr_DocumentationDBID: make(map[*models.Documentation]uint, 0),
 
-		db:    db,
+		db:    dbWrapper,
 		stage: stage,
 	}
 	backRepo.BackRepoElement = BackRepoElementStruct{
@@ -219,7 +185,7 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 		Map_ElementDBID_ElementDB:  make(map[uint]*ElementDB, 0),
 		Map_ElementPtr_ElementDBID: make(map[*models.Element]uint, 0),
 
-		db:    db,
+		db:    dbWrapper,
 		stage: stage,
 	}
 	backRepo.BackRepoEnumeration = BackRepoEnumerationStruct{
@@ -227,7 +193,7 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 		Map_EnumerationDBID_EnumerationDB:  make(map[uint]*EnumerationDB, 0),
 		Map_EnumerationPtr_EnumerationDBID: make(map[*models.Enumeration]uint, 0),
 
-		db:    db,
+		db:    dbWrapper,
 		stage: stage,
 	}
 	backRepo.BackRepoExtension = BackRepoExtensionStruct{
@@ -235,7 +201,7 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 		Map_ExtensionDBID_ExtensionDB:  make(map[uint]*ExtensionDB, 0),
 		Map_ExtensionPtr_ExtensionDBID: make(map[*models.Extension]uint, 0),
 
-		db:    db,
+		db:    dbWrapper,
 		stage: stage,
 	}
 	backRepo.BackRepoGroup = BackRepoGroupStruct{
@@ -243,7 +209,7 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 		Map_GroupDBID_GroupDB:  make(map[uint]*GroupDB, 0),
 		Map_GroupPtr_GroupDBID: make(map[*models.Group]uint, 0),
 
-		db:    db,
+		db:    dbWrapper,
 		stage: stage,
 	}
 	backRepo.BackRepoLength = BackRepoLengthStruct{
@@ -251,7 +217,7 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 		Map_LengthDBID_LengthDB:  make(map[uint]*LengthDB, 0),
 		Map_LengthPtr_LengthDBID: make(map[*models.Length]uint, 0),
 
-		db:    db,
+		db:    dbWrapper,
 		stage: stage,
 	}
 	backRepo.BackRepoMaxInclusive = BackRepoMaxInclusiveStruct{
@@ -259,7 +225,7 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 		Map_MaxInclusiveDBID_MaxInclusiveDB:  make(map[uint]*MaxInclusiveDB, 0),
 		Map_MaxInclusivePtr_MaxInclusiveDBID: make(map[*models.MaxInclusive]uint, 0),
 
-		db:    db,
+		db:    dbWrapper,
 		stage: stage,
 	}
 	backRepo.BackRepoMaxLength = BackRepoMaxLengthStruct{
@@ -267,7 +233,7 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 		Map_MaxLengthDBID_MaxLengthDB:  make(map[uint]*MaxLengthDB, 0),
 		Map_MaxLengthPtr_MaxLengthDBID: make(map[*models.MaxLength]uint, 0),
 
-		db:    db,
+		db:    dbWrapper,
 		stage: stage,
 	}
 	backRepo.BackRepoMinInclusive = BackRepoMinInclusiveStruct{
@@ -275,7 +241,7 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 		Map_MinInclusiveDBID_MinInclusiveDB:  make(map[uint]*MinInclusiveDB, 0),
 		Map_MinInclusivePtr_MinInclusiveDBID: make(map[*models.MinInclusive]uint, 0),
 
-		db:    db,
+		db:    dbWrapper,
 		stage: stage,
 	}
 	backRepo.BackRepoMinLength = BackRepoMinLengthStruct{
@@ -283,7 +249,7 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 		Map_MinLengthDBID_MinLengthDB:  make(map[uint]*MinLengthDB, 0),
 		Map_MinLengthPtr_MinLengthDBID: make(map[*models.MinLength]uint, 0),
 
-		db:    db,
+		db:    dbWrapper,
 		stage: stage,
 	}
 	backRepo.BackRepoPattern = BackRepoPatternStruct{
@@ -291,7 +257,7 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 		Map_PatternDBID_PatternDB:  make(map[uint]*PatternDB, 0),
 		Map_PatternPtr_PatternDBID: make(map[*models.Pattern]uint, 0),
 
-		db:    db,
+		db:    dbWrapper,
 		stage: stage,
 	}
 	backRepo.BackRepoRestriction = BackRepoRestrictionStruct{
@@ -299,7 +265,7 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 		Map_RestrictionDBID_RestrictionDB:  make(map[uint]*RestrictionDB, 0),
 		Map_RestrictionPtr_RestrictionDBID: make(map[*models.Restriction]uint, 0),
 
-		db:    db,
+		db:    dbWrapper,
 		stage: stage,
 	}
 	backRepo.BackRepoSchema = BackRepoSchemaStruct{
@@ -307,7 +273,7 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 		Map_SchemaDBID_SchemaDB:  make(map[uint]*SchemaDB, 0),
 		Map_SchemaPtr_SchemaDBID: make(map[*models.Schema]uint, 0),
 
-		db:    db,
+		db:    dbWrapper,
 		stage: stage,
 	}
 	backRepo.BackRepoSequence = BackRepoSequenceStruct{
@@ -315,7 +281,7 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 		Map_SequenceDBID_SequenceDB:  make(map[uint]*SequenceDB, 0),
 		Map_SequencePtr_SequenceDBID: make(map[*models.Sequence]uint, 0),
 
-		db:    db,
+		db:    dbWrapper,
 		stage: stage,
 	}
 	backRepo.BackRepoSimpleContent = BackRepoSimpleContentStruct{
@@ -323,7 +289,7 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 		Map_SimpleContentDBID_SimpleContentDB:  make(map[uint]*SimpleContentDB, 0),
 		Map_SimpleContentPtr_SimpleContentDBID: make(map[*models.SimpleContent]uint, 0),
 
-		db:    db,
+		db:    dbWrapper,
 		stage: stage,
 	}
 	backRepo.BackRepoSimpleType = BackRepoSimpleTypeStruct{
@@ -331,7 +297,7 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 		Map_SimpleTypeDBID_SimpleTypeDB:  make(map[uint]*SimpleTypeDB, 0),
 		Map_SimpleTypePtr_SimpleTypeDBID: make(map[*models.SimpleType]uint, 0),
 
-		db:    db,
+		db:    dbWrapper,
 		stage: stage,
 	}
 	backRepo.BackRepoTotalDigit = BackRepoTotalDigitStruct{
@@ -339,7 +305,7 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 		Map_TotalDigitDBID_TotalDigitDB:  make(map[uint]*TotalDigitDB, 0),
 		Map_TotalDigitPtr_TotalDigitDBID: make(map[*models.TotalDigit]uint, 0),
 
-		db:    db,
+		db:    dbWrapper,
 		stage: stage,
 	}
 	backRepo.BackRepoUnion = BackRepoUnionStruct{
@@ -347,7 +313,7 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 		Map_UnionDBID_UnionDB:  make(map[uint]*UnionDB, 0),
 		Map_UnionPtr_UnionDBID: make(map[*models.Union]uint, 0),
 
-		db:    db,
+		db:    dbWrapper,
 		stage: stage,
 	}
 	backRepo.BackRepoWhiteSpace = BackRepoWhiteSpaceStruct{
@@ -355,7 +321,7 @@ func NewBackRepo(stage *models.StageStruct, filename string) (backRepo *BackRepo
 		Map_WhiteSpaceDBID_WhiteSpaceDB:  make(map[uint]*WhiteSpaceDB, 0),
 		Map_WhiteSpacePtr_WhiteSpaceDBID: make(map[*models.WhiteSpace]uint, 0),
 
-		db:    db,
+		db:    dbWrapper,
 		stage: stage,
 	}
 
@@ -388,7 +354,7 @@ func (backRepo *BackRepoStruct) IncrementCommitFromBackNb() uint {
 	backRepo.CommitFromBackNb = backRepo.CommitFromBackNb + 1
 
 	backRepo.broadcastNbCommitToBack()
-	
+
 	return backRepo.CommitFromBackNb
 }
 

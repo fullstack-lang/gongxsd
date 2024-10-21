@@ -70,12 +70,12 @@ func (controller *Controller) GetAttributeGroups(c *gin.Context) {
 	}
 	db := backRepo.BackRepoAttributeGroup.GetDB()
 
-	query := db.Find(&attributegroupDBs)
-	if query.Error != nil {
+	_, err := db.Find(&attributegroupDBs)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -151,12 +151,12 @@ func (controller *Controller) PostAttributeGroup(c *gin.Context) {
 	attributegroupDB.AttributeGroupPointersEncoding = input.AttributeGroupPointersEncoding
 	attributegroupDB.CopyBasicFieldsFromAttributeGroup_WOP(&input.AttributeGroup_WOP)
 
-	query := db.Create(&attributegroupDB)
-	if query.Error != nil {
+	_, err = db.Create(&attributegroupDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -205,7 +205,7 @@ func (controller *Controller) GetAttributeGroup(c *gin.Context) {
 
 	// Get attributegroupDB in DB
 	var attributegroupDB orm.AttributeGroupDB
-	if err := db.First(&attributegroupDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&attributegroupDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -264,13 +264,13 @@ func (controller *Controller) UpdateAttributeGroup(c *gin.Context) {
 	var attributegroupDB orm.AttributeGroupDB
 
 	// fetch the attributegroup
-	query := db.First(&attributegroupDB, c.Param("id"))
+	_, err := db.First(&attributegroupDB, c.Param("id"))
 
-	if query.Error != nil {
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -279,12 +279,13 @@ func (controller *Controller) UpdateAttributeGroup(c *gin.Context) {
 	attributegroupDB.CopyBasicFieldsFromAttributeGroup_WOP(&input.AttributeGroup_WOP)
 	attributegroupDB.AttributeGroupPointersEncoding = input.AttributeGroupPointersEncoding
 
-	query = db.Model(&attributegroupDB).Updates(attributegroupDB)
-	if query.Error != nil {
+	db, _ = db.Model(&attributegroupDB)
+	_, err = db.Updates(attributegroupDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -343,7 +344,7 @@ func (controller *Controller) DeleteAttributeGroup(c *gin.Context) {
 
 	// Get model if exist
 	var attributegroupDB orm.AttributeGroupDB
-	if err := db.First(&attributegroupDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&attributegroupDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -353,7 +354,8 @@ func (controller *Controller) DeleteAttributeGroup(c *gin.Context) {
 	}
 
 	// with gorm.Model field, default delete is a soft delete. Unscoped() force delete
-	db.Unscoped().Delete(&attributegroupDB)
+	db.Unscoped()
+	db.Delete(&attributegroupDB)
 
 	// get an instance (not staged) from DB instance, and call callback function
 	attributegroupDeleted := new(models.AttributeGroup)

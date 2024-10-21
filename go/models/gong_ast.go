@@ -513,107 +513,159 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 									switch gongstructName {
 									// insertion point for identifiers
 									case "All":
-										instanceAll := (&All{Name: instanceName}).Stage(stage)
+										instanceAll := new(All)
+										instanceAll.Name = instanceName
+										instanceAll.Stage(stage)
 										instance = any(instanceAll)
 										__gong__map_All[identifier] = instanceAll
 									case "Annotation":
-										instanceAnnotation := (&Annotation{Name: instanceName}).Stage(stage)
+										instanceAnnotation := new(Annotation)
+										instanceAnnotation.Name = instanceName
+										instanceAnnotation.Stage(stage)
 										instance = any(instanceAnnotation)
 										__gong__map_Annotation[identifier] = instanceAnnotation
 									case "Attribute":
-										instanceAttribute := (&Attribute{Name: instanceName}).Stage(stage)
+										instanceAttribute := new(Attribute)
+										instanceAttribute.Name = instanceName
+										instanceAttribute.Stage(stage)
 										instance = any(instanceAttribute)
 										__gong__map_Attribute[identifier] = instanceAttribute
 									case "AttributeGroup":
-										instanceAttributeGroup := (&AttributeGroup{Name: instanceName}).Stage(stage)
+										instanceAttributeGroup := new(AttributeGroup)
+										instanceAttributeGroup.Name = instanceName
+										instanceAttributeGroup.Stage(stage)
 										instance = any(instanceAttributeGroup)
 										__gong__map_AttributeGroup[identifier] = instanceAttributeGroup
 									case "Choice":
-										instanceChoice := (&Choice{Name: instanceName}).Stage(stage)
+										instanceChoice := new(Choice)
+										instanceChoice.Name = instanceName
+										instanceChoice.Stage(stage)
 										instance = any(instanceChoice)
 										__gong__map_Choice[identifier] = instanceChoice
 									case "ComplexContent":
-										instanceComplexContent := (&ComplexContent{Name: instanceName}).Stage(stage)
+										instanceComplexContent := new(ComplexContent)
+										instanceComplexContent.Name = instanceName
+										instanceComplexContent.Stage(stage)
 										instance = any(instanceComplexContent)
 										__gong__map_ComplexContent[identifier] = instanceComplexContent
 									case "ComplexType":
-										instanceComplexType := (&ComplexType{Name: instanceName}).Stage(stage)
+										instanceComplexType := new(ComplexType)
+										instanceComplexType.Name = instanceName
+										instanceComplexType.Stage(stage)
 										instance = any(instanceComplexType)
 										__gong__map_ComplexType[identifier] = instanceComplexType
 									case "Documentation":
-										instanceDocumentation := (&Documentation{Name: instanceName}).Stage(stage)
+										instanceDocumentation := new(Documentation)
+										instanceDocumentation.Name = instanceName
+										instanceDocumentation.Stage(stage)
 										instance = any(instanceDocumentation)
 										__gong__map_Documentation[identifier] = instanceDocumentation
 									case "Element":
-										instanceElement := (&Element{Name: instanceName}).Stage(stage)
+										instanceElement := new(Element)
+										instanceElement.Name = instanceName
+										instanceElement.Stage(stage)
 										instance = any(instanceElement)
 										__gong__map_Element[identifier] = instanceElement
 									case "Enumeration":
-										instanceEnumeration := (&Enumeration{Name: instanceName}).Stage(stage)
+										instanceEnumeration := new(Enumeration)
+										instanceEnumeration.Name = instanceName
+										instanceEnumeration.Stage(stage)
 										instance = any(instanceEnumeration)
 										__gong__map_Enumeration[identifier] = instanceEnumeration
 									case "Extension":
-										instanceExtension := (&Extension{Name: instanceName}).Stage(stage)
+										instanceExtension := new(Extension)
+										instanceExtension.Name = instanceName
+										instanceExtension.Stage(stage)
 										instance = any(instanceExtension)
 										__gong__map_Extension[identifier] = instanceExtension
 									case "Group":
-										instanceGroup := (&Group{Name: instanceName}).Stage(stage)
+										instanceGroup := new(Group)
+										instanceGroup.Name = instanceName
+										instanceGroup.Stage(stage)
 										instance = any(instanceGroup)
 										__gong__map_Group[identifier] = instanceGroup
 									case "Length":
-										instanceLength := (&Length{Name: instanceName}).Stage(stage)
+										instanceLength := new(Length)
+										instanceLength.Name = instanceName
+										instanceLength.Stage(stage)
 										instance = any(instanceLength)
 										__gong__map_Length[identifier] = instanceLength
 									case "MaxInclusive":
-										instanceMaxInclusive := (&MaxInclusive{Name: instanceName}).Stage(stage)
+										instanceMaxInclusive := new(MaxInclusive)
+										instanceMaxInclusive.Name = instanceName
+										instanceMaxInclusive.Stage(stage)
 										instance = any(instanceMaxInclusive)
 										__gong__map_MaxInclusive[identifier] = instanceMaxInclusive
 									case "MaxLength":
-										instanceMaxLength := (&MaxLength{Name: instanceName}).Stage(stage)
+										instanceMaxLength := new(MaxLength)
+										instanceMaxLength.Name = instanceName
+										instanceMaxLength.Stage(stage)
 										instance = any(instanceMaxLength)
 										__gong__map_MaxLength[identifier] = instanceMaxLength
 									case "MinInclusive":
-										instanceMinInclusive := (&MinInclusive{Name: instanceName}).Stage(stage)
+										instanceMinInclusive := new(MinInclusive)
+										instanceMinInclusive.Name = instanceName
+										instanceMinInclusive.Stage(stage)
 										instance = any(instanceMinInclusive)
 										__gong__map_MinInclusive[identifier] = instanceMinInclusive
 									case "MinLength":
-										instanceMinLength := (&MinLength{Name: instanceName}).Stage(stage)
+										instanceMinLength := new(MinLength)
+										instanceMinLength.Name = instanceName
+										instanceMinLength.Stage(stage)
 										instance = any(instanceMinLength)
 										__gong__map_MinLength[identifier] = instanceMinLength
 									case "Pattern":
-										instancePattern := (&Pattern{Name: instanceName}).Stage(stage)
+										instancePattern := new(Pattern)
+										instancePattern.Name = instanceName
+										instancePattern.Stage(stage)
 										instance = any(instancePattern)
 										__gong__map_Pattern[identifier] = instancePattern
 									case "Restriction":
-										instanceRestriction := (&Restriction{Name: instanceName}).Stage(stage)
+										instanceRestriction := new(Restriction)
+										instanceRestriction.Name = instanceName
+										instanceRestriction.Stage(stage)
 										instance = any(instanceRestriction)
 										__gong__map_Restriction[identifier] = instanceRestriction
 									case "Schema":
-										instanceSchema := (&Schema{Name: instanceName}).Stage(stage)
+										instanceSchema := new(Schema)
+										instanceSchema.Name = instanceName
+										instanceSchema.Stage(stage)
 										instance = any(instanceSchema)
 										__gong__map_Schema[identifier] = instanceSchema
 									case "Sequence":
-										instanceSequence := (&Sequence{Name: instanceName}).Stage(stage)
+										instanceSequence := new(Sequence)
+										instanceSequence.Name = instanceName
+										instanceSequence.Stage(stage)
 										instance = any(instanceSequence)
 										__gong__map_Sequence[identifier] = instanceSequence
 									case "SimpleContent":
-										instanceSimpleContent := (&SimpleContent{Name: instanceName}).Stage(stage)
+										instanceSimpleContent := new(SimpleContent)
+										instanceSimpleContent.Name = instanceName
+										instanceSimpleContent.Stage(stage)
 										instance = any(instanceSimpleContent)
 										__gong__map_SimpleContent[identifier] = instanceSimpleContent
 									case "SimpleType":
-										instanceSimpleType := (&SimpleType{Name: instanceName}).Stage(stage)
+										instanceSimpleType := new(SimpleType)
+										instanceSimpleType.Name = instanceName
+										instanceSimpleType.Stage(stage)
 										instance = any(instanceSimpleType)
 										__gong__map_SimpleType[identifier] = instanceSimpleType
 									case "TotalDigit":
-										instanceTotalDigit := (&TotalDigit{Name: instanceName}).Stage(stage)
+										instanceTotalDigit := new(TotalDigit)
+										instanceTotalDigit.Name = instanceName
+										instanceTotalDigit.Stage(stage)
 										instance = any(instanceTotalDigit)
 										__gong__map_TotalDigit[identifier] = instanceTotalDigit
 									case "Union":
-										instanceUnion := (&Union{Name: instanceName}).Stage(stage)
+										instanceUnion := new(Union)
+										instanceUnion.Name = instanceName
+										instanceUnion.Stage(stage)
 										instance = any(instanceUnion)
 										__gong__map_Union[identifier] = instanceUnion
 									case "WhiteSpace":
-										instanceWhiteSpace := (&WhiteSpace{Name: instanceName}).Stage(stage)
+										instanceWhiteSpace := new(WhiteSpace)
+										instanceWhiteSpace.Name = instanceName
+										instanceWhiteSpace.Stage(stage)
 										instance = any(instanceWhiteSpace)
 										__gong__map_WhiteSpace[identifier] = instanceWhiteSpace
 									}

@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/go/db"
 	"github.com/fullstack-lang/gongxsd/go/models"
 )
 
@@ -95,7 +96,7 @@ type AllDB struct {
 
 	// Declation for basic field allDB.MaxOccurs
 	MaxOccurs_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	AllPointersEncoding
@@ -153,7 +154,7 @@ type BackRepoAllStruct struct {
 	// stores All according to their gorm ID
 	Map_AllDBID_AllPtr map[uint]*models.All
 
-	db *gorm.DB
+	db db.DBInterface
 
 	stage *models.StageStruct
 }
@@ -163,7 +164,7 @@ func (backRepoAll *BackRepoAllStruct) GetStage() (stage *models.StageStruct) {
 	return
 }
 
-func (backRepoAll *BackRepoAllStruct) GetDB() *gorm.DB {
+func (backRepoAll *BackRepoAllStruct) GetDB() db.DBInterface {
 	return backRepoAll.db
 }
 
@@ -200,9 +201,10 @@ func (backRepoAll *BackRepoAllStruct) CommitDeleteInstance(id uint) (Error error
 
 	// all is not staged anymore, remove allDB
 	allDB := backRepoAll.Map_AllDBID_AllDB[id]
-	query := backRepoAll.db.Unscoped().Delete(&allDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoAll.db.Unscoped()
+	_, err := db.Delete(&allDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -226,9 +228,9 @@ func (backRepoAll *BackRepoAllStruct) CommitPhaseOneInstance(all *models.All) (E
 	var allDB AllDB
 	allDB.CopyBasicFieldsFromAll(all)
 
-	query := backRepoAll.db.Create(&allDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoAll.db.Create(&allDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -362,9 +364,9 @@ func (backRepoAll *BackRepoAllStruct) CommitPhaseTwoInstance(backRepo *BackRepoS
 				append(allDB.AllPointersEncoding.Elements, int(elementAssocEnd_DB.ID))
 		}
 
-		query := backRepoAll.db.Save(&allDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoAll.db.Save(&allDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -383,9 +385,9 @@ func (backRepoAll *BackRepoAllStruct) CommitPhaseTwoInstance(backRepo *BackRepoS
 func (backRepoAll *BackRepoAllStruct) CheckoutPhaseOne() (Error error) {
 
 	allDBArray := make([]AllDB, 0)
-	query := backRepoAll.db.Find(&allDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoAll.db.Find(&allDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -546,7 +548,7 @@ func (backRepo *BackRepoStruct) CheckoutAll(all *models.All) {
 			var allDB AllDB
 			allDB.ID = id
 
-			if err := backRepo.BackRepoAll.db.First(&allDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoAll.db.First(&allDB, id); err != nil {
 				log.Fatalln("CheckoutAll : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoAll.CheckoutPhaseOneInstance(&allDB)
@@ -753,9 +755,9 @@ func (backRepoAll *BackRepoAllStruct) rowVisitorAll(row *xlsx.Row) error {
 
 		allDB_ID_atBackupTime := allDB.ID
 		allDB.ID = 0
-		query := backRepoAll.db.Create(allDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoAll.db.Create(allDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoAll.Map_AllDBID_AllDB[allDB.ID] = allDB
 		BackRepoAllid_atBckpTime_newID[allDB_ID_atBackupTime] = allDB.ID
@@ -790,9 +792,9 @@ func (backRepoAll *BackRepoAllStruct) RestorePhaseOne(dirPath string) {
 
 		allDB_ID_atBackupTime := allDB.ID
 		allDB.ID = 0
-		query := backRepoAll.db.Create(allDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoAll.db.Create(allDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoAll.Map_AllDBID_AllDB[allDB.ID] = allDB
 		BackRepoAllid_atBckpTime_newID[allDB_ID_atBackupTime] = allDB.ID
@@ -820,9 +822,10 @@ func (backRepoAll *BackRepoAllStruct) RestorePhaseTwo() {
 		}
 
 		// update databse with new index encoding
-		query := backRepoAll.db.Model(allDB).Updates(*allDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoAll.db.Model(allDB)
+		_, err := db.Updates(*allDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/go/db"
 	"github.com/fullstack-lang/gongxsd/go/models"
 )
 
@@ -64,7 +65,7 @@ type AnnotationDB struct {
 
 	// Declation for basic field annotationDB.Name
 	Name_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	AnnotationPointersEncoding
@@ -107,7 +108,7 @@ type BackRepoAnnotationStruct struct {
 	// stores Annotation according to their gorm ID
 	Map_AnnotationDBID_AnnotationPtr map[uint]*models.Annotation
 
-	db *gorm.DB
+	db db.DBInterface
 
 	stage *models.StageStruct
 }
@@ -117,7 +118,7 @@ func (backRepoAnnotation *BackRepoAnnotationStruct) GetStage() (stage *models.St
 	return
 }
 
-func (backRepoAnnotation *BackRepoAnnotationStruct) GetDB() *gorm.DB {
+func (backRepoAnnotation *BackRepoAnnotationStruct) GetDB() db.DBInterface {
 	return backRepoAnnotation.db
 }
 
@@ -154,9 +155,10 @@ func (backRepoAnnotation *BackRepoAnnotationStruct) CommitDeleteInstance(id uint
 
 	// annotation is not staged anymore, remove annotationDB
 	annotationDB := backRepoAnnotation.Map_AnnotationDBID_AnnotationDB[id]
-	query := backRepoAnnotation.db.Unscoped().Delete(&annotationDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoAnnotation.db.Unscoped()
+	_, err := db.Delete(&annotationDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -180,9 +182,9 @@ func (backRepoAnnotation *BackRepoAnnotationStruct) CommitPhaseOneInstance(annot
 	var annotationDB AnnotationDB
 	annotationDB.CopyBasicFieldsFromAnnotation(annotation)
 
-	query := backRepoAnnotation.db.Create(&annotationDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoAnnotation.db.Create(&annotationDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -232,9 +234,9 @@ func (backRepoAnnotation *BackRepoAnnotationStruct) CommitPhaseTwoInstance(backR
 				append(annotationDB.AnnotationPointersEncoding.Documentations, int(documentationAssocEnd_DB.ID))
 		}
 
-		query := backRepoAnnotation.db.Save(&annotationDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoAnnotation.db.Save(&annotationDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -253,9 +255,9 @@ func (backRepoAnnotation *BackRepoAnnotationStruct) CommitPhaseTwoInstance(backR
 func (backRepoAnnotation *BackRepoAnnotationStruct) CheckoutPhaseOne() (Error error) {
 
 	annotationDBArray := make([]AnnotationDB, 0)
-	query := backRepoAnnotation.db.Find(&annotationDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoAnnotation.db.Find(&annotationDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -375,7 +377,7 @@ func (backRepo *BackRepoStruct) CheckoutAnnotation(annotation *models.Annotation
 			var annotationDB AnnotationDB
 			annotationDB.ID = id
 
-			if err := backRepo.BackRepoAnnotation.db.First(&annotationDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoAnnotation.db.First(&annotationDB, id); err != nil {
 				log.Fatalln("CheckoutAnnotation : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoAnnotation.CheckoutPhaseOneInstance(&annotationDB)
@@ -522,9 +524,9 @@ func (backRepoAnnotation *BackRepoAnnotationStruct) rowVisitorAnnotation(row *xl
 
 		annotationDB_ID_atBackupTime := annotationDB.ID
 		annotationDB.ID = 0
-		query := backRepoAnnotation.db.Create(annotationDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoAnnotation.db.Create(annotationDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoAnnotation.Map_AnnotationDBID_AnnotationDB[annotationDB.ID] = annotationDB
 		BackRepoAnnotationid_atBckpTime_newID[annotationDB_ID_atBackupTime] = annotationDB.ID
@@ -559,9 +561,9 @@ func (backRepoAnnotation *BackRepoAnnotationStruct) RestorePhaseOne(dirPath stri
 
 		annotationDB_ID_atBackupTime := annotationDB.ID
 		annotationDB.ID = 0
-		query := backRepoAnnotation.db.Create(annotationDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoAnnotation.db.Create(annotationDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoAnnotation.Map_AnnotationDBID_AnnotationDB[annotationDB.ID] = annotationDB
 		BackRepoAnnotationid_atBckpTime_newID[annotationDB_ID_atBackupTime] = annotationDB.ID
@@ -583,9 +585,10 @@ func (backRepoAnnotation *BackRepoAnnotationStruct) RestorePhaseTwo() {
 
 		// insertion point for reindexing pointers encoding
 		// update databse with new index encoding
-		query := backRepoAnnotation.db.Model(annotationDB).Updates(*annotationDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoAnnotation.db.Model(annotationDB)
+		_, err := db.Updates(*annotationDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

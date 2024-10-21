@@ -70,12 +70,12 @@ func (controller *Controller) GetAlls(c *gin.Context) {
 	}
 	db := backRepo.BackRepoAll.GetDB()
 
-	query := db.Find(&allDBs)
-	if query.Error != nil {
+	_, err := db.Find(&allDBs)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -151,12 +151,12 @@ func (controller *Controller) PostAll(c *gin.Context) {
 	allDB.AllPointersEncoding = input.AllPointersEncoding
 	allDB.CopyBasicFieldsFromAll_WOP(&input.All_WOP)
 
-	query := db.Create(&allDB)
-	if query.Error != nil {
+	_, err = db.Create(&allDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -205,7 +205,7 @@ func (controller *Controller) GetAll(c *gin.Context) {
 
 	// Get allDB in DB
 	var allDB orm.AllDB
-	if err := db.First(&allDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&allDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -264,13 +264,13 @@ func (controller *Controller) UpdateAll(c *gin.Context) {
 	var allDB orm.AllDB
 
 	// fetch the all
-	query := db.First(&allDB, c.Param("id"))
+	_, err := db.First(&allDB, c.Param("id"))
 
-	if query.Error != nil {
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -279,12 +279,13 @@ func (controller *Controller) UpdateAll(c *gin.Context) {
 	allDB.CopyBasicFieldsFromAll_WOP(&input.All_WOP)
 	allDB.AllPointersEncoding = input.AllPointersEncoding
 
-	query = db.Model(&allDB).Updates(allDB)
-	if query.Error != nil {
+	db, _ = db.Model(&allDB)
+	_, err = db.Updates(allDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -343,7 +344,7 @@ func (controller *Controller) DeleteAll(c *gin.Context) {
 
 	// Get model if exist
 	var allDB orm.AllDB
-	if err := db.First(&allDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&allDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -353,7 +354,8 @@ func (controller *Controller) DeleteAll(c *gin.Context) {
 	}
 
 	// with gorm.Model field, default delete is a soft delete. Unscoped() force delete
-	db.Unscoped().Delete(&allDB)
+	db.Unscoped()
+	db.Delete(&allDB)
 
 	// get an instance (not staged) from DB instance, and call callback function
 	allDeleted := new(models.All)

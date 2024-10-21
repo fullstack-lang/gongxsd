@@ -70,12 +70,12 @@ func (controller *Controller) GetSequences(c *gin.Context) {
 	}
 	db := backRepo.BackRepoSequence.GetDB()
 
-	query := db.Find(&sequenceDBs)
-	if query.Error != nil {
+	_, err := db.Find(&sequenceDBs)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -151,12 +151,12 @@ func (controller *Controller) PostSequence(c *gin.Context) {
 	sequenceDB.SequencePointersEncoding = input.SequencePointersEncoding
 	sequenceDB.CopyBasicFieldsFromSequence_WOP(&input.Sequence_WOP)
 
-	query := db.Create(&sequenceDB)
-	if query.Error != nil {
+	_, err = db.Create(&sequenceDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -205,7 +205,7 @@ func (controller *Controller) GetSequence(c *gin.Context) {
 
 	// Get sequenceDB in DB
 	var sequenceDB orm.SequenceDB
-	if err := db.First(&sequenceDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&sequenceDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -264,13 +264,13 @@ func (controller *Controller) UpdateSequence(c *gin.Context) {
 	var sequenceDB orm.SequenceDB
 
 	// fetch the sequence
-	query := db.First(&sequenceDB, c.Param("id"))
+	_, err := db.First(&sequenceDB, c.Param("id"))
 
-	if query.Error != nil {
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -279,12 +279,13 @@ func (controller *Controller) UpdateSequence(c *gin.Context) {
 	sequenceDB.CopyBasicFieldsFromSequence_WOP(&input.Sequence_WOP)
 	sequenceDB.SequencePointersEncoding = input.SequencePointersEncoding
 
-	query = db.Model(&sequenceDB).Updates(sequenceDB)
-	if query.Error != nil {
+	db, _ = db.Model(&sequenceDB)
+	_, err = db.Updates(sequenceDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -343,7 +344,7 @@ func (controller *Controller) DeleteSequence(c *gin.Context) {
 
 	// Get model if exist
 	var sequenceDB orm.SequenceDB
-	if err := db.First(&sequenceDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&sequenceDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -353,7 +354,8 @@ func (controller *Controller) DeleteSequence(c *gin.Context) {
 	}
 
 	// with gorm.Model field, default delete is a soft delete. Unscoped() force delete
-	db.Unscoped().Delete(&sequenceDB)
+	db.Unscoped()
+	db.Delete(&sequenceDB)
 
 	// get an instance (not staged) from DB instance, and call callback function
 	sequenceDeleted := new(models.Sequence)

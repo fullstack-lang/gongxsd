@@ -70,12 +70,12 @@ func (controller *Controller) GetElements(c *gin.Context) {
 	}
 	db := backRepo.BackRepoElement.GetDB()
 
-	query := db.Find(&elementDBs)
-	if query.Error != nil {
+	_, err := db.Find(&elementDBs)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -151,12 +151,12 @@ func (controller *Controller) PostElement(c *gin.Context) {
 	elementDB.ElementPointersEncoding = input.ElementPointersEncoding
 	elementDB.CopyBasicFieldsFromElement_WOP(&input.Element_WOP)
 
-	query := db.Create(&elementDB)
-	if query.Error != nil {
+	_, err = db.Create(&elementDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -205,7 +205,7 @@ func (controller *Controller) GetElement(c *gin.Context) {
 
 	// Get elementDB in DB
 	var elementDB orm.ElementDB
-	if err := db.First(&elementDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&elementDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -264,13 +264,13 @@ func (controller *Controller) UpdateElement(c *gin.Context) {
 	var elementDB orm.ElementDB
 
 	// fetch the element
-	query := db.First(&elementDB, c.Param("id"))
+	_, err := db.First(&elementDB, c.Param("id"))
 
-	if query.Error != nil {
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -279,12 +279,13 @@ func (controller *Controller) UpdateElement(c *gin.Context) {
 	elementDB.CopyBasicFieldsFromElement_WOP(&input.Element_WOP)
 	elementDB.ElementPointersEncoding = input.ElementPointersEncoding
 
-	query = db.Model(&elementDB).Updates(elementDB)
-	if query.Error != nil {
+	db, _ = db.Model(&elementDB)
+	_, err = db.Updates(elementDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -343,7 +344,7 @@ func (controller *Controller) DeleteElement(c *gin.Context) {
 
 	// Get model if exist
 	var elementDB orm.ElementDB
-	if err := db.First(&elementDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&elementDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -353,7 +354,8 @@ func (controller *Controller) DeleteElement(c *gin.Context) {
 	}
 
 	// with gorm.Model field, default delete is a soft delete. Unscoped() force delete
-	db.Unscoped().Delete(&elementDB)
+	db.Unscoped()
+	db.Delete(&elementDB)
 
 	// get an instance (not staged) from DB instance, and call callback function
 	elementDeleted := new(models.Element)

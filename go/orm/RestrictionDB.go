@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/go/db"
 	"github.com/fullstack-lang/gongxsd/go/models"
 )
 
@@ -103,7 +104,7 @@ type RestrictionDB struct {
 
 	// Declation for basic field restrictionDB.Base
 	Base_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	RestrictionPointersEncoding
@@ -149,7 +150,7 @@ type BackRepoRestrictionStruct struct {
 	// stores Restriction according to their gorm ID
 	Map_RestrictionDBID_RestrictionPtr map[uint]*models.Restriction
 
-	db *gorm.DB
+	db db.DBInterface
 
 	stage *models.StageStruct
 }
@@ -159,7 +160,7 @@ func (backRepoRestriction *BackRepoRestrictionStruct) GetStage() (stage *models.
 	return
 }
 
-func (backRepoRestriction *BackRepoRestrictionStruct) GetDB() *gorm.DB {
+func (backRepoRestriction *BackRepoRestrictionStruct) GetDB() db.DBInterface {
 	return backRepoRestriction.db
 }
 
@@ -196,9 +197,10 @@ func (backRepoRestriction *BackRepoRestrictionStruct) CommitDeleteInstance(id ui
 
 	// restriction is not staged anymore, remove restrictionDB
 	restrictionDB := backRepoRestriction.Map_RestrictionDBID_RestrictionDB[id]
-	query := backRepoRestriction.db.Unscoped().Delete(&restrictionDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoRestriction.db.Unscoped()
+	_, err := db.Delete(&restrictionDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -222,9 +224,9 @@ func (backRepoRestriction *BackRepoRestrictionStruct) CommitPhaseOneInstance(res
 	var restrictionDB RestrictionDB
 	restrictionDB.CopyBasicFieldsFromRestriction(restriction)
 
-	query := backRepoRestriction.db.Create(&restrictionDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoRestriction.db.Create(&restrictionDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -382,9 +384,9 @@ func (backRepoRestriction *BackRepoRestrictionStruct) CommitPhaseTwoInstance(bac
 			restrictionDB.TotalDigitID.Valid = true
 		}
 
-		query := backRepoRestriction.db.Save(&restrictionDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoRestriction.db.Save(&restrictionDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -403,9 +405,9 @@ func (backRepoRestriction *BackRepoRestrictionStruct) CommitPhaseTwoInstance(bac
 func (backRepoRestriction *BackRepoRestrictionStruct) CheckoutPhaseOne() (Error error) {
 
 	restrictionDBArray := make([]RestrictionDB, 0)
-	query := backRepoRestriction.db.Find(&restrictionDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoRestriction.db.Find(&restrictionDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -570,7 +572,7 @@ func (backRepo *BackRepoStruct) CheckoutRestriction(restriction *models.Restrict
 			var restrictionDB RestrictionDB
 			restrictionDB.ID = id
 
-			if err := backRepo.BackRepoRestriction.db.First(&restrictionDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoRestriction.db.First(&restrictionDB, id); err != nil {
 				log.Fatalln("CheckoutRestriction : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoRestriction.CheckoutPhaseOneInstance(&restrictionDB)
@@ -729,9 +731,9 @@ func (backRepoRestriction *BackRepoRestrictionStruct) rowVisitorRestriction(row 
 
 		restrictionDB_ID_atBackupTime := restrictionDB.ID
 		restrictionDB.ID = 0
-		query := backRepoRestriction.db.Create(restrictionDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoRestriction.db.Create(restrictionDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoRestriction.Map_RestrictionDBID_RestrictionDB[restrictionDB.ID] = restrictionDB
 		BackRepoRestrictionid_atBckpTime_newID[restrictionDB_ID_atBackupTime] = restrictionDB.ID
@@ -766,9 +768,9 @@ func (backRepoRestriction *BackRepoRestrictionStruct) RestorePhaseOne(dirPath st
 
 		restrictionDB_ID_atBackupTime := restrictionDB.ID
 		restrictionDB.ID = 0
-		query := backRepoRestriction.db.Create(restrictionDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoRestriction.db.Create(restrictionDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoRestriction.Map_RestrictionDBID_RestrictionDB[restrictionDB.ID] = restrictionDB
 		BackRepoRestrictionid_atBckpTime_newID[restrictionDB_ID_atBackupTime] = restrictionDB.ID
@@ -844,9 +846,10 @@ func (backRepoRestriction *BackRepoRestrictionStruct) RestorePhaseTwo() {
 		}
 
 		// update databse with new index encoding
-		query := backRepoRestriction.db.Model(restrictionDB).Updates(*restrictionDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoRestriction.db.Model(restrictionDB)
+		_, err := db.Updates(*restrictionDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

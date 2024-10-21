@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/go/db"
 	"github.com/fullstack-lang/gongxsd/go/models"
 )
 
@@ -61,7 +62,7 @@ type ComplexContentDB struct {
 
 	// Declation for basic field complexcontentDB.Name
 	Name_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	ComplexContentPointersEncoding
@@ -104,7 +105,7 @@ type BackRepoComplexContentStruct struct {
 	// stores ComplexContent according to their gorm ID
 	Map_ComplexContentDBID_ComplexContentPtr map[uint]*models.ComplexContent
 
-	db *gorm.DB
+	db db.DBInterface
 
 	stage *models.StageStruct
 }
@@ -114,7 +115,7 @@ func (backRepoComplexContent *BackRepoComplexContentStruct) GetStage() (stage *m
 	return
 }
 
-func (backRepoComplexContent *BackRepoComplexContentStruct) GetDB() *gorm.DB {
+func (backRepoComplexContent *BackRepoComplexContentStruct) GetDB() db.DBInterface {
 	return backRepoComplexContent.db
 }
 
@@ -151,9 +152,10 @@ func (backRepoComplexContent *BackRepoComplexContentStruct) CommitDeleteInstance
 
 	// complexcontent is not staged anymore, remove complexcontentDB
 	complexcontentDB := backRepoComplexContent.Map_ComplexContentDBID_ComplexContentDB[id]
-	query := backRepoComplexContent.db.Unscoped().Delete(&complexcontentDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoComplexContent.db.Unscoped()
+	_, err := db.Delete(&complexcontentDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -177,9 +179,9 @@ func (backRepoComplexContent *BackRepoComplexContentStruct) CommitPhaseOneInstan
 	var complexcontentDB ComplexContentDB
 	complexcontentDB.CopyBasicFieldsFromComplexContent(complexcontent)
 
-	query := backRepoComplexContent.db.Create(&complexcontentDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoComplexContent.db.Create(&complexcontentDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -211,9 +213,9 @@ func (backRepoComplexContent *BackRepoComplexContentStruct) CommitPhaseTwoInstan
 		complexcontentDB.CopyBasicFieldsFromComplexContent(complexcontent)
 
 		// insertion point for translating pointers encodings into actual pointers
-		query := backRepoComplexContent.db.Save(&complexcontentDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoComplexContent.db.Save(&complexcontentDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -232,9 +234,9 @@ func (backRepoComplexContent *BackRepoComplexContentStruct) CommitPhaseTwoInstan
 func (backRepoComplexContent *BackRepoComplexContentStruct) CheckoutPhaseOne() (Error error) {
 
 	complexcontentDBArray := make([]ComplexContentDB, 0)
-	query := backRepoComplexContent.db.Find(&complexcontentDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoComplexContent.db.Find(&complexcontentDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -345,7 +347,7 @@ func (backRepo *BackRepoStruct) CheckoutComplexContent(complexcontent *models.Co
 			var complexcontentDB ComplexContentDB
 			complexcontentDB.ID = id
 
-			if err := backRepo.BackRepoComplexContent.db.First(&complexcontentDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoComplexContent.db.First(&complexcontentDB, id); err != nil {
 				log.Fatalln("CheckoutComplexContent : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoComplexContent.CheckoutPhaseOneInstance(&complexcontentDB)
@@ -492,9 +494,9 @@ func (backRepoComplexContent *BackRepoComplexContentStruct) rowVisitorComplexCon
 
 		complexcontentDB_ID_atBackupTime := complexcontentDB.ID
 		complexcontentDB.ID = 0
-		query := backRepoComplexContent.db.Create(complexcontentDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoComplexContent.db.Create(complexcontentDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoComplexContent.Map_ComplexContentDBID_ComplexContentDB[complexcontentDB.ID] = complexcontentDB
 		BackRepoComplexContentid_atBckpTime_newID[complexcontentDB_ID_atBackupTime] = complexcontentDB.ID
@@ -529,9 +531,9 @@ func (backRepoComplexContent *BackRepoComplexContentStruct) RestorePhaseOne(dirP
 
 		complexcontentDB_ID_atBackupTime := complexcontentDB.ID
 		complexcontentDB.ID = 0
-		query := backRepoComplexContent.db.Create(complexcontentDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoComplexContent.db.Create(complexcontentDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoComplexContent.Map_ComplexContentDBID_ComplexContentDB[complexcontentDB.ID] = complexcontentDB
 		BackRepoComplexContentid_atBckpTime_newID[complexcontentDB_ID_atBackupTime] = complexcontentDB.ID
@@ -553,9 +555,10 @@ func (backRepoComplexContent *BackRepoComplexContentStruct) RestorePhaseTwo() {
 
 		// insertion point for reindexing pointers encoding
 		// update databse with new index encoding
-		query := backRepoComplexContent.db.Model(complexcontentDB).Updates(*complexcontentDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoComplexContent.db.Model(complexcontentDB)
+		_, err := db.Updates(*complexcontentDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

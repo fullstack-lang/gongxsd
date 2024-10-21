@@ -70,12 +70,12 @@ func (controller *Controller) GetTotalDigits(c *gin.Context) {
 	}
 	db := backRepo.BackRepoTotalDigit.GetDB()
 
-	query := db.Find(&totaldigitDBs)
-	if query.Error != nil {
+	_, err := db.Find(&totaldigitDBs)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -151,12 +151,12 @@ func (controller *Controller) PostTotalDigit(c *gin.Context) {
 	totaldigitDB.TotalDigitPointersEncoding = input.TotalDigitPointersEncoding
 	totaldigitDB.CopyBasicFieldsFromTotalDigit_WOP(&input.TotalDigit_WOP)
 
-	query := db.Create(&totaldigitDB)
-	if query.Error != nil {
+	_, err = db.Create(&totaldigitDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -205,7 +205,7 @@ func (controller *Controller) GetTotalDigit(c *gin.Context) {
 
 	// Get totaldigitDB in DB
 	var totaldigitDB orm.TotalDigitDB
-	if err := db.First(&totaldigitDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&totaldigitDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -264,13 +264,13 @@ func (controller *Controller) UpdateTotalDigit(c *gin.Context) {
 	var totaldigitDB orm.TotalDigitDB
 
 	// fetch the totaldigit
-	query := db.First(&totaldigitDB, c.Param("id"))
+	_, err := db.First(&totaldigitDB, c.Param("id"))
 
-	if query.Error != nil {
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -279,12 +279,13 @@ func (controller *Controller) UpdateTotalDigit(c *gin.Context) {
 	totaldigitDB.CopyBasicFieldsFromTotalDigit_WOP(&input.TotalDigit_WOP)
 	totaldigitDB.TotalDigitPointersEncoding = input.TotalDigitPointersEncoding
 
-	query = db.Model(&totaldigitDB).Updates(totaldigitDB)
-	if query.Error != nil {
+	db, _ = db.Model(&totaldigitDB)
+	_, err = db.Updates(totaldigitDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -343,7 +344,7 @@ func (controller *Controller) DeleteTotalDigit(c *gin.Context) {
 
 	// Get model if exist
 	var totaldigitDB orm.TotalDigitDB
-	if err := db.First(&totaldigitDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&totaldigitDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -353,7 +354,8 @@ func (controller *Controller) DeleteTotalDigit(c *gin.Context) {
 	}
 
 	// with gorm.Model field, default delete is a soft delete. Unscoped() force delete
-	db.Unscoped().Delete(&totaldigitDB)
+	db.Unscoped()
+	db.Delete(&totaldigitDB)
 
 	// get an instance (not staged) from DB instance, and call callback function
 	totaldigitDeleted := new(models.TotalDigit)

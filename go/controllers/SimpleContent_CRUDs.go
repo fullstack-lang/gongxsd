@@ -70,12 +70,12 @@ func (controller *Controller) GetSimpleContents(c *gin.Context) {
 	}
 	db := backRepo.BackRepoSimpleContent.GetDB()
 
-	query := db.Find(&simplecontentDBs)
-	if query.Error != nil {
+	_, err := db.Find(&simplecontentDBs)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -151,12 +151,12 @@ func (controller *Controller) PostSimpleContent(c *gin.Context) {
 	simplecontentDB.SimpleContentPointersEncoding = input.SimpleContentPointersEncoding
 	simplecontentDB.CopyBasicFieldsFromSimpleContent_WOP(&input.SimpleContent_WOP)
 
-	query := db.Create(&simplecontentDB)
-	if query.Error != nil {
+	_, err = db.Create(&simplecontentDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -205,7 +205,7 @@ func (controller *Controller) GetSimpleContent(c *gin.Context) {
 
 	// Get simplecontentDB in DB
 	var simplecontentDB orm.SimpleContentDB
-	if err := db.First(&simplecontentDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&simplecontentDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -264,13 +264,13 @@ func (controller *Controller) UpdateSimpleContent(c *gin.Context) {
 	var simplecontentDB orm.SimpleContentDB
 
 	// fetch the simplecontent
-	query := db.First(&simplecontentDB, c.Param("id"))
+	_, err := db.First(&simplecontentDB, c.Param("id"))
 
-	if query.Error != nil {
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -279,12 +279,13 @@ func (controller *Controller) UpdateSimpleContent(c *gin.Context) {
 	simplecontentDB.CopyBasicFieldsFromSimpleContent_WOP(&input.SimpleContent_WOP)
 	simplecontentDB.SimpleContentPointersEncoding = input.SimpleContentPointersEncoding
 
-	query = db.Model(&simplecontentDB).Updates(simplecontentDB)
-	if query.Error != nil {
+	db, _ = db.Model(&simplecontentDB)
+	_, err = db.Updates(simplecontentDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -343,7 +344,7 @@ func (controller *Controller) DeleteSimpleContent(c *gin.Context) {
 
 	// Get model if exist
 	var simplecontentDB orm.SimpleContentDB
-	if err := db.First(&simplecontentDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&simplecontentDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -353,7 +354,8 @@ func (controller *Controller) DeleteSimpleContent(c *gin.Context) {
 	}
 
 	// with gorm.Model field, default delete is a soft delete. Unscoped() force delete
-	db.Unscoped().Delete(&simplecontentDB)
+	db.Unscoped()
+	db.Delete(&simplecontentDB)
 
 	// get an instance (not staged) from DB instance, and call callback function
 	simplecontentDeleted := new(models.SimpleContent)

@@ -70,12 +70,12 @@ func (controller *Controller) GetSimpleTypes(c *gin.Context) {
 	}
 	db := backRepo.BackRepoSimpleType.GetDB()
 
-	query := db.Find(&simpletypeDBs)
-	if query.Error != nil {
+	_, err := db.Find(&simpletypeDBs)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -151,12 +151,12 @@ func (controller *Controller) PostSimpleType(c *gin.Context) {
 	simpletypeDB.SimpleTypePointersEncoding = input.SimpleTypePointersEncoding
 	simpletypeDB.CopyBasicFieldsFromSimpleType_WOP(&input.SimpleType_WOP)
 
-	query := db.Create(&simpletypeDB)
-	if query.Error != nil {
+	_, err = db.Create(&simpletypeDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -205,7 +205,7 @@ func (controller *Controller) GetSimpleType(c *gin.Context) {
 
 	// Get simpletypeDB in DB
 	var simpletypeDB orm.SimpleTypeDB
-	if err := db.First(&simpletypeDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&simpletypeDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -264,13 +264,13 @@ func (controller *Controller) UpdateSimpleType(c *gin.Context) {
 	var simpletypeDB orm.SimpleTypeDB
 
 	// fetch the simpletype
-	query := db.First(&simpletypeDB, c.Param("id"))
+	_, err := db.First(&simpletypeDB, c.Param("id"))
 
-	if query.Error != nil {
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -279,12 +279,13 @@ func (controller *Controller) UpdateSimpleType(c *gin.Context) {
 	simpletypeDB.CopyBasicFieldsFromSimpleType_WOP(&input.SimpleType_WOP)
 	simpletypeDB.SimpleTypePointersEncoding = input.SimpleTypePointersEncoding
 
-	query = db.Model(&simpletypeDB).Updates(simpletypeDB)
-	if query.Error != nil {
+	db, _ = db.Model(&simpletypeDB)
+	_, err = db.Updates(simpletypeDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -343,7 +344,7 @@ func (controller *Controller) DeleteSimpleType(c *gin.Context) {
 
 	// Get model if exist
 	var simpletypeDB orm.SimpleTypeDB
-	if err := db.First(&simpletypeDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&simpletypeDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -353,7 +354,8 @@ func (controller *Controller) DeleteSimpleType(c *gin.Context) {
 	}
 
 	// with gorm.Model field, default delete is a soft delete. Unscoped() force delete
-	db.Unscoped().Delete(&simpletypeDB)
+	db.Unscoped()
+	db.Delete(&simpletypeDB)
 
 	// get an instance (not staged) from DB instance, and call callback function
 	simpletypeDeleted := new(models.SimpleType)

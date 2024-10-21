@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/go/db"
 	"github.com/fullstack-lang/gongxsd/go/models"
 )
 
@@ -82,7 +83,7 @@ type SimpleTypeDB struct {
 
 	// Declation for basic field simpletypeDB.Depth
 	Depth_Data sql.NullInt64
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	SimpleTypePointersEncoding
@@ -134,7 +135,7 @@ type BackRepoSimpleTypeStruct struct {
 	// stores SimpleType according to their gorm ID
 	Map_SimpleTypeDBID_SimpleTypePtr map[uint]*models.SimpleType
 
-	db *gorm.DB
+	db db.DBInterface
 
 	stage *models.StageStruct
 }
@@ -144,7 +145,7 @@ func (backRepoSimpleType *BackRepoSimpleTypeStruct) GetStage() (stage *models.St
 	return
 }
 
-func (backRepoSimpleType *BackRepoSimpleTypeStruct) GetDB() *gorm.DB {
+func (backRepoSimpleType *BackRepoSimpleTypeStruct) GetDB() db.DBInterface {
 	return backRepoSimpleType.db
 }
 
@@ -181,9 +182,10 @@ func (backRepoSimpleType *BackRepoSimpleTypeStruct) CommitDeleteInstance(id uint
 
 	// simpletype is not staged anymore, remove simpletypeDB
 	simpletypeDB := backRepoSimpleType.Map_SimpleTypeDBID_SimpleTypeDB[id]
-	query := backRepoSimpleType.db.Unscoped().Delete(&simpletypeDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoSimpleType.db.Unscoped()
+	_, err := db.Delete(&simpletypeDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -207,9 +209,9 @@ func (backRepoSimpleType *BackRepoSimpleTypeStruct) CommitPhaseOneInstance(simpl
 	var simpletypeDB SimpleTypeDB
 	simpletypeDB.CopyBasicFieldsFromSimpleType(simpletype)
 
-	query := backRepoSimpleType.db.Create(&simpletypeDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoSimpleType.db.Create(&simpletypeDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -277,9 +279,9 @@ func (backRepoSimpleType *BackRepoSimpleTypeStruct) CommitPhaseTwoInstance(backR
 			simpletypeDB.UnionID.Valid = true
 		}
 
-		query := backRepoSimpleType.db.Save(&simpletypeDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoSimpleType.db.Save(&simpletypeDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -298,9 +300,9 @@ func (backRepoSimpleType *BackRepoSimpleTypeStruct) CommitPhaseTwoInstance(backR
 func (backRepoSimpleType *BackRepoSimpleTypeStruct) CheckoutPhaseOne() (Error error) {
 
 	simpletypeDBArray := make([]SimpleTypeDB, 0)
-	query := backRepoSimpleType.db.Find(&simpletypeDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoSimpleType.db.Find(&simpletypeDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -426,7 +428,7 @@ func (backRepo *BackRepoStruct) CheckoutSimpleType(simpletype *models.SimpleType
 			var simpletypeDB SimpleTypeDB
 			simpletypeDB.ID = id
 
-			if err := backRepo.BackRepoSimpleType.db.First(&simpletypeDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoSimpleType.db.First(&simpletypeDB, id); err != nil {
 				log.Fatalln("CheckoutSimpleType : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoSimpleType.CheckoutPhaseOneInstance(&simpletypeDB)
@@ -609,9 +611,9 @@ func (backRepoSimpleType *BackRepoSimpleTypeStruct) rowVisitorSimpleType(row *xl
 
 		simpletypeDB_ID_atBackupTime := simpletypeDB.ID
 		simpletypeDB.ID = 0
-		query := backRepoSimpleType.db.Create(simpletypeDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoSimpleType.db.Create(simpletypeDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoSimpleType.Map_SimpleTypeDBID_SimpleTypeDB[simpletypeDB.ID] = simpletypeDB
 		BackRepoSimpleTypeid_atBckpTime_newID[simpletypeDB_ID_atBackupTime] = simpletypeDB.ID
@@ -646,9 +648,9 @@ func (backRepoSimpleType *BackRepoSimpleTypeStruct) RestorePhaseOne(dirPath stri
 
 		simpletypeDB_ID_atBackupTime := simpletypeDB.ID
 		simpletypeDB.ID = 0
-		query := backRepoSimpleType.db.Create(simpletypeDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoSimpleType.db.Create(simpletypeDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoSimpleType.Map_SimpleTypeDBID_SimpleTypeDB[simpletypeDB.ID] = simpletypeDB
 		BackRepoSimpleTypeid_atBckpTime_newID[simpletypeDB_ID_atBackupTime] = simpletypeDB.ID
@@ -688,9 +690,10 @@ func (backRepoSimpleType *BackRepoSimpleTypeStruct) RestorePhaseTwo() {
 		}
 
 		// update databse with new index encoding
-		query := backRepoSimpleType.db.Model(simpletypeDB).Updates(*simpletypeDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoSimpleType.db.Model(simpletypeDB)
+		_, err := db.Updates(*simpletypeDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

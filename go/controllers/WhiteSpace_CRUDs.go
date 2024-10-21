@@ -70,12 +70,12 @@ func (controller *Controller) GetWhiteSpaces(c *gin.Context) {
 	}
 	db := backRepo.BackRepoWhiteSpace.GetDB()
 
-	query := db.Find(&whitespaceDBs)
-	if query.Error != nil {
+	_, err := db.Find(&whitespaceDBs)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -151,12 +151,12 @@ func (controller *Controller) PostWhiteSpace(c *gin.Context) {
 	whitespaceDB.WhiteSpacePointersEncoding = input.WhiteSpacePointersEncoding
 	whitespaceDB.CopyBasicFieldsFromWhiteSpace_WOP(&input.WhiteSpace_WOP)
 
-	query := db.Create(&whitespaceDB)
-	if query.Error != nil {
+	_, err = db.Create(&whitespaceDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -205,7 +205,7 @@ func (controller *Controller) GetWhiteSpace(c *gin.Context) {
 
 	// Get whitespaceDB in DB
 	var whitespaceDB orm.WhiteSpaceDB
-	if err := db.First(&whitespaceDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&whitespaceDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -264,13 +264,13 @@ func (controller *Controller) UpdateWhiteSpace(c *gin.Context) {
 	var whitespaceDB orm.WhiteSpaceDB
 
 	// fetch the whitespace
-	query := db.First(&whitespaceDB, c.Param("id"))
+	_, err := db.First(&whitespaceDB, c.Param("id"))
 
-	if query.Error != nil {
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -279,12 +279,13 @@ func (controller *Controller) UpdateWhiteSpace(c *gin.Context) {
 	whitespaceDB.CopyBasicFieldsFromWhiteSpace_WOP(&input.WhiteSpace_WOP)
 	whitespaceDB.WhiteSpacePointersEncoding = input.WhiteSpacePointersEncoding
 
-	query = db.Model(&whitespaceDB).Updates(whitespaceDB)
-	if query.Error != nil {
+	db, _ = db.Model(&whitespaceDB)
+	_, err = db.Updates(whitespaceDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -343,7 +344,7 @@ func (controller *Controller) DeleteWhiteSpace(c *gin.Context) {
 
 	// Get model if exist
 	var whitespaceDB orm.WhiteSpaceDB
-	if err := db.First(&whitespaceDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&whitespaceDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -353,7 +354,8 @@ func (controller *Controller) DeleteWhiteSpace(c *gin.Context) {
 	}
 
 	// with gorm.Model field, default delete is a soft delete. Unscoped() force delete
-	db.Unscoped().Delete(&whitespaceDB)
+	db.Unscoped()
+	db.Delete(&whitespaceDB)
 
 	// get an instance (not staged) from DB instance, and call callback function
 	whitespaceDeleted := new(models.WhiteSpace)

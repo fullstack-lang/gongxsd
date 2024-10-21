@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/go/db"
 	"github.com/fullstack-lang/gongxsd/go/models"
 )
 
@@ -89,7 +90,7 @@ type SchemaDB struct {
 
 	// Declation for basic field schemaDB.Depth
 	Depth_Data sql.NullInt64
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	SchemaPointersEncoding
@@ -141,7 +142,7 @@ type BackRepoSchemaStruct struct {
 	// stores Schema according to their gorm ID
 	Map_SchemaDBID_SchemaPtr map[uint]*models.Schema
 
-	db *gorm.DB
+	db db.DBInterface
 
 	stage *models.StageStruct
 }
@@ -151,7 +152,7 @@ func (backRepoSchema *BackRepoSchemaStruct) GetStage() (stage *models.StageStruc
 	return
 }
 
-func (backRepoSchema *BackRepoSchemaStruct) GetDB() *gorm.DB {
+func (backRepoSchema *BackRepoSchemaStruct) GetDB() db.DBInterface {
 	return backRepoSchema.db
 }
 
@@ -188,9 +189,10 @@ func (backRepoSchema *BackRepoSchemaStruct) CommitDeleteInstance(id uint) (Error
 
 	// schema is not staged anymore, remove schemaDB
 	schemaDB := backRepoSchema.Map_SchemaDBID_SchemaDB[id]
-	query := backRepoSchema.db.Unscoped().Delete(&schemaDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoSchema.db.Unscoped()
+	_, err := db.Delete(&schemaDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -214,9 +216,9 @@ func (backRepoSchema *BackRepoSchemaStruct) CommitPhaseOneInstance(schema *model
 	var schemaDB SchemaDB
 	schemaDB.CopyBasicFieldsFromSchema(schema)
 
-	query := backRepoSchema.db.Create(&schemaDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoSchema.db.Create(&schemaDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -350,9 +352,9 @@ func (backRepoSchema *BackRepoSchemaStruct) CommitPhaseTwoInstance(backRepo *Bac
 				append(schemaDB.SchemaPointersEncoding.Groups, int(groupAssocEnd_DB.ID))
 		}
 
-		query := backRepoSchema.db.Save(&schemaDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoSchema.db.Save(&schemaDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -371,9 +373,9 @@ func (backRepoSchema *BackRepoSchemaStruct) CommitPhaseTwoInstance(backRepo *Bac
 func (backRepoSchema *BackRepoSchemaStruct) CheckoutPhaseOne() (Error error) {
 
 	schemaDBArray := make([]SchemaDB, 0)
-	query := backRepoSchema.db.Find(&schemaDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoSchema.db.Find(&schemaDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -534,7 +536,7 @@ func (backRepo *BackRepoStruct) CheckoutSchema(schema *models.Schema) {
 			var schemaDB SchemaDB
 			schemaDB.ID = id
 
-			if err := backRepo.BackRepoSchema.db.First(&schemaDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoSchema.db.First(&schemaDB, id); err != nil {
 				log.Fatalln("CheckoutSchema : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoSchema.CheckoutPhaseOneInstance(&schemaDB)
@@ -717,9 +719,9 @@ func (backRepoSchema *BackRepoSchemaStruct) rowVisitorSchema(row *xlsx.Row) erro
 
 		schemaDB_ID_atBackupTime := schemaDB.ID
 		schemaDB.ID = 0
-		query := backRepoSchema.db.Create(schemaDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoSchema.db.Create(schemaDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoSchema.Map_SchemaDBID_SchemaDB[schemaDB.ID] = schemaDB
 		BackRepoSchemaid_atBckpTime_newID[schemaDB_ID_atBackupTime] = schemaDB.ID
@@ -754,9 +756,9 @@ func (backRepoSchema *BackRepoSchemaStruct) RestorePhaseOne(dirPath string) {
 
 		schemaDB_ID_atBackupTime := schemaDB.ID
 		schemaDB.ID = 0
-		query := backRepoSchema.db.Create(schemaDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoSchema.db.Create(schemaDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoSchema.Map_SchemaDBID_SchemaDB[schemaDB.ID] = schemaDB
 		BackRepoSchemaid_atBckpTime_newID[schemaDB_ID_atBackupTime] = schemaDB.ID
@@ -784,9 +786,10 @@ func (backRepoSchema *BackRepoSchemaStruct) RestorePhaseTwo() {
 		}
 
 		// update databse with new index encoding
-		query := backRepoSchema.db.Model(schemaDB).Updates(*schemaDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoSchema.db.Model(schemaDB)
+		_, err := db.Updates(*schemaDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

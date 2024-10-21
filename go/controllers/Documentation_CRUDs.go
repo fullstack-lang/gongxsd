@@ -70,12 +70,12 @@ func (controller *Controller) GetDocumentations(c *gin.Context) {
 	}
 	db := backRepo.BackRepoDocumentation.GetDB()
 
-	query := db.Find(&documentationDBs)
-	if query.Error != nil {
+	_, err := db.Find(&documentationDBs)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -151,12 +151,12 @@ func (controller *Controller) PostDocumentation(c *gin.Context) {
 	documentationDB.DocumentationPointersEncoding = input.DocumentationPointersEncoding
 	documentationDB.CopyBasicFieldsFromDocumentation_WOP(&input.Documentation_WOP)
 
-	query := db.Create(&documentationDB)
-	if query.Error != nil {
+	_, err = db.Create(&documentationDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -205,7 +205,7 @@ func (controller *Controller) GetDocumentation(c *gin.Context) {
 
 	// Get documentationDB in DB
 	var documentationDB orm.DocumentationDB
-	if err := db.First(&documentationDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&documentationDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -264,13 +264,13 @@ func (controller *Controller) UpdateDocumentation(c *gin.Context) {
 	var documentationDB orm.DocumentationDB
 
 	// fetch the documentation
-	query := db.First(&documentationDB, c.Param("id"))
+	_, err := db.First(&documentationDB, c.Param("id"))
 
-	if query.Error != nil {
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -279,12 +279,13 @@ func (controller *Controller) UpdateDocumentation(c *gin.Context) {
 	documentationDB.CopyBasicFieldsFromDocumentation_WOP(&input.Documentation_WOP)
 	documentationDB.DocumentationPointersEncoding = input.DocumentationPointersEncoding
 
-	query = db.Model(&documentationDB).Updates(documentationDB)
-	if query.Error != nil {
+	db, _ = db.Model(&documentationDB)
+	_, err = db.Updates(documentationDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -343,7 +344,7 @@ func (controller *Controller) DeleteDocumentation(c *gin.Context) {
 
 	// Get model if exist
 	var documentationDB orm.DocumentationDB
-	if err := db.First(&documentationDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&documentationDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -353,7 +354,8 @@ func (controller *Controller) DeleteDocumentation(c *gin.Context) {
 	}
 
 	// with gorm.Model field, default delete is a soft delete. Unscoped() force delete
-	db.Unscoped().Delete(&documentationDB)
+	db.Unscoped()
+	db.Delete(&documentationDB)
 
 	// get an instance (not staged) from DB instance, and call callback function
 	documentationDeleted := new(models.Documentation)

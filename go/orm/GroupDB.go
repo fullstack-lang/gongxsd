@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/go/db"
 	"github.com/fullstack-lang/gongxsd/go/models"
 )
 
@@ -116,7 +117,7 @@ type GroupDB struct {
 
 	// Declation for basic field groupDB.MaxOccurs
 	MaxOccurs_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	GroupPointersEncoding
@@ -189,7 +190,7 @@ type BackRepoGroupStruct struct {
 	// stores Group according to their gorm ID
 	Map_GroupDBID_GroupPtr map[uint]*models.Group
 
-	db *gorm.DB
+	db db.DBInterface
 
 	stage *models.StageStruct
 }
@@ -199,7 +200,7 @@ func (backRepoGroup *BackRepoGroupStruct) GetStage() (stage *models.StageStruct)
 	return
 }
 
-func (backRepoGroup *BackRepoGroupStruct) GetDB() *gorm.DB {
+func (backRepoGroup *BackRepoGroupStruct) GetDB() db.DBInterface {
 	return backRepoGroup.db
 }
 
@@ -236,9 +237,10 @@ func (backRepoGroup *BackRepoGroupStruct) CommitDeleteInstance(id uint) (Error e
 
 	// group is not staged anymore, remove groupDB
 	groupDB := backRepoGroup.Map_GroupDBID_GroupDB[id]
-	query := backRepoGroup.db.Unscoped().Delete(&groupDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoGroup.db.Unscoped()
+	_, err := db.Delete(&groupDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -262,9 +264,9 @@ func (backRepoGroup *BackRepoGroupStruct) CommitPhaseOneInstance(group *models.G
 	var groupDB GroupDB
 	groupDB.CopyBasicFieldsFromGroup(group)
 
-	query := backRepoGroup.db.Create(&groupDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoGroup.db.Create(&groupDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -410,9 +412,9 @@ func (backRepoGroup *BackRepoGroupStruct) CommitPhaseTwoInstance(backRepo *BackR
 				append(groupDB.GroupPointersEncoding.Elements, int(elementAssocEnd_DB.ID))
 		}
 
-		query := backRepoGroup.db.Save(&groupDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoGroup.db.Save(&groupDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -431,9 +433,9 @@ func (backRepoGroup *BackRepoGroupStruct) CommitPhaseTwoInstance(backRepo *BackR
 func (backRepoGroup *BackRepoGroupStruct) CheckoutPhaseOne() (Error error) {
 
 	groupDBArray := make([]GroupDB, 0)
-	query := backRepoGroup.db.Find(&groupDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoGroup.db.Find(&groupDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -599,7 +601,7 @@ func (backRepo *BackRepoStruct) CheckoutGroup(group *models.Group) {
 			var groupDB GroupDB
 			groupDB.ID = id
 
-			if err := backRepo.BackRepoGroup.db.First(&groupDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoGroup.db.First(&groupDB, id); err != nil {
 				log.Fatalln("CheckoutGroup : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoGroup.CheckoutPhaseOneInstance(&groupDB)
@@ -866,9 +868,9 @@ func (backRepoGroup *BackRepoGroupStruct) rowVisitorGroup(row *xlsx.Row) error {
 
 		groupDB_ID_atBackupTime := groupDB.ID
 		groupDB.ID = 0
-		query := backRepoGroup.db.Create(groupDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoGroup.db.Create(groupDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoGroup.Map_GroupDBID_GroupDB[groupDB.ID] = groupDB
 		BackRepoGroupid_atBckpTime_newID[groupDB_ID_atBackupTime] = groupDB.ID
@@ -903,9 +905,9 @@ func (backRepoGroup *BackRepoGroupStruct) RestorePhaseOne(dirPath string) {
 
 		groupDB_ID_atBackupTime := groupDB.ID
 		groupDB.ID = 0
-		query := backRepoGroup.db.Create(groupDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoGroup.db.Create(groupDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoGroup.Map_GroupDBID_GroupDB[groupDB.ID] = groupDB
 		BackRepoGroupid_atBckpTime_newID[groupDB_ID_atBackupTime] = groupDB.ID
@@ -939,9 +941,10 @@ func (backRepoGroup *BackRepoGroupStruct) RestorePhaseTwo() {
 		}
 
 		// update databse with new index encoding
-		query := backRepoGroup.db.Model(groupDB).Updates(*groupDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoGroup.db.Model(groupDB)
+		_, err := db.Updates(*groupDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/go/db"
 	"github.com/fullstack-lang/gongxsd/go/models"
 )
 
@@ -129,7 +130,7 @@ type ElementDB struct {
 	// Declation for basic field elementDB.IsDuplicatedInXSD
 	// provide the sql storage for the boolan
 	IsDuplicatedInXSD_Data sql.NullBool
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	ElementPointersEncoding
@@ -223,7 +224,7 @@ type BackRepoElementStruct struct {
 	// stores Element according to their gorm ID
 	Map_ElementDBID_ElementPtr map[uint]*models.Element
 
-	db *gorm.DB
+	db db.DBInterface
 
 	stage *models.StageStruct
 }
@@ -233,7 +234,7 @@ func (backRepoElement *BackRepoElementStruct) GetStage() (stage *models.StageStr
 	return
 }
 
-func (backRepoElement *BackRepoElementStruct) GetDB() *gorm.DB {
+func (backRepoElement *BackRepoElementStruct) GetDB() db.DBInterface {
 	return backRepoElement.db
 }
 
@@ -270,9 +271,10 @@ func (backRepoElement *BackRepoElementStruct) CommitDeleteInstance(id uint) (Err
 
 	// element is not staged anymore, remove elementDB
 	elementDB := backRepoElement.Map_ElementDBID_ElementDB[id]
-	query := backRepoElement.db.Unscoped().Delete(&elementDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoElement.db.Unscoped()
+	_, err := db.Delete(&elementDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -296,9 +298,9 @@ func (backRepoElement *BackRepoElementStruct) CommitPhaseOneInstance(element *mo
 	var elementDB ElementDB
 	elementDB.CopyBasicFieldsFromElement(element)
 
-	query := backRepoElement.db.Create(&elementDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoElement.db.Create(&elementDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -384,9 +386,9 @@ func (backRepoElement *BackRepoElementStruct) CommitPhaseTwoInstance(backRepo *B
 				append(elementDB.ElementPointersEncoding.Groups, int(groupAssocEnd_DB.ID))
 		}
 
-		query := backRepoElement.db.Save(&elementDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoElement.db.Save(&elementDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -405,9 +407,9 @@ func (backRepoElement *BackRepoElementStruct) CommitPhaseTwoInstance(backRepo *B
 func (backRepoElement *BackRepoElementStruct) CheckoutPhaseOne() (Error error) {
 
 	elementDBArray := make([]ElementDB, 0)
-	query := backRepoElement.db.Find(&elementDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoElement.db.Find(&elementDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -542,7 +544,7 @@ func (backRepo *BackRepoStruct) CheckoutElement(element *models.Element) {
 			var elementDB ElementDB
 			elementDB.ID = id
 
-			if err := backRepo.BackRepoElement.db.First(&elementDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoElement.db.First(&elementDB, id); err != nil {
 				log.Fatalln("CheckoutElement : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoElement.CheckoutPhaseOneInstance(&elementDB)
@@ -893,9 +895,9 @@ func (backRepoElement *BackRepoElementStruct) rowVisitorElement(row *xlsx.Row) e
 
 		elementDB_ID_atBackupTime := elementDB.ID
 		elementDB.ID = 0
-		query := backRepoElement.db.Create(elementDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoElement.db.Create(elementDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoElement.Map_ElementDBID_ElementDB[elementDB.ID] = elementDB
 		BackRepoElementid_atBckpTime_newID[elementDB_ID_atBackupTime] = elementDB.ID
@@ -930,9 +932,9 @@ func (backRepoElement *BackRepoElementStruct) RestorePhaseOne(dirPath string) {
 
 		elementDB_ID_atBackupTime := elementDB.ID
 		elementDB.ID = 0
-		query := backRepoElement.db.Create(elementDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoElement.db.Create(elementDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoElement.Map_ElementDBID_ElementDB[elementDB.ID] = elementDB
 		BackRepoElementid_atBckpTime_newID[elementDB_ID_atBackupTime] = elementDB.ID
@@ -972,9 +974,10 @@ func (backRepoElement *BackRepoElementStruct) RestorePhaseTwo() {
 		}
 
 		// update databse with new index encoding
-		query := backRepoElement.db.Model(elementDB).Updates(*elementDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoElement.db.Model(elementDB)
+		_, err := db.Updates(*elementDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

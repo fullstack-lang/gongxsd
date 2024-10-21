@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/go/db"
 	"github.com/fullstack-lang/gongxsd/go/models"
 )
 
@@ -68,7 +69,7 @@ type PatternDB struct {
 
 	// Declation for basic field patternDB.Value
 	Value_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	PatternPointersEncoding
@@ -114,7 +115,7 @@ type BackRepoPatternStruct struct {
 	// stores Pattern according to their gorm ID
 	Map_PatternDBID_PatternPtr map[uint]*models.Pattern
 
-	db *gorm.DB
+	db db.DBInterface
 
 	stage *models.StageStruct
 }
@@ -124,7 +125,7 @@ func (backRepoPattern *BackRepoPatternStruct) GetStage() (stage *models.StageStr
 	return
 }
 
-func (backRepoPattern *BackRepoPatternStruct) GetDB() *gorm.DB {
+func (backRepoPattern *BackRepoPatternStruct) GetDB() db.DBInterface {
 	return backRepoPattern.db
 }
 
@@ -161,9 +162,10 @@ func (backRepoPattern *BackRepoPatternStruct) CommitDeleteInstance(id uint) (Err
 
 	// pattern is not staged anymore, remove patternDB
 	patternDB := backRepoPattern.Map_PatternDBID_PatternDB[id]
-	query := backRepoPattern.db.Unscoped().Delete(&patternDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoPattern.db.Unscoped()
+	_, err := db.Delete(&patternDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -187,9 +189,9 @@ func (backRepoPattern *BackRepoPatternStruct) CommitPhaseOneInstance(pattern *mo
 	var patternDB PatternDB
 	patternDB.CopyBasicFieldsFromPattern(pattern)
 
-	query := backRepoPattern.db.Create(&patternDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoPattern.db.Create(&patternDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -233,9 +235,9 @@ func (backRepoPattern *BackRepoPatternStruct) CommitPhaseTwoInstance(backRepo *B
 			patternDB.AnnotationID.Valid = true
 		}
 
-		query := backRepoPattern.db.Save(&patternDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoPattern.db.Save(&patternDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -254,9 +256,9 @@ func (backRepoPattern *BackRepoPatternStruct) CommitPhaseTwoInstance(backRepo *B
 func (backRepoPattern *BackRepoPatternStruct) CheckoutPhaseOne() (Error error) {
 
 	patternDBArray := make([]PatternDB, 0)
-	query := backRepoPattern.db.Find(&patternDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoPattern.db.Find(&patternDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -372,7 +374,7 @@ func (backRepo *BackRepoStruct) CheckoutPattern(pattern *models.Pattern) {
 			var patternDB PatternDB
 			patternDB.ID = id
 
-			if err := backRepo.BackRepoPattern.db.First(&patternDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoPattern.db.First(&patternDB, id); err != nil {
 				log.Fatalln("CheckoutPattern : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoPattern.CheckoutPhaseOneInstance(&patternDB)
@@ -531,9 +533,9 @@ func (backRepoPattern *BackRepoPatternStruct) rowVisitorPattern(row *xlsx.Row) e
 
 		patternDB_ID_atBackupTime := patternDB.ID
 		patternDB.ID = 0
-		query := backRepoPattern.db.Create(patternDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoPattern.db.Create(patternDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoPattern.Map_PatternDBID_PatternDB[patternDB.ID] = patternDB
 		BackRepoPatternid_atBckpTime_newID[patternDB_ID_atBackupTime] = patternDB.ID
@@ -568,9 +570,9 @@ func (backRepoPattern *BackRepoPatternStruct) RestorePhaseOne(dirPath string) {
 
 		patternDB_ID_atBackupTime := patternDB.ID
 		patternDB.ID = 0
-		query := backRepoPattern.db.Create(patternDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoPattern.db.Create(patternDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoPattern.Map_PatternDBID_PatternDB[patternDB.ID] = patternDB
 		BackRepoPatternid_atBckpTime_newID[patternDB_ID_atBackupTime] = patternDB.ID
@@ -598,9 +600,10 @@ func (backRepoPattern *BackRepoPatternStruct) RestorePhaseTwo() {
 		}
 
 		// update databse with new index encoding
-		query := backRepoPattern.db.Model(patternDB).Updates(*patternDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoPattern.db.Model(patternDB)
+		_, err := db.Updates(*patternDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

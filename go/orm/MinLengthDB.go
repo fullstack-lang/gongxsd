@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/go/db"
 	"github.com/fullstack-lang/gongxsd/go/models"
 )
 
@@ -68,7 +69,7 @@ type MinLengthDB struct {
 
 	// Declation for basic field minlengthDB.Value
 	Value_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	MinLengthPointersEncoding
@@ -114,7 +115,7 @@ type BackRepoMinLengthStruct struct {
 	// stores MinLength according to their gorm ID
 	Map_MinLengthDBID_MinLengthPtr map[uint]*models.MinLength
 
-	db *gorm.DB
+	db db.DBInterface
 
 	stage *models.StageStruct
 }
@@ -124,7 +125,7 @@ func (backRepoMinLength *BackRepoMinLengthStruct) GetStage() (stage *models.Stag
 	return
 }
 
-func (backRepoMinLength *BackRepoMinLengthStruct) GetDB() *gorm.DB {
+func (backRepoMinLength *BackRepoMinLengthStruct) GetDB() db.DBInterface {
 	return backRepoMinLength.db
 }
 
@@ -161,9 +162,10 @@ func (backRepoMinLength *BackRepoMinLengthStruct) CommitDeleteInstance(id uint) 
 
 	// minlength is not staged anymore, remove minlengthDB
 	minlengthDB := backRepoMinLength.Map_MinLengthDBID_MinLengthDB[id]
-	query := backRepoMinLength.db.Unscoped().Delete(&minlengthDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoMinLength.db.Unscoped()
+	_, err := db.Delete(&minlengthDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -187,9 +189,9 @@ func (backRepoMinLength *BackRepoMinLengthStruct) CommitPhaseOneInstance(minleng
 	var minlengthDB MinLengthDB
 	minlengthDB.CopyBasicFieldsFromMinLength(minlength)
 
-	query := backRepoMinLength.db.Create(&minlengthDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoMinLength.db.Create(&minlengthDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -233,9 +235,9 @@ func (backRepoMinLength *BackRepoMinLengthStruct) CommitPhaseTwoInstance(backRep
 			minlengthDB.AnnotationID.Valid = true
 		}
 
-		query := backRepoMinLength.db.Save(&minlengthDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoMinLength.db.Save(&minlengthDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -254,9 +256,9 @@ func (backRepoMinLength *BackRepoMinLengthStruct) CommitPhaseTwoInstance(backRep
 func (backRepoMinLength *BackRepoMinLengthStruct) CheckoutPhaseOne() (Error error) {
 
 	minlengthDBArray := make([]MinLengthDB, 0)
-	query := backRepoMinLength.db.Find(&minlengthDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoMinLength.db.Find(&minlengthDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -372,7 +374,7 @@ func (backRepo *BackRepoStruct) CheckoutMinLength(minlength *models.MinLength) {
 			var minlengthDB MinLengthDB
 			minlengthDB.ID = id
 
-			if err := backRepo.BackRepoMinLength.db.First(&minlengthDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoMinLength.db.First(&minlengthDB, id); err != nil {
 				log.Fatalln("CheckoutMinLength : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoMinLength.CheckoutPhaseOneInstance(&minlengthDB)
@@ -531,9 +533,9 @@ func (backRepoMinLength *BackRepoMinLengthStruct) rowVisitorMinLength(row *xlsx.
 
 		minlengthDB_ID_atBackupTime := minlengthDB.ID
 		minlengthDB.ID = 0
-		query := backRepoMinLength.db.Create(minlengthDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoMinLength.db.Create(minlengthDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoMinLength.Map_MinLengthDBID_MinLengthDB[minlengthDB.ID] = minlengthDB
 		BackRepoMinLengthid_atBckpTime_newID[minlengthDB_ID_atBackupTime] = minlengthDB.ID
@@ -568,9 +570,9 @@ func (backRepoMinLength *BackRepoMinLengthStruct) RestorePhaseOne(dirPath string
 
 		minlengthDB_ID_atBackupTime := minlengthDB.ID
 		minlengthDB.ID = 0
-		query := backRepoMinLength.db.Create(minlengthDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoMinLength.db.Create(minlengthDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoMinLength.Map_MinLengthDBID_MinLengthDB[minlengthDB.ID] = minlengthDB
 		BackRepoMinLengthid_atBckpTime_newID[minlengthDB_ID_atBackupTime] = minlengthDB.ID
@@ -598,9 +600,10 @@ func (backRepoMinLength *BackRepoMinLengthStruct) RestorePhaseTwo() {
 		}
 
 		// update databse with new index encoding
-		query := backRepoMinLength.db.Model(minlengthDB).Updates(*minlengthDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoMinLength.db.Model(minlengthDB)
+		_, err := db.Updates(*minlengthDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

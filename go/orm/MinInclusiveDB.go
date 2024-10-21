@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/go/db"
 	"github.com/fullstack-lang/gongxsd/go/models"
 )
 
@@ -68,7 +69,7 @@ type MinInclusiveDB struct {
 
 	// Declation for basic field mininclusiveDB.Value
 	Value_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	MinInclusivePointersEncoding
@@ -114,7 +115,7 @@ type BackRepoMinInclusiveStruct struct {
 	// stores MinInclusive according to their gorm ID
 	Map_MinInclusiveDBID_MinInclusivePtr map[uint]*models.MinInclusive
 
-	db *gorm.DB
+	db db.DBInterface
 
 	stage *models.StageStruct
 }
@@ -124,7 +125,7 @@ func (backRepoMinInclusive *BackRepoMinInclusiveStruct) GetStage() (stage *model
 	return
 }
 
-func (backRepoMinInclusive *BackRepoMinInclusiveStruct) GetDB() *gorm.DB {
+func (backRepoMinInclusive *BackRepoMinInclusiveStruct) GetDB() db.DBInterface {
 	return backRepoMinInclusive.db
 }
 
@@ -161,9 +162,10 @@ func (backRepoMinInclusive *BackRepoMinInclusiveStruct) CommitDeleteInstance(id 
 
 	// mininclusive is not staged anymore, remove mininclusiveDB
 	mininclusiveDB := backRepoMinInclusive.Map_MinInclusiveDBID_MinInclusiveDB[id]
-	query := backRepoMinInclusive.db.Unscoped().Delete(&mininclusiveDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoMinInclusive.db.Unscoped()
+	_, err := db.Delete(&mininclusiveDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -187,9 +189,9 @@ func (backRepoMinInclusive *BackRepoMinInclusiveStruct) CommitPhaseOneInstance(m
 	var mininclusiveDB MinInclusiveDB
 	mininclusiveDB.CopyBasicFieldsFromMinInclusive(mininclusive)
 
-	query := backRepoMinInclusive.db.Create(&mininclusiveDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoMinInclusive.db.Create(&mininclusiveDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -233,9 +235,9 @@ func (backRepoMinInclusive *BackRepoMinInclusiveStruct) CommitPhaseTwoInstance(b
 			mininclusiveDB.AnnotationID.Valid = true
 		}
 
-		query := backRepoMinInclusive.db.Save(&mininclusiveDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoMinInclusive.db.Save(&mininclusiveDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -254,9 +256,9 @@ func (backRepoMinInclusive *BackRepoMinInclusiveStruct) CommitPhaseTwoInstance(b
 func (backRepoMinInclusive *BackRepoMinInclusiveStruct) CheckoutPhaseOne() (Error error) {
 
 	mininclusiveDBArray := make([]MinInclusiveDB, 0)
-	query := backRepoMinInclusive.db.Find(&mininclusiveDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoMinInclusive.db.Find(&mininclusiveDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -372,7 +374,7 @@ func (backRepo *BackRepoStruct) CheckoutMinInclusive(mininclusive *models.MinInc
 			var mininclusiveDB MinInclusiveDB
 			mininclusiveDB.ID = id
 
-			if err := backRepo.BackRepoMinInclusive.db.First(&mininclusiveDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoMinInclusive.db.First(&mininclusiveDB, id); err != nil {
 				log.Fatalln("CheckoutMinInclusive : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoMinInclusive.CheckoutPhaseOneInstance(&mininclusiveDB)
@@ -531,9 +533,9 @@ func (backRepoMinInclusive *BackRepoMinInclusiveStruct) rowVisitorMinInclusive(r
 
 		mininclusiveDB_ID_atBackupTime := mininclusiveDB.ID
 		mininclusiveDB.ID = 0
-		query := backRepoMinInclusive.db.Create(mininclusiveDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoMinInclusive.db.Create(mininclusiveDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoMinInclusive.Map_MinInclusiveDBID_MinInclusiveDB[mininclusiveDB.ID] = mininclusiveDB
 		BackRepoMinInclusiveid_atBckpTime_newID[mininclusiveDB_ID_atBackupTime] = mininclusiveDB.ID
@@ -568,9 +570,9 @@ func (backRepoMinInclusive *BackRepoMinInclusiveStruct) RestorePhaseOne(dirPath 
 
 		mininclusiveDB_ID_atBackupTime := mininclusiveDB.ID
 		mininclusiveDB.ID = 0
-		query := backRepoMinInclusive.db.Create(mininclusiveDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoMinInclusive.db.Create(mininclusiveDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoMinInclusive.Map_MinInclusiveDBID_MinInclusiveDB[mininclusiveDB.ID] = mininclusiveDB
 		BackRepoMinInclusiveid_atBckpTime_newID[mininclusiveDB_ID_atBackupTime] = mininclusiveDB.ID
@@ -598,9 +600,10 @@ func (backRepoMinInclusive *BackRepoMinInclusiveStruct) RestorePhaseTwo() {
 		}
 
 		// update databse with new index encoding
-		query := backRepoMinInclusive.db.Model(mininclusiveDB).Updates(*mininclusiveDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoMinInclusive.db.Model(mininclusiveDB)
+		_, err := db.Updates(*mininclusiveDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

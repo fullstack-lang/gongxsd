@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/go/db"
 	"github.com/fullstack-lang/gongxsd/go/models"
 )
 
@@ -68,7 +69,7 @@ type MaxLengthDB struct {
 
 	// Declation for basic field maxlengthDB.Value
 	Value_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	MaxLengthPointersEncoding
@@ -114,7 +115,7 @@ type BackRepoMaxLengthStruct struct {
 	// stores MaxLength according to their gorm ID
 	Map_MaxLengthDBID_MaxLengthPtr map[uint]*models.MaxLength
 
-	db *gorm.DB
+	db db.DBInterface
 
 	stage *models.StageStruct
 }
@@ -124,7 +125,7 @@ func (backRepoMaxLength *BackRepoMaxLengthStruct) GetStage() (stage *models.Stag
 	return
 }
 
-func (backRepoMaxLength *BackRepoMaxLengthStruct) GetDB() *gorm.DB {
+func (backRepoMaxLength *BackRepoMaxLengthStruct) GetDB() db.DBInterface {
 	return backRepoMaxLength.db
 }
 
@@ -161,9 +162,10 @@ func (backRepoMaxLength *BackRepoMaxLengthStruct) CommitDeleteInstance(id uint) 
 
 	// maxlength is not staged anymore, remove maxlengthDB
 	maxlengthDB := backRepoMaxLength.Map_MaxLengthDBID_MaxLengthDB[id]
-	query := backRepoMaxLength.db.Unscoped().Delete(&maxlengthDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoMaxLength.db.Unscoped()
+	_, err := db.Delete(&maxlengthDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -187,9 +189,9 @@ func (backRepoMaxLength *BackRepoMaxLengthStruct) CommitPhaseOneInstance(maxleng
 	var maxlengthDB MaxLengthDB
 	maxlengthDB.CopyBasicFieldsFromMaxLength(maxlength)
 
-	query := backRepoMaxLength.db.Create(&maxlengthDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoMaxLength.db.Create(&maxlengthDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -233,9 +235,9 @@ func (backRepoMaxLength *BackRepoMaxLengthStruct) CommitPhaseTwoInstance(backRep
 			maxlengthDB.AnnotationID.Valid = true
 		}
 
-		query := backRepoMaxLength.db.Save(&maxlengthDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoMaxLength.db.Save(&maxlengthDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -254,9 +256,9 @@ func (backRepoMaxLength *BackRepoMaxLengthStruct) CommitPhaseTwoInstance(backRep
 func (backRepoMaxLength *BackRepoMaxLengthStruct) CheckoutPhaseOne() (Error error) {
 
 	maxlengthDBArray := make([]MaxLengthDB, 0)
-	query := backRepoMaxLength.db.Find(&maxlengthDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoMaxLength.db.Find(&maxlengthDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -372,7 +374,7 @@ func (backRepo *BackRepoStruct) CheckoutMaxLength(maxlength *models.MaxLength) {
 			var maxlengthDB MaxLengthDB
 			maxlengthDB.ID = id
 
-			if err := backRepo.BackRepoMaxLength.db.First(&maxlengthDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoMaxLength.db.First(&maxlengthDB, id); err != nil {
 				log.Fatalln("CheckoutMaxLength : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoMaxLength.CheckoutPhaseOneInstance(&maxlengthDB)
@@ -531,9 +533,9 @@ func (backRepoMaxLength *BackRepoMaxLengthStruct) rowVisitorMaxLength(row *xlsx.
 
 		maxlengthDB_ID_atBackupTime := maxlengthDB.ID
 		maxlengthDB.ID = 0
-		query := backRepoMaxLength.db.Create(maxlengthDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoMaxLength.db.Create(maxlengthDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoMaxLength.Map_MaxLengthDBID_MaxLengthDB[maxlengthDB.ID] = maxlengthDB
 		BackRepoMaxLengthid_atBckpTime_newID[maxlengthDB_ID_atBackupTime] = maxlengthDB.ID
@@ -568,9 +570,9 @@ func (backRepoMaxLength *BackRepoMaxLengthStruct) RestorePhaseOne(dirPath string
 
 		maxlengthDB_ID_atBackupTime := maxlengthDB.ID
 		maxlengthDB.ID = 0
-		query := backRepoMaxLength.db.Create(maxlengthDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoMaxLength.db.Create(maxlengthDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoMaxLength.Map_MaxLengthDBID_MaxLengthDB[maxlengthDB.ID] = maxlengthDB
 		BackRepoMaxLengthid_atBckpTime_newID[maxlengthDB_ID_atBackupTime] = maxlengthDB.ID
@@ -598,9 +600,10 @@ func (backRepoMaxLength *BackRepoMaxLengthStruct) RestorePhaseTwo() {
 		}
 
 		// update databse with new index encoding
-		query := backRepoMaxLength.db.Model(maxlengthDB).Updates(*maxlengthDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoMaxLength.db.Model(maxlengthDB)
+		_, err := db.Updates(*maxlengthDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

@@ -70,12 +70,12 @@ func (controller *Controller) GetChoices(c *gin.Context) {
 	}
 	db := backRepo.BackRepoChoice.GetDB()
 
-	query := db.Find(&choiceDBs)
-	if query.Error != nil {
+	_, err := db.Find(&choiceDBs)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -151,12 +151,12 @@ func (controller *Controller) PostChoice(c *gin.Context) {
 	choiceDB.ChoicePointersEncoding = input.ChoicePointersEncoding
 	choiceDB.CopyBasicFieldsFromChoice_WOP(&input.Choice_WOP)
 
-	query := db.Create(&choiceDB)
-	if query.Error != nil {
+	_, err = db.Create(&choiceDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -205,7 +205,7 @@ func (controller *Controller) GetChoice(c *gin.Context) {
 
 	// Get choiceDB in DB
 	var choiceDB orm.ChoiceDB
-	if err := db.First(&choiceDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&choiceDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -264,13 +264,13 @@ func (controller *Controller) UpdateChoice(c *gin.Context) {
 	var choiceDB orm.ChoiceDB
 
 	// fetch the choice
-	query := db.First(&choiceDB, c.Param("id"))
+	_, err := db.First(&choiceDB, c.Param("id"))
 
-	if query.Error != nil {
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -279,12 +279,13 @@ func (controller *Controller) UpdateChoice(c *gin.Context) {
 	choiceDB.CopyBasicFieldsFromChoice_WOP(&input.Choice_WOP)
 	choiceDB.ChoicePointersEncoding = input.ChoicePointersEncoding
 
-	query = db.Model(&choiceDB).Updates(choiceDB)
-	if query.Error != nil {
+	db, _ = db.Model(&choiceDB)
+	_, err = db.Updates(choiceDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -343,7 +344,7 @@ func (controller *Controller) DeleteChoice(c *gin.Context) {
 
 	// Get model if exist
 	var choiceDB orm.ChoiceDB
-	if err := db.First(&choiceDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&choiceDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -353,7 +354,8 @@ func (controller *Controller) DeleteChoice(c *gin.Context) {
 	}
 
 	// with gorm.Model field, default delete is a soft delete. Unscoped() force delete
-	db.Unscoped().Delete(&choiceDB)
+	db.Unscoped()
+	db.Delete(&choiceDB)
 
 	// get an instance (not staged) from DB instance, and call callback function
 	choiceDeleted := new(models.Choice)

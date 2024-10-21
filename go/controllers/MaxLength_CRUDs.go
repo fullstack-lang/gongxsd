@@ -70,12 +70,12 @@ func (controller *Controller) GetMaxLengths(c *gin.Context) {
 	}
 	db := backRepo.BackRepoMaxLength.GetDB()
 
-	query := db.Find(&maxlengthDBs)
-	if query.Error != nil {
+	_, err := db.Find(&maxlengthDBs)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -151,12 +151,12 @@ func (controller *Controller) PostMaxLength(c *gin.Context) {
 	maxlengthDB.MaxLengthPointersEncoding = input.MaxLengthPointersEncoding
 	maxlengthDB.CopyBasicFieldsFromMaxLength_WOP(&input.MaxLength_WOP)
 
-	query := db.Create(&maxlengthDB)
-	if query.Error != nil {
+	_, err = db.Create(&maxlengthDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -205,7 +205,7 @@ func (controller *Controller) GetMaxLength(c *gin.Context) {
 
 	// Get maxlengthDB in DB
 	var maxlengthDB orm.MaxLengthDB
-	if err := db.First(&maxlengthDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&maxlengthDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -264,13 +264,13 @@ func (controller *Controller) UpdateMaxLength(c *gin.Context) {
 	var maxlengthDB orm.MaxLengthDB
 
 	// fetch the maxlength
-	query := db.First(&maxlengthDB, c.Param("id"))
+	_, err := db.First(&maxlengthDB, c.Param("id"))
 
-	if query.Error != nil {
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -279,12 +279,13 @@ func (controller *Controller) UpdateMaxLength(c *gin.Context) {
 	maxlengthDB.CopyBasicFieldsFromMaxLength_WOP(&input.MaxLength_WOP)
 	maxlengthDB.MaxLengthPointersEncoding = input.MaxLengthPointersEncoding
 
-	query = db.Model(&maxlengthDB).Updates(maxlengthDB)
-	if query.Error != nil {
+	db, _ = db.Model(&maxlengthDB)
+	_, err = db.Updates(maxlengthDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -343,7 +344,7 @@ func (controller *Controller) DeleteMaxLength(c *gin.Context) {
 
 	// Get model if exist
 	var maxlengthDB orm.MaxLengthDB
-	if err := db.First(&maxlengthDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&maxlengthDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -353,7 +354,8 @@ func (controller *Controller) DeleteMaxLength(c *gin.Context) {
 	}
 
 	// with gorm.Model field, default delete is a soft delete. Unscoped() force delete
-	db.Unscoped().Delete(&maxlengthDB)
+	db.Unscoped()
+	db.Delete(&maxlengthDB)
 
 	// get an instance (not staged) from DB instance, and call callback function
 	maxlengthDeleted := new(models.MaxLength)

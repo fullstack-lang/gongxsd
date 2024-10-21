@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/go/db"
 	"github.com/fullstack-lang/gongxsd/go/models"
 )
 
@@ -102,7 +103,7 @@ type AttributeDB struct {
 
 	// Declation for basic field attributeDB.IDXSD
 	IDXSD_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	AttributePointersEncoding
@@ -181,7 +182,7 @@ type BackRepoAttributeStruct struct {
 	// stores Attribute according to their gorm ID
 	Map_AttributeDBID_AttributePtr map[uint]*models.Attribute
 
-	db *gorm.DB
+	db db.DBInterface
 
 	stage *models.StageStruct
 }
@@ -191,7 +192,7 @@ func (backRepoAttribute *BackRepoAttributeStruct) GetStage() (stage *models.Stag
 	return
 }
 
-func (backRepoAttribute *BackRepoAttributeStruct) GetDB() *gorm.DB {
+func (backRepoAttribute *BackRepoAttributeStruct) GetDB() db.DBInterface {
 	return backRepoAttribute.db
 }
 
@@ -228,9 +229,10 @@ func (backRepoAttribute *BackRepoAttributeStruct) CommitDeleteInstance(id uint) 
 
 	// attribute is not staged anymore, remove attributeDB
 	attributeDB := backRepoAttribute.Map_AttributeDBID_AttributeDB[id]
-	query := backRepoAttribute.db.Unscoped().Delete(&attributeDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoAttribute.db.Unscoped()
+	_, err := db.Delete(&attributeDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -254,9 +256,9 @@ func (backRepoAttribute *BackRepoAttributeStruct) CommitPhaseOneInstance(attribu
 	var attributeDB AttributeDB
 	attributeDB.CopyBasicFieldsFromAttribute(attribute)
 
-	query := backRepoAttribute.db.Create(&attributeDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoAttribute.db.Create(&attributeDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -300,9 +302,9 @@ func (backRepoAttribute *BackRepoAttributeStruct) CommitPhaseTwoInstance(backRep
 			attributeDB.AnnotationID.Valid = true
 		}
 
-		query := backRepoAttribute.db.Save(&attributeDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoAttribute.db.Save(&attributeDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -321,9 +323,9 @@ func (backRepoAttribute *BackRepoAttributeStruct) CommitPhaseTwoInstance(backRep
 func (backRepoAttribute *BackRepoAttributeStruct) CheckoutPhaseOne() (Error error) {
 
 	attributeDBArray := make([]AttributeDB, 0)
-	query := backRepoAttribute.db.Find(&attributeDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoAttribute.db.Find(&attributeDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -439,7 +441,7 @@ func (backRepo *BackRepoStruct) CheckoutAttribute(attribute *models.Attribute) {
 			var attributeDB AttributeDB
 			attributeDB.ID = id
 
-			if err := backRepo.BackRepoAttribute.db.First(&attributeDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoAttribute.db.First(&attributeDB, id); err != nil {
 				log.Fatalln("CheckoutAttribute : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoAttribute.CheckoutPhaseOneInstance(&attributeDB)
@@ -730,9 +732,9 @@ func (backRepoAttribute *BackRepoAttributeStruct) rowVisitorAttribute(row *xlsx.
 
 		attributeDB_ID_atBackupTime := attributeDB.ID
 		attributeDB.ID = 0
-		query := backRepoAttribute.db.Create(attributeDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoAttribute.db.Create(attributeDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoAttribute.Map_AttributeDBID_AttributeDB[attributeDB.ID] = attributeDB
 		BackRepoAttributeid_atBckpTime_newID[attributeDB_ID_atBackupTime] = attributeDB.ID
@@ -767,9 +769,9 @@ func (backRepoAttribute *BackRepoAttributeStruct) RestorePhaseOne(dirPath string
 
 		attributeDB_ID_atBackupTime := attributeDB.ID
 		attributeDB.ID = 0
-		query := backRepoAttribute.db.Create(attributeDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoAttribute.db.Create(attributeDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoAttribute.Map_AttributeDBID_AttributeDB[attributeDB.ID] = attributeDB
 		BackRepoAttributeid_atBckpTime_newID[attributeDB_ID_atBackupTime] = attributeDB.ID
@@ -797,9 +799,10 @@ func (backRepoAttribute *BackRepoAttributeStruct) RestorePhaseTwo() {
 		}
 
 		// update databse with new index encoding
-		query := backRepoAttribute.db.Model(attributeDB).Updates(*attributeDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoAttribute.db.Model(attributeDB)
+		_, err := db.Updates(*attributeDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

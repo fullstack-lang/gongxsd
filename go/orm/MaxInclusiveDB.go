@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/go/db"
 	"github.com/fullstack-lang/gongxsd/go/models"
 )
 
@@ -68,7 +69,7 @@ type MaxInclusiveDB struct {
 
 	// Declation for basic field maxinclusiveDB.Value
 	Value_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	MaxInclusivePointersEncoding
@@ -114,7 +115,7 @@ type BackRepoMaxInclusiveStruct struct {
 	// stores MaxInclusive according to their gorm ID
 	Map_MaxInclusiveDBID_MaxInclusivePtr map[uint]*models.MaxInclusive
 
-	db *gorm.DB
+	db db.DBInterface
 
 	stage *models.StageStruct
 }
@@ -124,7 +125,7 @@ func (backRepoMaxInclusive *BackRepoMaxInclusiveStruct) GetStage() (stage *model
 	return
 }
 
-func (backRepoMaxInclusive *BackRepoMaxInclusiveStruct) GetDB() *gorm.DB {
+func (backRepoMaxInclusive *BackRepoMaxInclusiveStruct) GetDB() db.DBInterface {
 	return backRepoMaxInclusive.db
 }
 
@@ -161,9 +162,10 @@ func (backRepoMaxInclusive *BackRepoMaxInclusiveStruct) CommitDeleteInstance(id 
 
 	// maxinclusive is not staged anymore, remove maxinclusiveDB
 	maxinclusiveDB := backRepoMaxInclusive.Map_MaxInclusiveDBID_MaxInclusiveDB[id]
-	query := backRepoMaxInclusive.db.Unscoped().Delete(&maxinclusiveDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoMaxInclusive.db.Unscoped()
+	_, err := db.Delete(&maxinclusiveDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -187,9 +189,9 @@ func (backRepoMaxInclusive *BackRepoMaxInclusiveStruct) CommitPhaseOneInstance(m
 	var maxinclusiveDB MaxInclusiveDB
 	maxinclusiveDB.CopyBasicFieldsFromMaxInclusive(maxinclusive)
 
-	query := backRepoMaxInclusive.db.Create(&maxinclusiveDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoMaxInclusive.db.Create(&maxinclusiveDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -233,9 +235,9 @@ func (backRepoMaxInclusive *BackRepoMaxInclusiveStruct) CommitPhaseTwoInstance(b
 			maxinclusiveDB.AnnotationID.Valid = true
 		}
 
-		query := backRepoMaxInclusive.db.Save(&maxinclusiveDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoMaxInclusive.db.Save(&maxinclusiveDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -254,9 +256,9 @@ func (backRepoMaxInclusive *BackRepoMaxInclusiveStruct) CommitPhaseTwoInstance(b
 func (backRepoMaxInclusive *BackRepoMaxInclusiveStruct) CheckoutPhaseOne() (Error error) {
 
 	maxinclusiveDBArray := make([]MaxInclusiveDB, 0)
-	query := backRepoMaxInclusive.db.Find(&maxinclusiveDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoMaxInclusive.db.Find(&maxinclusiveDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -372,7 +374,7 @@ func (backRepo *BackRepoStruct) CheckoutMaxInclusive(maxinclusive *models.MaxInc
 			var maxinclusiveDB MaxInclusiveDB
 			maxinclusiveDB.ID = id
 
-			if err := backRepo.BackRepoMaxInclusive.db.First(&maxinclusiveDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoMaxInclusive.db.First(&maxinclusiveDB, id); err != nil {
 				log.Fatalln("CheckoutMaxInclusive : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoMaxInclusive.CheckoutPhaseOneInstance(&maxinclusiveDB)
@@ -531,9 +533,9 @@ func (backRepoMaxInclusive *BackRepoMaxInclusiveStruct) rowVisitorMaxInclusive(r
 
 		maxinclusiveDB_ID_atBackupTime := maxinclusiveDB.ID
 		maxinclusiveDB.ID = 0
-		query := backRepoMaxInclusive.db.Create(maxinclusiveDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoMaxInclusive.db.Create(maxinclusiveDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoMaxInclusive.Map_MaxInclusiveDBID_MaxInclusiveDB[maxinclusiveDB.ID] = maxinclusiveDB
 		BackRepoMaxInclusiveid_atBckpTime_newID[maxinclusiveDB_ID_atBackupTime] = maxinclusiveDB.ID
@@ -568,9 +570,9 @@ func (backRepoMaxInclusive *BackRepoMaxInclusiveStruct) RestorePhaseOne(dirPath 
 
 		maxinclusiveDB_ID_atBackupTime := maxinclusiveDB.ID
 		maxinclusiveDB.ID = 0
-		query := backRepoMaxInclusive.db.Create(maxinclusiveDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoMaxInclusive.db.Create(maxinclusiveDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoMaxInclusive.Map_MaxInclusiveDBID_MaxInclusiveDB[maxinclusiveDB.ID] = maxinclusiveDB
 		BackRepoMaxInclusiveid_atBckpTime_newID[maxinclusiveDB_ID_atBackupTime] = maxinclusiveDB.ID
@@ -598,9 +600,10 @@ func (backRepoMaxInclusive *BackRepoMaxInclusiveStruct) RestorePhaseTwo() {
 		}
 
 		// update databse with new index encoding
-		query := backRepoMaxInclusive.db.Model(maxinclusiveDB).Updates(*maxinclusiveDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoMaxInclusive.db.Model(maxinclusiveDB)
+		_, err := db.Updates(*maxinclusiveDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

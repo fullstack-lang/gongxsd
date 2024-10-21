@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/go/db"
 	"github.com/fullstack-lang/gongxsd/go/models"
 )
 
@@ -100,7 +101,7 @@ type ExtensionDB struct {
 
 	// Declation for basic field extensionDB.Ref
 	Ref_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	ExtensionPointersEncoding
@@ -164,7 +165,7 @@ type BackRepoExtensionStruct struct {
 	// stores Extension according to their gorm ID
 	Map_ExtensionDBID_ExtensionPtr map[uint]*models.Extension
 
-	db *gorm.DB
+	db db.DBInterface
 
 	stage *models.StageStruct
 }
@@ -174,7 +175,7 @@ func (backRepoExtension *BackRepoExtensionStruct) GetStage() (stage *models.Stag
 	return
 }
 
-func (backRepoExtension *BackRepoExtensionStruct) GetDB() *gorm.DB {
+func (backRepoExtension *BackRepoExtensionStruct) GetDB() db.DBInterface {
 	return backRepoExtension.db
 }
 
@@ -211,9 +212,10 @@ func (backRepoExtension *BackRepoExtensionStruct) CommitDeleteInstance(id uint) 
 
 	// extension is not staged anymore, remove extensionDB
 	extensionDB := backRepoExtension.Map_ExtensionDBID_ExtensionDB[id]
-	query := backRepoExtension.db.Unscoped().Delete(&extensionDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoExtension.db.Unscoped()
+	_, err := db.Delete(&extensionDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -237,9 +239,9 @@ func (backRepoExtension *BackRepoExtensionStruct) CommitPhaseOneInstance(extensi
 	var extensionDB ExtensionDB
 	extensionDB.CopyBasicFieldsFromExtension(extension)
 
-	query := backRepoExtension.db.Create(&extensionDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoExtension.db.Create(&extensionDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -379,9 +381,9 @@ func (backRepoExtension *BackRepoExtensionStruct) CommitPhaseTwoInstance(backRep
 				append(extensionDB.ExtensionPointersEncoding.Attributes, int(attributeAssocEnd_DB.ID))
 		}
 
-		query := backRepoExtension.db.Save(&extensionDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoExtension.db.Save(&extensionDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -400,9 +402,9 @@ func (backRepoExtension *BackRepoExtensionStruct) CommitPhaseTwoInstance(backRep
 func (backRepoExtension *BackRepoExtensionStruct) CheckoutPhaseOne() (Error error) {
 
 	extensionDBArray := make([]ExtensionDB, 0)
-	query := backRepoExtension.db.Find(&extensionDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoExtension.db.Find(&extensionDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -567,7 +569,7 @@ func (backRepo *BackRepoStruct) CheckoutExtension(extension *models.Extension) {
 			var extensionDB ExtensionDB
 			extensionDB.ID = id
 
-			if err := backRepo.BackRepoExtension.db.First(&extensionDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoExtension.db.First(&extensionDB, id); err != nil {
 				log.Fatalln("CheckoutExtension : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoExtension.CheckoutPhaseOneInstance(&extensionDB)
@@ -798,9 +800,9 @@ func (backRepoExtension *BackRepoExtensionStruct) rowVisitorExtension(row *xlsx.
 
 		extensionDB_ID_atBackupTime := extensionDB.ID
 		extensionDB.ID = 0
-		query := backRepoExtension.db.Create(extensionDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoExtension.db.Create(extensionDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoExtension.Map_ExtensionDBID_ExtensionDB[extensionDB.ID] = extensionDB
 		BackRepoExtensionid_atBckpTime_newID[extensionDB_ID_atBackupTime] = extensionDB.ID
@@ -835,9 +837,9 @@ func (backRepoExtension *BackRepoExtensionStruct) RestorePhaseOne(dirPath string
 
 		extensionDB_ID_atBackupTime := extensionDB.ID
 		extensionDB.ID = 0
-		query := backRepoExtension.db.Create(extensionDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoExtension.db.Create(extensionDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoExtension.Map_ExtensionDBID_ExtensionDB[extensionDB.ID] = extensionDB
 		BackRepoExtensionid_atBckpTime_newID[extensionDB_ID_atBackupTime] = extensionDB.ID
@@ -859,9 +861,10 @@ func (backRepoExtension *BackRepoExtensionStruct) RestorePhaseTwo() {
 
 		// insertion point for reindexing pointers encoding
 		// update databse with new index encoding
-		query := backRepoExtension.db.Model(extensionDB).Updates(*extensionDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoExtension.db.Model(extensionDB)
+		_, err := db.Updates(*extensionDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

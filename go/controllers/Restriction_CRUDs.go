@@ -70,12 +70,12 @@ func (controller *Controller) GetRestrictions(c *gin.Context) {
 	}
 	db := backRepo.BackRepoRestriction.GetDB()
 
-	query := db.Find(&restrictionDBs)
-	if query.Error != nil {
+	_, err := db.Find(&restrictionDBs)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -151,12 +151,12 @@ func (controller *Controller) PostRestriction(c *gin.Context) {
 	restrictionDB.RestrictionPointersEncoding = input.RestrictionPointersEncoding
 	restrictionDB.CopyBasicFieldsFromRestriction_WOP(&input.Restriction_WOP)
 
-	query := db.Create(&restrictionDB)
-	if query.Error != nil {
+	_, err = db.Create(&restrictionDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -205,7 +205,7 @@ func (controller *Controller) GetRestriction(c *gin.Context) {
 
 	// Get restrictionDB in DB
 	var restrictionDB orm.RestrictionDB
-	if err := db.First(&restrictionDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&restrictionDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -264,13 +264,13 @@ func (controller *Controller) UpdateRestriction(c *gin.Context) {
 	var restrictionDB orm.RestrictionDB
 
 	// fetch the restriction
-	query := db.First(&restrictionDB, c.Param("id"))
+	_, err := db.First(&restrictionDB, c.Param("id"))
 
-	if query.Error != nil {
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -279,12 +279,13 @@ func (controller *Controller) UpdateRestriction(c *gin.Context) {
 	restrictionDB.CopyBasicFieldsFromRestriction_WOP(&input.Restriction_WOP)
 	restrictionDB.RestrictionPointersEncoding = input.RestrictionPointersEncoding
 
-	query = db.Model(&restrictionDB).Updates(restrictionDB)
-	if query.Error != nil {
+	db, _ = db.Model(&restrictionDB)
+	_, err = db.Updates(restrictionDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -343,7 +344,7 @@ func (controller *Controller) DeleteRestriction(c *gin.Context) {
 
 	// Get model if exist
 	var restrictionDB orm.RestrictionDB
-	if err := db.First(&restrictionDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&restrictionDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -353,7 +354,8 @@ func (controller *Controller) DeleteRestriction(c *gin.Context) {
 	}
 
 	// with gorm.Model field, default delete is a soft delete. Unscoped() force delete
-	db.Unscoped().Delete(&restrictionDB)
+	db.Unscoped()
+	db.Delete(&restrictionDB)
 
 	// get an instance (not staged) from DB instance, and call callback function
 	restrictionDeleted := new(models.Restriction)

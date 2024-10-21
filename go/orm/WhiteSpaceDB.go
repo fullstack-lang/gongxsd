@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/go/db"
 	"github.com/fullstack-lang/gongxsd/go/models"
 )
 
@@ -68,7 +69,7 @@ type WhiteSpaceDB struct {
 
 	// Declation for basic field whitespaceDB.Value
 	Value_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	WhiteSpacePointersEncoding
@@ -114,7 +115,7 @@ type BackRepoWhiteSpaceStruct struct {
 	// stores WhiteSpace according to their gorm ID
 	Map_WhiteSpaceDBID_WhiteSpacePtr map[uint]*models.WhiteSpace
 
-	db *gorm.DB
+	db db.DBInterface
 
 	stage *models.StageStruct
 }
@@ -124,7 +125,7 @@ func (backRepoWhiteSpace *BackRepoWhiteSpaceStruct) GetStage() (stage *models.St
 	return
 }
 
-func (backRepoWhiteSpace *BackRepoWhiteSpaceStruct) GetDB() *gorm.DB {
+func (backRepoWhiteSpace *BackRepoWhiteSpaceStruct) GetDB() db.DBInterface {
 	return backRepoWhiteSpace.db
 }
 
@@ -161,9 +162,10 @@ func (backRepoWhiteSpace *BackRepoWhiteSpaceStruct) CommitDeleteInstance(id uint
 
 	// whitespace is not staged anymore, remove whitespaceDB
 	whitespaceDB := backRepoWhiteSpace.Map_WhiteSpaceDBID_WhiteSpaceDB[id]
-	query := backRepoWhiteSpace.db.Unscoped().Delete(&whitespaceDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoWhiteSpace.db.Unscoped()
+	_, err := db.Delete(&whitespaceDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -187,9 +189,9 @@ func (backRepoWhiteSpace *BackRepoWhiteSpaceStruct) CommitPhaseOneInstance(white
 	var whitespaceDB WhiteSpaceDB
 	whitespaceDB.CopyBasicFieldsFromWhiteSpace(whitespace)
 
-	query := backRepoWhiteSpace.db.Create(&whitespaceDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoWhiteSpace.db.Create(&whitespaceDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -233,9 +235,9 @@ func (backRepoWhiteSpace *BackRepoWhiteSpaceStruct) CommitPhaseTwoInstance(backR
 			whitespaceDB.AnnotationID.Valid = true
 		}
 
-		query := backRepoWhiteSpace.db.Save(&whitespaceDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoWhiteSpace.db.Save(&whitespaceDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -254,9 +256,9 @@ func (backRepoWhiteSpace *BackRepoWhiteSpaceStruct) CommitPhaseTwoInstance(backR
 func (backRepoWhiteSpace *BackRepoWhiteSpaceStruct) CheckoutPhaseOne() (Error error) {
 
 	whitespaceDBArray := make([]WhiteSpaceDB, 0)
-	query := backRepoWhiteSpace.db.Find(&whitespaceDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoWhiteSpace.db.Find(&whitespaceDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -372,7 +374,7 @@ func (backRepo *BackRepoStruct) CheckoutWhiteSpace(whitespace *models.WhiteSpace
 			var whitespaceDB WhiteSpaceDB
 			whitespaceDB.ID = id
 
-			if err := backRepo.BackRepoWhiteSpace.db.First(&whitespaceDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoWhiteSpace.db.First(&whitespaceDB, id); err != nil {
 				log.Fatalln("CheckoutWhiteSpace : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoWhiteSpace.CheckoutPhaseOneInstance(&whitespaceDB)
@@ -531,9 +533,9 @@ func (backRepoWhiteSpace *BackRepoWhiteSpaceStruct) rowVisitorWhiteSpace(row *xl
 
 		whitespaceDB_ID_atBackupTime := whitespaceDB.ID
 		whitespaceDB.ID = 0
-		query := backRepoWhiteSpace.db.Create(whitespaceDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoWhiteSpace.db.Create(whitespaceDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoWhiteSpace.Map_WhiteSpaceDBID_WhiteSpaceDB[whitespaceDB.ID] = whitespaceDB
 		BackRepoWhiteSpaceid_atBckpTime_newID[whitespaceDB_ID_atBackupTime] = whitespaceDB.ID
@@ -568,9 +570,9 @@ func (backRepoWhiteSpace *BackRepoWhiteSpaceStruct) RestorePhaseOne(dirPath stri
 
 		whitespaceDB_ID_atBackupTime := whitespaceDB.ID
 		whitespaceDB.ID = 0
-		query := backRepoWhiteSpace.db.Create(whitespaceDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoWhiteSpace.db.Create(whitespaceDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoWhiteSpace.Map_WhiteSpaceDBID_WhiteSpaceDB[whitespaceDB.ID] = whitespaceDB
 		BackRepoWhiteSpaceid_atBckpTime_newID[whitespaceDB_ID_atBackupTime] = whitespaceDB.ID
@@ -598,9 +600,10 @@ func (backRepoWhiteSpace *BackRepoWhiteSpaceStruct) RestorePhaseTwo() {
 		}
 
 		// update databse with new index encoding
-		query := backRepoWhiteSpace.db.Model(whitespaceDB).Updates(*whitespaceDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoWhiteSpace.db.Model(whitespaceDB)
+		_, err := db.Updates(*whitespaceDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 
