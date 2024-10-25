@@ -280,7 +280,7 @@ func (controller *Controller) UpdateEnumeration(c *gin.Context) {
 	enumerationDB.EnumerationPointersEncoding = input.EnumerationPointersEncoding
 
 	db, _ = db.Model(&enumerationDB)
-	_, err = db.Updates(enumerationDB)
+	_, err = db.Updates(&enumerationDB)
 	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest

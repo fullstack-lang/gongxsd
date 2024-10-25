@@ -280,7 +280,7 @@ func (controller *Controller) UpdateSchema(c *gin.Context) {
 	schemaDB.SchemaPointersEncoding = input.SchemaPointersEncoding
 
 	db, _ = db.Model(&schemaDB)
-	_, err = db.Updates(schemaDB)
+	_, err = db.Updates(&schemaDB)
 	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest

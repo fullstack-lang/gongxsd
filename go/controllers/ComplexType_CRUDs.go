@@ -280,7 +280,7 @@ func (controller *Controller) UpdateComplexType(c *gin.Context) {
 	complextypeDB.ComplexTypePointersEncoding = input.ComplexTypePointersEncoding
 
 	db, _ = db.Model(&complextypeDB)
-	_, err = db.Updates(complextypeDB)
+	_, err = db.Updates(&complextypeDB)
 	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest

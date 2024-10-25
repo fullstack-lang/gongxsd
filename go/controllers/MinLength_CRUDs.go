@@ -280,7 +280,7 @@ func (controller *Controller) UpdateMinLength(c *gin.Context) {
 	minlengthDB.MinLengthPointersEncoding = input.MinLengthPointersEncoding
 
 	db, _ = db.Model(&minlengthDB)
-	_, err = db.Updates(minlengthDB)
+	_, err = db.Updates(&minlengthDB)
 	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest

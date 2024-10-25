@@ -280,7 +280,7 @@ func (controller *Controller) UpdateAttributeGroup(c *gin.Context) {
 	attributegroupDB.AttributeGroupPointersEncoding = input.AttributeGroupPointersEncoding
 
 	db, _ = db.Model(&attributegroupDB)
-	_, err = db.Updates(attributegroupDB)
+	_, err = db.Updates(&attributegroupDB)
 	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest

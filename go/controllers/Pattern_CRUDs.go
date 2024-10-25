@@ -280,7 +280,7 @@ func (controller *Controller) UpdatePattern(c *gin.Context) {
 	patternDB.PatternPointersEncoding = input.PatternPointersEncoding
 
 	db, _ = db.Model(&patternDB)
-	_, err = db.Updates(patternDB)
+	_, err = db.Updates(&patternDB)
 	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest

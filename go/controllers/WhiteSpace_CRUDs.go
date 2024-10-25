@@ -280,7 +280,7 @@ func (controller *Controller) UpdateWhiteSpace(c *gin.Context) {
 	whitespaceDB.WhiteSpacePointersEncoding = input.WhiteSpacePointersEncoding
 
 	db, _ = db.Model(&whitespaceDB)
-	_, err = db.Updates(whitespaceDB)
+	_, err = db.Updates(&whitespaceDB)
 	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest

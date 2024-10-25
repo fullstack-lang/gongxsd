@@ -280,7 +280,7 @@ func (controller *Controller) UpdateMaxInclusive(c *gin.Context) {
 	maxinclusiveDB.MaxInclusivePointersEncoding = input.MaxInclusivePointersEncoding
 
 	db, _ = db.Model(&maxinclusiveDB)
-	_, err = db.Updates(maxinclusiveDB)
+	_, err = db.Updates(&maxinclusiveDB)
 	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest

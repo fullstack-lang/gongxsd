@@ -280,7 +280,7 @@ func (controller *Controller) UpdateTotalDigit(c *gin.Context) {
 	totaldigitDB.TotalDigitPointersEncoding = input.TotalDigitPointersEncoding
 
 	db, _ = db.Model(&totaldigitDB)
-	_, err = db.Updates(totaldigitDB)
+	_, err = db.Updates(&totaldigitDB)
 	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest

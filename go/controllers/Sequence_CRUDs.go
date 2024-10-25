@@ -280,7 +280,7 @@ func (controller *Controller) UpdateSequence(c *gin.Context) {
 	sequenceDB.SequencePointersEncoding = input.SequencePointersEncoding
 
 	db, _ = db.Model(&sequenceDB)
-	_, err = db.Updates(sequenceDB)
+	_, err = db.Updates(&sequenceDB)
 	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest

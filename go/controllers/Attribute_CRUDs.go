@@ -280,7 +280,7 @@ func (controller *Controller) UpdateAttribute(c *gin.Context) {
 	attributeDB.AttributePointersEncoding = input.AttributePointersEncoding
 
 	db, _ = db.Model(&attributeDB)
-	_, err = db.Updates(attributeDB)
+	_, err = db.Updates(&attributeDB)
 	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest

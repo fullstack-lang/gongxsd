@@ -280,7 +280,7 @@ func (controller *Controller) UpdateComplexContent(c *gin.Context) {
 	complexcontentDB.ComplexContentPointersEncoding = input.ComplexContentPointersEncoding
 
 	db, _ = db.Model(&complexcontentDB)
-	_, err = db.Updates(complexcontentDB)
+	_, err = db.Updates(&complexcontentDB)
 	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest

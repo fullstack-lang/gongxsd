@@ -280,7 +280,7 @@ func (controller *Controller) UpdateSimpleContent(c *gin.Context) {
 	simplecontentDB.SimpleContentPointersEncoding = input.SimpleContentPointersEncoding
 
 	db, _ = db.Model(&simplecontentDB)
-	_, err = db.Updates(simplecontentDB)
+	_, err = db.Updates(&simplecontentDB)
 	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest

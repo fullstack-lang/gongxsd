@@ -280,7 +280,7 @@ func (controller *Controller) UpdateElement(c *gin.Context) {
 	elementDB.ElementPointersEncoding = input.ElementPointersEncoding
 
 	db, _ = db.Model(&elementDB)
-	_, err = db.Updates(elementDB)
+	_, err = db.Updates(&elementDB)
 	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest

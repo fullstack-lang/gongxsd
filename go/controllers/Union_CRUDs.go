@@ -280,7 +280,7 @@ func (controller *Controller) UpdateUnion(c *gin.Context) {
 	unionDB.UnionPointersEncoding = input.UnionPointersEncoding
 
 	db, _ = db.Model(&unionDB)
-	_, err = db.Updates(unionDB)
+	_, err = db.Updates(&unionDB)
 	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest

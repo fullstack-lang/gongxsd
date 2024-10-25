@@ -280,7 +280,7 @@ func (controller *Controller) UpdateAnnotation(c *gin.Context) {
 	annotationDB.AnnotationPointersEncoding = input.AnnotationPointersEncoding
 
 	db, _ = db.Model(&annotationDB)
-	_, err = db.Updates(annotationDB)
+	_, err = db.Updates(&annotationDB)
 	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest

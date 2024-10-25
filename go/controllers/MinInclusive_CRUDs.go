@@ -280,7 +280,7 @@ func (controller *Controller) UpdateMinInclusive(c *gin.Context) {
 	mininclusiveDB.MinInclusivePointersEncoding = input.MinInclusivePointersEncoding
 
 	db, _ = db.Model(&mininclusiveDB)
-	_, err = db.Updates(mininclusiveDB)
+	_, err = db.Updates(&mininclusiveDB)
 	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest

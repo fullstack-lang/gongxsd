@@ -280,7 +280,7 @@ func (controller *Controller) UpdateMaxLength(c *gin.Context) {
 	maxlengthDB.MaxLengthPointersEncoding = input.MaxLengthPointersEncoding
 
 	db, _ = db.Model(&maxlengthDB)
-	_, err = db.Updates(maxlengthDB)
+	_, err = db.Updates(&maxlengthDB)
 	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest

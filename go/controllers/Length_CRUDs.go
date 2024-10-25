@@ -280,7 +280,7 @@ func (controller *Controller) UpdateLength(c *gin.Context) {
 	lengthDB.LengthPointersEncoding = input.LengthPointersEncoding
 
 	db, _ = db.Model(&lengthDB)
-	_, err = db.Updates(lengthDB)
+	_, err = db.Updates(&lengthDB)
 	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest

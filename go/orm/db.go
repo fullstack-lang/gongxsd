@@ -187,7 +187,7 @@ func NewDBLite() *DBLite {
 // Create inserts a new record into the database
 func (db *DBLite) Create(instanceDB any) (db.DBInterface, error) {
 	if instanceDB == nil {
-		return nil, errors.New("instanceDB cannot be nil")
+		return nil, errors.New("github.com/fullstack-lang/gongxsd/go, instanceDB cannot be nil")
 	}
 
 	db.mu.Lock()
@@ -300,7 +300,7 @@ func (db *DBLite) Create(instanceDB any) (db.DBInterface, error) {
 		v.ID = db.nextIDWhiteSpaceDB
 		db.whitespaceDBs[v.ID] = v
 	default:
-		return nil, errors.New("unsupported type in Create")
+		return nil, errors.New("github.com/fullstack-lang/gongxsd/go, unsupported type in Create")
 	}
 	return db, nil
 }
@@ -319,7 +319,7 @@ func (db *DBLite) Model(instanceDB any) (db.DBInterface, error) {
 // Delete removes a record from the database
 func (db *DBLite) Delete(instanceDB any) (db.DBInterface, error) {
 	if instanceDB == nil {
-		return nil, errors.New("instanceDB cannot be nil")
+		return nil, errors.New("github.com/fullstack-lang/gongxsd/go, instanceDB cannot be nil")
 	}
 
 	db.mu.Lock()
@@ -380,7 +380,7 @@ func (db *DBLite) Delete(instanceDB any) (db.DBInterface, error) {
 	case *WhiteSpaceDB:
 		delete(db.whitespaceDBs, v.ID)
 	default:
-		return nil, errors.New("unsupported type in Delete")
+		return nil, errors.New("github.com/fullstack-lang/gongxsd/go, unsupported type in Delete")
 	}
 	return db, nil
 }
@@ -389,7 +389,7 @@ func (db *DBLite) Delete(instanceDB any) (db.DBInterface, error) {
 func (db *DBLite) Save(instanceDB any) (db.DBInterface, error) {
 
 	if instanceDB == nil {
-		return nil, errors.New("instanceDB cannot be nil")
+		return nil, errors.New("github.com/fullstack-lang/gongxsd/go, instanceDB cannot be nil")
 	}
 
 	db.mu.Lock()
@@ -476,14 +476,14 @@ func (db *DBLite) Save(instanceDB any) (db.DBInterface, error) {
 		db.whitespaceDBs[v.ID] = v
 		return db, nil
 	default:
-		return nil, errors.New("Save: unsupported type")
+		return nil, errors.New("github.com/fullstack-lang/gongxsd/go, Save: unsupported type")
 	}
 }
 
 // Updates modifies an existing record in the database
 func (db *DBLite) Updates(instanceDB any) (db.DBInterface, error) {
 	if instanceDB == nil {
-		return nil, errors.New("instanceDB cannot be nil")
+		return nil, errors.New("github.com/fullstack-lang/gongxsd/go, instanceDB cannot be nil")
 	}
 
 	db.mu.Lock()
@@ -495,160 +495,160 @@ func (db *DBLite) Updates(instanceDB any) (db.DBInterface, error) {
 		if existing, ok := db.allDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("record not found")
+			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *AnnotationDB:
 		if existing, ok := db.annotationDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("record not found")
+			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *AttributeDB:
 		if existing, ok := db.attributeDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("record not found")
+			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *AttributeGroupDB:
 		if existing, ok := db.attributegroupDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("record not found")
+			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *ChoiceDB:
 		if existing, ok := db.choiceDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("record not found")
+			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *ComplexContentDB:
 		if existing, ok := db.complexcontentDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("record not found")
+			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *ComplexTypeDB:
 		if existing, ok := db.complextypeDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("record not found")
+			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *DocumentationDB:
 		if existing, ok := db.documentationDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("record not found")
+			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *ElementDB:
 		if existing, ok := db.elementDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("record not found")
+			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *EnumerationDB:
 		if existing, ok := db.enumerationDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("record not found")
+			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *ExtensionDB:
 		if existing, ok := db.extensionDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("record not found")
+			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *GroupDB:
 		if existing, ok := db.groupDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("record not found")
+			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *LengthDB:
 		if existing, ok := db.lengthDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("record not found")
+			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *MaxInclusiveDB:
 		if existing, ok := db.maxinclusiveDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("record not found")
+			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *MaxLengthDB:
 		if existing, ok := db.maxlengthDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("record not found")
+			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *MinInclusiveDB:
 		if existing, ok := db.mininclusiveDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("record not found")
+			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *MinLengthDB:
 		if existing, ok := db.minlengthDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("record not found")
+			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *PatternDB:
 		if existing, ok := db.patternDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("record not found")
+			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *RestrictionDB:
 		if existing, ok := db.restrictionDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("record not found")
+			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *SchemaDB:
 		if existing, ok := db.schemaDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("record not found")
+			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *SequenceDB:
 		if existing, ok := db.sequenceDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("record not found")
+			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *SimpleContentDB:
 		if existing, ok := db.simplecontentDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("record not found")
+			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *SimpleTypeDB:
 		if existing, ok := db.simpletypeDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("record not found")
+			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *TotalDigitDB:
 		if existing, ok := db.totaldigitDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("record not found")
+			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *UnionDB:
 		if existing, ok := db.unionDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("record not found")
+			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *WhiteSpaceDB:
 		if existing, ok := db.whitespaceDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("record not found")
+			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	default:
-		return nil, errors.New("unsupported type in Updates")
+		return nil, errors.New("github.com/fullstack-lang/gongxsd/go, unsupported type in Updates")
 	}
 	return db, nil
 }
@@ -818,25 +818,25 @@ func (db *DBLite) Find(instanceDBs any) (db.DBInterface, error) {
         }
         return db, nil
     default:
-        return nil, errors.New("Find: unsupported type")
+        return nil, errors.New("github.com/fullstack-lang/gongxsd/go, Find: unsupported type")
     }
 }
 
 // First retrieves the first record of a type from the database
 func (db *DBLite) First(instanceDB any, conds ...any) (db.DBInterface, error) {
 	if len(conds) != 1 {
-		return nil, errors.New("Do not process when conds is not a single parameter")
+		return nil, errors.New("github.com/fullstack-lang/gongxsd/go, Do not process when conds is not a single parameter")
 	}
 
 	str, ok := conds[0].(string)
 
 	if !ok {
-		return nil, errors.New("conds[0] is not a string")
+		return nil, errors.New("github.com/fullstack-lang/gongxsd/go, conds[0] is not a string")
 	}
 
 	i, err := strconv.ParseUint(str, 10, 32) // Base 10, 32-bit unsigned int
 	if err != nil {
-		return nil, errors.New("conds[0] is not a string number")
+		return nil, errors.New("github.com/fullstack-lang/gongxsd/go, conds[0] is not a string number")
 	}
 
 	db.mu.RLock()
@@ -1053,7 +1053,7 @@ func (db *DBLite) First(instanceDB any, conds ...any) (db.DBInterface, error) {
 			return nil, errors.New(fmt.Sprintf("Unkown entry %d", i))
 		}
 	default:
-		return nil, errors.New("Unkown type")
+		return nil, errors.New("github.com/fullstack-lang/gongxsd/go, Unkown type")
 	}
 	
 	return db, nil

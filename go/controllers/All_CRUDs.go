@@ -280,7 +280,7 @@ func (controller *Controller) UpdateAll(c *gin.Context) {
 	allDB.AllPointersEncoding = input.AllPointersEncoding
 
 	db, _ = db.Model(&allDB)
-	_, err = db.Updates(allDB)
+	_, err = db.Updates(&allDB)
 	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest

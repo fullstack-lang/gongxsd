@@ -280,7 +280,7 @@ func (controller *Controller) UpdateRestriction(c *gin.Context) {
 	restrictionDB.RestrictionPointersEncoding = input.RestrictionPointersEncoding
 
 	db, _ = db.Model(&restrictionDB)
-	_, err = db.Updates(restrictionDB)
+	_, err = db.Updates(&restrictionDB)
 	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest

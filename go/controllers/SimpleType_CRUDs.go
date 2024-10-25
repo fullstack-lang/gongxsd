@@ -280,7 +280,7 @@ func (controller *Controller) UpdateSimpleType(c *gin.Context) {
 	simpletypeDB.SimpleTypePointersEncoding = input.SimpleTypePointersEncoding
 
 	db, _ = db.Model(&simpletypeDB)
-	_, err = db.Updates(simpletypeDB)
+	_, err = db.Updates(&simpletypeDB)
 	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest

@@ -280,7 +280,7 @@ func (controller *Controller) UpdateExtension(c *gin.Context) {
 	extensionDB.ExtensionPointersEncoding = input.ExtensionPointersEncoding
 
 	db, _ = db.Model(&extensionDB)
-	_, err = db.Updates(extensionDB)
+	_, err = db.Updates(&extensionDB)
 	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest

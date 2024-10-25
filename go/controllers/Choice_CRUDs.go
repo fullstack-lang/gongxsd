@@ -280,7 +280,7 @@ func (controller *Controller) UpdateChoice(c *gin.Context) {
 	choiceDB.ChoicePointersEncoding = input.ChoicePointersEncoding
 
 	db, _ = db.Model(&choiceDB)
-	_, err = db.Updates(choiceDB)
+	_, err = db.Updates(&choiceDB)
 	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
