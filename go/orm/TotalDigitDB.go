@@ -163,7 +163,7 @@ func (backRepoTotalDigit *BackRepoTotalDigitStruct) CommitDeleteInstance(id uint
 	// totaldigit is not staged anymore, remove totaldigitDB
 	totaldigitDB := backRepoTotalDigit.Map_TotalDigitDBID_TotalDigitDB[id]
 	db, _ := backRepoTotalDigit.db.Unscoped()
-	_, err := db.Delete(&totaldigitDB)
+	_, err := db.Delete(totaldigitDB)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -235,7 +235,7 @@ func (backRepoTotalDigit *BackRepoTotalDigitStruct) CommitPhaseTwoInstance(backR
 			totaldigitDB.AnnotationID.Valid = true
 		}
 
-		_, err := backRepoTotalDigit.db.Save(&totaldigitDB)
+		_, err := backRepoTotalDigit.db.Save(totaldigitDB)
 		if err != nil {
 			log.Fatal(err)
 		}

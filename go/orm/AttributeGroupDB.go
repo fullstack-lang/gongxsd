@@ -200,7 +200,7 @@ func (backRepoAttributeGroup *BackRepoAttributeGroupStruct) CommitDeleteInstance
 	// attributegroup is not staged anymore, remove attributegroupDB
 	attributegroupDB := backRepoAttributeGroup.Map_AttributeGroupDBID_AttributeGroupDB[id]
 	db, _ := backRepoAttributeGroup.db.Unscoped()
-	_, err := db.Delete(&attributegroupDB)
+	_, err := db.Delete(attributegroupDB)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -308,7 +308,7 @@ func (backRepoAttributeGroup *BackRepoAttributeGroupStruct) CommitPhaseTwoInstan
 				append(attributegroupDB.AttributeGroupPointersEncoding.Attributes, int(attributeAssocEnd_DB.ID))
 		}
 
-		_, err := backRepoAttributeGroup.db.Save(&attributegroupDB)
+		_, err := backRepoAttributeGroup.db.Save(attributegroupDB)
 		if err != nil {
 			log.Fatal(err)
 		}

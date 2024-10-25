@@ -209,7 +209,7 @@ func (backRepoChoice *BackRepoChoiceStruct) CommitDeleteInstance(id uint) (Error
 	// choice is not staged anymore, remove choiceDB
 	choiceDB := backRepoChoice.Map_ChoiceDBID_ChoiceDB[id]
 	db, _ := backRepoChoice.db.Unscoped()
-	_, err := db.Delete(&choiceDB)
+	_, err := db.Delete(choiceDB)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -371,7 +371,7 @@ func (backRepoChoice *BackRepoChoiceStruct) CommitPhaseTwoInstance(backRepo *Bac
 				append(choiceDB.ChoicePointersEncoding.Elements, int(elementAssocEnd_DB.ID))
 		}
 
-		_, err := backRepoChoice.db.Save(&choiceDB)
+		_, err := backRepoChoice.db.Save(choiceDB)
 		if err != nil {
 			log.Fatal(err)
 		}

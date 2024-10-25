@@ -163,7 +163,7 @@ func (backRepoMinInclusive *BackRepoMinInclusiveStruct) CommitDeleteInstance(id 
 	// mininclusive is not staged anymore, remove mininclusiveDB
 	mininclusiveDB := backRepoMinInclusive.Map_MinInclusiveDBID_MinInclusiveDB[id]
 	db, _ := backRepoMinInclusive.db.Unscoped()
-	_, err := db.Delete(&mininclusiveDB)
+	_, err := db.Delete(mininclusiveDB)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -235,7 +235,7 @@ func (backRepoMinInclusive *BackRepoMinInclusiveStruct) CommitPhaseTwoInstance(b
 			mininclusiveDB.AnnotationID.Valid = true
 		}
 
-		_, err := backRepoMinInclusive.db.Save(&mininclusiveDB)
+		_, err := backRepoMinInclusive.db.Save(mininclusiveDB)
 		if err != nil {
 			log.Fatal(err)
 		}

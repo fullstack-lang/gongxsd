@@ -183,7 +183,7 @@ func (backRepoSimpleType *BackRepoSimpleTypeStruct) CommitDeleteInstance(id uint
 	// simpletype is not staged anymore, remove simpletypeDB
 	simpletypeDB := backRepoSimpleType.Map_SimpleTypeDBID_SimpleTypeDB[id]
 	db, _ := backRepoSimpleType.db.Unscoped()
-	_, err := db.Delete(&simpletypeDB)
+	_, err := db.Delete(simpletypeDB)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -279,7 +279,7 @@ func (backRepoSimpleType *BackRepoSimpleTypeStruct) CommitPhaseTwoInstance(backR
 			simpletypeDB.UnionID.Valid = true
 		}
 
-		_, err := backRepoSimpleType.db.Save(&simpletypeDB)
+		_, err := backRepoSimpleType.db.Save(simpletypeDB)
 		if err != nil {
 			log.Fatal(err)
 		}

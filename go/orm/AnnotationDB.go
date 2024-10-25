@@ -156,7 +156,7 @@ func (backRepoAnnotation *BackRepoAnnotationStruct) CommitDeleteInstance(id uint
 	// annotation is not staged anymore, remove annotationDB
 	annotationDB := backRepoAnnotation.Map_AnnotationDBID_AnnotationDB[id]
 	db, _ := backRepoAnnotation.db.Unscoped()
-	_, err := db.Delete(&annotationDB)
+	_, err := db.Delete(annotationDB)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -234,7 +234,7 @@ func (backRepoAnnotation *BackRepoAnnotationStruct) CommitPhaseTwoInstance(backR
 				append(annotationDB.AnnotationPointersEncoding.Documentations, int(documentationAssocEnd_DB.ID))
 		}
 
-		_, err := backRepoAnnotation.db.Save(&annotationDB)
+		_, err := backRepoAnnotation.db.Save(annotationDB)
 		if err != nil {
 			log.Fatal(err)
 		}

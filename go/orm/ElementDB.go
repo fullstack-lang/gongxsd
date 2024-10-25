@@ -272,7 +272,7 @@ func (backRepoElement *BackRepoElementStruct) CommitDeleteInstance(id uint) (Err
 	// element is not staged anymore, remove elementDB
 	elementDB := backRepoElement.Map_ElementDBID_ElementDB[id]
 	db, _ := backRepoElement.db.Unscoped()
-	_, err := db.Delete(&elementDB)
+	_, err := db.Delete(elementDB)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -386,7 +386,7 @@ func (backRepoElement *BackRepoElementStruct) CommitPhaseTwoInstance(backRepo *B
 				append(elementDB.ElementPointersEncoding.Groups, int(groupAssocEnd_DB.ID))
 		}
 
-		_, err := backRepoElement.db.Save(&elementDB)
+		_, err := backRepoElement.db.Save(elementDB)
 		if err != nil {
 			log.Fatal(err)
 		}

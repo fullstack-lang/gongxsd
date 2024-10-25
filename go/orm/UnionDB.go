@@ -163,7 +163,7 @@ func (backRepoUnion *BackRepoUnionStruct) CommitDeleteInstance(id uint) (Error e
 	// union is not staged anymore, remove unionDB
 	unionDB := backRepoUnion.Map_UnionDBID_UnionDB[id]
 	db, _ := backRepoUnion.db.Unscoped()
-	_, err := db.Delete(&unionDB)
+	_, err := db.Delete(unionDB)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -235,7 +235,7 @@ func (backRepoUnion *BackRepoUnionStruct) CommitPhaseTwoInstance(backRepo *BackR
 			unionDB.AnnotationID.Valid = true
 		}
 
-		_, err := backRepoUnion.db.Save(&unionDB)
+		_, err := backRepoUnion.db.Save(unionDB)
 		if err != nil {
 			log.Fatal(err)
 		}

@@ -230,7 +230,7 @@ func (backRepoAttribute *BackRepoAttributeStruct) CommitDeleteInstance(id uint) 
 	// attribute is not staged anymore, remove attributeDB
 	attributeDB := backRepoAttribute.Map_AttributeDBID_AttributeDB[id]
 	db, _ := backRepoAttribute.db.Unscoped()
-	_, err := db.Delete(&attributeDB)
+	_, err := db.Delete(attributeDB)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -302,7 +302,7 @@ func (backRepoAttribute *BackRepoAttributeStruct) CommitPhaseTwoInstance(backRep
 			attributeDB.AnnotationID.Valid = true
 		}
 
-		_, err := backRepoAttribute.db.Save(&attributeDB)
+		_, err := backRepoAttribute.db.Save(attributeDB)
 		if err != nil {
 			log.Fatal(err)
 		}

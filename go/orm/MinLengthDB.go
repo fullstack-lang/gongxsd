@@ -163,7 +163,7 @@ func (backRepoMinLength *BackRepoMinLengthStruct) CommitDeleteInstance(id uint) 
 	// minlength is not staged anymore, remove minlengthDB
 	minlengthDB := backRepoMinLength.Map_MinLengthDBID_MinLengthDB[id]
 	db, _ := backRepoMinLength.db.Unscoped()
-	_, err := db.Delete(&minlengthDB)
+	_, err := db.Delete(minlengthDB)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -235,7 +235,7 @@ func (backRepoMinLength *BackRepoMinLengthStruct) CommitPhaseTwoInstance(backRep
 			minlengthDB.AnnotationID.Valid = true
 		}
 
-		_, err := backRepoMinLength.db.Save(&minlengthDB)
+		_, err := backRepoMinLength.db.Save(minlengthDB)
 		if err != nil {
 			log.Fatal(err)
 		}

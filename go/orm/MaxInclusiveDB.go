@@ -163,7 +163,7 @@ func (backRepoMaxInclusive *BackRepoMaxInclusiveStruct) CommitDeleteInstance(id 
 	// maxinclusive is not staged anymore, remove maxinclusiveDB
 	maxinclusiveDB := backRepoMaxInclusive.Map_MaxInclusiveDBID_MaxInclusiveDB[id]
 	db, _ := backRepoMaxInclusive.db.Unscoped()
-	_, err := db.Delete(&maxinclusiveDB)
+	_, err := db.Delete(maxinclusiveDB)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -235,7 +235,7 @@ func (backRepoMaxInclusive *BackRepoMaxInclusiveStruct) CommitPhaseTwoInstance(b
 			maxinclusiveDB.AnnotationID.Valid = true
 		}
 
-		_, err := backRepoMaxInclusive.db.Save(&maxinclusiveDB)
+		_, err := backRepoMaxInclusive.db.Save(maxinclusiveDB)
 		if err != nil {
 			log.Fatal(err)
 		}

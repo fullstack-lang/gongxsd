@@ -190,7 +190,7 @@ func (backRepoSchema *BackRepoSchemaStruct) CommitDeleteInstance(id uint) (Error
 	// schema is not staged anymore, remove schemaDB
 	schemaDB := backRepoSchema.Map_SchemaDBID_SchemaDB[id]
 	db, _ := backRepoSchema.db.Unscoped()
-	_, err := db.Delete(&schemaDB)
+	_, err := db.Delete(schemaDB)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -352,7 +352,7 @@ func (backRepoSchema *BackRepoSchemaStruct) CommitPhaseTwoInstance(backRepo *Bac
 				append(schemaDB.SchemaPointersEncoding.Groups, int(groupAssocEnd_DB.ID))
 		}
 
-		_, err := backRepoSchema.db.Save(&schemaDB)
+		_, err := backRepoSchema.db.Save(schemaDB)
 		if err != nil {
 			log.Fatal(err)
 		}

@@ -198,7 +198,7 @@ func (backRepoRestriction *BackRepoRestrictionStruct) CommitDeleteInstance(id ui
 	// restriction is not staged anymore, remove restrictionDB
 	restrictionDB := backRepoRestriction.Map_RestrictionDBID_RestrictionDB[id]
 	db, _ := backRepoRestriction.db.Unscoped()
-	_, err := db.Delete(&restrictionDB)
+	_, err := db.Delete(restrictionDB)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -384,7 +384,7 @@ func (backRepoRestriction *BackRepoRestrictionStruct) CommitPhaseTwoInstance(bac
 			restrictionDB.TotalDigitID.Valid = true
 		}
 
-		_, err := backRepoRestriction.db.Save(&restrictionDB)
+		_, err := backRepoRestriction.db.Save(restrictionDB)
 		if err != nil {
 			log.Fatal(err)
 		}

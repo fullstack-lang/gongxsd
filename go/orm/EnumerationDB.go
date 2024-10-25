@@ -163,7 +163,7 @@ func (backRepoEnumeration *BackRepoEnumerationStruct) CommitDeleteInstance(id ui
 	// enumeration is not staged anymore, remove enumerationDB
 	enumerationDB := backRepoEnumeration.Map_EnumerationDBID_EnumerationDB[id]
 	db, _ := backRepoEnumeration.db.Unscoped()
-	_, err := db.Delete(&enumerationDB)
+	_, err := db.Delete(enumerationDB)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -235,7 +235,7 @@ func (backRepoEnumeration *BackRepoEnumerationStruct) CommitPhaseTwoInstance(bac
 			enumerationDB.AnnotationID.Valid = true
 		}
 
-		_, err := backRepoEnumeration.db.Save(&enumerationDB)
+		_, err := backRepoEnumeration.db.Save(enumerationDB)
 		if err != nil {
 			log.Fatal(err)
 		}

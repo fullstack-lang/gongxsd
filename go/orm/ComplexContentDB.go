@@ -153,7 +153,7 @@ func (backRepoComplexContent *BackRepoComplexContentStruct) CommitDeleteInstance
 	// complexcontent is not staged anymore, remove complexcontentDB
 	complexcontentDB := backRepoComplexContent.Map_ComplexContentDBID_ComplexContentDB[id]
 	db, _ := backRepoComplexContent.db.Unscoped()
-	_, err := db.Delete(&complexcontentDB)
+	_, err := db.Delete(complexcontentDB)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -213,7 +213,7 @@ func (backRepoComplexContent *BackRepoComplexContentStruct) CommitPhaseTwoInstan
 		complexcontentDB.CopyBasicFieldsFromComplexContent(complexcontent)
 
 		// insertion point for translating pointers encodings into actual pointers
-		_, err := backRepoComplexContent.db.Save(&complexcontentDB)
+		_, err := backRepoComplexContent.db.Save(complexcontentDB)
 		if err != nil {
 			log.Fatal(err)
 		}

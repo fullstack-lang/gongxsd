@@ -238,7 +238,7 @@ func (backRepoGroup *BackRepoGroupStruct) CommitDeleteInstance(id uint) (Error e
 	// group is not staged anymore, remove groupDB
 	groupDB := backRepoGroup.Map_GroupDBID_GroupDB[id]
 	db, _ := backRepoGroup.db.Unscoped()
-	_, err := db.Delete(&groupDB)
+	_, err := db.Delete(groupDB)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -412,7 +412,7 @@ func (backRepoGroup *BackRepoGroupStruct) CommitPhaseTwoInstance(backRepo *BackR
 				append(groupDB.GroupPointersEncoding.Elements, int(elementAssocEnd_DB.ID))
 		}
 
-		_, err := backRepoGroup.db.Save(&groupDB)
+		_, err := backRepoGroup.db.Save(groupDB)
 		if err != nil {
 			log.Fatal(err)
 		}

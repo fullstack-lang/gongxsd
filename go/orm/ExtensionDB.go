@@ -213,7 +213,7 @@ func (backRepoExtension *BackRepoExtensionStruct) CommitDeleteInstance(id uint) 
 	// extension is not staged anymore, remove extensionDB
 	extensionDB := backRepoExtension.Map_ExtensionDBID_ExtensionDB[id]
 	db, _ := backRepoExtension.db.Unscoped()
-	_, err := db.Delete(&extensionDB)
+	_, err := db.Delete(extensionDB)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -381,7 +381,7 @@ func (backRepoExtension *BackRepoExtensionStruct) CommitPhaseTwoInstance(backRep
 				append(extensionDB.ExtensionPointersEncoding.Attributes, int(attributeAssocEnd_DB.ID))
 		}
 
-		_, err := backRepoExtension.db.Save(&extensionDB)
+		_, err := backRepoExtension.db.Save(extensionDB)
 		if err != nil {
 			log.Fatal(err)
 		}

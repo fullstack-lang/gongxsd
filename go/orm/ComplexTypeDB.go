@@ -257,7 +257,7 @@ func (backRepoComplexType *BackRepoComplexTypeStruct) CommitDeleteInstance(id ui
 	// complextype is not staged anymore, remove complextypeDB
 	complextypeDB := backRepoComplexType.Map_ComplexTypeDBID_ComplexTypeDB[id]
 	db, _ := backRepoComplexType.db.Unscoped()
-	_, err := db.Delete(&complextypeDB)
+	_, err := db.Delete(complextypeDB)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -503,7 +503,7 @@ func (backRepoComplexType *BackRepoComplexTypeStruct) CommitPhaseTwoInstance(bac
 				append(complextypeDB.ComplexTypePointersEncoding.AttributeGroups, int(attributegroupAssocEnd_DB.ID))
 		}
 
-		_, err := backRepoComplexType.db.Save(&complextypeDB)
+		_, err := backRepoComplexType.db.Save(complextypeDB)
 		if err != nil {
 			log.Fatal(err)
 		}

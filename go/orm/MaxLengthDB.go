@@ -163,7 +163,7 @@ func (backRepoMaxLength *BackRepoMaxLengthStruct) CommitDeleteInstance(id uint) 
 	// maxlength is not staged anymore, remove maxlengthDB
 	maxlengthDB := backRepoMaxLength.Map_MaxLengthDBID_MaxLengthDB[id]
 	db, _ := backRepoMaxLength.db.Unscoped()
-	_, err := db.Delete(&maxlengthDB)
+	_, err := db.Delete(maxlengthDB)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -235,7 +235,7 @@ func (backRepoMaxLength *BackRepoMaxLengthStruct) CommitPhaseTwoInstance(backRep
 			maxlengthDB.AnnotationID.Valid = true
 		}
 
-		_, err := backRepoMaxLength.db.Save(&maxlengthDB)
+		_, err := backRepoMaxLength.db.Save(maxlengthDB)
 		if err != nil {
 			log.Fatal(err)
 		}

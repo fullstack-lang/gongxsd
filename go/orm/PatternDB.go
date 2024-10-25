@@ -163,7 +163,7 @@ func (backRepoPattern *BackRepoPatternStruct) CommitDeleteInstance(id uint) (Err
 	// pattern is not staged anymore, remove patternDB
 	patternDB := backRepoPattern.Map_PatternDBID_PatternDB[id]
 	db, _ := backRepoPattern.db.Unscoped()
-	_, err := db.Delete(&patternDB)
+	_, err := db.Delete(patternDB)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -235,7 +235,7 @@ func (backRepoPattern *BackRepoPatternStruct) CommitPhaseTwoInstance(backRepo *B
 			patternDB.AnnotationID.Valid = true
 		}
 
-		_, err := backRepoPattern.db.Save(&patternDB)
+		_, err := backRepoPattern.db.Save(patternDB)
 		if err != nil {
 			log.Fatal(err)
 		}

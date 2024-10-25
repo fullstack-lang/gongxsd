@@ -163,7 +163,7 @@ func (backRepoWhiteSpace *BackRepoWhiteSpaceStruct) CommitDeleteInstance(id uint
 	// whitespace is not staged anymore, remove whitespaceDB
 	whitespaceDB := backRepoWhiteSpace.Map_WhiteSpaceDBID_WhiteSpaceDB[id]
 	db, _ := backRepoWhiteSpace.db.Unscoped()
-	_, err := db.Delete(&whitespaceDB)
+	_, err := db.Delete(whitespaceDB)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -235,7 +235,7 @@ func (backRepoWhiteSpace *BackRepoWhiteSpaceStruct) CommitPhaseTwoInstance(backR
 			whitespaceDB.AnnotationID.Valid = true
 		}
 
-		_, err := backRepoWhiteSpace.db.Save(&whitespaceDB)
+		_, err := backRepoWhiteSpace.db.Save(whitespaceDB)
 		if err != nil {
 			log.Fatal(err)
 		}

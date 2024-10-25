@@ -163,7 +163,7 @@ func (backRepoLength *BackRepoLengthStruct) CommitDeleteInstance(id uint) (Error
 	// length is not staged anymore, remove lengthDB
 	lengthDB := backRepoLength.Map_LengthDBID_LengthDB[id]
 	db, _ := backRepoLength.db.Unscoped()
-	_, err := db.Delete(&lengthDB)
+	_, err := db.Delete(lengthDB)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -235,7 +235,7 @@ func (backRepoLength *BackRepoLengthStruct) CommitPhaseTwoInstance(backRepo *Bac
 			lengthDB.AnnotationID.Valid = true
 		}
 
-		_, err := backRepoLength.db.Save(&lengthDB)
+		_, err := backRepoLength.db.Save(lengthDB)
 		if err != nil {
 			log.Fatal(err)
 		}

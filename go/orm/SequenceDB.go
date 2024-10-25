@@ -202,7 +202,7 @@ func (backRepoSequence *BackRepoSequenceStruct) CommitDeleteInstance(id uint) (E
 	// sequence is not staged anymore, remove sequenceDB
 	sequenceDB := backRepoSequence.Map_SequenceDBID_SequenceDB[id]
 	db, _ := backRepoSequence.db.Unscoped()
-	_, err := db.Delete(&sequenceDB)
+	_, err := db.Delete(sequenceDB)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -364,7 +364,7 @@ func (backRepoSequence *BackRepoSequenceStruct) CommitPhaseTwoInstance(backRepo 
 				append(sequenceDB.SequencePointersEncoding.Elements, int(elementAssocEnd_DB.ID))
 		}
 
-		_, err := backRepoSequence.db.Save(&sequenceDB)
+		_, err := backRepoSequence.db.Save(sequenceDB)
 		if err != nil {
 			log.Fatal(err)
 		}

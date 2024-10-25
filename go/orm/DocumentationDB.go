@@ -171,7 +171,7 @@ func (backRepoDocumentation *BackRepoDocumentationStruct) CommitDeleteInstance(i
 	// documentation is not staged anymore, remove documentationDB
 	documentationDB := backRepoDocumentation.Map_DocumentationDBID_DocumentationDB[id]
 	db, _ := backRepoDocumentation.db.Unscoped()
-	_, err := db.Delete(&documentationDB)
+	_, err := db.Delete(documentationDB)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -231,7 +231,7 @@ func (backRepoDocumentation *BackRepoDocumentationStruct) CommitPhaseTwoInstance
 		documentationDB.CopyBasicFieldsFromDocumentation(documentation)
 
 		// insertion point for translating pointers encodings into actual pointers
-		_, err := backRepoDocumentation.db.Save(&documentationDB)
+		_, err := backRepoDocumentation.db.Save(documentationDB)
 		if err != nil {
 			log.Fatal(err)
 		}

@@ -161,7 +161,7 @@ func (backRepoSimpleContent *BackRepoSimpleContentStruct) CommitDeleteInstance(i
 	// simplecontent is not staged anymore, remove simplecontentDB
 	simplecontentDB := backRepoSimpleContent.Map_SimpleContentDBID_SimpleContentDB[id]
 	db, _ := backRepoSimpleContent.db.Unscoped()
-	_, err := db.Delete(&simplecontentDB)
+	_, err := db.Delete(simplecontentDB)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -245,7 +245,7 @@ func (backRepoSimpleContent *BackRepoSimpleContentStruct) CommitPhaseTwoInstance
 			simplecontentDB.RestrictionID.Valid = true
 		}
 
-		_, err := backRepoSimpleContent.db.Save(&simplecontentDB)
+		_, err := backRepoSimpleContent.db.Save(simplecontentDB)
 		if err != nil {
 			log.Fatal(err)
 		}

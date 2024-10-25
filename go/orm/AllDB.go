@@ -202,7 +202,7 @@ func (backRepoAll *BackRepoAllStruct) CommitDeleteInstance(id uint) (Error error
 	// all is not staged anymore, remove allDB
 	allDB := backRepoAll.Map_AllDBID_AllDB[id]
 	db, _ := backRepoAll.db.Unscoped()
-	_, err := db.Delete(&allDB)
+	_, err := db.Delete(allDB)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -364,7 +364,7 @@ func (backRepoAll *BackRepoAllStruct) CommitPhaseTwoInstance(backRepo *BackRepoS
 				append(allDB.AllPointersEncoding.Elements, int(elementAssocEnd_DB.ID))
 		}
 
-		_, err := backRepoAll.db.Save(&allDB)
+		_, err := backRepoAll.db.Save(allDB)
 		if err != nil {
 			log.Fatal(err)
 		}
