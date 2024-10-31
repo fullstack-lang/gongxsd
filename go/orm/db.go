@@ -495,157 +495,157 @@ func (db *DBLite) Updates(instanceDB any) (db.DBInterface, error) {
 		if existing, ok := db.allDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
+			return nil, errors.New("db All github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *AnnotationDB:
 		if existing, ok := db.annotationDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
+			return nil, errors.New("db Annotation github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *AttributeDB:
 		if existing, ok := db.attributeDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
+			return nil, errors.New("db Attribute github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *AttributeGroupDB:
 		if existing, ok := db.attributegroupDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
+			return nil, errors.New("db AttributeGroup github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *ChoiceDB:
 		if existing, ok := db.choiceDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
+			return nil, errors.New("db Choice github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *ComplexContentDB:
 		if existing, ok := db.complexcontentDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
+			return nil, errors.New("db ComplexContent github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *ComplexTypeDB:
 		if existing, ok := db.complextypeDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
+			return nil, errors.New("db ComplexType github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *DocumentationDB:
 		if existing, ok := db.documentationDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
+			return nil, errors.New("db Documentation github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *ElementDB:
 		if existing, ok := db.elementDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
+			return nil, errors.New("db Element github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *EnumerationDB:
 		if existing, ok := db.enumerationDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
+			return nil, errors.New("db Enumeration github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *ExtensionDB:
 		if existing, ok := db.extensionDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
+			return nil, errors.New("db Extension github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *GroupDB:
 		if existing, ok := db.groupDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
+			return nil, errors.New("db Group github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *LengthDB:
 		if existing, ok := db.lengthDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
+			return nil, errors.New("db Length github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *MaxInclusiveDB:
 		if existing, ok := db.maxinclusiveDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
+			return nil, errors.New("db MaxInclusive github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *MaxLengthDB:
 		if existing, ok := db.maxlengthDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
+			return nil, errors.New("db MaxLength github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *MinInclusiveDB:
 		if existing, ok := db.mininclusiveDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
+			return nil, errors.New("db MinInclusive github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *MinLengthDB:
 		if existing, ok := db.minlengthDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
+			return nil, errors.New("db MinLength github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *PatternDB:
 		if existing, ok := db.patternDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
+			return nil, errors.New("db Pattern github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *RestrictionDB:
 		if existing, ok := db.restrictionDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
+			return nil, errors.New("db Restriction github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *SchemaDB:
 		if existing, ok := db.schemaDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
+			return nil, errors.New("db Schema github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *SequenceDB:
 		if existing, ok := db.sequenceDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
+			return nil, errors.New("db Sequence github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *SimpleContentDB:
 		if existing, ok := db.simplecontentDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
+			return nil, errors.New("db SimpleContent github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *SimpleTypeDB:
 		if existing, ok := db.simpletypeDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
+			return nil, errors.New("db SimpleType github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *TotalDigitDB:
 		if existing, ok := db.totaldigitDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
+			return nil, errors.New("db TotalDigit github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *UnionDB:
 		if existing, ok := db.unionDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
+			return nil, errors.New("db Union github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	case *WhiteSpaceDB:
 		if existing, ok := db.whitespaceDBs[v.ID]; ok {
 			*existing = *v
 		} else {
-			return nil, errors.New("github.com/fullstack-lang/gongxsd/go, record not found")
+			return nil, errors.New("db WhiteSpace github.com/fullstack-lang/gongxsd/go, record not found")
 		}
 	default:
 		return nil, errors.New("github.com/fullstack-lang/gongxsd/go, unsupported type in Updates")
@@ -662,164 +662,164 @@ func (db *DBLite) Find(instanceDBs any) (db.DBInterface, error) {
 	switch ptr := instanceDBs.(type) {
 	// insertion point find
 	case *[]AllDB:
-        *ptr = make([]AllDB, 0, len(db.allDBs))
-        for _, v := range db.allDBs {
-            *ptr = append(*ptr, *v)
-        }
-        return db, nil
+		*ptr = make([]AllDB, 0, len(db.allDBs))
+		for _, v := range db.allDBs {
+			*ptr = append(*ptr, *v)
+		}
+		return db, nil
 	case *[]AnnotationDB:
-        *ptr = make([]AnnotationDB, 0, len(db.annotationDBs))
-        for _, v := range db.annotationDBs {
-            *ptr = append(*ptr, *v)
-        }
-        return db, nil
+		*ptr = make([]AnnotationDB, 0, len(db.annotationDBs))
+		for _, v := range db.annotationDBs {
+			*ptr = append(*ptr, *v)
+		}
+		return db, nil
 	case *[]AttributeDB:
-        *ptr = make([]AttributeDB, 0, len(db.attributeDBs))
-        for _, v := range db.attributeDBs {
-            *ptr = append(*ptr, *v)
-        }
-        return db, nil
+		*ptr = make([]AttributeDB, 0, len(db.attributeDBs))
+		for _, v := range db.attributeDBs {
+			*ptr = append(*ptr, *v)
+		}
+		return db, nil
 	case *[]AttributeGroupDB:
-        *ptr = make([]AttributeGroupDB, 0, len(db.attributegroupDBs))
-        for _, v := range db.attributegroupDBs {
-            *ptr = append(*ptr, *v)
-        }
-        return db, nil
+		*ptr = make([]AttributeGroupDB, 0, len(db.attributegroupDBs))
+		for _, v := range db.attributegroupDBs {
+			*ptr = append(*ptr, *v)
+		}
+		return db, nil
 	case *[]ChoiceDB:
-        *ptr = make([]ChoiceDB, 0, len(db.choiceDBs))
-        for _, v := range db.choiceDBs {
-            *ptr = append(*ptr, *v)
-        }
-        return db, nil
+		*ptr = make([]ChoiceDB, 0, len(db.choiceDBs))
+		for _, v := range db.choiceDBs {
+			*ptr = append(*ptr, *v)
+		}
+		return db, nil
 	case *[]ComplexContentDB:
-        *ptr = make([]ComplexContentDB, 0, len(db.complexcontentDBs))
-        for _, v := range db.complexcontentDBs {
-            *ptr = append(*ptr, *v)
-        }
-        return db, nil
+		*ptr = make([]ComplexContentDB, 0, len(db.complexcontentDBs))
+		for _, v := range db.complexcontentDBs {
+			*ptr = append(*ptr, *v)
+		}
+		return db, nil
 	case *[]ComplexTypeDB:
-        *ptr = make([]ComplexTypeDB, 0, len(db.complextypeDBs))
-        for _, v := range db.complextypeDBs {
-            *ptr = append(*ptr, *v)
-        }
-        return db, nil
+		*ptr = make([]ComplexTypeDB, 0, len(db.complextypeDBs))
+		for _, v := range db.complextypeDBs {
+			*ptr = append(*ptr, *v)
+		}
+		return db, nil
 	case *[]DocumentationDB:
-        *ptr = make([]DocumentationDB, 0, len(db.documentationDBs))
-        for _, v := range db.documentationDBs {
-            *ptr = append(*ptr, *v)
-        }
-        return db, nil
+		*ptr = make([]DocumentationDB, 0, len(db.documentationDBs))
+		for _, v := range db.documentationDBs {
+			*ptr = append(*ptr, *v)
+		}
+		return db, nil
 	case *[]ElementDB:
-        *ptr = make([]ElementDB, 0, len(db.elementDBs))
-        for _, v := range db.elementDBs {
-            *ptr = append(*ptr, *v)
-        }
-        return db, nil
+		*ptr = make([]ElementDB, 0, len(db.elementDBs))
+		for _, v := range db.elementDBs {
+			*ptr = append(*ptr, *v)
+		}
+		return db, nil
 	case *[]EnumerationDB:
-        *ptr = make([]EnumerationDB, 0, len(db.enumerationDBs))
-        for _, v := range db.enumerationDBs {
-            *ptr = append(*ptr, *v)
-        }
-        return db, nil
+		*ptr = make([]EnumerationDB, 0, len(db.enumerationDBs))
+		for _, v := range db.enumerationDBs {
+			*ptr = append(*ptr, *v)
+		}
+		return db, nil
 	case *[]ExtensionDB:
-        *ptr = make([]ExtensionDB, 0, len(db.extensionDBs))
-        for _, v := range db.extensionDBs {
-            *ptr = append(*ptr, *v)
-        }
-        return db, nil
+		*ptr = make([]ExtensionDB, 0, len(db.extensionDBs))
+		for _, v := range db.extensionDBs {
+			*ptr = append(*ptr, *v)
+		}
+		return db, nil
 	case *[]GroupDB:
-        *ptr = make([]GroupDB, 0, len(db.groupDBs))
-        for _, v := range db.groupDBs {
-            *ptr = append(*ptr, *v)
-        }
-        return db, nil
+		*ptr = make([]GroupDB, 0, len(db.groupDBs))
+		for _, v := range db.groupDBs {
+			*ptr = append(*ptr, *v)
+		}
+		return db, nil
 	case *[]LengthDB:
-        *ptr = make([]LengthDB, 0, len(db.lengthDBs))
-        for _, v := range db.lengthDBs {
-            *ptr = append(*ptr, *v)
-        }
-        return db, nil
+		*ptr = make([]LengthDB, 0, len(db.lengthDBs))
+		for _, v := range db.lengthDBs {
+			*ptr = append(*ptr, *v)
+		}
+		return db, nil
 	case *[]MaxInclusiveDB:
-        *ptr = make([]MaxInclusiveDB, 0, len(db.maxinclusiveDBs))
-        for _, v := range db.maxinclusiveDBs {
-            *ptr = append(*ptr, *v)
-        }
-        return db, nil
+		*ptr = make([]MaxInclusiveDB, 0, len(db.maxinclusiveDBs))
+		for _, v := range db.maxinclusiveDBs {
+			*ptr = append(*ptr, *v)
+		}
+		return db, nil
 	case *[]MaxLengthDB:
-        *ptr = make([]MaxLengthDB, 0, len(db.maxlengthDBs))
-        for _, v := range db.maxlengthDBs {
-            *ptr = append(*ptr, *v)
-        }
-        return db, nil
+		*ptr = make([]MaxLengthDB, 0, len(db.maxlengthDBs))
+		for _, v := range db.maxlengthDBs {
+			*ptr = append(*ptr, *v)
+		}
+		return db, nil
 	case *[]MinInclusiveDB:
-        *ptr = make([]MinInclusiveDB, 0, len(db.mininclusiveDBs))
-        for _, v := range db.mininclusiveDBs {
-            *ptr = append(*ptr, *v)
-        }
-        return db, nil
+		*ptr = make([]MinInclusiveDB, 0, len(db.mininclusiveDBs))
+		for _, v := range db.mininclusiveDBs {
+			*ptr = append(*ptr, *v)
+		}
+		return db, nil
 	case *[]MinLengthDB:
-        *ptr = make([]MinLengthDB, 0, len(db.minlengthDBs))
-        for _, v := range db.minlengthDBs {
-            *ptr = append(*ptr, *v)
-        }
-        return db, nil
+		*ptr = make([]MinLengthDB, 0, len(db.minlengthDBs))
+		for _, v := range db.minlengthDBs {
+			*ptr = append(*ptr, *v)
+		}
+		return db, nil
 	case *[]PatternDB:
-        *ptr = make([]PatternDB, 0, len(db.patternDBs))
-        for _, v := range db.patternDBs {
-            *ptr = append(*ptr, *v)
-        }
-        return db, nil
+		*ptr = make([]PatternDB, 0, len(db.patternDBs))
+		for _, v := range db.patternDBs {
+			*ptr = append(*ptr, *v)
+		}
+		return db, nil
 	case *[]RestrictionDB:
-        *ptr = make([]RestrictionDB, 0, len(db.restrictionDBs))
-        for _, v := range db.restrictionDBs {
-            *ptr = append(*ptr, *v)
-        }
-        return db, nil
+		*ptr = make([]RestrictionDB, 0, len(db.restrictionDBs))
+		for _, v := range db.restrictionDBs {
+			*ptr = append(*ptr, *v)
+		}
+		return db, nil
 	case *[]SchemaDB:
-        *ptr = make([]SchemaDB, 0, len(db.schemaDBs))
-        for _, v := range db.schemaDBs {
-            *ptr = append(*ptr, *v)
-        }
-        return db, nil
+		*ptr = make([]SchemaDB, 0, len(db.schemaDBs))
+		for _, v := range db.schemaDBs {
+			*ptr = append(*ptr, *v)
+		}
+		return db, nil
 	case *[]SequenceDB:
-        *ptr = make([]SequenceDB, 0, len(db.sequenceDBs))
-        for _, v := range db.sequenceDBs {
-            *ptr = append(*ptr, *v)
-        }
-        return db, nil
+		*ptr = make([]SequenceDB, 0, len(db.sequenceDBs))
+		for _, v := range db.sequenceDBs {
+			*ptr = append(*ptr, *v)
+		}
+		return db, nil
 	case *[]SimpleContentDB:
-        *ptr = make([]SimpleContentDB, 0, len(db.simplecontentDBs))
-        for _, v := range db.simplecontentDBs {
-            *ptr = append(*ptr, *v)
-        }
-        return db, nil
+		*ptr = make([]SimpleContentDB, 0, len(db.simplecontentDBs))
+		for _, v := range db.simplecontentDBs {
+			*ptr = append(*ptr, *v)
+		}
+		return db, nil
 	case *[]SimpleTypeDB:
-        *ptr = make([]SimpleTypeDB, 0, len(db.simpletypeDBs))
-        for _, v := range db.simpletypeDBs {
-            *ptr = append(*ptr, *v)
-        }
-        return db, nil
+		*ptr = make([]SimpleTypeDB, 0, len(db.simpletypeDBs))
+		for _, v := range db.simpletypeDBs {
+			*ptr = append(*ptr, *v)
+		}
+		return db, nil
 	case *[]TotalDigitDB:
-        *ptr = make([]TotalDigitDB, 0, len(db.totaldigitDBs))
-        for _, v := range db.totaldigitDBs {
-            *ptr = append(*ptr, *v)
-        }
-        return db, nil
+		*ptr = make([]TotalDigitDB, 0, len(db.totaldigitDBs))
+		for _, v := range db.totaldigitDBs {
+			*ptr = append(*ptr, *v)
+		}
+		return db, nil
 	case *[]UnionDB:
-        *ptr = make([]UnionDB, 0, len(db.unionDBs))
-        for _, v := range db.unionDBs {
-            *ptr = append(*ptr, *v)
-        }
-        return db, nil
+		*ptr = make([]UnionDB, 0, len(db.unionDBs))
+		for _, v := range db.unionDBs {
+			*ptr = append(*ptr, *v)
+		}
+		return db, nil
 	case *[]WhiteSpaceDB:
-        *ptr = make([]WhiteSpaceDB, 0, len(db.whitespaceDBs))
-        for _, v := range db.whitespaceDBs {
-            *ptr = append(*ptr, *v)
-        }
-        return db, nil
-    default:
-        return nil, errors.New("github.com/fullstack-lang/gongxsd/go, Find: unsupported type")
-    }
+		*ptr = make([]WhiteSpaceDB, 0, len(db.whitespaceDBs))
+		for _, v := range db.whitespaceDBs {
+			*ptr = append(*ptr, *v)
+		}
+		return db, nil
+	default:
+		return nil, errors.New("github.com/fullstack-lang/gongxsd/go, Find: unsupported type")
+	}
 }
 
 // First retrieves the first record of a type from the database
@@ -847,211 +847,263 @@ func (db *DBLite) First(instanceDB any, conds ...any) (db.DBInterface, error) {
 	case *AllDB:
 		tmp, ok := db.allDBs[uint(i)]
 
+		if !ok {
+			return nil, errors.New(fmt.Sprintf("db.First All Unkown entry %d", i))
+		}
+
 		allDB, _ := instanceDB.(*AllDB)
 		*allDB = *tmp
-		if !ok {
-			return nil, errors.New(fmt.Sprintf("Unkown entry %d", i))
-		}
+		
 	case *AnnotationDB:
 		tmp, ok := db.annotationDBs[uint(i)]
 
+		if !ok {
+			return nil, errors.New(fmt.Sprintf("db.First Annotation Unkown entry %d", i))
+		}
+
 		annotationDB, _ := instanceDB.(*AnnotationDB)
 		*annotationDB = *tmp
-		if !ok {
-			return nil, errors.New(fmt.Sprintf("Unkown entry %d", i))
-		}
+		
 	case *AttributeDB:
 		tmp, ok := db.attributeDBs[uint(i)]
 
+		if !ok {
+			return nil, errors.New(fmt.Sprintf("db.First Attribute Unkown entry %d", i))
+		}
+
 		attributeDB, _ := instanceDB.(*AttributeDB)
 		*attributeDB = *tmp
-		if !ok {
-			return nil, errors.New(fmt.Sprintf("Unkown entry %d", i))
-		}
+		
 	case *AttributeGroupDB:
 		tmp, ok := db.attributegroupDBs[uint(i)]
 
+		if !ok {
+			return nil, errors.New(fmt.Sprintf("db.First AttributeGroup Unkown entry %d", i))
+		}
+
 		attributegroupDB, _ := instanceDB.(*AttributeGroupDB)
 		*attributegroupDB = *tmp
-		if !ok {
-			return nil, errors.New(fmt.Sprintf("Unkown entry %d", i))
-		}
+		
 	case *ChoiceDB:
 		tmp, ok := db.choiceDBs[uint(i)]
 
+		if !ok {
+			return nil, errors.New(fmt.Sprintf("db.First Choice Unkown entry %d", i))
+		}
+
 		choiceDB, _ := instanceDB.(*ChoiceDB)
 		*choiceDB = *tmp
-		if !ok {
-			return nil, errors.New(fmt.Sprintf("Unkown entry %d", i))
-		}
+		
 	case *ComplexContentDB:
 		tmp, ok := db.complexcontentDBs[uint(i)]
 
+		if !ok {
+			return nil, errors.New(fmt.Sprintf("db.First ComplexContent Unkown entry %d", i))
+		}
+
 		complexcontentDB, _ := instanceDB.(*ComplexContentDB)
 		*complexcontentDB = *tmp
-		if !ok {
-			return nil, errors.New(fmt.Sprintf("Unkown entry %d", i))
-		}
+		
 	case *ComplexTypeDB:
 		tmp, ok := db.complextypeDBs[uint(i)]
 
+		if !ok {
+			return nil, errors.New(fmt.Sprintf("db.First ComplexType Unkown entry %d", i))
+		}
+
 		complextypeDB, _ := instanceDB.(*ComplexTypeDB)
 		*complextypeDB = *tmp
-		if !ok {
-			return nil, errors.New(fmt.Sprintf("Unkown entry %d", i))
-		}
+		
 	case *DocumentationDB:
 		tmp, ok := db.documentationDBs[uint(i)]
 
+		if !ok {
+			return nil, errors.New(fmt.Sprintf("db.First Documentation Unkown entry %d", i))
+		}
+
 		documentationDB, _ := instanceDB.(*DocumentationDB)
 		*documentationDB = *tmp
-		if !ok {
-			return nil, errors.New(fmt.Sprintf("Unkown entry %d", i))
-		}
+		
 	case *ElementDB:
 		tmp, ok := db.elementDBs[uint(i)]
 
+		if !ok {
+			return nil, errors.New(fmt.Sprintf("db.First Element Unkown entry %d", i))
+		}
+
 		elementDB, _ := instanceDB.(*ElementDB)
 		*elementDB = *tmp
-		if !ok {
-			return nil, errors.New(fmt.Sprintf("Unkown entry %d", i))
-		}
+		
 	case *EnumerationDB:
 		tmp, ok := db.enumerationDBs[uint(i)]
 
+		if !ok {
+			return nil, errors.New(fmt.Sprintf("db.First Enumeration Unkown entry %d", i))
+		}
+
 		enumerationDB, _ := instanceDB.(*EnumerationDB)
 		*enumerationDB = *tmp
-		if !ok {
-			return nil, errors.New(fmt.Sprintf("Unkown entry %d", i))
-		}
+		
 	case *ExtensionDB:
 		tmp, ok := db.extensionDBs[uint(i)]
 
+		if !ok {
+			return nil, errors.New(fmt.Sprintf("db.First Extension Unkown entry %d", i))
+		}
+
 		extensionDB, _ := instanceDB.(*ExtensionDB)
 		*extensionDB = *tmp
-		if !ok {
-			return nil, errors.New(fmt.Sprintf("Unkown entry %d", i))
-		}
+		
 	case *GroupDB:
 		tmp, ok := db.groupDBs[uint(i)]
 
+		if !ok {
+			return nil, errors.New(fmt.Sprintf("db.First Group Unkown entry %d", i))
+		}
+
 		groupDB, _ := instanceDB.(*GroupDB)
 		*groupDB = *tmp
-		if !ok {
-			return nil, errors.New(fmt.Sprintf("Unkown entry %d", i))
-		}
+		
 	case *LengthDB:
 		tmp, ok := db.lengthDBs[uint(i)]
 
+		if !ok {
+			return nil, errors.New(fmt.Sprintf("db.First Length Unkown entry %d", i))
+		}
+
 		lengthDB, _ := instanceDB.(*LengthDB)
 		*lengthDB = *tmp
-		if !ok {
-			return nil, errors.New(fmt.Sprintf("Unkown entry %d", i))
-		}
+		
 	case *MaxInclusiveDB:
 		tmp, ok := db.maxinclusiveDBs[uint(i)]
 
+		if !ok {
+			return nil, errors.New(fmt.Sprintf("db.First MaxInclusive Unkown entry %d", i))
+		}
+
 		maxinclusiveDB, _ := instanceDB.(*MaxInclusiveDB)
 		*maxinclusiveDB = *tmp
-		if !ok {
-			return nil, errors.New(fmt.Sprintf("Unkown entry %d", i))
-		}
+		
 	case *MaxLengthDB:
 		tmp, ok := db.maxlengthDBs[uint(i)]
 
+		if !ok {
+			return nil, errors.New(fmt.Sprintf("db.First MaxLength Unkown entry %d", i))
+		}
+
 		maxlengthDB, _ := instanceDB.(*MaxLengthDB)
 		*maxlengthDB = *tmp
-		if !ok {
-			return nil, errors.New(fmt.Sprintf("Unkown entry %d", i))
-		}
+		
 	case *MinInclusiveDB:
 		tmp, ok := db.mininclusiveDBs[uint(i)]
 
+		if !ok {
+			return nil, errors.New(fmt.Sprintf("db.First MinInclusive Unkown entry %d", i))
+		}
+
 		mininclusiveDB, _ := instanceDB.(*MinInclusiveDB)
 		*mininclusiveDB = *tmp
-		if !ok {
-			return nil, errors.New(fmt.Sprintf("Unkown entry %d", i))
-		}
+		
 	case *MinLengthDB:
 		tmp, ok := db.minlengthDBs[uint(i)]
 
+		if !ok {
+			return nil, errors.New(fmt.Sprintf("db.First MinLength Unkown entry %d", i))
+		}
+
 		minlengthDB, _ := instanceDB.(*MinLengthDB)
 		*minlengthDB = *tmp
-		if !ok {
-			return nil, errors.New(fmt.Sprintf("Unkown entry %d", i))
-		}
+		
 	case *PatternDB:
 		tmp, ok := db.patternDBs[uint(i)]
 
+		if !ok {
+			return nil, errors.New(fmt.Sprintf("db.First Pattern Unkown entry %d", i))
+		}
+
 		patternDB, _ := instanceDB.(*PatternDB)
 		*patternDB = *tmp
-		if !ok {
-			return nil, errors.New(fmt.Sprintf("Unkown entry %d", i))
-		}
+		
 	case *RestrictionDB:
 		tmp, ok := db.restrictionDBs[uint(i)]
 
+		if !ok {
+			return nil, errors.New(fmt.Sprintf("db.First Restriction Unkown entry %d", i))
+		}
+
 		restrictionDB, _ := instanceDB.(*RestrictionDB)
 		*restrictionDB = *tmp
-		if !ok {
-			return nil, errors.New(fmt.Sprintf("Unkown entry %d", i))
-		}
+		
 	case *SchemaDB:
 		tmp, ok := db.schemaDBs[uint(i)]
 
+		if !ok {
+			return nil, errors.New(fmt.Sprintf("db.First Schema Unkown entry %d", i))
+		}
+
 		schemaDB, _ := instanceDB.(*SchemaDB)
 		*schemaDB = *tmp
-		if !ok {
-			return nil, errors.New(fmt.Sprintf("Unkown entry %d", i))
-		}
+		
 	case *SequenceDB:
 		tmp, ok := db.sequenceDBs[uint(i)]
 
+		if !ok {
+			return nil, errors.New(fmt.Sprintf("db.First Sequence Unkown entry %d", i))
+		}
+
 		sequenceDB, _ := instanceDB.(*SequenceDB)
 		*sequenceDB = *tmp
-		if !ok {
-			return nil, errors.New(fmt.Sprintf("Unkown entry %d", i))
-		}
+		
 	case *SimpleContentDB:
 		tmp, ok := db.simplecontentDBs[uint(i)]
 
+		if !ok {
+			return nil, errors.New(fmt.Sprintf("db.First SimpleContent Unkown entry %d", i))
+		}
+
 		simplecontentDB, _ := instanceDB.(*SimpleContentDB)
 		*simplecontentDB = *tmp
-		if !ok {
-			return nil, errors.New(fmt.Sprintf("Unkown entry %d", i))
-		}
+		
 	case *SimpleTypeDB:
 		tmp, ok := db.simpletypeDBs[uint(i)]
 
+		if !ok {
+			return nil, errors.New(fmt.Sprintf("db.First SimpleType Unkown entry %d", i))
+		}
+
 		simpletypeDB, _ := instanceDB.(*SimpleTypeDB)
 		*simpletypeDB = *tmp
-		if !ok {
-			return nil, errors.New(fmt.Sprintf("Unkown entry %d", i))
-		}
+		
 	case *TotalDigitDB:
 		tmp, ok := db.totaldigitDBs[uint(i)]
 
+		if !ok {
+			return nil, errors.New(fmt.Sprintf("db.First TotalDigit Unkown entry %d", i))
+		}
+
 		totaldigitDB, _ := instanceDB.(*TotalDigitDB)
 		*totaldigitDB = *tmp
-		if !ok {
-			return nil, errors.New(fmt.Sprintf("Unkown entry %d", i))
-		}
+		
 	case *UnionDB:
 		tmp, ok := db.unionDBs[uint(i)]
 
+		if !ok {
+			return nil, errors.New(fmt.Sprintf("db.First Union Unkown entry %d", i))
+		}
+
 		unionDB, _ := instanceDB.(*UnionDB)
 		*unionDB = *tmp
-		if !ok {
-			return nil, errors.New(fmt.Sprintf("Unkown entry %d", i))
-		}
+		
 	case *WhiteSpaceDB:
 		tmp, ok := db.whitespaceDBs[uint(i)]
 
+		if !ok {
+			return nil, errors.New(fmt.Sprintf("db.First WhiteSpace Unkown entry %d", i))
+		}
+
 		whitespaceDB, _ := instanceDB.(*WhiteSpaceDB)
 		*whitespaceDB = *tmp
-		if !ok {
-			return nil, errors.New(fmt.Sprintf("Unkown entry %d", i))
-		}
+		
 	default:
 		return nil, errors.New("github.com/fullstack-lang/gongxsd/go, Unkown type")
 	}
