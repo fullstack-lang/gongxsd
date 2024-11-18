@@ -348,11 +348,25 @@ func (backRepoUnion *BackRepoUnionStruct) CheckoutPhaseTwoInstance(backRepo *Bac
 func (unionDB *UnionDB) DecodePointers(backRepo *BackRepoStruct, union *models.Union) {
 
 	// insertion point for checkout of pointer encoding
-	// Annotation field
-	union.Annotation = nil
-	if unionDB.AnnotationID.Int64 != 0 {
-		union.Annotation = backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(unionDB.AnnotationID.Int64)]
+	// Annotation field	
+	{
+		id := unionDB.AnnotationID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(id)]
+
+			if !ok {
+				log.Fatalln("DecodePointers: union.Annotation, unknown pointer id", id)
+			}
+
+			// updates only if field has changed
+			if union.Annotation == nil || union.Annotation != tmp {
+				union.Annotation = tmp
+			}
+		} else {
+			union.Annotation = nil
+		}
 	}
+	
 	return
 }
 

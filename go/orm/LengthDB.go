@@ -348,11 +348,25 @@ func (backRepoLength *BackRepoLengthStruct) CheckoutPhaseTwoInstance(backRepo *B
 func (lengthDB *LengthDB) DecodePointers(backRepo *BackRepoStruct, length *models.Length) {
 
 	// insertion point for checkout of pointer encoding
-	// Annotation field
-	length.Annotation = nil
-	if lengthDB.AnnotationID.Int64 != 0 {
-		length.Annotation = backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(lengthDB.AnnotationID.Int64)]
+	// Annotation field	
+	{
+		id := lengthDB.AnnotationID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(id)]
+
+			if !ok {
+				log.Fatalln("DecodePointers: length.Annotation, unknown pointer id", id)
+			}
+
+			// updates only if field has changed
+			if length.Annotation == nil || length.Annotation != tmp {
+				length.Annotation = tmp
+			}
+		} else {
+			length.Annotation = nil
+		}
 	}
+	
 	return
 }
 

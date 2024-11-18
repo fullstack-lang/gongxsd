@@ -616,16 +616,44 @@ func (backRepoComplexType *BackRepoComplexTypeStruct) CheckoutPhaseTwoInstance(b
 func (complextypeDB *ComplexTypeDB) DecodePointers(backRepo *BackRepoStruct, complextype *models.ComplexType) {
 
 	// insertion point for checkout of pointer encoding
-	// OuterElement field
-	complextype.OuterElement = nil
-	if complextypeDB.OuterElementID.Int64 != 0 {
-		complextype.OuterElement = backRepo.BackRepoElement.Map_ElementDBID_ElementPtr[uint(complextypeDB.OuterElementID.Int64)]
+	// OuterElement field	
+	{
+		id := complextypeDB.OuterElementID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoElement.Map_ElementDBID_ElementPtr[uint(id)]
+
+			if !ok {
+				log.Fatalln("DecodePointers: complextype.OuterElement, unknown pointer id", id)
+			}
+
+			// updates only if field has changed
+			if complextype.OuterElement == nil || complextype.OuterElement != tmp {
+				complextype.OuterElement = tmp
+			}
+		} else {
+			complextype.OuterElement = nil
+		}
 	}
-	// Annotation field
-	complextype.Annotation = nil
-	if complextypeDB.AnnotationID.Int64 != 0 {
-		complextype.Annotation = backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(complextypeDB.AnnotationID.Int64)]
+	
+	// Annotation field	
+	{
+		id := complextypeDB.AnnotationID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(id)]
+
+			if !ok {
+				log.Fatalln("DecodePointers: complextype.Annotation, unknown pointer id", id)
+			}
+
+			// updates only if field has changed
+			if complextype.Annotation == nil || complextype.Annotation != tmp {
+				complextype.Annotation = tmp
+			}
+		} else {
+			complextype.Annotation = nil
+		}
 	}
+	
 	// This loop redeem complextype.Sequences in the stage from the encode in the back repo
 	// It parses all SequenceDB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance
@@ -671,21 +699,63 @@ func (complextypeDB *ComplexTypeDB) DecodePointers(backRepo *BackRepoStruct, com
 		complextype.Elements = append(complextype.Elements, backRepo.BackRepoElement.Map_ElementDBID_ElementPtr[uint(_Elementid)])
 	}
 
-	// Extension field
-	complextype.Extension = nil
-	if complextypeDB.ExtensionID.Int64 != 0 {
-		complextype.Extension = backRepo.BackRepoExtension.Map_ExtensionDBID_ExtensionPtr[uint(complextypeDB.ExtensionID.Int64)]
+	// Extension field	
+	{
+		id := complextypeDB.ExtensionID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoExtension.Map_ExtensionDBID_ExtensionPtr[uint(id)]
+
+			if !ok {
+				log.Fatalln("DecodePointers: complextype.Extension, unknown pointer id", id)
+			}
+
+			// updates only if field has changed
+			if complextype.Extension == nil || complextype.Extension != tmp {
+				complextype.Extension = tmp
+			}
+		} else {
+			complextype.Extension = nil
+		}
 	}
-	// SimpleContent field
-	complextype.SimpleContent = nil
-	if complextypeDB.SimpleContentID.Int64 != 0 {
-		complextype.SimpleContent = backRepo.BackRepoSimpleContent.Map_SimpleContentDBID_SimpleContentPtr[uint(complextypeDB.SimpleContentID.Int64)]
+	
+	// SimpleContent field	
+	{
+		id := complextypeDB.SimpleContentID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoSimpleContent.Map_SimpleContentDBID_SimpleContentPtr[uint(id)]
+
+			if !ok {
+				log.Fatalln("DecodePointers: complextype.SimpleContent, unknown pointer id", id)
+			}
+
+			// updates only if field has changed
+			if complextype.SimpleContent == nil || complextype.SimpleContent != tmp {
+				complextype.SimpleContent = tmp
+			}
+		} else {
+			complextype.SimpleContent = nil
+		}
 	}
-	// ComplexContent field
-	complextype.ComplexContent = nil
-	if complextypeDB.ComplexContentID.Int64 != 0 {
-		complextype.ComplexContent = backRepo.BackRepoComplexContent.Map_ComplexContentDBID_ComplexContentPtr[uint(complextypeDB.ComplexContentID.Int64)]
+	
+	// ComplexContent field	
+	{
+		id := complextypeDB.ComplexContentID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoComplexContent.Map_ComplexContentDBID_ComplexContentPtr[uint(id)]
+
+			if !ok {
+				log.Fatalln("DecodePointers: complextype.ComplexContent, unknown pointer id", id)
+			}
+
+			// updates only if field has changed
+			if complextype.ComplexContent == nil || complextype.ComplexContent != tmp {
+				complextype.ComplexContent = tmp
+			}
+		} else {
+			complextype.ComplexContent = nil
+		}
 	}
+	
 	// This loop redeem complextype.Attributes in the stage from the encode in the back repo
 	// It parses all AttributeDB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance

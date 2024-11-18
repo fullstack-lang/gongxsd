@@ -465,11 +465,25 @@ func (backRepoSchema *BackRepoSchemaStruct) CheckoutPhaseTwoInstance(backRepo *B
 func (schemaDB *SchemaDB) DecodePointers(backRepo *BackRepoStruct, schema *models.Schema) {
 
 	// insertion point for checkout of pointer encoding
-	// Annotation field
-	schema.Annotation = nil
-	if schemaDB.AnnotationID.Int64 != 0 {
-		schema.Annotation = backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(schemaDB.AnnotationID.Int64)]
+	// Annotation field	
+	{
+		id := schemaDB.AnnotationID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(id)]
+
+			if !ok {
+				log.Fatalln("DecodePointers: schema.Annotation, unknown pointer id", id)
+			}
+
+			// updates only if field has changed
+			if schema.Annotation == nil || schema.Annotation != tmp {
+				schema.Annotation = tmp
+			}
+		} else {
+			schema.Annotation = nil
+		}
 	}
+	
 	// This loop redeem schema.Elements in the stage from the encode in the back repo
 	// It parses all ElementDB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance

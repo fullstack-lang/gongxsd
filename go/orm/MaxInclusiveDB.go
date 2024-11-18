@@ -348,11 +348,25 @@ func (backRepoMaxInclusive *BackRepoMaxInclusiveStruct) CheckoutPhaseTwoInstance
 func (maxinclusiveDB *MaxInclusiveDB) DecodePointers(backRepo *BackRepoStruct, maxinclusive *models.MaxInclusive) {
 
 	// insertion point for checkout of pointer encoding
-	// Annotation field
-	maxinclusive.Annotation = nil
-	if maxinclusiveDB.AnnotationID.Int64 != 0 {
-		maxinclusive.Annotation = backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(maxinclusiveDB.AnnotationID.Int64)]
+	// Annotation field	
+	{
+		id := maxinclusiveDB.AnnotationID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(id)]
+
+			if !ok {
+				log.Fatalln("DecodePointers: maxinclusive.Annotation, unknown pointer id", id)
+			}
+
+			// updates only if field has changed
+			if maxinclusive.Annotation == nil || maxinclusive.Annotation != tmp {
+				maxinclusive.Annotation = tmp
+			}
+		} else {
+			maxinclusive.Annotation = nil
+		}
 	}
+	
 	return
 }
 

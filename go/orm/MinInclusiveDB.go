@@ -348,11 +348,25 @@ func (backRepoMinInclusive *BackRepoMinInclusiveStruct) CheckoutPhaseTwoInstance
 func (mininclusiveDB *MinInclusiveDB) DecodePointers(backRepo *BackRepoStruct, mininclusive *models.MinInclusive) {
 
 	// insertion point for checkout of pointer encoding
-	// Annotation field
-	mininclusive.Annotation = nil
-	if mininclusiveDB.AnnotationID.Int64 != 0 {
-		mininclusive.Annotation = backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(mininclusiveDB.AnnotationID.Int64)]
+	// Annotation field	
+	{
+		id := mininclusiveDB.AnnotationID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(id)]
+
+			if !ok {
+				log.Fatalln("DecodePointers: mininclusive.Annotation, unknown pointer id", id)
+			}
+
+			// updates only if field has changed
+			if mininclusive.Annotation == nil || mininclusive.Annotation != tmp {
+				mininclusive.Annotation = tmp
+			}
+		} else {
+			mininclusive.Annotation = nil
+		}
 	}
+	
 	return
 }
 

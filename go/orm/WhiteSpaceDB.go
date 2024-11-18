@@ -348,11 +348,25 @@ func (backRepoWhiteSpace *BackRepoWhiteSpaceStruct) CheckoutPhaseTwoInstance(bac
 func (whitespaceDB *WhiteSpaceDB) DecodePointers(backRepo *BackRepoStruct, whitespace *models.WhiteSpace) {
 
 	// insertion point for checkout of pointer encoding
-	// Annotation field
-	whitespace.Annotation = nil
-	if whitespaceDB.AnnotationID.Int64 != 0 {
-		whitespace.Annotation = backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(whitespaceDB.AnnotationID.Int64)]
+	// Annotation field	
+	{
+		id := whitespaceDB.AnnotationID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(id)]
+
+			if !ok {
+				log.Fatalln("DecodePointers: whitespace.Annotation, unknown pointer id", id)
+			}
+
+			// updates only if field has changed
+			if whitespace.Annotation == nil || whitespace.Annotation != tmp {
+				whitespace.Annotation = tmp
+			}
+		} else {
+			whitespace.Annotation = nil
+		}
 	}
+	
 	return
 }
 

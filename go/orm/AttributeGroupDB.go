@@ -421,11 +421,25 @@ func (backRepoAttributeGroup *BackRepoAttributeGroupStruct) CheckoutPhaseTwoInst
 func (attributegroupDB *AttributeGroupDB) DecodePointers(backRepo *BackRepoStruct, attributegroup *models.AttributeGroup) {
 
 	// insertion point for checkout of pointer encoding
-	// Annotation field
-	attributegroup.Annotation = nil
-	if attributegroupDB.AnnotationID.Int64 != 0 {
-		attributegroup.Annotation = backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(attributegroupDB.AnnotationID.Int64)]
+	// Annotation field	
+	{
+		id := attributegroupDB.AnnotationID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(id)]
+
+			if !ok {
+				log.Fatalln("DecodePointers: attributegroup.Annotation, unknown pointer id", id)
+			}
+
+			// updates only if field has changed
+			if attributegroup.Annotation == nil || attributegroup.Annotation != tmp {
+				attributegroup.Annotation = tmp
+			}
+		} else {
+			attributegroup.Annotation = nil
+		}
 	}
+	
 	// This loop redeem attributegroup.AttributeGroups in the stage from the encode in the back repo
 	// It parses all AttributeGroupDB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance

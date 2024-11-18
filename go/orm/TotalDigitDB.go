@@ -348,11 +348,25 @@ func (backRepoTotalDigit *BackRepoTotalDigitStruct) CheckoutPhaseTwoInstance(bac
 func (totaldigitDB *TotalDigitDB) DecodePointers(backRepo *BackRepoStruct, totaldigit *models.TotalDigit) {
 
 	// insertion point for checkout of pointer encoding
-	// Annotation field
-	totaldigit.Annotation = nil
-	if totaldigitDB.AnnotationID.Int64 != 0 {
-		totaldigit.Annotation = backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(totaldigitDB.AnnotationID.Int64)]
+	// Annotation field	
+	{
+		id := totaldigitDB.AnnotationID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(id)]
+
+			if !ok {
+				log.Fatalln("DecodePointers: totaldigit.Annotation, unknown pointer id", id)
+			}
+
+			// updates only if field has changed
+			if totaldigit.Annotation == nil || totaldigit.Annotation != tmp {
+				totaldigit.Annotation = tmp
+			}
+		} else {
+			totaldigit.Annotation = nil
+		}
 	}
+	
 	return
 }
 

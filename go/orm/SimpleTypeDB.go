@@ -392,21 +392,63 @@ func (backRepoSimpleType *BackRepoSimpleTypeStruct) CheckoutPhaseTwoInstance(bac
 func (simpletypeDB *SimpleTypeDB) DecodePointers(backRepo *BackRepoStruct, simpletype *models.SimpleType) {
 
 	// insertion point for checkout of pointer encoding
-	// Annotation field
-	simpletype.Annotation = nil
-	if simpletypeDB.AnnotationID.Int64 != 0 {
-		simpletype.Annotation = backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(simpletypeDB.AnnotationID.Int64)]
+	// Annotation field	
+	{
+		id := simpletypeDB.AnnotationID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(id)]
+
+			if !ok {
+				log.Fatalln("DecodePointers: simpletype.Annotation, unknown pointer id", id)
+			}
+
+			// updates only if field has changed
+			if simpletype.Annotation == nil || simpletype.Annotation != tmp {
+				simpletype.Annotation = tmp
+			}
+		} else {
+			simpletype.Annotation = nil
+		}
 	}
-	// Restriction field
-	simpletype.Restriction = nil
-	if simpletypeDB.RestrictionID.Int64 != 0 {
-		simpletype.Restriction = backRepo.BackRepoRestriction.Map_RestrictionDBID_RestrictionPtr[uint(simpletypeDB.RestrictionID.Int64)]
+	
+	// Restriction field	
+	{
+		id := simpletypeDB.RestrictionID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoRestriction.Map_RestrictionDBID_RestrictionPtr[uint(id)]
+
+			if !ok {
+				log.Fatalln("DecodePointers: simpletype.Restriction, unknown pointer id", id)
+			}
+
+			// updates only if field has changed
+			if simpletype.Restriction == nil || simpletype.Restriction != tmp {
+				simpletype.Restriction = tmp
+			}
+		} else {
+			simpletype.Restriction = nil
+		}
 	}
-	// Union field
-	simpletype.Union = nil
-	if simpletypeDB.UnionID.Int64 != 0 {
-		simpletype.Union = backRepo.BackRepoUnion.Map_UnionDBID_UnionPtr[uint(simpletypeDB.UnionID.Int64)]
+	
+	// Union field	
+	{
+		id := simpletypeDB.UnionID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoUnion.Map_UnionDBID_UnionPtr[uint(id)]
+
+			if !ok {
+				log.Fatalln("DecodePointers: simpletype.Union, unknown pointer id", id)
+			}
+
+			// updates only if field has changed
+			if simpletype.Union == nil || simpletype.Union != tmp {
+				simpletype.Union = tmp
+			}
+		} else {
+			simpletype.Union = nil
+		}
 	}
+	
 	return
 }
 

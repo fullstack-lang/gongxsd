@@ -484,11 +484,25 @@ func (backRepoChoice *BackRepoChoiceStruct) CheckoutPhaseTwoInstance(backRepo *B
 func (choiceDB *ChoiceDB) DecodePointers(backRepo *BackRepoStruct, choice *models.Choice) {
 
 	// insertion point for checkout of pointer encoding
-	// Annotation field
-	choice.Annotation = nil
-	if choiceDB.AnnotationID.Int64 != 0 {
-		choice.Annotation = backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(choiceDB.AnnotationID.Int64)]
+	// Annotation field	
+	{
+		id := choiceDB.AnnotationID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(id)]
+
+			if !ok {
+				log.Fatalln("DecodePointers: choice.Annotation, unknown pointer id", id)
+			}
+
+			// updates only if field has changed
+			if choice.Annotation == nil || choice.Annotation != tmp {
+				choice.Annotation = tmp
+			}
+		} else {
+			choice.Annotation = nil
+		}
 	}
+	
 	// This loop redeem choice.Sequences in the stage from the encode in the back repo
 	// It parses all SequenceDB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance

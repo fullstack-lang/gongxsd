@@ -415,11 +415,25 @@ func (backRepoAttribute *BackRepoAttributeStruct) CheckoutPhaseTwoInstance(backR
 func (attributeDB *AttributeDB) DecodePointers(backRepo *BackRepoStruct, attribute *models.Attribute) {
 
 	// insertion point for checkout of pointer encoding
-	// Annotation field
-	attribute.Annotation = nil
-	if attributeDB.AnnotationID.Int64 != 0 {
-		attribute.Annotation = backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(attributeDB.AnnotationID.Int64)]
+	// Annotation field	
+	{
+		id := attributeDB.AnnotationID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(id)]
+
+			if !ok {
+				log.Fatalln("DecodePointers: attribute.Annotation, unknown pointer id", id)
+			}
+
+			// updates only if field has changed
+			if attribute.Annotation == nil || attribute.Annotation != tmp {
+				attribute.Annotation = tmp
+			}
+		} else {
+			attribute.Annotation = nil
+		}
 	}
+	
 	return
 }
 

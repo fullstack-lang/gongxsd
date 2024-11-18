@@ -348,11 +348,25 @@ func (backRepoMaxLength *BackRepoMaxLengthStruct) CheckoutPhaseTwoInstance(backR
 func (maxlengthDB *MaxLengthDB) DecodePointers(backRepo *BackRepoStruct, maxlength *models.MaxLength) {
 
 	// insertion point for checkout of pointer encoding
-	// Annotation field
-	maxlength.Annotation = nil
-	if maxlengthDB.AnnotationID.Int64 != 0 {
-		maxlength.Annotation = backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(maxlengthDB.AnnotationID.Int64)]
+	// Annotation field	
+	{
+		id := maxlengthDB.AnnotationID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(id)]
+
+			if !ok {
+				log.Fatalln("DecodePointers: maxlength.Annotation, unknown pointer id", id)
+			}
+
+			// updates only if field has changed
+			if maxlength.Annotation == nil || maxlength.Annotation != tmp {
+				maxlength.Annotation = tmp
+			}
+		} else {
+			maxlength.Annotation = nil
+		}
 	}
+	
 	return
 }
 

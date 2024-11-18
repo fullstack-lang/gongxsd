@@ -497,11 +497,25 @@ func (backRepoRestriction *BackRepoRestrictionStruct) CheckoutPhaseTwoInstance(b
 func (restrictionDB *RestrictionDB) DecodePointers(backRepo *BackRepoStruct, restriction *models.Restriction) {
 
 	// insertion point for checkout of pointer encoding
-	// Annotation field
-	restriction.Annotation = nil
-	if restrictionDB.AnnotationID.Int64 != 0 {
-		restriction.Annotation = backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(restrictionDB.AnnotationID.Int64)]
+	// Annotation field	
+	{
+		id := restrictionDB.AnnotationID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(id)]
+
+			if !ok {
+				log.Fatalln("DecodePointers: restriction.Annotation, unknown pointer id", id)
+			}
+
+			// updates only if field has changed
+			if restriction.Annotation == nil || restriction.Annotation != tmp {
+				restriction.Annotation = tmp
+			}
+		} else {
+			restriction.Annotation = nil
+		}
 	}
+	
 	// This loop redeem restriction.Enumerations in the stage from the encode in the back repo
 	// It parses all EnumerationDB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance
@@ -511,46 +525,158 @@ func (restrictionDB *RestrictionDB) DecodePointers(backRepo *BackRepoStruct, res
 		restriction.Enumerations = append(restriction.Enumerations, backRepo.BackRepoEnumeration.Map_EnumerationDBID_EnumerationPtr[uint(_Enumerationid)])
 	}
 
-	// MinInclusive field
-	restriction.MinInclusive = nil
-	if restrictionDB.MinInclusiveID.Int64 != 0 {
-		restriction.MinInclusive = backRepo.BackRepoMinInclusive.Map_MinInclusiveDBID_MinInclusivePtr[uint(restrictionDB.MinInclusiveID.Int64)]
+	// MinInclusive field	
+	{
+		id := restrictionDB.MinInclusiveID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoMinInclusive.Map_MinInclusiveDBID_MinInclusivePtr[uint(id)]
+
+			if !ok {
+				log.Fatalln("DecodePointers: restriction.MinInclusive, unknown pointer id", id)
+			}
+
+			// updates only if field has changed
+			if restriction.MinInclusive == nil || restriction.MinInclusive != tmp {
+				restriction.MinInclusive = tmp
+			}
+		} else {
+			restriction.MinInclusive = nil
+		}
 	}
-	// MaxInclusive field
-	restriction.MaxInclusive = nil
-	if restrictionDB.MaxInclusiveID.Int64 != 0 {
-		restriction.MaxInclusive = backRepo.BackRepoMaxInclusive.Map_MaxInclusiveDBID_MaxInclusivePtr[uint(restrictionDB.MaxInclusiveID.Int64)]
+	
+	// MaxInclusive field	
+	{
+		id := restrictionDB.MaxInclusiveID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoMaxInclusive.Map_MaxInclusiveDBID_MaxInclusivePtr[uint(id)]
+
+			if !ok {
+				log.Fatalln("DecodePointers: restriction.MaxInclusive, unknown pointer id", id)
+			}
+
+			// updates only if field has changed
+			if restriction.MaxInclusive == nil || restriction.MaxInclusive != tmp {
+				restriction.MaxInclusive = tmp
+			}
+		} else {
+			restriction.MaxInclusive = nil
+		}
 	}
-	// Pattern field
-	restriction.Pattern = nil
-	if restrictionDB.PatternID.Int64 != 0 {
-		restriction.Pattern = backRepo.BackRepoPattern.Map_PatternDBID_PatternPtr[uint(restrictionDB.PatternID.Int64)]
+	
+	// Pattern field	
+	{
+		id := restrictionDB.PatternID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoPattern.Map_PatternDBID_PatternPtr[uint(id)]
+
+			if !ok {
+				log.Fatalln("DecodePointers: restriction.Pattern, unknown pointer id", id)
+			}
+
+			// updates only if field has changed
+			if restriction.Pattern == nil || restriction.Pattern != tmp {
+				restriction.Pattern = tmp
+			}
+		} else {
+			restriction.Pattern = nil
+		}
 	}
-	// WhiteSpace field
-	restriction.WhiteSpace = nil
-	if restrictionDB.WhiteSpaceID.Int64 != 0 {
-		restriction.WhiteSpace = backRepo.BackRepoWhiteSpace.Map_WhiteSpaceDBID_WhiteSpacePtr[uint(restrictionDB.WhiteSpaceID.Int64)]
+	
+	// WhiteSpace field	
+	{
+		id := restrictionDB.WhiteSpaceID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoWhiteSpace.Map_WhiteSpaceDBID_WhiteSpacePtr[uint(id)]
+
+			if !ok {
+				log.Fatalln("DecodePointers: restriction.WhiteSpace, unknown pointer id", id)
+			}
+
+			// updates only if field has changed
+			if restriction.WhiteSpace == nil || restriction.WhiteSpace != tmp {
+				restriction.WhiteSpace = tmp
+			}
+		} else {
+			restriction.WhiteSpace = nil
+		}
 	}
-	// MinLength field
-	restriction.MinLength = nil
-	if restrictionDB.MinLengthID.Int64 != 0 {
-		restriction.MinLength = backRepo.BackRepoMinLength.Map_MinLengthDBID_MinLengthPtr[uint(restrictionDB.MinLengthID.Int64)]
+	
+	// MinLength field	
+	{
+		id := restrictionDB.MinLengthID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoMinLength.Map_MinLengthDBID_MinLengthPtr[uint(id)]
+
+			if !ok {
+				log.Fatalln("DecodePointers: restriction.MinLength, unknown pointer id", id)
+			}
+
+			// updates only if field has changed
+			if restriction.MinLength == nil || restriction.MinLength != tmp {
+				restriction.MinLength = tmp
+			}
+		} else {
+			restriction.MinLength = nil
+		}
 	}
-	// MaxLength field
-	restriction.MaxLength = nil
-	if restrictionDB.MaxLengthID.Int64 != 0 {
-		restriction.MaxLength = backRepo.BackRepoMaxLength.Map_MaxLengthDBID_MaxLengthPtr[uint(restrictionDB.MaxLengthID.Int64)]
+	
+	// MaxLength field	
+	{
+		id := restrictionDB.MaxLengthID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoMaxLength.Map_MaxLengthDBID_MaxLengthPtr[uint(id)]
+
+			if !ok {
+				log.Fatalln("DecodePointers: restriction.MaxLength, unknown pointer id", id)
+			}
+
+			// updates only if field has changed
+			if restriction.MaxLength == nil || restriction.MaxLength != tmp {
+				restriction.MaxLength = tmp
+			}
+		} else {
+			restriction.MaxLength = nil
+		}
 	}
-	// Length field
-	restriction.Length = nil
-	if restrictionDB.LengthID.Int64 != 0 {
-		restriction.Length = backRepo.BackRepoLength.Map_LengthDBID_LengthPtr[uint(restrictionDB.LengthID.Int64)]
+	
+	// Length field	
+	{
+		id := restrictionDB.LengthID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoLength.Map_LengthDBID_LengthPtr[uint(id)]
+
+			if !ok {
+				log.Fatalln("DecodePointers: restriction.Length, unknown pointer id", id)
+			}
+
+			// updates only if field has changed
+			if restriction.Length == nil || restriction.Length != tmp {
+				restriction.Length = tmp
+			}
+		} else {
+			restriction.Length = nil
+		}
 	}
-	// TotalDigit field
-	restriction.TotalDigit = nil
-	if restrictionDB.TotalDigitID.Int64 != 0 {
-		restriction.TotalDigit = backRepo.BackRepoTotalDigit.Map_TotalDigitDBID_TotalDigitPtr[uint(restrictionDB.TotalDigitID.Int64)]
+	
+	// TotalDigit field	
+	{
+		id := restrictionDB.TotalDigitID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoTotalDigit.Map_TotalDigitDBID_TotalDigitPtr[uint(id)]
+
+			if !ok {
+				log.Fatalln("DecodePointers: restriction.TotalDigit, unknown pointer id", id)
+			}
+
+			// updates only if field has changed
+			if restriction.TotalDigit == nil || restriction.TotalDigit != tmp {
+				restriction.TotalDigit = tmp
+			}
+		} else {
+			restriction.TotalDigit = nil
+		}
 	}
+	
 	return
 }
 

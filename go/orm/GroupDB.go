@@ -525,16 +525,44 @@ func (backRepoGroup *BackRepoGroupStruct) CheckoutPhaseTwoInstance(backRepo *Bac
 func (groupDB *GroupDB) DecodePointers(backRepo *BackRepoStruct, group *models.Group) {
 
 	// insertion point for checkout of pointer encoding
-	// Annotation field
-	group.Annotation = nil
-	if groupDB.AnnotationID.Int64 != 0 {
-		group.Annotation = backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(groupDB.AnnotationID.Int64)]
+	// Annotation field	
+	{
+		id := groupDB.AnnotationID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(id)]
+
+			if !ok {
+				log.Fatalln("DecodePointers: group.Annotation, unknown pointer id", id)
+			}
+
+			// updates only if field has changed
+			if group.Annotation == nil || group.Annotation != tmp {
+				group.Annotation = tmp
+			}
+		} else {
+			group.Annotation = nil
+		}
 	}
-	// OuterElement field
-	group.OuterElement = nil
-	if groupDB.OuterElementID.Int64 != 0 {
-		group.OuterElement = backRepo.BackRepoElement.Map_ElementDBID_ElementPtr[uint(groupDB.OuterElementID.Int64)]
+	
+	// OuterElement field	
+	{
+		id := groupDB.OuterElementID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoElement.Map_ElementDBID_ElementPtr[uint(id)]
+
+			if !ok {
+				log.Fatalln("DecodePointers: group.OuterElement, unknown pointer id", id)
+			}
+
+			// updates only if field has changed
+			if group.OuterElement == nil || group.OuterElement != tmp {
+				group.OuterElement = tmp
+			}
+		} else {
+			group.OuterElement = nil
+		}
 	}
+	
 	// This loop redeem group.Sequences in the stage from the encode in the back repo
 	// It parses all SequenceDB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance

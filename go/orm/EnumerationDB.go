@@ -348,11 +348,25 @@ func (backRepoEnumeration *BackRepoEnumerationStruct) CheckoutPhaseTwoInstance(b
 func (enumerationDB *EnumerationDB) DecodePointers(backRepo *BackRepoStruct, enumeration *models.Enumeration) {
 
 	// insertion point for checkout of pointer encoding
-	// Annotation field
-	enumeration.Annotation = nil
-	if enumerationDB.AnnotationID.Int64 != 0 {
-		enumeration.Annotation = backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(enumerationDB.AnnotationID.Int64)]
+	// Annotation field	
+	{
+		id := enumerationDB.AnnotationID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(id)]
+
+			if !ok {
+				log.Fatalln("DecodePointers: enumeration.Annotation, unknown pointer id", id)
+			}
+
+			// updates only if field has changed
+			if enumeration.Annotation == nil || enumeration.Annotation != tmp {
+				enumeration.Annotation = tmp
+			}
+		} else {
+			enumeration.Annotation = nil
+		}
 	}
+	
 	return
 }
 

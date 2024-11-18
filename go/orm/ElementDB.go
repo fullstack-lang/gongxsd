@@ -499,21 +499,63 @@ func (backRepoElement *BackRepoElementStruct) CheckoutPhaseTwoInstance(backRepo 
 func (elementDB *ElementDB) DecodePointers(backRepo *BackRepoStruct, element *models.Element) {
 
 	// insertion point for checkout of pointer encoding
-	// Annotation field
-	element.Annotation = nil
-	if elementDB.AnnotationID.Int64 != 0 {
-		element.Annotation = backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(elementDB.AnnotationID.Int64)]
+	// Annotation field	
+	{
+		id := elementDB.AnnotationID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(id)]
+
+			if !ok {
+				log.Fatalln("DecodePointers: element.Annotation, unknown pointer id", id)
+			}
+
+			// updates only if field has changed
+			if element.Annotation == nil || element.Annotation != tmp {
+				element.Annotation = tmp
+			}
+		} else {
+			element.Annotation = nil
+		}
 	}
-	// SimpleType field
-	element.SimpleType = nil
-	if elementDB.SimpleTypeID.Int64 != 0 {
-		element.SimpleType = backRepo.BackRepoSimpleType.Map_SimpleTypeDBID_SimpleTypePtr[uint(elementDB.SimpleTypeID.Int64)]
+	
+	// SimpleType field	
+	{
+		id := elementDB.SimpleTypeID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoSimpleType.Map_SimpleTypeDBID_SimpleTypePtr[uint(id)]
+
+			if !ok {
+				log.Fatalln("DecodePointers: element.SimpleType, unknown pointer id", id)
+			}
+
+			// updates only if field has changed
+			if element.SimpleType == nil || element.SimpleType != tmp {
+				element.SimpleType = tmp
+			}
+		} else {
+			element.SimpleType = nil
+		}
 	}
-	// ComplexType field
-	element.ComplexType = nil
-	if elementDB.ComplexTypeID.Int64 != 0 {
-		element.ComplexType = backRepo.BackRepoComplexType.Map_ComplexTypeDBID_ComplexTypePtr[uint(elementDB.ComplexTypeID.Int64)]
+	
+	// ComplexType field	
+	{
+		id := elementDB.ComplexTypeID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoComplexType.Map_ComplexTypeDBID_ComplexTypePtr[uint(id)]
+
+			if !ok {
+				log.Fatalln("DecodePointers: element.ComplexType, unknown pointer id", id)
+			}
+
+			// updates only if field has changed
+			if element.ComplexType == nil || element.ComplexType != tmp {
+				element.ComplexType = tmp
+			}
+		} else {
+			element.ComplexType = nil
+		}
 	}
+	
 	// This loop redeem element.Groups in the stage from the encode in the back repo
 	// It parses all GroupDB in the back repo and if the reverse pointer encoding matches the back repo ID
 	// it appends the stage instance

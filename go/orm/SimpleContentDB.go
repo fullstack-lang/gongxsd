@@ -358,16 +358,44 @@ func (backRepoSimpleContent *BackRepoSimpleContentStruct) CheckoutPhaseTwoInstan
 func (simplecontentDB *SimpleContentDB) DecodePointers(backRepo *BackRepoStruct, simplecontent *models.SimpleContent) {
 
 	// insertion point for checkout of pointer encoding
-	// Extension field
-	simplecontent.Extension = nil
-	if simplecontentDB.ExtensionID.Int64 != 0 {
-		simplecontent.Extension = backRepo.BackRepoExtension.Map_ExtensionDBID_ExtensionPtr[uint(simplecontentDB.ExtensionID.Int64)]
+	// Extension field	
+	{
+		id := simplecontentDB.ExtensionID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoExtension.Map_ExtensionDBID_ExtensionPtr[uint(id)]
+
+			if !ok {
+				log.Fatalln("DecodePointers: simplecontent.Extension, unknown pointer id", id)
+			}
+
+			// updates only if field has changed
+			if simplecontent.Extension == nil || simplecontent.Extension != tmp {
+				simplecontent.Extension = tmp
+			}
+		} else {
+			simplecontent.Extension = nil
+		}
 	}
-	// Restriction field
-	simplecontent.Restriction = nil
-	if simplecontentDB.RestrictionID.Int64 != 0 {
-		simplecontent.Restriction = backRepo.BackRepoRestriction.Map_RestrictionDBID_RestrictionPtr[uint(simplecontentDB.RestrictionID.Int64)]
+	
+	// Restriction field	
+	{
+		id := simplecontentDB.RestrictionID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoRestriction.Map_RestrictionDBID_RestrictionPtr[uint(id)]
+
+			if !ok {
+				log.Fatalln("DecodePointers: simplecontent.Restriction, unknown pointer id", id)
+			}
+
+			// updates only if field has changed
+			if simplecontent.Restriction == nil || simplecontent.Restriction != tmp {
+				simplecontent.Restriction = tmp
+			}
+		} else {
+			simplecontent.Restriction = nil
+		}
 	}
+	
 	return
 }
 
