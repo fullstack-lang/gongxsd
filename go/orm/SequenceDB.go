@@ -483,13 +483,15 @@ func (sequenceDB *SequenceDB) DecodePointers(backRepo *BackRepoStruct, sequence 
 		if id != 0 {
 			tmp, ok := backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(id)]
 
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
 			if !ok {
-				log.Fatalln("DecodePointers: sequence.Annotation, unknown pointer id", id)
-			}
-
-			// updates only if field has changed
-			if sequence.Annotation == nil || sequence.Annotation != tmp {
-				sequence.Annotation = tmp
+				log.Println("DecodePointers: sequence.Annotation, unknown pointer id", id)
+				sequence.Annotation = nil
+			} else {
+				// updates only if field has changed
+				if sequence.Annotation == nil || sequence.Annotation != tmp {
+					sequence.Annotation = tmp
+				}
 			}
 		} else {
 			sequence.Annotation = nil

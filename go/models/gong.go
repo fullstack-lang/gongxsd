@@ -4719,7 +4719,40 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 	return
 }
 
-func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fieldName string) (res string) {
+type GongFieldValueType string
+
+const (
+	GongFieldValueTypeInt     GongFieldValueType = "GongFieldValueTypeInt"
+	GongFieldValueTypeFloat   GongFieldValueType = "GongFieldValueTypeFloat"
+	GongFieldValueTypeBool    GongFieldValueType = "GongFieldValueTypeBool"
+	GongFieldValueTypeOthers  GongFieldValueType = "GongFieldValueTypeOthers"
+)
+
+type GongFieldValue struct {
+	valueString string
+	GongFieldValueType
+	valueInt   int
+	valueFloat float64
+	valueBool  bool
+}
+
+func (gongValueField *GongFieldValue) GetValueString() string {
+	return gongValueField.valueString
+}
+
+func (gongValueField *GongFieldValue) GetValueInt() int {
+	return gongValueField.valueInt
+}
+	
+func (gongValueField *GongFieldValue) GetValueFloat() float64 {
+	return gongValueField.valueFloat
+}
+	
+func (gongValueField *GongFieldValue) GetValueBool() bool {
+	return gongValueField.valueBool
+}
+
+func GetFieldStringValueFromPointer(instance any, fieldName string) (res GongFieldValue) {
 
 	switch inferedInstance := any(instance).(type) {
 	// insertion point for generic get gongstruct field value
@@ -4727,814 +4760,874 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
-				res = inferedInstance.Annotation.Name
+				res.valueString = inferedInstance.Annotation.Name
 			}
 		case "OuterElementName":
-			res = inferedInstance.OuterElementName
+			res.valueString = inferedInstance.OuterElementName
 		case "Sequences":
 			for idx, __instance__ := range inferedInstance.Sequences {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Alls":
 			for idx, __instance__ := range inferedInstance.Alls {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Choices":
 			for idx, __instance__ := range inferedInstance.Choices {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Groups":
 			for idx, __instance__ := range inferedInstance.Groups {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Elements":
 			for idx, __instance__ := range inferedInstance.Elements {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Order":
-			res = fmt.Sprintf("%d", inferedInstance.Order)
+			res.valueString = fmt.Sprintf("%d", inferedInstance.Order)
+			res.valueInt = inferedInstance.Order
+			res.GongFieldValueType = GongFieldValueTypeInt
 		case "Depth":
-			res = fmt.Sprintf("%d", inferedInstance.Depth)
+			res.valueString = fmt.Sprintf("%d", inferedInstance.Depth)
+			res.valueInt = inferedInstance.Depth
+			res.GongFieldValueType = GongFieldValueTypeInt
 		case "MinOccurs":
-			res = inferedInstance.MinOccurs
+			res.valueString = inferedInstance.MinOccurs
 		case "MaxOccurs":
-			res = inferedInstance.MaxOccurs
+			res.valueString = inferedInstance.MaxOccurs
 		}
 	case *Annotation:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "Documentations":
 			for idx, __instance__ := range inferedInstance.Documentations {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		}
 	case *Attribute:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "NameXSD":
-			res = inferedInstance.NameXSD
+			res.valueString = inferedInstance.NameXSD
 		case "Type":
-			res = inferedInstance.Type
+			res.valueString = inferedInstance.Type
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
-				res = inferedInstance.Annotation.Name
+				res.valueString = inferedInstance.Annotation.Name
 			}
 		case "HasNameConflict":
-			res = fmt.Sprintf("%t", inferedInstance.HasNameConflict)
+			res.valueString = fmt.Sprintf("%t", inferedInstance.HasNameConflict)
+			res.valueBool = inferedInstance.HasNameConflict
+			res.GongFieldValueType = GongFieldValueTypeBool
 		case "GoIdentifier":
-			res = inferedInstance.GoIdentifier
+			res.valueString = inferedInstance.GoIdentifier
 		case "Default":
-			res = inferedInstance.Default
+			res.valueString = inferedInstance.Default
 		case "Use":
-			res = inferedInstance.Use
+			res.valueString = inferedInstance.Use
 		case "Form":
-			res = inferedInstance.Form
+			res.valueString = inferedInstance.Form
 		case "Fixed":
-			res = inferedInstance.Fixed
+			res.valueString = inferedInstance.Fixed
 		case "Ref":
-			res = inferedInstance.Ref
+			res.valueString = inferedInstance.Ref
 		case "TargetNamespace":
-			res = inferedInstance.TargetNamespace
+			res.valueString = inferedInstance.TargetNamespace
 		case "SimpleType":
-			res = inferedInstance.SimpleType
+			res.valueString = inferedInstance.SimpleType
 		case "IDXSD":
-			res = inferedInstance.IDXSD
+			res.valueString = inferedInstance.IDXSD
 		}
 	case *AttributeGroup:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "NameXSD":
-			res = inferedInstance.NameXSD
+			res.valueString = inferedInstance.NameXSD
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
-				res = inferedInstance.Annotation.Name
+				res.valueString = inferedInstance.Annotation.Name
 			}
 		case "HasNameConflict":
-			res = fmt.Sprintf("%t", inferedInstance.HasNameConflict)
+			res.valueString = fmt.Sprintf("%t", inferedInstance.HasNameConflict)
+			res.valueBool = inferedInstance.HasNameConflict
+			res.GongFieldValueType = GongFieldValueTypeBool
 		case "GoIdentifier":
-			res = inferedInstance.GoIdentifier
+			res.valueString = inferedInstance.GoIdentifier
 		case "AttributeGroups":
 			for idx, __instance__ := range inferedInstance.AttributeGroups {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Ref":
-			res = inferedInstance.Ref
+			res.valueString = inferedInstance.Ref
 		case "Attributes":
 			for idx, __instance__ := range inferedInstance.Attributes {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Order":
-			res = fmt.Sprintf("%d", inferedInstance.Order)
+			res.valueString = fmt.Sprintf("%d", inferedInstance.Order)
+			res.valueInt = inferedInstance.Order
+			res.GongFieldValueType = GongFieldValueTypeInt
 		case "Depth":
-			res = fmt.Sprintf("%d", inferedInstance.Depth)
+			res.valueString = fmt.Sprintf("%d", inferedInstance.Depth)
+			res.valueInt = inferedInstance.Depth
+			res.GongFieldValueType = GongFieldValueTypeInt
 		}
 	case *Choice:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
-				res = inferedInstance.Annotation.Name
+				res.valueString = inferedInstance.Annotation.Name
 			}
 		case "OuterElementName":
-			res = inferedInstance.OuterElementName
+			res.valueString = inferedInstance.OuterElementName
 		case "Sequences":
 			for idx, __instance__ := range inferedInstance.Sequences {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Alls":
 			for idx, __instance__ := range inferedInstance.Alls {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Choices":
 			for idx, __instance__ := range inferedInstance.Choices {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Groups":
 			for idx, __instance__ := range inferedInstance.Groups {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Elements":
 			for idx, __instance__ := range inferedInstance.Elements {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Order":
-			res = fmt.Sprintf("%d", inferedInstance.Order)
+			res.valueString = fmt.Sprintf("%d", inferedInstance.Order)
+			res.valueInt = inferedInstance.Order
+			res.GongFieldValueType = GongFieldValueTypeInt
 		case "Depth":
-			res = fmt.Sprintf("%d", inferedInstance.Depth)
+			res.valueString = fmt.Sprintf("%d", inferedInstance.Depth)
+			res.valueInt = inferedInstance.Depth
+			res.GongFieldValueType = GongFieldValueTypeInt
 		case "MinOccurs":
-			res = inferedInstance.MinOccurs
+			res.valueString = inferedInstance.MinOccurs
 		case "MaxOccurs":
-			res = inferedInstance.MaxOccurs
+			res.valueString = inferedInstance.MaxOccurs
 		case "IsDuplicatedInXSD":
-			res = fmt.Sprintf("%t", inferedInstance.IsDuplicatedInXSD)
+			res.valueString = fmt.Sprintf("%t", inferedInstance.IsDuplicatedInXSD)
+			res.valueBool = inferedInstance.IsDuplicatedInXSD
+			res.GongFieldValueType = GongFieldValueTypeBool
 		}
 	case *ComplexContent:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		}
 	case *ComplexType:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "HasNameConflict":
-			res = fmt.Sprintf("%t", inferedInstance.HasNameConflict)
+			res.valueString = fmt.Sprintf("%t", inferedInstance.HasNameConflict)
+			res.valueBool = inferedInstance.HasNameConflict
+			res.GongFieldValueType = GongFieldValueTypeBool
 		case "GoIdentifier":
-			res = inferedInstance.GoIdentifier
+			res.valueString = inferedInstance.GoIdentifier
 		case "IsAnonymous":
-			res = fmt.Sprintf("%t", inferedInstance.IsAnonymous)
+			res.valueString = fmt.Sprintf("%t", inferedInstance.IsAnonymous)
+			res.valueBool = inferedInstance.IsAnonymous
+			res.GongFieldValueType = GongFieldValueTypeBool
 		case "OuterElement":
 			if inferedInstance.OuterElement != nil {
-				res = inferedInstance.OuterElement.Name
+				res.valueString = inferedInstance.OuterElement.Name
 			}
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
-				res = inferedInstance.Annotation.Name
+				res.valueString = inferedInstance.Annotation.Name
 			}
 		case "NameXSD":
-			res = inferedInstance.NameXSD
+			res.valueString = inferedInstance.NameXSD
 		case "OuterElementName":
-			res = inferedInstance.OuterElementName
+			res.valueString = inferedInstance.OuterElementName
 		case "Sequences":
 			for idx, __instance__ := range inferedInstance.Sequences {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Alls":
 			for idx, __instance__ := range inferedInstance.Alls {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Choices":
 			for idx, __instance__ := range inferedInstance.Choices {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Groups":
 			for idx, __instance__ := range inferedInstance.Groups {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Elements":
 			for idx, __instance__ := range inferedInstance.Elements {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Order":
-			res = fmt.Sprintf("%d", inferedInstance.Order)
+			res.valueString = fmt.Sprintf("%d", inferedInstance.Order)
+			res.valueInt = inferedInstance.Order
+			res.GongFieldValueType = GongFieldValueTypeInt
 		case "Depth":
-			res = fmt.Sprintf("%d", inferedInstance.Depth)
+			res.valueString = fmt.Sprintf("%d", inferedInstance.Depth)
+			res.valueInt = inferedInstance.Depth
+			res.GongFieldValueType = GongFieldValueTypeInt
 		case "MinOccurs":
-			res = inferedInstance.MinOccurs
+			res.valueString = inferedInstance.MinOccurs
 		case "MaxOccurs":
-			res = inferedInstance.MaxOccurs
+			res.valueString = inferedInstance.MaxOccurs
 		case "Extension":
 			if inferedInstance.Extension != nil {
-				res = inferedInstance.Extension.Name
+				res.valueString = inferedInstance.Extension.Name
 			}
 		case "SimpleContent":
 			if inferedInstance.SimpleContent != nil {
-				res = inferedInstance.SimpleContent.Name
+				res.valueString = inferedInstance.SimpleContent.Name
 			}
 		case "ComplexContent":
 			if inferedInstance.ComplexContent != nil {
-				res = inferedInstance.ComplexContent.Name
+				res.valueString = inferedInstance.ComplexContent.Name
 			}
 		case "Attributes":
 			for idx, __instance__ := range inferedInstance.Attributes {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "AttributeGroups":
 			for idx, __instance__ := range inferedInstance.AttributeGroups {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "IsDuplicatedInXSD":
-			res = fmt.Sprintf("%t", inferedInstance.IsDuplicatedInXSD)
+			res.valueString = fmt.Sprintf("%t", inferedInstance.IsDuplicatedInXSD)
+			res.valueBool = inferedInstance.IsDuplicatedInXSD
+			res.GongFieldValueType = GongFieldValueTypeBool
 		}
 	case *Documentation:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "Text":
-			res = inferedInstance.Text
+			res.valueString = inferedInstance.Text
 		case "Source":
-			res = inferedInstance.Source
+			res.valueString = inferedInstance.Source
 		case "Lang":
-			res = inferedInstance.Lang
+			res.valueString = inferedInstance.Lang
 		}
 	case *Element:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "Order":
-			res = fmt.Sprintf("%d", inferedInstance.Order)
+			res.valueString = fmt.Sprintf("%d", inferedInstance.Order)
+			res.valueInt = inferedInstance.Order
+			res.GongFieldValueType = GongFieldValueTypeInt
 		case "Depth":
-			res = fmt.Sprintf("%d", inferedInstance.Depth)
+			res.valueString = fmt.Sprintf("%d", inferedInstance.Depth)
+			res.valueInt = inferedInstance.Depth
+			res.GongFieldValueType = GongFieldValueTypeInt
 		case "HasNameConflict":
-			res = fmt.Sprintf("%t", inferedInstance.HasNameConflict)
+			res.valueString = fmt.Sprintf("%t", inferedInstance.HasNameConflict)
+			res.valueBool = inferedInstance.HasNameConflict
+			res.GongFieldValueType = GongFieldValueTypeBool
 		case "GoIdentifier":
-			res = inferedInstance.GoIdentifier
+			res.valueString = inferedInstance.GoIdentifier
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
-				res = inferedInstance.Annotation.Name
+				res.valueString = inferedInstance.Annotation.Name
 			}
 		case "NameXSD":
-			res = inferedInstance.NameXSD
+			res.valueString = inferedInstance.NameXSD
 		case "Type":
-			res = inferedInstance.Type
+			res.valueString = inferedInstance.Type
 		case "MinOccurs":
-			res = inferedInstance.MinOccurs
+			res.valueString = inferedInstance.MinOccurs
 		case "MaxOccurs":
-			res = inferedInstance.MaxOccurs
+			res.valueString = inferedInstance.MaxOccurs
 		case "Default":
-			res = inferedInstance.Default
+			res.valueString = inferedInstance.Default
 		case "Fixed":
-			res = inferedInstance.Fixed
+			res.valueString = inferedInstance.Fixed
 		case "Nillable":
-			res = inferedInstance.Nillable
+			res.valueString = inferedInstance.Nillable
 		case "Ref":
-			res = inferedInstance.Ref
+			res.valueString = inferedInstance.Ref
 		case "Abstract":
-			res = inferedInstance.Abstract
+			res.valueString = inferedInstance.Abstract
 		case "Form":
-			res = inferedInstance.Form
+			res.valueString = inferedInstance.Form
 		case "Block":
-			res = inferedInstance.Block
+			res.valueString = inferedInstance.Block
 		case "Final":
-			res = inferedInstance.Final
+			res.valueString = inferedInstance.Final
 		case "SimpleType":
 			if inferedInstance.SimpleType != nil {
-				res = inferedInstance.SimpleType.Name
+				res.valueString = inferedInstance.SimpleType.Name
 			}
 		case "ComplexType":
 			if inferedInstance.ComplexType != nil {
-				res = inferedInstance.ComplexType.Name
+				res.valueString = inferedInstance.ComplexType.Name
 			}
 		case "Groups":
 			for idx, __instance__ := range inferedInstance.Groups {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "IsDuplicatedInXSD":
-			res = fmt.Sprintf("%t", inferedInstance.IsDuplicatedInXSD)
+			res.valueString = fmt.Sprintf("%t", inferedInstance.IsDuplicatedInXSD)
+			res.valueBool = inferedInstance.IsDuplicatedInXSD
+			res.GongFieldValueType = GongFieldValueTypeBool
 		}
 	case *Enumeration:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
-				res = inferedInstance.Annotation.Name
+				res.valueString = inferedInstance.Annotation.Name
 			}
 		case "Value":
-			res = inferedInstance.Value
+			res.valueString = inferedInstance.Value
 		}
 	case *Extension:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "OuterElementName":
-			res = inferedInstance.OuterElementName
+			res.valueString = inferedInstance.OuterElementName
 		case "Sequences":
 			for idx, __instance__ := range inferedInstance.Sequences {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Alls":
 			for idx, __instance__ := range inferedInstance.Alls {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Choices":
 			for idx, __instance__ := range inferedInstance.Choices {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Groups":
 			for idx, __instance__ := range inferedInstance.Groups {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Elements":
 			for idx, __instance__ := range inferedInstance.Elements {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Order":
-			res = fmt.Sprintf("%d", inferedInstance.Order)
+			res.valueString = fmt.Sprintf("%d", inferedInstance.Order)
+			res.valueInt = inferedInstance.Order
+			res.GongFieldValueType = GongFieldValueTypeInt
 		case "Depth":
-			res = fmt.Sprintf("%d", inferedInstance.Depth)
+			res.valueString = fmt.Sprintf("%d", inferedInstance.Depth)
+			res.valueInt = inferedInstance.Depth
+			res.GongFieldValueType = GongFieldValueTypeInt
 		case "MinOccurs":
-			res = inferedInstance.MinOccurs
+			res.valueString = inferedInstance.MinOccurs
 		case "MaxOccurs":
-			res = inferedInstance.MaxOccurs
+			res.valueString = inferedInstance.MaxOccurs
 		case "Base":
-			res = inferedInstance.Base
+			res.valueString = inferedInstance.Base
 		case "Ref":
-			res = inferedInstance.Ref
+			res.valueString = inferedInstance.Ref
 		case "Attributes":
 			for idx, __instance__ := range inferedInstance.Attributes {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		}
 	case *Group:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
-				res = inferedInstance.Annotation.Name
+				res.valueString = inferedInstance.Annotation.Name
 			}
 		case "NameXSD":
-			res = inferedInstance.NameXSD
+			res.valueString = inferedInstance.NameXSD
 		case "Ref":
-			res = inferedInstance.Ref
+			res.valueString = inferedInstance.Ref
 		case "IsAnonymous":
-			res = fmt.Sprintf("%t", inferedInstance.IsAnonymous)
+			res.valueString = fmt.Sprintf("%t", inferedInstance.IsAnonymous)
+			res.valueBool = inferedInstance.IsAnonymous
+			res.GongFieldValueType = GongFieldValueTypeBool
 		case "OuterElement":
 			if inferedInstance.OuterElement != nil {
-				res = inferedInstance.OuterElement.Name
+				res.valueString = inferedInstance.OuterElement.Name
 			}
 		case "HasNameConflict":
-			res = fmt.Sprintf("%t", inferedInstance.HasNameConflict)
+			res.valueString = fmt.Sprintf("%t", inferedInstance.HasNameConflict)
+			res.valueBool = inferedInstance.HasNameConflict
+			res.GongFieldValueType = GongFieldValueTypeBool
 		case "GoIdentifier":
-			res = inferedInstance.GoIdentifier
+			res.valueString = inferedInstance.GoIdentifier
 		case "OuterElementName":
-			res = inferedInstance.OuterElementName
+			res.valueString = inferedInstance.OuterElementName
 		case "Sequences":
 			for idx, __instance__ := range inferedInstance.Sequences {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Alls":
 			for idx, __instance__ := range inferedInstance.Alls {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Choices":
 			for idx, __instance__ := range inferedInstance.Choices {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Groups":
 			for idx, __instance__ := range inferedInstance.Groups {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Elements":
 			for idx, __instance__ := range inferedInstance.Elements {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Order":
-			res = fmt.Sprintf("%d", inferedInstance.Order)
+			res.valueString = fmt.Sprintf("%d", inferedInstance.Order)
+			res.valueInt = inferedInstance.Order
+			res.GongFieldValueType = GongFieldValueTypeInt
 		case "Depth":
-			res = fmt.Sprintf("%d", inferedInstance.Depth)
+			res.valueString = fmt.Sprintf("%d", inferedInstance.Depth)
+			res.valueInt = inferedInstance.Depth
+			res.GongFieldValueType = GongFieldValueTypeInt
 		case "MinOccurs":
-			res = inferedInstance.MinOccurs
+			res.valueString = inferedInstance.MinOccurs
 		case "MaxOccurs":
-			res = inferedInstance.MaxOccurs
+			res.valueString = inferedInstance.MaxOccurs
 		}
 	case *Length:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
-				res = inferedInstance.Annotation.Name
+				res.valueString = inferedInstance.Annotation.Name
 			}
 		case "Value":
-			res = inferedInstance.Value
+			res.valueString = inferedInstance.Value
 		}
 	case *MaxInclusive:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
-				res = inferedInstance.Annotation.Name
+				res.valueString = inferedInstance.Annotation.Name
 			}
 		case "Value":
-			res = inferedInstance.Value
+			res.valueString = inferedInstance.Value
 		}
 	case *MaxLength:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
-				res = inferedInstance.Annotation.Name
+				res.valueString = inferedInstance.Annotation.Name
 			}
 		case "Value":
-			res = inferedInstance.Value
+			res.valueString = inferedInstance.Value
 		}
 	case *MinInclusive:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
-				res = inferedInstance.Annotation.Name
+				res.valueString = inferedInstance.Annotation.Name
 			}
 		case "Value":
-			res = inferedInstance.Value
+			res.valueString = inferedInstance.Value
 		}
 	case *MinLength:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
-				res = inferedInstance.Annotation.Name
+				res.valueString = inferedInstance.Annotation.Name
 			}
 		case "Value":
-			res = inferedInstance.Value
+			res.valueString = inferedInstance.Value
 		}
 	case *Pattern:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
-				res = inferedInstance.Annotation.Name
+				res.valueString = inferedInstance.Annotation.Name
 			}
 		case "Value":
-			res = inferedInstance.Value
+			res.valueString = inferedInstance.Value
 		}
 	case *Restriction:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
-				res = inferedInstance.Annotation.Name
+				res.valueString = inferedInstance.Annotation.Name
 			}
 		case "Base":
-			res = inferedInstance.Base
+			res.valueString = inferedInstance.Base
 		case "Enumerations":
 			for idx, __instance__ := range inferedInstance.Enumerations {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "MinInclusive":
 			if inferedInstance.MinInclusive != nil {
-				res = inferedInstance.MinInclusive.Name
+				res.valueString = inferedInstance.MinInclusive.Name
 			}
 		case "MaxInclusive":
 			if inferedInstance.MaxInclusive != nil {
-				res = inferedInstance.MaxInclusive.Name
+				res.valueString = inferedInstance.MaxInclusive.Name
 			}
 		case "Pattern":
 			if inferedInstance.Pattern != nil {
-				res = inferedInstance.Pattern.Name
+				res.valueString = inferedInstance.Pattern.Name
 			}
 		case "WhiteSpace":
 			if inferedInstance.WhiteSpace != nil {
-				res = inferedInstance.WhiteSpace.Name
+				res.valueString = inferedInstance.WhiteSpace.Name
 			}
 		case "MinLength":
 			if inferedInstance.MinLength != nil {
-				res = inferedInstance.MinLength.Name
+				res.valueString = inferedInstance.MinLength.Name
 			}
 		case "MaxLength":
 			if inferedInstance.MaxLength != nil {
-				res = inferedInstance.MaxLength.Name
+				res.valueString = inferedInstance.MaxLength.Name
 			}
 		case "Length":
 			if inferedInstance.Length != nil {
-				res = inferedInstance.Length.Name
+				res.valueString = inferedInstance.Length.Name
 			}
 		case "TotalDigit":
 			if inferedInstance.TotalDigit != nil {
-				res = inferedInstance.TotalDigit.Name
+				res.valueString = inferedInstance.TotalDigit.Name
 			}
 		}
 	case *Schema:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "Xs":
-			res = inferedInstance.Xs
+			res.valueString = inferedInstance.Xs
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
-				res = inferedInstance.Annotation.Name
+				res.valueString = inferedInstance.Annotation.Name
 			}
 		case "Elements":
 			for idx, __instance__ := range inferedInstance.Elements {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "SimpleTypes":
 			for idx, __instance__ := range inferedInstance.SimpleTypes {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "ComplexTypes":
 			for idx, __instance__ := range inferedInstance.ComplexTypes {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "AttributeGroups":
 			for idx, __instance__ := range inferedInstance.AttributeGroups {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Groups":
 			for idx, __instance__ := range inferedInstance.Groups {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Order":
-			res = fmt.Sprintf("%d", inferedInstance.Order)
+			res.valueString = fmt.Sprintf("%d", inferedInstance.Order)
+			res.valueInt = inferedInstance.Order
+			res.GongFieldValueType = GongFieldValueTypeInt
 		case "Depth":
-			res = fmt.Sprintf("%d", inferedInstance.Depth)
+			res.valueString = fmt.Sprintf("%d", inferedInstance.Depth)
+			res.valueInt = inferedInstance.Depth
+			res.GongFieldValueType = GongFieldValueTypeInt
 		}
 	case *Sequence:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
-				res = inferedInstance.Annotation.Name
+				res.valueString = inferedInstance.Annotation.Name
 			}
 		case "OuterElementName":
-			res = inferedInstance.OuterElementName
+			res.valueString = inferedInstance.OuterElementName
 		case "Sequences":
 			for idx, __instance__ := range inferedInstance.Sequences {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Alls":
 			for idx, __instance__ := range inferedInstance.Alls {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Choices":
 			for idx, __instance__ := range inferedInstance.Choices {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Groups":
 			for idx, __instance__ := range inferedInstance.Groups {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Elements":
 			for idx, __instance__ := range inferedInstance.Elements {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Order":
-			res = fmt.Sprintf("%d", inferedInstance.Order)
+			res.valueString = fmt.Sprintf("%d", inferedInstance.Order)
+			res.valueInt = inferedInstance.Order
+			res.GongFieldValueType = GongFieldValueTypeInt
 		case "Depth":
-			res = fmt.Sprintf("%d", inferedInstance.Depth)
+			res.valueString = fmt.Sprintf("%d", inferedInstance.Depth)
+			res.valueInt = inferedInstance.Depth
+			res.GongFieldValueType = GongFieldValueTypeInt
 		case "MinOccurs":
-			res = inferedInstance.MinOccurs
+			res.valueString = inferedInstance.MinOccurs
 		case "MaxOccurs":
-			res = inferedInstance.MaxOccurs
+			res.valueString = inferedInstance.MaxOccurs
 		}
 	case *SimpleContent:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "Extension":
 			if inferedInstance.Extension != nil {
-				res = inferedInstance.Extension.Name
+				res.valueString = inferedInstance.Extension.Name
 			}
 		case "Restriction":
 			if inferedInstance.Restriction != nil {
-				res = inferedInstance.Restriction.Name
+				res.valueString = inferedInstance.Restriction.Name
 			}
 		}
 	case *SimpleType:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
-				res = inferedInstance.Annotation.Name
+				res.valueString = inferedInstance.Annotation.Name
 			}
 		case "NameXSD":
-			res = inferedInstance.NameXSD
+			res.valueString = inferedInstance.NameXSD
 		case "Restriction":
 			if inferedInstance.Restriction != nil {
-				res = inferedInstance.Restriction.Name
+				res.valueString = inferedInstance.Restriction.Name
 			}
 		case "Union":
 			if inferedInstance.Union != nil {
-				res = inferedInstance.Union.Name
+				res.valueString = inferedInstance.Union.Name
 			}
 		case "Order":
-			res = fmt.Sprintf("%d", inferedInstance.Order)
+			res.valueString = fmt.Sprintf("%d", inferedInstance.Order)
+			res.valueInt = inferedInstance.Order
+			res.GongFieldValueType = GongFieldValueTypeInt
 		case "Depth":
-			res = fmt.Sprintf("%d", inferedInstance.Depth)
+			res.valueString = fmt.Sprintf("%d", inferedInstance.Depth)
+			res.valueInt = inferedInstance.Depth
+			res.GongFieldValueType = GongFieldValueTypeInt
 		}
 	case *TotalDigit:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
-				res = inferedInstance.Annotation.Name
+				res.valueString = inferedInstance.Annotation.Name
 			}
 		case "Value":
-			res = inferedInstance.Value
+			res.valueString = inferedInstance.Value
 		}
 	case *Union:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
-				res = inferedInstance.Annotation.Name
+				res.valueString = inferedInstance.Annotation.Name
 			}
 		case "MemberTypes":
-			res = inferedInstance.MemberTypes
+			res.valueString = inferedInstance.MemberTypes
 		}
 	case *WhiteSpace:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
-				res = inferedInstance.Annotation.Name
+				res.valueString = inferedInstance.Annotation.Name
 			}
 		case "Value":
-			res = inferedInstance.Value
+			res.valueString = inferedInstance.Value
 		}
 	default:
 		_ = inferedInstance
@@ -5542,7 +5635,7 @@ func GetFieldStringValueFromPointer[Type PointerToGongstruct](instance Type, fie
 	return
 }
 
-func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res string) {
+func GetFieldStringValue(instance any, fieldName string) (res GongFieldValue) {
 
 	switch inferedInstance := any(instance).(type) {
 	// insertion point for generic get gongstruct field value
@@ -5550,814 +5643,874 @@ func GetFieldStringValue[Type Gongstruct](instance Type, fieldName string) (res 
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
-				res = inferedInstance.Annotation.Name
+				res.valueString = inferedInstance.Annotation.Name
 			}
 		case "OuterElementName":
-			res = inferedInstance.OuterElementName
+			res.valueString = inferedInstance.OuterElementName
 		case "Sequences":
 			for idx, __instance__ := range inferedInstance.Sequences {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Alls":
 			for idx, __instance__ := range inferedInstance.Alls {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Choices":
 			for idx, __instance__ := range inferedInstance.Choices {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Groups":
 			for idx, __instance__ := range inferedInstance.Groups {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Elements":
 			for idx, __instance__ := range inferedInstance.Elements {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Order":
-			res = fmt.Sprintf("%d", inferedInstance.Order)
+			res.valueString = fmt.Sprintf("%d", inferedInstance.Order)
+			res.valueInt = inferedInstance.Order
+			res.GongFieldValueType = GongFieldValueTypeInt
 		case "Depth":
-			res = fmt.Sprintf("%d", inferedInstance.Depth)
+			res.valueString = fmt.Sprintf("%d", inferedInstance.Depth)
+			res.valueInt = inferedInstance.Depth
+			res.GongFieldValueType = GongFieldValueTypeInt
 		case "MinOccurs":
-			res = inferedInstance.MinOccurs
+			res.valueString = inferedInstance.MinOccurs
 		case "MaxOccurs":
-			res = inferedInstance.MaxOccurs
+			res.valueString = inferedInstance.MaxOccurs
 		}
 	case Annotation:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "Documentations":
 			for idx, __instance__ := range inferedInstance.Documentations {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		}
 	case Attribute:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "NameXSD":
-			res = inferedInstance.NameXSD
+			res.valueString = inferedInstance.NameXSD
 		case "Type":
-			res = inferedInstance.Type
+			res.valueString = inferedInstance.Type
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
-				res = inferedInstance.Annotation.Name
+				res.valueString = inferedInstance.Annotation.Name
 			}
 		case "HasNameConflict":
-			res = fmt.Sprintf("%t", inferedInstance.HasNameConflict)
+			res.valueString = fmt.Sprintf("%t", inferedInstance.HasNameConflict)
+			res.valueBool = inferedInstance.HasNameConflict
+			res.GongFieldValueType = GongFieldValueTypeBool
 		case "GoIdentifier":
-			res = inferedInstance.GoIdentifier
+			res.valueString = inferedInstance.GoIdentifier
 		case "Default":
-			res = inferedInstance.Default
+			res.valueString = inferedInstance.Default
 		case "Use":
-			res = inferedInstance.Use
+			res.valueString = inferedInstance.Use
 		case "Form":
-			res = inferedInstance.Form
+			res.valueString = inferedInstance.Form
 		case "Fixed":
-			res = inferedInstance.Fixed
+			res.valueString = inferedInstance.Fixed
 		case "Ref":
-			res = inferedInstance.Ref
+			res.valueString = inferedInstance.Ref
 		case "TargetNamespace":
-			res = inferedInstance.TargetNamespace
+			res.valueString = inferedInstance.TargetNamespace
 		case "SimpleType":
-			res = inferedInstance.SimpleType
+			res.valueString = inferedInstance.SimpleType
 		case "IDXSD":
-			res = inferedInstance.IDXSD
+			res.valueString = inferedInstance.IDXSD
 		}
 	case AttributeGroup:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "NameXSD":
-			res = inferedInstance.NameXSD
+			res.valueString = inferedInstance.NameXSD
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
-				res = inferedInstance.Annotation.Name
+				res.valueString = inferedInstance.Annotation.Name
 			}
 		case "HasNameConflict":
-			res = fmt.Sprintf("%t", inferedInstance.HasNameConflict)
+			res.valueString = fmt.Sprintf("%t", inferedInstance.HasNameConflict)
+			res.valueBool = inferedInstance.HasNameConflict
+			res.GongFieldValueType = GongFieldValueTypeBool
 		case "GoIdentifier":
-			res = inferedInstance.GoIdentifier
+			res.valueString = inferedInstance.GoIdentifier
 		case "AttributeGroups":
 			for idx, __instance__ := range inferedInstance.AttributeGroups {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Ref":
-			res = inferedInstance.Ref
+			res.valueString = inferedInstance.Ref
 		case "Attributes":
 			for idx, __instance__ := range inferedInstance.Attributes {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Order":
-			res = fmt.Sprintf("%d", inferedInstance.Order)
+			res.valueString = fmt.Sprintf("%d", inferedInstance.Order)
+			res.valueInt = inferedInstance.Order
+			res.GongFieldValueType = GongFieldValueTypeInt
 		case "Depth":
-			res = fmt.Sprintf("%d", inferedInstance.Depth)
+			res.valueString = fmt.Sprintf("%d", inferedInstance.Depth)
+			res.valueInt = inferedInstance.Depth
+			res.GongFieldValueType = GongFieldValueTypeInt
 		}
 	case Choice:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
-				res = inferedInstance.Annotation.Name
+				res.valueString = inferedInstance.Annotation.Name
 			}
 		case "OuterElementName":
-			res = inferedInstance.OuterElementName
+			res.valueString = inferedInstance.OuterElementName
 		case "Sequences":
 			for idx, __instance__ := range inferedInstance.Sequences {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Alls":
 			for idx, __instance__ := range inferedInstance.Alls {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Choices":
 			for idx, __instance__ := range inferedInstance.Choices {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Groups":
 			for idx, __instance__ := range inferedInstance.Groups {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Elements":
 			for idx, __instance__ := range inferedInstance.Elements {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Order":
-			res = fmt.Sprintf("%d", inferedInstance.Order)
+			res.valueString = fmt.Sprintf("%d", inferedInstance.Order)
+			res.valueInt = inferedInstance.Order
+			res.GongFieldValueType = GongFieldValueTypeInt
 		case "Depth":
-			res = fmt.Sprintf("%d", inferedInstance.Depth)
+			res.valueString = fmt.Sprintf("%d", inferedInstance.Depth)
+			res.valueInt = inferedInstance.Depth
+			res.GongFieldValueType = GongFieldValueTypeInt
 		case "MinOccurs":
-			res = inferedInstance.MinOccurs
+			res.valueString = inferedInstance.MinOccurs
 		case "MaxOccurs":
-			res = inferedInstance.MaxOccurs
+			res.valueString = inferedInstance.MaxOccurs
 		case "IsDuplicatedInXSD":
-			res = fmt.Sprintf("%t", inferedInstance.IsDuplicatedInXSD)
+			res.valueString = fmt.Sprintf("%t", inferedInstance.IsDuplicatedInXSD)
+			res.valueBool = inferedInstance.IsDuplicatedInXSD
+			res.GongFieldValueType = GongFieldValueTypeBool
 		}
 	case ComplexContent:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		}
 	case ComplexType:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "HasNameConflict":
-			res = fmt.Sprintf("%t", inferedInstance.HasNameConflict)
+			res.valueString = fmt.Sprintf("%t", inferedInstance.HasNameConflict)
+			res.valueBool = inferedInstance.HasNameConflict
+			res.GongFieldValueType = GongFieldValueTypeBool
 		case "GoIdentifier":
-			res = inferedInstance.GoIdentifier
+			res.valueString = inferedInstance.GoIdentifier
 		case "IsAnonymous":
-			res = fmt.Sprintf("%t", inferedInstance.IsAnonymous)
+			res.valueString = fmt.Sprintf("%t", inferedInstance.IsAnonymous)
+			res.valueBool = inferedInstance.IsAnonymous
+			res.GongFieldValueType = GongFieldValueTypeBool
 		case "OuterElement":
 			if inferedInstance.OuterElement != nil {
-				res = inferedInstance.OuterElement.Name
+				res.valueString = inferedInstance.OuterElement.Name
 			}
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
-				res = inferedInstance.Annotation.Name
+				res.valueString = inferedInstance.Annotation.Name
 			}
 		case "NameXSD":
-			res = inferedInstance.NameXSD
+			res.valueString = inferedInstance.NameXSD
 		case "OuterElementName":
-			res = inferedInstance.OuterElementName
+			res.valueString = inferedInstance.OuterElementName
 		case "Sequences":
 			for idx, __instance__ := range inferedInstance.Sequences {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Alls":
 			for idx, __instance__ := range inferedInstance.Alls {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Choices":
 			for idx, __instance__ := range inferedInstance.Choices {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Groups":
 			for idx, __instance__ := range inferedInstance.Groups {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Elements":
 			for idx, __instance__ := range inferedInstance.Elements {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Order":
-			res = fmt.Sprintf("%d", inferedInstance.Order)
+			res.valueString = fmt.Sprintf("%d", inferedInstance.Order)
+			res.valueInt = inferedInstance.Order
+			res.GongFieldValueType = GongFieldValueTypeInt
 		case "Depth":
-			res = fmt.Sprintf("%d", inferedInstance.Depth)
+			res.valueString = fmt.Sprintf("%d", inferedInstance.Depth)
+			res.valueInt = inferedInstance.Depth
+			res.GongFieldValueType = GongFieldValueTypeInt
 		case "MinOccurs":
-			res = inferedInstance.MinOccurs
+			res.valueString = inferedInstance.MinOccurs
 		case "MaxOccurs":
-			res = inferedInstance.MaxOccurs
+			res.valueString = inferedInstance.MaxOccurs
 		case "Extension":
 			if inferedInstance.Extension != nil {
-				res = inferedInstance.Extension.Name
+				res.valueString = inferedInstance.Extension.Name
 			}
 		case "SimpleContent":
 			if inferedInstance.SimpleContent != nil {
-				res = inferedInstance.SimpleContent.Name
+				res.valueString = inferedInstance.SimpleContent.Name
 			}
 		case "ComplexContent":
 			if inferedInstance.ComplexContent != nil {
-				res = inferedInstance.ComplexContent.Name
+				res.valueString = inferedInstance.ComplexContent.Name
 			}
 		case "Attributes":
 			for idx, __instance__ := range inferedInstance.Attributes {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "AttributeGroups":
 			for idx, __instance__ := range inferedInstance.AttributeGroups {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "IsDuplicatedInXSD":
-			res = fmt.Sprintf("%t", inferedInstance.IsDuplicatedInXSD)
+			res.valueString = fmt.Sprintf("%t", inferedInstance.IsDuplicatedInXSD)
+			res.valueBool = inferedInstance.IsDuplicatedInXSD
+			res.GongFieldValueType = GongFieldValueTypeBool
 		}
 	case Documentation:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "Text":
-			res = inferedInstance.Text
+			res.valueString = inferedInstance.Text
 		case "Source":
-			res = inferedInstance.Source
+			res.valueString = inferedInstance.Source
 		case "Lang":
-			res = inferedInstance.Lang
+			res.valueString = inferedInstance.Lang
 		}
 	case Element:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "Order":
-			res = fmt.Sprintf("%d", inferedInstance.Order)
+			res.valueString = fmt.Sprintf("%d", inferedInstance.Order)
+			res.valueInt = inferedInstance.Order
+			res.GongFieldValueType = GongFieldValueTypeInt
 		case "Depth":
-			res = fmt.Sprintf("%d", inferedInstance.Depth)
+			res.valueString = fmt.Sprintf("%d", inferedInstance.Depth)
+			res.valueInt = inferedInstance.Depth
+			res.GongFieldValueType = GongFieldValueTypeInt
 		case "HasNameConflict":
-			res = fmt.Sprintf("%t", inferedInstance.HasNameConflict)
+			res.valueString = fmt.Sprintf("%t", inferedInstance.HasNameConflict)
+			res.valueBool = inferedInstance.HasNameConflict
+			res.GongFieldValueType = GongFieldValueTypeBool
 		case "GoIdentifier":
-			res = inferedInstance.GoIdentifier
+			res.valueString = inferedInstance.GoIdentifier
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
-				res = inferedInstance.Annotation.Name
+				res.valueString = inferedInstance.Annotation.Name
 			}
 		case "NameXSD":
-			res = inferedInstance.NameXSD
+			res.valueString = inferedInstance.NameXSD
 		case "Type":
-			res = inferedInstance.Type
+			res.valueString = inferedInstance.Type
 		case "MinOccurs":
-			res = inferedInstance.MinOccurs
+			res.valueString = inferedInstance.MinOccurs
 		case "MaxOccurs":
-			res = inferedInstance.MaxOccurs
+			res.valueString = inferedInstance.MaxOccurs
 		case "Default":
-			res = inferedInstance.Default
+			res.valueString = inferedInstance.Default
 		case "Fixed":
-			res = inferedInstance.Fixed
+			res.valueString = inferedInstance.Fixed
 		case "Nillable":
-			res = inferedInstance.Nillable
+			res.valueString = inferedInstance.Nillable
 		case "Ref":
-			res = inferedInstance.Ref
+			res.valueString = inferedInstance.Ref
 		case "Abstract":
-			res = inferedInstance.Abstract
+			res.valueString = inferedInstance.Abstract
 		case "Form":
-			res = inferedInstance.Form
+			res.valueString = inferedInstance.Form
 		case "Block":
-			res = inferedInstance.Block
+			res.valueString = inferedInstance.Block
 		case "Final":
-			res = inferedInstance.Final
+			res.valueString = inferedInstance.Final
 		case "SimpleType":
 			if inferedInstance.SimpleType != nil {
-				res = inferedInstance.SimpleType.Name
+				res.valueString = inferedInstance.SimpleType.Name
 			}
 		case "ComplexType":
 			if inferedInstance.ComplexType != nil {
-				res = inferedInstance.ComplexType.Name
+				res.valueString = inferedInstance.ComplexType.Name
 			}
 		case "Groups":
 			for idx, __instance__ := range inferedInstance.Groups {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "IsDuplicatedInXSD":
-			res = fmt.Sprintf("%t", inferedInstance.IsDuplicatedInXSD)
+			res.valueString = fmt.Sprintf("%t", inferedInstance.IsDuplicatedInXSD)
+			res.valueBool = inferedInstance.IsDuplicatedInXSD
+			res.GongFieldValueType = GongFieldValueTypeBool
 		}
 	case Enumeration:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
-				res = inferedInstance.Annotation.Name
+				res.valueString = inferedInstance.Annotation.Name
 			}
 		case "Value":
-			res = inferedInstance.Value
+			res.valueString = inferedInstance.Value
 		}
 	case Extension:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "OuterElementName":
-			res = inferedInstance.OuterElementName
+			res.valueString = inferedInstance.OuterElementName
 		case "Sequences":
 			for idx, __instance__ := range inferedInstance.Sequences {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Alls":
 			for idx, __instance__ := range inferedInstance.Alls {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Choices":
 			for idx, __instance__ := range inferedInstance.Choices {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Groups":
 			for idx, __instance__ := range inferedInstance.Groups {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Elements":
 			for idx, __instance__ := range inferedInstance.Elements {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Order":
-			res = fmt.Sprintf("%d", inferedInstance.Order)
+			res.valueString = fmt.Sprintf("%d", inferedInstance.Order)
+			res.valueInt = inferedInstance.Order
+			res.GongFieldValueType = GongFieldValueTypeInt
 		case "Depth":
-			res = fmt.Sprintf("%d", inferedInstance.Depth)
+			res.valueString = fmt.Sprintf("%d", inferedInstance.Depth)
+			res.valueInt = inferedInstance.Depth
+			res.GongFieldValueType = GongFieldValueTypeInt
 		case "MinOccurs":
-			res = inferedInstance.MinOccurs
+			res.valueString = inferedInstance.MinOccurs
 		case "MaxOccurs":
-			res = inferedInstance.MaxOccurs
+			res.valueString = inferedInstance.MaxOccurs
 		case "Base":
-			res = inferedInstance.Base
+			res.valueString = inferedInstance.Base
 		case "Ref":
-			res = inferedInstance.Ref
+			res.valueString = inferedInstance.Ref
 		case "Attributes":
 			for idx, __instance__ := range inferedInstance.Attributes {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		}
 	case Group:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
-				res = inferedInstance.Annotation.Name
+				res.valueString = inferedInstance.Annotation.Name
 			}
 		case "NameXSD":
-			res = inferedInstance.NameXSD
+			res.valueString = inferedInstance.NameXSD
 		case "Ref":
-			res = inferedInstance.Ref
+			res.valueString = inferedInstance.Ref
 		case "IsAnonymous":
-			res = fmt.Sprintf("%t", inferedInstance.IsAnonymous)
+			res.valueString = fmt.Sprintf("%t", inferedInstance.IsAnonymous)
+			res.valueBool = inferedInstance.IsAnonymous
+			res.GongFieldValueType = GongFieldValueTypeBool
 		case "OuterElement":
 			if inferedInstance.OuterElement != nil {
-				res = inferedInstance.OuterElement.Name
+				res.valueString = inferedInstance.OuterElement.Name
 			}
 		case "HasNameConflict":
-			res = fmt.Sprintf("%t", inferedInstance.HasNameConflict)
+			res.valueString = fmt.Sprintf("%t", inferedInstance.HasNameConflict)
+			res.valueBool = inferedInstance.HasNameConflict
+			res.GongFieldValueType = GongFieldValueTypeBool
 		case "GoIdentifier":
-			res = inferedInstance.GoIdentifier
+			res.valueString = inferedInstance.GoIdentifier
 		case "OuterElementName":
-			res = inferedInstance.OuterElementName
+			res.valueString = inferedInstance.OuterElementName
 		case "Sequences":
 			for idx, __instance__ := range inferedInstance.Sequences {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Alls":
 			for idx, __instance__ := range inferedInstance.Alls {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Choices":
 			for idx, __instance__ := range inferedInstance.Choices {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Groups":
 			for idx, __instance__ := range inferedInstance.Groups {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Elements":
 			for idx, __instance__ := range inferedInstance.Elements {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Order":
-			res = fmt.Sprintf("%d", inferedInstance.Order)
+			res.valueString = fmt.Sprintf("%d", inferedInstance.Order)
+			res.valueInt = inferedInstance.Order
+			res.GongFieldValueType = GongFieldValueTypeInt
 		case "Depth":
-			res = fmt.Sprintf("%d", inferedInstance.Depth)
+			res.valueString = fmt.Sprintf("%d", inferedInstance.Depth)
+			res.valueInt = inferedInstance.Depth
+			res.GongFieldValueType = GongFieldValueTypeInt
 		case "MinOccurs":
-			res = inferedInstance.MinOccurs
+			res.valueString = inferedInstance.MinOccurs
 		case "MaxOccurs":
-			res = inferedInstance.MaxOccurs
+			res.valueString = inferedInstance.MaxOccurs
 		}
 	case Length:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
-				res = inferedInstance.Annotation.Name
+				res.valueString = inferedInstance.Annotation.Name
 			}
 		case "Value":
-			res = inferedInstance.Value
+			res.valueString = inferedInstance.Value
 		}
 	case MaxInclusive:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
-				res = inferedInstance.Annotation.Name
+				res.valueString = inferedInstance.Annotation.Name
 			}
 		case "Value":
-			res = inferedInstance.Value
+			res.valueString = inferedInstance.Value
 		}
 	case MaxLength:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
-				res = inferedInstance.Annotation.Name
+				res.valueString = inferedInstance.Annotation.Name
 			}
 		case "Value":
-			res = inferedInstance.Value
+			res.valueString = inferedInstance.Value
 		}
 	case MinInclusive:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
-				res = inferedInstance.Annotation.Name
+				res.valueString = inferedInstance.Annotation.Name
 			}
 		case "Value":
-			res = inferedInstance.Value
+			res.valueString = inferedInstance.Value
 		}
 	case MinLength:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
-				res = inferedInstance.Annotation.Name
+				res.valueString = inferedInstance.Annotation.Name
 			}
 		case "Value":
-			res = inferedInstance.Value
+			res.valueString = inferedInstance.Value
 		}
 	case Pattern:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
-				res = inferedInstance.Annotation.Name
+				res.valueString = inferedInstance.Annotation.Name
 			}
 		case "Value":
-			res = inferedInstance.Value
+			res.valueString = inferedInstance.Value
 		}
 	case Restriction:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
-				res = inferedInstance.Annotation.Name
+				res.valueString = inferedInstance.Annotation.Name
 			}
 		case "Base":
-			res = inferedInstance.Base
+			res.valueString = inferedInstance.Base
 		case "Enumerations":
 			for idx, __instance__ := range inferedInstance.Enumerations {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "MinInclusive":
 			if inferedInstance.MinInclusive != nil {
-				res = inferedInstance.MinInclusive.Name
+				res.valueString = inferedInstance.MinInclusive.Name
 			}
 		case "MaxInclusive":
 			if inferedInstance.MaxInclusive != nil {
-				res = inferedInstance.MaxInclusive.Name
+				res.valueString = inferedInstance.MaxInclusive.Name
 			}
 		case "Pattern":
 			if inferedInstance.Pattern != nil {
-				res = inferedInstance.Pattern.Name
+				res.valueString = inferedInstance.Pattern.Name
 			}
 		case "WhiteSpace":
 			if inferedInstance.WhiteSpace != nil {
-				res = inferedInstance.WhiteSpace.Name
+				res.valueString = inferedInstance.WhiteSpace.Name
 			}
 		case "MinLength":
 			if inferedInstance.MinLength != nil {
-				res = inferedInstance.MinLength.Name
+				res.valueString = inferedInstance.MinLength.Name
 			}
 		case "MaxLength":
 			if inferedInstance.MaxLength != nil {
-				res = inferedInstance.MaxLength.Name
+				res.valueString = inferedInstance.MaxLength.Name
 			}
 		case "Length":
 			if inferedInstance.Length != nil {
-				res = inferedInstance.Length.Name
+				res.valueString = inferedInstance.Length.Name
 			}
 		case "TotalDigit":
 			if inferedInstance.TotalDigit != nil {
-				res = inferedInstance.TotalDigit.Name
+				res.valueString = inferedInstance.TotalDigit.Name
 			}
 		}
 	case Schema:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "Xs":
-			res = inferedInstance.Xs
+			res.valueString = inferedInstance.Xs
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
-				res = inferedInstance.Annotation.Name
+				res.valueString = inferedInstance.Annotation.Name
 			}
 		case "Elements":
 			for idx, __instance__ := range inferedInstance.Elements {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "SimpleTypes":
 			for idx, __instance__ := range inferedInstance.SimpleTypes {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "ComplexTypes":
 			for idx, __instance__ := range inferedInstance.ComplexTypes {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "AttributeGroups":
 			for idx, __instance__ := range inferedInstance.AttributeGroups {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Groups":
 			for idx, __instance__ := range inferedInstance.Groups {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Order":
-			res = fmt.Sprintf("%d", inferedInstance.Order)
+			res.valueString = fmt.Sprintf("%d", inferedInstance.Order)
+			res.valueInt = inferedInstance.Order
+			res.GongFieldValueType = GongFieldValueTypeInt
 		case "Depth":
-			res = fmt.Sprintf("%d", inferedInstance.Depth)
+			res.valueString = fmt.Sprintf("%d", inferedInstance.Depth)
+			res.valueInt = inferedInstance.Depth
+			res.GongFieldValueType = GongFieldValueTypeInt
 		}
 	case Sequence:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
-				res = inferedInstance.Annotation.Name
+				res.valueString = inferedInstance.Annotation.Name
 			}
 		case "OuterElementName":
-			res = inferedInstance.OuterElementName
+			res.valueString = inferedInstance.OuterElementName
 		case "Sequences":
 			for idx, __instance__ := range inferedInstance.Sequences {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Alls":
 			for idx, __instance__ := range inferedInstance.Alls {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Choices":
 			for idx, __instance__ := range inferedInstance.Choices {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Groups":
 			for idx, __instance__ := range inferedInstance.Groups {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Elements":
 			for idx, __instance__ := range inferedInstance.Elements {
 				if idx > 0 {
-					res += "\n"
+					res.valueString += "\n"
 				}
-				res += __instance__.Name
+				res.valueString += __instance__.Name
 			}
 		case "Order":
-			res = fmt.Sprintf("%d", inferedInstance.Order)
+			res.valueString = fmt.Sprintf("%d", inferedInstance.Order)
+			res.valueInt = inferedInstance.Order
+			res.GongFieldValueType = GongFieldValueTypeInt
 		case "Depth":
-			res = fmt.Sprintf("%d", inferedInstance.Depth)
+			res.valueString = fmt.Sprintf("%d", inferedInstance.Depth)
+			res.valueInt = inferedInstance.Depth
+			res.GongFieldValueType = GongFieldValueTypeInt
 		case "MinOccurs":
-			res = inferedInstance.MinOccurs
+			res.valueString = inferedInstance.MinOccurs
 		case "MaxOccurs":
-			res = inferedInstance.MaxOccurs
+			res.valueString = inferedInstance.MaxOccurs
 		}
 	case SimpleContent:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "Extension":
 			if inferedInstance.Extension != nil {
-				res = inferedInstance.Extension.Name
+				res.valueString = inferedInstance.Extension.Name
 			}
 		case "Restriction":
 			if inferedInstance.Restriction != nil {
-				res = inferedInstance.Restriction.Name
+				res.valueString = inferedInstance.Restriction.Name
 			}
 		}
 	case SimpleType:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
-				res = inferedInstance.Annotation.Name
+				res.valueString = inferedInstance.Annotation.Name
 			}
 		case "NameXSD":
-			res = inferedInstance.NameXSD
+			res.valueString = inferedInstance.NameXSD
 		case "Restriction":
 			if inferedInstance.Restriction != nil {
-				res = inferedInstance.Restriction.Name
+				res.valueString = inferedInstance.Restriction.Name
 			}
 		case "Union":
 			if inferedInstance.Union != nil {
-				res = inferedInstance.Union.Name
+				res.valueString = inferedInstance.Union.Name
 			}
 		case "Order":
-			res = fmt.Sprintf("%d", inferedInstance.Order)
+			res.valueString = fmt.Sprintf("%d", inferedInstance.Order)
+			res.valueInt = inferedInstance.Order
+			res.GongFieldValueType = GongFieldValueTypeInt
 		case "Depth":
-			res = fmt.Sprintf("%d", inferedInstance.Depth)
+			res.valueString = fmt.Sprintf("%d", inferedInstance.Depth)
+			res.valueInt = inferedInstance.Depth
+			res.GongFieldValueType = GongFieldValueTypeInt
 		}
 	case TotalDigit:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
-				res = inferedInstance.Annotation.Name
+				res.valueString = inferedInstance.Annotation.Name
 			}
 		case "Value":
-			res = inferedInstance.Value
+			res.valueString = inferedInstance.Value
 		}
 	case Union:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
-				res = inferedInstance.Annotation.Name
+				res.valueString = inferedInstance.Annotation.Name
 			}
 		case "MemberTypes":
-			res = inferedInstance.MemberTypes
+			res.valueString = inferedInstance.MemberTypes
 		}
 	case WhiteSpace:
 		switch fieldName {
 		// string value of fields
 		case "Name":
-			res = inferedInstance.Name
+			res.valueString = inferedInstance.Name
 		case "Annotation":
 			if inferedInstance.Annotation != nil {
-				res = inferedInstance.Annotation.Name
+				res.valueString = inferedInstance.Annotation.Name
 			}
 		case "Value":
-			res = inferedInstance.Value
+			res.valueString = inferedInstance.Value
 		}
 	default:
 		_ = inferedInstance

@@ -354,13 +354,15 @@ func (enumerationDB *EnumerationDB) DecodePointers(backRepo *BackRepoStruct, enu
 		if id != 0 {
 			tmp, ok := backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(id)]
 
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
 			if !ok {
-				log.Fatalln("DecodePointers: enumeration.Annotation, unknown pointer id", id)
-			}
-
-			// updates only if field has changed
-			if enumeration.Annotation == nil || enumeration.Annotation != tmp {
-				enumeration.Annotation = tmp
+				log.Println("DecodePointers: enumeration.Annotation, unknown pointer id", id)
+				enumeration.Annotation = nil
+			} else {
+				// updates only if field has changed
+				if enumeration.Annotation == nil || enumeration.Annotation != tmp {
+					enumeration.Annotation = tmp
+				}
 			}
 		} else {
 			enumeration.Annotation = nil

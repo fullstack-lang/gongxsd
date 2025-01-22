@@ -427,13 +427,15 @@ func (attributegroupDB *AttributeGroupDB) DecodePointers(backRepo *BackRepoStruc
 		if id != 0 {
 			tmp, ok := backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(id)]
 
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
 			if !ok {
-				log.Fatalln("DecodePointers: attributegroup.Annotation, unknown pointer id", id)
-			}
-
-			// updates only if field has changed
-			if attributegroup.Annotation == nil || attributegroup.Annotation != tmp {
-				attributegroup.Annotation = tmp
+				log.Println("DecodePointers: attributegroup.Annotation, unknown pointer id", id)
+				attributegroup.Annotation = nil
+			} else {
+				// updates only if field has changed
+				if attributegroup.Annotation == nil || attributegroup.Annotation != tmp {
+					attributegroup.Annotation = tmp
+				}
 			}
 		} else {
 			attributegroup.Annotation = nil

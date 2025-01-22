@@ -531,13 +531,15 @@ func (groupDB *GroupDB) DecodePointers(backRepo *BackRepoStruct, group *models.G
 		if id != 0 {
 			tmp, ok := backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(id)]
 
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
 			if !ok {
-				log.Fatalln("DecodePointers: group.Annotation, unknown pointer id", id)
-			}
-
-			// updates only if field has changed
-			if group.Annotation == nil || group.Annotation != tmp {
-				group.Annotation = tmp
+				log.Println("DecodePointers: group.Annotation, unknown pointer id", id)
+				group.Annotation = nil
+			} else {
+				// updates only if field has changed
+				if group.Annotation == nil || group.Annotation != tmp {
+					group.Annotation = tmp
+				}
 			}
 		} else {
 			group.Annotation = nil
@@ -550,13 +552,15 @@ func (groupDB *GroupDB) DecodePointers(backRepo *BackRepoStruct, group *models.G
 		if id != 0 {
 			tmp, ok := backRepo.BackRepoElement.Map_ElementDBID_ElementPtr[uint(id)]
 
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
 			if !ok {
-				log.Fatalln("DecodePointers: group.OuterElement, unknown pointer id", id)
-			}
-
-			// updates only if field has changed
-			if group.OuterElement == nil || group.OuterElement != tmp {
-				group.OuterElement = tmp
+				log.Println("DecodePointers: group.OuterElement, unknown pointer id", id)
+				group.OuterElement = nil
+			} else {
+				// updates only if field has changed
+				if group.OuterElement == nil || group.OuterElement != tmp {
+					group.OuterElement = tmp
+				}
 			}
 		} else {
 			group.OuterElement = nil

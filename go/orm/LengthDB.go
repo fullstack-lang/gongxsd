@@ -354,13 +354,15 @@ func (lengthDB *LengthDB) DecodePointers(backRepo *BackRepoStruct, length *model
 		if id != 0 {
 			tmp, ok := backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(id)]
 
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
 			if !ok {
-				log.Fatalln("DecodePointers: length.Annotation, unknown pointer id", id)
-			}
-
-			// updates only if field has changed
-			if length.Annotation == nil || length.Annotation != tmp {
-				length.Annotation = tmp
+				log.Println("DecodePointers: length.Annotation, unknown pointer id", id)
+				length.Annotation = nil
+			} else {
+				// updates only if field has changed
+				if length.Annotation == nil || length.Annotation != tmp {
+					length.Annotation = tmp
+				}
 			}
 		} else {
 			length.Annotation = nil

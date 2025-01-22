@@ -364,13 +364,15 @@ func (simplecontentDB *SimpleContentDB) DecodePointers(backRepo *BackRepoStruct,
 		if id != 0 {
 			tmp, ok := backRepo.BackRepoExtension.Map_ExtensionDBID_ExtensionPtr[uint(id)]
 
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
 			if !ok {
-				log.Fatalln("DecodePointers: simplecontent.Extension, unknown pointer id", id)
-			}
-
-			// updates only if field has changed
-			if simplecontent.Extension == nil || simplecontent.Extension != tmp {
-				simplecontent.Extension = tmp
+				log.Println("DecodePointers: simplecontent.Extension, unknown pointer id", id)
+				simplecontent.Extension = nil
+			} else {
+				// updates only if field has changed
+				if simplecontent.Extension == nil || simplecontent.Extension != tmp {
+					simplecontent.Extension = tmp
+				}
 			}
 		} else {
 			simplecontent.Extension = nil
@@ -383,13 +385,15 @@ func (simplecontentDB *SimpleContentDB) DecodePointers(backRepo *BackRepoStruct,
 		if id != 0 {
 			tmp, ok := backRepo.BackRepoRestriction.Map_RestrictionDBID_RestrictionPtr[uint(id)]
 
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
 			if !ok {
-				log.Fatalln("DecodePointers: simplecontent.Restriction, unknown pointer id", id)
-			}
-
-			// updates only if field has changed
-			if simplecontent.Restriction == nil || simplecontent.Restriction != tmp {
-				simplecontent.Restriction = tmp
+				log.Println("DecodePointers: simplecontent.Restriction, unknown pointer id", id)
+				simplecontent.Restriction = nil
+			} else {
+				// updates only if field has changed
+				if simplecontent.Restriction == nil || simplecontent.Restriction != tmp {
+					simplecontent.Restriction = tmp
+				}
 			}
 		} else {
 			simplecontent.Restriction = nil

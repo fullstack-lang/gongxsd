@@ -354,13 +354,15 @@ func (totaldigitDB *TotalDigitDB) DecodePointers(backRepo *BackRepoStruct, total
 		if id != 0 {
 			tmp, ok := backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(id)]
 
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
 			if !ok {
-				log.Fatalln("DecodePointers: totaldigit.Annotation, unknown pointer id", id)
-			}
-
-			// updates only if field has changed
-			if totaldigit.Annotation == nil || totaldigit.Annotation != tmp {
-				totaldigit.Annotation = tmp
+				log.Println("DecodePointers: totaldigit.Annotation, unknown pointer id", id)
+				totaldigit.Annotation = nil
+			} else {
+				// updates only if field has changed
+				if totaldigit.Annotation == nil || totaldigit.Annotation != tmp {
+					totaldigit.Annotation = tmp
+				}
 			}
 		} else {
 			totaldigit.Annotation = nil

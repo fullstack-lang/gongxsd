@@ -354,13 +354,15 @@ func (patternDB *PatternDB) DecodePointers(backRepo *BackRepoStruct, pattern *mo
 		if id != 0 {
 			tmp, ok := backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(id)]
 
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
 			if !ok {
-				log.Fatalln("DecodePointers: pattern.Annotation, unknown pointer id", id)
-			}
-
-			// updates only if field has changed
-			if pattern.Annotation == nil || pattern.Annotation != tmp {
-				pattern.Annotation = tmp
+				log.Println("DecodePointers: pattern.Annotation, unknown pointer id", id)
+				pattern.Annotation = nil
+			} else {
+				// updates only if field has changed
+				if pattern.Annotation == nil || pattern.Annotation != tmp {
+					pattern.Annotation = tmp
+				}
 			}
 		} else {
 			pattern.Annotation = nil

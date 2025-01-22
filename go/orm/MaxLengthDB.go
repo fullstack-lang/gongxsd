@@ -354,13 +354,15 @@ func (maxlengthDB *MaxLengthDB) DecodePointers(backRepo *BackRepoStruct, maxleng
 		if id != 0 {
 			tmp, ok := backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(id)]
 
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
 			if !ok {
-				log.Fatalln("DecodePointers: maxlength.Annotation, unknown pointer id", id)
-			}
-
-			// updates only if field has changed
-			if maxlength.Annotation == nil || maxlength.Annotation != tmp {
-				maxlength.Annotation = tmp
+				log.Println("DecodePointers: maxlength.Annotation, unknown pointer id", id)
+				maxlength.Annotation = nil
+			} else {
+				// updates only if field has changed
+				if maxlength.Annotation == nil || maxlength.Annotation != tmp {
+					maxlength.Annotation = tmp
+				}
 			}
 		} else {
 			maxlength.Annotation = nil

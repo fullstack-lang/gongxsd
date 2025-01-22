@@ -471,13 +471,15 @@ func (schemaDB *SchemaDB) DecodePointers(backRepo *BackRepoStruct, schema *model
 		if id != 0 {
 			tmp, ok := backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(id)]
 
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
 			if !ok {
-				log.Fatalln("DecodePointers: schema.Annotation, unknown pointer id", id)
-			}
-
-			// updates only if field has changed
-			if schema.Annotation == nil || schema.Annotation != tmp {
-				schema.Annotation = tmp
+				log.Println("DecodePointers: schema.Annotation, unknown pointer id", id)
+				schema.Annotation = nil
+			} else {
+				// updates only if field has changed
+				if schema.Annotation == nil || schema.Annotation != tmp {
+					schema.Annotation = tmp
+				}
 			}
 		} else {
 			schema.Annotation = nil

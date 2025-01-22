@@ -505,13 +505,15 @@ func (elementDB *ElementDB) DecodePointers(backRepo *BackRepoStruct, element *mo
 		if id != 0 {
 			tmp, ok := backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(id)]
 
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
 			if !ok {
-				log.Fatalln("DecodePointers: element.Annotation, unknown pointer id", id)
-			}
-
-			// updates only if field has changed
-			if element.Annotation == nil || element.Annotation != tmp {
-				element.Annotation = tmp
+				log.Println("DecodePointers: element.Annotation, unknown pointer id", id)
+				element.Annotation = nil
+			} else {
+				// updates only if field has changed
+				if element.Annotation == nil || element.Annotation != tmp {
+					element.Annotation = tmp
+				}
 			}
 		} else {
 			element.Annotation = nil
@@ -524,13 +526,15 @@ func (elementDB *ElementDB) DecodePointers(backRepo *BackRepoStruct, element *mo
 		if id != 0 {
 			tmp, ok := backRepo.BackRepoSimpleType.Map_SimpleTypeDBID_SimpleTypePtr[uint(id)]
 
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
 			if !ok {
-				log.Fatalln("DecodePointers: element.SimpleType, unknown pointer id", id)
-			}
-
-			// updates only if field has changed
-			if element.SimpleType == nil || element.SimpleType != tmp {
-				element.SimpleType = tmp
+				log.Println("DecodePointers: element.SimpleType, unknown pointer id", id)
+				element.SimpleType = nil
+			} else {
+				// updates only if field has changed
+				if element.SimpleType == nil || element.SimpleType != tmp {
+					element.SimpleType = tmp
+				}
 			}
 		} else {
 			element.SimpleType = nil
@@ -543,13 +547,15 @@ func (elementDB *ElementDB) DecodePointers(backRepo *BackRepoStruct, element *mo
 		if id != 0 {
 			tmp, ok := backRepo.BackRepoComplexType.Map_ComplexTypeDBID_ComplexTypePtr[uint(id)]
 
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
 			if !ok {
-				log.Fatalln("DecodePointers: element.ComplexType, unknown pointer id", id)
-			}
-
-			// updates only if field has changed
-			if element.ComplexType == nil || element.ComplexType != tmp {
-				element.ComplexType = tmp
+				log.Println("DecodePointers: element.ComplexType, unknown pointer id", id)
+				element.ComplexType = nil
+			} else {
+				// updates only if field has changed
+				if element.ComplexType == nil || element.ComplexType != tmp {
+					element.ComplexType = tmp
+				}
 			}
 		} else {
 			element.ComplexType = nil

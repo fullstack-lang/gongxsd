@@ -354,13 +354,15 @@ func (minlengthDB *MinLengthDB) DecodePointers(backRepo *BackRepoStruct, minleng
 		if id != 0 {
 			tmp, ok := backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(id)]
 
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
 			if !ok {
-				log.Fatalln("DecodePointers: minlength.Annotation, unknown pointer id", id)
-			}
-
-			// updates only if field has changed
-			if minlength.Annotation == nil || minlength.Annotation != tmp {
-				minlength.Annotation = tmp
+				log.Println("DecodePointers: minlength.Annotation, unknown pointer id", id)
+				minlength.Annotation = nil
+			} else {
+				// updates only if field has changed
+				if minlength.Annotation == nil || minlength.Annotation != tmp {
+					minlength.Annotation = tmp
+				}
 			}
 		} else {
 			minlength.Annotation = nil

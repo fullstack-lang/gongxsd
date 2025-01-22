@@ -490,13 +490,15 @@ func (choiceDB *ChoiceDB) DecodePointers(backRepo *BackRepoStruct, choice *model
 		if id != 0 {
 			tmp, ok := backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(id)]
 
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
 			if !ok {
-				log.Fatalln("DecodePointers: choice.Annotation, unknown pointer id", id)
-			}
-
-			// updates only if field has changed
-			if choice.Annotation == nil || choice.Annotation != tmp {
-				choice.Annotation = tmp
+				log.Println("DecodePointers: choice.Annotation, unknown pointer id", id)
+				choice.Annotation = nil
+			} else {
+				// updates only if field has changed
+				if choice.Annotation == nil || choice.Annotation != tmp {
+					choice.Annotation = tmp
+				}
 			}
 		} else {
 			choice.Annotation = nil

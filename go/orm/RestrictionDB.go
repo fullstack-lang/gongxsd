@@ -503,13 +503,15 @@ func (restrictionDB *RestrictionDB) DecodePointers(backRepo *BackRepoStruct, res
 		if id != 0 {
 			tmp, ok := backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(id)]
 
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
 			if !ok {
-				log.Fatalln("DecodePointers: restriction.Annotation, unknown pointer id", id)
-			}
-
-			// updates only if field has changed
-			if restriction.Annotation == nil || restriction.Annotation != tmp {
-				restriction.Annotation = tmp
+				log.Println("DecodePointers: restriction.Annotation, unknown pointer id", id)
+				restriction.Annotation = nil
+			} else {
+				// updates only if field has changed
+				if restriction.Annotation == nil || restriction.Annotation != tmp {
+					restriction.Annotation = tmp
+				}
 			}
 		} else {
 			restriction.Annotation = nil
@@ -531,13 +533,15 @@ func (restrictionDB *RestrictionDB) DecodePointers(backRepo *BackRepoStruct, res
 		if id != 0 {
 			tmp, ok := backRepo.BackRepoMinInclusive.Map_MinInclusiveDBID_MinInclusivePtr[uint(id)]
 
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
 			if !ok {
-				log.Fatalln("DecodePointers: restriction.MinInclusive, unknown pointer id", id)
-			}
-
-			// updates only if field has changed
-			if restriction.MinInclusive == nil || restriction.MinInclusive != tmp {
-				restriction.MinInclusive = tmp
+				log.Println("DecodePointers: restriction.MinInclusive, unknown pointer id", id)
+				restriction.MinInclusive = nil
+			} else {
+				// updates only if field has changed
+				if restriction.MinInclusive == nil || restriction.MinInclusive != tmp {
+					restriction.MinInclusive = tmp
+				}
 			}
 		} else {
 			restriction.MinInclusive = nil
@@ -550,13 +554,15 @@ func (restrictionDB *RestrictionDB) DecodePointers(backRepo *BackRepoStruct, res
 		if id != 0 {
 			tmp, ok := backRepo.BackRepoMaxInclusive.Map_MaxInclusiveDBID_MaxInclusivePtr[uint(id)]
 
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
 			if !ok {
-				log.Fatalln("DecodePointers: restriction.MaxInclusive, unknown pointer id", id)
-			}
-
-			// updates only if field has changed
-			if restriction.MaxInclusive == nil || restriction.MaxInclusive != tmp {
-				restriction.MaxInclusive = tmp
+				log.Println("DecodePointers: restriction.MaxInclusive, unknown pointer id", id)
+				restriction.MaxInclusive = nil
+			} else {
+				// updates only if field has changed
+				if restriction.MaxInclusive == nil || restriction.MaxInclusive != tmp {
+					restriction.MaxInclusive = tmp
+				}
 			}
 		} else {
 			restriction.MaxInclusive = nil
@@ -569,13 +575,15 @@ func (restrictionDB *RestrictionDB) DecodePointers(backRepo *BackRepoStruct, res
 		if id != 0 {
 			tmp, ok := backRepo.BackRepoPattern.Map_PatternDBID_PatternPtr[uint(id)]
 
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
 			if !ok {
-				log.Fatalln("DecodePointers: restriction.Pattern, unknown pointer id", id)
-			}
-
-			// updates only if field has changed
-			if restriction.Pattern == nil || restriction.Pattern != tmp {
-				restriction.Pattern = tmp
+				log.Println("DecodePointers: restriction.Pattern, unknown pointer id", id)
+				restriction.Pattern = nil
+			} else {
+				// updates only if field has changed
+				if restriction.Pattern == nil || restriction.Pattern != tmp {
+					restriction.Pattern = tmp
+				}
 			}
 		} else {
 			restriction.Pattern = nil
@@ -588,13 +596,15 @@ func (restrictionDB *RestrictionDB) DecodePointers(backRepo *BackRepoStruct, res
 		if id != 0 {
 			tmp, ok := backRepo.BackRepoWhiteSpace.Map_WhiteSpaceDBID_WhiteSpacePtr[uint(id)]
 
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
 			if !ok {
-				log.Fatalln("DecodePointers: restriction.WhiteSpace, unknown pointer id", id)
-			}
-
-			// updates only if field has changed
-			if restriction.WhiteSpace == nil || restriction.WhiteSpace != tmp {
-				restriction.WhiteSpace = tmp
+				log.Println("DecodePointers: restriction.WhiteSpace, unknown pointer id", id)
+				restriction.WhiteSpace = nil
+			} else {
+				// updates only if field has changed
+				if restriction.WhiteSpace == nil || restriction.WhiteSpace != tmp {
+					restriction.WhiteSpace = tmp
+				}
 			}
 		} else {
 			restriction.WhiteSpace = nil
@@ -607,13 +617,15 @@ func (restrictionDB *RestrictionDB) DecodePointers(backRepo *BackRepoStruct, res
 		if id != 0 {
 			tmp, ok := backRepo.BackRepoMinLength.Map_MinLengthDBID_MinLengthPtr[uint(id)]
 
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
 			if !ok {
-				log.Fatalln("DecodePointers: restriction.MinLength, unknown pointer id", id)
-			}
-
-			// updates only if field has changed
-			if restriction.MinLength == nil || restriction.MinLength != tmp {
-				restriction.MinLength = tmp
+				log.Println("DecodePointers: restriction.MinLength, unknown pointer id", id)
+				restriction.MinLength = nil
+			} else {
+				// updates only if field has changed
+				if restriction.MinLength == nil || restriction.MinLength != tmp {
+					restriction.MinLength = tmp
+				}
 			}
 		} else {
 			restriction.MinLength = nil
@@ -626,13 +638,15 @@ func (restrictionDB *RestrictionDB) DecodePointers(backRepo *BackRepoStruct, res
 		if id != 0 {
 			tmp, ok := backRepo.BackRepoMaxLength.Map_MaxLengthDBID_MaxLengthPtr[uint(id)]
 
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
 			if !ok {
-				log.Fatalln("DecodePointers: restriction.MaxLength, unknown pointer id", id)
-			}
-
-			// updates only if field has changed
-			if restriction.MaxLength == nil || restriction.MaxLength != tmp {
-				restriction.MaxLength = tmp
+				log.Println("DecodePointers: restriction.MaxLength, unknown pointer id", id)
+				restriction.MaxLength = nil
+			} else {
+				// updates only if field has changed
+				if restriction.MaxLength == nil || restriction.MaxLength != tmp {
+					restriction.MaxLength = tmp
+				}
 			}
 		} else {
 			restriction.MaxLength = nil
@@ -645,13 +659,15 @@ func (restrictionDB *RestrictionDB) DecodePointers(backRepo *BackRepoStruct, res
 		if id != 0 {
 			tmp, ok := backRepo.BackRepoLength.Map_LengthDBID_LengthPtr[uint(id)]
 
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
 			if !ok {
-				log.Fatalln("DecodePointers: restriction.Length, unknown pointer id", id)
-			}
-
-			// updates only if field has changed
-			if restriction.Length == nil || restriction.Length != tmp {
-				restriction.Length = tmp
+				log.Println("DecodePointers: restriction.Length, unknown pointer id", id)
+				restriction.Length = nil
+			} else {
+				// updates only if field has changed
+				if restriction.Length == nil || restriction.Length != tmp {
+					restriction.Length = tmp
+				}
 			}
 		} else {
 			restriction.Length = nil
@@ -664,13 +680,15 @@ func (restrictionDB *RestrictionDB) DecodePointers(backRepo *BackRepoStruct, res
 		if id != 0 {
 			tmp, ok := backRepo.BackRepoTotalDigit.Map_TotalDigitDBID_TotalDigitPtr[uint(id)]
 
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
 			if !ok {
-				log.Fatalln("DecodePointers: restriction.TotalDigit, unknown pointer id", id)
-			}
-
-			// updates only if field has changed
-			if restriction.TotalDigit == nil || restriction.TotalDigit != tmp {
-				restriction.TotalDigit = tmp
+				log.Println("DecodePointers: restriction.TotalDigit, unknown pointer id", id)
+				restriction.TotalDigit = nil
+			} else {
+				// updates only if field has changed
+				if restriction.TotalDigit == nil || restriction.TotalDigit != tmp {
+					restriction.TotalDigit = tmp
+				}
 			}
 		} else {
 			restriction.TotalDigit = nil

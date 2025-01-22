@@ -6,7 +6,7 @@ import (
 	"io"
 	"os"
 
-	models "github.com/fullstack-lang/gongxsd/test/musicxml/go/models"
+	gongxsd_musicxml_models "github.com/fullstack-lang/gongxsd/test/musicxml/go/models"
 )
 
 func main() {
@@ -34,7 +34,7 @@ func main() {
 	// }
 
 	// Unmarshal the XML into the Books struct
-	var scorePartwise models.Score_partwise
+	var scorePartwise gongxsd_musicxml_models.Score_partwise
 	err = xml.Unmarshal(byteValue, &scorePartwise)
 	if err != nil {
 		fmt.Println("Error unmarshalling XML:", err)

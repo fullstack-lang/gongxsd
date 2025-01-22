@@ -354,13 +354,15 @@ func (whitespaceDB *WhiteSpaceDB) DecodePointers(backRepo *BackRepoStruct, white
 		if id != 0 {
 			tmp, ok := backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(id)]
 
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
 			if !ok {
-				log.Fatalln("DecodePointers: whitespace.Annotation, unknown pointer id", id)
-			}
-
-			// updates only if field has changed
-			if whitespace.Annotation == nil || whitespace.Annotation != tmp {
-				whitespace.Annotation = tmp
+				log.Println("DecodePointers: whitespace.Annotation, unknown pointer id", id)
+				whitespace.Annotation = nil
+			} else {
+				// updates only if field has changed
+				if whitespace.Annotation == nil || whitespace.Annotation != tmp {
+					whitespace.Annotation = tmp
+				}
 			}
 		} else {
 			whitespace.Annotation = nil

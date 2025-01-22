@@ -622,13 +622,15 @@ func (complextypeDB *ComplexTypeDB) DecodePointers(backRepo *BackRepoStruct, com
 		if id != 0 {
 			tmp, ok := backRepo.BackRepoElement.Map_ElementDBID_ElementPtr[uint(id)]
 
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
 			if !ok {
-				log.Fatalln("DecodePointers: complextype.OuterElement, unknown pointer id", id)
-			}
-
-			// updates only if field has changed
-			if complextype.OuterElement == nil || complextype.OuterElement != tmp {
-				complextype.OuterElement = tmp
+				log.Println("DecodePointers: complextype.OuterElement, unknown pointer id", id)
+				complextype.OuterElement = nil
+			} else {
+				// updates only if field has changed
+				if complextype.OuterElement == nil || complextype.OuterElement != tmp {
+					complextype.OuterElement = tmp
+				}
 			}
 		} else {
 			complextype.OuterElement = nil
@@ -641,13 +643,15 @@ func (complextypeDB *ComplexTypeDB) DecodePointers(backRepo *BackRepoStruct, com
 		if id != 0 {
 			tmp, ok := backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(id)]
 
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
 			if !ok {
-				log.Fatalln("DecodePointers: complextype.Annotation, unknown pointer id", id)
-			}
-
-			// updates only if field has changed
-			if complextype.Annotation == nil || complextype.Annotation != tmp {
-				complextype.Annotation = tmp
+				log.Println("DecodePointers: complextype.Annotation, unknown pointer id", id)
+				complextype.Annotation = nil
+			} else {
+				// updates only if field has changed
+				if complextype.Annotation == nil || complextype.Annotation != tmp {
+					complextype.Annotation = tmp
+				}
 			}
 		} else {
 			complextype.Annotation = nil
@@ -705,13 +709,15 @@ func (complextypeDB *ComplexTypeDB) DecodePointers(backRepo *BackRepoStruct, com
 		if id != 0 {
 			tmp, ok := backRepo.BackRepoExtension.Map_ExtensionDBID_ExtensionPtr[uint(id)]
 
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
 			if !ok {
-				log.Fatalln("DecodePointers: complextype.Extension, unknown pointer id", id)
-			}
-
-			// updates only if field has changed
-			if complextype.Extension == nil || complextype.Extension != tmp {
-				complextype.Extension = tmp
+				log.Println("DecodePointers: complextype.Extension, unknown pointer id", id)
+				complextype.Extension = nil
+			} else {
+				// updates only if field has changed
+				if complextype.Extension == nil || complextype.Extension != tmp {
+					complextype.Extension = tmp
+				}
 			}
 		} else {
 			complextype.Extension = nil
@@ -724,13 +730,15 @@ func (complextypeDB *ComplexTypeDB) DecodePointers(backRepo *BackRepoStruct, com
 		if id != 0 {
 			tmp, ok := backRepo.BackRepoSimpleContent.Map_SimpleContentDBID_SimpleContentPtr[uint(id)]
 
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
 			if !ok {
-				log.Fatalln("DecodePointers: complextype.SimpleContent, unknown pointer id", id)
-			}
-
-			// updates only if field has changed
-			if complextype.SimpleContent == nil || complextype.SimpleContent != tmp {
-				complextype.SimpleContent = tmp
+				log.Println("DecodePointers: complextype.SimpleContent, unknown pointer id", id)
+				complextype.SimpleContent = nil
+			} else {
+				// updates only if field has changed
+				if complextype.SimpleContent == nil || complextype.SimpleContent != tmp {
+					complextype.SimpleContent = tmp
+				}
 			}
 		} else {
 			complextype.SimpleContent = nil
@@ -743,13 +751,15 @@ func (complextypeDB *ComplexTypeDB) DecodePointers(backRepo *BackRepoStruct, com
 		if id != 0 {
 			tmp, ok := backRepo.BackRepoComplexContent.Map_ComplexContentDBID_ComplexContentPtr[uint(id)]
 
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
 			if !ok {
-				log.Fatalln("DecodePointers: complextype.ComplexContent, unknown pointer id", id)
-			}
-
-			// updates only if field has changed
-			if complextype.ComplexContent == nil || complextype.ComplexContent != tmp {
-				complextype.ComplexContent = tmp
+				log.Println("DecodePointers: complextype.ComplexContent, unknown pointer id", id)
+				complextype.ComplexContent = nil
+			} else {
+				// updates only if field has changed
+				if complextype.ComplexContent == nil || complextype.ComplexContent != tmp {
+					complextype.ComplexContent = tmp
+				}
 			}
 		} else {
 			complextype.ComplexContent = nil

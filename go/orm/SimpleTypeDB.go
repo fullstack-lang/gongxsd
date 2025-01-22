@@ -398,13 +398,15 @@ func (simpletypeDB *SimpleTypeDB) DecodePointers(backRepo *BackRepoStruct, simpl
 		if id != 0 {
 			tmp, ok := backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(id)]
 
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
 			if !ok {
-				log.Fatalln("DecodePointers: simpletype.Annotation, unknown pointer id", id)
-			}
-
-			// updates only if field has changed
-			if simpletype.Annotation == nil || simpletype.Annotation != tmp {
-				simpletype.Annotation = tmp
+				log.Println("DecodePointers: simpletype.Annotation, unknown pointer id", id)
+				simpletype.Annotation = nil
+			} else {
+				// updates only if field has changed
+				if simpletype.Annotation == nil || simpletype.Annotation != tmp {
+					simpletype.Annotation = tmp
+				}
 			}
 		} else {
 			simpletype.Annotation = nil
@@ -417,13 +419,15 @@ func (simpletypeDB *SimpleTypeDB) DecodePointers(backRepo *BackRepoStruct, simpl
 		if id != 0 {
 			tmp, ok := backRepo.BackRepoRestriction.Map_RestrictionDBID_RestrictionPtr[uint(id)]
 
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
 			if !ok {
-				log.Fatalln("DecodePointers: simpletype.Restriction, unknown pointer id", id)
-			}
-
-			// updates only if field has changed
-			if simpletype.Restriction == nil || simpletype.Restriction != tmp {
-				simpletype.Restriction = tmp
+				log.Println("DecodePointers: simpletype.Restriction, unknown pointer id", id)
+				simpletype.Restriction = nil
+			} else {
+				// updates only if field has changed
+				if simpletype.Restriction == nil || simpletype.Restriction != tmp {
+					simpletype.Restriction = tmp
+				}
 			}
 		} else {
 			simpletype.Restriction = nil
@@ -436,13 +440,15 @@ func (simpletypeDB *SimpleTypeDB) DecodePointers(backRepo *BackRepoStruct, simpl
 		if id != 0 {
 			tmp, ok := backRepo.BackRepoUnion.Map_UnionDBID_UnionPtr[uint(id)]
 
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
 			if !ok {
-				log.Fatalln("DecodePointers: simpletype.Union, unknown pointer id", id)
-			}
-
-			// updates only if field has changed
-			if simpletype.Union == nil || simpletype.Union != tmp {
-				simpletype.Union = tmp
+				log.Println("DecodePointers: simpletype.Union, unknown pointer id", id)
+				simpletype.Union = nil
+			} else {
+				// updates only if field has changed
+				if simpletype.Union == nil || simpletype.Union != tmp {
+					simpletype.Union = tmp
+				}
 			}
 		} else {
 			simpletype.Union = nil

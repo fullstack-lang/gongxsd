@@ -354,13 +354,15 @@ func (maxinclusiveDB *MaxInclusiveDB) DecodePointers(backRepo *BackRepoStruct, m
 		if id != 0 {
 			tmp, ok := backRepo.BackRepoAnnotation.Map_AnnotationDBID_AnnotationPtr[uint(id)]
 
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
 			if !ok {
-				log.Fatalln("DecodePointers: maxinclusive.Annotation, unknown pointer id", id)
-			}
-
-			// updates only if field has changed
-			if maxinclusive.Annotation == nil || maxinclusive.Annotation != tmp {
-				maxinclusive.Annotation = tmp
+				log.Println("DecodePointers: maxinclusive.Annotation, unknown pointer id", id)
+				maxinclusive.Annotation = nil
+			} else {
+				// updates only if field has changed
+				if maxinclusive.Annotation == nil || maxinclusive.Annotation != tmp {
+					maxinclusive.Annotation = tmp
+				}
 			}
 		} else {
 			maxinclusive.Annotation = nil
