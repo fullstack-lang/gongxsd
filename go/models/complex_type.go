@@ -65,13 +65,20 @@ func (ct *ComplexType) GetFields(stage *StageStruct) (fields string) {
 		} else {
 			log.Fatalln("Unkown attribute group", referencedAg.Ref)
 		}
-
 	}
 
 	if ct.SimpleContent != nil {
 		if ct.SimpleContent.Extension != nil {
 			generateAttributes(ct.SimpleContent.Extension.Attributes, stMap, setOfFieldsGoIdentifiers, &fields)
+			for _, referencedAg := range ct.SimpleContent.Extension.AttributeGroups {
 
+				if namedAg, ok := agMap[referencedAg.Ref]; ok {
+					fields += "\n\n\t// generated from attribute group \"" + referencedAg.Ref +
+						"\n\t" + namedAg.GoIdentifier
+				} else {
+					log.Fatalln("Unkown attribute group", referencedAg.Ref)
+				}
+			}
 			// remove namespace from type
 			if NsPrefix(ct.SimpleContent.Extension.Base) != "" {
 				ct.SimpleContent.Extension.Base = Name(ct.SimpleContent.Extension.Base)

@@ -646,6 +646,9 @@ func (stage *StageStruct) StageBranchExtension(extension *Extension) {
 	for _, _attribute := range extension.Attributes {
 		StageBranch(stage, _attribute)
 	}
+	for _, _attributegroup := range extension.AttributeGroups {
+		StageBranch(stage, _attributegroup)
+	}
 
 }
 
@@ -1450,6 +1453,9 @@ func CopyBranchExtension(mapOrigCopy map[any]any, extensionFrom *Extension) (ext
 	for _, _attribute := range extensionFrom.Attributes {
 		extensionTo.Attributes = append(extensionTo.Attributes, CopyBranchAttribute(mapOrigCopy, _attribute))
 	}
+	for _, _attributegroup := range extensionFrom.AttributeGroups {
+		extensionTo.AttributeGroups = append(extensionTo.AttributeGroups, CopyBranchAttributeGroup(mapOrigCopy, _attributegroup))
+	}
 
 	return
 }
@@ -2241,6 +2247,9 @@ func (stage *StageStruct) UnstageBranchExtension(extension *Extension) {
 	}
 	for _, _attribute := range extension.Attributes {
 		UnstageBranch(stage, _attribute)
+	}
+	for _, _attributegroup := range extension.AttributeGroups {
+		UnstageBranch(stage, _attributegroup)
 	}
 
 }

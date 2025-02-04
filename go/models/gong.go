@@ -195,6 +195,8 @@ type StageStruct struct {
 
 	Extension_Attributes_reverseMap map[*Attribute]*Extension
 
+	Extension_AttributeGroups_reverseMap map[*AttributeGroup]*Extension
+
 	OnAfterExtensionCreateCallback OnAfterCreateInterface[Extension]
 	OnAfterExtensionUpdateCallback OnAfterUpdateInterface[Extension]
 	OnAfterExtensionDeleteCallback OnAfterDeleteInterface[Extension]
@@ -2791,6 +2793,8 @@ func GetAssociationName[Type Gongstruct]() *Type {
 			// Initialisation of associations
 			// field is initialized with an instance of Attribute with the name of the field
 			Attributes: []*Attribute{{Name: "Attributes"}},
+			// field is initialized with an instance of AttributeGroup with the name of the field
+			AttributeGroups: []*AttributeGroup{{Name: "AttributeGroups"}},
 		}).(*Type)
 	case Group:
 		return any(&Group{
@@ -4032,6 +4036,14 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 				}
 			}
 			return any(res).(map[*End]*Start)
+		case "AttributeGroups":
+			res := make(map[*AttributeGroup]*Extension)
+			for extension := range stage.Extensions {
+				for _, attributegroup_ := range extension.AttributeGroups {
+					res[attributegroup_] = extension
+				}
+			}
+			return any(res).(map[*End]*Start)
 		}
 	// reverse maps of direct associations of Group
 	case Group:
@@ -4396,7 +4408,7 @@ func GetFields[Type Gongstruct]() (res []string) {
 	case Enumeration:
 		res = []string{"Name", "Annotation", "Value"}
 	case Extension:
-		res = []string{"Name", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth", "MinOccurs", "MaxOccurs", "Base", "Ref", "Attributes"}
+		res = []string{"Name", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth", "MinOccurs", "MaxOccurs", "Base", "Ref", "Attributes", "AttributeGroups"}
 	case Group:
 		res = []string{"Name", "Annotation", "NameXSD", "Ref", "IsAnonymous", "OuterElement", "HasNameConflict", "GoIdentifier", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth", "MinOccurs", "MaxOccurs"}
 	case Length:
@@ -4488,6 +4500,9 @@ func GetReverseFields[Type Gongstruct]() (res []ReverseField) {
 		rf.Fieldname = "AttributeGroups"
 		res = append(res, rf)
 		rf.GongstructName = "ComplexType"
+		rf.Fieldname = "AttributeGroups"
+		res = append(res, rf)
+		rf.GongstructName = "Extension"
 		rf.Fieldname = "AttributeGroups"
 		res = append(res, rf)
 		rf.GongstructName = "Schema"
@@ -4684,7 +4699,7 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 	case *Enumeration:
 		res = []string{"Name", "Annotation", "Value"}
 	case *Extension:
-		res = []string{"Name", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth", "MinOccurs", "MaxOccurs", "Base", "Ref", "Attributes"}
+		res = []string{"Name", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth", "MinOccurs", "MaxOccurs", "Base", "Ref", "Attributes", "AttributeGroups"}
 	case *Group:
 		res = []string{"Name", "Annotation", "NameXSD", "Ref", "IsAnonymous", "OuterElement", "HasNameConflict", "GoIdentifier", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth", "MinOccurs", "MaxOccurs"}
 	case *Length:
@@ -5231,6 +5246,13 @@ func GetFieldStringValueFromPointer(instance any, fieldName string) (res GongFie
 			res.valueString = inferedInstance.Ref
 		case "Attributes":
 			for idx, __instance__ := range inferedInstance.Attributes {
+				if idx > 0 {
+					res.valueString += "\n"
+				}
+				res.valueString += __instance__.Name
+			}
+		case "AttributeGroups":
+			for idx, __instance__ := range inferedInstance.AttributeGroups {
 				if idx > 0 {
 					res.valueString += "\n"
 				}
@@ -6114,6 +6136,13 @@ func GetFieldStringValue(instance any, fieldName string) (res GongFieldValue) {
 			res.valueString = inferedInstance.Ref
 		case "Attributes":
 			for idx, __instance__ := range inferedInstance.Attributes {
+				if idx > 0 {
+					res.valueString += "\n"
+				}
+				res.valueString += __instance__.Name
+			}
+		case "AttributeGroups":
+			for idx, __instance__ := range inferedInstance.AttributeGroups {
 				if idx > 0 {
 					res.valueString += "\n"
 				}

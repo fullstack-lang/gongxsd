@@ -109,6 +109,13 @@ func GetReverseFieldOwnerName(
 					res = _complextype.Name
 				}
 			}
+		case "Extension":
+			switch reverseField.Fieldname {
+			case "AttributeGroups":
+				if _extension, ok := stage.Extension_AttributeGroups_reverseMap[inst]; ok {
+					res = _extension.Name
+				}
+			}
 		case "Schema":
 			switch reverseField.Fieldname {
 			case "AttributeGroups":
@@ -532,6 +539,11 @@ func GetReverseFieldOwner[T models.Gongstruct](
 			switch reverseField.Fieldname {
 			case "AttributeGroups":
 				res = stage.ComplexType_AttributeGroups_reverseMap[inst]
+			}
+		case "Extension":
+			switch reverseField.Fieldname {
+			case "AttributeGroups":
+				res = stage.Extension_AttributeGroups_reverseMap[inst]
 			}
 		case "Schema":
 			switch reverseField.Fieldname {

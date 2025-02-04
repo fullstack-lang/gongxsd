@@ -808,6 +808,48 @@ func (attributegroupFormCallback *AttributeGroupFormCallback) OnSave() {
 					}
 				}
 			}
+		case "Extension:AttributeGroups":
+			// we need to retrieve the field owner before the change
+			var pastExtensionOwner *models.Extension
+			var rf models.ReverseField
+			_ = rf
+			rf.GongstructName = "Extension"
+			rf.Fieldname = "AttributeGroups"
+			reverseFieldOwner := orm.GetReverseFieldOwner(
+				attributegroupFormCallback.probe.stageOfInterest,
+				attributegroupFormCallback.probe.backRepoOfInterest,
+				attributegroup_,
+				&rf)
+
+			if reverseFieldOwner != nil {
+				pastExtensionOwner = reverseFieldOwner.(*models.Extension)
+			}
+			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
+				if pastExtensionOwner != nil {
+					idx := slices.Index(pastExtensionOwner.AttributeGroups, attributegroup_)
+					pastExtensionOwner.AttributeGroups = slices.Delete(pastExtensionOwner.AttributeGroups, idx, idx+1)
+				}
+			} else {
+				// we need to retrieve the field owner after the change
+				// parse all astrcut and get the one with the name in the
+				// div
+				for _extension := range *models.GetGongstructInstancesSet[models.Extension](attributegroupFormCallback.probe.stageOfInterest) {
+
+					// the match is base on the name
+					if _extension.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
+						newExtensionOwner := _extension // we have a match
+						if pastExtensionOwner != nil {
+							if newExtensionOwner != pastExtensionOwner {
+								idx := slices.Index(pastExtensionOwner.AttributeGroups, attributegroup_)
+								pastExtensionOwner.AttributeGroups = slices.Delete(pastExtensionOwner.AttributeGroups, idx, idx+1)
+								newExtensionOwner.AttributeGroups = append(newExtensionOwner.AttributeGroups, attributegroup_)
+							}
+						} else {
+							newExtensionOwner.AttributeGroups = append(newExtensionOwner.AttributeGroups, attributegroup_)
+						}
+					}
+				}
+			}
 		case "Schema:AttributeGroups":
 			// we need to retrieve the field owner before the change
 			var pastSchemaOwner *models.Schema

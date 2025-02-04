@@ -253,6 +253,14 @@ func (stage *StageStruct) ComputeReverseMaps() {
 			stage.Extension_Attributes_reverseMap[_attribute] = extension
 		}
 	}
+	clear(stage.Extension_AttributeGroups_reverseMap)
+	stage.Extension_AttributeGroups_reverseMap = make(map[*AttributeGroup]*Extension)
+	for extension := range stage.Extensions {
+		_ = extension
+		for _, _attributegroup := range extension.AttributeGroups {
+			stage.Extension_AttributeGroups_reverseMap[_attributegroup] = extension
+		}
+	}
 
 	// Compute reverse map for named struct Group
 	// insertion point per field

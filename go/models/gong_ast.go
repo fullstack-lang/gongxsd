@@ -1038,6 +1038,12 @@ func UnmarshallGongstructStaging(stage *StageStruct, cmap *ast.CommentMap, assig
 							target := __gong__map_Attribute[targetIdentifier]
 							__gong__map_Extension[identifier].Attributes =
 								append(__gong__map_Extension[identifier].Attributes, target)
+						case "AttributeGroups":
+							// remove first and last char
+							targetIdentifier := ident.Name
+							target := __gong__map_AttributeGroup[targetIdentifier]
+							__gong__map_Extension[identifier].AttributeGroups =
+								append(__gong__map_Extension[identifier].AttributeGroups, target)
 						}
 					case "Group":
 						switch fieldName {

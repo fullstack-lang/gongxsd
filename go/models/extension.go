@@ -7,5 +7,6 @@ type Extension struct {
 	Base string `xml:"base,attr"`
 	Ref  string `xml:"ref,attr"`
 
-	Attributes []*Attribute `xml:"attribute"`
+	Attributes      []*Attribute      `xml:"attribute"`
+	AttributeGroups []*AttributeGroup `xml:"attributeGroup"`
 }

@@ -102,6 +102,21 @@
             ]
         },
         {
+            "name": "read musicxml -marshallOnCommit=music",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceFolder}/go/cmd/gongxsd-cli",
+            "args": [
+                "read",
+                "../../../test/musicxml/musicxml.xsd",
+                "-o",
+                "../../../test/musicxml/go/models/models.go",
+                "-m",
+                "music_stage",
+            ]
+        },
+        {
             "name": "roundtrip musicxml",
             "type": "go",
             "request": "launch",
