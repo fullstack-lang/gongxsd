@@ -117,10 +117,10 @@ type BackRepoPatternStruct struct {
 
 	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoPattern *BackRepoPatternStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoPattern *BackRepoPatternStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoPattern.stage
 	return
 }
@@ -138,9 +138,19 @@ func (backRepoPattern *BackRepoPatternStruct) GetPatternDBFromPatternPtr(pattern
 
 // BackRepoPattern.CommitPhaseOne commits all staged instances of Pattern to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoPattern *BackRepoPatternStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoPattern *BackRepoPatternStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var patterns []*models.Pattern
 	for pattern := range stage.Patterns {
+		patterns = append(patterns, pattern)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(patterns, func(i, j int) bool {
+		return stage.PatternMap_Staged_Order[patterns[i]] < stage.PatternMap_Staged_Order[patterns[j]]
+	})
+
+	for _, pattern := range patterns {
 		backRepoPattern.CommitPhaseOneInstance(pattern)
 	}
 

@@ -2,17 +2,15 @@
 package probe
 
 import (
-	"log"
-
 	gong_models "github.com/fullstack-lang/gong/go/models"
-	gongtree_models "github.com/fullstack-lang/gongtree/go/models"
+	gongtree_models "github.com/fullstack-lang/gong/lib/tree/go/models"
 
 	"github.com/fullstack-lang/gongxsd/go/models"
 )
 
 type TreeNodeImplGongstruct struct {
 	gongStruct *gong_models.GongStruct
-	probe *Probe
+	probe      *Probe
 }
 
 func NewTreeNodeImplGongstruct(
@@ -27,7 +25,7 @@ func NewTreeNodeImplGongstruct(
 }
 
 func (nodeImplGongstruct *TreeNodeImplGongstruct) OnAfterUpdate(
-	gongtreeStage *gongtree_models.StageStruct,
+	gongtreeStage *gongtree_models.Stage,
 	stagedNode, frontNode *gongtree_models.Node) {
 
 	// setting the value of the staged node	to the new value
@@ -49,86 +47,86 @@ func (nodeImplGongstruct *TreeNodeImplGongstruct) OnAfterUpdate(
 
 	// the node was selected. Therefore, one request the
 	// table to route to the table
-	log.Println("NodeImplGongstruct:OnAfterUpdate with: ", nodeImplGongstruct.gongStruct.GetName())
+	// log.Println("NodeImplGongstruct:OnAfterUpdate with: ", nodeImplGongstruct.gongStruct.GetName())
 
 	// insertion point
 	if nodeImplGongstruct.gongStruct.GetName() == "All" {
-		fillUpTable[models.All](nodeImplGongstruct.probe)
+		updateAndCommitTable[models.All](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Annotation" {
-		fillUpTable[models.Annotation](nodeImplGongstruct.probe)
+		updateAndCommitTable[models.Annotation](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Attribute" {
-		fillUpTable[models.Attribute](nodeImplGongstruct.probe)
+		updateAndCommitTable[models.Attribute](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "AttributeGroup" {
-		fillUpTable[models.AttributeGroup](nodeImplGongstruct.probe)
+		updateAndCommitTable[models.AttributeGroup](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Choice" {
-		fillUpTable[models.Choice](nodeImplGongstruct.probe)
+		updateAndCommitTable[models.Choice](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "ComplexContent" {
-		fillUpTable[models.ComplexContent](nodeImplGongstruct.probe)
+		updateAndCommitTable[models.ComplexContent](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "ComplexType" {
-		fillUpTable[models.ComplexType](nodeImplGongstruct.probe)
+		updateAndCommitTable[models.ComplexType](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Documentation" {
-		fillUpTable[models.Documentation](nodeImplGongstruct.probe)
+		updateAndCommitTable[models.Documentation](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Element" {
-		fillUpTable[models.Element](nodeImplGongstruct.probe)
+		updateAndCommitTable[models.Element](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Enumeration" {
-		fillUpTable[models.Enumeration](nodeImplGongstruct.probe)
+		updateAndCommitTable[models.Enumeration](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Extension" {
-		fillUpTable[models.Extension](nodeImplGongstruct.probe)
+		updateAndCommitTable[models.Extension](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Group" {
-		fillUpTable[models.Group](nodeImplGongstruct.probe)
+		updateAndCommitTable[models.Group](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Length" {
-		fillUpTable[models.Length](nodeImplGongstruct.probe)
+		updateAndCommitTable[models.Length](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "MaxInclusive" {
-		fillUpTable[models.MaxInclusive](nodeImplGongstruct.probe)
+		updateAndCommitTable[models.MaxInclusive](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "MaxLength" {
-		fillUpTable[models.MaxLength](nodeImplGongstruct.probe)
+		updateAndCommitTable[models.MaxLength](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "MinInclusive" {
-		fillUpTable[models.MinInclusive](nodeImplGongstruct.probe)
+		updateAndCommitTable[models.MinInclusive](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "MinLength" {
-		fillUpTable[models.MinLength](nodeImplGongstruct.probe)
+		updateAndCommitTable[models.MinLength](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Pattern" {
-		fillUpTable[models.Pattern](nodeImplGongstruct.probe)
+		updateAndCommitTable[models.Pattern](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Restriction" {
-		fillUpTable[models.Restriction](nodeImplGongstruct.probe)
+		updateAndCommitTable[models.Restriction](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Schema" {
-		fillUpTable[models.Schema](nodeImplGongstruct.probe)
+		updateAndCommitTable[models.Schema](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Sequence" {
-		fillUpTable[models.Sequence](nodeImplGongstruct.probe)
+		updateAndCommitTable[models.Sequence](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "SimpleContent" {
-		fillUpTable[models.SimpleContent](nodeImplGongstruct.probe)
+		updateAndCommitTable[models.SimpleContent](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "SimpleType" {
-		fillUpTable[models.SimpleType](nodeImplGongstruct.probe)
+		updateAndCommitTable[models.SimpleType](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "TotalDigit" {
-		fillUpTable[models.TotalDigit](nodeImplGongstruct.probe)
+		updateAndCommitTable[models.TotalDigit](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Union" {
-		fillUpTable[models.Union](nodeImplGongstruct.probe)
+		updateAndCommitTable[models.Union](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "WhiteSpace" {
-		fillUpTable[models.WhiteSpace](nodeImplGongstruct.probe)
+		updateAndCommitTable[models.WhiteSpace](nodeImplGongstruct.probe)
 	}
 
 	// set color for node and reset all other nodes color

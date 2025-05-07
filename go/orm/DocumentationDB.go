@@ -125,10 +125,10 @@ type BackRepoDocumentationStruct struct {
 
 	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoDocumentation *BackRepoDocumentationStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoDocumentation *BackRepoDocumentationStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoDocumentation.stage
 	return
 }
@@ -146,9 +146,19 @@ func (backRepoDocumentation *BackRepoDocumentationStruct) GetDocumentationDBFrom
 
 // BackRepoDocumentation.CommitPhaseOne commits all staged instances of Documentation to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoDocumentation *BackRepoDocumentationStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoDocumentation *BackRepoDocumentationStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var documentations []*models.Documentation
 	for documentation := range stage.Documentations {
+		documentations = append(documentations, documentation)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(documentations, func(i, j int) bool {
+		return stage.DocumentationMap_Staged_Order[documentations[i]] < stage.DocumentationMap_Staged_Order[documentations[j]]
+	})
+
+	for _, documentation := range documentations {
 		backRepoDocumentation.CommitPhaseOneInstance(documentation)
 	}
 

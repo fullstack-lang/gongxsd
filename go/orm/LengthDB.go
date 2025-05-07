@@ -117,10 +117,10 @@ type BackRepoLengthStruct struct {
 
 	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoLength *BackRepoLengthStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoLength *BackRepoLengthStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoLength.stage
 	return
 }
@@ -138,9 +138,19 @@ func (backRepoLength *BackRepoLengthStruct) GetLengthDBFromLengthPtr(length *mod
 
 // BackRepoLength.CommitPhaseOne commits all staged instances of Length to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoLength *BackRepoLengthStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoLength *BackRepoLengthStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var lengths []*models.Length
 	for length := range stage.Lengths {
+		lengths = append(lengths, length)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(lengths, func(i, j int) bool {
+		return stage.LengthMap_Staged_Order[lengths[i]] < stage.LengthMap_Staged_Order[lengths[j]]
+	})
+
+	for _, length := range lengths {
 		backRepoLength.CommitPhaseOneInstance(length)
 	}
 

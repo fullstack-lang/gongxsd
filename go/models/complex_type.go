@@ -36,7 +36,7 @@ type ComplexType struct {
 	OuterParticleOwnerAbstract
 }
 
-func (ct *ComplexType) GetFields(stage *StageStruct) (fields string) {
+func (ct *ComplexType) GetFields(stage *Stage) (fields string) {
 	setOfFieldsGoIdentifiers := make(map[string]any)
 
 	stMap := make(map[string]*SimpleType)

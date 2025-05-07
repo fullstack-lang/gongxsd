@@ -163,10 +163,10 @@ type BackRepoChoiceStruct struct {
 
 	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoChoice *BackRepoChoiceStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoChoice *BackRepoChoiceStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoChoice.stage
 	return
 }
@@ -184,9 +184,19 @@ func (backRepoChoice *BackRepoChoiceStruct) GetChoiceDBFromChoicePtr(choice *mod
 
 // BackRepoChoice.CommitPhaseOne commits all staged instances of Choice to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoChoice *BackRepoChoiceStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoChoice *BackRepoChoiceStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var choices []*models.Choice
 	for choice := range stage.Choices {
+		choices = append(choices, choice)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(choices, func(i, j int) bool {
+		return stage.ChoiceMap_Staged_Order[choices[i]] < stage.ChoiceMap_Staged_Order[choices[j]]
+	})
+
+	for _, choice := range choices {
 		backRepoChoice.CommitPhaseOneInstance(choice)
 	}
 

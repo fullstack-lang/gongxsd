@@ -117,10 +117,10 @@ type BackRepoWhiteSpaceStruct struct {
 
 	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoWhiteSpace *BackRepoWhiteSpaceStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoWhiteSpace *BackRepoWhiteSpaceStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoWhiteSpace.stage
 	return
 }
@@ -138,9 +138,19 @@ func (backRepoWhiteSpace *BackRepoWhiteSpaceStruct) GetWhiteSpaceDBFromWhiteSpac
 
 // BackRepoWhiteSpace.CommitPhaseOne commits all staged instances of WhiteSpace to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoWhiteSpace *BackRepoWhiteSpaceStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoWhiteSpace *BackRepoWhiteSpaceStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var whitespaces []*models.WhiteSpace
 	for whitespace := range stage.WhiteSpaces {
+		whitespaces = append(whitespaces, whitespace)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(whitespaces, func(i, j int) bool {
+		return stage.WhiteSpaceMap_Staged_Order[whitespaces[i]] < stage.WhiteSpaceMap_Staged_Order[whitespaces[j]]
+	})
+
+	for _, whitespace := range whitespaces {
 		backRepoWhiteSpace.CommitPhaseOneInstance(whitespace)
 	}
 

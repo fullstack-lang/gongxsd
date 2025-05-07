@@ -11,6 +11,9 @@ import (
 	gongxsd_stack "github.com/fullstack-lang/gongxsd/go/stack"
 	gongxsd_static "github.com/fullstack-lang/gongxsd/go/static"
 
+	// insertion point for models import
+	gongxsd_models "github.com/fullstack-lang/gongxsd/go/models"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -25,9 +28,15 @@ func process(args []string) (r *gin.Engine, stack *gongxsd_stack.Stack) {
 		fmt.Printf("Reading file: %s\n", xsdFilePath)
 	}
 
+	// setup the static file server and get the controller
 	r = gongxsd_static.ServeStaticFiles(false)
+
+	// setup model stack with its probe
 	stack = gongxsd_stack.NewStack(r, "gongxsd", *unmarshallFromCode, *marshallOnCommit, "", false, true)
-	stack.Stage.Reset()
+	stack.Probe.Refresh()
+
+	// insertion point for call to stager
+	gongxsd_models.NewStager(r, stack.Stage)
 
 	content, err := os.ReadFile(xsdFilePath)
 	if err != nil {

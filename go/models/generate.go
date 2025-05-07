@@ -13,7 +13,7 @@ import (
 //
 // - all Named Complex Type => Gongstruct
 // - all Elements with inlined ComplexType => Gongstruct
-func Generate(stage *StageStruct, outputFilePath string) {
+func Generate(stage *Stage, outputFilePath string) {
 
 	// generate the typescript file
 	codeGO := ModelsFileTemplate

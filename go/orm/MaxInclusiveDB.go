@@ -117,10 +117,10 @@ type BackRepoMaxInclusiveStruct struct {
 
 	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoMaxInclusive *BackRepoMaxInclusiveStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoMaxInclusive *BackRepoMaxInclusiveStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoMaxInclusive.stage
 	return
 }
@@ -138,9 +138,19 @@ func (backRepoMaxInclusive *BackRepoMaxInclusiveStruct) GetMaxInclusiveDBFromMax
 
 // BackRepoMaxInclusive.CommitPhaseOne commits all staged instances of MaxInclusive to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoMaxInclusive *BackRepoMaxInclusiveStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoMaxInclusive *BackRepoMaxInclusiveStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var maxinclusives []*models.MaxInclusive
 	for maxinclusive := range stage.MaxInclusives {
+		maxinclusives = append(maxinclusives, maxinclusive)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(maxinclusives, func(i, j int) bool {
+		return stage.MaxInclusiveMap_Staged_Order[maxinclusives[i]] < stage.MaxInclusiveMap_Staged_Order[maxinclusives[j]]
+	})
+
+	for _, maxinclusive := range maxinclusives {
 		backRepoMaxInclusive.CommitPhaseOneInstance(maxinclusive)
 	}
 

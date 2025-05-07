@@ -184,10 +184,10 @@ type BackRepoAttributeStruct struct {
 
 	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoAttribute *BackRepoAttributeStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoAttribute *BackRepoAttributeStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoAttribute.stage
 	return
 }
@@ -205,9 +205,19 @@ func (backRepoAttribute *BackRepoAttributeStruct) GetAttributeDBFromAttributePtr
 
 // BackRepoAttribute.CommitPhaseOne commits all staged instances of Attribute to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoAttribute *BackRepoAttributeStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoAttribute *BackRepoAttributeStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var attributes []*models.Attribute
 	for attribute := range stage.Attributes {
+		attributes = append(attributes, attribute)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(attributes, func(i, j int) bool {
+		return stage.AttributeMap_Staged_Order[attributes[i]] < stage.AttributeMap_Staged_Order[attributes[j]]
+	})
+
+	for _, attribute := range attributes {
 		backRepoAttribute.CommitPhaseOneInstance(attribute)
 	}
 

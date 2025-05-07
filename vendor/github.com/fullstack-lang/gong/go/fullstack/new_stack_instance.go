@@ -25,7 +25,7 @@ func NewStackInstance(
 	stackPath string,
 	// filesnames is an optional parameter for the name of the database
 	filenames ...string) (
-	stage *models.StageStruct,
+	stage *models.Stage,
 	backRepo *orm.BackRepoStruct) {
 
 	stage = models.NewStage(stackPath)
@@ -36,9 +36,7 @@ func NewStackInstance(
 
 	backRepo = orm.NewBackRepo(stage, filenames[0])
 
-	if stackPath != "" {
-		controllers.GetController().AddBackRepo(backRepo, stackPath)
-	}
+	controllers.GetController().AddBackRepo(backRepo, stackPath)
 
 	controllers.Register(r)
 

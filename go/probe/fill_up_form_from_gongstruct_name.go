@@ -2,7 +2,7 @@
 package probe
 
 import (
-	form "github.com/fullstack-lang/gongtable/go/models"
+	form "github.com/fullstack-lang/gong/lib/table/go/models"
 
 	"github.com/fullstack-lang/gongxsd/go/models"
 )
@@ -27,7 +27,7 @@ func FillUpFormFromGongstructName(
 	// insertion point
 	case "All":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "All Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__AllFormCallback(
@@ -40,7 +40,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(all, formGroup, probe)
 	case "Annotation":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "Annotation Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__AnnotationFormCallback(
@@ -53,7 +53,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(annotation, formGroup, probe)
 	case "Attribute":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "Attribute Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__AttributeFormCallback(
@@ -66,7 +66,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(attribute, formGroup, probe)
 	case "AttributeGroup":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "AttributeGroup Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__AttributeGroupFormCallback(
@@ -79,7 +79,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(attributegroup, formGroup, probe)
 	case "Choice":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "Choice Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__ChoiceFormCallback(
@@ -92,7 +92,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(choice, formGroup, probe)
 	case "ComplexContent":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "ComplexContent Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__ComplexContentFormCallback(
@@ -105,7 +105,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(complexcontent, formGroup, probe)
 	case "ComplexType":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "ComplexType Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__ComplexTypeFormCallback(
@@ -118,7 +118,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(complextype, formGroup, probe)
 	case "Documentation":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "Documentation Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__DocumentationFormCallback(
@@ -131,7 +131,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(documentation, formGroup, probe)
 	case "Element":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "Element Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__ElementFormCallback(
@@ -144,7 +144,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(element, formGroup, probe)
 	case "Enumeration":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "Enumeration Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__EnumerationFormCallback(
@@ -157,7 +157,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(enumeration, formGroup, probe)
 	case "Extension":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "Extension Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__ExtensionFormCallback(
@@ -170,7 +170,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(extension, formGroup, probe)
 	case "Group":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "Group Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__GroupFormCallback(
@@ -183,7 +183,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(group, formGroup, probe)
 	case "Length":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "Length Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__LengthFormCallback(
@@ -196,7 +196,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(length, formGroup, probe)
 	case "MaxInclusive":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "MaxInclusive Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__MaxInclusiveFormCallback(
@@ -209,7 +209,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(maxinclusive, formGroup, probe)
 	case "MaxLength":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "MaxLength Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__MaxLengthFormCallback(
@@ -222,7 +222,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(maxlength, formGroup, probe)
 	case "MinInclusive":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "MinInclusive Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__MinInclusiveFormCallback(
@@ -235,7 +235,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(mininclusive, formGroup, probe)
 	case "MinLength":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "MinLength Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__MinLengthFormCallback(
@@ -248,7 +248,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(minlength, formGroup, probe)
 	case "Pattern":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "Pattern Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__PatternFormCallback(
@@ -261,7 +261,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(pattern, formGroup, probe)
 	case "Restriction":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "Restriction Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__RestrictionFormCallback(
@@ -274,7 +274,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(restriction, formGroup, probe)
 	case "Schema":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "Schema Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__SchemaFormCallback(
@@ -287,7 +287,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(schema, formGroup, probe)
 	case "Sequence":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "Sequence Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__SequenceFormCallback(
@@ -300,7 +300,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(sequence, formGroup, probe)
 	case "SimpleContent":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "SimpleContent Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__SimpleContentFormCallback(
@@ -313,7 +313,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(simplecontent, formGroup, probe)
 	case "SimpleType":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "SimpleType Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__SimpleTypeFormCallback(
@@ -326,7 +326,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(simpletype, formGroup, probe)
 	case "TotalDigit":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "TotalDigit Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__TotalDigitFormCallback(
@@ -339,7 +339,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(totaldigit, formGroup, probe)
 	case "Union":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "Union Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__UnionFormCallback(
@@ -352,7 +352,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(union, formGroup, probe)
 	case "WhiteSpace":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "WhiteSpace Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__WhiteSpaceFormCallback(

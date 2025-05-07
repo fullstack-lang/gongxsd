@@ -117,10 +117,10 @@ type BackRepoEnumerationStruct struct {
 
 	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoEnumeration *BackRepoEnumerationStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoEnumeration *BackRepoEnumerationStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoEnumeration.stage
 	return
 }
@@ -138,9 +138,19 @@ func (backRepoEnumeration *BackRepoEnumerationStruct) GetEnumerationDBFromEnumer
 
 // BackRepoEnumeration.CommitPhaseOne commits all staged instances of Enumeration to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoEnumeration *BackRepoEnumerationStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoEnumeration *BackRepoEnumerationStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var enumerations []*models.Enumeration
 	for enumeration := range stage.Enumerations {
+		enumerations = append(enumerations, enumeration)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(enumerations, func(i, j int) bool {
+		return stage.EnumerationMap_Staged_Order[enumerations[i]] < stage.EnumerationMap_Staged_Order[enumerations[j]]
+	})
+
+	for _, enumeration := range enumerations {
 		backRepoEnumeration.CommitPhaseOneInstance(enumeration)
 	}
 

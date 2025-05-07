@@ -115,10 +115,10 @@ type BackRepoSimpleContentStruct struct {
 
 	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoSimpleContent *BackRepoSimpleContentStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoSimpleContent *BackRepoSimpleContentStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoSimpleContent.stage
 	return
 }
@@ -136,9 +136,19 @@ func (backRepoSimpleContent *BackRepoSimpleContentStruct) GetSimpleContentDBFrom
 
 // BackRepoSimpleContent.CommitPhaseOne commits all staged instances of SimpleContent to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoSimpleContent *BackRepoSimpleContentStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoSimpleContent *BackRepoSimpleContentStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var simplecontents []*models.SimpleContent
 	for simplecontent := range stage.SimpleContents {
+		simplecontents = append(simplecontents, simplecontent)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(simplecontents, func(i, j int) bool {
+		return stage.SimpleContentMap_Staged_Order[simplecontents[i]] < stage.SimpleContentMap_Staged_Order[simplecontents[j]]
+	})
+
+	for _, simplecontent := range simplecontents {
 		backRepoSimpleContent.CommitPhaseOneInstance(simplecontent)
 	}
 

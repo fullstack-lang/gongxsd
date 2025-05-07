@@ -52,14 +52,63 @@ github.com/dustin/go-humanize
 # github.com/frankban/quicktest v1.14.6
 ## explicit; go 1.13
 github.com/frankban/quicktest
-# github.com/fullstack-lang/gong v0.0.0-20250228015728-c81eed3e9613
+# github.com/fullstack-lang/gong v0.0.0-20250507051852-2d6005cab3b2
 ## explicit; go 1.23.1
+github.com/fullstack-lang/gong/go
 github.com/fullstack-lang/gong/go/controllers
 github.com/fullstack-lang/gong/go/db
 github.com/fullstack-lang/gong/go/fullstack
 github.com/fullstack-lang/gong/go/ignore
 github.com/fullstack-lang/gong/go/models
 github.com/fullstack-lang/gong/go/orm
+github.com/fullstack-lang/gong/lib/button/ng-github.com-fullstack-lang-gong-lib-button
+github.com/fullstack-lang/gong/lib/cursor/ng-github.com-fullstack-lang-gong-lib-cursor
+github.com/fullstack-lang/gong/lib/doc/ng-github.com-fullstack-lang-gong-lib-doc
+github.com/fullstack-lang/gong/lib/doc2/go
+github.com/fullstack-lang/gong/lib/doc2/go/controllers
+github.com/fullstack-lang/gong/lib/doc2/go/db
+github.com/fullstack-lang/gong/lib/doc2/go/fullstack
+github.com/fullstack-lang/gong/lib/doc2/go/models
+github.com/fullstack-lang/gong/lib/doc2/go/orm
+github.com/fullstack-lang/gong/lib/doc2/go/prepare
+github.com/fullstack-lang/gong/lib/doc2/ng-github.com-fullstack-lang-gong-lib-doc2
+github.com/fullstack-lang/gong/lib/gantt/ng-github.com-fullstack-lang-gong-lib-gantt
+github.com/fullstack-lang/gong/lib/load/ng-github.com-fullstack-lang-gong-lib-load
+github.com/fullstack-lang/gong/lib/sim/ng-github.com-fullstack-lang-gong-lib-sim
+github.com/fullstack-lang/gong/lib/slider/ng-github.com-fullstack-lang-gong-lib-slider
+github.com/fullstack-lang/gong/lib/split/go
+github.com/fullstack-lang/gong/lib/split/go/controllers
+github.com/fullstack-lang/gong/lib/split/go/db
+github.com/fullstack-lang/gong/lib/split/go/fullstack
+github.com/fullstack-lang/gong/lib/split/go/models
+github.com/fullstack-lang/gong/lib/split/go/orm
+github.com/fullstack-lang/gong/lib/split/go/probe
+github.com/fullstack-lang/gong/lib/split/go/stack
+github.com/fullstack-lang/gong/lib/split/ng-github.com-fullstack-lang-gong-lib-split
+github.com/fullstack-lang/gong/lib/svg/go
+github.com/fullstack-lang/gong/lib/svg/go/controllers
+github.com/fullstack-lang/gong/lib/svg/go/db
+github.com/fullstack-lang/gong/lib/svg/go/fullstack
+github.com/fullstack-lang/gong/lib/svg/go/models
+github.com/fullstack-lang/gong/lib/svg/go/orm
+github.com/fullstack-lang/gong/lib/svg/ng-github.com-fullstack-lang-gong-lib-svg
+github.com/fullstack-lang/gong/lib/table/go
+github.com/fullstack-lang/gong/lib/table/go/controllers
+github.com/fullstack-lang/gong/lib/table/go/db
+github.com/fullstack-lang/gong/lib/table/go/fullstack
+github.com/fullstack-lang/gong/lib/table/go/models
+github.com/fullstack-lang/gong/lib/table/go/orm
+github.com/fullstack-lang/gong/lib/table/ng-github.com-fullstack-lang-gong-lib-table
+github.com/fullstack-lang/gong/lib/tone/ng-github.com-fullstack-lang-gong-lib-tone
+github.com/fullstack-lang/gong/lib/tree/go
+github.com/fullstack-lang/gong/lib/tree/go/buttons
+github.com/fullstack-lang/gong/lib/tree/go/controllers
+github.com/fullstack-lang/gong/lib/tree/go/db
+github.com/fullstack-lang/gong/lib/tree/go/fullstack
+github.com/fullstack-lang/gong/lib/tree/go/models
+github.com/fullstack-lang/gong/lib/tree/go/orm
+github.com/fullstack-lang/gong/lib/tree/ng-github.com-fullstack-lang-gong-lib-tree
+github.com/fullstack-lang/gong/lib/xlsx/ng-github.com-fullstack-lang-gong-lib-xlsx
 github.com/fullstack-lang/gong/ng-github.com-fullstack-lang-gong
 # github.com/fullstack-lang/gongdoc v0.0.0-20250228015737-2b85c5f57bb8
 ## explicit; go 1.23.1

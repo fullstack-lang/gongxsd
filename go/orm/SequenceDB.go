@@ -156,10 +156,10 @@ type BackRepoSequenceStruct struct {
 
 	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoSequence *BackRepoSequenceStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoSequence *BackRepoSequenceStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoSequence.stage
 	return
 }
@@ -177,9 +177,19 @@ func (backRepoSequence *BackRepoSequenceStruct) GetSequenceDBFromSequencePtr(seq
 
 // BackRepoSequence.CommitPhaseOne commits all staged instances of Sequence to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoSequence *BackRepoSequenceStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoSequence *BackRepoSequenceStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var sequences []*models.Sequence
 	for sequence := range stage.Sequences {
+		sequences = append(sequences, sequence)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(sequences, func(i, j int) bool {
+		return stage.SequenceMap_Staged_Order[sequences[i]] < stage.SequenceMap_Staged_Order[sequences[j]]
+	})
+
+	for _, sequence := range sequences {
 		backRepoSequence.CommitPhaseOneInstance(sequence)
 	}
 

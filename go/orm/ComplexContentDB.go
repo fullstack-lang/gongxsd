@@ -107,10 +107,10 @@ type BackRepoComplexContentStruct struct {
 
 	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoComplexContent *BackRepoComplexContentStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoComplexContent *BackRepoComplexContentStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoComplexContent.stage
 	return
 }
@@ -128,9 +128,19 @@ func (backRepoComplexContent *BackRepoComplexContentStruct) GetComplexContentDBF
 
 // BackRepoComplexContent.CommitPhaseOne commits all staged instances of ComplexContent to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoComplexContent *BackRepoComplexContentStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoComplexContent *BackRepoComplexContentStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var complexcontents []*models.ComplexContent
 	for complexcontent := range stage.ComplexContents {
+		complexcontents = append(complexcontents, complexcontent)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(complexcontents, func(i, j int) bool {
+		return stage.ComplexContentMap_Staged_Order[complexcontents[i]] < stage.ComplexContentMap_Staged_Order[complexcontents[j]]
+	})
+
+	for _, complexcontent := range complexcontents {
 		backRepoComplexContent.CommitPhaseOneInstance(complexcontent)
 	}
 

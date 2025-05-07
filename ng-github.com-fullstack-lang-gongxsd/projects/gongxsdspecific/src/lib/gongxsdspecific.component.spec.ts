@@ -11,7 +11,7 @@ describe('GongxsdspecificComponent', () => {
       imports: [GongxsdspecificComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(GongxsdspecificComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

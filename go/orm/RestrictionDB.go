@@ -152,10 +152,10 @@ type BackRepoRestrictionStruct struct {
 
 	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoRestriction *BackRepoRestrictionStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoRestriction *BackRepoRestrictionStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoRestriction.stage
 	return
 }
@@ -173,9 +173,19 @@ func (backRepoRestriction *BackRepoRestrictionStruct) GetRestrictionDBFromRestri
 
 // BackRepoRestriction.CommitPhaseOne commits all staged instances of Restriction to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoRestriction *BackRepoRestrictionStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoRestriction *BackRepoRestrictionStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var restrictions []*models.Restriction
 	for restriction := range stage.Restrictions {
+		restrictions = append(restrictions, restriction)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(restrictions, func(i, j int) bool {
+		return stage.RestrictionMap_Staged_Order[restrictions[i]] < stage.RestrictionMap_Staged_Order[restrictions[j]]
+	})
+
+	for _, restriction := range restrictions {
 		backRepoRestriction.CommitPhaseOneInstance(restriction)
 	}
 

@@ -16,7 +16,7 @@ type Group struct {
 	ModelGroup
 }
 
-func (group *Group) GetFields(stage *StageStruct) (fields string) {
+func (group *Group) GetFields(stage *Stage) (fields string) {
 	setOfFieldGoIdentifiers := make(map[string]any)
 
 	stMap := make(map[string]*SimpleType)

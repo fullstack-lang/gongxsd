@@ -226,10 +226,10 @@ type BackRepoElementStruct struct {
 
 	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoElement *BackRepoElementStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoElement *BackRepoElementStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoElement.stage
 	return
 }
@@ -247,9 +247,19 @@ func (backRepoElement *BackRepoElementStruct) GetElementDBFromElementPtr(element
 
 // BackRepoElement.CommitPhaseOne commits all staged instances of Element to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoElement *BackRepoElementStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoElement *BackRepoElementStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var elements []*models.Element
 	for element := range stage.Elements {
+		elements = append(elements, element)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(elements, func(i, j int) bool {
+		return stage.ElementMap_Staged_Order[elements[i]] < stage.ElementMap_Staged_Order[elements[j]]
+	})
+
+	for _, element := range elements {
 		backRepoElement.CommitPhaseOneInstance(element)
 	}
 

@@ -1,6 +1,6 @@
 package models
 
-func PostProcessingAnalyzeXSDStructure(stage *StageStruct) {
+func PostProcessingAnalyzeXSDStructure(stage *Stage) {
 
 	// characterize complex types that are inlined
 	for element := range *GetGongstructInstancesSet[Element](stage) {

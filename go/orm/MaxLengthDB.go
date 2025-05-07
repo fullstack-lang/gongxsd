@@ -117,10 +117,10 @@ type BackRepoMaxLengthStruct struct {
 
 	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoMaxLength *BackRepoMaxLengthStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoMaxLength *BackRepoMaxLengthStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoMaxLength.stage
 	return
 }
@@ -138,9 +138,19 @@ func (backRepoMaxLength *BackRepoMaxLengthStruct) GetMaxLengthDBFromMaxLengthPtr
 
 // BackRepoMaxLength.CommitPhaseOne commits all staged instances of MaxLength to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoMaxLength *BackRepoMaxLengthStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoMaxLength *BackRepoMaxLengthStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var maxlengths []*models.MaxLength
 	for maxlength := range stage.MaxLengths {
+		maxlengths = append(maxlengths, maxlength)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(maxlengths, func(i, j int) bool {
+		return stage.MaxLengthMap_Staged_Order[maxlengths[i]] < stage.MaxLengthMap_Staged_Order[maxlengths[j]]
+	})
+
+	for _, maxlength := range maxlengths {
 		backRepoMaxLength.CommitPhaseOneInstance(maxlength)
 	}
 

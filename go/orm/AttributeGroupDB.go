@@ -154,10 +154,10 @@ type BackRepoAttributeGroupStruct struct {
 
 	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoAttributeGroup *BackRepoAttributeGroupStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoAttributeGroup *BackRepoAttributeGroupStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoAttributeGroup.stage
 	return
 }
@@ -175,9 +175,19 @@ func (backRepoAttributeGroup *BackRepoAttributeGroupStruct) GetAttributeGroupDBF
 
 // BackRepoAttributeGroup.CommitPhaseOne commits all staged instances of AttributeGroup to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoAttributeGroup *BackRepoAttributeGroupStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoAttributeGroup *BackRepoAttributeGroupStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var attributegroups []*models.AttributeGroup
 	for attributegroup := range stage.AttributeGroups {
+		attributegroups = append(attributegroups, attributegroup)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(attributegroups, func(i, j int) bool {
+		return stage.AttributeGroupMap_Staged_Order[attributegroups[i]] < stage.AttributeGroupMap_Staged_Order[attributegroups[j]]
+	})
+
+	for _, attributegroup := range attributegroups {
 		backRepoAttributeGroup.CommitPhaseOneInstance(attributegroup)
 	}
 

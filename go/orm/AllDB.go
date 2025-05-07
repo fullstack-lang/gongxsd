@@ -156,10 +156,10 @@ type BackRepoAllStruct struct {
 
 	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoAll *BackRepoAllStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoAll *BackRepoAllStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoAll.stage
 	return
 }
@@ -177,9 +177,19 @@ func (backRepoAll *BackRepoAllStruct) GetAllDBFromAllPtr(all *models.All) (allDB
 
 // BackRepoAll.CommitPhaseOne commits all staged instances of All to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoAll *BackRepoAllStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoAll *BackRepoAllStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var alls []*models.All
 	for all := range stage.Alls {
+		alls = append(alls, all)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(alls, func(i, j int) bool {
+		return stage.AllMap_Staged_Order[alls[i]] < stage.AllMap_Staged_Order[alls[j]]
+	})
+
+	for _, all := range alls {
 		backRepoAll.CommitPhaseOneInstance(all)
 	}
 

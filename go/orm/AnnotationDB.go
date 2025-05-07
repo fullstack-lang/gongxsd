@@ -110,10 +110,10 @@ type BackRepoAnnotationStruct struct {
 
 	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoAnnotation *BackRepoAnnotationStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoAnnotation *BackRepoAnnotationStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoAnnotation.stage
 	return
 }
@@ -131,9 +131,19 @@ func (backRepoAnnotation *BackRepoAnnotationStruct) GetAnnotationDBFromAnnotatio
 
 // BackRepoAnnotation.CommitPhaseOne commits all staged instances of Annotation to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoAnnotation *BackRepoAnnotationStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoAnnotation *BackRepoAnnotationStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var annotations []*models.Annotation
 	for annotation := range stage.Annotations {
+		annotations = append(annotations, annotation)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(annotations, func(i, j int) bool {
+		return stage.AnnotationMap_Staged_Order[annotations[i]] < stage.AnnotationMap_Staged_Order[annotations[j]]
+	})
+
+	for _, annotation := range annotations {
 		backRepoAnnotation.CommitPhaseOneInstance(annotation)
 	}
 

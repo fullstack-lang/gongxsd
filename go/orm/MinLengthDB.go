@@ -117,10 +117,10 @@ type BackRepoMinLengthStruct struct {
 
 	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoMinLength *BackRepoMinLengthStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoMinLength *BackRepoMinLengthStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoMinLength.stage
 	return
 }
@@ -138,9 +138,19 @@ func (backRepoMinLength *BackRepoMinLengthStruct) GetMinLengthDBFromMinLengthPtr
 
 // BackRepoMinLength.CommitPhaseOne commits all staged instances of MinLength to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoMinLength *BackRepoMinLengthStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoMinLength *BackRepoMinLengthStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var minlengths []*models.MinLength
 	for minlength := range stage.MinLengths {
+		minlengths = append(minlengths, minlength)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(minlengths, func(i, j int) bool {
+		return stage.MinLengthMap_Staged_Order[minlengths[i]] < stage.MinLengthMap_Staged_Order[minlengths[j]]
+	})
+
+	for _, minlength := range minlengths {
 		backRepoMinLength.CommitPhaseOneInstance(minlength)
 	}
 

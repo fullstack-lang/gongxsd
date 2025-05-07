@@ -1,6 +1,6 @@
 package models
 
-func PostProcessing(stage *StageStruct) {
+func PostProcessing(stage *Stage) {
 	PostProcessingComputeAnonymousity(stage)
 	PostProcessingNames(stage)
 	PostProcessingAnalyzeXSDStructure(stage)

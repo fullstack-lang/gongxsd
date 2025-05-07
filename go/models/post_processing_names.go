@@ -9,7 +9,7 @@ func prefix(s string) string {
 	return s + "_Inlined"
 }
 
-func PostProcessingNames(stage *StageStruct) {
+func PostProcessingNames(stage *Stage) {
 
 	// map of embedded complex struct within elements
 	map_EmbeddedComplexType := make(map[*ComplexType]*Element)

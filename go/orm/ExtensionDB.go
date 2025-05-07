@@ -170,10 +170,10 @@ type BackRepoExtensionStruct struct {
 
 	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoExtension *BackRepoExtensionStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoExtension *BackRepoExtensionStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoExtension.stage
 	return
 }
@@ -191,9 +191,19 @@ func (backRepoExtension *BackRepoExtensionStruct) GetExtensionDBFromExtensionPtr
 
 // BackRepoExtension.CommitPhaseOne commits all staged instances of Extension to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoExtension *BackRepoExtensionStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoExtension *BackRepoExtensionStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var extensions []*models.Extension
 	for extension := range stage.Extensions {
+		extensions = append(extensions, extension)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(extensions, func(i, j int) bool {
+		return stage.ExtensionMap_Staged_Order[extensions[i]] < stage.ExtensionMap_Staged_Order[extensions[j]]
+	})
+
+	for _, extension := range extensions {
 		backRepoExtension.CommitPhaseOneInstance(extension)
 	}
 

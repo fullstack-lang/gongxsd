@@ -175,10 +175,10 @@ type BackRepoGongBasicFieldStruct struct {
 
 	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoGongBasicField *BackRepoGongBasicFieldStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoGongBasicField *BackRepoGongBasicFieldStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoGongBasicField.stage
 	return
 }
@@ -196,9 +196,19 @@ func (backRepoGongBasicField *BackRepoGongBasicFieldStruct) GetGongBasicFieldDBF
 
 // BackRepoGongBasicField.CommitPhaseOne commits all staged instances of GongBasicField to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoGongBasicField *BackRepoGongBasicFieldStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoGongBasicField *BackRepoGongBasicFieldStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var gongbasicfields []*models.GongBasicField
 	for gongbasicfield := range stage.GongBasicFields {
+		gongbasicfields = append(gongbasicfields, gongbasicfield)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(gongbasicfields, func(i, j int) bool {
+		return stage.GongBasicFieldMap_Staged_Order[gongbasicfields[i]] < stage.GongBasicFieldMap_Staged_Order[gongbasicfields[j]]
+	})
+
+	for _, gongbasicfield := range gongbasicfields {
 		backRepoGongBasicField.CommitPhaseOneInstance(gongbasicfield)
 	}
 

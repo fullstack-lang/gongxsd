@@ -117,10 +117,10 @@ type BackRepoUnionStruct struct {
 
 	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoUnion *BackRepoUnionStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoUnion *BackRepoUnionStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoUnion.stage
 	return
 }
@@ -138,9 +138,19 @@ func (backRepoUnion *BackRepoUnionStruct) GetUnionDBFromUnionPtr(union *models.U
 
 // BackRepoUnion.CommitPhaseOne commits all staged instances of Union to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoUnion *BackRepoUnionStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoUnion *BackRepoUnionStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var unions []*models.Union
 	for union := range stage.Unions {
+		unions = append(unions, union)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(unions, func(i, j int) bool {
+		return stage.UnionMap_Staged_Order[unions[i]] < stage.UnionMap_Staged_Order[unions[j]]
+	})
+
+	for _, union := range unions {
 		backRepoUnion.CommitPhaseOneInstance(union)
 	}
 

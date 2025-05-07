@@ -144,10 +144,10 @@ type BackRepoSchemaStruct struct {
 
 	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoSchema *BackRepoSchemaStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoSchema *BackRepoSchemaStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoSchema.stage
 	return
 }
@@ -165,9 +165,19 @@ func (backRepoSchema *BackRepoSchemaStruct) GetSchemaDBFromSchemaPtr(schema *mod
 
 // BackRepoSchema.CommitPhaseOne commits all staged instances of Schema to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoSchema *BackRepoSchemaStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoSchema *BackRepoSchemaStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var schemas []*models.Schema
 	for schema := range stage.Schemas {
+		schemas = append(schemas, schema)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(schemas, func(i, j int) bool {
+		return stage.SchemaMap_Staged_Order[schemas[i]] < stage.SchemaMap_Staged_Order[schemas[j]]
+	})
+
+	for _, schema := range schemas {
 		backRepoSchema.CommitPhaseOneInstance(schema)
 	}
 

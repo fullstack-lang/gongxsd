@@ -117,10 +117,10 @@ type BackRepoTotalDigitStruct struct {
 
 	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoTotalDigit *BackRepoTotalDigitStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoTotalDigit *BackRepoTotalDigitStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoTotalDigit.stage
 	return
 }
@@ -138,9 +138,19 @@ func (backRepoTotalDigit *BackRepoTotalDigitStruct) GetTotalDigitDBFromTotalDigi
 
 // BackRepoTotalDigit.CommitPhaseOne commits all staged instances of TotalDigit to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoTotalDigit *BackRepoTotalDigitStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoTotalDigit *BackRepoTotalDigitStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var totaldigits []*models.TotalDigit
 	for totaldigit := range stage.TotalDigits {
+		totaldigits = append(totaldigits, totaldigit)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(totaldigits, func(i, j int) bool {
+		return stage.TotalDigitMap_Staged_Order[totaldigits[i]] < stage.TotalDigitMap_Staged_Order[totaldigits[j]]
+	})
+
+	for _, totaldigit := range totaldigits {
 		backRepoTotalDigit.CommitPhaseOneInstance(totaldigit)
 	}
 

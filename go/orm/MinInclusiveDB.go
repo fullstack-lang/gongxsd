@@ -117,10 +117,10 @@ type BackRepoMinInclusiveStruct struct {
 
 	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoMinInclusive *BackRepoMinInclusiveStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoMinInclusive *BackRepoMinInclusiveStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoMinInclusive.stage
 	return
 }
@@ -138,9 +138,19 @@ func (backRepoMinInclusive *BackRepoMinInclusiveStruct) GetMinInclusiveDBFromMin
 
 // BackRepoMinInclusive.CommitPhaseOne commits all staged instances of MinInclusive to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoMinInclusive *BackRepoMinInclusiveStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoMinInclusive *BackRepoMinInclusiveStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var mininclusives []*models.MinInclusive
 	for mininclusive := range stage.MinInclusives {
+		mininclusives = append(mininclusives, mininclusive)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(mininclusives, func(i, j int) bool {
+		return stage.MinInclusiveMap_Staged_Order[mininclusives[i]] < stage.MinInclusiveMap_Staged_Order[mininclusives[j]]
+	})
+
+	for _, mininclusive := range mininclusives {
 		backRepoMinInclusive.CommitPhaseOneInstance(mininclusive)
 	}
 

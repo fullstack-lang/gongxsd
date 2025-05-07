@@ -1,6 +1,6 @@
 package models
 
-func PostProcessingComputeAnonymousity(stage *StageStruct) {
+func PostProcessingComputeAnonymousity(stage *Stage) {
 
 	for ct := range *GetGongstructInstancesSet[ComplexType](stage) {
 		ct.IsAnonymous = true
