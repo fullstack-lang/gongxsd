@@ -4,6 +4,7 @@ import { FormSortAssocButtonAPI } from './formsortassocbutton-api'
 import { FrontRepo } from './front-repo.service';
 
 // insertion point for imports
+import { FormEditAssocButton } from './formeditassocbutton'
 
 // usefull for managing pointer ID values that can be nullable
 import { NullInt64 } from './null-int64'
@@ -19,8 +20,12 @@ export class FormSortAssocButton {
 	// insertion point for basic fields declarations
 	Name: string = ""
 	Label: string = ""
+	HasToolTip: boolean = false
+	ToolTipText: string = ""
 
 	// insertion point for pointers and slices of pointers declarations
+	FormEditAssocButton?: FormEditAssocButton
+
 }
 
 export function CopyFormSortAssocButtonToFormSortAssocButtonAPI(formsortassocbutton: FormSortAssocButton, formsortassocbuttonAPI: FormSortAssocButtonAPI) {
@@ -32,8 +37,17 @@ export function CopyFormSortAssocButtonToFormSortAssocButtonAPI(formsortassocbut
 	// insertion point for basic fields copy operations
 	formsortassocbuttonAPI.Name = formsortassocbutton.Name
 	formsortassocbuttonAPI.Label = formsortassocbutton.Label
+	formsortassocbuttonAPI.HasToolTip = formsortassocbutton.HasToolTip
+	formsortassocbuttonAPI.ToolTipText = formsortassocbutton.ToolTipText
 
 	// insertion point for pointer fields encoding
+	formsortassocbuttonAPI.FormSortAssocButtonPointersEncoding.FormEditAssocButtonID.Valid = true
+	if (formsortassocbutton.FormEditAssocButton != undefined) {
+		formsortassocbuttonAPI.FormSortAssocButtonPointersEncoding.FormEditAssocButtonID.Int64 = formsortassocbutton.FormEditAssocButton.ID  
+	} else {
+		formsortassocbuttonAPI.FormSortAssocButtonPointersEncoding.FormEditAssocButtonID.Int64 = 0 		
+	}
+
 
 	// insertion point for slice of pointers fields encoding
 }
@@ -51,8 +65,11 @@ export function CopyFormSortAssocButtonAPIToFormSortAssocButton(formsortassocbut
 	// insertion point for basic fields copy operations
 	formsortassocbutton.Name = formsortassocbuttonAPI.Name
 	formsortassocbutton.Label = formsortassocbuttonAPI.Label
+	formsortassocbutton.HasToolTip = formsortassocbuttonAPI.HasToolTip
+	formsortassocbutton.ToolTipText = formsortassocbuttonAPI.ToolTipText
 
 	// insertion point for pointer fields encoding
+	formsortassocbutton.FormEditAssocButton = frontRepo.map_ID_FormEditAssocButton.get(formsortassocbuttonAPI.FormSortAssocButtonPointersEncoding.FormEditAssocButtonID.Int64)
 
 	// insertion point for slice of pointers fields encoding
 }

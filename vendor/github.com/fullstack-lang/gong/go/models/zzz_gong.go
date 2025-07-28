@@ -16,7 +16,8 @@ import (
 )
 
 // can be used for
-//     days := __Gong__Abs(int(int(inferedInstance.ComputedDuration.Hours()) / 24))
+//
+//	days := __Gong__Abs(int(int(inferedInstance.ComputedDuration.Hours()) / 24))
 func __Gong__Abs(x int) int {
 	if x < 0 {
 		return -x
@@ -26,10 +27,10 @@ func __Gong__Abs(x int) int {
 
 var _ = __Gong__Abs
 
-const ProbeTreeSidebarSuffix = "-sidebar"
-const ProbeTableSuffix = "-table"
-const ProbeFormSuffix = "-form"
-const ProbeSplitSuffix = "-probe"
+const ProbeTreeSidebarSuffix = ":sidebar of the probe"
+const ProbeTableSuffix = ":table of the probe"
+const ProbeFormSuffix = ":form of the probe"
+const ProbeSplitSuffix = ":probe of the probe"
 
 func (stage *Stage) GetProbeTreeSidebarStageName() string {
 	return stage.GetType() + ":" + stage.GetName() + ProbeTreeSidebarSuffix
@@ -53,8 +54,12 @@ var errUnkownEnum = errors.New("unkown enum")
 // needed to avoid when fmt package is not needed by generated code
 var __dummy__fmt_variable fmt.Scanner
 
+var _ = __dummy__fmt_variable
+
 // idem for math package when not need by generated code
 var __dummy_math_variable = math.E
+
+var _ = __dummy_math_variable
 
 // swagger:ignore
 type __void any
@@ -74,7 +79,12 @@ type GongStructInterface interface {
 // Stage enables storage of staged instances
 // swagger:ignore
 type Stage struct {
-	name string
+	name               string
+	commitId           uint // commitId is updated at each commit
+	commitTimeStamp    time.Time
+	contentWhenParsed  string
+	commitIdWhenParsed uint
+	generatesDiff      bool
 
 	// insertion point for definition of arrays registering instances
 	GongBasicFields           map[*GongBasicField]any
@@ -266,6 +276,18 @@ type Stage struct {
 	NamedStructs []*NamedStruct
 }
 
+func (stage *Stage) GetCommitId() uint {
+	return stage.commitId
+}
+
+func (stage *Stage) GetCommitTS() time.Time {
+	return stage.commitTimeStamp
+}
+
+func (stage *Stage) SetGeneratesDiff(generatesDiff bool) {
+	stage.generatesDiff = generatesDiff
+}
+
 // GetNamedStructs implements models.ProbebStage.
 func (stage *Stage) GetNamedStructsNames() (res []string) {
 
@@ -300,39 +322,239 @@ func GetNamedStructInstances[T PointerToGongstruct](set map[T]any, order map[T]u
 	return
 }
 
-func (stage *Stage) GetNamedStructNamesByOrder(namedStructName string) (res []string) {
+func GetStructInstancesByOrderAuto[T PointerToGongstruct](stage *Stage) (res []T) {
+	var t T
+	switch any(t).(type) {
+		// insertion point for case
+	case *GongBasicField:
+		tmp := GetStructInstancesByOrder(stage.GongBasicFields, stage.GongBasicFieldMap_Staged_Order)
 
-	switch namedStructName {
-	// insertion point for case 
-		case "GongBasicField":
-			res = GetNamedStructInstances(stage.GongBasicFields, stage.GongBasicFieldMap_Staged_Order)
-		case "GongEnum":
-			res = GetNamedStructInstances(stage.GongEnums, stage.GongEnumMap_Staged_Order)
-		case "GongEnumValue":
-			res = GetNamedStructInstances(stage.GongEnumValues, stage.GongEnumValueMap_Staged_Order)
-		case "GongLink":
-			res = GetNamedStructInstances(stage.GongLinks, stage.GongLinkMap_Staged_Order)
-		case "GongNote":
-			res = GetNamedStructInstances(stage.GongNotes, stage.GongNoteMap_Staged_Order)
-		case "GongStruct":
-			res = GetNamedStructInstances(stage.GongStructs, stage.GongStructMap_Staged_Order)
-		case "GongTimeField":
-			res = GetNamedStructInstances(stage.GongTimeFields, stage.GongTimeFieldMap_Staged_Order)
-		case "Meta":
-			res = GetNamedStructInstances(stage.Metas, stage.MetaMap_Staged_Order)
-		case "MetaReference":
-			res = GetNamedStructInstances(stage.MetaReferences, stage.MetaReferenceMap_Staged_Order)
-		case "ModelPkg":
-			res = GetNamedStructInstances(stage.ModelPkgs, stage.ModelPkgMap_Staged_Order)
-		case "PointerToGongStructField":
-			res = GetNamedStructInstances(stage.PointerToGongStructFields, stage.PointerToGongStructFieldMap_Staged_Order)
-		case "SliceOfPointerToGongStructField":
-			res = GetNamedStructInstances(stage.SliceOfPointerToGongStructFields, stage.SliceOfPointerToGongStructFieldMap_Staged_Order)
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *GongBasicField implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *GongEnum:
+		tmp := GetStructInstancesByOrder(stage.GongEnums, stage.GongEnumMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *GongEnum implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *GongEnumValue:
+		tmp := GetStructInstancesByOrder(stage.GongEnumValues, stage.GongEnumValueMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *GongEnumValue implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *GongLink:
+		tmp := GetStructInstancesByOrder(stage.GongLinks, stage.GongLinkMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *GongLink implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *GongNote:
+		tmp := GetStructInstancesByOrder(stage.GongNotes, stage.GongNoteMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *GongNote implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *GongStruct:
+		tmp := GetStructInstancesByOrder(stage.GongStructs, stage.GongStructMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *GongStruct implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *GongTimeField:
+		tmp := GetStructInstancesByOrder(stage.GongTimeFields, stage.GongTimeFieldMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *GongTimeField implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *Meta:
+		tmp := GetStructInstancesByOrder(stage.Metas, stage.MetaMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *Meta implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *MetaReference:
+		tmp := GetStructInstancesByOrder(stage.MetaReferences, stage.MetaReferenceMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *MetaReference implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *ModelPkg:
+		tmp := GetStructInstancesByOrder(stage.ModelPkgs, stage.ModelPkgMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *ModelPkg implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *PointerToGongStructField:
+		tmp := GetStructInstancesByOrder(stage.PointerToGongStructFields, stage.PointerToGongStructFieldMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *PointerToGongStructField implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *SliceOfPointerToGongStructField:
+		tmp := GetStructInstancesByOrder(stage.SliceOfPointerToGongStructFields, stage.SliceOfPointerToGongStructFieldMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *SliceOfPointerToGongStructField implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+
+	}
+	return
+}
+
+func GetStructInstancesByOrder[T PointerToGongstruct](set map[T]any, order map[T]uint) (res []T) {
+
+	orderedSet := []T{}
+	for instance := range set {
+		orderedSet = append(orderedSet, instance)
+	}
+	sort.Slice(orderedSet[:], func(i, j int) bool {
+		instancei := orderedSet[i]
+		instancej := orderedSet[j]
+		i_order, oki := order[instancei]
+		j_order, okj := order[instancej]
+		if !oki || !okj {
+			log.Fatalf("GetNamedStructInstances: pointer not found")
+		}
+		return i_order < j_order
+	})
+
+	for _, instance := range orderedSet {
+		res = append(res, instance)
 	}
 
 	return
 }
 
+func (stage *Stage) GetNamedStructNamesByOrder(namedStructName string) (res []string) {
+
+	switch namedStructName {
+	// insertion point for case
+	case "GongBasicField":
+		res = GetNamedStructInstances(stage.GongBasicFields, stage.GongBasicFieldMap_Staged_Order)
+	case "GongEnum":
+		res = GetNamedStructInstances(stage.GongEnums, stage.GongEnumMap_Staged_Order)
+	case "GongEnumValue":
+		res = GetNamedStructInstances(stage.GongEnumValues, stage.GongEnumValueMap_Staged_Order)
+	case "GongLink":
+		res = GetNamedStructInstances(stage.GongLinks, stage.GongLinkMap_Staged_Order)
+	case "GongNote":
+		res = GetNamedStructInstances(stage.GongNotes, stage.GongNoteMap_Staged_Order)
+	case "GongStruct":
+		res = GetNamedStructInstances(stage.GongStructs, stage.GongStructMap_Staged_Order)
+	case "GongTimeField":
+		res = GetNamedStructInstances(stage.GongTimeFields, stage.GongTimeFieldMap_Staged_Order)
+	case "Meta":
+		res = GetNamedStructInstances(stage.Metas, stage.MetaMap_Staged_Order)
+	case "MetaReference":
+		res = GetNamedStructInstances(stage.MetaReferences, stage.MetaReferenceMap_Staged_Order)
+	case "ModelPkg":
+		res = GetNamedStructInstances(stage.ModelPkgs, stage.ModelPkgMap_Staged_Order)
+	case "PointerToGongStructField":
+		res = GetNamedStructInstances(stage.PointerToGongStructFields, stage.PointerToGongStructFieldMap_Staged_Order)
+	case "SliceOfPointerToGongStructField":
+		res = GetNamedStructInstances(stage.SliceOfPointerToGongStructFields, stage.SliceOfPointerToGongStructFieldMap_Staged_Order)
+	}
+
+	return
+}
 
 type NamedStruct struct {
 	name string
@@ -553,6 +775,39 @@ func GetOrder[Type Gongstruct](stage *Stage, instance *Type) uint {
 	}
 }
 
+func GetOrderPointerGongstruct[Type PointerToGongstruct](stage *Stage, instance Type) uint {
+
+	switch instance := any(instance).(type) {
+	// insertion point for order map initialisations
+	case *GongBasicField:
+		return stage.GongBasicFieldMap_Staged_Order[instance]
+	case *GongEnum:
+		return stage.GongEnumMap_Staged_Order[instance]
+	case *GongEnumValue:
+		return stage.GongEnumValueMap_Staged_Order[instance]
+	case *GongLink:
+		return stage.GongLinkMap_Staged_Order[instance]
+	case *GongNote:
+		return stage.GongNoteMap_Staged_Order[instance]
+	case *GongStruct:
+		return stage.GongStructMap_Staged_Order[instance]
+	case *GongTimeField:
+		return stage.GongTimeFieldMap_Staged_Order[instance]
+	case *Meta:
+		return stage.MetaMap_Staged_Order[instance]
+	case *MetaReference:
+		return stage.MetaReferenceMap_Staged_Order[instance]
+	case *ModelPkg:
+		return stage.ModelPkgMap_Staged_Order[instance]
+	case *PointerToGongStructField:
+		return stage.PointerToGongStructFieldMap_Staged_Order[instance]
+	case *SliceOfPointerToGongStructField:
+		return stage.SliceOfPointerToGongStructFieldMap_Staged_Order[instance]
+	default:
+		return 0 // should not happen
+	}
+}
+
 func (stage *Stage) GetName() string {
 	return stage.name
 }
@@ -567,6 +822,8 @@ func (stage *Stage) CommitWithSuspendedCallbacks() {
 
 func (stage *Stage) Commit() {
 	stage.ComputeReverseMaps()
+	stage.commitId++
+	stage.commitTimeStamp = time.Now()
 
 	if stage.BackRepo != nil {
 		stage.BackRepo.Commit(stage)
@@ -1931,7 +2188,7 @@ func GetPointerReverseMap[Start, End Gongstruct](fieldname string, stage *Stage)
 // The function provides a map with keys as instances of End and values to *Start instances
 // the map is construed by iterating over all Start instances and populating keys with End instances
 // and values with the Start instances
-func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage *Stage) map[*End]*Start {
+func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage *Stage) map[*End][]*Start {
 
 	var ret Start
 
@@ -1947,13 +2204,13 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 		switch fieldname {
 		// insertion point for per direct association field
 		case "GongEnumValues":
-			res := make(map[*GongEnumValue]*GongEnum)
+			res := make(map[*GongEnumValue][]*GongEnum)
 			for gongenum := range stage.GongEnums {
 				for _, gongenumvalue_ := range gongenum.GongEnumValues {
-					res[gongenumvalue_] = gongenum
+					res[gongenumvalue_] = append(res[gongenumvalue_], gongenum)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of GongEnumValue
 	case GongEnumValue:
@@ -1970,50 +2227,50 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 		switch fieldname {
 		// insertion point for per direct association field
 		case "Links":
-			res := make(map[*GongLink]*GongNote)
+			res := make(map[*GongLink][]*GongNote)
 			for gongnote := range stage.GongNotes {
 				for _, gonglink_ := range gongnote.Links {
-					res[gonglink_] = gongnote
+					res[gonglink_] = append(res[gonglink_], gongnote)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of GongStruct
 	case GongStruct:
 		switch fieldname {
 		// insertion point for per direct association field
 		case "GongBasicFields":
-			res := make(map[*GongBasicField]*GongStruct)
+			res := make(map[*GongBasicField][]*GongStruct)
 			for gongstruct := range stage.GongStructs {
 				for _, gongbasicfield_ := range gongstruct.GongBasicFields {
-					res[gongbasicfield_] = gongstruct
+					res[gongbasicfield_] = append(res[gongbasicfield_], gongstruct)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		case "GongTimeFields":
-			res := make(map[*GongTimeField]*GongStruct)
+			res := make(map[*GongTimeField][]*GongStruct)
 			for gongstruct := range stage.GongStructs {
 				for _, gongtimefield_ := range gongstruct.GongTimeFields {
-					res[gongtimefield_] = gongstruct
+					res[gongtimefield_] = append(res[gongtimefield_], gongstruct)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		case "PointerToGongStructFields":
-			res := make(map[*PointerToGongStructField]*GongStruct)
+			res := make(map[*PointerToGongStructField][]*GongStruct)
 			for gongstruct := range stage.GongStructs {
 				for _, pointertogongstructfield_ := range gongstruct.PointerToGongStructFields {
-					res[pointertogongstructfield_] = gongstruct
+					res[pointertogongstructfield_] = append(res[pointertogongstructfield_], gongstruct)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		case "SliceOfPointerToGongStructFields":
-			res := make(map[*SliceOfPointerToGongStructField]*GongStruct)
+			res := make(map[*SliceOfPointerToGongStructField][]*GongStruct)
 			for gongstruct := range stage.GongStructs {
 				for _, sliceofpointertogongstructfield_ := range gongstruct.SliceOfPointerToGongStructFields {
-					res[sliceofpointertogongstructfield_] = gongstruct
+					res[sliceofpointertogongstructfield_] = append(res[sliceofpointertogongstructfield_], gongstruct)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of GongTimeField
 	case GongTimeField:
@@ -2025,13 +2282,13 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 		switch fieldname {
 		// insertion point for per direct association field
 		case "MetaReferences":
-			res := make(map[*MetaReference]*Meta)
+			res := make(map[*MetaReference][]*Meta)
 			for meta := range stage.Metas {
 				for _, metareference_ := range meta.MetaReferences {
-					res[metareference_] = meta
+					res[metareference_] = append(res[metareference_], meta)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of MetaReference
 	case MetaReference:
@@ -2137,7 +2394,7 @@ func GetFields[Type Gongstruct]() (res []string) {
 	switch any(ret).(type) {
 	// insertion point for generic get gongstruct name
 	case GongBasicField:
-		res = []string{"Name", "BasicKindName", "GongEnum", "DeclaredType", "CompositeStructName", "Index", "IsDocLink", "IsTextArea", "IsBespokeWidth", "BespokeWidth", "IsBespokeHeight", "BespokeHeight"}
+		res = []string{"Name", "BasicKindName", "GongEnum", "DeclaredType", "CompositeStructName", "Index", "IsTextArea", "IsBespokeWidth", "BespokeWidth", "IsBespokeHeight", "BespokeHeight"}
 	case GongEnum:
 		res = []string{"Name", "Type", "GongEnumValues"}
 	case GongEnumValue:
@@ -2247,7 +2504,7 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 	switch any(ret).(type) {
 	// insertion point for generic get gongstruct name
 	case *GongBasicField:
-		res = []string{"Name", "BasicKindName", "GongEnum", "DeclaredType", "CompositeStructName", "Index", "IsDocLink", "IsTextArea", "IsBespokeWidth", "BespokeWidth", "IsBespokeHeight", "BespokeHeight"}
+		res = []string{"Name", "BasicKindName", "GongEnum", "DeclaredType", "CompositeStructName", "Index", "IsTextArea", "IsBespokeWidth", "BespokeWidth", "IsBespokeHeight", "BespokeHeight"}
 	case *GongEnum:
 		res = []string{"Name", "Type", "GongEnumValues"}
 	case *GongEnumValue:
@@ -2330,10 +2587,6 @@ func GetFieldStringValueFromPointer(instance any, fieldName string) (res GongFie
 			res.valueString = fmt.Sprintf("%d", inferedInstance.Index)
 			res.valueInt = inferedInstance.Index
 			res.GongFieldValueType = GongFieldValueTypeInt
-		case "IsDocLink":
-			res.valueString = fmt.Sprintf("%t", inferedInstance.IsDocLink)
-			res.valueBool = inferedInstance.IsDocLink
-			res.GongFieldValueType = GongFieldValueTypeBool
 		case "IsTextArea":
 			res.valueString = fmt.Sprintf("%t", inferedInstance.IsTextArea)
 			res.valueBool = inferedInstance.IsTextArea
@@ -2586,10 +2839,6 @@ func GetFieldStringValue(instance any, fieldName string) (res GongFieldValue) {
 			res.valueString = fmt.Sprintf("%d", inferedInstance.Index)
 			res.valueInt = inferedInstance.Index
 			res.GongFieldValueType = GongFieldValueTypeInt
-		case "IsDocLink":
-			res.valueString = fmt.Sprintf("%t", inferedInstance.IsDocLink)
-			res.valueBool = inferedInstance.IsDocLink
-			res.GongFieldValueType = GongFieldValueTypeBool
 		case "IsTextArea":
 			res.valueString = fmt.Sprintf("%t", inferedInstance.IsTextArea)
 			res.valueBool = inferedInstance.IsTextArea

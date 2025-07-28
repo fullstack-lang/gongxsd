@@ -12,11 +12,12 @@ import (
 	"github.com/fullstack-lang/gong/lib/doc2/go/fullstack"
 	"github.com/fullstack-lang/gong/lib/doc2/go/models"
 
+	gong_fullstack "github.com/fullstack-lang/gong/go/fullstack"
+	ssg_fullstack "github.com/fullstack-lang/gong/lib/ssg/go/fullstack"
+	svg_fullstack "github.com/fullstack-lang/gong/lib/svg/go/fullstack"
+	table_fullstack "github.com/fullstack-lang/gong/lib/table/go/fullstack"
 	tree_fullstack "github.com/fullstack-lang/gong/lib/tree/go/fullstack"
 
-	svg_fullstack "github.com/fullstack-lang/gong/lib/svg/go/fullstack"
-
-	gong_fullstack "github.com/fullstack-lang/gong/go/fullstack"
 	gong "github.com/fullstack-lang/gong/go/models"
 
 	split "github.com/fullstack-lang/gong/lib/split/go/models"
@@ -59,14 +60,16 @@ func Prepare(
 	goModelsDir embed.FS,
 	goDiagramsDir embed.FS,
 	receivingAsSplitArea *split.AsSplitArea, // split area that will receive the doc2 areas
+	map_GongStructName_InstancesNb map[string]int,
 ) {
 	var stage *models.Stage
 
 	stage, _ = fullstack.NewStackInstance(r, doc2StackName)
 
-	stage.Checkout()
-	stage.Reset()
-	stage.Commit()
+	stage.MetaPackageImportAlias = "ref_models"
+
+	splits := strings.Split(doc2StackName, ":")
+	stage.MetaPackageImportPath = `"` + splits[0] + `/models"`
 
 	if !embeddedDiagrams {
 		err := models.ParseAstFile(stage, "../../diagrams/diagrams.go")
@@ -92,13 +95,11 @@ func Prepare(
 		}
 	}
 
-	stage.Commit()
-
-	stage.Checkout()
-
 	treeStage, _ := tree_fullstack.NewStackInstance(r, doc2StackName+":doc2-sidebar", "", "")
 	svgStage, _ := svg_fullstack.NewStackInstance(r, doc2StackName+":doc2-svg", "", "", "")
+	ssgStage, _ := ssg_fullstack.NewStackInstance(r, doc2StackName+":doc2-ssg", "", "", "")
 	gongStage, _ := gong_fullstack.NewStackInstance(r, doc2StackName+":doc2-gong", "", "")
+	formStage, _ := table_fullstack.NewStackInstance(r, doc2StackName+":doc2-diagramForm", "", "")
 
 	// load the code of the model of interest into the gongStage
 	gong.LoadEmbedded(gongStage, goModelsDir)
@@ -110,5 +111,8 @@ func Prepare(
 		treeStage,
 		svgStage,
 		gongStage,
-		embeddedDiagrams)
+		formStage,
+		ssgStage,
+		embeddedDiagrams,
+		map_GongStructName_InstancesNb)
 }

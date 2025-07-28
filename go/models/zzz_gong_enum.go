@@ -49,7 +49,7 @@ func (level0 *Level0) FromCodeString(input string) (err error) {
 	case "Level0Nb":
 		*level0 = Level0Nb
 	default:
-		return errUnkownEnum
+		err = errUnkownEnum
 	}
 	return
 }
@@ -146,7 +146,7 @@ func (level1 *Level1) FromCodeString(input string) (err error) {
 	case "Level1Nb":
 		*level1 = Level1Nb
 	default:
-		return errUnkownEnum
+		err = errUnkownEnum
 	}
 	return
 }
@@ -275,7 +275,7 @@ func (level2 *Level2) FromCodeString(input string) (err error) {
 	case "Level2Nb":
 		*level2 = Level2Nb
 	default:
-		return errUnkownEnum
+		err = errUnkownEnum
 	}
 	return
 }
@@ -385,7 +385,7 @@ func (level3 *Level3) FromCodeString(input string) (err error) {
 	case "Level3Nb":
 		*level3 = Level3Nb
 	default:
-		return errUnkownEnum
+		err = errUnkownEnum
 	}
 	return
 }

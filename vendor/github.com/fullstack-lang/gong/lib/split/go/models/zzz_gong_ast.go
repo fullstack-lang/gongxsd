@@ -46,6 +46,15 @@ func ParseAstFile(stage *Stage, pathToFile string) error {
 		return errors.New("Path does not exist %s ;" + fileOfInterest)
 	}
 
+	// Read the file content using os.ReadFile
+	content, err := os.ReadFile(fileOfInterest)
+	if err != nil {
+		return errors.New("Unable to read file " + err.Error())
+	}
+
+	// Assign the content to stage.contentWhenParsed
+	stage.contentWhenParsed = string(content)
+
 	fset := token.NewFileSet()
 	// startParser := time.Now()
 	inFile, errParser := parser.ParseFile(fset, fileOfInterest, nil, parser.ParseComments)
@@ -79,7 +88,7 @@ func ParseAstEmbeddedFile(stage *Stage, directory embed.FS, pathToFile string) e
 	fileContentBytes, err := directory.ReadFile(pathToFile)
 	if err != nil {
 		// Return a specific error if the file can't be read from the embed.FS
-		return errors.New("Unable to read embedded file '" + pathToFile + "': " + err.Error())
+		return errors.New(stage.GetName() + "; Unable to read embedded file " + err.Error())
 	}
 
 	// 2. Create a FileSet to manage position information.
@@ -139,6 +148,29 @@ func ParseAstFileFromAst(stage *Stage, inFile *ast.File, fset *token.FileSet) er
 				// astCoordinate := // astCoordinate + "\tBody: "
 				for _, stmt := range body.List {
 					switch stmt := stmt.(type) {
+					case *ast.DeclStmt:
+						if genDecl, ok := stmt.Decl.(*ast.GenDecl); ok && genDecl.Tok == token.CONST {
+							for _, spec := range genDecl.Specs {
+								if valueSpec, ok := spec.(*ast.ValueSpec); ok {
+									for i, name := range valueSpec.Names {
+										if i < len(valueSpec.Values) {
+											if basicLit, ok := valueSpec.Values[i].(*ast.BasicLit); ok && basicLit.Kind == token.STRING {
+												// Remove quotes from string literal
+												value := strings.Trim(basicLit.Value, `"`)
+
+												switch name.Name {
+												case "__commitId__":
+													if parsedUint, err := strconv.ParseUint(value, 10, 64); err == nil {
+														stage.commitId = uint(parsedUint)
+														stage.commitIdWhenParsed = stage.commitId
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
 					case *ast.ExprStmt:
 						exprStmt := stmt
 						// astCoordinate := // astCoordinate + "\tExprStmt: "
@@ -158,7 +190,8 @@ func ParseAstFileFromAst(stage *Stage, inFile *ast.File, fset *token.FileSet) er
 						// Create an ast.CommentMap from the ast.File's comments.
 						// This helps keeping the association between comments
 						// and AST nodes.
-						cmap := ast.NewCommentMap(fset, inFile, inFile.Comments)
+						// cmap := ast.NewCommentMap(fset, inFile, inFile.Comments)
+						var cmap ast.CommentMap
 						astCoordinate := "\tAssignStmt: "
 						// log.Println(// astCoordinate)
 						assignStmt := stmt
@@ -365,12 +398,17 @@ var __gong__map_AsSplitArea = make(map[string]*AsSplitArea)
 var __gong__map_Button = make(map[string]*Button)
 var __gong__map_Cursor = make(map[string]*Cursor)
 var __gong__map_Doc = make(map[string]*Doc)
+var __gong__map_FavIcon = make(map[string]*FavIcon)
 var __gong__map_Form = make(map[string]*Form)
 var __gong__map_Load = make(map[string]*Load)
+var __gong__map_LogoOnTheLeft = make(map[string]*LogoOnTheLeft)
+var __gong__map_LogoOnTheRight = make(map[string]*LogoOnTheRight)
+var __gong__map_Markdown = make(map[string]*Markdown)
 var __gong__map_Slider = make(map[string]*Slider)
 var __gong__map_Split = make(map[string]*Split)
 var __gong__map_Svg = make(map[string]*Svg)
 var __gong__map_Table = make(map[string]*Table)
+var __gong__map_Title = make(map[string]*Title)
 var __gong__map_Tone = make(map[string]*Tone)
 var __gong__map_Tree = make(map[string]*Tree)
 var __gong__map_View = make(map[string]*View)
@@ -383,11 +421,9 @@ var __gong__map_Xlsx = make(map[string]*Xlsx)
 func lookupPackage(name string) (importPath string, ok bool) {
 	return name, true
 }
-func lookupSym(recv, name string) (ok bool) {
-	if recv == "" {
-		return true
-	}
-	return false
+
+func lookupSym(recv, name string) bool {
+	return recv == ""
 }
 
 // UnmarshallGoStaging unmarshall a go assign statement
@@ -475,6 +511,8 @@ func UnmarshallGongstructStaging(stage *Stage, cmap *ast.CommentMap, assignStmt 
 		// astCoordinate := astCoordinate + "\tRhs"
 		switch expr := expr.(type) {
 		case *ast.CallExpr:
+			var basicLit *ast.BasicLit
+
 			callExpr := expr
 			// astCoordinate := astCoordinate + "\tFun"
 			switch fun := callExpr.Fun.(type) {
@@ -577,6 +615,12 @@ func UnmarshallGongstructStaging(stage *Stage, cmap *ast.CommentMap, assignStmt 
 										instanceDoc.Stage(stage)
 										instance = any(instanceDoc)
 										__gong__map_Doc[identifier] = instanceDoc
+									case "FavIcon":
+										instanceFavIcon := new(FavIcon)
+										instanceFavIcon.Name = instanceName
+										instanceFavIcon.Stage(stage)
+										instance = any(instanceFavIcon)
+										__gong__map_FavIcon[identifier] = instanceFavIcon
 									case "Form":
 										instanceForm := new(Form)
 										instanceForm.Name = instanceName
@@ -589,6 +633,24 @@ func UnmarshallGongstructStaging(stage *Stage, cmap *ast.CommentMap, assignStmt 
 										instanceLoad.Stage(stage)
 										instance = any(instanceLoad)
 										__gong__map_Load[identifier] = instanceLoad
+									case "LogoOnTheLeft":
+										instanceLogoOnTheLeft := new(LogoOnTheLeft)
+										instanceLogoOnTheLeft.Name = instanceName
+										instanceLogoOnTheLeft.Stage(stage)
+										instance = any(instanceLogoOnTheLeft)
+										__gong__map_LogoOnTheLeft[identifier] = instanceLogoOnTheLeft
+									case "LogoOnTheRight":
+										instanceLogoOnTheRight := new(LogoOnTheRight)
+										instanceLogoOnTheRight.Name = instanceName
+										instanceLogoOnTheRight.Stage(stage)
+										instance = any(instanceLogoOnTheRight)
+										__gong__map_LogoOnTheRight[identifier] = instanceLogoOnTheRight
+									case "Markdown":
+										instanceMarkdown := new(Markdown)
+										instanceMarkdown.Name = instanceName
+										instanceMarkdown.Stage(stage)
+										instance = any(instanceMarkdown)
+										__gong__map_Markdown[identifier] = instanceMarkdown
 									case "Slider":
 										instanceSlider := new(Slider)
 										instanceSlider.Name = instanceName
@@ -613,6 +675,12 @@ func UnmarshallGongstructStaging(stage *Stage, cmap *ast.CommentMap, assignStmt 
 										instanceTable.Stage(stage)
 										instance = any(instanceTable)
 										__gong__map_Table[identifier] = instanceTable
+									case "Title":
+										instanceTitle := new(Title)
+										instanceTitle.Name = instanceName
+										instanceTitle.Stage(stage)
+										instance = any(instanceTitle)
+										__gong__map_Title[identifier] = instanceTitle
 									case "Tone":
 										instanceTone := new(Tone)
 										instanceTone.Name = instanceName
@@ -669,7 +737,8 @@ func UnmarshallGongstructStaging(stage *Stage, cmap *ast.CommentMap, assignStmt 
 						var ok bool
 						gongstructName, ok = __gong__map_Indentifiers_gongstructName[identifier]
 						if !ok {
-							log.Fatalln("gongstructName not found for identifier", identifier)
+							log.Println("gongstructName not found for identifier", identifier)
+							break
 						}
 						switch gongstructName {
 						// insertion point for basic lit assignments
@@ -693,11 +762,27 @@ func UnmarshallGongstructStaging(stage *Stage, cmap *ast.CommentMap, assignStmt 
 							switch fieldName {
 							// insertion point for date assign code
 							}
+						case "FavIcon":
+							switch fieldName {
+							// insertion point for date assign code
+							}
 						case "Form":
 							switch fieldName {
 							// insertion point for date assign code
 							}
 						case "Load":
+							switch fieldName {
+							// insertion point for date assign code
+							}
+						case "LogoOnTheLeft":
+							switch fieldName {
+							// insertion point for date assign code
+							}
+						case "LogoOnTheRight":
+							switch fieldName {
+							// insertion point for date assign code
+							}
+						case "Markdown":
 							switch fieldName {
 							// insertion point for date assign code
 							}
@@ -714,6 +799,10 @@ func UnmarshallGongstructStaging(stage *Stage, cmap *ast.CommentMap, assignStmt 
 							// insertion point for date assign code
 							}
 						case "Table":
+							switch fieldName {
+							// insertion point for date assign code
+							}
+						case "Title":
 							switch fieldName {
 							// insertion point for date assign code
 							}
@@ -737,24 +826,56 @@ func UnmarshallGongstructStaging(stage *Stage, cmap *ast.CommentMap, assignStmt 
 					}
 				}
 			case *ast.Ident:
-				// append function
-				ident := fun
-				_ = ident
-				// astCoordinate := astCoordinate + "\tIdent" + "." + ident.Name
-				// log.Println(astCoordinate)
+				// pick up the first arg
+				if len(callExpr.Args) != 1 {
+					break
+				}
+				arg0 := callExpr.Args[0]
+
+				var se *ast.SelectorExpr
+				var ok bool
+				if se, ok = arg0.(*ast.SelectorExpr); !ok {
+					break
+				}
+
+				var seXident *ast.Ident
+				if seXident = se.X.(*ast.Ident); !ok {
+					break
+				}
+
+				basicLit = new(ast.BasicLit)
+				// For a "fake" literal, Kind might be set to something like token.STRING or a custom indicator
+				basicLit.Kind = token.STRING // Or another appropriate token.Kind
+				basicLit.Value = "new(" + seXident.Name + "." + se.Sel.Name + ")"
+				// following lines are here to avoid warning "unused write to field..."
+				_ = basicLit.Kind
+				_ = basicLit.Value
+				_ = basicLit
 			}
-			for _, arg := range callExpr.Args {
+			for argNb, arg := range callExpr.Args {
+				_ = argNb
 				// astCoordinate := astCoordinate + "\tArg"
 				switch arg := arg.(type) {
-				case *ast.Ident:
-					ident := arg
-					_ = ident
-					// astCoordinate := astCoordinate + "\tIdent" + "." + ident.Name
-					// log.Println(astCoordinate)
+				case *ast.Ident, *ast.SelectorExpr:
+					var ident *ast.Ident
 					var ok bool
+					_ = ok
+					if ident, ok = arg.(*ast.Ident); !ok {
+						// log.Println("we are in the case of new(....)")
+					}
+
+					var se *ast.SelectorExpr
+					if se, ok = arg.(*ast.SelectorExpr); ok {
+						if ident, ok = se.X.(*ast.Ident); !ok {
+							// log.Println("we are in the case of append(....)")
+						}
+					}
+					_ = ident
+
 					gongstructName, ok = __gong__map_Indentifiers_gongstructName[identifier]
 					if !ok {
-						log.Fatalln("gongstructName not found for identifier", identifier)
+						log.Println("gongstructName not found for identifier", identifier)
+						break
 					}
 					switch gongstructName {
 					// insertion point for slice of pointers assignments
@@ -762,11 +883,15 @@ func UnmarshallGongstructStaging(stage *Stage, cmap *ast.CommentMap, assignStmt 
 						switch fieldName {
 						// insertion point for slice of pointers assign code
 						case "AsSplitAreas":
-							// remove first and last char
-							targetIdentifier := ident.Name
-							target := __gong__map_AsSplitArea[targetIdentifier]
-							__gong__map_AsSplit[identifier].AsSplitAreas =
-								append(__gong__map_AsSplit[identifier].AsSplitAreas, target)
+							// perform the append only when the loop is processing the second argument
+							if argNb == 0 {
+								break
+							}
+							identifierOfInstanceToAppend := ident.Name
+							if instanceToAppend, ok := __gong__map_AsSplitArea[identifierOfInstanceToAppend]; ok {
+								instanceWhoseFieldIsAppended := __gong__map_AsSplit[identifier]
+								instanceWhoseFieldIsAppended.AsSplitAreas = append(instanceWhoseFieldIsAppended.AsSplitAreas, instanceToAppend)
+							}
 						}
 					case "AsSplitArea":
 						switch fieldName {
@@ -784,11 +909,27 @@ func UnmarshallGongstructStaging(stage *Stage, cmap *ast.CommentMap, assignStmt 
 						switch fieldName {
 						// insertion point for slice of pointers assign code
 						}
+					case "FavIcon":
+						switch fieldName {
+						// insertion point for slice of pointers assign code
+						}
 					case "Form":
 						switch fieldName {
 						// insertion point for slice of pointers assign code
 						}
 					case "Load":
+						switch fieldName {
+						// insertion point for slice of pointers assign code
+						}
+					case "LogoOnTheLeft":
+						switch fieldName {
+						// insertion point for slice of pointers assign code
+						}
+					case "LogoOnTheRight":
+						switch fieldName {
+						// insertion point for slice of pointers assign code
+						}
+					case "Markdown":
 						switch fieldName {
 						// insertion point for slice of pointers assign code
 						}
@@ -808,6 +949,10 @@ func UnmarshallGongstructStaging(stage *Stage, cmap *ast.CommentMap, assignStmt 
 						switch fieldName {
 						// insertion point for slice of pointers assign code
 						}
+					case "Title":
+						switch fieldName {
+						// insertion point for slice of pointers assign code
+						}
 					case "Tone":
 						switch fieldName {
 						// insertion point for slice of pointers assign code
@@ -820,48 +965,61 @@ func UnmarshallGongstructStaging(stage *Stage, cmap *ast.CommentMap, assignStmt 
 						switch fieldName {
 						// insertion point for slice of pointers assign code
 						case "RootAsSplitAreas":
-							// remove first and last char
-							targetIdentifier := ident.Name
-							target := __gong__map_AsSplitArea[targetIdentifier]
-							__gong__map_View[identifier].RootAsSplitAreas =
-								append(__gong__map_View[identifier].RootAsSplitAreas, target)
+							// perform the append only when the loop is processing the second argument
+							if argNb == 0 {
+								break
+							}
+							identifierOfInstanceToAppend := ident.Name
+							if instanceToAppend, ok := __gong__map_AsSplitArea[identifierOfInstanceToAppend]; ok {
+								instanceWhoseFieldIsAppended := __gong__map_View[identifier]
+								instanceWhoseFieldIsAppended.RootAsSplitAreas = append(instanceWhoseFieldIsAppended.RootAsSplitAreas, instanceToAppend)
+							}
 						}
 					case "Xlsx":
 						switch fieldName {
 						// insertion point for slice of pointers assign code
 						}
 					}
-				case *ast.SelectorExpr:
-					slcExpr := arg
-					// astCoordinate := astCoordinate + "\tSelectorExpr"
-					switch X := slcExpr.X.(type) {
-					case *ast.Ident:
-						ident := X
-						_ = ident
-						// astCoordinate := astCoordinate + "\tX" + "." + ident.Name
-						// log.Println(astCoordinate)
-
-					}
-					if Sel := slcExpr.Sel; Sel != nil {
-						// astCoordinate := astCoordinate + "\tSel" + "." + Sel.Name
-						// log.Println(astCoordinate)
-					}
 				}
 			}
-		case *ast.BasicLit, *ast.UnaryExpr:
+		case *ast.BasicLit, *ast.UnaryExpr, *ast.CompositeLit:
 
 			var basicLit *ast.BasicLit
 			var exprSign = 1.0
 			_ = exprSign // in case this is not used
-
-			if bl, ok := expr.(*ast.BasicLit); ok {
-				// expression is  for instance ... = 18.000
-				basicLit = bl
-			} else if ue, ok := expr.(*ast.UnaryExpr); ok {
-				// expression is  for instance ... = -18.000
+			switch v := expr.(type) {
+			case *ast.BasicLit:
+				// expression is for instance ... = 18.000
+				basicLit = v
+			case *ast.UnaryExpr:
+				// expression is for instance ... = -18.000
 				// we want to extract a *ast.BasicLit from the *ast.UnaryExpr
-				basicLit = ue.X.(*ast.BasicLit)
-				exprSign = -1
+				if bl, ok := v.X.(*ast.BasicLit); ok {
+					basicLit = bl
+					// Check the operator to set the sign
+					if v.Op == token.SUB { // token.SUB is for '-'
+						exprSign = -1
+					} else if v.Op == token.ADD { // token.ADD is for '+'
+						exprSign = 1
+					}
+				}
+			case *ast.CompositeLit:
+				var sl *ast.SelectorExpr
+				var ident *ast.Ident
+				var ok bool
+
+				if sl, ok = v.Type.(*ast.SelectorExpr); !ok {
+					break // Exits the switch case
+				}
+
+				if ident, ok = sl.X.(*ast.Ident); !ok {
+					break // Exits the switch case
+				}
+
+				basicLit = new(ast.BasicLit)
+				// For a "fake" literal, Kind might be set to something like token.STRING or a custom indicator
+				basicLit.Kind = token.STRING // Or another appropriate token.Kind
+				basicLit.Value = ident.Name + "." + sl.Sel.Name + "{}"
 			}
 
 			// astCoordinate := astCoordinate + "\tBasicLit" + "." + basicLit.Value
@@ -869,7 +1027,8 @@ func UnmarshallGongstructStaging(stage *Stage, cmap *ast.CommentMap, assignStmt 
 			var ok bool
 			gongstructName, ok = __gong__map_Indentifiers_gongstructName[identifier]
 			if !ok {
-				log.Fatalln("gongstructName not found for identifier", identifier)
+				log.Println("gongstructName not found for identifier", identifier)
+				break
 			}
 
 			// substitute the RHS part of the assignment if a //gong:ident directive is met
@@ -946,6 +1105,18 @@ func UnmarshallGongstructStaging(stage *Stage, cmap *ast.CommentMap, assignStmt 
 					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
 					__gong__map_Doc[identifier].StackName = fielValue
 				}
+			case "FavIcon":
+				switch fieldName {
+				// insertion point for field dependant code
+				case "Name":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_FavIcon[identifier].Name = fielValue
+				case "SVG":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_FavIcon[identifier].SVG = fielValue
+				}
 			case "Form":
 				switch fieldName {
 				// insertion point for field dependant code
@@ -973,6 +1144,70 @@ func UnmarshallGongstructStaging(stage *Stage, cmap *ast.CommentMap, assignStmt 
 					// remove first and last char
 					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
 					__gong__map_Load[identifier].StackName = fielValue
+				}
+			case "LogoOnTheLeft":
+				switch fieldName {
+				// insertion point for field dependant code
+				case "Name":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_LogoOnTheLeft[identifier].Name = fielValue
+				case "Width":
+					// convert string to int
+					fielValue, err := strconv.ParseInt(basicLit.Value, 10, 64)
+					if err != nil {
+						log.Fatalln(err)
+					}
+					__gong__map_LogoOnTheLeft[identifier].Width = int(exprSign) * int(fielValue)
+				case "Height":
+					// convert string to int
+					fielValue, err := strconv.ParseInt(basicLit.Value, 10, 64)
+					if err != nil {
+						log.Fatalln(err)
+					}
+					__gong__map_LogoOnTheLeft[identifier].Height = int(exprSign) * int(fielValue)
+				case "SVG":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_LogoOnTheLeft[identifier].SVG = fielValue
+				}
+			case "LogoOnTheRight":
+				switch fieldName {
+				// insertion point for field dependant code
+				case "Name":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_LogoOnTheRight[identifier].Name = fielValue
+				case "Width":
+					// convert string to int
+					fielValue, err := strconv.ParseInt(basicLit.Value, 10, 64)
+					if err != nil {
+						log.Fatalln(err)
+					}
+					__gong__map_LogoOnTheRight[identifier].Width = int(exprSign) * int(fielValue)
+				case "Height":
+					// convert string to int
+					fielValue, err := strconv.ParseInt(basicLit.Value, 10, 64)
+					if err != nil {
+						log.Fatalln(err)
+					}
+					__gong__map_LogoOnTheRight[identifier].Height = int(exprSign) * int(fielValue)
+				case "SVG":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_LogoOnTheRight[identifier].SVG = fielValue
+				}
+			case "Markdown":
+				switch fieldName {
+				// insertion point for field dependant code
+				case "Name":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_Markdown[identifier].Name = fielValue
+				case "StackName":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_Markdown[identifier].StackName = fielValue
 				}
 			case "Slider":
 				switch fieldName {
@@ -1029,6 +1264,14 @@ func UnmarshallGongstructStaging(stage *Stage, cmap *ast.CommentMap, assignStmt 
 					// remove first and last char
 					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
 					__gong__map_Table[identifier].TableName = fielValue
+				}
+			case "Title":
+				switch fieldName {
+				// insertion point for field dependant code
+				case "Name":
+					// remove first and last char
+					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
+					__gong__map_Title[identifier].Name = fielValue
 				}
 			case "Tone":
 				switch fieldName {
@@ -1088,7 +1331,8 @@ func UnmarshallGongstructStaging(stage *Stage, cmap *ast.CommentMap, assignStmt 
 			var ok bool
 			gongstructName, ok = __gong__map_Indentifiers_gongstructName[identifier]
 			if !ok {
-				log.Fatalln("gongstructName not found for identifier", identifier)
+				log.Println("gongstructName not found for identifier", identifier)
+				break
 			}
 			switch gongstructName {
 			// insertion point for bool & pointers assignments
@@ -1131,6 +1375,9 @@ func UnmarshallGongstructStaging(stage *Stage, cmap *ast.CommentMap, assignStmt 
 				case "Load":
 					targetIdentifier := ident.Name
 					__gong__map_AsSplitArea[identifier].Load = __gong__map_Load[targetIdentifier]
+				case "Markdown":
+					targetIdentifier := ident.Name
+					__gong__map_AsSplitArea[identifier].Markdown = __gong__map_Markdown[targetIdentifier]
 				case "Slider":
 					targetIdentifier := ident.Name
 					__gong__map_AsSplitArea[identifier].Slider = __gong__map_Slider[targetIdentifier]
@@ -1172,11 +1419,27 @@ func UnmarshallGongstructStaging(stage *Stage, cmap *ast.CommentMap, assignStmt 
 				switch fieldName {
 				// insertion point for field dependant code
 				}
+			case "FavIcon":
+				switch fieldName {
+				// insertion point for field dependant code
+				}
 			case "Form":
 				switch fieldName {
 				// insertion point for field dependant code
 				}
 			case "Load":
+				switch fieldName {
+				// insertion point for field dependant code
+				}
+			case "LogoOnTheLeft":
+				switch fieldName {
+				// insertion point for field dependant code
+				}
+			case "LogoOnTheRight":
+				switch fieldName {
+				// insertion point for field dependant code
+				}
+			case "Markdown":
 				switch fieldName {
 				// insertion point for field dependant code
 				}
@@ -1193,6 +1456,10 @@ func UnmarshallGongstructStaging(stage *Stage, cmap *ast.CommentMap, assignStmt 
 				// insertion point for field dependant code
 				}
 			case "Table":
+				switch fieldName {
+				// insertion point for field dependant code
+				}
+			case "Title":
 				switch fieldName {
 				// insertion point for field dependant code
 				}
@@ -1214,6 +1481,13 @@ func UnmarshallGongstructStaging(stage *Stage, cmap *ast.CommentMap, assignStmt 
 						log.Fatalln(err)
 					}
 					__gong__map_View[identifier].ShowViewName = fielValue
+				case "IsSelectedView":
+					// convert string to boolean
+					fielValue, err := strconv.ParseBool(ident.Name)
+					if err != nil {
+						log.Fatalln(err)
+					}
+					__gong__map_View[identifier].IsSelectedView = fielValue
 				}
 			case "Xlsx":
 				switch fieldName {
@@ -1221,6 +1495,9 @@ func UnmarshallGongstructStaging(stage *Stage, cmap *ast.CommentMap, assignStmt 
 				}
 			}
 		case *ast.SelectorExpr:
+			var basicLit *ast.BasicLit
+			var ident *ast.Ident
+
 			// assignment to enum field
 			selectorExpr := expr
 			// astCoordinate := astCoordinate + "\tSelectorExpr"
@@ -1230,7 +1507,24 @@ func UnmarshallGongstructStaging(stage *Stage, cmap *ast.CommentMap, assignStmt 
 				_ = ident
 				// astCoordinate := astCoordinate + "\tX" + "." + ident.Name
 				// log.Println(astCoordinate)
+			case *ast.CompositeLit:
+				var ok bool
+				var sl *ast.SelectorExpr
+
+				if sl, ok = X.Type.(*ast.SelectorExpr); !ok {
+					break // Exits the switch case
+				}
+
+				if ident, ok = sl.X.(*ast.Ident); !ok {
+					break // Exits the switch case
+				}
+
+				basicLit = new(ast.BasicLit)
+				// For a "fake" literal, Kind might be set to something like token.STRING or a custom indicator
+				basicLit.Kind = token.STRING // Or another appropriate token.Kind
+				basicLit.Value = ident.Name + "." + sl.Sel.Name + "{}." + selectorExpr.Sel.Name
 			}
+
 			if Sel := selectorExpr.Sel; Sel != nil {
 				// astCoordinate := astCoordinate + "\tSel" + "." + Sel.Name
 				// log.Println(astCoordinate)
@@ -1239,17 +1533,27 @@ func UnmarshallGongstructStaging(stage *Stage, cmap *ast.CommentMap, assignStmt 
 				var ok bool
 				gongstructName, ok = __gong__map_Indentifiers_gongstructName[identifier]
 				if !ok {
-					log.Fatalln("gongstructName not found for identifier", identifier)
+					log.Println("gongstructName not found for identifier", identifier)
+					break
+				}
+
+				if basicLit == nil {
+					// for the meta field written as ref_models.ENUM_VALUE1
+					basicLit = new(ast.BasicLit)
+					basicLit.Kind = token.STRING // Or another appropriate token.Kind
+					basicLit.Value = selectorExpr.X.(*ast.Ident).Name + "." + Sel.Name
+					_ = basicLit.Kind
+					_ = basicLit.Value
 				}
 
 				// remove first and last char
 				enumValue := Sel.Name
 				_ = enumValue
 				switch gongstructName {
-				// insertion point for enums assignments
+				// insertion point for selector expr assignments
 				case "AsSplit":
 					switch fieldName {
-					// insertion point for enum assign code
+					// insertion point for selector expr assign code
 					case "Direction":
 						var val Direction
 						err := (&val).FromCodeString(enumValue)
@@ -1260,59 +1564,79 @@ func UnmarshallGongstructStaging(stage *Stage, cmap *ast.CommentMap, assignStmt 
 					}
 				case "AsSplitArea":
 					switch fieldName {
-					// insertion point for enum assign code
+					// insertion point for selector expr assign code
 					}
 				case "Button":
 					switch fieldName {
-					// insertion point for enum assign code
+					// insertion point for selector expr assign code
 					}
 				case "Cursor":
 					switch fieldName {
-					// insertion point for enum assign code
+					// insertion point for selector expr assign code
 					}
 				case "Doc":
 					switch fieldName {
-					// insertion point for enum assign code
+					// insertion point for selector expr assign code
+					}
+				case "FavIcon":
+					switch fieldName {
+					// insertion point for selector expr assign code
 					}
 				case "Form":
 					switch fieldName {
-					// insertion point for enum assign code
+					// insertion point for selector expr assign code
 					}
 				case "Load":
 					switch fieldName {
-					// insertion point for enum assign code
+					// insertion point for selector expr assign code
+					}
+				case "LogoOnTheLeft":
+					switch fieldName {
+					// insertion point for selector expr assign code
+					}
+				case "LogoOnTheRight":
+					switch fieldName {
+					// insertion point for selector expr assign code
+					}
+				case "Markdown":
+					switch fieldName {
+					// insertion point for selector expr assign code
 					}
 				case "Slider":
 					switch fieldName {
-					// insertion point for enum assign code
+					// insertion point for selector expr assign code
 					}
 				case "Split":
 					switch fieldName {
-					// insertion point for enum assign code
+					// insertion point for selector expr assign code
 					}
 				case "Svg":
 					switch fieldName {
-					// insertion point for enum assign code
+					// insertion point for selector expr assign code
 					}
 				case "Table":
 					switch fieldName {
-					// insertion point for enum assign code
+					// insertion point for selector expr assign code
+					}
+				case "Title":
+					switch fieldName {
+					// insertion point for selector expr assign code
 					}
 				case "Tone":
 					switch fieldName {
-					// insertion point for enum assign code
+					// insertion point for selector expr assign code
 					}
 				case "Tree":
 					switch fieldName {
-					// insertion point for enum assign code
+					// insertion point for selector expr assign code
 					}
 				case "View":
 					switch fieldName {
-					// insertion point for enum assign code
+					// insertion point for selector expr assign code
 					}
 				case "Xlsx":
 					switch fieldName {
-					// insertion point for enum assign code
+					// insertion point for selector expr assign code
 					}
 				}
 			}

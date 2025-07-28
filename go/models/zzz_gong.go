@@ -16,7 +16,8 @@ import (
 )
 
 // can be used for
-//     days := __Gong__Abs(int(int(inferedInstance.ComputedDuration.Hours()) / 24))
+//
+//	days := __Gong__Abs(int(int(inferedInstance.ComputedDuration.Hours()) / 24))
 func __Gong__Abs(x int) int {
 	if x < 0 {
 		return -x
@@ -26,10 +27,10 @@ func __Gong__Abs(x int) int {
 
 var _ = __Gong__Abs
 
-const ProbeTreeSidebarSuffix = "-sidebar"
-const ProbeTableSuffix = "-table"
-const ProbeFormSuffix = "-form"
-const ProbeSplitSuffix = "-probe"
+const ProbeTreeSidebarSuffix = ":sidebar of the probe"
+const ProbeTableSuffix = ":table of the probe"
+const ProbeFormSuffix = ":form of the probe"
+const ProbeSplitSuffix = ":probe of the probe"
 
 func (stage *Stage) GetProbeTreeSidebarStageName() string {
 	return stage.GetType() + ":" + stage.GetName() + ProbeTreeSidebarSuffix
@@ -53,8 +54,12 @@ var errUnkownEnum = errors.New("unkown enum")
 // needed to avoid when fmt package is not needed by generated code
 var __dummy__fmt_variable fmt.Scanner
 
+var _ = __dummy__fmt_variable
+
 // idem for math package when not need by generated code
 var __dummy_math_variable = math.E
+
+var _ = __dummy_math_variable
 
 // swagger:ignore
 type __void any
@@ -74,7 +79,12 @@ type GongStructInterface interface {
 // Stage enables storage of staged instances
 // swagger:ignore
 type Stage struct {
-	name string
+	name               string
+	commitId           uint // commitId is updated at each commit
+	commitTimeStamp    time.Time
+	contentWhenParsed  string
+	commitIdWhenParsed uint
+	generatesDiff      bool
 
 	// insertion point for definition of arrays registering instances
 	Alls           map[*All]any
@@ -508,6 +518,18 @@ type Stage struct {
 	NamedStructs []*NamedStruct
 }
 
+func (stage *Stage) GetCommitId() uint {
+	return stage.commitId
+}
+
+func (stage *Stage) GetCommitTS() time.Time {
+	return stage.commitTimeStamp
+}
+
+func (stage *Stage) SetGeneratesDiff(generatesDiff bool) {
+	stage.generatesDiff = generatesDiff
+}
+
 // GetNamedStructs implements models.ProbebStage.
 func (stage *Stage) GetNamedStructsNames() (res []string) {
 
@@ -542,67 +564,463 @@ func GetNamedStructInstances[T PointerToGongstruct](set map[T]any, order map[T]u
 	return
 }
 
-func (stage *Stage) GetNamedStructNamesByOrder(namedStructName string) (res []string) {
+func GetStructInstancesByOrderAuto[T PointerToGongstruct](stage *Stage) (res []T) {
+	var t T
+	switch any(t).(type) {
+		// insertion point for case
+	case *All:
+		tmp := GetStructInstancesByOrder(stage.Alls, stage.AllMap_Staged_Order)
 
-	switch namedStructName {
-	// insertion point for case 
-		case "All":
-			res = GetNamedStructInstances(stage.Alls, stage.AllMap_Staged_Order)
-		case "Annotation":
-			res = GetNamedStructInstances(stage.Annotations, stage.AnnotationMap_Staged_Order)
-		case "Attribute":
-			res = GetNamedStructInstances(stage.Attributes, stage.AttributeMap_Staged_Order)
-		case "AttributeGroup":
-			res = GetNamedStructInstances(stage.AttributeGroups, stage.AttributeGroupMap_Staged_Order)
-		case "Choice":
-			res = GetNamedStructInstances(stage.Choices, stage.ChoiceMap_Staged_Order)
-		case "ComplexContent":
-			res = GetNamedStructInstances(stage.ComplexContents, stage.ComplexContentMap_Staged_Order)
-		case "ComplexType":
-			res = GetNamedStructInstances(stage.ComplexTypes, stage.ComplexTypeMap_Staged_Order)
-		case "Documentation":
-			res = GetNamedStructInstances(stage.Documentations, stage.DocumentationMap_Staged_Order)
-		case "Element":
-			res = GetNamedStructInstances(stage.Elements, stage.ElementMap_Staged_Order)
-		case "Enumeration":
-			res = GetNamedStructInstances(stage.Enumerations, stage.EnumerationMap_Staged_Order)
-		case "Extension":
-			res = GetNamedStructInstances(stage.Extensions, stage.ExtensionMap_Staged_Order)
-		case "Group":
-			res = GetNamedStructInstances(stage.Groups, stage.GroupMap_Staged_Order)
-		case "Length":
-			res = GetNamedStructInstances(stage.Lengths, stage.LengthMap_Staged_Order)
-		case "MaxInclusive":
-			res = GetNamedStructInstances(stage.MaxInclusives, stage.MaxInclusiveMap_Staged_Order)
-		case "MaxLength":
-			res = GetNamedStructInstances(stage.MaxLengths, stage.MaxLengthMap_Staged_Order)
-		case "MinInclusive":
-			res = GetNamedStructInstances(stage.MinInclusives, stage.MinInclusiveMap_Staged_Order)
-		case "MinLength":
-			res = GetNamedStructInstances(stage.MinLengths, stage.MinLengthMap_Staged_Order)
-		case "Pattern":
-			res = GetNamedStructInstances(stage.Patterns, stage.PatternMap_Staged_Order)
-		case "Restriction":
-			res = GetNamedStructInstances(stage.Restrictions, stage.RestrictionMap_Staged_Order)
-		case "Schema":
-			res = GetNamedStructInstances(stage.Schemas, stage.SchemaMap_Staged_Order)
-		case "Sequence":
-			res = GetNamedStructInstances(stage.Sequences, stage.SequenceMap_Staged_Order)
-		case "SimpleContent":
-			res = GetNamedStructInstances(stage.SimpleContents, stage.SimpleContentMap_Staged_Order)
-		case "SimpleType":
-			res = GetNamedStructInstances(stage.SimpleTypes, stage.SimpleTypeMap_Staged_Order)
-		case "TotalDigit":
-			res = GetNamedStructInstances(stage.TotalDigits, stage.TotalDigitMap_Staged_Order)
-		case "Union":
-			res = GetNamedStructInstances(stage.Unions, stage.UnionMap_Staged_Order)
-		case "WhiteSpace":
-			res = GetNamedStructInstances(stage.WhiteSpaces, stage.WhiteSpaceMap_Staged_Order)
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *All implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *Annotation:
+		tmp := GetStructInstancesByOrder(stage.Annotations, stage.AnnotationMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *Annotation implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *Attribute:
+		tmp := GetStructInstancesByOrder(stage.Attributes, stage.AttributeMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *Attribute implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *AttributeGroup:
+		tmp := GetStructInstancesByOrder(stage.AttributeGroups, stage.AttributeGroupMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *AttributeGroup implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *Choice:
+		tmp := GetStructInstancesByOrder(stage.Choices, stage.ChoiceMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *Choice implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *ComplexContent:
+		tmp := GetStructInstancesByOrder(stage.ComplexContents, stage.ComplexContentMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *ComplexContent implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *ComplexType:
+		tmp := GetStructInstancesByOrder(stage.ComplexTypes, stage.ComplexTypeMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *ComplexType implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *Documentation:
+		tmp := GetStructInstancesByOrder(stage.Documentations, stage.DocumentationMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *Documentation implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *Element:
+		tmp := GetStructInstancesByOrder(stage.Elements, stage.ElementMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *Element implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *Enumeration:
+		tmp := GetStructInstancesByOrder(stage.Enumerations, stage.EnumerationMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *Enumeration implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *Extension:
+		tmp := GetStructInstancesByOrder(stage.Extensions, stage.ExtensionMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *Extension implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *Group:
+		tmp := GetStructInstancesByOrder(stage.Groups, stage.GroupMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *Group implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *Length:
+		tmp := GetStructInstancesByOrder(stage.Lengths, stage.LengthMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *Length implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *MaxInclusive:
+		tmp := GetStructInstancesByOrder(stage.MaxInclusives, stage.MaxInclusiveMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *MaxInclusive implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *MaxLength:
+		tmp := GetStructInstancesByOrder(stage.MaxLengths, stage.MaxLengthMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *MaxLength implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *MinInclusive:
+		tmp := GetStructInstancesByOrder(stage.MinInclusives, stage.MinInclusiveMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *MinInclusive implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *MinLength:
+		tmp := GetStructInstancesByOrder(stage.MinLengths, stage.MinLengthMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *MinLength implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *Pattern:
+		tmp := GetStructInstancesByOrder(stage.Patterns, stage.PatternMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *Pattern implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *Restriction:
+		tmp := GetStructInstancesByOrder(stage.Restrictions, stage.RestrictionMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *Restriction implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *Schema:
+		tmp := GetStructInstancesByOrder(stage.Schemas, stage.SchemaMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *Schema implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *Sequence:
+		tmp := GetStructInstancesByOrder(stage.Sequences, stage.SequenceMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *Sequence implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *SimpleContent:
+		tmp := GetStructInstancesByOrder(stage.SimpleContents, stage.SimpleContentMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *SimpleContent implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *SimpleType:
+		tmp := GetStructInstancesByOrder(stage.SimpleTypes, stage.SimpleTypeMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *SimpleType implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *TotalDigit:
+		tmp := GetStructInstancesByOrder(stage.TotalDigits, stage.TotalDigitMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *TotalDigit implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *Union:
+		tmp := GetStructInstancesByOrder(stage.Unions, stage.UnionMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *Union implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *WhiteSpace:
+		tmp := GetStructInstancesByOrder(stage.WhiteSpaces, stage.WhiteSpaceMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *WhiteSpace implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+
+	}
+	return
+}
+
+func GetStructInstancesByOrder[T PointerToGongstruct](set map[T]any, order map[T]uint) (res []T) {
+
+	orderedSet := []T{}
+	for instance := range set {
+		orderedSet = append(orderedSet, instance)
+	}
+	sort.Slice(orderedSet[:], func(i, j int) bool {
+		instancei := orderedSet[i]
+		instancej := orderedSet[j]
+		i_order, oki := order[instancei]
+		j_order, okj := order[instancej]
+		if !oki || !okj {
+			log.Fatalf("GetNamedStructInstances: pointer not found")
+		}
+		return i_order < j_order
+	})
+
+	for _, instance := range orderedSet {
+		res = append(res, instance)
 	}
 
 	return
 }
 
+func (stage *Stage) GetNamedStructNamesByOrder(namedStructName string) (res []string) {
+
+	switch namedStructName {
+	// insertion point for case
+	case "All":
+		res = GetNamedStructInstances(stage.Alls, stage.AllMap_Staged_Order)
+	case "Annotation":
+		res = GetNamedStructInstances(stage.Annotations, stage.AnnotationMap_Staged_Order)
+	case "Attribute":
+		res = GetNamedStructInstances(stage.Attributes, stage.AttributeMap_Staged_Order)
+	case "AttributeGroup":
+		res = GetNamedStructInstances(stage.AttributeGroups, stage.AttributeGroupMap_Staged_Order)
+	case "Choice":
+		res = GetNamedStructInstances(stage.Choices, stage.ChoiceMap_Staged_Order)
+	case "ComplexContent":
+		res = GetNamedStructInstances(stage.ComplexContents, stage.ComplexContentMap_Staged_Order)
+	case "ComplexType":
+		res = GetNamedStructInstances(stage.ComplexTypes, stage.ComplexTypeMap_Staged_Order)
+	case "Documentation":
+		res = GetNamedStructInstances(stage.Documentations, stage.DocumentationMap_Staged_Order)
+	case "Element":
+		res = GetNamedStructInstances(stage.Elements, stage.ElementMap_Staged_Order)
+	case "Enumeration":
+		res = GetNamedStructInstances(stage.Enumerations, stage.EnumerationMap_Staged_Order)
+	case "Extension":
+		res = GetNamedStructInstances(stage.Extensions, stage.ExtensionMap_Staged_Order)
+	case "Group":
+		res = GetNamedStructInstances(stage.Groups, stage.GroupMap_Staged_Order)
+	case "Length":
+		res = GetNamedStructInstances(stage.Lengths, stage.LengthMap_Staged_Order)
+	case "MaxInclusive":
+		res = GetNamedStructInstances(stage.MaxInclusives, stage.MaxInclusiveMap_Staged_Order)
+	case "MaxLength":
+		res = GetNamedStructInstances(stage.MaxLengths, stage.MaxLengthMap_Staged_Order)
+	case "MinInclusive":
+		res = GetNamedStructInstances(stage.MinInclusives, stage.MinInclusiveMap_Staged_Order)
+	case "MinLength":
+		res = GetNamedStructInstances(stage.MinLengths, stage.MinLengthMap_Staged_Order)
+	case "Pattern":
+		res = GetNamedStructInstances(stage.Patterns, stage.PatternMap_Staged_Order)
+	case "Restriction":
+		res = GetNamedStructInstances(stage.Restrictions, stage.RestrictionMap_Staged_Order)
+	case "Schema":
+		res = GetNamedStructInstances(stage.Schemas, stage.SchemaMap_Staged_Order)
+	case "Sequence":
+		res = GetNamedStructInstances(stage.Sequences, stage.SequenceMap_Staged_Order)
+	case "SimpleContent":
+		res = GetNamedStructInstances(stage.SimpleContents, stage.SimpleContentMap_Staged_Order)
+	case "SimpleType":
+		res = GetNamedStructInstances(stage.SimpleTypes, stage.SimpleTypeMap_Staged_Order)
+	case "TotalDigit":
+		res = GetNamedStructInstances(stage.TotalDigits, stage.TotalDigitMap_Staged_Order)
+	case "Union":
+		res = GetNamedStructInstances(stage.Unions, stage.UnionMap_Staged_Order)
+	case "WhiteSpace":
+		res = GetNamedStructInstances(stage.WhiteSpaces, stage.WhiteSpaceMap_Staged_Order)
+	}
+
+	return
+}
 
 type NamedStruct struct {
 	name string
@@ -963,6 +1381,67 @@ func GetOrder[Type Gongstruct](stage *Stage, instance *Type) uint {
 	}
 }
 
+func GetOrderPointerGongstruct[Type PointerToGongstruct](stage *Stage, instance Type) uint {
+
+	switch instance := any(instance).(type) {
+	// insertion point for order map initialisations
+	case *All:
+		return stage.AllMap_Staged_Order[instance]
+	case *Annotation:
+		return stage.AnnotationMap_Staged_Order[instance]
+	case *Attribute:
+		return stage.AttributeMap_Staged_Order[instance]
+	case *AttributeGroup:
+		return stage.AttributeGroupMap_Staged_Order[instance]
+	case *Choice:
+		return stage.ChoiceMap_Staged_Order[instance]
+	case *ComplexContent:
+		return stage.ComplexContentMap_Staged_Order[instance]
+	case *ComplexType:
+		return stage.ComplexTypeMap_Staged_Order[instance]
+	case *Documentation:
+		return stage.DocumentationMap_Staged_Order[instance]
+	case *Element:
+		return stage.ElementMap_Staged_Order[instance]
+	case *Enumeration:
+		return stage.EnumerationMap_Staged_Order[instance]
+	case *Extension:
+		return stage.ExtensionMap_Staged_Order[instance]
+	case *Group:
+		return stage.GroupMap_Staged_Order[instance]
+	case *Length:
+		return stage.LengthMap_Staged_Order[instance]
+	case *MaxInclusive:
+		return stage.MaxInclusiveMap_Staged_Order[instance]
+	case *MaxLength:
+		return stage.MaxLengthMap_Staged_Order[instance]
+	case *MinInclusive:
+		return stage.MinInclusiveMap_Staged_Order[instance]
+	case *MinLength:
+		return stage.MinLengthMap_Staged_Order[instance]
+	case *Pattern:
+		return stage.PatternMap_Staged_Order[instance]
+	case *Restriction:
+		return stage.RestrictionMap_Staged_Order[instance]
+	case *Schema:
+		return stage.SchemaMap_Staged_Order[instance]
+	case *Sequence:
+		return stage.SequenceMap_Staged_Order[instance]
+	case *SimpleContent:
+		return stage.SimpleContentMap_Staged_Order[instance]
+	case *SimpleType:
+		return stage.SimpleTypeMap_Staged_Order[instance]
+	case *TotalDigit:
+		return stage.TotalDigitMap_Staged_Order[instance]
+	case *Union:
+		return stage.UnionMap_Staged_Order[instance]
+	case *WhiteSpace:
+		return stage.WhiteSpaceMap_Staged_Order[instance]
+	default:
+		return 0 // should not happen
+	}
+}
+
 func (stage *Stage) GetName() string {
 	return stage.name
 }
@@ -977,6 +1456,8 @@ func (stage *Stage) CommitWithSuspendedCallbacks() {
 
 func (stage *Stage) Commit() {
 	stage.ComputeReverseMaps()
+	stage.commitId++
+	stage.commitTimeStamp = time.Now()
 
 	if stage.BackRepo != nil {
 		stage.BackRepo.Commit(stage)
@@ -4318,7 +4799,7 @@ func GetPointerReverseMap[Start, End Gongstruct](fieldname string, stage *Stage)
 // The function provides a map with keys as instances of End and values to *Start instances
 // the map is construed by iterating over all Start instances and populating keys with End instances
 // and values with the Start instances
-func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage *Stage) map[*End]*Start {
+func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage *Stage) map[*End][]*Start {
 
 	var ret Start
 
@@ -4329,58 +4810,58 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 		switch fieldname {
 		// insertion point for per direct association field
 		case "Sequences":
-			res := make(map[*Sequence]*All)
+			res := make(map[*Sequence][]*All)
 			for all := range stage.Alls {
 				for _, sequence_ := range all.Sequences {
-					res[sequence_] = all
+					res[sequence_] = append(res[sequence_], all)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		case "Alls":
-			res := make(map[*All]*All)
+			res := make(map[*All][]*All)
 			for all := range stage.Alls {
 				for _, all_ := range all.Alls {
-					res[all_] = all
+					res[all_] = append(res[all_], all)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		case "Choices":
-			res := make(map[*Choice]*All)
+			res := make(map[*Choice][]*All)
 			for all := range stage.Alls {
 				for _, choice_ := range all.Choices {
-					res[choice_] = all
+					res[choice_] = append(res[choice_], all)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		case "Groups":
-			res := make(map[*Group]*All)
+			res := make(map[*Group][]*All)
 			for all := range stage.Alls {
 				for _, group_ := range all.Groups {
-					res[group_] = all
+					res[group_] = append(res[group_], all)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		case "Elements":
-			res := make(map[*Element]*All)
+			res := make(map[*Element][]*All)
 			for all := range stage.Alls {
 				for _, element_ := range all.Elements {
-					res[element_] = all
+					res[element_] = append(res[element_], all)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of Annotation
 	case Annotation:
 		switch fieldname {
 		// insertion point for per direct association field
 		case "Documentations":
-			res := make(map[*Documentation]*Annotation)
+			res := make(map[*Documentation][]*Annotation)
 			for annotation := range stage.Annotations {
 				for _, documentation_ := range annotation.Documentations {
-					res[documentation_] = annotation
+					res[documentation_] = append(res[documentation_], annotation)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of Attribute
 	case Attribute:
@@ -4392,66 +4873,66 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 		switch fieldname {
 		// insertion point for per direct association field
 		case "AttributeGroups":
-			res := make(map[*AttributeGroup]*AttributeGroup)
+			res := make(map[*AttributeGroup][]*AttributeGroup)
 			for attributegroup := range stage.AttributeGroups {
 				for _, attributegroup_ := range attributegroup.AttributeGroups {
-					res[attributegroup_] = attributegroup
+					res[attributegroup_] = append(res[attributegroup_], attributegroup)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		case "Attributes":
-			res := make(map[*Attribute]*AttributeGroup)
+			res := make(map[*Attribute][]*AttributeGroup)
 			for attributegroup := range stage.AttributeGroups {
 				for _, attribute_ := range attributegroup.Attributes {
-					res[attribute_] = attributegroup
+					res[attribute_] = append(res[attribute_], attributegroup)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of Choice
 	case Choice:
 		switch fieldname {
 		// insertion point for per direct association field
 		case "Sequences":
-			res := make(map[*Sequence]*Choice)
+			res := make(map[*Sequence][]*Choice)
 			for choice := range stage.Choices {
 				for _, sequence_ := range choice.Sequences {
-					res[sequence_] = choice
+					res[sequence_] = append(res[sequence_], choice)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		case "Alls":
-			res := make(map[*All]*Choice)
+			res := make(map[*All][]*Choice)
 			for choice := range stage.Choices {
 				for _, all_ := range choice.Alls {
-					res[all_] = choice
+					res[all_] = append(res[all_], choice)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		case "Choices":
-			res := make(map[*Choice]*Choice)
+			res := make(map[*Choice][]*Choice)
 			for choice := range stage.Choices {
 				for _, choice_ := range choice.Choices {
-					res[choice_] = choice
+					res[choice_] = append(res[choice_], choice)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		case "Groups":
-			res := make(map[*Group]*Choice)
+			res := make(map[*Group][]*Choice)
 			for choice := range stage.Choices {
 				for _, group_ := range choice.Groups {
-					res[group_] = choice
+					res[group_] = append(res[group_], choice)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		case "Elements":
-			res := make(map[*Element]*Choice)
+			res := make(map[*Element][]*Choice)
 			for choice := range stage.Choices {
 				for _, element_ := range choice.Elements {
-					res[element_] = choice
+					res[element_] = append(res[element_], choice)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of ComplexContent
 	case ComplexContent:
@@ -4463,61 +4944,61 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 		switch fieldname {
 		// insertion point for per direct association field
 		case "Sequences":
-			res := make(map[*Sequence]*ComplexType)
+			res := make(map[*Sequence][]*ComplexType)
 			for complextype := range stage.ComplexTypes {
 				for _, sequence_ := range complextype.Sequences {
-					res[sequence_] = complextype
+					res[sequence_] = append(res[sequence_], complextype)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		case "Alls":
-			res := make(map[*All]*ComplexType)
+			res := make(map[*All][]*ComplexType)
 			for complextype := range stage.ComplexTypes {
 				for _, all_ := range complextype.Alls {
-					res[all_] = complextype
+					res[all_] = append(res[all_], complextype)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		case "Choices":
-			res := make(map[*Choice]*ComplexType)
+			res := make(map[*Choice][]*ComplexType)
 			for complextype := range stage.ComplexTypes {
 				for _, choice_ := range complextype.Choices {
-					res[choice_] = complextype
+					res[choice_] = append(res[choice_], complextype)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		case "Groups":
-			res := make(map[*Group]*ComplexType)
+			res := make(map[*Group][]*ComplexType)
 			for complextype := range stage.ComplexTypes {
 				for _, group_ := range complextype.Groups {
-					res[group_] = complextype
+					res[group_] = append(res[group_], complextype)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		case "Elements":
-			res := make(map[*Element]*ComplexType)
+			res := make(map[*Element][]*ComplexType)
 			for complextype := range stage.ComplexTypes {
 				for _, element_ := range complextype.Elements {
-					res[element_] = complextype
+					res[element_] = append(res[element_], complextype)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		case "Attributes":
-			res := make(map[*Attribute]*ComplexType)
+			res := make(map[*Attribute][]*ComplexType)
 			for complextype := range stage.ComplexTypes {
 				for _, attribute_ := range complextype.Attributes {
-					res[attribute_] = complextype
+					res[attribute_] = append(res[attribute_], complextype)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		case "AttributeGroups":
-			res := make(map[*AttributeGroup]*ComplexType)
+			res := make(map[*AttributeGroup][]*ComplexType)
 			for complextype := range stage.ComplexTypes {
 				for _, attributegroup_ := range complextype.AttributeGroups {
-					res[attributegroup_] = complextype
+					res[attributegroup_] = append(res[attributegroup_], complextype)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of Documentation
 	case Documentation:
@@ -4529,13 +5010,13 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 		switch fieldname {
 		// insertion point for per direct association field
 		case "Groups":
-			res := make(map[*Group]*Element)
+			res := make(map[*Group][]*Element)
 			for element := range stage.Elements {
 				for _, group_ := range element.Groups {
-					res[group_] = element
+					res[group_] = append(res[group_], element)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of Enumeration
 	case Enumeration:
@@ -4547,106 +5028,106 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 		switch fieldname {
 		// insertion point for per direct association field
 		case "Sequences":
-			res := make(map[*Sequence]*Extension)
+			res := make(map[*Sequence][]*Extension)
 			for extension := range stage.Extensions {
 				for _, sequence_ := range extension.Sequences {
-					res[sequence_] = extension
+					res[sequence_] = append(res[sequence_], extension)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		case "Alls":
-			res := make(map[*All]*Extension)
+			res := make(map[*All][]*Extension)
 			for extension := range stage.Extensions {
 				for _, all_ := range extension.Alls {
-					res[all_] = extension
+					res[all_] = append(res[all_], extension)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		case "Choices":
-			res := make(map[*Choice]*Extension)
+			res := make(map[*Choice][]*Extension)
 			for extension := range stage.Extensions {
 				for _, choice_ := range extension.Choices {
-					res[choice_] = extension
+					res[choice_] = append(res[choice_], extension)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		case "Groups":
-			res := make(map[*Group]*Extension)
+			res := make(map[*Group][]*Extension)
 			for extension := range stage.Extensions {
 				for _, group_ := range extension.Groups {
-					res[group_] = extension
+					res[group_] = append(res[group_], extension)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		case "Elements":
-			res := make(map[*Element]*Extension)
+			res := make(map[*Element][]*Extension)
 			for extension := range stage.Extensions {
 				for _, element_ := range extension.Elements {
-					res[element_] = extension
+					res[element_] = append(res[element_], extension)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		case "Attributes":
-			res := make(map[*Attribute]*Extension)
+			res := make(map[*Attribute][]*Extension)
 			for extension := range stage.Extensions {
 				for _, attribute_ := range extension.Attributes {
-					res[attribute_] = extension
+					res[attribute_] = append(res[attribute_], extension)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		case "AttributeGroups":
-			res := make(map[*AttributeGroup]*Extension)
+			res := make(map[*AttributeGroup][]*Extension)
 			for extension := range stage.Extensions {
 				for _, attributegroup_ := range extension.AttributeGroups {
-					res[attributegroup_] = extension
+					res[attributegroup_] = append(res[attributegroup_], extension)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of Group
 	case Group:
 		switch fieldname {
 		// insertion point for per direct association field
 		case "Sequences":
-			res := make(map[*Sequence]*Group)
+			res := make(map[*Sequence][]*Group)
 			for group := range stage.Groups {
 				for _, sequence_ := range group.Sequences {
-					res[sequence_] = group
+					res[sequence_] = append(res[sequence_], group)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		case "Alls":
-			res := make(map[*All]*Group)
+			res := make(map[*All][]*Group)
 			for group := range stage.Groups {
 				for _, all_ := range group.Alls {
-					res[all_] = group
+					res[all_] = append(res[all_], group)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		case "Choices":
-			res := make(map[*Choice]*Group)
+			res := make(map[*Choice][]*Group)
 			for group := range stage.Groups {
 				for _, choice_ := range group.Choices {
-					res[choice_] = group
+					res[choice_] = append(res[choice_], group)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		case "Groups":
-			res := make(map[*Group]*Group)
+			res := make(map[*Group][]*Group)
 			for group := range stage.Groups {
 				for _, group_ := range group.Groups {
-					res[group_] = group
+					res[group_] = append(res[group_], group)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		case "Elements":
-			res := make(map[*Element]*Group)
+			res := make(map[*Element][]*Group)
 			for group := range stage.Groups {
 				for _, element_ := range group.Elements {
-					res[element_] = group
+					res[element_] = append(res[element_], group)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of Length
 	case Length:
@@ -4683,103 +5164,103 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 		switch fieldname {
 		// insertion point for per direct association field
 		case "Enumerations":
-			res := make(map[*Enumeration]*Restriction)
+			res := make(map[*Enumeration][]*Restriction)
 			for restriction := range stage.Restrictions {
 				for _, enumeration_ := range restriction.Enumerations {
-					res[enumeration_] = restriction
+					res[enumeration_] = append(res[enumeration_], restriction)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of Schema
 	case Schema:
 		switch fieldname {
 		// insertion point for per direct association field
 		case "Elements":
-			res := make(map[*Element]*Schema)
+			res := make(map[*Element][]*Schema)
 			for schema := range stage.Schemas {
 				for _, element_ := range schema.Elements {
-					res[element_] = schema
+					res[element_] = append(res[element_], schema)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		case "SimpleTypes":
-			res := make(map[*SimpleType]*Schema)
+			res := make(map[*SimpleType][]*Schema)
 			for schema := range stage.Schemas {
 				for _, simpletype_ := range schema.SimpleTypes {
-					res[simpletype_] = schema
+					res[simpletype_] = append(res[simpletype_], schema)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		case "ComplexTypes":
-			res := make(map[*ComplexType]*Schema)
+			res := make(map[*ComplexType][]*Schema)
 			for schema := range stage.Schemas {
 				for _, complextype_ := range schema.ComplexTypes {
-					res[complextype_] = schema
+					res[complextype_] = append(res[complextype_], schema)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		case "AttributeGroups":
-			res := make(map[*AttributeGroup]*Schema)
+			res := make(map[*AttributeGroup][]*Schema)
 			for schema := range stage.Schemas {
 				for _, attributegroup_ := range schema.AttributeGroups {
-					res[attributegroup_] = schema
+					res[attributegroup_] = append(res[attributegroup_], schema)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		case "Groups":
-			res := make(map[*Group]*Schema)
+			res := make(map[*Group][]*Schema)
 			for schema := range stage.Schemas {
 				for _, group_ := range schema.Groups {
-					res[group_] = schema
+					res[group_] = append(res[group_], schema)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of Sequence
 	case Sequence:
 		switch fieldname {
 		// insertion point for per direct association field
 		case "Sequences":
-			res := make(map[*Sequence]*Sequence)
+			res := make(map[*Sequence][]*Sequence)
 			for sequence := range stage.Sequences {
 				for _, sequence_ := range sequence.Sequences {
-					res[sequence_] = sequence
+					res[sequence_] = append(res[sequence_], sequence)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		case "Alls":
-			res := make(map[*All]*Sequence)
+			res := make(map[*All][]*Sequence)
 			for sequence := range stage.Sequences {
 				for _, all_ := range sequence.Alls {
-					res[all_] = sequence
+					res[all_] = append(res[all_], sequence)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		case "Choices":
-			res := make(map[*Choice]*Sequence)
+			res := make(map[*Choice][]*Sequence)
 			for sequence := range stage.Sequences {
 				for _, choice_ := range sequence.Choices {
-					res[choice_] = sequence
+					res[choice_] = append(res[choice_], sequence)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		case "Groups":
-			res := make(map[*Group]*Sequence)
+			res := make(map[*Group][]*Sequence)
 			for sequence := range stage.Sequences {
 				for _, group_ := range sequence.Groups {
-					res[group_] = sequence
+					res[group_] = append(res[group_], sequence)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		case "Elements":
-			res := make(map[*Element]*Sequence)
+			res := make(map[*Element][]*Sequence)
 			for sequence := range stage.Sequences {
 				for _, element_ := range sequence.Elements {
-					res[element_] = sequence
+					res[element_] = append(res[element_], sequence)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of SimpleContent
 	case SimpleContent:

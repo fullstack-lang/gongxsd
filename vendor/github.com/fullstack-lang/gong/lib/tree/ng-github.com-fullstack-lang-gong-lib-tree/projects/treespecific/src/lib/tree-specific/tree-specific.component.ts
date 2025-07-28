@@ -12,7 +12,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
-import { MatTooltipModule } from '@angular/material/tooltip';
+import { MAT_TOOLTIP_DEFAULT_OPTIONS, MatTooltipDefaultOptions, MatTooltipModule } from '@angular/material/tooltip';
 
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
@@ -21,6 +21,15 @@ import { Router, RouterState } from '@angular/router';
 
 import * as tree from '../../../../tree/src/public-api'
 import { IconService } from '../icon-service.service';
+
+// Define the custom default options for the tooltips
+export const myCustomTooltipDefaults: MatTooltipDefaultOptions = {
+  showDelay: 500,
+  hideDelay: 100,
+  position: 'below',
+  touchGestures: 'off',
+  touchendHideDelay: 1500
+}
 
 /**
  * Food data with nested structure.
@@ -54,6 +63,9 @@ interface FlatNode {
     MatInputModule,
     MatRadioModule,
     MatTooltipModule,
+  ],
+  providers: [
+    { provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: myCustomTooltipDefaults }
   ],
   templateUrl: './tree-specific.component.html',
   styleUrl: './tree-specific.component.css'
@@ -171,13 +183,28 @@ export class TreeSpecificComponent implements OnInit, AfterViewChecked {
     }
   }
 
-  gongNodeToMatTreeNode(nodeDB: tree.Node): Node {
-    var matTreeNode: Node = { name: nodeDB.Name, gongNode: nodeDB, children: [] }
-    if (nodeDB.Children != undefined) {
-      matTreeNode.children = nodeDB.Children.map(child => this.gongNodeToMatTreeNode(child))
+  gongNodeToMatTreeNode(nodeDB: tree.Node, visited: Set<tree.Node> = new Set()): Node {
+    // Check if we've already visited this node
+    if (visited.has(nodeDB)) {
+      // Return a node without children to break the cycle
+      return { name: nodeDB.Name + ' (cycle detected)', gongNode: nodeDB, children: [] };
     }
 
-    return matTreeNode
+    // Mark this node as visited
+    visited.add(nodeDB);
+
+    var matTreeNode: Node = { name: nodeDB.Name, gongNode: nodeDB, children: [] };
+    
+    if (nodeDB.Children != undefined) {
+      matTreeNode.children = nodeDB.Children.map(child => 
+        this.gongNodeToMatTreeNode(child, visited)
+      );
+    }
+
+    // Remove from visited set after processing (allows same node in different branches)
+    visited.delete(nodeDB);
+    
+    return matTreeNode;
   }
 
   toggleNodeExpansion(node: FlatNode): void {

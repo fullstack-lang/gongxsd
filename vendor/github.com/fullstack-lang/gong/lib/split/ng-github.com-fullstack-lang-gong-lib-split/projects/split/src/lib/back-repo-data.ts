@@ -11,9 +11,17 @@ import { CursorAPI } from './cursor-api'
 
 import { DocAPI } from './doc-api'
 
+import { FavIconAPI } from './favicon-api'
+
 import { FormAPI } from './form-api'
 
 import { LoadAPI } from './load-api'
+
+import { LogoOnTheLeftAPI } from './logoontheleft-api'
+
+import { LogoOnTheRightAPI } from './logoontheright-api'
+
+import { MarkdownAPI } from './markdown-api'
 
 import { SliderAPI } from './slider-api'
 
@@ -22,6 +30,8 @@ import { SplitAPI } from './split-api'
 import { SvgAPI } from './svg-api'
 
 import { TableAPI } from './table-api'
+
+import { TitleAPI } from './title-api'
 
 import { ToneAPI } from './tone-api'
 
@@ -44,9 +54,17 @@ export class BackRepoData {
 
 	DocAPIs = new Array<DocAPI>()
 
+	FavIconAPIs = new Array<FavIconAPI>()
+
 	FormAPIs = new Array<FormAPI>()
 
 	LoadAPIs = new Array<LoadAPI>()
+
+	LogoOnTheLeftAPIs = new Array<LogoOnTheLeftAPI>()
+
+	LogoOnTheRightAPIs = new Array<LogoOnTheRightAPI>()
+
+	MarkdownAPIs = new Array<MarkdownAPI>()
 
 	SliderAPIs = new Array<SliderAPI>()
 
@@ -55,6 +73,8 @@ export class BackRepoData {
 	SvgAPIs = new Array<SvgAPI>()
 
 	TableAPIs = new Array<TableAPI>()
+
+	TitleAPIs = new Array<TitleAPI>()
 
 	ToneAPIs = new Array<ToneAPI>()
 
@@ -80,9 +100,17 @@ export class BackRepoData {
 
 		this.DocAPIs = data?.DocAPIs || [];
 
+		this.FavIconAPIs = data?.FavIconAPIs || [];
+
 		this.FormAPIs = data?.FormAPIs || [];
 
 		this.LoadAPIs = data?.LoadAPIs || [];
+
+		this.LogoOnTheLeftAPIs = data?.LogoOnTheLeftAPIs || [];
+
+		this.LogoOnTheRightAPIs = data?.LogoOnTheRightAPIs || [];
+
+		this.MarkdownAPIs = data?.MarkdownAPIs || [];
 
 		this.SliderAPIs = data?.SliderAPIs || [];
 
@@ -91,6 +119,8 @@ export class BackRepoData {
 		this.SvgAPIs = data?.SvgAPIs || [];
 
 		this.TableAPIs = data?.TableAPIs || [];
+
+		this.TitleAPIs = data?.TitleAPIs || [];
 
 		this.ToneAPIs = data?.ToneAPIs || [];
 

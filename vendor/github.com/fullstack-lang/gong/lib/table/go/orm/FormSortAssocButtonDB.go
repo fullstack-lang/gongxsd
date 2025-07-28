@@ -47,6 +47,10 @@ type FormSortAssocButtonAPI struct {
 // reverse pointers of slice of poitners to Struct
 type FormSortAssocButtonPointersEncoding struct {
 	// insertion for pointer fields encoding declaration
+
+	// field FormEditAssocButton is a pointer to another Struct (optional or 0..1)
+	// This field is generated into another field to enable AS ONE association
+	FormEditAssocButtonID sql.NullInt64
 }
 
 // FormSortAssocButtonDB describes a formsortassocbutton in the database
@@ -65,6 +69,13 @@ type FormSortAssocButtonDB struct {
 
 	// Declation for basic field formsortassocbuttonDB.Label
 	Label_Data sql.NullString
+
+	// Declation for basic field formsortassocbuttonDB.HasToolTip
+	// provide the sql storage for the boolan
+	HasToolTip_Data sql.NullBool
+
+	// Declation for basic field formsortassocbuttonDB.ToolTipText
+	ToolTipText_Data sql.NullString
 
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
@@ -91,6 +102,10 @@ type FormSortAssocButtonWOP struct {
 	Name string `xlsx:"1"`
 
 	Label string `xlsx:"2"`
+
+	HasToolTip bool `xlsx:"3"`
+
+	ToolTipText string `xlsx:"4"`
 	// insertion for WOP pointer fields
 }
 
@@ -99,6 +114,8 @@ var FormSortAssocButton_Fields = []string{
 	"ID",
 	"Name",
 	"Label",
+	"HasToolTip",
+	"ToolTipText",
 }
 
 type BackRepoFormSortAssocButtonStruct struct {
@@ -229,6 +246,18 @@ func (backRepoFormSortAssocButton *BackRepoFormSortAssocButtonStruct) CommitPhas
 		formsortassocbuttonDB.CopyBasicFieldsFromFormSortAssocButton(formsortassocbutton)
 
 		// insertion point for translating pointers encodings into actual pointers
+		// commit pointer value formsortassocbutton.FormEditAssocButton translates to updating the formsortassocbutton.FormEditAssocButtonID
+		formsortassocbuttonDB.FormEditAssocButtonID.Valid = true // allow for a 0 value (nil association)
+		if formsortassocbutton.FormEditAssocButton != nil {
+			if FormEditAssocButtonId, ok := backRepo.BackRepoFormEditAssocButton.Map_FormEditAssocButtonPtr_FormEditAssocButtonDBID[formsortassocbutton.FormEditAssocButton]; ok {
+				formsortassocbuttonDB.FormEditAssocButtonID.Int64 = int64(FormEditAssocButtonId)
+				formsortassocbuttonDB.FormEditAssocButtonID.Valid = true
+			}
+		} else {
+			formsortassocbuttonDB.FormEditAssocButtonID.Int64 = 0
+			formsortassocbuttonDB.FormEditAssocButtonID.Valid = true
+		}
+
 		_, err := backRepoFormSortAssocButton.db.Save(formsortassocbuttonDB)
 		if err != nil {
 			log.Fatal(err)
@@ -342,6 +371,27 @@ func (backRepoFormSortAssocButton *BackRepoFormSortAssocButtonStruct) CheckoutPh
 func (formsortassocbuttonDB *FormSortAssocButtonDB) DecodePointers(backRepo *BackRepoStruct, formsortassocbutton *models.FormSortAssocButton) {
 
 	// insertion point for checkout of pointer encoding
+	// FormEditAssocButton field	
+	{
+		id := formsortassocbuttonDB.FormEditAssocButtonID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoFormEditAssocButton.Map_FormEditAssocButtonDBID_FormEditAssocButtonPtr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: formsortassocbutton.FormEditAssocButton, unknown pointer id", id)
+				formsortassocbutton.FormEditAssocButton = nil
+			} else {
+				// updates only if field has changed
+				if formsortassocbutton.FormEditAssocButton == nil || formsortassocbutton.FormEditAssocButton != tmp {
+					formsortassocbutton.FormEditAssocButton = tmp
+				}
+			}
+		} else {
+			formsortassocbutton.FormEditAssocButton = nil
+		}
+	}
+	
 	return
 }
 
@@ -381,6 +431,12 @@ func (formsortassocbuttonDB *FormSortAssocButtonDB) CopyBasicFieldsFromFormSortA
 
 	formsortassocbuttonDB.Label_Data.String = formsortassocbutton.Label
 	formsortassocbuttonDB.Label_Data.Valid = true
+
+	formsortassocbuttonDB.HasToolTip_Data.Bool = formsortassocbutton.HasToolTip
+	formsortassocbuttonDB.HasToolTip_Data.Valid = true
+
+	formsortassocbuttonDB.ToolTipText_Data.String = formsortassocbutton.ToolTipText
+	formsortassocbuttonDB.ToolTipText_Data.Valid = true
 }
 
 // CopyBasicFieldsFromFormSortAssocButton_WOP
@@ -392,6 +448,12 @@ func (formsortassocbuttonDB *FormSortAssocButtonDB) CopyBasicFieldsFromFormSortA
 
 	formsortassocbuttonDB.Label_Data.String = formsortassocbutton.Label
 	formsortassocbuttonDB.Label_Data.Valid = true
+
+	formsortassocbuttonDB.HasToolTip_Data.Bool = formsortassocbutton.HasToolTip
+	formsortassocbuttonDB.HasToolTip_Data.Valid = true
+
+	formsortassocbuttonDB.ToolTipText_Data.String = formsortassocbutton.ToolTipText
+	formsortassocbuttonDB.ToolTipText_Data.Valid = true
 }
 
 // CopyBasicFieldsFromFormSortAssocButtonWOP
@@ -403,6 +465,12 @@ func (formsortassocbuttonDB *FormSortAssocButtonDB) CopyBasicFieldsFromFormSortA
 
 	formsortassocbuttonDB.Label_Data.String = formsortassocbutton.Label
 	formsortassocbuttonDB.Label_Data.Valid = true
+
+	formsortassocbuttonDB.HasToolTip_Data.Bool = formsortassocbutton.HasToolTip
+	formsortassocbuttonDB.HasToolTip_Data.Valid = true
+
+	formsortassocbuttonDB.ToolTipText_Data.String = formsortassocbutton.ToolTipText
+	formsortassocbuttonDB.ToolTipText_Data.Valid = true
 }
 
 // CopyBasicFieldsToFormSortAssocButton
@@ -410,6 +478,8 @@ func (formsortassocbuttonDB *FormSortAssocButtonDB) CopyBasicFieldsToFormSortAss
 	// insertion point for checkout of basic fields (back repo to stage)
 	formsortassocbutton.Name = formsortassocbuttonDB.Name_Data.String
 	formsortassocbutton.Label = formsortassocbuttonDB.Label_Data.String
+	formsortassocbutton.HasToolTip = formsortassocbuttonDB.HasToolTip_Data.Bool
+	formsortassocbutton.ToolTipText = formsortassocbuttonDB.ToolTipText_Data.String
 }
 
 // CopyBasicFieldsToFormSortAssocButton_WOP
@@ -417,6 +487,8 @@ func (formsortassocbuttonDB *FormSortAssocButtonDB) CopyBasicFieldsToFormSortAss
 	// insertion point for checkout of basic fields (back repo to stage)
 	formsortassocbutton.Name = formsortassocbuttonDB.Name_Data.String
 	formsortassocbutton.Label = formsortassocbuttonDB.Label_Data.String
+	formsortassocbutton.HasToolTip = formsortassocbuttonDB.HasToolTip_Data.Bool
+	formsortassocbutton.ToolTipText = formsortassocbuttonDB.ToolTipText_Data.String
 }
 
 // CopyBasicFieldsToFormSortAssocButtonWOP
@@ -425,6 +497,8 @@ func (formsortassocbuttonDB *FormSortAssocButtonDB) CopyBasicFieldsToFormSortAss
 	// insertion point for checkout of basic fields (back repo to stage)
 	formsortassocbutton.Name = formsortassocbuttonDB.Name_Data.String
 	formsortassocbutton.Label = formsortassocbuttonDB.Label_Data.String
+	formsortassocbutton.HasToolTip = formsortassocbuttonDB.HasToolTip_Data.Bool
+	formsortassocbutton.ToolTipText = formsortassocbuttonDB.ToolTipText_Data.String
 }
 
 // Backup generates a json file from a slice of all FormSortAssocButtonDB instances in the backrepo
@@ -582,6 +656,12 @@ func (backRepoFormSortAssocButton *BackRepoFormSortAssocButtonStruct) RestorePha
 		_ = formsortassocbuttonDB
 
 		// insertion point for reindexing pointers encoding
+		// reindexing FormEditAssocButton field
+		if formsortassocbuttonDB.FormEditAssocButtonID.Int64 != 0 {
+			formsortassocbuttonDB.FormEditAssocButtonID.Int64 = int64(BackRepoFormEditAssocButtonid_atBckpTime_newID[uint(formsortassocbuttonDB.FormEditAssocButtonID.Int64)])
+			formsortassocbuttonDB.FormEditAssocButtonID.Valid = true
+		}
+
 		// update databse with new index encoding
 		db, _ := backRepoFormSortAssocButton.db.Model(formsortassocbuttonDB)
 		_, err := db.Updates(*formsortassocbuttonDB)

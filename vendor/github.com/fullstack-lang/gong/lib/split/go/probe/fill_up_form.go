@@ -40,6 +40,7 @@ func FillUpForm(
 		AssociationFieldToForm("Doc", instanceWithInferedType.Doc, formGroup, probe)
 		AssociationFieldToForm("Form", instanceWithInferedType.Form, formGroup, probe)
 		AssociationFieldToForm("Load", instanceWithInferedType.Load, formGroup, probe)
+		AssociationFieldToForm("Markdown", instanceWithInferedType.Markdown, formGroup, probe)
 		AssociationFieldToForm("Slider", instanceWithInferedType.Slider, formGroup, probe)
 		AssociationFieldToForm("Split", instanceWithInferedType.Split, formGroup, probe)
 		AssociationFieldToForm("Svg", instanceWithInferedType.Svg, formGroup, probe)
@@ -65,7 +66,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.AsSplit, *models.AsSplitArea](
+				AssociationReverseFieldToForm[*models.AsSplit](
 					nil,
 					"AsSplitAreas",
 					instanceWithInferedType,
@@ -87,7 +88,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.View, *models.AsSplitArea](
+				AssociationReverseFieldToForm[*models.View](
 					nil,
 					"RootAsSplitAreas",
 					instanceWithInferedType,
@@ -119,6 +120,13 @@ func FillUpForm(
 		BasicFieldtoForm("StackName", instanceWithInferedType.StackName, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
 
+	case *models.FavIcon:
+		// insertion point
+		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		BasicFieldtoForm("SVG", instanceWithInferedType.SVG, instanceWithInferedType, probe.formStage, formGroup,
+			false, true, 600, true, 300)
+
 	case *models.Form:
 		// insertion point
 		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
@@ -129,6 +137,35 @@ func FillUpForm(
 			false, false, 0, false, 0)
 
 	case *models.Load:
+		// insertion point
+		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		BasicFieldtoForm("StackName", instanceWithInferedType.StackName, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+
+	case *models.LogoOnTheLeft:
+		// insertion point
+		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		BasicFieldtoForm("Width", instanceWithInferedType.Width, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		BasicFieldtoForm("Height", instanceWithInferedType.Height, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		BasicFieldtoForm("SVG", instanceWithInferedType.SVG, instanceWithInferedType, probe.formStage, formGroup,
+			false, true, 600, true, 300)
+
+	case *models.LogoOnTheRight:
+		// insertion point
+		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		BasicFieldtoForm("Width", instanceWithInferedType.Width, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		BasicFieldtoForm("Height", instanceWithInferedType.Height, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		BasicFieldtoForm("SVG", instanceWithInferedType.SVG, instanceWithInferedType, probe.formStage, formGroup,
+			false, true, 600, true, 300)
+
+	case *models.Markdown:
 		// insertion point
 		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
@@ -167,6 +204,11 @@ func FillUpForm(
 		BasicFieldtoForm("TableName", instanceWithInferedType.TableName, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
 
+	case *models.Title:
+		// insertion point
+		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+
 	case *models.Tone:
 		// insertion point
 		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
@@ -190,6 +232,8 @@ func FillUpForm(
 		BasicFieldtoForm("ShowViewName", instanceWithInferedType.ShowViewName, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
 		AssociationSliceToForm("RootAsSplitAreas", instanceWithInferedType, &instanceWithInferedType.RootAsSplitAreas, formGroup, probe)
+		BasicFieldtoForm("IsSelectedView", instanceWithInferedType.IsSelectedView, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
 
 	case *models.Xlsx:
 		// insertion point

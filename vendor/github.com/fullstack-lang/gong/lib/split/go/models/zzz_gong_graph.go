@@ -20,11 +20,23 @@ func IsStaged[Type Gongstruct](stage *Stage, instance *Type) (ok bool) {
 	case *Doc:
 		ok = stage.IsStagedDoc(target)
 
+	case *FavIcon:
+		ok = stage.IsStagedFavIcon(target)
+
 	case *Form:
 		ok = stage.IsStagedForm(target)
 
 	case *Load:
 		ok = stage.IsStagedLoad(target)
+
+	case *LogoOnTheLeft:
+		ok = stage.IsStagedLogoOnTheLeft(target)
+
+	case *LogoOnTheRight:
+		ok = stage.IsStagedLogoOnTheRight(target)
+
+	case *Markdown:
+		ok = stage.IsStagedMarkdown(target)
 
 	case *Slider:
 		ok = stage.IsStagedSlider(target)
@@ -37,6 +49,9 @@ func IsStaged[Type Gongstruct](stage *Stage, instance *Type) (ok bool) {
 
 	case *Table:
 		ok = stage.IsStagedTable(target)
+
+	case *Title:
+		ok = stage.IsStagedTitle(target)
 
 	case *Tone:
 		ok = stage.IsStagedTone(target)
@@ -92,6 +107,13 @@ func (stage *Stage) IsStagedDoc(doc *Doc) (ok bool) {
 	return
 }
 
+func (stage *Stage) IsStagedFavIcon(favicon *FavIcon) (ok bool) {
+
+	_, ok = stage.FavIcons[favicon]
+
+	return
+}
+
 func (stage *Stage) IsStagedForm(form *Form) (ok bool) {
 
 	_, ok = stage.Forms[form]
@@ -102,6 +124,27 @@ func (stage *Stage) IsStagedForm(form *Form) (ok bool) {
 func (stage *Stage) IsStagedLoad(load *Load) (ok bool) {
 
 	_, ok = stage.Loads[load]
+
+	return
+}
+
+func (stage *Stage) IsStagedLogoOnTheLeft(logoontheleft *LogoOnTheLeft) (ok bool) {
+
+	_, ok = stage.LogoOnTheLefts[logoontheleft]
+
+	return
+}
+
+func (stage *Stage) IsStagedLogoOnTheRight(logoontheright *LogoOnTheRight) (ok bool) {
+
+	_, ok = stage.LogoOnTheRights[logoontheright]
+
+	return
+}
+
+func (stage *Stage) IsStagedMarkdown(markdown *Markdown) (ok bool) {
+
+	_, ok = stage.Markdowns[markdown]
 
 	return
 }
@@ -130,6 +173,13 @@ func (stage *Stage) IsStagedSvg(svg *Svg) (ok bool) {
 func (stage *Stage) IsStagedTable(table *Table) (ok bool) {
 
 	_, ok = stage.Tables[table]
+
+	return
+}
+
+func (stage *Stage) IsStagedTitle(title *Title) (ok bool) {
+
+	_, ok = stage.Titles[title]
 
 	return
 }
@@ -185,11 +235,23 @@ func StageBranch[Type Gongstruct](stage *Stage, instance *Type) {
 	case *Doc:
 		stage.StageBranchDoc(target)
 
+	case *FavIcon:
+		stage.StageBranchFavIcon(target)
+
 	case *Form:
 		stage.StageBranchForm(target)
 
 	case *Load:
 		stage.StageBranchLoad(target)
+
+	case *LogoOnTheLeft:
+		stage.StageBranchLogoOnTheLeft(target)
+
+	case *LogoOnTheRight:
+		stage.StageBranchLogoOnTheRight(target)
+
+	case *Markdown:
+		stage.StageBranchMarkdown(target)
 
 	case *Slider:
 		stage.StageBranchSlider(target)
@@ -202,6 +264,9 @@ func StageBranch[Type Gongstruct](stage *Stage, instance *Type) {
 
 	case *Table:
 		stage.StageBranchTable(target)
+
+	case *Title:
+		stage.StageBranchTitle(target)
 
 	case *Tone:
 		stage.StageBranchTone(target)
@@ -266,6 +331,9 @@ func (stage *Stage) StageBranchAsSplitArea(assplitarea *AsSplitArea) {
 	}
 	if assplitarea.Load != nil {
 		StageBranch(stage, assplitarea.Load)
+	}
+	if assplitarea.Markdown != nil {
+		StageBranch(stage, assplitarea.Markdown)
 	}
 	if assplitarea.Slider != nil {
 		StageBranch(stage, assplitarea.Slider)
@@ -338,6 +406,21 @@ func (stage *Stage) StageBranchDoc(doc *Doc) {
 
 }
 
+func (stage *Stage) StageBranchFavIcon(favicon *FavIcon) {
+
+	// check if instance is already staged
+	if IsStaged(stage, favicon) {
+		return
+	}
+
+	favicon.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
 func (stage *Stage) StageBranchForm(form *Form) {
 
 	// check if instance is already staged
@@ -361,6 +444,51 @@ func (stage *Stage) StageBranchLoad(load *Load) {
 	}
 
 	load.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *Stage) StageBranchLogoOnTheLeft(logoontheleft *LogoOnTheLeft) {
+
+	// check if instance is already staged
+	if IsStaged(stage, logoontheleft) {
+		return
+	}
+
+	logoontheleft.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *Stage) StageBranchLogoOnTheRight(logoontheright *LogoOnTheRight) {
+
+	// check if instance is already staged
+	if IsStaged(stage, logoontheright) {
+		return
+	}
+
+	logoontheright.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *Stage) StageBranchMarkdown(markdown *Markdown) {
+
+	// check if instance is already staged
+	if IsStaged(stage, markdown) {
+		return
+	}
+
+	markdown.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
 
@@ -421,6 +549,21 @@ func (stage *Stage) StageBranchTable(table *Table) {
 	}
 
 	table.Stage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *Stage) StageBranchTitle(title *Title) {
+
+	// check if instance is already staged
+	if IsStaged(stage, title) {
+		return
+	}
+
+	title.Stage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
 
@@ -522,12 +665,28 @@ func CopyBranch[Type Gongstruct](from *Type) (to *Type) {
 		toT := CopyBranchDoc(mapOrigCopy, fromT)
 		return any(toT).(*Type)
 
+	case *FavIcon:
+		toT := CopyBranchFavIcon(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
 	case *Form:
 		toT := CopyBranchForm(mapOrigCopy, fromT)
 		return any(toT).(*Type)
 
 	case *Load:
 		toT := CopyBranchLoad(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
+	case *LogoOnTheLeft:
+		toT := CopyBranchLogoOnTheLeft(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
+	case *LogoOnTheRight:
+		toT := CopyBranchLogoOnTheRight(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
+	case *Markdown:
+		toT := CopyBranchMarkdown(mapOrigCopy, fromT)
 		return any(toT).(*Type)
 
 	case *Slider:
@@ -544,6 +703,10 @@ func CopyBranch[Type Gongstruct](from *Type) (to *Type) {
 
 	case *Table:
 		toT := CopyBranchTable(mapOrigCopy, fromT)
+		return any(toT).(*Type)
+
+	case *Title:
+		toT := CopyBranchTitle(mapOrigCopy, fromT)
 		return any(toT).(*Type)
 
 	case *Tone:
@@ -621,6 +784,9 @@ func CopyBranchAsSplitArea(mapOrigCopy map[any]any, assplitareaFrom *AsSplitArea
 	}
 	if assplitareaFrom.Load != nil {
 		assplitareaTo.Load = CopyBranchLoad(mapOrigCopy, assplitareaFrom.Load)
+	}
+	if assplitareaFrom.Markdown != nil {
+		assplitareaTo.Markdown = CopyBranchMarkdown(mapOrigCopy, assplitareaFrom.Markdown)
 	}
 	if assplitareaFrom.Slider != nil {
 		assplitareaTo.Slider = CopyBranchSlider(mapOrigCopy, assplitareaFrom.Slider)
@@ -706,6 +872,25 @@ func CopyBranchDoc(mapOrigCopy map[any]any, docFrom *Doc) (docTo *Doc) {
 	return
 }
 
+func CopyBranchFavIcon(mapOrigCopy map[any]any, faviconFrom *FavIcon) (faviconTo *FavIcon) {
+
+	// faviconFrom has already been copied
+	if _faviconTo, ok := mapOrigCopy[faviconFrom]; ok {
+		faviconTo = _faviconTo.(*FavIcon)
+		return
+	}
+
+	faviconTo = new(FavIcon)
+	mapOrigCopy[faviconFrom] = faviconTo
+	faviconFrom.CopyBasicFields(faviconTo)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+	return
+}
+
 func CopyBranchForm(mapOrigCopy map[any]any, formFrom *Form) (formTo *Form) {
 
 	// formFrom has already been copied
@@ -736,6 +921,63 @@ func CopyBranchLoad(mapOrigCopy map[any]any, loadFrom *Load) (loadTo *Load) {
 	loadTo = new(Load)
 	mapOrigCopy[loadFrom] = loadTo
 	loadFrom.CopyBasicFields(loadTo)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+	return
+}
+
+func CopyBranchLogoOnTheLeft(mapOrigCopy map[any]any, logoontheleftFrom *LogoOnTheLeft) (logoontheleftTo *LogoOnTheLeft) {
+
+	// logoontheleftFrom has already been copied
+	if _logoontheleftTo, ok := mapOrigCopy[logoontheleftFrom]; ok {
+		logoontheleftTo = _logoontheleftTo.(*LogoOnTheLeft)
+		return
+	}
+
+	logoontheleftTo = new(LogoOnTheLeft)
+	mapOrigCopy[logoontheleftFrom] = logoontheleftTo
+	logoontheleftFrom.CopyBasicFields(logoontheleftTo)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+	return
+}
+
+func CopyBranchLogoOnTheRight(mapOrigCopy map[any]any, logoontherightFrom *LogoOnTheRight) (logoontherightTo *LogoOnTheRight) {
+
+	// logoontherightFrom has already been copied
+	if _logoontherightTo, ok := mapOrigCopy[logoontherightFrom]; ok {
+		logoontherightTo = _logoontherightTo.(*LogoOnTheRight)
+		return
+	}
+
+	logoontherightTo = new(LogoOnTheRight)
+	mapOrigCopy[logoontherightFrom] = logoontherightTo
+	logoontherightFrom.CopyBasicFields(logoontherightTo)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+	return
+}
+
+func CopyBranchMarkdown(mapOrigCopy map[any]any, markdownFrom *Markdown) (markdownTo *Markdown) {
+
+	// markdownFrom has already been copied
+	if _markdownTo, ok := mapOrigCopy[markdownFrom]; ok {
+		markdownTo = _markdownTo.(*Markdown)
+		return
+	}
+
+	markdownTo = new(Markdown)
+	mapOrigCopy[markdownFrom] = markdownTo
+	markdownFrom.CopyBasicFields(markdownTo)
 
 	//insertion point for the staging of instances referenced by pointers
 
@@ -812,6 +1054,25 @@ func CopyBranchTable(mapOrigCopy map[any]any, tableFrom *Table) (tableTo *Table)
 	tableTo = new(Table)
 	mapOrigCopy[tableFrom] = tableTo
 	tableFrom.CopyBasicFields(tableTo)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+	return
+}
+
+func CopyBranchTitle(mapOrigCopy map[any]any, titleFrom *Title) (titleTo *Title) {
+
+	// titleFrom has already been copied
+	if _titleTo, ok := mapOrigCopy[titleFrom]; ok {
+		titleTo = _titleTo.(*Title)
+		return
+	}
+
+	titleTo = new(Title)
+	mapOrigCopy[titleFrom] = titleTo
+	titleFrom.CopyBasicFields(titleTo)
 
 	//insertion point for the staging of instances referenced by pointers
 
@@ -922,11 +1183,23 @@ func UnstageBranch[Type Gongstruct](stage *Stage, instance *Type) {
 	case *Doc:
 		stage.UnstageBranchDoc(target)
 
+	case *FavIcon:
+		stage.UnstageBranchFavIcon(target)
+
 	case *Form:
 		stage.UnstageBranchForm(target)
 
 	case *Load:
 		stage.UnstageBranchLoad(target)
+
+	case *LogoOnTheLeft:
+		stage.UnstageBranchLogoOnTheLeft(target)
+
+	case *LogoOnTheRight:
+		stage.UnstageBranchLogoOnTheRight(target)
+
+	case *Markdown:
+		stage.UnstageBranchMarkdown(target)
 
 	case *Slider:
 		stage.UnstageBranchSlider(target)
@@ -939,6 +1212,9 @@ func UnstageBranch[Type Gongstruct](stage *Stage, instance *Type) {
 
 	case *Table:
 		stage.UnstageBranchTable(target)
+
+	case *Title:
+		stage.UnstageBranchTitle(target)
 
 	case *Tone:
 		stage.UnstageBranchTone(target)
@@ -1003,6 +1279,9 @@ func (stage *Stage) UnstageBranchAsSplitArea(assplitarea *AsSplitArea) {
 	}
 	if assplitarea.Load != nil {
 		UnstageBranch(stage, assplitarea.Load)
+	}
+	if assplitarea.Markdown != nil {
+		UnstageBranch(stage, assplitarea.Markdown)
 	}
 	if assplitarea.Slider != nil {
 		UnstageBranch(stage, assplitarea.Slider)
@@ -1075,6 +1354,21 @@ func (stage *Stage) UnstageBranchDoc(doc *Doc) {
 
 }
 
+func (stage *Stage) UnstageBranchFavIcon(favicon *FavIcon) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, favicon) {
+		return
+	}
+
+	favicon.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
 func (stage *Stage) UnstageBranchForm(form *Form) {
 
 	// check if instance is already staged
@@ -1098,6 +1392,51 @@ func (stage *Stage) UnstageBranchLoad(load *Load) {
 	}
 
 	load.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *Stage) UnstageBranchLogoOnTheLeft(logoontheleft *LogoOnTheLeft) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, logoontheleft) {
+		return
+	}
+
+	logoontheleft.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *Stage) UnstageBranchLogoOnTheRight(logoontheright *LogoOnTheRight) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, logoontheright) {
+		return
+	}
+
+	logoontheright.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *Stage) UnstageBranchMarkdown(markdown *Markdown) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, markdown) {
+		return
+	}
+
+	markdown.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
 
@@ -1158,6 +1497,21 @@ func (stage *Stage) UnstageBranchTable(table *Table) {
 	}
 
 	table.Unstage(stage)
+
+	//insertion point for the staging of instances referenced by pointers
+
+	//insertion point for the staging of instances referenced by slice of pointers
+
+}
+
+func (stage *Stage) UnstageBranchTitle(title *Title) {
+
+	// check if instance is already staged
+	if !IsStaged(stage, title) {
+		return
+	}
+
+	title.Unstage(stage)
 
 	//insertion point for the staging of instances referenced by pointers
 

@@ -51,7 +51,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.All, *models.All](
+				AssociationReverseFieldToForm[*models.All](
 					nil,
 					"Alls",
 					instanceWithInferedType,
@@ -73,7 +73,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.Choice, *models.All](
+				AssociationReverseFieldToForm[*models.Choice](
 					nil,
 					"Alls",
 					instanceWithInferedType,
@@ -95,7 +95,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.ComplexType, *models.All](
+				AssociationReverseFieldToForm[*models.ComplexType](
 					nil,
 					"Alls",
 					instanceWithInferedType,
@@ -117,7 +117,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.Extension, *models.All](
+				AssociationReverseFieldToForm[*models.Extension](
 					nil,
 					"Alls",
 					instanceWithInferedType,
@@ -139,7 +139,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.Group, *models.All](
+				AssociationReverseFieldToForm[*models.Group](
 					nil,
 					"Alls",
 					instanceWithInferedType,
@@ -161,7 +161,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.Sequence, *models.All](
+				AssociationReverseFieldToForm[*models.Sequence](
 					nil,
 					"Alls",
 					instanceWithInferedType,
@@ -219,7 +219,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.AttributeGroup, *models.Attribute](
+				AssociationReverseFieldToForm[*models.AttributeGroup](
 					nil,
 					"Attributes",
 					instanceWithInferedType,
@@ -241,7 +241,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.ComplexType, *models.Attribute](
+				AssociationReverseFieldToForm[*models.ComplexType](
 					nil,
 					"Attributes",
 					instanceWithInferedType,
@@ -263,7 +263,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.Extension, *models.Attribute](
+				AssociationReverseFieldToForm[*models.Extension](
 					nil,
 					"Attributes",
 					instanceWithInferedType,
@@ -305,7 +305,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.AttributeGroup, *models.AttributeGroup](
+				AssociationReverseFieldToForm[*models.AttributeGroup](
 					nil,
 					"AttributeGroups",
 					instanceWithInferedType,
@@ -327,7 +327,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.ComplexType, *models.AttributeGroup](
+				AssociationReverseFieldToForm[*models.ComplexType](
 					nil,
 					"AttributeGroups",
 					instanceWithInferedType,
@@ -349,7 +349,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.Extension, *models.AttributeGroup](
+				AssociationReverseFieldToForm[*models.Extension](
 					nil,
 					"AttributeGroups",
 					instanceWithInferedType,
@@ -371,7 +371,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.Schema, *models.AttributeGroup](
+				AssociationReverseFieldToForm[*models.Schema](
 					nil,
 					"AttributeGroups",
 					instanceWithInferedType,
@@ -416,7 +416,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.All, *models.Choice](
+				AssociationReverseFieldToForm[*models.All](
 					nil,
 					"Choices",
 					instanceWithInferedType,
@@ -438,7 +438,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.Choice, *models.Choice](
+				AssociationReverseFieldToForm[*models.Choice](
 					nil,
 					"Choices",
 					instanceWithInferedType,
@@ -460,7 +460,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.ComplexType, *models.Choice](
+				AssociationReverseFieldToForm[*models.ComplexType](
 					nil,
 					"Choices",
 					instanceWithInferedType,
@@ -482,7 +482,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.Extension, *models.Choice](
+				AssociationReverseFieldToForm[*models.Extension](
 					nil,
 					"Choices",
 					instanceWithInferedType,
@@ -504,7 +504,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.Group, *models.Choice](
+				AssociationReverseFieldToForm[*models.Group](
 					nil,
 					"Choices",
 					instanceWithInferedType,
@@ -526,7 +526,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.Sequence, *models.Choice](
+				AssociationReverseFieldToForm[*models.Sequence](
 					nil,
 					"Choices",
 					instanceWithInferedType,
@@ -590,7 +590,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.Schema, *models.ComplexType](
+				AssociationReverseFieldToForm[*models.Schema](
 					nil,
 					"ComplexTypes",
 					instanceWithInferedType,
@@ -623,7 +623,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.Annotation, *models.Documentation](
+				AssociationReverseFieldToForm[*models.Annotation](
 					nil,
 					"Documentations",
 					instanceWithInferedType,
@@ -688,7 +688,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.All, *models.Element](
+				AssociationReverseFieldToForm[*models.All](
 					nil,
 					"Elements",
 					instanceWithInferedType,
@@ -710,7 +710,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.Choice, *models.Element](
+				AssociationReverseFieldToForm[*models.Choice](
 					nil,
 					"Elements",
 					instanceWithInferedType,
@@ -732,7 +732,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.ComplexType, *models.Element](
+				AssociationReverseFieldToForm[*models.ComplexType](
 					nil,
 					"Elements",
 					instanceWithInferedType,
@@ -754,7 +754,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.Extension, *models.Element](
+				AssociationReverseFieldToForm[*models.Extension](
 					nil,
 					"Elements",
 					instanceWithInferedType,
@@ -776,7 +776,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.Group, *models.Element](
+				AssociationReverseFieldToForm[*models.Group](
 					nil,
 					"Elements",
 					instanceWithInferedType,
@@ -798,7 +798,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.Schema, *models.Element](
+				AssociationReverseFieldToForm[*models.Schema](
 					nil,
 					"Elements",
 					instanceWithInferedType,
@@ -820,7 +820,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.Sequence, *models.Element](
+				AssociationReverseFieldToForm[*models.Sequence](
 					nil,
 					"Elements",
 					instanceWithInferedType,
@@ -850,7 +850,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.Restriction, *models.Enumeration](
+				AssociationReverseFieldToForm[*models.Restriction](
 					nil,
 					"Enumerations",
 					instanceWithInferedType,
@@ -930,7 +930,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.All, *models.Group](
+				AssociationReverseFieldToForm[*models.All](
 					nil,
 					"Groups",
 					instanceWithInferedType,
@@ -952,7 +952,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.Choice, *models.Group](
+				AssociationReverseFieldToForm[*models.Choice](
 					nil,
 					"Groups",
 					instanceWithInferedType,
@@ -974,7 +974,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.ComplexType, *models.Group](
+				AssociationReverseFieldToForm[*models.ComplexType](
 					nil,
 					"Groups",
 					instanceWithInferedType,
@@ -996,7 +996,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.Element, *models.Group](
+				AssociationReverseFieldToForm[*models.Element](
 					nil,
 					"Groups",
 					instanceWithInferedType,
@@ -1018,7 +1018,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.Extension, *models.Group](
+				AssociationReverseFieldToForm[*models.Extension](
 					nil,
 					"Groups",
 					instanceWithInferedType,
@@ -1040,7 +1040,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.Group, *models.Group](
+				AssociationReverseFieldToForm[*models.Group](
 					nil,
 					"Groups",
 					instanceWithInferedType,
@@ -1062,7 +1062,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.Schema, *models.Group](
+				AssociationReverseFieldToForm[*models.Schema](
 					nil,
 					"Groups",
 					instanceWithInferedType,
@@ -1084,7 +1084,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.Sequence, *models.Group](
+				AssociationReverseFieldToForm[*models.Sequence](
 					nil,
 					"Groups",
 					instanceWithInferedType,
@@ -1209,7 +1209,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.All, *models.Sequence](
+				AssociationReverseFieldToForm[*models.All](
 					nil,
 					"Sequences",
 					instanceWithInferedType,
@@ -1231,7 +1231,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.Choice, *models.Sequence](
+				AssociationReverseFieldToForm[*models.Choice](
 					nil,
 					"Sequences",
 					instanceWithInferedType,
@@ -1253,7 +1253,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.ComplexType, *models.Sequence](
+				AssociationReverseFieldToForm[*models.ComplexType](
 					nil,
 					"Sequences",
 					instanceWithInferedType,
@@ -1275,7 +1275,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.Extension, *models.Sequence](
+				AssociationReverseFieldToForm[*models.Extension](
 					nil,
 					"Sequences",
 					instanceWithInferedType,
@@ -1297,7 +1297,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.Group, *models.Sequence](
+				AssociationReverseFieldToForm[*models.Group](
 					nil,
 					"Sequences",
 					instanceWithInferedType,
@@ -1319,7 +1319,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.Sequence, *models.Sequence](
+				AssociationReverseFieldToForm[*models.Sequence](
 					nil,
 					"Sequences",
 					instanceWithInferedType,
@@ -1362,7 +1362,7 @@ func FillUpForm(
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.Schema, *models.SimpleType](
+				AssociationReverseFieldToForm[*models.Schema](
 					nil,
 					"SimpleTypes",
 					instanceWithInferedType,

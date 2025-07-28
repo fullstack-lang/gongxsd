@@ -73,7 +73,6 @@ func _(stage *models.Stage) {
 
 	__Field__000000_Name.Name = `Name`
 
-	//gong:ident [ref_models.SVG.Name] comment added to overcome the problem with the comment map association
 	__Field__000000_Name.Identifier = `ref_models.SVG.Name`
 	__Field__000000_Name.FieldTypeAsString = ``
 	__Field__000000_Name.Structname = `SVG`
@@ -81,7 +80,6 @@ func _(stage *models.Stage) {
 
 	__Field__000001_IsEditable.Name = `IsEditable`
 
-	//gong:ident [ref_models.SVG.IsEditable] comment added to overcome the problem with the comment map association
 	__Field__000001_IsEditable.Identifier = `ref_models.SVG.IsEditable`
 	__Field__000001_IsEditable.FieldTypeAsString = ``
 	__Field__000001_IsEditable.Structname = `SVG`
@@ -89,7 +87,6 @@ func _(stage *models.Stage) {
 
 	__Field__000002_Display.Name = `Display`
 
-	//gong:ident [ref_models.Layer.Display] comment added to overcome the problem with the comment map association
 	__Field__000002_Display.Identifier = `ref_models.Layer.Display`
 	__Field__000002_Display.FieldTypeAsString = ``
 	__Field__000002_Display.Structname = `Layer`
@@ -97,90 +94,72 @@ func _(stage *models.Stage) {
 
 	__GongStructShape__000000_Default_SVG.Name = `Default-SVG`
 
-	//gong:ident [ref_models.SVG] comment added to overcome the problem with the comment map association
 	__GongStructShape__000000_Default_SVG.Identifier = `ref_models.SVG`
-	__GongStructShape__000000_Default_SVG.ShowNbInstances = false
-	__GongStructShape__000000_Default_SVG.NbInstances = 0
+
 	__GongStructShape__000000_Default_SVG.Width = 240.000000
 	__GongStructShape__000000_Default_SVG.Height = 93.000000
 	__GongStructShape__000000_Default_SVG.IsSelected = false
 
 	__GongStructShape__000001_Default_Layer.Name = `Default-Layer`
 
-	//gong:ident [ref_models.Layer] comment added to overcome the problem with the comment map association
 	__GongStructShape__000001_Default_Layer.Identifier = `ref_models.Layer`
-	__GongStructShape__000001_Default_Layer.ShowNbInstances = false
-	__GongStructShape__000001_Default_Layer.NbInstances = 0
+
 	__GongStructShape__000001_Default_Layer.Width = 240.000000
 	__GongStructShape__000001_Default_Layer.Height = 78.000000
 	__GongStructShape__000001_Default_Layer.IsSelected = false
 
 	__GongStructShape__000002_Default_Link.Name = `Default-Link`
 
-	//gong:ident [ref_models.Link] comment added to overcome the problem with the comment map association
 	__GongStructShape__000002_Default_Link.Identifier = `ref_models.Link`
-	__GongStructShape__000002_Default_Link.ShowNbInstances = false
-	__GongStructShape__000002_Default_Link.NbInstances = 0
+
 	__GongStructShape__000002_Default_Link.Width = 240.000000
 	__GongStructShape__000002_Default_Link.Height = 63.000000
 	__GongStructShape__000002_Default_Link.IsSelected = false
 
 	__GongStructShape__000003_Default_Rect.Name = `Default-Rect`
 
-	//gong:ident [ref_models.Rect] comment added to overcome the problem with the comment map association
 	__GongStructShape__000003_Default_Rect.Identifier = `ref_models.Rect`
-	__GongStructShape__000003_Default_Rect.ShowNbInstances = false
-	__GongStructShape__000003_Default_Rect.NbInstances = 0
+
 	__GongStructShape__000003_Default_Rect.Width = 240.000000
 	__GongStructShape__000003_Default_Rect.Height = 123.000000
 	__GongStructShape__000003_Default_Rect.IsSelected = false
 
 	__GongStructShape__000004_Default_RectLinkLink.Name = `Default-RectLinkLink`
 
-	//gong:ident [ref_models.RectLinkLink] comment added to overcome the problem with the comment map association
 	__GongStructShape__000004_Default_RectLinkLink.Identifier = `ref_models.RectLinkLink`
-	__GongStructShape__000004_Default_RectLinkLink.ShowNbInstances = false
-	__GongStructShape__000004_Default_RectLinkLink.NbInstances = 0
+
 	__GongStructShape__000004_Default_RectLinkLink.Width = 240.000000
 	__GongStructShape__000004_Default_RectLinkLink.Height = 63.000000
 	__GongStructShape__000004_Default_RectLinkLink.IsSelected = false
 
 	__GongStructShape__000005_Default_RectAnchoredRect.Name = `Default-RectAnchoredRect`
 
-	//gong:ident [ref_models.RectAnchoredRect] comment added to overcome the problem with the comment map association
 	__GongStructShape__000005_Default_RectAnchoredRect.Identifier = `ref_models.RectAnchoredRect`
-	__GongStructShape__000005_Default_RectAnchoredRect.ShowNbInstances = false
-	__GongStructShape__000005_Default_RectAnchoredRect.NbInstances = 0
+
 	__GongStructShape__000005_Default_RectAnchoredRect.Width = 240.000000
 	__GongStructShape__000005_Default_RectAnchoredRect.Height = 63.000000
 	__GongStructShape__000005_Default_RectAnchoredRect.IsSelected = false
 
 	__GongStructShape__000006_Default_RectAnchoredPath.Name = `Default-RectAnchoredPath`
 
-	//gong:ident [ref_models.RectAnchoredPath] comment added to overcome the problem with the comment map association
 	__GongStructShape__000006_Default_RectAnchoredPath.Identifier = `ref_models.RectAnchoredPath`
-	__GongStructShape__000006_Default_RectAnchoredPath.ShowNbInstances = false
-	__GongStructShape__000006_Default_RectAnchoredPath.NbInstances = 0
+
 	__GongStructShape__000006_Default_RectAnchoredPath.Width = 240.000000
 	__GongStructShape__000006_Default_RectAnchoredPath.Height = 63.000000
 	__GongStructShape__000006_Default_RectAnchoredPath.IsSelected = false
 
 	__GongStructShape__000007_Default_RectAnchoredText.Name = `Default-RectAnchoredText`
 
-	//gong:ident [ref_models.RectAnchoredText] comment added to overcome the problem with the comment map association
 	__GongStructShape__000007_Default_RectAnchoredText.Identifier = `ref_models.RectAnchoredText`
-	__GongStructShape__000007_Default_RectAnchoredText.ShowNbInstances = false
-	__GongStructShape__000007_Default_RectAnchoredText.NbInstances = 0
+
 	__GongStructShape__000007_Default_RectAnchoredText.Width = 240.000000
 	__GongStructShape__000007_Default_RectAnchoredText.Height = 63.000000
 	__GongStructShape__000007_Default_RectAnchoredText.IsSelected = false
 
 	__Link__000000_Layers.Name = `Layers`
 
-	//gong:ident [ref_models.SVG.Layers] comment added to overcome the problem with the comment map association
 	__Link__000000_Layers.Identifier = `ref_models.SVG.Layers`
 
-	//gong:ident [ref_models.Layer] comment added to overcome the problem with the comment map association
 	__Link__000000_Layers.Fieldtypename = `ref_models.Layer`
 	__Link__000000_Layers.FieldOffsetX = 0.000000
 	__Link__000000_Layers.FieldOffsetY = 0.000000
@@ -198,10 +177,8 @@ func _(stage *models.Stage) {
 
 	__Link__000001_Rects.Name = `Rects`
 
-	//gong:ident [ref_models.Layer.Rects] comment added to overcome the problem with the comment map association
 	__Link__000001_Rects.Identifier = `ref_models.Layer.Rects`
 
-	//gong:ident [ref_models.Rect] comment added to overcome the problem with the comment map association
 	__Link__000001_Rects.Fieldtypename = `ref_models.Rect`
 	__Link__000001_Rects.FieldOffsetX = 0.000000
 	__Link__000001_Rects.FieldOffsetY = 0.000000
@@ -219,10 +196,8 @@ func _(stage *models.Stage) {
 
 	__Link__000002_Links.Name = `Links`
 
-	//gong:ident [ref_models.Layer.Links] comment added to overcome the problem with the comment map association
 	__Link__000002_Links.Identifier = `ref_models.Layer.Links`
 
-	//gong:ident [ref_models.Link] comment added to overcome the problem with the comment map association
 	__Link__000002_Links.Fieldtypename = `ref_models.Link`
 	__Link__000002_Links.FieldOffsetX = 0.000000
 	__Link__000002_Links.FieldOffsetY = 0.000000
@@ -240,10 +215,8 @@ func _(stage *models.Stage) {
 
 	__Link__000003_RectLinkLinks.Name = `RectLinkLinks`
 
-	//gong:ident [ref_models.Layer.RectLinkLinks] comment added to overcome the problem with the comment map association
 	__Link__000003_RectLinkLinks.Identifier = `ref_models.Layer.RectLinkLinks`
 
-	//gong:ident [ref_models.RectLinkLink] comment added to overcome the problem with the comment map association
 	__Link__000003_RectLinkLinks.Fieldtypename = `ref_models.RectLinkLink`
 	__Link__000003_RectLinkLinks.FieldOffsetX = 0.000000
 	__Link__000003_RectLinkLinks.FieldOffsetY = 0.000000
@@ -261,10 +234,8 @@ func _(stage *models.Stage) {
 
 	__Link__000004_RectAnchoredTexts.Name = `RectAnchoredTexts`
 
-	//gong:ident [ref_models.Rect.RectAnchoredTexts] comment added to overcome the problem with the comment map association
 	__Link__000004_RectAnchoredTexts.Identifier = `ref_models.Rect.RectAnchoredTexts`
 
-	//gong:ident [ref_models.RectAnchoredText] comment added to overcome the problem with the comment map association
 	__Link__000004_RectAnchoredTexts.Fieldtypename = `ref_models.RectAnchoredText`
 	__Link__000004_RectAnchoredTexts.FieldOffsetX = 0.000000
 	__Link__000004_RectAnchoredTexts.FieldOffsetY = 0.000000
@@ -282,10 +253,8 @@ func _(stage *models.Stage) {
 
 	__Link__000005_RectAnchoredRects.Name = `RectAnchoredRects`
 
-	//gong:ident [ref_models.Rect.RectAnchoredRects] comment added to overcome the problem with the comment map association
 	__Link__000005_RectAnchoredRects.Identifier = `ref_models.Rect.RectAnchoredRects`
 
-	//gong:ident [ref_models.RectAnchoredRect] comment added to overcome the problem with the comment map association
 	__Link__000005_RectAnchoredRects.Fieldtypename = `ref_models.RectAnchoredRect`
 	__Link__000005_RectAnchoredRects.FieldOffsetX = 0.000000
 	__Link__000005_RectAnchoredRects.FieldOffsetY = 0.000000
@@ -303,10 +272,8 @@ func _(stage *models.Stage) {
 
 	__Link__000006_RectAnchoredPaths.Name = `RectAnchoredPaths`
 
-	//gong:ident [ref_models.Rect.RectAnchoredPaths] comment added to overcome the problem with the comment map association
 	__Link__000006_RectAnchoredPaths.Identifier = `ref_models.Rect.RectAnchoredPaths`
 
-	//gong:ident [ref_models.RectAnchoredPath] comment added to overcome the problem with the comment map association
 	__Link__000006_RectAnchoredPaths.Fieldtypename = `ref_models.RectAnchoredPath`
 	__Link__000006_RectAnchoredPaths.FieldOffsetX = 0.000000
 	__Link__000006_RectAnchoredPaths.FieldOffsetY = 0.000000

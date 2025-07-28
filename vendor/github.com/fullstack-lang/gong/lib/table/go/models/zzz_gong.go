@@ -16,7 +16,8 @@ import (
 )
 
 // can be used for
-//     days := __Gong__Abs(int(int(inferedInstance.ComputedDuration.Hours()) / 24))
+//
+//	days := __Gong__Abs(int(int(inferedInstance.ComputedDuration.Hours()) / 24))
 func __Gong__Abs(x int) int {
 	if x < 0 {
 		return -x
@@ -26,10 +27,10 @@ func __Gong__Abs(x int) int {
 
 var _ = __Gong__Abs
 
-const ProbeTreeSidebarSuffix = "-sidebar"
-const ProbeTableSuffix = "-table"
-const ProbeFormSuffix = "-form"
-const ProbeSplitSuffix = "-probe"
+const ProbeTreeSidebarSuffix = ":sidebar of the probe"
+const ProbeTableSuffix = ":table of the probe"
+const ProbeFormSuffix = ":form of the probe"
+const ProbeSplitSuffix = ":probe of the probe"
 
 func (stage *Stage) GetProbeTreeSidebarStageName() string {
 	return stage.GetType() + ":" + stage.GetName() + ProbeTreeSidebarSuffix
@@ -53,8 +54,12 @@ var errUnkownEnum = errors.New("unkown enum")
 // needed to avoid when fmt package is not needed by generated code
 var __dummy__fmt_variable fmt.Scanner
 
+var _ = __dummy__fmt_variable
+
 // idem for math package when not need by generated code
 var __dummy_math_variable = math.E
+
+var _ = __dummy_math_variable
 
 // swagger:ignore
 type __void any
@@ -74,7 +79,12 @@ type GongStructInterface interface {
 // Stage enables storage of staged instances
 // swagger:ignore
 type Stage struct {
-	name string
+	name               string
+	commitId           uint // commitId is updated at each commit
+	commitTimeStamp    time.Time
+	contentWhenParsed  string
+	commitIdWhenParsed uint
+	generatesDiff      bool
 
 	// insertion point for definition of arrays registering instances
 	Cells           map[*Cell]any
@@ -398,6 +408,18 @@ type Stage struct {
 	NamedStructs []*NamedStruct
 }
 
+func (stage *Stage) GetCommitId() uint {
+	return stage.commitId
+}
+
+func (stage *Stage) GetCommitTS() time.Time {
+	return stage.commitTimeStamp
+}
+
+func (stage *Stage) SetGeneratesDiff(generatesDiff bool) {
+	stage.generatesDiff = generatesDiff
+}
+
 // GetNamedStructs implements models.ProbebStage.
 func (stage *Stage) GetNamedStructsNames() (res []string) {
 
@@ -432,61 +454,415 @@ func GetNamedStructInstances[T PointerToGongstruct](set map[T]any, order map[T]u
 	return
 }
 
-func (stage *Stage) GetNamedStructNamesByOrder(namedStructName string) (res []string) {
+func GetStructInstancesByOrderAuto[T PointerToGongstruct](stage *Stage) (res []T) {
+	var t T
+	switch any(t).(type) {
+		// insertion point for case
+	case *Cell:
+		tmp := GetStructInstancesByOrder(stage.Cells, stage.CellMap_Staged_Order)
 
-	switch namedStructName {
-	// insertion point for case 
-		case "Cell":
-			res = GetNamedStructInstances(stage.Cells, stage.CellMap_Staged_Order)
-		case "CellBoolean":
-			res = GetNamedStructInstances(stage.CellBooleans, stage.CellBooleanMap_Staged_Order)
-		case "CellFloat64":
-			res = GetNamedStructInstances(stage.CellFloat64s, stage.CellFloat64Map_Staged_Order)
-		case "CellIcon":
-			res = GetNamedStructInstances(stage.CellIcons, stage.CellIconMap_Staged_Order)
-		case "CellInt":
-			res = GetNamedStructInstances(stage.CellInts, stage.CellIntMap_Staged_Order)
-		case "CellString":
-			res = GetNamedStructInstances(stage.CellStrings, stage.CellStringMap_Staged_Order)
-		case "CheckBox":
-			res = GetNamedStructInstances(stage.CheckBoxs, stage.CheckBoxMap_Staged_Order)
-		case "DisplayedColumn":
-			res = GetNamedStructInstances(stage.DisplayedColumns, stage.DisplayedColumnMap_Staged_Order)
-		case "FormDiv":
-			res = GetNamedStructInstances(stage.FormDivs, stage.FormDivMap_Staged_Order)
-		case "FormEditAssocButton":
-			res = GetNamedStructInstances(stage.FormEditAssocButtons, stage.FormEditAssocButtonMap_Staged_Order)
-		case "FormField":
-			res = GetNamedStructInstances(stage.FormFields, stage.FormFieldMap_Staged_Order)
-		case "FormFieldDate":
-			res = GetNamedStructInstances(stage.FormFieldDates, stage.FormFieldDateMap_Staged_Order)
-		case "FormFieldDateTime":
-			res = GetNamedStructInstances(stage.FormFieldDateTimes, stage.FormFieldDateTimeMap_Staged_Order)
-		case "FormFieldFloat64":
-			res = GetNamedStructInstances(stage.FormFieldFloat64s, stage.FormFieldFloat64Map_Staged_Order)
-		case "FormFieldInt":
-			res = GetNamedStructInstances(stage.FormFieldInts, stage.FormFieldIntMap_Staged_Order)
-		case "FormFieldSelect":
-			res = GetNamedStructInstances(stage.FormFieldSelects, stage.FormFieldSelectMap_Staged_Order)
-		case "FormFieldString":
-			res = GetNamedStructInstances(stage.FormFieldStrings, stage.FormFieldStringMap_Staged_Order)
-		case "FormFieldTime":
-			res = GetNamedStructInstances(stage.FormFieldTimes, stage.FormFieldTimeMap_Staged_Order)
-		case "FormGroup":
-			res = GetNamedStructInstances(stage.FormGroups, stage.FormGroupMap_Staged_Order)
-		case "FormSortAssocButton":
-			res = GetNamedStructInstances(stage.FormSortAssocButtons, stage.FormSortAssocButtonMap_Staged_Order)
-		case "Option":
-			res = GetNamedStructInstances(stage.Options, stage.OptionMap_Staged_Order)
-		case "Row":
-			res = GetNamedStructInstances(stage.Rows, stage.RowMap_Staged_Order)
-		case "Table":
-			res = GetNamedStructInstances(stage.Tables, stage.TableMap_Staged_Order)
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *Cell implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *CellBoolean:
+		tmp := GetStructInstancesByOrder(stage.CellBooleans, stage.CellBooleanMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *CellBoolean implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *CellFloat64:
+		tmp := GetStructInstancesByOrder(stage.CellFloat64s, stage.CellFloat64Map_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *CellFloat64 implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *CellIcon:
+		tmp := GetStructInstancesByOrder(stage.CellIcons, stage.CellIconMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *CellIcon implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *CellInt:
+		tmp := GetStructInstancesByOrder(stage.CellInts, stage.CellIntMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *CellInt implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *CellString:
+		tmp := GetStructInstancesByOrder(stage.CellStrings, stage.CellStringMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *CellString implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *CheckBox:
+		tmp := GetStructInstancesByOrder(stage.CheckBoxs, stage.CheckBoxMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *CheckBox implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *DisplayedColumn:
+		tmp := GetStructInstancesByOrder(stage.DisplayedColumns, stage.DisplayedColumnMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *DisplayedColumn implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *FormDiv:
+		tmp := GetStructInstancesByOrder(stage.FormDivs, stage.FormDivMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *FormDiv implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *FormEditAssocButton:
+		tmp := GetStructInstancesByOrder(stage.FormEditAssocButtons, stage.FormEditAssocButtonMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *FormEditAssocButton implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *FormField:
+		tmp := GetStructInstancesByOrder(stage.FormFields, stage.FormFieldMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *FormField implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *FormFieldDate:
+		tmp := GetStructInstancesByOrder(stage.FormFieldDates, stage.FormFieldDateMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *FormFieldDate implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *FormFieldDateTime:
+		tmp := GetStructInstancesByOrder(stage.FormFieldDateTimes, stage.FormFieldDateTimeMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *FormFieldDateTime implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *FormFieldFloat64:
+		tmp := GetStructInstancesByOrder(stage.FormFieldFloat64s, stage.FormFieldFloat64Map_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *FormFieldFloat64 implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *FormFieldInt:
+		tmp := GetStructInstancesByOrder(stage.FormFieldInts, stage.FormFieldIntMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *FormFieldInt implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *FormFieldSelect:
+		tmp := GetStructInstancesByOrder(stage.FormFieldSelects, stage.FormFieldSelectMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *FormFieldSelect implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *FormFieldString:
+		tmp := GetStructInstancesByOrder(stage.FormFieldStrings, stage.FormFieldStringMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *FormFieldString implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *FormFieldTime:
+		tmp := GetStructInstancesByOrder(stage.FormFieldTimes, stage.FormFieldTimeMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *FormFieldTime implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *FormGroup:
+		tmp := GetStructInstancesByOrder(stage.FormGroups, stage.FormGroupMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *FormGroup implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *FormSortAssocButton:
+		tmp := GetStructInstancesByOrder(stage.FormSortAssocButtons, stage.FormSortAssocButtonMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *FormSortAssocButton implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *Option:
+		tmp := GetStructInstancesByOrder(stage.Options, stage.OptionMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *Option implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *Row:
+		tmp := GetStructInstancesByOrder(stage.Rows, stage.RowMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *Row implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+	case *Table:
+		tmp := GetStructInstancesByOrder(stage.Tables, stage.TableMap_Staged_Order)
+
+		// Create a new slice of the generic type T with the same capacity.
+		res = make([]T, 0, len(tmp))
+
+		// Iterate over the source slice and perform a type assertion on each element.
+		for _, v := range tmp {
+			// Assert that the element 'v' can be treated as type 'T'.
+			// Note: This relies on the constraint that PointerToGongstruct
+			// is an interface that *Table implements.
+			res = append(res, any(v).(T))
+		}
+		return res
+
+	}
+	return
+}
+
+func GetStructInstancesByOrder[T PointerToGongstruct](set map[T]any, order map[T]uint) (res []T) {
+
+	orderedSet := []T{}
+	for instance := range set {
+		orderedSet = append(orderedSet, instance)
+	}
+	sort.Slice(orderedSet[:], func(i, j int) bool {
+		instancei := orderedSet[i]
+		instancej := orderedSet[j]
+		i_order, oki := order[instancei]
+		j_order, okj := order[instancej]
+		if !oki || !okj {
+			log.Fatalf("GetNamedStructInstances: pointer not found")
+		}
+		return i_order < j_order
+	})
+
+	for _, instance := range orderedSet {
+		res = append(res, instance)
 	}
 
 	return
 }
 
+func (stage *Stage) GetNamedStructNamesByOrder(namedStructName string) (res []string) {
+
+	switch namedStructName {
+	// insertion point for case
+	case "Cell":
+		res = GetNamedStructInstances(stage.Cells, stage.CellMap_Staged_Order)
+	case "CellBoolean":
+		res = GetNamedStructInstances(stage.CellBooleans, stage.CellBooleanMap_Staged_Order)
+	case "CellFloat64":
+		res = GetNamedStructInstances(stage.CellFloat64s, stage.CellFloat64Map_Staged_Order)
+	case "CellIcon":
+		res = GetNamedStructInstances(stage.CellIcons, stage.CellIconMap_Staged_Order)
+	case "CellInt":
+		res = GetNamedStructInstances(stage.CellInts, stage.CellIntMap_Staged_Order)
+	case "CellString":
+		res = GetNamedStructInstances(stage.CellStrings, stage.CellStringMap_Staged_Order)
+	case "CheckBox":
+		res = GetNamedStructInstances(stage.CheckBoxs, stage.CheckBoxMap_Staged_Order)
+	case "DisplayedColumn":
+		res = GetNamedStructInstances(stage.DisplayedColumns, stage.DisplayedColumnMap_Staged_Order)
+	case "FormDiv":
+		res = GetNamedStructInstances(stage.FormDivs, stage.FormDivMap_Staged_Order)
+	case "FormEditAssocButton":
+		res = GetNamedStructInstances(stage.FormEditAssocButtons, stage.FormEditAssocButtonMap_Staged_Order)
+	case "FormField":
+		res = GetNamedStructInstances(stage.FormFields, stage.FormFieldMap_Staged_Order)
+	case "FormFieldDate":
+		res = GetNamedStructInstances(stage.FormFieldDates, stage.FormFieldDateMap_Staged_Order)
+	case "FormFieldDateTime":
+		res = GetNamedStructInstances(stage.FormFieldDateTimes, stage.FormFieldDateTimeMap_Staged_Order)
+	case "FormFieldFloat64":
+		res = GetNamedStructInstances(stage.FormFieldFloat64s, stage.FormFieldFloat64Map_Staged_Order)
+	case "FormFieldInt":
+		res = GetNamedStructInstances(stage.FormFieldInts, stage.FormFieldIntMap_Staged_Order)
+	case "FormFieldSelect":
+		res = GetNamedStructInstances(stage.FormFieldSelects, stage.FormFieldSelectMap_Staged_Order)
+	case "FormFieldString":
+		res = GetNamedStructInstances(stage.FormFieldStrings, stage.FormFieldStringMap_Staged_Order)
+	case "FormFieldTime":
+		res = GetNamedStructInstances(stage.FormFieldTimes, stage.FormFieldTimeMap_Staged_Order)
+	case "FormGroup":
+		res = GetNamedStructInstances(stage.FormGroups, stage.FormGroupMap_Staged_Order)
+	case "FormSortAssocButton":
+		res = GetNamedStructInstances(stage.FormSortAssocButtons, stage.FormSortAssocButtonMap_Staged_Order)
+	case "Option":
+		res = GetNamedStructInstances(stage.Options, stage.OptionMap_Staged_Order)
+	case "Row":
+		res = GetNamedStructInstances(stage.Rows, stage.RowMap_Staged_Order)
+	case "Table":
+		res = GetNamedStructInstances(stage.Tables, stage.TableMap_Staged_Order)
+	}
+
+	return
+}
 
 type NamedStruct struct {
 	name string
@@ -817,6 +1193,61 @@ func GetOrder[Type Gongstruct](stage *Stage, instance *Type) uint {
 	}
 }
 
+func GetOrderPointerGongstruct[Type PointerToGongstruct](stage *Stage, instance Type) uint {
+
+	switch instance := any(instance).(type) {
+	// insertion point for order map initialisations
+	case *Cell:
+		return stage.CellMap_Staged_Order[instance]
+	case *CellBoolean:
+		return stage.CellBooleanMap_Staged_Order[instance]
+	case *CellFloat64:
+		return stage.CellFloat64Map_Staged_Order[instance]
+	case *CellIcon:
+		return stage.CellIconMap_Staged_Order[instance]
+	case *CellInt:
+		return stage.CellIntMap_Staged_Order[instance]
+	case *CellString:
+		return stage.CellStringMap_Staged_Order[instance]
+	case *CheckBox:
+		return stage.CheckBoxMap_Staged_Order[instance]
+	case *DisplayedColumn:
+		return stage.DisplayedColumnMap_Staged_Order[instance]
+	case *FormDiv:
+		return stage.FormDivMap_Staged_Order[instance]
+	case *FormEditAssocButton:
+		return stage.FormEditAssocButtonMap_Staged_Order[instance]
+	case *FormField:
+		return stage.FormFieldMap_Staged_Order[instance]
+	case *FormFieldDate:
+		return stage.FormFieldDateMap_Staged_Order[instance]
+	case *FormFieldDateTime:
+		return stage.FormFieldDateTimeMap_Staged_Order[instance]
+	case *FormFieldFloat64:
+		return stage.FormFieldFloat64Map_Staged_Order[instance]
+	case *FormFieldInt:
+		return stage.FormFieldIntMap_Staged_Order[instance]
+	case *FormFieldSelect:
+		return stage.FormFieldSelectMap_Staged_Order[instance]
+	case *FormFieldString:
+		return stage.FormFieldStringMap_Staged_Order[instance]
+	case *FormFieldTime:
+		return stage.FormFieldTimeMap_Staged_Order[instance]
+	case *FormGroup:
+		return stage.FormGroupMap_Staged_Order[instance]
+	case *FormSortAssocButton:
+		return stage.FormSortAssocButtonMap_Staged_Order[instance]
+	case *Option:
+		return stage.OptionMap_Staged_Order[instance]
+	case *Row:
+		return stage.RowMap_Staged_Order[instance]
+	case *Table:
+		return stage.TableMap_Staged_Order[instance]
+	default:
+		return 0 // should not happen
+	}
+}
+
 func (stage *Stage) GetName() string {
 	return stage.name
 }
@@ -831,6 +1262,8 @@ func (stage *Stage) CommitWithSuspendedCallbacks() {
 
 func (stage *Stage) Commit() {
 	stage.ComputeReverseMaps()
+	stage.commitId++
+	stage.commitTimeStamp = time.Now()
 
 	if stage.BackRepo != nil {
 		stage.BackRepo.Commit(stage)
@@ -2996,6 +3429,8 @@ func GetAssociationName[Type Gongstruct]() *Type {
 	case FormSortAssocButton:
 		return any(&FormSortAssocButton{
 			// Initialisation of associations
+			// field is initialized with an instance of FormEditAssocButton with the name of the field
+			FormEditAssocButton: &FormEditAssocButton{Name: "FormEditAssocButton"},
 		}).(*Type)
 	case Option:
 		return any(&Option{
@@ -3387,6 +3822,23 @@ func GetPointerReverseMap[Start, End Gongstruct](fieldname string, stage *Stage)
 	case FormSortAssocButton:
 		switch fieldname {
 		// insertion point for per direct association field
+		case "FormEditAssocButton":
+			res := make(map[*FormEditAssocButton][]*FormSortAssocButton)
+			for formsortassocbutton := range stage.FormSortAssocButtons {
+				if formsortassocbutton.FormEditAssocButton != nil {
+					formeditassocbutton_ := formsortassocbutton.FormEditAssocButton
+					var formsortassocbuttons []*FormSortAssocButton
+					_, ok := res[formeditassocbutton_]
+					if ok {
+						formsortassocbuttons = res[formeditassocbutton_]
+					} else {
+						formsortassocbuttons = make([]*FormSortAssocButton, 0)
+					}
+					formsortassocbuttons = append(formsortassocbuttons, formsortassocbutton)
+					res[formeditassocbutton_] = formsortassocbuttons
+				}
+			}
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of Option
 	case Option:
@@ -3413,7 +3865,7 @@ func GetPointerReverseMap[Start, End Gongstruct](fieldname string, stage *Stage)
 // The function provides a map with keys as instances of End and values to *Start instances
 // the map is construed by iterating over all Start instances and populating keys with End instances
 // and values with the Start instances
-func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage *Stage) map[*End]*Start {
+func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage *Stage) map[*End][]*Start {
 
 	var ret Start
 
@@ -3464,21 +3916,21 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 		switch fieldname {
 		// insertion point for per direct association field
 		case "FormFields":
-			res := make(map[*FormField]*FormDiv)
+			res := make(map[*FormField][]*FormDiv)
 			for formdiv := range stage.FormDivs {
 				for _, formfield_ := range formdiv.FormFields {
-					res[formfield_] = formdiv
+					res[formfield_] = append(res[formfield_], formdiv)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		case "CheckBoxs":
-			res := make(map[*CheckBox]*FormDiv)
+			res := make(map[*CheckBox][]*FormDiv)
 			for formdiv := range stage.FormDivs {
 				for _, checkbox_ := range formdiv.CheckBoxs {
-					res[checkbox_] = formdiv
+					res[checkbox_] = append(res[checkbox_], formdiv)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of FormEditAssocButton
 	case FormEditAssocButton:
@@ -3515,13 +3967,13 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 		switch fieldname {
 		// insertion point for per direct association field
 		case "Options":
-			res := make(map[*Option]*FormFieldSelect)
+			res := make(map[*Option][]*FormFieldSelect)
 			for formfieldselect := range stage.FormFieldSelects {
 				for _, option_ := range formfieldselect.Options {
-					res[option_] = formfieldselect
+					res[option_] = append(res[option_], formfieldselect)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of FormFieldString
 	case FormFieldString:
@@ -3538,13 +3990,13 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 		switch fieldname {
 		// insertion point for per direct association field
 		case "FormDivs":
-			res := make(map[*FormDiv]*FormGroup)
+			res := make(map[*FormDiv][]*FormGroup)
 			for formgroup := range stage.FormGroups {
 				for _, formdiv_ := range formgroup.FormDivs {
-					res[formdiv_] = formgroup
+					res[formdiv_] = append(res[formdiv_], formgroup)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of FormSortAssocButton
 	case FormSortAssocButton:
@@ -3561,34 +4013,34 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 		switch fieldname {
 		// insertion point for per direct association field
 		case "Cells":
-			res := make(map[*Cell]*Row)
+			res := make(map[*Cell][]*Row)
 			for row := range stage.Rows {
 				for _, cell_ := range row.Cells {
-					res[cell_] = row
+					res[cell_] = append(res[cell_], row)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		}
 	// reverse maps of direct associations of Table
 	case Table:
 		switch fieldname {
 		// insertion point for per direct association field
 		case "DisplayedColumns":
-			res := make(map[*DisplayedColumn]*Table)
+			res := make(map[*DisplayedColumn][]*Table)
 			for table := range stage.Tables {
 				for _, displayedcolumn_ := range table.DisplayedColumns {
-					res[displayedcolumn_] = table
+					res[displayedcolumn_] = append(res[displayedcolumn_], table)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		case "Rows":
-			res := make(map[*Row]*Table)
+			res := make(map[*Row][]*Table)
 			for table := range stage.Tables {
 				for _, row_ := range table.Rows {
-					res[row_] = table
+					res[row_] = append(res[row_], table)
 				}
 			}
-			return any(res).(map[*End]*Start)
+			return any(res).(map[*End][]*Start)
 		}
 	}
 	return nil
@@ -3724,7 +4176,7 @@ func GetFields[Type Gongstruct]() (res []string) {
 	case CellFloat64:
 		res = []string{"Name", "Value"}
 	case CellIcon:
-		res = []string{"Name", "Icon"}
+		res = []string{"Name", "Icon", "NeedsConfirmation", "ConfirmationMessage"}
 	case CellInt:
 		res = []string{"Name", "Value"}
 	case CellString:
@@ -3736,7 +4188,7 @@ func GetFields[Type Gongstruct]() (res []string) {
 	case FormDiv:
 		res = []string{"Name", "FormFields", "CheckBoxs", "FormEditAssocButton", "FormSortAssocButton"}
 	case FormEditAssocButton:
-		res = []string{"Name", "Label"}
+		res = []string{"Name", "Label", "AssociationStorage", "HasChanged", "IsForSavePurpose", "HasToolTip", "ToolTipText"}
 	case FormField:
 		res = []string{"Name", "InputTypeEnum", "Label", "Placeholder", "FormFieldString", "FormFieldFloat64", "FormFieldInt", "FormFieldDate", "FormFieldTime", "FormFieldDateTime", "FormFieldSelect", "HasBespokeWidth", "BespokeWidthPx", "HasBespokeHeight", "BespokeHeightPx"}
 	case FormFieldDate:
@@ -3756,13 +4208,13 @@ func GetFields[Type Gongstruct]() (res []string) {
 	case FormGroup:
 		res = []string{"Name", "Label", "FormDivs", "HasSuppressButton", "HasSuppressButtonBeenPressed"}
 	case FormSortAssocButton:
-		res = []string{"Name", "Label"}
+		res = []string{"Name", "Label", "HasToolTip", "ToolTipText", "FormEditAssocButton"}
 	case Option:
 		res = []string{"Name"}
 	case Row:
 		res = []string{"Name", "Cells", "IsChecked"}
 	case Table:
-		res = []string{"Name", "DisplayedColumns", "Rows", "HasFiltering", "HasColumnSorting", "HasPaginator", "HasCheckableRows", "HasSaveButton", "CanDragDropRows", "HasCloseButton", "SavingInProgress", "NbOfStickyColumns"}
+		res = []string{"Name", "DisplayedColumns", "Rows", "HasFiltering", "HasColumnSorting", "HasPaginator", "HasCheckableRows", "HasSaveButton", "SaveButtonLabel", "CanDragDropRows", "HasCloseButton", "SavingInProgress", "NbOfStickyColumns"}
 	}
 	return
 }
@@ -3889,7 +4341,7 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 	case *CellFloat64:
 		res = []string{"Name", "Value"}
 	case *CellIcon:
-		res = []string{"Name", "Icon"}
+		res = []string{"Name", "Icon", "NeedsConfirmation", "ConfirmationMessage"}
 	case *CellInt:
 		res = []string{"Name", "Value"}
 	case *CellString:
@@ -3901,7 +4353,7 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 	case *FormDiv:
 		res = []string{"Name", "FormFields", "CheckBoxs", "FormEditAssocButton", "FormSortAssocButton"}
 	case *FormEditAssocButton:
-		res = []string{"Name", "Label"}
+		res = []string{"Name", "Label", "AssociationStorage", "HasChanged", "IsForSavePurpose", "HasToolTip", "ToolTipText"}
 	case *FormField:
 		res = []string{"Name", "InputTypeEnum", "Label", "Placeholder", "FormFieldString", "FormFieldFloat64", "FormFieldInt", "FormFieldDate", "FormFieldTime", "FormFieldDateTime", "FormFieldSelect", "HasBespokeWidth", "BespokeWidthPx", "HasBespokeHeight", "BespokeHeightPx"}
 	case *FormFieldDate:
@@ -3921,13 +4373,13 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 	case *FormGroup:
 		res = []string{"Name", "Label", "FormDivs", "HasSuppressButton", "HasSuppressButtonBeenPressed"}
 	case *FormSortAssocButton:
-		res = []string{"Name", "Label"}
+		res = []string{"Name", "Label", "HasToolTip", "ToolTipText", "FormEditAssocButton"}
 	case *Option:
 		res = []string{"Name"}
 	case *Row:
 		res = []string{"Name", "Cells", "IsChecked"}
 	case *Table:
-		res = []string{"Name", "DisplayedColumns", "Rows", "HasFiltering", "HasColumnSorting", "HasPaginator", "HasCheckableRows", "HasSaveButton", "CanDragDropRows", "HasCloseButton", "SavingInProgress", "NbOfStickyColumns"}
+		res = []string{"Name", "DisplayedColumns", "Rows", "HasFiltering", "HasColumnSorting", "HasPaginator", "HasCheckableRows", "HasSaveButton", "SaveButtonLabel", "CanDragDropRows", "HasCloseButton", "SavingInProgress", "NbOfStickyColumns"}
 	}
 	return
 }
@@ -4022,6 +4474,12 @@ func GetFieldStringValueFromPointer(instance any, fieldName string) (res GongFie
 			res.valueString = inferedInstance.Name
 		case "Icon":
 			res.valueString = inferedInstance.Icon
+		case "NeedsConfirmation":
+			res.valueString = fmt.Sprintf("%t", inferedInstance.NeedsConfirmation)
+			res.valueBool = inferedInstance.NeedsConfirmation
+			res.GongFieldValueType = GongFieldValueTypeBool
+		case "ConfirmationMessage":
+			res.valueString = inferedInstance.ConfirmationMessage
 		}
 	case *CellInt:
 		switch fieldName {
@@ -4092,6 +4550,22 @@ func GetFieldStringValueFromPointer(instance any, fieldName string) (res GongFie
 			res.valueString = inferedInstance.Name
 		case "Label":
 			res.valueString = inferedInstance.Label
+		case "AssociationStorage":
+			res.valueString = inferedInstance.AssociationStorage
+		case "HasChanged":
+			res.valueString = fmt.Sprintf("%t", inferedInstance.HasChanged)
+			res.valueBool = inferedInstance.HasChanged
+			res.GongFieldValueType = GongFieldValueTypeBool
+		case "IsForSavePurpose":
+			res.valueString = fmt.Sprintf("%t", inferedInstance.IsForSavePurpose)
+			res.valueBool = inferedInstance.IsForSavePurpose
+			res.GongFieldValueType = GongFieldValueTypeBool
+		case "HasToolTip":
+			res.valueString = fmt.Sprintf("%t", inferedInstance.HasToolTip)
+			res.valueBool = inferedInstance.HasToolTip
+			res.GongFieldValueType = GongFieldValueTypeBool
+		case "ToolTipText":
+			res.valueString = inferedInstance.ToolTipText
 		}
 	case *FormField:
 		switch fieldName {
@@ -4293,6 +4767,16 @@ func GetFieldStringValueFromPointer(instance any, fieldName string) (res GongFie
 			res.valueString = inferedInstance.Name
 		case "Label":
 			res.valueString = inferedInstance.Label
+		case "HasToolTip":
+			res.valueString = fmt.Sprintf("%t", inferedInstance.HasToolTip)
+			res.valueBool = inferedInstance.HasToolTip
+			res.GongFieldValueType = GongFieldValueTypeBool
+		case "ToolTipText":
+			res.valueString = inferedInstance.ToolTipText
+		case "FormEditAssocButton":
+			if inferedInstance.FormEditAssocButton != nil {
+				res.valueString = inferedInstance.FormEditAssocButton.Name
+			}
 		}
 	case *Option:
 		switch fieldName {
@@ -4356,6 +4840,8 @@ func GetFieldStringValueFromPointer(instance any, fieldName string) (res GongFie
 			res.valueString = fmt.Sprintf("%t", inferedInstance.HasSaveButton)
 			res.valueBool = inferedInstance.HasSaveButton
 			res.GongFieldValueType = GongFieldValueTypeBool
+		case "SaveButtonLabel":
+			res.valueString = inferedInstance.SaveButtonLabel
 		case "CanDragDropRows":
 			res.valueString = fmt.Sprintf("%t", inferedInstance.CanDragDropRows)
 			res.valueBool = inferedInstance.CanDragDropRows
@@ -4436,6 +4922,12 @@ func GetFieldStringValue(instance any, fieldName string) (res GongFieldValue) {
 			res.valueString = inferedInstance.Name
 		case "Icon":
 			res.valueString = inferedInstance.Icon
+		case "NeedsConfirmation":
+			res.valueString = fmt.Sprintf("%t", inferedInstance.NeedsConfirmation)
+			res.valueBool = inferedInstance.NeedsConfirmation
+			res.GongFieldValueType = GongFieldValueTypeBool
+		case "ConfirmationMessage":
+			res.valueString = inferedInstance.ConfirmationMessage
 		}
 	case CellInt:
 		switch fieldName {
@@ -4506,6 +4998,22 @@ func GetFieldStringValue(instance any, fieldName string) (res GongFieldValue) {
 			res.valueString = inferedInstance.Name
 		case "Label":
 			res.valueString = inferedInstance.Label
+		case "AssociationStorage":
+			res.valueString = inferedInstance.AssociationStorage
+		case "HasChanged":
+			res.valueString = fmt.Sprintf("%t", inferedInstance.HasChanged)
+			res.valueBool = inferedInstance.HasChanged
+			res.GongFieldValueType = GongFieldValueTypeBool
+		case "IsForSavePurpose":
+			res.valueString = fmt.Sprintf("%t", inferedInstance.IsForSavePurpose)
+			res.valueBool = inferedInstance.IsForSavePurpose
+			res.GongFieldValueType = GongFieldValueTypeBool
+		case "HasToolTip":
+			res.valueString = fmt.Sprintf("%t", inferedInstance.HasToolTip)
+			res.valueBool = inferedInstance.HasToolTip
+			res.GongFieldValueType = GongFieldValueTypeBool
+		case "ToolTipText":
+			res.valueString = inferedInstance.ToolTipText
 		}
 	case FormField:
 		switch fieldName {
@@ -4707,6 +5215,16 @@ func GetFieldStringValue(instance any, fieldName string) (res GongFieldValue) {
 			res.valueString = inferedInstance.Name
 		case "Label":
 			res.valueString = inferedInstance.Label
+		case "HasToolTip":
+			res.valueString = fmt.Sprintf("%t", inferedInstance.HasToolTip)
+			res.valueBool = inferedInstance.HasToolTip
+			res.GongFieldValueType = GongFieldValueTypeBool
+		case "ToolTipText":
+			res.valueString = inferedInstance.ToolTipText
+		case "FormEditAssocButton":
+			if inferedInstance.FormEditAssocButton != nil {
+				res.valueString = inferedInstance.FormEditAssocButton.Name
+			}
 		}
 	case Option:
 		switch fieldName {
@@ -4770,6 +5288,8 @@ func GetFieldStringValue(instance any, fieldName string) (res GongFieldValue) {
 			res.valueString = fmt.Sprintf("%t", inferedInstance.HasSaveButton)
 			res.valueBool = inferedInstance.HasSaveButton
 			res.GongFieldValueType = GongFieldValueTypeBool
+		case "SaveButtonLabel":
+			res.valueString = inferedInstance.SaveButtonLabel
 		case "CanDragDropRows":
 			res.valueString = fmt.Sprintf("%t", inferedInstance.CanDragDropRows)
 			res.valueBool = inferedInstance.CanDragDropRows

@@ -1,7 +1,6 @@
 package models
 
 import (
-	"log"
 	"slices"
 	"strings"
 
@@ -12,8 +11,10 @@ import (
 type AttributeShape struct {
 	Name string
 
-	//gong:ident
-	Identifier string
+	// for storing the reference as a renaming target for gopls
+	// for instance 'ref_models.Astruct.IntField'
+	//gong:meta
+	IdentifierMeta any
 
 	FieldTypeAsString string
 	Structname        string
@@ -41,7 +42,6 @@ func (classdiagram *Classdiagram) RemoveLinkFieldShape(
 
 	idx := slices.Index(gongStructShape.LinkShapes, linkShape)
 	gongStructShape.LinkShapes = slices.Delete(gongStructShape.LinkShapes, idx, idx+1)
-	gongStructShape.Height = gongStructShape.Height - HeightBetween2AttributeShapes
 	linkShape.Unstage(stage)
 
 }
@@ -60,8 +60,12 @@ func (classdiagram *Classdiagram) AddAttributeFieldShape(
 		// concrete in the sense of UML concrete syntax
 		var concreteField AttributeShape
 		concreteField.Name = field.GetName()
-		concreteField.Identifier = GongstructAndFieldnameToFieldIdentifier(
+
+		fieldIdentifier := GongstructAndFieldnameToFieldIdentifier(
 			gongStruct.Name, field.GetName())
+
+		// turn ref_models.Button.Name{} into ref_models.Button{}.Name
+		concreteField.IdentifierMeta = moveStructLiteralToType(fieldIdentifier)
 
 		switch realField := field.(type) {
 		case *gong.GongBasicField:
@@ -77,7 +81,7 @@ func (classdiagram *Classdiagram) AddAttributeFieldShape(
 		case *gong.SliceOfPointerToGongStructField:
 		}
 
-		concreteField.Structname = IdentifierToGongObjectName(gongStructShape.Identifier)
+		concreteField.Structname = IdentifierMetaToGongStructName(gongStructShape.IdentifierMeta)
 		concreteField.Stage(stage)
 
 		gongStructShape.Height = gongStructShape.Height + HeightBetween2AttributeShapes
@@ -102,7 +106,7 @@ func (classdiagram *Classdiagram) AddAttributeFieldShape(
 		// compute insertionIndex (index where to insert the field to display)
 		insertionIndex := 0
 		for idx, field := range gongStructShape.AttributeShapes {
-			gongField := map_Name_Field[IdentifierToFieldName(field.Identifier)]
+			gongField := map_Name_Field[IdentifierMetaToFieldName(field.IdentifierMeta)]
 			_fieldRank := map_Field_Rank[gongField]
 			if fieldRank > _fieldRank {
 				insertionIndex = idx + 1
@@ -118,78 +122,5 @@ func (classdiagram *Classdiagram) AddAttributeFieldShape(
 			gongStructShape.AttributeShapes[insertionIndex] = &concreteField
 		}
 
-	}
-}
-
-// AddToDiagram implements diagrammer.ElementNode.
-func (classdiagram *Classdiagram) AddLinkFieldShape(
-	stage *Stage,
-	gongStage *gong.Stage,
-	gongStruct *gong.GongStruct,
-	field gong.FieldInterface,
-	gongStructShape *GongStructShape) {
-	diagramPackage := getTheDiagramPackage(stage)
-
-	switch field.(type) {
-	case *gong.PointerToGongStructField, *gong.SliceOfPointerToGongStructField:
-
-		var targetStructName string
-		var sourceMultiplicity MultiplicityType
-		var targetMultiplicity MultiplicityType
-
-		switch realField := field.(type) {
-		case *gong.PointerToGongStructField:
-			targetStructName = realField.GongStruct.Name
-			sourceMultiplicity = MANY
-			targetMultiplicity = ZERO_ONE
-		case *gong.SliceOfPointerToGongStructField:
-			targetStructName = realField.GongStruct.Name
-			sourceMultiplicity = MANY
-			targetMultiplicity = MANY
-		}
-		targetSourceGongStructShape := false
-		var targetGongStructShape *GongStructShape
-		for _, _gongstructshape := range diagramPackage.SelectedClassdiagram.GongStructShapes {
-
-			// strange behavior when the gongstructshape is remove within the loop
-			if IdentifierToGongObjectName(_gongstructshape.Identifier) == targetStructName && !targetSourceGongStructShape {
-				targetSourceGongStructShape = true
-				targetGongStructShape = _gongstructshape
-			}
-		}
-		if !targetSourceGongStructShape {
-			log.Panicf("GongStructShape %s of field not present ", targetStructName)
-		}
-		_ = targetGongStructShape
-
-		link := new(LinkShape).Stage(stage)
-		link.Name = field.GetName()
-		link.SourceMultiplicity = sourceMultiplicity
-		link.SourceMultiplicityOffsetX = 0
-		link.SourceMultiplicityOffsetY = 0
-
-		link.TargetMultiplicity = targetMultiplicity
-		link.TargetMultiplicityOffsetX = 0
-		link.TargetMultiplicityOffsetY = 0
-
-		link.FieldOffsetX = 0
-		link.FieldOffsetY = 0
-
-		link.Identifier =
-			GongstructAndFieldnameToFieldIdentifier(gongStruct.Name, field.GetName())
-		link.Fieldtypename = GongStructNameToIdentifier(targetStructName)
-
-		gongStructShape.LinkShapes = append(gongStructShape.LinkShapes, link)
-
-		link.X = (gongStructShape.X+targetGongStructShape.X)/2.0 +
-			gongStructShape.Width*1.5
-		link.Y = (gongStructShape.Y+targetGongStructShape.Y)/2.0 +
-			gongStructShape.Height/2.0
-
-		link.StartOrientation = ORIENTATION_HORIZONTAL
-		link.StartRatio = 0.5
-		link.EndOrientation = ORIENTATION_HORIZONTAL
-		link.EndRatio = 0.5
-		link.CornerOffsetRatio = 1.38
 	}
 }

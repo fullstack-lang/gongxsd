@@ -14,6 +14,11 @@ export class FormEditAssocButtonAPI {
 	// insertion point for basic fields declarations
 	Name: string = ""
 	Label: string = ""
+	AssociationStorage: string = ""
+	HasChanged: boolean = false
+	IsForSavePurpose: boolean = false
+	HasToolTip: boolean = false
+	ToolTipText: string = ""
 
 	// insertion point for other decls
 

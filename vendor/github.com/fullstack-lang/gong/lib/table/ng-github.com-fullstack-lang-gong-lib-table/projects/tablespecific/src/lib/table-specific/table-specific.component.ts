@@ -1,33 +1,40 @@
-import { AfterViewInit, Component, Inject, Input, OnInit, Optional, ViewChild } from '@angular/core';
-import { Subscription, debounceTime, distinctUntilChanged, forkJoin } from 'rxjs';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { AfterViewInit, Component, Inject, Input, OnInit, OnDestroy, Optional, ViewChild } from '@angular/core'
+import { Subscription, debounceTime, distinctUntilChanged, forkJoin } from 'rxjs'
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
 
-import * as table from '../../../../table/src/public-api'
+import * as table from '../../../../table/src/public-api' // Assuming this path is correct
 
-import { MatTableDataSource } from '@angular/material/table';
-import { FormControl } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material/table'
+import { FormControl } from '@angular/forms'
 
-import { SelectionModel } from '@angular/cdk/collections';
-import { TableDialogData } from '../table-dialog-data'
+import { SelectionModel } from '@angular/cdk/collections'
+import { TableDialogData } from '../table-dialog-data' // Assuming this path is correct
 
 const allowMultiSelect = true
 
-import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatSort, MatSortModule } from '@angular/material/sort';
-import { DragDropModule } from '@angular/cdk/drag-drop';
-import { CommonModule } from '@angular/common';
+// Import MatDialogRef
+import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { MatSort, MatSortModule } from '@angular/material/sort'
+import { DragDropModule } from '@angular/cdk/drag-drop'
+import { CommonModule } from '@angular/common'
 
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { MatTableModule } from '@angular/material/table';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator'
+import { MatTableModule } from '@angular/material/table'
+import { MatCheckboxModule } from '@angular/material/checkbox'
+import { MatInputModule } from '@angular/material/input'
+import { MatButtonModule } from '@angular/material/button'
+import { decodeStringToIntArray_json } from '../association-storage'
+import { ConfirmationDialogComponent } from '../dialog/dialog.component'
+import { MatIconModule } from '@angular/material/icon'
+import { MatTooltipModule } from '@angular/material/tooltip'
 
 
 @Component({
   selector: 'lib-table-specific',
+  // Ensure these are in the NgModule that declares this component if not using standalone components
+  // For Angular 17+ standalone is the default, so 'imports' array is used directly here.
   imports: [
     FormsModule,
     ReactiveFormsModule,
@@ -41,11 +48,13 @@ import { MatButtonModule } from '@angular/material/button';
     MatSortModule,
     CommonModule,
     DragDropModule,
+    MatIconModule,
+    MatTooltipModule,
   ],
   templateUrl: './table-specific.component.html',
   styleUrl: './table-specific.component.css'
 })
-export class TableSpecificComponent {
+export class TableSpecificComponent implements OnInit, AfterViewInit, OnDestroy {
 
   displayedColumns: string[] = []
   allDisplayedColumns: string[] = [] // in case there is a checkbox
@@ -60,7 +69,7 @@ export class TableSpecificComponent {
     zIndex: '1'
   }
   // for selection
-  selectedTable: table.Table | undefined = undefined;
+  selectedTable: table.Table | undefined = undefined
 
   @Input() Name: string = ""
   @Input() TableName: string = ""
@@ -69,25 +78,33 @@ export class TableSpecificComponent {
   filterControl = new FormControl()
 
   // for sorting
-  @ViewChild(MatSort) sort: MatSort | undefined
+  @ViewChild(MatSort) sort!: MatSort // Use definite assignment assertion if sure it's always there after view init
   matSortDirective: string = ""
 
   // for pagination
   @ViewChild(MatPaginator)
-  paginator: MatPaginator | undefined;
+  paginator!: MatPaginator // Use definite assignment assertion
 
-  // the component is refreshed when modification are performed in the back repo 
-  // 
-  // the checkCommitNbFromBackTimer polls the commit number of the back repo
-  // if the commit number has increased, it pulls the front repo and redraw the diagram
-  private commutNbFromBackSubscription: Subscription = new Subscription
+  // The component is refreshed when modifications are performed in the back repo
+  private commutNbFromBackSubscription: Subscription = new Subscription()
   lastCommitNbFromBack = -1
   lastPushFromFrontNb = -1
   currTime: number = 0
-  dateOfLastTimerEmission: Date = new Date
+  dateOfLastTimerEmission: Date = new Date()
 
+  // Subscription management
+  private subscriptions: Subscription = new Subscription()
+  private webSocketSubscription?: Subscription
+  private filterSubscription?: Subscription
 
   public gongtableFrontRepo?: table.FrontRepo
+
+  // SelectionModel to hold the selected rows
+  selection: SelectionModel<table.Row> = new SelectionModel<table.Row>(allowMultiSelect, [])
+  initialSelection = new Array<table.Row>()
+
+  // NEW: for toggling text truncation
+  public isTextTruncated = true
 
   constructor(
     private gongtableFrontRepoService: table.FrontRepoService,
@@ -96,18 +113,28 @@ export class TableSpecificComponent {
     private tableService: table.TableService,
     private celliconService: table.CellIconService,
 
-
-    // not null if the component is called as a selection component of cellboolean instances
+    // MatDialog service for opening OTHER dialogs (if needed)
     public dialog: MatDialog,
+
+    // Inject MatDialogRef for THIS dialog instance
+    @Optional() public dialogRef: MatDialogRef<TableSpecificComponent>,
+
+    // Data passed into this dialog
     @Optional() @Inject(MAT_DIALOG_DATA) public tableDialogData: TableDialogData,
   ) {
-
+    // Initialize selection if needed, or it will be done in refresh
+    // The following 'if' condition (line 112 from your error) caused a type error
+    // because 'initialSelection' was not defined on the 'TableDialogData' type.
+    // To fix this, ensure your 'TableDialogData' interface (in '../table-dialog-data.ts')
+    // includes 'initialSelection?: table.Row[]' as an optional property.
+    if (this.tableDialogData && this.tableDialogData.initialSelection) {
+      // Assuming TableDialogData can carry an initial selection
+      // this.initialSelection = this.tableDialogData.initialSelection
+      // this.selection = new SelectionModel<table.Row>(allowMultiSelect, this.initialSelection)
+    }
   }
 
   ngOnInit(): void {
-
-    // if the component is started via component, one needs to fetch Name and TableName from
-    // the dialog data
     if (this.tableDialogData) {
       this.Name = this.tableDialogData.Name
       this.TableName = this.tableDialogData.TableName
@@ -115,295 +142,459 @@ export class TableSpecificComponent {
 
     this.refresh()
 
-    this.filterControl.valueChanges
+    // Subscribe to filter control changes and add to subscriptions
+    this.filterSubscription = this.filterControl.valueChanges
       .pipe(
-        debounceTime(200), // Optional. To reduce number of requests.
-        distinctUntilChanged() // Optional. To prevent same filter fire multiple times.
+        debounceTime(200),
+        distinctUntilChanged()
       )
       .subscribe(value => {
-        this.dataSource.filter = value;
+        this.dataSource.filter = value ? value.trim().toLowerCase() : ''
       })
 
-    this.dataSource.filterPredicate = (data: any, filter: string) => {
-      const dataStr = JSON.stringify(data).toLowerCase(); // Convert the data to a lower case string.
-      return dataStr.indexOf(filter) !== -1;
+    // Add filter subscription to the main subscriptions container
+    if (this.filterSubscription) {
+      this.subscriptions.add(this.filterSubscription)
     }
   }
 
-  refresh(): void {
+  ngOnDestroy(): void {
+    // Unsubscribe from all subscriptions to prevent memory leaks
+    this.subscriptions.unsubscribe()
 
-    this.gongtableFrontRepoService.connectToWebSocket(this.Name).subscribe(
+    // Explicitly unsubscribe from the WebSocket connection if it exists
+    if (this.webSocketSubscription) {
+      this.webSocketSubscription.unsubscribe()
+    }
+
+    // Unsubscribe from the commit number subscription
+    if (this.commutNbFromBackSubscription) {
+      this.commutNbFromBackSubscription.unsubscribe()
+    }
+  }
+
+  // NEW: toggle function for the text wrap button
+  toggleTextTruncation(): void {
+    this.isTextTruncated = !this.isTextTruncated
+  }
+
+  refresh(): void {
+    // Unsubscribe from previous WebSocket connection if it exists
+    if (this.webSocketSubscription) {
+      this.webSocketSubscription.unsubscribe()
+    }
+
+    this.webSocketSubscription = this.gongtableFrontRepoService.connectToWebSocket(this.Name).subscribe(
       gongtablesFrontRepo => {
         this.gongtableFrontRepo = gongtablesFrontRepo
-
         this.selectedTable = undefined
 
-        // use of the refactorable version
+        if (!this.gongtableFrontRepo) { // Guard against undefined front repo
+          console.error("Gongtable front repo is not available.")
+          return
+        }
+
+        let tableNames = new (Array<string>)
         for (let item of this.gongtableFrontRepo.getFrontArray<table.Table>(table.Table.GONGSTRUCT_NAME)) {
+          tableNames.push(item.Name)
           if (item.Name == this.TableName) {
             this.selectedTable = item
+            break // Found the table, no need to continue loop
           }
         }
 
-        if (this.selectedTable == undefined) {
+        if (!this.selectedTable) {
+          console.error(this.selectedTable, "not found among table names", tableNames)
           return
         }
 
-        this.dataSource = new MatTableDataSource(this.selectedTable.Rows!)
-
-        if (this.selectedTable.HasCheckableRows) {
-
-        }
-
-        // enable filtering on all fields (including pointers and reverse pointer, which is not done by default)
-
-        if (this.selectedTable.DisplayedColumns == undefined) {
-          return
-        }
 
         this.mapHeaderIdIndex = new Map<string, number>()
-        let index = 0
-
         this.displayedColumns = []
-        for (let column of this.selectedTable.DisplayedColumns) {
-          this.mapHeaderIdIndex.set(column.Name, index)
-          this.displayedColumns.push(column.Name)
-          index++
+        if (this.selectedTable.DisplayedColumns) {
+          this.selectedTable.DisplayedColumns.forEach((column, index) => {
+            if (column.Name) { // Ensure column name exists
+              this.mapHeaderIdIndex.set(column.Name, index)
+              this.displayedColumns.push(column.Name)
+            }
+          })
         }
-        this.allDisplayedColumns = []
-        if (this.selectedTable.HasCheckableRows) {
-          this.allDisplayedColumns = ['select']
 
-          if (this.selectedTable.Rows != undefined) {
-            this.initialSelection = []
-            for (let Row of this.selectedTable.Rows) {
+
+        this.allDisplayedColumns = [...this.displayedColumns] // Initialize with displayed columns
+
+        if (this.selectedTable.HasCheckableRows) {
+          this.allDisplayedColumns.unshift('select') // Add 'select' column at the beginning
+
+          this.initialSelection = []
+          if (this.selectedTable.Rows) {
+            this.selectedTable.Rows.forEach(Row => {
               if (Row.IsChecked) {
                 this.initialSelection.push(Row)
               }
-            }
-            this.selection = new SelectionModel<table.Row>(allowMultiSelect, this.initialSelection)
+            })
           }
 
+          if (this.tableDialogData && this.tableDialogData.AssociationStorage) {
+
+            let sliceOfIDs = decodeStringToIntArray_json(this.tableDialogData.AssociationStorage)
+
+            // parse all rows, get the ID (first cell), and if the ID is in the association storage,
+            // push the row into the initial selection
+            this.selectedTable.Rows.forEach(Row => {
+              if (Row.Cells.length > 0 && Row.Cells[0].CellInt) {
+                let id = Row.Cells[0].CellInt.Value
+
+                if (sliceOfIDs.includes(id)) {
+                  this.initialSelection.push(Row)
+                }
+              }
+            })
+
+          }
+          // Re-initialize selection model with current data
+          this.selection = new SelectionModel<table.Row>(allowMultiSelect, this.initialSelection)
         }
-        this.allDisplayedColumns = this.allDisplayedColumns.concat(this.displayedColumns)
 
-        if (this.selectedTable.HasFiltering) {
-          this.dataSource.filterPredicate = (Row: table.Row, filter: string) => {
+        // for sorting, we reorder the items according to the order in the association storage
+        // and we remove the items that are not in the association storage
+        if (this.selectedTable.CanDragDropRows && this.tableDialogData.AssociationStorage) {
+          const sliceOfIDs = decodeStringToIntArray_json(this.tableDialogData.AssociationStorage)
 
-            // filtering is based on finding a lower case filter into a concatenated string
-            // the Cell properties
-            let mergedContent = ""
+          // --- DEBUGGING START ---
+          // Step 1: Check the IDs you expect to find.
+          console.log("Association IDs to order by:", sliceOfIDs)
+          // --- DEBUGGING END ---
 
-            for (let cell of Row.Cells!) {
-              if (cell.CellInt) {
-                mergedContent += cell.CellInt.Value
-              }
-              if (cell.CellFloat64) {
-                mergedContent += cell.CellFloat64.Value
-              }
-              if (cell.CellString) {
-                mergedContent += cell.CellString.Value
+          // Create a Map for quick lookup of rows by their ID.
+          const rowMapByID = new Map<number, table.Row>()
+          for (const row of this.selectedTable.Rows) {
+            if (row.Cells.length > 0 && row.Cells[0]?.CellInt) {
+
+              // FIX: Explicitly convert the ID from the cell to a number to prevent type mismatch (e.g., "4" vs 4).
+              const id = Number(row.Cells[0].CellInt.Value)
+
+              // Only add the row to the map if its ID is a valid number.
+              if (!isNaN(id)) {
+                rowMapByID.set(id, row)
               }
             }
+          }
 
+          // --- DEBUGGING START ---
+          // Step 2: Check the map that was created. Does it contain keys 4 and 1?
+          // If not, the original `this.selectedTable.Rows` does not contain rows with these IDs.
+          console.log("Map of available rows (ID -> Row):", rowMapByID)
+          // --- DEBUGGING END ---
+
+          // Build the new `Rows` array by iterating through the ordered IDs.
+          const orderedRows: table.Row[] = sliceOfIDs
+            .map(id => rowMapByID.get(id)) // Look up the row for each ID (as a number)
+            .filter((row): row is table.Row => row !== undefined) // Filter out any IDs that didn't have a matching row
+
+          // --- DEBUGGING START ---
+          // Step 3: Check the final result.
+          console.log("Final ordered and filtered rows:", orderedRows)
+          // --- DEBUGGING END ---
+
+          this.selectedTable.Rows = orderedRows
+        }
+
+        // Create the new dataSource
+        this.dataSource = new MatTableDataSource(this.selectedTable.Rows || [])
+
+        // NOW, set the filterPredicate on the new dataSource
+        if (this.selectedTable.HasFiltering) {
+          this.dataSource.filterPredicate = (row: table.Row, filter: string) => {
+            let mergedContent = ""
+            if (row.Cells) {
+              for (let cell of row.Cells) {
+                if (cell.CellInt) mergedContent += cell.CellInt.Value
+                if (cell.CellFloat64) mergedContent += cell.CellFloat64.Value
+                if (cell.CellString) mergedContent += cell.CellString.Value
+                // Add other cell types if necessary
+              }
+            }
             mergedContent = mergedContent.toLowerCase()
-            let isSelected = mergedContent.includes(filter.toLowerCase())
-            return isSelected
+            return mergedContent.includes(filter.toLowerCase())
           }
         }
 
         this.matSortDirective = ""
-        if (this.selectedTable.HasColumnSorting) {
-          this.dataSource.sort = this.sort!
+        if (this.selectedTable.HasColumnSorting && this.sort) {
+          this.dataSource.sort = this.sort
           this.matSortDirective = "mat-sort"
 
-          // enable sorting on all fields (including pointers and reverse pointer)
-          this.dataSource.sortingDataAccessor = (Row: table.Row, sortHeaderId: string) => {
+          this.dataSource.sortingDataAccessor = (row: table.Row, sortHeaderId: string): string | number => {
+            if (!row.Cells) return ""
+            const index = this.mapHeaderIdIndex.get(sortHeaderId)
+            if (index === undefined) return ""
 
-            if (Row.Cells == undefined) {
-              return ""
-            }
-            let index = this.mapHeaderIdIndex.get(sortHeaderId)
-            if (index == undefined) {
-              return ""
-            }
-
-            let cell: table.Cell = Row.Cells[index]
-            if (cell.CellInt) {
-              return cell.CellInt.Value
-            }
-            if (cell.CellFloat64) {
-              return cell.CellFloat64.Value
-            }
-            if (cell.CellString) {
-              return cell.CellString.Value
-            }
-            if (cell.CellIcon) {
-              return cell.CellIcon.Icon
-            }
-            if (cell.CellBool) {
-              if (cell.CellBool.Value) {
-                return "true"
-              } else {
-                return "false"
-              }
-            }
-
-            return "";
-          };
+            const cell: table.Cell = row.Cells[index]
+            if (cell.CellInt) return cell.CellInt.Value
+            if (cell.CellFloat64) return cell.CellFloat64.Value
+            if (cell.CellString) return cell.CellString.Value
+            if (cell.CellIcon) return cell.CellIcon.Icon || "" // Ensure string for sorting
+            if (cell.CellBool) return cell.CellBool.Value ? "true" : "false"
+            return ""
+          }
         }
 
-        if (this.selectedTable.HasPaginator) {
-          this.dataSource.paginator = this.paginator!
+        // IMPORTANT: Re-apply sort and paginator after creating new data source
+        if (this.selectedTable.HasColumnSorting && this.sort) {
+          this.dataSource.sort = this.sort;
+          this.setupSortingDataAccessor()
         }
+
+        if (this.selectedTable.HasPaginator && this.paginator) {
+          this.dataSource.paginator = this.paginator;
+        }
+
       }
     )
+
+    // Add the WebSocket subscription to the main subscriptions container
+    if (this.webSocketSubscription) {
+      this.subscriptions.add(this.webSocketSubscription)
+    }
   }
 
   ngAfterViewInit() {
-    this.dataSource.sort = this.sort!
+    // Wait for next tick to ensure all view children are available
+    setTimeout(() => {
+      if (this.sort && this.selectedTable?.HasColumnSorting) {
+        this.dataSource.sort = this.sort;
+
+        // Set up the sorting data accessor
+        this.dataSource.sortingDataAccessor = (row: table.Row, sortHeaderId: string): string | number => {
+          if (!row.Cells) return "";
+          const index = this.mapHeaderIdIndex.get(sortHeaderId)
+          if (index === undefined) return "";
+
+          const cell: table.Cell = row.Cells[index];
+          if (cell.CellInt) return cell.CellInt.Value;
+          if (cell.CellFloat64) return cell.CellFloat64.Value;
+          if (cell.CellString) return cell.CellString.Value;
+          if (cell.CellIcon) return cell.CellIcon.Icon || "";
+          if (cell.CellBool) return cell.CellBool.Value ? 1 : 0; // Use numbers for boolean sorting
+          return "";
+        };
+      }
+
+      if (this.paginator && this.selectedTable?.HasPaginator) {
+        this.dataSource.paginator = this.paginator;
+      }
+    })
+
   }
 
   applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    const filterValue = (event.target as HTMLInputElement).value
+    this.dataSource.filter = filterValue.trim().toLowerCase()
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage()
+    }
   }
 
-  selection: SelectionModel<table.Row> = new (SelectionModel)
-  initialSelection = new Array<table.Row>()
-
+  /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.selectedTable?.Rows?.length
-    return numSelected === numRows;
+    const numSelected = this.selection.selected.length
+    const numRows = this.dataSource.data.length // Use dataSource.data for current rows after filter
+    return numSelected === numRows && numRows > 0
   }
 
-
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
-    this.isAllSelected() ?
-      this.selection.clear() :
-      this.selectedTable?.Rows?.forEach(row => this.selection.select(row));
+    if (this.isAllSelected()) {
+      this.selection.clear()
+    } else {
+      this.dataSource.data.forEach(row => this.selection.select(row)) // Select all rows in current view
+    }
   }
 
-  save() {
-
-    if (this.selectedTable == undefined) {
+  save(): void {
+    if (!this.selectedTable || !this.selectedTable.Rows) {
+      console.warn("Save called without a selected table or rows.")
       return
     }
 
-    // map of modified rows to be be updated
-    let modifiedRows = new Set<table.Row>
-    for (let row of this.selectedTable.Rows!) {
-      if ((row.IsChecked && !this.selection.isSelected(row)) ||
-        (!row.IsChecked && this.selection.isSelected(row))) {
-        row.IsChecked = !row.IsChecked
+    const modifiedRows = new Set<table.Row>()
+    this.selectedTable.Rows.forEach(row => {
+      const isCurrentlySelected = this.selection.isSelected(row)
+      if (row.IsChecked !== isCurrentlySelected) {
+        row.IsChecked = isCurrentlySelected
         modifiedRows.add(row)
       }
+    })
+
+    this.selectedTable.SavingInProgress = true // Indicate saving started
+
+    if (this.tableDialogData && this.dialogRef) {
+      // Pass the current selection (which might be empty or unchanged)
+      this.dialogRef.close(this.selection.selected)
     }
-
-    if (modifiedRows.size == 0) {
-      // in case this component is called as a modal window (MatDialog)
-      // exits,
-      this.selectedTable.SavingInProgress = true
-      this.tableService.updateFront(this.selectedTable!, this.Name).subscribe(
-        () => {
-          // in case this component is called as a modal window (MatDialog)
-          // exits,
-          if (this.tableDialogData) {
-            this.dialog.closeAll()
-          }
-        }
-      )
-      return
-    }
-
-    // inform the back that the saving is some rows is in progress
-    this.selectedTable.SavingInProgress = true
-
-
-    const promises = []
-    for (let row of modifiedRows) {
-      promises.push(this.rowService.updateFront(row, this.Name))
-    }
-
-    forkJoin(promises).subscribe(
-      () => {
-
-        this.selectedTable!.SavingInProgress = false
-        this.tableService.updateFront(this.selectedTable!, this.Name).subscribe(
-          () => {
-            // in case this component is called as a modal window (MatDialog)
-            // exits,
-            if (this.tableDialogData) {
-              this.dialog.closeAll()
-            }
-          }
-        )
-      }
-
-    )
-
-
+    return
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.selectedTable?.Rows!, event.previousIndex, event.currentIndex)
+    if (!this.selectedTable || !this.selectedTable.Rows) {
+      return
+    }
 
-    this.dataSource = new MatTableDataSource(this.selectedTable?.Rows!)
+    // This moves the item in the local array, reordering the rows
+    moveItemInArray(this.selectedTable.Rows, event.previousIndex, event.currentIndex)
 
-    this.tableService.updateFront(this.selectedTable!, this.Name).subscribe(
-      () => {
-        console.log("table", this.selectedTable?.Name, "rows shuffled")
+    // This updates the MatTableDataSource to reflect the new order in the UI
+    this.dataSource.data = [...this.selectedTable.Rows]
+
+    // one need to update the associated storage
+    // [START] Completed Code
+    if (this.selectedTable?.CanDragDropRows && this.tableDialogData?.AssociationStorage) {
+
+      // 1. Extract the IDs from the rows in their new order.
+      // We must ensure that we only process rows that have a valid ID structure,
+      // which is assumed to be in the first cell as an integer (CellInt).
+      const newOrderedIDs: number[] = this.selectedTable.Rows
+        .map(row => {
+          // Safely access the ID from the first cell
+          if (row.Cells && row.Cells.length > 0 && row.Cells[0]?.CellInt) {
+            return row.Cells[0].CellInt.Value
+          }
+          return null // Return null for rows that don't match the structure
+        })
+        .filter((id): id is number => id !== null) // Filter out any nulls to get a clean number array
+
+      // 2. Convert the new array of IDs into a JSON string.
+      const newAssociationStorage = JSON.stringify(newOrderedIDs)
+
+      // 3. Update the AssociationStorage property in the dialog data.
+      // This ensures that when the dialog is saved or closed, the new order is available
+      // to the component that opened it.
+      this.tableDialogData.AssociationStorage = newAssociationStorage
+
+      if (this.sort) {
+        this.sort.active = '';
+        this.sort.direction = '';
       }
-    )
+
+      console.log("Updated association order:", this.tableDialogData.AssociationStorage)
+    }
+    // [END] Completed Code
   }
 
-  isDraggableRow = (index: number, item: table.Row) => this.selectedTable?.CanDragDropRows
+  isDraggableRow = (index: number, item: table.Row): boolean => !!this.selectedTable?.CanDragDropRows
 
-  close() {
-    if (this.tableDialogData) {
-      this.dialog.closeAll()
+  close(): void {
+    if (this.tableDialogData && this.dialogRef) {
+      this.dialogRef.close(this.selection.selected)
+    } else if (this.dialogRef) {
+      this.dialogRef.close()
     }
   }
 
-  // onClick performs an update of the clicked row (without any property change)
-  // this minimalist design will hopefully be sufficient for the backend to interpret
-  // that the row has been clicked
-  onClick(row: table.Row) {
-    console.log("Material Table: onClick: Stack: `" + this.Name + "`table:`" + this.TableName + "`row:" + row.Name)
+  onClick(row: table.Row): void {
+    console.log("Material Table: onClick: Stack: `" + this.Name + "`table:`" + this.TableName + "`row:" + (row.Name || 'Unnamed Row'))
 
-    let cells = row.Cells
-
-    this.rowService.updateFront(row, this.Name).subscribe(
+    const originalCells = row.Cells
+    const updateSubscription = this.rowService.updateFront(row, this.Name).subscribe(
       () => {
-        console.log("row updated")
-        row.Cells = cells
+        console.log("Row updated on click:", row.Name || 'Unnamed Row')
       }
     )
+
+    // Add the subscription to be cleaned up
+    this.subscriptions.add(updateSubscription)
   }
 
   getDynamicStyles(columnIndex: number): { [key: string]: any } {
-    const styles: { [key: string]: any } = {} // Explicitly define the type here 
-    if (this.selectedTable == undefined) {
+    const styles: { [key: string]: any } = {}
+    if (!this.selectedTable) {
       return styles
     }
 
-    if (columnIndex <= this.selectedTable.NbOfStickyColumns) {
+    if (this.selectedTable.NbOfStickyColumns && columnIndex < this.selectedTable.NbOfStickyColumns) {
       styles['position'] = 'sticky'
-      return styles
+      styles['left'] = '0px'
+      styles['background'] = 'white'
+      styles['z-index'] = '1'
     }
-
-
     return styles
   }
 
-  onClickCellIcon(cellIcon: table.CellIcon) {
-    console.log("Cell Icon clicked")
-    this.celliconService.updateFront(cellIcon, this.Name).subscribe(
-      () => {
+  onClickCellIcon(cellIcon: table.CellIcon): void {
+    console.log("Cell Icon clicked:", cellIcon.Name || 'Unnamed Icon')
 
-      }
-    )
+    if (cellIcon.NeedsConfirmation) {
+      const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+        width: '250px',
+        data: { message: cellIcon.ConfirmationMessage }
+      })
+
+      const dialogSubscription = dialogRef.afterClosed().subscribe(result => {
+        if (!result) {
+          return
+        } else {
+          const updateSubscription = this.celliconService.updateFront(cellIcon, this.Name).subscribe(
+            () => {
+              console.log("Cell icon updated after confirmation:", cellIcon.Name || 'Unnamed Icon')
+            }
+          )
+          // Add the subscription to be cleaned up
+          this.subscriptions.add(updateSubscription)
+        }
+      })
+
+      // Add the dialog subscription to be cleaned up
+      this.subscriptions.add(dialogSubscription)
+    } else {
+      const updateSubscription = this.celliconService.updateFront(cellIcon, this.Name).subscribe(
+        () => {
+          console.log("Cell icon updated:", cellIcon.Name || 'Unnamed Icon')
+        }
+      )
+
+      // Add the subscription to be cleaned up
+      this.subscriptions.add(updateSubscription)
+    }
   }
 
+  private setupSortingDataAccessor(): void {
+    this.dataSource.sortingDataAccessor = (row: table.Row, sortHeaderId: string): string | number => {
+      if (!row.Cells) return "";
+
+      const index = this.mapHeaderIdIndex.get(sortHeaderId)
+      if (index === undefined) {
+        console.warn(`Column index not found for: ${sortHeaderId}`)
+        return "";
+      }
+
+      const cell: table.Cell = row.Cells[index];
+      if (!cell) return "";
+
+      // Handle different cell types with proper type conversion
+      if (cell.CellInt) return Number(cell.CellInt.Value) || 0;
+      if (cell.CellFloat64) return Number(cell.CellFloat64.Value) || 0;
+      if (cell.CellString) return String(cell.CellString.Value || "").toLowerCase()
+      if (cell.CellIcon) return String(cell.CellIcon.Icon || "").toLowerCase()
+      if (cell.CellBool) return cell.CellBool.Value ? 1 : 0;
+
+      return "";
+    };
+  }
+
+  debugSortingState(): void {
+    console.log('=== Sorting Debug Info ===')
+    console.log('selectedTable.HasColumnSorting:', this.selectedTable?.HasColumnSorting)
+    console.log('sort ViewChild:', this.sort)
+    console.log('dataSource.sort:', this.dataSource.sort)
+    console.log('displayedColumns:', this.displayedColumns)
+    console.log('mapHeaderIdIndex:', this.mapHeaderIdIndex)
+    console.log('dataSource.data length:', this.dataSource.data.length)
+
+    if (this.sort) {
+      console.log('sort.active:', this.sort.active)
+      console.log('sort.direction:', this.sort.direction)
+    }
+  }
 }

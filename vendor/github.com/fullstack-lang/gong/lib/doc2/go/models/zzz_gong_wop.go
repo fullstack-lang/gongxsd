@@ -6,20 +6,27 @@ import "time"
 // to avoid compile error if no time field is present
 var __GONG_time_The_fool_doth_think_he_is_wise__ = time.Hour
 
+var _ = __GONG_time_The_fool_doth_think_he_is_wise__
+
 // insertion point
 type AttributeShape_WOP struct {
 	// insertion point
+
 	Name string
-	Identifier string
+
+	IdentifierMeta any
+
 	FieldTypeAsString string
+
 	Structname string
+
 	Fieldtypename string
 }
 
 func (from *AttributeShape) CopyBasicFields(to *AttributeShape) {
 	// insertion point
 	to.Name = from.Name
-	to.Identifier = from.Identifier
+	to.IdentifierMeta = from.IdentifierMeta
 	to.FieldTypeAsString = from.FieldTypeAsString
 	to.Structname = from.Structname
 	to.Fieldtypename = from.Fieldtypename
@@ -27,35 +34,54 @@ func (from *AttributeShape) CopyBasicFields(to *AttributeShape) {
 
 type Classdiagram_WOP struct {
 	// insertion point
+
 	Name string
+
+	Description string
+
+	IsIncludedInStaticWebSite bool
+
 	IsInRenameMode bool
+
 	IsExpanded bool
+
 	NodeGongStructsIsExpanded bool
-	NodeGongStructNodeExpansionBinaryEncoding int
+
+	NodeGongStructNodeExpansion string
+
 	NodeGongEnumsIsExpanded bool
-	NodeGongEnumNodeExpansionBinaryEncoding int
+
+	NodeGongEnumNodeExpansion string
+
 	NodeGongNotesIsExpanded bool
-	NodeGongNoteNodeExpansionBinaryEncoding int
+
+	NodeGongNoteNodeExpansion string
 }
 
 func (from *Classdiagram) CopyBasicFields(to *Classdiagram) {
 	// insertion point
 	to.Name = from.Name
+	to.Description = from.Description
+	to.IsIncludedInStaticWebSite = from.IsIncludedInStaticWebSite
 	to.IsInRenameMode = from.IsInRenameMode
 	to.IsExpanded = from.IsExpanded
 	to.NodeGongStructsIsExpanded = from.NodeGongStructsIsExpanded
-	to.NodeGongStructNodeExpansionBinaryEncoding = from.NodeGongStructNodeExpansionBinaryEncoding
+	to.NodeGongStructNodeExpansion = from.NodeGongStructNodeExpansion
 	to.NodeGongEnumsIsExpanded = from.NodeGongEnumsIsExpanded
-	to.NodeGongEnumNodeExpansionBinaryEncoding = from.NodeGongEnumNodeExpansionBinaryEncoding
+	to.NodeGongEnumNodeExpansion = from.NodeGongEnumNodeExpansion
 	to.NodeGongNotesIsExpanded = from.NodeGongNotesIsExpanded
-	to.NodeGongNoteNodeExpansionBinaryEncoding = from.NodeGongNoteNodeExpansionBinaryEncoding
+	to.NodeGongNoteNodeExpansion = from.NodeGongNoteNodeExpansion
 }
 
 type DiagramPackage_WOP struct {
 	// insertion point
+
 	Name string
+
 	Path string
+
 	GongModelPath string
+
 	AbsolutePathToDiagramPackage string
 }
 
@@ -69,12 +95,19 @@ func (from *DiagramPackage) CopyBasicFields(to *DiagramPackage) {
 
 type GongEnumShape_WOP struct {
 	// insertion point
+
 	Name string
+
 	X float64
+
 	Y float64
-	Identifier string
+
+	IdentifierMeta any
+
 	Width float64
+
 	Height float64
+
 	IsExpanded bool
 }
 
@@ -83,7 +116,7 @@ func (from *GongEnumShape) CopyBasicFields(to *GongEnumShape) {
 	to.Name = from.Name
 	to.X = from.X
 	to.Y = from.Y
-	to.Identifier = from.Identifier
+	to.IdentifierMeta = from.IdentifierMeta
 	to.Width = from.Width
 	to.Height = from.Height
 	to.IsExpanded = from.IsExpanded
@@ -91,20 +124,25 @@ func (from *GongEnumShape) CopyBasicFields(to *GongEnumShape) {
 
 type GongEnumValueShape_WOP struct {
 	// insertion point
+
 	Name string
-	Identifier string
+
+	IdentifierMeta any
 }
 
 func (from *GongEnumValueShape) CopyBasicFields(to *GongEnumValueShape) {
 	// insertion point
 	to.Name = from.Name
-	to.Identifier = from.Identifier
+	to.IdentifierMeta = from.IdentifierMeta
 }
 
 type GongNoteLinkShape_WOP struct {
 	// insertion point
+
 	Name string
+
 	Identifier string
+
 	Type NoteShapeLinkType
 }
 
@@ -117,15 +155,25 @@ func (from *GongNoteLinkShape) CopyBasicFields(to *GongNoteLinkShape) {
 
 type GongNoteShape_WOP struct {
 	// insertion point
+
 	Name string
+
 	Identifier string
+
 	Body string
+
 	BodyHTML string
+
 	X float64
+
 	Y float64
+
 	Width float64
+
 	Height float64
+
 	Matched bool
+
 	IsExpanded bool
 }
 
@@ -145,14 +193,19 @@ func (from *GongNoteShape) CopyBasicFields(to *GongNoteShape) {
 
 type GongStructShape_WOP struct {
 	// insertion point
+
 	Name string
+
 	X float64
+
 	Y float64
-	Identifier string
-	ShowNbInstances bool
-	NbInstances int
+
+	IdentifierMeta any
+
 	Width float64
+
 	Height float64
+
 	IsSelected bool
 }
 
@@ -161,9 +214,7 @@ func (from *GongStructShape) CopyBasicFields(to *GongStructShape) {
 	to.Name = from.Name
 	to.X = from.X
 	to.Y = from.Y
-	to.Identifier = from.Identifier
-	to.ShowNbInstances = from.ShowNbInstances
-	to.NbInstances = from.NbInstances
+	to.IdentifierMeta = from.IdentifierMeta
 	to.Width = from.Width
 	to.Height = from.Height
 	to.IsSelected = from.IsSelected
@@ -171,31 +222,49 @@ func (from *GongStructShape) CopyBasicFields(to *GongStructShape) {
 
 type LinkShape_WOP struct {
 	// insertion point
+
 	Name string
-	Identifier string
-	Fieldtypename string
+
+	IdentifierMeta any
+
+	FieldTypeIdentifierMeta any
+
 	FieldOffsetX float64
+
 	FieldOffsetY float64
+
 	TargetMultiplicity MultiplicityType
+
 	TargetMultiplicityOffsetX float64
+
 	TargetMultiplicityOffsetY float64
+
 	SourceMultiplicity MultiplicityType
+
 	SourceMultiplicityOffsetX float64
+
 	SourceMultiplicityOffsetY float64
+
 	X float64
+
 	Y float64
+
 	StartOrientation OrientationType
+
 	StartRatio float64
+
 	EndOrientation OrientationType
+
 	EndRatio float64
+
 	CornerOffsetRatio float64
 }
 
 func (from *LinkShape) CopyBasicFields(to *LinkShape) {
 	// insertion point
 	to.Name = from.Name
-	to.Identifier = from.Identifier
-	to.Fieldtypename = from.Fieldtypename
+	to.IdentifierMeta = from.IdentifierMeta
+	to.FieldTypeIdentifierMeta = from.FieldTypeIdentifierMeta
 	to.FieldOffsetX = from.FieldOffsetX
 	to.FieldOffsetY = from.FieldOffsetY
 	to.TargetMultiplicity = from.TargetMultiplicity

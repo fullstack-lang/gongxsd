@@ -2,11 +2,20 @@ import { Injectable } from '@angular/core'
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
 
 import { Observable, combineLatest, BehaviorSubject, of } from 'rxjs'
+import { shareReplay } from 'rxjs/operators'
 
 // insertion point sub template for services imports
 import { FileToDownloadAPI } from './filetodownload-api'
 import { FileToDownload, CopyFileToDownloadAPIToFileToDownload } from './filetodownload'
 import { FileToDownloadService } from './filetodownload.service'
+
+import { FileToUploadAPI } from './filetoupload-api'
+import { FileToUpload, CopyFileToUploadAPIToFileToUpload } from './filetoupload'
+import { FileToUploadService } from './filetoupload.service'
+
+import { MessageAPI } from './message-api'
+import { Message, CopyMessageAPIToMessage } from './message'
+import { MessageService } from './message.service'
 
 
 import { BackRepoData } from './back-repo-data'
@@ -17,6 +26,12 @@ export const StackType = "github.com/fullstack-lang/gong/lib/load/go/models"
 export class FrontRepo { // insertion point sub template
 	array_FileToDownloads = new Array<FileToDownload>() // array of front instances
 	map_ID_FileToDownload = new Map<number, FileToDownload>() // map of front instances
+
+	array_FileToUploads = new Array<FileToUpload>() // array of front instances
+	map_ID_FileToUpload = new Map<number, FileToUpload>() // map of front instances
+
+	array_Messages = new Array<Message>() // array of front instances
+	map_ID_Message = new Map<number, Message>() // map of front instances
 
 
 	public GONG__Index = -1
@@ -29,8 +44,12 @@ export class FrontRepo { // insertion point sub template
 			// insertion point
 			case 'FileToDownload':
 				return this.array_FileToDownloads as unknown as Array<Type>
+			case 'FileToUpload':
+				return this.array_FileToUploads as unknown as Array<Type>
+			case 'Message':
+				return this.array_Messages as unknown as Array<Type>
 			default:
-				throw new Error("Type not recognized");
+				throw new Error("Type not recognized")
 		}
 	}
 
@@ -39,8 +58,12 @@ export class FrontRepo { // insertion point sub template
 			// insertion point
 			case 'FileToDownload':
 				return this.map_ID_FileToDownload as unknown as Map<number, Type>
+			case 'FileToUpload':
+				return this.map_ID_FileToUpload as unknown as Map<number, Type>
+			case 'Message':
+				return this.map_ID_Message as unknown as Map<number, Type>
 			default:
-				throw new Error("Type not recognized");
+				throw new Error("Type not recognized")
 		}
 	}
 }
@@ -93,20 +116,25 @@ export enum SelectionMode {
 export class FrontRepoService {
 
 	Name: string = ""
-	private socket: WebSocket | undefined
 
 	httpOptions = {
 		headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-	};
+	}
 
 	//
 	// Store of all instances of the stack
 	//
 	frontRepo = new (FrontRepo)
 
+	// Manage open WebSocket connections
+	private webSocketConnections = new Map<string, Observable<FrontRepo>>()
+
+
 	constructor(
 		private http: HttpClient, // insertion point sub template 
 		private filetodownloadService: FileToDownloadService,
+		private filetouploadService: FileToUploadService,
+		private messageService: MessageService,
 	) { }
 
 	// postService provides a post function for each struct name
@@ -119,7 +147,7 @@ export class FrontRepoService {
 				let behaviorSubject = instanceToBePosted[(structName + "ServiceChanged") as keyof typeof instanceToBePosted] as unknown as BehaviorSubject<string>
 				behaviorSubject.next("post")
 			}
-		);
+		)
 	}
 
 	// deleteService provides a delete function for each struct name
@@ -132,7 +160,7 @@ export class FrontRepoService {
 				let behaviorSubject = instanceToBeDeleted[(structName + "ServiceChanged") as keyof typeof instanceToBeDeleted] as unknown as BehaviorSubject<string>
 				behaviorSubject.next("delete")
 			}
-		);
+		)
 	}
 
 	// typing of observable can be messy in typescript. Therefore, one force the type
@@ -140,7 +168,9 @@ export class FrontRepoService {
 		Observable<null>, // see below for the of(null) observable
 		// insertion point sub template 
 		Observable<FileToDownloadAPI[]>,
-	];
+		Observable<FileToUploadAPI[]>,
+		Observable<MessageAPI[]>,
+	]
 
 	//
 	// pull performs a GET on all struct of the stack and redeem association pointers 
@@ -156,6 +186,8 @@ export class FrontRepoService {
 			of(null), // see above for justification
 			// insertion point sub template
 			this.filetodownloadService.getFileToDownloads(this.Name, this.frontRepo),
+			this.filetouploadService.getFileToUploads(this.Name, this.frontRepo),
+			this.messageService.getMessages(this.Name, this.frontRepo),
 		]
 
 		return new Observable<FrontRepo>(
@@ -167,12 +199,18 @@ export class FrontRepoService {
 						___of_null, // see above for the explanation about of
 						// insertion point sub template for declarations 
 						filetodownloads_,
+						filetouploads_,
+						messages_,
 					]) => {
 						let _this = this
 						// Typing can be messy with many items. Therefore, type casting is necessary here
 						// insertion point sub template for type casting 
 						var filetodownloads: FileToDownloadAPI[]
 						filetodownloads = filetodownloads_ as FileToDownloadAPI[]
+						var filetouploads: FileToUploadAPI[]
+						filetouploads = filetouploads_ as FileToUploadAPI[]
+						var messages: MessageAPI[]
+						messages = messages_ as MessageAPI[]
 
 						// 
 						// First Step: init map of instances
@@ -189,6 +227,30 @@ export class FrontRepoService {
 							}
 						)
 
+						// init the arrays
+						this.frontRepo.array_FileToUploads = []
+						this.frontRepo.map_ID_FileToUpload.clear()
+
+						filetouploads.forEach(
+							filetouploadAPI => {
+								let filetoupload = new FileToUpload
+								this.frontRepo.array_FileToUploads.push(filetoupload)
+								this.frontRepo.map_ID_FileToUpload.set(filetouploadAPI.ID, filetoupload)
+							}
+						)
+
+						// init the arrays
+						this.frontRepo.array_Messages = []
+						this.frontRepo.map_ID_Message.clear()
+
+						messages.forEach(
+							messageAPI => {
+								let message = new Message
+								this.frontRepo.array_Messages.push(message)
+								this.frontRepo.map_ID_Message.set(messageAPI.ID, message)
+							}
+						)
+
 
 						// 
 						// Second Step: reddeem front objects
@@ -198,6 +260,22 @@ export class FrontRepoService {
 							filetodownloadAPI => {
 								let filetodownload = this.frontRepo.map_ID_FileToDownload.get(filetodownloadAPI.ID)
 								CopyFileToDownloadAPIToFileToDownload(filetodownloadAPI, filetodownload!, this.frontRepo)
+							}
+						)
+
+						// fill up front objects
+						filetouploads.forEach(
+							filetouploadAPI => {
+								let filetoupload = this.frontRepo.map_ID_FileToUpload.get(filetouploadAPI.ID)
+								CopyFileToUploadAPIToFileToUpload(filetouploadAPI, filetoupload!, this.frontRepo)
+							}
+						)
+
+						// fill up front objects
+						messages.forEach(
+							messageAPI => {
+								let message = this.frontRepo.map_ID_Message.get(messageAPI.ID)
+								CopyMessageAPIToMessage(messageAPI, message!, this.frontRepo)
 							}
 						)
 
@@ -212,22 +290,35 @@ export class FrontRepoService {
 
 	public connectToWebSocket(Name: string): Observable<FrontRepo> {
 
-		this.Name = Name
+		// Check if a connection for this name already exists
+		if (this.webSocketConnections.has(Name)) {
+			return this.webSocketConnections.get(Name)!
+		}
 
+		//
+		// Create a new connection
+		//
+		let host = window.location.host
+		const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:'
 
-		let params = new HttpParams().set("Name", this.Name)
-		let basePath = 'ws://localhost:8080/api/github.com/fullstack-lang/gong/lib/load/go/v1/ws/stage'
+		if (host === 'localhost:4200') {
+			host = 'localhost:8080'
+		}
+
+		// Construct the base path using the dynamic host and protocol
+		// The API path remains the same.
+		let basePath = `${protocol}//${host}/api/github.com/fullstack-lang/gong/lib/load/go/v1/ws/stage`
+
+		let params = new HttpParams().set("Name", Name)
 		let paramString = params.toString()
 		let url = `${basePath}?${paramString}`
-		this.socket = new WebSocket(url)
 
-		return new Observable(observer => {
-			this.socket!.onmessage = event => {
+		const newConnection$ = new Observable<FrontRepo>(observer => {
+			const socket = new WebSocket(url)
 
-
+			socket.onmessage = event => {
 				const backRepoData = new BackRepoData(JSON.parse(event.data))
-
-				let frontRepo = new (FrontRepo)
+				let frontRepo = new (FrontRepo)()
 				frontRepo.GONG__Index = backRepoData.GONG__Index
 
 				// 
@@ -247,6 +338,30 @@ export class FrontRepoService {
 					}
 				)
 
+				// init the arrays
+				frontRepo.array_FileToUploads = []
+				frontRepo.map_ID_FileToUpload.clear()
+
+				backRepoData.FileToUploadAPIs.forEach(
+					filetouploadAPI => {
+						let filetoupload = new FileToUpload
+						frontRepo.array_FileToUploads.push(filetoupload)
+						frontRepo.map_ID_FileToUpload.set(filetouploadAPI.ID, filetoupload)
+					}
+				)
+
+				// init the arrays
+				frontRepo.array_Messages = []
+				frontRepo.map_ID_Message.clear()
+
+				backRepoData.MessageAPIs.forEach(
+					messageAPI => {
+						let message = new Message
+						frontRepo.array_Messages.push(message)
+						frontRepo.map_ID_Message.set(messageAPI.ID, message)
+					}
+				)
+
 
 				// 
 				// Second Step: reddeem front objects
@@ -261,25 +376,56 @@ export class FrontRepoService {
 					}
 				)
 
+				// fill up front objects
+				backRepoData.FileToUploadAPIs.forEach(
+					filetouploadAPI => {
+						let filetoupload = frontRepo.map_ID_FileToUpload.get(filetouploadAPI.ID)
+						CopyFileToUploadAPIToFileToUpload(filetouploadAPI, filetoupload!, frontRepo)
+					}
+				)
+
+				// fill up front objects
+				backRepoData.MessageAPIs.forEach(
+					messageAPI => {
+						let message = frontRepo.map_ID_Message.get(messageAPI.ID)
+						CopyMessageAPIToMessage(messageAPI, message!, frontRepo)
+					}
+				)
 
 
 				observer.next(frontRepo)
 			}
-			this.socket!.onerror = event => {
-				observer.error(event)
-			}
-			this.socket!.onclose = event => {
-				observer.complete()
-			}
 
+			socket.onerror = event => observer.error(event)
+			socket.onclose = () => observer.complete()
+
+			// Teardown logic: Called when the last subscriber unsubscribes.
 			return () => {
-				this.socket!.close()
+				this.webSocketConnections.delete(Name) // Remove from cache
+				socket.close()
 			}
-		})
+		}).pipe(
+			// This is the key:
+			// - shareReplay makes this a "multicast" observable, sharing the single WebSocket among subscribers.
+			// - { bufferSize: 1, refCount: true } means:
+			//   - bufferSize: 1 => new subscribers get the last emitted value immediately.
+			//   - refCount: true => the connection starts with the first subscriber and stops with the last.
+			shareReplay({ bufferSize: 1, refCount: true })
+		)
+
+		// Store the new connection observable in the map
+		this.webSocketConnections.set(Name, newConnection$)
+		return newConnection$
 	}
 }
 
 // insertion point for get unique ID per struct 
 export function getFileToDownloadUniqueID(id: number): number {
 	return 31 * id
+}
+export function getFileToUploadUniqueID(id: number): number {
+	return 37 * id
+}
+export function getMessageUniqueID(id: number): number {
+	return 41 * id
 }

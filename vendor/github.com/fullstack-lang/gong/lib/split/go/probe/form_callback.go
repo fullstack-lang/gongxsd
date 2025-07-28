@@ -2,6 +2,7 @@
 package probe
 
 import (
+	"log"
 	"slices"
 	"time"
 
@@ -10,9 +11,12 @@ import (
 	"github.com/fullstack-lang/gong/lib/split/go/models"
 )
 
-const __dummmy__time = time.Nanosecond
+// to avoid errors when time and slices packages are not used in the generated code
+const _ = time.Nanosecond
 
-var __dummmy__letters = slices.Delete([]string{"a"}, 0, 1)
+var _ = slices.Delete([]string{"a"}, 0, 1)
+
+var _ = log.Panicf
 
 // insertion point
 func __gong__New__AsSplitFormCallback(
@@ -62,6 +66,31 @@ func (assplitFormCallback *AsSplitFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(assplit_.Name), formDiv)
 		case "Direction":
 			FormDivEnumStringFieldToField(&(assplit_.Direction), formDiv)
+		case "AsSplitAreas":
+			instanceSet := *models.GetGongstructInstancesSetFromPointerType[*models.AsSplitArea](assplitFormCallback.probe.stageOfInterest)
+			instanceSlice := make([]*models.AsSplitArea, 0)
+
+			// make a map of all instances by their ID
+			map_id_instances := make(map[uint]*models.AsSplitArea)
+
+			for instance := range instanceSet {
+				id := models.GetOrderPointerGongstruct(
+					assplitFormCallback.probe.stageOfInterest,
+					instance,
+				)
+				map_id_instances[id] = instance
+			}
+
+			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+
+			if err != nil {
+				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
+			}
+			for _, id := range ids {
+				instanceSlice = append(instanceSlice, map_id_instances[id])
+			}
+			assplit_.AsSplitAreas = instanceSlice
+
 		}
 	}
 
@@ -157,6 +186,8 @@ func (assplitareaFormCallback *AsSplitAreaFormCallback) OnSave() {
 			FormDivSelectFieldToField(&(assplitarea_.Form), assplitareaFormCallback.probe.stageOfInterest, formDiv)
 		case "Load":
 			FormDivSelectFieldToField(&(assplitarea_.Load), assplitareaFormCallback.probe.stageOfInterest, formDiv)
+		case "Markdown":
+			FormDivSelectFieldToField(&(assplitarea_.Markdown), assplitareaFormCallback.probe.stageOfInterest, formDiv)
 		case "Slider":
 			FormDivSelectFieldToField(&(assplitarea_.Slider), assplitareaFormCallback.probe.stageOfInterest, formDiv)
 		case "Split":
@@ -176,107 +207,139 @@ func (assplitareaFormCallback *AsSplitAreaFormCallback) OnSave() {
 		case "DivStyle":
 			FormDivBasicFieldToField(&(assplitarea_.DivStyle), formDiv)
 		case "AsSplit:AsSplitAreas":
-			// we need to retrieve the field owner before the change
-			var pastAsSplitOwner *models.AsSplit
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "AsSplit"
-			rf.Fieldname = "AsSplitAreas"
-			reverseFieldOwner := models.GetReverseFieldOwner(
-				assplitareaFormCallback.probe.stageOfInterest,
-				assplitarea_,
-				&rf)
+			// WARNING : this form deals with the N-N association "AsSplit.AsSplitAreas []*AsSplitArea" but
+			// it work only for 1-N associations (TODO: #660, enable this form only for field with //gong:1_N magic code)
+			//
+			// In many use cases, for instance tree structures, the assocation is semanticaly a 1-N
+			// association. For those use cases, it is handy to set the source of the assocation with
+			// the form of the target source (when editing an instance of AsSplitArea). Setting up a value
+			// will discard the former value is there is one.
+			//
+			// Therefore, the forms works only in ONE particular case:
+			// - there was no association to this target
+			var formerSource *models.AsSplit
+			{
+				var rf models.ReverseField
+				_ = rf
+				rf.GongstructName = "AsSplit"
+				rf.Fieldname = "AsSplitAreas"
+				formerAssociationSource := models.GetReverseFieldOwner(
+					assplitareaFormCallback.probe.stageOfInterest,
+					assplitarea_,
+					&rf)
 
-			if reverseFieldOwner != nil {
-				pastAsSplitOwner = reverseFieldOwner.(*models.AsSplit)
-			}
-			fieldValue := formDiv.FormFields[0].FormFieldSelect.Value
-			if fieldValue == nil {
-				if pastAsSplitOwner != nil {
-					idx := slices.Index(pastAsSplitOwner.AsSplitAreas, assplitarea_)
-					pastAsSplitOwner.AsSplitAreas = slices.Delete(pastAsSplitOwner.AsSplitAreas, idx, idx+1)
-				}
-			} else {
-
-				// if the name of the field value is the same as of the past owner
-				// it is assumed the owner has not changed
-				// therefore, the owner must be eventualy changed if the name is different
-				if pastAsSplitOwner.GetName() != fieldValue.GetName() {
-
-					// we need to retrieve the field owner after the change
-					// parse all astrcut and get the one with the name in the
-					// div
-					for _assplit := range *models.GetGongstructInstancesSet[models.AsSplit](assplitareaFormCallback.probe.stageOfInterest) {
-
-						// the match is base on the name
-						if _assplit.GetName() == fieldValue.GetName() {
-							newAsSplitOwner := _assplit // we have a match
-							
-							// we remove the assplitarea_ instance from the pastAsSplitOwner field
-							if pastAsSplitOwner != nil {
-								if newAsSplitOwner != pastAsSplitOwner {
-									idx := slices.Index(pastAsSplitOwner.AsSplitAreas, assplitarea_)
-									pastAsSplitOwner.AsSplitAreas = slices.Delete(pastAsSplitOwner.AsSplitAreas, idx, idx+1)
-									newAsSplitOwner.AsSplitAreas = append(newAsSplitOwner.AsSplitAreas, assplitarea_)
-								}
-							} else {
-								newAsSplitOwner.AsSplitAreas = append(newAsSplitOwner.AsSplitAreas, assplitarea_)
-							}
-						}
+				var ok bool
+				if formerAssociationSource != nil {
+					formerSource, ok = formerAssociationSource.(*models.AsSplit)
+					if !ok {
+						log.Fatalln("Source of AsSplit.AsSplitAreas []*AsSplitArea, is not an AsSplit instance")
 					}
 				}
 			}
+
+			newSourceName := formDiv.FormFields[0].FormFieldSelect.Value
+
+			// case when the user set empty for the source value
+			if newSourceName == nil {
+				// That could mean we clear the assocation for all source instances
+				if formerSource != nil {
+					idx := slices.Index(formerSource.AsSplitAreas, assplitarea_)
+					formerSource.AsSplitAreas = slices.Delete(formerSource.AsSplitAreas, idx, idx+1)
+				}
+				break // nothing else to do for this field
+			}
+
+			// the former source is not empty. the new value could
+			// be different but there mught more that one source thet
+			// points to this target
+			if formerSource != nil {
+				break // nothing else to do for this field
+			}
+
+			// (2) find the source
+			var newSource *models.AsSplit
+			for _assplit := range *models.GetGongstructInstancesSet[models.AsSplit](assplitareaFormCallback.probe.stageOfInterest) {
+
+				// the match is base on the name
+				if _assplit.GetName() == newSourceName.GetName() {
+					newSource = _assplit // we have a match
+					break
+				}
+			}
+			if newSource == nil {
+				log.Println("Source of AsSplit.AsSplitAreas []*AsSplitArea, with name", newSourceName, ", does not exist")
+				break
+			}
+
+			// (3) append the new value to the new source field
+			newSource.AsSplitAreas = append(newSource.AsSplitAreas, assplitarea_)
 		case "View:RootAsSplitAreas":
-			// we need to retrieve the field owner before the change
-			var pastViewOwner *models.View
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "View"
-			rf.Fieldname = "RootAsSplitAreas"
-			reverseFieldOwner := models.GetReverseFieldOwner(
-				assplitareaFormCallback.probe.stageOfInterest,
-				assplitarea_,
-				&rf)
+			// WARNING : this form deals with the N-N association "View.RootAsSplitAreas []*AsSplitArea" but
+			// it work only for 1-N associations (TODO: #660, enable this form only for field with //gong:1_N magic code)
+			//
+			// In many use cases, for instance tree structures, the assocation is semanticaly a 1-N
+			// association. For those use cases, it is handy to set the source of the assocation with
+			// the form of the target source (when editing an instance of AsSplitArea). Setting up a value
+			// will discard the former value is there is one.
+			//
+			// Therefore, the forms works only in ONE particular case:
+			// - there was no association to this target
+			var formerSource *models.View
+			{
+				var rf models.ReverseField
+				_ = rf
+				rf.GongstructName = "View"
+				rf.Fieldname = "RootAsSplitAreas"
+				formerAssociationSource := models.GetReverseFieldOwner(
+					assplitareaFormCallback.probe.stageOfInterest,
+					assplitarea_,
+					&rf)
 
-			if reverseFieldOwner != nil {
-				pastViewOwner = reverseFieldOwner.(*models.View)
-			}
-			fieldValue := formDiv.FormFields[0].FormFieldSelect.Value
-			if fieldValue == nil {
-				if pastViewOwner != nil {
-					idx := slices.Index(pastViewOwner.RootAsSplitAreas, assplitarea_)
-					pastViewOwner.RootAsSplitAreas = slices.Delete(pastViewOwner.RootAsSplitAreas, idx, idx+1)
-				}
-			} else {
-
-				// if the name of the field value is the same as of the past owner
-				// it is assumed the owner has not changed
-				// therefore, the owner must be eventualy changed if the name is different
-				if pastViewOwner.GetName() != fieldValue.GetName() {
-
-					// we need to retrieve the field owner after the change
-					// parse all astrcut and get the one with the name in the
-					// div
-					for _view := range *models.GetGongstructInstancesSet[models.View](assplitareaFormCallback.probe.stageOfInterest) {
-
-						// the match is base on the name
-						if _view.GetName() == fieldValue.GetName() {
-							newViewOwner := _view // we have a match
-							
-							// we remove the assplitarea_ instance from the pastViewOwner field
-							if pastViewOwner != nil {
-								if newViewOwner != pastViewOwner {
-									idx := slices.Index(pastViewOwner.RootAsSplitAreas, assplitarea_)
-									pastViewOwner.RootAsSplitAreas = slices.Delete(pastViewOwner.RootAsSplitAreas, idx, idx+1)
-									newViewOwner.RootAsSplitAreas = append(newViewOwner.RootAsSplitAreas, assplitarea_)
-								}
-							} else {
-								newViewOwner.RootAsSplitAreas = append(newViewOwner.RootAsSplitAreas, assplitarea_)
-							}
-						}
+				var ok bool
+				if formerAssociationSource != nil {
+					formerSource, ok = formerAssociationSource.(*models.View)
+					if !ok {
+						log.Fatalln("Source of View.RootAsSplitAreas []*AsSplitArea, is not an View instance")
 					}
 				}
 			}
+
+			newSourceName := formDiv.FormFields[0].FormFieldSelect.Value
+
+			// case when the user set empty for the source value
+			if newSourceName == nil {
+				// That could mean we clear the assocation for all source instances
+				if formerSource != nil {
+					idx := slices.Index(formerSource.RootAsSplitAreas, assplitarea_)
+					formerSource.RootAsSplitAreas = slices.Delete(formerSource.RootAsSplitAreas, idx, idx+1)
+				}
+				break // nothing else to do for this field
+			}
+
+			// the former source is not empty. the new value could
+			// be different but there mught more that one source thet
+			// points to this target
+			if formerSource != nil {
+				break // nothing else to do for this field
+			}
+
+			// (2) find the source
+			var newSource *models.View
+			for _view := range *models.GetGongstructInstancesSet[models.View](assplitareaFormCallback.probe.stageOfInterest) {
+
+				// the match is base on the name
+				if _view.GetName() == newSourceName.GetName() {
+					newSource = _view // we have a match
+					break
+				}
+			}
+			if newSource == nil {
+				log.Println("Source of View.RootAsSplitAreas []*AsSplitArea, with name", newSourceName, ", does not exist")
+				break
+			}
+
+			// (3) append the new value to the new source field
+			newSource.RootAsSplitAreas = append(newSource.RootAsSplitAreas, assplitarea_)
 		}
 	}
 
@@ -548,6 +611,85 @@ func (docFormCallback *DocFormCallback) OnSave() {
 
 	updateAndCommitTree(docFormCallback.probe)
 }
+func __gong__New__FavIconFormCallback(
+	favicon *models.FavIcon,
+	probe *Probe,
+	formGroup *table.FormGroup,
+) (faviconFormCallback *FavIconFormCallback) {
+	faviconFormCallback = new(FavIconFormCallback)
+	faviconFormCallback.probe = probe
+	faviconFormCallback.favicon = favicon
+	faviconFormCallback.formGroup = formGroup
+
+	faviconFormCallback.CreationMode = (favicon == nil)
+
+	return
+}
+
+type FavIconFormCallback struct {
+	favicon *models.FavIcon
+
+	// If the form call is called on the creation of a new instnace
+	CreationMode bool
+
+	probe *Probe
+
+	formGroup *table.FormGroup
+}
+
+func (faviconFormCallback *FavIconFormCallback) OnSave() {
+
+	// log.Println("FavIconFormCallback, OnSave")
+
+	// checkout formStage to have the form group on the stage synchronized with the
+	// back repo (and front repo)
+	faviconFormCallback.probe.formStage.Checkout()
+
+	if faviconFormCallback.favicon == nil {
+		faviconFormCallback.favicon = new(models.FavIcon).Stage(faviconFormCallback.probe.stageOfInterest)
+	}
+	favicon_ := faviconFormCallback.favicon
+	_ = favicon_
+
+	for _, formDiv := range faviconFormCallback.formGroup.FormDivs {
+		switch formDiv.Name {
+		// insertion point per field
+		case "Name":
+			FormDivBasicFieldToField(&(favicon_.Name), formDiv)
+		case "SVG":
+			FormDivBasicFieldToField(&(favicon_.SVG), formDiv)
+		}
+	}
+
+	// manage the suppress operation
+	if faviconFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		favicon_.Unstage(faviconFormCallback.probe.stageOfInterest)
+	}
+
+	faviconFormCallback.probe.stageOfInterest.Commit()
+	updateAndCommitTable[models.FavIcon](
+		faviconFormCallback.probe,
+	)
+	faviconFormCallback.probe.tableStage.Commit()
+
+	// display a new form by reset the form stage
+	if faviconFormCallback.CreationMode || faviconFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		faviconFormCallback.probe.formStage.Reset()
+		newFormGroup := (&table.FormGroup{
+			Name: FormName,
+		}).Stage(faviconFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__FavIconFormCallback(
+			nil,
+			faviconFormCallback.probe,
+			newFormGroup,
+		)
+		favicon := new(models.FavIcon)
+		FillUpForm(favicon, newFormGroup, faviconFormCallback.probe)
+		faviconFormCallback.probe.formStage.Commit()
+	}
+
+	updateAndCommitTree(faviconFormCallback.probe)
+}
 func __gong__New__FormFormCallback(
 	form *models.Form,
 	probe *Probe,
@@ -707,6 +849,251 @@ func (loadFormCallback *LoadFormCallback) OnSave() {
 	}
 
 	updateAndCommitTree(loadFormCallback.probe)
+}
+func __gong__New__LogoOnTheLeftFormCallback(
+	logoontheleft *models.LogoOnTheLeft,
+	probe *Probe,
+	formGroup *table.FormGroup,
+) (logoontheleftFormCallback *LogoOnTheLeftFormCallback) {
+	logoontheleftFormCallback = new(LogoOnTheLeftFormCallback)
+	logoontheleftFormCallback.probe = probe
+	logoontheleftFormCallback.logoontheleft = logoontheleft
+	logoontheleftFormCallback.formGroup = formGroup
+
+	logoontheleftFormCallback.CreationMode = (logoontheleft == nil)
+
+	return
+}
+
+type LogoOnTheLeftFormCallback struct {
+	logoontheleft *models.LogoOnTheLeft
+
+	// If the form call is called on the creation of a new instnace
+	CreationMode bool
+
+	probe *Probe
+
+	formGroup *table.FormGroup
+}
+
+func (logoontheleftFormCallback *LogoOnTheLeftFormCallback) OnSave() {
+
+	// log.Println("LogoOnTheLeftFormCallback, OnSave")
+
+	// checkout formStage to have the form group on the stage synchronized with the
+	// back repo (and front repo)
+	logoontheleftFormCallback.probe.formStage.Checkout()
+
+	if logoontheleftFormCallback.logoontheleft == nil {
+		logoontheleftFormCallback.logoontheleft = new(models.LogoOnTheLeft).Stage(logoontheleftFormCallback.probe.stageOfInterest)
+	}
+	logoontheleft_ := logoontheleftFormCallback.logoontheleft
+	_ = logoontheleft_
+
+	for _, formDiv := range logoontheleftFormCallback.formGroup.FormDivs {
+		switch formDiv.Name {
+		// insertion point per field
+		case "Name":
+			FormDivBasicFieldToField(&(logoontheleft_.Name), formDiv)
+		case "Width":
+			FormDivBasicFieldToField(&(logoontheleft_.Width), formDiv)
+		case "Height":
+			FormDivBasicFieldToField(&(logoontheleft_.Height), formDiv)
+		case "SVG":
+			FormDivBasicFieldToField(&(logoontheleft_.SVG), formDiv)
+		}
+	}
+
+	// manage the suppress operation
+	if logoontheleftFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		logoontheleft_.Unstage(logoontheleftFormCallback.probe.stageOfInterest)
+	}
+
+	logoontheleftFormCallback.probe.stageOfInterest.Commit()
+	updateAndCommitTable[models.LogoOnTheLeft](
+		logoontheleftFormCallback.probe,
+	)
+	logoontheleftFormCallback.probe.tableStage.Commit()
+
+	// display a new form by reset the form stage
+	if logoontheleftFormCallback.CreationMode || logoontheleftFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		logoontheleftFormCallback.probe.formStage.Reset()
+		newFormGroup := (&table.FormGroup{
+			Name: FormName,
+		}).Stage(logoontheleftFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__LogoOnTheLeftFormCallback(
+			nil,
+			logoontheleftFormCallback.probe,
+			newFormGroup,
+		)
+		logoontheleft := new(models.LogoOnTheLeft)
+		FillUpForm(logoontheleft, newFormGroup, logoontheleftFormCallback.probe)
+		logoontheleftFormCallback.probe.formStage.Commit()
+	}
+
+	updateAndCommitTree(logoontheleftFormCallback.probe)
+}
+func __gong__New__LogoOnTheRightFormCallback(
+	logoontheright *models.LogoOnTheRight,
+	probe *Probe,
+	formGroup *table.FormGroup,
+) (logoontherightFormCallback *LogoOnTheRightFormCallback) {
+	logoontherightFormCallback = new(LogoOnTheRightFormCallback)
+	logoontherightFormCallback.probe = probe
+	logoontherightFormCallback.logoontheright = logoontheright
+	logoontherightFormCallback.formGroup = formGroup
+
+	logoontherightFormCallback.CreationMode = (logoontheright == nil)
+
+	return
+}
+
+type LogoOnTheRightFormCallback struct {
+	logoontheright *models.LogoOnTheRight
+
+	// If the form call is called on the creation of a new instnace
+	CreationMode bool
+
+	probe *Probe
+
+	formGroup *table.FormGroup
+}
+
+func (logoontherightFormCallback *LogoOnTheRightFormCallback) OnSave() {
+
+	// log.Println("LogoOnTheRightFormCallback, OnSave")
+
+	// checkout formStage to have the form group on the stage synchronized with the
+	// back repo (and front repo)
+	logoontherightFormCallback.probe.formStage.Checkout()
+
+	if logoontherightFormCallback.logoontheright == nil {
+		logoontherightFormCallback.logoontheright = new(models.LogoOnTheRight).Stage(logoontherightFormCallback.probe.stageOfInterest)
+	}
+	logoontheright_ := logoontherightFormCallback.logoontheright
+	_ = logoontheright_
+
+	for _, formDiv := range logoontherightFormCallback.formGroup.FormDivs {
+		switch formDiv.Name {
+		// insertion point per field
+		case "Name":
+			FormDivBasicFieldToField(&(logoontheright_.Name), formDiv)
+		case "Width":
+			FormDivBasicFieldToField(&(logoontheright_.Width), formDiv)
+		case "Height":
+			FormDivBasicFieldToField(&(logoontheright_.Height), formDiv)
+		case "SVG":
+			FormDivBasicFieldToField(&(logoontheright_.SVG), formDiv)
+		}
+	}
+
+	// manage the suppress operation
+	if logoontherightFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		logoontheright_.Unstage(logoontherightFormCallback.probe.stageOfInterest)
+	}
+
+	logoontherightFormCallback.probe.stageOfInterest.Commit()
+	updateAndCommitTable[models.LogoOnTheRight](
+		logoontherightFormCallback.probe,
+	)
+	logoontherightFormCallback.probe.tableStage.Commit()
+
+	// display a new form by reset the form stage
+	if logoontherightFormCallback.CreationMode || logoontherightFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		logoontherightFormCallback.probe.formStage.Reset()
+		newFormGroup := (&table.FormGroup{
+			Name: FormName,
+		}).Stage(logoontherightFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__LogoOnTheRightFormCallback(
+			nil,
+			logoontherightFormCallback.probe,
+			newFormGroup,
+		)
+		logoontheright := new(models.LogoOnTheRight)
+		FillUpForm(logoontheright, newFormGroup, logoontherightFormCallback.probe)
+		logoontherightFormCallback.probe.formStage.Commit()
+	}
+
+	updateAndCommitTree(logoontherightFormCallback.probe)
+}
+func __gong__New__MarkdownFormCallback(
+	markdown *models.Markdown,
+	probe *Probe,
+	formGroup *table.FormGroup,
+) (markdownFormCallback *MarkdownFormCallback) {
+	markdownFormCallback = new(MarkdownFormCallback)
+	markdownFormCallback.probe = probe
+	markdownFormCallback.markdown = markdown
+	markdownFormCallback.formGroup = formGroup
+
+	markdownFormCallback.CreationMode = (markdown == nil)
+
+	return
+}
+
+type MarkdownFormCallback struct {
+	markdown *models.Markdown
+
+	// If the form call is called on the creation of a new instnace
+	CreationMode bool
+
+	probe *Probe
+
+	formGroup *table.FormGroup
+}
+
+func (markdownFormCallback *MarkdownFormCallback) OnSave() {
+
+	// log.Println("MarkdownFormCallback, OnSave")
+
+	// checkout formStage to have the form group on the stage synchronized with the
+	// back repo (and front repo)
+	markdownFormCallback.probe.formStage.Checkout()
+
+	if markdownFormCallback.markdown == nil {
+		markdownFormCallback.markdown = new(models.Markdown).Stage(markdownFormCallback.probe.stageOfInterest)
+	}
+	markdown_ := markdownFormCallback.markdown
+	_ = markdown_
+
+	for _, formDiv := range markdownFormCallback.formGroup.FormDivs {
+		switch formDiv.Name {
+		// insertion point per field
+		case "Name":
+			FormDivBasicFieldToField(&(markdown_.Name), formDiv)
+		case "StackName":
+			FormDivBasicFieldToField(&(markdown_.StackName), formDiv)
+		}
+	}
+
+	// manage the suppress operation
+	if markdownFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		markdown_.Unstage(markdownFormCallback.probe.stageOfInterest)
+	}
+
+	markdownFormCallback.probe.stageOfInterest.Commit()
+	updateAndCommitTable[models.Markdown](
+		markdownFormCallback.probe,
+	)
+	markdownFormCallback.probe.tableStage.Commit()
+
+	// display a new form by reset the form stage
+	if markdownFormCallback.CreationMode || markdownFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		markdownFormCallback.probe.formStage.Reset()
+		newFormGroup := (&table.FormGroup{
+			Name: FormName,
+		}).Stage(markdownFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__MarkdownFormCallback(
+			nil,
+			markdownFormCallback.probe,
+			newFormGroup,
+		)
+		markdown := new(models.Markdown)
+		FillUpForm(markdown, newFormGroup, markdownFormCallback.probe)
+		markdownFormCallback.probe.formStage.Commit()
+	}
+
+	updateAndCommitTree(markdownFormCallback.probe)
 }
 func __gong__New__SliderFormCallback(
 	slider *models.Slider,
@@ -1028,6 +1415,83 @@ func (tableFormCallback *TableFormCallback) OnSave() {
 
 	updateAndCommitTree(tableFormCallback.probe)
 }
+func __gong__New__TitleFormCallback(
+	title *models.Title,
+	probe *Probe,
+	formGroup *table.FormGroup,
+) (titleFormCallback *TitleFormCallback) {
+	titleFormCallback = new(TitleFormCallback)
+	titleFormCallback.probe = probe
+	titleFormCallback.title = title
+	titleFormCallback.formGroup = formGroup
+
+	titleFormCallback.CreationMode = (title == nil)
+
+	return
+}
+
+type TitleFormCallback struct {
+	title *models.Title
+
+	// If the form call is called on the creation of a new instnace
+	CreationMode bool
+
+	probe *Probe
+
+	formGroup *table.FormGroup
+}
+
+func (titleFormCallback *TitleFormCallback) OnSave() {
+
+	// log.Println("TitleFormCallback, OnSave")
+
+	// checkout formStage to have the form group on the stage synchronized with the
+	// back repo (and front repo)
+	titleFormCallback.probe.formStage.Checkout()
+
+	if titleFormCallback.title == nil {
+		titleFormCallback.title = new(models.Title).Stage(titleFormCallback.probe.stageOfInterest)
+	}
+	title_ := titleFormCallback.title
+	_ = title_
+
+	for _, formDiv := range titleFormCallback.formGroup.FormDivs {
+		switch formDiv.Name {
+		// insertion point per field
+		case "Name":
+			FormDivBasicFieldToField(&(title_.Name), formDiv)
+		}
+	}
+
+	// manage the suppress operation
+	if titleFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		title_.Unstage(titleFormCallback.probe.stageOfInterest)
+	}
+
+	titleFormCallback.probe.stageOfInterest.Commit()
+	updateAndCommitTable[models.Title](
+		titleFormCallback.probe,
+	)
+	titleFormCallback.probe.tableStage.Commit()
+
+	// display a new form by reset the form stage
+	if titleFormCallback.CreationMode || titleFormCallback.formGroup.HasSuppressButtonBeenPressed {
+		titleFormCallback.probe.formStage.Reset()
+		newFormGroup := (&table.FormGroup{
+			Name: FormName,
+		}).Stage(titleFormCallback.probe.formStage)
+		newFormGroup.OnSave = __gong__New__TitleFormCallback(
+			nil,
+			titleFormCallback.probe,
+			newFormGroup,
+		)
+		title := new(models.Title)
+		FillUpForm(title, newFormGroup, titleFormCallback.probe)
+		titleFormCallback.probe.formStage.Commit()
+	}
+
+	updateAndCommitTree(titleFormCallback.probe)
+}
 func __gong__New__ToneFormCallback(
 	tone *models.Tone,
 	probe *Probe,
@@ -1235,6 +1699,33 @@ func (viewFormCallback *ViewFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(view_.Name), formDiv)
 		case "ShowViewName":
 			FormDivBasicFieldToField(&(view_.ShowViewName), formDiv)
+		case "RootAsSplitAreas":
+			instanceSet := *models.GetGongstructInstancesSetFromPointerType[*models.AsSplitArea](viewFormCallback.probe.stageOfInterest)
+			instanceSlice := make([]*models.AsSplitArea, 0)
+
+			// make a map of all instances by their ID
+			map_id_instances := make(map[uint]*models.AsSplitArea)
+
+			for instance := range instanceSet {
+				id := models.GetOrderPointerGongstruct(
+					viewFormCallback.probe.stageOfInterest,
+					instance,
+				)
+				map_id_instances[id] = instance
+			}
+
+			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+
+			if err != nil {
+				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
+			}
+			for _, id := range ids {
+				instanceSlice = append(instanceSlice, map_id_instances[id])
+			}
+			view_.RootAsSplitAreas = instanceSlice
+
+		case "IsSelectedView":
+			FormDivBasicFieldToField(&(view_.IsSelectedView), formDiv)
 		}
 	}
 

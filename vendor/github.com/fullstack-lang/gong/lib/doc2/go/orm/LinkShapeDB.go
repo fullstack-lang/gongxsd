@@ -63,12 +63,6 @@ type LinkShapeDB struct {
 	// Declation for basic field linkshapeDB.Name
 	Name_Data sql.NullString
 
-	// Declation for basic field linkshapeDB.Identifier
-	Identifier_Data sql.NullString
-
-	// Declation for basic field linkshapeDB.Fieldtypename
-	Fieldtypename_Data sql.NullString
-
 	// Declation for basic field linkshapeDB.FieldOffsetX
 	FieldOffsetX_Data sql.NullFloat64
 
@@ -138,9 +132,9 @@ type LinkShapeWOP struct {
 
 	Name string `xlsx:"1"`
 
-	Identifier string `xlsx:"2"`
+	IdentifierMeta any `xlsx:"2"`
 
-	Fieldtypename string `xlsx:"3"`
+	FieldTypeIdentifierMeta any `xlsx:"3"`
 
 	FieldOffsetX float64 `xlsx:"4"`
 
@@ -178,8 +172,8 @@ var LinkShape_Fields = []string{
 	// insertion for WOP basic fields
 	"ID",
 	"Name",
-	"Identifier",
-	"Fieldtypename",
+	"IdentifierMeta",
+	"FieldTypeIdentifierMeta",
 	"FieldOffsetX",
 	"FieldOffsetY",
 	"TargetMultiplicity",
@@ -475,12 +469,6 @@ func (linkshapeDB *LinkShapeDB) CopyBasicFieldsFromLinkShape(linkshape *models.L
 	linkshapeDB.Name_Data.String = linkshape.Name
 	linkshapeDB.Name_Data.Valid = true
 
-	linkshapeDB.Identifier_Data.String = linkshape.Identifier
-	linkshapeDB.Identifier_Data.Valid = true
-
-	linkshapeDB.Fieldtypename_Data.String = linkshape.Fieldtypename
-	linkshapeDB.Fieldtypename_Data.Valid = true
-
 	linkshapeDB.FieldOffsetX_Data.Float64 = linkshape.FieldOffsetX
 	linkshapeDB.FieldOffsetX_Data.Valid = true
 
@@ -533,12 +521,6 @@ func (linkshapeDB *LinkShapeDB) CopyBasicFieldsFromLinkShape_WOP(linkshape *mode
 
 	linkshapeDB.Name_Data.String = linkshape.Name
 	linkshapeDB.Name_Data.Valid = true
-
-	linkshapeDB.Identifier_Data.String = linkshape.Identifier
-	linkshapeDB.Identifier_Data.Valid = true
-
-	linkshapeDB.Fieldtypename_Data.String = linkshape.Fieldtypename
-	linkshapeDB.Fieldtypename_Data.Valid = true
 
 	linkshapeDB.FieldOffsetX_Data.Float64 = linkshape.FieldOffsetX
 	linkshapeDB.FieldOffsetX_Data.Valid = true
@@ -593,12 +575,6 @@ func (linkshapeDB *LinkShapeDB) CopyBasicFieldsFromLinkShapeWOP(linkshape *LinkS
 	linkshapeDB.Name_Data.String = linkshape.Name
 	linkshapeDB.Name_Data.Valid = true
 
-	linkshapeDB.Identifier_Data.String = linkshape.Identifier
-	linkshapeDB.Identifier_Data.Valid = true
-
-	linkshapeDB.Fieldtypename_Data.String = linkshape.Fieldtypename
-	linkshapeDB.Fieldtypename_Data.Valid = true
-
 	linkshapeDB.FieldOffsetX_Data.Float64 = linkshape.FieldOffsetX
 	linkshapeDB.FieldOffsetX_Data.Valid = true
 
@@ -649,8 +625,6 @@ func (linkshapeDB *LinkShapeDB) CopyBasicFieldsFromLinkShapeWOP(linkshape *LinkS
 func (linkshapeDB *LinkShapeDB) CopyBasicFieldsToLinkShape(linkshape *models.LinkShape) {
 	// insertion point for checkout of basic fields (back repo to stage)
 	linkshape.Name = linkshapeDB.Name_Data.String
-	linkshape.Identifier = linkshapeDB.Identifier_Data.String
-	linkshape.Fieldtypename = linkshapeDB.Fieldtypename_Data.String
 	linkshape.FieldOffsetX = linkshapeDB.FieldOffsetX_Data.Float64
 	linkshape.FieldOffsetY = linkshapeDB.FieldOffsetY_Data.Float64
 	linkshape.TargetMultiplicity.FromString(linkshapeDB.TargetMultiplicity_Data.String)
@@ -672,8 +646,6 @@ func (linkshapeDB *LinkShapeDB) CopyBasicFieldsToLinkShape(linkshape *models.Lin
 func (linkshapeDB *LinkShapeDB) CopyBasicFieldsToLinkShape_WOP(linkshape *models.LinkShape_WOP) {
 	// insertion point for checkout of basic fields (back repo to stage)
 	linkshape.Name = linkshapeDB.Name_Data.String
-	linkshape.Identifier = linkshapeDB.Identifier_Data.String
-	linkshape.Fieldtypename = linkshapeDB.Fieldtypename_Data.String
 	linkshape.FieldOffsetX = linkshapeDB.FieldOffsetX_Data.Float64
 	linkshape.FieldOffsetY = linkshapeDB.FieldOffsetY_Data.Float64
 	linkshape.TargetMultiplicity.FromString(linkshapeDB.TargetMultiplicity_Data.String)
@@ -696,8 +668,6 @@ func (linkshapeDB *LinkShapeDB) CopyBasicFieldsToLinkShapeWOP(linkshape *LinkSha
 	linkshape.ID = int(linkshapeDB.ID)
 	// insertion point for checkout of basic fields (back repo to stage)
 	linkshape.Name = linkshapeDB.Name_Data.String
-	linkshape.Identifier = linkshapeDB.Identifier_Data.String
-	linkshape.Fieldtypename = linkshapeDB.Fieldtypename_Data.String
 	linkshape.FieldOffsetX = linkshapeDB.FieldOffsetX_Data.Float64
 	linkshape.FieldOffsetY = linkshapeDB.FieldOffsetY_Data.Float64
 	linkshape.TargetMultiplicity.FromString(linkshapeDB.TargetMultiplicity_Data.String)

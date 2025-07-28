@@ -8,6 +8,7 @@ import (
 	_ "github.com/fullstack-lang/gong/lib/doc/ng-github.com-fullstack-lang-gong-lib-doc"
 	_ "github.com/fullstack-lang/gong/lib/gantt/ng-github.com-fullstack-lang-gong-lib-gantt"
 	_ "github.com/fullstack-lang/gong/lib/load/ng-github.com-fullstack-lang-gong-lib-load"
+	_ "github.com/fullstack-lang/gong/lib/markdown/ng-github.com-fullstack-lang-gong-lib-markdown"
 	_ "github.com/fullstack-lang/gong/lib/sim/ng-github.com-fullstack-lang-gong-lib-sim"
 	_ "github.com/fullstack-lang/gong/lib/slider/ng-github.com-fullstack-lang-gong-lib-slider"
 	_ "github.com/fullstack-lang/gong/lib/svg/ng-github.com-fullstack-lang-gong-lib-svg"
@@ -16,6 +17,18 @@ import (
 	_ "github.com/fullstack-lang/gong/lib/tree/ng-github.com-fullstack-lang-gong-lib-tree"
 	_ "github.com/fullstack-lang/gong/lib/xlsx/ng-github.com-fullstack-lang-gong-lib-xlsx"
 )
+
+// View is the top structuring eleement of the split component
+//
+// There can be many instancied views
+// The one with [models.IsSelectedView] set to true will be displayed
+// (if more than one view has this field to true, the behavior is not specified)
+type View struct {
+	Name             string
+	ShowViewName     bool // by default, a standalone views wont display the
+	RootAsSplitAreas []*AsSplitArea
+	IsSelectedView   bool
+}
 
 type Direction string
 
@@ -44,18 +57,19 @@ type AsSplitArea struct {
 
 	AsSplit *AsSplit
 
-	Button *Button
-	Cursor *Cursor
-	Doc    *Doc
-	Form   *Form
-	Load   *Load
-	Slider *Slider
-	Split  *Split
-	Svg    *Svg
-	Table  *Table
-	Tone   *Tone
-	Tree   *Tree
-	Xlsx   *Xlsx
+	Button   *Button
+	Cursor   *Cursor
+	Doc      *Doc
+	Form     *Form
+	Load     *Load
+	Markdown *Markdown
+	Slider   *Slider
+	Split    *Split
+	Svg      *Svg
+	Table    *Table
+	Tone     *Tone
+	Tree     *Tree
+	Xlsx     *Xlsx
 
 	HasDiv   bool
 	DivStyle string // in case of div, the div style
@@ -84,6 +98,11 @@ type Form struct {
 }
 
 type Load struct {
+	Name      string // name of the stack
+	StackName string
+}
+
+type Markdown struct {
 	Name      string // name of the stack
 	StackName string
 }
@@ -126,8 +145,38 @@ type Xlsx struct {
 	StackName string
 }
 
-type View struct {
-	Name             string
-	ShowViewName     bool // by default, a standalone views wont display the
-	RootAsSplitAreas []*AsSplitArea
+// You can configure the browser tab title and favicon dynamically in Angular
+type Title struct {
+	Name string
+}
+
+// You can configure the browser tab title and favicon dynamically in Angular
+// creates one instance and it will set the browser accordingly
+type FavIcon struct {
+	Name string
+
+	//gong:width 600 gong:height 300
+	SVG string
+}
+
+// LogoOnTheLeft displayed in the banner
+type LogoOnTheLeft struct {
+	Name string
+
+	Width  int
+	Height int
+
+	//gong:width 600 gong:height 300
+	SVG string
+}
+
+// LogoOnTheLeft displayed in the banner
+type LogoOnTheRight struct {
+	Name string
+
+	Width  int
+	Height int
+
+	//gong:width 600 gong:height 300
+	SVG string
 }

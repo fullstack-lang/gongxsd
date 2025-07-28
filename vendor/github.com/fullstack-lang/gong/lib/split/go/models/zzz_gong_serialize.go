@@ -21,12 +21,17 @@ func SerializeStage(stage *Stage, filename string) {
 		SerializeExcelizePointerToGongstruct[*Button](stage, f)
 		SerializeExcelizePointerToGongstruct[*Cursor](stage, f)
 		SerializeExcelizePointerToGongstruct[*Doc](stage, f)
+		SerializeExcelizePointerToGongstruct[*FavIcon](stage, f)
 		SerializeExcelizePointerToGongstruct[*Form](stage, f)
 		SerializeExcelizePointerToGongstruct[*Load](stage, f)
+		SerializeExcelizePointerToGongstruct[*LogoOnTheLeft](stage, f)
+		SerializeExcelizePointerToGongstruct[*LogoOnTheRight](stage, f)
+		SerializeExcelizePointerToGongstruct[*Markdown](stage, f)
 		SerializeExcelizePointerToGongstruct[*Slider](stage, f)
 		SerializeExcelizePointerToGongstruct[*Split](stage, f)
 		SerializeExcelizePointerToGongstruct[*Svg](stage, f)
 		SerializeExcelizePointerToGongstruct[*Table](stage, f)
+		SerializeExcelizePointerToGongstruct[*Title](stage, f)
 		SerializeExcelizePointerToGongstruct[*Tone](stage, f)
 		SerializeExcelizePointerToGongstruct[*Tree](stage, f)
 		SerializeExcelizePointerToGongstruct[*View](stage, f)
@@ -143,7 +148,7 @@ func SerializeStage(stage *Stage, filename string) {
 			}
 		}
 	}
-	
+
 	var tab ExcelizeTabulator
 	tab.SetExcelizeFile(f)
 	{
@@ -152,7 +157,13 @@ func SerializeStage(stage *Stage, filename string) {
 			fmt.Println("cannot write xl file : ", err)
 		}
 	}
-		
+}
+
+func shortenString(s string) string {
+	if len(s) > 31 {
+		return s[:31]
+	}
+	return s
 }
 
 // Tabulator is an interface for writing to a table strings
@@ -164,6 +175,8 @@ type Tabulator interface {
 
 func Serialize[Type Gongstruct](stage *Stage, tab Tabulator) {
 	sheetName := GetGongstructName[Type]()
+
+	sheetName = shortenString(sheetName)
 
 	// Create a new sheet.
 	tab.AddSheet(sheetName)
@@ -208,6 +221,8 @@ func (tab *ExcelizeTabulator) AddCell(sheetName string, rowId, columnIndex int, 
 
 func SerializeExcelizePointerToGongstruct[Type PointerToGongstruct](stage *Stage, f *excelize.File) {
 	sheetName := GetPointerToGongstructName[Type]()
+
+	sheetName = shortenString(sheetName)
 
 	// Create a new sheet.
 	f.NewSheet(sheetName)
@@ -262,6 +277,8 @@ func SerializeExcelizePointerToGongstruct[Type PointerToGongstruct](stage *Stage
 
 func SerializeExcelize[Type Gongstruct](stage *Stage, f *excelize.File) {
 	sheetName := GetGongstructName[Type]()
+
+	sheetName = shortenString(sheetName)
 
 	// Create a new sheet.
 	f.NewSheet(sheetName)

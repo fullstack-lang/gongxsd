@@ -17,13 +17,8 @@ type GongStructShape struct {
 	Y float64
 
 	// Identifier is the identifier of the struct referenced by the shape in the modeled package
-	//gong:ident
-	Identifier string
-
-	// gongdoc can be integrated in a runtime application
-	// the application can then set up the number of instances of Struct
-	ShowNbInstances bool
-	NbInstances     int
+	//gong:meta
+	IdentifierMeta any
 
 	// models of the composition of Field
 	AttributeShapes []*AttributeShape
@@ -45,7 +40,7 @@ func (classdiagram *Classdiagram) HasGongStructShape(gongstructName string) (fou
 	for _, _gongstructshape := range classdiagram.GongStructShapes {
 
 		// strange behavior when the gongstructshape is remove within the loop
-		if IdentifierToGongObjectName(_gongstructshape.Identifier) == gongstructName && !foundGongStructShape {
+		if IdentifierMetaToGongStructName(_gongstructshape.IdentifierMeta) == gongstructName && !foundGongStructShape {
 			foundGongStructShape = true
 			gongstructshape = _gongstructshape
 		}
@@ -72,13 +67,13 @@ func (classdiagram *Classdiagram) RemoveGongStructShape(stage *Stage, gongstruct
 	for _, fromGongStructShape := range classdiagram.GongStructShapes {
 
 		newSliceOfLinks := make([]*LinkShape, 0)
-		for _, link := range fromGongStructShape.LinkShapes {
-			typeOfTheField := IdentifierToGongObjectName(gongstructshape.Identifier)
-			typeOfTheLink := IdentifierToGongObjectName(link.Fieldtypename)
+		for _, linkShape := range fromGongStructShape.LinkShapes {
+			typeOfTheField := IdentifierMetaToGongStructName(gongstructshape.IdentifierMeta)
+			typeOfTheLink := IdentifierMetaToGongStructName(linkShape.FieldTypeIdentifierMeta)
 			if typeOfTheLink == typeOfTheField {
-				link.Unstage(stage)
+				linkShape.Unstage(stage)
 			} else {
-				newSliceOfLinks = append(newSliceOfLinks, link)
+				newSliceOfLinks = append(newSliceOfLinks, linkShape)
 			}
 		}
 		fromGongStructShape.LinkShapes = newSliceOfLinks
@@ -99,10 +94,10 @@ func (classdiagram *Classdiagram) RemoveGongStructShape(stage *Stage, gongstruct
 		if noteShapeLink.Name == gongstructName {
 
 			// get the note shape
-			noteShape := map_NoteShapeLink_NodeShape[noteShapeLink]
+			noteShapes := map_NoteShapeLink_NodeShape[noteShapeLink]
 
 			// remove it from the slice of links
-			noteShape.GongNoteLinkShapes = remove(noteShape.GongNoteLinkShapes, noteShapeLink)
+			noteShapes[0].GongNoteLinkShapes = remove(noteShapes[0].GongNoteLinkShapes, noteShapeLink)
 
 			noteShapeLink.Unstage(stage)
 		}
@@ -113,26 +108,26 @@ func (classdiagram *Classdiagram) RemoveGongStructShape(stage *Stage, gongstruct
 	// log.Println("RemoveGongStructShape, after commit, nb ", Stage.BackRepo.GetLastCommitFromBackNb())
 }
 
-func (classdiagram *Classdiagram) AddGongStructShape(stage *Stage, diagramPackage *DiagramPackage, gongstructshapeName string) {
+func (classdiagram *Classdiagram) AddGongStructShape(stage *Stage, diagramPackage *DiagramPackage, gongStructShapeName string) {
 
-	var gongstructshape GongStructShape
-	gongstructshape.Name = classdiagram.Name + "-" + gongstructshapeName
-	gongstructshape.Identifier = GongStructNameToIdentifier(gongstructshapeName)
-	gongstructshape.Width = 240
-	gongstructshape.Height = 63
+	var gongStructShape GongStructShape
+	gongStructShape.Name = classdiagram.Name + "-" + gongStructShapeName
+	// gongStructShape.Identifier = GongStructNameToIdentifier(gongStructShapeName)
+
+	// for instanciation of the struct ref_models.Astruct{}
+	gongStructShape.IdentifierMeta = GongStructNameToIdentifier(gongStructShapeName) + "{}"
+	gongStructShape.Width = 240
+	gongStructShape.Height = 63
 
 	// attach GongStruct to gongstructshape
-	nbInstances, ok := diagramPackage.Map_Identifier_NbInstances[gongstructshape.Identifier]
-	if ok {
-		gongstructshape.ShowNbInstances = true
-		gongstructshape.NbInstances = nbInstances
-	}
-	gongstructshape.Stage(stage)
+	// nbInstances, ok := diagramPackage.Map_Identifier_NbInstances[gongStructShapeName]
 
-	gongstructshape.X = float64(int(rand.Float32()*100) + 10)
-	gongstructshape.Y = float64(int(rand.Float32()*100) + 10)
+	gongStructShape.Stage(stage)
 
-	classdiagram.GongStructShapes = append(classdiagram.GongStructShapes, &gongstructshape)
+	gongStructShape.X = float64(int(rand.Float32()*100) + 10)
+	gongStructShape.Y = float64(int(rand.Float32()*100) + 10)
+
+	classdiagram.GongStructShapes = append(classdiagram.GongStructShapes, &gongStructShape)
 
 	// log.Println("AddGongStructShape, before commit, nb ", Stage.BackRepo.GetLastCommitFromBackNb())
 	stage.Commit()
