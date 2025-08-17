@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/test/reqif/go/db"
 	"github.com/fullstack-lang/gongxsd/test/reqif/go/models"
 )
 
@@ -89,7 +90,7 @@ type ATTRIBUTE_DEFINITION_REALDB struct {
 
 	// Declation for basic field attribute_definition_realDB.LONG_NAME
 	LONG_NAME_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	ATTRIBUTE_DEFINITION_REALPointersEncoding
@@ -147,17 +148,17 @@ type BackRepoATTRIBUTE_DEFINITION_REALStruct struct {
 	// stores ATTRIBUTE_DEFINITION_REAL according to their gorm ID
 	Map_ATTRIBUTE_DEFINITION_REALDBID_ATTRIBUTE_DEFINITION_REALPtr map[uint]*models.ATTRIBUTE_DEFINITION_REAL
 
-	db *gorm.DB
+	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoATTRIBUTE_DEFINITION_REAL *BackRepoATTRIBUTE_DEFINITION_REALStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoATTRIBUTE_DEFINITION_REAL *BackRepoATTRIBUTE_DEFINITION_REALStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoATTRIBUTE_DEFINITION_REAL.stage
 	return
 }
 
-func (backRepoATTRIBUTE_DEFINITION_REAL *BackRepoATTRIBUTE_DEFINITION_REALStruct) GetDB() *gorm.DB {
+func (backRepoATTRIBUTE_DEFINITION_REAL *BackRepoATTRIBUTE_DEFINITION_REALStruct) GetDB() db.DBInterface {
 	return backRepoATTRIBUTE_DEFINITION_REAL.db
 }
 
@@ -170,9 +171,19 @@ func (backRepoATTRIBUTE_DEFINITION_REAL *BackRepoATTRIBUTE_DEFINITION_REALStruct
 
 // BackRepoATTRIBUTE_DEFINITION_REAL.CommitPhaseOne commits all staged instances of ATTRIBUTE_DEFINITION_REAL to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoATTRIBUTE_DEFINITION_REAL *BackRepoATTRIBUTE_DEFINITION_REALStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoATTRIBUTE_DEFINITION_REAL *BackRepoATTRIBUTE_DEFINITION_REALStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var attribute_definition_reals []*models.ATTRIBUTE_DEFINITION_REAL
 	for attribute_definition_real := range stage.ATTRIBUTE_DEFINITION_REALs {
+		attribute_definition_reals = append(attribute_definition_reals, attribute_definition_real)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(attribute_definition_reals, func(i, j int) bool {
+		return stage.ATTRIBUTE_DEFINITION_REALMap_Staged_Order[attribute_definition_reals[i]] < stage.ATTRIBUTE_DEFINITION_REALMap_Staged_Order[attribute_definition_reals[j]]
+	})
+
+	for _, attribute_definition_real := range attribute_definition_reals {
 		backRepoATTRIBUTE_DEFINITION_REAL.CommitPhaseOneInstance(attribute_definition_real)
 	}
 
@@ -194,9 +205,10 @@ func (backRepoATTRIBUTE_DEFINITION_REAL *BackRepoATTRIBUTE_DEFINITION_REALStruct
 
 	// attribute_definition_real is not staged anymore, remove attribute_definition_realDB
 	attribute_definition_realDB := backRepoATTRIBUTE_DEFINITION_REAL.Map_ATTRIBUTE_DEFINITION_REALDBID_ATTRIBUTE_DEFINITION_REALDB[id]
-	query := backRepoATTRIBUTE_DEFINITION_REAL.db.Unscoped().Delete(&attribute_definition_realDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoATTRIBUTE_DEFINITION_REAL.db.Unscoped()
+	_, err := db.Delete(attribute_definition_realDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -220,9 +232,9 @@ func (backRepoATTRIBUTE_DEFINITION_REAL *BackRepoATTRIBUTE_DEFINITION_REALStruct
 	var attribute_definition_realDB ATTRIBUTE_DEFINITION_REALDB
 	attribute_definition_realDB.CopyBasicFieldsFromATTRIBUTE_DEFINITION_REAL(attribute_definition_real)
 
-	query := backRepoATTRIBUTE_DEFINITION_REAL.db.Create(&attribute_definition_realDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoATTRIBUTE_DEFINITION_REAL.db.Create(&attribute_definition_realDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -290,9 +302,9 @@ func (backRepoATTRIBUTE_DEFINITION_REAL *BackRepoATTRIBUTE_DEFINITION_REALStruct
 			attribute_definition_realDB.TYPEID.Valid = true
 		}
 
-		query := backRepoATTRIBUTE_DEFINITION_REAL.db.Save(&attribute_definition_realDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoATTRIBUTE_DEFINITION_REAL.db.Save(attribute_definition_realDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -311,9 +323,9 @@ func (backRepoATTRIBUTE_DEFINITION_REAL *BackRepoATTRIBUTE_DEFINITION_REALStruct
 func (backRepoATTRIBUTE_DEFINITION_REAL *BackRepoATTRIBUTE_DEFINITION_REALStruct) CheckoutPhaseOne() (Error error) {
 
 	attribute_definition_realDBArray := make([]ATTRIBUTE_DEFINITION_REALDB, 0)
-	query := backRepoATTRIBUTE_DEFINITION_REAL.db.Find(&attribute_definition_realDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoATTRIBUTE_DEFINITION_REAL.db.Find(&attribute_definition_realDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -403,21 +415,69 @@ func (backRepoATTRIBUTE_DEFINITION_REAL *BackRepoATTRIBUTE_DEFINITION_REALStruct
 func (attribute_definition_realDB *ATTRIBUTE_DEFINITION_REALDB) DecodePointers(backRepo *BackRepoStruct, attribute_definition_real *models.ATTRIBUTE_DEFINITION_REAL) {
 
 	// insertion point for checkout of pointer encoding
-	// ALTERNATIVE_ID field
-	attribute_definition_real.ALTERNATIVE_ID = nil
-	if attribute_definition_realDB.ALTERNATIVE_IDID.Int64 != 0 {
-		attribute_definition_real.ALTERNATIVE_ID = backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(attribute_definition_realDB.ALTERNATIVE_IDID.Int64)]
+	// ALTERNATIVE_ID field	
+	{
+		id := attribute_definition_realDB.ALTERNATIVE_IDID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: attribute_definition_real.ALTERNATIVE_ID, unknown pointer id", id)
+				attribute_definition_real.ALTERNATIVE_ID = nil
+			} else {
+				// updates only if field has changed
+				if attribute_definition_real.ALTERNATIVE_ID == nil || attribute_definition_real.ALTERNATIVE_ID != tmp {
+					attribute_definition_real.ALTERNATIVE_ID = tmp
+				}
+			}
+		} else {
+			attribute_definition_real.ALTERNATIVE_ID = nil
+		}
 	}
-	// DEFAULT_VALUE field
-	attribute_definition_real.DEFAULT_VALUE = nil
-	if attribute_definition_realDB.DEFAULT_VALUEID.Int64 != 0 {
-		attribute_definition_real.DEFAULT_VALUE = backRepo.BackRepoA_ATTRIBUTE_VALUE_REAL.Map_A_ATTRIBUTE_VALUE_REALDBID_A_ATTRIBUTE_VALUE_REALPtr[uint(attribute_definition_realDB.DEFAULT_VALUEID.Int64)]
+	
+	// DEFAULT_VALUE field	
+	{
+		id := attribute_definition_realDB.DEFAULT_VALUEID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoA_ATTRIBUTE_VALUE_REAL.Map_A_ATTRIBUTE_VALUE_REALDBID_A_ATTRIBUTE_VALUE_REALPtr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: attribute_definition_real.DEFAULT_VALUE, unknown pointer id", id)
+				attribute_definition_real.DEFAULT_VALUE = nil
+			} else {
+				// updates only if field has changed
+				if attribute_definition_real.DEFAULT_VALUE == nil || attribute_definition_real.DEFAULT_VALUE != tmp {
+					attribute_definition_real.DEFAULT_VALUE = tmp
+				}
+			}
+		} else {
+			attribute_definition_real.DEFAULT_VALUE = nil
+		}
 	}
-	// TYPE field
-	attribute_definition_real.TYPE = nil
-	if attribute_definition_realDB.TYPEID.Int64 != 0 {
-		attribute_definition_real.TYPE = backRepo.BackRepoA_DATATYPE_DEFINITION_REAL_REF.Map_A_DATATYPE_DEFINITION_REAL_REFDBID_A_DATATYPE_DEFINITION_REAL_REFPtr[uint(attribute_definition_realDB.TYPEID.Int64)]
+	
+	// TYPE field	
+	{
+		id := attribute_definition_realDB.TYPEID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoA_DATATYPE_DEFINITION_REAL_REF.Map_A_DATATYPE_DEFINITION_REAL_REFDBID_A_DATATYPE_DEFINITION_REAL_REFPtr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: attribute_definition_real.TYPE, unknown pointer id", id)
+				attribute_definition_real.TYPE = nil
+			} else {
+				// updates only if field has changed
+				if attribute_definition_real.TYPE == nil || attribute_definition_real.TYPE != tmp {
+					attribute_definition_real.TYPE = tmp
+				}
+			}
+		} else {
+			attribute_definition_real.TYPE = nil
+		}
 	}
+	
 	return
 }
 
@@ -439,7 +499,7 @@ func (backRepo *BackRepoStruct) CheckoutATTRIBUTE_DEFINITION_REAL(attribute_defi
 			var attribute_definition_realDB ATTRIBUTE_DEFINITION_REALDB
 			attribute_definition_realDB.ID = id
 
-			if err := backRepo.BackRepoATTRIBUTE_DEFINITION_REAL.db.First(&attribute_definition_realDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoATTRIBUTE_DEFINITION_REAL.db.First(&attribute_definition_realDB, id); err != nil {
 				log.Fatalln("CheckoutATTRIBUTE_DEFINITION_REAL : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoATTRIBUTE_DEFINITION_REAL.CheckoutPhaseOneInstance(&attribute_definition_realDB)
@@ -646,9 +706,9 @@ func (backRepoATTRIBUTE_DEFINITION_REAL *BackRepoATTRIBUTE_DEFINITION_REALStruct
 
 		attribute_definition_realDB_ID_atBackupTime := attribute_definition_realDB.ID
 		attribute_definition_realDB.ID = 0
-		query := backRepoATTRIBUTE_DEFINITION_REAL.db.Create(attribute_definition_realDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoATTRIBUTE_DEFINITION_REAL.db.Create(attribute_definition_realDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoATTRIBUTE_DEFINITION_REAL.Map_ATTRIBUTE_DEFINITION_REALDBID_ATTRIBUTE_DEFINITION_REALDB[attribute_definition_realDB.ID] = attribute_definition_realDB
 		BackRepoATTRIBUTE_DEFINITION_REALid_atBckpTime_newID[attribute_definition_realDB_ID_atBackupTime] = attribute_definition_realDB.ID
@@ -683,9 +743,9 @@ func (backRepoATTRIBUTE_DEFINITION_REAL *BackRepoATTRIBUTE_DEFINITION_REALStruct
 
 		attribute_definition_realDB_ID_atBackupTime := attribute_definition_realDB.ID
 		attribute_definition_realDB.ID = 0
-		query := backRepoATTRIBUTE_DEFINITION_REAL.db.Create(attribute_definition_realDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoATTRIBUTE_DEFINITION_REAL.db.Create(attribute_definition_realDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoATTRIBUTE_DEFINITION_REAL.Map_ATTRIBUTE_DEFINITION_REALDBID_ATTRIBUTE_DEFINITION_REALDB[attribute_definition_realDB.ID] = attribute_definition_realDB
 		BackRepoATTRIBUTE_DEFINITION_REALid_atBckpTime_newID[attribute_definition_realDB_ID_atBackupTime] = attribute_definition_realDB.ID
@@ -725,9 +785,10 @@ func (backRepoATTRIBUTE_DEFINITION_REAL *BackRepoATTRIBUTE_DEFINITION_REALStruct
 		}
 
 		// update databse with new index encoding
-		query := backRepoATTRIBUTE_DEFINITION_REAL.db.Model(attribute_definition_realDB).Updates(*attribute_definition_realDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoATTRIBUTE_DEFINITION_REAL.db.Model(attribute_definition_realDB)
+		_, err := db.Updates(*attribute_definition_realDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

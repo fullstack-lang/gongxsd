@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/test/reqif/go/db"
 	"github.com/fullstack-lang/gongxsd/test/reqif/go/models"
 )
 
@@ -64,7 +65,7 @@ type A_CHILDRENDB struct {
 
 	// Declation for basic field a_childrenDB.Name
 	Name_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	A_CHILDRENPointersEncoding
@@ -107,17 +108,17 @@ type BackRepoA_CHILDRENStruct struct {
 	// stores A_CHILDREN according to their gorm ID
 	Map_A_CHILDRENDBID_A_CHILDRENPtr map[uint]*models.A_CHILDREN
 
-	db *gorm.DB
+	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoA_CHILDREN *BackRepoA_CHILDRENStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoA_CHILDREN *BackRepoA_CHILDRENStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoA_CHILDREN.stage
 	return
 }
 
-func (backRepoA_CHILDREN *BackRepoA_CHILDRENStruct) GetDB() *gorm.DB {
+func (backRepoA_CHILDREN *BackRepoA_CHILDRENStruct) GetDB() db.DBInterface {
 	return backRepoA_CHILDREN.db
 }
 
@@ -130,9 +131,19 @@ func (backRepoA_CHILDREN *BackRepoA_CHILDRENStruct) GetA_CHILDRENDBFromA_CHILDRE
 
 // BackRepoA_CHILDREN.CommitPhaseOne commits all staged instances of A_CHILDREN to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoA_CHILDREN *BackRepoA_CHILDRENStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoA_CHILDREN *BackRepoA_CHILDRENStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var a_childrens []*models.A_CHILDREN
 	for a_children := range stage.A_CHILDRENs {
+		a_childrens = append(a_childrens, a_children)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(a_childrens, func(i, j int) bool {
+		return stage.A_CHILDRENMap_Staged_Order[a_childrens[i]] < stage.A_CHILDRENMap_Staged_Order[a_childrens[j]]
+	})
+
+	for _, a_children := range a_childrens {
 		backRepoA_CHILDREN.CommitPhaseOneInstance(a_children)
 	}
 
@@ -154,9 +165,10 @@ func (backRepoA_CHILDREN *BackRepoA_CHILDRENStruct) CommitDeleteInstance(id uint
 
 	// a_children is not staged anymore, remove a_childrenDB
 	a_childrenDB := backRepoA_CHILDREN.Map_A_CHILDRENDBID_A_CHILDRENDB[id]
-	query := backRepoA_CHILDREN.db.Unscoped().Delete(&a_childrenDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoA_CHILDREN.db.Unscoped()
+	_, err := db.Delete(a_childrenDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -180,9 +192,9 @@ func (backRepoA_CHILDREN *BackRepoA_CHILDRENStruct) CommitPhaseOneInstance(a_chi
 	var a_childrenDB A_CHILDRENDB
 	a_childrenDB.CopyBasicFieldsFromA_CHILDREN(a_children)
 
-	query := backRepoA_CHILDREN.db.Create(&a_childrenDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoA_CHILDREN.db.Create(&a_childrenDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -232,9 +244,9 @@ func (backRepoA_CHILDREN *BackRepoA_CHILDRENStruct) CommitPhaseTwoInstance(backR
 				append(a_childrenDB.A_CHILDRENPointersEncoding.SPEC_HIERARCHY, int(spec_hierarchyAssocEnd_DB.ID))
 		}
 
-		query := backRepoA_CHILDREN.db.Save(&a_childrenDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoA_CHILDREN.db.Save(a_childrenDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -253,9 +265,9 @@ func (backRepoA_CHILDREN *BackRepoA_CHILDRENStruct) CommitPhaseTwoInstance(backR
 func (backRepoA_CHILDREN *BackRepoA_CHILDRENStruct) CheckoutPhaseOne() (Error error) {
 
 	a_childrenDBArray := make([]A_CHILDRENDB, 0)
-	query := backRepoA_CHILDREN.db.Find(&a_childrenDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoA_CHILDREN.db.Find(&a_childrenDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -375,7 +387,7 @@ func (backRepo *BackRepoStruct) CheckoutA_CHILDREN(a_children *models.A_CHILDREN
 			var a_childrenDB A_CHILDRENDB
 			a_childrenDB.ID = id
 
-			if err := backRepo.BackRepoA_CHILDREN.db.First(&a_childrenDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoA_CHILDREN.db.First(&a_childrenDB, id); err != nil {
 				log.Fatalln("CheckoutA_CHILDREN : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoA_CHILDREN.CheckoutPhaseOneInstance(&a_childrenDB)
@@ -522,9 +534,9 @@ func (backRepoA_CHILDREN *BackRepoA_CHILDRENStruct) rowVisitorA_CHILDREN(row *xl
 
 		a_childrenDB_ID_atBackupTime := a_childrenDB.ID
 		a_childrenDB.ID = 0
-		query := backRepoA_CHILDREN.db.Create(a_childrenDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoA_CHILDREN.db.Create(a_childrenDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoA_CHILDREN.Map_A_CHILDRENDBID_A_CHILDRENDB[a_childrenDB.ID] = a_childrenDB
 		BackRepoA_CHILDRENid_atBckpTime_newID[a_childrenDB_ID_atBackupTime] = a_childrenDB.ID
@@ -559,9 +571,9 @@ func (backRepoA_CHILDREN *BackRepoA_CHILDRENStruct) RestorePhaseOne(dirPath stri
 
 		a_childrenDB_ID_atBackupTime := a_childrenDB.ID
 		a_childrenDB.ID = 0
-		query := backRepoA_CHILDREN.db.Create(a_childrenDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoA_CHILDREN.db.Create(a_childrenDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoA_CHILDREN.Map_A_CHILDRENDBID_A_CHILDRENDB[a_childrenDB.ID] = a_childrenDB
 		BackRepoA_CHILDRENid_atBckpTime_newID[a_childrenDB_ID_atBackupTime] = a_childrenDB.ID
@@ -583,9 +595,10 @@ func (backRepoA_CHILDREN *BackRepoA_CHILDRENStruct) RestorePhaseTwo() {
 
 		// insertion point for reindexing pointers encoding
 		// update databse with new index encoding
-		query := backRepoA_CHILDREN.db.Model(a_childrenDB).Updates(*a_childrenDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoA_CHILDREN.db.Model(a_childrenDB)
+		_, err := db.Updates(*a_childrenDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

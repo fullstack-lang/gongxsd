@@ -2,7 +2,7 @@
 package probe
 
 import (
-	form "github.com/fullstack-lang/gongtable/go/models"
+	form "github.com/fullstack-lang/gong/lib/table/go/models"
 
 	"github.com/fullstack-lang/gongxsd/test/reqif/go/models"
 )
@@ -14,7 +14,6 @@ func FillUpFormFromGongstructName(
 ) {
 	formStage := probe.formStage
 	formStage.Reset()
-	formStage.Commit()
 
 	var prefix string
 
@@ -28,7 +27,7 @@ func FillUpFormFromGongstructName(
 	// insertion point
 	case "ALTERNATIVE_ID":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "ALTERNATIVE_ID Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__ALTERNATIVE_IDFormCallback(
@@ -41,7 +40,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(alternative_id, formGroup, probe)
 	case "ATTRIBUTE_DEFINITION_BOOLEAN":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "ATTRIBUTE_DEFINITION_BOOLEAN Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__ATTRIBUTE_DEFINITION_BOOLEANFormCallback(
@@ -54,7 +53,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(attribute_definition_boolean, formGroup, probe)
 	case "ATTRIBUTE_DEFINITION_DATE":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "ATTRIBUTE_DEFINITION_DATE Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__ATTRIBUTE_DEFINITION_DATEFormCallback(
@@ -67,7 +66,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(attribute_definition_date, formGroup, probe)
 	case "ATTRIBUTE_DEFINITION_ENUMERATION":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "ATTRIBUTE_DEFINITION_ENUMERATION Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__ATTRIBUTE_DEFINITION_ENUMERATIONFormCallback(
@@ -80,7 +79,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(attribute_definition_enumeration, formGroup, probe)
 	case "ATTRIBUTE_DEFINITION_INTEGER":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "ATTRIBUTE_DEFINITION_INTEGER Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__ATTRIBUTE_DEFINITION_INTEGERFormCallback(
@@ -93,7 +92,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(attribute_definition_integer, formGroup, probe)
 	case "ATTRIBUTE_DEFINITION_REAL":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "ATTRIBUTE_DEFINITION_REAL Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__ATTRIBUTE_DEFINITION_REALFormCallback(
@@ -106,7 +105,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(attribute_definition_real, formGroup, probe)
 	case "ATTRIBUTE_DEFINITION_STRING":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "ATTRIBUTE_DEFINITION_STRING Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__ATTRIBUTE_DEFINITION_STRINGFormCallback(
@@ -119,7 +118,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(attribute_definition_string, formGroup, probe)
 	case "ATTRIBUTE_DEFINITION_XHTML":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "ATTRIBUTE_DEFINITION_XHTML Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__ATTRIBUTE_DEFINITION_XHTMLFormCallback(
@@ -132,7 +131,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(attribute_definition_xhtml, formGroup, probe)
 	case "ATTRIBUTE_VALUE_BOOLEAN":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "ATTRIBUTE_VALUE_BOOLEAN Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__ATTRIBUTE_VALUE_BOOLEANFormCallback(
@@ -145,7 +144,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(attribute_value_boolean, formGroup, probe)
 	case "ATTRIBUTE_VALUE_DATE":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "ATTRIBUTE_VALUE_DATE Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__ATTRIBUTE_VALUE_DATEFormCallback(
@@ -158,7 +157,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(attribute_value_date, formGroup, probe)
 	case "ATTRIBUTE_VALUE_ENUMERATION":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "ATTRIBUTE_VALUE_ENUMERATION Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__ATTRIBUTE_VALUE_ENUMERATIONFormCallback(
@@ -171,7 +170,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(attribute_value_enumeration, formGroup, probe)
 	case "ATTRIBUTE_VALUE_INTEGER":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "ATTRIBUTE_VALUE_INTEGER Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__ATTRIBUTE_VALUE_INTEGERFormCallback(
@@ -184,7 +183,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(attribute_value_integer, formGroup, probe)
 	case "ATTRIBUTE_VALUE_REAL":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "ATTRIBUTE_VALUE_REAL Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__ATTRIBUTE_VALUE_REALFormCallback(
@@ -197,7 +196,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(attribute_value_real, formGroup, probe)
 	case "ATTRIBUTE_VALUE_STRING":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "ATTRIBUTE_VALUE_STRING Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__ATTRIBUTE_VALUE_STRINGFormCallback(
@@ -210,7 +209,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(attribute_value_string, formGroup, probe)
 	case "ATTRIBUTE_VALUE_XHTML":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "ATTRIBUTE_VALUE_XHTML Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__ATTRIBUTE_VALUE_XHTMLFormCallback(
@@ -223,7 +222,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(attribute_value_xhtml, formGroup, probe)
 	case "A_ALTERNATIVE_ID":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_ALTERNATIVE_ID Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_ALTERNATIVE_IDFormCallback(
@@ -236,7 +235,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_alternative_id, formGroup, probe)
 	case "A_ATTRIBUTE_DEFINITION_BOOLEAN_REF":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_ATTRIBUTE_DEFINITION_BOOLEAN_REF Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_ATTRIBUTE_DEFINITION_BOOLEAN_REFFormCallback(
@@ -249,7 +248,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_attribute_definition_boolean_ref, formGroup, probe)
 	case "A_ATTRIBUTE_DEFINITION_DATE_REF":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_ATTRIBUTE_DEFINITION_DATE_REF Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_ATTRIBUTE_DEFINITION_DATE_REFFormCallback(
@@ -262,7 +261,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_attribute_definition_date_ref, formGroup, probe)
 	case "A_ATTRIBUTE_DEFINITION_ENUMERATION_REF":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_ATTRIBUTE_DEFINITION_ENUMERATION_REF Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_ATTRIBUTE_DEFINITION_ENUMERATION_REFFormCallback(
@@ -275,7 +274,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_attribute_definition_enumeration_ref, formGroup, probe)
 	case "A_ATTRIBUTE_DEFINITION_INTEGER_REF":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_ATTRIBUTE_DEFINITION_INTEGER_REF Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_ATTRIBUTE_DEFINITION_INTEGER_REFFormCallback(
@@ -288,7 +287,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_attribute_definition_integer_ref, formGroup, probe)
 	case "A_ATTRIBUTE_DEFINITION_REAL_REF":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_ATTRIBUTE_DEFINITION_REAL_REF Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_ATTRIBUTE_DEFINITION_REAL_REFFormCallback(
@@ -301,7 +300,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_attribute_definition_real_ref, formGroup, probe)
 	case "A_ATTRIBUTE_DEFINITION_STRING_REF":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_ATTRIBUTE_DEFINITION_STRING_REF Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_ATTRIBUTE_DEFINITION_STRING_REFFormCallback(
@@ -314,7 +313,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_attribute_definition_string_ref, formGroup, probe)
 	case "A_ATTRIBUTE_DEFINITION_XHTML_REF":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_ATTRIBUTE_DEFINITION_XHTML_REF Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_ATTRIBUTE_DEFINITION_XHTML_REFFormCallback(
@@ -327,7 +326,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_attribute_definition_xhtml_ref, formGroup, probe)
 	case "A_ATTRIBUTE_VALUE_BOOLEAN":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_ATTRIBUTE_VALUE_BOOLEAN Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_ATTRIBUTE_VALUE_BOOLEANFormCallback(
@@ -340,7 +339,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_attribute_value_boolean, formGroup, probe)
 	case "A_ATTRIBUTE_VALUE_DATE":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_ATTRIBUTE_VALUE_DATE Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_ATTRIBUTE_VALUE_DATEFormCallback(
@@ -353,7 +352,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_attribute_value_date, formGroup, probe)
 	case "A_ATTRIBUTE_VALUE_ENUMERATION":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_ATTRIBUTE_VALUE_ENUMERATION Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_ATTRIBUTE_VALUE_ENUMERATIONFormCallback(
@@ -366,7 +365,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_attribute_value_enumeration, formGroup, probe)
 	case "A_ATTRIBUTE_VALUE_INTEGER":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_ATTRIBUTE_VALUE_INTEGER Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_ATTRIBUTE_VALUE_INTEGERFormCallback(
@@ -379,7 +378,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_attribute_value_integer, formGroup, probe)
 	case "A_ATTRIBUTE_VALUE_REAL":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_ATTRIBUTE_VALUE_REAL Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_ATTRIBUTE_VALUE_REALFormCallback(
@@ -392,7 +391,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_attribute_value_real, formGroup, probe)
 	case "A_ATTRIBUTE_VALUE_STRING":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_ATTRIBUTE_VALUE_STRING Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_ATTRIBUTE_VALUE_STRINGFormCallback(
@@ -405,7 +404,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_attribute_value_string, formGroup, probe)
 	case "A_ATTRIBUTE_VALUE_XHTML":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_ATTRIBUTE_VALUE_XHTML Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_ATTRIBUTE_VALUE_XHTMLFormCallback(
@@ -418,7 +417,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_attribute_value_xhtml, formGroup, probe)
 	case "A_ATTRIBUTE_VALUE_XHTML_1":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_ATTRIBUTE_VALUE_XHTML_1 Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_ATTRIBUTE_VALUE_XHTML_1FormCallback(
@@ -431,7 +430,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_attribute_value_xhtml_1, formGroup, probe)
 	case "A_CHILDREN":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_CHILDREN Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_CHILDRENFormCallback(
@@ -444,7 +443,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_children, formGroup, probe)
 	case "A_CORE_CONTENT":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_CORE_CONTENT Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_CORE_CONTENTFormCallback(
@@ -457,7 +456,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_core_content, formGroup, probe)
 	case "A_DATATYPES":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_DATATYPES Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_DATATYPESFormCallback(
@@ -470,7 +469,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_datatypes, formGroup, probe)
 	case "A_DATATYPE_DEFINITION_BOOLEAN_REF":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_DATATYPE_DEFINITION_BOOLEAN_REF Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_DATATYPE_DEFINITION_BOOLEAN_REFFormCallback(
@@ -483,7 +482,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_datatype_definition_boolean_ref, formGroup, probe)
 	case "A_DATATYPE_DEFINITION_DATE_REF":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_DATATYPE_DEFINITION_DATE_REF Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_DATATYPE_DEFINITION_DATE_REFFormCallback(
@@ -496,7 +495,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_datatype_definition_date_ref, formGroup, probe)
 	case "A_DATATYPE_DEFINITION_ENUMERATION_REF":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_DATATYPE_DEFINITION_ENUMERATION_REF Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_DATATYPE_DEFINITION_ENUMERATION_REFFormCallback(
@@ -509,7 +508,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_datatype_definition_enumeration_ref, formGroup, probe)
 	case "A_DATATYPE_DEFINITION_INTEGER_REF":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_DATATYPE_DEFINITION_INTEGER_REF Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_DATATYPE_DEFINITION_INTEGER_REFFormCallback(
@@ -522,7 +521,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_datatype_definition_integer_ref, formGroup, probe)
 	case "A_DATATYPE_DEFINITION_REAL_REF":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_DATATYPE_DEFINITION_REAL_REF Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_DATATYPE_DEFINITION_REAL_REFFormCallback(
@@ -535,7 +534,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_datatype_definition_real_ref, formGroup, probe)
 	case "A_DATATYPE_DEFINITION_STRING_REF":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_DATATYPE_DEFINITION_STRING_REF Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_DATATYPE_DEFINITION_STRING_REFFormCallback(
@@ -548,7 +547,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_datatype_definition_string_ref, formGroup, probe)
 	case "A_DATATYPE_DEFINITION_XHTML_REF":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_DATATYPE_DEFINITION_XHTML_REF Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_DATATYPE_DEFINITION_XHTML_REFFormCallback(
@@ -561,7 +560,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_datatype_definition_xhtml_ref, formGroup, probe)
 	case "A_EDITABLE_ATTS":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_EDITABLE_ATTS Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_EDITABLE_ATTSFormCallback(
@@ -574,7 +573,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_editable_atts, formGroup, probe)
 	case "A_ENUM_VALUE_REF":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_ENUM_VALUE_REF Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_ENUM_VALUE_REFFormCallback(
@@ -587,7 +586,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_enum_value_ref, formGroup, probe)
 	case "A_OBJECT":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_OBJECT Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_OBJECTFormCallback(
@@ -600,7 +599,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_object, formGroup, probe)
 	case "A_PROPERTIES":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_PROPERTIES Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_PROPERTIESFormCallback(
@@ -613,7 +612,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_properties, formGroup, probe)
 	case "A_RELATION_GROUP_TYPE_REF":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_RELATION_GROUP_TYPE_REF Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_RELATION_GROUP_TYPE_REFFormCallback(
@@ -626,7 +625,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_relation_group_type_ref, formGroup, probe)
 	case "A_SOURCE_1":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_SOURCE_1 Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_SOURCE_1FormCallback(
@@ -639,7 +638,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_source_1, formGroup, probe)
 	case "A_SOURCE_SPECIFICATION_1":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_SOURCE_SPECIFICATION_1 Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_SOURCE_SPECIFICATION_1FormCallback(
@@ -652,7 +651,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_source_specification_1, formGroup, probe)
 	case "A_SPECIFICATIONS":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_SPECIFICATIONS Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_SPECIFICATIONSFormCallback(
@@ -665,7 +664,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_specifications, formGroup, probe)
 	case "A_SPECIFICATION_TYPE_REF":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_SPECIFICATION_TYPE_REF Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_SPECIFICATION_TYPE_REFFormCallback(
@@ -678,7 +677,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_specification_type_ref, formGroup, probe)
 	case "A_SPECIFIED_VALUES":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_SPECIFIED_VALUES Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_SPECIFIED_VALUESFormCallback(
@@ -691,7 +690,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_specified_values, formGroup, probe)
 	case "A_SPEC_ATTRIBUTES":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_SPEC_ATTRIBUTES Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_SPEC_ATTRIBUTESFormCallback(
@@ -704,7 +703,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_spec_attributes, formGroup, probe)
 	case "A_SPEC_OBJECTS":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_SPEC_OBJECTS Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_SPEC_OBJECTSFormCallback(
@@ -717,7 +716,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_spec_objects, formGroup, probe)
 	case "A_SPEC_OBJECT_TYPE_REF":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_SPEC_OBJECT_TYPE_REF Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_SPEC_OBJECT_TYPE_REFFormCallback(
@@ -730,7 +729,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_spec_object_type_ref, formGroup, probe)
 	case "A_SPEC_RELATIONS":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_SPEC_RELATIONS Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_SPEC_RELATIONSFormCallback(
@@ -743,7 +742,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_spec_relations, formGroup, probe)
 	case "A_SPEC_RELATION_GROUPS":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_SPEC_RELATION_GROUPS Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_SPEC_RELATION_GROUPSFormCallback(
@@ -756,7 +755,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_spec_relation_groups, formGroup, probe)
 	case "A_SPEC_RELATION_REF":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_SPEC_RELATION_REF Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_SPEC_RELATION_REFFormCallback(
@@ -769,7 +768,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_spec_relation_ref, formGroup, probe)
 	case "A_SPEC_RELATION_TYPE_REF":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_SPEC_RELATION_TYPE_REF Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_SPEC_RELATION_TYPE_REFFormCallback(
@@ -782,7 +781,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_spec_relation_type_ref, formGroup, probe)
 	case "A_SPEC_TYPES":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_SPEC_TYPES Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_SPEC_TYPESFormCallback(
@@ -795,7 +794,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_spec_types, formGroup, probe)
 	case "A_THE_HEADER":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_THE_HEADER Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_THE_HEADERFormCallback(
@@ -808,7 +807,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_the_header, formGroup, probe)
 	case "A_TOOL_EXTENSIONS":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "A_TOOL_EXTENSIONS Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__A_TOOL_EXTENSIONSFormCallback(
@@ -821,7 +820,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(a_tool_extensions, formGroup, probe)
 	case "DATATYPE_DEFINITION_BOOLEAN":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "DATATYPE_DEFINITION_BOOLEAN Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__DATATYPE_DEFINITION_BOOLEANFormCallback(
@@ -834,7 +833,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(datatype_definition_boolean, formGroup, probe)
 	case "DATATYPE_DEFINITION_DATE":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "DATATYPE_DEFINITION_DATE Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__DATATYPE_DEFINITION_DATEFormCallback(
@@ -847,7 +846,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(datatype_definition_date, formGroup, probe)
 	case "DATATYPE_DEFINITION_ENUMERATION":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "DATATYPE_DEFINITION_ENUMERATION Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__DATATYPE_DEFINITION_ENUMERATIONFormCallback(
@@ -860,7 +859,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(datatype_definition_enumeration, formGroup, probe)
 	case "DATATYPE_DEFINITION_INTEGER":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "DATATYPE_DEFINITION_INTEGER Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__DATATYPE_DEFINITION_INTEGERFormCallback(
@@ -873,7 +872,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(datatype_definition_integer, formGroup, probe)
 	case "DATATYPE_DEFINITION_REAL":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "DATATYPE_DEFINITION_REAL Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__DATATYPE_DEFINITION_REALFormCallback(
@@ -886,7 +885,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(datatype_definition_real, formGroup, probe)
 	case "DATATYPE_DEFINITION_STRING":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "DATATYPE_DEFINITION_STRING Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__DATATYPE_DEFINITION_STRINGFormCallback(
@@ -899,7 +898,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(datatype_definition_string, formGroup, probe)
 	case "DATATYPE_DEFINITION_XHTML":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "DATATYPE_DEFINITION_XHTML Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__DATATYPE_DEFINITION_XHTMLFormCallback(
@@ -912,7 +911,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(datatype_definition_xhtml, formGroup, probe)
 	case "EMBEDDED_VALUE":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "EMBEDDED_VALUE Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__EMBEDDED_VALUEFormCallback(
@@ -925,7 +924,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(embedded_value, formGroup, probe)
 	case "ENUM_VALUE":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "ENUM_VALUE Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__ENUM_VALUEFormCallback(
@@ -938,7 +937,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(enum_value, formGroup, probe)
 	case "RELATION_GROUP":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "RELATION_GROUP Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__RELATION_GROUPFormCallback(
@@ -951,7 +950,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(relation_group, formGroup, probe)
 	case "RELATION_GROUP_TYPE":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "RELATION_GROUP_TYPE Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__RELATION_GROUP_TYPEFormCallback(
@@ -964,7 +963,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(relation_group_type, formGroup, probe)
 	case "REQ_IF":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "REQ_IF Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__REQ_IFFormCallback(
@@ -977,7 +976,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(req_if, formGroup, probe)
 	case "REQ_IF_CONTENT":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "REQ_IF_CONTENT Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__REQ_IF_CONTENTFormCallback(
@@ -990,7 +989,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(req_if_content, formGroup, probe)
 	case "REQ_IF_HEADER":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "REQ_IF_HEADER Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__REQ_IF_HEADERFormCallback(
@@ -1003,7 +1002,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(req_if_header, formGroup, probe)
 	case "REQ_IF_TOOL_EXTENSION":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "REQ_IF_TOOL_EXTENSION Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__REQ_IF_TOOL_EXTENSIONFormCallback(
@@ -1016,7 +1015,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(req_if_tool_extension, formGroup, probe)
 	case "SPECIFICATION":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "SPECIFICATION Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__SPECIFICATIONFormCallback(
@@ -1029,7 +1028,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(specification, formGroup, probe)
 	case "SPECIFICATION_TYPE":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "SPECIFICATION_TYPE Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__SPECIFICATION_TYPEFormCallback(
@@ -1042,7 +1041,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(specification_type, formGroup, probe)
 	case "SPEC_HIERARCHY":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "SPEC_HIERARCHY Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__SPEC_HIERARCHYFormCallback(
@@ -1055,7 +1054,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(spec_hierarchy, formGroup, probe)
 	case "SPEC_OBJECT":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "SPEC_OBJECT Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__SPEC_OBJECTFormCallback(
@@ -1068,7 +1067,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(spec_object, formGroup, probe)
 	case "SPEC_OBJECT_TYPE":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "SPEC_OBJECT_TYPE Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__SPEC_OBJECT_TYPEFormCallback(
@@ -1081,7 +1080,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(spec_object_type, formGroup, probe)
 	case "SPEC_RELATION":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "SPEC_RELATION Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__SPEC_RELATIONFormCallback(
@@ -1094,7 +1093,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(spec_relation, formGroup, probe)
 	case "SPEC_RELATION_TYPE":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "SPEC_RELATION_TYPE Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__SPEC_RELATION_TYPEFormCallback(
@@ -1107,7 +1106,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(spec_relation_type, formGroup, probe)
 	case "XHTML_CONTENT":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "XHTML_CONTENT Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__XHTML_CONTENTFormCallback(

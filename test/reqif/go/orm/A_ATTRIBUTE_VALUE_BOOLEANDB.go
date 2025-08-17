@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/test/reqif/go/db"
 	"github.com/fullstack-lang/gongxsd/test/reqif/go/models"
 )
 
@@ -64,7 +65,7 @@ type A_ATTRIBUTE_VALUE_BOOLEANDB struct {
 
 	// Declation for basic field a_attribute_value_booleanDB.Name
 	Name_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	A_ATTRIBUTE_VALUE_BOOLEANPointersEncoding
@@ -107,17 +108,17 @@ type BackRepoA_ATTRIBUTE_VALUE_BOOLEANStruct struct {
 	// stores A_ATTRIBUTE_VALUE_BOOLEAN according to their gorm ID
 	Map_A_ATTRIBUTE_VALUE_BOOLEANDBID_A_ATTRIBUTE_VALUE_BOOLEANPtr map[uint]*models.A_ATTRIBUTE_VALUE_BOOLEAN
 
-	db *gorm.DB
+	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoA_ATTRIBUTE_VALUE_BOOLEAN *BackRepoA_ATTRIBUTE_VALUE_BOOLEANStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoA_ATTRIBUTE_VALUE_BOOLEAN *BackRepoA_ATTRIBUTE_VALUE_BOOLEANStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoA_ATTRIBUTE_VALUE_BOOLEAN.stage
 	return
 }
 
-func (backRepoA_ATTRIBUTE_VALUE_BOOLEAN *BackRepoA_ATTRIBUTE_VALUE_BOOLEANStruct) GetDB() *gorm.DB {
+func (backRepoA_ATTRIBUTE_VALUE_BOOLEAN *BackRepoA_ATTRIBUTE_VALUE_BOOLEANStruct) GetDB() db.DBInterface {
 	return backRepoA_ATTRIBUTE_VALUE_BOOLEAN.db
 }
 
@@ -130,9 +131,19 @@ func (backRepoA_ATTRIBUTE_VALUE_BOOLEAN *BackRepoA_ATTRIBUTE_VALUE_BOOLEANStruct
 
 // BackRepoA_ATTRIBUTE_VALUE_BOOLEAN.CommitPhaseOne commits all staged instances of A_ATTRIBUTE_VALUE_BOOLEAN to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoA_ATTRIBUTE_VALUE_BOOLEAN *BackRepoA_ATTRIBUTE_VALUE_BOOLEANStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoA_ATTRIBUTE_VALUE_BOOLEAN *BackRepoA_ATTRIBUTE_VALUE_BOOLEANStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var a_attribute_value_booleans []*models.A_ATTRIBUTE_VALUE_BOOLEAN
 	for a_attribute_value_boolean := range stage.A_ATTRIBUTE_VALUE_BOOLEANs {
+		a_attribute_value_booleans = append(a_attribute_value_booleans, a_attribute_value_boolean)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(a_attribute_value_booleans, func(i, j int) bool {
+		return stage.A_ATTRIBUTE_VALUE_BOOLEANMap_Staged_Order[a_attribute_value_booleans[i]] < stage.A_ATTRIBUTE_VALUE_BOOLEANMap_Staged_Order[a_attribute_value_booleans[j]]
+	})
+
+	for _, a_attribute_value_boolean := range a_attribute_value_booleans {
 		backRepoA_ATTRIBUTE_VALUE_BOOLEAN.CommitPhaseOneInstance(a_attribute_value_boolean)
 	}
 
@@ -154,9 +165,10 @@ func (backRepoA_ATTRIBUTE_VALUE_BOOLEAN *BackRepoA_ATTRIBUTE_VALUE_BOOLEANStruct
 
 	// a_attribute_value_boolean is not staged anymore, remove a_attribute_value_booleanDB
 	a_attribute_value_booleanDB := backRepoA_ATTRIBUTE_VALUE_BOOLEAN.Map_A_ATTRIBUTE_VALUE_BOOLEANDBID_A_ATTRIBUTE_VALUE_BOOLEANDB[id]
-	query := backRepoA_ATTRIBUTE_VALUE_BOOLEAN.db.Unscoped().Delete(&a_attribute_value_booleanDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoA_ATTRIBUTE_VALUE_BOOLEAN.db.Unscoped()
+	_, err := db.Delete(a_attribute_value_booleanDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -180,9 +192,9 @@ func (backRepoA_ATTRIBUTE_VALUE_BOOLEAN *BackRepoA_ATTRIBUTE_VALUE_BOOLEANStruct
 	var a_attribute_value_booleanDB A_ATTRIBUTE_VALUE_BOOLEANDB
 	a_attribute_value_booleanDB.CopyBasicFieldsFromA_ATTRIBUTE_VALUE_BOOLEAN(a_attribute_value_boolean)
 
-	query := backRepoA_ATTRIBUTE_VALUE_BOOLEAN.db.Create(&a_attribute_value_booleanDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoA_ATTRIBUTE_VALUE_BOOLEAN.db.Create(&a_attribute_value_booleanDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -232,9 +244,9 @@ func (backRepoA_ATTRIBUTE_VALUE_BOOLEAN *BackRepoA_ATTRIBUTE_VALUE_BOOLEANStruct
 				append(a_attribute_value_booleanDB.A_ATTRIBUTE_VALUE_BOOLEANPointersEncoding.ATTRIBUTE_VALUE_BOOLEAN, int(attribute_value_booleanAssocEnd_DB.ID))
 		}
 
-		query := backRepoA_ATTRIBUTE_VALUE_BOOLEAN.db.Save(&a_attribute_value_booleanDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoA_ATTRIBUTE_VALUE_BOOLEAN.db.Save(a_attribute_value_booleanDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -253,9 +265,9 @@ func (backRepoA_ATTRIBUTE_VALUE_BOOLEAN *BackRepoA_ATTRIBUTE_VALUE_BOOLEANStruct
 func (backRepoA_ATTRIBUTE_VALUE_BOOLEAN *BackRepoA_ATTRIBUTE_VALUE_BOOLEANStruct) CheckoutPhaseOne() (Error error) {
 
 	a_attribute_value_booleanDBArray := make([]A_ATTRIBUTE_VALUE_BOOLEANDB, 0)
-	query := backRepoA_ATTRIBUTE_VALUE_BOOLEAN.db.Find(&a_attribute_value_booleanDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoA_ATTRIBUTE_VALUE_BOOLEAN.db.Find(&a_attribute_value_booleanDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -375,7 +387,7 @@ func (backRepo *BackRepoStruct) CheckoutA_ATTRIBUTE_VALUE_BOOLEAN(a_attribute_va
 			var a_attribute_value_booleanDB A_ATTRIBUTE_VALUE_BOOLEANDB
 			a_attribute_value_booleanDB.ID = id
 
-			if err := backRepo.BackRepoA_ATTRIBUTE_VALUE_BOOLEAN.db.First(&a_attribute_value_booleanDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoA_ATTRIBUTE_VALUE_BOOLEAN.db.First(&a_attribute_value_booleanDB, id); err != nil {
 				log.Fatalln("CheckoutA_ATTRIBUTE_VALUE_BOOLEAN : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoA_ATTRIBUTE_VALUE_BOOLEAN.CheckoutPhaseOneInstance(&a_attribute_value_booleanDB)
@@ -522,9 +534,9 @@ func (backRepoA_ATTRIBUTE_VALUE_BOOLEAN *BackRepoA_ATTRIBUTE_VALUE_BOOLEANStruct
 
 		a_attribute_value_booleanDB_ID_atBackupTime := a_attribute_value_booleanDB.ID
 		a_attribute_value_booleanDB.ID = 0
-		query := backRepoA_ATTRIBUTE_VALUE_BOOLEAN.db.Create(a_attribute_value_booleanDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoA_ATTRIBUTE_VALUE_BOOLEAN.db.Create(a_attribute_value_booleanDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoA_ATTRIBUTE_VALUE_BOOLEAN.Map_A_ATTRIBUTE_VALUE_BOOLEANDBID_A_ATTRIBUTE_VALUE_BOOLEANDB[a_attribute_value_booleanDB.ID] = a_attribute_value_booleanDB
 		BackRepoA_ATTRIBUTE_VALUE_BOOLEANid_atBckpTime_newID[a_attribute_value_booleanDB_ID_atBackupTime] = a_attribute_value_booleanDB.ID
@@ -559,9 +571,9 @@ func (backRepoA_ATTRIBUTE_VALUE_BOOLEAN *BackRepoA_ATTRIBUTE_VALUE_BOOLEANStruct
 
 		a_attribute_value_booleanDB_ID_atBackupTime := a_attribute_value_booleanDB.ID
 		a_attribute_value_booleanDB.ID = 0
-		query := backRepoA_ATTRIBUTE_VALUE_BOOLEAN.db.Create(a_attribute_value_booleanDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoA_ATTRIBUTE_VALUE_BOOLEAN.db.Create(a_attribute_value_booleanDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoA_ATTRIBUTE_VALUE_BOOLEAN.Map_A_ATTRIBUTE_VALUE_BOOLEANDBID_A_ATTRIBUTE_VALUE_BOOLEANDB[a_attribute_value_booleanDB.ID] = a_attribute_value_booleanDB
 		BackRepoA_ATTRIBUTE_VALUE_BOOLEANid_atBckpTime_newID[a_attribute_value_booleanDB_ID_atBackupTime] = a_attribute_value_booleanDB.ID
@@ -583,9 +595,10 @@ func (backRepoA_ATTRIBUTE_VALUE_BOOLEAN *BackRepoA_ATTRIBUTE_VALUE_BOOLEANStruct
 
 		// insertion point for reindexing pointers encoding
 		// update databse with new index encoding
-		query := backRepoA_ATTRIBUTE_VALUE_BOOLEAN.db.Model(a_attribute_value_booleanDB).Updates(*a_attribute_value_booleanDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoA_ATTRIBUTE_VALUE_BOOLEAN.db.Model(a_attribute_value_booleanDB)
+		_, err := db.Updates(*a_attribute_value_booleanDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

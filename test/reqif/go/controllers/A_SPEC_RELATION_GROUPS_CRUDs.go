@@ -58,24 +58,31 @@ func (controller *Controller) GetA_SPEC_RELATION_GROUPSs(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("GetA_SPEC_RELATION_GROUPSs", "GONG__StackPath", stackPath)
+			// log.Println("GetA_SPEC_RELATION_GROUPSs", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "GET Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoA_SPEC_RELATION_GROUPS.GetDB()
 
-	query := db.Find(&a_spec_relation_groupsDBs)
-	if query.Error != nil {
+	_, err := db.Find(&a_spec_relation_groupsDBs)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -121,15 +128,22 @@ func (controller *Controller) PostA_SPEC_RELATION_GROUPS(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("PostA_SPEC_RELATION_GROUPSs", "GONG__StackPath", stackPath)
+			// log.Println("PostA_SPEC_RELATION_GROUPSs", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "Post Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoA_SPEC_RELATION_GROUPS.GetDB()
 
@@ -151,12 +165,12 @@ func (controller *Controller) PostA_SPEC_RELATION_GROUPS(c *gin.Context) {
 	a_spec_relation_groupsDB.A_SPEC_RELATION_GROUPSPointersEncoding = input.A_SPEC_RELATION_GROUPSPointersEncoding
 	a_spec_relation_groupsDB.CopyBasicFieldsFromA_SPEC_RELATION_GROUPS_WOP(&input.A_SPEC_RELATION_GROUPS_WOP)
 
-	query := db.Create(&a_spec_relation_groupsDB)
-	if query.Error != nil {
+	_, err = db.Create(&a_spec_relation_groupsDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -191,21 +205,28 @@ func (controller *Controller) GetA_SPEC_RELATION_GROUPS(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("GetA_SPEC_RELATION_GROUPS", "GONG__StackPath", stackPath)
+			// log.Println("GetA_SPEC_RELATION_GROUPS", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoA_SPEC_RELATION_GROUPS.GetDB()
 
 	// Get a_spec_relation_groupsDB in DB
 	var a_spec_relation_groupsDB orm.A_SPEC_RELATION_GROUPSDB
-	if err := db.First(&a_spec_relation_groupsDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&a_spec_relation_groupsDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -240,15 +261,22 @@ func (controller *Controller) UpdateA_SPEC_RELATION_GROUPS(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("UpdateA_SPEC_RELATION_GROUPS", "GONG__StackPath", stackPath)
+			// log.Println("UpdateA_SPEC_RELATION_GROUPS", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "PATCH Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoA_SPEC_RELATION_GROUPS.GetDB()
 
@@ -264,13 +292,13 @@ func (controller *Controller) UpdateA_SPEC_RELATION_GROUPS(c *gin.Context) {
 	var a_spec_relation_groupsDB orm.A_SPEC_RELATION_GROUPSDB
 
 	// fetch the a_spec_relation_groups
-	query := db.First(&a_spec_relation_groupsDB, c.Param("id"))
+	_, err := db.First(&a_spec_relation_groupsDB, c.Param("id"))
 
-	if query.Error != nil {
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -279,12 +307,13 @@ func (controller *Controller) UpdateA_SPEC_RELATION_GROUPS(c *gin.Context) {
 	a_spec_relation_groupsDB.CopyBasicFieldsFromA_SPEC_RELATION_GROUPS_WOP(&input.A_SPEC_RELATION_GROUPS_WOP)
 	a_spec_relation_groupsDB.A_SPEC_RELATION_GROUPSPointersEncoding = input.A_SPEC_RELATION_GROUPSPointersEncoding
 
-	query = db.Model(&a_spec_relation_groupsDB).Updates(a_spec_relation_groupsDB)
-	if query.Error != nil {
+	db, _ = db.Model(&a_spec_relation_groupsDB)
+	_, err = db.Updates(&a_spec_relation_groupsDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -329,21 +358,28 @@ func (controller *Controller) DeleteA_SPEC_RELATION_GROUPS(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("DeleteA_SPEC_RELATION_GROUPS", "GONG__StackPath", stackPath)
+			// log.Println("DeleteA_SPEC_RELATION_GROUPS", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "DELETE Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoA_SPEC_RELATION_GROUPS.GetDB()
 
 	// Get model if exist
 	var a_spec_relation_groupsDB orm.A_SPEC_RELATION_GROUPSDB
-	if err := db.First(&a_spec_relation_groupsDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&a_spec_relation_groupsDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -353,7 +389,8 @@ func (controller *Controller) DeleteA_SPEC_RELATION_GROUPS(c *gin.Context) {
 	}
 
 	// with gorm.Model field, default delete is a soft delete. Unscoped() force delete
-	db.Unscoped().Delete(&a_spec_relation_groupsDB)
+	db.Unscoped()
+	db.Delete(&a_spec_relation_groupsDB)
 
 	// get an instance (not staged) from DB instance, and call callback function
 	a_spec_relation_groupsDeleted := new(models.A_SPEC_RELATION_GROUPS)

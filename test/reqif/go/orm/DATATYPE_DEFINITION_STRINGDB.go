@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/test/reqif/go/db"
 	"github.com/fullstack-lang/gongxsd/test/reqif/go/models"
 )
 
@@ -80,7 +81,7 @@ type DATATYPE_DEFINITION_STRINGDB struct {
 
 	// Declation for basic field datatype_definition_stringDB.MAX_LENGTH
 	MAX_LENGTH_Data sql.NullInt64
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	DATATYPE_DEFINITION_STRINGPointersEncoding
@@ -138,17 +139,17 @@ type BackRepoDATATYPE_DEFINITION_STRINGStruct struct {
 	// stores DATATYPE_DEFINITION_STRING according to their gorm ID
 	Map_DATATYPE_DEFINITION_STRINGDBID_DATATYPE_DEFINITION_STRINGPtr map[uint]*models.DATATYPE_DEFINITION_STRING
 
-	db *gorm.DB
+	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoDATATYPE_DEFINITION_STRING *BackRepoDATATYPE_DEFINITION_STRINGStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoDATATYPE_DEFINITION_STRING *BackRepoDATATYPE_DEFINITION_STRINGStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoDATATYPE_DEFINITION_STRING.stage
 	return
 }
 
-func (backRepoDATATYPE_DEFINITION_STRING *BackRepoDATATYPE_DEFINITION_STRINGStruct) GetDB() *gorm.DB {
+func (backRepoDATATYPE_DEFINITION_STRING *BackRepoDATATYPE_DEFINITION_STRINGStruct) GetDB() db.DBInterface {
 	return backRepoDATATYPE_DEFINITION_STRING.db
 }
 
@@ -161,9 +162,19 @@ func (backRepoDATATYPE_DEFINITION_STRING *BackRepoDATATYPE_DEFINITION_STRINGStru
 
 // BackRepoDATATYPE_DEFINITION_STRING.CommitPhaseOne commits all staged instances of DATATYPE_DEFINITION_STRING to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoDATATYPE_DEFINITION_STRING *BackRepoDATATYPE_DEFINITION_STRINGStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoDATATYPE_DEFINITION_STRING *BackRepoDATATYPE_DEFINITION_STRINGStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var datatype_definition_strings []*models.DATATYPE_DEFINITION_STRING
 	for datatype_definition_string := range stage.DATATYPE_DEFINITION_STRINGs {
+		datatype_definition_strings = append(datatype_definition_strings, datatype_definition_string)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(datatype_definition_strings, func(i, j int) bool {
+		return stage.DATATYPE_DEFINITION_STRINGMap_Staged_Order[datatype_definition_strings[i]] < stage.DATATYPE_DEFINITION_STRINGMap_Staged_Order[datatype_definition_strings[j]]
+	})
+
+	for _, datatype_definition_string := range datatype_definition_strings {
 		backRepoDATATYPE_DEFINITION_STRING.CommitPhaseOneInstance(datatype_definition_string)
 	}
 
@@ -185,9 +196,10 @@ func (backRepoDATATYPE_DEFINITION_STRING *BackRepoDATATYPE_DEFINITION_STRINGStru
 
 	// datatype_definition_string is not staged anymore, remove datatype_definition_stringDB
 	datatype_definition_stringDB := backRepoDATATYPE_DEFINITION_STRING.Map_DATATYPE_DEFINITION_STRINGDBID_DATATYPE_DEFINITION_STRINGDB[id]
-	query := backRepoDATATYPE_DEFINITION_STRING.db.Unscoped().Delete(&datatype_definition_stringDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoDATATYPE_DEFINITION_STRING.db.Unscoped()
+	_, err := db.Delete(datatype_definition_stringDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -211,9 +223,9 @@ func (backRepoDATATYPE_DEFINITION_STRING *BackRepoDATATYPE_DEFINITION_STRINGStru
 	var datatype_definition_stringDB DATATYPE_DEFINITION_STRINGDB
 	datatype_definition_stringDB.CopyBasicFieldsFromDATATYPE_DEFINITION_STRING(datatype_definition_string)
 
-	query := backRepoDATATYPE_DEFINITION_STRING.db.Create(&datatype_definition_stringDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoDATATYPE_DEFINITION_STRING.db.Create(&datatype_definition_stringDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -257,9 +269,9 @@ func (backRepoDATATYPE_DEFINITION_STRING *BackRepoDATATYPE_DEFINITION_STRINGStru
 			datatype_definition_stringDB.ALTERNATIVE_IDID.Valid = true
 		}
 
-		query := backRepoDATATYPE_DEFINITION_STRING.db.Save(&datatype_definition_stringDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoDATATYPE_DEFINITION_STRING.db.Save(datatype_definition_stringDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -278,9 +290,9 @@ func (backRepoDATATYPE_DEFINITION_STRING *BackRepoDATATYPE_DEFINITION_STRINGStru
 func (backRepoDATATYPE_DEFINITION_STRING *BackRepoDATATYPE_DEFINITION_STRINGStruct) CheckoutPhaseOne() (Error error) {
 
 	datatype_definition_stringDBArray := make([]DATATYPE_DEFINITION_STRINGDB, 0)
-	query := backRepoDATATYPE_DEFINITION_STRING.db.Find(&datatype_definition_stringDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoDATATYPE_DEFINITION_STRING.db.Find(&datatype_definition_stringDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -370,11 +382,27 @@ func (backRepoDATATYPE_DEFINITION_STRING *BackRepoDATATYPE_DEFINITION_STRINGStru
 func (datatype_definition_stringDB *DATATYPE_DEFINITION_STRINGDB) DecodePointers(backRepo *BackRepoStruct, datatype_definition_string *models.DATATYPE_DEFINITION_STRING) {
 
 	// insertion point for checkout of pointer encoding
-	// ALTERNATIVE_ID field
-	datatype_definition_string.ALTERNATIVE_ID = nil
-	if datatype_definition_stringDB.ALTERNATIVE_IDID.Int64 != 0 {
-		datatype_definition_string.ALTERNATIVE_ID = backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(datatype_definition_stringDB.ALTERNATIVE_IDID.Int64)]
+	// ALTERNATIVE_ID field	
+	{
+		id := datatype_definition_stringDB.ALTERNATIVE_IDID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: datatype_definition_string.ALTERNATIVE_ID, unknown pointer id", id)
+				datatype_definition_string.ALTERNATIVE_ID = nil
+			} else {
+				// updates only if field has changed
+				if datatype_definition_string.ALTERNATIVE_ID == nil || datatype_definition_string.ALTERNATIVE_ID != tmp {
+					datatype_definition_string.ALTERNATIVE_ID = tmp
+				}
+			}
+		} else {
+			datatype_definition_string.ALTERNATIVE_ID = nil
+		}
 	}
+	
 	return
 }
 
@@ -396,7 +424,7 @@ func (backRepo *BackRepoStruct) CheckoutDATATYPE_DEFINITION_STRING(datatype_defi
 			var datatype_definition_stringDB DATATYPE_DEFINITION_STRINGDB
 			datatype_definition_stringDB.ID = id
 
-			if err := backRepo.BackRepoDATATYPE_DEFINITION_STRING.db.First(&datatype_definition_stringDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoDATATYPE_DEFINITION_STRING.db.First(&datatype_definition_stringDB, id); err != nil {
 				log.Fatalln("CheckoutDATATYPE_DEFINITION_STRING : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoDATATYPE_DEFINITION_STRING.CheckoutPhaseOneInstance(&datatype_definition_stringDB)
@@ -603,9 +631,9 @@ func (backRepoDATATYPE_DEFINITION_STRING *BackRepoDATATYPE_DEFINITION_STRINGStru
 
 		datatype_definition_stringDB_ID_atBackupTime := datatype_definition_stringDB.ID
 		datatype_definition_stringDB.ID = 0
-		query := backRepoDATATYPE_DEFINITION_STRING.db.Create(datatype_definition_stringDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoDATATYPE_DEFINITION_STRING.db.Create(datatype_definition_stringDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoDATATYPE_DEFINITION_STRING.Map_DATATYPE_DEFINITION_STRINGDBID_DATATYPE_DEFINITION_STRINGDB[datatype_definition_stringDB.ID] = datatype_definition_stringDB
 		BackRepoDATATYPE_DEFINITION_STRINGid_atBckpTime_newID[datatype_definition_stringDB_ID_atBackupTime] = datatype_definition_stringDB.ID
@@ -640,9 +668,9 @@ func (backRepoDATATYPE_DEFINITION_STRING *BackRepoDATATYPE_DEFINITION_STRINGStru
 
 		datatype_definition_stringDB_ID_atBackupTime := datatype_definition_stringDB.ID
 		datatype_definition_stringDB.ID = 0
-		query := backRepoDATATYPE_DEFINITION_STRING.db.Create(datatype_definition_stringDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoDATATYPE_DEFINITION_STRING.db.Create(datatype_definition_stringDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoDATATYPE_DEFINITION_STRING.Map_DATATYPE_DEFINITION_STRINGDBID_DATATYPE_DEFINITION_STRINGDB[datatype_definition_stringDB.ID] = datatype_definition_stringDB
 		BackRepoDATATYPE_DEFINITION_STRINGid_atBckpTime_newID[datatype_definition_stringDB_ID_atBackupTime] = datatype_definition_stringDB.ID
@@ -670,9 +698,10 @@ func (backRepoDATATYPE_DEFINITION_STRING *BackRepoDATATYPE_DEFINITION_STRINGStru
 		}
 
 		// update databse with new index encoding
-		query := backRepoDATATYPE_DEFINITION_STRING.db.Model(datatype_definition_stringDB).Updates(*datatype_definition_stringDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoDATATYPE_DEFINITION_STRING.db.Model(datatype_definition_stringDB)
+		_, err := db.Updates(*datatype_definition_stringDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

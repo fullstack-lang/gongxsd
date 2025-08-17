@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/test/reqif/go/db"
 	"github.com/fullstack-lang/gongxsd/test/reqif/go/models"
 )
 
@@ -64,7 +65,7 @@ type A_SPECIFIED_VALUESDB struct {
 
 	// Declation for basic field a_specified_valuesDB.Name
 	Name_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	A_SPECIFIED_VALUESPointersEncoding
@@ -107,17 +108,17 @@ type BackRepoA_SPECIFIED_VALUESStruct struct {
 	// stores A_SPECIFIED_VALUES according to their gorm ID
 	Map_A_SPECIFIED_VALUESDBID_A_SPECIFIED_VALUESPtr map[uint]*models.A_SPECIFIED_VALUES
 
-	db *gorm.DB
+	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoA_SPECIFIED_VALUES *BackRepoA_SPECIFIED_VALUESStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoA_SPECIFIED_VALUES *BackRepoA_SPECIFIED_VALUESStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoA_SPECIFIED_VALUES.stage
 	return
 }
 
-func (backRepoA_SPECIFIED_VALUES *BackRepoA_SPECIFIED_VALUESStruct) GetDB() *gorm.DB {
+func (backRepoA_SPECIFIED_VALUES *BackRepoA_SPECIFIED_VALUESStruct) GetDB() db.DBInterface {
 	return backRepoA_SPECIFIED_VALUES.db
 }
 
@@ -130,9 +131,19 @@ func (backRepoA_SPECIFIED_VALUES *BackRepoA_SPECIFIED_VALUESStruct) GetA_SPECIFI
 
 // BackRepoA_SPECIFIED_VALUES.CommitPhaseOne commits all staged instances of A_SPECIFIED_VALUES to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoA_SPECIFIED_VALUES *BackRepoA_SPECIFIED_VALUESStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoA_SPECIFIED_VALUES *BackRepoA_SPECIFIED_VALUESStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var a_specified_valuess []*models.A_SPECIFIED_VALUES
 	for a_specified_values := range stage.A_SPECIFIED_VALUESs {
+		a_specified_valuess = append(a_specified_valuess, a_specified_values)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(a_specified_valuess, func(i, j int) bool {
+		return stage.A_SPECIFIED_VALUESMap_Staged_Order[a_specified_valuess[i]] < stage.A_SPECIFIED_VALUESMap_Staged_Order[a_specified_valuess[j]]
+	})
+
+	for _, a_specified_values := range a_specified_valuess {
 		backRepoA_SPECIFIED_VALUES.CommitPhaseOneInstance(a_specified_values)
 	}
 
@@ -154,9 +165,10 @@ func (backRepoA_SPECIFIED_VALUES *BackRepoA_SPECIFIED_VALUESStruct) CommitDelete
 
 	// a_specified_values is not staged anymore, remove a_specified_valuesDB
 	a_specified_valuesDB := backRepoA_SPECIFIED_VALUES.Map_A_SPECIFIED_VALUESDBID_A_SPECIFIED_VALUESDB[id]
-	query := backRepoA_SPECIFIED_VALUES.db.Unscoped().Delete(&a_specified_valuesDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoA_SPECIFIED_VALUES.db.Unscoped()
+	_, err := db.Delete(a_specified_valuesDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -180,9 +192,9 @@ func (backRepoA_SPECIFIED_VALUES *BackRepoA_SPECIFIED_VALUESStruct) CommitPhaseO
 	var a_specified_valuesDB A_SPECIFIED_VALUESDB
 	a_specified_valuesDB.CopyBasicFieldsFromA_SPECIFIED_VALUES(a_specified_values)
 
-	query := backRepoA_SPECIFIED_VALUES.db.Create(&a_specified_valuesDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoA_SPECIFIED_VALUES.db.Create(&a_specified_valuesDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -232,9 +244,9 @@ func (backRepoA_SPECIFIED_VALUES *BackRepoA_SPECIFIED_VALUESStruct) CommitPhaseT
 				append(a_specified_valuesDB.A_SPECIFIED_VALUESPointersEncoding.ENUM_VALUE, int(enum_valueAssocEnd_DB.ID))
 		}
 
-		query := backRepoA_SPECIFIED_VALUES.db.Save(&a_specified_valuesDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoA_SPECIFIED_VALUES.db.Save(a_specified_valuesDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -253,9 +265,9 @@ func (backRepoA_SPECIFIED_VALUES *BackRepoA_SPECIFIED_VALUESStruct) CommitPhaseT
 func (backRepoA_SPECIFIED_VALUES *BackRepoA_SPECIFIED_VALUESStruct) CheckoutPhaseOne() (Error error) {
 
 	a_specified_valuesDBArray := make([]A_SPECIFIED_VALUESDB, 0)
-	query := backRepoA_SPECIFIED_VALUES.db.Find(&a_specified_valuesDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoA_SPECIFIED_VALUES.db.Find(&a_specified_valuesDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -375,7 +387,7 @@ func (backRepo *BackRepoStruct) CheckoutA_SPECIFIED_VALUES(a_specified_values *m
 			var a_specified_valuesDB A_SPECIFIED_VALUESDB
 			a_specified_valuesDB.ID = id
 
-			if err := backRepo.BackRepoA_SPECIFIED_VALUES.db.First(&a_specified_valuesDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoA_SPECIFIED_VALUES.db.First(&a_specified_valuesDB, id); err != nil {
 				log.Fatalln("CheckoutA_SPECIFIED_VALUES : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoA_SPECIFIED_VALUES.CheckoutPhaseOneInstance(&a_specified_valuesDB)
@@ -522,9 +534,9 @@ func (backRepoA_SPECIFIED_VALUES *BackRepoA_SPECIFIED_VALUESStruct) rowVisitorA_
 
 		a_specified_valuesDB_ID_atBackupTime := a_specified_valuesDB.ID
 		a_specified_valuesDB.ID = 0
-		query := backRepoA_SPECIFIED_VALUES.db.Create(a_specified_valuesDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoA_SPECIFIED_VALUES.db.Create(a_specified_valuesDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoA_SPECIFIED_VALUES.Map_A_SPECIFIED_VALUESDBID_A_SPECIFIED_VALUESDB[a_specified_valuesDB.ID] = a_specified_valuesDB
 		BackRepoA_SPECIFIED_VALUESid_atBckpTime_newID[a_specified_valuesDB_ID_atBackupTime] = a_specified_valuesDB.ID
@@ -559,9 +571,9 @@ func (backRepoA_SPECIFIED_VALUES *BackRepoA_SPECIFIED_VALUESStruct) RestorePhase
 
 		a_specified_valuesDB_ID_atBackupTime := a_specified_valuesDB.ID
 		a_specified_valuesDB.ID = 0
-		query := backRepoA_SPECIFIED_VALUES.db.Create(a_specified_valuesDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoA_SPECIFIED_VALUES.db.Create(a_specified_valuesDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoA_SPECIFIED_VALUES.Map_A_SPECIFIED_VALUESDBID_A_SPECIFIED_VALUESDB[a_specified_valuesDB.ID] = a_specified_valuesDB
 		BackRepoA_SPECIFIED_VALUESid_atBckpTime_newID[a_specified_valuesDB_ID_atBackupTime] = a_specified_valuesDB.ID
@@ -583,9 +595,10 @@ func (backRepoA_SPECIFIED_VALUES *BackRepoA_SPECIFIED_VALUESStruct) RestorePhase
 
 		// insertion point for reindexing pointers encoding
 		// update databse with new index encoding
-		query := backRepoA_SPECIFIED_VALUES.db.Model(a_specified_valuesDB).Updates(*a_specified_valuesDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoA_SPECIFIED_VALUES.db.Model(a_specified_valuesDB)
+		_, err := db.Updates(*a_specified_valuesDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

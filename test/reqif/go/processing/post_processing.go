@@ -2,7 +2,7 @@ package processing
 
 import "github.com/fullstack-lang/gongxsd/test/reqif/go/models"
 
-func PostProcessing(stage *models.StageStruct) {
+func PostProcessing(stage *models.Stage) {
 
 	for x := range *models.GetGongstructInstancesSet[models.ATTRIBUTE_DEFINITION_ENUMERATION](stage) {
 		x.Name = x.LONG_NAME

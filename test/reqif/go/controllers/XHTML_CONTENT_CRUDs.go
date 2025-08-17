@@ -58,24 +58,31 @@ func (controller *Controller) GetXHTML_CONTENTs(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("GetXHTML_CONTENTs", "GONG__StackPath", stackPath)
+			// log.Println("GetXHTML_CONTENTs", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "GET Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoXHTML_CONTENT.GetDB()
 
-	query := db.Find(&xhtml_contentDBs)
-	if query.Error != nil {
+	_, err := db.Find(&xhtml_contentDBs)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -121,15 +128,22 @@ func (controller *Controller) PostXHTML_CONTENT(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("PostXHTML_CONTENTs", "GONG__StackPath", stackPath)
+			// log.Println("PostXHTML_CONTENTs", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "Post Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoXHTML_CONTENT.GetDB()
 
@@ -151,12 +165,12 @@ func (controller *Controller) PostXHTML_CONTENT(c *gin.Context) {
 	xhtml_contentDB.XHTML_CONTENTPointersEncoding = input.XHTML_CONTENTPointersEncoding
 	xhtml_contentDB.CopyBasicFieldsFromXHTML_CONTENT_WOP(&input.XHTML_CONTENT_WOP)
 
-	query := db.Create(&xhtml_contentDB)
-	if query.Error != nil {
+	_, err = db.Create(&xhtml_contentDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -191,21 +205,28 @@ func (controller *Controller) GetXHTML_CONTENT(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("GetXHTML_CONTENT", "GONG__StackPath", stackPath)
+			// log.Println("GetXHTML_CONTENT", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoXHTML_CONTENT.GetDB()
 
 	// Get xhtml_contentDB in DB
 	var xhtml_contentDB orm.XHTML_CONTENTDB
-	if err := db.First(&xhtml_contentDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&xhtml_contentDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -240,15 +261,22 @@ func (controller *Controller) UpdateXHTML_CONTENT(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("UpdateXHTML_CONTENT", "GONG__StackPath", stackPath)
+			// log.Println("UpdateXHTML_CONTENT", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "PATCH Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoXHTML_CONTENT.GetDB()
 
@@ -264,13 +292,13 @@ func (controller *Controller) UpdateXHTML_CONTENT(c *gin.Context) {
 	var xhtml_contentDB orm.XHTML_CONTENTDB
 
 	// fetch the xhtml_content
-	query := db.First(&xhtml_contentDB, c.Param("id"))
+	_, err := db.First(&xhtml_contentDB, c.Param("id"))
 
-	if query.Error != nil {
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -279,12 +307,13 @@ func (controller *Controller) UpdateXHTML_CONTENT(c *gin.Context) {
 	xhtml_contentDB.CopyBasicFieldsFromXHTML_CONTENT_WOP(&input.XHTML_CONTENT_WOP)
 	xhtml_contentDB.XHTML_CONTENTPointersEncoding = input.XHTML_CONTENTPointersEncoding
 
-	query = db.Model(&xhtml_contentDB).Updates(xhtml_contentDB)
-	if query.Error != nil {
+	db, _ = db.Model(&xhtml_contentDB)
+	_, err = db.Updates(&xhtml_contentDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -329,21 +358,28 @@ func (controller *Controller) DeleteXHTML_CONTENT(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("DeleteXHTML_CONTENT", "GONG__StackPath", stackPath)
+			// log.Println("DeleteXHTML_CONTENT", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "DELETE Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoXHTML_CONTENT.GetDB()
 
 	// Get model if exist
 	var xhtml_contentDB orm.XHTML_CONTENTDB
-	if err := db.First(&xhtml_contentDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&xhtml_contentDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -353,7 +389,8 @@ func (controller *Controller) DeleteXHTML_CONTENT(c *gin.Context) {
 	}
 
 	// with gorm.Model field, default delete is a soft delete. Unscoped() force delete
-	db.Unscoped().Delete(&xhtml_contentDB)
+	db.Unscoped()
+	db.Delete(&xhtml_contentDB)
 
 	// get an instance (not staged) from DB instance, and call callback function
 	xhtml_contentDeleted := new(models.XHTML_CONTENT)

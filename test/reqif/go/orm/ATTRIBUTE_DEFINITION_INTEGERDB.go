@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/test/reqif/go/db"
 	"github.com/fullstack-lang/gongxsd/test/reqif/go/models"
 )
 
@@ -89,7 +90,7 @@ type ATTRIBUTE_DEFINITION_INTEGERDB struct {
 
 	// Declation for basic field attribute_definition_integerDB.LONG_NAME
 	LONG_NAME_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	ATTRIBUTE_DEFINITION_INTEGERPointersEncoding
@@ -147,17 +148,17 @@ type BackRepoATTRIBUTE_DEFINITION_INTEGERStruct struct {
 	// stores ATTRIBUTE_DEFINITION_INTEGER according to their gorm ID
 	Map_ATTRIBUTE_DEFINITION_INTEGERDBID_ATTRIBUTE_DEFINITION_INTEGERPtr map[uint]*models.ATTRIBUTE_DEFINITION_INTEGER
 
-	db *gorm.DB
+	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoATTRIBUTE_DEFINITION_INTEGER *BackRepoATTRIBUTE_DEFINITION_INTEGERStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoATTRIBUTE_DEFINITION_INTEGER *BackRepoATTRIBUTE_DEFINITION_INTEGERStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoATTRIBUTE_DEFINITION_INTEGER.stage
 	return
 }
 
-func (backRepoATTRIBUTE_DEFINITION_INTEGER *BackRepoATTRIBUTE_DEFINITION_INTEGERStruct) GetDB() *gorm.DB {
+func (backRepoATTRIBUTE_DEFINITION_INTEGER *BackRepoATTRIBUTE_DEFINITION_INTEGERStruct) GetDB() db.DBInterface {
 	return backRepoATTRIBUTE_DEFINITION_INTEGER.db
 }
 
@@ -170,9 +171,19 @@ func (backRepoATTRIBUTE_DEFINITION_INTEGER *BackRepoATTRIBUTE_DEFINITION_INTEGER
 
 // BackRepoATTRIBUTE_DEFINITION_INTEGER.CommitPhaseOne commits all staged instances of ATTRIBUTE_DEFINITION_INTEGER to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoATTRIBUTE_DEFINITION_INTEGER *BackRepoATTRIBUTE_DEFINITION_INTEGERStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoATTRIBUTE_DEFINITION_INTEGER *BackRepoATTRIBUTE_DEFINITION_INTEGERStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var attribute_definition_integers []*models.ATTRIBUTE_DEFINITION_INTEGER
 	for attribute_definition_integer := range stage.ATTRIBUTE_DEFINITION_INTEGERs {
+		attribute_definition_integers = append(attribute_definition_integers, attribute_definition_integer)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(attribute_definition_integers, func(i, j int) bool {
+		return stage.ATTRIBUTE_DEFINITION_INTEGERMap_Staged_Order[attribute_definition_integers[i]] < stage.ATTRIBUTE_DEFINITION_INTEGERMap_Staged_Order[attribute_definition_integers[j]]
+	})
+
+	for _, attribute_definition_integer := range attribute_definition_integers {
 		backRepoATTRIBUTE_DEFINITION_INTEGER.CommitPhaseOneInstance(attribute_definition_integer)
 	}
 
@@ -194,9 +205,10 @@ func (backRepoATTRIBUTE_DEFINITION_INTEGER *BackRepoATTRIBUTE_DEFINITION_INTEGER
 
 	// attribute_definition_integer is not staged anymore, remove attribute_definition_integerDB
 	attribute_definition_integerDB := backRepoATTRIBUTE_DEFINITION_INTEGER.Map_ATTRIBUTE_DEFINITION_INTEGERDBID_ATTRIBUTE_DEFINITION_INTEGERDB[id]
-	query := backRepoATTRIBUTE_DEFINITION_INTEGER.db.Unscoped().Delete(&attribute_definition_integerDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoATTRIBUTE_DEFINITION_INTEGER.db.Unscoped()
+	_, err := db.Delete(attribute_definition_integerDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -220,9 +232,9 @@ func (backRepoATTRIBUTE_DEFINITION_INTEGER *BackRepoATTRIBUTE_DEFINITION_INTEGER
 	var attribute_definition_integerDB ATTRIBUTE_DEFINITION_INTEGERDB
 	attribute_definition_integerDB.CopyBasicFieldsFromATTRIBUTE_DEFINITION_INTEGER(attribute_definition_integer)
 
-	query := backRepoATTRIBUTE_DEFINITION_INTEGER.db.Create(&attribute_definition_integerDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoATTRIBUTE_DEFINITION_INTEGER.db.Create(&attribute_definition_integerDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -290,9 +302,9 @@ func (backRepoATTRIBUTE_DEFINITION_INTEGER *BackRepoATTRIBUTE_DEFINITION_INTEGER
 			attribute_definition_integerDB.TYPEID.Valid = true
 		}
 
-		query := backRepoATTRIBUTE_DEFINITION_INTEGER.db.Save(&attribute_definition_integerDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoATTRIBUTE_DEFINITION_INTEGER.db.Save(attribute_definition_integerDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -311,9 +323,9 @@ func (backRepoATTRIBUTE_DEFINITION_INTEGER *BackRepoATTRIBUTE_DEFINITION_INTEGER
 func (backRepoATTRIBUTE_DEFINITION_INTEGER *BackRepoATTRIBUTE_DEFINITION_INTEGERStruct) CheckoutPhaseOne() (Error error) {
 
 	attribute_definition_integerDBArray := make([]ATTRIBUTE_DEFINITION_INTEGERDB, 0)
-	query := backRepoATTRIBUTE_DEFINITION_INTEGER.db.Find(&attribute_definition_integerDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoATTRIBUTE_DEFINITION_INTEGER.db.Find(&attribute_definition_integerDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -403,21 +415,69 @@ func (backRepoATTRIBUTE_DEFINITION_INTEGER *BackRepoATTRIBUTE_DEFINITION_INTEGER
 func (attribute_definition_integerDB *ATTRIBUTE_DEFINITION_INTEGERDB) DecodePointers(backRepo *BackRepoStruct, attribute_definition_integer *models.ATTRIBUTE_DEFINITION_INTEGER) {
 
 	// insertion point for checkout of pointer encoding
-	// ALTERNATIVE_ID field
-	attribute_definition_integer.ALTERNATIVE_ID = nil
-	if attribute_definition_integerDB.ALTERNATIVE_IDID.Int64 != 0 {
-		attribute_definition_integer.ALTERNATIVE_ID = backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(attribute_definition_integerDB.ALTERNATIVE_IDID.Int64)]
+	// ALTERNATIVE_ID field	
+	{
+		id := attribute_definition_integerDB.ALTERNATIVE_IDID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: attribute_definition_integer.ALTERNATIVE_ID, unknown pointer id", id)
+				attribute_definition_integer.ALTERNATIVE_ID = nil
+			} else {
+				// updates only if field has changed
+				if attribute_definition_integer.ALTERNATIVE_ID == nil || attribute_definition_integer.ALTERNATIVE_ID != tmp {
+					attribute_definition_integer.ALTERNATIVE_ID = tmp
+				}
+			}
+		} else {
+			attribute_definition_integer.ALTERNATIVE_ID = nil
+		}
 	}
-	// DEFAULT_VALUE field
-	attribute_definition_integer.DEFAULT_VALUE = nil
-	if attribute_definition_integerDB.DEFAULT_VALUEID.Int64 != 0 {
-		attribute_definition_integer.DEFAULT_VALUE = backRepo.BackRepoA_ATTRIBUTE_VALUE_INTEGER.Map_A_ATTRIBUTE_VALUE_INTEGERDBID_A_ATTRIBUTE_VALUE_INTEGERPtr[uint(attribute_definition_integerDB.DEFAULT_VALUEID.Int64)]
+	
+	// DEFAULT_VALUE field	
+	{
+		id := attribute_definition_integerDB.DEFAULT_VALUEID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoA_ATTRIBUTE_VALUE_INTEGER.Map_A_ATTRIBUTE_VALUE_INTEGERDBID_A_ATTRIBUTE_VALUE_INTEGERPtr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: attribute_definition_integer.DEFAULT_VALUE, unknown pointer id", id)
+				attribute_definition_integer.DEFAULT_VALUE = nil
+			} else {
+				// updates only if field has changed
+				if attribute_definition_integer.DEFAULT_VALUE == nil || attribute_definition_integer.DEFAULT_VALUE != tmp {
+					attribute_definition_integer.DEFAULT_VALUE = tmp
+				}
+			}
+		} else {
+			attribute_definition_integer.DEFAULT_VALUE = nil
+		}
 	}
-	// TYPE field
-	attribute_definition_integer.TYPE = nil
-	if attribute_definition_integerDB.TYPEID.Int64 != 0 {
-		attribute_definition_integer.TYPE = backRepo.BackRepoA_DATATYPE_DEFINITION_INTEGER_REF.Map_A_DATATYPE_DEFINITION_INTEGER_REFDBID_A_DATATYPE_DEFINITION_INTEGER_REFPtr[uint(attribute_definition_integerDB.TYPEID.Int64)]
+	
+	// TYPE field	
+	{
+		id := attribute_definition_integerDB.TYPEID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoA_DATATYPE_DEFINITION_INTEGER_REF.Map_A_DATATYPE_DEFINITION_INTEGER_REFDBID_A_DATATYPE_DEFINITION_INTEGER_REFPtr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: attribute_definition_integer.TYPE, unknown pointer id", id)
+				attribute_definition_integer.TYPE = nil
+			} else {
+				// updates only if field has changed
+				if attribute_definition_integer.TYPE == nil || attribute_definition_integer.TYPE != tmp {
+					attribute_definition_integer.TYPE = tmp
+				}
+			}
+		} else {
+			attribute_definition_integer.TYPE = nil
+		}
 	}
+	
 	return
 }
 
@@ -439,7 +499,7 @@ func (backRepo *BackRepoStruct) CheckoutATTRIBUTE_DEFINITION_INTEGER(attribute_d
 			var attribute_definition_integerDB ATTRIBUTE_DEFINITION_INTEGERDB
 			attribute_definition_integerDB.ID = id
 
-			if err := backRepo.BackRepoATTRIBUTE_DEFINITION_INTEGER.db.First(&attribute_definition_integerDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoATTRIBUTE_DEFINITION_INTEGER.db.First(&attribute_definition_integerDB, id); err != nil {
 				log.Fatalln("CheckoutATTRIBUTE_DEFINITION_INTEGER : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoATTRIBUTE_DEFINITION_INTEGER.CheckoutPhaseOneInstance(&attribute_definition_integerDB)
@@ -646,9 +706,9 @@ func (backRepoATTRIBUTE_DEFINITION_INTEGER *BackRepoATTRIBUTE_DEFINITION_INTEGER
 
 		attribute_definition_integerDB_ID_atBackupTime := attribute_definition_integerDB.ID
 		attribute_definition_integerDB.ID = 0
-		query := backRepoATTRIBUTE_DEFINITION_INTEGER.db.Create(attribute_definition_integerDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoATTRIBUTE_DEFINITION_INTEGER.db.Create(attribute_definition_integerDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoATTRIBUTE_DEFINITION_INTEGER.Map_ATTRIBUTE_DEFINITION_INTEGERDBID_ATTRIBUTE_DEFINITION_INTEGERDB[attribute_definition_integerDB.ID] = attribute_definition_integerDB
 		BackRepoATTRIBUTE_DEFINITION_INTEGERid_atBckpTime_newID[attribute_definition_integerDB_ID_atBackupTime] = attribute_definition_integerDB.ID
@@ -683,9 +743,9 @@ func (backRepoATTRIBUTE_DEFINITION_INTEGER *BackRepoATTRIBUTE_DEFINITION_INTEGER
 
 		attribute_definition_integerDB_ID_atBackupTime := attribute_definition_integerDB.ID
 		attribute_definition_integerDB.ID = 0
-		query := backRepoATTRIBUTE_DEFINITION_INTEGER.db.Create(attribute_definition_integerDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoATTRIBUTE_DEFINITION_INTEGER.db.Create(attribute_definition_integerDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoATTRIBUTE_DEFINITION_INTEGER.Map_ATTRIBUTE_DEFINITION_INTEGERDBID_ATTRIBUTE_DEFINITION_INTEGERDB[attribute_definition_integerDB.ID] = attribute_definition_integerDB
 		BackRepoATTRIBUTE_DEFINITION_INTEGERid_atBckpTime_newID[attribute_definition_integerDB_ID_atBackupTime] = attribute_definition_integerDB.ID
@@ -725,9 +785,10 @@ func (backRepoATTRIBUTE_DEFINITION_INTEGER *BackRepoATTRIBUTE_DEFINITION_INTEGER
 		}
 
 		// update databse with new index encoding
-		query := backRepoATTRIBUTE_DEFINITION_INTEGER.db.Model(attribute_definition_integerDB).Updates(*attribute_definition_integerDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoATTRIBUTE_DEFINITION_INTEGER.db.Model(attribute_definition_integerDB)
+		_, err := db.Updates(*attribute_definition_integerDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/test/reqif/go/db"
 	"github.com/fullstack-lang/gongxsd/test/reqif/go/models"
 )
 
@@ -64,7 +65,7 @@ type A_ATTRIBUTE_DEFINITION_ENUMERATION_REFDB struct {
 
 	// Declation for basic field a_attribute_definition_enumeration_refDB.ATTRIBUTE_DEFINITION_ENUMERATION_REF
 	ATTRIBUTE_DEFINITION_ENUMERATION_REF_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	A_ATTRIBUTE_DEFINITION_ENUMERATION_REFPointersEncoding
@@ -110,17 +111,17 @@ type BackRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REFStruct struct {
 	// stores A_ATTRIBUTE_DEFINITION_ENUMERATION_REF according to their gorm ID
 	Map_A_ATTRIBUTE_DEFINITION_ENUMERATION_REFDBID_A_ATTRIBUTE_DEFINITION_ENUMERATION_REFPtr map[uint]*models.A_ATTRIBUTE_DEFINITION_ENUMERATION_REF
 
-	db *gorm.DB
+	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REF *BackRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REFStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REF *BackRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REFStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REF.stage
 	return
 }
 
-func (backRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REF *BackRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REFStruct) GetDB() *gorm.DB {
+func (backRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REF *BackRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REFStruct) GetDB() db.DBInterface {
 	return backRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REF.db
 }
 
@@ -133,9 +134,19 @@ func (backRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REF *BackRepoA_ATTRIBUTE_DEFINI
 
 // BackRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REF.CommitPhaseOne commits all staged instances of A_ATTRIBUTE_DEFINITION_ENUMERATION_REF to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REF *BackRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REFStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REF *BackRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REFStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var a_attribute_definition_enumeration_refs []*models.A_ATTRIBUTE_DEFINITION_ENUMERATION_REF
 	for a_attribute_definition_enumeration_ref := range stage.A_ATTRIBUTE_DEFINITION_ENUMERATION_REFs {
+		a_attribute_definition_enumeration_refs = append(a_attribute_definition_enumeration_refs, a_attribute_definition_enumeration_ref)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(a_attribute_definition_enumeration_refs, func(i, j int) bool {
+		return stage.A_ATTRIBUTE_DEFINITION_ENUMERATION_REFMap_Staged_Order[a_attribute_definition_enumeration_refs[i]] < stage.A_ATTRIBUTE_DEFINITION_ENUMERATION_REFMap_Staged_Order[a_attribute_definition_enumeration_refs[j]]
+	})
+
+	for _, a_attribute_definition_enumeration_ref := range a_attribute_definition_enumeration_refs {
 		backRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REF.CommitPhaseOneInstance(a_attribute_definition_enumeration_ref)
 	}
 
@@ -157,9 +168,10 @@ func (backRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REF *BackRepoA_ATTRIBUTE_DEFINI
 
 	// a_attribute_definition_enumeration_ref is not staged anymore, remove a_attribute_definition_enumeration_refDB
 	a_attribute_definition_enumeration_refDB := backRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REF.Map_A_ATTRIBUTE_DEFINITION_ENUMERATION_REFDBID_A_ATTRIBUTE_DEFINITION_ENUMERATION_REFDB[id]
-	query := backRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REF.db.Unscoped().Delete(&a_attribute_definition_enumeration_refDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REF.db.Unscoped()
+	_, err := db.Delete(a_attribute_definition_enumeration_refDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -183,9 +195,9 @@ func (backRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REF *BackRepoA_ATTRIBUTE_DEFINI
 	var a_attribute_definition_enumeration_refDB A_ATTRIBUTE_DEFINITION_ENUMERATION_REFDB
 	a_attribute_definition_enumeration_refDB.CopyBasicFieldsFromA_ATTRIBUTE_DEFINITION_ENUMERATION_REF(a_attribute_definition_enumeration_ref)
 
-	query := backRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REF.db.Create(&a_attribute_definition_enumeration_refDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REF.db.Create(&a_attribute_definition_enumeration_refDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -217,9 +229,9 @@ func (backRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REF *BackRepoA_ATTRIBUTE_DEFINI
 		a_attribute_definition_enumeration_refDB.CopyBasicFieldsFromA_ATTRIBUTE_DEFINITION_ENUMERATION_REF(a_attribute_definition_enumeration_ref)
 
 		// insertion point for translating pointers encodings into actual pointers
-		query := backRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REF.db.Save(&a_attribute_definition_enumeration_refDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REF.db.Save(a_attribute_definition_enumeration_refDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -238,9 +250,9 @@ func (backRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REF *BackRepoA_ATTRIBUTE_DEFINI
 func (backRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REF *BackRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REFStruct) CheckoutPhaseOne() (Error error) {
 
 	a_attribute_definition_enumeration_refDBArray := make([]A_ATTRIBUTE_DEFINITION_ENUMERATION_REFDB, 0)
-	query := backRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REF.db.Find(&a_attribute_definition_enumeration_refDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REF.db.Find(&a_attribute_definition_enumeration_refDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -351,7 +363,7 @@ func (backRepo *BackRepoStruct) CheckoutA_ATTRIBUTE_DEFINITION_ENUMERATION_REF(a
 			var a_attribute_definition_enumeration_refDB A_ATTRIBUTE_DEFINITION_ENUMERATION_REFDB
 			a_attribute_definition_enumeration_refDB.ID = id
 
-			if err := backRepo.BackRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REF.db.First(&a_attribute_definition_enumeration_refDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REF.db.First(&a_attribute_definition_enumeration_refDB, id); err != nil {
 				log.Fatalln("CheckoutA_ATTRIBUTE_DEFINITION_ENUMERATION_REF : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REF.CheckoutPhaseOneInstance(&a_attribute_definition_enumeration_refDB)
@@ -510,9 +522,9 @@ func (backRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REF *BackRepoA_ATTRIBUTE_DEFINI
 
 		a_attribute_definition_enumeration_refDB_ID_atBackupTime := a_attribute_definition_enumeration_refDB.ID
 		a_attribute_definition_enumeration_refDB.ID = 0
-		query := backRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REF.db.Create(a_attribute_definition_enumeration_refDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REF.db.Create(a_attribute_definition_enumeration_refDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REF.Map_A_ATTRIBUTE_DEFINITION_ENUMERATION_REFDBID_A_ATTRIBUTE_DEFINITION_ENUMERATION_REFDB[a_attribute_definition_enumeration_refDB.ID] = a_attribute_definition_enumeration_refDB
 		BackRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REFid_atBckpTime_newID[a_attribute_definition_enumeration_refDB_ID_atBackupTime] = a_attribute_definition_enumeration_refDB.ID
@@ -547,9 +559,9 @@ func (backRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REF *BackRepoA_ATTRIBUTE_DEFINI
 
 		a_attribute_definition_enumeration_refDB_ID_atBackupTime := a_attribute_definition_enumeration_refDB.ID
 		a_attribute_definition_enumeration_refDB.ID = 0
-		query := backRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REF.db.Create(a_attribute_definition_enumeration_refDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REF.db.Create(a_attribute_definition_enumeration_refDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REF.Map_A_ATTRIBUTE_DEFINITION_ENUMERATION_REFDBID_A_ATTRIBUTE_DEFINITION_ENUMERATION_REFDB[a_attribute_definition_enumeration_refDB.ID] = a_attribute_definition_enumeration_refDB
 		BackRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REFid_atBckpTime_newID[a_attribute_definition_enumeration_refDB_ID_atBackupTime] = a_attribute_definition_enumeration_refDB.ID
@@ -571,9 +583,10 @@ func (backRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REF *BackRepoA_ATTRIBUTE_DEFINI
 
 		// insertion point for reindexing pointers encoding
 		// update databse with new index encoding
-		query := backRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REF.db.Model(a_attribute_definition_enumeration_refDB).Updates(*a_attribute_definition_enumeration_refDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoA_ATTRIBUTE_DEFINITION_ENUMERATION_REF.db.Model(a_attribute_definition_enumeration_refDB)
+		_, err := db.Updates(*a_attribute_definition_enumeration_refDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/test/reqif/go/db"
 	"github.com/fullstack-lang/gongxsd/test/reqif/go/models"
 )
 
@@ -68,7 +69,7 @@ type ATTRIBUTE_VALUE_DATEDB struct {
 
 	// Declation for basic field attribute_value_dateDB.THE_VALUE
 	THE_VALUE_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	ATTRIBUTE_VALUE_DATEPointersEncoding
@@ -114,17 +115,17 @@ type BackRepoATTRIBUTE_VALUE_DATEStruct struct {
 	// stores ATTRIBUTE_VALUE_DATE according to their gorm ID
 	Map_ATTRIBUTE_VALUE_DATEDBID_ATTRIBUTE_VALUE_DATEPtr map[uint]*models.ATTRIBUTE_VALUE_DATE
 
-	db *gorm.DB
+	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoATTRIBUTE_VALUE_DATE *BackRepoATTRIBUTE_VALUE_DATEStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoATTRIBUTE_VALUE_DATE *BackRepoATTRIBUTE_VALUE_DATEStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoATTRIBUTE_VALUE_DATE.stage
 	return
 }
 
-func (backRepoATTRIBUTE_VALUE_DATE *BackRepoATTRIBUTE_VALUE_DATEStruct) GetDB() *gorm.DB {
+func (backRepoATTRIBUTE_VALUE_DATE *BackRepoATTRIBUTE_VALUE_DATEStruct) GetDB() db.DBInterface {
 	return backRepoATTRIBUTE_VALUE_DATE.db
 }
 
@@ -137,9 +138,19 @@ func (backRepoATTRIBUTE_VALUE_DATE *BackRepoATTRIBUTE_VALUE_DATEStruct) GetATTRI
 
 // BackRepoATTRIBUTE_VALUE_DATE.CommitPhaseOne commits all staged instances of ATTRIBUTE_VALUE_DATE to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoATTRIBUTE_VALUE_DATE *BackRepoATTRIBUTE_VALUE_DATEStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoATTRIBUTE_VALUE_DATE *BackRepoATTRIBUTE_VALUE_DATEStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var attribute_value_dates []*models.ATTRIBUTE_VALUE_DATE
 	for attribute_value_date := range stage.ATTRIBUTE_VALUE_DATEs {
+		attribute_value_dates = append(attribute_value_dates, attribute_value_date)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(attribute_value_dates, func(i, j int) bool {
+		return stage.ATTRIBUTE_VALUE_DATEMap_Staged_Order[attribute_value_dates[i]] < stage.ATTRIBUTE_VALUE_DATEMap_Staged_Order[attribute_value_dates[j]]
+	})
+
+	for _, attribute_value_date := range attribute_value_dates {
 		backRepoATTRIBUTE_VALUE_DATE.CommitPhaseOneInstance(attribute_value_date)
 	}
 
@@ -161,9 +172,10 @@ func (backRepoATTRIBUTE_VALUE_DATE *BackRepoATTRIBUTE_VALUE_DATEStruct) CommitDe
 
 	// attribute_value_date is not staged anymore, remove attribute_value_dateDB
 	attribute_value_dateDB := backRepoATTRIBUTE_VALUE_DATE.Map_ATTRIBUTE_VALUE_DATEDBID_ATTRIBUTE_VALUE_DATEDB[id]
-	query := backRepoATTRIBUTE_VALUE_DATE.db.Unscoped().Delete(&attribute_value_dateDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoATTRIBUTE_VALUE_DATE.db.Unscoped()
+	_, err := db.Delete(attribute_value_dateDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -187,9 +199,9 @@ func (backRepoATTRIBUTE_VALUE_DATE *BackRepoATTRIBUTE_VALUE_DATEStruct) CommitPh
 	var attribute_value_dateDB ATTRIBUTE_VALUE_DATEDB
 	attribute_value_dateDB.CopyBasicFieldsFromATTRIBUTE_VALUE_DATE(attribute_value_date)
 
-	query := backRepoATTRIBUTE_VALUE_DATE.db.Create(&attribute_value_dateDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoATTRIBUTE_VALUE_DATE.db.Create(&attribute_value_dateDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -233,9 +245,9 @@ func (backRepoATTRIBUTE_VALUE_DATE *BackRepoATTRIBUTE_VALUE_DATEStruct) CommitPh
 			attribute_value_dateDB.DEFINITIONID.Valid = true
 		}
 
-		query := backRepoATTRIBUTE_VALUE_DATE.db.Save(&attribute_value_dateDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoATTRIBUTE_VALUE_DATE.db.Save(attribute_value_dateDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -254,9 +266,9 @@ func (backRepoATTRIBUTE_VALUE_DATE *BackRepoATTRIBUTE_VALUE_DATEStruct) CommitPh
 func (backRepoATTRIBUTE_VALUE_DATE *BackRepoATTRIBUTE_VALUE_DATEStruct) CheckoutPhaseOne() (Error error) {
 
 	attribute_value_dateDBArray := make([]ATTRIBUTE_VALUE_DATEDB, 0)
-	query := backRepoATTRIBUTE_VALUE_DATE.db.Find(&attribute_value_dateDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoATTRIBUTE_VALUE_DATE.db.Find(&attribute_value_dateDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -346,11 +358,27 @@ func (backRepoATTRIBUTE_VALUE_DATE *BackRepoATTRIBUTE_VALUE_DATEStruct) Checkout
 func (attribute_value_dateDB *ATTRIBUTE_VALUE_DATEDB) DecodePointers(backRepo *BackRepoStruct, attribute_value_date *models.ATTRIBUTE_VALUE_DATE) {
 
 	// insertion point for checkout of pointer encoding
-	// DEFINITION field
-	attribute_value_date.DEFINITION = nil
-	if attribute_value_dateDB.DEFINITIONID.Int64 != 0 {
-		attribute_value_date.DEFINITION = backRepo.BackRepoA_ATTRIBUTE_DEFINITION_DATE_REF.Map_A_ATTRIBUTE_DEFINITION_DATE_REFDBID_A_ATTRIBUTE_DEFINITION_DATE_REFPtr[uint(attribute_value_dateDB.DEFINITIONID.Int64)]
+	// DEFINITION field	
+	{
+		id := attribute_value_dateDB.DEFINITIONID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoA_ATTRIBUTE_DEFINITION_DATE_REF.Map_A_ATTRIBUTE_DEFINITION_DATE_REFDBID_A_ATTRIBUTE_DEFINITION_DATE_REFPtr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: attribute_value_date.DEFINITION, unknown pointer id", id)
+				attribute_value_date.DEFINITION = nil
+			} else {
+				// updates only if field has changed
+				if attribute_value_date.DEFINITION == nil || attribute_value_date.DEFINITION != tmp {
+					attribute_value_date.DEFINITION = tmp
+				}
+			}
+		} else {
+			attribute_value_date.DEFINITION = nil
+		}
 	}
+	
 	return
 }
 
@@ -372,7 +400,7 @@ func (backRepo *BackRepoStruct) CheckoutATTRIBUTE_VALUE_DATE(attribute_value_dat
 			var attribute_value_dateDB ATTRIBUTE_VALUE_DATEDB
 			attribute_value_dateDB.ID = id
 
-			if err := backRepo.BackRepoATTRIBUTE_VALUE_DATE.db.First(&attribute_value_dateDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoATTRIBUTE_VALUE_DATE.db.First(&attribute_value_dateDB, id); err != nil {
 				log.Fatalln("CheckoutATTRIBUTE_VALUE_DATE : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoATTRIBUTE_VALUE_DATE.CheckoutPhaseOneInstance(&attribute_value_dateDB)
@@ -531,9 +559,9 @@ func (backRepoATTRIBUTE_VALUE_DATE *BackRepoATTRIBUTE_VALUE_DATEStruct) rowVisit
 
 		attribute_value_dateDB_ID_atBackupTime := attribute_value_dateDB.ID
 		attribute_value_dateDB.ID = 0
-		query := backRepoATTRIBUTE_VALUE_DATE.db.Create(attribute_value_dateDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoATTRIBUTE_VALUE_DATE.db.Create(attribute_value_dateDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoATTRIBUTE_VALUE_DATE.Map_ATTRIBUTE_VALUE_DATEDBID_ATTRIBUTE_VALUE_DATEDB[attribute_value_dateDB.ID] = attribute_value_dateDB
 		BackRepoATTRIBUTE_VALUE_DATEid_atBckpTime_newID[attribute_value_dateDB_ID_atBackupTime] = attribute_value_dateDB.ID
@@ -568,9 +596,9 @@ func (backRepoATTRIBUTE_VALUE_DATE *BackRepoATTRIBUTE_VALUE_DATEStruct) RestoreP
 
 		attribute_value_dateDB_ID_atBackupTime := attribute_value_dateDB.ID
 		attribute_value_dateDB.ID = 0
-		query := backRepoATTRIBUTE_VALUE_DATE.db.Create(attribute_value_dateDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoATTRIBUTE_VALUE_DATE.db.Create(attribute_value_dateDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoATTRIBUTE_VALUE_DATE.Map_ATTRIBUTE_VALUE_DATEDBID_ATTRIBUTE_VALUE_DATEDB[attribute_value_dateDB.ID] = attribute_value_dateDB
 		BackRepoATTRIBUTE_VALUE_DATEid_atBckpTime_newID[attribute_value_dateDB_ID_atBackupTime] = attribute_value_dateDB.ID
@@ -598,9 +626,10 @@ func (backRepoATTRIBUTE_VALUE_DATE *BackRepoATTRIBUTE_VALUE_DATEStruct) RestoreP
 		}
 
 		// update databse with new index encoding
-		query := backRepoATTRIBUTE_VALUE_DATE.db.Model(attribute_value_dateDB).Updates(*attribute_value_dateDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoATTRIBUTE_VALUE_DATE.db.Model(attribute_value_dateDB)
+		_, err := db.Updates(*attribute_value_dateDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

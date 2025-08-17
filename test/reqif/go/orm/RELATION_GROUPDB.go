@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/test/reqif/go/db"
 	"github.com/fullstack-lang/gongxsd/test/reqif/go/models"
 )
 
@@ -93,7 +94,7 @@ type RELATION_GROUPDB struct {
 
 	// Declation for basic field relation_groupDB.LONG_NAME
 	LONG_NAME_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	RELATION_GROUPPointersEncoding
@@ -148,17 +149,17 @@ type BackRepoRELATION_GROUPStruct struct {
 	// stores RELATION_GROUP according to their gorm ID
 	Map_RELATION_GROUPDBID_RELATION_GROUPPtr map[uint]*models.RELATION_GROUP
 
-	db *gorm.DB
+	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoRELATION_GROUP *BackRepoRELATION_GROUPStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoRELATION_GROUP *BackRepoRELATION_GROUPStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoRELATION_GROUP.stage
 	return
 }
 
-func (backRepoRELATION_GROUP *BackRepoRELATION_GROUPStruct) GetDB() *gorm.DB {
+func (backRepoRELATION_GROUP *BackRepoRELATION_GROUPStruct) GetDB() db.DBInterface {
 	return backRepoRELATION_GROUP.db
 }
 
@@ -171,9 +172,19 @@ func (backRepoRELATION_GROUP *BackRepoRELATION_GROUPStruct) GetRELATION_GROUPDBF
 
 // BackRepoRELATION_GROUP.CommitPhaseOne commits all staged instances of RELATION_GROUP to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoRELATION_GROUP *BackRepoRELATION_GROUPStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoRELATION_GROUP *BackRepoRELATION_GROUPStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var relation_groups []*models.RELATION_GROUP
 	for relation_group := range stage.RELATION_GROUPs {
+		relation_groups = append(relation_groups, relation_group)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(relation_groups, func(i, j int) bool {
+		return stage.RELATION_GROUPMap_Staged_Order[relation_groups[i]] < stage.RELATION_GROUPMap_Staged_Order[relation_groups[j]]
+	})
+
+	for _, relation_group := range relation_groups {
 		backRepoRELATION_GROUP.CommitPhaseOneInstance(relation_group)
 	}
 
@@ -195,9 +206,10 @@ func (backRepoRELATION_GROUP *BackRepoRELATION_GROUPStruct) CommitDeleteInstance
 
 	// relation_group is not staged anymore, remove relation_groupDB
 	relation_groupDB := backRepoRELATION_GROUP.Map_RELATION_GROUPDBID_RELATION_GROUPDB[id]
-	query := backRepoRELATION_GROUP.db.Unscoped().Delete(&relation_groupDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoRELATION_GROUP.db.Unscoped()
+	_, err := db.Delete(relation_groupDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -221,9 +233,9 @@ func (backRepoRELATION_GROUP *BackRepoRELATION_GROUPStruct) CommitPhaseOneInstan
 	var relation_groupDB RELATION_GROUPDB
 	relation_groupDB.CopyBasicFieldsFromRELATION_GROUP(relation_group)
 
-	query := backRepoRELATION_GROUP.db.Create(&relation_groupDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoRELATION_GROUP.db.Create(&relation_groupDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -315,9 +327,9 @@ func (backRepoRELATION_GROUP *BackRepoRELATION_GROUPStruct) CommitPhaseTwoInstan
 			relation_groupDB.TYPEID.Valid = true
 		}
 
-		query := backRepoRELATION_GROUP.db.Save(&relation_groupDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoRELATION_GROUP.db.Save(relation_groupDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -336,9 +348,9 @@ func (backRepoRELATION_GROUP *BackRepoRELATION_GROUPStruct) CommitPhaseTwoInstan
 func (backRepoRELATION_GROUP *BackRepoRELATION_GROUPStruct) CheckoutPhaseOne() (Error error) {
 
 	relation_groupDBArray := make([]RELATION_GROUPDB, 0)
-	query := backRepoRELATION_GROUP.db.Find(&relation_groupDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoRELATION_GROUP.db.Find(&relation_groupDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -428,31 +440,111 @@ func (backRepoRELATION_GROUP *BackRepoRELATION_GROUPStruct) CheckoutPhaseTwoInst
 func (relation_groupDB *RELATION_GROUPDB) DecodePointers(backRepo *BackRepoStruct, relation_group *models.RELATION_GROUP) {
 
 	// insertion point for checkout of pointer encoding
-	// ALTERNATIVE_ID field
-	relation_group.ALTERNATIVE_ID = nil
-	if relation_groupDB.ALTERNATIVE_IDID.Int64 != 0 {
-		relation_group.ALTERNATIVE_ID = backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(relation_groupDB.ALTERNATIVE_IDID.Int64)]
+	// ALTERNATIVE_ID field	
+	{
+		id := relation_groupDB.ALTERNATIVE_IDID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: relation_group.ALTERNATIVE_ID, unknown pointer id", id)
+				relation_group.ALTERNATIVE_ID = nil
+			} else {
+				// updates only if field has changed
+				if relation_group.ALTERNATIVE_ID == nil || relation_group.ALTERNATIVE_ID != tmp {
+					relation_group.ALTERNATIVE_ID = tmp
+				}
+			}
+		} else {
+			relation_group.ALTERNATIVE_ID = nil
+		}
 	}
-	// SOURCE_SPECIFICATION field
-	relation_group.SOURCE_SPECIFICATION = nil
-	if relation_groupDB.SOURCE_SPECIFICATIONID.Int64 != 0 {
-		relation_group.SOURCE_SPECIFICATION = backRepo.BackRepoA_SOURCE_SPECIFICATION_1.Map_A_SOURCE_SPECIFICATION_1DBID_A_SOURCE_SPECIFICATION_1Ptr[uint(relation_groupDB.SOURCE_SPECIFICATIONID.Int64)]
+	
+	// SOURCE_SPECIFICATION field	
+	{
+		id := relation_groupDB.SOURCE_SPECIFICATIONID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoA_SOURCE_SPECIFICATION_1.Map_A_SOURCE_SPECIFICATION_1DBID_A_SOURCE_SPECIFICATION_1Ptr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: relation_group.SOURCE_SPECIFICATION, unknown pointer id", id)
+				relation_group.SOURCE_SPECIFICATION = nil
+			} else {
+				// updates only if field has changed
+				if relation_group.SOURCE_SPECIFICATION == nil || relation_group.SOURCE_SPECIFICATION != tmp {
+					relation_group.SOURCE_SPECIFICATION = tmp
+				}
+			}
+		} else {
+			relation_group.SOURCE_SPECIFICATION = nil
+		}
 	}
-	// SPEC_RELATIONS field
-	relation_group.SPEC_RELATIONS = nil
-	if relation_groupDB.SPEC_RELATIONSID.Int64 != 0 {
-		relation_group.SPEC_RELATIONS = backRepo.BackRepoA_SPEC_RELATION_REF.Map_A_SPEC_RELATION_REFDBID_A_SPEC_RELATION_REFPtr[uint(relation_groupDB.SPEC_RELATIONSID.Int64)]
+	
+	// SPEC_RELATIONS field	
+	{
+		id := relation_groupDB.SPEC_RELATIONSID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoA_SPEC_RELATION_REF.Map_A_SPEC_RELATION_REFDBID_A_SPEC_RELATION_REFPtr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: relation_group.SPEC_RELATIONS, unknown pointer id", id)
+				relation_group.SPEC_RELATIONS = nil
+			} else {
+				// updates only if field has changed
+				if relation_group.SPEC_RELATIONS == nil || relation_group.SPEC_RELATIONS != tmp {
+					relation_group.SPEC_RELATIONS = tmp
+				}
+			}
+		} else {
+			relation_group.SPEC_RELATIONS = nil
+		}
 	}
-	// TARGET_SPECIFICATION field
-	relation_group.TARGET_SPECIFICATION = nil
-	if relation_groupDB.TARGET_SPECIFICATIONID.Int64 != 0 {
-		relation_group.TARGET_SPECIFICATION = backRepo.BackRepoA_SOURCE_SPECIFICATION_1.Map_A_SOURCE_SPECIFICATION_1DBID_A_SOURCE_SPECIFICATION_1Ptr[uint(relation_groupDB.TARGET_SPECIFICATIONID.Int64)]
+	
+	// TARGET_SPECIFICATION field	
+	{
+		id := relation_groupDB.TARGET_SPECIFICATIONID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoA_SOURCE_SPECIFICATION_1.Map_A_SOURCE_SPECIFICATION_1DBID_A_SOURCE_SPECIFICATION_1Ptr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: relation_group.TARGET_SPECIFICATION, unknown pointer id", id)
+				relation_group.TARGET_SPECIFICATION = nil
+			} else {
+				// updates only if field has changed
+				if relation_group.TARGET_SPECIFICATION == nil || relation_group.TARGET_SPECIFICATION != tmp {
+					relation_group.TARGET_SPECIFICATION = tmp
+				}
+			}
+		} else {
+			relation_group.TARGET_SPECIFICATION = nil
+		}
 	}
-	// TYPE field
-	relation_group.TYPE = nil
-	if relation_groupDB.TYPEID.Int64 != 0 {
-		relation_group.TYPE = backRepo.BackRepoA_RELATION_GROUP_TYPE_REF.Map_A_RELATION_GROUP_TYPE_REFDBID_A_RELATION_GROUP_TYPE_REFPtr[uint(relation_groupDB.TYPEID.Int64)]
+	
+	// TYPE field	
+	{
+		id := relation_groupDB.TYPEID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoA_RELATION_GROUP_TYPE_REF.Map_A_RELATION_GROUP_TYPE_REFDBID_A_RELATION_GROUP_TYPE_REFPtr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: relation_group.TYPE, unknown pointer id", id)
+				relation_group.TYPE = nil
+			} else {
+				// updates only if field has changed
+				if relation_group.TYPE == nil || relation_group.TYPE != tmp {
+					relation_group.TYPE = tmp
+				}
+			}
+		} else {
+			relation_group.TYPE = nil
+		}
 	}
+	
 	return
 }
 
@@ -474,7 +566,7 @@ func (backRepo *BackRepoStruct) CheckoutRELATION_GROUP(relation_group *models.RE
 			var relation_groupDB RELATION_GROUPDB
 			relation_groupDB.ID = id
 
-			if err := backRepo.BackRepoRELATION_GROUP.db.First(&relation_groupDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoRELATION_GROUP.db.First(&relation_groupDB, id); err != nil {
 				log.Fatalln("CheckoutRELATION_GROUP : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoRELATION_GROUP.CheckoutPhaseOneInstance(&relation_groupDB)
@@ -669,9 +761,9 @@ func (backRepoRELATION_GROUP *BackRepoRELATION_GROUPStruct) rowVisitorRELATION_G
 
 		relation_groupDB_ID_atBackupTime := relation_groupDB.ID
 		relation_groupDB.ID = 0
-		query := backRepoRELATION_GROUP.db.Create(relation_groupDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoRELATION_GROUP.db.Create(relation_groupDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoRELATION_GROUP.Map_RELATION_GROUPDBID_RELATION_GROUPDB[relation_groupDB.ID] = relation_groupDB
 		BackRepoRELATION_GROUPid_atBckpTime_newID[relation_groupDB_ID_atBackupTime] = relation_groupDB.ID
@@ -706,9 +798,9 @@ func (backRepoRELATION_GROUP *BackRepoRELATION_GROUPStruct) RestorePhaseOne(dirP
 
 		relation_groupDB_ID_atBackupTime := relation_groupDB.ID
 		relation_groupDB.ID = 0
-		query := backRepoRELATION_GROUP.db.Create(relation_groupDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoRELATION_GROUP.db.Create(relation_groupDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoRELATION_GROUP.Map_RELATION_GROUPDBID_RELATION_GROUPDB[relation_groupDB.ID] = relation_groupDB
 		BackRepoRELATION_GROUPid_atBckpTime_newID[relation_groupDB_ID_atBackupTime] = relation_groupDB.ID
@@ -760,9 +852,10 @@ func (backRepoRELATION_GROUP *BackRepoRELATION_GROUPStruct) RestorePhaseTwo() {
 		}
 
 		// update databse with new index encoding
-		query := backRepoRELATION_GROUP.db.Model(relation_groupDB).Updates(*relation_groupDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoRELATION_GROUP.db.Model(relation_groupDB)
+		_, err := db.Updates(*relation_groupDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

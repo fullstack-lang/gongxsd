@@ -58,24 +58,31 @@ func (controller *Controller) GetA_ENUM_VALUE_REFs(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("GetA_ENUM_VALUE_REFs", "GONG__StackPath", stackPath)
+			// log.Println("GetA_ENUM_VALUE_REFs", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "GET Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoA_ENUM_VALUE_REF.GetDB()
 
-	query := db.Find(&a_enum_value_refDBs)
-	if query.Error != nil {
+	_, err := db.Find(&a_enum_value_refDBs)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -121,15 +128,22 @@ func (controller *Controller) PostA_ENUM_VALUE_REF(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("PostA_ENUM_VALUE_REFs", "GONG__StackPath", stackPath)
+			// log.Println("PostA_ENUM_VALUE_REFs", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "Post Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoA_ENUM_VALUE_REF.GetDB()
 
@@ -151,12 +165,12 @@ func (controller *Controller) PostA_ENUM_VALUE_REF(c *gin.Context) {
 	a_enum_value_refDB.A_ENUM_VALUE_REFPointersEncoding = input.A_ENUM_VALUE_REFPointersEncoding
 	a_enum_value_refDB.CopyBasicFieldsFromA_ENUM_VALUE_REF_WOP(&input.A_ENUM_VALUE_REF_WOP)
 
-	query := db.Create(&a_enum_value_refDB)
-	if query.Error != nil {
+	_, err = db.Create(&a_enum_value_refDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -191,21 +205,28 @@ func (controller *Controller) GetA_ENUM_VALUE_REF(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("GetA_ENUM_VALUE_REF", "GONG__StackPath", stackPath)
+			// log.Println("GetA_ENUM_VALUE_REF", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoA_ENUM_VALUE_REF.GetDB()
 
 	// Get a_enum_value_refDB in DB
 	var a_enum_value_refDB orm.A_ENUM_VALUE_REFDB
-	if err := db.First(&a_enum_value_refDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&a_enum_value_refDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -240,15 +261,22 @@ func (controller *Controller) UpdateA_ENUM_VALUE_REF(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("UpdateA_ENUM_VALUE_REF", "GONG__StackPath", stackPath)
+			// log.Println("UpdateA_ENUM_VALUE_REF", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "PATCH Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoA_ENUM_VALUE_REF.GetDB()
 
@@ -264,13 +292,13 @@ func (controller *Controller) UpdateA_ENUM_VALUE_REF(c *gin.Context) {
 	var a_enum_value_refDB orm.A_ENUM_VALUE_REFDB
 
 	// fetch the a_enum_value_ref
-	query := db.First(&a_enum_value_refDB, c.Param("id"))
+	_, err := db.First(&a_enum_value_refDB, c.Param("id"))
 
-	if query.Error != nil {
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -279,12 +307,13 @@ func (controller *Controller) UpdateA_ENUM_VALUE_REF(c *gin.Context) {
 	a_enum_value_refDB.CopyBasicFieldsFromA_ENUM_VALUE_REF_WOP(&input.A_ENUM_VALUE_REF_WOP)
 	a_enum_value_refDB.A_ENUM_VALUE_REFPointersEncoding = input.A_ENUM_VALUE_REFPointersEncoding
 
-	query = db.Model(&a_enum_value_refDB).Updates(a_enum_value_refDB)
-	if query.Error != nil {
+	db, _ = db.Model(&a_enum_value_refDB)
+	_, err = db.Updates(&a_enum_value_refDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -329,21 +358,28 @@ func (controller *Controller) DeleteA_ENUM_VALUE_REF(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("DeleteA_ENUM_VALUE_REF", "GONG__StackPath", stackPath)
+			// log.Println("DeleteA_ENUM_VALUE_REF", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "DELETE Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoA_ENUM_VALUE_REF.GetDB()
 
 	// Get model if exist
 	var a_enum_value_refDB orm.A_ENUM_VALUE_REFDB
-	if err := db.First(&a_enum_value_refDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&a_enum_value_refDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -353,7 +389,8 @@ func (controller *Controller) DeleteA_ENUM_VALUE_REF(c *gin.Context) {
 	}
 
 	// with gorm.Model field, default delete is a soft delete. Unscoped() force delete
-	db.Unscoped().Delete(&a_enum_value_refDB)
+	db.Unscoped()
+	db.Delete(&a_enum_value_refDB)
 
 	// get an instance (not staged) from DB instance, and call callback function
 	a_enum_value_refDeleted := new(models.A_ENUM_VALUE_REF)

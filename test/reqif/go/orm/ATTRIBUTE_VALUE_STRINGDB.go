@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/test/reqif/go/db"
 	"github.com/fullstack-lang/gongxsd/test/reqif/go/models"
 )
 
@@ -68,7 +69,7 @@ type ATTRIBUTE_VALUE_STRINGDB struct {
 
 	// Declation for basic field attribute_value_stringDB.THE_VALUE
 	THE_VALUE_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	ATTRIBUTE_VALUE_STRINGPointersEncoding
@@ -114,17 +115,17 @@ type BackRepoATTRIBUTE_VALUE_STRINGStruct struct {
 	// stores ATTRIBUTE_VALUE_STRING according to their gorm ID
 	Map_ATTRIBUTE_VALUE_STRINGDBID_ATTRIBUTE_VALUE_STRINGPtr map[uint]*models.ATTRIBUTE_VALUE_STRING
 
-	db *gorm.DB
+	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoATTRIBUTE_VALUE_STRING *BackRepoATTRIBUTE_VALUE_STRINGStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoATTRIBUTE_VALUE_STRING *BackRepoATTRIBUTE_VALUE_STRINGStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoATTRIBUTE_VALUE_STRING.stage
 	return
 }
 
-func (backRepoATTRIBUTE_VALUE_STRING *BackRepoATTRIBUTE_VALUE_STRINGStruct) GetDB() *gorm.DB {
+func (backRepoATTRIBUTE_VALUE_STRING *BackRepoATTRIBUTE_VALUE_STRINGStruct) GetDB() db.DBInterface {
 	return backRepoATTRIBUTE_VALUE_STRING.db
 }
 
@@ -137,9 +138,19 @@ func (backRepoATTRIBUTE_VALUE_STRING *BackRepoATTRIBUTE_VALUE_STRINGStruct) GetA
 
 // BackRepoATTRIBUTE_VALUE_STRING.CommitPhaseOne commits all staged instances of ATTRIBUTE_VALUE_STRING to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoATTRIBUTE_VALUE_STRING *BackRepoATTRIBUTE_VALUE_STRINGStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoATTRIBUTE_VALUE_STRING *BackRepoATTRIBUTE_VALUE_STRINGStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var attribute_value_strings []*models.ATTRIBUTE_VALUE_STRING
 	for attribute_value_string := range stage.ATTRIBUTE_VALUE_STRINGs {
+		attribute_value_strings = append(attribute_value_strings, attribute_value_string)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(attribute_value_strings, func(i, j int) bool {
+		return stage.ATTRIBUTE_VALUE_STRINGMap_Staged_Order[attribute_value_strings[i]] < stage.ATTRIBUTE_VALUE_STRINGMap_Staged_Order[attribute_value_strings[j]]
+	})
+
+	for _, attribute_value_string := range attribute_value_strings {
 		backRepoATTRIBUTE_VALUE_STRING.CommitPhaseOneInstance(attribute_value_string)
 	}
 
@@ -161,9 +172,10 @@ func (backRepoATTRIBUTE_VALUE_STRING *BackRepoATTRIBUTE_VALUE_STRINGStruct) Comm
 
 	// attribute_value_string is not staged anymore, remove attribute_value_stringDB
 	attribute_value_stringDB := backRepoATTRIBUTE_VALUE_STRING.Map_ATTRIBUTE_VALUE_STRINGDBID_ATTRIBUTE_VALUE_STRINGDB[id]
-	query := backRepoATTRIBUTE_VALUE_STRING.db.Unscoped().Delete(&attribute_value_stringDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoATTRIBUTE_VALUE_STRING.db.Unscoped()
+	_, err := db.Delete(attribute_value_stringDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -187,9 +199,9 @@ func (backRepoATTRIBUTE_VALUE_STRING *BackRepoATTRIBUTE_VALUE_STRINGStruct) Comm
 	var attribute_value_stringDB ATTRIBUTE_VALUE_STRINGDB
 	attribute_value_stringDB.CopyBasicFieldsFromATTRIBUTE_VALUE_STRING(attribute_value_string)
 
-	query := backRepoATTRIBUTE_VALUE_STRING.db.Create(&attribute_value_stringDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoATTRIBUTE_VALUE_STRING.db.Create(&attribute_value_stringDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -233,9 +245,9 @@ func (backRepoATTRIBUTE_VALUE_STRING *BackRepoATTRIBUTE_VALUE_STRINGStruct) Comm
 			attribute_value_stringDB.DEFINITIONID.Valid = true
 		}
 
-		query := backRepoATTRIBUTE_VALUE_STRING.db.Save(&attribute_value_stringDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoATTRIBUTE_VALUE_STRING.db.Save(attribute_value_stringDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -254,9 +266,9 @@ func (backRepoATTRIBUTE_VALUE_STRING *BackRepoATTRIBUTE_VALUE_STRINGStruct) Comm
 func (backRepoATTRIBUTE_VALUE_STRING *BackRepoATTRIBUTE_VALUE_STRINGStruct) CheckoutPhaseOne() (Error error) {
 
 	attribute_value_stringDBArray := make([]ATTRIBUTE_VALUE_STRINGDB, 0)
-	query := backRepoATTRIBUTE_VALUE_STRING.db.Find(&attribute_value_stringDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoATTRIBUTE_VALUE_STRING.db.Find(&attribute_value_stringDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -346,11 +358,27 @@ func (backRepoATTRIBUTE_VALUE_STRING *BackRepoATTRIBUTE_VALUE_STRINGStruct) Chec
 func (attribute_value_stringDB *ATTRIBUTE_VALUE_STRINGDB) DecodePointers(backRepo *BackRepoStruct, attribute_value_string *models.ATTRIBUTE_VALUE_STRING) {
 
 	// insertion point for checkout of pointer encoding
-	// DEFINITION field
-	attribute_value_string.DEFINITION = nil
-	if attribute_value_stringDB.DEFINITIONID.Int64 != 0 {
-		attribute_value_string.DEFINITION = backRepo.BackRepoA_ATTRIBUTE_DEFINITION_STRING_REF.Map_A_ATTRIBUTE_DEFINITION_STRING_REFDBID_A_ATTRIBUTE_DEFINITION_STRING_REFPtr[uint(attribute_value_stringDB.DEFINITIONID.Int64)]
+	// DEFINITION field	
+	{
+		id := attribute_value_stringDB.DEFINITIONID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoA_ATTRIBUTE_DEFINITION_STRING_REF.Map_A_ATTRIBUTE_DEFINITION_STRING_REFDBID_A_ATTRIBUTE_DEFINITION_STRING_REFPtr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: attribute_value_string.DEFINITION, unknown pointer id", id)
+				attribute_value_string.DEFINITION = nil
+			} else {
+				// updates only if field has changed
+				if attribute_value_string.DEFINITION == nil || attribute_value_string.DEFINITION != tmp {
+					attribute_value_string.DEFINITION = tmp
+				}
+			}
+		} else {
+			attribute_value_string.DEFINITION = nil
+		}
 	}
+	
 	return
 }
 
@@ -372,7 +400,7 @@ func (backRepo *BackRepoStruct) CheckoutATTRIBUTE_VALUE_STRING(attribute_value_s
 			var attribute_value_stringDB ATTRIBUTE_VALUE_STRINGDB
 			attribute_value_stringDB.ID = id
 
-			if err := backRepo.BackRepoATTRIBUTE_VALUE_STRING.db.First(&attribute_value_stringDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoATTRIBUTE_VALUE_STRING.db.First(&attribute_value_stringDB, id); err != nil {
 				log.Fatalln("CheckoutATTRIBUTE_VALUE_STRING : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoATTRIBUTE_VALUE_STRING.CheckoutPhaseOneInstance(&attribute_value_stringDB)
@@ -531,9 +559,9 @@ func (backRepoATTRIBUTE_VALUE_STRING *BackRepoATTRIBUTE_VALUE_STRINGStruct) rowV
 
 		attribute_value_stringDB_ID_atBackupTime := attribute_value_stringDB.ID
 		attribute_value_stringDB.ID = 0
-		query := backRepoATTRIBUTE_VALUE_STRING.db.Create(attribute_value_stringDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoATTRIBUTE_VALUE_STRING.db.Create(attribute_value_stringDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoATTRIBUTE_VALUE_STRING.Map_ATTRIBUTE_VALUE_STRINGDBID_ATTRIBUTE_VALUE_STRINGDB[attribute_value_stringDB.ID] = attribute_value_stringDB
 		BackRepoATTRIBUTE_VALUE_STRINGid_atBckpTime_newID[attribute_value_stringDB_ID_atBackupTime] = attribute_value_stringDB.ID
@@ -568,9 +596,9 @@ func (backRepoATTRIBUTE_VALUE_STRING *BackRepoATTRIBUTE_VALUE_STRINGStruct) Rest
 
 		attribute_value_stringDB_ID_atBackupTime := attribute_value_stringDB.ID
 		attribute_value_stringDB.ID = 0
-		query := backRepoATTRIBUTE_VALUE_STRING.db.Create(attribute_value_stringDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoATTRIBUTE_VALUE_STRING.db.Create(attribute_value_stringDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoATTRIBUTE_VALUE_STRING.Map_ATTRIBUTE_VALUE_STRINGDBID_ATTRIBUTE_VALUE_STRINGDB[attribute_value_stringDB.ID] = attribute_value_stringDB
 		BackRepoATTRIBUTE_VALUE_STRINGid_atBckpTime_newID[attribute_value_stringDB_ID_atBackupTime] = attribute_value_stringDB.ID
@@ -598,9 +626,10 @@ func (backRepoATTRIBUTE_VALUE_STRING *BackRepoATTRIBUTE_VALUE_STRINGStruct) Rest
 		}
 
 		// update databse with new index encoding
-		query := backRepoATTRIBUTE_VALUE_STRING.db.Model(attribute_value_stringDB).Updates(*attribute_value_stringDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoATTRIBUTE_VALUE_STRING.db.Model(attribute_value_stringDB)
+		_, err := db.Updates(*attribute_value_stringDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

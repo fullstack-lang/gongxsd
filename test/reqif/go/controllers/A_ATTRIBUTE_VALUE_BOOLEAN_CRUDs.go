@@ -58,24 +58,31 @@ func (controller *Controller) GetA_ATTRIBUTE_VALUE_BOOLEANs(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("GetA_ATTRIBUTE_VALUE_BOOLEANs", "GONG__StackPath", stackPath)
+			// log.Println("GetA_ATTRIBUTE_VALUE_BOOLEANs", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "GET Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoA_ATTRIBUTE_VALUE_BOOLEAN.GetDB()
 
-	query := db.Find(&a_attribute_value_booleanDBs)
-	if query.Error != nil {
+	_, err := db.Find(&a_attribute_value_booleanDBs)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -121,15 +128,22 @@ func (controller *Controller) PostA_ATTRIBUTE_VALUE_BOOLEAN(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("PostA_ATTRIBUTE_VALUE_BOOLEANs", "GONG__StackPath", stackPath)
+			// log.Println("PostA_ATTRIBUTE_VALUE_BOOLEANs", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "Post Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoA_ATTRIBUTE_VALUE_BOOLEAN.GetDB()
 
@@ -151,12 +165,12 @@ func (controller *Controller) PostA_ATTRIBUTE_VALUE_BOOLEAN(c *gin.Context) {
 	a_attribute_value_booleanDB.A_ATTRIBUTE_VALUE_BOOLEANPointersEncoding = input.A_ATTRIBUTE_VALUE_BOOLEANPointersEncoding
 	a_attribute_value_booleanDB.CopyBasicFieldsFromA_ATTRIBUTE_VALUE_BOOLEAN_WOP(&input.A_ATTRIBUTE_VALUE_BOOLEAN_WOP)
 
-	query := db.Create(&a_attribute_value_booleanDB)
-	if query.Error != nil {
+	_, err = db.Create(&a_attribute_value_booleanDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -191,21 +205,28 @@ func (controller *Controller) GetA_ATTRIBUTE_VALUE_BOOLEAN(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("GetA_ATTRIBUTE_VALUE_BOOLEAN", "GONG__StackPath", stackPath)
+			// log.Println("GetA_ATTRIBUTE_VALUE_BOOLEAN", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoA_ATTRIBUTE_VALUE_BOOLEAN.GetDB()
 
 	// Get a_attribute_value_booleanDB in DB
 	var a_attribute_value_booleanDB orm.A_ATTRIBUTE_VALUE_BOOLEANDB
-	if err := db.First(&a_attribute_value_booleanDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&a_attribute_value_booleanDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -240,15 +261,22 @@ func (controller *Controller) UpdateA_ATTRIBUTE_VALUE_BOOLEAN(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("UpdateA_ATTRIBUTE_VALUE_BOOLEAN", "GONG__StackPath", stackPath)
+			// log.Println("UpdateA_ATTRIBUTE_VALUE_BOOLEAN", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "PATCH Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoA_ATTRIBUTE_VALUE_BOOLEAN.GetDB()
 
@@ -264,13 +292,13 @@ func (controller *Controller) UpdateA_ATTRIBUTE_VALUE_BOOLEAN(c *gin.Context) {
 	var a_attribute_value_booleanDB orm.A_ATTRIBUTE_VALUE_BOOLEANDB
 
 	// fetch the a_attribute_value_boolean
-	query := db.First(&a_attribute_value_booleanDB, c.Param("id"))
+	_, err := db.First(&a_attribute_value_booleanDB, c.Param("id"))
 
-	if query.Error != nil {
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -279,12 +307,13 @@ func (controller *Controller) UpdateA_ATTRIBUTE_VALUE_BOOLEAN(c *gin.Context) {
 	a_attribute_value_booleanDB.CopyBasicFieldsFromA_ATTRIBUTE_VALUE_BOOLEAN_WOP(&input.A_ATTRIBUTE_VALUE_BOOLEAN_WOP)
 	a_attribute_value_booleanDB.A_ATTRIBUTE_VALUE_BOOLEANPointersEncoding = input.A_ATTRIBUTE_VALUE_BOOLEANPointersEncoding
 
-	query = db.Model(&a_attribute_value_booleanDB).Updates(a_attribute_value_booleanDB)
-	if query.Error != nil {
+	db, _ = db.Model(&a_attribute_value_booleanDB)
+	_, err = db.Updates(&a_attribute_value_booleanDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -329,21 +358,28 @@ func (controller *Controller) DeleteA_ATTRIBUTE_VALUE_BOOLEAN(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("DeleteA_ATTRIBUTE_VALUE_BOOLEAN", "GONG__StackPath", stackPath)
+			// log.Println("DeleteA_ATTRIBUTE_VALUE_BOOLEAN", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "DELETE Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoA_ATTRIBUTE_VALUE_BOOLEAN.GetDB()
 
 	// Get model if exist
 	var a_attribute_value_booleanDB orm.A_ATTRIBUTE_VALUE_BOOLEANDB
-	if err := db.First(&a_attribute_value_booleanDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&a_attribute_value_booleanDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -353,7 +389,8 @@ func (controller *Controller) DeleteA_ATTRIBUTE_VALUE_BOOLEAN(c *gin.Context) {
 	}
 
 	// with gorm.Model field, default delete is a soft delete. Unscoped() force delete
-	db.Unscoped().Delete(&a_attribute_value_booleanDB)
+	db.Unscoped()
+	db.Delete(&a_attribute_value_booleanDB)
 
 	// get an instance (not staged) from DB instance, and call callback function
 	a_attribute_value_booleanDeleted := new(models.A_ATTRIBUTE_VALUE_BOOLEAN)

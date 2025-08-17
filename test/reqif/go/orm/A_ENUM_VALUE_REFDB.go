@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/test/reqif/go/db"
 	"github.com/fullstack-lang/gongxsd/test/reqif/go/models"
 )
 
@@ -64,7 +65,7 @@ type A_ENUM_VALUE_REFDB struct {
 
 	// Declation for basic field a_enum_value_refDB.ENUM_VALUE_REF
 	ENUM_VALUE_REF_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	A_ENUM_VALUE_REFPointersEncoding
@@ -110,17 +111,17 @@ type BackRepoA_ENUM_VALUE_REFStruct struct {
 	// stores A_ENUM_VALUE_REF according to their gorm ID
 	Map_A_ENUM_VALUE_REFDBID_A_ENUM_VALUE_REFPtr map[uint]*models.A_ENUM_VALUE_REF
 
-	db *gorm.DB
+	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoA_ENUM_VALUE_REF *BackRepoA_ENUM_VALUE_REFStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoA_ENUM_VALUE_REF *BackRepoA_ENUM_VALUE_REFStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoA_ENUM_VALUE_REF.stage
 	return
 }
 
-func (backRepoA_ENUM_VALUE_REF *BackRepoA_ENUM_VALUE_REFStruct) GetDB() *gorm.DB {
+func (backRepoA_ENUM_VALUE_REF *BackRepoA_ENUM_VALUE_REFStruct) GetDB() db.DBInterface {
 	return backRepoA_ENUM_VALUE_REF.db
 }
 
@@ -133,9 +134,19 @@ func (backRepoA_ENUM_VALUE_REF *BackRepoA_ENUM_VALUE_REFStruct) GetA_ENUM_VALUE_
 
 // BackRepoA_ENUM_VALUE_REF.CommitPhaseOne commits all staged instances of A_ENUM_VALUE_REF to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoA_ENUM_VALUE_REF *BackRepoA_ENUM_VALUE_REFStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoA_ENUM_VALUE_REF *BackRepoA_ENUM_VALUE_REFStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var a_enum_value_refs []*models.A_ENUM_VALUE_REF
 	for a_enum_value_ref := range stage.A_ENUM_VALUE_REFs {
+		a_enum_value_refs = append(a_enum_value_refs, a_enum_value_ref)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(a_enum_value_refs, func(i, j int) bool {
+		return stage.A_ENUM_VALUE_REFMap_Staged_Order[a_enum_value_refs[i]] < stage.A_ENUM_VALUE_REFMap_Staged_Order[a_enum_value_refs[j]]
+	})
+
+	for _, a_enum_value_ref := range a_enum_value_refs {
 		backRepoA_ENUM_VALUE_REF.CommitPhaseOneInstance(a_enum_value_ref)
 	}
 
@@ -157,9 +168,10 @@ func (backRepoA_ENUM_VALUE_REF *BackRepoA_ENUM_VALUE_REFStruct) CommitDeleteInst
 
 	// a_enum_value_ref is not staged anymore, remove a_enum_value_refDB
 	a_enum_value_refDB := backRepoA_ENUM_VALUE_REF.Map_A_ENUM_VALUE_REFDBID_A_ENUM_VALUE_REFDB[id]
-	query := backRepoA_ENUM_VALUE_REF.db.Unscoped().Delete(&a_enum_value_refDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoA_ENUM_VALUE_REF.db.Unscoped()
+	_, err := db.Delete(a_enum_value_refDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -183,9 +195,9 @@ func (backRepoA_ENUM_VALUE_REF *BackRepoA_ENUM_VALUE_REFStruct) CommitPhaseOneIn
 	var a_enum_value_refDB A_ENUM_VALUE_REFDB
 	a_enum_value_refDB.CopyBasicFieldsFromA_ENUM_VALUE_REF(a_enum_value_ref)
 
-	query := backRepoA_ENUM_VALUE_REF.db.Create(&a_enum_value_refDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoA_ENUM_VALUE_REF.db.Create(&a_enum_value_refDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -217,9 +229,9 @@ func (backRepoA_ENUM_VALUE_REF *BackRepoA_ENUM_VALUE_REFStruct) CommitPhaseTwoIn
 		a_enum_value_refDB.CopyBasicFieldsFromA_ENUM_VALUE_REF(a_enum_value_ref)
 
 		// insertion point for translating pointers encodings into actual pointers
-		query := backRepoA_ENUM_VALUE_REF.db.Save(&a_enum_value_refDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoA_ENUM_VALUE_REF.db.Save(a_enum_value_refDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -238,9 +250,9 @@ func (backRepoA_ENUM_VALUE_REF *BackRepoA_ENUM_VALUE_REFStruct) CommitPhaseTwoIn
 func (backRepoA_ENUM_VALUE_REF *BackRepoA_ENUM_VALUE_REFStruct) CheckoutPhaseOne() (Error error) {
 
 	a_enum_value_refDBArray := make([]A_ENUM_VALUE_REFDB, 0)
-	query := backRepoA_ENUM_VALUE_REF.db.Find(&a_enum_value_refDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoA_ENUM_VALUE_REF.db.Find(&a_enum_value_refDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -351,7 +363,7 @@ func (backRepo *BackRepoStruct) CheckoutA_ENUM_VALUE_REF(a_enum_value_ref *model
 			var a_enum_value_refDB A_ENUM_VALUE_REFDB
 			a_enum_value_refDB.ID = id
 
-			if err := backRepo.BackRepoA_ENUM_VALUE_REF.db.First(&a_enum_value_refDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoA_ENUM_VALUE_REF.db.First(&a_enum_value_refDB, id); err != nil {
 				log.Fatalln("CheckoutA_ENUM_VALUE_REF : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoA_ENUM_VALUE_REF.CheckoutPhaseOneInstance(&a_enum_value_refDB)
@@ -510,9 +522,9 @@ func (backRepoA_ENUM_VALUE_REF *BackRepoA_ENUM_VALUE_REFStruct) rowVisitorA_ENUM
 
 		a_enum_value_refDB_ID_atBackupTime := a_enum_value_refDB.ID
 		a_enum_value_refDB.ID = 0
-		query := backRepoA_ENUM_VALUE_REF.db.Create(a_enum_value_refDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoA_ENUM_VALUE_REF.db.Create(a_enum_value_refDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoA_ENUM_VALUE_REF.Map_A_ENUM_VALUE_REFDBID_A_ENUM_VALUE_REFDB[a_enum_value_refDB.ID] = a_enum_value_refDB
 		BackRepoA_ENUM_VALUE_REFid_atBckpTime_newID[a_enum_value_refDB_ID_atBackupTime] = a_enum_value_refDB.ID
@@ -547,9 +559,9 @@ func (backRepoA_ENUM_VALUE_REF *BackRepoA_ENUM_VALUE_REFStruct) RestorePhaseOne(
 
 		a_enum_value_refDB_ID_atBackupTime := a_enum_value_refDB.ID
 		a_enum_value_refDB.ID = 0
-		query := backRepoA_ENUM_VALUE_REF.db.Create(a_enum_value_refDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoA_ENUM_VALUE_REF.db.Create(a_enum_value_refDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoA_ENUM_VALUE_REF.Map_A_ENUM_VALUE_REFDBID_A_ENUM_VALUE_REFDB[a_enum_value_refDB.ID] = a_enum_value_refDB
 		BackRepoA_ENUM_VALUE_REFid_atBckpTime_newID[a_enum_value_refDB_ID_atBackupTime] = a_enum_value_refDB.ID
@@ -571,9 +583,10 @@ func (backRepoA_ENUM_VALUE_REF *BackRepoA_ENUM_VALUE_REFStruct) RestorePhaseTwo(
 
 		// insertion point for reindexing pointers encoding
 		// update databse with new index encoding
-		query := backRepoA_ENUM_VALUE_REF.db.Model(a_enum_value_refDB).Updates(*a_enum_value_refDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoA_ENUM_VALUE_REF.db.Model(a_enum_value_refDB)
+		_, err := db.Updates(*a_enum_value_refDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

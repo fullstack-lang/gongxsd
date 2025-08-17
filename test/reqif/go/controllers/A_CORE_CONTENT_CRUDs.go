@@ -58,24 +58,31 @@ func (controller *Controller) GetA_CORE_CONTENTs(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("GetA_CORE_CONTENTs", "GONG__StackPath", stackPath)
+			// log.Println("GetA_CORE_CONTENTs", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "GET Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoA_CORE_CONTENT.GetDB()
 
-	query := db.Find(&a_core_contentDBs)
-	if query.Error != nil {
+	_, err := db.Find(&a_core_contentDBs)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -121,15 +128,22 @@ func (controller *Controller) PostA_CORE_CONTENT(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("PostA_CORE_CONTENTs", "GONG__StackPath", stackPath)
+			// log.Println("PostA_CORE_CONTENTs", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "Post Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoA_CORE_CONTENT.GetDB()
 
@@ -151,12 +165,12 @@ func (controller *Controller) PostA_CORE_CONTENT(c *gin.Context) {
 	a_core_contentDB.A_CORE_CONTENTPointersEncoding = input.A_CORE_CONTENTPointersEncoding
 	a_core_contentDB.CopyBasicFieldsFromA_CORE_CONTENT_WOP(&input.A_CORE_CONTENT_WOP)
 
-	query := db.Create(&a_core_contentDB)
-	if query.Error != nil {
+	_, err = db.Create(&a_core_contentDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -191,21 +205,28 @@ func (controller *Controller) GetA_CORE_CONTENT(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("GetA_CORE_CONTENT", "GONG__StackPath", stackPath)
+			// log.Println("GetA_CORE_CONTENT", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoA_CORE_CONTENT.GetDB()
 
 	// Get a_core_contentDB in DB
 	var a_core_contentDB orm.A_CORE_CONTENTDB
-	if err := db.First(&a_core_contentDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&a_core_contentDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -240,15 +261,22 @@ func (controller *Controller) UpdateA_CORE_CONTENT(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("UpdateA_CORE_CONTENT", "GONG__StackPath", stackPath)
+			// log.Println("UpdateA_CORE_CONTENT", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "PATCH Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoA_CORE_CONTENT.GetDB()
 
@@ -264,13 +292,13 @@ func (controller *Controller) UpdateA_CORE_CONTENT(c *gin.Context) {
 	var a_core_contentDB orm.A_CORE_CONTENTDB
 
 	// fetch the a_core_content
-	query := db.First(&a_core_contentDB, c.Param("id"))
+	_, err := db.First(&a_core_contentDB, c.Param("id"))
 
-	if query.Error != nil {
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -279,12 +307,13 @@ func (controller *Controller) UpdateA_CORE_CONTENT(c *gin.Context) {
 	a_core_contentDB.CopyBasicFieldsFromA_CORE_CONTENT_WOP(&input.A_CORE_CONTENT_WOP)
 	a_core_contentDB.A_CORE_CONTENTPointersEncoding = input.A_CORE_CONTENTPointersEncoding
 
-	query = db.Model(&a_core_contentDB).Updates(a_core_contentDB)
-	if query.Error != nil {
+	db, _ = db.Model(&a_core_contentDB)
+	_, err = db.Updates(&a_core_contentDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -329,21 +358,28 @@ func (controller *Controller) DeleteA_CORE_CONTENT(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("DeleteA_CORE_CONTENT", "GONG__StackPath", stackPath)
+			// log.Println("DeleteA_CORE_CONTENT", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "DELETE Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoA_CORE_CONTENT.GetDB()
 
 	// Get model if exist
 	var a_core_contentDB orm.A_CORE_CONTENTDB
-	if err := db.First(&a_core_contentDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&a_core_contentDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -353,7 +389,8 @@ func (controller *Controller) DeleteA_CORE_CONTENT(c *gin.Context) {
 	}
 
 	// with gorm.Model field, default delete is a soft delete. Unscoped() force delete
-	db.Unscoped().Delete(&a_core_contentDB)
+	db.Unscoped()
+	db.Delete(&a_core_contentDB)
 
 	// get an instance (not staged) from DB instance, and call callback function
 	a_core_contentDeleted := new(models.A_CORE_CONTENT)

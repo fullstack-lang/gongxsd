@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/test/reqif/go/db"
 	"github.com/fullstack-lang/gongxsd/test/reqif/go/models"
 )
 
@@ -65,7 +66,7 @@ type A_PROPERTIESDB struct {
 
 	// Declation for basic field a_propertiesDB.Name
 	Name_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	A_PROPERTIESPointersEncoding
@@ -108,17 +109,17 @@ type BackRepoA_PROPERTIESStruct struct {
 	// stores A_PROPERTIES according to their gorm ID
 	Map_A_PROPERTIESDBID_A_PROPERTIESPtr map[uint]*models.A_PROPERTIES
 
-	db *gorm.DB
+	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoA_PROPERTIES *BackRepoA_PROPERTIESStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoA_PROPERTIES *BackRepoA_PROPERTIESStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoA_PROPERTIES.stage
 	return
 }
 
-func (backRepoA_PROPERTIES *BackRepoA_PROPERTIESStruct) GetDB() *gorm.DB {
+func (backRepoA_PROPERTIES *BackRepoA_PROPERTIESStruct) GetDB() db.DBInterface {
 	return backRepoA_PROPERTIES.db
 }
 
@@ -131,9 +132,19 @@ func (backRepoA_PROPERTIES *BackRepoA_PROPERTIESStruct) GetA_PROPERTIESDBFromA_P
 
 // BackRepoA_PROPERTIES.CommitPhaseOne commits all staged instances of A_PROPERTIES to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoA_PROPERTIES *BackRepoA_PROPERTIESStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoA_PROPERTIES *BackRepoA_PROPERTIESStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var a_propertiess []*models.A_PROPERTIES
 	for a_properties := range stage.A_PROPERTIESs {
+		a_propertiess = append(a_propertiess, a_properties)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(a_propertiess, func(i, j int) bool {
+		return stage.A_PROPERTIESMap_Staged_Order[a_propertiess[i]] < stage.A_PROPERTIESMap_Staged_Order[a_propertiess[j]]
+	})
+
+	for _, a_properties := range a_propertiess {
 		backRepoA_PROPERTIES.CommitPhaseOneInstance(a_properties)
 	}
 
@@ -155,9 +166,10 @@ func (backRepoA_PROPERTIES *BackRepoA_PROPERTIESStruct) CommitDeleteInstance(id 
 
 	// a_properties is not staged anymore, remove a_propertiesDB
 	a_propertiesDB := backRepoA_PROPERTIES.Map_A_PROPERTIESDBID_A_PROPERTIESDB[id]
-	query := backRepoA_PROPERTIES.db.Unscoped().Delete(&a_propertiesDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoA_PROPERTIES.db.Unscoped()
+	_, err := db.Delete(a_propertiesDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -181,9 +193,9 @@ func (backRepoA_PROPERTIES *BackRepoA_PROPERTIESStruct) CommitPhaseOneInstance(a
 	var a_propertiesDB A_PROPERTIESDB
 	a_propertiesDB.CopyBasicFieldsFromA_PROPERTIES(a_properties)
 
-	query := backRepoA_PROPERTIES.db.Create(&a_propertiesDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoA_PROPERTIES.db.Create(&a_propertiesDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -227,9 +239,9 @@ func (backRepoA_PROPERTIES *BackRepoA_PROPERTIESStruct) CommitPhaseTwoInstance(b
 			a_propertiesDB.EMBEDDED_VALUEID.Valid = true
 		}
 
-		query := backRepoA_PROPERTIES.db.Save(&a_propertiesDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoA_PROPERTIES.db.Save(a_propertiesDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -248,9 +260,9 @@ func (backRepoA_PROPERTIES *BackRepoA_PROPERTIESStruct) CommitPhaseTwoInstance(b
 func (backRepoA_PROPERTIES *BackRepoA_PROPERTIESStruct) CheckoutPhaseOne() (Error error) {
 
 	a_propertiesDBArray := make([]A_PROPERTIESDB, 0)
-	query := backRepoA_PROPERTIES.db.Find(&a_propertiesDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoA_PROPERTIES.db.Find(&a_propertiesDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -340,11 +352,27 @@ func (backRepoA_PROPERTIES *BackRepoA_PROPERTIESStruct) CheckoutPhaseTwoInstance
 func (a_propertiesDB *A_PROPERTIESDB) DecodePointers(backRepo *BackRepoStruct, a_properties *models.A_PROPERTIES) {
 
 	// insertion point for checkout of pointer encoding
-	// EMBEDDED_VALUE field
-	a_properties.EMBEDDED_VALUE = nil
-	if a_propertiesDB.EMBEDDED_VALUEID.Int64 != 0 {
-		a_properties.EMBEDDED_VALUE = backRepo.BackRepoEMBEDDED_VALUE.Map_EMBEDDED_VALUEDBID_EMBEDDED_VALUEPtr[uint(a_propertiesDB.EMBEDDED_VALUEID.Int64)]
+	// EMBEDDED_VALUE field	
+	{
+		id := a_propertiesDB.EMBEDDED_VALUEID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoEMBEDDED_VALUE.Map_EMBEDDED_VALUEDBID_EMBEDDED_VALUEPtr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: a_properties.EMBEDDED_VALUE, unknown pointer id", id)
+				a_properties.EMBEDDED_VALUE = nil
+			} else {
+				// updates only if field has changed
+				if a_properties.EMBEDDED_VALUE == nil || a_properties.EMBEDDED_VALUE != tmp {
+					a_properties.EMBEDDED_VALUE = tmp
+				}
+			}
+		} else {
+			a_properties.EMBEDDED_VALUE = nil
+		}
 	}
+	
 	return
 }
 
@@ -366,7 +394,7 @@ func (backRepo *BackRepoStruct) CheckoutA_PROPERTIES(a_properties *models.A_PROP
 			var a_propertiesDB A_PROPERTIESDB
 			a_propertiesDB.ID = id
 
-			if err := backRepo.BackRepoA_PROPERTIES.db.First(&a_propertiesDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoA_PROPERTIES.db.First(&a_propertiesDB, id); err != nil {
 				log.Fatalln("CheckoutA_PROPERTIES : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoA_PROPERTIES.CheckoutPhaseOneInstance(&a_propertiesDB)
@@ -513,9 +541,9 @@ func (backRepoA_PROPERTIES *BackRepoA_PROPERTIESStruct) rowVisitorA_PROPERTIES(r
 
 		a_propertiesDB_ID_atBackupTime := a_propertiesDB.ID
 		a_propertiesDB.ID = 0
-		query := backRepoA_PROPERTIES.db.Create(a_propertiesDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoA_PROPERTIES.db.Create(a_propertiesDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoA_PROPERTIES.Map_A_PROPERTIESDBID_A_PROPERTIESDB[a_propertiesDB.ID] = a_propertiesDB
 		BackRepoA_PROPERTIESid_atBckpTime_newID[a_propertiesDB_ID_atBackupTime] = a_propertiesDB.ID
@@ -550,9 +578,9 @@ func (backRepoA_PROPERTIES *BackRepoA_PROPERTIESStruct) RestorePhaseOne(dirPath 
 
 		a_propertiesDB_ID_atBackupTime := a_propertiesDB.ID
 		a_propertiesDB.ID = 0
-		query := backRepoA_PROPERTIES.db.Create(a_propertiesDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoA_PROPERTIES.db.Create(a_propertiesDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoA_PROPERTIES.Map_A_PROPERTIESDBID_A_PROPERTIESDB[a_propertiesDB.ID] = a_propertiesDB
 		BackRepoA_PROPERTIESid_atBckpTime_newID[a_propertiesDB_ID_atBackupTime] = a_propertiesDB.ID
@@ -580,9 +608,10 @@ func (backRepoA_PROPERTIES *BackRepoA_PROPERTIESStruct) RestorePhaseTwo() {
 		}
 
 		// update databse with new index encoding
-		query := backRepoA_PROPERTIES.db.Model(a_propertiesDB).Updates(*a_propertiesDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoA_PROPERTIES.db.Model(a_propertiesDB)
+		_, err := db.Updates(*a_propertiesDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

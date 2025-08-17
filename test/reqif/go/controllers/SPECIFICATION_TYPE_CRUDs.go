@@ -58,24 +58,31 @@ func (controller *Controller) GetSPECIFICATION_TYPEs(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("GetSPECIFICATION_TYPEs", "GONG__StackPath", stackPath)
+			// log.Println("GetSPECIFICATION_TYPEs", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "GET Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoSPECIFICATION_TYPE.GetDB()
 
-	query := db.Find(&specification_typeDBs)
-	if query.Error != nil {
+	_, err := db.Find(&specification_typeDBs)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -121,15 +128,22 @@ func (controller *Controller) PostSPECIFICATION_TYPE(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("PostSPECIFICATION_TYPEs", "GONG__StackPath", stackPath)
+			// log.Println("PostSPECIFICATION_TYPEs", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "Post Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoSPECIFICATION_TYPE.GetDB()
 
@@ -151,12 +165,12 @@ func (controller *Controller) PostSPECIFICATION_TYPE(c *gin.Context) {
 	specification_typeDB.SPECIFICATION_TYPEPointersEncoding = input.SPECIFICATION_TYPEPointersEncoding
 	specification_typeDB.CopyBasicFieldsFromSPECIFICATION_TYPE_WOP(&input.SPECIFICATION_TYPE_WOP)
 
-	query := db.Create(&specification_typeDB)
-	if query.Error != nil {
+	_, err = db.Create(&specification_typeDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -191,21 +205,28 @@ func (controller *Controller) GetSPECIFICATION_TYPE(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("GetSPECIFICATION_TYPE", "GONG__StackPath", stackPath)
+			// log.Println("GetSPECIFICATION_TYPE", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoSPECIFICATION_TYPE.GetDB()
 
 	// Get specification_typeDB in DB
 	var specification_typeDB orm.SPECIFICATION_TYPEDB
-	if err := db.First(&specification_typeDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&specification_typeDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -240,15 +261,22 @@ func (controller *Controller) UpdateSPECIFICATION_TYPE(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("UpdateSPECIFICATION_TYPE", "GONG__StackPath", stackPath)
+			// log.Println("UpdateSPECIFICATION_TYPE", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "PATCH Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoSPECIFICATION_TYPE.GetDB()
 
@@ -264,13 +292,13 @@ func (controller *Controller) UpdateSPECIFICATION_TYPE(c *gin.Context) {
 	var specification_typeDB orm.SPECIFICATION_TYPEDB
 
 	// fetch the specification_type
-	query := db.First(&specification_typeDB, c.Param("id"))
+	_, err := db.First(&specification_typeDB, c.Param("id"))
 
-	if query.Error != nil {
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -279,12 +307,13 @@ func (controller *Controller) UpdateSPECIFICATION_TYPE(c *gin.Context) {
 	specification_typeDB.CopyBasicFieldsFromSPECIFICATION_TYPE_WOP(&input.SPECIFICATION_TYPE_WOP)
 	specification_typeDB.SPECIFICATION_TYPEPointersEncoding = input.SPECIFICATION_TYPEPointersEncoding
 
-	query = db.Model(&specification_typeDB).Updates(specification_typeDB)
-	if query.Error != nil {
+	db, _ = db.Model(&specification_typeDB)
+	_, err = db.Updates(&specification_typeDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -329,21 +358,28 @@ func (controller *Controller) DeleteSPECIFICATION_TYPE(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("DeleteSPECIFICATION_TYPE", "GONG__StackPath", stackPath)
+			// log.Println("DeleteSPECIFICATION_TYPE", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "DELETE Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoSPECIFICATION_TYPE.GetDB()
 
 	// Get model if exist
 	var specification_typeDB orm.SPECIFICATION_TYPEDB
-	if err := db.First(&specification_typeDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&specification_typeDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -353,7 +389,8 @@ func (controller *Controller) DeleteSPECIFICATION_TYPE(c *gin.Context) {
 	}
 
 	// with gorm.Model field, default delete is a soft delete. Unscoped() force delete
-	db.Unscoped().Delete(&specification_typeDB)
+	db.Unscoped()
+	db.Delete(&specification_typeDB)
 
 	// get an instance (not staged) from DB instance, and call callback function
 	specification_typeDeleted := new(models.SPECIFICATION_TYPE)

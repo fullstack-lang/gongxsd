@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/test/reqif/go/db"
 	"github.com/fullstack-lang/gongxsd/test/reqif/go/models"
 )
 
@@ -85,7 +86,7 @@ type REQ_IF_CONTENTDB struct {
 
 	// Declation for basic field req_if_contentDB.Name
 	Name_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	REQ_IF_CONTENTPointersEncoding
@@ -128,17 +129,17 @@ type BackRepoREQ_IF_CONTENTStruct struct {
 	// stores REQ_IF_CONTENT according to their gorm ID
 	Map_REQ_IF_CONTENTDBID_REQ_IF_CONTENTPtr map[uint]*models.REQ_IF_CONTENT
 
-	db *gorm.DB
+	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoREQ_IF_CONTENT *BackRepoREQ_IF_CONTENTStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoREQ_IF_CONTENT *BackRepoREQ_IF_CONTENTStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoREQ_IF_CONTENT.stage
 	return
 }
 
-func (backRepoREQ_IF_CONTENT *BackRepoREQ_IF_CONTENTStruct) GetDB() *gorm.DB {
+func (backRepoREQ_IF_CONTENT *BackRepoREQ_IF_CONTENTStruct) GetDB() db.DBInterface {
 	return backRepoREQ_IF_CONTENT.db
 }
 
@@ -151,9 +152,19 @@ func (backRepoREQ_IF_CONTENT *BackRepoREQ_IF_CONTENTStruct) GetREQ_IF_CONTENTDBF
 
 // BackRepoREQ_IF_CONTENT.CommitPhaseOne commits all staged instances of REQ_IF_CONTENT to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoREQ_IF_CONTENT *BackRepoREQ_IF_CONTENTStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoREQ_IF_CONTENT *BackRepoREQ_IF_CONTENTStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var req_if_contents []*models.REQ_IF_CONTENT
 	for req_if_content := range stage.REQ_IF_CONTENTs {
+		req_if_contents = append(req_if_contents, req_if_content)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(req_if_contents, func(i, j int) bool {
+		return stage.REQ_IF_CONTENTMap_Staged_Order[req_if_contents[i]] < stage.REQ_IF_CONTENTMap_Staged_Order[req_if_contents[j]]
+	})
+
+	for _, req_if_content := range req_if_contents {
 		backRepoREQ_IF_CONTENT.CommitPhaseOneInstance(req_if_content)
 	}
 
@@ -175,9 +186,10 @@ func (backRepoREQ_IF_CONTENT *BackRepoREQ_IF_CONTENTStruct) CommitDeleteInstance
 
 	// req_if_content is not staged anymore, remove req_if_contentDB
 	req_if_contentDB := backRepoREQ_IF_CONTENT.Map_REQ_IF_CONTENTDBID_REQ_IF_CONTENTDB[id]
-	query := backRepoREQ_IF_CONTENT.db.Unscoped().Delete(&req_if_contentDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoREQ_IF_CONTENT.db.Unscoped()
+	_, err := db.Delete(req_if_contentDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -201,9 +213,9 @@ func (backRepoREQ_IF_CONTENT *BackRepoREQ_IF_CONTENTStruct) CommitPhaseOneInstan
 	var req_if_contentDB REQ_IF_CONTENTDB
 	req_if_contentDB.CopyBasicFieldsFromREQ_IF_CONTENT(req_if_content)
 
-	query := backRepoREQ_IF_CONTENT.db.Create(&req_if_contentDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoREQ_IF_CONTENT.db.Create(&req_if_contentDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -307,9 +319,9 @@ func (backRepoREQ_IF_CONTENT *BackRepoREQ_IF_CONTENTStruct) CommitPhaseTwoInstan
 			req_if_contentDB.SPEC_RELATION_GROUPSID.Valid = true
 		}
 
-		query := backRepoREQ_IF_CONTENT.db.Save(&req_if_contentDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoREQ_IF_CONTENT.db.Save(req_if_contentDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -328,9 +340,9 @@ func (backRepoREQ_IF_CONTENT *BackRepoREQ_IF_CONTENTStruct) CommitPhaseTwoInstan
 func (backRepoREQ_IF_CONTENT *BackRepoREQ_IF_CONTENTStruct) CheckoutPhaseOne() (Error error) {
 
 	req_if_contentDBArray := make([]REQ_IF_CONTENTDB, 0)
-	query := backRepoREQ_IF_CONTENT.db.Find(&req_if_contentDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoREQ_IF_CONTENT.db.Find(&req_if_contentDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -420,36 +432,132 @@ func (backRepoREQ_IF_CONTENT *BackRepoREQ_IF_CONTENTStruct) CheckoutPhaseTwoInst
 func (req_if_contentDB *REQ_IF_CONTENTDB) DecodePointers(backRepo *BackRepoStruct, req_if_content *models.REQ_IF_CONTENT) {
 
 	// insertion point for checkout of pointer encoding
-	// DATATYPES field
-	req_if_content.DATATYPES = nil
-	if req_if_contentDB.DATATYPESID.Int64 != 0 {
-		req_if_content.DATATYPES = backRepo.BackRepoA_DATATYPES.Map_A_DATATYPESDBID_A_DATATYPESPtr[uint(req_if_contentDB.DATATYPESID.Int64)]
+	// DATATYPES field	
+	{
+		id := req_if_contentDB.DATATYPESID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoA_DATATYPES.Map_A_DATATYPESDBID_A_DATATYPESPtr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: req_if_content.DATATYPES, unknown pointer id", id)
+				req_if_content.DATATYPES = nil
+			} else {
+				// updates only if field has changed
+				if req_if_content.DATATYPES == nil || req_if_content.DATATYPES != tmp {
+					req_if_content.DATATYPES = tmp
+				}
+			}
+		} else {
+			req_if_content.DATATYPES = nil
+		}
 	}
-	// SPEC_TYPES field
-	req_if_content.SPEC_TYPES = nil
-	if req_if_contentDB.SPEC_TYPESID.Int64 != 0 {
-		req_if_content.SPEC_TYPES = backRepo.BackRepoA_SPEC_TYPES.Map_A_SPEC_TYPESDBID_A_SPEC_TYPESPtr[uint(req_if_contentDB.SPEC_TYPESID.Int64)]
+	
+	// SPEC_TYPES field	
+	{
+		id := req_if_contentDB.SPEC_TYPESID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoA_SPEC_TYPES.Map_A_SPEC_TYPESDBID_A_SPEC_TYPESPtr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: req_if_content.SPEC_TYPES, unknown pointer id", id)
+				req_if_content.SPEC_TYPES = nil
+			} else {
+				// updates only if field has changed
+				if req_if_content.SPEC_TYPES == nil || req_if_content.SPEC_TYPES != tmp {
+					req_if_content.SPEC_TYPES = tmp
+				}
+			}
+		} else {
+			req_if_content.SPEC_TYPES = nil
+		}
 	}
-	// SPEC_OBJECTS field
-	req_if_content.SPEC_OBJECTS = nil
-	if req_if_contentDB.SPEC_OBJECTSID.Int64 != 0 {
-		req_if_content.SPEC_OBJECTS = backRepo.BackRepoA_SPEC_OBJECTS.Map_A_SPEC_OBJECTSDBID_A_SPEC_OBJECTSPtr[uint(req_if_contentDB.SPEC_OBJECTSID.Int64)]
+	
+	// SPEC_OBJECTS field	
+	{
+		id := req_if_contentDB.SPEC_OBJECTSID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoA_SPEC_OBJECTS.Map_A_SPEC_OBJECTSDBID_A_SPEC_OBJECTSPtr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: req_if_content.SPEC_OBJECTS, unknown pointer id", id)
+				req_if_content.SPEC_OBJECTS = nil
+			} else {
+				// updates only if field has changed
+				if req_if_content.SPEC_OBJECTS == nil || req_if_content.SPEC_OBJECTS != tmp {
+					req_if_content.SPEC_OBJECTS = tmp
+				}
+			}
+		} else {
+			req_if_content.SPEC_OBJECTS = nil
+		}
 	}
-	// SPEC_RELATIONS field
-	req_if_content.SPEC_RELATIONS = nil
-	if req_if_contentDB.SPEC_RELATIONSID.Int64 != 0 {
-		req_if_content.SPEC_RELATIONS = backRepo.BackRepoA_SPEC_RELATIONS.Map_A_SPEC_RELATIONSDBID_A_SPEC_RELATIONSPtr[uint(req_if_contentDB.SPEC_RELATIONSID.Int64)]
+	
+	// SPEC_RELATIONS field	
+	{
+		id := req_if_contentDB.SPEC_RELATIONSID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoA_SPEC_RELATIONS.Map_A_SPEC_RELATIONSDBID_A_SPEC_RELATIONSPtr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: req_if_content.SPEC_RELATIONS, unknown pointer id", id)
+				req_if_content.SPEC_RELATIONS = nil
+			} else {
+				// updates only if field has changed
+				if req_if_content.SPEC_RELATIONS == nil || req_if_content.SPEC_RELATIONS != tmp {
+					req_if_content.SPEC_RELATIONS = tmp
+				}
+			}
+		} else {
+			req_if_content.SPEC_RELATIONS = nil
+		}
 	}
-	// SPECIFICATIONS field
-	req_if_content.SPECIFICATIONS = nil
-	if req_if_contentDB.SPECIFICATIONSID.Int64 != 0 {
-		req_if_content.SPECIFICATIONS = backRepo.BackRepoA_SPECIFICATIONS.Map_A_SPECIFICATIONSDBID_A_SPECIFICATIONSPtr[uint(req_if_contentDB.SPECIFICATIONSID.Int64)]
+	
+	// SPECIFICATIONS field	
+	{
+		id := req_if_contentDB.SPECIFICATIONSID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoA_SPECIFICATIONS.Map_A_SPECIFICATIONSDBID_A_SPECIFICATIONSPtr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: req_if_content.SPECIFICATIONS, unknown pointer id", id)
+				req_if_content.SPECIFICATIONS = nil
+			} else {
+				// updates only if field has changed
+				if req_if_content.SPECIFICATIONS == nil || req_if_content.SPECIFICATIONS != tmp {
+					req_if_content.SPECIFICATIONS = tmp
+				}
+			}
+		} else {
+			req_if_content.SPECIFICATIONS = nil
+		}
 	}
-	// SPEC_RELATION_GROUPS field
-	req_if_content.SPEC_RELATION_GROUPS = nil
-	if req_if_contentDB.SPEC_RELATION_GROUPSID.Int64 != 0 {
-		req_if_content.SPEC_RELATION_GROUPS = backRepo.BackRepoA_SPEC_RELATION_GROUPS.Map_A_SPEC_RELATION_GROUPSDBID_A_SPEC_RELATION_GROUPSPtr[uint(req_if_contentDB.SPEC_RELATION_GROUPSID.Int64)]
+	
+	// SPEC_RELATION_GROUPS field	
+	{
+		id := req_if_contentDB.SPEC_RELATION_GROUPSID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoA_SPEC_RELATION_GROUPS.Map_A_SPEC_RELATION_GROUPSDBID_A_SPEC_RELATION_GROUPSPtr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: req_if_content.SPEC_RELATION_GROUPS, unknown pointer id", id)
+				req_if_content.SPEC_RELATION_GROUPS = nil
+			} else {
+				// updates only if field has changed
+				if req_if_content.SPEC_RELATION_GROUPS == nil || req_if_content.SPEC_RELATION_GROUPS != tmp {
+					req_if_content.SPEC_RELATION_GROUPS = tmp
+				}
+			}
+		} else {
+			req_if_content.SPEC_RELATION_GROUPS = nil
+		}
 	}
+	
 	return
 }
 
@@ -471,7 +579,7 @@ func (backRepo *BackRepoStruct) CheckoutREQ_IF_CONTENT(req_if_content *models.RE
 			var req_if_contentDB REQ_IF_CONTENTDB
 			req_if_contentDB.ID = id
 
-			if err := backRepo.BackRepoREQ_IF_CONTENT.db.First(&req_if_contentDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoREQ_IF_CONTENT.db.First(&req_if_contentDB, id); err != nil {
 				log.Fatalln("CheckoutREQ_IF_CONTENT : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoREQ_IF_CONTENT.CheckoutPhaseOneInstance(&req_if_contentDB)
@@ -618,9 +726,9 @@ func (backRepoREQ_IF_CONTENT *BackRepoREQ_IF_CONTENTStruct) rowVisitorREQ_IF_CON
 
 		req_if_contentDB_ID_atBackupTime := req_if_contentDB.ID
 		req_if_contentDB.ID = 0
-		query := backRepoREQ_IF_CONTENT.db.Create(req_if_contentDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoREQ_IF_CONTENT.db.Create(req_if_contentDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoREQ_IF_CONTENT.Map_REQ_IF_CONTENTDBID_REQ_IF_CONTENTDB[req_if_contentDB.ID] = req_if_contentDB
 		BackRepoREQ_IF_CONTENTid_atBckpTime_newID[req_if_contentDB_ID_atBackupTime] = req_if_contentDB.ID
@@ -655,9 +763,9 @@ func (backRepoREQ_IF_CONTENT *BackRepoREQ_IF_CONTENTStruct) RestorePhaseOne(dirP
 
 		req_if_contentDB_ID_atBackupTime := req_if_contentDB.ID
 		req_if_contentDB.ID = 0
-		query := backRepoREQ_IF_CONTENT.db.Create(req_if_contentDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoREQ_IF_CONTENT.db.Create(req_if_contentDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoREQ_IF_CONTENT.Map_REQ_IF_CONTENTDBID_REQ_IF_CONTENTDB[req_if_contentDB.ID] = req_if_contentDB
 		BackRepoREQ_IF_CONTENTid_atBckpTime_newID[req_if_contentDB_ID_atBackupTime] = req_if_contentDB.ID
@@ -715,9 +823,10 @@ func (backRepoREQ_IF_CONTENT *BackRepoREQ_IF_CONTENTStruct) RestorePhaseTwo() {
 		}
 
 		// update databse with new index encoding
-		query := backRepoREQ_IF_CONTENT.db.Model(req_if_contentDB).Updates(*req_if_contentDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoREQ_IF_CONTENT.db.Model(req_if_contentDB)
+		_, err := db.Updates(*req_if_contentDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

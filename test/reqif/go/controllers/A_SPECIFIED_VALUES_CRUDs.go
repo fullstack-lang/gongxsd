@@ -58,24 +58,31 @@ func (controller *Controller) GetA_SPECIFIED_VALUESs(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("GetA_SPECIFIED_VALUESs", "GONG__StackPath", stackPath)
+			// log.Println("GetA_SPECIFIED_VALUESs", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "GET Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoA_SPECIFIED_VALUES.GetDB()
 
-	query := db.Find(&a_specified_valuesDBs)
-	if query.Error != nil {
+	_, err := db.Find(&a_specified_valuesDBs)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -121,15 +128,22 @@ func (controller *Controller) PostA_SPECIFIED_VALUES(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("PostA_SPECIFIED_VALUESs", "GONG__StackPath", stackPath)
+			// log.Println("PostA_SPECIFIED_VALUESs", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "Post Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoA_SPECIFIED_VALUES.GetDB()
 
@@ -151,12 +165,12 @@ func (controller *Controller) PostA_SPECIFIED_VALUES(c *gin.Context) {
 	a_specified_valuesDB.A_SPECIFIED_VALUESPointersEncoding = input.A_SPECIFIED_VALUESPointersEncoding
 	a_specified_valuesDB.CopyBasicFieldsFromA_SPECIFIED_VALUES_WOP(&input.A_SPECIFIED_VALUES_WOP)
 
-	query := db.Create(&a_specified_valuesDB)
-	if query.Error != nil {
+	_, err = db.Create(&a_specified_valuesDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -191,21 +205,28 @@ func (controller *Controller) GetA_SPECIFIED_VALUES(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("GetA_SPECIFIED_VALUES", "GONG__StackPath", stackPath)
+			// log.Println("GetA_SPECIFIED_VALUES", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoA_SPECIFIED_VALUES.GetDB()
 
 	// Get a_specified_valuesDB in DB
 	var a_specified_valuesDB orm.A_SPECIFIED_VALUESDB
-	if err := db.First(&a_specified_valuesDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&a_specified_valuesDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -240,15 +261,22 @@ func (controller *Controller) UpdateA_SPECIFIED_VALUES(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("UpdateA_SPECIFIED_VALUES", "GONG__StackPath", stackPath)
+			// log.Println("UpdateA_SPECIFIED_VALUES", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "PATCH Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoA_SPECIFIED_VALUES.GetDB()
 
@@ -264,13 +292,13 @@ func (controller *Controller) UpdateA_SPECIFIED_VALUES(c *gin.Context) {
 	var a_specified_valuesDB orm.A_SPECIFIED_VALUESDB
 
 	// fetch the a_specified_values
-	query := db.First(&a_specified_valuesDB, c.Param("id"))
+	_, err := db.First(&a_specified_valuesDB, c.Param("id"))
 
-	if query.Error != nil {
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -279,12 +307,13 @@ func (controller *Controller) UpdateA_SPECIFIED_VALUES(c *gin.Context) {
 	a_specified_valuesDB.CopyBasicFieldsFromA_SPECIFIED_VALUES_WOP(&input.A_SPECIFIED_VALUES_WOP)
 	a_specified_valuesDB.A_SPECIFIED_VALUESPointersEncoding = input.A_SPECIFIED_VALUESPointersEncoding
 
-	query = db.Model(&a_specified_valuesDB).Updates(a_specified_valuesDB)
-	if query.Error != nil {
+	db, _ = db.Model(&a_specified_valuesDB)
+	_, err = db.Updates(&a_specified_valuesDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -329,21 +358,28 @@ func (controller *Controller) DeleteA_SPECIFIED_VALUES(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("DeleteA_SPECIFIED_VALUES", "GONG__StackPath", stackPath)
+			// log.Println("DeleteA_SPECIFIED_VALUES", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "DELETE Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoA_SPECIFIED_VALUES.GetDB()
 
 	// Get model if exist
 	var a_specified_valuesDB orm.A_SPECIFIED_VALUESDB
-	if err := db.First(&a_specified_valuesDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&a_specified_valuesDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -353,7 +389,8 @@ func (controller *Controller) DeleteA_SPECIFIED_VALUES(c *gin.Context) {
 	}
 
 	// with gorm.Model field, default delete is a soft delete. Unscoped() force delete
-	db.Unscoped().Delete(&a_specified_valuesDB)
+	db.Unscoped()
+	db.Delete(&a_specified_valuesDB)
 
 	// get an instance (not staged) from DB instance, and call callback function
 	a_specified_valuesDeleted := new(models.A_SPECIFIED_VALUES)

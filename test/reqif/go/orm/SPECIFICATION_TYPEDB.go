@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/test/reqif/go/db"
 	"github.com/fullstack-lang/gongxsd/test/reqif/go/models"
 )
 
@@ -81,7 +82,7 @@ type SPECIFICATION_TYPEDB struct {
 
 	// Declation for basic field specification_typeDB.LONG_NAME
 	LONG_NAME_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	SPECIFICATION_TYPEPointersEncoding
@@ -136,17 +137,17 @@ type BackRepoSPECIFICATION_TYPEStruct struct {
 	// stores SPECIFICATION_TYPE according to their gorm ID
 	Map_SPECIFICATION_TYPEDBID_SPECIFICATION_TYPEPtr map[uint]*models.SPECIFICATION_TYPE
 
-	db *gorm.DB
+	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoSPECIFICATION_TYPE *BackRepoSPECIFICATION_TYPEStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoSPECIFICATION_TYPE *BackRepoSPECIFICATION_TYPEStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoSPECIFICATION_TYPE.stage
 	return
 }
 
-func (backRepoSPECIFICATION_TYPE *BackRepoSPECIFICATION_TYPEStruct) GetDB() *gorm.DB {
+func (backRepoSPECIFICATION_TYPE *BackRepoSPECIFICATION_TYPEStruct) GetDB() db.DBInterface {
 	return backRepoSPECIFICATION_TYPE.db
 }
 
@@ -159,9 +160,19 @@ func (backRepoSPECIFICATION_TYPE *BackRepoSPECIFICATION_TYPEStruct) GetSPECIFICA
 
 // BackRepoSPECIFICATION_TYPE.CommitPhaseOne commits all staged instances of SPECIFICATION_TYPE to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoSPECIFICATION_TYPE *BackRepoSPECIFICATION_TYPEStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoSPECIFICATION_TYPE *BackRepoSPECIFICATION_TYPEStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var specification_types []*models.SPECIFICATION_TYPE
 	for specification_type := range stage.SPECIFICATION_TYPEs {
+		specification_types = append(specification_types, specification_type)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(specification_types, func(i, j int) bool {
+		return stage.SPECIFICATION_TYPEMap_Staged_Order[specification_types[i]] < stage.SPECIFICATION_TYPEMap_Staged_Order[specification_types[j]]
+	})
+
+	for _, specification_type := range specification_types {
 		backRepoSPECIFICATION_TYPE.CommitPhaseOneInstance(specification_type)
 	}
 
@@ -183,9 +194,10 @@ func (backRepoSPECIFICATION_TYPE *BackRepoSPECIFICATION_TYPEStruct) CommitDelete
 
 	// specification_type is not staged anymore, remove specification_typeDB
 	specification_typeDB := backRepoSPECIFICATION_TYPE.Map_SPECIFICATION_TYPEDBID_SPECIFICATION_TYPEDB[id]
-	query := backRepoSPECIFICATION_TYPE.db.Unscoped().Delete(&specification_typeDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoSPECIFICATION_TYPE.db.Unscoped()
+	_, err := db.Delete(specification_typeDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -209,9 +221,9 @@ func (backRepoSPECIFICATION_TYPE *BackRepoSPECIFICATION_TYPEStruct) CommitPhaseO
 	var specification_typeDB SPECIFICATION_TYPEDB
 	specification_typeDB.CopyBasicFieldsFromSPECIFICATION_TYPE(specification_type)
 
-	query := backRepoSPECIFICATION_TYPE.db.Create(&specification_typeDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoSPECIFICATION_TYPE.db.Create(&specification_typeDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -267,9 +279,9 @@ func (backRepoSPECIFICATION_TYPE *BackRepoSPECIFICATION_TYPEStruct) CommitPhaseT
 			specification_typeDB.SPEC_ATTRIBUTESID.Valid = true
 		}
 
-		query := backRepoSPECIFICATION_TYPE.db.Save(&specification_typeDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoSPECIFICATION_TYPE.db.Save(specification_typeDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -288,9 +300,9 @@ func (backRepoSPECIFICATION_TYPE *BackRepoSPECIFICATION_TYPEStruct) CommitPhaseT
 func (backRepoSPECIFICATION_TYPE *BackRepoSPECIFICATION_TYPEStruct) CheckoutPhaseOne() (Error error) {
 
 	specification_typeDBArray := make([]SPECIFICATION_TYPEDB, 0)
-	query := backRepoSPECIFICATION_TYPE.db.Find(&specification_typeDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoSPECIFICATION_TYPE.db.Find(&specification_typeDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -380,16 +392,48 @@ func (backRepoSPECIFICATION_TYPE *BackRepoSPECIFICATION_TYPEStruct) CheckoutPhas
 func (specification_typeDB *SPECIFICATION_TYPEDB) DecodePointers(backRepo *BackRepoStruct, specification_type *models.SPECIFICATION_TYPE) {
 
 	// insertion point for checkout of pointer encoding
-	// ALTERNATIVE_ID field
-	specification_type.ALTERNATIVE_ID = nil
-	if specification_typeDB.ALTERNATIVE_IDID.Int64 != 0 {
-		specification_type.ALTERNATIVE_ID = backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(specification_typeDB.ALTERNATIVE_IDID.Int64)]
+	// ALTERNATIVE_ID field	
+	{
+		id := specification_typeDB.ALTERNATIVE_IDID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: specification_type.ALTERNATIVE_ID, unknown pointer id", id)
+				specification_type.ALTERNATIVE_ID = nil
+			} else {
+				// updates only if field has changed
+				if specification_type.ALTERNATIVE_ID == nil || specification_type.ALTERNATIVE_ID != tmp {
+					specification_type.ALTERNATIVE_ID = tmp
+				}
+			}
+		} else {
+			specification_type.ALTERNATIVE_ID = nil
+		}
 	}
-	// SPEC_ATTRIBUTES field
-	specification_type.SPEC_ATTRIBUTES = nil
-	if specification_typeDB.SPEC_ATTRIBUTESID.Int64 != 0 {
-		specification_type.SPEC_ATTRIBUTES = backRepo.BackRepoA_SPEC_ATTRIBUTES.Map_A_SPEC_ATTRIBUTESDBID_A_SPEC_ATTRIBUTESPtr[uint(specification_typeDB.SPEC_ATTRIBUTESID.Int64)]
+	
+	// SPEC_ATTRIBUTES field	
+	{
+		id := specification_typeDB.SPEC_ATTRIBUTESID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoA_SPEC_ATTRIBUTES.Map_A_SPEC_ATTRIBUTESDBID_A_SPEC_ATTRIBUTESPtr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: specification_type.SPEC_ATTRIBUTES, unknown pointer id", id)
+				specification_type.SPEC_ATTRIBUTES = nil
+			} else {
+				// updates only if field has changed
+				if specification_type.SPEC_ATTRIBUTES == nil || specification_type.SPEC_ATTRIBUTES != tmp {
+					specification_type.SPEC_ATTRIBUTES = tmp
+				}
+			}
+		} else {
+			specification_type.SPEC_ATTRIBUTES = nil
+		}
 	}
+	
 	return
 }
 
@@ -411,7 +455,7 @@ func (backRepo *BackRepoStruct) CheckoutSPECIFICATION_TYPE(specification_type *m
 			var specification_typeDB SPECIFICATION_TYPEDB
 			specification_typeDB.ID = id
 
-			if err := backRepo.BackRepoSPECIFICATION_TYPE.db.First(&specification_typeDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoSPECIFICATION_TYPE.db.First(&specification_typeDB, id); err != nil {
 				log.Fatalln("CheckoutSPECIFICATION_TYPE : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoSPECIFICATION_TYPE.CheckoutPhaseOneInstance(&specification_typeDB)
@@ -606,9 +650,9 @@ func (backRepoSPECIFICATION_TYPE *BackRepoSPECIFICATION_TYPEStruct) rowVisitorSP
 
 		specification_typeDB_ID_atBackupTime := specification_typeDB.ID
 		specification_typeDB.ID = 0
-		query := backRepoSPECIFICATION_TYPE.db.Create(specification_typeDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoSPECIFICATION_TYPE.db.Create(specification_typeDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoSPECIFICATION_TYPE.Map_SPECIFICATION_TYPEDBID_SPECIFICATION_TYPEDB[specification_typeDB.ID] = specification_typeDB
 		BackRepoSPECIFICATION_TYPEid_atBckpTime_newID[specification_typeDB_ID_atBackupTime] = specification_typeDB.ID
@@ -643,9 +687,9 @@ func (backRepoSPECIFICATION_TYPE *BackRepoSPECIFICATION_TYPEStruct) RestorePhase
 
 		specification_typeDB_ID_atBackupTime := specification_typeDB.ID
 		specification_typeDB.ID = 0
-		query := backRepoSPECIFICATION_TYPE.db.Create(specification_typeDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoSPECIFICATION_TYPE.db.Create(specification_typeDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoSPECIFICATION_TYPE.Map_SPECIFICATION_TYPEDBID_SPECIFICATION_TYPEDB[specification_typeDB.ID] = specification_typeDB
 		BackRepoSPECIFICATION_TYPEid_atBckpTime_newID[specification_typeDB_ID_atBackupTime] = specification_typeDB.ID
@@ -679,9 +723,10 @@ func (backRepoSPECIFICATION_TYPE *BackRepoSPECIFICATION_TYPEStruct) RestorePhase
 		}
 
 		// update databse with new index encoding
-		query := backRepoSPECIFICATION_TYPE.db.Model(specification_typeDB).Updates(*specification_typeDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoSPECIFICATION_TYPE.db.Model(specification_typeDB)
+		_, err := db.Updates(*specification_typeDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

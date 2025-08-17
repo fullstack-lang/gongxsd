@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/test/reqif/go/db"
 	"github.com/fullstack-lang/gongxsd/test/reqif/go/models"
 )
 
@@ -77,7 +78,7 @@ type DATATYPE_DEFINITION_BOOLEANDB struct {
 
 	// Declation for basic field datatype_definition_booleanDB.LONG_NAME
 	LONG_NAME_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	DATATYPE_DEFINITION_BOOLEANPointersEncoding
@@ -132,17 +133,17 @@ type BackRepoDATATYPE_DEFINITION_BOOLEANStruct struct {
 	// stores DATATYPE_DEFINITION_BOOLEAN according to their gorm ID
 	Map_DATATYPE_DEFINITION_BOOLEANDBID_DATATYPE_DEFINITION_BOOLEANPtr map[uint]*models.DATATYPE_DEFINITION_BOOLEAN
 
-	db *gorm.DB
+	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoDATATYPE_DEFINITION_BOOLEAN *BackRepoDATATYPE_DEFINITION_BOOLEANStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoDATATYPE_DEFINITION_BOOLEAN *BackRepoDATATYPE_DEFINITION_BOOLEANStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoDATATYPE_DEFINITION_BOOLEAN.stage
 	return
 }
 
-func (backRepoDATATYPE_DEFINITION_BOOLEAN *BackRepoDATATYPE_DEFINITION_BOOLEANStruct) GetDB() *gorm.DB {
+func (backRepoDATATYPE_DEFINITION_BOOLEAN *BackRepoDATATYPE_DEFINITION_BOOLEANStruct) GetDB() db.DBInterface {
 	return backRepoDATATYPE_DEFINITION_BOOLEAN.db
 }
 
@@ -155,9 +156,19 @@ func (backRepoDATATYPE_DEFINITION_BOOLEAN *BackRepoDATATYPE_DEFINITION_BOOLEANSt
 
 // BackRepoDATATYPE_DEFINITION_BOOLEAN.CommitPhaseOne commits all staged instances of DATATYPE_DEFINITION_BOOLEAN to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoDATATYPE_DEFINITION_BOOLEAN *BackRepoDATATYPE_DEFINITION_BOOLEANStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoDATATYPE_DEFINITION_BOOLEAN *BackRepoDATATYPE_DEFINITION_BOOLEANStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var datatype_definition_booleans []*models.DATATYPE_DEFINITION_BOOLEAN
 	for datatype_definition_boolean := range stage.DATATYPE_DEFINITION_BOOLEANs {
+		datatype_definition_booleans = append(datatype_definition_booleans, datatype_definition_boolean)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(datatype_definition_booleans, func(i, j int) bool {
+		return stage.DATATYPE_DEFINITION_BOOLEANMap_Staged_Order[datatype_definition_booleans[i]] < stage.DATATYPE_DEFINITION_BOOLEANMap_Staged_Order[datatype_definition_booleans[j]]
+	})
+
+	for _, datatype_definition_boolean := range datatype_definition_booleans {
 		backRepoDATATYPE_DEFINITION_BOOLEAN.CommitPhaseOneInstance(datatype_definition_boolean)
 	}
 
@@ -179,9 +190,10 @@ func (backRepoDATATYPE_DEFINITION_BOOLEAN *BackRepoDATATYPE_DEFINITION_BOOLEANSt
 
 	// datatype_definition_boolean is not staged anymore, remove datatype_definition_booleanDB
 	datatype_definition_booleanDB := backRepoDATATYPE_DEFINITION_BOOLEAN.Map_DATATYPE_DEFINITION_BOOLEANDBID_DATATYPE_DEFINITION_BOOLEANDB[id]
-	query := backRepoDATATYPE_DEFINITION_BOOLEAN.db.Unscoped().Delete(&datatype_definition_booleanDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoDATATYPE_DEFINITION_BOOLEAN.db.Unscoped()
+	_, err := db.Delete(datatype_definition_booleanDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -205,9 +217,9 @@ func (backRepoDATATYPE_DEFINITION_BOOLEAN *BackRepoDATATYPE_DEFINITION_BOOLEANSt
 	var datatype_definition_booleanDB DATATYPE_DEFINITION_BOOLEANDB
 	datatype_definition_booleanDB.CopyBasicFieldsFromDATATYPE_DEFINITION_BOOLEAN(datatype_definition_boolean)
 
-	query := backRepoDATATYPE_DEFINITION_BOOLEAN.db.Create(&datatype_definition_booleanDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoDATATYPE_DEFINITION_BOOLEAN.db.Create(&datatype_definition_booleanDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -251,9 +263,9 @@ func (backRepoDATATYPE_DEFINITION_BOOLEAN *BackRepoDATATYPE_DEFINITION_BOOLEANSt
 			datatype_definition_booleanDB.ALTERNATIVE_IDID.Valid = true
 		}
 
-		query := backRepoDATATYPE_DEFINITION_BOOLEAN.db.Save(&datatype_definition_booleanDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoDATATYPE_DEFINITION_BOOLEAN.db.Save(datatype_definition_booleanDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -272,9 +284,9 @@ func (backRepoDATATYPE_DEFINITION_BOOLEAN *BackRepoDATATYPE_DEFINITION_BOOLEANSt
 func (backRepoDATATYPE_DEFINITION_BOOLEAN *BackRepoDATATYPE_DEFINITION_BOOLEANStruct) CheckoutPhaseOne() (Error error) {
 
 	datatype_definition_booleanDBArray := make([]DATATYPE_DEFINITION_BOOLEANDB, 0)
-	query := backRepoDATATYPE_DEFINITION_BOOLEAN.db.Find(&datatype_definition_booleanDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoDATATYPE_DEFINITION_BOOLEAN.db.Find(&datatype_definition_booleanDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -364,11 +376,27 @@ func (backRepoDATATYPE_DEFINITION_BOOLEAN *BackRepoDATATYPE_DEFINITION_BOOLEANSt
 func (datatype_definition_booleanDB *DATATYPE_DEFINITION_BOOLEANDB) DecodePointers(backRepo *BackRepoStruct, datatype_definition_boolean *models.DATATYPE_DEFINITION_BOOLEAN) {
 
 	// insertion point for checkout of pointer encoding
-	// ALTERNATIVE_ID field
-	datatype_definition_boolean.ALTERNATIVE_ID = nil
-	if datatype_definition_booleanDB.ALTERNATIVE_IDID.Int64 != 0 {
-		datatype_definition_boolean.ALTERNATIVE_ID = backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(datatype_definition_booleanDB.ALTERNATIVE_IDID.Int64)]
+	// ALTERNATIVE_ID field	
+	{
+		id := datatype_definition_booleanDB.ALTERNATIVE_IDID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: datatype_definition_boolean.ALTERNATIVE_ID, unknown pointer id", id)
+				datatype_definition_boolean.ALTERNATIVE_ID = nil
+			} else {
+				// updates only if field has changed
+				if datatype_definition_boolean.ALTERNATIVE_ID == nil || datatype_definition_boolean.ALTERNATIVE_ID != tmp {
+					datatype_definition_boolean.ALTERNATIVE_ID = tmp
+				}
+			}
+		} else {
+			datatype_definition_boolean.ALTERNATIVE_ID = nil
+		}
 	}
+	
 	return
 }
 
@@ -390,7 +418,7 @@ func (backRepo *BackRepoStruct) CheckoutDATATYPE_DEFINITION_BOOLEAN(datatype_def
 			var datatype_definition_booleanDB DATATYPE_DEFINITION_BOOLEANDB
 			datatype_definition_booleanDB.ID = id
 
-			if err := backRepo.BackRepoDATATYPE_DEFINITION_BOOLEAN.db.First(&datatype_definition_booleanDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoDATATYPE_DEFINITION_BOOLEAN.db.First(&datatype_definition_booleanDB, id); err != nil {
 				log.Fatalln("CheckoutDATATYPE_DEFINITION_BOOLEAN : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoDATATYPE_DEFINITION_BOOLEAN.CheckoutPhaseOneInstance(&datatype_definition_booleanDB)
@@ -585,9 +613,9 @@ func (backRepoDATATYPE_DEFINITION_BOOLEAN *BackRepoDATATYPE_DEFINITION_BOOLEANSt
 
 		datatype_definition_booleanDB_ID_atBackupTime := datatype_definition_booleanDB.ID
 		datatype_definition_booleanDB.ID = 0
-		query := backRepoDATATYPE_DEFINITION_BOOLEAN.db.Create(datatype_definition_booleanDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoDATATYPE_DEFINITION_BOOLEAN.db.Create(datatype_definition_booleanDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoDATATYPE_DEFINITION_BOOLEAN.Map_DATATYPE_DEFINITION_BOOLEANDBID_DATATYPE_DEFINITION_BOOLEANDB[datatype_definition_booleanDB.ID] = datatype_definition_booleanDB
 		BackRepoDATATYPE_DEFINITION_BOOLEANid_atBckpTime_newID[datatype_definition_booleanDB_ID_atBackupTime] = datatype_definition_booleanDB.ID
@@ -622,9 +650,9 @@ func (backRepoDATATYPE_DEFINITION_BOOLEAN *BackRepoDATATYPE_DEFINITION_BOOLEANSt
 
 		datatype_definition_booleanDB_ID_atBackupTime := datatype_definition_booleanDB.ID
 		datatype_definition_booleanDB.ID = 0
-		query := backRepoDATATYPE_DEFINITION_BOOLEAN.db.Create(datatype_definition_booleanDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoDATATYPE_DEFINITION_BOOLEAN.db.Create(datatype_definition_booleanDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoDATATYPE_DEFINITION_BOOLEAN.Map_DATATYPE_DEFINITION_BOOLEANDBID_DATATYPE_DEFINITION_BOOLEANDB[datatype_definition_booleanDB.ID] = datatype_definition_booleanDB
 		BackRepoDATATYPE_DEFINITION_BOOLEANid_atBckpTime_newID[datatype_definition_booleanDB_ID_atBackupTime] = datatype_definition_booleanDB.ID
@@ -652,9 +680,10 @@ func (backRepoDATATYPE_DEFINITION_BOOLEAN *BackRepoDATATYPE_DEFINITION_BOOLEANSt
 		}
 
 		// update databse with new index encoding
-		query := backRepoDATATYPE_DEFINITION_BOOLEAN.db.Model(datatype_definition_booleanDB).Updates(*datatype_definition_booleanDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoDATATYPE_DEFINITION_BOOLEAN.db.Model(datatype_definition_booleanDB)
+		_, err := db.Updates(*datatype_definition_booleanDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

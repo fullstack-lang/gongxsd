@@ -11,7 +11,8 @@ import (
 
 	"github.com/fullstack-lang/gongxsd/test/reqif/go/processing"
 	reqif_stack "github.com/fullstack-lang/gongxsd/test/reqif/go/stack"
-	reqif_static "github.com/fullstack-lang/gongxsd/test/reqif/go/static"
+
+	split_static "github.com/fullstack-lang/gong/lib/split/go/static"
 
 	models "github.com/fullstack-lang/gongxsd/test/reqif/go/models"
 )
@@ -39,7 +40,7 @@ func main() {
 	flag.Parse()
 
 	// setup the static file server and get the controller
-	r := reqif_static.ServeStaticFiles(*logGINFlag)
+	r := split_static.ServeStaticFiles(*logGINFlag)
 
 	// setup stack
 	stack := reqif_stack.NewStack(r, "reqif", *unmarshallFromCode, *marshallOnCommit, "", *embeddedDiagrams, true)

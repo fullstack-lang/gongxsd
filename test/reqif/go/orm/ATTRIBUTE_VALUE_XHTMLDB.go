@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/test/reqif/go/db"
 	"github.com/fullstack-lang/gongxsd/test/reqif/go/models"
 )
 
@@ -77,7 +78,7 @@ type ATTRIBUTE_VALUE_XHTMLDB struct {
 	// Declation for basic field attribute_value_xhtmlDB.IS_SIMPLIFIED
 	// provide the sql storage for the boolan
 	IS_SIMPLIFIED_Data sql.NullBool
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	ATTRIBUTE_VALUE_XHTMLPointersEncoding
@@ -123,17 +124,17 @@ type BackRepoATTRIBUTE_VALUE_XHTMLStruct struct {
 	// stores ATTRIBUTE_VALUE_XHTML according to their gorm ID
 	Map_ATTRIBUTE_VALUE_XHTMLDBID_ATTRIBUTE_VALUE_XHTMLPtr map[uint]*models.ATTRIBUTE_VALUE_XHTML
 
-	db *gorm.DB
+	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoATTRIBUTE_VALUE_XHTML *BackRepoATTRIBUTE_VALUE_XHTMLStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoATTRIBUTE_VALUE_XHTML *BackRepoATTRIBUTE_VALUE_XHTMLStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoATTRIBUTE_VALUE_XHTML.stage
 	return
 }
 
-func (backRepoATTRIBUTE_VALUE_XHTML *BackRepoATTRIBUTE_VALUE_XHTMLStruct) GetDB() *gorm.DB {
+func (backRepoATTRIBUTE_VALUE_XHTML *BackRepoATTRIBUTE_VALUE_XHTMLStruct) GetDB() db.DBInterface {
 	return backRepoATTRIBUTE_VALUE_XHTML.db
 }
 
@@ -146,9 +147,19 @@ func (backRepoATTRIBUTE_VALUE_XHTML *BackRepoATTRIBUTE_VALUE_XHTMLStruct) GetATT
 
 // BackRepoATTRIBUTE_VALUE_XHTML.CommitPhaseOne commits all staged instances of ATTRIBUTE_VALUE_XHTML to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoATTRIBUTE_VALUE_XHTML *BackRepoATTRIBUTE_VALUE_XHTMLStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoATTRIBUTE_VALUE_XHTML *BackRepoATTRIBUTE_VALUE_XHTMLStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var attribute_value_xhtmls []*models.ATTRIBUTE_VALUE_XHTML
 	for attribute_value_xhtml := range stage.ATTRIBUTE_VALUE_XHTMLs {
+		attribute_value_xhtmls = append(attribute_value_xhtmls, attribute_value_xhtml)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(attribute_value_xhtmls, func(i, j int) bool {
+		return stage.ATTRIBUTE_VALUE_XHTMLMap_Staged_Order[attribute_value_xhtmls[i]] < stage.ATTRIBUTE_VALUE_XHTMLMap_Staged_Order[attribute_value_xhtmls[j]]
+	})
+
+	for _, attribute_value_xhtml := range attribute_value_xhtmls {
 		backRepoATTRIBUTE_VALUE_XHTML.CommitPhaseOneInstance(attribute_value_xhtml)
 	}
 
@@ -170,9 +181,10 @@ func (backRepoATTRIBUTE_VALUE_XHTML *BackRepoATTRIBUTE_VALUE_XHTMLStruct) Commit
 
 	// attribute_value_xhtml is not staged anymore, remove attribute_value_xhtmlDB
 	attribute_value_xhtmlDB := backRepoATTRIBUTE_VALUE_XHTML.Map_ATTRIBUTE_VALUE_XHTMLDBID_ATTRIBUTE_VALUE_XHTMLDB[id]
-	query := backRepoATTRIBUTE_VALUE_XHTML.db.Unscoped().Delete(&attribute_value_xhtmlDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoATTRIBUTE_VALUE_XHTML.db.Unscoped()
+	_, err := db.Delete(attribute_value_xhtmlDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -196,9 +208,9 @@ func (backRepoATTRIBUTE_VALUE_XHTML *BackRepoATTRIBUTE_VALUE_XHTMLStruct) Commit
 	var attribute_value_xhtmlDB ATTRIBUTE_VALUE_XHTMLDB
 	attribute_value_xhtmlDB.CopyBasicFieldsFromATTRIBUTE_VALUE_XHTML(attribute_value_xhtml)
 
-	query := backRepoATTRIBUTE_VALUE_XHTML.db.Create(&attribute_value_xhtmlDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoATTRIBUTE_VALUE_XHTML.db.Create(&attribute_value_xhtmlDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -266,9 +278,9 @@ func (backRepoATTRIBUTE_VALUE_XHTML *BackRepoATTRIBUTE_VALUE_XHTMLStruct) Commit
 			attribute_value_xhtmlDB.DEFINITIONID.Valid = true
 		}
 
-		query := backRepoATTRIBUTE_VALUE_XHTML.db.Save(&attribute_value_xhtmlDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoATTRIBUTE_VALUE_XHTML.db.Save(attribute_value_xhtmlDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -287,9 +299,9 @@ func (backRepoATTRIBUTE_VALUE_XHTML *BackRepoATTRIBUTE_VALUE_XHTMLStruct) Commit
 func (backRepoATTRIBUTE_VALUE_XHTML *BackRepoATTRIBUTE_VALUE_XHTMLStruct) CheckoutPhaseOne() (Error error) {
 
 	attribute_value_xhtmlDBArray := make([]ATTRIBUTE_VALUE_XHTMLDB, 0)
-	query := backRepoATTRIBUTE_VALUE_XHTML.db.Find(&attribute_value_xhtmlDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoATTRIBUTE_VALUE_XHTML.db.Find(&attribute_value_xhtmlDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -379,21 +391,69 @@ func (backRepoATTRIBUTE_VALUE_XHTML *BackRepoATTRIBUTE_VALUE_XHTMLStruct) Checko
 func (attribute_value_xhtmlDB *ATTRIBUTE_VALUE_XHTMLDB) DecodePointers(backRepo *BackRepoStruct, attribute_value_xhtml *models.ATTRIBUTE_VALUE_XHTML) {
 
 	// insertion point for checkout of pointer encoding
-	// THE_VALUE field
-	attribute_value_xhtml.THE_VALUE = nil
-	if attribute_value_xhtmlDB.THE_VALUEID.Int64 != 0 {
-		attribute_value_xhtml.THE_VALUE = backRepo.BackRepoXHTML_CONTENT.Map_XHTML_CONTENTDBID_XHTML_CONTENTPtr[uint(attribute_value_xhtmlDB.THE_VALUEID.Int64)]
+	// THE_VALUE field	
+	{
+		id := attribute_value_xhtmlDB.THE_VALUEID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoXHTML_CONTENT.Map_XHTML_CONTENTDBID_XHTML_CONTENTPtr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: attribute_value_xhtml.THE_VALUE, unknown pointer id", id)
+				attribute_value_xhtml.THE_VALUE = nil
+			} else {
+				// updates only if field has changed
+				if attribute_value_xhtml.THE_VALUE == nil || attribute_value_xhtml.THE_VALUE != tmp {
+					attribute_value_xhtml.THE_VALUE = tmp
+				}
+			}
+		} else {
+			attribute_value_xhtml.THE_VALUE = nil
+		}
 	}
-	// THE_ORIGINAL_VALUE field
-	attribute_value_xhtml.THE_ORIGINAL_VALUE = nil
-	if attribute_value_xhtmlDB.THE_ORIGINAL_VALUEID.Int64 != 0 {
-		attribute_value_xhtml.THE_ORIGINAL_VALUE = backRepo.BackRepoXHTML_CONTENT.Map_XHTML_CONTENTDBID_XHTML_CONTENTPtr[uint(attribute_value_xhtmlDB.THE_ORIGINAL_VALUEID.Int64)]
+	
+	// THE_ORIGINAL_VALUE field	
+	{
+		id := attribute_value_xhtmlDB.THE_ORIGINAL_VALUEID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoXHTML_CONTENT.Map_XHTML_CONTENTDBID_XHTML_CONTENTPtr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: attribute_value_xhtml.THE_ORIGINAL_VALUE, unknown pointer id", id)
+				attribute_value_xhtml.THE_ORIGINAL_VALUE = nil
+			} else {
+				// updates only if field has changed
+				if attribute_value_xhtml.THE_ORIGINAL_VALUE == nil || attribute_value_xhtml.THE_ORIGINAL_VALUE != tmp {
+					attribute_value_xhtml.THE_ORIGINAL_VALUE = tmp
+				}
+			}
+		} else {
+			attribute_value_xhtml.THE_ORIGINAL_VALUE = nil
+		}
 	}
-	// DEFINITION field
-	attribute_value_xhtml.DEFINITION = nil
-	if attribute_value_xhtmlDB.DEFINITIONID.Int64 != 0 {
-		attribute_value_xhtml.DEFINITION = backRepo.BackRepoA_ATTRIBUTE_DEFINITION_XHTML_REF.Map_A_ATTRIBUTE_DEFINITION_XHTML_REFDBID_A_ATTRIBUTE_DEFINITION_XHTML_REFPtr[uint(attribute_value_xhtmlDB.DEFINITIONID.Int64)]
+	
+	// DEFINITION field	
+	{
+		id := attribute_value_xhtmlDB.DEFINITIONID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoA_ATTRIBUTE_DEFINITION_XHTML_REF.Map_A_ATTRIBUTE_DEFINITION_XHTML_REFDBID_A_ATTRIBUTE_DEFINITION_XHTML_REFPtr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: attribute_value_xhtml.DEFINITION, unknown pointer id", id)
+				attribute_value_xhtml.DEFINITION = nil
+			} else {
+				// updates only if field has changed
+				if attribute_value_xhtml.DEFINITION == nil || attribute_value_xhtml.DEFINITION != tmp {
+					attribute_value_xhtml.DEFINITION = tmp
+				}
+			}
+		} else {
+			attribute_value_xhtml.DEFINITION = nil
+		}
 	}
+	
 	return
 }
 
@@ -415,7 +475,7 @@ func (backRepo *BackRepoStruct) CheckoutATTRIBUTE_VALUE_XHTML(attribute_value_xh
 			var attribute_value_xhtmlDB ATTRIBUTE_VALUE_XHTMLDB
 			attribute_value_xhtmlDB.ID = id
 
-			if err := backRepo.BackRepoATTRIBUTE_VALUE_XHTML.db.First(&attribute_value_xhtmlDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoATTRIBUTE_VALUE_XHTML.db.First(&attribute_value_xhtmlDB, id); err != nil {
 				log.Fatalln("CheckoutATTRIBUTE_VALUE_XHTML : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoATTRIBUTE_VALUE_XHTML.CheckoutPhaseOneInstance(&attribute_value_xhtmlDB)
@@ -574,9 +634,9 @@ func (backRepoATTRIBUTE_VALUE_XHTML *BackRepoATTRIBUTE_VALUE_XHTMLStruct) rowVis
 
 		attribute_value_xhtmlDB_ID_atBackupTime := attribute_value_xhtmlDB.ID
 		attribute_value_xhtmlDB.ID = 0
-		query := backRepoATTRIBUTE_VALUE_XHTML.db.Create(attribute_value_xhtmlDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoATTRIBUTE_VALUE_XHTML.db.Create(attribute_value_xhtmlDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoATTRIBUTE_VALUE_XHTML.Map_ATTRIBUTE_VALUE_XHTMLDBID_ATTRIBUTE_VALUE_XHTMLDB[attribute_value_xhtmlDB.ID] = attribute_value_xhtmlDB
 		BackRepoATTRIBUTE_VALUE_XHTMLid_atBckpTime_newID[attribute_value_xhtmlDB_ID_atBackupTime] = attribute_value_xhtmlDB.ID
@@ -611,9 +671,9 @@ func (backRepoATTRIBUTE_VALUE_XHTML *BackRepoATTRIBUTE_VALUE_XHTMLStruct) Restor
 
 		attribute_value_xhtmlDB_ID_atBackupTime := attribute_value_xhtmlDB.ID
 		attribute_value_xhtmlDB.ID = 0
-		query := backRepoATTRIBUTE_VALUE_XHTML.db.Create(attribute_value_xhtmlDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoATTRIBUTE_VALUE_XHTML.db.Create(attribute_value_xhtmlDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoATTRIBUTE_VALUE_XHTML.Map_ATTRIBUTE_VALUE_XHTMLDBID_ATTRIBUTE_VALUE_XHTMLDB[attribute_value_xhtmlDB.ID] = attribute_value_xhtmlDB
 		BackRepoATTRIBUTE_VALUE_XHTMLid_atBckpTime_newID[attribute_value_xhtmlDB_ID_atBackupTime] = attribute_value_xhtmlDB.ID
@@ -653,9 +713,10 @@ func (backRepoATTRIBUTE_VALUE_XHTML *BackRepoATTRIBUTE_VALUE_XHTMLStruct) Restor
 		}
 
 		// update databse with new index encoding
-		query := backRepoATTRIBUTE_VALUE_XHTML.db.Model(attribute_value_xhtmlDB).Updates(*attribute_value_xhtmlDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoATTRIBUTE_VALUE_XHTML.db.Model(attribute_value_xhtmlDB)
+		_, err := db.Updates(*attribute_value_xhtmlDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

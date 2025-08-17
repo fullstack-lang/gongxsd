@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/test/reqif/go/db"
 	"github.com/fullstack-lang/gongxsd/test/reqif/go/models"
 )
 
@@ -64,7 +65,7 @@ type A_TOOL_EXTENSIONSDB struct {
 
 	// Declation for basic field a_tool_extensionsDB.Name
 	Name_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	A_TOOL_EXTENSIONSPointersEncoding
@@ -107,17 +108,17 @@ type BackRepoA_TOOL_EXTENSIONSStruct struct {
 	// stores A_TOOL_EXTENSIONS according to their gorm ID
 	Map_A_TOOL_EXTENSIONSDBID_A_TOOL_EXTENSIONSPtr map[uint]*models.A_TOOL_EXTENSIONS
 
-	db *gorm.DB
+	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoA_TOOL_EXTENSIONS *BackRepoA_TOOL_EXTENSIONSStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoA_TOOL_EXTENSIONS *BackRepoA_TOOL_EXTENSIONSStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoA_TOOL_EXTENSIONS.stage
 	return
 }
 
-func (backRepoA_TOOL_EXTENSIONS *BackRepoA_TOOL_EXTENSIONSStruct) GetDB() *gorm.DB {
+func (backRepoA_TOOL_EXTENSIONS *BackRepoA_TOOL_EXTENSIONSStruct) GetDB() db.DBInterface {
 	return backRepoA_TOOL_EXTENSIONS.db
 }
 
@@ -130,9 +131,19 @@ func (backRepoA_TOOL_EXTENSIONS *BackRepoA_TOOL_EXTENSIONSStruct) GetA_TOOL_EXTE
 
 // BackRepoA_TOOL_EXTENSIONS.CommitPhaseOne commits all staged instances of A_TOOL_EXTENSIONS to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoA_TOOL_EXTENSIONS *BackRepoA_TOOL_EXTENSIONSStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoA_TOOL_EXTENSIONS *BackRepoA_TOOL_EXTENSIONSStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var a_tool_extensionss []*models.A_TOOL_EXTENSIONS
 	for a_tool_extensions := range stage.A_TOOL_EXTENSIONSs {
+		a_tool_extensionss = append(a_tool_extensionss, a_tool_extensions)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(a_tool_extensionss, func(i, j int) bool {
+		return stage.A_TOOL_EXTENSIONSMap_Staged_Order[a_tool_extensionss[i]] < stage.A_TOOL_EXTENSIONSMap_Staged_Order[a_tool_extensionss[j]]
+	})
+
+	for _, a_tool_extensions := range a_tool_extensionss {
 		backRepoA_TOOL_EXTENSIONS.CommitPhaseOneInstance(a_tool_extensions)
 	}
 
@@ -154,9 +165,10 @@ func (backRepoA_TOOL_EXTENSIONS *BackRepoA_TOOL_EXTENSIONSStruct) CommitDeleteIn
 
 	// a_tool_extensions is not staged anymore, remove a_tool_extensionsDB
 	a_tool_extensionsDB := backRepoA_TOOL_EXTENSIONS.Map_A_TOOL_EXTENSIONSDBID_A_TOOL_EXTENSIONSDB[id]
-	query := backRepoA_TOOL_EXTENSIONS.db.Unscoped().Delete(&a_tool_extensionsDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoA_TOOL_EXTENSIONS.db.Unscoped()
+	_, err := db.Delete(a_tool_extensionsDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -180,9 +192,9 @@ func (backRepoA_TOOL_EXTENSIONS *BackRepoA_TOOL_EXTENSIONSStruct) CommitPhaseOne
 	var a_tool_extensionsDB A_TOOL_EXTENSIONSDB
 	a_tool_extensionsDB.CopyBasicFieldsFromA_TOOL_EXTENSIONS(a_tool_extensions)
 
-	query := backRepoA_TOOL_EXTENSIONS.db.Create(&a_tool_extensionsDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoA_TOOL_EXTENSIONS.db.Create(&a_tool_extensionsDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -232,9 +244,9 @@ func (backRepoA_TOOL_EXTENSIONS *BackRepoA_TOOL_EXTENSIONSStruct) CommitPhaseTwo
 				append(a_tool_extensionsDB.A_TOOL_EXTENSIONSPointersEncoding.REQ_IF_TOOL_EXTENSION, int(req_if_tool_extensionAssocEnd_DB.ID))
 		}
 
-		query := backRepoA_TOOL_EXTENSIONS.db.Save(&a_tool_extensionsDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoA_TOOL_EXTENSIONS.db.Save(a_tool_extensionsDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -253,9 +265,9 @@ func (backRepoA_TOOL_EXTENSIONS *BackRepoA_TOOL_EXTENSIONSStruct) CommitPhaseTwo
 func (backRepoA_TOOL_EXTENSIONS *BackRepoA_TOOL_EXTENSIONSStruct) CheckoutPhaseOne() (Error error) {
 
 	a_tool_extensionsDBArray := make([]A_TOOL_EXTENSIONSDB, 0)
-	query := backRepoA_TOOL_EXTENSIONS.db.Find(&a_tool_extensionsDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoA_TOOL_EXTENSIONS.db.Find(&a_tool_extensionsDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -375,7 +387,7 @@ func (backRepo *BackRepoStruct) CheckoutA_TOOL_EXTENSIONS(a_tool_extensions *mod
 			var a_tool_extensionsDB A_TOOL_EXTENSIONSDB
 			a_tool_extensionsDB.ID = id
 
-			if err := backRepo.BackRepoA_TOOL_EXTENSIONS.db.First(&a_tool_extensionsDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoA_TOOL_EXTENSIONS.db.First(&a_tool_extensionsDB, id); err != nil {
 				log.Fatalln("CheckoutA_TOOL_EXTENSIONS : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoA_TOOL_EXTENSIONS.CheckoutPhaseOneInstance(&a_tool_extensionsDB)
@@ -522,9 +534,9 @@ func (backRepoA_TOOL_EXTENSIONS *BackRepoA_TOOL_EXTENSIONSStruct) rowVisitorA_TO
 
 		a_tool_extensionsDB_ID_atBackupTime := a_tool_extensionsDB.ID
 		a_tool_extensionsDB.ID = 0
-		query := backRepoA_TOOL_EXTENSIONS.db.Create(a_tool_extensionsDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoA_TOOL_EXTENSIONS.db.Create(a_tool_extensionsDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoA_TOOL_EXTENSIONS.Map_A_TOOL_EXTENSIONSDBID_A_TOOL_EXTENSIONSDB[a_tool_extensionsDB.ID] = a_tool_extensionsDB
 		BackRepoA_TOOL_EXTENSIONSid_atBckpTime_newID[a_tool_extensionsDB_ID_atBackupTime] = a_tool_extensionsDB.ID
@@ -559,9 +571,9 @@ func (backRepoA_TOOL_EXTENSIONS *BackRepoA_TOOL_EXTENSIONSStruct) RestorePhaseOn
 
 		a_tool_extensionsDB_ID_atBackupTime := a_tool_extensionsDB.ID
 		a_tool_extensionsDB.ID = 0
-		query := backRepoA_TOOL_EXTENSIONS.db.Create(a_tool_extensionsDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoA_TOOL_EXTENSIONS.db.Create(a_tool_extensionsDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoA_TOOL_EXTENSIONS.Map_A_TOOL_EXTENSIONSDBID_A_TOOL_EXTENSIONSDB[a_tool_extensionsDB.ID] = a_tool_extensionsDB
 		BackRepoA_TOOL_EXTENSIONSid_atBckpTime_newID[a_tool_extensionsDB_ID_atBackupTime] = a_tool_extensionsDB.ID
@@ -583,9 +595,10 @@ func (backRepoA_TOOL_EXTENSIONS *BackRepoA_TOOL_EXTENSIONSStruct) RestorePhaseTw
 
 		// insertion point for reindexing pointers encoding
 		// update databse with new index encoding
-		query := backRepoA_TOOL_EXTENSIONS.db.Model(a_tool_extensionsDB).Updates(*a_tool_extensionsDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoA_TOOL_EXTENSIONS.db.Model(a_tool_extensionsDB)
+		_, err := db.Updates(*a_tool_extensionsDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 
