@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/test/reqif/go/db"
 	"github.com/fullstack-lang/gongxsd/test/reqif/go/models"
 )
 
@@ -64,7 +65,7 @@ type A_DATATYPE_DEFINITION_DATE_REFDB struct {
 
 	// Declation for basic field a_datatype_definition_date_refDB.DATATYPE_DEFINITION_DATE_REF
 	DATATYPE_DEFINITION_DATE_REF_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	A_DATATYPE_DEFINITION_DATE_REFPointersEncoding
@@ -110,17 +111,17 @@ type BackRepoA_DATATYPE_DEFINITION_DATE_REFStruct struct {
 	// stores A_DATATYPE_DEFINITION_DATE_REF according to their gorm ID
 	Map_A_DATATYPE_DEFINITION_DATE_REFDBID_A_DATATYPE_DEFINITION_DATE_REFPtr map[uint]*models.A_DATATYPE_DEFINITION_DATE_REF
 
-	db *gorm.DB
+	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoA_DATATYPE_DEFINITION_DATE_REF *BackRepoA_DATATYPE_DEFINITION_DATE_REFStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoA_DATATYPE_DEFINITION_DATE_REF *BackRepoA_DATATYPE_DEFINITION_DATE_REFStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoA_DATATYPE_DEFINITION_DATE_REF.stage
 	return
 }
 
-func (backRepoA_DATATYPE_DEFINITION_DATE_REF *BackRepoA_DATATYPE_DEFINITION_DATE_REFStruct) GetDB() *gorm.DB {
+func (backRepoA_DATATYPE_DEFINITION_DATE_REF *BackRepoA_DATATYPE_DEFINITION_DATE_REFStruct) GetDB() db.DBInterface {
 	return backRepoA_DATATYPE_DEFINITION_DATE_REF.db
 }
 
@@ -133,9 +134,19 @@ func (backRepoA_DATATYPE_DEFINITION_DATE_REF *BackRepoA_DATATYPE_DEFINITION_DATE
 
 // BackRepoA_DATATYPE_DEFINITION_DATE_REF.CommitPhaseOne commits all staged instances of A_DATATYPE_DEFINITION_DATE_REF to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoA_DATATYPE_DEFINITION_DATE_REF *BackRepoA_DATATYPE_DEFINITION_DATE_REFStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoA_DATATYPE_DEFINITION_DATE_REF *BackRepoA_DATATYPE_DEFINITION_DATE_REFStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var a_datatype_definition_date_refs []*models.A_DATATYPE_DEFINITION_DATE_REF
 	for a_datatype_definition_date_ref := range stage.A_DATATYPE_DEFINITION_DATE_REFs {
+		a_datatype_definition_date_refs = append(a_datatype_definition_date_refs, a_datatype_definition_date_ref)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(a_datatype_definition_date_refs, func(i, j int) bool {
+		return stage.A_DATATYPE_DEFINITION_DATE_REFMap_Staged_Order[a_datatype_definition_date_refs[i]] < stage.A_DATATYPE_DEFINITION_DATE_REFMap_Staged_Order[a_datatype_definition_date_refs[j]]
+	})
+
+	for _, a_datatype_definition_date_ref := range a_datatype_definition_date_refs {
 		backRepoA_DATATYPE_DEFINITION_DATE_REF.CommitPhaseOneInstance(a_datatype_definition_date_ref)
 	}
 
@@ -157,9 +168,10 @@ func (backRepoA_DATATYPE_DEFINITION_DATE_REF *BackRepoA_DATATYPE_DEFINITION_DATE
 
 	// a_datatype_definition_date_ref is not staged anymore, remove a_datatype_definition_date_refDB
 	a_datatype_definition_date_refDB := backRepoA_DATATYPE_DEFINITION_DATE_REF.Map_A_DATATYPE_DEFINITION_DATE_REFDBID_A_DATATYPE_DEFINITION_DATE_REFDB[id]
-	query := backRepoA_DATATYPE_DEFINITION_DATE_REF.db.Unscoped().Delete(&a_datatype_definition_date_refDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoA_DATATYPE_DEFINITION_DATE_REF.db.Unscoped()
+	_, err := db.Delete(a_datatype_definition_date_refDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -183,9 +195,9 @@ func (backRepoA_DATATYPE_DEFINITION_DATE_REF *BackRepoA_DATATYPE_DEFINITION_DATE
 	var a_datatype_definition_date_refDB A_DATATYPE_DEFINITION_DATE_REFDB
 	a_datatype_definition_date_refDB.CopyBasicFieldsFromA_DATATYPE_DEFINITION_DATE_REF(a_datatype_definition_date_ref)
 
-	query := backRepoA_DATATYPE_DEFINITION_DATE_REF.db.Create(&a_datatype_definition_date_refDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoA_DATATYPE_DEFINITION_DATE_REF.db.Create(&a_datatype_definition_date_refDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -217,9 +229,9 @@ func (backRepoA_DATATYPE_DEFINITION_DATE_REF *BackRepoA_DATATYPE_DEFINITION_DATE
 		a_datatype_definition_date_refDB.CopyBasicFieldsFromA_DATATYPE_DEFINITION_DATE_REF(a_datatype_definition_date_ref)
 
 		// insertion point for translating pointers encodings into actual pointers
-		query := backRepoA_DATATYPE_DEFINITION_DATE_REF.db.Save(&a_datatype_definition_date_refDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoA_DATATYPE_DEFINITION_DATE_REF.db.Save(a_datatype_definition_date_refDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -238,9 +250,9 @@ func (backRepoA_DATATYPE_DEFINITION_DATE_REF *BackRepoA_DATATYPE_DEFINITION_DATE
 func (backRepoA_DATATYPE_DEFINITION_DATE_REF *BackRepoA_DATATYPE_DEFINITION_DATE_REFStruct) CheckoutPhaseOne() (Error error) {
 
 	a_datatype_definition_date_refDBArray := make([]A_DATATYPE_DEFINITION_DATE_REFDB, 0)
-	query := backRepoA_DATATYPE_DEFINITION_DATE_REF.db.Find(&a_datatype_definition_date_refDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoA_DATATYPE_DEFINITION_DATE_REF.db.Find(&a_datatype_definition_date_refDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -351,7 +363,7 @@ func (backRepo *BackRepoStruct) CheckoutA_DATATYPE_DEFINITION_DATE_REF(a_datatyp
 			var a_datatype_definition_date_refDB A_DATATYPE_DEFINITION_DATE_REFDB
 			a_datatype_definition_date_refDB.ID = id
 
-			if err := backRepo.BackRepoA_DATATYPE_DEFINITION_DATE_REF.db.First(&a_datatype_definition_date_refDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoA_DATATYPE_DEFINITION_DATE_REF.db.First(&a_datatype_definition_date_refDB, id); err != nil {
 				log.Fatalln("CheckoutA_DATATYPE_DEFINITION_DATE_REF : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoA_DATATYPE_DEFINITION_DATE_REF.CheckoutPhaseOneInstance(&a_datatype_definition_date_refDB)
@@ -510,9 +522,9 @@ func (backRepoA_DATATYPE_DEFINITION_DATE_REF *BackRepoA_DATATYPE_DEFINITION_DATE
 
 		a_datatype_definition_date_refDB_ID_atBackupTime := a_datatype_definition_date_refDB.ID
 		a_datatype_definition_date_refDB.ID = 0
-		query := backRepoA_DATATYPE_DEFINITION_DATE_REF.db.Create(a_datatype_definition_date_refDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoA_DATATYPE_DEFINITION_DATE_REF.db.Create(a_datatype_definition_date_refDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoA_DATATYPE_DEFINITION_DATE_REF.Map_A_DATATYPE_DEFINITION_DATE_REFDBID_A_DATATYPE_DEFINITION_DATE_REFDB[a_datatype_definition_date_refDB.ID] = a_datatype_definition_date_refDB
 		BackRepoA_DATATYPE_DEFINITION_DATE_REFid_atBckpTime_newID[a_datatype_definition_date_refDB_ID_atBackupTime] = a_datatype_definition_date_refDB.ID
@@ -547,9 +559,9 @@ func (backRepoA_DATATYPE_DEFINITION_DATE_REF *BackRepoA_DATATYPE_DEFINITION_DATE
 
 		a_datatype_definition_date_refDB_ID_atBackupTime := a_datatype_definition_date_refDB.ID
 		a_datatype_definition_date_refDB.ID = 0
-		query := backRepoA_DATATYPE_DEFINITION_DATE_REF.db.Create(a_datatype_definition_date_refDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoA_DATATYPE_DEFINITION_DATE_REF.db.Create(a_datatype_definition_date_refDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoA_DATATYPE_DEFINITION_DATE_REF.Map_A_DATATYPE_DEFINITION_DATE_REFDBID_A_DATATYPE_DEFINITION_DATE_REFDB[a_datatype_definition_date_refDB.ID] = a_datatype_definition_date_refDB
 		BackRepoA_DATATYPE_DEFINITION_DATE_REFid_atBckpTime_newID[a_datatype_definition_date_refDB_ID_atBackupTime] = a_datatype_definition_date_refDB.ID
@@ -571,9 +583,10 @@ func (backRepoA_DATATYPE_DEFINITION_DATE_REF *BackRepoA_DATATYPE_DEFINITION_DATE
 
 		// insertion point for reindexing pointers encoding
 		// update databse with new index encoding
-		query := backRepoA_DATATYPE_DEFINITION_DATE_REF.db.Model(a_datatype_definition_date_refDB).Updates(*a_datatype_definition_date_refDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoA_DATATYPE_DEFINITION_DATE_REF.db.Model(a_datatype_definition_date_refDB)
+		_, err := db.Updates(*a_datatype_definition_date_refDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

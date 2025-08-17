@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/test/reqif/go/db"
 	"github.com/fullstack-lang/gongxsd/test/reqif/go/models"
 )
 
@@ -64,7 +65,7 @@ type A_SOURCE_1DB struct {
 
 	// Declation for basic field a_source_1DB.SPEC_OBJECT_REF
 	SPEC_OBJECT_REF_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	A_SOURCE_1PointersEncoding
@@ -110,17 +111,17 @@ type BackRepoA_SOURCE_1Struct struct {
 	// stores A_SOURCE_1 according to their gorm ID
 	Map_A_SOURCE_1DBID_A_SOURCE_1Ptr map[uint]*models.A_SOURCE_1
 
-	db *gorm.DB
+	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoA_SOURCE_1 *BackRepoA_SOURCE_1Struct) GetStage() (stage *models.StageStruct) {
+func (backRepoA_SOURCE_1 *BackRepoA_SOURCE_1Struct) GetStage() (stage *models.Stage) {
 	stage = backRepoA_SOURCE_1.stage
 	return
 }
 
-func (backRepoA_SOURCE_1 *BackRepoA_SOURCE_1Struct) GetDB() *gorm.DB {
+func (backRepoA_SOURCE_1 *BackRepoA_SOURCE_1Struct) GetDB() db.DBInterface {
 	return backRepoA_SOURCE_1.db
 }
 
@@ -133,9 +134,19 @@ func (backRepoA_SOURCE_1 *BackRepoA_SOURCE_1Struct) GetA_SOURCE_1DBFromA_SOURCE_
 
 // BackRepoA_SOURCE_1.CommitPhaseOne commits all staged instances of A_SOURCE_1 to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoA_SOURCE_1 *BackRepoA_SOURCE_1Struct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoA_SOURCE_1 *BackRepoA_SOURCE_1Struct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var a_source_1s []*models.A_SOURCE_1
 	for a_source_1 := range stage.A_SOURCE_1s {
+		a_source_1s = append(a_source_1s, a_source_1)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(a_source_1s, func(i, j int) bool {
+		return stage.A_SOURCE_1Map_Staged_Order[a_source_1s[i]] < stage.A_SOURCE_1Map_Staged_Order[a_source_1s[j]]
+	})
+
+	for _, a_source_1 := range a_source_1s {
 		backRepoA_SOURCE_1.CommitPhaseOneInstance(a_source_1)
 	}
 
@@ -157,9 +168,10 @@ func (backRepoA_SOURCE_1 *BackRepoA_SOURCE_1Struct) CommitDeleteInstance(id uint
 
 	// a_source_1 is not staged anymore, remove a_source_1DB
 	a_source_1DB := backRepoA_SOURCE_1.Map_A_SOURCE_1DBID_A_SOURCE_1DB[id]
-	query := backRepoA_SOURCE_1.db.Unscoped().Delete(&a_source_1DB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoA_SOURCE_1.db.Unscoped()
+	_, err := db.Delete(a_source_1DB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -183,9 +195,9 @@ func (backRepoA_SOURCE_1 *BackRepoA_SOURCE_1Struct) CommitPhaseOneInstance(a_sou
 	var a_source_1DB A_SOURCE_1DB
 	a_source_1DB.CopyBasicFieldsFromA_SOURCE_1(a_source_1)
 
-	query := backRepoA_SOURCE_1.db.Create(&a_source_1DB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoA_SOURCE_1.db.Create(&a_source_1DB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -217,9 +229,9 @@ func (backRepoA_SOURCE_1 *BackRepoA_SOURCE_1Struct) CommitPhaseTwoInstance(backR
 		a_source_1DB.CopyBasicFieldsFromA_SOURCE_1(a_source_1)
 
 		// insertion point for translating pointers encodings into actual pointers
-		query := backRepoA_SOURCE_1.db.Save(&a_source_1DB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoA_SOURCE_1.db.Save(a_source_1DB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -238,9 +250,9 @@ func (backRepoA_SOURCE_1 *BackRepoA_SOURCE_1Struct) CommitPhaseTwoInstance(backR
 func (backRepoA_SOURCE_1 *BackRepoA_SOURCE_1Struct) CheckoutPhaseOne() (Error error) {
 
 	a_source_1DBArray := make([]A_SOURCE_1DB, 0)
-	query := backRepoA_SOURCE_1.db.Find(&a_source_1DBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoA_SOURCE_1.db.Find(&a_source_1DBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -351,7 +363,7 @@ func (backRepo *BackRepoStruct) CheckoutA_SOURCE_1(a_source_1 *models.A_SOURCE_1
 			var a_source_1DB A_SOURCE_1DB
 			a_source_1DB.ID = id
 
-			if err := backRepo.BackRepoA_SOURCE_1.db.First(&a_source_1DB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoA_SOURCE_1.db.First(&a_source_1DB, id); err != nil {
 				log.Fatalln("CheckoutA_SOURCE_1 : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoA_SOURCE_1.CheckoutPhaseOneInstance(&a_source_1DB)
@@ -510,9 +522,9 @@ func (backRepoA_SOURCE_1 *BackRepoA_SOURCE_1Struct) rowVisitorA_SOURCE_1(row *xl
 
 		a_source_1DB_ID_atBackupTime := a_source_1DB.ID
 		a_source_1DB.ID = 0
-		query := backRepoA_SOURCE_1.db.Create(a_source_1DB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoA_SOURCE_1.db.Create(a_source_1DB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoA_SOURCE_1.Map_A_SOURCE_1DBID_A_SOURCE_1DB[a_source_1DB.ID] = a_source_1DB
 		BackRepoA_SOURCE_1id_atBckpTime_newID[a_source_1DB_ID_atBackupTime] = a_source_1DB.ID
@@ -547,9 +559,9 @@ func (backRepoA_SOURCE_1 *BackRepoA_SOURCE_1Struct) RestorePhaseOne(dirPath stri
 
 		a_source_1DB_ID_atBackupTime := a_source_1DB.ID
 		a_source_1DB.ID = 0
-		query := backRepoA_SOURCE_1.db.Create(a_source_1DB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoA_SOURCE_1.db.Create(a_source_1DB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoA_SOURCE_1.Map_A_SOURCE_1DBID_A_SOURCE_1DB[a_source_1DB.ID] = a_source_1DB
 		BackRepoA_SOURCE_1id_atBckpTime_newID[a_source_1DB_ID_atBackupTime] = a_source_1DB.ID
@@ -571,9 +583,10 @@ func (backRepoA_SOURCE_1 *BackRepoA_SOURCE_1Struct) RestorePhaseTwo() {
 
 		// insertion point for reindexing pointers encoding
 		// update databse with new index encoding
-		query := backRepoA_SOURCE_1.db.Model(a_source_1DB).Updates(*a_source_1DB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoA_SOURCE_1.db.Model(a_source_1DB)
+		_, err := db.Updates(*a_source_1DB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

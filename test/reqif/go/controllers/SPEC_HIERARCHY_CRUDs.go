@@ -58,24 +58,31 @@ func (controller *Controller) GetSPEC_HIERARCHYs(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("GetSPEC_HIERARCHYs", "GONG__StackPath", stackPath)
+			// log.Println("GetSPEC_HIERARCHYs", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "GET Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoSPEC_HIERARCHY.GetDB()
 
-	query := db.Find(&spec_hierarchyDBs)
-	if query.Error != nil {
+	_, err := db.Find(&spec_hierarchyDBs)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -121,15 +128,22 @@ func (controller *Controller) PostSPEC_HIERARCHY(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("PostSPEC_HIERARCHYs", "GONG__StackPath", stackPath)
+			// log.Println("PostSPEC_HIERARCHYs", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "Post Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoSPEC_HIERARCHY.GetDB()
 
@@ -151,12 +165,12 @@ func (controller *Controller) PostSPEC_HIERARCHY(c *gin.Context) {
 	spec_hierarchyDB.SPEC_HIERARCHYPointersEncoding = input.SPEC_HIERARCHYPointersEncoding
 	spec_hierarchyDB.CopyBasicFieldsFromSPEC_HIERARCHY_WOP(&input.SPEC_HIERARCHY_WOP)
 
-	query := db.Create(&spec_hierarchyDB)
-	if query.Error != nil {
+	_, err = db.Create(&spec_hierarchyDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -191,21 +205,28 @@ func (controller *Controller) GetSPEC_HIERARCHY(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("GetSPEC_HIERARCHY", "GONG__StackPath", stackPath)
+			// log.Println("GetSPEC_HIERARCHY", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoSPEC_HIERARCHY.GetDB()
 
 	// Get spec_hierarchyDB in DB
 	var spec_hierarchyDB orm.SPEC_HIERARCHYDB
-	if err := db.First(&spec_hierarchyDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&spec_hierarchyDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -240,15 +261,22 @@ func (controller *Controller) UpdateSPEC_HIERARCHY(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("UpdateSPEC_HIERARCHY", "GONG__StackPath", stackPath)
+			// log.Println("UpdateSPEC_HIERARCHY", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "PATCH Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoSPEC_HIERARCHY.GetDB()
 
@@ -264,13 +292,13 @@ func (controller *Controller) UpdateSPEC_HIERARCHY(c *gin.Context) {
 	var spec_hierarchyDB orm.SPEC_HIERARCHYDB
 
 	// fetch the spec_hierarchy
-	query := db.First(&spec_hierarchyDB, c.Param("id"))
+	_, err := db.First(&spec_hierarchyDB, c.Param("id"))
 
-	if query.Error != nil {
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -279,12 +307,13 @@ func (controller *Controller) UpdateSPEC_HIERARCHY(c *gin.Context) {
 	spec_hierarchyDB.CopyBasicFieldsFromSPEC_HIERARCHY_WOP(&input.SPEC_HIERARCHY_WOP)
 	spec_hierarchyDB.SPEC_HIERARCHYPointersEncoding = input.SPEC_HIERARCHYPointersEncoding
 
-	query = db.Model(&spec_hierarchyDB).Updates(spec_hierarchyDB)
-	if query.Error != nil {
+	db, _ = db.Model(&spec_hierarchyDB)
+	_, err = db.Updates(&spec_hierarchyDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -329,21 +358,28 @@ func (controller *Controller) DeleteSPEC_HIERARCHY(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("DeleteSPEC_HIERARCHY", "GONG__StackPath", stackPath)
+			// log.Println("DeleteSPEC_HIERARCHY", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "DELETE Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoSPEC_HIERARCHY.GetDB()
 
 	// Get model if exist
 	var spec_hierarchyDB orm.SPEC_HIERARCHYDB
-	if err := db.First(&spec_hierarchyDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&spec_hierarchyDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -353,7 +389,8 @@ func (controller *Controller) DeleteSPEC_HIERARCHY(c *gin.Context) {
 	}
 
 	// with gorm.Model field, default delete is a soft delete. Unscoped() force delete
-	db.Unscoped().Delete(&spec_hierarchyDB)
+	db.Unscoped()
+	db.Delete(&spec_hierarchyDB)
 
 	// get an instance (not staged) from DB instance, and call callback function
 	spec_hierarchyDeleted := new(models.SPEC_HIERARCHY)

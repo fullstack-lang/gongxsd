@@ -58,24 +58,31 @@ func (controller *Controller) GetALTERNATIVE_IDs(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("GetALTERNATIVE_IDs", "GONG__StackPath", stackPath)
+			// log.Println("GetALTERNATIVE_IDs", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "GET Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoALTERNATIVE_ID.GetDB()
 
-	query := db.Find(&alternative_idDBs)
-	if query.Error != nil {
+	_, err := db.Find(&alternative_idDBs)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -121,15 +128,22 @@ func (controller *Controller) PostALTERNATIVE_ID(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("PostALTERNATIVE_IDs", "GONG__StackPath", stackPath)
+			// log.Println("PostALTERNATIVE_IDs", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "Post Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoALTERNATIVE_ID.GetDB()
 
@@ -151,12 +165,12 @@ func (controller *Controller) PostALTERNATIVE_ID(c *gin.Context) {
 	alternative_idDB.ALTERNATIVE_IDPointersEncoding = input.ALTERNATIVE_IDPointersEncoding
 	alternative_idDB.CopyBasicFieldsFromALTERNATIVE_ID_WOP(&input.ALTERNATIVE_ID_WOP)
 
-	query := db.Create(&alternative_idDB)
-	if query.Error != nil {
+	_, err = db.Create(&alternative_idDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -191,21 +205,28 @@ func (controller *Controller) GetALTERNATIVE_ID(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("GetALTERNATIVE_ID", "GONG__StackPath", stackPath)
+			// log.Println("GetALTERNATIVE_ID", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoALTERNATIVE_ID.GetDB()
 
 	// Get alternative_idDB in DB
 	var alternative_idDB orm.ALTERNATIVE_IDDB
-	if err := db.First(&alternative_idDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&alternative_idDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -240,15 +261,22 @@ func (controller *Controller) UpdateALTERNATIVE_ID(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("UpdateALTERNATIVE_ID", "GONG__StackPath", stackPath)
+			// log.Println("UpdateALTERNATIVE_ID", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "PATCH Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoALTERNATIVE_ID.GetDB()
 
@@ -264,13 +292,13 @@ func (controller *Controller) UpdateALTERNATIVE_ID(c *gin.Context) {
 	var alternative_idDB orm.ALTERNATIVE_IDDB
 
 	// fetch the alternative_id
-	query := db.First(&alternative_idDB, c.Param("id"))
+	_, err := db.First(&alternative_idDB, c.Param("id"))
 
-	if query.Error != nil {
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -279,12 +307,13 @@ func (controller *Controller) UpdateALTERNATIVE_ID(c *gin.Context) {
 	alternative_idDB.CopyBasicFieldsFromALTERNATIVE_ID_WOP(&input.ALTERNATIVE_ID_WOP)
 	alternative_idDB.ALTERNATIVE_IDPointersEncoding = input.ALTERNATIVE_IDPointersEncoding
 
-	query = db.Model(&alternative_idDB).Updates(alternative_idDB)
-	if query.Error != nil {
+	db, _ = db.Model(&alternative_idDB)
+	_, err = db.Updates(&alternative_idDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -329,21 +358,28 @@ func (controller *Controller) DeleteALTERNATIVE_ID(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("DeleteALTERNATIVE_ID", "GONG__StackPath", stackPath)
+			// log.Println("DeleteALTERNATIVE_ID", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "DELETE Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoALTERNATIVE_ID.GetDB()
 
 	// Get model if exist
 	var alternative_idDB orm.ALTERNATIVE_IDDB
-	if err := db.First(&alternative_idDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&alternative_idDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -353,7 +389,8 @@ func (controller *Controller) DeleteALTERNATIVE_ID(c *gin.Context) {
 	}
 
 	// with gorm.Model field, default delete is a soft delete. Unscoped() force delete
-	db.Unscoped().Delete(&alternative_idDB)
+	db.Unscoped()
+	db.Delete(&alternative_idDB)
 
 	// get an instance (not staged) from DB instance, and call callback function
 	alternative_idDeleted := new(models.ALTERNATIVE_ID)

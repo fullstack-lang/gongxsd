@@ -58,24 +58,31 @@ func (controller *Controller) GetA_ATTRIBUTE_DEFINITION_XHTML_REFs(c *gin.Contex
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("GetA_ATTRIBUTE_DEFINITION_XHTML_REFs", "GONG__StackPath", stackPath)
+			// log.Println("GetA_ATTRIBUTE_DEFINITION_XHTML_REFs", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "GET Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoA_ATTRIBUTE_DEFINITION_XHTML_REF.GetDB()
 
-	query := db.Find(&a_attribute_definition_xhtml_refDBs)
-	if query.Error != nil {
+	_, err := db.Find(&a_attribute_definition_xhtml_refDBs)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -121,15 +128,22 @@ func (controller *Controller) PostA_ATTRIBUTE_DEFINITION_XHTML_REF(c *gin.Contex
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("PostA_ATTRIBUTE_DEFINITION_XHTML_REFs", "GONG__StackPath", stackPath)
+			// log.Println("PostA_ATTRIBUTE_DEFINITION_XHTML_REFs", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "Post Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoA_ATTRIBUTE_DEFINITION_XHTML_REF.GetDB()
 
@@ -151,12 +165,12 @@ func (controller *Controller) PostA_ATTRIBUTE_DEFINITION_XHTML_REF(c *gin.Contex
 	a_attribute_definition_xhtml_refDB.A_ATTRIBUTE_DEFINITION_XHTML_REFPointersEncoding = input.A_ATTRIBUTE_DEFINITION_XHTML_REFPointersEncoding
 	a_attribute_definition_xhtml_refDB.CopyBasicFieldsFromA_ATTRIBUTE_DEFINITION_XHTML_REF_WOP(&input.A_ATTRIBUTE_DEFINITION_XHTML_REF_WOP)
 
-	query := db.Create(&a_attribute_definition_xhtml_refDB)
-	if query.Error != nil {
+	_, err = db.Create(&a_attribute_definition_xhtml_refDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -191,21 +205,28 @@ func (controller *Controller) GetA_ATTRIBUTE_DEFINITION_XHTML_REF(c *gin.Context
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("GetA_ATTRIBUTE_DEFINITION_XHTML_REF", "GONG__StackPath", stackPath)
+			// log.Println("GetA_ATTRIBUTE_DEFINITION_XHTML_REF", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoA_ATTRIBUTE_DEFINITION_XHTML_REF.GetDB()
 
 	// Get a_attribute_definition_xhtml_refDB in DB
 	var a_attribute_definition_xhtml_refDB orm.A_ATTRIBUTE_DEFINITION_XHTML_REFDB
-	if err := db.First(&a_attribute_definition_xhtml_refDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&a_attribute_definition_xhtml_refDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -240,15 +261,22 @@ func (controller *Controller) UpdateA_ATTRIBUTE_DEFINITION_XHTML_REF(c *gin.Cont
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("UpdateA_ATTRIBUTE_DEFINITION_XHTML_REF", "GONG__StackPath", stackPath)
+			// log.Println("UpdateA_ATTRIBUTE_DEFINITION_XHTML_REF", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "PATCH Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoA_ATTRIBUTE_DEFINITION_XHTML_REF.GetDB()
 
@@ -264,13 +292,13 @@ func (controller *Controller) UpdateA_ATTRIBUTE_DEFINITION_XHTML_REF(c *gin.Cont
 	var a_attribute_definition_xhtml_refDB orm.A_ATTRIBUTE_DEFINITION_XHTML_REFDB
 
 	// fetch the a_attribute_definition_xhtml_ref
-	query := db.First(&a_attribute_definition_xhtml_refDB, c.Param("id"))
+	_, err := db.First(&a_attribute_definition_xhtml_refDB, c.Param("id"))
 
-	if query.Error != nil {
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -279,12 +307,13 @@ func (controller *Controller) UpdateA_ATTRIBUTE_DEFINITION_XHTML_REF(c *gin.Cont
 	a_attribute_definition_xhtml_refDB.CopyBasicFieldsFromA_ATTRIBUTE_DEFINITION_XHTML_REF_WOP(&input.A_ATTRIBUTE_DEFINITION_XHTML_REF_WOP)
 	a_attribute_definition_xhtml_refDB.A_ATTRIBUTE_DEFINITION_XHTML_REFPointersEncoding = input.A_ATTRIBUTE_DEFINITION_XHTML_REFPointersEncoding
 
-	query = db.Model(&a_attribute_definition_xhtml_refDB).Updates(a_attribute_definition_xhtml_refDB)
-	if query.Error != nil {
+	db, _ = db.Model(&a_attribute_definition_xhtml_refDB)
+	_, err = db.Updates(&a_attribute_definition_xhtml_refDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -329,21 +358,28 @@ func (controller *Controller) DeleteA_ATTRIBUTE_DEFINITION_XHTML_REF(c *gin.Cont
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("DeleteA_ATTRIBUTE_DEFINITION_XHTML_REF", "GONG__StackPath", stackPath)
+			// log.Println("DeleteA_ATTRIBUTE_DEFINITION_XHTML_REF", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "DELETE Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoA_ATTRIBUTE_DEFINITION_XHTML_REF.GetDB()
 
 	// Get model if exist
 	var a_attribute_definition_xhtml_refDB orm.A_ATTRIBUTE_DEFINITION_XHTML_REFDB
-	if err := db.First(&a_attribute_definition_xhtml_refDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&a_attribute_definition_xhtml_refDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -353,7 +389,8 @@ func (controller *Controller) DeleteA_ATTRIBUTE_DEFINITION_XHTML_REF(c *gin.Cont
 	}
 
 	// with gorm.Model field, default delete is a soft delete. Unscoped() force delete
-	db.Unscoped().Delete(&a_attribute_definition_xhtml_refDB)
+	db.Unscoped()
+	db.Delete(&a_attribute_definition_xhtml_refDB)
 
 	// get an instance (not staged) from DB instance, and call callback function
 	a_attribute_definition_xhtml_refDeleted := new(models.A_ATTRIBUTE_DEFINITION_XHTML_REF)

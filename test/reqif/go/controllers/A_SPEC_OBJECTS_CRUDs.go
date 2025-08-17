@@ -58,24 +58,31 @@ func (controller *Controller) GetA_SPEC_OBJECTSs(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("GetA_SPEC_OBJECTSs", "GONG__StackPath", stackPath)
+			// log.Println("GetA_SPEC_OBJECTSs", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "GET Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoA_SPEC_OBJECTS.GetDB()
 
-	query := db.Find(&a_spec_objectsDBs)
-	if query.Error != nil {
+	_, err := db.Find(&a_spec_objectsDBs)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -121,15 +128,22 @@ func (controller *Controller) PostA_SPEC_OBJECTS(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("PostA_SPEC_OBJECTSs", "GONG__StackPath", stackPath)
+			// log.Println("PostA_SPEC_OBJECTSs", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "Post Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoA_SPEC_OBJECTS.GetDB()
 
@@ -151,12 +165,12 @@ func (controller *Controller) PostA_SPEC_OBJECTS(c *gin.Context) {
 	a_spec_objectsDB.A_SPEC_OBJECTSPointersEncoding = input.A_SPEC_OBJECTSPointersEncoding
 	a_spec_objectsDB.CopyBasicFieldsFromA_SPEC_OBJECTS_WOP(&input.A_SPEC_OBJECTS_WOP)
 
-	query := db.Create(&a_spec_objectsDB)
-	if query.Error != nil {
+	_, err = db.Create(&a_spec_objectsDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -191,21 +205,28 @@ func (controller *Controller) GetA_SPEC_OBJECTS(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("GetA_SPEC_OBJECTS", "GONG__StackPath", stackPath)
+			// log.Println("GetA_SPEC_OBJECTS", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoA_SPEC_OBJECTS.GetDB()
 
 	// Get a_spec_objectsDB in DB
 	var a_spec_objectsDB orm.A_SPEC_OBJECTSDB
-	if err := db.First(&a_spec_objectsDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&a_spec_objectsDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -240,15 +261,22 @@ func (controller *Controller) UpdateA_SPEC_OBJECTS(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("UpdateA_SPEC_OBJECTS", "GONG__StackPath", stackPath)
+			// log.Println("UpdateA_SPEC_OBJECTS", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "PATCH Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoA_SPEC_OBJECTS.GetDB()
 
@@ -264,13 +292,13 @@ func (controller *Controller) UpdateA_SPEC_OBJECTS(c *gin.Context) {
 	var a_spec_objectsDB orm.A_SPEC_OBJECTSDB
 
 	// fetch the a_spec_objects
-	query := db.First(&a_spec_objectsDB, c.Param("id"))
+	_, err := db.First(&a_spec_objectsDB, c.Param("id"))
 
-	if query.Error != nil {
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -279,12 +307,13 @@ func (controller *Controller) UpdateA_SPEC_OBJECTS(c *gin.Context) {
 	a_spec_objectsDB.CopyBasicFieldsFromA_SPEC_OBJECTS_WOP(&input.A_SPEC_OBJECTS_WOP)
 	a_spec_objectsDB.A_SPEC_OBJECTSPointersEncoding = input.A_SPEC_OBJECTSPointersEncoding
 
-	query = db.Model(&a_spec_objectsDB).Updates(a_spec_objectsDB)
-	if query.Error != nil {
+	db, _ = db.Model(&a_spec_objectsDB)
+	_, err = db.Updates(&a_spec_objectsDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -329,21 +358,28 @@ func (controller *Controller) DeleteA_SPEC_OBJECTS(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("DeleteA_SPEC_OBJECTS", "GONG__StackPath", stackPath)
+			// log.Println("DeleteA_SPEC_OBJECTS", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "DELETE Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoA_SPEC_OBJECTS.GetDB()
 
 	// Get model if exist
 	var a_spec_objectsDB orm.A_SPEC_OBJECTSDB
-	if err := db.First(&a_spec_objectsDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&a_spec_objectsDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -353,7 +389,8 @@ func (controller *Controller) DeleteA_SPEC_OBJECTS(c *gin.Context) {
 	}
 
 	// with gorm.Model field, default delete is a soft delete. Unscoped() force delete
-	db.Unscoped().Delete(&a_spec_objectsDB)
+	db.Unscoped()
+	db.Delete(&a_spec_objectsDB)
 
 	// get an instance (not staged) from DB instance, and call callback function
 	a_spec_objectsDeleted := new(models.A_SPEC_OBJECTS)

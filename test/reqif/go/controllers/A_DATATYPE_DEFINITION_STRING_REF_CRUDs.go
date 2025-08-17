@@ -58,24 +58,31 @@ func (controller *Controller) GetA_DATATYPE_DEFINITION_STRING_REFs(c *gin.Contex
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("GetA_DATATYPE_DEFINITION_STRING_REFs", "GONG__StackPath", stackPath)
+			// log.Println("GetA_DATATYPE_DEFINITION_STRING_REFs", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "GET Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoA_DATATYPE_DEFINITION_STRING_REF.GetDB()
 
-	query := db.Find(&a_datatype_definition_string_refDBs)
-	if query.Error != nil {
+	_, err := db.Find(&a_datatype_definition_string_refDBs)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -121,15 +128,22 @@ func (controller *Controller) PostA_DATATYPE_DEFINITION_STRING_REF(c *gin.Contex
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("PostA_DATATYPE_DEFINITION_STRING_REFs", "GONG__StackPath", stackPath)
+			// log.Println("PostA_DATATYPE_DEFINITION_STRING_REFs", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "Post Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoA_DATATYPE_DEFINITION_STRING_REF.GetDB()
 
@@ -151,12 +165,12 @@ func (controller *Controller) PostA_DATATYPE_DEFINITION_STRING_REF(c *gin.Contex
 	a_datatype_definition_string_refDB.A_DATATYPE_DEFINITION_STRING_REFPointersEncoding = input.A_DATATYPE_DEFINITION_STRING_REFPointersEncoding
 	a_datatype_definition_string_refDB.CopyBasicFieldsFromA_DATATYPE_DEFINITION_STRING_REF_WOP(&input.A_DATATYPE_DEFINITION_STRING_REF_WOP)
 
-	query := db.Create(&a_datatype_definition_string_refDB)
-	if query.Error != nil {
+	_, err = db.Create(&a_datatype_definition_string_refDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -191,21 +205,28 @@ func (controller *Controller) GetA_DATATYPE_DEFINITION_STRING_REF(c *gin.Context
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("GetA_DATATYPE_DEFINITION_STRING_REF", "GONG__StackPath", stackPath)
+			// log.Println("GetA_DATATYPE_DEFINITION_STRING_REF", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoA_DATATYPE_DEFINITION_STRING_REF.GetDB()
 
 	// Get a_datatype_definition_string_refDB in DB
 	var a_datatype_definition_string_refDB orm.A_DATATYPE_DEFINITION_STRING_REFDB
-	if err := db.First(&a_datatype_definition_string_refDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&a_datatype_definition_string_refDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -240,15 +261,22 @@ func (controller *Controller) UpdateA_DATATYPE_DEFINITION_STRING_REF(c *gin.Cont
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("UpdateA_DATATYPE_DEFINITION_STRING_REF", "GONG__StackPath", stackPath)
+			// log.Println("UpdateA_DATATYPE_DEFINITION_STRING_REF", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "PATCH Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoA_DATATYPE_DEFINITION_STRING_REF.GetDB()
 
@@ -264,13 +292,13 @@ func (controller *Controller) UpdateA_DATATYPE_DEFINITION_STRING_REF(c *gin.Cont
 	var a_datatype_definition_string_refDB orm.A_DATATYPE_DEFINITION_STRING_REFDB
 
 	// fetch the a_datatype_definition_string_ref
-	query := db.First(&a_datatype_definition_string_refDB, c.Param("id"))
+	_, err := db.First(&a_datatype_definition_string_refDB, c.Param("id"))
 
-	if query.Error != nil {
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -279,12 +307,13 @@ func (controller *Controller) UpdateA_DATATYPE_DEFINITION_STRING_REF(c *gin.Cont
 	a_datatype_definition_string_refDB.CopyBasicFieldsFromA_DATATYPE_DEFINITION_STRING_REF_WOP(&input.A_DATATYPE_DEFINITION_STRING_REF_WOP)
 	a_datatype_definition_string_refDB.A_DATATYPE_DEFINITION_STRING_REFPointersEncoding = input.A_DATATYPE_DEFINITION_STRING_REFPointersEncoding
 
-	query = db.Model(&a_datatype_definition_string_refDB).Updates(a_datatype_definition_string_refDB)
-	if query.Error != nil {
+	db, _ = db.Model(&a_datatype_definition_string_refDB)
+	_, err = db.Updates(&a_datatype_definition_string_refDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -329,21 +358,28 @@ func (controller *Controller) DeleteA_DATATYPE_DEFINITION_STRING_REF(c *gin.Cont
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("DeleteA_DATATYPE_DEFINITION_STRING_REF", "GONG__StackPath", stackPath)
+			// log.Println("DeleteA_DATATYPE_DEFINITION_STRING_REF", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "DELETE Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoA_DATATYPE_DEFINITION_STRING_REF.GetDB()
 
 	// Get model if exist
 	var a_datatype_definition_string_refDB orm.A_DATATYPE_DEFINITION_STRING_REFDB
-	if err := db.First(&a_datatype_definition_string_refDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&a_datatype_definition_string_refDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -353,7 +389,8 @@ func (controller *Controller) DeleteA_DATATYPE_DEFINITION_STRING_REF(c *gin.Cont
 	}
 
 	// with gorm.Model field, default delete is a soft delete. Unscoped() force delete
-	db.Unscoped().Delete(&a_datatype_definition_string_refDB)
+	db.Unscoped()
+	db.Delete(&a_datatype_definition_string_refDB)
 
 	// get an instance (not staged) from DB instance, and call callback function
 	a_datatype_definition_string_refDeleted := new(models.A_DATATYPE_DEFINITION_STRING_REF)

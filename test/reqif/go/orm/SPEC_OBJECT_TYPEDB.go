@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/test/reqif/go/db"
 	"github.com/fullstack-lang/gongxsd/test/reqif/go/models"
 )
 
@@ -81,7 +82,7 @@ type SPEC_OBJECT_TYPEDB struct {
 
 	// Declation for basic field spec_object_typeDB.LONG_NAME
 	LONG_NAME_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	SPEC_OBJECT_TYPEPointersEncoding
@@ -136,17 +137,17 @@ type BackRepoSPEC_OBJECT_TYPEStruct struct {
 	// stores SPEC_OBJECT_TYPE according to their gorm ID
 	Map_SPEC_OBJECT_TYPEDBID_SPEC_OBJECT_TYPEPtr map[uint]*models.SPEC_OBJECT_TYPE
 
-	db *gorm.DB
+	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoSPEC_OBJECT_TYPE *BackRepoSPEC_OBJECT_TYPEStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoSPEC_OBJECT_TYPE *BackRepoSPEC_OBJECT_TYPEStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoSPEC_OBJECT_TYPE.stage
 	return
 }
 
-func (backRepoSPEC_OBJECT_TYPE *BackRepoSPEC_OBJECT_TYPEStruct) GetDB() *gorm.DB {
+func (backRepoSPEC_OBJECT_TYPE *BackRepoSPEC_OBJECT_TYPEStruct) GetDB() db.DBInterface {
 	return backRepoSPEC_OBJECT_TYPE.db
 }
 
@@ -159,9 +160,19 @@ func (backRepoSPEC_OBJECT_TYPE *BackRepoSPEC_OBJECT_TYPEStruct) GetSPEC_OBJECT_T
 
 // BackRepoSPEC_OBJECT_TYPE.CommitPhaseOne commits all staged instances of SPEC_OBJECT_TYPE to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoSPEC_OBJECT_TYPE *BackRepoSPEC_OBJECT_TYPEStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoSPEC_OBJECT_TYPE *BackRepoSPEC_OBJECT_TYPEStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var spec_object_types []*models.SPEC_OBJECT_TYPE
 	for spec_object_type := range stage.SPEC_OBJECT_TYPEs {
+		spec_object_types = append(spec_object_types, spec_object_type)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(spec_object_types, func(i, j int) bool {
+		return stage.SPEC_OBJECT_TYPEMap_Staged_Order[spec_object_types[i]] < stage.SPEC_OBJECT_TYPEMap_Staged_Order[spec_object_types[j]]
+	})
+
+	for _, spec_object_type := range spec_object_types {
 		backRepoSPEC_OBJECT_TYPE.CommitPhaseOneInstance(spec_object_type)
 	}
 
@@ -183,9 +194,10 @@ func (backRepoSPEC_OBJECT_TYPE *BackRepoSPEC_OBJECT_TYPEStruct) CommitDeleteInst
 
 	// spec_object_type is not staged anymore, remove spec_object_typeDB
 	spec_object_typeDB := backRepoSPEC_OBJECT_TYPE.Map_SPEC_OBJECT_TYPEDBID_SPEC_OBJECT_TYPEDB[id]
-	query := backRepoSPEC_OBJECT_TYPE.db.Unscoped().Delete(&spec_object_typeDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoSPEC_OBJECT_TYPE.db.Unscoped()
+	_, err := db.Delete(spec_object_typeDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -209,9 +221,9 @@ func (backRepoSPEC_OBJECT_TYPE *BackRepoSPEC_OBJECT_TYPEStruct) CommitPhaseOneIn
 	var spec_object_typeDB SPEC_OBJECT_TYPEDB
 	spec_object_typeDB.CopyBasicFieldsFromSPEC_OBJECT_TYPE(spec_object_type)
 
-	query := backRepoSPEC_OBJECT_TYPE.db.Create(&spec_object_typeDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoSPEC_OBJECT_TYPE.db.Create(&spec_object_typeDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -267,9 +279,9 @@ func (backRepoSPEC_OBJECT_TYPE *BackRepoSPEC_OBJECT_TYPEStruct) CommitPhaseTwoIn
 			spec_object_typeDB.SPEC_ATTRIBUTESID.Valid = true
 		}
 
-		query := backRepoSPEC_OBJECT_TYPE.db.Save(&spec_object_typeDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoSPEC_OBJECT_TYPE.db.Save(spec_object_typeDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -288,9 +300,9 @@ func (backRepoSPEC_OBJECT_TYPE *BackRepoSPEC_OBJECT_TYPEStruct) CommitPhaseTwoIn
 func (backRepoSPEC_OBJECT_TYPE *BackRepoSPEC_OBJECT_TYPEStruct) CheckoutPhaseOne() (Error error) {
 
 	spec_object_typeDBArray := make([]SPEC_OBJECT_TYPEDB, 0)
-	query := backRepoSPEC_OBJECT_TYPE.db.Find(&spec_object_typeDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoSPEC_OBJECT_TYPE.db.Find(&spec_object_typeDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -380,16 +392,48 @@ func (backRepoSPEC_OBJECT_TYPE *BackRepoSPEC_OBJECT_TYPEStruct) CheckoutPhaseTwo
 func (spec_object_typeDB *SPEC_OBJECT_TYPEDB) DecodePointers(backRepo *BackRepoStruct, spec_object_type *models.SPEC_OBJECT_TYPE) {
 
 	// insertion point for checkout of pointer encoding
-	// ALTERNATIVE_ID field
-	spec_object_type.ALTERNATIVE_ID = nil
-	if spec_object_typeDB.ALTERNATIVE_IDID.Int64 != 0 {
-		spec_object_type.ALTERNATIVE_ID = backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(spec_object_typeDB.ALTERNATIVE_IDID.Int64)]
+	// ALTERNATIVE_ID field	
+	{
+		id := spec_object_typeDB.ALTERNATIVE_IDID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: spec_object_type.ALTERNATIVE_ID, unknown pointer id", id)
+				spec_object_type.ALTERNATIVE_ID = nil
+			} else {
+				// updates only if field has changed
+				if spec_object_type.ALTERNATIVE_ID == nil || spec_object_type.ALTERNATIVE_ID != tmp {
+					spec_object_type.ALTERNATIVE_ID = tmp
+				}
+			}
+		} else {
+			spec_object_type.ALTERNATIVE_ID = nil
+		}
 	}
-	// SPEC_ATTRIBUTES field
-	spec_object_type.SPEC_ATTRIBUTES = nil
-	if spec_object_typeDB.SPEC_ATTRIBUTESID.Int64 != 0 {
-		spec_object_type.SPEC_ATTRIBUTES = backRepo.BackRepoA_SPEC_ATTRIBUTES.Map_A_SPEC_ATTRIBUTESDBID_A_SPEC_ATTRIBUTESPtr[uint(spec_object_typeDB.SPEC_ATTRIBUTESID.Int64)]
+	
+	// SPEC_ATTRIBUTES field	
+	{
+		id := spec_object_typeDB.SPEC_ATTRIBUTESID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoA_SPEC_ATTRIBUTES.Map_A_SPEC_ATTRIBUTESDBID_A_SPEC_ATTRIBUTESPtr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: spec_object_type.SPEC_ATTRIBUTES, unknown pointer id", id)
+				spec_object_type.SPEC_ATTRIBUTES = nil
+			} else {
+				// updates only if field has changed
+				if spec_object_type.SPEC_ATTRIBUTES == nil || spec_object_type.SPEC_ATTRIBUTES != tmp {
+					spec_object_type.SPEC_ATTRIBUTES = tmp
+				}
+			}
+		} else {
+			spec_object_type.SPEC_ATTRIBUTES = nil
+		}
 	}
+	
 	return
 }
 
@@ -411,7 +455,7 @@ func (backRepo *BackRepoStruct) CheckoutSPEC_OBJECT_TYPE(spec_object_type *model
 			var spec_object_typeDB SPEC_OBJECT_TYPEDB
 			spec_object_typeDB.ID = id
 
-			if err := backRepo.BackRepoSPEC_OBJECT_TYPE.db.First(&spec_object_typeDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoSPEC_OBJECT_TYPE.db.First(&spec_object_typeDB, id); err != nil {
 				log.Fatalln("CheckoutSPEC_OBJECT_TYPE : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoSPEC_OBJECT_TYPE.CheckoutPhaseOneInstance(&spec_object_typeDB)
@@ -606,9 +650,9 @@ func (backRepoSPEC_OBJECT_TYPE *BackRepoSPEC_OBJECT_TYPEStruct) rowVisitorSPEC_O
 
 		spec_object_typeDB_ID_atBackupTime := spec_object_typeDB.ID
 		spec_object_typeDB.ID = 0
-		query := backRepoSPEC_OBJECT_TYPE.db.Create(spec_object_typeDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoSPEC_OBJECT_TYPE.db.Create(spec_object_typeDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoSPEC_OBJECT_TYPE.Map_SPEC_OBJECT_TYPEDBID_SPEC_OBJECT_TYPEDB[spec_object_typeDB.ID] = spec_object_typeDB
 		BackRepoSPEC_OBJECT_TYPEid_atBckpTime_newID[spec_object_typeDB_ID_atBackupTime] = spec_object_typeDB.ID
@@ -643,9 +687,9 @@ func (backRepoSPEC_OBJECT_TYPE *BackRepoSPEC_OBJECT_TYPEStruct) RestorePhaseOne(
 
 		spec_object_typeDB_ID_atBackupTime := spec_object_typeDB.ID
 		spec_object_typeDB.ID = 0
-		query := backRepoSPEC_OBJECT_TYPE.db.Create(spec_object_typeDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoSPEC_OBJECT_TYPE.db.Create(spec_object_typeDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoSPEC_OBJECT_TYPE.Map_SPEC_OBJECT_TYPEDBID_SPEC_OBJECT_TYPEDB[spec_object_typeDB.ID] = spec_object_typeDB
 		BackRepoSPEC_OBJECT_TYPEid_atBckpTime_newID[spec_object_typeDB_ID_atBackupTime] = spec_object_typeDB.ID
@@ -679,9 +723,10 @@ func (backRepoSPEC_OBJECT_TYPE *BackRepoSPEC_OBJECT_TYPEStruct) RestorePhaseTwo(
 		}
 
 		// update databse with new index encoding
-		query := backRepoSPEC_OBJECT_TYPE.db.Model(spec_object_typeDB).Updates(*spec_object_typeDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoSPEC_OBJECT_TYPE.db.Model(spec_object_typeDB)
+		_, err := db.Updates(*spec_object_typeDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

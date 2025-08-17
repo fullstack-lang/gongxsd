@@ -10,12 +10,14 @@ import (
 )
 
 // A Controller is the handler of all API REST calls matching the stack model
-// It forwards API requests to the stack instance identified by the GONG_StackPath parameters in the request
+// It forwards API requests to the stack instance identified by the Name parameters in the request
 // the stack instance is the BackRepo instance
 type Controller struct {
 
 	// Map_BackRepos is the map to the backRepo instance according to the stack instance path
 	Map_BackRepos map[string]*reqif_orm.BackRepoStruct
+
+	listenerIndex int // Counter to track the number of listeners
 }
 
 var _controllerSingloton *Controller

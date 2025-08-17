@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/test/reqif/go/db"
 	"github.com/fullstack-lang/gongxsd/test/reqif/go/models"
 )
 
@@ -64,7 +65,7 @@ type A_SPEC_RELATION_REFDB struct {
 
 	// Declation for basic field a_spec_relation_refDB.SPEC_RELATION_REF
 	SPEC_RELATION_REF_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	A_SPEC_RELATION_REFPointersEncoding
@@ -110,17 +111,17 @@ type BackRepoA_SPEC_RELATION_REFStruct struct {
 	// stores A_SPEC_RELATION_REF according to their gorm ID
 	Map_A_SPEC_RELATION_REFDBID_A_SPEC_RELATION_REFPtr map[uint]*models.A_SPEC_RELATION_REF
 
-	db *gorm.DB
+	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoA_SPEC_RELATION_REF *BackRepoA_SPEC_RELATION_REFStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoA_SPEC_RELATION_REF *BackRepoA_SPEC_RELATION_REFStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoA_SPEC_RELATION_REF.stage
 	return
 }
 
-func (backRepoA_SPEC_RELATION_REF *BackRepoA_SPEC_RELATION_REFStruct) GetDB() *gorm.DB {
+func (backRepoA_SPEC_RELATION_REF *BackRepoA_SPEC_RELATION_REFStruct) GetDB() db.DBInterface {
 	return backRepoA_SPEC_RELATION_REF.db
 }
 
@@ -133,9 +134,19 @@ func (backRepoA_SPEC_RELATION_REF *BackRepoA_SPEC_RELATION_REFStruct) GetA_SPEC_
 
 // BackRepoA_SPEC_RELATION_REF.CommitPhaseOne commits all staged instances of A_SPEC_RELATION_REF to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoA_SPEC_RELATION_REF *BackRepoA_SPEC_RELATION_REFStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoA_SPEC_RELATION_REF *BackRepoA_SPEC_RELATION_REFStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var a_spec_relation_refs []*models.A_SPEC_RELATION_REF
 	for a_spec_relation_ref := range stage.A_SPEC_RELATION_REFs {
+		a_spec_relation_refs = append(a_spec_relation_refs, a_spec_relation_ref)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(a_spec_relation_refs, func(i, j int) bool {
+		return stage.A_SPEC_RELATION_REFMap_Staged_Order[a_spec_relation_refs[i]] < stage.A_SPEC_RELATION_REFMap_Staged_Order[a_spec_relation_refs[j]]
+	})
+
+	for _, a_spec_relation_ref := range a_spec_relation_refs {
 		backRepoA_SPEC_RELATION_REF.CommitPhaseOneInstance(a_spec_relation_ref)
 	}
 
@@ -157,9 +168,10 @@ func (backRepoA_SPEC_RELATION_REF *BackRepoA_SPEC_RELATION_REFStruct) CommitDele
 
 	// a_spec_relation_ref is not staged anymore, remove a_spec_relation_refDB
 	a_spec_relation_refDB := backRepoA_SPEC_RELATION_REF.Map_A_SPEC_RELATION_REFDBID_A_SPEC_RELATION_REFDB[id]
-	query := backRepoA_SPEC_RELATION_REF.db.Unscoped().Delete(&a_spec_relation_refDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoA_SPEC_RELATION_REF.db.Unscoped()
+	_, err := db.Delete(a_spec_relation_refDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -183,9 +195,9 @@ func (backRepoA_SPEC_RELATION_REF *BackRepoA_SPEC_RELATION_REFStruct) CommitPhas
 	var a_spec_relation_refDB A_SPEC_RELATION_REFDB
 	a_spec_relation_refDB.CopyBasicFieldsFromA_SPEC_RELATION_REF(a_spec_relation_ref)
 
-	query := backRepoA_SPEC_RELATION_REF.db.Create(&a_spec_relation_refDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoA_SPEC_RELATION_REF.db.Create(&a_spec_relation_refDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -217,9 +229,9 @@ func (backRepoA_SPEC_RELATION_REF *BackRepoA_SPEC_RELATION_REFStruct) CommitPhas
 		a_spec_relation_refDB.CopyBasicFieldsFromA_SPEC_RELATION_REF(a_spec_relation_ref)
 
 		// insertion point for translating pointers encodings into actual pointers
-		query := backRepoA_SPEC_RELATION_REF.db.Save(&a_spec_relation_refDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoA_SPEC_RELATION_REF.db.Save(a_spec_relation_refDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -238,9 +250,9 @@ func (backRepoA_SPEC_RELATION_REF *BackRepoA_SPEC_RELATION_REFStruct) CommitPhas
 func (backRepoA_SPEC_RELATION_REF *BackRepoA_SPEC_RELATION_REFStruct) CheckoutPhaseOne() (Error error) {
 
 	a_spec_relation_refDBArray := make([]A_SPEC_RELATION_REFDB, 0)
-	query := backRepoA_SPEC_RELATION_REF.db.Find(&a_spec_relation_refDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoA_SPEC_RELATION_REF.db.Find(&a_spec_relation_refDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -351,7 +363,7 @@ func (backRepo *BackRepoStruct) CheckoutA_SPEC_RELATION_REF(a_spec_relation_ref 
 			var a_spec_relation_refDB A_SPEC_RELATION_REFDB
 			a_spec_relation_refDB.ID = id
 
-			if err := backRepo.BackRepoA_SPEC_RELATION_REF.db.First(&a_spec_relation_refDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoA_SPEC_RELATION_REF.db.First(&a_spec_relation_refDB, id); err != nil {
 				log.Fatalln("CheckoutA_SPEC_RELATION_REF : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoA_SPEC_RELATION_REF.CheckoutPhaseOneInstance(&a_spec_relation_refDB)
@@ -510,9 +522,9 @@ func (backRepoA_SPEC_RELATION_REF *BackRepoA_SPEC_RELATION_REFStruct) rowVisitor
 
 		a_spec_relation_refDB_ID_atBackupTime := a_spec_relation_refDB.ID
 		a_spec_relation_refDB.ID = 0
-		query := backRepoA_SPEC_RELATION_REF.db.Create(a_spec_relation_refDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoA_SPEC_RELATION_REF.db.Create(a_spec_relation_refDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoA_SPEC_RELATION_REF.Map_A_SPEC_RELATION_REFDBID_A_SPEC_RELATION_REFDB[a_spec_relation_refDB.ID] = a_spec_relation_refDB
 		BackRepoA_SPEC_RELATION_REFid_atBckpTime_newID[a_spec_relation_refDB_ID_atBackupTime] = a_spec_relation_refDB.ID
@@ -547,9 +559,9 @@ func (backRepoA_SPEC_RELATION_REF *BackRepoA_SPEC_RELATION_REFStruct) RestorePha
 
 		a_spec_relation_refDB_ID_atBackupTime := a_spec_relation_refDB.ID
 		a_spec_relation_refDB.ID = 0
-		query := backRepoA_SPEC_RELATION_REF.db.Create(a_spec_relation_refDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoA_SPEC_RELATION_REF.db.Create(a_spec_relation_refDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoA_SPEC_RELATION_REF.Map_A_SPEC_RELATION_REFDBID_A_SPEC_RELATION_REFDB[a_spec_relation_refDB.ID] = a_spec_relation_refDB
 		BackRepoA_SPEC_RELATION_REFid_atBckpTime_newID[a_spec_relation_refDB_ID_atBackupTime] = a_spec_relation_refDB.ID
@@ -571,9 +583,10 @@ func (backRepoA_SPEC_RELATION_REF *BackRepoA_SPEC_RELATION_REFStruct) RestorePha
 
 		// insertion point for reindexing pointers encoding
 		// update databse with new index encoding
-		query := backRepoA_SPEC_RELATION_REF.db.Model(a_spec_relation_refDB).Updates(*a_spec_relation_refDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoA_SPEC_RELATION_REF.db.Model(a_spec_relation_refDB)
+		_, err := db.Updates(*a_spec_relation_refDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

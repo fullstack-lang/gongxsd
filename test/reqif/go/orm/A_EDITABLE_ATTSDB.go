@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/test/reqif/go/db"
 	"github.com/fullstack-lang/gongxsd/test/reqif/go/models"
 )
 
@@ -82,7 +83,7 @@ type A_EDITABLE_ATTSDB struct {
 
 	// Declation for basic field a_editable_attsDB.ATTRIBUTE_DEFINITION_XHTML_REF
 	ATTRIBUTE_DEFINITION_XHTML_REF_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	A_EDITABLE_ATTSPointersEncoding
@@ -146,17 +147,17 @@ type BackRepoA_EDITABLE_ATTSStruct struct {
 	// stores A_EDITABLE_ATTS according to their gorm ID
 	Map_A_EDITABLE_ATTSDBID_A_EDITABLE_ATTSPtr map[uint]*models.A_EDITABLE_ATTS
 
-	db *gorm.DB
+	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoA_EDITABLE_ATTS *BackRepoA_EDITABLE_ATTSStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoA_EDITABLE_ATTS *BackRepoA_EDITABLE_ATTSStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoA_EDITABLE_ATTS.stage
 	return
 }
 
-func (backRepoA_EDITABLE_ATTS *BackRepoA_EDITABLE_ATTSStruct) GetDB() *gorm.DB {
+func (backRepoA_EDITABLE_ATTS *BackRepoA_EDITABLE_ATTSStruct) GetDB() db.DBInterface {
 	return backRepoA_EDITABLE_ATTS.db
 }
 
@@ -169,9 +170,19 @@ func (backRepoA_EDITABLE_ATTS *BackRepoA_EDITABLE_ATTSStruct) GetA_EDITABLE_ATTS
 
 // BackRepoA_EDITABLE_ATTS.CommitPhaseOne commits all staged instances of A_EDITABLE_ATTS to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoA_EDITABLE_ATTS *BackRepoA_EDITABLE_ATTSStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoA_EDITABLE_ATTS *BackRepoA_EDITABLE_ATTSStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var a_editable_attss []*models.A_EDITABLE_ATTS
 	for a_editable_atts := range stage.A_EDITABLE_ATTSs {
+		a_editable_attss = append(a_editable_attss, a_editable_atts)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(a_editable_attss, func(i, j int) bool {
+		return stage.A_EDITABLE_ATTSMap_Staged_Order[a_editable_attss[i]] < stage.A_EDITABLE_ATTSMap_Staged_Order[a_editable_attss[j]]
+	})
+
+	for _, a_editable_atts := range a_editable_attss {
 		backRepoA_EDITABLE_ATTS.CommitPhaseOneInstance(a_editable_atts)
 	}
 
@@ -193,9 +204,10 @@ func (backRepoA_EDITABLE_ATTS *BackRepoA_EDITABLE_ATTSStruct) CommitDeleteInstan
 
 	// a_editable_atts is not staged anymore, remove a_editable_attsDB
 	a_editable_attsDB := backRepoA_EDITABLE_ATTS.Map_A_EDITABLE_ATTSDBID_A_EDITABLE_ATTSDB[id]
-	query := backRepoA_EDITABLE_ATTS.db.Unscoped().Delete(&a_editable_attsDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoA_EDITABLE_ATTS.db.Unscoped()
+	_, err := db.Delete(a_editable_attsDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -219,9 +231,9 @@ func (backRepoA_EDITABLE_ATTS *BackRepoA_EDITABLE_ATTSStruct) CommitPhaseOneInst
 	var a_editable_attsDB A_EDITABLE_ATTSDB
 	a_editable_attsDB.CopyBasicFieldsFromA_EDITABLE_ATTS(a_editable_atts)
 
-	query := backRepoA_EDITABLE_ATTS.db.Create(&a_editable_attsDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoA_EDITABLE_ATTS.db.Create(&a_editable_attsDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -253,9 +265,9 @@ func (backRepoA_EDITABLE_ATTS *BackRepoA_EDITABLE_ATTSStruct) CommitPhaseTwoInst
 		a_editable_attsDB.CopyBasicFieldsFromA_EDITABLE_ATTS(a_editable_atts)
 
 		// insertion point for translating pointers encodings into actual pointers
-		query := backRepoA_EDITABLE_ATTS.db.Save(&a_editable_attsDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoA_EDITABLE_ATTS.db.Save(a_editable_attsDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -274,9 +286,9 @@ func (backRepoA_EDITABLE_ATTS *BackRepoA_EDITABLE_ATTSStruct) CommitPhaseTwoInst
 func (backRepoA_EDITABLE_ATTS *BackRepoA_EDITABLE_ATTSStruct) CheckoutPhaseOne() (Error error) {
 
 	a_editable_attsDBArray := make([]A_EDITABLE_ATTSDB, 0)
-	query := backRepoA_EDITABLE_ATTS.db.Find(&a_editable_attsDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoA_EDITABLE_ATTS.db.Find(&a_editable_attsDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -387,7 +399,7 @@ func (backRepo *BackRepoStruct) CheckoutA_EDITABLE_ATTS(a_editable_atts *models.
 			var a_editable_attsDB A_EDITABLE_ATTSDB
 			a_editable_attsDB.ID = id
 
-			if err := backRepo.BackRepoA_EDITABLE_ATTS.db.First(&a_editable_attsDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoA_EDITABLE_ATTS.db.First(&a_editable_attsDB, id); err != nil {
 				log.Fatalln("CheckoutA_EDITABLE_ATTS : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoA_EDITABLE_ATTS.CheckoutPhaseOneInstance(&a_editable_attsDB)
@@ -618,9 +630,9 @@ func (backRepoA_EDITABLE_ATTS *BackRepoA_EDITABLE_ATTSStruct) rowVisitorA_EDITAB
 
 		a_editable_attsDB_ID_atBackupTime := a_editable_attsDB.ID
 		a_editable_attsDB.ID = 0
-		query := backRepoA_EDITABLE_ATTS.db.Create(a_editable_attsDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoA_EDITABLE_ATTS.db.Create(a_editable_attsDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoA_EDITABLE_ATTS.Map_A_EDITABLE_ATTSDBID_A_EDITABLE_ATTSDB[a_editable_attsDB.ID] = a_editable_attsDB
 		BackRepoA_EDITABLE_ATTSid_atBckpTime_newID[a_editable_attsDB_ID_atBackupTime] = a_editable_attsDB.ID
@@ -655,9 +667,9 @@ func (backRepoA_EDITABLE_ATTS *BackRepoA_EDITABLE_ATTSStruct) RestorePhaseOne(di
 
 		a_editable_attsDB_ID_atBackupTime := a_editable_attsDB.ID
 		a_editable_attsDB.ID = 0
-		query := backRepoA_EDITABLE_ATTS.db.Create(a_editable_attsDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoA_EDITABLE_ATTS.db.Create(a_editable_attsDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoA_EDITABLE_ATTS.Map_A_EDITABLE_ATTSDBID_A_EDITABLE_ATTSDB[a_editable_attsDB.ID] = a_editable_attsDB
 		BackRepoA_EDITABLE_ATTSid_atBckpTime_newID[a_editable_attsDB_ID_atBackupTime] = a_editable_attsDB.ID
@@ -679,9 +691,10 @@ func (backRepoA_EDITABLE_ATTS *BackRepoA_EDITABLE_ATTSStruct) RestorePhaseTwo() 
 
 		// insertion point for reindexing pointers encoding
 		// update databse with new index encoding
-		query := backRepoA_EDITABLE_ATTS.db.Model(a_editable_attsDB).Updates(*a_editable_attsDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoA_EDITABLE_ATTS.db.Model(a_editable_attsDB)
+		_, err := db.Updates(*a_editable_attsDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

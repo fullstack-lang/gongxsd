@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/test/reqif/go/db"
 	"github.com/fullstack-lang/gongxsd/test/reqif/go/models"
 )
 
@@ -81,7 +82,7 @@ type SPEC_RELATION_TYPEDB struct {
 
 	// Declation for basic field spec_relation_typeDB.LONG_NAME
 	LONG_NAME_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	SPEC_RELATION_TYPEPointersEncoding
@@ -136,17 +137,17 @@ type BackRepoSPEC_RELATION_TYPEStruct struct {
 	// stores SPEC_RELATION_TYPE according to their gorm ID
 	Map_SPEC_RELATION_TYPEDBID_SPEC_RELATION_TYPEPtr map[uint]*models.SPEC_RELATION_TYPE
 
-	db *gorm.DB
+	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoSPEC_RELATION_TYPE *BackRepoSPEC_RELATION_TYPEStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoSPEC_RELATION_TYPE *BackRepoSPEC_RELATION_TYPEStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoSPEC_RELATION_TYPE.stage
 	return
 }
 
-func (backRepoSPEC_RELATION_TYPE *BackRepoSPEC_RELATION_TYPEStruct) GetDB() *gorm.DB {
+func (backRepoSPEC_RELATION_TYPE *BackRepoSPEC_RELATION_TYPEStruct) GetDB() db.DBInterface {
 	return backRepoSPEC_RELATION_TYPE.db
 }
 
@@ -159,9 +160,19 @@ func (backRepoSPEC_RELATION_TYPE *BackRepoSPEC_RELATION_TYPEStruct) GetSPEC_RELA
 
 // BackRepoSPEC_RELATION_TYPE.CommitPhaseOne commits all staged instances of SPEC_RELATION_TYPE to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoSPEC_RELATION_TYPE *BackRepoSPEC_RELATION_TYPEStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoSPEC_RELATION_TYPE *BackRepoSPEC_RELATION_TYPEStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var spec_relation_types []*models.SPEC_RELATION_TYPE
 	for spec_relation_type := range stage.SPEC_RELATION_TYPEs {
+		spec_relation_types = append(spec_relation_types, spec_relation_type)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(spec_relation_types, func(i, j int) bool {
+		return stage.SPEC_RELATION_TYPEMap_Staged_Order[spec_relation_types[i]] < stage.SPEC_RELATION_TYPEMap_Staged_Order[spec_relation_types[j]]
+	})
+
+	for _, spec_relation_type := range spec_relation_types {
 		backRepoSPEC_RELATION_TYPE.CommitPhaseOneInstance(spec_relation_type)
 	}
 
@@ -183,9 +194,10 @@ func (backRepoSPEC_RELATION_TYPE *BackRepoSPEC_RELATION_TYPEStruct) CommitDelete
 
 	// spec_relation_type is not staged anymore, remove spec_relation_typeDB
 	spec_relation_typeDB := backRepoSPEC_RELATION_TYPE.Map_SPEC_RELATION_TYPEDBID_SPEC_RELATION_TYPEDB[id]
-	query := backRepoSPEC_RELATION_TYPE.db.Unscoped().Delete(&spec_relation_typeDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoSPEC_RELATION_TYPE.db.Unscoped()
+	_, err := db.Delete(spec_relation_typeDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -209,9 +221,9 @@ func (backRepoSPEC_RELATION_TYPE *BackRepoSPEC_RELATION_TYPEStruct) CommitPhaseO
 	var spec_relation_typeDB SPEC_RELATION_TYPEDB
 	spec_relation_typeDB.CopyBasicFieldsFromSPEC_RELATION_TYPE(spec_relation_type)
 
-	query := backRepoSPEC_RELATION_TYPE.db.Create(&spec_relation_typeDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoSPEC_RELATION_TYPE.db.Create(&spec_relation_typeDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -267,9 +279,9 @@ func (backRepoSPEC_RELATION_TYPE *BackRepoSPEC_RELATION_TYPEStruct) CommitPhaseT
 			spec_relation_typeDB.SPEC_ATTRIBUTESID.Valid = true
 		}
 
-		query := backRepoSPEC_RELATION_TYPE.db.Save(&spec_relation_typeDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoSPEC_RELATION_TYPE.db.Save(spec_relation_typeDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -288,9 +300,9 @@ func (backRepoSPEC_RELATION_TYPE *BackRepoSPEC_RELATION_TYPEStruct) CommitPhaseT
 func (backRepoSPEC_RELATION_TYPE *BackRepoSPEC_RELATION_TYPEStruct) CheckoutPhaseOne() (Error error) {
 
 	spec_relation_typeDBArray := make([]SPEC_RELATION_TYPEDB, 0)
-	query := backRepoSPEC_RELATION_TYPE.db.Find(&spec_relation_typeDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoSPEC_RELATION_TYPE.db.Find(&spec_relation_typeDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -380,16 +392,48 @@ func (backRepoSPEC_RELATION_TYPE *BackRepoSPEC_RELATION_TYPEStruct) CheckoutPhas
 func (spec_relation_typeDB *SPEC_RELATION_TYPEDB) DecodePointers(backRepo *BackRepoStruct, spec_relation_type *models.SPEC_RELATION_TYPE) {
 
 	// insertion point for checkout of pointer encoding
-	// ALTERNATIVE_ID field
-	spec_relation_type.ALTERNATIVE_ID = nil
-	if spec_relation_typeDB.ALTERNATIVE_IDID.Int64 != 0 {
-		spec_relation_type.ALTERNATIVE_ID = backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(spec_relation_typeDB.ALTERNATIVE_IDID.Int64)]
+	// ALTERNATIVE_ID field	
+	{
+		id := spec_relation_typeDB.ALTERNATIVE_IDID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: spec_relation_type.ALTERNATIVE_ID, unknown pointer id", id)
+				spec_relation_type.ALTERNATIVE_ID = nil
+			} else {
+				// updates only if field has changed
+				if spec_relation_type.ALTERNATIVE_ID == nil || spec_relation_type.ALTERNATIVE_ID != tmp {
+					spec_relation_type.ALTERNATIVE_ID = tmp
+				}
+			}
+		} else {
+			spec_relation_type.ALTERNATIVE_ID = nil
+		}
 	}
-	// SPEC_ATTRIBUTES field
-	spec_relation_type.SPEC_ATTRIBUTES = nil
-	if spec_relation_typeDB.SPEC_ATTRIBUTESID.Int64 != 0 {
-		spec_relation_type.SPEC_ATTRIBUTES = backRepo.BackRepoA_SPEC_ATTRIBUTES.Map_A_SPEC_ATTRIBUTESDBID_A_SPEC_ATTRIBUTESPtr[uint(spec_relation_typeDB.SPEC_ATTRIBUTESID.Int64)]
+	
+	// SPEC_ATTRIBUTES field	
+	{
+		id := spec_relation_typeDB.SPEC_ATTRIBUTESID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoA_SPEC_ATTRIBUTES.Map_A_SPEC_ATTRIBUTESDBID_A_SPEC_ATTRIBUTESPtr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: spec_relation_type.SPEC_ATTRIBUTES, unknown pointer id", id)
+				spec_relation_type.SPEC_ATTRIBUTES = nil
+			} else {
+				// updates only if field has changed
+				if spec_relation_type.SPEC_ATTRIBUTES == nil || spec_relation_type.SPEC_ATTRIBUTES != tmp {
+					spec_relation_type.SPEC_ATTRIBUTES = tmp
+				}
+			}
+		} else {
+			spec_relation_type.SPEC_ATTRIBUTES = nil
+		}
 	}
+	
 	return
 }
 
@@ -411,7 +455,7 @@ func (backRepo *BackRepoStruct) CheckoutSPEC_RELATION_TYPE(spec_relation_type *m
 			var spec_relation_typeDB SPEC_RELATION_TYPEDB
 			spec_relation_typeDB.ID = id
 
-			if err := backRepo.BackRepoSPEC_RELATION_TYPE.db.First(&spec_relation_typeDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoSPEC_RELATION_TYPE.db.First(&spec_relation_typeDB, id); err != nil {
 				log.Fatalln("CheckoutSPEC_RELATION_TYPE : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoSPEC_RELATION_TYPE.CheckoutPhaseOneInstance(&spec_relation_typeDB)
@@ -606,9 +650,9 @@ func (backRepoSPEC_RELATION_TYPE *BackRepoSPEC_RELATION_TYPEStruct) rowVisitorSP
 
 		spec_relation_typeDB_ID_atBackupTime := spec_relation_typeDB.ID
 		spec_relation_typeDB.ID = 0
-		query := backRepoSPEC_RELATION_TYPE.db.Create(spec_relation_typeDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoSPEC_RELATION_TYPE.db.Create(spec_relation_typeDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoSPEC_RELATION_TYPE.Map_SPEC_RELATION_TYPEDBID_SPEC_RELATION_TYPEDB[spec_relation_typeDB.ID] = spec_relation_typeDB
 		BackRepoSPEC_RELATION_TYPEid_atBckpTime_newID[spec_relation_typeDB_ID_atBackupTime] = spec_relation_typeDB.ID
@@ -643,9 +687,9 @@ func (backRepoSPEC_RELATION_TYPE *BackRepoSPEC_RELATION_TYPEStruct) RestorePhase
 
 		spec_relation_typeDB_ID_atBackupTime := spec_relation_typeDB.ID
 		spec_relation_typeDB.ID = 0
-		query := backRepoSPEC_RELATION_TYPE.db.Create(spec_relation_typeDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoSPEC_RELATION_TYPE.db.Create(spec_relation_typeDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoSPEC_RELATION_TYPE.Map_SPEC_RELATION_TYPEDBID_SPEC_RELATION_TYPEDB[spec_relation_typeDB.ID] = spec_relation_typeDB
 		BackRepoSPEC_RELATION_TYPEid_atBckpTime_newID[spec_relation_typeDB_ID_atBackupTime] = spec_relation_typeDB.ID
@@ -679,9 +723,10 @@ func (backRepoSPEC_RELATION_TYPE *BackRepoSPEC_RELATION_TYPEStruct) RestorePhase
 		}
 
 		// update databse with new index encoding
-		query := backRepoSPEC_RELATION_TYPE.db.Model(spec_relation_typeDB).Updates(*spec_relation_typeDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoSPEC_RELATION_TYPE.db.Model(spec_relation_typeDB)
+		_, err := db.Updates(*spec_relation_typeDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/test/reqif/go/db"
 	"github.com/fullstack-lang/gongxsd/test/reqif/go/models"
 )
 
@@ -82,7 +83,7 @@ type A_DATATYPESDB struct {
 
 	// Declation for basic field a_datatypesDB.Name
 	Name_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	A_DATATYPESPointersEncoding
@@ -125,17 +126,17 @@ type BackRepoA_DATATYPESStruct struct {
 	// stores A_DATATYPES according to their gorm ID
 	Map_A_DATATYPESDBID_A_DATATYPESPtr map[uint]*models.A_DATATYPES
 
-	db *gorm.DB
+	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoA_DATATYPES *BackRepoA_DATATYPESStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoA_DATATYPES *BackRepoA_DATATYPESStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoA_DATATYPES.stage
 	return
 }
 
-func (backRepoA_DATATYPES *BackRepoA_DATATYPESStruct) GetDB() *gorm.DB {
+func (backRepoA_DATATYPES *BackRepoA_DATATYPESStruct) GetDB() db.DBInterface {
 	return backRepoA_DATATYPES.db
 }
 
@@ -148,9 +149,19 @@ func (backRepoA_DATATYPES *BackRepoA_DATATYPESStruct) GetA_DATATYPESDBFromA_DATA
 
 // BackRepoA_DATATYPES.CommitPhaseOne commits all staged instances of A_DATATYPES to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoA_DATATYPES *BackRepoA_DATATYPESStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoA_DATATYPES *BackRepoA_DATATYPESStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var a_datatypess []*models.A_DATATYPES
 	for a_datatypes := range stage.A_DATATYPESs {
+		a_datatypess = append(a_datatypess, a_datatypes)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(a_datatypess, func(i, j int) bool {
+		return stage.A_DATATYPESMap_Staged_Order[a_datatypess[i]] < stage.A_DATATYPESMap_Staged_Order[a_datatypess[j]]
+	})
+
+	for _, a_datatypes := range a_datatypess {
 		backRepoA_DATATYPES.CommitPhaseOneInstance(a_datatypes)
 	}
 
@@ -172,9 +183,10 @@ func (backRepoA_DATATYPES *BackRepoA_DATATYPESStruct) CommitDeleteInstance(id ui
 
 	// a_datatypes is not staged anymore, remove a_datatypesDB
 	a_datatypesDB := backRepoA_DATATYPES.Map_A_DATATYPESDBID_A_DATATYPESDB[id]
-	query := backRepoA_DATATYPES.db.Unscoped().Delete(&a_datatypesDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoA_DATATYPES.db.Unscoped()
+	_, err := db.Delete(a_datatypesDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -198,9 +210,9 @@ func (backRepoA_DATATYPES *BackRepoA_DATATYPESStruct) CommitPhaseOneInstance(a_d
 	var a_datatypesDB A_DATATYPESDB
 	a_datatypesDB.CopyBasicFieldsFromA_DATATYPES(a_datatypes)
 
-	query := backRepoA_DATATYPES.db.Create(&a_datatypesDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoA_DATATYPES.db.Create(&a_datatypesDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -358,9 +370,9 @@ func (backRepoA_DATATYPES *BackRepoA_DATATYPESStruct) CommitPhaseTwoInstance(bac
 				append(a_datatypesDB.A_DATATYPESPointersEncoding.DATATYPE_DEFINITION_XHTML, int(datatype_definition_xhtmlAssocEnd_DB.ID))
 		}
 
-		query := backRepoA_DATATYPES.db.Save(&a_datatypesDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoA_DATATYPES.db.Save(a_datatypesDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -379,9 +391,9 @@ func (backRepoA_DATATYPES *BackRepoA_DATATYPESStruct) CommitPhaseTwoInstance(bac
 func (backRepoA_DATATYPES *BackRepoA_DATATYPESStruct) CheckoutPhaseOne() (Error error) {
 
 	a_datatypesDBArray := make([]A_DATATYPESDB, 0)
-	query := backRepoA_DATATYPES.db.Find(&a_datatypesDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoA_DATATYPES.db.Find(&a_datatypesDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -555,7 +567,7 @@ func (backRepo *BackRepoStruct) CheckoutA_DATATYPES(a_datatypes *models.A_DATATY
 			var a_datatypesDB A_DATATYPESDB
 			a_datatypesDB.ID = id
 
-			if err := backRepo.BackRepoA_DATATYPES.db.First(&a_datatypesDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoA_DATATYPES.db.First(&a_datatypesDB, id); err != nil {
 				log.Fatalln("CheckoutA_DATATYPES : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoA_DATATYPES.CheckoutPhaseOneInstance(&a_datatypesDB)
@@ -702,9 +714,9 @@ func (backRepoA_DATATYPES *BackRepoA_DATATYPESStruct) rowVisitorA_DATATYPES(row 
 
 		a_datatypesDB_ID_atBackupTime := a_datatypesDB.ID
 		a_datatypesDB.ID = 0
-		query := backRepoA_DATATYPES.db.Create(a_datatypesDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoA_DATATYPES.db.Create(a_datatypesDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoA_DATATYPES.Map_A_DATATYPESDBID_A_DATATYPESDB[a_datatypesDB.ID] = a_datatypesDB
 		BackRepoA_DATATYPESid_atBckpTime_newID[a_datatypesDB_ID_atBackupTime] = a_datatypesDB.ID
@@ -739,9 +751,9 @@ func (backRepoA_DATATYPES *BackRepoA_DATATYPESStruct) RestorePhaseOne(dirPath st
 
 		a_datatypesDB_ID_atBackupTime := a_datatypesDB.ID
 		a_datatypesDB.ID = 0
-		query := backRepoA_DATATYPES.db.Create(a_datatypesDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoA_DATATYPES.db.Create(a_datatypesDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoA_DATATYPES.Map_A_DATATYPESDBID_A_DATATYPESDB[a_datatypesDB.ID] = a_datatypesDB
 		BackRepoA_DATATYPESid_atBckpTime_newID[a_datatypesDB_ID_atBackupTime] = a_datatypesDB.ID
@@ -763,9 +775,10 @@ func (backRepoA_DATATYPES *BackRepoA_DATATYPESStruct) RestorePhaseTwo() {
 
 		// insertion point for reindexing pointers encoding
 		// update databse with new index encoding
-		query := backRepoA_DATATYPES.db.Model(a_datatypesDB).Updates(*a_datatypesDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoA_DATATYPES.db.Model(a_datatypesDB)
+		_, err := db.Updates(*a_datatypesDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

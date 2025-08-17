@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/test/reqif/go/db"
 	"github.com/fullstack-lang/gongxsd/test/reqif/go/models"
 )
 
@@ -81,7 +82,7 @@ type ENUM_VALUEDB struct {
 
 	// Declation for basic field enum_valueDB.LONG_NAME
 	LONG_NAME_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	ENUM_VALUEPointersEncoding
@@ -136,17 +137,17 @@ type BackRepoENUM_VALUEStruct struct {
 	// stores ENUM_VALUE according to their gorm ID
 	Map_ENUM_VALUEDBID_ENUM_VALUEPtr map[uint]*models.ENUM_VALUE
 
-	db *gorm.DB
+	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoENUM_VALUE *BackRepoENUM_VALUEStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoENUM_VALUE *BackRepoENUM_VALUEStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoENUM_VALUE.stage
 	return
 }
 
-func (backRepoENUM_VALUE *BackRepoENUM_VALUEStruct) GetDB() *gorm.DB {
+func (backRepoENUM_VALUE *BackRepoENUM_VALUEStruct) GetDB() db.DBInterface {
 	return backRepoENUM_VALUE.db
 }
 
@@ -159,9 +160,19 @@ func (backRepoENUM_VALUE *BackRepoENUM_VALUEStruct) GetENUM_VALUEDBFromENUM_VALU
 
 // BackRepoENUM_VALUE.CommitPhaseOne commits all staged instances of ENUM_VALUE to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoENUM_VALUE *BackRepoENUM_VALUEStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoENUM_VALUE *BackRepoENUM_VALUEStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var enum_values []*models.ENUM_VALUE
 	for enum_value := range stage.ENUM_VALUEs {
+		enum_values = append(enum_values, enum_value)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(enum_values, func(i, j int) bool {
+		return stage.ENUM_VALUEMap_Staged_Order[enum_values[i]] < stage.ENUM_VALUEMap_Staged_Order[enum_values[j]]
+	})
+
+	for _, enum_value := range enum_values {
 		backRepoENUM_VALUE.CommitPhaseOneInstance(enum_value)
 	}
 
@@ -183,9 +194,10 @@ func (backRepoENUM_VALUE *BackRepoENUM_VALUEStruct) CommitDeleteInstance(id uint
 
 	// enum_value is not staged anymore, remove enum_valueDB
 	enum_valueDB := backRepoENUM_VALUE.Map_ENUM_VALUEDBID_ENUM_VALUEDB[id]
-	query := backRepoENUM_VALUE.db.Unscoped().Delete(&enum_valueDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoENUM_VALUE.db.Unscoped()
+	_, err := db.Delete(enum_valueDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -209,9 +221,9 @@ func (backRepoENUM_VALUE *BackRepoENUM_VALUEStruct) CommitPhaseOneInstance(enum_
 	var enum_valueDB ENUM_VALUEDB
 	enum_valueDB.CopyBasicFieldsFromENUM_VALUE(enum_value)
 
-	query := backRepoENUM_VALUE.db.Create(&enum_valueDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoENUM_VALUE.db.Create(&enum_valueDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -267,9 +279,9 @@ func (backRepoENUM_VALUE *BackRepoENUM_VALUEStruct) CommitPhaseTwoInstance(backR
 			enum_valueDB.PROPERTIESID.Valid = true
 		}
 
-		query := backRepoENUM_VALUE.db.Save(&enum_valueDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoENUM_VALUE.db.Save(enum_valueDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -288,9 +300,9 @@ func (backRepoENUM_VALUE *BackRepoENUM_VALUEStruct) CommitPhaseTwoInstance(backR
 func (backRepoENUM_VALUE *BackRepoENUM_VALUEStruct) CheckoutPhaseOne() (Error error) {
 
 	enum_valueDBArray := make([]ENUM_VALUEDB, 0)
-	query := backRepoENUM_VALUE.db.Find(&enum_valueDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoENUM_VALUE.db.Find(&enum_valueDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -380,16 +392,48 @@ func (backRepoENUM_VALUE *BackRepoENUM_VALUEStruct) CheckoutPhaseTwoInstance(bac
 func (enum_valueDB *ENUM_VALUEDB) DecodePointers(backRepo *BackRepoStruct, enum_value *models.ENUM_VALUE) {
 
 	// insertion point for checkout of pointer encoding
-	// ALTERNATIVE_ID field
-	enum_value.ALTERNATIVE_ID = nil
-	if enum_valueDB.ALTERNATIVE_IDID.Int64 != 0 {
-		enum_value.ALTERNATIVE_ID = backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(enum_valueDB.ALTERNATIVE_IDID.Int64)]
+	// ALTERNATIVE_ID field	
+	{
+		id := enum_valueDB.ALTERNATIVE_IDID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: enum_value.ALTERNATIVE_ID, unknown pointer id", id)
+				enum_value.ALTERNATIVE_ID = nil
+			} else {
+				// updates only if field has changed
+				if enum_value.ALTERNATIVE_ID == nil || enum_value.ALTERNATIVE_ID != tmp {
+					enum_value.ALTERNATIVE_ID = tmp
+				}
+			}
+		} else {
+			enum_value.ALTERNATIVE_ID = nil
+		}
 	}
-	// PROPERTIES field
-	enum_value.PROPERTIES = nil
-	if enum_valueDB.PROPERTIESID.Int64 != 0 {
-		enum_value.PROPERTIES = backRepo.BackRepoA_PROPERTIES.Map_A_PROPERTIESDBID_A_PROPERTIESPtr[uint(enum_valueDB.PROPERTIESID.Int64)]
+	
+	// PROPERTIES field	
+	{
+		id := enum_valueDB.PROPERTIESID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoA_PROPERTIES.Map_A_PROPERTIESDBID_A_PROPERTIESPtr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: enum_value.PROPERTIES, unknown pointer id", id)
+				enum_value.PROPERTIES = nil
+			} else {
+				// updates only if field has changed
+				if enum_value.PROPERTIES == nil || enum_value.PROPERTIES != tmp {
+					enum_value.PROPERTIES = tmp
+				}
+			}
+		} else {
+			enum_value.PROPERTIES = nil
+		}
 	}
+	
 	return
 }
 
@@ -411,7 +455,7 @@ func (backRepo *BackRepoStruct) CheckoutENUM_VALUE(enum_value *models.ENUM_VALUE
 			var enum_valueDB ENUM_VALUEDB
 			enum_valueDB.ID = id
 
-			if err := backRepo.BackRepoENUM_VALUE.db.First(&enum_valueDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoENUM_VALUE.db.First(&enum_valueDB, id); err != nil {
 				log.Fatalln("CheckoutENUM_VALUE : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoENUM_VALUE.CheckoutPhaseOneInstance(&enum_valueDB)
@@ -606,9 +650,9 @@ func (backRepoENUM_VALUE *BackRepoENUM_VALUEStruct) rowVisitorENUM_VALUE(row *xl
 
 		enum_valueDB_ID_atBackupTime := enum_valueDB.ID
 		enum_valueDB.ID = 0
-		query := backRepoENUM_VALUE.db.Create(enum_valueDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoENUM_VALUE.db.Create(enum_valueDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoENUM_VALUE.Map_ENUM_VALUEDBID_ENUM_VALUEDB[enum_valueDB.ID] = enum_valueDB
 		BackRepoENUM_VALUEid_atBckpTime_newID[enum_valueDB_ID_atBackupTime] = enum_valueDB.ID
@@ -643,9 +687,9 @@ func (backRepoENUM_VALUE *BackRepoENUM_VALUEStruct) RestorePhaseOne(dirPath stri
 
 		enum_valueDB_ID_atBackupTime := enum_valueDB.ID
 		enum_valueDB.ID = 0
-		query := backRepoENUM_VALUE.db.Create(enum_valueDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoENUM_VALUE.db.Create(enum_valueDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoENUM_VALUE.Map_ENUM_VALUEDBID_ENUM_VALUEDB[enum_valueDB.ID] = enum_valueDB
 		BackRepoENUM_VALUEid_atBckpTime_newID[enum_valueDB_ID_atBackupTime] = enum_valueDB.ID
@@ -679,9 +723,10 @@ func (backRepoENUM_VALUE *BackRepoENUM_VALUEStruct) RestorePhaseTwo() {
 		}
 
 		// update databse with new index encoding
-		query := backRepoENUM_VALUE.db.Model(enum_valueDB).Updates(*enum_valueDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoENUM_VALUE.db.Model(enum_valueDB)
+		_, err := db.Updates(*enum_valueDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

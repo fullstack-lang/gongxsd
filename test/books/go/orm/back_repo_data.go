@@ -11,9 +11,17 @@ type BackRepoData struct {
 	CreditAPIs []*CreditAPI
 
 	LinkAPIs []*LinkAPI
+
+	// index of the web socket for this stack type (unique among all stack instances)
+	GONG__Index int
 }
 
 func CopyBackRepoToBackRepoData(backRepo *BackRepoStruct, backRepoData *BackRepoData) {
+
+	// wait till backRepo is written by commit
+	backRepo.rwMutex.RLock()
+	defer backRepo.rwMutex.RUnlock()
+
 	// insertion point for slices copies
 	for _, booktypeDB := range backRepo.BackRepoBookType.Map_BookTypeDBID_BookTypeDB {
 

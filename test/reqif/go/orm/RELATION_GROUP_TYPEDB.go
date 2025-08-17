@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/test/reqif/go/db"
 	"github.com/fullstack-lang/gongxsd/test/reqif/go/models"
 )
 
@@ -81,7 +82,7 @@ type RELATION_GROUP_TYPEDB struct {
 
 	// Declation for basic field relation_group_typeDB.LONG_NAME
 	LONG_NAME_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	RELATION_GROUP_TYPEPointersEncoding
@@ -136,17 +137,17 @@ type BackRepoRELATION_GROUP_TYPEStruct struct {
 	// stores RELATION_GROUP_TYPE according to their gorm ID
 	Map_RELATION_GROUP_TYPEDBID_RELATION_GROUP_TYPEPtr map[uint]*models.RELATION_GROUP_TYPE
 
-	db *gorm.DB
+	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoRELATION_GROUP_TYPE *BackRepoRELATION_GROUP_TYPEStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoRELATION_GROUP_TYPE *BackRepoRELATION_GROUP_TYPEStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoRELATION_GROUP_TYPE.stage
 	return
 }
 
-func (backRepoRELATION_GROUP_TYPE *BackRepoRELATION_GROUP_TYPEStruct) GetDB() *gorm.DB {
+func (backRepoRELATION_GROUP_TYPE *BackRepoRELATION_GROUP_TYPEStruct) GetDB() db.DBInterface {
 	return backRepoRELATION_GROUP_TYPE.db
 }
 
@@ -159,9 +160,19 @@ func (backRepoRELATION_GROUP_TYPE *BackRepoRELATION_GROUP_TYPEStruct) GetRELATIO
 
 // BackRepoRELATION_GROUP_TYPE.CommitPhaseOne commits all staged instances of RELATION_GROUP_TYPE to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoRELATION_GROUP_TYPE *BackRepoRELATION_GROUP_TYPEStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoRELATION_GROUP_TYPE *BackRepoRELATION_GROUP_TYPEStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var relation_group_types []*models.RELATION_GROUP_TYPE
 	for relation_group_type := range stage.RELATION_GROUP_TYPEs {
+		relation_group_types = append(relation_group_types, relation_group_type)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(relation_group_types, func(i, j int) bool {
+		return stage.RELATION_GROUP_TYPEMap_Staged_Order[relation_group_types[i]] < stage.RELATION_GROUP_TYPEMap_Staged_Order[relation_group_types[j]]
+	})
+
+	for _, relation_group_type := range relation_group_types {
 		backRepoRELATION_GROUP_TYPE.CommitPhaseOneInstance(relation_group_type)
 	}
 
@@ -183,9 +194,10 @@ func (backRepoRELATION_GROUP_TYPE *BackRepoRELATION_GROUP_TYPEStruct) CommitDele
 
 	// relation_group_type is not staged anymore, remove relation_group_typeDB
 	relation_group_typeDB := backRepoRELATION_GROUP_TYPE.Map_RELATION_GROUP_TYPEDBID_RELATION_GROUP_TYPEDB[id]
-	query := backRepoRELATION_GROUP_TYPE.db.Unscoped().Delete(&relation_group_typeDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoRELATION_GROUP_TYPE.db.Unscoped()
+	_, err := db.Delete(relation_group_typeDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -209,9 +221,9 @@ func (backRepoRELATION_GROUP_TYPE *BackRepoRELATION_GROUP_TYPEStruct) CommitPhas
 	var relation_group_typeDB RELATION_GROUP_TYPEDB
 	relation_group_typeDB.CopyBasicFieldsFromRELATION_GROUP_TYPE(relation_group_type)
 
-	query := backRepoRELATION_GROUP_TYPE.db.Create(&relation_group_typeDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoRELATION_GROUP_TYPE.db.Create(&relation_group_typeDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -267,9 +279,9 @@ func (backRepoRELATION_GROUP_TYPE *BackRepoRELATION_GROUP_TYPEStruct) CommitPhas
 			relation_group_typeDB.SPEC_ATTRIBUTESID.Valid = true
 		}
 
-		query := backRepoRELATION_GROUP_TYPE.db.Save(&relation_group_typeDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoRELATION_GROUP_TYPE.db.Save(relation_group_typeDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -288,9 +300,9 @@ func (backRepoRELATION_GROUP_TYPE *BackRepoRELATION_GROUP_TYPEStruct) CommitPhas
 func (backRepoRELATION_GROUP_TYPE *BackRepoRELATION_GROUP_TYPEStruct) CheckoutPhaseOne() (Error error) {
 
 	relation_group_typeDBArray := make([]RELATION_GROUP_TYPEDB, 0)
-	query := backRepoRELATION_GROUP_TYPE.db.Find(&relation_group_typeDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoRELATION_GROUP_TYPE.db.Find(&relation_group_typeDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -380,16 +392,48 @@ func (backRepoRELATION_GROUP_TYPE *BackRepoRELATION_GROUP_TYPEStruct) CheckoutPh
 func (relation_group_typeDB *RELATION_GROUP_TYPEDB) DecodePointers(backRepo *BackRepoStruct, relation_group_type *models.RELATION_GROUP_TYPE) {
 
 	// insertion point for checkout of pointer encoding
-	// ALTERNATIVE_ID field
-	relation_group_type.ALTERNATIVE_ID = nil
-	if relation_group_typeDB.ALTERNATIVE_IDID.Int64 != 0 {
-		relation_group_type.ALTERNATIVE_ID = backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(relation_group_typeDB.ALTERNATIVE_IDID.Int64)]
+	// ALTERNATIVE_ID field	
+	{
+		id := relation_group_typeDB.ALTERNATIVE_IDID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: relation_group_type.ALTERNATIVE_ID, unknown pointer id", id)
+				relation_group_type.ALTERNATIVE_ID = nil
+			} else {
+				// updates only if field has changed
+				if relation_group_type.ALTERNATIVE_ID == nil || relation_group_type.ALTERNATIVE_ID != tmp {
+					relation_group_type.ALTERNATIVE_ID = tmp
+				}
+			}
+		} else {
+			relation_group_type.ALTERNATIVE_ID = nil
+		}
 	}
-	// SPEC_ATTRIBUTES field
-	relation_group_type.SPEC_ATTRIBUTES = nil
-	if relation_group_typeDB.SPEC_ATTRIBUTESID.Int64 != 0 {
-		relation_group_type.SPEC_ATTRIBUTES = backRepo.BackRepoA_SPEC_ATTRIBUTES.Map_A_SPEC_ATTRIBUTESDBID_A_SPEC_ATTRIBUTESPtr[uint(relation_group_typeDB.SPEC_ATTRIBUTESID.Int64)]
+	
+	// SPEC_ATTRIBUTES field	
+	{
+		id := relation_group_typeDB.SPEC_ATTRIBUTESID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoA_SPEC_ATTRIBUTES.Map_A_SPEC_ATTRIBUTESDBID_A_SPEC_ATTRIBUTESPtr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: relation_group_type.SPEC_ATTRIBUTES, unknown pointer id", id)
+				relation_group_type.SPEC_ATTRIBUTES = nil
+			} else {
+				// updates only if field has changed
+				if relation_group_type.SPEC_ATTRIBUTES == nil || relation_group_type.SPEC_ATTRIBUTES != tmp {
+					relation_group_type.SPEC_ATTRIBUTES = tmp
+				}
+			}
+		} else {
+			relation_group_type.SPEC_ATTRIBUTES = nil
+		}
 	}
+	
 	return
 }
 
@@ -411,7 +455,7 @@ func (backRepo *BackRepoStruct) CheckoutRELATION_GROUP_TYPE(relation_group_type 
 			var relation_group_typeDB RELATION_GROUP_TYPEDB
 			relation_group_typeDB.ID = id
 
-			if err := backRepo.BackRepoRELATION_GROUP_TYPE.db.First(&relation_group_typeDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoRELATION_GROUP_TYPE.db.First(&relation_group_typeDB, id); err != nil {
 				log.Fatalln("CheckoutRELATION_GROUP_TYPE : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoRELATION_GROUP_TYPE.CheckoutPhaseOneInstance(&relation_group_typeDB)
@@ -606,9 +650,9 @@ func (backRepoRELATION_GROUP_TYPE *BackRepoRELATION_GROUP_TYPEStruct) rowVisitor
 
 		relation_group_typeDB_ID_atBackupTime := relation_group_typeDB.ID
 		relation_group_typeDB.ID = 0
-		query := backRepoRELATION_GROUP_TYPE.db.Create(relation_group_typeDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoRELATION_GROUP_TYPE.db.Create(relation_group_typeDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoRELATION_GROUP_TYPE.Map_RELATION_GROUP_TYPEDBID_RELATION_GROUP_TYPEDB[relation_group_typeDB.ID] = relation_group_typeDB
 		BackRepoRELATION_GROUP_TYPEid_atBckpTime_newID[relation_group_typeDB_ID_atBackupTime] = relation_group_typeDB.ID
@@ -643,9 +687,9 @@ func (backRepoRELATION_GROUP_TYPE *BackRepoRELATION_GROUP_TYPEStruct) RestorePha
 
 		relation_group_typeDB_ID_atBackupTime := relation_group_typeDB.ID
 		relation_group_typeDB.ID = 0
-		query := backRepoRELATION_GROUP_TYPE.db.Create(relation_group_typeDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoRELATION_GROUP_TYPE.db.Create(relation_group_typeDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoRELATION_GROUP_TYPE.Map_RELATION_GROUP_TYPEDBID_RELATION_GROUP_TYPEDB[relation_group_typeDB.ID] = relation_group_typeDB
 		BackRepoRELATION_GROUP_TYPEid_atBckpTime_newID[relation_group_typeDB_ID_atBackupTime] = relation_group_typeDB.ID
@@ -679,9 +723,10 @@ func (backRepoRELATION_GROUP_TYPE *BackRepoRELATION_GROUP_TYPEStruct) RestorePha
 		}
 
 		// update databse with new index encoding
-		query := backRepoRELATION_GROUP_TYPE.db.Model(relation_group_typeDB).Updates(*relation_group_typeDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoRELATION_GROUP_TYPE.db.Model(relation_group_typeDB)
+		_, err := db.Updates(*relation_group_typeDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

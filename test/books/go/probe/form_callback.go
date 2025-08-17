@@ -6,16 +6,17 @@ import (
 	"slices"
 	"time"
 
-	table "github.com/fullstack-lang/gongtable/go/models"
+	table "github.com/fullstack-lang/gong/lib/table/go/models"
 
 	"github.com/fullstack-lang/gongxsd/test/books/go/models"
-	"github.com/fullstack-lang/gongxsd/test/books/go/orm"
 )
 
-const __dummmy__time = time.Nanosecond
+// to avoid errors when time and slices packages are not used in the generated code
+const _ = time.Nanosecond
 
-var __dummmy__letters = slices.Delete([]string{"a"}, 0, 1)
-var __dummy_orm = orm.BackRepoStruct{}
+var _ = slices.Delete([]string{"a"}, 0, 1)
+
+var _ = log.Panicf
 
 // insertion point
 func __gong__New__BookTypeFormCallback(
@@ -46,7 +47,7 @@ type BookTypeFormCallback struct {
 
 func (booktypeFormCallback *BookTypeFormCallback) OnSave() {
 
-	log.Println("BookTypeFormCallback, OnSave")
+	// log.Println("BookTypeFormCallback, OnSave")
 
 	// checkout formStage to have the form group on the stage synchronized with the
 	// back repo (and front repo)
@@ -77,48 +78,98 @@ func (booktypeFormCallback *BookTypeFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(booktype_.Year), formDiv)
 		case "Format":
 			FormDivBasicFieldToField(&(booktype_.Format), formDiv)
-		case "Books:Book":
-			// we need to retrieve the field owner before the change
-			var pastBooksOwner *models.Books
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "Books"
-			rf.Fieldname = "Book"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				booktypeFormCallback.probe.stageOfInterest,
-				booktypeFormCallback.probe.backRepoOfInterest,
-				booktype_,
-				&rf)
+		case "Credit":
+			instanceSet := *models.GetGongstructInstancesSetFromPointerType[*models.Credit](booktypeFormCallback.probe.stageOfInterest)
+			instanceSlice := make([]*models.Credit, 0)
 
-			if reverseFieldOwner != nil {
-				pastBooksOwner = reverseFieldOwner.(*models.Books)
+			// make a map of all instances by their ID
+			map_id_instances := make(map[uint]*models.Credit)
+
+			for instance := range instanceSet {
+				id := models.GetOrderPointerGongstruct(
+					booktypeFormCallback.probe.stageOfInterest,
+					instance,
+				)
+				map_id_instances[id] = instance
 			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastBooksOwner != nil {
-					idx := slices.Index(pastBooksOwner.Book, booktype_)
-					pastBooksOwner.Book = slices.Delete(pastBooksOwner.Book, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _books := range *models.GetGongstructInstancesSet[models.Books](booktypeFormCallback.probe.stageOfInterest) {
 
-					// the match is base on the name
-					if _books.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newBooksOwner := _books // we have a match
-						if pastBooksOwner != nil {
-							if newBooksOwner != pastBooksOwner {
-								idx := slices.Index(pastBooksOwner.Book, booktype_)
-								pastBooksOwner.Book = slices.Delete(pastBooksOwner.Book, idx, idx+1)
-								newBooksOwner.Book = append(newBooksOwner.Book, booktype_)
-							}
-						} else {
-							newBooksOwner.Book = append(newBooksOwner.Book, booktype_)
-						}
+			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+
+			if err != nil {
+				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
+			}
+			for _, id := range ids {
+				instanceSlice = append(instanceSlice, map_id_instances[id])
+			}
+			booktype_.Credit = instanceSlice
+
+		case "Books:Book":
+			// WARNING : this form deals with the N-N association "Books.Book []*BookType" but
+			// it work only for 1-N associations (TODO: #660, enable this form only for field with //gong:1_N magic code)
+			//
+			// In many use cases, for instance tree structures, the assocation is semanticaly a 1-N
+			// association. For those use cases, it is handy to set the source of the assocation with
+			// the form of the target source (when editing an instance of BookType). Setting up a value
+			// will discard the former value is there is one.
+			//
+			// Therefore, the forms works only in ONE particular case:
+			// - there was no association to this target
+			var formerSource *models.Books
+			{
+				var rf models.ReverseField
+				_ = rf
+				rf.GongstructName = "Books"
+				rf.Fieldname = "Book"
+				formerAssociationSource := models.GetReverseFieldOwner(
+					booktypeFormCallback.probe.stageOfInterest,
+					booktype_,
+					&rf)
+
+				var ok bool
+				if formerAssociationSource != nil {
+					formerSource, ok = formerAssociationSource.(*models.Books)
+					if !ok {
+						log.Fatalln("Source of Books.Book []*BookType, is not an Books instance")
 					}
 				}
 			}
+
+			newSourceName := formDiv.FormFields[0].FormFieldSelect.Value
+
+			// case when the user set empty for the source value
+			if newSourceName == nil {
+				// That could mean we clear the assocation for all source instances
+				if formerSource != nil {
+					idx := slices.Index(formerSource.Book, booktype_)
+					formerSource.Book = slices.Delete(formerSource.Book, idx, idx+1)
+				}
+				break // nothing else to do for this field
+			}
+
+			// the former source is not empty. the new value could
+			// be different but there mught more that one source thet
+			// points to this target
+			if formerSource != nil {
+				break // nothing else to do for this field
+			}
+
+			// (2) find the source
+			var newSource *models.Books
+			for _books := range *models.GetGongstructInstancesSet[models.Books](booktypeFormCallback.probe.stageOfInterest) {
+
+				// the match is base on the name
+				if _books.GetName() == newSourceName.GetName() {
+					newSource = _books // we have a match
+					break
+				}
+			}
+			if newSource == nil {
+				log.Println("Source of Books.Book []*BookType, with name", newSourceName, ", does not exist")
+				break
+			}
+
+			// (3) append the new value to the new source field
+			newSource.Book = append(newSource.Book, booktype_)
 		}
 	}
 
@@ -128,7 +179,7 @@ func (booktypeFormCallback *BookTypeFormCallback) OnSave() {
 	}
 
 	booktypeFormCallback.probe.stageOfInterest.Commit()
-	fillUpTable[models.BookType](
+	updateAndCommitTable[models.BookType](
 		booktypeFormCallback.probe,
 	)
 	booktypeFormCallback.probe.tableStage.Commit()
@@ -137,7 +188,7 @@ func (booktypeFormCallback *BookTypeFormCallback) OnSave() {
 	if booktypeFormCallback.CreationMode || booktypeFormCallback.formGroup.HasSuppressButtonBeenPressed {
 		booktypeFormCallback.probe.formStage.Reset()
 		newFormGroup := (&table.FormGroup{
-			Name: table.FormGroupDefaultName.ToString(),
+			Name: FormName,
 		}).Stage(booktypeFormCallback.probe.formStage)
 		newFormGroup.OnSave = __gong__New__BookTypeFormCallback(
 			nil,
@@ -149,7 +200,7 @@ func (booktypeFormCallback *BookTypeFormCallback) OnSave() {
 		booktypeFormCallback.probe.formStage.Commit()
 	}
 
-	fillUpTree(booktypeFormCallback.probe)
+	updateAndCommitTree(booktypeFormCallback.probe)
 }
 func __gong__New__BooksFormCallback(
 	books *models.Books,
@@ -179,7 +230,7 @@ type BooksFormCallback struct {
 
 func (booksFormCallback *BooksFormCallback) OnSave() {
 
-	log.Println("BooksFormCallback, OnSave")
+	// log.Println("BooksFormCallback, OnSave")
 
 	// checkout formStage to have the form group on the stage synchronized with the
 	// back repo (and front repo)
@@ -196,6 +247,31 @@ func (booksFormCallback *BooksFormCallback) OnSave() {
 		// insertion point per field
 		case "Name":
 			FormDivBasicFieldToField(&(books_.Name), formDiv)
+		case "Book":
+			instanceSet := *models.GetGongstructInstancesSetFromPointerType[*models.BookType](booksFormCallback.probe.stageOfInterest)
+			instanceSlice := make([]*models.BookType, 0)
+
+			// make a map of all instances by their ID
+			map_id_instances := make(map[uint]*models.BookType)
+
+			for instance := range instanceSet {
+				id := models.GetOrderPointerGongstruct(
+					booksFormCallback.probe.stageOfInterest,
+					instance,
+				)
+				map_id_instances[id] = instance
+			}
+
+			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+
+			if err != nil {
+				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
+			}
+			for _, id := range ids {
+				instanceSlice = append(instanceSlice, map_id_instances[id])
+			}
+			books_.Book = instanceSlice
+
 		}
 	}
 
@@ -205,7 +281,7 @@ func (booksFormCallback *BooksFormCallback) OnSave() {
 	}
 
 	booksFormCallback.probe.stageOfInterest.Commit()
-	fillUpTable[models.Books](
+	updateAndCommitTable[models.Books](
 		booksFormCallback.probe,
 	)
 	booksFormCallback.probe.tableStage.Commit()
@@ -214,7 +290,7 @@ func (booksFormCallback *BooksFormCallback) OnSave() {
 	if booksFormCallback.CreationMode || booksFormCallback.formGroup.HasSuppressButtonBeenPressed {
 		booksFormCallback.probe.formStage.Reset()
 		newFormGroup := (&table.FormGroup{
-			Name: table.FormGroupDefaultName.ToString(),
+			Name: FormName,
 		}).Stage(booksFormCallback.probe.formStage)
 		newFormGroup.OnSave = __gong__New__BooksFormCallback(
 			nil,
@@ -226,7 +302,7 @@ func (booksFormCallback *BooksFormCallback) OnSave() {
 		booksFormCallback.probe.formStage.Commit()
 	}
 
-	fillUpTree(booksFormCallback.probe)
+	updateAndCommitTree(booksFormCallback.probe)
 }
 func __gong__New__CreditFormCallback(
 	credit *models.Credit,
@@ -256,7 +332,7 @@ type CreditFormCallback struct {
 
 func (creditFormCallback *CreditFormCallback) OnSave() {
 
-	log.Println("CreditFormCallback, OnSave")
+	// log.Println("CreditFormCallback, OnSave")
 
 	// checkout formStage to have the form group on the stage synchronized with the
 	// back repo (and front repo)
@@ -277,52 +353,102 @@ func (creditFormCallback *CreditFormCallback) OnSave() {
 			FormDivBasicFieldToField(&(credit_.Page), formDiv)
 		case "Credit_type":
 			FormDivBasicFieldToField(&(credit_.Credit_type), formDiv)
+		case "Link":
+			instanceSet := *models.GetGongstructInstancesSetFromPointerType[*models.Link](creditFormCallback.probe.stageOfInterest)
+			instanceSlice := make([]*models.Link, 0)
+
+			// make a map of all instances by their ID
+			map_id_instances := make(map[uint]*models.Link)
+
+			for instance := range instanceSet {
+				id := models.GetOrderPointerGongstruct(
+					creditFormCallback.probe.stageOfInterest,
+					instance,
+				)
+				map_id_instances[id] = instance
+			}
+
+			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+
+			if err != nil {
+				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
+			}
+			for _, id := range ids {
+				instanceSlice = append(instanceSlice, map_id_instances[id])
+			}
+			credit_.Link = instanceSlice
+
 		case "Credit_words":
 			FormDivBasicFieldToField(&(credit_.Credit_words), formDiv)
 		case "Credit_symbol":
 			FormDivBasicFieldToField(&(credit_.Credit_symbol), formDiv)
 		case "BookType:Credit":
-			// we need to retrieve the field owner before the change
-			var pastBookTypeOwner *models.BookType
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "BookType"
-			rf.Fieldname = "Credit"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				creditFormCallback.probe.stageOfInterest,
-				creditFormCallback.probe.backRepoOfInterest,
-				credit_,
-				&rf)
+			// WARNING : this form deals with the N-N association "BookType.Credit []*Credit" but
+			// it work only for 1-N associations (TODO: #660, enable this form only for field with //gong:1_N magic code)
+			//
+			// In many use cases, for instance tree structures, the assocation is semanticaly a 1-N
+			// association. For those use cases, it is handy to set the source of the assocation with
+			// the form of the target source (when editing an instance of Credit). Setting up a value
+			// will discard the former value is there is one.
+			//
+			// Therefore, the forms works only in ONE particular case:
+			// - there was no association to this target
+			var formerSource *models.BookType
+			{
+				var rf models.ReverseField
+				_ = rf
+				rf.GongstructName = "BookType"
+				rf.Fieldname = "Credit"
+				formerAssociationSource := models.GetReverseFieldOwner(
+					creditFormCallback.probe.stageOfInterest,
+					credit_,
+					&rf)
 
-			if reverseFieldOwner != nil {
-				pastBookTypeOwner = reverseFieldOwner.(*models.BookType)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastBookTypeOwner != nil {
-					idx := slices.Index(pastBookTypeOwner.Credit, credit_)
-					pastBookTypeOwner.Credit = slices.Delete(pastBookTypeOwner.Credit, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _booktype := range *models.GetGongstructInstancesSet[models.BookType](creditFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _booktype.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newBookTypeOwner := _booktype // we have a match
-						if pastBookTypeOwner != nil {
-							if newBookTypeOwner != pastBookTypeOwner {
-								idx := slices.Index(pastBookTypeOwner.Credit, credit_)
-								pastBookTypeOwner.Credit = slices.Delete(pastBookTypeOwner.Credit, idx, idx+1)
-								newBookTypeOwner.Credit = append(newBookTypeOwner.Credit, credit_)
-							}
-						} else {
-							newBookTypeOwner.Credit = append(newBookTypeOwner.Credit, credit_)
-						}
+				var ok bool
+				if formerAssociationSource != nil {
+					formerSource, ok = formerAssociationSource.(*models.BookType)
+					if !ok {
+						log.Fatalln("Source of BookType.Credit []*Credit, is not an BookType instance")
 					}
 				}
 			}
+
+			newSourceName := formDiv.FormFields[0].FormFieldSelect.Value
+
+			// case when the user set empty for the source value
+			if newSourceName == nil {
+				// That could mean we clear the assocation for all source instances
+				if formerSource != nil {
+					idx := slices.Index(formerSource.Credit, credit_)
+					formerSource.Credit = slices.Delete(formerSource.Credit, idx, idx+1)
+				}
+				break // nothing else to do for this field
+			}
+
+			// the former source is not empty. the new value could
+			// be different but there mught more that one source thet
+			// points to this target
+			if formerSource != nil {
+				break // nothing else to do for this field
+			}
+
+			// (2) find the source
+			var newSource *models.BookType
+			for _booktype := range *models.GetGongstructInstancesSet[models.BookType](creditFormCallback.probe.stageOfInterest) {
+
+				// the match is base on the name
+				if _booktype.GetName() == newSourceName.GetName() {
+					newSource = _booktype // we have a match
+					break
+				}
+			}
+			if newSource == nil {
+				log.Println("Source of BookType.Credit []*Credit, with name", newSourceName, ", does not exist")
+				break
+			}
+
+			// (3) append the new value to the new source field
+			newSource.Credit = append(newSource.Credit, credit_)
 		}
 	}
 
@@ -332,7 +458,7 @@ func (creditFormCallback *CreditFormCallback) OnSave() {
 	}
 
 	creditFormCallback.probe.stageOfInterest.Commit()
-	fillUpTable[models.Credit](
+	updateAndCommitTable[models.Credit](
 		creditFormCallback.probe,
 	)
 	creditFormCallback.probe.tableStage.Commit()
@@ -341,7 +467,7 @@ func (creditFormCallback *CreditFormCallback) OnSave() {
 	if creditFormCallback.CreationMode || creditFormCallback.formGroup.HasSuppressButtonBeenPressed {
 		creditFormCallback.probe.formStage.Reset()
 		newFormGroup := (&table.FormGroup{
-			Name: table.FormGroupDefaultName.ToString(),
+			Name: FormName,
 		}).Stage(creditFormCallback.probe.formStage)
 		newFormGroup.OnSave = __gong__New__CreditFormCallback(
 			nil,
@@ -353,7 +479,7 @@ func (creditFormCallback *CreditFormCallback) OnSave() {
 		creditFormCallback.probe.formStage.Commit()
 	}
 
-	fillUpTree(creditFormCallback.probe)
+	updateAndCommitTree(creditFormCallback.probe)
 }
 func __gong__New__LinkFormCallback(
 	link *models.Link,
@@ -383,7 +509,7 @@ type LinkFormCallback struct {
 
 func (linkFormCallback *LinkFormCallback) OnSave() {
 
-	log.Println("LinkFormCallback, OnSave")
+	// log.Println("LinkFormCallback, OnSave")
 
 	// checkout formStage to have the form group on the stage synchronized with the
 	// back repo (and front repo)
@@ -405,47 +531,72 @@ func (linkFormCallback *LinkFormCallback) OnSave() {
 		case "EnclosedText":
 			FormDivBasicFieldToField(&(link_.EnclosedText), formDiv)
 		case "Credit:Link":
-			// we need to retrieve the field owner before the change
-			var pastCreditOwner *models.Credit
-			var rf models.ReverseField
-			_ = rf
-			rf.GongstructName = "Credit"
-			rf.Fieldname = "Link"
-			reverseFieldOwner := orm.GetReverseFieldOwner(
-				linkFormCallback.probe.stageOfInterest,
-				linkFormCallback.probe.backRepoOfInterest,
-				link_,
-				&rf)
+			// WARNING : this form deals with the N-N association "Credit.Link []*Link" but
+			// it work only for 1-N associations (TODO: #660, enable this form only for field with //gong:1_N magic code)
+			//
+			// In many use cases, for instance tree structures, the assocation is semanticaly a 1-N
+			// association. For those use cases, it is handy to set the source of the assocation with
+			// the form of the target source (when editing an instance of Link). Setting up a value
+			// will discard the former value is there is one.
+			//
+			// Therefore, the forms works only in ONE particular case:
+			// - there was no association to this target
+			var formerSource *models.Credit
+			{
+				var rf models.ReverseField
+				_ = rf
+				rf.GongstructName = "Credit"
+				rf.Fieldname = "Link"
+				formerAssociationSource := models.GetReverseFieldOwner(
+					linkFormCallback.probe.stageOfInterest,
+					link_,
+					&rf)
 
-			if reverseFieldOwner != nil {
-				pastCreditOwner = reverseFieldOwner.(*models.Credit)
-			}
-			if formDiv.FormFields[0].FormFieldSelect.Value == nil {
-				if pastCreditOwner != nil {
-					idx := slices.Index(pastCreditOwner.Link, link_)
-					pastCreditOwner.Link = slices.Delete(pastCreditOwner.Link, idx, idx+1)
-				}
-			} else {
-				// we need to retrieve the field owner after the change
-				// parse all astrcut and get the one with the name in the
-				// div
-				for _credit := range *models.GetGongstructInstancesSet[models.Credit](linkFormCallback.probe.stageOfInterest) {
-
-					// the match is base on the name
-					if _credit.GetName() == formDiv.FormFields[0].FormFieldSelect.Value.GetName() {
-						newCreditOwner := _credit // we have a match
-						if pastCreditOwner != nil {
-							if newCreditOwner != pastCreditOwner {
-								idx := slices.Index(pastCreditOwner.Link, link_)
-								pastCreditOwner.Link = slices.Delete(pastCreditOwner.Link, idx, idx+1)
-								newCreditOwner.Link = append(newCreditOwner.Link, link_)
-							}
-						} else {
-							newCreditOwner.Link = append(newCreditOwner.Link, link_)
-						}
+				var ok bool
+				if formerAssociationSource != nil {
+					formerSource, ok = formerAssociationSource.(*models.Credit)
+					if !ok {
+						log.Fatalln("Source of Credit.Link []*Link, is not an Credit instance")
 					}
 				}
 			}
+
+			newSourceName := formDiv.FormFields[0].FormFieldSelect.Value
+
+			// case when the user set empty for the source value
+			if newSourceName == nil {
+				// That could mean we clear the assocation for all source instances
+				if formerSource != nil {
+					idx := slices.Index(formerSource.Link, link_)
+					formerSource.Link = slices.Delete(formerSource.Link, idx, idx+1)
+				}
+				break // nothing else to do for this field
+			}
+
+			// the former source is not empty. the new value could
+			// be different but there mught more that one source thet
+			// points to this target
+			if formerSource != nil {
+				break // nothing else to do for this field
+			}
+
+			// (2) find the source
+			var newSource *models.Credit
+			for _credit := range *models.GetGongstructInstancesSet[models.Credit](linkFormCallback.probe.stageOfInterest) {
+
+				// the match is base on the name
+				if _credit.GetName() == newSourceName.GetName() {
+					newSource = _credit // we have a match
+					break
+				}
+			}
+			if newSource == nil {
+				log.Println("Source of Credit.Link []*Link, with name", newSourceName, ", does not exist")
+				break
+			}
+
+			// (3) append the new value to the new source field
+			newSource.Link = append(newSource.Link, link_)
 		}
 	}
 
@@ -455,7 +606,7 @@ func (linkFormCallback *LinkFormCallback) OnSave() {
 	}
 
 	linkFormCallback.probe.stageOfInterest.Commit()
-	fillUpTable[models.Link](
+	updateAndCommitTable[models.Link](
 		linkFormCallback.probe,
 	)
 	linkFormCallback.probe.tableStage.Commit()
@@ -464,7 +615,7 @@ func (linkFormCallback *LinkFormCallback) OnSave() {
 	if linkFormCallback.CreationMode || linkFormCallback.formGroup.HasSuppressButtonBeenPressed {
 		linkFormCallback.probe.formStage.Reset()
 		newFormGroup := (&table.FormGroup{
-			Name: table.FormGroupDefaultName.ToString(),
+			Name: FormName,
 		}).Stage(linkFormCallback.probe.formStage)
 		newFormGroup.OnSave = __gong__New__LinkFormCallback(
 			nil,
@@ -476,5 +627,5 @@ func (linkFormCallback *LinkFormCallback) OnSave() {
 		linkFormCallback.probe.formStage.Commit()
 	}
 
-	fillUpTree(linkFormCallback.probe)
+	updateAndCommitTree(linkFormCallback.probe)
 }

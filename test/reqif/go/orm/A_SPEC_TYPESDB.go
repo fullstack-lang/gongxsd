@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/test/reqif/go/db"
 	"github.com/fullstack-lang/gongxsd/test/reqif/go/models"
 )
 
@@ -73,7 +74,7 @@ type A_SPEC_TYPESDB struct {
 
 	// Declation for basic field a_spec_typesDB.Name
 	Name_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	A_SPEC_TYPESPointersEncoding
@@ -116,17 +117,17 @@ type BackRepoA_SPEC_TYPESStruct struct {
 	// stores A_SPEC_TYPES according to their gorm ID
 	Map_A_SPEC_TYPESDBID_A_SPEC_TYPESPtr map[uint]*models.A_SPEC_TYPES
 
-	db *gorm.DB
+	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoA_SPEC_TYPES *BackRepoA_SPEC_TYPESStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoA_SPEC_TYPES *BackRepoA_SPEC_TYPESStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoA_SPEC_TYPES.stage
 	return
 }
 
-func (backRepoA_SPEC_TYPES *BackRepoA_SPEC_TYPESStruct) GetDB() *gorm.DB {
+func (backRepoA_SPEC_TYPES *BackRepoA_SPEC_TYPESStruct) GetDB() db.DBInterface {
 	return backRepoA_SPEC_TYPES.db
 }
 
@@ -139,9 +140,19 @@ func (backRepoA_SPEC_TYPES *BackRepoA_SPEC_TYPESStruct) GetA_SPEC_TYPESDBFromA_S
 
 // BackRepoA_SPEC_TYPES.CommitPhaseOne commits all staged instances of A_SPEC_TYPES to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoA_SPEC_TYPES *BackRepoA_SPEC_TYPESStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoA_SPEC_TYPES *BackRepoA_SPEC_TYPESStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var a_spec_typess []*models.A_SPEC_TYPES
 	for a_spec_types := range stage.A_SPEC_TYPESs {
+		a_spec_typess = append(a_spec_typess, a_spec_types)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(a_spec_typess, func(i, j int) bool {
+		return stage.A_SPEC_TYPESMap_Staged_Order[a_spec_typess[i]] < stage.A_SPEC_TYPESMap_Staged_Order[a_spec_typess[j]]
+	})
+
+	for _, a_spec_types := range a_spec_typess {
 		backRepoA_SPEC_TYPES.CommitPhaseOneInstance(a_spec_types)
 	}
 
@@ -163,9 +174,10 @@ func (backRepoA_SPEC_TYPES *BackRepoA_SPEC_TYPESStruct) CommitDeleteInstance(id 
 
 	// a_spec_types is not staged anymore, remove a_spec_typesDB
 	a_spec_typesDB := backRepoA_SPEC_TYPES.Map_A_SPEC_TYPESDBID_A_SPEC_TYPESDB[id]
-	query := backRepoA_SPEC_TYPES.db.Unscoped().Delete(&a_spec_typesDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoA_SPEC_TYPES.db.Unscoped()
+	_, err := db.Delete(a_spec_typesDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -189,9 +201,9 @@ func (backRepoA_SPEC_TYPES *BackRepoA_SPEC_TYPESStruct) CommitPhaseOneInstance(a
 	var a_spec_typesDB A_SPEC_TYPESDB
 	a_spec_typesDB.CopyBasicFieldsFromA_SPEC_TYPES(a_spec_types)
 
-	query := backRepoA_SPEC_TYPES.db.Create(&a_spec_typesDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoA_SPEC_TYPES.db.Create(&a_spec_typesDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -295,9 +307,9 @@ func (backRepoA_SPEC_TYPES *BackRepoA_SPEC_TYPESStruct) CommitPhaseTwoInstance(b
 				append(a_spec_typesDB.A_SPEC_TYPESPointersEncoding.SPECIFICATION_TYPE, int(specification_typeAssocEnd_DB.ID))
 		}
 
-		query := backRepoA_SPEC_TYPES.db.Save(&a_spec_typesDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoA_SPEC_TYPES.db.Save(a_spec_typesDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -316,9 +328,9 @@ func (backRepoA_SPEC_TYPES *BackRepoA_SPEC_TYPESStruct) CommitPhaseTwoInstance(b
 func (backRepoA_SPEC_TYPES *BackRepoA_SPEC_TYPESStruct) CheckoutPhaseOne() (Error error) {
 
 	a_spec_typesDBArray := make([]A_SPEC_TYPESDB, 0)
-	query := backRepoA_SPEC_TYPES.db.Find(&a_spec_typesDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoA_SPEC_TYPES.db.Find(&a_spec_typesDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -465,7 +477,7 @@ func (backRepo *BackRepoStruct) CheckoutA_SPEC_TYPES(a_spec_types *models.A_SPEC
 			var a_spec_typesDB A_SPEC_TYPESDB
 			a_spec_typesDB.ID = id
 
-			if err := backRepo.BackRepoA_SPEC_TYPES.db.First(&a_spec_typesDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoA_SPEC_TYPES.db.First(&a_spec_typesDB, id); err != nil {
 				log.Fatalln("CheckoutA_SPEC_TYPES : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoA_SPEC_TYPES.CheckoutPhaseOneInstance(&a_spec_typesDB)
@@ -612,9 +624,9 @@ func (backRepoA_SPEC_TYPES *BackRepoA_SPEC_TYPESStruct) rowVisitorA_SPEC_TYPES(r
 
 		a_spec_typesDB_ID_atBackupTime := a_spec_typesDB.ID
 		a_spec_typesDB.ID = 0
-		query := backRepoA_SPEC_TYPES.db.Create(a_spec_typesDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoA_SPEC_TYPES.db.Create(a_spec_typesDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoA_SPEC_TYPES.Map_A_SPEC_TYPESDBID_A_SPEC_TYPESDB[a_spec_typesDB.ID] = a_spec_typesDB
 		BackRepoA_SPEC_TYPESid_atBckpTime_newID[a_spec_typesDB_ID_atBackupTime] = a_spec_typesDB.ID
@@ -649,9 +661,9 @@ func (backRepoA_SPEC_TYPES *BackRepoA_SPEC_TYPESStruct) RestorePhaseOne(dirPath 
 
 		a_spec_typesDB_ID_atBackupTime := a_spec_typesDB.ID
 		a_spec_typesDB.ID = 0
-		query := backRepoA_SPEC_TYPES.db.Create(a_spec_typesDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoA_SPEC_TYPES.db.Create(a_spec_typesDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoA_SPEC_TYPES.Map_A_SPEC_TYPESDBID_A_SPEC_TYPESDB[a_spec_typesDB.ID] = a_spec_typesDB
 		BackRepoA_SPEC_TYPESid_atBckpTime_newID[a_spec_typesDB_ID_atBackupTime] = a_spec_typesDB.ID
@@ -673,9 +685,10 @@ func (backRepoA_SPEC_TYPES *BackRepoA_SPEC_TYPESStruct) RestorePhaseTwo() {
 
 		// insertion point for reindexing pointers encoding
 		// update databse with new index encoding
-		query := backRepoA_SPEC_TYPES.db.Model(a_spec_typesDB).Updates(*a_spec_typesDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoA_SPEC_TYPES.db.Model(a_spec_typesDB)
+		_, err := db.Updates(*a_spec_typesDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

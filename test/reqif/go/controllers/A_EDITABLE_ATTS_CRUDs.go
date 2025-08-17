@@ -58,24 +58,31 @@ func (controller *Controller) GetA_EDITABLE_ATTSs(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("GetA_EDITABLE_ATTSs", "GONG__StackPath", stackPath)
+			// log.Println("GetA_EDITABLE_ATTSs", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "GET Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoA_EDITABLE_ATTS.GetDB()
 
-	query := db.Find(&a_editable_attsDBs)
-	if query.Error != nil {
+	_, err := db.Find(&a_editable_attsDBs)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -121,15 +128,22 @@ func (controller *Controller) PostA_EDITABLE_ATTS(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("PostA_EDITABLE_ATTSs", "GONG__StackPath", stackPath)
+			// log.Println("PostA_EDITABLE_ATTSs", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "Post Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoA_EDITABLE_ATTS.GetDB()
 
@@ -151,12 +165,12 @@ func (controller *Controller) PostA_EDITABLE_ATTS(c *gin.Context) {
 	a_editable_attsDB.A_EDITABLE_ATTSPointersEncoding = input.A_EDITABLE_ATTSPointersEncoding
 	a_editable_attsDB.CopyBasicFieldsFromA_EDITABLE_ATTS_WOP(&input.A_EDITABLE_ATTS_WOP)
 
-	query := db.Create(&a_editable_attsDB)
-	if query.Error != nil {
+	_, err = db.Create(&a_editable_attsDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -191,21 +205,28 @@ func (controller *Controller) GetA_EDITABLE_ATTS(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("GetA_EDITABLE_ATTS", "GONG__StackPath", stackPath)
+			// log.Println("GetA_EDITABLE_ATTS", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoA_EDITABLE_ATTS.GetDB()
 
 	// Get a_editable_attsDB in DB
 	var a_editable_attsDB orm.A_EDITABLE_ATTSDB
-	if err := db.First(&a_editable_attsDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&a_editable_attsDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -240,15 +261,22 @@ func (controller *Controller) UpdateA_EDITABLE_ATTS(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("UpdateA_EDITABLE_ATTS", "GONG__StackPath", stackPath)
+			// log.Println("UpdateA_EDITABLE_ATTS", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "PATCH Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoA_EDITABLE_ATTS.GetDB()
 
@@ -264,13 +292,13 @@ func (controller *Controller) UpdateA_EDITABLE_ATTS(c *gin.Context) {
 	var a_editable_attsDB orm.A_EDITABLE_ATTSDB
 
 	// fetch the a_editable_atts
-	query := db.First(&a_editable_attsDB, c.Param("id"))
+	_, err := db.First(&a_editable_attsDB, c.Param("id"))
 
-	if query.Error != nil {
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -279,12 +307,13 @@ func (controller *Controller) UpdateA_EDITABLE_ATTS(c *gin.Context) {
 	a_editable_attsDB.CopyBasicFieldsFromA_EDITABLE_ATTS_WOP(&input.A_EDITABLE_ATTS_WOP)
 	a_editable_attsDB.A_EDITABLE_ATTSPointersEncoding = input.A_EDITABLE_ATTSPointersEncoding
 
-	query = db.Model(&a_editable_attsDB).Updates(a_editable_attsDB)
-	if query.Error != nil {
+	db, _ = db.Model(&a_editable_attsDB)
+	_, err = db.Updates(&a_editable_attsDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -329,21 +358,28 @@ func (controller *Controller) DeleteA_EDITABLE_ATTS(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("DeleteA_EDITABLE_ATTS", "GONG__StackPath", stackPath)
+			// log.Println("DeleteA_EDITABLE_ATTS", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "DELETE Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoA_EDITABLE_ATTS.GetDB()
 
 	// Get model if exist
 	var a_editable_attsDB orm.A_EDITABLE_ATTSDB
-	if err := db.First(&a_editable_attsDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&a_editable_attsDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -353,7 +389,8 @@ func (controller *Controller) DeleteA_EDITABLE_ATTS(c *gin.Context) {
 	}
 
 	// with gorm.Model field, default delete is a soft delete. Unscoped() force delete
-	db.Unscoped().Delete(&a_editable_attsDB)
+	db.Unscoped()
+	db.Delete(&a_editable_attsDB)
 
 	// get an instance (not staged) from DB instance, and call callback function
 	a_editable_attsDeleted := new(models.A_EDITABLE_ATTS)

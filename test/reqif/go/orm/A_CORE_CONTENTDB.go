@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/test/reqif/go/db"
 	"github.com/fullstack-lang/gongxsd/test/reqif/go/models"
 )
 
@@ -65,7 +66,7 @@ type A_CORE_CONTENTDB struct {
 
 	// Declation for basic field a_core_contentDB.Name
 	Name_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	A_CORE_CONTENTPointersEncoding
@@ -108,17 +109,17 @@ type BackRepoA_CORE_CONTENTStruct struct {
 	// stores A_CORE_CONTENT according to their gorm ID
 	Map_A_CORE_CONTENTDBID_A_CORE_CONTENTPtr map[uint]*models.A_CORE_CONTENT
 
-	db *gorm.DB
+	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoA_CORE_CONTENT *BackRepoA_CORE_CONTENTStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoA_CORE_CONTENT *BackRepoA_CORE_CONTENTStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoA_CORE_CONTENT.stage
 	return
 }
 
-func (backRepoA_CORE_CONTENT *BackRepoA_CORE_CONTENTStruct) GetDB() *gorm.DB {
+func (backRepoA_CORE_CONTENT *BackRepoA_CORE_CONTENTStruct) GetDB() db.DBInterface {
 	return backRepoA_CORE_CONTENT.db
 }
 
@@ -131,9 +132,19 @@ func (backRepoA_CORE_CONTENT *BackRepoA_CORE_CONTENTStruct) GetA_CORE_CONTENTDBF
 
 // BackRepoA_CORE_CONTENT.CommitPhaseOne commits all staged instances of A_CORE_CONTENT to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoA_CORE_CONTENT *BackRepoA_CORE_CONTENTStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoA_CORE_CONTENT *BackRepoA_CORE_CONTENTStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var a_core_contents []*models.A_CORE_CONTENT
 	for a_core_content := range stage.A_CORE_CONTENTs {
+		a_core_contents = append(a_core_contents, a_core_content)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(a_core_contents, func(i, j int) bool {
+		return stage.A_CORE_CONTENTMap_Staged_Order[a_core_contents[i]] < stage.A_CORE_CONTENTMap_Staged_Order[a_core_contents[j]]
+	})
+
+	for _, a_core_content := range a_core_contents {
 		backRepoA_CORE_CONTENT.CommitPhaseOneInstance(a_core_content)
 	}
 
@@ -155,9 +166,10 @@ func (backRepoA_CORE_CONTENT *BackRepoA_CORE_CONTENTStruct) CommitDeleteInstance
 
 	// a_core_content is not staged anymore, remove a_core_contentDB
 	a_core_contentDB := backRepoA_CORE_CONTENT.Map_A_CORE_CONTENTDBID_A_CORE_CONTENTDB[id]
-	query := backRepoA_CORE_CONTENT.db.Unscoped().Delete(&a_core_contentDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoA_CORE_CONTENT.db.Unscoped()
+	_, err := db.Delete(a_core_contentDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -181,9 +193,9 @@ func (backRepoA_CORE_CONTENT *BackRepoA_CORE_CONTENTStruct) CommitPhaseOneInstan
 	var a_core_contentDB A_CORE_CONTENTDB
 	a_core_contentDB.CopyBasicFieldsFromA_CORE_CONTENT(a_core_content)
 
-	query := backRepoA_CORE_CONTENT.db.Create(&a_core_contentDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoA_CORE_CONTENT.db.Create(&a_core_contentDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -227,9 +239,9 @@ func (backRepoA_CORE_CONTENT *BackRepoA_CORE_CONTENTStruct) CommitPhaseTwoInstan
 			a_core_contentDB.REQ_IF_CONTENTID.Valid = true
 		}
 
-		query := backRepoA_CORE_CONTENT.db.Save(&a_core_contentDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoA_CORE_CONTENT.db.Save(a_core_contentDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -248,9 +260,9 @@ func (backRepoA_CORE_CONTENT *BackRepoA_CORE_CONTENTStruct) CommitPhaseTwoInstan
 func (backRepoA_CORE_CONTENT *BackRepoA_CORE_CONTENTStruct) CheckoutPhaseOne() (Error error) {
 
 	a_core_contentDBArray := make([]A_CORE_CONTENTDB, 0)
-	query := backRepoA_CORE_CONTENT.db.Find(&a_core_contentDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoA_CORE_CONTENT.db.Find(&a_core_contentDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -340,11 +352,27 @@ func (backRepoA_CORE_CONTENT *BackRepoA_CORE_CONTENTStruct) CheckoutPhaseTwoInst
 func (a_core_contentDB *A_CORE_CONTENTDB) DecodePointers(backRepo *BackRepoStruct, a_core_content *models.A_CORE_CONTENT) {
 
 	// insertion point for checkout of pointer encoding
-	// REQ_IF_CONTENT field
-	a_core_content.REQ_IF_CONTENT = nil
-	if a_core_contentDB.REQ_IF_CONTENTID.Int64 != 0 {
-		a_core_content.REQ_IF_CONTENT = backRepo.BackRepoREQ_IF_CONTENT.Map_REQ_IF_CONTENTDBID_REQ_IF_CONTENTPtr[uint(a_core_contentDB.REQ_IF_CONTENTID.Int64)]
+	// REQ_IF_CONTENT field	
+	{
+		id := a_core_contentDB.REQ_IF_CONTENTID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoREQ_IF_CONTENT.Map_REQ_IF_CONTENTDBID_REQ_IF_CONTENTPtr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: a_core_content.REQ_IF_CONTENT, unknown pointer id", id)
+				a_core_content.REQ_IF_CONTENT = nil
+			} else {
+				// updates only if field has changed
+				if a_core_content.REQ_IF_CONTENT == nil || a_core_content.REQ_IF_CONTENT != tmp {
+					a_core_content.REQ_IF_CONTENT = tmp
+				}
+			}
+		} else {
+			a_core_content.REQ_IF_CONTENT = nil
+		}
 	}
+	
 	return
 }
 
@@ -366,7 +394,7 @@ func (backRepo *BackRepoStruct) CheckoutA_CORE_CONTENT(a_core_content *models.A_
 			var a_core_contentDB A_CORE_CONTENTDB
 			a_core_contentDB.ID = id
 
-			if err := backRepo.BackRepoA_CORE_CONTENT.db.First(&a_core_contentDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoA_CORE_CONTENT.db.First(&a_core_contentDB, id); err != nil {
 				log.Fatalln("CheckoutA_CORE_CONTENT : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoA_CORE_CONTENT.CheckoutPhaseOneInstance(&a_core_contentDB)
@@ -513,9 +541,9 @@ func (backRepoA_CORE_CONTENT *BackRepoA_CORE_CONTENTStruct) rowVisitorA_CORE_CON
 
 		a_core_contentDB_ID_atBackupTime := a_core_contentDB.ID
 		a_core_contentDB.ID = 0
-		query := backRepoA_CORE_CONTENT.db.Create(a_core_contentDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoA_CORE_CONTENT.db.Create(a_core_contentDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoA_CORE_CONTENT.Map_A_CORE_CONTENTDBID_A_CORE_CONTENTDB[a_core_contentDB.ID] = a_core_contentDB
 		BackRepoA_CORE_CONTENTid_atBckpTime_newID[a_core_contentDB_ID_atBackupTime] = a_core_contentDB.ID
@@ -550,9 +578,9 @@ func (backRepoA_CORE_CONTENT *BackRepoA_CORE_CONTENTStruct) RestorePhaseOne(dirP
 
 		a_core_contentDB_ID_atBackupTime := a_core_contentDB.ID
 		a_core_contentDB.ID = 0
-		query := backRepoA_CORE_CONTENT.db.Create(a_core_contentDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoA_CORE_CONTENT.db.Create(a_core_contentDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoA_CORE_CONTENT.Map_A_CORE_CONTENTDBID_A_CORE_CONTENTDB[a_core_contentDB.ID] = a_core_contentDB
 		BackRepoA_CORE_CONTENTid_atBckpTime_newID[a_core_contentDB_ID_atBackupTime] = a_core_contentDB.ID
@@ -580,9 +608,10 @@ func (backRepoA_CORE_CONTENT *BackRepoA_CORE_CONTENTStruct) RestorePhaseTwo() {
 		}
 
 		// update databse with new index encoding
-		query := backRepoA_CORE_CONTENT.db.Model(a_core_contentDB).Updates(*a_core_contentDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoA_CORE_CONTENT.db.Model(a_core_contentDB)
+		_, err := db.Updates(*a_core_contentDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

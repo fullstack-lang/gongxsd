@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/test/reqif/go/db"
 	"github.com/fullstack-lang/gongxsd/test/reqif/go/models"
 )
 
@@ -89,7 +90,7 @@ type SPECIFICATIONDB struct {
 
 	// Declation for basic field specificationDB.LONG_NAME
 	LONG_NAME_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	SPECIFICATIONPointersEncoding
@@ -144,17 +145,17 @@ type BackRepoSPECIFICATIONStruct struct {
 	// stores SPECIFICATION according to their gorm ID
 	Map_SPECIFICATIONDBID_SPECIFICATIONPtr map[uint]*models.SPECIFICATION
 
-	db *gorm.DB
+	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoSPECIFICATION *BackRepoSPECIFICATIONStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoSPECIFICATION *BackRepoSPECIFICATIONStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoSPECIFICATION.stage
 	return
 }
 
-func (backRepoSPECIFICATION *BackRepoSPECIFICATIONStruct) GetDB() *gorm.DB {
+func (backRepoSPECIFICATION *BackRepoSPECIFICATIONStruct) GetDB() db.DBInterface {
 	return backRepoSPECIFICATION.db
 }
 
@@ -167,9 +168,19 @@ func (backRepoSPECIFICATION *BackRepoSPECIFICATIONStruct) GetSPECIFICATIONDBFrom
 
 // BackRepoSPECIFICATION.CommitPhaseOne commits all staged instances of SPECIFICATION to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoSPECIFICATION *BackRepoSPECIFICATIONStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoSPECIFICATION *BackRepoSPECIFICATIONStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var specifications []*models.SPECIFICATION
 	for specification := range stage.SPECIFICATIONs {
+		specifications = append(specifications, specification)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(specifications, func(i, j int) bool {
+		return stage.SPECIFICATIONMap_Staged_Order[specifications[i]] < stage.SPECIFICATIONMap_Staged_Order[specifications[j]]
+	})
+
+	for _, specification := range specifications {
 		backRepoSPECIFICATION.CommitPhaseOneInstance(specification)
 	}
 
@@ -191,9 +202,10 @@ func (backRepoSPECIFICATION *BackRepoSPECIFICATIONStruct) CommitDeleteInstance(i
 
 	// specification is not staged anymore, remove specificationDB
 	specificationDB := backRepoSPECIFICATION.Map_SPECIFICATIONDBID_SPECIFICATIONDB[id]
-	query := backRepoSPECIFICATION.db.Unscoped().Delete(&specificationDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoSPECIFICATION.db.Unscoped()
+	_, err := db.Delete(specificationDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -217,9 +229,9 @@ func (backRepoSPECIFICATION *BackRepoSPECIFICATIONStruct) CommitPhaseOneInstance
 	var specificationDB SPECIFICATIONDB
 	specificationDB.CopyBasicFieldsFromSPECIFICATION(specification)
 
-	query := backRepoSPECIFICATION.db.Create(&specificationDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoSPECIFICATION.db.Create(&specificationDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -299,9 +311,9 @@ func (backRepoSPECIFICATION *BackRepoSPECIFICATIONStruct) CommitPhaseTwoInstance
 			specificationDB.TYPEID.Valid = true
 		}
 
-		query := backRepoSPECIFICATION.db.Save(&specificationDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoSPECIFICATION.db.Save(specificationDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -320,9 +332,9 @@ func (backRepoSPECIFICATION *BackRepoSPECIFICATIONStruct) CommitPhaseTwoInstance
 func (backRepoSPECIFICATION *BackRepoSPECIFICATIONStruct) CheckoutPhaseOne() (Error error) {
 
 	specificationDBArray := make([]SPECIFICATIONDB, 0)
-	query := backRepoSPECIFICATION.db.Find(&specificationDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoSPECIFICATION.db.Find(&specificationDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -412,26 +424,90 @@ func (backRepoSPECIFICATION *BackRepoSPECIFICATIONStruct) CheckoutPhaseTwoInstan
 func (specificationDB *SPECIFICATIONDB) DecodePointers(backRepo *BackRepoStruct, specification *models.SPECIFICATION) {
 
 	// insertion point for checkout of pointer encoding
-	// ALTERNATIVE_ID field
-	specification.ALTERNATIVE_ID = nil
-	if specificationDB.ALTERNATIVE_IDID.Int64 != 0 {
-		specification.ALTERNATIVE_ID = backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(specificationDB.ALTERNATIVE_IDID.Int64)]
+	// ALTERNATIVE_ID field	
+	{
+		id := specificationDB.ALTERNATIVE_IDID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: specification.ALTERNATIVE_ID, unknown pointer id", id)
+				specification.ALTERNATIVE_ID = nil
+			} else {
+				// updates only if field has changed
+				if specification.ALTERNATIVE_ID == nil || specification.ALTERNATIVE_ID != tmp {
+					specification.ALTERNATIVE_ID = tmp
+				}
+			}
+		} else {
+			specification.ALTERNATIVE_ID = nil
+		}
 	}
-	// CHILDREN field
-	specification.CHILDREN = nil
-	if specificationDB.CHILDRENID.Int64 != 0 {
-		specification.CHILDREN = backRepo.BackRepoA_CHILDREN.Map_A_CHILDRENDBID_A_CHILDRENPtr[uint(specificationDB.CHILDRENID.Int64)]
+	
+	// CHILDREN field	
+	{
+		id := specificationDB.CHILDRENID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoA_CHILDREN.Map_A_CHILDRENDBID_A_CHILDRENPtr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: specification.CHILDREN, unknown pointer id", id)
+				specification.CHILDREN = nil
+			} else {
+				// updates only if field has changed
+				if specification.CHILDREN == nil || specification.CHILDREN != tmp {
+					specification.CHILDREN = tmp
+				}
+			}
+		} else {
+			specification.CHILDREN = nil
+		}
 	}
-	// VALUES field
-	specification.VALUES = nil
-	if specificationDB.VALUESID.Int64 != 0 {
-		specification.VALUES = backRepo.BackRepoA_ATTRIBUTE_VALUE_XHTML_1.Map_A_ATTRIBUTE_VALUE_XHTML_1DBID_A_ATTRIBUTE_VALUE_XHTML_1Ptr[uint(specificationDB.VALUESID.Int64)]
+	
+	// VALUES field	
+	{
+		id := specificationDB.VALUESID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoA_ATTRIBUTE_VALUE_XHTML_1.Map_A_ATTRIBUTE_VALUE_XHTML_1DBID_A_ATTRIBUTE_VALUE_XHTML_1Ptr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: specification.VALUES, unknown pointer id", id)
+				specification.VALUES = nil
+			} else {
+				// updates only if field has changed
+				if specification.VALUES == nil || specification.VALUES != tmp {
+					specification.VALUES = tmp
+				}
+			}
+		} else {
+			specification.VALUES = nil
+		}
 	}
-	// TYPE field
-	specification.TYPE = nil
-	if specificationDB.TYPEID.Int64 != 0 {
-		specification.TYPE = backRepo.BackRepoA_SPECIFICATION_TYPE_REF.Map_A_SPECIFICATION_TYPE_REFDBID_A_SPECIFICATION_TYPE_REFPtr[uint(specificationDB.TYPEID.Int64)]
+	
+	// TYPE field	
+	{
+		id := specificationDB.TYPEID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoA_SPECIFICATION_TYPE_REF.Map_A_SPECIFICATION_TYPE_REFDBID_A_SPECIFICATION_TYPE_REFPtr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: specification.TYPE, unknown pointer id", id)
+				specification.TYPE = nil
+			} else {
+				// updates only if field has changed
+				if specification.TYPE == nil || specification.TYPE != tmp {
+					specification.TYPE = tmp
+				}
+			}
+		} else {
+			specification.TYPE = nil
+		}
 	}
+	
 	return
 }
 
@@ -453,7 +529,7 @@ func (backRepo *BackRepoStruct) CheckoutSPECIFICATION(specification *models.SPEC
 			var specificationDB SPECIFICATIONDB
 			specificationDB.ID = id
 
-			if err := backRepo.BackRepoSPECIFICATION.db.First(&specificationDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoSPECIFICATION.db.First(&specificationDB, id); err != nil {
 				log.Fatalln("CheckoutSPECIFICATION : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoSPECIFICATION.CheckoutPhaseOneInstance(&specificationDB)
@@ -648,9 +724,9 @@ func (backRepoSPECIFICATION *BackRepoSPECIFICATIONStruct) rowVisitorSPECIFICATIO
 
 		specificationDB_ID_atBackupTime := specificationDB.ID
 		specificationDB.ID = 0
-		query := backRepoSPECIFICATION.db.Create(specificationDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoSPECIFICATION.db.Create(specificationDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoSPECIFICATION.Map_SPECIFICATIONDBID_SPECIFICATIONDB[specificationDB.ID] = specificationDB
 		BackRepoSPECIFICATIONid_atBckpTime_newID[specificationDB_ID_atBackupTime] = specificationDB.ID
@@ -685,9 +761,9 @@ func (backRepoSPECIFICATION *BackRepoSPECIFICATIONStruct) RestorePhaseOne(dirPat
 
 		specificationDB_ID_atBackupTime := specificationDB.ID
 		specificationDB.ID = 0
-		query := backRepoSPECIFICATION.db.Create(specificationDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoSPECIFICATION.db.Create(specificationDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoSPECIFICATION.Map_SPECIFICATIONDBID_SPECIFICATIONDB[specificationDB.ID] = specificationDB
 		BackRepoSPECIFICATIONid_atBckpTime_newID[specificationDB_ID_atBackupTime] = specificationDB.ID
@@ -733,9 +809,10 @@ func (backRepoSPECIFICATION *BackRepoSPECIFICATIONStruct) RestorePhaseTwo() {
 		}
 
 		// update databse with new index encoding
-		query := backRepoSPECIFICATION.db.Model(specificationDB).Updates(*specificationDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoSPECIFICATION.db.Model(specificationDB)
+		_, err := db.Updates(*specificationDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

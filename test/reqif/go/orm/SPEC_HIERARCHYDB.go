@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/test/reqif/go/db"
 	"github.com/fullstack-lang/gongxsd/test/reqif/go/models"
 )
 
@@ -97,7 +98,7 @@ type SPEC_HIERARCHYDB struct {
 
 	// Declation for basic field spec_hierarchyDB.LONG_NAME
 	LONG_NAME_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	SPEC_HIERARCHYPointersEncoding
@@ -158,17 +159,17 @@ type BackRepoSPEC_HIERARCHYStruct struct {
 	// stores SPEC_HIERARCHY according to their gorm ID
 	Map_SPEC_HIERARCHYDBID_SPEC_HIERARCHYPtr map[uint]*models.SPEC_HIERARCHY
 
-	db *gorm.DB
+	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoSPEC_HIERARCHY *BackRepoSPEC_HIERARCHYStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoSPEC_HIERARCHY *BackRepoSPEC_HIERARCHYStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoSPEC_HIERARCHY.stage
 	return
 }
 
-func (backRepoSPEC_HIERARCHY *BackRepoSPEC_HIERARCHYStruct) GetDB() *gorm.DB {
+func (backRepoSPEC_HIERARCHY *BackRepoSPEC_HIERARCHYStruct) GetDB() db.DBInterface {
 	return backRepoSPEC_HIERARCHY.db
 }
 
@@ -181,9 +182,19 @@ func (backRepoSPEC_HIERARCHY *BackRepoSPEC_HIERARCHYStruct) GetSPEC_HIERARCHYDBF
 
 // BackRepoSPEC_HIERARCHY.CommitPhaseOne commits all staged instances of SPEC_HIERARCHY to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoSPEC_HIERARCHY *BackRepoSPEC_HIERARCHYStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoSPEC_HIERARCHY *BackRepoSPEC_HIERARCHYStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var spec_hierarchys []*models.SPEC_HIERARCHY
 	for spec_hierarchy := range stage.SPEC_HIERARCHYs {
+		spec_hierarchys = append(spec_hierarchys, spec_hierarchy)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(spec_hierarchys, func(i, j int) bool {
+		return stage.SPEC_HIERARCHYMap_Staged_Order[spec_hierarchys[i]] < stage.SPEC_HIERARCHYMap_Staged_Order[spec_hierarchys[j]]
+	})
+
+	for _, spec_hierarchy := range spec_hierarchys {
 		backRepoSPEC_HIERARCHY.CommitPhaseOneInstance(spec_hierarchy)
 	}
 
@@ -205,9 +216,10 @@ func (backRepoSPEC_HIERARCHY *BackRepoSPEC_HIERARCHYStruct) CommitDeleteInstance
 
 	// spec_hierarchy is not staged anymore, remove spec_hierarchyDB
 	spec_hierarchyDB := backRepoSPEC_HIERARCHY.Map_SPEC_HIERARCHYDBID_SPEC_HIERARCHYDB[id]
-	query := backRepoSPEC_HIERARCHY.db.Unscoped().Delete(&spec_hierarchyDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoSPEC_HIERARCHY.db.Unscoped()
+	_, err := db.Delete(spec_hierarchyDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -231,9 +243,9 @@ func (backRepoSPEC_HIERARCHY *BackRepoSPEC_HIERARCHYStruct) CommitPhaseOneInstan
 	var spec_hierarchyDB SPEC_HIERARCHYDB
 	spec_hierarchyDB.CopyBasicFieldsFromSPEC_HIERARCHY(spec_hierarchy)
 
-	query := backRepoSPEC_HIERARCHY.db.Create(&spec_hierarchyDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoSPEC_HIERARCHY.db.Create(&spec_hierarchyDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -313,9 +325,9 @@ func (backRepoSPEC_HIERARCHY *BackRepoSPEC_HIERARCHYStruct) CommitPhaseTwoInstan
 			spec_hierarchyDB.OBJECTID.Valid = true
 		}
 
-		query := backRepoSPEC_HIERARCHY.db.Save(&spec_hierarchyDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoSPEC_HIERARCHY.db.Save(spec_hierarchyDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -334,9 +346,9 @@ func (backRepoSPEC_HIERARCHY *BackRepoSPEC_HIERARCHYStruct) CommitPhaseTwoInstan
 func (backRepoSPEC_HIERARCHY *BackRepoSPEC_HIERARCHYStruct) CheckoutPhaseOne() (Error error) {
 
 	spec_hierarchyDBArray := make([]SPEC_HIERARCHYDB, 0)
-	query := backRepoSPEC_HIERARCHY.db.Find(&spec_hierarchyDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoSPEC_HIERARCHY.db.Find(&spec_hierarchyDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -426,26 +438,90 @@ func (backRepoSPEC_HIERARCHY *BackRepoSPEC_HIERARCHYStruct) CheckoutPhaseTwoInst
 func (spec_hierarchyDB *SPEC_HIERARCHYDB) DecodePointers(backRepo *BackRepoStruct, spec_hierarchy *models.SPEC_HIERARCHY) {
 
 	// insertion point for checkout of pointer encoding
-	// ALTERNATIVE_ID field
-	spec_hierarchy.ALTERNATIVE_ID = nil
-	if spec_hierarchyDB.ALTERNATIVE_IDID.Int64 != 0 {
-		spec_hierarchy.ALTERNATIVE_ID = backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(spec_hierarchyDB.ALTERNATIVE_IDID.Int64)]
+	// ALTERNATIVE_ID field	
+	{
+		id := spec_hierarchyDB.ALTERNATIVE_IDID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: spec_hierarchy.ALTERNATIVE_ID, unknown pointer id", id)
+				spec_hierarchy.ALTERNATIVE_ID = nil
+			} else {
+				// updates only if field has changed
+				if spec_hierarchy.ALTERNATIVE_ID == nil || spec_hierarchy.ALTERNATIVE_ID != tmp {
+					spec_hierarchy.ALTERNATIVE_ID = tmp
+				}
+			}
+		} else {
+			spec_hierarchy.ALTERNATIVE_ID = nil
+		}
 	}
-	// CHILDREN field
-	spec_hierarchy.CHILDREN = nil
-	if spec_hierarchyDB.CHILDRENID.Int64 != 0 {
-		spec_hierarchy.CHILDREN = backRepo.BackRepoA_CHILDREN.Map_A_CHILDRENDBID_A_CHILDRENPtr[uint(spec_hierarchyDB.CHILDRENID.Int64)]
+	
+	// CHILDREN field	
+	{
+		id := spec_hierarchyDB.CHILDRENID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoA_CHILDREN.Map_A_CHILDRENDBID_A_CHILDRENPtr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: spec_hierarchy.CHILDREN, unknown pointer id", id)
+				spec_hierarchy.CHILDREN = nil
+			} else {
+				// updates only if field has changed
+				if spec_hierarchy.CHILDREN == nil || spec_hierarchy.CHILDREN != tmp {
+					spec_hierarchy.CHILDREN = tmp
+				}
+			}
+		} else {
+			spec_hierarchy.CHILDREN = nil
+		}
 	}
-	// EDITABLE_ATTS field
-	spec_hierarchy.EDITABLE_ATTS = nil
-	if spec_hierarchyDB.EDITABLE_ATTSID.Int64 != 0 {
-		spec_hierarchy.EDITABLE_ATTS = backRepo.BackRepoA_EDITABLE_ATTS.Map_A_EDITABLE_ATTSDBID_A_EDITABLE_ATTSPtr[uint(spec_hierarchyDB.EDITABLE_ATTSID.Int64)]
+	
+	// EDITABLE_ATTS field	
+	{
+		id := spec_hierarchyDB.EDITABLE_ATTSID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoA_EDITABLE_ATTS.Map_A_EDITABLE_ATTSDBID_A_EDITABLE_ATTSPtr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: spec_hierarchy.EDITABLE_ATTS, unknown pointer id", id)
+				spec_hierarchy.EDITABLE_ATTS = nil
+			} else {
+				// updates only if field has changed
+				if spec_hierarchy.EDITABLE_ATTS == nil || spec_hierarchy.EDITABLE_ATTS != tmp {
+					spec_hierarchy.EDITABLE_ATTS = tmp
+				}
+			}
+		} else {
+			spec_hierarchy.EDITABLE_ATTS = nil
+		}
 	}
-	// OBJECT field
-	spec_hierarchy.OBJECT = nil
-	if spec_hierarchyDB.OBJECTID.Int64 != 0 {
-		spec_hierarchy.OBJECT = backRepo.BackRepoA_OBJECT.Map_A_OBJECTDBID_A_OBJECTPtr[uint(spec_hierarchyDB.OBJECTID.Int64)]
+	
+	// OBJECT field	
+	{
+		id := spec_hierarchyDB.OBJECTID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoA_OBJECT.Map_A_OBJECTDBID_A_OBJECTPtr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: spec_hierarchy.OBJECT, unknown pointer id", id)
+				spec_hierarchy.OBJECT = nil
+			} else {
+				// updates only if field has changed
+				if spec_hierarchy.OBJECT == nil || spec_hierarchy.OBJECT != tmp {
+					spec_hierarchy.OBJECT = tmp
+				}
+			}
+		} else {
+			spec_hierarchy.OBJECT = nil
+		}
 	}
+	
 	return
 }
 
@@ -467,7 +543,7 @@ func (backRepo *BackRepoStruct) CheckoutSPEC_HIERARCHY(spec_hierarchy *models.SP
 			var spec_hierarchyDB SPEC_HIERARCHYDB
 			spec_hierarchyDB.ID = id
 
-			if err := backRepo.BackRepoSPEC_HIERARCHY.db.First(&spec_hierarchyDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoSPEC_HIERARCHY.db.First(&spec_hierarchyDB, id); err != nil {
 				log.Fatalln("CheckoutSPEC_HIERARCHY : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoSPEC_HIERARCHY.CheckoutPhaseOneInstance(&spec_hierarchyDB)
@@ -686,9 +762,9 @@ func (backRepoSPEC_HIERARCHY *BackRepoSPEC_HIERARCHYStruct) rowVisitorSPEC_HIERA
 
 		spec_hierarchyDB_ID_atBackupTime := spec_hierarchyDB.ID
 		spec_hierarchyDB.ID = 0
-		query := backRepoSPEC_HIERARCHY.db.Create(spec_hierarchyDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoSPEC_HIERARCHY.db.Create(spec_hierarchyDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoSPEC_HIERARCHY.Map_SPEC_HIERARCHYDBID_SPEC_HIERARCHYDB[spec_hierarchyDB.ID] = spec_hierarchyDB
 		BackRepoSPEC_HIERARCHYid_atBckpTime_newID[spec_hierarchyDB_ID_atBackupTime] = spec_hierarchyDB.ID
@@ -723,9 +799,9 @@ func (backRepoSPEC_HIERARCHY *BackRepoSPEC_HIERARCHYStruct) RestorePhaseOne(dirP
 
 		spec_hierarchyDB_ID_atBackupTime := spec_hierarchyDB.ID
 		spec_hierarchyDB.ID = 0
-		query := backRepoSPEC_HIERARCHY.db.Create(spec_hierarchyDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoSPEC_HIERARCHY.db.Create(spec_hierarchyDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoSPEC_HIERARCHY.Map_SPEC_HIERARCHYDBID_SPEC_HIERARCHYDB[spec_hierarchyDB.ID] = spec_hierarchyDB
 		BackRepoSPEC_HIERARCHYid_atBckpTime_newID[spec_hierarchyDB_ID_atBackupTime] = spec_hierarchyDB.ID
@@ -771,9 +847,10 @@ func (backRepoSPEC_HIERARCHY *BackRepoSPEC_HIERARCHYStruct) RestorePhaseTwo() {
 		}
 
 		// update databse with new index encoding
-		query := backRepoSPEC_HIERARCHY.db.Model(spec_hierarchyDB).Updates(*spec_hierarchyDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoSPEC_HIERARCHY.db.Model(spec_hierarchyDB)
+		_, err := db.Updates(*spec_hierarchyDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

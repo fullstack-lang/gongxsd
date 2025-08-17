@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/test/reqif/go/db"
 	"github.com/fullstack-lang/gongxsd/test/reqif/go/models"
 )
 
@@ -64,7 +65,7 @@ type A_SPECIFICATION_TYPE_REFDB struct {
 
 	// Declation for basic field a_specification_type_refDB.SPECIFICATION_TYPE_REF
 	SPECIFICATION_TYPE_REF_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	A_SPECIFICATION_TYPE_REFPointersEncoding
@@ -110,17 +111,17 @@ type BackRepoA_SPECIFICATION_TYPE_REFStruct struct {
 	// stores A_SPECIFICATION_TYPE_REF according to their gorm ID
 	Map_A_SPECIFICATION_TYPE_REFDBID_A_SPECIFICATION_TYPE_REFPtr map[uint]*models.A_SPECIFICATION_TYPE_REF
 
-	db *gorm.DB
+	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoA_SPECIFICATION_TYPE_REF *BackRepoA_SPECIFICATION_TYPE_REFStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoA_SPECIFICATION_TYPE_REF *BackRepoA_SPECIFICATION_TYPE_REFStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoA_SPECIFICATION_TYPE_REF.stage
 	return
 }
 
-func (backRepoA_SPECIFICATION_TYPE_REF *BackRepoA_SPECIFICATION_TYPE_REFStruct) GetDB() *gorm.DB {
+func (backRepoA_SPECIFICATION_TYPE_REF *BackRepoA_SPECIFICATION_TYPE_REFStruct) GetDB() db.DBInterface {
 	return backRepoA_SPECIFICATION_TYPE_REF.db
 }
 
@@ -133,9 +134,19 @@ func (backRepoA_SPECIFICATION_TYPE_REF *BackRepoA_SPECIFICATION_TYPE_REFStruct) 
 
 // BackRepoA_SPECIFICATION_TYPE_REF.CommitPhaseOne commits all staged instances of A_SPECIFICATION_TYPE_REF to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoA_SPECIFICATION_TYPE_REF *BackRepoA_SPECIFICATION_TYPE_REFStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoA_SPECIFICATION_TYPE_REF *BackRepoA_SPECIFICATION_TYPE_REFStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var a_specification_type_refs []*models.A_SPECIFICATION_TYPE_REF
 	for a_specification_type_ref := range stage.A_SPECIFICATION_TYPE_REFs {
+		a_specification_type_refs = append(a_specification_type_refs, a_specification_type_ref)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(a_specification_type_refs, func(i, j int) bool {
+		return stage.A_SPECIFICATION_TYPE_REFMap_Staged_Order[a_specification_type_refs[i]] < stage.A_SPECIFICATION_TYPE_REFMap_Staged_Order[a_specification_type_refs[j]]
+	})
+
+	for _, a_specification_type_ref := range a_specification_type_refs {
 		backRepoA_SPECIFICATION_TYPE_REF.CommitPhaseOneInstance(a_specification_type_ref)
 	}
 
@@ -157,9 +168,10 @@ func (backRepoA_SPECIFICATION_TYPE_REF *BackRepoA_SPECIFICATION_TYPE_REFStruct) 
 
 	// a_specification_type_ref is not staged anymore, remove a_specification_type_refDB
 	a_specification_type_refDB := backRepoA_SPECIFICATION_TYPE_REF.Map_A_SPECIFICATION_TYPE_REFDBID_A_SPECIFICATION_TYPE_REFDB[id]
-	query := backRepoA_SPECIFICATION_TYPE_REF.db.Unscoped().Delete(&a_specification_type_refDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoA_SPECIFICATION_TYPE_REF.db.Unscoped()
+	_, err := db.Delete(a_specification_type_refDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -183,9 +195,9 @@ func (backRepoA_SPECIFICATION_TYPE_REF *BackRepoA_SPECIFICATION_TYPE_REFStruct) 
 	var a_specification_type_refDB A_SPECIFICATION_TYPE_REFDB
 	a_specification_type_refDB.CopyBasicFieldsFromA_SPECIFICATION_TYPE_REF(a_specification_type_ref)
 
-	query := backRepoA_SPECIFICATION_TYPE_REF.db.Create(&a_specification_type_refDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoA_SPECIFICATION_TYPE_REF.db.Create(&a_specification_type_refDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -217,9 +229,9 @@ func (backRepoA_SPECIFICATION_TYPE_REF *BackRepoA_SPECIFICATION_TYPE_REFStruct) 
 		a_specification_type_refDB.CopyBasicFieldsFromA_SPECIFICATION_TYPE_REF(a_specification_type_ref)
 
 		// insertion point for translating pointers encodings into actual pointers
-		query := backRepoA_SPECIFICATION_TYPE_REF.db.Save(&a_specification_type_refDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoA_SPECIFICATION_TYPE_REF.db.Save(a_specification_type_refDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -238,9 +250,9 @@ func (backRepoA_SPECIFICATION_TYPE_REF *BackRepoA_SPECIFICATION_TYPE_REFStruct) 
 func (backRepoA_SPECIFICATION_TYPE_REF *BackRepoA_SPECIFICATION_TYPE_REFStruct) CheckoutPhaseOne() (Error error) {
 
 	a_specification_type_refDBArray := make([]A_SPECIFICATION_TYPE_REFDB, 0)
-	query := backRepoA_SPECIFICATION_TYPE_REF.db.Find(&a_specification_type_refDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoA_SPECIFICATION_TYPE_REF.db.Find(&a_specification_type_refDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -351,7 +363,7 @@ func (backRepo *BackRepoStruct) CheckoutA_SPECIFICATION_TYPE_REF(a_specification
 			var a_specification_type_refDB A_SPECIFICATION_TYPE_REFDB
 			a_specification_type_refDB.ID = id
 
-			if err := backRepo.BackRepoA_SPECIFICATION_TYPE_REF.db.First(&a_specification_type_refDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoA_SPECIFICATION_TYPE_REF.db.First(&a_specification_type_refDB, id); err != nil {
 				log.Fatalln("CheckoutA_SPECIFICATION_TYPE_REF : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoA_SPECIFICATION_TYPE_REF.CheckoutPhaseOneInstance(&a_specification_type_refDB)
@@ -510,9 +522,9 @@ func (backRepoA_SPECIFICATION_TYPE_REF *BackRepoA_SPECIFICATION_TYPE_REFStruct) 
 
 		a_specification_type_refDB_ID_atBackupTime := a_specification_type_refDB.ID
 		a_specification_type_refDB.ID = 0
-		query := backRepoA_SPECIFICATION_TYPE_REF.db.Create(a_specification_type_refDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoA_SPECIFICATION_TYPE_REF.db.Create(a_specification_type_refDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoA_SPECIFICATION_TYPE_REF.Map_A_SPECIFICATION_TYPE_REFDBID_A_SPECIFICATION_TYPE_REFDB[a_specification_type_refDB.ID] = a_specification_type_refDB
 		BackRepoA_SPECIFICATION_TYPE_REFid_atBckpTime_newID[a_specification_type_refDB_ID_atBackupTime] = a_specification_type_refDB.ID
@@ -547,9 +559,9 @@ func (backRepoA_SPECIFICATION_TYPE_REF *BackRepoA_SPECIFICATION_TYPE_REFStruct) 
 
 		a_specification_type_refDB_ID_atBackupTime := a_specification_type_refDB.ID
 		a_specification_type_refDB.ID = 0
-		query := backRepoA_SPECIFICATION_TYPE_REF.db.Create(a_specification_type_refDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoA_SPECIFICATION_TYPE_REF.db.Create(a_specification_type_refDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoA_SPECIFICATION_TYPE_REF.Map_A_SPECIFICATION_TYPE_REFDBID_A_SPECIFICATION_TYPE_REFDB[a_specification_type_refDB.ID] = a_specification_type_refDB
 		BackRepoA_SPECIFICATION_TYPE_REFid_atBckpTime_newID[a_specification_type_refDB_ID_atBackupTime] = a_specification_type_refDB.ID
@@ -571,9 +583,10 @@ func (backRepoA_SPECIFICATION_TYPE_REF *BackRepoA_SPECIFICATION_TYPE_REFStruct) 
 
 		// insertion point for reindexing pointers encoding
 		// update databse with new index encoding
-		query := backRepoA_SPECIFICATION_TYPE_REF.db.Model(a_specification_type_refDB).Updates(*a_specification_type_refDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoA_SPECIFICATION_TYPE_REF.db.Model(a_specification_type_refDB)
+		_, err := db.Updates(*a_specification_type_refDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

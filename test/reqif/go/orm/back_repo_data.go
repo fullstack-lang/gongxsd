@@ -171,9 +171,17 @@ type BackRepoData struct {
 	SPEC_RELATION_TYPEAPIs []*SPEC_RELATION_TYPEAPI
 
 	XHTML_CONTENTAPIs []*XHTML_CONTENTAPI
+
+	// index of the web socket for this stack type (unique among all stack instances)
+	GONG__Index int
 }
 
 func CopyBackRepoToBackRepoData(backRepo *BackRepoStruct, backRepoData *BackRepoData) {
+
+	// wait till backRepo is written by commit
+	backRepo.rwMutex.RLock()
+	defer backRepo.rwMutex.RUnlock()
+
 	// insertion point for slices copies
 	for _, alternative_idDB := range backRepo.BackRepoALTERNATIVE_ID.Map_ALTERNATIVE_IDDBID_ALTERNATIVE_IDDB {
 

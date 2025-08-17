@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/test/reqif/go/db"
 	"github.com/fullstack-lang/gongxsd/test/reqif/go/models"
 )
 
@@ -64,7 +65,7 @@ type A_ATTRIBUTE_VALUE_STRINGDB struct {
 
 	// Declation for basic field a_attribute_value_stringDB.Name
 	Name_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	A_ATTRIBUTE_VALUE_STRINGPointersEncoding
@@ -107,17 +108,17 @@ type BackRepoA_ATTRIBUTE_VALUE_STRINGStruct struct {
 	// stores A_ATTRIBUTE_VALUE_STRING according to their gorm ID
 	Map_A_ATTRIBUTE_VALUE_STRINGDBID_A_ATTRIBUTE_VALUE_STRINGPtr map[uint]*models.A_ATTRIBUTE_VALUE_STRING
 
-	db *gorm.DB
+	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoA_ATTRIBUTE_VALUE_STRING *BackRepoA_ATTRIBUTE_VALUE_STRINGStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoA_ATTRIBUTE_VALUE_STRING *BackRepoA_ATTRIBUTE_VALUE_STRINGStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoA_ATTRIBUTE_VALUE_STRING.stage
 	return
 }
 
-func (backRepoA_ATTRIBUTE_VALUE_STRING *BackRepoA_ATTRIBUTE_VALUE_STRINGStruct) GetDB() *gorm.DB {
+func (backRepoA_ATTRIBUTE_VALUE_STRING *BackRepoA_ATTRIBUTE_VALUE_STRINGStruct) GetDB() db.DBInterface {
 	return backRepoA_ATTRIBUTE_VALUE_STRING.db
 }
 
@@ -130,9 +131,19 @@ func (backRepoA_ATTRIBUTE_VALUE_STRING *BackRepoA_ATTRIBUTE_VALUE_STRINGStruct) 
 
 // BackRepoA_ATTRIBUTE_VALUE_STRING.CommitPhaseOne commits all staged instances of A_ATTRIBUTE_VALUE_STRING to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoA_ATTRIBUTE_VALUE_STRING *BackRepoA_ATTRIBUTE_VALUE_STRINGStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoA_ATTRIBUTE_VALUE_STRING *BackRepoA_ATTRIBUTE_VALUE_STRINGStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var a_attribute_value_strings []*models.A_ATTRIBUTE_VALUE_STRING
 	for a_attribute_value_string := range stage.A_ATTRIBUTE_VALUE_STRINGs {
+		a_attribute_value_strings = append(a_attribute_value_strings, a_attribute_value_string)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(a_attribute_value_strings, func(i, j int) bool {
+		return stage.A_ATTRIBUTE_VALUE_STRINGMap_Staged_Order[a_attribute_value_strings[i]] < stage.A_ATTRIBUTE_VALUE_STRINGMap_Staged_Order[a_attribute_value_strings[j]]
+	})
+
+	for _, a_attribute_value_string := range a_attribute_value_strings {
 		backRepoA_ATTRIBUTE_VALUE_STRING.CommitPhaseOneInstance(a_attribute_value_string)
 	}
 
@@ -154,9 +165,10 @@ func (backRepoA_ATTRIBUTE_VALUE_STRING *BackRepoA_ATTRIBUTE_VALUE_STRINGStruct) 
 
 	// a_attribute_value_string is not staged anymore, remove a_attribute_value_stringDB
 	a_attribute_value_stringDB := backRepoA_ATTRIBUTE_VALUE_STRING.Map_A_ATTRIBUTE_VALUE_STRINGDBID_A_ATTRIBUTE_VALUE_STRINGDB[id]
-	query := backRepoA_ATTRIBUTE_VALUE_STRING.db.Unscoped().Delete(&a_attribute_value_stringDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoA_ATTRIBUTE_VALUE_STRING.db.Unscoped()
+	_, err := db.Delete(a_attribute_value_stringDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -180,9 +192,9 @@ func (backRepoA_ATTRIBUTE_VALUE_STRING *BackRepoA_ATTRIBUTE_VALUE_STRINGStruct) 
 	var a_attribute_value_stringDB A_ATTRIBUTE_VALUE_STRINGDB
 	a_attribute_value_stringDB.CopyBasicFieldsFromA_ATTRIBUTE_VALUE_STRING(a_attribute_value_string)
 
-	query := backRepoA_ATTRIBUTE_VALUE_STRING.db.Create(&a_attribute_value_stringDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoA_ATTRIBUTE_VALUE_STRING.db.Create(&a_attribute_value_stringDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -232,9 +244,9 @@ func (backRepoA_ATTRIBUTE_VALUE_STRING *BackRepoA_ATTRIBUTE_VALUE_STRINGStruct) 
 				append(a_attribute_value_stringDB.A_ATTRIBUTE_VALUE_STRINGPointersEncoding.ATTRIBUTE_VALUE_STRING, int(attribute_value_stringAssocEnd_DB.ID))
 		}
 
-		query := backRepoA_ATTRIBUTE_VALUE_STRING.db.Save(&a_attribute_value_stringDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoA_ATTRIBUTE_VALUE_STRING.db.Save(a_attribute_value_stringDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -253,9 +265,9 @@ func (backRepoA_ATTRIBUTE_VALUE_STRING *BackRepoA_ATTRIBUTE_VALUE_STRINGStruct) 
 func (backRepoA_ATTRIBUTE_VALUE_STRING *BackRepoA_ATTRIBUTE_VALUE_STRINGStruct) CheckoutPhaseOne() (Error error) {
 
 	a_attribute_value_stringDBArray := make([]A_ATTRIBUTE_VALUE_STRINGDB, 0)
-	query := backRepoA_ATTRIBUTE_VALUE_STRING.db.Find(&a_attribute_value_stringDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoA_ATTRIBUTE_VALUE_STRING.db.Find(&a_attribute_value_stringDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -375,7 +387,7 @@ func (backRepo *BackRepoStruct) CheckoutA_ATTRIBUTE_VALUE_STRING(a_attribute_val
 			var a_attribute_value_stringDB A_ATTRIBUTE_VALUE_STRINGDB
 			a_attribute_value_stringDB.ID = id
 
-			if err := backRepo.BackRepoA_ATTRIBUTE_VALUE_STRING.db.First(&a_attribute_value_stringDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoA_ATTRIBUTE_VALUE_STRING.db.First(&a_attribute_value_stringDB, id); err != nil {
 				log.Fatalln("CheckoutA_ATTRIBUTE_VALUE_STRING : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoA_ATTRIBUTE_VALUE_STRING.CheckoutPhaseOneInstance(&a_attribute_value_stringDB)
@@ -522,9 +534,9 @@ func (backRepoA_ATTRIBUTE_VALUE_STRING *BackRepoA_ATTRIBUTE_VALUE_STRINGStruct) 
 
 		a_attribute_value_stringDB_ID_atBackupTime := a_attribute_value_stringDB.ID
 		a_attribute_value_stringDB.ID = 0
-		query := backRepoA_ATTRIBUTE_VALUE_STRING.db.Create(a_attribute_value_stringDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoA_ATTRIBUTE_VALUE_STRING.db.Create(a_attribute_value_stringDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoA_ATTRIBUTE_VALUE_STRING.Map_A_ATTRIBUTE_VALUE_STRINGDBID_A_ATTRIBUTE_VALUE_STRINGDB[a_attribute_value_stringDB.ID] = a_attribute_value_stringDB
 		BackRepoA_ATTRIBUTE_VALUE_STRINGid_atBckpTime_newID[a_attribute_value_stringDB_ID_atBackupTime] = a_attribute_value_stringDB.ID
@@ -559,9 +571,9 @@ func (backRepoA_ATTRIBUTE_VALUE_STRING *BackRepoA_ATTRIBUTE_VALUE_STRINGStruct) 
 
 		a_attribute_value_stringDB_ID_atBackupTime := a_attribute_value_stringDB.ID
 		a_attribute_value_stringDB.ID = 0
-		query := backRepoA_ATTRIBUTE_VALUE_STRING.db.Create(a_attribute_value_stringDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoA_ATTRIBUTE_VALUE_STRING.db.Create(a_attribute_value_stringDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoA_ATTRIBUTE_VALUE_STRING.Map_A_ATTRIBUTE_VALUE_STRINGDBID_A_ATTRIBUTE_VALUE_STRINGDB[a_attribute_value_stringDB.ID] = a_attribute_value_stringDB
 		BackRepoA_ATTRIBUTE_VALUE_STRINGid_atBckpTime_newID[a_attribute_value_stringDB_ID_atBackupTime] = a_attribute_value_stringDB.ID
@@ -583,9 +595,10 @@ func (backRepoA_ATTRIBUTE_VALUE_STRING *BackRepoA_ATTRIBUTE_VALUE_STRINGStruct) 
 
 		// insertion point for reindexing pointers encoding
 		// update databse with new index encoding
-		query := backRepoA_ATTRIBUTE_VALUE_STRING.db.Model(a_attribute_value_stringDB).Updates(*a_attribute_value_stringDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoA_ATTRIBUTE_VALUE_STRING.db.Model(a_attribute_value_stringDB)
+		_, err := db.Updates(*a_attribute_value_stringDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

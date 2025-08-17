@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/test/reqif/go/db"
 	"github.com/fullstack-lang/gongxsd/test/reqif/go/models"
 )
 
@@ -65,7 +66,7 @@ type A_THE_HEADERDB struct {
 
 	// Declation for basic field a_the_headerDB.Name
 	Name_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	A_THE_HEADERPointersEncoding
@@ -108,17 +109,17 @@ type BackRepoA_THE_HEADERStruct struct {
 	// stores A_THE_HEADER according to their gorm ID
 	Map_A_THE_HEADERDBID_A_THE_HEADERPtr map[uint]*models.A_THE_HEADER
 
-	db *gorm.DB
+	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoA_THE_HEADER *BackRepoA_THE_HEADERStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoA_THE_HEADER *BackRepoA_THE_HEADERStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoA_THE_HEADER.stage
 	return
 }
 
-func (backRepoA_THE_HEADER *BackRepoA_THE_HEADERStruct) GetDB() *gorm.DB {
+func (backRepoA_THE_HEADER *BackRepoA_THE_HEADERStruct) GetDB() db.DBInterface {
 	return backRepoA_THE_HEADER.db
 }
 
@@ -131,9 +132,19 @@ func (backRepoA_THE_HEADER *BackRepoA_THE_HEADERStruct) GetA_THE_HEADERDBFromA_T
 
 // BackRepoA_THE_HEADER.CommitPhaseOne commits all staged instances of A_THE_HEADER to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoA_THE_HEADER *BackRepoA_THE_HEADERStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoA_THE_HEADER *BackRepoA_THE_HEADERStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var a_the_headers []*models.A_THE_HEADER
 	for a_the_header := range stage.A_THE_HEADERs {
+		a_the_headers = append(a_the_headers, a_the_header)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(a_the_headers, func(i, j int) bool {
+		return stage.A_THE_HEADERMap_Staged_Order[a_the_headers[i]] < stage.A_THE_HEADERMap_Staged_Order[a_the_headers[j]]
+	})
+
+	for _, a_the_header := range a_the_headers {
 		backRepoA_THE_HEADER.CommitPhaseOneInstance(a_the_header)
 	}
 
@@ -155,9 +166,10 @@ func (backRepoA_THE_HEADER *BackRepoA_THE_HEADERStruct) CommitDeleteInstance(id 
 
 	// a_the_header is not staged anymore, remove a_the_headerDB
 	a_the_headerDB := backRepoA_THE_HEADER.Map_A_THE_HEADERDBID_A_THE_HEADERDB[id]
-	query := backRepoA_THE_HEADER.db.Unscoped().Delete(&a_the_headerDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoA_THE_HEADER.db.Unscoped()
+	_, err := db.Delete(a_the_headerDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -181,9 +193,9 @@ func (backRepoA_THE_HEADER *BackRepoA_THE_HEADERStruct) CommitPhaseOneInstance(a
 	var a_the_headerDB A_THE_HEADERDB
 	a_the_headerDB.CopyBasicFieldsFromA_THE_HEADER(a_the_header)
 
-	query := backRepoA_THE_HEADER.db.Create(&a_the_headerDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoA_THE_HEADER.db.Create(&a_the_headerDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -227,9 +239,9 @@ func (backRepoA_THE_HEADER *BackRepoA_THE_HEADERStruct) CommitPhaseTwoInstance(b
 			a_the_headerDB.REQ_IF_HEADERID.Valid = true
 		}
 
-		query := backRepoA_THE_HEADER.db.Save(&a_the_headerDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoA_THE_HEADER.db.Save(a_the_headerDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -248,9 +260,9 @@ func (backRepoA_THE_HEADER *BackRepoA_THE_HEADERStruct) CommitPhaseTwoInstance(b
 func (backRepoA_THE_HEADER *BackRepoA_THE_HEADERStruct) CheckoutPhaseOne() (Error error) {
 
 	a_the_headerDBArray := make([]A_THE_HEADERDB, 0)
-	query := backRepoA_THE_HEADER.db.Find(&a_the_headerDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoA_THE_HEADER.db.Find(&a_the_headerDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -340,11 +352,27 @@ func (backRepoA_THE_HEADER *BackRepoA_THE_HEADERStruct) CheckoutPhaseTwoInstance
 func (a_the_headerDB *A_THE_HEADERDB) DecodePointers(backRepo *BackRepoStruct, a_the_header *models.A_THE_HEADER) {
 
 	// insertion point for checkout of pointer encoding
-	// REQ_IF_HEADER field
-	a_the_header.REQ_IF_HEADER = nil
-	if a_the_headerDB.REQ_IF_HEADERID.Int64 != 0 {
-		a_the_header.REQ_IF_HEADER = backRepo.BackRepoREQ_IF_HEADER.Map_REQ_IF_HEADERDBID_REQ_IF_HEADERPtr[uint(a_the_headerDB.REQ_IF_HEADERID.Int64)]
+	// REQ_IF_HEADER field	
+	{
+		id := a_the_headerDB.REQ_IF_HEADERID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoREQ_IF_HEADER.Map_REQ_IF_HEADERDBID_REQ_IF_HEADERPtr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: a_the_header.REQ_IF_HEADER, unknown pointer id", id)
+				a_the_header.REQ_IF_HEADER = nil
+			} else {
+				// updates only if field has changed
+				if a_the_header.REQ_IF_HEADER == nil || a_the_header.REQ_IF_HEADER != tmp {
+					a_the_header.REQ_IF_HEADER = tmp
+				}
+			}
+		} else {
+			a_the_header.REQ_IF_HEADER = nil
+		}
 	}
+	
 	return
 }
 
@@ -366,7 +394,7 @@ func (backRepo *BackRepoStruct) CheckoutA_THE_HEADER(a_the_header *models.A_THE_
 			var a_the_headerDB A_THE_HEADERDB
 			a_the_headerDB.ID = id
 
-			if err := backRepo.BackRepoA_THE_HEADER.db.First(&a_the_headerDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoA_THE_HEADER.db.First(&a_the_headerDB, id); err != nil {
 				log.Fatalln("CheckoutA_THE_HEADER : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoA_THE_HEADER.CheckoutPhaseOneInstance(&a_the_headerDB)
@@ -513,9 +541,9 @@ func (backRepoA_THE_HEADER *BackRepoA_THE_HEADERStruct) rowVisitorA_THE_HEADER(r
 
 		a_the_headerDB_ID_atBackupTime := a_the_headerDB.ID
 		a_the_headerDB.ID = 0
-		query := backRepoA_THE_HEADER.db.Create(a_the_headerDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoA_THE_HEADER.db.Create(a_the_headerDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoA_THE_HEADER.Map_A_THE_HEADERDBID_A_THE_HEADERDB[a_the_headerDB.ID] = a_the_headerDB
 		BackRepoA_THE_HEADERid_atBckpTime_newID[a_the_headerDB_ID_atBackupTime] = a_the_headerDB.ID
@@ -550,9 +578,9 @@ func (backRepoA_THE_HEADER *BackRepoA_THE_HEADERStruct) RestorePhaseOne(dirPath 
 
 		a_the_headerDB_ID_atBackupTime := a_the_headerDB.ID
 		a_the_headerDB.ID = 0
-		query := backRepoA_THE_HEADER.db.Create(a_the_headerDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoA_THE_HEADER.db.Create(a_the_headerDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoA_THE_HEADER.Map_A_THE_HEADERDBID_A_THE_HEADERDB[a_the_headerDB.ID] = a_the_headerDB
 		BackRepoA_THE_HEADERid_atBckpTime_newID[a_the_headerDB_ID_atBackupTime] = a_the_headerDB.ID
@@ -580,9 +608,10 @@ func (backRepoA_THE_HEADER *BackRepoA_THE_HEADERStruct) RestorePhaseTwo() {
 		}
 
 		// update databse with new index encoding
-		query := backRepoA_THE_HEADER.db.Model(a_the_headerDB).Updates(*a_the_headerDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoA_THE_HEADER.db.Model(a_the_headerDB)
+		_, err := db.Updates(*a_the_headerDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

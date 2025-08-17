@@ -2,17 +2,15 @@
 package probe
 
 import (
-	"log"
-
 	gong_models "github.com/fullstack-lang/gong/go/models"
-	gongtree_models "github.com/fullstack-lang/gongtree/go/models"
+	gongtree_models "github.com/fullstack-lang/gong/lib/tree/go/models"
 
 	"github.com/fullstack-lang/gongxsd/test/books/go/models"
 )
 
 type TreeNodeImplGongstruct struct {
 	gongStruct *gong_models.GongStruct
-	probe *Probe
+	probe      *Probe
 }
 
 func NewTreeNodeImplGongstruct(
@@ -27,7 +25,7 @@ func NewTreeNodeImplGongstruct(
 }
 
 func (nodeImplGongstruct *TreeNodeImplGongstruct) OnAfterUpdate(
-	gongtreeStage *gongtree_models.StageStruct,
+	gongtreeStage *gongtree_models.Stage,
 	stagedNode, frontNode *gongtree_models.Node) {
 
 	// setting the value of the staged node	to the new value
@@ -49,20 +47,20 @@ func (nodeImplGongstruct *TreeNodeImplGongstruct) OnAfterUpdate(
 
 	// the node was selected. Therefore, one request the
 	// table to route to the table
-	log.Println("NodeImplGongstruct:OnAfterUpdate with: ", nodeImplGongstruct.gongStruct.GetName())
+	// log.Println("NodeImplGongstruct:OnAfterUpdate with: ", nodeImplGongstruct.gongStruct.GetName())
 
 	// insertion point
 	if nodeImplGongstruct.gongStruct.GetName() == "BookType" {
-		fillUpTable[models.BookType](nodeImplGongstruct.probe)
+		updateAndCommitTable[models.BookType](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Books" {
-		fillUpTable[models.Books](nodeImplGongstruct.probe)
+		updateAndCommitTable[models.Books](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Credit" {
-		fillUpTable[models.Credit](nodeImplGongstruct.probe)
+		updateAndCommitTable[models.Credit](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Link" {
-		fillUpTable[models.Link](nodeImplGongstruct.probe)
+		updateAndCommitTable[models.Link](nodeImplGongstruct.probe)
 	}
 
 	// set color for node and reset all other nodes color

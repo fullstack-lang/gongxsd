@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/test/reqif/go/db"
 	"github.com/fullstack-lang/gongxsd/test/reqif/go/models"
 )
 
@@ -83,7 +84,7 @@ type DATATYPE_DEFINITION_INTEGERDB struct {
 
 	// Declation for basic field datatype_definition_integerDB.MIN
 	MIN_Data sql.NullInt64
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	DATATYPE_DEFINITION_INTEGERPointersEncoding
@@ -144,17 +145,17 @@ type BackRepoDATATYPE_DEFINITION_INTEGERStruct struct {
 	// stores DATATYPE_DEFINITION_INTEGER according to their gorm ID
 	Map_DATATYPE_DEFINITION_INTEGERDBID_DATATYPE_DEFINITION_INTEGERPtr map[uint]*models.DATATYPE_DEFINITION_INTEGER
 
-	db *gorm.DB
+	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoDATATYPE_DEFINITION_INTEGER *BackRepoDATATYPE_DEFINITION_INTEGERStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoDATATYPE_DEFINITION_INTEGER *BackRepoDATATYPE_DEFINITION_INTEGERStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoDATATYPE_DEFINITION_INTEGER.stage
 	return
 }
 
-func (backRepoDATATYPE_DEFINITION_INTEGER *BackRepoDATATYPE_DEFINITION_INTEGERStruct) GetDB() *gorm.DB {
+func (backRepoDATATYPE_DEFINITION_INTEGER *BackRepoDATATYPE_DEFINITION_INTEGERStruct) GetDB() db.DBInterface {
 	return backRepoDATATYPE_DEFINITION_INTEGER.db
 }
 
@@ -167,9 +168,19 @@ func (backRepoDATATYPE_DEFINITION_INTEGER *BackRepoDATATYPE_DEFINITION_INTEGERSt
 
 // BackRepoDATATYPE_DEFINITION_INTEGER.CommitPhaseOne commits all staged instances of DATATYPE_DEFINITION_INTEGER to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoDATATYPE_DEFINITION_INTEGER *BackRepoDATATYPE_DEFINITION_INTEGERStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoDATATYPE_DEFINITION_INTEGER *BackRepoDATATYPE_DEFINITION_INTEGERStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var datatype_definition_integers []*models.DATATYPE_DEFINITION_INTEGER
 	for datatype_definition_integer := range stage.DATATYPE_DEFINITION_INTEGERs {
+		datatype_definition_integers = append(datatype_definition_integers, datatype_definition_integer)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(datatype_definition_integers, func(i, j int) bool {
+		return stage.DATATYPE_DEFINITION_INTEGERMap_Staged_Order[datatype_definition_integers[i]] < stage.DATATYPE_DEFINITION_INTEGERMap_Staged_Order[datatype_definition_integers[j]]
+	})
+
+	for _, datatype_definition_integer := range datatype_definition_integers {
 		backRepoDATATYPE_DEFINITION_INTEGER.CommitPhaseOneInstance(datatype_definition_integer)
 	}
 
@@ -191,9 +202,10 @@ func (backRepoDATATYPE_DEFINITION_INTEGER *BackRepoDATATYPE_DEFINITION_INTEGERSt
 
 	// datatype_definition_integer is not staged anymore, remove datatype_definition_integerDB
 	datatype_definition_integerDB := backRepoDATATYPE_DEFINITION_INTEGER.Map_DATATYPE_DEFINITION_INTEGERDBID_DATATYPE_DEFINITION_INTEGERDB[id]
-	query := backRepoDATATYPE_DEFINITION_INTEGER.db.Unscoped().Delete(&datatype_definition_integerDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoDATATYPE_DEFINITION_INTEGER.db.Unscoped()
+	_, err := db.Delete(datatype_definition_integerDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -217,9 +229,9 @@ func (backRepoDATATYPE_DEFINITION_INTEGER *BackRepoDATATYPE_DEFINITION_INTEGERSt
 	var datatype_definition_integerDB DATATYPE_DEFINITION_INTEGERDB
 	datatype_definition_integerDB.CopyBasicFieldsFromDATATYPE_DEFINITION_INTEGER(datatype_definition_integer)
 
-	query := backRepoDATATYPE_DEFINITION_INTEGER.db.Create(&datatype_definition_integerDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoDATATYPE_DEFINITION_INTEGER.db.Create(&datatype_definition_integerDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -263,9 +275,9 @@ func (backRepoDATATYPE_DEFINITION_INTEGER *BackRepoDATATYPE_DEFINITION_INTEGERSt
 			datatype_definition_integerDB.ALTERNATIVE_IDID.Valid = true
 		}
 
-		query := backRepoDATATYPE_DEFINITION_INTEGER.db.Save(&datatype_definition_integerDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoDATATYPE_DEFINITION_INTEGER.db.Save(datatype_definition_integerDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -284,9 +296,9 @@ func (backRepoDATATYPE_DEFINITION_INTEGER *BackRepoDATATYPE_DEFINITION_INTEGERSt
 func (backRepoDATATYPE_DEFINITION_INTEGER *BackRepoDATATYPE_DEFINITION_INTEGERStruct) CheckoutPhaseOne() (Error error) {
 
 	datatype_definition_integerDBArray := make([]DATATYPE_DEFINITION_INTEGERDB, 0)
-	query := backRepoDATATYPE_DEFINITION_INTEGER.db.Find(&datatype_definition_integerDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoDATATYPE_DEFINITION_INTEGER.db.Find(&datatype_definition_integerDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -376,11 +388,27 @@ func (backRepoDATATYPE_DEFINITION_INTEGER *BackRepoDATATYPE_DEFINITION_INTEGERSt
 func (datatype_definition_integerDB *DATATYPE_DEFINITION_INTEGERDB) DecodePointers(backRepo *BackRepoStruct, datatype_definition_integer *models.DATATYPE_DEFINITION_INTEGER) {
 
 	// insertion point for checkout of pointer encoding
-	// ALTERNATIVE_ID field
-	datatype_definition_integer.ALTERNATIVE_ID = nil
-	if datatype_definition_integerDB.ALTERNATIVE_IDID.Int64 != 0 {
-		datatype_definition_integer.ALTERNATIVE_ID = backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(datatype_definition_integerDB.ALTERNATIVE_IDID.Int64)]
+	// ALTERNATIVE_ID field	
+	{
+		id := datatype_definition_integerDB.ALTERNATIVE_IDID.Int64
+		if id != 0 {
+			tmp, ok := backRepo.BackRepoA_ALTERNATIVE_ID.Map_A_ALTERNATIVE_IDDBID_A_ALTERNATIVE_IDPtr[uint(id)]
+
+			// if the pointer id is unknown, it is not a problem, maybe the target was removed from the front
+			if !ok {
+				log.Println("DecodePointers: datatype_definition_integer.ALTERNATIVE_ID, unknown pointer id", id)
+				datatype_definition_integer.ALTERNATIVE_ID = nil
+			} else {
+				// updates only if field has changed
+				if datatype_definition_integer.ALTERNATIVE_ID == nil || datatype_definition_integer.ALTERNATIVE_ID != tmp {
+					datatype_definition_integer.ALTERNATIVE_ID = tmp
+				}
+			}
+		} else {
+			datatype_definition_integer.ALTERNATIVE_ID = nil
+		}
 	}
+	
 	return
 }
 
@@ -402,7 +430,7 @@ func (backRepo *BackRepoStruct) CheckoutDATATYPE_DEFINITION_INTEGER(datatype_def
 			var datatype_definition_integerDB DATATYPE_DEFINITION_INTEGERDB
 			datatype_definition_integerDB.ID = id
 
-			if err := backRepo.BackRepoDATATYPE_DEFINITION_INTEGER.db.First(&datatype_definition_integerDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoDATATYPE_DEFINITION_INTEGER.db.First(&datatype_definition_integerDB, id); err != nil {
 				log.Fatalln("CheckoutDATATYPE_DEFINITION_INTEGER : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoDATATYPE_DEFINITION_INTEGER.CheckoutPhaseOneInstance(&datatype_definition_integerDB)
@@ -621,9 +649,9 @@ func (backRepoDATATYPE_DEFINITION_INTEGER *BackRepoDATATYPE_DEFINITION_INTEGERSt
 
 		datatype_definition_integerDB_ID_atBackupTime := datatype_definition_integerDB.ID
 		datatype_definition_integerDB.ID = 0
-		query := backRepoDATATYPE_DEFINITION_INTEGER.db.Create(datatype_definition_integerDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoDATATYPE_DEFINITION_INTEGER.db.Create(datatype_definition_integerDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoDATATYPE_DEFINITION_INTEGER.Map_DATATYPE_DEFINITION_INTEGERDBID_DATATYPE_DEFINITION_INTEGERDB[datatype_definition_integerDB.ID] = datatype_definition_integerDB
 		BackRepoDATATYPE_DEFINITION_INTEGERid_atBckpTime_newID[datatype_definition_integerDB_ID_atBackupTime] = datatype_definition_integerDB.ID
@@ -658,9 +686,9 @@ func (backRepoDATATYPE_DEFINITION_INTEGER *BackRepoDATATYPE_DEFINITION_INTEGERSt
 
 		datatype_definition_integerDB_ID_atBackupTime := datatype_definition_integerDB.ID
 		datatype_definition_integerDB.ID = 0
-		query := backRepoDATATYPE_DEFINITION_INTEGER.db.Create(datatype_definition_integerDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoDATATYPE_DEFINITION_INTEGER.db.Create(datatype_definition_integerDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoDATATYPE_DEFINITION_INTEGER.Map_DATATYPE_DEFINITION_INTEGERDBID_DATATYPE_DEFINITION_INTEGERDB[datatype_definition_integerDB.ID] = datatype_definition_integerDB
 		BackRepoDATATYPE_DEFINITION_INTEGERid_atBckpTime_newID[datatype_definition_integerDB_ID_atBackupTime] = datatype_definition_integerDB.ID
@@ -688,9 +716,10 @@ func (backRepoDATATYPE_DEFINITION_INTEGER *BackRepoDATATYPE_DEFINITION_INTEGERSt
 		}
 
 		// update databse with new index encoding
-		query := backRepoDATATYPE_DEFINITION_INTEGER.db.Model(datatype_definition_integerDB).Updates(*datatype_definition_integerDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoDATATYPE_DEFINITION_INTEGER.db.Model(datatype_definition_integerDB)
+		_, err := db.Updates(*datatype_definition_integerDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

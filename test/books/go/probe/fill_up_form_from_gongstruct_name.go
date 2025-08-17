@@ -2,7 +2,7 @@
 package probe
 
 import (
-	form "github.com/fullstack-lang/gongtable/go/models"
+	form "github.com/fullstack-lang/gong/lib/table/go/models"
 
 	"github.com/fullstack-lang/gongxsd/test/books/go/models"
 )
@@ -14,7 +14,6 @@ func FillUpFormFromGongstructName(
 ) {
 	formStage := probe.formStage
 	formStage.Reset()
-	formStage.Commit()
 
 	var prefix string
 
@@ -28,7 +27,7 @@ func FillUpFormFromGongstructName(
 	// insertion point
 	case "BookType":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "BookType Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__BookTypeFormCallback(
@@ -41,7 +40,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(booktype, formGroup, probe)
 	case "Books":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "Books Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__BooksFormCallback(
@@ -54,7 +53,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(books, formGroup, probe)
 	case "Credit":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "Credit Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__CreditFormCallback(
@@ -67,7 +66,7 @@ func FillUpFormFromGongstructName(
 		FillUpForm(credit, formGroup, probe)
 	case "Link":
 		formGroup := (&form.FormGroup{
-			Name:  form.FormGroupDefaultName.ToString(),
+			Name:  FormName,
 			Label: prefix + "Link Form",
 		}).Stage(formStage)
 		formGroup.OnSave = __gong__New__LinkFormCallback(

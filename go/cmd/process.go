@@ -7,9 +7,9 @@ import (
 	"strings"
 	"time"
 
+	split_static "github.com/fullstack-lang/gong/lib/split/go/static"
 	"github.com/fullstack-lang/gongxsd/go/models"
 	gongxsd_stack "github.com/fullstack-lang/gongxsd/go/stack"
-	gongxsd_static "github.com/fullstack-lang/gongxsd/go/static"
 
 	// insertion point for models import
 	gongxsd_models "github.com/fullstack-lang/gongxsd/go/models"
@@ -29,7 +29,7 @@ func process(args []string) (r *gin.Engine, stack *gongxsd_stack.Stack) {
 	}
 
 	// setup the static file server and get the controller
-	r = gongxsd_static.ServeStaticFiles(false)
+	r = split_static.ServeStaticFiles(false)
 
 	// setup model stack with its probe
 	stack = gongxsd_stack.NewStack(r, "gongxsd", *unmarshallFromCode, *marshallOnCommit, "", false, true)

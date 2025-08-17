@@ -58,24 +58,31 @@ func (controller *Controller) GetATTRIBUTE_DEFINITION_DATEs(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("GetATTRIBUTE_DEFINITION_DATEs", "GONG__StackPath", stackPath)
+			// log.Println("GetATTRIBUTE_DEFINITION_DATEs", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "GET Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoATTRIBUTE_DEFINITION_DATE.GetDB()
 
-	query := db.Find(&attribute_definition_dateDBs)
-	if query.Error != nil {
+	_, err := db.Find(&attribute_definition_dateDBs)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -121,15 +128,22 @@ func (controller *Controller) PostATTRIBUTE_DEFINITION_DATE(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("PostATTRIBUTE_DEFINITION_DATEs", "GONG__StackPath", stackPath)
+			// log.Println("PostATTRIBUTE_DEFINITION_DATEs", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "Post Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoATTRIBUTE_DEFINITION_DATE.GetDB()
 
@@ -151,12 +165,12 @@ func (controller *Controller) PostATTRIBUTE_DEFINITION_DATE(c *gin.Context) {
 	attribute_definition_dateDB.ATTRIBUTE_DEFINITION_DATEPointersEncoding = input.ATTRIBUTE_DEFINITION_DATEPointersEncoding
 	attribute_definition_dateDB.CopyBasicFieldsFromATTRIBUTE_DEFINITION_DATE_WOP(&input.ATTRIBUTE_DEFINITION_DATE_WOP)
 
-	query := db.Create(&attribute_definition_dateDB)
-	if query.Error != nil {
+	_, err = db.Create(&attribute_definition_dateDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -191,21 +205,28 @@ func (controller *Controller) GetATTRIBUTE_DEFINITION_DATE(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("GetATTRIBUTE_DEFINITION_DATE", "GONG__StackPath", stackPath)
+			// log.Println("GetATTRIBUTE_DEFINITION_DATE", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoATTRIBUTE_DEFINITION_DATE.GetDB()
 
 	// Get attribute_definition_dateDB in DB
 	var attribute_definition_dateDB orm.ATTRIBUTE_DEFINITION_DATEDB
-	if err := db.First(&attribute_definition_dateDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&attribute_definition_dateDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -240,15 +261,22 @@ func (controller *Controller) UpdateATTRIBUTE_DEFINITION_DATE(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("UpdateATTRIBUTE_DEFINITION_DATE", "GONG__StackPath", stackPath)
+			// log.Println("UpdateATTRIBUTE_DEFINITION_DATE", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "PATCH Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoATTRIBUTE_DEFINITION_DATE.GetDB()
 
@@ -264,13 +292,13 @@ func (controller *Controller) UpdateATTRIBUTE_DEFINITION_DATE(c *gin.Context) {
 	var attribute_definition_dateDB orm.ATTRIBUTE_DEFINITION_DATEDB
 
 	// fetch the attribute_definition_date
-	query := db.First(&attribute_definition_dateDB, c.Param("id"))
+	_, err := db.First(&attribute_definition_dateDB, c.Param("id"))
 
-	if query.Error != nil {
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -279,12 +307,13 @@ func (controller *Controller) UpdateATTRIBUTE_DEFINITION_DATE(c *gin.Context) {
 	attribute_definition_dateDB.CopyBasicFieldsFromATTRIBUTE_DEFINITION_DATE_WOP(&input.ATTRIBUTE_DEFINITION_DATE_WOP)
 	attribute_definition_dateDB.ATTRIBUTE_DEFINITION_DATEPointersEncoding = input.ATTRIBUTE_DEFINITION_DATEPointersEncoding
 
-	query = db.Model(&attribute_definition_dateDB).Updates(attribute_definition_dateDB)
-	if query.Error != nil {
+	db, _ = db.Model(&attribute_definition_dateDB)
+	_, err = db.Updates(&attribute_definition_dateDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -329,21 +358,28 @@ func (controller *Controller) DeleteATTRIBUTE_DEFINITION_DATE(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("DeleteATTRIBUTE_DEFINITION_DATE", "GONG__StackPath", stackPath)
+			// log.Println("DeleteATTRIBUTE_DEFINITION_DATE", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "DELETE Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoATTRIBUTE_DEFINITION_DATE.GetDB()
 
 	// Get model if exist
 	var attribute_definition_dateDB orm.ATTRIBUTE_DEFINITION_DATEDB
-	if err := db.First(&attribute_definition_dateDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&attribute_definition_dateDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -353,7 +389,8 @@ func (controller *Controller) DeleteATTRIBUTE_DEFINITION_DATE(c *gin.Context) {
 	}
 
 	// with gorm.Model field, default delete is a soft delete. Unscoped() force delete
-	db.Unscoped().Delete(&attribute_definition_dateDB)
+	db.Unscoped()
+	db.Delete(&attribute_definition_dateDB)
 
 	// get an instance (not staged) from DB instance, and call callback function
 	attribute_definition_dateDeleted := new(models.ATTRIBUTE_DEFINITION_DATE)

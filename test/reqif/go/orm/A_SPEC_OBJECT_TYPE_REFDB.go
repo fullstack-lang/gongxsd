@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/test/reqif/go/db"
 	"github.com/fullstack-lang/gongxsd/test/reqif/go/models"
 )
 
@@ -64,7 +65,7 @@ type A_SPEC_OBJECT_TYPE_REFDB struct {
 
 	// Declation for basic field a_spec_object_type_refDB.SPEC_OBJECT_TYPE_REF
 	SPEC_OBJECT_TYPE_REF_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	A_SPEC_OBJECT_TYPE_REFPointersEncoding
@@ -110,17 +111,17 @@ type BackRepoA_SPEC_OBJECT_TYPE_REFStruct struct {
 	// stores A_SPEC_OBJECT_TYPE_REF according to their gorm ID
 	Map_A_SPEC_OBJECT_TYPE_REFDBID_A_SPEC_OBJECT_TYPE_REFPtr map[uint]*models.A_SPEC_OBJECT_TYPE_REF
 
-	db *gorm.DB
+	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoA_SPEC_OBJECT_TYPE_REF *BackRepoA_SPEC_OBJECT_TYPE_REFStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoA_SPEC_OBJECT_TYPE_REF *BackRepoA_SPEC_OBJECT_TYPE_REFStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoA_SPEC_OBJECT_TYPE_REF.stage
 	return
 }
 
-func (backRepoA_SPEC_OBJECT_TYPE_REF *BackRepoA_SPEC_OBJECT_TYPE_REFStruct) GetDB() *gorm.DB {
+func (backRepoA_SPEC_OBJECT_TYPE_REF *BackRepoA_SPEC_OBJECT_TYPE_REFStruct) GetDB() db.DBInterface {
 	return backRepoA_SPEC_OBJECT_TYPE_REF.db
 }
 
@@ -133,9 +134,19 @@ func (backRepoA_SPEC_OBJECT_TYPE_REF *BackRepoA_SPEC_OBJECT_TYPE_REFStruct) GetA
 
 // BackRepoA_SPEC_OBJECT_TYPE_REF.CommitPhaseOne commits all staged instances of A_SPEC_OBJECT_TYPE_REF to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoA_SPEC_OBJECT_TYPE_REF *BackRepoA_SPEC_OBJECT_TYPE_REFStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoA_SPEC_OBJECT_TYPE_REF *BackRepoA_SPEC_OBJECT_TYPE_REFStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var a_spec_object_type_refs []*models.A_SPEC_OBJECT_TYPE_REF
 	for a_spec_object_type_ref := range stage.A_SPEC_OBJECT_TYPE_REFs {
+		a_spec_object_type_refs = append(a_spec_object_type_refs, a_spec_object_type_ref)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(a_spec_object_type_refs, func(i, j int) bool {
+		return stage.A_SPEC_OBJECT_TYPE_REFMap_Staged_Order[a_spec_object_type_refs[i]] < stage.A_SPEC_OBJECT_TYPE_REFMap_Staged_Order[a_spec_object_type_refs[j]]
+	})
+
+	for _, a_spec_object_type_ref := range a_spec_object_type_refs {
 		backRepoA_SPEC_OBJECT_TYPE_REF.CommitPhaseOneInstance(a_spec_object_type_ref)
 	}
 
@@ -157,9 +168,10 @@ func (backRepoA_SPEC_OBJECT_TYPE_REF *BackRepoA_SPEC_OBJECT_TYPE_REFStruct) Comm
 
 	// a_spec_object_type_ref is not staged anymore, remove a_spec_object_type_refDB
 	a_spec_object_type_refDB := backRepoA_SPEC_OBJECT_TYPE_REF.Map_A_SPEC_OBJECT_TYPE_REFDBID_A_SPEC_OBJECT_TYPE_REFDB[id]
-	query := backRepoA_SPEC_OBJECT_TYPE_REF.db.Unscoped().Delete(&a_spec_object_type_refDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoA_SPEC_OBJECT_TYPE_REF.db.Unscoped()
+	_, err := db.Delete(a_spec_object_type_refDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -183,9 +195,9 @@ func (backRepoA_SPEC_OBJECT_TYPE_REF *BackRepoA_SPEC_OBJECT_TYPE_REFStruct) Comm
 	var a_spec_object_type_refDB A_SPEC_OBJECT_TYPE_REFDB
 	a_spec_object_type_refDB.CopyBasicFieldsFromA_SPEC_OBJECT_TYPE_REF(a_spec_object_type_ref)
 
-	query := backRepoA_SPEC_OBJECT_TYPE_REF.db.Create(&a_spec_object_type_refDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoA_SPEC_OBJECT_TYPE_REF.db.Create(&a_spec_object_type_refDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -217,9 +229,9 @@ func (backRepoA_SPEC_OBJECT_TYPE_REF *BackRepoA_SPEC_OBJECT_TYPE_REFStruct) Comm
 		a_spec_object_type_refDB.CopyBasicFieldsFromA_SPEC_OBJECT_TYPE_REF(a_spec_object_type_ref)
 
 		// insertion point for translating pointers encodings into actual pointers
-		query := backRepoA_SPEC_OBJECT_TYPE_REF.db.Save(&a_spec_object_type_refDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoA_SPEC_OBJECT_TYPE_REF.db.Save(a_spec_object_type_refDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -238,9 +250,9 @@ func (backRepoA_SPEC_OBJECT_TYPE_REF *BackRepoA_SPEC_OBJECT_TYPE_REFStruct) Comm
 func (backRepoA_SPEC_OBJECT_TYPE_REF *BackRepoA_SPEC_OBJECT_TYPE_REFStruct) CheckoutPhaseOne() (Error error) {
 
 	a_spec_object_type_refDBArray := make([]A_SPEC_OBJECT_TYPE_REFDB, 0)
-	query := backRepoA_SPEC_OBJECT_TYPE_REF.db.Find(&a_spec_object_type_refDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoA_SPEC_OBJECT_TYPE_REF.db.Find(&a_spec_object_type_refDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -351,7 +363,7 @@ func (backRepo *BackRepoStruct) CheckoutA_SPEC_OBJECT_TYPE_REF(a_spec_object_typ
 			var a_spec_object_type_refDB A_SPEC_OBJECT_TYPE_REFDB
 			a_spec_object_type_refDB.ID = id
 
-			if err := backRepo.BackRepoA_SPEC_OBJECT_TYPE_REF.db.First(&a_spec_object_type_refDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoA_SPEC_OBJECT_TYPE_REF.db.First(&a_spec_object_type_refDB, id); err != nil {
 				log.Fatalln("CheckoutA_SPEC_OBJECT_TYPE_REF : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoA_SPEC_OBJECT_TYPE_REF.CheckoutPhaseOneInstance(&a_spec_object_type_refDB)
@@ -510,9 +522,9 @@ func (backRepoA_SPEC_OBJECT_TYPE_REF *BackRepoA_SPEC_OBJECT_TYPE_REFStruct) rowV
 
 		a_spec_object_type_refDB_ID_atBackupTime := a_spec_object_type_refDB.ID
 		a_spec_object_type_refDB.ID = 0
-		query := backRepoA_SPEC_OBJECT_TYPE_REF.db.Create(a_spec_object_type_refDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoA_SPEC_OBJECT_TYPE_REF.db.Create(a_spec_object_type_refDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoA_SPEC_OBJECT_TYPE_REF.Map_A_SPEC_OBJECT_TYPE_REFDBID_A_SPEC_OBJECT_TYPE_REFDB[a_spec_object_type_refDB.ID] = a_spec_object_type_refDB
 		BackRepoA_SPEC_OBJECT_TYPE_REFid_atBckpTime_newID[a_spec_object_type_refDB_ID_atBackupTime] = a_spec_object_type_refDB.ID
@@ -547,9 +559,9 @@ func (backRepoA_SPEC_OBJECT_TYPE_REF *BackRepoA_SPEC_OBJECT_TYPE_REFStruct) Rest
 
 		a_spec_object_type_refDB_ID_atBackupTime := a_spec_object_type_refDB.ID
 		a_spec_object_type_refDB.ID = 0
-		query := backRepoA_SPEC_OBJECT_TYPE_REF.db.Create(a_spec_object_type_refDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoA_SPEC_OBJECT_TYPE_REF.db.Create(a_spec_object_type_refDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoA_SPEC_OBJECT_TYPE_REF.Map_A_SPEC_OBJECT_TYPE_REFDBID_A_SPEC_OBJECT_TYPE_REFDB[a_spec_object_type_refDB.ID] = a_spec_object_type_refDB
 		BackRepoA_SPEC_OBJECT_TYPE_REFid_atBckpTime_newID[a_spec_object_type_refDB_ID_atBackupTime] = a_spec_object_type_refDB.ID
@@ -571,9 +583,10 @@ func (backRepoA_SPEC_OBJECT_TYPE_REF *BackRepoA_SPEC_OBJECT_TYPE_REFStruct) Rest
 
 		// insertion point for reindexing pointers encoding
 		// update databse with new index encoding
-		query := backRepoA_SPEC_OBJECT_TYPE_REF.db.Model(a_spec_object_type_refDB).Updates(*a_spec_object_type_refDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoA_SPEC_OBJECT_TYPE_REF.db.Model(a_spec_object_type_refDB)
+		_, err := db.Updates(*a_spec_object_type_refDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

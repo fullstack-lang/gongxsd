@@ -58,24 +58,31 @@ func (controller *Controller) GetREQ_IF_HEADERs(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("GetREQ_IF_HEADERs", "GONG__StackPath", stackPath)
+			// log.Println("GetREQ_IF_HEADERs", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "GET Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoREQ_IF_HEADER.GetDB()
 
-	query := db.Find(&req_if_headerDBs)
-	if query.Error != nil {
+	_, err := db.Find(&req_if_headerDBs)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -121,15 +128,22 @@ func (controller *Controller) PostREQ_IF_HEADER(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("PostREQ_IF_HEADERs", "GONG__StackPath", stackPath)
+			// log.Println("PostREQ_IF_HEADERs", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "Post Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoREQ_IF_HEADER.GetDB()
 
@@ -151,12 +165,12 @@ func (controller *Controller) PostREQ_IF_HEADER(c *gin.Context) {
 	req_if_headerDB.REQ_IF_HEADERPointersEncoding = input.REQ_IF_HEADERPointersEncoding
 	req_if_headerDB.CopyBasicFieldsFromREQ_IF_HEADER_WOP(&input.REQ_IF_HEADER_WOP)
 
-	query := db.Create(&req_if_headerDB)
-	if query.Error != nil {
+	_, err = db.Create(&req_if_headerDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -191,21 +205,28 @@ func (controller *Controller) GetREQ_IF_HEADER(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("GetREQ_IF_HEADER", "GONG__StackPath", stackPath)
+			// log.Println("GetREQ_IF_HEADER", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoREQ_IF_HEADER.GetDB()
 
 	// Get req_if_headerDB in DB
 	var req_if_headerDB orm.REQ_IF_HEADERDB
-	if err := db.First(&req_if_headerDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&req_if_headerDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -240,15 +261,22 @@ func (controller *Controller) UpdateREQ_IF_HEADER(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("UpdateREQ_IF_HEADER", "GONG__StackPath", stackPath)
+			// log.Println("UpdateREQ_IF_HEADER", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "PATCH Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoREQ_IF_HEADER.GetDB()
 
@@ -264,13 +292,13 @@ func (controller *Controller) UpdateREQ_IF_HEADER(c *gin.Context) {
 	var req_if_headerDB orm.REQ_IF_HEADERDB
 
 	// fetch the req_if_header
-	query := db.First(&req_if_headerDB, c.Param("id"))
+	_, err := db.First(&req_if_headerDB, c.Param("id"))
 
-	if query.Error != nil {
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -279,12 +307,13 @@ func (controller *Controller) UpdateREQ_IF_HEADER(c *gin.Context) {
 	req_if_headerDB.CopyBasicFieldsFromREQ_IF_HEADER_WOP(&input.REQ_IF_HEADER_WOP)
 	req_if_headerDB.REQ_IF_HEADERPointersEncoding = input.REQ_IF_HEADERPointersEncoding
 
-	query = db.Model(&req_if_headerDB).Updates(req_if_headerDB)
-	if query.Error != nil {
+	db, _ = db.Model(&req_if_headerDB)
+	_, err = db.Updates(&req_if_headerDB)
+	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
-		returnError.Body.Message = query.Error.Error()
-		log.Println(query.Error.Error())
+		returnError.Body.Message = err.Error()
+		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
 	}
@@ -329,21 +358,28 @@ func (controller *Controller) DeleteREQ_IF_HEADER(c *gin.Context) {
 	_values := c.Request.URL.Query()
 	stackPath := ""
 	if len(_values) == 1 {
-		value := _values["GONG__StackPath"]
+		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("DeleteREQ_IF_HEADER", "GONG__StackPath", stackPath)
+			// log.Println("DeleteREQ_IF_HEADER", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
 	if backRepo == nil {
-		log.Panic("Stack github.com/fullstack-lang/gongxsd/test/reqif/go/models, Unkown stack", stackPath)
+		message := "DELETE Stack github.com/fullstack-lang/gongxsd/test/reqif/go, Unkown stack: \"" + stackPath + "\"\n"
+
+		message += "Availabe stack names are:\n"
+		for k := range controller.Map_BackRepos {
+			message += k + "\n"
+		}
+
+		log.Panic(message)
 	}
 	db := backRepo.BackRepoREQ_IF_HEADER.GetDB()
 
 	// Get model if exist
 	var req_if_headerDB orm.REQ_IF_HEADERDB
-	if err := db.First(&req_if_headerDB, c.Param("id")).Error; err != nil {
+	if _, err := db.First(&req_if_headerDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -353,7 +389,8 @@ func (controller *Controller) DeleteREQ_IF_HEADER(c *gin.Context) {
 	}
 
 	// with gorm.Model field, default delete is a soft delete. Unscoped() force delete
-	db.Unscoped().Delete(&req_if_headerDB)
+	db.Unscoped()
+	db.Delete(&req_if_headerDB)
 
 	// get an instance (not staged) from DB instance, and call callback function
 	req_if_headerDeleted := new(models.REQ_IF_HEADER)
