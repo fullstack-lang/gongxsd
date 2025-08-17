@@ -21,6 +21,11 @@ var _ map[string]any = map[string]any{
 // function will stage objects
 func _(stage *models.Stage) {
 
+	const __write__local_time = "2025-08-17 17:40:37.976931 CEST"
+	const __write__utc_time__ = "2025-08-17 15:40:37.976931 UTC"
+
+	const __commitId__ = "0000000001"
+
 	// Declaration of instances to stage
 
 	__Annotation__000000_Schema_Inlined := (&models.Annotation{}).Stage(stage)
@@ -873,3 +878,4 @@ func _(stage *models.Stage) {
 	__SimpleType__000002_titleType.Restriction = __Restriction__000002_titleType_Inlined
 	// setup of WhiteSpace instances pointers
 }
+

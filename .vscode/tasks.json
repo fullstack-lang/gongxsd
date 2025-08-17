@@ -54,17 +54,7 @@
 			"problemMatcher": []
 		},
 		{
-			"label": "01 - gongc gongxsd",
-			"type": "shell",
-			"options": {
-				"cwd": "${workspaceFolder}/go/models"
-			},
-			"command": "gongc",
-			"group": "build",
-			"args": []
-		},
-		{
-			"label": "01 - gongc gongxsd -skipNg",
+			"label": "01 - gongc gongxsd -level1",
 			"type": "shell",
 			"options": {
 				"cwd": "${workspaceFolder}/go/models"
@@ -72,7 +62,19 @@
 			"command": "gongc",
 			"group": "build",
 			"args": [
-				"-skipNg"
+				"-level1",
+			]
+		},
+		{
+			"label": "01 - gongc gongxsd -level1",
+			"type": "shell",
+			"options": {
+				"cwd": "${workspaceFolder}/go/models"
+			},
+			"command": "gongc",
+			"group": "build",
+			"args": [
+				"-level1",
 			]
 		},
 		{
@@ -84,11 +86,12 @@
 			"command": "gongc",
 			"group": "build",
 			"args": [
-				"-skipGoModCommands"
+				"-skipGoModCommands",
+				"-level1",
 			]
 		},
 		{
-			"label": "01 - gongc gongxsd -skipNg -skipGoModCommands",
+			"label": "01 - gongc gongxsd -level1 -skipGoModCommands",
 			"type": "shell",
 			"options": {
 				"cwd": "${workspaceFolder}/go/models"
@@ -96,7 +99,7 @@
 			"command": "gongc",
 			"group": "build",
 			"args": [
-				"-skipNg",
+				"-level1",
 				"-skipGoModCommands"
 			]
 		},
@@ -205,7 +208,7 @@
 			]
 		},
 		{
-			"label": "01 - gongc books -skipNg -skipNpmWorkspaces",
+			"label": "01 - gongc books -level1 -skipNpmWorkspaces",
 			"type": "shell",
 			"options": {
 				"cwd": "${workspaceFolder}/test/books"
@@ -214,7 +217,7 @@
 			"group": "build",
 			"args": [
 				"-skipNpmWorkspaces",
-				"-skipNg",
+				"-level1",
 				"go/models",
 			]
 		},
@@ -248,7 +251,7 @@
 			]
 		},
 		{
-			"label": "01 - gongc musicxml -skipNpmWorkspaces -skipNg -skipGoModCommands",
+			"label": "01 - gongc musicxml -skipNpmWorkspaces -level1 -skipGoModCommands",
 			"type": "shell",
 			"options": {
 				"cwd": "${workspaceFolder}/test/musicxml"
@@ -257,7 +260,7 @@
 			"group": "build",
 			"args": [
 				"-skipNpmWorkspaces",
-				"-skipNg",
+				"-level1",
 				"-skipGoModCommands",
 				"go/models",
 			]
@@ -319,7 +322,7 @@
 			]
 		},
 		{
-			"label": "01 - gongc alt -skipNg -skipNpmWorkspaces",
+			"label": "01 - gongc alt -level1 -skipNpmWorkspaces",
 			"type": "shell",
 			"options": {
 				"cwd": "${workspaceFolder}/alt"
@@ -328,7 +331,7 @@
 			"group": "build",
 			"args": [
 				"-skipNpmWorkspaces",
-				"-skipNg",
+				"-level1",
 				"go/models",
 			]
 		},
@@ -346,7 +349,7 @@
 			]
 		},
 		{
-			"label": "01 - gongc reqif -skipNg -skipNpmWorkspaces",
+			"label": "01 - gongc reqif -level1 -skipNpmWorkspaces",
 			"type": "shell",
 			"options": {
 				"cwd": "${workspaceFolder}/test/reqif"
@@ -355,7 +358,7 @@
 			"group": "build",
 			"args": [
 				"-skipNpmWorkspaces",
-				"-skipNg",
+				"-level1",
 				"go/models",
 			]
 		},

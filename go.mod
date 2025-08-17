@@ -5,7 +5,7 @@ go 1.24.3
 toolchain go1.24.5
 
 require (
-	github.com/fullstack-lang/gong v0.0.0-20250725070820-9d62bdaed028
+	github.com/fullstack-lang/gong v0.0.0-20250731115806-9eee1862ee00
 	github.com/fullstack-lang/gongdoc v0.0.0-20250228015737-2b85c5f57bb8
 	github.com/fullstack-lang/gongtable v0.0.0-20250228015820-9014f126a754
 	github.com/fullstack-lang/gongtree v0.0.0-20250228022722-ff4a6e5e77e6

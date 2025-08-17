@@ -6,9 +6,9 @@ import (
 	"strconv"
 
 	// insertion point for models import
+	split_static "github.com/fullstack-lang/gong/lib/split/go/static"
 	gongxsd_models "github.com/fullstack-lang/gongxsd/go/models"
 	gongxsd_stack "github.com/fullstack-lang/gongxsd/go/stack"
-	gongxsd_static "github.com/fullstack-lang/gongxsd/go/static"
 )
 
 var (
@@ -31,7 +31,7 @@ func main() {
 	flag.Parse()
 
 	// setup the static file server and get the controller
-	r := gongxsd_static.ServeStaticFiles(*logGINFlag)
+	r := split_static.ServeStaticFiles(*logGINFlag)
 
 	// setup model stack with its probe
 	stack := gongxsd_stack.NewStack(r, "gongxsd", *unmarshallFromCode, *marshallOnCommit, "", *embeddedDiagrams, true)
