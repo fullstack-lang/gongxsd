@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/test/books/go/db"
 	"github.com/fullstack-lang/gongxsd/test/books/go/models"
 )
 
@@ -86,7 +87,7 @@ type BookTypeDB struct {
 
 	// Declation for basic field booktypeDB.Format
 	Format_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	BookTypePointersEncoding
@@ -150,17 +151,17 @@ type BackRepoBookTypeStruct struct {
 	// stores BookType according to their gorm ID
 	Map_BookTypeDBID_BookTypePtr map[uint]*models.BookType
 
-	db *gorm.DB
+	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoBookType *BackRepoBookTypeStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoBookType *BackRepoBookTypeStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoBookType.stage
 	return
 }
 
-func (backRepoBookType *BackRepoBookTypeStruct) GetDB() *gorm.DB {
+func (backRepoBookType *BackRepoBookTypeStruct) GetDB() db.DBInterface {
 	return backRepoBookType.db
 }
 
@@ -173,9 +174,19 @@ func (backRepoBookType *BackRepoBookTypeStruct) GetBookTypeDBFromBookTypePtr(boo
 
 // BackRepoBookType.CommitPhaseOne commits all staged instances of BookType to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoBookType *BackRepoBookTypeStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoBookType *BackRepoBookTypeStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var booktypes []*models.BookType
 	for booktype := range stage.BookTypes {
+		booktypes = append(booktypes, booktype)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(booktypes, func(i, j int) bool {
+		return stage.BookTypeMap_Staged_Order[booktypes[i]] < stage.BookTypeMap_Staged_Order[booktypes[j]]
+	})
+
+	for _, booktype := range booktypes {
 		backRepoBookType.CommitPhaseOneInstance(booktype)
 	}
 
@@ -197,9 +208,10 @@ func (backRepoBookType *BackRepoBookTypeStruct) CommitDeleteInstance(id uint) (E
 
 	// booktype is not staged anymore, remove booktypeDB
 	booktypeDB := backRepoBookType.Map_BookTypeDBID_BookTypeDB[id]
-	query := backRepoBookType.db.Unscoped().Delete(&booktypeDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoBookType.db.Unscoped()
+	_, err := db.Delete(booktypeDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -223,9 +235,9 @@ func (backRepoBookType *BackRepoBookTypeStruct) CommitPhaseOneInstance(booktype 
 	var booktypeDB BookTypeDB
 	booktypeDB.CopyBasicFieldsFromBookType(booktype)
 
-	query := backRepoBookType.db.Create(&booktypeDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoBookType.db.Create(&booktypeDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -275,9 +287,9 @@ func (backRepoBookType *BackRepoBookTypeStruct) CommitPhaseTwoInstance(backRepo 
 				append(booktypeDB.BookTypePointersEncoding.Credit, int(creditAssocEnd_DB.ID))
 		}
 
-		query := backRepoBookType.db.Save(&booktypeDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoBookType.db.Save(booktypeDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -296,9 +308,9 @@ func (backRepoBookType *BackRepoBookTypeStruct) CommitPhaseTwoInstance(backRepo 
 func (backRepoBookType *BackRepoBookTypeStruct) CheckoutPhaseOne() (Error error) {
 
 	booktypeDBArray := make([]BookTypeDB, 0)
-	query := backRepoBookType.db.Find(&booktypeDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoBookType.db.Find(&booktypeDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -418,7 +430,7 @@ func (backRepo *BackRepoStruct) CheckoutBookType(booktype *models.BookType) {
 			var booktypeDB BookTypeDB
 			booktypeDB.ID = id
 
-			if err := backRepo.BackRepoBookType.db.First(&booktypeDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoBookType.db.First(&booktypeDB, id); err != nil {
 				log.Fatalln("CheckoutBookType : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoBookType.CheckoutPhaseOneInstance(&booktypeDB)
@@ -649,9 +661,9 @@ func (backRepoBookType *BackRepoBookTypeStruct) rowVisitorBookType(row *xlsx.Row
 
 		booktypeDB_ID_atBackupTime := booktypeDB.ID
 		booktypeDB.ID = 0
-		query := backRepoBookType.db.Create(booktypeDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoBookType.db.Create(booktypeDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoBookType.Map_BookTypeDBID_BookTypeDB[booktypeDB.ID] = booktypeDB
 		BackRepoBookTypeid_atBckpTime_newID[booktypeDB_ID_atBackupTime] = booktypeDB.ID
@@ -686,9 +698,9 @@ func (backRepoBookType *BackRepoBookTypeStruct) RestorePhaseOne(dirPath string) 
 
 		booktypeDB_ID_atBackupTime := booktypeDB.ID
 		booktypeDB.ID = 0
-		query := backRepoBookType.db.Create(booktypeDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoBookType.db.Create(booktypeDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoBookType.Map_BookTypeDBID_BookTypeDB[booktypeDB.ID] = booktypeDB
 		BackRepoBookTypeid_atBckpTime_newID[booktypeDB_ID_atBackupTime] = booktypeDB.ID
@@ -710,9 +722,10 @@ func (backRepoBookType *BackRepoBookTypeStruct) RestorePhaseTwo() {
 
 		// insertion point for reindexing pointers encoding
 		// update databse with new index encoding
-		query := backRepoBookType.db.Model(booktypeDB).Updates(*booktypeDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoBookType.db.Model(booktypeDB)
+		_, err := db.Updates(*booktypeDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

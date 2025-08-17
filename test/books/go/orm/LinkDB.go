@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/test/books/go/db"
 	"github.com/fullstack-lang/gongxsd/test/books/go/models"
 )
 
@@ -67,7 +68,7 @@ type LinkDB struct {
 
 	// Declation for basic field linkDB.EnclosedText
 	EnclosedText_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	LinkPointersEncoding
@@ -116,17 +117,17 @@ type BackRepoLinkStruct struct {
 	// stores Link according to their gorm ID
 	Map_LinkDBID_LinkPtr map[uint]*models.Link
 
-	db *gorm.DB
+	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoLink *BackRepoLinkStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoLink *BackRepoLinkStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoLink.stage
 	return
 }
 
-func (backRepoLink *BackRepoLinkStruct) GetDB() *gorm.DB {
+func (backRepoLink *BackRepoLinkStruct) GetDB() db.DBInterface {
 	return backRepoLink.db
 }
 
@@ -139,9 +140,19 @@ func (backRepoLink *BackRepoLinkStruct) GetLinkDBFromLinkPtr(link *models.Link) 
 
 // BackRepoLink.CommitPhaseOne commits all staged instances of Link to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoLink *BackRepoLinkStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoLink *BackRepoLinkStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var links []*models.Link
 	for link := range stage.Links {
+		links = append(links, link)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(links, func(i, j int) bool {
+		return stage.LinkMap_Staged_Order[links[i]] < stage.LinkMap_Staged_Order[links[j]]
+	})
+
+	for _, link := range links {
 		backRepoLink.CommitPhaseOneInstance(link)
 	}
 
@@ -163,9 +174,10 @@ func (backRepoLink *BackRepoLinkStruct) CommitDeleteInstance(id uint) (Error err
 
 	// link is not staged anymore, remove linkDB
 	linkDB := backRepoLink.Map_LinkDBID_LinkDB[id]
-	query := backRepoLink.db.Unscoped().Delete(&linkDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoLink.db.Unscoped()
+	_, err := db.Delete(linkDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -189,9 +201,9 @@ func (backRepoLink *BackRepoLinkStruct) CommitPhaseOneInstance(link *models.Link
 	var linkDB LinkDB
 	linkDB.CopyBasicFieldsFromLink(link)
 
-	query := backRepoLink.db.Create(&linkDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoLink.db.Create(&linkDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -223,9 +235,9 @@ func (backRepoLink *BackRepoLinkStruct) CommitPhaseTwoInstance(backRepo *BackRep
 		linkDB.CopyBasicFieldsFromLink(link)
 
 		// insertion point for translating pointers encodings into actual pointers
-		query := backRepoLink.db.Save(&linkDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoLink.db.Save(linkDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -244,9 +256,9 @@ func (backRepoLink *BackRepoLinkStruct) CommitPhaseTwoInstance(backRepo *BackRep
 func (backRepoLink *BackRepoLinkStruct) CheckoutPhaseOne() (Error error) {
 
 	linkDBArray := make([]LinkDB, 0)
-	query := backRepoLink.db.Find(&linkDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoLink.db.Find(&linkDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -357,7 +369,7 @@ func (backRepo *BackRepoStruct) CheckoutLink(link *models.Link) {
 			var linkDB LinkDB
 			linkDB.ID = id
 
-			if err := backRepo.BackRepoLink.db.First(&linkDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoLink.db.First(&linkDB, id); err != nil {
 				log.Fatalln("CheckoutLink : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoLink.CheckoutPhaseOneInstance(&linkDB)
@@ -528,9 +540,9 @@ func (backRepoLink *BackRepoLinkStruct) rowVisitorLink(row *xlsx.Row) error {
 
 		linkDB_ID_atBackupTime := linkDB.ID
 		linkDB.ID = 0
-		query := backRepoLink.db.Create(linkDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoLink.db.Create(linkDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoLink.Map_LinkDBID_LinkDB[linkDB.ID] = linkDB
 		BackRepoLinkid_atBckpTime_newID[linkDB_ID_atBackupTime] = linkDB.ID
@@ -565,9 +577,9 @@ func (backRepoLink *BackRepoLinkStruct) RestorePhaseOne(dirPath string) {
 
 		linkDB_ID_atBackupTime := linkDB.ID
 		linkDB.ID = 0
-		query := backRepoLink.db.Create(linkDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoLink.db.Create(linkDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoLink.Map_LinkDBID_LinkDB[linkDB.ID] = linkDB
 		BackRepoLinkid_atBckpTime_newID[linkDB_ID_atBackupTime] = linkDB.ID
@@ -589,9 +601,10 @@ func (backRepoLink *BackRepoLinkStruct) RestorePhaseTwo() {
 
 		// insertion point for reindexing pointers encoding
 		// update databse with new index encoding
-		query := backRepoLink.db.Model(linkDB).Updates(*linkDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoLink.db.Model(linkDB)
+		_, err := db.Updates(*linkDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

@@ -14,16 +14,16 @@ import (
 )
 
 // declaration in order to justify use of the models import
-var __Books__dummysDeclaration__ models.Books
-var __Books_time__dummyDeclaration time.Duration
+var __A_books__dummysDeclaration__ models.A_books
+var __A_books_time__dummyDeclaration time.Duration
 
-var mutexBooks sync.Mutex
+var mutexA_books sync.Mutex
 
-// An BooksID parameter model.
+// An A_booksID parameter model.
 //
 // This is used for operations that want the ID of an order in the path
-// swagger:parameters getBooks updateBooks deleteBooks
-type BooksID struct {
+// swagger:parameters getA_books updateA_books deleteA_books
+type A_booksID struct {
 	// The ID of the order
 	//
 	// in: path
@@ -31,29 +31,29 @@ type BooksID struct {
 	ID int64
 }
 
-// BooksInput is a schema that can validate the user’s
+// A_booksInput is a schema that can validate the user’s
 // input to prevent us from getting invalid data
-// swagger:parameters postBooks updateBooks
-type BooksInput struct {
-	// The Books to submit or modify
+// swagger:parameters postA_books updateA_books
+type A_booksInput struct {
+	// The A_books to submit or modify
 	// in: body
-	Books *orm.BooksAPI
+	A_books *orm.A_booksAPI
 }
 
-// GetBookss
+// GetA_bookss
 //
-// swagger:route GET /bookss bookss getBookss
+// swagger:route GET /a_bookss a_bookss getA_bookss
 //
-// # Get all bookss
+// # Get all a_bookss
 //
 // Responses:
 // default: genericError
 //
-//	200: booksDBResponse
-func (controller *Controller) GetBookss(c *gin.Context) {
+//	200: a_booksDBResponse
+func (controller *Controller) GetA_bookss(c *gin.Context) {
 
 	// source slice
-	var booksDBs []orm.BooksDB
+	var a_booksDBs []orm.A_booksDB
 
 	_values := c.Request.URL.Query()
 	stackPath := ""
@@ -61,7 +61,7 @@ func (controller *Controller) GetBookss(c *gin.Context) {
 		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("GetBookss", "Name", stackPath)
+			// log.Println("GetA_bookss", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
@@ -75,9 +75,9 @@ func (controller *Controller) GetBookss(c *gin.Context) {
 
 		log.Panic(message)
 	}
-	db := backRepo.BackRepoBooks.GetDB()
+	db := backRepo.BackRepoA_books.GetDB()
 
-	_, err := db.Find(&booksDBs)
+	_, err := db.Find(&a_booksDBs)
 	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
@@ -88,29 +88,29 @@ func (controller *Controller) GetBookss(c *gin.Context) {
 	}
 
 	// slice that will be transmitted to the front
-	booksAPIs := make([]orm.BooksAPI, 0)
+	a_booksAPIs := make([]orm.A_booksAPI, 0)
 
-	// for each books, update fields from the database nullable fields
-	for idx := range booksDBs {
-		booksDB := &booksDBs[idx]
-		_ = booksDB
-		var booksAPI orm.BooksAPI
+	// for each a_books, update fields from the database nullable fields
+	for idx := range a_booksDBs {
+		a_booksDB := &a_booksDBs[idx]
+		_ = a_booksDB
+		var a_booksAPI orm.A_booksAPI
 
 		// insertion point for updating fields
-		booksAPI.ID = booksDB.ID
-		booksDB.CopyBasicFieldsToBooks_WOP(&booksAPI.Books_WOP)
-		booksAPI.BooksPointersEncoding = booksDB.BooksPointersEncoding
-		booksAPIs = append(booksAPIs, booksAPI)
+		a_booksAPI.ID = a_booksDB.ID
+		a_booksDB.CopyBasicFieldsToA_books_WOP(&a_booksAPI.A_books_WOP)
+		a_booksAPI.A_booksPointersEncoding = a_booksDB.A_booksPointersEncoding
+		a_booksAPIs = append(a_booksAPIs, a_booksAPI)
 	}
 
-	c.JSON(http.StatusOK, booksAPIs)
+	c.JSON(http.StatusOK, a_booksAPIs)
 }
 
-// PostBooks
+// PostA_books
 //
-// swagger:route POST /bookss bookss postBooks
+// swagger:route POST /a_bookss a_bookss postA_books
 //
-// Creates a books
+// Creates a a_books
 //
 //	Consumes:
 //	- application/json
@@ -120,10 +120,10 @@ func (controller *Controller) GetBookss(c *gin.Context) {
 //
 //	Responses:
 //	  200: nodeDBResponse
-func (controller *Controller) PostBooks(c *gin.Context) {
+func (controller *Controller) PostA_books(c *gin.Context) {
 
-	mutexBooks.Lock()
-	defer mutexBooks.Unlock()
+	mutexA_books.Lock()
+	defer mutexA_books.Unlock()
 
 	_values := c.Request.URL.Query()
 	stackPath := ""
@@ -131,7 +131,7 @@ func (controller *Controller) PostBooks(c *gin.Context) {
 		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("PostBookss", "Name", stackPath)
+			// log.Println("PostA_bookss", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
@@ -145,10 +145,10 @@ func (controller *Controller) PostBooks(c *gin.Context) {
 
 		log.Panic(message)
 	}
-	db := backRepo.BackRepoBooks.GetDB()
+	db := backRepo.BackRepoA_books.GetDB()
 
 	// Validate input
-	var input orm.BooksAPI
+	var input orm.A_booksAPI
 
 	err := c.ShouldBindJSON(&input)
 	if err != nil {
@@ -160,12 +160,12 @@ func (controller *Controller) PostBooks(c *gin.Context) {
 		return
 	}
 
-	// Create books
-	booksDB := orm.BooksDB{}
-	booksDB.BooksPointersEncoding = input.BooksPointersEncoding
-	booksDB.CopyBasicFieldsFromBooks_WOP(&input.Books_WOP)
+	// Create a_books
+	a_booksDB := orm.A_booksDB{}
+	a_booksDB.A_booksPointersEncoding = input.A_booksPointersEncoding
+	a_booksDB.CopyBasicFieldsFromA_books_WOP(&input.A_books_WOP)
 
-	_, err = db.Create(&booksDB)
+	_, err = db.Create(&a_booksDB)
 	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
@@ -176,31 +176,31 @@ func (controller *Controller) PostBooks(c *gin.Context) {
 	}
 
 	// get an instance (not staged) from DB instance, and call callback function
-	backRepo.BackRepoBooks.CheckoutPhaseOneInstance(&booksDB)
-	books := backRepo.BackRepoBooks.Map_BooksDBID_BooksPtr[booksDB.ID]
+	backRepo.BackRepoA_books.CheckoutPhaseOneInstance(&a_booksDB)
+	a_books := backRepo.BackRepoA_books.Map_A_booksDBID_A_booksPtr[a_booksDB.ID]
 
-	if books != nil {
-		models.AfterCreateFromFront(backRepo.GetStage(), books)
+	if a_books != nil {
+		models.AfterCreateFromFront(backRepo.GetStage(), a_books)
 	}
 
 	// a POST is equivalent to a back repo commit increase
 	// (this will be improved with implementation of unit of work design pattern)
 	backRepo.IncrementPushFromFrontNb()
 
-	c.JSON(http.StatusOK, booksDB)
+	c.JSON(http.StatusOK, a_booksDB)
 }
 
-// GetBooks
+// GetA_books
 //
-// swagger:route GET /bookss/{ID} bookss getBooks
+// swagger:route GET /a_bookss/{ID} a_bookss getA_books
 //
-// Gets the details for a books.
+// Gets the details for a a_books.
 //
 // Responses:
 // default: genericError
 //
-//	200: booksDBResponse
-func (controller *Controller) GetBooks(c *gin.Context) {
+//	200: a_booksDBResponse
+func (controller *Controller) GetA_books(c *gin.Context) {
 
 	_values := c.Request.URL.Query()
 	stackPath := ""
@@ -208,7 +208,7 @@ func (controller *Controller) GetBooks(c *gin.Context) {
 		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("GetBooks", "Name", stackPath)
+			// log.Println("GetA_books", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
@@ -222,11 +222,11 @@ func (controller *Controller) GetBooks(c *gin.Context) {
 
 		log.Panic(message)
 	}
-	db := backRepo.BackRepoBooks.GetDB()
+	db := backRepo.BackRepoA_books.GetDB()
 
-	// Get booksDB in DB
-	var booksDB orm.BooksDB
-	if _, err := db.First(&booksDB, c.Param("id")); err != nil {
+	// Get a_booksDB in DB
+	var a_booksDB orm.A_booksDB
+	if _, err := db.First(&a_booksDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -235,28 +235,28 @@ func (controller *Controller) GetBooks(c *gin.Context) {
 		return
 	}
 
-	var booksAPI orm.BooksAPI
-	booksAPI.ID = booksDB.ID
-	booksAPI.BooksPointersEncoding = booksDB.BooksPointersEncoding
-	booksDB.CopyBasicFieldsToBooks_WOP(&booksAPI.Books_WOP)
+	var a_booksAPI orm.A_booksAPI
+	a_booksAPI.ID = a_booksDB.ID
+	a_booksAPI.A_booksPointersEncoding = a_booksDB.A_booksPointersEncoding
+	a_booksDB.CopyBasicFieldsToA_books_WOP(&a_booksAPI.A_books_WOP)
 
-	c.JSON(http.StatusOK, booksAPI)
+	c.JSON(http.StatusOK, a_booksAPI)
 }
 
-// UpdateBooks
+// UpdateA_books
 //
-// swagger:route PATCH /bookss/{ID} bookss updateBooks
+// swagger:route PATCH /a_bookss/{ID} a_bookss updateA_books
 //
-// # Update a books
+// # Update a a_books
 //
 // Responses:
 // default: genericError
 //
-//	200: booksDBResponse
-func (controller *Controller) UpdateBooks(c *gin.Context) {
+//	200: a_booksDBResponse
+func (controller *Controller) UpdateA_books(c *gin.Context) {
 
-	mutexBooks.Lock()
-	defer mutexBooks.Unlock()
+	mutexA_books.Lock()
+	defer mutexA_books.Unlock()
 
 	_values := c.Request.URL.Query()
 	stackPath := ""
@@ -264,7 +264,7 @@ func (controller *Controller) UpdateBooks(c *gin.Context) {
 		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("UpdateBooks", "Name", stackPath)
+			// log.Println("UpdateA_books", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
@@ -278,10 +278,10 @@ func (controller *Controller) UpdateBooks(c *gin.Context) {
 
 		log.Panic(message)
 	}
-	db := backRepo.BackRepoBooks.GetDB()
+	db := backRepo.BackRepoA_books.GetDB()
 
 	// Validate input
-	var input orm.BooksAPI
+	var input orm.A_booksAPI
 	if err := c.ShouldBindJSON(&input); err != nil {
 		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -289,10 +289,10 @@ func (controller *Controller) UpdateBooks(c *gin.Context) {
 	}
 
 	// Get model if exist
-	var booksDB orm.BooksDB
+	var a_booksDB orm.A_booksDB
 
-	// fetch the books
-	_, err := db.First(&booksDB, c.Param("id"))
+	// fetch the a_books
+	_, err := db.First(&a_booksDB, c.Param("id"))
 
 	if err != nil {
 		var returnError GenericError
@@ -304,11 +304,11 @@ func (controller *Controller) UpdateBooks(c *gin.Context) {
 	}
 
 	// update
-	booksDB.CopyBasicFieldsFromBooks_WOP(&input.Books_WOP)
-	booksDB.BooksPointersEncoding = input.BooksPointersEncoding
+	a_booksDB.CopyBasicFieldsFromA_books_WOP(&input.A_books_WOP)
+	a_booksDB.A_booksPointersEncoding = input.A_booksPointersEncoding
 
-	db, _ = db.Model(&booksDB)
-	_, err = db.Updates(&booksDB)
+	db, _ = db.Model(&a_booksDB)
+	_, err = db.Updates(&a_booksDB)
 	if err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
@@ -319,16 +319,16 @@ func (controller *Controller) UpdateBooks(c *gin.Context) {
 	}
 
 	// get an instance (not staged) from DB instance, and call callback function
-	booksNew := new(models.Books)
-	booksDB.CopyBasicFieldsToBooks(booksNew)
+	a_booksNew := new(models.A_books)
+	a_booksDB.CopyBasicFieldsToA_books(a_booksNew)
 
 	// redeem pointers
-	booksDB.DecodePointers(backRepo, booksNew)
+	a_booksDB.DecodePointers(backRepo, a_booksNew)
 
 	// get stage instance from DB instance, and call callback function
-	booksOld := backRepo.BackRepoBooks.Map_BooksDBID_BooksPtr[booksDB.ID]
-	if booksOld != nil {
-		models.AfterUpdateFromFront(backRepo.GetStage(), booksOld, booksNew)
+	a_booksOld := backRepo.BackRepoA_books.Map_A_booksDBID_A_booksPtr[a_booksDB.ID]
+	if a_booksOld != nil {
+		models.AfterUpdateFromFront(backRepo.GetStage(), a_booksOld, a_booksNew)
 	}
 
 	// an UPDATE generates a back repo commit increase
@@ -337,23 +337,23 @@ func (controller *Controller) UpdateBooks(c *gin.Context) {
 	// generates a checkout
 	backRepo.IncrementPushFromFrontNb()
 
-	// return status OK with the marshalling of the the booksDB
-	c.JSON(http.StatusOK, booksDB)
+	// return status OK with the marshalling of the the a_booksDB
+	c.JSON(http.StatusOK, a_booksDB)
 }
 
-// DeleteBooks
+// DeleteA_books
 //
-// swagger:route DELETE /bookss/{ID} bookss deleteBooks
+// swagger:route DELETE /a_bookss/{ID} a_bookss deleteA_books
 //
-// # Delete a books
+// # Delete a a_books
 //
 // default: genericError
 //
-//	200: booksDBResponse
-func (controller *Controller) DeleteBooks(c *gin.Context) {
+//	200: a_booksDBResponse
+func (controller *Controller) DeleteA_books(c *gin.Context) {
 
-	mutexBooks.Lock()
-	defer mutexBooks.Unlock()
+	mutexA_books.Lock()
+	defer mutexA_books.Unlock()
 
 	_values := c.Request.URL.Query()
 	stackPath := ""
@@ -361,7 +361,7 @@ func (controller *Controller) DeleteBooks(c *gin.Context) {
 		value := _values["Name"]
 		if len(value) == 1 {
 			stackPath = value[0]
-			// log.Println("DeleteBooks", "Name", stackPath)
+			// log.Println("DeleteA_books", "Name", stackPath)
 		}
 	}
 	backRepo := controller.Map_BackRepos[stackPath]
@@ -375,11 +375,11 @@ func (controller *Controller) DeleteBooks(c *gin.Context) {
 
 		log.Panic(message)
 	}
-	db := backRepo.BackRepoBooks.GetDB()
+	db := backRepo.BackRepoA_books.GetDB()
 
 	// Get model if exist
-	var booksDB orm.BooksDB
-	if _, err := db.First(&booksDB, c.Param("id")); err != nil {
+	var a_booksDB orm.A_booksDB
+	if _, err := db.First(&a_booksDB, c.Param("id")); err != nil {
 		var returnError GenericError
 		returnError.Body.Code = http.StatusBadRequest
 		returnError.Body.Message = err.Error()
@@ -390,16 +390,16 @@ func (controller *Controller) DeleteBooks(c *gin.Context) {
 
 	// with gorm.Model field, default delete is a soft delete. Unscoped() force delete
 	db.Unscoped()
-	db.Delete(&booksDB)
+	db.Delete(&a_booksDB)
 
 	// get an instance (not staged) from DB instance, and call callback function
-	booksDeleted := new(models.Books)
-	booksDB.CopyBasicFieldsToBooks(booksDeleted)
+	a_booksDeleted := new(models.A_books)
+	a_booksDB.CopyBasicFieldsToA_books(a_booksDeleted)
 
 	// get stage instance from DB instance, and call callback function
-	booksStaged := backRepo.BackRepoBooks.Map_BooksDBID_BooksPtr[booksDB.ID]
-	if booksStaged != nil {
-		models.AfterDeleteFromFront(backRepo.GetStage(), booksStaged, booksDeleted)
+	a_booksStaged := backRepo.BackRepoA_books.Map_A_booksDBID_A_booksPtr[a_booksDB.ID]
+	if a_booksStaged != nil {
+		models.AfterDeleteFromFront(backRepo.GetStage(), a_booksStaged, a_booksDeleted)
 	}
 
 	// a DELETE generates a back repo commit increase

@@ -17,6 +17,7 @@ import (
 
 	"github.com/tealeg/xlsx/v3"
 
+	"github.com/fullstack-lang/gongxsd/test/books/go/db"
 	"github.com/fullstack-lang/gongxsd/test/books/go/models"
 )
 
@@ -76,7 +77,7 @@ type CreditDB struct {
 
 	// Declation for basic field creditDB.Credit_symbol
 	Credit_symbol_Data sql.NullString
-	
+
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	CreditPointersEncoding
@@ -131,17 +132,17 @@ type BackRepoCreditStruct struct {
 	// stores Credit according to their gorm ID
 	Map_CreditDBID_CreditPtr map[uint]*models.Credit
 
-	db *gorm.DB
+	db db.DBInterface
 
-	stage *models.StageStruct
+	stage *models.Stage
 }
 
-func (backRepoCredit *BackRepoCreditStruct) GetStage() (stage *models.StageStruct) {
+func (backRepoCredit *BackRepoCreditStruct) GetStage() (stage *models.Stage) {
 	stage = backRepoCredit.stage
 	return
 }
 
-func (backRepoCredit *BackRepoCreditStruct) GetDB() *gorm.DB {
+func (backRepoCredit *BackRepoCreditStruct) GetDB() db.DBInterface {
 	return backRepoCredit.db
 }
 
@@ -154,9 +155,19 @@ func (backRepoCredit *BackRepoCreditStruct) GetCreditDBFromCreditPtr(credit *mod
 
 // BackRepoCredit.CommitPhaseOne commits all staged instances of Credit to the BackRepo
 // Phase One is the creation of instance in the database if it is not yet done to get the unique ID for each staged instance
-func (backRepoCredit *BackRepoCreditStruct) CommitPhaseOne(stage *models.StageStruct) (Error error) {
+func (backRepoCredit *BackRepoCreditStruct) CommitPhaseOne(stage *models.Stage) (Error error) {
 
+	var credits []*models.Credit
 	for credit := range stage.Credits {
+		credits = append(credits, credit)
+	}
+
+	// Sort by the order stored in Map_Staged_Order.
+	sort.Slice(credits, func(i, j int) bool {
+		return stage.CreditMap_Staged_Order[credits[i]] < stage.CreditMap_Staged_Order[credits[j]]
+	})
+
+	for _, credit := range credits {
 		backRepoCredit.CommitPhaseOneInstance(credit)
 	}
 
@@ -178,9 +189,10 @@ func (backRepoCredit *BackRepoCreditStruct) CommitDeleteInstance(id uint) (Error
 
 	// credit is not staged anymore, remove creditDB
 	creditDB := backRepoCredit.Map_CreditDBID_CreditDB[id]
-	query := backRepoCredit.db.Unscoped().Delete(&creditDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	db, _ := backRepoCredit.db.Unscoped()
+	_, err := db.Delete(creditDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -204,9 +216,9 @@ func (backRepoCredit *BackRepoCreditStruct) CommitPhaseOneInstance(credit *model
 	var creditDB CreditDB
 	creditDB.CopyBasicFieldsFromCredit(credit)
 
-	query := backRepoCredit.db.Create(&creditDB)
-	if query.Error != nil {
-		log.Fatal(query.Error)
+	_, err := backRepoCredit.db.Create(&creditDB)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	// update stores
@@ -256,9 +268,9 @@ func (backRepoCredit *BackRepoCreditStruct) CommitPhaseTwoInstance(backRepo *Bac
 				append(creditDB.CreditPointersEncoding.Link, int(linkAssocEnd_DB.ID))
 		}
 
-		query := backRepoCredit.db.Save(&creditDB)
-		if query.Error != nil {
-			log.Fatalln(query.Error)
+		_, err := backRepoCredit.db.Save(creditDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 
 	} else {
@@ -277,9 +289,9 @@ func (backRepoCredit *BackRepoCreditStruct) CommitPhaseTwoInstance(backRepo *Bac
 func (backRepoCredit *BackRepoCreditStruct) CheckoutPhaseOne() (Error error) {
 
 	creditDBArray := make([]CreditDB, 0)
-	query := backRepoCredit.db.Find(&creditDBArray)
-	if query.Error != nil {
-		return query.Error
+	_, err := backRepoCredit.db.Find(&creditDBArray)
+	if err != nil {
+		return err
 	}
 
 	// list of instances to be removed
@@ -399,7 +411,7 @@ func (backRepo *BackRepoStruct) CheckoutCredit(credit *models.Credit) {
 			var creditDB CreditDB
 			creditDB.ID = id
 
-			if err := backRepo.BackRepoCredit.db.First(&creditDB, id).Error; err != nil {
+			if _, err := backRepo.BackRepoCredit.db.First(&creditDB, id); err != nil {
 				log.Fatalln("CheckoutCredit : Problem with getting object with id:", id)
 			}
 			backRepo.BackRepoCredit.CheckoutPhaseOneInstance(&creditDB)
@@ -594,9 +606,9 @@ func (backRepoCredit *BackRepoCreditStruct) rowVisitorCredit(row *xlsx.Row) erro
 
 		creditDB_ID_atBackupTime := creditDB.ID
 		creditDB.ID = 0
-		query := backRepoCredit.db.Create(creditDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoCredit.db.Create(creditDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoCredit.Map_CreditDBID_CreditDB[creditDB.ID] = creditDB
 		BackRepoCreditid_atBckpTime_newID[creditDB_ID_atBackupTime] = creditDB.ID
@@ -631,9 +643,9 @@ func (backRepoCredit *BackRepoCreditStruct) RestorePhaseOne(dirPath string) {
 
 		creditDB_ID_atBackupTime := creditDB.ID
 		creditDB.ID = 0
-		query := backRepoCredit.db.Create(creditDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		_, err := backRepoCredit.db.Create(creditDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 		backRepoCredit.Map_CreditDBID_CreditDB[creditDB.ID] = creditDB
 		BackRepoCreditid_atBckpTime_newID[creditDB_ID_atBackupTime] = creditDB.ID
@@ -655,9 +667,10 @@ func (backRepoCredit *BackRepoCreditStruct) RestorePhaseTwo() {
 
 		// insertion point for reindexing pointers encoding
 		// update databse with new index encoding
-		query := backRepoCredit.db.Model(creditDB).Updates(*creditDB)
-		if query.Error != nil {
-			log.Fatal(query.Error)
+		db, _ := backRepoCredit.db.Model(creditDB)
+		_, err := db.Updates(*creditDB)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 

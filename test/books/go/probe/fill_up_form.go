@@ -2,22 +2,27 @@
 package probe
 
 import (
-	form "github.com/fullstack-lang/gongtable/go/models"
+	form "github.com/fullstack-lang/gong/lib/table/go/models"
 
 	"github.com/fullstack-lang/gongxsd/test/books/go/models"
-	"github.com/fullstack-lang/gongxsd/test/books/go/orm"
 )
 
-var __dummy_orm_fillup_form = orm.BackRepoStruct{}
+const FormName = "Form"
 
-func FillUpForm[T models.Gongstruct](
-	instance *T,
+func FillUpForm(
+	instance any,
 	formGroup *form.FormGroup,
 	probe *Probe,
 ) {
 
 	switch instanceWithInferedType := any(instance).(type) {
 	// insertion point
+	case *models.A_books:
+		// insertion point
+		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
+		AssociationSliceToForm("Book", instanceWithInferedType, &instanceWithInferedType.Book, formGroup, probe)
+
 	case *models.BookType:
 		// insertion point
 		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
@@ -40,9 +45,31 @@ func FillUpForm[T models.Gongstruct](
 		{
 			var rf models.ReverseField
 			_ = rf
+			rf.GongstructName = "A_books"
+			rf.Fieldname = "Book"
+			reverseFieldOwner := models.GetReverseFieldOwner(probe.stageOfInterest, instanceWithInferedType, &rf)
+			if reverseFieldOwner != nil {
+				AssociationReverseFieldToForm(
+					reverseFieldOwner.(*models.A_books),
+					"Book",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			} else {
+				AssociationReverseFieldToForm[*models.A_books](
+					nil,
+					"Book",
+					instanceWithInferedType,
+					formGroup,
+					probe)
+			}
+		}
+		{
+			var rf models.ReverseField
+			_ = rf
 			rf.GongstructName = "Books"
 			rf.Fieldname = "Book"
-			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			reverseFieldOwner := models.GetReverseFieldOwner(probe.stageOfInterest, instanceWithInferedType, &rf)
 			if reverseFieldOwner != nil {
 				AssociationReverseFieldToForm(
 					reverseFieldOwner.(*models.Books),
@@ -51,7 +78,7 @@ func FillUpForm[T models.Gongstruct](
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.Books, *models.BookType](
+				AssociationReverseFieldToForm[*models.Books](
 					nil,
 					"Book",
 					instanceWithInferedType,
@@ -62,6 +89,8 @@ func FillUpForm[T models.Gongstruct](
 
 	case *models.Books:
 		// insertion point
+		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
+			false, false, 0, false, 0)
 		BasicFieldtoForm("Name", instanceWithInferedType.Name, instanceWithInferedType, probe.formStage, formGroup,
 			false, false, 0, false, 0)
 		AssociationSliceToForm("Book", instanceWithInferedType, &instanceWithInferedType.Book, formGroup, probe)
@@ -84,7 +113,7 @@ func FillUpForm[T models.Gongstruct](
 			_ = rf
 			rf.GongstructName = "BookType"
 			rf.Fieldname = "Credit"
-			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			reverseFieldOwner := models.GetReverseFieldOwner(probe.stageOfInterest, instanceWithInferedType, &rf)
 			if reverseFieldOwner != nil {
 				AssociationReverseFieldToForm(
 					reverseFieldOwner.(*models.BookType),
@@ -93,7 +122,7 @@ func FillUpForm[T models.Gongstruct](
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.BookType, *models.Credit](
+				AssociationReverseFieldToForm[*models.BookType](
 					nil,
 					"Credit",
 					instanceWithInferedType,
@@ -115,7 +144,7 @@ func FillUpForm[T models.Gongstruct](
 			_ = rf
 			rf.GongstructName = "Credit"
 			rf.Fieldname = "Link"
-			reverseFieldOwner := orm.GetReverseFieldOwner(probe.stageOfInterest, probe.backRepoOfInterest, instanceWithInferedType, &rf)
+			reverseFieldOwner := models.GetReverseFieldOwner(probe.stageOfInterest, instanceWithInferedType, &rf)
 			if reverseFieldOwner != nil {
 				AssociationReverseFieldToForm(
 					reverseFieldOwner.(*models.Credit),
@@ -124,7 +153,7 @@ func FillUpForm[T models.Gongstruct](
 					formGroup,
 					probe)
 			} else {
-				AssociationReverseFieldToForm[*models.Credit, *models.Link](
+				AssociationReverseFieldToForm[*models.Credit](
 					nil,
 					"Link",
 					instanceWithInferedType,

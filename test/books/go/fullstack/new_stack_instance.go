@@ -7,11 +7,12 @@ import (
 	"github.com/fullstack-lang/gongxsd/test/books/go/orm"
 
 	"github.com/gin-gonic/gin"
-
 	// this will import the angular front end source code directory (versionned with git) in the vendor directory
 	// this path will be included in the "tsconfig.json" front end compilation paths
 	// to include this stack front end code
-	_ "github.com/fullstack-lang/gongxsd/test/books/ng-github.com-fullstack-lang-gongxsd-test-books/projects"
+	// This is a level 1 gong application, no need to import the angular code
+	// therefore, the following line that is necessary in level 2 applications, is commented
+	// _ "github.com/fullstack-lang/gongxsd/test/books/ng-github.com-fullstack-lang-gongxsd-test-books"
 )
 
 // NewStackInstance creates a new stack instance from the Stack Model
@@ -25,7 +26,7 @@ func NewStackInstance(
 	stackPath string,
 	// filesnames is an optional parameter for the name of the database
 	filenames ...string) (
-	stage *models.StageStruct,
+	stage *models.Stage,
 	backRepo *orm.BackRepoStruct) {
 
 	stage = models.NewStage(stackPath)
@@ -36,14 +37,13 @@ func NewStackInstance(
 
 	backRepo = orm.NewBackRepo(stage, filenames[0])
 
-	if stackPath != "" {
-		controllers.GetController().AddBackRepo(backRepo, stackPath)
-	}
+	controllers.GetController().AddBackRepo(backRepo, stackPath)
 
 	controllers.Register(r)
 
 	// add orchestration
 	// insertion point
+	models.SetOrchestratorOnAfterUpdate[models.A_books](stage)
 	models.SetOrchestratorOnAfterUpdate[models.BookType](stage)
 	models.SetOrchestratorOnAfterUpdate[models.Books](stage)
 	models.SetOrchestratorOnAfterUpdate[models.Credit](stage)

@@ -2,9 +2,8 @@
 package probe
 
 import (
-	"log"
 
-	gongtable "github.com/fullstack-lang/gongtable/go/models"
+	gongtable "github.com/fullstack-lang/gong/lib/table/go/models"
 
 	"github.com/fullstack-lang/gongxsd/test/books/go/models"
 )
@@ -20,16 +19,18 @@ func NewCellDeleteIconImpl[T models.Gongstruct](
 }
 
 type CellDeleteIconImpl[T models.Gongstruct] struct {
-	Instance   *T
-	probe *Probe
+	Instance *T
+	probe    *Probe
 }
 
-func (cellDeleteIconImpl *CellDeleteIconImpl[T]) CellIconUpdated(stage *gongtable.StageStruct,
+func (cellDeleteIconImpl *CellDeleteIconImpl[T]) CellIconUpdated(stage *gongtable.Stage,
 	row, updatedCellIcon *gongtable.CellIcon) {
-	log.Println("CellIconUpdate: CellIconUpdated", updatedCellIcon.Name)
+	// log.Println("CellIconUpdate: CellIconUpdated", updatedCellIcon.Name)
 
 	switch instancesTyped := any(cellDeleteIconImpl.Instance).(type) {
 	// insertion point
+	case *models.A_books:
+		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
 	case *models.BookType:
 		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
 	case *models.Books:
@@ -43,8 +44,7 @@ func (cellDeleteIconImpl *CellDeleteIconImpl[T]) CellIconUpdated(stage *gongtabl
 	}
 	cellDeleteIconImpl.probe.stageOfInterest.Commit()
 
-	fillUpTable[T](cellDeleteIconImpl.probe)
-	fillUpTree(cellDeleteIconImpl.probe)
+	updateAndCommitTable[T](cellDeleteIconImpl.probe)
+	updateAndCommitTree(cellDeleteIconImpl.probe)
 	cellDeleteIconImpl.probe.tableStage.Commit()
 }
-

@@ -2,24 +2,35 @@
 package probe
 
 import (
-	gongtable "github.com/fullstack-lang/gongtable/go/models"
+	gongtable "github.com/fullstack-lang/gong/lib/table/go/models"
 
 	"github.com/fullstack-lang/gongxsd/test/books/go/models"
 )
 
-func FillUpFormFromGongstruct[T models.Gongstruct](instance *T, probe *Probe) {
+func FillUpFormFromGongstruct(instance any, probe *Probe) {
 	formStage := probe.formStage
 	formStage.Reset()
-	formStage.Commit()
 
-	FillUpNamedFormFromGongstruct[T](instance, probe, formStage, gongtable.FormGroupDefaultName.ToString())
+	FillUpNamedFormFromGongstruct(instance, probe, formStage, FormName)
 
 }
 
-func FillUpNamedFormFromGongstruct[T models.Gongstruct](instance *T, probe *Probe, formStage *gongtable.StageStruct, formName string) {
+func FillUpNamedFormFromGongstruct(instance any, probe *Probe, formStage *gongtable.Stage, formName string) {
 
 	switch instancesTyped := any(instance).(type) {
 	// insertion point
+	case *models.A_books:
+		formGroup := (&gongtable.FormGroup{
+			Name:  formName,
+			Label: "A_books Form",
+		}).Stage(formStage)
+		formGroup.OnSave = __gong__New__A_booksFormCallback(
+			instancesTyped,
+			probe,
+			formGroup,
+		)
+		formGroup.HasSuppressButton = true
+		FillUpForm(instancesTyped, formGroup, probe)
 	case *models.BookType:
 		formGroup := (&gongtable.FormGroup{
 			Name:  formName,
