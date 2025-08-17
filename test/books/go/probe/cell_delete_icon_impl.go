@@ -29,8 +29,6 @@ func (cellDeleteIconImpl *CellDeleteIconImpl[T]) CellIconUpdated(stage *gongtabl
 
 	switch instancesTyped := any(cellDeleteIconImpl.Instance).(type) {
 	// insertion point
-	case *models.A_books:
-		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
 	case *models.BookType:
 		instancesTyped.Unstage(cellDeleteIconImpl.probe.stageOfInterest)
 	case *models.Books:

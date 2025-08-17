@@ -82,16 +82,6 @@ func updateAndCommitTree(
 
 		switch gongStruct.Name {
 		// insertion point
-		case "A_books":
-			nodeGongstruct.Name = name
-			set := *models.GetGongstructInstancesSet[models.A_books](probe.stageOfInterest)
-			for _a_books := range set {
-				nodeInstance := &tree.Node{Name: _a_books.GetName()}
-				nodeInstance.IsNodeClickable = true
-				nodeInstance.Impl = NewInstanceNodeCallback(_a_books, "A_books", probe)
-
-				nodeGongstruct.Children = append(nodeGongstruct.Children, nodeInstance)
-			}
 		case "BookType":
 			nodeGongstruct.Name = name
 			set := *models.GetGongstructInstancesSet[models.BookType](probe.stageOfInterest)

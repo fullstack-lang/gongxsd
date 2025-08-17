@@ -208,7 +208,7 @@
 			]
 		},
 		{
-			"label": "01 - gongc books -level1 -skipNpmWorkspaces",
+			"label": "01 - gongc books -level1 -skipStager=false",
 			"type": "shell",
 			"options": {
 				"cwd": "${workspaceFolder}/test/books"
@@ -218,6 +218,7 @@
 			"args": [
 				"-skipNpmWorkspaces",
 				"-level1",
+				"-skipStager=false",
 				"go/models",
 			]
 		},

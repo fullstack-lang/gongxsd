@@ -5,17 +5,6 @@ package models
 // Its complexity is in O(n)O(p) where p is the number of pointers
 func (stage *Stage) ComputeReverseMaps() {
 	// insertion point per named struct
-	// Compute reverse map for named struct A_books
-	// insertion point per field
-	clear(stage.A_books_Book_reverseMap)
-	stage.A_books_Book_reverseMap = make(map[*BookType]*A_books)
-	for a_books := range stage.A_bookss {
-		_ = a_books
-		for _, _booktype := range a_books.Book {
-			stage.A_books_Book_reverseMap[_booktype] = a_books
-		}
-	}
-
 	// Compute reverse map for named struct BookType
 	// insertion point per field
 	clear(stage.BookType_Credit_reverseMap)

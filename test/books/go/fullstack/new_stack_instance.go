@@ -43,7 +43,6 @@ func NewStackInstance(
 
 	// add orchestration
 	// insertion point
-	models.SetOrchestratorOnAfterUpdate[models.A_books](stage)
 	models.SetOrchestratorOnAfterUpdate[models.BookType](stage)
 	models.SetOrchestratorOnAfterUpdate[models.Books](stage)
 	models.SetOrchestratorOnAfterUpdate[models.Credit](stage)

@@ -9,21 +9,9 @@ func GetReverseFieldOwnerName(
 	res = ""
 	switch inst := any(instance).(type) {
 	// insertion point
-	case *A_books:
-		switch reverseField.GongstructName {
-		// insertion point
-		}
-
 	case *BookType:
 		switch reverseField.GongstructName {
 		// insertion point
-		case "A_books":
-			switch reverseField.Fieldname {
-			case "Book":
-				if _a_books, ok := stage.A_books_Book_reverseMap[inst]; ok {
-					res = _a_books.Name
-				}
-			}
 		case "Books":
 			switch reverseField.Fieldname {
 			case "Book":
@@ -76,19 +64,9 @@ func GetReverseFieldOwner[T Gongstruct](
 	res = nil
 	switch inst := any(instance).(type) {
 	// insertion point
-	case *A_books:
-		switch reverseField.GongstructName {
-		// insertion point
-		}
-
 	case *BookType:
 		switch reverseField.GongstructName {
 		// insertion point
-		case "A_books":
-			switch reverseField.Fieldname {
-			case "Book":
-				res = stage.A_books_Book_reverseMap[inst]
-			}
 		case "Books":
 			switch reverseField.Fieldname {
 			case "Book":

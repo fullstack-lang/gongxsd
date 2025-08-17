@@ -393,7 +393,6 @@ func ParseAstFileFromAst(stage *Stage, inFile *ast.File, fset *token.FileSet) er
 var __gong__map_Indentifiers_gongstructName = make(map[string]string)
 
 // insertion point for identifiers maps
-var __gong__map_A_books = make(map[string]*A_books)
 var __gong__map_BookType = make(map[string]*BookType)
 var __gong__map_Books = make(map[string]*Books)
 var __gong__map_Credit = make(map[string]*Credit)
@@ -570,12 +569,6 @@ func UnmarshallGongstructStaging(stage *Stage, cmap *ast.CommentMap, assignStmt 
 									// this is the place where an instance is created
 									switch gongstructName {
 									// insertion point for identifiers
-									case "A_books":
-										instanceA_books := new(A_books)
-										instanceA_books.Name = instanceName
-										instanceA_books.Stage(stage)
-										instance = any(instanceA_books)
-										__gong__map_A_books[identifier] = instanceA_books
 									case "BookType":
 										instanceBookType := new(BookType)
 										instanceBookType.Name = instanceName
@@ -637,10 +630,6 @@ func UnmarshallGongstructStaging(stage *Stage, cmap *ast.CommentMap, assignStmt 
 						}
 						switch gongstructName {
 						// insertion point for basic lit assignments
-						case "A_books":
-							switch fieldName {
-							// insertion point for date assign code
-							}
 						case "BookType":
 							switch fieldName {
 							// insertion point for date assign code
@@ -714,20 +703,6 @@ func UnmarshallGongstructStaging(stage *Stage, cmap *ast.CommentMap, assignStmt 
 					}
 					switch gongstructName {
 					// insertion point for slice of pointers assignments
-					case "A_books":
-						switch fieldName {
-						// insertion point for slice of pointers assign code
-						case "Book":
-							// perform the append only when the loop is processing the second argument
-							if argNb == 0 {
-								break
-							}
-							identifierOfInstanceToAppend := ident.Name
-							if instanceToAppend, ok := __gong__map_BookType[identifierOfInstanceToAppend]; ok {
-								instanceWhoseFieldIsAppended := __gong__map_A_books[identifier]
-								instanceWhoseFieldIsAppended.Book = append(instanceWhoseFieldIsAppended.Book, instanceToAppend)
-							}
-						}
 					case "BookType":
 						switch fieldName {
 						// insertion point for slice of pointers assign code
@@ -833,14 +808,6 @@ func UnmarshallGongstructStaging(stage *Stage, cmap *ast.CommentMap, assignStmt 
 
 			switch gongstructName {
 			// insertion point for basic lit assignments
-			case "A_books":
-				switch fieldName {
-				// insertion point for field dependant code
-				case "Name":
-					// remove first and last char
-					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
-					__gong__map_A_books[identifier].Name = fielValue
-				}
 			case "BookType":
 				switch fieldName {
 				// insertion point for field dependant code
@@ -879,10 +846,6 @@ func UnmarshallGongstructStaging(stage *Stage, cmap *ast.CommentMap, assignStmt 
 			case "Books":
 				switch fieldName {
 				// insertion point for field dependant code
-				case "Name":
-					// remove first and last char
-					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
-					__gong__map_Books[identifier].Name = fielValue
 				case "Name":
 					// remove first and last char
 					fielValue := basicLit.Value[1 : len(basicLit.Value)-1]
@@ -946,10 +909,6 @@ func UnmarshallGongstructStaging(stage *Stage, cmap *ast.CommentMap, assignStmt 
 			}
 			switch gongstructName {
 			// insertion point for bool & pointers assignments
-			case "A_books":
-				switch fieldName {
-				// insertion point for field dependant code
-				}
 			case "BookType":
 				switch fieldName {
 				// insertion point for field dependant code
@@ -1031,10 +990,6 @@ func UnmarshallGongstructStaging(stage *Stage, cmap *ast.CommentMap, assignStmt 
 				_ = enumValue
 				switch gongstructName {
 				// insertion point for selector expr assignments
-				case "A_books":
-					switch fieldName {
-					// insertion point for selector expr assign code
-					}
 				case "BookType":
 					switch fieldName {
 					// insertion point for selector expr assign code

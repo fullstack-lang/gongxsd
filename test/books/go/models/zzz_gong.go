@@ -87,17 +87,6 @@ type Stage struct {
 	generatesDiff      bool
 
 	// insertion point for definition of arrays registering instances
-	A_bookss           map[*A_books]any
-	A_bookss_mapString map[string]*A_books
-
-	// insertion point for slice of pointers maps
-	A_books_Book_reverseMap map[*BookType]*A_books
-
-	OnAfterA_booksCreateCallback OnAfterCreateInterface[A_books]
-	OnAfterA_booksUpdateCallback OnAfterUpdateInterface[A_books]
-	OnAfterA_booksDeleteCallback OnAfterDeleteInterface[A_books]
-	OnAfterA_booksReadCallback   OnAfterReadInterface[A_books]
-
 	BookTypes           map[*BookType]any
 	BookTypes_mapString map[string]*BookType
 
@@ -166,9 +155,6 @@ type Stage struct {
 	// store the stage order of each instance in order to
 	// preserve this order when serializing them
 	// insertion point for order fields declaration
-	A_booksOrder            uint
-	A_booksMap_Staged_Order map[*A_books]uint
-
 	BookTypeOrder            uint
 	BookTypeMap_Staged_Order map[*BookType]uint
 
@@ -236,20 +222,6 @@ func GetStructInstancesByOrderAuto[T PointerToGongstruct](stage *Stage) (res []T
 	var t T
 	switch any(t).(type) {
 		// insertion point for case
-	case *A_books:
-		tmp := GetStructInstancesByOrder(stage.A_bookss, stage.A_booksMap_Staged_Order)
-
-		// Create a new slice of the generic type T with the same capacity.
-		res = make([]T, 0, len(tmp))
-
-		// Iterate over the source slice and perform a type assertion on each element.
-		for _, v := range tmp {
-			// Assert that the element 'v' can be treated as type 'T'.
-			// Note: This relies on the constraint that PointerToGongstruct
-			// is an interface that *A_books implements.
-			res = append(res, any(v).(T))
-		}
-		return res
 	case *BookType:
 		tmp := GetStructInstancesByOrder(stage.BookTypes, stage.BookTypeMap_Staged_Order)
 
@@ -339,8 +311,6 @@ func (stage *Stage) GetNamedStructNamesByOrder(namedStructName string) (res []st
 
 	switch namedStructName {
 	// insertion point for case
-	case "A_books":
-		res = GetNamedStructInstances(stage.A_bookss, stage.A_booksMap_Staged_Order)
 	case "BookType":
 		res = GetNamedStructInstances(stage.BookTypes, stage.BookTypeMap_Staged_Order)
 	case "Books":
@@ -418,8 +388,6 @@ type BackRepoInterface interface {
 	BackupXL(stage *Stage, dirPath string)
 	RestoreXL(stage *Stage, dirPath string)
 	// insertion point for Commit and Checkout signatures
-	CommitA_books(a_books *A_books)
-	CheckoutA_books(a_books *A_books)
 	CommitBookType(booktype *BookType)
 	CheckoutBookType(booktype *BookType)
 	CommitBooks(books *Books)
@@ -435,9 +403,6 @@ type BackRepoInterface interface {
 func NewStage(name string) (stage *Stage) {
 
 	stage = &Stage{ // insertion point for array initiatialisation
-		A_bookss:           make(map[*A_books]any),
-		A_bookss_mapString: make(map[string]*A_books),
-
 		BookTypes:           make(map[*BookType]any),
 		BookTypes_mapString: make(map[string]*BookType),
 
@@ -460,8 +425,6 @@ func NewStage(name string) (stage *Stage) {
 		// the to be removed stops here
 
 		// insertion point for order map initialisations
-		A_booksMap_Staged_Order: make(map[*A_books]uint),
-
 		BookTypeMap_Staged_Order: make(map[*BookType]uint),
 
 		BooksMap_Staged_Order: make(map[*Books]uint),
@@ -473,7 +436,6 @@ func NewStage(name string) (stage *Stage) {
 		// end of insertion point
 
 		NamedStructs: []*NamedStruct{ // insertion point for order map initialisations
-			{name: "A_books"},
 			{name: "BookType"},
 			{name: "Books"},
 			{name: "Credit"},
@@ -488,8 +450,6 @@ func GetOrder[Type Gongstruct](stage *Stage, instance *Type) uint {
 
 	switch instance := any(instance).(type) {
 	// insertion point for order map initialisations
-	case *A_books:
-		return stage.A_booksMap_Staged_Order[instance]
 	case *BookType:
 		return stage.BookTypeMap_Staged_Order[instance]
 	case *Books:
@@ -507,8 +467,6 @@ func GetOrderPointerGongstruct[Type PointerToGongstruct](stage *Stage, instance 
 
 	switch instance := any(instance).(type) {
 	// insertion point for order map initialisations
-	case *A_books:
-		return stage.A_booksMap_Staged_Order[instance]
 	case *BookType:
 		return stage.BookTypeMap_Staged_Order[instance]
 	case *Books:
@@ -544,7 +502,6 @@ func (stage *Stage) Commit() {
 	}
 
 	// insertion point for computing the map of number of instances per gongstruct
-	stage.Map_GongStructName_InstancesNb["A_books"] = len(stage.A_bookss)
 	stage.Map_GongStructName_InstancesNb["BookType"] = len(stage.BookTypes)
 	stage.Map_GongStructName_InstancesNb["Books"] = len(stage.Bookss)
 	stage.Map_GongStructName_InstancesNb["Credit"] = len(stage.Credits)
@@ -559,7 +516,6 @@ func (stage *Stage) Checkout() {
 
 	stage.ComputeReverseMaps()
 	// insertion point for computing the map of number of instances per gongstruct
-	stage.Map_GongStructName_InstancesNb["A_books"] = len(stage.A_bookss)
 	stage.Map_GongStructName_InstancesNb["BookType"] = len(stage.BookTypes)
 	stage.Map_GongStructName_InstancesNb["Books"] = len(stage.Bookss)
 	stage.Map_GongStructName_InstancesNb["Credit"] = len(stage.Credits)
@@ -596,61 +552,6 @@ func (stage *Stage) RestoreXL(dirPath string) {
 }
 
 // insertion point for cumulative sub template with model space calls
-// Stage puts a_books to the model stage
-func (a_books *A_books) Stage(stage *Stage) *A_books {
-
-	if _, ok := stage.A_bookss[a_books]; !ok {
-		stage.A_bookss[a_books] = __member
-		stage.A_booksMap_Staged_Order[a_books] = stage.A_booksOrder
-		stage.A_booksOrder++
-	}
-	stage.A_bookss_mapString[a_books.Name] = a_books
-
-	return a_books
-}
-
-// Unstage removes a_books off the model stage
-func (a_books *A_books) Unstage(stage *Stage) *A_books {
-	delete(stage.A_bookss, a_books)
-	delete(stage.A_bookss_mapString, a_books.Name)
-	return a_books
-}
-
-// UnstageVoid removes a_books off the model stage
-func (a_books *A_books) UnstageVoid(stage *Stage) {
-	delete(stage.A_bookss, a_books)
-	delete(stage.A_bookss_mapString, a_books.Name)
-}
-
-// commit a_books to the back repo (if it is already staged)
-func (a_books *A_books) Commit(stage *Stage) *A_books {
-	if _, ok := stage.A_bookss[a_books]; ok {
-		if stage.BackRepo != nil {
-			stage.BackRepo.CommitA_books(a_books)
-		}
-	}
-	return a_books
-}
-
-func (a_books *A_books) CommitVoid(stage *Stage) {
-	a_books.Commit(stage)
-}
-
-// Checkout a_books to the back repo (if it is already staged)
-func (a_books *A_books) Checkout(stage *Stage) *A_books {
-	if _, ok := stage.A_bookss[a_books]; ok {
-		if stage.BackRepo != nil {
-			stage.BackRepo.CheckoutA_books(a_books)
-		}
-	}
-	return a_books
-}
-
-// for satisfaction of GongStruct interface
-func (a_books *A_books) GetName() (res string) {
-	return a_books.Name
-}
-
 // Stage puts booktype to the model stage
 func (booktype *BookType) Stage(stage *Stage) *BookType {
 
@@ -873,7 +774,6 @@ func (link *Link) GetName() (res string) {
 
 // swagger:ignore
 type AllModelsStructCreateInterface interface { // insertion point for Callbacks on creation
-	CreateORMA_books(A_books *A_books)
 	CreateORMBookType(BookType *BookType)
 	CreateORMBooks(Books *Books)
 	CreateORMCredit(Credit *Credit)
@@ -881,7 +781,6 @@ type AllModelsStructCreateInterface interface { // insertion point for Callbacks
 }
 
 type AllModelsStructDeleteInterface interface { // insertion point for Callbacks on deletion
-	DeleteORMA_books(A_books *A_books)
 	DeleteORMBookType(BookType *BookType)
 	DeleteORMBooks(Books *Books)
 	DeleteORMCredit(Credit *Credit)
@@ -889,11 +788,6 @@ type AllModelsStructDeleteInterface interface { // insertion point for Callbacks
 }
 
 func (stage *Stage) Reset() { // insertion point for array reset
-	stage.A_bookss = make(map[*A_books]any)
-	stage.A_bookss_mapString = make(map[string]*A_books)
-	stage.A_booksMap_Staged_Order = make(map[*A_books]uint)
-	stage.A_booksOrder = 0
-
 	stage.BookTypes = make(map[*BookType]any)
 	stage.BookTypes_mapString = make(map[string]*BookType)
 	stage.BookTypeMap_Staged_Order = make(map[*BookType]uint)
@@ -917,9 +811,6 @@ func (stage *Stage) Reset() { // insertion point for array reset
 }
 
 func (stage *Stage) Nil() { // insertion point for array nil
-	stage.A_bookss = nil
-	stage.A_bookss_mapString = nil
-
 	stage.BookTypes = nil
 	stage.BookTypes_mapString = nil
 
@@ -935,10 +826,6 @@ func (stage *Stage) Nil() { // insertion point for array nil
 }
 
 func (stage *Stage) Unstage() { // insertion point for array nil
-	for a_books := range stage.A_bookss {
-		a_books.Unstage(stage)
-	}
-
 	for booktype := range stage.BookTypes {
 		booktype.Unstage(stage)
 	}
@@ -1016,8 +903,6 @@ func GongGetSet[Type GongstructSet](stage *Stage) *Type {
 
 	switch any(ret).(type) {
 	// insertion point for generic get functions
-	case map[*A_books]any:
-		return any(&stage.A_bookss).(*Type)
 	case map[*BookType]any:
 		return any(&stage.BookTypes).(*Type)
 	case map[*Books]any:
@@ -1038,8 +923,6 @@ func GongGetMap[Type GongstructMapString](stage *Stage) *Type {
 
 	switch any(ret).(type) {
 	// insertion point for generic get functions
-	case map[string]*A_books:
-		return any(&stage.A_bookss_mapString).(*Type)
 	case map[string]*BookType:
 		return any(&stage.BookTypes_mapString).(*Type)
 	case map[string]*Books:
@@ -1060,8 +943,6 @@ func GetGongstructInstancesSet[Type Gongstruct](stage *Stage) *map[*Type]any {
 
 	switch any(ret).(type) {
 	// insertion point for generic get functions
-	case A_books:
-		return any(&stage.A_bookss).(*map[*Type]any)
 	case BookType:
 		return any(&stage.BookTypes).(*map[*Type]any)
 	case Books:
@@ -1082,8 +963,6 @@ func GetGongstructInstancesSetFromPointerType[Type PointerToGongstruct](stage *S
 
 	switch any(ret).(type) {
 	// insertion point for generic get functions
-	case *A_books:
-		return any(&stage.A_bookss).(*map[Type]any)
 	case *BookType:
 		return any(&stage.BookTypes).(*map[Type]any)
 	case *Books:
@@ -1104,8 +983,6 @@ func GetGongstructInstancesMap[Type Gongstruct](stage *Stage) *map[string]*Type 
 
 	switch any(ret).(type) {
 	// insertion point for generic get functions
-	case A_books:
-		return any(&stage.A_bookss_mapString).(*map[string]*Type)
 	case BookType:
 		return any(&stage.BookTypes_mapString).(*map[string]*Type)
 	case Books:
@@ -1128,12 +1005,6 @@ func GetAssociationName[Type Gongstruct]() *Type {
 
 	switch any(ret).(type) {
 	// insertion point for instance with special fields
-	case A_books:
-		return any(&A_books{
-			// Initialisation of associations
-			// field is initialized with an instance of BookType with the name of the field
-			Book: []*BookType{{Name: "Book"}},
-		}).(*Type)
 	case BookType:
 		return any(&BookType{
 			// Initialisation of associations
@@ -1172,11 +1043,6 @@ func GetPointerReverseMap[Start, End Gongstruct](fieldname string, stage *Stage)
 
 	switch any(ret).(type) {
 	// insertion point of functions that provide maps for reverse associations
-	// reverse maps of direct associations of A_books
-	case A_books:
-		switch fieldname {
-		// insertion point for per direct association field
-		}
 	// reverse maps of direct associations of BookType
 	case BookType:
 		switch fieldname {
@@ -1213,19 +1079,6 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 
 	switch any(ret).(type) {
 	// insertion point of functions that provide maps for reverse associations
-	// reverse maps of direct associations of A_books
-	case A_books:
-		switch fieldname {
-		// insertion point for per direct association field
-		case "Book":
-			res := make(map[*BookType][]*A_books)
-			for a_books := range stage.A_bookss {
-				for _, booktype_ := range a_books.Book {
-					res[booktype_] = append(res[booktype_], a_books)
-				}
-			}
-			return any(res).(map[*End][]*Start)
-		}
 	// reverse maps of direct associations of BookType
 	case BookType:
 		switch fieldname {
@@ -1282,8 +1135,6 @@ func GetGongstructName[Type Gongstruct]() (res string) {
 
 	switch any(ret).(type) {
 	// insertion point for generic get gongstruct name
-	case A_books:
-		res = "A_books"
 	case BookType:
 		res = "BookType"
 	case Books:
@@ -1304,8 +1155,6 @@ func GetPointerToGongstructName[Type PointerToGongstruct]() (res string) {
 
 	switch any(ret).(type) {
 	// insertion point for generic get gongstruct name
-	case *A_books:
-		res = "A_books"
 	case *BookType:
 		res = "BookType"
 	case *Books:
@@ -1325,12 +1174,10 @@ func GetFields[Type Gongstruct]() (res []string) {
 
 	switch any(ret).(type) {
 	// insertion point for generic get gongstruct name
-	case A_books:
-		res = []string{"Name", "Book"}
 	case BookType:
 		res = []string{"Name", "Edition", "Isbn", "Bestseller", "Title", "Author", "Year", "Format", "Credit"}
 	case Books:
-		res = []string{"Name", "Name", "Book"}
+		res = []string{"Name", "Book"}
 	case Credit:
 		res = []string{"Name", "Page", "Credit_type", "Link", "Credit_words", "Credit_symbol"}
 	case Link:
@@ -1353,15 +1200,9 @@ func GetReverseFields[Type Gongstruct]() (res []ReverseField) {
 	switch any(ret).(type) {
 
 	// insertion point for generic get gongstruct name
-	case A_books:
-		var rf ReverseField
-		_ = rf
 	case BookType:
 		var rf ReverseField
 		_ = rf
-		rf.GongstructName = "A_books"
-		rf.Fieldname = "Book"
-		res = append(res, rf)
 		rf.GongstructName = "Books"
 		rf.Fieldname = "Book"
 		res = append(res, rf)
@@ -1391,12 +1232,10 @@ func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
 
 	switch any(ret).(type) {
 	// insertion point for generic get gongstruct name
-	case *A_books:
-		res = []string{"Name", "Book"}
 	case *BookType:
 		res = []string{"Name", "Edition", "Isbn", "Bestseller", "Title", "Author", "Year", "Format", "Credit"}
 	case *Books:
-		res = []string{"Name", "Name", "Book"}
+		res = []string{"Name", "Book"}
 	case *Credit:
 		res = []string{"Name", "Page", "Credit_type", "Link", "Credit_words", "Credit_symbol"}
 	case *Link:
@@ -1442,19 +1281,6 @@ func GetFieldStringValueFromPointer(instance any, fieldName string) (res GongFie
 
 	switch inferedInstance := any(instance).(type) {
 	// insertion point for generic get gongstruct field value
-	case *A_books:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "Book":
-			for idx, __instance__ := range inferedInstance.Book {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		}
 	case *BookType:
 		switch fieldName {
 		// string value of fields
@@ -1489,8 +1315,6 @@ func GetFieldStringValueFromPointer(instance any, fieldName string) (res GongFie
 	case *Books:
 		switch fieldName {
 		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
 		case "Name":
 			res.valueString = inferedInstance.Name
 		case "Book":
@@ -1544,19 +1368,6 @@ func GetFieldStringValue(instance any, fieldName string) (res GongFieldValue) {
 
 	switch inferedInstance := any(instance).(type) {
 	// insertion point for generic get gongstruct field value
-	case A_books:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "Book":
-			for idx, __instance__ := range inferedInstance.Book {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		}
 	case BookType:
 		switch fieldName {
 		// string value of fields
@@ -1591,8 +1402,6 @@ func GetFieldStringValue(instance any, fieldName string) (res GongFieldValue) {
 	case Books:
 		switch fieldName {
 		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
 		case "Name":
 			res.valueString = inferedInstance.Name
 		case "Book":

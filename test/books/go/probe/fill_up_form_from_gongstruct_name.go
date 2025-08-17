@@ -25,19 +25,6 @@ func FillUpFormFromGongstructName(
 
 	switch gongstructName {
 	// insertion point
-	case "A_books":
-		formGroup := (&form.FormGroup{
-			Name:  FormName,
-			Label: prefix + "A_books Form",
-		}).Stage(formStage)
-		formGroup.OnSave = __gong__New__A_booksFormCallback(
-			nil,
-			probe,
-			formGroup,
-		)
-		a_books := new(models.A_books)
-		formGroup.HasSuppressButton = !isNewInstance
-		FillUpForm(a_books, formGroup, probe)
 	case "BookType":
 		formGroup := (&form.FormGroup{
 			Name:  FormName,

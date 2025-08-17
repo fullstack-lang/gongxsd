@@ -15,10 +15,6 @@ func GetInstanceDBFromInstance[T models.Gongstruct, T2 GongstructDB](
 
 	switch concreteInstance := any(instance).(type) {
 	// insertion point for per struct backup
-	case *models.A_books:
-		a_booksInstance := any(concreteInstance).(*models.A_books)
-		ret2 := backRepo.BackRepoA_books.GetA_booksDBFromA_booksPtr(a_booksInstance)
-		ret = any(ret2).(*T2)
 	case *models.BookType:
 		booktypeInstance := any(concreteInstance).(*models.BookType)
 		ret2 := backRepo.BackRepoBookType.GetBookTypeDBFromBookTypePtr(booktypeInstance)
@@ -48,11 +44,6 @@ func GetID[T models.Gongstruct](
 
 	switch inst := any(instance).(type) {
 	// insertion point for per struct backup
-	case *models.A_books:
-		tmp := GetInstanceDBFromInstance[models.A_books, A_booksDB](
-			stage, backRepo, inst,
-		)
-		id = int(tmp.ID)
 	case *models.BookType:
 		tmp := GetInstanceDBFromInstance[models.BookType, BookTypeDB](
 			stage, backRepo, inst,
@@ -86,11 +77,6 @@ func GetIDPointer[T models.PointerToGongstruct](
 
 	switch inst := any(instance).(type) {
 	// insertion point for per struct backup
-	case *models.A_books:
-		tmp := GetInstanceDBFromInstance[models.A_books, A_booksDB](
-			stage, backRepo, inst,
-		)
-		id = int(tmp.ID)
 	case *models.BookType:
 		tmp := GetInstanceDBFromInstance[models.BookType, BookTypeDB](
 			stage, backRepo, inst,

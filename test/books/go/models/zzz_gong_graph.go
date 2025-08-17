@@ -5,9 +5,6 @@ func IsStaged[Type Gongstruct](stage *Stage, instance *Type) (ok bool) {
 
 	switch target := any(instance).(type) {
 	// insertion point for stage
-	case *A_books:
-		ok = stage.IsStagedA_books(target)
-
 	case *BookType:
 		ok = stage.IsStagedBookType(target)
 
@@ -27,13 +24,6 @@ func IsStaged[Type Gongstruct](stage *Stage, instance *Type) (ok bool) {
 }
 
 // insertion point for stage per struct
-func (stage *Stage) IsStagedA_books(a_books *A_books) (ok bool) {
-
-	_, ok = stage.A_bookss[a_books]
-
-	return
-}
-
 func (stage *Stage) IsStagedBookType(booktype *BookType) (ok bool) {
 
 	_, ok = stage.BookTypes[booktype]
@@ -70,9 +60,6 @@ func StageBranch[Type Gongstruct](stage *Stage, instance *Type) {
 
 	switch target := any(instance).(type) {
 	// insertion point for stage branch
-	case *A_books:
-		stage.StageBranchA_books(target)
-
 	case *BookType:
 		stage.StageBranchBookType(target)
 
@@ -91,24 +78,6 @@ func StageBranch[Type Gongstruct](stage *Stage, instance *Type) {
 }
 
 // insertion point for stage branch per struct
-func (stage *Stage) StageBranchA_books(a_books *A_books) {
-
-	// check if instance is already staged
-	if IsStaged(stage, a_books) {
-		return
-	}
-
-	a_books.Stage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _booktype := range a_books.Book {
-		StageBranch(stage, _booktype)
-	}
-
-}
-
 func (stage *Stage) StageBranchBookType(booktype *BookType) {
 
 	// check if instance is already staged
@@ -189,10 +158,6 @@ func CopyBranch[Type Gongstruct](from *Type) (to *Type) {
 
 	switch fromT := any(from).(type) {
 	// insertion point for stage branch
-	case *A_books:
-		toT := CopyBranchA_books(mapOrigCopy, fromT)
-		return any(toT).(*Type)
-
 	case *BookType:
 		toT := CopyBranchBookType(mapOrigCopy, fromT)
 		return any(toT).(*Type)
@@ -216,28 +181,6 @@ func CopyBranch[Type Gongstruct](from *Type) (to *Type) {
 }
 
 // insertion point for stage branch per struct
-func CopyBranchA_books(mapOrigCopy map[any]any, a_booksFrom *A_books) (a_booksTo *A_books) {
-
-	// a_booksFrom has already been copied
-	if _a_booksTo, ok := mapOrigCopy[a_booksFrom]; ok {
-		a_booksTo = _a_booksTo.(*A_books)
-		return
-	}
-
-	a_booksTo = new(A_books)
-	mapOrigCopy[a_booksFrom] = a_booksTo
-	a_booksFrom.CopyBasicFields(a_booksTo)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _booktype := range a_booksFrom.Book {
-		a_booksTo.Book = append(a_booksTo.Book, CopyBranchBookType(mapOrigCopy, _booktype))
-	}
-
-	return
-}
-
 func CopyBranchBookType(mapOrigCopy map[any]any, booktypeFrom *BookType) (booktypeTo *BookType) {
 
 	// booktypeFrom has already been copied
@@ -331,9 +274,6 @@ func UnstageBranch[Type Gongstruct](stage *Stage, instance *Type) {
 
 	switch target := any(instance).(type) {
 	// insertion point for unstage branch
-	case *A_books:
-		stage.UnstageBranchA_books(target)
-
 	case *BookType:
 		stage.UnstageBranchBookType(target)
 
@@ -352,24 +292,6 @@ func UnstageBranch[Type Gongstruct](stage *Stage, instance *Type) {
 }
 
 // insertion point for unstage branch per struct
-func (stage *Stage) UnstageBranchA_books(a_books *A_books) {
-
-	// check if instance is already staged
-	if !IsStaged(stage, a_books) {
-		return
-	}
-
-	a_books.Unstage(stage)
-
-	//insertion point for the staging of instances referenced by pointers
-
-	//insertion point for the staging of instances referenced by slice of pointers
-	for _, _booktype := range a_books.Book {
-		UnstageBranch(stage, _booktype)
-	}
-
-}
-
 func (stage *Stage) UnstageBranchBookType(booktype *BookType) {
 
 	// check if instance is already staged

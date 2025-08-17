@@ -66,9 +66,6 @@ type BooksDB struct {
 	// Declation for basic field booksDB.Name
 	Name_Data sql.NullString
 
-	// Declation for basic field booksDB.Name
-	Name_Data sql.NullString
-
 	// encoding of pointers
 	// for GORM serialization, it is necessary to embed to Pointer Encoding declaration
 	BooksPointersEncoding
@@ -92,15 +89,12 @@ type BooksWOP struct {
 	// insertion for WOP basic fields
 
 	Name string `xlsx:"1"`
-
-	Name string `xlsx:"2"`
 	// insertion for WOP pointer fields
 }
 
 var Books_Fields = []string{
 	// insertion for WOP basic fields
 	"ID",
-	"Name",
 	"Name",
 }
 
@@ -408,17 +402,11 @@ func (booksDB *BooksDB) CopyBasicFieldsFromBooks(books *models.Books) {
 
 	booksDB.Name_Data.String = books.Name
 	booksDB.Name_Data.Valid = true
-
-	booksDB.Name_Data.String = books.Name
-	booksDB.Name_Data.Valid = true
 }
 
 // CopyBasicFieldsFromBooks_WOP
 func (booksDB *BooksDB) CopyBasicFieldsFromBooks_WOP(books *models.Books_WOP) {
 	// insertion point for fields commit
-
-	booksDB.Name_Data.String = books.Name
-	booksDB.Name_Data.Valid = true
 
 	booksDB.Name_Data.String = books.Name
 	booksDB.Name_Data.Valid = true
@@ -430,15 +418,11 @@ func (booksDB *BooksDB) CopyBasicFieldsFromBooksWOP(books *BooksWOP) {
 
 	booksDB.Name_Data.String = books.Name
 	booksDB.Name_Data.Valid = true
-
-	booksDB.Name_Data.String = books.Name
-	booksDB.Name_Data.Valid = true
 }
 
 // CopyBasicFieldsToBooks
 func (booksDB *BooksDB) CopyBasicFieldsToBooks(books *models.Books) {
 	// insertion point for checkout of basic fields (back repo to stage)
-	books.Name = booksDB.Name_Data.String
 	books.Name = booksDB.Name_Data.String
 }
 
@@ -446,14 +430,12 @@ func (booksDB *BooksDB) CopyBasicFieldsToBooks(books *models.Books) {
 func (booksDB *BooksDB) CopyBasicFieldsToBooks_WOP(books *models.Books_WOP) {
 	// insertion point for checkout of basic fields (back repo to stage)
 	books.Name = booksDB.Name_Data.String
-	books.Name = booksDB.Name_Data.String
 }
 
 // CopyBasicFieldsToBooksWOP
 func (booksDB *BooksDB) CopyBasicFieldsToBooksWOP(books *BooksWOP) {
 	books.ID = int(booksDB.ID)
 	// insertion point for checkout of basic fields (back repo to stage)
-	books.Name = booksDB.Name_Data.String
 	books.Name = booksDB.Name_Data.String
 }
 

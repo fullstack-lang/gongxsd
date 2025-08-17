@@ -104,47 +104,6 @@ func (stage *Stage) Marshall(file *os.File, modelsPackageName, packageName strin
 	_ = setValueField
 
 	// insertion initialization of objects to stage
-	map_A_books_Identifiers := make(map[*A_books]string)
-	_ = map_A_books_Identifiers
-
-	a_booksOrdered := []*A_books{}
-	for a_books := range stage.A_bookss {
-		a_booksOrdered = append(a_booksOrdered, a_books)
-	}
-	sort.Slice(a_booksOrdered[:], func(i, j int) bool {
-		a_booksi := a_booksOrdered[i]
-		a_booksj := a_booksOrdered[j]
-		a_booksi_order, oki := stage.A_booksMap_Staged_Order[a_booksi]
-		a_booksj_order, okj := stage.A_booksMap_Staged_Order[a_booksj]
-		if !oki || !okj {
-			log.Fatalln("unknown pointers")
-		}
-		return a_booksi_order < a_booksj_order
-	})
-	if len(a_booksOrdered) > 0 {
-		identifiersDecl += "\n"
-	}
-	for idx, a_books := range a_booksOrdered {
-
-		id = generatesIdentifier("A_books", idx, a_books.Name)
-		map_A_books_Identifiers[a_books] = id
-
-		decl = IdentifiersDecls
-		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
-		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "A_books")
-		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", a_books.Name)
-		identifiersDecl += decl
-
-		initializerStatements += "\n"
-		// Initialisation of values
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(a_books.Name))
-		initializerStatements += setValueField
-
-	}
-
 	map_BookType_Identifiers := make(map[*BookType]string)
 	_ = map_BookType_Identifiers
 
@@ -261,12 +220,6 @@ func (stage *Stage) Marshall(file *os.File, modelsPackageName, packageName strin
 
 		initializerStatements += "\n"
 		// Initialisation of values
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(books.Name))
-		initializerStatements += setValueField
-
 		setValueField = StringInitStatement
 		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
 		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
@@ -394,27 +347,6 @@ func (stage *Stage) Marshall(file *os.File, modelsPackageName, packageName strin
 	}
 
 	// insertion initialization of objects to stage
-	if len(a_booksOrdered) > 0 {
-		pointersInitializesStatements += "\n\t// setup of A_books instances pointers"
-	}
-	for idx, a_books := range a_booksOrdered {
-		var setPointerField string
-		_ = setPointerField
-
-		id = generatesIdentifier("A_books", idx, a_books.Name)
-		map_A_books_Identifiers[a_books] = id
-
-		// Initialisation of values
-		for _, _booktype := range a_books.Book {
-			setPointerField = SliceOfPointersFieldInitStatement
-			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Book")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_BookType_Identifiers[_booktype])
-			pointersInitializesStatements += setPointerField
-		}
-
-	}
-
 	if len(booktypeOrdered) > 0 {
 		pointersInitializesStatements += "\n\t// setup of BookType instances pointers"
 	}

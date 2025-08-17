@@ -19,8 +19,6 @@ func updateAndCommitTablePointerToGongstruct[T models.PointerToGongstruct](
 	var typedInstance T
 	switch any(typedInstance).(type) {
 	// insertion point
-	case *models.A_books:
-		updateAndCommitTable[models.A_books](probe)
 	case *models.BookType:
 		updateAndCommitTable[models.BookType](probe)
 	case *models.Books:

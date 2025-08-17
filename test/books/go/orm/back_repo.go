@@ -24,8 +24,6 @@ import (
 // BackRepoStruct supports callback functions
 type BackRepoStruct struct {
 	// insertion point for per struct back repo declarations
-	BackRepoA_books BackRepoA_booksStruct
-
 	BackRepoBookType BackRepoBookTypeStruct
 
 	BackRepoBooks BackRepoBooksStruct
@@ -55,7 +53,6 @@ func NewBackRepo(stage *models.Stage, filename string) (backRepo *BackRepoStruct
 
 	/* THIS IS REMOVED BY GONG COMPILER IF TARGET IS gorm
 	db = dbgorm.NewDBWrapper(filename, "github_com_fullstack_lang_gongxsd_test_books_go",
-		&A_booksDB{},
 		&BookTypeDB{},
 		&BooksDB{},
 		&CreditDB{},
@@ -66,14 +63,6 @@ func NewBackRepo(stage *models.Stage, filename string) (backRepo *BackRepoStruct
 	backRepo = new(BackRepoStruct)
 
 	// insertion point for per struct back repo declarations
-	backRepo.BackRepoA_books = BackRepoA_booksStruct{
-		Map_A_booksDBID_A_booksPtr: make(map[uint]*models.A_books, 0),
-		Map_A_booksDBID_A_booksDB:  make(map[uint]*A_booksDB, 0),
-		Map_A_booksPtr_A_booksDBID: make(map[*models.A_books]uint, 0),
-
-		db:    db,
-		stage: stage,
-	}
 	backRepo.BackRepoBookType = BackRepoBookTypeStruct{
 		Map_BookTypeDBID_BookTypePtr: make(map[uint]*models.BookType, 0),
 		Map_BookTypeDBID_BookTypeDB:  make(map[uint]*BookTypeDB, 0),
@@ -158,14 +147,12 @@ func (backRepo *BackRepoStruct) Commit(stage *models.Stage) {
 	backRepo.rwMutex.Lock()
 
 	// insertion point for per struct back repo phase one commit
-	backRepo.BackRepoA_books.CommitPhaseOne(stage)
 	backRepo.BackRepoBookType.CommitPhaseOne(stage)
 	backRepo.BackRepoBooks.CommitPhaseOne(stage)
 	backRepo.BackRepoCredit.CommitPhaseOne(stage)
 	backRepo.BackRepoLink.CommitPhaseOne(stage)
 
 	// insertion point for per struct back repo phase two commit
-	backRepo.BackRepoA_books.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoBookType.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoBooks.CommitPhaseTwo(backRepo)
 	backRepo.BackRepoCredit.CommitPhaseTwo(backRepo)
@@ -184,14 +171,12 @@ func (backRepo *BackRepoStruct) Checkout(stage *models.Stage) {
 	backRepo.rwMutex.Lock()
 	defer backRepo.rwMutex.Unlock()
 	// insertion point for per struct back repo phase one commit
-	backRepo.BackRepoA_books.CheckoutPhaseOne()
 	backRepo.BackRepoBookType.CheckoutPhaseOne()
 	backRepo.BackRepoBooks.CheckoutPhaseOne()
 	backRepo.BackRepoCredit.CheckoutPhaseOne()
 	backRepo.BackRepoLink.CheckoutPhaseOne()
 
 	// insertion point for per struct back repo phase two commit
-	backRepo.BackRepoA_books.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoBookType.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoBooks.CheckoutPhaseTwo(backRepo)
 	backRepo.BackRepoCredit.CheckoutPhaseTwo(backRepo)
@@ -203,7 +188,6 @@ func (backRepo *BackRepoStruct) Backup(stage *models.Stage, dirPath string) {
 	os.MkdirAll(dirPath, os.ModePerm)
 
 	// insertion point for per struct backup
-	backRepo.BackRepoA_books.Backup(dirPath)
 	backRepo.BackRepoBookType.Backup(dirPath)
 	backRepo.BackRepoBooks.Backup(dirPath)
 	backRepo.BackRepoCredit.Backup(dirPath)
@@ -218,7 +202,6 @@ func (backRepo *BackRepoStruct) BackupXL(stage *models.Stage, dirPath string) {
 	file := xlsx.NewFile()
 
 	// insertion point for per struct backup
-	backRepo.BackRepoA_books.BackupXL(file)
 	backRepo.BackRepoBookType.BackupXL(file)
 	backRepo.BackRepoBooks.BackupXL(file)
 	backRepo.BackRepoCredit.BackupXL(file)
@@ -247,7 +230,6 @@ func (backRepo *BackRepoStruct) Restore(stage *models.Stage, dirPath string) {
 	//
 
 	// insertion point for per struct backup
-	backRepo.BackRepoA_books.RestorePhaseOne(dirPath)
 	backRepo.BackRepoBookType.RestorePhaseOne(dirPath)
 	backRepo.BackRepoBooks.RestorePhaseOne(dirPath)
 	backRepo.BackRepoCredit.RestorePhaseOne(dirPath)
@@ -258,7 +240,6 @@ func (backRepo *BackRepoStruct) Restore(stage *models.Stage, dirPath string) {
 	//
 
 	// insertion point for per struct backup
-	backRepo.BackRepoA_books.RestorePhaseTwo()
 	backRepo.BackRepoBookType.RestorePhaseTwo()
 	backRepo.BackRepoBooks.RestorePhaseTwo()
 	backRepo.BackRepoCredit.RestorePhaseTwo()
@@ -290,7 +271,6 @@ func (backRepo *BackRepoStruct) RestoreXL(stage *models.Stage, dirPath string) {
 	//
 
 	// insertion point for per struct backup
-	backRepo.BackRepoA_books.RestoreXLPhaseOne(file)
 	backRepo.BackRepoBookType.RestoreXLPhaseOne(file)
 	backRepo.BackRepoBooks.RestoreXLPhaseOne(file)
 	backRepo.BackRepoCredit.RestoreXLPhaseOne(file)

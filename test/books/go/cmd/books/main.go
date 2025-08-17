@@ -6,7 +6,7 @@ import (
 	"strconv"
 
 	// insertion point for models import
-	// books_models "github.com/fullstack-lang/gongxsd/test/books/go/models"
+	books_models "github.com/fullstack-lang/gongxsd/test/books/go/models"
 	books_stack "github.com/fullstack-lang/gongxsd/test/books/go/stack"
 
 	// static

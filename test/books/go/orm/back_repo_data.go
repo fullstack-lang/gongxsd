@@ -4,8 +4,6 @@ package orm
 type BackRepoData struct {
 	// insertion point for slices
 
-	A_booksAPIs []*A_booksAPI
-
 	BookTypeAPIs []*BookTypeAPI
 
 	BooksAPIs []*BooksAPI
@@ -25,16 +23,6 @@ func CopyBackRepoToBackRepoData(backRepo *BackRepoStruct, backRepoData *BackRepo
 	defer backRepo.rwMutex.RUnlock()
 
 	// insertion point for slices copies
-	for _, a_booksDB := range backRepo.BackRepoA_books.Map_A_booksDBID_A_booksDB {
-
-		var a_booksAPI A_booksAPI
-		a_booksAPI.ID = a_booksDB.ID
-		a_booksAPI.A_booksPointersEncoding = a_booksDB.A_booksPointersEncoding
-		a_booksDB.CopyBasicFieldsToA_books_WOP(&a_booksAPI.A_books_WOP)
-
-		backRepoData.A_booksAPIs = append(backRepoData.A_booksAPIs, &a_booksAPI)
-	}
-
 	for _, booktypeDB := range backRepo.BackRepoBookType.Map_BookTypeDBID_BookTypeDB {
 
 		var booktypeAPI BookTypeAPI

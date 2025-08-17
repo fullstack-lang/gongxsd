@@ -20,10 +20,6 @@ type DBLite struct {
 
 	// insertion point definitions
 
-	a_booksDBs map[uint]*A_booksDB
-
-	nextIDA_booksDB uint
-
 	booktypeDBs map[uint]*BookTypeDB
 
 	nextIDBookTypeDB uint
@@ -46,8 +42,6 @@ func NewDBLite() *DBLite {
 	return &DBLite{
 		// insertion point maps init
 
-		a_booksDBs: make(map[uint]*A_booksDB),
-
 		booktypeDBs: make(map[uint]*BookTypeDB),
 
 		booksDBs: make(map[uint]*BooksDB),
@@ -69,10 +63,6 @@ func (db *DBLite) Create(instanceDB any) (db.DBInterface, error) {
 
 	switch v := instanceDB.(type) {
 	// insertion point create
-	case *A_booksDB:
-		db.nextIDA_booksDB++
-		v.ID = db.nextIDA_booksDB
-		db.a_booksDBs[v.ID] = v
 	case *BookTypeDB:
 		db.nextIDBookTypeDB++
 		v.ID = db.nextIDBookTypeDB
@@ -117,8 +107,6 @@ func (db *DBLite) Delete(instanceDB any) (db.DBInterface, error) {
 
 	switch v := instanceDB.(type) {
 	// insertion point delete
-	case *A_booksDB:
-		delete(db.a_booksDBs, v.ID)
 	case *BookTypeDB:
 		delete(db.booktypeDBs, v.ID)
 	case *BooksDB:
@@ -145,9 +133,6 @@ func (db *DBLite) Save(instanceDB any) (db.DBInterface, error) {
 
 	switch v := instanceDB.(type) {
 	// insertion point delete
-	case *A_booksDB:
-		db.a_booksDBs[v.ID] = v
-		return db, nil
 	case *BookTypeDB:
 		db.booktypeDBs[v.ID] = v
 		return db, nil
@@ -176,12 +161,6 @@ func (db *DBLite) Updates(instanceDB any) (db.DBInterface, error) {
 
 	switch v := instanceDB.(type) {
 	// insertion point delete
-	case *A_booksDB:
-		if existing, ok := db.a_booksDBs[v.ID]; ok {
-			*existing = *v
-		} else {
-			return nil, errors.New("db A_books github.com/fullstack-lang/gongxsd/test/books/go, record not found")
-		}
 	case *BookTypeDB:
 		if existing, ok := db.booktypeDBs[v.ID]; ok {
 			*existing = *v
@@ -220,12 +199,6 @@ func (db *DBLite) Find(instanceDBs any) (db.DBInterface, error) {
 
 	switch ptr := instanceDBs.(type) {
 	// insertion point find
-	case *[]A_booksDB:
-		*ptr = make([]A_booksDB, 0, len(db.a_booksDBs))
-		for _, v := range db.a_booksDBs {
-			*ptr = append(*ptr, *v)
-		}
-		return db, nil
 	case *[]BookTypeDB:
 		*ptr = make([]BookTypeDB, 0, len(db.booktypeDBs))
 		for _, v := range db.booktypeDBs {
@@ -283,16 +256,6 @@ func (db *DBLite) First(instanceDB any, conds ...any) (db.DBInterface, error) {
 
 	switch instanceDB.(type) {
 	// insertion point first
-	case *A_booksDB:
-		tmp, ok := db.a_booksDBs[uint(i)]
-
-		if !ok {
-			return nil, errors.New(fmt.Sprintf("db.First A_books Unkown entry %d", i))
-		}
-
-		a_booksDB, _ := instanceDB.(*A_booksDB)
-		*a_booksDB = *tmp
-		
 	case *BookTypeDB:
 		tmp, ok := db.booktypeDBs[uint(i)]
 
