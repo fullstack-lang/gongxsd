@@ -8,8 +8,7 @@ import (
 	"sort"
 
 	gongtable_fullstack "github.com/fullstack-lang/gong/lib/table/go/fullstack"
-	form "github.com/fullstack-lang/gong/lib/table/go/models"
-	gongtable_models "github.com/fullstack-lang/gong/lib/table/go/models"
+	table "github.com/fullstack-lang/gong/lib/table/go/models"
 
 	"github.com/fullstack-lang/gongxsd/test/books/go/models"
 )
@@ -40,6 +39,30 @@ func DecodeStringToIntSlice(str string) ([]uint, error) {
 	return decodedData, nil
 }
 
+func GetMap_ID_RowID[FieldType models.PointerToGongstruct](stageOfInterest *models.Stage) (map_ID_rowID map[uint]int) {
+	map_ID_rowID = make(map[uint]int)
+	{
+		orderedByIdInstance := models.GetStructInstancesByOrderAuto[FieldType](stageOfInterest)
+		for rowID, instance := range orderedByIdInstance {
+			id := models.GetOrderPointerGongstruct(stageOfInterest, instance)
+			map_ID_rowID[id] = rowID
+		}
+	}
+	return
+}
+
+func GetMap_RowID_ID[FieldType models.PointerToGongstruct](stageOfInterest *models.Stage) (map_RowID_ID map[int]uint) {
+	map_RowID_ID = make(map[int]uint)
+	{
+		orderedByIdInstance := models.GetStructInstancesByOrderAuto[FieldType](stageOfInterest)
+		for rowID, instance := range orderedByIdInstance {
+			id := models.GetOrderPointerGongstruct(stageOfInterest, instance)
+			map_RowID_ID[rowID] = id
+		}
+	}
+	return
+}
+
 // AssociationSliceToForm add a form div with 2 buttons
 // - one for selection
 // - one for sorting
@@ -47,43 +70,48 @@ func AssociationSliceToForm[InstanceType models.PointerToGongstruct, FieldType m
 	fieldName string,
 	instance InstanceType,
 	field *[]FieldType,
-	formGroup *form.FormGroup,
+	formGroup *table.FormGroup,
 	probe *Probe,
 ) {
 
-	formDiv := (&form.FormDiv{
+	formDiv := (&table.FormDiv{
 		Name: fieldName,
 	}).Stage(probe.formStage)
 	formGroup.FormDivs = append(formGroup.FormDivs, formDiv)
 
-	instanceSliceID := make([]uint, 0)
-	for _, instance := range *field {
-		id := uint(models.GetOrderPointerGongstruct(
-			probe.stageOfInterest,
-			instance,
-		))
-		instanceSliceID = append(instanceSliceID, id)
+	map_ID_RowID := GetMap_ID_RowID[FieldType](probe.stageOfInterest)
+
+	rowIDsOfInstancesInField := make([]uint, 0)
+	{
+		for _, instance := range *field {
+			id := models.GetOrderPointerGongstruct(probe.stageOfInterest, instance)
+			rowIDsOfInstancesInField = append(rowIDsOfInstancesInField,
+				uint(map_ID_RowID[id]))
+		}
 	}
-	storage, err := EncodeIntSliceToString(instanceSliceID)
+
+	storage, err := EncodeIntSliceToString(rowIDsOfInstancesInField)
 	if err != nil {
 		log.Panic("Unable to encode association")
 	}
 
-	formEditAssocButton := (&form.FormEditAssocButton{
-		Name:               fieldName,
-		Label:              fieldName,
-		AssociationStorage: storage,
-		HasToolTip:         true,
-		ToolTipText:        "Edit list of the instances of " + models.GetPointerToGongstructName[FieldType]() + " associated to this field",
+	formEditAssocButton := (&table.FormEditAssocButton{
+		Name:                fieldName,
+		Label:               fieldName,
+		AssociationStorage:  storage,
+		HasToolTip:          true,
+		MatTooltipShowDelay: "1500",
+		ToolTipText:         "Edit list of the instances of " + models.GetPointerToGongstructName[FieldType]() + " associated to this field",
 	}).Stage(probe.formStage)
 	formDiv.FormEditAssocButton = formEditAssocButton
 	onAssocEditon := NewOnAssocEditon(instance, field, probe)
 	formEditAssocButton.OnAssocEditon = onAssocEditon
 
-	formSortAssocButton := (&form.FormSortAssocButton{
+	formSortAssocButton := (&table.FormSortAssocButton{
 		Name:                fieldName,
 		Label:               fieldName,
 		HasToolTip:          true,
+		MatTooltipShowDelay: "1500",
 		ToolTipText:         "Edit order within the list instances of " + models.GetPointerToGongstructName[FieldType]() + " associated to this field",
 		FormEditAssocButton: formEditAssocButton,
 	}).Stage(probe.formStage)
@@ -94,9 +122,9 @@ func AssociationSliceToForm[InstanceType models.PointerToGongstruct, FieldType m
 }
 
 type OnAssocEditon[InstanceType models.PointerToGongstruct, FieldType models.PointerToGongstruct] struct {
-	instance  InstanceType
-	field     *[]FieldType
-	probe     *Probe
+	instance InstanceType
+	field    *[]FieldType
+	probe    *Probe
 }
 
 func NewOnAssocEditon[InstanceType models.PointerToGongstruct, FieldType models.PointerToGongstruct](
@@ -115,7 +143,7 @@ func NewOnAssocEditon[InstanceType models.PointerToGongstruct, FieldType models.
 
 func (onAssocEditon *OnAssocEditon[InstanceType, FieldType]) OnButtonPressed() {
 
-	tableStackName := onAssocEditon.probe.formStage.GetName() + string(form.StackNamePostFixForTableForAssociation)
+	tableStackName := onAssocEditon.probe.formStage.GetName() + string(table.StackNamePostFixForTableForAssociation)
 
 	// tableStackName supposed to be "test-form-table"
 	tableStageForSelection, _ := gongtable_fullstack.NewStackInstance(onAssocEditon.probe.r, tableStackName)
@@ -125,43 +153,42 @@ func (onAssocEditon *OnAssocEditon[InstanceType, FieldType]) OnButtonPressed() {
 	for instance := range instanceSet {
 		instanceSlice = append(instanceSlice, instance)
 	}
+
+	// we supposed that the table is ordered by ID
 	sort.Slice(instanceSlice, func(i, j int) bool {
-		return instanceSlice[i].GetName() < instanceSlice[j].GetName()
+		idI := models.GetOrderPointerGongstruct(onAssocEditon.probe.stageOfInterest, instanceSlice[i])
+		idJ := models.GetOrderPointerGongstruct(onAssocEditon.probe.stageOfInterest, instanceSlice[j])
+
+		return idI < idJ
 	})
 
-	table := new(gongtable_models.Table).Stage(tableStageForSelection)
-	table.Name = string(form.TableSelectExtraName)
-	table.HasColumnSorting = true
-	table.HasFiltering = true
-	table.HasPaginator = false
-	table.HasCheckableRows = true
-	table.HasSaveButton = true
+	instancesTable := new(table.Table).Stage(tableStageForSelection)
+	instancesTable.Name = string(table.TableSelectExtraName)
+	instancesTable.HasColumnSorting = true
+	instancesTable.HasFiltering = true
+	instancesTable.HasPaginator = false
+	instancesTable.HasCheckableRows = true
+	instancesTable.HasSaveButton = true
 
-	column := new(gongtable_models.DisplayedColumn).Stage(tableStageForSelection)
+	column := new(table.DisplayedColumn).Stage(tableStageForSelection)
 	column.Name = "ID"
-	table.DisplayedColumns = append(table.DisplayedColumns, column)
-
-	// filterdInstanceSet is the set of instance that are part of the field
-	filterdInstanceSet := make(map[FieldType]any, 0)
-	for _, instance := range *onAssocEditon.field {
-		filterdInstanceSet[instance] = nil
-	}
+	instancesTable.DisplayedColumns = append(instancesTable.DisplayedColumns, column)
 
 	for _, fieldName := range models.GetFieldsFromPointer[FieldType]() {
-		column := new(gongtable_models.DisplayedColumn).Stage(tableStageForSelection)
-		column.Name = fieldName
-		table.DisplayedColumns = append(table.DisplayedColumns, column)
+		column := new(table.DisplayedColumn).Stage(tableStageForSelection)
+		column.Name = fieldName.Name
+		instancesTable.DisplayedColumns = append(instancesTable.DisplayedColumns, column)
 	}
 	for _, instance := range instanceSlice {
-		row := new(gongtable_models.Row).Stage(tableStageForSelection)
+		row := new(table.Row).Stage(tableStageForSelection)
 		row.Name = instance.GetName()
-		table.Rows = append(table.Rows, row)
+		instancesTable.Rows = append(instancesTable.Rows, row)
 
-		cell := (&gongtable_models.Cell{
+		cell := (&table.Cell{
 			Name: "ID",
 		}).Stage(tableStageForSelection)
 		row.Cells = append(row.Cells, cell)
-		cellInt := (&gongtable_models.CellInt{
+		cellInt := (&table.CellInt{
 			Name: "ID",
 			Value: int(models.GetOrderPointerGongstruct(
 				onAssocEditon.probe.stageOfInterest,
@@ -171,11 +198,11 @@ func (onAssocEditon *OnAssocEditon[InstanceType, FieldType]) OnButtonPressed() {
 		cell.CellInt = cellInt
 
 		for _, fieldName := range models.GetFieldsFromPointer[FieldType]() {
-			cell := new(gongtable_models.Cell).Stage(tableStageForSelection)
+			cell := new(table.Cell).Stage(tableStageForSelection)
 			cell.Name = fmt.Sprintf("Row %s - Column %s", instance.GetName(), fieldName)
 
-			cellString := new(gongtable_models.CellString).Stage(tableStageForSelection)
-			value := models.GetFieldStringValueFromPointer(instance, fieldName)
+			cellString := new(table.CellString).Stage(tableStageForSelection)
+			value := models.GetFieldStringValueFromPointer(instance, fieldName.Name, onAssocEditon.probe.stageOfInterest)
 			cellString.Name = value.GetValueString()
 			cellString.Value = cellString.Name
 			cell.CellString = cellString

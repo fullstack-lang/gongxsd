@@ -5,12 +5,8 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"path/filepath"
-	"regexp"
 	"sort"
 	"strings"
-
-	"github.com/sergi/go-diff/diffmatchpatch"
 )
 
 const marshallRes = `package {{PackageName}}
@@ -36,21 +32,23 @@ var _ map[string]any = map[string]any{
 // function will stage objects
 func _(stage *models.Stage) {
 
-	const __write__local_time = "{{LocalTimeStamp}}"
-	const __write__utc_time__ = "{{UTCTimeStamp}}"
+	// insertion point for declaration of instances to stage{{Identifiers}}
 
-	const __commitId__ = "{{CommitId}}"
+	// insertion point for initialization of values{{ValueInitializers}}
 
-	// Declaration of instances to stage{{Identifiers}}
+	// insertion point for setup of pointers{{PointersInitializers}}
+}`
 
-	// Setup of values{{ValueInitializers}}
+const GongIdentifiersDecls = `
+	{{Identifier}} := (&models.{{GeneratedStructName}}{Name: ` + "`" + `{{GeneratedFieldNameValue}}` + "`" + `}).Stage(stage)`
 
-	// Setup of pointers{{PointersInitializers}}
-}
-`
+const GongUnstageStmt = `
+	{{Identifier}}.Unstage(stage)`
 
-const IdentifiersDecls = `
-	{{Identifier}} := (&models.{{GeneratedStructName}}{}).Stage(stage)`
+// previous version does not hanldle embedded structs (https://github.com/golang/go/issues/9859)
+// simpler version but the name of the instance cannot be human read before the fields initialization
+const IdentifiersDeclsWithoutNameInit = `
+	{{Identifier}} := (&models.{{GeneratedStructName}}{}).Stage(stage)` /* */
 
 const StringInitStatement = `
 	{{Identifier}}.{{GeneratedFieldName}} = ` + "`" + `{{GeneratedFieldNameValue}}` + "`"
@@ -79,34 +77,38 @@ func (stage *Stage) Marshall(file *os.File, modelsPackageName, packageName strin
 	name := file.Name()
 
 	if !strings.HasSuffix(name, ".go") {
-		log.Fatalln(name + " is not a go filename")
+		log.Println(name + " is not a go filename")
 	}
 
 	log.Printf("Marshalling %s", name)
-	newBase := filepath.Base(file.Name())
 
-	res := marshallRes
-	res = strings.ReplaceAll(res, "{{databaseName}}", strings.ReplaceAll(newBase, ".go", ""))
+	res, err := stage.MarshallToString(modelsPackageName, packageName)
+	if err != nil {
+		log.Fatalln("Error marshalling to string:", err)
+	}
+
+	fmt.Fprintln(file, res)
+}
+
+// MarshallToString marshall the stage content into a string
+func (stage *Stage) MarshallToString(modelsPackageName, packageName string) (res string, err error) {
+
+	res = marshallRes
 	res = strings.ReplaceAll(res, "{{PackageName}}", packageName)
 	res = strings.ReplaceAll(res, "{{ModelsPackageName}}", modelsPackageName)
 
 	// map of identifiers
 	// var StageMapDstructIds map[*Dstruct]string
-	identifiersDecl := ""
-	initializerStatements := ""
-	pointersInitializesStatements := ""
+	var identifiersDecl strings.Builder
+	var initializerStatements strings.Builder
+	var pointersInitializesStatements strings.Builder
 
-	id := ""
-	_ = id
 	decl := ""
 	_ = decl
 	setValueField := ""
 	_ = setValueField
 
 	// insertion initialization of objects to stage
-	map_BookType_Identifiers := make(map[*BookType]string)
-	_ = map_BookType_Identifiers
-
 	booktypeOrdered := []*BookType{}
 	for booktype := range stage.BookTypes {
 		booktypeOrdered = append(booktypeOrdered, booktype)
@@ -122,73 +124,24 @@ func (stage *Stage) Marshall(file *os.File, modelsPackageName, packageName strin
 		return booktypei_order < booktypej_order
 	})
 	if len(booktypeOrdered) > 0 {
-		identifiersDecl += "\n"
+		identifiersDecl.WriteString("\n")
 	}
-	for idx, booktype := range booktypeOrdered {
+	for _, booktype := range booktypeOrdered {
 
-		id = generatesIdentifier("BookType", idx, booktype.Name)
-		map_BookType_Identifiers[booktype] = id
+		identifiersDecl.WriteString(booktype.GongMarshallIdentifier(stage))
 
-		decl = IdentifiersDecls
-		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
-		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "BookType")
-		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", booktype.Name)
-		identifiersDecl += decl
-
-		initializerStatements += "\n"
-		// Initialisation of values
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(booktype.Name))
-		initializerStatements += setValueField
-
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Edition")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(booktype.Edition))
-		initializerStatements += setValueField
-
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Isbn")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(booktype.Isbn))
-		initializerStatements += setValueField
-
-		setValueField = NumberInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Bestseller")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", fmt.Sprintf("%t", booktype.Bestseller))
-		initializerStatements += setValueField
-
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Title")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(booktype.Title))
-		initializerStatements += setValueField
-
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Author")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(booktype.Author))
-		initializerStatements += setValueField
-
-		setValueField = NumberInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Year")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", fmt.Sprintf("%d", booktype.Year))
-		initializerStatements += setValueField
-
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Format")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(booktype.Format))
-		initializerStatements += setValueField
-
+		initializerStatements.WriteString("\n")
+		// Insertion point for basic fields value assignment
+		initializerStatements.WriteString(booktype.GongMarshallField(stage, "Name"))
+		initializerStatements.WriteString(booktype.GongMarshallField(stage, "Edition"))
+		initializerStatements.WriteString(booktype.GongMarshallField(stage, "Isbn"))
+		initializerStatements.WriteString(booktype.GongMarshallField(stage, "Bestseller"))
+		initializerStatements.WriteString(booktype.GongMarshallField(stage, "Title"))
+		initializerStatements.WriteString(booktype.GongMarshallField(stage, "Author"))
+		initializerStatements.WriteString(booktype.GongMarshallField(stage, "Year"))
+		initializerStatements.WriteString(booktype.GongMarshallField(stage, "Format"))
+		pointersInitializesStatements.WriteString(booktype.GongMarshallField(stage, "Credit"))
 	}
-
-	map_Books_Identifiers := make(map[*Books]string)
-	_ = map_Books_Identifiers
 
 	booksOrdered := []*Books{}
 	for books := range stage.Bookss {
@@ -205,31 +158,17 @@ func (stage *Stage) Marshall(file *os.File, modelsPackageName, packageName strin
 		return booksi_order < booksj_order
 	})
 	if len(booksOrdered) > 0 {
-		identifiersDecl += "\n"
+		identifiersDecl.WriteString("\n")
 	}
-	for idx, books := range booksOrdered {
+	for _, books := range booksOrdered {
 
-		id = generatesIdentifier("Books", idx, books.Name)
-		map_Books_Identifiers[books] = id
+		identifiersDecl.WriteString(books.GongMarshallIdentifier(stage))
 
-		decl = IdentifiersDecls
-		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
-		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "Books")
-		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", books.Name)
-		identifiersDecl += decl
-
-		initializerStatements += "\n"
-		// Initialisation of values
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(books.Name))
-		initializerStatements += setValueField
-
+		initializerStatements.WriteString("\n")
+		// Insertion point for basic fields value assignment
+		initializerStatements.WriteString(books.GongMarshallField(stage, "Name"))
+		pointersInitializesStatements.WriteString(books.GongMarshallField(stage, "Book"))
 	}
-
-	map_Credit_Identifiers := make(map[*Credit]string)
-	_ = map_Credit_Identifiers
 
 	creditOrdered := []*Credit{}
 	for credit := range stage.Credits {
@@ -246,55 +185,21 @@ func (stage *Stage) Marshall(file *os.File, modelsPackageName, packageName strin
 		return crediti_order < creditj_order
 	})
 	if len(creditOrdered) > 0 {
-		identifiersDecl += "\n"
+		identifiersDecl.WriteString("\n")
 	}
-	for idx, credit := range creditOrdered {
+	for _, credit := range creditOrdered {
 
-		id = generatesIdentifier("Credit", idx, credit.Name)
-		map_Credit_Identifiers[credit] = id
+		identifiersDecl.WriteString(credit.GongMarshallIdentifier(stage))
 
-		decl = IdentifiersDecls
-		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
-		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "Credit")
-		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", credit.Name)
-		identifiersDecl += decl
-
-		initializerStatements += "\n"
-		// Initialisation of values
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(credit.Name))
-		initializerStatements += setValueField
-
-		setValueField = NumberInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Page")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", fmt.Sprintf("%d", credit.Page))
-		initializerStatements += setValueField
-
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Credit_type")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(credit.Credit_type))
-		initializerStatements += setValueField
-
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Credit_words")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(credit.Credit_words))
-		initializerStatements += setValueField
-
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Credit_symbol")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(credit.Credit_symbol))
-		initializerStatements += setValueField
-
+		initializerStatements.WriteString("\n")
+		// Insertion point for basic fields value assignment
+		initializerStatements.WriteString(credit.GongMarshallField(stage, "Name"))
+		initializerStatements.WriteString(credit.GongMarshallField(stage, "Page"))
+		initializerStatements.WriteString(credit.GongMarshallField(stage, "Credit_type"))
+		pointersInitializesStatements.WriteString(credit.GongMarshallField(stage, "Link"))
+		initializerStatements.WriteString(credit.GongMarshallField(stage, "Credit_words"))
+		initializerStatements.WriteString(credit.GongMarshallField(stage, "Credit_symbol"))
 	}
-
-	map_Link_Identifiers := make(map[*Link]string)
-	_ = map_Link_Identifiers
 
 	linkOrdered := []*Link{}
 	for link := range stage.Links {
@@ -311,130 +216,55 @@ func (stage *Stage) Marshall(file *os.File, modelsPackageName, packageName strin
 		return linki_order < linkj_order
 	})
 	if len(linkOrdered) > 0 {
-		identifiersDecl += "\n"
+		identifiersDecl.WriteString("\n")
 	}
-	for idx, link := range linkOrdered {
+	for _, link := range linkOrdered {
 
-		id = generatesIdentifier("Link", idx, link.Name)
-		map_Link_Identifiers[link] = id
+		identifiersDecl.WriteString(link.GongMarshallIdentifier(stage))
 
-		decl = IdentifiersDecls
-		decl = strings.ReplaceAll(decl, "{{Identifier}}", id)
-		decl = strings.ReplaceAll(decl, "{{GeneratedStructName}}", "Link")
-		decl = strings.ReplaceAll(decl, "{{GeneratedFieldNameValue}}", link.Name)
-		identifiersDecl += decl
-
-		initializerStatements += "\n"
-		// Initialisation of values
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "Name")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(link.Name))
-		initializerStatements += setValueField
-
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "NameXSD")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(link.NameXSD))
-		initializerStatements += setValueField
-
-		setValueField = StringInitStatement
-		setValueField = strings.ReplaceAll(setValueField, "{{Identifier}}", id)
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldName}}", "EnclosedText")
-		setValueField = strings.ReplaceAll(setValueField, "{{GeneratedFieldNameValue}}", string(link.EnclosedText))
-		initializerStatements += setValueField
-
+		initializerStatements.WriteString("\n")
+		// Insertion point for basic fields value assignment
+		initializerStatements.WriteString(link.GongMarshallField(stage, "Name"))
+		initializerStatements.WriteString(link.GongMarshallField(stage, "NameXSD"))
+		initializerStatements.WriteString(link.GongMarshallField(stage, "EnclosedText"))
 	}
 
 	// insertion initialization of objects to stage
-	if len(booktypeOrdered) > 0 {
-		pointersInitializesStatements += "\n\t// setup of BookType instances pointers"
-	}
-	for idx, booktype := range booktypeOrdered {
+	for _, booktype := range booktypeOrdered {
+		_ = booktype
 		var setPointerField string
 		_ = setPointerField
 
-		id = generatesIdentifier("BookType", idx, booktype.Name)
-		map_BookType_Identifiers[booktype] = id
-
-		// Initialisation of values
-		for _, _credit := range booktype.Credit {
-			setPointerField = SliceOfPointersFieldInitStatement
-			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Credit")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Credit_Identifiers[_credit])
-			pointersInitializesStatements += setPointerField
-		}
-
+		// Insertion point for pointers initialization
 	}
 
-	if len(booksOrdered) > 0 {
-		pointersInitializesStatements += "\n\t// setup of Books instances pointers"
-	}
-	for idx, books := range booksOrdered {
+	for _, books := range booksOrdered {
+		_ = books
 		var setPointerField string
 		_ = setPointerField
 
-		id = generatesIdentifier("Books", idx, books.Name)
-		map_Books_Identifiers[books] = id
-
-		// Initialisation of values
-		for _, _booktype := range books.Book {
-			setPointerField = SliceOfPointersFieldInitStatement
-			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Book")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_BookType_Identifiers[_booktype])
-			pointersInitializesStatements += setPointerField
-		}
-
+		// Insertion point for pointers initialization
 	}
 
-	if len(creditOrdered) > 0 {
-		pointersInitializesStatements += "\n\t// setup of Credit instances pointers"
-	}
-	for idx, credit := range creditOrdered {
+	for _, credit := range creditOrdered {
+		_ = credit
 		var setPointerField string
 		_ = setPointerField
 
-		id = generatesIdentifier("Credit", idx, credit.Name)
-		map_Credit_Identifiers[credit] = id
-
-		// Initialisation of values
-		for _, _link := range credit.Link {
-			setPointerField = SliceOfPointersFieldInitStatement
-			setPointerField = strings.ReplaceAll(setPointerField, "{{Identifier}}", id)
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldName}}", "Link")
-			setPointerField = strings.ReplaceAll(setPointerField, "{{GeneratedFieldNameValue}}", map_Link_Identifiers[_link])
-			pointersInitializesStatements += setPointerField
-		}
-
+		// Insertion point for pointers initialization
 	}
 
-	if len(linkOrdered) > 0 {
-		pointersInitializesStatements += "\n\t// setup of Link instances pointers"
-	}
-	for idx, link := range linkOrdered {
+	for _, link := range linkOrdered {
+		_ = link
 		var setPointerField string
 		_ = setPointerField
 
-		id = generatesIdentifier("Link", idx, link.Name)
-		map_Link_Identifiers[link] = id
-
-		// Initialisation of values
+		// Insertion point for pointers initialization
 	}
 
-	res = strings.ReplaceAll(res, "{{Identifiers}}", identifiersDecl)
-	res = strings.ReplaceAll(res, "{{ValueInitializers}}", initializerStatements)
-	res = strings.ReplaceAll(res, "{{PointersInitializers}}", pointersInitializesStatements)
-
-	// Local time with timezone
-	localTimestamp := stage.commitTimeStamp.Format("2006-01-02 15:04:05.000000 MST")
-
-	// UTC time
-	utcTimestamp := stage.commitTimeStamp.UTC().Format("2006-01-02 15:04:05.000000 UTC")
-	res = strings.ReplaceAll(res, "{{LocalTimeStamp}}", localTimestamp)
-	res = strings.ReplaceAll(res, "{{UTCTimeStamp}}", utcTimestamp)
-	res = strings.ReplaceAll(res, "{{CommitId}}", fmt.Sprintf("%.10d", stage.commitId))
+	res = strings.ReplaceAll(res, "{{Identifiers}}", identifiersDecl.String())
+	res = strings.ReplaceAll(res, "{{ValueInitializers}}", initializerStatements.String())
+	res = strings.ReplaceAll(res, "{{PointersInitializers}}", pointersInitializesStatements.String())
 
 	if stage.MetaPackageImportAlias != "" {
 		res = strings.ReplaceAll(res, "{{ImportPackageDeclaration}}",
@@ -444,7 +274,7 @@ func (stage *Stage) Marshall(file *os.File, modelsPackageName, packageName strin
 			fmt.Sprintf("\nvar _ %s.Stage",
 				stage.MetaPackageImportAlias))
 
-		var entries string
+		var entries strings.Builder
 
 		// regenerate the map of doc link renaming
 		// the key and value are set to the value because
@@ -463,78 +293,242 @@ func (stage *Stage) Marshall(file *os.File, modelsPackageName, packageName strin
 
 			switch value.Type {
 			case GONG__ENUM_CAST_INT:
-				entries += fmt.Sprintf("\n\n\t\"%s\": %s(0),", value.Ident, value.Ident)
+				entries.WriteString(fmt.Sprintf("\n\n\t\"%s\": %s(0),", value.Ident, value.Ident))
 			case GONG__ENUM_CAST_STRING:
-				entries += fmt.Sprintf("\n\n\t\"%s\": %s(\"\"),", value.Ident, value.Ident)
+				entries.WriteString(fmt.Sprintf("\n\n\t\"%s\": %s(\"\"),", value.Ident, value.Ident))
 			case GONG__FIELD_VALUE:
 				// substitute the second point with "{})."
 				joker := "__substitute_for_first_point__"
 				valueIdentifier := strings.Replace(value.Ident, ".", joker, 1)
 				valueIdentifier = strings.Replace(valueIdentifier, ".", "{}).", 1)
 				valueIdentifier = strings.Replace(valueIdentifier, joker, ".", 1)
-				entries += fmt.Sprintf("\n\n\t\"%s\": (%s,", value.Ident, valueIdentifier)
+				entries.WriteString(fmt.Sprintf("\n\n\t\"%s\": (%s,", value.Ident, valueIdentifier))
 			case GONG__IDENTIFIER_CONST:
-				entries += fmt.Sprintf("\n\n\t\"%s\": %s,", value.Ident, value.Ident)
+				entries.WriteString(fmt.Sprintf("\n\n\t\"%s\": %s,", value.Ident, value.Ident))
 			case GONG__STRUCT_INSTANCE:
-				entries += fmt.Sprintf("\n\n\t\"%s\": &(%s{}),", value.Ident, value.Ident)
+				entries.WriteString(fmt.Sprintf("\n\n\t\"%s\": &(%s{}),", value.Ident, value.Ident))
 			}
 		}
 
-		// res = strings.ReplaceAll(res, "{{EntriesDocLinkStringDocLinkIdentifier}}", entries)
+		// res = strings.ReplaceAll(res, "{{EntriesDocLinkStringDocLinkIdentifier}}", entries.String())
 	}
-
-	if stage.generatesDiff {
-		diff := computeDiff(stage.contentWhenParsed, res)
-		os.WriteFile(fmt.Sprintf("%s-%.10d-%.10d.delta", name, stage.commitIdWhenParsed, stage.commitId), []byte(diff), os.FileMode(0666))
-		diff = ComputeDiff(stage.contentWhenParsed, res)
-		os.WriteFile(fmt.Sprintf("%s-%.10d-%.10d.diff", name, stage.commitIdWhenParsed, stage.commitId), []byte(diff), os.FileMode(0666))
-	}
-	stage.contentWhenParsed = res
-	stage.commitIdWhenParsed = stage.commitId
-
-	fmt.Fprintln(file, res)
+	return
 }
 
-// computeDiff calculates the git-style unified diff between two strings.
-func computeDiff(a, b string) string {
-	dmp := diffmatchpatch.New()
-	diffs := dmp.DiffMain(a, b, false)
-	return dmp.DiffToDelta(diffs)
-}
+// insertion point for marshall field methods
+func (booktype *BookType) GongMarshallField(stage *Stage, fieldName string) (res string) {
 
-// computePrettyDiff calculates the git-style unified diff between two strings.
-func computePrettyDiff(a, b string) string {
-	dmp := diffmatchpatch.New()
-	diffs := dmp.DiffMain(a, b, false)
-	return dmp.DiffPrettyHtml(diffs)
-}
+	switch fieldName {
+	case "Name":
+		res = StringInitStatement
+		res = strings.ReplaceAll(res, "{{Identifier}}", booktype.GongGetIdentifier(stage))
+		res = strings.ReplaceAll(res, "{{GeneratedFieldName}}", "Name")
+		res = strings.ReplaceAll(res, "{{GeneratedFieldNameValue}}", string(booktype.Name))
+	case "Edition":
+		res = StringInitStatement
+		res = strings.ReplaceAll(res, "{{Identifier}}", booktype.GongGetIdentifier(stage))
+		res = strings.ReplaceAll(res, "{{GeneratedFieldName}}", "Edition")
+		res = strings.ReplaceAll(res, "{{GeneratedFieldNameValue}}", string(booktype.Edition))
+	case "Isbn":
+		res = StringInitStatement
+		res = strings.ReplaceAll(res, "{{Identifier}}", booktype.GongGetIdentifier(stage))
+		res = strings.ReplaceAll(res, "{{GeneratedFieldName}}", "Isbn")
+		res = strings.ReplaceAll(res, "{{GeneratedFieldNameValue}}", string(booktype.Isbn))
+	case "Bestseller":
+		res = NumberInitStatement
+		res = strings.ReplaceAll(res, "{{Identifier}}", booktype.GongGetIdentifier(stage))
+		res = strings.ReplaceAll(res, "{{GeneratedFieldName}}", "Bestseller")
+		res = strings.ReplaceAll(res, "{{GeneratedFieldNameValue}}", fmt.Sprintf("%t", booktype.Bestseller))
+	case "Title":
+		res = StringInitStatement
+		res = strings.ReplaceAll(res, "{{Identifier}}", booktype.GongGetIdentifier(stage))
+		res = strings.ReplaceAll(res, "{{GeneratedFieldName}}", "Title")
+		res = strings.ReplaceAll(res, "{{GeneratedFieldNameValue}}", string(booktype.Title))
+	case "Author":
+		res = StringInitStatement
+		res = strings.ReplaceAll(res, "{{Identifier}}", booktype.GongGetIdentifier(stage))
+		res = strings.ReplaceAll(res, "{{GeneratedFieldName}}", "Author")
+		res = strings.ReplaceAll(res, "{{GeneratedFieldNameValue}}", string(booktype.Author))
+	case "Year":
+		res = NumberInitStatement
+		res = strings.ReplaceAll(res, "{{Identifier}}", booktype.GongGetIdentifier(stage))
+		res = strings.ReplaceAll(res, "{{GeneratedFieldName}}", "Year")
+		res = strings.ReplaceAll(res, "{{GeneratedFieldNameValue}}", fmt.Sprintf("%d", booktype.Year))
+	case "Format":
+		res = StringInitStatement
+		res = strings.ReplaceAll(res, "{{Identifier}}", booktype.GongGetIdentifier(stage))
+		res = strings.ReplaceAll(res, "{{GeneratedFieldName}}", "Format")
+		res = strings.ReplaceAll(res, "{{GeneratedFieldNameValue}}", string(booktype.Format))
 
-// applyDiff reconstructs the original string 'a' from the new string 'b' and the diff string 'c'.
-func applyDiff(b, c string) (string, error) {
-	dmp := diffmatchpatch.New()
-	diffs, err := dmp.DiffFromDelta(b, c)
-	if err != nil {
-		return "", err
+	case "Credit":
+		var sb strings.Builder
+		for _, _credit := range booktype.Credit {
+			tmp := SliceOfPointersFieldInitStatement
+			tmp = strings.ReplaceAll(tmp, "{{Identifier}}", booktype.GongGetIdentifier(stage))
+			tmp = strings.ReplaceAll(tmp, "{{GeneratedFieldName}}", "Credit")
+			tmp = strings.ReplaceAll(tmp, "{{GeneratedFieldNameValue}}", _credit.GongGetIdentifier(stage))
+			sb.WriteString(tmp)
+		}
+		res = sb.String()
+	default:
+		log.Panicf("Unknown field %s for Gongstruct BookType", fieldName)
 	}
-	patches := dmp.PatchMake(b, diffs)
-	// We are applying the patch in reverse to get from 'b' to 'a'.
-	// The library's PatchApply function returns the new string and a slice of booleans indicating the success of each patch application.
-	result, _ := dmp.PatchApply(patches, b)
-	return result, nil
+	return
 }
 
-// unique identifier per struct
-func generatesIdentifier(gongStructName string, idx int, instanceName string) (identifier string) {
+func (books *Books) GongMarshallField(stage *Stage, fieldName string) (res string) {
 
-	identifier = instanceName
-	// Make a Regex to say we only want letters and numbers
-	reg, err := regexp.Compile("[^a-zA-Z0-9]+")
-	if err != nil {
-		log.Fatal(err)
+	switch fieldName {
+	case "Name":
+		res = StringInitStatement
+		res = strings.ReplaceAll(res, "{{Identifier}}", books.GongGetIdentifier(stage))
+		res = strings.ReplaceAll(res, "{{GeneratedFieldName}}", "Name")
+		res = strings.ReplaceAll(res, "{{GeneratedFieldNameValue}}", string(books.Name))
+
+	case "Book":
+		var sb strings.Builder
+		for _, _booktype := range books.Book {
+			tmp := SliceOfPointersFieldInitStatement
+			tmp = strings.ReplaceAll(tmp, "{{Identifier}}", books.GongGetIdentifier(stage))
+			tmp = strings.ReplaceAll(tmp, "{{GeneratedFieldName}}", "Book")
+			tmp = strings.ReplaceAll(tmp, "{{GeneratedFieldNameValue}}", _booktype.GongGetIdentifier(stage))
+			sb.WriteString(tmp)
+		}
+		res = sb.String()
+	default:
+		log.Panicf("Unknown field %s for Gongstruct Books", fieldName)
 	}
-	processedString := reg.ReplaceAllString(instanceName, "_")
+	return
+}
 
-	identifier = fmt.Sprintf("__%s__%06d_%s", gongStructName, idx, processedString)
+func (credit *Credit) GongMarshallField(stage *Stage, fieldName string) (res string) {
 
+	switch fieldName {
+	case "Name":
+		res = StringInitStatement
+		res = strings.ReplaceAll(res, "{{Identifier}}", credit.GongGetIdentifier(stage))
+		res = strings.ReplaceAll(res, "{{GeneratedFieldName}}", "Name")
+		res = strings.ReplaceAll(res, "{{GeneratedFieldNameValue}}", string(credit.Name))
+	case "Page":
+		res = NumberInitStatement
+		res = strings.ReplaceAll(res, "{{Identifier}}", credit.GongGetIdentifier(stage))
+		res = strings.ReplaceAll(res, "{{GeneratedFieldName}}", "Page")
+		res = strings.ReplaceAll(res, "{{GeneratedFieldNameValue}}", fmt.Sprintf("%d", credit.Page))
+	case "Credit_type":
+		res = StringInitStatement
+		res = strings.ReplaceAll(res, "{{Identifier}}", credit.GongGetIdentifier(stage))
+		res = strings.ReplaceAll(res, "{{GeneratedFieldName}}", "Credit_type")
+		res = strings.ReplaceAll(res, "{{GeneratedFieldNameValue}}", string(credit.Credit_type))
+	case "Credit_words":
+		res = StringInitStatement
+		res = strings.ReplaceAll(res, "{{Identifier}}", credit.GongGetIdentifier(stage))
+		res = strings.ReplaceAll(res, "{{GeneratedFieldName}}", "Credit_words")
+		res = strings.ReplaceAll(res, "{{GeneratedFieldNameValue}}", string(credit.Credit_words))
+	case "Credit_symbol":
+		res = StringInitStatement
+		res = strings.ReplaceAll(res, "{{Identifier}}", credit.GongGetIdentifier(stage))
+		res = strings.ReplaceAll(res, "{{GeneratedFieldName}}", "Credit_symbol")
+		res = strings.ReplaceAll(res, "{{GeneratedFieldNameValue}}", string(credit.Credit_symbol))
+
+	case "Link":
+		var sb strings.Builder
+		for _, _link := range credit.Link {
+			tmp := SliceOfPointersFieldInitStatement
+			tmp = strings.ReplaceAll(tmp, "{{Identifier}}", credit.GongGetIdentifier(stage))
+			tmp = strings.ReplaceAll(tmp, "{{GeneratedFieldName}}", "Link")
+			tmp = strings.ReplaceAll(tmp, "{{GeneratedFieldNameValue}}", _link.GongGetIdentifier(stage))
+			sb.WriteString(tmp)
+		}
+		res = sb.String()
+	default:
+		log.Panicf("Unknown field %s for Gongstruct Credit", fieldName)
+	}
+	return
+}
+
+func (link *Link) GongMarshallField(stage *Stage, fieldName string) (res string) {
+
+	switch fieldName {
+	case "Name":
+		res = StringInitStatement
+		res = strings.ReplaceAll(res, "{{Identifier}}", link.GongGetIdentifier(stage))
+		res = strings.ReplaceAll(res, "{{GeneratedFieldName}}", "Name")
+		res = strings.ReplaceAll(res, "{{GeneratedFieldNameValue}}", string(link.Name))
+	case "NameXSD":
+		res = StringInitStatement
+		res = strings.ReplaceAll(res, "{{Identifier}}", link.GongGetIdentifier(stage))
+		res = strings.ReplaceAll(res, "{{GeneratedFieldName}}", "NameXSD")
+		res = strings.ReplaceAll(res, "{{GeneratedFieldNameValue}}", string(link.NameXSD))
+	case "EnclosedText":
+		res = StringInitStatement
+		res = strings.ReplaceAll(res, "{{Identifier}}", link.GongGetIdentifier(stage))
+		res = strings.ReplaceAll(res, "{{GeneratedFieldName}}", "EnclosedText")
+		res = strings.ReplaceAll(res, "{{GeneratedFieldNameValue}}", string(link.EnclosedText))
+
+	default:
+		log.Panicf("Unknown field %s for Gongstruct Link", fieldName)
+	}
+	return
+}
+
+// insertion point for marshall all fields methods
+func (booktype *BookType) GongMarshallAllFields(stage *Stage) (initRes string, ptrRes string) {
+
+	var initializerStatements strings.Builder
+	var pointersInitializesStatements strings.Builder
+	{ // Insertion point for basic fields value assignment
+		initializerStatements.WriteString(booktype.GongMarshallField(stage, "Name"))
+		initializerStatements.WriteString(booktype.GongMarshallField(stage, "Edition"))
+		initializerStatements.WriteString(booktype.GongMarshallField(stage, "Isbn"))
+		initializerStatements.WriteString(booktype.GongMarshallField(stage, "Bestseller"))
+		initializerStatements.WriteString(booktype.GongMarshallField(stage, "Title"))
+		initializerStatements.WriteString(booktype.GongMarshallField(stage, "Author"))
+		initializerStatements.WriteString(booktype.GongMarshallField(stage, "Year"))
+		initializerStatements.WriteString(booktype.GongMarshallField(stage, "Format"))
+		pointersInitializesStatements.WriteString(booktype.GongMarshallField(stage, "Credit"))
+	}
+	initRes = initializerStatements.String()
+	ptrRes = pointersInitializesStatements.String()
+	return
+}
+func (books *Books) GongMarshallAllFields(stage *Stage) (initRes string, ptrRes string) {
+
+	var initializerStatements strings.Builder
+	var pointersInitializesStatements strings.Builder
+	{ // Insertion point for basic fields value assignment
+		initializerStatements.WriteString(books.GongMarshallField(stage, "Name"))
+		pointersInitializesStatements.WriteString(books.GongMarshallField(stage, "Book"))
+	}
+	initRes = initializerStatements.String()
+	ptrRes = pointersInitializesStatements.String()
+	return
+}
+func (credit *Credit) GongMarshallAllFields(stage *Stage) (initRes string, ptrRes string) {
+
+	var initializerStatements strings.Builder
+	var pointersInitializesStatements strings.Builder
+	{ // Insertion point for basic fields value assignment
+		initializerStatements.WriteString(credit.GongMarshallField(stage, "Name"))
+		initializerStatements.WriteString(credit.GongMarshallField(stage, "Page"))
+		initializerStatements.WriteString(credit.GongMarshallField(stage, "Credit_type"))
+		pointersInitializesStatements.WriteString(credit.GongMarshallField(stage, "Link"))
+		initializerStatements.WriteString(credit.GongMarshallField(stage, "Credit_words"))
+		initializerStatements.WriteString(credit.GongMarshallField(stage, "Credit_symbol"))
+	}
+	initRes = initializerStatements.String()
+	ptrRes = pointersInitializesStatements.String()
+	return
+}
+func (link *Link) GongMarshallAllFields(stage *Stage) (initRes string, ptrRes string) {
+
+	var initializerStatements strings.Builder
+	var pointersInitializesStatements strings.Builder
+	{ // Insertion point for basic fields value assignment
+		initializerStatements.WriteString(link.GongMarshallField(stage, "Name"))
+		initializerStatements.WriteString(link.GongMarshallField(stage, "NameXSD"))
+		initializerStatements.WriteString(link.GongMarshallField(stage, "EnclosedText"))
+	}
+	initRes = initializerStatements.String()
+	ptrRes = pointersInitializesStatements.String()
 	return
 }

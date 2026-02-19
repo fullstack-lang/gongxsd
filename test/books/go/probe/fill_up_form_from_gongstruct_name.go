@@ -7,6 +7,42 @@ import (
 	"github.com/fullstack-lang/gongxsd/test/books/go/models"
 )
 
+// updateFillUpForm updates the current form if there is one
+func (probe *Probe) updateFillUpForm() {
+	var formGroup *form.FormGroup
+	for fg := range probe.formStage.FormGroups {
+		formGroup = fg
+	}
+	if formGroup != nil {
+		switch onSave := formGroup.OnSave.(type) { // insertion point
+		case *BookTypeFormCallback:
+			if onSave.CreationMode {
+				FillUpFormFromGongstructName(probe, "BookType", true)
+			} else {
+				FillUpFormFromGongstruct(onSave.booktype, probe)
+			}
+		case *BooksFormCallback:
+			if onSave.CreationMode {
+				FillUpFormFromGongstructName(probe, "Books", true)
+			} else {
+				FillUpFormFromGongstruct(onSave.books, probe)
+			}
+		case *CreditFormCallback:
+			if onSave.CreationMode {
+				FillUpFormFromGongstructName(probe, "Credit", true)
+			} else {
+				FillUpFormFromGongstruct(onSave.credit, probe)
+			}
+		case *LinkFormCallback:
+			if onSave.CreationMode {
+				FillUpFormFromGongstructName(probe, "Link", true)
+			} else {
+				FillUpFormFromGongstruct(onSave.link, probe)
+			}
+		}
+	}
+}
+
 func FillUpFormFromGongstructName(
 	probe *Probe,
 	gongstructName string,

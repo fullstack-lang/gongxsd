@@ -51,82 +51,82 @@ func (nodeImplGongstruct *TreeNodeImplGongstruct) OnAfterUpdate(
 
 	// insertion point
 	if nodeImplGongstruct.gongStruct.GetName() == "All" {
-		updateAndCommitTable[models.All](nodeImplGongstruct.probe)
+		updateProbeTable[*models.All](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Annotation" {
-		updateAndCommitTable[models.Annotation](nodeImplGongstruct.probe)
+		updateProbeTable[*models.Annotation](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Attribute" {
-		updateAndCommitTable[models.Attribute](nodeImplGongstruct.probe)
+		updateProbeTable[*models.Attribute](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "AttributeGroup" {
-		updateAndCommitTable[models.AttributeGroup](nodeImplGongstruct.probe)
+		updateProbeTable[*models.AttributeGroup](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Choice" {
-		updateAndCommitTable[models.Choice](nodeImplGongstruct.probe)
+		updateProbeTable[*models.Choice](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "ComplexContent" {
-		updateAndCommitTable[models.ComplexContent](nodeImplGongstruct.probe)
+		updateProbeTable[*models.ComplexContent](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "ComplexType" {
-		updateAndCommitTable[models.ComplexType](nodeImplGongstruct.probe)
+		updateProbeTable[*models.ComplexType](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Documentation" {
-		updateAndCommitTable[models.Documentation](nodeImplGongstruct.probe)
+		updateProbeTable[*models.Documentation](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Element" {
-		updateAndCommitTable[models.Element](nodeImplGongstruct.probe)
+		updateProbeTable[*models.Element](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Enumeration" {
-		updateAndCommitTable[models.Enumeration](nodeImplGongstruct.probe)
+		updateProbeTable[*models.Enumeration](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Extension" {
-		updateAndCommitTable[models.Extension](nodeImplGongstruct.probe)
+		updateProbeTable[*models.Extension](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Group" {
-		updateAndCommitTable[models.Group](nodeImplGongstruct.probe)
+		updateProbeTable[*models.Group](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Length" {
-		updateAndCommitTable[models.Length](nodeImplGongstruct.probe)
+		updateProbeTable[*models.Length](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "MaxInclusive" {
-		updateAndCommitTable[models.MaxInclusive](nodeImplGongstruct.probe)
+		updateProbeTable[*models.MaxInclusive](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "MaxLength" {
-		updateAndCommitTable[models.MaxLength](nodeImplGongstruct.probe)
+		updateProbeTable[*models.MaxLength](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "MinInclusive" {
-		updateAndCommitTable[models.MinInclusive](nodeImplGongstruct.probe)
+		updateProbeTable[*models.MinInclusive](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "MinLength" {
-		updateAndCommitTable[models.MinLength](nodeImplGongstruct.probe)
+		updateProbeTable[*models.MinLength](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Pattern" {
-		updateAndCommitTable[models.Pattern](nodeImplGongstruct.probe)
+		updateProbeTable[*models.Pattern](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Restriction" {
-		updateAndCommitTable[models.Restriction](nodeImplGongstruct.probe)
+		updateProbeTable[*models.Restriction](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Schema" {
-		updateAndCommitTable[models.Schema](nodeImplGongstruct.probe)
+		updateProbeTable[*models.Schema](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Sequence" {
-		updateAndCommitTable[models.Sequence](nodeImplGongstruct.probe)
+		updateProbeTable[*models.Sequence](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "SimpleContent" {
-		updateAndCommitTable[models.SimpleContent](nodeImplGongstruct.probe)
+		updateProbeTable[*models.SimpleContent](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "SimpleType" {
-		updateAndCommitTable[models.SimpleType](nodeImplGongstruct.probe)
+		updateProbeTable[*models.SimpleType](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "TotalDigit" {
-		updateAndCommitTable[models.TotalDigit](nodeImplGongstruct.probe)
+		updateProbeTable[*models.TotalDigit](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Union" {
-		updateAndCommitTable[models.Union](nodeImplGongstruct.probe)
+		updateProbeTable[*models.Union](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "WhiteSpace" {
-		updateAndCommitTable[models.WhiteSpace](nodeImplGongstruct.probe)
+		updateProbeTable[*models.WhiteSpace](nodeImplGongstruct.probe)
 	}
 
 	// set color for node and reset all other nodes color
@@ -135,6 +135,4 @@ func (nodeImplGongstruct *TreeNodeImplGongstruct) OnAfterUpdate(
 	}
 	stagedNode.BackgroundColor = "lightgrey"
 	gongtreeStage.Commit()
-
-	nodeImplGongstruct.probe.tableStage.Commit()
 }

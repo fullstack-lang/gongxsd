@@ -54,123 +54,82 @@
 			"problemMatcher": []
 		},
 		{
-			"label": "01 - gongc gongxsd -level1",
+			"label": "01 - gong gongxsd --level1",
 			"type": "shell",
 			"options": {
 				"cwd": "${workspaceFolder}/go/models"
 			},
-			"command": "gongc",
+			"command": "gong",
 			"group": "build",
 			"args": [
-				"-level1",
+				"generate",
+				"--level1",
 			]
 		},
 		{
-			"label": "01 - gongc gongxsd -level1",
+			"label": "01 - gong gongxsd --level1",
 			"type": "shell",
 			"options": {
 				"cwd": "${workspaceFolder}/go/models"
 			},
-			"command": "gongc",
+			"command": "gong",
 			"group": "build",
 			"args": [
-				"-level1",
+				"generate",
+				"--level1",
 			]
 		},
 		{
-			"label": "01 - gongc gongxsd -skipGoModCommands",
+			"label": "01 - gong gongxsd -skipGoModCommands",
 			"type": "shell",
 			"options": {
 				"cwd": "${workspaceFolder}/go/models"
 			},
-			"command": "gongc",
+			"command": "gong",
 			"group": "build",
 			"args": [
 				"-skipGoModCommands",
-				"-level1",
+				"generate",
+				"--level1",
 			]
 		},
 		{
-			"label": "01 - gongc gongxsd -level1 -skipGoModCommands",
+			"label": "01 - gong gongxsd --level1 -skipGoModCommands",
 			"type": "shell",
 			"options": {
 				"cwd": "${workspaceFolder}/go/models"
 			},
-			"command": "gongc",
+			"command": "gong",
 			"group": "build",
 			"args": [
-				"-level1",
+				"generate",
+				"--level1",
 				"-skipGoModCommands"
 			]
 		},
 		{
-			"label": "01 - gongc gongxsd -clean",
+			"label": "01 - gong gongxsd -clean",
 			"type": "shell",
 			"options": {
 				"cwd": "${workspaceFolder}/go/models"
 			},
-			"command": "gongc",
+			"command": "gong",
 			"group": "build",
 			"args": [
 				"-clean"
 			]
 		},
 		{
-			"label": "01 - gongc books -clean",
+			"label": "01 - gong books -clean",
 			"type": "shell",
 			"options": {
 				"cwd": "${workspaceFolder}/test/books/go/models"
 			},
-			"command": "gongc",
+			"command": "gong",
 			"group": "build",
 			"args": [
 				"-clean"
 			]
-		},
-		{
-			"label": "00 - go mod vendor",
-			"type": "shell",
-			"group": "build",
-			"command": "go mod vendor"
-		},
-		{
-			"label": "00 - update dependencies",
-			"type": "shell",
-			"command": "go",
-			"args": [
-				"get",
-				"-d",
-				"github.com/fullstack-lang/gong@HEAD",
-				"github.com/fullstack-lang/gongdoc@HEAD",
-				"github.com/fullstack-lang/gongsvg@HEAD",
-			],
-			"group": "build"
-		},
-		{
-			"label": "00 - go get -d github.com/fullstack-lang/gong@HEAD",
-			"type": "shell",
-			"command": "go",
-			"args": [
-				"get",
-				"-d",
-				"github.com/fullstack-lang/gong@HEAD",
-				"github.com/fullstack-lang/gongdoc@HEAD",
-				"github.com/fullstack-lang/gongrouter@HEAD",
-				"github.com/fullstack-lang/gongsvg@HEAD",
-				"github.com/fullstack-lang/gongtree@HEAD",
-			],
-			"group": "build"
-		},
-		{
-			"label": "00 - go get -d github.com/fullstack-lang/gongdoc@HEAD",
-			"type": "shell",
-			"command": "go",
-			"args": [
-				"get",
-				"-d",
-				"github.com/fullstack-lang/gongdoc@HEAD",
-			],
-			"group": "build"
 		},
 		{
 			"label": "00 - go mod tidy",
@@ -195,12 +154,12 @@
 			"group": "build"
 		},
 		{
-			"label": "01 - gongc books -skipNpmWorkspaces",
+			"label": "01 - gong books -skipNpmWorkspaces",
 			"type": "shell",
 			"options": {
 				"cwd": "${workspaceFolder}/test/books"
 			},
-			"command": "gongc",
+			"command": "gong",
 			"group": "build",
 			"args": [
 				"-skipNpmWorkspaces",
@@ -208,17 +167,16 @@
 			]
 		},
 		{
-			"label": "01 - gongc books -level1 -skipStager=false",
+			"label": "01 - gong books --level1",
 			"type": "shell",
 			"options": {
 				"cwd": "${workspaceFolder}/test/books"
 			},
-			"command": "gongc",
+			"command": "gong",
 			"group": "build",
 			"args": [
-				"-skipNpmWorkspaces",
-				"-level1",
-				"-skipStager=false",
+				"generate",
+				"--level1",
 				"go/models",
 			]
 		},
@@ -239,12 +197,12 @@
 			"group": "build"
 		},
 		{
-			"label": "01 - gongc musicxml -skipNpmWorkspaces",
+			"label": "01 - gong musicxml -skipNpmWorkspaces",
 			"type": "shell",
 			"options": {
 				"cwd": "${workspaceFolder}/test/musicxml"
 			},
-			"command": "gongc",
+			"command": "gong",
 			"group": "build",
 			"args": [
 				"-skipNpmWorkspaces",
@@ -252,27 +210,28 @@
 			]
 		},
 		{
-			"label": "01 - gongc musicxml -skipNpmWorkspaces -level1 -skipGoModCommands",
+			"label": "01 - gong musicxml -skipNpmWorkspaces --level1 -skipGoModCommands",
 			"type": "shell",
 			"options": {
 				"cwd": "${workspaceFolder}/test/musicxml"
 			},
-			"command": "gongc",
+			"command": "gong",
 			"group": "build",
 			"args": [
 				"-skipNpmWorkspaces",
-				"-level1",
+				"generate",
+				"--level1",
 				"-skipGoModCommands",
 				"go/models",
 			]
 		},
 		{
-			"label": "01 - gongc musicxml -clean",
+			"label": "01 - gong musicxml -clean",
 			"type": "shell",
 			"options": {
 				"cwd": "${workspaceFolder}/test/musicxml"
 			},
-			"command": "gongc",
+			"command": "gong",
 			"group": "build",
 			"args": [
 				"-clean",
@@ -298,24 +257,24 @@
 			"group": "build"
 		},
 		{
-			"label": "01 - gongc alt -clean",
+			"label": "01 - gong alt -clean",
 			"type": "shell",
 			"options": {
 				"cwd": "${workspaceFolder}/test/go/models"
 			},
-			"command": "gongc",
+			"command": "gong",
 			"group": "build",
 			"args": [
 				"-clean"
 			]
 		},
 		{
-			"label": "01 - gongc alt -skipNpmWorkspaces",
+			"label": "01 - gong alt -skipNpmWorkspaces",
 			"type": "shell",
 			"options": {
 				"cwd": "${workspaceFolder}/alt"
 			},
-			"command": "gongc",
+			"command": "gong",
 			"group": "build",
 			"args": [
 				"-skipNpmWorkspaces",
@@ -323,56 +282,43 @@
 			]
 		},
 		{
-			"label": "01 - gongc alt -level1 -skipNpmWorkspaces",
+			"label": "01 - gong alt --level1 -skipNpmWorkspaces",
 			"type": "shell",
 			"options": {
 				"cwd": "${workspaceFolder}/alt"
 			},
-			"command": "gongc",
+			"command": "gong",
 			"group": "build",
 			"args": [
-				"-skipNpmWorkspaces",
-				"-level1",
+				"generate",
+				"--level1",
 				"go/models",
 			]
 		},
 		{
-			"label": "01 - gongc reqif -skipNpmWorkspaces",
+			"label": "01 - gong reqif",
 			"type": "shell",
 			"options": {
 				"cwd": "${workspaceFolder}/test/reqif"
 			},
-			"command": "gongc",
+			"command": "gong",
 			"group": "build",
 			"args": [
-				"-skipNpmWorkspaces",
+				"generate",
+				"--level1",
 				"go/models",
-			]
+							]
 		},
 		{
-			"label": "01 - gongc reqif -level1 -skipNpmWorkspaces",
-			"type": "shell",
-			"options": {
-				"cwd": "${workspaceFolder}/test/reqif"
-			},
-			"command": "gongc",
-			"group": "build",
-			"args": [
-				"-skipNpmWorkspaces",
-				"-level1",
-				"go/models",
-			]
-		},
-		{
-			"label": "01 - gongc reqif -clean",
+			"label": "01 - gong reqif -clean",
 			"type": "shell",
 			"options": {
 				"cwd": "${workspaceFolder}/test/reqif/go/models"
 			},
-			"command": "gongc",
+			"command": "gong",
 			"group": "build",
 			"args": [
-				"-clean"
+				"clean"
 			]
 		},
 		{

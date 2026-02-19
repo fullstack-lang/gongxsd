@@ -17,3 +17,5 @@ test/reqif/go/cmd/reqif/__debug_bin*
 .DS_Store
 .DS_Store
 go/cmd/gongxsd-cli/music_stage.go
+
+vendor

@@ -7,9 +7,7 @@ import (
 	"strings"
 	"time"
 
-	split_static "github.com/fullstack-lang/gong/lib/split/go/static"
-	"github.com/fullstack-lang/gongxsd/go/models"
-	gongxsd_stack "github.com/fullstack-lang/gongxsd/go/stack"
+	gongxsd_level1stack "github.com/fullstack-lang/gongxsd/go/level1stack"
 
 	// insertion point for models import
 	gongxsd_models "github.com/fullstack-lang/gongxsd/go/models"
@@ -17,7 +15,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func process(args []string) (r *gin.Engine, stack *gongxsd_stack.Stack) {
+func process(args []string) (r *gin.Engine, stack *gongxsd_level1stack.Level1Stack) {
 	start := time.Now()
 	if Verbose {
 		fmt.Printf("generate start\n")
@@ -28,15 +26,12 @@ func process(args []string) (r *gin.Engine, stack *gongxsd_stack.Stack) {
 		fmt.Printf("Reading file: %s\n", xsdFilePath)
 	}
 
-	// setup the static file server and get the controller
-	r = split_static.ServeStaticFiles(false)
-
 	// setup model stack with its probe
-	stack = gongxsd_stack.NewStack(r, "gongxsd", *unmarshallFromCode, *marshallOnCommit, "", false, true)
+	stack = gongxsd_level1stack.NewLevel1Stack("gongxsd", *unmarshallFromCode, *marshallOnCommit, false, true)
 	stack.Probe.Refresh()
 
 	// insertion point for call to stager
-	gongxsd_models.NewStager(r, stack.Stage)
+	gongxsd_models.NewStager(r, stack.Stage, stack.Probe)
 
 	content, err := os.ReadFile(xsdFilePath)
 	if err != nil {
@@ -44,7 +39,7 @@ func process(args []string) (r *gin.Engine, stack *gongxsd_stack.Stack) {
 		os.Exit(1)
 	}
 
-	err = xml.Unmarshal(content, &models.SchemaSingloton)
+	err = xml.Unmarshal(content, &gongxsd_models.SchemaSingloton)
 	if err != nil {
 		fmt.Printf("Error parsing XML: %v\n", err)
 		os.Exit(1)
@@ -52,15 +47,15 @@ func process(args []string) (r *gin.Engine, stack *gongxsd_stack.Stack) {
 
 	// suppress duplicates
 	if strings.Contains(xsdFilePath, "dtc-11-04-05") {
-		models.SchemaSingloton.FactorDuplicates()
-		models.SchemaSingloton.RenameTypeAnonymousComplexType()
+		gongxsd_models.SchemaSingloton.FactorDuplicates()
+		gongxsd_models.SchemaSingloton.RenameTypeAnonymousComplexType()
 	}
 
-	stack.Stage.StageBranchSchema(&models.SchemaSingloton)
+	stack.Stage.StageBranchSchema(&gongxsd_models.SchemaSingloton)
 
 	stack.Stage.ComputeReverseMaps()
 
-	models.PostProcessing(stack.Stage)
+	gongxsd_models.PostProcessing(stack.Stage)
 
 	if Verbose {
 		fmt.Printf("generating file %s\n", *outputModelFilePath)
@@ -69,8 +64,8 @@ func process(args []string) (r *gin.Engine, stack *gongxsd_stack.Stack) {
 	// and XSD is a acyclic directed graph (ADG) and it can be interesting
 	// to navigate this ADG. Therefore, one first set the interface links between
 	// the XSD nodes
-	models.SchemaSingloton.SetParentAndChildren(nil)
-	models.Generate(stack.Stage, *outputModelFilePath)
+	gongxsd_models.SchemaSingloton.SetParentAndChildren(nil)
+	gongxsd_models.Generate(stack.Stage, *outputModelFilePath)
 
 	if Verbose {
 		fmt.Printf("generate took %s\n", time.Since(start))

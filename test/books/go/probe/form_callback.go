@@ -46,6 +46,8 @@ type BookTypeFormCallback struct {
 }
 
 func (booktypeFormCallback *BookTypeFormCallback) OnSave() {
+	booktypeFormCallback.probe.stageOfInterest.Lock()
+	defer booktypeFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("BookTypeFormCallback, OnSave")
 
@@ -93,13 +95,19 @@ func (booktypeFormCallback *BookTypeFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.Credit](booktypeFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			booktype_.Credit = instanceSlice
 
@@ -120,9 +128,8 @@ func (booktypeFormCallback *BookTypeFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "Books"
 				rf.Fieldname = "Book"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := booktype_.GongGetReverseFieldOwner(
 					booktypeFormCallback.probe.stageOfInterest,
-					booktype_,
 					&rf)
 
 				var ok bool
@@ -179,10 +186,9 @@ func (booktypeFormCallback *BookTypeFormCallback) OnSave() {
 	}
 
 	booktypeFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.BookType](
+	updateProbeTable[*models.BookType](
 		booktypeFormCallback.probe,
 	)
-	booktypeFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if booktypeFormCallback.CreationMode || booktypeFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -229,6 +235,8 @@ type BooksFormCallback struct {
 }
 
 func (booksFormCallback *BooksFormCallback) OnSave() {
+	booksFormCallback.probe.stageOfInterest.Lock()
+	defer booksFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("BooksFormCallback, OnSave")
 
@@ -262,13 +270,19 @@ func (booksFormCallback *BooksFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.BookType](booksFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			books_.Book = instanceSlice
 
@@ -281,10 +295,9 @@ func (booksFormCallback *BooksFormCallback) OnSave() {
 	}
 
 	booksFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.Books](
+	updateProbeTable[*models.Books](
 		booksFormCallback.probe,
 	)
-	booksFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if booksFormCallback.CreationMode || booksFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -331,6 +344,8 @@ type CreditFormCallback struct {
 }
 
 func (creditFormCallback *CreditFormCallback) OnSave() {
+	creditFormCallback.probe.stageOfInterest.Lock()
+	defer creditFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("CreditFormCallback, OnSave")
 
@@ -368,13 +383,19 @@ func (creditFormCallback *CreditFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.Link](creditFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			credit_.Link = instanceSlice
 
@@ -399,9 +420,8 @@ func (creditFormCallback *CreditFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "BookType"
 				rf.Fieldname = "Credit"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := credit_.GongGetReverseFieldOwner(
 					creditFormCallback.probe.stageOfInterest,
-					credit_,
 					&rf)
 
 				var ok bool
@@ -458,10 +478,9 @@ func (creditFormCallback *CreditFormCallback) OnSave() {
 	}
 
 	creditFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.Credit](
+	updateProbeTable[*models.Credit](
 		creditFormCallback.probe,
 	)
-	creditFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if creditFormCallback.CreationMode || creditFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -508,6 +527,8 @@ type LinkFormCallback struct {
 }
 
 func (linkFormCallback *LinkFormCallback) OnSave() {
+	linkFormCallback.probe.stageOfInterest.Lock()
+	defer linkFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("LinkFormCallback, OnSave")
 
@@ -547,9 +568,8 @@ func (linkFormCallback *LinkFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "Credit"
 				rf.Fieldname = "Link"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := link_.GongGetReverseFieldOwner(
 					linkFormCallback.probe.stageOfInterest,
-					link_,
 					&rf)
 
 				var ok bool
@@ -606,10 +626,9 @@ func (linkFormCallback *LinkFormCallback) OnSave() {
 	}
 
 	linkFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.Link](
+	updateProbeTable[*models.Link](
 		linkFormCallback.probe,
 	)
-	linkFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if linkFormCallback.CreationMode || linkFormCallback.formGroup.HasSuppressButtonBeenPressed {

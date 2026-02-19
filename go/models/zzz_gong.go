@@ -10,6 +10,8 @@ import (
 	"math"
 	"slices"
 	"sort"
+	"strings"
+	"sync"
 	"time"
 
 	gongxsd_go "github.com/fullstack-lang/gongxsd/go"
@@ -25,12 +27,18 @@ func __Gong__Abs(x int) int {
 	return x
 }
 
-var _ = __Gong__Abs
+var (
+	_ = __Gong__Abs
+	_ = strings.Clone("")
+)
 
-const ProbeTreeSidebarSuffix = ":sidebar of the probe"
-const ProbeTableSuffix = ":table of the probe"
-const ProbeFormSuffix = ":form of the probe"
-const ProbeSplitSuffix = ":probe of the probe"
+const (
+	ProbeTreeSidebarSuffix       = ":sidebar of the probe"
+	ProbeTableSuffix             = ":table of the probe"
+	ProbeNotificationTableSuffix = ":notification table of the probe"
+	ProbeFormSuffix              = ":form of the probe"
+	ProbeSplitSuffix             = ":probe of the probe"
+)
 
 func (stage *Stage) GetProbeTreeSidebarStageName() string {
 	return stage.GetType() + ":" + stage.GetName() + ProbeTreeSidebarSuffix
@@ -44,12 +52,19 @@ func (stage *Stage) GetProbeTableStageName() string {
 	return stage.GetType() + ":" + stage.GetName() + ProbeTableSuffix
 }
 
+func (stage *Stage) GetProbeNotificationTableStageName() string {
+	return stage.GetType() + ":" + stage.GetName() + ProbeNotificationTableSuffix
+}
+
 func (stage *Stage) GetProbeSplitStageName() string {
 	return stage.GetType() + ":" + stage.GetName() + ProbeSplitSuffix
 }
 
 // errUnkownEnum is returns when a value cannot match enum values
-var errUnkownEnum = errors.New("unkown enum")
+var (
+	errUnkownEnum = errors.New("unkown enum")
+	_             = errUnkownEnum
+)
 
 // needed to avoid when fmt package is not needed by generated code
 var __dummy__fmt_variable fmt.Scanner
@@ -65,7 +80,10 @@ var _ = __dummy_math_variable
 type __void any
 
 // needed for creating set of instances in the stage
-var __member __void
+var (
+	__member __void
+	_        = __member
+)
 
 // GongStructInterface is the interface met by GongStructs
 // It allows runtime reflexion of instances (without the hassle of the "reflect" package)
@@ -74,21 +92,23 @@ type GongStructInterface interface {
 	// GetID() (res int)
 	// GetFields() (res []string)
 	// GetFieldStringValue(fieldName string) (res string)
+	GongSetFieldValue(fieldName string, value GongFieldValue, stage *Stage) error
+	GongGetGongstructName() string
 }
 
 // Stage enables storage of staged instances
-// swagger:ignore
 type Stage struct {
-	name               string
-	commitId           uint // commitId is updated at each commit
-	commitTimeStamp    time.Time
-	contentWhenParsed  string
-	commitIdWhenParsed uint
-	generatesDiff      bool
+	name string
+
+	// isInDeltaMode is true when the stage is used to compute difference between
+	// succesive commit
+	isInDeltaMode bool
 
 	// insertion point for definition of arrays registering instances
-	Alls           map[*All]any
-	Alls_mapString map[string]*All
+	Alls                map[*All]struct{}
+	Alls_reference      map[*All]*All
+	Alls_referenceOrder map[*All]uint // diff Unstage needs the reference order
+	Alls_mapString      map[string]*All
 
 	// insertion point for slice of pointers maps
 	All_Sequences_reverseMap map[*Sequence]*All
@@ -106,8 +126,10 @@ type Stage struct {
 	OnAfterAllDeleteCallback OnAfterDeleteInterface[All]
 	OnAfterAllReadCallback   OnAfterReadInterface[All]
 
-	Annotations           map[*Annotation]any
-	Annotations_mapString map[string]*Annotation
+	Annotations                map[*Annotation]struct{}
+	Annotations_reference      map[*Annotation]*Annotation
+	Annotations_referenceOrder map[*Annotation]uint // diff Unstage needs the reference order
+	Annotations_mapString      map[string]*Annotation
 
 	// insertion point for slice of pointers maps
 	Annotation_Documentations_reverseMap map[*Documentation]*Annotation
@@ -117,8 +139,10 @@ type Stage struct {
 	OnAfterAnnotationDeleteCallback OnAfterDeleteInterface[Annotation]
 	OnAfterAnnotationReadCallback   OnAfterReadInterface[Annotation]
 
-	Attributes           map[*Attribute]any
-	Attributes_mapString map[string]*Attribute
+	Attributes                map[*Attribute]struct{}
+	Attributes_reference      map[*Attribute]*Attribute
+	Attributes_referenceOrder map[*Attribute]uint // diff Unstage needs the reference order
+	Attributes_mapString      map[string]*Attribute
 
 	// insertion point for slice of pointers maps
 	OnAfterAttributeCreateCallback OnAfterCreateInterface[Attribute]
@@ -126,8 +150,10 @@ type Stage struct {
 	OnAfterAttributeDeleteCallback OnAfterDeleteInterface[Attribute]
 	OnAfterAttributeReadCallback   OnAfterReadInterface[Attribute]
 
-	AttributeGroups           map[*AttributeGroup]any
-	AttributeGroups_mapString map[string]*AttributeGroup
+	AttributeGroups                map[*AttributeGroup]struct{}
+	AttributeGroups_reference      map[*AttributeGroup]*AttributeGroup
+	AttributeGroups_referenceOrder map[*AttributeGroup]uint // diff Unstage needs the reference order
+	AttributeGroups_mapString      map[string]*AttributeGroup
 
 	// insertion point for slice of pointers maps
 	AttributeGroup_AttributeGroups_reverseMap map[*AttributeGroup]*AttributeGroup
@@ -139,8 +165,10 @@ type Stage struct {
 	OnAfterAttributeGroupDeleteCallback OnAfterDeleteInterface[AttributeGroup]
 	OnAfterAttributeGroupReadCallback   OnAfterReadInterface[AttributeGroup]
 
-	Choices           map[*Choice]any
-	Choices_mapString map[string]*Choice
+	Choices                map[*Choice]struct{}
+	Choices_reference      map[*Choice]*Choice
+	Choices_referenceOrder map[*Choice]uint // diff Unstage needs the reference order
+	Choices_mapString      map[string]*Choice
 
 	// insertion point for slice of pointers maps
 	Choice_Sequences_reverseMap map[*Sequence]*Choice
@@ -158,8 +186,10 @@ type Stage struct {
 	OnAfterChoiceDeleteCallback OnAfterDeleteInterface[Choice]
 	OnAfterChoiceReadCallback   OnAfterReadInterface[Choice]
 
-	ComplexContents           map[*ComplexContent]any
-	ComplexContents_mapString map[string]*ComplexContent
+	ComplexContents                map[*ComplexContent]struct{}
+	ComplexContents_reference      map[*ComplexContent]*ComplexContent
+	ComplexContents_referenceOrder map[*ComplexContent]uint // diff Unstage needs the reference order
+	ComplexContents_mapString      map[string]*ComplexContent
 
 	// insertion point for slice of pointers maps
 	OnAfterComplexContentCreateCallback OnAfterCreateInterface[ComplexContent]
@@ -167,8 +197,10 @@ type Stage struct {
 	OnAfterComplexContentDeleteCallback OnAfterDeleteInterface[ComplexContent]
 	OnAfterComplexContentReadCallback   OnAfterReadInterface[ComplexContent]
 
-	ComplexTypes           map[*ComplexType]any
-	ComplexTypes_mapString map[string]*ComplexType
+	ComplexTypes                map[*ComplexType]struct{}
+	ComplexTypes_reference      map[*ComplexType]*ComplexType
+	ComplexTypes_referenceOrder map[*ComplexType]uint // diff Unstage needs the reference order
+	ComplexTypes_mapString      map[string]*ComplexType
 
 	// insertion point for slice of pointers maps
 	ComplexType_Sequences_reverseMap map[*Sequence]*ComplexType
@@ -190,8 +222,10 @@ type Stage struct {
 	OnAfterComplexTypeDeleteCallback OnAfterDeleteInterface[ComplexType]
 	OnAfterComplexTypeReadCallback   OnAfterReadInterface[ComplexType]
 
-	Documentations           map[*Documentation]any
-	Documentations_mapString map[string]*Documentation
+	Documentations                map[*Documentation]struct{}
+	Documentations_reference      map[*Documentation]*Documentation
+	Documentations_referenceOrder map[*Documentation]uint // diff Unstage needs the reference order
+	Documentations_mapString      map[string]*Documentation
 
 	// insertion point for slice of pointers maps
 	OnAfterDocumentationCreateCallback OnAfterCreateInterface[Documentation]
@@ -199,8 +233,10 @@ type Stage struct {
 	OnAfterDocumentationDeleteCallback OnAfterDeleteInterface[Documentation]
 	OnAfterDocumentationReadCallback   OnAfterReadInterface[Documentation]
 
-	Elements           map[*Element]any
-	Elements_mapString map[string]*Element
+	Elements                map[*Element]struct{}
+	Elements_reference      map[*Element]*Element
+	Elements_referenceOrder map[*Element]uint // diff Unstage needs the reference order
+	Elements_mapString      map[string]*Element
 
 	// insertion point for slice of pointers maps
 	Element_Groups_reverseMap map[*Group]*Element
@@ -210,8 +246,10 @@ type Stage struct {
 	OnAfterElementDeleteCallback OnAfterDeleteInterface[Element]
 	OnAfterElementReadCallback   OnAfterReadInterface[Element]
 
-	Enumerations           map[*Enumeration]any
-	Enumerations_mapString map[string]*Enumeration
+	Enumerations                map[*Enumeration]struct{}
+	Enumerations_reference      map[*Enumeration]*Enumeration
+	Enumerations_referenceOrder map[*Enumeration]uint // diff Unstage needs the reference order
+	Enumerations_mapString      map[string]*Enumeration
 
 	// insertion point for slice of pointers maps
 	OnAfterEnumerationCreateCallback OnAfterCreateInterface[Enumeration]
@@ -219,8 +257,10 @@ type Stage struct {
 	OnAfterEnumerationDeleteCallback OnAfterDeleteInterface[Enumeration]
 	OnAfterEnumerationReadCallback   OnAfterReadInterface[Enumeration]
 
-	Extensions           map[*Extension]any
-	Extensions_mapString map[string]*Extension
+	Extensions                map[*Extension]struct{}
+	Extensions_reference      map[*Extension]*Extension
+	Extensions_referenceOrder map[*Extension]uint // diff Unstage needs the reference order
+	Extensions_mapString      map[string]*Extension
 
 	// insertion point for slice of pointers maps
 	Extension_Sequences_reverseMap map[*Sequence]*Extension
@@ -242,8 +282,10 @@ type Stage struct {
 	OnAfterExtensionDeleteCallback OnAfterDeleteInterface[Extension]
 	OnAfterExtensionReadCallback   OnAfterReadInterface[Extension]
 
-	Groups           map[*Group]any
-	Groups_mapString map[string]*Group
+	Groups                map[*Group]struct{}
+	Groups_reference      map[*Group]*Group
+	Groups_referenceOrder map[*Group]uint // diff Unstage needs the reference order
+	Groups_mapString      map[string]*Group
 
 	// insertion point for slice of pointers maps
 	Group_Sequences_reverseMap map[*Sequence]*Group
@@ -261,8 +303,10 @@ type Stage struct {
 	OnAfterGroupDeleteCallback OnAfterDeleteInterface[Group]
 	OnAfterGroupReadCallback   OnAfterReadInterface[Group]
 
-	Lengths           map[*Length]any
-	Lengths_mapString map[string]*Length
+	Lengths                map[*Length]struct{}
+	Lengths_reference      map[*Length]*Length
+	Lengths_referenceOrder map[*Length]uint // diff Unstage needs the reference order
+	Lengths_mapString      map[string]*Length
 
 	// insertion point for slice of pointers maps
 	OnAfterLengthCreateCallback OnAfterCreateInterface[Length]
@@ -270,8 +314,10 @@ type Stage struct {
 	OnAfterLengthDeleteCallback OnAfterDeleteInterface[Length]
 	OnAfterLengthReadCallback   OnAfterReadInterface[Length]
 
-	MaxInclusives           map[*MaxInclusive]any
-	MaxInclusives_mapString map[string]*MaxInclusive
+	MaxInclusives                map[*MaxInclusive]struct{}
+	MaxInclusives_reference      map[*MaxInclusive]*MaxInclusive
+	MaxInclusives_referenceOrder map[*MaxInclusive]uint // diff Unstage needs the reference order
+	MaxInclusives_mapString      map[string]*MaxInclusive
 
 	// insertion point for slice of pointers maps
 	OnAfterMaxInclusiveCreateCallback OnAfterCreateInterface[MaxInclusive]
@@ -279,8 +325,10 @@ type Stage struct {
 	OnAfterMaxInclusiveDeleteCallback OnAfterDeleteInterface[MaxInclusive]
 	OnAfterMaxInclusiveReadCallback   OnAfterReadInterface[MaxInclusive]
 
-	MaxLengths           map[*MaxLength]any
-	MaxLengths_mapString map[string]*MaxLength
+	MaxLengths                map[*MaxLength]struct{}
+	MaxLengths_reference      map[*MaxLength]*MaxLength
+	MaxLengths_referenceOrder map[*MaxLength]uint // diff Unstage needs the reference order
+	MaxLengths_mapString      map[string]*MaxLength
 
 	// insertion point for slice of pointers maps
 	OnAfterMaxLengthCreateCallback OnAfterCreateInterface[MaxLength]
@@ -288,8 +336,10 @@ type Stage struct {
 	OnAfterMaxLengthDeleteCallback OnAfterDeleteInterface[MaxLength]
 	OnAfterMaxLengthReadCallback   OnAfterReadInterface[MaxLength]
 
-	MinInclusives           map[*MinInclusive]any
-	MinInclusives_mapString map[string]*MinInclusive
+	MinInclusives                map[*MinInclusive]struct{}
+	MinInclusives_reference      map[*MinInclusive]*MinInclusive
+	MinInclusives_referenceOrder map[*MinInclusive]uint // diff Unstage needs the reference order
+	MinInclusives_mapString      map[string]*MinInclusive
 
 	// insertion point for slice of pointers maps
 	OnAfterMinInclusiveCreateCallback OnAfterCreateInterface[MinInclusive]
@@ -297,8 +347,10 @@ type Stage struct {
 	OnAfterMinInclusiveDeleteCallback OnAfterDeleteInterface[MinInclusive]
 	OnAfterMinInclusiveReadCallback   OnAfterReadInterface[MinInclusive]
 
-	MinLengths           map[*MinLength]any
-	MinLengths_mapString map[string]*MinLength
+	MinLengths                map[*MinLength]struct{}
+	MinLengths_reference      map[*MinLength]*MinLength
+	MinLengths_referenceOrder map[*MinLength]uint // diff Unstage needs the reference order
+	MinLengths_mapString      map[string]*MinLength
 
 	// insertion point for slice of pointers maps
 	OnAfterMinLengthCreateCallback OnAfterCreateInterface[MinLength]
@@ -306,8 +358,10 @@ type Stage struct {
 	OnAfterMinLengthDeleteCallback OnAfterDeleteInterface[MinLength]
 	OnAfterMinLengthReadCallback   OnAfterReadInterface[MinLength]
 
-	Patterns           map[*Pattern]any
-	Patterns_mapString map[string]*Pattern
+	Patterns                map[*Pattern]struct{}
+	Patterns_reference      map[*Pattern]*Pattern
+	Patterns_referenceOrder map[*Pattern]uint // diff Unstage needs the reference order
+	Patterns_mapString      map[string]*Pattern
 
 	// insertion point for slice of pointers maps
 	OnAfterPatternCreateCallback OnAfterCreateInterface[Pattern]
@@ -315,8 +369,10 @@ type Stage struct {
 	OnAfterPatternDeleteCallback OnAfterDeleteInterface[Pattern]
 	OnAfterPatternReadCallback   OnAfterReadInterface[Pattern]
 
-	Restrictions           map[*Restriction]any
-	Restrictions_mapString map[string]*Restriction
+	Restrictions                map[*Restriction]struct{}
+	Restrictions_reference      map[*Restriction]*Restriction
+	Restrictions_referenceOrder map[*Restriction]uint // diff Unstage needs the reference order
+	Restrictions_mapString      map[string]*Restriction
 
 	// insertion point for slice of pointers maps
 	Restriction_Enumerations_reverseMap map[*Enumeration]*Restriction
@@ -326,8 +382,10 @@ type Stage struct {
 	OnAfterRestrictionDeleteCallback OnAfterDeleteInterface[Restriction]
 	OnAfterRestrictionReadCallback   OnAfterReadInterface[Restriction]
 
-	Schemas           map[*Schema]any
-	Schemas_mapString map[string]*Schema
+	Schemas                map[*Schema]struct{}
+	Schemas_reference      map[*Schema]*Schema
+	Schemas_referenceOrder map[*Schema]uint // diff Unstage needs the reference order
+	Schemas_mapString      map[string]*Schema
 
 	// insertion point for slice of pointers maps
 	Schema_Elements_reverseMap map[*Element]*Schema
@@ -345,8 +403,10 @@ type Stage struct {
 	OnAfterSchemaDeleteCallback OnAfterDeleteInterface[Schema]
 	OnAfterSchemaReadCallback   OnAfterReadInterface[Schema]
 
-	Sequences           map[*Sequence]any
-	Sequences_mapString map[string]*Sequence
+	Sequences                map[*Sequence]struct{}
+	Sequences_reference      map[*Sequence]*Sequence
+	Sequences_referenceOrder map[*Sequence]uint // diff Unstage needs the reference order
+	Sequences_mapString      map[string]*Sequence
 
 	// insertion point for slice of pointers maps
 	Sequence_Sequences_reverseMap map[*Sequence]*Sequence
@@ -364,8 +424,10 @@ type Stage struct {
 	OnAfterSequenceDeleteCallback OnAfterDeleteInterface[Sequence]
 	OnAfterSequenceReadCallback   OnAfterReadInterface[Sequence]
 
-	SimpleContents           map[*SimpleContent]any
-	SimpleContents_mapString map[string]*SimpleContent
+	SimpleContents                map[*SimpleContent]struct{}
+	SimpleContents_reference      map[*SimpleContent]*SimpleContent
+	SimpleContents_referenceOrder map[*SimpleContent]uint // diff Unstage needs the reference order
+	SimpleContents_mapString      map[string]*SimpleContent
 
 	// insertion point for slice of pointers maps
 	OnAfterSimpleContentCreateCallback OnAfterCreateInterface[SimpleContent]
@@ -373,8 +435,10 @@ type Stage struct {
 	OnAfterSimpleContentDeleteCallback OnAfterDeleteInterface[SimpleContent]
 	OnAfterSimpleContentReadCallback   OnAfterReadInterface[SimpleContent]
 
-	SimpleTypes           map[*SimpleType]any
-	SimpleTypes_mapString map[string]*SimpleType
+	SimpleTypes                map[*SimpleType]struct{}
+	SimpleTypes_reference      map[*SimpleType]*SimpleType
+	SimpleTypes_referenceOrder map[*SimpleType]uint // diff Unstage needs the reference order
+	SimpleTypes_mapString      map[string]*SimpleType
 
 	// insertion point for slice of pointers maps
 	OnAfterSimpleTypeCreateCallback OnAfterCreateInterface[SimpleType]
@@ -382,8 +446,10 @@ type Stage struct {
 	OnAfterSimpleTypeDeleteCallback OnAfterDeleteInterface[SimpleType]
 	OnAfterSimpleTypeReadCallback   OnAfterReadInterface[SimpleType]
 
-	TotalDigits           map[*TotalDigit]any
-	TotalDigits_mapString map[string]*TotalDigit
+	TotalDigits                map[*TotalDigit]struct{}
+	TotalDigits_reference      map[*TotalDigit]*TotalDigit
+	TotalDigits_referenceOrder map[*TotalDigit]uint // diff Unstage needs the reference order
+	TotalDigits_mapString      map[string]*TotalDigit
 
 	// insertion point for slice of pointers maps
 	OnAfterTotalDigitCreateCallback OnAfterCreateInterface[TotalDigit]
@@ -391,8 +457,10 @@ type Stage struct {
 	OnAfterTotalDigitDeleteCallback OnAfterDeleteInterface[TotalDigit]
 	OnAfterTotalDigitReadCallback   OnAfterReadInterface[TotalDigit]
 
-	Unions           map[*Union]any
-	Unions_mapString map[string]*Union
+	Unions                map[*Union]struct{}
+	Unions_reference      map[*Union]*Union
+	Unions_referenceOrder map[*Union]uint // diff Unstage needs the reference order
+	Unions_mapString      map[string]*Union
 
 	// insertion point for slice of pointers maps
 	OnAfterUnionCreateCallback OnAfterCreateInterface[Union]
@@ -400,8 +468,10 @@ type Stage struct {
 	OnAfterUnionDeleteCallback OnAfterDeleteInterface[Union]
 	OnAfterUnionReadCallback   OnAfterReadInterface[Union]
 
-	WhiteSpaces           map[*WhiteSpace]any
-	WhiteSpaces_mapString map[string]*WhiteSpace
+	WhiteSpaces                map[*WhiteSpace]struct{}
+	WhiteSpaces_reference      map[*WhiteSpace]*WhiteSpace
+	WhiteSpaces_referenceOrder map[*WhiteSpace]uint // diff Unstage needs the reference order
+	WhiteSpaces_mapString      map[string]*WhiteSpace
 
 	// insertion point for slice of pointers maps
 	OnAfterWhiteSpaceCreateCallback OnAfterCreateInterface[WhiteSpace]
@@ -516,23 +586,559 @@ type Stage struct {
 	// end of insertion point
 
 	NamedStructs []*NamedStruct
+
+	// GongUnmarshallers is the registry of all model unmarshallers
+	GongUnmarshallers map[string]ModelUnmarshaller
+
+	// probeIF is the interface to the probe that allows log
+	// commit event to the probe
+	probeIF ProbeIF
+
+	forwardCommits  []string
+	backwardCommits []string
+
+	// when navigating the commit history
+	// navigationMode is set to Navigating
+	navigationMode gongStageNavigationMode
+	commitsBehind  int // the number of commits the stage is behind the front of the history
+
+	lock sync.RWMutex
 }
 
-func (stage *Stage) GetCommitId() uint {
-	return stage.commitId
+type gongStageNavigationMode string
+
+const (
+	GongNavigationModeNormal gongStageNavigationMode = "Normal"
+	// when the mode is navigating, each commit backward and forward
+	// it is possible to go apply the nbCommitsBackward forward commits
+	GongNavigationModeNavigating gongStageNavigationMode = "Navigating"
+)
+
+// ApplyBackwardCommit applies the commit before the current one
+func (stage *Stage) ApplyBackwardCommit() error {
+	if len(stage.backwardCommits) == 0 {
+		return errors.New("no backward commit to apply")
+	}
+
+	if stage.navigationMode == GongNavigationModeNormal && stage.commitsBehind != 0 {
+		return errors.New("in navigation mode normal, cannot have commitsBehind != 0")
+	}
+
+	if stage.navigationMode == GongNavigationModeNormal {
+		stage.navigationMode = GongNavigationModeNavigating
+	}
+
+	if stage.commitsBehind >= len(stage.backwardCommits) {
+		return errors.New("no more backward commit to apply")
+	}
+
+	commitToApply := stage.backwardCommits[len(stage.backwardCommits)-1-stage.commitsBehind]
+
+	// umarshall the backward commit to the stage
+
+	// the parsing of the commit will call the UX update
+	// therefore, it is important to stage.commitsBehind before because it is used in the
+	// UX
+	stage.commitsBehind++
+	err := GongParseAstString(stage, commitToApply, true)
+	if err != nil {
+		log.Println("error during ApplyBackwardCommit: ", err)
+		return err
+	}
+
+	stage.ComputeReferenceAndOrders()
+
+	return nil
 }
 
-func (stage *Stage) GetCommitTS() time.Time {
-	return stage.commitTimeStamp
+func (stage *Stage) GetForwardCommits() []string {
+	return stage.forwardCommits
 }
 
-func (stage *Stage) SetGeneratesDiff(generatesDiff bool) {
-	stage.generatesDiff = generatesDiff
+func (stage *Stage) GetBackwardCommits() []string {
+	return stage.backwardCommits
+}
+
+func (stage *Stage) ApplyForwardCommit() error {
+	if stage.navigationMode == GongNavigationModeNormal && stage.commitsBehind != 0 {
+		return errors.New("in navigation mode normal, cannot have commitsBehind != 0")
+	}
+
+	if stage.commitsBehind == 0 {
+		return errors.New("no more forward commit to apply")
+	}
+
+	if stage.navigationMode == GongNavigationModeNormal {
+		stage.navigationMode = GongNavigationModeNavigating
+	}
+
+	commitToApply := stage.forwardCommits[len(stage.forwardCommits)-1-stage.commitsBehind+1]
+
+	// the parsing of the commit will call the UX update
+	// therefore, it is important to stage.commitsBehind before because it is used in the
+	// UX
+	stage.commitsBehind--
+	err := GongParseAstString(stage, commitToApply, true)
+	if err != nil {
+		log.Println("error during ApplyForwardCommit: ", err)
+		return err
+	}
+	stage.ComputeReferenceAndOrders()
+
+	return nil
+}
+
+func (stage *Stage) GetCommitsBehind() int {
+	return stage.commitsBehind
+}
+
+func (stage *Stage) Lock() {
+	stage.lock.Lock()
+}
+
+func (stage *Stage) Unlock() {
+	stage.lock.Unlock()
+}
+
+func (stage *Stage) RLock() {
+	stage.lock.RLock()
+}
+
+func (stage *Stage) RUnlock() {
+	stage.lock.RUnlock()
+}
+
+// ResetHard removes the more recent
+// commitsBehind forward/backward Commits from the
+// stage
+func (stage *Stage) ResetHard() {
+	newCommitsLen := len(stage.forwardCommits) - stage.GetCommitsBehind()
+
+	stage.forwardCommits = stage.forwardCommits[:newCommitsLen]
+	stage.backwardCommits = stage.backwardCommits[:newCommitsLen]
+	stage.commitsBehind = 0
+	stage.navigationMode = GongNavigationModeNormal
+
+	stage.ComputeInstancesNb()
+	if stage.OnInitCommitCallback != nil {
+		stage.OnInitCommitCallback.BeforeCommit(stage)
+	}
+	if stage.OnInitCommitFromBackCallback != nil {
+		stage.OnInitCommitFromBackCallback.BeforeCommit(stage)
+	}
+}
+
+// Orphans removes all commits
+func (stage *Stage) Orphans() {
+	stage.forwardCommits = stage.forwardCommits[:0]
+	stage.backwardCommits = stage.backwardCommits[:0]
+	stage.commitsBehind = 0
+	stage.navigationMode = GongNavigationModeNormal
+
+	stage.ComputeInstancesNb()
+	if stage.OnInitCommitCallback != nil {
+		stage.OnInitCommitCallback.BeforeCommit(stage)
+	}
+	if stage.OnInitCommitFromBackCallback != nil {
+		stage.OnInitCommitFromBackCallback.BeforeCommit(stage)
+	}
+}
+
+// recomputeOrders recomputes the next order for each struct
+// this is necessary because the order might have been incremented
+// during the commits that have been discarded
+// insertion point for max order recomputation
+func (stage *Stage) recomputeOrders() {
+	// insertion point for max order recomputation
+	var maxAllOrder uint
+	var foundAll bool
+	for _, order := range stage.AllMap_Staged_Order {
+		if !foundAll || order > maxAllOrder {
+			maxAllOrder = order
+			foundAll = true
+		}
+	}
+	if foundAll {
+		stage.AllOrder = maxAllOrder + 1
+	} else {
+		stage.AllOrder = 0
+	}
+
+	var maxAnnotationOrder uint
+	var foundAnnotation bool
+	for _, order := range stage.AnnotationMap_Staged_Order {
+		if !foundAnnotation || order > maxAnnotationOrder {
+			maxAnnotationOrder = order
+			foundAnnotation = true
+		}
+	}
+	if foundAnnotation {
+		stage.AnnotationOrder = maxAnnotationOrder + 1
+	} else {
+		stage.AnnotationOrder = 0
+	}
+
+	var maxAttributeOrder uint
+	var foundAttribute bool
+	for _, order := range stage.AttributeMap_Staged_Order {
+		if !foundAttribute || order > maxAttributeOrder {
+			maxAttributeOrder = order
+			foundAttribute = true
+		}
+	}
+	if foundAttribute {
+		stage.AttributeOrder = maxAttributeOrder + 1
+	} else {
+		stage.AttributeOrder = 0
+	}
+
+	var maxAttributeGroupOrder uint
+	var foundAttributeGroup bool
+	for _, order := range stage.AttributeGroupMap_Staged_Order {
+		if !foundAttributeGroup || order > maxAttributeGroupOrder {
+			maxAttributeGroupOrder = order
+			foundAttributeGroup = true
+		}
+	}
+	if foundAttributeGroup {
+		stage.AttributeGroupOrder = maxAttributeGroupOrder + 1
+	} else {
+		stage.AttributeGroupOrder = 0
+	}
+
+	var maxChoiceOrder uint
+	var foundChoice bool
+	for _, order := range stage.ChoiceMap_Staged_Order {
+		if !foundChoice || order > maxChoiceOrder {
+			maxChoiceOrder = order
+			foundChoice = true
+		}
+	}
+	if foundChoice {
+		stage.ChoiceOrder = maxChoiceOrder + 1
+	} else {
+		stage.ChoiceOrder = 0
+	}
+
+	var maxComplexContentOrder uint
+	var foundComplexContent bool
+	for _, order := range stage.ComplexContentMap_Staged_Order {
+		if !foundComplexContent || order > maxComplexContentOrder {
+			maxComplexContentOrder = order
+			foundComplexContent = true
+		}
+	}
+	if foundComplexContent {
+		stage.ComplexContentOrder = maxComplexContentOrder + 1
+	} else {
+		stage.ComplexContentOrder = 0
+	}
+
+	var maxComplexTypeOrder uint
+	var foundComplexType bool
+	for _, order := range stage.ComplexTypeMap_Staged_Order {
+		if !foundComplexType || order > maxComplexTypeOrder {
+			maxComplexTypeOrder = order
+			foundComplexType = true
+		}
+	}
+	if foundComplexType {
+		stage.ComplexTypeOrder = maxComplexTypeOrder + 1
+	} else {
+		stage.ComplexTypeOrder = 0
+	}
+
+	var maxDocumentationOrder uint
+	var foundDocumentation bool
+	for _, order := range stage.DocumentationMap_Staged_Order {
+		if !foundDocumentation || order > maxDocumentationOrder {
+			maxDocumentationOrder = order
+			foundDocumentation = true
+		}
+	}
+	if foundDocumentation {
+		stage.DocumentationOrder = maxDocumentationOrder + 1
+	} else {
+		stage.DocumentationOrder = 0
+	}
+
+	var maxElementOrder uint
+	var foundElement bool
+	for _, order := range stage.ElementMap_Staged_Order {
+		if !foundElement || order > maxElementOrder {
+			maxElementOrder = order
+			foundElement = true
+		}
+	}
+	if foundElement {
+		stage.ElementOrder = maxElementOrder + 1
+	} else {
+		stage.ElementOrder = 0
+	}
+
+	var maxEnumerationOrder uint
+	var foundEnumeration bool
+	for _, order := range stage.EnumerationMap_Staged_Order {
+		if !foundEnumeration || order > maxEnumerationOrder {
+			maxEnumerationOrder = order
+			foundEnumeration = true
+		}
+	}
+	if foundEnumeration {
+		stage.EnumerationOrder = maxEnumerationOrder + 1
+	} else {
+		stage.EnumerationOrder = 0
+	}
+
+	var maxExtensionOrder uint
+	var foundExtension bool
+	for _, order := range stage.ExtensionMap_Staged_Order {
+		if !foundExtension || order > maxExtensionOrder {
+			maxExtensionOrder = order
+			foundExtension = true
+		}
+	}
+	if foundExtension {
+		stage.ExtensionOrder = maxExtensionOrder + 1
+	} else {
+		stage.ExtensionOrder = 0
+	}
+
+	var maxGroupOrder uint
+	var foundGroup bool
+	for _, order := range stage.GroupMap_Staged_Order {
+		if !foundGroup || order > maxGroupOrder {
+			maxGroupOrder = order
+			foundGroup = true
+		}
+	}
+	if foundGroup {
+		stage.GroupOrder = maxGroupOrder + 1
+	} else {
+		stage.GroupOrder = 0
+	}
+
+	var maxLengthOrder uint
+	var foundLength bool
+	for _, order := range stage.LengthMap_Staged_Order {
+		if !foundLength || order > maxLengthOrder {
+			maxLengthOrder = order
+			foundLength = true
+		}
+	}
+	if foundLength {
+		stage.LengthOrder = maxLengthOrder + 1
+	} else {
+		stage.LengthOrder = 0
+	}
+
+	var maxMaxInclusiveOrder uint
+	var foundMaxInclusive bool
+	for _, order := range stage.MaxInclusiveMap_Staged_Order {
+		if !foundMaxInclusive || order > maxMaxInclusiveOrder {
+			maxMaxInclusiveOrder = order
+			foundMaxInclusive = true
+		}
+	}
+	if foundMaxInclusive {
+		stage.MaxInclusiveOrder = maxMaxInclusiveOrder + 1
+	} else {
+		stage.MaxInclusiveOrder = 0
+	}
+
+	var maxMaxLengthOrder uint
+	var foundMaxLength bool
+	for _, order := range stage.MaxLengthMap_Staged_Order {
+		if !foundMaxLength || order > maxMaxLengthOrder {
+			maxMaxLengthOrder = order
+			foundMaxLength = true
+		}
+	}
+	if foundMaxLength {
+		stage.MaxLengthOrder = maxMaxLengthOrder + 1
+	} else {
+		stage.MaxLengthOrder = 0
+	}
+
+	var maxMinInclusiveOrder uint
+	var foundMinInclusive bool
+	for _, order := range stage.MinInclusiveMap_Staged_Order {
+		if !foundMinInclusive || order > maxMinInclusiveOrder {
+			maxMinInclusiveOrder = order
+			foundMinInclusive = true
+		}
+	}
+	if foundMinInclusive {
+		stage.MinInclusiveOrder = maxMinInclusiveOrder + 1
+	} else {
+		stage.MinInclusiveOrder = 0
+	}
+
+	var maxMinLengthOrder uint
+	var foundMinLength bool
+	for _, order := range stage.MinLengthMap_Staged_Order {
+		if !foundMinLength || order > maxMinLengthOrder {
+			maxMinLengthOrder = order
+			foundMinLength = true
+		}
+	}
+	if foundMinLength {
+		stage.MinLengthOrder = maxMinLengthOrder + 1
+	} else {
+		stage.MinLengthOrder = 0
+	}
+
+	var maxPatternOrder uint
+	var foundPattern bool
+	for _, order := range stage.PatternMap_Staged_Order {
+		if !foundPattern || order > maxPatternOrder {
+			maxPatternOrder = order
+			foundPattern = true
+		}
+	}
+	if foundPattern {
+		stage.PatternOrder = maxPatternOrder + 1
+	} else {
+		stage.PatternOrder = 0
+	}
+
+	var maxRestrictionOrder uint
+	var foundRestriction bool
+	for _, order := range stage.RestrictionMap_Staged_Order {
+		if !foundRestriction || order > maxRestrictionOrder {
+			maxRestrictionOrder = order
+			foundRestriction = true
+		}
+	}
+	if foundRestriction {
+		stage.RestrictionOrder = maxRestrictionOrder + 1
+	} else {
+		stage.RestrictionOrder = 0
+	}
+
+	var maxSchemaOrder uint
+	var foundSchema bool
+	for _, order := range stage.SchemaMap_Staged_Order {
+		if !foundSchema || order > maxSchemaOrder {
+			maxSchemaOrder = order
+			foundSchema = true
+		}
+	}
+	if foundSchema {
+		stage.SchemaOrder = maxSchemaOrder + 1
+	} else {
+		stage.SchemaOrder = 0
+	}
+
+	var maxSequenceOrder uint
+	var foundSequence bool
+	for _, order := range stage.SequenceMap_Staged_Order {
+		if !foundSequence || order > maxSequenceOrder {
+			maxSequenceOrder = order
+			foundSequence = true
+		}
+	}
+	if foundSequence {
+		stage.SequenceOrder = maxSequenceOrder + 1
+	} else {
+		stage.SequenceOrder = 0
+	}
+
+	var maxSimpleContentOrder uint
+	var foundSimpleContent bool
+	for _, order := range stage.SimpleContentMap_Staged_Order {
+		if !foundSimpleContent || order > maxSimpleContentOrder {
+			maxSimpleContentOrder = order
+			foundSimpleContent = true
+		}
+	}
+	if foundSimpleContent {
+		stage.SimpleContentOrder = maxSimpleContentOrder + 1
+	} else {
+		stage.SimpleContentOrder = 0
+	}
+
+	var maxSimpleTypeOrder uint
+	var foundSimpleType bool
+	for _, order := range stage.SimpleTypeMap_Staged_Order {
+		if !foundSimpleType || order > maxSimpleTypeOrder {
+			maxSimpleTypeOrder = order
+			foundSimpleType = true
+		}
+	}
+	if foundSimpleType {
+		stage.SimpleTypeOrder = maxSimpleTypeOrder + 1
+	} else {
+		stage.SimpleTypeOrder = 0
+	}
+
+	var maxTotalDigitOrder uint
+	var foundTotalDigit bool
+	for _, order := range stage.TotalDigitMap_Staged_Order {
+		if !foundTotalDigit || order > maxTotalDigitOrder {
+			maxTotalDigitOrder = order
+			foundTotalDigit = true
+		}
+	}
+	if foundTotalDigit {
+		stage.TotalDigitOrder = maxTotalDigitOrder + 1
+	} else {
+		stage.TotalDigitOrder = 0
+	}
+
+	var maxUnionOrder uint
+	var foundUnion bool
+	for _, order := range stage.UnionMap_Staged_Order {
+		if !foundUnion || order > maxUnionOrder {
+			maxUnionOrder = order
+			foundUnion = true
+		}
+	}
+	if foundUnion {
+		stage.UnionOrder = maxUnionOrder + 1
+	} else {
+		stage.UnionOrder = 0
+	}
+
+	var maxWhiteSpaceOrder uint
+	var foundWhiteSpace bool
+	for _, order := range stage.WhiteSpaceMap_Staged_Order {
+		if !foundWhiteSpace || order > maxWhiteSpaceOrder {
+			maxWhiteSpaceOrder = order
+			foundWhiteSpace = true
+		}
+	}
+	if foundWhiteSpace {
+		stage.WhiteSpaceOrder = maxWhiteSpaceOrder + 1
+	} else {
+		stage.WhiteSpaceOrder = 0
+	}
+
+	// end of insertion point for max order recomputation
+}
+
+func (stage *Stage) SetDeltaMode(inDeltaMode bool) {
+	stage.isInDeltaMode = inDeltaMode
+}
+
+func (stage *Stage) IsInDeltaMode() bool {
+	return stage.isInDeltaMode
+}
+
+func (stage *Stage) SetProbeIF(probeIF ProbeIF) {
+	stage.probeIF = probeIF
+}
+
+func (stage *Stage) GetProbeIF() ProbeIF {
+	if stage.probeIF == nil {
+		return nil
+	}
+
+	return stage.probeIF
 }
 
 // GetNamedStructs implements models.ProbebStage.
 func (stage *Stage) GetNamedStructsNames() (res []string) {
-
 	for _, namedStruct := range stage.NamedStructs {
 		res = append(res, namedStruct.name)
 	}
@@ -540,8 +1146,7 @@ func (stage *Stage) GetNamedStructsNames() (res []string) {
 	return
 }
 
-func GetNamedStructInstances[T PointerToGongstruct](set map[T]any, order map[T]uint) (res []string) {
-
+func GetNamedStructInstances[T PointerToGongstruct](set map[T]struct{}, order map[T]uint) (res []string) {
 	orderedSet := []T{}
 	for instance := range set {
 		orderedSet = append(orderedSet, instance)
@@ -567,7 +1172,7 @@ func GetNamedStructInstances[T PointerToGongstruct](set map[T]any, order map[T]u
 func GetStructInstancesByOrderAuto[T PointerToGongstruct](stage *Stage) (res []T) {
 	var t T
 	switch any(t).(type) {
-		// insertion point for case
+	// insertion point for case
 	case *All:
 		tmp := GetStructInstancesByOrder(stage.Alls, stage.AllMap_Staged_Order)
 
@@ -937,8 +1542,7 @@ func GetStructInstancesByOrderAuto[T PointerToGongstruct](stage *Stage) (res []T
 	return
 }
 
-func GetStructInstancesByOrder[T PointerToGongstruct](set map[T]any, order map[T]uint) (res []T) {
-
+func GetStructInstancesByOrder[T PointerToGongstruct](set map[T]struct{}, order map[T]uint) (res []T) {
 	orderedSet := []T{}
 	for instance := range set {
 		orderedSet = append(orderedSet, instance)
@@ -954,15 +1558,12 @@ func GetStructInstancesByOrder[T PointerToGongstruct](set map[T]any, order map[T
 		return i_order < j_order
 	})
 
-	for _, instance := range orderedSet {
-		res = append(res, instance)
-	}
+	res = append(res, orderedSet...)
 
 	return
 }
 
 func (stage *Stage) GetNamedStructNamesByOrder(namedStructName string) (res []string) {
-
 	switch namedStructName {
 	// insertion point for case
 	case "All":
@@ -1143,84 +1744,83 @@ type BackRepoInterface interface {
 }
 
 func NewStage(name string) (stage *Stage) {
-
 	stage = &Stage{ // insertion point for array initiatialisation
-		Alls:           make(map[*All]any),
+		Alls:           make(map[*All]struct{}),
 		Alls_mapString: make(map[string]*All),
 
-		Annotations:           make(map[*Annotation]any),
+		Annotations:           make(map[*Annotation]struct{}),
 		Annotations_mapString: make(map[string]*Annotation),
 
-		Attributes:           make(map[*Attribute]any),
+		Attributes:           make(map[*Attribute]struct{}),
 		Attributes_mapString: make(map[string]*Attribute),
 
-		AttributeGroups:           make(map[*AttributeGroup]any),
+		AttributeGroups:           make(map[*AttributeGroup]struct{}),
 		AttributeGroups_mapString: make(map[string]*AttributeGroup),
 
-		Choices:           make(map[*Choice]any),
+		Choices:           make(map[*Choice]struct{}),
 		Choices_mapString: make(map[string]*Choice),
 
-		ComplexContents:           make(map[*ComplexContent]any),
+		ComplexContents:           make(map[*ComplexContent]struct{}),
 		ComplexContents_mapString: make(map[string]*ComplexContent),
 
-		ComplexTypes:           make(map[*ComplexType]any),
+		ComplexTypes:           make(map[*ComplexType]struct{}),
 		ComplexTypes_mapString: make(map[string]*ComplexType),
 
-		Documentations:           make(map[*Documentation]any),
+		Documentations:           make(map[*Documentation]struct{}),
 		Documentations_mapString: make(map[string]*Documentation),
 
-		Elements:           make(map[*Element]any),
+		Elements:           make(map[*Element]struct{}),
 		Elements_mapString: make(map[string]*Element),
 
-		Enumerations:           make(map[*Enumeration]any),
+		Enumerations:           make(map[*Enumeration]struct{}),
 		Enumerations_mapString: make(map[string]*Enumeration),
 
-		Extensions:           make(map[*Extension]any),
+		Extensions:           make(map[*Extension]struct{}),
 		Extensions_mapString: make(map[string]*Extension),
 
-		Groups:           make(map[*Group]any),
+		Groups:           make(map[*Group]struct{}),
 		Groups_mapString: make(map[string]*Group),
 
-		Lengths:           make(map[*Length]any),
+		Lengths:           make(map[*Length]struct{}),
 		Lengths_mapString: make(map[string]*Length),
 
-		MaxInclusives:           make(map[*MaxInclusive]any),
+		MaxInclusives:           make(map[*MaxInclusive]struct{}),
 		MaxInclusives_mapString: make(map[string]*MaxInclusive),
 
-		MaxLengths:           make(map[*MaxLength]any),
+		MaxLengths:           make(map[*MaxLength]struct{}),
 		MaxLengths_mapString: make(map[string]*MaxLength),
 
-		MinInclusives:           make(map[*MinInclusive]any),
+		MinInclusives:           make(map[*MinInclusive]struct{}),
 		MinInclusives_mapString: make(map[string]*MinInclusive),
 
-		MinLengths:           make(map[*MinLength]any),
+		MinLengths:           make(map[*MinLength]struct{}),
 		MinLengths_mapString: make(map[string]*MinLength),
 
-		Patterns:           make(map[*Pattern]any),
+		Patterns:           make(map[*Pattern]struct{}),
 		Patterns_mapString: make(map[string]*Pattern),
 
-		Restrictions:           make(map[*Restriction]any),
+		Restrictions:           make(map[*Restriction]struct{}),
 		Restrictions_mapString: make(map[string]*Restriction),
 
-		Schemas:           make(map[*Schema]any),
+		Schemas:           make(map[*Schema]struct{}),
 		Schemas_mapString: make(map[string]*Schema),
 
-		Sequences:           make(map[*Sequence]any),
+		Sequences:           make(map[*Sequence]struct{}),
 		Sequences_mapString: make(map[string]*Sequence),
 
-		SimpleContents:           make(map[*SimpleContent]any),
+		SimpleContents:           make(map[*SimpleContent]struct{}),
 		SimpleContents_mapString: make(map[string]*SimpleContent),
 
-		SimpleTypes:           make(map[*SimpleType]any),
+		SimpleTypes:           make(map[*SimpleType]struct{}),
 		SimpleTypes_mapString: make(map[string]*SimpleType),
 
-		TotalDigits:           make(map[*TotalDigit]any),
+		TotalDigits:           make(map[*TotalDigit]struct{}),
 		TotalDigits_mapString: make(map[string]*TotalDigit),
 
-		Unions:           make(map[*Union]any),
+		Unions:           make(map[*Union]struct{}),
 		Unions_mapString: make(map[string]*Union),
 
-		WhiteSpaces:           make(map[*WhiteSpace]any),
+		WhiteSpaces:           make(map[*WhiteSpace]struct{}),
 		WhiteSpaces_mapString: make(map[string]*WhiteSpace),
 
 		// end of insertion point
@@ -1286,6 +1886,61 @@ func NewStage(name string) (stage *Stage) {
 		WhiteSpaceMap_Staged_Order: make(map[*WhiteSpace]uint),
 
 		// end of insertion point
+		GongUnmarshallers: map[string]ModelUnmarshaller{ // insertion point for unmarshallers
+			"All": &AllUnmarshaller{},
+
+			"Annotation": &AnnotationUnmarshaller{},
+
+			"Attribute": &AttributeUnmarshaller{},
+
+			"AttributeGroup": &AttributeGroupUnmarshaller{},
+
+			"Choice": &ChoiceUnmarshaller{},
+
+			"ComplexContent": &ComplexContentUnmarshaller{},
+
+			"ComplexType": &ComplexTypeUnmarshaller{},
+
+			"Documentation": &DocumentationUnmarshaller{},
+
+			"Element": &ElementUnmarshaller{},
+
+			"Enumeration": &EnumerationUnmarshaller{},
+
+			"Extension": &ExtensionUnmarshaller{},
+
+			"Group": &GroupUnmarshaller{},
+
+			"Length": &LengthUnmarshaller{},
+
+			"MaxInclusive": &MaxInclusiveUnmarshaller{},
+
+			"MaxLength": &MaxLengthUnmarshaller{},
+
+			"MinInclusive": &MinInclusiveUnmarshaller{},
+
+			"MinLength": &MinLengthUnmarshaller{},
+
+			"Pattern": &PatternUnmarshaller{},
+
+			"Restriction": &RestrictionUnmarshaller{},
+
+			"Schema": &SchemaUnmarshaller{},
+
+			"Sequence": &SequenceUnmarshaller{},
+
+			"SimpleContent": &SimpleContentUnmarshaller{},
+
+			"SimpleType": &SimpleTypeUnmarshaller{},
+
+			"TotalDigit": &TotalDigitUnmarshaller{},
+
+			"Union": &UnionUnmarshaller{},
+
+			"WhiteSpace": &WhiteSpaceUnmarshaller{},
+
+			// end of insertion point
+		},
 
 		NamedStructs: []*NamedStruct{ // insertion point for order map initialisations
 			{name: "All"},
@@ -1315,13 +1970,14 @@ func NewStage(name string) (stage *Stage) {
 			{name: "Union"},
 			{name: "WhiteSpace"},
 		}, // end of insertion point
+
+		navigationMode: GongNavigationModeNormal,
 	}
 
 	return
 }
 
 func GetOrder[Type Gongstruct](stage *Stage, instance *Type) uint {
-
 	switch instance := any(instance).(type) {
 	// insertion point for order map initialisations
 	case *All:
@@ -1382,7 +2038,6 @@ func GetOrder[Type Gongstruct](stage *Stage, instance *Type) uint {
 }
 
 func GetOrderPointerGongstruct[Type PointerToGongstruct](stage *Stage, instance Type) uint {
-
 	switch instance := any(instance).(type) {
 	// insertion point for order map initialisations
 	case *All:
@@ -1447,7 +2102,6 @@ func (stage *Stage) GetName() string {
 }
 
 func (stage *Stage) CommitWithSuspendedCallbacks() {
-
 	tmp := stage.OnInitCommitFromBackCallback
 	stage.OnInitCommitFromBackCallback = nil
 	stage.Commit()
@@ -1456,13 +2110,33 @@ func (stage *Stage) CommitWithSuspendedCallbacks() {
 
 func (stage *Stage) Commit() {
 	stage.ComputeReverseMaps()
-	stage.commitId++
-	stage.commitTimeStamp = time.Now()
+
+	if stage.OnInitCommitCallback != nil {
+		stage.OnInitCommitCallback.BeforeCommit(stage)
+	}
+	if stage.OnInitCommitFromBackCallback != nil {
+		stage.OnInitCommitFromBackCallback.BeforeCommit(stage)
+	}
 
 	if stage.BackRepo != nil {
 		stage.BackRepo.Commit(stage)
 	}
+	stage.ComputeInstancesNb()
 
+	// if a commit is applied when in navigation mode
+	// this will reset the commits behind and swith the
+	// naviagation
+	if stage.isInDeltaMode && stage.navigationMode == GongNavigationModeNavigating && stage.GetCommitsBehind() > 0 {
+		stage.ResetHard()
+	}
+
+	if stage.IsInDeltaMode() {
+		stage.ComputeForwardAndBackwardCommits()
+		stage.ComputeReferenceAndOrders()
+	}
+}
+
+func (stage *Stage) ComputeInstancesNb() {
 	// insertion point for computing the map of number of instances per gongstruct
 	stage.Map_GongStructName_InstancesNb["All"] = len(stage.Alls)
 	stage.Map_GongStructName_InstancesNb["Annotation"] = len(stage.Annotations)
@@ -1490,7 +2164,6 @@ func (stage *Stage) Commit() {
 	stage.Map_GongStructName_InstancesNb["TotalDigit"] = len(stage.TotalDigits)
 	stage.Map_GongStructName_InstancesNb["Union"] = len(stage.Unions)
 	stage.Map_GongStructName_InstancesNb["WhiteSpace"] = len(stage.WhiteSpaces)
-
 }
 
 func (stage *Stage) Checkout() {
@@ -1499,34 +2172,7 @@ func (stage *Stage) Checkout() {
 	}
 
 	stage.ComputeReverseMaps()
-	// insertion point for computing the map of number of instances per gongstruct
-	stage.Map_GongStructName_InstancesNb["All"] = len(stage.Alls)
-	stage.Map_GongStructName_InstancesNb["Annotation"] = len(stage.Annotations)
-	stage.Map_GongStructName_InstancesNb["Attribute"] = len(stage.Attributes)
-	stage.Map_GongStructName_InstancesNb["AttributeGroup"] = len(stage.AttributeGroups)
-	stage.Map_GongStructName_InstancesNb["Choice"] = len(stage.Choices)
-	stage.Map_GongStructName_InstancesNb["ComplexContent"] = len(stage.ComplexContents)
-	stage.Map_GongStructName_InstancesNb["ComplexType"] = len(stage.ComplexTypes)
-	stage.Map_GongStructName_InstancesNb["Documentation"] = len(stage.Documentations)
-	stage.Map_GongStructName_InstancesNb["Element"] = len(stage.Elements)
-	stage.Map_GongStructName_InstancesNb["Enumeration"] = len(stage.Enumerations)
-	stage.Map_GongStructName_InstancesNb["Extension"] = len(stage.Extensions)
-	stage.Map_GongStructName_InstancesNb["Group"] = len(stage.Groups)
-	stage.Map_GongStructName_InstancesNb["Length"] = len(stage.Lengths)
-	stage.Map_GongStructName_InstancesNb["MaxInclusive"] = len(stage.MaxInclusives)
-	stage.Map_GongStructName_InstancesNb["MaxLength"] = len(stage.MaxLengths)
-	stage.Map_GongStructName_InstancesNb["MinInclusive"] = len(stage.MinInclusives)
-	stage.Map_GongStructName_InstancesNb["MinLength"] = len(stage.MinLengths)
-	stage.Map_GongStructName_InstancesNb["Pattern"] = len(stage.Patterns)
-	stage.Map_GongStructName_InstancesNb["Restriction"] = len(stage.Restrictions)
-	stage.Map_GongStructName_InstancesNb["Schema"] = len(stage.Schemas)
-	stage.Map_GongStructName_InstancesNb["Sequence"] = len(stage.Sequences)
-	stage.Map_GongStructName_InstancesNb["SimpleContent"] = len(stage.SimpleContents)
-	stage.Map_GongStructName_InstancesNb["SimpleType"] = len(stage.SimpleTypes)
-	stage.Map_GongStructName_InstancesNb["TotalDigit"] = len(stage.TotalDigits)
-	stage.Map_GongStructName_InstancesNb["Union"] = len(stage.Unions)
-	stage.Map_GongStructName_InstancesNb["WhiteSpace"] = len(stage.WhiteSpaces)
-
+	stage.ComputeInstancesNb()
 }
 
 // backup generates backup files in the dirPath
@@ -1560,9 +2206,8 @@ func (stage *Stage) RestoreXL(dirPath string) {
 // insertion point for cumulative sub template with model space calls
 // Stage puts all to the model stage
 func (all *All) Stage(stage *Stage) *All {
-
 	if _, ok := stage.Alls[all]; !ok {
-		stage.Alls[all] = __member
+		stage.Alls[all] = struct{}{}
 		stage.AllMap_Staged_Order[all] = stage.AllOrder
 		stage.AllOrder++
 	}
@@ -1571,16 +2216,37 @@ func (all *All) Stage(stage *Stage) *All {
 	return all
 }
 
+// StagePreserveOrder puts all to the model stage, and if the astrtuct
+// was not staged before:
+//
+// - force the order if the order is equal or greater than the stage.AllOrder
+// - update stage.AllOrder accordingly
+func (all *All) StagePreserveOrder(stage *Stage, order uint) {
+	if _, ok := stage.Alls[all]; !ok {
+		stage.Alls[all] = struct{}{}
+
+		if order > stage.AllOrder {
+			stage.AllOrder = order
+		}
+		stage.AllMap_Staged_Order[all] = order
+		stage.AllOrder++
+	}
+	stage.Alls_mapString[all.Name] = all
+}
+
 // Unstage removes all off the model stage
 func (all *All) Unstage(stage *Stage) *All {
 	delete(stage.Alls, all)
+	delete(stage.AllMap_Staged_Order, all)
 	delete(stage.Alls_mapString, all.Name)
+
 	return all
 }
 
 // UnstageVoid removes all off the model stage
 func (all *All) UnstageVoid(stage *Stage) {
 	delete(stage.Alls, all)
+	delete(stage.AllMap_Staged_Order, all)
 	delete(stage.Alls_mapString, all.Name)
 }
 
@@ -1598,6 +2264,10 @@ func (all *All) CommitVoid(stage *Stage) {
 	all.Commit(stage)
 }
 
+func (all *All) StageVoid(stage *Stage) {
+	all.Stage(stage)
+}
+
 // Checkout all to the back repo (if it is already staged)
 func (all *All) Checkout(stage *Stage) *All {
 	if _, ok := stage.Alls[all]; ok {
@@ -1613,11 +2283,15 @@ func (all *All) GetName() (res string) {
 	return all.Name
 }
 
+// for satisfaction of GongStruct interface
+func (all *All) SetName(name string) {
+	all.Name = name
+}
+
 // Stage puts annotation to the model stage
 func (annotation *Annotation) Stage(stage *Stage) *Annotation {
-
 	if _, ok := stage.Annotations[annotation]; !ok {
-		stage.Annotations[annotation] = __member
+		stage.Annotations[annotation] = struct{}{}
 		stage.AnnotationMap_Staged_Order[annotation] = stage.AnnotationOrder
 		stage.AnnotationOrder++
 	}
@@ -1626,16 +2300,37 @@ func (annotation *Annotation) Stage(stage *Stage) *Annotation {
 	return annotation
 }
 
+// StagePreserveOrder puts annotation to the model stage, and if the astrtuct
+// was not staged before:
+//
+// - force the order if the order is equal or greater than the stage.AnnotationOrder
+// - update stage.AnnotationOrder accordingly
+func (annotation *Annotation) StagePreserveOrder(stage *Stage, order uint) {
+	if _, ok := stage.Annotations[annotation]; !ok {
+		stage.Annotations[annotation] = struct{}{}
+
+		if order > stage.AnnotationOrder {
+			stage.AnnotationOrder = order
+		}
+		stage.AnnotationMap_Staged_Order[annotation] = order
+		stage.AnnotationOrder++
+	}
+	stage.Annotations_mapString[annotation.Name] = annotation
+}
+
 // Unstage removes annotation off the model stage
 func (annotation *Annotation) Unstage(stage *Stage) *Annotation {
 	delete(stage.Annotations, annotation)
+	delete(stage.AnnotationMap_Staged_Order, annotation)
 	delete(stage.Annotations_mapString, annotation.Name)
+
 	return annotation
 }
 
 // UnstageVoid removes annotation off the model stage
 func (annotation *Annotation) UnstageVoid(stage *Stage) {
 	delete(stage.Annotations, annotation)
+	delete(stage.AnnotationMap_Staged_Order, annotation)
 	delete(stage.Annotations_mapString, annotation.Name)
 }
 
@@ -1653,6 +2348,10 @@ func (annotation *Annotation) CommitVoid(stage *Stage) {
 	annotation.Commit(stage)
 }
 
+func (annotation *Annotation) StageVoid(stage *Stage) {
+	annotation.Stage(stage)
+}
+
 // Checkout annotation to the back repo (if it is already staged)
 func (annotation *Annotation) Checkout(stage *Stage) *Annotation {
 	if _, ok := stage.Annotations[annotation]; ok {
@@ -1668,11 +2367,15 @@ func (annotation *Annotation) GetName() (res string) {
 	return annotation.Name
 }
 
+// for satisfaction of GongStruct interface
+func (annotation *Annotation) SetName(name string) {
+	annotation.Name = name
+}
+
 // Stage puts attribute to the model stage
 func (attribute *Attribute) Stage(stage *Stage) *Attribute {
-
 	if _, ok := stage.Attributes[attribute]; !ok {
-		stage.Attributes[attribute] = __member
+		stage.Attributes[attribute] = struct{}{}
 		stage.AttributeMap_Staged_Order[attribute] = stage.AttributeOrder
 		stage.AttributeOrder++
 	}
@@ -1681,16 +2384,37 @@ func (attribute *Attribute) Stage(stage *Stage) *Attribute {
 	return attribute
 }
 
+// StagePreserveOrder puts attribute to the model stage, and if the astrtuct
+// was not staged before:
+//
+// - force the order if the order is equal or greater than the stage.AttributeOrder
+// - update stage.AttributeOrder accordingly
+func (attribute *Attribute) StagePreserveOrder(stage *Stage, order uint) {
+	if _, ok := stage.Attributes[attribute]; !ok {
+		stage.Attributes[attribute] = struct{}{}
+
+		if order > stage.AttributeOrder {
+			stage.AttributeOrder = order
+		}
+		stage.AttributeMap_Staged_Order[attribute] = order
+		stage.AttributeOrder++
+	}
+	stage.Attributes_mapString[attribute.Name] = attribute
+}
+
 // Unstage removes attribute off the model stage
 func (attribute *Attribute) Unstage(stage *Stage) *Attribute {
 	delete(stage.Attributes, attribute)
+	delete(stage.AttributeMap_Staged_Order, attribute)
 	delete(stage.Attributes_mapString, attribute.Name)
+
 	return attribute
 }
 
 // UnstageVoid removes attribute off the model stage
 func (attribute *Attribute) UnstageVoid(stage *Stage) {
 	delete(stage.Attributes, attribute)
+	delete(stage.AttributeMap_Staged_Order, attribute)
 	delete(stage.Attributes_mapString, attribute.Name)
 }
 
@@ -1708,6 +2432,10 @@ func (attribute *Attribute) CommitVoid(stage *Stage) {
 	attribute.Commit(stage)
 }
 
+func (attribute *Attribute) StageVoid(stage *Stage) {
+	attribute.Stage(stage)
+}
+
 // Checkout attribute to the back repo (if it is already staged)
 func (attribute *Attribute) Checkout(stage *Stage) *Attribute {
 	if _, ok := stage.Attributes[attribute]; ok {
@@ -1723,11 +2451,15 @@ func (attribute *Attribute) GetName() (res string) {
 	return attribute.Name
 }
 
+// for satisfaction of GongStruct interface
+func (attribute *Attribute) SetName(name string) {
+	attribute.Name = name
+}
+
 // Stage puts attributegroup to the model stage
 func (attributegroup *AttributeGroup) Stage(stage *Stage) *AttributeGroup {
-
 	if _, ok := stage.AttributeGroups[attributegroup]; !ok {
-		stage.AttributeGroups[attributegroup] = __member
+		stage.AttributeGroups[attributegroup] = struct{}{}
 		stage.AttributeGroupMap_Staged_Order[attributegroup] = stage.AttributeGroupOrder
 		stage.AttributeGroupOrder++
 	}
@@ -1736,16 +2468,37 @@ func (attributegroup *AttributeGroup) Stage(stage *Stage) *AttributeGroup {
 	return attributegroup
 }
 
+// StagePreserveOrder puts attributegroup to the model stage, and if the astrtuct
+// was not staged before:
+//
+// - force the order if the order is equal or greater than the stage.AttributeGroupOrder
+// - update stage.AttributeGroupOrder accordingly
+func (attributegroup *AttributeGroup) StagePreserveOrder(stage *Stage, order uint) {
+	if _, ok := stage.AttributeGroups[attributegroup]; !ok {
+		stage.AttributeGroups[attributegroup] = struct{}{}
+
+		if order > stage.AttributeGroupOrder {
+			stage.AttributeGroupOrder = order
+		}
+		stage.AttributeGroupMap_Staged_Order[attributegroup] = order
+		stage.AttributeGroupOrder++
+	}
+	stage.AttributeGroups_mapString[attributegroup.Name] = attributegroup
+}
+
 // Unstage removes attributegroup off the model stage
 func (attributegroup *AttributeGroup) Unstage(stage *Stage) *AttributeGroup {
 	delete(stage.AttributeGroups, attributegroup)
+	delete(stage.AttributeGroupMap_Staged_Order, attributegroup)
 	delete(stage.AttributeGroups_mapString, attributegroup.Name)
+
 	return attributegroup
 }
 
 // UnstageVoid removes attributegroup off the model stage
 func (attributegroup *AttributeGroup) UnstageVoid(stage *Stage) {
 	delete(stage.AttributeGroups, attributegroup)
+	delete(stage.AttributeGroupMap_Staged_Order, attributegroup)
 	delete(stage.AttributeGroups_mapString, attributegroup.Name)
 }
 
@@ -1763,6 +2516,10 @@ func (attributegroup *AttributeGroup) CommitVoid(stage *Stage) {
 	attributegroup.Commit(stage)
 }
 
+func (attributegroup *AttributeGroup) StageVoid(stage *Stage) {
+	attributegroup.Stage(stage)
+}
+
 // Checkout attributegroup to the back repo (if it is already staged)
 func (attributegroup *AttributeGroup) Checkout(stage *Stage) *AttributeGroup {
 	if _, ok := stage.AttributeGroups[attributegroup]; ok {
@@ -1778,11 +2535,15 @@ func (attributegroup *AttributeGroup) GetName() (res string) {
 	return attributegroup.Name
 }
 
+// for satisfaction of GongStruct interface
+func (attributegroup *AttributeGroup) SetName(name string) {
+	attributegroup.Name = name
+}
+
 // Stage puts choice to the model stage
 func (choice *Choice) Stage(stage *Stage) *Choice {
-
 	if _, ok := stage.Choices[choice]; !ok {
-		stage.Choices[choice] = __member
+		stage.Choices[choice] = struct{}{}
 		stage.ChoiceMap_Staged_Order[choice] = stage.ChoiceOrder
 		stage.ChoiceOrder++
 	}
@@ -1791,16 +2552,37 @@ func (choice *Choice) Stage(stage *Stage) *Choice {
 	return choice
 }
 
+// StagePreserveOrder puts choice to the model stage, and if the astrtuct
+// was not staged before:
+//
+// - force the order if the order is equal or greater than the stage.ChoiceOrder
+// - update stage.ChoiceOrder accordingly
+func (choice *Choice) StagePreserveOrder(stage *Stage, order uint) {
+	if _, ok := stage.Choices[choice]; !ok {
+		stage.Choices[choice] = struct{}{}
+
+		if order > stage.ChoiceOrder {
+			stage.ChoiceOrder = order
+		}
+		stage.ChoiceMap_Staged_Order[choice] = order
+		stage.ChoiceOrder++
+	}
+	stage.Choices_mapString[choice.Name] = choice
+}
+
 // Unstage removes choice off the model stage
 func (choice *Choice) Unstage(stage *Stage) *Choice {
 	delete(stage.Choices, choice)
+	delete(stage.ChoiceMap_Staged_Order, choice)
 	delete(stage.Choices_mapString, choice.Name)
+
 	return choice
 }
 
 // UnstageVoid removes choice off the model stage
 func (choice *Choice) UnstageVoid(stage *Stage) {
 	delete(stage.Choices, choice)
+	delete(stage.ChoiceMap_Staged_Order, choice)
 	delete(stage.Choices_mapString, choice.Name)
 }
 
@@ -1818,6 +2600,10 @@ func (choice *Choice) CommitVoid(stage *Stage) {
 	choice.Commit(stage)
 }
 
+func (choice *Choice) StageVoid(stage *Stage) {
+	choice.Stage(stage)
+}
+
 // Checkout choice to the back repo (if it is already staged)
 func (choice *Choice) Checkout(stage *Stage) *Choice {
 	if _, ok := stage.Choices[choice]; ok {
@@ -1833,11 +2619,15 @@ func (choice *Choice) GetName() (res string) {
 	return choice.Name
 }
 
+// for satisfaction of GongStruct interface
+func (choice *Choice) SetName(name string) {
+	choice.Name = name
+}
+
 // Stage puts complexcontent to the model stage
 func (complexcontent *ComplexContent) Stage(stage *Stage) *ComplexContent {
-
 	if _, ok := stage.ComplexContents[complexcontent]; !ok {
-		stage.ComplexContents[complexcontent] = __member
+		stage.ComplexContents[complexcontent] = struct{}{}
 		stage.ComplexContentMap_Staged_Order[complexcontent] = stage.ComplexContentOrder
 		stage.ComplexContentOrder++
 	}
@@ -1846,16 +2636,37 @@ func (complexcontent *ComplexContent) Stage(stage *Stage) *ComplexContent {
 	return complexcontent
 }
 
+// StagePreserveOrder puts complexcontent to the model stage, and if the astrtuct
+// was not staged before:
+//
+// - force the order if the order is equal or greater than the stage.ComplexContentOrder
+// - update stage.ComplexContentOrder accordingly
+func (complexcontent *ComplexContent) StagePreserveOrder(stage *Stage, order uint) {
+	if _, ok := stage.ComplexContents[complexcontent]; !ok {
+		stage.ComplexContents[complexcontent] = struct{}{}
+
+		if order > stage.ComplexContentOrder {
+			stage.ComplexContentOrder = order
+		}
+		stage.ComplexContentMap_Staged_Order[complexcontent] = order
+		stage.ComplexContentOrder++
+	}
+	stage.ComplexContents_mapString[complexcontent.Name] = complexcontent
+}
+
 // Unstage removes complexcontent off the model stage
 func (complexcontent *ComplexContent) Unstage(stage *Stage) *ComplexContent {
 	delete(stage.ComplexContents, complexcontent)
+	delete(stage.ComplexContentMap_Staged_Order, complexcontent)
 	delete(stage.ComplexContents_mapString, complexcontent.Name)
+
 	return complexcontent
 }
 
 // UnstageVoid removes complexcontent off the model stage
 func (complexcontent *ComplexContent) UnstageVoid(stage *Stage) {
 	delete(stage.ComplexContents, complexcontent)
+	delete(stage.ComplexContentMap_Staged_Order, complexcontent)
 	delete(stage.ComplexContents_mapString, complexcontent.Name)
 }
 
@@ -1873,6 +2684,10 @@ func (complexcontent *ComplexContent) CommitVoid(stage *Stage) {
 	complexcontent.Commit(stage)
 }
 
+func (complexcontent *ComplexContent) StageVoid(stage *Stage) {
+	complexcontent.Stage(stage)
+}
+
 // Checkout complexcontent to the back repo (if it is already staged)
 func (complexcontent *ComplexContent) Checkout(stage *Stage) *ComplexContent {
 	if _, ok := stage.ComplexContents[complexcontent]; ok {
@@ -1888,11 +2703,15 @@ func (complexcontent *ComplexContent) GetName() (res string) {
 	return complexcontent.Name
 }
 
+// for satisfaction of GongStruct interface
+func (complexcontent *ComplexContent) SetName(name string) {
+	complexcontent.Name = name
+}
+
 // Stage puts complextype to the model stage
 func (complextype *ComplexType) Stage(stage *Stage) *ComplexType {
-
 	if _, ok := stage.ComplexTypes[complextype]; !ok {
-		stage.ComplexTypes[complextype] = __member
+		stage.ComplexTypes[complextype] = struct{}{}
 		stage.ComplexTypeMap_Staged_Order[complextype] = stage.ComplexTypeOrder
 		stage.ComplexTypeOrder++
 	}
@@ -1901,16 +2720,37 @@ func (complextype *ComplexType) Stage(stage *Stage) *ComplexType {
 	return complextype
 }
 
+// StagePreserveOrder puts complextype to the model stage, and if the astrtuct
+// was not staged before:
+//
+// - force the order if the order is equal or greater than the stage.ComplexTypeOrder
+// - update stage.ComplexTypeOrder accordingly
+func (complextype *ComplexType) StagePreserveOrder(stage *Stage, order uint) {
+	if _, ok := stage.ComplexTypes[complextype]; !ok {
+		stage.ComplexTypes[complextype] = struct{}{}
+
+		if order > stage.ComplexTypeOrder {
+			stage.ComplexTypeOrder = order
+		}
+		stage.ComplexTypeMap_Staged_Order[complextype] = order
+		stage.ComplexTypeOrder++
+	}
+	stage.ComplexTypes_mapString[complextype.Name] = complextype
+}
+
 // Unstage removes complextype off the model stage
 func (complextype *ComplexType) Unstage(stage *Stage) *ComplexType {
 	delete(stage.ComplexTypes, complextype)
+	delete(stage.ComplexTypeMap_Staged_Order, complextype)
 	delete(stage.ComplexTypes_mapString, complextype.Name)
+
 	return complextype
 }
 
 // UnstageVoid removes complextype off the model stage
 func (complextype *ComplexType) UnstageVoid(stage *Stage) {
 	delete(stage.ComplexTypes, complextype)
+	delete(stage.ComplexTypeMap_Staged_Order, complextype)
 	delete(stage.ComplexTypes_mapString, complextype.Name)
 }
 
@@ -1928,6 +2768,10 @@ func (complextype *ComplexType) CommitVoid(stage *Stage) {
 	complextype.Commit(stage)
 }
 
+func (complextype *ComplexType) StageVoid(stage *Stage) {
+	complextype.Stage(stage)
+}
+
 // Checkout complextype to the back repo (if it is already staged)
 func (complextype *ComplexType) Checkout(stage *Stage) *ComplexType {
 	if _, ok := stage.ComplexTypes[complextype]; ok {
@@ -1943,11 +2787,15 @@ func (complextype *ComplexType) GetName() (res string) {
 	return complextype.Name
 }
 
+// for satisfaction of GongStruct interface
+func (complextype *ComplexType) SetName(name string) {
+	complextype.Name = name
+}
+
 // Stage puts documentation to the model stage
 func (documentation *Documentation) Stage(stage *Stage) *Documentation {
-
 	if _, ok := stage.Documentations[documentation]; !ok {
-		stage.Documentations[documentation] = __member
+		stage.Documentations[documentation] = struct{}{}
 		stage.DocumentationMap_Staged_Order[documentation] = stage.DocumentationOrder
 		stage.DocumentationOrder++
 	}
@@ -1956,16 +2804,37 @@ func (documentation *Documentation) Stage(stage *Stage) *Documentation {
 	return documentation
 }
 
+// StagePreserveOrder puts documentation to the model stage, and if the astrtuct
+// was not staged before:
+//
+// - force the order if the order is equal or greater than the stage.DocumentationOrder
+// - update stage.DocumentationOrder accordingly
+func (documentation *Documentation) StagePreserveOrder(stage *Stage, order uint) {
+	if _, ok := stage.Documentations[documentation]; !ok {
+		stage.Documentations[documentation] = struct{}{}
+
+		if order > stage.DocumentationOrder {
+			stage.DocumentationOrder = order
+		}
+		stage.DocumentationMap_Staged_Order[documentation] = order
+		stage.DocumentationOrder++
+	}
+	stage.Documentations_mapString[documentation.Name] = documentation
+}
+
 // Unstage removes documentation off the model stage
 func (documentation *Documentation) Unstage(stage *Stage) *Documentation {
 	delete(stage.Documentations, documentation)
+	delete(stage.DocumentationMap_Staged_Order, documentation)
 	delete(stage.Documentations_mapString, documentation.Name)
+
 	return documentation
 }
 
 // UnstageVoid removes documentation off the model stage
 func (documentation *Documentation) UnstageVoid(stage *Stage) {
 	delete(stage.Documentations, documentation)
+	delete(stage.DocumentationMap_Staged_Order, documentation)
 	delete(stage.Documentations_mapString, documentation.Name)
 }
 
@@ -1983,6 +2852,10 @@ func (documentation *Documentation) CommitVoid(stage *Stage) {
 	documentation.Commit(stage)
 }
 
+func (documentation *Documentation) StageVoid(stage *Stage) {
+	documentation.Stage(stage)
+}
+
 // Checkout documentation to the back repo (if it is already staged)
 func (documentation *Documentation) Checkout(stage *Stage) *Documentation {
 	if _, ok := stage.Documentations[documentation]; ok {
@@ -1998,11 +2871,15 @@ func (documentation *Documentation) GetName() (res string) {
 	return documentation.Name
 }
 
+// for satisfaction of GongStruct interface
+func (documentation *Documentation) SetName(name string) {
+	documentation.Name = name
+}
+
 // Stage puts element to the model stage
 func (element *Element) Stage(stage *Stage) *Element {
-
 	if _, ok := stage.Elements[element]; !ok {
-		stage.Elements[element] = __member
+		stage.Elements[element] = struct{}{}
 		stage.ElementMap_Staged_Order[element] = stage.ElementOrder
 		stage.ElementOrder++
 	}
@@ -2011,16 +2888,37 @@ func (element *Element) Stage(stage *Stage) *Element {
 	return element
 }
 
+// StagePreserveOrder puts element to the model stage, and if the astrtuct
+// was not staged before:
+//
+// - force the order if the order is equal or greater than the stage.ElementOrder
+// - update stage.ElementOrder accordingly
+func (element *Element) StagePreserveOrder(stage *Stage, order uint) {
+	if _, ok := stage.Elements[element]; !ok {
+		stage.Elements[element] = struct{}{}
+
+		if order > stage.ElementOrder {
+			stage.ElementOrder = order
+		}
+		stage.ElementMap_Staged_Order[element] = order
+		stage.ElementOrder++
+	}
+	stage.Elements_mapString[element.Name] = element
+}
+
 // Unstage removes element off the model stage
 func (element *Element) Unstage(stage *Stage) *Element {
 	delete(stage.Elements, element)
+	delete(stage.ElementMap_Staged_Order, element)
 	delete(stage.Elements_mapString, element.Name)
+
 	return element
 }
 
 // UnstageVoid removes element off the model stage
 func (element *Element) UnstageVoid(stage *Stage) {
 	delete(stage.Elements, element)
+	delete(stage.ElementMap_Staged_Order, element)
 	delete(stage.Elements_mapString, element.Name)
 }
 
@@ -2038,6 +2936,10 @@ func (element *Element) CommitVoid(stage *Stage) {
 	element.Commit(stage)
 }
 
+func (element *Element) StageVoid(stage *Stage) {
+	element.Stage(stage)
+}
+
 // Checkout element to the back repo (if it is already staged)
 func (element *Element) Checkout(stage *Stage) *Element {
 	if _, ok := stage.Elements[element]; ok {
@@ -2053,11 +2955,15 @@ func (element *Element) GetName() (res string) {
 	return element.Name
 }
 
+// for satisfaction of GongStruct interface
+func (element *Element) SetName(name string) {
+	element.Name = name
+}
+
 // Stage puts enumeration to the model stage
 func (enumeration *Enumeration) Stage(stage *Stage) *Enumeration {
-
 	if _, ok := stage.Enumerations[enumeration]; !ok {
-		stage.Enumerations[enumeration] = __member
+		stage.Enumerations[enumeration] = struct{}{}
 		stage.EnumerationMap_Staged_Order[enumeration] = stage.EnumerationOrder
 		stage.EnumerationOrder++
 	}
@@ -2066,16 +2972,37 @@ func (enumeration *Enumeration) Stage(stage *Stage) *Enumeration {
 	return enumeration
 }
 
+// StagePreserveOrder puts enumeration to the model stage, and if the astrtuct
+// was not staged before:
+//
+// - force the order if the order is equal or greater than the stage.EnumerationOrder
+// - update stage.EnumerationOrder accordingly
+func (enumeration *Enumeration) StagePreserveOrder(stage *Stage, order uint) {
+	if _, ok := stage.Enumerations[enumeration]; !ok {
+		stage.Enumerations[enumeration] = struct{}{}
+
+		if order > stage.EnumerationOrder {
+			stage.EnumerationOrder = order
+		}
+		stage.EnumerationMap_Staged_Order[enumeration] = order
+		stage.EnumerationOrder++
+	}
+	stage.Enumerations_mapString[enumeration.Name] = enumeration
+}
+
 // Unstage removes enumeration off the model stage
 func (enumeration *Enumeration) Unstage(stage *Stage) *Enumeration {
 	delete(stage.Enumerations, enumeration)
+	delete(stage.EnumerationMap_Staged_Order, enumeration)
 	delete(stage.Enumerations_mapString, enumeration.Name)
+
 	return enumeration
 }
 
 // UnstageVoid removes enumeration off the model stage
 func (enumeration *Enumeration) UnstageVoid(stage *Stage) {
 	delete(stage.Enumerations, enumeration)
+	delete(stage.EnumerationMap_Staged_Order, enumeration)
 	delete(stage.Enumerations_mapString, enumeration.Name)
 }
 
@@ -2093,6 +3020,10 @@ func (enumeration *Enumeration) CommitVoid(stage *Stage) {
 	enumeration.Commit(stage)
 }
 
+func (enumeration *Enumeration) StageVoid(stage *Stage) {
+	enumeration.Stage(stage)
+}
+
 // Checkout enumeration to the back repo (if it is already staged)
 func (enumeration *Enumeration) Checkout(stage *Stage) *Enumeration {
 	if _, ok := stage.Enumerations[enumeration]; ok {
@@ -2108,11 +3039,15 @@ func (enumeration *Enumeration) GetName() (res string) {
 	return enumeration.Name
 }
 
+// for satisfaction of GongStruct interface
+func (enumeration *Enumeration) SetName(name string) {
+	enumeration.Name = name
+}
+
 // Stage puts extension to the model stage
 func (extension *Extension) Stage(stage *Stage) *Extension {
-
 	if _, ok := stage.Extensions[extension]; !ok {
-		stage.Extensions[extension] = __member
+		stage.Extensions[extension] = struct{}{}
 		stage.ExtensionMap_Staged_Order[extension] = stage.ExtensionOrder
 		stage.ExtensionOrder++
 	}
@@ -2121,16 +3056,37 @@ func (extension *Extension) Stage(stage *Stage) *Extension {
 	return extension
 }
 
+// StagePreserveOrder puts extension to the model stage, and if the astrtuct
+// was not staged before:
+//
+// - force the order if the order is equal or greater than the stage.ExtensionOrder
+// - update stage.ExtensionOrder accordingly
+func (extension *Extension) StagePreserveOrder(stage *Stage, order uint) {
+	if _, ok := stage.Extensions[extension]; !ok {
+		stage.Extensions[extension] = struct{}{}
+
+		if order > stage.ExtensionOrder {
+			stage.ExtensionOrder = order
+		}
+		stage.ExtensionMap_Staged_Order[extension] = order
+		stage.ExtensionOrder++
+	}
+	stage.Extensions_mapString[extension.Name] = extension
+}
+
 // Unstage removes extension off the model stage
 func (extension *Extension) Unstage(stage *Stage) *Extension {
 	delete(stage.Extensions, extension)
+	delete(stage.ExtensionMap_Staged_Order, extension)
 	delete(stage.Extensions_mapString, extension.Name)
+
 	return extension
 }
 
 // UnstageVoid removes extension off the model stage
 func (extension *Extension) UnstageVoid(stage *Stage) {
 	delete(stage.Extensions, extension)
+	delete(stage.ExtensionMap_Staged_Order, extension)
 	delete(stage.Extensions_mapString, extension.Name)
 }
 
@@ -2148,6 +3104,10 @@ func (extension *Extension) CommitVoid(stage *Stage) {
 	extension.Commit(stage)
 }
 
+func (extension *Extension) StageVoid(stage *Stage) {
+	extension.Stage(stage)
+}
+
 // Checkout extension to the back repo (if it is already staged)
 func (extension *Extension) Checkout(stage *Stage) *Extension {
 	if _, ok := stage.Extensions[extension]; ok {
@@ -2163,11 +3123,15 @@ func (extension *Extension) GetName() (res string) {
 	return extension.Name
 }
 
+// for satisfaction of GongStruct interface
+func (extension *Extension) SetName(name string) {
+	extension.Name = name
+}
+
 // Stage puts group to the model stage
 func (group *Group) Stage(stage *Stage) *Group {
-
 	if _, ok := stage.Groups[group]; !ok {
-		stage.Groups[group] = __member
+		stage.Groups[group] = struct{}{}
 		stage.GroupMap_Staged_Order[group] = stage.GroupOrder
 		stage.GroupOrder++
 	}
@@ -2176,16 +3140,37 @@ func (group *Group) Stage(stage *Stage) *Group {
 	return group
 }
 
+// StagePreserveOrder puts group to the model stage, and if the astrtuct
+// was not staged before:
+//
+// - force the order if the order is equal or greater than the stage.GroupOrder
+// - update stage.GroupOrder accordingly
+func (group *Group) StagePreserveOrder(stage *Stage, order uint) {
+	if _, ok := stage.Groups[group]; !ok {
+		stage.Groups[group] = struct{}{}
+
+		if order > stage.GroupOrder {
+			stage.GroupOrder = order
+		}
+		stage.GroupMap_Staged_Order[group] = order
+		stage.GroupOrder++
+	}
+	stage.Groups_mapString[group.Name] = group
+}
+
 // Unstage removes group off the model stage
 func (group *Group) Unstage(stage *Stage) *Group {
 	delete(stage.Groups, group)
+	delete(stage.GroupMap_Staged_Order, group)
 	delete(stage.Groups_mapString, group.Name)
+
 	return group
 }
 
 // UnstageVoid removes group off the model stage
 func (group *Group) UnstageVoid(stage *Stage) {
 	delete(stage.Groups, group)
+	delete(stage.GroupMap_Staged_Order, group)
 	delete(stage.Groups_mapString, group.Name)
 }
 
@@ -2203,6 +3188,10 @@ func (group *Group) CommitVoid(stage *Stage) {
 	group.Commit(stage)
 }
 
+func (group *Group) StageVoid(stage *Stage) {
+	group.Stage(stage)
+}
+
 // Checkout group to the back repo (if it is already staged)
 func (group *Group) Checkout(stage *Stage) *Group {
 	if _, ok := stage.Groups[group]; ok {
@@ -2218,11 +3207,15 @@ func (group *Group) GetName() (res string) {
 	return group.Name
 }
 
+// for satisfaction of GongStruct interface
+func (group *Group) SetName(name string) {
+	group.Name = name
+}
+
 // Stage puts length to the model stage
 func (length *Length) Stage(stage *Stage) *Length {
-
 	if _, ok := stage.Lengths[length]; !ok {
-		stage.Lengths[length] = __member
+		stage.Lengths[length] = struct{}{}
 		stage.LengthMap_Staged_Order[length] = stage.LengthOrder
 		stage.LengthOrder++
 	}
@@ -2231,16 +3224,37 @@ func (length *Length) Stage(stage *Stage) *Length {
 	return length
 }
 
+// StagePreserveOrder puts length to the model stage, and if the astrtuct
+// was not staged before:
+//
+// - force the order if the order is equal or greater than the stage.LengthOrder
+// - update stage.LengthOrder accordingly
+func (length *Length) StagePreserveOrder(stage *Stage, order uint) {
+	if _, ok := stage.Lengths[length]; !ok {
+		stage.Lengths[length] = struct{}{}
+
+		if order > stage.LengthOrder {
+			stage.LengthOrder = order
+		}
+		stage.LengthMap_Staged_Order[length] = order
+		stage.LengthOrder++
+	}
+	stage.Lengths_mapString[length.Name] = length
+}
+
 // Unstage removes length off the model stage
 func (length *Length) Unstage(stage *Stage) *Length {
 	delete(stage.Lengths, length)
+	delete(stage.LengthMap_Staged_Order, length)
 	delete(stage.Lengths_mapString, length.Name)
+
 	return length
 }
 
 // UnstageVoid removes length off the model stage
 func (length *Length) UnstageVoid(stage *Stage) {
 	delete(stage.Lengths, length)
+	delete(stage.LengthMap_Staged_Order, length)
 	delete(stage.Lengths_mapString, length.Name)
 }
 
@@ -2258,6 +3272,10 @@ func (length *Length) CommitVoid(stage *Stage) {
 	length.Commit(stage)
 }
 
+func (length *Length) StageVoid(stage *Stage) {
+	length.Stage(stage)
+}
+
 // Checkout length to the back repo (if it is already staged)
 func (length *Length) Checkout(stage *Stage) *Length {
 	if _, ok := stage.Lengths[length]; ok {
@@ -2273,11 +3291,15 @@ func (length *Length) GetName() (res string) {
 	return length.Name
 }
 
+// for satisfaction of GongStruct interface
+func (length *Length) SetName(name string) {
+	length.Name = name
+}
+
 // Stage puts maxinclusive to the model stage
 func (maxinclusive *MaxInclusive) Stage(stage *Stage) *MaxInclusive {
-
 	if _, ok := stage.MaxInclusives[maxinclusive]; !ok {
-		stage.MaxInclusives[maxinclusive] = __member
+		stage.MaxInclusives[maxinclusive] = struct{}{}
 		stage.MaxInclusiveMap_Staged_Order[maxinclusive] = stage.MaxInclusiveOrder
 		stage.MaxInclusiveOrder++
 	}
@@ -2286,16 +3308,37 @@ func (maxinclusive *MaxInclusive) Stage(stage *Stage) *MaxInclusive {
 	return maxinclusive
 }
 
+// StagePreserveOrder puts maxinclusive to the model stage, and if the astrtuct
+// was not staged before:
+//
+// - force the order if the order is equal or greater than the stage.MaxInclusiveOrder
+// - update stage.MaxInclusiveOrder accordingly
+func (maxinclusive *MaxInclusive) StagePreserveOrder(stage *Stage, order uint) {
+	if _, ok := stage.MaxInclusives[maxinclusive]; !ok {
+		stage.MaxInclusives[maxinclusive] = struct{}{}
+
+		if order > stage.MaxInclusiveOrder {
+			stage.MaxInclusiveOrder = order
+		}
+		stage.MaxInclusiveMap_Staged_Order[maxinclusive] = order
+		stage.MaxInclusiveOrder++
+	}
+	stage.MaxInclusives_mapString[maxinclusive.Name] = maxinclusive
+}
+
 // Unstage removes maxinclusive off the model stage
 func (maxinclusive *MaxInclusive) Unstage(stage *Stage) *MaxInclusive {
 	delete(stage.MaxInclusives, maxinclusive)
+	delete(stage.MaxInclusiveMap_Staged_Order, maxinclusive)
 	delete(stage.MaxInclusives_mapString, maxinclusive.Name)
+
 	return maxinclusive
 }
 
 // UnstageVoid removes maxinclusive off the model stage
 func (maxinclusive *MaxInclusive) UnstageVoid(stage *Stage) {
 	delete(stage.MaxInclusives, maxinclusive)
+	delete(stage.MaxInclusiveMap_Staged_Order, maxinclusive)
 	delete(stage.MaxInclusives_mapString, maxinclusive.Name)
 }
 
@@ -2313,6 +3356,10 @@ func (maxinclusive *MaxInclusive) CommitVoid(stage *Stage) {
 	maxinclusive.Commit(stage)
 }
 
+func (maxinclusive *MaxInclusive) StageVoid(stage *Stage) {
+	maxinclusive.Stage(stage)
+}
+
 // Checkout maxinclusive to the back repo (if it is already staged)
 func (maxinclusive *MaxInclusive) Checkout(stage *Stage) *MaxInclusive {
 	if _, ok := stage.MaxInclusives[maxinclusive]; ok {
@@ -2328,11 +3375,15 @@ func (maxinclusive *MaxInclusive) GetName() (res string) {
 	return maxinclusive.Name
 }
 
+// for satisfaction of GongStruct interface
+func (maxinclusive *MaxInclusive) SetName(name string) {
+	maxinclusive.Name = name
+}
+
 // Stage puts maxlength to the model stage
 func (maxlength *MaxLength) Stage(stage *Stage) *MaxLength {
-
 	if _, ok := stage.MaxLengths[maxlength]; !ok {
-		stage.MaxLengths[maxlength] = __member
+		stage.MaxLengths[maxlength] = struct{}{}
 		stage.MaxLengthMap_Staged_Order[maxlength] = stage.MaxLengthOrder
 		stage.MaxLengthOrder++
 	}
@@ -2341,16 +3392,37 @@ func (maxlength *MaxLength) Stage(stage *Stage) *MaxLength {
 	return maxlength
 }
 
+// StagePreserveOrder puts maxlength to the model stage, and if the astrtuct
+// was not staged before:
+//
+// - force the order if the order is equal or greater than the stage.MaxLengthOrder
+// - update stage.MaxLengthOrder accordingly
+func (maxlength *MaxLength) StagePreserveOrder(stage *Stage, order uint) {
+	if _, ok := stage.MaxLengths[maxlength]; !ok {
+		stage.MaxLengths[maxlength] = struct{}{}
+
+		if order > stage.MaxLengthOrder {
+			stage.MaxLengthOrder = order
+		}
+		stage.MaxLengthMap_Staged_Order[maxlength] = order
+		stage.MaxLengthOrder++
+	}
+	stage.MaxLengths_mapString[maxlength.Name] = maxlength
+}
+
 // Unstage removes maxlength off the model stage
 func (maxlength *MaxLength) Unstage(stage *Stage) *MaxLength {
 	delete(stage.MaxLengths, maxlength)
+	delete(stage.MaxLengthMap_Staged_Order, maxlength)
 	delete(stage.MaxLengths_mapString, maxlength.Name)
+
 	return maxlength
 }
 
 // UnstageVoid removes maxlength off the model stage
 func (maxlength *MaxLength) UnstageVoid(stage *Stage) {
 	delete(stage.MaxLengths, maxlength)
+	delete(stage.MaxLengthMap_Staged_Order, maxlength)
 	delete(stage.MaxLengths_mapString, maxlength.Name)
 }
 
@@ -2368,6 +3440,10 @@ func (maxlength *MaxLength) CommitVoid(stage *Stage) {
 	maxlength.Commit(stage)
 }
 
+func (maxlength *MaxLength) StageVoid(stage *Stage) {
+	maxlength.Stage(stage)
+}
+
 // Checkout maxlength to the back repo (if it is already staged)
 func (maxlength *MaxLength) Checkout(stage *Stage) *MaxLength {
 	if _, ok := stage.MaxLengths[maxlength]; ok {
@@ -2383,11 +3459,15 @@ func (maxlength *MaxLength) GetName() (res string) {
 	return maxlength.Name
 }
 
+// for satisfaction of GongStruct interface
+func (maxlength *MaxLength) SetName(name string) {
+	maxlength.Name = name
+}
+
 // Stage puts mininclusive to the model stage
 func (mininclusive *MinInclusive) Stage(stage *Stage) *MinInclusive {
-
 	if _, ok := stage.MinInclusives[mininclusive]; !ok {
-		stage.MinInclusives[mininclusive] = __member
+		stage.MinInclusives[mininclusive] = struct{}{}
 		stage.MinInclusiveMap_Staged_Order[mininclusive] = stage.MinInclusiveOrder
 		stage.MinInclusiveOrder++
 	}
@@ -2396,16 +3476,37 @@ func (mininclusive *MinInclusive) Stage(stage *Stage) *MinInclusive {
 	return mininclusive
 }
 
+// StagePreserveOrder puts mininclusive to the model stage, and if the astrtuct
+// was not staged before:
+//
+// - force the order if the order is equal or greater than the stage.MinInclusiveOrder
+// - update stage.MinInclusiveOrder accordingly
+func (mininclusive *MinInclusive) StagePreserveOrder(stage *Stage, order uint) {
+	if _, ok := stage.MinInclusives[mininclusive]; !ok {
+		stage.MinInclusives[mininclusive] = struct{}{}
+
+		if order > stage.MinInclusiveOrder {
+			stage.MinInclusiveOrder = order
+		}
+		stage.MinInclusiveMap_Staged_Order[mininclusive] = order
+		stage.MinInclusiveOrder++
+	}
+	stage.MinInclusives_mapString[mininclusive.Name] = mininclusive
+}
+
 // Unstage removes mininclusive off the model stage
 func (mininclusive *MinInclusive) Unstage(stage *Stage) *MinInclusive {
 	delete(stage.MinInclusives, mininclusive)
+	delete(stage.MinInclusiveMap_Staged_Order, mininclusive)
 	delete(stage.MinInclusives_mapString, mininclusive.Name)
+
 	return mininclusive
 }
 
 // UnstageVoid removes mininclusive off the model stage
 func (mininclusive *MinInclusive) UnstageVoid(stage *Stage) {
 	delete(stage.MinInclusives, mininclusive)
+	delete(stage.MinInclusiveMap_Staged_Order, mininclusive)
 	delete(stage.MinInclusives_mapString, mininclusive.Name)
 }
 
@@ -2423,6 +3524,10 @@ func (mininclusive *MinInclusive) CommitVoid(stage *Stage) {
 	mininclusive.Commit(stage)
 }
 
+func (mininclusive *MinInclusive) StageVoid(stage *Stage) {
+	mininclusive.Stage(stage)
+}
+
 // Checkout mininclusive to the back repo (if it is already staged)
 func (mininclusive *MinInclusive) Checkout(stage *Stage) *MinInclusive {
 	if _, ok := stage.MinInclusives[mininclusive]; ok {
@@ -2438,11 +3543,15 @@ func (mininclusive *MinInclusive) GetName() (res string) {
 	return mininclusive.Name
 }
 
+// for satisfaction of GongStruct interface
+func (mininclusive *MinInclusive) SetName(name string) {
+	mininclusive.Name = name
+}
+
 // Stage puts minlength to the model stage
 func (minlength *MinLength) Stage(stage *Stage) *MinLength {
-
 	if _, ok := stage.MinLengths[minlength]; !ok {
-		stage.MinLengths[minlength] = __member
+		stage.MinLengths[minlength] = struct{}{}
 		stage.MinLengthMap_Staged_Order[minlength] = stage.MinLengthOrder
 		stage.MinLengthOrder++
 	}
@@ -2451,16 +3560,37 @@ func (minlength *MinLength) Stage(stage *Stage) *MinLength {
 	return minlength
 }
 
+// StagePreserveOrder puts minlength to the model stage, and if the astrtuct
+// was not staged before:
+//
+// - force the order if the order is equal or greater than the stage.MinLengthOrder
+// - update stage.MinLengthOrder accordingly
+func (minlength *MinLength) StagePreserveOrder(stage *Stage, order uint) {
+	if _, ok := stage.MinLengths[minlength]; !ok {
+		stage.MinLengths[minlength] = struct{}{}
+
+		if order > stage.MinLengthOrder {
+			stage.MinLengthOrder = order
+		}
+		stage.MinLengthMap_Staged_Order[minlength] = order
+		stage.MinLengthOrder++
+	}
+	stage.MinLengths_mapString[minlength.Name] = minlength
+}
+
 // Unstage removes minlength off the model stage
 func (minlength *MinLength) Unstage(stage *Stage) *MinLength {
 	delete(stage.MinLengths, minlength)
+	delete(stage.MinLengthMap_Staged_Order, minlength)
 	delete(stage.MinLengths_mapString, minlength.Name)
+
 	return minlength
 }
 
 // UnstageVoid removes minlength off the model stage
 func (minlength *MinLength) UnstageVoid(stage *Stage) {
 	delete(stage.MinLengths, minlength)
+	delete(stage.MinLengthMap_Staged_Order, minlength)
 	delete(stage.MinLengths_mapString, minlength.Name)
 }
 
@@ -2478,6 +3608,10 @@ func (minlength *MinLength) CommitVoid(stage *Stage) {
 	minlength.Commit(stage)
 }
 
+func (minlength *MinLength) StageVoid(stage *Stage) {
+	minlength.Stage(stage)
+}
+
 // Checkout minlength to the back repo (if it is already staged)
 func (minlength *MinLength) Checkout(stage *Stage) *MinLength {
 	if _, ok := stage.MinLengths[minlength]; ok {
@@ -2493,11 +3627,15 @@ func (minlength *MinLength) GetName() (res string) {
 	return minlength.Name
 }
 
+// for satisfaction of GongStruct interface
+func (minlength *MinLength) SetName(name string) {
+	minlength.Name = name
+}
+
 // Stage puts pattern to the model stage
 func (pattern *Pattern) Stage(stage *Stage) *Pattern {
-
 	if _, ok := stage.Patterns[pattern]; !ok {
-		stage.Patterns[pattern] = __member
+		stage.Patterns[pattern] = struct{}{}
 		stage.PatternMap_Staged_Order[pattern] = stage.PatternOrder
 		stage.PatternOrder++
 	}
@@ -2506,16 +3644,37 @@ func (pattern *Pattern) Stage(stage *Stage) *Pattern {
 	return pattern
 }
 
+// StagePreserveOrder puts pattern to the model stage, and if the astrtuct
+// was not staged before:
+//
+// - force the order if the order is equal or greater than the stage.PatternOrder
+// - update stage.PatternOrder accordingly
+func (pattern *Pattern) StagePreserveOrder(stage *Stage, order uint) {
+	if _, ok := stage.Patterns[pattern]; !ok {
+		stage.Patterns[pattern] = struct{}{}
+
+		if order > stage.PatternOrder {
+			stage.PatternOrder = order
+		}
+		stage.PatternMap_Staged_Order[pattern] = order
+		stage.PatternOrder++
+	}
+	stage.Patterns_mapString[pattern.Name] = pattern
+}
+
 // Unstage removes pattern off the model stage
 func (pattern *Pattern) Unstage(stage *Stage) *Pattern {
 	delete(stage.Patterns, pattern)
+	delete(stage.PatternMap_Staged_Order, pattern)
 	delete(stage.Patterns_mapString, pattern.Name)
+
 	return pattern
 }
 
 // UnstageVoid removes pattern off the model stage
 func (pattern *Pattern) UnstageVoid(stage *Stage) {
 	delete(stage.Patterns, pattern)
+	delete(stage.PatternMap_Staged_Order, pattern)
 	delete(stage.Patterns_mapString, pattern.Name)
 }
 
@@ -2533,6 +3692,10 @@ func (pattern *Pattern) CommitVoid(stage *Stage) {
 	pattern.Commit(stage)
 }
 
+func (pattern *Pattern) StageVoid(stage *Stage) {
+	pattern.Stage(stage)
+}
+
 // Checkout pattern to the back repo (if it is already staged)
 func (pattern *Pattern) Checkout(stage *Stage) *Pattern {
 	if _, ok := stage.Patterns[pattern]; ok {
@@ -2548,11 +3711,15 @@ func (pattern *Pattern) GetName() (res string) {
 	return pattern.Name
 }
 
+// for satisfaction of GongStruct interface
+func (pattern *Pattern) SetName(name string) {
+	pattern.Name = name
+}
+
 // Stage puts restriction to the model stage
 func (restriction *Restriction) Stage(stage *Stage) *Restriction {
-
 	if _, ok := stage.Restrictions[restriction]; !ok {
-		stage.Restrictions[restriction] = __member
+		stage.Restrictions[restriction] = struct{}{}
 		stage.RestrictionMap_Staged_Order[restriction] = stage.RestrictionOrder
 		stage.RestrictionOrder++
 	}
@@ -2561,16 +3728,37 @@ func (restriction *Restriction) Stage(stage *Stage) *Restriction {
 	return restriction
 }
 
+// StagePreserveOrder puts restriction to the model stage, and if the astrtuct
+// was not staged before:
+//
+// - force the order if the order is equal or greater than the stage.RestrictionOrder
+// - update stage.RestrictionOrder accordingly
+func (restriction *Restriction) StagePreserveOrder(stage *Stage, order uint) {
+	if _, ok := stage.Restrictions[restriction]; !ok {
+		stage.Restrictions[restriction] = struct{}{}
+
+		if order > stage.RestrictionOrder {
+			stage.RestrictionOrder = order
+		}
+		stage.RestrictionMap_Staged_Order[restriction] = order
+		stage.RestrictionOrder++
+	}
+	stage.Restrictions_mapString[restriction.Name] = restriction
+}
+
 // Unstage removes restriction off the model stage
 func (restriction *Restriction) Unstage(stage *Stage) *Restriction {
 	delete(stage.Restrictions, restriction)
+	delete(stage.RestrictionMap_Staged_Order, restriction)
 	delete(stage.Restrictions_mapString, restriction.Name)
+
 	return restriction
 }
 
 // UnstageVoid removes restriction off the model stage
 func (restriction *Restriction) UnstageVoid(stage *Stage) {
 	delete(stage.Restrictions, restriction)
+	delete(stage.RestrictionMap_Staged_Order, restriction)
 	delete(stage.Restrictions_mapString, restriction.Name)
 }
 
@@ -2588,6 +3776,10 @@ func (restriction *Restriction) CommitVoid(stage *Stage) {
 	restriction.Commit(stage)
 }
 
+func (restriction *Restriction) StageVoid(stage *Stage) {
+	restriction.Stage(stage)
+}
+
 // Checkout restriction to the back repo (if it is already staged)
 func (restriction *Restriction) Checkout(stage *Stage) *Restriction {
 	if _, ok := stage.Restrictions[restriction]; ok {
@@ -2603,11 +3795,15 @@ func (restriction *Restriction) GetName() (res string) {
 	return restriction.Name
 }
 
+// for satisfaction of GongStruct interface
+func (restriction *Restriction) SetName(name string) {
+	restriction.Name = name
+}
+
 // Stage puts schema to the model stage
 func (schema *Schema) Stage(stage *Stage) *Schema {
-
 	if _, ok := stage.Schemas[schema]; !ok {
-		stage.Schemas[schema] = __member
+		stage.Schemas[schema] = struct{}{}
 		stage.SchemaMap_Staged_Order[schema] = stage.SchemaOrder
 		stage.SchemaOrder++
 	}
@@ -2616,16 +3812,37 @@ func (schema *Schema) Stage(stage *Stage) *Schema {
 	return schema
 }
 
+// StagePreserveOrder puts schema to the model stage, and if the astrtuct
+// was not staged before:
+//
+// - force the order if the order is equal or greater than the stage.SchemaOrder
+// - update stage.SchemaOrder accordingly
+func (schema *Schema) StagePreserveOrder(stage *Stage, order uint) {
+	if _, ok := stage.Schemas[schema]; !ok {
+		stage.Schemas[schema] = struct{}{}
+
+		if order > stage.SchemaOrder {
+			stage.SchemaOrder = order
+		}
+		stage.SchemaMap_Staged_Order[schema] = order
+		stage.SchemaOrder++
+	}
+	stage.Schemas_mapString[schema.Name] = schema
+}
+
 // Unstage removes schema off the model stage
 func (schema *Schema) Unstage(stage *Stage) *Schema {
 	delete(stage.Schemas, schema)
+	delete(stage.SchemaMap_Staged_Order, schema)
 	delete(stage.Schemas_mapString, schema.Name)
+
 	return schema
 }
 
 // UnstageVoid removes schema off the model stage
 func (schema *Schema) UnstageVoid(stage *Stage) {
 	delete(stage.Schemas, schema)
+	delete(stage.SchemaMap_Staged_Order, schema)
 	delete(stage.Schemas_mapString, schema.Name)
 }
 
@@ -2643,6 +3860,10 @@ func (schema *Schema) CommitVoid(stage *Stage) {
 	schema.Commit(stage)
 }
 
+func (schema *Schema) StageVoid(stage *Stage) {
+	schema.Stage(stage)
+}
+
 // Checkout schema to the back repo (if it is already staged)
 func (schema *Schema) Checkout(stage *Stage) *Schema {
 	if _, ok := stage.Schemas[schema]; ok {
@@ -2658,11 +3879,15 @@ func (schema *Schema) GetName() (res string) {
 	return schema.Name
 }
 
+// for satisfaction of GongStruct interface
+func (schema *Schema) SetName(name string) {
+	schema.Name = name
+}
+
 // Stage puts sequence to the model stage
 func (sequence *Sequence) Stage(stage *Stage) *Sequence {
-
 	if _, ok := stage.Sequences[sequence]; !ok {
-		stage.Sequences[sequence] = __member
+		stage.Sequences[sequence] = struct{}{}
 		stage.SequenceMap_Staged_Order[sequence] = stage.SequenceOrder
 		stage.SequenceOrder++
 	}
@@ -2671,16 +3896,37 @@ func (sequence *Sequence) Stage(stage *Stage) *Sequence {
 	return sequence
 }
 
+// StagePreserveOrder puts sequence to the model stage, and if the astrtuct
+// was not staged before:
+//
+// - force the order if the order is equal or greater than the stage.SequenceOrder
+// - update stage.SequenceOrder accordingly
+func (sequence *Sequence) StagePreserveOrder(stage *Stage, order uint) {
+	if _, ok := stage.Sequences[sequence]; !ok {
+		stage.Sequences[sequence] = struct{}{}
+
+		if order > stage.SequenceOrder {
+			stage.SequenceOrder = order
+		}
+		stage.SequenceMap_Staged_Order[sequence] = order
+		stage.SequenceOrder++
+	}
+	stage.Sequences_mapString[sequence.Name] = sequence
+}
+
 // Unstage removes sequence off the model stage
 func (sequence *Sequence) Unstage(stage *Stage) *Sequence {
 	delete(stage.Sequences, sequence)
+	delete(stage.SequenceMap_Staged_Order, sequence)
 	delete(stage.Sequences_mapString, sequence.Name)
+
 	return sequence
 }
 
 // UnstageVoid removes sequence off the model stage
 func (sequence *Sequence) UnstageVoid(stage *Stage) {
 	delete(stage.Sequences, sequence)
+	delete(stage.SequenceMap_Staged_Order, sequence)
 	delete(stage.Sequences_mapString, sequence.Name)
 }
 
@@ -2698,6 +3944,10 @@ func (sequence *Sequence) CommitVoid(stage *Stage) {
 	sequence.Commit(stage)
 }
 
+func (sequence *Sequence) StageVoid(stage *Stage) {
+	sequence.Stage(stage)
+}
+
 // Checkout sequence to the back repo (if it is already staged)
 func (sequence *Sequence) Checkout(stage *Stage) *Sequence {
 	if _, ok := stage.Sequences[sequence]; ok {
@@ -2713,11 +3963,15 @@ func (sequence *Sequence) GetName() (res string) {
 	return sequence.Name
 }
 
+// for satisfaction of GongStruct interface
+func (sequence *Sequence) SetName(name string) {
+	sequence.Name = name
+}
+
 // Stage puts simplecontent to the model stage
 func (simplecontent *SimpleContent) Stage(stage *Stage) *SimpleContent {
-
 	if _, ok := stage.SimpleContents[simplecontent]; !ok {
-		stage.SimpleContents[simplecontent] = __member
+		stage.SimpleContents[simplecontent] = struct{}{}
 		stage.SimpleContentMap_Staged_Order[simplecontent] = stage.SimpleContentOrder
 		stage.SimpleContentOrder++
 	}
@@ -2726,16 +3980,37 @@ func (simplecontent *SimpleContent) Stage(stage *Stage) *SimpleContent {
 	return simplecontent
 }
 
+// StagePreserveOrder puts simplecontent to the model stage, and if the astrtuct
+// was not staged before:
+//
+// - force the order if the order is equal or greater than the stage.SimpleContentOrder
+// - update stage.SimpleContentOrder accordingly
+func (simplecontent *SimpleContent) StagePreserveOrder(stage *Stage, order uint) {
+	if _, ok := stage.SimpleContents[simplecontent]; !ok {
+		stage.SimpleContents[simplecontent] = struct{}{}
+
+		if order > stage.SimpleContentOrder {
+			stage.SimpleContentOrder = order
+		}
+		stage.SimpleContentMap_Staged_Order[simplecontent] = order
+		stage.SimpleContentOrder++
+	}
+	stage.SimpleContents_mapString[simplecontent.Name] = simplecontent
+}
+
 // Unstage removes simplecontent off the model stage
 func (simplecontent *SimpleContent) Unstage(stage *Stage) *SimpleContent {
 	delete(stage.SimpleContents, simplecontent)
+	delete(stage.SimpleContentMap_Staged_Order, simplecontent)
 	delete(stage.SimpleContents_mapString, simplecontent.Name)
+
 	return simplecontent
 }
 
 // UnstageVoid removes simplecontent off the model stage
 func (simplecontent *SimpleContent) UnstageVoid(stage *Stage) {
 	delete(stage.SimpleContents, simplecontent)
+	delete(stage.SimpleContentMap_Staged_Order, simplecontent)
 	delete(stage.SimpleContents_mapString, simplecontent.Name)
 }
 
@@ -2753,6 +4028,10 @@ func (simplecontent *SimpleContent) CommitVoid(stage *Stage) {
 	simplecontent.Commit(stage)
 }
 
+func (simplecontent *SimpleContent) StageVoid(stage *Stage) {
+	simplecontent.Stage(stage)
+}
+
 // Checkout simplecontent to the back repo (if it is already staged)
 func (simplecontent *SimpleContent) Checkout(stage *Stage) *SimpleContent {
 	if _, ok := stage.SimpleContents[simplecontent]; ok {
@@ -2768,11 +4047,15 @@ func (simplecontent *SimpleContent) GetName() (res string) {
 	return simplecontent.Name
 }
 
+// for satisfaction of GongStruct interface
+func (simplecontent *SimpleContent) SetName(name string) {
+	simplecontent.Name = name
+}
+
 // Stage puts simpletype to the model stage
 func (simpletype *SimpleType) Stage(stage *Stage) *SimpleType {
-
 	if _, ok := stage.SimpleTypes[simpletype]; !ok {
-		stage.SimpleTypes[simpletype] = __member
+		stage.SimpleTypes[simpletype] = struct{}{}
 		stage.SimpleTypeMap_Staged_Order[simpletype] = stage.SimpleTypeOrder
 		stage.SimpleTypeOrder++
 	}
@@ -2781,16 +4064,37 @@ func (simpletype *SimpleType) Stage(stage *Stage) *SimpleType {
 	return simpletype
 }
 
+// StagePreserveOrder puts simpletype to the model stage, and if the astrtuct
+// was not staged before:
+//
+// - force the order if the order is equal or greater than the stage.SimpleTypeOrder
+// - update stage.SimpleTypeOrder accordingly
+func (simpletype *SimpleType) StagePreserveOrder(stage *Stage, order uint) {
+	if _, ok := stage.SimpleTypes[simpletype]; !ok {
+		stage.SimpleTypes[simpletype] = struct{}{}
+
+		if order > stage.SimpleTypeOrder {
+			stage.SimpleTypeOrder = order
+		}
+		stage.SimpleTypeMap_Staged_Order[simpletype] = order
+		stage.SimpleTypeOrder++
+	}
+	stage.SimpleTypes_mapString[simpletype.Name] = simpletype
+}
+
 // Unstage removes simpletype off the model stage
 func (simpletype *SimpleType) Unstage(stage *Stage) *SimpleType {
 	delete(stage.SimpleTypes, simpletype)
+	delete(stage.SimpleTypeMap_Staged_Order, simpletype)
 	delete(stage.SimpleTypes_mapString, simpletype.Name)
+
 	return simpletype
 }
 
 // UnstageVoid removes simpletype off the model stage
 func (simpletype *SimpleType) UnstageVoid(stage *Stage) {
 	delete(stage.SimpleTypes, simpletype)
+	delete(stage.SimpleTypeMap_Staged_Order, simpletype)
 	delete(stage.SimpleTypes_mapString, simpletype.Name)
 }
 
@@ -2808,6 +4112,10 @@ func (simpletype *SimpleType) CommitVoid(stage *Stage) {
 	simpletype.Commit(stage)
 }
 
+func (simpletype *SimpleType) StageVoid(stage *Stage) {
+	simpletype.Stage(stage)
+}
+
 // Checkout simpletype to the back repo (if it is already staged)
 func (simpletype *SimpleType) Checkout(stage *Stage) *SimpleType {
 	if _, ok := stage.SimpleTypes[simpletype]; ok {
@@ -2823,11 +4131,15 @@ func (simpletype *SimpleType) GetName() (res string) {
 	return simpletype.Name
 }
 
+// for satisfaction of GongStruct interface
+func (simpletype *SimpleType) SetName(name string) {
+	simpletype.Name = name
+}
+
 // Stage puts totaldigit to the model stage
 func (totaldigit *TotalDigit) Stage(stage *Stage) *TotalDigit {
-
 	if _, ok := stage.TotalDigits[totaldigit]; !ok {
-		stage.TotalDigits[totaldigit] = __member
+		stage.TotalDigits[totaldigit] = struct{}{}
 		stage.TotalDigitMap_Staged_Order[totaldigit] = stage.TotalDigitOrder
 		stage.TotalDigitOrder++
 	}
@@ -2836,16 +4148,37 @@ func (totaldigit *TotalDigit) Stage(stage *Stage) *TotalDigit {
 	return totaldigit
 }
 
+// StagePreserveOrder puts totaldigit to the model stage, and if the astrtuct
+// was not staged before:
+//
+// - force the order if the order is equal or greater than the stage.TotalDigitOrder
+// - update stage.TotalDigitOrder accordingly
+func (totaldigit *TotalDigit) StagePreserveOrder(stage *Stage, order uint) {
+	if _, ok := stage.TotalDigits[totaldigit]; !ok {
+		stage.TotalDigits[totaldigit] = struct{}{}
+
+		if order > stage.TotalDigitOrder {
+			stage.TotalDigitOrder = order
+		}
+		stage.TotalDigitMap_Staged_Order[totaldigit] = order
+		stage.TotalDigitOrder++
+	}
+	stage.TotalDigits_mapString[totaldigit.Name] = totaldigit
+}
+
 // Unstage removes totaldigit off the model stage
 func (totaldigit *TotalDigit) Unstage(stage *Stage) *TotalDigit {
 	delete(stage.TotalDigits, totaldigit)
+	delete(stage.TotalDigitMap_Staged_Order, totaldigit)
 	delete(stage.TotalDigits_mapString, totaldigit.Name)
+
 	return totaldigit
 }
 
 // UnstageVoid removes totaldigit off the model stage
 func (totaldigit *TotalDigit) UnstageVoid(stage *Stage) {
 	delete(stage.TotalDigits, totaldigit)
+	delete(stage.TotalDigitMap_Staged_Order, totaldigit)
 	delete(stage.TotalDigits_mapString, totaldigit.Name)
 }
 
@@ -2863,6 +4196,10 @@ func (totaldigit *TotalDigit) CommitVoid(stage *Stage) {
 	totaldigit.Commit(stage)
 }
 
+func (totaldigit *TotalDigit) StageVoid(stage *Stage) {
+	totaldigit.Stage(stage)
+}
+
 // Checkout totaldigit to the back repo (if it is already staged)
 func (totaldigit *TotalDigit) Checkout(stage *Stage) *TotalDigit {
 	if _, ok := stage.TotalDigits[totaldigit]; ok {
@@ -2878,11 +4215,15 @@ func (totaldigit *TotalDigit) GetName() (res string) {
 	return totaldigit.Name
 }
 
+// for satisfaction of GongStruct interface
+func (totaldigit *TotalDigit) SetName(name string) {
+	totaldigit.Name = name
+}
+
 // Stage puts union to the model stage
 func (union *Union) Stage(stage *Stage) *Union {
-
 	if _, ok := stage.Unions[union]; !ok {
-		stage.Unions[union] = __member
+		stage.Unions[union] = struct{}{}
 		stage.UnionMap_Staged_Order[union] = stage.UnionOrder
 		stage.UnionOrder++
 	}
@@ -2891,16 +4232,37 @@ func (union *Union) Stage(stage *Stage) *Union {
 	return union
 }
 
+// StagePreserveOrder puts union to the model stage, and if the astrtuct
+// was not staged before:
+//
+// - force the order if the order is equal or greater than the stage.UnionOrder
+// - update stage.UnionOrder accordingly
+func (union *Union) StagePreserveOrder(stage *Stage, order uint) {
+	if _, ok := stage.Unions[union]; !ok {
+		stage.Unions[union] = struct{}{}
+
+		if order > stage.UnionOrder {
+			stage.UnionOrder = order
+		}
+		stage.UnionMap_Staged_Order[union] = order
+		stage.UnionOrder++
+	}
+	stage.Unions_mapString[union.Name] = union
+}
+
 // Unstage removes union off the model stage
 func (union *Union) Unstage(stage *Stage) *Union {
 	delete(stage.Unions, union)
+	delete(stage.UnionMap_Staged_Order, union)
 	delete(stage.Unions_mapString, union.Name)
+
 	return union
 }
 
 // UnstageVoid removes union off the model stage
 func (union *Union) UnstageVoid(stage *Stage) {
 	delete(stage.Unions, union)
+	delete(stage.UnionMap_Staged_Order, union)
 	delete(stage.Unions_mapString, union.Name)
 }
 
@@ -2918,6 +4280,10 @@ func (union *Union) CommitVoid(stage *Stage) {
 	union.Commit(stage)
 }
 
+func (union *Union) StageVoid(stage *Stage) {
+	union.Stage(stage)
+}
+
 // Checkout union to the back repo (if it is already staged)
 func (union *Union) Checkout(stage *Stage) *Union {
 	if _, ok := stage.Unions[union]; ok {
@@ -2933,11 +4299,15 @@ func (union *Union) GetName() (res string) {
 	return union.Name
 }
 
+// for satisfaction of GongStruct interface
+func (union *Union) SetName(name string) {
+	union.Name = name
+}
+
 // Stage puts whitespace to the model stage
 func (whitespace *WhiteSpace) Stage(stage *Stage) *WhiteSpace {
-
 	if _, ok := stage.WhiteSpaces[whitespace]; !ok {
-		stage.WhiteSpaces[whitespace] = __member
+		stage.WhiteSpaces[whitespace] = struct{}{}
 		stage.WhiteSpaceMap_Staged_Order[whitespace] = stage.WhiteSpaceOrder
 		stage.WhiteSpaceOrder++
 	}
@@ -2946,16 +4316,37 @@ func (whitespace *WhiteSpace) Stage(stage *Stage) *WhiteSpace {
 	return whitespace
 }
 
+// StagePreserveOrder puts whitespace to the model stage, and if the astrtuct
+// was not staged before:
+//
+// - force the order if the order is equal or greater than the stage.WhiteSpaceOrder
+// - update stage.WhiteSpaceOrder accordingly
+func (whitespace *WhiteSpace) StagePreserveOrder(stage *Stage, order uint) {
+	if _, ok := stage.WhiteSpaces[whitespace]; !ok {
+		stage.WhiteSpaces[whitespace] = struct{}{}
+
+		if order > stage.WhiteSpaceOrder {
+			stage.WhiteSpaceOrder = order
+		}
+		stage.WhiteSpaceMap_Staged_Order[whitespace] = order
+		stage.WhiteSpaceOrder++
+	}
+	stage.WhiteSpaces_mapString[whitespace.Name] = whitespace
+}
+
 // Unstage removes whitespace off the model stage
 func (whitespace *WhiteSpace) Unstage(stage *Stage) *WhiteSpace {
 	delete(stage.WhiteSpaces, whitespace)
+	delete(stage.WhiteSpaceMap_Staged_Order, whitespace)
 	delete(stage.WhiteSpaces_mapString, whitespace.Name)
+
 	return whitespace
 }
 
 // UnstageVoid removes whitespace off the model stage
 func (whitespace *WhiteSpace) UnstageVoid(stage *Stage) {
 	delete(stage.WhiteSpaces, whitespace)
+	delete(stage.WhiteSpaceMap_Staged_Order, whitespace)
 	delete(stage.WhiteSpaces_mapString, whitespace.Name)
 }
 
@@ -2973,6 +4364,10 @@ func (whitespace *WhiteSpace) CommitVoid(stage *Stage) {
 	whitespace.Commit(stage)
 }
 
+func (whitespace *WhiteSpace) StageVoid(stage *Stage) {
+	whitespace.Stage(stage)
+}
+
 // Checkout whitespace to the back repo (if it is already staged)
 func (whitespace *WhiteSpace) Checkout(stage *Stage) *WhiteSpace {
 	if _, ok := stage.WhiteSpaces[whitespace]; ok {
@@ -2986,6 +4381,11 @@ func (whitespace *WhiteSpace) Checkout(stage *Stage) *WhiteSpace {
 // for satisfaction of GongStruct interface
 func (whitespace *WhiteSpace) GetName() (res string) {
 	return whitespace.Name
+}
+
+// for satisfaction of GongStruct interface
+func (whitespace *WhiteSpace) SetName(name string) {
+	whitespace.Name = name
 }
 
 // swagger:ignore
@@ -3048,136 +4448,142 @@ type AllModelsStructDeleteInterface interface { // insertion point for Callbacks
 }
 
 func (stage *Stage) Reset() { // insertion point for array reset
-	stage.Alls = make(map[*All]any)
+	stage.Alls = make(map[*All]struct{})
 	stage.Alls_mapString = make(map[string]*All)
 	stage.AllMap_Staged_Order = make(map[*All]uint)
 	stage.AllOrder = 0
 
-	stage.Annotations = make(map[*Annotation]any)
+	stage.Annotations = make(map[*Annotation]struct{})
 	stage.Annotations_mapString = make(map[string]*Annotation)
 	stage.AnnotationMap_Staged_Order = make(map[*Annotation]uint)
 	stage.AnnotationOrder = 0
 
-	stage.Attributes = make(map[*Attribute]any)
+	stage.Attributes = make(map[*Attribute]struct{})
 	stage.Attributes_mapString = make(map[string]*Attribute)
 	stage.AttributeMap_Staged_Order = make(map[*Attribute]uint)
 	stage.AttributeOrder = 0
 
-	stage.AttributeGroups = make(map[*AttributeGroup]any)
+	stage.AttributeGroups = make(map[*AttributeGroup]struct{})
 	stage.AttributeGroups_mapString = make(map[string]*AttributeGroup)
 	stage.AttributeGroupMap_Staged_Order = make(map[*AttributeGroup]uint)
 	stage.AttributeGroupOrder = 0
 
-	stage.Choices = make(map[*Choice]any)
+	stage.Choices = make(map[*Choice]struct{})
 	stage.Choices_mapString = make(map[string]*Choice)
 	stage.ChoiceMap_Staged_Order = make(map[*Choice]uint)
 	stage.ChoiceOrder = 0
 
-	stage.ComplexContents = make(map[*ComplexContent]any)
+	stage.ComplexContents = make(map[*ComplexContent]struct{})
 	stage.ComplexContents_mapString = make(map[string]*ComplexContent)
 	stage.ComplexContentMap_Staged_Order = make(map[*ComplexContent]uint)
 	stage.ComplexContentOrder = 0
 
-	stage.ComplexTypes = make(map[*ComplexType]any)
+	stage.ComplexTypes = make(map[*ComplexType]struct{})
 	stage.ComplexTypes_mapString = make(map[string]*ComplexType)
 	stage.ComplexTypeMap_Staged_Order = make(map[*ComplexType]uint)
 	stage.ComplexTypeOrder = 0
 
-	stage.Documentations = make(map[*Documentation]any)
+	stage.Documentations = make(map[*Documentation]struct{})
 	stage.Documentations_mapString = make(map[string]*Documentation)
 	stage.DocumentationMap_Staged_Order = make(map[*Documentation]uint)
 	stage.DocumentationOrder = 0
 
-	stage.Elements = make(map[*Element]any)
+	stage.Elements = make(map[*Element]struct{})
 	stage.Elements_mapString = make(map[string]*Element)
 	stage.ElementMap_Staged_Order = make(map[*Element]uint)
 	stage.ElementOrder = 0
 
-	stage.Enumerations = make(map[*Enumeration]any)
+	stage.Enumerations = make(map[*Enumeration]struct{})
 	stage.Enumerations_mapString = make(map[string]*Enumeration)
 	stage.EnumerationMap_Staged_Order = make(map[*Enumeration]uint)
 	stage.EnumerationOrder = 0
 
-	stage.Extensions = make(map[*Extension]any)
+	stage.Extensions = make(map[*Extension]struct{})
 	stage.Extensions_mapString = make(map[string]*Extension)
 	stage.ExtensionMap_Staged_Order = make(map[*Extension]uint)
 	stage.ExtensionOrder = 0
 
-	stage.Groups = make(map[*Group]any)
+	stage.Groups = make(map[*Group]struct{})
 	stage.Groups_mapString = make(map[string]*Group)
 	stage.GroupMap_Staged_Order = make(map[*Group]uint)
 	stage.GroupOrder = 0
 
-	stage.Lengths = make(map[*Length]any)
+	stage.Lengths = make(map[*Length]struct{})
 	stage.Lengths_mapString = make(map[string]*Length)
 	stage.LengthMap_Staged_Order = make(map[*Length]uint)
 	stage.LengthOrder = 0
 
-	stage.MaxInclusives = make(map[*MaxInclusive]any)
+	stage.MaxInclusives = make(map[*MaxInclusive]struct{})
 	stage.MaxInclusives_mapString = make(map[string]*MaxInclusive)
 	stage.MaxInclusiveMap_Staged_Order = make(map[*MaxInclusive]uint)
 	stage.MaxInclusiveOrder = 0
 
-	stage.MaxLengths = make(map[*MaxLength]any)
+	stage.MaxLengths = make(map[*MaxLength]struct{})
 	stage.MaxLengths_mapString = make(map[string]*MaxLength)
 	stage.MaxLengthMap_Staged_Order = make(map[*MaxLength]uint)
 	stage.MaxLengthOrder = 0
 
-	stage.MinInclusives = make(map[*MinInclusive]any)
+	stage.MinInclusives = make(map[*MinInclusive]struct{})
 	stage.MinInclusives_mapString = make(map[string]*MinInclusive)
 	stage.MinInclusiveMap_Staged_Order = make(map[*MinInclusive]uint)
 	stage.MinInclusiveOrder = 0
 
-	stage.MinLengths = make(map[*MinLength]any)
+	stage.MinLengths = make(map[*MinLength]struct{})
 	stage.MinLengths_mapString = make(map[string]*MinLength)
 	stage.MinLengthMap_Staged_Order = make(map[*MinLength]uint)
 	stage.MinLengthOrder = 0
 
-	stage.Patterns = make(map[*Pattern]any)
+	stage.Patterns = make(map[*Pattern]struct{})
 	stage.Patterns_mapString = make(map[string]*Pattern)
 	stage.PatternMap_Staged_Order = make(map[*Pattern]uint)
 	stage.PatternOrder = 0
 
-	stage.Restrictions = make(map[*Restriction]any)
+	stage.Restrictions = make(map[*Restriction]struct{})
 	stage.Restrictions_mapString = make(map[string]*Restriction)
 	stage.RestrictionMap_Staged_Order = make(map[*Restriction]uint)
 	stage.RestrictionOrder = 0
 
-	stage.Schemas = make(map[*Schema]any)
+	stage.Schemas = make(map[*Schema]struct{})
 	stage.Schemas_mapString = make(map[string]*Schema)
 	stage.SchemaMap_Staged_Order = make(map[*Schema]uint)
 	stage.SchemaOrder = 0
 
-	stage.Sequences = make(map[*Sequence]any)
+	stage.Sequences = make(map[*Sequence]struct{})
 	stage.Sequences_mapString = make(map[string]*Sequence)
 	stage.SequenceMap_Staged_Order = make(map[*Sequence]uint)
 	stage.SequenceOrder = 0
 
-	stage.SimpleContents = make(map[*SimpleContent]any)
+	stage.SimpleContents = make(map[*SimpleContent]struct{})
 	stage.SimpleContents_mapString = make(map[string]*SimpleContent)
 	stage.SimpleContentMap_Staged_Order = make(map[*SimpleContent]uint)
 	stage.SimpleContentOrder = 0
 
-	stage.SimpleTypes = make(map[*SimpleType]any)
+	stage.SimpleTypes = make(map[*SimpleType]struct{})
 	stage.SimpleTypes_mapString = make(map[string]*SimpleType)
 	stage.SimpleTypeMap_Staged_Order = make(map[*SimpleType]uint)
 	stage.SimpleTypeOrder = 0
 
-	stage.TotalDigits = make(map[*TotalDigit]any)
+	stage.TotalDigits = make(map[*TotalDigit]struct{})
 	stage.TotalDigits_mapString = make(map[string]*TotalDigit)
 	stage.TotalDigitMap_Staged_Order = make(map[*TotalDigit]uint)
 	stage.TotalDigitOrder = 0
 
-	stage.Unions = make(map[*Union]any)
+	stage.Unions = make(map[*Union]struct{})
 	stage.Unions_mapString = make(map[string]*Union)
 	stage.UnionMap_Staged_Order = make(map[*Union]uint)
 	stage.UnionOrder = 0
 
-	stage.WhiteSpaces = make(map[*WhiteSpace]any)
+	stage.WhiteSpaces = make(map[*WhiteSpace]struct{})
 	stage.WhiteSpaces_mapString = make(map[string]*WhiteSpace)
 	stage.WhiteSpaceMap_Staged_Order = make(map[*WhiteSpace]uint)
 	stage.WhiteSpaceOrder = 0
 
+	if stage.GetProbeIF() != nil {
+		stage.GetProbeIF().ResetNotifications()
+	}
+	if stage.IsInDeltaMode() {
+		stage.ComputeReferenceAndOrders()
+	}
 }
 
 func (stage *Stage) Nil() { // insertion point for array nil
@@ -3259,6 +4665,7 @@ func (stage *Stage) Nil() { // insertion point for array nil
 	stage.WhiteSpaces = nil
 	stage.WhiteSpaces_mapString = nil
 
+	// end of insertion point for array nil
 }
 
 func (stage *Stage) Unstage() { // insertion point for array nil
@@ -3366,14 +4773,14 @@ func (stage *Stage) Unstage() { // insertion point for array nil
 		whitespace.Unstage(stage)
 	}
 
+	// end of insertion point for array nil
 }
 
 // Gongstruct is the type parameter for generated generic function that allows
 // - access to staged instances
 // - navigation between staged instances by going backward association links between gongstruct
 // - full refactoring of Gongstruct identifiers / fields
-type Gongstruct interface {
-}
+type Gongstruct interface{}
 
 type GongtructBasicField interface {
 	int | float64 | bool | string | time.Time | time.Duration
@@ -3383,10 +4790,26 @@ type GongtructBasicField interface {
 // - access to staged instances
 // - navigation between staged instances by going backward association links between gongstruct
 // - full refactoring of Gongstruct identifiers / fields
-type PointerToGongstruct interface {
+type GongstructIF interface {
 	GetName() string
+	SetName(string)
 	CommitVoid(*Stage)
+	StageVoid(*Stage)
 	UnstageVoid(stage *Stage)
+	GongGetFieldHeaders() []GongFieldHeader
+	GongClean(stage *Stage) (modified bool)
+	GongGetFieldValue(fieldName string, stage *Stage) GongFieldValue
+	GongSetFieldValue(fieldName string, value GongFieldValue, stage *Stage) error
+	GongGetGongstructName() string
+	GongGetOrder(stage *Stage) uint
+	GongGetReferenceIdentifier(stage *Stage) string
+	GongGetIdentifier(stage *Stage) string
+	GongCopy() GongstructIF
+	GongGetReverseFieldOwnerName(stage *Stage, reverseField *ReverseField) string
+	GongGetReverseFieldOwner(stage *Stage, reverseField *ReverseField) GongstructIF
+}
+type PointerToGongstruct interface {
+	GongstructIF
 	comparable
 }
 
@@ -3394,8 +4817,7 @@ func CompareGongstructByName[T PointerToGongstruct](a, b T) int {
 	return cmp.Compare(a.GetName(), b.GetName())
 }
 
-func SortGongstructSetByName[T PointerToGongstruct](set map[T]any) (sortedSlice []T) {
-
+func SortGongstructSetByName[T PointerToGongstruct](set map[T]struct{}) (sortedSlice []T) {
 	for key := range set {
 		sortedSlice = append(sortedSlice, key)
 	}
@@ -3405,7 +4827,6 @@ func SortGongstructSetByName[T PointerToGongstruct](set map[T]any) (sortedSlice 
 }
 
 func GetGongstrucsSorted[T PointerToGongstruct](stage *Stage) (sortedSlice []T) {
-
 	set := GetGongstructInstancesSetFromPointerType[T](stage)
 	sortedSlice = SortGongstructSetByName(*set)
 
@@ -3484,65 +4905,65 @@ func GongGetSet[Type GongstructSet](stage *Stage) *Type {
 	}
 }
 
-// GongGetMap returns the map of staged GongstructType instances
-// it is usefull because it allows refactoring of gong struct identifier
-func GongGetMap[Type GongstructMapString](stage *Stage) *Type {
+// GongGetMap returns the map of staged Gonstruct instance by their name
+// Can be usefull if names are unique
+func GongGetMap[Type GongstructIF](stage *Stage) map[string]Type {
 	var ret Type
 
 	switch any(ret).(type) {
 	// insertion point for generic get functions
-	case map[string]*All:
-		return any(&stage.Alls_mapString).(*Type)
-	case map[string]*Annotation:
-		return any(&stage.Annotations_mapString).(*Type)
-	case map[string]*Attribute:
-		return any(&stage.Attributes_mapString).(*Type)
-	case map[string]*AttributeGroup:
-		return any(&stage.AttributeGroups_mapString).(*Type)
-	case map[string]*Choice:
-		return any(&stage.Choices_mapString).(*Type)
-	case map[string]*ComplexContent:
-		return any(&stage.ComplexContents_mapString).(*Type)
-	case map[string]*ComplexType:
-		return any(&stage.ComplexTypes_mapString).(*Type)
-	case map[string]*Documentation:
-		return any(&stage.Documentations_mapString).(*Type)
-	case map[string]*Element:
-		return any(&stage.Elements_mapString).(*Type)
-	case map[string]*Enumeration:
-		return any(&stage.Enumerations_mapString).(*Type)
-	case map[string]*Extension:
-		return any(&stage.Extensions_mapString).(*Type)
-	case map[string]*Group:
-		return any(&stage.Groups_mapString).(*Type)
-	case map[string]*Length:
-		return any(&stage.Lengths_mapString).(*Type)
-	case map[string]*MaxInclusive:
-		return any(&stage.MaxInclusives_mapString).(*Type)
-	case map[string]*MaxLength:
-		return any(&stage.MaxLengths_mapString).(*Type)
-	case map[string]*MinInclusive:
-		return any(&stage.MinInclusives_mapString).(*Type)
-	case map[string]*MinLength:
-		return any(&stage.MinLengths_mapString).(*Type)
-	case map[string]*Pattern:
-		return any(&stage.Patterns_mapString).(*Type)
-	case map[string]*Restriction:
-		return any(&stage.Restrictions_mapString).(*Type)
-	case map[string]*Schema:
-		return any(&stage.Schemas_mapString).(*Type)
-	case map[string]*Sequence:
-		return any(&stage.Sequences_mapString).(*Type)
-	case map[string]*SimpleContent:
-		return any(&stage.SimpleContents_mapString).(*Type)
-	case map[string]*SimpleType:
-		return any(&stage.SimpleTypes_mapString).(*Type)
-	case map[string]*TotalDigit:
-		return any(&stage.TotalDigits_mapString).(*Type)
-	case map[string]*Union:
-		return any(&stage.Unions_mapString).(*Type)
-	case map[string]*WhiteSpace:
-		return any(&stage.WhiteSpaces_mapString).(*Type)
+	case *All:
+		return any(stage.Alls_mapString).(map[string]Type)
+	case *Annotation:
+		return any(stage.Annotations_mapString).(map[string]Type)
+	case *Attribute:
+		return any(stage.Attributes_mapString).(map[string]Type)
+	case *AttributeGroup:
+		return any(stage.AttributeGroups_mapString).(map[string]Type)
+	case *Choice:
+		return any(stage.Choices_mapString).(map[string]Type)
+	case *ComplexContent:
+		return any(stage.ComplexContents_mapString).(map[string]Type)
+	case *ComplexType:
+		return any(stage.ComplexTypes_mapString).(map[string]Type)
+	case *Documentation:
+		return any(stage.Documentations_mapString).(map[string]Type)
+	case *Element:
+		return any(stage.Elements_mapString).(map[string]Type)
+	case *Enumeration:
+		return any(stage.Enumerations_mapString).(map[string]Type)
+	case *Extension:
+		return any(stage.Extensions_mapString).(map[string]Type)
+	case *Group:
+		return any(stage.Groups_mapString).(map[string]Type)
+	case *Length:
+		return any(stage.Lengths_mapString).(map[string]Type)
+	case *MaxInclusive:
+		return any(stage.MaxInclusives_mapString).(map[string]Type)
+	case *MaxLength:
+		return any(stage.MaxLengths_mapString).(map[string]Type)
+	case *MinInclusive:
+		return any(stage.MinInclusives_mapString).(map[string]Type)
+	case *MinLength:
+		return any(stage.MinLengths_mapString).(map[string]Type)
+	case *Pattern:
+		return any(stage.Patterns_mapString).(map[string]Type)
+	case *Restriction:
+		return any(stage.Restrictions_mapString).(map[string]Type)
+	case *Schema:
+		return any(stage.Schemas_mapString).(map[string]Type)
+	case *Sequence:
+		return any(stage.Sequences_mapString).(map[string]Type)
+	case *SimpleContent:
+		return any(stage.SimpleContents_mapString).(map[string]Type)
+	case *SimpleType:
+		return any(stage.SimpleTypes_mapString).(map[string]Type)
+	case *TotalDigit:
+		return any(stage.TotalDigits_mapString).(map[string]Type)
+	case *Union:
+		return any(stage.Unions_mapString).(map[string]Type)
+	case *WhiteSpace:
+		return any(stage.WhiteSpaces_mapString).(map[string]Type)
 	default:
 		return nil
 	}
@@ -3550,63 +4971,63 @@ func GongGetMap[Type GongstructMapString](stage *Stage) *Type {
 
 // GetGongstructInstancesSet returns the set staged GongstructType instances
 // it is usefull because it allows refactoring of gongstruct identifier
-func GetGongstructInstancesSet[Type Gongstruct](stage *Stage) *map[*Type]any {
+func GetGongstructInstancesSet[Type Gongstruct](stage *Stage) *map[*Type]struct{} {
 	var ret Type
 
 	switch any(ret).(type) {
 	// insertion point for generic get functions
 	case All:
-		return any(&stage.Alls).(*map[*Type]any)
+		return any(&stage.Alls).(*map[*Type]struct{})
 	case Annotation:
-		return any(&stage.Annotations).(*map[*Type]any)
+		return any(&stage.Annotations).(*map[*Type]struct{})
 	case Attribute:
-		return any(&stage.Attributes).(*map[*Type]any)
+		return any(&stage.Attributes).(*map[*Type]struct{})
 	case AttributeGroup:
-		return any(&stage.AttributeGroups).(*map[*Type]any)
+		return any(&stage.AttributeGroups).(*map[*Type]struct{})
 	case Choice:
-		return any(&stage.Choices).(*map[*Type]any)
+		return any(&stage.Choices).(*map[*Type]struct{})
 	case ComplexContent:
-		return any(&stage.ComplexContents).(*map[*Type]any)
+		return any(&stage.ComplexContents).(*map[*Type]struct{})
 	case ComplexType:
-		return any(&stage.ComplexTypes).(*map[*Type]any)
+		return any(&stage.ComplexTypes).(*map[*Type]struct{})
 	case Documentation:
-		return any(&stage.Documentations).(*map[*Type]any)
+		return any(&stage.Documentations).(*map[*Type]struct{})
 	case Element:
-		return any(&stage.Elements).(*map[*Type]any)
+		return any(&stage.Elements).(*map[*Type]struct{})
 	case Enumeration:
-		return any(&stage.Enumerations).(*map[*Type]any)
+		return any(&stage.Enumerations).(*map[*Type]struct{})
 	case Extension:
-		return any(&stage.Extensions).(*map[*Type]any)
+		return any(&stage.Extensions).(*map[*Type]struct{})
 	case Group:
-		return any(&stage.Groups).(*map[*Type]any)
+		return any(&stage.Groups).(*map[*Type]struct{})
 	case Length:
-		return any(&stage.Lengths).(*map[*Type]any)
+		return any(&stage.Lengths).(*map[*Type]struct{})
 	case MaxInclusive:
-		return any(&stage.MaxInclusives).(*map[*Type]any)
+		return any(&stage.MaxInclusives).(*map[*Type]struct{})
 	case MaxLength:
-		return any(&stage.MaxLengths).(*map[*Type]any)
+		return any(&stage.MaxLengths).(*map[*Type]struct{})
 	case MinInclusive:
-		return any(&stage.MinInclusives).(*map[*Type]any)
+		return any(&stage.MinInclusives).(*map[*Type]struct{})
 	case MinLength:
-		return any(&stage.MinLengths).(*map[*Type]any)
+		return any(&stage.MinLengths).(*map[*Type]struct{})
 	case Pattern:
-		return any(&stage.Patterns).(*map[*Type]any)
+		return any(&stage.Patterns).(*map[*Type]struct{})
 	case Restriction:
-		return any(&stage.Restrictions).(*map[*Type]any)
+		return any(&stage.Restrictions).(*map[*Type]struct{})
 	case Schema:
-		return any(&stage.Schemas).(*map[*Type]any)
+		return any(&stage.Schemas).(*map[*Type]struct{})
 	case Sequence:
-		return any(&stage.Sequences).(*map[*Type]any)
+		return any(&stage.Sequences).(*map[*Type]struct{})
 	case SimpleContent:
-		return any(&stage.SimpleContents).(*map[*Type]any)
+		return any(&stage.SimpleContents).(*map[*Type]struct{})
 	case SimpleType:
-		return any(&stage.SimpleTypes).(*map[*Type]any)
+		return any(&stage.SimpleTypes).(*map[*Type]struct{})
 	case TotalDigit:
-		return any(&stage.TotalDigits).(*map[*Type]any)
+		return any(&stage.TotalDigits).(*map[*Type]struct{})
 	case Union:
-		return any(&stage.Unions).(*map[*Type]any)
+		return any(&stage.Unions).(*map[*Type]struct{})
 	case WhiteSpace:
-		return any(&stage.WhiteSpaces).(*map[*Type]any)
+		return any(&stage.WhiteSpaces).(*map[*Type]struct{})
 	default:
 		return nil
 	}
@@ -3614,70 +5035,70 @@ func GetGongstructInstancesSet[Type Gongstruct](stage *Stage) *map[*Type]any {
 
 // GetGongstructInstancesSetFromPointerType returns the set staged GongstructType instances
 // it is usefull because it allows refactoring of gongstruct identifier
-func GetGongstructInstancesSetFromPointerType[Type PointerToGongstruct](stage *Stage) *map[Type]any {
+func GetGongstructInstancesSetFromPointerType[Type PointerToGongstruct](stage *Stage) *map[Type]struct{} {
 	var ret Type
 
 	switch any(ret).(type) {
 	// insertion point for generic get functions
 	case *All:
-		return any(&stage.Alls).(*map[Type]any)
+		return any(&stage.Alls).(*map[Type]struct{})
 	case *Annotation:
-		return any(&stage.Annotations).(*map[Type]any)
+		return any(&stage.Annotations).(*map[Type]struct{})
 	case *Attribute:
-		return any(&stage.Attributes).(*map[Type]any)
+		return any(&stage.Attributes).(*map[Type]struct{})
 	case *AttributeGroup:
-		return any(&stage.AttributeGroups).(*map[Type]any)
+		return any(&stage.AttributeGroups).(*map[Type]struct{})
 	case *Choice:
-		return any(&stage.Choices).(*map[Type]any)
+		return any(&stage.Choices).(*map[Type]struct{})
 	case *ComplexContent:
-		return any(&stage.ComplexContents).(*map[Type]any)
+		return any(&stage.ComplexContents).(*map[Type]struct{})
 	case *ComplexType:
-		return any(&stage.ComplexTypes).(*map[Type]any)
+		return any(&stage.ComplexTypes).(*map[Type]struct{})
 	case *Documentation:
-		return any(&stage.Documentations).(*map[Type]any)
+		return any(&stage.Documentations).(*map[Type]struct{})
 	case *Element:
-		return any(&stage.Elements).(*map[Type]any)
+		return any(&stage.Elements).(*map[Type]struct{})
 	case *Enumeration:
-		return any(&stage.Enumerations).(*map[Type]any)
+		return any(&stage.Enumerations).(*map[Type]struct{})
 	case *Extension:
-		return any(&stage.Extensions).(*map[Type]any)
+		return any(&stage.Extensions).(*map[Type]struct{})
 	case *Group:
-		return any(&stage.Groups).(*map[Type]any)
+		return any(&stage.Groups).(*map[Type]struct{})
 	case *Length:
-		return any(&stage.Lengths).(*map[Type]any)
+		return any(&stage.Lengths).(*map[Type]struct{})
 	case *MaxInclusive:
-		return any(&stage.MaxInclusives).(*map[Type]any)
+		return any(&stage.MaxInclusives).(*map[Type]struct{})
 	case *MaxLength:
-		return any(&stage.MaxLengths).(*map[Type]any)
+		return any(&stage.MaxLengths).(*map[Type]struct{})
 	case *MinInclusive:
-		return any(&stage.MinInclusives).(*map[Type]any)
+		return any(&stage.MinInclusives).(*map[Type]struct{})
 	case *MinLength:
-		return any(&stage.MinLengths).(*map[Type]any)
+		return any(&stage.MinLengths).(*map[Type]struct{})
 	case *Pattern:
-		return any(&stage.Patterns).(*map[Type]any)
+		return any(&stage.Patterns).(*map[Type]struct{})
 	case *Restriction:
-		return any(&stage.Restrictions).(*map[Type]any)
+		return any(&stage.Restrictions).(*map[Type]struct{})
 	case *Schema:
-		return any(&stage.Schemas).(*map[Type]any)
+		return any(&stage.Schemas).(*map[Type]struct{})
 	case *Sequence:
-		return any(&stage.Sequences).(*map[Type]any)
+		return any(&stage.Sequences).(*map[Type]struct{})
 	case *SimpleContent:
-		return any(&stage.SimpleContents).(*map[Type]any)
+		return any(&stage.SimpleContents).(*map[Type]struct{})
 	case *SimpleType:
-		return any(&stage.SimpleTypes).(*map[Type]any)
+		return any(&stage.SimpleTypes).(*map[Type]struct{})
 	case *TotalDigit:
-		return any(&stage.TotalDigits).(*map[Type]any)
+		return any(&stage.TotalDigits).(*map[Type]struct{})
 	case *Union:
-		return any(&stage.Unions).(*map[Type]any)
+		return any(&stage.Unions).(*map[Type]struct{})
 	case *WhiteSpace:
-		return any(&stage.WhiteSpaces).(*map[Type]any)
+		return any(&stage.WhiteSpaces).(*map[Type]struct{})
 	default:
 		return nil
 	}
 }
 
 // GetGongstructInstancesMap returns the map of staged GongstructType instances
-// it is usefull because it allows refactoring of gong struct identifier
+// it is usefull because it allows refactoring of gongstruct identifier
 func GetGongstructInstancesMap[Type Gongstruct](stage *Stage) *map[string]*Type {
 	var ret Type
 
@@ -3974,7 +5395,6 @@ func GetAssociationName[Type Gongstruct]() *Type {
 // the map is construed by iterating over all Start instances and populationg keys with End instances
 // and values with slice of Start instances
 func GetPointerReverseMap[Start, End Gongstruct](fieldname string, stage *Stage) map[*End][]*Start {
-
 	var ret Start
 
 	switch any(ret).(type) {
@@ -4800,7 +6220,6 @@ func GetPointerReverseMap[Start, End Gongstruct](fieldname string, stage *Stage)
 // the map is construed by iterating over all Start instances and populating keys with End instances
 // and values with the Start instances
 func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage *Stage) map[*End][]*Start {
-
 	var ret Start
 
 	switch any(ret).(type) {
@@ -5291,74 +6710,9 @@ func GetSliceOfPointersReverseMap[Start, End Gongstruct](fieldname string, stage
 	return nil
 }
 
-// GetGongstructName returns the name of the Gongstruct
-// this can be usefull if one want program robust to refactoring
-func GetGongstructName[Type Gongstruct]() (res string) {
-
-	var ret Type
-
-	switch any(ret).(type) {
-	// insertion point for generic get gongstruct name
-	case All:
-		res = "All"
-	case Annotation:
-		res = "Annotation"
-	case Attribute:
-		res = "Attribute"
-	case AttributeGroup:
-		res = "AttributeGroup"
-	case Choice:
-		res = "Choice"
-	case ComplexContent:
-		res = "ComplexContent"
-	case ComplexType:
-		res = "ComplexType"
-	case Documentation:
-		res = "Documentation"
-	case Element:
-		res = "Element"
-	case Enumeration:
-		res = "Enumeration"
-	case Extension:
-		res = "Extension"
-	case Group:
-		res = "Group"
-	case Length:
-		res = "Length"
-	case MaxInclusive:
-		res = "MaxInclusive"
-	case MaxLength:
-		res = "MaxLength"
-	case MinInclusive:
-		res = "MinInclusive"
-	case MinLength:
-		res = "MinLength"
-	case Pattern:
-		res = "Pattern"
-	case Restriction:
-		res = "Restriction"
-	case Schema:
-		res = "Schema"
-	case Sequence:
-		res = "Sequence"
-	case SimpleContent:
-		res = "SimpleContent"
-	case SimpleType:
-		res = "SimpleType"
-	case TotalDigit:
-		res = "TotalDigit"
-	case Union:
-		res = "Union"
-	case WhiteSpace:
-		res = "WhiteSpace"
-	}
-	return res
-}
-
 // GetPointerToGongstructName returns the name of the Gongstruct
 // this can be usefull if one want program robust to refactoring
-func GetPointerToGongstructName[Type PointerToGongstruct]() (res string) {
-
+func GetPointerToGongstructName[Type GongstructIF]() (res string) {
 	var ret Type
 
 	switch any(ret).(type) {
@@ -5419,76 +6773,12 @@ func GetPointerToGongstructName[Type PointerToGongstruct]() (res string) {
 	return res
 }
 
-// GetFields return the array of the fields
-func GetFields[Type Gongstruct]() (res []string) {
-
-	var ret Type
-
-	switch any(ret).(type) {
-	// insertion point for generic get gongstruct name
-	case All:
-		res = []string{"Name", "Annotation", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth", "MinOccurs", "MaxOccurs"}
-	case Annotation:
-		res = []string{"Name", "Documentations"}
-	case Attribute:
-		res = []string{"Name", "NameXSD", "Type", "Annotation", "HasNameConflict", "GoIdentifier", "Default", "Use", "Form", "Fixed", "Ref", "TargetNamespace", "SimpleType", "IDXSD"}
-	case AttributeGroup:
-		res = []string{"Name", "NameXSD", "Annotation", "HasNameConflict", "GoIdentifier", "AttributeGroups", "Ref", "Attributes", "Order", "Depth"}
-	case Choice:
-		res = []string{"Name", "Annotation", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth", "MinOccurs", "MaxOccurs", "IsDuplicatedInXSD"}
-	case ComplexContent:
-		res = []string{"Name"}
-	case ComplexType:
-		res = []string{"Name", "HasNameConflict", "GoIdentifier", "IsAnonymous", "OuterElement", "Annotation", "NameXSD", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth", "MinOccurs", "MaxOccurs", "Extension", "SimpleContent", "ComplexContent", "Attributes", "AttributeGroups", "IsDuplicatedInXSD"}
-	case Documentation:
-		res = []string{"Name", "Text", "Source", "Lang"}
-	case Element:
-		res = []string{"Name", "Order", "Depth", "HasNameConflict", "GoIdentifier", "Annotation", "NameXSD", "Type", "MinOccurs", "MaxOccurs", "Default", "Fixed", "Nillable", "Ref", "Abstract", "Form", "Block", "Final", "SimpleType", "ComplexType", "Groups", "IsDuplicatedInXSD"}
-	case Enumeration:
-		res = []string{"Name", "Annotation", "Value"}
-	case Extension:
-		res = []string{"Name", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth", "MinOccurs", "MaxOccurs", "Base", "Ref", "Attributes", "AttributeGroups"}
-	case Group:
-		res = []string{"Name", "Annotation", "NameXSD", "Ref", "IsAnonymous", "OuterElement", "HasNameConflict", "GoIdentifier", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth", "MinOccurs", "MaxOccurs"}
-	case Length:
-		res = []string{"Name", "Annotation", "Value"}
-	case MaxInclusive:
-		res = []string{"Name", "Annotation", "Value"}
-	case MaxLength:
-		res = []string{"Name", "Annotation", "Value"}
-	case MinInclusive:
-		res = []string{"Name", "Annotation", "Value"}
-	case MinLength:
-		res = []string{"Name", "Annotation", "Value"}
-	case Pattern:
-		res = []string{"Name", "Annotation", "Value"}
-	case Restriction:
-		res = []string{"Name", "Annotation", "Base", "Enumerations", "MinInclusive", "MaxInclusive", "Pattern", "WhiteSpace", "MinLength", "MaxLength", "Length", "TotalDigit"}
-	case Schema:
-		res = []string{"Name", "Xs", "Annotation", "Elements", "SimpleTypes", "ComplexTypes", "AttributeGroups", "Groups", "Order", "Depth"}
-	case Sequence:
-		res = []string{"Name", "Annotation", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth", "MinOccurs", "MaxOccurs"}
-	case SimpleContent:
-		res = []string{"Name", "Extension", "Restriction"}
-	case SimpleType:
-		res = []string{"Name", "Annotation", "NameXSD", "Restriction", "Union", "Order", "Depth"}
-	case TotalDigit:
-		res = []string{"Name", "Annotation", "Value"}
-	case Union:
-		res = []string{"Name", "Annotation", "MemberTypes"}
-	case WhiteSpace:
-		res = []string{"Name", "Annotation", "Value"}
-	}
-	return
-}
-
 type ReverseField struct {
 	GongstructName string
 	Fieldname      string
 }
 
-func GetReverseFields[Type Gongstruct]() (res []ReverseField) {
-
+func GetReverseFields[Type GongstructIF]() (res []ReverseField) {
 	res = make([]ReverseField, 0)
 
 	var ret Type
@@ -5496,7 +6786,7 @@ func GetReverseFields[Type Gongstruct]() (res []ReverseField) {
 	switch any(ret).(type) {
 
 	// insertion point for generic get gongstruct name
-	case All:
+	case *All:
 		var rf ReverseField
 		_ = rf
 		rf.GongstructName = "All"
@@ -5517,10 +6807,10 @@ func GetReverseFields[Type Gongstruct]() (res []ReverseField) {
 		rf.GongstructName = "Sequence"
 		rf.Fieldname = "Alls"
 		res = append(res, rf)
-	case Annotation:
+	case *Annotation:
 		var rf ReverseField
 		_ = rf
-	case Attribute:
+	case *Attribute:
 		var rf ReverseField
 		_ = rf
 		rf.GongstructName = "AttributeGroup"
@@ -5532,7 +6822,7 @@ func GetReverseFields[Type Gongstruct]() (res []ReverseField) {
 		rf.GongstructName = "Extension"
 		rf.Fieldname = "Attributes"
 		res = append(res, rf)
-	case AttributeGroup:
+	case *AttributeGroup:
 		var rf ReverseField
 		_ = rf
 		rf.GongstructName = "AttributeGroup"
@@ -5547,7 +6837,7 @@ func GetReverseFields[Type Gongstruct]() (res []ReverseField) {
 		rf.GongstructName = "Schema"
 		rf.Fieldname = "AttributeGroups"
 		res = append(res, rf)
-	case Choice:
+	case *Choice:
 		var rf ReverseField
 		_ = rf
 		rf.GongstructName = "All"
@@ -5568,22 +6858,22 @@ func GetReverseFields[Type Gongstruct]() (res []ReverseField) {
 		rf.GongstructName = "Sequence"
 		rf.Fieldname = "Choices"
 		res = append(res, rf)
-	case ComplexContent:
+	case *ComplexContent:
 		var rf ReverseField
 		_ = rf
-	case ComplexType:
+	case *ComplexType:
 		var rf ReverseField
 		_ = rf
 		rf.GongstructName = "Schema"
 		rf.Fieldname = "ComplexTypes"
 		res = append(res, rf)
-	case Documentation:
+	case *Documentation:
 		var rf ReverseField
 		_ = rf
 		rf.GongstructName = "Annotation"
 		rf.Fieldname = "Documentations"
 		res = append(res, rf)
-	case Element:
+	case *Element:
 		var rf ReverseField
 		_ = rf
 		rf.GongstructName = "All"
@@ -5607,16 +6897,16 @@ func GetReverseFields[Type Gongstruct]() (res []ReverseField) {
 		rf.GongstructName = "Sequence"
 		rf.Fieldname = "Elements"
 		res = append(res, rf)
-	case Enumeration:
+	case *Enumeration:
 		var rf ReverseField
 		_ = rf
 		rf.GongstructName = "Restriction"
 		rf.Fieldname = "Enumerations"
 		res = append(res, rf)
-	case Extension:
+	case *Extension:
 		var rf ReverseField
 		_ = rf
-	case Group:
+	case *Group:
 		var rf ReverseField
 		_ = rf
 		rf.GongstructName = "All"
@@ -5643,31 +6933,31 @@ func GetReverseFields[Type Gongstruct]() (res []ReverseField) {
 		rf.GongstructName = "Sequence"
 		rf.Fieldname = "Groups"
 		res = append(res, rf)
-	case Length:
+	case *Length:
 		var rf ReverseField
 		_ = rf
-	case MaxInclusive:
+	case *MaxInclusive:
 		var rf ReverseField
 		_ = rf
-	case MaxLength:
+	case *MaxLength:
 		var rf ReverseField
 		_ = rf
-	case MinInclusive:
+	case *MinInclusive:
 		var rf ReverseField
 		_ = rf
-	case MinLength:
+	case *MinLength:
 		var rf ReverseField
 		_ = rf
-	case Pattern:
+	case *Pattern:
 		var rf ReverseField
 		_ = rf
-	case Restriction:
+	case *Restriction:
 		var rf ReverseField
 		_ = rf
-	case Schema:
+	case *Schema:
 		var rf ReverseField
 		_ = rf
-	case Sequence:
+	case *Sequence:
 		var rf ReverseField
 		_ = rf
 		rf.GongstructName = "All"
@@ -5688,106 +6978,1161 @@ func GetReverseFields[Type Gongstruct]() (res []ReverseField) {
 		rf.GongstructName = "Sequence"
 		rf.Fieldname = "Sequences"
 		res = append(res, rf)
-	case SimpleContent:
+	case *SimpleContent:
 		var rf ReverseField
 		_ = rf
-	case SimpleType:
+	case *SimpleType:
 		var rf ReverseField
 		_ = rf
 		rf.GongstructName = "Schema"
 		rf.Fieldname = "SimpleTypes"
 		res = append(res, rf)
-	case TotalDigit:
+	case *TotalDigit:
 		var rf ReverseField
 		_ = rf
-	case Union:
+	case *Union:
 		var rf ReverseField
 		_ = rf
-	case WhiteSpace:
+	case *WhiteSpace:
 		var rf ReverseField
 		_ = rf
+	}
+	return
+}
+
+// insertion point for get fields header method
+func (all *All) GongGetFieldHeaders() (res []GongFieldHeader) {
+	// insertion point for list of field headers
+	res = []GongFieldHeader{
+		{
+			Name:               "Name",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:                 "Annotation",
+			GongFieldValueType:   GongFieldValueTypePointer,
+			TargetGongstructName: "Annotation",
+		},
+		{
+			Name:               "OuterElementName",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:                 "Sequences",
+			GongFieldValueType:   GongFieldValueTypeSliceOfPointers,
+			TargetGongstructName: "Sequence",
+		},
+		{
+			Name:                 "Alls",
+			GongFieldValueType:   GongFieldValueTypeSliceOfPointers,
+			TargetGongstructName: "All",
+		},
+		{
+			Name:                 "Choices",
+			GongFieldValueType:   GongFieldValueTypeSliceOfPointers,
+			TargetGongstructName: "Choice",
+		},
+		{
+			Name:                 "Groups",
+			GongFieldValueType:   GongFieldValueTypeSliceOfPointers,
+			TargetGongstructName: "Group",
+		},
+		{
+			Name:                 "Elements",
+			GongFieldValueType:   GongFieldValueTypeSliceOfPointers,
+			TargetGongstructName: "Element",
+		},
+		{
+			Name:               "Order",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "Depth",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "MinOccurs",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "MaxOccurs",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+	}
+	return
+}
+
+func (annotation *Annotation) GongGetFieldHeaders() (res []GongFieldHeader) {
+	// insertion point for list of field headers
+	res = []GongFieldHeader{
+		{
+			Name:               "Name",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:                 "Documentations",
+			GongFieldValueType:   GongFieldValueTypeSliceOfPointers,
+			TargetGongstructName: "Documentation",
+		},
+	}
+	return
+}
+
+func (attribute *Attribute) GongGetFieldHeaders() (res []GongFieldHeader) {
+	// insertion point for list of field headers
+	res = []GongFieldHeader{
+		{
+			Name:               "Name",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "NameXSD",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "Type",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:                 "Annotation",
+			GongFieldValueType:   GongFieldValueTypePointer,
+			TargetGongstructName: "Annotation",
+		},
+		{
+			Name:               "HasNameConflict",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "GoIdentifier",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "Default",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "Use",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "Form",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "Fixed",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "Ref",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "TargetNamespace",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "SimpleType",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "IDXSD",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+	}
+	return
+}
+
+func (attributegroup *AttributeGroup) GongGetFieldHeaders() (res []GongFieldHeader) {
+	// insertion point for list of field headers
+	res = []GongFieldHeader{
+		{
+			Name:               "Name",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "NameXSD",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:                 "Annotation",
+			GongFieldValueType:   GongFieldValueTypePointer,
+			TargetGongstructName: "Annotation",
+		},
+		{
+			Name:               "HasNameConflict",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "GoIdentifier",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:                 "AttributeGroups",
+			GongFieldValueType:   GongFieldValueTypeSliceOfPointers,
+			TargetGongstructName: "AttributeGroup",
+		},
+		{
+			Name:               "Ref",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:                 "Attributes",
+			GongFieldValueType:   GongFieldValueTypeSliceOfPointers,
+			TargetGongstructName: "Attribute",
+		},
+		{
+			Name:               "Order",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "Depth",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+	}
+	return
+}
+
+func (choice *Choice) GongGetFieldHeaders() (res []GongFieldHeader) {
+	// insertion point for list of field headers
+	res = []GongFieldHeader{
+		{
+			Name:               "Name",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:                 "Annotation",
+			GongFieldValueType:   GongFieldValueTypePointer,
+			TargetGongstructName: "Annotation",
+		},
+		{
+			Name:               "OuterElementName",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:                 "Sequences",
+			GongFieldValueType:   GongFieldValueTypeSliceOfPointers,
+			TargetGongstructName: "Sequence",
+		},
+		{
+			Name:                 "Alls",
+			GongFieldValueType:   GongFieldValueTypeSliceOfPointers,
+			TargetGongstructName: "All",
+		},
+		{
+			Name:                 "Choices",
+			GongFieldValueType:   GongFieldValueTypeSliceOfPointers,
+			TargetGongstructName: "Choice",
+		},
+		{
+			Name:                 "Groups",
+			GongFieldValueType:   GongFieldValueTypeSliceOfPointers,
+			TargetGongstructName: "Group",
+		},
+		{
+			Name:                 "Elements",
+			GongFieldValueType:   GongFieldValueTypeSliceOfPointers,
+			TargetGongstructName: "Element",
+		},
+		{
+			Name:               "Order",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "Depth",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "MinOccurs",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "MaxOccurs",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "IsDuplicatedInXSD",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+	}
+	return
+}
+
+func (complexcontent *ComplexContent) GongGetFieldHeaders() (res []GongFieldHeader) {
+	// insertion point for list of field headers
+	res = []GongFieldHeader{
+		{
+			Name:               "Name",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+	}
+	return
+}
+
+func (complextype *ComplexType) GongGetFieldHeaders() (res []GongFieldHeader) {
+	// insertion point for list of field headers
+	res = []GongFieldHeader{
+		{
+			Name:               "Name",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "HasNameConflict",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "GoIdentifier",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "IsAnonymous",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:                 "OuterElement",
+			GongFieldValueType:   GongFieldValueTypePointer,
+			TargetGongstructName: "Element",
+		},
+		{
+			Name:                 "Annotation",
+			GongFieldValueType:   GongFieldValueTypePointer,
+			TargetGongstructName: "Annotation",
+		},
+		{
+			Name:               "NameXSD",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "OuterElementName",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:                 "Sequences",
+			GongFieldValueType:   GongFieldValueTypeSliceOfPointers,
+			TargetGongstructName: "Sequence",
+		},
+		{
+			Name:                 "Alls",
+			GongFieldValueType:   GongFieldValueTypeSliceOfPointers,
+			TargetGongstructName: "All",
+		},
+		{
+			Name:                 "Choices",
+			GongFieldValueType:   GongFieldValueTypeSliceOfPointers,
+			TargetGongstructName: "Choice",
+		},
+		{
+			Name:                 "Groups",
+			GongFieldValueType:   GongFieldValueTypeSliceOfPointers,
+			TargetGongstructName: "Group",
+		},
+		{
+			Name:                 "Elements",
+			GongFieldValueType:   GongFieldValueTypeSliceOfPointers,
+			TargetGongstructName: "Element",
+		},
+		{
+			Name:               "Order",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "Depth",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "MinOccurs",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "MaxOccurs",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:                 "Extension",
+			GongFieldValueType:   GongFieldValueTypePointer,
+			TargetGongstructName: "Extension",
+		},
+		{
+			Name:                 "SimpleContent",
+			GongFieldValueType:   GongFieldValueTypePointer,
+			TargetGongstructName: "SimpleContent",
+		},
+		{
+			Name:                 "ComplexContent",
+			GongFieldValueType:   GongFieldValueTypePointer,
+			TargetGongstructName: "ComplexContent",
+		},
+		{
+			Name:                 "Attributes",
+			GongFieldValueType:   GongFieldValueTypeSliceOfPointers,
+			TargetGongstructName: "Attribute",
+		},
+		{
+			Name:                 "AttributeGroups",
+			GongFieldValueType:   GongFieldValueTypeSliceOfPointers,
+			TargetGongstructName: "AttributeGroup",
+		},
+		{
+			Name:               "IsDuplicatedInXSD",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+	}
+	return
+}
+
+func (documentation *Documentation) GongGetFieldHeaders() (res []GongFieldHeader) {
+	// insertion point for list of field headers
+	res = []GongFieldHeader{
+		{
+			Name:               "Name",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "Text",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "Source",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "Lang",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+	}
+	return
+}
+
+func (element *Element) GongGetFieldHeaders() (res []GongFieldHeader) {
+	// insertion point for list of field headers
+	res = []GongFieldHeader{
+		{
+			Name:               "Name",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "Order",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "Depth",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "HasNameConflict",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "GoIdentifier",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:                 "Annotation",
+			GongFieldValueType:   GongFieldValueTypePointer,
+			TargetGongstructName: "Annotation",
+		},
+		{
+			Name:               "NameXSD",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "Type",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "MinOccurs",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "MaxOccurs",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "Default",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "Fixed",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "Nillable",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "Ref",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "Abstract",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "Form",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "Block",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "Final",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:                 "SimpleType",
+			GongFieldValueType:   GongFieldValueTypePointer,
+			TargetGongstructName: "SimpleType",
+		},
+		{
+			Name:                 "ComplexType",
+			GongFieldValueType:   GongFieldValueTypePointer,
+			TargetGongstructName: "ComplexType",
+		},
+		{
+			Name:                 "Groups",
+			GongFieldValueType:   GongFieldValueTypeSliceOfPointers,
+			TargetGongstructName: "Group",
+		},
+		{
+			Name:               "IsDuplicatedInXSD",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+	}
+	return
+}
+
+func (enumeration *Enumeration) GongGetFieldHeaders() (res []GongFieldHeader) {
+	// insertion point for list of field headers
+	res = []GongFieldHeader{
+		{
+			Name:               "Name",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:                 "Annotation",
+			GongFieldValueType:   GongFieldValueTypePointer,
+			TargetGongstructName: "Annotation",
+		},
+		{
+			Name:               "Value",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+	}
+	return
+}
+
+func (extension *Extension) GongGetFieldHeaders() (res []GongFieldHeader) {
+	// insertion point for list of field headers
+	res = []GongFieldHeader{
+		{
+			Name:               "Name",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "OuterElementName",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:                 "Sequences",
+			GongFieldValueType:   GongFieldValueTypeSliceOfPointers,
+			TargetGongstructName: "Sequence",
+		},
+		{
+			Name:                 "Alls",
+			GongFieldValueType:   GongFieldValueTypeSliceOfPointers,
+			TargetGongstructName: "All",
+		},
+		{
+			Name:                 "Choices",
+			GongFieldValueType:   GongFieldValueTypeSliceOfPointers,
+			TargetGongstructName: "Choice",
+		},
+		{
+			Name:                 "Groups",
+			GongFieldValueType:   GongFieldValueTypeSliceOfPointers,
+			TargetGongstructName: "Group",
+		},
+		{
+			Name:                 "Elements",
+			GongFieldValueType:   GongFieldValueTypeSliceOfPointers,
+			TargetGongstructName: "Element",
+		},
+		{
+			Name:               "Order",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "Depth",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "MinOccurs",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "MaxOccurs",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "Base",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "Ref",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:                 "Attributes",
+			GongFieldValueType:   GongFieldValueTypeSliceOfPointers,
+			TargetGongstructName: "Attribute",
+		},
+		{
+			Name:                 "AttributeGroups",
+			GongFieldValueType:   GongFieldValueTypeSliceOfPointers,
+			TargetGongstructName: "AttributeGroup",
+		},
+	}
+	return
+}
+
+func (group *Group) GongGetFieldHeaders() (res []GongFieldHeader) {
+	// insertion point for list of field headers
+	res = []GongFieldHeader{
+		{
+			Name:               "Name",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:                 "Annotation",
+			GongFieldValueType:   GongFieldValueTypePointer,
+			TargetGongstructName: "Annotation",
+		},
+		{
+			Name:               "NameXSD",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "Ref",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "IsAnonymous",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:                 "OuterElement",
+			GongFieldValueType:   GongFieldValueTypePointer,
+			TargetGongstructName: "Element",
+		},
+		{
+			Name:               "HasNameConflict",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "GoIdentifier",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "OuterElementName",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:                 "Sequences",
+			GongFieldValueType:   GongFieldValueTypeSliceOfPointers,
+			TargetGongstructName: "Sequence",
+		},
+		{
+			Name:                 "Alls",
+			GongFieldValueType:   GongFieldValueTypeSliceOfPointers,
+			TargetGongstructName: "All",
+		},
+		{
+			Name:                 "Choices",
+			GongFieldValueType:   GongFieldValueTypeSliceOfPointers,
+			TargetGongstructName: "Choice",
+		},
+		{
+			Name:                 "Groups",
+			GongFieldValueType:   GongFieldValueTypeSliceOfPointers,
+			TargetGongstructName: "Group",
+		},
+		{
+			Name:                 "Elements",
+			GongFieldValueType:   GongFieldValueTypeSliceOfPointers,
+			TargetGongstructName: "Element",
+		},
+		{
+			Name:               "Order",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "Depth",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "MinOccurs",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "MaxOccurs",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+	}
+	return
+}
+
+func (length *Length) GongGetFieldHeaders() (res []GongFieldHeader) {
+	// insertion point for list of field headers
+	res = []GongFieldHeader{
+		{
+			Name:               "Name",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:                 "Annotation",
+			GongFieldValueType:   GongFieldValueTypePointer,
+			TargetGongstructName: "Annotation",
+		},
+		{
+			Name:               "Value",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+	}
+	return
+}
+
+func (maxinclusive *MaxInclusive) GongGetFieldHeaders() (res []GongFieldHeader) {
+	// insertion point for list of field headers
+	res = []GongFieldHeader{
+		{
+			Name:               "Name",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:                 "Annotation",
+			GongFieldValueType:   GongFieldValueTypePointer,
+			TargetGongstructName: "Annotation",
+		},
+		{
+			Name:               "Value",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+	}
+	return
+}
+
+func (maxlength *MaxLength) GongGetFieldHeaders() (res []GongFieldHeader) {
+	// insertion point for list of field headers
+	res = []GongFieldHeader{
+		{
+			Name:               "Name",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:                 "Annotation",
+			GongFieldValueType:   GongFieldValueTypePointer,
+			TargetGongstructName: "Annotation",
+		},
+		{
+			Name:               "Value",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+	}
+	return
+}
+
+func (mininclusive *MinInclusive) GongGetFieldHeaders() (res []GongFieldHeader) {
+	// insertion point for list of field headers
+	res = []GongFieldHeader{
+		{
+			Name:               "Name",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:                 "Annotation",
+			GongFieldValueType:   GongFieldValueTypePointer,
+			TargetGongstructName: "Annotation",
+		},
+		{
+			Name:               "Value",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+	}
+	return
+}
+
+func (minlength *MinLength) GongGetFieldHeaders() (res []GongFieldHeader) {
+	// insertion point for list of field headers
+	res = []GongFieldHeader{
+		{
+			Name:               "Name",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:                 "Annotation",
+			GongFieldValueType:   GongFieldValueTypePointer,
+			TargetGongstructName: "Annotation",
+		},
+		{
+			Name:               "Value",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+	}
+	return
+}
+
+func (pattern *Pattern) GongGetFieldHeaders() (res []GongFieldHeader) {
+	// insertion point for list of field headers
+	res = []GongFieldHeader{
+		{
+			Name:               "Name",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:                 "Annotation",
+			GongFieldValueType:   GongFieldValueTypePointer,
+			TargetGongstructName: "Annotation",
+		},
+		{
+			Name:               "Value",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+	}
+	return
+}
+
+func (restriction *Restriction) GongGetFieldHeaders() (res []GongFieldHeader) {
+	// insertion point for list of field headers
+	res = []GongFieldHeader{
+		{
+			Name:               "Name",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:                 "Annotation",
+			GongFieldValueType:   GongFieldValueTypePointer,
+			TargetGongstructName: "Annotation",
+		},
+		{
+			Name:               "Base",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:                 "Enumerations",
+			GongFieldValueType:   GongFieldValueTypeSliceOfPointers,
+			TargetGongstructName: "Enumeration",
+		},
+		{
+			Name:                 "MinInclusive",
+			GongFieldValueType:   GongFieldValueTypePointer,
+			TargetGongstructName: "MinInclusive",
+		},
+		{
+			Name:                 "MaxInclusive",
+			GongFieldValueType:   GongFieldValueTypePointer,
+			TargetGongstructName: "MaxInclusive",
+		},
+		{
+			Name:                 "Pattern",
+			GongFieldValueType:   GongFieldValueTypePointer,
+			TargetGongstructName: "Pattern",
+		},
+		{
+			Name:                 "WhiteSpace",
+			GongFieldValueType:   GongFieldValueTypePointer,
+			TargetGongstructName: "WhiteSpace",
+		},
+		{
+			Name:                 "MinLength",
+			GongFieldValueType:   GongFieldValueTypePointer,
+			TargetGongstructName: "MinLength",
+		},
+		{
+			Name:                 "MaxLength",
+			GongFieldValueType:   GongFieldValueTypePointer,
+			TargetGongstructName: "MaxLength",
+		},
+		{
+			Name:                 "Length",
+			GongFieldValueType:   GongFieldValueTypePointer,
+			TargetGongstructName: "Length",
+		},
+		{
+			Name:                 "TotalDigit",
+			GongFieldValueType:   GongFieldValueTypePointer,
+			TargetGongstructName: "TotalDigit",
+		},
+	}
+	return
+}
+
+func (schema *Schema) GongGetFieldHeaders() (res []GongFieldHeader) {
+	// insertion point for list of field headers
+	res = []GongFieldHeader{
+		{
+			Name:               "Name",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "Xs",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:                 "Annotation",
+			GongFieldValueType:   GongFieldValueTypePointer,
+			TargetGongstructName: "Annotation",
+		},
+		{
+			Name:                 "Elements",
+			GongFieldValueType:   GongFieldValueTypeSliceOfPointers,
+			TargetGongstructName: "Element",
+		},
+		{
+			Name:                 "SimpleTypes",
+			GongFieldValueType:   GongFieldValueTypeSliceOfPointers,
+			TargetGongstructName: "SimpleType",
+		},
+		{
+			Name:                 "ComplexTypes",
+			GongFieldValueType:   GongFieldValueTypeSliceOfPointers,
+			TargetGongstructName: "ComplexType",
+		},
+		{
+			Name:                 "AttributeGroups",
+			GongFieldValueType:   GongFieldValueTypeSliceOfPointers,
+			TargetGongstructName: "AttributeGroup",
+		},
+		{
+			Name:                 "Groups",
+			GongFieldValueType:   GongFieldValueTypeSliceOfPointers,
+			TargetGongstructName: "Group",
+		},
+		{
+			Name:               "Order",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "Depth",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+	}
+	return
+}
+
+func (sequence *Sequence) GongGetFieldHeaders() (res []GongFieldHeader) {
+	// insertion point for list of field headers
+	res = []GongFieldHeader{
+		{
+			Name:               "Name",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:                 "Annotation",
+			GongFieldValueType:   GongFieldValueTypePointer,
+			TargetGongstructName: "Annotation",
+		},
+		{
+			Name:               "OuterElementName",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:                 "Sequences",
+			GongFieldValueType:   GongFieldValueTypeSliceOfPointers,
+			TargetGongstructName: "Sequence",
+		},
+		{
+			Name:                 "Alls",
+			GongFieldValueType:   GongFieldValueTypeSliceOfPointers,
+			TargetGongstructName: "All",
+		},
+		{
+			Name:                 "Choices",
+			GongFieldValueType:   GongFieldValueTypeSliceOfPointers,
+			TargetGongstructName: "Choice",
+		},
+		{
+			Name:                 "Groups",
+			GongFieldValueType:   GongFieldValueTypeSliceOfPointers,
+			TargetGongstructName: "Group",
+		},
+		{
+			Name:                 "Elements",
+			GongFieldValueType:   GongFieldValueTypeSliceOfPointers,
+			TargetGongstructName: "Element",
+		},
+		{
+			Name:               "Order",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "Depth",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "MinOccurs",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "MaxOccurs",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+	}
+	return
+}
+
+func (simplecontent *SimpleContent) GongGetFieldHeaders() (res []GongFieldHeader) {
+	// insertion point for list of field headers
+	res = []GongFieldHeader{
+		{
+			Name:               "Name",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:                 "Extension",
+			GongFieldValueType:   GongFieldValueTypePointer,
+			TargetGongstructName: "Extension",
+		},
+		{
+			Name:                 "Restriction",
+			GongFieldValueType:   GongFieldValueTypePointer,
+			TargetGongstructName: "Restriction",
+		},
+	}
+	return
+}
+
+func (simpletype *SimpleType) GongGetFieldHeaders() (res []GongFieldHeader) {
+	// insertion point for list of field headers
+	res = []GongFieldHeader{
+		{
+			Name:               "Name",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:                 "Annotation",
+			GongFieldValueType:   GongFieldValueTypePointer,
+			TargetGongstructName: "Annotation",
+		},
+		{
+			Name:               "NameXSD",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:                 "Restriction",
+			GongFieldValueType:   GongFieldValueTypePointer,
+			TargetGongstructName: "Restriction",
+		},
+		{
+			Name:                 "Union",
+			GongFieldValueType:   GongFieldValueTypePointer,
+			TargetGongstructName: "Union",
+		},
+		{
+			Name:               "Order",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:               "Depth",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+	}
+	return
+}
+
+func (totaldigit *TotalDigit) GongGetFieldHeaders() (res []GongFieldHeader) {
+	// insertion point for list of field headers
+	res = []GongFieldHeader{
+		{
+			Name:               "Name",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:                 "Annotation",
+			GongFieldValueType:   GongFieldValueTypePointer,
+			TargetGongstructName: "Annotation",
+		},
+		{
+			Name:               "Value",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+	}
+	return
+}
+
+func (union *Union) GongGetFieldHeaders() (res []GongFieldHeader) {
+	// insertion point for list of field headers
+	res = []GongFieldHeader{
+		{
+			Name:               "Name",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:                 "Annotation",
+			GongFieldValueType:   GongFieldValueTypePointer,
+			TargetGongstructName: "Annotation",
+		},
+		{
+			Name:               "MemberTypes",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+	}
+	return
+}
+
+func (whitespace *WhiteSpace) GongGetFieldHeaders() (res []GongFieldHeader) {
+	// insertion point for list of field headers
+	res = []GongFieldHeader{
+		{
+			Name:               "Name",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
+		{
+			Name:                 "Annotation",
+			GongFieldValueType:   GongFieldValueTypePointer,
+			TargetGongstructName: "Annotation",
+		},
+		{
+			Name:               "Value",
+			GongFieldValueType: GongFieldValueTypeBasicKind,
+		},
 	}
 	return
 }
 
 // GetFieldsFromPointer return the array of the fields
-func GetFieldsFromPointer[Type PointerToGongstruct]() (res []string) {
-
+func GetFieldsFromPointer[Type PointerToGongstruct]() (res []GongFieldHeader) {
 	var ret Type
-
-	switch any(ret).(type) {
-	// insertion point for generic get gongstruct name
-	case *All:
-		res = []string{"Name", "Annotation", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth", "MinOccurs", "MaxOccurs"}
-	case *Annotation:
-		res = []string{"Name", "Documentations"}
-	case *Attribute:
-		res = []string{"Name", "NameXSD", "Type", "Annotation", "HasNameConflict", "GoIdentifier", "Default", "Use", "Form", "Fixed", "Ref", "TargetNamespace", "SimpleType", "IDXSD"}
-	case *AttributeGroup:
-		res = []string{"Name", "NameXSD", "Annotation", "HasNameConflict", "GoIdentifier", "AttributeGroups", "Ref", "Attributes", "Order", "Depth"}
-	case *Choice:
-		res = []string{"Name", "Annotation", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth", "MinOccurs", "MaxOccurs", "IsDuplicatedInXSD"}
-	case *ComplexContent:
-		res = []string{"Name"}
-	case *ComplexType:
-		res = []string{"Name", "HasNameConflict", "GoIdentifier", "IsAnonymous", "OuterElement", "Annotation", "NameXSD", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth", "MinOccurs", "MaxOccurs", "Extension", "SimpleContent", "ComplexContent", "Attributes", "AttributeGroups", "IsDuplicatedInXSD"}
-	case *Documentation:
-		res = []string{"Name", "Text", "Source", "Lang"}
-	case *Element:
-		res = []string{"Name", "Order", "Depth", "HasNameConflict", "GoIdentifier", "Annotation", "NameXSD", "Type", "MinOccurs", "MaxOccurs", "Default", "Fixed", "Nillable", "Ref", "Abstract", "Form", "Block", "Final", "SimpleType", "ComplexType", "Groups", "IsDuplicatedInXSD"}
-	case *Enumeration:
-		res = []string{"Name", "Annotation", "Value"}
-	case *Extension:
-		res = []string{"Name", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth", "MinOccurs", "MaxOccurs", "Base", "Ref", "Attributes", "AttributeGroups"}
-	case *Group:
-		res = []string{"Name", "Annotation", "NameXSD", "Ref", "IsAnonymous", "OuterElement", "HasNameConflict", "GoIdentifier", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth", "MinOccurs", "MaxOccurs"}
-	case *Length:
-		res = []string{"Name", "Annotation", "Value"}
-	case *MaxInclusive:
-		res = []string{"Name", "Annotation", "Value"}
-	case *MaxLength:
-		res = []string{"Name", "Annotation", "Value"}
-	case *MinInclusive:
-		res = []string{"Name", "Annotation", "Value"}
-	case *MinLength:
-		res = []string{"Name", "Annotation", "Value"}
-	case *Pattern:
-		res = []string{"Name", "Annotation", "Value"}
-	case *Restriction:
-		res = []string{"Name", "Annotation", "Base", "Enumerations", "MinInclusive", "MaxInclusive", "Pattern", "WhiteSpace", "MinLength", "MaxLength", "Length", "TotalDigit"}
-	case *Schema:
-		res = []string{"Name", "Xs", "Annotation", "Elements", "SimpleTypes", "ComplexTypes", "AttributeGroups", "Groups", "Order", "Depth"}
-	case *Sequence:
-		res = []string{"Name", "Annotation", "OuterElementName", "Sequences", "Alls", "Choices", "Groups", "Elements", "Order", "Depth", "MinOccurs", "MaxOccurs"}
-	case *SimpleContent:
-		res = []string{"Name", "Extension", "Restriction"}
-	case *SimpleType:
-		res = []string{"Name", "Annotation", "NameXSD", "Restriction", "Union", "Order", "Depth"}
-	case *TotalDigit:
-		res = []string{"Name", "Annotation", "Value"}
-	case *Union:
-		res = []string{"Name", "Annotation", "MemberTypes"}
-	case *WhiteSpace:
-		res = []string{"Name", "Annotation", "Value"}
-	}
-	return
+	return ret.GongGetFieldHeaders()
 }
 
 type GongFieldValueType string
 
 const (
-	GongFieldValueTypeInt    GongFieldValueType = "GongFieldValueTypeInt"
-	GongFieldValueTypeFloat  GongFieldValueType = "GongFieldValueTypeFloat"
-	GongFieldValueTypeBool   GongFieldValueType = "GongFieldValueTypeBool"
-	GongFieldValueTypeOthers GongFieldValueType = "GongFieldValueTypeOthers"
+	GongFieldValueTypeInt             GongFieldValueType = "GongFieldValueTypeInt"
+	GongFieldValueTypeFloat           GongFieldValueType = "GongFieldValueTypeFloat"
+	GongFieldValueTypeBool            GongFieldValueType = "GongFieldValueTypeBool"
+	GongFieldValueTypeString          GongFieldValueType = "GongFieldValueTypeString"
+	GongFieldValueTypeBasicKind       GongFieldValueType = "GongFieldValueTypeBasicKind"
+	GongFieldValueTypePointer         GongFieldValueType = "GongFieldValueTypePointer"
+	GongFieldValueTypeSliceOfPointers GongFieldValueType = "GongFieldValueTypeSliceOfPointers"
 )
 
 type GongFieldValue struct {
-	valueString string
 	GongFieldValueType
-	valueInt   int
-	valueFloat float64
-	valueBool  bool
+	valueString string
+	valueInt    int
+	valueFloat  float64
+	valueBool   bool
+
+	// in case of a pointer, the ID of the pointed element
+	// in case of a slice of pointers, the IDs, separated by semi columbs
+	ids string
+}
+
+type GongFieldHeader struct {
+	Name string
+	GongFieldValueType
+	TargetGongstructName string
 }
 
 func (gongValueField *GongFieldValue) GetValueString() string {
@@ -5806,1784 +8151,2968 @@ func (gongValueField *GongFieldValue) GetValueBool() bool {
 	return gongValueField.valueBool
 }
 
-func GetFieldStringValueFromPointer(instance any, fieldName string) (res GongFieldValue) {
-
-	switch inferedInstance := any(instance).(type) {
-	// insertion point for generic get gongstruct field value
-	case *All:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "Annotation":
-			if inferedInstance.Annotation != nil {
-				res.valueString = inferedInstance.Annotation.Name
-			}
-		case "OuterElementName":
-			res.valueString = inferedInstance.OuterElementName
-		case "Sequences":
-			for idx, __instance__ := range inferedInstance.Sequences {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Alls":
-			for idx, __instance__ := range inferedInstance.Alls {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Choices":
-			for idx, __instance__ := range inferedInstance.Choices {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Groups":
-			for idx, __instance__ := range inferedInstance.Groups {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Elements":
-			for idx, __instance__ := range inferedInstance.Elements {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Order":
-			res.valueString = fmt.Sprintf("%d", inferedInstance.Order)
-			res.valueInt = inferedInstance.Order
-			res.GongFieldValueType = GongFieldValueTypeInt
-		case "Depth":
-			res.valueString = fmt.Sprintf("%d", inferedInstance.Depth)
-			res.valueInt = inferedInstance.Depth
-			res.GongFieldValueType = GongFieldValueTypeInt
-		case "MinOccurs":
-			res.valueString = inferedInstance.MinOccurs
-		case "MaxOccurs":
-			res.valueString = inferedInstance.MaxOccurs
+// insertion point for generic get gongstruct field value
+func (all *All) GongGetFieldValue(fieldName string, stage *Stage) (res GongFieldValue) {
+	switch fieldName {
+	// string value of fields
+	case "Name":
+		res.valueString = all.Name
+	case "Annotation":
+		res.GongFieldValueType = GongFieldValueTypePointer
+		if all.Annotation != nil {
+			res.valueString = all.Annotation.Name
+			res.ids = fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, all.Annotation))
 		}
-	case *Annotation:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "Documentations":
-			for idx, __instance__ := range inferedInstance.Documentations {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
+	case "OuterElementName":
+		res.valueString = all.OuterElementName
+	case "Sequences":
+		res.GongFieldValueType = GongFieldValueTypeSliceOfPointers
+		for idx, __instance__ := range all.Sequences {
+			if idx > 0 {
+				res.valueString += "\n"
+				res.ids += ";"
 			}
+			res.valueString += __instance__.Name
+			res.ids += fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, __instance__))
 		}
-	case *Attribute:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "NameXSD":
-			res.valueString = inferedInstance.NameXSD
-		case "Type":
-			res.valueString = inferedInstance.Type
-		case "Annotation":
-			if inferedInstance.Annotation != nil {
-				res.valueString = inferedInstance.Annotation.Name
+	case "Alls":
+		res.GongFieldValueType = GongFieldValueTypeSliceOfPointers
+		for idx, __instance__ := range all.Alls {
+			if idx > 0 {
+				res.valueString += "\n"
+				res.ids += ";"
 			}
-		case "HasNameConflict":
-			res.valueString = fmt.Sprintf("%t", inferedInstance.HasNameConflict)
-			res.valueBool = inferedInstance.HasNameConflict
-			res.GongFieldValueType = GongFieldValueTypeBool
-		case "GoIdentifier":
-			res.valueString = inferedInstance.GoIdentifier
-		case "Default":
-			res.valueString = inferedInstance.Default
-		case "Use":
-			res.valueString = inferedInstance.Use
-		case "Form":
-			res.valueString = inferedInstance.Form
-		case "Fixed":
-			res.valueString = inferedInstance.Fixed
-		case "Ref":
-			res.valueString = inferedInstance.Ref
-		case "TargetNamespace":
-			res.valueString = inferedInstance.TargetNamespace
-		case "SimpleType":
-			res.valueString = inferedInstance.SimpleType
-		case "IDXSD":
-			res.valueString = inferedInstance.IDXSD
+			res.valueString += __instance__.Name
+			res.ids += fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, __instance__))
 		}
-	case *AttributeGroup:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "NameXSD":
-			res.valueString = inferedInstance.NameXSD
-		case "Annotation":
-			if inferedInstance.Annotation != nil {
-				res.valueString = inferedInstance.Annotation.Name
+	case "Choices":
+		res.GongFieldValueType = GongFieldValueTypeSliceOfPointers
+		for idx, __instance__ := range all.Choices {
+			if idx > 0 {
+				res.valueString += "\n"
+				res.ids += ";"
 			}
-		case "HasNameConflict":
-			res.valueString = fmt.Sprintf("%t", inferedInstance.HasNameConflict)
-			res.valueBool = inferedInstance.HasNameConflict
-			res.GongFieldValueType = GongFieldValueTypeBool
-		case "GoIdentifier":
-			res.valueString = inferedInstance.GoIdentifier
-		case "AttributeGroups":
-			for idx, __instance__ := range inferedInstance.AttributeGroups {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Ref":
-			res.valueString = inferedInstance.Ref
-		case "Attributes":
-			for idx, __instance__ := range inferedInstance.Attributes {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Order":
-			res.valueString = fmt.Sprintf("%d", inferedInstance.Order)
-			res.valueInt = inferedInstance.Order
-			res.GongFieldValueType = GongFieldValueTypeInt
-		case "Depth":
-			res.valueString = fmt.Sprintf("%d", inferedInstance.Depth)
-			res.valueInt = inferedInstance.Depth
-			res.GongFieldValueType = GongFieldValueTypeInt
+			res.valueString += __instance__.Name
+			res.ids += fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, __instance__))
 		}
-	case *Choice:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "Annotation":
-			if inferedInstance.Annotation != nil {
-				res.valueString = inferedInstance.Annotation.Name
+	case "Groups":
+		res.GongFieldValueType = GongFieldValueTypeSliceOfPointers
+		for idx, __instance__ := range all.Groups {
+			if idx > 0 {
+				res.valueString += "\n"
+				res.ids += ";"
 			}
-		case "OuterElementName":
-			res.valueString = inferedInstance.OuterElementName
-		case "Sequences":
-			for idx, __instance__ := range inferedInstance.Sequences {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Alls":
-			for idx, __instance__ := range inferedInstance.Alls {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Choices":
-			for idx, __instance__ := range inferedInstance.Choices {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Groups":
-			for idx, __instance__ := range inferedInstance.Groups {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Elements":
-			for idx, __instance__ := range inferedInstance.Elements {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Order":
-			res.valueString = fmt.Sprintf("%d", inferedInstance.Order)
-			res.valueInt = inferedInstance.Order
-			res.GongFieldValueType = GongFieldValueTypeInt
-		case "Depth":
-			res.valueString = fmt.Sprintf("%d", inferedInstance.Depth)
-			res.valueInt = inferedInstance.Depth
-			res.GongFieldValueType = GongFieldValueTypeInt
-		case "MinOccurs":
-			res.valueString = inferedInstance.MinOccurs
-		case "MaxOccurs":
-			res.valueString = inferedInstance.MaxOccurs
-		case "IsDuplicatedInXSD":
-			res.valueString = fmt.Sprintf("%t", inferedInstance.IsDuplicatedInXSD)
-			res.valueBool = inferedInstance.IsDuplicatedInXSD
-			res.GongFieldValueType = GongFieldValueTypeBool
+			res.valueString += __instance__.Name
+			res.ids += fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, __instance__))
 		}
-	case *ComplexContent:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
+	case "Elements":
+		res.GongFieldValueType = GongFieldValueTypeSliceOfPointers
+		for idx, __instance__ := range all.Elements {
+			if idx > 0 {
+				res.valueString += "\n"
+				res.ids += ";"
+			}
+			res.valueString += __instance__.Name
+			res.ids += fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, __instance__))
 		}
-	case *ComplexType:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "HasNameConflict":
-			res.valueString = fmt.Sprintf("%t", inferedInstance.HasNameConflict)
-			res.valueBool = inferedInstance.HasNameConflict
-			res.GongFieldValueType = GongFieldValueTypeBool
-		case "GoIdentifier":
-			res.valueString = inferedInstance.GoIdentifier
-		case "IsAnonymous":
-			res.valueString = fmt.Sprintf("%t", inferedInstance.IsAnonymous)
-			res.valueBool = inferedInstance.IsAnonymous
-			res.GongFieldValueType = GongFieldValueTypeBool
-		case "OuterElement":
-			if inferedInstance.OuterElement != nil {
-				res.valueString = inferedInstance.OuterElement.Name
-			}
-		case "Annotation":
-			if inferedInstance.Annotation != nil {
-				res.valueString = inferedInstance.Annotation.Name
-			}
-		case "NameXSD":
-			res.valueString = inferedInstance.NameXSD
-		case "OuterElementName":
-			res.valueString = inferedInstance.OuterElementName
-		case "Sequences":
-			for idx, __instance__ := range inferedInstance.Sequences {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Alls":
-			for idx, __instance__ := range inferedInstance.Alls {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Choices":
-			for idx, __instance__ := range inferedInstance.Choices {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Groups":
-			for idx, __instance__ := range inferedInstance.Groups {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Elements":
-			for idx, __instance__ := range inferedInstance.Elements {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Order":
-			res.valueString = fmt.Sprintf("%d", inferedInstance.Order)
-			res.valueInt = inferedInstance.Order
-			res.GongFieldValueType = GongFieldValueTypeInt
-		case "Depth":
-			res.valueString = fmt.Sprintf("%d", inferedInstance.Depth)
-			res.valueInt = inferedInstance.Depth
-			res.GongFieldValueType = GongFieldValueTypeInt
-		case "MinOccurs":
-			res.valueString = inferedInstance.MinOccurs
-		case "MaxOccurs":
-			res.valueString = inferedInstance.MaxOccurs
-		case "Extension":
-			if inferedInstance.Extension != nil {
-				res.valueString = inferedInstance.Extension.Name
-			}
-		case "SimpleContent":
-			if inferedInstance.SimpleContent != nil {
-				res.valueString = inferedInstance.SimpleContent.Name
-			}
-		case "ComplexContent":
-			if inferedInstance.ComplexContent != nil {
-				res.valueString = inferedInstance.ComplexContent.Name
-			}
-		case "Attributes":
-			for idx, __instance__ := range inferedInstance.Attributes {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "AttributeGroups":
-			for idx, __instance__ := range inferedInstance.AttributeGroups {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "IsDuplicatedInXSD":
-			res.valueString = fmt.Sprintf("%t", inferedInstance.IsDuplicatedInXSD)
-			res.valueBool = inferedInstance.IsDuplicatedInXSD
-			res.GongFieldValueType = GongFieldValueTypeBool
-		}
-	case *Documentation:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "Text":
-			res.valueString = inferedInstance.Text
-		case "Source":
-			res.valueString = inferedInstance.Source
-		case "Lang":
-			res.valueString = inferedInstance.Lang
-		}
-	case *Element:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "Order":
-			res.valueString = fmt.Sprintf("%d", inferedInstance.Order)
-			res.valueInt = inferedInstance.Order
-			res.GongFieldValueType = GongFieldValueTypeInt
-		case "Depth":
-			res.valueString = fmt.Sprintf("%d", inferedInstance.Depth)
-			res.valueInt = inferedInstance.Depth
-			res.GongFieldValueType = GongFieldValueTypeInt
-		case "HasNameConflict":
-			res.valueString = fmt.Sprintf("%t", inferedInstance.HasNameConflict)
-			res.valueBool = inferedInstance.HasNameConflict
-			res.GongFieldValueType = GongFieldValueTypeBool
-		case "GoIdentifier":
-			res.valueString = inferedInstance.GoIdentifier
-		case "Annotation":
-			if inferedInstance.Annotation != nil {
-				res.valueString = inferedInstance.Annotation.Name
-			}
-		case "NameXSD":
-			res.valueString = inferedInstance.NameXSD
-		case "Type":
-			res.valueString = inferedInstance.Type
-		case "MinOccurs":
-			res.valueString = inferedInstance.MinOccurs
-		case "MaxOccurs":
-			res.valueString = inferedInstance.MaxOccurs
-		case "Default":
-			res.valueString = inferedInstance.Default
-		case "Fixed":
-			res.valueString = inferedInstance.Fixed
-		case "Nillable":
-			res.valueString = inferedInstance.Nillable
-		case "Ref":
-			res.valueString = inferedInstance.Ref
-		case "Abstract":
-			res.valueString = inferedInstance.Abstract
-		case "Form":
-			res.valueString = inferedInstance.Form
-		case "Block":
-			res.valueString = inferedInstance.Block
-		case "Final":
-			res.valueString = inferedInstance.Final
-		case "SimpleType":
-			if inferedInstance.SimpleType != nil {
-				res.valueString = inferedInstance.SimpleType.Name
-			}
-		case "ComplexType":
-			if inferedInstance.ComplexType != nil {
-				res.valueString = inferedInstance.ComplexType.Name
-			}
-		case "Groups":
-			for idx, __instance__ := range inferedInstance.Groups {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "IsDuplicatedInXSD":
-			res.valueString = fmt.Sprintf("%t", inferedInstance.IsDuplicatedInXSD)
-			res.valueBool = inferedInstance.IsDuplicatedInXSD
-			res.GongFieldValueType = GongFieldValueTypeBool
-		}
-	case *Enumeration:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "Annotation":
-			if inferedInstance.Annotation != nil {
-				res.valueString = inferedInstance.Annotation.Name
-			}
-		case "Value":
-			res.valueString = inferedInstance.Value
-		}
-	case *Extension:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "OuterElementName":
-			res.valueString = inferedInstance.OuterElementName
-		case "Sequences":
-			for idx, __instance__ := range inferedInstance.Sequences {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Alls":
-			for idx, __instance__ := range inferedInstance.Alls {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Choices":
-			for idx, __instance__ := range inferedInstance.Choices {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Groups":
-			for idx, __instance__ := range inferedInstance.Groups {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Elements":
-			for idx, __instance__ := range inferedInstance.Elements {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Order":
-			res.valueString = fmt.Sprintf("%d", inferedInstance.Order)
-			res.valueInt = inferedInstance.Order
-			res.GongFieldValueType = GongFieldValueTypeInt
-		case "Depth":
-			res.valueString = fmt.Sprintf("%d", inferedInstance.Depth)
-			res.valueInt = inferedInstance.Depth
-			res.GongFieldValueType = GongFieldValueTypeInt
-		case "MinOccurs":
-			res.valueString = inferedInstance.MinOccurs
-		case "MaxOccurs":
-			res.valueString = inferedInstance.MaxOccurs
-		case "Base":
-			res.valueString = inferedInstance.Base
-		case "Ref":
-			res.valueString = inferedInstance.Ref
-		case "Attributes":
-			for idx, __instance__ := range inferedInstance.Attributes {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "AttributeGroups":
-			for idx, __instance__ := range inferedInstance.AttributeGroups {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		}
-	case *Group:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "Annotation":
-			if inferedInstance.Annotation != nil {
-				res.valueString = inferedInstance.Annotation.Name
-			}
-		case "NameXSD":
-			res.valueString = inferedInstance.NameXSD
-		case "Ref":
-			res.valueString = inferedInstance.Ref
-		case "IsAnonymous":
-			res.valueString = fmt.Sprintf("%t", inferedInstance.IsAnonymous)
-			res.valueBool = inferedInstance.IsAnonymous
-			res.GongFieldValueType = GongFieldValueTypeBool
-		case "OuterElement":
-			if inferedInstance.OuterElement != nil {
-				res.valueString = inferedInstance.OuterElement.Name
-			}
-		case "HasNameConflict":
-			res.valueString = fmt.Sprintf("%t", inferedInstance.HasNameConflict)
-			res.valueBool = inferedInstance.HasNameConflict
-			res.GongFieldValueType = GongFieldValueTypeBool
-		case "GoIdentifier":
-			res.valueString = inferedInstance.GoIdentifier
-		case "OuterElementName":
-			res.valueString = inferedInstance.OuterElementName
-		case "Sequences":
-			for idx, __instance__ := range inferedInstance.Sequences {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Alls":
-			for idx, __instance__ := range inferedInstance.Alls {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Choices":
-			for idx, __instance__ := range inferedInstance.Choices {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Groups":
-			for idx, __instance__ := range inferedInstance.Groups {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Elements":
-			for idx, __instance__ := range inferedInstance.Elements {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Order":
-			res.valueString = fmt.Sprintf("%d", inferedInstance.Order)
-			res.valueInt = inferedInstance.Order
-			res.GongFieldValueType = GongFieldValueTypeInt
-		case "Depth":
-			res.valueString = fmt.Sprintf("%d", inferedInstance.Depth)
-			res.valueInt = inferedInstance.Depth
-			res.GongFieldValueType = GongFieldValueTypeInt
-		case "MinOccurs":
-			res.valueString = inferedInstance.MinOccurs
-		case "MaxOccurs":
-			res.valueString = inferedInstance.MaxOccurs
-		}
-	case *Length:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "Annotation":
-			if inferedInstance.Annotation != nil {
-				res.valueString = inferedInstance.Annotation.Name
-			}
-		case "Value":
-			res.valueString = inferedInstance.Value
-		}
-	case *MaxInclusive:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "Annotation":
-			if inferedInstance.Annotation != nil {
-				res.valueString = inferedInstance.Annotation.Name
-			}
-		case "Value":
-			res.valueString = inferedInstance.Value
-		}
-	case *MaxLength:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "Annotation":
-			if inferedInstance.Annotation != nil {
-				res.valueString = inferedInstance.Annotation.Name
-			}
-		case "Value":
-			res.valueString = inferedInstance.Value
-		}
-	case *MinInclusive:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "Annotation":
-			if inferedInstance.Annotation != nil {
-				res.valueString = inferedInstance.Annotation.Name
-			}
-		case "Value":
-			res.valueString = inferedInstance.Value
-		}
-	case *MinLength:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "Annotation":
-			if inferedInstance.Annotation != nil {
-				res.valueString = inferedInstance.Annotation.Name
-			}
-		case "Value":
-			res.valueString = inferedInstance.Value
-		}
-	case *Pattern:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "Annotation":
-			if inferedInstance.Annotation != nil {
-				res.valueString = inferedInstance.Annotation.Name
-			}
-		case "Value":
-			res.valueString = inferedInstance.Value
-		}
-	case *Restriction:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "Annotation":
-			if inferedInstance.Annotation != nil {
-				res.valueString = inferedInstance.Annotation.Name
-			}
-		case "Base":
-			res.valueString = inferedInstance.Base
-		case "Enumerations":
-			for idx, __instance__ := range inferedInstance.Enumerations {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "MinInclusive":
-			if inferedInstance.MinInclusive != nil {
-				res.valueString = inferedInstance.MinInclusive.Name
-			}
-		case "MaxInclusive":
-			if inferedInstance.MaxInclusive != nil {
-				res.valueString = inferedInstance.MaxInclusive.Name
-			}
-		case "Pattern":
-			if inferedInstance.Pattern != nil {
-				res.valueString = inferedInstance.Pattern.Name
-			}
-		case "WhiteSpace":
-			if inferedInstance.WhiteSpace != nil {
-				res.valueString = inferedInstance.WhiteSpace.Name
-			}
-		case "MinLength":
-			if inferedInstance.MinLength != nil {
-				res.valueString = inferedInstance.MinLength.Name
-			}
-		case "MaxLength":
-			if inferedInstance.MaxLength != nil {
-				res.valueString = inferedInstance.MaxLength.Name
-			}
-		case "Length":
-			if inferedInstance.Length != nil {
-				res.valueString = inferedInstance.Length.Name
-			}
-		case "TotalDigit":
-			if inferedInstance.TotalDigit != nil {
-				res.valueString = inferedInstance.TotalDigit.Name
-			}
-		}
-	case *Schema:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "Xs":
-			res.valueString = inferedInstance.Xs
-		case "Annotation":
-			if inferedInstance.Annotation != nil {
-				res.valueString = inferedInstance.Annotation.Name
-			}
-		case "Elements":
-			for idx, __instance__ := range inferedInstance.Elements {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "SimpleTypes":
-			for idx, __instance__ := range inferedInstance.SimpleTypes {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "ComplexTypes":
-			for idx, __instance__ := range inferedInstance.ComplexTypes {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "AttributeGroups":
-			for idx, __instance__ := range inferedInstance.AttributeGroups {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Groups":
-			for idx, __instance__ := range inferedInstance.Groups {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Order":
-			res.valueString = fmt.Sprintf("%d", inferedInstance.Order)
-			res.valueInt = inferedInstance.Order
-			res.GongFieldValueType = GongFieldValueTypeInt
-		case "Depth":
-			res.valueString = fmt.Sprintf("%d", inferedInstance.Depth)
-			res.valueInt = inferedInstance.Depth
-			res.GongFieldValueType = GongFieldValueTypeInt
-		}
-	case *Sequence:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "Annotation":
-			if inferedInstance.Annotation != nil {
-				res.valueString = inferedInstance.Annotation.Name
-			}
-		case "OuterElementName":
-			res.valueString = inferedInstance.OuterElementName
-		case "Sequences":
-			for idx, __instance__ := range inferedInstance.Sequences {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Alls":
-			for idx, __instance__ := range inferedInstance.Alls {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Choices":
-			for idx, __instance__ := range inferedInstance.Choices {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Groups":
-			for idx, __instance__ := range inferedInstance.Groups {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Elements":
-			for idx, __instance__ := range inferedInstance.Elements {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Order":
-			res.valueString = fmt.Sprintf("%d", inferedInstance.Order)
-			res.valueInt = inferedInstance.Order
-			res.GongFieldValueType = GongFieldValueTypeInt
-		case "Depth":
-			res.valueString = fmt.Sprintf("%d", inferedInstance.Depth)
-			res.valueInt = inferedInstance.Depth
-			res.GongFieldValueType = GongFieldValueTypeInt
-		case "MinOccurs":
-			res.valueString = inferedInstance.MinOccurs
-		case "MaxOccurs":
-			res.valueString = inferedInstance.MaxOccurs
-		}
-	case *SimpleContent:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "Extension":
-			if inferedInstance.Extension != nil {
-				res.valueString = inferedInstance.Extension.Name
-			}
-		case "Restriction":
-			if inferedInstance.Restriction != nil {
-				res.valueString = inferedInstance.Restriction.Name
-			}
-		}
-	case *SimpleType:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "Annotation":
-			if inferedInstance.Annotation != nil {
-				res.valueString = inferedInstance.Annotation.Name
-			}
-		case "NameXSD":
-			res.valueString = inferedInstance.NameXSD
-		case "Restriction":
-			if inferedInstance.Restriction != nil {
-				res.valueString = inferedInstance.Restriction.Name
-			}
-		case "Union":
-			if inferedInstance.Union != nil {
-				res.valueString = inferedInstance.Union.Name
-			}
-		case "Order":
-			res.valueString = fmt.Sprintf("%d", inferedInstance.Order)
-			res.valueInt = inferedInstance.Order
-			res.GongFieldValueType = GongFieldValueTypeInt
-		case "Depth":
-			res.valueString = fmt.Sprintf("%d", inferedInstance.Depth)
-			res.valueInt = inferedInstance.Depth
-			res.GongFieldValueType = GongFieldValueTypeInt
-		}
-	case *TotalDigit:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "Annotation":
-			if inferedInstance.Annotation != nil {
-				res.valueString = inferedInstance.Annotation.Name
-			}
-		case "Value":
-			res.valueString = inferedInstance.Value
-		}
-	case *Union:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "Annotation":
-			if inferedInstance.Annotation != nil {
-				res.valueString = inferedInstance.Annotation.Name
-			}
-		case "MemberTypes":
-			res.valueString = inferedInstance.MemberTypes
-		}
-	case *WhiteSpace:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "Annotation":
-			if inferedInstance.Annotation != nil {
-				res.valueString = inferedInstance.Annotation.Name
-			}
-		case "Value":
-			res.valueString = inferedInstance.Value
-		}
-	default:
-		_ = inferedInstance
+	case "Order":
+		res.valueString = fmt.Sprintf("%d", all.Order)
+		res.valueInt = all.Order
+		res.GongFieldValueType = GongFieldValueTypeInt
+	case "Depth":
+		res.valueString = fmt.Sprintf("%d", all.Depth)
+		res.valueInt = all.Depth
+		res.GongFieldValueType = GongFieldValueTypeInt
+	case "MinOccurs":
+		res.valueString = all.MinOccurs
+	case "MaxOccurs":
+		res.valueString = all.MaxOccurs
 	}
 	return
 }
 
-func GetFieldStringValue(instance any, fieldName string) (res GongFieldValue) {
-
-	switch inferedInstance := any(instance).(type) {
-	// insertion point for generic get gongstruct field value
-	case All:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "Annotation":
-			if inferedInstance.Annotation != nil {
-				res.valueString = inferedInstance.Annotation.Name
+func (annotation *Annotation) GongGetFieldValue(fieldName string, stage *Stage) (res GongFieldValue) {
+	switch fieldName {
+	// string value of fields
+	case "Name":
+		res.valueString = annotation.Name
+	case "Documentations":
+		res.GongFieldValueType = GongFieldValueTypeSliceOfPointers
+		for idx, __instance__ := range annotation.Documentations {
+			if idx > 0 {
+				res.valueString += "\n"
+				res.ids += ";"
 			}
-		case "OuterElementName":
-			res.valueString = inferedInstance.OuterElementName
-		case "Sequences":
-			for idx, __instance__ := range inferedInstance.Sequences {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Alls":
-			for idx, __instance__ := range inferedInstance.Alls {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Choices":
-			for idx, __instance__ := range inferedInstance.Choices {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Groups":
-			for idx, __instance__ := range inferedInstance.Groups {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Elements":
-			for idx, __instance__ := range inferedInstance.Elements {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Order":
-			res.valueString = fmt.Sprintf("%d", inferedInstance.Order)
-			res.valueInt = inferedInstance.Order
-			res.GongFieldValueType = GongFieldValueTypeInt
-		case "Depth":
-			res.valueString = fmt.Sprintf("%d", inferedInstance.Depth)
-			res.valueInt = inferedInstance.Depth
-			res.GongFieldValueType = GongFieldValueTypeInt
-		case "MinOccurs":
-			res.valueString = inferedInstance.MinOccurs
-		case "MaxOccurs":
-			res.valueString = inferedInstance.MaxOccurs
+			res.valueString += __instance__.Name
+			res.ids += fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, __instance__))
 		}
-	case Annotation:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "Documentations":
-			for idx, __instance__ := range inferedInstance.Documentations {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		}
-	case Attribute:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "NameXSD":
-			res.valueString = inferedInstance.NameXSD
-		case "Type":
-			res.valueString = inferedInstance.Type
-		case "Annotation":
-			if inferedInstance.Annotation != nil {
-				res.valueString = inferedInstance.Annotation.Name
-			}
-		case "HasNameConflict":
-			res.valueString = fmt.Sprintf("%t", inferedInstance.HasNameConflict)
-			res.valueBool = inferedInstance.HasNameConflict
-			res.GongFieldValueType = GongFieldValueTypeBool
-		case "GoIdentifier":
-			res.valueString = inferedInstance.GoIdentifier
-		case "Default":
-			res.valueString = inferedInstance.Default
-		case "Use":
-			res.valueString = inferedInstance.Use
-		case "Form":
-			res.valueString = inferedInstance.Form
-		case "Fixed":
-			res.valueString = inferedInstance.Fixed
-		case "Ref":
-			res.valueString = inferedInstance.Ref
-		case "TargetNamespace":
-			res.valueString = inferedInstance.TargetNamespace
-		case "SimpleType":
-			res.valueString = inferedInstance.SimpleType
-		case "IDXSD":
-			res.valueString = inferedInstance.IDXSD
-		}
-	case AttributeGroup:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "NameXSD":
-			res.valueString = inferedInstance.NameXSD
-		case "Annotation":
-			if inferedInstance.Annotation != nil {
-				res.valueString = inferedInstance.Annotation.Name
-			}
-		case "HasNameConflict":
-			res.valueString = fmt.Sprintf("%t", inferedInstance.HasNameConflict)
-			res.valueBool = inferedInstance.HasNameConflict
-			res.GongFieldValueType = GongFieldValueTypeBool
-		case "GoIdentifier":
-			res.valueString = inferedInstance.GoIdentifier
-		case "AttributeGroups":
-			for idx, __instance__ := range inferedInstance.AttributeGroups {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Ref":
-			res.valueString = inferedInstance.Ref
-		case "Attributes":
-			for idx, __instance__ := range inferedInstance.Attributes {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Order":
-			res.valueString = fmt.Sprintf("%d", inferedInstance.Order)
-			res.valueInt = inferedInstance.Order
-			res.GongFieldValueType = GongFieldValueTypeInt
-		case "Depth":
-			res.valueString = fmt.Sprintf("%d", inferedInstance.Depth)
-			res.valueInt = inferedInstance.Depth
-			res.GongFieldValueType = GongFieldValueTypeInt
-		}
-	case Choice:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "Annotation":
-			if inferedInstance.Annotation != nil {
-				res.valueString = inferedInstance.Annotation.Name
-			}
-		case "OuterElementName":
-			res.valueString = inferedInstance.OuterElementName
-		case "Sequences":
-			for idx, __instance__ := range inferedInstance.Sequences {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Alls":
-			for idx, __instance__ := range inferedInstance.Alls {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Choices":
-			for idx, __instance__ := range inferedInstance.Choices {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Groups":
-			for idx, __instance__ := range inferedInstance.Groups {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Elements":
-			for idx, __instance__ := range inferedInstance.Elements {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Order":
-			res.valueString = fmt.Sprintf("%d", inferedInstance.Order)
-			res.valueInt = inferedInstance.Order
-			res.GongFieldValueType = GongFieldValueTypeInt
-		case "Depth":
-			res.valueString = fmt.Sprintf("%d", inferedInstance.Depth)
-			res.valueInt = inferedInstance.Depth
-			res.GongFieldValueType = GongFieldValueTypeInt
-		case "MinOccurs":
-			res.valueString = inferedInstance.MinOccurs
-		case "MaxOccurs":
-			res.valueString = inferedInstance.MaxOccurs
-		case "IsDuplicatedInXSD":
-			res.valueString = fmt.Sprintf("%t", inferedInstance.IsDuplicatedInXSD)
-			res.valueBool = inferedInstance.IsDuplicatedInXSD
-			res.GongFieldValueType = GongFieldValueTypeBool
-		}
-	case ComplexContent:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		}
-	case ComplexType:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "HasNameConflict":
-			res.valueString = fmt.Sprintf("%t", inferedInstance.HasNameConflict)
-			res.valueBool = inferedInstance.HasNameConflict
-			res.GongFieldValueType = GongFieldValueTypeBool
-		case "GoIdentifier":
-			res.valueString = inferedInstance.GoIdentifier
-		case "IsAnonymous":
-			res.valueString = fmt.Sprintf("%t", inferedInstance.IsAnonymous)
-			res.valueBool = inferedInstance.IsAnonymous
-			res.GongFieldValueType = GongFieldValueTypeBool
-		case "OuterElement":
-			if inferedInstance.OuterElement != nil {
-				res.valueString = inferedInstance.OuterElement.Name
-			}
-		case "Annotation":
-			if inferedInstance.Annotation != nil {
-				res.valueString = inferedInstance.Annotation.Name
-			}
-		case "NameXSD":
-			res.valueString = inferedInstance.NameXSD
-		case "OuterElementName":
-			res.valueString = inferedInstance.OuterElementName
-		case "Sequences":
-			for idx, __instance__ := range inferedInstance.Sequences {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Alls":
-			for idx, __instance__ := range inferedInstance.Alls {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Choices":
-			for idx, __instance__ := range inferedInstance.Choices {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Groups":
-			for idx, __instance__ := range inferedInstance.Groups {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Elements":
-			for idx, __instance__ := range inferedInstance.Elements {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Order":
-			res.valueString = fmt.Sprintf("%d", inferedInstance.Order)
-			res.valueInt = inferedInstance.Order
-			res.GongFieldValueType = GongFieldValueTypeInt
-		case "Depth":
-			res.valueString = fmt.Sprintf("%d", inferedInstance.Depth)
-			res.valueInt = inferedInstance.Depth
-			res.GongFieldValueType = GongFieldValueTypeInt
-		case "MinOccurs":
-			res.valueString = inferedInstance.MinOccurs
-		case "MaxOccurs":
-			res.valueString = inferedInstance.MaxOccurs
-		case "Extension":
-			if inferedInstance.Extension != nil {
-				res.valueString = inferedInstance.Extension.Name
-			}
-		case "SimpleContent":
-			if inferedInstance.SimpleContent != nil {
-				res.valueString = inferedInstance.SimpleContent.Name
-			}
-		case "ComplexContent":
-			if inferedInstance.ComplexContent != nil {
-				res.valueString = inferedInstance.ComplexContent.Name
-			}
-		case "Attributes":
-			for idx, __instance__ := range inferedInstance.Attributes {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "AttributeGroups":
-			for idx, __instance__ := range inferedInstance.AttributeGroups {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "IsDuplicatedInXSD":
-			res.valueString = fmt.Sprintf("%t", inferedInstance.IsDuplicatedInXSD)
-			res.valueBool = inferedInstance.IsDuplicatedInXSD
-			res.GongFieldValueType = GongFieldValueTypeBool
-		}
-	case Documentation:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "Text":
-			res.valueString = inferedInstance.Text
-		case "Source":
-			res.valueString = inferedInstance.Source
-		case "Lang":
-			res.valueString = inferedInstance.Lang
-		}
-	case Element:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "Order":
-			res.valueString = fmt.Sprintf("%d", inferedInstance.Order)
-			res.valueInt = inferedInstance.Order
-			res.GongFieldValueType = GongFieldValueTypeInt
-		case "Depth":
-			res.valueString = fmt.Sprintf("%d", inferedInstance.Depth)
-			res.valueInt = inferedInstance.Depth
-			res.GongFieldValueType = GongFieldValueTypeInt
-		case "HasNameConflict":
-			res.valueString = fmt.Sprintf("%t", inferedInstance.HasNameConflict)
-			res.valueBool = inferedInstance.HasNameConflict
-			res.GongFieldValueType = GongFieldValueTypeBool
-		case "GoIdentifier":
-			res.valueString = inferedInstance.GoIdentifier
-		case "Annotation":
-			if inferedInstance.Annotation != nil {
-				res.valueString = inferedInstance.Annotation.Name
-			}
-		case "NameXSD":
-			res.valueString = inferedInstance.NameXSD
-		case "Type":
-			res.valueString = inferedInstance.Type
-		case "MinOccurs":
-			res.valueString = inferedInstance.MinOccurs
-		case "MaxOccurs":
-			res.valueString = inferedInstance.MaxOccurs
-		case "Default":
-			res.valueString = inferedInstance.Default
-		case "Fixed":
-			res.valueString = inferedInstance.Fixed
-		case "Nillable":
-			res.valueString = inferedInstance.Nillable
-		case "Ref":
-			res.valueString = inferedInstance.Ref
-		case "Abstract":
-			res.valueString = inferedInstance.Abstract
-		case "Form":
-			res.valueString = inferedInstance.Form
-		case "Block":
-			res.valueString = inferedInstance.Block
-		case "Final":
-			res.valueString = inferedInstance.Final
-		case "SimpleType":
-			if inferedInstance.SimpleType != nil {
-				res.valueString = inferedInstance.SimpleType.Name
-			}
-		case "ComplexType":
-			if inferedInstance.ComplexType != nil {
-				res.valueString = inferedInstance.ComplexType.Name
-			}
-		case "Groups":
-			for idx, __instance__ := range inferedInstance.Groups {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "IsDuplicatedInXSD":
-			res.valueString = fmt.Sprintf("%t", inferedInstance.IsDuplicatedInXSD)
-			res.valueBool = inferedInstance.IsDuplicatedInXSD
-			res.GongFieldValueType = GongFieldValueTypeBool
-		}
-	case Enumeration:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "Annotation":
-			if inferedInstance.Annotation != nil {
-				res.valueString = inferedInstance.Annotation.Name
-			}
-		case "Value":
-			res.valueString = inferedInstance.Value
-		}
-	case Extension:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "OuterElementName":
-			res.valueString = inferedInstance.OuterElementName
-		case "Sequences":
-			for idx, __instance__ := range inferedInstance.Sequences {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Alls":
-			for idx, __instance__ := range inferedInstance.Alls {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Choices":
-			for idx, __instance__ := range inferedInstance.Choices {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Groups":
-			for idx, __instance__ := range inferedInstance.Groups {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Elements":
-			for idx, __instance__ := range inferedInstance.Elements {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Order":
-			res.valueString = fmt.Sprintf("%d", inferedInstance.Order)
-			res.valueInt = inferedInstance.Order
-			res.GongFieldValueType = GongFieldValueTypeInt
-		case "Depth":
-			res.valueString = fmt.Sprintf("%d", inferedInstance.Depth)
-			res.valueInt = inferedInstance.Depth
-			res.GongFieldValueType = GongFieldValueTypeInt
-		case "MinOccurs":
-			res.valueString = inferedInstance.MinOccurs
-		case "MaxOccurs":
-			res.valueString = inferedInstance.MaxOccurs
-		case "Base":
-			res.valueString = inferedInstance.Base
-		case "Ref":
-			res.valueString = inferedInstance.Ref
-		case "Attributes":
-			for idx, __instance__ := range inferedInstance.Attributes {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "AttributeGroups":
-			for idx, __instance__ := range inferedInstance.AttributeGroups {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		}
-	case Group:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "Annotation":
-			if inferedInstance.Annotation != nil {
-				res.valueString = inferedInstance.Annotation.Name
-			}
-		case "NameXSD":
-			res.valueString = inferedInstance.NameXSD
-		case "Ref":
-			res.valueString = inferedInstance.Ref
-		case "IsAnonymous":
-			res.valueString = fmt.Sprintf("%t", inferedInstance.IsAnonymous)
-			res.valueBool = inferedInstance.IsAnonymous
-			res.GongFieldValueType = GongFieldValueTypeBool
-		case "OuterElement":
-			if inferedInstance.OuterElement != nil {
-				res.valueString = inferedInstance.OuterElement.Name
-			}
-		case "HasNameConflict":
-			res.valueString = fmt.Sprintf("%t", inferedInstance.HasNameConflict)
-			res.valueBool = inferedInstance.HasNameConflict
-			res.GongFieldValueType = GongFieldValueTypeBool
-		case "GoIdentifier":
-			res.valueString = inferedInstance.GoIdentifier
-		case "OuterElementName":
-			res.valueString = inferedInstance.OuterElementName
-		case "Sequences":
-			for idx, __instance__ := range inferedInstance.Sequences {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Alls":
-			for idx, __instance__ := range inferedInstance.Alls {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Choices":
-			for idx, __instance__ := range inferedInstance.Choices {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Groups":
-			for idx, __instance__ := range inferedInstance.Groups {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Elements":
-			for idx, __instance__ := range inferedInstance.Elements {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Order":
-			res.valueString = fmt.Sprintf("%d", inferedInstance.Order)
-			res.valueInt = inferedInstance.Order
-			res.GongFieldValueType = GongFieldValueTypeInt
-		case "Depth":
-			res.valueString = fmt.Sprintf("%d", inferedInstance.Depth)
-			res.valueInt = inferedInstance.Depth
-			res.GongFieldValueType = GongFieldValueTypeInt
-		case "MinOccurs":
-			res.valueString = inferedInstance.MinOccurs
-		case "MaxOccurs":
-			res.valueString = inferedInstance.MaxOccurs
-		}
-	case Length:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "Annotation":
-			if inferedInstance.Annotation != nil {
-				res.valueString = inferedInstance.Annotation.Name
-			}
-		case "Value":
-			res.valueString = inferedInstance.Value
-		}
-	case MaxInclusive:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "Annotation":
-			if inferedInstance.Annotation != nil {
-				res.valueString = inferedInstance.Annotation.Name
-			}
-		case "Value":
-			res.valueString = inferedInstance.Value
-		}
-	case MaxLength:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "Annotation":
-			if inferedInstance.Annotation != nil {
-				res.valueString = inferedInstance.Annotation.Name
-			}
-		case "Value":
-			res.valueString = inferedInstance.Value
-		}
-	case MinInclusive:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "Annotation":
-			if inferedInstance.Annotation != nil {
-				res.valueString = inferedInstance.Annotation.Name
-			}
-		case "Value":
-			res.valueString = inferedInstance.Value
-		}
-	case MinLength:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "Annotation":
-			if inferedInstance.Annotation != nil {
-				res.valueString = inferedInstance.Annotation.Name
-			}
-		case "Value":
-			res.valueString = inferedInstance.Value
-		}
-	case Pattern:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "Annotation":
-			if inferedInstance.Annotation != nil {
-				res.valueString = inferedInstance.Annotation.Name
-			}
-		case "Value":
-			res.valueString = inferedInstance.Value
-		}
-	case Restriction:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "Annotation":
-			if inferedInstance.Annotation != nil {
-				res.valueString = inferedInstance.Annotation.Name
-			}
-		case "Base":
-			res.valueString = inferedInstance.Base
-		case "Enumerations":
-			for idx, __instance__ := range inferedInstance.Enumerations {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "MinInclusive":
-			if inferedInstance.MinInclusive != nil {
-				res.valueString = inferedInstance.MinInclusive.Name
-			}
-		case "MaxInclusive":
-			if inferedInstance.MaxInclusive != nil {
-				res.valueString = inferedInstance.MaxInclusive.Name
-			}
-		case "Pattern":
-			if inferedInstance.Pattern != nil {
-				res.valueString = inferedInstance.Pattern.Name
-			}
-		case "WhiteSpace":
-			if inferedInstance.WhiteSpace != nil {
-				res.valueString = inferedInstance.WhiteSpace.Name
-			}
-		case "MinLength":
-			if inferedInstance.MinLength != nil {
-				res.valueString = inferedInstance.MinLength.Name
-			}
-		case "MaxLength":
-			if inferedInstance.MaxLength != nil {
-				res.valueString = inferedInstance.MaxLength.Name
-			}
-		case "Length":
-			if inferedInstance.Length != nil {
-				res.valueString = inferedInstance.Length.Name
-			}
-		case "TotalDigit":
-			if inferedInstance.TotalDigit != nil {
-				res.valueString = inferedInstance.TotalDigit.Name
-			}
-		}
-	case Schema:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "Xs":
-			res.valueString = inferedInstance.Xs
-		case "Annotation":
-			if inferedInstance.Annotation != nil {
-				res.valueString = inferedInstance.Annotation.Name
-			}
-		case "Elements":
-			for idx, __instance__ := range inferedInstance.Elements {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "SimpleTypes":
-			for idx, __instance__ := range inferedInstance.SimpleTypes {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "ComplexTypes":
-			for idx, __instance__ := range inferedInstance.ComplexTypes {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "AttributeGroups":
-			for idx, __instance__ := range inferedInstance.AttributeGroups {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Groups":
-			for idx, __instance__ := range inferedInstance.Groups {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Order":
-			res.valueString = fmt.Sprintf("%d", inferedInstance.Order)
-			res.valueInt = inferedInstance.Order
-			res.GongFieldValueType = GongFieldValueTypeInt
-		case "Depth":
-			res.valueString = fmt.Sprintf("%d", inferedInstance.Depth)
-			res.valueInt = inferedInstance.Depth
-			res.GongFieldValueType = GongFieldValueTypeInt
-		}
-	case Sequence:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "Annotation":
-			if inferedInstance.Annotation != nil {
-				res.valueString = inferedInstance.Annotation.Name
-			}
-		case "OuterElementName":
-			res.valueString = inferedInstance.OuterElementName
-		case "Sequences":
-			for idx, __instance__ := range inferedInstance.Sequences {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Alls":
-			for idx, __instance__ := range inferedInstance.Alls {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Choices":
-			for idx, __instance__ := range inferedInstance.Choices {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Groups":
-			for idx, __instance__ := range inferedInstance.Groups {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Elements":
-			for idx, __instance__ := range inferedInstance.Elements {
-				if idx > 0 {
-					res.valueString += "\n"
-				}
-				res.valueString += __instance__.Name
-			}
-		case "Order":
-			res.valueString = fmt.Sprintf("%d", inferedInstance.Order)
-			res.valueInt = inferedInstance.Order
-			res.GongFieldValueType = GongFieldValueTypeInt
-		case "Depth":
-			res.valueString = fmt.Sprintf("%d", inferedInstance.Depth)
-			res.valueInt = inferedInstance.Depth
-			res.GongFieldValueType = GongFieldValueTypeInt
-		case "MinOccurs":
-			res.valueString = inferedInstance.MinOccurs
-		case "MaxOccurs":
-			res.valueString = inferedInstance.MaxOccurs
-		}
-	case SimpleContent:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "Extension":
-			if inferedInstance.Extension != nil {
-				res.valueString = inferedInstance.Extension.Name
-			}
-		case "Restriction":
-			if inferedInstance.Restriction != nil {
-				res.valueString = inferedInstance.Restriction.Name
-			}
-		}
-	case SimpleType:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "Annotation":
-			if inferedInstance.Annotation != nil {
-				res.valueString = inferedInstance.Annotation.Name
-			}
-		case "NameXSD":
-			res.valueString = inferedInstance.NameXSD
-		case "Restriction":
-			if inferedInstance.Restriction != nil {
-				res.valueString = inferedInstance.Restriction.Name
-			}
-		case "Union":
-			if inferedInstance.Union != nil {
-				res.valueString = inferedInstance.Union.Name
-			}
-		case "Order":
-			res.valueString = fmt.Sprintf("%d", inferedInstance.Order)
-			res.valueInt = inferedInstance.Order
-			res.GongFieldValueType = GongFieldValueTypeInt
-		case "Depth":
-			res.valueString = fmt.Sprintf("%d", inferedInstance.Depth)
-			res.valueInt = inferedInstance.Depth
-			res.GongFieldValueType = GongFieldValueTypeInt
-		}
-	case TotalDigit:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "Annotation":
-			if inferedInstance.Annotation != nil {
-				res.valueString = inferedInstance.Annotation.Name
-			}
-		case "Value":
-			res.valueString = inferedInstance.Value
-		}
-	case Union:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "Annotation":
-			if inferedInstance.Annotation != nil {
-				res.valueString = inferedInstance.Annotation.Name
-			}
-		case "MemberTypes":
-			res.valueString = inferedInstance.MemberTypes
-		}
-	case WhiteSpace:
-		switch fieldName {
-		// string value of fields
-		case "Name":
-			res.valueString = inferedInstance.Name
-		case "Annotation":
-			if inferedInstance.Annotation != nil {
-				res.valueString = inferedInstance.Annotation.Name
-			}
-		case "Value":
-			res.valueString = inferedInstance.Value
-		}
-	default:
-		_ = inferedInstance
 	}
 	return
+}
+
+func (attribute *Attribute) GongGetFieldValue(fieldName string, stage *Stage) (res GongFieldValue) {
+	switch fieldName {
+	// string value of fields
+	case "Name":
+		res.valueString = attribute.Name
+	case "NameXSD":
+		res.valueString = attribute.NameXSD
+	case "Type":
+		res.valueString = attribute.Type
+	case "Annotation":
+		res.GongFieldValueType = GongFieldValueTypePointer
+		if attribute.Annotation != nil {
+			res.valueString = attribute.Annotation.Name
+			res.ids = fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, attribute.Annotation))
+		}
+	case "HasNameConflict":
+		res.valueString = fmt.Sprintf("%t", attribute.HasNameConflict)
+		res.valueBool = attribute.HasNameConflict
+		res.GongFieldValueType = GongFieldValueTypeBool
+	case "GoIdentifier":
+		res.valueString = attribute.GoIdentifier
+	case "Default":
+		res.valueString = attribute.Default
+	case "Use":
+		res.valueString = attribute.Use
+	case "Form":
+		res.valueString = attribute.Form
+	case "Fixed":
+		res.valueString = attribute.Fixed
+	case "Ref":
+		res.valueString = attribute.Ref
+	case "TargetNamespace":
+		res.valueString = attribute.TargetNamespace
+	case "SimpleType":
+		res.valueString = attribute.SimpleType
+	case "IDXSD":
+		res.valueString = attribute.IDXSD
+	}
+	return
+}
+
+func (attributegroup *AttributeGroup) GongGetFieldValue(fieldName string, stage *Stage) (res GongFieldValue) {
+	switch fieldName {
+	// string value of fields
+	case "Name":
+		res.valueString = attributegroup.Name
+	case "NameXSD":
+		res.valueString = attributegroup.NameXSD
+	case "Annotation":
+		res.GongFieldValueType = GongFieldValueTypePointer
+		if attributegroup.Annotation != nil {
+			res.valueString = attributegroup.Annotation.Name
+			res.ids = fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, attributegroup.Annotation))
+		}
+	case "HasNameConflict":
+		res.valueString = fmt.Sprintf("%t", attributegroup.HasNameConflict)
+		res.valueBool = attributegroup.HasNameConflict
+		res.GongFieldValueType = GongFieldValueTypeBool
+	case "GoIdentifier":
+		res.valueString = attributegroup.GoIdentifier
+	case "AttributeGroups":
+		res.GongFieldValueType = GongFieldValueTypeSliceOfPointers
+		for idx, __instance__ := range attributegroup.AttributeGroups {
+			if idx > 0 {
+				res.valueString += "\n"
+				res.ids += ";"
+			}
+			res.valueString += __instance__.Name
+			res.ids += fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, __instance__))
+		}
+	case "Ref":
+		res.valueString = attributegroup.Ref
+	case "Attributes":
+		res.GongFieldValueType = GongFieldValueTypeSliceOfPointers
+		for idx, __instance__ := range attributegroup.Attributes {
+			if idx > 0 {
+				res.valueString += "\n"
+				res.ids += ";"
+			}
+			res.valueString += __instance__.Name
+			res.ids += fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, __instance__))
+		}
+	case "Order":
+		res.valueString = fmt.Sprintf("%d", attributegroup.Order)
+		res.valueInt = attributegroup.Order
+		res.GongFieldValueType = GongFieldValueTypeInt
+	case "Depth":
+		res.valueString = fmt.Sprintf("%d", attributegroup.Depth)
+		res.valueInt = attributegroup.Depth
+		res.GongFieldValueType = GongFieldValueTypeInt
+	}
+	return
+}
+
+func (choice *Choice) GongGetFieldValue(fieldName string, stage *Stage) (res GongFieldValue) {
+	switch fieldName {
+	// string value of fields
+	case "Name":
+		res.valueString = choice.Name
+	case "Annotation":
+		res.GongFieldValueType = GongFieldValueTypePointer
+		if choice.Annotation != nil {
+			res.valueString = choice.Annotation.Name
+			res.ids = fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, choice.Annotation))
+		}
+	case "OuterElementName":
+		res.valueString = choice.OuterElementName
+	case "Sequences":
+		res.GongFieldValueType = GongFieldValueTypeSliceOfPointers
+		for idx, __instance__ := range choice.Sequences {
+			if idx > 0 {
+				res.valueString += "\n"
+				res.ids += ";"
+			}
+			res.valueString += __instance__.Name
+			res.ids += fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, __instance__))
+		}
+	case "Alls":
+		res.GongFieldValueType = GongFieldValueTypeSliceOfPointers
+		for idx, __instance__ := range choice.Alls {
+			if idx > 0 {
+				res.valueString += "\n"
+				res.ids += ";"
+			}
+			res.valueString += __instance__.Name
+			res.ids += fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, __instance__))
+		}
+	case "Choices":
+		res.GongFieldValueType = GongFieldValueTypeSliceOfPointers
+		for idx, __instance__ := range choice.Choices {
+			if idx > 0 {
+				res.valueString += "\n"
+				res.ids += ";"
+			}
+			res.valueString += __instance__.Name
+			res.ids += fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, __instance__))
+		}
+	case "Groups":
+		res.GongFieldValueType = GongFieldValueTypeSliceOfPointers
+		for idx, __instance__ := range choice.Groups {
+			if idx > 0 {
+				res.valueString += "\n"
+				res.ids += ";"
+			}
+			res.valueString += __instance__.Name
+			res.ids += fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, __instance__))
+		}
+	case "Elements":
+		res.GongFieldValueType = GongFieldValueTypeSliceOfPointers
+		for idx, __instance__ := range choice.Elements {
+			if idx > 0 {
+				res.valueString += "\n"
+				res.ids += ";"
+			}
+			res.valueString += __instance__.Name
+			res.ids += fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, __instance__))
+		}
+	case "Order":
+		res.valueString = fmt.Sprintf("%d", choice.Order)
+		res.valueInt = choice.Order
+		res.GongFieldValueType = GongFieldValueTypeInt
+	case "Depth":
+		res.valueString = fmt.Sprintf("%d", choice.Depth)
+		res.valueInt = choice.Depth
+		res.GongFieldValueType = GongFieldValueTypeInt
+	case "MinOccurs":
+		res.valueString = choice.MinOccurs
+	case "MaxOccurs":
+		res.valueString = choice.MaxOccurs
+	case "IsDuplicatedInXSD":
+		res.valueString = fmt.Sprintf("%t", choice.IsDuplicatedInXSD)
+		res.valueBool = choice.IsDuplicatedInXSD
+		res.GongFieldValueType = GongFieldValueTypeBool
+	}
+	return
+}
+
+func (complexcontent *ComplexContent) GongGetFieldValue(fieldName string, stage *Stage) (res GongFieldValue) {
+	switch fieldName {
+	// string value of fields
+	case "Name":
+		res.valueString = complexcontent.Name
+	}
+	return
+}
+
+func (complextype *ComplexType) GongGetFieldValue(fieldName string, stage *Stage) (res GongFieldValue) {
+	switch fieldName {
+	// string value of fields
+	case "Name":
+		res.valueString = complextype.Name
+	case "HasNameConflict":
+		res.valueString = fmt.Sprintf("%t", complextype.HasNameConflict)
+		res.valueBool = complextype.HasNameConflict
+		res.GongFieldValueType = GongFieldValueTypeBool
+	case "GoIdentifier":
+		res.valueString = complextype.GoIdentifier
+	case "IsAnonymous":
+		res.valueString = fmt.Sprintf("%t", complextype.IsAnonymous)
+		res.valueBool = complextype.IsAnonymous
+		res.GongFieldValueType = GongFieldValueTypeBool
+	case "OuterElement":
+		res.GongFieldValueType = GongFieldValueTypePointer
+		if complextype.OuterElement != nil {
+			res.valueString = complextype.OuterElement.Name
+			res.ids = fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, complextype.OuterElement))
+		}
+	case "Annotation":
+		res.GongFieldValueType = GongFieldValueTypePointer
+		if complextype.Annotation != nil {
+			res.valueString = complextype.Annotation.Name
+			res.ids = fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, complextype.Annotation))
+		}
+	case "NameXSD":
+		res.valueString = complextype.NameXSD
+	case "OuterElementName":
+		res.valueString = complextype.OuterElementName
+	case "Sequences":
+		res.GongFieldValueType = GongFieldValueTypeSliceOfPointers
+		for idx, __instance__ := range complextype.Sequences {
+			if idx > 0 {
+				res.valueString += "\n"
+				res.ids += ";"
+			}
+			res.valueString += __instance__.Name
+			res.ids += fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, __instance__))
+		}
+	case "Alls":
+		res.GongFieldValueType = GongFieldValueTypeSliceOfPointers
+		for idx, __instance__ := range complextype.Alls {
+			if idx > 0 {
+				res.valueString += "\n"
+				res.ids += ";"
+			}
+			res.valueString += __instance__.Name
+			res.ids += fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, __instance__))
+		}
+	case "Choices":
+		res.GongFieldValueType = GongFieldValueTypeSliceOfPointers
+		for idx, __instance__ := range complextype.Choices {
+			if idx > 0 {
+				res.valueString += "\n"
+				res.ids += ";"
+			}
+			res.valueString += __instance__.Name
+			res.ids += fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, __instance__))
+		}
+	case "Groups":
+		res.GongFieldValueType = GongFieldValueTypeSliceOfPointers
+		for idx, __instance__ := range complextype.Groups {
+			if idx > 0 {
+				res.valueString += "\n"
+				res.ids += ";"
+			}
+			res.valueString += __instance__.Name
+			res.ids += fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, __instance__))
+		}
+	case "Elements":
+		res.GongFieldValueType = GongFieldValueTypeSliceOfPointers
+		for idx, __instance__ := range complextype.Elements {
+			if idx > 0 {
+				res.valueString += "\n"
+				res.ids += ";"
+			}
+			res.valueString += __instance__.Name
+			res.ids += fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, __instance__))
+		}
+	case "Order":
+		res.valueString = fmt.Sprintf("%d", complextype.Order)
+		res.valueInt = complextype.Order
+		res.GongFieldValueType = GongFieldValueTypeInt
+	case "Depth":
+		res.valueString = fmt.Sprintf("%d", complextype.Depth)
+		res.valueInt = complextype.Depth
+		res.GongFieldValueType = GongFieldValueTypeInt
+	case "MinOccurs":
+		res.valueString = complextype.MinOccurs
+	case "MaxOccurs":
+		res.valueString = complextype.MaxOccurs
+	case "Extension":
+		res.GongFieldValueType = GongFieldValueTypePointer
+		if complextype.Extension != nil {
+			res.valueString = complextype.Extension.Name
+			res.ids = fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, complextype.Extension))
+		}
+	case "SimpleContent":
+		res.GongFieldValueType = GongFieldValueTypePointer
+		if complextype.SimpleContent != nil {
+			res.valueString = complextype.SimpleContent.Name
+			res.ids = fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, complextype.SimpleContent))
+		}
+	case "ComplexContent":
+		res.GongFieldValueType = GongFieldValueTypePointer
+		if complextype.ComplexContent != nil {
+			res.valueString = complextype.ComplexContent.Name
+			res.ids = fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, complextype.ComplexContent))
+		}
+	case "Attributes":
+		res.GongFieldValueType = GongFieldValueTypeSliceOfPointers
+		for idx, __instance__ := range complextype.Attributes {
+			if idx > 0 {
+				res.valueString += "\n"
+				res.ids += ";"
+			}
+			res.valueString += __instance__.Name
+			res.ids += fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, __instance__))
+		}
+	case "AttributeGroups":
+		res.GongFieldValueType = GongFieldValueTypeSliceOfPointers
+		for idx, __instance__ := range complextype.AttributeGroups {
+			if idx > 0 {
+				res.valueString += "\n"
+				res.ids += ";"
+			}
+			res.valueString += __instance__.Name
+			res.ids += fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, __instance__))
+		}
+	case "IsDuplicatedInXSD":
+		res.valueString = fmt.Sprintf("%t", complextype.IsDuplicatedInXSD)
+		res.valueBool = complextype.IsDuplicatedInXSD
+		res.GongFieldValueType = GongFieldValueTypeBool
+	}
+	return
+}
+
+func (documentation *Documentation) GongGetFieldValue(fieldName string, stage *Stage) (res GongFieldValue) {
+	switch fieldName {
+	// string value of fields
+	case "Name":
+		res.valueString = documentation.Name
+	case "Text":
+		res.valueString = documentation.Text
+	case "Source":
+		res.valueString = documentation.Source
+	case "Lang":
+		res.valueString = documentation.Lang
+	}
+	return
+}
+
+func (element *Element) GongGetFieldValue(fieldName string, stage *Stage) (res GongFieldValue) {
+	switch fieldName {
+	// string value of fields
+	case "Name":
+		res.valueString = element.Name
+	case "Order":
+		res.valueString = fmt.Sprintf("%d", element.Order)
+		res.valueInt = element.Order
+		res.GongFieldValueType = GongFieldValueTypeInt
+	case "Depth":
+		res.valueString = fmt.Sprintf("%d", element.Depth)
+		res.valueInt = element.Depth
+		res.GongFieldValueType = GongFieldValueTypeInt
+	case "HasNameConflict":
+		res.valueString = fmt.Sprintf("%t", element.HasNameConflict)
+		res.valueBool = element.HasNameConflict
+		res.GongFieldValueType = GongFieldValueTypeBool
+	case "GoIdentifier":
+		res.valueString = element.GoIdentifier
+	case "Annotation":
+		res.GongFieldValueType = GongFieldValueTypePointer
+		if element.Annotation != nil {
+			res.valueString = element.Annotation.Name
+			res.ids = fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, element.Annotation))
+		}
+	case "NameXSD":
+		res.valueString = element.NameXSD
+	case "Type":
+		res.valueString = element.Type
+	case "MinOccurs":
+		res.valueString = element.MinOccurs
+	case "MaxOccurs":
+		res.valueString = element.MaxOccurs
+	case "Default":
+		res.valueString = element.Default
+	case "Fixed":
+		res.valueString = element.Fixed
+	case "Nillable":
+		res.valueString = element.Nillable
+	case "Ref":
+		res.valueString = element.Ref
+	case "Abstract":
+		res.valueString = element.Abstract
+	case "Form":
+		res.valueString = element.Form
+	case "Block":
+		res.valueString = element.Block
+	case "Final":
+		res.valueString = element.Final
+	case "SimpleType":
+		res.GongFieldValueType = GongFieldValueTypePointer
+		if element.SimpleType != nil {
+			res.valueString = element.SimpleType.Name
+			res.ids = fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, element.SimpleType))
+		}
+	case "ComplexType":
+		res.GongFieldValueType = GongFieldValueTypePointer
+		if element.ComplexType != nil {
+			res.valueString = element.ComplexType.Name
+			res.ids = fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, element.ComplexType))
+		}
+	case "Groups":
+		res.GongFieldValueType = GongFieldValueTypeSliceOfPointers
+		for idx, __instance__ := range element.Groups {
+			if idx > 0 {
+				res.valueString += "\n"
+				res.ids += ";"
+			}
+			res.valueString += __instance__.Name
+			res.ids += fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, __instance__))
+		}
+	case "IsDuplicatedInXSD":
+		res.valueString = fmt.Sprintf("%t", element.IsDuplicatedInXSD)
+		res.valueBool = element.IsDuplicatedInXSD
+		res.GongFieldValueType = GongFieldValueTypeBool
+	}
+	return
+}
+
+func (enumeration *Enumeration) GongGetFieldValue(fieldName string, stage *Stage) (res GongFieldValue) {
+	switch fieldName {
+	// string value of fields
+	case "Name":
+		res.valueString = enumeration.Name
+	case "Annotation":
+		res.GongFieldValueType = GongFieldValueTypePointer
+		if enumeration.Annotation != nil {
+			res.valueString = enumeration.Annotation.Name
+			res.ids = fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, enumeration.Annotation))
+		}
+	case "Value":
+		res.valueString = enumeration.Value
+	}
+	return
+}
+
+func (extension *Extension) GongGetFieldValue(fieldName string, stage *Stage) (res GongFieldValue) {
+	switch fieldName {
+	// string value of fields
+	case "Name":
+		res.valueString = extension.Name
+	case "OuterElementName":
+		res.valueString = extension.OuterElementName
+	case "Sequences":
+		res.GongFieldValueType = GongFieldValueTypeSliceOfPointers
+		for idx, __instance__ := range extension.Sequences {
+			if idx > 0 {
+				res.valueString += "\n"
+				res.ids += ";"
+			}
+			res.valueString += __instance__.Name
+			res.ids += fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, __instance__))
+		}
+	case "Alls":
+		res.GongFieldValueType = GongFieldValueTypeSliceOfPointers
+		for idx, __instance__ := range extension.Alls {
+			if idx > 0 {
+				res.valueString += "\n"
+				res.ids += ";"
+			}
+			res.valueString += __instance__.Name
+			res.ids += fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, __instance__))
+		}
+	case "Choices":
+		res.GongFieldValueType = GongFieldValueTypeSliceOfPointers
+		for idx, __instance__ := range extension.Choices {
+			if idx > 0 {
+				res.valueString += "\n"
+				res.ids += ";"
+			}
+			res.valueString += __instance__.Name
+			res.ids += fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, __instance__))
+		}
+	case "Groups":
+		res.GongFieldValueType = GongFieldValueTypeSliceOfPointers
+		for idx, __instance__ := range extension.Groups {
+			if idx > 0 {
+				res.valueString += "\n"
+				res.ids += ";"
+			}
+			res.valueString += __instance__.Name
+			res.ids += fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, __instance__))
+		}
+	case "Elements":
+		res.GongFieldValueType = GongFieldValueTypeSliceOfPointers
+		for idx, __instance__ := range extension.Elements {
+			if idx > 0 {
+				res.valueString += "\n"
+				res.ids += ";"
+			}
+			res.valueString += __instance__.Name
+			res.ids += fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, __instance__))
+		}
+	case "Order":
+		res.valueString = fmt.Sprintf("%d", extension.Order)
+		res.valueInt = extension.Order
+		res.GongFieldValueType = GongFieldValueTypeInt
+	case "Depth":
+		res.valueString = fmt.Sprintf("%d", extension.Depth)
+		res.valueInt = extension.Depth
+		res.GongFieldValueType = GongFieldValueTypeInt
+	case "MinOccurs":
+		res.valueString = extension.MinOccurs
+	case "MaxOccurs":
+		res.valueString = extension.MaxOccurs
+	case "Base":
+		res.valueString = extension.Base
+	case "Ref":
+		res.valueString = extension.Ref
+	case "Attributes":
+		res.GongFieldValueType = GongFieldValueTypeSliceOfPointers
+		for idx, __instance__ := range extension.Attributes {
+			if idx > 0 {
+				res.valueString += "\n"
+				res.ids += ";"
+			}
+			res.valueString += __instance__.Name
+			res.ids += fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, __instance__))
+		}
+	case "AttributeGroups":
+		res.GongFieldValueType = GongFieldValueTypeSliceOfPointers
+		for idx, __instance__ := range extension.AttributeGroups {
+			if idx > 0 {
+				res.valueString += "\n"
+				res.ids += ";"
+			}
+			res.valueString += __instance__.Name
+			res.ids += fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, __instance__))
+		}
+	}
+	return
+}
+
+func (group *Group) GongGetFieldValue(fieldName string, stage *Stage) (res GongFieldValue) {
+	switch fieldName {
+	// string value of fields
+	case "Name":
+		res.valueString = group.Name
+	case "Annotation":
+		res.GongFieldValueType = GongFieldValueTypePointer
+		if group.Annotation != nil {
+			res.valueString = group.Annotation.Name
+			res.ids = fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, group.Annotation))
+		}
+	case "NameXSD":
+		res.valueString = group.NameXSD
+	case "Ref":
+		res.valueString = group.Ref
+	case "IsAnonymous":
+		res.valueString = fmt.Sprintf("%t", group.IsAnonymous)
+		res.valueBool = group.IsAnonymous
+		res.GongFieldValueType = GongFieldValueTypeBool
+	case "OuterElement":
+		res.GongFieldValueType = GongFieldValueTypePointer
+		if group.OuterElement != nil {
+			res.valueString = group.OuterElement.Name
+			res.ids = fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, group.OuterElement))
+		}
+	case "HasNameConflict":
+		res.valueString = fmt.Sprintf("%t", group.HasNameConflict)
+		res.valueBool = group.HasNameConflict
+		res.GongFieldValueType = GongFieldValueTypeBool
+	case "GoIdentifier":
+		res.valueString = group.GoIdentifier
+	case "OuterElementName":
+		res.valueString = group.OuterElementName
+	case "Sequences":
+		res.GongFieldValueType = GongFieldValueTypeSliceOfPointers
+		for idx, __instance__ := range group.Sequences {
+			if idx > 0 {
+				res.valueString += "\n"
+				res.ids += ";"
+			}
+			res.valueString += __instance__.Name
+			res.ids += fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, __instance__))
+		}
+	case "Alls":
+		res.GongFieldValueType = GongFieldValueTypeSliceOfPointers
+		for idx, __instance__ := range group.Alls {
+			if idx > 0 {
+				res.valueString += "\n"
+				res.ids += ";"
+			}
+			res.valueString += __instance__.Name
+			res.ids += fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, __instance__))
+		}
+	case "Choices":
+		res.GongFieldValueType = GongFieldValueTypeSliceOfPointers
+		for idx, __instance__ := range group.Choices {
+			if idx > 0 {
+				res.valueString += "\n"
+				res.ids += ";"
+			}
+			res.valueString += __instance__.Name
+			res.ids += fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, __instance__))
+		}
+	case "Groups":
+		res.GongFieldValueType = GongFieldValueTypeSliceOfPointers
+		for idx, __instance__ := range group.Groups {
+			if idx > 0 {
+				res.valueString += "\n"
+				res.ids += ";"
+			}
+			res.valueString += __instance__.Name
+			res.ids += fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, __instance__))
+		}
+	case "Elements":
+		res.GongFieldValueType = GongFieldValueTypeSliceOfPointers
+		for idx, __instance__ := range group.Elements {
+			if idx > 0 {
+				res.valueString += "\n"
+				res.ids += ";"
+			}
+			res.valueString += __instance__.Name
+			res.ids += fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, __instance__))
+		}
+	case "Order":
+		res.valueString = fmt.Sprintf("%d", group.Order)
+		res.valueInt = group.Order
+		res.GongFieldValueType = GongFieldValueTypeInt
+	case "Depth":
+		res.valueString = fmt.Sprintf("%d", group.Depth)
+		res.valueInt = group.Depth
+		res.GongFieldValueType = GongFieldValueTypeInt
+	case "MinOccurs":
+		res.valueString = group.MinOccurs
+	case "MaxOccurs":
+		res.valueString = group.MaxOccurs
+	}
+	return
+}
+
+func (length *Length) GongGetFieldValue(fieldName string, stage *Stage) (res GongFieldValue) {
+	switch fieldName {
+	// string value of fields
+	case "Name":
+		res.valueString = length.Name
+	case "Annotation":
+		res.GongFieldValueType = GongFieldValueTypePointer
+		if length.Annotation != nil {
+			res.valueString = length.Annotation.Name
+			res.ids = fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, length.Annotation))
+		}
+	case "Value":
+		res.valueString = length.Value
+	}
+	return
+}
+
+func (maxinclusive *MaxInclusive) GongGetFieldValue(fieldName string, stage *Stage) (res GongFieldValue) {
+	switch fieldName {
+	// string value of fields
+	case "Name":
+		res.valueString = maxinclusive.Name
+	case "Annotation":
+		res.GongFieldValueType = GongFieldValueTypePointer
+		if maxinclusive.Annotation != nil {
+			res.valueString = maxinclusive.Annotation.Name
+			res.ids = fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, maxinclusive.Annotation))
+		}
+	case "Value":
+		res.valueString = maxinclusive.Value
+	}
+	return
+}
+
+func (maxlength *MaxLength) GongGetFieldValue(fieldName string, stage *Stage) (res GongFieldValue) {
+	switch fieldName {
+	// string value of fields
+	case "Name":
+		res.valueString = maxlength.Name
+	case "Annotation":
+		res.GongFieldValueType = GongFieldValueTypePointer
+		if maxlength.Annotation != nil {
+			res.valueString = maxlength.Annotation.Name
+			res.ids = fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, maxlength.Annotation))
+		}
+	case "Value":
+		res.valueString = maxlength.Value
+	}
+	return
+}
+
+func (mininclusive *MinInclusive) GongGetFieldValue(fieldName string, stage *Stage) (res GongFieldValue) {
+	switch fieldName {
+	// string value of fields
+	case "Name":
+		res.valueString = mininclusive.Name
+	case "Annotation":
+		res.GongFieldValueType = GongFieldValueTypePointer
+		if mininclusive.Annotation != nil {
+			res.valueString = mininclusive.Annotation.Name
+			res.ids = fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, mininclusive.Annotation))
+		}
+	case "Value":
+		res.valueString = mininclusive.Value
+	}
+	return
+}
+
+func (minlength *MinLength) GongGetFieldValue(fieldName string, stage *Stage) (res GongFieldValue) {
+	switch fieldName {
+	// string value of fields
+	case "Name":
+		res.valueString = minlength.Name
+	case "Annotation":
+		res.GongFieldValueType = GongFieldValueTypePointer
+		if minlength.Annotation != nil {
+			res.valueString = minlength.Annotation.Name
+			res.ids = fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, minlength.Annotation))
+		}
+	case "Value":
+		res.valueString = minlength.Value
+	}
+	return
+}
+
+func (pattern *Pattern) GongGetFieldValue(fieldName string, stage *Stage) (res GongFieldValue) {
+	switch fieldName {
+	// string value of fields
+	case "Name":
+		res.valueString = pattern.Name
+	case "Annotation":
+		res.GongFieldValueType = GongFieldValueTypePointer
+		if pattern.Annotation != nil {
+			res.valueString = pattern.Annotation.Name
+			res.ids = fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, pattern.Annotation))
+		}
+	case "Value":
+		res.valueString = pattern.Value
+	}
+	return
+}
+
+func (restriction *Restriction) GongGetFieldValue(fieldName string, stage *Stage) (res GongFieldValue) {
+	switch fieldName {
+	// string value of fields
+	case "Name":
+		res.valueString = restriction.Name
+	case "Annotation":
+		res.GongFieldValueType = GongFieldValueTypePointer
+		if restriction.Annotation != nil {
+			res.valueString = restriction.Annotation.Name
+			res.ids = fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, restriction.Annotation))
+		}
+	case "Base":
+		res.valueString = restriction.Base
+	case "Enumerations":
+		res.GongFieldValueType = GongFieldValueTypeSliceOfPointers
+		for idx, __instance__ := range restriction.Enumerations {
+			if idx > 0 {
+				res.valueString += "\n"
+				res.ids += ";"
+			}
+			res.valueString += __instance__.Name
+			res.ids += fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, __instance__))
+		}
+	case "MinInclusive":
+		res.GongFieldValueType = GongFieldValueTypePointer
+		if restriction.MinInclusive != nil {
+			res.valueString = restriction.MinInclusive.Name
+			res.ids = fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, restriction.MinInclusive))
+		}
+	case "MaxInclusive":
+		res.GongFieldValueType = GongFieldValueTypePointer
+		if restriction.MaxInclusive != nil {
+			res.valueString = restriction.MaxInclusive.Name
+			res.ids = fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, restriction.MaxInclusive))
+		}
+	case "Pattern":
+		res.GongFieldValueType = GongFieldValueTypePointer
+		if restriction.Pattern != nil {
+			res.valueString = restriction.Pattern.Name
+			res.ids = fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, restriction.Pattern))
+		}
+	case "WhiteSpace":
+		res.GongFieldValueType = GongFieldValueTypePointer
+		if restriction.WhiteSpace != nil {
+			res.valueString = restriction.WhiteSpace.Name
+			res.ids = fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, restriction.WhiteSpace))
+		}
+	case "MinLength":
+		res.GongFieldValueType = GongFieldValueTypePointer
+		if restriction.MinLength != nil {
+			res.valueString = restriction.MinLength.Name
+			res.ids = fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, restriction.MinLength))
+		}
+	case "MaxLength":
+		res.GongFieldValueType = GongFieldValueTypePointer
+		if restriction.MaxLength != nil {
+			res.valueString = restriction.MaxLength.Name
+			res.ids = fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, restriction.MaxLength))
+		}
+	case "Length":
+		res.GongFieldValueType = GongFieldValueTypePointer
+		if restriction.Length != nil {
+			res.valueString = restriction.Length.Name
+			res.ids = fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, restriction.Length))
+		}
+	case "TotalDigit":
+		res.GongFieldValueType = GongFieldValueTypePointer
+		if restriction.TotalDigit != nil {
+			res.valueString = restriction.TotalDigit.Name
+			res.ids = fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, restriction.TotalDigit))
+		}
+	}
+	return
+}
+
+func (schema *Schema) GongGetFieldValue(fieldName string, stage *Stage) (res GongFieldValue) {
+	switch fieldName {
+	// string value of fields
+	case "Name":
+		res.valueString = schema.Name
+	case "Xs":
+		res.valueString = schema.Xs
+	case "Annotation":
+		res.GongFieldValueType = GongFieldValueTypePointer
+		if schema.Annotation != nil {
+			res.valueString = schema.Annotation.Name
+			res.ids = fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, schema.Annotation))
+		}
+	case "Elements":
+		res.GongFieldValueType = GongFieldValueTypeSliceOfPointers
+		for idx, __instance__ := range schema.Elements {
+			if idx > 0 {
+				res.valueString += "\n"
+				res.ids += ";"
+			}
+			res.valueString += __instance__.Name
+			res.ids += fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, __instance__))
+		}
+	case "SimpleTypes":
+		res.GongFieldValueType = GongFieldValueTypeSliceOfPointers
+		for idx, __instance__ := range schema.SimpleTypes {
+			if idx > 0 {
+				res.valueString += "\n"
+				res.ids += ";"
+			}
+			res.valueString += __instance__.Name
+			res.ids += fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, __instance__))
+		}
+	case "ComplexTypes":
+		res.GongFieldValueType = GongFieldValueTypeSliceOfPointers
+		for idx, __instance__ := range schema.ComplexTypes {
+			if idx > 0 {
+				res.valueString += "\n"
+				res.ids += ";"
+			}
+			res.valueString += __instance__.Name
+			res.ids += fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, __instance__))
+		}
+	case "AttributeGroups":
+		res.GongFieldValueType = GongFieldValueTypeSliceOfPointers
+		for idx, __instance__ := range schema.AttributeGroups {
+			if idx > 0 {
+				res.valueString += "\n"
+				res.ids += ";"
+			}
+			res.valueString += __instance__.Name
+			res.ids += fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, __instance__))
+		}
+	case "Groups":
+		res.GongFieldValueType = GongFieldValueTypeSliceOfPointers
+		for idx, __instance__ := range schema.Groups {
+			if idx > 0 {
+				res.valueString += "\n"
+				res.ids += ";"
+			}
+			res.valueString += __instance__.Name
+			res.ids += fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, __instance__))
+		}
+	case "Order":
+		res.valueString = fmt.Sprintf("%d", schema.Order)
+		res.valueInt = schema.Order
+		res.GongFieldValueType = GongFieldValueTypeInt
+	case "Depth":
+		res.valueString = fmt.Sprintf("%d", schema.Depth)
+		res.valueInt = schema.Depth
+		res.GongFieldValueType = GongFieldValueTypeInt
+	}
+	return
+}
+
+func (sequence *Sequence) GongGetFieldValue(fieldName string, stage *Stage) (res GongFieldValue) {
+	switch fieldName {
+	// string value of fields
+	case "Name":
+		res.valueString = sequence.Name
+	case "Annotation":
+		res.GongFieldValueType = GongFieldValueTypePointer
+		if sequence.Annotation != nil {
+			res.valueString = sequence.Annotation.Name
+			res.ids = fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, sequence.Annotation))
+		}
+	case "OuterElementName":
+		res.valueString = sequence.OuterElementName
+	case "Sequences":
+		res.GongFieldValueType = GongFieldValueTypeSliceOfPointers
+		for idx, __instance__ := range sequence.Sequences {
+			if idx > 0 {
+				res.valueString += "\n"
+				res.ids += ";"
+			}
+			res.valueString += __instance__.Name
+			res.ids += fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, __instance__))
+		}
+	case "Alls":
+		res.GongFieldValueType = GongFieldValueTypeSliceOfPointers
+		for idx, __instance__ := range sequence.Alls {
+			if idx > 0 {
+				res.valueString += "\n"
+				res.ids += ";"
+			}
+			res.valueString += __instance__.Name
+			res.ids += fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, __instance__))
+		}
+	case "Choices":
+		res.GongFieldValueType = GongFieldValueTypeSliceOfPointers
+		for idx, __instance__ := range sequence.Choices {
+			if idx > 0 {
+				res.valueString += "\n"
+				res.ids += ";"
+			}
+			res.valueString += __instance__.Name
+			res.ids += fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, __instance__))
+		}
+	case "Groups":
+		res.GongFieldValueType = GongFieldValueTypeSliceOfPointers
+		for idx, __instance__ := range sequence.Groups {
+			if idx > 0 {
+				res.valueString += "\n"
+				res.ids += ";"
+			}
+			res.valueString += __instance__.Name
+			res.ids += fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, __instance__))
+		}
+	case "Elements":
+		res.GongFieldValueType = GongFieldValueTypeSliceOfPointers
+		for idx, __instance__ := range sequence.Elements {
+			if idx > 0 {
+				res.valueString += "\n"
+				res.ids += ";"
+			}
+			res.valueString += __instance__.Name
+			res.ids += fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, __instance__))
+		}
+	case "Order":
+		res.valueString = fmt.Sprintf("%d", sequence.Order)
+		res.valueInt = sequence.Order
+		res.GongFieldValueType = GongFieldValueTypeInt
+	case "Depth":
+		res.valueString = fmt.Sprintf("%d", sequence.Depth)
+		res.valueInt = sequence.Depth
+		res.GongFieldValueType = GongFieldValueTypeInt
+	case "MinOccurs":
+		res.valueString = sequence.MinOccurs
+	case "MaxOccurs":
+		res.valueString = sequence.MaxOccurs
+	}
+	return
+}
+
+func (simplecontent *SimpleContent) GongGetFieldValue(fieldName string, stage *Stage) (res GongFieldValue) {
+	switch fieldName {
+	// string value of fields
+	case "Name":
+		res.valueString = simplecontent.Name
+	case "Extension":
+		res.GongFieldValueType = GongFieldValueTypePointer
+		if simplecontent.Extension != nil {
+			res.valueString = simplecontent.Extension.Name
+			res.ids = fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, simplecontent.Extension))
+		}
+	case "Restriction":
+		res.GongFieldValueType = GongFieldValueTypePointer
+		if simplecontent.Restriction != nil {
+			res.valueString = simplecontent.Restriction.Name
+			res.ids = fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, simplecontent.Restriction))
+		}
+	}
+	return
+}
+
+func (simpletype *SimpleType) GongGetFieldValue(fieldName string, stage *Stage) (res GongFieldValue) {
+	switch fieldName {
+	// string value of fields
+	case "Name":
+		res.valueString = simpletype.Name
+	case "Annotation":
+		res.GongFieldValueType = GongFieldValueTypePointer
+		if simpletype.Annotation != nil {
+			res.valueString = simpletype.Annotation.Name
+			res.ids = fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, simpletype.Annotation))
+		}
+	case "NameXSD":
+		res.valueString = simpletype.NameXSD
+	case "Restriction":
+		res.GongFieldValueType = GongFieldValueTypePointer
+		if simpletype.Restriction != nil {
+			res.valueString = simpletype.Restriction.Name
+			res.ids = fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, simpletype.Restriction))
+		}
+	case "Union":
+		res.GongFieldValueType = GongFieldValueTypePointer
+		if simpletype.Union != nil {
+			res.valueString = simpletype.Union.Name
+			res.ids = fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, simpletype.Union))
+		}
+	case "Order":
+		res.valueString = fmt.Sprintf("%d", simpletype.Order)
+		res.valueInt = simpletype.Order
+		res.GongFieldValueType = GongFieldValueTypeInt
+	case "Depth":
+		res.valueString = fmt.Sprintf("%d", simpletype.Depth)
+		res.valueInt = simpletype.Depth
+		res.GongFieldValueType = GongFieldValueTypeInt
+	}
+	return
+}
+
+func (totaldigit *TotalDigit) GongGetFieldValue(fieldName string, stage *Stage) (res GongFieldValue) {
+	switch fieldName {
+	// string value of fields
+	case "Name":
+		res.valueString = totaldigit.Name
+	case "Annotation":
+		res.GongFieldValueType = GongFieldValueTypePointer
+		if totaldigit.Annotation != nil {
+			res.valueString = totaldigit.Annotation.Name
+			res.ids = fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, totaldigit.Annotation))
+		}
+	case "Value":
+		res.valueString = totaldigit.Value
+	}
+	return
+}
+
+func (union *Union) GongGetFieldValue(fieldName string, stage *Stage) (res GongFieldValue) {
+	switch fieldName {
+	// string value of fields
+	case "Name":
+		res.valueString = union.Name
+	case "Annotation":
+		res.GongFieldValueType = GongFieldValueTypePointer
+		if union.Annotation != nil {
+			res.valueString = union.Annotation.Name
+			res.ids = fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, union.Annotation))
+		}
+	case "MemberTypes":
+		res.valueString = union.MemberTypes
+	}
+	return
+}
+
+func (whitespace *WhiteSpace) GongGetFieldValue(fieldName string, stage *Stage) (res GongFieldValue) {
+	switch fieldName {
+	// string value of fields
+	case "Name":
+		res.valueString = whitespace.Name
+	case "Annotation":
+		res.GongFieldValueType = GongFieldValueTypePointer
+		if whitespace.Annotation != nil {
+			res.valueString = whitespace.Annotation.Name
+			res.ids = fmt.Sprintf("%d", GetOrderPointerGongstruct(stage, whitespace.Annotation))
+		}
+	case "Value":
+		res.valueString = whitespace.Value
+	}
+	return
+}
+
+func GetFieldStringValueFromPointer(instance GongstructIF, fieldName string, stage *Stage) (res GongFieldValue) {
+	res = instance.GongGetFieldValue(fieldName, stage)
+	return
+}
+
+// insertion point for generic set gongstruct field value
+func (all *All) GongSetFieldValue(fieldName string, value GongFieldValue, stage *Stage) error {
+	switch fieldName {
+	// insertion point for per field code
+	case "Name":
+		all.Name = value.GetValueString()
+	case "Annotation":
+		var id int
+		if _, err := fmt.Sscanf(value.ids, "%d", &id); err == nil {
+			all.Annotation = nil
+			for __instance__ := range stage.Annotations {
+				if stage.AnnotationMap_Staged_Order[__instance__] == uint(id) {
+					all.Annotation = __instance__
+					break
+				}
+			}
+		}
+	case "OuterElementName":
+		all.OuterElementName = value.GetValueString()
+	case "Sequences":
+		all.Sequences = make([]*Sequence, 0)
+		ids := strings.Split(value.ids, ";")
+		for _, idStr := range ids {
+			var id int
+			if _, err := fmt.Sscanf(idStr, "%d", &id); err == nil {
+				for __instance__ := range stage.Sequences {
+					if stage.SequenceMap_Staged_Order[__instance__] == uint(id) {
+						all.Sequences = append(all.Sequences, __instance__)
+						break
+					}
+				}
+			}
+		}
+	case "Alls":
+		all.Alls = make([]*All, 0)
+		ids := strings.Split(value.ids, ";")
+		for _, idStr := range ids {
+			var id int
+			if _, err := fmt.Sscanf(idStr, "%d", &id); err == nil {
+				for __instance__ := range stage.Alls {
+					if stage.AllMap_Staged_Order[__instance__] == uint(id) {
+						all.Alls = append(all.Alls, __instance__)
+						break
+					}
+				}
+			}
+		}
+	case "Choices":
+		all.Choices = make([]*Choice, 0)
+		ids := strings.Split(value.ids, ";")
+		for _, idStr := range ids {
+			var id int
+			if _, err := fmt.Sscanf(idStr, "%d", &id); err == nil {
+				for __instance__ := range stage.Choices {
+					if stage.ChoiceMap_Staged_Order[__instance__] == uint(id) {
+						all.Choices = append(all.Choices, __instance__)
+						break
+					}
+				}
+			}
+		}
+	case "Groups":
+		all.Groups = make([]*Group, 0)
+		ids := strings.Split(value.ids, ";")
+		for _, idStr := range ids {
+			var id int
+			if _, err := fmt.Sscanf(idStr, "%d", &id); err == nil {
+				for __instance__ := range stage.Groups {
+					if stage.GroupMap_Staged_Order[__instance__] == uint(id) {
+						all.Groups = append(all.Groups, __instance__)
+						break
+					}
+				}
+			}
+		}
+	case "Elements":
+		all.Elements = make([]*Element, 0)
+		ids := strings.Split(value.ids, ";")
+		for _, idStr := range ids {
+			var id int
+			if _, err := fmt.Sscanf(idStr, "%d", &id); err == nil {
+				for __instance__ := range stage.Elements {
+					if stage.ElementMap_Staged_Order[__instance__] == uint(id) {
+						all.Elements = append(all.Elements, __instance__)
+						break
+					}
+				}
+			}
+		}
+	case "Order":
+		all.Order = int(value.GetValueInt())
+	case "Depth":
+		all.Depth = int(value.GetValueInt())
+	case "MinOccurs":
+		all.MinOccurs = value.GetValueString()
+	case "MaxOccurs":
+		all.MaxOccurs = value.GetValueString()
+	default:
+		return fmt.Errorf("unknown field %s", fieldName)
+	}
+	return nil
+}
+
+func (annotation *Annotation) GongSetFieldValue(fieldName string, value GongFieldValue, stage *Stage) error {
+	switch fieldName {
+	// insertion point for per field code
+	case "Name":
+		annotation.Name = value.GetValueString()
+	case "Documentations":
+		annotation.Documentations = make([]*Documentation, 0)
+		ids := strings.Split(value.ids, ";")
+		for _, idStr := range ids {
+			var id int
+			if _, err := fmt.Sscanf(idStr, "%d", &id); err == nil {
+				for __instance__ := range stage.Documentations {
+					if stage.DocumentationMap_Staged_Order[__instance__] == uint(id) {
+						annotation.Documentations = append(annotation.Documentations, __instance__)
+						break
+					}
+				}
+			}
+		}
+	default:
+		return fmt.Errorf("unknown field %s", fieldName)
+	}
+	return nil
+}
+
+func (attribute *Attribute) GongSetFieldValue(fieldName string, value GongFieldValue, stage *Stage) error {
+	switch fieldName {
+	// insertion point for per field code
+	case "Name":
+		attribute.Name = value.GetValueString()
+	case "NameXSD":
+		attribute.NameXSD = value.GetValueString()
+	case "Type":
+		attribute.Type = value.GetValueString()
+	case "Annotation":
+		var id int
+		if _, err := fmt.Sscanf(value.ids, "%d", &id); err == nil {
+			attribute.Annotation = nil
+			for __instance__ := range stage.Annotations {
+				if stage.AnnotationMap_Staged_Order[__instance__] == uint(id) {
+					attribute.Annotation = __instance__
+					break
+				}
+			}
+		}
+	case "HasNameConflict":
+		attribute.HasNameConflict = value.GetValueBool()
+	case "GoIdentifier":
+		attribute.GoIdentifier = value.GetValueString()
+	case "Default":
+		attribute.Default = value.GetValueString()
+	case "Use":
+		attribute.Use = value.GetValueString()
+	case "Form":
+		attribute.Form = value.GetValueString()
+	case "Fixed":
+		attribute.Fixed = value.GetValueString()
+	case "Ref":
+		attribute.Ref = value.GetValueString()
+	case "TargetNamespace":
+		attribute.TargetNamespace = value.GetValueString()
+	case "SimpleType":
+		attribute.SimpleType = value.GetValueString()
+	case "IDXSD":
+		attribute.IDXSD = value.GetValueString()
+	default:
+		return fmt.Errorf("unknown field %s", fieldName)
+	}
+	return nil
+}
+
+func (attributegroup *AttributeGroup) GongSetFieldValue(fieldName string, value GongFieldValue, stage *Stage) error {
+	switch fieldName {
+	// insertion point for per field code
+	case "Name":
+		attributegroup.Name = value.GetValueString()
+	case "NameXSD":
+		attributegroup.NameXSD = value.GetValueString()
+	case "Annotation":
+		var id int
+		if _, err := fmt.Sscanf(value.ids, "%d", &id); err == nil {
+			attributegroup.Annotation = nil
+			for __instance__ := range stage.Annotations {
+				if stage.AnnotationMap_Staged_Order[__instance__] == uint(id) {
+					attributegroup.Annotation = __instance__
+					break
+				}
+			}
+		}
+	case "HasNameConflict":
+		attributegroup.HasNameConflict = value.GetValueBool()
+	case "GoIdentifier":
+		attributegroup.GoIdentifier = value.GetValueString()
+	case "AttributeGroups":
+		attributegroup.AttributeGroups = make([]*AttributeGroup, 0)
+		ids := strings.Split(value.ids, ";")
+		for _, idStr := range ids {
+			var id int
+			if _, err := fmt.Sscanf(idStr, "%d", &id); err == nil {
+				for __instance__ := range stage.AttributeGroups {
+					if stage.AttributeGroupMap_Staged_Order[__instance__] == uint(id) {
+						attributegroup.AttributeGroups = append(attributegroup.AttributeGroups, __instance__)
+						break
+					}
+				}
+			}
+		}
+	case "Ref":
+		attributegroup.Ref = value.GetValueString()
+	case "Attributes":
+		attributegroup.Attributes = make([]*Attribute, 0)
+		ids := strings.Split(value.ids, ";")
+		for _, idStr := range ids {
+			var id int
+			if _, err := fmt.Sscanf(idStr, "%d", &id); err == nil {
+				for __instance__ := range stage.Attributes {
+					if stage.AttributeMap_Staged_Order[__instance__] == uint(id) {
+						attributegroup.Attributes = append(attributegroup.Attributes, __instance__)
+						break
+					}
+				}
+			}
+		}
+	case "Order":
+		attributegroup.Order = int(value.GetValueInt())
+	case "Depth":
+		attributegroup.Depth = int(value.GetValueInt())
+	default:
+		return fmt.Errorf("unknown field %s", fieldName)
+	}
+	return nil
+}
+
+func (choice *Choice) GongSetFieldValue(fieldName string, value GongFieldValue, stage *Stage) error {
+	switch fieldName {
+	// insertion point for per field code
+	case "Name":
+		choice.Name = value.GetValueString()
+	case "Annotation":
+		var id int
+		if _, err := fmt.Sscanf(value.ids, "%d", &id); err == nil {
+			choice.Annotation = nil
+			for __instance__ := range stage.Annotations {
+				if stage.AnnotationMap_Staged_Order[__instance__] == uint(id) {
+					choice.Annotation = __instance__
+					break
+				}
+			}
+		}
+	case "OuterElementName":
+		choice.OuterElementName = value.GetValueString()
+	case "Sequences":
+		choice.Sequences = make([]*Sequence, 0)
+		ids := strings.Split(value.ids, ";")
+		for _, idStr := range ids {
+			var id int
+			if _, err := fmt.Sscanf(idStr, "%d", &id); err == nil {
+				for __instance__ := range stage.Sequences {
+					if stage.SequenceMap_Staged_Order[__instance__] == uint(id) {
+						choice.Sequences = append(choice.Sequences, __instance__)
+						break
+					}
+				}
+			}
+		}
+	case "Alls":
+		choice.Alls = make([]*All, 0)
+		ids := strings.Split(value.ids, ";")
+		for _, idStr := range ids {
+			var id int
+			if _, err := fmt.Sscanf(idStr, "%d", &id); err == nil {
+				for __instance__ := range stage.Alls {
+					if stage.AllMap_Staged_Order[__instance__] == uint(id) {
+						choice.Alls = append(choice.Alls, __instance__)
+						break
+					}
+				}
+			}
+		}
+	case "Choices":
+		choice.Choices = make([]*Choice, 0)
+		ids := strings.Split(value.ids, ";")
+		for _, idStr := range ids {
+			var id int
+			if _, err := fmt.Sscanf(idStr, "%d", &id); err == nil {
+				for __instance__ := range stage.Choices {
+					if stage.ChoiceMap_Staged_Order[__instance__] == uint(id) {
+						choice.Choices = append(choice.Choices, __instance__)
+						break
+					}
+				}
+			}
+		}
+	case "Groups":
+		choice.Groups = make([]*Group, 0)
+		ids := strings.Split(value.ids, ";")
+		for _, idStr := range ids {
+			var id int
+			if _, err := fmt.Sscanf(idStr, "%d", &id); err == nil {
+				for __instance__ := range stage.Groups {
+					if stage.GroupMap_Staged_Order[__instance__] == uint(id) {
+						choice.Groups = append(choice.Groups, __instance__)
+						break
+					}
+				}
+			}
+		}
+	case "Elements":
+		choice.Elements = make([]*Element, 0)
+		ids := strings.Split(value.ids, ";")
+		for _, idStr := range ids {
+			var id int
+			if _, err := fmt.Sscanf(idStr, "%d", &id); err == nil {
+				for __instance__ := range stage.Elements {
+					if stage.ElementMap_Staged_Order[__instance__] == uint(id) {
+						choice.Elements = append(choice.Elements, __instance__)
+						break
+					}
+				}
+			}
+		}
+	case "Order":
+		choice.Order = int(value.GetValueInt())
+	case "Depth":
+		choice.Depth = int(value.GetValueInt())
+	case "MinOccurs":
+		choice.MinOccurs = value.GetValueString()
+	case "MaxOccurs":
+		choice.MaxOccurs = value.GetValueString()
+	case "IsDuplicatedInXSD":
+		choice.IsDuplicatedInXSD = value.GetValueBool()
+	default:
+		return fmt.Errorf("unknown field %s", fieldName)
+	}
+	return nil
+}
+
+func (complexcontent *ComplexContent) GongSetFieldValue(fieldName string, value GongFieldValue, stage *Stage) error {
+	switch fieldName {
+	// insertion point for per field code
+	case "Name":
+		complexcontent.Name = value.GetValueString()
+	default:
+		return fmt.Errorf("unknown field %s", fieldName)
+	}
+	return nil
+}
+
+func (complextype *ComplexType) GongSetFieldValue(fieldName string, value GongFieldValue, stage *Stage) error {
+	switch fieldName {
+	// insertion point for per field code
+	case "Name":
+		complextype.Name = value.GetValueString()
+	case "HasNameConflict":
+		complextype.HasNameConflict = value.GetValueBool()
+	case "GoIdentifier":
+		complextype.GoIdentifier = value.GetValueString()
+	case "IsAnonymous":
+		complextype.IsAnonymous = value.GetValueBool()
+	case "OuterElement":
+		var id int
+		if _, err := fmt.Sscanf(value.ids, "%d", &id); err == nil {
+			complextype.OuterElement = nil
+			for __instance__ := range stage.Elements {
+				if stage.ElementMap_Staged_Order[__instance__] == uint(id) {
+					complextype.OuterElement = __instance__
+					break
+				}
+			}
+		}
+	case "Annotation":
+		var id int
+		if _, err := fmt.Sscanf(value.ids, "%d", &id); err == nil {
+			complextype.Annotation = nil
+			for __instance__ := range stage.Annotations {
+				if stage.AnnotationMap_Staged_Order[__instance__] == uint(id) {
+					complextype.Annotation = __instance__
+					break
+				}
+			}
+		}
+	case "NameXSD":
+		complextype.NameXSD = value.GetValueString()
+	case "OuterElementName":
+		complextype.OuterElementName = value.GetValueString()
+	case "Sequences":
+		complextype.Sequences = make([]*Sequence, 0)
+		ids := strings.Split(value.ids, ";")
+		for _, idStr := range ids {
+			var id int
+			if _, err := fmt.Sscanf(idStr, "%d", &id); err == nil {
+				for __instance__ := range stage.Sequences {
+					if stage.SequenceMap_Staged_Order[__instance__] == uint(id) {
+						complextype.Sequences = append(complextype.Sequences, __instance__)
+						break
+					}
+				}
+			}
+		}
+	case "Alls":
+		complextype.Alls = make([]*All, 0)
+		ids := strings.Split(value.ids, ";")
+		for _, idStr := range ids {
+			var id int
+			if _, err := fmt.Sscanf(idStr, "%d", &id); err == nil {
+				for __instance__ := range stage.Alls {
+					if stage.AllMap_Staged_Order[__instance__] == uint(id) {
+						complextype.Alls = append(complextype.Alls, __instance__)
+						break
+					}
+				}
+			}
+		}
+	case "Choices":
+		complextype.Choices = make([]*Choice, 0)
+		ids := strings.Split(value.ids, ";")
+		for _, idStr := range ids {
+			var id int
+			if _, err := fmt.Sscanf(idStr, "%d", &id); err == nil {
+				for __instance__ := range stage.Choices {
+					if stage.ChoiceMap_Staged_Order[__instance__] == uint(id) {
+						complextype.Choices = append(complextype.Choices, __instance__)
+						break
+					}
+				}
+			}
+		}
+	case "Groups":
+		complextype.Groups = make([]*Group, 0)
+		ids := strings.Split(value.ids, ";")
+		for _, idStr := range ids {
+			var id int
+			if _, err := fmt.Sscanf(idStr, "%d", &id); err == nil {
+				for __instance__ := range stage.Groups {
+					if stage.GroupMap_Staged_Order[__instance__] == uint(id) {
+						complextype.Groups = append(complextype.Groups, __instance__)
+						break
+					}
+				}
+			}
+		}
+	case "Elements":
+		complextype.Elements = make([]*Element, 0)
+		ids := strings.Split(value.ids, ";")
+		for _, idStr := range ids {
+			var id int
+			if _, err := fmt.Sscanf(idStr, "%d", &id); err == nil {
+				for __instance__ := range stage.Elements {
+					if stage.ElementMap_Staged_Order[__instance__] == uint(id) {
+						complextype.Elements = append(complextype.Elements, __instance__)
+						break
+					}
+				}
+			}
+		}
+	case "Order":
+		complextype.Order = int(value.GetValueInt())
+	case "Depth":
+		complextype.Depth = int(value.GetValueInt())
+	case "MinOccurs":
+		complextype.MinOccurs = value.GetValueString()
+	case "MaxOccurs":
+		complextype.MaxOccurs = value.GetValueString()
+	case "Extension":
+		var id int
+		if _, err := fmt.Sscanf(value.ids, "%d", &id); err == nil {
+			complextype.Extension = nil
+			for __instance__ := range stage.Extensions {
+				if stage.ExtensionMap_Staged_Order[__instance__] == uint(id) {
+					complextype.Extension = __instance__
+					break
+				}
+			}
+		}
+	case "SimpleContent":
+		var id int
+		if _, err := fmt.Sscanf(value.ids, "%d", &id); err == nil {
+			complextype.SimpleContent = nil
+			for __instance__ := range stage.SimpleContents {
+				if stage.SimpleContentMap_Staged_Order[__instance__] == uint(id) {
+					complextype.SimpleContent = __instance__
+					break
+				}
+			}
+		}
+	case "ComplexContent":
+		var id int
+		if _, err := fmt.Sscanf(value.ids, "%d", &id); err == nil {
+			complextype.ComplexContent = nil
+			for __instance__ := range stage.ComplexContents {
+				if stage.ComplexContentMap_Staged_Order[__instance__] == uint(id) {
+					complextype.ComplexContent = __instance__
+					break
+				}
+			}
+		}
+	case "Attributes":
+		complextype.Attributes = make([]*Attribute, 0)
+		ids := strings.Split(value.ids, ";")
+		for _, idStr := range ids {
+			var id int
+			if _, err := fmt.Sscanf(idStr, "%d", &id); err == nil {
+				for __instance__ := range stage.Attributes {
+					if stage.AttributeMap_Staged_Order[__instance__] == uint(id) {
+						complextype.Attributes = append(complextype.Attributes, __instance__)
+						break
+					}
+				}
+			}
+		}
+	case "AttributeGroups":
+		complextype.AttributeGroups = make([]*AttributeGroup, 0)
+		ids := strings.Split(value.ids, ";")
+		for _, idStr := range ids {
+			var id int
+			if _, err := fmt.Sscanf(idStr, "%d", &id); err == nil {
+				for __instance__ := range stage.AttributeGroups {
+					if stage.AttributeGroupMap_Staged_Order[__instance__] == uint(id) {
+						complextype.AttributeGroups = append(complextype.AttributeGroups, __instance__)
+						break
+					}
+				}
+			}
+		}
+	case "IsDuplicatedInXSD":
+		complextype.IsDuplicatedInXSD = value.GetValueBool()
+	default:
+		return fmt.Errorf("unknown field %s", fieldName)
+	}
+	return nil
+}
+
+func (documentation *Documentation) GongSetFieldValue(fieldName string, value GongFieldValue, stage *Stage) error {
+	switch fieldName {
+	// insertion point for per field code
+	case "Name":
+		documentation.Name = value.GetValueString()
+	case "Text":
+		documentation.Text = value.GetValueString()
+	case "Source":
+		documentation.Source = value.GetValueString()
+	case "Lang":
+		documentation.Lang = value.GetValueString()
+	default:
+		return fmt.Errorf("unknown field %s", fieldName)
+	}
+	return nil
+}
+
+func (element *Element) GongSetFieldValue(fieldName string, value GongFieldValue, stage *Stage) error {
+	switch fieldName {
+	// insertion point for per field code
+	case "Name":
+		element.Name = value.GetValueString()
+	case "Order":
+		element.Order = int(value.GetValueInt())
+	case "Depth":
+		element.Depth = int(value.GetValueInt())
+	case "HasNameConflict":
+		element.HasNameConflict = value.GetValueBool()
+	case "GoIdentifier":
+		element.GoIdentifier = value.GetValueString()
+	case "Annotation":
+		var id int
+		if _, err := fmt.Sscanf(value.ids, "%d", &id); err == nil {
+			element.Annotation = nil
+			for __instance__ := range stage.Annotations {
+				if stage.AnnotationMap_Staged_Order[__instance__] == uint(id) {
+					element.Annotation = __instance__
+					break
+				}
+			}
+		}
+	case "NameXSD":
+		element.NameXSD = value.GetValueString()
+	case "Type":
+		element.Type = value.GetValueString()
+	case "MinOccurs":
+		element.MinOccurs = value.GetValueString()
+	case "MaxOccurs":
+		element.MaxOccurs = value.GetValueString()
+	case "Default":
+		element.Default = value.GetValueString()
+	case "Fixed":
+		element.Fixed = value.GetValueString()
+	case "Nillable":
+		element.Nillable = value.GetValueString()
+	case "Ref":
+		element.Ref = value.GetValueString()
+	case "Abstract":
+		element.Abstract = value.GetValueString()
+	case "Form":
+		element.Form = value.GetValueString()
+	case "Block":
+		element.Block = value.GetValueString()
+	case "Final":
+		element.Final = value.GetValueString()
+	case "SimpleType":
+		var id int
+		if _, err := fmt.Sscanf(value.ids, "%d", &id); err == nil {
+			element.SimpleType = nil
+			for __instance__ := range stage.SimpleTypes {
+				if stage.SimpleTypeMap_Staged_Order[__instance__] == uint(id) {
+					element.SimpleType = __instance__
+					break
+				}
+			}
+		}
+	case "ComplexType":
+		var id int
+		if _, err := fmt.Sscanf(value.ids, "%d", &id); err == nil {
+			element.ComplexType = nil
+			for __instance__ := range stage.ComplexTypes {
+				if stage.ComplexTypeMap_Staged_Order[__instance__] == uint(id) {
+					element.ComplexType = __instance__
+					break
+				}
+			}
+		}
+	case "Groups":
+		element.Groups = make([]*Group, 0)
+		ids := strings.Split(value.ids, ";")
+		for _, idStr := range ids {
+			var id int
+			if _, err := fmt.Sscanf(idStr, "%d", &id); err == nil {
+				for __instance__ := range stage.Groups {
+					if stage.GroupMap_Staged_Order[__instance__] == uint(id) {
+						element.Groups = append(element.Groups, __instance__)
+						break
+					}
+				}
+			}
+		}
+	case "IsDuplicatedInXSD":
+		element.IsDuplicatedInXSD = value.GetValueBool()
+	default:
+		return fmt.Errorf("unknown field %s", fieldName)
+	}
+	return nil
+}
+
+func (enumeration *Enumeration) GongSetFieldValue(fieldName string, value GongFieldValue, stage *Stage) error {
+	switch fieldName {
+	// insertion point for per field code
+	case "Name":
+		enumeration.Name = value.GetValueString()
+	case "Annotation":
+		var id int
+		if _, err := fmt.Sscanf(value.ids, "%d", &id); err == nil {
+			enumeration.Annotation = nil
+			for __instance__ := range stage.Annotations {
+				if stage.AnnotationMap_Staged_Order[__instance__] == uint(id) {
+					enumeration.Annotation = __instance__
+					break
+				}
+			}
+		}
+	case "Value":
+		enumeration.Value = value.GetValueString()
+	default:
+		return fmt.Errorf("unknown field %s", fieldName)
+	}
+	return nil
+}
+
+func (extension *Extension) GongSetFieldValue(fieldName string, value GongFieldValue, stage *Stage) error {
+	switch fieldName {
+	// insertion point for per field code
+	case "Name":
+		extension.Name = value.GetValueString()
+	case "OuterElementName":
+		extension.OuterElementName = value.GetValueString()
+	case "Sequences":
+		extension.Sequences = make([]*Sequence, 0)
+		ids := strings.Split(value.ids, ";")
+		for _, idStr := range ids {
+			var id int
+			if _, err := fmt.Sscanf(idStr, "%d", &id); err == nil {
+				for __instance__ := range stage.Sequences {
+					if stage.SequenceMap_Staged_Order[__instance__] == uint(id) {
+						extension.Sequences = append(extension.Sequences, __instance__)
+						break
+					}
+				}
+			}
+		}
+	case "Alls":
+		extension.Alls = make([]*All, 0)
+		ids := strings.Split(value.ids, ";")
+		for _, idStr := range ids {
+			var id int
+			if _, err := fmt.Sscanf(idStr, "%d", &id); err == nil {
+				for __instance__ := range stage.Alls {
+					if stage.AllMap_Staged_Order[__instance__] == uint(id) {
+						extension.Alls = append(extension.Alls, __instance__)
+						break
+					}
+				}
+			}
+		}
+	case "Choices":
+		extension.Choices = make([]*Choice, 0)
+		ids := strings.Split(value.ids, ";")
+		for _, idStr := range ids {
+			var id int
+			if _, err := fmt.Sscanf(idStr, "%d", &id); err == nil {
+				for __instance__ := range stage.Choices {
+					if stage.ChoiceMap_Staged_Order[__instance__] == uint(id) {
+						extension.Choices = append(extension.Choices, __instance__)
+						break
+					}
+				}
+			}
+		}
+	case "Groups":
+		extension.Groups = make([]*Group, 0)
+		ids := strings.Split(value.ids, ";")
+		for _, idStr := range ids {
+			var id int
+			if _, err := fmt.Sscanf(idStr, "%d", &id); err == nil {
+				for __instance__ := range stage.Groups {
+					if stage.GroupMap_Staged_Order[__instance__] == uint(id) {
+						extension.Groups = append(extension.Groups, __instance__)
+						break
+					}
+				}
+			}
+		}
+	case "Elements":
+		extension.Elements = make([]*Element, 0)
+		ids := strings.Split(value.ids, ";")
+		for _, idStr := range ids {
+			var id int
+			if _, err := fmt.Sscanf(idStr, "%d", &id); err == nil {
+				for __instance__ := range stage.Elements {
+					if stage.ElementMap_Staged_Order[__instance__] == uint(id) {
+						extension.Elements = append(extension.Elements, __instance__)
+						break
+					}
+				}
+			}
+		}
+	case "Order":
+		extension.Order = int(value.GetValueInt())
+	case "Depth":
+		extension.Depth = int(value.GetValueInt())
+	case "MinOccurs":
+		extension.MinOccurs = value.GetValueString()
+	case "MaxOccurs":
+		extension.MaxOccurs = value.GetValueString()
+	case "Base":
+		extension.Base = value.GetValueString()
+	case "Ref":
+		extension.Ref = value.GetValueString()
+	case "Attributes":
+		extension.Attributes = make([]*Attribute, 0)
+		ids := strings.Split(value.ids, ";")
+		for _, idStr := range ids {
+			var id int
+			if _, err := fmt.Sscanf(idStr, "%d", &id); err == nil {
+				for __instance__ := range stage.Attributes {
+					if stage.AttributeMap_Staged_Order[__instance__] == uint(id) {
+						extension.Attributes = append(extension.Attributes, __instance__)
+						break
+					}
+				}
+			}
+		}
+	case "AttributeGroups":
+		extension.AttributeGroups = make([]*AttributeGroup, 0)
+		ids := strings.Split(value.ids, ";")
+		for _, idStr := range ids {
+			var id int
+			if _, err := fmt.Sscanf(idStr, "%d", &id); err == nil {
+				for __instance__ := range stage.AttributeGroups {
+					if stage.AttributeGroupMap_Staged_Order[__instance__] == uint(id) {
+						extension.AttributeGroups = append(extension.AttributeGroups, __instance__)
+						break
+					}
+				}
+			}
+		}
+	default:
+		return fmt.Errorf("unknown field %s", fieldName)
+	}
+	return nil
+}
+
+func (group *Group) GongSetFieldValue(fieldName string, value GongFieldValue, stage *Stage) error {
+	switch fieldName {
+	// insertion point for per field code
+	case "Name":
+		group.Name = value.GetValueString()
+	case "Annotation":
+		var id int
+		if _, err := fmt.Sscanf(value.ids, "%d", &id); err == nil {
+			group.Annotation = nil
+			for __instance__ := range stage.Annotations {
+				if stage.AnnotationMap_Staged_Order[__instance__] == uint(id) {
+					group.Annotation = __instance__
+					break
+				}
+			}
+		}
+	case "NameXSD":
+		group.NameXSD = value.GetValueString()
+	case "Ref":
+		group.Ref = value.GetValueString()
+	case "IsAnonymous":
+		group.IsAnonymous = value.GetValueBool()
+	case "OuterElement":
+		var id int
+		if _, err := fmt.Sscanf(value.ids, "%d", &id); err == nil {
+			group.OuterElement = nil
+			for __instance__ := range stage.Elements {
+				if stage.ElementMap_Staged_Order[__instance__] == uint(id) {
+					group.OuterElement = __instance__
+					break
+				}
+			}
+		}
+	case "HasNameConflict":
+		group.HasNameConflict = value.GetValueBool()
+	case "GoIdentifier":
+		group.GoIdentifier = value.GetValueString()
+	case "OuterElementName":
+		group.OuterElementName = value.GetValueString()
+	case "Sequences":
+		group.Sequences = make([]*Sequence, 0)
+		ids := strings.Split(value.ids, ";")
+		for _, idStr := range ids {
+			var id int
+			if _, err := fmt.Sscanf(idStr, "%d", &id); err == nil {
+				for __instance__ := range stage.Sequences {
+					if stage.SequenceMap_Staged_Order[__instance__] == uint(id) {
+						group.Sequences = append(group.Sequences, __instance__)
+						break
+					}
+				}
+			}
+		}
+	case "Alls":
+		group.Alls = make([]*All, 0)
+		ids := strings.Split(value.ids, ";")
+		for _, idStr := range ids {
+			var id int
+			if _, err := fmt.Sscanf(idStr, "%d", &id); err == nil {
+				for __instance__ := range stage.Alls {
+					if stage.AllMap_Staged_Order[__instance__] == uint(id) {
+						group.Alls = append(group.Alls, __instance__)
+						break
+					}
+				}
+			}
+		}
+	case "Choices":
+		group.Choices = make([]*Choice, 0)
+		ids := strings.Split(value.ids, ";")
+		for _, idStr := range ids {
+			var id int
+			if _, err := fmt.Sscanf(idStr, "%d", &id); err == nil {
+				for __instance__ := range stage.Choices {
+					if stage.ChoiceMap_Staged_Order[__instance__] == uint(id) {
+						group.Choices = append(group.Choices, __instance__)
+						break
+					}
+				}
+			}
+		}
+	case "Groups":
+		group.Groups = make([]*Group, 0)
+		ids := strings.Split(value.ids, ";")
+		for _, idStr := range ids {
+			var id int
+			if _, err := fmt.Sscanf(idStr, "%d", &id); err == nil {
+				for __instance__ := range stage.Groups {
+					if stage.GroupMap_Staged_Order[__instance__] == uint(id) {
+						group.Groups = append(group.Groups, __instance__)
+						break
+					}
+				}
+			}
+		}
+	case "Elements":
+		group.Elements = make([]*Element, 0)
+		ids := strings.Split(value.ids, ";")
+		for _, idStr := range ids {
+			var id int
+			if _, err := fmt.Sscanf(idStr, "%d", &id); err == nil {
+				for __instance__ := range stage.Elements {
+					if stage.ElementMap_Staged_Order[__instance__] == uint(id) {
+						group.Elements = append(group.Elements, __instance__)
+						break
+					}
+				}
+			}
+		}
+	case "Order":
+		group.Order = int(value.GetValueInt())
+	case "Depth":
+		group.Depth = int(value.GetValueInt())
+	case "MinOccurs":
+		group.MinOccurs = value.GetValueString()
+	case "MaxOccurs":
+		group.MaxOccurs = value.GetValueString()
+	default:
+		return fmt.Errorf("unknown field %s", fieldName)
+	}
+	return nil
+}
+
+func (length *Length) GongSetFieldValue(fieldName string, value GongFieldValue, stage *Stage) error {
+	switch fieldName {
+	// insertion point for per field code
+	case "Name":
+		length.Name = value.GetValueString()
+	case "Annotation":
+		var id int
+		if _, err := fmt.Sscanf(value.ids, "%d", &id); err == nil {
+			length.Annotation = nil
+			for __instance__ := range stage.Annotations {
+				if stage.AnnotationMap_Staged_Order[__instance__] == uint(id) {
+					length.Annotation = __instance__
+					break
+				}
+			}
+		}
+	case "Value":
+		length.Value = value.GetValueString()
+	default:
+		return fmt.Errorf("unknown field %s", fieldName)
+	}
+	return nil
+}
+
+func (maxinclusive *MaxInclusive) GongSetFieldValue(fieldName string, value GongFieldValue, stage *Stage) error {
+	switch fieldName {
+	// insertion point for per field code
+	case "Name":
+		maxinclusive.Name = value.GetValueString()
+	case "Annotation":
+		var id int
+		if _, err := fmt.Sscanf(value.ids, "%d", &id); err == nil {
+			maxinclusive.Annotation = nil
+			for __instance__ := range stage.Annotations {
+				if stage.AnnotationMap_Staged_Order[__instance__] == uint(id) {
+					maxinclusive.Annotation = __instance__
+					break
+				}
+			}
+		}
+	case "Value":
+		maxinclusive.Value = value.GetValueString()
+	default:
+		return fmt.Errorf("unknown field %s", fieldName)
+	}
+	return nil
+}
+
+func (maxlength *MaxLength) GongSetFieldValue(fieldName string, value GongFieldValue, stage *Stage) error {
+	switch fieldName {
+	// insertion point for per field code
+	case "Name":
+		maxlength.Name = value.GetValueString()
+	case "Annotation":
+		var id int
+		if _, err := fmt.Sscanf(value.ids, "%d", &id); err == nil {
+			maxlength.Annotation = nil
+			for __instance__ := range stage.Annotations {
+				if stage.AnnotationMap_Staged_Order[__instance__] == uint(id) {
+					maxlength.Annotation = __instance__
+					break
+				}
+			}
+		}
+	case "Value":
+		maxlength.Value = value.GetValueString()
+	default:
+		return fmt.Errorf("unknown field %s", fieldName)
+	}
+	return nil
+}
+
+func (mininclusive *MinInclusive) GongSetFieldValue(fieldName string, value GongFieldValue, stage *Stage) error {
+	switch fieldName {
+	// insertion point for per field code
+	case "Name":
+		mininclusive.Name = value.GetValueString()
+	case "Annotation":
+		var id int
+		if _, err := fmt.Sscanf(value.ids, "%d", &id); err == nil {
+			mininclusive.Annotation = nil
+			for __instance__ := range stage.Annotations {
+				if stage.AnnotationMap_Staged_Order[__instance__] == uint(id) {
+					mininclusive.Annotation = __instance__
+					break
+				}
+			}
+		}
+	case "Value":
+		mininclusive.Value = value.GetValueString()
+	default:
+		return fmt.Errorf("unknown field %s", fieldName)
+	}
+	return nil
+}
+
+func (minlength *MinLength) GongSetFieldValue(fieldName string, value GongFieldValue, stage *Stage) error {
+	switch fieldName {
+	// insertion point for per field code
+	case "Name":
+		minlength.Name = value.GetValueString()
+	case "Annotation":
+		var id int
+		if _, err := fmt.Sscanf(value.ids, "%d", &id); err == nil {
+			minlength.Annotation = nil
+			for __instance__ := range stage.Annotations {
+				if stage.AnnotationMap_Staged_Order[__instance__] == uint(id) {
+					minlength.Annotation = __instance__
+					break
+				}
+			}
+		}
+	case "Value":
+		minlength.Value = value.GetValueString()
+	default:
+		return fmt.Errorf("unknown field %s", fieldName)
+	}
+	return nil
+}
+
+func (pattern *Pattern) GongSetFieldValue(fieldName string, value GongFieldValue, stage *Stage) error {
+	switch fieldName {
+	// insertion point for per field code
+	case "Name":
+		pattern.Name = value.GetValueString()
+	case "Annotation":
+		var id int
+		if _, err := fmt.Sscanf(value.ids, "%d", &id); err == nil {
+			pattern.Annotation = nil
+			for __instance__ := range stage.Annotations {
+				if stage.AnnotationMap_Staged_Order[__instance__] == uint(id) {
+					pattern.Annotation = __instance__
+					break
+				}
+			}
+		}
+	case "Value":
+		pattern.Value = value.GetValueString()
+	default:
+		return fmt.Errorf("unknown field %s", fieldName)
+	}
+	return nil
+}
+
+func (restriction *Restriction) GongSetFieldValue(fieldName string, value GongFieldValue, stage *Stage) error {
+	switch fieldName {
+	// insertion point for per field code
+	case "Name":
+		restriction.Name = value.GetValueString()
+	case "Annotation":
+		var id int
+		if _, err := fmt.Sscanf(value.ids, "%d", &id); err == nil {
+			restriction.Annotation = nil
+			for __instance__ := range stage.Annotations {
+				if stage.AnnotationMap_Staged_Order[__instance__] == uint(id) {
+					restriction.Annotation = __instance__
+					break
+				}
+			}
+		}
+	case "Base":
+		restriction.Base = value.GetValueString()
+	case "Enumerations":
+		restriction.Enumerations = make([]*Enumeration, 0)
+		ids := strings.Split(value.ids, ";")
+		for _, idStr := range ids {
+			var id int
+			if _, err := fmt.Sscanf(idStr, "%d", &id); err == nil {
+				for __instance__ := range stage.Enumerations {
+					if stage.EnumerationMap_Staged_Order[__instance__] == uint(id) {
+						restriction.Enumerations = append(restriction.Enumerations, __instance__)
+						break
+					}
+				}
+			}
+		}
+	case "MinInclusive":
+		var id int
+		if _, err := fmt.Sscanf(value.ids, "%d", &id); err == nil {
+			restriction.MinInclusive = nil
+			for __instance__ := range stage.MinInclusives {
+				if stage.MinInclusiveMap_Staged_Order[__instance__] == uint(id) {
+					restriction.MinInclusive = __instance__
+					break
+				}
+			}
+		}
+	case "MaxInclusive":
+		var id int
+		if _, err := fmt.Sscanf(value.ids, "%d", &id); err == nil {
+			restriction.MaxInclusive = nil
+			for __instance__ := range stage.MaxInclusives {
+				if stage.MaxInclusiveMap_Staged_Order[__instance__] == uint(id) {
+					restriction.MaxInclusive = __instance__
+					break
+				}
+			}
+		}
+	case "Pattern":
+		var id int
+		if _, err := fmt.Sscanf(value.ids, "%d", &id); err == nil {
+			restriction.Pattern = nil
+			for __instance__ := range stage.Patterns {
+				if stage.PatternMap_Staged_Order[__instance__] == uint(id) {
+					restriction.Pattern = __instance__
+					break
+				}
+			}
+		}
+	case "WhiteSpace":
+		var id int
+		if _, err := fmt.Sscanf(value.ids, "%d", &id); err == nil {
+			restriction.WhiteSpace = nil
+			for __instance__ := range stage.WhiteSpaces {
+				if stage.WhiteSpaceMap_Staged_Order[__instance__] == uint(id) {
+					restriction.WhiteSpace = __instance__
+					break
+				}
+			}
+		}
+	case "MinLength":
+		var id int
+		if _, err := fmt.Sscanf(value.ids, "%d", &id); err == nil {
+			restriction.MinLength = nil
+			for __instance__ := range stage.MinLengths {
+				if stage.MinLengthMap_Staged_Order[__instance__] == uint(id) {
+					restriction.MinLength = __instance__
+					break
+				}
+			}
+		}
+	case "MaxLength":
+		var id int
+		if _, err := fmt.Sscanf(value.ids, "%d", &id); err == nil {
+			restriction.MaxLength = nil
+			for __instance__ := range stage.MaxLengths {
+				if stage.MaxLengthMap_Staged_Order[__instance__] == uint(id) {
+					restriction.MaxLength = __instance__
+					break
+				}
+			}
+		}
+	case "Length":
+		var id int
+		if _, err := fmt.Sscanf(value.ids, "%d", &id); err == nil {
+			restriction.Length = nil
+			for __instance__ := range stage.Lengths {
+				if stage.LengthMap_Staged_Order[__instance__] == uint(id) {
+					restriction.Length = __instance__
+					break
+				}
+			}
+		}
+	case "TotalDigit":
+		var id int
+		if _, err := fmt.Sscanf(value.ids, "%d", &id); err == nil {
+			restriction.TotalDigit = nil
+			for __instance__ := range stage.TotalDigits {
+				if stage.TotalDigitMap_Staged_Order[__instance__] == uint(id) {
+					restriction.TotalDigit = __instance__
+					break
+				}
+			}
+		}
+	default:
+		return fmt.Errorf("unknown field %s", fieldName)
+	}
+	return nil
+}
+
+func (schema *Schema) GongSetFieldValue(fieldName string, value GongFieldValue, stage *Stage) error {
+	switch fieldName {
+	// insertion point for per field code
+	case "Name":
+		schema.Name = value.GetValueString()
+	case "Xs":
+		schema.Xs = value.GetValueString()
+	case "Annotation":
+		var id int
+		if _, err := fmt.Sscanf(value.ids, "%d", &id); err == nil {
+			schema.Annotation = nil
+			for __instance__ := range stage.Annotations {
+				if stage.AnnotationMap_Staged_Order[__instance__] == uint(id) {
+					schema.Annotation = __instance__
+					break
+				}
+			}
+		}
+	case "Elements":
+		schema.Elements = make([]*Element, 0)
+		ids := strings.Split(value.ids, ";")
+		for _, idStr := range ids {
+			var id int
+			if _, err := fmt.Sscanf(idStr, "%d", &id); err == nil {
+				for __instance__ := range stage.Elements {
+					if stage.ElementMap_Staged_Order[__instance__] == uint(id) {
+						schema.Elements = append(schema.Elements, __instance__)
+						break
+					}
+				}
+			}
+		}
+	case "SimpleTypes":
+		schema.SimpleTypes = make([]*SimpleType, 0)
+		ids := strings.Split(value.ids, ";")
+		for _, idStr := range ids {
+			var id int
+			if _, err := fmt.Sscanf(idStr, "%d", &id); err == nil {
+				for __instance__ := range stage.SimpleTypes {
+					if stage.SimpleTypeMap_Staged_Order[__instance__] == uint(id) {
+						schema.SimpleTypes = append(schema.SimpleTypes, __instance__)
+						break
+					}
+				}
+			}
+		}
+	case "ComplexTypes":
+		schema.ComplexTypes = make([]*ComplexType, 0)
+		ids := strings.Split(value.ids, ";")
+		for _, idStr := range ids {
+			var id int
+			if _, err := fmt.Sscanf(idStr, "%d", &id); err == nil {
+				for __instance__ := range stage.ComplexTypes {
+					if stage.ComplexTypeMap_Staged_Order[__instance__] == uint(id) {
+						schema.ComplexTypes = append(schema.ComplexTypes, __instance__)
+						break
+					}
+				}
+			}
+		}
+	case "AttributeGroups":
+		schema.AttributeGroups = make([]*AttributeGroup, 0)
+		ids := strings.Split(value.ids, ";")
+		for _, idStr := range ids {
+			var id int
+			if _, err := fmt.Sscanf(idStr, "%d", &id); err == nil {
+				for __instance__ := range stage.AttributeGroups {
+					if stage.AttributeGroupMap_Staged_Order[__instance__] == uint(id) {
+						schema.AttributeGroups = append(schema.AttributeGroups, __instance__)
+						break
+					}
+				}
+			}
+		}
+	case "Groups":
+		schema.Groups = make([]*Group, 0)
+		ids := strings.Split(value.ids, ";")
+		for _, idStr := range ids {
+			var id int
+			if _, err := fmt.Sscanf(idStr, "%d", &id); err == nil {
+				for __instance__ := range stage.Groups {
+					if stage.GroupMap_Staged_Order[__instance__] == uint(id) {
+						schema.Groups = append(schema.Groups, __instance__)
+						break
+					}
+				}
+			}
+		}
+	case "Order":
+		schema.Order = int(value.GetValueInt())
+	case "Depth":
+		schema.Depth = int(value.GetValueInt())
+	default:
+		return fmt.Errorf("unknown field %s", fieldName)
+	}
+	return nil
+}
+
+func (sequence *Sequence) GongSetFieldValue(fieldName string, value GongFieldValue, stage *Stage) error {
+	switch fieldName {
+	// insertion point for per field code
+	case "Name":
+		sequence.Name = value.GetValueString()
+	case "Annotation":
+		var id int
+		if _, err := fmt.Sscanf(value.ids, "%d", &id); err == nil {
+			sequence.Annotation = nil
+			for __instance__ := range stage.Annotations {
+				if stage.AnnotationMap_Staged_Order[__instance__] == uint(id) {
+					sequence.Annotation = __instance__
+					break
+				}
+			}
+		}
+	case "OuterElementName":
+		sequence.OuterElementName = value.GetValueString()
+	case "Sequences":
+		sequence.Sequences = make([]*Sequence, 0)
+		ids := strings.Split(value.ids, ";")
+		for _, idStr := range ids {
+			var id int
+			if _, err := fmt.Sscanf(idStr, "%d", &id); err == nil {
+				for __instance__ := range stage.Sequences {
+					if stage.SequenceMap_Staged_Order[__instance__] == uint(id) {
+						sequence.Sequences = append(sequence.Sequences, __instance__)
+						break
+					}
+				}
+			}
+		}
+	case "Alls":
+		sequence.Alls = make([]*All, 0)
+		ids := strings.Split(value.ids, ";")
+		for _, idStr := range ids {
+			var id int
+			if _, err := fmt.Sscanf(idStr, "%d", &id); err == nil {
+				for __instance__ := range stage.Alls {
+					if stage.AllMap_Staged_Order[__instance__] == uint(id) {
+						sequence.Alls = append(sequence.Alls, __instance__)
+						break
+					}
+				}
+			}
+		}
+	case "Choices":
+		sequence.Choices = make([]*Choice, 0)
+		ids := strings.Split(value.ids, ";")
+		for _, idStr := range ids {
+			var id int
+			if _, err := fmt.Sscanf(idStr, "%d", &id); err == nil {
+				for __instance__ := range stage.Choices {
+					if stage.ChoiceMap_Staged_Order[__instance__] == uint(id) {
+						sequence.Choices = append(sequence.Choices, __instance__)
+						break
+					}
+				}
+			}
+		}
+	case "Groups":
+		sequence.Groups = make([]*Group, 0)
+		ids := strings.Split(value.ids, ";")
+		for _, idStr := range ids {
+			var id int
+			if _, err := fmt.Sscanf(idStr, "%d", &id); err == nil {
+				for __instance__ := range stage.Groups {
+					if stage.GroupMap_Staged_Order[__instance__] == uint(id) {
+						sequence.Groups = append(sequence.Groups, __instance__)
+						break
+					}
+				}
+			}
+		}
+	case "Elements":
+		sequence.Elements = make([]*Element, 0)
+		ids := strings.Split(value.ids, ";")
+		for _, idStr := range ids {
+			var id int
+			if _, err := fmt.Sscanf(idStr, "%d", &id); err == nil {
+				for __instance__ := range stage.Elements {
+					if stage.ElementMap_Staged_Order[__instance__] == uint(id) {
+						sequence.Elements = append(sequence.Elements, __instance__)
+						break
+					}
+				}
+			}
+		}
+	case "Order":
+		sequence.Order = int(value.GetValueInt())
+	case "Depth":
+		sequence.Depth = int(value.GetValueInt())
+	case "MinOccurs":
+		sequence.MinOccurs = value.GetValueString()
+	case "MaxOccurs":
+		sequence.MaxOccurs = value.GetValueString()
+	default:
+		return fmt.Errorf("unknown field %s", fieldName)
+	}
+	return nil
+}
+
+func (simplecontent *SimpleContent) GongSetFieldValue(fieldName string, value GongFieldValue, stage *Stage) error {
+	switch fieldName {
+	// insertion point for per field code
+	case "Name":
+		simplecontent.Name = value.GetValueString()
+	case "Extension":
+		var id int
+		if _, err := fmt.Sscanf(value.ids, "%d", &id); err == nil {
+			simplecontent.Extension = nil
+			for __instance__ := range stage.Extensions {
+				if stage.ExtensionMap_Staged_Order[__instance__] == uint(id) {
+					simplecontent.Extension = __instance__
+					break
+				}
+			}
+		}
+	case "Restriction":
+		var id int
+		if _, err := fmt.Sscanf(value.ids, "%d", &id); err == nil {
+			simplecontent.Restriction = nil
+			for __instance__ := range stage.Restrictions {
+				if stage.RestrictionMap_Staged_Order[__instance__] == uint(id) {
+					simplecontent.Restriction = __instance__
+					break
+				}
+			}
+		}
+	default:
+		return fmt.Errorf("unknown field %s", fieldName)
+	}
+	return nil
+}
+
+func (simpletype *SimpleType) GongSetFieldValue(fieldName string, value GongFieldValue, stage *Stage) error {
+	switch fieldName {
+	// insertion point for per field code
+	case "Name":
+		simpletype.Name = value.GetValueString()
+	case "Annotation":
+		var id int
+		if _, err := fmt.Sscanf(value.ids, "%d", &id); err == nil {
+			simpletype.Annotation = nil
+			for __instance__ := range stage.Annotations {
+				if stage.AnnotationMap_Staged_Order[__instance__] == uint(id) {
+					simpletype.Annotation = __instance__
+					break
+				}
+			}
+		}
+	case "NameXSD":
+		simpletype.NameXSD = value.GetValueString()
+	case "Restriction":
+		var id int
+		if _, err := fmt.Sscanf(value.ids, "%d", &id); err == nil {
+			simpletype.Restriction = nil
+			for __instance__ := range stage.Restrictions {
+				if stage.RestrictionMap_Staged_Order[__instance__] == uint(id) {
+					simpletype.Restriction = __instance__
+					break
+				}
+			}
+		}
+	case "Union":
+		var id int
+		if _, err := fmt.Sscanf(value.ids, "%d", &id); err == nil {
+			simpletype.Union = nil
+			for __instance__ := range stage.Unions {
+				if stage.UnionMap_Staged_Order[__instance__] == uint(id) {
+					simpletype.Union = __instance__
+					break
+				}
+			}
+		}
+	case "Order":
+		simpletype.Order = int(value.GetValueInt())
+	case "Depth":
+		simpletype.Depth = int(value.GetValueInt())
+	default:
+		return fmt.Errorf("unknown field %s", fieldName)
+	}
+	return nil
+}
+
+func (totaldigit *TotalDigit) GongSetFieldValue(fieldName string, value GongFieldValue, stage *Stage) error {
+	switch fieldName {
+	// insertion point for per field code
+	case "Name":
+		totaldigit.Name = value.GetValueString()
+	case "Annotation":
+		var id int
+		if _, err := fmt.Sscanf(value.ids, "%d", &id); err == nil {
+			totaldigit.Annotation = nil
+			for __instance__ := range stage.Annotations {
+				if stage.AnnotationMap_Staged_Order[__instance__] == uint(id) {
+					totaldigit.Annotation = __instance__
+					break
+				}
+			}
+		}
+	case "Value":
+		totaldigit.Value = value.GetValueString()
+	default:
+		return fmt.Errorf("unknown field %s", fieldName)
+	}
+	return nil
+}
+
+func (union *Union) GongSetFieldValue(fieldName string, value GongFieldValue, stage *Stage) error {
+	switch fieldName {
+	// insertion point for per field code
+	case "Name":
+		union.Name = value.GetValueString()
+	case "Annotation":
+		var id int
+		if _, err := fmt.Sscanf(value.ids, "%d", &id); err == nil {
+			union.Annotation = nil
+			for __instance__ := range stage.Annotations {
+				if stage.AnnotationMap_Staged_Order[__instance__] == uint(id) {
+					union.Annotation = __instance__
+					break
+				}
+			}
+		}
+	case "MemberTypes":
+		union.MemberTypes = value.GetValueString()
+	default:
+		return fmt.Errorf("unknown field %s", fieldName)
+	}
+	return nil
+}
+
+func (whitespace *WhiteSpace) GongSetFieldValue(fieldName string, value GongFieldValue, stage *Stage) error {
+	switch fieldName {
+	// insertion point for per field code
+	case "Name":
+		whitespace.Name = value.GetValueString()
+	case "Annotation":
+		var id int
+		if _, err := fmt.Sscanf(value.ids, "%d", &id); err == nil {
+			whitespace.Annotation = nil
+			for __instance__ := range stage.Annotations {
+				if stage.AnnotationMap_Staged_Order[__instance__] == uint(id) {
+					whitespace.Annotation = __instance__
+					break
+				}
+			}
+		}
+	case "Value":
+		whitespace.Value = value.GetValueString()
+	default:
+		return fmt.Errorf("unknown field %s", fieldName)
+	}
+	return nil
+}
+
+func SetFieldStringValueFromPointer(instance GongstructIF, fieldName string, value GongFieldValue, stage *Stage) error {
+	return instance.GongSetFieldValue(fieldName, value, stage)
+}
+
+// insertion point for generic get gongstruct name
+func (all *All) GongGetGongstructName() string {
+	return "All"
+}
+
+func (annotation *Annotation) GongGetGongstructName() string {
+	return "Annotation"
+}
+
+func (attribute *Attribute) GongGetGongstructName() string {
+	return "Attribute"
+}
+
+func (attributegroup *AttributeGroup) GongGetGongstructName() string {
+	return "AttributeGroup"
+}
+
+func (choice *Choice) GongGetGongstructName() string {
+	return "Choice"
+}
+
+func (complexcontent *ComplexContent) GongGetGongstructName() string {
+	return "ComplexContent"
+}
+
+func (complextype *ComplexType) GongGetGongstructName() string {
+	return "ComplexType"
+}
+
+func (documentation *Documentation) GongGetGongstructName() string {
+	return "Documentation"
+}
+
+func (element *Element) GongGetGongstructName() string {
+	return "Element"
+}
+
+func (enumeration *Enumeration) GongGetGongstructName() string {
+	return "Enumeration"
+}
+
+func (extension *Extension) GongGetGongstructName() string {
+	return "Extension"
+}
+
+func (group *Group) GongGetGongstructName() string {
+	return "Group"
+}
+
+func (length *Length) GongGetGongstructName() string {
+	return "Length"
+}
+
+func (maxinclusive *MaxInclusive) GongGetGongstructName() string {
+	return "MaxInclusive"
+}
+
+func (maxlength *MaxLength) GongGetGongstructName() string {
+	return "MaxLength"
+}
+
+func (mininclusive *MinInclusive) GongGetGongstructName() string {
+	return "MinInclusive"
+}
+
+func (minlength *MinLength) GongGetGongstructName() string {
+	return "MinLength"
+}
+
+func (pattern *Pattern) GongGetGongstructName() string {
+	return "Pattern"
+}
+
+func (restriction *Restriction) GongGetGongstructName() string {
+	return "Restriction"
+}
+
+func (schema *Schema) GongGetGongstructName() string {
+	return "Schema"
+}
+
+func (sequence *Sequence) GongGetGongstructName() string {
+	return "Sequence"
+}
+
+func (simplecontent *SimpleContent) GongGetGongstructName() string {
+	return "SimpleContent"
+}
+
+func (simpletype *SimpleType) GongGetGongstructName() string {
+	return "SimpleType"
+}
+
+func (totaldigit *TotalDigit) GongGetGongstructName() string {
+	return "TotalDigit"
+}
+
+func (union *Union) GongGetGongstructName() string {
+	return "Union"
+}
+
+func (whitespace *WhiteSpace) GongGetGongstructName() string {
+	return "WhiteSpace"
+}
+
+func GetGongstructNameFromPointer(instance GongstructIF) (res string) {
+	res = instance.GongGetGongstructName()
+	return
+}
+
+func (stage *Stage) ResetMapStrings() {
+	// insertion point for generic get gongstruct name
+	stage.Alls_mapString = make(map[string]*All)
+	for all := range stage.Alls {
+		stage.Alls_mapString[all.Name] = all
+	}
+
+	stage.Annotations_mapString = make(map[string]*Annotation)
+	for annotation := range stage.Annotations {
+		stage.Annotations_mapString[annotation.Name] = annotation
+	}
+
+	stage.Attributes_mapString = make(map[string]*Attribute)
+	for attribute := range stage.Attributes {
+		stage.Attributes_mapString[attribute.Name] = attribute
+	}
+
+	stage.AttributeGroups_mapString = make(map[string]*AttributeGroup)
+	for attributegroup := range stage.AttributeGroups {
+		stage.AttributeGroups_mapString[attributegroup.Name] = attributegroup
+	}
+
+	stage.Choices_mapString = make(map[string]*Choice)
+	for choice := range stage.Choices {
+		stage.Choices_mapString[choice.Name] = choice
+	}
+
+	stage.ComplexContents_mapString = make(map[string]*ComplexContent)
+	for complexcontent := range stage.ComplexContents {
+		stage.ComplexContents_mapString[complexcontent.Name] = complexcontent
+	}
+
+	stage.ComplexTypes_mapString = make(map[string]*ComplexType)
+	for complextype := range stage.ComplexTypes {
+		stage.ComplexTypes_mapString[complextype.Name] = complextype
+	}
+
+	stage.Documentations_mapString = make(map[string]*Documentation)
+	for documentation := range stage.Documentations {
+		stage.Documentations_mapString[documentation.Name] = documentation
+	}
+
+	stage.Elements_mapString = make(map[string]*Element)
+	for element := range stage.Elements {
+		stage.Elements_mapString[element.Name] = element
+	}
+
+	stage.Enumerations_mapString = make(map[string]*Enumeration)
+	for enumeration := range stage.Enumerations {
+		stage.Enumerations_mapString[enumeration.Name] = enumeration
+	}
+
+	stage.Extensions_mapString = make(map[string]*Extension)
+	for extension := range stage.Extensions {
+		stage.Extensions_mapString[extension.Name] = extension
+	}
+
+	stage.Groups_mapString = make(map[string]*Group)
+	for group := range stage.Groups {
+		stage.Groups_mapString[group.Name] = group
+	}
+
+	stage.Lengths_mapString = make(map[string]*Length)
+	for length := range stage.Lengths {
+		stage.Lengths_mapString[length.Name] = length
+	}
+
+	stage.MaxInclusives_mapString = make(map[string]*MaxInclusive)
+	for maxinclusive := range stage.MaxInclusives {
+		stage.MaxInclusives_mapString[maxinclusive.Name] = maxinclusive
+	}
+
+	stage.MaxLengths_mapString = make(map[string]*MaxLength)
+	for maxlength := range stage.MaxLengths {
+		stage.MaxLengths_mapString[maxlength.Name] = maxlength
+	}
+
+	stage.MinInclusives_mapString = make(map[string]*MinInclusive)
+	for mininclusive := range stage.MinInclusives {
+		stage.MinInclusives_mapString[mininclusive.Name] = mininclusive
+	}
+
+	stage.MinLengths_mapString = make(map[string]*MinLength)
+	for minlength := range stage.MinLengths {
+		stage.MinLengths_mapString[minlength.Name] = minlength
+	}
+
+	stage.Patterns_mapString = make(map[string]*Pattern)
+	for pattern := range stage.Patterns {
+		stage.Patterns_mapString[pattern.Name] = pattern
+	}
+
+	stage.Restrictions_mapString = make(map[string]*Restriction)
+	for restriction := range stage.Restrictions {
+		stage.Restrictions_mapString[restriction.Name] = restriction
+	}
+
+	stage.Schemas_mapString = make(map[string]*Schema)
+	for schema := range stage.Schemas {
+		stage.Schemas_mapString[schema.Name] = schema
+	}
+
+	stage.Sequences_mapString = make(map[string]*Sequence)
+	for sequence := range stage.Sequences {
+		stage.Sequences_mapString[sequence.Name] = sequence
+	}
+
+	stage.SimpleContents_mapString = make(map[string]*SimpleContent)
+	for simplecontent := range stage.SimpleContents {
+		stage.SimpleContents_mapString[simplecontent.Name] = simplecontent
+	}
+
+	stage.SimpleTypes_mapString = make(map[string]*SimpleType)
+	for simpletype := range stage.SimpleTypes {
+		stage.SimpleTypes_mapString[simpletype.Name] = simpletype
+	}
+
+	stage.TotalDigits_mapString = make(map[string]*TotalDigit)
+	for totaldigit := range stage.TotalDigits {
+		stage.TotalDigits_mapString[totaldigit.Name] = totaldigit
+	}
+
+	stage.Unions_mapString = make(map[string]*Union)
+	for union := range stage.Unions {
+		stage.Unions_mapString[union.Name] = union
+	}
+
+	stage.WhiteSpaces_mapString = make(map[string]*WhiteSpace)
+	for whitespace := range stage.WhiteSpaces {
+		stage.WhiteSpaces_mapString[whitespace.Name] = whitespace
+	}
+
+	// end of insertion point for generic get gongstruct name
 }
 
 // Last line of the template

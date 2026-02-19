@@ -46,6 +46,8 @@ type ALTERNATIVE_IDFormCallback struct {
 }
 
 func (alternative_idFormCallback *ALTERNATIVE_IDFormCallback) OnSave() {
+	alternative_idFormCallback.probe.stageOfInterest.Lock()
+	defer alternative_idFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("ALTERNATIVE_IDFormCallback, OnSave")
 
@@ -75,10 +77,9 @@ func (alternative_idFormCallback *ALTERNATIVE_IDFormCallback) OnSave() {
 	}
 
 	alternative_idFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.ALTERNATIVE_ID](
+	updateProbeTable[*models.ALTERNATIVE_ID](
 		alternative_idFormCallback.probe,
 	)
-	alternative_idFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if alternative_idFormCallback.CreationMode || alternative_idFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -125,6 +126,8 @@ type ATTRIBUTE_DEFINITION_BOOLEANFormCallback struct {
 }
 
 func (attribute_definition_booleanFormCallback *ATTRIBUTE_DEFINITION_BOOLEANFormCallback) OnSave() {
+	attribute_definition_booleanFormCallback.probe.stageOfInterest.Lock()
+	defer attribute_definition_booleanFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("ATTRIBUTE_DEFINITION_BOOLEANFormCallback, OnSave")
 
@@ -176,9 +179,8 @@ func (attribute_definition_booleanFormCallback *ATTRIBUTE_DEFINITION_BOOLEANForm
 				_ = rf
 				rf.GongstructName = "A_SPEC_ATTRIBUTES"
 				rf.Fieldname = "ATTRIBUTE_DEFINITION_BOOLEAN"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := attribute_definition_boolean_.GongGetReverseFieldOwner(
 					attribute_definition_booleanFormCallback.probe.stageOfInterest,
-					attribute_definition_boolean_,
 					&rf)
 
 				var ok bool
@@ -235,10 +237,9 @@ func (attribute_definition_booleanFormCallback *ATTRIBUTE_DEFINITION_BOOLEANForm
 	}
 
 	attribute_definition_booleanFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.ATTRIBUTE_DEFINITION_BOOLEAN](
+	updateProbeTable[*models.ATTRIBUTE_DEFINITION_BOOLEAN](
 		attribute_definition_booleanFormCallback.probe,
 	)
-	attribute_definition_booleanFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if attribute_definition_booleanFormCallback.CreationMode || attribute_definition_booleanFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -285,6 +286,8 @@ type ATTRIBUTE_DEFINITION_DATEFormCallback struct {
 }
 
 func (attribute_definition_dateFormCallback *ATTRIBUTE_DEFINITION_DATEFormCallback) OnSave() {
+	attribute_definition_dateFormCallback.probe.stageOfInterest.Lock()
+	defer attribute_definition_dateFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("ATTRIBUTE_DEFINITION_DATEFormCallback, OnSave")
 
@@ -336,9 +339,8 @@ func (attribute_definition_dateFormCallback *ATTRIBUTE_DEFINITION_DATEFormCallba
 				_ = rf
 				rf.GongstructName = "A_SPEC_ATTRIBUTES"
 				rf.Fieldname = "ATTRIBUTE_DEFINITION_DATE"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := attribute_definition_date_.GongGetReverseFieldOwner(
 					attribute_definition_dateFormCallback.probe.stageOfInterest,
-					attribute_definition_date_,
 					&rf)
 
 				var ok bool
@@ -395,10 +397,9 @@ func (attribute_definition_dateFormCallback *ATTRIBUTE_DEFINITION_DATEFormCallba
 	}
 
 	attribute_definition_dateFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.ATTRIBUTE_DEFINITION_DATE](
+	updateProbeTable[*models.ATTRIBUTE_DEFINITION_DATE](
 		attribute_definition_dateFormCallback.probe,
 	)
-	attribute_definition_dateFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if attribute_definition_dateFormCallback.CreationMode || attribute_definition_dateFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -445,6 +446,8 @@ type ATTRIBUTE_DEFINITION_ENUMERATIONFormCallback struct {
 }
 
 func (attribute_definition_enumerationFormCallback *ATTRIBUTE_DEFINITION_ENUMERATIONFormCallback) OnSave() {
+	attribute_definition_enumerationFormCallback.probe.stageOfInterest.Lock()
+	defer attribute_definition_enumerationFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("ATTRIBUTE_DEFINITION_ENUMERATIONFormCallback, OnSave")
 
@@ -498,9 +501,8 @@ func (attribute_definition_enumerationFormCallback *ATTRIBUTE_DEFINITION_ENUMERA
 				_ = rf
 				rf.GongstructName = "A_SPEC_ATTRIBUTES"
 				rf.Fieldname = "ATTRIBUTE_DEFINITION_ENUMERATION"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := attribute_definition_enumeration_.GongGetReverseFieldOwner(
 					attribute_definition_enumerationFormCallback.probe.stageOfInterest,
-					attribute_definition_enumeration_,
 					&rf)
 
 				var ok bool
@@ -557,10 +559,9 @@ func (attribute_definition_enumerationFormCallback *ATTRIBUTE_DEFINITION_ENUMERA
 	}
 
 	attribute_definition_enumerationFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.ATTRIBUTE_DEFINITION_ENUMERATION](
+	updateProbeTable[*models.ATTRIBUTE_DEFINITION_ENUMERATION](
 		attribute_definition_enumerationFormCallback.probe,
 	)
-	attribute_definition_enumerationFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if attribute_definition_enumerationFormCallback.CreationMode || attribute_definition_enumerationFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -607,6 +608,8 @@ type ATTRIBUTE_DEFINITION_INTEGERFormCallback struct {
 }
 
 func (attribute_definition_integerFormCallback *ATTRIBUTE_DEFINITION_INTEGERFormCallback) OnSave() {
+	attribute_definition_integerFormCallback.probe.stageOfInterest.Lock()
+	defer attribute_definition_integerFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("ATTRIBUTE_DEFINITION_INTEGERFormCallback, OnSave")
 
@@ -658,9 +661,8 @@ func (attribute_definition_integerFormCallback *ATTRIBUTE_DEFINITION_INTEGERForm
 				_ = rf
 				rf.GongstructName = "A_SPEC_ATTRIBUTES"
 				rf.Fieldname = "ATTRIBUTE_DEFINITION_INTEGER"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := attribute_definition_integer_.GongGetReverseFieldOwner(
 					attribute_definition_integerFormCallback.probe.stageOfInterest,
-					attribute_definition_integer_,
 					&rf)
 
 				var ok bool
@@ -717,10 +719,9 @@ func (attribute_definition_integerFormCallback *ATTRIBUTE_DEFINITION_INTEGERForm
 	}
 
 	attribute_definition_integerFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.ATTRIBUTE_DEFINITION_INTEGER](
+	updateProbeTable[*models.ATTRIBUTE_DEFINITION_INTEGER](
 		attribute_definition_integerFormCallback.probe,
 	)
-	attribute_definition_integerFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if attribute_definition_integerFormCallback.CreationMode || attribute_definition_integerFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -767,6 +768,8 @@ type ATTRIBUTE_DEFINITION_REALFormCallback struct {
 }
 
 func (attribute_definition_realFormCallback *ATTRIBUTE_DEFINITION_REALFormCallback) OnSave() {
+	attribute_definition_realFormCallback.probe.stageOfInterest.Lock()
+	defer attribute_definition_realFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("ATTRIBUTE_DEFINITION_REALFormCallback, OnSave")
 
@@ -818,9 +821,8 @@ func (attribute_definition_realFormCallback *ATTRIBUTE_DEFINITION_REALFormCallba
 				_ = rf
 				rf.GongstructName = "A_SPEC_ATTRIBUTES"
 				rf.Fieldname = "ATTRIBUTE_DEFINITION_REAL"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := attribute_definition_real_.GongGetReverseFieldOwner(
 					attribute_definition_realFormCallback.probe.stageOfInterest,
-					attribute_definition_real_,
 					&rf)
 
 				var ok bool
@@ -877,10 +879,9 @@ func (attribute_definition_realFormCallback *ATTRIBUTE_DEFINITION_REALFormCallba
 	}
 
 	attribute_definition_realFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.ATTRIBUTE_DEFINITION_REAL](
+	updateProbeTable[*models.ATTRIBUTE_DEFINITION_REAL](
 		attribute_definition_realFormCallback.probe,
 	)
-	attribute_definition_realFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if attribute_definition_realFormCallback.CreationMode || attribute_definition_realFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -927,6 +928,8 @@ type ATTRIBUTE_DEFINITION_STRINGFormCallback struct {
 }
 
 func (attribute_definition_stringFormCallback *ATTRIBUTE_DEFINITION_STRINGFormCallback) OnSave() {
+	attribute_definition_stringFormCallback.probe.stageOfInterest.Lock()
+	defer attribute_definition_stringFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("ATTRIBUTE_DEFINITION_STRINGFormCallback, OnSave")
 
@@ -978,9 +981,8 @@ func (attribute_definition_stringFormCallback *ATTRIBUTE_DEFINITION_STRINGFormCa
 				_ = rf
 				rf.GongstructName = "A_SPEC_ATTRIBUTES"
 				rf.Fieldname = "ATTRIBUTE_DEFINITION_STRING"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := attribute_definition_string_.GongGetReverseFieldOwner(
 					attribute_definition_stringFormCallback.probe.stageOfInterest,
-					attribute_definition_string_,
 					&rf)
 
 				var ok bool
@@ -1037,10 +1039,9 @@ func (attribute_definition_stringFormCallback *ATTRIBUTE_DEFINITION_STRINGFormCa
 	}
 
 	attribute_definition_stringFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.ATTRIBUTE_DEFINITION_STRING](
+	updateProbeTable[*models.ATTRIBUTE_DEFINITION_STRING](
 		attribute_definition_stringFormCallback.probe,
 	)
-	attribute_definition_stringFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if attribute_definition_stringFormCallback.CreationMode || attribute_definition_stringFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -1087,6 +1088,8 @@ type ATTRIBUTE_DEFINITION_XHTMLFormCallback struct {
 }
 
 func (attribute_definition_xhtmlFormCallback *ATTRIBUTE_DEFINITION_XHTMLFormCallback) OnSave() {
+	attribute_definition_xhtmlFormCallback.probe.stageOfInterest.Lock()
+	defer attribute_definition_xhtmlFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("ATTRIBUTE_DEFINITION_XHTMLFormCallback, OnSave")
 
@@ -1138,9 +1141,8 @@ func (attribute_definition_xhtmlFormCallback *ATTRIBUTE_DEFINITION_XHTMLFormCall
 				_ = rf
 				rf.GongstructName = "A_SPEC_ATTRIBUTES"
 				rf.Fieldname = "ATTRIBUTE_DEFINITION_XHTML"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := attribute_definition_xhtml_.GongGetReverseFieldOwner(
 					attribute_definition_xhtmlFormCallback.probe.stageOfInterest,
-					attribute_definition_xhtml_,
 					&rf)
 
 				var ok bool
@@ -1197,10 +1199,9 @@ func (attribute_definition_xhtmlFormCallback *ATTRIBUTE_DEFINITION_XHTMLFormCall
 	}
 
 	attribute_definition_xhtmlFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.ATTRIBUTE_DEFINITION_XHTML](
+	updateProbeTable[*models.ATTRIBUTE_DEFINITION_XHTML](
 		attribute_definition_xhtmlFormCallback.probe,
 	)
-	attribute_definition_xhtmlFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if attribute_definition_xhtmlFormCallback.CreationMode || attribute_definition_xhtmlFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -1247,6 +1248,8 @@ type ATTRIBUTE_VALUE_BOOLEANFormCallback struct {
 }
 
 func (attribute_value_booleanFormCallback *ATTRIBUTE_VALUE_BOOLEANFormCallback) OnSave() {
+	attribute_value_booleanFormCallback.probe.stageOfInterest.Lock()
+	defer attribute_value_booleanFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("ATTRIBUTE_VALUE_BOOLEANFormCallback, OnSave")
 
@@ -1286,9 +1289,8 @@ func (attribute_value_booleanFormCallback *ATTRIBUTE_VALUE_BOOLEANFormCallback) 
 				_ = rf
 				rf.GongstructName = "A_ATTRIBUTE_VALUE_BOOLEAN"
 				rf.Fieldname = "ATTRIBUTE_VALUE_BOOLEAN"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := attribute_value_boolean_.GongGetReverseFieldOwner(
 					attribute_value_booleanFormCallback.probe.stageOfInterest,
-					attribute_value_boolean_,
 					&rf)
 
 				var ok bool
@@ -1353,9 +1355,8 @@ func (attribute_value_booleanFormCallback *ATTRIBUTE_VALUE_BOOLEANFormCallback) 
 				_ = rf
 				rf.GongstructName = "A_ATTRIBUTE_VALUE_XHTML_1"
 				rf.Fieldname = "ATTRIBUTE_VALUE_BOOLEAN"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := attribute_value_boolean_.GongGetReverseFieldOwner(
 					attribute_value_booleanFormCallback.probe.stageOfInterest,
-					attribute_value_boolean_,
 					&rf)
 
 				var ok bool
@@ -1412,10 +1413,9 @@ func (attribute_value_booleanFormCallback *ATTRIBUTE_VALUE_BOOLEANFormCallback) 
 	}
 
 	attribute_value_booleanFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.ATTRIBUTE_VALUE_BOOLEAN](
+	updateProbeTable[*models.ATTRIBUTE_VALUE_BOOLEAN](
 		attribute_value_booleanFormCallback.probe,
 	)
-	attribute_value_booleanFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if attribute_value_booleanFormCallback.CreationMode || attribute_value_booleanFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -1462,6 +1462,8 @@ type ATTRIBUTE_VALUE_DATEFormCallback struct {
 }
 
 func (attribute_value_dateFormCallback *ATTRIBUTE_VALUE_DATEFormCallback) OnSave() {
+	attribute_value_dateFormCallback.probe.stageOfInterest.Lock()
+	defer attribute_value_dateFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("ATTRIBUTE_VALUE_DATEFormCallback, OnSave")
 
@@ -1501,9 +1503,8 @@ func (attribute_value_dateFormCallback *ATTRIBUTE_VALUE_DATEFormCallback) OnSave
 				_ = rf
 				rf.GongstructName = "A_ATTRIBUTE_VALUE_DATE"
 				rf.Fieldname = "ATTRIBUTE_VALUE_DATE"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := attribute_value_date_.GongGetReverseFieldOwner(
 					attribute_value_dateFormCallback.probe.stageOfInterest,
-					attribute_value_date_,
 					&rf)
 
 				var ok bool
@@ -1568,9 +1569,8 @@ func (attribute_value_dateFormCallback *ATTRIBUTE_VALUE_DATEFormCallback) OnSave
 				_ = rf
 				rf.GongstructName = "A_ATTRIBUTE_VALUE_XHTML_1"
 				rf.Fieldname = "ATTRIBUTE_VALUE_DATE"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := attribute_value_date_.GongGetReverseFieldOwner(
 					attribute_value_dateFormCallback.probe.stageOfInterest,
-					attribute_value_date_,
 					&rf)
 
 				var ok bool
@@ -1627,10 +1627,9 @@ func (attribute_value_dateFormCallback *ATTRIBUTE_VALUE_DATEFormCallback) OnSave
 	}
 
 	attribute_value_dateFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.ATTRIBUTE_VALUE_DATE](
+	updateProbeTable[*models.ATTRIBUTE_VALUE_DATE](
 		attribute_value_dateFormCallback.probe,
 	)
-	attribute_value_dateFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if attribute_value_dateFormCallback.CreationMode || attribute_value_dateFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -1677,6 +1676,8 @@ type ATTRIBUTE_VALUE_ENUMERATIONFormCallback struct {
 }
 
 func (attribute_value_enumerationFormCallback *ATTRIBUTE_VALUE_ENUMERATIONFormCallback) OnSave() {
+	attribute_value_enumerationFormCallback.probe.stageOfInterest.Lock()
+	defer attribute_value_enumerationFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("ATTRIBUTE_VALUE_ENUMERATIONFormCallback, OnSave")
 
@@ -1716,9 +1717,8 @@ func (attribute_value_enumerationFormCallback *ATTRIBUTE_VALUE_ENUMERATIONFormCa
 				_ = rf
 				rf.GongstructName = "A_ATTRIBUTE_VALUE_ENUMERATION"
 				rf.Fieldname = "ATTRIBUTE_VALUE_ENUMERATION"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := attribute_value_enumeration_.GongGetReverseFieldOwner(
 					attribute_value_enumerationFormCallback.probe.stageOfInterest,
-					attribute_value_enumeration_,
 					&rf)
 
 				var ok bool
@@ -1783,9 +1783,8 @@ func (attribute_value_enumerationFormCallback *ATTRIBUTE_VALUE_ENUMERATIONFormCa
 				_ = rf
 				rf.GongstructName = "A_ATTRIBUTE_VALUE_XHTML_1"
 				rf.Fieldname = "ATTRIBUTE_VALUE_ENUMERATION"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := attribute_value_enumeration_.GongGetReverseFieldOwner(
 					attribute_value_enumerationFormCallback.probe.stageOfInterest,
-					attribute_value_enumeration_,
 					&rf)
 
 				var ok bool
@@ -1842,10 +1841,9 @@ func (attribute_value_enumerationFormCallback *ATTRIBUTE_VALUE_ENUMERATIONFormCa
 	}
 
 	attribute_value_enumerationFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.ATTRIBUTE_VALUE_ENUMERATION](
+	updateProbeTable[*models.ATTRIBUTE_VALUE_ENUMERATION](
 		attribute_value_enumerationFormCallback.probe,
 	)
-	attribute_value_enumerationFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if attribute_value_enumerationFormCallback.CreationMode || attribute_value_enumerationFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -1892,6 +1890,8 @@ type ATTRIBUTE_VALUE_INTEGERFormCallback struct {
 }
 
 func (attribute_value_integerFormCallback *ATTRIBUTE_VALUE_INTEGERFormCallback) OnSave() {
+	attribute_value_integerFormCallback.probe.stageOfInterest.Lock()
+	defer attribute_value_integerFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("ATTRIBUTE_VALUE_INTEGERFormCallback, OnSave")
 
@@ -1931,9 +1931,8 @@ func (attribute_value_integerFormCallback *ATTRIBUTE_VALUE_INTEGERFormCallback) 
 				_ = rf
 				rf.GongstructName = "A_ATTRIBUTE_VALUE_INTEGER"
 				rf.Fieldname = "ATTRIBUTE_VALUE_INTEGER"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := attribute_value_integer_.GongGetReverseFieldOwner(
 					attribute_value_integerFormCallback.probe.stageOfInterest,
-					attribute_value_integer_,
 					&rf)
 
 				var ok bool
@@ -1998,9 +1997,8 @@ func (attribute_value_integerFormCallback *ATTRIBUTE_VALUE_INTEGERFormCallback) 
 				_ = rf
 				rf.GongstructName = "A_ATTRIBUTE_VALUE_XHTML_1"
 				rf.Fieldname = "ATTRIBUTE_VALUE_INTEGER"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := attribute_value_integer_.GongGetReverseFieldOwner(
 					attribute_value_integerFormCallback.probe.stageOfInterest,
-					attribute_value_integer_,
 					&rf)
 
 				var ok bool
@@ -2057,10 +2055,9 @@ func (attribute_value_integerFormCallback *ATTRIBUTE_VALUE_INTEGERFormCallback) 
 	}
 
 	attribute_value_integerFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.ATTRIBUTE_VALUE_INTEGER](
+	updateProbeTable[*models.ATTRIBUTE_VALUE_INTEGER](
 		attribute_value_integerFormCallback.probe,
 	)
-	attribute_value_integerFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if attribute_value_integerFormCallback.CreationMode || attribute_value_integerFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -2107,6 +2104,8 @@ type ATTRIBUTE_VALUE_REALFormCallback struct {
 }
 
 func (attribute_value_realFormCallback *ATTRIBUTE_VALUE_REALFormCallback) OnSave() {
+	attribute_value_realFormCallback.probe.stageOfInterest.Lock()
+	defer attribute_value_realFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("ATTRIBUTE_VALUE_REALFormCallback, OnSave")
 
@@ -2146,9 +2145,8 @@ func (attribute_value_realFormCallback *ATTRIBUTE_VALUE_REALFormCallback) OnSave
 				_ = rf
 				rf.GongstructName = "A_ATTRIBUTE_VALUE_REAL"
 				rf.Fieldname = "ATTRIBUTE_VALUE_REAL"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := attribute_value_real_.GongGetReverseFieldOwner(
 					attribute_value_realFormCallback.probe.stageOfInterest,
-					attribute_value_real_,
 					&rf)
 
 				var ok bool
@@ -2213,9 +2211,8 @@ func (attribute_value_realFormCallback *ATTRIBUTE_VALUE_REALFormCallback) OnSave
 				_ = rf
 				rf.GongstructName = "A_ATTRIBUTE_VALUE_XHTML_1"
 				rf.Fieldname = "ATTRIBUTE_VALUE_REAL"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := attribute_value_real_.GongGetReverseFieldOwner(
 					attribute_value_realFormCallback.probe.stageOfInterest,
-					attribute_value_real_,
 					&rf)
 
 				var ok bool
@@ -2272,10 +2269,9 @@ func (attribute_value_realFormCallback *ATTRIBUTE_VALUE_REALFormCallback) OnSave
 	}
 
 	attribute_value_realFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.ATTRIBUTE_VALUE_REAL](
+	updateProbeTable[*models.ATTRIBUTE_VALUE_REAL](
 		attribute_value_realFormCallback.probe,
 	)
-	attribute_value_realFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if attribute_value_realFormCallback.CreationMode || attribute_value_realFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -2322,6 +2318,8 @@ type ATTRIBUTE_VALUE_STRINGFormCallback struct {
 }
 
 func (attribute_value_stringFormCallback *ATTRIBUTE_VALUE_STRINGFormCallback) OnSave() {
+	attribute_value_stringFormCallback.probe.stageOfInterest.Lock()
+	defer attribute_value_stringFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("ATTRIBUTE_VALUE_STRINGFormCallback, OnSave")
 
@@ -2361,9 +2359,8 @@ func (attribute_value_stringFormCallback *ATTRIBUTE_VALUE_STRINGFormCallback) On
 				_ = rf
 				rf.GongstructName = "A_ATTRIBUTE_VALUE_STRING"
 				rf.Fieldname = "ATTRIBUTE_VALUE_STRING"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := attribute_value_string_.GongGetReverseFieldOwner(
 					attribute_value_stringFormCallback.probe.stageOfInterest,
-					attribute_value_string_,
 					&rf)
 
 				var ok bool
@@ -2428,9 +2425,8 @@ func (attribute_value_stringFormCallback *ATTRIBUTE_VALUE_STRINGFormCallback) On
 				_ = rf
 				rf.GongstructName = "A_ATTRIBUTE_VALUE_XHTML_1"
 				rf.Fieldname = "ATTRIBUTE_VALUE_STRING"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := attribute_value_string_.GongGetReverseFieldOwner(
 					attribute_value_stringFormCallback.probe.stageOfInterest,
-					attribute_value_string_,
 					&rf)
 
 				var ok bool
@@ -2487,10 +2483,9 @@ func (attribute_value_stringFormCallback *ATTRIBUTE_VALUE_STRINGFormCallback) On
 	}
 
 	attribute_value_stringFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.ATTRIBUTE_VALUE_STRING](
+	updateProbeTable[*models.ATTRIBUTE_VALUE_STRING](
 		attribute_value_stringFormCallback.probe,
 	)
-	attribute_value_stringFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if attribute_value_stringFormCallback.CreationMode || attribute_value_stringFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -2537,6 +2532,8 @@ type ATTRIBUTE_VALUE_XHTMLFormCallback struct {
 }
 
 func (attribute_value_xhtmlFormCallback *ATTRIBUTE_VALUE_XHTMLFormCallback) OnSave() {
+	attribute_value_xhtmlFormCallback.probe.stageOfInterest.Lock()
+	defer attribute_value_xhtmlFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("ATTRIBUTE_VALUE_XHTMLFormCallback, OnSave")
 
@@ -2580,9 +2577,8 @@ func (attribute_value_xhtmlFormCallback *ATTRIBUTE_VALUE_XHTMLFormCallback) OnSa
 				_ = rf
 				rf.GongstructName = "A_ATTRIBUTE_VALUE_XHTML"
 				rf.Fieldname = "ATTRIBUTE_VALUE_XHTML"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := attribute_value_xhtml_.GongGetReverseFieldOwner(
 					attribute_value_xhtmlFormCallback.probe.stageOfInterest,
-					attribute_value_xhtml_,
 					&rf)
 
 				var ok bool
@@ -2647,9 +2643,8 @@ func (attribute_value_xhtmlFormCallback *ATTRIBUTE_VALUE_XHTMLFormCallback) OnSa
 				_ = rf
 				rf.GongstructName = "A_ATTRIBUTE_VALUE_XHTML_1"
 				rf.Fieldname = "ATTRIBUTE_VALUE_XHTML"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := attribute_value_xhtml_.GongGetReverseFieldOwner(
 					attribute_value_xhtmlFormCallback.probe.stageOfInterest,
-					attribute_value_xhtml_,
 					&rf)
 
 				var ok bool
@@ -2706,10 +2701,9 @@ func (attribute_value_xhtmlFormCallback *ATTRIBUTE_VALUE_XHTMLFormCallback) OnSa
 	}
 
 	attribute_value_xhtmlFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.ATTRIBUTE_VALUE_XHTML](
+	updateProbeTable[*models.ATTRIBUTE_VALUE_XHTML](
 		attribute_value_xhtmlFormCallback.probe,
 	)
-	attribute_value_xhtmlFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if attribute_value_xhtmlFormCallback.CreationMode || attribute_value_xhtmlFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -2756,6 +2750,8 @@ type A_ALTERNATIVE_IDFormCallback struct {
 }
 
 func (a_alternative_idFormCallback *A_ALTERNATIVE_IDFormCallback) OnSave() {
+	a_alternative_idFormCallback.probe.stageOfInterest.Lock()
+	defer a_alternative_idFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_ALTERNATIVE_IDFormCallback, OnSave")
 
@@ -2785,10 +2781,9 @@ func (a_alternative_idFormCallback *A_ALTERNATIVE_IDFormCallback) OnSave() {
 	}
 
 	a_alternative_idFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_ALTERNATIVE_ID](
+	updateProbeTable[*models.A_ALTERNATIVE_ID](
 		a_alternative_idFormCallback.probe,
 	)
-	a_alternative_idFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_alternative_idFormCallback.CreationMode || a_alternative_idFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -2835,6 +2830,8 @@ type A_ATTRIBUTE_DEFINITION_BOOLEAN_REFFormCallback struct {
 }
 
 func (a_attribute_definition_boolean_refFormCallback *A_ATTRIBUTE_DEFINITION_BOOLEAN_REFFormCallback) OnSave() {
+	a_attribute_definition_boolean_refFormCallback.probe.stageOfInterest.Lock()
+	defer a_attribute_definition_boolean_refFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_ATTRIBUTE_DEFINITION_BOOLEAN_REFFormCallback, OnSave")
 
@@ -2864,10 +2861,9 @@ func (a_attribute_definition_boolean_refFormCallback *A_ATTRIBUTE_DEFINITION_BOO
 	}
 
 	a_attribute_definition_boolean_refFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_ATTRIBUTE_DEFINITION_BOOLEAN_REF](
+	updateProbeTable[*models.A_ATTRIBUTE_DEFINITION_BOOLEAN_REF](
 		a_attribute_definition_boolean_refFormCallback.probe,
 	)
-	a_attribute_definition_boolean_refFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_attribute_definition_boolean_refFormCallback.CreationMode || a_attribute_definition_boolean_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -2914,6 +2910,8 @@ type A_ATTRIBUTE_DEFINITION_DATE_REFFormCallback struct {
 }
 
 func (a_attribute_definition_date_refFormCallback *A_ATTRIBUTE_DEFINITION_DATE_REFFormCallback) OnSave() {
+	a_attribute_definition_date_refFormCallback.probe.stageOfInterest.Lock()
+	defer a_attribute_definition_date_refFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_ATTRIBUTE_DEFINITION_DATE_REFFormCallback, OnSave")
 
@@ -2943,10 +2941,9 @@ func (a_attribute_definition_date_refFormCallback *A_ATTRIBUTE_DEFINITION_DATE_R
 	}
 
 	a_attribute_definition_date_refFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_ATTRIBUTE_DEFINITION_DATE_REF](
+	updateProbeTable[*models.A_ATTRIBUTE_DEFINITION_DATE_REF](
 		a_attribute_definition_date_refFormCallback.probe,
 	)
-	a_attribute_definition_date_refFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_attribute_definition_date_refFormCallback.CreationMode || a_attribute_definition_date_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -2993,6 +2990,8 @@ type A_ATTRIBUTE_DEFINITION_ENUMERATION_REFFormCallback struct {
 }
 
 func (a_attribute_definition_enumeration_refFormCallback *A_ATTRIBUTE_DEFINITION_ENUMERATION_REFFormCallback) OnSave() {
+	a_attribute_definition_enumeration_refFormCallback.probe.stageOfInterest.Lock()
+	defer a_attribute_definition_enumeration_refFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_ATTRIBUTE_DEFINITION_ENUMERATION_REFFormCallback, OnSave")
 
@@ -3022,10 +3021,9 @@ func (a_attribute_definition_enumeration_refFormCallback *A_ATTRIBUTE_DEFINITION
 	}
 
 	a_attribute_definition_enumeration_refFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_ATTRIBUTE_DEFINITION_ENUMERATION_REF](
+	updateProbeTable[*models.A_ATTRIBUTE_DEFINITION_ENUMERATION_REF](
 		a_attribute_definition_enumeration_refFormCallback.probe,
 	)
-	a_attribute_definition_enumeration_refFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_attribute_definition_enumeration_refFormCallback.CreationMode || a_attribute_definition_enumeration_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -3072,6 +3070,8 @@ type A_ATTRIBUTE_DEFINITION_INTEGER_REFFormCallback struct {
 }
 
 func (a_attribute_definition_integer_refFormCallback *A_ATTRIBUTE_DEFINITION_INTEGER_REFFormCallback) OnSave() {
+	a_attribute_definition_integer_refFormCallback.probe.stageOfInterest.Lock()
+	defer a_attribute_definition_integer_refFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_ATTRIBUTE_DEFINITION_INTEGER_REFFormCallback, OnSave")
 
@@ -3101,10 +3101,9 @@ func (a_attribute_definition_integer_refFormCallback *A_ATTRIBUTE_DEFINITION_INT
 	}
 
 	a_attribute_definition_integer_refFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_ATTRIBUTE_DEFINITION_INTEGER_REF](
+	updateProbeTable[*models.A_ATTRIBUTE_DEFINITION_INTEGER_REF](
 		a_attribute_definition_integer_refFormCallback.probe,
 	)
-	a_attribute_definition_integer_refFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_attribute_definition_integer_refFormCallback.CreationMode || a_attribute_definition_integer_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -3151,6 +3150,8 @@ type A_ATTRIBUTE_DEFINITION_REAL_REFFormCallback struct {
 }
 
 func (a_attribute_definition_real_refFormCallback *A_ATTRIBUTE_DEFINITION_REAL_REFFormCallback) OnSave() {
+	a_attribute_definition_real_refFormCallback.probe.stageOfInterest.Lock()
+	defer a_attribute_definition_real_refFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_ATTRIBUTE_DEFINITION_REAL_REFFormCallback, OnSave")
 
@@ -3180,10 +3181,9 @@ func (a_attribute_definition_real_refFormCallback *A_ATTRIBUTE_DEFINITION_REAL_R
 	}
 
 	a_attribute_definition_real_refFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_ATTRIBUTE_DEFINITION_REAL_REF](
+	updateProbeTable[*models.A_ATTRIBUTE_DEFINITION_REAL_REF](
 		a_attribute_definition_real_refFormCallback.probe,
 	)
-	a_attribute_definition_real_refFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_attribute_definition_real_refFormCallback.CreationMode || a_attribute_definition_real_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -3230,6 +3230,8 @@ type A_ATTRIBUTE_DEFINITION_STRING_REFFormCallback struct {
 }
 
 func (a_attribute_definition_string_refFormCallback *A_ATTRIBUTE_DEFINITION_STRING_REFFormCallback) OnSave() {
+	a_attribute_definition_string_refFormCallback.probe.stageOfInterest.Lock()
+	defer a_attribute_definition_string_refFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_ATTRIBUTE_DEFINITION_STRING_REFFormCallback, OnSave")
 
@@ -3259,10 +3261,9 @@ func (a_attribute_definition_string_refFormCallback *A_ATTRIBUTE_DEFINITION_STRI
 	}
 
 	a_attribute_definition_string_refFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_ATTRIBUTE_DEFINITION_STRING_REF](
+	updateProbeTable[*models.A_ATTRIBUTE_DEFINITION_STRING_REF](
 		a_attribute_definition_string_refFormCallback.probe,
 	)
-	a_attribute_definition_string_refFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_attribute_definition_string_refFormCallback.CreationMode || a_attribute_definition_string_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -3309,6 +3310,8 @@ type A_ATTRIBUTE_DEFINITION_XHTML_REFFormCallback struct {
 }
 
 func (a_attribute_definition_xhtml_refFormCallback *A_ATTRIBUTE_DEFINITION_XHTML_REFFormCallback) OnSave() {
+	a_attribute_definition_xhtml_refFormCallback.probe.stageOfInterest.Lock()
+	defer a_attribute_definition_xhtml_refFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_ATTRIBUTE_DEFINITION_XHTML_REFFormCallback, OnSave")
 
@@ -3338,10 +3341,9 @@ func (a_attribute_definition_xhtml_refFormCallback *A_ATTRIBUTE_DEFINITION_XHTML
 	}
 
 	a_attribute_definition_xhtml_refFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_ATTRIBUTE_DEFINITION_XHTML_REF](
+	updateProbeTable[*models.A_ATTRIBUTE_DEFINITION_XHTML_REF](
 		a_attribute_definition_xhtml_refFormCallback.probe,
 	)
-	a_attribute_definition_xhtml_refFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_attribute_definition_xhtml_refFormCallback.CreationMode || a_attribute_definition_xhtml_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -3388,6 +3390,8 @@ type A_ATTRIBUTE_VALUE_BOOLEANFormCallback struct {
 }
 
 func (a_attribute_value_booleanFormCallback *A_ATTRIBUTE_VALUE_BOOLEANFormCallback) OnSave() {
+	a_attribute_value_booleanFormCallback.probe.stageOfInterest.Lock()
+	defer a_attribute_value_booleanFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_ATTRIBUTE_VALUE_BOOLEANFormCallback, OnSave")
 
@@ -3421,13 +3425,19 @@ func (a_attribute_value_booleanFormCallback *A_ATTRIBUTE_VALUE_BOOLEANFormCallba
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.ATTRIBUTE_VALUE_BOOLEAN](a_attribute_value_booleanFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			a_attribute_value_boolean_.ATTRIBUTE_VALUE_BOOLEAN = instanceSlice
 
@@ -3440,10 +3450,9 @@ func (a_attribute_value_booleanFormCallback *A_ATTRIBUTE_VALUE_BOOLEANFormCallba
 	}
 
 	a_attribute_value_booleanFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_ATTRIBUTE_VALUE_BOOLEAN](
+	updateProbeTable[*models.A_ATTRIBUTE_VALUE_BOOLEAN](
 		a_attribute_value_booleanFormCallback.probe,
 	)
-	a_attribute_value_booleanFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_attribute_value_booleanFormCallback.CreationMode || a_attribute_value_booleanFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -3490,6 +3499,8 @@ type A_ATTRIBUTE_VALUE_DATEFormCallback struct {
 }
 
 func (a_attribute_value_dateFormCallback *A_ATTRIBUTE_VALUE_DATEFormCallback) OnSave() {
+	a_attribute_value_dateFormCallback.probe.stageOfInterest.Lock()
+	defer a_attribute_value_dateFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_ATTRIBUTE_VALUE_DATEFormCallback, OnSave")
 
@@ -3523,13 +3534,19 @@ func (a_attribute_value_dateFormCallback *A_ATTRIBUTE_VALUE_DATEFormCallback) On
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.ATTRIBUTE_VALUE_DATE](a_attribute_value_dateFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			a_attribute_value_date_.ATTRIBUTE_VALUE_DATE = instanceSlice
 
@@ -3542,10 +3559,9 @@ func (a_attribute_value_dateFormCallback *A_ATTRIBUTE_VALUE_DATEFormCallback) On
 	}
 
 	a_attribute_value_dateFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_ATTRIBUTE_VALUE_DATE](
+	updateProbeTable[*models.A_ATTRIBUTE_VALUE_DATE](
 		a_attribute_value_dateFormCallback.probe,
 	)
-	a_attribute_value_dateFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_attribute_value_dateFormCallback.CreationMode || a_attribute_value_dateFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -3592,6 +3608,8 @@ type A_ATTRIBUTE_VALUE_ENUMERATIONFormCallback struct {
 }
 
 func (a_attribute_value_enumerationFormCallback *A_ATTRIBUTE_VALUE_ENUMERATIONFormCallback) OnSave() {
+	a_attribute_value_enumerationFormCallback.probe.stageOfInterest.Lock()
+	defer a_attribute_value_enumerationFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_ATTRIBUTE_VALUE_ENUMERATIONFormCallback, OnSave")
 
@@ -3625,13 +3643,19 @@ func (a_attribute_value_enumerationFormCallback *A_ATTRIBUTE_VALUE_ENUMERATIONFo
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.ATTRIBUTE_VALUE_ENUMERATION](a_attribute_value_enumerationFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			a_attribute_value_enumeration_.ATTRIBUTE_VALUE_ENUMERATION = instanceSlice
 
@@ -3644,10 +3668,9 @@ func (a_attribute_value_enumerationFormCallback *A_ATTRIBUTE_VALUE_ENUMERATIONFo
 	}
 
 	a_attribute_value_enumerationFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_ATTRIBUTE_VALUE_ENUMERATION](
+	updateProbeTable[*models.A_ATTRIBUTE_VALUE_ENUMERATION](
 		a_attribute_value_enumerationFormCallback.probe,
 	)
-	a_attribute_value_enumerationFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_attribute_value_enumerationFormCallback.CreationMode || a_attribute_value_enumerationFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -3694,6 +3717,8 @@ type A_ATTRIBUTE_VALUE_INTEGERFormCallback struct {
 }
 
 func (a_attribute_value_integerFormCallback *A_ATTRIBUTE_VALUE_INTEGERFormCallback) OnSave() {
+	a_attribute_value_integerFormCallback.probe.stageOfInterest.Lock()
+	defer a_attribute_value_integerFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_ATTRIBUTE_VALUE_INTEGERFormCallback, OnSave")
 
@@ -3727,13 +3752,19 @@ func (a_attribute_value_integerFormCallback *A_ATTRIBUTE_VALUE_INTEGERFormCallba
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.ATTRIBUTE_VALUE_INTEGER](a_attribute_value_integerFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			a_attribute_value_integer_.ATTRIBUTE_VALUE_INTEGER = instanceSlice
 
@@ -3746,10 +3777,9 @@ func (a_attribute_value_integerFormCallback *A_ATTRIBUTE_VALUE_INTEGERFormCallba
 	}
 
 	a_attribute_value_integerFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_ATTRIBUTE_VALUE_INTEGER](
+	updateProbeTable[*models.A_ATTRIBUTE_VALUE_INTEGER](
 		a_attribute_value_integerFormCallback.probe,
 	)
-	a_attribute_value_integerFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_attribute_value_integerFormCallback.CreationMode || a_attribute_value_integerFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -3796,6 +3826,8 @@ type A_ATTRIBUTE_VALUE_REALFormCallback struct {
 }
 
 func (a_attribute_value_realFormCallback *A_ATTRIBUTE_VALUE_REALFormCallback) OnSave() {
+	a_attribute_value_realFormCallback.probe.stageOfInterest.Lock()
+	defer a_attribute_value_realFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_ATTRIBUTE_VALUE_REALFormCallback, OnSave")
 
@@ -3829,13 +3861,19 @@ func (a_attribute_value_realFormCallback *A_ATTRIBUTE_VALUE_REALFormCallback) On
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.ATTRIBUTE_VALUE_REAL](a_attribute_value_realFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			a_attribute_value_real_.ATTRIBUTE_VALUE_REAL = instanceSlice
 
@@ -3848,10 +3886,9 @@ func (a_attribute_value_realFormCallback *A_ATTRIBUTE_VALUE_REALFormCallback) On
 	}
 
 	a_attribute_value_realFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_ATTRIBUTE_VALUE_REAL](
+	updateProbeTable[*models.A_ATTRIBUTE_VALUE_REAL](
 		a_attribute_value_realFormCallback.probe,
 	)
-	a_attribute_value_realFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_attribute_value_realFormCallback.CreationMode || a_attribute_value_realFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -3898,6 +3935,8 @@ type A_ATTRIBUTE_VALUE_STRINGFormCallback struct {
 }
 
 func (a_attribute_value_stringFormCallback *A_ATTRIBUTE_VALUE_STRINGFormCallback) OnSave() {
+	a_attribute_value_stringFormCallback.probe.stageOfInterest.Lock()
+	defer a_attribute_value_stringFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_ATTRIBUTE_VALUE_STRINGFormCallback, OnSave")
 
@@ -3931,13 +3970,19 @@ func (a_attribute_value_stringFormCallback *A_ATTRIBUTE_VALUE_STRINGFormCallback
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.ATTRIBUTE_VALUE_STRING](a_attribute_value_stringFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			a_attribute_value_string_.ATTRIBUTE_VALUE_STRING = instanceSlice
 
@@ -3950,10 +3995,9 @@ func (a_attribute_value_stringFormCallback *A_ATTRIBUTE_VALUE_STRINGFormCallback
 	}
 
 	a_attribute_value_stringFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_ATTRIBUTE_VALUE_STRING](
+	updateProbeTable[*models.A_ATTRIBUTE_VALUE_STRING](
 		a_attribute_value_stringFormCallback.probe,
 	)
-	a_attribute_value_stringFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_attribute_value_stringFormCallback.CreationMode || a_attribute_value_stringFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -4000,6 +4044,8 @@ type A_ATTRIBUTE_VALUE_XHTMLFormCallback struct {
 }
 
 func (a_attribute_value_xhtmlFormCallback *A_ATTRIBUTE_VALUE_XHTMLFormCallback) OnSave() {
+	a_attribute_value_xhtmlFormCallback.probe.stageOfInterest.Lock()
+	defer a_attribute_value_xhtmlFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_ATTRIBUTE_VALUE_XHTMLFormCallback, OnSave")
 
@@ -4033,13 +4079,19 @@ func (a_attribute_value_xhtmlFormCallback *A_ATTRIBUTE_VALUE_XHTMLFormCallback) 
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.ATTRIBUTE_VALUE_XHTML](a_attribute_value_xhtmlFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			a_attribute_value_xhtml_.ATTRIBUTE_VALUE_XHTML = instanceSlice
 
@@ -4052,10 +4104,9 @@ func (a_attribute_value_xhtmlFormCallback *A_ATTRIBUTE_VALUE_XHTMLFormCallback) 
 	}
 
 	a_attribute_value_xhtmlFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_ATTRIBUTE_VALUE_XHTML](
+	updateProbeTable[*models.A_ATTRIBUTE_VALUE_XHTML](
 		a_attribute_value_xhtmlFormCallback.probe,
 	)
-	a_attribute_value_xhtmlFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_attribute_value_xhtmlFormCallback.CreationMode || a_attribute_value_xhtmlFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -4102,6 +4153,8 @@ type A_ATTRIBUTE_VALUE_XHTML_1FormCallback struct {
 }
 
 func (a_attribute_value_xhtml_1FormCallback *A_ATTRIBUTE_VALUE_XHTML_1FormCallback) OnSave() {
+	a_attribute_value_xhtml_1FormCallback.probe.stageOfInterest.Lock()
+	defer a_attribute_value_xhtml_1FormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_ATTRIBUTE_VALUE_XHTML_1FormCallback, OnSave")
 
@@ -4135,13 +4188,19 @@ func (a_attribute_value_xhtml_1FormCallback *A_ATTRIBUTE_VALUE_XHTML_1FormCallba
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.ATTRIBUTE_VALUE_BOOLEAN](a_attribute_value_xhtml_1FormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			a_attribute_value_xhtml_1_.ATTRIBUTE_VALUE_BOOLEAN = instanceSlice
 
@@ -4160,13 +4219,19 @@ func (a_attribute_value_xhtml_1FormCallback *A_ATTRIBUTE_VALUE_XHTML_1FormCallba
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.ATTRIBUTE_VALUE_DATE](a_attribute_value_xhtml_1FormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			a_attribute_value_xhtml_1_.ATTRIBUTE_VALUE_DATE = instanceSlice
 
@@ -4185,13 +4250,19 @@ func (a_attribute_value_xhtml_1FormCallback *A_ATTRIBUTE_VALUE_XHTML_1FormCallba
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.ATTRIBUTE_VALUE_ENUMERATION](a_attribute_value_xhtml_1FormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			a_attribute_value_xhtml_1_.ATTRIBUTE_VALUE_ENUMERATION = instanceSlice
 
@@ -4210,13 +4281,19 @@ func (a_attribute_value_xhtml_1FormCallback *A_ATTRIBUTE_VALUE_XHTML_1FormCallba
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.ATTRIBUTE_VALUE_INTEGER](a_attribute_value_xhtml_1FormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			a_attribute_value_xhtml_1_.ATTRIBUTE_VALUE_INTEGER = instanceSlice
 
@@ -4235,13 +4312,19 @@ func (a_attribute_value_xhtml_1FormCallback *A_ATTRIBUTE_VALUE_XHTML_1FormCallba
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.ATTRIBUTE_VALUE_REAL](a_attribute_value_xhtml_1FormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			a_attribute_value_xhtml_1_.ATTRIBUTE_VALUE_REAL = instanceSlice
 
@@ -4260,13 +4343,19 @@ func (a_attribute_value_xhtml_1FormCallback *A_ATTRIBUTE_VALUE_XHTML_1FormCallba
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.ATTRIBUTE_VALUE_STRING](a_attribute_value_xhtml_1FormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			a_attribute_value_xhtml_1_.ATTRIBUTE_VALUE_STRING = instanceSlice
 
@@ -4285,13 +4374,19 @@ func (a_attribute_value_xhtml_1FormCallback *A_ATTRIBUTE_VALUE_XHTML_1FormCallba
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.ATTRIBUTE_VALUE_XHTML](a_attribute_value_xhtml_1FormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			a_attribute_value_xhtml_1_.ATTRIBUTE_VALUE_XHTML = instanceSlice
 
@@ -4304,10 +4399,9 @@ func (a_attribute_value_xhtml_1FormCallback *A_ATTRIBUTE_VALUE_XHTML_1FormCallba
 	}
 
 	a_attribute_value_xhtml_1FormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_ATTRIBUTE_VALUE_XHTML_1](
+	updateProbeTable[*models.A_ATTRIBUTE_VALUE_XHTML_1](
 		a_attribute_value_xhtml_1FormCallback.probe,
 	)
-	a_attribute_value_xhtml_1FormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_attribute_value_xhtml_1FormCallback.CreationMode || a_attribute_value_xhtml_1FormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -4354,6 +4448,8 @@ type A_CHILDRENFormCallback struct {
 }
 
 func (a_childrenFormCallback *A_CHILDRENFormCallback) OnSave() {
+	a_childrenFormCallback.probe.stageOfInterest.Lock()
+	defer a_childrenFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_CHILDRENFormCallback, OnSave")
 
@@ -4387,13 +4483,19 @@ func (a_childrenFormCallback *A_CHILDRENFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.SPEC_HIERARCHY](a_childrenFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			a_children_.SPEC_HIERARCHY = instanceSlice
 
@@ -4406,10 +4508,9 @@ func (a_childrenFormCallback *A_CHILDRENFormCallback) OnSave() {
 	}
 
 	a_childrenFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_CHILDREN](
+	updateProbeTable[*models.A_CHILDREN](
 		a_childrenFormCallback.probe,
 	)
-	a_childrenFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_childrenFormCallback.CreationMode || a_childrenFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -4456,6 +4557,8 @@ type A_CORE_CONTENTFormCallback struct {
 }
 
 func (a_core_contentFormCallback *A_CORE_CONTENTFormCallback) OnSave() {
+	a_core_contentFormCallback.probe.stageOfInterest.Lock()
+	defer a_core_contentFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_CORE_CONTENTFormCallback, OnSave")
 
@@ -4485,10 +4588,9 @@ func (a_core_contentFormCallback *A_CORE_CONTENTFormCallback) OnSave() {
 	}
 
 	a_core_contentFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_CORE_CONTENT](
+	updateProbeTable[*models.A_CORE_CONTENT](
 		a_core_contentFormCallback.probe,
 	)
-	a_core_contentFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_core_contentFormCallback.CreationMode || a_core_contentFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -4535,6 +4637,8 @@ type A_DATATYPESFormCallback struct {
 }
 
 func (a_datatypesFormCallback *A_DATATYPESFormCallback) OnSave() {
+	a_datatypesFormCallback.probe.stageOfInterest.Lock()
+	defer a_datatypesFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_DATATYPESFormCallback, OnSave")
 
@@ -4568,13 +4672,19 @@ func (a_datatypesFormCallback *A_DATATYPESFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.DATATYPE_DEFINITION_BOOLEAN](a_datatypesFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			a_datatypes_.DATATYPE_DEFINITION_BOOLEAN = instanceSlice
 
@@ -4593,13 +4703,19 @@ func (a_datatypesFormCallback *A_DATATYPESFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.DATATYPE_DEFINITION_DATE](a_datatypesFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			a_datatypes_.DATATYPE_DEFINITION_DATE = instanceSlice
 
@@ -4618,13 +4734,19 @@ func (a_datatypesFormCallback *A_DATATYPESFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.DATATYPE_DEFINITION_ENUMERATION](a_datatypesFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			a_datatypes_.DATATYPE_DEFINITION_ENUMERATION = instanceSlice
 
@@ -4643,13 +4765,19 @@ func (a_datatypesFormCallback *A_DATATYPESFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.DATATYPE_DEFINITION_INTEGER](a_datatypesFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			a_datatypes_.DATATYPE_DEFINITION_INTEGER = instanceSlice
 
@@ -4668,13 +4796,19 @@ func (a_datatypesFormCallback *A_DATATYPESFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.DATATYPE_DEFINITION_REAL](a_datatypesFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			a_datatypes_.DATATYPE_DEFINITION_REAL = instanceSlice
 
@@ -4693,13 +4827,19 @@ func (a_datatypesFormCallback *A_DATATYPESFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.DATATYPE_DEFINITION_STRING](a_datatypesFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			a_datatypes_.DATATYPE_DEFINITION_STRING = instanceSlice
 
@@ -4718,13 +4858,19 @@ func (a_datatypesFormCallback *A_DATATYPESFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.DATATYPE_DEFINITION_XHTML](a_datatypesFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			a_datatypes_.DATATYPE_DEFINITION_XHTML = instanceSlice
 
@@ -4737,10 +4883,9 @@ func (a_datatypesFormCallback *A_DATATYPESFormCallback) OnSave() {
 	}
 
 	a_datatypesFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_DATATYPES](
+	updateProbeTable[*models.A_DATATYPES](
 		a_datatypesFormCallback.probe,
 	)
-	a_datatypesFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_datatypesFormCallback.CreationMode || a_datatypesFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -4787,6 +4932,8 @@ type A_DATATYPE_DEFINITION_BOOLEAN_REFFormCallback struct {
 }
 
 func (a_datatype_definition_boolean_refFormCallback *A_DATATYPE_DEFINITION_BOOLEAN_REFFormCallback) OnSave() {
+	a_datatype_definition_boolean_refFormCallback.probe.stageOfInterest.Lock()
+	defer a_datatype_definition_boolean_refFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_DATATYPE_DEFINITION_BOOLEAN_REFFormCallback, OnSave")
 
@@ -4816,10 +4963,9 @@ func (a_datatype_definition_boolean_refFormCallback *A_DATATYPE_DEFINITION_BOOLE
 	}
 
 	a_datatype_definition_boolean_refFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_DATATYPE_DEFINITION_BOOLEAN_REF](
+	updateProbeTable[*models.A_DATATYPE_DEFINITION_BOOLEAN_REF](
 		a_datatype_definition_boolean_refFormCallback.probe,
 	)
-	a_datatype_definition_boolean_refFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_datatype_definition_boolean_refFormCallback.CreationMode || a_datatype_definition_boolean_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -4866,6 +5012,8 @@ type A_DATATYPE_DEFINITION_DATE_REFFormCallback struct {
 }
 
 func (a_datatype_definition_date_refFormCallback *A_DATATYPE_DEFINITION_DATE_REFFormCallback) OnSave() {
+	a_datatype_definition_date_refFormCallback.probe.stageOfInterest.Lock()
+	defer a_datatype_definition_date_refFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_DATATYPE_DEFINITION_DATE_REFFormCallback, OnSave")
 
@@ -4895,10 +5043,9 @@ func (a_datatype_definition_date_refFormCallback *A_DATATYPE_DEFINITION_DATE_REF
 	}
 
 	a_datatype_definition_date_refFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_DATATYPE_DEFINITION_DATE_REF](
+	updateProbeTable[*models.A_DATATYPE_DEFINITION_DATE_REF](
 		a_datatype_definition_date_refFormCallback.probe,
 	)
-	a_datatype_definition_date_refFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_datatype_definition_date_refFormCallback.CreationMode || a_datatype_definition_date_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -4945,6 +5092,8 @@ type A_DATATYPE_DEFINITION_ENUMERATION_REFFormCallback struct {
 }
 
 func (a_datatype_definition_enumeration_refFormCallback *A_DATATYPE_DEFINITION_ENUMERATION_REFFormCallback) OnSave() {
+	a_datatype_definition_enumeration_refFormCallback.probe.stageOfInterest.Lock()
+	defer a_datatype_definition_enumeration_refFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_DATATYPE_DEFINITION_ENUMERATION_REFFormCallback, OnSave")
 
@@ -4974,10 +5123,9 @@ func (a_datatype_definition_enumeration_refFormCallback *A_DATATYPE_DEFINITION_E
 	}
 
 	a_datatype_definition_enumeration_refFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_DATATYPE_DEFINITION_ENUMERATION_REF](
+	updateProbeTable[*models.A_DATATYPE_DEFINITION_ENUMERATION_REF](
 		a_datatype_definition_enumeration_refFormCallback.probe,
 	)
-	a_datatype_definition_enumeration_refFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_datatype_definition_enumeration_refFormCallback.CreationMode || a_datatype_definition_enumeration_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -5024,6 +5172,8 @@ type A_DATATYPE_DEFINITION_INTEGER_REFFormCallback struct {
 }
 
 func (a_datatype_definition_integer_refFormCallback *A_DATATYPE_DEFINITION_INTEGER_REFFormCallback) OnSave() {
+	a_datatype_definition_integer_refFormCallback.probe.stageOfInterest.Lock()
+	defer a_datatype_definition_integer_refFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_DATATYPE_DEFINITION_INTEGER_REFFormCallback, OnSave")
 
@@ -5053,10 +5203,9 @@ func (a_datatype_definition_integer_refFormCallback *A_DATATYPE_DEFINITION_INTEG
 	}
 
 	a_datatype_definition_integer_refFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_DATATYPE_DEFINITION_INTEGER_REF](
+	updateProbeTable[*models.A_DATATYPE_DEFINITION_INTEGER_REF](
 		a_datatype_definition_integer_refFormCallback.probe,
 	)
-	a_datatype_definition_integer_refFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_datatype_definition_integer_refFormCallback.CreationMode || a_datatype_definition_integer_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -5103,6 +5252,8 @@ type A_DATATYPE_DEFINITION_REAL_REFFormCallback struct {
 }
 
 func (a_datatype_definition_real_refFormCallback *A_DATATYPE_DEFINITION_REAL_REFFormCallback) OnSave() {
+	a_datatype_definition_real_refFormCallback.probe.stageOfInterest.Lock()
+	defer a_datatype_definition_real_refFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_DATATYPE_DEFINITION_REAL_REFFormCallback, OnSave")
 
@@ -5132,10 +5283,9 @@ func (a_datatype_definition_real_refFormCallback *A_DATATYPE_DEFINITION_REAL_REF
 	}
 
 	a_datatype_definition_real_refFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_DATATYPE_DEFINITION_REAL_REF](
+	updateProbeTable[*models.A_DATATYPE_DEFINITION_REAL_REF](
 		a_datatype_definition_real_refFormCallback.probe,
 	)
-	a_datatype_definition_real_refFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_datatype_definition_real_refFormCallback.CreationMode || a_datatype_definition_real_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -5182,6 +5332,8 @@ type A_DATATYPE_DEFINITION_STRING_REFFormCallback struct {
 }
 
 func (a_datatype_definition_string_refFormCallback *A_DATATYPE_DEFINITION_STRING_REFFormCallback) OnSave() {
+	a_datatype_definition_string_refFormCallback.probe.stageOfInterest.Lock()
+	defer a_datatype_definition_string_refFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_DATATYPE_DEFINITION_STRING_REFFormCallback, OnSave")
 
@@ -5211,10 +5363,9 @@ func (a_datatype_definition_string_refFormCallback *A_DATATYPE_DEFINITION_STRING
 	}
 
 	a_datatype_definition_string_refFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_DATATYPE_DEFINITION_STRING_REF](
+	updateProbeTable[*models.A_DATATYPE_DEFINITION_STRING_REF](
 		a_datatype_definition_string_refFormCallback.probe,
 	)
-	a_datatype_definition_string_refFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_datatype_definition_string_refFormCallback.CreationMode || a_datatype_definition_string_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -5261,6 +5412,8 @@ type A_DATATYPE_DEFINITION_XHTML_REFFormCallback struct {
 }
 
 func (a_datatype_definition_xhtml_refFormCallback *A_DATATYPE_DEFINITION_XHTML_REFFormCallback) OnSave() {
+	a_datatype_definition_xhtml_refFormCallback.probe.stageOfInterest.Lock()
+	defer a_datatype_definition_xhtml_refFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_DATATYPE_DEFINITION_XHTML_REFFormCallback, OnSave")
 
@@ -5290,10 +5443,9 @@ func (a_datatype_definition_xhtml_refFormCallback *A_DATATYPE_DEFINITION_XHTML_R
 	}
 
 	a_datatype_definition_xhtml_refFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_DATATYPE_DEFINITION_XHTML_REF](
+	updateProbeTable[*models.A_DATATYPE_DEFINITION_XHTML_REF](
 		a_datatype_definition_xhtml_refFormCallback.probe,
 	)
-	a_datatype_definition_xhtml_refFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_datatype_definition_xhtml_refFormCallback.CreationMode || a_datatype_definition_xhtml_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -5340,6 +5492,8 @@ type A_EDITABLE_ATTSFormCallback struct {
 }
 
 func (a_editable_attsFormCallback *A_EDITABLE_ATTSFormCallback) OnSave() {
+	a_editable_attsFormCallback.probe.stageOfInterest.Lock()
+	defer a_editable_attsFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_EDITABLE_ATTSFormCallback, OnSave")
 
@@ -5381,10 +5535,9 @@ func (a_editable_attsFormCallback *A_EDITABLE_ATTSFormCallback) OnSave() {
 	}
 
 	a_editable_attsFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_EDITABLE_ATTS](
+	updateProbeTable[*models.A_EDITABLE_ATTS](
 		a_editable_attsFormCallback.probe,
 	)
-	a_editable_attsFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_editable_attsFormCallback.CreationMode || a_editable_attsFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -5431,6 +5584,8 @@ type A_ENUM_VALUE_REFFormCallback struct {
 }
 
 func (a_enum_value_refFormCallback *A_ENUM_VALUE_REFFormCallback) OnSave() {
+	a_enum_value_refFormCallback.probe.stageOfInterest.Lock()
+	defer a_enum_value_refFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_ENUM_VALUE_REFFormCallback, OnSave")
 
@@ -5460,10 +5615,9 @@ func (a_enum_value_refFormCallback *A_ENUM_VALUE_REFFormCallback) OnSave() {
 	}
 
 	a_enum_value_refFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_ENUM_VALUE_REF](
+	updateProbeTable[*models.A_ENUM_VALUE_REF](
 		a_enum_value_refFormCallback.probe,
 	)
-	a_enum_value_refFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_enum_value_refFormCallback.CreationMode || a_enum_value_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -5510,6 +5664,8 @@ type A_OBJECTFormCallback struct {
 }
 
 func (a_objectFormCallback *A_OBJECTFormCallback) OnSave() {
+	a_objectFormCallback.probe.stageOfInterest.Lock()
+	defer a_objectFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_OBJECTFormCallback, OnSave")
 
@@ -5539,10 +5695,9 @@ func (a_objectFormCallback *A_OBJECTFormCallback) OnSave() {
 	}
 
 	a_objectFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_OBJECT](
+	updateProbeTable[*models.A_OBJECT](
 		a_objectFormCallback.probe,
 	)
-	a_objectFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_objectFormCallback.CreationMode || a_objectFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -5589,6 +5744,8 @@ type A_PROPERTIESFormCallback struct {
 }
 
 func (a_propertiesFormCallback *A_PROPERTIESFormCallback) OnSave() {
+	a_propertiesFormCallback.probe.stageOfInterest.Lock()
+	defer a_propertiesFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_PROPERTIESFormCallback, OnSave")
 
@@ -5618,10 +5775,9 @@ func (a_propertiesFormCallback *A_PROPERTIESFormCallback) OnSave() {
 	}
 
 	a_propertiesFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_PROPERTIES](
+	updateProbeTable[*models.A_PROPERTIES](
 		a_propertiesFormCallback.probe,
 	)
-	a_propertiesFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_propertiesFormCallback.CreationMode || a_propertiesFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -5668,6 +5824,8 @@ type A_RELATION_GROUP_TYPE_REFFormCallback struct {
 }
 
 func (a_relation_group_type_refFormCallback *A_RELATION_GROUP_TYPE_REFFormCallback) OnSave() {
+	a_relation_group_type_refFormCallback.probe.stageOfInterest.Lock()
+	defer a_relation_group_type_refFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_RELATION_GROUP_TYPE_REFFormCallback, OnSave")
 
@@ -5697,10 +5855,9 @@ func (a_relation_group_type_refFormCallback *A_RELATION_GROUP_TYPE_REFFormCallba
 	}
 
 	a_relation_group_type_refFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_RELATION_GROUP_TYPE_REF](
+	updateProbeTable[*models.A_RELATION_GROUP_TYPE_REF](
 		a_relation_group_type_refFormCallback.probe,
 	)
-	a_relation_group_type_refFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_relation_group_type_refFormCallback.CreationMode || a_relation_group_type_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -5747,6 +5904,8 @@ type A_SOURCE_1FormCallback struct {
 }
 
 func (a_source_1FormCallback *A_SOURCE_1FormCallback) OnSave() {
+	a_source_1FormCallback.probe.stageOfInterest.Lock()
+	defer a_source_1FormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_SOURCE_1FormCallback, OnSave")
 
@@ -5776,10 +5935,9 @@ func (a_source_1FormCallback *A_SOURCE_1FormCallback) OnSave() {
 	}
 
 	a_source_1FormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_SOURCE_1](
+	updateProbeTable[*models.A_SOURCE_1](
 		a_source_1FormCallback.probe,
 	)
-	a_source_1FormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_source_1FormCallback.CreationMode || a_source_1FormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -5826,6 +5984,8 @@ type A_SOURCE_SPECIFICATION_1FormCallback struct {
 }
 
 func (a_source_specification_1FormCallback *A_SOURCE_SPECIFICATION_1FormCallback) OnSave() {
+	a_source_specification_1FormCallback.probe.stageOfInterest.Lock()
+	defer a_source_specification_1FormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_SOURCE_SPECIFICATION_1FormCallback, OnSave")
 
@@ -5855,10 +6015,9 @@ func (a_source_specification_1FormCallback *A_SOURCE_SPECIFICATION_1FormCallback
 	}
 
 	a_source_specification_1FormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_SOURCE_SPECIFICATION_1](
+	updateProbeTable[*models.A_SOURCE_SPECIFICATION_1](
 		a_source_specification_1FormCallback.probe,
 	)
-	a_source_specification_1FormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_source_specification_1FormCallback.CreationMode || a_source_specification_1FormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -5905,6 +6064,8 @@ type A_SPECIFICATIONSFormCallback struct {
 }
 
 func (a_specificationsFormCallback *A_SPECIFICATIONSFormCallback) OnSave() {
+	a_specificationsFormCallback.probe.stageOfInterest.Lock()
+	defer a_specificationsFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_SPECIFICATIONSFormCallback, OnSave")
 
@@ -5938,13 +6099,19 @@ func (a_specificationsFormCallback *A_SPECIFICATIONSFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.SPECIFICATION](a_specificationsFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			a_specifications_.SPECIFICATION = instanceSlice
 
@@ -5957,10 +6124,9 @@ func (a_specificationsFormCallback *A_SPECIFICATIONSFormCallback) OnSave() {
 	}
 
 	a_specificationsFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_SPECIFICATIONS](
+	updateProbeTable[*models.A_SPECIFICATIONS](
 		a_specificationsFormCallback.probe,
 	)
-	a_specificationsFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_specificationsFormCallback.CreationMode || a_specificationsFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -6007,6 +6173,8 @@ type A_SPECIFICATION_TYPE_REFFormCallback struct {
 }
 
 func (a_specification_type_refFormCallback *A_SPECIFICATION_TYPE_REFFormCallback) OnSave() {
+	a_specification_type_refFormCallback.probe.stageOfInterest.Lock()
+	defer a_specification_type_refFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_SPECIFICATION_TYPE_REFFormCallback, OnSave")
 
@@ -6036,10 +6204,9 @@ func (a_specification_type_refFormCallback *A_SPECIFICATION_TYPE_REFFormCallback
 	}
 
 	a_specification_type_refFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_SPECIFICATION_TYPE_REF](
+	updateProbeTable[*models.A_SPECIFICATION_TYPE_REF](
 		a_specification_type_refFormCallback.probe,
 	)
-	a_specification_type_refFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_specification_type_refFormCallback.CreationMode || a_specification_type_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -6086,6 +6253,8 @@ type A_SPECIFIED_VALUESFormCallback struct {
 }
 
 func (a_specified_valuesFormCallback *A_SPECIFIED_VALUESFormCallback) OnSave() {
+	a_specified_valuesFormCallback.probe.stageOfInterest.Lock()
+	defer a_specified_valuesFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_SPECIFIED_VALUESFormCallback, OnSave")
 
@@ -6119,13 +6288,19 @@ func (a_specified_valuesFormCallback *A_SPECIFIED_VALUESFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.ENUM_VALUE](a_specified_valuesFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			a_specified_values_.ENUM_VALUE = instanceSlice
 
@@ -6138,10 +6313,9 @@ func (a_specified_valuesFormCallback *A_SPECIFIED_VALUESFormCallback) OnSave() {
 	}
 
 	a_specified_valuesFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_SPECIFIED_VALUES](
+	updateProbeTable[*models.A_SPECIFIED_VALUES](
 		a_specified_valuesFormCallback.probe,
 	)
-	a_specified_valuesFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_specified_valuesFormCallback.CreationMode || a_specified_valuesFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -6188,6 +6362,8 @@ type A_SPEC_ATTRIBUTESFormCallback struct {
 }
 
 func (a_spec_attributesFormCallback *A_SPEC_ATTRIBUTESFormCallback) OnSave() {
+	a_spec_attributesFormCallback.probe.stageOfInterest.Lock()
+	defer a_spec_attributesFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_SPEC_ATTRIBUTESFormCallback, OnSave")
 
@@ -6221,13 +6397,19 @@ func (a_spec_attributesFormCallback *A_SPEC_ATTRIBUTESFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.ATTRIBUTE_DEFINITION_BOOLEAN](a_spec_attributesFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			a_spec_attributes_.ATTRIBUTE_DEFINITION_BOOLEAN = instanceSlice
 
@@ -6246,13 +6428,19 @@ func (a_spec_attributesFormCallback *A_SPEC_ATTRIBUTESFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.ATTRIBUTE_DEFINITION_DATE](a_spec_attributesFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			a_spec_attributes_.ATTRIBUTE_DEFINITION_DATE = instanceSlice
 
@@ -6271,13 +6459,19 @@ func (a_spec_attributesFormCallback *A_SPEC_ATTRIBUTESFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.ATTRIBUTE_DEFINITION_ENUMERATION](a_spec_attributesFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			a_spec_attributes_.ATTRIBUTE_DEFINITION_ENUMERATION = instanceSlice
 
@@ -6296,13 +6490,19 @@ func (a_spec_attributesFormCallback *A_SPEC_ATTRIBUTESFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.ATTRIBUTE_DEFINITION_INTEGER](a_spec_attributesFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			a_spec_attributes_.ATTRIBUTE_DEFINITION_INTEGER = instanceSlice
 
@@ -6321,13 +6521,19 @@ func (a_spec_attributesFormCallback *A_SPEC_ATTRIBUTESFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.ATTRIBUTE_DEFINITION_REAL](a_spec_attributesFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			a_spec_attributes_.ATTRIBUTE_DEFINITION_REAL = instanceSlice
 
@@ -6346,13 +6552,19 @@ func (a_spec_attributesFormCallback *A_SPEC_ATTRIBUTESFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.ATTRIBUTE_DEFINITION_STRING](a_spec_attributesFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			a_spec_attributes_.ATTRIBUTE_DEFINITION_STRING = instanceSlice
 
@@ -6371,13 +6583,19 @@ func (a_spec_attributesFormCallback *A_SPEC_ATTRIBUTESFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.ATTRIBUTE_DEFINITION_XHTML](a_spec_attributesFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			a_spec_attributes_.ATTRIBUTE_DEFINITION_XHTML = instanceSlice
 
@@ -6390,10 +6608,9 @@ func (a_spec_attributesFormCallback *A_SPEC_ATTRIBUTESFormCallback) OnSave() {
 	}
 
 	a_spec_attributesFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_SPEC_ATTRIBUTES](
+	updateProbeTable[*models.A_SPEC_ATTRIBUTES](
 		a_spec_attributesFormCallback.probe,
 	)
-	a_spec_attributesFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_spec_attributesFormCallback.CreationMode || a_spec_attributesFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -6440,6 +6657,8 @@ type A_SPEC_OBJECTSFormCallback struct {
 }
 
 func (a_spec_objectsFormCallback *A_SPEC_OBJECTSFormCallback) OnSave() {
+	a_spec_objectsFormCallback.probe.stageOfInterest.Lock()
+	defer a_spec_objectsFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_SPEC_OBJECTSFormCallback, OnSave")
 
@@ -6473,13 +6692,19 @@ func (a_spec_objectsFormCallback *A_SPEC_OBJECTSFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.SPEC_OBJECT](a_spec_objectsFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			a_spec_objects_.SPEC_OBJECT = instanceSlice
 
@@ -6492,10 +6717,9 @@ func (a_spec_objectsFormCallback *A_SPEC_OBJECTSFormCallback) OnSave() {
 	}
 
 	a_spec_objectsFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_SPEC_OBJECTS](
+	updateProbeTable[*models.A_SPEC_OBJECTS](
 		a_spec_objectsFormCallback.probe,
 	)
-	a_spec_objectsFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_spec_objectsFormCallback.CreationMode || a_spec_objectsFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -6542,6 +6766,8 @@ type A_SPEC_OBJECT_TYPE_REFFormCallback struct {
 }
 
 func (a_spec_object_type_refFormCallback *A_SPEC_OBJECT_TYPE_REFFormCallback) OnSave() {
+	a_spec_object_type_refFormCallback.probe.stageOfInterest.Lock()
+	defer a_spec_object_type_refFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_SPEC_OBJECT_TYPE_REFFormCallback, OnSave")
 
@@ -6571,10 +6797,9 @@ func (a_spec_object_type_refFormCallback *A_SPEC_OBJECT_TYPE_REFFormCallback) On
 	}
 
 	a_spec_object_type_refFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_SPEC_OBJECT_TYPE_REF](
+	updateProbeTable[*models.A_SPEC_OBJECT_TYPE_REF](
 		a_spec_object_type_refFormCallback.probe,
 	)
-	a_spec_object_type_refFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_spec_object_type_refFormCallback.CreationMode || a_spec_object_type_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -6621,6 +6846,8 @@ type A_SPEC_RELATIONSFormCallback struct {
 }
 
 func (a_spec_relationsFormCallback *A_SPEC_RELATIONSFormCallback) OnSave() {
+	a_spec_relationsFormCallback.probe.stageOfInterest.Lock()
+	defer a_spec_relationsFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_SPEC_RELATIONSFormCallback, OnSave")
 
@@ -6654,13 +6881,19 @@ func (a_spec_relationsFormCallback *A_SPEC_RELATIONSFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.SPEC_RELATION](a_spec_relationsFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			a_spec_relations_.SPEC_RELATION = instanceSlice
 
@@ -6673,10 +6906,9 @@ func (a_spec_relationsFormCallback *A_SPEC_RELATIONSFormCallback) OnSave() {
 	}
 
 	a_spec_relationsFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_SPEC_RELATIONS](
+	updateProbeTable[*models.A_SPEC_RELATIONS](
 		a_spec_relationsFormCallback.probe,
 	)
-	a_spec_relationsFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_spec_relationsFormCallback.CreationMode || a_spec_relationsFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -6723,6 +6955,8 @@ type A_SPEC_RELATION_GROUPSFormCallback struct {
 }
 
 func (a_spec_relation_groupsFormCallback *A_SPEC_RELATION_GROUPSFormCallback) OnSave() {
+	a_spec_relation_groupsFormCallback.probe.stageOfInterest.Lock()
+	defer a_spec_relation_groupsFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_SPEC_RELATION_GROUPSFormCallback, OnSave")
 
@@ -6756,13 +6990,19 @@ func (a_spec_relation_groupsFormCallback *A_SPEC_RELATION_GROUPSFormCallback) On
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.RELATION_GROUP](a_spec_relation_groupsFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			a_spec_relation_groups_.RELATION_GROUP = instanceSlice
 
@@ -6775,10 +7015,9 @@ func (a_spec_relation_groupsFormCallback *A_SPEC_RELATION_GROUPSFormCallback) On
 	}
 
 	a_spec_relation_groupsFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_SPEC_RELATION_GROUPS](
+	updateProbeTable[*models.A_SPEC_RELATION_GROUPS](
 		a_spec_relation_groupsFormCallback.probe,
 	)
-	a_spec_relation_groupsFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_spec_relation_groupsFormCallback.CreationMode || a_spec_relation_groupsFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -6825,6 +7064,8 @@ type A_SPEC_RELATION_REFFormCallback struct {
 }
 
 func (a_spec_relation_refFormCallback *A_SPEC_RELATION_REFFormCallback) OnSave() {
+	a_spec_relation_refFormCallback.probe.stageOfInterest.Lock()
+	defer a_spec_relation_refFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_SPEC_RELATION_REFFormCallback, OnSave")
 
@@ -6854,10 +7095,9 @@ func (a_spec_relation_refFormCallback *A_SPEC_RELATION_REFFormCallback) OnSave()
 	}
 
 	a_spec_relation_refFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_SPEC_RELATION_REF](
+	updateProbeTable[*models.A_SPEC_RELATION_REF](
 		a_spec_relation_refFormCallback.probe,
 	)
-	a_spec_relation_refFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_spec_relation_refFormCallback.CreationMode || a_spec_relation_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -6904,6 +7144,8 @@ type A_SPEC_RELATION_TYPE_REFFormCallback struct {
 }
 
 func (a_spec_relation_type_refFormCallback *A_SPEC_RELATION_TYPE_REFFormCallback) OnSave() {
+	a_spec_relation_type_refFormCallback.probe.stageOfInterest.Lock()
+	defer a_spec_relation_type_refFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_SPEC_RELATION_TYPE_REFFormCallback, OnSave")
 
@@ -6933,10 +7175,9 @@ func (a_spec_relation_type_refFormCallback *A_SPEC_RELATION_TYPE_REFFormCallback
 	}
 
 	a_spec_relation_type_refFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_SPEC_RELATION_TYPE_REF](
+	updateProbeTable[*models.A_SPEC_RELATION_TYPE_REF](
 		a_spec_relation_type_refFormCallback.probe,
 	)
-	a_spec_relation_type_refFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_spec_relation_type_refFormCallback.CreationMode || a_spec_relation_type_refFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -6983,6 +7224,8 @@ type A_SPEC_TYPESFormCallback struct {
 }
 
 func (a_spec_typesFormCallback *A_SPEC_TYPESFormCallback) OnSave() {
+	a_spec_typesFormCallback.probe.stageOfInterest.Lock()
+	defer a_spec_typesFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_SPEC_TYPESFormCallback, OnSave")
 
@@ -7016,13 +7259,19 @@ func (a_spec_typesFormCallback *A_SPEC_TYPESFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.RELATION_GROUP_TYPE](a_spec_typesFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			a_spec_types_.RELATION_GROUP_TYPE = instanceSlice
 
@@ -7041,13 +7290,19 @@ func (a_spec_typesFormCallback *A_SPEC_TYPESFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.SPEC_OBJECT_TYPE](a_spec_typesFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			a_spec_types_.SPEC_OBJECT_TYPE = instanceSlice
 
@@ -7066,13 +7321,19 @@ func (a_spec_typesFormCallback *A_SPEC_TYPESFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.SPEC_RELATION_TYPE](a_spec_typesFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			a_spec_types_.SPEC_RELATION_TYPE = instanceSlice
 
@@ -7091,13 +7352,19 @@ func (a_spec_typesFormCallback *A_SPEC_TYPESFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.SPECIFICATION_TYPE](a_spec_typesFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			a_spec_types_.SPECIFICATION_TYPE = instanceSlice
 
@@ -7110,10 +7377,9 @@ func (a_spec_typesFormCallback *A_SPEC_TYPESFormCallback) OnSave() {
 	}
 
 	a_spec_typesFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_SPEC_TYPES](
+	updateProbeTable[*models.A_SPEC_TYPES](
 		a_spec_typesFormCallback.probe,
 	)
-	a_spec_typesFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_spec_typesFormCallback.CreationMode || a_spec_typesFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -7160,6 +7426,8 @@ type A_THE_HEADERFormCallback struct {
 }
 
 func (a_the_headerFormCallback *A_THE_HEADERFormCallback) OnSave() {
+	a_the_headerFormCallback.probe.stageOfInterest.Lock()
+	defer a_the_headerFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_THE_HEADERFormCallback, OnSave")
 
@@ -7189,10 +7457,9 @@ func (a_the_headerFormCallback *A_THE_HEADERFormCallback) OnSave() {
 	}
 
 	a_the_headerFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_THE_HEADER](
+	updateProbeTable[*models.A_THE_HEADER](
 		a_the_headerFormCallback.probe,
 	)
-	a_the_headerFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_the_headerFormCallback.CreationMode || a_the_headerFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -7239,6 +7506,8 @@ type A_TOOL_EXTENSIONSFormCallback struct {
 }
 
 func (a_tool_extensionsFormCallback *A_TOOL_EXTENSIONSFormCallback) OnSave() {
+	a_tool_extensionsFormCallback.probe.stageOfInterest.Lock()
+	defer a_tool_extensionsFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("A_TOOL_EXTENSIONSFormCallback, OnSave")
 
@@ -7272,13 +7541,19 @@ func (a_tool_extensionsFormCallback *A_TOOL_EXTENSIONSFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.REQ_IF_TOOL_EXTENSION](a_tool_extensionsFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			a_tool_extensions_.REQ_IF_TOOL_EXTENSION = instanceSlice
 
@@ -7291,10 +7566,9 @@ func (a_tool_extensionsFormCallback *A_TOOL_EXTENSIONSFormCallback) OnSave() {
 	}
 
 	a_tool_extensionsFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.A_TOOL_EXTENSIONS](
+	updateProbeTable[*models.A_TOOL_EXTENSIONS](
 		a_tool_extensionsFormCallback.probe,
 	)
-	a_tool_extensionsFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if a_tool_extensionsFormCallback.CreationMode || a_tool_extensionsFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -7341,6 +7615,8 @@ type DATATYPE_DEFINITION_BOOLEANFormCallback struct {
 }
 
 func (datatype_definition_booleanFormCallback *DATATYPE_DEFINITION_BOOLEANFormCallback) OnSave() {
+	datatype_definition_booleanFormCallback.probe.stageOfInterest.Lock()
+	defer datatype_definition_booleanFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("DATATYPE_DEFINITION_BOOLEANFormCallback, OnSave")
 
@@ -7386,9 +7662,8 @@ func (datatype_definition_booleanFormCallback *DATATYPE_DEFINITION_BOOLEANFormCa
 				_ = rf
 				rf.GongstructName = "A_DATATYPES"
 				rf.Fieldname = "DATATYPE_DEFINITION_BOOLEAN"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := datatype_definition_boolean_.GongGetReverseFieldOwner(
 					datatype_definition_booleanFormCallback.probe.stageOfInterest,
-					datatype_definition_boolean_,
 					&rf)
 
 				var ok bool
@@ -7445,10 +7720,9 @@ func (datatype_definition_booleanFormCallback *DATATYPE_DEFINITION_BOOLEANFormCa
 	}
 
 	datatype_definition_booleanFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.DATATYPE_DEFINITION_BOOLEAN](
+	updateProbeTable[*models.DATATYPE_DEFINITION_BOOLEAN](
 		datatype_definition_booleanFormCallback.probe,
 	)
-	datatype_definition_booleanFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if datatype_definition_booleanFormCallback.CreationMode || datatype_definition_booleanFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -7495,6 +7769,8 @@ type DATATYPE_DEFINITION_DATEFormCallback struct {
 }
 
 func (datatype_definition_dateFormCallback *DATATYPE_DEFINITION_DATEFormCallback) OnSave() {
+	datatype_definition_dateFormCallback.probe.stageOfInterest.Lock()
+	defer datatype_definition_dateFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("DATATYPE_DEFINITION_DATEFormCallback, OnSave")
 
@@ -7540,9 +7816,8 @@ func (datatype_definition_dateFormCallback *DATATYPE_DEFINITION_DATEFormCallback
 				_ = rf
 				rf.GongstructName = "A_DATATYPES"
 				rf.Fieldname = "DATATYPE_DEFINITION_DATE"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := datatype_definition_date_.GongGetReverseFieldOwner(
 					datatype_definition_dateFormCallback.probe.stageOfInterest,
-					datatype_definition_date_,
 					&rf)
 
 				var ok bool
@@ -7599,10 +7874,9 @@ func (datatype_definition_dateFormCallback *DATATYPE_DEFINITION_DATEFormCallback
 	}
 
 	datatype_definition_dateFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.DATATYPE_DEFINITION_DATE](
+	updateProbeTable[*models.DATATYPE_DEFINITION_DATE](
 		datatype_definition_dateFormCallback.probe,
 	)
-	datatype_definition_dateFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if datatype_definition_dateFormCallback.CreationMode || datatype_definition_dateFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -7649,6 +7923,8 @@ type DATATYPE_DEFINITION_ENUMERATIONFormCallback struct {
 }
 
 func (datatype_definition_enumerationFormCallback *DATATYPE_DEFINITION_ENUMERATIONFormCallback) OnSave() {
+	datatype_definition_enumerationFormCallback.probe.stageOfInterest.Lock()
+	defer datatype_definition_enumerationFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("DATATYPE_DEFINITION_ENUMERATIONFormCallback, OnSave")
 
@@ -7696,9 +7972,8 @@ func (datatype_definition_enumerationFormCallback *DATATYPE_DEFINITION_ENUMERATI
 				_ = rf
 				rf.GongstructName = "A_DATATYPES"
 				rf.Fieldname = "DATATYPE_DEFINITION_ENUMERATION"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := datatype_definition_enumeration_.GongGetReverseFieldOwner(
 					datatype_definition_enumerationFormCallback.probe.stageOfInterest,
-					datatype_definition_enumeration_,
 					&rf)
 
 				var ok bool
@@ -7755,10 +8030,9 @@ func (datatype_definition_enumerationFormCallback *DATATYPE_DEFINITION_ENUMERATI
 	}
 
 	datatype_definition_enumerationFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.DATATYPE_DEFINITION_ENUMERATION](
+	updateProbeTable[*models.DATATYPE_DEFINITION_ENUMERATION](
 		datatype_definition_enumerationFormCallback.probe,
 	)
-	datatype_definition_enumerationFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if datatype_definition_enumerationFormCallback.CreationMode || datatype_definition_enumerationFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -7805,6 +8079,8 @@ type DATATYPE_DEFINITION_INTEGERFormCallback struct {
 }
 
 func (datatype_definition_integerFormCallback *DATATYPE_DEFINITION_INTEGERFormCallback) OnSave() {
+	datatype_definition_integerFormCallback.probe.stageOfInterest.Lock()
+	defer datatype_definition_integerFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("DATATYPE_DEFINITION_INTEGERFormCallback, OnSave")
 
@@ -7854,9 +8130,8 @@ func (datatype_definition_integerFormCallback *DATATYPE_DEFINITION_INTEGERFormCa
 				_ = rf
 				rf.GongstructName = "A_DATATYPES"
 				rf.Fieldname = "DATATYPE_DEFINITION_INTEGER"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := datatype_definition_integer_.GongGetReverseFieldOwner(
 					datatype_definition_integerFormCallback.probe.stageOfInterest,
-					datatype_definition_integer_,
 					&rf)
 
 				var ok bool
@@ -7913,10 +8188,9 @@ func (datatype_definition_integerFormCallback *DATATYPE_DEFINITION_INTEGERFormCa
 	}
 
 	datatype_definition_integerFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.DATATYPE_DEFINITION_INTEGER](
+	updateProbeTable[*models.DATATYPE_DEFINITION_INTEGER](
 		datatype_definition_integerFormCallback.probe,
 	)
-	datatype_definition_integerFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if datatype_definition_integerFormCallback.CreationMode || datatype_definition_integerFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -7963,6 +8237,8 @@ type DATATYPE_DEFINITION_REALFormCallback struct {
 }
 
 func (datatype_definition_realFormCallback *DATATYPE_DEFINITION_REALFormCallback) OnSave() {
+	datatype_definition_realFormCallback.probe.stageOfInterest.Lock()
+	defer datatype_definition_realFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("DATATYPE_DEFINITION_REALFormCallback, OnSave")
 
@@ -8014,9 +8290,8 @@ func (datatype_definition_realFormCallback *DATATYPE_DEFINITION_REALFormCallback
 				_ = rf
 				rf.GongstructName = "A_DATATYPES"
 				rf.Fieldname = "DATATYPE_DEFINITION_REAL"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := datatype_definition_real_.GongGetReverseFieldOwner(
 					datatype_definition_realFormCallback.probe.stageOfInterest,
-					datatype_definition_real_,
 					&rf)
 
 				var ok bool
@@ -8073,10 +8348,9 @@ func (datatype_definition_realFormCallback *DATATYPE_DEFINITION_REALFormCallback
 	}
 
 	datatype_definition_realFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.DATATYPE_DEFINITION_REAL](
+	updateProbeTable[*models.DATATYPE_DEFINITION_REAL](
 		datatype_definition_realFormCallback.probe,
 	)
-	datatype_definition_realFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if datatype_definition_realFormCallback.CreationMode || datatype_definition_realFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -8123,6 +8397,8 @@ type DATATYPE_DEFINITION_STRINGFormCallback struct {
 }
 
 func (datatype_definition_stringFormCallback *DATATYPE_DEFINITION_STRINGFormCallback) OnSave() {
+	datatype_definition_stringFormCallback.probe.stageOfInterest.Lock()
+	defer datatype_definition_stringFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("DATATYPE_DEFINITION_STRINGFormCallback, OnSave")
 
@@ -8170,9 +8446,8 @@ func (datatype_definition_stringFormCallback *DATATYPE_DEFINITION_STRINGFormCall
 				_ = rf
 				rf.GongstructName = "A_DATATYPES"
 				rf.Fieldname = "DATATYPE_DEFINITION_STRING"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := datatype_definition_string_.GongGetReverseFieldOwner(
 					datatype_definition_stringFormCallback.probe.stageOfInterest,
-					datatype_definition_string_,
 					&rf)
 
 				var ok bool
@@ -8229,10 +8504,9 @@ func (datatype_definition_stringFormCallback *DATATYPE_DEFINITION_STRINGFormCall
 	}
 
 	datatype_definition_stringFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.DATATYPE_DEFINITION_STRING](
+	updateProbeTable[*models.DATATYPE_DEFINITION_STRING](
 		datatype_definition_stringFormCallback.probe,
 	)
-	datatype_definition_stringFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if datatype_definition_stringFormCallback.CreationMode || datatype_definition_stringFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -8279,6 +8553,8 @@ type DATATYPE_DEFINITION_XHTMLFormCallback struct {
 }
 
 func (datatype_definition_xhtmlFormCallback *DATATYPE_DEFINITION_XHTMLFormCallback) OnSave() {
+	datatype_definition_xhtmlFormCallback.probe.stageOfInterest.Lock()
+	defer datatype_definition_xhtmlFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("DATATYPE_DEFINITION_XHTMLFormCallback, OnSave")
 
@@ -8324,9 +8600,8 @@ func (datatype_definition_xhtmlFormCallback *DATATYPE_DEFINITION_XHTMLFormCallba
 				_ = rf
 				rf.GongstructName = "A_DATATYPES"
 				rf.Fieldname = "DATATYPE_DEFINITION_XHTML"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := datatype_definition_xhtml_.GongGetReverseFieldOwner(
 					datatype_definition_xhtmlFormCallback.probe.stageOfInterest,
-					datatype_definition_xhtml_,
 					&rf)
 
 				var ok bool
@@ -8383,10 +8658,9 @@ func (datatype_definition_xhtmlFormCallback *DATATYPE_DEFINITION_XHTMLFormCallba
 	}
 
 	datatype_definition_xhtmlFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.DATATYPE_DEFINITION_XHTML](
+	updateProbeTable[*models.DATATYPE_DEFINITION_XHTML](
 		datatype_definition_xhtmlFormCallback.probe,
 	)
-	datatype_definition_xhtmlFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if datatype_definition_xhtmlFormCallback.CreationMode || datatype_definition_xhtmlFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -8433,6 +8707,8 @@ type EMBEDDED_VALUEFormCallback struct {
 }
 
 func (embedded_valueFormCallback *EMBEDDED_VALUEFormCallback) OnSave() {
+	embedded_valueFormCallback.probe.stageOfInterest.Lock()
+	defer embedded_valueFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("EMBEDDED_VALUEFormCallback, OnSave")
 
@@ -8464,10 +8740,9 @@ func (embedded_valueFormCallback *EMBEDDED_VALUEFormCallback) OnSave() {
 	}
 
 	embedded_valueFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.EMBEDDED_VALUE](
+	updateProbeTable[*models.EMBEDDED_VALUE](
 		embedded_valueFormCallback.probe,
 	)
-	embedded_valueFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if embedded_valueFormCallback.CreationMode || embedded_valueFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -8514,6 +8789,8 @@ type ENUM_VALUEFormCallback struct {
 }
 
 func (enum_valueFormCallback *ENUM_VALUEFormCallback) OnSave() {
+	enum_valueFormCallback.probe.stageOfInterest.Lock()
+	defer enum_valueFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("ENUM_VALUEFormCallback, OnSave")
 
@@ -8561,9 +8838,8 @@ func (enum_valueFormCallback *ENUM_VALUEFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "A_SPECIFIED_VALUES"
 				rf.Fieldname = "ENUM_VALUE"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := enum_value_.GongGetReverseFieldOwner(
 					enum_valueFormCallback.probe.stageOfInterest,
-					enum_value_,
 					&rf)
 
 				var ok bool
@@ -8620,10 +8896,9 @@ func (enum_valueFormCallback *ENUM_VALUEFormCallback) OnSave() {
 	}
 
 	enum_valueFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.ENUM_VALUE](
+	updateProbeTable[*models.ENUM_VALUE](
 		enum_valueFormCallback.probe,
 	)
-	enum_valueFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if enum_valueFormCallback.CreationMode || enum_valueFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -8670,6 +8945,8 @@ type RELATION_GROUPFormCallback struct {
 }
 
 func (relation_groupFormCallback *RELATION_GROUPFormCallback) OnSave() {
+	relation_groupFormCallback.probe.stageOfInterest.Lock()
+	defer relation_groupFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("RELATION_GROUPFormCallback, OnSave")
 
@@ -8723,9 +9000,8 @@ func (relation_groupFormCallback *RELATION_GROUPFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "A_SPEC_RELATION_GROUPS"
 				rf.Fieldname = "RELATION_GROUP"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := relation_group_.GongGetReverseFieldOwner(
 					relation_groupFormCallback.probe.stageOfInterest,
-					relation_group_,
 					&rf)
 
 				var ok bool
@@ -8782,10 +9058,9 @@ func (relation_groupFormCallback *RELATION_GROUPFormCallback) OnSave() {
 	}
 
 	relation_groupFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.RELATION_GROUP](
+	updateProbeTable[*models.RELATION_GROUP](
 		relation_groupFormCallback.probe,
 	)
-	relation_groupFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if relation_groupFormCallback.CreationMode || relation_groupFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -8832,6 +9107,8 @@ type RELATION_GROUP_TYPEFormCallback struct {
 }
 
 func (relation_group_typeFormCallback *RELATION_GROUP_TYPEFormCallback) OnSave() {
+	relation_group_typeFormCallback.probe.stageOfInterest.Lock()
+	defer relation_group_typeFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("RELATION_GROUP_TYPEFormCallback, OnSave")
 
@@ -8879,9 +9156,8 @@ func (relation_group_typeFormCallback *RELATION_GROUP_TYPEFormCallback) OnSave()
 				_ = rf
 				rf.GongstructName = "A_SPEC_TYPES"
 				rf.Fieldname = "RELATION_GROUP_TYPE"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := relation_group_type_.GongGetReverseFieldOwner(
 					relation_group_typeFormCallback.probe.stageOfInterest,
-					relation_group_type_,
 					&rf)
 
 				var ok bool
@@ -8938,10 +9214,9 @@ func (relation_group_typeFormCallback *RELATION_GROUP_TYPEFormCallback) OnSave()
 	}
 
 	relation_group_typeFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.RELATION_GROUP_TYPE](
+	updateProbeTable[*models.RELATION_GROUP_TYPE](
 		relation_group_typeFormCallback.probe,
 	)
-	relation_group_typeFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if relation_group_typeFormCallback.CreationMode || relation_group_typeFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -8988,6 +9263,8 @@ type REQ_IFFormCallback struct {
 }
 
 func (req_ifFormCallback *REQ_IFFormCallback) OnSave() {
+	req_ifFormCallback.probe.stageOfInterest.Lock()
+	defer req_ifFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("REQ_IFFormCallback, OnSave")
 
@@ -9023,10 +9300,9 @@ func (req_ifFormCallback *REQ_IFFormCallback) OnSave() {
 	}
 
 	req_ifFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.REQ_IF](
+	updateProbeTable[*models.REQ_IF](
 		req_ifFormCallback.probe,
 	)
-	req_ifFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if req_ifFormCallback.CreationMode || req_ifFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -9073,6 +9349,8 @@ type REQ_IF_CONTENTFormCallback struct {
 }
 
 func (req_if_contentFormCallback *REQ_IF_CONTENTFormCallback) OnSave() {
+	req_if_contentFormCallback.probe.stageOfInterest.Lock()
+	defer req_if_contentFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("REQ_IF_CONTENTFormCallback, OnSave")
 
@@ -9112,10 +9390,9 @@ func (req_if_contentFormCallback *REQ_IF_CONTENTFormCallback) OnSave() {
 	}
 
 	req_if_contentFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.REQ_IF_CONTENT](
+	updateProbeTable[*models.REQ_IF_CONTENT](
 		req_if_contentFormCallback.probe,
 	)
-	req_if_contentFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if req_if_contentFormCallback.CreationMode || req_if_contentFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -9162,6 +9439,8 @@ type REQ_IF_HEADERFormCallback struct {
 }
 
 func (req_if_headerFormCallback *REQ_IF_HEADERFormCallback) OnSave() {
+	req_if_headerFormCallback.probe.stageOfInterest.Lock()
+	defer req_if_headerFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("REQ_IF_HEADERFormCallback, OnSave")
 
@@ -9205,10 +9484,9 @@ func (req_if_headerFormCallback *REQ_IF_HEADERFormCallback) OnSave() {
 	}
 
 	req_if_headerFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.REQ_IF_HEADER](
+	updateProbeTable[*models.REQ_IF_HEADER](
 		req_if_headerFormCallback.probe,
 	)
-	req_if_headerFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if req_if_headerFormCallback.CreationMode || req_if_headerFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -9255,6 +9533,8 @@ type REQ_IF_TOOL_EXTENSIONFormCallback struct {
 }
 
 func (req_if_tool_extensionFormCallback *REQ_IF_TOOL_EXTENSIONFormCallback) OnSave() {
+	req_if_tool_extensionFormCallback.probe.stageOfInterest.Lock()
+	defer req_if_tool_extensionFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("REQ_IF_TOOL_EXTENSIONFormCallback, OnSave")
 
@@ -9290,9 +9570,8 @@ func (req_if_tool_extensionFormCallback *REQ_IF_TOOL_EXTENSIONFormCallback) OnSa
 				_ = rf
 				rf.GongstructName = "A_TOOL_EXTENSIONS"
 				rf.Fieldname = "REQ_IF_TOOL_EXTENSION"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := req_if_tool_extension_.GongGetReverseFieldOwner(
 					req_if_tool_extensionFormCallback.probe.stageOfInterest,
-					req_if_tool_extension_,
 					&rf)
 
 				var ok bool
@@ -9349,10 +9628,9 @@ func (req_if_tool_extensionFormCallback *REQ_IF_TOOL_EXTENSIONFormCallback) OnSa
 	}
 
 	req_if_tool_extensionFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.REQ_IF_TOOL_EXTENSION](
+	updateProbeTable[*models.REQ_IF_TOOL_EXTENSION](
 		req_if_tool_extensionFormCallback.probe,
 	)
-	req_if_tool_extensionFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if req_if_tool_extensionFormCallback.CreationMode || req_if_tool_extensionFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -9399,6 +9677,8 @@ type SPECIFICATIONFormCallback struct {
 }
 
 func (specificationFormCallback *SPECIFICATIONFormCallback) OnSave() {
+	specificationFormCallback.probe.stageOfInterest.Lock()
+	defer specificationFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("SPECIFICATIONFormCallback, OnSave")
 
@@ -9450,9 +9730,8 @@ func (specificationFormCallback *SPECIFICATIONFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "A_SPECIFICATIONS"
 				rf.Fieldname = "SPECIFICATION"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := specification_.GongGetReverseFieldOwner(
 					specificationFormCallback.probe.stageOfInterest,
-					specification_,
 					&rf)
 
 				var ok bool
@@ -9509,10 +9788,9 @@ func (specificationFormCallback *SPECIFICATIONFormCallback) OnSave() {
 	}
 
 	specificationFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.SPECIFICATION](
+	updateProbeTable[*models.SPECIFICATION](
 		specificationFormCallback.probe,
 	)
-	specificationFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if specificationFormCallback.CreationMode || specificationFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -9559,6 +9837,8 @@ type SPECIFICATION_TYPEFormCallback struct {
 }
 
 func (specification_typeFormCallback *SPECIFICATION_TYPEFormCallback) OnSave() {
+	specification_typeFormCallback.probe.stageOfInterest.Lock()
+	defer specification_typeFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("SPECIFICATION_TYPEFormCallback, OnSave")
 
@@ -9606,9 +9886,8 @@ func (specification_typeFormCallback *SPECIFICATION_TYPEFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "A_SPEC_TYPES"
 				rf.Fieldname = "SPECIFICATION_TYPE"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := specification_type_.GongGetReverseFieldOwner(
 					specification_typeFormCallback.probe.stageOfInterest,
-					specification_type_,
 					&rf)
 
 				var ok bool
@@ -9665,10 +9944,9 @@ func (specification_typeFormCallback *SPECIFICATION_TYPEFormCallback) OnSave() {
 	}
 
 	specification_typeFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.SPECIFICATION_TYPE](
+	updateProbeTable[*models.SPECIFICATION_TYPE](
 		specification_typeFormCallback.probe,
 	)
-	specification_typeFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if specification_typeFormCallback.CreationMode || specification_typeFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -9715,6 +9993,8 @@ type SPEC_HIERARCHYFormCallback struct {
 }
 
 func (spec_hierarchyFormCallback *SPEC_HIERARCHYFormCallback) OnSave() {
+	spec_hierarchyFormCallback.probe.stageOfInterest.Lock()
+	defer spec_hierarchyFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("SPEC_HIERARCHYFormCallback, OnSave")
 
@@ -9770,9 +10050,8 @@ func (spec_hierarchyFormCallback *SPEC_HIERARCHYFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "A_CHILDREN"
 				rf.Fieldname = "SPEC_HIERARCHY"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := spec_hierarchy_.GongGetReverseFieldOwner(
 					spec_hierarchyFormCallback.probe.stageOfInterest,
-					spec_hierarchy_,
 					&rf)
 
 				var ok bool
@@ -9829,10 +10108,9 @@ func (spec_hierarchyFormCallback *SPEC_HIERARCHYFormCallback) OnSave() {
 	}
 
 	spec_hierarchyFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.SPEC_HIERARCHY](
+	updateProbeTable[*models.SPEC_HIERARCHY](
 		spec_hierarchyFormCallback.probe,
 	)
-	spec_hierarchyFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if spec_hierarchyFormCallback.CreationMode || spec_hierarchyFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -9879,6 +10157,8 @@ type SPEC_OBJECTFormCallback struct {
 }
 
 func (spec_objectFormCallback *SPEC_OBJECTFormCallback) OnSave() {
+	spec_objectFormCallback.probe.stageOfInterest.Lock()
+	defer spec_objectFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("SPEC_OBJECTFormCallback, OnSave")
 
@@ -9928,9 +10208,8 @@ func (spec_objectFormCallback *SPEC_OBJECTFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "A_SPEC_OBJECTS"
 				rf.Fieldname = "SPEC_OBJECT"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := spec_object_.GongGetReverseFieldOwner(
 					spec_objectFormCallback.probe.stageOfInterest,
-					spec_object_,
 					&rf)
 
 				var ok bool
@@ -9987,10 +10266,9 @@ func (spec_objectFormCallback *SPEC_OBJECTFormCallback) OnSave() {
 	}
 
 	spec_objectFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.SPEC_OBJECT](
+	updateProbeTable[*models.SPEC_OBJECT](
 		spec_objectFormCallback.probe,
 	)
-	spec_objectFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if spec_objectFormCallback.CreationMode || spec_objectFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -10037,6 +10315,8 @@ type SPEC_OBJECT_TYPEFormCallback struct {
 }
 
 func (spec_object_typeFormCallback *SPEC_OBJECT_TYPEFormCallback) OnSave() {
+	spec_object_typeFormCallback.probe.stageOfInterest.Lock()
+	defer spec_object_typeFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("SPEC_OBJECT_TYPEFormCallback, OnSave")
 
@@ -10084,9 +10364,8 @@ func (spec_object_typeFormCallback *SPEC_OBJECT_TYPEFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "A_SPEC_TYPES"
 				rf.Fieldname = "SPEC_OBJECT_TYPE"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := spec_object_type_.GongGetReverseFieldOwner(
 					spec_object_typeFormCallback.probe.stageOfInterest,
-					spec_object_type_,
 					&rf)
 
 				var ok bool
@@ -10143,10 +10422,9 @@ func (spec_object_typeFormCallback *SPEC_OBJECT_TYPEFormCallback) OnSave() {
 	}
 
 	spec_object_typeFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.SPEC_OBJECT_TYPE](
+	updateProbeTable[*models.SPEC_OBJECT_TYPE](
 		spec_object_typeFormCallback.probe,
 	)
-	spec_object_typeFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if spec_object_typeFormCallback.CreationMode || spec_object_typeFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -10193,6 +10471,8 @@ type SPEC_RELATIONFormCallback struct {
 }
 
 func (spec_relationFormCallback *SPEC_RELATIONFormCallback) OnSave() {
+	spec_relationFormCallback.probe.stageOfInterest.Lock()
+	defer spec_relationFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("SPEC_RELATIONFormCallback, OnSave")
 
@@ -10246,9 +10526,8 @@ func (spec_relationFormCallback *SPEC_RELATIONFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "A_SPEC_RELATIONS"
 				rf.Fieldname = "SPEC_RELATION"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := spec_relation_.GongGetReverseFieldOwner(
 					spec_relationFormCallback.probe.stageOfInterest,
-					spec_relation_,
 					&rf)
 
 				var ok bool
@@ -10305,10 +10584,9 @@ func (spec_relationFormCallback *SPEC_RELATIONFormCallback) OnSave() {
 	}
 
 	spec_relationFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.SPEC_RELATION](
+	updateProbeTable[*models.SPEC_RELATION](
 		spec_relationFormCallback.probe,
 	)
-	spec_relationFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if spec_relationFormCallback.CreationMode || spec_relationFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -10355,6 +10633,8 @@ type SPEC_RELATION_TYPEFormCallback struct {
 }
 
 func (spec_relation_typeFormCallback *SPEC_RELATION_TYPEFormCallback) OnSave() {
+	spec_relation_typeFormCallback.probe.stageOfInterest.Lock()
+	defer spec_relation_typeFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("SPEC_RELATION_TYPEFormCallback, OnSave")
 
@@ -10402,9 +10682,8 @@ func (spec_relation_typeFormCallback *SPEC_RELATION_TYPEFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "A_SPEC_TYPES"
 				rf.Fieldname = "SPEC_RELATION_TYPE"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := spec_relation_type_.GongGetReverseFieldOwner(
 					spec_relation_typeFormCallback.probe.stageOfInterest,
-					spec_relation_type_,
 					&rf)
 
 				var ok bool
@@ -10461,10 +10740,9 @@ func (spec_relation_typeFormCallback *SPEC_RELATION_TYPEFormCallback) OnSave() {
 	}
 
 	spec_relation_typeFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.SPEC_RELATION_TYPE](
+	updateProbeTable[*models.SPEC_RELATION_TYPE](
 		spec_relation_typeFormCallback.probe,
 	)
-	spec_relation_typeFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if spec_relation_typeFormCallback.CreationMode || spec_relation_typeFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -10511,6 +10789,8 @@ type XHTML_CONTENTFormCallback struct {
 }
 
 func (xhtml_contentFormCallback *XHTML_CONTENTFormCallback) OnSave() {
+	xhtml_contentFormCallback.probe.stageOfInterest.Lock()
+	defer xhtml_contentFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("XHTML_CONTENTFormCallback, OnSave")
 
@@ -10542,10 +10822,9 @@ func (xhtml_contentFormCallback *XHTML_CONTENTFormCallback) OnSave() {
 	}
 
 	xhtml_contentFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.XHTML_CONTENT](
+	updateProbeTable[*models.XHTML_CONTENT](
 		xhtml_contentFormCallback.probe,
 	)
-	xhtml_contentFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if xhtml_contentFormCallback.CreationMode || xhtml_contentFormCallback.formGroup.HasSuppressButtonBeenPressed {

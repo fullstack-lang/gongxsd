@@ -3,17 +3,18 @@ package probe
 
 import (
 	"embed"
+	"time"
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/fullstack-lang/gong/lib/doc2/go/prepare"
+	"github.com/fullstack-lang/gong/lib/doc/go/prepare"
 	gongsplit_fullstack "github.com/fullstack-lang/gong/lib/split/go/fullstack"
 	gongtable_fullstack "github.com/fullstack-lang/gong/lib/table/go/fullstack"
 	gongtree_fullstack "github.com/fullstack-lang/gong/lib/tree/go/fullstack"
 
-	gong_fullstack "github.com/fullstack-lang/gong/go/fullstack"
 	gong_models "github.com/fullstack-lang/gong/go/models"
 
+	doc "github.com/fullstack-lang/gong/lib/doc/go/models"
 	split "github.com/fullstack-lang/gong/lib/split/go/models"
 	form "github.com/fullstack-lang/gong/lib/table/go/models"
 	tree "github.com/fullstack-lang/gong/lib/tree/go/models"
@@ -24,19 +25,35 @@ import (
 )
 
 type Probe struct {
-	r               *gin.Engine
-	stageOfInterest *models.Stage
-	gongStage       *gong_models.Stage
-	treeStage       *tree.Stage
-	formStage       *form.Stage
-	tableStage      *form.Stage
-	splitStage      *split.Stage
+	r                      *gin.Engine
+	stageOfInterest        *models.Stage
+	gongStage              *gong_models.Stage
+	treeStage              *tree.Stage
+	formStage              *form.Stage
+	tableStage             *form.Stage
+	notificationTableStage *form.Stage
+	splitStage             *split.Stage
 
 	// AsSplit to be used if one need only the data editor
 	dataEditor *split.AsSplit
 
 	// AsSplitArea for the diagram editor
 	diagramEditor *split.AsSplitArea
+
+	docStager *doc.Stager
+
+	notification []*Notification
+
+	// to limit the  number of elements per gong struct node in the tree
+	maxElementsNbPerGongStructNode int
+}
+
+func (probe *Probe) SetMaxElementsNbPerGongStructNode(nb int) {
+	probe.maxElementsNbPerGongStructNode = nb
+}
+
+func (probe *Probe) GetMaxElementsNbPerGongStructNode() int {
+	return probe.maxElementsNbPerGongStructNode
 }
 
 func NewProbe(
@@ -51,8 +68,8 @@ func NewProbe(
 	splitStage.Commit()
 
 	// load the gong
-	gongStage, _ := gong_fullstack.NewStackInstance(r, stageOfInterest.GetName())
-	gong_models.LoadEmbedded(gongStage, goModelsDir)
+	stage := gong_models.NewStage(stageOfInterest.GetName())
+	gong_models.LoadEmbedded(stage, goModelsDir)
 
 	// treeForSelectingDate that is on the sidebar
 	treeStage, _ := gongtree_fullstack.NewStackInstance(r, stageOfInterest.GetProbeTreeSidebarStageName())
@@ -61,18 +78,24 @@ func NewProbe(
 	tableStage, _ := gongtable_fullstack.NewStackInstance(r, stageOfInterest.GetProbeTableStageName())
 	tableStage.Commit()
 
+	notificationTableStage, _ := gongtable_fullstack.NewStackInstance(r, stageOfInterest.GetProbeNotificationTableStageName())
+	notificationTableStage.Commit()
+
 	// stage for reusable form
 	formStage, _ := gongtable_fullstack.NewStackInstance(r, stageOfInterest.GetProbeFormStageName())
 	formStage.Commit()
 
-	probe = new(Probe)
-	probe.r = r
-	probe.stageOfInterest = stageOfInterest
-	probe.gongStage = gongStage
-	probe.treeStage = treeStage
-	probe.formStage = formStage
-	probe.tableStage = tableStage
-	probe.splitStage = splitStage
+	probe = &Probe{
+		r:                              r,
+		stageOfInterest:                stageOfInterest,
+		gongStage:                      stage,
+		treeStage:                      treeStage,
+		formStage:                      formStage,
+		tableStage:                     tableStage,
+		notificationTableStage:         notificationTableStage,
+		splitStage:                     splitStage,
+		maxElementsNbPerGongStructNode: 10,
+	}
 
 	// prepare the receiving AsSplitArea
 	probe.diagramEditor = &split.AsSplitArea{
@@ -81,12 +104,12 @@ func NewProbe(
 		Size:             50,
 	}
 
-	prepare.Prepare(
+	probe.docStager = prepare.Prepare(
 		r,
 		embeddedDiagrams,
 
 		// this is the prefix of the names of the stages svg and tree that will be created
-		// by doc2. Using a combination of the package name and the stage of interest name
+		// by doc. Using a combination of the package name and the stage of interest name
 		// might prevent name collisions if more that one probe is being instancied
 		"github.com/fullstack-lang/gongxsd/test/reqif/go"+":"+stageOfInterest.GetName(),
 		reqif_go.GoModelsDir,
@@ -99,41 +122,58 @@ func NewProbe(
 		Name:      "Top, sidebar, table & form",
 		Direction: split.Horizontal,
 		AsSplitAreas: []*split.AsSplitArea{
-			(&split.AsSplitArea{
+			{
 				Name: "sidebar tree",
 				Size: 20,
-				Tree: (&split.Tree{
+				Tree: &split.Tree{
 					Name:      "Sidebar",
 					StackName: probe.treeStage.GetName(),
-				}),
-			}),
-			(&split.AsSplitArea{
-				Name: "table",
+				},
+			},
+			{
+				Name: "both tables",
 				Size: 50,
-				Table: (&split.Table{
-					Name:      "Table",
-					StackName: probe.tableStage.GetName(),
-				}),
-			}),
-			(&split.AsSplitArea{
+				AsSplit: &split.AsSplit{
+					Direction: split.Vertical,
+					AsSplitAreas: []*split.AsSplitArea{
+						{
+							Name: "table",
+							Size: 50,
+							Table: &split.Table{
+								Name:      "Table",
+								StackName: probe.tableStage.GetName(),
+							},
+						},
+						{
+							Name: "notification table",
+							Size: 50,
+							Table: &split.Table{
+								Name:      "Table",
+								StackName: probe.notificationTableStage.GetName(),
+							},
+						},
+					},
+				},
+			},
+			{
 				Name: "form",
 				Size: 30,
-				Form: (&split.Form{
+				Form: &split.Form{
 					Name:      "Form",
 					StackName: probe.formStage.GetName(),
-				}),
-			}),
+				},
+			},
 		},
 	}
 
 	split.StageBranch(probe.splitStage, &split.View{
 		Name: "Main view",
 		RootAsSplitAreas: []*split.AsSplitArea{
-			(&split.AsSplitArea{
+			{
 				Name:    "Top",
 				Size:    50,
 				AsSplit: probe.dataEditor,
-			}),
+			},
 			probe.diagramEditor,
 		},
 	})
@@ -146,6 +186,32 @@ func NewProbe(
 
 func (probe *Probe) Refresh() {
 	updateAndCommitTree(probe)
+	updateCurrentProbeTable(probe)
+	probe.updateFillUpForm()
+	probe.docStager.UpdateAndCommitSVGStage()
+}
+
+const NbNotificationMax = 100
+
+func (probe *Probe) AddNotification(date time.Time, message string) {
+	notification := Notification{
+		Date:    date,
+		Message: message,
+	}
+	probe.notification = append(probe.notification, &notification)
+
+	if len(probe.notification) > NbNotificationMax {
+		probe.notification = probe.notification[1:] // Drop the first element (index 0)
+	}
+}
+
+func (probe *Probe) CommitNotificationTable() {
+	probe.UpdateAndCommitNotificationTable()
+}
+
+func (probe *Probe) ResetNotifications() {
+	probe.notification = make([]*Notification, 0)
+	probe.UpdateAndCommitNotificationTable()
 }
 
 func (probe *Probe) GetFormStage() *form.Stage {
@@ -158,4 +224,13 @@ func (probe *Probe) GetDataEditor() *split.AsSplit {
 
 func (probe *Probe) GetDiagramEditor() *split.AsSplitArea {
 	return probe.diagramEditor
+}
+
+func (probe *Probe) FillUpFormFromGongstruct(instance any, formName string) {
+	FillUpFormFromGongstruct(instance, probe)
+}
+
+type Notification struct {
+	Date    time.Time
+	Message string
 }

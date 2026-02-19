@@ -51,16 +51,16 @@ func (nodeImplGongstruct *TreeNodeImplGongstruct) OnAfterUpdate(
 
 	// insertion point
 	if nodeImplGongstruct.gongStruct.GetName() == "BookType" {
-		updateAndCommitTable[models.BookType](nodeImplGongstruct.probe)
+		updateProbeTable[*models.BookType](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Books" {
-		updateAndCommitTable[models.Books](nodeImplGongstruct.probe)
+		updateProbeTable[*models.Books](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Credit" {
-		updateAndCommitTable[models.Credit](nodeImplGongstruct.probe)
+		updateProbeTable[*models.Credit](nodeImplGongstruct.probe)
 	}
 	if nodeImplGongstruct.gongStruct.GetName() == "Link" {
-		updateAndCommitTable[models.Link](nodeImplGongstruct.probe)
+		updateProbeTable[*models.Link](nodeImplGongstruct.probe)
 	}
 
 	// set color for node and reset all other nodes color
@@ -69,6 +69,4 @@ func (nodeImplGongstruct *TreeNodeImplGongstruct) OnAfterUpdate(
 	}
 	stagedNode.BackgroundColor = "lightgrey"
 	gongtreeStage.Commit()
-
-	nodeImplGongstruct.probe.tableStage.Commit()
 }

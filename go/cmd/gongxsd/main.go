@@ -5,15 +5,11 @@ import (
 	"log"
 	"strconv"
 
-	// insertion point for models import
-	split_static "github.com/fullstack-lang/gong/lib/split/go/static"
-	gongxsd_models "github.com/fullstack-lang/gongxsd/go/models"
-	gongxsd_stack "github.com/fullstack-lang/gongxsd/go/stack"
+	"github.com/fullstack-lang/gongxsd/go/level1stack"
+	"github.com/fullstack-lang/gongxsd/go/models"
 )
 
 var (
-	logGINFlag = flag.Bool("logGIN", false, "log mode for gin")
-
 	unmarshallFromCode = flag.String("unmarshallFromCode", "", "unmarshall data from go file and '.go' (must be lowercased without spaces), If unmarshallFromCode arg is '', no unmarshalling")
 	marshallOnCommit   = flag.String("marshallOnCommit", "", "on all commits, marshall staged data to a go file with the marshall name and '.go' (must be lowercased without spaces). If marshall arg is '', no marshalling")
 
@@ -25,23 +21,28 @@ var (
 func main() {
 
 	log.SetPrefix("gongxsd: ")
-	log.SetFlags(0)
+	log.SetFlags(log.Lmicroseconds)
 
 	// parse program arguments
 	flag.Parse()
 
-	// setup the static file server and get the controller
-	r := split_static.ServeStaticFiles(*logGINFlag)
-
-	// setup model stack with its probe
-	stack := gongxsd_stack.NewStack(r, "gongxsd", *unmarshallFromCode, *marshallOnCommit, "", *embeddedDiagrams, true)
+	// setup
+	// - model level1 stack with its probe
+	// - unmarshall/marshall go file with stage data
+	stack := level1stack.NewLevel1Stack("gongxsd", *unmarshallFromCode, *marshallOnCommit, true, *embeddedDiagrams)
+	
+	// refresh the probe, therefore we can see what has been unmarshalled
 	stack.Probe.Refresh()
 
-	// insertion point for call to stager
-	gongxsd_models.NewStager(r, stack.Stage)
+	// initiates the UX loop
+	models.NewStager(
+		stack.R,
+		stack.Stage,
+		stack.Probe,
+	)
 
 	log.Println("Server ready serve on localhost:" + strconv.Itoa(*port))
-	err := r.Run(":" + strconv.Itoa(*port))
+	err := stack.R.Run(":" + strconv.Itoa(*port))
 	if err != nil {
 		log.Fatalln(err.Error())
 	}

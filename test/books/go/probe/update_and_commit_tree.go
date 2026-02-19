@@ -33,27 +33,56 @@ func updateAndCommitTree(
 
 	probe.treeStage.Reset()
 
+	stageOfInterest := probe.stageOfInterest
+
 	// create tree
 	sidebar := &tree.Tree{Name: "Sidebar"}
+	topNode := &tree.Node{Name: fmt.Sprintf("%s", stageOfInterest.GetName())}
+	sidebar.RootNodes = append(sidebar.RootNodes, topNode)
 
-	nodeRefreshButton := &tree.Node{Name: fmt.Sprintf("Stage %s, # %d, %s",
-		probe.stageOfInterest.GetName(),
-		probe.stageOfInterest.GetCommitId(),
-		probe.stageOfInterest.GetCommitTS().Local().Format(time.Kitchen))}
-	sidebar.RootNodes = append(sidebar.RootNodes, nodeRefreshButton)
+	notificationsResetButton := &tree.Button{
+		Name:            "NotificationsResetButton",
+		Icon:            string(gongtree_buttons.BUTTON_playlist_remove),
+		HasToolTip:      true,
+		ToolTipText:     "Reset notification table",
+		ToolTipPosition: tree.Below,
+	}
+	topNode.Buttons = append(topNode.Buttons, notificationsResetButton)
+	notificationsResetButton.Impl = &tree.FunctionalButtonProxy{
+		OnUpdated: func(stage *tree.Stage,
+			stagedButton, frontButton *tree.Button,
+		) {
+			probe.ResetNotifications()
+		},
+	}
 	refreshButton := &tree.Button{
 		Name:            "RefreshButton" + " " + string(gongtree_buttons.BUTTON_refresh),
 		Icon:            string(gongtree_buttons.BUTTON_refresh),
 		HasToolTip:      true,
 		ToolTipText:     "Refresh probe",
-		ToolTipPosition: tree.Left,
+		ToolTipPosition: tree.Below,
+	}
+	topNode.Buttons = append(topNode.Buttons, refreshButton)
+	refreshButton.Impl = &tree.FunctionalButtonProxy{
+		OnUpdated: func(stage *tree.Stage,
+			stagedButton, frontButton *tree.Button,
+		) {
+			probe.stageOfInterest.ComputeInstancesNb()
+			probe.docStager.SetMap_GongStructName_InstancesNb(
+				probe.stageOfInterest.Map_GongStructName_InstancesNb,
+			)
+			probe.Refresh()
+		},
 	}
 
-	nodeRefreshButton.Buttons = append(nodeRefreshButton.Buttons, refreshButton)
-	refreshButton.Impl = NewButtonImplRefresh(probe)
+	if stageOfInterest.IsInDeltaMode() {
+		probe.AddCommitNavigationNode(func(node models.GongNodeIF) {
+			sidebar.RootNodes = append(sidebar.RootNodes, node.(*tree.Node))
+		})
+	}
 
 	// collect all gong struct to construe the true
-	setOfGongStructs := *gong_models.GetGongstructInstancesSet[gong_models.GongStruct](probe.gongStage)
+	setOfGongStructs := *gong_models.GetGongstructInstancesSetFromPointerType[*gong_models.GongStruct](probe.gongStage)
 
 	sliceOfGongStructsSorted := make([]*gong_models.GongStruct, len(setOfGongStructs))
 	i := 0
@@ -84,8 +113,14 @@ func updateAndCommitTree(
 		// insertion point
 		case "BookType":
 			nodeGongstruct.Name = name
-			set := *models.GetGongstructInstancesSet[models.BookType](probe.stageOfInterest)
+			set := *models.GetGongstructInstancesSetFromPointerType[*models.BookType](probe.stageOfInterest)
+			count := 0
 			for _booktype := range set {
+				if count >= probe.GetMaxElementsNbPerGongStructNode() {
+					nodeGongstruct.Children = append(nodeGongstruct.Children, &tree.Node{Name: "..."})
+					break
+				}
+				count++
 				nodeInstance := &tree.Node{Name: _booktype.GetName()}
 				nodeInstance.IsNodeClickable = true
 				nodeInstance.Impl = NewInstanceNodeCallback(_booktype, "BookType", probe)
@@ -94,8 +129,14 @@ func updateAndCommitTree(
 			}
 		case "Books":
 			nodeGongstruct.Name = name
-			set := *models.GetGongstructInstancesSet[models.Books](probe.stageOfInterest)
+			set := *models.GetGongstructInstancesSetFromPointerType[*models.Books](probe.stageOfInterest)
+			count := 0
 			for _books := range set {
+				if count >= probe.GetMaxElementsNbPerGongStructNode() {
+					nodeGongstruct.Children = append(nodeGongstruct.Children, &tree.Node{Name: "..."})
+					break
+				}
+				count++
 				nodeInstance := &tree.Node{Name: _books.GetName()}
 				nodeInstance.IsNodeClickable = true
 				nodeInstance.Impl = NewInstanceNodeCallback(_books, "Books", probe)
@@ -104,8 +145,14 @@ func updateAndCommitTree(
 			}
 		case "Credit":
 			nodeGongstruct.Name = name
-			set := *models.GetGongstructInstancesSet[models.Credit](probe.stageOfInterest)
+			set := *models.GetGongstructInstancesSetFromPointerType[*models.Credit](probe.stageOfInterest)
+			count := 0
 			for _credit := range set {
+				if count >= probe.GetMaxElementsNbPerGongStructNode() {
+					nodeGongstruct.Children = append(nodeGongstruct.Children, &tree.Node{Name: "..."})
+					break
+				}
+				count++
 				nodeInstance := &tree.Node{Name: _credit.GetName()}
 				nodeInstance.IsNodeClickable = true
 				nodeInstance.Impl = NewInstanceNodeCallback(_credit, "Credit", probe)
@@ -114,8 +161,14 @@ func updateAndCommitTree(
 			}
 		case "Link":
 			nodeGongstruct.Name = name
-			set := *models.GetGongstructInstancesSet[models.Link](probe.stageOfInterest)
+			set := *models.GetGongstructInstancesSetFromPointerType[*models.Link](probe.stageOfInterest)
+			count := 0
 			for _link := range set {
+				if count >= probe.GetMaxElementsNbPerGongStructNode() {
+					nodeGongstruct.Children = append(nodeGongstruct.Children, &tree.Node{Name: "..."})
+					break
+				}
+				count++
 				nodeInstance := &tree.Node{Name: _link.GetName()}
 				nodeInstance.IsNodeClickable = true
 				nodeInstance.Impl = NewInstanceNodeCallback(_link, "Link", probe)
@@ -136,11 +189,15 @@ func updateAndCommitTree(
 			ToolTipPosition: tree.Right,
 		}
 		nodeGongstruct.Buttons = append(nodeGongstruct.Buttons, addButton)
-		addButton.Impl = NewButtonImplGongstruct(
-			gongStruct,
-			gongtree_buttons.BUTTON_add,
-			probe,
-		)
+		addButton.Impl = &tree.FunctionalButtonProxy{
+			OnUpdated: func(stage *tree.Stage, stagedButton, frontButton *tree.Button) {
+				FillUpFormFromGongstructName(
+					probe,
+					gongStruct.Name,
+					true,
+				)
+			},
+		}
 
 		sidebar.RootNodes = append(sidebar.RootNodes, nodeGongstruct)
 	}
@@ -150,14 +207,14 @@ func updateAndCommitTree(
 	probe.treeStage.Commit()
 }
 
-type InstanceNodeCallback[T models.Gongstruct] struct {
-	Instance       *T
+type InstanceNodeCallback[T models.PointerToGongstruct] struct {
+	Instance       T
 	gongstructName string
 	probe          *Probe
 }
 
-func NewInstanceNodeCallback[T models.Gongstruct](
-	instance *T,
+func NewInstanceNodeCallback[T models.PointerToGongstruct](
+	instance T,
 	gongstructName string,
 	probe *Probe) (
 	instanceNodeCallback *InstanceNodeCallback[T],
@@ -173,10 +230,144 @@ func NewInstanceNodeCallback[T models.Gongstruct](
 
 func (instanceNodeCallback *InstanceNodeCallback[T]) OnAfterUpdate(
 	gongtreeStage *tree.Stage,
-	stagedNode, frontNode *tree.Node) {
-
+	stagedNode, frontNode *tree.Node,
+) {
 	FillUpFormFromGongstruct(
 		instanceNodeCallback.Instance,
 		instanceNodeCallback.probe,
 	)
+}
+
+func (probe *Probe) AddCommitNavigationNode(appendChildrenNodeFunc func(models.GongNodeIF)) {
+	stageOfInterest := probe.stageOfInterest
+
+	deltaNode := &tree.Node{}
+
+	backwardButton := &tree.Button{
+		Name:       "BackwardButton",
+		Icon:       string(gongtree_buttons.BUTTON_undo),
+		HasToolTip: true,
+		ToolTipText: fmt.Sprintf("Go to previous commit (%d/%d)",
+			len(stageOfInterest.GetBackwardCommits()), stageOfInterest.GetCommitsBehind()),
+		ToolTipPosition: tree.Below,
+	}
+	deltaNode.Buttons = append(deltaNode.Buttons, backwardButton)
+	backwardButton.Impl = &tree.FunctionalButtonProxy{
+		OnUpdated: func(stage *tree.Stage,
+			stagedButton, frontButton *tree.Button,
+		) {
+			err := stageOfInterest.ApplyBackwardCommit()
+			if err != nil {
+				panic(err)
+			}
+			probe.Refresh()
+		},
+	}
+
+	if stageOfInterest.GetCommitsBehind() == len(stageOfInterest.GetBackwardCommits()) {
+		backwardButton.IsDisabled = true
+		backwardButton.ToolTipText = "No more previous commits"
+	}
+
+	forwardButton := &tree.Button{
+		Name:       "ForwardButton",
+		Icon:       string(gongtree_buttons.BUTTON_redo),
+		HasToolTip: true,
+		ToolTipText: fmt.Sprintf("Go to next commit (%d/%d)",
+			len(stageOfInterest.GetBackwardCommits()), stageOfInterest.GetCommitsBehind()),
+		ToolTipPosition: tree.Below,
+	}
+	deltaNode.Buttons = append(deltaNode.Buttons, forwardButton)
+	forwardButton.Impl = &tree.FunctionalButtonProxy{
+		OnUpdated: func(stage *tree.Stage,
+			stagedButton, frontButton *tree.Button,
+		) {
+			err := stageOfInterest.ApplyForwardCommit()
+			if err != nil {
+				panic(err)
+			}
+			probe.Refresh()
+		},
+	}
+
+	if stageOfInterest.GetCommitsBehind() == 0 {
+		forwardButton.IsDisabled = true
+		forwardButton.ToolTipText = "No more next commits"
+	}
+
+	if stageOfInterest.GetCommitsBehind() > 0 {
+		discardButton := &tree.Button{
+			Name:            "DiscardButton",
+			Icon:            string(gongtree_buttons.BUTTON_cancel),
+			HasToolTip:      true,
+			ToolTipText:     "Discard commits ahead (git reset --hard HEAD)",
+			ToolTipPosition: tree.Below,
+		}
+		deltaNode.Buttons = append(deltaNode.Buttons, discardButton)
+		discardButton.Impl = &tree.FunctionalButtonProxy{
+			OnUpdated: func(stage *tree.Stage,
+				stagedButton, frontButton *tree.Button,
+			) {
+				stageOfInterest.ResetHard()
+				probe.Refresh()
+			},
+		}
+	}
+
+	if len(stageOfInterest.GetBackwardCommits()) > 0 {
+		orphansButton := &tree.Button{
+			Name:            "OrphansButton",
+			Icon:            string(gongtree_buttons.BUTTON_delete),
+			HasToolTip:      true,
+			ToolTipText:     "Discard all commits history (git orphan)",
+			ToolTipPosition: tree.Below,
+		}
+		deltaNode.Buttons = append(deltaNode.Buttons, orphansButton)
+		orphansButton.Impl = &tree.FunctionalButtonProxy{
+			OnUpdated: func(stage *tree.Stage,
+				stagedButton, frontButton *tree.Button,
+			) {
+				stageOfInterest.Orphans()
+				probe.Refresh()
+			},
+		}
+	}
+
+	logCommitsButton := &tree.Button{
+		Name:            "LogCommitsButton",
+		Icon:            string(gongtree_buttons.BUTTON_playlist_add),
+		HasToolTip:      true,
+		ToolTipText:     "Log commits to notification table",
+		ToolTipPosition: tree.Below,
+	}
+	deltaNode.Buttons = append(deltaNode.Buttons, logCommitsButton)
+	logCommitsButton.Impl = &tree.FunctionalButtonProxy{
+		OnUpdated: func(stage *tree.Stage,
+			stagedButton, frontButton *tree.Button,
+		) {
+			var mergedCommits string
+			for _, commit := range stageOfInterest.GetForwardCommits() {
+				mergedCommits += commit
+			}
+			probe.AddNotification(
+				time.Now(),
+				"	// Forward commits:\n"+
+					mergedCommits,
+			)
+
+			var reverseMergedCommits string
+			for _, reverserCommit := range stageOfInterest.GetBackwardCommits() {
+				reverseMergedCommits += reverserCommit
+			}
+			probe.AddNotification(
+				time.Now(),
+				"	// Backward commits:\n"+
+					reverseMergedCommits,
+			)
+
+			probe.CommitNotificationTable()
+		},
+	}
+
+	appendChildrenNodeFunc(deltaNode)
 }

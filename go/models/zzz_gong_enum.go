@@ -447,7 +447,7 @@ type GongstructEnumIntField interface {
 }
 
 type PointerToGongstructEnumIntField interface {
-	*Level0 | *Level1 | *Level2 | *Level3
+	//insertion point for pointers to enum int types | *Level0 | *Level1 | *Level2 | *Level3
 	FromCodeString(input string) (err error)
 }
 

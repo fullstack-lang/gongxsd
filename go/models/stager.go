@@ -14,7 +14,7 @@ type Stager struct {
 	splitStage *split.Stage
 }
 
-func NewStager(r *gin.Engine, stage *Stage) (stager *Stager) {
+func NewStager(r *gin.Engine, stage *Stage, probe ProbeIF) (stager *Stager) {
 
 	stager = new(Stager)
 

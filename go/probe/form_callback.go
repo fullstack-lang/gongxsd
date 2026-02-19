@@ -46,6 +46,8 @@ type AllFormCallback struct {
 }
 
 func (allFormCallback *AllFormCallback) OnSave() {
+	allFormCallback.probe.stageOfInterest.Lock()
+	defer allFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("AllFormCallback, OnSave")
 
@@ -83,13 +85,19 @@ func (allFormCallback *AllFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.Sequence](allFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			all_.Sequences = instanceSlice
 
@@ -108,13 +116,19 @@ func (allFormCallback *AllFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.All](allFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			all_.Alls = instanceSlice
 
@@ -133,13 +147,19 @@ func (allFormCallback *AllFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.Choice](allFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			all_.Choices = instanceSlice
 
@@ -158,13 +178,19 @@ func (allFormCallback *AllFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.Group](allFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			all_.Groups = instanceSlice
 
@@ -183,13 +209,19 @@ func (allFormCallback *AllFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.Element](allFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			all_.Elements = instanceSlice
 
@@ -218,9 +250,8 @@ func (allFormCallback *AllFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "All"
 				rf.Fieldname = "Alls"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := all_.GongGetReverseFieldOwner(
 					allFormCallback.probe.stageOfInterest,
-					all_,
 					&rf)
 
 				var ok bool
@@ -285,9 +316,8 @@ func (allFormCallback *AllFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "Choice"
 				rf.Fieldname = "Alls"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := all_.GongGetReverseFieldOwner(
 					allFormCallback.probe.stageOfInterest,
-					all_,
 					&rf)
 
 				var ok bool
@@ -352,9 +382,8 @@ func (allFormCallback *AllFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "ComplexType"
 				rf.Fieldname = "Alls"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := all_.GongGetReverseFieldOwner(
 					allFormCallback.probe.stageOfInterest,
-					all_,
 					&rf)
 
 				var ok bool
@@ -419,9 +448,8 @@ func (allFormCallback *AllFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "Extension"
 				rf.Fieldname = "Alls"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := all_.GongGetReverseFieldOwner(
 					allFormCallback.probe.stageOfInterest,
-					all_,
 					&rf)
 
 				var ok bool
@@ -486,9 +514,8 @@ func (allFormCallback *AllFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "Group"
 				rf.Fieldname = "Alls"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := all_.GongGetReverseFieldOwner(
 					allFormCallback.probe.stageOfInterest,
-					all_,
 					&rf)
 
 				var ok bool
@@ -553,9 +580,8 @@ func (allFormCallback *AllFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "Sequence"
 				rf.Fieldname = "Alls"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := all_.GongGetReverseFieldOwner(
 					allFormCallback.probe.stageOfInterest,
-					all_,
 					&rf)
 
 				var ok bool
@@ -612,10 +638,9 @@ func (allFormCallback *AllFormCallback) OnSave() {
 	}
 
 	allFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.All](
+	updateProbeTable[*models.All](
 		allFormCallback.probe,
 	)
-	allFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if allFormCallback.CreationMode || allFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -662,6 +687,8 @@ type AnnotationFormCallback struct {
 }
 
 func (annotationFormCallback *AnnotationFormCallback) OnSave() {
+	annotationFormCallback.probe.stageOfInterest.Lock()
+	defer annotationFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("AnnotationFormCallback, OnSave")
 
@@ -695,13 +722,19 @@ func (annotationFormCallback *AnnotationFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.Documentation](annotationFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			annotation_.Documentations = instanceSlice
 
@@ -714,10 +747,9 @@ func (annotationFormCallback *AnnotationFormCallback) OnSave() {
 	}
 
 	annotationFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.Annotation](
+	updateProbeTable[*models.Annotation](
 		annotationFormCallback.probe,
 	)
-	annotationFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if annotationFormCallback.CreationMode || annotationFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -764,6 +796,8 @@ type AttributeFormCallback struct {
 }
 
 func (attributeFormCallback *AttributeFormCallback) OnSave() {
+	attributeFormCallback.probe.stageOfInterest.Lock()
+	defer attributeFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("AttributeFormCallback, OnSave")
 
@@ -825,9 +859,8 @@ func (attributeFormCallback *AttributeFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "AttributeGroup"
 				rf.Fieldname = "Attributes"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := attribute_.GongGetReverseFieldOwner(
 					attributeFormCallback.probe.stageOfInterest,
-					attribute_,
 					&rf)
 
 				var ok bool
@@ -892,9 +925,8 @@ func (attributeFormCallback *AttributeFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "ComplexType"
 				rf.Fieldname = "Attributes"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := attribute_.GongGetReverseFieldOwner(
 					attributeFormCallback.probe.stageOfInterest,
-					attribute_,
 					&rf)
 
 				var ok bool
@@ -959,9 +991,8 @@ func (attributeFormCallback *AttributeFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "Extension"
 				rf.Fieldname = "Attributes"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := attribute_.GongGetReverseFieldOwner(
 					attributeFormCallback.probe.stageOfInterest,
-					attribute_,
 					&rf)
 
 				var ok bool
@@ -1018,10 +1049,9 @@ func (attributeFormCallback *AttributeFormCallback) OnSave() {
 	}
 
 	attributeFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.Attribute](
+	updateProbeTable[*models.Attribute](
 		attributeFormCallback.probe,
 	)
-	attributeFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if attributeFormCallback.CreationMode || attributeFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -1068,6 +1098,8 @@ type AttributeGroupFormCallback struct {
 }
 
 func (attributegroupFormCallback *AttributeGroupFormCallback) OnSave() {
+	attributegroupFormCallback.probe.stageOfInterest.Lock()
+	defer attributegroupFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("AttributeGroupFormCallback, OnSave")
 
@@ -1109,13 +1141,19 @@ func (attributegroupFormCallback *AttributeGroupFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.AttributeGroup](attributegroupFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			attributegroup_.AttributeGroups = instanceSlice
 
@@ -1136,13 +1174,19 @@ func (attributegroupFormCallback *AttributeGroupFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.Attribute](attributegroupFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			attributegroup_.Attributes = instanceSlice
 
@@ -1167,9 +1211,8 @@ func (attributegroupFormCallback *AttributeGroupFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "AttributeGroup"
 				rf.Fieldname = "AttributeGroups"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := attributegroup_.GongGetReverseFieldOwner(
 					attributegroupFormCallback.probe.stageOfInterest,
-					attributegroup_,
 					&rf)
 
 				var ok bool
@@ -1234,9 +1277,8 @@ func (attributegroupFormCallback *AttributeGroupFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "ComplexType"
 				rf.Fieldname = "AttributeGroups"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := attributegroup_.GongGetReverseFieldOwner(
 					attributegroupFormCallback.probe.stageOfInterest,
-					attributegroup_,
 					&rf)
 
 				var ok bool
@@ -1301,9 +1343,8 @@ func (attributegroupFormCallback *AttributeGroupFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "Extension"
 				rf.Fieldname = "AttributeGroups"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := attributegroup_.GongGetReverseFieldOwner(
 					attributegroupFormCallback.probe.stageOfInterest,
-					attributegroup_,
 					&rf)
 
 				var ok bool
@@ -1368,9 +1409,8 @@ func (attributegroupFormCallback *AttributeGroupFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "Schema"
 				rf.Fieldname = "AttributeGroups"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := attributegroup_.GongGetReverseFieldOwner(
 					attributegroupFormCallback.probe.stageOfInterest,
-					attributegroup_,
 					&rf)
 
 				var ok bool
@@ -1427,10 +1467,9 @@ func (attributegroupFormCallback *AttributeGroupFormCallback) OnSave() {
 	}
 
 	attributegroupFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.AttributeGroup](
+	updateProbeTable[*models.AttributeGroup](
 		attributegroupFormCallback.probe,
 	)
-	attributegroupFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if attributegroupFormCallback.CreationMode || attributegroupFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -1477,6 +1516,8 @@ type ChoiceFormCallback struct {
 }
 
 func (choiceFormCallback *ChoiceFormCallback) OnSave() {
+	choiceFormCallback.probe.stageOfInterest.Lock()
+	defer choiceFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("ChoiceFormCallback, OnSave")
 
@@ -1514,13 +1555,19 @@ func (choiceFormCallback *ChoiceFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.Sequence](choiceFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			choice_.Sequences = instanceSlice
 
@@ -1539,13 +1586,19 @@ func (choiceFormCallback *ChoiceFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.All](choiceFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			choice_.Alls = instanceSlice
 
@@ -1564,13 +1617,19 @@ func (choiceFormCallback *ChoiceFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.Choice](choiceFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			choice_.Choices = instanceSlice
 
@@ -1589,13 +1648,19 @@ func (choiceFormCallback *ChoiceFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.Group](choiceFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			choice_.Groups = instanceSlice
 
@@ -1614,13 +1679,19 @@ func (choiceFormCallback *ChoiceFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.Element](choiceFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			choice_.Elements = instanceSlice
 
@@ -1651,9 +1722,8 @@ func (choiceFormCallback *ChoiceFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "All"
 				rf.Fieldname = "Choices"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := choice_.GongGetReverseFieldOwner(
 					choiceFormCallback.probe.stageOfInterest,
-					choice_,
 					&rf)
 
 				var ok bool
@@ -1718,9 +1788,8 @@ func (choiceFormCallback *ChoiceFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "Choice"
 				rf.Fieldname = "Choices"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := choice_.GongGetReverseFieldOwner(
 					choiceFormCallback.probe.stageOfInterest,
-					choice_,
 					&rf)
 
 				var ok bool
@@ -1785,9 +1854,8 @@ func (choiceFormCallback *ChoiceFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "ComplexType"
 				rf.Fieldname = "Choices"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := choice_.GongGetReverseFieldOwner(
 					choiceFormCallback.probe.stageOfInterest,
-					choice_,
 					&rf)
 
 				var ok bool
@@ -1852,9 +1920,8 @@ func (choiceFormCallback *ChoiceFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "Extension"
 				rf.Fieldname = "Choices"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := choice_.GongGetReverseFieldOwner(
 					choiceFormCallback.probe.stageOfInterest,
-					choice_,
 					&rf)
 
 				var ok bool
@@ -1919,9 +1986,8 @@ func (choiceFormCallback *ChoiceFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "Group"
 				rf.Fieldname = "Choices"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := choice_.GongGetReverseFieldOwner(
 					choiceFormCallback.probe.stageOfInterest,
-					choice_,
 					&rf)
 
 				var ok bool
@@ -1986,9 +2052,8 @@ func (choiceFormCallback *ChoiceFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "Sequence"
 				rf.Fieldname = "Choices"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := choice_.GongGetReverseFieldOwner(
 					choiceFormCallback.probe.stageOfInterest,
-					choice_,
 					&rf)
 
 				var ok bool
@@ -2045,10 +2110,9 @@ func (choiceFormCallback *ChoiceFormCallback) OnSave() {
 	}
 
 	choiceFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.Choice](
+	updateProbeTable[*models.Choice](
 		choiceFormCallback.probe,
 	)
-	choiceFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if choiceFormCallback.CreationMode || choiceFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -2095,6 +2159,8 @@ type ComplexContentFormCallback struct {
 }
 
 func (complexcontentFormCallback *ComplexContentFormCallback) OnSave() {
+	complexcontentFormCallback.probe.stageOfInterest.Lock()
+	defer complexcontentFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("ComplexContentFormCallback, OnSave")
 
@@ -2122,10 +2188,9 @@ func (complexcontentFormCallback *ComplexContentFormCallback) OnSave() {
 	}
 
 	complexcontentFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.ComplexContent](
+	updateProbeTable[*models.ComplexContent](
 		complexcontentFormCallback.probe,
 	)
-	complexcontentFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if complexcontentFormCallback.CreationMode || complexcontentFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -2172,6 +2237,8 @@ type ComplexTypeFormCallback struct {
 }
 
 func (complextypeFormCallback *ComplexTypeFormCallback) OnSave() {
+	complextypeFormCallback.probe.stageOfInterest.Lock()
+	defer complextypeFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("ComplexTypeFormCallback, OnSave")
 
@@ -2219,13 +2286,19 @@ func (complextypeFormCallback *ComplexTypeFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.Sequence](complextypeFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			complextype_.Sequences = instanceSlice
 
@@ -2244,13 +2317,19 @@ func (complextypeFormCallback *ComplexTypeFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.All](complextypeFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			complextype_.Alls = instanceSlice
 
@@ -2269,13 +2348,19 @@ func (complextypeFormCallback *ComplexTypeFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.Choice](complextypeFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			complextype_.Choices = instanceSlice
 
@@ -2294,13 +2379,19 @@ func (complextypeFormCallback *ComplexTypeFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.Group](complextypeFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			complextype_.Groups = instanceSlice
 
@@ -2319,13 +2410,19 @@ func (complextypeFormCallback *ComplexTypeFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.Element](complextypeFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			complextype_.Elements = instanceSlice
 
@@ -2358,13 +2455,19 @@ func (complextypeFormCallback *ComplexTypeFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.Attribute](complextypeFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			complextype_.Attributes = instanceSlice
 
@@ -2383,13 +2486,19 @@ func (complextypeFormCallback *ComplexTypeFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.AttributeGroup](complextypeFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			complextype_.AttributeGroups = instanceSlice
 
@@ -2412,9 +2521,8 @@ func (complextypeFormCallback *ComplexTypeFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "Schema"
 				rf.Fieldname = "ComplexTypes"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := complextype_.GongGetReverseFieldOwner(
 					complextypeFormCallback.probe.stageOfInterest,
-					complextype_,
 					&rf)
 
 				var ok bool
@@ -2471,10 +2579,9 @@ func (complextypeFormCallback *ComplexTypeFormCallback) OnSave() {
 	}
 
 	complextypeFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.ComplexType](
+	updateProbeTable[*models.ComplexType](
 		complextypeFormCallback.probe,
 	)
-	complextypeFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if complextypeFormCallback.CreationMode || complextypeFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -2521,6 +2628,8 @@ type DocumentationFormCallback struct {
 }
 
 func (documentationFormCallback *DocumentationFormCallback) OnSave() {
+	documentationFormCallback.probe.stageOfInterest.Lock()
+	defer documentationFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("DocumentationFormCallback, OnSave")
 
@@ -2562,9 +2671,8 @@ func (documentationFormCallback *DocumentationFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "Annotation"
 				rf.Fieldname = "Documentations"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := documentation_.GongGetReverseFieldOwner(
 					documentationFormCallback.probe.stageOfInterest,
-					documentation_,
 					&rf)
 
 				var ok bool
@@ -2621,10 +2729,9 @@ func (documentationFormCallback *DocumentationFormCallback) OnSave() {
 	}
 
 	documentationFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.Documentation](
+	updateProbeTable[*models.Documentation](
 		documentationFormCallback.probe,
 	)
-	documentationFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if documentationFormCallback.CreationMode || documentationFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -2671,6 +2778,8 @@ type ElementFormCallback struct {
 }
 
 func (elementFormCallback *ElementFormCallback) OnSave() {
+	elementFormCallback.probe.stageOfInterest.Lock()
+	defer elementFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("ElementFormCallback, OnSave")
 
@@ -2742,13 +2851,19 @@ func (elementFormCallback *ElementFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.Group](elementFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			element_.Groups = instanceSlice
 
@@ -2771,9 +2886,8 @@ func (elementFormCallback *ElementFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "All"
 				rf.Fieldname = "Elements"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := element_.GongGetReverseFieldOwner(
 					elementFormCallback.probe.stageOfInterest,
-					element_,
 					&rf)
 
 				var ok bool
@@ -2838,9 +2952,8 @@ func (elementFormCallback *ElementFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "Choice"
 				rf.Fieldname = "Elements"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := element_.GongGetReverseFieldOwner(
 					elementFormCallback.probe.stageOfInterest,
-					element_,
 					&rf)
 
 				var ok bool
@@ -2905,9 +3018,8 @@ func (elementFormCallback *ElementFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "ComplexType"
 				rf.Fieldname = "Elements"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := element_.GongGetReverseFieldOwner(
 					elementFormCallback.probe.stageOfInterest,
-					element_,
 					&rf)
 
 				var ok bool
@@ -2972,9 +3084,8 @@ func (elementFormCallback *ElementFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "Extension"
 				rf.Fieldname = "Elements"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := element_.GongGetReverseFieldOwner(
 					elementFormCallback.probe.stageOfInterest,
-					element_,
 					&rf)
 
 				var ok bool
@@ -3039,9 +3150,8 @@ func (elementFormCallback *ElementFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "Group"
 				rf.Fieldname = "Elements"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := element_.GongGetReverseFieldOwner(
 					elementFormCallback.probe.stageOfInterest,
-					element_,
 					&rf)
 
 				var ok bool
@@ -3106,9 +3216,8 @@ func (elementFormCallback *ElementFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "Schema"
 				rf.Fieldname = "Elements"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := element_.GongGetReverseFieldOwner(
 					elementFormCallback.probe.stageOfInterest,
-					element_,
 					&rf)
 
 				var ok bool
@@ -3173,9 +3282,8 @@ func (elementFormCallback *ElementFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "Sequence"
 				rf.Fieldname = "Elements"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := element_.GongGetReverseFieldOwner(
 					elementFormCallback.probe.stageOfInterest,
-					element_,
 					&rf)
 
 				var ok bool
@@ -3232,10 +3340,9 @@ func (elementFormCallback *ElementFormCallback) OnSave() {
 	}
 
 	elementFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.Element](
+	updateProbeTable[*models.Element](
 		elementFormCallback.probe,
 	)
-	elementFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if elementFormCallback.CreationMode || elementFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -3282,6 +3389,8 @@ type EnumerationFormCallback struct {
 }
 
 func (enumerationFormCallback *EnumerationFormCallback) OnSave() {
+	enumerationFormCallback.probe.stageOfInterest.Lock()
+	defer enumerationFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("EnumerationFormCallback, OnSave")
 
@@ -3321,9 +3430,8 @@ func (enumerationFormCallback *EnumerationFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "Restriction"
 				rf.Fieldname = "Enumerations"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := enumeration_.GongGetReverseFieldOwner(
 					enumerationFormCallback.probe.stageOfInterest,
-					enumeration_,
 					&rf)
 
 				var ok bool
@@ -3380,10 +3488,9 @@ func (enumerationFormCallback *EnumerationFormCallback) OnSave() {
 	}
 
 	enumerationFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.Enumeration](
+	updateProbeTable[*models.Enumeration](
 		enumerationFormCallback.probe,
 	)
-	enumerationFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if enumerationFormCallback.CreationMode || enumerationFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -3430,6 +3537,8 @@ type ExtensionFormCallback struct {
 }
 
 func (extensionFormCallback *ExtensionFormCallback) OnSave() {
+	extensionFormCallback.probe.stageOfInterest.Lock()
+	defer extensionFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("ExtensionFormCallback, OnSave")
 
@@ -3465,13 +3574,19 @@ func (extensionFormCallback *ExtensionFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.Sequence](extensionFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			extension_.Sequences = instanceSlice
 
@@ -3490,13 +3605,19 @@ func (extensionFormCallback *ExtensionFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.All](extensionFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			extension_.Alls = instanceSlice
 
@@ -3515,13 +3636,19 @@ func (extensionFormCallback *ExtensionFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.Choice](extensionFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			extension_.Choices = instanceSlice
 
@@ -3540,13 +3667,19 @@ func (extensionFormCallback *ExtensionFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.Group](extensionFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			extension_.Groups = instanceSlice
 
@@ -3565,13 +3698,19 @@ func (extensionFormCallback *ExtensionFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.Element](extensionFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			extension_.Elements = instanceSlice
 
@@ -3602,13 +3741,19 @@ func (extensionFormCallback *ExtensionFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.Attribute](extensionFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			extension_.Attributes = instanceSlice
 
@@ -3627,13 +3772,19 @@ func (extensionFormCallback *ExtensionFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.AttributeGroup](extensionFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			extension_.AttributeGroups = instanceSlice
 
@@ -3646,10 +3797,9 @@ func (extensionFormCallback *ExtensionFormCallback) OnSave() {
 	}
 
 	extensionFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.Extension](
+	updateProbeTable[*models.Extension](
 		extensionFormCallback.probe,
 	)
-	extensionFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if extensionFormCallback.CreationMode || extensionFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -3696,6 +3846,8 @@ type GroupFormCallback struct {
 }
 
 func (groupFormCallback *GroupFormCallback) OnSave() {
+	groupFormCallback.probe.stageOfInterest.Lock()
+	defer groupFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("GroupFormCallback, OnSave")
 
@@ -3745,13 +3897,19 @@ func (groupFormCallback *GroupFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.Sequence](groupFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			group_.Sequences = instanceSlice
 
@@ -3770,13 +3928,19 @@ func (groupFormCallback *GroupFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.All](groupFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			group_.Alls = instanceSlice
 
@@ -3795,13 +3959,19 @@ func (groupFormCallback *GroupFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.Choice](groupFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			group_.Choices = instanceSlice
 
@@ -3820,13 +3990,19 @@ func (groupFormCallback *GroupFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.Group](groupFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			group_.Groups = instanceSlice
 
@@ -3845,13 +4021,19 @@ func (groupFormCallback *GroupFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.Element](groupFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			group_.Elements = instanceSlice
 
@@ -3880,9 +4062,8 @@ func (groupFormCallback *GroupFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "All"
 				rf.Fieldname = "Groups"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := group_.GongGetReverseFieldOwner(
 					groupFormCallback.probe.stageOfInterest,
-					group_,
 					&rf)
 
 				var ok bool
@@ -3947,9 +4128,8 @@ func (groupFormCallback *GroupFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "Choice"
 				rf.Fieldname = "Groups"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := group_.GongGetReverseFieldOwner(
 					groupFormCallback.probe.stageOfInterest,
-					group_,
 					&rf)
 
 				var ok bool
@@ -4014,9 +4194,8 @@ func (groupFormCallback *GroupFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "ComplexType"
 				rf.Fieldname = "Groups"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := group_.GongGetReverseFieldOwner(
 					groupFormCallback.probe.stageOfInterest,
-					group_,
 					&rf)
 
 				var ok bool
@@ -4081,9 +4260,8 @@ func (groupFormCallback *GroupFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "Element"
 				rf.Fieldname = "Groups"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := group_.GongGetReverseFieldOwner(
 					groupFormCallback.probe.stageOfInterest,
-					group_,
 					&rf)
 
 				var ok bool
@@ -4148,9 +4326,8 @@ func (groupFormCallback *GroupFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "Extension"
 				rf.Fieldname = "Groups"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := group_.GongGetReverseFieldOwner(
 					groupFormCallback.probe.stageOfInterest,
-					group_,
 					&rf)
 
 				var ok bool
@@ -4215,9 +4392,8 @@ func (groupFormCallback *GroupFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "Group"
 				rf.Fieldname = "Groups"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := group_.GongGetReverseFieldOwner(
 					groupFormCallback.probe.stageOfInterest,
-					group_,
 					&rf)
 
 				var ok bool
@@ -4282,9 +4458,8 @@ func (groupFormCallback *GroupFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "Schema"
 				rf.Fieldname = "Groups"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := group_.GongGetReverseFieldOwner(
 					groupFormCallback.probe.stageOfInterest,
-					group_,
 					&rf)
 
 				var ok bool
@@ -4349,9 +4524,8 @@ func (groupFormCallback *GroupFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "Sequence"
 				rf.Fieldname = "Groups"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := group_.GongGetReverseFieldOwner(
 					groupFormCallback.probe.stageOfInterest,
-					group_,
 					&rf)
 
 				var ok bool
@@ -4408,10 +4582,9 @@ func (groupFormCallback *GroupFormCallback) OnSave() {
 	}
 
 	groupFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.Group](
+	updateProbeTable[*models.Group](
 		groupFormCallback.probe,
 	)
-	groupFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if groupFormCallback.CreationMode || groupFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -4458,6 +4631,8 @@ type LengthFormCallback struct {
 }
 
 func (lengthFormCallback *LengthFormCallback) OnSave() {
+	lengthFormCallback.probe.stageOfInterest.Lock()
+	defer lengthFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("LengthFormCallback, OnSave")
 
@@ -4489,10 +4664,9 @@ func (lengthFormCallback *LengthFormCallback) OnSave() {
 	}
 
 	lengthFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.Length](
+	updateProbeTable[*models.Length](
 		lengthFormCallback.probe,
 	)
-	lengthFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if lengthFormCallback.CreationMode || lengthFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -4539,6 +4713,8 @@ type MaxInclusiveFormCallback struct {
 }
 
 func (maxinclusiveFormCallback *MaxInclusiveFormCallback) OnSave() {
+	maxinclusiveFormCallback.probe.stageOfInterest.Lock()
+	defer maxinclusiveFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("MaxInclusiveFormCallback, OnSave")
 
@@ -4570,10 +4746,9 @@ func (maxinclusiveFormCallback *MaxInclusiveFormCallback) OnSave() {
 	}
 
 	maxinclusiveFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.MaxInclusive](
+	updateProbeTable[*models.MaxInclusive](
 		maxinclusiveFormCallback.probe,
 	)
-	maxinclusiveFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if maxinclusiveFormCallback.CreationMode || maxinclusiveFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -4620,6 +4795,8 @@ type MaxLengthFormCallback struct {
 }
 
 func (maxlengthFormCallback *MaxLengthFormCallback) OnSave() {
+	maxlengthFormCallback.probe.stageOfInterest.Lock()
+	defer maxlengthFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("MaxLengthFormCallback, OnSave")
 
@@ -4651,10 +4828,9 @@ func (maxlengthFormCallback *MaxLengthFormCallback) OnSave() {
 	}
 
 	maxlengthFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.MaxLength](
+	updateProbeTable[*models.MaxLength](
 		maxlengthFormCallback.probe,
 	)
-	maxlengthFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if maxlengthFormCallback.CreationMode || maxlengthFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -4701,6 +4877,8 @@ type MinInclusiveFormCallback struct {
 }
 
 func (mininclusiveFormCallback *MinInclusiveFormCallback) OnSave() {
+	mininclusiveFormCallback.probe.stageOfInterest.Lock()
+	defer mininclusiveFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("MinInclusiveFormCallback, OnSave")
 
@@ -4732,10 +4910,9 @@ func (mininclusiveFormCallback *MinInclusiveFormCallback) OnSave() {
 	}
 
 	mininclusiveFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.MinInclusive](
+	updateProbeTable[*models.MinInclusive](
 		mininclusiveFormCallback.probe,
 	)
-	mininclusiveFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if mininclusiveFormCallback.CreationMode || mininclusiveFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -4782,6 +4959,8 @@ type MinLengthFormCallback struct {
 }
 
 func (minlengthFormCallback *MinLengthFormCallback) OnSave() {
+	minlengthFormCallback.probe.stageOfInterest.Lock()
+	defer minlengthFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("MinLengthFormCallback, OnSave")
 
@@ -4813,10 +4992,9 @@ func (minlengthFormCallback *MinLengthFormCallback) OnSave() {
 	}
 
 	minlengthFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.MinLength](
+	updateProbeTable[*models.MinLength](
 		minlengthFormCallback.probe,
 	)
-	minlengthFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if minlengthFormCallback.CreationMode || minlengthFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -4863,6 +5041,8 @@ type PatternFormCallback struct {
 }
 
 func (patternFormCallback *PatternFormCallback) OnSave() {
+	patternFormCallback.probe.stageOfInterest.Lock()
+	defer patternFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("PatternFormCallback, OnSave")
 
@@ -4894,10 +5074,9 @@ func (patternFormCallback *PatternFormCallback) OnSave() {
 	}
 
 	patternFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.Pattern](
+	updateProbeTable[*models.Pattern](
 		patternFormCallback.probe,
 	)
-	patternFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if patternFormCallback.CreationMode || patternFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -4944,6 +5123,8 @@ type RestrictionFormCallback struct {
 }
 
 func (restrictionFormCallback *RestrictionFormCallback) OnSave() {
+	restrictionFormCallback.probe.stageOfInterest.Lock()
+	defer restrictionFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("RestrictionFormCallback, OnSave")
 
@@ -4981,13 +5162,19 @@ func (restrictionFormCallback *RestrictionFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.Enumeration](restrictionFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			restriction_.Enumerations = instanceSlice
 
@@ -5016,10 +5203,9 @@ func (restrictionFormCallback *RestrictionFormCallback) OnSave() {
 	}
 
 	restrictionFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.Restriction](
+	updateProbeTable[*models.Restriction](
 		restrictionFormCallback.probe,
 	)
-	restrictionFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if restrictionFormCallback.CreationMode || restrictionFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -5066,6 +5252,8 @@ type SchemaFormCallback struct {
 }
 
 func (schemaFormCallback *SchemaFormCallback) OnSave() {
+	schemaFormCallback.probe.stageOfInterest.Lock()
+	defer schemaFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("SchemaFormCallback, OnSave")
 
@@ -5103,13 +5291,19 @@ func (schemaFormCallback *SchemaFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.Element](schemaFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			schema_.Elements = instanceSlice
 
@@ -5128,13 +5322,19 @@ func (schemaFormCallback *SchemaFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.SimpleType](schemaFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			schema_.SimpleTypes = instanceSlice
 
@@ -5153,13 +5353,19 @@ func (schemaFormCallback *SchemaFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.ComplexType](schemaFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			schema_.ComplexTypes = instanceSlice
 
@@ -5178,13 +5384,19 @@ func (schemaFormCallback *SchemaFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.AttributeGroup](schemaFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			schema_.AttributeGroups = instanceSlice
 
@@ -5203,13 +5415,19 @@ func (schemaFormCallback *SchemaFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.Group](schemaFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			schema_.Groups = instanceSlice
 
@@ -5226,10 +5444,9 @@ func (schemaFormCallback *SchemaFormCallback) OnSave() {
 	}
 
 	schemaFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.Schema](
+	updateProbeTable[*models.Schema](
 		schemaFormCallback.probe,
 	)
-	schemaFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if schemaFormCallback.CreationMode || schemaFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -5276,6 +5493,8 @@ type SequenceFormCallback struct {
 }
 
 func (sequenceFormCallback *SequenceFormCallback) OnSave() {
+	sequenceFormCallback.probe.stageOfInterest.Lock()
+	defer sequenceFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("SequenceFormCallback, OnSave")
 
@@ -5313,13 +5532,19 @@ func (sequenceFormCallback *SequenceFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.Sequence](sequenceFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			sequence_.Sequences = instanceSlice
 
@@ -5338,13 +5563,19 @@ func (sequenceFormCallback *SequenceFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.All](sequenceFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			sequence_.Alls = instanceSlice
 
@@ -5363,13 +5594,19 @@ func (sequenceFormCallback *SequenceFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.Choice](sequenceFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			sequence_.Choices = instanceSlice
 
@@ -5388,13 +5625,19 @@ func (sequenceFormCallback *SequenceFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.Group](sequenceFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			sequence_.Groups = instanceSlice
 
@@ -5413,13 +5656,19 @@ func (sequenceFormCallback *SequenceFormCallback) OnSave() {
 				map_id_instances[id] = instance
 			}
 
-			ids, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
+			rowIDs, err := DecodeStringToIntSlice(formDiv.FormEditAssocButton.AssociationStorage)
 
 			if err != nil {
 				log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage)
 			}
-			for _, id := range ids {
-				instanceSlice = append(instanceSlice, map_id_instances[id])
+			map_RowID_ID := GetMap_RowID_ID[*models.Element](sequenceFormCallback.probe.stageOfInterest)
+
+			for _, rowID := range rowIDs {
+				if id, ok := map_RowID_ID[int(rowID)]; ok {
+					instanceSlice = append(instanceSlice, map_id_instances[id])
+				} else {
+					log.Panic("not a good storage", formDiv.FormEditAssocButton.AssociationStorage, "unkown row id", rowID)
+				}
 			}
 			sequence_.Elements = instanceSlice
 
@@ -5448,9 +5697,8 @@ func (sequenceFormCallback *SequenceFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "All"
 				rf.Fieldname = "Sequences"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := sequence_.GongGetReverseFieldOwner(
 					sequenceFormCallback.probe.stageOfInterest,
-					sequence_,
 					&rf)
 
 				var ok bool
@@ -5515,9 +5763,8 @@ func (sequenceFormCallback *SequenceFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "Choice"
 				rf.Fieldname = "Sequences"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := sequence_.GongGetReverseFieldOwner(
 					sequenceFormCallback.probe.stageOfInterest,
-					sequence_,
 					&rf)
 
 				var ok bool
@@ -5582,9 +5829,8 @@ func (sequenceFormCallback *SequenceFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "ComplexType"
 				rf.Fieldname = "Sequences"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := sequence_.GongGetReverseFieldOwner(
 					sequenceFormCallback.probe.stageOfInterest,
-					sequence_,
 					&rf)
 
 				var ok bool
@@ -5649,9 +5895,8 @@ func (sequenceFormCallback *SequenceFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "Extension"
 				rf.Fieldname = "Sequences"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := sequence_.GongGetReverseFieldOwner(
 					sequenceFormCallback.probe.stageOfInterest,
-					sequence_,
 					&rf)
 
 				var ok bool
@@ -5716,9 +5961,8 @@ func (sequenceFormCallback *SequenceFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "Group"
 				rf.Fieldname = "Sequences"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := sequence_.GongGetReverseFieldOwner(
 					sequenceFormCallback.probe.stageOfInterest,
-					sequence_,
 					&rf)
 
 				var ok bool
@@ -5783,9 +6027,8 @@ func (sequenceFormCallback *SequenceFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "Sequence"
 				rf.Fieldname = "Sequences"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := sequence_.GongGetReverseFieldOwner(
 					sequenceFormCallback.probe.stageOfInterest,
-					sequence_,
 					&rf)
 
 				var ok bool
@@ -5842,10 +6085,9 @@ func (sequenceFormCallback *SequenceFormCallback) OnSave() {
 	}
 
 	sequenceFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.Sequence](
+	updateProbeTable[*models.Sequence](
 		sequenceFormCallback.probe,
 	)
-	sequenceFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if sequenceFormCallback.CreationMode || sequenceFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -5892,6 +6134,8 @@ type SimpleContentFormCallback struct {
 }
 
 func (simplecontentFormCallback *SimpleContentFormCallback) OnSave() {
+	simplecontentFormCallback.probe.stageOfInterest.Lock()
+	defer simplecontentFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("SimpleContentFormCallback, OnSave")
 
@@ -5923,10 +6167,9 @@ func (simplecontentFormCallback *SimpleContentFormCallback) OnSave() {
 	}
 
 	simplecontentFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.SimpleContent](
+	updateProbeTable[*models.SimpleContent](
 		simplecontentFormCallback.probe,
 	)
-	simplecontentFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if simplecontentFormCallback.CreationMode || simplecontentFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -5973,6 +6216,8 @@ type SimpleTypeFormCallback struct {
 }
 
 func (simpletypeFormCallback *SimpleTypeFormCallback) OnSave() {
+	simpletypeFormCallback.probe.stageOfInterest.Lock()
+	defer simpletypeFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("SimpleTypeFormCallback, OnSave")
 
@@ -6020,9 +6265,8 @@ func (simpletypeFormCallback *SimpleTypeFormCallback) OnSave() {
 				_ = rf
 				rf.GongstructName = "Schema"
 				rf.Fieldname = "SimpleTypes"
-				formerAssociationSource := models.GetReverseFieldOwner(
+				formerAssociationSource := simpletype_.GongGetReverseFieldOwner(
 					simpletypeFormCallback.probe.stageOfInterest,
-					simpletype_,
 					&rf)
 
 				var ok bool
@@ -6079,10 +6323,9 @@ func (simpletypeFormCallback *SimpleTypeFormCallback) OnSave() {
 	}
 
 	simpletypeFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.SimpleType](
+	updateProbeTable[*models.SimpleType](
 		simpletypeFormCallback.probe,
 	)
-	simpletypeFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if simpletypeFormCallback.CreationMode || simpletypeFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -6129,6 +6372,8 @@ type TotalDigitFormCallback struct {
 }
 
 func (totaldigitFormCallback *TotalDigitFormCallback) OnSave() {
+	totaldigitFormCallback.probe.stageOfInterest.Lock()
+	defer totaldigitFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("TotalDigitFormCallback, OnSave")
 
@@ -6160,10 +6405,9 @@ func (totaldigitFormCallback *TotalDigitFormCallback) OnSave() {
 	}
 
 	totaldigitFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.TotalDigit](
+	updateProbeTable[*models.TotalDigit](
 		totaldigitFormCallback.probe,
 	)
-	totaldigitFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if totaldigitFormCallback.CreationMode || totaldigitFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -6210,6 +6454,8 @@ type UnionFormCallback struct {
 }
 
 func (unionFormCallback *UnionFormCallback) OnSave() {
+	unionFormCallback.probe.stageOfInterest.Lock()
+	defer unionFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("UnionFormCallback, OnSave")
 
@@ -6241,10 +6487,9 @@ func (unionFormCallback *UnionFormCallback) OnSave() {
 	}
 
 	unionFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.Union](
+	updateProbeTable[*models.Union](
 		unionFormCallback.probe,
 	)
-	unionFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if unionFormCallback.CreationMode || unionFormCallback.formGroup.HasSuppressButtonBeenPressed {
@@ -6291,6 +6536,8 @@ type WhiteSpaceFormCallback struct {
 }
 
 func (whitespaceFormCallback *WhiteSpaceFormCallback) OnSave() {
+	whitespaceFormCallback.probe.stageOfInterest.Lock()
+	defer whitespaceFormCallback.probe.stageOfInterest.Unlock()
 
 	// log.Println("WhiteSpaceFormCallback, OnSave")
 
@@ -6322,10 +6569,9 @@ func (whitespaceFormCallback *WhiteSpaceFormCallback) OnSave() {
 	}
 
 	whitespaceFormCallback.probe.stageOfInterest.Commit()
-	updateAndCommitTable[models.WhiteSpace](
+	updateProbeTable[*models.WhiteSpace](
 		whitespaceFormCallback.probe,
 	)
-	whitespaceFormCallback.probe.tableStage.Commit()
 
 	// display a new form by reset the form stage
 	if whitespaceFormCallback.CreationMode || whitespaceFormCallback.formGroup.HasSuppressButtonBeenPressed {
