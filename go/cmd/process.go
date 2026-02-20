@@ -27,7 +27,7 @@ func process(args []string) (r *gin.Engine, stack *gongxsd_level1stack.Level1Sta
 	}
 
 	// setup model stack with its probe
-	stack = gongxsd_level1stack.NewLevel1Stack("gongxsd", *unmarshallFromCode, *marshallOnCommit, false, true)
+	stack = gongxsd_level1stack.NewLevel1Stack("gongxsd", *unmarshallFromCode, *marshallOnCommit, true, true)
 	stack.Probe.Refresh()
 
 	// insertion point for call to stager
@@ -71,5 +71,5 @@ func process(args []string) (r *gin.Engine, stack *gongxsd_level1stack.Level1Sta
 		fmt.Printf("generate took %s\n", time.Since(start))
 	}
 
-	return
+	return stack.R, stack
 }

@@ -76,6 +76,7 @@ type Books struct {
 
 // A_books Named source within outer element "books"
 type A_books struct {
+	Name string `xml:"-"`
 
 	// insertion point for fields
 
